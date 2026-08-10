@@ -1,0 +1,3245 @@
+{
+  "version": 1,
+  "level": "freegroups-1",
+  "scope": [
+    "prop-free-equivalence-is-an-equivalence-and-a-congruence",
+    "thm-word-quotient-model-is-a-group",
+    "lem-formal-letters-act-by-permutations-on-reduced-words",
+    "thm-normal-form-for-the-word-quotient-model",
+    "thm-word-quotient-model-is-free",
+    "cor-generators-embed-in-the-word-quotient",
+    "cor-word-quotient-and-reduced-word-models-are-uniquely-isomorphic",
+    "thm-finite-free-bases-have-the-same-cardinality",
+    "prop-normal-closure-is-products-of-conjugates",
+    "prop-equality-of-words-in-a-presentation",
+    "thm-von-dyck",
+    "cor-every-finite-group-is-finitely-presented",
+    "thm-abelianisation-of-a-free-group-is-free-abelian",
+    "prop-tietze-transformations-preserve-presented-groups",
+    "thm-tietze-transformations-connect-finite-presentations",
+    "lem-cyclic-reduction-normal-form",
+    "thm-free-groups-are-torsion-free",
+    "thm-conjugacy-of-cyclically-reduced-words",
+    "ex-free-group-on-the-empty-set",
+    "ex-free-group-on-one-generator",
+    "ex-free-group-on-two-generators-is-not-abelian",
+    "ex-presentation-of-a-finite-cyclic-group",
+    "ex-presentation-of-a-dihedral-group",
+    "ex-presentation-of-the-klein-four-group",
+    "ex-presentation-of-z-squared",
+    "ex-presentation-of-the-symmetric-group-on-three-letters",
+    "cex-delete-only-relator-rewriting-misses-ba",
+    "cex-delete-only-relator-rewriting-can-require-lengthening",
+    "cex-delete-only-relator-rewriting-is-order-dependent"
+  ],
+  "contracts": {
+    "prop-free-equivalence-is-an-equivalence-and-a-congruence": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-alphabet-words-and-reduction",
+          "source_section": "Definition",
+          "quote": "Words are **freely equivalent** if one can be transformed into the other by finitely many elementary cancellations and their reverse insertions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The empty move sequence proves reflexivity.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "definition of finite sequence"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Reverse a finite move sequence and interchange cancellations with insertions to prove symmetry.",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Concatenate move sequences to prove transitivity.",
+          "step": "1.3",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Prefixing and suffixing each elementary move proves w~w' implies uwv~uw'v.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "inspection of one move"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "If w~w' and v~v', then wv~w'v~w'v', proving congruence.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty word is allowed as word, prefix, and suffix."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero moves are the reflexive case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-move sequence remains elementary after adding context."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No further degenerate case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-word-quotient-model-is-a-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-free-equivalence-is-an-equivalence-and-a-congruence",
+          "source_section": "Statement",
+          "quote": "If $w\\sim w'$ and $v\\sim v'$, then $wv\\sim w'v'$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "A **group** is a monoid $(G,*,e)$",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Congruence makes [w][v]=[wv] independent of both representatives.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Associativity follows from literal associativity of string concatenation.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The empty-word class is a two-sided identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Reverse and formally invert a word; successive central cancellations give both inverse equations.",
+          "step": "4.1",
+          "inputs": [
+            "def-word-quotient-model-of-the-free-group",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The preceding checks establish the group axioms.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For X empty the quotient is the one-element group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length word is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-letter word is inverted by its formal inverse."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The empty word is its own inverse."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-formal-letters-act-by-permutations-on-reduced-words": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-alphabet-words-and-reduction",
+          "source_section": "Definition",
+          "quote": "A word is **reduced** if no elementary cancellation applies.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "A **permutation** of $X$ is a bijection $f : X \\to X$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Adjoin a formal letter to a reduced word, cancelling exactly at an inverse seam; the output is reduced.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "seam case split"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The construction for the inverse letter undoes this map in both seam cases.",
+          "step": "1.2",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Each letter therefore acts by a permutation, and inverse letters give inverse permutations.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Compose letter actions to define a word action, with orientation fixed so acting on the empty word gives its reduced form.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "induction on length"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Insertion or deletion of aa^{-1} composes adjacent inverse permutations and leaves the word action unchanged.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty word acts as the identity permutation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-letter composition is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-letter action sends the empty word to that letter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The empty reduced word has no seam letter."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The construction checks the relevant end letter only for nonempty words."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-normal-form-for-the-word-quotient-model": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-formal-letters-act-by-permutations-on-reduced-words",
+          "source_section": "Statement",
+          "quote": "Freely equivalent words induce the same permutation of the set of reduced words.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-alphabet-words-and-reduction",
+          "source_section": "Definition",
+          "quote": "An **elementary cancellation** deletes two adjacent letters $xx^{-1}$ or $x^{-1}x$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Induction on length cancels adjacent inverse pairs until a reduced word r is reached.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The cancellation sequence proves every quotient class has a reduced representative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "definition of free equivalence"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Freely equivalent reduced r and s induce the same permutation.",
+          "step": "3.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply the equal permutations to the empty word; the fixed orientation recovers r and s, hence r=s.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "permutation construction"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Existence and uniqueness give exactly one reduced representative per class.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty word is the identity class's unique reduced representative."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Length zero is the induction base."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One-letter words are reduced."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "An already reduced word stops immediately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The action orientation is checked at the empty word."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-word-quotient-model-is-free": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-word-quotient-model-is-a-group",
+          "source_section": "Statement",
+          "quote": "$F_{\\mathrm{word}}(X)$ is a group under $[w][v]=[wv]$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "$f(xy) \\;=\\; f(x)\\, f(y) \\qquad \\text{for all } x, y \\in G .$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "for every $x \\in G$ there is $y \\in G$ with $y * x = e = x * y$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Extend u to inverse letters and evaluate each word as the ordered product of letter values.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A single elementary move inserts or removes an adjacent inverse pair, so evaluation is unchanged.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Evaluation descends to quotient classes.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "finite move sequence"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Evaluation of concatenation is a product, so the descended map is a homomorphism extending u.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Any extending homomorphism is forced on every product of one-letter classes.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "F1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Existence and uniqueness establish the free-group universal property.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "def-free-group"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For X empty this is the unique homomorphism from the trivial group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty product evaluates to the target identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A generator class evaluates to its prescribed value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The target may be trivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All values are determined; no representatives are selected without a proof of invariance."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-generators-embed-in-the-word-quotient": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-normal-form-for-the-word-quotient-model",
+          "source_section": "Statement",
+          "quote": "Every class in $W(X)/{\\sim}$ contains exactly one reduced word.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If [x]=[y], the reduced one-letter representatives x and y lie in one class, so x=y.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Therefore the generator map is injective.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "definition of injection"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Injectivity is vacuous for an empty alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "No length-zero word is a generator image."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A singleton alphabet is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No further degenerate case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-word-quotient-and-reduced-word-models-are-uniquely-isomorphic": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-free-groups-unique-up-to-unique-isomorphism",
+          "source_section": "Statement",
+          "quote": "If $(F,\\iota)$ and $(F',\\iota')$ are free groups on the same set $X$, then there is a unique group isomorphism $\\phi:F\\to F'$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-reduced-words-form-the-free-group",
+          "source_section": "Statement",
+          "quote": "The map sending $x\\in X$ to the one-letter word $x$ has the universal property of the free group on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply the published uniqueness theorem to the quotient model and reduced-word model.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "thm-word-quotient-model-is-free"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Its compatibility clause sends [x] to the one-letter reduced word x and makes the isomorphism unique.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-alphabet models are one-element groups."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identity class maps to the empty reduced word."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The sole generator is fixed."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No further degenerate case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-free-bases-have-the-same-cardinality": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Then $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-nat-power",
+          "source_section": "Definition",
+          "quote": "$\\iota\\big(m^{n}\\big) = \\iota(m)^{n} \\qquad (m, n \\in \\mathbb{N}).$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-power-monotone",
+          "source_section": "Statement",
+          "quote": "If $a > 1$ then $a^m < a^n$ whenever $m < n$ in $\\mathbb{N}$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-nat-trichotomy",
+          "source_section": "Statement",
+          "quote": "exactly one of $m < n$, $m = n$, $m > n$ holds.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-symmetric-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "$(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ of [[def-symmetric-group]] is a group ([[def-group]])",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Explicitly enumerate C2=Sym({0,1}) as the identity and transposition.",
+          "step": "1.1",
+          "inputs": [
+            "def-symmetric-group",
+            "function extensionality"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Restriction and universal extension biject Hom(F,C2) with C2^B, giving 2^{|B|}.",
+          "step": "2.1",
+          "inputs": [
+            "def-free-basis",
+            "L1",
+            "L5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Two finite bases B,C therefore give 2^{|B|}=2^{|C|}.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The natural-to-real bridge and strict exponent monotonicity force |B|=|C|.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "step 2.2",
+            "direct contradiction"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus finite free bases have equal cardinality.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty bases give one map and 2^0=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Rank zero is included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-element basis gives two maps."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "C2 is explicitly nontrivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Extensions are unique rather than chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-normal-closure-is-products-of-conjugates": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "**(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$;",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-normal-closure",
+          "source_section": "Definition",
+          "quote": "Thus it is the smallest normal subgroup of $G$ containing $S$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-group-inverse-laws",
+          "source_section": "Statement",
+          "quote": "$(gh)^{-1} = h^{-1} g^{-1}$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set P of finite products of conjugates g r^epsilon g^{-1}, including the empty product, is a subgroup.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "F1",
+            "def-subgroup"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "P contains R by a one-factor product with identity conjugator.",
+          "step": "1.2",
+          "inputs": [
+            "definition of P"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conjugating a product in P conjugates each factor and proves P normal.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Minimality gives <<R>> subset P.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Every normal subgroup containing R contains every displayed factor and product, so P subset <<R>>.",
+          "step": "3.2",
+          "inputs": [
+            "L1",
+            "normality"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The two inclusions give equality.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For R empty only the empty product occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-factor product is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-factor product contains each r."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Identity conjugators and both signs are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-equality-of-words-in-a-presentation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-coset-membership-and-equality",
+          "source_section": "Statement",
+          "quote": "$aH=bH\\iff a^{-1}b\\in H.$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "$\\langle X\\mid R\\rangle:=F(X)/\\langle\\!\\langle R\\rangle\\!\\rangle_{F(X)}$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put N=<<R>>; u and v represent the quotient cosets uN and vN.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The cosets are equal exactly when u^{-1}v lies in N.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute N=<<R>> to obtain both directions.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For R empty the criterion is equality in the free group."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty word may be u or v."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One relator needs no special argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No further degenerate case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Equal cosets imply membership by L1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Membership implies equal cosets by L1."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-von-dyck": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-quotient-group-universal-property",
+          "source_section": "Statement",
+          "quote": "If $N\\mathrel{\\trianglelefteq}G$, $f:G\\to H$ is a homomorphism, and $N\\subseteq\\ker f$, then there is a unique homomorphism $\\bar f:G/N\\to H$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-free-group",
+          "source_section": "Definition",
+          "quote": "for every group $G$ and every function $u:X\\to G$, there is a unique group homomorphism $\\widehat u:F(X)\\to G$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Freely extend the generator map to f:F(X)->H.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The relators lie in ker f; kernel normality and normal-closure minimality give <<R>> subset ker f.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "def-kernel-and-image-of-group-homomorphism",
+            "thm-image-subgroup-and-kernel-normal",
+            "def-normal-closure"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Factor uniquely through F(X)/<<R>>.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "def-group-presentation"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Any other generator-compatible homomorphism pulls back to the unique free extension, so it is the same factor.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The free generators generate F(X), and their quotient classes generate the presented group.",
+          "step": "5.1",
+          "inputs": [
+            "def-generated-subgroup",
+            "def-free-group",
+            "prop-canonical-quotient-map",
+            "thm-image-subgroup-and-kernel-normal"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "The factor is onto if and only if the chosen generator images generate H.",
+          "step": "5.2",
+          "inputs": [
+            "step 3.1",
+            "step 5.1",
+            "thm-image-subgroup-and-kernel-normal",
+            "def-generated-subgroup"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The construction applies to X empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "R empty reduces to the free universal property."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One generator or relator is ordinary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The target may be trivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Both universal maps are unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Surjectivity makes H generated by images of X."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "If those images generate H, the image subgroup is H."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-every-finite-group-is-finitely-presented": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "A map $u:X\\to H$ that sends every relator in $R$ to the identity extends uniquely to a homomorphism $\\langle X\\mid R\\rangle\\to H$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-product-rule",
+          "source_section": "Statement",
+          "quote": "If $A$ and $B$ are finite then $A \\times B$ is finite",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each g in finite G take x_g and for each pair take x_g x_h x_{gh}^{-1}; both sets are finite.",
+          "step": "1.1",
+          "inputs": [
+            "def-finite-cardinality",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Sending x_g to g kills the table relators and gives pi:P->G.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The map sigma(g)=[x_g] is a homomorphism because the table relators encode multiplication.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "pi sigma fixes G and sigma pi fixes all generator classes, hence both are identities.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "uniqueness in L1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus G has the displayed finite presentation.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "def-relators-relations-and-finite-presentations"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Groups contain an identity, so G is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A group cannot have zero elements."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group case works."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The identity symbol is forced to the group identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The multiplication table determines every relator."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-abelianisation-of-a-free-group-is-free-abelian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-quotient-abelian-iff-contains-commutator-subgroup",
+          "source_section": "Statement",
+          "quote": "$G/N$ is abelian if and only if\n\n$$[G,G]\\subseteq N.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-quotient-group-universal-property",
+          "source_section": "Statement",
+          "quote": "A homomorphism that kills a normal subgroup factors uniquely through the quotient group.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "F/[F,F] is abelian.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The free extension to an abelian target kills every commutator and hence [F,F].",
+          "step": "2.1",
+          "inputs": [
+            "def-free-group",
+            "def-commutator-and-commutator-subgroup"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "It factors through the abelianisation and extends the prescribed map.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Two factors agree after the surjective quotient map and therefore agree.",
+          "step": "4.1",
+          "inputs": [
+            "L2",
+            "def-free-group",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "This is the free-abelian universal property.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "step 4.1",
+            "def-free-abelian-group"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-set free group and free abelian group are trivial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identity is preserved."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-generator case is infinite cyclic."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The target may be trivial."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Extensions and factors are unique."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-tietze-transformations-preserve-presented-groups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "A map $u:X\\to H$ that sends every relator in $R$ to the identity extends uniquely to a homomorphism $\\langle X\\mid R\\rangle\\to H$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a dictionary move, substitution and inclusion induce mutually inverse homomorphisms.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "def-tietze-transformations"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Adding a relator in the existing normal closure leaves that normal closure unchanged; the inverse condition makes deletion legal.",
+          "step": "2.1",
+          "inputs": [
+            "prop-normal-closure-is-products-of-conjugates",
+            "def-tietze-transformations"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A renaming bijection and its inverse extend to mutually inverse homomorphisms.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "def-tietze-transformations"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Every allowed forward or inverse move preserves isomorphism type.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Moves allow empty words and relator sets under their side conditions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero moves change nothing."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each branch proves one elementary move."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Renaming uses a fresh symbol."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Substitution maps are determined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-tietze-transformations-connect-finite-presentations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-tietze-transformations-preserve-presented-groups",
+          "source_section": "Statement",
+          "quote": "Each Tietze transformation preserves the isomorphism type of the presented group.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-equality-of-words-in-a-presentation",
+          "source_section": "Statement",
+          "quote": "the words $u$ and $v$ represent the same element if and only if $u^{-1}v\\in\\langle\\!\\langle R\\rangle\\!\\rangle$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A finite move sequence gives an isomorphism by composing the preservation isomorphisms.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "From a fixed isomorphism, choose representing words for each generator in each finite set.",
+          "step": "2.1",
+          "inputs": [
+            "prop-canonical-quotient-map",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Add the other generators by dictionary moves and add the other relators and inverse dictionaries as consequences.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "def-tietze-transformations"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Pass through the common presentation on X union Y, deleting only relators still redundant and generators with dictionary relations.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L2",
+            "inverse-move side conditions"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Remove remaining redundant dictionary consequences to obtain the second finite presentation.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "finiteness"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The two constructions prove both directions.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty finite generator or relator sets simply omit moves."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Identical presentations use zero moves."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One move is the preservation base."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Trivial groups are covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many representatives are chosen by finite induction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "A move sequence yields an isomorphism."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "An isomorphism yields the common-intermediate move sequence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-cyclic-reduction-normal-form": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cyclically-reduced-word",
+          "source_section": "Definition",
+          "quote": "A reduced word is cyclically reduced when it is empty or its first letter is not the formal inverse of its last letter.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A nonempty reduced word that is not cyclically reduced has literal form a u a^{-1}.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "endpoint inspection"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Induct on length, which falls by two, until a nonempty cyclically reduced core c is reached.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Collect peeled letters to get a reduced literal factorisation w=tct^{-1}.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The factorisation proves the conjugacy normal form.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The lemma excludes empty w; the definition handles it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Length zero is outside the nonempty assertion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-letter word is already cyclically reduced."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If w is cyclically reduced, t is empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Failure is exactly an inverse first/last pair."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-free-groups-are-torsion-free": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cyclic-reduction-normal-form",
+          "source_section": "Statement",
+          "quote": "Every nonempty reduced word has the form $tct^{-1}$ with $c$ nonempty and cyclically reduced.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-reduced-words-form-the-free-group",
+          "source_section": "Statement",
+          "quote": "The reduced words on $X\\sqcup X^{-1}$ form a group when the product of reduced words is their concatenation followed by free reduction.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write a nonidentity reduced word as tct^{-1} with c nonempty cyclically reduced.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For every n>=1 the word c^n is reduced and nonempty because copy seams do not cancel.",
+          "step": "2.1",
+          "inputs": [
+            "def-cyclically-reduced-word",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Then w^n reduces to t c^n t^{-1}, not the identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Transport the result to any free-group model through the unique compatible isomorphism.",
+          "step": "4.1",
+          "inputs": [
+            "thm-free-groups-unique-up-to-unique-isomorphism",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Only the identity can have finite order.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "def-order-in-a-group"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-alphabet group is trivial."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Only positive exponents matter; g^0 is irrelevant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1 the core remains nonempty."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The identity is excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cyclic seam condition prevents cancellation between copies."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-conjugacy-of-cyclically-reduced-words": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-reduced-words-form-the-free-group",
+          "source_section": "Statement",
+          "quote": "The reduced words on $X\\sqcup X^{-1}$ form a group",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cyclically-reduced-word",
+          "source_section": "Definition",
+          "quote": "A reduced word is cyclically reduced when it is empty or its first letter is not the formal inverse of its last letter.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-free-groups-unique-up-to-unique-isomorphism",
+          "source_section": "Statement",
+          "quote": "there is a unique group isomorphism $\\phi:F\\to F'$ such that",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If u=pq, then p^{-1}up freely reduces to qp, so a cyclic permutation is conjugate.",
+          "step": "1.1",
+          "inputs": [
+            "free cancellation"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Work in the reduced-word model and induct on the length of a reduced conjugator t; t empty gives u=v.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If neither outer seam cancels, the reduced conjugate starts and ends with inverse letters, contradicting cyclic reduction.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "A cancelling seam peels one letter from t and cyclically shifts u, leaving a shorter conjugator.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "direct seam calculation"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Induction on |t| makes v a cyclic permutation of u.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Include the empty-word case, combine both directions, and transport the result to any free-group model.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty word is conjugate only to itself."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero-length conjugator is the base."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-letter word has only itself as cyclic shift."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "u=v uses the empty conjugator."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both conjugation seams are inspected."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "One conjugator is instantiated and its natural length minimized."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Cyclic shifts are directly conjugate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Shortened-conjugator induction gives a cyclic shift."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-free-group-on-the-empty-set": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-normal-form-for-the-word-quotient-model",
+          "source_section": "Statement",
+          "quote": "Every class in $W(X)/{\\sim}$ contains exactly one reduced word.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For X empty, the empty word is the only word and normal form.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "definition of word"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The free group therefore has one element and is trivial.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "thm-word-quotient-model-is-free"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "This is the empty-alphabet boundary."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The sole word has length zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The group has one element."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The generator map has empty domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-free-group-on-one-generator": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-normal-form-for-the-word-quotient-model",
+          "source_section": "Statement",
+          "quote": "Every class in $W(X)/{\\sim}$ contains exactly one reduced word.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-classification-of-cyclic-groups",
+          "source_section": "Statement",
+          "quote": "if $g$ has infinite order, $G\\cong(\\mathbb Z,+)$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every reduced word on {x} is x^n, x^{-n}, or empty, uniquely.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "adjacent-letter inspection",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The generator has infinite order and generates the group.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Cyclic classification gives the isomorphism with Z, carrying x to 1.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty word corresponds to zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Exponent zero is the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "x maps to 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Positive and negative powers have different normal forms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-free-group-on-two-generators-is-not-abelian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-normal-form-for-the-word-quotient-model",
+          "source_section": "Statement",
+          "quote": "Every class in $W(X)/{\\sim}$ contains exactly one reduced word.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-free-groups-unique-up-to-unique-isomorphism",
+          "source_section": "Statement",
+          "quote": "there is a unique group isomorphism $\\phi:F\\to F'$ such that",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For distinct x,y, the reduced words xy and yx are literally different.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "They represent different elements, so x and y do not commute.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Hence a free group with two distinct basis elements is nonabelian.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The hypothesis excludes an empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The witnesses have positive length."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-element basis is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "x and y are assumed distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-presentation-of-a-finite-cyclic-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-division-algorithm-in-z",
+          "source_section": "Statement",
+          "quote": "$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "contains exactly one integer $r$ with $0\\le r<n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "A map $u:X\\to H$ that sends every relator in $R$ to the identity extends uniquely to a homomorphism $\\langle X\\mid R\\rangle\\to H$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-group-power-laws",
+          "source_section": "Statement",
+          "quote": "$g^{m+n} = g^{m} g^{n}$;",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Send a to [1]_n; its nth power is zero, so Von Dyck gives a map to Z/n.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "modular group laws"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every word is a^k and division plus a^n=e gives a representative a^r with 0<=r<n.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L4",
+            "def-group-power",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Those normal forms have distinct images [r]_n, so the map is bijective.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "This proves the claimed isomorphism.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The generator set is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "n=0 is outside the finite-cyclic family; the relator a^0 imposes no relation and gives the infinite-cyclic boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "n=1 gives the trivial group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Negative k is included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "r=0 is included and r=n excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-presentation-of-a-dihedral-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "$|\\mathbb Z/n|=n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "A map $u:X\\to H$ that sends every relator in $R$ to the identity extends uniquely to a homomorphism $\\langle X\\mid R\\rangle\\to H$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On Z/n, rho(k)=k+1 and sigma(k)=-k satisfy the three relators.",
+          "step": "1.1",
+          "inputs": [
+            "modular group laws",
+            "direct substitution"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Von Dyck gives a surjection to D_n=<rho,sigma>.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Using sr=r^{-1}s and division, every word becomes r^i s^epsilon with 0<=i<n and epsilon=0 or 1.",
+          "step": "2.2",
+          "inputs": [
+            "presentation relators",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The 2n permutations rho^i and rho^i sigma are distinct for n>=3 by values at 0 and 1.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "thm-sum-rule",
+            "direct evaluation"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "At most 2n source forms surject onto 2n target elements, so the map is an isomorphism.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The target is the stated symmetry group of the n-gon.",
+          "step": "5.1",
+          "inputs": [
+            "definition of D_n in Statement"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "There are two generators."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "n=0 is excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "n=1 is excluded."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "n=2 is handled separately by the Klein example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "i ranges from 0 through n-1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All permutations are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-presentation-of-the-klein-four-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "A map $u:X\\to H$ that sends every relator in $R$ to the identity extends uniquely to a homomorphism $\\langle X\\mid R\\rangle\\to H$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Map a,b to the two coordinate generators of (Z/2)^2; all relators vanish.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "modular and direct-product laws"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Commutation and square relations reduce every word to e,a,b,ab.",
+          "step": "2.1",
+          "inputs": [
+            "presentation relators",
+            "def-group",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The four forms have four distinct coordinate images, so the map is bijective.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "standard representatives modulo 2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "This identifies the presentation with the Klein four-group.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity form is included."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Exponents reduce to 0 or 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each coordinate generator has order two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All four target elements are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Residues 0 and 1 are both checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-presentation-of-z-squared": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "A map $u:X\\to H$ that sends every relator in $R$ to the identity extends uniquely to a homomorphism $\\langle X\\mid R\\rangle\\to H$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-int-comm-ring",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{Z}, +, \\cdot, 0, 1)$ with the operations of [[def-int-operations]] is a commutative ring",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Send a,b to (1,0),(0,1); the commutator vanishes and gives a homomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "direct-product laws"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The relation lets every word commute to a^m b^n.",
+          "step": "2.1",
+          "inputs": [
+            "presentation relation",
+            "lem-group-power-laws",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The map sends this form to (m,n), proving injectivity and surjectivity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore the presentation is Z x Z.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identity maps to (0,0)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero exponents are included."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The generators map to coordinate units."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Negative exponents map to negative coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-presentation-of-the-symmetric-group-on-three-letters": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-number-of-bijections-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "$\\lvert\\operatorname{Bij}(A)\\rvert = n!$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-von-dyck",
+          "source_section": "Statement",
+          "quote": "A map $u:X\\to H$ that sends every relator in $R$ to the identity extends uniquely to a homomorphism $\\langle X\\mid R\\rangle\\to H$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "s=(0 1), t=(1 2) satisfy the relators and generate S3, giving a surjection.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "direct permutation computation"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Cancel squares; any remaining alternating word of length at least four shortens using (st)^3=e.",
+          "step": "2.1",
+          "inputs": [
+            "presentation relators",
+            "thm-induction-principle"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The same relators give sts=tst, leaving at most e,s,t,st,ts,sts.",
+          "step": "2.2",
+          "inputs": [
+            "step 2.1",
+            "group algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "These six words have six distinct images and S3 has 3!=6 elements.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "direct evaluation"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The surjection is bijective.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty word is one normal form."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Length zero gives identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "s and t are retained."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The three letters are distinct."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Composition uses the published rightmost-first convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-delete-only-relator-rewriting-misses-ba": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "In this quotient, every relation in $R$ becomes the identity",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "asserting $y * x = e$ alone already says $y = x^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "ab=e implies b=a^{-1}, hence ba=e.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "ba is freely reduced and contains neither ab nor b^{-1}a^{-1}.",
+          "step": "2.1",
+          "inputs": [
+            "direct inspection"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The delete-only procedure is stuck at a word representing identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The target empty word is unreachable."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "No empty relator occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The stuck witness has minimal relevant positive length."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The inverse relator is checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No endpoint case occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-delete-only-relator-rewriting-can-require-lengthening": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "In this quotient, every relation in $R$ becomes the identity, as do all consequences forced by normality.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-group-power-laws",
+          "source_section": "Statement",
+          "quote": "**if $gh = hg$** then $(gh)^{n} = g^{n} h^{n}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "**(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "**(G2)** $e * x = x = x * e$ for every $x \\in G$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "**(G3)** for every $x \\in G$ there is $y \\in G$ with $y * x = e = x * y$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The defining relator gives ab=ba in the quotient, so a^2b^2a^{-2}b^{-2}=e.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The expanded word is freely reduced.",
+          "step": "2.1",
+          "inputs": [
+            "adjacent-pair inspection"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Its five length-four windows contain neither the relator nor its inverse.",
+          "step": "2.2",
+          "inputs": [
+            "explicit finite list"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus delete-only rewriting is stuck at a nonempty identity word.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The witness represents identity but stays nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "No empty relator occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One relator and its inverse are checked."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated equal letters are not inverse pairs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All five windows are enumerated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-delete-only-relator-rewriting-is-order-dependent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-presentation",
+          "source_section": "Definition",
+          "quote": "In this quotient, every relation in $R$ becomes the identity",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "**(G1)** $(x * y) * z = x * (y * z)$ for all $x, y, z \\in G$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-group",
+          "source_section": "Definition",
+          "quote": "**(G2)** $e * x = x = x * e$ for every $x \\in G$;",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "ab=e and aba=e force a=e and b=e.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Deleting the whole relator aba gives the empty word.",
+          "step": "2.1",
+          "inputs": [
+            "procedure definition"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Deleting the prefix ab gives a, which is stuck after checking relators and inverses.",
+          "step": "2.2",
+          "inputs": [
+            "direct inspection"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Two allowed first moves end at different strings representing the same element.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "One path ends empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "No empty relator occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The other path ends at one letter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both inverse relators are checked."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The competing occurrences are the prefix and whole word."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice from a varying nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}
