@@ -7,25 +7,28 @@ are the sibling coverage and proof-contract files.
 
 ## 1. Result and split decision
 
-The scaffold has 65 items:
+The scaffold has 67 items after the Step-3 batch-5 determinant-interface repair:
 
 | order | page | kind | items |
 |---:|---|:---:|---:|
 | 80 | gaussian-elimination-and-row-reduction | A | 29 |
 | 81 | gaussian-elimination-and-row-reduction-examples | B | 8 |
-| 82 | determinants-of-matrices-over-a-commutative-ring | A | 22 |
+| 82 | determinants-of-matrices-over-a-commutative-ring | A | 24 |
 | 83 | determinants-of-matrices-over-a-commutative-ring-examples | B | 6 |
 
-No split is proposed. The A pages contain 29 and 22 items, respectively, both
+No split is proposed. The A pages contain 29 and 24 items, respectively, both
 well below the binding 60-item limit. Nothing was dropped to obtain those
 counts.
 
-The determinant page has one intentional addition to the dispatch-level page
-requirements: it also requires gaussian-elimination-and-row-reduction. The
+The determinant page has two intentional additions to the dispatch-level page
+requirements: it requires gaussian-elimination-and-row-reduction and
+polynomial-rings-and-roots. The
 determinant row-operation interface uses the ring-level row-transformation seam
 defined locally, while that seam explicitly reconciles its reversible field
 cases with the Gaussian page. Order 80 is backward from order 82, so this
-creates no cycle.
+creates no cycle. The polynomial page is at order 52 and supplies the formal
+finite multivariate-polynomial interface used by the new determinant-polynomial
+corollary.
 
 ## 2. Complete per-page reading order
 
@@ -80,7 +83,7 @@ write \(\dim\) before establishing finite dimensionality.
 8. cex-row-equivalent-matrices-can-have-different-column-spaces — rank is
    preserved but the literal column space need not be.
 
-### determinants-of-matrices-over-a-commutative-ring — 22 items
+### determinants-of-matrices-over-a-commutative-ring — 24 items
 
 | # | id | kind | purpose |
 |---:|---|---|---|
@@ -93,19 +96,21 @@ write \(\dim\) before establishing finite dimensionality.
 | 7 | lem-alternating-multilinear-implies-antisymmetric | lemma | polarisation without dividing by \(2\) |
 | 8 | lem-rigidity-of-alternating-multilinear-matrix-functions | lemma | permutation expansion of every such function |
 | 9 | def-determinant-of-a-square-matrix | definition | required Leibniz determinant, \(n\ge1\), and \(\lvert\det A\rvert\) over \(\mathbb R\) |
-| 10 | thm-leibniz-determinant-is-alternating-multilinear-and-normalized | theorem | existence half of the characterisation |
-| 11 | thm-determinant-is-the-unique-normalized-alternating-multilinear-function | theorem | uniqueness half |
-| 12 | cor-determinant-vanishes-with-a-zero-or-repeated-column | corollary | two basic vanishing tests |
-| 13 | thm-determinant-of-transpose | theorem | transpose invariance |
-| 14 | cor-determinant-is-alternating-multilinear-in-the-rows | corollary | transfer to rows |
-| 15 | def-row-transformations-over-a-commutative-ring | definition | swaps, arbitrary scaling and row additions; reversible cases distinguished |
-| 16 | thm-determinant-under-elementary-row-operations | theorem | required row laws, with no nonsingularity assumption |
-| 17 | def-triangular-and-diagonal-matrices-over-a-commutative-ring | definition | triangular vocabulary |
-| 18 | thm-determinant-of-a-triangular-matrix | theorem | diagonal product |
-| 19 | thm-determinant-multiplicative | theorem | required \(\det(AB)=\det A\det B\) |
-| 20 | cor-invertible-matrix-has-unit-determinant | corollary | ring-valued invertibility consequence |
-| 21 | cor-determinant-of-an-inverse | corollary | determinant of \(A^{-1}\) |
-| 22 | cor-determinant-is-invariant-under-similarity | corollary | ring similarity invariant |
+| 10 | cor-determinant-is-a-polynomial-in-the-matrix-entries | corollary | explicit polynomial in the \(n^2\) real entries |
+| 11 | thm-leibniz-determinant-is-alternating-multilinear-and-normalized | theorem | existence half of the characterisation |
+| 12 | thm-determinant-is-the-unique-normalized-alternating-multilinear-function | theorem | uniqueness half |
+| 13 | cor-determinant-vanishes-with-a-zero-or-repeated-column | corollary | two basic vanishing tests |
+| 14 | thm-determinant-of-transpose | theorem | transpose invariance |
+| 15 | cor-determinant-is-alternating-multilinear-in-the-rows | corollary | transfer to rows |
+| 16 | def-row-transformations-over-a-commutative-ring | definition | swaps, arbitrary scaling and row additions; reversible cases distinguished |
+| 17 | thm-determinant-under-elementary-row-operations | theorem | required row laws, with no nonsingularity assumption |
+| 18 | def-triangular-and-diagonal-matrices-over-a-commutative-ring | definition | triangular vocabulary |
+| 19 | thm-determinant-of-a-triangular-matrix | theorem | diagonal product |
+| 20 | thm-determinant-multiplicative | theorem | required \(\det(AB)=\det A\det B\) |
+| 21 | cor-invertible-matrix-has-unit-determinant | corollary | ring-valued invertibility consequence |
+| 22 | thm-real-square-matrix-invertible-iff-determinant-nonzero | theorem | real-field invertibility criterion needed by batch 5 |
+| 23 | cor-determinant-of-an-inverse | corollary | determinant of \(A^{-1}\) |
+| 24 | cor-determinant-is-invariant-under-similarity | corollary | ring similarity invariant |
 
 The two local seam definitions are load bearing. Batch 1's matrix interface is
 over fields, so it cannot define invertibility or similarity over an arbitrary
@@ -116,6 +121,15 @@ transformations, calls only the reversible cases elementary equivalences, and
 the determinant theorem proves the scaling formula for every scalar. This is
 stronger than the requested nonzero-scalar clause and lets the proof cover zero
 divisors without cancellation.
+
+The real invertibility criterion is deliberately not stated over an arbitrary
+commutative ring. Over a general commutative ring the exact criterion is that
+the determinant be a unit, and the converse needs adjugate/cofactor machinery
+assigned to the following determinant page. Batch 5 needs only real matrices,
+and the real-field converse closes now by row reduction, so the exact requested
+real id is the honest boundary. The polynomial corollary is likewise stated in
+the exact real form needed downstream: for fixed \(n\ge1\), the Leibniz sum is
+a polynomial in the \(n^2\) real coordinate entries.
 
 ### determinants-of-matrices-over-a-commutative-ring-examples — 6 items
 
@@ -177,8 +191,9 @@ matrix page is field-valued, the page first builds the required ring-valued
 matrix arithmetic, inverse and similarity interfaces and proves that they
 specialise exactly to the established field interface. It then proves that the
 Leibniz function is normalized, alternating and multilinear, and that these
-properties uniquely determine it; \(\lvert\det A\rvert\) is also fixed for real
-matrices.
+properties uniquely determine it. For each fixed positive size, the same
+Leibniz expression exhibits the real determinant as a polynomial in the matrix
+entries; \(\lvert\det A\rvert\) is also fixed for real matrices.
 
 Transpose invariance transfers the column laws to rows. Consequently row swaps
 negate the determinant, scaling a row by any scalar scales it, and adding a
@@ -186,7 +201,8 @@ multiple of another row leaves it unchanged, with singular matrices and rings
 with zero divisors included. The determinant of a triangular matrix is the
 product of its diagonal entries, determinants multiply over every commutative
 ring, and invertibility, inverses and similarity yield the expected unit and
-invariance corollaries.
+invariance corollaries. Specializing to real matrices and using row reduction
+also proves that invertibility is equivalent to nonzero determinant.
 
 ### Determinant B
 
@@ -210,13 +226,18 @@ totals are:
 
 | pair | included | inline | deferred | out of scope |
 |---|---:|---:|---:|---:|
-| Gaussian | 50 | 19 | 1 | 0 |
-| determinant | 30 | 6 | 8 | 2 |
-| total | 80 | 25 | 9 | 2 |
+| Gaussian | 55 | 19 | 0 | 0 |
+| determinant | 37 | 6 | 7 | 2 |
+| total | 92 | 25 | 7 | 2 |
 
-Thus 80 harvested headings become separate scaffolded items and 25 are absorbed
-inline; 11 are declined. Repeated headings from independent sources are counted
-independently, as the checklist requires.
+Thus 92 harvested headings become separate scaffolded items and 25 are absorbed
+inline; 9 are declined. Repeated headings from independent sources are counted
+independently, as the checklist requires. The Step-3 repair changes three JSON
+heading rows but only two result-level dispositions: ILA's invertibility
+criterion occurs once in the broad PDF harvest under the Gaussian pair and once
+in the determinant-specific HTML harvest, and both now point to the same new
+theorem; Massot's polynomial-evaluation observation now points to the new
+corollary.
 
 Source codes used below:
 
@@ -224,8 +245,9 @@ Source codes used below:
   <https://textbooks.math.gatech.edu/ila/ila.pdf>. Gaussian ranges:
   §§1.2, 1.3, 2.4, 2.7, 2.9, 3.5 and 3.6 exactly as enumerated in the harvest.
   Determinant range: all of §4.1.1–§4.1.2. This is the controlling
-  computational textbook. The book states GNU FDL 1.2 or later, with no
-  invariant sections or cover texts.
+  computational textbook and directly supplies the real invertibility
+  criterion proved by row reduction. The book states GNU FDL 1.2 or later,
+  with no invariant sections or cover texts.
 - H — Jim Hefferon, _Linear Algebra_, fourth edition.
   <https://jheffero.w3.uvm.edu/linearalgebra/book.pdf>. Read Chapter One
   §§III.1–III.2, Chapter Two §III.3 and Chapter Three §§IV.3–IV.4 in the exact
@@ -243,36 +265,35 @@ Source codes used below:
 - M — Patrick Massot, _Structures algébriques fondamentales_, §6.4.
   <https://www.imo.universite-paris-saclay.fr/~patrick.massot/enseignement/poly_alg/cha-algebres.html>.
   Read Definition 6.4.1 through Proposition 6.4.3. It independently supports
-  the alternating-multilinear construction, the Leibniz formula, transpose,
-  triangular determinants and multiplicativity. No explicit reuse licence was
-  located; again, only the mathematical facts and proof architecture are used.
+  the alternating-multilinear construction, the Leibniz formula, its
+  polynomial-evaluation interpretation, transpose, triangular determinants and
+  multiplicativity. No explicit reuse licence was located; again, only the
+  mathematical facts and proof architecture are used.
 
 All Step-5 prose and derivations will be freshly written in house style.
 There is no scraped source and no external fallback.
 
 ### Declines most likely to be challenged
 
-- ILA's \(2\times2\) “invertible iff determinant is nonzero” and its
-  row-reduction determinant recipe are deferred to the next planned determinant
-  page, the-determinant-of-a-linear-operator, where the field-only converse,
-  cofactor expansion and computational recipes are assigned. They are not
-  discarded from the library.
+- ILA's worked row-reduction determinant recipe remains deferred to the next
+  planned determinant examples page, where it is paired with cofactor
+  expansion. The theorem that licenses the recipe is already included here.
 - W's bilinear-form representation theorem belongs to the later
   dual-spaces/bilinear-forms page; it is not determinant machinery.
 - M's cofactor/adjugate identity is deferred to the next determinant page with
   Cramer's rule. The present repeated-column lemma is deliberately built as its
   prerequisite.
-- M's polynomial-evaluation observation and Sylvester identity are out of scope:
-  their supplied proofs use universal polynomial-ring and integral-domain
-  machinery belonging to a later algebra subject, and neither result is needed
-  for the determinant spine or batch 5's change-of-variables interface.
+- M's Sylvester identity remains out of scope: its proof uses universal
+  polynomial-ring and integral-domain machinery, and the secondary identity is
+  not used by the determinant spine or batch 5. The polynomial-evaluation
+  observation itself is no longer declined; the already scaffolded order-52
+  multivariate-polynomial interface is sufficient to state and prove it.
 - A rigorous signed-volume interpretation is out of scope because the plan
   assigns it to later measure/orientation machinery. The current interface
   still exposes \(\lvert\det A\rvert\), as the dispatch requires.
 
-The only Gaussian decline is the ILA \(2\times2\) determinant invertibility
-criterion, which is determinant material rather than row-reduction material and
-is assigned to the later determinant-of-an-operator page.
+The Gaussian harvest now has no decline: its duplicated ILA \(2\times2\)
+invertibility heading points to the determinant theorem on the second pair.
 
 ## 5. Published and same-run dependency audit
 
@@ -310,8 +331,9 @@ thm-integers-modulo-n-basic-algebra, thm-number-of-bijections-of-a-finite-set,
 thm-quaternions-form-a-division-ring, thm-reals-ordered-field.
 
 The same-run dependencies were read from
-research/frontier-10-batch-1.pages.json, not invented. They all occur on A
-pages at order 44 or 78, before orders 80 and 82:
+research/frontier-10-batch-1.pages.json and
+research/frontier-10-batch-3.pages.json, not invented. They all occur on A
+pages at orders 44, 52 or 78, before orders 80 and 82:
 
 - sign page, order 44:
   def-inversions-inversion-number-and-sign,
@@ -324,9 +346,15 @@ pages at order 44 or 78, before orders 80 and 82:
   def-transpose-of-a-matrix, thm-coordinate-action-of-a-linear-map,
   def-invertible-matrix-and-general-linear-group,
   thm-invertible-matrices-correspond-to-linear-isomorphisms, and
-  def-similar-matrices.
+  def-similar-matrices;
+- polynomial page, order 52:
+  def-multivariate-polynomial-ring-by-iteration and
+  def-polynomial-evaluation-and-root. Batch 3 records the first Statement as
+  literature-derived and the second as a source-backed adaptation of Donaldson
+  and McKernan, so both are eligible load-bearing dependencies rather than
+  generated bridges.
 
-The dependency-closure check found 37 published external ids, 12 same-run
+The dependency-closure check found 37 published external ids, 14 same-run
 earlier ids, no missing target and no same-page forward dependency.
 
 ## 6. Expected component provenance for every planned item
@@ -396,6 +424,7 @@ ai-generated proof does not change the Statement label.
 | lem-alternating-multilinear-implies-antisymmetric | LD | AA | W Theorem 4.19; polarisation without division |
 | lem-rigidity-of-alternating-multilinear-matrix-functions | LD | AA | W Theorem 4.20/M Definition 6.4.1 |
 | def-determinant-of-a-square-matrix | LD | NA | W/M Leibniz formula; G for real absolute value convention |
+| cor-determinant-is-a-polynomial-in-the-matrix-entries | LD | AA | M's polynomial-evaluation observation; proof adapted to batch 3's formal finite multivariate-polynomial interface |
 | thm-leibniz-determinant-is-alternating-multilinear-and-normalized | LD | AA | W/M; finite reindexing proof |
 | thm-determinant-is-the-unique-normalized-alternating-multilinear-function | LD | AA | W/M |
 | cor-determinant-vanishes-with-a-zero-or-repeated-column | LD | AA | W Theorem 4.19 |
@@ -407,6 +436,7 @@ ai-generated proof does not change the Statement label.
 | thm-determinant-of-a-triangular-matrix | LD | AA | W/G |
 | thm-determinant-multiplicative | LD | AA | W Theorem 4.24/M Lemma 6.4.2; rigidity proof |
 | cor-invertible-matrix-has-unit-determinant | LD | AA | W/G, generalized faithfully to a commutative ring |
+| thm-real-square-matrix-invertible-iff-determinant-nonzero | LD | AA | G Invertibility Property; two directions adapted to the ring/field seam and the Gaussian RREF interface |
 | cor-determinant-of-an-inverse | LD | AA | W/G |
 | cor-determinant-is-invariant-under-similarity | LD | AA | W/G |
 
@@ -459,14 +489,26 @@ required properties; and the uniqueness theorem. Transpose invariance is
 isolated before row multilinearity and the row-operation laws. Multiplicativity
 then uses rigidity rather than an unscaffolded combinatorial expansion.
 
-Useful determinant corollaries are zero/repeated-column vanishing, row
-multilinearity, unit determinant of an invertible matrix, determinant of the
-inverse, and similarity invariance. The richness pass added the characteristic
+The Step-3 repair adds two short, independently auditable routes. For
+`cor-determinant-is-a-polynomial-in-the-matrix-entries`, fix \(n\ge1\), form
+\(P_n=\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)
+\prod_{i<n}x_{\sigma(i),i}\) in the \(n^2\)-variable real polynomial ring, and
+identify its evaluation at the entries of \(A\) with the Leibniz formula. For
+`thm-real-square-matrix-invertible-iff-determinant-nonzero`, the forward
+direction specializes the ring unit-determinant corollary to \(\mathbb R\). For
+the converse, a noninvertible matrix has an RREF with fewer than \(n\) pivots,
+hence a zero row; that RREF is upper triangular with determinant zero, and the
+reversible real row operations preserve whether the determinant vanishes.
+
+Useful determinant corollaries are the polynomial-in-entries formula,
+zero/repeated-column vanishing, row multilinearity, unit determinant of an
+invertible matrix, the real invertibility criterion, determinant of the inverse,
+and similarity invariance. The richness pass added the characteristic
 two, noncommutative quaternion, coefficient-ring, and singular-zero-divisor
 boundaries. It also caught and repaired the false “equal columns gives
 \(2k\)” witness before authoring.
 
-The proof-contract file scopes all 52 proof-bearing items, with one contract per
+The proof-contract file scopes all 54 proof-bearing items, with one contract per
 item. Each contract maps citations and substantive derivations and records all
 eight boundary classes. Definitions are intentionally outside proof-contract
 scope. No finite-smoke type in the repository applies to these linear-algebra
@@ -495,6 +537,14 @@ items; every fixed witness instead has an explicit arithmetic derivation.
 - In Gaussian elimination, scaling by a nonzero field scalar is reversible. In
   the ring determinant theorem, scaling by any scalar has a determinant law,
   but a nonunit scaling is not a row equivalence. Do not call it reversible.
+- `thm-real-square-matrix-invertible-iff-determinant-nonzero` is a real-field
+  specialization. Never generalize its word “nonzero” to arbitrary commutative
+  rings: there the correct invariant is “unit,” and only the forward implication
+  is established on this page before adjugates are available.
+- `cor-determinant-is-a-polynomial-in-the-matrix-entries` must display the
+  finite \(n^2\)-variable Leibniz polynomial itself. It asserts no analytic
+  continuity theorem at order 82; batch 5 combines the displayed finite
+  sum/product expression with its later continuity algebra.
 - Batch 1's similarity is field-valued. The determinant page defines ring
   similarity separately and proves exact agreement after field specialization.
 - Write \(\det A\), not \(|A|\), for the determinant. Reserve
@@ -519,12 +569,19 @@ No interface substitution is proposed. Batch 5 may cite these exact ids:
 - def-determinant-of-a-square-matrix;
 - thm-determinant-under-elementary-row-operations;
 - thm-determinant-multiplicative;
-- thm-invertible-matrices-factor-into-elementary-matrices.
+- thm-invertible-matrices-factor-into-elementary-matrices;
+- thm-real-square-matrix-invertible-iff-determinant-nonzero; and
+- cor-determinant-is-a-polynomial-in-the-matrix-entries.
 
 The determinant definition explicitly includes \(\lvert\det A\rvert\) for a
 real matrix. The row-operation theorem explicitly covers singular matrices and
 proves swap, scaling and row-addition laws. The factorisation theorem is on the
 Gaussian page and is specialized to finite square real matrices, as requested.
+The new real criterion supplies batch 5's singular-branch implication
+directly. The polynomial corollary supplies the explicit finite Leibniz
+sum-of-products expression; batch 5, at its later order, combines that
+expression with componentwise continuity to obtain continuity of the absolute
+Jacobian determinant.
 
 Recommendations for Step 3:
 
@@ -535,7 +592,10 @@ Recommendations for Step 3:
 2. Approve the local ring invertibility/similarity definition and the field
    compatibility proposition. Without them, the last three determinant
    corollaries would silently use batch 1's field-only interface.
-3. Approve no split. Both A pages are far below 60 items, and the complete
+3. Approve the order-52 polynomial-page requirement. It supplies the exact
+   finite multivariate-polynomial vocabulary for the new corollary and remains
+   strictly earlier than the determinant page.
+4. Approve no split. Both A pages are far below 60 items, and the complete
    harvested spine fits without pruning.
 
 There are no unavoidable forward references, no external fallback, no
@@ -545,10 +605,10 @@ derivations are mapped in the proof contracts for Step 5.
 
 ## 10. Mechanical checks and runtime blocker
 
-The whole-corpus mint collision command generated all 65 ids and piped them to
+The whole-corpus mint collision command generated all 67 ids and piped them to
 rg -F -f - over items/ and research/plan-spec.json. It returned exit 1 with no
 match, which is the expected no-collision result. A separate structural check
-found 65 unique ids, no duplicate, no missing dependency and no same-page
+found 67 unique ids, no duplicate, no missing dependency and no same-page
 forward dependency.
 
 Direct gates:

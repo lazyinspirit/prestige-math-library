@@ -37,6 +37,7 @@
     "prop-field-and-ring-matrix-interfaces-agree",
     "lem-alternating-multilinear-implies-antisymmetric",
     "lem-rigidity-of-alternating-multilinear-matrix-functions",
+    "cor-determinant-is-a-polynomial-in-the-matrix-entries",
     "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
     "thm-determinant-is-the-unique-normalized-alternating-multilinear-function",
     "cor-determinant-vanishes-with-a-zero-or-repeated-column",
@@ -46,6 +47,7 @@
     "thm-determinant-of-a-triangular-matrix",
     "thm-determinant-multiplicative",
     "cor-invertible-matrix-has-unit-determinant",
+    "thm-real-square-matrix-invertible-iff-determinant-nonzero",
     "cor-determinant-of-an-inverse",
     "cor-determinant-is-invariant-under-similarity",
     "ex-two-by-two-determinant-formula",
@@ -3741,6 +3743,134 @@
       ],
       "finite_smoke": []
     },
+    "cor-determinant-is-a-polynomial-in-the-matrix-entries": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For $n\\ge1$, the determinant over a commutative ring is given by the finite Leibniz formula",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-multivariate-polynomial-ring-by-iteration",
+          "source_section": "Planned Statement in frontier-10 batch 3 (synchronize at Step 5)",
+          "quote": "Polynomial rings in finitely many commuting indeterminates are defined by iteration",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-reals-field",
+          "source_section": "Published Statement",
+          "quote": "$\\mathbb{R}$ is a field",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-field-is-a-commutative-ring",
+          "source_section": "Published Statement, clause 1",
+          "quote": "Every field is a commutative ring with $1\\ne0$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-polynomial-evaluation-and-root",
+          "source_section": "Planned Statement in frontier-10 batch 3 (synchronize at Step 5)",
+          "quote": "Evaluation of a polynomial in a commutative target ring is the finite sum of its coefficients times powers of the chosen target element",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $n\\ge1$, form the real polynomial $P_n=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}x_{\\sigma(i),i}$ in the $n^2$ commuting entry variables.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Evaluate $P_n$ at the entries of an arbitrary real matrix and identify the value term by term with the finite Leibniz formula for its determinant.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "step 1.1",
+            "algebra",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conclude that the determinant is a polynomial function of the $n^2$ real entries, with an explicit finite sum-of-products expression available to downstream continuity arguments.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "definitions"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The determinant interface is expressly restricted to fixed finite sizes $n\\ge1$, so there is no empty matrix case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the same polynomial at the zero matrix and gives determinant zero without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At $n=1$, step 1.1 gives the one-variable polynomial $P_1=x_{0,0}$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies to singular matrices because the Leibniz expression requires no invertibility hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower size endpoint $n=1$ is handled explicitly; every larger fixed finite size uses the same formula."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The polynomial is explicitly defined by a finite sum over the finite symmetric group; no arbitrary choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional; the equality with the displayed polynomial is proved directly."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional and no converse is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
     "thm-leibniz-determinant-is-alternating-multilinear-and-normalized": {
       "citations": [
         {
@@ -4698,6 +4828,176 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "reason": "The top-level statement is not a biconditional and no converse is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-real-square-matrix-invertible-iff-determinant-nonzero": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-field-and-ring-matrix-interfaces-agree",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For a field, the ring-matrix operations and invertibility agree exactly with the established field-matrix interface",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-row-echelon-reduced-row-echelon-and-pivots",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Row echelon form, reduced row echelon form, leading entries, pivots, pivot positions and pivot columns",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-invertible-matrix-theorem",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For a finite square matrix over a field, invertibility, full pivot rank and reduced row echelon form equal to the identity are equivalent",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-determinant-under-elementary-row-operations",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "A row swap negates the determinant, scaling a row by any scalar scales it, and row addition leaves it unchanged",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-determinant-of-a-triangular-matrix",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The determinant of a triangular matrix is the product of its diagonal entries",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-invertible-matrix-has-unit-determinant",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "An invertible square matrix over a commutative ring has unit determinant",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-reals-field",
+          "source_section": "Published Statement",
+          "quote": "$\\mathbb{R}$ is a field",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If a real square matrix is invertible, its determinant is a unit in the real field and therefore is nonzero.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L6",
+            "L7",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the converse, suppose the matrix is not invertible and row-reduce it to its RREF; the invertible matrix theorem gives fewer than $n$ pivots, hence a zero row, and the square RREF is upper triangular.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The triangular determinant formula gives determinant zero for that RREF because its zero row forces a zero diagonal factor.",
+          "step": "3.1",
+          "inputs": [
+            "L5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Along the finite real row reduction, swaps, nonzero row scalings and row additions preserve whether the determinant is zero, so the original matrix also has determinant zero.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "L7",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Take the contrapositive of steps 2.1--4.1 to obtain nonzero determinant implies invertibility, and combine it with step 1.1.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The determinant is defined here only for square matrices of finite size $n\\ge1$, so the zero-dimensional matrix is outside the Statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1--4.1 include the zero matrix: its RREF has a zero row and its determinant is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $n=1$, the argument reduces to the field fact that $[a]$ is invertible exactly when $a\\ne0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The entire converse route starts from a noninvertible, rank-deficient matrix and proves that its determinant vanishes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The lower size endpoint $n=1$ is explicit, and finite row reduction covers every larger finite size."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The unique RREF and a finite row-reduction sequence are supplied constructively; no arbitrary choice from a merely nonempty family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves invertibility implies nonzero determinant through the unit-determinant corollary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1--5.1 prove nonzero determinant implies invertibility by the contrapositive row-reduction argument."
         }
       ],
       "finite_smoke": []

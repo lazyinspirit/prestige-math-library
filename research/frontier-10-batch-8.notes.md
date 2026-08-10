@@ -150,7 +150,8 @@ headings:
 | `deferred` | 5 |
 | `out-of-scope` | 10 |
 
-The four independent treatments are:
+The four source treatments (three independent authors, with Conrad's second
+note used only for the exact \(A_4\) witness) are:
 
 1. Thomas W. Judson, *Abstract Algebra: Theory and Applications*, Chapter 14:
    [groups acting on sets](https://twjudson.github.io/aata-files/aata-html/actions-section-groups-acting-on-sets.html),
@@ -255,13 +256,13 @@ statement opened on disk).
 | `thm-finite-index-core-bound-and-finite-overgroups` | ai-altered | ai-altered | C Theorem 6.8 plus P first isomorphism and finite symmetric-group cardinality; the explicit divisibility by \(n!\) strengthens Conrad's finite-index conclusion |
 | `thm-transitive-actions-are-coset-actions` | literature-derived | ai-altered | B Lemma 3.105–Theorem 3.107 |
 | `cor-faithful-transitive-actions-are-core-free-coset-actions` | ai-altered | ai-generated | direct corollary of the preceding classification and kernel theorem |
-| `def-conjugacy-class-and-centralizer` | literature-derived | not-applicable | J `14.2 and B Corollary 3.109 |
+| `def-conjugacy-class-and-centralizer` | literature-derived | not-applicable | J §14.2 and B Corollary 3.109 |
 | `def-normalizer-of-a-subgroup` | literature-derived | not-applicable | B Corollary 3.110 |
 | `lem-centralizers-and-normalizers-are-subgroups` | literature-derived | ai-altered | standard subgroup facts needed before their indices are used |
 | `thm-conjugacy-class-cardinality` | literature-derived | ai-altered | B Corollary 3.109, obtained from P conjugation and orbit–stabiliser |
 | `thm-conjugate-subgroups-are-counted-by-the-normalizer` | literature-derived | ai-altered | B Corollary 3.110 |
-| `thm-class-equation` | literature-derived | ai-altered | J `14.2 opening result |
-| `def-finite-p-group` | literature-derived | not-applicable | C ``4–5; includes the trivial group by allowing exponent zero |
+| `thm-class-equation` | literature-derived | ai-altered | J §14.2 opening result |
+| `def-finite-p-group` | literature-derived | not-applicable | C §§4–5; includes the trivial group by allowing exponent zero |
 | `lem-subgroups-of-finite-p-groups-are-p-groups` | ai-altered | ai-generated | proof-decomposition lemma from P Lagrange and unique prime factorisation |
 | `cor-index-p-subgroups-of-finite-p-groups-are-normal` | literature-derived | ai-altered | C Corollary 6.4; proof is rebuilt from the new core factorial bound rather than depending on deferred Theorem 6.2 |
 | `thm-p-group-fixed-point-congruence` | literature-derived | ai-altered | C Theorem 4.1 |
@@ -285,7 +286,7 @@ statement opened on disk).
 | `ex-fixed-point-congruence-for-an-action-of-z-two` | ai-generated | ai-generated | five-point finite witness; it is a leaf |
 | `cex-fixed-point-congruence-fails-without-p-group-hypothesis` | ai-altered | ai-generated | natural \(S_3\)-action cross-checked against the retained class-equation computation; \(3\not\equiv0\pmod2\) gives the exact failed conclusion |
 | `cex-cauchys-theorem-does-not-extend-to-composite-divisors` | literature-derived | ai-altered | A4C opening and Theorem 1; direct index-two normality/conjugation proof is restated in house style |
-| `ex-two-colourings-of-a-square-up-to-dihedral-symmetry` | literature-derived | ai-altered | J `14.3 opening problem, with a complete fixed-count table |
+| `ex-two-colourings-of-a-square-up-to-dihedral-symmetry` | literature-derived | ai-altered | J §14.3 opening problem, with a complete fixed-count table |
 | `ex-binary-necklaces-of-length-four` | literature-derived | ai-altered | standard Cauchy–Frobenius rotation count, cross-checked by its four fixed counts |
 | `cex-orbit-count-is-not-set-size-divided-by-group-order` | ai-generated | ai-generated | direct leaf counterexample derived from P's singleton trivial action |
 
@@ -536,28 +537,21 @@ Checkpoint written after the source/dependency pass and before final gates,
 
 The escalation-free direct gates are green:
 
-- `node tools/validate-plan.mjs research/plan-spec.json`: exit 0; the declared
-  page order is acyclic and consistent.
-- `node tools/depsource.mjs research/plan-spec.json`: exit 0; 16,688 published
-  dependencies and zero unresolved, homeless, planned-later or B-page edges in
-  the currently spliced spec.
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed
+  research/frontier-10-rehomed.json`: exit 0; the declared page order is acyclic
+  and consistent, with no item-level cycles, forward references, B-page
+  dependencies or unresolved IDs among pages carrying item lists.
 - `node tools/coverage-checklist.mjs
-  research/frontier-10-batch-8.coverage.json`: exit 0; 1 page, 52 headings, no
+  research/frontier-10-batch-8.coverage.json`: exit 0; 1 page, 66 headings, no
   error or warning.
-- The same coverage tool over every currently present frontier-10 checklist
-  (batches 4, 5, 6, 7 and 8): exit 0; 7 pages, 422 headings, no error or warning.
 - `node tools/content-policy.mjs
-  research/frontier-10-batch-8.pages.json --manifest-only`: exit 0; 39 scoped
-  items, no error or warning.
+  research/frontier-10-batch-8.pages.json --manifest-only --rehomed
+  research/frontier-10-rehomed.json`: exit 0; 45 scoped items, no error or
+  warning.
 - All three JSON artifacts parse, the proof scope and contract map both contain
-  exactly 32 IDs, and `git diff --check` is clean for the four allowed files.
+  exactly 38 IDs, and `git diff --check` is clean for the four allowed files.
 
-The literal aggregate command `node tools/gates.mjs --step 2 --run
-frontier-10` could not be left green in this runtime. Its wrapper uses Node
-`spawnSync` to launch each child gate; the workspace sandbox rejects every such
-nested Node process with `spawnSync /usr/bin/node EPERM`. The wrapper therefore
-reported three child-launch failures before any gate body ran. Running those
-same three children directly gives the green results above. Per the owner's
-no-permission-prompts rule, no escalation was requested. This nested-process
-restriction is the sole blocker; there is no mathematical, source-access,
-dependency or size blocker in batch 8.
+Per the dispatch, `tools/gates.mjs` was not run. The runtime preflight still
+reports the known nested-process `spawnSync EPERM` restriction, but every
+required direct gate above ran successfully without escalation. There is no
+mathematical, source-access, dependency, size or deliverable blocker in batch 8.

@@ -2546,7 +2546,7 @@
           "fact": "L5",
           "source": "def-sum-over-a-finite-index-set",
           "source_section": "Definition",
-          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$, and let $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$. Choose a bijection $\\varphi : n \\to S$ and set $\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}$. The value is independent of the enumeration, and the sum over the empty set is $0$.",
+          "quote": "$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$",
           "uses": [
             "1.1"
           ]
@@ -2554,7 +2554,7 @@
         {
           "fact": "L6",
           "source": "def-sum-over-a-finite-index-set",
-          "source_section": "Definition, clause (b)",
+          "source_section": "Definition",
           "quote": "If $h : T \\to S$ is a bijection of finite sets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for products.",
           "uses": [
             "1.1"
@@ -4037,6 +4037,453 @@
           "status": "not_applicable",
           "reason": "The planned top-level statement is not a biconditional."
         }
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-index-core-bound-and-finite-overgroups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-left-coset-action-and-its-kernel",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The left action of $G$ on $G/H$ induces a homomorphism $\\rho:G\\to\\operatorname{Sym}(G/H)$ with kernel $\\operatorname{Core}_G(H)$",
+          "uses": ["1.1", "2.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-core-is-largest-normal-subgroup-contained",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "$\\operatorname{Core}_G(H)$ is the largest normal subgroup of $G$ contained in $H$",
+          "uses": ["1.1", "3.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-first-isomorphism-theorem-groups",
+          "source_section": "Statement",
+          "quote": "First isomorphism theorem for groups: $G/\\ker f\\cong\\operatorname{im}f$.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "The **symmetric group of $X$** is the\nset of all permutations of $X$",
+          "uses": ["1.1", "2.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-symmetric-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the triple\n$(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ of [[def-symmetric-group]] is a\ngroup ([[def-group]])",
+          "uses": ["1.1", "2.1"]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-number-of-bijections-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Then $\\operatorname{Bij}(A)$ is finite and $\\lvert\\operatorname{Bij}(A)\\rvert = n!$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-lagrange",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and $H\\le G$. Then\n\n$$|G|=[G:H]\\,|H|.$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L8",
+          "source": "prop-canonical-quotient-map",
+          "source_section": "Statement",
+          "quote": "The canonical projection\n\n$$\\pi:G\\longrightarrow G/N,\\qquad \\pi(g):=gN,$$\n\nis a surjective group homomorphism.",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "L9",
+          "source": "cor-cardinality-of-the-power-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set and $n := \\lvert A\\rvert$. Then the power set\n$\\mathcal{P}(A)$ is finite",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $N=\\operatorname{Core}_G(H)$. The coset action gives a homomorphism $\\rho:G\\to\\operatorname{Sym}(G/H)$ with kernel $N$, and $N\\trianglelefteq G$ with $N\\le H$.",
+          "step": "1.1",
+          "inputs": ["L1", "L2", "L4", "L5", "given"]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "First isomorphism identifies $G/N$ with the subgroup $\\operatorname{im}\\rho$ of the symmetric group on the $n$ cosets. Lagrange and the $n!$ count therefore give $[G:N]\\mid n!$.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "L1", "L3", "L4", "L5", "L6", "L7", "algebra"]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every overgroup $K\\ge H$ contains $N$ and satisfies $K=\\pi^{-1}[\\pi[K]]$. Thus $K\\mapsto\\pi[K]$ injects the overgroups of $H$ into the finite power set of the finite set $G/N$.",
+          "step": "3.1",
+          "inputs": ["step 2.1", "L2", "L8", "L9", "L10", "algebra"]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Conclude simultaneously that the core is finite-index normal, its index divides $n!$, and only finitely many subgroups of $G$ contain $H$.",
+          "step": "4.1",
+          "inputs": ["step 2.1", "step 3.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "A subgroup contains the identity, so the coset set is nonempty even though it is only assumed finite."},
+        {"case": "zero", "status": "not_applicable", "reason": "A subgroup cannot have index zero; the finite index n is automatically positive."},
+        {"case": "one", "status": "checked", "evidence": "When H=G, the core is G, its index is 1 dividing 1!, and G is the only overgroup."},
+        {"case": "degenerate", "status": "checked", "evidence": "The proof explicitly includes the trivial group and the index-one subgroup case."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "No interval endpoint occurs; the factorial endpoint n=1 is covered by the index-one case."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The proof selects no coset representative globally and uses only canonical action and quotient maps."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-index-p-subgroups-of-finite-p-groups-are-normal": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-finite-index-core-bound-and-finite-overgroups",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If $[G:H]=n<\\infty$, then $\\operatorname{Core}_G(H)\\trianglelefteq G$ and $[G:\\operatorname{Core}_G(H)]\\mid n!$",
+          "uses": ["1.1", "2.1", "3.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-subgroups-of-finite-p-groups-are-p-groups",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Every subgroup of a finite $p$-group is a finite $p$-group",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-index-tower-finite",
+          "source_section": "Statement",
+          "quote": "If $K\\le H\\le G$ and $G$ is finite, then all three indices are finite and\n\n$$[G:K]=[G:H][H:K].$$",
+          "uses": ["1.1", "2.1", "4.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "We write $n! := F(n)$.",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-euclids-lemma-for-finite-products",
+          "source_section": "Statement",
+          "quote": "If\n\n$$p \\;\\Big|\\; \\prod_{i<n} a_i ,$$\n\nthen $p \\mid a_i$ for some $i < n$.",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-canonical-prime-factorisation",
+          "source_section": "Statement",
+          "quote": "the exponents are determined by $n$: if $e : r \\to \\mathbb{N}$ and\n   $n = \\prod_{i<r} p_i^{\\,e_i}$, then $e_j = v_{p_j}(n)$ for every $j < r$.",
+          "uses": ["2.1", "3.1"]
+        },
+        {
+          "fact": "L7",
+          "source": "def-prime",
+          "source_section": "Definition",
+          "quote": "In words: $p$ exceeds $1$, and its only positive divisors are $1$ and $p$.",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $K=\\operatorname{Core}_G(H)$. Then $K\\trianglelefteq G$, $K\\le H$, $[G:K]\\mid p!$, and the index tower gives $[G:K]=p[H:K]$.",
+          "step": "1.1",
+          "inputs": ["L1", "L3", "given"]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because $G$, $H$, and $K$ have prime-power orders, Lagrange and unique prime factorisation show that $[G:K]$ is a positive power of $p$.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "L1", "L2", "L3", "L6", "algebra"]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Among the factors $1,\u2026,p$ of $p!$, only $p$ is divisible by $p$; Euclid's lemma for finite products therefore shows $p^2\\nmid p!$. Since the positive p-power $[G:K]$ is divisible by p and divides p!, it equals p.",
+          "step": "3.1",
+          "inputs": ["step 2.1", "L1", "L4", "L5", "L6", "L7", "algebra"]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The equality $[G:K]=p=p[H:K]$ forces $[H:K]=1$, hence $H=K$ and $H\\trianglelefteq G$.",
+          "step": "4.1",
+          "inputs": ["step 1.1", "step 3.1", "L3", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "Groups and subgroups are nonempty because they contain the identity."},
+        {"case": "zero", "status": "not_applicable", "reason": "A prime satisfies p at least 2 and an index cannot be zero."},
+        {"case": "one", "status": "not_applicable", "reason": "The hypothesis [G:H]=p with p prime excludes index one."},
+        {"case": "degenerate", "status": "checked", "evidence": "The smallest possible case G of order p and H trivial is covered and H is normal."},
+        {"case": "endpoints", "status": "checked", "evidence": "The proof treats the final factorial factor p separately and all earlier factors lie strictly between 1 and p."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The core is canonical and the proof makes no choice from a variable nonempty family."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-s-three-has-trivial-center": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-nontrivial-center-of-a-finite-p-group",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Every nontrivial finite $p$-group has nontrivial center",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "ex-class-equation-of-s-three",
+          "source_section": "Planned Example (synchronize at Step 5)",
+          "quote": "The class equation of $S_3$ is $6=1+2+3$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "def-center-of-a-group",
+          "source_section": "Definition",
+          "quote": "The **center of $G$** is\n\n$$Z(G):=\\{z\\in G:zg=gz\\text{ for every }g\\in G\\}.$$",
+          "uses": ["1.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the class equation $6=1+2+3$, the central elements are exactly the singleton conjugacy classes, so $Z(S_3)=\\{e\\}$.",
+          "step": "1.1",
+          "inputs": ["L2", "L3", "algebra"]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $S_3$ is nontrivial but has trivial center, it shows that the finite p-group hypothesis in the nontrivial-center theorem cannot be omitted.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "L1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The witness is the fixed nonempty group S_3."},
+        {"case": "zero", "status": "not_applicable", "reason": "No zero-valued parameter occurs in the witness."},
+        {"case": "one", "status": "checked", "evidence": "The sole singleton conjugacy class is explicitly identified as the identity class."},
+        {"case": "degenerate", "status": "not_applicable", "reason": "The fixed witness is nontrivial and has no variable degenerate regime."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "No ordered interval or endpoint occurs."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "No choice from a variable nonempty set is made."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-groups-of-order-p-cubed-need-not-be-abelian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-groups-of-order-p-squared-are-abelian",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Every group of order $p^2$ is abelian",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "ex-symmetries-of-a-square",
+          "source_section": "Example",
+          "quote": "$$D \\;=\\; \\{\\, \\mathrm{id},\\ r,\\ r^{2},\\ r^{3},\\ s,\\ rs,\\ r^{2}s,\\ r^{3}s \\,\\},$$",
+          "uses": ["1.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The published square-symmetry group has the eight displayed elements, and direct evaluation gives $sr\\ne rs$.",
+          "step": "1.1",
+          "inputs": ["L2", "algebra"]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Thus a group of order $8=2^3$ need not be abelian, so the exponent two in the order-p-squared theorem cannot be replaced by three.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "L1", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The witness is the fixed nonempty square-symmetry group."},
+        {"case": "zero", "status": "not_applicable", "reason": "The prime and exponent in the witness are fixed as 2 and 3."},
+        {"case": "one", "status": "not_applicable", "reason": "The witness has eight elements and is not an order-one case."},
+        {"case": "degenerate", "status": "checked", "evidence": "The smallest prime p=2 is used, so no smaller prime boundary is hidden."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "No ordered interval endpoint occurs."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The two explicit generators are fixed rather than selected noncanonically."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-fixed-point-congruence-fails-without-p-group-hypothesis": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-p-group-fixed-point-congruence",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For a finite $p$-group acting on a finite set $X$, one has $|X|\\equiv|X^G|\\pmod p$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "def-fixed-point-sets-of-a-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "$X^G$ is the set of points fixed by every element of $G$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "cex-faithful-transitive-action-need-not-be-free",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The natural action of $S_3$ on three points is faithful and transitive but not free",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "when $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the natural transitive action of $S_3$ on $X=\\{1,2,3\\}$, no point is fixed by every permutation, so $|X|=3$ and $|X^{S_3}|=0$.",
+          "step": "1.1",
+          "inputs": ["L2", "L3", "algebra"]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because 2 does not divide $3-0$, the congruence modulo 2 fails; $S_3$ is not a 2-group, isolating the theorem's p-group hypothesis.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "L1", "L4", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The acted-on set is explicitly the nonempty three-point set."},
+        {"case": "zero", "status": "checked", "evidence": "The global fixed-point set is empty and its cardinality zero is used explicitly."},
+        {"case": "one", "status": "not_applicable", "reason": "The witness uses a three-point action and a six-element group."},
+        {"case": "degenerate", "status": "checked", "evidence": "The smallest modulus prime p=2 is used to expose the failure."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "No interval endpoint occurs."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The action and set are explicit; no choice from a varying family is made."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-cauchys-theorem-does-not-extend-to-composite-divisors": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchys-theorem-for-finite-groups",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If a prime $p$ divides the order of a finite group $G$, then $G$ has an element of order $p$",
+          "uses": ["4.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-index-two-subgroup-is-normal",
+          "source_section": "Statement",
+          "quote": "If $H\\le G$ and $[G:H]=2$, then $H\\mathrel{\\trianglelefteq}G$.",
+          "uses": ["2.1", "3.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "The **symmetric group of $X$** is the\nset of all permutations of $X$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-symmetric-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the triple\n$(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ of [[def-symmetric-group]] is a\ngroup ([[def-group]])",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "def-generated-subgroup",
+          "source_section": "Definition",
+          "quote": "That intersection is the **subgroup generated by $S$**",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-lagrange",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and $H\\le G$. Then\n\n$$|G|=[G:H]\\,|H|.$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-conjugation-is-an-automorphism",
+          "source_section": "Statement",
+          "quote": "Conjugation $x\\mapsto gxg^{-1}$ is an automorphism.",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Inside $S_4$, enumerate the subgroup $A=\\langle(1\\,2\\,3),(1\\,2)(3\\,4)\\rangle$ as the identity, eight 3-cycles, and three double transpositions; hence $|A|=12$.",
+          "step": "1.1",
+          "inputs": ["L3", "L4", "L5", "algebra"]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $H\\le A$ had order 6, Lagrange would give $[A:H]=2$, so $H$ would be normal. Its six-element complement cannot contain all eight 3-cycles, so $H$ contains a 3-cycle.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "L2", "L6", "algebra"]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Subgroup closure gives the inverse cycle and normality gives all conjugates of both. Direct conjugation by the displayed generators yields all eight 3-cycles, already more than six elements, a contradiction.",
+          "step": "3.1",
+          "inputs": ["step 1.1", "step 2.1", "L2", "L7", "algebra"]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Thus the composite divisor 6 of 12 is not a subgroup order, while Cauchy's theorem guarantees only the prime-divisor cases; the proposed arbitrary-divisor extension is false.",
+          "step": "4.1",
+          "inputs": ["step 3.1", "L1", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The witness is an explicit nonempty generated subgroup of S_4."},
+        {"case": "zero", "status": "not_applicable", "reason": "The fixed orders 12 and 6 are positive."},
+        {"case": "one", "status": "checked", "evidence": "The identity is included separately from the eight 3-cycles in the enumeration."},
+        {"case": "degenerate", "status": "not_applicable", "reason": "The fixed witness has no variable degenerate parameter."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "No ordered interval endpoint occurs."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "A 3-cycle in H is selected only after counting proves that at least one lies in H."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The top-level statement is not a biconditional."}
       ],
       "finite_smoke": []
     }
