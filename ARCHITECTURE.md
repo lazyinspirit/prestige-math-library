@@ -295,8 +295,13 @@ Errors: `resolve`, `requires-resolve`, `requires-cycle`, `item-cycle`,
 `page-cycle`, `prereq-order`, `undeclared-prereq`, `forward-ref`,
 `forward-whitelist`, `intra-order`, **`b-leaf`** (nothing may depend on an item
 on a B/examples page — B pages are leaves), `b-requires-a`, `dup-id`, `prefix`,
-`kind`, `companion`. Warnings: `orphan`, `size` (above 100 A-page items; a review
-ceiling, not a target or permission to prune), `redundant-prereq` (a declared prerequisite already reachable transitively; 12
+`kind`, `companion`, **`size`** (above `--max-items` A-page items, default **60**
+since owner 2026-08-11 — was a warning at 100. The remedy is always to SPLIT into
+two or more A pages, never to prune: the same owner instruction requires Betas to
+build every prerequisite a theorem needs, which makes pages larger, and 60 items
+is the bound on a readable and auditable unit. No published page has ever exceeded
+54, so the tightening stranded nothing). Warnings: `orphan`,
+`redundant-prereq` (a declared prerequisite already reachable transitively; 12
 stand in the spec as of 2026-07-27 and are kept deliberately where the direct
 edge is mathematically real). 19 codes total.
 

@@ -98,8 +98,25 @@ Rules the gate enforces, so read them before you write the file:
 
 There is deliberately **no minimum number of results**: padding is forbidden by
 the scaffold-richness rule and a count would invite it. The bar is set by the
-source, not by a target. If a chapter proves twenty things and you build six,
-that can be entirely correct — but you must say, result by result, why.
+source, not by a target.
+
+**But raising the bar for a decline (owner, 2026-08-11):** if a result is
+important and the only thing stopping you is that the library lacks a definition
+or theorem it needs, **build the prerequisite**. That is not out of scope; that
+is the work. `deferred` and `out-of-scope` are for material that belongs to
+another page's topic or rests on a whole subject area the library has not reached
+— a computability level, a measure-theory level — **never** for a definition or
+lemma you could simply have written. If a chapter proves twenty things and you
+build six, be ready to defend all fourteen declines to Alpha, result by result.
+
+**When the machinery makes the page big, SPLIT it.** An A page over **60 items**
+is a hard `validate-plan.mjs` error (`size`), and the remedy is always two or
+more A pages — each with its own B companion, its own two-paragraph summary, and
+its own slot in reading order — never a shorter page with results dropped to fit.
+Propose the split in your notes at Step 2 with the proposed ids and the cut you
+would make; the orchestrator adjudicates it at Step 3 and splices new page ids
+into `plan-spec.json` at Step 4. Splitting before authoring costs a spec edit;
+splitting after authoring is a rewrite.
 
 Run it yourself before you report done:
 

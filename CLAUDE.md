@@ -370,8 +370,12 @@ banner; the public sees only `published`.
   never auto-trusted: when its exact claim or conventions are in doubt, Beta or
   Alpha verifies it against reputable literature. Beta then searches reputable sources
   for the exact statement of any well-known result it needs, and tries to prove
-  that result from available library dependencies. If that fails, Beta
-  decomposes, rescopes, or drops the item with a licensing note. The narrow last
+  that result from available library dependencies. **If that fails, Beta builds
+  the missing prerequisite definitions and theorems (owner, 2026-08-11),
+  splitting the A page at 60 items when the machinery makes it large.** Dropping
+  an important result for want of a definition or lemma that could have been
+  written is no longer a permitted disposition; decomposing and rescoping remain
+  available where the material genuinely belongs on another page. The narrow last
   resort is a well-established, source-checked result whose local proof cannot
   be built in scope: record it as a source-cited `rem-` item with
   `proved_here: false`, cite that item in `deps`, and record the exact source,
@@ -391,11 +395,38 @@ banner; the public sees only `published`.
   subscription account into the worker service.
 - Mathematical content requires the step-6 Alpha/Beta audit before publish, even
   when judged.
-- **Scaffold richness (owner, 2026-07-30).** For every A/B pair, Beta decomposes
-  long theorem/lemma proofs into focused intermediate lemmas and performs a pass
-  for useful, cheaply proved corollaries. The A-page size-warning ceiling is 100
-  total items, raised from 60. It is a review ceiling, not a target: never pad,
-  and never drop valuable results merely for ergonomics or to stay below it.
+- **Scaffold richness (owner, 2026-07-30; ceiling superseded 2026-08-11).** For
+  every A/B pair, Beta decomposes long theorem/lemma proofs into focused
+  intermediate lemmas and performs a pass for useful, cheaply proved corollaries.
+  Never pad, and never drop valuable results merely for ergonomics. **The A-page
+  ceiling is now 60 items and it is a hard error, not a warning** — see the
+  build-the-machinery rule below for what to do at the ceiling.
+
+- **Build the machinery; split the page (owner, 2026-08-11, standing for all
+  future sessions).** Two rules, and they are a pair — neither works alone.
+  1. **Build every prerequisite a theorem needs.** If a result requires
+     definitions or theorems the library has not established, Beta **builds
+     them**. Dropping an important result because its prerequisites are missing
+     is the lazy approach and is no longer an acceptable disposition. This
+     reverses the previous default: `deferred`/`out-of-scope` in the coverage
+     checklist is now reserved for material that genuinely belongs to another
+     page's topic or rests on a whole subject area the library has not reached
+     (a computability level, a measure theory level), **not** for a definition
+     or lemma that could simply have been written. The narrow `proved_here:
+     false` external fallback survives unchanged for a well-established result
+     whose local proof genuinely cannot be built in scope; it is a last resort,
+     and "it would have taken three more lemmas" is not a licence to use it.
+  2. **An A page over 60 items is SPLIT into two or more A pages**, each with
+     its own B companion, its own summary, and its own place in reading order.
+     Splitting is the pressure valve that makes rule 1 affordable: building all
+     the machinery makes pages bigger, and a 60-item page is the bound on what a
+     reader and an auditor can hold at once. **Splitting is never dropping** —
+     every result survives, it just gets a better home.
+  `validate-plan.mjs` enforces the ceiling as error code `size` at steps 0, 2
+  and 4, where a split still costs a spec edit rather than a rewrite. Split
+  before authoring, never after. A split creates new page ids and shifts plan
+  order, so recompute order from `plan-spec.json` and never quote a remembered
+  one (`LEVELS.md` §"`order` is not stable").
 - **Source depth and the canonical-coverage harvest (owner, 2026-08-11).** Two
   published pairs came out thin: `group-actions-and-cayleys-theorem` shipped
   without the orbit–stabiliser theorem, the class equation or Cauchy's theorem

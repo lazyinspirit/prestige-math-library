@@ -278,12 +278,23 @@ Priority order, owner's words: **mathematical accuracy and correct dependency
 citation are non-negotiable; then minimize forward references; then preserve
 mathematical richness.**
 
-**Self-contained scope and external fallback (hard rule).** A theorem or
-example needing machinery beyond current scope is normally **dropped from the
+**Build the machinery; split the page (owner, 2026-08-11).** If a theorem needs
+definitions or theorems the library has not established, **build them**. Dropping
+an important result because a prerequisite is missing is the lazy approach and is
+no longer a permitted disposition. Its pressure valve is the ceiling: **an A page
+over 60 items is split into two or more A pages**, each with its own B companion
+and summary, enforced as `validate-plan.mjs` error `size` at steps 0, 2 and 4.
+Split before authoring — after authoring it is a rewrite. Splitting is never
+dropping; every result keeps a home.
+
+**Self-contained scope and external fallback (hard rule).** A theorem or example
+needing machinery beyond current scope — a whole subject area the library has not
+reached, not a lemma that could have been written — is **dropped from the
 scaffold with a note recording why and what would license it**. Before dropping
 it, Beta must avoid `ai-generated` dependencies, search reputable sources for
 the exact statement and conventions of a needed well-known result, and attempt
-to prove that result from available library dependencies. Only if that local
+to prove that result from available library dependencies, **building the
+prerequisites that proof needs**. Only if that local
 proof cannot be built in scope may Beta use the last-resort external fallback:
 create a source-cited `rem-` item with `proved_here: false`, list it in `deps`,
 and record the exact source, failed in-library route, and necessity in the batch

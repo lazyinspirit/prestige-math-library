@@ -309,9 +309,15 @@ Measure repairs from disk; do not count them from what an agent reported.
 theorem, example, or counterexample needs a well-known result absent from the
 library, Beta must first avoid `ai-generated` dependencies, search reputable
 sources for the exact statement and conventions, and try to prove that result
-from available library dependencies. If that does not close, it decomposes,
-rescopes, or **drops the item from the scaffold** with a note saying why and
-what would license it.
+from available library dependencies. **If that does not close, Beta builds the
+missing prerequisite definitions and theorems (owner, 2026-08-11)** — dropping an
+important result for want of a lemma that could have been written is the lazy
+approach and is not a permitted disposition. Where the machinery makes the A page
+exceed **60 items, the page is split** into two or more A pages, each with its own
+B companion; `validate-plan.mjs` enforces that as error `size`. Only where the
+missing material is a whole subject area the library has not reached does Beta
+decompose, rescope, or **drop the item from the scaffold** with a note saying why
+and what would license it.
 
 **The narrow last resort:** where the needed result is well-established and
 literature-backed, the exact source statement has been checked, and a local

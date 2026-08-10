@@ -16,8 +16,15 @@
 //                    unless `--rehomed FILE` names an owner-approved re-home of
 //                    that exact id from that exact page to this one
 //   9. prefix        item id prefix matches its declared kind (SCHEMA.md §2)
-//  10. size          WARN when an A page exceeds --max-items (default 100;
-//                    review ceiling, not a target or a reason to drop results)
+//  10. size          ERROR when an A page exceeds --max-items (default 60;
+//                    owner, 2026-08-11). The remedy is ALWAYS to SPLIT the page
+//                    into two or more A pages, never to drop results: this
+//                    ceiling exists because the owner simultaneously required
+//                    Betas to build every prerequisite a theorem needs, which
+//                    pushes pages larger, and a 60-item reading unit is the
+//                    bound on how much a reader (or an auditor) can hold. It was
+//                    a warning at 100 until 2026-08-11; no published page has
+//                    ever exceeded 54, so tightening it strands nothing.
 //  11. companion     every A page names a B companion that exists, and vice versa
 //
 // PAGE-LEVEL PREREQUISITES (`requires: [pageId, ...]` on each page)
@@ -49,7 +56,9 @@ import { REPO } from './paths.mjs';
 const args = process.argv.slice(2);
 const specPath = args.find((a) => !a.startsWith('--'));
 const repo = argVal('--repo') ?? REPO;
-const maxItems = Number(argVal('--max-items') ?? 100);
+// 60, not 100 (owner, 2026-08-11). Overridable, but an override is a decision to
+// record in the run's notes, not a way past a page that should have been split.
+const maxItems = Number(argVal('--max-items') ?? 60);
 if (!specPath) die('usage: validate-plan.mjs <plan-spec.json> [--repo DIR] [--max-items N] [--rehomed FILE]');
 
 // --rehomed: the owner-approved RE-HOME receipt (see the `dup-id` note below).
@@ -345,7 +354,7 @@ for (const p of pages) {
 
 for (const p of pages) {
   if (p.kind === 'A' && p.items.length > maxItems)
-    warn('size', `page ${p.id} has ${p.items.length} items (review ceiling ${maxItems}, not a target); consider structural splitting, but do not drop valuable results for ergonomics`);
+    err('size', `page ${p.id} has ${p.items.length} items, over the ${maxItems}-item ceiling: SPLIT it into two or more A pages, each with its own B companion. Do NOT drop results to fit — the owner's rule (2026-08-11) is that every prerequisite a theorem needs gets built, and splitting is how that stays readable.`);
   if (p.kind === 'A') {
     if (!p.companion) err('companion', `A page ${p.id} declares no companion examples page`);
     else if (!pages.some((q) => q.id === p.companion && q.kind === 'B'))
