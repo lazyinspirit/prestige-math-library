@@ -14,7 +14,7 @@ You are the **Beta who scaffolded this batch, returning as its step-5 author**
 
 ## Run identity
 
-Everywhere the base contract says `research/level<n>-…`, read
+Everywhere the base contract says `research/level⟨n⟩-…`, read
 `research/frontier-10-…`. Your batch number is in the dispatch section below.
 Gates run as `node tools/gates.mjs --step 5 --run frontier-10`.
 
@@ -22,13 +22,13 @@ Your writable artifacts, and nothing else:
 
 - `items/<id>.md` — the items your own manifest declares, and only those
 - `library/<category>/<page-id>.md` — your own pages (**batch 8: see below**)
-- `research/frontier-10-batch-<i>.notes.md`
-- `research/frontier-10-batch-<i>.coverage.json`
-- `research/frontier-10-batch-<i>.proof-contracts.json`
+- `research/frontier-10-batch-⟨i⟩.notes.md`
+- `research/frontier-10-batch-⟨i⟩.coverage.json`
+- `research/frontier-10-batch-⟨i⟩.proof-contracts.json`
 
 ## Author exactly what step 3 and 4 settled
 
-`research/frontier-10-batch-<i>.pages.json` is authoritative for ids, kinds,
+`research/frontier-10-batch-⟨i⟩.pages.json` is authoritative for ids, kinds,
 titles, reading order and the baseline dependency list — it has been spliced into
 `research/plan-spec.json` and adjudicated. Alpha's
 `research/frontier-10-alpha-step3-scaffold-review.md` may have added required
@@ -41,7 +41,7 @@ step 6.
    legitimately drops, renames or merges an item; when it does, that heading's
    disposition changes with it. An `included` row naming an item you did not
    write is a step-6 gate failure. Re-run
-   `node tools/coverage-checklist.mjs research/frontier-10-batch-<i>.coverage.json`.
+   `node tools/coverage-checklist.mjs research/frontier-10-batch-⟨i⟩.coverage.json`.
 2. **Build the machinery, do not drop.** A missing prerequisite is a thing to
    write. If that pushes the A page over **60 items**, you may not prune — stop
    and report, because a split at this stage is an orchestrator decision.
@@ -76,9 +76,9 @@ node tools/tsx-run.mjs tools/precheck.mts
 node tools/depcheck.mjs
 node tools/rendercheck.mjs
 node tools/prosecheck.mjs
-node tools/content-policy.mjs research/frontier-10-batch-<i>.pages.json
-node tools/coverage-checklist.mjs research/frontier-10-batch-<i>.coverage.json
-node tools/proof-contract.mjs research/frontier-10-batch-<i>.proof-contracts.json --strict
+node tools/content-policy.mjs research/frontier-10-batch-⟨i⟩.pages.json
+node tools/coverage-checklist.mjs research/frontier-10-batch-⟨i⟩.coverage.json
+node tools/proof-contract.mjs research/frontier-10-batch-⟨i⟩.proof-contracts.json --strict
 ```
 
 **Do not run `tools/gates.mjs`.** Beta-4 and Beta-7 both found it fails `EPERM`
