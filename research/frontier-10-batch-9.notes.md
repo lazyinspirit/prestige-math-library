@@ -772,3 +772,179 @@ Final R3/R4 gate record:
 
 No wrapper gate was run. No item, library page, plan spec, other batch artifact,
 or normative file was edited.
+
+## 13. Step-5 authoring closeout
+
+### Authored artifacts and exact per-item precheck record
+
+All 69 manifest items were authored in their settled order: 29 Gaussian A, 9
+Gaussian B, 24 determinant A and 7 determinant B. The 13 definitions have no
+proof precheck by schema; every one of the other 56 items passed the proof
+precheck. The four page files were also authored. Both A pages remain below the
+60-item split threshold, and both B pages have an empty body.
+
+```text
+def-elementary-row-operations-and-row-equivalence — N/A (definition)
+lem-elementary-row-operations-are-reversible — PASS
+def-elementary-matrix — N/A (definition)
+thm-elementary-row-operations-are-left-multiplication — PASS
+cor-elementary-matrices-are-invertible — PASS
+cor-a-row-reduction-is-a-product-of-elementary-matrices — PASS
+def-matrix-equation-augmented-matrix-and-linear-system — N/A (definition)
+thm-row-operations-preserve-solution-sets — PASS
+def-row-echelon-reduced-row-echelon-and-pivots — N/A (definition)
+thm-gaussian-elimination-produces-row-echelon-form — PASS
+thm-gauss-jordan-elimination-produces-reduced-row-echelon-form — PASS
+thm-reduced-row-echelon-form-is-unique — PASS
+def-row-space-column-space-nullspace-and-matrix-ranks — N/A (definition)
+lem-row-operations-preserve-row-space — PASS
+lem-nonzero-echelon-rows-form-a-basis-of-the-row-space — PASS
+thm-row-equivalence-characterisations — PASS
+lem-row-operations-preserve-column-relations — PASS
+thm-pivot-columns-form-a-basis-of-the-column-space — PASS
+thm-row-rank-equals-column-rank — PASS
+cor-matrix-rank-equals-the-rank-of-its-linear-map — PASS
+cor-matrix-rank-nullity — PASS
+def-affine-subspace-of-a-vector-space — N/A (definition)
+thm-solution-set-is-an-affine-nullspace — PASS
+thm-rref-consistency-and-free-variable-parametrisation — PASS
+cor-rank-criterion-for-consistency — PASS
+cor-solution-count-trichotomy-over-an-infinite-field — PASS
+thm-invertible-matrix-theorem — PASS
+thm-invertible-matrices-factor-into-elementary-matrices — PASS
+cor-inverse-by-row-reducing-an-augmented-matrix — PASS
+ex-row-reduction-with-a-unique-solution — PASS
+ex-inconsistent-system-detected-by-a-pivot — PASS
+ex-infinite-solution-affine-parametrisation — PASS
+ex-inverse-by-augmented-row-reduction — PASS
+ex-row-echelon-form-is-not-unique-but-rref-is — PASS
+ex-parameter-dependent-rank-drop — PASS
+ex-elementary-factorisation-of-an-invertible-matrix — PASS
+cex-row-equivalent-matrices-can-have-different-column-spaces — PASS
+cex-solution-count-trichotomy-fails-over-a-finite-field — PASS
+def-matrices-over-a-commutative-ring — N/A (definition)
+def-ring-matrix-product-identity-and-transpose — N/A (definition)
+thm-ring-matrix-arithmetic-laws — PASS
+def-invertible-matrix-and-similarity-over-a-commutative-ring — N/A (definition)
+prop-field-and-ring-matrix-interfaces-agree — PASS
+def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions — N/A (definition)
+lem-alternating-multilinear-implies-antisymmetric — PASS
+lem-rigidity-of-alternating-multilinear-matrix-functions — PASS
+def-determinant-of-a-square-matrix — N/A (definition)
+cor-determinant-is-a-polynomial-in-the-matrix-entries — PASS
+thm-leibniz-determinant-is-alternating-multilinear-and-normalized — PASS
+thm-determinant-is-the-unique-normalized-alternating-multilinear-function — PASS
+cor-determinant-vanishes-with-a-zero-or-repeated-column — PASS
+thm-determinant-of-transpose — PASS
+cor-determinant-is-alternating-multilinear-in-the-rows — PASS
+def-row-transformations-over-a-commutative-ring — N/A (definition)
+thm-determinant-under-elementary-row-operations — PASS
+def-triangular-and-diagonal-matrices-over-a-commutative-ring — N/A (definition)
+thm-determinant-of-a-triangular-matrix — PASS
+thm-determinant-multiplicative — PASS
+cor-invertible-matrix-has-unit-determinant — PASS
+thm-real-square-matrix-invertible-iff-determinant-nonzero — PASS
+cor-determinant-of-an-inverse — PASS
+cor-determinant-is-invariant-under-similarity — PASS
+ex-two-by-two-determinant-formula — PASS
+ex-three-by-three-leibniz-expansion — PASS
+ex-integer-determinant-two-is-invertible-over-q-not-z — PASS
+cex-antisymmetric-need-not-be-alternating-in-characteristic-two — PASS
+cex-naive-quaternion-determinant-is-not-row-alternating — PASS
+ex-row-operations-on-a-singular-matrix-over-z-mod-six — PASS
+fs-determinant-is-additive-on-matrices — PASS
+```
+
+The scoped reflow pass reported all 69 item files unchanged. Manifest/page
+drift checks found all ids, kinds, titles and reading order exact. The Gaussian
+summary paragraphs have 60 and 78 words; the determinant summary paragraphs
+have 64 and 74 words. Each A summary therefore has exactly two nonempty prose
+paragraphs under 150 words.
+
+### Authoring ledger
+
+No item was dropped, merged or renamed, and no settled id, kind, title, page
+home or reading position changed. Five dependency-list changes were necessary
+to make the final proof prose honest:
+
+- `thm-row-equivalence-characterisations` adds
+  `lem-elementary-row-operations-are-reversible`, used when reversing the
+  reduction from the common RREF.
+- `cor-rank-criterion-for-consistency` drops
+  `def-row-space-column-space-nullspace-and-matrix-ranks`; the final proof uses
+  the pivot-count theorem directly and does not cite rank invariance to a
+  definition.
+- `cor-determinant-is-a-polynomial-in-the-matrix-entries` replaces
+  `def-polynomial-evaluation-and-root` with
+  `thm-universal-property-of-a-polynomial-ring`, because preservation of sums
+  and products is a theorem about evaluation, not part of that definition.
+- `cor-invertible-matrix-has-unit-determinant` and
+  `cor-determinant-of-an-inverse` each add
+  `thm-leibniz-determinant-is-alternating-multilinear-and-normalized`, which
+  supplies the used equation `det(I_n)=1`.
+
+The determinant statements that use the dispatched Leibniz determinant say
+`n >= 1` explicitly. This preserves rather than expands the settled ring/field
+boundary. The RREF uniqueness proof reconstructs pivot positions and nonpivot
+columns from the common homogeneous solution set. The row-equivalence proof
+derives the unique reduced row basis from possible leading positions in the
+common row space. These are proof repairs, not statement changes.
+
+Section 6 is the per-item component-provenance ledger and matches the authored
+frontmatter for all 69 items exactly. The four generated Statements retain
+their required generation metadata and were searched as follows:
+
+- the finite-field trichotomy counterexample exhausts all four pairs in
+  `F_2^2` and finds exactly two solutions;
+- the integer/rational matrix witness checks its rational inverse directly and
+  rules out an integer inverse because determinant 2 is not a unit;
+- the quaternion witness uses equal rows and the published equations
+  `ij=k`, `ji=-k`, giving nonzero naive value `2k`;
+- the `Z/6` witness computes all three row-transformation determinants and
+  checks that determinant 2 is nonzero but not a unit.
+
+### Harvest and boundaries
+
+The checklist remains true of the authored result: 128 harvested headings,
+with 92 `included`, 25 `inline`, 7 `deferred` and 4 `out-of-scope`. No included
+row names an unwritten item. The two explicit out-of-scope Gaussian boundaries
+are LU factorisation and two-sided rank normal form; the other two out-of-scope
+rows are the already-recorded determinant scope exclusions. Every deferred row
+names its planned later home.
+
+The strict proof worksheet contains 56 contracts and all 448 standard boundary
+dispositions. Counts by case are: empty 25 checked/31 not applicable; zero
+36/20; one 40/16; degenerate 43/13; endpoints 40/16; nonempty-choice 2/54;
+iff-forward 7/49; iff-reverse 7/49. Positive determinant size makes the empty
+case explicitly out of scope; Gaussian zero-sized matrices and empty reductions
+are handled in the algorithms; zero matrices, singular systems, zero divisors,
+finite fields, characteristic 2 and noncommutativity are either covered by the
+proof or isolated by the authored examples. The only nonempty selections are
+the two pivot algorithms, where a nonzero entry has first been exhibited.
+
+### Gate record and confidence
+
+- `precheck.mts`: PASS globally, 2675 checked and 0 failing; the scoped batch
+  run is 56 checked and 0 failing.
+- `depcheck.mjs`: PASS; no cycles, all references resolve and no draft item is
+  on a published page. Its inherited legacy warnings name no batch-9 item.
+- `rendercheck.mjs`: PASS on 3689 files; the scoped run is 73 files with no
+  renderer, KaTeX, delimiter or YAML error.
+- `prosecheck.mjs`: PASS on 3689 files with 0 errors. Its 583 global heuristic
+  warnings are count/scope phrases in research records, not hard errors.
+- batch-9 `content-policy.mjs`: PASS, 69 scoped items, 0 errors and 0 warnings.
+- batch-9 `coverage-checklist.mjs`: PASS, 2 A-page checklists and 128 harvested
+  results, 0 errors and 0 warnings.
+- batch-9 strict `proof-contract.mjs`: PASS, 56/56 items, 0 errors and 0
+  warnings.
+- The additional authoring-base checks `fwdcheck.mjs`, `extcheck.mjs` and
+  `citecheck.mjs` all exit successfully. Citecheck's sole batch-9 heuristic is
+  the word “antisymmetry” in the row-swap theorem, misclassified as an order
+  axiom; the cited result is the row-antisymmetry theorem itself.
+
+No aggregate wrapper gate and no judge were run, as required. I did not
+independently re-harvest the settled source PDFs or perform the later paired
+model judgment. Within authoring scope, I checked the displayed arithmetic,
+the ring/field boundaries, the six downstream interfaces, exact source quotes
+in the proof contracts, page summaries, and all required mechanical gates.
+There is no batch-9 blocker.
