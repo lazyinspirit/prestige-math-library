@@ -1,0 +1,56 @@
+---
+id: thm-abelianisation-of-a-free-group-is-free-abelian
+kind: theorem
+title: "The abelianisation of the free group on $X$ is the free abelian group on $X$"
+status: draft
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-free-group, def-abelianisation-of-a-group, def-free-abelian-group, thm-quotient-abelian-iff-contains-commutator-subgroup, thm-quotient-group-universal-property, def-commutator-and-commutator-subgroup]
+justified_by: []
+aliases: []
+landmark: true
+proof_strategy: constructive
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "Richard Elman, Lectures on Abstract Algebra, §18"
+      url: "https://www.math.ucla.edu/~rse/algebra_book.pdf"
+    - title: "John McKernan, Presentations and Groups of Small Order, Lecture 12"
+      url: "https://math.mit.edu/~mckernan/Teaching/12-13/Spring/18.703/l_12.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+Let $(F(X),\iota)$ be a free group on $X$, let
+$q:F(X)\to F(X)^{\mathrm{ab}}$ be the abelianisation map, and put
+$\iota_{\mathrm{ab}}=q\circ\iota$. Then
+$(F(X)^{\mathrm{ab}},\iota_{\mathrm{ab}})$ is a free abelian group on $X$.
+
+## Facts & Assumptions
+
+**Given:** A free group $(F(X),\iota)$, its quotient $F(X)^{\mathrm{ab}}=F(X)/[F(X),F(X)]$, its canonical quotient map $q$, and $\iota_{\mathrm{ab}}=q\circ\iota$.
+
+[L1] For $N\mathrel{\trianglelefteq}G$, the quotient $G/N$ is abelian if and only if $[G,G]\subseteq N$ ([[thm-quotient-abelian-iff-contains-commutator-subgroup]]).
+
+[L2] If a homomorphism $f:G\to H$ kills a normal subgroup $N$, then it factors uniquely through $G/N$ ([[thm-quotient-group-universal-property]]).
+
+[F1] A free abelian group on $X$ is an abelian group $A(X)$ with a map from $X$ such that every function from $X$ to an abelian group extends uniquely to a homomorphism from $A(X)$ ([[def-free-abelian-group]]).
+
+## Proof
+
+**Proof technique:** constructive.
+
+1.1 Taking $N=[F(X),F(X)]$ in [L1] shows that $F(X)^{\mathrm{ab}}$ is abelian. [L1, given]
+
+1.2 Let $A$ be an abelian group and $u:X\to A$ a function; the free-group property gives a unique homomorphism $f:F(X)\to A$ extending $u$, and $f([g,h])=f(g)f(h)f(g)^{-1}f(h)^{-1}=e_A$ because $A$ is abelian, so $[F(X),F(X)]\subseteq\ker f$. [given]
+
+2.1 By [L2], construct a homomorphism $\overline f:F(X)^{\mathrm{ab}}\to A$ with $f=\overline f\circ q$; then $\overline f\circ\iota_{\mathrm{ab}}=\overline f\circ q\circ\iota=f\circ\iota=u$. [L2, step 1.2, construct]
+
+3.1 If $h:F(X)^{\mathrm{ab}}\to A$ also extends $u$, then $h\circ q$ and $\overline f\circ q$ are homomorphisms $F(X)\to A$ agreeing with $u$ on $X$, so free-group uniqueness makes them equal; both $h$ and $\overline f$ therefore factor the same map through the quotient, and uniqueness in [L2] gives $h=\overline f$. [L2, step 2.1, given]
+
+4.1 Steps 1.1, 2.1, and 3.1 give the abelian target, extension, and uniqueness clauses in [F1], so $F(X)^{\mathrm{ab}}$ is free abelian on $X$; for $X=\varnothing$ both universal properties yield the trivial group. [F1, step 1.1, step 2.1, step 3.1, discharge-construct] ∎

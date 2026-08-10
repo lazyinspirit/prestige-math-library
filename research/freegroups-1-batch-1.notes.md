@@ -1,10 +1,10 @@
 # Beta-freegroups-1-1 — scaffold notes
 
-This is a reasoning and authoring record only.  It is not a prose scaffold and
-contains no requested edit to either published page.  The page manifest keeps
-all published items in their present positions and appends the proposed items.
-In the tables below, **new** means absent from both `items/` and
-`research/plan-spec.json` at the time of the collision check.
+This is a reasoning and authoring record only.  It contains no requested edit
+to either published page.  The authoring manifest is mint-only; the separate
+full-order file preserves the interleaving of the published and proposed
+items.  In the tables below, **new** means absent from both `items/` and
+`research/plan-spec.json` at the time of the scaffold collision check.
 
 ## 1. What the published pair already proves, and the D6 overlap audit
 
@@ -68,8 +68,8 @@ the stated van der Waerden requirement.
 
 ### A page, order 60
 
-The first six entries in the manifest are the six published entries, unchanged
-and in their current order.  These appended entries are new:
+In the approved full reading order, the published entries remain unchanged and
+the following entries are new:
 
 | position | id | kind | purpose |
 |---:|---|---|---|
@@ -110,8 +110,8 @@ spine, not padding.
 
 ### B page, order 61
 
-The first entry in the manifest is the published reduction example, unchanged.
-These appended entries are new:
+In the approved full reading order, the published reduction example remains
+unchanged and the following entries are new:
 
 | position | id | kind | purpose |
 |---:|---|---|---|
@@ -391,7 +391,7 @@ witness, not a failure to find literature.
 | `def-cyclically-reduced-word` | `literature-derived` | `not-applicable` | Magnus–Karrass–Solitar convention |
 | `lem-cyclic-reduction-normal-form` | `ai-altered` | `ai-altered` | standard cyclic peeling lemma, specialized to published word notation |
 | `thm-free-groups-are-torsion-free` | `literature-derived` | `ai-altered` | standard theorem with cyclic-core proof |
-| `thm-conjugacy-of-cyclically-reduced-words` | `literature-derived` | `ai-altered` | standard cyclic-permutation conjugacy theorem with a shortened-conjugator induction |
+| `thm-conjugacy-of-cyclically-reduced-words` | `literature-derived` | `ai-altered` | standard cyclic-permutation conjugacy theorem with seam analysis and induction on an arbitrary reduced conjugator |
 
 ### B-page items
 
@@ -649,7 +649,7 @@ use an external fallback.
 
 Because the deliverables are not yet spliced into `plan-spec.json`, the
 authoritative `validate-plan` and `depsource` gates belong to the orchestrator.
-The completed local checks are:
+At scaffold time, the completed local checks were:
 
 - both JSON files parse;
 - the manifest contains 37 proposed ids, none colliding with `items/` or
@@ -715,6 +715,60 @@ mathematical oracle.
 prescribed reading, the full pair/item overlap audit, the whole-pool id and
 vocabulary search, source research, the direct published-dependency audit, all
 three namespaced deliverables, and the local gates recorded in §9.  Disk state
-was rechecked after the final dependency repair.  The manifest contains the
-unchanged published positions followed by the proposed items; no page, item, or
-plan-spec file was changed.
+was rechecked after the final dependency repair.  The full-order file contains
+the unchanged published positions together with the proposed items, while the
+mint manifest contains only the proposed rows; no page, item, or plan-spec file
+was changed at that stage.
+## Step 5 continuity checkpoint
+
+All 37 mint-only draft items have been authored without editing either published page, any published item, or `plan-spec.json`. The quotient-model spine, finite-rank restriction, presentation and abelianisation results, the three-move Tietze package, cyclic-reduction results, the concrete examples, and the delete-only counterexamples are present. Initial per-item prechecks exposed only canonical-stratification repairs plus a small number of local strategy/prose issues; those repairs are being adopted manually because the repository helper cannot create its `npx` IPC socket in this sandbox. Remaining work is to finish those canonical repairs, synchronize the strict proof contracts and provenance notes, and run every required gate.
+
+## 12. Step 5 authoring closeout
+
+The approved scaffold was authored without adding, dropping, or retitling an
+item.  Every minted item is a draft and carries component provenance.  The
+published pages, published items, and `plan-spec.json` were not edited.
+
+Departures and authoring refinements:
+
+- Precheck's canonical proof stratification was adopted wherever the scaffold
+  step map placed a consequence too early.  This changed step numbers and
+  ordering, not claims.
+- The conjugacy proof uses seam analysis and induction on an arbitrary reduced
+  conjugator rather than the scaffold's minimal-conjugator phrasing.  This
+  closes the same theorem more directly, and the unused cyclic-reduction lemma
+  was removed from that item's dependencies.
+- The model-comparison corollary now cites the quotient normal-form theorem
+  explicitly, because its claim about the unique reduced representative needs
+  that Statement in addition to the universal-property isomorphism.
+- The Tietze definition proves that renaming is simulated by the classical
+  generator/relator moves, including the inverse-relator orientation needed to
+  delete an old generator.  The completeness proof constructs a common finite
+  presentation and reverses additions in an order that makes every inverse
+  deletion legal.
+- Quotient-factorisation uniqueness is used explicitly in Von Dyck's theorem
+  and the abelianisation theorem.  The dihedral example now proves that its
+  displayed normal forms exhaust the generated symmetry group as well as being
+  distinct.
+
+Final gate record:
+
+- per-item reflow: every authored item unchanged on the final run;
+- per-item precheck: every proof-bearing item passes, and every definition is
+  clean with no proof block to check;
+- strict proof contract: 0 errors and 0 warnings on all scoped contracts;
+- content policy: 37 scoped items, 0 errors, 0 warnings;
+- dependency check: exit 0, with no cycles, unresolved references, or draft
+  items on published pages;
+- forward-reference check: exit 0 with no open forward references;
+- external-dependency check: exit 0; its repository-wide warnings concern
+  already-published material, not this batch;
+- citation check: exit 0; its repository-wide heuristic warnings name no item
+  in this batch;
+- finite smoke: 0 errors; no registered finite-model check applies; and
+- prose check: 0 errors and 0 warnings across the authored items and these notes.
+
+No mathematical claim remains knowingly unclosed, and no authoring decision
+needs further adjudication.  The finite-presentation Tietze theorem remains the
+adjudicated high-risk item for the dedicated step-6 refuter and Alpha risk
+review; that is a required review lane, not an unresolved authoring blocker.
