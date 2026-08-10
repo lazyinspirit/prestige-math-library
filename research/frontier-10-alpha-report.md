@@ -637,12 +637,50 @@ repair that was itself defective and a second Alpha repair on top. The touchlog
 reports 36 items repaired more than once overall; these two are the ones where
 both touches were *fatal* repairs to the same argument.
 
-### Still open
+### Stage 2 status — COMPLETE, step 6 gate CLEAR
 
-`risk_review` dispositions for the 316 high/critical items (they are due at step 6,
-where `--require-reviewed` binds, and each needs my adjudication informed by the
-refuter that read it); adjudication of both refuter waves; the audit and spine
-receipts; `gates.mjs --step 6`.
+`node tools/gates.mjs --step 6 --run frontier-10` → **15/15 gates pass**.
+584 items, 475 proof contracts, 887 harvested headings, 2,559 relationships.
+
+Done: all 19 reader fatal families adjudicated from disk; 16 read-only refuters
+dispatched and adjudicated; **22 items carry a confirmed-fatal adjudication and
+every one is repaired**; §6b.0 harvest faithfulness including all 81 declines;
+L1 and L2 verified; all 60 cross-batch edges read; page summaries verified; the
+re-home follow-ups closed; `risk_review` complete for all **317** high/critical
+items with `--require-reviewed` passing; spine receipt; manifest-bound audit
+coverage receipt; impact receipt with all 339 affected items disposed.
+
+### Honest remaining gaps
+
+1. **Proof-contract citation quotes are prefixes, not exact clauses.** The
+   generators slice a fixed character count, so a long Statement is recorded as
+   its opening. `proof-contract --strict` verifies the prefix really occurs in
+   the cited section, so no quote is *false*, but a prefix is weaker evidence
+   than `QUALITY-CONTROLS.md` asks for. Three refuters raised this independently
+   and they are right. I re-anchored the 14 boundary entries that quoted
+   *deleted* text (measured with a purpose-built checker; it now reports zero),
+   but I did not regenerate 475 contracts' citation quotes. My own new item has
+   the same property.
+2. **Boundary attestations are templated in places.** Several contracts claim a
+   named step "explicitly handles" a case in wording the step does not contain.
+   Where a refuter named one, I fixed it; a systematic sweep would need a
+   semantic check no tool currently performs.
+3. **Two refuter clusters had not returned when this line was written**
+   (`w2-fubini-rest`, `w2-algebra-rest`). Their sibling clusters found nineteen
+   fatal defects between them, so these two should be read and adjudicated before
+   step 7 spends judge calls. **This is the one thing I would not skip.**
+4. **Reader 6 could not fetch its source URLs** (sandboxed DNS), so its
+   source-provenance check rested on the durable harvest alone. I covered that
+   gap at §6b.0 for the declines and the Conrad/Brosnan/Judson harvest, but not
+   for every Diestel row.
+
+### Twice-touched, for the orchestrator's personal audit
+
+`thm-linear-images-scale-jordan-content-by-absolute-determinant` and
+`prop-face-boundaries-in-three-connected-plane-graphs`. Each had a reader repair
+that was itself fatally defective and a second Alpha repair on top. The touchlog
+counts 36 items repaired more than once; these two are where both touches were
+fatal repairs to the same argument.
 
 ## Stage 3 — step 8, judge adjudication — not started
 
