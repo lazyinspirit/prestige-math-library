@@ -7,14 +7,15 @@ are the sibling coverage and proof-contract files.
 
 ## 1. Result and split decision
 
-The scaffold has 67 items after the Step-3 batch-5 determinant-interface repair:
+The scaffold has 69 items after the Step-3 batch-5 interface repair and Alpha's
+R3/R4 breadth repair:
 
 | order | page | kind | items |
 |---:|---|:---:|---:|
 | 80 | gaussian-elimination-and-row-reduction | A | 29 |
-| 81 | gaussian-elimination-and-row-reduction-examples | B | 8 |
+| 81 | gaussian-elimination-and-row-reduction-examples | B | 9 |
 | 82 | determinants-of-matrices-over-a-commutative-ring | A | 24 |
-| 83 | determinants-of-matrices-over-a-commutative-ring-examples | B | 6 |
+| 83 | determinants-of-matrices-over-a-commutative-ring-examples | B | 7 |
 
 No split is proposed. The A pages contain 29 and 24 items, respectively, both
 well below the binding 60-item limit. Nothing was dropped to obtain those
@@ -71,7 +72,7 @@ column lists span their respective spaces, and a greedy induction deletes
 dependent entries until a finite basis remains. The Step-5 item must not merely
 write \(\dim\) before establishing finite dimensionality.
 
-### gaussian-elimination-and-row-reduction-examples — 8 items
+### gaussian-elimination-and-row-reduction-examples — 9 items
 
 1. ex-row-reduction-with-a-unique-solution — a \(3\times3\) unique solution.
 2. ex-inconsistent-system-detected-by-a-pivot — an augmented pivot.
@@ -82,6 +83,9 @@ write \(\dim\) before establishing finite dimensionality.
 7. ex-elementary-factorisation-of-an-invertible-matrix — an explicit product.
 8. cex-row-equivalent-matrices-can-have-different-column-spaces — rank is
    preserved but the literal column space need not be.
+9. cex-solution-count-trichotomy-fails-over-a-finite-field — over
+   \(\mathbb F_2\), the equation \(x+y=0\) has exactly the two solutions
+   \((0,0)\) and \((1,1)\), so the infinite-field hypothesis cannot be removed.
 
 ### determinants-of-matrices-over-a-commutative-ring — 24 items
 
@@ -131,7 +135,7 @@ real id is the honest boundary. The polynomial corollary is likewise stated in
 the exact real form needed downstream: for fixed \(n\ge1\), the Leibniz sum is
 a polynomial in the \(n^2\) real coordinate entries.
 
-### determinants-of-matrices-over-a-commutative-ring-examples — 6 items
+### determinants-of-matrices-over-a-commutative-ring-examples — 7 items
 
 1. ex-two-by-two-determinant-formula — \(ad-bc\).
 2. ex-three-by-three-leibniz-expansion — all six signed terms.
@@ -147,6 +151,10 @@ a polynomial in the \(n^2\) real coordinate entries.
    is a nonunit, so \(A\) is not invertible. Swapping rows gives determinant
    \(4=-2\), scaling by the nonzero nonunit \(3\) gives \(0=3\cdot2\), and a
    row addition leaves \(2\) unchanged.
+7. fs-determinant-is-additive-on-matrices — refute whole-matrix additivity
+   with \(A=B=I_2\): \(\det(A+B)=\det(2I_2)=4\), whereas
+   \(\det A+\det B=2\). This distinguishes multilinearity in one row or column
+   with all others fixed from linearity on the matrix space.
 
 ## 3. Exact two-paragraph page summaries for Step 4
 
@@ -179,9 +187,11 @@ echelon form.
 
 The final examples expose the structural content behind the computations. One
 reverses a row reduction to display an explicit elementary-matrix
-factorisation, while the counterexample shows that row operations preserve all
+factorisation, while one counterexample shows that row operations preserve all
 linear relations among columns and hence column rank without preserving the
-literal column space.
+literal column space. The equation \(x+y=0\) over \(\mathbb F_2\) has exactly
+two solutions, marking the infinite-field hypothesis in the solution
+trichotomy.
 
 ### Determinant A
 
@@ -212,32 +222,34 @@ the permutation signs visible. The integer matrix
 from invertibility over \(\mathbb Z\), and a characteristic-two bilinear form
 shows why antisymmetry alone is weaker than alternation when \(2=0\).
 
-Two boundary examples show exactly where hypotheses matter. The naive
+Further boundary examples show exactly where hypotheses matter. The naive
 quaternionic expression \(ad-bc\) can be nonzero on equal rows because
 multiplication is not commutative. Over \(\mathbb Z/6\), a singular matrix with
 nonzero determinant undergoes a swap, a nonunit scaling and a row addition,
 confirming the row-operation formulas without division or any hidden
-nonsingularity assumption.
+nonsingularity assumption. Finally, \(A=B=I_2\) refutes additivity of the
+determinant as a function of the whole matrix and separates that false claim
+from rowwise or columnwise multilinearity.
 
 ## 4. Canonical-coverage harvest and source ledger
 
-The harvest enumerates 126 source or canonical headings. Its disposition
+The harvest enumerates 128 source or canonical headings. Its disposition
 totals are:
 
 | pair | included | inline | deferred | out of scope |
 |---|---:|---:|---:|---:|
-| Gaussian | 55 | 19 | 0 | 0 |
+| Gaussian | 55 | 19 | 0 | 2 |
 | determinant | 37 | 6 | 7 | 2 |
-| total | 92 | 25 | 7 | 2 |
+| total | 92 | 25 | 7 | 4 |
 
 Thus 92 harvested headings become separate scaffolded items and 25 are absorbed
-inline; 9 are declined. Repeated headings from independent sources are counted
-independently, as the checklist requires. The Step-3 repair changes three JSON
-heading rows but only two result-level dispositions: ILA's invertibility
-criterion occurs once in the broad PDF harvest under the Gaussian pair and once
-in the determinant-specific HTML harvest, and both now point to the same new
-theorem; Massot's polynomial-evaluation observation now points to the new
-corollary.
+inline; 11 are declined. Repeated headings from independent sources are counted
+independently, as the checklist requires. The R3/R4 repair adds explicit
+canonical rows for LU factorisation and rank normal form, repoints Hefferon's
+solution-size heading to the finite-field boundary witness while the ILA
+heading continues to cover the theorem, and repoints ILA's rowwise
+multilinearity heading to the whole-matrix-additivity false statement while
+New's treatment continues to cover the theorem.
 
 Source codes used below:
 
@@ -269,6 +281,13 @@ Source codes used below:
   polynomial-evaluation interpretation, transpose, triangular determinants and
   multiplicativity. No explicit reuse licence was located; again, only the
   mathematical facts and proof architecture are used.
+- P — Purdue University, _3.1 + 3.2 Determinants — Accessible Math Notes_.
+  <https://www.math.purdue.edu/~chenjk/MA265Su18/Lesson11-acc.html>.
+  Its “Properties of Determinants” section states explicitly that
+  \(\det(A+B)\ne\det A+\det B\) in general and immediately contrasts that with
+  linearity in one selected column. It is an auxiliary exact citation for the
+  false-statement item; G remains the harvested textbook treatment whose named
+  Multilinearity Property is disposed to that boundary item.
 
 All Step-5 prose and derivations will be freshly written in house style.
 There is no scraped source and no external fallback.
@@ -291,9 +310,21 @@ There is no scraped source and no external fallback.
 - A rigorous signed-volume interpretation is out of scope because the plan
   assigns it to later measure/orientation machinery. The current interface
   still exposes \(\lvert\det A\rvert\), as the dispatch requires.
+- LU factorisation is out of scope because it is a triangular-factorisation
+  topic with pivoting or leading-minor hypotheses, and neither declared
+  Gaussian locator develops it.
+- The rank normal form \(PAQ=\begin{psmallmatrix}I_r&0\\0&0\end{psmallmatrix}\)
+  is out of scope because it classifies matrices under two-sided row-and-column
+  equivalence; the Gaussian pair develops row equivalence and its solution-set
+  geometry.
+- The real linear-dependence criterion is deferred to the actual planned page
+  'the-determinant-of-a-linear-operator', whose title and declared scope include
+  cofactors and the adjugate. The former 'invertibility-and-adjugate' home did
+  not exist and has been removed from the ledger.
 
-The Gaussian harvest now has no decline: its duplicated ILA \(2\times2\)
-invertibility heading points to the determinant theorem on the second pair.
+The Gaussian source harvest has no decline. Its two page-level canonical
+declines are the explicit LU and rank-normal-form rows Alpha required; neither
+result occurs in the declared source locators.
 
 ## 5. Published and same-run dependency audit
 
@@ -320,7 +351,8 @@ thm-induction-principle, thm-int-comm-ring,
 thm-linear-kernel-image-and-injectivity, thm-rank-nullity, thm-rat-field,
 thm-reals-field, thm-z-mod-p-is-a-field.
 
-D-A (24): def-countable, def-dimension, def-field, def-finite-cardinality,
+D-A (25): def-addition-and-multiplication-modulo-n, def-countable, def-dimension,
+def-field, def-finite-cardinality,
 def-finite-sum-in-a-commutative-monoid, def-integers-modulo-n,
 def-invertible-element, def-linear-basis, def-linear-combination-and-span,
 def-linear-independence, def-matrix-space, def-monoid-finite-product,
@@ -410,6 +442,7 @@ ai-generated proof does not change the Statement label.
 | ex-parameter-dependent-rank-drop | AA | AG | H exercise pattern; exhaustive parameter split |
 | ex-elementary-factorisation-of-an-invertible-matrix | AA | AG | H construction; multiply the displayed factors |
 | cex-row-equivalent-matrices-can-have-different-column-spaces | LD | AG | H Remark 3.15; explicit two-matrix witness |
+| cex-solution-count-trichotomy-fails-over-a-finite-field | AG | AG | direct exhaustive \(\mathbb F_2^2\) witness marking the H/G theorem's scalar-field boundary; generated counterexample leaf |
 
 ### Determinant A
 
@@ -450,14 +483,22 @@ ai-generated proof does not change the Statement label.
 | cex-antisymmetric-need-not-be-alternating-in-characteristic-two | LD | AG | W Theorem 4.19 boundary; explicit \(B(x,y)=x_0y_0\) |
 | cex-naive-quaternion-determinant-is-not-row-alternating | AG | AG | direct equal-row quaternion witness; leaf |
 | ex-row-operations-on-a-singular-matrix-over-z-mod-six | AG | AG | direct \(\mathbb Z/6\) witness; leaf |
+| fs-determinant-is-additive-on-matrices | LD | AA | P states the exact false claim and G states the one-row/one-column multilinearity boundary; the \(I_2\) refutation is a direct adaptation |
 
-The three AG Statements are permitted generated examples with completely
+The three determinant AG Statements are permitted generated examples with completely
 checkable witnesses, and none is a dependency target. Step 5 must add
 generation metadata to them. Their truth-risk checks are already fixed above:
 direct multiplication verifies the rational inverse but no integer inverse;
 \(ij-ji=2k\ne0\) follows from the published quaternion table and real
 characteristic zero; and multiplication modulo \(6\) checks every determinant
 in the singular-row-operation example.
+
+The Gaussian finite-field counterexample is a fourth permitted generated
+Statement and also a dependency leaf. Step 5 must give it generation role
+'counterexample'; exhaustive enumeration of \(\mathbb F_2^2\) is its
+truth-risk check. The determinant false statement is not generated: P records
+the exact misconception and G records the precise multilinearity boundary, so
+its Statement is literature-derived and its refutation is an adaptation.
 
 ## 7. Proof decomposition and richness passes
 
@@ -480,7 +521,8 @@ of a reduction, matrix/linear-map rank agreement, matrix rank-nullity, the
 consistency rank criterion, the infinite-field solution trichotomy, and the
 \([A\mid I]\) inverse criterion. The B page tests all three solution outcomes,
 parameter degeneration, nonuniqueness of REF, explicit factorisation, and the
-column-space noninvariance boundary.
+column-space noninvariance boundary. It now also tests the trichotomy's
+infinite-field hypothesis with a finite non-singleton solution set.
 
 For the determinant pair, the long proof is decomposed into the ring matrix
 interface and its field seam; alternating-implies-antisymmetric; rigidity of
@@ -505,10 +547,11 @@ zero/repeated-column vanishing, row multilinearity, unit determinant of an
 invertible matrix, the real invertibility criterion, determinant of the inverse,
 and similarity invariance. The richness pass added the characteristic
 two, noncommutative quaternion, coefficient-ring, and singular-zero-divisor
-boundaries. It also caught and repaired the false “equal columns gives
+boundaries, and it now distinguishes multilinearity from false whole-matrix
+additivity. It also caught and repaired the false “equal columns gives
 \(2k\)” witness before authoring.
 
-The proof-contract file scopes all 54 proof-bearing items, with one contract per
+The proof-contract file scopes all 56 proof-bearing items, with one contract per
 item. Each contract maps citations and substantive derivations and records all
 eight boundary classes. Definitions are intentionally outside proof-contract
 scope. No finite-smoke type in the repository applies to these linear-algebra
@@ -561,6 +604,11 @@ items; every fixed witness instead has an explicit arithmetic derivation.
   ring-module dependence would change its truth conditions.
 - H often says “nonsingular”; the library uses “invertible”. REF is not unique,
   while RREF is unique, and those terms must not be conflated.
+- The solution-count trichotomy needs an infinite scalar field. Do not
+  generalize it to arbitrary fields: \(x+y=0\) over \(\mathbb F_2\) has exactly
+  two solutions.
+- Multilinearity means linearity in one selected row or column while the others
+  are fixed. It never licenses \(\det(A+B)=\det A+\det B\) for whole matrices.
 
 ## 9. Batch-5 handoff and orchestrator decisions
 
@@ -668,3 +716,59 @@ No wrapper gate was run in this repair round, as directed. The isolated
 content-policy command cannot be green until Step 4 authors or splices its
 other-batch dependencies; deleting those valid dependencies merely to silence
 the isolated invocation would break the scaffold's logical closure.
+
+## 12. Alpha R3/R4 breadth-repair closeout
+
+R3 is closed in three places.
+
+- 'cex-solution-count-trichotomy-fails-over-a-finite-field' is Gaussian B item
+  9. It exhausts \(\mathbb F_2^2\), finding exactly \((0,0)\) and \((1,1)\)
+  as the solutions of \(x+y=0\). Its source anchor is Hefferon's solution-size
+  paragraph, whose proof uses infinitely many real scalars; the harvest row now
+  points to this boundary item while Margalit–Rabinoff's independent row still
+  points to the infinite-field corollary.
+- The Gaussian canonical harvest now has an explicit out-of-scope row for LU
+  factorisation, with the triangular-factorisation and pivot-hypothesis reason.
+- It also has an explicit out-of-scope row for the rank normal form, with the
+  two-sided row-and-column-equivalence reason. Neither result occurs in the
+  two declared source locators, so neither remains silently absent.
+
+R4 is closed in two places.
+
+- 'fs-determinant-is-additive-on-matrices' is determinant B item 7. The
+  refutation takes \(A=B=I_2\), giving
+  \(\det(A+B)=4\ne2=\det A+\det B\). The ILA Multilinearity Property harvest
+  row now points to this boundary item, and Purdue's determinant notes supply
+  an auxiliary exact reference for the false claim. New's course notes continue
+  to source the alternating-multilinear theorem itself.
+- The decline for real linear dependence forcing zero determinant now names
+  the actual planned home, 'the-determinant-of-a-linear-operator', whose title
+  and declared scope include cofactors, the adjugate and Cramer's rule. The
+  nonexistent 'invertibility-and-adjugate' id is gone.
+
+Both new ids were collision-checked against 'items/', 'plan-spec.json', and all
+frontier-10 batch manifests before insertion. Both occur as real 'included'
+harvest dispositions under the sources above, both are proof-contract scoped,
+and the contract file now has 56 scoped ids and 56 contract objects. The page
+counts are 29 + 9 and 24 + 7; neither A page changed size, so no split is
+proposed.
+
+Final R3/R4 gate record:
+
+- 'validate-plan.mjs' with the re-home receipt: **PASS**.
+- 'coverage-checklist.mjs': **PASS** — 2 pages, 128 harvested results, 0 errors
+  and 0 warnings.
+- The required isolated 'content-policy.mjs' command: **BLOCKED exactly as in
+  the preceding repair** — 26 'batch-dependency-missing' errors, all for the
+  existing batch-1 sign/matrix providers and batch-3 polynomial providers that
+  an isolated batch-9 invocation cannot see; neither new item appears in an
+  error.
+- The whole-run content-policy diagnostic that can see every provider:
+  **PASS** — 583 scoped items, 0 errors and 0 warnings.
+- Local manifest/coverage/contract drift check: **PASS** — 69 unique scaffold
+  ids, both additions harvested, and no missing or extra contract.
+- 'prosecheck.mjs --warnings': **PASS** — 0 errors; its 15 advisory warnings
+  are the intentional audit counts in these notes.
+
+No wrapper gate was run. No item, library page, plan spec, other batch artifact,
+or normative file was edited.

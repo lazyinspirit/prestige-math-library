@@ -356,6 +356,15 @@ finite-sum items were removed from both the manifest and this ledger;
 `def-sum-over-a-finite-index-set`, which is sufficient for its natural-number
 valued sum.
 
+For the R2 repair, both new theorems reuse eight published dependencies already
+in this ledger, and all eight were reopened on disk. Route `L` applies to
+`def-group-action` and `thm-conjugation-is-an-automorphism`; route `A` applies
+to `def-finite-cardinality`, `def-index`,
+`def-sum-over-a-finite-index-set`, `thm-lagrange`,
+`thm-subset-of-a-finite-set` and `thm-sum-rule`. The remaining dependencies of
+the two new items are planned batch-8 items whose clauses are synchronized in
+their proof contracts.
+
 No published dependency was found false. The old applied-embedding spelling in
 some legacy number-theory/group statements is not copied into any new title,
 planned statement, proof outline or note; those legacy files remain untouched.
@@ -525,11 +534,25 @@ left stale, the later pages will mint duplicate IDs or duplicate statements.
   Conrad's exact \(A_4\) note. The requested cross-batch cite is not encoded as
   a dependency because the target is a later B-page leaf; §7 records the
   conflict and the source-backed resolution.
-- **B8 — remaining Conrad §6 results:** Theorem 6.2, Example 6.3 and
-  Corollary 6.5 are deferred with result-specific Sylow-page reasons; Theorem
-  6.6, Remark 6.7, Theorem 6.9 and Theorem 6.10 are out of scope with distinct
-  permutation-group, classification, finite-index-calculus and
-  subgroup-covering reasons. No §6 heading in the read range is undisposed.
+- **R2 — Conrad Theorem 6.6:** added `thm-jordans-derangement-theorem` to the
+  A page immediately after Cauchy–Frobenius orbit counting. The harvest now
+  records Theorem 6.6 as `included`, and the proof contract derives the
+  fixed-point-free element from the integral orbit-count identity.
+- **R2 — Conrad Theorem 6.10:** added
+  `thm-conjugates-of-proper-subgroup-do-not-cover-finite-group` immediately
+  after the normalizer-count theorem. The harvest now records Theorem 6.10 as
+  `included`, and the proof contract uses the exact normalizer count plus the
+  shared-identity union bound.
+- **R2 — Conrad Theorem 6.9:** retained as `out-of-scope`, but replaced the
+  invalid “not consumed here” reason. It is a general finite-index-subgroup
+  closure theorem belonging with subgroup intersections and index calculus on
+  the real `monoids-groups-and-subgroups` page; its statement and coset-pair
+  proof are independent of action-specific structure.
+- **Remaining Conrad §6 results:** Theorem 6.2, Example 6.3 and Corollary 6.5
+  remain deferred with result-specific Sylow-page reasons, and Remark 6.7
+  remains out of scope because its prime-power-order strengthening rests on the
+  classification of finite simple groups. No §6 heading in the read range is
+  undisposed.
 
 ## 10. Continuity checkpoint
 
@@ -537,10 +560,10 @@ Checkpoint written after the source/dependency pass and before final gates,
 2026-08-11:
 
 - The four allowed batch artifacts are the only batch-8 files touched.
-- `pages.json` parses and contains 29 new A items and 16 new B items.
+- `pages.json` parses and contains 31 new A items and 16 new B items.
 - `coverage.json` parses and currently reports 66 harvested headings with
-  39 included, 8 inline, 4 already published and 15 declined.
-- `proof-contracts.json` parses and has 38 scoped contracts, one for every
+  41 included, 8 inline, 4 already published and 13 declined.
+- `proof-contracts.json` parses and has 40 scoped contracts, one for every
   proof-bearing new item.
 - All 57 unique published dependencies/context items have been opened on disk;
   none has an AI-generated statement component.
@@ -560,10 +583,12 @@ The escalation-free direct gates are green:
   error or warning.
 - `node tools/content-policy.mjs
   research/frontier-10-batch-8.pages.json --manifest-only --rehomed
-  research/frontier-10-rehomed.json`: exit 0; 45 scoped items, no error or
+  research/frontier-10-rehomed.json`: exit 0; 47 scoped items, no error or
   warning.
 - All three JSON artifacts parse, the proof scope and contract map both contain
-  exactly 38 IDs, and `git diff --check` is clean for the four allowed files.
+  exactly 40 IDs, and `git diff --check` is clean for the four allowed files.
+- `node tools/prosecheck.mjs` over the four allowed files: exit 0; no errors and
+  three advisory `count-in-prose` warnings for deliberate checkpoint counts.
 
 Per the dispatch, `tools/gates.mjs` was not run. The runtime preflight still
 reports the known nested-process `spawnSync EPERM` restriction, but every
