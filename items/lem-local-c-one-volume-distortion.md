@@ -46,9 +46,7 @@ The cube may be chosen inside any prescribed neighborhood of $a$.
 
 **Proof technique:** reduction.
 
-1.1 Normalize at $a$ by the affine map below. Choose $0<q<\varepsilon$ and a slightly larger cube inside $U$ on which $\|D H-I\|_{2\to2}\le q/\sqrt n$. The mean-value bound in [L4] makes $H-I$ a $q$-contraction in the sup norm, so $H$ is injective and bi-Lipschitz there. The derivative bound also makes every $DH$ invertible; the inverse function theorem in [L4] therefore makes $H$ a homeomorphism on a neighborhood of the smaller positive-radius cube $Q$. [L4, given]
-$$H(x)=a+A^{-1}(g(x)-g(a)).$$
-Here $H(a)=a$ and $DH(a)=I$; continuity of $Dg$ permits the stated choice inside any prescribed neighborhood.
+1.1 Normalize at $a$ by the affine map $$H(x)=a+A^{-1}(g(x)-g(a)).$$ Choose $0<q<\varepsilon$ and a slightly larger cube inside $U$ on which $\|D H-I\|_{2\to2}\le q/\sqrt n$. The mean-value bound in [L4] makes $H-I$ a $q$-contraction in the sup norm, so $H$ is injective and bi-Lipschitz there. The derivative bound also makes every $DH$ invertible; the inverse function theorem in [L4] therefore makes $H$ a homeomorphism on a neighborhood of the smaller positive-radius cube $Q$. Here $H(a)=a$ and $DH(a)=I$; continuity of $Dg$ permits the stated choice inside any prescribed neighborhood. [L4, given]
 
 2.1 If $E\subseteq Q$ is Jordan, the homeomorphism in step 1.1 gives $\partial H(E)=H(\partial E)$. Compose $H$ on the larger cube with coordinatewise clamping onto that cube to obtain a global Lipschitz map. Since $\partial E$ is null, [L4] makes $H(\partial E)$ null and hence makes $H(E)$ Jordan. [L4, step 1.1]
 

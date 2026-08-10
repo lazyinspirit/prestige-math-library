@@ -46,8 +46,7 @@ $$\left|\int_Fh\right|\le \sup_F|h|\operatorname{cont}(F).$$
 
 **Proof technique:** direct.
 
-1.1 Extend all functions by zero to one bounding rectangle. The indicators in [L2] are integrable, and the nonnegativity of every $M_i$ makes the following inequality valid both on and off $E$. Monotonicity and finite linearity from [L1] give the cover bound, because each indicator integral is the content of its Jordan set. [L1, L2, given]
-$$h\le\sum_{i=1}^N M_i\mathbf1_{E_i}.$$
+1.1 Extend all functions by zero to one bounding rectangle. The indicators in [L2] are integrable, and the nonnegativity of every $M_i$ makes the following inequality valid both on and off $E$. Monotonicity and finite linearity from [L1] give the cover bound, because each indicator integral is the content of its Jordan set: $$h\le\sum_{i=1}^N M_i\mathbf1_{E_i}.$$ [L1, L2, given]
 
 1.2 The restriction of $h$ to each $F_i$ is integrable: away from grid cells meeting $\partial F_i$ its Darboux gap is inherited from $h$, while [L2] makes the total volume of boundary cells arbitrarily small. Hence $\int_{F_i}h\ge m_i\operatorname{cont}(F_i)$ by [L1]. Pairwise interior-disjoint Jordan sets intersect only on their content-zero boundaries, so the sum of their zero-extended restrictions equals the restriction to their union outside a content-zero set. The same boundary-cell argument and linearity [L1] therefore add these integrals without overcounting; their union lies in $E$, and $h\ge0$, giving the lower bound. [L1, L2]
 

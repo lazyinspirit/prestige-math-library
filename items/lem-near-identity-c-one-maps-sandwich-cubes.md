@@ -46,9 +46,7 @@ Moreover, $F$ is injective on $C(a,r)$.
 
 **Proof technique:** fixed-point.
 
-1.1 Put $R=F-I$ and use [L1] with the Euclidean--sup norm comparison [L4] to obtain the following contraction estimate. [L1, L4, given]
-$$\|R(x)-R(y)\|_\infty\le q\|x-y\|_\infty$$
-on the cube. In particular $\|R(x)\|_\infty\le qr$, so $F(x)=x+R(x)$ lies in $C(a,(1+q)r)$.
+1.1 Put $R=F-I$ and use [L1] with the Euclidean--sup norm comparison [L4] to obtain the contraction estimate $$\|R(x)-R(y)\|_\infty\le q\|x-y\|_\infty$$ on the cube. In particular $\|R(x)\|_\infty\le qr$, so $F(x)=x+R(x)$ lies in $C(a,(1+q)r)$. [L1, L4, given]
 
 2.1 Fix $z\in C(a,(1-q)r)$ and define $S_z(x)=z-R(x)$. Step 1.1 gives $S_z(C(a,r))\subseteq C(a,r)$ and makes $S_z$ a $q$-contraction. The cube is a nonempty closed subset of complete Euclidean space, so [L2]--[L3] give $x\in C(a,r)$ with $S_z(x)=x$, equivalently $F(x)=z$. This proves the inner containment. [L2, L3, step 1.1]
 

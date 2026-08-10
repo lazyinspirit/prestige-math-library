@@ -42,8 +42,7 @@ Let $n\ge1$, let $U\subseteq\mathbb R^n$ be open, let $g:U\to\mathbb R^n$ be inj
 
 **Proof technique:** local-to-global.
 
-1.1 Continuity and [L2] make $g(K)$ compact, hence closed and bounded. If $y=g(x)\in\partial g(K)$, then $x$ cannot lie in the interior of $K$: otherwise [L1], together with global injectivity on $U$, would map a neighborhood of $x$ contained in $K$ onto a neighborhood of $y$ contained in $g(K)$. Thus the following boundary inclusion holds. [L1, L2]
-$$\partial g(K)\subseteq g(\partial K).$$
+1.1 Continuity and [L2] make $g(K)$ compact, hence closed and bounded. If $y=g(x)\in\partial g(K)$, then $x$ cannot lie in the interior of $K$: otherwise [L1], together with global injectivity on $U$, would map a neighborhood of $x$ contained in $K$ onto a neighborhood of $y$ contained in $g(K)$. Thus $$\partial g(K)\subseteq g(\partial K).$$ [L1, L2]
 
 1.2 Around each point of the compact set $\partial K$, choose a closed cube in a slightly larger convex cube inside $U$ on which $Dg$ is bounded. By [L4], $g$ is Lipschitz on the smaller cube. Composing its restriction with coordinatewise clamping onto that cube produces a Lipschitz self-map of $\mathbb R^n$, so [L3] sends the null set $\partial K$ inside the cube to a null set. A finite subcover shows that $g(\partial K)$ is null. [L3, L4, given]
 

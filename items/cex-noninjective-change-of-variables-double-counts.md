@@ -40,7 +40,6 @@ pipeline_run: null
 
 1.1 The derivative $2x$ never vanishes anywhere on $U$, but $g(-x)=g(x)$, so every point of $(1,4)$ has one preimage in each component of $K$. [L2, given]
 
-2.1 The image integral is its length, $\int_{1}^{4}1\,dy=3$, while the proposed source integral is the doubled value below. [L2, step 1.1]
-$$\int_K|2x|\,dx=\int_{-2}^{-1}(-2x)\,dx+\int_1^2 2x\,dx=3+3=6.$$
+2.1 The image integral is its length, $\int_{1}^{4}1\,dy=3$, while the proposed source integral is $$\int_K|2x|\,dx=\int_{-2}^{-1}(-2x)\,dx+\int_1^2 2x\,dx=3+3=6.$$ [L2, step 1.1]
 
 3.1 The mismatch $6\ne3$ is exact double counting. Thus nonvanishing derivative does not replace injectivity, and [L1]'s hypothesis is essential. [L1, step 2.1] ∎

@@ -48,10 +48,6 @@ Changing finitely many initial terms or moving the finite lower integration endp
 
 **Proof technique:** direct.
 
-1.1 For every integer $k\ge1$, monotonicity of $f$ and [L1, L2] give
-$$f(k+1)\le\int_k^{k+1}f(x)\,dx\le f(k).$$
-Adding these inequalities and using interval additivity yields
-$$\sum_{k=2}^{N+1}f(k)\le\int_1^{N+1}f(x)\,dx\le\sum_{k=1}^{N}f(k).$$
-Thus the series partial sums are bounded exactly when the integer truncation integrals are bounded. By [L2], this is exactly convergence of the corresponding two monotone sequences. [L1, L2]
+1.1 For every integer $k\ge1$, monotonicity of $f$ and [L1, L2] give $f(k+1)\le\int_k^{k+1}f(x)\,dx\le f(k)$. Adding these inequalities and using interval additivity yields $\sum_{k=2}^{N+1}f(k)\le\int_1^{N+1}f(x)\,dx\le\sum_{k=1}^{N}f(k)$. Thus the series partial sums are bounded exactly when the integer truncation integrals are bounded. By [L2], this is exactly convergence of the corresponding two monotone sequences. [L1, L2]
 
 2.1 Suppose the integer truncations converge to $I$. Given a sufficiently large integer $N$ and any real $R\ge N$, [L3] supplies an integer $M>R$. Nonnegativity gives $\int_1^Nf\le\int_1^Rf\le\int_1^Mf$, and both integer bounds tend to $I$; hence the full real-parameter limit is $I$. The reverse implication is immediate by restriction to integer truncations. Tail invariance handles finite changes. [L3] ∎

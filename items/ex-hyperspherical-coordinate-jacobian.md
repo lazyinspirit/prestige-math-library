@@ -48,14 +48,6 @@ On compact boxes with $r>0$, every $\phi_j$ in a compact subinterval of $(0,\pi)
 
 1.1 For $n=2$, the formula is the polar determinant $r$, with the empty product of sine factors equal to $1$. Direct differentiation verifies it, while the image norm and strict cosine monotonicity recover the radius and seam-free angle. [L1, L4, base]
 
-1.2 Assume the formula in dimension $n$. Factor the dimension-$(n+1)$ coordinate map as
-$$
-(r,\phi_1,\xi)\longmapsto(s,\rho,\xi)=(r\cos\phi_1,r\sin\phi_1,\xi)
-\longmapsto(s,\Phi_n(\rho,\xi)),
-$$
-where $\Phi_n$ is the dimension-$n$ hyperspherical map in the induction hypothesis. [ih, assume-hyp]
+1.2 Assume the formula in dimension $n$. Factor the dimension-$(n+1)$ coordinate map as $$ (r,\phi_1,\xi)\longmapsto(s,\rho,\xi)=(r\cos\phi_1,r\sin\phi_1,\xi) \longmapsto(s,\Phi_n(\rho,\xi)), $$ where $\Phi_n$ is the dimension-$n$ hyperspherical map in the induction hypothesis. [ih, assume-hyp]
 
-2.1 By [L1] and [L2], the first map in step 1.2 has a $2\times2$ Jacobian block of determinant $r(\cos^2\phi_1+\sin^2\phi_1)=r$ and an identity block in $\xi$. The second has a $1\times1$ identity block and the Jacobian of $\Phi_n$ at radius $\rho$; [L3] will discharge the induction after this step. The signed-permutation formula gives these block determinants, and multiplicativity with the induction hypothesis gives
-$$r\rho^{n-1}\prod_{j=2}^{n-1}\sin^{n-j}\phi_j
-=r^n\sin^{n-1}\phi_1\prod_{j=2}^{n-1}\sin^{n-j}\phi_j.$$
-On the stated boxes, the image norm recovers $r$, then successive coordinate ratios and strict cosine monotonicity [L4] recover every $\phi_j$, and the final planar pair recovers $\theta$. The sine factors do not vanish, so the map is injective with nonzero determinant. This proves the formula and box claim in dimension $n+1$, and [L3] completes the induction. [L1, L2, L3, L4, step 1.2, discharge-induction: base and induction step] ∎
+2.1 By [L1] and [L2], the first map in step 1.2 has a $2\times2$ Jacobian block of determinant $r(\cos^2\phi_1+\sin^2\phi_1)=r$ and an identity block in $\xi$. The second has a $1\times1$ identity block and the Jacobian of $\Phi_n$ at radius $\rho$; [L3] will discharge the induction after this step. The signed-permutation formula gives these block determinants, and multiplicativity with the induction hypothesis gives $$r\rho^{n-1}\prod_{j=2}^{n-1}\sin^{n-j}\phi_j =r^n\sin^{n-1}\phi_1\prod_{j=2}^{n-1}\sin^{n-j}\phi_j.$$ On the stated boxes, the image norm recovers $r$, then successive coordinate ratios and strict cosine monotonicity [L4] recover every $\phi_j$, and the final planar pair recovers $\theta$. The sine factors do not vanish, so the map is injective with nonzero determinant. This proves the formula and box claim in dimension $n+1$, and [L3] completes the induction. [L1, L2, L3, L4, step 1.2, discharge-induction: base and induction step] ∎

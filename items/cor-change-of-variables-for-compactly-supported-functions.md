@@ -47,7 +47,6 @@ $$\int_{\mathbb R^n}f(y)\,dy=\int_{\mathbb R^n}h(x)\,dx.$$
 
 1.1 By [L4] and global injectivity, the local inverses patch to a continuous inverse on $g(U)$. Thus $C=g^{-1}(\operatorname{supp}f)$ is compact and lies in $U$. By [L1], choose compact Jordan $K$ with $C\subseteq\operatorname{int}K\subseteq K\subseteq U$. [L1, L4, given]
 
-2.1 The function $f$ vanishes outside $g(K)$, while $h$ vanishes outside $K$. Apply [L2] to $f|_{g(K)}$; its transformed integrand is $h|_K$, giving the following identity. [L2, step 1.1]
-$$\int_{g(K)}f=\int_Kh.$$
+2.1 The function $f$ vanishes outside $g(K)$, while $h$ vanishes outside $K$. Apply [L2] to $f|_{g(K)}$; its transformed integrand is $h|_K$, giving $$\int_{g(K)}f=\int_Kh.$$ [L2, step 1.1]
 
 3.1 The support of $h$ is contained in the compact set $C$, because $f(g(x))=0$ away from its preimage. Thus $h$ is compactly supported and [L3] identifies the two integrals in step 2.1 with the corresponding integrals over $\mathbb R^n$. [L3, step 2.1] ∎

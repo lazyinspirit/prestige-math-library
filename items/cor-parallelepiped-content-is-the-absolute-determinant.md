@@ -44,6 +44,4 @@ This includes the singular case, when the content is zero.
 
 1.1 The matrix map $T(x)=Ax$ sends $Q$ exactly onto $P(v_1,\ldots,v_n)$. [L1, given]
 
-2.1 Apply [L1] to $Q$ and use [L2] to obtain the stated content formula. [L1, L2, step 1.1]
-$$\operatorname{cont}(P)=|\det A|\operatorname{cont}(Q)=|\det A|.$$
-If the columns are dependent, [L1] simultaneously supplies Jordan measurability and the zero-content conclusion. ∎
+2.1 Apply [L1] to $Q$ and use [L2] to obtain the stated content formula: $$\operatorname{cont}(P)=|\det A|\operatorname{cont}(Q)=|\det A|.$$ If the columns are dependent, [L1] simultaneously supplies Jordan measurability and the zero-content conclusion. [L1, L2, step 1.1] ∎

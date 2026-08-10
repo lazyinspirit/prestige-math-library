@@ -44,7 +44,6 @@ Reversing the order avoids an awkward antiderivative in $x$.
 
 1.1 By continuity and [L1], reverse the order and integrate in $y$ first. Since $\partial_y\exp(xy)=x\exp(xy)$, [L2] gives $\int_0^1x\exp(xy)\,dy=e^x-1$, including $x=0$. [L1, L2]
 
-2.1 A second application of [L2] gives the endpoint calculation below. [L2, step 1.1]
-$$\int_{-1}^1(e^x-1)\,dx=(e-e^{-1})-2.$$
+2.1 A second application of [L2] gives $$\int_{-1}^1(e^x-1)\,dx=(e-e^{-1})-2.$$ [L2, step 1.1]
 
 3.1 Using [L3] for the negative endpoint yields the stated value $e-e^{-1}-2$. [L3, step 2.1] ∎

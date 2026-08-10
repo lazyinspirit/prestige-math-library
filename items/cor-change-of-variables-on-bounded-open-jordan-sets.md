@@ -46,8 +46,7 @@ No improper-integral convention is implicit in this statement.
 
 **Proof technique:** exhaustion.
 
-1.1 If $U=\emptyset$, then $V=\emptyset$ and both integrals are $0$. Otherwise choose the compact grid exhaustion $K_j\uparrow U$ from [L1]. For every $j$, [L2] gives the compact-set identity below. [L1, L2, given]
-$$\int_{g(K_j)}f=\int_{K_j}h.$$
+1.1 If $U=\emptyset$, then $V=\emptyset$ and both integrals are $0$. Otherwise choose the compact grid exhaustion $K_j\uparrow U$ from [L1]. For every $j$, [L2] gives $$\int_{g(K_j)}f=\int_{K_j}h.$$ [L1, L2, given]
 
 2.1 A bound $M_h$ for $|h|$ gives source error at most $M_h\operatorname{cont}(U\setminus K_j)$, which tends to zero by [L1] and [L3]. [L1, L3, given, step 1.1]
 

@@ -40,8 +40,7 @@ The parallelepiped spanned by these vectors has Jordan content $12$.
 
 **Proof technique:** computation.
 
-1.1 Put the vectors into the columns of the following upper-triangular matrix. [given]
-$$A=\begin{pmatrix}2&1&0\\0&3&1\\0&0&-2\end{pmatrix}.$$
+1.1 Put the vectors into the columns of the upper-triangular matrix $$A=\begin{pmatrix}2&1&0\\0&3&1\\0&0&-2\end{pmatrix}.$$ [given]
 
 2.1 The signed-permutation formula [L2] leaves only the diagonal term, so $\det A=2\cdot3\cdot(-2)=-12$. [L2, step 1.1]
 
