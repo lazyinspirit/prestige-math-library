@@ -2,7 +2,7 @@
 id: ex-presentation-of-a-dihedral-group
 kind: example
 title: '$D_n\cong\langle r,s\mid r^n,\ s^2,\ srs^{-1}r\rangle$ for the dihedral group $D_n=\langle\{\rho,\sigma\}\rangle\leq\operatorname{Sym}(\mathbb Z/n)$, $n\geq 3$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

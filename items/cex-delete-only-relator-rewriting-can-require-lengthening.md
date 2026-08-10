@@ -2,7 +2,7 @@
 id: cex-delete-only-relator-rewriting-can-require-lengthening
 kind: counterexample
 title: 'In $\langle a,b\mid aba^{-1}b^{-1}\rangle$, the trivial word $a^2b^2a^{-2}b^{-2}$ is stuck under free cancellation and delete-only relator rewriting'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: def-tietze-transformations
 kind: definition
 title: "Tietze transformations: dictionary generators, redundant relators, renaming, and their inverses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-11
   precheck: n/a
 sources:
   scraped: []

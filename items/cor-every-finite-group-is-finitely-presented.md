@@ -2,7 +2,7 @@
 id: cor-every-finite-group-is-finitely-presented
 kind: corollary
 title: "Every finite group has a finite presentation from its multiplication table"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

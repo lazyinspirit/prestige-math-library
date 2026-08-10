@@ -2,7 +2,7 @@
 id: def-free-abelian-group
 kind: definition
 title: "Free abelian group on a set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: [thm-abelianisation-of-a-free-group-is-free-abelian]
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-11
   precheck: n/a
 sources:
   scraped: []

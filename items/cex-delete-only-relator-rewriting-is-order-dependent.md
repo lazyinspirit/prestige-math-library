@@ -2,7 +2,7 @@
 id: cex-delete-only-relator-rewriting-is-order-dependent
 kind: counterexample
 title: 'In $\langle a,b\mid ab,\ aba\rangle$, delete-only relator rewriting sends $aba$ either to the empty word or to the stuck word $a$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

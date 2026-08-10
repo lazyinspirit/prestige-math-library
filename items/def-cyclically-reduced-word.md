@@ -2,7 +2,7 @@
 id: def-cyclically-reduced-word
 kind: definition
 title: "Cyclically reduced words"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-11
   precheck: n/a
 sources:
   scraped: []

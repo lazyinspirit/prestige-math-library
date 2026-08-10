@@ -2,7 +2,7 @@
 id: ex-presentation-of-a-finite-cyclic-group
 kind: example
 title: '$\langle a\mid a^n\rangle\cong(\mathbb Z/n,+)$ for every $n\geq 1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

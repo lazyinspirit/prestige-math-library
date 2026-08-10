@@ -2,7 +2,7 @@
 id: def-rank-of-a-finite-rank-free-group
 kind: definition
 title: "The rank of a free group admitting a finite basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-11
   precheck: n/a
 sources:
   scraped: []

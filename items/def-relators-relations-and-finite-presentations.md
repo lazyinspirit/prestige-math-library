@@ -2,7 +2,7 @@
 id: def-relators-relations-and-finite-presentations
 kind: definition
 title: "Relators and relations; finitely generated, finitely related, and finite presentations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-11
   precheck: n/a
 sources:
   scraped: []

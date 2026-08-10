@@ -2,7 +2,7 @@
 id: thm-conjugacy-of-cyclically-reduced-words
 kind: theorem
 title: "Two cyclically reduced words in a free group are conjugate if and only if one is a cyclic permutation of the other"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

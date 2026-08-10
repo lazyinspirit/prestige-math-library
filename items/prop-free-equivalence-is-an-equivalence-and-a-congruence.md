@@ -2,7 +2,7 @@
 id: prop-free-equivalence-is-an-equivalence-and-a-congruence
 kind: proposition
 title: "Free equivalence is an equivalence relation and concatenation respects it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

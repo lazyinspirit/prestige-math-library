@@ -2,7 +2,7 @@
 id: ex-presentation-of-the-symmetric-group-on-three-letters
 kind: example
 title: '$\operatorname{Sym}(\{0,1,2\})\cong\langle s,t\mid s^2,\ t^2,\ (st)^3\rangle$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: thm-finite-free-bases-have-the-same-cardinality
 kind: theorem
 title: "Any two finite free bases of the same group have the same cardinality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

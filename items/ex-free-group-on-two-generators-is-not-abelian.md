@@ -2,7 +2,7 @@
 id: ex-free-group-on-two-generators-is-not-abelian
 kind: example
 title: "A free group whose basis contains two distinct elements is not abelian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

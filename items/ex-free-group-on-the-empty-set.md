@@ -2,7 +2,7 @@
 id: ex-free-group-on-the-empty-set
 kind: example
 title: "The free group on the empty set is the trivial group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

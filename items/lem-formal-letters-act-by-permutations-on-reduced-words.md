@@ -2,7 +2,7 @@
 id: lem-formal-letters-act-by-permutations-on-reduced-words
 kind: lemma
 title: "Formal letters act by mutually inverse permutations on the set of reduced words"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

@@ -2,7 +2,7 @@
 id: prop-normal-closure-is-products-of-conjugates
 kind: proposition
 title: "The normal closure of $R$ is the set of finite products of conjugates of elements of $R$ and their inverses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

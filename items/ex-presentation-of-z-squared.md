@@ -2,7 +2,7 @@
 id: ex-presentation-of-z-squared
 kind: example
 title: '$\langle a,b\mid aba^{-1}b^{-1}\rangle\cong(\mathbb Z,+)\times(\mathbb Z,+)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

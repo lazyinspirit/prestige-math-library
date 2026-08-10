@@ -2,7 +2,7 @@
 id: cor-generators-embed-in-the-word-quotient
 kind: corollary
 title: 'The generator map $X\to W(X)/{\sim}$ is injective'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

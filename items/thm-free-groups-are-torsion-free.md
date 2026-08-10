@@ -2,7 +2,7 @@
 id: thm-free-groups-are-torsion-free
 kind: theorem
 title: "Free groups are torsion-free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

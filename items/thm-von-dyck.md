@@ -2,7 +2,7 @@
 id: thm-von-dyck
 kind: theorem
 title: "Von Dyck's theorem: maps of generators that satisfy the relators extend uniquely from a presented group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [thm-von-dycks-theorem]
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

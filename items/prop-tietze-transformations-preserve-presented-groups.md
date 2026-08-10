@@ -2,7 +2,7 @@
 id: prop-tietze-transformations-preserve-presented-groups
 kind: proposition
 title: "Each Tietze transformation preserves the isomorphism type of the presented group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

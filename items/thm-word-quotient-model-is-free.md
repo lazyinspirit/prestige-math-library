@@ -2,7 +2,7 @@
 id: thm-word-quotient-model-is-free
 kind: theorem
 title: 'The word-quotient group $W(X)/{\sim}$ satisfies the universal property of the free group on $X$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

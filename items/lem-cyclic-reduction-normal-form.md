@@ -2,7 +2,7 @@
 id: lem-cyclic-reduction-normal-form
 kind: lemma
 title: 'Every nonempty reduced word has the form $tct^{-1}$ with $c$ nonempty and cyclically reduced'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: induction
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

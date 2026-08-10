@@ -2,7 +2,7 @@
 id: def-word-quotient-model-of-the-free-group
 kind: definition
 title: 'The word-quotient model $F_{\mathrm{word}}(X):=W(X)/{\sim}$ with multiplication induced by concatenation'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: []
 landmark: true
 verification:
+  audited: 2026-08-11
   precheck: n/a
 sources:
   scraped: []

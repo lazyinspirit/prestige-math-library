@@ -2,7 +2,7 @@
 id: prop-equality-of-words-in-a-presentation
 kind: proposition
 title: 'In $\langle X\mid R\rangle$, the words $u$ and $v$ represent the same element if and only if $u^{-1}v\in\langle\!\langle R\rangle\!\rangle$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

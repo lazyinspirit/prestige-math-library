@@ -2,7 +2,7 @@
 id: def-abelianisation-of-a-group
 kind: definition
 title: 'The abelianisation $G^{\mathrm{ab}}:=G/[G,G]$ and its canonical map'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ justified_by: []
 aliases: [def-abelianization-of-a-group]
 landmark: true
 verification:
+  audited: 2026-08-11
   precheck: n/a
 sources:
   scraped: []

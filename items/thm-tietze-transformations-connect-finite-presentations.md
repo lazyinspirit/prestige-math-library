@@ -2,7 +2,7 @@
 id: thm-tietze-transformations-connect-finite-presentations
 kind: theorem
 title: "Two finite presentations define isomorphic groups if and only if a finite sequence of Tietze transformations and inverses connects them"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [thm-tietzes-theorem-for-finite-presentations]
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

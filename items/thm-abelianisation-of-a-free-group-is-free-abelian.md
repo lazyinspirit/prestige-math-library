@@ -2,7 +2,7 @@
 id: thm-abelianisation-of-a-free-group-is-free-abelian
 kind: theorem
 title: "The abelianisation of a free group on $X$ is a free abelian group on $X$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: constructive
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []

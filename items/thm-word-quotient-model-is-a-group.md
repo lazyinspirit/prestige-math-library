@@ -2,7 +2,7 @@
 id: thm-word-quotient-model-is-a-group
 kind: theorem
 title: '$F_{\mathrm{word}}(X)$ is a group under $[w][v]=[wv]$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 proof_strategy: direct
 verification:
+  audited: 2026-08-11
   precheck: pass
 sources:
   scraped: []
