@@ -512,6 +512,56 @@ evidence than the exact clause the standard asks for. I am recording this as a
 known limitation of the artifact rather than silently regenerating 475 contracts,
 and my own new item's contract has the same property.
 
+### Refuter wave 1, the last cluster — two more fatals on the planar spine
+
+`kuratowski` returned last and found two more.
+
+6. **`lem-separation-augmentation-for-kuratowski-free-graphs` — a third false
+   title.** It claimed the graph augments "**each** proper separation", while the
+   Statement, every proof step, and Diestel's cited lemma are all restricted to a
+   **minimum** proper separation of order at most two. Retitled to what is
+   proved. The Statement and proof themselves passed the order-zero, order-one,
+   $xy\in E(G)$, rerouting and two-sided edge-maximality checks.
+
+7. **`prop-face-boundaries-in-three-connected-plane-graphs` — the same step,
+   wrong a second time.** The reader's F8 correctly removed a false "at most two
+   of three internally disjoint paths can meet the cycle" claim. Its replacement
+   then inferred arc-containment from the *absence of four alternating
+   attachments*, and that implication fails when two components share three
+   attachments: $A(D_1)=A(D_2)=\{a,b,c\}$ has no alternating quadruple, yet
+   neither set lies in an arc between consecutive attachments of the other. The
+   refuter marked this fatal at medium confidence and explicitly left the
+   30-second call to me. **I judge it fatal**: it is a distinct plane
+   configuration needing its own Jordan invocation rather than omitted algebra,
+   and it is the second defect found in this one load-bearing step, which sits
+   directly under `thm-kuratowski-wagner-planarity-characterisation`. Replaced
+   with a direct region argument — a spanning tree of one component plus one edge
+   to each of its $k$ attachments cuts the facial side into $k$ regions, each
+   bounded by an arc between **consecutive** attachments, so every other
+   component lies in one region with all its neighbours on that arc; the open arc
+   together with the components inside it then has exactly those two attachments
+   as outside neighbours, which is the 2-cut. This reaches the shared-attachment
+   case that no alternation argument can.
+
+I also verified reader F10 independently and from first principles before the
+refuter did: the weighted-centre walk cannot backtrack (moving into a component
+of weight $\ge3$ leaves the side you came from at weight $\le1$) and terminates,
+and the claimed $K_{3,3}$ bipartition $\{a,u_3,u_4\}\mid\{b,u_1,u_2\}$ really
+does carry all nine edges over six disjoint connected branch sets.
+
+One further nonfatal arithmetic slip repaired while unfrozen: step 4.1 of
+`lem-bv-functions-are-regulated` bounded an enlarged component's oscillation by
+$\varepsilon/4+\varepsilon/2+\varepsilon/2$ and called it $<\varepsilon$. The
+continuity neighbourhoods are now taken at $\varepsilon/4$.
+
+### Fatal tally so far
+
+**Nine fatal defects confirmed and repaired at Stage 2 that no reader had
+caught** — five in wave 1's first six clusters, two from `kuratowski`, plus the
+`def-category` and `prop-sets-and-functions-form-category-set` pair. Three of the
+nine are **false titles**, the class the step-7 judges structurally cannot see,
+which is now the single most common fatal class in this run.
+
 ### Still open
 
 `risk_review` dispositions for the 316 high/critical items (they are due at step 6,
