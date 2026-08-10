@@ -407,6 +407,111 @@ high/critical items, grouped by page: `w2-group-actions` (30), `w2-improper` (31
 Every brief carries the no-permission-prompt block verbatim, and the lane is
 `--sandbox read-only` enforced by `dispatch.mjs`, not by instruction.
 
+### Refuter wave 1 — what it caught that nobody else did
+
+Eight refuters returned. **They found five fatal defects that both the nine
+independent readers and my own adjudication had missed**, which is the clearest
+evidence in this run that the role earns its cost. All five are repaired.
+
+1. **`thm-linear-images-scale-jordan-content-by-absolute-determinant` — the
+   Cavalieri gap was only half fixed.** I had checked the *ordering* circularity
+   the reader repaired and confirmed it. The refuter checked the *other*
+   hypothesis: `cor-cavalieri-principle-for-jordan-content` requires the target's
+   sections to be Jordan measurable outside a content-zero parameter set, and
+   step 1.1 applied it to an arbitrary bounded Jordan $F$. It supplied a
+   counterexample showing that hypothesis is not implied by Jordan
+   measurability — enumerate $q_k\in[0,1]$, take compact nowhere-dense $C_k
+   \subseteq[0,2^{-k}]$ of positive content containing $0$, and set
+   $F=([0,1]\times\{0\})\cup\bigcup_k(\{q_k\}\times C_k)$. I verified it:
+   $F$ is compact with outer content $0$, hence Jordan, while $F_{q_k}=C_k$ is
+   non-Jordan on a dense, non-content-zero parameter set. **Confirmed fatal.**
+   Repaired on the refuter's own suggested route: Cavalieri is now applied only
+   to the rectangular figures $P,Q$ and their images, whose sections are finite
+   unions of intervals and therefore do satisfy the hypothesis, and the
+   already-Jordan $E_0F$ is squeezed between them.
+
+2. **`def-category` and the concrete categories — morphisms had no well-defined
+   codomain.** `def-function` in this library states explicitly that the codomain
+   is *not* part of a function, and that the empty function is a function
+   $\varnothing\to B$ for **every** $B$ at once. So $\varnothing^\varnothing
+   =\{\varnothing\}=\{\varnothing\}^\varnothing$, and reading
+   $\mathbf{Set}$'s morphisms as bare functions gives one morphism two
+   codomains, contradicting `def-category`'s requirement that `cod` be a
+   function. The refuter gave the analogous collisions in the functor category
+   (one natural family being a morphism $F\Rightarrow F$ and $F\Rightarrow G$)
+   and in the comma category. **Confirmed fatal.** I repaired it at the root
+   rather than in fifteen places: `def-category` now states that when a category
+   is presented by its hom-collections the morphism class is their **disjoint
+   union**, so a morphism is a triple and `dom`/`cod` are projections. That one
+   convention legitimises Set, Grp, Ring, Vect, RMod, Top, Poset, the functor
+   category and the comma/slice/coslice categories at once. I also corrected
+   `prop-sets-and-functions-form-category-set`, whose `[L1]` had inflated
+   `def-function` into saying a function *has* a codomain.
+
+3. **`ex-change-of-basepoint-isomorphism-for-fundamental-groups` — the reader's
+   own F7-05 repair introduced a b-leaf violation.** It routed the repair through
+   `ex-fundamental-groupoid`, and both items live on the same **B page**. B pages
+   are leaves. **Confirmed fatal**, and worth recording *why no gate caught it*:
+   `validate-plan` reads `plan-spec.json`, which still carried the pre-repair
+   dependency list, so the durable artifact concealed the edge. The gate was
+   green on stale data. Repaired by proving the arbitrary-endpoint groupoid laws
+   inline from published dependencies — concatenation well defined on
+   rel-endpoint classes by pasting, associativity and unit laws by
+   reparametrisation, and $\lambda*\bar\lambda\simeq c$ by an explicit
+   contraction. Inlining rather than re-homing was forced: the A page sits at
+   exactly the 60-item ceiling, so absorbing the groupoid there would have
+   required a page split at step 6.
+
+4. **`ex-amalgamation-along-a-whole-factor` — a second false title.** The title
+   claimed "Amalgamating along a whole factor recovers the other group", but the
+   Example takes an arbitrary homomorphism $h$ and displays the noninjective
+   reduction $C_4\to C_2$, while the page's own
+   `def-free-product-with-amalgamation` reserves "amalgamation" for **injective**
+   maps. **Confirmed fatal** and retitled to what the proof gives: "A pushout
+   along an isomorphism recovers the other group." This is the second instance of
+   the class the judges structurally cannot see.
+
+5. **`thm-riemann-stieltjes-darboux-criterion` — the equivalence fails at
+   $a=b$.** The Statement carried no $a<b$. On $[a,a]$ the definition fixes the
+   integral at $0$, so every bounded $f$ is integrable, while
+   `def-partition-and-refinement` admits no partition of a singleton, so
+   condition 2 asserts the existence of something that cannot exist.
+   **Confirmed fatal**; $a<b$ added, with the reason recorded in the Statement.
+   The same refuter found that `thm-riemann-stieltjes-continuous-composition`'s
+   `[L1]` had dropped this criterion's continuity-at-integrator-discontinuities
+   clause, and gave a counterexample ($\alpha=\mathbf1_{[c,1]}$,
+   $f=\mathbf1_{(c,1]}$) proving the clause essential. **Confirmed fatal as a
+   dependency-citation defect**; the Fact now states what its target states, and
+   the Statement survives because the proof restores the clause itself at
+   step 3.1.
+
+Nonfatal findings I accepted and repaired while the text is unfrozen: the two
+surviving natural-isomorphism citations left stale by the F7-26 repair; the
+$k\ge1$ domain of `lem-successive-p-multiple-quotients-recover-elementary-divisors`
+(the formula $d_{k-1}-d_k$ is undefined at $k=0$); the zero-ring case of
+`cor-factor-theorem-over-a-commutative-ring` (there $x-a=0$ is not monic, so the
+division theorem is inapplicable, though the conclusion holds trivially); and the
+empty-set boundary of `lem-finite-jordan-cover-sum-bounds`, since this library
+adopts no extended-real convention for $\sup\varnothing$.
+
+### The contract-integrity finding, measured
+
+Three refuters independently reported that boundary attestations quote deleted
+pre-repair proof text and that citation quotes are mechanically truncated. Rather
+than accept or dismiss the claim, I wrote a checker that normalises whitespace and
+tests every quoted boundary fragment against the current item text. The real
+scale is **14 entries across 6 items, out of 1,700 with evidence** — all in
+batch 4, whose proofs the reader rewrote most heavily. All 14 are re-anchored to
+the step that now discharges the case, and the checker reports zero.
+
+The truncated-quote criticism is correct and is **structural, not local**: the
+contract generators slice a fixed number of characters, so a long Statement is
+recorded as a prefix. `proof-contract --strict` verifies the prefix genuinely
+occurs in the cited section, so no quote is *false*; but a prefix is weaker
+evidence than the exact clause the standard asks for. I am recording this as a
+known limitation of the artifact rather than silently regenerating 475 contracts,
+and my own new item's contract has the same property.
+
 ### Still open
 
 `risk_review` dispositions for the 316 high/critical items (they are due at step 6,
