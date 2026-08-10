@@ -99,8 +99,25 @@ recorded under `enrichment_of_published` as context. Listing them as batch items
 is what `content-policy.mjs` rejects with `batch-item-already-exists` — that was
 the first step-0 failure of this run.
 
+## Mid-run owner instructions (2026-08-11), all landed before step 3
+
+- **`\iota` gone from the free-groups pair**, with rejudge/restamp explicitly
+  waived. 12 items, commit `cce8d63`. Full record and the one non-cosmetic spot:
+  `research/frontier-10-notation-change.md`.
+- **Alpha reviews scaffold breadth and depth at the end of step 3**, standing for
+  all future sessions. Alpha now spawns at step 3, not step 4. Commit `fa4448b`;
+  `briefs/alpha.md` §"Stage 0", `LEVELS.md` §"Step 3".
+  **This binds the current run** — step 3 is not complete until
+  `research/frontier-10-alpha-step3-scaffold-review.md` exists and every pair is
+  `sufficient`.
+
 ## State
 
+- **Step 1 RUNNING** — 8 Betas dispatched 2026-08-11 01:52, lane cap 5 so three
+  queued. Batch 7 has checkpointed: all eight prerequisites opened on disk, the
+  harvest running against Riehl *Category Theory in Context* ch. 1 §§1.1–1.5,
+  1.7 and Awodey–Bauer ch. 1 §§1.1–1.4.3, heading-by-heading dispositions in
+  progress, 60-item ceiling checked and no split indicated yet.
 - **Step 0 CLEAR.** `node tools/gates.mjs --step 0 --run frontier-10` passes
   `validate-plan.mjs` and `content-policy.mjs --manifest-only`.
 - 8 manifests at `research/frontier-10-batch-{1..8}.pages.json`.
@@ -112,10 +129,12 @@ the first step-0 failure of this run.
 
 ## Exact next action
 
-Step 1: dispatch one Beta per batch on `briefs/beta-scaffold.md` (cap 5, so
-batches 6–8 queue). Every Beta must produce
-`research/frontier-10-batch-<i>.coverage.json` alongside its `.pages.json` and
-`.notes.md`, or step 2 fails `missing-receipt`.
+Wait for the 8 Betas, then `node tools/gates.mjs --step 2 --run frontier-10`.
+Every Beta must have produced `research/frontier-10-batch-<i>.coverage.json`
+alongside its `.pages.json` and `.notes.md`, or step 2 fails `missing-receipt`.
+Then step 3: orchestrator adjudicates recommendations, **then dispatch Alpha for
+the breadth/depth review** — that half of step 3 is new as of this run and is
+mandatory before any step-4 splice.
 
 ## Open risks
 
