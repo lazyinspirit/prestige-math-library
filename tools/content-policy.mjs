@@ -239,7 +239,9 @@ for (const file of files) {
     error('batch-a-pair-cap', `${file}: contains ${aPages.length} A/B pairs; a Beta may scaffold and author at most ${BATCH_A_PAIR_CAP}`);
   }
   for (const page of batch) {
+    let itemIndex = -1;
     for (const planned of page.items ?? []) {
+      itemIndex++;
       const id = typeof planned === 'string' ? planned : planned?.id;
       if (typeof id !== 'string' || !id) {
         error('batch-item-shape', `${file}: page ${page?.id ?? '?'} contains an item without an id`);
@@ -272,6 +274,7 @@ for (const file of files) {
           page: page?.id ?? '?',
           pageKind: page?.kind,
           order: page?.order,
+          itemIndex,
           deps: Array.isArray(planned?.deps) ? planned.deps : [],
         });
       }
@@ -295,8 +298,25 @@ if (manifestOnly) for (const [id, planned] of plannedItems) {
       // Both of these are rules about what a batch may be SCAFFOLDED to do.
       // Published pages predate them, so in audit scope they are findings for
       // the wave to read, not gate failures.
-      if (!auditMode && target.pageKind === 'B') {
+      // B pages are LEAVES: nothing outside one may rest on its content. But an
+      // example building on an EARLIER example of its own page is ordinary and
+      // legal, and `depcheck` has always said so — its `b-leaf-content` rule
+      // reads "except within that same B page", and ARCHITECTURE.md §8 states the
+      // same exemption. This gate lacked it, so the two disagreed and the
+      // stricter one won by accident. Measured on `frontier-10`: six legitimate
+      // B-page scaffolds blocked at step 0, all same-page and all backward.
+      const sameBPage = target.page === planned.page
+        && typeof target.itemIndex === 'number' && typeof planned.itemIndex === 'number'
+        && target.itemIndex < planned.itemIndex;
+      if (!auditMode && target.pageKind === 'B' && !sameBPage) {
         error('batch-b-leaf-target', `${id} depends on B-page item ${raw} (${target.page})`, id);
+      }
+      // A same-page B edge still has to point backwards. Forward is caught by
+      // `batch-forward-dependency` only across pages, since both share an order.
+      if (!auditMode && target.pageKind === 'B' && target.page === planned.page
+          && typeof target.itemIndex === 'number' && typeof planned.itemIndex === 'number'
+          && target.itemIndex > planned.itemIndex) {
+        error('batch-b-leaf-forward', `${id} depends on ${raw}, which is LATER on the same B page ${target.page}`, id);
       }
       if (!auditMode && typeof target.order === 'number' && typeof planned.order === 'number' && target.order > planned.order) {
         error('batch-forward-dependency', `${id} depends on later item ${raw} (${target.page})`, id);

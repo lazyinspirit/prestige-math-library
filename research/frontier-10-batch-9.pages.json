@@ -9,7 +9,328 @@
     "requires": [
       "matrices-and-the-matrix-of-a-linear-map"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-elementary-row-operations-and-row-equivalence",
+        "kind": "definition",
+        "title": "Elementary row operations and row equivalence for finite matrices over a field",
+        "deps": [
+          "def-matrix-space",
+          "def-field"
+        ]
+      },
+      {
+        "id": "lem-elementary-row-operations-are-reversible",
+        "kind": "lemma",
+        "title": "Every elementary row operation has an elementary inverse, so row equivalence is an equivalence relation",
+        "strategy": "direct",
+        "deps": [
+          "def-elementary-row-operations-and-row-equivalence"
+        ]
+      },
+      {
+        "id": "def-elementary-matrix",
+        "kind": "definition",
+        "title": "Elementary matrices obtained by applying one elementary row operation to an identity matrix",
+        "deps": [
+          "def-elementary-row-operations-and-row-equivalence",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "thm-elementary-row-operations-are-left-multiplication",
+        "kind": "theorem",
+        "title": "Applying an elementary row operation is left multiplication by its elementary matrix",
+        "strategy": "direct",
+        "deps": [
+          "def-elementary-matrix",
+          "def-matrix-product-and-identity-matrix"
+        ]
+      },
+      {
+        "id": "cor-elementary-matrices-are-invertible",
+        "kind": "corollary",
+        "title": "Every elementary matrix is invertible, with inverse given by the reverse elementary operation",
+        "strategy": "direct",
+        "deps": [
+          "lem-elementary-row-operations-are-reversible",
+          "thm-elementary-row-operations-are-left-multiplication",
+          "def-invertible-matrix-and-general-linear-group"
+        ]
+      },
+      {
+        "id": "cor-a-row-reduction-is-a-product-of-elementary-matrices",
+        "kind": "corollary",
+        "title": "A finite row reduction from $A$ to $B$ is encoded by $B=E_r\\cdots E_1A$",
+        "strategy": "induction",
+        "deps": [
+          "thm-elementary-row-operations-are-left-multiplication",
+          "thm-matrix-multiplication-laws",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "def-matrix-equation-augmented-matrix-and-linear-system",
+        "kind": "definition",
+        "title": "Matrix equation $Ax=b$, its solution set, consistency, homogeneous systems and the augmented matrix $[A\\mid b]$",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "thm-row-operations-preserve-solution-sets",
+        "kind": "theorem",
+        "title": "Elementary row operations on an augmented matrix preserve exactly the solutions of its linear system",
+        "strategy": "direct",
+        "deps": [
+          "def-elementary-row-operations-and-row-equivalence",
+          "lem-elementary-row-operations-are-reversible",
+          "def-matrix-equation-augmented-matrix-and-linear-system"
+        ]
+      },
+      {
+        "id": "def-row-echelon-reduced-row-echelon-and-pivots",
+        "kind": "definition",
+        "title": "Row echelon form, reduced row echelon form, leading entries, pivots, pivot positions and pivot columns",
+        "deps": [
+          "def-matrix-space",
+          "def-field"
+        ]
+      },
+      {
+        "id": "thm-gaussian-elimination-produces-row-echelon-form",
+        "kind": "theorem",
+        "title": "Gaussian elimination reduces every finite matrix over a field to row echelon form",
+        "strategy": "constructive induction",
+        "deps": [
+          "def-elementary-row-operations-and-row-equivalence",
+          "def-row-echelon-reduced-row-echelon-and-pivots",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "thm-gauss-jordan-elimination-produces-reduced-row-echelon-form",
+        "kind": "theorem",
+        "title": "Gauss–Jordan elimination reduces every finite matrix over a field to reduced row echelon form",
+        "strategy": "constructive",
+        "deps": [
+          "thm-gaussian-elimination-produces-row-echelon-form",
+          "def-row-echelon-reduced-row-echelon-and-pivots"
+        ]
+      },
+      {
+        "id": "thm-reduced-row-echelon-form-is-unique",
+        "kind": "theorem",
+        "title": "Every finite matrix over a field is row equivalent to exactly one reduced row echelon matrix",
+        "strategy": "induction",
+        "deps": [
+          "thm-gauss-jordan-elimination-produces-reduced-row-echelon-form",
+          "thm-row-operations-preserve-solution-sets",
+          "def-row-echelon-reduced-row-echelon-and-pivots",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "def-row-space-column-space-nullspace-and-matrix-ranks",
+        "kind": "definition",
+        "title": "Row space, column space, nullspace, row rank, column rank and matrix rank",
+        "deps": [
+          "def-matrix-space",
+          "def-linear-combination-and-span",
+          "def-linear-basis",
+          "def-linear-independence",
+          "def-dimension",
+          "thm-induction-principle",
+          "def-matrix-equation-augmented-matrix-and-linear-system"
+        ]
+      },
+      {
+        "id": "lem-row-operations-preserve-row-space",
+        "kind": "lemma",
+        "title": "Row-equivalent matrices have the same row space and the same row rank",
+        "strategy": "direct",
+        "deps": [
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "lem-elementary-row-operations-are-reversible",
+          "def-elementary-row-operations-and-row-equivalence"
+        ]
+      },
+      {
+        "id": "lem-nonzero-echelon-rows-form-a-basis-of-the-row-space",
+        "kind": "lemma",
+        "title": "The nonzero rows of a row echelon form form a basis of the original row space",
+        "strategy": "direct",
+        "deps": [
+          "lem-row-operations-preserve-row-space",
+          "def-row-echelon-reduced-row-echelon-and-pivots",
+          "def-linear-basis",
+          "def-linear-independence"
+        ]
+      },
+      {
+        "id": "thm-row-equivalence-characterisations",
+        "kind": "theorem",
+        "title": "For equal-sized matrices, row equivalence, equality of row spaces and equality of reduced row echelon forms are equivalent",
+        "strategy": "direct",
+        "deps": [
+          "thm-reduced-row-echelon-form-is-unique",
+          "lem-row-operations-preserve-row-space",
+          "lem-nonzero-echelon-rows-form-a-basis-of-the-row-space"
+        ]
+      },
+      {
+        "id": "lem-row-operations-preserve-column-relations",
+        "kind": "lemma",
+        "title": "Elementary row operations preserve every linear relation among the columns and hence preserve column rank",
+        "strategy": "direct",
+        "deps": [
+          "thm-row-operations-preserve-solution-sets",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "def-linear-independence"
+        ]
+      },
+      {
+        "id": "thm-pivot-columns-form-a-basis-of-the-column-space",
+        "kind": "theorem",
+        "title": "The columns of the original matrix indexed by pivot columns form a basis of its column space",
+        "strategy": "direct",
+        "deps": [
+          "lem-row-operations-preserve-column-relations",
+          "def-row-echelon-reduced-row-echelon-and-pivots",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "def-linear-basis"
+        ]
+      },
+      {
+        "id": "thm-row-rank-equals-column-rank",
+        "kind": "theorem",
+        "title": "Row rank equals column rank, and both equal the number of pivots",
+        "strategy": "direct",
+        "deps": [
+          "lem-nonzero-echelon-rows-form-a-basis-of-the-row-space",
+          "thm-pivot-columns-form-a-basis-of-the-column-space",
+          "def-row-space-column-space-nullspace-and-matrix-ranks"
+        ]
+      },
+      {
+        "id": "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+        "kind": "corollary",
+        "title": "The rank of a matrix equals the rank of the linear map $x\\mapsto Ax$",
+        "strategy": "direct",
+        "deps": [
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "thm-row-rank-equals-column-rank",
+          "def-rank-and-nullity",
+          "thm-coordinate-action-of-a-linear-map"
+        ]
+      },
+      {
+        "id": "cor-matrix-rank-nullity",
+        "kind": "corollary",
+        "title": "For an $m\\times n$ matrix $A$, $\\operatorname{rank}(A)+\\dim N(A)=n$",
+        "strategy": "direct",
+        "deps": [
+          "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+          "thm-rank-nullity",
+          "def-row-space-column-space-nullspace-and-matrix-ranks"
+        ]
+      },
+      {
+        "id": "def-affine-subspace-of-a-vector-space",
+        "kind": "definition",
+        "title": "Affine subspaces as translates $x+U$ of linear subspaces",
+        "deps": [
+          "def-linear-subspace",
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "thm-solution-set-is-an-affine-nullspace",
+        "kind": "theorem",
+        "title": "If $Ax=b$ has one solution $x_p$, then its full solution set is the affine subspace $x_p+N(A)$",
+        "strategy": "direct",
+        "deps": [
+          "def-matrix-equation-augmented-matrix-and-linear-system",
+          "def-row-space-column-space-nullspace-and-matrix-ranks",
+          "def-affine-subspace-of-a-vector-space"
+        ]
+      },
+      {
+        "id": "thm-rref-consistency-and-free-variable-parametrisation",
+        "kind": "theorem",
+        "title": "Reduced row echelon form detects consistency and parametrises every solution by the nonpivot variables",
+        "strategy": "constructive",
+        "deps": [
+          "thm-row-operations-preserve-solution-sets",
+          "thm-reduced-row-echelon-form-is-unique",
+          "def-matrix-equation-augmented-matrix-and-linear-system",
+          "def-row-echelon-reduced-row-echelon-and-pivots"
+        ]
+      },
+      {
+        "id": "cor-rank-criterion-for-consistency",
+        "kind": "corollary",
+        "title": "The system $Ax=b$ is consistent if and only if $\\operatorname{rank}(A)=\\operatorname{rank}([A\\mid b])$",
+        "strategy": "direct",
+        "deps": [
+          "thm-rref-consistency-and-free-variable-parametrisation",
+          "thm-row-rank-equals-column-rank",
+          "def-row-space-column-space-nullspace-and-matrix-ranks"
+        ]
+      },
+      {
+        "id": "cor-solution-count-trichotomy-over-an-infinite-field",
+        "kind": "corollary",
+        "title": "Over an infinite field, a finite linear system has no solution, exactly one solution, or infinitely many solutions according to its pivots",
+        "strategy": "direct",
+        "deps": [
+          "thm-rref-consistency-and-free-variable-parametrisation",
+          "def-finite-cardinality",
+          "def-countable",
+          "def-field"
+        ]
+      },
+      {
+        "id": "thm-invertible-matrix-theorem",
+        "kind": "theorem",
+        "title": "Invertible matrix theorem: invertibility, full pivot rank, RREF $I$, trivial nullspace and unique solvability are equivalent",
+        "strategy": "equivalence chain",
+        "deps": [
+          "thm-rref-consistency-and-free-variable-parametrisation",
+          "cor-matrix-rank-nullity",
+          "cor-matrix-rank-equals-the-rank-of-its-linear-map",
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-invertible-matrices-correspond-to-linear-isomorphisms",
+          "thm-linear-kernel-image-and-injectivity"
+        ]
+      },
+      {
+        "id": "thm-invertible-matrices-factor-into-elementary-matrices",
+        "kind": "theorem",
+        "title": "Every invertible finite square real matrix is a finite product of elementary matrices",
+        "strategy": "constructive",
+        "deps": [
+          "thm-invertible-matrix-theorem",
+          "cor-a-row-reduction-is-a-product-of-elementary-matrices",
+          "cor-elementary-matrices-are-invertible",
+          "thm-reals-field"
+        ]
+      },
+      {
+        "id": "cor-inverse-by-row-reducing-an-augmented-matrix",
+        "kind": "corollary",
+        "title": "Row reducing $[A\\mid I]$ yields $[I\\mid A^{-1}]$ exactly when $A$ is invertible",
+        "strategy": "constructive",
+        "deps": [
+          "thm-invertible-matrix-theorem",
+          "thm-elementary-row-operations-are-left-multiplication",
+          "cor-a-row-reduction-is-a-product-of-elementary-matrices",
+          "def-matrix-equation-augmented-matrix-and-linear-system"
+        ]
+      }
+    ]
   },
   {
     "order": 81,
@@ -20,7 +341,90 @@
     "requires": [
       "gaussian-elimination-and-row-reduction"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-row-reduction-with-a-unique-solution",
+        "kind": "example",
+        "title": "A $3\\times3$ system row reduces to a unique solution",
+        "strategy": "calculation",
+        "deps": [
+          "thm-rref-consistency-and-free-variable-parametrisation",
+          "thm-row-operations-preserve-solution-sets"
+        ]
+      },
+      {
+        "id": "ex-inconsistent-system-detected-by-a-pivot",
+        "kind": "example",
+        "title": "A $3\\times3$ system has no solution because its augmented column contains a pivot",
+        "strategy": "calculation",
+        "deps": [
+          "thm-rref-consistency-and-free-variable-parametrisation",
+          "cor-rank-criterion-for-consistency"
+        ]
+      },
+      {
+        "id": "ex-infinite-solution-affine-parametrisation",
+        "kind": "example",
+        "title": "A consistent underdetermined system has an affine two-parameter solution set",
+        "strategy": "calculation",
+        "deps": [
+          "thm-rref-consistency-and-free-variable-parametrisation",
+          "thm-solution-set-is-an-affine-nullspace",
+          "thm-reals-field"
+        ]
+      },
+      {
+        "id": "ex-inverse-by-augmented-row-reduction",
+        "kind": "example",
+        "title": "A $3\\times3$ inverse computed by row reducing $[A\\mid I]$",
+        "strategy": "calculation",
+        "deps": [
+          "cor-inverse-by-row-reducing-an-augmented-matrix",
+          "thm-matrix-multiplication-laws"
+        ]
+      },
+      {
+        "id": "ex-row-echelon-form-is-not-unique-but-rref-is",
+        "kind": "example",
+        "title": "One matrix has two distinct row echelon forms but one reduced row echelon form",
+        "strategy": "calculation",
+        "deps": [
+          "thm-reduced-row-echelon-form-is-unique",
+          "def-row-echelon-reduced-row-echelon-and-pivots"
+        ]
+      },
+      {
+        "id": "ex-parameter-dependent-rank-drop",
+        "kind": "example",
+        "title": "The rank and solution behaviour of a parameterised matrix change at one exceptional parameter",
+        "strategy": "case split and calculation",
+        "deps": [
+          "thm-row-rank-equals-column-rank",
+          "thm-rref-consistency-and-free-variable-parametrisation",
+          "thm-reals-field"
+        ]
+      },
+      {
+        "id": "ex-elementary-factorisation-of-an-invertible-matrix",
+        "kind": "example",
+        "title": "An invertible $3\\times3$ real matrix factored explicitly into elementary matrices",
+        "strategy": "calculation",
+        "deps": [
+          "thm-invertible-matrices-factor-into-elementary-matrices",
+          "cor-a-row-reduction-is-a-product-of-elementary-matrices"
+        ]
+      },
+      {
+        "id": "cex-row-equivalent-matrices-can-have-different-column-spaces",
+        "kind": "counterexample",
+        "title": "Row-equivalent matrices can have different column spaces even though their column ranks agree",
+        "strategy": "explicit counterexample",
+        "deps": [
+          "lem-row-operations-preserve-column-relations",
+          "def-row-space-column-space-nullspace-and-matrix-ranks"
+        ]
+      }
+    ]
   },
   {
     "order": 82,
@@ -33,9 +437,266 @@
       "matrices-and-the-matrix-of-a-linear-map",
       "symmetric-groups-and-the-sign-homomorphism",
       "rings-subrings-and-integral-domains",
-      "finite-counting-and-binomial-coefficients"
+      "finite-counting-and-binomial-coefficients",
+      "gaussian-elimination-and-row-reduction"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-matrices-over-a-commutative-ring",
+        "kind": "definition",
+        "title": "Finite rectangular matrices over a commutative ring, their entries, rows and columns",
+        "deps": [
+          "def-commutative-ring",
+          "def-function",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "def-ring-matrix-product-identity-and-transpose",
+        "kind": "definition",
+        "title": "Entrywise ring-matrix operations, rectangular matrix products, identity matrices and transpose",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-ring-matrix-arithmetic-laws",
+        "kind": "theorem",
+        "title": "Matrix arithmetic over a commutative ring is associative, unital and distributive, and transpose reverses products",
+        "strategy": "entrywise calculation",
+        "deps": [
+          "def-ring-matrix-product-identity-and-transpose",
+          "lem-finite-sum-reindexing-and-fubini",
+          "lem-ring-elementary-consequences"
+        ]
+      },
+      {
+        "id": "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+        "kind": "definition",
+        "title": "Invertible square matrices and similarity over a commutative ring",
+        "deps": [
+          "def-ring-matrix-product-identity-and-transpose",
+          "thm-ring-matrix-arithmetic-laws",
+          "def-invertible-element",
+          "lem-inverse-unique"
+        ]
+      },
+      {
+        "id": "prop-field-and-ring-matrix-interfaces-agree",
+        "kind": "proposition",
+        "title": "For a field, the ring-matrix operations, invertibility and similarity agree exactly with the established field-matrix interface",
+        "strategy": "definitions",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-ring-matrix-product-identity-and-transpose",
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-similar-matrices",
+          "lem-field-is-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions",
+        "kind": "definition",
+        "title": "Column-multilinear, alternating, normalized and antisymmetric functions on square matrices over a commutative ring",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-function",
+          "def-commutative-ring"
+        ]
+      },
+      {
+        "id": "lem-alternating-multilinear-implies-antisymmetric",
+        "kind": "lemma",
+        "title": "Every alternating multilinear matrix function is antisymmetric under a column swap",
+        "strategy": "polarisation without division",
+        "deps": [
+          "def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions",
+          "lem-ring-elementary-consequences"
+        ]
+      },
+      {
+        "id": "lem-rigidity-of-alternating-multilinear-matrix-functions",
+        "kind": "lemma",
+        "title": "Every alternating multilinear $F$ satisfies $F(A)=F(I)\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_i a_{\\sigma(i),i}$",
+        "strategy": "multilinear expansion",
+        "deps": [
+          "def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions",
+          "lem-alternating-multilinear-implies-antisymmetric",
+          "def-inversions-inversion-number-and-sign",
+          "thm-transpositions-generate-the-symmetric-group",
+          "thm-parity-of-transposition-factorisations-is-well-defined",
+          "thm-sign-is-a-homomorphism",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-monoid-finite-product"
+        ]
+      },
+      {
+        "id": "def-determinant-of-a-square-matrix",
+        "kind": "definition",
+        "title": "For $n\\ge1$, the determinant over a commutative ring by the Leibniz formula, and $|\\det A|$ for a real matrix",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-inversions-inversion-number-and-sign",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-monoid-finite-product",
+          "thm-number-of-bijections-of-a-finite-set",
+          "def-abs-value",
+          "thm-reals-field",
+          "thm-reals-ordered-field",
+          "lem-field-is-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+        "kind": "theorem",
+        "title": "The Leibniz determinant is column-multilinear, alternating and normalized over every commutative ring",
+        "strategy": "finite-sum expansion and reindexing",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions",
+          "lem-a-transposition-reverses-inversion-sign",
+          "thm-sign-is-a-homomorphism",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "thm-determinant-is-the-unique-normalized-alternating-multilinear-function",
+        "kind": "theorem",
+        "title": "The determinant is the unique normalized alternating multilinear function on the columns",
+        "strategy": "direct",
+        "deps": [
+          "lem-rigidity-of-alternating-multilinear-matrix-functions",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized"
+        ]
+      },
+      {
+        "id": "cor-determinant-vanishes-with-a-zero-or-repeated-column",
+        "kind": "corollary",
+        "title": "A square matrix with a zero column or two equal columns has determinant zero",
+        "strategy": "direct",
+        "deps": [
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized"
+        ]
+      },
+      {
+        "id": "thm-determinant-of-transpose",
+        "kind": "theorem",
+        "title": "For every square matrix over a commutative ring, $\\det(A^{\\mathsf T})=\\det(A)$",
+        "strategy": "reindex by inverse permutations",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "def-ring-matrix-product-identity-and-transpose",
+          "thm-sign-is-a-homomorphism",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "cor-determinant-is-alternating-multilinear-in-the-rows",
+        "kind": "corollary",
+        "title": "The determinant is alternating and multilinear in the rows as well as in the columns",
+        "strategy": "transpose",
+        "deps": [
+          "thm-determinant-of-transpose",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "def-row-transformations-over-a-commutative-ring",
+        "kind": "definition",
+        "title": "Row swaps, arbitrary row scalings and row additions over a commutative ring, with reversible elementary cases distinguished",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-commutative-ring",
+          "def-elementary-row-operations-and-row-equivalence",
+          "lem-field-is-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-determinant-under-elementary-row-operations",
+        "kind": "theorem",
+        "title": "For every square matrix, including singular ones, a row swap negates the determinant, scaling a row by any scalar scales it, and row addition leaves it unchanged",
+        "strategy": "alternating multilinearity",
+        "deps": [
+          "cor-determinant-is-alternating-multilinear-in-the-rows",
+          "def-row-transformations-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+        "kind": "definition",
+        "title": "Upper triangular, lower triangular and diagonal square matrices over a commutative ring",
+        "deps": [
+          "def-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-determinant-of-a-triangular-matrix",
+        "kind": "theorem",
+        "title": "The determinant of a triangular matrix is the product of its diagonal entries",
+        "strategy": "Leibniz formula",
+        "deps": [
+          "def-triangular-and-diagonal-matrices-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix",
+          "def-inversions-inversion-number-and-sign"
+        ]
+      },
+      {
+        "id": "thm-determinant-multiplicative",
+        "kind": "theorem",
+        "title": "For same-sized finite square matrices over a commutative ring, $\\det(AB)=\\det(A)\\det(B)$",
+        "strategy": "rigidity",
+        "deps": [
+          "thm-determinant-is-the-unique-normalized-alternating-multilinear-function",
+          "lem-rigidity-of-alternating-multilinear-matrix-functions",
+          "thm-ring-matrix-arithmetic-laws",
+          "def-determinant-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "cor-invertible-matrix-has-unit-determinant",
+        "kind": "corollary",
+        "title": "An invertible square matrix over a commutative ring has unit determinant",
+        "strategy": "direct",
+        "deps": [
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "thm-determinant-multiplicative",
+          "lem-ring-units-form-a-group",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "cor-determinant-of-an-inverse",
+        "kind": "corollary",
+        "title": "If $A$ is invertible over a commutative ring, then $\\det(A^{-1})=\\det(A)^{-1}$",
+        "strategy": "direct",
+        "deps": [
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "cor-invertible-matrix-has-unit-determinant",
+          "thm-determinant-multiplicative",
+          "lem-ring-units-form-a-group"
+        ]
+      },
+      {
+        "id": "cor-determinant-is-invariant-under-similarity",
+        "kind": "corollary",
+        "title": "Similar matrices over a commutative ring have the same determinant",
+        "strategy": "direct",
+        "deps": [
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "thm-determinant-multiplicative",
+          "cor-determinant-of-an-inverse",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      }
+    ]
   },
   {
     "order": 83,
@@ -46,6 +707,77 @@
     "requires": [
       "determinants-of-matrices-over-a-commutative-ring"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-two-by-two-determinant-formula",
+        "kind": "example",
+        "title": "The Leibniz formula gives $\\det\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}=ad-bc$",
+        "strategy": "finite calculation",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "def-inversions-inversion-number-and-sign"
+        ]
+      },
+      {
+        "id": "ex-three-by-three-leibniz-expansion",
+        "kind": "example",
+        "title": "A full $3\\times3$ Leibniz expansion lists all six permutations and their signs",
+        "strategy": "finite calculation",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "def-inversions-inversion-number-and-sign",
+          "thm-number-of-bijections-of-a-finite-set"
+        ]
+      },
+      {
+        "id": "ex-integer-determinant-two-is-invertible-over-q-not-z",
+        "kind": "example",
+        "title": "An integer matrix of determinant $2$ is invertible over $\\mathbb Q$ but not over $\\mathbb Z$",
+        "strategy": "explicit calculation",
+        "deps": [
+          "ex-two-by-two-determinant-formula",
+          "cor-invertible-matrix-has-unit-determinant",
+          "thm-rat-field",
+          "thm-int-comm-ring",
+          "lem-units-of-z"
+        ]
+      },
+      {
+        "id": "cex-antisymmetric-need-not-be-alternating-in-characteristic-two",
+        "kind": "counterexample",
+        "title": "Over $\\mathbb Z/2$, an antisymmetric bilinear form need not be alternating",
+        "strategy": "explicit counterexample",
+        "deps": [
+          "def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions",
+          "thm-z-mod-p-is-a-field",
+          "thm-integers-modulo-n-basic-algebra"
+        ]
+      },
+      {
+        "id": "cex-naive-quaternion-determinant-is-not-row-alternating",
+        "kind": "counterexample",
+        "title": "The naive quaternionic formula $ad-bc$ is not row-alternating: a matrix with equal rows can have value $2k\\ne0$",
+        "strategy": "explicit counterexample",
+        "deps": [
+          "def-quaternions",
+          "thm-quaternions-form-a-division-ring",
+          "ex-two-by-two-determinant-formula"
+        ]
+      },
+      {
+        "id": "ex-row-operations-on-a-singular-matrix-over-z-mod-six",
+        "kind": "example",
+        "title": "Row operations track determinant correctly for a singular triangular matrix over $\\mathbb Z/6$",
+        "strategy": "finite calculation",
+        "deps": [
+          "thm-determinant-under-elementary-row-operations",
+          "def-row-transformations-over-a-commutative-ring",
+          "thm-determinant-of-a-triangular-matrix",
+          "cor-invertible-matrix-has-unit-determinant",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-integers-modulo-n"
+        ]
+      }
+    ]
   }
 ]

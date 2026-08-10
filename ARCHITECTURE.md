@@ -360,7 +360,16 @@ future external fallback carries a source URL,
 exact statement, failed local route, and necessity matching a reference URL.
 In its explicit `--manifest-only` Step-0 mode it also rejects more than two A
 pages, duplicate or colliding ids, missing dependency targets, backwards
-reading-order edges, and any edge into a B/examples page. This enforces the
+reading-order edges, and any edge into a B/examples page — **except an earlier
+item on that same B page** (`batch-b-leaf-target`), with a later item on the same
+B page caught separately as `batch-b-leaf-forward`. That exemption was missing
+until 2026-08-11 and made this gate stricter than `depcheck`'s `b-leaf-content`,
+whose rule has always read "except within that same B page" and which §8 below
+documents. The two disagreed silently and the stricter one won by accident;
+measured on `frontier-10`, it blocked six legitimate B-page scaffolds at step 0,
+every one same-page and backward. An example resting on an earlier example of its
+own page is ordinary and legal; what the leaf rule forbids is anything *outside*
+a B page resting on its content. This enforces the
 owner's future-session maximum of two A/B pairs per Beta without rewriting
 historical three-pair manifests. The gate does not decide whether a literature
 source is semantically correct; it makes that exact check an explicit Alpha
