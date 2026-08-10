@@ -154,17 +154,66 @@ presentations provable here.
 | step | state |
 |---|---|
 | 0 batch | complete — one batch, one A/B pair |
-| 1 scaffold | dispatched |
-| 2 resolve deps | — |
-| 3 adjudicate | — |
-| 4 apply | — |
-| 5 author | — |
+| 1 scaffold | complete — 44 items, 37 new |
+| 2 resolve deps | complete |
+| 3 adjudicate | complete — freegroups-1-step3-decisions.md |
+| 4 apply | complete — manifest split mint-only, gate 0/0; Alpha deferred to step 6 per D7 |
+| 5 author | BLOCKED — Codex auth retired, owner must run `codex login` |
 | 6 audit | — |
 | 7 judge | — |
 | 8 adjudicate rejections | — |
 | 9 scope sweep | — |
 | 10 rundown | — (sole owner pause) |
 
+## BLOCKED at step 5 — Codex auth must be renewed by the owner
+
+Steps 0 to 4 are complete. Step 5 authoring failed after 6 seconds, exit 1, with
+`refresh_token_reused` / 401. **This is not a content failure and nothing
+mathematical is wrong.**
+
+Cause: ChatGPT-subscription auth uses a single-use refresh token. The step-1
+Beta ran 63 minutes, refreshed mid-run, and wrote the rotated token into the
+throwaway `CODEX_HOME` that `dispatch.mjs` deletes on exit. The canonical
+`/root/.codex-writable/auth.json` kept the retired token — it is still dated
+2026-07-30 — so every later Codex call 401s, including plain `codex exec`.
+`codex login status` does not detect this: it reads the file and still reports
+"Logged in using ChatGPT".
+
+Fixed forward in `ee6c08fc`: `dispatch.mjs` now copies a rotated auth record
+back to the canonical `CODEX_HOME`, and `preflight`'s `codex-auth` line is
+relabelled because presence is not validity. Neither fix can revive the token
+already retired.
+
+**Owner action required — interactive, cannot be automated:**
+
+```
+codex login
+```
+
+Lane status while blocked:
+
+| lane | model | state |
+|---|---|---|
+| Beta authoring, readers, refuters | GPT 5.6 Sol via Codex | **DOWN** |
+| second judge lane | GPT 5.6 Terra via Codex | **DOWN** |
+| Alpha | Claude Opus 5 | up |
+| first judge lane | DeepSeek V4 Pro | up |
+
 ## Next action
 
-Dispatch Beta-freegroups-1-1 on `research/freegroups-1-brief-beta-1.md`.
+After `codex login`, verify with a real call rather than `login status`:
+
+```
+node tools/preflight.mjs --judges
+```
+
+then re-dispatch step 5 unchanged:
+
+```
+node tools/dispatch.mjs --role beta \
+  --brief research/freegroups-1-brief-beta-1-authoring.md \
+  --label batch-1-author --run freegroups-1 --timeout 21600
+```
+
+No scaffold, adjudication, or gate result is invalidated by the outage; the
+step-5 brief and the mint-only manifest are unchanged on disk.
