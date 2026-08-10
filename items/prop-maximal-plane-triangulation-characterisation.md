@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-maximal-plane-and-maximally-planar-graph, lem-plane-edge-face-incidence, thm-polygonal-jordan-curve, def-graph-walk-trail-path-and-cycle]
+deps: [prop-face-boundaries-in-two-connected-plane-graphs, def-maximal-plane-and-maximally-planar-graph, lem-plane-edge-face-incidence, thm-polygonal-jordan-curve, def-graph-walk-trail-path-and-cycle]
 justified_by: []
 aliases: []
 landmark: false
@@ -24,7 +24,7 @@ pipeline_run: null
 
 ## Statement
 
-A plane graph with at least three vertices is maximal plane if and only if it is a plane triangulation ([[def-maximal-plane-and-maximally-planar-graph]]). Facial walks and cycles use [[lem-plane-edge-face-incidence]] and [[def-graph-walk-trail-path-and-cycle]].
+A **two-connected** plane graph with at least three vertices is maximal plane if and only if it is a plane triangulation ([[def-maximal-plane-and-maximally-planar-graph]]). Two-connectivity is what makes every facial boundary a cycle ([[prop-face-boundaries-in-two-connected-plane-graphs]]); [[def-plane-graph-face-and-boundary]] assumes no boundary walk is a cycle until a connectivity result proves it, and the polygonal Jordan argument below is about polygons, not about walks that may repeat a vertex. Facial walks and cycles use [[lem-plane-edge-face-incidence]] and [[def-graph-walk-trail-path-and-cycle]].
 
 ## Facts & Assumptions
 

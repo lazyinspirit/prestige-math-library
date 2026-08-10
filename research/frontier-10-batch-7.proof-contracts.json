@@ -139,7 +139,7 @@
         },
         {
           "id": "step-3-1",
-          "claim": "3.1 For fixed $A,B$, the hom-collection is the set $B^A$ from [L1]; the object class contains every ordinal and therefore is not a set, so $\\mathbf{Set}$ is locally small and large. [step 2.1, L1, L2] ∎",
+          "claim": "For fixed $A,B$ the hom-collection is the tagged set $\\{(A,B,f):f\\in B^A\\}$, a set in bijection with $B^A$; the tagging is what gives each morphism a unique codomain, since the empty function alone would otherwise be a morphism into every set. The object class contains every ordinal, so it is not a set and Set is locally small and large.",
           "step": "3.1",
           "inputs": [
             "step 2.1",
@@ -2024,7 +2024,7 @@
       "risk_review": {
         "status": "complete",
         "reviewer": "Alpha-frontier-10 (Claude Opus 5, xhigh), on the evidence of the read-only refuter named below plus the independent step-6 reader",
-        "notes": "Risk high (score 5: 7 declared dependencies; 7 cited facts). Reader: independent step-6 reader for batch 7. Refuter: refuter cluster `w2-det-cat`. Alpha disposition: Read adversarially by that refuter and by the independent step-6 reader for this batch; neither surfaced a concrete false claim, unlicensed inference, missing hypothesis, scope error or inaccurate citation against the current text. Alpha accepts the item on that evidence."
+        "notes": "Risk high (score 5: 7 declared dependencies; 7 cited facts). Reader: independent step-6 reader for batch 7. Refuter: refuter cluster `w2-det-cat`. Alpha disposition: Accepted with a nonfatal residue recorded. Step 2.1 writes q=a/b while [L1] records only the embedding and that Q is a field, not that every rational has a fraction representative. Correct and closable well within 30 seconds."
       }
     },
     "prop-zero-object-induces-zero-morphisms": {
@@ -4350,6 +4350,24 @@
             "2.1",
             "2.2"
           ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another ",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "1.2"
+          ]
         }
       ],
       "derivations": [
@@ -4363,10 +4381,11 @@
         },
         {
           "id": "step-1-2",
-          "claim": "Define $R^{(X)}$ to be the free left $R$-module with basis $(e_x)_{x\\in X}$. The assignment $e_x\\mapsto e_{f(x)}$ extends linearly to $R^{(f)}:R^{(X)}\\to R^{(Y)}$; equivalently, it sends a finitely supported coefficient family $a$ to the family $y\\mapsto\\sum_{x\\in f^{-1}(y)}a_x$. [L3]",
+          "claim": "R^(X) is constructed explicitly as the finitely supported functions X->R with pointwise operations, shown closed under them and shown to have the delta family as a basis, hence free in the sense of [L3]. The transport map sums over f^{-1}(y) intersect supp(a), a finite index set as [L4] requires, whereas f^{-1}(y) itself may be infinite.",
           "step": "1.2",
           "inputs": [
-            "L3"
+            "L3",
+            "L4"
           ]
         },
         {
@@ -4449,7 +4468,7 @@
       "risk_review": {
         "status": "complete",
         "reviewer": "Alpha-frontier-10 (Claude Opus 5, xhigh), on the evidence of the read-only refuter named below plus the independent step-6 reader",
-        "notes": "Risk high (score 5: 8 declared dependencies; 8 cited facts). Reader: independent step-6 reader for batch 7. Refuter: refuter cluster `w2-det-cat`. Alpha disposition: Read adversarially by that refuter and by the independent step-6 reader for this batch; neither surfaced a concrete false claim, unlicensed inference, missing hypothesis, scope error or inaccurate citation against the current text. Alpha accepts the item on that evidence."
+        "notes": "Risk high (score 7: 10 declared dependencies; 10 cited facts; boundary-sensitive language). Reader: independent step-6 reader for batch 7. Refuter: refuter cluster `w2-det-cat`. Alpha disposition: CONFIRMED FATAL and repaired. The free-module half asserted a functor whose object assignment was never constructed: the cited definition says only what it means for a module to have a basis. There was also a real indexing defect, since the coefficient sum ran over f^{-1}(y), which may be infinite. R^(X) is now constructed inline as the finitely supported functions X->R, shown free, and the transport sum is restricted to f^{-1}(y) intersect supp(a), which is finite. Inline construction rather than a new item because this is a B-page leaf and the A page sits at the 60-item ceiling. The free-group half was already licensed."
       }
     },
     "ex-matrix-category-equivalent-to-finite-dimensional-vector-spaces": {

@@ -26,7 +26,7 @@ pipeline_run: null
 
 ## Statement
 
-Every connected plane graph $G$ admits a polygonal plane embedding of its dual multigraph [[def-plane-dual-multigraph]] in which each dual edge crosses its corresponding primal edge exactly once and crosses no other primal or dual edge. In this reciprocal embedding, $(G^*)^*$ is isomorphic to $G$ in the sense of [[def-graph-isomorphism-and-complement]]. Face finiteness is [[lem-plane-graph-faces-are-finite-with-one-unbounded-face]], local incidence is [[lem-plane-edge-face-incidence]], and polygonal separation is [[thm-polygonal-jordan-curve]].
+Every connected plane graph $G$ admits a polygonal plane embedding of its dual multigraph [[def-plane-dual-multigraph]] in which each dual edge crosses its corresponding primal edge exactly once and crosses no other primal or dual edge. In this reciprocal embedding, if $G^*$ is itself simple — equivalently, if $G$ has no bridge and no two faces share more than one edge — then $G^*$ is a plane graph in the sense of [[def-plane-graph-face-and-boundary]] and $(G^*)^*$ is isomorphic to $G$ in the sense of [[def-graph-isomorphism-and-complement]]. The simplicity hypothesis is necessary and not a convenience: a plane graph is a finite **simple** graph here, while [[def-plane-dual-multigraph]] may produce loops and parallel edges, so the double dual is otherwise not formed at all. For $G=K_2$ the single edge is a bridge and $G^*$ is one vertex with a loop, which is not a plane graph and has no dual under these definitions. Face finiteness is [[lem-plane-graph-faces-are-finite-with-one-unbounded-face]], local incidence is [[lem-plane-edge-face-incidence]], and polygonal separation is [[thm-polygonal-jordan-curve]].
 
 ## Facts & Assumptions
 
