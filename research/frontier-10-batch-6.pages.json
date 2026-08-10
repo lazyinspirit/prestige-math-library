@@ -9,9 +9,267 @@
     "requires": [
       "graph-colouring",
       "inclusion-exclusion-and-the-pigeonhole-principle",
-      "countability-and-uncountability"
+      "countability-and-uncountability",
+      "sequences-and-limits"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-ramsey-colouring-and-arrow-notation",
+        "kind": "definition",
+        "title": "Finite colourings of $k$-element subsets, monochromatic sets, and the arrow notations $N\\to(s,t)^2$ and $N\\to(r)^k_c$",
+        "deps": [
+          "def-equinumerous",
+          "def-natural-numbers",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-two-colour-ramsey-arrow-recursion",
+        "kind": "lemma",
+        "title": "If $m\\to(s-1,t)^2$ and $n\\to(s,t-1)^2$, then $m+n\\to(s,t)^2$ for $s,t\\ge2$",
+        "strategy": "direct",
+        "deps": [
+          "def-ramsey-colouring-and-arrow-notation",
+          "thm-sum-rule",
+          "def-finite-cardinality",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "thm-finite-graph-ramsey-binomial-bound",
+        "kind": "theorem",
+        "title": "Finite graph Ramsey theorem: $\\binom{s+t-2}{s-1}\\to(s,t)^2$ for all positive $s,t$",
+        "strategy": "induction",
+        "deps": [
+          "lem-two-colour-ramsey-arrow-recursion",
+          "def-ramsey-colouring-and-arrow-notation",
+          "def-binomial-coefficient",
+          "thm-pascals-rule",
+          "thm-induction-principle",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "def-off-diagonal-ramsey-number",
+        "kind": "definition",
+        "title": "The off-diagonal Ramsey number $R(s,t)$ as the least $N$ with $N\\to(s,t)^2$, for positive $s,t$",
+        "deps": [
+          "thm-finite-graph-ramsey-binomial-bound",
+          "def-ramsey-colouring-and-arrow-notation",
+          "thm-well-ordering-principle"
+        ]
+      },
+      {
+        "id": "cor-ramsey-recursion-and-diagonal-upper-bound",
+        "kind": "corollary",
+        "title": "$R(s,t)\\le R(s-1,t)+R(s,t-1)$ for $s,t\\ge2$, and $R(k,k)\\le\\binom{2k-2}{k-1}\\le2^{2k-2}$",
+        "strategy": "direct",
+        "deps": [
+          "def-off-diagonal-ramsey-number",
+          "lem-two-colour-ramsey-arrow-recursion",
+          "thm-finite-graph-ramsey-binomial-bound",
+          "thm-binomial-theorem",
+          "def-binomial-coefficient"
+        ]
+      },
+      {
+        "id": "thm-r-three-three-equals-six",
+        "kind": "theorem",
+        "title": "The first exact Ramsey number is $R(3,3)=6$",
+        "strategy": "constructive",
+        "deps": [
+          "def-off-diagonal-ramsey-number",
+          "thm-the-strong-pigeonhole-principle",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-graph-walk-trail-path-and-cycle"
+        ]
+      },
+      {
+        "id": "thm-diagonal-ramsey-counting-lower-bound",
+        "kind": "theorem",
+        "title": "Erdős's finite counting bound $R(k,k)>2^{k/2}$ for every $k\\ge3$",
+        "strategy": "counting",
+        "deps": [
+          "def-off-diagonal-ramsey-number",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-sum-rule",
+          "thm-product-rule",
+          "def-rational-power",
+          "lem-rational-power-monotone",
+          "def-nat-power"
+        ]
+      },
+      {
+        "id": "thm-finite-ramsey-for-uniform-subsets",
+        "kind": "theorem",
+        "title": "For positive $k,c,r$ there is an $N$ such that every $c$-colouring of $[N]^k$ has a monochromatic $r$-element set",
+        "strategy": "induction",
+        "deps": [
+          "def-ramsey-colouring-and-arrow-notation",
+          "thm-finite-graph-ramsey-binomial-bound",
+          "thm-the-strong-pigeonhole-principle",
+          "thm-induction-principle",
+          "thm-cardinality-of-a-set-of-functions",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "def-uniform-ramsey-number",
+        "kind": "definition",
+        "title": "The uniform Ramsey number $R_k(r;c)$ as the least finite witness for $c$ colours on $k$-element subsets",
+        "deps": [
+          "thm-finite-ramsey-for-uniform-subsets",
+          "def-ramsey-colouring-and-arrow-notation",
+          "thm-well-ordering-principle"
+        ]
+      },
+      {
+        "id": "def-finitely-branching-tree-on-finite-sequences",
+        "kind": "definition",
+        "title": "Rooted trees of finite sequences, levels, branches, and finite branching, with ordered finite successor sets",
+        "deps": [
+          "def-finite-cardinality",
+          "def-natural-numbers",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "thm-konig-infinity-lemma-for-ordered-trees",
+        "kind": "theorem",
+        "title": "König's infinity lemma: an ordered finitely branching tree with a node at every level has an infinite branch, in ZF",
+        "strategy": "constructive",
+        "deps": [
+          "def-finitely-branching-tree-on-finite-sequences",
+          "thm-well-ordering-principle",
+          "thm-induction-principle",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "lem-infinite-pigeonhole-on-the-naturals",
+        "kind": "lemma",
+        "title": "Every finite colouring of $\\mathbb N$ has an infinite colour class, in ZF",
+        "strategy": "contradiction",
+        "deps": [
+          "def-countable",
+          "thm-the-strong-pigeonhole-principle",
+          "thm-sum-rule",
+          "def-finite-cardinality",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "thm-infinite-ramsey-on-the-naturals",
+        "kind": "theorem",
+        "title": "Infinite Ramsey theorem on $\\mathbb N$: every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF",
+        "strategy": "induction",
+        "deps": [
+          "def-ramsey-colouring-and-arrow-notation",
+          "lem-infinite-pigeonhole-on-the-naturals",
+          "thm-induction-principle",
+          "thm-recursion",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "cor-infinite-ramsey-for-dedekind-infinite-sets",
+        "kind": "corollary",
+        "title": "Infinite Ramsey holds for every set equipped with an injection from $\\mathbb N$",
+        "strategy": "direct",
+        "deps": [
+          "thm-infinite-ramsey-on-the-naturals",
+          "def-ramsey-colouring-and-arrow-notation",
+          "def-injection-surjection-bijection",
+          "def-equinumerous"
+        ]
+      },
+      {
+        "id": "cor-finite-ramsey-by-konig-compactness",
+        "kind": "corollary",
+        "title": "The finite uniform Ramsey theorem follows a second time from the infinite theorem by a finitely branching tree of bad finite colourings",
+        "strategy": "contradiction",
+        "deps": [
+          "thm-konig-infinity-lemma-for-ordered-trees",
+          "thm-infinite-ramsey-on-the-naturals",
+          "thm-finite-ramsey-for-uniform-subsets",
+          "def-ramsey-colouring-and-arrow-notation",
+          "thm-cardinality-of-a-set-of-functions"
+        ]
+      },
+      {
+        "id": "thm-canonical-ramsey-theorem-for-pairs",
+        "kind": "theorem",
+        "title": "Canonical Ramsey theorem for pairs: on an infinite subset a colouring is constant, injective, left-dependent, or right-dependent",
+        "strategy": "induction",
+        "deps": [
+          "thm-infinite-ramsey-on-the-naturals",
+          "def-ramsey-colouring-and-arrow-notation",
+          "def-injection-surjection-bijection",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "lem-colour-focussing-for-arithmetic-progressions",
+        "kind": "lemma",
+        "title": "Finite colour focussing extends equally coloured progressions to a longer monochromatic arithmetic progression",
+        "strategy": "induction",
+        "deps": [
+          "thm-the-strong-pigeonhole-principle",
+          "thm-product-rule",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-induction-principle",
+          "def-finite-cardinality",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "thm-van-der-waerden-with-monochromatic-difference",
+        "kind": "theorem",
+        "title": "Van der Waerden's theorem, strengthened so the progression and its common difference have one colour",
+        "strategy": "double induction",
+        "deps": [
+          "lem-colour-focussing-for-arithmetic-progressions",
+          "thm-the-strong-pigeonhole-principle",
+          "thm-product-rule",
+          "thm-induction-principle",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "def-van-der-waerden-number",
+        "kind": "definition",
+        "title": "The van der Waerden number $W(k,c)$ as the least interval length forcing a monochromatic $k$-term arithmetic progression",
+        "deps": [
+          "thm-van-der-waerden-with-monochromatic-difference",
+          "thm-well-ordering-principle",
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "thm-schur-monochromatic-sum",
+        "kind": "theorem",
+        "title": "Schur's theorem: every finite colouring of a sufficiently long initial interval has monochromatic $x,y,z$ with $x+y=z$",
+        "strategy": "direct",
+        "deps": [
+          "thm-finite-graph-ramsey-binomial-bound",
+          "def-ramsey-colouring-and-arrow-notation",
+          "def-natural-numbers",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "def-schur-number",
+        "kind": "definition",
+        "title": "The Schur number $S(c)$ as the largest length of a $c$-colouring with no monochromatic solution of $x+y=z$",
+        "deps": [
+          "thm-schur-monochromatic-sum",
+          "thm-well-ordering-principle",
+          "def-natural-numbers"
+        ]
+      }
+    ]
   },
   {
     "order": 218,
@@ -23,7 +281,76 @@
     "requires": [
       "ramsey-theory"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-r-three-three-both-bounds",
+        "kind": "example",
+        "title": "$R(3,3)=6$ in both directions: the six-vertex argument and the red $5$-cycle whose blue complement is another $5$-cycle",
+        "strategy": "constructive",
+        "deps": [
+          "thm-r-three-three-equals-six",
+          "thm-the-strong-pigeonhole-principle",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "ex-w-three-two-equals-nine",
+        "kind": "example",
+        "title": "$W(3,2)=9$ by an explicit colouring of $\\{0,\\ldots,7\\}$ and an exhaustive symmetry-reduced proof for $\\{0,\\ldots,8\\}$",
+        "strategy": "cases",
+        "deps": [
+          "def-van-der-waerden-number",
+          "thm-van-der-waerden-with-monochromatic-difference",
+          "def-natural-numbers",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "ex-infinite-monotone-subsequence-by-ramsey",
+        "kind": "example",
+        "title": "Infinite Ramsey for pairs gives an increasing or nonincreasing subsequence of every real sequence",
+        "strategy": "direct",
+        "deps": [
+          "thm-infinite-ramsey-on-the-naturals",
+          "def-sequence",
+          "def-real-order"
+        ]
+      },
+      {
+        "id": "ex-infinite-convex-or-concave-subsequence-by-ramsey",
+        "kind": "example",
+        "title": "Infinite Ramsey for triples gives a convex or concave subsequence of every real sequence in general position",
+        "strategy": "direct",
+        "deps": [
+          "thm-infinite-ramsey-on-the-naturals",
+          "def-sequence",
+          "def-ordered-field"
+        ]
+      },
+      {
+        "id": "fs-two-colouring-forces-an-infinite-monochromatic-progression",
+        "kind": "false-statement",
+        "title": "FALSE: every two-colouring of $\\mathbb N$ contains an infinite monochromatic arithmetic progression",
+        "strategy": "constructive",
+        "deps": [
+          "thm-van-der-waerden-with-monochromatic-difference",
+          "def-natural-numbers",
+          "def-nat-order"
+        ]
+      },
+      {
+        "id": "cex-infinite-branching-is-not-enough-for-konig",
+        "kind": "counterexample",
+        "title": "Finite strictly decreasing sequences of naturals form a tree with every finite level nonempty but no infinite branch",
+        "strategy": "descent",
+        "deps": [
+          "thm-konig-infinity-lemma-for-ordered-trees",
+          "def-finitely-branching-tree-on-finite-sequences",
+          "thm-well-ordering-principle"
+        ]
+      }
+    ]
   },
   {
     "order": 357,
@@ -38,7 +365,467 @@
       "matchings-covers-menger-and-network-flows",
       "trees-forests-and-spanning-trees"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-polygonal-arc-and-polygon",
+        "kind": "definition",
+        "title": "Polygonal arcs and polygons as non-self-intersecting finite unions of line segments in $\\mathbb R^2$",
+        "deps": [
+          "def-polygonal-path-and-polygonal-connectedness",
+          "def-injection-surjection-bijection",
+          "def-finite-cardinality",
+          "lem-metrics-on-rn"
+        ]
+      },
+      {
+        "id": "def-plane-region-and-frontier",
+        "kind": "definition",
+        "title": "Regions of the complement of a planar set and their frontiers",
+        "deps": [
+          "def-connected-component-and-quasicomponent",
+          "def-interior-closure-boundary-top",
+          "def-subspace-topology-top",
+          "lem-metrics-on-rn"
+        ]
+      },
+      {
+        "id": "lem-polygonal-ray-general-position",
+        "kind": "lemma",
+        "title": "Every point off a polygon admits a ray meeting it transversely in finitely many nonvertex points",
+        "strategy": "constructive",
+        "deps": [
+          "def-polygonal-arc-and-polygon",
+          "def-plane-region-and-frontier",
+          "lem-of-q-dense",
+          "thm-sum-rule",
+          "def-polygonal-path-and-polygonal-connectedness"
+        ]
+      },
+      {
+        "id": "lem-polygonal-crossing-parity-is-locally-constant",
+        "kind": "lemma",
+        "title": "The parity of transverse ray crossings with a polygon is locally constant on its complement",
+        "strategy": "cases",
+        "deps": [
+          "lem-polygonal-ray-general-position",
+          "def-polygonal-arc-and-polygon",
+          "def-plane-region-and-frontier",
+          "lem-alternating-sequence"
+        ]
+      },
+      {
+        "id": "thm-polygonal-jordan-curve",
+        "kind": "theorem",
+        "title": "Polygonal Jordan curve theorem: a polygon has exactly two complementary regions and is the frontier of each",
+        "strategy": "crossing parity",
+        "deps": [
+          "lem-polygonal-crossing-parity-is-locally-constant",
+          "lem-polygonal-ray-general-position",
+          "def-plane-region-and-frontier",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected"
+        ]
+      },
+      {
+        "id": "lem-polygonal-arc-does-not-separate-the-plane",
+        "kind": "lemma",
+        "title": "The complement of a polygonal arc in $\\mathbb R^2$ is polygonally connected",
+        "strategy": "constructive",
+        "deps": [
+          "def-polygonal-arc-and-polygon",
+          "lem-polygonal-ray-general-position",
+          "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "def-plane-region-and-frontier"
+        ]
+      },
+      {
+        "id": "def-plane-graph-face-and-boundary",
+        "kind": "definition",
+        "title": "Plane embeddings of finite simple graphs, their faces, facial boundary walks and lengths (counting a bridge twice), and planar graphs",
+        "deps": [
+          "def-polygonal-arc-and-polygon",
+          "def-plane-region-and-frontier",
+          "def-finite-simple-graph",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-plane-graph-faces-are-finite-with-one-unbounded-face",
+        "kind": "lemma",
+        "title": "A plane graph has finitely many faces and exactly one unbounded face",
+        "strategy": "induction",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "thm-polygonal-jordan-curve",
+          "lem-polygonal-arc-does-not-separate-the-plane",
+          "thm-induction-principle",
+          "def-bounded-set"
+        ]
+      },
+      {
+        "id": "lem-face-containment-under-plane-subgraphs",
+        "kind": "lemma",
+        "title": "Every face of a plane subgraph contains each face of the original graph that it meets",
+        "strategy": "direct",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "def-connected-component-and-quasicomponent",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "lem-plane-edge-face-incidence",
+        "kind": "lemma",
+        "title": "Face frontiers are unions of whole edges; a cycle edge borders two faces and a bridge borders one",
+        "strategy": "cases",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "thm-polygonal-jordan-curve",
+          "lem-polygonal-arc-does-not-separate-the-plane",
+          "lem-edge-deletion-in-a-tree",
+          "def-graph-deletion-contraction-minor-and-subdivision"
+        ]
+      },
+      {
+        "id": "prop-plane-forest-has-one-face",
+        "kind": "proposition",
+        "title": "Every plane forest has exactly one face",
+        "strategy": "induction",
+        "deps": [
+          "lem-plane-edge-face-incidence",
+          "thm-forest-edge-component-count",
+          "def-tree-forest-and-leaf",
+          "lem-nonempty-forest-has-low-degree-vertex"
+        ]
+      },
+      {
+        "id": "lem-equal-plane-face-boundaries-force-a-cycle",
+        "kind": "lemma",
+        "title": "If two distinct faces of a connected plane graph have the same boundary subgraph, then the graph is a cycle",
+        "strategy": "contradiction",
+        "deps": [
+          "lem-plane-edge-face-incidence",
+          "thm-polygonal-jordan-curve",
+          "def-connected-graph-and-connected-component",
+          "def-graph-walk-trail-path-and-cycle"
+        ]
+      },
+      {
+        "id": "prop-face-boundaries-in-two-connected-plane-graphs",
+        "kind": "proposition",
+        "title": "Every face of a two-connected plane graph is bounded by a cycle",
+        "strategy": "contradiction",
+        "deps": [
+          "lem-plane-edge-face-incidence",
+          "cor-whitney-k-connected-path-characterisation",
+          "def-vertex-and-edge-connectivity",
+          "def-graph-walk-trail-path-and-cycle"
+        ]
+      },
+      {
+        "id": "prop-face-boundaries-in-three-connected-plane-graphs",
+        "kind": "proposition",
+        "title": "In a three-connected plane graph, face boundaries are exactly the induced cycles whose deletion leaves the graph connected",
+        "strategy": "direct",
+        "deps": [
+          "prop-face-boundaries-in-two-connected-plane-graphs",
+          "cor-whitney-k-connected-path-characterisation",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-graph-deletion-contraction-minor-and-subdivision"
+        ]
+      },
+      {
+        "id": "def-maximal-plane-and-maximally-planar-graph",
+        "kind": "definition",
+        "title": "Maximal plane graphs, plane triangulations, and maximally planar abstract graphs",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "def-graph-deletion-contraction-minor-and-subdivision",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "prop-maximal-plane-triangulation-characterisation",
+        "kind": "proposition",
+        "title": "A plane graph of order at least three is maximal exactly when every face is triangular",
+        "strategy": "contradiction",
+        "deps": [
+          "def-maximal-plane-and-maximally-planar-graph",
+          "lem-plane-edge-face-incidence",
+          "thm-polygonal-jordan-curve",
+          "def-graph-walk-trail-path-and-cycle"
+        ]
+      },
+      {
+        "id": "thm-euler-formula-for-connected-plane-graphs",
+        "kind": "theorem",
+        "title": "Euler's formula $|V|-|E|+|F|=2$ for every connected plane graph",
+        "strategy": "induction",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "lem-plane-edge-face-incidence",
+          "prop-plane-forest-has-one-face",
+          "thm-connected-iff-has-spanning-tree",
+          "lem-edge-deletion-in-a-tree",
+          "def-graph-deletion-contraction-minor-and-subdivision",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "cor-euler-formula-for-disconnected-plane-graphs",
+        "kind": "corollary",
+        "title": "For a plane graph with $c$ components, $|V|-|E|+|F|=1+c$, including the null graph",
+        "strategy": "induction",
+        "deps": [
+          "thm-euler-formula-for-connected-plane-graphs",
+          "lem-plane-graph-faces-are-finite-with-one-unbounded-face",
+          "cor-connected-components-partition-the-vertex-set",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-plane-face-handshake-by-girth",
+        "kind": "lemma",
+        "title": "If every facial boundary walk of a connected plane graph has length at least $g$, then $g|F|\\le2|E|$",
+        "strategy": "double counting",
+        "deps": [
+          "lem-plane-edge-face-incidence",
+          "prop-face-boundaries-in-two-connected-plane-graphs",
+          "thm-double-counting",
+          "def-graph-distance-and-girth",
+          "def-sum-over-a-finite-index-set"
+        ]
+      },
+      {
+        "id": "cor-planar-simple-graph-edge-bound",
+        "kind": "corollary",
+        "title": "Every simple planar graph with $n\\ge3$ vertices has at most $3n-6$ edges, with equality for a triangulation",
+        "strategy": "direct",
+        "deps": [
+          "thm-euler-formula-for-connected-plane-graphs",
+          "lem-plane-face-handshake-by-girth",
+          "prop-maximal-plane-triangulation-characterisation",
+          "cor-connected-components-partition-the-vertex-set"
+        ]
+      },
+      {
+        "id": "cor-triangle-free-planar-edge-bound",
+        "kind": "corollary",
+        "title": "Every triangle-free simple planar graph with $n\\ge3$ vertices has at most $2n-4$ edges",
+        "strategy": "direct",
+        "deps": [
+          "thm-euler-formula-for-connected-plane-graphs",
+          "lem-plane-face-handshake-by-girth",
+          "def-bipartite-graph",
+          "thm-bipartite-iff-no-odd-cycle"
+        ]
+      },
+      {
+        "id": "cor-planar-graph-has-low-degree-vertex",
+        "kind": "corollary",
+        "title": "Every nonnull simple planar graph has a vertex of degree at most five",
+        "strategy": "contradiction",
+        "deps": [
+          "cor-planar-simple-graph-edge-bound",
+          "thm-handshake-lemma-for-finite-simple-graphs",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "cor-k-five-and-k-three-three-are-nonplanar",
+        "kind": "corollary",
+        "title": "$K_5$ and $K_{3,3}$ are nonplanar",
+        "strategy": "contradiction",
+        "deps": [
+          "cor-planar-simple-graph-edge-bound",
+          "cor-triangle-free-planar-edge-bound",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "cor-complete-graph-edge-count",
+          "thm-handshake-lemma-for-finite-simple-graphs"
+        ]
+      },
+      {
+        "id": "cor-planar-graphs-have-no-kuratowski-subdivision",
+        "kind": "corollary",
+        "title": "A planar graph contains no subdivision of $K_5$ or $K_{3,3}$",
+        "strategy": "contradiction",
+        "deps": [
+          "cor-k-five-and-k-three-three-are-nonplanar",
+          "def-graph-deletion-contraction-minor-and-subdivision",
+          "def-plane-graph-face-and-boundary"
+        ]
+      },
+      {
+        "id": "prop-maximally-planar-edge-characterisation",
+        "kind": "proposition",
+        "title": "For a planar graph of order at least three, maximal planarity is equivalent to having $3n-6$ edges",
+        "strategy": "direct",
+        "deps": [
+          "def-maximal-plane-and-maximally-planar-graph",
+          "prop-maximal-plane-triangulation-characterisation",
+          "cor-planar-simple-graph-edge-bound"
+        ]
+      },
+      {
+        "id": "lem-kuratowski-minors-are-topological-minors",
+        "kind": "lemma",
+        "title": "A graph has a $K_5$ or $K_{3,3}$ minor exactly when it has a subdivision of $K_5$ or $K_{3,3}$ as a subgraph",
+        "strategy": "constructive",
+        "deps": [
+          "def-graph-deletion-contraction-minor-and-subdivision",
+          "cor-whitney-k-connected-path-characterisation",
+          "thm-menger-finite-directed-and-undirected-path-forms",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "lem-three-connected-graph-has-a-contractible-edge",
+        "kind": "lemma",
+        "title": "Every three-connected simple graph with more than four vertices has an edge whose simple contraction remains three-connected",
+        "strategy": "contradiction",
+        "deps": [
+          "cor-whitney-k-connected-path-characterisation",
+          "def-vertex-and-edge-connectivity",
+          "def-graph-deletion-contraction-minor-and-subdivision",
+          "thm-menger-finite-directed-and-undirected-path-forms",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-three-connected-kuratowski-free-is-planar",
+        "kind": "lemma",
+        "title": "Every three-connected graph with no $K_5$ or $K_{3,3}$ minor is planar",
+        "strategy": "induction",
+        "deps": [
+          "lem-kuratowski-minors-are-topological-minors",
+          "lem-three-connected-graph-has-a-contractible-edge",
+          "cor-whitney-k-connected-path-characterisation",
+          "def-vertex-and-edge-connectivity",
+          "def-graph-deletion-contraction-minor-and-subdivision",
+          "thm-menger-finite-directed-and-undirected-path-forms",
+          "thm-polygonal-jordan-curve"
+        ]
+      },
+      {
+        "id": "lem-separation-augmentation-for-kuratowski-free-graphs",
+        "kind": "lemma",
+        "title": "An edge-maximal graph excluding subdivisions of $K_5$ and $K_{3,3}$ augments each proper separation without creating either obstruction",
+        "strategy": "cases",
+        "deps": [
+          "lem-kuratowski-minors-are-topological-minors",
+          "def-vertex-and-edge-connectivity",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "thm-menger-finite-directed-and-undirected-path-forms"
+        ]
+      },
+      {
+        "id": "lem-edge-maximal-kuratowski-free-is-three-connected",
+        "kind": "lemma",
+        "title": "Every edge-maximal graph of order at least four with no subdivision of $K_5$ or $K_{3,3}$ is three-connected",
+        "strategy": "contradiction",
+        "deps": [
+          "lem-separation-augmentation-for-kuratowski-free-graphs",
+          "cor-whitney-k-connected-path-characterisation",
+          "def-vertex-and-edge-connectivity",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "thm-kuratowski-wagner-planarity-characterisation",
+        "kind": "theorem",
+        "title": "Kuratowski–Wagner theorem: a finite graph is planar exactly when it has neither a $K_5$ nor a $K_{3,3}$ minor, equivalently neither subdivision",
+        "strategy": "contradiction",
+        "deps": [
+          "cor-planar-graphs-have-no-kuratowski-subdivision",
+          "lem-kuratowski-minors-are-topological-minors",
+          "lem-three-connected-kuratowski-free-is-planar",
+          "lem-edge-maximal-kuratowski-free-is-three-connected",
+          "def-graph-deletion-contraction-minor-and-subdivision"
+        ]
+      },
+      {
+        "id": "def-plane-dual-multigraph",
+        "kind": "definition",
+        "title": "The plane dual multigraph, with a vertex for each face and one crossing edge for each primal edge",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "lem-plane-edge-face-incidence",
+          "def-multigraph-loop-and-digraph"
+        ]
+      },
+      {
+        "id": "thm-plane-dual-exists-and-double-dual-recovers-primal",
+        "kind": "theorem",
+        "title": "Every connected plane graph has a plane dual, and the reciprocal embedding identifies its double dual with the original graph",
+        "strategy": "constructive",
+        "deps": [
+          "def-plane-dual-multigraph",
+          "lem-plane-graph-faces-are-finite-with-one-unbounded-face",
+          "lem-plane-edge-face-incidence",
+          "thm-polygonal-jordan-curve",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "thm-six-colour-theorem-for-planar-graphs",
+        "kind": "theorem",
+        "title": "Every planar graph has a proper vertex colouring with at most six colours",
+        "strategy": "induction",
+        "deps": [
+          "cor-planar-graph-has-low-degree-vertex",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-graph-deletion-contraction-minor-and-subdivision",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "def-kempe-chain",
+        "kind": "definition",
+        "title": "Kempe chains as connected components induced by two colour classes",
+        "deps": [
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-connected-graph-and-connected-component"
+        ]
+      },
+      {
+        "id": "lem-kempe-component-colour-swap",
+        "kind": "lemma",
+        "title": "Swapping the two colours on one Kempe component preserves a proper colouring",
+        "strategy": "cases",
+        "deps": [
+          "def-kempe-chain",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-connected-graph-and-connected-component"
+        ]
+      },
+      {
+        "id": "lem-alternating-kempe-paths-cannot-both-occur",
+        "kind": "lemma",
+        "title": "For five cyclically ordered neighbours of a plane vertex, alternating Kempe paths between the first and third and between the second and fourth cannot both occur",
+        "strategy": "separation",
+        "deps": [
+          "def-kempe-chain",
+          "thm-polygonal-jordan-curve",
+          "def-plane-graph-face-and-boundary",
+          "def-graph-walk-trail-path-and-cycle"
+        ]
+      },
+      {
+        "id": "thm-five-colour-theorem",
+        "kind": "theorem",
+        "title": "Five colour theorem: every planar graph has chromatic number at most five",
+        "strategy": "induction",
+        "deps": [
+          "cor-planar-graph-has-low-degree-vertex",
+          "def-kempe-chain",
+          "lem-kempe-component-colour-swap",
+          "lem-alternating-kempe-paths-cannot-both-occur",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-graph-deletion-contraction-minor-and-subdivision",
+          "thm-induction-principle"
+        ]
+      }
+    ]
   },
   {
     "order": 358,
@@ -50,6 +837,87 @@
     "requires": [
       "plane-graphs-euler-and-the-five-colour-theorem"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-euler-formula-on-a-tree-cycle-and-k-four",
+        "kind": "example",
+        "title": "Euler's formula checked on a plane tree, a cycle, and the four-face embedding of $K_4$",
+        "strategy": "direct",
+        "deps": [
+          "thm-euler-formula-for-connected-plane-graphs",
+          "prop-plane-forest-has-one-face",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "cex-k-four-is-planar-but-not-three-colourable",
+        "kind": "counterexample",
+        "title": "$K_4$ is planar but has chromatic number four, so the five-colour bound cannot be lowered to three",
+        "strategy": "direct",
+        "deps": [
+          "thm-five-colour-theorem",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-petersen-graph-nonplanar-by-kuratowski",
+        "kind": "example",
+        "title": "The Petersen graph is nonplanar by an explicit subdivision of $K_{3,3}$ after deleting one vertex",
+        "strategy": "constructive",
+        "deps": [
+          "thm-kuratowski-wagner-planarity-characterisation",
+          "def-petersen-graph",
+          "def-graph-deletion-contraction-minor-and-subdivision"
+        ]
+      },
+      {
+        "id": "ex-one-planar-graph-two-nonisomorphic-duals",
+        "kind": "example",
+        "title": "Two plane embeddings of one connected planar graph have nonisomorphic dual multigraphs",
+        "strategy": "constructive",
+        "deps": [
+          "def-plane-dual-multigraph",
+          "thm-plane-dual-exists-and-double-dual-recovers-primal",
+          "def-graph-isomorphism-and-complement",
+          "def-multigraph-loop-and-digraph"
+        ]
+      },
+      {
+        "id": "ex-five-colouring-by-a-kempe-swap",
+        "kind": "example",
+        "title": "A degree-five vertex is inserted into a plane graph after one explicit Kempe-chain colour swap",
+        "strategy": "constructive",
+        "deps": [
+          "thm-five-colour-theorem",
+          "def-kempe-chain",
+          "lem-kempe-component-colour-swap",
+          "lem-alternating-kempe-paths-cannot-both-occur"
+        ]
+      },
+      {
+        "id": "cex-k-three-three-satisfies-the-planar-edge-bound",
+        "kind": "counterexample",
+        "title": "$K_{3,3}$ satisfies $|E|\\le3|V|-6$ but is nonplanar, so the planar edge bound is not sufficient",
+        "strategy": "direct",
+        "deps": [
+          "cor-planar-simple-graph-edge-bound",
+          "cor-k-five-and-k-three-three-are-nonplanar",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "thm-handshake-lemma-for-finite-simple-graphs"
+        ]
+      },
+      {
+        "id": "cex-a-wild-arc-drawing-is-not-a-plane-graph",
+        "kind": "counterexample",
+        "title": "An injective nonpolygonal arc drawing is excluded by the page's finite polygonal plane-graph convention",
+        "strategy": "direct",
+        "deps": [
+          "def-plane-graph-face-and-boundary",
+          "def-polygonal-arc-and-polygon",
+          "def-path-connected"
+        ]
+      }
+    ]
   }
 ]

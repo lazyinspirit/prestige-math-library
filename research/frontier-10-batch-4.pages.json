@@ -6,10 +6,233 @@
     "category": "real-analysis",
     "title": "Bounded Variation and the Riemann–Stieltjes Integral",
     "companion": "bounded-variation-and-riemann-stieltjes-examples",
-    "requires": [
-      "properties-of-the-integral-and-the-working-ftc"
-    ],
-    "items": []
+    "requires": ["properties-of-the-integral-and-the-working-ftc"],
+    "items": [
+      {
+        "id": "def-bounded-variation-and-total-variation",
+        "kind": "definition",
+        "title": "Bounded variation and total variation on an interval",
+        "strategy": "For a partition P=(n,t), define V(f,P)=sum_{i<n}|f(t_{i+1})-f(t_i)| and define Var_[a,b](f) as the supremum of these sums when they are bounded. Prove that the set of sums is nonempty and that completeness makes the value well-defined; set singleton variation to zero.",
+        "deps": ["def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "def-bounded-set", "def-complete-ordered-field", "lem-sup-unique", "def-interval", "def-abs-value"]
+      },
+      {
+        "id": "lem-basic-properties-of-total-variation",
+        "kind": "lemma",
+        "title": "Total variation bounds increments; bounded-variation functions are bounded; zero variation means constant",
+        "strategy": "Insert x<y into a partition to obtain |f(y)-f(x)|<=Var(f). With x=a, the triangle inequality bounds f. Prove Var(f)=0 iff every increment vanishes, including the constant-function direction and singleton interval.",
+        "deps": ["def-bounded-variation-and-total-variation", "def-partition-and-refinement", "lem-finite-sum-laws", "lem-of-triangle-inequality", "def-bounded-set"]
+      },
+      {
+        "id": "lem-variation-additive-on-subintervals",
+        "kind": "lemma",
+        "title": "Total variation is additive over adjacent subintervals and decreases under restriction",
+        "strategy": "Splice partitions of [a,c] and [c,b] for one inequality. For the other, insert c into an arbitrary partition and split its sum. Take suprema only after both finite-sum estimates; include endpoint cuts and the restriction corollary.",
+        "deps": ["def-bounded-variation-and-total-variation", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "lem-sup-unique", "def-interval"]
+      },
+      {
+        "id": "def-variation-function-and-positive-negative-variation",
+        "kind": "definition",
+        "title": "Variation function and positive and negative variations",
+        "strategy": "For BV f on [a,b], set V_f(a)=0 and V_f(x)=Var_[a,x](f). Define P_f=(V_f+f-f(a))/2 and N_f=(V_f-f+f(a))/2. Leave monotonicity to the next lemma.",
+        "deps": ["def-bounded-variation-and-total-variation", "lem-variation-additive-on-subintervals", "def-interval"]
+      },
+      {
+        "id": "lem-variation-function-and-jordan-identities",
+        "kind": "lemma",
+        "title": "The positive and negative variations are nondecreasing and give the Jordan identities",
+        "strategy": "For x<y, additivity gives V_f(y)-V_f(x)=Var_[x,y](f)>=|f(y)-f(x)|. Remove the absolute value in both directions to show P_f and N_f are nondecreasing, then verify f=f(a)+P_f-N_f and V_f=P_f+N_f algebraically.",
+        "deps": ["def-variation-function-and-positive-negative-variation", "lem-variation-additive-on-subintervals", "lem-basic-properties-of-total-variation", "def-monotone-function", "def-abs-value"]
+      },
+      {
+        "id": "thm-jordan-decomposition-for-bv-functions",
+        "kind": "theorem",
+        "title": "Jordan decomposition for functions of bounded variation",
+        "strategy": "The forward implication uses f=f(a)+P_f-N_f. Conversely, if f=g-h with g,h nondecreasing, bound every variation sum by the endpoint increments of g and h. Prove the minimality of P_f,N_f among normalized decompositions so the canonical construction is characterized, not merely exhibited.",
+        "deps": ["lem-variation-function-and-jordan-identities", "def-bounded-variation-and-total-variation", "def-monotone-function", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "lem-of-triangle-inequality"]
+      },
+      {
+        "id": "cor-bv-discontinuities-are-countable-and-of-first-kind",
+        "kind": "corollary",
+        "title": "A bounded-variation function has at most countably many discontinuities, all of the first kind",
+        "strategy": "Apply the published monotone-discontinuity theorem to both functions in a Jordan decomposition. Their one-sided limits subtract, and the discontinuity set lies in the union of two countable sets. Do not claim almost-everywhere differentiability, which belongs to measure theory.",
+        "deps": ["thm-jordan-decomposition-for-bv-functions", "thm-monotone-discontinuities-are-jumps", "def-one-sided-limits", "thm-algebra-of-function-limits"]
+      },
+      {
+        "id": "lem-jumps-of-the-variation-function",
+        "kind": "lemma",
+        "title": "The jumps of a variation function equal the absolute jumps of the original function",
+        "strategy": "Use additivity and the existence of one-sided limits to identify the right and left increments of V_f with limits of variations on shrinking intervals. Prove the lower bound from the endpoint increment and the reverse bound by fixing a nearly maximizing partition and using convergence of f on the shrinking tail. Conclude that V_f is continuous wherever f is continuous.",
+        "deps": ["lem-variation-additive-on-subintervals", "lem-basic-properties-of-total-variation", "cor-bv-discontinuities-are-countable-and-of-first-kind", "def-one-sided-limits", "thm-algebra-of-function-limits", "def-continuity-real"]
+      },
+      {
+        "id": "lem-total-variation-seminorm-laws",
+        "kind": "lemma",
+        "title": "Homogeneity and subadditivity of total variation",
+        "strategy": "Prove Var(cf)=|c|Var(f) and Var(f+g)<=Var(f)+Var(g) first for each partition, then pass to suprema. Include Var(-f)=Var(f) and closure under finite linear combinations.",
+        "deps": ["def-bounded-variation-and-total-variation", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "lem-of-abs-value", "lem-of-triangle-inequality"]
+      },
+      {
+        "id": "thm-bv-functions-form-an-algebra",
+        "kind": "theorem",
+        "title": "Functions of bounded variation form an algebra",
+        "strategy": "Use f(y)g(y)-f(x)g(x)=f(y)(g(y)-g(x))+g(x)(f(y)-f(x)) and boundedness of BV functions to prove Var(fg)<=M_f Var(g)+M_g Var(f). Cite the seminorm laws for sums and scalar multiples.",
+        "deps": ["lem-total-variation-seminorm-laws", "lem-basic-properties-of-total-variation", "def-bounded-variation-and-total-variation", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "lem-of-abs-value", "lem-of-triangle-inequality"]
+      },
+      {
+        "id": "cor-bv-functions-are-riemann-integrable",
+        "kind": "corollary",
+        "title": "Every bounded-variation function on a compact interval is Riemann integrable",
+        "strategy": "Use Jordan decomposition, the published integrability of monotone functions, and linearity of the ordinary integral. Keep this result before Stieltjes notation so the two integrals are not conflated.",
+        "deps": ["thm-jordan-decomposition-for-bv-functions", "thm-monotone-implies-integrable", "thm-linearity-of-the-integral", "def-darboux-integral"]
+      },
+      {
+        "id": "def-absolutely-continuous-function",
+        "kind": "definition",
+        "title": "Absolute continuity on a compact interval",
+        "strategy": "Define absolute continuity using every finite family of pairwise nonoverlapping subintervals: small total length must force a small sum of endpoint oscillations. State the empty-family and singleton-interval cases explicitly. Use finite families because that is sufficient for the elementary theory here and avoids importing series into the definition.",
+        "deps": ["def-interval", "def-finite-sum", "lem-finite-sum-laws", "def-continuity-real", "def-abs-value"]
+      },
+      {
+        "id": "thm-c1-lipschitz-ac-bv-hierarchy",
+        "kind": "theorem",
+        "title": "$C^1$ implies Lipschitz, Lipschitz implies absolutely continuous, and absolutely continuous implies continuous and bounded variation",
+        "strategy": "Bound a continuous derivative on the compact interval and apply the mean-value estimate. Sum a Lipschitz estimate over disjoint intervals for absolute continuity. A one-interval family proves continuity; subdivide [a,b] into finitely many intervals shorter than the delta for epsilon=1 and apply the definition on each piece to bound every variation sum.",
+        "deps": ["def-absolutely-continuous-function", "def-derivative", "def-continuity-real", "cor-boundedness-theorem-r", "cor-bounded-derivative-implies-lipschitz", "def-lipschitz-holder-contraction", "lem-real-and-metric-notions-agree", "def-bounded-variation-and-total-variation", "def-partition-and-refinement", "lem-finite-sum-laws", "thm-of-archimedean"]
+      },
+      {
+        "id": "def-riemann-stieltjes-sum-and-integral",
+        "kind": "definition",
+        "title": "Riemann–Stieltjes sums, upper and lower sums, and the Riemann–Stieltjes integral",
+        "strategy": "Define tagged sums S(f,alpha;P,xi)=sum_{i<n}f(xi_i)(alpha(t_{i+1})-alpha(t_i)) and mesh-limit integrability. For nondecreasing alpha and bounded f also define upper and lower Stieltjes sums. Extend by zero on singleton intervals and sign reversal under reversed limits, matching the ordinary oriented integral.",
+        "deps": ["def-partition-and-refinement", "def-tagged-partition-and-riemann-sum", "def-finite-sum", "lem-finite-sum-laws", "def-bounded-set", "def-monotone-function", "def-interval", "def-oriented-integral"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-darboux-criterion",
+        "kind": "theorem",
+        "title": "Darboux criterion for Riemann–Stieltjes integrability with a nondecreasing integrator",
+        "strategy": "Prove that bounded f is integrable with respect to nondecreasing alpha iff for every epsilon there is a partition whose upper-minus-lower Stieltjes sum is below epsilon. Refinement monotonicity and selection of near-extremal tags give both directions. Record the weighted-oscillation form used by composition and finite-discontinuity results.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "def-complete-ordered-field", "def-bounded-set", "cor-archimedean-reciprocal"]
+      },
+      {
+        "id": "lem-riemann-stieltjes-integral-unique",
+        "kind": "lemma",
+        "title": "The Riemann–Stieltjes integral is unique",
+        "strategy": "If I and J both satisfy the mesh condition, choose one tagged uniform partition below both thresholds and apply the triangle inequality. Arbitrarily fine uniform partitions come from the Archimedean property. Avoid the deprecated notation for canonical naturals.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "def-partition-and-refinement", "cor-archimedean-reciprocal", "def-canonical-natural", "lem-of-triangle-inequality", "lem-of-abs-value"]
+      },
+      {
+        "id": "lem-riemann-stieltjes-refinement-estimate",
+        "kind": "lemma",
+        "title": "Refinement and tag-change estimates for Stieltjes sums",
+        "strategy": "Group refined intervals inside each coarse interval and telescope alpha-increments. If f oscillates by at most omega on each coarse interval, bound the difference between sums by a universal constant times omega Var(alpha). Include the two-tag special case and zero variation.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "def-bounded-variation-and-total-variation", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "lem-of-triangle-inequality"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-existence-continuous-bv",
+        "kind": "theorem",
+        "title": "A continuous integrand is Riemann–Stieltjes integrable against every bounded-variation integrator",
+        "strategy": "Use uniform continuity and the refinement estimate to make all sufficiently fine tagged sums Cauchy. Obtain their common limit from completeness and compare arbitrary fine sums through a common refinement. Treat zero variation before dividing by a variation bound.",
+        "deps": ["lem-riemann-stieltjes-refinement-estimate", "lem-riemann-stieltjes-integral-unique", "def-riemann-stieltjes-sum-and-integral", "def-bounded-variation-and-total-variation", "thm-heine-cantor-r", "def-continuity-real", "thm-cauchy-criterion-via-lub", "def-real-limit", "def-sequence", "def-partition-and-refinement"]
+      },
+      {
+        "id": "cor-riemann-stieltjes-integral-bound",
+        "kind": "corollary",
+        "title": "The total-variation bound for a Riemann–Stieltjes integral",
+        "strategy": "From |f|<=M, bound every tagged sum by M Var(alpha), then pass to the mesh limit using preservation of order. State the bound whenever the integral exists, not only under the continuous-integrand theorem.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "def-bounded-variation-and-total-variation", "lem-riemann-stieltjes-integral-unique", "def-finite-sum", "lem-finite-sum-laws", "lem-limit-preserves-order", "lem-of-triangle-inequality", "lem-of-abs-value"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-linearity-and-additivity",
+        "kind": "theorem",
+        "title": "Linearity and interval additivity of the Riemann–Stieltjes integral",
+        "strategy": "Use exact finite-sum identities for linearity in the integrand and integrator. For a cut c, insert c and splice partitions; continuity of the integrand at c controls the one interval changed by insertion. State both restriction and gluing directions with that hypothesis, and do not assert unconditional gluing across a common jump.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "lem-riemann-stieltjes-integral-unique", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "def-continuity-real", "def-oriented-integral"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-integration-by-parts",
+        "kind": "theorem",
+        "title": "Riemann–Stieltjes integration by parts",
+        "strategy": "Apply finite summation by parts to partition increments. Match the complementary tags and show the endpoint-tag error vanishes with the mesh. Conclude that existence of either integral forces existence of the other and their sum is f(b)alpha(b)-f(a)alpha(a).",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "lem-riemann-stieltjes-integral-unique", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "lem-abel-summation-by-parts"]
+      },
+      {
+        "id": "cor-riemann-stieltjes-existence-bv-continuous",
+        "kind": "corollary",
+        "title": "A bounded-variation integrand is Riemann–Stieltjes integrable against every continuous integrator",
+        "strategy": "First integrate the continuous function alpha against the BV function f by the continuous-integrand theorem, then apply Stieltjes integration by parts. This is the symmetric elementary existence rung.",
+        "deps": ["thm-riemann-stieltjes-existence-continuous-bv", "thm-riemann-stieltjes-integration-by-parts", "def-bounded-variation-and-total-variation", "def-continuity-real"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-existence-finitely-discontinuous",
+        "kind": "theorem",
+        "title": "A bounded function with finitely many discontinuities is Stieltjes integrable against a continuous bounded-variation integrator",
+        "strategy": "Use Jordan decomposition for the integrator. The variation-function jump lemma makes both monotone components continuous. Isolate the finitely many discontinuities in intervals having arbitrarily small component increments; uniform continuity controls oscillation elsewhere. Apply the weighted Darboux criterion to each component and recombine by linearity.",
+        "deps": ["thm-riemann-stieltjes-darboux-criterion", "thm-jordan-decomposition-for-bv-functions", "lem-jumps-of-the-variation-function", "thm-riemann-stieltjes-linearity-and-additivity", "def-bounded-variation-and-total-variation", "def-continuity-real", "thm-heine-cantor-r"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-continuous-composition",
+        "kind": "theorem",
+        "title": "A continuous function of a Stieltjes-integrable function is Stieltjes integrable for a nondecreasing integrator",
+        "strategy": "For bounded f in R(alpha) with alpha nondecreasing and continuous phi on an interval containing f([a,b]), use uniform continuity of phi. Split partition intervals according to whether f oscillation is below a chosen threshold and charge the remaining alpha-increments to the weighted oscillation sum from the Darboux criterion.",
+        "deps": ["thm-riemann-stieltjes-darboux-criterion", "def-riemann-stieltjes-sum-and-integral", "thm-heine-cantor-r", "cor-boundedness-theorem-r", "def-continuity-real", "def-monotone-function", "lem-finite-sum-laws"]
+      },
+      {
+        "id": "lem-bv-functions-are-regulated",
+        "kind": "lemma",
+        "title": "Every bounded-variation function is uniformly approximable by step functions",
+        "strategy": "Use the existence of finite one-sided limits and compactness to choose a finite partition on whose open subintervals f has small oscillation. A step function sampled on those intervals then approximates f uniformly. Keep all endpoint values explicit because they matter for Stieltjes integration at jumps.",
+        "deps": ["cor-bv-discontinuities-are-countable-and-of-first-kind", "def-one-sided-limits", "def-continuity-real", "thm-heine-borel-r", "def-partition-and-refinement", "def-bounded-variation-and-total-variation"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-existence-bv-no-common-discontinuities",
+        "kind": "theorem",
+        "title": "Two bounded-variation functions with no common discontinuity are Riemann–Stieltjes integrable",
+        "strategy": "Approximate the integrand uniformly by finite step functions whose jump points are continuity points of the integrator, using the regulated lemma and the no-common-discontinuity hypothesis. Prove directly that each such step function is integrable, then use the total-variation bound to show the resulting integrals and arbitrary tagged sums are Cauchy. Record the common-jump hypothesis as sharp via the companion counterexample, not as a dependency.",
+        "deps": ["lem-bv-functions-are-regulated", "cor-bv-discontinuities-are-countable-and-of-first-kind", "thm-riemann-stieltjes-existence-finitely-discontinuous", "cor-riemann-stieltjes-integral-bound", "def-riemann-stieltjes-sum-and-integral", "def-bounded-variation-and-total-variation", "thm-cauchy-criterion-via-lub"]
+      },
+      {
+        "id": "cor-riemann-stieltjes-agrees-with-riemann",
+        "kind": "corollary",
+        "title": "The identity integrator recovers the Riemann integral",
+        "strategy": "For alpha(x)=x, every Stieltjes sum is the corresponding Riemann sum term by term. Use Darboux–Riemann agreement in both directions and include the oriented endpoint conventions.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "def-tagged-partition-and-riemann-sum", "thm-darboux-equals-riemann", "def-darboux-integral", "def-oriented-integral"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-c1-integrator-reduction",
+        "kind": "theorem",
+        "title": "A continuously differentiable integrator reduces Stieltjes integration to ordinary integration",
+        "strategy": "On each partition interval apply the mean value theorem to alpha and compare the Stieltjes sum with a Riemann sum for f alpha'. Uniform continuity of alpha' and boundedness of integrable f make the error vanish. State alpha continuous on [a,b], differentiable inside, with alpha' extending continuously to the endpoints.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "cor-riemann-stieltjes-agrees-with-riemann", "cor-mean-value-theorem", "def-derivative", "def-continuity-real", "thm-heine-cantor-r", "def-darboux-integral", "def-darboux-sums", "cor-integrability-of-absolute-values-products-and-lattice-operations", "thm-darboux-equals-riemann"]
+      },
+      {
+        "id": "thm-riemann-stieltjes-change-of-variable",
+        "kind": "theorem",
+        "title": "Change of variable for the Riemann–Stieltjes integral",
+        "strategy": "Let phi:[c,d]->[a,b] be a strictly increasing continuous bijection. Map every partition and tag through phi; the Stieltjes sums for f against alpha and for f composed with phi against alpha composed with phi are identical. Uniform continuity of phi and its inverse transfers the mesh condition in both directions.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "lem-riemann-stieltjes-integral-unique", "thm-continuous-inverse", "thm-heine-cantor-r", "def-partition-and-refinement"]
+      },
+      {
+        "id": "lem-young-partition-sum-estimate-rational",
+        "kind": "lemma",
+        "title": "Young's partition estimate for rational Hölder exponents",
+        "strategy": "For rational alpha,beta in (0,1] with alpha+beta>1, compare sums on successive dyadic refinements. Pair the inserted-point errors and bound their geometric decay by mesh^(alpha+beta-1). Sum the geometric tail to obtain a uniform Cauchy estimate. Treat zero Hölder constants and singleton intervals separately.",
+        "deps": ["def-lipschitz-holder-contraction", "def-rational-power", "lem-rational-power-laws", "lem-rational-power-monotone", "thm-geometric-series", "def-partition-and-refinement", "def-finite-sum", "lem-finite-sum-laws", "lem-of-triangle-inequality"]
+      },
+      {
+        "id": "thm-young-riemann-stieltjes-existence-rational",
+        "kind": "theorem",
+        "title": "Young's Riemann–Stieltjes existence theorem for rational Hölder exponents",
+        "strategy": "Apply the partition estimate to show dyadic sums converge and that arbitrary fine tagged sums have the same limit. State the result for rational exponents alpha,beta with alpha+beta>1 because those are the exponents the library currently defines; include integration by parts as a corollary of the general Stieltjes theorem.",
+        "deps": ["lem-young-partition-sum-estimate-rational", "def-riemann-stieltjes-sum-and-integral", "lem-riemann-stieltjes-integral-unique", "def-lipschitz-holder-contraction", "thm-cauchy-criterion-via-lub", "def-rational-power", "lem-rational-power-laws", "lem-rational-power-monotone"]
+      },
+      {
+        "id": "rem-riemann-stieltjes-conventions-and-scope",
+        "kind": "remark",
+        "title": "Conventions and proved scope for bounded variation and Stieltjes integration",
+        "strategy": "Collect the singleton and orientation conventions, the distinction between arbitrary BV and nondecreasing integrators in the Darboux criterion, the sharp common-jump obstruction, and the rational restriction on Young exponents. State that no Lebesgue–Stieltjes measure, a.e. differentiability, or real-exponent Hölder theorem is claimed here.",
+        "deps": ["def-bounded-variation-and-total-variation", "def-absolutely-continuous-function", "def-riemann-stieltjes-sum-and-integral", "thm-riemann-stieltjes-darboux-criterion", "thm-riemann-stieltjes-existence-bv-no-common-discontinuities", "thm-young-riemann-stieltjes-existence-rational"]
+      }
+    ]
   },
   {
     "order": 164,
@@ -17,10 +240,93 @@
     "kind": "B",
     "category": "real-analysis",
     "title": "Bounded Variation and the Riemann–Stieltjes Integral: Examples and Counterexamples",
-    "requires": [
-      "bounded-variation-and-riemann-stieltjes"
-    ],
-    "items": []
+    "requires": ["bounded-variation-and-riemann-stieltjes"],
+    "items": [
+      {
+        "id": "ex-absolute-value-lipschitz-not-c1",
+        "kind": "example",
+        "title": "$|x|$ is Lipschitz and absolutely continuous but not $C^1$ on $[-1,1]$",
+        "strategy": "Use ||x|-|y||<=|x-y| for the Lipschitz claim and the hierarchy theorem for absolute continuity. Compute the unequal one-sided difference quotients at zero to refute differentiability.",
+        "deps": ["thm-c1-lipschitz-ac-bv-hierarchy", "cor-of-reverse-triangle", "def-derivative", "def-abs-value"]
+      },
+      {
+        "id": "ex-square-root-ac-not-lipschitz",
+        "kind": "example",
+        "title": "$\\sqrt{x}$ is absolutely continuous but not Lipschitz on $[0,1]$",
+        "strategy": "For disjoint intervals, use sqrt(v)-sqrt(u)=(v-u)/(sqrt(v)+sqrt(u)) and split those meeting a short initial segment from those away from zero; choose the cutoff and total length to prove absolute continuity directly. Refute Lipschitz by the ratios sqrt(x)/x=1/sqrt(x) along x=1/n^2.",
+        "deps": ["def-absolutely-continuous-function", "def-lipschitz-holder-contraction", "thm-nth-roots-exist", "lem-of-square-monotone", "lem-finite-sum-laws", "thm-of-archimedean"]
+      },
+      {
+        "id": "ex-cantor-function-bv-not-absolutely-continuous",
+        "kind": "example",
+        "title": "The Cantor function is continuous and of bounded variation but not absolutely continuous",
+        "strategy": "Monotonicity gives variation one. At construction stage n, use the finitely many surviving closed intervals: their total length is (2/3)^n while the Cantor-function increment across each is 2^{-n}, so the sum of endpoint increments is one. This directly violates absolute continuity without measure theory.",
+        "deps": ["thm-cantor-function-properties", "def-bounded-variation-and-total-variation", "def-absolutely-continuous-function", "lem-geometric-sequence-null", "lem-finite-sum-laws"]
+      },
+      {
+        "id": "cex-continuous-function-of-unbounded-variation",
+        "kind": "counterexample",
+        "title": "A continuous function on $[0,1]$ can have unbounded variation",
+        "strategy": "For x>0 set f(x)=x d(1/x,Z), where distance to the nonempty set Z is 1-Lipschitz, and set f(0)=0. Establish inline that 0<=d(t,Z)<=1/2, that the distance vanishes at integers and equals 1/2 at half-integers. Continuity away from zero follows from the Lipschitz distance map and the algebra of limits, while |f(x)|<=x/2 gives continuity at zero. Alternating zeros and peaks at reciprocals of consecutive integers and half-integers give variation sums dominating a fixed multiple of harmonic partial sums, hence unbounded variation.",
+        "deps": ["def-metric-bounded-diameter", "lem-distance-to-set-is-lipschitz", "lem-real-line-is-a-metric-space", "lem-real-and-metric-notions-agree", "def-integers", "lem-integer-part", "thm-algebra-of-function-limits", "def-continuity-real", "lem-of-abs-value", "def-bounded-variation-and-total-variation", "def-partition-and-refinement", "thm-p-series-rational"]
+      },
+      {
+        "id": "ex-step-integrator-evaluates-at-the-jump",
+        "kind": "example",
+        "title": "A one-jump integrator evaluates a continuous integrand at the jump",
+        "strategy": "For a<c<b, let alpha=0 left of c and alpha=1 at and right of c. Only the partition interval containing c contributes, and its tag tends to c with the mesh, so the integral is f(c). The same convention captures a jump at b; to capture a jump at a instead set alpha(a)=0 and alpha(x)=1 for x>a. State explicitly that a constant endpoint step has zero integral rather than silently assigning it an atom.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "thm-riemann-stieltjes-existence-continuous-bv", "def-continuity-real", "def-partition-and-refinement"]
+      },
+      {
+        "id": "ex-finite-step-integrator-weighted-jump-sum",
+        "kind": "example",
+        "title": "A finite-step integrator gives a weighted sum over its jumps",
+        "strategy": "Write a finite-step integrator as a constant plus a finite linear combination of one-jump functions. For a continuous f, apply Stieltjes linearity and the one-jump computation to obtain the sum of f(c_j) times the jump at c_j. Check coincident endpoint jumps using the adopted one-sided convention rather than silently counting them twice.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "thm-riemann-stieltjes-linearity-and-additivity", "ex-step-integrator-evaluates-at-the-jump", "def-finite-sum", "lem-finite-sum-laws"]
+      },
+      {
+        "id": "ex-unbounded-integrand-stieltjes-integrable",
+        "kind": "example",
+        "title": "A Riemann–Stieltjes integrable integrand need not be bounded",
+        "strategy": "On [0,1], let alpha be the unit step at 1/2 and let f(0)=0, f(x)=1/x for x>0. Although f is unbounded near 0, every nonzero Stieltjes contribution comes from the interval containing 1/2, where f is continuous; prove directly from tagged sums that the integral is f(1/2)=2. This also explains why boundedness is an explicit hypothesis in the Darboux formulation but is not forced by a locally constant integrator.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "ex-step-integrator-evaluates-at-the-jump", "def-integer-power", "def-continuity-real", "def-bounded-set", "def-partition-and-refinement"]
+      },
+      {
+        "id": "ex-cantor-function-as-riemann-stieltjes-integrator",
+        "kind": "example",
+        "title": "The Cantor function defines a nonclassical Stieltjes integrator and $\\int_0^1 1\\,dc=1$",
+        "strategy": "Use continuity and monotonicity of the Cantor function for existence. Every tagged sum of the constant integrand telescopes to c(1)-c(0)=1. Note that the computation uses neither a derivative nor measure theory.",
+        "deps": ["thm-cantor-function-properties", "thm-riemann-stieltjes-existence-continuous-bv", "def-riemann-stieltjes-sum-and-integral", "lem-finite-sum-laws"]
+      },
+      {
+        "id": "cex-common-jump-prevents-riemann-stieltjes-integrability",
+        "kind": "counterexample",
+        "title": "A common jump can destroy Riemann–Stieltjes integrability",
+        "strategy": "Take f=alpha to be the unit step at an interior c. On arbitrarily fine partitions with c inside one interval, choose its tag on opposite sides of c; the sums are respectively zero and one. Thus no mesh limit exists despite both functions being BV.",
+        "deps": ["def-riemann-stieltjes-sum-and-integral", "def-bounded-variation-and-total-variation", "def-partition-and-refinement", "lem-riemann-stieltjes-integral-unique"]
+      },
+      {
+        "id": "ex-riemann-stieltjes-polynomial-computation",
+        "kind": "example",
+        "title": "$\\int_0^1 x\\,d(x^2)=2/3$",
+        "strategy": "Apply the continuously differentiable integrator reduction with alpha(x)=x^2, computing alpha'(x)=2x directly from the difference quotient, and reduce to the ordinary integral of 2x^2. Verify the cubic primitive directly from the difference quotient and evaluate by the working FTC.",
+        "deps": ["thm-riemann-stieltjes-c1-integrator-reduction", "def-derivative", "thm-ftc-second-part", "thm-linearity-of-the-integral", "def-integer-power"]
+      },
+      {
+        "id": "ex-riemann-stieltjes-substitution",
+        "kind": "example",
+        "title": "A nonlinear reparametrisation leaves a Stieltjes integral unchanged",
+        "strategy": "Apply Stieltjes change of variable to phi(t)=t^2 on [0,1], f(x)=x, and alpha(x)=x. The identity becomes integral_0^1 x dx = integral_0^1 t^2 d(t^2); compute the needed derivatives directly from difference quotients and verify both sides by the reduction theorem as a concrete check of the reparametrisation formula.",
+        "deps": ["thm-riemann-stieltjes-change-of-variable", "thm-riemann-stieltjes-c1-integrator-reduction", "cor-riemann-stieltjes-agrees-with-riemann", "def-derivative", "thm-ftc-second-part", "def-integer-power"]
+      },
+      {
+        "id": "ex-young-integral-beyond-bounded-variation",
+        "kind": "example",
+        "title": "Young's theorem integrates a Hölder function of unbounded variation against itself",
+        "strategy": "Let gamma=3/4, normalize the convergent widths w_n proportional to n^{-4/3} so their sum is one, and tile (0,1] by adjacent intervals of widths w_n accumulating at zero. On the n-th interval draw a symmetric triangular tent of height w_n^gamma and set f(0)=0. A same-tent/different-tent case split proves a uniform gamma-Hölder bound, while partitions through all peaks and endpoints have variation 2 sum_n w_n^gamma, a constant multiple of the divergent harmonic series. Since 2gamma>1, Young's theorem gives the integral of f against itself although f is not BV.",
+        "deps": ["thm-young-riemann-stieltjes-existence-rational", "def-lipschitz-holder-contraction", "def-rational-power", "lem-rational-power-monotone", "lem-rational-power-laws", "thm-p-series-rational", "def-series", "lem-series-tail-invariance", "lem-convergent-implies-cauchy", "def-sequence", "def-bounded-variation-and-total-variation", "def-partition-and-refinement", "lem-of-triangle-inequality"]
+      }
+    ]
   },
   {
     "order": 165,
@@ -29,10 +335,177 @@
     "category": "real-analysis",
     "title": "Improper Integrals",
     "companion": "improper-integrals-examples",
-    "requires": [
-      "properties-of-the-integral-and-the-working-ftc"
-    ],
-    "items": []
+    "requires": ["properties-of-the-integral-and-the-working-ftc"],
+    "items": [
+      {
+        "id": "def-improper-integral-at-infinity",
+        "kind": "definition",
+        "title": "Improper integrals over unbounded intervals",
+        "strategy": "For f properly integrable on every compact truncation, define the integrals over [a,infinity) and (-infinity,b] by the appropriate finite real limits. Define convergence only when that limit is finite, and keep divergence to infinity distinct from convergence.",
+        "deps": ["def-limits-at-infinity", "def-oriented-integral", "def-darboux-integral", "def-interval"]
+      },
+      {
+        "id": "def-improper-integral-at-a-finite-endpoint",
+        "kind": "definition",
+        "title": "Improper integrals at a finite singular endpoint",
+        "strategy": "Define left- and right-endpoint improper integrals by one-sided limits of proper truncations. Require proper Riemann integrability on every closed truncated interval; endpoint values themselves are irrelevant.",
+        "deps": ["def-one-sided-limits", "def-oriented-integral", "def-darboux-integral", "def-interval"]
+      },
+      {
+        "id": "def-mixed-improper-integral",
+        "kind": "definition",
+        "title": "Improper integrals with several singular ends",
+        "strategy": "Choose an interior split point and require every one-ended improper integral to converge separately; define the value as their sum. Cover an interior singularity and the whole real line. Independence of the split point is proved next, never built into the definition.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-oriented-integral", "def-interval"]
+      },
+      {
+        "id": "lem-improper-integral-splitting-and-tail-invariance",
+        "kind": "lemma",
+        "title": "Improper convergence is independent of finite truncations and split points",
+        "strategy": "Use additivity of the proper integral before taking limits. Show that moving a finite endpoint changes the value by exactly one proper integral, and compare two interior split points. Include the whole-line and interior-singularity cases.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-mixed-improper-integral", "thm-additivity-over-subintervals", "thm-algebra-of-function-limits", "def-oriented-integral"]
+      },
+      {
+        "id": "thm-linearity-of-improper-integrals",
+        "kind": "theorem",
+        "title": "Linearity of convergent improper integrals",
+        "strategy": "Apply proper-integral linearity on every truncation and pass through the finite limits. For mixed integrals, apply the one-ended result to every separately convergent piece. State no infinity-minus-infinity convention.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-mixed-improper-integral", "thm-linearity-of-the-integral", "thm-algebra-of-function-limits"]
+      },
+      {
+        "id": "thm-cauchy-criterion-for-improper-integrals",
+        "kind": "theorem",
+        "title": "Cauchy criterion for improper integrals",
+        "strategy": "At infinity, prove convergence iff every sufficiently remote proper tail integral has absolute value below epsilon. Translate between the continuous truncation parameter and an Archimedean sequence, then use completeness. Give explicit left- and right-endpoint forms and check the first permitted truncation.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "thm-additivity-over-subintervals", "thm-cauchy-criterion-via-lub", "lem-convergent-implies-cauchy", "def-real-limit", "def-sequence", "cor-archimedean-reciprocal", "thm-of-archimedean", "def-canonical-natural", "lem-of-naturals-positive"]
+      },
+      {
+        "id": "def-absolute-and-conditional-improper-convergence",
+        "kind": "definition",
+        "title": "Absolute and conditional convergence of improper integrals",
+        "strategy": "Define absolute convergence as convergence of the corresponding improper integral of |f| and conditional convergence as convergence without absolute convergence. For several singular ends, require the property separately at each end.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-mixed-improper-integral", "cor-integrability-of-absolute-values-products-and-lattice-operations", "def-abs-value"]
+      },
+      {
+        "id": "thm-nonnegative-improper-integral-bounded-primitive-criterion",
+        "kind": "theorem",
+        "title": "A nonnegative improper integral converges iff its truncated integrals are bounded",
+        "strategy": "For f>=0, monotonicity makes the truncation function nondecreasing. It converges exactly when its range is bounded above, by the least-upper-bound property; in that case the improper value is the supremum of the truncated integrals. Give both infinite- and finite-endpoint forms.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "thm-monotonicity-of-the-integral", "cor-monotone-converges-iff-bounded", "def-complete-ordered-field", "def-bounded-set", "lem-improper-integral-splitting-and-tail-invariance"]
+      },
+      {
+        "id": "thm-absolute-improper-convergence-implies-convergence",
+        "kind": "theorem",
+        "title": "Absolute convergence implies improper convergence",
+        "strategy": "Use |integral_u^v f|<=integral_u^v |f| and the improper Cauchy criterion. Pass the proper triangle inequality to the limit for |integral f|<=integral |f|. Handle mixed integrals piecewise.",
+        "deps": ["def-absolute-and-conditional-improper-convergence", "thm-cauchy-criterion-for-improper-integrals", "cor-integrability-of-absolute-values-products-and-lattice-operations", "lem-limit-preserves-order", "lem-improper-integral-splitting-and-tail-invariance"]
+      },
+      {
+        "id": "cor-improper-integral-tails-tend-to-zero",
+        "kind": "corollary",
+        "title": "Tails of a convergent improper integral tend to zero",
+        "strategy": "Split a convergent integral at the moving truncation and subtract the initial segment. Give both qualitative and epsilon forms at every type of singular end.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "lem-improper-integral-splitting-and-tail-invariance", "thm-cauchy-criterion-for-improper-integrals"]
+      },
+      {
+        "id": "thm-comparison-test-for-improper-integrals",
+        "kind": "theorem",
+        "title": "Comparison tests for improper integrals",
+        "strategy": "If 0<=f<=g eventually and the improper integral of g converges, proper monotonicity and the nonnegative bounded-primitive criterion give convergence of f. Add the absolute form |f|<=g. Tail invariance removes any finite initial interval.",
+        "deps": ["thm-nonnegative-improper-integral-bounded-primitive-criterion", "thm-absolute-improper-convergence-implies-convergence", "lem-improper-integral-splitting-and-tail-invariance", "thm-monotonicity-of-the-integral", "cor-integrability-of-absolute-values-products-and-lattice-operations"]
+      },
+      {
+        "id": "cor-limit-comparison-test-for-improper-integrals",
+        "kind": "corollary",
+        "title": "Limit comparison for positive improper integrals",
+        "strategy": "If f/g tends to a finite positive L, trap it between L/2 and 3L/2 on a tail and apply comparison in both directions. State the corresponding one-sided endpoint form. Keep the L=0 and infinite-limit cases as one-way remarks only.",
+        "deps": ["thm-comparison-test-for-improper-integrals", "def-limits-at-infinity", "def-one-sided-limits", "lem-sign-preservation-near-a-limit", "lem-of-inverse-positive"]
+      },
+      {
+        "id": "cor-improper-integral-test-for-series",
+        "kind": "corollary",
+        "title": "Integral test as an equivalence with an improper integral",
+        "strategy": "For nonnegative nonincreasing f, combine the published proper-integral test with monotone convergence of the truncation integrals. Use Archimedean bracketing to show that convergence at integer truncations is equivalent to the full real-parameter limit. Write natural numbers directly in real expressions.",
+        "deps": ["def-improper-integral-at-infinity", "thm-integral-test-for-series", "cor-monotone-converges-iff-bounded", "lem-improper-integral-splitting-and-tail-invariance", "thm-of-archimedean", "def-canonical-natural", "def-series", "lem-series-tail-invariance"]
+      },
+      {
+        "id": "lem-truncated-integrals-of-rational-powers",
+        "kind": "lemma",
+        "title": "Truncated integrals of rational powers",
+        "strategy": "For rational p>0, p!=1, choose p=m/q, derive the positive and negative integer power rules by induction, the product rule, and the reciprocal rule, and substitute x=t^q to obtain integral_A^B x^{-p} dx=(B^{1-p}-A^{1-p})/(1-p). For p=1, prove dyadic lower bounds sufficient for divergence without using logarithms.",
+        "deps": ["def-rational-power", "lem-rational-power-laws", "lem-rational-power-monotone", "thm-nth-roots-exist", "thm-algebra-of-derivatives", "thm-substitution", "cor-primitives-of-a-continuous-function", "thm-ftc-second-part", "def-integer-power", "def-canonical-natural", "def-derivative"]
+      },
+      {
+        "id": "thm-improper-p-test-rational",
+        "kind": "theorem",
+        "title": "The improper $p$-test for rational exponents",
+        "strategy": "Use the truncated formula and rational-power limits to prove integral_1^infinity x^{-p} converges iff p>1 and integral_0^1 x^{-p} converges iff p<1. Treat p=1 by dyadic blocks, p<=0 by direct boundedness near zero and comparison with one at infinity, and preserve the rational-exponent scope.",
+        "deps": ["lem-truncated-integrals-of-rational-powers", "def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "thm-comparison-test-for-improper-integrals", "def-rational-power", "lem-rational-power-monotone", "lem-rational-power-laws", "lem-geometric-sequence-null", "thm-of-archimedean"]
+      },
+      {
+        "id": "def-cauchy-principal-value",
+        "kind": "definition",
+        "title": "Cauchy principal values at a finite singularity and on the real line",
+        "strategy": "At an interior singularity remove symmetric epsilon-neighbourhoods; on the real line use symmetric [-R,R] truncations. Require proper integrability away from the singularity and state visibly that the coupled limit need not give separate improper convergence.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-one-sided-limits", "def-limits-at-infinity", "def-oriented-integral", "def-darboux-integral"]
+      },
+      {
+        "id": "thm-improper-convergence-implies-principal-value",
+        "kind": "theorem",
+        "title": "Separate improper convergence implies convergence of the principal value",
+        "strategy": "Add the two independently convergent one-sided limits at a finite singularity or split the real line at zero. An epsilon estimate shows symmetric truncations approach the same sum. State that the converse fails without depending on the later example.",
+        "deps": ["def-cauchy-principal-value", "def-mixed-improper-integral", "lem-improper-integral-splitting-and-tail-invariance", "thm-linearity-of-improper-integrals"]
+      },
+      {
+        "id": "thm-dirichlet-test-for-improper-integrals",
+        "kind": "theorem",
+        "title": "Dirichlet's test for improper integrals",
+        "strategy": "Let f have bounded primitives and let g be nonnegative, nonincreasing, and tend to zero. Apply the published second mean value theorem on each tail to bound integral_u^v fg by a constant times g(u), then invoke the improper Cauchy criterion. State the finite-endpoint analogue explicitly.",
+        "deps": ["thm-cauchy-criterion-for-improper-integrals", "thm-second-mean-value-theorem-for-integrals", "thm-additivity-over-subintervals", "def-monotone-function", "def-limits-at-infinity", "def-darboux-integral", "lem-of-triangle-inequality"]
+      },
+      {
+        "id": "cor-abel-test-for-improper-integrals",
+        "kind": "corollary",
+        "title": "Abel's test for improper integrals",
+        "strategy": "If integral f converges and g is bounded and monotone, prove g has a finite endpoint limit L from completeness. Write g=L+h, orient h so it is nonnegative decreasing to zero, apply Dirichlet to fh, and use linearity for Lf.",
+        "deps": ["thm-dirichlet-test-for-improper-integrals", "thm-linearity-of-improper-integrals", "def-improper-integral-at-infinity", "def-monotone-function", "def-limits-at-infinity", "def-complete-ordered-field", "def-bounded-set"]
+      },
+      {
+        "id": "thm-dirichlet-divergence-transfer",
+        "kind": "theorem",
+        "title": "A Dirichlet-type transfer criterion for divergence",
+        "strategy": "Suppose integral u diverges, v>0 tends to infinity, and v'/v^2 is absolutely integrable. If integral uv converged, apply Dirichlet's test to f=uv and g=1/v: the primitive of f would be bounded, g tends to zero, and g' is absolutely integrable, forcing integral u to converge. This contradiction proves divergence.",
+        "deps": ["thm-dirichlet-test-for-improper-integrals", "def-improper-integral-at-infinity", "def-absolute-and-conditional-improper-convergence", "thm-algebra-of-derivatives", "def-limits-at-infinity"]
+      },
+      {
+        "id": "thm-absolute-divergence-from-uniform-tail-mass",
+        "kind": "theorem",
+        "title": "Uniform oscillatory tail mass forces failure of absolute convergence",
+        "strategy": "Let g be nonnegative monotone with divergent improper integral, and suppose an increasing sequence x_j tends to the singular end with bounded gaps and integral_[x_j,x_{j+1}] |f|>=delta. Monotonicity compares each block of |fg| with delta times an endpoint value of g; bounded gaps and divergence of integral g force the resulting block sum to diverge.",
+        "deps": ["thm-nonnegative-improper-integral-bounded-primitive-criterion", "def-absolute-and-conditional-improper-convergence", "thm-monotonicity-of-the-integral", "thm-additivity-over-subintervals", "def-monotone-function", "def-sequence", "def-series", "lem-series-tail-invariance"]
+      },
+      {
+        "id": "thm-substitution-for-improper-integrals",
+        "kind": "theorem",
+        "title": "Change of variable in an improper integral",
+        "strategy": "Let a monotone differentiable map phi carry one half-open or open interval onto another, with phi' locally integrable and f locally integrable. Apply the proper substitution theorem on truncations and transfer the endpoint limits through monotonicity and surjectivity. Include decreasing maps through |phi'| and oriented limits; convergence or divergence is preserved, and convergent values agree.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-mixed-improper-integral", "thm-substitution", "def-monotone-function", "def-derivative", "thm-algebra-of-function-limits", "def-oriented-integral"]
+      },
+      {
+        "id": "thm-frullani-integral-proper-factor",
+        "kind": "theorem",
+        "title": "Frullani's formula with its proper integral factor",
+        "strategy": "For a,b>0 and continuous f on [0,infinity) with limit L, use proper substitutions on [epsilon,R] to rewrite the difference quotient integral as two integrals over the fixed interval between a and b. Uniform estimates send them to f(0) and L times integral_a^b dt/t. Keep this proper factor rather than invoking the later logarithm page.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-mixed-improper-integral", "thm-substitution", "thm-linearity-of-the-integral", "thm-monotonicity-of-the-integral", "def-continuity-real", "def-limits-at-infinity", "def-oriented-integral", "cor-integrability-of-absolute-values-products-and-lattice-operations"]
+      },
+      {
+        "id": "rem-improper-integral-conventions-and-scope",
+        "kind": "remark",
+        "title": "Conventions and proved scope for improper integrals",
+        "strategy": "Record separate convergence at every singular end, split-point independence, the difference between an improper integral and a principal value, and the rational restriction in the p-test. State Frullani's value using the proper integral of 1/t and make no Lebesgue-integrability or real-exponent claim.",
+        "deps": ["def-improper-integral-at-infinity", "def-improper-integral-at-a-finite-endpoint", "def-mixed-improper-integral", "def-absolute-and-conditional-improper-convergence", "def-cauchy-principal-value", "thm-improper-p-test-rational", "thm-frullani-integral-proper-factor"]
+      }
+    ]
   },
   {
     "order": 166,
@@ -40,9 +513,92 @@
     "kind": "B",
     "category": "real-analysis",
     "title": "Improper Integrals: Examples and Counterexamples",
-    "requires": [
-      "improper-integrals"
-    ],
-    "items": []
+    "requires": ["improper-integrals"],
+    "items": [
+      {
+        "id": "ex-principal-value-of-one-over-x",
+        "kind": "example",
+        "title": "$1/x$ on $[-1,1]$ has principal value $0$ but no improper integral",
+        "strategy": "Symmetric truncated integrals cancel exactly. Each one-sided integral diverges by the rational p-test at p=1, with opposite signs. This supplies the converse failure to principal-value agreement.",
+        "deps": ["def-cauchy-principal-value", "thm-improper-convergence-implies-principal-value", "thm-improper-p-test-rational", "def-oriented-integral"]
+      },
+      {
+        "id": "ex-conditionally-convergent-step-function-integral",
+        "kind": "example",
+        "title": "A step function whose improper integral is the alternating harmonic series",
+        "strategy": "On [k,k+1) give the function value epsilon_k/(k+1), where epsilon_k is the published alternating sign. Integer truncations are alternating-harmonic partial sums; the absolute integrals are harmonic partial sums. Check local Riemann integrability from finitely many jumps on each compact interval and write natural numbers directly.",
+        "deps": ["def-absolute-and-conditional-improper-convergence", "def-improper-integral-at-infinity", "lem-alternating-sequence", "thm-alternating-series-test", "thm-p-series-rational", "thm-additivity-over-subintervals", "lem-changing-a-function-at-finitely-many-points", "def-canonical-natural", "lem-of-naturals-positive"]
+      },
+      {
+        "id": "ex-convergent-positive-continuous-unbounded-integrand",
+        "kind": "example",
+        "title": "A positive continuous integrand can have finite integral while unbounded on every tail",
+        "strategy": "Add pairwise disjoint triangular spikes to (1+x)^{-2}; the k-th spike has height k and area 2^{-k-2}. Verify a bounded primitive of the baseline directly with the algebra of derivatives. Local finiteness gives continuity, the geometric series bounds total area, and the center values are unbounded. Choose explicit rational supports so no choice principle is hidden.",
+        "deps": ["def-improper-integral-at-infinity", "thm-cauchy-criterion-for-improper-integrals", "thm-additivity-over-subintervals", "thm-linearity-of-the-integral", "thm-geometric-series", "thm-algebra-of-derivatives", "cor-primitives-of-a-continuous-function", "def-canonical-natural", "lem-of-naturals-positive", "def-integer-power", "def-continuity-real"]
+      },
+      {
+        "id": "ex-one-over-square-root-improper-integral",
+        "kind": "example",
+        "title": "$\\int_0^1 x^{-1/2}\\,dx=2$",
+        "strategy": "Use the finite-endpoint rational p-test for convergence, evaluate the truncation as 2(1-sqrt(c)), and pass to c->0+. Explicitly contrast this with the undefined proper Riemann integral of the unbounded endpoint function.",
+        "deps": ["thm-improper-p-test-rational", "lem-truncated-integrals-of-rational-powers", "def-improper-integral-at-a-finite-endpoint", "def-rational-power", "thm-nth-roots-exist", "def-darboux-sums"]
+      },
+      {
+        "id": "ex-rational-p-integrals-at-both-endpoints",
+        "kind": "example",
+        "title": "The rational $p$-threshold reverses between zero and infinity",
+        "strategy": "Apply both halves of the p-test at p=2 and p=1/2. Compute the two convergent values from the truncation formula and contrast them with divergence at the opposite endpoints.",
+        "deps": ["thm-improper-p-test-rational", "lem-truncated-integrals-of-rational-powers", "ex-one-over-square-root-improper-integral"]
+      },
+      {
+        "id": "ex-frullani-rational-kernel",
+        "kind": "example",
+        "title": "A rational-kernel Frullani integral",
+        "strategy": "Apply Frullani to f(t)=1/(1+t), obtaining integral_0^infinity ((1+ax)^{-1}-(1+bx)^{-1}) dx/x = integral_a^b dt/t. Simplify the apparent singularity at zero and compare the tail with x^{-2}; do not replace the proper factor by a logarithm.",
+        "deps": ["thm-frullani-integral-proper-factor", "thm-comparison-test-for-improper-integrals", "thm-improper-p-test-rational", "thm-algebra-of-function-limits", "def-oriented-integral"]
+      },
+      {
+        "id": "ex-absolutely-convergent-rational-integral-on-the-line",
+        "kind": "example",
+        "title": "$\\int_{-\\infty}^{\\infty}(1+x^2)^{-1}\\,dx$ converges absolutely",
+        "strategy": "On |x|>=1 compare the nonnegative integrand with x^{-2}; the middle interval is a proper integral. Treat the two tails separately and do not evaluate the integral as pi, since inverse trigonometric functions occur later.",
+        "deps": ["def-mixed-improper-integral", "def-absolute-and-conditional-improper-convergence", "thm-comparison-test-for-improper-integrals", "thm-improper-p-test-rational", "cor-integrability-of-absolute-values-products-and-lattice-operations", "def-darboux-integral"]
+      },
+      {
+        "id": "ex-improper-substitution-reciprocal",
+        "kind": "example",
+        "title": "The substitution $x=1/t$ exchanges the two rational $p$-tests",
+        "strategy": "Apply the improper substitution theorem to integral_1^infinity x^{-p} dx. The transformed integral is integral_0^1 t^{p-2} dt, so the convergence condition p>1 is exactly the finite-endpoint condition for exponent 2-p<1. Check the orientation and absolute derivative explicitly.",
+        "deps": ["thm-substitution-for-improper-integrals", "thm-improper-p-test-rational", "lem-rational-power-laws", "def-rational-power", "thm-algebra-of-derivatives"]
+      },
+      {
+        "id": "cex-oscillatory-step-function-improper-integral-diverges",
+        "kind": "counterexample",
+        "title": "A bounded truncation function need not have an improper limit",
+        "strategy": "Let f(x)=(-1)^k on [k,k+1). The integral from zero to an integer N alternates between zero and one, so its truncations are bounded but have no limit. This shows exactly why the bounded-primitive criterion requires a nonnegative integrand and why a term test has no direct integral analogue.",
+        "deps": ["def-improper-integral-at-infinity", "thm-nonnegative-improper-integral-bounded-primitive-criterion", "thm-additivity-over-subintervals", "lem-alternating-sequence", "def-canonical-natural"]
+      },
+      {
+        "id": "ex-interior-square-root-singularity",
+        "kind": "example",
+        "title": "$|x-c|^{-1/2}$ has a convergent improper integral across an interior singularity",
+        "strategy": "Split at c and translate each half to a finite-endpoint square-root integral. Apply the rational p-test separately, obtaining 2sqrt(c-a)+2sqrt(b-c) on [a,b]. Keep the two one-sided limits independent as required by the mixed definition.",
+        "deps": ["def-mixed-improper-integral", "thm-improper-p-test-rational", "lem-truncated-integrals-of-rational-powers", "thm-substitution", "thm-linearity-of-the-integral", "thm-nth-roots-exist"]
+      },
+      {
+        "id": "cex-principal-value-one-over-x-squared-diverges",
+        "kind": "counterexample",
+        "title": "$1/x^2$ has no finite Cauchy principal value at zero",
+        "strategy": "Compute the two symmetric truncated integrals on [-1,-epsilon] and [epsilon,1]. Their sum is 2/epsilon-2, which is unbounded as epsilon tends to zero, so symmetry cannot rescue a nonnegative singularity.",
+        "deps": ["def-cauchy-principal-value", "lem-truncated-integrals-of-rational-powers", "def-one-sided-limits", "lem-of-inverse-positive"]
+      },
+      {
+        "id": "ex-beta-kernel-convergence-rational",
+        "kind": "example",
+        "title": "Convergence range of $x^{-p}(1+x)^{-q}$ on $(0,\\infty)$ for rational exponents",
+        "strategy": "For rational p,q, compare the kernel with x^{-p} near zero and with x^{-(p+q)} at infinity using limit comparison and rational-power laws. Conclude separate convergence exactly when p<1 and p+q>1, under the positivity conditions needed to define all powers.",
+        "deps": ["def-mixed-improper-integral", "cor-limit-comparison-test-for-improper-integrals", "thm-improper-p-test-rational", "def-rational-power", "lem-rational-power-laws", "lem-rational-power-monotone", "thm-algebra-of-function-limits"]
+      }
+    ]
   }
 ]

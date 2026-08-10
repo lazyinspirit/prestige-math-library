@@ -1,0 +1,4038 @@
+{
+  "version": 1,
+  "level": "frontier-10",
+  "scope": [
+    "thm-orbit-stabilizer",
+    "cor-orbit-stabilizer-cardinality",
+    "lem-stabilizers-in-one-orbit-are-conjugate",
+    "lem-core-is-largest-normal-subgroup-contained",
+    "thm-left-coset-action-and-its-kernel",
+    "thm-transitive-actions-are-coset-actions",
+    "cor-faithful-transitive-actions-are-core-free-coset-actions",
+    "lem-centralizers-and-normalizers-are-subgroups",
+    "thm-conjugacy-class-cardinality",
+    "thm-conjugate-subgroups-are-counted-by-the-normalizer",
+    "thm-class-equation",
+    "lem-subgroups-of-finite-p-groups-are-p-groups",
+    "thm-p-group-fixed-point-congruence",
+    "cor-p-group-action-has-a-fixed-point",
+    "thm-nontrivial-center-of-a-finite-p-group",
+    "lem-cyclic-quotient-by-center-implies-abelian",
+    "cor-groups-of-order-p-squared-are-abelian",
+    "thm-normal-subgroups-of-finite-p-groups-meet-the-center",
+    "thm-cauchys-theorem-for-finite-groups",
+    "thm-cauchy-frobenius-orbit-counting",
+    "ex-left-regular-action-is-free-and-transitive",
+    "cex-faithful-transitive-action-need-not-be-free",
+    "cex-free-action-need-not-be-transitive",
+    "ex-rotations-of-a-square-on-its-vertices",
+    "ex-nonfaithful-coset-action-of-z-six",
+    "ex-class-equation-of-s-three",
+    "ex-class-equation-of-the-dihedral-group-of-order-eight",
+    "ex-conjugate-subgroups-and-normalizers-in-s-three",
+    "ex-fixed-point-congruence-for-an-action-of-z-two",
+    "ex-two-colourings-of-a-square-up-to-dihedral-symmetry",
+    "ex-binary-necklaces-of-length-four",
+    "cex-orbit-count-is-not-set-size-divided-by-group-order"
+  ],
+  "contracts": {
+    "thm-orbit-stabilizer": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-orbit-and-stabilizer",
+          "source_section": "Definition",
+          "quote": "For a left action of $G$ on $X$ and $x\\in X$, the **orbit** of $x$ is\n\n$$G\\cdot x:=\\{g\\cdot x:g\\in G\\},$$\n\nand the **stabilizer** of $x$ is\n\n$$G_x:=\\{g\\in G:g\\cdot x=x\\}.$$\n\nThe subgroup claim implicit in the word “stabilizer” is proved in\n[[lem-stabilizer-is-a-subgroup]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-stabilizer-is-a-subgroup",
+          "source_section": "Statement",
+          "quote": "For every left action of a group $G$ on a set $X$ and every $x\\in X$, the\nstabilizer $G_x$ is a subgroup of $G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-coset",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $H\\le G$ be a subgroup ([[def-group]],\n[[def-subgroup]]). For $g\\in G$, the **left coset** and **right coset** of $H$\nrepresented by $g$ are\n\n$$gH:=\\{gh:h\\in H\\},\\qquad Hg:=\\{hg:h\\in H\\}.$$\n\nThe element $g$ is a **representative** of these cosets. The notation denotes\nsubsets of $G$; it does not assert that either subset is a subgroup.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-coset-membership-and-equality",
+          "source_section": "Statement",
+          "quote": "Let $H\\le G$ and let $a,b,x\\in G$. Then\n\n$$x\\in aH\\iff a^{-1}x\\in H,$$\n\nand\n\n$$aH=bH\\iff a^{-1}b\\in H.$$\n\nThe corresponding right-coset criterion is $Ha=Hb$ if and only if\n$ab^{-1}\\in H$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-injection-surjection-bijection",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets and let $f : A \\to B$ be a function ([[def-function]]).\n\n- $f$ is **injective** (one-to-one) if $f(x) = f(y)$ implies $x = y$, for all\n  $x, y \\in A$.\n- $f$ is **surjective** (onto) if for every $b \\in B$ there is some $x \\in A$\n  with $f(x) = b$; equivalently, the image $f[A] := \\{ f(x) : x \\in A \\}$ equals\n  $B$.\n- $f$ is **bijective** if it is both injective and surjective.\n\nFor $S \\subseteq A$ we write $f[S] = \\{ f(x) : x \\in S \\}$ for the image of $S$,\nand for $T \\subseteq B$ we write $f^{-1}[T] = \\{ x \\in A : f(x) \\in T \\}$ for the\npreimage of $T$; these are the image and preimage of a set under $f$ read as a\nrelation ([[def-image-and-preimage-under-a-relation]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Show that gG_x maps to g·x independently of the coset representative, using the coset-equality criterion and the definition of G_x.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every point of G·x has the displayed form, so the orbit map is surjective.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Equality g·x=h·x implies g^{-1}h∈G_x and hence gG_x=hG_x, so the map is injective.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-orbit-stabilizer-cardinality": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-orbit-stabilizer",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Orbit-stabiliser: $G/G_x\\to G\\cdot x$, $gG_x\\mapsto g\\cdot x$, is a well-defined bijection",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-index",
+          "source_section": "Definition",
+          "quote": "Let $H\\le G$. The **left coset set** is\n\n$$G/H:=\\{gH:g\\in G\\}.$$\n\nBy [[lem-coset-partition]], its elements are exactly the blocks of the coset\npartition of $G$. The **index** of $H$ in $G$ is\n\n$$[G:H]:=|G/H|$$\n\nwhen $G/H$ is finite, with finite cardinality as in\n[[def-finite-cardinality]]. If $G/H$ is not finite, write $[G:H]=\\infty$.\nHere $\\infty$ is a symbol, not a natural number, and no arithmetic with it is\ndefined.\n\nThe right coset set has the same finite or infinite size because\n[[lem-left-and-right-cosets-equinumerous]] gives an explicit bijection between\nthe two coset sets. Thus the index does not depend on choosing left rather than\nright cosets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-lagrange",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and $H\\le G$. Then\n\n$$|G|=[G:H]\\,|H|.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Transport finite cardinality across the orbit-stabilizer bijection to obtain |G·x|=[G:G_x].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For finite G, substitute [G:G_x]=|G·x| into Lagrange’s identity |G|=[G:G_x]|G_x|.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-stabilizers-in-one-orbit-are-conjugate": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-orbit-and-stabilizer",
+          "source_section": "Definition",
+          "quote": "For a left action of $G$ on $X$ and $x\\in X$, the **orbit** of $x$ is\n\n$$G\\cdot x:=\\{g\\cdot x:g\\in G\\},$$\n\nand the **stabilizer** of $x$ is\n\n$$G_x:=\\{g\\in G:g\\cdot x=x\\}.$$\n\nThe subgroup claim implicit in the word “stabilizer” is proved in\n[[lem-stabilizer-is-a-subgroup]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-conjugation-is-an-automorphism",
+          "source_section": "Statement",
+          "quote": "Conjugation $x\\mapsto gxg^{-1}$ is an automorphism.\n\nFor each $g\\in G$, the map $c_g:G\\to G$, $c_g(x)=gxg^{-1}$, is an\nautomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For y=g·x, rewrite h·y=y by the action law as (g^{-1}hg)·x=x.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The preceding equivalence gives h∈G_y iff h∈gG_xg^{-1}, proving equality; conjugation supplies the subgroup isomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-core-is-largest-normal-subgroup-contained": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-core-of-a-subgroup",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The core $\\operatorname{Core}_G(H)=\\bigcap_{g\\in G}gHg^{-1}$ of a subgroup",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-normal-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $N\\le G$ be a subgroup ([[def-subgroup]]). For\n$g\\in G$, write\n\n$$gNg^{-1}:=\\{gng^{-1}:n\\in N\\}.$$\n\nThe subgroup $N$ is **normal in $G$** when\n\n$$gNg^{-1}=N\\qquad\\text{for every }g\\in G.$$\n\nIn that case write $N\\mathrel{\\trianglelefteq}G$. Equivalently, every inner\nconjugation of $G$ maps $N$ onto itself. The connection with equality of the\nleft and right cosets of [[def-coset]] is proved in\n[[thm-normal-subgroup-characterisations]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-normal-subgroup-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $N\\le G$. The following conditions are equivalent:\n\n1. $N\\mathrel{\\trianglelefteq}G$ ([[def-normal-subgroup]]);\n2. $gNg^{-1}\\subseteq N$ for every $g\\in G$;\n3. $gN=Ng$ for every $g\\in G$, where these are the left and right cosets of\n   $N$ represented by $g$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-subgroup-criterion",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$ and let $H \\subseteq G$ be\nnonempty. Then $H$ is a subgroup of $G$ ([[def-subgroup]]) **if and only if**\n\n$$g h^{-1} \\in H \\qquad \\text{for all } g, h \\in H .$$\n\nMoreover, if $H \\subseteq G$ is nonempty, closed under the operation of $G$, and\nis a group under that restricted operation with some identity element $f$ and\nsome inverse $x^{\\ast}$ for each $x \\in H$, then $f = e$ and $x^{\\ast} = x^{-1}$\nfor every $x \\in H$; so $H$ is a subgroup in the sense of [[def-subgroup]], and\n\"subgroup\" and \"subset that is a group under the restricted operation\" agree.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the subgroup criterion to show the intersection of all conjugates gHg^{-1} is a subgroup, and use the g=e term to place it inside H.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conjugating the entire intersection permutes its conjugate factors, so the core is normal.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If N is normal and N≤H, then N=gNg^{-1}≤gHg^{-1} for every g, hence N lies in the core.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-left-coset-action-and-its-kernel": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-group-actions-correspond-to-homomorphisms",
+          "source_section": "Statement",
+          "quote": "For groups $G$ and a set $X$, left actions of $G$ on $X$ are in bijection with\ngroup homomorphisms $\\rho:G\\to\\operatorname{Sym}(X)$. The action attached to\n$\\rho$ is $g\\cdot x:=\\rho(g)(x)$; the homomorphism attached to an action sends\n$g$ to the permutation $x\\mapsto g\\cdot x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-coset",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $H\\le G$ be a subgroup ([[def-group]],\n[[def-subgroup]]). For $g\\in G$, the **left coset** and **right coset** of $H$\nrepresented by $g$ are\n\n$$gH:=\\{gh:h\\in H\\},\\qquad Hg:=\\{hg:h\\in H\\}.$$\n\nThe element $g$ is a **representative** of these cosets. The notation denotes\nsubsets of $G$; it does not assert that either subset is a subgroup.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-index",
+          "source_section": "Definition",
+          "quote": "Let $H\\le G$. The **left coset set** is\n\n$$G/H:=\\{gH:g\\in G\\}.$$\n\nBy [[lem-coset-partition]], its elements are exactly the blocks of the coset\npartition of $G$. The **index** of $H$ in $G$ is\n\n$$[G:H]:=|G/H|$$\n\nwhen $G/H$ is finite, with finite cardinality as in\n[[def-finite-cardinality]]. If $G/H$ is not finite, write $[G:H]=\\infty$.\nHere $\\infty$ is a symbol, not a natural number, and no arithmetic with it is\ndefined.\n\nThe right coset set has the same finite or infinite size because\n[[lem-left-and-right-cosets-equinumerous]] gives an explicit bijection between\nthe two coset sets. Thus the index does not depend on choosing left rather than\nright cosets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-coset-membership-and-equality",
+          "source_section": "Statement",
+          "quote": "Let $H\\le G$ and let $a,b,x\\in G$. Then\n\n$$x\\in aH\\iff a^{-1}x\\in H,$$\n\nand\n\n$$aH=bH\\iff a^{-1}b\\in H.$$\n\nThe corresponding right-coset criterion is $Ha=Hb$ if and only if\n$ab^{-1}\\in H$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-kernel-and-image-of-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "The kernel and image of a group homomorphism.\n\nFor a group homomorphism $f:G\\to H$, define\n\n$$\\ker f:=\\{g\\in G:f(g)=e_H\\},\\qquad\\operatorname{im}f:=\\{f(g):g\\in G\\}.$$\n\nThus $f$ is surjective exactly when $\\operatorname{im}f=H$\n([[def-injection-surjection-bijection]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-core-of-a-subgroup",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The core $\\operatorname{Core}_G(H)=\\bigcap_{g\\in G}gHg^{-1}$ of a subgroup",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "lem-core-is-largest-normal-subgroup-contained",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "$\\operatorname{Core}_G(H)$ is the largest normal subgroup of $G$ contained in $H$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Verify that g·(aH)=(ga)H is well-defined and satisfies the two action laws; show every aH is a·H and that the stabilizer of H is H.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "L8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "An element k is in the associated homomorphism’s kernel exactly when kaH=aH for every a∈G.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the coset-equality criterion to rewrite that condition as a^{-1}ka∈H for every a, equivalently k∈Core_G(H).",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-transitive-actions-are-coset-actions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-equivariant-map-of-group-actions",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "Equivariant maps and isomorphisms of group actions",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-orbit-stabilizer",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Orbit-stabiliser: $G/G_x\\to G\\cdot x$, $gG_x\\mapsto g\\cdot x$, is a well-defined bijection",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-left-coset-action-and-its-kernel",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Left multiplication on $G/H$ is transitive, has stabiliser $H$ at $H$, and has kernel $\\operatorname{Core}_G(H)$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For a chosen x, use orbit-stabilizer to obtain the bijection gG_x↦g·x from G/G_x onto G·x.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Check directly that this bijection is equivariant for the left-coset action.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Transitivity gives G·x=X, so the equivariant bijection has the asserted codomain.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-faithful-transitive-actions-are-core-free-coset-actions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-transitive-actions-are-coset-actions",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Every transitive $G$-set is equivariantly isomorphic to $G/G_x$ for any chosen point $x$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-left-coset-action-and-its-kernel",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Left multiplication on $G/H$ is transitive, has stabiliser $H$ at $H$, and has kernel $\\operatorname{Core}_G(H)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-core-of-a-subgroup",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The core $\\operatorname{Core}_G(H)=\\bigcap_{g\\in G}gHg^{-1}$ of a subgroup",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Transport a transitive action to G/G_x through the equivariant isomorphism.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The action kernel is preserved by equivariant isomorphism and the coset-action kernel is Core_G(G_x).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use the published definition of faithful to prove both directions: faithfulness is equivalent to that kernel being {e}.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Planned steps 1.1–3.1 identify a faithful kernel with the trivial core."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Planned steps 1.1–3.1 identify a trivial core with a trivial action kernel and hence faithfulness."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-centralizers-and-normalizers-are-subgroups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-conjugacy-class-and-centralizer",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The conjugacy class $\\operatorname{Cl}_G(x)$ and centralizer $C_G(x)$ of an element",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-normalizer-of-a-subgroup",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The normalizer $N_G(H)=\\{g\\in G:gHg^{-1}=H\\}$ of a subgroup",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-subgroup-criterion",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$ and let $H \\subseteq G$ be\nnonempty. Then $H$ is a subgroup of $G$ ([[def-subgroup]]) **if and only if**\n\n$$g h^{-1} \\in H \\qquad \\text{for all } g, h \\in H .$$\n\nMoreover, if $H \\subseteq G$ is nonempty, closed under the operation of $G$, and\nis a group under that restricted operation with some identity element $f$ and\nsome inverse $x^{\\ast}$ for each $x \\in H$, then $f = e$ and $x^{\\ast} = x^{-1}$\nfor every $x \\in H$; so $H$ is a subgroup in the sense of [[def-subgroup]], and\n\"subgroup\" and \"subset that is a group under the restricted operation\" agree.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For C_G(x), verify nonemptiness and closure under ab^{-1} from ax=xa and bx=xb.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For N_G(H), use conjugation to show the identity normalizes H and that ab^{-1} normalizes H whenever a and b do.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the subgroup criterion to both subsets.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-conjugacy-class-cardinality": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-orbit-stabilizer",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Orbit-stabiliser: $G/G_x\\to G\\cdot x$, $gG_x\\mapsto g\\cdot x$, is a well-defined bijection",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-orbit-stabilizer-cardinality",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Orbit-stabiliser cardinality: $|G\\cdot x|=[G:G_x]$, and for finite $G$, $|G|=|G_x|\\,|G\\cdot x|$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-conjugacy-class-and-centralizer",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The conjugacy class $\\operatorname{Cl}_G(x)$ and centralizer $C_G(x)$ of an element",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-centralizers-and-normalizers-are-subgroups",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "$C_G(x)$ and $N_G(H)$ are subgroups of $G$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-conjugation-homomorphism",
+          "source_section": "Statement",
+          "quote": "The map $g\\mapsto(x\\mapsto gxg^{-1})$ is a homomorphism $G\\to\\operatorname{Aut}(G)$ with kernel $Z(G)$ and image $\\operatorname{Inn}(G)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-group-actions-correspond-to-homomorphisms",
+          "source_section": "Statement",
+          "quote": "For groups $G$ and a set $X$, left actions of $G$ on $X$ are in bijection with\ngroup homomorphisms $\\rho:G\\to\\operatorname{Sym}(X)$. The action attached to\n$\\rho$ is $g\\cdot x:=\\rho(g)(x)$; the homomorphism attached to an action sends\n$g$ to the permutation $x\\mapsto g\\cdot x$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the conjugation homomorphism to obtain an action of G on itself; identify the orbit of x with Cl_G(x) and its stabilizer with C_G(x).",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply orbit-stabilizer to obtain the displayed coset bijection.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Transport finite cardinality to obtain the index formula whenever the conjugacy class/index is finite, in particular for finite G.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-conjugate-subgroups-are-counted-by-the-normalizer": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-orbit-stabilizer",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Orbit-stabiliser: $G/G_x\\to G\\cdot x$, $gG_x\\mapsto g\\cdot x$, is a well-defined bijection",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-orbit-stabilizer-cardinality",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Orbit-stabiliser cardinality: $|G\\cdot x|=[G:G_x]$, and for finite $G$, $|G|=|G_x|\\,|G\\cdot x|$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-normalizer-of-a-subgroup",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The normalizer $N_G(H)=\\{g\\in G:gHg^{-1}=H\\}$ of a subgroup",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-centralizers-and-normalizers-are-subgroups",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "$C_G(x)$ and $N_G(H)$ are subgroups of $G$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-conjugation-is-an-automorphism",
+          "source_section": "Statement",
+          "quote": "Conjugation $x\\mapsto gxg^{-1}$ is an automorphism.\n\nFor each $g\\in G$, the map $c_g:G\\to G$, $c_g(x)=gxg^{-1}$, is an\nautomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Conjugation sends subgroups to subgroups and defines an action on the set of subgroups of G.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Identify the orbit of H with its conjugates and its stabilizer with N_G(H).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply orbit-stabilizer and its finite-cardinality corollary.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-class-equation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-orbits-partition-the-set",
+          "source_section": "Statement",
+          "quote": "For a left action of $G$ on $X$, define $x\\sim y$ when $y=g\\cdot x$ for some\n$g\\in G$. This is an equivalence relation, its equivalence class at $x$ is\n$G\\cdot x$, and the distinct orbits partition $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-conjugacy-class-cardinality",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "$G/C_G(x)\\to\\operatorname{Cl}_G(x)$ is a bijection, so $|\\operatorname{Cl}_G(x)|=[G:C_G(x)]$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-conjugacy-class-and-centralizer",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The conjugacy class $\\operatorname{Cl}_G(x)$ and centralizer $C_G(x)$ of an element",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-center-of-a-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]). The **center of $G$** is\n\n$$Z(G):=\\{z\\in G:zg=gz\\text{ for every }g\\in G\\}.$$\n\nThus $Z(G)$ consists of the elements that commute with every element of $G$.\nIts subgroup and normality properties are proved in [[lem-center-is-normal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "1. **Two blocks.** If $A$ and $B$ are finite and **disjoint**, then $A \\cup B$ is\n   finite and $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. **A finite partition.** If $I$ is a finite set and $(A_i)_{i \\in I}$ is a\n   family of finite sets that are pairwise disjoint, then $\\bigcup_{i \\in I} A_i$\n   is finite and\n   $\\big\\lvert\\bigcup_{i \\in I} A_i\\big\\rvert = \\sum_{i \\in I}\\lvert A_i\\rvert$,\n   the sum being that of [[def-sum-over-a-finite-index-set]].\n3. **Splitting a sum along a partition of its index set.** Let $S$ be finite, let\n   $J$ be finite, and let $(S_j)_{j \\in J}$ be pairwise disjoint subsets of $S$\n   with $\\bigcup_{j \\in J} S_j = S$. Then for $a : S \\to \\mathbb{R}$ or\n   $a : S \\to \\mathbb{N}$,\n   $$\\sum_{i \\in S} a_i = \\sum_{j \\in J}\\Big(\\sum_{i \\in S_j} a_i\\Big), \\qquad \\prod_{i \\in S} a_i = \\prod_{j \\in J}\\Big(\\prod_{i \\in S_j} a_i\\Big).$$\n   In particular $\\sum_{i \\in S \\cup T} a_i = \\sum_{i \\in S} a_i + \\sum_{i \\in T} a_i$\n   for disjoint finite $S$ and $T$.\n\n**Disjointness is a hypothesis and not a formality.** It is spent at exactly one\nstep, the injectivity of the splice map, and dropping it makes clause 1 false;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Under conjugation, the orbits are conjugacy classes and they partition the finite set G.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A conjugacy class is a singleton exactly for a central element, so split off the singleton classes indexed by Z(G).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Choose one representative x_i from each remaining class and apply the finite partition sum rule.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Replace each remaining class size by [G:C_G(x_i)] to obtain the class equation.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Planned steps 2.1–4.1 allow an abelian group, when the noncentral representative list is empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Planned step 3.1 chooses representatives only from the finite nonempty conjugacy classes and also permits an empty class list."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-subgroups-of-finite-p-groups-are-p-groups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-finite-p-group",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A finite $p$-group has order $p^n$ for a prime $p$ and some $n\\in\\mathbb N$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-lagrange",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and $H\\le G$. Then\n\n$$|G|=[G:H]\\,|H|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-canonical-prime-factorisation",
+          "source_section": "Statement",
+          "quote": "Powers are the natural powers of [[def-group-power]] and finite products those of\n[[def-monoid-finite-product]], both taken in the commutative monoid\n$(\\mathbb{Z},\\cdot,1)$ of [[lem-units-of-z]]. Call $p : r \\to \\mathbb{Z}$ an\n**injective list of primes** when every $p_i$ is prime ([[def-prime]]) and\n$p_i = p_j$ forces $i = j$ ([[def-injection-surjection-bijection]]).\n\nLet $n \\in \\mathbb{Z}$ with $n \\ge 1$ and let $p : r \\to \\mathbb{Z}$ be an\ninjective list of primes such that every prime divisor of $n$ equals $p_i$ for\nsome $i < r$. Then, with $v_q$ as in [[def-p-adic-valuation]]:\n\n1. $\\displaystyle n \\;=\\; \\prod_{i<r} p_i^{\\,v_{p_i}(n)}$;\n2. $v_q(n) = 0$ for every prime $q$ that is not among $p_0,\\dots,p_{r-1}$;\n3. the exponents are determined by $n$: if $e : r \\to \\mathbb{N}$ and\n   $n = \\prod_{i<r} p_i^{\\,e_i}$, then $e_j = v_{p_j}(n)$ for every $j < r$.\n\nClause 3 needs only injectivity of the list, not the covering hypothesis.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Lagrange gives p^n=[P:H]|H| for a subgroup H≤P.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Uniqueness of prime factorization shows that no prime other than p divides |H|, so |H|=p^k for some k≤n.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Include H={e} as k=0 and conclude that every subgroup has prime-power order.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-p-group-fixed-point-congruence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-finite-p-group",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A finite $p$-group has order $p^n$ for a prime $p$ and some $n\\in\\mathbb N$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-fixed-point-sets-of-a-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The fixed-point sets $X^g$ and $X^G$ of a group action",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-orbits-partition-the-set",
+          "source_section": "Statement",
+          "quote": "For a left action of $G$ on $X$, define $x\\sim y$ when $y=g\\cdot x$ for some\n$g\\in G$. This is an equivalence relation, its equivalence class at $x$ is\n$G\\cdot x$, and the distinct orbits partition $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-orbit-stabilizer-cardinality",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Orbit-stabiliser cardinality: $|G\\cdot x|=[G:G_x]$, and for finite $G$, $|G|=|G_x|\\,|G\\cdot x|$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-subgroups-of-finite-p-groups-are-p-groups",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Every subgroup of a finite $p$-group has order a power of $p$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-sum-rule",
+          "source_section": "Statement",
+          "quote": "1. **Two blocks.** If $A$ and $B$ are finite and **disjoint**, then $A \\cup B$ is\n   finite and $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$\n   ([[def-finite-cardinality]]).\n2. **A finite partition.** If $I$ is a finite set and $(A_i)_{i \\in I}$ is a\n   family of finite sets that are pairwise disjoint, then $\\bigcup_{i \\in I} A_i$\n   is finite and\n   $\\big\\lvert\\bigcup_{i \\in I} A_i\\big\\rvert = \\sum_{i \\in I}\\lvert A_i\\rvert$,\n   the sum being that of [[def-sum-over-a-finite-index-set]].\n3. **Splitting a sum along a partition of its index set.** Let $S$ be finite, let\n   $J$ be finite, and let $(S_j)_{j \\in J}$ be pairwise disjoint subsets of $S$\n   with $\\bigcup_{j \\in J} S_j = S$. Then for $a : S \\to \\mathbb{R}$ or\n   $a : S \\to \\mathbb{N}$,\n   $$\\sum_{i \\in S} a_i = \\sum_{j \\in J}\\Big(\\sum_{i \\in S_j} a_i\\Big), \\qquad \\prod_{i \\in S} a_i = \\prod_{j \\in J}\\Big(\\prod_{i \\in S_j} a_i\\Big).$$\n   In particular $\\sum_{i \\in S \\cup T} a_i = \\sum_{i \\in S} a_i + \\sum_{i \\in T} a_i$\n   for disjoint finite $S$ and $T$.\n\n**Disjointness is a hypothesis and not a formality.** It is spent at exactly one\nstep, the injectivity of the splice map, and dropping it makes clause 1 false;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Partition X into P-orbits; singleton orbits are exactly the points fixed by all of P.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "L8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a non-singleton orbit, its stabilizer is a proper subgroup and orbit-stabilizer together with the subgroup lemma makes the orbit size a positive power of p.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the finite partition sum rule: all non-singleton orbit sizes vanish modulo p, leaving |X|≡|X^P| mod p.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Planned steps 1.1–3.1 allow X=∅ and both sides/counts are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty acted-on set has cardinality zero and the planned orbit sum is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-p-group-action-has-a-fixed-point": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-p-group-fixed-point-congruence",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If a finite $p$-group $P$ acts on a finite set $X$, then $|X|\\equiv|X^P|\\pmod p$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-fixed-point-sets-of-a-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The fixed-point sets $X^g$ and $X^G$ of a group action",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-prime",
+          "source_section": "Definition",
+          "quote": "Let $p \\in \\mathbb{Z}$ ([[def-integers]]), ordered as in [[def-int-order]], with\ndivisibility as in [[def-divides-in-z]]. Then $p$ is **prime** when\n\n$$p > 1 \\qquad \\text{and} \\qquad d \\mid p \\ \\text{ with } \\ d > 0 \\ \\text{ force } \\ d = 1 \\ \\text{ or } \\ d = p .$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume X^P is empty; then |X^P|=0.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The fixed-point congruence forces p to divide |X|, contradicting the hypothesis.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Therefore X^P is nonempty and any of its points is a global fixed point.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Planned steps 1.1–3.1 allow X=∅ and both sides/counts are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty acted-on set has cardinality zero and the planned orbit sum is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-nontrivial-center-of-a-finite-p-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-finite-p-group",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A finite $p$-group has order $p^n$ for a prime $p$ and some $n\\in\\mathbb N$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-p-group-fixed-point-congruence",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If a finite $p$-group $P$ acts on a finite set $X$, then $|X|\\equiv|X^P|\\pmod p$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-conjugation-homomorphism",
+          "source_section": "Statement",
+          "quote": "The map $g\\mapsto(x\\mapsto gxg^{-1})$ is a homomorphism $G\\to\\operatorname{Aut}(G)$ with kernel $Z(G)$ and image $\\operatorname{Inn}(G)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-group-actions-correspond-to-homomorphisms",
+          "source_section": "Statement",
+          "quote": "For groups $G$ and a set $X$, left actions of $G$ on $X$ are in bijection with\ngroup homomorphisms $\\rho:G\\to\\operatorname{Sym}(X)$. The action attached to\n$\\rho$ is $g\\cdot x:=\\rho(g)(x)$; the homomorphism attached to an action sends\n$g$ to the permutation $x\\mapsto g\\cdot x$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-center-of-a-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]). The **center of $G$** is\n\n$$Z(G):=\\{z\\in G:zg=gz\\text{ for every }g\\in G\\}.$$\n\nThus $Z(G)$ consists of the elements that commute with every element of $G$.\nIts subgroup and normality properties are proved in [[lem-center-is-normal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let P act on itself by conjugation; the global fixed-point set is exactly Z(P).",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the fixed-point congruence to get |P|≡|Z(P)| mod p.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since nontriviality makes |P| a positive power of p, p divides |Z(P)|; as Z(P) contains e, it therefore contains a nonidentity element.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-cyclic-quotient-by-center-implies-abelian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-center-of-a-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]). The **center of $G$** is\n\n$$Z(G):=\\{z\\in G:zg=gz\\text{ for every }g\\in G\\}.$$\n\nThus $Z(G)$ consists of the elements that commute with every element of $G$.\nIts subgroup and normality properties are proved in [[lem-center-is-normal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-center-is-normal",
+          "source_section": "Statement",
+          "quote": "For every group $G$, the center $Z(G)$ is a normal subgroup of $G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-quotient-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $N\\mathrel{\\trianglelefteq}G$ be a normal subgroup\n([[def-normal-subgroup]]). The **quotient group**, or **factor group**, $G/N$\nhas the left cosets\n\n$$G/N:=\\{gN:g\\in G\\}$$\n\nas its elements ([[def-coset]], [[def-index]]), with product\n\n$$ (gN)(hN):=ghN.$$\n\nIndependence of the chosen representatives is proved in\n[[thm-coset-multiplication-well-defined-iff-normal]], and the group axioms are\nproved in [[thm-quotient-group-laws]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-generated-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) and $S \\subseteq G$ a subset. The set of\nsubgroups of $G$ containing $S$ is nonempty, since $G$ itself is such a subgroup,\nso its intersection is a subgroup of $G$ by [[lem-intersection-of-subgroups]].\nThat intersection is the **subgroup generated by $S$**,\n\n$$\\langle S \\rangle \\;:=\\; \\bigcap \\{\\, H \\;:\\; H \\le G \\text{ and } S \\subseteq H \\,\\} .$$\n\nIt contains $S$, being an intersection of sets each containing $S$, and it is\ncontained in every subgroup of $G$ that contains $S$; so it is the **smallest**\nsubgroup of $G$ containing $S$, and these two properties determine it uniquely.\nThe elements of $S$ are called **generators**.\n\nFor a single element $g \\in G$ we write $\\langle g \\rangle := \\langle \\{g\\}\\rangle$\nand call it the **cyclic subgroup generated by $g$**. A group $G$ is **cyclic**\nwhen $G = \\langle g \\rangle$ for some $g \\in G$.\n\nBy convention $\\langle \\varnothing \\rangle = \\{e\\}$: the trivial subgroup is the\nsmallest subgroup containing the empty set, and this is a consequence of the\ndefinition, not a stipulation, since every subgroup contains $e$\n([[def-subgroup]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cyclic-subgroup-is-the-set-of-powers",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group and $g \\in G$, with integer powers as in [[def-group-power]].\nThen\n\n$$\\langle g \\rangle \\;=\\; \\{\\, g^{n} \\;:\\; n \\in \\mathbb{Z} \\,\\} ,$$\n\nthe cyclic subgroup generated by $g$ ([[def-generated-subgroup]]) being exactly\nthe set of integer powers of $g$. Consequently every cyclic group is abelian, and\nso is every cyclic subgroup of any group.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-group-power-laws",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$, let $g, h \\in G$, and let\npowers be as in [[def-group-power]]. For all $m, n \\in \\mathbb{Z}$:\n\n1. $g^{m+n} = g^{m} g^{n}$;\n2. $g^{-m} = (g^{m})^{-1}$;\n3. $(g^{m})^{n} = g^{mn}$;\n4. $g^{m} g^{n} = g^{n} g^{m}$: any two powers of one element commute;\n5. **if $gh = hg$** then $(gh)^{n} = g^{n} h^{n}$.\n\nClaim 5 is **false in general without its hypothesis**: in a group in which $g$\nand $h$ do not commute the equation can fail already at $n = 2$, and a witness is\nrecorded on the companion page.\n\nClaims 1 and 3 hold in any monoid ([[def-semigroup-and-monoid]]) for exponents in\n$\\mathbb{N}$, and so does claim 5 for exponents in $\\mathbb{N}$ under the same\ncommuting hypothesis; only the extension to negative exponents needs inverses.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose aZ(G) generating G/Z(G); write arbitrary x,y as a^m z and a^n w with z,w central.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Central factors commute with everything and powers of a commute with one another.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Reorder the factors to obtain xy=yx for arbitrary x,y, so G is abelian.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-groups-of-order-p-squared-are-abelian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-nontrivial-center-of-a-finite-p-group",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Every nontrivial finite $p$-group has nontrivial center, in fact $p$ divides $|Z(P)|$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cyclic-quotient-by-center-implies-abelian",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If $G/Z(G)$ is cyclic, then $G$ is abelian",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-order-of-a-quotient-group",
+          "source_section": "Statement",
+          "quote": "Let $N\\mathrel{\\trianglelefteq}G$. If $[G:N]$ is finite, then the quotient group\n$G/N$ is finite and\n\n$$|G/N|=[G:N].$$\n\nIn particular, if $G$ is finite, then\n\n$$|G/N|=\\frac{|G|}{|N|}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-prime-order-group-is-cyclic",
+          "source_section": "Statement",
+          "quote": "Then every $g\\ne e$ has order $|G|$, satisfies $\\langle g\\rangle=G$, and hence\ngenerates $G$. In particular, $G$ is cyclic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-finite-p-group",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A finite $p$-group has order $p^n$ for a prime $p$ and some $n\\in\\mathbb N$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The center theorem and Lagrange leave |Z(G)| equal to p or p^2.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If |Z(G)|=p^2 then Z(G)=G; if |Z(G)|=p then G/Z(G) has prime order and is cyclic.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the cyclic-quotient-by-center lemma in the second case and conclude abelianness in both cases.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-normal-subgroups-of-finite-p-groups-meet-the-center": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-finite-p-group",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A finite $p$-group has order $p^n$ for a prime $p$ and some $n\\in\\mathbb N$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-p-group-fixed-point-congruence",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If a finite $p$-group $P$ acts on a finite set $X$, then $|X|\\equiv|X^P|\\pmod p$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-normal-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and let $N\\le G$ be a subgroup ([[def-subgroup]]). For\n$g\\in G$, write\n\n$$gNg^{-1}:=\\{gng^{-1}:n\\in N\\}.$$\n\nThe subgroup $N$ is **normal in $G$** when\n\n$$gNg^{-1}=N\\qquad\\text{for every }g\\in G.$$\n\nIn that case write $N\\mathrel{\\trianglelefteq}G$. Equivalently, every inner\nconjugation of $G$ maps $N$ onto itself. The connection with equality of the\nleft and right cosets of [[def-coset]] is proved in\n[[thm-normal-subgroup-characterisations]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-normal-subgroup-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $N\\le G$. The following conditions are equivalent:\n\n1. $N\\mathrel{\\trianglelefteq}G$ ([[def-normal-subgroup]]);\n2. $gNg^{-1}\\subseteq N$ for every $g\\in G$;\n3. $gN=Ng$ for every $g\\in G$, where these are the left and right cosets of\n   $N$ represented by $g$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-conjugation-is-an-automorphism",
+          "source_section": "Statement",
+          "quote": "Conjugation $x\\mapsto gxg^{-1}$ is an automorphism.\n\nFor each $g\\in G$, the map $c_g:G\\to G$, $c_g(x)=gxg^{-1}$, is an\nautomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-center-of-a-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]). The **center of $G$** is\n\n$$Z(G):=\\{z\\in G:zg=gz\\text{ for every }g\\in G\\}.$$\n\nThus $Z(G)$ consists of the elements that commute with every element of $G$.\nIts subgroup and normality properties are proved in [[lem-center-is-normal]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Normality lets P act on N by conjugation.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The global fixed-point set of this restricted action is N∩Z(P).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The subgroup lemma makes |N| a positive power of p, and the fixed-point congruence makes |N∩Z(P)| divisible by p.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Hence the intersection contains more than the identity.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-cauchys-theorem-for-finite-groups": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-p-group-fixed-point-congruence",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If a finite $p$-group $P$ acts on a finite set $X$, then $|X|\\equiv|X^P|\\pmod p$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-integers-modulo-n",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n$. Congruence modulo $n$ is an equivalence relation on\n$\\mathbb Z$ by [[lem-congruence-is-an-equivalence-relation]]. The\n**congruence class of $a$ modulo $n$** is\n\n$$[a]_n:=\\{\\,b\\in\\mathbb Z:b\\equiv a\\pmod n\\,\\},$$\n\nand the **integers modulo $n$** form the quotient set\n\n$$\\mathbb Z/n:=\\{\\,[a]_n:a\\in\\mathbb Z\\,\\}.$$\n\nThis is the quotient-set construction of [[def-equivalence-relation]]. By\n[[lem-equivalence-classes-partition]], two classes are equal exactly when their\nrepresentatives are congruent:\n\n$$[a]_n=[b]_n\\quad\\Longleftrightarrow\\quad a\\equiv b\\pmod n.$$\n\nAt $n=0$ each class is a singleton because congruence modulo $0$ is equality.\nAt $n=1$ there is one class, namely $\\mathbb Z$ itself.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-nat-power",
+          "source_section": "Definition",
+          "quote": "Let $m \\in \\mathbb{N}$. By the recursion theorem ([[thm-recursion]]) applied to\nthe set $\\mathbb{N}$, the starting element $1$ and the function\n$f(x) = x \\cdot m$ ([[def-nat-multiplication]]), there is a unique function\n$\\mathbb{N} \\to \\mathbb{N}$, written $n \\mapsto m^{n}$, with\n\n$$m^{0} = 1, \\qquad m^{\\sigma(n)} = m^{n} \\cdot m \\quad (n \\in \\mathbb{N}).$$\n\nBoth the base and the value are natural numbers, so $m^n \\in \\mathbb{N}$ for all\n$m, n$. In particular $m^{1} = m^{0}\\cdot m = m$ and $m^{2} = m \\cdot m$.\n\n**Why a new item is needed.** [[def-integer-power]] defines $a^{n}$ for a\n**real** base $a$, so its value is a real number. The counts on this page,\n$\\lvert A^{B}\\rvert$ and $\\lvert\\mathcal{P}(A)\\rvert$ among them, are natural\nnumbers, and an identity between them has to be an identity in $\\mathbb{N}$. The\ntwo operations are related by clause (d) below and by nothing weaker.\n\n**(a) $0^{0} = 1$ and $0^{n} = 0$ for $n \\ge 1$.** The first is the base clause.\nFor the second, $0^{\\sigma(n)} = 0^{n}\\cdot 0 = 0$, the clause $x \\cdot 0 = 0$\nbeing definitional ([[def-nat-multiplication]]), and every $n \\ge 1$ is a\nsuccessor.\n\n**(b) $1^{n} = 1$ for every $n$.** Induction: $1^{0} = 1$, and",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-prime",
+          "source_section": "Definition",
+          "quote": "Let $p \\in \\mathbb{Z}$ ([[def-integers]]), ordered as in [[def-int-order]], with\ndivisibility as in [[def-divides-in-z]]. Then $p$ is **prime** when\n\n$$p > 1 \\qquad \\text{and} \\qquad d \\mid p \\ \\text{ with } \\ d > 0 \\ \\text{ force } \\ d = 1 \\ \\text{ or } \\ d = p .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-divides-in-z",
+          "source_section": "Definition",
+          "quote": "Let $d, a \\in \\mathbb{Z}$ ([[def-integers]]). We say **$d$ divides $a$**, and\nwrite $d \\mid a$, when\n\n$$a \\;=\\; d q \\qquad \\text{for some } q \\in \\mathbb{Z},$$\n\nthe product being that of [[def-int-operations]]. We write $d \\nmid a$ when this\nfails. In this situation $d$ is called a **divisor**, or a **factor**, of $a$,\nand $a$ is called a **multiple** of $d$.\n\n**This is the relation the library already has, not a second one.** The published\n[[thm-division-algorithm-in-z]] introduces it in its own Statement, in these\nwords: \"We say $b$ **divides** $a$, written $b \\mid a$, when $a = qb$ for some\n$q \\in \\mathbb{Z}$.\" Since multiplication on $\\mathbb{Z}$ is commutative\n([[thm-int-comm-ring]]), $a = qd$ and $a = dq$ are the same condition, so the\ndefinition above is that relation verbatim and the two usages agree everywhere.\nThe theorem defined it for use on its own page and left the systematic theory to\na later page; this is that page, and this item records the agreement rather than\nintroducing a rival notion.\n\n**The remainder test.** For $b > 0$ the same Statement records that $b \\mid a$\nholds exactly when the remainder $r$ in $a = qb + r$, $0 \\le r < b$, is $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-order-in-a-group",
+          "source_section": "Definition",
+          "quote": "**The order of a finite group.** Let $G$ be a group ([[def-group]]) whose\nunderlying set is finite ([[def-countable]]), so that $G \\approx n$ for some\n$n \\in \\mathbb{N}$ ([[def-equinumerous]]). That natural number is unique: if\n$G \\approx n$ and $G \\approx n'$ then $n \\approx n'$, since $\\approx$ is\nsymmetric and transitive, and then $n = n'$ by claim 3 of [[lem-pigeonhole]]. The\n**order of $G$** is that unique natural number, written $|G|$. A group is\n**infinite** when its underlying set is not finite, and $|G|$ is then not\ndefined.\n\n**The order of an element.** Let $G$ be any group and $g \\in G$, with natural\npowers as in [[def-group-power]]. Put\n\n$$S_g \\;:=\\; \\{\\, k \\in \\mathbb{N} \\;:\\; k \\ge 1 \\text{ and } g^{k} = e \\,\\} \\;\\subseteq\\; \\mathbb{N}.$$\n\n- If $S_g \\ne \\varnothing$, the **order of $g$** is its least element,\n\n  $$\\operatorname{ord}(g) \\;:=\\; \\min S_g \\;\\in\\; \\mathbb{N},$$\n\n  which exists by the well-ordering principle ([[thm-well-ordering-principle]]):\n  every nonempty subset of $\\mathbb{N}$ has a least element, and that element is\n  unique, being $\\le$ every element of $S_g$ and a member of it. We then say $g$\n  has **finite order**.\n- If $S_g = \\varnothing$ we say $g$ has **infinite order** and write",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L9",
+          "source": "lem-order-characterisation",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group, $g \\in G$, and let orders be as in [[def-order-in-a-group]].\nThroughout, a natural number written where an integer is expected means its image\nunder the embedding $\\iota : \\mathbb{N} \\to \\mathbb{Z}$ of [[lem-nat-embeds-int]].\n\n**Finite order.** Suppose $\\operatorname{ord}(g) = n$ with $n \\in \\mathbb{N}$,\n$n \\ge 1$. Then:\n\n1. for every $k \\in \\mathbb{Z}$, $g^{k} = e$ if and only if $k = qn$ for some\n   $q \\in \\mathbb{Z}$, that is, if and only if $n \\mid k$\n   ([[thm-division-algorithm-in-z]]);\n2. the powers $g^{0}, g^{1}, \\dots, g^{n-1}$ are pairwise distinct: if\n   $i, j \\in \\mathbb{N}$ with $i < n$, $j < n$ and $g^{i} = g^{j}$, then $i = j$;\n3. $\\langle g \\rangle = \\{\\, g^{s} : s \\in \\mathbb{N},\\ s < n \\,\\}$ and\n   $\\langle g \\rangle \\approx n$; so $\\langle g \\rangle$ is finite with\n   $|\\langle g \\rangle| = n = \\operatorname{ord}(g)$.\n\n**Infinite order.** If $\\operatorname{ord}(g) = \\infty$ then for $j, k \\in \\mathbb{Z}$,\n$g^{j} = g^{k}$ implies $j = k$; so the integer powers of $g$ are pairwise\ndistinct and $\\langle g \\rangle$ is not finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let Ω be the p-tuples (g_0,…,g_{p-1}) with product e; choosing the first p−1 coordinates determines the last, so |Ω|=|G|^{p−1} and p divides |Ω|.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "L8",
+            "L9",
+            "L10",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Cyclic rotation defines an action of the additive group Z/p on Ω; rotation preserves the product-e condition even when G is nonabelian.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A tuple fixed by all rotations is constant (g,…,g) with g^p=e.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The fixed-point congruence makes the number of fixed tuples divisible by p; since the identity tuple is fixed, there is a second fixed tuple.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Its entry g is nonidentity and g^p=e, so the order characterization and primality of p give ord(g)=p.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The prime hypothesis excludes p=1; planned step 5.1 separately uses the identity tuple."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-cauchy-frobenius-orbit-counting": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-fixed-point-sets-of-a-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The fixed-point sets $X^g$ and $X^G$ of a group action",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-orbits-partition-the-set",
+          "source_section": "Statement",
+          "quote": "For a left action of $G$ on $X$, define $x\\sim y$ when $y=g\\cdot x$ for some\n$g\\in G$. This is an equivalence relation, its equivalence class at $x$ is\n$G\\cdot x$, and the distinct orbits partition $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-orbit-stabilizer-cardinality",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Orbit-stabiliser cardinality: $|G\\cdot x|=[G:G_x]$, and for finite $G$, $|G|=|G_x|\\,|G\\cdot x|$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-double-counting",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be finite sets and let $R \\subseteq X \\times Y$, with row fibres\n$R_x$ and column fibres $R^{y}$ as in\n[[def-a-finite-incidence-relation-and-its-fibres]]. Then, in $\\mathbb{N}$,\n\n$$\\sum_{x \\in X}\\lvert R_x\\rvert \\;=\\; \\lvert R\\rvert \\;=\\; \\sum_{y \\in Y}\\lvert R^{y}\\rvert ,$$\n\nthe sums being those of [[def-sum-over-a-finite-index-set]].\n\nBoth index sets may be empty. If $X = \\varnothing$ then $R = \\varnothing$, every\ncolumn fibre is empty, and all three quantities are $0$; the same holds with the\nroles of $X$ and $Y$ exchanged.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Double-count R={(g,x)∈G×X:g·x=x} by g to obtain |R|=Σ_g|X^g|.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Count the same relation by x to obtain |R|=Σ_x|G_x|.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Group the second sum by orbits; on each orbit stabilizer sizes are constant up to conjugacy and orbit-stabilizer makes the orbit contribution |G|.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "There is one such contribution per orbit, giving Σ_g|X^g|=|G||X/G|.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Planned steps 1.1–3.1 allow X=∅ and both sides/counts are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The empty acted-on set has cardinality zero and the planned orbit sum is empty."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-left-regular-action-is-free-and-transitive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-free-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A free group action has no nonidentity element fixing a point",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-orbit-and-stabilizer",
+          "source_section": "Definition",
+          "quote": "For a left action of $G$ on $X$ and $x\\in X$, the **orbit** of $x$ is\n\n$$G\\cdot x:=\\{g\\cdot x:g\\in G\\},$$\n\nand the **stabilizer** of $x$ is\n\n$$G_x:=\\{g\\in G:g\\cdot x=x\\}.$$\n\nThe subgroup claim implicit in the word “stabilizer” is proved in\n[[lem-stabilizer-is-a-subgroup]].",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Verify the action laws for g·x=gx.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For x,y choose g=yx^{-1} to prove transitivity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If g fixes any x then gx=x and cancellation gives g=e, proving freeness.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-faithful-transitive-action-need-not-be-free": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-free-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A free group action has no nonidentity element fixing a point",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-orbit-and-stabilizer",
+          "source_section": "Definition",
+          "quote": "For a left action of $G$ on $X$ and $x\\in X$, the **orbit** of $x$ is\n\n$$G\\cdot x:=\\{g\\cdot x:g\\in G\\},$$\n\nand the **stabilizer** of $x$ is\n\n$$G_x:=\\{g\\in G:g\\cdot x=x\\}.$$\n\nThe subgroup claim implicit in the word “stabilizer” is proved in\n[[lem-stabilizer-is-a-subgroup]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **permutation** of $X$ is a bijection $f : X \\to X$\n([[def-injection-surjection-bijection]]). The **symmetric group of $X$** is the\nset of all permutations of $X$,\n\n$$\\operatorname{Sym}(X) \\;:=\\; \\{\\, f : X \\to X \\;:\\; f \\text{ is a bijection} \\,\\},$$\n\nequipped with **composition** as its operation,\n\n$$(f \\circ g)(x) \\;=\\; f(g(x)) \\qquad (x \\in X),$$\n\nand with the identity map $\\mathrm{id}_X$, given by $\\mathrm{id}_X(x) = x$, as\ndistinguished element.\n\nComposition of two bijections of $X$ is again a bijection of $X$\n([[def-injection-surjection-bijection]]), so $\\operatorname{Sym}(X)$ is closed\nunder $\\circ$ and $\\circ$ is a binary operation on it\n([[def-binary-operation]]); and $\\mathrm{id}_X$ is a bijection of $X$, so it is an\nelement of $\\operatorname{Sym}(X)$, and it is a two-sided identity for\ncomposition ([[def-identity-element]]) because\n$f \\circ \\mathrm{id}_X = f = \\mathrm{id}_X \\circ f$ holds pointwise for every\n$f$. That $(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ is a group is\n[[lem-symmetric-group-is-a-group]].\n\n**Cycle notation for a finite list of distinct points.** For distinct elements\n$x_0, x_1, \\dots, x_{k-1}$ of $X$ with $k \\ge 2$, the symbol",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-symmetric-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the triple\n$(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ of [[def-symmetric-group]] is a\ngroup ([[def-group]]); the inverse of a permutation $f$ is its inverse function\n$f^{-1}$.\n\nIf $X$ contains three distinct elements $a$, $b$, $c$, then\n$\\operatorname{Sym}(X)$ is not abelian: the transpositions $\\tau = (a\\,b)$ and\n$\\rho = (b\\,c)$ satisfy $\\tau \\circ \\rho \\ne \\rho \\circ \\tau$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let S_3 act on {1,2,3} by evaluation and verify the action laws.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Transpositions move points, so an element fixing all three points is the identity; the action is faithful, and transpositions also prove transitivity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The transposition (2 3) fixes 1, so the action is not free and refutes the implication.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-free-action-need-not-be-transitive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-free-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A free group action has no nonidentity element fixing a point",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-orbit-and-stabilizer",
+          "source_section": "Definition",
+          "quote": "For a left action of $G$ on $X$ and $x\\in X$, the **orbit** of $x$ is\n\n$$G\\cdot x:=\\{g\\cdot x:g\\in G\\},$$\n\nand the **stabilizer** of $x$ is\n\n$$G_x:=\\{g\\in G:g\\cdot x=x\\}.$$\n\nThe subgroup claim implicit in the word “stabilizer” is proved in\n[[lem-stabilizer-is-a-subgroup]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let Z/2 translate the first coordinate of (Z/2)×{0,1}; verify the action laws.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A nonzero group element changes the first coordinate, so the action is free.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The second coordinate is invariant, giving exactly two orbits and failure of transitivity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-rotations-of-a-square-on-its-vertices": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-free-group-action",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "A free group action has no nonidentity element fixing a point",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Identify vertices with Z/4 and let Z/4 act by addition; verify the action laws.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For any two vertices their difference supplies a unique rotation, proving freeness and transitivity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "An element fixing every vertex fixes 0 and hence is 0, proving faithfulness.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-nonfaithful-coset-action-of-z-six": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-left-coset-action-and-its-kernel",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Left multiplication on $G/H$ is transitive, has stabiliser $H$ at $H$, and has kernel $\\operatorname{Core}_G(H)$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-subgroup",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$. A subset $H \\subseteq G$ is\na **subgroup** of $G$, written $H \\le G$, when\n\n- **(S1)** $e \\in H$;\n- **(S2)** $H$ is closed under the operation: $x, y \\in H$ implies $xy \\in H$\n  ([[def-binary-operation]]);\n- **(S3)** $H$ is closed under inverses: $x \\in H$ implies $x^{-1} \\in H$.\n\nBy (S2) the operation of $G$ restricts to a binary operation on $H$; it is\nassociative there because it is associative on $G$, the element $e$ of (S1) is a\ntwo-sided identity for it ([[def-identity-element]]), and (S3) supplies for each\n$x \\in H$ a two-sided inverse lying in $H$ ([[def-invertible-element]]). So a\nsubgroup, with the restricted operation, is itself a group, and its identity and\nits inverses are those of $G$.\n\nEvery group $G$ has the two **trivial subgroups** $\\{e\\}$ and $G$ itself; a\nsubgroup $H$ with $H \\ne G$ is called **proper**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Verify H={0,3} is a subgroup of the additive group Z/6 and list its three cosets.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Because Z/6 is abelian, every conjugate of H equals H and hence Core(H)=H.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the coset-action theorem: the action is transitive with kernel H, which is nontrivial, so it is not faithful.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-class-equation-of-s-three": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-class-equation",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The class equation $|G|=|Z(G)|+\\sum_i [G:C_G(x_i)]$ for a finite group",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-conjugacy-class-cardinality",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "$G/C_G(x)\\to\\operatorname{Cl}_G(x)$ is a bijection, so $|\\operatorname{Cl}_G(x)|=[G:C_G(x)]$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **permutation** of $X$ is a bijection $f : X \\to X$\n([[def-injection-surjection-bijection]]). The **symmetric group of $X$** is the\nset of all permutations of $X$,\n\n$$\\operatorname{Sym}(X) \\;:=\\; \\{\\, f : X \\to X \\;:\\; f \\text{ is a bijection} \\,\\},$$\n\nequipped with **composition** as its operation,\n\n$$(f \\circ g)(x) \\;=\\; f(g(x)) \\qquad (x \\in X),$$\n\nand with the identity map $\\mathrm{id}_X$, given by $\\mathrm{id}_X(x) = x$, as\ndistinguished element.\n\nComposition of two bijections of $X$ is again a bijection of $X$\n([[def-injection-surjection-bijection]]), so $\\operatorname{Sym}(X)$ is closed\nunder $\\circ$ and $\\circ$ is a binary operation on it\n([[def-binary-operation]]); and $\\mathrm{id}_X$ is a bijection of $X$, so it is an\nelement of $\\operatorname{Sym}(X)$, and it is a two-sided identity for\ncomposition ([[def-identity-element]]) because\n$f \\circ \\mathrm{id}_X = f = \\mathrm{id}_X \\circ f$ holds pointwise for every\n$f$. That $(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ is a group is\n[[lem-symmetric-group-is-a-group]].\n\n**Cycle notation for a finite list of distinct points.** For distinct elements\n$x_0, x_1, \\dots, x_{k-1}$ of $X$ with $k \\ge 2$, the symbol",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-symmetric-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the triple\n$(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ of [[def-symmetric-group]] is a\ngroup ([[def-group]]); the inverse of a permutation $f$ is its inverse function\n$f^{-1}$.\n\nIf $X$ contains three distinct elements $a$, $b$, $c$, then\n$\\operatorname{Sym}(X)$ is not abelian: the transpositions $\\tau = (a\\,b)$ and\n$\\rho = (b\\,c)$ satisfy $\\tau \\circ \\rho \\ne \\rho \\circ \\tau$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "ex-conjugation-in-symmetric-group-three",
+          "source_section": "Example",
+          "quote": "Conjugation by $(1\\,2)$ in $\\operatorname{Sym}(\\{1,2,3\\})$ exchanges the transpositions $(1\\,3)$ and $(2\\,3)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "List S_3 as the identity, three transpositions and two 3-cycles.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Direct conjugation shows the three displayed parts are precisely the conjugacy classes.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Compute centralizer indices or class sizes and apply the class equation to obtain 6=1+3+2, reordered as 6=1+2+3.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-class-equation-of-the-dihedral-group-of-order-eight": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-class-equation",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The class equation $|G|=|Z(G)|+\\sum_i [G:C_G(x_i)]$ for a finite group",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-conjugacy-class-cardinality",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "$G/C_G(x)\\to\\operatorname{Cl}_G(x)$ is a bijection, so $|\\operatorname{Cl}_G(x)|=[G:C_G(x)]$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "ex-symmetries-of-a-square",
+          "source_section": "Example",
+          "quote": "Let $X = \\{1,2,3,4\\}$ and regard its four elements as the vertices of a square\nread in cyclic order, so that the **edges** are the four pairs\n\n$$E \\;=\\; \\bigl\\{\\, \\{1,2\\},\\ \\{2,3\\},\\ \\{3,4\\},\\ \\{4,1\\} \\,\\bigr\\}$$\n\nand the two remaining pairs $\\{1,3\\}$, $\\{2,4\\}$ are the diagonals. Call a\npermutation $f$ of $X$ a **vertex symmetry of the square** when, for all\n$x \\ne y$ in $X$, $\\{x,y\\} \\in E$ if and only if $\\{f(x),f(y)\\} \\in E$.\n\nPut $r = (1\\,2\\,3\\,4)$ and $s = (1\\,3)$ in $\\operatorname{Sym}(X)$\n([[def-symmetric-group]]) and\n\n$$D \\;=\\; \\{\\, \\mathrm{id},\\ r,\\ r^{2},\\ r^{3},\\ s,\\ rs,\\ r^{2}s,\\ r^{3}s \\,\\},$$\n\nwhere juxtaposition is composition and powers are those of [[def-group-power]].\nThen:\n\n1. $r^{4} = \\mathrm{id}$, $s^{2} = \\mathrm{id}$ and $sr = r^{-1}s$;\n2. $D$ is a subgroup of $\\operatorname{Sym}(X)$ ([[def-subgroup]]) whose eight\n   listed elements are pairwise distinct, so $|D| = 8$\n   ([[def-order-in-a-group]]), and $D = \\langle \\{r,s\\} \\rangle$\n   ([[def-generated-subgroup]]);\n3. $D$ is not abelian: $rs \\ne sr$;\n4. $D$ is exactly the set of vertex symmetries of the square.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the published square-symmetry presentation D={1,r,r^2,r^3,s,rs,r^2s,r^3s} with sr=r^{-1}s.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compute the four conjugacy classes {1}, {r^2}, {r,r^3}, and the two reflection pairs.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Their sizes give 8=1+1+2+2+2=2+2+2+2, with center {1,r^2}.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-conjugate-subgroups-and-normalizers-in-s-three": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-conjugate-subgroups-are-counted-by-the-normalizer",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The conjugates of $H$ are in bijection with $G/N_G(H)$ and, for finite $G$, number $[G:N_G(H)]$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-normalizer-of-a-subgroup",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The normalizer $N_G(H)=\\{g\\in G:gHg^{-1}=H\\}$ of a subgroup",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **permutation** of $X$ is a bijection $f : X \\to X$\n([[def-injection-surjection-bijection]]). The **symmetric group of $X$** is the\nset of all permutations of $X$,\n\n$$\\operatorname{Sym}(X) \\;:=\\; \\{\\, f : X \\to X \\;:\\; f \\text{ is a bijection} \\,\\},$$\n\nequipped with **composition** as its operation,\n\n$$(f \\circ g)(x) \\;=\\; f(g(x)) \\qquad (x \\in X),$$\n\nand with the identity map $\\mathrm{id}_X$, given by $\\mathrm{id}_X(x) = x$, as\ndistinguished element.\n\nComposition of two bijections of $X$ is again a bijection of $X$\n([[def-injection-surjection-bijection]]), so $\\operatorname{Sym}(X)$ is closed\nunder $\\circ$ and $\\circ$ is a binary operation on it\n([[def-binary-operation]]); and $\\mathrm{id}_X$ is a bijection of $X$, so it is an\nelement of $\\operatorname{Sym}(X)$, and it is a two-sided identity for\ncomposition ([[def-identity-element]]) because\n$f \\circ \\mathrm{id}_X = f = \\mathrm{id}_X \\circ f$ holds pointwise for every\n$f$. That $(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ is a group is\n[[lem-symmetric-group-is-a-group]].\n\n**Cycle notation for a finite list of distinct points.** For distinct elements\n$x_0, x_1, \\dots, x_{k-1}$ of $X$ with $k \\ge 2$, the symbol",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-symmetric-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the triple\n$(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ of [[def-symmetric-group]] is a\ngroup ([[def-group]]); the inverse of a permutation $f$ is its inverse function\n$f^{-1}$.\n\nIf $X$ contains three distinct elements $a$, $b$, $c$, then\n$\\operatorname{Sym}(X)$ is not abelian: the transpositions $\\tau = (a\\,b)$ and\n$\\rho = (b\\,c)$ satisfy $\\tau \\circ \\rho \\ne \\rho \\circ \\tau$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The three transpositions generate three distinct subgroups of order 2.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Conjugating a transposition relabels its two moved points, so the three subgroups form one conjugacy orbit.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Orbit-stabilizer gives normalizer index 3; since |S_3|=6, the normalizer has order 2 and equals the subgroup.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-fixed-point-congruence-for-an-action-of-z-two": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-p-group-fixed-point-congruence",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If a finite $p$-group $P$ acts on a finite set $X$, then $|X|\\equiv|X^P|\\pmod p$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let the nonidentity element of Z/2 swap two chosen points and fix the other three; verify this is an action.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The orbit partition has one two-point orbit and three singleton orbits.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus the global fixed set has size 3 and 5−3=2 is divisible by 2.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-two-colourings-of-a-square-up-to-dihedral-symmetry": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-frobenius-orbit-counting",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Cauchy-Frobenius orbit counting: $|G|\\,|X/G|=\\sum_{g\\in G}|X^g|$ for a finite group action",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "ex-symmetries-of-a-square",
+          "source_section": "Example",
+          "quote": "Let $X = \\{1,2,3,4\\}$ and regard its four elements as the vertices of a square\nread in cyclic order, so that the **edges** are the four pairs\n\n$$E \\;=\\; \\bigl\\{\\, \\{1,2\\},\\ \\{2,3\\},\\ \\{3,4\\},\\ \\{4,1\\} \\,\\bigr\\}$$\n\nand the two remaining pairs $\\{1,3\\}$, $\\{2,4\\}$ are the diagonals. Call a\npermutation $f$ of $X$ a **vertex symmetry of the square** when, for all\n$x \\ne y$ in $X$, $\\{x,y\\} \\in E$ if and only if $\\{f(x),f(y)\\} \\in E$.\n\nPut $r = (1\\,2\\,3\\,4)$ and $s = (1\\,3)$ in $\\operatorname{Sym}(X)$\n([[def-symmetric-group]]) and\n\n$$D \\;=\\; \\{\\, \\mathrm{id},\\ r,\\ r^{2},\\ r^{3},\\ s,\\ rs,\\ r^{2}s,\\ r^{3}s \\,\\},$$\n\nwhere juxtaposition is composition and powers are those of [[def-group-power]].\nThen:\n\n1. $r^{4} = \\mathrm{id}$, $s^{2} = \\mathrm{id}$ and $sr = r^{-1}s$;\n2. $D$ is a subgroup of $\\operatorname{Sym}(X)$ ([[def-subgroup]]) whose eight\n   listed elements are pairwise distinct, so $|D| = 8$\n   ([[def-order-in-a-group]]), and $D = \\langle \\{r,s\\} \\rangle$\n   ([[def-generated-subgroup]]);\n3. $D$ is not abelian: $rs \\ne sr$;\n4. $D$ is exactly the set of vertex symmetries of the square.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let the eight square symmetries act on the 16 vertex colourings by precomposition.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compute fixed-colouring counts by cycle type: identity 16, quarter-turns 2 each, half-turn 4, two reflections 8 each and two reflections 4 each.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The fixed-count sum is 48, so orbit counting gives 48=8·6 and hence six orbits.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Cross-check the six orbits by number/adjacency pattern of black vertices.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-binary-necklaces-of-length-four": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-frobenius-orbit-counting",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Cauchy-Frobenius orbit counting: $|G|\\,|X/G|=\\sum_{g\\in G}|X^g|$ for a finite group action",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-cardinality-of-a-set-of-functions",
+          "source_section": "Statement",
+          "quote": "Let $A$ and $B$ be finite sets and write\n\n$$A^{B} := \\{\\, f : f \\text{ is a function } B \\to A \\,\\}.$$\n\nThen $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$,\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\n\nBoth degenerate cases are covered and neither is a stipulation. If\n$B = \\varnothing$ there is exactly one function $B \\to A$, the empty function, so\n$\\lvert A^{\\varnothing}\\rvert = 1 = \\lvert A\\rvert^{0}$ **even when\n$A = \\varnothing$**. If $A = \\varnothing$ and $B \\ne \\varnothing$ there is no\nfunction at all, so $\\lvert A^{B}\\rvert = 0 = 0^{\\lvert B\\rvert}$ with\n$\\lvert B\\rvert \\ge 1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let the four rotations act on the 16 binary words of length four.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The fixed-colouring counts for rotations by 0,1,2,3 steps are 16,2,4,2.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Their sum is 24, so orbit counting gives 24=4·6 and hence six necklaces.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-orbit-count-is-not-set-size-divided-by-group-order": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-frobenius-orbit-counting",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Cauchy-Frobenius orbit counting: $|G|\\,|X/G|=\\sum_{g\\in G}|X^g|$ for a finite group action",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "ex-trivial-action-of-z-two-is-not-faithful",
+          "source_section": "Example",
+          "quote": "Let $\\mathbb Z/2$ act on the singleton $X=\\{*\\}$ by $a\\cdot *=*$ for both\nresidue classes $a$. This action is transitive, but it is not faithful.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the published trivial action of Z/2 on a singleton; it has one orbit.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Here |X|=1 and |G|=2, so no natural q satisfies |X|=|G|q, while |X/G|=1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus the naive division rule fails; orbit counting instead uses the two fixed-point counts 1+1=2.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes a group element, point, subgroup, or explicit nonempty finite witness; no empty family is silently selected."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero-valued parameter is admitted beyond cases handled explicitly in the planned derivation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The trivial group, singleton orbit, or one-element witness is covered explicitly by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned derivation records the trivial action/subgroup or repeated-orbit degeneration where it can occur."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or analytic endpoint occurs in this algebraic statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any chosen point, representative, generator, or nonidentity element is introduced only after its containing set is shown nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

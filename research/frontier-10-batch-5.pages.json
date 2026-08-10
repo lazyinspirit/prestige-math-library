@@ -8,9 +8,320 @@
     "companion": "fubini-and-change-of-variables-examples",
     "requires": [
       "the-riemann-integral-in-rn-and-jordan-content",
-      "inverse-and-implicit-function-theorems"
+      "inverse-and-implicit-function-theorems",
+      "gaussian-elimination-and-row-reduction",
+      "determinants-of-matrices-over-a-commutative-ring"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-sections-and-iterated-riemann-integrals",
+        "kind": "definition",
+        "title": "Sections, lower and upper section integrals, and iterated Riemann integrals on product rectangles and Jordan sets",
+        "deps": [
+          "def-multidimensional-rectangle-and-volume",
+          "def-multidimensional-darboux-integral",
+          "def-riemann-integral-over-a-jordan-set"
+        ]
+      },
+      {
+        "id": "lem-product-grid-bounds-for-section-integrals",
+        "kind": "lemma",
+        "title": "A product grid bounds the Darboux sums of the lower and upper section-integral functions",
+        "strategy": "Regroup the finite Darboux sums over product cells, compare each cell infimum and supremum with the corresponding section sums, and obtain both outer Darboux inequalities without assuming that individual sections are integrable.",
+        "deps": [
+          "def-sections-and-iterated-riemann-integrals",
+          "def-multidimensional-grid-partition",
+          "def-multidimensional-darboux-sums",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "thm-riemann-fubini-on-product-rectangles",
+        "kind": "theorem",
+        "title": "Riemann--Fubini on product rectangles, with lower and upper section integrals and content-zero exceptional sections",
+        "strategy": "Use arbitrarily small product-grid Darboux gaps and the preceding bounds to prove that both lower and upper section-integral functions are integrable with the multiple integral as value; repeat after swapping the coordinate blocks, then identify the two functions off any content-zero exceptional set of integrable sections.",
+        "deps": [
+          "def-sections-and-iterated-riemann-integrals",
+          "lem-product-grid-bounds-for-section-integrals",
+          "thm-multidimensional-riemann-criterion",
+          "thm-multidimensional-integral-properties",
+          "def-null-and-content-zero-in-rn"
+        ]
+      },
+      {
+        "id": "cor-repeated-riemann-integrals-on-rectangles",
+        "kind": "corollary",
+        "title": "A continuous function on a closed rectangle has repeated Riemann integrals in every coordinate order, all equal to its multiple integral",
+        "strategy": "Continuity passes to every coordinate section, the published compact-rectangle theorem gives integrability at every stage, and repeated applications of Riemann--Fubini permit an arbitrary permutation of the coordinate order.",
+        "deps": [
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "def-metric-continuity"
+        ]
+      },
+      {
+        "id": "cor-riemann-integral-of-a-product-function",
+        "kind": "corollary",
+        "title": "The integral of a product function on a product rectangle is the product of the two integrals",
+        "strategy": "For continuous functions on the two factor rectangles, apply Riemann--Fubini to the continuous product and pull the constant factor through the inner and outer integrals; include the coordinate-independent case by taking one factor constant one.",
+        "deps": [
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-multidimensional-integral-properties"
+        ]
+      },
+      {
+        "id": "cor-finite-section-support-forces-zero-integral",
+        "kind": "corollary",
+        "title": "An integrable function whose sections vanish outside finite sets has multiple integral zero",
+        "strategy": "Cover each finite section support by finitely many cubes of arbitrarily small total volume to show that its section integral is zero, then apply Riemann--Fubini in the section direction.",
+        "deps": [
+          "thm-riemann-fubini-on-product-rectangles",
+          "def-null-and-content-zero-in-rn"
+        ]
+      },
+      {
+        "id": "thm-jordan-fubini-by-sections",
+        "kind": "theorem",
+        "title": "Fubini over a bounded Jordan set when all but a content-zero family of sections are integrable",
+        "strategy": "Extend the integrand by zero to a product bounding rectangle, identify almost every extended section with the integral over the corresponding Jordan section, and apply the exceptional-section clause of rectangular Riemann--Fubini; verify independence of both bounding rectangles.",
+        "deps": [
+          "def-sections-and-iterated-riemann-integrals",
+          "thm-riemann-fubini-on-product-rectangles",
+          "def-riemann-integral-over-a-jordan-set",
+          "lem-jordan-set-integral-well-defined",
+          "def-null-and-content-zero-in-rn"
+        ]
+      },
+      {
+        "id": "cor-cavalieri-principle-for-jordan-content",
+        "kind": "corollary",
+        "title": "Cavalieri: Jordan content is the integral of sectional contents, and equal sections give equal content",
+        "strategy": "Apply Jordan--Fubini to the constant-one function. For the comparison clause, integrate the common sectional-content function after discarding the stated content-zero exceptional parameter set.",
+        "deps": [
+          "thm-jordan-fubini-by-sections",
+          "thm-jordan-content-and-indicator-integrability"
+        ]
+      },
+      {
+        "id": "thm-fubini-over-a-region-between-continuous-graphs",
+        "kind": "theorem",
+        "title": "A region between two continuous graphs is Jordan measurable, and a continuous integrand extending to its closure integrates by vertical sections",
+        "strategy": "Describe the boundary by the two graphs and the endpoint segments, use the published graph-nullity and boundary criteria for Jordan measurability, then apply Jordan--Fubini to the continuous extension; boundary sections and the boundary of the region contribute zero.",
+        "deps": [
+          "thm-jordan-fubini-by-sections",
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "thm-jordan-boundary-criterion",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable"
+        ]
+      },
+      {
+        "id": "def-jacobian-determinant-of-a-c-one-map",
+        "kind": "definition",
+        "title": "The Jacobian determinant of a square-dimensional $C^1$ map is the determinant of its Jacobian matrix",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-jacobian-matrix-and-gradient",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-determinant-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "lem-finite-jordan-cover-sum-bounds",
+        "kind": "lemma",
+        "title": "Finite Jordan covers bound upper integrals, while interior-disjoint Jordan subfamilies bound lower integrals",
+        "strategy": "Compare the relevant indicator functions, use finite additivity after isolating content-zero overlaps, and apply monotonicity to the positive and negative parts so that signed integrands are handled without an illicit supremum inequality.",
+        "deps": [
+          "def-riemann-integral-over-a-jordan-set",
+          "thm-multidimensional-integral-properties",
+          "cor-jordan-content-finite-additivity"
+        ]
+      },
+      {
+        "id": "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+        "kind": "theorem",
+        "title": "A linear endomorphism of $\\mathbb R^n$ sends bounded Jordan sets to bounded Jordan sets and scales their content by the absolute determinant",
+        "strategy": "Treat singular matrices by row reduction and a thin-slab cover of a proper coordinate subspace. Factor an invertible matrix into elementary matrices, verify coordinate swaps and scalings directly and shears by Cavalieri, multiply the scale factors using the determinant laws, and extend from rectangles to arbitrary bounded Jordan sets by finite inner and outer approximation.",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-under-elementary-row-operations",
+          "thm-invertible-matrices-factor-into-elementary-matrices",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "def-jordan-inner-and-outer-content",
+          "thm-jordan-boundary-criterion",
+          "cor-cavalieri-principle-for-jordan-content",
+          "lem-finite-jordan-cover-sum-bounds"
+        ]
+      },
+      {
+        "id": "cor-parallelepiped-content-is-the-absolute-determinant",
+        "kind": "corollary",
+        "title": "The Jordan content of the parallelepiped spanned by the columns of a square real matrix is the absolute value of its determinant",
+        "strategy": "Realize the parallelepiped as the linear image of the unit cube and apply the linear content-scaling theorem, including singular matrices and the zero-content conclusion.",
+        "deps": [
+          "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "def-multidimensional-rectangle-and-volume",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded"
+        ]
+      },
+      {
+        "id": "lem-near-identity-c-one-maps-sandwich-cubes",
+        "kind": "lemma",
+        "title": "A $C^1$ map uniformly close to the identity derivative sandwiches a cube between contracted and expanded cubes",
+        "strategy": "The total-derivative mean-value inequality gives the outer containment. For a target in the contracted cube, turn its preimage equation into a self-map of the complete cube and apply Banach's fixed-point theorem; track the strict error bound and the zero-radius exclusion explicitly.",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "thm-banach-fixed-point",
+          "thm-euclidean-space-complete",
+          "thm-complete-subspace-iff-closed",
+          "def-metric-ball",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics"
+        ]
+      },
+      {
+        "id": "lem-local-c-one-volume-distortion",
+        "kind": "lemma",
+        "title": "On a small cube, a $C^1$ diffeomorphism distorts Jordan content by factors arbitrarily close to its linearized absolute determinant",
+        "strategy": "Normalize by translation and the inverse derivative at the cube centre, apply the near-identity cube sandwich, and then apply linear content scaling; use continuity of the derivative to make the error uniform on the cube and record both lower and upper factors.",
+        "deps": [
+          "def-jacobian-determinant-of-a-c-one-map",
+          "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "lem-near-identity-c-one-maps-sandwich-cubes",
+          "def-jordan-inner-and-outer-content"
+        ]
+      },
+      {
+        "id": "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+        "kind": "theorem",
+        "title": "An injective $C^1$ map with invertible derivative sends compact Jordan sets to compact Jordan sets",
+        "strategy": "Compactness and continuity give a compact bounded image. The inverse function theorem makes the map locally open and locally bi-Lipschitz near the compact set; show the image boundary is contained in the image of the source boundary, then use Lipschitz preservation of null sets and the Jordan boundary criterion.",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-invertible-euclidean-linear-map",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-mean-value-inequality-for-total-derivatives",
+          "thm-lipschitz-images-of-null-sets-in-rn-are-null",
+          "thm-jordan-boundary-criterion"
+        ]
+      },
+      {
+        "id": "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+        "kind": "lemma",
+        "title": "A compact subset of an open Euclidean set has a compact Jordan neighborhood inside that open set",
+        "strategy": "Cover the compact set by finitely many sufficiently small closed grid rectangles whose slightly enlarged rectangles remain in the open set. Their finite union is compact, contains the set in its interior, lies in the open set, and is Jordan because its boundary is contained in finitely many coordinate hyperplanes.",
+        "deps": [
+          "def-metric-compactness",
+          "lem-compactness-is-intrinsic",
+          "def-metric-topology",
+          "def-multidimensional-grid-partition",
+          "cor-jordan-content-finite-additivity",
+          "thm-heine-borel-rn",
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "thm-jordan-boundary-criterion"
+        ]
+      },
+      {
+        "id": "lem-bounded-open-jordan-sets-have-compact-grid-exhaustions",
+        "kind": "lemma",
+        "title": "A bounded open Jordan set has an increasing exhaustion by compact finite unions of grid rectangles with vanishing content remainder",
+        "strategy": "Choose successively finer grids and retain the closed cells contained in the open set. Compact subsets eventually lie in the retained union, while every omitted cell meeting the set lies near its content-zero boundary; grid-control makes the omitted content tend to zero and a common-refinement construction makes the exhaustion increasing.",
+        "deps": [
+          "def-multidimensional-grid-partition",
+          "def-jordan-inner-and-outer-content",
+          "thm-jordan-boundary-criterion",
+          "lem-finite-cube-covers-admit-grid-control",
+          "cor-jordan-content-finite-additivity"
+        ]
+      },
+      {
+        "id": "thm-change-of-variables-for-compact-jordan-sets",
+        "kind": "theorem",
+        "title": "Change of variables for an injective $C^1$ map on a compact Jordan set",
+        "strategy": "Reduce by a finite interior-disjoint rectangle cover inside the open domain, estimate nonnegative upper sums on each small cube with the local volume-distortion lemma, and let the distortion tend to one. Apply the same one-sided inequality to the $C^1$ inverse and use the chain rule and determinant multiplication for equality; split a signed integrand into positive and negative parts and prove the transformed integrability simultaneously.",
+        "deps": [
+          "def-jacobian-determinant-of-a-c-one-map",
+          "lem-finite-jordan-cover-sum-bounds",
+          "lem-local-c-one-volume-distortion",
+          "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+          "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-determinant-multiplicative",
+          "thm-multidimensional-integral-properties",
+          "lem-jordan-set-integral-well-defined"
+        ]
+      },
+      {
+        "id": "cor-jordan-content-under-a-c-one-diffeomorphism",
+        "kind": "corollary",
+        "title": "The content of a compact Jordan image is the integral of the absolute Jacobian determinant",
+        "strategy": "Apply change of variables to the constant-one function on the image and identify its integral with Jordan content.",
+        "deps": [
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-jordan-content-and-indicator-integrability"
+        ]
+      },
+      {
+        "id": "def-support-and-compactly-supported-riemann-integral-in-rn",
+        "kind": "definition",
+        "title": "The support of a function on $\\mathbb{R}^n$ and its compactly supported Riemann integral",
+        "deps": [
+          "def-metric-interior-closure-boundary",
+          "def-metric-compactness",
+          "def-multidimensional-rectangle-and-volume",
+          "def-multidimensional-darboux-integral",
+          "thm-heine-borel-rn"
+        ]
+      },
+      {
+        "id": "lem-compactly-supported-riemann-integral-is-well-defined",
+        "kind": "lemma",
+        "title": "The Riemann integral of a compactly supported function is independent of its bounding rectangle",
+        "strategy": "Given two bounding rectangles containing the support, place both in a third rectangle. Outside the support the function is zero, so both restrictions have the same zero extension to the common rectangle; apply the published well-definedness of Jordan-set integration twice, including the empty-support case.",
+        "deps": [
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "lem-jordan-set-integral-well-defined",
+          "thm-multidimensional-integral-properties"
+        ]
+      },
+      {
+        "id": "cor-change-of-variables-for-compactly-supported-functions",
+        "kind": "corollary",
+        "title": "A compactly supported Riemann integrand admits the global change-of-variables formula from a diffeomorphism near the relevant compact preimage",
+        "strategy": "Choose a compact Jordan neighborhood inside the region on which the map is injective and $C^1$, extend both integrands by zero, and apply compact-Jordan change of variables; verify that points outside the chosen preimage contribute zero.",
+        "deps": [
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+          "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+          "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "lem-compactly-supported-riemann-integral-is-well-defined"
+        ]
+      },
+      {
+        "id": "cor-change-of-variables-on-bounded-open-jordan-sets",
+        "kind": "corollary",
+        "title": "Change of variables on bounded open Jordan sets when both integrands are bounded and Riemann integrable",
+        "strategy": "Apply compact-Jordan change of variables to the compact grid exhaustion. Bound the omitted source and image contributions by the two integrand suprema times the corresponding vanishing remainder contents, and pass to the limit; the statement must assume the Riemann integrability of both sides rather than smuggle in an improper-integral convention.",
+        "deps": [
+          "lem-bounded-open-jordan-sets-have-compact-grid-exhaustions",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-multidimensional-integral-properties"
+        ]
+      },
+      {
+        "id": "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+        "kind": "corollary",
+        "title": "In one dimension the compact-Jordan formula is substitution over the unoriented image interval with the absolute derivative",
+        "strategy": "For an injective $C^1$ map with nonzero derivative on a compact interval, use monotonicity to identify the image interval and its orientation. Compare the absolute-derivative formula with the published oriented substitution theorem in the increasing and decreasing cases.",
+        "deps": [
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-substitution",
+          "thm-continuous-injection-on-an-interval-is-strictly-monotone"
+        ]
+      }
+    ]
   },
   {
     "order": 238,
@@ -21,6 +332,158 @@
     "requires": [
       "fubini-and-change-of-variables"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-riemann-integrable-function-with-a-nonintegrable-section",
+        "kind": "example",
+        "title": "An integrable function on the unit square with one Dirichlet section and only one defined order of ordinary iteration",
+        "strategy": "Use the function supported on the rational points of the vertical line $x=1/2$; squeeze its two-dimensional upper sum into an arbitrarily thin strip, compute every horizontal section, and identify the exceptional vertical section as the Dirichlet function.",
+        "deps": [
+          "thm-riemann-fubini-on-product-rectangles",
+          "def-dirichlet-and-thomae-functions",
+          "cex-dirichlet-is-not-riemann-integrable",
+          "thm-multidimensional-riemann-criterion"
+        ]
+      },
+      {
+        "id": "cex-one-existing-iterated-integral-does-not-give-riemann-integrability",
+        "kind": "counterexample",
+        "title": "One existing iterated integral does not imply multiple Riemann integrability",
+        "strategy": "For $f(x,y)=x$ when $y$ is rational and zero otherwise on $[-1,1]\\times[0,1]$, compute the $x$-first integral as zero, show the other inner sections fail except at $x=0$, compute their lower and upper integrals, and invoke Fubini contrapositively to refute multiple integrability.",
+        "deps": [
+          "thm-riemann-fubini-on-product-rectangles",
+          "def-dirichlet-and-thomae-functions",
+          "cex-dirichlet-is-not-riemann-integrable"
+        ]
+      },
+      {
+        "id": "ex-riemann-integrable-function-with-dense-nonintegrable-sections",
+        "kind": "example",
+        "title": "A Riemann-integrable Thomae-type function whose $x$-sections are nonintegrable at every rational height",
+        "strategy": "Use the rational-denominator height from Lebl's exercise, dominate the exceptional horizontal layers by finitely many small-denominator rationals plus a uniformly small tail, and compute the two directions of lower, upper, and ordinary iteration explicitly.",
+        "deps": [
+          "thm-riemann-fubini-on-product-rectangles",
+          "def-dirichlet-and-thomae-functions",
+          "ex-thomae-is-riemann-integrable-with-integral-zero",
+          "thm-multidimensional-riemann-criterion"
+        ]
+      },
+      {
+        "id": "ex-fubini-computes-the-integral-of-x-exp-xy",
+        "kind": "example",
+        "title": "Fubini computes $\\int_0^1\\int_{-1}^1 x\\exp(xy)\\,dx\\,dy$ by reversing the order",
+        "strategy": "Use continuity and Fubini to integrate with respect to $y$ first, recognize $x\\exp(xy)$ as the derivative of $\\exp(xy)$ in $y$, then use the fundamental theorem once more in $x$ and simplify the endpoints.",
+        "deps": [
+          "cor-repeated-riemann-integrals-on-rectangles",
+          "thm-derivative-of-exponential",
+          "thm-ftc-second-part",
+          "cor-exponential-reciprocal-and-positivity"
+        ]
+      },
+      {
+        "id": "ex-cavalieri-shear-preserves-jordan-content",
+        "kind": "example",
+        "title": "A coordinate shear preserves Jordan content by translating every section",
+        "strategy": "For $(x_1,\\ldots,x_n)\\mapsto(x_1,\\ldots,x_j+c x_i,\\ldots,x_n)$, identify every affected section as a translate of the old one and apply Cavalieri; check directly that the shear determinant is one.",
+        "deps": [
+          "cor-cavalieri-principle-for-jordan-content",
+          "thm-linear-images-scale-jordan-content-by-absolute-determinant"
+        ]
+      },
+      {
+        "id": "ex-parallelepiped-content-from-a-matrix",
+        "kind": "example",
+        "title": "The content of a concrete three-dimensional parallelepiped computed from its spanning matrix",
+        "strategy": "Write the three spanning vectors as matrix columns, evaluate the determinant by the published finite formula, take its absolute value, and compare with a direct base-times-height check in this triangular example.",
+        "deps": [
+          "cor-parallelepiped-content-is-the-absolute-determinant",
+          "def-determinant-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "ex-polar-change-of-variables-on-an-annular-sector",
+        "kind": "example",
+        "title": "Polar change of variables on a compact annular sector gives the Jacobian factor $r$ and its area",
+        "strategy": "On a sector with positive inner radius and angular width below one full turn, compute the derivative matrix and determinant, verify injectivity from the chosen angular interval, apply change of variables to the constant-one function, and evaluate the repeated integral.",
+        "deps": [
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "def-jacobian-determinant-of-a-c-one-map",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power"
+        ]
+      },
+      {
+        "id": "ex-cylindrical-coordinate-jacobian",
+        "kind": "example",
+        "title": "Cylindrical coordinates have absolute Jacobian determinant $r$ on an injective compact box",
+        "strategy": "Differentiate $(r,\\theta,z)\\mapsto(r\\cos\\theta,r\\sin\\theta,z)$, expand its determinant, and verify the change-of-variables hypotheses on a box with positive inner radius and a seam-free angular interval.",
+        "deps": [
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "def-jacobian-determinant-of-a-c-one-map",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ]
+      },
+      {
+        "id": "ex-spherical-coordinate-jacobian",
+        "kind": "example",
+        "title": "Spherical coordinates have absolute Jacobian determinant $r^2\\sin\\phi$ away from the axis and angular seam",
+        "strategy": "Differentiate the standard spherical-coordinate map, evaluate the determinant using the trigonometric identities, and state a compact parameter box on which the radius is positive, the polar angle stays strictly between the poles, and the map is injective.",
+        "deps": [
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "def-jacobian-determinant-of-a-c-one-map",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges"
+        ]
+      },
+      {
+        "id": "ex-hyperspherical-coordinate-jacobian",
+        "kind": "example",
+        "title": "The hyperspherical-coordinate Jacobian is the standard product of a radial power and sine powers",
+        "strategy": "Use induction on dimension: split off the final polar angle, arrange the derivative columns into radial, angular, and lower-dimensional blocks, expand the determinant, and obtain $r^{n-1}\\sin^{n-2}\\phi_1\\cdots\\sin\\phi_{n-2}$ on a seam-free compact parameter box.",
+        "deps": [
+          "def-jacobian-determinant-of-a-c-one-map",
+          "thm-determinant-multiplicative",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "cex-polar-coordinates-are-not-globally-injective",
+        "kind": "counterexample",
+        "title": "Polar coordinates on a full closed angular period are not injective and are singular at radius zero",
+        "strategy": "Exhibit the two seam points $(r,0)$ and $(r,2\\pi)$ with the same image for $r>0$, then show that every angle maps to the origin at $r=0$ and that the Jacobian determinant vanishes there.",
+        "deps": [
+          "def-jacobian-determinant-of-a-c-one-map",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ]
+      },
+      {
+        "id": "cex-omitting-the-absolute-jacobian-reverses-sign",
+        "kind": "counterexample",
+        "title": "Omitting the absolute value from the Jacobian gives negative length under the reflection $x\\mapsto1-x$",
+        "strategy": "Take the constant-one integrand on $[0,1]$, compute the image integral as one, and compute the un-absolute transformed integral as minus one because the derivative is constantly negative one.",
+        "deps": [
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "thm-substitution"
+        ]
+      },
+      {
+        "id": "cex-noninjective-change-of-variables-double-counts",
+        "kind": "counterexample",
+        "title": "Dropping injectivity double-counts under $x\\mapsto x^2$ on two disjoint intervals",
+        "strategy": "Use the compact Jordan domain $[-2,-1]\\cup[1,2]$ and the constant-one integrand on $[1,4]$; the derivative is nonzero throughout the domain, but the absolute-Jacobian integral is six whereas the image length is three.",
+        "deps": [
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power"
+        ]
+      }
+    ]
   }
 ]

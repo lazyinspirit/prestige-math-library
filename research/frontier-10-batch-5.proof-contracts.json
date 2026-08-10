@@ -1,0 +1,3442 @@
+{
+  "version": 1,
+  "level": "frontier-10",
+  "scope": [
+    "lem-product-grid-bounds-for-section-integrals",
+    "thm-riemann-fubini-on-product-rectangles",
+    "cor-repeated-riemann-integrals-on-rectangles",
+    "cor-riemann-integral-of-a-product-function",
+    "cor-finite-section-support-forces-zero-integral",
+    "thm-jordan-fubini-by-sections",
+    "cor-cavalieri-principle-for-jordan-content",
+    "thm-fubini-over-a-region-between-continuous-graphs",
+    "lem-finite-jordan-cover-sum-bounds",
+    "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+    "cor-parallelepiped-content-is-the-absolute-determinant",
+    "lem-near-identity-c-one-maps-sandwich-cubes",
+    "lem-local-c-one-volume-distortion",
+    "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+    "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+    "lem-bounded-open-jordan-sets-have-compact-grid-exhaustions",
+    "thm-change-of-variables-for-compact-jordan-sets",
+    "cor-jordan-content-under-a-c-one-diffeomorphism",
+    "lem-compactly-supported-riemann-integral-is-well-defined",
+    "cor-change-of-variables-for-compactly-supported-functions",
+    "cor-change-of-variables-on-bounded-open-jordan-sets",
+    "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+    "ex-riemann-integrable-function-with-a-nonintegrable-section",
+    "cex-one-existing-iterated-integral-does-not-give-riemann-integrability",
+    "ex-riemann-integrable-function-with-dense-nonintegrable-sections",
+    "ex-fubini-computes-the-integral-of-x-exp-xy",
+    "ex-cavalieri-shear-preserves-jordan-content",
+    "ex-parallelepiped-content-from-a-matrix",
+    "ex-polar-change-of-variables-on-an-annular-sector",
+    "ex-cylindrical-coordinate-jacobian",
+    "ex-spherical-coordinate-jacobian",
+    "ex-hyperspherical-coordinate-jacobian",
+    "cex-polar-coordinates-are-not-globally-injective",
+    "cex-omitting-the-absolute-jacobian-reverses-sign",
+    "cex-noninjective-change-of-variables-double-counts"
+  ],
+  "contracts": {
+    "lem-product-grid-bounds-for-section-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sections-and-iterated-riemann-integrals",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For a bounded function on a product rectangle, the lower and upper section integrals are defined for every parameter even when the section is not Riemann integrable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Regroup the finite lower and upper Darboux sums over a product grid into outer-cell sums of inner section sums.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each outer cell, compare the infimum or supremum of the section lower or upper integral with the corresponding regrouped cell extrema.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Sum the cellwise inequalities to obtain both product-grid bounds, including degenerate section values without assuming section integrability.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-riemann-fubini-on-product-rectangles": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-product-grid-bounds-for-section-integrals",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Product-grid Darboux sums bound the outer Darboux sums of the lower and upper section-integral functions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-multidimensional-riemann-criterion",
+          "source_section": "Statement",
+          "quote": "A bounded $f:Q\\to\\mathbb R$ on a nondegenerate rectangle is Riemann\nintegrable if and only if, for every $\\varepsilon>0$, some grid $P$ satisfies\n$U(f,P)-L(f,P)<\\varepsilon$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose a product-grid refinement with Darboux gap below an arbitrary epsilon and apply L1 to squeeze the outer lower and upper section functions.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use L2 to prove those two bounded section-envelope functions are integrable and have the same value as the multiple integral.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Repeat after swapping coordinate blocks; when ordinary sections are integrable off a content-zero exceptional set, replace both envelopes there and use null-set invariance of the Riemann integral.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-repeated-riemann-integrals-on-rectangles": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Riemann Fubini on product rectangles identifies the multiple integral with either iterated integral whenever the ordinary sections exist away from a content-zero exceptional set.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "source_section": "Statement",
+          "quote": "Every continuous real function on a closed nondegenerate rectangle $Q\\subseteq\\mathbb R^m$, $m\\ge1$, is Riemann integrable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Continuity of the integrand restricts to continuity on every coordinate section, so L2 makes every inner integral exist.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply L1 successively for adjacent coordinate blocks; induction on the number of coordinates gives every coordinate order.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Check the one-coordinate base case and identify every repeated value with the original multiple integral.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-riemann-integral-of-a-product-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Riemann Fubini identifies the integral over a product rectangle with either iterated integral.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For h(x,y)=f(x)g(y), compute each inner integral by constant-multiple linearity as f(x) times the integral of g.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply L1 and pull the remaining constant through the outer integral to obtain the product formula.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Take one factor constantly one to record the coordinate-independent special case, including zero integrals.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-finite-section-support-forces-zero-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Riemann Fubini permits a content-zero exceptional set of parameters and identifies the multiple integral with the resulting iterated integral.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Cover the finite set of parameters supporting nonzero sections by finitely many cubes with arbitrarily small total volume, proving that parameter set has content zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Outside that set each section is identically zero and has integral zero; apply L1 to identify the multiple integral with the zero outer integral.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Check the empty support as the identically-zero case.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-jordan-fubini-by-sections": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Riemann Fubini applies to bounded functions on a product rectangle using lower and upper section integrals and a content-zero exceptional set.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-sections-and-iterated-riemann-integrals",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "An empty Jordan section has integral zero, and section integrals are taken after zero extension to a bounding rectangle.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose factor bounding rectangles, extend the Jordan-set integrand by zero, and identify every extended section with the zero extension of the corresponding Jordan section.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply L1 to the extended function and replace section envelopes by ordinary Jordan-section integrals away from the allowed exceptional set.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use zero-extension well-definedness to prove independence of both bounding rectangles and explicitly retain value zero for empty sections.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-cavalieri-principle-for-jordan-content": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-jordan-fubini-by-sections",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Jordan Fubini computes an integral over a bounded Jordan set by integrating its section integrals, with empty sections assigned zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-jordan-content-and-indicator-integrability",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its indicator $1_E$ is Riemann integrable on a fixed nondegenerate bounding\nrectangle $Q$. In that case\n$$\\int_Q1_E=\\operatorname{cont}(E).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply L1 to the constant-one function and use L2 on the set and its sections to obtain content as the integral of sectional content.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If two Jordan sets have equal sectional contents off a content-zero parameter set, integrate the common function to obtain equal total contents.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Include empty sections and zero-content sets explicitly.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-fubini-over-a-region-between-continuous-graphs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-jordan-fubini-by-sections",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Jordan Fubini integrates a bounded integrable function over a Jordan set by its Jordan sections.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-jordan-boundary-criterion",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Using the continuous extension to the compact closure, describe the region boundary by the two graphs and finitely many endpoint faces; graph nullity and L2 make the region Jordan.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every interior vertical section is the closed interval between the graphs; boundary discrepancies have one-dimensional content zero, so L1 gives the displayed iterated formula.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Treat coincident graphs and interval endpoints, and note why continuity only on the open region would be insufficient.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-jordan-cover-sum-bounds": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-multidimensional-integral-properties",
+          "source_section": "Statement",
+          "quote": "Let $Q=\\prod_{j<m}[a_j,b_j]$ be nondegenerate. For integrable\n$f,g:Q\\to\\mathbb R$ and scalars $\\alpha,\\beta$, the function\n$\\alpha f+\\beta g$ is integrable and its integral is\n$\\alpha\\int_Qf+\\beta\\int_Qg$. If $f\\le g$, then\n$\\int_Qf\\le\\int_Qg$. Also $|f|$ is integrable and\n$|\\int_Qf|\\le\\int_Q|f|$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Express a finite Jordan cover or interior-disjoint decomposition through indicator inequalities, discarding only content-zero overlaps.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply L1 separately to positive and negative parts and use finite additivity to derive the required upper and lower sum bounds.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Check the empty family and zero-content pieces so no supremum inequality is used for a signed function.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every selected cover member, neighborhood, or inverse chart is chosen only after membership/nonemptiness is established; compactness reduces to finitely many choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-linear-images-scale-jordan-content-by-absolute-determinant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-finite-jordan-cover-sum-bounds",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Finite Jordan covers and interior-disjoint decompositions give valid content and integral sum bounds for signed as well as nonnegative functions.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-cavalieri-principle-for-jordan-content",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Jordan content is the integral of sectional content, and equal sectional contents off a content-zero set give equal total content.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-determinant-under-elementary-row-operations",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "A row swap negates the determinant, a row scaling multiplies it by the scalar, and adding a multiple of one row to another leaves it unchanged.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If the matrix is singular, row-reduce its image into a proper coordinate subspace and cover that subspace inside a bounding box by arbitrarily thin slabs, obtaining zero content.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For invertible elementary matrices, prove swap and scaling directly and prove shear invariance with L2; match each content factor to the absolute determinant using L3.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Factor an arbitrary invertible matrix into elementary matrices and multiply the factors, then use finite inner and outer Jordan approximations plus L1 to extend from rectangles to every bounded Jordan set.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Combine the singular and invertible cases and verify the zero-dimensional degeneration is excluded by n at least one.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-parallelepiped-content-is-the-absolute-determinant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For every real square matrix A and bounded Jordan set E, the image A[E] is Jordan and has content |det A| times the content of E.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Represent the column parallelepiped as the image of the unit cube under its column matrix.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply L1 and use that the unit cube has content one.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Retain the singular case, where both the determinant and content are zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-near-identity-c-one-maps-sandwich-cubes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-mean-value-inequality-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be convex and open, and let $f:U\\to\\mathbb R^n$ be totally differentiable at every point. If $M\\ge0$ satisfies $\\|Df(z)v\\|_2\\le M\\|v\\|_2$ for every $z\\in U$ and $v\\in\\mathbb R^m$, then\n\n$$\\|f(y)-f(x)\\|_2\\le M\\|y-x\\|_2\\qquad(x,y\\in U).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty complete metric space ([[def-complete-metric-space]])\nand let $f : X \\to X$ be a contraction with constant $q$, so\n$d(f(u),f(v)) \\le q\\,d(u,v)$ for all $u,v \\in X$ and $0 \\le q < 1$\n([[def-lipschitz-holder-contraction]]). Then:\n\n1. There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Subtract the identity map and apply L1, with norm equivalence tracked, to obtain the outer expanded-cube containment.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a point in the contracted cube, rewrite the preimage equation as a contraction self-map of the closed cube; prove the cube nonempty and complete and invoke L2.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Translate the fixed-point equation back to a preimage and record the strict contraction bound, positive radius, and equality behavior at cube faces.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-local-c-one-volume-distortion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-near-identity-c-one-maps-sandwich-cubes",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "A C-one map whose derivative is uniformly close to the identity sandwiches a cube between its contracted and expanded copies.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "An invertible linear image scales Jordan content by the absolute determinant.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "At a point with invertible derivative, normalize the map by translation and the inverse derivative; continuity of the derivative gives a cube on which the normalized derivative is uniformly close to identity.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply L1 to sandwich the normalized image, then apply L2 to undo the linear normalization and obtain lower and upper content factors.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let the derivative-closeness parameter tend to zero and state all constants uniformly on the chosen cube.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-euclidean-inverse-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $f:U\\to\\mathbb R^n$ be\n$C^1$, and let $a\\in U$.  If $Df(a)$ is invertible, then there are open sets\n$V,W\\subseteq\\mathbb R^n$ with $a\\in V\\subseteq U$ and $f(a)\\in W$ such that\n$f|_V:V\\to W$ is bijective.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-lipschitz-images-of-null-sets-in-rn-are-null",
+          "source_section": "Statement",
+          "quote": "If $T:\\mathbb R^m\\to\\mathbb R^m$ is Lipschitz and $E$ is null, then $T[E]$ is null.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Continuity sends the compact source to a compact, hence bounded, image.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use L1 and compactness to obtain finitely many neighborhoods on which the map and inverse are Lipschitz, and prove boundary(image) is contained in image(boundary source).",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Split the source boundary across the finite local cover, apply L2 to each piece, and use the Jordan boundary criterion to prove the compact image Jordan.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Check the empty source and explain where global injectivity is used in the boundary inclusion.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every selected cover member, neighborhood, or inverse chart is chosen only after membership/nonemptiness is established; compactness reduces to finitely many choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "**Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "A subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-compactness-is-intrinsic",
+          "source_section": "Statement",
+          "quote": "**Compactness read in the ambient space.** $A$ is a compact subset of $X$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-graphs-of-continuous-functions-have-content-zero",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $Q\\subseteq\\mathbb R^m$ be a closed nondegenerate rectangle, and let $f:Q\\to\\mathbb R$ be continuous. Its graph has content zero in $\\mathbb R^{m+1}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every point of the compact set, use L2 to choose a small grid rectangle whose enlargement has closure inside the open set; compactness yields a finite subcover after reconciling intrinsic and ambient covers.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Take the finite union of the closed rectangles; L1 makes it compact, and the un-enlarged rectangles place the original compact set in its interior while the enlarged closures keep the union inside the open set.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Its boundary lies in finitely many coordinate hyperplanes, hence is null, so the Jordan boundary criterion proves the union Jordan; handle the empty compact set by the empty union.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every selected cover member, neighborhood, or inverse chart is chosen only after membership/nonemptiness is established; compactness reduces to finitely many choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-bounded-open-jordan-sets-have-compact-grid-exhaustions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-finite-jordan-cover-sum-bounds",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Finite grid unions admit valid Jordan-content sum bounds, including content-zero overlaps.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-jordan-boundary-criterion",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its boundary $\\partial E$ is null, equivalently has content zero.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On successively refined grids retain closed cells contained in the open Jordan set, and pass to common refinements so the retained compact unions increase.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every compact subset is eventually retained; omitted cells meeting the set lie in a shrinking grid neighborhood of its boundary.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use L2 and grid-cover control, with L1 for the finite unions, to prove the remainder content tends to zero; include the empty open set.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-change-of-variables-for-compact-jordan-sets": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-local-c-one-volume-distortion",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "On sufficiently small cubes a C-one diffeomorphism distorts Jordan content between factors arbitrarily close to its linearized absolute determinant.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-injective-c-one-images-of-compact-jordan-sets-are-jordan",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "An injective C-one map with invertible derivative sends compact Jordan sets to compact Jordan sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For square matrices of the same finite size, det(AB)=det(A)det(B).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use the compact Jordan-neighborhood lemma and L2 to place source and image in legitimate Jordan domains and to discharge transformed-set measurability.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a nonnegative integrand, take a sufficiently fine finite interior-disjoint rectangle cover and use L1 plus upper sums to prove one direction of the integral inequality.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply the same inequality to the C-one inverse; L3 and L4 identify the reciprocal Jacobian factors and turn the two inequalities into equality.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Split a signed integrand into positive and negative parts, prove both transformed parts integrable, subtract, and check empty and zero-content source sets.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every selected cover member, neighborhood, or inverse chart is chosen only after membership/nonemptiness is established; compactness reduces to finitely many choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-jordan-content-under-a-c-one-diffeomorphism": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For an injective C-one map with invertible derivative on a neighborhood of a compact Jordan set K, integration over its image equals integration over K with factor |det Dg|.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-jordan-content-and-indicator-integrability",
+          "source_section": "Statement",
+          "quote": "A metric-bounded set $E\\subseteq\\mathbb R^m$ is Jordan measurable if and only\nif its indicator $1_E$ is Riemann integrable on a fixed nondegenerate bounding\nrectangle $Q$. In that case\n$$\\int_Q1_E=\\operatorname{cont}(E).$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply L1 to the constant-one function on the compact Jordan image.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use L2 on source and image to identify the two constant-one integrals with Jordan contents.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Retain the empty and zero-content cases, where both sides vanish.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every selected cover member, neighborhood, or inverse chart is chosen only after membership/nonemptiness is established; compactness reduces to finitely many choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-compactly-supported-riemann-integral-is-well-defined": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "For a compactly supported Riemann-integrable function f on real n-space, choose a nondegenerate closed rectangle Q containing its support and define the global integral of f to be its Riemann integral on Q.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-jordan-set-integral-well-defined",
+          "source_section": "Statement",
+          "quote": "The definition of $\\int_E f$ is independent of the chosen bounding rectangle.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Given two nondegenerate rectangles Q and Q' containing the support, enclose both in a third rectangle R; because every nonzero point lies in the support, f vanishes on R outside Q and outside Q'.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Regard Q and Q' as Jordan sets and apply L2 to their zero extensions on R; both extensions equal f restricted to R, so both integrals exist and are equal.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For empty support f is identically zero, so every bounding rectangle gives zero; otherwise step 2.1 proves the definition independent of the rectangle.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 proves that empty support forces the zero function and value zero on every bounding rectangle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 handles the identically-zero function."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The definition and proof include dimension n=1 and a single bounding interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Bounding rectangles are explicitly nondegenerate; a support contained in a point is still handled by any surrounding nondegenerate rectangle."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses closed rectangles and zero extension across all faces, so endpoint values agree."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof compares two arbitrary bounding rectangles and constructs a common one explicitly; it makes no varying nonempty choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The well-definedness statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The well-definedness statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-change-of-variables-for-compactly-supported-functions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "A compact subset of an open Euclidean set lies in the interior of a compact Jordan set contained in that open set.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Compact-Jordan change of variables holds for an injective C-one map with invertible derivative.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-support-and-compactly-supported-riemann-integral-in-rn",
+          "source_section": "Planned Definition (synchronize at Step 5)",
+          "quote": "The support of f is the closure of the set on which f is nonzero; f is compactly supported when that support is compact.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-compactly-supported-riemann-integral-is-well-defined",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The Riemann integral of a compactly supported function is independent of the nondegenerate bounding rectangle containing its support.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use L3 and L4 to fix the global compact-support integrals, identify the compact preimage of the target support, and choose a compact Jordan neighborhood of it inside the diffeomorphism region.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "L4",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply L1 to the compact preimage of the support and choose a compact Jordan neighborhood inside the diffeomorphism region.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply L2 on that neighborhood; zero support outside it reduces both global integrals to the compact-Jordan formula, including empty support.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-change-of-variables-on-bounded-open-jordan-sets": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-bounded-open-jordan-sets-have-compact-grid-exhaustions",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "A bounded open Jordan set has an increasing compact grid exhaustion whose omitted Jordan content tends to zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Compact-Jordan change of variables holds on every compact stage of an injective C-one diffeomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Apply L2 on every compact stage supplied by L1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use the stated boundedness and Riemann-integrability hypotheses on both the image integrand and the absolute-Jacobian transformed integrand to bound the two remainder integrals by their suprema times vanishing remainder contents.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Pass to the limit and verify that open-set boundary values do not alter the Jordan integrals; handle the empty set.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned final derivation explicitly disposes of the empty set, empty support, or empty finite family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-one-dimensional-change-of-variables-with-absolute-derivative": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "In dimension one, compact-Jordan change of variables uses the absolute determinant of the derivative.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "Then $(f\\circ\\varphi)\\,\\varphi'$ is integrable on $[c,d]$ and\n\n$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$\n\nthe left-hand integral being the oriented one of [[def-oriented-integral]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A continuous injective map on the compact interval is strictly monotone; identify the unoriented image interval in its increasing and decreasing cases.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "In the increasing case compare L1 directly with L2; in the decreasing case reverse the oriented endpoints and use |phi'|=-phi'.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Check that the nonzero derivative assumption excludes constant and folding degeneracies and that endpoint derivatives use the library's one-sided convention.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-riemann-integrable-function-with-a-nonintegrable-section": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "A Riemann-integrable function may have exceptional nonintegrable sections, and Fubini uses lower and upper section integrals.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cex-dirichlet-is-not-riemann-integrable",
+          "source_section": "Statement refuted",
+          "quote": "**Refuted:** that every bounded function on a closed bounded interval with\ndistinct endpoints is Riemann integrable",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the function supported on rational points of the vertical line x=1/2 and bound every two-dimensional upper sum by the width of the grid strip meeting that line.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compute vertical sections: the exceptional section is the Dirichlet function and is nonintegrable by L2, while every other section is zero.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Compute horizontal sections and use L1 to reconcile their integrals with the two-dimensional value zero.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-one-existing-iterated-integral-does-not-give-riemann-integrability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "If a bounded function on a product rectangle is Riemann integrable, the lower and upper section-integral envelopes have the common multiple-integral value.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For f(x,y)=x on rational y and zero on irrational y, compute every x-section integral and hence the x-first iterated integral as zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed nonzero x, compute unequal lower and upper y-integrals; at x=0 the section is zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The outer integrals of the two envelopes differ, contradicting the necessary conclusion L1 and proving nonintegrability; verify rectangle endpoints.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-riemann-integrable-function-with-dense-nonintegrable-sections": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Riemann Fubini permits a content-zero exceptional set of nonintegrable sections and controls both lower and upper section envelopes.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define the rational-denominator height construction and show that each rational exceptional layer gives a Dirichlet-type nonintegrable section while irrational layers give zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For an arbitrary epsilon, isolate finitely many small-denominator rational layers and bound the remaining tail uniformly, producing a product grid with small Darboux gap.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Compute both directions of lower, upper, and ordinary iteration and apply L1; verify density and content zero of the exceptional parameters.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-fubini-computes-the-integral-of-x-exp-xy": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-repeated-riemann-integrals-on-rectangles",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "A continuous function on a product rectangle may be integrated repeatedly in either coordinate order.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-ftc-second-part",
+          "source_section": "Statement",
+          "quote": "$$\\int_a^b f \\;=\\; G(b) - G(a) .$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Use L1 to integrate in y first and recognize x exp(xy) as the y-derivative of exp(xy); apply L2.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Simplify the endpoint expression and apply L2 once more in x.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Check x=0 by continuity so no division by x is introduced.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-cavalieri-shear-preserves-jordan-content": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-cavalieri-principle-for-jordan-content",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Jordan sets with equal sectional contents away from a content-zero exceptional parameter set have equal total content.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write the elementary shear and identify each affected coordinate section of the image as a translate of the corresponding original section.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Translations preserve sectional Jordan content, so apply L1 to obtain total-content preservation.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Evaluate the elementary shear determinant as one and compare with the linear scaling theorem.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-parallelepiped-content-from-a-matrix": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-parallelepiped-content-is-the-absolute-determinant",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The Jordan content of the column parallelepiped of a real square matrix is the absolute value of its determinant.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose and display an explicit triangular integer matrix and list its column spanning vectors.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Evaluate its determinant from the finite determinant formula and apply L1.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Compute the same content by base times height, including the sign-to-absolute-value check.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-polar-change-of-variables-on-an-annular-sector": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Compact-Jordan change of variables applies on an injective C-one parameter map with invertible derivative.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-jacobian-determinant-of-a-c-one-map",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The Jacobian determinant of a C-one map is the determinant of its published Jacobian matrix.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the polar map, use L2 and the Pythagorean identity to compute determinant r.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On a compact box with positive inner radius and angular width below one full turn, prove injectivity and nonvanishing determinant.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply L1 to constant one and evaluate the repeated integral, checking both radial and angular endpoints.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-cylindrical-coordinate-jacobian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-jacobian-determinant-of-a-c-one-map",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The Jacobian determinant of a C-one map is the determinant of its Jacobian matrix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Compact-Jordan change of variables requires injectivity and invertible derivative.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the cylindrical map and expand the block-triangular determinant to r.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Choose a positive-radius, seam-free compact parameter box and verify injectivity and nonzero determinant.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "State the resulting integral factor and identify failure at the excluded axis and seam.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-spherical-coordinate-jacobian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-jacobian-determinant-of-a-c-one-map",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The Jacobian determinant of a C-one map is the determinant of its Jacobian matrix.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Compact-Jordan change of variables requires injectivity and invertible derivative.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the standard spherical-coordinate map and simplify its determinant to the stated r-squared sine factor.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Restrict radius away from zero, polar angle away from both poles, and azimuth to a seam-free interval; prove injectivity.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply L2 on that compact box and explain why the absolute value can be removed under the chosen angle convention.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-hyperspherical-coordinate-jacobian": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-jacobian-determinant-of-a-c-one-map",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The Jacobian determinant of a C-one map is the determinant of its Jacobian matrix.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For finite square matrices, determinant is multiplicative.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Establish the two-dimensional base case directly from L1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the induction step, split off the final polar angle, arrange radial, angular, and lower-dimensional derivative columns into blocks, and use L2 to obtain the recurrence.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Solve the recurrence to obtain the product of powers of r and sines, and specify the positive-radius seam-free compact box.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued parameter occurs beyond ordinary algebra already included in the displayed computation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval endpoint or coordinate seam is part of this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-polar-coordinates-are-not-globally-injective": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-jacobian-determinant-of-a-c-one-map",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "For the polar map, the Jacobian determinant is computed from its derivative matrix.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For r>0, use sine and cosine periodicity to show (r,0) and (r,2pi) have the same image although the parameter points differ.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "At r=0, show every angle maps to the origin and compute the Jacobian determinant as zero using L1.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conclude that neither global injectivity nor derivative invertibility holds on the usual closed polar rectangle.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-omitting-the-absolute-jacobian-reverses-sign": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "The unoriented one-dimensional image formula uses the absolute derivative.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take the reflection phi(x)=1-x on [0,1] and the constant-one image integrand; compute the image integral as one.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compute phi'=-1, so the transformed integral without an absolute value is minus one while L1 gives one.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Verify injectivity, endpoint reversal, and nonvanishing derivative so the missing absolute value is the only failed clause.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-noninjective-change-of-variables-double-counts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Planned Statement (synchronize at Step 5)",
+          "quote": "Change of variables assumes the C-one map is injective on the compact Jordan source.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let K=[-2,-1] union [1,2] and phi(x)=x^2; verify K is compact Jordan and phi' is nonzero throughout K.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "definitions"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compute phi[K]=[1,4] with content three and compute the absolute-Jacobian integral over the two components as three plus three.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since six differs from three, the formula fails exactly because both components cover the same image, confirming the necessity of injectivity in L1.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The planned statement fixes a nondegenerate rectangle, positive-dimensional coordinate box, or explicit nonempty witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned final derivation records the zero function, zero content, singular factor, or zero-radius exclusion as applicable."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional, one-cell, one-point, or one-factor specialization is covered by the first or final planned step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned proof identifies the relevant singular matrix, coincident graph, collapsed support, seam, or nonintegrable-section degeneration; otherwise nondegeneracy is explicit."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed-rectangle faces, interval endpoints, or parameter-box seams are addressed explicitly in the planned derivation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; any invoked criterion is cited in its required direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned top-level statement is not a biconditional; no converse is asserted silently."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

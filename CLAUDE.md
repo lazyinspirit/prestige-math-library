@@ -107,15 +107,22 @@ banner; the public sees only `published`.
 
 ## Hard rules
 
-- **No shell-permission prompts (owner, 2026-07-30).** This binds the
-  orchestrator and every current and future subagent. Run routine repository
-  reads, writes, and gates inside the workspace sandbox and choose
-  non-escalated command forms. Do not request shell-command approval from the
-  owner. On runtimes that expose `dangerouslyDisableSandbox`, pass it on every
-  Bash call as the existing unattended-build backstop; on runtimes that do not,
-  stay within their already-granted workspace permissions. If an indispensable
-  operation truly cannot be expressed without new authority, stop and record a
-  blocker instead of raising a permission prompt.
+- **No permission prompts of ANY kind (owner, 2026-07-30; broadened
+  2026-08-11).** This binds the orchestrator and every current and future
+  subagent. The 2026-08-11 wording is the owner's: *"Do not ask and do not let
+  any agents ask for shell command permissions, edit permissions, git
+  permissions, or any permissions whatsoever."* Run routine repository reads,
+  writes, gates, commits and agent dispatches inside the workspace sandbox and
+  choose non-escalated command forms. On runtimes that expose
+  `dangerouslyDisableSandbox`, pass it on **every** Bash call as the existing
+  unattended-build backstop; on runtimes that do not, stay within their
+  already-granted workspace permissions. An orchestrator dispatching agents is
+  responsible for the prompts its agents raise as well as its own: every brief
+  it writes must carry this rule. If an indispensable operation truly cannot be
+  expressed without new authority, **stop and record a blocker** in the run
+  record — that is the escape hatch, not a prompt. Committing to a feature
+  branch is routine and needs no approval; pushing, publishing, and anything
+  else outward-facing remains a separate owner decision, unchanged by this rule.
 
 - **Context continuity and compaction (owner, 2026-08-03).** Once active
   context reaches **60%**, automatically save durable session history at the

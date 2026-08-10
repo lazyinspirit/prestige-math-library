@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "level": "frontier-10",
+  "scope": [
+    "lem-two-colour-ramsey-arrow-recursion",
+    "thm-finite-graph-ramsey-binomial-bound",
+    "cor-ramsey-recursion-and-diagonal-upper-bound",
+    "thm-r-three-three-equals-six",
+    "thm-diagonal-ramsey-counting-lower-bound",
+    "thm-finite-ramsey-for-uniform-subsets",
+    "thm-konig-infinity-lemma-for-ordered-trees",
+    "lem-infinite-pigeonhole-on-the-naturals",
+    "thm-infinite-ramsey-on-the-naturals",
+    "cor-infinite-ramsey-for-dedekind-infinite-sets",
+    "cor-finite-ramsey-by-konig-compactness",
+    "thm-canonical-ramsey-theorem-for-pairs",
+    "lem-colour-focussing-for-arithmetic-progressions",
+    "thm-van-der-waerden-with-monochromatic-difference",
+    "thm-schur-monochromatic-sum",
+    "ex-r-three-three-both-bounds",
+    "ex-w-three-two-equals-nine",
+    "ex-infinite-monotone-subsequence-by-ramsey",
+    "ex-infinite-convex-or-concave-subsequence-by-ramsey",
+    "fs-two-colouring-forces-an-infinite-monochromatic-progression",
+    "cex-infinite-branching-is-not-enough-for-konig",
+    "lem-polygonal-ray-general-position",
+    "lem-polygonal-crossing-parity-is-locally-constant",
+    "thm-polygonal-jordan-curve",
+    "lem-polygonal-arc-does-not-separate-the-plane",
+    "lem-plane-graph-faces-are-finite-with-one-unbounded-face",
+    "lem-face-containment-under-plane-subgraphs",
+    "lem-plane-edge-face-incidence",
+    "prop-plane-forest-has-one-face",
+    "lem-equal-plane-face-boundaries-force-a-cycle",
+    "prop-face-boundaries-in-two-connected-plane-graphs",
+    "prop-face-boundaries-in-three-connected-plane-graphs",
+    "prop-maximal-plane-triangulation-characterisation",
+    "thm-euler-formula-for-connected-plane-graphs",
+    "cor-euler-formula-for-disconnected-plane-graphs",
+    "lem-plane-face-handshake-by-girth",
+    "cor-planar-simple-graph-edge-bound",
+    "cor-triangle-free-planar-edge-bound",
+    "cor-planar-graph-has-low-degree-vertex",
+    "cor-k-five-and-k-three-three-are-nonplanar",
+    "cor-planar-graphs-have-no-kuratowski-subdivision",
+    "prop-maximally-planar-edge-characterisation",
+    "lem-kuratowski-minors-are-topological-minors",
+    "lem-three-connected-graph-has-a-contractible-edge",
+    "lem-three-connected-kuratowski-free-is-planar",
+    "lem-separation-augmentation-for-kuratowski-free-graphs",
+    "lem-edge-maximal-kuratowski-free-is-three-connected",
+    "thm-kuratowski-wagner-planarity-characterisation",
+    "thm-plane-dual-exists-and-double-dual-recovers-primal",
+    "thm-six-colour-theorem-for-planar-graphs",
+    "lem-kempe-component-colour-swap",
+    "lem-alternating-kempe-paths-cannot-both-occur",
+    "thm-five-colour-theorem",
+    "ex-euler-formula-on-a-tree-cycle-and-k-four",
+    "cex-k-four-is-planar-but-not-three-colourable",
+    "ex-petersen-graph-nonplanar-by-kuratowski",
+    "ex-one-planar-graph-two-nonisomorphic-duals",
+    "ex-five-colouring-by-a-kempe-swap",
+    "cex-k-three-three-satisfies-the-planar-edge-bound",
+    "cex-a-wild-arc-drawing-is-not-a-plane-graph"
+  ],
+  "contracts": {
+    "lem-two-colour-ramsey-arrow-recursion": {
+      "citations": [{"fact":"F1","source":"def-ramsey-colouring-and-arrow-notation","source_section":"Planned Statement (synchronize at Step 5)","quote":"A red-blue colouring witnesses $N\\to(s,t)^2$ when it contains a red $s$-set or a blue $t$-set.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"pivot-split","claim":"Choose a pivot, partition the remaining vertices by its two incident colours, and apply the two input arrow hypotheses to the corresponding side.","step":"1.1","inputs":["F1","given","definitions"]},
+        {"id":"assemble-clique","claim":"Adjoin the pivot in the matching-colour case, or retain the opposite-colour homogeneous set, to prove the recursion.","step":"2.1","inputs":["F1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The statement assumes positive target sizes and a finite complete vertex set of the displayed size."},
+        {"case":"zero","status":"not_applicable","reason":"No zero target size occurs; the recursion is stated only for $s,t\\ge2$."},
+        {"case":"one","status":"checked","evidence":"The planned statement records the separate arrow base cases before step 1.1."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 allows either pivot-neighbour colour class to be too small and uses the other hypothesis."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 checks the exact $s-1$ and $t-1$ thresholds before adjoining the pivot."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 chooses one pivot only from the explicitly nonempty finite vertex set."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The planned statement is an implication, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse recursion is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-graph-ramsey-binomial-bound": {
+      "citations": [{"fact":"L1","source":"lem-two-colour-ramsey-arrow-recursion","source_section":"Planned Statement (synchronize at Step 5)","quote":"If $m\\to(s-1,t)^2$ and $n\\to(s,t-1)^2$, then $m+n\\to(s,t)^2$ for $s,t\\ge2$.","uses":["2.1"]},{"fact":"L2","source":"thm-pascals-rule","source_section":"Statement","quote":"Pascal's rule. $\\displaystyle\\binom{n+1}{k+1} = \\binom{n}{k} + \\binom{n}{k+1}$","uses":["2.1"]}],
+      "derivations": [
+        {"id":"base","claim":"Prove the $s=1$ and $t=1$ arrow base cases directly from the definition.","step":"1.1","inputs":["given","definitions"]},
+        {"id":"pascal-induction","claim":"Induct on $s+t$, substitute the two smaller binomial witnesses into L1, and identify their sum using L2.","step":"2.1","inputs":["L1","L2","step 1.1","induction"]},
+        {"id":"conclude","claim":"Discharge the induction for all positive $s,t$ and retain the displayed explicit witness rather than mere existence.","step":"3.1","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Positive clique targets are required and their binomial witness is a finite natural."},
+        {"case":"zero","status":"not_applicable","reason":"Target sizes zero are outside the planned definition of this arrow statement."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 proves both target-size-one bases."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 covers the only degenerate induction faces before L1 is invoked."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 uses Pascal's identity at both boundary coefficients."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The induction uses no choice from a varying family of nonempty sets."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is a universal implication about every colouring."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse to the sufficient binomial bound is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-ramsey-recursion-and-diagonal-upper-bound": {
+      "citations": [{"fact":"L1","source":"lem-two-colour-ramsey-arrow-recursion","source_section":"Planned Statement (synchronize at Step 5)","quote":"If $m\\to(s-1,t)^2$ and $n\\to(s,t-1)^2$, then $m+n\\to(s,t)^2$ for $s,t\\ge2$.","uses":["1.1"]},{"fact":"L2","source":"thm-binomial-theorem","source_section":"Statement","quote":"For all $x, y \\in \\mathbb{R}$ and every $n \\in \\mathbb{N}$,","uses":["2.1"]}],
+      "derivations": [
+        {"id":"leastness","claim":"Apply L1 to least Ramsey witnesses and use the definition of $R(s,t)$ to obtain the recursion inequality.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"diagonal","claim":"Specialise the explicit binomial theorem and bound one coefficient by the full sum of nonnegative coefficients at $x=y=1$.","step":"2.1","inputs":["L2","step 1.1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Ramsey numbers here have positive integer arguments."},
+        {"case":"zero","status":"not_applicable","reason":"The recursion is explicitly restricted to $s,t\\ge2$."},
+        {"case":"one","status":"checked","evidence":"The planned statement records $R(1,t)=R(s,1)=1$ as the boundary behind step 1.1."},
+        {"case":"degenerate","status":"not_applicable","reason":"No graph degeneration remains after the positive target hypotheses."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 includes $k=1$ and the central-coefficient endpoints allowed by its displayed range."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Leastness follows from well-ordering after existence and uses no choice function."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Only upper inequalities are asserted."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No equality or converse bound is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-r-three-three-equals-six": {
+      "citations": [{"fact":"L1","source":"thm-the-strong-pigeonhole-principle","source_section":"Statement","quote":"If $\\lvert A\\rvert > k\\,\\lvert B\\rvert$ then there is $b \\in B$ with $\\lvert f^{-1}[\\{b\\}]\\rvert > k$.","uses":["1.1"]}],
+      "derivations": [
+        {"id":"upper-six","claim":"At one vertex of a red-blue $K_6$, use L1 to find three incident edges of one colour and close a monochromatic triangle by cases.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"lower-five","claim":"Colour a five-cycle red and its complementary five-cycle blue and verify neither colour contains a triangle.","step":"2.1","inputs":["given","definitions","construct"]},
+        {"id":"least","claim":"Combine the upper and lower witnesses with the definition of the least Ramsey number.","step":"3.1","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The theorem concerns the fixed nonempty complete graphs on five and six vertices."},
+        {"case":"zero","status":"not_applicable","reason":"No zero parameter occurs."},
+        {"case":"one","status":"not_applicable","reason":"The fixed target is a triangle, not a one-vertex clique."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 verifies every triangle type in the extremal five-cycle colouring."},
+        {"case":"endpoints","status":"checked","evidence":"Steps 1.1 and 2.1 establish both the upper and lower endpoints needed for equality."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 fixes an arbitrary vertex of the explicitly six-vertex graph."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement is an exact numerical equality, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No biconditional occurs."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-diagonal-ramsey-counting-lower-bound": {
+      "citations": [{"fact":"L1","source":"thm-cardinality-of-a-set-of-functions","source_section":"Statement","quote":"Then $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$","uses":["1.1","2.1"]},{"fact":"L2","source":"thm-binomial-closed-formula","source_section":"Statement","quote":"$\\binom{n}{k}\\cdot k!\\cdot (n-k)! = n!$","uses":["3.1"]}],
+      "derivations": [
+        {"id":"count-all","claim":"Count all red-blue colourings of the edges of $K_N$ as $2^{\\binom N2}$ by L1.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"count-bad","claim":"For each $k$-vertex set count colourings monochromatic on it, sum these finite bad sets, and obtain the sufficient strict inequality for a good colouring.","step":"2.1","inputs":["L1","step 1.1","counting"]},
+        {"id":"inequality","claim":"Put $N=\\lfloor2^{k/2}\\rfloor$ in the finite inequality and use L2/product cancellation estimates to prove it for every $k\\ge3$.","step":"3.1","inputs":["L2","step 2.1","algebra"]},
+        {"id":"conclude-lower","claim":"A good colouring on $N$ vertices gives $R(k,k)>N$, and the strict numerical estimate yields the displayed bound.","step":"4.1","inputs":["step 3.1","definitions"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The proof fixes $k\\ge3$ and a positive finite vertex set."},
+        {"case":"zero","status":"not_applicable","reason":"The lower bound excludes $k=0$."},
+        {"case":"one","status":"not_applicable","reason":"The lower bound excludes $k=1$."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 counts both possible monochromatic colours and permits overlaps in the finite union bound."},
+        {"case":"endpoints","status":"checked","evidence":"Step 3.1 separately verifies the small endpoint $k=3$ before the monotone estimate."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Existence follows from a strict finite count, not from a choice principle."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Only a sufficient counting condition and resulting lower bound are asserted."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse to the union-bound estimate is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-finite-ramsey-for-uniform-subsets": {
+      "citations": [{"fact":"L1","source":"thm-finite-graph-ramsey-binomial-bound","source_section":"Planned Statement (synchronize at Step 5)","quote":"For all positive $s,t$, $\\binom{s+t-2}{s-1}\\to(s,t)^2$.","uses":["1.1"]},{"fact":"L2","source":"thm-cardinality-of-a-set-of-functions","source_section":"Statement","quote":"Then $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$","uses":["2.1"]}],
+      "derivations": [
+        {"id":"bases","claim":"Prove the $k=1$, $r=1$, and $c=1$ bases using finite pigeonhole and L1 for the pair case.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"stabilise-patterns","claim":"For the induction from $k$ to $k+1$, grow a finite sequence while using L2 to pigeonhole the finitely many colour patterns on earlier $k$-sets.","step":"2.1","inputs":["L2","step 1.1","induction"]},
+        {"id":"apply-induction","claim":"Apply the $k$-uniform induction hypothesis to the stabilised set and append the reserved vertex to obtain an $r$-set homogeneous for $(k+1)$-subsets.","step":"3.1","inputs":["step 2.1","induction"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"All three parameters $k,c,r$ are explicitly positive."},
+        {"case":"zero","status":"not_applicable","reason":"Zero colours and zero-uniform subsets are outside the theorem's stated form."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 proves the $k=1$, $c=1$, and $r=1$ faces."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 permits repeated colour patterns and counts the entire finite function set."},
+        {"case":"endpoints","status":"checked","evidence":"Step 3.1 verifies that adjoining the reserved vertex gives exactly $r$ vertices."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Every selection is from one explicitly finite set within a finite induction."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement is existential-universal, not biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse witness bound is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-konig-infinity-lemma-for-ordered-trees": {
+      "citations": [{"fact":"L1","source":"thm-well-ordering-principle","source_section":"Statement","quote":"Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element","uses":["2.1"]}],
+      "derivations": [
+        {"id":"viable-root","claim":"Call a node viable when it has descendants at arbitrarily high levels and prove the root is viable by finite branching.","step":"1.1","inputs":["given","definitions","finite-union"]},
+        {"id":"least-successor","claim":"At a viable node, prove some successor is viable and choose the least such successor using the built-in finite order and L1.","step":"2.1","inputs":["L1","step 1.1","definitions"]},
+        {"id":"recursive-branch","claim":"Use recursion on the uniquely determined least viable successor and verify the resulting nodes form a branch meeting every level.","step":"3.1","inputs":["step 2.1","recursion"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The planned definition includes the empty sequence as root and step 1.1 starts there."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 handles level zero explicitly."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 covers a node with exactly one successor without a case exception."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 allows dead ends but proves the selected viable node is not one."},
+        {"case":"endpoints","status":"not_applicable","reason":"The tree has unbounded natural levels and no terminal endpoint is asserted."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 selects the least viable successor, so the recursive construction is definable in ZF rather than an appeal to dependent choice."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is an implication."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"An infinite branch plainly supplies nodes at each level, but that converse is not the stated theorem."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-infinite-pigeonhole-on-the-naturals": {
+      "citations": [{"fact":"L1","source":"thm-sum-rule","source_section":"Statement","quote":"a finite disjoint union is finite with $\\lvert A \\cup B\\rvert = \\lvert A\\rvert + \\lvert B\\rvert$","uses":["2.1"]}],
+      "derivations": [
+        {"id":"assume-finite","claim":"Assume every colour class is finite and note that the finitely many fibres partition $\\mathbb N$.","step":"1.1","inputs":["given","definitions"]},
+        {"id":"finite-union","claim":"Apply L1 iteratively to make the union finite, contradicting the published infinitude of $\\mathbb N$.","step":"2.1","inputs":["L1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The domain $\\mathbb N$ is nonempty and the finite colour set must be nonempty for a colouring to exist."},
+        {"case":"zero","status":"checked","evidence":"The planned statement notes that no map from $\\mathbb N$ to the empty colour set exists."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 covers the one-colour case, whose unique fibre is all of $\\mathbb N$."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 allows empty colour classes among the finite partition."},
+        {"case":"endpoints","status":"not_applicable","reason":"The natural-number domain has no largest endpoint."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The contradiction uses the given finite family of fibres and makes no selections from them."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is an implication."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-infinite-ramsey-on-the-naturals": {
+      "citations": [{"fact":"L1","source":"lem-infinite-pigeonhole-on-the-naturals","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of $\\mathbb N$ has an infinite colour class, in ZF.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"base","claim":"Prove $k=1$ with L1 and state the vacuous one-colour boundary.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"reservoir","claim":"Choose the least next vertex and then the least colour with an infinite compatible reservoir, iterating entirely inside the ordered naturals.","step":"2.1","inputs":["L1","step 1.1","recursion"]},
+        {"id":"induct-uniformity","claim":"Colour $k$-subsets of the selected sequence by their stabilised extension colour, apply the induction hypothesis, and recover a homogeneous $(k+1)$-set family.","step":"3.1","inputs":["step 2.1","induction"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The domain is $\\mathbb N$ and the subset size and colour count are positive."},
+        {"case":"zero","status":"not_applicable","reason":"The theorem is stated for positive $k$ and a nonempty finite colour set."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 handles $k=1$ and the one-colour case."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 permits empty colour classes while L1 supplies one infinite class."},
+        {"case":"endpoints","status":"not_applicable","reason":"The natural-number domain has no terminal endpoint."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 uses least naturals and least colours; this is the explicit ZF choice audit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse colouring construction is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-infinite-ramsey-for-dedekind-infinite-sets": {
+      "citations": [{"fact":"L1","source":"thm-infinite-ramsey-on-the-naturals","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF.","uses":["1.1"]},{"fact":"F1","source":"def-injection-surjection-bijection","source_section":"Definition","quote":"$f$ is **injective** (one-to-one) if $f(x) = f(y)$ implies $x = y$","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"pullback","claim":"Pull the colouring of $[X]^k$ back along the supplied injection $j:\\mathbb N\\to X$ and apply L1.","step":"1.1","inputs":["L1","F1","given","definitions"]},
+        {"id":"pushforward","claim":"Use injectivity to send the infinite homogeneous subset back to an infinite homogeneous subset of $X$.","step":"2.1","inputs":["F1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A set carrying an injection from $\\mathbb N$ cannot be empty."},
+        {"case":"zero","status":"not_applicable","reason":"The uniformity and number of colours are positive as in the source theorem."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 inherits the source theorem's $k=1$ boundary."},
+        {"case":"degenerate","status":"not_applicable","reason":"Injectivity prevents collisions among transported subsets."},
+        {"case":"endpoints","status":"not_applicable","reason":"No ordered endpoint in $X$ is used."},
+        {"case":"nonempty-choice","status":"checked","evidence":"The statement supplies the injection; steps 1.1–2.1 make no selection from an arbitrary infinite set."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary is an implication from supplied Dedekind infinitude."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse characterisation of infinite sets is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-finite-ramsey-by-konig-compactness": {
+      "citations": [{"fact":"L1","source":"thm-konig-infinity-lemma-for-ordered-trees","source_section":"Planned Statement (synchronize at Step 5)","quote":"An ordered finitely branching tree with a node at every level has an infinite branch, in ZF.","uses":["2.1"]},{"fact":"L2","source":"thm-infinite-ramsey-on-the-naturals","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF.","uses":["3.1"]}],
+      "derivations": [
+        {"id":"bad-tree","claim":"Assuming no finite witness, form the ordered tree of bad colourings of initial segments and verify restriction closure and finite branching.","step":"1.1","inputs":["given","definitions","counting"]},
+        {"id":"infinite-colouring","claim":"Use L1 to obtain a coherent branch and unite its compatible finite functions into a colouring of $[\\mathbb N]^k$.","step":"2.1","inputs":["L1","step 1.1"]},
+        {"id":"contradiction","claim":"Apply L2 to the branch colouring; its finite initial segment contradicts the badness of the corresponding tree node.","step":"3.1","inputs":["L2","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.1 includes the empty colouring as the tree root."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 checks level zero and then uses positive $k,c,r$ from the finite theorem."},
+        {"case":"one","status":"checked","evidence":"Step 3.1 covers $r=1$ and $c=1$ without changing the contradiction."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 verifies every level has at least one bad colouring under the contradiction assumption."},
+        {"case":"endpoints","status":"not_applicable","reason":"The compactness tree has natural levels with no final endpoint."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 invokes the choice-free ordered-tree lemma and makes no hidden sequence of arbitrary choices."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The result is a second implication proof of an already stated theorem."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No logical equivalence between finite and infinite Ramsey over weak set theories is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-canonical-ramsey-theorem-for-pairs": {
+      "citations": [{"fact":"L1","source":"thm-infinite-ramsey-on-the-naturals","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"equality-types","claim":"Encode equality relations among the colours of finitely many ordered pairs by a finite colouring of suitably larger subsets and apply L1.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"classify","claim":"On the homogeneous infinite set, analyse the stable equality pattern and prove it gives exactly constant, injective, left-dependent, or right-dependent behaviour.","step":"2.1","inputs":["L1","step 1.1","cases"]},
+        {"id":"thin","claim":"Thin once more where necessary and verify the four displayed canonical forms are exhaustive, with their defining injectivity conditions.","step":"3.1","inputs":["step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The theorem concerns pairs from an infinite subset of $\\mathbb N$."},
+        {"case":"zero","status":"not_applicable","reason":"There is no zero-uniform parameter in the pair theorem."},
+        {"case":"one","status":"not_applicable","reason":"The domain consists of two-element subsets."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 treats repeated colour values and collapses them to the constant or one-coordinate cases."},
+        {"case":"endpoints","status":"not_applicable","reason":"No finite endpoint is involved."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Steps 1.1–3.1 use the ZF theorem on $\\mathbb N$ and definable thinning only."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem asserts an exhaustive existence classification, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is needed; each canonical form is visibly a colouring form."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-colour-focussing-for-arithmetic-progressions": {
+      "citations": [{"fact":"L1","source":"thm-the-strong-pigeonhole-principle","source_section":"Statement","quote":"If $\\lvert A\\rvert > k\\,\\lvert B\\rvert$ then there is $b \\in B$ with $\\lvert f^{-1}[\\{b\\}]\\rvert > k$.","uses":["2.1"]},{"fact":"L2","source":"thm-cardinality-of-a-set-of-functions","source_section":"Statement","quote":"Then $A^{B}$ is finite and $\\lvert A^{B}\\rvert = \\lvert A\\rvert^{\\lvert B\\rvert}$","uses":["2.1"]}],
+      "derivations": [
+        {"id":"focus-base","claim":"State the focussed progression invariant and prove its length-one base, including positive common difference.","step":"1.1","inputs":["given","definitions"]},
+        {"id":"colour-vector","claim":"Compare translated blocks by their finite colour vectors, count those vectors with L2, and use L1 to obtain repeated patterns.","step":"2.1","inputs":["L1","L2","step 1.1"]},
+        {"id":"extend","claim":"Use the repeated pattern to extend every equally coloured focussed progression by one term while preserving a common future focus.","step":"3.1","inputs":["step 2.1","induction"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The lemma uses a positive finite colour set and nonempty finite progressions."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 excludes zero common difference explicitly."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 establishes the one-term focussed base."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 permits identical colour vectors and uses their repetition as the intended case."},
+        {"case":"endpoints","status":"checked","evidence":"Step 3.1 checks all translated blocks remain inside the chosen finite initial interval."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Only finitely many explicitly constructed blocks and colour vectors are used."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is an extension implication."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse focussing criterion is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-van-der-waerden-with-monochromatic-difference": {
+      "citations": [{"fact":"L1","source":"lem-colour-focussing-for-arithmetic-progressions","source_section":"Planned Statement (synchronize at Step 5)","quote":"Finite colour focussing extends equally coloured progressions to a longer monochromatic arithmetic progression.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"outer-base","claim":"Set up the induction on progression length and the inner induction on the number of focus colours, checking length one and one colour.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"focus-iteration","claim":"Iterate L1 with explicit finite bounds until a focus and its progression share one colour.","step":"2.1","inputs":["L1","step 1.1","double-induction"]},
+        {"id":"extract","claim":"Extract the required positive common difference and the full progression from the focussed configuration and discharge both inductions.","step":"3.1","inputs":["step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The colour set and target progression length are positive."},
+        {"case":"zero","status":"checked","evidence":"The planned statement and step 3.1 require a strictly positive common difference."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 handles one colour and progression length one."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 permits coincident colour patterns but not coincident progression terms."},
+        {"case":"endpoints","status":"checked","evidence":"Step 3.1 checks the progression lies in the promised initial interval."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The double induction is finite and makes only explicit finite selections."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is a finite existence statement."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse bound is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-schur-monochromatic-sum": {
+      "citations": [{"fact":"L1","source":"thm-finite-graph-ramsey-binomial-bound","source_section":"Planned Statement (synchronize at Step 5)","quote":"For all positive $s,t$, $\\binom{s+t-2}{s-1}\\to(s,t)^2$.","uses":["1.1"]}],
+      "derivations": [
+        {"id":"difference-colouring","claim":"Apply finite Ramsey to a complete graph whose edge $ij$ receives the colour of the positive difference $j-i$.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"triangle-sum","claim":"For a monochromatic triangle $i<j<k$, set $x=j-i$, $y=k-j$, and $z=k-i$ and verify $x+y=z$ with all three the same colour.","step":"2.1","inputs":["step 1.1","arithmetic"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A positive finite colour count and a nonempty initial interval are used."},
+        {"case":"zero","status":"checked","evidence":"Step 2.1 uses strict vertex inequalities, so $x,y,z$ are positive and zero never appears."},
+        {"case":"one","status":"checked","evidence":"The one-colour case is included by step 1.1."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 permits $x=y$; distinctness of the summands is not claimed."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 bounds every difference by the stated finite interval length."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The proof uses one finite Ramsey witness and no choice family."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Schur's theorem is an existence implication."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-r-three-three-both-bounds": {
+      "citations": [{"fact":"L1","source":"thm-r-three-three-equals-six","source_section":"Planned Statement (synchronize at Step 5)","quote":"The first exact Ramsey number is $R(3,3)=6$.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"worked-upper","claim":"Run the six-vertex majority-colour argument with labelled vertices and exhibit the forced triangle.","step":"1.1","inputs":["L1","given","construct"]},
+        {"id":"worked-lower","claim":"List the red five-cycle and blue complement edges and verify directly that both colour classes are five-cycles and triangle-free.","step":"2.1","inputs":["L1","step 1.1","construct"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The example fixes labelled complete graphs on five and six vertices."},
+        {"case":"zero","status":"not_applicable","reason":"No zero parameter occurs."},
+        {"case":"one","status":"not_applicable","reason":"No one-vertex boundary occurs."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 checks every triangle of the five-vertex witness, not only a picture."},
+        {"case":"endpoints","status":"checked","evidence":"Steps 1.1 and 2.1 work both numerical endpoints of the exact value."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All vertices and colours in the worked example are explicitly labelled."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example demonstrates an equality, not an iff claim."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No biconditional occurs."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-w-three-two-equals-nine": {
+      "citations": [{"fact":"L1","source":"thm-van-der-waerden-with-monochromatic-difference","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of a sufficiently long initial interval has a monochromatic arithmetic progression whose common difference has the same colour.","uses":["2.1"]}],
+      "derivations": [
+        {"id":"lower-eight","claim":"Display the two-colouring of $0,\\ldots,7$ and check every three-term arithmetic progression has two colours.","step":"1.1","inputs":["given","construct"]},
+        {"id":"upper-nine","claim":"Fix the colour of 4, reduce by reflection and colour exchange, and exhaust the forced cases on $0,\\ldots,8$ until a monochromatic triple appears.","step":"2.1","inputs":["L1","step 1.1","cases"]},
+        {"id":"exactness","claim":"Combine the eight-point avoidance colouring and nine-point forcing proof to conclude $W(3,2)=9$ under zero-based indexing.","step":"3.1","inputs":["step 1.1","step 2.1","definitions"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The example fixes intervals of eight and nine elements."},
+        {"case":"zero","status":"checked","evidence":"Steps 1.1–3.1 state the zero-based interval convention while requiring positive common differences."},
+        {"case":"one","status":"not_applicable","reason":"The fixed problem has two colours and three terms."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 quotients only by proved colour-swap and reflection symmetries."},
+        {"case":"endpoints","status":"checked","evidence":"Steps 1.1 and 2.1 exhaust the two exact interval lengths."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The colouring and finite case tree are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example proves a numerical equality."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No biconditional is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-infinite-monotone-subsequence-by-ramsey": {
+      "citations": [{"fact":"L1","source":"thm-infinite-ramsey-on-the-naturals","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF.","uses":["1.1"]},{"fact":"F1","source":"def-sequence","source_section":"Definition","quote":"A **sequence of reals** is a function $x : \\mathbb{N} \\to \\mathbb{R}$.","uses":["1.1","2.1"]}],
+      "derivations": [
+        {"id":"pair-colouring","claim":"Colour $i<j$ according as $x_i\\le x_j$ or $x_i>x_j$ and apply L1 to obtain an infinite homogeneous index set.","step":"1.1","inputs":["L1","F1","given","definitions"]},
+        {"id":"subsequence","claim":"Enumerate that subset increasingly and translate its constant pair colour into a nondecreasing or strictly decreasing subsequence.","step":"2.1","inputs":["F1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"A sequence has the nonempty infinite domain $\\mathbb N$."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 includes the index $0$ under the library's sequence convention."},
+        {"case":"one","status":"not_applicable","reason":"The conclusion is an infinite subsequence rather than a length-one claim."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 assigns equal values to the nondecreasing colour, so repeated terms are handled."},
+        {"case":"endpoints","status":"not_applicable","reason":"There is no final sequence index."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 enumerates a subset of $\\mathbb N$ by least elements, not arbitrary choices."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example is a one-way application."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse to Ramsey is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-infinite-convex-or-concave-subsequence-by-ramsey": {
+      "citations": [{"fact":"L1","source":"thm-infinite-ramsey-on-the-naturals","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF.","uses":["1.1"]}],
+      "derivations": [
+        {"id":"triple-colouring","claim":"For each index triple, colour by the sign of the successive-slope difference; general position excludes the zero sign.","step":"1.1","inputs":["L1","given","definitions"]},
+        {"id":"homogeneous-slopes","claim":"Apply L1 to triples and prove the homogeneous sign makes the selected sequence's successive secant slopes strictly monotone.","step":"2.1","inputs":["L1","step 1.1"]},
+        {"id":"shape","claim":"Translate monotone secant slopes into the stated strict convexity or concavity condition on every selected triple.","step":"3.1","inputs":["step 2.1","ordered-field-algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The input is an infinite real sequence."},
+        {"case":"zero","status":"not_applicable","reason":"No zero parameter occurs; zero slope difference is excluded by general position."},
+        {"case":"one","status":"not_applicable","reason":"Convexity is tested on triples, not singleton data."},
+        {"case":"degenerate","status":"checked","evidence":"Step 1.1 states the no-collinear-triples general-position hypothesis and explains exactly where it is used."},
+        {"case":"endpoints","status":"not_applicable","reason":"The sequence has no final index."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 2.1 applies the ZF theorem on natural indices and enumerates by least elements."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example is a one-way Ramsey application."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-two-colouring-forces-an-infinite-monochromatic-progression": {
+      "citations": [{"fact":"L1","source":"thm-van-der-waerden-with-monochromatic-difference","source_section":"Planned Statement (synchronize at Step 5)","quote":"Every finite colouring of a sufficiently long initial interval has a monochromatic arithmetic progression whose common difference has the same colour.","uses":["2.1"]}],
+      "derivations": [
+        {"id":"construct-colouring","claim":"Colour natural numbers in alternating dyadic blocks, spelling out the convention at zero and every power-of-two boundary.","step":"1.1","inputs":["given","construct"]},
+        {"id":"refute-progression","claim":"For any positive start and difference, show an infinite arithmetic progression eventually crosses each sufficiently large dyadic boundary and hence meets both colours; contrast this with L1's finite conclusion.","step":"2.1","inputs":["L1","step 1.1","archimedean-arithmetic"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The refuted statement concerns the nonempty set $\\mathbb N$."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 assigns a colour to zero and step 2.1 requires positive common difference."},
+        {"case":"one","status":"not_applicable","reason":"The false statement fixes two colours and an infinite progression."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 excludes constant progressions by the positive-difference convention."},
+        {"case":"endpoints","status":"checked","evidence":"Step 1.1 assigns every dyadic block endpoint unambiguously."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The countercolouring is an explicit function."},
+        {"case":"iff-forward","status":"not_applicable","reason":"This is a refuted universal statement, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is involved."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-infinite-branching-is-not-enough-for-konig": {
+      "citations": [{"fact":"L1","source":"thm-konig-infinity-lemma-for-ordered-trees","source_section":"Planned Statement (synchronize at Step 5)","quote":"An ordered finitely branching tree with a node at every level has an infinite branch, in ZF.","uses":["2.1"]}],
+      "derivations": [
+        {"id":"tree","claim":"Define the prefix tree of finite strictly decreasing natural sequences and exhibit a node at every finite level.","step":"1.1","inputs":["given","construct"]},
+        {"id":"failure","claim":"Show the root has infinitely many successors, prove an infinite branch would be an infinite descending natural sequence, and refute that by well-ordering; identify finite branching as the failed hypothesis of L1.","step":"2.1","inputs":["L1","step 1.1","well-ordering"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.1 includes the empty sequence as root."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 handles level zero and sequences ending at zero."},
+        {"case":"one","status":"checked","evidence":"Step 1.1 exhibits the one-term nodes and their finite descendant heights."},
+        {"case":"degenerate","status":"checked","evidence":"Step 2.1 distinguishes infinite branching at the root from finite branching at each node."},
+        {"case":"endpoints","status":"checked","evidence":"Step 2.1 notes every descending sequence reaching zero is terminal."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The tree is explicit and the nonexistence proof makes no sequence of choices."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The counterexample sharpens one hypothesis rather than proving an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"No converse is asserted."}
+      ],
+      "finite_smoke": []
+    }
+  }
+}
