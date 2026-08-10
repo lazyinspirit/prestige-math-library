@@ -32,9 +32,9 @@ In particular, a singular linear image has content zero.
 
 **Given:** A linear endomorphism $T$ with matrix $A$ and a bounded Jordan set $E$.
 
-[L1] A real square matrix is invertible exactly when its determinant is nonzero ([[thm-real-square-matrix-invertible-iff-determinant-nonzero]]), and every invertible matrix is a product of elementary matrices ([[thm-invertible-matrices-factor-into-elementary-matrices]]).
+[L1] For every $n\ge1$ and $A\in M_n(\mathbb R)$, the matrix $A$ is invertible if and only if $\det(A)\ne0$ ([[thm-real-square-matrix-invertible-iff-determinant-nonzero]]); every invertible $A\in M_n(\mathbb R)$ is a finite product of elementary matrices, with the identity represented by the empty product ([[thm-invertible-matrices-factor-into-elementary-matrices]]).
 
-[L2] Row swaps, row scalings, and row additions have the corresponding determinant effects ([[thm-determinant-under-elementary-row-operations]]).
+[L2] For $n\ge1$ and $A\in M_n(R)$ over a commutative ring, interchanging two rows changes $\det(A)$ to $-\det(A)$, multiplying one row by $c\in R$ changes it to $c\det(A)$, and adding $c$ times one row to a distinct row leaves it equal to $\det(A)$ ([[thm-determinant-under-elementary-row-operations]]).
 
 [L3] Cavalieri identifies content with the integral of sectional contents ([[cor-cavalieri-principle-for-jordan-content]]).
 
@@ -42,9 +42,9 @@ In particular, a singular linear image has content zero.
 
 [L5] Every Euclidean linear map is bounded and continuous ([[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).
 
-[L6] Gaussian elimination produces row-echelon form, and a square matrix is invertible exactly when that form has a pivot in every row ([[thm-gaussian-elimination-produces-row-echelon-form]], [[thm-invertible-matrix-theorem]]).
+[L6] Every finite matrix over a field is row equivalent, by Gaussian elimination, to a matrix in row echelon form ([[thm-gaussian-elimination-produces-row-echelon-form]]). For $A\in M_n(F)$, the matrix $A$ is invertible if and only if it has a pivot in every row and every column ([[thm-invertible-matrix-theorem]]).
 
-[L7] A finite row reduction is left multiplication by a product of elementary matrices, each of which is invertible ([[cor-a-row-reduction-is-a-product-of-elementary-matrices]], [[cor-elementary-matrices-are-invertible]]).
+[L7] If $r$ elementary row operations transform $A$ into $B$, and $E_1,\ldots,E_r$ are their elementary matrices in execution order, then $B=E_r\cdots E_1A$; for $r=0$ the empty product is the identity and $B=A$ ([[cor-a-row-reduction-is-a-product-of-elementary-matrices]]). Every elementary matrix $E\in M_n(F)$ is invertible, with inverse the elementary matrix of the inverse row operation ([[cor-elementary-matrices-are-invertible]]).
 
 ## Proof
 

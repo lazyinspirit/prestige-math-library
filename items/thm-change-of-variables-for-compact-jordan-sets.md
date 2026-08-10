@@ -38,13 +38,13 @@ $$\int_{g(K)}f(y)\,dy=\int_K f(g(x))|\det Dg(x)|\,dx.$$
 
 **Given:** The map $g$, compact Jordan set $K$, and bounded $f$ in the statement.
 
-[L1] The determinant is a polynomial in the matrix entries ([[cor-determinant-is-a-polynomial-in-the-matrix-entries]]), and componentwise continuity gives continuity of maps assembled from finitely many continuous components ([[thm-componentwise-limits-and-continuity]]).
+[L1] For each fixed $n\ge1$, the function $\det:M_n(\mathbb R)\to\mathbb R$ is evaluation of a polynomial in the $n^2$ matrix-entry variables ([[cor-determinant-is-a-polynomial-in-the-matrix-entries]]), and componentwise continuity gives continuity of maps assembled from finitely many continuous components ([[thm-componentwise-limits-and-continuity]]).
 
 [L2] Local $C^1$ volume distortion is bounded by factors arbitrarily close to the absolute determinant of the derivative ([[lem-local-c-one-volume-distortion]]), with finite Jordan cover bounds controlling upper and lower sums ([[lem-finite-jordan-cover-sum-bounds]]).
 
 [L3] The image $g(K)$ is compact Jordan ([[thm-injective-c-one-images-of-compact-jordan-sets-are-jordan]]), while the inverse function theorem supplies local $C^1$ inverses ([[thm-euclidean-inverse-function-theorem]]).
 
-[L4] The chain rule multiplies derivatives ([[thm-chain-rule-for-total-derivatives]]) and determinants multiply ([[thm-determinant-multiplicative]]).
+[L4] The chain rule multiplies derivatives ([[thm-chain-rule-for-total-derivatives]]), and for $n\ge1$ and $A,B\in M_n(R)$ over a commutative ring one has $\det(AB)=\det(A)\det(B)$ ([[thm-determinant-multiplicative]]).
 
 [L5] The Riemann integral is linear, monotone, and stable under absolute value ([[thm-multidimensional-integral-properties]]), with Jordan-set values independent of the bounding rectangle ([[lem-jordan-set-integral-well-defined]]).
 

@@ -36,7 +36,7 @@ On compact boxes with $r>0$, every $\phi_j$ strictly between $0$ and $\pi$, and 
 
 [L1] Sine and cosine have their standard derivatives and satisfy $\sin^2+\cos^2=1$ ([[thm-sine-and-cosine-derivatives]], [[cor-trigonometric-parity-and-pythagorean-identity]]).
 
-[L2] Determinants multiply under matrix products ([[thm-determinant-multiplicative]]).
+[L2] For $n\ge1$ and $A,B\in M_n(R)$ over a commutative ring, $\det(AB)=\det(A)\det(B)$ ([[thm-determinant-multiplicative]]).
 
 [L3] Mathematical induction proves a statement from its base case and induction step ([[thm-induction-principle]]).
 

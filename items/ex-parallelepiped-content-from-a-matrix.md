@@ -34,7 +34,7 @@ The parallelepiped spanned by these vectors has Jordan content $12$.
 
 [L1] The content of a square-matrix parallelepiped is the absolute value of its determinant ([[cor-parallelepiped-content-is-the-absolute-determinant]]).
 
-[L2] The determinant is given by the finite signed-permutation formula ([[def-determinant-of-a-square-matrix]]).
+[L2] For a commutative ring $R$, $n\ge1$, and $A=(a_{ij})\in M_n(R)$, the determinant is the finite signed-permutation sum $\det(A)=\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)\prod_{i<n}a_{\sigma(i),i}$ ([[def-determinant-of-a-square-matrix]]).
 
 ## Verification
 
