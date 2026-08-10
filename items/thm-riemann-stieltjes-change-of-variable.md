@@ -26,9 +26,11 @@ pipeline_run: null
 
 ## Statement
 
-Let $\phi:[c,d]\to[a,b]$ be a strictly increasing continuous bijection. For functions $f,\alpha:[a,b]\to\mathbb R$, one of the two Riemann–Stieltjes integrals below exists if and only if the other does, and in that case
+Let $c<d$ and $a<b$, and let $\phi:[c,d]\to[a,b]$ be a strictly increasing continuous bijection. For functions $f,\alpha:[a,b]\to\mathbb R$, one of the two Riemann–Stieltjes integrals below exists if and only if the other does, and in that case
 
 $$\int_a^b f\,d\alpha=\int_c^d(f\circ\phi)\,d(\alpha\circ\phi).$$
+
+The nondegeneracy hypotheses are not cosmetic. If $c=d$ and $a=b$ both integrals are $0$ by the singleton convention and the identity holds trivially, but no partition exists and the argument below does not apply. If the written endpoints are reversed the intervals are empty, the empty map is vacuously such a bijection, and $f,\alpha$ typed on an empty interval give the displayed integrals no values; that case is excluded rather than asserted.
 
 ## Facts & Assumptions
 

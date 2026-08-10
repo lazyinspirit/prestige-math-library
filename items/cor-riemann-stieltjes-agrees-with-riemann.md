@@ -26,11 +26,11 @@ pipeline_run: null
 
 ## Statement
 
-For the identity function $\operatorname{id}(x)=x$, a bounded $f:[a,b]\to\mathbb R$ is Riemann–Stieltjes integrable with respect to $\operatorname{id}$ exactly when it is Riemann integrable, and then
+Let $a\le b$. For the identity function $\operatorname{id}(x)=x$, a bounded $f:[a,b]\to\mathbb R$ is Riemann–Stieltjes integrable with respect to $\operatorname{id}$ exactly when it is Riemann integrable, and then
 
 $$\int_a^b f\,d\operatorname{id}=\int_a^b f(x)\,dx.$$
 
-The equality also holds for $a=b$ and for reversed endpoints under the oriented conventions.
+For $a=b$ both sides are $0$ by the singleton conventions. For reversed endpoints the statement is about a function defined on the sorted interval: if $a>b$ and $f$ is bounded on $[b,a]$, then both oriented conventions negate the corresponding sorted integral, so the equality is inherited from the case just proved. The hypothesis $a\le b$ is needed for the displayed clause itself, because $[a,b]$ is empty when $a>b$ and a function typed on it supplies no values to integrate.
 
 ## Facts & Assumptions
 
