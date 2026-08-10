@@ -111,45 +111,48 @@ the first step-0 failure of this run.
   `research/frontier-10-alpha-step3-scaffold-review.md` exists and every pair is
   `sufficient`.
 
-## State — step 3 in flight
+## State — step 3, repair round in flight
 
-- **Steps 0, 1, 2 CLEAR.** All 8 Betas exited 0 (36–84 min each). Step-2 gate:
-  `validate-plan`, `depsource`, `coverage-checklist` all green.
-- **Scaffold totals: 12 A pages, 508 items to author, 39 sources, 720 harvested
-  headings, every one disposed** — 508 `included`, 115 `inline`, 26
-  `already-published`, 40 `deferred`, 31 `out-of-scope`. The coverage gate's
-  first real outing found 0 errors. frontier-9, for comparison, shipped 83 items
-  across 20 pages.
-- No A page exceeds 60. `categories-functors` is at exactly 60 (see D2).
-- **Step 3 half one done** — `research/frontier-10-step3-decisions.md`, D1–D4.
-- **Step 3 half two RUNNING** — Alpha dispatched for the breadth/depth review of
-  batches 1–8, and **batch 9 Beta dispatched** (see D1).
-- **The run is now 14 pair-units, not 12.** D1 spliced
-  `gaussian-elimination-and-row-reduction` (80) and
-  `determinants-of-matrices-over-a-commutative-ring` (82) as batch 9: Beta-5
-  correctly refused to scaffold change-of-variables against a library with no
-  determinant, and the owner's build-the-machinery rule says build it.
-  **Batch 5 cannot author until batch 9's interfaces exist.**
-- Supervision: a 15-minute health monitor is armed (owner request). Its first
-  version had a broken staleness detector and gave one false STALE; replaced.
-- Permissions: `.claude/settings.local.json` now allows Bash/Edit/Write
-  unconditionally with `defaultMode: acceptEdits` (owner, no prompts). Gitignored,
-  backup in the session scratchpad. `node tools/gates.mjs --step 0 --run frontier-10` passes
-  `validate-plan.mjs` and `content-policy.mjs --manifest-only`.
-- 8 manifests at `research/frontier-10-batch-{1..8}.pages.json`.
-- Item lists are empty by construction (these pages are unscaffolded in the
-  spec), so the **cross-batch seam count cannot be computed from item lists yet**
-  — `LEVELS.md` §Step 0 requires saying so rather than reporting 0. The
-  *page-level* seam count is a computed 0, above.
-- Nothing dispatched yet.
+- **Steps 0, 1, 2 CLEAR.** Step 0 re-run clean with all **9 batches**: 563 scoped
+  items, 0 errors.
+- **Alpha's step-3 breadth review is DONE** —
+  `research/frontier-10-alpha-step3-scaffold-review.md`, 30 KB. Verdict: **5
+  sufficient, 7 insufficient**, no finding requiring a split. Alpha's own summary:
+  the harvests it checked against the actual sources "were faithful, not
+  decorative".
+- **F1, Alpha's largest finding, is resolved.** Seven load-bearing forward
+  references to two order-203 items, cited from orders 42, 52 and 78 — invisible
+  to every gate. The owner chose relocation; the re-home receipt is
+  `research/frontier-10-rehomed.json`, moving both items to
+  `rings-subrings-and-integral-domains` (46). Verified before writing: the def's
+  six dependencies all sit at 5.3–24, and the lemma's only late dependency is the
+  def, which moves with it. **Batch 8 is NOT fixed by this** — group-actions is
+  order 42, still below 46 — so it redirects to the order-20
+  `def-sum-over-a-finite-index-set` instead.
+- **A gate bug was found and fixed** (`2764386`): `content-policy`'s
+  `batch-b-leaf-target` lacked the same-page exemption `depcheck` and
+  ARCHITECTURE §8 both document, and blocked six legitimate B-page scaffolds. New
+  error `batch-b-leaf-forward` covers the same-page-wrong-direction case that the
+  cross-page check structurally cannot see.
+- **Batch 9 delivered its interfaces**: all four ids batch 5 named exist exactly
+  as named — no substitution to reconcile. 63 items over 4 pages. Still writing
+  notes/contracts.
+- **RUNNING**: batch 9, and step-3 repair Betas for batches 2, 3, 6, 7, 8.
+- **PENDING**: batch 5's repair, which needs batch 9's scaffold on disk.
 
 ## Exact next action
 
-Await Alpha's step-3 review and batch 9. Resolve every `insufficient` pair with
-its owning Beta, have Alpha re-check, then **step 4**: splice all 9 batches into
-`plan-spec.json`, adding the two determinant pages to
-`fubini-and-change-of-variables`' `requires`. Then **step 5** authoring, with
-batch 5 gated behind batch 9's determinant interfaces.
+Await the five repair Betas and batch 9. Then dispatch batch 5's repair (it needs
+batch 9 on disk), have **Alpha re-check every repaired pair plus batch 9**, and
+only then **step 4**: splice all 9 batches into `plan-spec.json` with
+`--rehomed research/frontier-10-rehomed.json`, adding the two determinant pages
+to `fubini-and-change-of-variables`' `requires`. Then step 5 authoring.
+
+The re-home's page-list edits (removing the two ids from
+`incidence-algebras-and-mobius-inversion`, adding them to
+`rings-subrings-and-integral-domains`) are **staged for the publishing commit**,
+per ARCHITECTURE §3.11a — never before. Until then `depcheck` may report them
+`multi-home`, which is the truth.
 
 ## Open risks
 
