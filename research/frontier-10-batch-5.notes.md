@@ -1,7 +1,7 @@
 # frontier-10 batch 5 — Beta scaffold notes
 
 **Owner:** Beta-frontier-10-5  
-**Step:** 3 B5 repair complete in the batch-5 artifacts; two upstream interface requests are staged below for batch 9
+**Step:** 4 B-leaf dependency repair complete in the batch-5 artifacts; no batch-5 repair blocker remains
 **Writable scope observed:** only the four `research/frontier-10-batch-5.*` artifacts
 
 ## Inventory and proposed page summaries
@@ -226,7 +226,7 @@ Every id below was opened from `items/<id>.md`, read on disk, and confirmed `sta
 
 ### Source-checked
 
-`cex-dirichlet-is-not-riemann-integrable`, `cor-exponential-reciprocal-and-positivity`, `cor-jordan-content-finite-additivity`, `cor-trigonometric-parity-and-pythagorean-identity`, `def-c-one-map-and-local-inverse`, `def-dirichlet-and-thomae-functions`, `def-invertible-euclidean-linear-map`, `def-jacobian-matrix-and-gradient`, `def-jordan-inner-and-outer-content`, `def-multidimensional-darboux-integral`, `def-multidimensional-darboux-sums`, `def-multidimensional-grid-partition`, `def-multidimensional-rectangle-and-volume`, `def-null-and-content-zero-in-rn`, `def-riemann-integral-over-a-jordan-set`, `ex-thomae-is-riemann-integrable-with-integral-zero`, `lem-derivative-of-a-power`, `lem-euclidean-linear-maps-have-matrices-and-are-bounded`, `lem-finite-cube-covers-admit-grid-control`, `lem-jordan-set-integral-well-defined`, `lem-p-norms-are-norms-and-induce-the-published-metrics`, `thm-banach-fixed-point`, `thm-chain-rule-for-total-derivatives`, `thm-complete-subspace-iff-closed`, `thm-componentwise-limits-and-continuity`, `thm-continuous-functions-on-compact-jordan-sets-are-integrable`, `thm-continuous-injection-on-an-interval-is-strictly-monotone`, `thm-continuous-on-a-rectangle-is-riemann-integrable`, `thm-derivative-of-exponential`, `thm-euclidean-inverse-function-theorem`, `thm-ftc-second-part`, `thm-graphs-of-continuous-functions-have-content-zero`, `thm-heine-borel-rn`, `thm-jordan-boundary-criterion`, `thm-jordan-content-and-indicator-integrability`, `thm-lipschitz-images-of-null-sets-in-rn-are-null`, `thm-mean-value-inequality-for-total-derivatives`, `thm-multidimensional-integral-properties`, `thm-multidimensional-riemann-criterion`, `thm-sine-and-cosine-derivatives`, `thm-sine-cosine-signs-monotonicity-and-ranges`, `thm-sine-cosine-zero-sets-and-fundamental-period`, `thm-substitution`, `thm-total-derivative-computes-directional-and-partial-derivatives`.
+`cor-exponential-reciprocal-and-positivity`, `cor-jordan-content-finite-additivity`, `cor-trigonometric-parity-and-pythagorean-identity`, `def-c-one-map-and-local-inverse`, `def-dirichlet-and-thomae-functions`, `def-invertible-euclidean-linear-map`, `def-jacobian-matrix-and-gradient`, `def-jordan-inner-and-outer-content`, `def-multidimensional-darboux-integral`, `def-multidimensional-darboux-sums`, `def-multidimensional-grid-partition`, `def-multidimensional-rectangle-and-volume`, `def-null-and-content-zero-in-rn`, `def-riemann-integral-over-a-jordan-set`, `fs-bounded-implies-riemann-integrable`, `lem-derivative-of-a-power`, `lem-euclidean-linear-maps-have-matrices-and-are-bounded`, `lem-finite-cube-covers-admit-grid-control`, `lem-jordan-set-integral-well-defined`, `lem-p-norms-are-norms-and-induce-the-published-metrics`, `thm-banach-fixed-point`, `thm-chain-rule-for-total-derivatives`, `thm-complete-subspace-iff-closed`, `thm-componentwise-limits-and-continuity`, `thm-continuous-functions-on-compact-jordan-sets-are-integrable`, `thm-continuous-injection-on-an-interval-is-strictly-monotone`, `thm-continuous-on-a-rectangle-is-riemann-integrable`, `thm-derivative-of-exponential`, `thm-euclidean-inverse-function-theorem`, `thm-ftc-second-part`, `thm-graphs-of-continuous-functions-have-content-zero`, `thm-heine-borel-rn`, `thm-jordan-boundary-criterion`, `thm-jordan-content-and-indicator-integrability`, `thm-lipschitz-images-of-null-sets-in-rn-are-null`, `thm-mean-value-inequality-for-total-derivatives`, `thm-multidimensional-integral-properties`, `thm-multidimensional-riemann-criterion`, `thm-sine-and-cosine-derivatives`, `thm-sine-cosine-signs-monotonicity-and-ranges`, `thm-sine-cosine-zero-sets-and-fundamental-period`, `thm-substitution`, `thm-total-derivative-computes-directional-and-partial-derivatives`.
 
 For the newly direct `thm-componentwise-limits-and-continuity` edge, I opened
 its full Statement and checked clauses 1 and 3 against Leibman's independent
@@ -286,3 +286,74 @@ the original four interfaces visible requires the orchestrator's Step-4 splice,
 and making the final two visible requires batch 9 to accept this handoff. Both
 actions are explicitly outside batch 5's writable scope. No wrapper gate was
 run, as directed.
+
+## Step-4 B-leaf dependency repair
+
+The three forbidden dependencies on published examples-page items are repaired
+without adding, dropping, or retitling any batch-5 item. The coverage harvest is
+unchanged because no item was added and every harvested disposition still names
+the same scaffolded result.
+
+1. `ex-riemann-integrable-function-with-a-nonintegrable-section` now depends on
+   the A-page result `fs-bounded-implies-riemann-integrable` instead of
+   `cex-dirichlet-is-not-riemann-integrable` (**route 1: cite the underlying
+   result**). The false-statement item's Refutation, step 4.1, proves the exact
+   fact used here: the Dirichlet restriction has lower Darboux integral zero,
+   upper Darboux integral one, and is not Riemann integrable. The proof contract
+   now quotes that clause and no longer names the published B-page witness.
+2. `cex-one-existing-iterated-integral-does-not-give-riemann-integrability`
+   no longer depends on `cex-dirichlet-is-not-riemann-integrable` (**route 3:
+   drop an unused dependency**). Its contract already computes the unequal
+   lower and upper integrals of every nonzero vertical section directly, then
+   invokes the planned rectangular Fubini theorem contrapositively; no step used
+   the published counterexample.
+3. `ex-riemann-integrable-function-with-dense-nonintegrable-sections` no longer
+   depends on `ex-thomae-is-riemann-integrable-with-integral-zero` (**route 3:
+   drop an unused dependency**). Its contract constructs the rational-
+   denominator height function itself, proves each rational-height section is
+   Dirichlet-type and nonintegrable, and proves multiple integrability by the
+   finite-small-denominator/uniform-tail Darboux estimate. The one-dimensional
+   Thomae example supplied no proof input.
+
+The companion page now declares `the-exponential-function` and
+`sine-cosine-and-the-definition-of-pi` in `requires`, in addition to its own A
+page. These are genuine page prerequisites: the exponential computation cites
+`thm-derivative-of-exponential` and
+`cor-exponential-reciprocal-and-positivity`, while the coordinate examples cite
+the derivative, parity/Pythagorean, sign/range, and zero-set/period results for
+sine and cosine. The sine/cosine page itself reaches the exponential page, so
+declaring both may produce the instructed `redundant-prereq` warning; that
+warning is intentionally retained rather than overriding the dispatch.
+
+For this repair I reopened and checked the exact on-disk interfaces of
+`cex-dirichlet-is-not-riemann-integrable` and
+`ex-thomae-is-riemann-integrable-with-integral-zero` before removing their
+edges, and `fs-bounded-implies-riemann-integrable` before selecting it as the
+replacement. I also reopened the six published exponential/trigonometric
+interfaces named above. All are `status: published`. The replacement and page-
+requirement interfaces use the existing `source-checked` route recorded in the
+published-dependency audit; the removed examples were inspected only to verify
+that their facts were either replaced exactly or already proved locally.
+
+### Current repair gate record
+
+This record supersedes the earlier Step-3 blocker state above. The determinant
+handoff is now visible across the current batch manifests.
+
+- All three batch JSON artifacts parse. The replacement proof-contract quote is
+  an exact normalized substring of the published Refutation clause it cites.
+- `coverage-checklist.mjs` passes: 1 A page, 46 harvested headings, 0 errors and
+  0 warnings.
+- The required isolated `content-policy.mjs --manifest-only` invocation still
+  reports the same 9 `batch-dependency-missing` errors for determinant items
+  owned by batch 9; it reports no B-leaf, provenance, generation, notation, or
+  other batch-5 policy defect. The whole-run manifest invocation sees the
+  cross-batch owners and passes 583 scoped items with 0 errors and 0 warnings.
+- Because this Beta may not edit `research/plan-spec.json`, I validated an
+  in-memory copy in which every current `frontier-10-batch-*.pages.json` page
+  replaces its stale spliced copy. `validate-plan.mjs` then reports no `b-leaf`
+  error at all and no error naming either batch-5 page. Its only four remaining
+  errors are unrelated `undeclared-prereq` edges into
+  `incidence-algebras-and-mobius-inversion` from other pages. The orchestrator
+  must re-splice the repaired batch artifacts before the literal plan-spec gate
+  can reflect this state.

@@ -2,20 +2,34 @@
 page: rings-subrings-and-integral-domains
 title: "Rings, Subrings, Integral Domains and Fields"
 status: published
-items: [def-ring, def-commutative-ring, lem-ring-elementary-consequences,
-        lem-integer-multiples-in-a-ring, lem-ring-units-form-a-group,
-        def-zero-divisor-and-integral-domain, lem-domain-cancellation,
-        def-division-ring, lem-field-is-a-commutative-ring,
-        lem-commutative-division-ring-is-a-field, def-quaternions,
-        thm-quaternions-form-a-division-ring, def-ordered-ring,
+items: [def-ring,
+        def-commutative-ring,
+        lem-ring-elementary-consequences,
+        lem-integer-multiples-in-a-ring,
+        lem-ring-units-form-a-group,
+        def-zero-divisor-and-integral-domain,
+        lem-domain-cancellation,
+        def-division-ring,
+        lem-field-is-a-commutative-ring,
+        lem-commutative-division-ring-is-a-field,
+        def-quaternions,
+        thm-quaternions-form-a-division-ring,
+        def-ordered-ring,
         lem-ordered-ring-cone-and-order-agree,
-        lem-ordered-field-is-an-ordered-ring, def-subring, lem-subring-criterion,
-        def-subfield, def-ring-homomorphism,
+        lem-ordered-field-is-an-ordered-ring,
+        def-subring,
+        lem-subring-criterion,
+        def-subfield,
+        def-ring-homomorphism,
         lem-ring-homomorphism-basic-properties,
         lem-ring-homomorphism-of-fields-is-a-field-homomorphism,
-        def-product-ring, def-ring-of-functions,
+        def-product-ring,
+        def-ring-of-functions,
         lem-integer-multiples-agree-with-canonical-natural,
-        def-ring-characteristic, lem-characteristic-and-additive-order]
+        def-ring-characteristic,
+        lem-characteristic-and-additive-order,
+        def-finite-sum-in-a-commutative-monoid,
+        lem-finite-sum-reindexing-and-fubini]
 examples: []
 ---
 

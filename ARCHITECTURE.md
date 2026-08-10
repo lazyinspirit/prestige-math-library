@@ -416,7 +416,23 @@ see is a waiver nobody re-reads, and this one moves published pages.
 `items:` list and adding it to the new page's. On a published page that is a live
 reader-facing change, so it belongs in the commit that publishes the new page,
 never before — and until it lands, `depcheck` reports the item `multi-home`,
-which is the truth. Nor does the receipt touch the item text: a moved item's
+which is the truth.
+
+**That deferral assumes the DESTINATION is unpublished** — it is written for the
+case a foundational page is being built underneath existing ones, where applying
+the move early would strand the item on a page no reader can see yet.
+**When both endpoints are already published the deferral inverts** (measured on
+`frontier-10`, 2026-08-11): the move is coherent the instant it lands, because
+the item simply appears on the earlier published page instead, and *deferring* it
+is what breaks things. `validate-plan` resolves item homes from the `library/`
+page files on disk, so a staged move leaves it computing the OLD home and raising
+`undeclared-prereq` on every page that cites the item from between the two
+orders — four of them here, and no gate can be green until the move is applied.
+Apply it at step 4 in that case, with the owner's approval already in the
+receipt, and record why. **Both halves must move together**: the page `items:`
+lists in `library/` AND the page item lists in `plan-spec.json`. Moving only the
+page files leaves the spec disagreeing with disk and raises `dup-id` — 2 of them
+here, which is how the omission was caught. Nor does the receipt touch the item text: a moved item's
 own wikilinks may now point *forward*, and its prose may make positional claims
 the move falsifies. Both are ordinary content repairs the audit has to make.
 

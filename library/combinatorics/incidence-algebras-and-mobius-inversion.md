@@ -3,8 +3,6 @@ page: incidence-algebras-and-mobius-inversion
 title: "Incidence Algebras and Möbius Inversion"
 status: published
 items: [def-poset-interval-and-finiteness-conditions,
-        def-finite-sum-in-a-commutative-monoid,
-        lem-finite-sum-reindexing-and-fubini,
         def-incidence-algebra-and-convolution,
         def-delta-and-zeta-incidence-functions,
         lem-incidence-convolution-associative-and-distributive,

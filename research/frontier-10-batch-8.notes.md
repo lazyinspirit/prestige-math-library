@@ -1,6 +1,6 @@
 # frontier-10 batch 8 — Beta scaffold notes
 
-Run role: `Beta-frontier-10-8`, step-3 R2 repair. Date: 2026-08-11.
+Run role: `Beta-frontier-10-8`, step-4 B-leaf repair. Date: 2026-08-11.
 
 This is an enrichment of two published pages. The batch manifest contains only
 newly minted IDs. Every new item is to be authored with `status: draft`; the
@@ -281,15 +281,15 @@ statement opened on disk).
 | `cex-free-action-need-not-be-transitive` | ai-generated | ai-generated | checkable disjoint-union construction; it is a leaf and no item depends on it |
 | `ex-rotations-of-a-square-on-its-vertices` | ai-altered | ai-generated | source-backed square rotation action written as translation on \(\mathbb Z/4\) |
 | `ex-nonfaithful-coset-action-of-z-six` | ai-generated | ai-generated | finite check of the core-kernel theorem; it is a leaf |
-| `ex-class-equation-of-s-three` | literature-derived | ai-altered | J Example 14.12 and P conjugation computation |
+| `ex-class-equation-of-s-three` | literature-derived | ai-altered | J Example 14.12; the six permutations and all needed conjugations are recomputed from P symmetric-group definitions and the finite-bijection count |
 | `cex-s-three-has-trivial-center` | ai-altered | ai-generated | J Example 14.12 repurposed as the exact boundary witness for the finite-p-group centre theorem |
-| `ex-class-equation-of-the-dihedral-group-of-order-eight` | literature-derived | ai-altered | J Example 14.13 and P square-symmetry group |
-| `cex-groups-of-order-p-cubed-need-not-be-abelian` | ai-altered | ai-generated | P square-symmetry group repurposed as the exact order-\(2^3\) boundary witness for the order-\(p^2\) theorem |
+| `ex-class-equation-of-the-dihedral-group-of-order-eight` | literature-derived | ai-altered | J Example 14.13; the batch item reconstructs the order-eight subgroup from P symmetric-group, subgroup and power machinery |
+| `cex-groups-of-order-p-cubed-need-not-be-abelian` | ai-altered | ai-generated | the preceding batch-owned square-group construction is repurposed as the exact order-\(2^3\) boundary witness for the order-\(p^2\) theorem |
 | `ex-conjugate-subgroups-and-normalizers-in-s-three` | literature-derived | ai-altered | B Example 3.111/Corollary 3.110 |
 | `ex-fixed-point-congruence-for-an-action-of-z-two` | ai-generated | ai-generated | five-point finite witness; it is a leaf |
 | `cex-fixed-point-congruence-fails-without-p-group-hypothesis` | ai-altered | ai-generated | natural \(S_3\)-action cross-checked against the retained class-equation computation; \(3\not\equiv0\pmod2\) gives the exact failed conclusion |
 | `cex-cauchys-theorem-does-not-extend-to-composite-divisors` | literature-derived | ai-altered | A4C opening and Theorem 1; direct index-two normality/conjugation proof is restated in house style |
-| `ex-two-colourings-of-a-square-up-to-dihedral-symmetry` | literature-derived | ai-altered | J §14.3 opening problem, with a complete fixed-count table |
+| `ex-two-colourings-of-a-square-up-to-dihedral-symmetry` | literature-derived | ai-altered | J §14.3 opening problem, using the preceding batch-owned square-group construction and a complete fixed-count table |
 | `ex-binary-necklaces-of-length-four` | literature-derived | ai-altered | standard Cauchy–Frobenius rotation count, cross-checked by its four fixed counts |
 | `cex-orbit-count-is-not-set-size-divided-by-group-order` | ai-generated | ai-generated | direct leaf counterexample derived from P's singleton trivial action |
 
@@ -311,9 +311,10 @@ statement opened on disk).
 - `cex-s-three-has-trivial-center`: the retained class equation partitions
   \(S_3\) as \(1+2+3\), so the singleton conjugacy class is the identity and
   the centre is trivial.
-- `cex-groups-of-order-p-cubed-need-not-be-abelian`: the published
-  square-symmetry group has eight elements and noncommuting rotation and
-  reflection generators, hence gives the case \(p=2\).
+- `cex-groups-of-order-p-cubed-need-not-be-abelian`: the preceding batch-owned
+  class-equation example constructs a square-symmetry subgroup with eight
+  elements and noncommuting rotation and reflection generators, hence gives the
+  case \(p=2\).
 - `cex-fixed-point-congruence-fails-without-p-group-hypothesis`: the natural
   transitive action of \(S_3\) on three points has no global fixed point, while
   \(3\not\equiv0\pmod2\).
@@ -338,14 +339,20 @@ consumer depends on the published statement component.
 | route | every published ID using that route |
 |---|---|
 | `L` | `def-center-of-a-group`, `def-congruence-modulo-an-integer`, `def-coset`, `def-function`, `def-group-action`, `def-kernel-and-image-of-group-homomorphism`, `def-normal-subgroup`, `def-orbit-and-stabilizer`, `def-quotient-group`, `lem-stabilizer-is-a-subgroup`, `thm-cardinality-of-a-set-of-functions`, `thm-cayleys-theorem`, `thm-conjugation-homomorphism`, `thm-conjugation-is-an-automorphism`, `thm-first-isomorphism-theorem-groups`, `thm-group-actions-correspond-to-homomorphisms`, `thm-orbits-partition-the-set` |
-| `A` | `cor-cardinality-of-the-power-set`, `cor-euclids-lemma-for-finite-products`, `cor-index-tower-finite`, `cor-order-of-a-quotient-group`, `cor-prime-order-group-is-cyclic`, `def-divides-in-z`, `def-factorial-and-falling-factorial`, `def-finite-cardinality`, `def-generated-subgroup`, `def-group`, `def-index`, `def-injection-surjection-bijection`, `def-integers-modulo-n`, `def-nat-power`, `def-order-in-a-group`, `def-prime`, `def-subgroup`, `def-sum-over-a-finite-index-set`, `def-symmetric-group`, `ex-conjugation-in-symmetric-group-three`, `ex-symmetries-of-a-square`, `ex-trivial-action-of-z-two-is-not-faithful`, `lem-center-is-normal`, `lem-coset-membership-and-equality`, `lem-cyclic-subgroup-is-the-set-of-powers`, `lem-group-power-laws`, `lem-order-characterisation`, `lem-subgroup-criterion`, `lem-symmetric-group-is-a-group`, `prop-canonical-quotient-map`, `thm-canonical-prime-factorisation`, `thm-double-counting`, `thm-index-two-subgroup-is-normal`, `thm-integers-modulo-n-basic-algebra`, `thm-lagrange`, `thm-normal-subgroup-characterisations`, `thm-number-of-bijections-of-a-finite-set`, `thm-standard-representatives-modulo-n`, `thm-subset-of-a-finite-set`, `thm-sum-rule` |
+| `A` | `cor-cardinality-of-the-power-set`, `cor-euclids-lemma-for-finite-products`, `cor-index-tower-finite`, `cor-order-of-a-quotient-group`, `cor-prime-order-group-is-cyclic`, `def-divides-in-z`, `def-factorial-and-falling-factorial`, `def-finite-cardinality`, `def-generated-subgroup`, `def-group`, `def-index`, `def-injection-surjection-bijection`, `def-integers-modulo-n`, `def-nat-power`, `def-order-in-a-group`, `def-prime`, `def-subgroup`, `def-sum-over-a-finite-index-set`, `def-symmetric-group`, `ex-trivial-action-of-z-two-is-not-faithful`, `lem-center-is-normal`, `lem-coset-membership-and-equality`, `lem-cyclic-subgroup-is-the-set-of-powers`, `lem-group-power-laws`, `lem-order-characterisation`, `lem-subgroup-criterion`, `lem-symmetric-group-is-a-group`, `prop-canonical-quotient-map`, `thm-canonical-prime-factorisation`, `thm-double-counting`, `thm-index-two-subgroup-is-normal`, `thm-integers-modulo-n-basic-algebra`, `thm-lagrange`, `thm-normal-subgroup-characterisations`, `thm-number-of-bijections-of-a-finite-set`, `thm-standard-representatives-modulo-n`, `thm-subset-of-a-finite-set`, `thm-sum-rule` |
 
-There are 57 unique published dependencies/context items in this ledger. The
+There are 55 unique published dependencies/context items in this ledger. The
 six existing A-page items were all opened. Five are directly reused by new
 items; `thm-cayleys-theorem` is retained as page context but not cited in a new
 proof because none of the new conclusions logically depends on Cayley. The
 existing B-page example was also opened and is reused by the naive-orbit-count
 counterexample.
+
+The two rejected targets, `ex-conjugation-in-symmetric-group-three` and
+`ex-symmetries-of-a-square`, were opened in full to identify exactly what the
+four forbidden edges had imported. They are no longer dependency or context
+entries: both live only on published B pages. Their A-page foundations used by
+the repair were also opened in full and retain route `A` in the table above.
 
 For the step-3 repair, the nine newly introduced published dependencies were
 opened on disk: `thm-first-isomorphism-theorem-groups` uses route `L`; the other
@@ -403,6 +410,12 @@ The high-risk proofs have these non-negotiable shapes:
 - The class equation explicitly separates singleton conjugacy classes, proves
   that they are exactly central elements, and permits the noncentral
   representative list to be empty.
+- The order-eight class-equation example no longer imports a published B-page
+  witness. It defines \(r=(1\,2\,3\,4)\) and \(s=(1\,3)\), checks
+  \(r^4=e\), \(s^2=e\) and \(sr=r^{-1}s\), proves the eight displayed
+  permutations form a nonabelian subgroup, and only then computes its conjugacy
+  classes. The later square-colouring and order-\(p^3\) items cite this earlier
+  same-B-page construction.
 - The fixed-point congruence partitions into orbits and spends the subgroup
   prime-power lemma to show each nonsingleton orbit size is divisible by \(p\).
 - Cauchy's theorem uses the cyclic rotation action on product-one \(p\)-tuples.
@@ -554,7 +567,44 @@ left stale, the later pages will mint duplicate IDs or duplicate statements.
   classification of finite simple groups. No §6 heading in the read range is
   undisposed.
 
-## 10. Continuity checkpoint
+## 10. Step-4 B-leaf repair
+
+No item was added or dropped, so the canonical harvest remains exact and no new
+coverage row is required. The four repairs are:
+
+- `ex-class-equation-of-s-three` →
+  `ex-conjugation-in-symmetric-group-three`: **route 1, cite the underlying
+  results instead.** The item now cites `def-symmetric-group`,
+  `lem-symmetric-group-is-a-group` and
+  `thm-number-of-bijections-of-a-finite-set`; it lists all six permutations and
+  performs every conjugation pointwise in its own verification. The published
+  example supplied only one of those elementary computations.
+- `ex-class-equation-of-the-dihedral-group-of-order-eight` →
+  `ex-symmetries-of-a-square`: **route 2, reconstruct the specific object in
+  the batch-owned item.** From the symmetric-group, subgroup, power and order
+  definitions it constructs
+  \(D=\{e,r,r^2,r^3,s,rs,r^2s,r^3s\}\), proves this is a nonabelian subgroup
+  of order eight, and then computes its conjugacy classes. No duplicate item was
+  minted: this construction belongs inside the already harvested class-equation
+  example.
+- `ex-two-colourings-of-a-square-up-to-dihedral-symmetry` →
+  `ex-symmetries-of-a-square`: **route 2, cite the preceding local
+  reconstruction.** Its dependency is now the earlier batch-owned class-equation
+  example on this same B page, plus `def-group-action` for the induced action on
+  colourings. Same-B backward dependencies are expressly legal.
+- `cex-groups-of-order-p-cubed-need-not-be-abelian` →
+  `ex-symmetries-of-a-square`: **route 2, cite the preceding local
+  reconstruction.** The counterexample now consumes the earlier batch-owned
+  statement that \(D\) has order eight and is nonabelian, rather than reaching
+  into a published examples page.
+
+All replacement published clauses were opened from disk. The two removed
+published examples were also opened from disk before their edges were removed.
+No convention disagreement was introduced: composition remains right-to-left,
+\(D\) denotes the order-eight square group locally, and \(r,s\) satisfy
+\(sr=r^{-1}s\).
+
+## 11. Continuity checkpoint
 
 Checkpoint written after the source/dependency pass and before final gates,
 2026-08-11:
@@ -565,19 +615,15 @@ Checkpoint written after the source/dependency pass and before final gates,
   41 included, 8 inline, 4 already published and 13 declined.
 - `proof-contracts.json` parses and has 40 scoped contracts, one for every
   proof-bearing new item.
-- All 57 unique published dependencies/context items have been opened on disk;
+- All 55 unique published dependencies/context items have been opened on disk;
   none has an AI-generated statement component.
 - No split is needed and no published item/page edit has been made.
-- Gate results and the aggregate-wrapper sandbox blocker are recorded in §11.
+- Gate results and the orchestrator-owned spec-sync handoff are recorded in §12.
 
-## 11. Gate receipt and blocker
+## 12. Gate receipt and blocker
 
-The escalation-free direct gates are green:
+The escalation-free batch-scoped direct gates are green:
 
-- `node tools/validate-plan.mjs research/plan-spec.json --rehomed
-  research/frontier-10-rehomed.json`: exit 0; the declared page order is acyclic
-  and consistent, with no item-level cycles, forward references, B-page
-  dependencies or unresolved IDs among pages carrying item lists.
 - `node tools/coverage-checklist.mjs
   research/frontier-10-batch-8.coverage.json`: exit 0; 1 page, 66 headings, no
   error or warning.
@@ -585,12 +631,28 @@ The escalation-free direct gates are green:
   research/frontier-10-batch-8.pages.json --manifest-only --rehomed
   research/frontier-10-rehomed.json`: exit 0; 47 scoped items, no error or
   warning.
-- All three JSON artifacts parse, the proof scope and contract map both contain
-  exactly 40 IDs, and `git diff --check` is clean for the four allowed files.
+- All three JSON artifacts parse. The proof-bearing item set, proof scope and
+  contract map each contain the same 40 IDs; every contract citation is present
+  in its item's manifest dependencies; and each same-B dependency points to an
+  earlier item.
+- `git diff --check` is clean for the four allowed files.
 - `node tools/prosecheck.mjs` over the four allowed files: exit 0; no errors and
-  three advisory `count-in-prose` warnings for deliberate checkpoint counts.
+  four advisory `count-in-prose` warnings for deliberate ledger/checkpoint
+  counts.
 
-Per the dispatch, `tools/gates.mjs` was not run. The runtime preflight still
-reports the known nested-process `spawnSync EPERM` restriction, but every
-required direct gate above ran successfully without escalation. There is no
-mathematical, source-access, dependency, size or deliverable blocker in batch 8.
+The exact prescribed `validate-plan` command currently exits 1 because
+`research/plan-spec.json` still contains the step-4 copies of the four old
+batch-8 dependency arrays. Editing or re-splicing that file is expressly outside
+this Beta's scope. To separate that stale copy from the repaired artifact, I
+copied the spec to `/tmp`, overlaid exactly the four dependency arrays from the
+repaired manifest, and ran the same validator with the same re-home file. It
+reported 16 errors belonging to other batches or already known undeclared
+prerequisites; none named `group-actions-and-cayleys-theorem` or its examples
+page. The current on-disk spec without that temporary overlay reports 22 errors,
+the difference being exactly batch 8's four B-leaf errors and two consequent
+undeclared-prerequisite errors. The orchestrator must synchronize the repaired
+arrays into `plan-spec.json` before the authoritative run can become green.
+
+Per the dispatch, `tools/gates.mjs` was not run. There is no mathematical,
+source-access, dependency, size or deliverable blocker in the four batch-8
+artifacts; the only remaining handoff is the orchestrator-owned spec sync.

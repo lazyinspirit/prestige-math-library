@@ -13,7 +13,7 @@ This is the durable reasoning record for orders 40–41 and 62–63. The only fi
 
 The batch has 70 items. Neither A page exceeds the binding 60-item limit, so **no split is proposed**. The exact dispatched cut remains mathematically coherent: the first pair proves only the finite abelian classification, while the second develops ordinary free products, arbitrary group pushouts, and injective amalgamation. The finitely generated abelian structure theorem is not imported into order 40.
 
-All same-page dependencies point backward. Every B-page dependency lies on its A page, on a published earlier page, or earlier on its own B page. There are no forward references, cross-batch dependencies, or external fallbacks.
+All same-page dependencies point backward. Every B-page dependency lies on its A page, on a published earlier A page, or earlier on its own B page. The free-product A page and its companion now both declare `cyclic-groups-and-direct-products` in `requires`, in addition to their pair-specific prerequisites. There are no forward references, cross-batch dependencies, external fallbacks, or dependencies on a published B-page item.
 
 ## 2. Exact prose-scaffold amendments
 
@@ -157,7 +157,7 @@ Codes [C], [E], [T], [N], [J], and [H] are the exact URLs and locators above. A 
 ### Generated-Statement truth-risk obligations
 
 - `cex-additive-rationals-show-finiteness-is-essential`: verify torsion-freeness directly and observe that any nontrivial product of nontrivial finite cyclic prime-power groups contains a nonzero finite-order element. Dependency-leaf check required.
-- `fs-every-finite-group-is-a-product-of-cyclic-prime-power-groups`: compute two noncommuting transpositions in the published $S_3$ example; a direct product of cyclic groups is abelian. Dependency-leaf check required.
+- `fs-every-finite-group-is-a-product-of-cyclic-prime-power-groups`: apply the published A-page symmetric-group lemma to three distinct points and the finite-bijection theorem to obtain a finite nonabelian group; prove directly from componentwise multiplication that a finite direct product of cyclic groups is abelian. Dependency-leaf check required.
 - `cor-amalgamation-along-an-isomorphism-recovers-the-other-factor`: write both cocone maps and both inverse composites from the pushout universal property, including the trivial-group boundary. Dependency-leaf check required.
 - `ex-c-two-free-product-c-three-is-infinite`: distinguish the reduced words $(st)^n$ by their lengths, including $n=0$. Dependency-leaf check required.
 - `ex-canonical-map-from-free-product-to-direct-product`: verify surjectivity from the two factor images and exhibit a nontrivial reduced cross-commutator in the kernel. Dependency-leaf check required.
@@ -188,7 +188,7 @@ For the free-product pair, ordinary normal form is decomposed into reduced-word 
 
 I opened `library/abstract-algebra/cyclic-groups-and-direct-products.md` and every published item from it that the finite-abelian pair uses. The page is intentionally thin on internal direct products, so those definitions and the recognition theorem are built locally. I opened the rewritten `library/abstract-algebra/free-groups-and-presentations.md` and its companion on disk; I did not rely on its older 6+1-item state. The rewritten page supplies the actual free-group, presentation, von Dyck, normal-closure, and rank vocabulary used here.
 
-Every direct dependency outside this batch was then opened from `items/` at its actual Definition, Statement, or Example. All 58 are `status: published`. No load-bearing dependency has an `ai-generated` Statement; where a published item's local proof is AI-generated, only its eligible literature-derived or AI-altered Statement is cited. No unambiguous falsehood was found in a published dependency.
+Every direct dependency outside this batch was then opened from `items/` at its actual Definition, Statement, or Example. All 60 are `status: published`. No load-bearing dependency has an `ai-generated` Statement; where a published item's local proof is AI-generated, only its eligible literature-derived or AI-altered Statement is cited. No unambiguous falsehood was found in a published dependency.
 
 | dependency | statement / proof provenance | confidence route |
 |---|---|---|
@@ -219,9 +219,8 @@ Every direct dependency outside this batch was then opened from `items/` at its 
 | `def-rank-of-a-finite-rank-free-group` | ai-altered / not-applicable | audit 2026-08-11; exact section re-opened |
 | `def-rationals` | literature-derived / not-applicable | audit 2026-07-24; exact section re-opened |
 | `def-relators-relations-and-finite-presentations` | ai-altered / not-applicable | audit 2026-08-11; exact section re-opened |
+| `def-symmetric-group` | ai-altered / not-applicable | judge z-ai/glm-5.2 pass 2026-07-27; audit 2026-07-27; exact section re-opened for the finite nonabelian witness |
 | `def-unit-group-modulo-n-and-euler-totient` | ai-altered / not-applicable | audit 2026-07-31; exact section re-opened |
-| `ex-free-group-on-one-generator` | literature-derived / ai-altered | audit 2026-08-11; exact section re-opened |
-| `ex-symmetric-group-on-three-letters` | ai-altered / ai-generated | judge z-ai/glm-5.2 pass 2026-07-27; audit 2026-07-27; exact section re-opened |
 | `lem-cyclic-subgroup-is-the-set-of-powers` | ai-altered / ai-generated | judge z-ai/glm-5.2 pass 2026-07-27; audit 2026-07-27; exact section re-opened |
 | `lem-every-integer-above-one-has-a-prime-divisor` | ai-altered / ai-generated | published-audit gpt-5.6-sol-codex-subscription certify 2026-08-03; exact section re-opened for the prime choice in the finite-abelian induction |
 | `lem-group-homomorphism-basic-properties` | ai-altered / ai-generated | published-audit claude-opus-5 certify 2026-08-02; exact section re-opened |
@@ -243,6 +242,8 @@ Every direct dependency outside this batch was then opened from `items/` at its 
 | `thm-free-groups-unique-up-to-unique-isomorphism` | literature-derived / ai-altered | audit 2026-08-03; exact section re-opened |
 | `thm-group-homomorphism-injective-iff-trivial-kernel` | literature-derived / ai-altered | audit 2026-08-02; exact section re-opened |
 | `thm-lagrange` | ai-altered / ai-altered | published-audit gpt-5.6-sol-codex-subscription certify 2026-08-03; exact section re-opened |
+| `thm-normal-form-for-the-word-quotient-model` | literature-derived / ai-altered | audit 2026-08-11; exact section re-opened for the one-generator infinite-cyclic calculation |
+| `thm-number-of-bijections-of-a-finite-set` | ai-altered / ai-generated | judge z-ai/glm-5.2 pass 2026-07-28; audit 2026-07-29; exact section re-opened for finiteness of the symmetric-group witness |
 | `thm-order-of-element-in-direct-product` | literature-derived / ai-altered | audit 2026-08-03; exact section re-opened |
 | `thm-quotient-group-universal-property` | literature-derived / ai-altered | audit 2026-08-02; exact section re-opened |
 | `thm-second-isomorphism-theorem-groups` | literature-derived / ai-altered | audit 2026-08-02; exact section re-opened |
@@ -250,6 +251,7 @@ Every direct dependency outside this batch was then opened from `items/` at its 
 | `thm-subgroups-of-cyclic-groups-are-cyclic` | literature-derived / ai-altered | audit 2026-08-03; exact section re-opened |
 | `thm-von-dyck` | literature-derived / ai-altered | audit 2026-08-11; exact section re-opened |
 | `thm-well-ordering-principle` | literature-derived / ai-altered | published-audit claude-opus-5 certify 2026-08-02; exact section re-opened |
+| `thm-word-quotient-model-is-free` | literature-derived / ai-altered | audit 2026-08-11; exact section re-opened for the empty-relator one-generator factor presentation |
 
 The confidence route is the item's own published audit or certification metadata plus this direct section read. The proof-contract skeleton records every declared dependency as a planned fact; Step 5 must replace each `Planned Statement` placeholder with the exact quoted clause and final numbered-step uses after the authored source sections exist.
 
@@ -261,10 +263,19 @@ The mandatory notation scan finds no canonical embedding applied to a natural nu
 
 Environment preflight completed every repository and application check available in the sandbox, but its outer process checks could not spawn `codex`, `claude`, `git`, or `df` because this runtime returned `EPERM`. The required Node gates themselves remain runnable without escalation. No mathematical or source blocker remains.
 
-## 10. Gate ledger
+## 10. Step-4 B-leaf repair
 
-- `node tools/validate-plan.mjs research/plan-spec.json --rehomed research/frontier-10-rehomed.json`: passed after the step-3 repair.
+- `cor-free-product-of-infinite-cyclic-groups-is-free` uses route 1. The dependency on `ex-free-group-on-one-generator` was replaced by the published A-page definition of a free group and the published cyclic-power, infinite-order, and exponent-law results. Its proof contract now constructs the singleton universal property inline before invoking the disjoint-basis theorem.
+- `ex-cyclic-amalgamation-with-relation-xm-equals-yn` uses route 1. The same published example was replaced by the A-page word-quotient normal-form and freeness theorems, together with the presentation definition and the products-of-conjugates theorem for the empty normal closure. This supplies the precise one-generator empty-relator presentation within the example itself.
+- `fs-every-finite-group-is-a-product-of-cyclic-prime-power-groups` uses route 1. The dependency on `ex-symmetric-group-on-three-letters` was replaced by `def-symmetric-group`, the A-page lemma that supplies noncommuting transpositions on any three distinct points, and the finite-bijection theorem that makes the witness finite. The cyclic-power lemma and direct-product results license the abelianness comparison.
+
+No item was added, dropped, or retitled, so the 84-row canonical harvest and its 70 item references remain unchanged. The proof contracts were synchronized with every replacement fact.
+
+## 11. Gate ledger
+
+- `node tools/validate-plan.mjs research/plan-spec.json --rehomed research/frontier-10-rehomed.json`: exits 1 with 22 errors because `plan-spec.json` still contains the pre-repair Step-4 copy. Five name this batch: the three removed B-leaf edges and the two now-added `cyclic-groups-and-direct-products` requirements. Editing or re-splicing the plan is outside this Beta's scope.
+- An in-memory replacement of exactly this batch's four page objects in the plan reduces the gate to 16 errors, all belonging to other batches or the already-approved rehoming operation. None names `the-structure-of-finite-abelian-groups`, `free-products-and-amalgamation`, either companion, or any batch-2 item.
 - `node tools/coverage-checklist.mjs research/frontier-10-batch-2.coverage.json`: passed with 84 harvested headings, zero errors, and zero warnings.
 - `node tools/content-policy.mjs research/frontier-10-batch-2.pages.json --manifest-only --rehomed research/frontier-10-rehomed.json`: passed with 70 scoped items, zero errors, and zero warnings.
-- The earlier step-2 direct dependency-source check passed with zero unresolved dependencies. The three new scaffolds use only opened, published dependencies, and the proof-contract scope was rechecked against all 56 proof-bearing items.
+- The direct dependency-source check has zero unresolved dependencies. The repaired scaffolds use only opened, published A-page dependencies, and the proof-contract scope remains exact at all 56 proof-bearing items.
 - Per the dispatch, `tools/gates.mjs` was not run. No escalation was requested.
