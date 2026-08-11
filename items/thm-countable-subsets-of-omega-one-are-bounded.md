@@ -9,6 +9,7 @@ provenance:
   proof: ai-altered
 deps: [def-first-uncountable-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-cofinal-subset-of-an-ordinal, def-countable-choice, thm-countable-union-of-countable, def-countable, lem-countable-iff-surjection-from-n, lem-ordinal-basics, lem-ordinal-trichotomy, def-ordinal, def-limit-ordinal, def-natural-numbers]
 justified_by: []
+forward_refs: [def-cofinality]
 aliases: [thm-omega-one-is-regular-under-countable-choice]
 landmark: true
 short: "under $\\mathrm{AC}_\\omega$, countable subsets of $\\omega_1$ are bounded"

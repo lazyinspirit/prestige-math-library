@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [thm-recursion, def-ordered-field, def-integers, def-field, def-int-operations, lem-nat-embeds-int, lem-of-inverse-unique, lem-of-no-zero-divisors, lem-of-zero-mult, thm-int-ordered-ring]
 justified_by: [lem-power-laws]
+forward_refs: [def-real-power]
 aliases: [def-power]
 landmark: false
 verification:

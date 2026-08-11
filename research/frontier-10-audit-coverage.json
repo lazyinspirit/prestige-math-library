@@ -1,7 +1,7 @@
 {
   "version": 1,
   "reviewer": "Alpha-frontier-10 (Claude Opus 5, xhigh), build alpha role, sole adjudicator",
-  "manifest_sha256": "82d5a8bb804a7c509404b1dc88a6fd71c264a76c2b74337067be7beaf32443e6",
+  "manifest_sha256": "302f9650033bd2d8a7aaba1ba7229700f611469239fcf7cce752a9a81db3d607",
   "item_scope": [
     "cex-a-family-of-components-need-not-be-natural",
     "cex-a-monomorphism-need-not-split",
@@ -386,6 +386,7 @@
     "lem-plane-edge-face-incidence",
     "lem-plane-face-handshake-by-girth",
     "lem-plane-graph-faces-are-finite-with-one-unbounded-face",
+    "lem-plane-triangulation-is-connected",
     "lem-polygonal-arc-does-not-separate-the-plane",
     "lem-polygonal-crossing-parity-is-locally-constant",
     "lem-polygonal-ray-general-position",
@@ -868,6 +869,7 @@
     "lem-plane-edge-face-incidence",
     "lem-plane-face-handshake-by-girth",
     "lem-plane-graph-faces-are-finite-with-one-unbounded-face",
+    "lem-plane-triangulation-is-connected",
     "lem-polygonal-arc-does-not-separate-the-plane",
     "lem-polygonal-crossing-parity-is-locally-constant",
     "lem-polygonal-ray-general-position",
@@ -1264,19 +1266,21 @@
       "id": "cor-planar-simple-graph-edge-bound",
       "planned_deps": [
         "cor-connected-components-partition-the-vertex-set",
-        "lem-plane-face-handshake-by-girth",
-        "prop-maximal-plane-triangulation-characterisation",
-        "thm-euler-formula-for-connected-plane-graphs"
-      ],
-      "actual_deps": [
-        "cor-connected-components-partition-the-vertex-set",
         "lem-plane-edge-face-incidence",
         "lem-plane-face-handshake-by-girth",
+        "lem-plane-triangulation-is-connected",
         "prop-maximal-plane-triangulation-characterisation",
         "thm-double-counting",
         "thm-euler-formula-for-connected-plane-graphs"
       ],
-      "reason": "Step-8 fatal repair (round 2), both lanes: step 3.1 read [L2] as an equality, but lem-plane-face-handshake-by-girth states only the inequality g|F| <= 2|E|. The equality case needs the face-handshake identity sum of facial walk lengths = 2|E|, which that lemma proves internally but does not export. lem-plane-edge-face-incidence and thm-double-counting were added as the exact targets of a new step that derives the identity inline; both are already reachable from this page (lem-plane-face-handshake-by-girth cites the same two), so no page prerequisite moved. Both Statements were read on disk before the edges were accepted."
+      "actual_deps": [
+        "cor-connected-components-partition-the-vertex-set",
+        "lem-plane-face-handshake-by-girth",
+        "lem-plane-triangulation-is-connected",
+        "prop-maximal-plane-triangulation-characterisation",
+        "thm-euler-formula-for-connected-plane-graphs"
+      ],
+      "reason": "Step-8 drift, round 4, and it runs the other way from round 2: two planned edges are absent from the authored item. Round 2 had added lem-plane-edge-face-incidence and thm-double-counting so that this corollary could derive the facial-total identity sum of facial walk lengths = 2|E| inline, because lem-plane-face-handshake-by-girth exported only the inequality g|F| <= 2|E|. Round 4 fixed the defect at its source instead: that lemma's Statement now exports the identity as well as the inequality, and cites the face-finiteness the double count needs. Step 1.2 of this corollary therefore reads the identity straight off [L2], the inline derivation is gone, and its two dependency edges went with it. Both removals were checked against the numbered steps that used to consume them; no step now cites either target. lem-plane-triangulation-is-connected is in both lists and is not drift: it was planned and authored together at the owner's item-4 direction to supply the connectedness that Euler's formula requires in the triangulation case."
     },
     {
       "id": "cor-trace-is-invariant-under-similarity",
@@ -1721,6 +1725,25 @@
         "thm-algebra-of-function-limits"
       ],
       "reason": "Step-6 licensing repair adjudicated by Alpha from disk: the authored proof uses a fact the scaffold's planned dependency list did not supply, so cor-monotone-converges-iff-bounded, def-series, lem-convergent-implies-cauchy, lem-geometric-sequence-null, lem-series-tail-invariance were added as the exact targets of the step that consumes them. The dependency is load-bearing and its target's Statement was read on disk before the edge was accepted."
+    },
+    {
+      "id": "lem-plane-face-handshake-by-girth",
+      "planned_deps": [
+        "def-graph-distance-and-girth",
+        "def-sum-over-a-finite-index-set",
+        "lem-plane-edge-face-incidence",
+        "prop-face-boundaries-in-two-connected-plane-graphs",
+        "thm-double-counting"
+      ],
+      "actual_deps": [
+        "def-graph-distance-and-girth",
+        "def-sum-over-a-finite-index-set",
+        "lem-plane-edge-face-incidence",
+        "lem-plane-graph-faces-are-finite-with-one-unbounded-face",
+        "prop-face-boundaries-in-two-connected-plane-graphs",
+        "thm-double-counting"
+      ],
+      "reason": "Step-8 fatal repair, round 4, Terra lane, defect_type logic: step 1.1 applied thm-double-counting to an incidence relation indexed by the face set without establishing that the face set is finite, which is a hypothesis of that theorem. lem-plane-graph-faces-are-finite-with-one-unbounded-face was added as the exact target of the new [L3], consumed by step 1.1 before the count is taken. Its Statement was read on disk and states exactly that every plane graph has finitely many faces. It already sits on this same page ahead of this lemma in reading order, so no page prerequisite moved and no forward reference was created."
     },
     {
       "id": "lem-riemann-stieltjes-refinement-estimate",
@@ -2562,5 +2585,5 @@
       "reason": "Step-6 licensing repair adjudicated by Alpha from disk: the authored proof uses a fact the scaffold's planned dependency list did not supply, so thm-geometric-series was added as the exact target of the step that consumes it. The dependency is load-bearing and its target's Statement was read on disk before the edge was accepted."
     }
   ],
-  "attestation": "Every one of the 70 planned-versus-authored dependency differences was read from disk against the authored Facts block and the numbered step that consumes it, and every added target's own Statement or Definition was opened before the edge was accepted. No edge was added merely to satisfy a gate. All 2,540 manifest edges were checked for dependency eligibility: zero target an ai-generated Statement. All 60 cross-batch edges were read individually and all are backward in reading order; zero forward edges run anywhere in the run. Nineteen fatal families reported by the nine independent step-6 readers were adjudicated from disk, not from their reports. Eight read-only refuters in wave 1 and eight in wave 2 re-attacked the repaired proofs and the high/critical tier; four further fatal defects that both the readers and Alpha had missed were found, confirmed and repaired (Cavalieri's sectional hypothesis, the def-category morphism tagging, a b-leaf dependency introduced by a reader repair, and the Darboux criterion at a=b), plus one false title. The coverage harvest was audited for faithfulness, not merely structural completeness: all 81 declines were read, three were mis-reasoned, and one declined result was genuinely buildable and is now built and proved by Alpha personally as thm-riemann-stieltjes-countable-step-integrator. All 14 A-page summaries are exactly two prose paragraphs under 150 words; no B page has an authored summary body. Judge coverage is deliberately absent at this stage: the paired DeepSeek/Terra sweep is step 7. This receipt records the step-6 audit only and must be re-run with --verify-current-context before step 8."
+  "attestation": "Every one of the 70 planned-versus-authored dependency differences was read from disk against the authored Facts block and the numbered step that consumes it, and every added target's own Statement or Definition was opened before the edge was accepted. No edge was added merely to satisfy a gate. All 2,540 manifest edges were checked for dependency eligibility: zero target an ai-generated Statement. All 60 cross-batch edges were read individually and all are backward in reading order; zero forward edges run anywhere in the run. Nineteen fatal families reported by the nine independent step-6 readers were adjudicated from disk, not from their reports. Eight read-only refuters in wave 1 and eight in wave 2 re-attacked the repaired proofs and the high/critical tier; four further fatal defects that both the readers and Alpha had missed were found, confirmed and repaired (Cavalieri's sectional hypothesis, the def-category morphism tagging, a b-leaf dependency introduced by a reader repair, and the Darboux criterion at a=b), plus one false title. The coverage harvest was audited for faithfulness, not merely structural completeness: all 81 declines were read, three were mis-reasoned, and one declined result was genuinely buildable and is now built and proved by Alpha personally as thm-riemann-stieltjes-countable-step-integrator. All 14 A-page summaries are exactly two prose paragraphs under 150 words; no B page has an authored summary body.\n\nSteps 7 and 8. The paired sweep recorded 1,249 verdicts over 592 items, with 470 rejections (313 Terra, 157 DeepSeek) touching 322 distinct items. Every rejection was adjudicated from the item text on disk rather than from the verdict prose: 466 rows, of which 37 are confirmed fatal across 13 distinct items (17 logic, 17 dependency_citation, 3 other), 420 confirmed nonfatal under the 30-second rule, and 9 false positives. Every fatal repair is licensed by a row carrying the pre-edit item_sha256, and tools/step8-guard.mjs against the pre-step8e baseline reports every changed item so licensed and no unlicensed edit anywhere in the tree.\n\nThe final round left two rejections, both Terra-only with DeepSeek passing the same frozen context, and both were adjudicated here. cor-planar-simple-graph-edge-bound is closed confirmed_nonfatal: the tree branch of step 1.1 does lean on the fact that a tree on n vertices has n-1 edges, and neither [L1] nor [L2] supplies it, but that fact is established in this library as the published cor-tree-edge-count, so the defect is an omitted citation on the page and not an unestablished dependency, it is closable far inside the 30-second threshold, and the identical Terra finding had already been adjudicated confirmed_nonfatal one round earlier at context e892344fbb. rem-riemann-stieltjes-conventions-and-scope is confirmed fatal, defect_type logic, and repaired: its finite-step sentence asserted that finite-step integrators turn the integral into a weighted evaluation sum with no hypothesis on the integrand, while the page's own thm-riemann-stieltjes-countable-step-integrator and ex-finite-step-integrator-weighted-jump-sum both require a continuous integrand, and the page's own cex-common-jump-prevents-riemann-stieltjes-integrability is a one-step integrator with a bounded BV integrand for which the integral does not exist, refuting the sentence as written. The repair adds the continuity hypothesis, and adds to the same sentence's second clause the Riemann-integrability hypothesis that thm-riemann-stieltjes-c1-integrator-reduction actually states. Nothing in the run depends on this remark and its deps did not move, so no impact closure was owed.\n\nlem-plane-triangulation-is-connected is the single item this receipt adds to item_scope and proof_scope. It was built after the step-6 audit at the owner's direction and had been seen by no independent reader and no refuter, so it was audited here in full and personally, from disk. Its title and Statement agree exactly. [F1] reproduces def-maximal-plane-and-maximally-planar-graph faithfully, including the clause 'including the unbounded face', which is load-bearing: step 6.1 discharges the contradiction on a face that may be the unbounded one, and a definition covering only bounded faces would leave that case open. [L4] quotes lem-plane-edge-face-incidence verbatim. The two 'first point' choices in steps 3.1 and 4.1 are licensed by compactness of the drawings of H and of C, which are finite unions of points and polygonal arcs. In step 3.1, y lies in the frontier of h, so every disc about y meets h; a small enough disc meets H only in y and in the initial segments of the edges incident with y, so each sector of D minus H is connected and disjoint from H, and by the choice of disc from C as well, hence disjoint from all of G, so the sector meeting h lies in h and in a single face f of G. In step 4.1 both endpoints lie in h (the drawing of C by step 2.1, the point q by step 3.1), and h is a connected component of an open set, so [L3] supplies the polygonal path. Step 5.1's disconnection is exactly the maximality in [L1]. The boundary cases hold: the smallest permitted order is non-vacuous, since K3 drawn in the plane is a triangulation, and the proof assumes only that a disconnected G splits into two nonempty parts, never that H carries an edge, so a component that is a single isolated vertex is covered; the unbounded face is covered explicitly. Two compressions are recorded and were deliberately not edited, because step 8 is fatal-only and neither is fatal: the local-finiteness disc choice in step 3.1 and the sector-partition argument are stated without citation, and each is closable well inside the 30-second threshold. The lemma survives the reading; I found no fatal defect in it."
 }

@@ -14,6 +14,7 @@ deps: [thm-metric-regularity-hierarchy, def-lipschitz-holder-contraction, thm-of
        def-interval, lem-of-square-monotone, lem-of-abs-value, thm-of-archimedean,
        def-rat-order, lem-of-sign-rules, def-metric-space, lem-of-square-positive]
 justified_by: []
+forward_refs: [def-real-power]
 aliases: []
 landmark: true
 short: "$\\sqrt{\\cdot}$ is $1/2$-Hölder, not Lipschitz"

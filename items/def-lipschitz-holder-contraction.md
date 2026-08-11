@@ -10,7 +10,7 @@ provenance:
 deps: [def-metric-uniform-continuity, def-metric-space, def-rational-power,
        def-rat-order, lem-metric-nonnegativity, def-integer-power]
 justified_by: []
-forward_refs: [cex-strict-contraction-without-a-fixed-point]
+forward_refs: [cex-strict-contraction-without-a-fixed-point, def-real-power]
 aliases: []
 landmark: true
 short: "Lipschitz, Hölder, contraction"
@@ -77,9 +77,7 @@ $d_Y(f(x),f(x'))\le C$, outside the standard Hölder range adopted here.
 
 **Why the exponent is rational on this page and why it is at most $1$.** At this
 point in the reading order only rational powers are available
-([[def-rational-power]]), so $\alpha$ ranges over the rationals. The later
-[[def-real-power]] removes that ambient restriction; the present definition is
-retained as the rational-exponent version. The upper
+([[def-rational-power]]), so $\alpha$ ranges over the rationals. The upper
 bound $\alpha \le 1$ is the standard convention, and it is where the notion is
 useful: the classical theory reserves the name for $\alpha \in (0,1]$, and
 nothing in this library uses an exponent outside that range. No claim is made
@@ -105,6 +103,11 @@ contraction here.
   $d_Y(f(x),f(x')) \le 0$ forces $f(x) = f(x')$ by the separation axiom (M1)
   ([[def-metric-space]]). So the constant maps are exactly the maps admitting
   every nonnegative constant, and they are contractions with constant $0$.
+- **The rational exponent is a position in the reading order, not a limitation
+  of the notion.** Real exponents are constructed later, in [[def-real-power]],
+  and that construction removes the ambient restriction; the definition above is
+  retained as its rational-exponent version. Nothing on this page uses the later
+  construction.
 - **Naming forks.** Many texts call a Lipschitz map with constant $L < 1$ a
   *contraction* and one with $d(fx,fy) < d(x,y)$ for $x \ne y$ a *contractive* or
   *weakly contractive* map. This library uses *contraction* only in the first

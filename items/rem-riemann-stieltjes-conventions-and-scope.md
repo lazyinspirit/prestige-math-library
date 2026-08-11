@@ -41,9 +41,10 @@ $[a,a]$ the integral is $0$ by convention, so every bounded integrand is
 integrable there, while a singleton interval admits no partition at all and so
 the Darboux condition fails; a consumer needing $a=b$ reads the value off the
 definition instead. A general BV integrator is handled through Jordan
-decomposition or tagged sums. Finite-step integrators turn the integral into a
-weighted evaluation sum, while continuously differentiable integrators reduce
-it to an ordinary integral against the derivative. The no-common-discontinuity
+decomposition or tagged sums. Finite-step integrators turn the integral of a
+continuous integrand into a weighted evaluation sum over the jumps, while
+continuously differentiable integrators reduce the integral of a
+Riemann-integrable integrand to an ordinary integral against the derivative. The no-common-discontinuity
 theorem is sharp in view of the companion common-jump counterexample. Young's
 theorem is proved here only for rational Hölder exponents because arbitrary real
 exponents are not available at this point in the reading order; the later

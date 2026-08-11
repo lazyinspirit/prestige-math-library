@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
 justified_by: []
-forward_refs: []
+forward_refs: [cor-monotone-converges-iff-bounded]
 aliases: [rem-mct]
 landmark: false
 short: "An increasing sequence of nonnegative measurable functions may be integrated term by term"

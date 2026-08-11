@@ -536,6 +536,17 @@ the judge strips only the `judge:` sub-block, the guard and `touchlog` strip the
 entire `verification:` block, so the two hashes differ for every stamped item.
 Quoting a judge-ledger item hash into an adjudication would write a value the
 guard can never match; adjudication rows take theirs from `item-hash.mjs`.
+**A third limit, measured on `frontier-10` (2026-08-11): the guard assumes step 8
+is one contiguous window, and `--against` only excludes edits that come after
+it.** That run's owner pause fell *inside* step 8 — publication was authorised
+while two judge rejections were still open — so 33 owner-approved published
+scope-denial edits and 14 `forward_refs` declarations interleaved with two later
+R1 rounds. The whole-run window then reports them all as `nonfatal-edit`, and no
+single `baseline→against` pair separates owner edits from R1 edits. The honest
+measurement is per round, one guard run per `baseline→against` pair, recorded in
+the run's step-10 rundown; the gate itself closes at the last contiguous
+pre-pause snapshot. If this recurs often, the fix is a guard accepting several
+windows in one invocation rather than one.
 
 ### 3.11b The omission gate — `coverage-checklist.mjs` (owner, 2026-08-11)
 

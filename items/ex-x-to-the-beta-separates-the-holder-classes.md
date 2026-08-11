@@ -9,6 +9,7 @@ provenance:
   proof: ai-altered
 deps: [def-lipschitz-holder-contraction, lem-real-and-metric-notions-agree, thm-metric-regularity-hierarchy, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-nth-roots-exist, def-integer-power, def-uniform-continuity-real, def-continuity-real, def-interval, def-rat-order, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-abs-value, def-ordered-field]
 justified_by: []
+forward_refs: [def-real-power]
 aliases: []
 landmark: true
 short: "$x^{\\beta}$ separates the Hölder classes"

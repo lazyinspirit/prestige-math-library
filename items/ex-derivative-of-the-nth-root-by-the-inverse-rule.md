@@ -9,6 +9,7 @@ provenance:
   proof: ai-generated
 deps: [thm-derivative-of-an-inverse, lem-derivative-of-a-power, thm-nth-roots-exist, def-rational-power, lem-rational-power-laws, def-integer-power, def-derivative, thm-continuous-inverse, def-interval, def-canonical-natural, lem-of-naturals-positive, lem-power-monotone, thm-algebra-of-continuous-functions, def-continuity-real, def-injection-surjection-bijection, def-limit-point-r]
 justified_by: []
+forward_refs: [def-real-power]
 aliases: []
 landmark: true
 short: "derivative of the $n$-th root"

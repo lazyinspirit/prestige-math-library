@@ -9,6 +9,7 @@ provenance:
   proof: ai-altered
 deps: [thm-countable-subsets-of-omega-one-are-bounded, rem-omega-one-and-the-cost-of-choice, def-cofinal-subset-of-an-ordinal, thm-omega-one-is-the-least-uncountable-ordinal, def-first-uncountable-ordinal, def-countable-choice, def-countable, lem-ordinal-basics, lem-ordinal-trichotomy, def-limit-ordinal, lem-omega-least-limit-ordinal, def-ordinal, def-natural-numbers]
 justified_by: []
+forward_refs: [def-cofinality]
 aliases: []
 landmark: false
 short: "$\\omega_1$ refutes it, under $\\mathrm{AC}_\\omega$"

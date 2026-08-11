@@ -10,7 +10,7 @@ provenance:
 deps: [lem-homeomorphism-criteria, def-homeomorphism-and-open-maps, def-standard-topologies,
        def-continuous-map-top, thm-continuity-characterisations-top]
 justified_by: []
-forward_refs: [cex-continuous-bijection-not-a-homeomorphism]
+forward_refs: [cex-continuous-bijection-not-a-homeomorphism, def-compact-space, def-hausdorff-space]
 aliases: []
 landmark: false
 short: "continuous bijection $\\ne$ homeomorphism"

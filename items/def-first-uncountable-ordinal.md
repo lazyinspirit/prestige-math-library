@@ -9,6 +9,7 @@ provenance:
   proof: not-applicable
 deps: [thm-hartogs, def-ordinal, def-countable, def-natural-numbers, lem-omega-least-limit-ordinal, lem-ordinal-trichotomy]
 justified_by: [thm-omega-one-is-the-least-uncountable-ordinal]
+forward_refs: [def-aleph-and-beth-hierarchies]
 aliases: [def-omega-one, def-omega-1]
 landmark: true
 short: "$\\omega_1$, the Hartogs number of $\\mathbb{N}$"

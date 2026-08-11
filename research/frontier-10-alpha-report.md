@@ -1770,3 +1770,186 @@ touches published items, so I am recording it rather than doing it.
 The step-9 `gates.mjs` wrapper blocker is unchanged: the nested `/usr/bin/node`
 spawn still fails `EPERM` under this runtime, so I ran the constituent gates
 directly. No permission prompt was raised, and no published file was mutated.
+
+---
+
+## Final round — the last two rejections, and the attestation
+
+Dispatch: close, repair once, or park; then attest one item. Baseline
+`pre-step8e` (touch snapshot 18, 06:51:48Z). Both items were unchanged from that
+baseline when I adjudicated, so both adjudication rows carry the pre-edit hash.
+
+### 1. `cor-planar-simple-graph-edge-bound` — CLOSED `confirmed_nonfatal`
+
+Terra: step 1.1 uses the uncited fact that a tree on `n` vertices has `n-1`
+edges. **Terra is factually right.** Step 1.1's tree branch does assert
+`m=n-1`, it is tagged `[L1, L2, algebra]`, and neither L1 (Euler) nor L2
+(face handshake) yields it. The branch is also genuinely load-bearing as
+written: deleting it would require justifying that every facial boundary walk
+has length at least 3 *for a tree*, which the page does not do, and which is
+less obvious than the fact being dropped.
+
+I closed it nonfatal anyway, on three grounds.
+
+- **The fact is established in this library.** `cor-tree-edge-count` is
+  published, with statement provenance `ai-altered` (legal to cite) and a
+  Diestel Ch.1 reference. So this is an omitted citation on the page, not an
+  unestablished dependency; self-contained scope is not breached.
+- **It closes far inside the 30-second threshold**, which makes it nonfatal by
+  the owner's rule, and I had **already adjudicated this identical Terra finding
+  `confirmed_nonfatal` one round earlier** (context `e892344fbb`). Nothing in the
+  tree branch changed between the two rounds. Reversing myself now, on the same
+  text, would be inconsistent adjudication.
+- **The repair's expected cost exceeds its benefit.** Terra has rejected this
+  item on five consecutive rounds, each time on a different point (L2-as-equality
+  → L2-as-equality again → the tree fact → face-finiteness → the tree fact
+  again). DeepSeek — the cross-family screen — has now passed it twice and
+  called its citations faithful. Under "no further round, a repair rejected again
+  parks automatically", a three-line citation edit buys a materially better page
+  and risks parking a **landmark** theorem with four dependents
+  (`cor-planar-graph-has-low-degree-vertex`,
+  `cor-k-five-and-k-three-three-are-nonplanar`,
+  `prop-maximally-planar-edge-characterisation`,
+  `cex-k-three-three-satisfies-the-planar-edge-bound`) — i.e. the five-colour
+  development. That is the wrong trade for a fact every reader knows.
+
+**Follow-up for the owner, not a repair I made:** the honest fix is to add
+`cor-tree-edge-count` to `deps` with an `[L4]` fact and tag step 1.1 with it.
+That is a step-6 polish, and step 6 is past. It should be picked up by the next
+audit wave over this page. No mutation was made here.
+
+### 2. `rem-riemann-stieltjes-conventions-and-scope` — `confirmed_fatal` (`logic`), REPAIRED
+
+Terra: the finite-step claim omits continuity at each jump. **Verified from disk,
+and it is refuted by the page's own companion.**
+
+The sentence read: *"Finite-step integrators turn the integral into a weighted
+evaluation sum, while continuously differentiable integrators reduce it to an
+ordinary integral against the derivative."* No hypothesis on the integrand.
+
+- `cex-common-jump-prevents-riemann-stieltjes-integrability` takes
+  `f = \alpha = H_c` with `a<c<b`. That `\alpha` is exactly a one-step integrator
+  in the sense of `ex-finite-step-integrator-weighted-jump-sum`
+  (`C=0, m=1, w_1=1, c_1=c\in(a,b)`), and `\int_a^b f\,d\alpha` does not exist.
+  So the first clause is false as written.
+- Both items the clause summarises state the hypothesis it dropped:
+  `thm-riemann-stieltjes-countable-step-integrator` says "for every continuous
+  `f`", and `ex-finite-step-integrator-weighted-jump-sum` says "For every
+  continuous `f`".
+- The second clause is equally unhypothesised, and
+  `thm-riemann-stieltjes-c1-integrator-reduction` opens "Let `f` be Riemann
+  integrable".
+
+This is a Statement asserting more than the page proves, refuted by a page-mate —
+not a gap between proof steps, so the 30-second rule does not reach it. Repaired
+minimally, one sentence:
+
+> Finite-step integrators turn the integral of a **continuous integrand** into a
+> weighted evaluation sum over the jumps, while continuously differentiable
+> integrators reduce the integral of a **Riemann-integrable integrand** to an
+> ordinary integral against the derivative.
+
+No `deps`, frontmatter, contract or impact mutation. Provenance stays
+`statement: ai-altered` (already AI-altered; this is a further alteration).
+Nothing in the run depends on this remark — it is `landmark: false` and no item
+cites it — so no impact closure was owed, and if a rejudge rejects it again,
+parking it costs one prose block and no mathematics.
+
+`step8-guard --baseline pre-step8e`: 3481 items at baseline, **1 changed, 1/1
+licensed by a `confirmed_fatal` row**. Clean.
+
+### 3. `lem-plane-triangulation-is-connected` — audited, SOUND
+
+The one item in this run that no independent reader and no refuter ever saw,
+because it was built after the step-6 wave at the owner's direction. I read it in
+full. It survives; I found **no fatal defect**. What I checked:
+
+- **Title vs Statement:** identical claim, no overreach.
+- **`[F1]` is faithful and its unbounded-face clause is load-bearing.**
+  `def-maximal-plane-and-maximally-planar-graph` really does say "every face,
+  **including the unbounded face**, has boundary a triangle". Step 6.1's
+  contradiction may land on the unbounded face, so a definition covering only
+  bounded faces would leave a hole. It does not.
+- **`[L4]` quotes `lem-plane-edge-face-incidence` verbatim.** `[L1]`, `[L2]`,
+  `[L3]` are used exactly as stated.
+- **The two "first point" choices (steps 3.1, 4.1) are licensed:** the drawings
+  of `H` and `C` are finite unions of points and polygonal arcs, hence compact,
+  so each first-hit exists.
+- **Step 3.1's sector:** `y` is in the frontier of `h`, so every disc about `y`
+  meets `h`; the disc meets `H` only in `y` and the initial segments of edges
+  incident with `y`, and avoids `C` by choice — so the sector meeting `h` is
+  disjoint from **all** of `G` (`G = C \cup H`) and lies in a single face `f`.
+- **Step 4.1's path exists:** both endpoints lie in `h` (the drawing of `C` by
+  step 2.1, `q` by step 3.1) and `h` is a component of an open set, so `[L3]`
+  applies.
+- **Step 5.1** is exactly the maximality clause of `[L1]`.
+- **Boundary cases.** Order three is **non-vacuous** — `K3` drawn in the plane is
+  a triangulation — so the lemma is not empty at its own lower bound. The proof
+  uses only that a disconnected `G` splits into two nonempty parts and never that
+  `H` carries an edge, so a component that is a single isolated vertex is
+  covered. The unbounded face is covered explicitly, twice: by `F1` and by step
+  6.1.
+
+Two nonfatal compressions, **recorded and deliberately not edited** (step 8 is
+fatal-only): the local-finiteness disc choice and the sector-partition argument
+in step 3.1 are asserted without citation. Both close well inside 30 seconds.
+
+**The `risk_review` blocker is now cleared, with a caveat stated in the record
+itself.** The item is CRITICAL 8, the highest tier on this run, and the critical
+tier routes to a refuter *and* an Alpha disposition. I previously refused to
+write the review because I had not done the reading. This dispatch commissioned
+exactly that reading, so I have written it — and the record says in its own
+`reviewer` field that **no refuter and no independent step-6 reader ever saw this
+item** and that the disposition rests on one adversarial reading rather than two.
+`risk-report.mjs --require-reviewed` now exits **0 errors, 476 items routed**.
+If the owner wants the second reading before publication, dispatch one refuter on
+this single item; nothing else is waiting on it.
+
+### The receipt
+
+`research/frontier-10-audit-coverage.json` rewritten from the regenerated
+template. `manifest_sha256`, `item_scope` (585) and `proof_scope` (476) match a
+template regenerated **after** my repair — the remark edit touched prose only, so
+no relationship moved. 74 plan-reconciliation reasons carried forward verbatim
+after checking each entry's planned/actual dep lists were unchanged (the build
+script throws rather than carrying a stale reason). Two written fresh:
+
+- **`lem-plane-face-handshake-by-girth`** (new drift): round-4 fatal repair —
+  step 1.1 double-counted over the face set without establishing it is finite,
+  which is a hypothesis of `thm-double-counting`. `lem-plane-graph-faces-are-
+  finite-with-one-unbounded-face` added as the exact target of `[L3]`. Same page,
+  earlier in reading order — no prerequisite moved, no forward reference.
+- **`cor-planar-simple-graph-edge-bound`** (drift reversed direction): two
+  *planned* edges are absent from the authored item. Round 2 added
+  `lem-plane-edge-face-incidence` and `thm-double-counting` so the corollary
+  could derive the facial-total identity inline; round 4 fixed it at source
+  instead, and the handshake lemma now exports the identity itself, so step 1.2
+  reads it off `[L2]` and both edges were dropped. Verified no remaining step
+  cites either target.
+
+The attestation carries the step-6 record forward and adds the step-7/8 tallies
+from the ledgers, not from memory: 1,249 verdicts over 592 items, 470 rejections
+(313 Terra, 157 DeepSeek) over 322 items; 466 adjudications — 37 confirmed fatal
+over 13 items (17 `logic`, 17 `dependency_citation`, 3 `other`), 420 confirmed
+nonfatal, 9 false positives.
+
+### Items changed by this dispatch — rejudge exactly these
+
+**`rem-riemann-stieltjes-conventions-and-scope`** — and nothing else. Its
+pre-edit hash is `2b6f881f45aacd6475fd1de44bb9df0d0f1176abbe3aee6b2ded03f8a7f89b9c`.
+`cor-planar-simple-graph-edge-bound` was **not** touched, so its current
+DeepSeek pass and its Terra rejection both stand against unchanged text and the
+Terra rejection is closed on its exact-hash row.
+
+### Blockers still open, none of them mine to close here
+
+1. **`fwdcheck` fails at HEAD — 16 `forward-undeclared` errors**, all committed
+   in `044c15b4` (owner item 3), none on any item I touched. Frontmatter-only
+   fix (declare each link in `forward_refs`), but it touches published items.
+   **This one is reader-facing: the sky/↗ marking the owner required for forward
+   references is not being applied to those 16.** Unchanged from my last report.
+2. **The critical-tier refuter leg for `lem-plane-triangulation-is-connected`**
+   was never run — see above. The `risk_review` says so in its own text.
+3. **`gates.mjs` step wrapper still fails `EPERM`** on its nested `/usr/bin/node`
+   spawn under this runtime; constituent gates were run directly. No permission
+   prompt was raised at any point in this dispatch.

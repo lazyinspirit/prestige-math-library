@@ -10,7 +10,7 @@ provenance:
 deps: [def-continuity-real, lem-real-and-metric-notions-agree, def-lipschitz-holder-contraction, thm-metric-regularity-hierarchy, def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, thm-nth-roots-exist, def-integer-power, def-interval, def-finite-sum, lem-finite-sum-laws, lem-triangle-inequality-finite, thm-of-archimedean, cor-archimedean-reciprocal, lem-of-inverse-positive, lem-of-abs-value, def-rat-order, def-ordered-field, def-complete-ordered-field]
 justified_by: []
 aliases: [thm-holder-above-one-constant]
-forward_refs: [ex-x-to-the-beta-separates-the-holder-classes]
+forward_refs: [ex-x-to-the-beta-separates-the-holder-classes, def-real-power]
 landmark: true
 short: "Hölder exponent above 1 forces constancy"
 proof_strategy: direct

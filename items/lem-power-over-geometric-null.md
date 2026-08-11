@@ -9,7 +9,7 @@ provenance:
   proof: ai-generated
 deps: [def-rational-power, lem-rational-power-monotone, lem-rational-power-laws, def-integer-power, lem-power-laws, lem-power-monotone, lem-bernoulli-inequality, thm-nth-roots-exist, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-of-naturals-positive, lem-of-sign-rules, lem-of-add-order, lem-of-abs-value, prop-of-multiply-inequalities, def-real-limit, def-sequence, def-nat-order, thm-nat-linear-order, def-ordered-field]
 justified_by: []
-forward_refs: [ex-standard-limits-worked]
+forward_refs: [ex-standard-limits-worked, thm-real-power-continuity-and-derivatives]
 aliases: []
 landmark: false
 short: "$n^{\\alpha}/(1+p)^n \\to 0$"

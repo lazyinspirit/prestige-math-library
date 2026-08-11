@@ -186,3 +186,108 @@ behaved exactly as designed.
 
 Both of Alpha's step-8d repairs are properly licensed. The baseline is retaken as
 `pre-verify` so the gate measures the window it is meant to.
+
+## Post-pause addendum 2 — the final round, and 16 forward references
+
+### The last two rejections are closed
+
+`cor-planar-simple-graph-edge-bound` — **closed `confirmed_nonfatal`, no edit.**
+Terra is factually right that step 1.1's tree branch uses "a tree on $n$ vertices
+has $n-1$ edges" and that neither `[L1]` nor `[L2]` supplies it. Alpha closed it
+because the fact **is** established here, as the published `cor-tree-edge-count`:
+that makes it an omitted citation on the page, not an unestablished dependency,
+so self-contained scope holds and the gap closes far inside the 30-second
+threshold. Alpha had already adjudicated this identical finding nonfatal one
+round earlier on unchanged text (context `e892344fbb`), and Terra has rejected
+this item on five consecutive rounds each on a different point while DeepSeek has
+now passed it twice. **Follow-up for a later wave:** add `cor-tree-edge-count` to
+`deps` as `[L4]` and tag step 1.1. That is step-6 polish, and step 6 is past.
+
+`rem-riemann-stieltjes-conventions-and-scope` — **`confirmed_fatal` (`logic`),
+repaired, and the page was refuting itself.** The remark asserted that
+finite-step integrators turn the integral into a weighted evaluation sum with no
+hypothesis on the integrand, while the same page's
+`cex-common-jump-prevents-riemann-stieltjes-integrability` is a one-step
+integrator with a bounded BV integrand for which the integral does not exist.
+Both summarised results state "for every **continuous** $f$", and the second
+clause's `thm-riemann-stieltjes-c1-integrator-reduction` opens "Let $f$ be
+Riemann integrable." One sentence changed, adding both hypotheses; no `deps`,
+frontmatter, contract or impact mutation, and nothing cites the remark.
+**Rejudged on both lanes: both pass.** Terra, which had rejected it five rounds
+running, accepts it.
+
+### The item nobody else had read
+
+`lem-plane-triangulation-is-connected` was built after the step-6 audit at the
+owner's direction, so no independent reader and no refuter ever saw it. Alpha
+read it personally and found **no fatal defect**. The attestation is specific:
+`[F1]` reproduces the definition including its "unbounded face" clause, which is
+load-bearing for step 6.1; `[L4]` quotes `lem-plane-edge-face-incidence`
+verbatim; the two "first point" choices are licensed by compactness of finite
+unions of points and polygonal arcs; order three is non-vacuous, since $K_3$
+drawn in the plane is a triangulation; the proof never assumes $H$ carries an
+edge, so an isolated-vertex component is covered. Two nonfatal compressions
+recorded and deliberately not edited. **The disposition rests on one adversarial
+reading rather than the two every other item in this run received**, and the
+`risk_review` record says so in those terms.
+
+### 16 undeclared forward references — found by Alpha, fixed here
+
+`fwdcheck` failed at `044c15b4` with 16 `forward-undeclared` errors across 14
+published items, and this one is reader-facing. The step-9 scope-denial repairs
+replaced false denials ("real exponents do not exist in this library") with the
+truth ("they are introduced later in `[[def-real-power]]`") — which is exactly
+the orientation-only forward reference the owner authorised on 2026-07-25, but a
+link only gets its sky/dashed/↗ marking when the target is declared in
+`forward_refs`. Undeclared, a reader saw an ordinary indigo citation to a page
+they had not reached. Declared in `research/frontier-10-declare-forward-refs.mjs`;
+every one sits in a Remark or a reading-order note, never in a Statement or a
+Facts row.
+
+One needed more than a declaration. `def-lipschitz-holder-contraction` is a
+**definition**, and its forward pointer sat in the Definition body, where
+`forward-on-spine` correctly refuses it — the spine must stay strictly ordered,
+and declaring it there closed a 16-item `forward-cycle` through the exponential
+and the FTC. The orientation sentence moved into `## Remarks`, where it is
+licensed; the Definition body keeps the corrected non-denial wording ("at this
+point in the reading order only rational powers are available"), which is true
+and is not a scope denial. `fwdcheck` now passes, and the ledger regenerates to
+**0 open, 398 closed, 33 load bearing**.
+
+### Guard window, again
+
+`step8-guard --baseline pre-step8e` reports **15 changed, 1/15 licensed**. The
+one is Alpha's `rem-riemann-stieltjes` repair. The other 14 are the forward_refs
+declarations above: published items, licensed by the owner's item-3 approval of
+the scope-denial repairs, not by R1, which governs judge-rejection repairs only.
+Same sequencing error as the P15 case — I applied non-step-8 edits inside step
+8's window. Verified before re-baselining, so the evidence is not erased; the
+baseline is retaken as `pre-publish`, against which the guard reads **0 changed**.
+
+### Every step-8 round, measured against its own baseline
+
+The whole-run window `pre-step8` → working tree reports 36 errors, and **not one
+of them is an R1 violation.** Step 8 ran in five rounds, and the owner pause fell
+*inside* it: rounds d and e came after `step10-owner-pause`, so the 33
+owner-approved published scope-denial edits and the 14 forward_refs declarations
+land inside step 8's chronological span. Per round:
+
+| window | changed | licensed | unlicensed |
+|---|---|---|---|
+| `pre-step8` → `after-step8c` (rounds a, b, c) | 12 | **12/12** | — |
+| `pre-step8d` → `pre-verify` (round d) | 3 | 2/3 | P15 title, owner item 3 |
+| `pre-step8e` → `pre-publish` (round e) | 15 | 1/15 | 14 forward_refs, owner item 3 |
+| `pre-publish` → working tree | 0 | — | — |
+
+Every unlicensed item is an owner-approved published edit; **zero nonfatal
+polishes anywhere in the run.** The gate runs with `--against after-step8c`, the
+documented way to close the window step 8 contiguously owns.
+
+**Mechanism gap worth recording.** `gates.mjs` step 8 hardcodes
+`--baseline pre-step8` and offers `--against` to exclude *later* owner-directed
+edits. That assumes step 8 is one contiguous window. It was not here: the owner
+authorised publication at step 10 while two judge rejections were still open, so
+legitimate owner edits interleaved with legitimate R1 rounds and no single
+window separates them. The per-round table above is the honest measurement. If
+this recurs, the fix is a guard that takes several `baseline→against` windows in
+one invocation rather than one.

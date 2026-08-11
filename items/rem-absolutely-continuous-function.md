@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-lebesgue-measure-and-integral]
 justified_by: []
-forward_refs: []
+forward_refs: [def-absolutely-continuous-function, thm-c1-lipschitz-ac-bv-hierarchy]
 aliases: [rem-absolute-continuity]
 landmark: false
 short: "The class between Lipschitz and bounded variation on which Newton-Leibniz holds"

@@ -9,7 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-interval, def-series, def-countable, thm-nonnegative-series-bounded-partial-sums, def-finite-sum, lem-finite-sum-laws, def-complete-ordered-field]
 justified_by: []
-forward_refs: [cex-null-set-not-of-content-zero]
+forward_refs: [cex-null-set-not-of-content-zero, def-jordan-inner-and-outer-content]
 aliases: [def-null-set]
 landmark: true
 verification:
