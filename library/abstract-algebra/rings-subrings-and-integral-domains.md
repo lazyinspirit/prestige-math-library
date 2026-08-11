@@ -159,7 +159,7 @@ ring homomorphism between fields is proved without them. Polynomial rings are no
 constructed. The further property of the characteristic of an integral domain
 that would say more than "it is $0$ or at least $2$" requires the notion of a
 prime number, which no definition on this page or among the items it cites
-introduces, so it is not stated here. Twenty-six items are proved on this page,
-eleven of them marked as landmarks in the flowchart above. Every instance lives
+introduces, so it is not stated here. Twenty-eight items are proved on this page,
+thirteen of them marked as landmarks in the flowchart above. Every instance lives
 on the companion page except one: the quaternions are built here, because
 companion pages are leaves in the reading order and later pages need them.

@@ -50,9 +50,13 @@ null sets to null sets.
 
 ## Remarks
 
-**Not proved in this library.** The definition can of course be written down with
-no measure theory at all, and the statement above is recorded rather than proved
-because its content, everything after the definition, is measure-theoretic.
+**Partly proved elsewhere in this library.** The elementary definition is
+[[def-absolutely-continuous-function]]. The hierarchy
+$C^1\subseteq\mathrm{Lipschitz}\subseteq AC\subseteq C\cap BV$ and strictness
+witnesses are proved in [[thm-c1-lipschitz-ac-bv-hierarchy]] and its companion
+examples. Closure under vector-space operations and products, Luzin's property
+(N), the sharp Lebesgue-integral FTC and the Banach–Zarecki characterisation
+remain unproved.
 
 **What would prove it.** Absolute continuity implies bounded variation by a
 covering argument on $[a,b]$; property (N) follows from the definition applied to

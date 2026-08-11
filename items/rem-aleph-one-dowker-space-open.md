@@ -55,10 +55,10 @@ is still open.
 
 ## Remarks
 
-**Not proved in this library, and not proved anywhere.** This library develops
-neither the general topology in which Dowker spaces are constructed nor the
-independence machinery in which the question would be settled negatively; both
-tracks are deferred.
+**Not proved in this library, and not proved anywhere.** The library now
+develops the required general-topology background, but it does not build a
+Dowker-space construction or the forcing and independence machinery needed to
+analyse the $\aleph_1$ question.
 
 **What is known, and what would settle it.** Settling it means either a ZFC
 construction of a Dowker space of size $\aleph_1$, or a model of ZFC containing no

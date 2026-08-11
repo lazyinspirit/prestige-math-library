@@ -59,8 +59,10 @@ the consistency of ZFC alone.
 
 ## Remarks
 
-- **Not proved in this library.** None of (a), (b), (c) is proved here, and no
-  metrisation theory exists here yet either.
+- **Not proved in this library.** None of (a), (b), or (c) is proved here. The
+  library now has a metrisation track and the standard metrisation theorems, but
+  not the large-cardinal, forcing, measure-theoretic or inner-model machinery
+  needed for these independence statements.
 
 - **What would prove it.** For (a), a CH construction plus the standard
   metrisation theorems. For (b), large-cardinal theory (strongly compact

@@ -1,7 +1,7 @@
 ---
 id: rem-real-exponents-deferred
 kind: remark
-title: "Why real exponents are deferred"
+title: "Why real exponents are deferred on the rational-powers page"
 status: published
 origin: session
 provenance:
@@ -99,6 +99,7 @@ real $x$, and [[thm-real-power-laws]] proves the power laws for those exponents.
 statement on this page it is an integer or a rational, and where that looks like
 a restriction it is a real one. The weights in the weighted AM-GM inequality are
 rational for this reason, and the conjugate exponent $q = p/(p-1)$ in Hölder and
-Minkowski is rational precisely because $p$ is. Those statements are not weaker
-versions of the classical ones waiting to be upgraded; they are the classical
-ones, restricted to the exponents that currently have a meaning.
+Minkowski is rational precisely because $p$ is. Those statements are the
+classical rational-exponent forms, restricted to the exponents available at this
+page's position in the reading order; the later real-power page supplies the
+general versions.

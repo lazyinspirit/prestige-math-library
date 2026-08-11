@@ -43,9 +43,9 @@ Chapter II of Kunen, *Set Theory: An Introduction to Independence Proofs*, state
 there as "if $X$ is a Suslin line, $X^2$ is not c.c.c.", with the definition of a
 Suslin line given in Definition 4.1 of the same section exactly as above. It is a
 plain ZFC theorem, and it asserts nothing about whether a Suslin line exists: only
-what follows if one does. It is not proved here because this library develops
-neither order topologies nor recursion of length $\omega_1$, both of which the
-argument uses.
+what follows if one does. It is not proved here. The library now develops order
+topologies and transfinite recursion through $\omega_1$, but it has not authored
+Kunen's specialised Suslin-line construction and square argument.
 
 **History of this entry, kept deliberately.** Until the audit of 2026-07-26 this
 item recorded the statement as **unverified**: the claim had been encountered,

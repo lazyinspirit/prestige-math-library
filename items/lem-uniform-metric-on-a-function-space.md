@@ -58,11 +58,12 @@ is unique ([[lem-sup-unique]]).
 metric**, and $\bar\rho(f,g) \le 1$ for all $f, g$.
 
 **Both hypotheses are used and neither is decoration.** Nonemptiness of $X$ is
-what makes $R(f,g)$ nonempty; for $X = \varnothing$ the set $Y^{X}$ has a single
-element and $\sup \varnothing$ does not exist in this library, which has no
-extended real line ([[rem-sup-conventions]]). Truncating $d$ at $1$ is what makes
-$R(f,g)$ bounded above **with no boundedness hypothesis on $f$ and $g$**; that is
-the whole reason the truncation is there.
+what makes $R(f,g)$ nonempty; for $X=\varnothing$ the set $Y^X$ has a single
+element, but $\sup\varnothing$ is undefined under the real-valued supremum
+convention used here ([[rem-sup-conventions]]). The extended real line is
+introduced later and is not the codomain of this metric. Truncating $d$ at $1$
+is what makes $R(f,g)$ bounded above **with no boundedness hypothesis on $f$ and
+$g$**; that is the whole reason the truncation is there.
 
 ## Facts & Assumptions
 

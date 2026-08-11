@@ -107,8 +107,10 @@ positive definiteness), and the affine subspace below collapses to a point.
 
 ### Affine subspaces
 
-The library has no notion of an affine subspace, so one is fixed here. For a
-linear subspace $W \subseteq \mathbb{R}^{n}$ and $s \in \mathbb{R}^{n}$, the
+At this point in the reading order the general definition is not yet available,
+so the Euclidean instance is fixed here; the later
+[[def-affine-subspace-of-a-vector-space]] supplies the general definition. For
+a linear subspace $W \subseteq \mathbb{R}^{n}$ and $s \in \mathbb{R}^{n}$, the
 **affine subspace through $s$ with direction $W$** is the coset
 
 $$s + W \;:=\; \{\, s + w \;:\; w \in W \,\} .$$

@@ -99,8 +99,9 @@ $m = 0$, where $-\iota(0) = \iota(0)$ and $(a^0)^{-1} = 1^{-1} = 1 = a^0$.
   $0^{-n}$ is not defined for $n \ge 1$, since $0$ has no inverse.
 - The exponent is an integer and stays an integer. Rational exponents are a
   separate construction resting on the existence of roots
-  ([[thm-nth-roots-exist]], [[def-rational-power]]), and real exponents do not
-  exist in this library yet ([[rem-real-exponents-deferred]]).
+  ([[thm-nth-roots-exist]], [[def-rational-power]]), and real exponents are not
+  available at this point in the reading order; they are introduced later in
+  [[def-real-power]] (see [[rem-real-exponents-deferred]]).
 - The laws $a^{m+n} = a^m a^n$, $(a^m)^n = a^{mn}$ and $(ab)^n = a^n b^n$ are
   proved, not assumed, in [[lem-power-laws]]; the order behaviour of $a \mapsto a^n$
   is [[lem-power-monotone]].

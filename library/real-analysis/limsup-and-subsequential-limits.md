@@ -91,8 +91,9 @@ equalities. The proof needs [[lem-nth-root-of-constant-tends-to-one]], which wit
 [[lem-nth-root-of-n-tends-to-one]], [[lem-power-over-geometric-null]] and
 [[lem-factorial-beats-geometric]] makes up the four standard limits of elementary
 analysis; the last two are proved directly from Bernoulli's inequality and the
-Archimedean property, since the continuity of $x \mapsto x^{\alpha}$ that the
-root-test route would need is not available in this library.
+Archimedean property, since continuity of $x\mapsto x^\alpha$ is not available
+at this point in the reading order; it is proved later in
+[[thm-real-power-continuity-and-derivatives]].
 
 **A note on indices.** Sequences here are functions on $\mathbb{N}$ and
 $\mathbb{N}$ contains $0$ ([[def-sequence]]). The expressions $n^{1/n}$,

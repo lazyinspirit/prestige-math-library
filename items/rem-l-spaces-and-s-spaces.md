@@ -57,9 +57,10 @@ is a genuine independence and not a theorem.
 
 ## Remarks
 
-- **Not proved in this library.** Neither construction is carried out here, and
-  the required topology (hereditary separability, the Lindelöf property, walks on
-  ordinals) is not developed here.
+- **Not proved in this library.** Neither construction is carried out here. The
+  library now develops separability, the Lindelöf property and their hereditary
+  forms, but it does not develop the minimal-walk and oscillation machinery for
+  the ZFC L-space or the forcing machinery for the S-space consistency result.
 
 - **What would prove it.** For (a), the combinatorics of minimal walks on
   countable ordinals and oscillation theory, which is ordinary ZFC but rests on

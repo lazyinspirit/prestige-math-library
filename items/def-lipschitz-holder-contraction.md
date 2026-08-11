@@ -75,9 +75,11 @@ equal-point inequality would still be the automatic $0\le C$. Globally, however,
 that extension would reduce to the bounded-diameter condition
 $d_Y(f(x),f(x'))\le C$, outside the standard Hölder range adopted here.
 
-**Why the exponent is a rational and why it is at most $1$.** This library has no
-real exponents ([[def-rational-power]]), so $\alpha$ ranges over the rationals;
-that is a limitation of the ambient toolkit and not of the notion. The upper
+**Why the exponent is rational on this page and why it is at most $1$.** At this
+point in the reading order only rational powers are available
+([[def-rational-power]]), so $\alpha$ ranges over the rationals. The later
+[[def-real-power]] removes that ambient restriction; the present definition is
+retained as the rational-exponent version. The upper
 bound $\alpha \le 1$ is the standard convention, and it is where the notion is
 useful: the classical theory reserves the name for $\alpha \in (0,1]$, and
 nothing in this library uses an exponent outside that range. No claim is made

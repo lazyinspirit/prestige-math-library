@@ -57,10 +57,12 @@ of the Lebesgue integral as an absolute integral, that is
 $f \in L^1 \iff |f| \in L^1$. The value $\pi/2$ needs a separate argument, by
 Feynman's trick, by contour integration, or by the Dirichlet kernel.
 
-**Which page it serves.** The improper integrals page, which will prove
-convergence of exactly this integral and the divergence of the integral of the
-absolute value, and can therefore state that the integral is conditionally
-convergent. The observation that no Lebesgue integral reproduces it belongs here,
+**Which page it serves.** The later improper-integrals page proves general
+Dirichlet and tail-mass criteria from which convergence of this integral and
+divergence of its absolute integral follow once the required trigonometric
+estimates are supplied. That concrete application and the value $\pi/2$ are not
+proved there, so this item remains a cited boundary statement. The observation
+that no Lebesgue integral reproduces it belongs here,
 and it is the standard warning against the belief that the Lebesgue integral
 extends every integral in use.
 

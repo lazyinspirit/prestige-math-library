@@ -53,8 +53,11 @@ and the diamond principle.
 
 ## Remarks
 
-- **Not proved in this library.** No construction here, and no topology track at
-  this point of the library.
+- **Not proved in this library.** The library now has a substantial general-
+  topology track, including separation, compactness and paracompactness, but it
+  does not construct a Dowker space or develop the specialised
+  countable-paracompactness and set-theoretic machinery used by the cited
+  constructions.
 
 - **What would prove it.** All three constructions are ZFC arguments, so no
   forcing is needed for (a) and (b), but they need ordinal and cardinal

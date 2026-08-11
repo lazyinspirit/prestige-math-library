@@ -72,13 +72,12 @@ naming obligation of this definition.
   $\omega_1$ is strictly above the least limit ordinal
   ([[lem-omega-least-limit-ordinal]]).
 
-- **Notation.** The cardinal notation $\aleph_1$ is **not** used on this page or
-  anywhere in this library's ordinal development. It presupposes the aleph
-  hierarchy $\alpha \mapsto \aleph_\alpha$, which is not constructed here; every
-  statement about the first uncountable ordinal is written $\omega_1$. The
-  symbol does occur in remarks elsewhere that record results of cardinal
-  arithmetic this library does not develop. The two names denote the same
-  ordinal once the hierarchy exists, but nothing on this page needs that.
+- **Notation and reading order.** The cardinal notation $\aleph_1$ is not used
+  on this page or in the ordinal development because the aleph hierarchy is not
+  available at this point in the reading order; every statement here is written
+  with $\omega_1$. The later [[def-aleph-and-beth-hierarchies]] constructs the
+  hierarchy and proves $\aleph_1=\omega_1$. Nothing on the present page needs
+  that later notation.
 
 - **Without a choice principle $\omega_1$ can behave strangely, and it still
   exists.** Its existence never fails, but statements about its cofinal

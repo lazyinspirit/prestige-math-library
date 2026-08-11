@@ -34,8 +34,8 @@ axiom: it follows from the other three, and [[lem-metric-nonnegativity]] proves
 it, so a verification that some candidate function is a metric has three things
 to check and not four. The values are real numbers, never $+\infty$;
 [[rem-metric-axiom-conventions]] records that decision, together with the live
-naming fork between *pseudometric* and *semimetric* and the reason extended
-metrics wait for the extended real line.
+naming fork between *pseudometric* and *semimetric*. The extended real line is
+introduced later, but no extended-metric restatement is made on this page.
 
 **Three metric spaces are established here, and they are the ones later pages
 cite.** That the absolute value makes $\mathbb{R}$ a metric space, with the open

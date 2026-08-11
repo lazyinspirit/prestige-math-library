@@ -104,8 +104,9 @@ the two regimes, and it is stated with both spaces metric because that is where
 both topologies are defined.
 
 **3. $X$ is nonempty wherever a supremum over $X$ is taken.** The uniform metric
-is a supremum over $X$, and this library has no extended real line and no
-convention $\sup \varnothing = -\infty$ ([[rem-sup-conventions]]). So
+is a real-valued supremum over $X$. The extended real line is introduced later.
+This page does not use it and adopts no convention
+$\sup\varnothing=-\infty$ ([[rem-sup-conventions]]). So
 [[lem-uniform-metric-on-a-function-space]] carries the hypothesis $X \ne \varnothing$
 and everything resting on it inherits it. Nothing is lost: for $X = \varnothing$
 the set of functions has exactly one element ([[def-product-topology]]) and all

@@ -48,7 +48,9 @@ characterisation of $\pi$ as the unique normalisation making the Hilbert
 transform a complex structure needs measure theory and functional analysis at
 once; the 2018 determination of the Weierstrass graph dimension needs hyperbolic
 dynamics; and that the square of a Suslin line fails the countable chain
-condition needs order topology and recursion on $\omega_1$. Difficulty is never
+condition uses the order-topology and $\omega_1$-recursion background the library
+now has, but its specialised conditional construction and proof have not been
+authored here. Difficulty is never
 the reason anything is here. A hard but reachable theorem gets decomposed into as
 many small lemmas as it takes and is proved. Two entries are a further case again
 and say so: the Lindemann-Weierstrass theorem and the transcendence of $\pi$ are

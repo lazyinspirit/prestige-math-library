@@ -72,9 +72,9 @@ measure track at all.
 results, and this library uses the phrase for both. The one stated here is
 Lebesgue's, sharpened by Beppo Levi in 1906, and it is about integrals of
 functions on a measure space. The other is the elementary theorem that a
-monotone sequence of reals converges if and only if it is bounded, which belongs
-to the sequences track; that one is not deferred, but as things stand it is not
-proved anywhere in this library either, and nothing on this page bears on it. A
+monotone sequence of reals converges if and only if it is bounded, proved in
+[[cor-monotone-converges-iff-bounded]]. Nothing on this page bears on that
+sequence theorem, and neither result is a special case of the other. A
 reader who wants "bounded monotone sequences converge" is in the wrong item, and
 neither result is a special case of the other.
 

@@ -55,9 +55,10 @@ written down.
 ## Remarks
 
 - **Not proved in this library.** The statement needs the product measure on
-  $\{0,1\}^{\mathbb{N}}$, or Lebesgue measure on $[0,1]$, and the Baire category
-  machinery on a Polish space. Neither track is developed here; measure and
-  integration is recorded, not proved, alongside this item.
+  $\{0,1\}^{\mathbb N}$, or Lebesgue measure on $[0,1]$, and a specialised
+  topological zero-one law on a Polish space. The library now has the general
+  Baire/category background, but not that zero-one-law argument or the measure
+  and integration track.
 
 - **What would prove it.** A free ultrafilter $\mathcal{U}$ is unchanged by
   altering finitely many coordinates, since it contains every cofinite set, so it

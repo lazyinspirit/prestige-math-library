@@ -100,8 +100,10 @@ proof, [[lem-content-zero-implies-null]], because it is cited on its own.
 - **Why "content" and not "measure" for the finite version.** The finite-cover
   notion is the vanishing of the Jordan outer content, and the countable-cover
   notion is the vanishing of the Lebesgue outer measure. Neither outer quantity
-  is defined in this library, and no item here assigns a nonzero size to any set:
-  every statement is of the shape "can, or cannot, be covered by intervals of
+  is available at this point in the reading order. Jordan outer content is
+  defined later in [[def-jordan-inner-and-outer-content]]; Lebesgue outer measure
+  is still not defined. No item on this page assigns a nonzero size to any set.
+  Every statement is of the shape "can, or cannot, be covered by intervals of
   total length below such and such a bound". That is a deliberate restriction of
   scope at this point in the reading order, not a claim that the general notions
   are unavailable in mathematics.

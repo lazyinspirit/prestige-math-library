@@ -37,9 +37,11 @@ silent omission.
 theorems, monotone convergence, Fatou and dominated convergence. The Vitali and
 mini-Vitali covering theorems, and the two differentiation theorems that rest on
 them: monotone functions are differentiable almost everywhere, and almost every
-point of an $L^1$ function is a Lebesgue point. Absolute continuity, the sharp
-fundamental theorem of calculus that characterises it, and its integral-free
-counterpart, the Banach-Zarecki theorem. Egorov and Lusin, the two theorems that
+point of an $L^1$ function is a Lebesgue point. The elementary definition of
+absolute continuity, its place in the $C^1$–Lipschitz–$AC$–$BV$ hierarchy, and
+strictness witnesses are now proved on the bounded-variation page. Luzin's
+property (N), the sharp Lebesgue-integral fundamental theorem of calculus and the
+Banach–Zarecki theorem remain recorded here. Egorov and Lusin, the two theorems that
 say measurable behaviour is uniform and continuous off a small set. The $L^p$
 spaces: Holder and Minkowski in integral form, Riesz-Fischer completeness,
 separability for finite $p$ and its failure at $p = \infty$. Fubini-Tonelli with
@@ -97,7 +99,8 @@ candidate-for-undeferral note, the semicontinuous function equal almost
 everywhere to no Riemann integrable function and the null set that is no
 function's discontinuity set, since their proofs may fit inside the elementary
 covering and Baire theory the library already has. A third, du Bois-Reymond's
-continuous function with a divergent Fourier series, is recorded as probably
-reachable by the uniform boundedness route now that norms exist
-([[def-norm-and-normed-space]]), once the library also has the Baire theorem for a
-general complete metric space, and is waiting on a page rather than on a theory.
+continuous function with a divergent Fourier series, is probably reachable by
+the uniform-boundedness route. The library already has the Baire theorem for
+complete metric spaces and now has norms; what remains is the
+Fourier/Dirichlet-kernel argument and the bounded-operator vocabulary needed to
+package the evaluation functionals.

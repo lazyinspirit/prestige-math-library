@@ -74,10 +74,11 @@ The other is
 [[cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval]], which
 separates continuity from uniform continuity.
 
-**Why the exponents are rational.** [[def-rational-power]] defines $a^{r}$ for
-rational $r$ only, so this library has no real exponents; that is a limitation
-of the ambient toolkit, recorded in [[def-lipschitz-holder-contraction]], and
-not of the notion. Exponents above $1$ are excluded there for a reason of
+**Why the exponents are rational.** [[def-rational-power]] is the exponent theory
+available at this page's position in the reading order, so the example is stated
+for rational exponents. The later [[def-real-power]] supplies real exponents; the
+restriction here belongs to the local toolkit, not to the Hölder notion. Exponents
+above $1$ are excluded there for a reason of
 substance: they force constancy
 ([[thm-holder-exponent-above-one-forces-constancy]]).
 

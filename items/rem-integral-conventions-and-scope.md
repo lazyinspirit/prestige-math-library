@@ -126,10 +126,10 @@ currently proves.
   integral remainder. It is therefore absent from the current library, with no
   later published page assigned to it; this is a statement about the present
   reading order, not a theorem about Taylor remainders.
-- **Bounded variation and the Riemann-Stieltjes integral.** The integrator
-  $\mathrm{d}\alpha$ generalises everything on this page, and the sharpened
-  second mean value theorem belongs with it. That is a later page of the same
-  track, and it is not built.
+- **Bounded variation and the Riemann–Stieltjes integral.** The later
+  bounded-variation page builds total variation, Jordan decomposition and the
+  Riemann–Stieltjes integral. None is available at this point in the reading
+  order, so nothing on the present page uses it.
 - **Improper integrals.** $\int_0^{\infty} f$ is not defined anywhere in this
   library at this point in the reading order, which is why
   [[thm-integral-test-for-series]] concludes with the boundedness of the sequence

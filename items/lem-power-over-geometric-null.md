@@ -111,8 +111,10 @@ $> 1$, however small the excess $p$ and however large the exponent $\alpha$.
   $\limsup_k w_k^{1/k} \le \limsup_k \big((k^{1/k})^{\alpha}\big)/\beta$, and
   closing that requires knowing $t_k \to 1 \Rightarrow t_k^{\alpha} \to 1$, that
   is the continuity of $x \mapsto x^{\alpha}$ at $x = 1$. That statement is not
-  available in this library and is not proved on this page, so the argument above
-  is made directly instead; it needs only Bernoulli and the Archimedean property.
+  available at this point in the reading order and is not proved on this page;
+  it is proved later in [[thm-real-power-continuity-and-derivatives]], so the
+  argument above is made directly instead. It needs only Bernoulli and the
+  Archimedean property.
 
 - **The growth hierarchy this places.** Together with
   [[lem-factorial-beats-geometric]] it orders the three standard scales: a fixed
