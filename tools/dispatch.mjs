@@ -268,14 +268,25 @@ const buildCodex = (temporaryHome) => [
   { CODEX_HOME: temporaryHome },
 ];
 
-// `acceptEdits` is kept even for a read-only role. It is safe because the ALLOW
-// list, not the permission mode, is what withholds the write tools — they are
-// never loaded, so there is nothing for the mode to accept. It is necessary
-// because the stricter `default` mode withholds web access too: probed
-// 2026-08-05, a read-only lane in `default` mode reported it could not confirm
-// web reachability, and a certifier that cannot fetch its source falls back to
-// asserting from memory — wave 2's eight `established-knowledge` waivers, seven
-// of which dissolved once a reader could actually fetch.
+// `bypassPermissions` is used even for a read-only role. It is safe because the
+// ALLOW list, not the permission mode, is what withholds the write tools — they
+// are never loaded, so there is nothing for the mode to permit. It is necessary
+// because anything stricter withholds web access: probed 2026-08-05, a read-only
+// lane in `default` mode reported it could not confirm web reachability, and a
+// certifier that cannot fetch its source falls back to asserting from memory —
+// wave 2's eight `established-knowledge` waivers, seven of which dissolved once
+// a reader could actually fetch.
+//
+// `acceptEdits` was the previous setting and was NOT enough, measured on
+// frontier-11 step 3 (2026-08-12): it auto-accepts edits but still PROMPTS for
+// WebFetch, so Alpha halted its source-faithfulness check with "Claude requested
+// permissions to use WebFetch, but you haven't granted it yet", correctly
+// recorded a blocker rather than asking, and could not perform criterion 2 of
+// the step-3 review at all. A dispatched agent has no human to answer a prompt,
+// so any prompt is a silent capability loss dressed up as a completed stage.
+// This is also the owner's standing rule (2026-07-30, broadened 2026-08-11):
+// no agent may be put in a position to ask for permissions of any kind, web
+// search included.
 const buildClaude = () => [
   process.env.CLAUDE_BIN ?? 'claude',
   [
@@ -283,7 +294,7 @@ const buildClaude = () => [
     // null model = inherit the session model (the orchestrator role).
     ...(spec.model ? ['--model', spec.model] : []),
     '--effort', spec.effort ?? 'high',
-    '--permission-mode', 'acceptEdits',
+    '--permission-mode', 'bypassPermissions',
     // Allow list FIRST (it is the actual guarantee), deny list second (redundant
     // barrier). Both are variadic, so each must be the last thing before the
     // next flag — hence the explicit ordering rather than a spread at the end.

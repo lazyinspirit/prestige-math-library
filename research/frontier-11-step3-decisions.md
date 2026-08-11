@@ -165,3 +165,57 @@ Beta also noted the prose scaffold's heading still reads order 289 for this pair
 while `plan-spec.json` has 361/362. **`plan-spec.json` is the machine authority**
 and no prose renumbering is required — consistent with the standing rule that
 `order` is not stable and must never be quoted from memory.
+
+---
+
+# Alpha's step-3 review — outcomes
+
+`research/frontier-11-alpha-step3-scaffold-review.md`, Alpha (Claude Opus 5,
+`claude-opus-5[1m]`, xhigh), 18 minutes. **5 of 9 pairs `insufficient`.** Both
+challenges the orchestrator escalated (D3, D5) were upheld, and the FTC page was
+found to omit **two results the plan requires that the scaffold neither has nor
+declines** — the silent-omission failure the harvest apparatus exists to catch.
+All findings routed to the owning Betas; Alpha re-checks before step 4 splices
+and will not splice a pair it marked `insufficient`.
+
+## D10 — FOR THE OWNER: the library uses a construction it never built
+
+**Not this run's work. Recorded for a future decision.**
+
+Alpha's §0 verified from disk that there is **no field-of-fractions or
+localisation construction anywhere** — not in `items/`, not as a page in
+`research/plan-spec.json`, and not inside
+`euclidean-domains-pids-and-unique-factorisation`. Three of five batches collided
+with its absence independently and handled it three different ways: batch 1
+declined a theorem for want of it, batch 4 routed around it (D7), and batch 3 was
+about to **assert** it in a theorem title.
+
+The part that outlives this run: **two published items already assume the
+construction.** `cex-ordered-field-not-archimedean` and
+`ex-rational-function-field-order` both open with *"Given: … the field of
+fractions of the polynomial ring $\mathbb{R}[t]$"*. That is a real plan gap — the
+natural home is with orders 46–50, all published and closed — and it is neither a
+retrofit of published text nor something to wedge into a field-extension or
+combinatorics page at order 54 or 193. Alpha's ruling for this run is therefore
+**do not build it**, and make sure nothing in the run depends on the term.
+
+## D11 — Alpha could not verify harvest faithfulness; a dispatch bug, now fixed
+
+Alpha recorded a blocker rather than prompting, exactly as the rule directs:
+`WebFetch` returned *"Claude requested permissions to use WebFetch, but you
+haven't granted it yet"*, so **criterion 2 of the step-3 review — open the source
+at its `locator` and check `contents` against it — could not be performed at
+all.** Alpha scoped its findings accordingly and alleged no omission inside any
+stated range.
+
+Cause: `tools/dispatch.mjs` launched the `claude` lane with
+`--permission-mode acceptEdits`, which auto-accepts edits but still prompts for
+web access. Fixed to `bypassPermissions` in the same commit. `--check-read-only`
+confirms no guarantee weakened: the ALLOW list, not the permission mode, is what
+withholds write tools, and no claude lane is read-only in the build lineup. A
+dispatched agent has no human to answer a prompt, so a prompt is a silent
+capability loss dressed as a completed stage.
+
+**Outstanding:** Alpha asked for a web-enabled re-check of batch 5's Riehl and
+Leinster harvests and batch 3's Flajolet–Sedgewick leg before step 6. Batch 5's
+fix task (Y1) and batch 3's (C2) both carry it, and Alpha re-checks at step 4.

@@ -45,10 +45,10 @@ blanket allow-list written from inside the session does **not** persist. Avoid
 | 1 | field-extensions-and-the-complex-numbers (54), conjugacy-and-simplicity-in-the-symmetric-groups (64) | 16+7, 18+8 |
 | 2 | the-fundamental-theorems-of-calculus (239), arc-length-and-rectifiable-curves (181) | 8+6, 13+6 |
 | 3 | formal-power-series (193), extremal-graph-theory (219) | 22+9, 20+7 |
-| 4 | the-determinant-of-a-linear-operator (84), the-integral-logarithm-and-its-characterisations (178.1) | 18+5, 19+5 |
+| 4 | the-determinant-of-a-linear-operator (84), the-integral-logarithm-and-its-characterisations (178.1) | 18+6, 19+5 |
 | 5 | universal-properties-and-the-yoneda-lemma (361) | 20+14 |
 
-**221 items, 348 harvested source headings, 0 coverage errors.** Page-level
+**222 items, 350 harvested source headings, 0 coverage errors.** Page-level
 cross-batch seams: **0**. Item-level seams were **not** reported as 0 at step 0 —
 they were not yet computable, per `LEVELS.md` §0.4.
 
