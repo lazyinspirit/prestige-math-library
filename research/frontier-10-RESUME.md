@@ -345,5 +345,31 @@ Taken one at a time with the owner.
 3. **The 33 published scope-denial edits** — *all 33, in the publishing commit*.
    Six were falsified by this run, 27 are inherited. Exact old/new text is in
    `research/frontier-10-step9-scope-denial.md` §P1–P33. **Not yet applied.**
-4. Pending.
+4. **`cor-planar-simple-graph-edge-bound`'s redundant hypothesis** — *build the
+   lemma*. Beta-6 is authoring the plane-triangulation connectedness lemma, then
+   dropping "connected" from the corollary and realigning
+   `prop-maximally-planar-edge-characterisation`'s `[L1]`. **This work is
+   OUTSIDE the audited scope steps 6–9 closed over** — authored, gated and judged,
+   but not reader-audited or refuted. Flag it at owner audit.
+
+## Open, discovered while applying item 2
+
+`lem-plane-face-handshake-by-girth` is **rejected by both lanes** and not yet
+clear:
+
+- My first title edit was **false** — I wrote "girth at least $g$" where the
+  Statement says "every facial boundary walk has length at least $g$". A one-edge
+  tree has infinite girth but a face of boundary length 2, so $3\cdot1\le2$.
+  Both lanes produced that counterexample independently. Corrected.
+- The rejudge then found a **real latent gap**: step 1.1 sums over $F(G)$ with a
+  finite-sum definition without establishing $F(G)$ finite. Exporting the
+  identity into the Statement made that dependency load-bearing and visible; the
+  gap predates my edit.
+- **Fix is available and legal**: cite
+  `lem-plane-graph-faces-are-finite-with-one-unbounded-face` ("Every plane graph
+  has finitely many faces, exactly one of which is unbounded"), which sits at #7
+  on the same page against the handshake lemma's #20. Queued for Beta-6 after its
+  current dispatch, to avoid concurrent edits to batch-6 artifacts.
+
+**This item must clear both lanes before publish.**
 
