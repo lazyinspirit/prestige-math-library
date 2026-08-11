@@ -1,7 +1,7 @@
 ---
 id: prop-maximal-plane-triangulation-characterisation
 kind: proposition
-title: "A plane graph of order at least three is maximal exactly when every face is triangular"
+title: "A two-connected plane graph of order at least three is maximal exactly when every face is triangular"
 status: draft
 origin: session
 provenance:

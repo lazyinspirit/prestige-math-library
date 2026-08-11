@@ -31,6 +31,8 @@ $f^{-1}$.
 A **groupoid** is a category in which every morphism is an isomorphism. A
 category is **connected** when it is nonempty and any two objects can be joined
 by a finite zigzag of morphisms, with successive arrows allowed to point in
-either direction. In a groupoid this is equivalent to the existence of an
-isomorphism between every ordered pair of objects.
+either direction. In a groupoid this is equivalent to being nonempty and having
+an isomorphism between every ordered pair of objects. Nonemptiness cannot be
+dropped: the empty groupoid has an isomorphism between every ordered pair of its
+objects, vacuously, and is not connected.
 

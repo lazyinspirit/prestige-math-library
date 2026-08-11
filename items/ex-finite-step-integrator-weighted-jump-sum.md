@@ -27,7 +27,7 @@ pipeline_run: null
 
 ## Example
 
-Let $c_1<\cdots<c_m$ be points of $[a,b]$ with the endpoint conventions of the one-jump example, and let
+Let $a<b$, let $c_1<\cdots<c_m$ be points of the open interval $(a,b)$, as in the one-jump example, and let
 $$\alpha=C+\sum_{j=1}^m w_jH_{c_j}.$$
 For every continuous $f$,
 $$\int_a^b f\,d\alpha=\sum_{j=1}^m w_jf(c_j).$$
@@ -46,4 +46,4 @@ $$\int_a^b f\,d\alpha=\sum_{j=1}^m w_jf(c_j).$$
 
 1.1 The constant term has every increment equal to zero. By [L1], each $H_{c_j}$ contributes $f(c_j)$, and finite linearity [L2] gives the displayed sum. [L1, L2]
 
-2.1 Ordering the distinct jump points prevents double counting. A jump at an endpoint is included exactly when it is encoded by the one-sided convention in [L1]; a constant endpoint assignment has increment zero. [L1] ∎
+2.1 Ordering the distinct jump points prevents double counting. The jump points are interior because [L1] places them strictly inside, and the restriction is not cosmetic: $H_a$ takes the value $1$ at every point of $[a,b]$, so a jump placed at $a$ makes every increment zero and contributes nothing, while the weighted sum would still count $w f(a)$. [L1] ∎

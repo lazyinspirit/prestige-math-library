@@ -35,7 +35,7 @@ pipeline_run: null
 Let $f$ be locally Riemann integrable on $[a,\infty)$ and suppose its truncation primitive $F(x)=\int_a^x f$ is bounded. Each of the following conditions implies convergence of $\int_a^\infty f(x)g(x)\,dx$:
 
 1. $g$ is nonnegative, nonincreasing, and $g(x)\to0$.
-2. $f$ is continuous, $g$ is differentiable, $g(x)\to0$, and $\int_a^\infty|g'(x)|\,dx$ converges.
+2. $f$ is continuous, $g$ is differentiable with $g'$ Riemann integrable on every compact subinterval, $g(x)\to0$, and $\int_a^\infty|g'(x)|\,dx$ converges. Local integrability of $g'$ is a hypothesis and not a consequence of the last one: convergence of $\int_a^\infty|g'|$ presupposes only that $|g'|$ is integrable on each compact subinterval, and a bounded derivative need not be Riemann integrable.
 
 The reflected statements hold at $-\infty$ and at finite singular endpoints, with monotonicity directed toward the singular end.
 

@@ -24,7 +24,7 @@ pipeline_run: null
 
 ## Example
 
-The matrix
+Over $\mathbb Q$, the matrix
 $$A=\begin{pmatrix}1&1\\1&0\end{pmatrix}$$
 has distinct row echelon forms
 $$R=\begin{pmatrix}1&1\\0&-1\end{pmatrix},\qquad S=\begin{pmatrix}1&1\\0&1\end{pmatrix},$$
@@ -42,6 +42,6 @@ but both reduce to $I_2$.
 
 **Proof technique:** direct.
 
-1.1 The operation $R_1\leftarrow R_1-R_0$ takes $A$ to $R$, and the additional scaling $R_1\leftarrow-R_1$ takes $R$ to $S$. Both are echelon forms by [L2], and $R\ne S$. [L1, L2, algebra]
+1.1 The operation $R_1\leftarrow R_1-R_0$ takes $A$ to $R$, and the additional scaling $R_1\leftarrow-R_1$ takes $R$ to $S$. Both are echelon forms by [L2], and $R\ne S$ because $-1\ne1$ in $\mathbb Q$. The ground field matters here and not elsewhere in the example: over $\mathbb F_2$ one has $-1=1$, so $R$ and $S$ coincide and this matrix exhibits no failure of uniqueness. [L1, L2, algebra]
 
 2.1 From $S$, replace $R_0$ by $R_0-R_1$ to obtain $I_2$, which satisfies every RREF condition. The same continuation after scaling takes $R$ to $I_2$, in agreement with uniqueness. [step 1.1, L1, L2, algebra] ∎

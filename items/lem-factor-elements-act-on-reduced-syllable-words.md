@@ -41,7 +41,7 @@ For each $i\in I$ and $g\in G_i$, left multiplication at the first syllable defi
 
 **Proof technique:** direct.
 
-1.1 Define $P_{i,g}$ by prepending $(i,g)$ when the word is empty or begins in another factor; when it begins $(i,h)$, replace that syllable by $(i,gh)$ and delete it if $gh=e_i$. [given, L1, L2, L3]
+1.1 Define $P_{i,e_i}$ to be the identity map, since $(i,e_i)$ is not a syllable and prepending it would leave a word that is not reduced. For $g\ne e_i$, define $P_{i,g}$ by prepending $(i,g)$ when the word is empty or begins in another factor; when it begins $(i,h)$, replace that syllable by $(i,gh)$ and delete it if $gh=e_i$. Every value is again a reduced word. [given, L1, L2, L3]
 
 2.1 The three seam cases, different first tag, nonidentity product, and identity product, show directly that applying $P_{i,g^{-1}}$ reverses applying $P_{i,g}$. Hence every $P_{i,g}$ is a permutation. [step 1.1]
 

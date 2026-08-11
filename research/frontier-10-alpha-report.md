@@ -682,6 +682,411 @@ that was itself fatally defective and a second Alpha repair on top. The touchlog
 counts 36 items repaired more than once; these two are where both touches were
 fatal repairs to the same argument.
 
-## Stage 3 — step 8, judge adjudication — not started
+## Stage 3 — step 8, judge adjudication — **IN PROGRESS**
 
-## Stage 3 — step 8, judge adjudication — not started
+Baseline `pre-step8` was taken before any adjudication. Working set:
+`research/frontier-10-step8-triage.json`, 322 live rejections over 28 page-units
+(117 both-lane, 27 DeepSeek-only, 178 Terra-only) built from the latest verdict
+per (item, model) in `research/frontier-10-judge.jsonl`. Ledger rows go to
+`research/frontier-10-judge-adjudications.jsonl`, one per rejecting model, with
+`item_sha256` recomputed from disk **before** any repair.
+
+Reading aids, both committed so a later reader can reproduce the working set:
+`research/frontier-10-dispatch/step8-show.mjs` prints a page-unit's rejections
+with both lanes' verdict text and the item's current hash;
+`step8-adj.mjs` appends ledger rows, expanding one line per item into one row
+per rejecting lane and taking each lane's own `context_sha256`. It accepts
+`<id>@ds` / `<id>@terra` because the two lanes often reject the same item for
+unrelated reasons and only one of them is fatal.
+
+### The line I am adjudicating on
+
+Settled on the first two page-units and applied unchanged since. R1 makes the
+cost of getting this wrong asymmetric, so it is written down rather than felt:
+
+**Fatal.** A title or Statement asserting more than the proof gives; a step
+whose stated content is false on a concrete configuration; an inflated `[L#]`
+whose extra content the proof actually leans on and which nothing in the frozen
+context establishes.
+
+**Nonfatal.** A citation tag that omits a fact the item already declares as a
+dependency or that sits on the same page; an inflated `[L#]` where the proof
+only uses the weaker true content; a true, standard step compressed at roughly
+the level the source text compresses it; a gap a competent reader closes in 30
+seconds.
+
+**False positive.** The judge's own claim is wrong — the fact it says is missing
+is present, its counterexample does not arise, or it contradicts a library
+convention it did not check.
+
+The third category is not a formality. Five of the first 44 adjudications are
+false positives, and two of them were confident, specific, cross-family
+DeepSeek findings that would have licensed a real edit to a correct proof.
+
+### Page-unit 1 — `symmetric-groups-and-the-sign-homomorphism` — 12 rejections, **0 fatal**
+
+11 nonfatal, 1 false positive, no edits. The pattern is almost entirely
+citation-tag precision: `def-group-homomorphism` and `def-symmetric-group` are
+declared dependencies that the step tags do not repeat; `sgn(\tau)=-1` is
+`thm-parity-of-transposition-factorisations-is-well-defined` at `r=1`, two items
+earlier on the same page; `\operatorname{Inv}(\sigma)` is a subset of the finite
+set `n \times n`.
+
+False positive: `cex-overlapping-cycles-need-not-commute`. Terra called `[L1]`
+an inaccurate restatement for dropping finiteness — but `[L1]` reproduces the
+cited lemma's own opening sentence verbatim, and the counterexample lives in
+`S_3` anyway.
+
+### Page-unit 2 — `plane-graphs-euler-and-the-five-colour-theorem` — 32 rejections, **5 fatal**
+
+The densest both-lane page in the run (17), and the one where the fatals are.
+Four false positives here too, all on the hardest material.
+
+**Fatal 1 and 2 — the two-connectivity chain.** Both lanes, independently, on
+two items. `prop-maximal-plane-triangulation-characterisation` was narrowed to
+**two-connected** plane graphs at some earlier stage — its Statement even
+explains why ("two-connectivity is what makes every facial boundary a cycle",
+which is what the Jordan-chord argument in its step 1.1 needs) — but its
+**title** still asserted the unrestricted Diestel 4.2.8 form. That is a title
+asserting more than the proof gives, `LEVELS.md` §Step 6's named fatal.
+`prop-maximally-planar-edge-characterisation` then quoted that title as its
+`[L2]` and leaned on the dropped hypothesis in step 1.1 — an inflated
+restatement the proof actually uses, so `dependency_citation`.
+
+Repairs: title narrowed to match the Statement; `[L2]` restated faithfully;
+`prop-maximally-planar-edge-characterisation` restated so the `3n-6 \Rightarrow`
+maximal direction stays unrestricted (its proof never needed the hypothesis) and
+only the converse carries two-connectivity, with the title following. I also
+corrected the same unrestricted claim where it had propagated into
+`cor-planar-simple-graph-edge-bound`'s Statement prose, which no judge caught.
+
+**Honest gap this leaves.** Diestel 4.2.8/4.4.1 hold without two-connectivity,
+because a maximal plane graph of order at least three *is* two-connected. Proving
+that needs a re-embedding lemma ("any face can be made the outer face") the page
+does not have, so building it is a rewrite, not a step-8 repair. The narrowed
+statements are true and proved; the unrestricted forms are a scope item for a
+later run.
+
+**Fatal 3 and 4 — the disconnected-augmentation construction.** DeepSeek on
+`cor-planar-simple-graph-edge-bound` step 2.1 and Terra on
+`cor-triangle-free-planar-edge-bound` step 3.1, each finding it in the item the
+other did not read closely. Both steps said to join the components of a
+disconnected plane graph "through the unbounded face". A component drawn inside
+a **bounded** face of another never meets the unbounded face, so for a fixed
+embedding the construction does not exist. Repaired by redrawing first: each
+component drawing is a finite union of segments and so bounded, so the
+components translate and scale into pairwise disjoint discs, which puts every
+one of them on the unbounded face without changing the abstract graph the bound
+is about.
+
+**Fatal 5 — another false title.** DeepSeek on
+`thm-plane-dual-exists-and-double-dual-recovers-primal`: the title asserted the
+double-dual identification unconditionally, while the item's **own Statement**
+makes it conditional on `G^*` being simple and names `G=K_2` as the case where
+it fails. Title narrowed to match.
+
+False titles are now, as at step 6, the most common fatal class in this run.
+
+**The four false positives, and why they matter.**
+
+- `lem-three-connected-kuratowski-free-is-planar` (DeepSeek). It claimed step 3.1
+  overlooks two `Y`-vertices "separated on `C` by another `X` vertex". Separated
+  on **one** side means they are consecutive in `X`, so they share the other
+  arc and the condition holds; separated on **both** sides *is* the alternating
+  case that yields `TK_{3,3}`. No gap.
+- `lem-separation-augmentation-for-kuratowski-free-graphs` (DeepSeek). It called
+  "deleting one edge from a subdivision leaves its branch vertices connected"
+  false, citing an internal edge of a subdivided path. That breaks the path, but
+  `K_5 - e` and `K_{3,3} - e` are connected, so the branch vertices stay
+  connected through the others. The claim is true.
+- `lem-three-connected-graph-has-a-contractible-edge` and
+  `thm-kuratowski-wagner-planarity-characterisation` (Terra, both). Both alleged
+  a dropped finiteness hypothesis. `def-finite-simple-graph` ends: "When no
+  qualifier is present, the word **graph** has this meaning." Terra did not check
+  the base convention.
+- `thm-plane-dual-...` (Terra). It said steps 3.1 and 4.1 form `(G^*)^*` without
+  assuming `G^*` simple. The Statement assumes exactly that and discusses `K_2`
+  explicitly; Terra rejected the item for the defect the item is written around.
+
+**The rest — 23 nonfatal.** This page builds polygonal plane topology from
+scratch, and most of what both lanes found is that its topological steps are
+compressed: relative non-separation asserted from the absolute lemma, the
+regular-neighbourhood construction asserted, "a tree meeting the boundary cycle
+in `k` points cuts the side into `k` regions" asserted. Every one of those is
+true and standard, and demanding the relative Jordan-Schoenflies development at
+step 8 is a rewrite of the page, not a repair of it. Two worth naming for a
+future reader:
+
+- `lem-polygonal-crossing-parity-is-locally-constant` step 1.2 lists "crossing an
+  edge tangentially creates or destroys two intersections". For straight edges
+  that event does not arise — Terra is right — but it is vacuous, and the vertex
+  event analysis that actually carries the proof is correct.
+- `def-polygonal-arc-and-polygon` does not pin a canonical vertex set: a straight
+  run admits extra breakpoints. Real imprecision, and Terra found it. It is
+  nonfatal only because every downstream use needs merely *some* finite
+  admissible list, never a canonical one.
+
+### Page-units 3 to 14 — the rest
+
+**`categories-functors-and-natural-transformations` (36) — 1 fatal.**
+`def-isomorphism-groupoid-and-connected-category` asserted that in a groupoid,
+connectedness is equivalent to having an isomorphism between every ordered pair
+of objects. Both lanes gave the same counterexample: the **empty groupoid**
+satisfies the right-hand condition vacuously and is not connected, because the
+same definition's own first clause requires nonemptiness. Repaired by putting
+nonemptiness into the equivalence and recording why it cannot be dropped.
+
+One false positive: `ex-free-group-and-free-module-functors`, where DeepSeek
+argued the basis proof fails over the zero ring because `1 = 0` there. The
+coordinate argument gives `c_y` directly and is valid over every ring; over the
+zero ring every coefficient is already `0`, so nothing fails.
+
+Two both-lane findings on this page are real and I want them recorded even
+though they are nonfatal. `def-full-faithful-and-essentially-surjective-functor`
+and `lem-isomorphism-characterised-by-composition-bijections` both apply
+`injective`/`surjective`/`bijective` to hom-collections that
+`rem-category-theory-class-and-size-conventions` explicitly allows to be proper
+classes, while `def-injection-surjection-bijection` is stated for functions
+between sets. Injectivity of a definable class-function schema is the same
+formula, so no statement becomes false and no step becomes unlicensed — but the
+page should carry one sentence saying so, and that was step-6 work.
+
+**`bounded-variation-and-riemann-stieltjes` (33) — 1 fatal.**
+`ex-finite-step-integrator-weighted-jump-sum` placed its jump points in the
+closed interval `[a,b]` "with the endpoint conventions of the one-jump example",
+and the one-jump example has no endpoint convention: it fixes `a<c<b`. DeepSeek
+found it through the degenerate case `a=b`; the sharper witness is `c_1=a`, where
+`H_a` takes the value `1` at every point of `[a,b]`, so every increment is zero
+and the integral is `0` while the claimed sum is `w_1f(a)`. Repaired by putting
+the jump points in the open interval and saying, in the step, why the boundary is
+excluded.
+
+This page's recurring `a=b` complaints are all nonfatal for one reason worth
+recording: `def-riemann-stieltjes-sum-and-integral` states "On `[a,a]` the
+integral is `0`" and `def-oriented-integral` is titled with that convention. The
+singleton cases the judges call unproved are true by a stated convention they did
+not open.
+
+**`improper-integrals` (30) — 1 fatal.**
+`thm-dirichlet-test-for-improper-integrals`, clause 2, assumed only that
+`int_a^inf |g'|` converges. By this library's own definition of an improper
+integral, that presupposes `|g'|` is Riemann integrable on each compact
+subinterval — **not** `g'`. The proof then applies integration by parts, which
+needs `g'` integrable, and a bounded derivative need not be Riemann integrable.
+Both lanes found it from different directions: DeepSeek at the hypothesis,
+Terra at the `[L3]` restatement of integration by parts. Repaired by making local
+integrability of `g'` an explicit hypothesis and saying why it does not follow
+from the other one.
+
+Terra's counterexample on `thm-absolute-improper-convergence-implies-convergence`
+(the rational-irrational sign function, `|f|=1` and `f` not integrable) does not
+apply: the Statement's subject is *an improper integral*, which already
+presupposes local integrability. Nonfatal.
+
+**`fubini-and-change-of-variables` (25) — 1 fatal.**
+`ex-cavalieri-shear-preserves-jordan-content` stated `[L1]` as "Cavalieri computes
+content by integrating sectional contents", dropping the cited corollary's
+explicit hypothesis that the sections are Jordan measurable outside a
+content-zero parameter set, and then applied it to an **arbitrary** bounded
+Jordan set. Step 6 of this same run already established, with a verified
+counterexample, that an arbitrary Jordan set need not have Jordan sections. So
+this is the same defect the run has already paid for once, in a second item.
+Repaired by restating `[L1]` faithfully and reordering the proof: the determinant
+argument, which was step 3.1 and is complete on its own, now carries the
+statement, and the sectional computation is explicitly a second reading rather
+than a second proof.
+
+By contrast `thm-linear-images-scale-jordan-content-by-absolute-determinant` —
+the item the step-6 refuter repaired for exactly this — is **clean**: its step 1.1
+verifies the sectional hypothesis for `P, Q, E_0P, E_0Q` and explicitly declines
+to claim it for `F`. Only its `[L3]` wording is loose. That is the difference
+between a repaired proof and a repaired sentence, and it is why Terra's rejection
+there is nonfatal and DeepSeek's here is not.
+
+**`ramsey-theory` (11) — 1 fatal.**
+`lem-colour-focussing-for-arithmetic-progressions` fixes `m>=2`, but for `m=2`
+step 1.2 applies `V(1, k^{2n})` and obtains a **one-term** progression of block
+indices, which carries no difference `t`. Steps 2.1 and 3.1 both need `t`. The
+`r>1, m=2` regime is therefore not proved. DeepSeek found it; Terra did not.
+Repaired by discharging `m=2` outright at the head of step 1.2 — among any `k+1`
+points two share a colour, and two same-coloured points are a monochromatic
+two-term progression, so `F(2,k,r)=k+1` and the first alternative always holds.
+
+**`free-products-and-amalgamation` (23) — 1 fatal.**
+`lem-factor-elements-act-on-reduced-syllable-words` defined `P_{i,g}` by
+"prepending `(i,g)` when the word is empty or begins in another factor", with no
+case for `g=e_i`. `(i,e_i)` is not a syllable, so `P_{i,e_i}` sends the empty word
+outside the set of reduced words and is not an operation on it — and step 3.1
+then asserts `P_{i,e_i}=id`. This is the action that carries the normal-form
+theorem for free products, so it is load-bearing. Both lanes. Repaired by
+defining `P_{i,e_i}` to be the identity and saying why.
+
+The amalgamated twin, `lem-factor-elements-act-on-amalgamated-normal-words`, does
+**not** have this hole: it is written in the transversal formulation, which
+multiplies the terminal `K` coefficient and rewrites uniquely. DeepSeek's
+complaint there is about compression, not well-definedness.
+
+**`gaussian-elimination-and-row-reduction` (18) — 1 fatal.**
+`ex-row-echelon-form-is-not-unique-but-rref-is` fixes no field anywhere, and its
+whole content is that `R` and `S` are distinct because one has `-1` where the
+other has `1`. Over `F_2` they coincide — and the sibling example on the very same
+page works over `Z/2`. Terra found it; DeepSeek did not. Repaired by fixing `Q`
+and recording, in the step, that the ground field is load-bearing here and
+nowhere else in the example.
+
+**Four page-units with no fatal finding at all.**
+`matrices-and-the-matrix-of-a-linear-map` (23),
+`determinants-of-matrices-over-a-commutative-ring` (13),
+`polynomial-rings-and-roots` (25),
+`the-structure-of-finite-abelian-groups` (24, one false positive),
+`group-actions-and-cayleys-theorem` (17), `symmetric-groups` (12, one false
+positive). On these the rejections are almost entirely step tags that omit a fact
+the item already declares as a dependency. "A field is an integral domain" alone
+was rejected four times on the polynomial page.
+
+Two false positives worth naming because they were confident and specific:
+`lem-three-connected-graph-has-a-contractible-edge` and
+`thm-kuratowski-wagner-planarity-characterisation`, both rejected by Terra for a
+dropped finiteness hypothesis. `def-finite-simple-graph` ends: "When no qualifier
+is present, the word **graph** has this meaning." And
+`lem-elementary-divisors-regroup-into-invariant-factors`, where DeepSeek said
+uniqueness was never proved — step 3.1 *is* the uniqueness half, recovering the
+exponent columns from any invariant-factor list, which is injectivity.
+
+### Final tally
+
+**322 rejections, 439 ledger rows** (one per rejecting lane), all recorded with
+`item_sha256` taken from disk before any repair.
+
+| outcome | rows |
+|---|---|
+| `confirmed_fatal` | 18 |
+| `confirmed_nonfatal` | 412 |
+| `false_positive` | 9 |
+
+**12 items carried a fatal defect** — 5.6% of the 322 rejections, on a level of
+584 items. By defect type: `logic` 6, `dependency_citation` 4, `other` (a title
+asserting more than the proof gives) 2.
+
+| page-unit | rejections | fatal | false positive |
+|---|---|---|---|
+| plane-graphs | 32 | 5 | 4 |
+| categories | 36 | 1 | 1 |
+| bounded-variation | 33 | 1 | 0 |
+| improper-integrals | 30 | 1 | 0 |
+| fubini | 25 | 1 | 0 |
+| free-products | 23 | 1 | 0 |
+| gaussian-elimination | 18 | 1 | 0 |
+| ramsey | 11 | 1 | 0 |
+| finite-abelian-groups | 24 | 0 | 1 |
+| symmetric-groups | 12 | 0 | 1 |
+| matrices | 23 | 0 | 0 |
+| polynomial-rings | 25 | 0 | 0 |
+| group-actions | 17 | 0 | 0 |
+| determinants | 13 | 0 | 0 |
+
+**What the lane split actually showed.** Terra rejected at roughly twice
+DeepSeek's rate and found 3 of the 12 fatal items alone; DeepSeek found 4 alone;
+both found 5 together. The 117 both-lane rejections contained 9 of the 12 fatals,
+which is where the dispatch predicted they would be. But DeepSeek also produced 6
+of the 9 false positives, and two of those were confident structural claims about
+the hardest proofs on the planar page. Cross-family independence bought real
+findings and real noise in the same pass; neither lane could have been trusted
+without adjudication.
+
+**Fatal-only cost nothing here.** Of the 412 nonfatal closures, I judge that
+perhaps 300 are citation tags that omit a fact the item already declares. Under
+the pre-R1 rule those were polishable, and polishing them would have voided 300
+judge pairs and resampled 300 refuters. Twelve rejudges is the whole bill.
+
+### The rejudge set — 12 items, and nothing else
+
+**These are the items I edited. Rejudge exactly this list.** Every one is a
+`confirmed_fatal` repair; no item was touched for any other reason.
+
+```
+prop-maximal-plane-triangulation-characterisation
+prop-maximally-planar-edge-characterisation
+cor-planar-simple-graph-edge-bound
+cor-triangle-free-planar-edge-bound
+thm-plane-dual-exists-and-double-dual-recovers-primal
+def-isomorphism-groupoid-and-connected-category
+ex-finite-step-integrator-weighted-jump-sum
+thm-dirichlet-test-for-improper-integrals
+ex-cavalieri-shear-preserves-jordan-content
+lem-colour-focussing-for-arithmetic-progressions
+lem-factor-elements-act-on-reduced-syllable-words
+ex-row-echelon-form-is-not-unique-but-rref-is
+```
+
+All 12 pass `precheck`. None carried a `verification.judge` block to delete —
+step-7 stamps have not been applied to disk. `impact-audit.mjs` reports **0
+changed public interfaces and 0 affected items**: every repair is a title
+narrowing, a hypothesis made explicit, or a proof step, and no `deps` line moved,
+so no downstream consumer needs a disposition.
+
+### Gate state at the end of stage 3
+
+`node tools/gates.mjs --step 8 --run frontier-10`:
+
+- `step8-guard.mjs` — **OK. 12 changed, 12/12 licensed by a confirmed_fatal
+  adjudication.** No `nonfatal-edit`, no `judge-adjudication-unhashed`.
+- `impact-audit.mjs` — **OK**, 0 changed public interfaces.
+- `level-coverage.mjs --verify-current-context` — **13 errors remaining**, and
+  every one is expected:
+  - 12 × `judge-coverage-missing`, exactly the 12 repaired items. These clear
+    when the targeted rejudge lands.
+  - 1 × `spine-receipt-invalid` / `receipt-scope`. The spine receipt is
+    hash-bound and lapses on mathematical-content change; 12 items changed.
+    **Refresh it after the rejudge, not before** — refreshing now produces a
+    receipt this same gate invalidates again, and it needs an independent read,
+    which is not something the repairer supplies for its own repairs.
+
+**Two errors I did close, because they were mine to reason about and were
+pre-existing.** `level-coverage` also reported
+`audit-receipt-plan-reconciliation-missing` for
+`prop-maximal-plane-triangulation-characterisation` and
+`ex-free-group-and-free-module-functors`, plus `audit-receipt-manifest`. None was
+caused by step 8 — I changed no `deps` line all stage. They are two step-6
+licensing repairs that landed after
+`research/frontier-10-audit-coverage.json` was written: the relationship count is
+now 2,563 against the receipt's 2,559, and the four extra edges are exactly those
+two items'. I read both from disk, wrote their reconciliation rows with reasons,
+and rebound `manifest_sha256`. The receipt's `item_scope` (584) and `proof_scope`
+(475) were unchanged, so nothing about the scope itself was restamped.
+
+For the record, `ex-free-group-and-free-module-functors` lists
+`def-finite-sum-in-a-commutative-monoid` **twice** in its `deps`. It is harmless
+and removing it would be an unlicensed step-8 edit, so I left it. It should be
+cleaned at the next legitimate opportunity.
+
+### Honest gaps this stage leaves
+
+1. **The unrestricted Diestel 4.2.8 / 4.4.1 forms are not in the library.**
+   `prop-maximal-plane-triangulation-characterisation` and
+   `prop-maximally-planar-edge-characterisation` are now stated for two-connected
+   plane graphs. Both hold without that hypothesis, because a maximal plane graph
+   of order at least three *is* two-connected — but proving that needs a
+   re-embedding lemma ("any face can be made the outer face") the page does not
+   have. Building it is a rewrite, not a step-8 repair. Scope item for a later
+   run.
+2. **`def-polygonal-arc-and-polygon` does not pin a canonical vertex set.** A
+   straight run admits extra breakpoints, so "its vertices" depends on the chosen
+   admissible parametrisation. Terra found this and it is real. It is nonfatal
+   only because every downstream use needs merely *some* finite admissible list.
+3. **`lem-polygonal-crossing-parity-is-locally-constant` step 1.2 lists a
+   non-event.** "Crossing an edge tangentially creates or destroys two
+   intersections" cannot happen for a straight ray and a straight segment. The
+   vertex analysis that actually carries the proof is correct, so the clause is
+   vacuous rather than wrong, but it should not be there.
+4. **The class-map hygiene sentence the category page needs** (item 2 under
+   `categories` above).
+5. **`ex-set-arithmetic-isomorphisms-are-natural` never names its functors.**
+   They are determined by the displayed formulas, and the naturality check is a
+   routine element chase, so it is nonfatal — but a naturality claim should say
+   between which functors.
+
+None of these is a fatal defect and none of them is repairable at step 8 without
+voiding a verdict for no gain. They belong in the step-10 rundown as known,
+recorded, non-blocking.
+

@@ -44,5 +44,5 @@ Every triangle-free simple planar graph with $n\ge3$ vertices and $m$ edges sati
 
 2.1 In the non-tree case, [L2] with $g=4$ and [L1] give $4(2-n+m)\le2m$, hence $m\le2n-4$. Together with the tree case this proves the connected bound. [step 1.1, L1, L2, algebra]
 
-3.1 For a disconnected graph, join components through the unbounded face by noncrossing bridge edges. No cycle, and hence no triangle, is added; the connected augmented graph has the same $n$ and at least as many edges. Step 2.1 gives the required bound for the original graph. [step 2.1, construct] ∎
+3.1 For a disconnected graph, first redraw it: each component drawing is bounded, so translating and scaling the components into pairwise disjoint discs puts every component on the unbounded face without changing the abstract graph, on which the bound depends. Now join the components through that face by noncrossing bridge edges. No cycle, and hence no triangle, is added; the connected augmented graph has the same $n$ and at least as many edges. Step 2.1 gives the required bound for the original graph. [step 2.1, construct] ∎
 

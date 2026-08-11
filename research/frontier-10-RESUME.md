@@ -223,19 +223,51 @@ syllabus row → Rudin ch. 6) and L2 (batch 8's Theorem 6.9 home →
 
 ## Exact next action
 
-**Step 7 — the paired judge sweep.** Step 6 is complete and its gate is clear.
+**Step 8 adjudication is COMPLETE. The next action is the targeted rejudge.**
+
+Alpha adjudicated all 322 live rejections (439 ledger rows, one per rejecting
+lane) in `research/frontier-10-judge-adjudications.jsonl`: **18 `confirmed_fatal`
+rows over 12 items**, 412 `confirmed_nonfatal`, 9 `false_positive`. Every row
+carries `item_sha256` taken from disk before any repair.
+`tools/step8-guard.mjs` passes: 12 items changed, 12/12 licensed.
+Full account, including the honest gaps, in `research/frontier-10-alpha-report.md`
+§"Stage 3".
+
+Rejudge **exactly these 12 items** and nothing else — their page-mates are
+untouched and `level-coverage` accepts a verdict cast against byte-identical text:
 
 ```
-JUDGE_LINEUP=deepseek+terra node tools/judge-sweep.mjs --pages <every A page in the run>
+JUDGE_LINEUP=deepseek+terra node tools/judge-sweep.mjs --items \
+  prop-maximal-plane-triangulation-characterisation \
+  prop-maximally-planar-edge-characterisation \
+  cor-planar-simple-graph-edge-bound \
+  cor-triangle-free-planar-edge-bound \
+  thm-plane-dual-exists-and-double-dual-recovers-primal \
+  def-isomorphism-groupoid-and-connected-category \
+  ex-finite-step-integrator-weighted-jump-sum \
+  thm-dirichlet-test-for-improper-integrals \
+  ex-cavalieri-shear-preserves-jordan-content \
+  lem-colour-focussing-for-arithmetic-progressions \
+  lem-factor-elements-act-on-reduced-syllable-words \
+  ex-row-echelon-form-is-not-unique-but-rref-is
 ```
 
-Supply **every A page**, not only the repaired ones: the initial Step-7 sweep is
-whole-level by owner rule, and `--items` is reserved for a later Alpha-selected
-rejudge. 14 A pages; the sweep includes each B companion automatically.
+Then, **in this order**:
 
-Step 7 is the paired judge sweep (DeepSeek + Terra, `JUDGE_LINEUP=deepseek+terra`),
-which SPENDS — supply every A page in the run. Then step 8 fatal-only
-adjudication, step 9 scope-denial sweep, step 10 rundown and the owner pause.
+1. Refresh the spine receipt (`tools/spine-audit.mjs`) — it is hash-bound and
+   lapsed when the 12 items changed. It must come **after** the rejudge, and its
+   reading must be independent of the repairer.
+2. Re-run `node tools/gates.mjs --step 8 --run frontier-10`. The only remaining
+   `level-coverage` errors right now are the 12 `judge-coverage-missing` and the
+   lapsed spine receipt; both clear at that point.
+3. Step 9 scope-denial sweep, then step 10 rundown and the owner pause.
+
+Alpha closed two pre-existing receipt errors on the way, neither caused by step 8:
+`prop-maximal-plane-triangulation-characterisation` and
+`ex-free-group-and-free-module-functors` were step-6 licensing repairs that landed
+after `research/frontier-10-audit-coverage.json` was written (relationships 2,559
+-> 2,563). Both now have reasoned `plan_reconciliation` rows and the receipt's
+`manifest_sha256` is rebound; `item_scope` and `proof_scope` were unchanged.
 
 ## Open risks
 
@@ -246,3 +278,7 @@ adjudication, step 9 scope-denial sweep, step 10 rundown and the owner pause.
   orchestrator decisions and need `plan-spec.json` order insertions at step 4.
 - `run-wave.test.mjs` has 2 pre-existing failures at baseline `2b6e537`
   (A10 owner-pause exit code). Untouched by this run; audit driver, not build.
+- **The unrestricted Diestel 4.2.8/4.4.1 forms are out of scope for this run.**
+  Two planar propositions are now stated for two-connected graphs; the general
+  forms need a re-embedding lemma the page does not have.
+  `research/frontier-10-alpha-report.md` §"Honest gaps this stage leaves".
