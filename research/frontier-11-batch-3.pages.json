@@ -1,0 +1,692 @@
+[
+  {
+    "order": 193,
+    "id": "formal-power-series",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Formal Power Series",
+    "companion": "formal-power-series-examples",
+    "requires": [
+      "polynomial-rings-and-roots",
+      "euclidean-domains-pids-and-unique-factorisation",
+      "formal-laurent-series-field"
+    ],
+    "items": [
+      {
+        "id": "def-formal-power-series-and-coefficient-extraction",
+        "kind": "definition",
+        "title": "Formal power series over a commutative ring and the coefficient-extraction functional $[x^n]$",
+        "strategy": "For a commutative ring $R$, define $R[[x]]$ as all coefficient functions $a:\\mathbb N\to R$, with coefficientwise addition and Cauchy product $[x^n](fg)=\\sum_{i+j=n}[x^i]f[x^j]g$. Define $x$ as the sequence supported at $1$, constants at $0$, and $[x^n]$ as evaluation at $n$. State once, prominently, that $x$ is an indeterminate and that no analytic convergence is asserted. Identify $R[x]$ with the finitely supported series, but leave the homomorphism proof to the next item.",
+        "deps": [
+          "def-commutative-ring",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-polynomial-ring-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-formal-power-series-ring-and-polynomial-embedding",
+        "kind": "theorem",
+        "title": "Cauchy multiplication makes $R[[x]]$ a commutative ring containing $R[x]$ as the finitely supported subring",
+        "strategy": "Check the ring laws coefficientwise. Each coefficient uses only a finite triangle of indices; associativity is finite Fubini over triples $i+j+k=n$, and distributivity is splitting a finite sum. Show constants and finitely supported coefficient sequences are closed, and that the inclusion $R[x]\\hookrightarrow R[[x]]$ is an injective unital ring homomorphism agreeing coefficient-for-coefficient with the published polynomial convolution.",
+        "deps": [
+          "def-formal-power-series-and-coefficient-extraction",
+          "lem-finite-sum-reindexing-and-fubini",
+          "thm-polynomial-ring-is-a-commutative-ring",
+          "def-ring-homomorphism"
+        ]
+      },
+      {
+        "id": "prop-coefficient-extraction-linearity-and-extensionality",
+        "kind": "proposition",
+        "title": "Coefficient extraction is $R$-linear, separates formal series, shifts under multiplication by $x^k$, and converts products to finite convolution",
+        "strategy": "Read every clause directly from coefficient functions: $[x^n](f+g)$ and $[x^n](rf)$ are pointwise, equality of all coefficients is equality of functions, $[x^n](x^kf)$ is $[x^{n-k}]f$ for $n\\ge k$ and $0$ otherwise, and the product clause is the defining finite convolution. Include $n=0$ and $k>n$ explicitly.",
+        "deps": [
+          "def-formal-power-series-and-coefficient-extraction",
+          "thm-formal-power-series-ring-and-polynomial-embedding"
+        ]
+      },
+      {
+        "id": "def-formal-order-and-x-adic-topology",
+        "kind": "definition",
+        "title": "Order of a formal series, congruence modulo $x^N$, and the $x$-adic notions of convergence and Cauchy sequence",
+        "strategy": "For nonzero $f$, define $\\operatorname{ord}_x(f)$ as its least nonzero coefficient index and set $\\operatorname{ord}_x(0)=+\\infty$. Define $f\\equiv g\\pmod{x^N}$ by equality through degree $N-1$, equivalently $\\operatorname{ord}_x(f-g)\\ge N$. A sequence converges when every finite coefficient prefix eventually stabilises, and is Cauchy when every prefix eventually agrees pairwise. This algebraic topology has no metric or analytic convergence dependency.",
+        "deps": [
+          "def-formal-power-series-and-coefficient-extraction"
+        ]
+      },
+      {
+        "id": "lem-formal-order-laws",
+        "kind": "lemma",
+        "title": "Formal order is non-Archimedean under sums and additive under products over a domain",
+        "strategy": "Show $\\operatorname{ord}_x(f+g)\\ge\\min(\\operatorname{ord}_x f,\\operatorname{ord}_x g)$ and identify the leading coefficient when the two orders differ or do not cancel. For products over an arbitrary commutative ring prove the lower bound; if the product of the two leading coefficients is nonzero, equality holds. Specialise to an integral domain to obtain exact additivity and no zero divisors in $R[[x]]$. Treat zero through the declared $+\\infty$ conventions rather than cancelling it.",
+        "deps": [
+          "def-formal-order-and-x-adic-topology",
+          "thm-formal-power-series-ring-and-polynomial-embedding",
+          "def-zero-divisor-and-integral-domain"
+        ]
+      },
+      {
+        "id": "def-summable-family-of-formal-series",
+        "kind": "definition",
+        "title": "Summable families of formal series are locally finite in every coefficient range",
+        "strategy": "For a family $(f_i)_{i\\in I}$, require that for every $N$ only finitely many indices have a nonzero coefficient below $N$. Define its sum coefficientwise by the resulting finite sum. For a sequence $(u_k)$ with $\\operatorname{ord}_x(u_k)\\to+\\infty$, define $\\prod_k(1+u_k)$ by eventual stabilisation modulo every $x^N$. Include the empty family and empty product.",
+        "deps": [
+          "def-formal-order-and-x-adic-topology",
+          "def-finite-sum-in-a-commutative-monoid"
+        ]
+      },
+      {
+        "id": "thm-summable-families-and-rearrangement",
+        "kind": "theorem",
+        "title": "Summable formal families may be regrouped and rearranged, distribute over multiplication, and have well-defined locally finite products",
+        "strategy": "Work modulo $x^N$, where only finitely many family members and finitely many coefficients survive. Apply finite reindexing and Fubini there, then use coefficient extensionality for the unrestricted identities. For products, show the partial products are eventually constant modulo each $x^N$ and are unchanged by permutations or finite regrouping. State hypotheses separately for sums and products so no analytic absolute-convergence language appears.",
+        "deps": [
+          "prop-coefficient-extraction-linearity-and-extensionality",
+          "def-summable-family-of-formal-series",
+          "lem-formal-order-laws",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "thm-x-adic-completeness-and-polynomial-density",
+        "kind": "theorem",
+        "title": "$R[[x]]$ is complete in the $x$-adic topology and $R[x]$ is dense by truncation",
+        "strategy": "Given a Cauchy sequence, define coefficient $n$ of the limit to be the eventual value of coefficient $n$; the Cauchy condition makes that value defined and gives convergence. Uniqueness follows by coefficient separation. Conversely, the truncations $\\sum_{n<N}[x^n]f\\,x^n$ are polynomials and agree with $f$ modulo $x^N$. Explicitly include the zero ring and the constant-series case.",
+        "deps": [
+          "def-formal-order-and-x-adic-topology",
+          "prop-coefficient-extraction-linearity-and-extensionality",
+          "thm-formal-power-series-ring-and-polynomial-embedding"
+        ]
+      },
+      {
+        "id": "thm-formal-power-series-unit-criterion",
+        "kind": "theorem",
+        "title": "A formal power series is a unit exactly when its constant coefficient is a unit",
+        "strategy": "If $fg=1$, the constant-coefficient equation makes $[x^0]f$ a unit. Conversely, if $a_0=[x^0]f$ has inverse, define $b_0=a_0^{-1}$ and recursively $b_n=-a_0^{-1}\\sum_{1\\le i\\le n}a_i b_{n-i}$. Verify each product coefficient is $1$ at $0$ and $0$ thereafter. The recursion is in the coefficient ring and works for every commutative ring, including the zero ring.",
+        "deps": [
+          "thm-formal-power-series-ring-and-polynomial-embedding",
+          "prop-coefficient-extraction-linearity-and-extensionality",
+          "lem-ring-units-form-a-group"
+        ]
+      },
+      {
+        "id": "cor-formal-series-over-a-field-is-a-local-domain",
+        "kind": "corollary",
+        "title": "For a field $K$, $K[[x]]$ is a domain and its nonunits form the unique maximal ideal $xK[[x]]$",
+        "strategy": "Use exact order additivity to prove the domain claim. The unit criterion says precisely that nonunits have zero constant term, and the shift formula identifies those series with $xK[[x]]$. This is a proper ideal; any ideal strictly containing it contains a series with nonzero constant coefficient, hence a unit, hence the whole ring. Any maximal ideal contains no unit and therefore lies in $xK[[x]]$, proving uniqueness. Check the constant and zero-series boundaries.",
+        "deps": [
+          "lem-formal-order-laws",
+          "thm-formal-power-series-unit-criterion",
+          "prop-coefficient-extraction-linearity-and-extensionality",
+          "def-field",
+          "def-prime-and-maximal-ideals"
+        ]
+      },
+      {
+        "id": "def-formal-series-composition",
+        "kind": "definition",
+        "title": "Composition $f\\circ g$ of formal series when the outer series is a polynomial or the inner series has zero constant term",
+        "strategy": "Define $f\\circ g=\\sum_{n\\ge0}[x^n]f\\,g^n$. If $f$ is a polynomial this is finite. Otherwise require $[x^0]g=0$, so $\\operatorname{ord}_x(g^n)\\ge n$ and the family is summable. State that unrestricted composition at a nonzero constant is not defined over a bare ring because one coefficient could require an infinite sum.",
+        "deps": [
+          "def-summable-family-of-formal-series",
+          "lem-formal-order-laws",
+          "def-formal-power-series-and-coefficient-extraction"
+        ]
+      },
+      {
+        "id": "thm-formal-composition-laws",
+        "kind": "theorem",
+        "title": "Admissible formal composition is associative and substitution by a zero-constant series is a ring homomorphism",
+        "strategy": "For $g(0)=0$, prove $(f+h)\\circ g=f\\circ g+h\\circ g$, $(fh)\\circ g=(f\\circ g)(h\\circ g)$, $1\\circ g=1$, and associativity whenever all displayed compositions are admissible. Reduce every coefficient to finite sums and use the summable-family rearrangement theorem. Record $x\\circ f=f$ and $f\\circ x=f$, and do not assert commutativity of composition.",
+        "deps": [
+          "def-formal-series-composition",
+          "thm-summable-families-and-rearrangement",
+          "thm-formal-power-series-ring-and-polynomial-embedding"
+        ]
+      },
+      {
+        "id": "thm-formal-compositional-inverse",
+        "kind": "theorem",
+        "title": "A zero-constant formal series has a compositional inverse exactly when its linear coefficient is a unit",
+        "strategy": "Necessity comes from the coefficient of $x$ in $f\\circ g=x$. For sufficiency, write $f=a_1x+a_2x^2+\\cdots$ and recursively choose coefficient $b_n$ of $g$ so that $[x^n](f\\circ g)$ is $0$ for $n>1$; the unknown occurs only as $a_1b_n$. This constructs a unique left inverse. Associativity then shows it is also the unique right inverse. Include the zero ring and the impossible zero linear coefficient when $1\\ne0$.",
+        "deps": [
+          "thm-formal-composition-laws",
+          "thm-formal-power-series-unit-criterion",
+          "prop-coefficient-extraction-linearity-and-extensionality"
+        ]
+      },
+      {
+        "id": "def-formal-power-series-derivative",
+        "kind": "definition",
+        "title": "The formal derivative $D(\\sum a_nx^n)=\\sum_{n\\ge1}na_nx^{n-1}$",
+        "strategy": "Define multiplication by the natural number $n$ as repeated addition in the coefficient ring, so the definition works in every characteristic. Define iterated derivatives and note, without analytic language, that $D(x^n)=nx^{n-1}$ and that $D(x^p)=0$ may occur in characteristic $p$.",
+        "deps": [
+          "def-formal-power-series-and-coefficient-extraction",
+          "thm-formal-power-series-ring-and-polynomial-embedding"
+        ]
+      },
+      {
+        "id": "prop-formal-derivative-algebra",
+        "kind": "proposition",
+        "title": "Formal differentiation is linear and satisfies product, power, quotient, chain, and coefficient-recovery laws",
+        "strategy": "Compare coefficients for linearity and the product rule, then induct for powers and differentiate $ff^{-1}=1$ for the quotient rule. Prove the chain rule first for monomials and extend through summable families under the composition hypotheses. Over a commutative ring containing the rationals, show $[x^n]f=D^nf(0)/n!$; over arbitrary characteristic state the Hasse-derivative replacement rather than dividing by a possibly nonunit factorial. Absorb the formal l'Hopital-at-zero identity for a denominator of order one as a final clause.",
+        "deps": [
+          "def-formal-power-series-derivative",
+          "thm-formal-power-series-unit-criterion",
+          "thm-formal-composition-laws",
+          "thm-summable-families-and-rearrangement"
+        ]
+      },
+      {
+        "id": "def-formal-exponential-logarithm-and-powers",
+        "kind": "definition",
+        "title": "Formal exponential, logarithm, and binomial powers over a commutative $\\mathbb Q$-algebra",
+        "strategy": "Define a commutative $\\mathbb Q$-algebra here as a commutative ring $R$ equipped with a unital ring homomorphism $\\mathbb Q\\to R$. For $u\\in xR[[x]]$, define $\\exp(u)=\\sum u^n/n!$, $\\log(1+u)=\\sum_{n\\ge1}(-1)^{n-1}u^n/n$, and $(1+u)^c=\\exp(c\\log(1+u))$ for $c\\in R$. Summability follows from $\\operatorname{ord}_x(u^n)\\ge n$; no analytic exponential or logarithm is invoked.",
+        "deps": [
+          "def-ring-homomorphism",
+          "thm-rat-field",
+          "def-summable-family-of-formal-series",
+          "thm-formal-power-series-unit-criterion"
+        ]
+      },
+      {
+        "id": "thm-formal-exponential-logarithm-identities",
+        "kind": "theorem",
+        "title": "Formal $\\exp$ and $\\log$ are inverse homomorphisms and formal binomial powers obey the expected addition laws",
+        "strategy": "Use finite coefficientwise binomial convolution to prove $\\exp(u+v)=\\exp(u)\\exp(v)$. Differentiate $\\log(1+u)$ and use the chain rule to show $\\log(\\exp u)=u$ and $\\exp(\\log(1+u))=1+u$, with constant terms fixing the integration constants. Deduce $\\log((1+u)(1+v))=\\log(1+u)+\\log(1+v)$ and $(1+u)^{c+d}=(1+u)^c(1+u)^d$; also identify coefficients with the generalized binomial products $c(c-1)\\cdots(c-n+1)/n!$.",
+        "deps": [
+          "def-formal-exponential-logarithm-and-powers",
+          "prop-formal-derivative-algebra",
+          "thm-formal-compositional-inverse",
+          "thm-summable-families-and-rearrangement"
+        ]
+      },
+      {
+        "id": "cor-unique-formal-root-with-constant-one",
+        "kind": "corollary",
+        "title": "Every $1+u$ with $u\\in xR[[x]]$ has a unique $k$th root with constant coefficient $1$ in a commutative $\\mathbb Q$-algebra",
+        "strategy": "Take $(1+u)^{1/k}$ from the formal power construction and use the exponent law for existence. If $v^k=1+u$ and $v(0)=1$, then $\\log(v^k)=k\\log v=\\log(1+u)$; multiply by $1/k$ and apply $\\exp$ for uniqueness. State $k\\ge1$ explicitly and isolate $u=0$.",
+        "deps": [
+          "thm-formal-exponential-logarithm-identities",
+          "thm-formal-power-series-unit-criterion"
+        ]
+      },
+      {
+        "id": "def-formal-laurent-series-and-residue",
+        "kind": "definition",
+        "title": "Formal Laurent series $K((x))$, their order, derivative, and residue",
+        "strategy": "For a field $K$, define $K((x))$ as coefficient functions on $\\mathbb Z$ with support bounded below, with finite convolution. Define order as the least occupied exponent, formal derivative termwise for all integer exponents, and $\\operatorname{res}(f)=[x^{-1}]f$. Cite the published real construction for conventions and make clear that this item generalises coefficients while changing the indeterminate from $t^{-1}$ to $x$.",
+        "deps": [
+          "def-field",
+          "def-formal-laurent-series",
+          "lem-laurent-series-ring",
+          "lem-laurent-valuation"
+        ]
+      },
+      {
+        "id": "lem-formal-residue-identities",
+        "kind": "lemma",
+        "title": "Formal residues satisfy integration by parts, logarithmic differentiation, and change of variables",
+        "strategy": "First show $\\operatorname{res}(Df)=0$ directly. The product rule gives $\\operatorname{res}((Df)g)=-\\operatorname{res}(fDg)$. Factor a nonzero Laurent series as $x^m$ times a unit to obtain $\\operatorname{res}(Df/f)=m$. For $g\\in xK[[x]]$ with nonzero linear term, prove $\\operatorname{res}(f(g)Dg)=\\operatorname{res}(f)$ by checking Laurent monomials, including the exceptional exponent $-1$ separately.",
+        "deps": [
+          "def-formal-laurent-series-and-residue",
+          "prop-formal-derivative-algebra",
+          "thm-formal-compositional-inverse",
+          "thm-laurent-series-field"
+        ]
+      },
+      {
+        "id": "thm-lagrange-burmann-inversion",
+        "kind": "theorem",
+        "title": "Lagrange–Bürmann inversion extracts coefficients of a compositional inverse and of functions of it",
+        "strategy": "Let $K$ be a field containing $\\mathbb Q$, let $w=x\\phi(w)$ with $\\phi(0)\\ne0$, and let $H\\in K[[x]]$. For $n\\ge1$, prove $[x^n]H(w)=\\frac1n[u^{n-1}]H'(u)\\phi(u)^n$ by writing coefficient extraction as a residue, substituting the inverse relation, and applying residue integration by parts and change of variables. Derive $[x^n]w^k=\\frac{k}{n}[u^{n-k}]\\phi(u)^n$ for $1\\le k\\le n$, with coefficient $0$ for $k>n$. This is a proof in scope, not an external fallback.",
+        "deps": [
+          "thm-formal-compositional-inverse",
+          "lem-formal-residue-identities",
+          "prop-coefficient-extraction-linearity-and-extensionality",
+          "thm-rat-field"
+        ]
+      },
+      {
+        "id": "thm-formal-power-laurent-dictionary",
+        "kind": "theorem",
+        "title": "$K[[x]]$ is the nonnegative-order subring of $K((x))$, whose field of fractions is $K((x))$; for $K=\\mathbb R$ this is the published $t^{-1}$ Laurent field",
+        "strategy": "Embed $K[[x]]$ by extending coefficients to vanish at negative indices and identify its image by nonnegative order. Any nonzero Laurent series is $x^m u$ with $u\\in K[[x]]$ a unit, so it is a quotient of two power series; conversely every such quotient lies in $K((x))$. Verify the field-of-fractions universal map. For $K=\\mathbb R$, send $x^n$ to $t^{-n}$ and check coefficients, convolution, order, and inverses against the published real Laurent items. Cite rather than restate their field and valuation proofs.",
+        "deps": [
+          "thm-formal-power-series-unit-criterion",
+          "def-formal-laurent-series-and-residue",
+          "thm-laurent-series-field",
+          "lem-laurent-valuation"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 194,
+    "id": "formal-power-series-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Formal Power Series — Examples",
+    "requires": [
+      "formal-power-series"
+    ],
+    "items": [
+      {
+        "id": "ex-formal-geometric-series",
+        "kind": "example",
+        "title": "The formal geometric identity $(1-x)^{-1}=\\sum_{n\\ge0}x^n$ holds over every commutative ring",
+        "strategy": "Multiply coefficientwise: the constant coefficient is $1$ and every positive coefficient is $1-1=0$. Emphasise that this is local finiteness of the Cauchy product, not convergence of numerical partial sums.",
+        "deps": [
+          "thm-formal-power-series-unit-criterion",
+          "prop-coefficient-extraction-linearity-and-extensionality"
+        ]
+      },
+      {
+        "id": "ex-negative-binomial-series",
+        "kind": "example",
+        "title": "Negative binomial series: $(1-x)^{-m}=\\sum_{n\\ge0}\\binom{m+n-1}{n}x^n$ for $m\\ge1$",
+        "strategy": "Raise the formal geometric series to the $m$th power and count weak compositions of $n$ into $m$ parts, or equivalently specialise the formal binomial-power coefficient formula. Check $m=1$ and $n=0$ explicitly.",
+        "deps": [
+          "ex-formal-geometric-series",
+          "thm-formal-exponential-logarithm-identities",
+          "def-binomial-coefficient"
+        ]
+      },
+      {
+        "id": "ex-formal-square-root-one-minus-four-x",
+        "kind": "example",
+        "title": "The constant-one square root of $1-4x$ and its first coefficients",
+        "strategy": "Apply the unique-root corollary over $\\mathbb Q$, expand the generalized binomial coefficients through degree $5$, and square the truncation modulo $x^6$ as an independent check. Keep this algebraic; do not discuss branches or radii of convergence.",
+        "deps": [
+          "cor-unique-formal-root-with-constant-one",
+          "prop-coefficient-extraction-linearity-and-extensionality"
+        ]
+      },
+      {
+        "id": "ex-lagrange-inversion-catalan-coefficients",
+        "kind": "example",
+        "title": "Lagrange inversion gives the Catalan coefficients of the inverse of $x-x^2$",
+        "strategy": "Write the inverse $w$ as $w=x/(1-w)$ and apply Lagrange inversion with $\\phi(u)=(1-u)^{-1}$. Obtain $[x^n]w=\\frac1n\\binom{2n-2}{n-1}$ for $n\\ge1$, list the first six coefficients, and verify $w-w^2=x$ through that degree.",
+        "deps": [
+          "thm-lagrange-burmann-inversion",
+          "ex-negative-binomial-series",
+          "thm-formal-compositional-inverse"
+        ]
+      },
+      {
+        "id": "ex-reversion-of-x-over-one-minus-x",
+        "kind": "example",
+        "title": "The compositional inverse of $x/(1-x)$ is $x/(1+x)$",
+        "strategy": "Use the two formal geometric identities to compose in both orders and simplify to $x$. Then display the alternating coefficient recursion from the general inverse construction.",
+        "deps": [
+          "thm-formal-compositional-inverse",
+          "thm-formal-composition-laws",
+          "ex-formal-geometric-series"
+        ]
+      },
+      {
+        "id": "cex-formal-nonunit-has-no-inverse",
+        "kind": "counterexample",
+        "title": "$x$ has no multiplicative inverse in $R[[x]]$ although it is invertible in $K((x))$ when $R=K$ is a field",
+        "strategy": "The constant coefficient of $xg$ is always $0$, so it cannot equal $1$ in a nonzero ring. In the Laurent field the monomial $x^{-1}$ exists and multiplies $x$ to $1$. This separates power-series units from Laurent-field units.",
+        "deps": [
+          "thm-formal-power-series-unit-criterion",
+          "thm-formal-power-laurent-dictionary"
+        ]
+      },
+      {
+        "id": "cex-formal-composition-with-nonzero-constant",
+        "kind": "counterexample",
+        "title": "Substituting $1$ into $1+x+x^2+\\cdots$ is not a defined formal composition",
+        "strategy": "The putative constant coefficient would be an infinite sum of copies of $1_R$, which the ring operations do not define. Contrast with substitution of $x^2$, where each coefficient has at most one contributor. This tests the zero-constant hypothesis exactly.",
+        "deps": [
+          "def-formal-series-composition",
+          "ex-formal-geometric-series"
+        ]
+      },
+      {
+        "id": "cex-nonsummable-constant-family",
+        "kind": "counterexample",
+        "title": "An infinite family of constant series $1$ is not summable in the formal topology",
+        "strategy": "At coefficient $0$ infinitely many family members are nonzero, violating local finiteness already modulo $x$. Contrast with the family $(x^n)_{n\\ge0}$, which is summable and yields the geometric series.",
+        "deps": [
+          "def-summable-family-of-formal-series",
+          "ex-formal-geometric-series"
+        ]
+      },
+      {
+        "id": "ex-formal-series-over-zmod-four",
+        "kind": "example",
+        "title": "Nonzero constant series can multiply to zero in $(\\mathbb Z/4\\mathbb Z)[[x]]$",
+        "strategy": "Regard the nonzero residue class $2$ as a constant series. Its square is the zero series because $2\\cdot2=0$ modulo $4$. This verifies why product-order additivity and the domain conclusion require a domain coefficient ring.",
+        "deps": [
+          "thm-integers-modulo-n-basic-algebra",
+          "lem-formal-order-laws",
+          "thm-formal-power-series-ring-and-polynomial-embedding"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 219,
+    "id": "extremal-graph-theory",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Extremal Graph Theory",
+    "companion": "extremal-graph-theory-examples",
+    "requires": [
+      "ramsey-theory",
+      "graph-colouring"
+    ],
+    "items": [
+      {
+        "id": "def-extremal-number-turan-graph-and-blowup",
+        "kind": "definition",
+        "title": "Ordinary-subgraph extremal number $\\operatorname{ex}(n,H)$, Turán graph $T_{n,r}$, and balanced blowup $H[s]$",
+        "strategy": "Fix ordinary, not induced, subgraph containment. For a forbidden graph $H$ with at least one edge, define $\\operatorname{ex}(n,H)$ as the maximum edge count of an $n$-vertex graph containing no ordinary copy of $H$; the edgeless $n$-vertex graph makes the finite candidate set nonempty. Define $T_{n,r}$ as the complete $r$-partite graph whose part sizes differ by at most one, allowing empty parts when $r>n$. Define $H[s]$ by replacing every vertex of $H$ with an independent $s$-set and every edge with all cross edges. State the induced-free terminology disagreement in a convention remark and never use bare '$H$-free' ambiguously.",
+        "deps": [
+          "def-finite-simple-graph",
+          "rem-finite-simple-graph-convention",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-turan-graph-edge-count-and-balance",
+        "kind": "lemma",
+        "title": "The exact edge count of $T_{n,r}$ and the unique balancing maximum among complete $r$-partite graphs",
+        "strategy": "If $n=qr+a$ with $0\\le a<r$, count missing within-part pairs to obtain $e(T_{n,r})=\\binom n2-(r-a)\\binom q2-a\\binom{q+1}2$. Moving one vertex from a part at least two larger than another increases the edge count; iterate to balance. Equality forces all nonempty part sizes to differ by at most one, giving uniqueness up to graph isomorphism. Include $n=0$, $r=1$, and $r>n$.",
+        "deps": [
+          "def-extremal-number-turan-graph-and-blowup",
+          "def-binomial-coefficient",
+          "cor-complete-graph-edge-count"
+        ]
+      },
+      {
+        "id": "thm-mantel-exact-and-unique",
+        "kind": "theorem",
+        "title": "Mantel's theorem: $\\operatorname{ex}(n,K_3)=\\lfloor n^2/4\\rfloor$, uniquely attained by $T_{n,2}$",
+        "strategy": "Give an independent induction, not a reference to Turán. For a triangle-free graph with an edge $uv$, the two open neighbourhoods are disjoint apart from their opposite endpoints, so $\\deg u+\\deg v\\le n$. Delete $u,v$, apply induction to the remaining $n-2$ vertices, and restore exactly $\\deg u+\\deg v-1$ incident edges. Verify the floor recurrence. Track equality: the smaller graph is balanced complete bipartite and the degree-sum equality forces $u,v$ into opposite parts with every allowed cross edge, yielding $T_{n,2}$. Handle edgeless graphs and $n=0,1,2$ separately.",
+        "deps": [
+          "def-extremal-number-turan-graph-and-blowup",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "lem-turan-graph-edge-count-and-balance"
+        ]
+      },
+      {
+        "id": "lem-zykov-symmetrisation",
+        "kind": "lemma",
+        "title": "Zykov symmetrisation turns an extremal clique-free graph into a complete multipartite graph without losing edges",
+        "strategy": "For nonadjacent vertices $u,v$, replacing the lower-degree vertex by a twin of the higher-degree vertex preserves $K_{r+1}$-avoidance and does not decrease edges. Apply the operation to degree classes with a termination statistic: first maximise edges, then the sum of squares of twin-class sizes. At termination nonadjacency is an equivalence relation, so the graph is complete multipartite. Record the equality case needed later: an edge-maximiser can be symmetrised without changing its edge count, and reversing an equality-preserving step cannot create a second nonisomorphic maximiser once balanced part sizes are forced.",
+        "deps": [
+          "def-extremal-number-turan-graph-and-blowup",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "def-clique-and-independence-numbers"
+        ]
+      },
+      {
+        "id": "thm-turan-exact-and-unique",
+        "kind": "theorem",
+        "title": "Turán's theorem with equality: $\\operatorname{ex}(n,K_{r+1})=e(T_{n,r})$, and $T_{n,r}$ is the unique extremal graph",
+        "strategy": "Use Zykov symmetrisation to reduce an extremal $K_{r+1}$-avoiding graph to a complete $k$-partite graph with $k\\le r$. The balancing lemma shows the largest such edge count is $e(T_{n,r})$ and identifies the balanced parts. For equality, carry the equality conditions through symmetrisation (or present the standard duplication proof directly) to show the original graph was already complete multipartite and balanced. State the exact quotient-remainder formula from the preceding lemma, not just the asymptotic bound. Cover $r=1$, $n=0$, and $r\\ge n$.",
+        "deps": [
+          "def-extremal-number-turan-graph-and-blowup",
+          "lem-turan-graph-edge-count-and-balance",
+          "lem-zykov-symmetrisation"
+        ]
+      },
+      {
+        "id": "cor-turan-ramsey-lower-bound",
+        "kind": "corollary",
+        "title": "Turán graphs give the Ramsey lower bound $R(s,t)\\ge(s-1)(t-1)+1$",
+        "strategy": "On $(s-1)(t-1)$ vertices split into $t-1$ classes of size $s-1$, colour within-class pairs red and cross-class pairs blue. Red cliques have size at most $s-1$, while blue cliques use at most one vertex from each of the $t-1$ classes. Thus there is neither a red $s$-set nor a blue $t$-set. Identify the blue graph as $T_{(s-1)(t-1),t-1}$ and translate the witness through the published arrow and Ramsey-number definitions. Check $s,t\\ge2$.",
+        "deps": [
+          "thm-turan-exact-and-unique",
+          "def-ramsey-colouring-and-arrow-notation",
+          "def-off-diagonal-ramsey-number"
+        ]
+      },
+      {
+        "id": "def-asymptotic-extremal-notation-and-edge-density",
+        "kind": "definition",
+        "title": "Edge density and the asymptotic notations $O$, $o$, $\\Omega$, and $\\Theta$ for extremal functions",
+        "strategy": "For an $n$-vertex graph with $n\\ge2$, define edge density as $e(G)/\\binom n2$. Define $f=O(g)$ and $f=o(g)$ with explicit constants and quantifiers as $n\\to\\infty$, and define $\\Omega,\\Theta$ from $O$. Fix that all forbidden graphs and integer parameters are held constant in asymptotic statements. Avoid defining density for $n<2$, where the denominator vanishes.",
+        "deps": [
+          "def-extremal-number-turan-graph-and-blowup",
+          "def-binomial-coefficient"
+        ]
+      },
+      {
+        "id": "prop-normalized-extremal-number-monotonicity",
+        "kind": "proposition",
+        "title": "$\\operatorname{ex}(n,H)/\\binom n2$ is nonincreasing for $n\\ge2$",
+        "strategy": "For a fixed forbidden graph $H$ with at least one edge, take an extremal $(n+1)$-vertex graph and double-count pairs $(v,e)$ where edge $e$ remains after deleting vertex $v$. Every $n$-vertex induced subgraph contains no ordinary copy of $H$, so its edges are at most $\\operatorname{ex}(n,H)$. Simplify the resulting natural-number inequality before dividing by positive binomial coefficients. State $n\\ge2$.",
+        "deps": [
+          "def-asymptotic-extremal-notation-and-edge-density",
+          "thm-double-counting",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph"
+        ]
+      },
+      {
+        "id": "thm-turan-density-exists",
+        "kind": "theorem",
+        "title": "Every finite graph with an edge has a Turán density $\\pi(H)=\\lim_{n\\to\\infty}\\operatorname{ex}(n,H)/\\binom n2$",
+        "strategy": "The normalized sequence is nonincreasing and lies in $[0,1]$, hence has an infimum and converges to it. Define that limit to be $\\pi(H)$. Give the equivalent epsilon-threshold formulation used by supersaturation. Keep the standing hypothesis that $H$ has at least one edge, so the extremal candidate family is never empty.",
+        "deps": [
+          "prop-normalized-extremal-number-monotonicity",
+          "def-asymptotic-extremal-notation-and-edge-density",
+          "thm-monotone-convergence"
+        ]
+      },
+      {
+        "id": "thm-extremal-graph-supersaturation",
+        "kind": "theorem",
+        "title": "Above Turán density, a graph contains a positive-density family of copies of the forbidden graph",
+        "strategy": "For a fixed graph $H$ with at least one edge and $\\varepsilon>0$, choose a fixed sample size $m$ at which the extremal density is below $\\pi(H)+\\varepsilon/2$. In an $n$-vertex graph of density at least $\\pi(H)+\\varepsilon$, average edges over all $m$-vertex subsets to show a positive fraction are above threshold and contain $H$. Double-count each unlabelled copy across the $m$-sets containing it to obtain $\\delta n^{v(H)}$ copies. Track constants and $n\\ge n_0$ explicitly.",
+        "deps": [
+          "thm-turan-density-exists",
+          "thm-double-counting",
+          "def-binomial-coefficient"
+        ]
+      },
+      {
+        "id": "def-zarankiewicz-number",
+        "kind": "definition",
+        "title": "The Zarankiewicz number $z(m,n;s,t)$ for a forbidden $K_{s,t}$ in a bipartite graph",
+        "strategy": "For fixed disjoint sides $A,B$ of sizes $m,n$, define $z(m,n;s,t)$ as the maximum number of cross edges with no ordinary $K_{s,t}$ whose $s$-side lies in $A$ and $t$-side in $B$. Record the transpose symmetry $z(m,n;s,t)=z(n,m;t,s)$ and the relation to $\\operatorname{ex}(N,K_{s,t})$. Require positive $s,t$; permit empty host sides.",
+        "deps": [
+          "def-extremal-number-turan-graph-and-blowup",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "lem-kst-common-neighbour-double-count",
+        "kind": "lemma",
+        "title": "The Kővári–Sós–Turán common-neighbour count and the discrete convexity lower bound for degree sums",
+        "strategy": "In a bipartite $K_{s,t}$-avoiding graph with sides $A,B$, count pairs $(S,b)$ with $S\\in[A]^s$ and $S\\subseteq N(b)$. The upper count is $(t-1)\\binom{|A|}{s}$ and the lower expression is $\\sum_{b\\in B}\\binom{\\deg b}{s}$. Prove the needed lower bound at a fixed total degree by smoothing integer degrees: moving one unit from a value at least two larger to the smaller value cannot increase the sum. This avoids citing real Jensen and includes average degree below $s-1$.",
+        "deps": [
+          "def-zarankiewicz-number",
+          "def-graph-adjacency-incidence-neighbourhood-and-degree",
+          "thm-double-counting",
+          "def-binomial-coefficient"
+        ]
+      },
+      {
+        "id": "thm-kovari-sos-turan-bound",
+        "kind": "theorem",
+        "title": "Kővári–Sós–Turán: exact bipartite and ordinary-graph upper bounds for excluding $K_{s,t}$",
+        "strategy": "For positive $s\\le t$, combine the common-neighbour bound with the discrete convex estimate to prove $z(m,n;s,t)\\le (t-1)^{1/s}m n^{1-1/s}+(s-1)n$ in the stated orientation. Apply the symmetric count directly to an $N$-vertex graph to obtain $\\operatorname{ex}(N,K_{s,t})\\le\\tfrac12(t-1)^{1/s}N^{2-1/s}+\\tfrac12(s-1)N$, and hence $O_{s,t}(N^{2-1/s})$. Check $s=1$, $N=0$, and the side-orientation convention.",
+        "deps": [
+          "lem-kst-common-neighbour-double-count",
+          "def-zarankiewicz-number",
+          "def-asymptotic-extremal-notation-and-edge-density"
+        ]
+      },
+      {
+        "id": "cor-bipartite-extremal-density-zero",
+        "kind": "corollary",
+        "title": "Every bipartite graph with at least one edge has Turán density zero",
+        "strategy": "If $H$ has bipartition sizes $s,t$, then $H$ is an ordinary subgraph of $K_{s,t}$, so every graph excluding $H$ also excludes $K_{s,t}$. Apply KST and divide by $\\binom n2$ to get a quantity tending to $0$. Exclude the edgeless case explicitly and allow isolated vertices by enlarging the two complete parts as needed.",
+        "deps": [
+          "thm-kovari-sos-turan-bound",
+          "thm-turan-density-exists",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "def-uniform-hypergraph-and-complete-partite-hypergraph",
+        "kind": "definition",
+        "title": "$r$-uniform hypergraphs and complete balanced $r$-partite $r$-graphs $K^{(r)}_{s,\\ldots,s}$",
+        "strategy": "Define an $r$-uniform hypergraph as a finite vertex set with edges in $[V]^r$. Define ordinary subhypergraph containment, the extremal number, and $K^{(r)}_{s,\\ldots,s}$ on $r$ disjoint $s$-sets with every transversal an edge. State the graph case $r=2$ as a dictionary, and require $r\\ge2$, $s\\ge1$ for subsequent use.",
+        "deps": [
+          "def-binomial-coefficient",
+          "def-finite-cardinality",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "thm-hypergraph-kovari-sos-turan-bound",
+        "kind": "theorem",
+        "title": "Hypergraph KST: $\\operatorname{ex}(n,K^{(r)}_{s,\\ldots,s})=O_{r,s}(n^{r-1/s^{r-1}})=o(n^r)$",
+        "strategy": "Induct on $r$. The base $r=2$ is KST. For the inductive step count copies of $K^{(r)}_{s,1,\\ldots,1}$ in two ways: fixing the $s$-set leaves an $(r-1)$-uniform link hypergraph excluding $K^{(r-1)}_{s,\\ldots,s}$, while fixing an $(r-1)$-tuple contributes a binomial coefficient of its codegree. Use the same smoothing inequality to compare the lower count with the average codegree. Solve the exponent recurrence and state only the little-$o$ consequence where it is used by Erdős–Stone.",
+        "deps": [
+          "def-uniform-hypergraph-and-complete-partite-hypergraph",
+          "thm-kovari-sos-turan-bound",
+          "lem-kst-common-neighbour-double-count",
+          "thm-double-counting"
+        ]
+      },
+      {
+        "id": "lem-colouring-embeds-a-graph-in-a-balanced-blowup",
+        "kind": "lemma",
+        "title": "Every finite graph $H$ with $\\chi(H)=r$ is an ordinary subgraph of $K_r[s]$ for some $s$",
+        "strategy": "Take a proper $r$-colouring, let $s$ be the largest colour-class size, inject each colour class into one of the $s$-vertex blowup parts, and observe that every edge joins different colours and therefore maps to a cross edge. Handle $H$ null separately, and for nonnull $H$ use the published existence and boundary convention for $\\chi(H)$.",
+        "deps": [
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-extremal-number-turan-graph-and-blowup",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "thm-erdos-stone-for-balanced-blowups",
+        "kind": "theorem",
+        "title": "Erdős–Stone for balanced blowups: $\\pi(K_r[s])=1-1/(r-1)$ for $r\\ge2$",
+        "strategy": "The lower bound is the $(r-1)$-partite Turán graph. For the upper bound, a graph with density above $\\pi(K_r)+\\varepsilon$ contains $\\delta n^r$ copies of $K_r$ by supersaturation. Form the $r$-uniform hypergraph whose edges are those $r$-cliques. Hypergraph KST forces a $K^{(r)}_{s,\\ldots,s}$, whose supporting graph is $K_r[s]$. Convert the epsilon statement to the density formula and keep $s=1$ as the Turán theorem boundary.",
+        "deps": [
+          "thm-turan-exact-and-unique",
+          "thm-extremal-graph-supersaturation",
+          "thm-hypergraph-kovari-sos-turan-bound",
+          "def-extremal-number-turan-graph-and-blowup"
+        ]
+      },
+      {
+        "id": "thm-erdos-stone-simonovits",
+        "kind": "theorem",
+        "title": "Erdős–Stone–Simonovits: $\\operatorname{ex}(n,H)=(1-1/(\\chi(H)-1)+o(1))\\binom n2$ for every graph with an edge",
+        "strategy": "Let $r=\\chi(H)\\ge2$. The graph $T_{n,r-1}$ contains no $H$, giving the lower bound. Embed $H$ into a balanced blowup $K_r[s]$; excluding $H$ implies excluding that blowup, so Erdős–Stone gives the matching upper bound. State the equivalent epsilon form with an explicit $n_0(H,\\varepsilon)$ and treat bipartite $r=2$ consistently as density $0$. The edgeless graph is excluded from the theorem statement.",
+        "deps": [
+          "lem-colouring-embeds-a-graph-in-a-balanced-blowup",
+          "thm-erdos-stone-for-balanced-blowups",
+          "thm-turan-exact-and-unique",
+          "def-proper-vertex-colouring-and-chromatic-number"
+        ]
+      },
+      {
+        "id": "cor-chromatic-number-extremal-density",
+        "kind": "corollary",
+        "title": "The asymptotic extremal density is determined exactly by chromatic number: $\\pi(H)=1-1/(\\chi(H)-1)$",
+        "strategy": "Divide the Erdős–Stone–Simonovits asymptotic by $\\binom n2$ and use existence of Turán density. Spell out the dichotomy: positive density exactly when $\\chi(H)\\ge3$, while every bipartite graph with an edge has density $0$, agreeing with KST. This is the short citable chromatic-number formulation required downstream.",
+        "deps": [
+          "thm-erdos-stone-simonovits",
+          "thm-turan-density-exists",
+          "cor-bipartite-extremal-density-zero"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 220,
+    "id": "extremal-graph-theory-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Extremal Graph Theory — Examples",
+    "requires": [
+      "extremal-graph-theory"
+    ],
+    "items": [
+      {
+        "id": "ex-turan-graph-t-ten-three",
+        "kind": "example",
+        "title": "$T_{10,3}=K_{3,3,4}$ has $33$ edges and is the unique $10$-vertex $K_4$-extremal graph",
+        "strategy": "Use $10=3\\cdot3+1$ in the exact edge formula, also count the three cross products $3\\cdot3+3\\cdot4+3\\cdot4=33$, and invoke the equality statement of Turán's theorem. Display a $K_4$ obstruction by the three parts.",
+        "deps": [
+          "lem-turan-graph-edge-count-and-balance",
+          "thm-turan-exact-and-unique"
+        ]
+      },
+      {
+        "id": "ex-mantel-balanced-complete-bipartite",
+        "kind": "example",
+        "title": "$K_{3,4}$ realises $\\operatorname{ex}(7,K_3)=12$",
+        "strategy": "Count $3\\cdot4=12=\\lfloor49/4\\rfloor$, note that a bipartite graph contains no triangle, and apply Mantel's exact equality characterization.",
+        "deps": [
+          "thm-mantel-exact-and-unique",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-near-extremal-triangle-free-graph",
+        "kind": "example",
+        "title": "Deleting one edge from $K_{3,4}$ gives a triangle-free graph one edge below the Mantel threshold",
+        "strategy": "Delete a displayed cross edge, recount $11$ edges, and verify triangle-freeness survives. Compare with the unique $12$-edge equality case to distinguish exact extremality from near-extremality without claiming a stability theorem.",
+        "deps": [
+          "ex-mantel-balanced-complete-bipartite",
+          "thm-mantel-exact-and-unique"
+        ]
+      },
+      {
+        "id": "ex-turan-ramsey-colouring-witness",
+        "kind": "example",
+        "title": "A Turán-partition colouring witnesses $R(4,3)\\ge7$",
+        "strategy": "Partition six vertices into three pairs, colour within pairs blue and cross pairs red. A red clique uses at most one vertex per pair, so has size at most $3$; a blue clique lies within one pair, so has size at most $2$. Translate this explicit colouring to failure of $6\\to(4,3)^2$.",
+        "deps": [
+          "cor-turan-ramsey-lower-bound",
+          "def-ramsey-colouring-and-arrow-notation"
+        ]
+      },
+      {
+        "id": "ex-five-cycle-k-two-two-free",
+        "kind": "example",
+        "title": "The five-cycle is $K_{2,2}$-avoiding and shows the KST problem is not just a complete-bipartite construction",
+        "strategy": "List the five cycle edges and observe that any two vertices have at most one common neighbour, whereas a $K_{2,2}$ would give two. Record its edge count and compare it with the KST upper bound at $N=5$ without asserting the bound is sharp there.",
+        "deps": [
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "thm-kovari-sos-turan-bound"
+        ]
+      },
+      {
+        "id": "ex-petersen-extremal-density",
+        "kind": "example",
+        "title": "The Petersen graph has chromatic number $3$, so its Turán density is $1/2$",
+        "strategy": "Use the published two-subset model to exhibit an odd $5$-cycle, ruling out two colours, and give an explicit three-colouring of all ten vertices. Apply the chromatic-density corollary to obtain $1-1/(3-1)=1/2$.",
+        "deps": [
+          "def-petersen-graph",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "cor-chromatic-number-extremal-density"
+        ]
+      },
+      {
+        "id": "ex-odd-cycle-extremal-density",
+        "kind": "example",
+        "title": "Every odd cycle $C_{2k+1}$ has Turán density $1/2$",
+        "strategy": "For $k\\ge1$, alternate two colours around the cycle until the closing edge forces a third colour, proving $\\chi(C_{2k+1})=3$. Apply the chromatic-density corollary to obtain $1-1/(3-1)=1/2$, and contrast this with the zero density of bipartite graphs without claiming an exact finite extremal number.",
+        "deps": [
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "cor-chromatic-number-extremal-density"
+        ]
+      }
+    ]
+  }
+]

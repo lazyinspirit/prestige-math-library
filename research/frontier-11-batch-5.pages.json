@@ -1,0 +1,426 @@
+[
+  {
+    "order": 361,
+    "id": "universal-properties-and-the-yoneda-lemma",
+    "kind": "A",
+    "category": "category-theory",
+    "title": "Universal Properties, Representables and the Yoneda Lemma",
+    "companion": "universal-properties-and-the-yoneda-lemma-examples",
+    "requires": [
+      "categories-functors-and-natural-transformations"
+    ],
+    "items": [
+      {
+        "id": "def-hom-functors-and-hom-bifunctor",
+        "kind": "definition",
+        "title": "The covariant and contravariant hom-assignments and the hom-bifunctor of a locally small category",
+        "deps": [
+          "def-category",
+          "def-small-locally-small-and-large-category",
+          "def-opposite-category",
+          "def-product-category",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "thm-hom-assignments-are-functors",
+        "kind": "theorem",
+        "title": "The assignments $\\mathcal C(a,-)$ and $\\mathcal C(-,a)$ are functors to $\\mathbf{Set}$",
+        "strategy": "For a morphism $u:b\\to c$, define the covariant action by postcomposition $f\\mapsto u\\circ f$ and the contravariant action by precomposition $g\\mapsto g\\circ u$. Associativity gives preservation of composition, and the identity laws give preservation of identities.",
+        "deps": [
+          "def-hom-functors-and-hom-bifunctor",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "thm-hom-assignment-is-a-bifunctor",
+        "kind": "theorem",
+        "title": "The hom-assignment $\\mathcal C(-,-):\\mathcal C^{\\mathrm{op}}\\times\\mathcal C\\to\\mathbf{Set}$ is a bifunctor",
+        "strategy": "Send $(h:a'\\to a,u:b\\to b')$ to $f\\mapsto u\\circ f\\circ h$. Check identity and composition componentwise; associativity also shows that precomposition and postcomposition commute, so the two one-variable hom-functors assemble into one bifunctor.",
+        "deps": [
+          "def-hom-functors-and-hom-bifunctor",
+          "thm-hom-assignments-are-functors",
+          "def-product-category"
+        ]
+      },
+      {
+        "id": "def-presheaf-representable-functor-and-representation",
+        "kind": "definition",
+        "title": "Presheaves, covariantly and contravariantly representable functors, and representations",
+        "deps": [
+          "thm-hom-assignments-are-functors",
+          "def-natural-transformation",
+          "def-natural-isomorphism",
+          "def-opposite-category",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "prop-initial-and-terminal-objects-as-representations",
+        "kind": "proposition",
+        "title": "Initial and terminal objects are exactly the representations of the constant singleton functor",
+        "strategy": "For the covariant case, a representation $\\mathcal C(I,-)\\cong 1$ says that every hom-set out of $I$ is a singleton, exactly the initial-object condition. Apply the same argument to $\\mathcal C(-,T)\\cong1$ for terminal objects, including the empty-category obstruction.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "def-initial-terminal-and-zero-object",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "thm-initial-and-terminal-objects-are-unique-up-to-unique-isomorphism",
+        "kind": "theorem",
+        "title": "Initial and terminal objects are unique up to a unique isomorphism",
+        "strategy": "Between two initial objects there is one morphism in each direction. Each composite is an endomorphism of an initial object and hence must be its unique endomorphism, the identity; uniqueness of the isomorphism follows from uniqueness of the forward morphism. Dualize for terminal objects.",
+        "deps": [
+          "def-initial-terminal-and-zero-object",
+          "def-isomorphism-groupoid-and-connected-category",
+          "thm-category-theoretic-duality-principle"
+        ]
+      },
+      {
+        "id": "lem-yoneda-evaluation-bijection",
+        "kind": "lemma",
+        "title": "Evaluation at the identity gives $\\operatorname{Nat}(\\mathcal C(a,-),F)\\cong F(a)$ and proves that the natural-transformation collection is a set",
+        "strategy": "Define evaluation by $\\alpha\\mapsto\\alpha_a(1_a)$. For $x\\in F(a)$ construct $\\alpha^x_c(f)=F(f)(x)$, check naturality, and prove the two constructions inverse using the naturality square for $f:a\\to c$. Only after this explicit bijection is constructed identify the natural-transformation collection with a set; no choice is used.",
+        "deps": [
+          "def-hom-functors-and-hom-bifunctor",
+          "thm-hom-assignments-are-functors",
+          "def-presheaf-representable-functor-and-representation",
+          "def-natural-transformation",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "thm-yoneda-lemma-is-natural-in-both-variables",
+        "kind": "theorem",
+        "title": "The Yoneda bijection $\\operatorname{Nat}(\\mathcal C(a,-),F)\\cong F(a)$ is natural in both $a$ and $F$",
+        "strategy": "Use the explicit evaluation bijection. For $h:a\\to a'$, verify that precomposition with $\\mathcal C(h,-):\\mathcal C(a',-)\\Rightarrow\\mathcal C(a,-)$ corresponds to $F(h)$; for $\\eta:F\\Rightarrow G$, verify that postcomposition by $\\eta$ corresponds to $\\eta_a$. These two equations establish the two naturality squares without assuming a functor category for a large source.",
+        "deps": [
+          "lem-yoneda-evaluation-bijection",
+          "thm-hom-assignment-is-a-bifunctor",
+          "def-natural-transformation",
+          "def-vertical-composition-of-natural-transformations"
+        ]
+      },
+      {
+        "id": "cor-contravariant-yoneda-lemma",
+        "kind": "corollary",
+        "title": "For a presheaf $P$, $\\operatorname{Nat}(\\mathcal C(-,a),P)\\cong P(a)$ naturally in $a$ and $P$",
+        "strategy": "Apply the covariant Yoneda lemma to $\\mathcal C^{\\mathrm{op}}$. Translate its covariant hom-functor, object morphisms, and naturality equations back to the stated presheaf variance.",
+        "deps": [
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "def-opposite-category",
+          "thm-category-theoretic-duality-principle",
+          "def-presheaf-representable-functor-and-representation"
+        ]
+      },
+      {
+        "id": "rem-size-of-natural-transformation-collections",
+        "kind": "remark",
+        "title": "Local smallness does not make every natural-transformation collection a set, but the Yoneda construction proves sethood in the representable-source case",
+        "deps": [
+          "def-small-locally-small-and-large-category",
+          "def-functor-category",
+          "prop-size-of-functor-categories",
+          "lem-yoneda-evaluation-bijection"
+        ]
+      },
+      {
+        "id": "def-yoneda-embedding",
+        "kind": "definition",
+        "title": "The Yoneda assignment and the small-source Yoneda functor, traditionally called the Yoneda embedding",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "thm-hom-assignment-is-a-bifunctor",
+          "def-functor-category",
+          "prop-size-of-functor-categories",
+          "def-embedding-of-categories"
+        ]
+      },
+      {
+        "id": "thm-yoneda-embedding-is-fully-faithful",
+        "kind": "theorem",
+        "title": "The Yoneda functor is fully faithful, and it is a full embedding when its object map is injective",
+        "strategy": "Specialize contravariant Yoneda to $P=\\mathcal C(-,b)$ to obtain $\\operatorname{Nat}(\\mathcal C(-,a),\\mathcal C(-,b))\\cong\\mathcal C(a,b)$. Check that the inverse sends $f:a\\to b$ to postcomposition by $f$, exactly the morphism action of $y$; the bijection gives fullness and faithfulness with no global smallness needed for the hom-set claim. Under the library's stronger terminology, add the conditional object-injectivity clause before calling this a full embedding.",
+        "deps": [
+          "cor-contravariant-yoneda-lemma",
+          "def-yoneda-embedding",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "def-embedding-of-categories"
+        ]
+      },
+      {
+        "id": "cor-representable-presheaves-detect-isomorphism-of-objects",
+        "kind": "corollary",
+        "title": "Objects $a$ and $b$ are isomorphic exactly when $\\mathcal C(-,a)$ and $\\mathcal C(-,b)$ are naturally isomorphic",
+        "strategy": "An isomorphism $a\\to b$ is sent by Yoneda to a natural isomorphism. Conversely, full faithfulness lifts a natural isomorphism and its inverse to morphisms $a\\to b$ and $b\\to a$; faithfulness turns the two inverse equations into the corresponding equations in $\\mathcal C$.",
+        "deps": [
+          "thm-yoneda-embedding-is-fully-faithful",
+          "def-natural-isomorphism",
+          "def-isomorphism-groupoid-and-connected-category"
+        ]
+      },
+      {
+        "id": "def-universal-element",
+        "kind": "definition",
+        "title": "Universal elements of covariant functors and presheaves",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation"
+        ]
+      },
+      {
+        "id": "thm-universal-elements-and-universal-factorisations",
+        "kind": "theorem",
+        "title": "A representation is equivalently a universal element with a unique factorisation property",
+        "strategy": "For covariant $F$, send a representation $\\theta:\\mathcal C(R,-)\\cong F$ to $u=\\theta_R(1_R)$ and use Yoneda's inverse formula to show $\\theta_c(f)=F(f)(u)$. Conversely the stipulated unique factorization makes each such map bijective, and functoriality makes the family natural. Apply the dual argument to presheaves.",
+        "deps": [
+          "lem-yoneda-evaluation-bijection",
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "cor-contravariant-yoneda-lemma",
+          "def-universal-element"
+        ]
+      },
+      {
+        "id": "thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism",
+        "kind": "theorem",
+        "title": "Representing objects are unique up to a unique isomorphism compatible with their universal elements",
+        "strategy": "Given universal elements $(R,u)$ and $(R',u')$ for the same covariant functor, use universality to obtain the unique maps $i:R\\to R'$ and $j:R'\\to R$ carrying one universal element to the other. Functoriality and uniqueness force $ji=1_R$ and $ij=1_{R'}$, and also force uniqueness of the compatible isomorphism; dualize for presheaves.",
+        "deps": [
+          "thm-universal-elements-and-universal-factorisations",
+          "def-isomorphism-groupoid-and-connected-category"
+        ]
+      },
+      {
+        "id": "def-category-of-elements",
+        "kind": "definition",
+        "title": "The category of elements of a covariant functor or a presheaf",
+        "deps": [
+          "def-category",
+          "def-functor-and-contravariant-functor",
+          "def-opposite-category",
+          "def-universal-element"
+        ]
+      },
+      {
+        "id": "thm-universal-elements-are-initial-or-terminal-in-the-category-of-elements",
+        "kind": "theorem",
+        "title": "Universal elements are initial in a covariant category of elements and terminal in a presheaf category of elements",
+        "strategy": "Unpack a morphism $(R,u)\\to(c,x)$ in the covariant category of elements: it is exactly a morphism $f:R\\to c$ satisfying $F(f)(u)=x$, so initiality is precisely the universal-factorization condition. The presheaf equation reverses the arrow and yields terminality.",
+        "deps": [
+          "thm-universal-elements-and-universal-factorisations",
+          "def-category-of-elements",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "def-universal-arrow-to-and-from-a-functor",
+        "kind": "definition",
+        "title": "Universal arrows from an object to a functor and from a functor to an object",
+        "deps": [
+          "def-functor-and-contravariant-functor",
+          "def-comma-slice-and-coslice-categories",
+          "def-universal-element"
+        ]
+      },
+      {
+        "id": "thm-universal-arrows-are-initial-or-terminal-in-comma-categories",
+        "kind": "theorem",
+        "title": "Universal arrows to a functor are initial in comma categories, and universal arrows from a functor are terminal",
+        "strategy": "An arrow in $(X\\downarrow U)$ from $(R,\\eta)$ to $(C,f)$ is a morphism $h:R\\to C$ with $U(h)\\eta=f$, exactly the unique factorization in a universal arrow from $X$ to $U$. Unpack $(U\\downarrow X)$ dually for universal arrows from $U$ to $X$.",
+        "deps": [
+          "def-universal-arrow-to-and-from-a-functor",
+          "def-comma-slice-and-coslice-categories",
+          "def-initial-terminal-and-zero-object"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 362,
+    "id": "universal-properties-and-the-yoneda-lemma-examples",
+    "kind": "B",
+    "category": "category-theory",
+    "title": "Universal Properties, Representables and the Yoneda Lemma — Examples",
+    "companion": "universal-properties-and-the-yoneda-lemma",
+    "requires": [
+      "universal-properties-and-the-yoneda-lemma"
+    ],
+    "items": [
+      {
+        "id": "ex-set-products-as-representing-objects",
+        "kind": "example",
+        "title": "A Cartesian product represents $X\\mapsto\\mathbf{Set}(X,A)\\times\\mathbf{Set}(X,B)$",
+        "strategy": "Use $A\\times B$ with its projections. Send $f:X\\to A\\times B$ to its two coordinate maps, send a pair $(g,h)$ to $x\\mapsto(g(x),h(x))$, and check that these operations are inverse and natural in $X$.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "prop-sets-and-functions-form-category-set",
+          "def-cartesian-product",
+          "def-function"
+        ]
+      },
+      {
+        "id": "ex-set-coproducts-as-representing-objects",
+        "kind": "example",
+        "title": "A tagged disjoint union represents $X\\mapsto\\mathbf{Set}(A,X)\\times\\mathbf{Set}(B,X)$",
+        "strategy": "Construct $A\\sqcup B=(A\\times\\{0\\})\\cup(B\\times\\{1\\})$. Restriction along the two injections sends a map out of the union to a pair of maps; define the inverse piecewise on the two tags and verify uniqueness and naturality.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "prop-sets-and-functions-form-category-set",
+          "def-cartesian-product",
+          "def-union-of-a-set-and-binary-union",
+          "def-ordered-pair"
+        ]
+      },
+      {
+        "id": "ex-function-sets-as-exponential-representing-objects",
+        "kind": "example",
+        "title": "The function set $B^A$ represents $X\\mapsto\\mathbf{Set}(X\\times A,B)$",
+        "strategy": "Curry a map $f:X\\times A\\to B$ to $x\\mapsto(a\\mapsto f(x,a))$ and uncurry a map $X\\to B^A$ by evaluation. The two formulas are inverse and commute with precomposition in $X$.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "prop-sets-and-functions-form-category-set",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-cartesian-product"
+        ]
+      },
+      {
+        "id": "ex-free-monoid-universal-property-as-a-representation",
+        "kind": "example",
+        "title": "The free word monoid on $X$ represents $M\\mapsto\\mathbf{Set}(X,U(M))$",
+        "strategy": "Form the monoid $X^*$ of finite words under concatenation and the one-letter map $j:X\\to X^*$. Extend $f:X\\to U(M)$ to the product of the letters in a word, prove this is the unique unital monoid homomorphism extending $f$, and check naturality in $M$. Also verify that monoids and unital homomorphisms form a locally small category and that $U$ is a functor.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "def-semigroup-and-monoid",
+          "def-group-homomorphism",
+          "def-category",
+          "def-small-locally-small-and-large-category",
+          "def-functor-and-contravariant-functor",
+          "def-the-set-of-functions-from-one-set-to-another"
+        ]
+      },
+      {
+        "id": "ex-free-group-universal-property-as-a-representation",
+        "kind": "example",
+        "title": "The free group on $X$ represents $G\\mapsto\\mathbf{Set}(X,U(G))$",
+        "strategy": "Apply the published free-group universal property to obtain a bijection $\\mathbf{Grp}(F(X),G)\\cong\\mathbf{Set}(X,U(G))$. Show that postcomposition by a group homomorphism agrees with postcomposition of the underlying set map, proving naturality; for a singleton $X$, identify $F(X)$ with the infinite cyclic group.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "def-free-group",
+          "thm-reduced-words-form-the-free-group",
+          "thm-free-groups-unique-up-to-unique-isomorphism",
+          "prop-groups-and-homomorphisms-form-category-grp"
+        ]
+      },
+      {
+        "id": "ex-polynomial-ring-represents-the-underlying-set-functor-on-rings",
+        "kind": "example",
+        "title": "$\\mathbb Z[x]$ represents the underlying-set functor on unital rings",
+        "strategy": "For an arbitrary unital ring $R$ and $r\\in R$, define evaluation by $\\sum_i a_i x^i\\mapsto\\sum_i(a_i1_R)r^i$. Integer scalars are central, so the convolution calculation proves multiplicativity without assuming $R$ commutative. Show that every unital homomorphism $\\mathbb Z[x]\\to R$ is forced by the image of $x$, and verify naturality under postcomposition.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "prop-rings-and-homomorphisms-form-category-ring",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "thm-polynomial-ring-is-a-commutative-ring",
+          "thm-int-comm-ring",
+          "lem-integer-multiples-in-a-ring",
+          "def-ring-homomorphism",
+          "def-monoid-finite-product",
+          "thm-generalised-associativity",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "ex-the-one-point-space-represents-the-underlying-set-functor-on-top",
+        "kind": "example",
+        "title": "The one-point space represents the underlying-set functor on $\\mathbf{Top}$",
+        "strategy": "A map from the one-point space $1$ to $X$ is determined by its unique image point, and every such map is continuous because each preimage is either empty or all of $1$. This gives $\\mathbf{Top}(1,X)\\cong U(X)$, naturally under continuous maps.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "prop-topological-spaces-and-continuous-maps-form-category-top",
+          "def-topological-space",
+          "def-continuous-map-top"
+        ]
+      },
+      {
+        "id": "ex-representable-presheaf-on-a-poset",
+        "kind": "example",
+        "title": "A representable presheaf on a poset is the indicator of a principal down-set",
+        "strategy": "View a poset $P$ as a category and fix $p\\in P$. Compute $P(-,p)$ at $q$: it is a singleton when $q\\le p$ and empty otherwise. The unique possible restriction maps display the presheaf completely and identify its nonempty support with the principal down-set of $p$.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors",
+          "def-preorder"
+        ]
+      },
+      {
+        "id": "cex-the-doubling-functor-on-set-is-not-representable",
+        "kind": "counterexample",
+        "title": "The functor $D(X)=X\\sqcup X$ on $\\mathbf{Set}$ is not covariantly representable",
+        "strategy": "Define $D$ on a function by applying it separately to the two tags. If $D\\cong\\mathbf{Set}(R,-)$, evaluation at a singleton would give a bijection from the two-element set $D(1)$ to the singleton $\\mathbf{Set}(R,1)$, an immediate contradiction for every set $R$.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "prop-sets-and-functions-form-category-set",
+          "def-functor-and-contravariant-functor",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "ex-two-singletons-are-canonically-isomorphic-representing-objects",
+        "kind": "example",
+        "title": "Two singleton sets give canonically isomorphic representations of the identity functor on $\\mathbf{Set}$",
+        "strategy": "Represent the identity functor by $\\{0\\}$ and by $\\{1\\}$ through evaluation at the unique point. The unique bijection $\\{0\\}\\to\\{1\\}$ is the unique isomorphism carrying one universal point to the other, illustrating compatibility rather than merely an arbitrary isomorphism.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-yoneda-embedding-of-the-walking-arrow-category",
+        "kind": "example",
+        "title": "The Yoneda embedding of the walking-arrow category computed objectwise",
+        "strategy": "For the category $0\\xrightarrow{u}1$, tabulate $y(0)$ and $y(1)$ on both objects and on $u^{\\mathrm{op}}$, then compute $y(u):y(0)\\Rightarrow y(1)$. The resulting natural-transformation sets reproduce the three hom-sets and their composition.",
+        "deps": [
+          "def-yoneda-embedding",
+          "thm-yoneda-embedding-is-fully-faithful",
+          "def-category"
+        ]
+      },
+      {
+        "id": "ex-yoneda-lemma-for-a-monoid-action",
+        "kind": "example",
+        "title": "For a monoid action, Yoneda says that an equivariant map from the regular action is determined by the identity element",
+        "strategy": "View a monoid $M$ as its one-object category and a functor $BM\\to\\mathbf{Set}$ as a left $M$-set $X$. Identify $BM(*,-)$ with the left regular action on $M$; evaluation at the identity sends an equivariant map $M\\to X$ to a point of $X$, with inverse $x\\mapsto(m\\mapsto m\\cdot x)$.",
+        "deps": [
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "prop-monoids-and-groups-as-one-object-categories",
+          "prop-sets-and-functions-form-category-set",
+          "def-semigroup-and-monoid"
+        ]
+      },
+      {
+        "id": "fs-yoneda-lemma-requires-a-small-category",
+        "kind": "false-statement",
+        "title": "The Yoneda lemma requires its category to be small",
+        "strategy": "Refute the claim by the proved theorem: its construction uses only that each $\\mathcal C(a,c)$ is a set. The large locally small category $\\mathbf{Set}$ supplies a concrete category outside the small case, while the same evaluation-and-inverse formulas still apply.",
+        "deps": [
+          "lem-yoneda-evaluation-bijection",
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "prop-sets-and-functions-form-category-set",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "fs-nonisomorphic-objects-can-have-isomorphic-representable-presheaves",
+        "kind": "false-statement",
+        "title": "Non-isomorphic objects can have naturally isomorphic representable presheaves",
+        "strategy": "A natural isomorphism $\\mathcal C(-,a)\\cong\\mathcal C(-,b)$ lifts by full faithfulness to mutually inverse morphisms $a\\to b$ and $b\\to a$. This contradicts non-isomorphism and directly refutes the claim.",
+        "deps": [
+          "cor-representable-presheaves-detect-isomorphism-of-objects",
+          "thm-yoneda-embedding-is-fully-faithful"
+        ]
+      }
+    ]
+  }
+]

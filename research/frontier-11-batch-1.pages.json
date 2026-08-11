@@ -1,0 +1,606 @@
+[
+  {
+    "order": 54,
+    "id": "field-extensions-and-the-complex-numbers",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "Simple Field Extensions and the Construction of the Complex Numbers",
+    "companion": "field-extensions-and-the-complex-numbers-examples",
+    "requires": [
+      "polynomial-rings-and-roots",
+      "roots-and-rational-powers"
+    ],
+    "items": [
+      {
+        "id": "def-field-extension-generated-subfields-and-simple-extension",
+        "kind": "definition",
+        "title": "Field extensions, generated subrings $F[S]$, generated subfields $F(S)$, and simple extensions",
+        "deps": [
+          "def-field"
+        ]
+      },
+      {
+        "id": "def-algebraic-and-transcendental-elements",
+        "kind": "definition",
+        "title": "Algebraic and transcendental elements and algebraic extensions",
+        "deps": [
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-polynomial-evaluation-and-root"
+        ]
+      },
+      {
+        "id": "thm-evaluation-kernel-and-minimal-polynomial",
+        "kind": "theorem",
+        "title": "The evaluation kernel and the unique monic irreducible minimal polynomial of an algebraic element",
+        "strategy": "Use the polynomial-ring universal property to make evaluation an $F$-algebra homomorphism. Algebraicity is exactly nonzero kernel; principality gives a monic generator $m_\\alpha$, minimal degree makes it irreducible, and membership in the kernel gives the divisibility characterization and uniqueness. Treat the transcendental case as the zero-kernel alternative.",
+        "deps": [
+          "def-algebraic-and-transcendental-elements",
+          "thm-universal-property-of-a-polynomial-ring",
+          "cor-polynomial-ring-over-a-field-is-a-pid"
+        ]
+      },
+      {
+        "id": "thm-irreducible-quotient-adjoins-a-root",
+        "kind": "theorem",
+        "title": "$F[x]/(p)$ for monic irreducible $p$ is a field extension containing the root $x+(p)$ with unique reduced representatives",
+        "strategy": "Apply the published irreducible-quotient criterion for fieldness. Prove that constants embed injectively by comparing degrees, set $a=x+(p)$, evaluate $p(a)=0$, and use polynomial division to give each coset a unique representative of degree below $\\deg p$, including the constant and linear boundary cases.",
+        "deps": [
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "thm-polynomial-quotient-is-a-field-iff-irreducible",
+          "thm-polynomial-division-algorithm-over-a-field",
+          "thm-universal-property-of-a-polynomial-ring"
+        ]
+      },
+      {
+        "id": "cor-every-nonconstant-polynomial-has-a-root-in-an-extension",
+        "kind": "corollary",
+        "title": "Every nonconstant polynomial over a field has a root in some field extension",
+        "strategy": "Factor the polynomial into irreducibles and choose one irreducible factor $p$. The quotient $F[x]/(p)$ is a field extension in which $a=x+(p)$ is a root of $p$, and therefore is a root of the original polynomial. Normalize $p$ to monic without changing its principal ideal, and exclude the zero polynomial through the nonconstant hypothesis.",
+        "deps": [
+          "thm-irreducible-quotient-adjoins-a-root",
+          "lem-polynomial-factorisation-into-irreducibles"
+        ]
+      },
+      {
+        "id": "thm-universal-property-of-adjoining-an-irreducible-root",
+        "kind": "theorem",
+        "title": "Universal property of adjoining a root of an irreducible polynomial",
+        "strategy": "For monic irreducible $p\\in F[x]$, let $a=x+(p)$. Given an extension $L/F$ and $b\\in L$ with $p(b)=0$, evaluation at $b$ kills $(p)$ and therefore factors uniquely through $F[x]/(p)$; the factor fixes $F$ and sends $a$ to $b$. Conversely those two requirements determine it because every quotient class is a polynomial in $a$.",
+        "deps": [
+          "thm-irreducible-quotient-adjoins-a-root",
+          "thm-quotient-ring-universal-property",
+          "thm-universal-property-of-a-polynomial-ring"
+        ]
+      },
+      {
+        "id": "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+        "kind": "theorem",
+        "title": "A simple algebraic extension is its minimal-polynomial quotient and has power basis $1,a,\\ldots,a^{n-1}$ and degree $n$",
+        "strategy": "For algebraic $a$ with minimal polynomial $m_a$ of degree $n$, evaluation has kernel $(m_a)$ and image $F[a]$. The first isomorphism theorem identifies $F[x]/(m_a)$ with $F[a]$; fieldness makes $F[a]=F(a)$, and unique degree-below-$n$ representatives give unique coordinates in the displayed powers. Define $[F(a):F]=n$ here by that unique-coordinate basis, without importing the later general vector-space dimension theory.",
+        "deps": [
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-polynomial-division-algorithm-over-a-field",
+          "thm-polynomial-quotient-is-a-field-iff-irreducible"
+        ]
+      },
+      {
+        "id": "lem-x-squared-plus-one-is-irreducible-over-the-reals",
+        "kind": "lemma",
+        "title": "$x^2+1$ is irreducible over $\\mathbb R$",
+        "strategy": "Every real square is nonnegative, so $r^2+1>0$ for every real $r$ and the polynomial has no real root. Invoke the degree-two irreducibility test, without any appeal to the fundamental theorem of algebra.",
+        "deps": [
+          "thm-reals-ordered-field",
+          "lem-of-square-positive",
+          "thm-quadratic-and-cubic-irreducibility-test"
+        ]
+      },
+      {
+        "id": "def-complex-numbers-and-arithmetic",
+        "kind": "definition",
+        "title": "The complex numbers as $\\mathbb R[x]/(x^2+1)$, with the real embedding and imaginary unit $i$",
+        "deps": [
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-field-extension-generated-subfields-and-simple-extension"
+        ]
+      },
+      {
+        "id": "thm-complex-numbers-form-a-field",
+        "kind": "theorem",
+        "title": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ is a field, every element is uniquely $a+bi$, and every nonzero element has inverse $(a-bi)/(a^2+b^2)$",
+        "strategy": "Apply the irreducible-quotient construction to obtain a field and unique linear representatives, then compute the induced addition and multiplication formulas using $i^2=-1$. For $a+bi\\ne0$, ordered-field square positivity gives $a^2+b^2>0$, and direct multiplication verifies the displayed inverse; the remaining field axioms are inherited from the quotient ring, so none is merely asserted.",
+        "deps": [
+          "def-complex-numbers-and-arithmetic",
+          "lem-x-squared-plus-one-is-irreducible-over-the-reals",
+          "thm-irreducible-quotient-adjoins-a-root",
+          "thm-reals-ordered-field",
+          "lem-of-square-positive"
+        ]
+      },
+      {
+        "id": "cor-complex-numbers-are-a-quadratic-real-extension",
+        "kind": "corollary",
+        "title": "$\\mathbb C/\\mathbb R$ has power basis $1,i$ and degree $2$",
+        "strategy": "Specialize the power-basis theorem to the minimal polynomial $x^2+1$ of $i$ and identify the resulting unique coordinates with the already established form $a+bi$.",
+        "deps": [
+          "thm-complex-numbers-form-a-field",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "lem-x-squared-plus-one-is-irreducible-over-the-reals"
+        ]
+      },
+      {
+        "id": "cor-universal-property-of-the-complex-numbers",
+        "kind": "corollary",
+        "title": "A square root of $-1$ in a real field extension determines a unique real-field homomorphism from $\\mathbb C$",
+        "strategy": "Specialize the universal property of adjoining an irreducible root to $p=x^2+1$: an element $j$ with $j^2=-1$ is precisely a root, so there is a unique homomorphism fixing $\\mathbb R$ and sending $i$ to $j$.",
+        "deps": [
+          "thm-universal-property-of-adjoining-an-irreducible-root",
+          "def-complex-numbers-and-arithmetic",
+          "lem-x-squared-plus-one-is-irreducible-over-the-reals"
+        ]
+      },
+      {
+        "id": "def-complex-conjugate-real-imaginary-part-and-modulus",
+        "kind": "definition",
+        "title": "Real and imaginary parts, complex conjugation, and modulus",
+        "deps": [
+          "thm-complex-numbers-form-a-field",
+          "thm-of-square-roots",
+          "cor-cauchy-reals-lub-complete"
+        ]
+      },
+      {
+        "id": "lem-complex-conjugation-and-modulus-laws",
+        "kind": "lemma",
+        "title": "Conjugation is an involutive real-field automorphism, $z\\overline z=|z|^2$, and modulus is definite, multiplicative, and subadditive",
+        "strategy": "Compute conjugation on the unique coordinates $a+bi$ to prove its additive, multiplicative, involutive, and real-fixing laws. The norm identity gives definiteness and multiplicativity after uniqueness of nonnegative square roots. For the triangle inequality, expand the squared sides and use $(av-bu)^2\\ge0$ to prove $(au+bv)^2\\le(a^2+b^2)(u^2+v^2)$, then apply monotonicity of squaring on nonnegative reals.",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "thm-complex-numbers-form-a-field",
+          "thm-of-square-roots",
+          "lem-of-square-monotone",
+          "lem-of-square-positive"
+        ]
+      },
+      {
+        "id": "thm-real-automorphisms-of-the-complex-numbers",
+        "kind": "theorem",
+        "title": "The only real-field automorphisms of $\\mathbb C$ are the identity and complex conjugation",
+        "strategy": "A real-field automorphism sends $i$ to a root of $x^2+1$. Factor $z^2+1=(z-i)(z+i)$ in the complex field to show those roots are exactly $i$ and $-i$; unique $a+bi$ coordinates then force the automorphism to be respectively the identity or conjugation, both of which have already been verified.",
+        "deps": [
+          "thm-complex-numbers-form-a-field",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-universal-property-of-the-complex-numbers"
+        ]
+      },
+      {
+        "id": "thm-every-complex-number-has-a-square-root",
+        "kind": "theorem",
+        "title": "Every complex number has a square root, by an explicit Cartesian formula",
+        "strategy": "For $z=a+bi$, put $r=|z|$. Treat $z=0$ and the nonpositive-real axis separately. Otherwise set $u=\\sqrt{(r+a)/2}>0$ and $v=b/(2u)$; use $r^2=a^2+b^2$ to obtain $v^2=(r-a)/2$, so $(u+vi)^2=a+bi$. This uses only real square roots and ordered-field algebra, never the fundamental theorem of algebra or polar form.",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-of-square-roots",
+          "thm-reals-ordered-field",
+          "lem-of-square-monotone"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 55,
+    "id": "field-extensions-and-the-complex-numbers-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "Field Extensions and the Complex Numbers: Examples and Counterexamples",
+    "companion": "field-extensions-and-the-complex-numbers",
+    "requires": [
+      "field-extensions-and-the-complex-numbers"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-rational-square-root-two-as-a-simple-extension",
+        "kind": "example",
+        "title": "$\\mathbb Q(\\sqrt2)\\cong\\mathbb Q[x]/(x^2-2)$ with basis $1,\\sqrt2$",
+        "strategy": "Use Eisenstein at $2$ to identify $x^2-2$ as the minimal polynomial, then specialize the quotient and power-basis theorems and compute the inverse of a sample nonzero element by rationalizing inside the field.",
+        "deps": [
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "thm-eisenstein-irreducibility-criterion",
+          "thm-rat-field"
+        ]
+      },
+      {
+        "id": "ex-the-four-element-field-from-an-irreducible-quadratic",
+        "kind": "example",
+        "title": "The four-element field $(\\mathbb Z/2)[x]/(x^2+x+1)$",
+        "strategy": "Check that the quadratic has no root in $\\mathbb Z/2$, apply the irreducible quotient construction, list the four reduced representatives $0,1,a,1+a$, and compute their multiplication from $a^2=a+1$ in characteristic two.",
+        "deps": [
+          "thm-irreducible-quotient-adjoins-a-root",
+          "thm-quadratic-and-cubic-irreducibility-test",
+          "thm-z-mod-p-is-a-field",
+          "prop-integers-modulo-n-as-a-quotient-ring"
+        ]
+      },
+      {
+        "id": "cex-reducible-polynomial-quotient-is-not-a-field",
+        "kind": "counterexample",
+        "title": "$\\mathbb Q[x]/(x^2-1)$ is not a field: reducibility creates nonzero zero divisors",
+        "strategy": "The nonzero classes of $x-1$ and $x+1$ multiply to zero because $(x-1)(x+1)=x^2-1$; degree comparison proves neither factor lies in the quotient ideal, isolating irreducibility in the quotient-field theorem.",
+        "deps": [
+          "thm-polynomial-quotient-is-a-field-iff-irreducible",
+          "thm-polynomial-division-algorithm-over-a-field",
+          "thm-rat-field"
+        ]
+      },
+      {
+        "id": "ex-minimal-polynomial-of-nested-radical-two-plus-root-three",
+        "kind": "example",
+        "title": "The minimal polynomial of $\\sqrt{2+\\sqrt3}$ over $\\mathbb Q$ is $x^4-4x^2+1$",
+        "strategy": "Successive squaring proves the element is a root. Translate the polynomial by $x\\mapsto x+1$ to get $x^4+4x^3+2x^2-4x-2$, apply Eisenstein at $2$, and transport irreducibility back through the inverse translation; the minimal-polynomial theorem then identifies it and gives degree four.",
+        "deps": [
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "thm-eisenstein-irreducibility-criterion",
+          "thm-universal-property-of-a-polynomial-ring",
+          "thm-of-square-roots"
+        ]
+      },
+      {
+        "id": "ex-square-roots-of-the-imaginary-unit",
+        "kind": "example",
+        "title": "The square roots of $i$ are $\\pm(1+i)/\\sqrt2$",
+        "strategy": "Square the two displayed candidates using Cartesian multiplication and $(\\sqrt2)^2=2$. Conversely compare real and imaginary parts of $(a+bi)^2=i$ to get $a^2=b^2=1/2$ and $ab=1/2$, forcing equal signs and exactly the two candidates.",
+        "deps": [
+          "thm-every-complex-number-has-a-square-root",
+          "thm-complex-numbers-form-a-field",
+          "thm-of-square-roots"
+        ]
+      },
+      {
+        "id": "fs-complex-numbers-form-an-ordered-field",
+        "kind": "false-statement",
+        "title": "FALSE: the complex field admits an order making it an ordered field",
+        "strategy": "In any ordered field every nonzero square is positive, so both $1$ and $i^2$ would be positive; but $i^2=-1$, contradicting trichotomy or positivity of $1$. Thus no order compatible with the complex field operations exists.",
+        "deps": [
+          "thm-complex-numbers-form-a-field",
+          "lem-of-square-positive"
+        ]
+      },
+      {
+        "id": "cex-an-annihilating-polynomial-need-not-be-minimal",
+        "kind": "counterexample",
+        "title": "An annihilating polynomial need not be minimal: $\\sqrt2$ is a root of both $x^2-2$ and $x^4-4$",
+        "strategy": "Evaluate both polynomials at $\\sqrt2$ and factor $x^4-4=(x^2-2)(x^2+2)$. Eisenstein makes $x^2-2$ irreducible, so the evaluation-kernel theorem identifies it as the minimal polynomial and displays the larger annihilator as a proper multiple.",
+        "deps": [
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "thm-eisenstein-irreducibility-criterion",
+          "thm-of-square-roots"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 64,
+    "id": "conjugacy-and-simplicity-in-the-symmetric-groups",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "Conjugacy in $S_n$, Generation, and the Simplicity of $A_n$",
+    "companion": "conjugacy-and-simplicity-in-the-symmetric-groups-examples",
+    "requires": [
+      "symmetric-groups-and-the-sign-homomorphism"
+    ],
+    "items": [
+      {
+        "id": "lem-conjugating-a-cycle-relabels-its-entries",
+        "kind": "lemma",
+        "title": "Conjugating a cycle relabels each entry: $g(a_1\\,\\ldots\\,a_k)g^{-1}=(g(a_1)\\,\\ldots\\,g(a_k))$",
+        "strategy": "Evaluate the conjugate at each relabelled cycle point and at every point outside their set. The first calculation advances one position and the second fixes the point, which proves equality as permutations rather than merely agreement on the displayed support.",
+        "deps": [
+          "def-symmetric-group",
+          "def-permutation-support-disjoint-cycles-and-cycle-type"
+        ]
+      },
+      {
+        "id": "thm-symmetric-permutations-are-conjugate-iff-same-cycle-type",
+        "kind": "theorem",
+        "title": "Two elements of $S_n$ are conjugate if and only if they have the same cycle type",
+        "strategy": "Conjugate a disjoint-cycle decomposition factor by factor using the relabelling lemma, proving invariance of cycle type. Conversely align equally long cycles, including fixed points, and define one bijection sending their entries positionwise; the same lemma shows it conjugates the first permutation to the second.",
+        "deps": [
+          "lem-conjugating-a-cycle-relabels-its-entries",
+          "thm-disjoint-cycle-decomposition",
+          "def-permutation-support-disjoint-cycles-and-cycle-type"
+        ]
+      },
+      {
+        "id": "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types",
+        "kind": "corollary",
+        "title": "The conjugacy classes of $S_n$ are indexed by the tuples $(c_1,\\ldots,c_n)$ with $\\sum k c_k=n$",
+        "strategy": "The cycle-type definition gives exactly one such multiplicity tuple for each permutation, and the conjugacy classification says two permutations give the same tuple exactly when they lie in the same conjugacy class. Construct a representative from disjoint cycles for every admissible tuple, including $n=0$.",
+        "deps": [
+          "thm-symmetric-permutations-are-conjugate-iff-same-cycle-type",
+          "def-permutation-support-disjoint-cycles-and-cycle-type"
+        ]
+      },
+      {
+        "id": "thm-centralizer-cardinality-from-cycle-type",
+        "kind": "theorem",
+        "title": "If $\\sigma\\in S_n$ has $c_k$ cycles of length $k$, then $|C_{S_n}(\\sigma)|=\\prod_{k=1}^n k^{c_k}c_k!$",
+        "strategy": "A commuting permutation must send each $\\langle\\sigma\\rangle$-orbit to another orbit of the same length. For the $c_k$ length-$k$ orbits, choose an arbitrary permutation of those orbits and an independent cyclic offset on each, giving $c_k!k^{c_k}$ choices; prove these choices assemble uniquely and multiply independently across lengths. Check $c_k=0$, the identity, and $n=0$ via empty products.",
+        "deps": [
+          "def-conjugacy-class-and-centralizer",
+          "thm-disjoint-cycle-decomposition",
+          "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "def-factorial-and-falling-factorial",
+          "def-monoid-finite-product"
+        ]
+      },
+      {
+        "id": "cor-symmetric-group-class-equation-by-cycle-type",
+        "kind": "corollary",
+        "title": "The class equation of $S_n$ is $n!=\\sum_{\\sum k c_k=n} n!/\\prod_k k^{c_k}c_k!$",
+        "strategy": "Index the conjugacy classes by cycle-type tuples, combine conjugacy-class cardinality with the centralizer formula, and sum the disjoint class sizes. At $n=0$ the single empty type contributes $1$.",
+        "deps": [
+          "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "thm-conjugacy-class-cardinality",
+          "thm-class-equation",
+          "thm-number-of-bijections-of-a-finite-set"
+        ]
+      },
+      {
+        "id": "cor-center-of-symmetric-group-is-trivial",
+        "kind": "corollary",
+        "title": "$Z(S_n)$ is trivial for $n\\ge3$",
+        "strategy": "A central permutation has a singleton conjugacy class, hence its cycle type has class-size formula $1$. Show every nonidentity cycle type for $n\\ge3$ has more than one relabelling, or directly choose a transposition whose conjugation changes a moved point; conclude only the identity is central. Record the exceptional abelian groups $S_0,S_1,S_2$.",
+        "deps": [
+          "def-center-of-a-group",
+          "thm-symmetric-permutations-are-conjugate-iff-same-cycle-type",
+          "thm-centralizer-cardinality-from-cycle-type"
+        ]
+      },
+      {
+        "id": "thm-adjacent-transpositions-generate-the-symmetric-group",
+        "kind": "theorem",
+        "title": "The adjacent transpositions $(1\\,2),(2\\,3),\\ldots,(n-1\\,n)$ generate $S_n$",
+        "strategy": "Express every transposition $(a\\,b)$ with $a<b$ as the standard palindromic word in adjacent transpositions, checking the word pointwise. Since all transpositions generate $S_n$, so do the adjacent ones; include $n=0,1$ as empty generating sets for the trivial groups.",
+        "deps": [
+          "thm-transpositions-generate-the-symmetric-group",
+          "def-generated-subgroup",
+          "def-symmetric-group"
+        ]
+      },
+      {
+        "id": "thm-an-n-cycle-and-a-neighbour-transposition-generate-the-symmetric-group",
+        "kind": "theorem",
+        "title": "For $n\\ge2$, $(1\\,2\\,\\ldots\\,n)$ and $(1\\,2)$ generate $S_n$",
+        "strategy": "Conjugating $(1\\,2)$ by successive powers of the $n$-cycle produces every neighboring transposition around the cycle, in particular the standard adjacent transpositions. Apply adjacent generation; at $n=2$ the two displayed generators coincide and still generate $S_2$.",
+        "deps": [
+          "lem-conjugating-a-cycle-relabels-its-entries",
+          "thm-adjacent-transpositions-generate-the-symmetric-group",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "thm-alternating-group-is-generated-by-three-cycles",
+        "kind": "theorem",
+        "title": "$A_n$ is generated by $3$-cycles for every $n\\ge3$",
+        "strategy": "Write an even permutation as a product of an even number of transpositions and pair them. Equal pairs cancel, overlapping pairs are one $3$-cycle, and disjoint pairs are a product of two $3$-cycles by explicit identities; hence every even permutation lies in the subgroup generated by $3$-cycles, while every $3$-cycle is even.",
+        "deps": [
+          "def-alternating-group",
+          "thm-transpositions-generate-the-symmetric-group",
+          "thm-sign-is-a-homomorphism",
+          "cor-sign-from-disjoint-cycle-structure",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup",
+        "kind": "lemma",
+        "title": "A conjugacy class in an index-two normal subgroup remains one class or splits into two equal classes, with a centralizer criterion",
+        "strategy": "For $H\\trianglelefteq G$ of index two and $x\\in H$, write $G=H\\sqcup tH$. Then $\\operatorname{Cl}_G(x)$ is the union of the $H$-class of $x$ and its $t$-conjugate. The two classes agree exactly when some element outside $H$ centralizes $x$; otherwise they are disjoint and conjugation by $t$ bijects them, giving equal size.",
+        "deps": [
+          "def-conjugacy-class-and-centralizer",
+          "def-normal-subgroup",
+          "cor-alternating-group-is-normal-and-has-half-the-elements"
+        ]
+      },
+      {
+        "id": "thm-alternating-conjugacy-class-splitting-criterion",
+        "kind": "theorem",
+        "title": "An $S_n$-class of an even permutation splits in $A_n$ exactly when all cycle lengths, including $1$-cycles, are odd and distinct",
+        "strategy": "Use the index-two splitting lemma with $H=A_n$. An even-length cycle is itself an odd centralizer element; two equal odd-length cycles can be swapped by an odd permutation, including two fixed points. Conversely, when the lengths are distinct and odd, every centralizer element preserves each cycle support and restricts there to a power of that odd cycle, hence is even. This proves both directions and the equal-size conclusion.",
+        "deps": [
+          "lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "cor-sign-from-disjoint-cycle-structure",
+          "def-alternating-group"
+        ]
+      },
+      {
+        "id": "cor-three-cycles-form-one-conjugacy-class-in-a-n",
+        "kind": "corollary",
+        "title": "All $3$-cycles are conjugate in $A_n$ for $n\\ge5$",
+        "strategy": "They have common cycle type $(3,1^{n-3})$. The splitting criterion does not split that type when $n\\ge5$ because the fixed-point length $1$ is repeated; equivalently correct an odd $S_n$ conjugator by a transposition on two fixed points.",
+        "deps": [
+          "thm-symmetric-permutations-are-conjugate-iff-same-cycle-type",
+          "thm-alternating-conjugacy-class-splitting-criterion"
+        ]
+      },
+      {
+        "id": "def-simple-group",
+        "kind": "definition",
+        "title": "Simple groups",
+        "deps": [
+          "def-normal-subgroup"
+        ]
+      },
+      {
+        "id": "lem-normal-subgroup-containing-a-three-cycle-is-a-n",
+        "kind": "lemma",
+        "title": "A normal subgroup of $A_n$ containing one $3$-cycle equals $A_n$ for $n\\ge5$",
+        "strategy": "Normality contains the whole $A_n$-conjugacy class of the given $3$-cycle. All $3$-cycles form that one class for $n\\ge5$, and the separate generation theorem says they generate $A_n$.",
+        "deps": [
+          "def-normal-subgroup",
+          "cor-three-cycles-form-one-conjugacy-class-in-a-n",
+          "thm-alternating-group-is-generated-by-three-cycles"
+        ]
+      },
+      {
+        "id": "lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle",
+        "kind": "lemma",
+        "title": "Every nontrivial normal subgroup of $A_n$ contains a $3$-cycle for $n\\ge5$",
+        "strategy": "Choose a nonidentity element of the normal subgroup with maximal number of fixed points. If it is not a $3$-cycle, split its cycle structure into the two exhaustive regimes: it has a cycle of length at least three with additional moved points, or it is a product of disjoint transpositions. In each regime choose a $3$-cycle $g$ so the nonidentity commutator $g\\sigma g^{-1}\\sigma^{-1}$ lies in the subgroup but fixes strictly more points, a contradiction. Verify separately the $4$-cycle and two-transposition edge configurations and the availability of a fifth point.",
+        "deps": [
+          "def-normal-subgroup",
+          "thm-disjoint-cycle-decomposition",
+          "lem-conjugating-a-cycle-relabels-its-entries",
+          "def-permutation-support-disjoint-cycles-and-cycle-type"
+        ]
+      },
+      {
+        "id": "thm-alternating-group-is-simple-for-n-at-least-five",
+        "kind": "theorem",
+        "title": "$A_n$ is simple for every $n\\ge5$",
+        "strategy": "Let $N\\trianglelefteq A_n$. If $N$ is nontrivial, the preceding support-reduction lemma supplies a $3$-cycle, and the normal-subgroup lemma then gives $N=A_n$. Exhibit two noncommuting $3$-cycles to ensure $A_n$ is nontrivial and nonabelian under the stated convention for simple groups.",
+        "deps": [
+          "def-simple-group",
+          "lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle",
+          "lem-normal-subgroup-containing-a-three-cycle-is-a-n"
+        ]
+      },
+      {
+        "id": "cor-only-proper-nontrivial-normal-subgroup-of-s-n",
+        "kind": "corollary",
+        "title": "For $n\\ge5$, the only proper nontrivial normal subgroup of $S_n$ is $A_n$",
+        "strategy": "For $N\\trianglelefteq S_n$, simplicity makes $N\\cap A_n$ either trivial or all of $A_n$. The latter gives $N=A_n$ or $S_n$; in the former case sign is injective on $N$, so a nontrivial $N$ has order two and its unique nonidentity element is central in $S_n$, contradicting triviality of the center.",
+        "deps": [
+          "thm-alternating-group-is-simple-for-n-at-least-five",
+          "cor-alternating-group-is-normal-and-has-half-the-elements",
+          "cor-center-of-symmetric-group-is-trivial",
+          "thm-sign-is-a-homomorphism",
+          "def-normal-subgroup"
+        ]
+      },
+      {
+        "id": "cor-derived-subgroups-of-symmetric-and-alternating-groups",
+        "kind": "corollary",
+        "title": "$[S_n,S_n]=A_n$ for $n\\ge2$, and $[A_n,A_n]=A_n$ for $n\\ge5$",
+        "strategy": "Because sign has abelian image, the quotient criterion puts $[S_n,S_n]$ inside $A_n$; every $3$-cycle is an explicit commutator of transpositions, so $3$-cycle generation gives the reverse inclusion. For $A_n$, its commutator subgroup is normal; two overlapping $3$-cycles do not commute, so it is nontrivial, and simplicity forces it to be all of $A_n$.",
+        "deps": [
+          "def-commutator-and-commutator-subgroup",
+          "lem-commutator-subgroup-is-normal",
+          "thm-quotient-abelian-iff-contains-commutator-subgroup",
+          "thm-alternating-group-is-generated-by-three-cycles",
+          "thm-alternating-group-is-simple-for-n-at-least-five",
+          "def-alternating-group"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 65,
+    "id": "conjugacy-and-simplicity-in-the-symmetric-groups-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "Conjugacy in $S_n$, Generation, and the Simplicity of $A_n$ — Examples",
+    "companion": "conjugacy-and-simplicity-in-the-symmetric-groups",
+    "requires": [
+      "conjugacy-and-simplicity-in-the-symmetric-groups"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-conjugating-permutations-by-relabeling",
+        "kind": "example",
+        "title": "Conjugating $(1\\,4)(2\\,5\\,3)$ by an explicit permutation in $S_5$",
+        "strategy": "Apply the relabelling formula cycle by cycle, then verify the result pointwise and read off that its cycle type is unchanged. Reverse the calculation to demonstrate the constructive direction of the conjugacy classification.",
+        "deps": [
+          "lem-conjugating-a-cycle-relabels-its-entries",
+          "thm-symmetric-permutations-are-conjugate-iff-same-cycle-type"
+        ]
+      },
+      {
+        "id": "ex-s-four-conjugacy-classes-and-class-equation",
+        "kind": "example",
+        "title": "The five conjugacy classes of $S_4$ and the class equation $24=1+6+3+8+6$",
+        "strategy": "List the five cycle types, compute each centralizer size from $\\prod k^{c_k}c_k!$, divide $24$ by it, and sum the resulting class sizes. Include parity and representatives to prepare the $A_4$ examples.",
+        "deps": [
+          "cor-symmetric-group-class-equation-by-cycle-type",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "cor-sign-from-disjoint-cycle-structure"
+        ]
+      },
+      {
+        "id": "ex-s-five-conjugacy-classes-and-class-equation",
+        "kind": "example",
+        "title": "The seven conjugacy classes of $S_5$ and their centralizer and class sizes",
+        "strategy": "Enumerate the seven cycle types of five, tabulate $z_\\lambda=\\prod k^{c_k}c_k!$ and $120/z_\\lambda$, and check that the class sizes sum to $120$; mark which types are even and which satisfy the alternating split criterion.",
+        "deps": [
+          "cor-symmetric-group-class-equation-by-cycle-type",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "cor-sign-from-disjoint-cycle-structure",
+          "thm-alternating-conjugacy-class-splitting-criterion"
+        ]
+      },
+      {
+        "id": "ex-a-five-conjugacy-classes-and-split-five-cycles",
+        "kind": "example",
+        "title": "The conjugacy classes of $A_5$: sizes $1,20,15,12,12$ and the split $5$-cycles",
+        "strategy": "Restrict the even $S_5$ cycle types. The identity, $3$-cycles, and double transpositions remain single classes; the distinct odd type $(5)$ splits into two classes of size $12$. Exhibit representatives from the two $5$-cycle classes and verify the total is $60$.",
+        "deps": [
+          "ex-s-five-conjugacy-classes-and-class-equation",
+          "thm-alternating-conjugacy-class-splitting-criterion",
+          "cor-alternating-group-is-normal-and-has-half-the-elements"
+        ]
+      },
+      {
+        "id": "ex-klein-four-is-normal-in-a-four",
+        "kind": "example",
+        "title": "$V_4=\\{1,(12)(34),(13)(24),(14)(23)\\}$ is a proper nontrivial normal subgroup of $A_4$",
+        "strategy": "Verify closure directly and note that conjugation relabels a double transposition, so the displayed set is invariant under $A_4$ (indeed under $S_4$). Its order four is strictly between $1$ and $|A_4|=12$, making the counterexample explicit.",
+        "deps": [
+          "lem-conjugating-a-cycle-relabels-its-entries",
+          "def-normal-subgroup",
+          "def-alternating-group",
+          "cor-alternating-group-is-normal-and-has-half-the-elements"
+        ]
+      },
+      {
+        "id": "fs-same-cycle-type-implies-conjugate-in-a-n",
+        "kind": "false-statement",
+        "title": "FALSE: two even permutations of the same cycle type are always conjugate in $A_n$",
+        "strategy": "In $A_4$, the $S_4$-class of eight $3$-cycles has type $(3,1)$ and splits into two classes of four. Compute directly that every permutation conjugating $(123)$ to $(132)$ in $S_4$ is odd, so the two are not conjugate in $A_4$.",
+        "deps": [
+          "thm-alternating-conjugacy-class-splitting-criterion",
+          "lem-conjugating-a-cycle-relabels-its-entries",
+          "def-alternating-group"
+        ]
+      },
+      {
+        "id": "fs-a-n-is-simple-for-all-n-at-least-four",
+        "kind": "false-statement",
+        "title": "FALSE: $A_n$ is simple for every $n\\ge4$",
+        "strategy": "Use the explicitly verified subgroup $V_4\\trianglelefteq A_4$, which is neither trivial nor all of $A_4$. Contrast this exact failure at $n=4$ with the theorem's valid boundary $n\\ge5$.",
+        "deps": [
+          "ex-klein-four-is-normal-in-a-four",
+          "def-simple-group",
+          "thm-alternating-group-is-simple-for-n-at-least-five"
+        ]
+      },
+      {
+        "id": "fs-arbitrary-transposition-and-n-cycle-generate-s-n",
+        "kind": "false-statement",
+        "title": "FALSE: any transposition together with any $n$-cycle generates $S_n$",
+        "strategy": "In $S_4$, the elements $(1234)$ and $(13)$ preserve the block system $\\{\\{1,3\\},\\{2,4\\}\\}$, possibly swapping its two blocks, so their generated subgroup is proper. The example isolates why the main theorem requires a neighboring transposition relative to the chosen cycle.",
+        "deps": [
+          "thm-an-n-cycle-and-a-neighbour-transposition-generate-the-symmetric-group",
+          "def-generated-subgroup",
+          "def-symmetric-group"
+        ]
+      }
+    ]
+  }
+]

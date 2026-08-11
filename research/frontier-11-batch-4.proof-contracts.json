@@ -1,0 +1,894 @@
+{
+  "version": 1,
+  "level": "frontier-11",
+  "scope": [
+    "thm-operator-determinant-is-basis-independent",
+    "thm-operator-determinant-is-multiplicative",
+    "cor-operator-determinant-by-row-reduction",
+    "thm-laplace-cofactor-expansion",
+    "thm-adjugate-identity-over-a-commutative-ring",
+    "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+    "cor-inverse-matrix-by-adjugate",
+    "lem-determinant-rank-one-update-over-a-commutative-ring",
+    "thm-adjugate-is-equivariant-under-similarity",
+    "thm-cramers-rule-over-a-commutative-ring",
+    "cor-cramers-rule-over-a-field",
+    "thm-operator-invertible-iff-determinant-nonzero",
+    "cor-operator-determinant-on-the-general-linear-group",
+    "thm-operator-adjugate-identity",
+    "ex-singular-projection-has-zero-determinant",
+    "ex-determinant-in-two-ordered-bases",
+    "ex-doubling-integers-has-nonunit-determinant",
+    "ex-four-by-four-determinant-by-cofactors-and-row-reduction",
+    "ex-three-by-three-inverse-by-adjugate",
+    "ex-cramers-rule-two-by-two-system",
+    "thm-integral-logarithm-derivative-and-normalisation",
+    "cor-integral-logarithm-is-strictly-increasing",
+    "thm-integral-logarithm-product-law",
+    "cor-integral-logarithm-reciprocals-and-integer-powers",
+    "thm-integral-logarithm-is-unbounded",
+    "thm-integral-logarithm-is-a-bijection",
+    "cor-integral-exponential-addition-law",
+    "thm-integral-exponential-solves-the-normalised-ivp",
+    "thm-integral-exponential-agrees-with-exponential",
+    "cor-integral-logarithm-agrees-with-natural-logarithm",
+    "cor-e-is-the-unique-unit-hyperbolic-area",
+    "thm-logarithm-continuous-functional-equation-characterisation",
+    "thm-logarithm-differentiable-functional-equation-characterisation",
+    "cor-continuous-logarithmic-functions-form-a-one-parameter-family",
+    "lem-log-series-extends-by-the-product-law",
+    "thm-logarithm-definition-equivalence",
+    "ex-log-two-from-four-characterisations",
+    "ex-logarithmic-functions-without-normalisation",
+    "cex-discontinuous-logarithmic-functional-equation",
+    "cex-mercator-series-does-not-define-logarithm-globally",
+    "ex-unit-hyperbolic-area-brackets-e"
+  ],
+  "contracts": {
+    "thm-operator-determinant-is-basis-independent": {
+      "citations": [
+        {"fact":"L1","source":"cor-determinant-is-invariant-under-similarity","source_section":"Statement","quote":"If $A,B\\in M_n(R)$ are similar over a commutative ring, then $\\det(B)=\\det(A)$.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"basis-change","claim":"The two representing matrices are conjugate by the invertible transition matrix.","step":"1.1","inputs":["thm-similarity-is-an-equivalence-relation-and-models-basis-change","given"]},
+        {"id":"similarity-invariance","claim":"Their determinants agree, so the definition is independent of basis.","step":"1.2","inputs":["1.1","L1"]},
+        {"id":"zero-space","claim":"The unique zero-dimensional endomorphism has the stipulated determinant 1 in every empty basis.","step":"1.3","inputs":["definition convention"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.3 handles the zero-dimensional space and empty basis."},
+        {"case":"zero","status":"checked","evidence":"Step 1.3 handles dimension zero; the zero operator in positive dimension is covered by Step 1.2."},
+        {"case":"one","status":"checked","evidence":"Step 1.2 applies to one-dimensional conjugate matrices."},
+        {"case":"degenerate","status":"checked","evidence":"No invertibility of T is assumed in Step 1.2."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoint or indexed terminal term occurs."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Finite-dimensional positive-dimensional spaces admit the ordered bases quantified by the definition; dimension zero is Step 1.3."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement is well-definedness, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The statement is well-definedness, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-operator-determinant-is-multiplicative": {
+      "citations": [
+        {"fact":"L1","source":"thm-matrix-of-a-composite-is-the-product","source_section":"Statement","quote":"$$[S\\circ T]_{\\mathcal B}^{\\mathcal D}=[S]_{\\mathcal C}^{\\mathcal D}[T]_{\\mathcal B}^{\\mathcal C}.$$","uses":["1.1"]},
+        {"fact":"L2","source":"thm-determinant-multiplicative","source_section":"Statement","quote":"$$\\det(AB)=\\det(A)\\det(B).$$","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"matrix-composite","claim":"In one ordered basis the matrix of ST is the product of the matrices of S and T.","step":"1.1","inputs":["L1"]},
+        {"id":"take-determinants","claim":"Matrix multiplicativity and basis independence give det(ST)=det(S)det(T).","step":"1.2","inputs":["1.1","L2","thm-operator-determinant-is-basis-independent"]},
+        {"id":"zero-dimension","claim":"The convention gives 1=1 times 1 on the zero space.","step":"1.3","inputs":["definition convention"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.3 handles dimension zero."},
+        {"case":"zero","status":"checked","evidence":"Zero endomorphisms in positive dimension are included in Step 1.2."},
+        {"case":"one","status":"checked","evidence":"The cited matrix theorem covers size one."},
+        {"case":"degenerate","status":"checked","evidence":"Neither S nor T is assumed invertible."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval or finite endpoint occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"One arbitrary basis is fixed; no choice from a varying family is made."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement is an equality, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The statement is an equality, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-operator-determinant-by-row-reduction": {
+      "citations": [
+        {"fact":"L1","source":"thm-determinant-under-elementary-row-operations","source_section":"Statement","quote":"Adding $c$ times one row to a distinct row leaves it equal to $\\det(A)$.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"choose-matrix","claim":"Basis independence permits any representing matrix.","step":"1.1","inputs":["thm-operator-determinant-is-basis-independent"]},
+        {"id":"track-operations","claim":"Gaussian elimination terminates in echelon form while swaps, scalings and row additions have the stated determinant effects.","step":"1.2","inputs":["L1","thm-gaussian-elimination-produces-row-echelon-form","thm-determinant-of-a-triangular-matrix"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The operator convention handles dimension zero without row reduction."},
+        {"case":"zero","status":"checked","evidence":"A zero row leads to triangular determinant zero in Step 1.2."},
+        {"case":"one","status":"checked","evidence":"A one-row matrix requires at most a scaling."},
+        {"case":"degenerate","status":"checked","evidence":"Singular matrices are allowed and produce a zero diagonal factor."},
+        {"case":"endpoints","status":"checked","evidence":"The first and last pivots are governed by the same row-operation rules."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No arbitrary nonempty selection affects the result."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary is a computation rule, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The corollary is a computation rule, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-laplace-cofactor-expansion": {
+      "citations": [
+        {"fact":"L1","source":"thm-leibniz-determinant-is-alternating-multilinear-and-normalized","source_section":"Statement","quote":"the Leibniz determinant $\\det:M_n(R)\\to R$ is column-multilinear, alternating and normalized.","uses":["1.1","1.2"]}
+      ],
+      "derivations": [
+        {"id":"row-partition","claim":"Partitioning the Leibniz sum by the image of a fixed row yields its signed minor sum.","step":"1.1","inputs":["def-determinant-of-a-square-matrix","permutation sign bookkeeping"]},
+        {"id":"column-form","claim":"Applying the row formula to the transpose yields every column expansion.","step":"1.2","inputs":["1.1","thm-determinant-of-transpose","L1"]},
+        {"id":"one-by-one","claim":"The empty-minor convention makes the size-one expansion return its sole entry.","step":"1.3","inputs":["definition convention"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The theorem is explicitly restricted to positive-sized matrices."},
+        {"case":"zero","status":"checked","evidence":"Zero rows or columns make every corresponding cofactor term vanish."},
+        {"case":"one","status":"checked","evidence":"Step 1.3 handles the empty minor at size one."},
+        {"case":"degenerate","status":"checked","evidence":"Repeated and singular rows are permitted by the Leibniz proof."},
+        {"case":"endpoints","status":"checked","evidence":"Every row and column index, including first and last zero-based indices, is covered."},
+        {"case":"nonempty-choice","status":"checked","evidence":"A fixed row or column exists because n is positive."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem gives equalities, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem gives equalities, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-adjugate-identity-over-a-commutative-ring": {
+      "citations": [],
+      "derivations": [
+        {"id":"left-product","claim":"Diagonal entries of A adj(A) are Laplace sums and off-diagonal entries are determinants with repeated rows, hence A adj(A)=det(A)I.","step":"1.1","inputs":["thm-laplace-cofactor-expansion","cor-determinant-is-alternating-multilinear-in-the-rows"]},
+        {"id":"right-product","claim":"The column expansion gives adj(A)A=det(A)I by the symmetric entry calculation.","step":"1.2","inputs":["thm-laplace-cofactor-expansion","cor-determinant-vanishes-with-a-zero-or-repeated-column"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The theorem is explicitly restricted to n at least one."},
+        {"case":"zero","status":"checked","evidence":"The zero matrix is covered; no cancellation or singularity inference is used."},
+        {"case":"one","status":"checked","evidence":"The empty minor has determinant one, so adj([a])=[1]."},
+        {"case":"degenerate","status":"checked","evidence":"Singular and repeated-row matrices are the off-diagonal mechanism in Step 1.1."},
+        {"case":"endpoints","status":"checked","evidence":"All zero-based matrix entries are covered by the entrywise calculation."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No selection from a merely nonempty family is made."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement consists of identities, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The statement consists of identities, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-square-matrix-invertible-iff-determinant-is-a-unit": {
+      "citations": [
+        {"fact":"L1","source":"cor-invertible-matrix-has-unit-determinant","source_section":"Statement","quote":"If $A\\in M_n(R)$ is invertible over a commutative ring, then $\\det(A)$ is a unit of $R$.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"forward","claim":"Invertibility implies that the determinant is a unit.","step":"1.1","inputs":["L1"]},
+        {"id":"reverse","claim":"If det(A) is a unit, det(A)^{-1}adj(A) is a two-sided inverse by the adjugate identity.","step":"1.2","inputs":["thm-adjugate-identity-over-a-commutative-ring","lem-ring-units-form-a-group"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The statement is restricted to positive-sized square matrices."},
+        {"case":"zero","status":"checked","evidence":"For a nonzero ring and positive size, det(0)=0 is not a unit; the zero ring follows its own unit convention through both directions."},
+        {"case":"one","status":"checked","evidence":"The result reduces to the definition of a unit for a one-by-one entry."},
+        {"case":"degenerate","status":"checked","evidence":"Nonzero non-units are not cancelled in either direction."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoint or index range occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No choice is made."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 1.2 constructs a two-sided inverse."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-inverse-matrix-by-adjugate": {
+      "citations": [],
+      "derivations": [
+        {"id":"scale-identities","claim":"Multiplying both adjugate identities by det(A)^{-1} produces a two-sided inverse.","step":"1.1","inputs":["thm-adjugate-identity-over-a-commutative-ring","given unit"]},
+        {"id":"uniqueness","claim":"Uniqueness of inverses identifies that matrix with A^{-1}.","step":"1.2","inputs":["1.1","lem-inverse-unique"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Adjugate notation here is restricted to positive size."},
+        {"case":"zero","status":"checked","evidence":"A zero determinant is admitted only when it is a unit under the ring's own conventions."},
+        {"case":"one","status":"checked","evidence":"The formula gives [a]^{-1}=[a^{-1}]."},
+        {"case":"degenerate","status":"checked","evidence":"The unit hypothesis excludes exactly the noninvertible determinant case."},
+        {"case":"endpoints","status":"not_applicable","reason":"No endpoint occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No choice occurs."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement is a conditional formula, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The statement is a conditional formula, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-determinant-rank-one-update-over-a-commutative-ring": {
+      "citations": [
+        {"fact":"L1","source":"thm-leibniz-determinant-is-alternating-multilinear-and-normalized","source_section":"Statement","quote":"the Leibniz determinant $\\det:M_n(R)\\to R$ is column-multilinear, alternating and normalized.","uses":["1.1","1.2"]}
+      ],
+      "derivations": [
+        {"id":"multilinear-subsets","claim":"Column multilinearity expands det(A+uv^T) over subsets of columns selected from uv^T.","step":"1.1","inputs":["L1","definition of matrix product"]},
+        {"id":"kill-repeats","claim":"Every term selecting at least two rank-one columns vanishes because those columns are scalar multiples of u.","step":"1.2","inputs":["1.1","L1"]},
+        {"id":"singleton-cofactors","claim":"The singleton terms sum to v^T adj(A)u by column Laplace expansion.","step":"1.3","inputs":["1.1","thm-laplace-cofactor-expansion","def-matrix-minors-cofactors-and-adjugate"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The lemma explicitly assumes positive matrix size."},
+        {"case":"zero","status":"checked","evidence":"u=0 or v=0 leaves only the empty subset term in Step 1.1."},
+        {"case":"one","status":"checked","evidence":"Step 1.3 becomes a+uv=a+v[1]u."},
+        {"case":"degenerate","status":"checked","evidence":"No invertibility of A, u, v, or any scalar is used."},
+        {"case":"endpoints","status":"checked","evidence":"Singleton subsets include the first and last zero-based columns."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The finite expansion is canonical and makes no choice."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is an equality."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The lemma is an equality."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-adjugate-is-equivariant-under-similarity": {
+      "citations": [
+        {"fact":"L1","source":"cor-determinant-is-invariant-under-similarity","source_section":"Statement","quote":"If $A,B\\in M_n(R)$ are similar over a commutative ring, then $\\det(B)=\\det(A)$.","uses":["1.1","1.2"]}
+      ],
+      "derivations": [
+        {"id":"compare-updates","claim":"Similarity and the rank-one formula give v^T adj(C)u=v^T P^{-1}adj(A)Pu for C=P^{-1}AP.","step":"1.1","inputs":["L1","lem-determinant-rank-one-update-over-a-commutative-ring","matrix algebra"]},
+        {"id":"entry-separation","claim":"Taking u and v as standard coordinate columns identifies every entry and yields adj(C)=P^{-1}adj(A)P.","step":"1.2","inputs":["1.1","standard coordinate columns"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Classical adjugates in this scaffold have positive size."},
+        {"case":"zero","status":"checked","evidence":"A may be zero or singular; Step 1.1 uses no inverse of A."},
+        {"case":"one","status":"checked","evidence":"For size one both adjugates are [1]."},
+        {"case":"degenerate","status":"checked","evidence":"Only P, not A, is assumed invertible."},
+        {"case":"endpoints","status":"checked","evidence":"Standard columns separate every first and last indexed entry."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Coordinate columns are explicitly specified, not chosen noncanonically."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement is an equality."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The statement is an equality."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-cramers-rule-over-a-commutative-ring": {
+      "citations": [
+        {"fact":"L1","source":"thm-leibniz-determinant-is-alternating-multilinear-and-normalized","source_section":"Statement","quote":"the Leibniz determinant $\\det:M_n(R)\\to R$ is column-multilinear, alternating and normalized.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"cross-multiplied","claim":"For any solution Ax=b, column multilinearity gives det(A_j(b))=x_j det(A) without cancellation.","step":"1.1","inputs":["L1","given Ax=b"]},
+        {"id":"unit-solution","claim":"If det(A) is a unit, the adjugate inverse constructs a solution with the quotient coordinates.","step":"1.2","inputs":["1.1","cor-inverse-matrix-by-adjugate"]},
+        {"id":"unique","claim":"The unit criterion makes A invertible, so the constructed solution is unique.","step":"1.3","inputs":["cor-square-matrix-invertible-iff-determinant-is-a-unit"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Cramer's rule is explicitly stated for n at least one."},
+        {"case":"zero","status":"checked","evidence":"A zero determinant still satisfies Step 1.1; no cancellation occurs."},
+        {"case":"one","status":"checked","evidence":"The identity reduces to ax=b and the unit quotient formula."},
+        {"case":"degenerate","status":"checked","evidence":"Nonzero non-unit determinants receive only the cross-multiplied conclusion."},
+        {"case":"endpoints","status":"checked","evidence":"Every coordinate j, including first and last zero-based indices, is covered."},
+        {"case":"nonempty-choice","status":"checked","evidence":"The replaced column j is supplied by the quantified coordinate, not selected existentially."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The ring theorem states implications and a formula, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The ring theorem states implications and a formula, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-cramers-rule-over-a-field": {
+      "citations": [
+        {"fact":"L1","source":"thm-invertible-matrix-theorem","source_section":"Statement","quote":"$N(A)=\\{0\\}$;","uses":["1.3"]}
+      ],
+      "derivations": [
+        {"id":"nonzero-forward","claim":"In a field nonzero det(A) is a unit, so the ring theorem supplies the unique Cramer solution for the given b.","step":"1.1","inputs":["thm-cramers-rule-over-a-commutative-ring","lem-field-is-a-commutative-ring"]},
+        {"id":"unique-kernel","claim":"If Ax=b has unique solution x, then Az=0 implies x+z is also a solution, hence z=0.","step":"1.2","inputs":["given unique solution","thm-ring-matrix-arithmetic-laws"]},
+        {"id":"reverse","claim":"The zero kernel makes A invertible by the invertible-matrix theorem, so its determinant is nonzero.","step":"1.3","inputs":["1.2","L1","cor-square-matrix-invertible-iff-determinant-is-a-unit"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The corollary follows the positive-size hypothesis of Cramer's rule."},
+        {"case":"zero","status":"checked","evidence":"det(A)=0 is exactly the noninvertible side in a field."},
+        {"case":"one","status":"checked","evidence":"The scalar equation is included."},
+        {"case":"degenerate","status":"checked","evidence":"For a singular matrix, any solution translates by a nonzero kernel vector and is not unique; otherwise no solution exists."},
+        {"case":"endpoints","status":"checked","evidence":"All replacement coordinates are covered by the ring theorem."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No arbitrary choice is made."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 gives nonzero determinant to the unique Cramer solution."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 1.2–1.3 give uniqueness for the fixed b to nonzero determinant."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-operator-invertible-iff-determinant-nonzero": {
+      "citations": [
+        {"fact":"L1","source":"thm-invertible-matrices-correspond-to-linear-isomorphisms","source_section":"Statement","quote":"$A$ is invertible if and only if $L_A$ is a linear","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"positive-dimension","claim":"A representing matrix is invertible iff T is invertible, and over a field this holds iff its determinant is nonzero.","step":"1.1","inputs":["L1","cor-square-matrix-invertible-iff-determinant-is-a-unit","lem-field-is-a-commutative-ring"]},
+        {"id":"zero-dimension","claim":"The unique endomorphism of the zero space is invertible and has determinant one.","step":"1.2","inputs":["definition convention"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.2 handles the zero-dimensional vector space."},
+        {"case":"zero","status":"checked","evidence":"Zero determinant is the negative side of the equivalence in positive dimension."},
+        {"case":"one","status":"checked","evidence":"The scalar multiplication case is covered by Step 1.1."},
+        {"case":"degenerate","status":"checked","evidence":"Singular operators are explicitly the reverse side."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoint occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The chosen basis is arbitrary and basis independence has already been proved."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1, with Step 1.2 for dimension zero."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 1.1, with Step 1.2 for dimension zero."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-operator-determinant-on-the-general-linear-group": {
+      "citations": [],
+      "derivations": [
+        {"id":"homomorphism","claim":"Multiplicativity and det(I)=1 define a homomorphism from GL(V) into the nonzero scalars.","step":"1.1","inputs":["thm-operator-determinant-is-multiplicative","thm-operator-invertible-iff-determinant-nonzero"]},
+        {"id":"inverse","claim":"Applying multiplicativity to TT^{-1}=I gives det(T^{-1})=det(T)^{-1}.","step":"1.2","inputs":["1.1","lem-ring-units-form-a-group"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"GL of the zero space contains its identity and determinant one."},
+        {"case":"zero","status":"checked","evidence":"Zero determinant cannot occur in GL(V)."},
+        {"case":"one","status":"checked","evidence":"The result reduces to multiplicativity of nonzero scalars."},
+        {"case":"degenerate","status":"not_applicable","reason":"Membership in GL(V) already excludes noninvertible operators."},
+        {"case":"endpoints","status":"not_applicable","reason":"No endpoint occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No choice occurs."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The statement is a homomorphism and inverse formula, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The statement is a homomorphism and inverse formula, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-operator-adjugate-identity": {
+      "citations": [
+        {"fact":"L1","source":"thm-matrix-of-a-composite-is-the-product","source_section":"Statement","quote":"$$[S\\circ T]_{\\mathcal B}^{\\mathcal D}=[S]_{\\mathcal C}^{\\mathcal D}[T]_{\\mathcal B}^{\\mathcal C}.$$","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"take-matrices","claim":"The matrices of T adj(T) and adj(T)T are A adj(A) and adj(A)A.","step":"1.1","inputs":["def-adjugate-of-a-linear-operator","L1"]},
+        {"id":"transport-identity","claim":"The matrix adjugate identity and determinant basis independence yield both operator identities.","step":"1.2","inputs":["1.1","thm-adjugate-identity-over-a-commutative-ring","thm-operator-determinant-is-basis-independent"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The operator adjugate is explicitly defined only in positive dimension."},
+        {"case":"zero","status":"checked","evidence":"The zero operator is singular but the matrix identity still applies."},
+        {"case":"one","status":"checked","evidence":"The identity becomes a[1]=[1]a=a."},
+        {"case":"degenerate","status":"checked","evidence":"No invertibility of T is assumed."},
+        {"case":"endpoints","status":"not_applicable","reason":"No endpoint occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Any basis gives the same already well-defined adjugate."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem gives identities."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem gives identities."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-singular-projection-has-zero-determinant": {
+      "citations": [],
+      "derivations": [
+        {"id":"matrix-and-det","claim":"The standard matrix of T(x,y)=(x,0) is diag(1,0), so its determinant is zero.","step":"1.1","inputs":["def-determinant-of-a-linear-operator","direct coordinate calculation"]},
+        {"id":"noninvertible","claim":"The nonzero kernel vector (0,1) and missing image vector (0,1) show noninvertibility, agreeing with the determinant criterion.","step":"1.2","inputs":["1.1","thm-operator-invertible-iff-determinant-nonzero"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The example is on the real plane."},
+        {"case":"zero","status":"checked","evidence":"The zero second diagonal entry and zero determinant are computed in Step 1.1."},
+        {"case":"one","status":"checked","evidence":"The first coordinate is fixed, so the operator is not the zero map."},
+        {"case":"degenerate","status":"checked","evidence":"Kernel and image are both computed in Step 1.2."},
+        {"case":"endpoints","status":"not_applicable","reason":"No endpoints occur."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All witnesses are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"This is a worked example, not a biconditional proof."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"This is a worked example, not a biconditional proof."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-determinant-in-two-ordered-bases": {
+      "citations": [],
+      "derivations": [
+        {"id":"change-matrix","claim":"For E and B=((1,1),(0,1)), direct multiplication gives [T]_B=[[2,0],[1,3]].","step":"1.1","inputs":["thm-two-sided-change-of-basis-formula","direct matrix multiplication"]},
+        {"id":"compare-det","claim":"The two-term Leibniz formula gives determinant 6 for both diag(2,3) and [[2,0],[1,3]].","step":"1.2","inputs":["1.1","def-determinant-of-a-square-matrix","direct two-permutation calculation"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Both ordered bases contain two explicit vectors."},
+        {"case":"zero","status":"checked","evidence":"The off-diagonal zero is retained in both determinant computations."},
+        {"case":"one","status":"checked","evidence":"The transition matrix has unit determinant one."},
+        {"case":"degenerate","status":"checked","evidence":"Both displayed basis vectors are linearly independent by the invertible transition matrix."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Both bases are explicitly fixed."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example verifies an equality."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example verifies an equality."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-doubling-integers-has-nonunit-determinant": {
+      "citations": [],
+      "derivations": [
+        {"id":"ring-data","claim":"The coordinate matrix [2] has determinant 2, adjugate [1], and 2 is not a unit of Z.","step":"1.1","inputs":["def-coordinate-endomorphism-over-a-commutative-ring","lem-units-of-z"]},
+        {"id":"injective-not-surjective","claim":"Integer cancellation proves injectivity, while a preimage of 1 would make 2 a unit, contradicting the units of Z.","step":"1.2","inputs":["thm-int-comm-ring","lem-int-cancellation","lem-units-of-z"]},
+        {"id":"field-extension","claim":"Over Q the scalar 2 has inverse 1/2, so the extended map is invertible.","step":"1.3","inputs":["thm-rat-field","cor-inverse-matrix-by-adjugate"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The coordinate module is Z to the first power."},
+        {"case":"zero","status":"checked","evidence":"Zero has the unique preimage zero; this does not establish surjectivity."},
+        {"case":"one","status":"checked","evidence":"The missing target 1 proves nonsurjectivity in Step 1.2."},
+        {"case":"degenerate","status":"checked","evidence":"The determinant is nonzero but a non-unit, the intended ring boundary."},
+        {"case":"endpoints","status":"not_applicable","reason":"Z has no relevant interval endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"All witnesses are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example is not stated as an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example is not stated as an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-four-by-four-determinant-by-cofactors-and-row-reduction": {
+      "citations": [],
+      "derivations": [
+        {"id":"cofactor-route","claim":"Expansion along the last row and then a sparse column gives determinant 30.","step":"1.1","inputs":["thm-laplace-cofactor-expansion","integer arithmetic"]},
+        {"id":"row-route","claim":"Replacing row 3 by row 3 minus four times row 1 gives a triangular matrix with diagonal product 30 and leaves the determinant unchanged.","step":"1.2","inputs":["thm-determinant-under-elementary-row-operations","thm-determinant-of-a-triangular-matrix"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The matrix has fixed size four."},
+        {"case":"zero","status":"checked","evidence":"All displayed zero entries are retained in both sparse computations."},
+        {"case":"one","status":"checked","evidence":"The leading diagonal entry one is included in the product."},
+        {"case":"degenerate","status":"checked","evidence":"No division or pivot normalisation is used."},
+        {"case":"endpoints","status":"checked","evidence":"The last row and the first relevant sparse column are explicitly expanded."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The expansion rows and operation are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example compares two calculations."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example compares two calculations."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-three-by-three-inverse-by-adjugate": {
+      "citations": [],
+      "derivations": [
+        {"id":"cofactors","claim":"The nine deleted-row-and-column determinants give cofactor matrix [[1,1,-1],[-2,1,2],[2,-1,1]].","step":"1.1","inputs":["def-matrix-minors-cofactors-and-adjugate","integer arithmetic"]},
+        {"id":"adjugate-check","claim":"Transposition gives adj(A), and direct multiplication gives A adj(A)=3I.","step":"1.2","inputs":["1.1","thm-adjugate-identity-over-a-commutative-ring","direct matrix multiplication"]},
+        {"id":"inverse","claim":"Because 3 is a unit in Q, one third of the adjugate is A^{-1}; multiplication checks both sides.","step":"1.3","inputs":["1.2","cor-inverse-matrix-by-adjugate","thm-rat-field"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The matrix has fixed size three."},
+        {"case":"zero","status":"checked","evidence":"All zero entries and signed zero products are retained in the cofactor calculation."},
+        {"case":"one","status":"checked","evidence":"Unit entries and the scalar identity matrix are included explicitly."},
+        {"case":"degenerate","status":"checked","evidence":"The computed determinant 3 is nonzero, so the inverse formula is licensed over Q."},
+        {"case":"endpoints","status":"checked","evidence":"All first and last zero-based row and column deletions appear among the nine cofactors."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Every cofactor and multiplication is explicitly prescribed."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example computes an inverse rather than proving an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example computes an inverse rather than proving an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-cramers-rule-two-by-two-system": {
+      "citations": [],
+      "derivations": [
+        {"id":"determinants","claim":"The two-term Leibniz formula gives coefficient and replacement determinants -3, -6, and -3.","step":"1.1","inputs":["def-determinant-of-a-square-matrix","integer arithmetic"]},
+        {"id":"quotients","claim":"Cramer's quotients give x=2 and y=1, which satisfy both equations.","step":"1.2","inputs":["1.1","cor-cramers-rule-over-a-field","direct substitution"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The system has two equations and two unknowns."},
+        {"case":"zero","status":"checked","evidence":"The coefficient determinant is explicitly nonzero."},
+        {"case":"one","status":"checked","evidence":"The computed y-coordinate equals one and is checked directly."},
+        {"case":"degenerate","status":"checked","evidence":"The nonzero determinant guarantees the system is not singular."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval endpoints occur."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The solution is uniquely calculated."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example does not assert an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example does not assert an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-integral-logarithm-derivative-and-normalisation": {
+      "citations": [
+        {"fact":"L1","source":"thm-ftc-first-part","source_section":"Statement","quote":"$$F'(c) \\;=\\; f(c) .$$","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"differentiate","claim":"On a compact positive interval containing x and 1, additivity and orientation express L locally as a constant plus a fixed-base integral function, so the first FTC gives L'(x)=1/x on either side of 1.","step":"1.1","inputs":["def-integral-logarithm","thm-algebra-of-continuous-functions","thm-continuous-implies-integrable","thm-additivity-over-subintervals","def-oriented-integral","L1"]},
+        {"id":"normalise","claim":"The oriented integral from 1 to 1 is zero.","step":"1.2","inputs":["def-oriented-integral"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The domain consists of positive reals."},
+        {"case":"zero","status":"checked","evidence":"Zero is excluded from the domain because 1/t is undefined there."},
+        {"case":"one","status":"checked","evidence":"Step 1.2 establishes L(1)=0."},
+        {"case":"degenerate","status":"checked","evidence":"The degenerate oriented interval [1,1] is handled separately."},
+        {"case":"endpoints","status":"checked","evidence":"The local compact interval can place x at an interior point; the normalisation endpoint is Step 1.2."},
+        {"case":"nonempty-choice","status":"checked","evidence":"For each x>0 an explicit compact positive neighbourhood can be chosen from x and 1."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem states formulas, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem states formulas, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-integral-logarithm-is-strictly-increasing": {
+      "citations": [
+        {"fact":"L1","source":"cor-mean-value-theorem","source_section":"Statement","quote":"$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"continuity","claim":"Differentiability of L implies continuity on the positive reals.","step":"1.1","inputs":["thm-integral-logarithm-derivative-and-normalisation","cor-differentiable-implies-continuous"]},
+        {"id":"strict-order","claim":"For 0<a<b, MVT gives L(b)-L(a)=(b-a)/c>0.","step":"1.2","inputs":["1.1","L1","thm-integral-logarithm-derivative-and-normalisation"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Every compared interval [a,b] is supplied with a<b."},
+        {"case":"zero","status":"checked","evidence":"The domain excludes zero explicitly."},
+        {"case":"one","status":"checked","evidence":"L(1)=0 is compatible with strict increase on either side."},
+        {"case":"degenerate","status":"checked","evidence":"When a=b strict comparison is not asserted; equality is immediate."},
+        {"case":"endpoints","status":"checked","evidence":"Continuity on [a,b] and differentiability on (a,b) match MVT hypotheses."},
+        {"case":"nonempty-choice","status":"checked","evidence":"MVT supplies c in the nonempty interval (a,b)."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary is not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The corollary is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-integral-logarithm-product-law": {
+      "citations": [
+        {"fact":"L1","source":"thm-chain-rule","source_section":"Statement","quote":"$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$","uses":["1.1"]},
+        {"fact":"L2","source":"cor-zero-derivative-implies-constant","source_section":"Statement","quote":"Then $f$ is constant on $I$","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"differentiate-fixed-y","claim":"For fixed y>0, h(x)=L(xy)-L(x) has derivative y/(xy)-1/x=0.","step":"1.1","inputs":["thm-integral-logarithm-derivative-and-normalisation","L1","algebra"]},
+        {"id":"constant-evaluate","claim":"Zero derivative makes h constant, and h(1)=L(y), yielding the product law.","step":"1.2","inputs":["1.1","L2","thm-integral-logarithm-derivative-and-normalisation"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The domain is the nonempty positive half-line."},
+        {"case":"zero","status":"checked","evidence":"x=0 and y=0 are excluded by the stated positive hypotheses."},
+        {"case":"one","status":"checked","evidence":"Evaluation at x=1 is Step 1.2 and uses L(1)=0."},
+        {"case":"degenerate","status":"checked","evidence":"y=1 gives the identity L(x)=L(x)+0."},
+        {"case":"endpoints","status":"not_applicable","reason":"The domain (0,infinity) has no included finite endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"y is fixed from the universal hypothesis; no selection is made."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is an identity."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem is an identity."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-integral-logarithm-reciprocals-and-integer-powers": {
+      "citations": [],
+      "derivations": [
+        {"id":"reciprocal","claim":"The product law on x times 1/x and L(1)=0 give L(1/x)=-L(x).","step":"1.1","inputs":["thm-integral-logarithm-product-law","thm-integral-logarithm-derivative-and-normalisation"]},
+        {"id":"natural-powers","claim":"Induction gives L(x^n)=nL(x) for all natural n, including n=0.","step":"1.2","inputs":["thm-induction-principle","thm-integral-logarithm-product-law","def-integer-power"]},
+        {"id":"negative-powers","claim":"The reciprocal identity extends the formula to negative integers and gives the specialisation x=2.","step":"1.3","inputs":["1.1","1.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"No empty set or product is quantified beyond the defined zeroth power."},
+        {"case":"zero","status":"checked","evidence":"The exponent n=0 is the induction base in Step 1.2."},
+        {"case":"one","status":"checked","evidence":"x=1 and exponent one both agree with L(1)=0."},
+        {"case":"degenerate","status":"checked","evidence":"Negative exponents are separately supplied by Step 1.3."},
+        {"case":"endpoints","status":"checked","evidence":"The first natural exponent is explicitly the base case."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Induction and reciprocal formation are canonical."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary gives identities."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The corollary gives identities."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-integral-logarithm-is-unbounded": {
+      "citations": [
+        {"fact":"L1","source":"thm-of-archimedean","source_section":"Statement","quote":"for every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$","uses":["1.1","1.2"]}
+      ],
+      "derivations": [
+        {"id":"above","claim":"Since L(2)>0, Archimedean order chooses n with nL(2) above any target, and this equals L(2^n).","step":"1.1","inputs":["cor-integral-logarithm-is-strictly-increasing","cor-integral-logarithm-reciprocals-and-integer-powers","L1"]},
+        {"id":"below","claim":"The reciprocal formula gives L(2^{-n})=-nL(2), below any prescribed lower target.","step":"1.2","inputs":["1.1","cor-integral-logarithm-reciprocals-and-integer-powers","L1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The positive-real domain is nonempty."},
+        {"case":"zero","status":"checked","evidence":"The chosen natural n is at least one; no division by n occurs."},
+        {"case":"one","status":"checked","evidence":"L(2)>0 follows by comparing 2 with 1."},
+        {"case":"degenerate","status":"checked","evidence":"Arbitrary positive, zero, and negative target bounds are covered by the same Archimedean choice."},
+        {"case":"endpoints","status":"not_applicable","reason":"Infinity is not treated as a domain endpoint."},
+        {"case":"nonempty-choice","status":"checked","evidence":"The Archimedean theorem supplies an n for each target."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Unboundedness is not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Unboundedness is not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-integral-logarithm-is-a-bijection": {
+      "citations": [
+        {"fact":"L1","source":"thm-intermediate-value","source_section":"Statement","quote":"Then there is $c \\in [a,b]$ with $f(c) = y$.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"injective","claim":"Strict increase makes L injective.","step":"1.1","inputs":["cor-integral-logarithm-is-strictly-increasing"]},
+        {"id":"surjective","claim":"Two-sided unboundedness brackets any target and IVT supplies a positive preimage.","step":"1.2","inputs":["thm-integral-logarithm-is-unbounded","cor-integral-logarithm-is-strictly-increasing","L1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The domain contains 1 and every IVT interval [a,b] is nonempty."},
+        {"case":"zero","status":"checked","evidence":"Target zero has the preimage 1."},
+        {"case":"one","status":"checked","evidence":"L(1)=0 fixes the normalisation point."},
+        {"case":"degenerate","status":"checked","evidence":"If a target equals a bracket value, that endpoint itself is a preimage; otherwise IVT applies internally."},
+        {"case":"endpoints","status":"checked","evidence":"IVT allows equality at either selected finite endpoint."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Unboundedness supplies explicit existence of both bracketing points."},
+        {"case":"iff-forward","status":"not_applicable","reason":"Bijection is proved as injection plus surjection, not stated as an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"Bijection is proved as injection plus surjection, not stated as an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-integral-exponential-addition-law": {
+      "citations": [],
+      "derivations": [
+        {"id":"apply-L","claim":"The product law gives L(E(a)E(b))=a+b=L(E(a+b)).","step":"1.1","inputs":["def-integral-exponential","thm-integral-logarithm-product-law"]},
+        {"id":"injectivity","claim":"Injectivity of L yields E(a+b)=E(a)E(b).","step":"1.2","inputs":["1.1","thm-integral-logarithm-is-a-bijection"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The domain of E is all real numbers."},
+        {"case":"zero","status":"checked","evidence":"Putting a or b equal to zero uses E(0)=1 from inverse normalisation."},
+        {"case":"one","status":"checked","evidence":"The value one is an ordinary real input; E(1) is positive."},
+        {"case":"degenerate","status":"checked","evidence":"Negative and equal inputs remain in the all-real domain."},
+        {"case":"endpoints","status":"not_applicable","reason":"The real line has no included endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The inverse is a function, so no preimage choice is made."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary is an identity."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The corollary is an identity."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-integral-exponential-solves-the-normalised-ivp": {
+      "citations": [
+        {"fact":"L1","source":"thm-derivative-of-an-inverse","source_section":"Statement","quote":"$$g'(b) \\;=\\; \\frac{1}{f'(c)} ;$$","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"inverse-derivative","claim":"Because L'(E(y))=1/E(y) is nonzero, inverse differentiation gives E'(y)=E(y).","step":"1.1","inputs":["def-integral-exponential","thm-integral-logarithm-derivative-and-normalisation","L1"]},
+        {"id":"initial-value","claim":"Since L(1)=0 and E is its inverse, E(0)=1.","step":"1.2","inputs":["def-integral-exponential","thm-integral-logarithm-derivative-and-normalisation"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"E is defined on all reals."},
+        {"case":"zero","status":"checked","evidence":"Step 1.2 checks the initial point zero."},
+        {"case":"one","status":"checked","evidence":"The initial value is exactly one."},
+        {"case":"degenerate","status":"checked","evidence":"L' never vanishes because E(y)>0, so the inverse theorem's bad branch cannot occur."},
+        {"case":"endpoints","status":"not_applicable","reason":"The real-line domain has no endpoint."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"E is the uniquely defined inverse function."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem states an IVP solution, not an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem states an IVP solution, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-integral-exponential-agrees-with-exponential": {
+      "citations": [
+        {"fact":"L1","source":"thm-exponential-ivp-uniqueness","source_section":"Statement","quote":"If $y:\\mathbb R\\to\\mathbb R$ is differentiable, $y'=y$, and $y(0)=1$, then $y=\\exp$.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"single-bridge","claim":"The integral inverse E meets all three hypotheses of exponential IVP uniqueness, hence E=exp.","step":"1.1","inputs":["thm-integral-exponential-solves-the-normalised-ivp","L1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Both functions have domain all reals."},
+        {"case":"zero","status":"checked","evidence":"The normalising input zero is part of Step 1.1."},
+        {"case":"one","status":"checked","evidence":"The normalising value one is part of Step 1.1."},
+        {"case":"degenerate","status":"not_applicable","reason":"The uniqueness theorem has no separate degenerate parameter."},
+        {"case":"endpoints","status":"not_applicable","reason":"The real line has no endpoint."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Uniqueness identifies the functions without a choice."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem is an equality obtained from uniqueness."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem is an equality obtained from uniqueness."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-integral-logarithm-agrees-with-natural-logarithm": {
+      "citations": [],
+      "derivations": [
+        {"id":"inverse-equality","claim":"E=exp and both are bijections, so their inverse functions agree; these inverses are L and the published log.","step":"1.1","inputs":["thm-integral-exponential-agrees-with-exponential","def-integral-exponential","def-natural-logarithm","cor-exponential-is-a-bijection-onto-positive-reals"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The common domain is the positive reals."},
+        {"case":"zero","status":"checked","evidence":"Zero is excluded from the logarithm domain."},
+        {"case":"one","status":"checked","evidence":"Both inverse functions take one to zero."},
+        {"case":"degenerate","status":"not_applicable","reason":"Bijections have unique inverse functions."},
+        {"case":"endpoints","status":"not_applicable","reason":"Zero and infinity are not domain points."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Inverse values are unique."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The corollary is equality of functions."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The corollary is equality of functions."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-e-is-the-unique-unit-hyperbolic-area": {
+      "citations": [],
+      "derivations": [
+        {"id":"value","claim":"L(e)=log(e)=1 from the function identification and e=exp(1).","step":"1.1","inputs":["cor-integral-logarithm-agrees-with-natural-logarithm","def-real-exponential-function-and-e","def-natural-logarithm"]},
+        {"id":"unique","claim":"Injectivity of L makes e the unique positive input with integral value one.","step":"1.2","inputs":["1.1","thm-integral-logarithm-is-a-bijection"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The positive-real domain is nonempty."},
+        {"case":"zero","status":"checked","evidence":"Zero is not a candidate because the integral logarithm is defined only for x>0."},
+        {"case":"one","status":"checked","evidence":"The target integral value is exactly one; L(1)=0 prevents confusing input and value."},
+        {"case":"degenerate","status":"not_applicable","reason":"Strict injectivity rules out repeated solutions."},
+        {"case":"endpoints","status":"not_applicable","reason":"The improper endpoints are not included."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 explicitly supplies e as a solution."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 proves x=e implies the integral equals one."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 1.2 proves uniqueness."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-logarithm-continuous-functional-equation-characterisation": {
+      "citations": [
+        {"fact":"L1","source":"thm-cauchy-functional-equation-regularity","source_section":"Statement","quote":"$f(x) = c\\,x$ for every real $x$.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"transport","claim":"For g(t)=f(E(t)), the integral-exponential addition law makes g additive, while differentiability of E makes the composite continuous.","step":"1.1","inputs":["cor-integral-exponential-addition-law","thm-integral-exponential-solves-the-normalised-ivp","cor-differentiable-implies-continuous","thm-composition-of-continuous-functions"]},
+        {"id":"regularity","claim":"Cauchy regularity gives g(t)=ct, and f(e)=1 with E(1)=e forces c=1.","step":"1.2","inputs":["1.1","L1","thm-integral-exponential-agrees-with-exponential"]},
+        {"id":"return","claim":"Writing x=E(L(x)) yields f(x)=L(x)=log x; published log verifies the hypotheses.","step":"1.3","inputs":["1.2","cor-integral-logarithm-agrees-with-natural-logarithm","thm-natural-logarithm-laws"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The functional equation has the nonempty positive-real domain."},
+        {"case":"zero","status":"checked","evidence":"Zero is excluded from f's domain but included as g(0)=f(1)=0."},
+        {"case":"one","status":"checked","evidence":"The multiplicative identity yields f(1)=0; normalisation is at e."},
+        {"case":"degenerate","status":"checked","evidence":"The zero solution is excluded by f(e)=1."},
+        {"case":"endpoints","status":"not_applicable","reason":"The positive half-line has no included endpoint at zero or infinity."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"E and L provide unique transported coordinates."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.3 verifies that log has the stated properties."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 1.1–1.3 prove uniqueness from the hypotheses."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-logarithm-differentiable-functional-equation-characterisation": {
+      "citations": [],
+      "derivations": [
+        {"id":"identity","claim":"The functional equation at 1 gives f(1)=0.","step":"1.1","inputs":["given functional equation","real additive cancellation"]},
+        {"id":"derivative","claim":"Writing f(x+h)-f(x)=f(1+h/x)-f(1) and rescaling the difference quotient proves f'(x)=f'(1)/x=1/x.","step":"1.2","inputs":["1.1","given functional equation","def-derivative","elementary limit rescaling"]},
+        {"id":"identify","claim":"Thus f'=1/x=L' and f(1)=L(1), so zero derivative of f-L gives f=L=log.","step":"1.3","inputs":["1.2","thm-integral-logarithm-derivative-and-normalisation","cor-zero-derivative-implies-constant","cor-integral-logarithm-agrees-with-natural-logarithm"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The domain is the positive reals."},
+        {"case":"zero","status":"checked","evidence":"Zero is excluded from the domain and never used as a multiplier."},
+        {"case":"one","status":"checked","evidence":"Differentiability and normalisation are imposed exactly at one."},
+        {"case":"degenerate","status":"checked","evidence":"The constant-zero logarithmic function fails f'(1)=1 and is excluded."},
+        {"case":"endpoints","status":"not_applicable","reason":"One is an interior point of the positive half-line."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No choice is made."},
+        {"case":"iff-forward","status":"checked","evidence":"Published log satisfies the functional equation and derivative normalisation."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 1.1–1.3 prove uniqueness."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-continuous-logarithmic-functions-form-a-one-parameter-family": {
+      "citations": [],
+      "derivations": [
+        {"id":"transport","claim":"For g=f composed with E, the integral-exponential addition law and differentiability make g continuous and additive, so Cauchy regularity gives g(t)=ct with c=g(1)=f(e).","step":"1.1","inputs":["cor-integral-exponential-addition-law","thm-integral-exponential-solves-the-normalised-ivp","thm-integral-exponential-agrees-with-exponential","thm-cauchy-functional-equation-regularity","cor-differentiable-implies-continuous"]},
+        {"id":"return","claim":"For x>0, x=E(L(x)) gives f(x)=cL(x)=c log x, including c=0 without division.","step":"1.2","inputs":["1.1","def-integral-exponential","cor-integral-logarithm-agrees-with-natural-logarithm"]},
+        {"id":"unique-parameter","claim":"Evaluating at e shows the scalar c is unique.","step":"1.3","inputs":["1.2","def-real-exponential-function-and-e"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The positive-real domain is nonempty."},
+        {"case":"zero","status":"checked","evidence":"Step 1.2 handles c=0 without division."},
+        {"case":"one","status":"checked","evidence":"Every logarithmic f has f(1)=0; evaluation at e fixes c."},
+        {"case":"degenerate","status":"checked","evidence":"The identically zero function is explicitly included."},
+        {"case":"endpoints","status":"not_applicable","reason":"No endpoint is included."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The coefficient c=f(e) is canonical."},
+        {"case":"iff-forward","status":"checked","evidence":"Direct logarithm laws show every c log has the properties."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 1.1–1.2 classify every function with the properties."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-log-series-extends-by-the-product-law": {
+      "citations": [
+        {"fact":"L1","source":"thm-log-one-plus-x-power-series","source_section":"Statement","quote":"The series converges at $x=1$ to $\\log2$ and diverges at $x=-1$.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"local-series","claim":"The published Mercator theorem identifies the series with log on its exact interval and supplies the x=1 endpoint.","step":"1.1","inputs":["L1","thm-log-one-plus-x-power-series"]},
+        {"id":"global-reduction","claim":"For each x>0 choose a natural m so that x divided by 2^m lies in (0,2], then use the product law to recover log x from the local value and m log 2.","step":"1.2","inputs":["thm-of-archimedean","thm-natural-logarithm-laws","1.1"]},
+        {"id":"uniqueness","claim":"Any product-to-sum function agreeing with the local series and its value at 2 agrees with this reduction for every x>0.","step":"1.3","inputs":["1.2","given product law"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The global domain is the positive reals."},
+        {"case":"zero","status":"checked","evidence":"The Mercator parameter zero gives log(1)=0; logarithm input zero remains excluded."},
+        {"case":"one","status":"checked","evidence":"The series endpoint parameter one supplies log 2."},
+        {"case":"degenerate","status":"checked","evidence":"Divergence at parameter -1 prevents assigning logarithm input zero."},
+        {"case":"endpoints","status":"checked","evidence":"The exact local interval -1<x<=1 and its included right endpoint are retained."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Archimedean order supplies m; equality with published log proves independence of the chosen admissible m."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is a continuation and uniqueness claim, not syntactically an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The lemma is a continuation and uniqueness claim, not syntactically an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-logarithm-definition-equivalence": {
+      "citations": [
+        {"fact":"L1","source":"thm-landau-logarithm-limit","source_section":"Statement","quote":"$$\\log x=\\lim_{n\\to\\infty}2^n\\bigl(x^{1/2^n}-1\\bigr).$$","uses":["1.3"]}
+      ],
+      "derivations": [
+        {"id":"inverse-integral","claim":"The single IVP bridge identifies the inverse-exponential and integral characterisations.","step":"1.1","inputs":["thm-integral-exponential-agrees-with-exponential","cor-integral-logarithm-agrees-with-natural-logarithm","thm-exponential-definition-equivalence"]},
+        {"id":"functional-series","claim":"The continuous functional equation and continued Mercator data each uniquely identify the same log.","step":"1.2","inputs":["thm-logarithm-continuous-functional-equation-characterisation","lem-log-series-extends-by-the-product-law"]},
+        {"id":"landau","claim":"The published Landau limit supplies the remaining characterisation for every positive x.","step":"1.3","inputs":["L1"]},
+        {"id":"converse-checks","claim":"Published log satisfies each stated characterisation with its exact normalisation and domain.","step":"1.4","inputs":["def-natural-logarithm","thm-natural-logarithm-laws","thm-log-one-plus-x-power-series","L1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Every logarithm candidate has the nonempty positive-real domain."},
+        {"case":"zero","status":"checked","evidence":"Input zero is excluded; normalisations at 1, e, and additive input zero are distinguished."},
+        {"case":"one","status":"checked","evidence":"All characterisations give log(1)=0 and the Mercator endpoint gives log 2."},
+        {"case":"degenerate","status":"checked","evidence":"The zero functional-equation solution is excluded by f(e)=1."},
+        {"case":"endpoints","status":"checked","evidence":"The Mercator interval and Landau domain use their exact published endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"Inverse functions and limits, when asserted, are unique."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.4 verifies every characterisation for log."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 1.1–1.3 identify every characterisation with log."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-log-two-from-four-characterisations": {
+      "citations": [
+        {"fact":"L1","source":"thm-log-one-plus-x-power-series","source_section":"Statement","quote":"The series converges at $x=1$ to $\\log2$ and diverges at $x=-1$.","uses":["1.1"]},
+        {"fact":"L2","source":"thm-landau-logarithm-limit","source_section":"Statement","quote":"$$\\log x=\\lim_{n\\to\\infty}2^n\\bigl(x^{1/2^n}-1\\bigr).$$","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"four-values","claim":"Specialising the integral, Mercator, Landau, and inverse-exponential characterisations at 2 gives four equal descriptions of log 2.","step":"1.1","inputs":["thm-logarithm-definition-equivalence","L1","L2","def-natural-logarithm"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"All four descriptions are explicit nonempty expressions."},
+        {"case":"zero","status":"checked","evidence":"The alternating sum starts at n=1; no n=0 denominator occurs."},
+        {"case":"one","status":"checked","evidence":"The series endpoint parameter is exactly one and is covered by L1."},
+        {"case":"degenerate","status":"not_applicable","reason":"The specialised input two lies inside every stated domain."},
+        {"case":"endpoints","status":"checked","evidence":"Mercator's included endpoint is used through its published theorem."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The inverse value is unique."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example records equal values."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example records equal values."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-logarithmic-functions-without-normalisation": {
+      "citations": [],
+      "derivations": [
+        {"id":"family","claim":"For every real c, f_c=c log satisfies the product-to-sum equation and has f_c(e)=c.","step":"1.1","inputs":["thm-natural-logarithm-laws","field algebra"]},
+        {"id":"bases-and-zero","claim":"For c=1/log b this is log base b, while c=0 is the constant-zero solution and does not correspond to a logarithm base.","step":"1.2","inputs":["def-logarithm-to-a-base","1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The positive-real domain is nonempty."},
+        {"case":"zero","status":"checked","evidence":"Step 1.2 includes c=0 separately and does not divide by it."},
+        {"case":"one","status":"checked","evidence":"Every member sends input one to zero."},
+        {"case":"degenerate","status":"checked","evidence":"The zero function is explicitly included."},
+        {"case":"endpoints","status":"checked","evidence":"A logarithm base must satisfy b>0 and b not equal to one."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"c and b are explicit parameters."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example displays a family rather than proving an iff."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example displays a family rather than proving an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-discontinuous-logarithmic-functional-equation": {
+      "citations": [
+        {"fact":"L1","source":"thm-cauchy-functional-equation-regularity","source_section":"Statement","quote":"$f(x) = c\\,x$ for every real $x$.","uses":["1.3"]},
+        {"fact":"L2","source":"thm-exponential-addition-formula","source_section":"Statement","quote":"$$\\exp(x+y)=\\exp(x)\\exp(y).$$","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"nonlinear-additive","claim":"Choice supplies a Hamel basis and an additive coefficient map g that is not scalar multiplication.","step":"1.1","inputs":["def-axiom-of-choice","lem-hamel-basis-exists"]},
+        {"id":"transport","claim":"Define f(exp t)=g(t); exponential bijectivity makes f well defined and the exponential law makes it logarithmic.","step":"1.2","inputs":["1.1","cor-exponential-is-a-bijection-onto-positive-reals","L2"]},
+        {"id":"discontinuous","claim":"If f were continuous, g=f composed with exp would be continuous and Cauchy regularity would make g scalar, contradiction.","step":"1.3","inputs":["1.1","1.2","thm-composition-of-continuous-functions","L1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The Hamel basis and positive-real domain are nonempty."},
+        {"case":"zero","status":"checked","evidence":"Additivity gives g(0)=0 and exp(0)=1, hence f(1)=0."},
+        {"case":"one","status":"checked","evidence":"The coefficient map differs from scalar multiplication on a chosen second basis direction."},
+        {"case":"degenerate","status":"checked","evidence":"A one-dimensional Q-span is insufficient; R over Q has more than one basis vector."},
+        {"case":"endpoints","status":"not_applicable","reason":"The positive-real domain excludes zero and has no included endpoint."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Step 1.1 states exactly where choice and the Hamel-basis selection enter."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The item is an existence counterexample."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The item is an existence counterexample."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-mercator-series-does-not-define-logarithm-globally": {
+      "citations": [
+        {"fact":"L1","source":"thm-ratio-test","source_section":"Statement","quote":"if $\\liminf_{k} q_k > 1$ then $\\sum a_k$ diverges.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"ratio","claim":"For u=x-1>1, the absolute ratio of successive Mercator terms tends to u>1, so the series diverges.","step":"1.1","inputs":["L1","lem-nth-term-test","elementary limit arithmetic"]},
+        {"id":"contrast","claim":"Thus the bare series cannot define log for x>2, while the product-law continuation remains global.","step":"1.2","inputs":["1.1","lem-log-series-extends-by-the-product-law"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The series has infinitely many explicit terms."},
+        {"case":"zero","status":"checked","evidence":"The indexed series starts at n=1, so no zero denominator is written."},
+        {"case":"one","status":"checked","evidence":"The boundary u=1 is excluded by x>2 and is known to converge conditionally."},
+        {"case":"degenerate","status":"checked","evidence":"At x=2 the counterclaim is not asserted; this is the sharp endpoint distinction."},
+        {"case":"endpoints","status":"checked","evidence":"The strict threshold x>2 is explicit."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"No choice is made."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The item gives a one-sided divergence counterexample."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The item gives a one-sided divergence counterexample."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-unit-hyperbolic-area-brackets-e": {
+      "citations": [],
+      "derivations": [
+        {"id":"bound-L2","claim":"Splitting [1,2] at 3/2 and bounding 1/t on each subinterval gives 7/12 <= L(2) <= 5/6.","step":"1.1","inputs":["thm-monotonicity-of-the-integral","thm-additivity-over-subintervals","rational arithmetic"]},
+        {"id":"compare-e","claim":"Hence L(2)<1 while L(4)=2L(2)>1, so strict increase and L(e)=1 give 2<e<4.","step":"1.2","inputs":["1.1","thm-integral-logarithm-product-law","cor-e-is-the-unique-unit-hyperbolic-area"]},
+        {"id":"sharper","claim":"The sharper published estimate 2<e<3 is cited without being reproved.","step":"1.3","inputs":["cor-two-less-than-e-less-than-three"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"Both integration subintervals are nonempty."},
+        {"case":"zero","status":"checked","evidence":"All integration points are at least one, so 1/t has no zero denominator."},
+        {"case":"one","status":"checked","evidence":"The target area one is compared strictly with both bounds."},
+        {"case":"degenerate","status":"checked","evidence":"The split point 3/2 lies strictly inside [1,2]."},
+        {"case":"endpoints","status":"checked","evidence":"Monotonicity bounds include both subinterval endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The split and all rational bounds are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The example establishes inequalities."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The example establishes inequalities."}
+      ],
+      "finite_smoke": []
+    }
+  }
+}

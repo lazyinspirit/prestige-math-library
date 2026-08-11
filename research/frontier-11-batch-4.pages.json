@@ -1,0 +1,620 @@
+[
+  {
+    "order": 84,
+    "id": "the-determinant-of-a-linear-operator",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "The Determinant of a Linear Operator, Cofactors and Cramer's Rule",
+    "companion": "the-determinant-of-a-linear-operator-examples",
+    "requires": [
+      "determinants-of-matrices-over-a-commutative-ring",
+      "gaussian-elimination-and-row-reduction"
+    ],
+    "items": [
+      {
+        "id": "def-determinant-of-a-linear-operator",
+        "kind": "definition",
+        "title": "The determinant of an endomorphism of a finite-dimensional vector space, defined from its matrix in an ordered basis",
+        "deps": [
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-determinant-of-a-square-matrix",
+          "def-dimension"
+        ]
+      },
+      {
+        "id": "thm-operator-determinant-is-basis-independent",
+        "kind": "theorem",
+        "title": "The determinant of a linear operator is independent of the chosen ordered basis",
+        "strategy": "If A and B are the matrices of T in two ordered bases, the change-of-basis theorem gives B=P^{-1}AP for an invertible transition matrix P. Apply the already-published similarity invariance of the matrix determinant. Treat the zero-dimensional convention det(T)=1 separately.",
+        "deps": [
+          "def-determinant-of-a-linear-operator",
+          "thm-similarity-is-an-equivalence-relation-and-models-basis-change",
+          "cor-determinant-is-invariant-under-similarity"
+        ]
+      },
+      {
+        "id": "thm-operator-determinant-is-multiplicative",
+        "kind": "theorem",
+        "title": "For endomorphisms S and T of one finite-dimensional vector space, det(ST)=det(S)det(T)",
+        "strategy": "Choose one ordered basis. The matrix of ST is the product of the matrices of S and T, and the published matrix determinant is multiplicative over the underlying field. The zero-dimensional case reads 1=1 times 1.",
+        "deps": [
+          "thm-operator-determinant-is-basis-independent",
+          "thm-matrix-of-a-composite-is-the-product",
+          "thm-determinant-multiplicative"
+        ]
+      },
+      {
+        "id": "cor-operator-determinant-by-row-reduction",
+        "kind": "corollary",
+        "title": "The determinant of an operator can be computed from any representing matrix by row reduction while tracking swaps and row scalings",
+        "strategy": "Choose any basis, row-reduce its representing matrix to echelon form, and use the published determinant effects of row operations and the diagonal product for a triangular matrix. Basis independence licenses the initial choice; row additions contribute no factor.",
+        "deps": [
+          "thm-operator-determinant-is-basis-independent",
+          "thm-gaussian-elimination-produces-row-echelon-form",
+          "thm-determinant-under-elementary-row-operations",
+          "thm-determinant-of-a-triangular-matrix"
+        ]
+      },
+      {
+        "id": "def-matrix-minors-cofactors-and-adjugate",
+        "kind": "definition",
+        "title": "Deleted-row-and-column minors, cofactors, the cofactor matrix and the adjugate over a commutative ring",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix",
+          "def-ring-matrix-product-identity-and-transpose"
+        ]
+      },
+      {
+        "id": "thm-laplace-cofactor-expansion",
+        "kind": "theorem",
+        "title": "Laplace expansion computes the determinant along every row and every column over a commutative ring",
+        "strategy": "For a fixed row, partition the Leibniz sum according to the selected column, delete that row and column, and identify the permutation sign with the cofactor sign. Obtain the column formula either by the same partition or by applying the row formula to the transpose and using determinant invariance under transpose. Include n=1 using the empty-minor convention.",
+        "deps": [
+          "def-matrix-minors-cofactors-and-adjugate",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-of-transpose",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized"
+        ]
+      },
+      {
+        "id": "thm-adjugate-identity-over-a-commutative-ring",
+        "kind": "theorem",
+        "title": "For every positive-sized square matrix over a commutative ring, A adj(A)=adj(A) A=det(A) I",
+        "strategy": "Compute each entry of A adj(A). A diagonal entry is the Laplace expansion along the corresponding row; an off-diagonal entry is the same cofactor sum for a matrix with one row replaced by another, hence has determinant zero by alternation. Apply the column version for adj(A)A. Do not infer the off-diagonal zeros merely from singularity over a ring.",
+        "deps": [
+          "thm-laplace-cofactor-expansion",
+          "cor-determinant-vanishes-with-a-zero-or-repeated-column",
+          "cor-determinant-is-alternating-multilinear-in-the-rows",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+        "kind": "corollary",
+        "title": "A positive-sized square matrix over a commutative ring is invertible if and only if its determinant is a unit",
+        "strategy": "The forward implication is the published unit-determinant corollary. Conversely, if u=det(A) is a unit, multiply the adjugate identity by u^{-1} to exhibit u^{-1}adj(A) as a two-sided inverse.",
+        "deps": [
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "cor-invertible-matrix-has-unit-determinant",
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "lem-ring-units-form-a-group"
+        ]
+      },
+      {
+        "id": "cor-inverse-matrix-by-adjugate",
+        "kind": "corollary",
+        "title": "If det(A) is a unit, then A^{-1}=det(A)^{-1} adj(A)",
+        "strategy": "Scale both sides of the two adjugate identities by the inverse of det(A), and invoke uniqueness of a two-sided matrix inverse.",
+        "deps": [
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "lem-inverse-unique"
+        ]
+      },
+      {
+        "id": "lem-determinant-rank-one-update-over-a-commutative-ring",
+        "kind": "lemma",
+        "title": "For A in M_n(R) and columns u,v over a commutative ring, det(A+uv^T)=det(A)+v^T adj(A)u",
+        "strategy": "Expand det(A+uv^T) multilinearly in its columns. The empty choice gives det(A); every term choosing two or more columns from uv^T vanishes because those columns are scalar multiples of u. For the singleton choice j, expand the determinant with column j replaced by u along that column, obtaining v_j sum_i C_ij u_i. Summing over j is v^T adj(A)u. State n>=1 explicitly.",
+        "deps": [
+          "def-matrix-minors-cofactors-and-adjugate",
+          "thm-laplace-cofactor-expansion",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "thm-adjugate-is-equivariant-under-similarity",
+        "kind": "theorem",
+        "title": "Over a commutative ring, adj(P^{-1}AP)=P^{-1}adj(A)P for every invertible P",
+        "strategy": "Put C=P^{-1}AP. Compare det(C+uv^T) in two ways. The rank-one update formula gives det(C)+v^T adj(C)u. Similarity invariance rewrites it as det(A+(Pu)(v^T P^{-1})), and a second rank-one update gives det(A)+v^T P^{-1}adj(A)Pu. Cancel det(C)=det(A), then choose u and v to be standard coordinate columns to identify every entry. This works for singular A and avoids any undeveloped rational-function field.",
+        "deps": [
+          "lem-determinant-rank-one-update-over-a-commutative-ring",
+          "cor-determinant-is-invariant-under-similarity",
+          "def-invertible-matrix-and-similarity-over-a-commutative-ring",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "def-coordinate-endomorphism-over-a-commutative-ring",
+        "kind": "definition",
+        "title": "For A in M_n(R), the coordinate endomorphism T_A:R^n to R^n, with det(T_A):=det(A) and adj(T_A):=T_adj(A)",
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-ring-matrix-product-identity-and-transpose",
+          "def-determinant-of-a-square-matrix",
+          "def-matrix-minors-cofactors-and-adjugate"
+        ]
+      },
+      {
+        "id": "thm-cramers-rule-over-a-commutative-ring",
+        "kind": "theorem",
+        "title": "Cramer's rule over a commutative ring: every solution satisfies det(A)x_j=det(A_j(b)), and a unit determinant gives the unique quotient formula",
+        "strategy": "For Ax=b, replace column j of A by b and use b=sum_k x_k A_k. Column multilinearity kills every term except k=j, giving det(A_j(b))=x_j det(A). If det(A) is a unit, the adjugate formula constructs the solution with those coordinates and invertibility gives uniqueness. State n>=1 and do not divide by a merely nonzero non-unit.",
+        "deps": [
+          "thm-laplace-cofactor-expansion",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "cor-inverse-matrix-by-adjugate",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "cor-cramers-rule-over-a-field",
+        "kind": "corollary",
+        "title": "Over a field, for each right-hand side b, Ax=b has a unique solution exactly when det(A) is nonzero, and then Cramer's quotient formula holds",
+        "strategy": "If det(A) is nonzero, it is a unit and the ring theorem supplies the unique Cramer solution. Conversely, if Ax=b has one unique solution x, every z in the kernel would make x+z another solution, so the kernel is zero; the invertible-matrix theorem makes A invertible, and the determinant is nonzero. State n>=1.",
+        "deps": [
+          "thm-cramers-rule-over-a-commutative-ring",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "thm-invertible-matrix-theorem",
+          "thm-ring-matrix-arithmetic-laws",
+          "lem-field-is-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-operator-invertible-iff-determinant-nonzero",
+        "kind": "theorem",
+        "title": "A finite-dimensional linear operator over a field is invertible if and only if its determinant is nonzero",
+        "strategy": "Choose a basis. The operator is invertible exactly when its representing matrix is invertible; over a field the unit-determinant criterion is the nonzero-determinant criterion. The unique endomorphism of the zero space is invertible and has determinant 1.",
+        "deps": [
+          "thm-operator-determinant-is-basis-independent",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "thm-invertible-matrices-correspond-to-linear-isomorphisms",
+          "lem-field-is-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "cor-operator-determinant-on-the-general-linear-group",
+        "kind": "corollary",
+        "title": "Determinant is a group homomorphism GL(V) to F^times, and det(T^{-1})=det(T)^{-1}",
+        "strategy": "Multiplicativity and det(I)=1 put invertible operators in the unit group. Apply multiplicativity to TT^{-1}=I to obtain the inverse formula.",
+        "deps": [
+          "thm-operator-determinant-is-multiplicative",
+          "thm-operator-invertible-iff-determinant-nonzero",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "lem-ring-units-form-a-group"
+        ]
+      },
+      {
+        "id": "def-adjugate-of-a-linear-operator",
+        "kind": "definition",
+        "title": "The adjugate of an operator on a positive-dimensional finite-dimensional vector space, defined by the adjugate matrix in any basis",
+        "deps": [
+          "def-matrix-minors-cofactors-and-adjugate",
+          "thm-adjugate-is-equivariant-under-similarity",
+          "thm-two-sided-change-of-basis-formula"
+        ]
+      },
+      {
+        "id": "thm-operator-adjugate-identity",
+        "kind": "theorem",
+        "title": "For a positive-dimensional finite-dimensional operator, T adj(T)=adj(T)T=det(T) I",
+        "strategy": "Choose a basis and take matrices. The two composites have matrices A adj(A) and adj(A)A, which equal det(A)I by the ring-level adjugate identity; basis independence identifies det(A) with det(T). Equality of representing matrices gives equality of operators.",
+        "deps": [
+          "def-adjugate-of-a-linear-operator",
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "thm-operator-determinant-is-basis-independent",
+          "thm-matrix-of-a-composite-is-the-product"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 85,
+    "id": "the-determinant-of-a-linear-operator-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "The Determinant of a Linear Operator, Cofactors and Cramer's Rule: Examples and Counterexamples",
+    "requires": [
+      "the-determinant-of-a-linear-operator"
+    ],
+    "items": [
+      {
+        "id": "ex-singular-projection-has-zero-determinant",
+        "kind": "example",
+        "title": "A nonidentity projection of the plane has determinant zero and is not invertible",
+        "strategy": "For T(x,y)=(x,0), compute the diagonal matrix diag(1,0), its determinant, kernel and image, and compare with the operator invertibility criterion.",
+        "deps": [
+          "def-determinant-of-a-linear-operator",
+          "thm-operator-invertible-iff-determinant-nonzero",
+          "thm-reals-field"
+        ]
+      },
+      {
+        "id": "ex-determinant-in-two-ordered-bases",
+        "kind": "example",
+        "title": "One operator has matrices diag(2,3) and [[2,0],[1,3]] in two bases, both with determinant 6",
+        "strategy": "Take T(x,y)=(2x,3y), the standard basis E, and B=((1,1),(0,1)). Compute P_{E<-B}, P^{-1}AP, and both determinants explicitly, checking the abstract change-of-basis proof numerically.",
+        "deps": [
+          "thm-operator-determinant-is-basis-independent",
+          "thm-two-sided-change-of-basis-formula",
+          "def-determinant-of-a-square-matrix",
+          "thm-reals-field"
+        ]
+      },
+      {
+        "id": "ex-doubling-integers-has-nonunit-determinant",
+        "kind": "example",
+        "title": "Multiplication by 2 on Z is injective but not surjective: its determinant is the non-unit 2, its adjugate is integral, and its inverse exists only over Q",
+        "strategy": "Represent n->2n by the 1 by 1 integer matrix [2]. Its determinant is 2 and its adjugate is [1]. Cancellation in Z proves injectivity, while 1 has no preimage proves nonsurjectivity; over Q the inverse matrix is [1/2].",
+        "deps": [
+          "def-coordinate-endomorphism-over-a-commutative-ring",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "cor-inverse-matrix-by-adjugate",
+          "thm-int-comm-ring",
+          "lem-int-cancellation",
+          "lem-units-of-z",
+          "thm-rat-field"
+        ]
+      },
+      {
+        "id": "ex-four-by-four-determinant-by-cofactors-and-row-reduction",
+        "kind": "example",
+        "title": "A sparse 4 by 4 determinant is 30 by both cofactor expansion and row reduction",
+        "strategy": "Use A=[[1,2,0,0],[0,3,0,0],[4,8,2,1],[0,0,0,5]]. Expand along the last row and then a sparse column to obtain 30. Separately replace row 3 by row 3 minus 4 row 1, producing a triangular matrix with diagonal 1,3,2,5 and no determinant-changing operation.",
+        "deps": [
+          "thm-laplace-cofactor-expansion",
+          "thm-determinant-under-elementary-row-operations",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "ex-three-by-three-inverse-by-adjugate",
+        "kind": "example",
+        "title": "The adjugate gives the inverse of a three by three rational matrix with determinant 3",
+        "strategy": "For A=[[1,2,0],[0,1,1],[1,0,1]], compute the cofactor matrix [[1,1,-1],[-2,1,2],[2,-1,1]], transpose it to adj(A)=[[1,-2,2],[1,1,-1],[-1,2,1]], and verify A adj(A)=3I. Since 3 is a unit in Q, conclude A^{-1}=(1/3)adj(A) and multiply once more to check.",
+        "deps": [
+          "def-matrix-minors-cofactors-and-adjugate",
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "cor-inverse-matrix-by-adjugate",
+          "thm-rat-field"
+        ]
+      },
+      {
+        "id": "ex-cramers-rule-two-by-two-system",
+        "kind": "example",
+        "title": "Cramer's rule solves 2x+y=5 and x-y=1 as (x,y)=(2,1)",
+        "strategy": "For A=[[2,1],[1,-1]] and b=(5,1), compute det(A)=-3, the two replacement determinants -6 and -3, divide in Q or R, and verify the resulting pair in both equations.",
+        "deps": [
+          "cor-cramers-rule-over-a-field",
+          "def-determinant-of-a-square-matrix",
+          "thm-rat-field"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 178.1,
+    "id": "the-integral-logarithm-and-its-characterisations",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "The Integral Logarithm and the Equivalence of Its Characterisations",
+    "companion": "the-integral-logarithm-and-its-characterisations-examples",
+    "requires": [
+      "the-logarithm-and-general-powers"
+    ],
+    "items": [
+      {
+        "id": "def-integral-logarithm",
+        "kind": "definition",
+        "title": "The integral logarithm L(x):=integral from 1 to x of dt/t for x>0",
+        "deps": [
+          "def-oriented-integral",
+          "thm-algebra-of-continuous-functions",
+          "thm-continuous-implies-integrable"
+        ]
+      },
+      {
+        "id": "thm-integral-logarithm-derivative-and-normalisation",
+        "kind": "theorem",
+        "title": "The integral logarithm satisfies L'(x)=1/x for x>0 and L(1)=0",
+        "strategy": "Choose a compact positive interval containing both x and 1. Additivity and the orientation convention rewrite L near x as a constant plus an integral function with a fixed lower endpoint, so the first FTC gives L'(x)=1/x on either side of 1. The oriented integral from 1 to 1 is zero. No exponential or logarithm result is cited.",
+        "deps": [
+          "def-integral-logarithm",
+          "thm-ftc-first-part",
+          "thm-additivity-over-subintervals",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "cor-integral-logarithm-is-strictly-increasing",
+        "kind": "corollary",
+        "title": "The integral logarithm is continuous and strictly increasing on (0,infinity)",
+        "strategy": "Differentiability gives continuity. For 0<a<b, the mean value theorem gives L(b)-L(a)=(b-a)/c for some c in (a,b), which is positive.",
+        "deps": [
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "cor-differentiable-implies-continuous",
+          "cor-mean-value-theorem"
+        ]
+      },
+      {
+        "id": "thm-integral-logarithm-product-law",
+        "kind": "theorem",
+        "title": "The integral logarithm satisfies L(xy)=L(x)+L(y) for all positive x and y",
+        "strategy": "Fix y>0 and set h(x)=L(xy)-L(x). By the chain rule and L'=1/x, h'(x)=y/(xy)-1/x=0. The zero-derivative theorem makes h constant, and h(1)=L(y)-L(1)=L(y). This proof deliberately uses no substitution theorem and no exponential.",
+        "deps": [
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "thm-chain-rule",
+          "cor-zero-derivative-implies-constant"
+        ]
+      },
+      {
+        "id": "cor-integral-logarithm-reciprocals-and-integer-powers",
+        "kind": "corollary",
+        "title": "L(1/x)=-L(x), L(x^n)=nL(x), and in particular L(2^n)=nL(2)",
+        "strategy": "Apply the product law to x(1/x)=1 for reciprocals and induct on the natural exponent for powers, with n=0 using L(1)=0. Negative integer powers follow from reciprocals. Since L is strictly increasing, L(2)>0.",
+        "deps": [
+          "thm-integral-logarithm-product-law",
+          "cor-integral-logarithm-is-strictly-increasing",
+          "def-integer-power",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "thm-integral-logarithm-is-unbounded",
+        "kind": "theorem",
+        "title": "The integral logarithm is unbounded above and below",
+        "strategy": "Because L(2)>0, the Archimedean property makes nL(2) exceed any prescribed real bound. The power formula identifies this value with L(2^n), and the reciprocal formula gives L(2^{-n})=-nL(2) for the lower bound. No exponential is used.",
+        "deps": [
+          "cor-integral-logarithm-reciprocals-and-integer-powers",
+          "thm-of-archimedean"
+        ]
+      },
+      {
+        "id": "thm-integral-logarithm-is-a-bijection",
+        "kind": "theorem",
+        "title": "L:(0,infinity) to R is a continuous strictly increasing bijection",
+        "strategy": "Strict increase gives injectivity. For a target r, choose positive a<b with L(a)<r<L(b) using two-sided unboundedness, then apply the intermediate value theorem on [a,b] for surjectivity. Continuity comes from differentiability.",
+        "deps": [
+          "cor-integral-logarithm-is-strictly-increasing",
+          "thm-integral-logarithm-is-unbounded",
+          "thm-intermediate-value"
+        ]
+      },
+      {
+        "id": "def-integral-exponential",
+        "kind": "definition",
+        "title": "The integral exponential E:R to (0,infinity) as the inverse of L",
+        "deps": [
+          "thm-integral-logarithm-is-a-bijection",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "cor-integral-exponential-addition-law",
+        "kind": "corollary",
+        "title": "The inverse E satisfies E(a+b)=E(a)E(b)",
+        "strategy": "The product law gives L(E(a)E(b))=a+b=L(E(a+b)); injectivity of L gives the result. This remains entirely inside the integral construction.",
+        "deps": [
+          "def-integral-exponential",
+          "thm-integral-logarithm-product-law"
+        ]
+      },
+      {
+        "id": "thm-integral-exponential-solves-the-normalised-ivp",
+        "kind": "theorem",
+        "title": "The inverse E is differentiable, E'=E, and E(0)=1",
+        "strategy": "Apply the derivative-of-an-inverse theorem to L at E(y): E'(y)=1/L'(E(y))=E(y). Since L(1)=0 and E is its inverse, E(0)=1. This proof contains no reference to the published exponential.",
+        "deps": [
+          "def-integral-exponential",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "thm-derivative-of-an-inverse"
+        ]
+      },
+      {
+        "id": "thm-integral-exponential-agrees-with-exponential",
+        "kind": "theorem",
+        "title": "The integral exponential E is the published exponential function",
+        "strategy": "The preceding theorem gives E'=E and E(0)=1. Invoke thm-exponential-ivp-uniqueness once to conclude E=exp. This is the sole bridge from the integral construction to exp.",
+        "deps": [
+          "thm-integral-exponential-solves-the-normalised-ivp",
+          "thm-exponential-ivp-uniqueness"
+        ]
+      },
+      {
+        "id": "cor-integral-logarithm-agrees-with-natural-logarithm",
+        "kind": "corollary",
+        "title": "The integral logarithm L is the published natural logarithm",
+        "strategy": "L is the inverse of E, E=exp by the bridge theorem, and the published log is defined as exp^{-1}; uniqueness of inverse functions gives L=log.",
+        "deps": [
+          "thm-integral-exponential-agrees-with-exponential",
+          "def-integral-exponential",
+          "def-natural-logarithm"
+        ]
+      },
+      {
+        "id": "cor-e-is-the-unique-unit-hyperbolic-area",
+        "kind": "corollary",
+        "title": "The number e is the unique x>0 satisfying integral from 1 to x of dt/t=1",
+        "strategy": "Since E=exp, E(1)=exp(1)=e. Inverse identities give L(e)=1, and strict increase of L gives uniqueness.",
+        "deps": [
+          "thm-integral-exponential-agrees-with-exponential",
+          "cor-integral-logarithm-is-strictly-increasing",
+          "def-real-exponential-function-and-e"
+        ]
+      },
+      {
+        "id": "thm-logarithm-continuous-functional-equation-characterisation",
+        "kind": "theorem",
+        "title": "Log is the unique continuous f:(0,infinity) to R with f(xy)=f(x)+f(y) and f(e)=1",
+        "strategy": "Set g(t)=f(E(t)). The integral-exponential addition law makes g additive, and E is continuous because E is differentiable. Cauchy regularity gives g(t)=ct. The single bridge gives E(1)=exp(1)=e, so g(1)=f(e)=1 fixes c=1. For x>0, x=E(L(x)), hence f(x)=L(x)=log x. Conversely, the published log has the required law, continuity and normalisation.",
+        "deps": [
+          "def-integral-exponential",
+          "cor-integral-exponential-addition-law",
+          "thm-integral-exponential-solves-the-normalised-ivp",
+          "thm-integral-exponential-agrees-with-exponential",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "thm-cauchy-functional-equation-regularity",
+          "def-real-exponential-function-and-e",
+          "cor-differentiable-implies-continuous",
+          "thm-natural-logarithm-laws",
+          "thm-composition-of-continuous-functions"
+        ]
+      },
+      {
+        "id": "thm-logarithm-differentiable-functional-equation-characterisation",
+        "kind": "theorem",
+        "title": "Log is the unique f with f(xy)=f(x)+f(y) that is differentiable at 1 with f'(1)=1",
+        "strategy": "The functional equation gives f(1)=0. Rewriting f(x+h)-f(x)=f(1+h/x)-f(1) and scaling the difference quotient proves differentiability at every x with f'(x)=f'(1)/x=1/x. Therefore (f-L)'=0 and f(1)=L(1)=0, so f=L=log.",
+        "deps": [
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "thm-integral-logarithm-derivative-and-normalisation",
+          "cor-zero-derivative-implies-constant",
+          "cor-differentiable-implies-continuous",
+          "def-derivative"
+        ]
+      },
+      {
+        "id": "cor-continuous-logarithmic-functions-form-a-one-parameter-family",
+        "kind": "corollary",
+        "title": "Every continuous f with f(xy)=f(x)+f(y) is f(x)=c log x for a unique c, including c=0",
+        "strategy": "Apply the same transport g=f composed with E. The addition law and continuity of E make g continuous and additive, so Cauchy regularity gives g(t)=ct with c=g(1)=f(e). For x>0, x=E(L(x)) gives f(x)=cL(x)=c log x. Uniqueness follows by evaluating at e. For c nonzero this is the constant-multiple form underlying logarithms to other bases; c=0 is the trivial solution and requires no division.",
+        "deps": [
+          "def-integral-exponential",
+          "cor-integral-exponential-addition-law",
+          "thm-integral-exponential-solves-the-normalised-ivp",
+          "thm-integral-exponential-agrees-with-exponential",
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "thm-cauchy-functional-equation-regularity",
+          "def-real-exponential-function-and-e",
+          "def-logarithm-to-a-base",
+          "cor-differentiable-implies-continuous",
+          "thm-composition-of-continuous-functions"
+        ]
+      },
+      {
+        "id": "lem-log-series-extends-by-the-product-law",
+        "kind": "lemma",
+        "title": "The Mercator series, its value at 1 and the product law determine log on all positive reals, while the series alone is only local",
+        "strategy": "For every x>0, use the Archimedean property to choose a natural k with 0<x/2^k<2, then write x=2^k(1+u) with |u|<1. Any product-law function agreeing with the Mercator series on 1+u and at 2 must have f(x)=k f(2)+f(1+u), so at most one extension exists; the published log series and log laws supply existence. State explicitly that this is continuation data, not convergence of the original series at x-1.",
+        "deps": [
+          "thm-log-one-plus-x-power-series",
+          "thm-natural-logarithm-laws",
+          "thm-of-archimedean",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "thm-logarithm-definition-equivalence",
+        "kind": "theorem",
+        "title": "Five characterisations of the natural logarithm are equivalent: inverse exponential, integral, continued Mercator series, Landau root limit and the normalised functional equation",
+        "strategy": "Use the single E=exp bridge and inversion for the integral characterisation; cite the published Mercator and Landau theorems for their local or pointwise formulas; use the extension lemma to state exactly what extra product-law data makes the series global; and use the continuous functional-equation uniqueness theorem for the fifth characterisation. Distinguish full-domain definitions from the local series plus continuation rule.",
+        "deps": [
+          "cor-integral-logarithm-agrees-with-natural-logarithm",
+          "thm-logarithm-continuous-functional-equation-characterisation",
+          "lem-log-series-extends-by-the-product-law",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "thm-log-one-plus-x-power-series",
+          "thm-landau-logarithm-limit"
+        ]
+      },
+      {
+        "id": "rem-logarithm-roadmap-and-circularity",
+        "kind": "remark",
+        "title": "Roadmap and non-circularity of the logarithm characterisations",
+        "deps": [
+          "thm-logarithm-definition-equivalence",
+          "thm-exponential-definition-equivalence"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 178.2,
+    "id": "the-integral-logarithm-and-its-characterisations-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "The Integral Logarithm and Its Characterisations: Examples and Counterexamples",
+    "requires": [
+      "the-integral-logarithm-and-its-characterisations"
+    ],
+    "items": [
+      {
+        "id": "ex-log-two-from-four-characterisations",
+        "kind": "example",
+        "title": "Log 2 from four characterisations: hyperbolic area, the alternating harmonic series, Landau iterates and exp^{-1}(2)",
+        "strategy": "List the four equal quantities integral_1^2 dt/t, sum_{n>=1}(-1)^{n+1}/n, lim 2^n(2^{1/2^n}-1), and the unique y with exp(y)=2. Cite the A-page series and Landau results directly, not the already-published B-page example, and identify all four through the equivalence theorem.",
+        "deps": [
+          "thm-logarithm-definition-equivalence",
+          "thm-log-one-plus-x-power-series",
+          "thm-landau-logarithm-limit",
+          "def-natural-logarithm"
+        ]
+      },
+      {
+        "id": "ex-logarithmic-functions-without-normalisation",
+        "kind": "example",
+        "title": "Dropping f(e)=1 leaves the whole family c log, including logarithms to other bases and the zero function",
+        "strategy": "Verify directly that c log(xy)=c log x+c log y, compute f(e)=c, and compare c=1/log b with log_b for b>0, b not equal to 1. Include c=0 to show why the family is slightly larger than base logarithms.",
+        "deps": [
+          "cor-continuous-logarithmic-functions-form-a-one-parameter-family",
+          "def-logarithm-to-a-base",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "cex-discontinuous-logarithmic-functional-equation",
+        "kind": "counterexample",
+        "title": "Assuming choice, a Hamel-basis additive map transported through exp gives a discontinuous logarithmic function that is not c log",
+        "strategy": "From a Hamel basis choose a coefficient map g:R->R that is additive and not scalar multiplication. Define f(exp t)=g(t), which is well-defined because exp is bijective. The exponential law gives f(xy)=f(x)+f(y). If f were continuous, then g=f composed with exp would be continuous and Cauchy regularity would force g to be scalar, a contradiction.",
+        "deps": [
+          "lem-hamel-basis-exists",
+          "thm-cauchy-functional-equation-regularity",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "def-axiom-of-choice",
+          "thm-composition-of-continuous-functions"
+        ]
+      },
+      {
+        "id": "cex-mercator-series-does-not-define-logarithm-globally",
+        "kind": "counterexample",
+        "title": "For every x>2 the uncontinued Mercator series at u=x-1 diverges",
+        "strategy": "For u=x-1>1, the absolute ratio of successive terms u^n/n tends to u>1; the ratio test gives divergence (equivalently the terms do not tend to zero). Contrast this with the product-law continuation in the A-page lemma.",
+        "deps": [
+          "lem-log-series-extends-by-the-product-law",
+          "thm-ratio-test",
+          "lem-nth-term-test"
+        ]
+      },
+      {
+        "id": "ex-unit-hyperbolic-area-brackets-e",
+        "kind": "example",
+        "title": "Integral bounds alone give 2<e<4; the sharper published bound is 2<e<3",
+        "strategy": "Split [1,2] at 3/2. Monotonicity gives 7/12<=L(2)<=5/6, hence L(2)<1 and L(4)=2L(2)>1. Since L(e)=1 and L is strictly increasing, 2<e<4. Cite, but do not reprove, the sharper 2<e<3 corollary.",
+        "deps": [
+          "cor-e-is-the-unique-unit-hyperbolic-area",
+          "thm-integral-logarithm-product-law",
+          "thm-monotonicity-of-the-integral",
+          "thm-additivity-over-subintervals",
+          "cor-two-less-than-e-less-than-three"
+        ]
+      }
+    ]
+  }
+]
