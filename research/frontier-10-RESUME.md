@@ -111,7 +111,7 @@ the first step-0 failure of this run.
   `research/frontier-10-alpha-step3-scaffold-review.md` exists and every pair is
   `sufficient`.
 
-## State — STEP 6 COMPLETE, gate CLEAR (steps 0–6 all clear)
+## State — STEP 8 COMPLETE, gate CLEAR (steps 0–8 all clear)
 
 - **Steps 0–5 CLEAR** (unchanged; see below for what step 4 caught).
 - **Step 6 CLEAR.** `node tools/gates.mjs --step 6 --run frontier-10` → 15/15
@@ -223,81 +223,71 @@ syllabus row → Rudin ch. 6) and L2 (batch 8's Theorem 6.9 home →
 
 ## Exact next action
 
-**Step 8 ROUND 2 adjudication is COMPLETE. The next action is the round-2
-targeted rejudge.**
+**STEP 8 IS COMPLETE AND CLEAR. The next action is step 9, the scope-denial
+sweep, then the step-10 rundown and the owner pause.**
 
-Round 1's 12 repairs were rejudged: 10 `keep`, 14 rejections over 10 items.
-Alpha adjudicated all 14 (ledger now 453 rows): **10 `confirmed_fatal` over 8
-items**, 4 `confirmed_nonfatal`, 0 `false_positive`, every row carrying
-`item_sha256` verified against both the `pre-step8b` snapshot and the judges' own
-recorded hash. `step8-guard` passes: 8 changed, 8/8 licensed. Two items cleared
-both lanes outright and are done
-(`prop-maximally-planar-edge-characterisation`,
-`def-isomorphism-groupoid-and-connected-category`). Full account in
-`research/frontier-10-alpha-report.md` §"Stage 3, round 2".
+Round 3 was the terminal repair round and it closed. Of the five items still
+rejected after round 2: **three closed nonfatal with no mutation, two were
+repaired once more, both cleared both lanes, and nothing was parked.** Ledger now
+460 rows; every round-3 row carries `item_sha256` matching its `pre-step8c`
+snapshot prefix. `step8-guard`: 3480 items at baseline, 2 changed, 2/2 licensed.
+All six step-8 gates pass. Full account in
+`research/frontier-10-alpha-report.md` §"Stage 3, round 3".
 
-Rejudge **exactly these 8 items** and nothing else — the four nonfatal closures
-changed by not a byte, and `level-coverage` accepts a verdict cast against
-byte-identical text:
+| item | lane(s) | outcome |
+|---|---|---|
+| `ex-row-echelon-form-is-not-unique-but-rref-is` | both | repaired → both lanes pass |
+| `prop-maximal-plane-triangulation-characterisation` | both | repaired → both lanes pass |
+| `cor-planar-simple-graph-edge-bound` | Terra | closed `confirmed_nonfatal` |
+| `thm-dirichlet-test-for-improper-integrals` | Terra | closed `confirmed_nonfatal` |
+| `lem-colour-focussing-for-arithmetic-progressions` | DeepSeek | closed `confirmed_nonfatal` |
 
-```
-JUDGE_LINEUP=deepseek+terra node tools/judge-sweep.mjs --items \
-  prop-maximal-plane-triangulation-characterisation \
-  cor-planar-simple-graph-edge-bound \
-  cor-triangle-free-planar-edge-bound \
-  thm-dirichlet-test-for-improper-integrals \
-  ex-finite-step-integrator-weighted-jump-sum \
-  ex-row-echelon-form-is-not-unique-but-rref-is \
-  lem-colour-focussing-for-arithmetic-progressions \
-  lem-factor-elements-act-on-reduced-syllable-words
-```
+Round history, for the record: round 1 adjudicated 322 live rejections over 439
+rows (18 `confirmed_fatal` / 12 items, 412 `confirmed_nonfatal`, 9
+`false_positive`); round 2 adjudicated 14 over 10 items (10 fatal / 8 items);
+round 3 adjudicated 7 over 5 items (4 fatal / 2 items, 3 nonfatal). **Zero
+`false_positive` after round 1 and zero parked items.**
 
-Round-1 history, for the record: 322 live rejections adjudicated over 439 rows —
-18 `confirmed_fatal` over 12 items, 412 `confirmed_nonfatal`, 9 `false_positive`.
+Receipts are current: merged contract rebuilt from the batch files
+(`research/frontier-10-dispatch/step8c-contract-refresh.mjs`),
+`frontier-10-audit-coverage.json` at 75 reasoned drift rows with
+`manifest_sha256` `82d5a8bb…`, `frontier-10-spine-audit.json` rebound to
+`12b82640…` carrying all 60 attestations forward (scope set identical, no
+`content_sha256` moved), touch snapshot `after-step8c` recorded.
 
-Then, **in this order**:
+### The planar root cause, restated — the dispatch's open question, answered
 
-1. Refresh the spine receipt (`tools/spine-audit.mjs`) — it is hash-bound and
-   lapsed when the 12 items changed. It must come **after** the rejudge, and its
-   reading must be independent of the repairer.
-2. Re-run `node tools/gates.mjs --step 8 --run frontier-10`. The only remaining
-   `level-coverage` errors right now are the 8 `judge-coverage-missing` and the
-   lapsed spine receipt; both clear at that point.
-3. Step 9 scope-denial sweep, then step 10 rundown and the owner pause.
+`lem-plane-face-handshake-by-girth` is **no longer the live defect.** Round 2's
+inline derivation of the handshake identity in `cor-planar-simple-graph-edge-bound`
+worked, and DeepSeek's round-3 verdict validates that equality case by name.
+Neither round-3 planar rejection mentions the lemma.
 
-Alpha closed the receipt errors on the way. Round 1 closed two step-6 licensing
-repairs that landed after `research/frontier-10-audit-coverage.json` was written;
-round 2's nine added dependency edges moved the drift set again, from 72 rows to
-74, and all three affected items
-(`cor-planar-simple-graph-edge-bound`,
-`prop-maximal-plane-triangulation-characterisation`,
-`thm-dirichlet-test-for-improper-integrals`) carry reasoned `plan_reconciliation`
-rows with `manifest_sha256` rebound. `item_scope` (584) and `proof_scope` (475)
-unchanged throughout.
+What round 3 found instead is a **second instance of the same pattern**:
+`thm-polygonal-jordan-curve` proves, in its own steps 1.1 and 3.1, that the two
+complementary regions of a polygon are exactly the even and odd crossing-parity
+classes — and exports only the region count. That unexported half is precisely
+what `prop-maximal-plane-triangulation-characterisation` step 5.1 needed, and R1
+licensed no edit to the theorem. The consumer proves it locally instead, as its
+new step 1.3, from four facts it already cited. Two "proves more than it exports"
+lemmas on one page is a scaffolding finding, not a lemma finding.
 
-### Mechanism gap found at round 2 — worth fixing before the next run
+### Carried to the step-10 owner report — six unlicensed-at-step-8 items
 
-`gates.mjs` step 8 runs `step8-guard`, `impact-audit` and `level-coverage` only.
-It runs **no `proof-contract`, `finite-smoke` or `risk-report`**, so a step-8
-fatal repair can invalidate its own proof contract and nothing says so. It had:
-`proof-contract --strict` was failing on **9 errors at HEAD** before round 2
-touched anything, and `risk-report --require-reviewed` on 1, all left by round 1
-and the step-6 repairs before it. Round 2 fixed every one and rewrote the eight
-repaired items' contracts, in the batch files so a re-merge cannot clobber them
-(`research/frontier-10-dispatch/step8b-contract-refresh.mjs`). All three tools are
-now clean. `QUALITY-CONTROLS.md` already requires them after step 5 and step-6
-repairs; step 8 was simply never added to the table.
+1. `prop-maximally-planar-edge-characterisation` [L1] needs "connected".
+2. `lem-plane-face-handshake-by-girth` should export $\sum_f\ell(f)=2|E|$.
+   Demoted from root cause to tidiness.
+3. **`thm-polygonal-jordan-curve` should export its parity characterisation**,
+   letting `prop-maximal-plane-triangulation-characterisation` delete step 1.3
+   and cite instead.
+4. `cor-planar-simple-graph-edge-bound` step 1.1 should cite `cor-tree-edge-count`.
+5. `lem-colour-focussing-for-arithmetic-progressions` step 1.2 should cite
+   `lem-pigeonhole`.
+6. `thm-dirichlet-test-for-improper-integrals` [L3] should restate
+   `thm-integration-by-parts` with both differentiability and both integrability
+   hypotheses; step 1.2 already verifies all of them at the point of use.
 
-### Two one-word repairs R1 blocked, for the step-10 owner report
-
-- `prop-maximally-planar-edge-characterisation` [L1] says "with equality for a
-  triangulation" where its source now says "connected plane triangulation". The
-  item passed both lanes this round, so nothing licenses the edit. Its use is
-  licensed anyway — the step has just called the graph two-connected.
-- `lem-plane-face-handshake-by-girth` proves the handshake identity
-  $\sum_f\ell(f)=2|E|$ in its step 1.1 and exports only the inequality, which is
-  the shared root of two of the four planar rejections. No rejection licenses
-  editing it, so the consumers were repaired instead.
+Items 4 to 6 are the three nonfatal closures. All six are step-6-class polish for
+the next unfrozen moment, not defects in the mathematics as published.
 
 ## Open risks
 

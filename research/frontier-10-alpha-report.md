@@ -1308,3 +1308,253 @@ need no rejudge — that is R1's exit, and taking it is what ends the loop.
 3. **`gates.mjs` step 8 should run `proof-contract`, `finite-smoke` and
    `risk-report`.** A mechanism change, so it is the orchestrator's to make, with
    `ARCHITECTURE.md` updated in the same commit.
+
+## Stage 3, round 3 — close or park, the terminal round — **COMPLETE**
+
+Five items entered this round. **Three closed with no mutation, two were repaired
+once more, and nothing was parked.** Baseline `pre-step8c` (touch snapshot 9,
+taken 2026-08-11T04:03:41Z, after the round-3 sweep and before any edit here).
+Seven adjudication rows appended, ledger now 460; every row carries the full
+`item_sha256` of the pre-edit text, each verified equal to that item's
+`pre-step8c` snapshot prefix.
+
+| item | rejecting lane(s) | outcome |
+|---|---|---|
+| `ex-row-echelon-form-is-not-unique-but-rref-is` | both | **repaired** — `confirmed_fatal`, `dependency_citation` |
+| `prop-maximal-plane-triangulation-characterisation` | both | **repaired** — `confirmed_fatal`, `logic` |
+| `cor-planar-simple-graph-edge-bound` | Terra | **closed** — `confirmed_nonfatal` |
+| `thm-dirichlet-test-for-improper-integrals` | Terra | **closed** — `confirmed_nonfatal` |
+| `lem-colour-focussing-for-arithmetic-progressions` | DeepSeek | **closed** — `confirmed_nonfatal` |
+
+### The three closures, and why each is honest rather than tired
+
+I read all three verdict histories end to end before closing anything. The
+pattern that decided all three is the same one R1's rationale predicts: each
+lane's *substantive* finding was fixed in round 1 or 2, and round 3's finding is
+a different, smaller thing found on a fresh stochastic pass over the same text.
+
+**`thm-dirichlet-test-for-improper-integrals`** — Terra's round-1 finding was
+two-part: `[L3]` misstates integration by parts, *and* the proof never
+establishes the integrability of $g'$. Round 2 fixed the substance — `[L5]`
+(FTC, first part) was added to supply $F'=f$, and $g'$'s local integrability
+became an explicit Statement hypothesis with a written note that it does not
+follow from convergence of $\int|g'|$. Round 3 Terra repeats only the `[L3]`
+wording half. **DeepSeek now passes and calls the facts block faithful.** I read
+`thm-integration-by-parts` on disk: its hypotheses are that $u,v$ are
+differentiable on $[a,b]$ with $u',v'$ integrable. Step 1.2 verifies *every one
+of them at the point of use* — it names $g$ differentiable, names $g'$ integrable
+on $[u,v]$, and derives $F'=f$ from `[L5]`. No inference in the proof is
+unlicensed. What is left is a fact-block shortening that omits hypotheses the
+step itself supplies, which is a step-6 polish and is exactly what R1 forbids me
+to spend a judge pair on.
+
+**`cor-planar-simple-graph-edge-bound`** — rounds 1 and 2 were both lanes on the
+real defect: step 3.1 read `lem-plane-face-handshake-by-girth` as an equality
+when it exports only an inequality. **Round 2's repair worked.** DeepSeek now
+passes with "correctly applies Euler's formula, face-handshake lemma, double
+counting … equality case is correct. All citations accurate." Terra's round-3
+finding is new and elsewhere: step 1.1's tree branch uses $m=n-1$ without
+citation. The fact is true, standard, and *published in this library* as
+`cor-tree-edge-count`; the arithmetic it feeds ($n-1\le3n-6$ for $n\ge3$) is one
+line. A competent reader closes that in well under thirty seconds, so it is
+nonfatal by the owner's rule. It is a real polish and it is recorded below.
+
+**`lem-colour-focussing-for-arithmetic-progressions`** — rounds 1 and 2 found
+four genuine defects (the $m=2$ degeneracy with no block difference; the focus
+not shown to lie in the first block; the colour-distinctness case). All were
+repaired, and **Terra now passes**, having verified the induction construction,
+the block-vector count, the focus alignment and the final colour cases.
+DeepSeek's sole remaining objection is that "among any $k+1$ points two share a
+colour" cites no pigeonhole theorem. That is the archetypal thirty-second gap.
+The library does prove it, as `lem-pigeonhole` — which makes this a missing
+citation of an available result, not a missing argument. Nonfatal, recorded
+below.
+
+All three closed with **no content, page, frontmatter, contract, impact or judge
+mutation**, and none is rejudged: their text is byte-identical to what the
+current verdicts were cast against.
+
+### `ex-row-echelon-form-is-not-unique-but-rref-is` — repaired, both lanes agreed
+
+This one is not a nitpick and I did not treat it as one. The two lanes named two
+halves of a single defect:
+
+- Terra: step 1.1 uses that the displayed replacements are elementary row
+  operations, hence that $R$ and $S$ are row equivalent to $A$ — and **neither
+  cited fact establishes row operations or row equivalence at all.** The item's
+  `deps` contained no such definition.
+- DeepSeek: `[L2]` "does not restate the row echelon definition but says it has
+  the stated conditions", so step 1.1's claim that $R$ and $S$ are echelon forms
+  is not justified by the fact it cites.
+
+DeepSeek is describing a direct violation of the house citation rule — `[L2]`
+read *"Echelon form and reduced echelon form have the stated pivot conditions"*,
+which is precisely the synthetic summary of what a definition is *for* that
+`CLAUDE.md` forbids in a `[F#]`/`[A#]`/`[L#]` fact. And the missing
+row-equivalence dependency is load-bearing in the **Statement**, not merely the
+proof: the Example asserts that $A$ *has* those two echelon forms.
+
+Repair: `[L2]` now reproduces the three echelon conditions and the reduced
+condition verbatim from `def-row-echelon-reduced-row-echelon-and-pivots`; a new
+`[L3]` reproduces the elementary-operation list and the definition of row
+equivalence from `def-elementary-row-operations-and-row-equivalence`, which is
+added to `deps`. Steps 1.1 and 2.1 now name which kind of elementary operation
+each replacement is, assert row equivalence from `[L3]`, and check the echelon
+and reduced conditions against `[L2]` entry by entry. The $\mathbb Q$ versus
+$\mathbb F_2$ observation from round 2 is untouched.
+
+The new edge is safe and I verified it on disk rather than assuming it:
+`def-elementary-row-operations-and-row-equivalence` is **item 0** of the A page
+`gaussian-elimination-and-row-reduction`, the very pair this example companions,
+so no page prerequisite moved and it is not a forward reference. Its
+`provenance.statement` is `literature-derived`.
+
+### `prop-maximal-plane-triangulation-characterisation` — repaired, both lanes agreed
+
+Both lanes named the *same* inference, in the same step, in almost the same
+words: step 5.1 concludes that $e'$ meets the region of $C$ containing $f$ from
+the fact that their $C$-parities agree — which needs **the two regions of $C$ to
+have different parities**. `[L3]` says only that parity is constant on each
+region; `[L1]` says only that there are two. Nothing supplied the distinctness.
+That is a genuine load-bearing gap in the contradiction, not a citation nicety,
+and it is fatal.
+
+**This is a second instance of the exact pattern I named at round 2 for
+`lem-plane-face-handshake-by-girth`: a result that proves more than it
+exports.** `thm-polygonal-jordan-curve`'s own step 1.1 proves that the even and
+odd crossing classes are each nonempty and open, and its step 3.1 proves that
+*they are precisely the two regions* — the unbounded one even, the bounded one
+odd. Its **Statement** exports only the region count and the frontier equality.
+So the fact the consumer needs is proved one page away and is unavailable to
+cite. Under R1 I cannot edit that theorem: it carries no rejection.
+
+I considered parking, and rejected it, for a reason I want on the record. Parking
+this item is not parking one item. Its transitive consumer set is **12 further
+draft items**, including `thm-five-colour-theorem`,
+`thm-kuratowski-wagner-planarity-characterisation`,
+`thm-six-colour-theorem-for-planar-graphs`, `cor-planar-simple-graph-edge-bound`
+and `prop-maximally-planar-edge-characterisation` — that is the headline content
+of `plane-graphs-euler-and-the-five-colour-theorem`. Parking costs 14 items with
+certainty; repairing costs 14 items only if the repair fails. Parking now is
+strictly dominated, so the only question was whether an honest repair exists
+**without** the root fix.
+
+It does, and it needs no new fact. The missing statement is derivable from four
+facts the item **already cites**, in one step:
+
+> Let $p$ be a nonvertex point in the relative interior of a segment of the
+> polygon $P$. By `[L6]` a small disc $D$ about $p$ meets $P$ only in that
+> segment, so $D\setminus P$ is two open half-discs, each connected and disjoint
+> from $P$ and hence inside a single region (`[L4]`). By `[L1]` there are exactly
+> two regions and each has frontier $P\ni p$, so each meets $D$; hence the two
+> half-discs lie in *different* regions. Only finitely many directions fail
+> general position for $P$ (`[L3]`) and only two run along the segment, so pick
+> $d$ avoiding both finite sets, and set $q=p-\varepsilon d$, $q'=p+\varepsilon
+> d$ inside $D$. Then $q,q'$ lie in the two different half-discs and $[q,q']$
+> meets $P$ only at $p$. The ray from $q$ in direction $d$ is $[q,q']$ followed
+> by the ray from $q'$ in direction $d$, so its crossing count exceeds that one
+> by exactly the single transverse crossing at $p$. By `[L3]` those counts are
+> the parities of $q$ and $q'$, which therefore differ; and parity is constant
+> on each region.
+
+That is the new **step 1.3**. It cites `[L1]`, `[L3]`, `[L4]`, `[L6]` and no
+proof step, so the canonical stratification puts it in phase 1; `precheck`
+confirms. Step 5.1 now cites `step 1.3` and states the inference explicitly
+instead of assuming it. **No dependency edge was added** — every fact it uses was
+already declared and already cited elsewhere in this proof.
+
+I am reporting the root fix regardless, because the repair above is the
+consumer's local proof of something the library ought to state once.
+
+### The question the dispatch asked, answered
+
+The dispatch asked whether the planar cluster can be closed without the
+`lem-plane-face-handshake-by-girth` root fix. **Yes, and that lemma is no longer
+the live defect.** Round 2's repair to `cor-planar-simple-graph-edge-bound` —
+deriving the handshake identity inline from `lem-plane-edge-face-incidence` and
+`thm-double-counting` — worked, and DeepSeek's round-3 verdict validates the
+equality case by name. Neither round-3 planar rejection mentions the handshake
+lemma. The root fix remains worth making, but it is now a tidiness item, not a
+blocker.
+
+What replaced it is the *same kind* of defect one level up:
+`thm-polygonal-jordan-curve` exporting less than it proves. Two independent
+instances of one pattern in one page is a finding about how these pages were
+scaffolded, not about either lemma.
+
+### Blockers recorded, not prompted — carried forward and extended
+
+1. **`prop-maximally-planar-edge-characterisation` [L1]** needs "connected"
+   added. Unlicensed at step 8 (the item passed both lanes). Owner call at step 10.
+2. **`lem-plane-face-handshake-by-girth`** should export the handshake identity
+   $\sum_f\ell(f)=2|E|$ its own step 1.1 establishes, and should not be restated
+   by consumers without the word "connected". Now demoted from root cause to
+   tidiness — no round-3 rejection depends on it.
+3. **`thm-polygonal-jordan-curve` should export the parity characterisation its
+   own proof gives** — that the two complementary regions are exactly the even
+   and the odd crossing-parity classes, the unbounded one even and the bounded
+   one odd. Its steps 1.1 and 3.1 prove this; the Statement stops at the region
+   count. Adding one clause there lets `prop-maximal-plane-triangulation-
+   characterisation` delete its new step 1.3 and cite instead, and it is the
+   honest home for a fact any future planar proof will want. **Unlicensed at
+   step 8** — that theorem carries no rejection. Next unfrozen moment.
+4. **`cor-planar-simple-graph-edge-bound` step 1.1 should cite
+   `cor-tree-edge-count`** for $m=n-1$. Nonfatal, closed; step-6 polish.
+5. **`lem-colour-focussing-for-arithmetic-progressions` step 1.2 should cite
+   `lem-pigeonhole`.** Nonfatal, closed; step-6 polish.
+6. **`thm-dirichlet-test-for-improper-integrals` `[L3]`** should restate
+   `thm-integration-by-parts` with both differentiability and both integrability
+   hypotheses. Nonfatal, closed; step-6 polish. Step 1.2 already verifies all of
+   them at the point of use.
+7. **`gates.mjs` step 8 now runs the contract trio** — closed by the orchestrator
+   at `bba68bac`, and it earned its place immediately: this round's repairs
+   changed one fact block, one dependency edge and one proof step, and
+   `proof-contract --strict` re-validated all 475 contracts against them.
+
+### Round-3 outcome — both repairs cleared both lanes
+
+The two repaired items were rejudged on the `deepseek+terra` lineup against their
+new frozen pair contexts. **Both pass on both lanes**, and each lane's pass names
+the thing it had rejected:
+
+- `ex-row-echelon-form-is-not-unique-but-rref-is` — Terra: "Verified the row
+  operations, echelon conditions, distinctness over Q, and reduction of both
+  forms to I2; all cited facts faithfully support the argument." DeepSeek: "all
+  transformations verified as elementary row operations per [L3] and the forms
+  checked against [L2]. No logical gaps or mis-citations."
+- `prop-maximal-plane-triangulation-characterisation` — Terra: "crossing parity
+  rules out facial cycles of length at least four in a maximal plane graph."
+  DeepSeek: "**The parity argument in step 5.1 is logically sound.** No defect."
+
+DeepSeek's verdict on the second needed its documented single 80k retry after a
+`finish_reason: length` at 40k — 718 s on the first attempt, on a proof that grew
+by one step. That is the ledger working as designed: an empty length-truncated
+response was requeued, not recorded as a mathematical verdict.
+
+### Gate state at the end of round 3 — STEP 8 CLEAR
+
+```
+step8-guard        OK — 3480 items at baseline, 2 changed, 2/2 licensed
+proof-contract     0 errors, 0 warnings, 475/475 contracts
+finite-smoke       0 errors
+risk-report        --require-reviewed clean
+impact-audit       clean
+level-coverage     clean (421 WARNs, all adjudicated-nonfatal notices)
+```
+
+Receipts closed on the way, in this order: the merged contract was rebuilt from
+the batch files (`research/frontier-10-dispatch/step8c-contract-refresh.mjs`, so
+a later re-merge cannot clobber it); `research/frontier-10-audit-coverage.json`
+gained the one new drift row and rebound `manifest_sha256`
+(`bb3f45af…` → `82d5a8bb…`), with `item_scope` 584 and `proof_scope` 475
+unchanged; and `research/frontier-10-spine-audit.json` was rebound
+(`f68443f6…` → `12b82640…`). **The spine rebind carried all 60 attestations
+forward and is not a re-reading**: the 60-item scope set is identical and not one
+`content_sha256` moved. What changed was six `transitive_consumers` counts,
+each by exactly one — `lem-nat-discrete`, `lem-nat-successor-neq-self`,
+`lem-nat-order-is-membership`, `thm-well-ordering-principle`, `lem-pigeonhole`
+and `lem-nat-embeds-int` — the downstream trace of the single dependency edge
+this round added. Touch snapshot `after-step8c` recorded.
+
+**Nothing was parked, and step 8 is closed.** No item entered a fourth repair
+round.
