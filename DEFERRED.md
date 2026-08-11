@@ -65,11 +65,14 @@ integral, the convergence theorems, L^p.
 **Deferred results**
 - The **Lebesgue integral** and its convergence theorems: monotone convergence,
   Fatou, dominated convergence.
-- **Absolutely continuous functions**, and the **sharp FTC**: F is absolutely
+- The **sharp FTC for absolutely continuous functions**: F is absolutely
   continuous on [a,b] iff F' exists a.e., is in L^1, and the integral of F'
-  recovers F(b) - F(a). This is the exact characterisation of the class for which
-  Newton-Leibniz holds, and it is the natural endpoint of the FTC page.
-  *(Placeholder on the FTC page: `rem-ftc-absolutely-continuous`.)*
+  recovers F on every subinterval. The elementary definition of absolute
+  continuity, the hierarchy $C^1\subseteq\mathrm{Lipschitz}\subseteq AC
+  \subseteq C\cap BV$, and witnesses that the inclusions are strict are now
+  built on the bounded-variation page; the Lebesgue-integral characterisation
+  remains deferred. *(Placeholder on the FTC page:
+  `rem-ftc-absolutely-continuous`.)*
 - **Lebesgue's differentiation theorem**: a monotone function is differentiable
   almost everywhere. Needed to state the Cantor-function counterexample at full
   strength.
@@ -104,17 +107,17 @@ integral, the convergence theorems, L^p.
 
 ## 2. FUNCTIONAL ANALYSIS
 
-Track to build: normed and Banach spaces, bounded operators, dual spaces, the
-three Baire-consequence theorems, weak topologies, Hilbert space, Banach
-algebras.
+Track to build: Banach spaces, bounded operators, dual spaces, the three
+Baire-consequence theorems, weak topologies, Hilbert space and Banach algebras.
+Normed spaces and their elementary finite-dimensional theory are already built.
 
 **Deferred results**
 - **Hahn-Banach** (and the fact that it follows from BPI, strictly weaker than
   AC: Luxemburg 1962, Pincus; it implies the existence of non-measurable sets).
 - **Open mapping theorem** and **closed graph theorem**.
 - **Uniform boundedness / Banach-Steinhaus.** *(Borderline: the proof is just
-  Baire plus linearity, so it could be pulled forward once normed spaces exist.
-  Flagged for reconsideration.)*
+  Baire plus linearity. Normed spaces now exist; pull it forward once Banach
+  spaces, bounded operators and the operator norm are built.)*
 - **Banach-Alaoglu** (equivalent to BPI).
 - **Riesz representation** for Hilbert space; **Riesz-Markov-Kakutani** for
   C(X)\* as regular Borel measures.
@@ -305,7 +308,10 @@ Urysohn's 1925 problem.
 
 ## 4. ALGEBRAIC TOPOLOGY
 
-Track to build: homotopy, the fundamental group, covering spaces; later homology.
+Track to build: change of basepoint, the circle computation and covering spaces;
+later homology. Endpoint-fixed path homotopy, the fundamental-group laws and
+functorial maps, simple connectedness and the convex Euclidean case are already
+built.
 
 **Deferred results**
 - **pi_1(S^1) is isomorphic to Z**, and the reading of the exact sequence
@@ -317,13 +323,14 @@ Track to build: homotopy, the fundamental group, covering spaces; later homology
   logarithm** as the universal cover of C minus 0. The elementary statement that
   no continuous logarithm exists on C minus 0 IS in scope (the winding-number
   obstruction can be made elementary), but the surface is not.
-- **Simply connected** as a homotopy-theoretic notion. The library uses only the
-  elementary substitutes (star-shaped, convex, polygonally connected) for the
-  Poincare lemma and the gradient theorem.
+- The **change-of-basepoint theorem** and the equivalence between trivial
+  fundamental group, null-homotopy of every loop and endpoint-fixed homotopy of
+  any two paths. The definition of simple connectedness itself is built.
 - **Brouwer's fixed point theorem** in dimension at least 2. *(Borderline: Pugh
   derives it from the general Stokes theorem, so it may be reachable from the
   multivariable track without homotopy. Flagged for reconsideration.)*
-- **The Jordan curve theorem**; **invariance of domain**.
+- The **general Jordan curve theorem**; **invariance of domain**. The polygonal
+  Jordan curve theorem is built on the plane-graphs page.
 - **Hopf's extension theorem** and obstruction theory, i.e. the reason Tietze
   does not extend maps into S^n.
 - Homology, cohomology, de Rham cohomology, and the general Stokes theorem on

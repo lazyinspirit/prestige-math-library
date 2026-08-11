@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: []
 justified_by: []
-forward_refs: []
+forward_refs: [def-norm-and-normed-space]
 aliases: []
 landmark: false
 short: "pointwise bounded implies uniformly bounded"
@@ -41,11 +41,13 @@ map.
 ## Remarks
 
 **Not proved in this library, and flagged as borderline.** DEFERRED.md marks this one for
-reconsideration, and the flag is worth repeating here: unlike Hahn-Banach, this theorem needs no
-machinery the library lacks. Its usual proof is the Baire category theorem for complete metric
-spaces, which is in scope, plus linearity. It is deferred only because normed spaces and bounded
-operators are not yet defined, so there is nothing here to state it about; the moment that
-vocabulary exists, this result can be pulled forward and proved in full.
+reconsideration, and the flag is worth repeating here: unlike Hahn-Banach, its
+proof needs no new machinery beyond the vocabulary in which to state it. The
+usual proof is the Baire category theorem for complete metric spaces, which is
+in scope, plus linearity. Normed spaces are now defined in
+[[def-norm-and-normed-space]]; the missing vocabulary is Banach spaces, bounded
+linear operators and their operator norms. Once that remaining vocabulary
+exists, this result can be pulled forward and proved in full.
 
 **What would prove it.** Either the Baire argument, applied to the closed sets
 $E_n = \{x : \lVert Tx \rVert \le n \text{ for all } T \in \mathcal{F}\}$, one of which must have

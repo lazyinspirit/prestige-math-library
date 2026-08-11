@@ -30,10 +30,12 @@ remark can find out exactly what was assumed and where it is proved in the liter
 
 The reason for the gap is a policy, not a judgement about difficulty. Rigor and
 non-circularity outrank completeness here: a result whose proof needs machinery the library
-has not built may not be authored with a borrowed or hand-waved proof. Functional analysis
-needs a track this library does not yet have, namely normed and Banach spaces, bounded
-operators, dual spaces, weak topologies, Hilbert space and Banach algebras. Until that
-track is built to the same standard as everything else, these statements are records.
+has not built may not be authored with a borrowed or hand-waved proof. The
+library now defines normed spaces and proves their elementary finite-dimensional
+theory. What remains unbuilt is the functional-analysis track proper: Banach
+spaces, bounded operators, dual spaces, weak topologies, Hilbert space and Banach
+algebras. Until that machinery is built to the same standard as everything else,
+these statements are records.
 
 The page opens with **Hahn-Banach** and with what it costs. That is the one theorem of the
 subject whose set-theoretic price is a real one: it follows from the Boolean prime ideal
@@ -47,9 +49,10 @@ deferred and belongs in the library proper; the item says so, and says what is s
 
 Then come the three consequences of the Baire category theorem, the **open mapping**,
 **closed graph** and **uniform boundedness** theorems. The third of these is flagged as
-borderline: its proof is Baire plus linearity, both of which the library can already afford,
-so it is deferred only for want of the vocabulary to state it in, and it should be pulled
-forward as soon as normed spaces exist.
+borderline: its proof is Baire plus linearity, both of which the library can already afford.
+Normed spaces now exist; it remains deferred for want of Banach spaces, bounded
+linear operators and the operator norm, and should be pulled forward when that
+remaining vocabulary is built.
 
 The middle of the page is duality: **weak and weak-star topologies**, which are not first
 countable and therefore not seen correctly by sequences, with **Mazur's lemma** as the repair
@@ -76,5 +79,6 @@ as its counterweight, **Nagata's theorem** and **Gerlits-Nagy** for $C_p(X)$, th
 form of **Dugundji's extension theorem**, and the **Kuratowski-Wojdyslawski** embedding.
 
 A result is listed here only when the library cannot reach it. Several statements that look
-functional-analytic are elementary once norms are defined, and those are not on this page:
-they will be proved in the ordinary way, with a full proof, where they belong.
+functional-analytic are elementary from norms alone; those are proved, or are to
+be proved, in the ordinary way with a full proof where they belong rather than
+being listed here.

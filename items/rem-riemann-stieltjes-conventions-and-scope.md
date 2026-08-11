@@ -14,6 +14,7 @@ deps: [def-bounded-variation-and-total-variation,
        thm-riemann-stieltjes-existence-bv-no-common-discontinuities,
        thm-young-riemann-stieltjes-existence-rational]
 justified_by: []
+forward_refs: [thm-holder-finite-real-exponents]
 aliases: []
 landmark: false
 proof_strategy: n/a
@@ -31,4 +32,16 @@ pipeline_run: null
 
 Total variation is zero on a singleton, and both ordinary and Riemann–Stieltjes integrals use the oriented convention when endpoints are reversed. Absolute continuity here is formulated with finite disjoint families of intervals.
 
-For a nondecreasing integrator, the weighted Darboux condition matches the all-fine-mesh definition only together with continuity of the integrand at the integrator's discontinuities; this extra compatibility is vacuous for a continuous integrator. A general BV integrator is handled through Jordan decomposition or tagged sums. Finite-step integrators turn the integral into a weighted evaluation sum, while continuously differentiable integrators reduce it to an ordinary integral against the derivative. The no-common-discontinuity theorem is sharp in view of the companion common-jump counterexample. Young's theorem is proved only for rational Hölder exponents because those are the powers presently developed in the library. No Lebesgue–Stieltjes measure, almost-everywhere differentiability theorem, or arbitrary-real-exponent Hölder theory is asserted.
+For a nondecreasing integrator, the weighted Darboux condition matches the
+all-fine-mesh definition only together with continuity of the integrand at the
+integrator's discontinuities; this extra compatibility is vacuous for a
+continuous integrator. A general BV integrator is handled through Jordan
+decomposition or tagged sums. Finite-step integrators turn the integral into a
+weighted evaluation sum, while continuously differentiable integrators reduce
+it to an ordinary integral against the derivative. The no-common-discontinuity
+theorem is sharp in view of the companion common-jump counterexample. Young's
+theorem is proved here only for rational Hölder exponents because arbitrary real
+exponents are not available at this point in the reading order; the later
+[[thm-holder-finite-real-exponents]] supplies that broader exponent theory. No
+Lebesgue–Stieltjes measure, almost-everywhere differentiability theorem, or
+arbitrary-real-exponent Stieltjes theorem is asserted on this page.

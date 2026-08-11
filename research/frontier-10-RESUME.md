@@ -221,10 +221,36 @@ run-wide at zero. Two ledger corrections ride to step 6: L1 (batch 4's MIT
 syllabus row → Rudin ch. 6) and L2 (batch 8's Theorem 6.9 home →
 `cosets-and-lagranges-theorem`).
 
+## Step 9 — scope-denial sweep
+
+Alpha's complete ledger is `research/frontier-10-step9-scope-denial.md`; the
+durable summary is in `research/frontier-10-alpha-report.md` §"Stage 4".
+
+Result: **10 draft files repaired; 33 published files queued and deliberately
+not edited.** Six published falsehoods were caused directly by this run
+(absolute continuity and integral-scope prose, one unmet sine-integral promise,
+the rings-page count after the finite-sum re-home, and the new affine-subspace
+definition). The remainder are inherited global denials exposed by the same
+full-corpus read. No stale determinant or category-theory denial was found, no
+arrival-order falsehood remains after the order-203 to order-46 re-home, and the
+six-item published group-actions prose remains truthful pending its staged
+31-item/16-example publishing amendment.
+
+Direct receipts pass: `git diff --check`, `depcheck`, `fwdcheck`, and both step-9
+`prosecheck` forms. The decidable check reads 3,690 files with 0 errors and 579
+heuristic warnings, including 215 scope candidates dispositioned by Alpha.
+
+**Infrastructure blocker, recorded without prompting:** the official
+`gates.mjs --step 9` wrapper cannot spawn nested `/usr/bin/node` in Alpha's
+runtime and reports `spawnSync /usr/bin/node EPERM` for both rows. No escalation
+was requested. The wrapper's two declared commands pass when invoked directly.
+
 ## Exact next action
 
-**STEP 8 IS COMPLETE AND CLEAR. The next action is step 9, the scope-denial
-sweep, then the step-10 rundown and the owner pause.**
+**STEP 9 CONTENT IS COMPLETE. The next action is the step-10 rundown and owner
+pause. Carry the wrapper-only `EPERM` as an infrastructure receipt blocker; if a
+wrapper receipt is mandatory, rerun it in the orchestrator runtime rather than
+requesting permission.**
 
 Round 3 was the terminal repair round and it closed. Of the five items still
 rejected after round 2: **three closed nonfatal with no mutation, two were

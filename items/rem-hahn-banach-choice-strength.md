@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: [rem-hahn-banach-theorem]
 justified_by: []
-forward_refs: [thm-ultrafilter-lemma, rem-choice-strengths, def-axiom-of-choice]
+forward_refs: [def-norm-and-normed-space, thm-ultrafilter-lemma, rem-choice-strengths, def-axiom-of-choice]
 aliases: []
 landmark: false
 short: "BPI implies HB; HB yields a non-measurable set"
@@ -55,9 +55,10 @@ particular are forcing arguments and belong to the set theory track that this li
 built.
 
 **What would prove it.** (1) is an ultrapower construction over the ultrafilter lemma, which this
-library does prove as [[thm-ultrafilter-lemma]]; it would become reachable as soon as normed spaces
-exist, but the argument is still not written here. (2) and (3) rest on permutation models and on
-Solovay style models of ZF + DC, which need forcing.
+library proves as [[thm-ultrafilter-lemma]]. The library now also defines normed spaces in
+[[def-norm-and-normed-space]], but it has not developed bounded linear functionals and dual spaces
+or written the ultrapower extension argument needed here. (2) and (3) rest on permutation models
+and on Solovay style models of ZF + DC, which need forcing.
 
 **Why it matters here.** The library's policy is that a theorem must name its choice principle.
 [[rem-choice-strengths]] records where the ultrafilter lemma sits between ZF and the axiom of

@@ -1558,3 +1558,54 @@ this round added. Touch snapshot `after-step8c` recorded.
 
 **Nothing was parked, and step 8 is closed.** No item entered a fourth repair
 round.
+
+## Stage 4 — step 9, scope-denial sweep — **COMPLETE WITH ONE WRAPPER BLOCKER**
+
+Output: `research/frontier-10-step9-scope-denial.md`.
+
+This was a corpus read, not a grep disposition. The structural entry point found
+218 scope-denial warnings in 195 files before repair. I read every candidate in
+context, widened the pass to 231 further files with semantic denial language,
+then directly swept every subject this run added, every `not-proved-here` page,
+both ends of the order-203 to order-46 finite-sum re-home, the incidence page,
+and the published group-actions pair.
+
+### Findings and mutations
+
+- **10 draft files repaired.** The stale clusters were absolute continuity,
+  normed-space prerequisites for functional analysis, the fundamental-group and
+  simple-connectivity core, the polygonal/general Jordan split, and rational
+  versus real Hölder exponents. All repaired files were reread in full after the
+  final edit.
+- **33 published files queued, not edited.** Six are directly falsified by this
+  run: absolute continuity and its deferred catalogue, the earlier integral
+  scope page, the sine-integral promise, the rings-page count after the re-home,
+  and the summing-directions affine-subspace denial. The other 27 are inherited
+  stale denials exposed by the same read: real powers, extended reals, topology
+  vocabulary, Baire/category prerequisites, GCD, and aleph/cofinality
+  vocabulary. The step-9 report gives exact old and exact replacement text for
+  every one.
+- **No stale determinant or category-theory denial.** The old determinant
+  remarks are page-local. No old prose says category theory is globally absent.
+- **No stale order claim after the finite-sum re-home.** The only false text is
+  the rings page's 26/11 count, now 28/13. The incidence page contains no late-
+  arrival assertion.
+- **No additional early group-actions edit.** Its six-item published prose is
+  truthful, and the 31 A-item/16-example enrichment remains staged for the
+  publishing commit.
+
+### Verification and blocker
+
+`git diff --check`, `depcheck` and `fwdcheck` pass. Direct
+`node tools/prosecheck.mjs` checks 3,690 files with **0 errors** and 579 heuristic
+warnings; `--warnings` exits 0 and reports the post-repair 215 scope candidates
+dispositioned in the report.
+
+The official wrapper `node tools/gates.mjs --step 9 --run frontier-10` cannot
+spawn its nested `/usr/bin/node` under this execution runtime and reports
+`spawnSync /usr/bin/node EPERM` for both rows. I did not seek permission or
+escalation. Its required and advisory constituent commands were run directly
+and both pass. This is an infrastructure receipt blocker, not a prosecheck
+failure, and must be carried plainly into step 10.
+
+No published file was mutated. No permission prompt was raised.

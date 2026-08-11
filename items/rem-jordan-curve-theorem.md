@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: []
 justified_by: []
-forward_refs: []
+forward_refs: [thm-polygonal-jordan-curve]
 aliases: []
 landmark: true
 short: "A simple closed curve in the plane has exactly two complementary components"
@@ -49,18 +49,18 @@ Two companions, also not proved here:
 
 ## Remarks
 
-**Not proved in this library.**
+**The general theorem is not proved in this library.**
 
 **What would prove it.** The standard modern proof is homological: a Mayer-Vietoris
 induction shows that for an embedded $S^k$ in $S^n$ the reduced homology of the
 complement is that of $S^{n-k-1}$, which for $k = n-1$ gives exactly two
 components; see [[rem-homology-and-cohomology]]. There are also winding-number
 proofs in the plane, which need [[rem-pi1-circle-is-z]] or an equivalent
-elementary degree theory, and a genuinely elementary proof for **polygonal**
-curves by the parity of crossings of a generic ray. The polygonal case is within
-reach of this library's methods; the general case is not, and the gap between
-them is exactly where the difficulty of the theorem lies, since a Jordan curve
-need not be rectifiable or even locally well behaved anywhere.
+elementary degree theory. The genuinely elementary **polygonal** case is now
+proved by parity of crossings of a generic ray in
+[[thm-polygonal-jordan-curve]]. The general case remains unavailable, and the
+gap between them is exactly where the difficulty of the theorem lies, since a
+Jordan curve need not be rectifiable or even locally well behaved anywhere.
 
 **Why it matters here.** Plane analysis quietly assumes it. Green's theorem, the
 Cauchy integral theorem in its "inside a closed contour" form, and every argument
@@ -70,4 +70,4 @@ regions given by an explicit description, for instance a region between two
 graphs, a finite union of such, or a domain given with its boundary
 parametrisation and an orientation convention, rather than for the interior of an
 arbitrary Jordan curve. That restriction is not laziness; it is the honest
-consequence of not having proved this theorem.
+consequence of not having proved the general theorem.

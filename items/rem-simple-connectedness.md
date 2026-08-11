@@ -7,10 +7,13 @@ origin: session
 proved_here: false
 deps: []
 justified_by: []
-forward_refs: []
+forward_refs: [def-based-loops-and-fundamental-group,
+               thm-fundamental-group-laws,
+               def-simply-connected,
+               thm-convex-subsets-have-trivial-fundamental-group]
 aliases: []
 landmark: false
-short: "Trivial fundamental group; this library uses convex and star-shaped instead"
+short: "Trivial fundamental group; change of basepoint and equivalent formulations remain deferred"
 verification:
   precheck: n/a
 sources:
@@ -45,25 +48,31 @@ endpoints are path homotopic; equivalently, every loop in $X$ is null homotopic.
 
 ## Remarks
 
-**Not proved in this library.** Nothing above is established here. The library
-does not construct the fundamental group, does not prove that concatenation is
-well defined on path-homotopy classes, does not prove that the group is
-independent of the basepoint on a path connected space, and does not prove the
-equivalence of the three formulations of simple connectedness.
+**Partly proved elsewhere in this library.** The library now constructs based
+loop classes and the fundamental group
+([[def-based-loops-and-fundamental-group]]), proves that concatenation is well
+defined and gives the group laws ([[thm-fundamental-group-laws]]), and defines
+simple connectedness by requiring a trivial fundamental group at every
+basepoint ([[def-simply-connected]]). What is not proved is the
+change-of-basepoint isomorphism on a path-connected space and, consequently, the
+equivalence of the three formulations stated above.
 
-**What would prove it.** The homotopy track: homotopy of maps and of paths, the
-groupoid of path classes, the fundamental group as a functor from pointed spaces
-to groups, and the change-of-basepoint isomorphism induced by a path. This is the
-opening chapter of any algebraic topology course and is elementary in the sense
-of needing no machinery beyond point-set topology, but it is a track this library
-has not built, so it is recorded and not proved.
+**What would prove the remaining clauses.** A path-induced
+change-of-basepoint isomorphism, with its independence and composition laws,
+would show that one basepoint suffices and would identify null-homotopy of every
+loop with endpoint-fixed homotopy of any two paths. The groupoid language is a
+natural way to package that argument, but it is not needed for the fundamental
+group core already present.
 
 **Why it matters here.** Simple connectedness is the hypothesis analysis wants
 whenever it needs a region with no holes: for the Poincare lemma (a closed
 differential form on such a region is exact), for the gradient theorem and path
 independence of line integrals, and for the existence of primitives and of
-branches of the logarithm. The library does not use it. It uses elementary
-substitutes instead, and the substitution is deliberate:
+branches of the logarithm. The library now uses the definition in its topology
+track and proves that every nonempty convex Euclidean subset is simply connected
+([[thm-convex-subsets-have-trivial-fundamental-group]]). The analysis results
+named above still use elementary substitutes, and that restriction is
+deliberate:
 
 * **convex** and **star-shaped** open sets, for which the required homotopy is
   written down explicitly by the straight-line formula
@@ -78,5 +87,6 @@ substitutes instead, and the substitution is deliberate:
 
 Star-shaped implies simply connected, and the converse fails, so every theorem
 this library states with a star-shaped or convex hypothesis is a strictly special
-case of the homotopy-theoretic statement. That is the honest position: the
-results are true as stated, and the general form is not available here.
+case of the homotopy-theoretic statement. The remaining unavailable generality
+is the change-of-basepoint theorem and the equivalent path and loop
+formulations, not the definition or group construction themselves.

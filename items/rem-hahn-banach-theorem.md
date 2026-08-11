@@ -7,7 +7,7 @@ origin: session
 proved_here: false
 deps: []
 justified_by: []
-forward_refs: [thm-zorn]
+forward_refs: [thm-zorn, def-norm-and-normed-space]
 aliases: []
 landmark: true
 short: "every dominated functional extends"
@@ -42,8 +42,11 @@ $\lVert x \rVert = \sup \{ |F(x)| : F \in X^{*},\ \lVert F \rVert \le 1 \}$.
 
 ## Remarks
 
-**Not proved in this library.** The library has no normed space or dual space track yet, so this
-statement is recorded with a citation rather than established. Nothing here rests on it.
+**Not proved in this library.** Normed spaces are now defined in
+[[def-norm-and-normed-space]], but bounded linear functionals, operator norms and
+dual spaces have not been developed. The extension theorem and its normed
+consequences are therefore recorded with citations rather than established.
+Nothing here rests on them.
 
 **What would prove it.** Two ingredients. First, a one step extension lemma: if $f \le p$ on $M$
 and $x_0 \notin M$, the two families of inequalities that a value $F(x_0)$ must satisfy leave a
@@ -52,8 +55,9 @@ maximal element of the partially ordered set of dominated extensions, ordered by
 Zorn's lemma supplies; that half the library does prove, in [[thm-zorn]]. The complex and normed
 cases then follow by the Bohnenblust and Sobczyk device, recovering a complex functional from its
 real part as $f(x) = \operatorname{Re} f(x) - i \operatorname{Re} f(ix)$. What is missing here is
-therefore not the choice principle but the analytic vocabulary: normed spaces, bounded operators
-and duals.
+therefore not the choice principle or the definition of a normed space, but the
+one-step extension lemma and the vocabulary and theory of bounded operators and
+duals.
 
 **Why it matters here.** Every duality statement downstream depends on this one. That $X^{*}$
 separates points is what makes the weak topology Hausdorff, what makes the canonical embedding into

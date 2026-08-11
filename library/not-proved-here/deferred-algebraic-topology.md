@@ -24,14 +24,14 @@ examples: []
 
 **Objective.** This page records the results of algebraic topology that the rest
 of the library needs to be able to refer to, and states them precisely, with a
-citation each. **Nothing on this page is proved here.** There is no proof section
-anywhere on it, and there cannot be: the homotopy track, the fundamental group,
-covering spaces, homology and cohomology, has not been built in this library, and
-the house rule is that a result whose proof needs machinery the library does not
-contain may not be authored with a borrowed or hand-waved argument. Every item is
-a remark marked "not proved here", and so is every result elsewhere in the
-library that comes to depend on one. The alternative would be a silent gap, or
-worse a proof that quietly assumes what it is meant to establish.
+citation each. **Nothing on this page is proved here.** The library now has the
+elementary endpoint-fixed homotopy and fundamental-group core: it constructs
+$\pi_1$, proves its group laws and functoriality, defines simple connectedness,
+and proves the convex Euclidean case. The entries retained here need machinery
+that core does not yet supply — change of basepoint and circle computations,
+covering spaces, general Jordan separation, homology and cohomology — so they
+remain remarks marked "not proved here". The house rule is that no such result
+may be authored with a borrowed or hand-waved argument.
 
 The page is deliberately blunt about a second thing, because this subject
 produces an unusual number of near misses. **Again and again the point-set half of
@@ -39,6 +39,10 @@ a statement is in scope and the homotopy half is not**, and the two halves look
 alike enough that a reader is likely to credit the library with more than it has
 proved. The splits recorded here are:
 
+* Based loop classes, the fundamental-group laws, induced maps and simple
+  connectedness are proved on the published fundamental-group page. The
+  change-of-basepoint theorem, the equivalent path and loop formulations, and
+  the computation $\pi_1(S^1)\cong\mathbb Z$ remain deferred.
 * The exact sequence $0 \to \mathbb{Z} \to \mathbb{R} \to \mathbb{T} \to 0$ and
   the computation that the kernel of the complex exponential is
   $2\pi i \mathbb{Z}$ are proved on the library's Euler's-formula page. Only the
@@ -51,6 +55,9 @@ proved. The splits recorded here are:
   theorem and is proved. Dimension two and above is deferred, and flagged
   borderline, since a route through the general Stokes theorem or through
   Sperner's lemma may recover it without any homotopy theory.
+* The polygonal Jordan curve theorem is proved by crossing parity on the plane
+  graphs page. The theorem for an arbitrary Jordan curve and the
+  Jordan-Schoenflies theorem remain deferred.
 * The Hawaiian earring is compact, connected, path connected, locally path
   connected and metrizable, all of it elementary and in scope, and the natural
   continuous bijection onto it from the wedge of circles is in scope as well. That
@@ -77,5 +84,6 @@ proved. The splits recorded here are:
 The page sits at the very start of the library's reading order and depends on
 nothing. Where an item points at material the library does prove, it does so as a
 forward reference, marked as such, and always for orientation rather than as a
-premise. When a homotopy track is eventually built, each item here becomes a real
-theorem with a real proof, and the entry is removed from the deferral list.
+premise. When the machinery needed by a remaining entry is eventually built,
+that entry becomes a real theorem with a real proof and is removed from the
+deferral list.
