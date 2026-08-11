@@ -107,6 +107,16 @@ entire table column of bare page orders. **Grep for bare numbers as well as for
 the word "order", and verify every section heading against the spec afterwards**
 rather than trusting the sweep.
 
+**So prefer a FRACTIONAL splice when you are inserting a pair rather than a
+track.** `order` is only ever compared, never counted: `validate-plan.mjs` checks
+`prereq-order` as a strict inequality and `rounds.mjs` derives levels from
+`requires`, so nothing requires the orders to be contiguous integers, and the
+spec has carried `5.1`–`5.4` since the foundations split. Inserting the
+logarithm-characterisations pair at `178.1`/`178.2` (2026-08-11) renumbered
+nothing and so cost no reference sweep at all, against the 264 pages a
+renumbering insertion at that point would have moved. Renumber only when a whole
+track needs contiguous room, and then pay the sweep above in full.
+
 ---
 
 ## EXECUTION ORDER — numbers now match the running order
@@ -174,6 +184,26 @@ the brief.
    two A pages. Merging batches can only remove cross-batch edges.
 4. Report the **cross-batch seam count before spawning**. If the pages have no
    item lists yet the count cannot be computed — say so rather than reporting 0.
+5. Honour any **owner-directed scope obligation** standing against the next
+   build. Such an obligation names a specific frontier pair that the batch
+   selection MUST include; it is not a preference to weigh against affinity
+   packing, and a build that omits it is incomplete however clean its gates are.
+   An obligation is discharged when its pair publishes, and the entry is struck
+   from the list below in that same commit.
+
+**Standing scope obligations.**
+
+- **`the-integral-logarithm-and-its-characterisations` + its B companion**
+  (orders 178.1/178.2; owner, 2026-08-11). An audit of the published
+  `the-exponential-function` and `the-logarithm-and-general-powers` found the
+  exponential side complete and the logarithm side carrying no equivalence
+  theorem, no uniqueness from the multiplicative-to-additive functional
+  equation, and no integral construction independent of `exp`. The owner
+  directed that all three gaps close in a dedicated pair in the next build. The
+  pair is spliced into `plan-spec.json` and is on the frontier; its design,
+  including what it may not restate from orders 175 and 177, is
+  `research/plan-realanalysis-pages.md` §RA-27b. **Closing two of the three
+  gaps does not discharge it.**
 
 ## Step 1 — Scaffold (Beta-n-i, all batches in parallel)
 

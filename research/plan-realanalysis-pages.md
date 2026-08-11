@@ -1125,6 +1125,18 @@ continuity of exp on R. Logarithms and arbitrary real powers remain outside
 this page. A general smooth partition of unity and a smooth function analytic
 nowhere are deferred because their constructions are not dependency-closed
 here.
+Audit note (2026-08-11, owner-directed audit of the published exp/log pages).
+This block is confirmed BUILT AND COMPLETE as designed: all five constructions
+are present, `thm-exponential-definition-equivalence` identifies them, and
+`rem-exponential-roadmap-and-circularity` argues non-circularity. Nothing is
+owed here. The one construction not on the list — exp as the inverse of the
+integral logarithm — is deliberately NOT added to this page, because the
+integral belongs with the logarithm; it arrives as a corollary of RA-27b, which
+also supplies the identification. Two legacy notation points, recorded and not
+scheduled: `def-real-exponential-function-and-e` and `thm-exponential-product-limit`
+write the applied `\iota(n!)` and `\iota(n)` that the 2026-08-11 owner rule bans
+in new content, and the ban is forward-looking, so they are not retro-flagged;
+any future rewrite of those two items should drop the applied form.
 
 **RA-27 The Logarithm, General Powers, and the Sup Definition** <- RA-26, RA-19
 log as the inverse of the already-built exp; prove that this equals
@@ -1179,6 +1191,140 @@ all finite initial factors exactly as `def-infinite-product` requires.
 If this page is
 scaffolded without the criterion, the deferral becomes a silent loss — this
 note is the plan line's only carrier.
+
+Audit note (2026-08-11, owner-directed audit of the published exp/log pages).
+This block is BUILT, and what it specified it delivered: log as exp^{-1}, the
+integral identity, the log series with the Abel endpoint, the Landau root limit,
+the sup power and its agreement, and the real-exponent inequalities. The audit
+found that the DESIGN, not the execution, was one-sided. Unlike RA-26 it never
+asked for an equivalence: it gives log exactly one definition and then proves
+four identities about it, so the page carries no theorem saying those identities
+are alternative definitions, no uniqueness from the functional equation (the laws
+prove log SATISFIES log(xy) = log x + log y and stop), and no roadmap remark. The
+integral development is also not independent — `thm-logarithm-derivative-and-integral`
+proves its identity by starting from exp^{-1}. Those three gaps are closed on
+**RA-27b**, not here, and RA-27 is NOT reopened or re-authored. The note exists so
+that a future Beta scaffolding RA-27 does not absorb RA-27b's material, and a
+future Beta scaffolding RA-27b does not restate RA-27's.
+
+**RA-27b The Integral Logarithm and the Equivalence of Its Characterisations**
+<- RA-27
+Added 2026-08-11 on owner instruction, after an audit of the published
+exponential and logarithm pages. The audit found the exponential side complete —
+`thm-exponential-definition-equivalence` identifies five constructions and
+`rem-exponential-roadmap-and-circularity` argues the identification is not
+circular — and the logarithm side one-sided: `the-logarithm-and-general-powers`
+(order 177) defines log ONLY as exp^{-1} and then proves four identities about
+it, with nothing presenting those identities as competing definitions. This page
+is the logarithm's RA-26.
+
+WHAT ORDER 177 AND 175 ALREADY OWN. Cite it; do not restate any of it.
+  log := exp^{-1}                         `def-natural-logarithm`
+  log' = 1/x AND log x = int_1^x dt/t     `thm-logarithm-derivative-and-integral`
+  product/quotient/reciprocal laws, order, continuity, range
+                                          `thm-natural-logarithm-laws`
+  log(1+x) = sum (-1)^{n+1} x^n / n on (-1,1], Abel at the endpoint
+                                          `thm-log-one-plus-x-power-series`
+  Landau root limit log x = lim 2^n (x^{1/2^n} - 1)
+                                          `thm-landau-logarithm-limit`
+  a^x = exp(x log a), the rational-supremum power, and their agreement
+                                          `def-real-power`,
+                                          `def-real-power-by-rational-supremum`,
+                                          `thm-rational-supremum-power-agrees-with-exp`
+  2 < e < 3                               `cor-two-less-than-e-less-than-three`
+
+THE THREE GAPS THIS PAGE CLOSES. All three are required; the page is not done
+with two of them.
+
+**(1) The integral is never a DEFINITION.** `thm-logarithm-derivative-and-integral`
+proves log x = int_1^x dt/t, but its proof STARTS from log = exp^{-1} and
+differentiates through `thm-derivative-of-exponential`. So the classical
+integral-first development is absent, and the identity it proves is not an
+equivalence between two independently built objects. Build it the way RA-27 built
+the sup power: define
+    **L(x) := int_1^x dt/t for x > 0**,
+notated L rather than log until agreement is proved, and derive EVERY property of
+L from the integral with NO reference to exp anywhere in the proofs.
+  L' = 1/x by the first FTC (`thm-ftc-first-part`, `def-oriented-integral`, with
+    continuity of 1/t on (0,inf) from `thm-algebra-of-continuous-functions`);
+  L(1) = 0; L strictly increasing;
+  **L(xy) = L(x) + L(y)** by fixing y, differentiating x |-> L(xy) - L(x) to zero
+    by the chain rule, and evaluating at x = 1 (`cor-zero-derivative-implies-constant`).
+    NOT by a change of variables the page would have to import;
+  hence L(2^n) = n L(2) and L(2^{-n}) = -n L(2), so L is unbounded above and
+    below, so by the IVT **L : (0,inf) -> R is a bijection**;
+  define **E := L^{-1}**, differentiable by `thm-derivative-of-an-inverse`, with
+    E' = E and E(0) = 1.
+Only then identify. E = exp is a SINGLE citation of
+`thm-exponential-ivp-uniqueness`, and L = log follows by inverting. That one
+citation is the whole bridge, and it is the point of the page: the equivalence is
+proved once, between two developments neither of which used the other.
+Corollary worth stating: **e is the unique x > 0 with int_1^x dt/t = 1**, the
+integral-first definition of e.
+
+**(2) No functional-equation characterisation of log.**
+`thm-natural-logarithm-laws` proves log SATISFIES log(xy) = log x + log y;
+nothing anywhere proves log is the UNIQUE such function. State and prove: **the
+unique continuous f : (0,inf) -> R with f(xy) = f(x) + f(y) and f(e) = 1 is
+log**, with the variant normalised instead by differentiability at 1 and
+f'(1) = 1. Route: f o exp is additive and continuous, so
+`thm-cauchy-functional-equation-regularity` (order 151, already inside this
+page's transitive prerequisites) forces f(exp t) = ct, and the normalisation
+fixes c = 1. This is the exact mirror of
+`thm-normalized-exponential-functional-equation` (order 175); prefer transporting
+that theorem through the bijection to redoing the regularity argument, if the
+shorter route closes honestly. Dropping the normalisation leaves exactly the
+family c log, which is `def-logarithm-to-a-base` up to that constant — say so
+rather than leaving the reader to notice it.
+
+**(3) No consolidating theorem and no roadmap.** Close with
+**`thm-logarithm-definition-equivalence`**, the mirror of
+`thm-exponential-definition-equivalence`: the inverse of exp, the integral L, the
+series continued off (-1,1] by the product law, the Landau root limit, and the
+normalised functional equation all name the same function (0,inf) -> R. The
+series needs one new lemma before it is a definition at all rather than a local
+identity — **`lem-log-series-extends-by-the-product-law`**: every x > 0 is
+2^k(1+u) with |u| < 1, so the series together with log 2 and the product law
+determines log everywhere, whereas the series alone does not. The equivalence
+theorem must say which of the five are definitions on all of (0,inf) and which
+need that continuation; an equivalence theorem that blurs it is worse than none.
+Then **`rem-logarithm-roadmap-and-circularity`**, written to the standard of
+`rem-exponential-roadmap-and-circularity`: it records that the theorem is an
+identification after independent proofs and not a list of mutually supporting
+definitions, that L is built with no exp and E with no series, and that (2) rests
+on the Cauchy-equation regularity theorem rather than on any property of log.
+
+B: **log 2 computed four ways** — int_1^2 dt/t, the alternating harmonic series
+(`ex-alternating-harmonic-series-sums-to-log-two` at order 178 already sums it;
+cite it and compute the other three), the Landau iterates 2^n(2^{1/2^n} - 1), and
+exp^{-1}(2). **A discontinuous f : (0,inf) -> R with f(xy) = f(x) + f(y) that is
+not c log**, transporting a Hamel-basis additive map through exp: this is what
+makes the regularity hypothesis in (2) load-bearing, and it is the multiplicative
+twin of `cex-discontinuous-multiplicative-cauchy-solution`. Build it from
+`lem-hamel-basis-exists` on the A page at order 151, NOT from that order-176
+counterexample or from `ex-hamel-basis-additive-function` at order 152 — both are
+on B pages, B pages are leaves, and `validate-plan.mjs` rule 6 rejects a
+dependency on one. **Dropping f(e) = 1 leaves the whole one-parameter family**
+log_b, so the normalisation is not cosmetic. **The series is not a definition on
+its own**: it diverges at every x > 2, which is exactly the work
+`lem-log-series-extends-by-the-product-law` does. **e located from the integral
+alone**: L(2) > 1/2 and L(4) = 2L(2) > 1 bound e strictly between 2 and 4 with no
+series; the sharper 2 < e < 3 is `cor-two-less-than-e-less-than-three` at order
+175 and is cited, not reproved.
+
+Sources. The 2026-08-11 canonical-coverage rule applies in full: at least two
+independent treatments, one of them a textbook or full course-note set with a
+harvestable table of contents, each read over a stated chapter range with every
+section and named-result heading given a disposition. Apostol, *Mathematical
+Analysis*, ch. 6 and Rudin, *Principles*, ch. 8 both run the integral-first
+development as the primary one and are the natural pair; Lebl's "Logarithm and
+Exponential" is already cited by order 177. Wikipedia is a convention tiebreaker
+only and cannot be this pair's primary backing.
+
+SIZE. This is deliberately a narrow page and should land well under the 60-item
+ceiling. If the integral development plus the equivalence theorem push it over,
+SPLIT it — the integral construction, then the characterisations — and never drop
+a characterisation, which is the whole reason the page exists.
 
 **RA-28 Sine, Cosine, and the Definition of pi** <- RA-26
 sin and cos by power series; sin' = cos, cos' = -sin; the Pythagorean identity;
