@@ -10,6 +10,7 @@ provenance:
 deps: [thm-cauchy-criterion-for-improper-integrals,
        thm-second-mean-value-theorem-for-integrals,
        thm-additivity-over-subintervals, thm-integration-by-parts,
+       thm-ftc-first-part,
        thm-comparison-test-for-improper-integrals,
        thm-absolute-improper-convergence-implies-convergence,
        def-absolute-and-conditional-improper-convergence,
@@ -51,6 +52,8 @@ The reflected statements hold at $-\infty$ and at finite singular endpoints, wit
 
 [L4] A bounded factor times an absolutely integrable function is absolutely integrable by comparison ([[thm-comparison-test-for-improper-integrals]], [[thm-absolute-improper-convergence-implies-convergence]]).
 
+[L5] If $f$ is integrable on $[a,b]$ and continuous at $c$, then its integral function $F$ satisfies $F'(c)=f(c)$; in particular an $f$ continuous on the whole of $[a,b]$ has $F$ as a primitive there ([[thm-ftc-first-part]]).
+
 ## Proof
 
 **Proof technique:** cases.
@@ -59,6 +62,6 @@ The reflected statements hold at $-\infty$ and at finite singular endpoints, wit
 $$\left|\int_u^vfg\right|\le2M(g(u)+g(v))\le4Mg(u).$$
 This tends to zero as $u\to\infty$, and [L2] proves convergence.
 
-1.2 In clause 2, [L3] gives the integration-by-parts identity. The boundary term $F(R)g(R)$ tends to zero because $F$ is bounded and $g(R)\to0$. Also $|Fg'|\le M|g'|$, so [L4] makes $\int Fg'$ converge. Passing $R\to\infty$ proves convergence of $\int fg$. [L3, L4, assume-case second]
+1.2 In clause 2 $f$ is continuous, hence integrable on every $[u,v]\subseteq[a,\infty)$, so [L5] gives $F'=f$ there — the hypothesis [L3] requires and which boundedness of $F$ does not supply. With $g$ differentiable and $g'$ integrable on $[u,v]$, [L3] gives the integration-by-parts identity. The boundary term $F(R)g(R)$ tends to zero because $F$ is bounded and $g(R)\to0$. Also $|Fg'|\le M|g'|$, so [L4] makes $\int Fg'$ converge. Passing $R\to\infty$ proves convergence of $\int fg$. [L3, L4, L5, assume-case second]
 
 2.1 The two clauses are exhausted by steps 1.1–1.2. Reversing orientation proves the $-\infty$ case. At a finite endpoint, use a primitive based at a fixed nonsingular point and take the corresponding one-sided limits; the same estimates are unchanged. [step 1.1, step 1.2, cases-exhaustive] ∎

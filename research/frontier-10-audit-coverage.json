@@ -1,7 +1,7 @@
 {
   "version": 1,
   "reviewer": "Alpha-frontier-10 (Claude Opus 5, xhigh), build alpha role, sole adjudicator",
-  "manifest_sha256": "9e9faa51ae653431fbaec2cf471030024ce619a07ad5e3efeac6fb8e851d16bc",
+  "manifest_sha256": "bb3f45af02559adf6dac0cb081ee7f859dbadf158e7fd44b0f8eb961fc49ebca",
   "item_scope": [
     "cex-a-family-of-components-need-not-be-natural",
     "cex-a-monomorphism-need-not-split",
@@ -1261,6 +1261,24 @@
       "reason": "Step-6 licensing repair adjudicated by Alpha from disk: the authored proof uses a fact the scaffold's planned dependency list did not supply, so thm-linearity-of-improper-integrals was added as the exact target of the step that consumes it; lem-sign-preservation-near-a-limit was removed as unused or as an inflated restatement of a target that does not state what the Fact claimed. The dependency is load-bearing and its target's Statement was read on disk before the edge was accepted."
     },
     {
+      "id": "cor-planar-simple-graph-edge-bound",
+      "planned_deps": [
+        "cor-connected-components-partition-the-vertex-set",
+        "lem-plane-face-handshake-by-girth",
+        "prop-maximal-plane-triangulation-characterisation",
+        "thm-euler-formula-for-connected-plane-graphs"
+      ],
+      "actual_deps": [
+        "cor-connected-components-partition-the-vertex-set",
+        "lem-plane-edge-face-incidence",
+        "lem-plane-face-handshake-by-girth",
+        "prop-maximal-plane-triangulation-characterisation",
+        "thm-double-counting",
+        "thm-euler-formula-for-connected-plane-graphs"
+      ],
+      "reason": "Step-8 fatal repair (round 2), both lanes: step 3.1 read [L2] as an equality, but lem-plane-face-handshake-by-girth states only the inequality g|F| <= 2|E|. The equality case needs the face-handshake identity sum of facial walk lengths = 2|E|, which that lemma proves internally but does not export. lem-plane-edge-face-incidence and thm-double-counting were added as the exact targets of a new step that derives the identity inline; both are already reachable from this page (lem-plane-face-handshake-by-girth cites the same two), so no page prerequisite moved. Both Statements were read on disk before the edges were accepted."
+    },
+    {
       "id": "cor-trace-is-invariant-under-similarity",
       "planned_deps": [
         "def-invertible-matrix-and-general-linear-group",
@@ -1791,13 +1809,19 @@
         "thm-polygonal-jordan-curve"
       ],
       "actual_deps": [
+        "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
         "def-graph-walk-trail-path-and-cycle",
         "def-maximal-plane-and-maximally-planar-graph",
+        "def-plane-graph-face-and-boundary",
+        "def-plane-region-and-frontier",
+        "def-polygonal-arc-and-polygon",
         "lem-plane-edge-face-incidence",
+        "lem-polygonal-crossing-parity-is-locally-constant",
+        "lem-polygonal-ray-general-position",
         "prop-face-boundaries-in-two-connected-plane-graphs",
         "thm-polygonal-jordan-curve"
       ],
-      "reason": "Step-6 licensing repair adjudicated by Alpha from disk: the Statement was narrowed to two-connected plane graphs, because the Jordan-chord argument in step 1.1 needs every facial boundary to be a cycle. prop-face-boundaries-in-two-connected-plane-graphs is exactly the result that supplies that, so it was added as a load-bearing dependency the scaffold had not planned. Its Statement was read on disk before the edge was accepted. Alpha additionally narrowed this item TITLE at step 8 to match the Statement (confirmed_fatal, both lanes); the title change adds no dependency."
+      "reason": "Step-8 fatal repair (round 2), both lanes: the forward direction rested on two uncited topological claims — that two boundary vertices of a face can be joined by an arc inside it, and that two-connectivity makes the facial boundary a cycle. The proof now proves both from the page's own polygonal toolkit, so the load-bearing targets were added as deps: prop-face-boundaries-in-two-connected-plane-graphs (boundary is a cycle, previously named only in the Statement prose), def-plane-region-and-frontier and cor-components-of-open-subsets-of-rn-are-polygonally-connected (a face is a region, hence open connected and polygonally connected), def-polygonal-arc-and-polygon and def-plane-graph-face-and-boundary (edges are finite unions of segments meeting only at shared endpoints, giving the local sector construction), and lem-polygonal-crossing-parity-is-locally-constant with lem-polygonal-ray-general-position (the parity argument replacing the asserted chord crossing). All are items of this same page except the polygonal-connectedness corollary, whose home the-topology-of-euclidean-space is already a declared page prerequisite; validate-plan is clean. Each Statement was read on disk before the edge was accepted. This supersedes the round-1 reconciliation, which covered the title narrowing only."
     },
     {
       "id": "prop-modules-and-homomorphisms-form-category-rmod",
@@ -2056,6 +2080,39 @@
         "thm-the-integral-function-is-lipschitz"
       ],
       "reason": "Step-6 licensing repair adjudicated by Alpha from disk: the authored proof uses a fact the scaffold's planned dependency list did not supply, so thm-the-integral-function-is-lipschitz was added as the exact target of the step that consumes it. The dependency is load-bearing and its target's Statement was read on disk before the edge was accepted."
+    },
+    {
+      "id": "thm-dirichlet-test-for-improper-integrals",
+      "planned_deps": [
+        "def-absolute-and-conditional-improper-convergence",
+        "def-continuity-real",
+        "def-darboux-integral",
+        "def-limits-at-infinity",
+        "def-monotone-function",
+        "lem-of-triangle-inequality",
+        "thm-absolute-improper-convergence-implies-convergence",
+        "thm-additivity-over-subintervals",
+        "thm-cauchy-criterion-for-improper-integrals",
+        "thm-comparison-test-for-improper-integrals",
+        "thm-integration-by-parts",
+        "thm-second-mean-value-theorem-for-integrals"
+      ],
+      "actual_deps": [
+        "def-absolute-and-conditional-improper-convergence",
+        "def-continuity-real",
+        "def-darboux-integral",
+        "def-limits-at-infinity",
+        "def-monotone-function",
+        "lem-of-triangle-inequality",
+        "thm-absolute-improper-convergence-implies-convergence",
+        "thm-additivity-over-subintervals",
+        "thm-cauchy-criterion-for-improper-integrals",
+        "thm-comparison-test-for-improper-integrals",
+        "thm-ftc-first-part",
+        "thm-integration-by-parts",
+        "thm-second-mean-value-theorem-for-integrals"
+      ],
+      "reason": "Step-8 fatal repair (round 2), both lanes: step 1.2 applied [L3] integration by parts, whose hypothesis is F' = f, without ever establishing it. Clause 2 assumes f continuous, so the first fundamental theorem supplies it; thm-ftc-first-part was added as the exact target of the step that consumes it. Its home page properties-of-the-integral-and-the-working-ftc is already this page's declared prerequisite (thm-integration-by-parts lives there too). Its Statement was read on disk before the edge was accepted."
     },
     {
       "id": "thm-every-equivalence-can-be-made-an-adjoint-equivalence",

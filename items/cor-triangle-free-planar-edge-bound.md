@@ -34,7 +34,7 @@ Every triangle-free simple planar graph with $n\ge3$ vertices and $m$ edges sati
 
 [L1] For every connected plane graph, $|V|-|E|+|F|=2$ ([[thm-euler-formula-for-connected-plane-graphs]]).
 
-[L2] If every facial boundary walk has length at least $g$, then $g|F|\le2|E|$ ([[lem-plane-face-handshake-by-girth]]).
+[L2] For a **connected** plane graph, if every facial boundary walk has length at least $g$, then $g|F|\le2|E|$ ([[lem-plane-face-handshake-by-girth]]).
 
 ## Proof
 

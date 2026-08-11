@@ -1324,15 +1324,16 @@
         },
         {
           "id": "step-2-1",
-          "claim": "In the first selected block, the induction hypothesis gives either a monochromatic $m$-term progression, which finishes, or $r-1$ colour-focused progressions $A_i=\\{a_i+j d_i:0\\le j<m-1\\}$ focused at $f$. For the second alternative define $A_i'=\\{a_i+j(d_i+2nt):0\\le j<m-1\\}$. Its $j$th term occupies the same relative position in block $b+jt$ as the $j$th term of $A_i$ in block $b$, so identical block vectors preserve its colour.",
+          "claim": "Apply the induction hypothesis to the first half of the first selected block, an interval of length $n=F(m,k,r-1)$. It gives either a monochromatic $m$-term progression, which finishes, or $r-1$ colour-focused progressions $A_i=\\{a_i+j d_i:0\\le j<m-1\\}$ of pairwise distinct colours focused at $f$. Each $A_i$ lies in that first half, so $a_i$ and $d_i$ are at most $n$ and the focus $f=a_i+(m-1)d_i\\le2n$ lies in the block, which is what the block length $2n$ is for, exactly as in step 1.1. The translates $A_i'=\\{a_i+j(d_i+2nt):0\\le j<m-1\\}$ then occupy the same relative positions in blocks $b+jt$, so identical block vectors preserve their colours.",
           "step": "2.1",
           "inputs": [
-            "1.2"
+            "1.2",
+            "1.1"
           ]
         },
         {
           "id": "step-3-1",
-          "claim": "The progressions $A_i'$ are focused at $f+(m-1)2nt$. The points $f,f+2nt,\\ldots,f+(m-2)2nt$ form another monochromatic $(m-1)$-term progression focused there. Its colour differs from every colour of the $A_i$, since equality with one would make $A_i\\cup\\{f\\}$ a monochromatic $m$-term progression. Thus the second alternative contains $r$ focused progressions of distinct colours.",
+          "claim": "The $A_i'$ are focused at $f+(m-1)2nt$, and since $f$ lies in block $b$ the points $f,f+2nt,\\ldots,f+(m-2)2nt$ are a monochromatic $(m-1)$-term progression focused there, coloured as $f$ is. If that colour equals some $A_i$'s, then $A_i\\cup\\{f\\}$ is a monochromatic $m$-term progression and the first alternative holds; otherwise the second alternative has $r$ focused progressions of distinct colours.",
           "step": "3.1",
           "inputs": [
             "2.1"
@@ -3436,37 +3437,158 @@
           "source_section": "Statement",
           "quote": "If $P\\subseteq\\mathbb R^2$ is a polygon, then $\\mathbb R^2\\setminus P$ has exactly two regions, one bounded and one unbounded, and",
           "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-face-boundaries-in-two-connected-plane-graphs",
+          "source_section": "Statement",
+          "quote": "In a two-connected plane graph ([[def-vertex-and-edge-connectivity]]), every facial boundary walk is a cycle ([[def-graph-walk-trail-path-and-cycle]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-polygonal-crossing-parity-is-locally-constant",
+          "source_section": "Statement",
+          "quote": "For a polygon $P$ ([[def-polygonal-arc-and-polygon]]) and $x\\notin P$, count the intersections modulo two of any general-position ray supplied by [[lem-polygonal-ray-general-position]]. This parity is independent of the chosen general-position ray and is constant throughout some open neighbourhood of $x$ in the complement.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-polygonal-ray-general-position",
+          "source_section": "Statement",
+          "quote": "Let $P$ be a polygon ([[def-polygonal-arc-and-polygon]]) and $x\\in\\mathbb R^2\\setminus P$, whose complementary regions use [[def-plane-region-and-frontier]].",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-plane-region-and-frontier",
+          "source_section": "Definition",
+          "quote": "Let $A\\subseteq\\mathbb R^2$, with the usual metric topology from [[lem-metrics-on-rn]].",
+          "uses": [
             "1.1",
-            "2.1"
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "source_section": "Statement",
+          "quote": "Every connected component of an open subset $U\\subseteq\\mathbb{R}^n$ is open in $\\mathbb{R}^n$ and polygonally connected.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-plane-edge-face-incidence",
+          "source_section": "Statement",
+          "quote": "In a plane graph ([[def-plane-graph-face-and-boundary]]), if the relative interior of an edge meets the frontier of a face, then the whole edge lies in that frontier.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-polygonal-arc-and-polygon",
+          "source_section": "Definition",
+          "quote": "Work in the metric plane $\\mathbb R^2$ of [[lem-metrics-on-rn]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-plane-graph-face-and-boundary",
+          "source_section": "Definition",
+          "quote": "A **plane graph** is a finite simple graph ([[def-finite-simple-graph]]) together with distinct points of $\\mathbb R^2$ for its vertices and a polygonal arc ([[def-polygonal-arc-and-polygon]]) for each edge, joining its endpoints, such that an edge interior contains no vertex and two edge arcs meet only at a common endpoint.",
+          "uses": [
+            "2.1",
+            "4.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Suppose $G$ is maximal plane. In any face, every two distinct boundary vertices must already be adjacent, because a polygonal arc between them can be drawn inside the face. If a facial boundary had at least four distinct vertices or repeated a vertex, four boundary occurrences together with [L1] would force two of the complete set of boundary chords to cross. Hence every face has exactly three distinct boundary vertices and is triangular.",
-          "step": "1.1",
+          "claim": "By [L2] the boundary walk of a face $f$ is a cycle $C$, drawn as a polygon; by [L5] the frontier of $f$ is exactly the point set of $C$. Then $f$ is a nonempty clopen subset of the region of $C$ containing it [L1, L4], so the face is one of the two regions of its own boundary cycle.",
           "inputs": [
-            "L1"
-          ]
+            "L1",
+            "L2",
+            "L4",
+            "L5"
+          ],
+          "step": "1.1"
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If instead every face is triangular, the interior of any proposed new plane edge is connected and disjoint from the drawing, so it lies in one face, with both endpoints on that face's boundary [L4]. Those endpoints are already adjacent because that boundary is a triangle, so no missing edge can be added.",
+          "inputs": [
+            "given",
+            "L4"
+          ],
+          "step": "1.2"
         },
         {
           "id": "step-2-1",
-          "claim": "Conversely, suppose every face is triangular. The interior of any proposed new plane edge must lie in one face of the old drawing, with both endpoints on its boundary. Those endpoints are already adjacent because that boundary is a triangle, so no missing edge can be added.",
-          "step": "2.1",
+          "claim": "A small enough disc about a vertex $u$ of $C$ meets the drawing only in initial straight segments of the edges at $u$ [L6], whose deletion leaves finitely many open sectors, each inside a single face [L4]. Since $u$ is on the frontier of $f$, one sector lies in $f$, and the straight radius from $u$ into it meets the drawing only at $u$.",
           "inputs": [
             "1.1",
-            "L1"
-          ]
+            "L4",
+            "L6"
+          ],
+          "step": "2.1"
         },
         {
           "id": "step-3-1",
-          "claim": "The order assumption excludes the one- and two-vertex degeneracies, and steps 1.1 and 2.1 prove both directions.",
-          "step": "3.1",
+          "claim": "Two such radii at distinct vertices $u,v$ of $C$, joined by a polygonal path inside the polygonally connected region $f$ [L4] and made simple, give a polygonal arc from $u$ to $v$ meeting the drawing only at its ends. So nonadjacent $u,v$ on a facial boundary contradict maximality.",
           "inputs": [
             "1.1",
-            "2.1"
-          ]
+            "2.1",
+            "L4"
+          ],
+          "step": "3.1"
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Assume $G$ maximal plane with a facial boundary cycle $C$ of length at least four, and take $u_1,u_2,u_3,u_4$ in cyclic order with $u_1$–$u_3$ subpaths $P_1\\ni u_2$ and $P_2\\ni u_4$. Step 3.1 makes $u_1u_3$ and $u_2u_4$ edges of $G$, not edges of $C$; their arcs $e,e'$ share no endpoint, so by [L6] each relative interior avoids $C$, the other arc, and $f$. Hence $J_1=e\\cup P_1$ and $J_2=e\\cup P_2$ are polygons.",
+          "inputs": [
+            "3.1",
+            "L6"
+          ],
+          "step": "4.1"
+        },
+        {
+          "id": "step-5-1",
+          "claim": "One ray in general position for the finite union $C\\cup e$ [L3] serves $C$, $J_1$ and $J_2$ at once, and its crossings satisfy $J_1+J_2=C$ modulo two. Parity is constant on $f$ and on the relative interior of $e'$ [L3]; local constancy at $u_4\\notin J_1$ and at $u_2\\notin J_2$ transfers both of $f$'s parities to $e'$, so $e'$ has $f$'s $C$-parity and meets $f$ itself by step 1.1. Part of the drawing cannot, so no facial boundary cycle has length four or more.",
+          "inputs": [
+            "1.1",
+            "4.1",
+            "L3"
+          ],
+          "step": "5.1"
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The order assumption excludes the one- and two-vertex degeneracies, and steps 5.1 and 1.2 prove both directions.",
+          "inputs": [
+            "5.1",
+            "1.2"
+          ],
+          "step": "6.1"
         }
       ],
       "routine_steps": [],
@@ -3489,27 +3611,27 @@
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "Step 1.1 treats repeated facial walks and step 3.1 discharges disconnected embeddings."
+          "evidence": "Step 1.1 derives that a facial boundary is a cycle from two-connectivity rather than assuming it, and step 6.1 discharges the small orders."
         },
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "Step 1.1 chooses chord endpoints among distinct boundary vertices and keeps the chord interior inside the face."
+          "evidence": "Steps 2.1 and 3.1 keep the constructed arc's interior inside the face and its ends exactly at the two chosen vertices."
         },
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Step 1.1 selects two nonadjacent vertices from one fixed finite facial boundary."
+          "evidence": "Step 4.1 selects four vertices from one fixed finite facial boundary cycle."
         },
         {
           "case": "iff-forward",
           "status": "checked",
-          "evidence": "Step 1.1 proves maximal implies triangular faces."
+          "evidence": "Steps 3.1 to 5.1 prove maximal implies triangular faces."
         },
         {
           "case": "iff-reverse",
           "status": "checked",
-          "evidence": "Step 2.1 proves triangular faces imply maximality."
+          "evidence": "Step 1.2 proves triangular faces imply maximality."
         }
       ],
       "finite_smoke": [],
@@ -3877,7 +3999,25 @@
           "quote": "Let $G$ be a connected plane graph. If every facial boundary walk has length at least a positive natural $g$, then",
           "uses": [
             "1.1",
-            "3.1"
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-plane-edge-face-incidence",
+          "source_section": "Statement",
+          "quote": "In a plane graph ([[def-plane-graph-face-and-boundary]]), if the relative interior of an edge meets the frontier of a face, then the whole edge lies in that frontier. An edge on a cycle is incident with two distinct faces, one on each local side. A bridge is incident with one face on both local sides and is therefore traversed twice in that face's boundary walk.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-double-counting",
+          "source_section": "Statement",
+          "quote": "Let $X$ and $Y$ be finite sets and let $R \\subseteq X \\times Y$, with row fibres $R_x$ and column fibres $R^{y}$ as in [[def-a-finite-incidence-relation-and-its-fibres]].",
+          "uses": [
+            "1.2"
           ]
         }
       ],
@@ -3892,22 +4032,31 @@
           ]
         },
         {
+          "id": "step-1-2",
+          "claim": "[L2] is an inequality and cannot by itself give equality, so count the incidences between faces and local edge sides directly. The fibre over a face is its boundary walk, of length $\\ell(f)$; the fibre over an edge has exactly two elements by [L3]. Hence [L4] gives $\\sum_{f\\in F}\\ell(f)=2m$.",
+          "inputs": [
+            "L2",
+            "L3",
+            "L4"
+          ],
+          "step": "1.2"
+        },
+        {
           "id": "step-2-1",
-          "claim": "If the graph is disconnected, draw noncrossing bridge edges through the unbounded face until its components are connected. This preserves simplicity and planarity, keeps $n$ fixed, and only increases the number of edges. Step 1.1 applied to the augmented graph therefore bounds the original $m$ by $3n-6$.",
-          "step": "2.1",
+          "claim": "If the graph is disconnected, first redraw it into pairwise disjoint discs so that every component meets the unbounded face, then join the components by noncrossing edges through that face. This preserves simplicity and planarity, keeps $n$ fixed, and only increases the number of edges. Step 1.1 applied to the augmented graph therefore bounds the original $m$ by $3n-6$.",
           "inputs": [
             "1.1"
-          ]
+          ],
+          "step": "2.1"
         },
         {
           "id": "step-3-1",
-          "claim": "In a triangulation, every face length is three, so [L2] is an equality; substitution into [L1] gives $m=3n-6$.",
-          "step": "3.1",
+          "claim": "Let the graph be a connected plane triangulation, so every face has boundary a triangle and $\\ell(f)=3$ for every face. Then step 1.2 reads $3|F|=2m$, and [L1] gives $|F|=2-n+m$, so $3(2-n+m)=2m$ and $m=3n-6$.",
           "inputs": [
-            "L2",
-            "L1",
-            "1.1"
-          ]
+            "1.2",
+            "L1"
+          ],
+          "step": "3.1"
         }
       ],
       "routine_steps": [],
@@ -3945,12 +4094,13 @@
         {
           "case": "iff-forward",
           "status": "checked",
-          "evidence": "Step 3.1 proves triangulation gives equality."
+          "evidence": "Step 3.1 proves that a connected plane triangulation attains the bound."
         },
         {
           "case": "iff-reverse",
-          "status": "checked",
-          "evidence": "Step 3.1 proves equality forces every facial boundary length to be three in the applicable maximal embedding."
+          "status": "not_applicable",
+          "evidence": "Step 3.1 proves equality forces every facial boundary length to be three in the applicable maximal embedding.",
+          "reason": "The equality clause is one directional: a connected plane triangulation has $m=3n-6$. The converse is prop-maximally-planar-edge-characterisation, not this corollary."
         }
       ],
       "finite_smoke": [],
@@ -4061,7 +4211,7 @@
           "fact": "L1",
           "source": "cor-planar-simple-graph-edge-bound",
           "source_section": "Statement",
-          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$. A plane triangulation has equality, and by [[prop-maximal-plane-triangulation-characterisation]] every maximal plane graph of this order is such a triangulation. Connected components are those of [[cor-connected-components-partition-the-vertex-set]].",
+          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$.",
           "uses": [
             "2.1"
           ]
@@ -4157,7 +4307,7 @@
           "fact": "L2",
           "source": "cor-planar-simple-graph-edge-bound",
           "source_section": "Statement",
-          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$. A plane triangulation has equality, and by [[prop-maximal-plane-triangulation-characterisation]] every maximal plane graph of this order is such a triangulation. Connected components are those of [[cor-connected-components-partition-the-vertex-set]].",
+          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$.",
           "uses": [
             "1.1"
           ]
@@ -4330,7 +4480,7 @@
           "fact": "L1",
           "source": "cor-planar-simple-graph-edge-bound",
           "source_section": "Statement",
-          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$. A plane triangulation has equality, and by [[prop-maximal-plane-triangulation-characterisation]] every maximal plane graph of this order is such a triangulation. Connected components are those of [[cor-connected-components-partition-the-vertex-set]].",
+          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$.",
           "uses": [
             "1.1",
             "2.1"
@@ -6127,7 +6277,7 @@
           "fact": "L1",
           "source": "cor-planar-simple-graph-edge-bound",
           "source_section": "Statement",
-          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$. A plane triangulation has equality, and by [[prop-maximal-plane-triangulation-characterisation]] every maximal plane graph of this order is such a triangulation. Connected components are those of [[cor-connected-components-partition-the-vertex-set]].",
+          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$.",
           "uses": [
             "1.1"
           ]

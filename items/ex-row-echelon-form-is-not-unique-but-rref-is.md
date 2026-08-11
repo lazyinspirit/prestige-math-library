@@ -34,7 +34,7 @@ but both reduce to $I_2$.
 
 **Given:** The displayed matrix and two proposed reductions.
 
-[L1] Every matrix has a unique reduced row echelon form ([[thm-reduced-row-echelon-form-is-unique]]).
+[L1] Every **finite** matrix **over a field** is row equivalent to exactly one matrix in reduced row echelon form ([[thm-reduced-row-echelon-form-is-unique]]).
 
 [L2] Echelon form and reduced echelon form have the stated pivot conditions ([[def-row-echelon-reduced-row-echelon-and-pivots]]).
 

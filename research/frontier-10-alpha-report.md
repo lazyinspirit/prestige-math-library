@@ -1090,3 +1090,221 @@ None of these is a fatal defect and none of them is repairable at step 8 without
 voiding a verdict for no gain. They belong in the step-10 rundown as known,
 recorded, non-blocking.
 
+
+---
+
+## Stage 3, round 2 — step 8 rejudge adjudication — **COMPLETE**
+
+The 12 round-1 repairs were rejudged on both lanes: **10 `keep`, 14 rejections
+across 10 items.** Two items cleared both lanes outright
+(`prop-maximally-planar-edge-characterisation`,
+`def-isomorphism-groupoid-and-connected-category`) and are done.
+
+All 14 rejections are adjudicated in
+`research/frontier-10-judge-adjudications.jsonl`, one row per rejecting lane,
+every row carrying `item_sha256` at the pre-edit state. All ten pre-edit hashes
+were verified to match **both** the `pre-step8b` touch snapshot and the
+`item_sha256` the judges themselves recorded, so the text I adjudicated is
+provably the text they read.
+
+**10 `confirmed_fatal` over 8 items; 4 `confirmed_nonfatal`; 0 `false_positive`.**
+
+### The four nonfatal closures — no mutation of any kind
+
+- **`lem-colour-focussing-for-arithmetic-progressions` (deepseek).** Step 3.1
+  asserts the new colour differs from every $A_i$ colour "since equality would
+  give an $m$-term progression". The lemma's conclusion is a disjunction, so the
+  equality case lands in its *first* alternative and the conclusion still holds;
+  only the sentence is elliptical. (The item is repaired anyway under Terra's
+  separate fatal row, and that repair spells the disjunction out.)
+- **`ex-cavalieri-shear-preserves-jordan-content` (terra).** Step 2.1 uses,
+  uncited, that translating a one-dimensional Jordan section preserves its
+  content. True, elementary, and sitting in prose the item **itself** labels "a
+  second reading of the result and not a second proof of it", with step 1.1
+  carrying the statement outright from the determinant-1 linear image. DeepSeek
+  passed the item and said as much.
+- **`thm-plane-dual-exists-and-double-dual-recovers-primal` (terra).** Steps 3.1
+  and 4.1 form $(G^*)^*$ without restating that $G^*$ is simple. The Statement
+  hypothesises it explicitly and even names $G=K_2$ as the excluded case. Terra
+  is asking for the hypothesis to be repeated inside the conditional's proof.
+- **`lem-factor-elements-act-on-reduced-syllable-words` — NOT nonfatal.** See
+  below; DeepSeek's finding here was confirmed fatal.
+
+### The eight fatal repairs
+
+**`cor-planar-simple-graph-edge-bound` — both lanes, `dependency_citation`.**
+Step 3.1 read [L2] as an equality. `lem-plane-face-handshake-by-girth` states
+only $g|F|\le2|E|$; the equality case needs the face-handshake **identity**
+$\sum_f\ell(f)=2|E|$, which that lemma proves in its own step 1.1 and does not
+export. New step 1.2 derives the identity inline from
+`lem-plane-edge-face-incidence` (two local sides per edge) and
+`thm-double-counting`. [L2] also had "connected" restored. **The Statement and
+title were narrowed to a *connected* plane triangulation** — Euler's formula is a
+connected-graph statement and the proof uses nothing that would give
+connectedness for free.
+
+**`cor-triangle-free-planar-edge-bound` — deepseek, `dependency_citation`.**
+[L2] restated `lem-plane-face-handshake-by-girth` without its connectedness
+hypothesis, asserting at a generality the library has not established. One word;
+the proof's own use was already inside the connected case.
+
+**`prop-maximal-plane-triangulation-characterisation` — both lanes.** The forward
+direction rested on two claims with no cited licence: that two boundary vertices
+of a face can be joined by an arc through the face, and that two-connectivity
+makes the facial boundary a cycle. Round 1 repaired only the title here, so this
+is the first round in which the proof body itself was challenged — progress, not
+a loop. Rewritten in five steps from the page's own polygonal toolkit: the face
+is a region of its boundary cycle (clopen argument); a local sector construction
+gives an accessible radius at each boundary vertex; polygonal connectedness of
+the region joins two radii into an arc; and the asserted "chords must cross" is
+replaced by a **crossing-parity** argument — one general-position ray for
+$C\cup e$ serves $C$, $J_1$ and $J_2$ at once, their parities satisfy
+$J_1+J_2=C$ modulo two, and local constancy at $u_4\notin J_1$ and $u_2\notin J_2$
+forces the chord $e'$ into $f$ itself. Six deps added, all already reachable;
+`validate-plan` is clean.
+
+**`thm-dirichlet-test-for-improper-integrals` — both lanes,
+`dependency_citation`.** Step 1.2 applied [L3] integration by parts, whose
+hypothesis is $F'=f$, without ever establishing it. Clause 2 assumes $f$
+continuous, so the first fundamental theorem supplies it; `thm-ftc-first-part`
+added as [L5] and cited at the step that consumes it.
+
+**`ex-finite-step-integrator-weighted-jump-sum` — terra,
+`dependency_citation`.** [L1] dropped the cited example's $a<c<b$. Without it the
+fact is **false**: under the displayed convention $H_a\equiv1$ on $[a,b]$, so a
+jump at $a$ contributes $0$, not $f(a)$ — which is the very defect round 1
+repaired in this item's Statement, still live in its fact restatement.
+
+**`ex-row-echelon-form-is-not-unique-but-rref-is` — terra,
+`dependency_citation`.** [L1] said "every matrix has a unique reduced row echelon
+form"; the cited theorem says "every **finite** matrix **over a field**". False
+as restated, and this run also builds
+`determinants-of-matrices-over-a-commutative-ring`, where it would be read.
+
+**`lem-colour-focussing-for-arithmetic-progressions` — terra, `logic`.** Step 2.1
+applied the induction hypothesis to "the first selected block", of length $2n$,
+and step 3.1 then needed the focus $f$ to lie in that block — which the $2n$
+length buys only if the hypothesis is applied to the **first half**. Step 1.1
+already performs exactly that manoeuvre explicitly. Now stated, with
+$a_i,d_i\le n$ and $f\le2n$ derived, and the disjunction of DeepSeek's finding
+spelled out in the same step.
+
+**`lem-factor-elements-act-on-reduced-syllable-words` — deepseek, `logic`.**
+Steps 2.1 and 3.1 *named* the three seam cases and asserted the outcome. That
+case check **is** the entire mathematical content of the lemma, and it carries
+the free-product normal form. All three cases are now written out for both the
+inverse law and the composition law; case (c) is where "reduced" is load-bearing,
+and it now says so.
+
+### The shared planar weakness, named once
+
+Two of the four planar rejections have one root cause:
+**`lem-plane-face-handshake-by-girth` exports only the inequality $g|F|\le2|E|$
+while proving the identity $\sum_f\ell(f)=2|E|$ internally, and states itself for
+connected graphs while consumers restate it without that word.** Every consumer
+needing equality then improvises. The right fix is at the root — record the
+identity in that lemma's Statement — but **no rejection licenses editing it**, so
+R1 correctly withheld the root fix and I repaired the consumers instead. That
+root edit belongs to the next unfrozen moment, and it is worth doing: the
+identity is proved, unexported, and reached for by more than one consumer.
+
+The remaining two planar items are not part of that pattern:
+`prop-maximal-plane-triangulation-characterisation` is a genuine plane-topology
+gap, now closed from the page's own toolkit, and
+`thm-plane-dual-exists-and-double-dual-recovers-primal` is nonfatal.
+
+### Statements re-examined under the twice-touched rule
+
+All eight repaired Statements were re-read for truth before the proof was touched
+again. **All eight are true**, and none needed narrowing on truth grounds. One
+was narrowed on *provability* grounds: `cor-planar-simple-graph-edge-bound`'s
+equality clause now says "connected plane triangulation". A plane triangulation
+of order at least three is in fact connected, but proving it needs the "a face
+meeting two components has a disconnected boundary subgraph" argument, which is a
+new lemma, not a step-8 repair.
+
+### What that narrowing costs, and what I could not do about it
+
+`prop-maximally-planar-edge-characterisation`'s [L1] now reads "with equality for
+a triangulation" where its source says "connected plane triangulation" — the same
+hypothesis-dropping class I confirmed fatal twice above, and **caused by my
+edit**. Its *use* is fully licensed: the step applies it to a graph the same step
+has just called two-connected. But the restatement is inflated, the item cleared
+both lanes this round, and **R1 gives me no licence to touch it.** One word,
+blocked. Flagging it for the owner at step 10 rather than making an unlicensed
+edit. The alternative — leaving `cor-planar-simple-graph-edge-bound` claiming
+equality for every triangulation — would have left a Statement asserting more
+than its proof gives, which is worse.
+
+### The contract and receipt closure, and a mechanism finding
+
+`proof-contract --strict` was failing on **9 errors before I made any round-2
+edit** — I verified this by stashing my changes and re-running at HEAD. They are
+the residue of round 1 and of the step-6 repairs before it: `ex-cavalieri-shear`'s
+contract still named a step 3.1 that round 1 had merged away, and six consumers
+quoted Statements that had since changed. `risk-report --require-reviewed` was
+likewise already failing, on a `risk_review` for `ex-cavalieri-shear` that round 1
+dropped.
+
+**The mechanism finding: step 8's gate table runs `step8-guard`, `impact-audit`
+and `level-coverage` — and no `proof-contract`, `finite-smoke` or `risk-report`.**
+So a step-8 fatal repair can silently invalidate its own contract, and did.
+`QUALITY-CONTROLS.md` requires those three after step 5 and after step-6 repairs;
+step 8 was never added. That is a real gap and it should be closed in
+`gates.mjs`, not by remembering to run them by hand.
+
+All of it is now closed. Contracts for the eight repaired items were rewritten to
+match disk, the nine pre-existing errors were fixed, the missing `risk_review` was
+written from my own round-2 reading, and the batch files — not just the merged
+file — carry the changes, so a re-merge cannot clobber them. The patch is
+committed as `research/frontier-10-dispatch/step8b-contract-refresh.mjs` so the
+work is reproducible rather than hand-edited. `proof-contract --strict`: 0 errors.
+`risk-report --require-reviewed`: 0 errors. `finite-smoke`: 0 errors.
+
+Three `audit-receipt-*` errors were also closed: my dep additions to
+`cor-planar-simple-graph-edge-bound`, `prop-maximal-plane-triangulation-characterisation`
+and `thm-dirichlet-test-for-improper-integrals` moved the planned-versus-authored
+drift set from 72 rows to 74. All three carry reasoned `plan_reconciliation` rows
+naming the exact steps that consume the new edges, the 71 prior reasons were
+carried forward unchanged, and `manifest_sha256` is rebound. `item_scope` (584)
+and `proof_scope` (475) are unchanged.
+
+### Gate state at the end of round 2
+
+- `step8-guard.mjs` — **OK. 8 changed, 8/8 licensed.**
+- `impact-audit.mjs` — **OK.**
+- `validate-plan.mjs` — **OK**; no `undeclared-prereq`, `b-leaf` or forward
+  reference from the nine added dependency edges.
+- `precheck` — **8/8 clean**, canonical stratification adopted where it
+  renumbered steps.
+- `level-coverage.mjs --verify-current-context` — **9 errors, all expected**:
+  8 × `judge-coverage-missing` (the 8 repaired items) and 1 ×
+  `spine-receipt-invalid`. Both clear after the rejudge; the spine receipt must
+  be refreshed **after** it, by a reader independent of the repairer.
+
+### The round-2 rejudge set — 8 items
+
+```
+prop-maximal-plane-triangulation-characterisation
+cor-planar-simple-graph-edge-bound
+cor-triangle-free-planar-edge-bound
+thm-dirichlet-test-for-improper-integrals
+ex-finite-step-integrator-weighted-jump-sum
+ex-row-echelon-form-is-not-unique-but-rref-is
+lem-colour-focussing-for-arithmetic-progressions
+lem-factor-elements-act-on-reduced-syllable-words
+```
+
+The four items whose rejections closed nonfatal changed by not a single byte and
+need no rejudge — that is R1's exit, and taking it is what ends the loop.
+
+### Blockers recorded, not prompted
+
+1. **`prop-maximally-planar-edge-characterisation` [L1]** needs "connected"
+   added. Unlicensed at step 8. Owner call at step 10.
+2. **`lem-plane-face-handshake-by-girth`** should export the handshake identity
+   its own proof establishes. Unlicensed at step 8; root fix for the next
+   unfrozen moment.
+3. **`gates.mjs` step 8 should run `proof-contract`, `finite-smoke` and
+   `risk-report`.** A mechanism change, so it is the orchestrator's to make, with
+   `ARCHITECTURE.md` updated in the same commit.

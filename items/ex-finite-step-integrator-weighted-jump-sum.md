@@ -36,7 +36,7 @@ $$\int_a^b f\,d\alpha=\sum_{j=1}^m w_jf(c_j).$$
 
 **Given:** The displayed finite-step integrator and a continuous $f$.
 
-[L1] A single jump of weight one evaluates $f$ at its jump point ([[ex-step-integrator-evaluates-at-the-jump]]).
+[L1] For $a<c<b$ and $H_c$ equal to $0$ below $c$ and $1$ from $c$ on, every continuous $f$ has $\int_a^bf\,dH_c=f(c)$: a single jump of weight one at an **interior** point evaluates $f$ there ([[ex-step-integrator-evaluates-at-the-jump]]).
 
 [L2] The Stieltjes integral is linear in its integrator ([[thm-riemann-stieltjes-linearity-and-additivity]]).
 
