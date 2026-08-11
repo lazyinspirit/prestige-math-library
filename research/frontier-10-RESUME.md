@@ -328,3 +328,22 @@ the next unfrozen moment, not defects in the mathematics as published.
   Two planar propositions are now stated for two-connected graphs; the general
   forms need a re-embedding lemma the page does not have.
   `research/frontier-10-alpha-report.md` §"Honest gaps this stage leaves".
+
+## Owner decisions at the step-10 pause (2026-08-11)
+
+Taken one at a time with the owner.
+
+1. **`prop-maximally-planar-edge-characterisation` `[L1]`** — *fix now*. Applied;
+   reads "connected plane triangulation", matching its source. **Cleared both
+   lanes on rejudge.** Correction to the step-10 rundown: both consumers of the
+   handshake lemma already cited it *with* "connected", so the step-8 repairs had
+   closed that half.
+2. **`lem-plane-face-handshake-by-girth`** — *export the identity, lemma only*.
+   Applied: the Statement now carries $\sum_f\ell(f)=2|E|$ as well as
+   $g|F|\le2|E|$, and the title describes both. Consumers deliberately untouched.
+   Rejudge in flight.
+3. **The 33 published scope-denial edits** — *all 33, in the publishing commit*.
+   Six were falsified by this run, 27 are inherited. Exact old/new text is in
+   `research/frontier-10-step9-scope-denial.md` §P1–P33. **Not yet applied.**
+4. Pending.
+
