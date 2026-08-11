@@ -1,7 +1,7 @@
 ---
 id: lem-plane-face-handshake-by-girth
 kind: lemma
-title: "Facial boundary walks of a connected plane graph sum to $2|E|$, so girth at least $g$ gives $g|F|\\le2|E|$"
+title: "Facial boundary walks of a connected plane graph sum to $2|E|$, and if every such walk has length at least $g$ then $g|F|\\le2|E|$"
 status: draft
 origin: session
 provenance:
