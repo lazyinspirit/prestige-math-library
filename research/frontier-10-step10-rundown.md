@@ -166,3 +166,23 @@ Committed as they were found, each with its measurement:
   fatal repair edits proof text, which is exactly what invalidates a contract.
 - Alpha now reviews scaffold breadth at **step 3**, not step 4.
 - `dispatch.mjs` — `web: true` on the `beta` and `reader` lanes.
+
+## Post-pause addendum — step8-guard window correction
+
+Verified before re-baselining, so the evidence is not erased by the new snapshot.
+
+`step8-guard --baseline pre-step8d` reported **3 changed, 2 licensed**:
+
+- `cor-planar-simple-graph-edge-bound` — licensed, `confirmed_fatal`
+- `rem-riemann-stieltjes-conventions-and-scope` — licensed, `confirmed_fatal`
+- `rem-real-exponents-deferred` — **`nonfatal-edit`, and correctly so**
+
+The third is the orchestrator's own P15 title edit, applied under the owner's
+item-3 approval of all 33 published scope-denial edits. It is licensed by that
+approval, not by R1, which governs judge-rejection repairs only. It tripped the
+guard because I took the `pre-step8d` baseline and *then* applied P15, putting a
+non-step-8 edit inside step 8's window. Sequencing error on my part; the guard
+behaved exactly as designed.
+
+Both of Alpha's step-8d repairs are properly licensed. The baseline is retaken as
+`pre-verify` so the gate measures the window it is meant to.

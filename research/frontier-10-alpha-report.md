@@ -1609,3 +1609,164 @@ and both pass. This is an infrastructure receipt blocker, not a prosecheck
 failure, and must be carried plainly into step 10.
 
 No published file was mutated. No permission prompt was raised.
+
+## Stage 3, round 4 — step 8d, the two remaining rejections — **COMPLETE**
+
+Dispatch: `research/frontier-10-alpha-step8d.task.md`. Four rejections on two
+items. **Three confirmed fatal and repaired; one false positive closed with no
+mutation.**
+
+### Baseline — `pre-step8d` could not be used
+
+`pre-step8d` was taken at `06:27:40Z`; commit `044c15b4` ("owner item 3 — all 33
+published scope-denial edits applied") landed at `16:29:11 +1000` = `06:29:11Z`,
+**inside that window**. So the snapshot straddles an owner-directed step-9/10
+application, and `step8-guard --baseline pre-step8d` reports
+`ERROR nonfatal-edit: rem-real-exponents-deferred` — an owner-approved
+scope-denial edit (title plus the closing paragraph), not a step-8 polish. That
+is exactly the case the guard's own docstring says must sit outside the window.
+
+R1 requires a dedicated baseline taken *immediately before* adjudication, so I
+took **`pre-step8e`** (`06:35:48Z`), adjudicated against it, and snapped
+`after-step8e` afterwards. `step8-guard --baseline pre-step8e`:
+`2 changed, 0 created, 0 deleted; 2/2 licensed by a confirmed_fatal`.
+
+### `cor-planar-simple-graph-edge-bound`
+
+`item_sha256` at adjudication `650a414d…`, after repair `92e32f39…`.
+
+**Terra — `confirmed_fatal` (`logic`).** Step 1.2 applied [L4] double counting to
+a face-indexed relation without establishing that the face set is finite.
+Finiteness is a hypothesis of the cited theorem, it is nowhere given, and
+`$\sum_{f\in F}$` needs a finite index set besides. It is not a 30-second gap:
+the fact is its own inductive lemma on this page, resting on the polygonal
+Jordan curve theorem.
+
+**Repair — at the root, not at the symptom.** The cited lemma
+`lem-plane-face-handshake-by-girth` **states the equality**
+`∑_{f∈F} ℓ(f) = 2|E|` for a connected plane graph and derives `g|F|≤2|E|` from
+it. This item's [L2] reported only the derived inequality. That under-citation is
+what produced step 1.2 in the first place: three earlier rejections (Terra ×2,
+DeepSeek ×1) all said "[L2] is only an inequality, so step 3.1's equality is
+unestablished", and the previous repair answered them by re-deriving the equality
+by hand — importing the finiteness hypothesis Terra has now caught.
+
+So rather than bolt the finiteness lemma on beside the hand derivation, I
+restated [L2] faithfully (equality first, inequality as its consequence, near
+verbatim from the lemma) and reduced step 1.2 to citing it. The double count is
+gone, and with it the unmet hypothesis; face-finiteness now lives where it is
+proved, inside the lemma, which carries its own `[L3]` finiteness fact after
+Beta-6's repair. `thm-double-counting` left `deps` with its last use.
+
+`lem-plane-edge-face-incidence` went with it. I first kept it as an uncited
+supporting fact, and `proof-contract.mjs --strict` was right to reject that:
+a fact no numbered step cites is exactly the "unused edge" the Beta
+dependency-discipline rule forbids, and the contract has nowhere to map it. So
+the facts are now `[L1]` Euler, `[L2]` handshake, `[L3]` triangulation-connected,
+with step 3.1 retagged. Steps 1.1 and 2.1 untouched. The batch-6 proof contract
+was rewritten to match — citations, both changed step claims, both input maps —
+re-merged, and `proof-contract.mjs --strict` and `finite-smoke.mjs` both come
+back at 0 errors over all 476 items.
+
+**DeepSeek — `false_positive`, no mutation.** It says step 2.1's redrawing
+"claims placing components into disjoint discs makes each meet the unbounded
+face, which is false". The claim is true. After the components are separated into
+pairwise disjoint discs, the complement of the union of those discs is connected
+and unbounded, hence inside the unbounded face; and for each component the
+point of its drawing with largest first coordinate has an open ray to the right
+meeting no drawing at all, so it lies on the frontier of that face. Every
+component therefore does meet the unbounded face. DeepSeek passed this same
+construction in an earlier round (`64482e17…`, "reduction of disconnected case
+via redrawing is valid") and its nested-component objection two rounds before
+that is precisely what the redrawing answers.
+
+There is a residual gap it did not name: the joining arcs need a **vertex** on
+that frontier, not merely a point. It closes immediately — if the extreme point
+is interior to an edge, `lem-plane-edge-face-incidence` puts the whole edge, and
+so its endpoints, in the frontier. Well inside the 30-second rule, therefore
+nonfatal, and under R1 not a licence to edit. Recorded as `false_positive`
+because the named defect — falsity of the construction — is not present.
+
+### `rem-riemann-stieltjes-conventions-and-scope`
+
+`item_sha256` at adjudication `baed18a9…`, after repair `2b6f881f…`.
+
+**DeepSeek — `confirmed_fatal` (`dependency_citation`).** The forward reference
+was to `thm-holder-finite-real-exponents`, which is **Hölder's inequality for
+finite sums with conjugate real exponents** — an inequality about sums, nothing
+to do with the Hölder-*continuity* exponent in Young's theorem. A name collision
+produced a false claim about what the library supplies.
+
+The *reason* the remark gives survives scrutiny and I checked it against
+`plan-spec.json` rather than assuming: this page is order **163**, real powers
+arrive on `the-logarithm-and-general-powers` at order **177**, and
+`thm-young-riemann-stieltjes-existence-rational` really does rest on
+`def-rational-power` and its laws. Only the pointer was wrong. Repaired to
+`[[def-real-power]]`, the item that actually introduces arbitrary real
+exponents; `forward_refs` updated to match, which is the same target
+`rem-real-exponents-deferred` already forward-references. `fwdcheck` marks the
+item `direct` forward-dependent, as before.
+
+**Terra — `confirmed_fatal` (`logic`).** The Darboux summary asserted an
+equivalence while dropping the cited theorem's `a<b`. On `[a,a]` the two sides
+genuinely part company: the integral is `0` by convention so every bounded
+integrand is integrable, while no partition of a singleton exists, so the
+Darboux condition fails. A conventions-and-scope remark that already rules on
+singletons in its first sentence cannot omit this. Repaired by stating the
+hypothesis and, in one added sentence, why it is not cosmetic — mirroring the
+paragraph `thm-riemann-stieltjes-darboux-criterion` itself carries.
+
+I did **not** add the "bounded integrand" hypothesis Terra raised in an earlier
+round (`af9b09b2…`): that rejection is closed `confirmed_nonfatal` on its ledger
+row, and R1 gives no licence to reopen it while repairing a different defect in
+the same sentence.
+
+### Gates
+
+`precheck` PASS on both (adopted its canonical stratification for the corollary).
+`step8-guard --baseline pre-step8e` OK. `depcheck` OK, `extcheck` OK. Neither
+item carried a `verification.judge` stamp, so there was none to delete.
+`depcheck`'s single mention of the remark is the pre-existing advisory
+`cited-not-in-deps` for a forward reference, which the old wrong pointer produced
+identically — verified by stashing the edit and re-running.
+
+### Second blocker — `lem-plane-triangulation-is-connected` has no `risk_review`
+
+`risk-report.mjs --require-reviewed` errors `risk-review-missing` on it. It is
+**CRITICAL 8** (7 declared dependencies; 6 cited facts; 6 numbered proof steps;
+boundary-sensitive language) — the highest tier on this run — and a critical item
+routes to an additional Alpha proof-refuter *and* requires the Alpha
+`risk_review` record. It is the lemma built today for owner item 4, so it never
+went through the step-6 refuter wave that produced everyone else's dispositions.
+Not caused by these repairs, and not in this dispatch's scope.
+
+I did read its proof closely here, because step 3.1 of the corollary now rests on
+it, and I found nothing false: the contradiction runs from a component `C` and
+the rest `H`, gets a vertex `y` of `H` on the frontier of a face `f` of `G`, gets
+a vertex of `C` on the same frontier, and closes because a triangle boundary is
+connected while a path between two components is impossible. That is my reading,
+not a refuter's, so I have **not** written the `risk_review` — the record would
+claim evidence the control requires and I do not have. Dispatch a refuter on it
+and the review can be written immediately.
+
+### Third blocker — `fwdcheck` now FAILS at HEAD
+
+Not from these repairs. `node tools/fwdcheck.mjs` exits **1** with **16
+`forward-undeclared` errors**, none of them on either item I touched. All 16 are
+committed at HEAD, in files rewritten by commit `044c15b4` (owner item 3), and
+`fwdcheck` passed when I verified at step 9 before that commit. The scope-denial
+edits introduced wikilinks that point forward without a `forward_refs`
+declaration, so the reader-facing sky/↗ marking those references require is not
+being applied. Affected ids include `ex-square-root-is-half-holder`,
+`ex-x-to-the-beta-separates-the-holder-classes`,
+`thm-holder-exponent-above-one-forces-constancy`, `lem-power-over-geometric-null`
+(all → `def-real-power` / `thm-real-power-continuity-and-derivatives`),
+`rem-absolutely-continuous-function`, `rem-monotone-convergence-theorem`,
+`fs-continuous-bijection-is-a-homeomorphism`,
+`thm-countable-subsets-of-omega-one-are-bounded`. The fix is frontmatter-only —
+declare each link in `forward_refs` — but it is outside this dispatch and it
+touches published items, so I am recording it rather than doing it.
+
+The step-9 `gates.mjs` wrapper blocker is unchanged: the nested `/usr/bin/node`
+spawn still fails `EPERM` under this runtime, so I ran the constituent gates
+directly. No permission prompt was raised, and no published file was mutated.
