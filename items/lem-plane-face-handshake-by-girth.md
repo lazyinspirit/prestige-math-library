@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-plane-edge-face-incidence, prop-face-boundaries-in-two-connected-plane-graphs, thm-double-counting, def-graph-distance-and-girth, def-sum-over-a-finite-index-set]
+deps: [lem-plane-edge-face-incidence, prop-face-boundaries-in-two-connected-plane-graphs, thm-double-counting, def-graph-distance-and-girth, def-sum-over-a-finite-index-set, lem-plane-graph-faces-are-finite-with-one-unbounded-face]
 justified_by: []
 aliases: []
 landmark: true
@@ -44,11 +44,12 @@ Facial walks count a bridge twice by [[lem-plane-edge-face-incidence]]. Cyclic b
 
 [L2] Each edge contributes two local face sides; a bridge contributes twice to its single facial boundary walk ([[lem-plane-edge-face-incidence]]).
 
+[L3] Every plane graph has finitely many faces, exactly one of which is unbounded ([[lem-plane-graph-faces-are-finite-with-one-unbounded-face]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Count incidences between faces and local edge sides. By [L2] every edge supplies exactly two sides, while the fibre over a face has size equal to its boundary-walk length. Thus [L1] gives $\sum_{f\in F}\ell(f)=2|E|$. [L1, L2]
+1.1 By [L3], $F(G)$ is finite. Count incidences between faces and local edge sides. By [L2] every edge supplies exactly two sides, while the fibre over a face has size equal to its boundary-walk length. Thus [L1] gives $\sum_{f\in F}\ell(f)=2|E|$. [L1, L2, L3]
 
 2.1 Since each $\ell(f)\ge g$, summing these inequalities yields $g|F|\le\sum_f\ell(f)=2|E|$. [step 1.1, L2, algebra] ∎
-
