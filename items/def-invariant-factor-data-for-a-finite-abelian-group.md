@@ -2,7 +2,7 @@
 id: def-invariant-factor-data-for-a-finite-abelian-group
 kind: definition
 title: "Invariant-factor data for a finite abelian group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

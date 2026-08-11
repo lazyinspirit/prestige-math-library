@@ -2,7 +2,7 @@
 id: lem-nonzero-echelon-rows-form-a-basis-of-the-row-space
 kind: lemma
 title: "The nonzero rows of a row echelon form form a basis of the original row space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

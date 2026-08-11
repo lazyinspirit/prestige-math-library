@@ -2,7 +2,7 @@
 id: thm-conjugates-of-proper-subgroup-do-not-cover-finite-group
 kind: theorem
 title: "The conjugates of a proper subgroup do not cover a finite group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

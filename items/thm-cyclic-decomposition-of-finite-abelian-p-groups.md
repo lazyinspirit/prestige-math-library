@@ -2,7 +2,7 @@
 id: thm-cyclic-decomposition-of-finite-abelian-p-groups
 kind: theorem
 title: "Every finite abelian p-group is a direct product of cyclic p-groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

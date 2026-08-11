@@ -2,7 +2,7 @@
 id: cor-ramsey-recursion-and-diagonal-upper-bound
 kind: corollary
 title: "$R(s,t)\\le R(s-1,t)+R(s,t-1)$ for $s,t\\ge2$, and $R(k,k)\\le\\binom{2k-2}{k-1}\\le2^{2k-2}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

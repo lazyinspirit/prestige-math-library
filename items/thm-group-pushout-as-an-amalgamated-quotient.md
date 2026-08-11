@@ -2,7 +2,7 @@
 id: thm-group-pushout-as-an-amalgamated-quotient
 kind: theorem
 title: "A group pushout is the quotient of a free product by the amalgamating relations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

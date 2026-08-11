@@ -2,7 +2,7 @@
 id: cor-polynomial-ring-over-a-domain-is-a-domain
 kind: corollary
 title: 'A polynomial ring over an integral domain is an integral domain'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

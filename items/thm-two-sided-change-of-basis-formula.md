@@ -2,7 +2,7 @@
 id: thm-two-sided-change-of-basis-formula
 kind: theorem
 title: '$[T]_{\mathcal B''}^{\mathcal C''}=P_{\mathcal C''\leftarrow\mathcal C}[T]_{\mathcal B}^{\mathcal C}P_{\mathcal B\leftarrow\mathcal B''}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ short: 'Two-sided change of basis'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

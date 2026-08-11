@@ -2,7 +2,7 @@
 id: prop-connected-groupoid-equivalent-to-an-automorphism-group
 kind: proposition
 title: "Under the Axiom of Choice, a connected small groupoid is equivalent to the automorphism group of any one of its objects"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

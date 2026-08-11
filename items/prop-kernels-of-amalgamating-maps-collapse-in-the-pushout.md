@@ -2,7 +2,7 @@
 id: prop-kernels-of-amalgamating-maps-collapse-in-the-pushout
 kind: proposition
 title: "The kernels of the amalgamating maps are killed in the opposite canonical maps to a group pushout"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

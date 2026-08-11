@@ -2,7 +2,7 @@
 id: cor-finite-subgroups-of-units-in-a-domain-are-cyclic
 kind: corollary
 title: 'Every finite subgroup of the unit group of an integral domain is cyclic'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

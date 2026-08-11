@@ -2,7 +2,7 @@
 id: cex-principal-value-one-over-x-squared-diverges
 kind: counterexample
 title: "$1/x^2$ has no finite Cauchy principal value at zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

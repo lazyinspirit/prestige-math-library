@@ -2,7 +2,7 @@
 id: def-uniform-ramsey-number
 kind: definition
 title: "The uniform Ramsey number $R_k(r;c)$ as the least finite witness for $c$ colours on $k$-element subsets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

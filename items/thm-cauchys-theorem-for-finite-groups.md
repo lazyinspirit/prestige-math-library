@@ -2,7 +2,7 @@
 id: thm-cauchys-theorem-for-finite-groups
 kind: theorem
 title: "Cauchy's theorem: if a prime $p$ divides $|G|$, then $G$ has an element of order $p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

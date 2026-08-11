@@ -2,7 +2,7 @@
 id: cor-converse-of-lagrange-for-finite-abelian-groups
 kind: corollary
 title: "Converse of Lagrange for finite abelian groups: every divisor occurs as a subgroup order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

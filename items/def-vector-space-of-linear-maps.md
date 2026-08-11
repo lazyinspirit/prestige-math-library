@@ -2,7 +2,7 @@
 id: def-vector-space-of-linear-maps
 kind: definition
 title: 'The space $\mathcal L(V,W)$ of linear maps with pointwise addition and scalar multiplication'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

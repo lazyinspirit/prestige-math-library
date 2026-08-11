@@ -2,7 +2,7 @@
 id: thm-riemann-stieltjes-c1-integrator-reduction
 kind: theorem
 title: "A continuously differentiable integrator reduces Stieltjes integration to ordinary integration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

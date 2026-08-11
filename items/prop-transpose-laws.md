@@ -2,7 +2,7 @@
 id: prop-transpose-laws
 kind: proposition
 title: 'Transpose is linear and involutive, and $(AB)^{\mathsf T}=B^{\mathsf T}A^{\mathsf T}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

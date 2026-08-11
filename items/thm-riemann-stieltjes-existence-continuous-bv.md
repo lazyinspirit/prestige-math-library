@@ -2,7 +2,7 @@
 id: thm-riemann-stieltjes-existence-continuous-bv
 kind: theorem
 title: "A continuous integrand is Riemann–Stieltjes integrable against every bounded-variation integrator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ short: '$f\in C,\ \alpha\in BV\Rightarrow\int f\,d\alpha$'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

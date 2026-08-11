@@ -2,7 +2,7 @@
 id: def-opposite-category
 kind: definition
 title: "Opposite category $\\mathcal C^{\\mathrm{op}}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

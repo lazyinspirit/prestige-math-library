@@ -2,7 +2,7 @@
 id: thm-van-der-waerden-with-monochromatic-difference
 kind: theorem
 title: "Van der Waerden's theorem, strengthened so the progression and its common difference have one colour"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Strengthened van der Waerden theorem"
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

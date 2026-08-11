@@ -2,7 +2,7 @@
 id: def-triangular-and-diagonal-matrices-over-a-commutative-ring
 kind: definition
 title: "Upper triangular, lower triangular and diagonal square matrices over a commutative ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

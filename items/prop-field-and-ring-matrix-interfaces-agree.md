@@ -2,7 +2,7 @@
 id: prop-field-and-ring-matrix-interfaces-agree
 kind: proposition
 title: "For a field, the ring-matrix operations, invertibility and similarity agree exactly with the established field-matrix interface"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

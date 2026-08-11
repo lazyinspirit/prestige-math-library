@@ -2,7 +2,7 @@
 id: ex-two-sided-basis-change-for-a-rectangular-linear-map
 kind: example
 title: 'Changing both domain and codomain bases of a map $F^2\to F^3$ uses both sides of the formula'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

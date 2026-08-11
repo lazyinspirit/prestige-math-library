@@ -2,7 +2,7 @@
 id: cor-planar-graph-has-low-degree-vertex
 kind: corollary
 title: "Every nonnull simple planar graph has a vertex of degree at most five"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-determinant-is-the-unique-normalized-alternating-multilinear-function
 kind: theorem
 title: "The determinant is the unique normalized alternating multilinear function on the columns"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

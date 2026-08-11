@@ -2,7 +2,7 @@
 id: cex-faithful-transitive-action-need-not-be-free
 kind: counterexample
 title: "The natural action of $S_3$ on three points is faithful and transitive but not free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

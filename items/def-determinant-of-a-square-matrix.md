@@ -2,7 +2,7 @@
 id: def-determinant-of-a-square-matrix
 kind: definition
 title: 'For $n\ge1$, the determinant over a commutative ring by the Leibniz formula, and $|\det A|$ for a real matrix'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

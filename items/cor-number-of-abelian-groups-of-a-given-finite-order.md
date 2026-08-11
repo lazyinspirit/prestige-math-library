@@ -2,7 +2,7 @@
 id: cor-number-of-abelian-groups-of-a-given-finite-order
 kind: corollary
 title: "The number of finite abelian groups of order n is the product of the partition numbers of the prime exponents of n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

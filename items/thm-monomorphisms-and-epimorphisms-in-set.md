@@ -2,7 +2,7 @@
 id: thm-monomorphisms-and-epimorphisms-in-set
 kind: theorem
 title: "In $\\mathbf{Set}$, monomorphisms are exactly injections and epimorphisms are exactly surjections"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

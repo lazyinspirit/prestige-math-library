@@ -2,7 +2,7 @@
 id: fs-determinant-is-additive-on-matrices
 kind: false-statement
 title: 'FALSE: $\det(A+B)=\det(A)+\det(B)$ for all same-sized square matrices'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

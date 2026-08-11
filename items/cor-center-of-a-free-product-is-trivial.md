@@ -2,7 +2,7 @@
 id: cor-center-of-a-free-product-is-trivial
 kind: corollary
 title: "The center of a free product with at least two nontrivial factors is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

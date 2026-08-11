@@ -2,7 +2,7 @@
 id: cor-parallelepiped-content-is-the-absolute-determinant
 kind: corollary
 title: "The Jordan content of the parallelepiped spanned by the columns of a square real matrix is the absolute value of its determinant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

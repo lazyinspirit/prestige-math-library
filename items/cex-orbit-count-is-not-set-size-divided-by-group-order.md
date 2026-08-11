@@ -2,7 +2,7 @@
 id: cex-orbit-count-is-not-set-size-divided-by-group-order
 kind: counterexample
 title: 'A nonfree action can have $|X/G|\ne|X|/|G|$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

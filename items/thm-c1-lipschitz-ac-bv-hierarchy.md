@@ -2,7 +2,7 @@
 id: thm-c1-lipschitz-ac-bv-hierarchy
 kind: theorem
 title: "$C^1$ implies Lipschitz, Lipschitz implies absolutely continuous, and absolutely continuous implies continuous and bounded variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -22,6 +22,7 @@ short: '$C^1\subseteq\mathrm{Lip}\subseteq AC\subseteq C\cap BV$'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

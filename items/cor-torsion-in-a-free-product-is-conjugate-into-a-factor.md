@@ -2,7 +2,7 @@
 id: cor-torsion-in-a-free-product-is-conjugate-into-a-factor
 kind: corollary
 title: "Finite-order elements of a free product are conjugate into factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

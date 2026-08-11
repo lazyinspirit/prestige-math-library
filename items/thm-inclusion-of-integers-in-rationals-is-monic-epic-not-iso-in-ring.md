@@ -2,7 +2,7 @@
 id: thm-inclusion-of-integers-in-rationals-is-monic-epic-not-iso-in-ring
 kind: theorem
 title: "The inclusion $\\mathbb Z\\hookrightarrow\\mathbb Q$ is monic and epic but neither surjective nor an isomorphism in $\\mathbf{Ring}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

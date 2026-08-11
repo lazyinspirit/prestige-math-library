@@ -2,7 +2,7 @@
 id: ex-canonical-map-from-free-product-to-direct-product
 kind: example
 title: "The canonical surjection from a free product to the direct product of its factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

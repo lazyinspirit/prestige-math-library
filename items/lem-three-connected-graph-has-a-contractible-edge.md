@@ -2,7 +2,7 @@
 id: lem-three-connected-graph-has-a-contractible-edge
 kind: lemma
 title: "Every three-connected simple graph with more than four vertices has an edge whose simple contraction remains three-connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "A contractible edge in a three-connected graph"
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

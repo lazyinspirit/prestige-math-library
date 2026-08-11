@@ -2,7 +2,7 @@
 id: lem-infinite-pigeonhole-on-the-naturals
 kind: lemma
 title: "Every finite colouring of $\\mathbb N$ has an infinite colour class, in ZF"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

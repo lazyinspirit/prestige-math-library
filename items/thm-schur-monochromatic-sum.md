@@ -2,7 +2,7 @@
 id: thm-schur-monochromatic-sum
 kind: theorem
 title: "Schur's theorem: every finite colouring of a sufficiently long positive initial interval $\\{1,\\ldots,N\\}$ has positive monochromatic $x,y,z$ with $x+y=z$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Schur's theorem"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

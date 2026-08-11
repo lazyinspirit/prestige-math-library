@@ -2,7 +2,7 @@
 id: cor-finite-ramsey-by-konig-compactness
 kind: corollary
 title: "The finite uniform Ramsey theorem follows a second time from the infinite theorem by a finitely branching tree of bad finite colourings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

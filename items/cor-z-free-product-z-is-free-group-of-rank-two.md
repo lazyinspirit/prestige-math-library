@@ -2,7 +2,7 @@
 id: cor-z-free-product-z-is-free-group-of-rank-two
 kind: corollary
 title: "The free product of two infinite cyclic groups is the free group on two generators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

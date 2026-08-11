@@ -2,7 +2,7 @@
 id: cor-factors-embed-in-a-free-product-with-amalgamation
 kind: corollary
 title: "The factor maps into a free product with amalgamation are injective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

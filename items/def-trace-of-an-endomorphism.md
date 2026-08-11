@@ -2,7 +2,7 @@
 id: def-trace-of-an-endomorphism
 kind: definition
 title: 'The basis-independent trace of an endomorphism of a finite-dimensional vector space'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-spherical-coordinate-jacobian
 kind: example
 title: 'Spherical coordinates have absolute Jacobian determinant $r^2\sin\phi$ away from the axis and angular seam'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

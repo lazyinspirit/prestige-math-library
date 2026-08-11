@@ -2,7 +2,7 @@
 id: cor-improper-integral-test-for-series
 kind: corollary
 title: "Integral test as an equivalence with an improper integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

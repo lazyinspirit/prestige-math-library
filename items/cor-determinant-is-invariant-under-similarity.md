@@ -2,7 +2,7 @@
 id: cor-determinant-is-invariant-under-similarity
 kind: corollary
 title: "Similar matrices over a commutative ring have the same determinant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-conditionally-convergent-step-function-integral
 kind: example
 title: "A step function whose improper integral is the alternating harmonic series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -21,6 +21,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

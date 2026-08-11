@@ -2,7 +2,7 @@
 id: ex-fixed-point-congruence-for-an-action-of-z-two
 kind: example
 title: 'An involution on five points has three fixed points and one two-point orbit, verifying $5\equiv3\pmod2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

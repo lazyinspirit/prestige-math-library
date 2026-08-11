@@ -2,7 +2,7 @@
 id: rem-riemann-stieltjes-conventions-and-scope
 kind: remark
 title: "Conventions and proved scope for bounded variation and Stieltjes integration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -20,6 +20,7 @@ landmark: false
 proof_strategy: n/a
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

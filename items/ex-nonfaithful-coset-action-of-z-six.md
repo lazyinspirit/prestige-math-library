@@ -2,7 +2,7 @@
 id: ex-nonfaithful-coset-action-of-z-six
 kind: example
 title: 'The action of $\mathbb Z/6$ on the cosets of $\{0,3\}$ is transitive with kernel $\{0,3\}$ and is not faithful'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

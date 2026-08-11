@@ -2,7 +2,7 @@
 id: ex-formal-derivative-detects-a-repeated-root-in-characteristic-two
 kind: example
 title: 'In characteristic 2, x^2+1=(x+1)^2 has zero derivative and a repeated root'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

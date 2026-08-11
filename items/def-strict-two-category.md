@@ -2,7 +2,7 @@
 id: def-strict-two-category
 kind: definition
 title: "Strict 2-category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-polygonal-arc-and-polygon
 kind: definition
 title: "Polygonal arcs and polygons as non-self-intersecting finite unions of line segments in $\\mathbb R^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

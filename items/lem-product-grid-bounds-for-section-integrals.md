@@ -2,7 +2,7 @@
 id: lem-product-grid-bounds-for-section-integrals
 kind: lemma
 title: "A product grid bounds the Darboux sums of the lower and upper section-integral functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

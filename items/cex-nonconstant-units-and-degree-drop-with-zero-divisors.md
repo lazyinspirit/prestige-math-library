@@ -2,7 +2,7 @@
 id: cex-nonconstant-units-and-degree-drop-with-zero-divisors
 kind: counterexample
 title: 'Over Z/4, a nonconstant polynomial can be a unit and product degree can drop'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

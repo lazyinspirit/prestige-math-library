@@ -2,7 +2,7 @@
 id: thm-matrix-representation-is-a-vector-space-isomorphism
 kind: theorem
 title: '$T\mapsto[T]_{\mathcal B}^{\mathcal C}$ is a vector-space isomorphism $\mathcal L(V,W)\cong M_{m\times n}(F)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ short: 'Linear maps are matrices in bases'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

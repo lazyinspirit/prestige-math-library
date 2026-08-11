@@ -2,7 +2,7 @@
 id: lem-alternating-kempe-paths-cannot-both-occur
 kind: lemma
 title: "For five cyclically ordered neighbours of a plane vertex, alternating Kempe paths between the first and third and between the second and fourth cannot both occur"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

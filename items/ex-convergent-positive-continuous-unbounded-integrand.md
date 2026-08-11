@@ -2,7 +2,7 @@
 id: ex-convergent-positive-continuous-unbounded-integrand
 kind: example
 title: "A positive continuous integrand can have finite integral while unbounded on every tail"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -21,6 +21,7 @@ landmark: false
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

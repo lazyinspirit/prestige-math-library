@@ -2,7 +2,7 @@
 id: def-polynomial-ring-over-a-commutative-ring
 kind: definition
 title: 'The polynomial ring over a commutative ring as finitely supported coefficient sequences with convolution'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-jordan-decomposition-for-bv-functions
 kind: theorem
 title: "Jordan decomposition for functions of bounded variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ short: "Jordan decomposition"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

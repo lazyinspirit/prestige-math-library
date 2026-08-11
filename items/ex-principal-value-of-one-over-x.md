@@ -2,7 +2,7 @@
 id: ex-principal-value-of-one-over-x
 kind: example
 title: "$1/x$ on $[-1,1]$ has principal value $0$ but no improper integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

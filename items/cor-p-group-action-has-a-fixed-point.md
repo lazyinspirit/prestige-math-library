@@ -2,7 +2,7 @@
 id: cor-p-group-action-has-a-fixed-point
 kind: corollary
 title: 'A finite $p$-group action on $X$ has a global fixed point whenever $p\nmid|X|$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

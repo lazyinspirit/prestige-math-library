@@ -2,7 +2,7 @@
 id: lem-separation-augmentation-for-kuratowski-free-graphs
 kind: lemma
 title: "In an edge-maximal graph with no $K_5$ or $K_{3,3}$ subdivision, a minimum proper separation of order at most two has an adjacent two-vertex separator and edge-maximal sides"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

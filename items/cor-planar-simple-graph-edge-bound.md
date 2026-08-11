@@ -2,7 +2,7 @@
 id: cor-planar-simple-graph-edge-bound
 kind: corollary
 title: "Every simple planar graph with $n\\ge3$ vertices has at most $3n-6$ edges, with equality for every plane triangulation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

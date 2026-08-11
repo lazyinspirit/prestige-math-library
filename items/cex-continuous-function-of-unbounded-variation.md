@@ -2,7 +2,7 @@
 id: cex-continuous-function-of-unbounded-variation
 kind: counterexample
 title: "A continuous function on $[0,1]$ can have unbounded variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -21,6 +21,7 @@ landmark: false
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

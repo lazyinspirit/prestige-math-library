@@ -2,7 +2,7 @@
 id: def-internal-direct-product-of-subgroups
 kind: definition
 title: "Internal direct products of finitely many normal subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

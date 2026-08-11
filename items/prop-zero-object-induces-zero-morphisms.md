@@ -2,7 +2,7 @@
 id: prop-zero-object-induces-zero-morphisms
 kind: proposition
 title: "A zero object supplies a unique compatible system of zero morphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

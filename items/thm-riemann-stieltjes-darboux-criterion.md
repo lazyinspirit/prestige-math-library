@@ -2,7 +2,7 @@
 id: thm-riemann-stieltjes-darboux-criterion
 kind: theorem
 title: "Darboux criterion for Riemann–Stieltjes integrability with a nondecreasing integrator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -20,6 +20,7 @@ short: "Stieltjes Darboux criterion"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

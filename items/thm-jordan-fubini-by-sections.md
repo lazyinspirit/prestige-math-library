@@ -2,7 +2,7 @@
 id: thm-jordan-fubini-by-sections
 kind: theorem
 title: "Fubini over a bounded Jordan set when all but a content-zero family of sections are integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

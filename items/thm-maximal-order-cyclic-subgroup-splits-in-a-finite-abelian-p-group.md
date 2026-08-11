@@ -2,7 +2,7 @@
 id: thm-maximal-order-cyclic-subgroup-splits-in-a-finite-abelian-p-group
 kind: theorem
 title: "A maximal-order cyclic subgroup splits off a finite abelian p-group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

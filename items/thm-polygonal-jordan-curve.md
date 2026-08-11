@@ -2,7 +2,7 @@
 id: thm-polygonal-jordan-curve
 kind: theorem
 title: "Polygonal Jordan curve theorem: a polygon has exactly two complementary regions and is the frontier of each"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Polygonal Jordan curve theorem"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-every-finite-group-is-a-product-of-cyclic-prime-power-groups
 kind: false-statement
 title: "FALSE: every finite group is a direct product of cyclic prime-power groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-six-colour-theorem-for-planar-graphs
 kind: theorem
 title: "Every planar graph has a proper vertex colouring with at most six colours"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-multivariate-polynomial-ring-by-iteration
 kind: definition
 title: 'Polynomial rings in finitely many commuting indeterminates by iteration'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

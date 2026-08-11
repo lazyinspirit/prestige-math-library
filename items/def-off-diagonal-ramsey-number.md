@@ -2,7 +2,7 @@
 id: def-off-diagonal-ramsey-number
 kind: definition
 title: "The off-diagonal Ramsey number $R(s,t)$ as the least $N$ with $N\\to(s,t)^2$, for positive $s,t$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

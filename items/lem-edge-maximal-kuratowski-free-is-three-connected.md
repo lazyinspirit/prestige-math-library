@@ -2,7 +2,7 @@
 id: lem-edge-maximal-kuratowski-free-is-three-connected
 kind: lemma
 title: "Every edge-maximal graph of order at least four with no subdivision of $K_5$ or $K_{3,3}$ is three-connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

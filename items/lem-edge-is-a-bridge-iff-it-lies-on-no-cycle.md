@@ -2,7 +2,7 @@
 id: lem-edge-is-a-bridge-iff-it-lies-on-no-cycle
 kind: lemma
 title: "An edge of a finite graph is a bridge if and only if it lies on no cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

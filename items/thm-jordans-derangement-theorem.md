@@ -2,7 +2,7 @@
 id: thm-jordans-derangement-theorem
 kind: theorem
 title: "Jordan's derangement theorem: every transitive action of a finite group on a finite set with more than one element has a nonidentity element with no fixed points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

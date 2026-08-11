@@ -2,7 +2,7 @@
 id: def-ring-matrix-product-identity-and-transpose
 kind: definition
 title: "Entrywise ring-matrix operations, rectangular matrix products, identity matrices and transpose"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

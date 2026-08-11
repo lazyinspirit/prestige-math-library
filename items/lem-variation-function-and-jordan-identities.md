@@ -2,7 +2,7 @@
 id: lem-variation-function-and-jordan-identities
 kind: lemma
 title: "The positive and negative variations are nondecreasing and give the Jordan identities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ short: "Jordan identities"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

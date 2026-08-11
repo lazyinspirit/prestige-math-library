@@ -2,7 +2,7 @@
 id: prop-face-boundaries-in-two-connected-plane-graphs
 kind: proposition
 title: "Every face of a two-connected plane graph is bounded by a cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

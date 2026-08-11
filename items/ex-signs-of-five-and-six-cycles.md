@@ -2,7 +2,7 @@
 id: ex-signs-of-five-and-six-cycles
 kind: example
 title: 'A five-cycle is even and a six-cycle is odd'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

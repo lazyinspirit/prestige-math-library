@@ -2,7 +2,7 @@
 id: cex-k-three-three-satisfies-the-planar-edge-bound
 kind: counterexample
 title: "$K_{3,3}$ satisfies $|E|\\le3|V|-6$ but is nonplanar, so the planar edge bound is not sufficient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

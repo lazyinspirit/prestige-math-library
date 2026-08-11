@@ -2,7 +2,7 @@
 id: thm-change-of-variables-for-compact-jordan-sets
 kind: theorem
 title: "Change of variables for an injective $C^1$ map on a compact Jordan set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: local-to-global
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

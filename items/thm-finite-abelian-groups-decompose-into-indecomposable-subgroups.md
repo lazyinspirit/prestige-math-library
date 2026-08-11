@@ -2,7 +2,7 @@
 id: thm-finite-abelian-groups-decompose-into-indecomposable-subgroups
 kind: theorem
 title: "Every nontrivial finite abelian group is an internal direct product of indecomposable subgroups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

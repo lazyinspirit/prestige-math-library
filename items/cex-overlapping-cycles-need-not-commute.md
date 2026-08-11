@@ -2,7 +2,7 @@
 id: cex-overlapping-cycles-need-not-commute
 kind: counterexample
 title: 'Overlapping cycles need not commute'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

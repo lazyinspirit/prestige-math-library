@@ -2,7 +2,7 @@
 id: cex-antisymmetric-need-not-be-alternating-in-characteristic-two
 kind: counterexample
 title: 'Over $\mathbb Z/2$, an antisymmetric bilinear form need not be alternating'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-one-existing-iterated-integral-does-not-give-riemann-integrability
 kind: counterexample
 title: "One existing iterated integral does not imply multiple Riemann integrability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-polynomial-factorisation-into-irreducibles
 kind: lemma
 title: 'Every nonzero nonunit polynomial over a field factors into irreducible polynomials'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

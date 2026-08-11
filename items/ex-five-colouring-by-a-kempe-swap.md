@@ -2,7 +2,7 @@
 id: ex-five-colouring-by-a-kempe-swap
 kind: example
 title: "A degree-five vertex is inserted into a plane graph after one explicit Kempe-chain colour swap"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

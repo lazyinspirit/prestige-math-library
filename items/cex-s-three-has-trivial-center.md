@@ -2,7 +2,7 @@
 id: cex-s-three-has-trivial-center
 kind: counterexample
 title: "$S_3$ has trivial center, so the finite $p$-group hypothesis in the nontrivial-center theorem is necessary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-parameter-dependent-rank-drop
 kind: example
 title: "The rank and solution behaviour of a parameterised matrix change at one exceptional parameter"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

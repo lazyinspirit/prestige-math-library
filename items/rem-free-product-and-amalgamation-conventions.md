@@ -2,7 +2,7 @@
 id: rem-free-product-and-amalgamation-conventions
 kind: remark
 title: "Conventions and proved scope for free products and amalgamation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -494,7 +494,22 @@ item** — `judge.mts` now records `item_sha256` on every verdict beside
 `context_sha256`, normalised exactly as `apply-judge-stamps`' `attestedItemHash`
 (the file with only the `judge:` block removed, so stamping a pass cannot
 invalidate it). A REPAIRED item is never covered by the second route, because its
-own hash changed; that guarantee is the point of the gate and is intact. Rows
+own hash changed; that guarantee is the point of the gate and is intact.
+**The publication flip stales every verdict in the level, by construction**
+(measured on `frontier-10`, 2026-08-11). `item_sha256` removes only the `judge:`
+block, so the act of stamping a pass cannot invalidate it — but `status: draft`
+→ `published` and the added `verification.audited` are both inside the hash.
+Flipping 585 items therefore turned a green `--verify-current-context` into 585
+`judge-coverage-missing` errors with **no mathematical content changed at all**:
+the whole diff across those 585 files was 585 `status:` lines and 585 `audited:`
+lines. So `COVERAGE()` in the step-10 table is a **pre-flip** receipt, and the
+flip is the terminal act of the run; re-running it afterwards can only fail, and
+rejudging to chase it would spend ~1,170 calls re-reading unchanged proofs. A
+publishing run records the green step-10 suite, then flips. If the flip ever
+needs to be gated after the fact, the fix is to widen the exclusion to the whole
+`verification:` block, as `item-hash.mjs` already does for `step8-guard` — but
+that renormalisation invalidates every verdict row ever written, so it is a
+migration and not a patch. Rows
 predating the field fall back to the strict context check. This is not a new
 licence: `AUDIT-WORKFLOW.md` §9 and `CLAUDE.md` already required A8 to re-judge
 "only on what changed", with an item SHA-256 so "a later unrelated companion-page

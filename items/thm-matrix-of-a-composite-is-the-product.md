@@ -2,7 +2,7 @@
 id: thm-matrix-of-a-composite-is-the-product
 kind: theorem
 title: '$[S\circ T]_{\mathcal B}^{\mathcal D}=[S]_{\mathcal C}^{\mathcal D}[T]_{\mathcal B}^{\mathcal C}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ short: 'Composition becomes matrix multiplication'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

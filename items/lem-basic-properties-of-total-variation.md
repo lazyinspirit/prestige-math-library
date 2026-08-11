@@ -2,7 +2,7 @@
 id: lem-basic-properties-of-total-variation
 kind: lemma
 title: "Total variation bounds increments; bounded-variation functions are bounded; zero variation means constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-triangle-free-planar-edge-bound
 kind: corollary
 title: "Every triangle-free simple planar graph with $n\\ge3$ vertices has at most $2n-4$ edges"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

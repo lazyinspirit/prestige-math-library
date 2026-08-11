@@ -2,7 +2,7 @@
 id: cor-general-linear-group-is-a-group
 kind: corollary
 title: '$\operatorname{GL}_n(F)$ is a group under matrix multiplication, including the trivial group $\operatorname{GL}_0(F)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-coordinate-column-and-matrix-of-a-linear-map
 kind: definition
 title: 'Coordinate columns $[v]_{\mathcal B}$ and matrices $[T]_{\mathcal B}^{\mathcal C}$ of linear maps relative to ordered bases'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

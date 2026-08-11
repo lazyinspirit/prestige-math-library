@@ -2,7 +2,7 @@
 id: cor-indecomposable-finite-abelian-groups-are-cyclic-prime-power
 kind: corollary
 title: "The indecomposable finite abelian groups are exactly the nontrivial cyclic groups of prime-power order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

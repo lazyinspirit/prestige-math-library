@@ -2,7 +2,7 @@
 id: lem-kuratowski-minors-are-topological-minors
 kind: lemma
 title: "A graph has a $K_5$ or $K_{3,3}$ minor exactly when it has a subdivision of $K_5$ or $K_{3,3}$ as a subgraph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

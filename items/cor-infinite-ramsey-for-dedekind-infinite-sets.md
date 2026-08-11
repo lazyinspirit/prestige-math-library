@@ -2,7 +2,7 @@
 id: cor-infinite-ramsey-for-dedekind-infinite-sets
 kind: corollary
 title: "Infinite Ramsey holds for every set equipped with an injection from $\\mathbb N$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

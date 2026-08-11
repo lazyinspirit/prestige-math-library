@@ -2,7 +2,7 @@
 id: def-small-locally-small-and-large-category
 kind: definition
 title: "Small, locally small, and large categories"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

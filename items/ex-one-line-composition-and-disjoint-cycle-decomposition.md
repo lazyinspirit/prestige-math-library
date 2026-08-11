@@ -2,7 +2,7 @@
 id: ex-one-line-composition-and-disjoint-cycle-decomposition
 kind: example
 title: 'From one-line notation to a disjoint-cycle decomposition, with the right-hand factor acting first'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

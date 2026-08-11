@@ -2,7 +2,7 @@
 id: def-invertible-matrix-and-general-linear-group
 kind: definition
 title: 'Invertible matrices and the general linear group $\operatorname{GL}_n(F)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

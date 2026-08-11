@@ -2,7 +2,7 @@
 id: def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions
 kind: definition
 title: "Column-multilinear, alternating, normalized and antisymmetric functions on square matrices over a commutative ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-determinant-is-a-polynomial-in-the-matrix-entries
 kind: corollary
 title: "For every fixed finite size at least one, the determinant of a real square matrix is a polynomial in its matrix entries"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

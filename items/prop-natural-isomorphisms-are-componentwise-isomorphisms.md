@@ -2,7 +2,7 @@
 id: prop-natural-isomorphisms-are-componentwise-isomorphisms
 kind: proposition
 title: "A natural transformation is a natural isomorphism exactly when every component is an isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

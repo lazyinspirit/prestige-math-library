@@ -2,7 +2,7 @@
 id: cex-groups-of-order-p-cubed-need-not-be-abelian
 kind: counterexample
 title: "The square-symmetry group has order $2^3$ and is nonabelian, so the order-$p^2$ theorem does not extend to order $p^3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

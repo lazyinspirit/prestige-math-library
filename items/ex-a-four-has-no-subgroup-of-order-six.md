@@ -2,7 +2,7 @@
 id: ex-a-four-has-no-subgroup-of-order-six
 kind: example
 title: '$A_4$ has no subgroup of order $6$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

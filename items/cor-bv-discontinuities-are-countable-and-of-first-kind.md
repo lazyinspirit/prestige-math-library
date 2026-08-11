@@ -2,7 +2,7 @@
 id: cor-bv-discontinuities-are-countable-and-of-first-kind
 kind: corollary
 title: "A bounded-variation function has at most countably many discontinuities, all of the first kind"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

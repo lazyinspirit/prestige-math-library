@@ -2,7 +2,7 @@
 id: lem-content-divisibility-characterisation
 kind: lemma
 title: 'Content is the positive common divisor of the coefficients divisible by every common divisor'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

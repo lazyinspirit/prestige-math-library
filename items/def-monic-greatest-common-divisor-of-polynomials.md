@@ -2,7 +2,7 @@
 id: def-monic-greatest-common-divisor-of-polynomials
 kind: definition
 title: 'The monic greatest common divisor of two polynomials over a field'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

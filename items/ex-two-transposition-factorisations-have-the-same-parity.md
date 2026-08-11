@@ -2,7 +2,7 @@
 id: ex-two-transposition-factorisations-have-the-same-parity
 kind: example
 title: 'Two different transposition factorisations of the same permutation have the same parity'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

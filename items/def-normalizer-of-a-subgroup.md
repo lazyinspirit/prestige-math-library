@@ -2,7 +2,7 @@
 id: def-normalizer-of-a-subgroup
 kind: definition
 title: 'The normalizer $N_G(H)=\{g\in G:gHg^{-1}=H\}$ of a subgroup'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

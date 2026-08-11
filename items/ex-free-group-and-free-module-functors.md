@@ -2,7 +2,7 @@
 id: ex-free-group-and-free-module-functors
 kind: example
 title: "The free-group functor $F:\\mathbf{Set}\\to\\mathbf{Grp}$ and free-module functor $R^{(-)}:\\mathbf{Set}\\to R\\text{-}\\mathbf{Mod}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

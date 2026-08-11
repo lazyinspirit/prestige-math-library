@@ -2,7 +2,7 @@
 id: thm-fully-faithful-split-essentially-surjective-characterises-equivalence
 kind: theorem
 title: "A functor is an equivalence exactly when it is fully faithful and split essentially surjective, without Choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

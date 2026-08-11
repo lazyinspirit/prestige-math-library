@@ -2,7 +2,7 @@
 id: cor-determinant-is-alternating-multilinear-in-the-rows
 kind: corollary
 title: "The determinant is alternating and multilinear in the rows as well as in the columns"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

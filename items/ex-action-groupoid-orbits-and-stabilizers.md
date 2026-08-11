@@ -2,7 +2,7 @@
 id: ex-action-groupoid-orbits-and-stabilizers
 kind: example
 title: "An action groupoid has the acted-on set as objects, orbits as connected components, and stabilizers as automorphism groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

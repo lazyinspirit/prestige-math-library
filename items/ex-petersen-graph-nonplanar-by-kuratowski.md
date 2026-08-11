@@ -2,7 +2,7 @@
 id: ex-petersen-graph-nonplanar-by-kuratowski
 kind: example
 title: "The Petersen graph is nonplanar by an explicit subdivision of $K_{3,3}$ after deleting one vertex"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

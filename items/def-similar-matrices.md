@@ -2,7 +2,7 @@
 id: def-similar-matrices
 kind: definition
 title: 'Similar matrices: $B=P^{-1}AP$ for an invertible $P$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-isomorphism-characterised-by-composition-bijections
 kind: lemma
 title: "A morphism is an isomorphism exactly when postcomposition, equivalently precomposition, induces bijections on every hom-collection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: prop-modules-and-homomorphisms-form-category-rmod
 kind: proposition
 title: "Left modules over a fixed ring and module homomorphisms form the large locally small category $R\\text{-}\\mathbf{Mod}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

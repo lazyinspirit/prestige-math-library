@@ -2,7 +2,7 @@
 id: thm-polynomial-division-algorithm-over-a-field
 kind: theorem
 title: 'Division algorithm for polynomials over a field'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

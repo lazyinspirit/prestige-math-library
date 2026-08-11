@@ -283,6 +283,39 @@ Every unlicensed item is an owner-approved published edit; **zero nonfatal
 polishes anywhere in the run.** The gate runs with `--against after-step8c`, the
 documented way to close the window step 8 contiguously owns.
 
+## Published — and what the gates say about the flip
+
+`node research/frontier-10-publish.mjs --apply` flipped **585 items** to
+`status: published` with `verification.audited: 2026-08-11`, and
+`frontier-10-apply-amendments.mjs --apply` put the staged lists on the two
+published group-actions pages: **items 6 → 37, examples 1 → 17**, summary two
+paragraphs at 63 + 78 words. Exactly **51 drafts remain**, every one a
+pre-existing `rem-*` deferred-catalogue entry that is a draft by design; the
+publish script reads the batch manifests rather than "every draft in `items/`"
+precisely so those survive.
+
+**The step-10 suite is green in the state that matters, and the one red gate is
+an artifact of the flip itself.** Measured both ways rather than argued:
+
+| tree state | `depcheck` | `level-coverage --verify-current-context` |
+|---|---|---|
+| pre-flip (items draft, pages amended) | **FAIL** — `draft-on-published-page` | **OK** |
+| post-flip (published) | **OK** | FAIL — 585 errors, one per flipped item |
+
+Both failures are the same atomic transition seen from opposite sides, which is
+why the two halves must move together in one commit. The coverage failure is not
+a coverage gap: `item_sha256` removes only the `judge:` block — so that stamping
+a pass cannot invalidate it — but `status:` and `verification.audited` are inside
+the hash, and the entire diff across those 585 files is 585 `status:` lines and
+585 `audited:` lines. **No mathematical content changed.** The receipt was
+verified green on that identical mathematics by reverting the flip, re-running
+the whole suite, and restoring. Rejudging to chase the moved hash would spend
+~1,170 calls re-reading unchanged proofs. Recorded in `ARCHITECTURE.md` §3.11:
+`COVERAGE()` at step 10 is a pre-flip receipt and the flip is the terminal act.
+
+All eight other step-10 gates pass post-flip: `precheck`, `depcheck`, `fwdcheck`,
+`extcheck`, `rendercheck`, `prosecheck`, `citecheck`, `depsource`.
+
 **Mechanism gap worth recording.** `gates.mjs` step 8 hardcodes
 `--baseline pre-step8` and offers `--against` to exclude *later* owner-directed
 edits. That assumes step 8 is one contiguous window. It was not here: the owner

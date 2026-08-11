@@ -2,7 +2,7 @@
 id: def-support-and-compactly-supported-riemann-integral-in-rn
 kind: definition
 title: 'The support of a function on $\mathbb{R}^n$ and its compactly supported Riemann integral'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

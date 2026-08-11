@@ -2,7 +2,7 @@
 id: lem-gauss-content-lemma
 kind: lemma
 title: 'The product of primitive integer polynomials is primitive, and contents multiply'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

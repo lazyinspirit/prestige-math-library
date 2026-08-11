@@ -2,7 +2,7 @@
 id: thm-repeated-root-derivative-criterion
 kind: theorem
 title: 'A root is repeated exactly when it is also a root of the formal derivative'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

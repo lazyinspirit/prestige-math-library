@@ -2,7 +2,7 @@
 id: cex-a-wild-arc-drawing-is-not-a-plane-graph
 kind: counterexample
 title: "An injective nonpolygonal arc drawing is excluded by the page's finite polygonal plane-graph convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-euler-formula-on-a-tree-cycle-and-k-four
 kind: example
 title: "Euler's formula checked on a plane tree, a cycle, and the four-face embedding of $K_4$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

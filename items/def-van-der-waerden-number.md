@@ -2,7 +2,7 @@
 id: def-van-der-waerden-number
 kind: definition
 title: "The van der Waerden number $W(k,c)$ as the least interval length forcing a monochromatic $k$-term arithmetic progression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

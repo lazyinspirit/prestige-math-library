@@ -2,7 +2,7 @@
 id: cex-polar-coordinates-are-not-globally-injective
 kind: counterexample
 title: "Polar coordinates on a full closed angular period are not injective and are singular at radius zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

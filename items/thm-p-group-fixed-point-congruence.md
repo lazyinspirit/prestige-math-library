@@ -2,7 +2,7 @@
 id: thm-p-group-fixed-point-congruence
 kind: theorem
 title: 'If a finite $p$-group $P$ acts on a finite set $X$, then $|X|\equiv|X^P|\pmod p$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

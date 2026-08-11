@@ -2,7 +2,7 @@
 id: ex-row-operations-on-a-singular-matrix-over-z-mod-six
 kind: example
 title: 'Row operations track determinant correctly for a singular triangular matrix over $\mathbb Z/6$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

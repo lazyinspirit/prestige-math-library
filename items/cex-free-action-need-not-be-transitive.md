@@ -2,7 +2,7 @@
 id: cex-free-action-need-not-be-transitive
 kind: counterexample
 title: 'The action of $\mathbb Z/2$ on two disjoint two-point orbits is free but not transitive'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

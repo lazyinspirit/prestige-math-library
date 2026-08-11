@@ -2,7 +2,7 @@
 id: thm-pivot-columns-form-a-basis-of-the-column-space
 kind: theorem
 title: "The columns of the original matrix indexed by pivot columns form a basis of its column space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-finitely-branching-tree-on-finite-sequences
 kind: definition
 title: "Rooted trees of finite sequences, levels, branches, and finite branching, with ordered finite successor sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

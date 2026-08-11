@@ -2,7 +2,7 @@
 id: cor-trace-is-invariant-under-similarity
 kind: corollary
 title: 'Similar matrices have the same trace'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

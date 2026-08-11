@@ -2,7 +2,7 @@
 id: def-change-of-basis-matrix
 kind: definition
 title: 'The change-of-basis matrix $P_{\mathcal C\leftarrow\mathcal B}=[\operatorname{id}_V]_{\mathcal B}^{\mathcal C}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

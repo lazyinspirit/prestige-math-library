@@ -2,7 +2,7 @@
 id: cor-square-matrices-form-a-ring
 kind: corollary
 title: '$M_n(F)$ is a ring under entrywise addition and matrix multiplication, including the zero ring $M_0(F)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

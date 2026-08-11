@@ -2,7 +2,7 @@
 id: def-matrix-product-and-identity-matrix
 kind: definition
 title: 'Rectangular matrix multiplication and the identity matrix $I_n$, including zero-sized shapes'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

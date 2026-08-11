@@ -2,7 +2,7 @@
 id: thm-ring-matrix-arithmetic-laws
 kind: theorem
 title: "Matrix arithmetic over a commutative ring is associative, unital and distributive, and transpose reverses products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

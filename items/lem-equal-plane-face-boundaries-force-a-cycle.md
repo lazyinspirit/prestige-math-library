@@ -2,7 +2,7 @@
 id: lem-equal-plane-face-boundaries-force-a-cycle
 kind: lemma
 title: "If two distinct faces of a connected plane graph have the same boundary subgraph, then the graph is a cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

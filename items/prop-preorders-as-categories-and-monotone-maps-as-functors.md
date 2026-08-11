@@ -2,7 +2,7 @@
 id: prop-preorders-as-categories-and-monotone-maps-as-functors
 kind: proposition
 title: "A preorder is a category with at most one morphism between any two objects, and its functors are exactly monotone maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-bounded-open-jordan-sets-have-compact-grid-exhaustions
 kind: lemma
 title: "A bounded open Jordan set has an increasing exhaustion by compact finite unions of grid rectangles with vanishing content remainder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: exhaustion
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-eisenstein-irreducibility-criterion
 kind: theorem
 title: 'Eisenstein criterion over the integers'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

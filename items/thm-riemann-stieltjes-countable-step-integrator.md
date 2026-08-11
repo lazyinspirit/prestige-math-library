@@ -2,7 +2,7 @@
 id: thm-riemann-stieltjes-countable-step-integrator
 kind: theorem
 title: "A countable pure-step integrator evaluates a continuous integrand as the absolutely convergent weighted sum of its values at the jumps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -25,6 +25,7 @@ short: '$\alpha=\sum c_nI(\cdot-s_n)\Rightarrow\int f\,d\alpha=\sum c_nf(s_n)$'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

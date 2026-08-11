@@ -2,7 +2,7 @@
 id: thm-category-theoretic-duality-principle
 kind: theorem
 title: "Every theorem about categories has a formal dual obtained by reversing morphisms and composition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

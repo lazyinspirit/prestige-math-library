@@ -2,7 +2,7 @@
 id: def-functor-and-contravariant-functor
 kind: definition
 title: "Covariant functor, identity functor, composite functor, and contravariant functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

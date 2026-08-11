@@ -2,7 +2,7 @@
 id: thm-gauss-jordan-elimination-produces-reduced-row-echelon-form
 kind: theorem
 title: "Gauss–Jordan elimination reduces every finite matrix over a field to reduced row echelon form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

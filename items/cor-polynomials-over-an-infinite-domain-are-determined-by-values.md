@@ -2,7 +2,7 @@
 id: cor-polynomials-over-an-infinite-domain-are-determined-by-values
 kind: corollary
 title: 'Over an infinite integral domain, equal polynomial functions come from equal polynomials'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

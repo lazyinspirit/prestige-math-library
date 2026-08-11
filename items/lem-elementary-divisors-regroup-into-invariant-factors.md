@@ -2,7 +2,7 @@
 id: lem-elementary-divisors-regroup-into-invariant-factors
 kind: lemma
 title: "Elementary divisors regroup uniquely into invariant factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

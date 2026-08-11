@@ -2,7 +2,7 @@
 id: lem-cyclic-quotient-by-center-implies-abelian
 kind: lemma
 title: "If $G/Z(G)$ is cyclic, then $G$ is abelian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

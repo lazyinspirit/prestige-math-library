@@ -2,7 +2,7 @@
 id: thm-monic-polynomial-division
 kind: theorem
 title: 'Division by a monic polynomial over a commutative ring'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

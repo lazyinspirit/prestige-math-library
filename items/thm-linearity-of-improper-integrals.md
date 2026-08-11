@@ -2,7 +2,7 @@
 id: thm-linearity-of-improper-integrals
 kind: theorem
 title: "Linearity of convergent improper integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

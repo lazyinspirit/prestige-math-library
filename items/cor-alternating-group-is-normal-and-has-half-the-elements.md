@@ -2,7 +2,7 @@
 id: cor-alternating-group-is-normal-and-has-half-the-elements
 kind: corollary
 title: '$A_n$ is normal in $S_n$; for $n\ge2$, $2\,|A_n|=n!$, while $A_n=S_n$ for $n=0,1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

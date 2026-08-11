@@ -2,7 +2,7 @@
 id: thm-cauchy-frobenius-orbit-counting
 kind: theorem
 title: 'Cauchy-Frobenius orbit counting: $|G|\,|X/G|=\sum_{g\in G}|X^g|$ for a finite group action'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

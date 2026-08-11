@@ -2,7 +2,7 @@
 id: lem-local-c-one-volume-distortion
 kind: lemma
 title: "On a small cube, a $C^1$ diffeomorphism distorts Jordan content by factors arbitrarily close to its linearized absolute determinant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: reduction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

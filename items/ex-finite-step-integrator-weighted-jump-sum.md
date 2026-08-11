@@ -2,7 +2,7 @@
 id: ex-finite-step-integrator-weighted-jump-sum
 kind: example
 title: "A finite-step integrator gives a weighted sum over its jumps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

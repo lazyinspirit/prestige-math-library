@@ -2,7 +2,7 @@
 id: lem-plane-graph-faces-are-finite-with-one-unbounded-face
 kind: lemma
 title: "A plane graph has finitely many faces and exactly one unbounded face"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

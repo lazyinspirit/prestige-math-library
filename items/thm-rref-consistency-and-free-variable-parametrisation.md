@@ -2,7 +2,7 @@
 id: thm-rref-consistency-and-free-variable-parametrisation
 kind: theorem
 title: "Reduced row echelon form detects consistency and parametrises every solution by the nonpivot variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-nontrivial-center-of-a-finite-p-group
 kind: theorem
 title: "Every nontrivial finite $p$-group has nontrivial center, in fact $p$ divides $|Z(P)|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

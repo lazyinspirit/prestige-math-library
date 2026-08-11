@@ -2,7 +2,7 @@
 id: cex-cauchys-theorem-does-not-extend-to-composite-divisors
 kind: counterexample
 title: 'The subgroup $\langle(1\,2\,3),(1\,2)(3\,4)\rangle\le S_4$ has order $12$ but no subgroup of order $6$, so Cauchy''s theorem does not extend to composite divisors'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

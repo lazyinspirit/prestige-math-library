@@ -2,7 +2,7 @@
 id: thm-kuratowski-wagner-planarity-characterisation
 kind: theorem
 title: "Kuratowski–Wagner theorem: a finite graph is planar exactly when it has neither a $K_5$ nor a $K_{3,3}$ minor, equivalently neither subdivision"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Kuratowski-Wagner theorem"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

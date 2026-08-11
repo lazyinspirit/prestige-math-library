@@ -2,7 +2,7 @@
 id: cor-abelian-p-groups-of-order-pn-are-counted-by-partitions
 kind: corollary
 title: "Isomorphism classes of abelian groups of order p^n are counted by partitions of n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

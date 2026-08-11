@@ -2,7 +2,7 @@
 id: ex-hyperspherical-coordinate-jacobian
 kind: example
 title: "The hyperspherical-coordinate Jacobian is the standard product of a radial power and sine powers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

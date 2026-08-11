@@ -2,7 +2,7 @@
 id: cor-finite-abelian-group-cyclic-iff-one-invariant-factor
 kind: corollary
 title: "A nontrivial finite abelian group is cyclic if and only if it has one invariant factor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

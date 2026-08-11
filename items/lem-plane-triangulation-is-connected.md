@@ -2,7 +2,7 @@
 id: lem-plane-triangulation-is-connected
 kind: lemma
 title: "Every plane triangulation with at least three vertices is connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

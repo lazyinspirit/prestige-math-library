@@ -2,7 +2,7 @@
 id: thm-root-bound-for-polynomials-over-a-domain
 kind: theorem
 title: 'A nonzero polynomial of degree n over an integral domain has at most n distinct roots'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

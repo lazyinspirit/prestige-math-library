@@ -2,7 +2,7 @@
 id: thm-disjoint-cycle-decomposition
 kind: theorem
 title: 'Every permutation of a finite set is a product of pairwise disjoint cycles, uniquely up to reordering and cyclic rotation'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ short: 'Disjoint-cycle decomposition'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

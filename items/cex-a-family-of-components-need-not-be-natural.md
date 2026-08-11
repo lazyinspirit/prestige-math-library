@@ -2,7 +2,7 @@
 id: cex-a-family-of-components-need-not-be-natural
 kind: counterexample
 title: "A componentwise family between functors need not be a natural transformation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

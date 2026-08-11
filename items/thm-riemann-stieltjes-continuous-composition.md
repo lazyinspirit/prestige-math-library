@@ -2,7 +2,7 @@
 id: thm-riemann-stieltjes-continuous-composition
 kind: theorem
 title: "A continuous function of a Stieltjes-integrable function is Stieltjes integrable for a nondecreasing integrator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

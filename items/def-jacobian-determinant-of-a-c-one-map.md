@@ -2,7 +2,7 @@
 id: def-jacobian-determinant-of-a-c-one-map
 kind: definition
 title: "The Jacobian determinant of a square-dimensional $C^1$ map is the determinant of its Jacobian matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

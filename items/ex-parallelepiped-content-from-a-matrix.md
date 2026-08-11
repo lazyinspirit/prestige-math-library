@@ -2,7 +2,7 @@
 id: ex-parallelepiped-content-from-a-matrix
 kind: example
 title: "The content of a concrete three-dimensional parallelepiped computed from its spanning matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

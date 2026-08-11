@@ -2,7 +2,7 @@
 id: thm-finite-graph-ramsey-binomial-bound
 kind: theorem
 title: "Finite graph Ramsey theorem: $\\binom{s+t-2}{s-1}\\to(s,t)^2$ for all positive $s,t$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Finite Ramsey theorem"
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

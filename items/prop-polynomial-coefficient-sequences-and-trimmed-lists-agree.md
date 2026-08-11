@@ -2,7 +2,7 @@
 id: prop-polynomial-coefficient-sequences-and-trimmed-lists-agree
 kind: proposition
 title: 'Finitely supported coefficient sequences and trimmed finite coefficient lists define the same formal polynomials'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

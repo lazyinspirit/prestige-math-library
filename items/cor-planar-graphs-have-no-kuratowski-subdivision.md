@@ -2,7 +2,7 @@
 id: cor-planar-graphs-have-no-kuratowski-subdivision
 kind: corollary
 title: "A planar graph contains no subdivision of $K_5$ or $K_{3,3}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

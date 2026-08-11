@@ -2,7 +2,7 @@
 id: lem-colour-focussing-for-arithmetic-progressions
 kind: lemma
 title: "Finite colour focussing extends equally coloured progressions to a longer monochromatic arithmetic progression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

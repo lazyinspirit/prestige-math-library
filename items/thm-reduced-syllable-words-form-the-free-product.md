@@ -2,7 +2,7 @@
 id: thm-reduced-syllable-words-form-the-free-product
 kind: theorem
 title: "Reduced syllable words form the free product of a family of groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

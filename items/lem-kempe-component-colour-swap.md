@@ -2,7 +2,7 @@
 id: lem-kempe-component-colour-swap
 kind: lemma
 title: "Swapping the two colours on one Kempe component preserves a proper colouring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

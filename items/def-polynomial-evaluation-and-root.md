@@ -2,7 +2,7 @@
 id: def-polynomial-evaluation-and-root
 kind: definition
 title: 'Evaluation and roots of a polynomial in a commutative target ring'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-one-dimensional-change-of-variables-with-absolute-derivative
 kind: corollary
 title: "In one dimension the compact-Jordan formula is substitution over the unoriented image interval with the absolute derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

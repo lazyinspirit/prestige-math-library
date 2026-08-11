@@ -2,7 +2,7 @@
 id: thm-canonical-ramsey-theorem-for-pairs
 kind: theorem
 title: "Canonical Ramsey theorem for pairs: on an infinite subset a colouring is constant, injective, left-dependent, or right-dependent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Canonical Ramsey theorem for pairs"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

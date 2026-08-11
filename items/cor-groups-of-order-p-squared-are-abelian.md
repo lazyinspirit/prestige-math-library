@@ -2,7 +2,7 @@
 id: cor-groups-of-order-p-squared-are-abelian
 kind: corollary
 title: "Every group of order $p^2$, for prime $p$, is abelian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

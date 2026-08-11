@@ -2,7 +2,7 @@
 id: thm-absolute-improper-convergence-implies-convergence
 kind: theorem
 title: "Absolute convergence implies improper convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-real-square-matrix-invertible-iff-determinant-nonzero
 kind: theorem
 title: "A finite square real matrix is invertible if and only if its determinant is nonzero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

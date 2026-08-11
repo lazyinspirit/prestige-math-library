@@ -2,7 +2,7 @@
 id: thm-determinant-under-elementary-row-operations
 kind: theorem
 title: "For every square matrix, including singular ones, a row swap negates the determinant, scaling a row by any scalar scales it, and row addition leaves it unchanged"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

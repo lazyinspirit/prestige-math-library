@@ -2,7 +2,7 @@
 id: cor-order-of-a-permutation-from-its-cycle-lengths
 kind: corollary
 title: 'The order of a permutation is the least positive common multiple of its nontrivial cycle lengths, with value $1$ for the identity'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

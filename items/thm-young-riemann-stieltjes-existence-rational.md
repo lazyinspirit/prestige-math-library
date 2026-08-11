@@ -2,7 +2,7 @@
 id: thm-young-riemann-stieltjes-existence-rational
 kind: theorem
 title: "Young's Riemann–Stieltjes existence theorem for rational Hölder exponents"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

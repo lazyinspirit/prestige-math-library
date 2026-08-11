@@ -7,16 +7,55 @@ items: [def-group-action,
         def-orbit-and-stabilizer,
         lem-stabilizer-is-a-subgroup,
         thm-orbits-partition-the-set,
-        thm-cayleys-theorem]
+        thm-cayleys-theorem,
+        def-equivariant-map-of-group-actions,
+        def-free-group-action,
+        def-fixed-point-sets-of-a-group-action,
+        thm-orbit-stabilizer,
+        cor-orbit-stabilizer-cardinality,
+        lem-stabilizers-in-one-orbit-are-conjugate,
+        def-core-of-a-subgroup,
+        lem-core-is-largest-normal-subgroup-contained,
+        thm-left-coset-action-and-its-kernel,
+        thm-finite-index-core-bound-and-finite-overgroups,
+        thm-transitive-actions-are-coset-actions,
+        cor-faithful-transitive-actions-are-core-free-coset-actions,
+        def-conjugacy-class-and-centralizer,
+        def-normalizer-of-a-subgroup,
+        lem-centralizers-and-normalizers-are-subgroups,
+        thm-conjugacy-class-cardinality,
+        thm-conjugate-subgroups-are-counted-by-the-normalizer,
+        thm-conjugates-of-proper-subgroup-do-not-cover-finite-group,
+        thm-class-equation,
+        def-finite-p-group,
+        lem-subgroups-of-finite-p-groups-are-p-groups,
+        cor-index-p-subgroups-of-finite-p-groups-are-normal,
+        thm-p-group-fixed-point-congruence,
+        cor-p-group-action-has-a-fixed-point,
+        thm-nontrivial-center-of-a-finite-p-group,
+        lem-cyclic-quotient-by-center-implies-abelian,
+        cor-groups-of-order-p-squared-are-abelian,
+        thm-normal-subgroups-of-finite-p-groups-meet-the-center,
+        thm-cauchys-theorem-for-finite-groups,
+        thm-cauchy-frobenius-orbit-counting,
+        thm-jordans-derangement-theorem]
 examples: []
 ---
 
-Groups, homomorphisms, and symmetric groups are the prerequisites for studying
-how a group acts by permutations of a set. Subgroups supply the natural
-setting for stabilisers, while equivalence relations provide the language for
-the orbit partition.
+A group action turns the elements of a group into symmetries of a set. Groups,
+homomorphisms, kernels, quotient groups and isomorphisms supply the declared
+algebraic prerequisites, while symmetric groups turn actions into permutation
+representations. Subgroups and cosets provide stabilisers and orbit models;
+normal subgroups and the isomorphism theorems control action kernels. Finite
+cardinality, index, Lagrange's theorem and elementary counting support the
+finite results.
 
-This page defines group actions, orbits, and stabilisers. It proves that actions
-are equivalent to homomorphisms into a symmetric group, that stabilisers are
-subgroups, and that the orbits partition the acted-on set. The regular action
-then gives Cayley's theorem: every group is isomorphic to a permutation group.
+Equivariant maps, free actions and fixed-point sets lead to orbit–stabiliser,
+coset actions, cores and the classification of transitive actions. Conjugation
+then yields centralisers, normalisers, conjugacy-class counts, the non-covering
+theorem and the class equation. For finite $p$-groups, orbit decomposition gives
+the fixed-point congruence, index-$p$ normality, nontrivial centres, the
+order-$p^2$ theorem, central intersection for normal subgroups and Cauchy's
+theorem. Double-counting fixed pairs closes the page with Cauchy–Frobenius orbit
+counting and Jordan's derangement theorem, while Cayley's theorem remains the
+regular-action case.

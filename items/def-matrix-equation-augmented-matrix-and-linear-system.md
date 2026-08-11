@@ -2,7 +2,7 @@
 id: def-matrix-equation-augmented-matrix-and-linear-system
 kind: definition
 title: 'Matrix equation $Ax=b$, its solution set, consistency, homogeneous systems and the augmented matrix $[A\mid b]$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

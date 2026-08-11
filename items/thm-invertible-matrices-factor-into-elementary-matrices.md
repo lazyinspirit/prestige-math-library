@@ -2,7 +2,7 @@
 id: thm-invertible-matrices-factor-into-elementary-matrices
 kind: theorem
 title: "Every invertible finite square real matrix is a finite product of elementary matrices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

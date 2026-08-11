@@ -2,7 +2,7 @@
 id: def-kempe-chain
 kind: definition
 title: "Kempe chains as connected components induced by two colour classes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-infinite-ramsey-on-the-naturals
 kind: theorem
 title: "Infinite Ramsey theorem on $\\mathbb N$: every finite colouring of $[\\mathbb N]^k$ has an infinite monochromatic set, in ZF"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Infinite Ramsey theorem"
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

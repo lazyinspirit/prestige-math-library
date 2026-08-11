@@ -2,7 +2,7 @@
 id: thm-nonnegative-improper-integral-bounded-primitive-criterion
 kind: theorem
 title: "A nonnegative improper integral converges iff its truncated integrals are bounded"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

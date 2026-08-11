@@ -2,7 +2,7 @@
 id: lem-three-connected-kuratowski-free-is-planar
 kind: lemma
 title: "Every three-connected graph with no $K_5$ or $K_{3,3}$ minor is planar"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

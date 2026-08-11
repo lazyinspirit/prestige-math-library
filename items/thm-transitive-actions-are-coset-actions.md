@@ -2,7 +2,7 @@
 id: thm-transitive-actions-are-coset-actions
 kind: theorem
 title: "Every transitive $G$-set is equivariantly isomorphic to $G/G_x$ for any chosen point $x$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

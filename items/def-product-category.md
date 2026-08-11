@@ -2,7 +2,7 @@
 id: def-product-category
 kind: definition
 title: "Product category and its projection functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

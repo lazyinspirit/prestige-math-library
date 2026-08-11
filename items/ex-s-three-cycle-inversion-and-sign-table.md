@@ -2,7 +2,7 @@
 id: ex-s-three-cycle-inversion-and-sign-table
 kind: example
 title: 'The six elements of $S_3$: one-line form, cycle structure, inversions, and sign'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-variation-additive-on-subintervals
 kind: lemma
 title: "Total variation is additive over adjacent subintervals and decreases under restriction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ short: "variation is interval-additive"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

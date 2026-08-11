@@ -2,7 +2,7 @@
 id: lem-two-colour-ramsey-arrow-recursion
 kind: lemma
 title: "If $m\\to(s-1,t)^2$ and $n\\to(s,t-1)^2$, then $m+n\\to(s,t)^2$ for $s,t\\ge2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

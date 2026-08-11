@@ -2,7 +2,7 @@
 id: cex-k-four-is-planar-but-not-three-colourable
 kind: counterexample
 title: "$K_4$ is planar but has chromatic number four, so the five-colour bound cannot be lowered to three"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

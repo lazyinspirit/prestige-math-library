@@ -2,7 +2,7 @@
 id: thm-row-rank-equals-column-rank
 kind: theorem
 title: "Row rank equals column rank, and both equal the number of pivots"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

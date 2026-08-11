@@ -2,7 +2,7 @@
 id: cex-infinite-branching-is-not-enough-for-konig
 kind: counterexample
 title: "Finite strictly decreasing sequences of naturals form a tree with every finite level nonempty but no infinite branch"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

@@ -2,7 +2,7 @@
 id: ex-quarter-turn-matrix-on-the-real-plane
 kind: example
 title: 'The quarter-turn $(x,y)\mapsto(-y,x)$ on $\mathbb R^2$ has matrix $\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ and square $-I_2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

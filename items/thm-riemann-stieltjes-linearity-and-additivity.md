@@ -2,7 +2,7 @@
 id: thm-riemann-stieltjes-linearity-and-additivity
 kind: theorem
 title: "Linearity and interval additivity of the Riemann–Stieltjes integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ short: "Stieltjes linearity and additivity"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

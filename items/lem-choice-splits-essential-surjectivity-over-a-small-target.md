@@ -2,7 +2,7 @@
 id: lem-choice-splits-essential-surjectivity-over-a-small-target
 kind: lemma
 title: "Under the Axiom of Choice, essential surjectivity onto a small category admits a splitting"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-euler-formula-for-connected-plane-graphs
 kind: theorem
 title: "Euler's formula $|V|-|E|+|F|=2$ for every connected plane graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Euler's formula"
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

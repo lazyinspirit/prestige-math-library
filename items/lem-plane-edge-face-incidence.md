@@ -2,7 +2,7 @@
 id: lem-plane-edge-face-incidence
 kind: lemma
 title: "Face frontiers are unions of whole edges; a cycle edge borders two faces and a bridge borders one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

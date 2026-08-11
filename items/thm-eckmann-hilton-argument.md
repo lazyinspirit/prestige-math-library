@@ -2,7 +2,7 @@
 id: thm-eckmann-hilton-argument
 kind: theorem
 title: "Eckmann–Hilton: two unital operations satisfying interchange coincide and are commutative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-finite-ramsey-for-uniform-subsets
 kind: theorem
 title: "For positive $k,c,r$ there is an $N$ such that every $c$-colouring of $[N]^k$ has a monochromatic $r$-element set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Finite uniform Ramsey theorem"
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

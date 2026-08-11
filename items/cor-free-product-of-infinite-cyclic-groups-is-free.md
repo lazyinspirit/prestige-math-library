@@ -2,7 +2,7 @@
 id: cor-free-product-of-infinite-cyclic-groups-is-free
 kind: corollary
 title: "A free product of copies of the infinite cyclic group is a free group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

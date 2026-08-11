@@ -2,7 +2,7 @@
 id: ex-matrix-category-equivalent-to-finite-dimensional-vector-spaces
 kind: example
 title: "Chosen bases exhibit $\\mathbf{Mat}_F$ as equivalent to finite-dimensional vector spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

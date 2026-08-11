@@ -2,7 +2,7 @@
 id: cex-common-jump-prevents-riemann-stieltjes-integrability
 kind: counterexample
 title: "A common jump can destroy Riemann–Stieltjes integrability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

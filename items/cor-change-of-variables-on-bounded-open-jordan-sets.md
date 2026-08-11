@@ -2,7 +2,7 @@
 id: cor-change-of-variables-on-bounded-open-jordan-sets
 kind: corollary
 title: "Change of variables on bounded open Jordan sets when both integrands are bounded and Riemann integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: exhaustion
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

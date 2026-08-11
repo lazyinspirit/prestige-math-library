@@ -2,7 +2,7 @@
 id: lem-improper-integral-splitting-and-tail-invariance
 kind: lemma
 title: "Improper convergence is independent of finite truncations and split points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

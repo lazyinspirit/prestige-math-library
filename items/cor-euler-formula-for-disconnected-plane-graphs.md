@@ -2,7 +2,7 @@
 id: cor-euler-formula-for-disconnected-plane-graphs
 kind: corollary
 title: "For a plane graph with $c$ components, $|V|-|E|+|F|=1+c$, including the null graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

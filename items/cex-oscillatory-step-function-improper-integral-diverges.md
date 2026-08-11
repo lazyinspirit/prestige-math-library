@@ -2,7 +2,7 @@
 id: cex-oscillatory-step-function-improper-integral-diverges
 kind: counterexample
 title: "A bounded truncation function need not have an improper limit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-omitting-the-absolute-jacobian-reverses-sign
 kind: counterexample
 title: 'Omitting the absolute value from the Jacobian gives negative length under the reflection $x\mapsto1-x$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

@@ -2,7 +2,7 @@
 id: lem-near-identity-c-one-maps-sandwich-cubes
 kind: lemma
 title: "A $C^1$ map uniformly close to the identity derivative sandwiches a cube between contracted and expanded cubes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: fixed-point
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

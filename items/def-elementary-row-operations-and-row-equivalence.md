@@ -2,7 +2,7 @@
 id: def-elementary-row-operations-and-row-equivalence
 kind: definition
 title: "Elementary row operations and row equivalence for finite matrices over a field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

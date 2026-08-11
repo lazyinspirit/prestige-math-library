@@ -2,7 +2,7 @@
 id: lem-polygonal-ray-general-position
 kind: lemma
 title: "Every point off a polygon admits a ray meeting it transversely in finitely many nonvertex points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

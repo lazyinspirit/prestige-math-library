@@ -2,7 +2,7 @@
 id: ex-left-regular-action-is-free-and-transitive
 kind: example
 title: "Left multiplication gives a free and transitive action of every group on itself"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

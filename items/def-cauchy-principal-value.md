@@ -2,7 +2,7 @@
 id: def-cauchy-principal-value
 kind: definition
 title: "Cauchy principal values at a finite singularity and on the real line"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: n/a
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

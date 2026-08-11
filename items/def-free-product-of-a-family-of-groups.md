@@ -2,7 +2,7 @@
 id: def-free-product-of-a-family-of-groups
 kind: definition
 title: "The free product of an arbitrary family of groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

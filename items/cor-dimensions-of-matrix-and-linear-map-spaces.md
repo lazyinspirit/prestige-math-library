@@ -2,7 +2,7 @@
 id: cor-dimensions-of-matrix-and-linear-map-spaces
 kind: corollary
 title: '$\dim_F M_{m\times n}(F)=mn$ and $\dim_F\mathcal L(V,W)=(\dim_FV)(\dim_FW)$ for finite-dimensional $V,W$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

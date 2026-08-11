@@ -2,7 +2,7 @@
 id: cor-orbit-stabilizer-cardinality
 kind: corollary
 title: 'Orbit-stabiliser cardinality: $|G\cdot x|=[G:G_x]$ whenever either side is finite, and $|G|=|G_x|\,|G\cdot x|$ for finite $G$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-elementary-matrices-are-invertible
 kind: corollary
 title: "Every elementary matrix is invertible, with inverse given by the reverse elementary operation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

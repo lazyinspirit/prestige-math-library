@@ -2,7 +2,7 @@
 id: cor-free-products-are-unique-up-to-unique-isomorphism
 kind: corollary
 title: "Free products are unique up to a unique factor-compatible isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

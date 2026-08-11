@@ -2,7 +2,7 @@
 id: ex-two-colourings-of-a-square-up-to-dihedral-symmetry
 kind: example
 title: "There are six two-colourings of the vertices of a square up to its eight symmetries"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

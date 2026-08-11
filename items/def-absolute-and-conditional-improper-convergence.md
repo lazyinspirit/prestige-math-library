@@ -2,7 +2,7 @@
 id: def-absolute-and-conditional-improper-convergence
 kind: definition
 title: "Absolute and conditional convergence of improper integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: n/a
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

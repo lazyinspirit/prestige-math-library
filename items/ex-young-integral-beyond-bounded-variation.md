@@ -2,7 +2,7 @@
 id: ex-young-integral-beyond-bounded-variation
 kind: example
 title: "Young's theorem integrates a Hölder function of unbounded variation against itself"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -22,6 +22,7 @@ landmark: false
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

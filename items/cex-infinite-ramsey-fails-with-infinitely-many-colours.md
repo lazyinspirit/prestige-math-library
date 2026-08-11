@@ -2,7 +2,7 @@
 id: cex-infinite-ramsey-fails-with-infinitely-many-colours
 kind: counterexample
 title: "Infinite Ramsey fails with infinitely many colours: colour $\\{i,j\\}$ by $\\min\\{i,j\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

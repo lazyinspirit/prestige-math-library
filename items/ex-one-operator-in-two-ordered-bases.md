@@ -2,7 +2,7 @@
 id: ex-one-operator-in-two-ordered-bases
 kind: example
 title: 'The same operator has two different matrices in two ordered bases'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-variation-function-and-positive-negative-variation
 kind: definition
 title: "Variation function and positive and negative variations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: true
 short: "positive and negative variation"
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

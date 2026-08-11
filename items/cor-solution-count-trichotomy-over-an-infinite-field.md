@@ -2,7 +2,7 @@
 id: cor-solution-count-trichotomy-over-an-infinite-field
 kind: corollary
 title: "Over an infinite field, a finite linear system has no solution, exactly one solution, or infinitely many solutions according to its pivots"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

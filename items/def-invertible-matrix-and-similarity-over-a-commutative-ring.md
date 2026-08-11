@@ -2,7 +2,7 @@
 id: def-invertible-matrix-and-similarity-over-a-commutative-ring
 kind: definition
 title: "Invertible square matrices and similarity over a commutative ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

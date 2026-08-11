@@ -2,7 +2,7 @@
 id: cor-units-in-a-polynomial-ring-over-a-domain
 kind: corollary
 title: 'The units of R[x] over an integral domain are exactly the constant polynomials whose values are units of R'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

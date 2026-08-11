@@ -2,7 +2,7 @@
 id: cor-endomorphism-ring-is-a-matrix-ring
 kind: corollary
 title: '$\operatorname{End}_F(V)$ is a ring and matrix representation is a ring isomorphism $\operatorname{End}_F(V)\cong M_n(F)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

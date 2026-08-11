@@ -2,7 +2,7 @@
 id: cex-naive-quaternion-determinant-is-not-row-alternating
 kind: counterexample
 title: 'The naive quaternionic formula $ad-bc$ is not row-alternating: a matrix with equal rows can have value $2k\ne0$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

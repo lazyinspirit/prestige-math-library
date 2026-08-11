@@ -2,7 +2,7 @@
 id: prop-vector-spaces-and-linear-maps-form-category-vect
 kind: proposition
 title: "Vector spaces over a fixed field and linear maps form the large locally small category $\\mathbf{Vect}_F$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

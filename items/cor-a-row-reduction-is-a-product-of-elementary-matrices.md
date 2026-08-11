@@ -2,7 +2,7 @@
 id: cor-a-row-reduction-is-a-product-of-elementary-matrices
 kind: corollary
 title: 'A finite row reduction from $A$ to $B$ is encoded by $B=E_r\cdots E_1A$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

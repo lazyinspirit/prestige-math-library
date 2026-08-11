@@ -2,7 +2,7 @@
 id: ex-two-involutions-generate-the-infinite-dihedral-group
 kind: example
 title: "C_2 free-product C_2 is the infinite dihedral group, and the product of its generators has infinite order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

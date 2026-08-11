@@ -2,7 +2,7 @@
 id: cor-change-of-variables-for-compactly-supported-functions
 kind: corollary
 title: "A compactly supported Riemann integrand admits the global change-of-variables formula from a diffeomorphism near the relevant compact preimage"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: reduction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

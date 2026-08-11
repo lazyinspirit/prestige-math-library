@@ -2,7 +2,7 @@
 id: cex-the-ideal-x-y-in-a-bivariate-polynomial-ring-is-not-principal
 kind: counterexample
 title: 'For a field F, the ideal (x,y) in F[x,y] is not principal'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

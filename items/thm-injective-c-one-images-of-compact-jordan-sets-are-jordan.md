@@ -2,7 +2,7 @@
 id: thm-injective-c-one-images-of-compact-jordan-sets-are-jordan
 kind: theorem
 title: "An injective $C^1$ map with invertible derivative sends compact Jordan sets to compact Jordan sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: local-to-global
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

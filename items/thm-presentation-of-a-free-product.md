@@ -2,7 +2,7 @@
 id: thm-presentation-of-a-free-product
 kind: theorem
 title: "A free product has the union presentation of presentations of its factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

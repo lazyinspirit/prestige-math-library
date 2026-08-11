@@ -2,7 +2,7 @@
 id: ex-cantor-function-bv-not-absolutely-continuous
 kind: example
 title: "The Cantor function is continuous and of bounded variation but not absolutely continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

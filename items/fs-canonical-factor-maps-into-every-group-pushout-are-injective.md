@@ -2,7 +2,7 @@
 id: fs-canonical-factor-maps-into-every-group-pushout-are-injective
 kind: false-statement
 title: "FALSE: canonical factor maps into every group pushout are injective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-fixed-point-congruence-fails-without-p-group-hypothesis
 kind: counterexample
 title: "$S_3$ acting on three points has $|X|=3$ and $|X^{S_3}|=0$, so the fixed-point congruence modulo $2$ fails without the $p$-group hypothesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

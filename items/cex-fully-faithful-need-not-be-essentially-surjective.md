@@ -2,7 +2,7 @@
 id: cex-fully-faithful-need-not-be-essentially-surjective
 kind: counterexample
 title: "The inclusion of one object into a discrete two-object category is fully faithful but not essentially surjective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

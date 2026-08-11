@@ -2,7 +2,7 @@
 id: prop-topological-spaces-and-continuous-maps-form-category-top
 kind: proposition
 title: "Topological spaces and continuous maps form the large locally small category $\\mathbf{Top}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

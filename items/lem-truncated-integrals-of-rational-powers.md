@@ -2,7 +2,7 @@
 id: lem-truncated-integrals-of-rational-powers
 kind: lemma
 title: "Truncated integrals of rational powers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-ramsey-colouring-and-arrow-notation
 kind: definition
 title: "Finite colourings of $k$-element subsets, monochromatic sets, and the arrow notations $N\\to(s,t)^2$ and $N\\to(r)^k_c$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-unique-subgroup-of-order-p-forces-cyclicity
 kind: lemma
 title: "A nontrivial finite abelian p-group with a unique subgroup of order p is cyclic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

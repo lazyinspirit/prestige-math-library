@@ -2,7 +2,7 @@
 id: thm-cauchy-for-finite-abelian-groups
 kind: theorem
 title: "Cauchy's theorem for finite abelian groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

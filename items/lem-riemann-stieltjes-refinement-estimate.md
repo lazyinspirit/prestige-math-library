@@ -2,7 +2,7 @@
 id: lem-riemann-stieltjes-refinement-estimate
 kind: lemma
 title: "Refinement and tag-change estimates for Stieltjes sums"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ short: "Stieltjes refinement estimate"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

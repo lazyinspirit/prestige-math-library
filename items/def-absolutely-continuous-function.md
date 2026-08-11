@@ -2,7 +2,7 @@
 id: def-absolutely-continuous-function
 kind: definition
 title: "Absolute continuity on a compact interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: true
 short: "absolute continuity"
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

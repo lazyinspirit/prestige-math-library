@@ -2,7 +2,7 @@
 id: thm-reduced-row-echelon-form-is-unique
 kind: theorem
 title: "Every finite matrix over a field is row equivalent to exactly one reduced row echelon matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

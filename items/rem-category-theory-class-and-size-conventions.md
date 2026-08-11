@@ -2,7 +2,7 @@
 id: rem-category-theory-class-and-size-conventions
 kind: remark
 title: "Class-sized category theory in ZFC: definable-class schemas, small and locally small categories, and why $\\mathbf{CAT}$ is not formed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

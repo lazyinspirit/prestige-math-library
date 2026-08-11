@@ -2,7 +2,7 @@
 id: ex-polar-change-of-variables-on-an-annular-sector
 kind: example
 title: "Polar change of variables on a compact annular sector gives the Jacobian factor $r$ and its area"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

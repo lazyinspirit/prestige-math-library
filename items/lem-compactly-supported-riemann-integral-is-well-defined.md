@@ -2,7 +2,7 @@
 id: lem-compactly-supported-riemann-integral-is-well-defined
 kind: lemma
 title: "The Riemann integral of a compactly supported function is independent of its bounding rectangle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: common-extension
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

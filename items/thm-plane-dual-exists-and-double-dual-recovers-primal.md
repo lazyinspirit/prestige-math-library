@@ -2,7 +2,7 @@
 id: thm-plane-dual-exists-and-double-dual-recovers-primal
 kind: theorem
 title: "Every connected plane graph has a plane dual multigraph, and when that dual is simple the reciprocal embedding identifies the double dual with the original graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

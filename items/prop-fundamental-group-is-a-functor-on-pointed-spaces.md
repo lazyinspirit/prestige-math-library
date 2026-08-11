@@ -2,7 +2,7 @@
 id: prop-fundamental-group-is-a-functor-on-pointed-spaces
 kind: proposition
 title: "The fundamental group is a functor $\\pi_1:\\mathbf{Top}_*\\to\\mathbf{Grp}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

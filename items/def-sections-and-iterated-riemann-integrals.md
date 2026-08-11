@@ -2,7 +2,7 @@
 id: def-sections-and-iterated-riemann-integrals
 kind: definition
 title: "Sections, lower and upper section integrals, and iterated Riemann integrals on product rectangles and Jordan sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

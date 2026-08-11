@@ -2,7 +2,7 @@
 id: ex-w-three-two-equals-nine
 kind: example
 title: "$W(3,2)=9$ by an explicit colouring of $\\{0,\\ldots,7\\}$ and an exhaustive symmetry-reduced proof for $\\{0,\\ldots,8\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

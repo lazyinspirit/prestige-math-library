@@ -2,7 +2,7 @@
 id: cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension
 kind: corollary
 title: 'Two finite-dimensional vector spaces over $F$ are linearly isomorphic if and only if they have the same dimension'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

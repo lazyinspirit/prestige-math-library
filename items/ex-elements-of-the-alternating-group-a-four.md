@@ -2,7 +2,7 @@
 id: ex-elements-of-the-alternating-group-a-four
 kind: example
 title: '$A_4$ consists of the identity, eight $3$-cycles, and three products of disjoint transpositions'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

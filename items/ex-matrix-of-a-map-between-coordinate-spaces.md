@@ -2,7 +2,7 @@
 id: ex-matrix-of-a-map-between-coordinate-spaces
 kind: example
 title: 'A matrix represents a map $F^2\to F^3$ by its images of the standard basis vectors'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

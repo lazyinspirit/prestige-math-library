@@ -2,7 +2,7 @@
 id: cor-amalgamation-along-an-isomorphism-recovers-the-other-factor
 kind: corollary
 title: "A pushout along an isomorphism is isomorphic to the other factor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

@@ -2,7 +2,7 @@
 id: lem-polygonal-arc-does-not-separate-the-plane
 kind: lemma
 title: "The complement of a polygonal arc in $\\mathbb R^2$ is polygonally connected"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-r-three-three-both-bounds
 kind: example
 title: "$R(3,3)=6$ in both directions: the six-vertex argument and the red $5$-cycle whose blue complement is another $5$-cycle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

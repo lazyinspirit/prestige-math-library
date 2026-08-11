@@ -2,7 +2,7 @@
 id: cor-full-faithful-essentially-surjective-small-target-characterises-equivalence
 kind: corollary
 title: "Under the Axiom of Choice, a functor with small target is an equivalence exactly when it is fully faithful and essentially surjective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

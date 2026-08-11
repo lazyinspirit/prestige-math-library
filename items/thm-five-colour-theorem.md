@@ -2,7 +2,7 @@
 id: thm-five-colour-theorem
 kind: theorem
 title: "Five colour theorem: every planar graph has chromatic number at most five"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "Five colour theorem"
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-free-product-of-free-groups-on-disjoint-bases
 kind: theorem
 title: "Free groups on disjoint bases freely multiply to the free group on their union"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

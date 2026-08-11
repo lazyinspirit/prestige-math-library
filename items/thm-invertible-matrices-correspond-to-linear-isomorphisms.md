@@ -2,7 +2,7 @@
 id: thm-invertible-matrices-correspond-to-linear-isomorphisms
 kind: theorem
 title: 'A square matrix is invertible exactly when its multiplication map is a linear isomorphism; matrices preserve inverses of linear isomorphisms'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

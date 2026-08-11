@@ -2,7 +2,7 @@
 id: cor-inverse-by-row-reducing-an-augmented-matrix
 kind: corollary
 title: 'Row reducing $[A\mid I]$ yields $[I\mid A^{-1}]$ exactly when $A$ is invertible'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-rigidity-of-alternating-multilinear-matrix-functions
 kind: lemma
 title: 'Every alternating multilinear $F$ satisfies $F(A)=F(I)\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)\prod_i a_{\sigma(i),i}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

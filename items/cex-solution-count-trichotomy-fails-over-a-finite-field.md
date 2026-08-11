@@ -2,7 +2,7 @@
 id: cex-solution-count-trichotomy-fails-over-a-finite-field
 kind: counterexample
 title: 'Over $\mathbb F_2$, the equation $x+y=0$ has exactly two solutions, so the infinite-field hypothesis is necessary'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

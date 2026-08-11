@@ -2,7 +2,7 @@
 id: def-riemann-stieltjes-sum-and-integral
 kind: definition
 title: "Riemann–Stieltjes sums, upper and lower sums, and the Riemann–Stieltjes integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ landmark: true
 short: "Riemann-Stieltjes integral"
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

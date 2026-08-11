@@ -2,7 +2,7 @@
 id: ex-underlying-set-and-forgetful-functors
 kind: example
 title: "Underlying-set and structure-forgetting functors among $\\mathbf{Grp}$, $\\mathbf{Ring}$, $\\mathbf{Vect}_F$, $R\\text{-}\\mathbf{Mod}$, $\\mathbf{Top}$, and $\\mathbf{Set}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

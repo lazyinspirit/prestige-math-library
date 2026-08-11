@@ -2,7 +2,7 @@
 id: thm-similarity-is-an-equivalence-relation-and-models-basis-change
 kind: theorem
 title: 'Similarity is an equivalence relation, and two matrices represent the same endomorphism in two bases exactly when they are similar'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ short: 'Similarity is basis change'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

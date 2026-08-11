@@ -2,7 +2,7 @@
 id: thm-sign-is-a-homomorphism
 kind: theorem
 title: 'The sign is a homomorphism $S_n\to\{+1,-1\}$, surjective exactly when $n\ge 2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ short: 'The sign homomorphism'
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

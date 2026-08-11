@@ -2,7 +2,7 @@
 id: lem-plane-face-handshake-by-girth
 kind: lemma
 title: "Facial boundary walks of a connected plane graph sum to $2|E|$, and if every such walk has length at least $g$ then $g|F|\\le2|E|$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

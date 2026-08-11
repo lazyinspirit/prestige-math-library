@@ -2,7 +2,7 @@
 id: ex-interior-square-root-singularity
 kind: example
 title: "$|x-c|^{-1/2}$ has a convergent improper integral across an interior singularity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

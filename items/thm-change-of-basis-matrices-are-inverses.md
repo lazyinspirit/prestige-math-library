@@ -2,7 +2,7 @@
 id: thm-change-of-basis-matrices-are-inverses
 kind: theorem
 title: '$[v]_{\mathcal C}=P_{\mathcal C\leftarrow\mathcal B}[v]_{\mathcal B}$ and $P_{\mathcal B\leftarrow\mathcal C}=P_{\mathcal C\leftarrow\mathcal B}^{-1}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

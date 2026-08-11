@@ -2,7 +2,7 @@
 id: def-category
 kind: definition
 title: "Category, object, morphism, domain, codomain, identity, composition, and hom-collection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

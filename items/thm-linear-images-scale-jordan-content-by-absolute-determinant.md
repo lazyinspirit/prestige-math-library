@@ -2,7 +2,7 @@
 id: thm-linear-images-scale-jordan-content-by-absolute-determinant
 kind: theorem
 title: 'A linear endomorphism of $\mathbb R^n$ sends bounded Jordan sets to bounded Jordan sets and scales their content by the absolute determinant'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

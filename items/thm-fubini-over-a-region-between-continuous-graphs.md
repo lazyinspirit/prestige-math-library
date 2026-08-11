@@ -2,7 +2,7 @@
 id: thm-fubini-over-a-region-between-continuous-graphs
 kind: theorem
 title: "A region between two continuous graphs is Jordan measurable, and a continuous integrand extending to its closure integrates by vertical sections"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

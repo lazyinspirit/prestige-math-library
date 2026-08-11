@@ -2,7 +2,7 @@
 id: cor-improper-integral-tails-tend-to-zero
 kind: corollary
 title: "Tails of a convergent improper integral tend to zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

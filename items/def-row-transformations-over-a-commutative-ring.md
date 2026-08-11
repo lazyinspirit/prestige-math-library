@@ -2,7 +2,7 @@
 id: def-row-transformations-over-a-commutative-ring
 kind: definition
 title: "Row swaps, arbitrary row scalings and row additions over a commutative ring, with reversible elementary cases distinguished"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

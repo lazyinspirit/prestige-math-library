@@ -2,7 +2,7 @@
 id: ex-determinant-is-a-natural-transformation
 kind: example
 title: "For $n\\ge 1$, determinant is a natural transformation $\\det:\\operatorname{GL}_n(-)\\Rightarrow(-)^{\\times}$ from commutative rings to groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

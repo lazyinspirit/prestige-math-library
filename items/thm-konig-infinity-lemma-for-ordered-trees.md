@@ -2,7 +2,7 @@
 id: thm-konig-infinity-lemma-for-ordered-trees
 kind: theorem
 title: "König's infinity lemma: an ordered finitely branching tree with a node at every level has an infinite branch, in ZF"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ short: "König's infinity lemma"
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

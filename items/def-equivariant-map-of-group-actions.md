@@ -2,7 +2,7 @@
 id: def-equivariant-map-of-group-actions
 kind: definition
 title: "Equivariant maps and isomorphisms of group actions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

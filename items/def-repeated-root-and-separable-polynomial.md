@@ -2,7 +2,7 @@
 id: def-repeated-root-and-separable-polynomial
 kind: definition
 title: 'Repeated roots in extension fields and separable polynomials'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

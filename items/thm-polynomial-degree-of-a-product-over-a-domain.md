@@ -2,7 +2,7 @@
 id: thm-polynomial-degree-of-a-product-over-a-domain
 kind: theorem
 title: 'Over an integral domain, degrees add under multiplication of nonzero polynomials'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

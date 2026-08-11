@@ -2,7 +2,7 @@
 id: def-permutation-support-disjoint-cycles-and-cycle-type
 kind: definition
 title: 'Support, fixed points, disjoint cycles, cycle length, disjoint-cycle decompositions, and cycle type'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

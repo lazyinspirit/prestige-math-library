@@ -2,7 +2,7 @@
 id: def-plane-graph-face-and-boundary
 kind: definition
 title: "Plane embeddings of finite simple graphs, their faces, facial boundary walks and lengths (counting a bridge twice), and planar graphs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

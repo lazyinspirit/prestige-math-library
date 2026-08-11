@@ -2,7 +2,7 @@
 id: cor-all-abelian-groups-of-order-n-cyclic-iff-n-squarefree
 kind: corollary
 title: "Every abelian group of order n is cyclic if and only if n is squarefree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

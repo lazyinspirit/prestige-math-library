@@ -2,7 +2,7 @@
 id: ex-amalgamating-c-two-inside-c-four-and-c-six
 kind: example
 title: "Amalgamating C_2 inside C_4 and C_6 gives the presentation with a^2=b^3"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

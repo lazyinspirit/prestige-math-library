@@ -2,7 +2,7 @@
 id: thm-parity-of-transposition-factorisations-is-well-defined
 kind: theorem
 title: 'Every transposition factorisation of $\sigma$ has parity $(-1)^{\operatorname{inv}(\sigma)}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

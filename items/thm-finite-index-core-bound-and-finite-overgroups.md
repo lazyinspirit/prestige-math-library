@@ -2,7 +2,7 @@
 id: thm-finite-index-core-bound-and-finite-overgroups
 kind: theorem
 title: 'If $[G:H]=n<\infty$, then $\operatorname{Core}_G(H)\trianglelefteq G$, $[G:\operatorname{Core}_G(H)]\mid n!$, and only finitely many subgroups contain $H$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

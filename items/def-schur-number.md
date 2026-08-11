@@ -2,7 +2,7 @@
 id: def-schur-number
 kind: definition
 title: "The Schur number $S(c)$ as the largest $N$ for which $\\{1,\\ldots,N\\}$ has a $c$-colouring with no positive monochromatic solution of $x+y=z$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

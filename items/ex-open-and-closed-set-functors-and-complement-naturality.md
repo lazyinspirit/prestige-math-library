@@ -2,7 +2,7 @@
 id: ex-open-and-closed-set-functors-and-complement-naturality
 kind: example
 title: "Open-set and closed-set functors on $\\mathbf{Top}^{\\mathrm{op}}$ are naturally isomorphic by complements"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

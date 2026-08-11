@@ -2,7 +2,7 @@
 id: thm-determinant-of-a-triangular-matrix
 kind: theorem
 title: "The determinant of a triangular matrix is the product of its diagonal entries"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

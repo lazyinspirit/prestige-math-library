@@ -2,7 +2,7 @@
 id: ex-successive-p-layers-read-a-cyclic-decomposition
 kind: example
 title: "Successive p-multiple layers recover the summands of C_p^2 times C_{p^3} times C_{p^4}^2"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

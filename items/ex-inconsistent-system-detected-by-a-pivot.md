@@ -2,7 +2,7 @@
 id: ex-inconsistent-system-detected-by-a-pivot
 kind: example
 title: 'A $3\times3$ system has no solution because its augmented column contains a pivot'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

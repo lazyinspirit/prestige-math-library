@@ -2,7 +2,7 @@
 id: thm-invertible-matrix-theorem
 kind: theorem
 title: "Invertible matrix theorem: invertibility, full pivot rank, RREF $I$, trivial nullspace and unique solvability are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

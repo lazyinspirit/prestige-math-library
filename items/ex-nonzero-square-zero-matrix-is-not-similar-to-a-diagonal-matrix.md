@@ -2,7 +2,7 @@
 id: ex-nonzero-square-zero-matrix-is-not-similar-to-a-diagonal-matrix
 kind: example
 title: 'A nonzero square-zero matrix is not similar to any diagonal matrix'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

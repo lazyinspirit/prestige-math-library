@@ -2,7 +2,7 @@
 id: ex-riemann-integrable-function-with-a-nonintegrable-section
 kind: example
 title: "An integrable function on the unit square with one Dirichlet section and only one defined order of ordinary iteration"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

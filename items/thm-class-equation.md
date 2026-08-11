@@ -2,7 +2,7 @@
 id: thm-class-equation
 kind: theorem
 title: 'The class equation $|G|=|Z(G)|+\sum_i [G:C_G(x_i)]$ for a finite group'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

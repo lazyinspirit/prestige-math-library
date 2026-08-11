@@ -2,7 +2,7 @@
 id: def-row-space-column-space-nullspace-and-matrix-ranks
 kind: definition
 title: "Row space, column space, nullspace, row rank, column rank and matrix rank"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

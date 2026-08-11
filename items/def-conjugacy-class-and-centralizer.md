@@ -2,7 +2,7 @@
 id: def-conjugacy-class-and-centralizer
 kind: definition
 title: 'The conjugacy class $\operatorname{Cl}_G(x)$ and centralizer $C_G(x)$ of an element'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

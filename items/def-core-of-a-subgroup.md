@@ -2,7 +2,7 @@
 id: def-core-of-a-subgroup
 kind: definition
 title: 'The core $\operatorname{Core}_G(H)=\bigcap_{g\in G}gHg^{-1}$ of a subgroup'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

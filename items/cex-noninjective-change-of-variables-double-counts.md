@@ -2,7 +2,7 @@
 id: cex-noninjective-change-of-variables-double-counts
 kind: counterexample
 title: 'Dropping injectivity double-counts under $x\mapsto x^2$ on two disjoint intervals'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references: []

@@ -2,7 +2,7 @@
 id: fs-two-colouring-forces-an-infinite-monochromatic-progression
 kind: false-statement
 title: "FALSE: every two-colouring of $\\mathbb N$ contains an infinite monochromatic arithmetic progression"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: prop-formal-derivative-laws
 kind: proposition
 title: 'Linearity, power rule, Leibniz rule and the degree bound for the formal derivative'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

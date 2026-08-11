@@ -2,7 +2,7 @@
 id: lem-finite-jordan-cover-sum-bounds
 kind: lemma
 title: "Finite Jordan covers bound upper integrals, while interior-disjoint Jordan subfamilies bound lower integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-irreducible-polynomial-is-separable-iff-derivative-nonzero
 kind: corollary
 title: 'An irreducible polynomial over a field is separable exactly when its derivative is nonzero'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-left-coset-action-and-its-kernel
 kind: theorem
 title: 'Left multiplication on $G/H$ is transitive, has stabiliser $H$ at $H$, and has kernel $\operatorname{Core}_G(H)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

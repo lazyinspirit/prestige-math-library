@@ -2,7 +2,7 @@
 id: def-bounded-variation-and-total-variation
 kind: definition
 title: "Bounded variation and total variation on an interval"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: true
 short: "bounded variation"
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

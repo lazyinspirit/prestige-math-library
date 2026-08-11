@@ -2,7 +2,7 @@
 id: def-finite-p-group
 kind: definition
 title: 'A finite $p$-group has order $p^n$ for a prime $p$ and some $n\in\mathbb N$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

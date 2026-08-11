@@ -2,7 +2,7 @@
 id: lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set
 kind: lemma
 title: "A compact subset of an open Euclidean set has a compact Jordan neighborhood inside that open set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: finite-cover
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

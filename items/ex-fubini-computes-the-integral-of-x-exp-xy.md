@@ -2,7 +2,7 @@
 id: ex-fubini-computes-the-integral-of-x-exp-xy
 kind: example
 title: 'Fubini computes $\int_0^1\int_{-1}^1 x\exp(xy)\,dx\,dy$ by reversing the order'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:

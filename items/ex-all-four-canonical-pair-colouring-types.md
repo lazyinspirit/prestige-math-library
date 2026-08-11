@@ -2,7 +2,7 @@
 id: ex-all-four-canonical-pair-colouring-types
 kind: example
 title: "Constant, injective, left-dependent, and right-dependent pair colourings all occur on $\\mathbb N$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-11
 sources:
   scraped: []
   references:
