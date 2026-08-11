@@ -12,11 +12,18 @@ Writable scope observed: only the four `research/frontier-11-batch-3.*` artifact
 | `formal-power-series` | A | 22 | 7 definitions, 2 lemmas, 2 propositions, 9 theorems, 2 corollaries |
 | `formal-power-series-examples` | B | 9 | 6 examples, 3 counterexamples |
 | `extremal-graph-theory` | A | 20 | 4 definitions, 4 lemmas, 1 proposition, 8 theorems, 3 corollaries |
-| `extremal-graph-theory-examples` | B | 7 | 7 examples |
+| `extremal-graph-theory-examples` | B | 9 | 7 examples, 2 false statements |
 
 Neither A page approaches the 60-item split threshold. **No split is proposed.** The exact cut remains the two pairs assigned at step 0: formal algebra at 193–194 and extremal graph theory at 219–220.
 
-The harvest contains 84 source-owned headings. Formal power series yielded 28 `included`, 12 `inline`, and 2 `out-of-scope`; extremal graph theory yielded 26 `included`, 15 `inline`, and 1 `out-of-scope`. Thus 54 headings land in numbered scaffold items, 27 are proved or explained inside those items, and 3 are declined. There are no `deferred` results and no result is dropped for lack of a buildable prerequisite.
+The corrected harvest contains 118 source-owned headings. Formal power series yields 31 `included`, 19 `inline`, 2 `already-published`, and 19 `out-of-scope`; extremal graph theory yields 26 `included`, 15 `inline`, 1 `out-of-scope`, and 5 `deferred`. The five deferred rows are the source headings for the KST lower-bound routes that need probability or finite-projective-plane machinery on later pages; no retained result is dropped for lack of a buildable prerequisite.
+
+## Step-3 fix record
+
+- **C1:** `thm-formal-power-laurent-dictionary` no longer names a field of fractions, a localisation, a quotient representation, or a universal property. Its scaffold and contract now prove only the coefficientwise embedding $K[[x]]\hookrightarrow K((x))$, the nonnegative-order image, the unique factorisation $h=x^{v(h)}u$ with $u$ a power-series unit, the inverse formula $h^{-1}=x^{-v(h)}u^{-1}$, and the $K=\mathbb R$ valuation dictionary. This follows the fix dispatch's narrower wording; the fraction-field construction remains outside this run.
+- **C2:** Wilf's *generatingfunctionology* is now the substantial independent monograph treatment. The exact range read is Chapter 1 opening and §§1.1–1.6, printed pp. 1–23, stopping before its exercises, and Chapter 2 opening and §§2.1–2.6, printed pp. 30–64, stopping before its exercises. The harvest enumerates every section heading in that range and the named theorem, proposition, and rule headings relevant to the pair. The existing Flajolet–Sedgewick headings were independently rechecked against the official book contents as Appendix A.5, “Formal power series,” and Appendix A.6, “Lagrange inversion.”
+- **E1:** the B page adds `fs-every-triangle-free-graph-is-bipartite`, routed directly through the published cycle definition and the published odd-cycle characterisation of bipartite graphs; and `fs-erdos-stone-simonovits-determines-the-extremal-number-for-every-graph`, routed through the local ESS theorem, KST theorem, and asymptotic notation plus the published $K_{2,2}$ and chromatic-number definitions. Both statements are source-grounded `ai-altered` boundary claims, not generated load-bearing bridges. The triangle refutation deliberately does not depend on the AI-generated neighbouring $C_5$ example.
+- **E2:** Zhao §§1.8–1.10 and Theorems 1.9.1 and 1.10.1 now have `deferred` coverage rows. The overview row names both licensing routes: `finite-probability-and-the-probabilistic-method` (order 221) for probabilistic deletion and `block-designs-and-finite-projective-planes` (order 225) for the Erdős–Rényi polarity/projective-plane construction giving $\operatorname{ex}(n,C_4)=\Theta(n^{3/2})$.
 
 ## Draft two-paragraph A-page summaries
 
@@ -24,7 +31,7 @@ The harvest contains 84 source-owned headings. Formal power series yielded 28 `i
 
 Commutative rings, finite commutative-monoid sums, polynomial convolution, units, domains, and the published real Laurent-series field supply the algebraic setting. Formal series are coefficient functions rather than functions of a numerical variable: the symbol $x$ is an indeterminate, every product coefficient is a finite sum, and no analytic convergence is asserted or used.
 
-The page builds $R[[x]]$ as a complete $x$-adic ring with coefficient extraction, order, summable families, units, composition, compositional inverses, and formal differentiation. Over a commutative $\mathbb Q$-algebra it constructs exponential, logarithm, binomial powers, and unique roots. Formal residues then prove Lagrange–Bürmann inversion, while the closing dictionary identifies $K[[x]]$ with the nonnegative-order subring of $K((x))$ and recovers the published real $t^{-1}$ Laurent field without duplicating its valuation or field proof.
+The page builds $R[[x]]$ as a complete $x$-adic ring with coefficient extraction, order, summable families, units, composition, compositional inverses, and formal differentiation. Over a commutative $\mathbb Q$-algebra it constructs exponential, logarithm, binomial powers, and unique roots. Formal residues then prove Lagrange–Bürmann inversion, while the closing dictionary embeds $K[[x]]$ as the nonnegative-order subring of $K((x))$ and derives the unique order factorisation and inverse formula directly.
 
 ### `extremal-graph-theory`
 
@@ -42,23 +49,27 @@ The machine-complete heading harvest is in `research/frontier-11-batch-3.coverag
 
 2. **Philippe Flajolet and Robert Sedgewick, _Analytic Combinatorics_.** Read Appendix A.5, pp. 730–731, and Appendix A.6, pp. 732–733. This independent textbook treatment checks the formal-series and coefficient-extraction conventions and the standard coefficient form of Lagrange inversion. It is a convention and theorem cross-check, not the proof source for analytic convergence; the page remains algebraic.
 
-3. **Published in-library Laurent development.** Opened the entire page `formal-laurent-series-field` and the exact items `def-formal-laurent-series`, `lem-laurent-series-ring`, `lem-laurent-valuation`, `thm-laurent-series-field`, and `thm-laurent-cauchy-complete`. The published page owns the real $\mathbb R((t^{-1}))$ construction, field property, and valuation. It does **not** state the field-of-fractions dictionary for $R[[x]]$, so `thm-formal-power-laurent-dictionary` builds that missing statement and cites the published field and valuation rather than restating their proofs. `thm-laurent-cauchy-complete` was read to check whether it owned the formal topology needed here; it concerns ordered-field Cauchy sequences, so it is not cited for the coefficientwise $x$-adic completeness theorem.
+3. **Herbert S. Wilf, _generatingfunctionology_, Internet Edition.** Read the Chapter 1 opening and §§1.1–1.6, printed pp. 1–23, stopping before the Chapter 1 exercises; and the Chapter 2 opening and §§2.1–2.6, printed pp. 30–64, stopping before the Chapter 2 exercises. The harvest enumerates every chapter and section heading in that range, Rules 1–5 and 1′–3′, and the named theorems and propositions used to check units, composition, differentiation, convolution, analytic/formal separation, and downstream boundaries. This is the second substantial treatment, while Sambale remains the principal proof source.
+
+4. **Published in-library Laurent development.** Opened the entire page `formal-laurent-series-field` and the exact items `def-formal-laurent-series`, `lem-laurent-series-ring`, `lem-laurent-valuation`, `thm-laurent-series-field`, and `thm-laurent-cauchy-complete`. The published page owns the real $\mathbb R((t^{-1}))$ construction, field property, and valuation. It does **not** supply a general fraction-field or localisation construction. The restated `thm-formal-power-laurent-dictionary` therefore uses only the published real field/valuation interface and proves the coefficientwise embedding, order factorisation, unit condition, and inverse formula directly. `thm-laurent-cauchy-complete` was read to check whether it owned the formal topology needed here; it concerns ordered-field Cauchy sequences, so it is not cited for the coefficientwise $x$-adic completeness theorem.
 
 ### Extremal graph theory
 
-1. **Yufei Zhao, _Graph Theory and Additive Combinatorics_, MIT 18.225 full lecture notes.** Read the Chapter 1 opening; §1.1 through Remark 1.1.2; §1.2 through Lemma 1.2.7; §1.3 through Theorem 1.3.4; §1.4 through Corollary 1.4.5; and §1.5 through Theorem 1.5.9 and its proof. This is the principal proof treatment for Mantel, Turán with uniqueness, normalized monotonicity, Turán density, supersaturation, KST, hypergraph KST, Erdős–Stone, and Erdős–Stone–Simonovits. The scaffold retains the elementary hypergraph-KST route to Erdős–Stone, so no regularity lemma or undeclared external theorem is needed.
+1. **Yufei Zhao, _Graph Theory and Additive Combinatorics_, MIT 18.225 full lecture notes.** Read the Chapter 1 opening; §1.1 through Remark 1.1.2; §1.2 through Lemma 1.2.7; §1.3 through Theorem 1.3.4; §1.4 through Corollary 1.4.5; §1.5 through Theorem 1.5.9 and its proof; and §1.8 through Theorem 1.10.1. This is the principal proof treatment for Mantel, Turán with uniqueness, normalized monotonicity, Turán density, supersaturation, KST, hypergraph KST, Erdős–Stone, and Erdős–Stone–Simonovits. The last range was read to disposition the randomized and algebraic KST lower-bound constructions: both are deferred to the later pages that supply their actual machinery. The scaffold retains the elementary hypergraph-KST route to Erdős–Stone, so no regularity lemma or undeclared external theorem is needed.
 
 2. **Reinhard Diestel, _Graph Theory_, Chapter 7 preview.** Read §7.1, pp. 180–185, through Lemma 7.1.4 and the proof of Corollary 7.1.3. This independent textbook treatment checks the extremal-number convention, both Turán proofs and their equality statement, the balanced blowup form of Erdős–Stone, and the chromatic-number density corollary.
 
 3. **Published graph pages.** Opened `graphs-walks-and-connectivity`, `graph-colouring`, and `ramsey-theory` and then the exact item files listed in the dependency table below. `graph-colouring` contains only four items: it does define proper colouring and $\chi(G)$, including the null-graph boundary, but contributes no extremal theorem. The scaffold therefore cites only that definition and builds all density machinery locally. `ramsey-theory` supplies the exact arrow and off-diagonal-number conventions used by the Turán colouring witness.
 
-## Declines likely to be challenged
+## Out-of-scope and deferred decisions likely to be challenged
 
-Only three harvested headings are declined.
+The three main out-of-scope decisions remain:
 
 - **Sambale Example 2.6(3), partial fractions for two linear factors — out of scope.** This calculation is specifically machinery for order 195, `linear-recurrences-and-rational-generating-functions`. Order 193 supplies its formal ring, inverse, and coefficient tools; duplicating the decomposition here would blur the exact page cut. This is not a missing prerequisite for any theorem in the present pair.
 - **Sambale Example 3.5(2), the Nottingham group — out of scope.** Its finite-$p$-group universality is specialised infinite-group structure, not formal-series machinery required by orders 195, 197, or 201. The compositional group and inverse theorem from the same source are fully included.
 - **Zhao Conjecture 1.4.4, tightness of KST for all $s,t$ — out of scope.** It is unresolved; the source names $K_{4,4}$ as the first open diagonal case. The page states and proves the upper bound and does not turn an open lower-bound conjecture into a theorem.
+
+The KST lower-bound material is not declined. Zhao §1.8, §1.9 and Theorem 1.9.1 are deferred to `finite-probability-and-the-probabilistic-method` (order 221), which supplies randomized sampling/deletion; §1.10 and Theorem 1.10.1 are deferred to `block-designs-and-finite-projective-planes` (order 225), which supplies the finite-projective-plane polarity construction. The §1.8 overview row records both routes explicitly.
 
 Lagrange inversion is **not** declined: it is scaffolded with an in-scope residue proof. Erdős–Stone–Simonovits is likewise not citation-only: supersaturation, balanced blowups, uniform hypergraphs, and hypergraph KST are all scaffolded as its local machinery.
 
@@ -103,6 +114,7 @@ No opened dependency is `legacy-unclassified`; every exact item below has compon
 | `def-graph-adjacency-incidence-neighbourhood-and-degree` | Degree and neighbourhood notation used by Mantel and KST; source-confirmed and independently checked. |
 | `def-subgraph-induced-subgraph-and-spanning-subgraph` | Opened specifically to distinguish ordinary from induced containment; source-confirmed from Diestel. |
 | `def-standard-complete-bipartite-path-and-cycle-graphs` | Exact $K_{m,n}$, $K_n$, $P_n$, and $C_n$ conventions; source-confirmed from Diestel. |
+| `thm-bipartite-iff-no-odd-cycle` | Exact odd-cycle characterisation used to refute the triangle-free/bipartite false statement; literature-derived, source-confirmed from Diestel, and independently checked. |
 | `def-petersen-graph` | Exact two-subset/disjointness model used only by the B example; source-confirmed from Diestel. |
 | `thm-handshake-lemma-for-finite-simple-graphs` | **Not load-bearing.** Opened while evaluating a degree-sum Mantel proof; the scaffold chose the independent vertex-pair induction instead. Exact statement is literature-derived and source-confirmed from Cornell. |
 | `cor-complete-graph-edge-count` | Exact $\binom n2$ edge count; statement and direct finite-set proof checked. |
@@ -147,7 +159,7 @@ Definitions have `proof: not-applicable`. “AI-altered” means the sourced res
 | `def-formal-laurent-series-and-residue` | ai-altered | not-applicable | Sambale 7.1/7.3 generalized to an arbitrary field and tied to the published real $t^{-1}$ convention. |
 | `lem-formal-residue-identities` | literature-derived | ai-altered | Sambale 7.4; monomial proof must isolate exponent $-1$. |
 | `thm-lagrange-burmann-inversion` | literature-derived | ai-altered | Sambale 7.5 and Flajolet–Sedgewick A.6; statement strengthened to the standard $H(w)$ coefficient form and proved locally. |
-| `thm-formal-power-laurent-dictionary` | ai-altered | ai-altered | Sambale 7.2 combined with exact published real Laurent interfaces; direct quotient representation avoids inventing a missing general fraction-field dependency. |
+| `thm-formal-power-laurent-dictionary` | ai-altered | ai-altered | Sambale 7.2 combined with exact published real Laurent interfaces; prove only the coefficientwise embedding, unique Laurent-order factorisation, unit condition, inverse formula, and real valuation dictionary, with no fraction-field or localisation claim. |
 | `ex-formal-geometric-series` | literature-derived | literature-derived | Sambale 2.3/2.6; direct coefficient multiplication. |
 | `ex-negative-binomial-series` | literature-derived | ai-altered | Standard negative-binomial identity; cross-check by both weak-composition count and formal powers. |
 | `ex-formal-square-root-one-minus-four-x` | literature-derived | ai-altered | Standard binomial expansion; verify by squaring modulo $x^6$. |
@@ -187,8 +199,10 @@ Definitions have `proof: not-applicable`. “AI-altered” means the sourced res
 | `ex-near-extremal-triangle-free-graph` | ai-generated | ai-generated | B-only. Truth-risk check: enumerate the 12 cross edges of $K_{3,4}$ and verify deletion leaves 11 and no triangle. |
 | `ex-turan-ramsey-colouring-witness` | literature-derived | ai-altered | Standard $R(4,3)$ lower-bound colouring; verify all red/blue clique sizes directly. |
 | `ex-five-cycle-k-two-two-free` | ai-generated | ai-generated | B-only. Truth-risk check: enumerate all ten vertex pairs and their common-neighbour sets; none has size two. |
+| `fs-every-triangle-free-graph-is-bipartite` | ai-altered | ai-altered | Standard false implication, refuted directly by $C_5$ from the published cycle definition and published odd-cycle criterion; it does not depend on the neighbouring AI-generated example. |
 | `ex-petersen-extremal-density` | literature-derived | ai-altered | Zhao 1.5.4 plus published Petersen model; explicitly exhibit the odd cycle and a three-colouring. |
 | `ex-odd-cycle-extremal-density` | ai-altered | ai-altered | Direct chromatic-number specialization; check $k=1$ gives the triangle and the same density $1/2$. |
+| `fs-erdos-stone-simonovits-determines-the-extremal-number-for-every-graph` | ai-altered | ai-altered | Boundary correction to ESS: for $K_{2,2}$, compare its zero quadratic coefficient with the local KST $O(n^{3/2})$ bound; this refutes exact or order-of-growth determination without claiming a lower bound. |
 
 No item with an AI-generated statement is load-bearing. All such items live on B pages, which remain leaves in reading order.
 
@@ -205,12 +219,14 @@ The proof-contract file gives the machine map. The highest-risk obligations for 
 7. **Hypergraph KST:** independently recompute the exponent $r-1/s^{r-1}$ from the induction before freezing the statement.
 8. **Erdős–Stone:** the clique hypergraph has one hyperedge per $r$-vertex clique, and a complete partite subhypergraph really supports every cross edge of the graph blowup.
 9. **ESS normalization:** all density statements use $\binom n2$; do not mix the equivalent $n^2/2$ normalization mid-proof.
+10. **B-page boundaries:** refute the triangle-free implication directly from the published cycle definition and odd-cycle criterion, and refute ESS determination using only the one-sided KST improvement; neither refutation may import a deferred lower-bound construction.
 
 ## Licensing notes
 
 - Sambale’s article is open access under **CC BY 4.0**. Attribution, source link, and indication of adaptations are required. The scaffold paraphrases and derives; it does not copy extended prose.
 - MIT OpenCourseWare materials are under **CC BY-NC-SA 4.0** under MIT OCW’s stated terms. The public items should cite Zhao and independently author the proofs; no figures or extended wording are copied.
 - Flajolet–Sedgewick’s complete PDF is made freely available by the authors’ official book site but remains **all rights reserved**. Use theorem attribution and independently worded proofs only.
+- Wilf’s Internet Edition is made freely available from his official University of Pennsylvania page. Treat it as copyrighted monograph material: cite the source and independently phrase every statement and proof.
 - Diestel’s official chapter preview is copyrighted textbook material. Use short theorem identification and independently worded proof, with no copied figure or extended passage.
 - Published in-library items retain their existing provenance and licenses; they are cited by ID, not copied into the new page.
 
@@ -221,6 +237,6 @@ None. Web sources were accessible, all required published dependencies were read
 ## Gate record
 
 - **PASS:** `node tools/validate-plan.mjs research/plan-spec.json` — `OK`; the declared page order is acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages carrying item lists.
-- **PASS:** `node tools/coverage-checklist.mjs research/frontier-11-batch-3.coverage.json` — 2 pages, 84 harvested results, 0 errors, 0 warnings.
+- **PASS:** `node tools/coverage-checklist.mjs research/frontier-11-batch-3.coverage.json` — 2 pages, 118 harvested results, 0 errors, 0 warnings.
 
 Per dispatch, `tools/gates.mjs` is not run.

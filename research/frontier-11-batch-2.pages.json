@@ -11,6 +11,16 @@
     ],
     "items": [
       {
+        "id": "rem-ftc-roadmap",
+        "kind": "remark",
+        "title": "Roadmap through the three strengths of FTC I and the five Riemann strengths of FTC II",
+        "strategy": "Locate the two named fundamental theorems on the published working-FTC page at order 161. Organize FTC I into its continuous-integrand consequence, its sharp pointwise Riemann form, and the deferred Lebesgue form. Organize FTC II into the C1 working form, the published closed-interval differentiable form with integrable derivative, this page's interior-derivative form, its finite-exception form, and Botsko's countable-exception form, then point onward to the deferred absolutely-continuous/Lebesgue characterization. Mark every stage as published, proved here, or deferred so none of this orientation is load-bearing.",
+        "deps": [
+          "thm-ftc-first-part",
+          "thm-ftc-second-part"
+        ]
+      },
+      {
         "id": "cor-ftc-integral-function-differentiable-almost-everywhere",
         "kind": "corollary",
         "title": "Assuming Countable Choice, the integral function of a Riemann-integrable function is Lipschitz and differentiable almost everywhere, with derivative equal to the integrand there",
@@ -40,6 +50,22 @@
         "deps": [
           "thm-newton-leibniz-with-interior-derivative",
           "thm-additivity-over-subintervals"
+        ]
+      },
+      {
+        "id": "thm-newton-leibniz-with-a-countable-exceptional-set",
+        "kind": "theorem",
+        "title": "Botsko's theorem: if $F$ is continuous on $[a,b]$, $F'(x)=f(x)$ off a countable subset of $(a,b)$, and $f$ is Riemann integrable, then $\\int_a^b f=F(b)-F(a)$",
+        "strategy": "Prove inline the countable-exception monotonicity lemma by enumerating a nonempty exceptional set with repetitions, assigning its points an epsilon-times-$2^{-n}$ error budget, and using continuity at exceptional points, the derivative inequality elsewhere, and a least-upper-bound first-crossing argument; treat the empty exceptional set separately. On each subinterval of an arbitrary partition, apply that lemma to $F(x)-M_i x$ and $m_i x-F(x)$, where $m_i$ and $M_i$ are the infimum and supremum of $f$ there. Sum the resulting increment bounds, telescope, and squeeze between the lower and upper Darboux integrals. No gauge integral or choice principle enters.",
+        "deps": [
+          "def-countable",
+          "lem-countable-iff-surjection-from-n",
+          "def-continuity-real",
+          "def-derivative",
+          "def-darboux-sums",
+          "def-darboux-integral",
+          "def-partition-and-refinement",
+          "def-complete-ordered-field"
         ]
       },
       {
@@ -198,7 +224,8 @@
     "companion": "arc-length-and-rectifiable-curves-examples",
     "requires": [
       "bounded-variation-and-riemann-stieltjes",
-      "rn-as-a-normed-space"
+      "rn-as-a-normed-space",
+      "sine-cosine-and-the-definition-of-pi"
     ],
     "items": [
       {
@@ -210,6 +237,15 @@
           "def-p-norms-on-rn",
           "def-partition-and-refinement",
           "def-complete-ordered-field"
+        ]
+      },
+      {
+        "id": "cor-chord-length-is-at-most-arc-length",
+        "kind": "corollary",
+        "title": "Every endpoint chord is no longer than the arc: $\\lVert\\gamma(b)-\\gamma(a)\\rVert_2\\le L(\\gamma)$",
+        "strategy": "Use the partition consisting only of the two endpoints. Its polygonal sum is the endpoint chord, and the defining supremum for arc length is at least every such sum. Include the singleton interval, where both sides are zero.",
+        "deps": [
+          "def-path-polygonal-length-and-rectifiability-in-rn"
         ]
       },
       {
@@ -293,6 +329,18 @@
         ]
       },
       {
+        "id": "cor-length-of-the-graph-of-a-c1-function",
+        "kind": "corollary",
+        "title": "If $f$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $f'$ extends continuously to $[a,b]$, then the graph of $f$ has length $\\int_a^b\\sqrt{1+f'(t)^2}\\,dt$",
+        "strategy": "Apply the C1 path-length theorem to $\\gamma(t)=(t,f(t))$. Componentwise differentiation gives the continuous derivative extension $(1,f'(t))$, and the Euclidean two-norm is $\\sqrt{1+f'(t)^2}$. Retain the singleton-interval case separately.",
+        "deps": [
+          "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
+          "def-vector-valued-derivative-and-integral",
+          "def-p-norms-on-rn",
+          "thm-of-square-roots"
+        ]
+      },
+      {
         "id": "cor-piecewise-c1-paths-have-additive-speed-integral-length",
         "kind": "corollary",
         "title": "A continuous piecewise-$C^1$ path is rectifiable and its length is the sum of the speed integrals over its pieces",
@@ -314,26 +362,28 @@
       {
         "id": "lem-arc-length-function-is-continuous-and-nondecreasing",
         "kind": "lemma",
-        "title": "The arc-length function of a continuous rectifiable path is continuous and nondecreasing, with increments equal to subpath lengths",
-        "strategy": "Additivity gives $s(v)-s(u)=L(\\gamma|_{[u,v]})\\ge0$. Each coordinate is continuous and BV by the componentwise theorem; the published jump theorem makes each scalar variation function continuous. Bound each subpath length by the sum of its coordinate variations to squeeze the increment of $s$ to zero from either side, including endpoints.",
+        "title": "The arc-length function is continuous and nondecreasing, with increments equal to subpath lengths; it is strictly increasing exactly when no nondegenerate subpath is constant",
+        "strategy": "Additivity gives $s(v)-s(u)=L(\\gamma|_{[u,v]})\\ge0$. Each coordinate is continuous and BV by the componentwise theorem; the published jump theorem makes each scalar variation function continuous. Bound each subpath length by the sum of its coordinate variations to squeeze the increment of $s$ to zero from either side, including endpoints. Finally use the chord bound on every pair of points in a subinterval to show that its length is zero exactly when the path is constant there, giving the strictness criterion.",
         "deps": [
           "def-arc-length-function",
           "thm-arc-length-is-additive-over-subintervals",
           "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
-          "lem-jumps-of-the-variation-function"
+          "lem-jumps-of-the-variation-function",
+          "cor-chord-length-is-at-most-arc-length"
         ]
       },
       {
         "id": "thm-every-rectifiable-path-has-an-arc-length-parametrization",
         "kind": "theorem",
         "title": "Every rectifiable path factors through its arc-length function as a unit-speed path on $[0,L]$",
-        "strategy": "Continuity makes the nondecreasing length function onto $[0,L]$. Define the new path by $\\bar\\gamma(s(t))=\\gamma(t)$; if two parameters have the same length value, additivity forces the intervening subpath to have zero length and hence equal endpoints, so this is well defined. Chord distance is at most subpath length, making $\\bar\\gamma$ $1$-Lipschitz. Use monotone reparametrization and additivity on arbitrary subintervals of $[0,L]$ to prove their lengths equal their parameter differences. Handle $L=0$ as a singleton-domain constant path.",
+        "strategy": "Continuity makes the nondecreasing length function onto $[0,L]$. Define the new path by $\\bar\\gamma(s(t))=\\gamma(t)$; if two parameters have the same length value, additivity forces the intervening subpath to have zero length and hence equal endpoints, so this is well defined. Apply the named chord bound to each subpath to make $\\bar\\gamma$ $1$-Lipschitz. Use monotone reparametrization and additivity on arbitrary subintervals of $[0,L]$ to prove their lengths equal their parameter differences. Handle $L=0$ as a singleton-domain constant path.",
         "deps": [
           "def-arc-length-function",
           "lem-arc-length-function-is-continuous-and-nondecreasing",
           "thm-arc-length-is-additive-over-subintervals",
           "thm-arc-length-is-invariant-under-monotone-reparametrization",
-          "lem-basic-properties-of-total-variation"
+          "lem-basic-properties-of-total-variation",
+          "cor-chord-length-is-at-most-arc-length"
         ]
       },
       {
@@ -370,6 +420,19 @@
         "deps": [
           "cor-piecewise-c1-paths-have-additive-speed-integral-length",
           "thm-arc-length-is-additive-over-subintervals"
+        ]
+      },
+      {
+        "id": "ex-unit-circle-arc-has-length-theta",
+        "kind": "example",
+        "title": "For every $\\theta\\ge0$, the unit-circle path $t\\mapsto(\\cos t,\\sin t)$ on $[0,\\theta]$ has length $\\theta$",
+        "strategy": "Differentiate componentwise and use the Pythagorean identity to make the Euclidean speed identically one. The C1 speed formula and the integral of the constant function one give length $\\theta$; when $\\theta=0$, use the singleton-interval convention directly. This is the arc-length computation that identifies the trigonometric parameter as radian measure.",
+        "deps": [
+          "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
+          "def-vector-valued-derivative-and-integral",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "lem-integral-elementary-bounds"
         ]
       },
       {

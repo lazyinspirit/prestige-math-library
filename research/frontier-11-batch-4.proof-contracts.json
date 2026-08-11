@@ -2,6 +2,8 @@
   "version": 1,
   "level": "frontier-11",
   "scope": [
+    "lem-alternating-top-forms-are-determined-by-one-ordered-basis",
+    "thm-operator-determinant-scales-every-alternating-top-form",
     "thm-operator-determinant-is-basis-independent",
     "thm-operator-determinant-is-multiplicative",
     "cor-operator-determinant-by-row-reduction",
@@ -19,9 +21,11 @@
     "ex-singular-projection-has-zero-determinant",
     "ex-determinant-in-two-ordered-bases",
     "ex-doubling-integers-has-nonunit-determinant",
+    "fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero",
     "ex-four-by-four-determinant-by-cofactors-and-row-reduction",
     "ex-three-by-three-inverse-by-adjugate",
     "ex-cramers-rule-two-by-two-system",
+    "ex-columnwise-additivity-versus-whole-matrix-nonadditivity",
     "thm-integral-logarithm-derivative-and-normalisation",
     "cor-integral-logarithm-is-strictly-increasing",
     "thm-integral-logarithm-product-law",
@@ -45,21 +49,68 @@
     "ex-unit-hyperbolic-area-brackets-e"
   ],
   "contracts": {
-    "thm-operator-determinant-is-basis-independent": {
+    "lem-alternating-top-forms-are-determined-by-one-ordered-basis": {
       "citations": [
-        {"fact":"L1","source":"cor-determinant-is-invariant-under-similarity","source_section":"Statement","quote":"If $A,B\\in M_n(R)$ are similar over a commutative ring, then $\\det(B)=\\det(A)$.","uses":["1.2"]}
+        {"fact":"L1","source":"lem-rigidity-of-alternating-multilinear-matrix-functions","source_section":"Statement","quote":"Let $n\\ge1$, let $R$ be a commutative ring, and let $F:M_n(R)\\to R$ be alternating and column-multilinear. Then for $A=(a_{ri})$, $F(A)=F(I_n)\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}$.","uses":["1.2"]}
       ],
       "derivations": [
-        {"id":"basis-change","claim":"The two representing matrices are conjugate by the invertible transition matrix.","step":"1.1","inputs":["thm-similarity-is-an-equivalence-relation-and-models-basis-change","given"]},
-        {"id":"similarity-invariance","claim":"Their determinants agree, so the definition is independent of basis.","step":"1.2","inputs":["1.1","L1"]},
+        {"id":"transport-to-matrices","claim":"For an ordered basis B, define F(A) by applying the alternating n-linear form to the vectors whose B-coordinate columns are the columns of A; then F is alternating and column-multilinear.","step":"1.1","inputs":["def-coordinate-column-and-matrix-of-a-linear-map","definition of alternating multilinear form"]},
+        {"id":"apply-rigidity","claim":"Matrix rigidity gives F(A)=F(I_n)det(A).","step":"1.2","inputs":["1.1","L1"]},
+        {"id":"evaluate","claim":"Since F(I_n) is the form's value on B, substituting the coordinate matrix of any n-tuple gives the claimed formula and determination by one ordered-basis value.","step":"1.3","inputs":["1.2","def-coordinate-column-and-matrix-of-a-linear-map"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The lemma explicitly assumes positive dimension."},
+        {"case":"zero","status":"checked","evidence":"The zero form and tuples containing a zero vector satisfy the formula through Step 1.3."},
+        {"case":"one","status":"checked","evidence":"For n=1, Step 1.3 is ordinary one-variable linearity."},
+        {"case":"degenerate","status":"checked","evidence":"Repeated or linearly dependent vectors give zero on both sides by alternation and the determinant formula."},
+        {"case":"endpoints","status":"checked","evidence":"All n argument slots, including the first and last, are transported as matrix columns in Step 1.1."},
+        {"case":"nonempty-choice","status":"checked","evidence":"The ordered basis is supplied by the hypothesis and positive dimension makes its tuple nonempty."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The lemma is a determination formula, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The lemma is a determination formula, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-operator-determinant-scales-every-alternating-top-form": {
+      "citations": [
+        {"fact":"L1","source":"lem-alternating-top-forms-are-determined-by-one-ordered-basis","source_section":"Statement","quote":"For every ordered basis $\\mathcal B=(b_1,\\ldots,b_n)$ and every $v_1,\\ldots,v_n\\in V$, one has $\\omega(v_1,\\ldots,v_n)=\\omega(\\mathcal B)\\det([v_1]_{\\mathcal B},\\ldots,[v_n]_{\\mathcal B}).$","uses":["1.1","1.2"]},
+        {"fact":"L2","source":"thm-leibniz-determinant-is-alternating-multilinear-and-normalized","source_section":"Statement","quote":"the Leibniz determinant $\\det:M_n(R)\\to R$ is column-multilinear, alternating and normalized.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"transport-pullback","claim":"For an alternating top-degree form omega, its pullback omega_T(v_1,...,v_n)=omega(Tv_1,...,Tv_n) is again alternating and n-linear, so the determination lemma applies to it.","step":"1.1","inputs":["L1","linearity of T"]},
+        {"id":"basis-value","claim":"Applying the determination formula to the tuple (Tb_1,...,Tb_n) gives omega_T(B)=omega(B)det([T]_B).","step":"1.2","inputs":["L1","def-coordinate-column-and-matrix-of-a-linear-map","def-determinant-of-a-linear-operator"]},
+        {"id":"scaling","claim":"Steps 1.1 and 1.2 imply omega(Tv_1,...,Tv_n)=det(T)omega(v_1,...,v_n) for every alternating top-degree form and tuple.","step":"1.3","inputs":["1.1","1.2"]},
+        {"id":"coordinate-form","claim":"The coordinate determinant delta_B(v_1,...,v_n)=det([v_1]_B,...,[v_n]_B) is alternating, n-linear, and has delta_B(B)=1.","step":"2.1","inputs":["L2","def-coordinate-column-and-matrix-of-a-linear-map"]},
+        {"id":"uniqueness","claim":"If a scalar c scales every alternating top-degree form under T, applying this to delta_B and the basis B gives c=det([T]_B)=det(T).","step":"2.2","inputs":["2.1","def-determinant-of-a-linear-operator"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The theorem is explicitly restricted to positive dimension; the zero-dimensional determinant convention is treated separately downstream."},
+        {"case":"zero","status":"checked","evidence":"The zero form and the zero operator satisfy Step 1.3; uniqueness uses the normalized coordinate form from Step 2.1."},
+        {"case":"one","status":"checked","evidence":"For n=1, the result reduces to scaling linear functionals by the one-by-one matrix entry."},
+        {"case":"degenerate","status":"checked","evidence":"Neither T nor the chosen tuple is assumed invertible or independent."},
+        {"case":"endpoints","status":"checked","evidence":"The pullback and coordinate form use all n argument slots, including the first and last."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Positive finite dimension supplies an ordered basis, and the proof fixes any such basis."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The theorem gives a scaling identity and uniqueness, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The theorem gives a scaling identity and uniqueness, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-operator-determinant-is-basis-independent": {
+      "citations": [
+        {"fact":"L1","source":"thm-operator-determinant-scales-every-alternating-top-form","source_section":"Statement","quote":"The operator determinant is the unique scalar by which $T$ scales every alternating top-degree form.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"intrinsic-scalar","claim":"In positive dimension the determinant computed in any ordered basis is the unique scalar in the basis-free top-form scaling property.","step":"1.1","inputs":["L1"]},
+        {"id":"compare-bases","claim":"Computations in two ordered bases therefore give the same unique scalar.","step":"1.2","inputs":["1.1"]},
         {"id":"zero-space","claim":"The unique zero-dimensional endomorphism has the stipulated determinant 1 in every empty basis.","step":"1.3","inputs":["definition convention"]}
       ],
       "routine_steps": [],
       "boundaries": [
         {"case":"empty","status":"checked","evidence":"Step 1.3 handles the zero-dimensional space and empty basis."},
         {"case":"zero","status":"checked","evidence":"Step 1.3 handles dimension zero; the zero operator in positive dimension is covered by Step 1.2."},
-        {"case":"one","status":"checked","evidence":"Step 1.2 applies to one-dimensional conjugate matrices."},
-        {"case":"degenerate","status":"checked","evidence":"No invertibility of T is assumed in Step 1.2."},
+        {"case":"one","status":"checked","evidence":"The cited top-form theorem includes positive dimension one."},
+        {"case":"degenerate","status":"checked","evidence":"No invertibility of T is assumed in Steps 1.1–1.2."},
         {"case":"endpoints","status":"not_applicable","reason":"No interval endpoint or indexed terminal term occurs."},
         {"case":"nonempty-choice","status":"checked","evidence":"Finite-dimensional positive-dimensional spaces admit the ordered bases quantified by the definition; dimension zero is Step 1.3."},
         {"case":"iff-forward","status":"not_applicable","reason":"The statement is well-definedness, not a biconditional."},
@@ -69,19 +120,18 @@
     },
     "thm-operator-determinant-is-multiplicative": {
       "citations": [
-        {"fact":"L1","source":"thm-matrix-of-a-composite-is-the-product","source_section":"Statement","quote":"$$[S\\circ T]_{\\mathcal B}^{\\mathcal D}=[S]_{\\mathcal C}^{\\mathcal D}[T]_{\\mathcal B}^{\\mathcal C}.$$","uses":["1.1"]},
-        {"fact":"L2","source":"thm-determinant-multiplicative","source_section":"Statement","quote":"$$\\det(AB)=\\det(A)\\det(B).$$","uses":["1.2"]}
+        {"fact":"L1","source":"thm-operator-determinant-scales-every-alternating-top-form","source_section":"Statement","quote":"The operator determinant is the unique scalar by which $T$ scales every alternating top-degree form.","uses":["1.1","1.2"]}
       ],
       "derivations": [
-        {"id":"matrix-composite","claim":"In one ordered basis the matrix of ST is the product of the matrices of S and T.","step":"1.1","inputs":["L1"]},
-        {"id":"take-determinants","claim":"Matrix multiplicativity and basis independence give det(ST)=det(S)det(T).","step":"1.2","inputs":["1.1","L2","thm-operator-determinant-is-basis-independent"]},
+        {"id":"scale-composite","claim":"Applying the top-form scaling identity first to S and then to T shows that ST scales every alternating top-degree form by det(S)det(T).","step":"1.1","inputs":["L1"]},
+        {"id":"identify-scalar","claim":"Uniqueness of the scaling scalar identifies det(ST) with det(S)det(T).","step":"1.2","inputs":["1.1","L1"]},
         {"id":"zero-dimension","claim":"The convention gives 1=1 times 1 on the zero space.","step":"1.3","inputs":["definition convention"]}
       ],
       "routine_steps": [],
       "boundaries": [
         {"case":"empty","status":"checked","evidence":"Step 1.3 handles dimension zero."},
         {"case":"zero","status":"checked","evidence":"Zero endomorphisms in positive dimension are included in Step 1.2."},
-        {"case":"one","status":"checked","evidence":"The cited matrix theorem covers size one."},
+        {"case":"one","status":"checked","evidence":"The cited top-form theorem covers positive dimension one."},
         {"case":"degenerate","status":"checked","evidence":"Neither S nor T is assumed invertible."},
         {"case":"endpoints","status":"not_applicable","reason":"No interval or finite endpoint occurs."},
         {"case":"nonempty-choice","status":"not_applicable","reason":"One arbitrary basis is fixed; no choice from a varying family is made."},
@@ -398,6 +448,31 @@
       ],
       "finite_smoke": []
     },
+    "fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero": {
+      "citations": [
+        {"fact":"L1","source":"ex-doubling-integers-has-nonunit-determinant","source_section":"Statement","quote":"The one-by-one integer matrix $[2]$ has determinant $2$, is injective, and is not surjective.","uses":["1.1","1.2"]},
+        {"fact":"L2","source":"cor-square-matrix-invertible-iff-determinant-is-a-unit","source_section":"Statement","quote":"A positive-sized square matrix over a commutative ring is invertible if and only if its determinant is a unit.","uses":["1.3"]},
+        {"fact":"L3","source":"def-ring","source_section":"Definition","quote":"Nothing above requires $1 \\ne 0$.","uses":["1.4"]}
+      ],
+      "derivations": [
+        {"id":"nonzero-determinant","claim":"For A=[2] over Z, det(A)=2 is nonzero.","step":"1.1","inputs":["L1","thm-int-comm-ring"]},
+        {"id":"not-invertible","claim":"The same one-by-one matrix is not invertible because multiplication by 2 is not surjective on Z, equivalently because 2 is not a unit.","step":"1.2","inputs":["L1","lem-units-of-z"]},
+        {"id":"correct-boundary","claim":"Thus nonzero determinant does not characterize invertibility over a general commutative ring; the correct condition is that the determinant be a unit.","step":"1.3","inputs":["1.1","1.2","L2"]},
+        {"id":"zero-ring-forward-failure","claim":"Because the library permits the zero ring, its one-by-one identity matrix is [0], is invertible, and has determinant zero, so even the forward implication needs a nonzero-ring hypothesis.","step":"1.4","inputs":["L3","def-determinant-of-a-square-matrix"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The false statement and counterexample concern positive-sized matrices."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 uses a nonzero determinant witness, while Step 1.4 checks the zero-ring determinant boundary."},
+        {"case":"one","status":"checked","evidence":"The counterexample has the smallest positive size, one by one."},
+        {"case":"degenerate","status":"checked","evidence":"The witness determinant is a nonzero non-unit, exactly the ring-theoretic boundary missed by the false statement."},
+        {"case":"endpoints","status":"not_applicable","reason":"No interval or index range occurs beyond the single matrix entry."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The counterexample is explicit."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.4 shows that this direction also fails when the commutative ring is the zero ring."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 1.1–1.2 give nonzero determinant without invertibility."}
+      ],
+      "finite_smoke": []
+    },
     "ex-four-by-four-determinant-by-cofactors-and-row-reduction": {
       "citations": [],
       "derivations": [
@@ -453,6 +528,31 @@
         {"case":"nonempty-choice","status":"not_applicable","reason":"The solution is uniquely calculated."},
         {"case":"iff-forward","status":"not_applicable","reason":"The example does not assert an iff."},
         {"case":"iff-reverse","status":"not_applicable","reason":"The example does not assert an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-columnwise-additivity-versus-whole-matrix-nonadditivity": {
+      "citations": [
+        {"fact":"L1","source":"thm-leibniz-determinant-is-alternating-multilinear-and-normalized","source_section":"Statement","quote":"For $n\\ge1$ and every commutative ring $R$, the Leibniz determinant $\\det:M_n(R)\\to R$ is column-multilinear, alternating and normalized.","uses":["1.1","1.2"]},
+        {"fact":"L2","source":"def-determinant-of-a-square-matrix","source_section":"Definition","quote":"Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its determinant is $\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}$.","uses":["1.2","2.1"]},
+        {"fact":"L3","source":"thm-int-comm-ring","source_section":"Statement","quote":"$(\\mathbb{Z}, +, \\cdot, 0, 1)$ with the operations of def-int-operations is a commutative ring with multiplicative identity.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"choose-columns","claim":"Over Z take u=(1,0)^T, v=(0,1)^T and w=(0,1)^T, keeping the second column w fixed.","step":"1.1","inputs":["def-matrices-over-a-commutative-ring","L1","L3"]},
+        {"id":"columnwise-check","claim":"The two-permutation formula gives det([u+v,w])=1=det([u,w])+det([v,w])=1+0, exhibiting additivity in the selected first column.","step":"1.2","inputs":["1.1","L1","L2","integer arithmetic"]},
+        {"id":"whole-matrix-check","claim":"For A=B=I_2, the same formula gives det(A+B)=4 while det(A)+det(B)=2.","step":"2.1","inputs":["L2","integer arithmetic"]},
+        {"id":"contrast","claim":"Steps 1.2 and 2.1 isolate columnwise multilinearity from the false whole-matrix additivity claim.","step":"2.2","inputs":["1.2","2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","reason":"The witness has fixed positive size two."},
+        {"case":"zero","status":"checked","evidence":"The repeated-column determinant in Step 1.2 is zero, and all zero entries are retained in both calculations."},
+        {"case":"one","status":"checked","evidence":"Step 1.2 includes determinants one and zero; Step 2.1 includes both summand determinants one."},
+        {"case":"degenerate","status":"checked","evidence":"The repeated columns [v,w] test alternation inside the valid columnwise identity."},
+        {"case":"endpoints","status":"checked","evidence":"Both the first selected column and the fixed last column are explicit, and both permutations in size two are included."},
+        {"case":"nonempty-choice","status":"not_applicable","reason":"The two matrices are explicit."},
+        {"case":"iff-forward","status":"not_applicable","reason":"The comparison concerns equalities, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","reason":"The comparison concerns equalities, not a biconditional."}
       ],
       "finite_smoke": []
     },

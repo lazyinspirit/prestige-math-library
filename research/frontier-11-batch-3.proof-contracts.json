@@ -47,8 +47,10 @@
     "ex-near-extremal-triangle-free-graph",
     "ex-turan-ramsey-colouring-witness",
     "ex-five-cycle-k-two-two-free",
+    "fs-every-triangle-free-graph-is-bipartite",
     "ex-petersen-extremal-density",
-    "ex-odd-cycle-extremal-density"
+    "ex-odd-cycle-extremal-density",
+    "fs-erdos-stone-simonovits-determines-the-extremal-number-for-every-graph"
   ],
   "contracts": {
     "thm-formal-power-series-ring-and-polynomial-embedding": {
@@ -1213,7 +1215,24 @@
           "source_section": "Statement",
           "quote": "$K = \\mathbb{R}((t^{-1}))$ ([[def-formal-laurent-series]]) is a field",
           "uses": [
-            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-formal-laurent-series",
+          "source_section": "Definition",
+          "quote": "The set of **formal Laurent series in $t^{-1}$ over $\\mathbb{R}$** is $K=\\mathbb{R}((t^{-1})):=\\{f:\\mathbb{Z}\\to\\mathbb{R}\\mid\\operatorname{supp}f\\text{ is bounded below}\\}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-laurent-valuation",
+          "source_section": "Statement",
+          "quote": "**(Products.)** $fg\\ne0_K$, and $v(fg)=v(f)+v(g)$, $\\operatorname{lc}(fg)=\\operatorname{lc}(f)\\operatorname{lc}(g)$.",
+          "uses": [
             "4.1"
           ]
         }
@@ -1230,20 +1249,21 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Every nonzero Laurent series factors as x^m times a power-series unit and therefore is a quotient of two power series.",
+          "claim": "Every nonzero Laurent series h factors uniquely as x^{v(h)}u with u a power-series unit.",
           "step": "2.1",
           "inputs": [
-            "same-page:thm-formal-power-series-unit-criterion",
-            "published:thm-laurent-series-field"
+            "same-page:def-formal-laurent-series-and-residue",
+            "same-page:thm-formal-power-series-unit-criterion"
           ]
         },
         {
           "id": "step-3-1",
-          "claim": "Every quotient of power series lies in K((x)), so the embedded field has the field-of-fractions property.",
+          "claim": "The inverse of h=x^{v(h)}u is the Laurent series x^{-v(h)}u^{-1}.",
           "step": "3.1",
           "inputs": [
-            "step 1.1",
-            "step 2.1"
+            "step 2.1",
+            "same-page:thm-formal-power-series-unit-criterion",
+            "same-page:def-formal-laurent-series-and-residue"
           ]
         },
         {
@@ -1291,13 +1311,13 @@
         },
         {
           "case": "iff-forward",
-          "status": "checked",
-          "evidence": "Planned step 1.1 explicitly disposes of the forward direction of any top-level equivalence."
+          "status": "not_applicable",
+          "reason": "The restated theorem has an embedding, a unique factorisation, and an inverse formula, but no top-level biconditional."
         },
         {
           "case": "iff-reverse",
-          "status": "checked",
-          "evidence": "Planned step 1.1 explicitly disposes of the reverse direction of any top-level equivalence."
+          "status": "not_applicable",
+          "reason": "The restated theorem has an embedding, a unique factorisation, and an inverse formula, but no top-level biconditional."
         }
       ],
       "finite_smoke": []
@@ -3680,6 +3700,102 @@
       ],
       "finite_smoke": []
     },
+    "fs-every-triangle-free-graph-is-bipartite": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "The **cycle graph** $C_n$ is defined only for $n\\ge3$: it has vertices $0,\\ldots,n-1$, the consecutive edges $\\{i,i+1\\}$ for $0\\le i<n-1$, and the closing edge $\\{n-1,0\\}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-bipartite-iff-no-odd-cycle",
+          "source_section": "Statement",
+          "quote": "A finite simple graph is bipartite if and only if it contains no cycle of odd length.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The cycle C_5 obtained from the published definition contains no triangle.",
+          "step": "1.1",
+          "inputs": [
+            "published:def-standard-complete-bipartite-path-and-cycle-graphs",
+            "finite edge enumeration"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The graph C_5 is not bipartite because it is itself an odd cycle.",
+          "step": "2.1",
+          "inputs": [
+            "published:thm-bipartite-iff-no-odd-cycle",
+            "published:def-standard-complete-bipartite-path-and-cycle-graphs"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus C_5 is a triangle-free graph that is not bipartite, refuting the displayed statement.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses the fixed nonempty graph C_5 and introduces no empty family, empty sum, or empty product."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The witness has five vertices and no numerical parameter can take the value zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness has five vertices and no numerical parameter can take the value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Planned steps 1.1 and 2.1 verify both required properties directly on the fixed witness rather than invoking a generic nondegeneracy assumption."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The false statement and its fixed witness contain no interval or threshold endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level false statement is an implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level false statement is an implication, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
     "ex-petersen-extremal-density": {
       "citations": [
         {
@@ -3841,6 +3957,111 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "reason": "The planned top-level statement introduces no separate the reverse direction of any top-level equivalence beyond hypotheses already fixed in its statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-erdos-stone-simonovits-determines-the-extremal-number-for-every-graph": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "source_section": "Definition",
+          "quote": "For disjoint finite sets $A$ and $B$, the **complete bipartite graph** $K_{A,B}$ has vertex set $A\\cup B$ and edge set $\\{\\{a,b\\}:a\\in A,\\ b\\in B\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-proper-vertex-colouring-and-chromatic-number",
+          "source_section": "Definition",
+          "quote": "The **chromatic number** of $G$ is $\\chi(G):=\\min\\{k\\in\\mathbb N:G\\text{ is }k\\text{-colourable}\\}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The complete bipartite graph K_{2,2} has chromatic number two.",
+          "step": "1.1",
+          "inputs": [
+            "published:def-standard-complete-bipartite-path-and-cycle-graphs",
+            "published:def-proper-vertex-colouring-and-chromatic-number"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For H=K_{2,2}, Erdős–Stone–Simonovits gives only ex(n,H)=o(n^2), because its quadratic coefficient is zero when chi(H)=2.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "same-page:thm-erdos-stone-simonovits",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The Kővári–Sós–Turán theorem supplies the strictly sharper upper bound ex(n,K_{2,2})=O(n^{3/2}).",
+          "step": "3.1",
+          "inputs": [
+            "same-page:thm-kovari-sos-turan-bound",
+            "same-page:def-asymptotic-extremal-notation-and-edge-density"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Therefore the density theorem determines only the quadratic leading density in the bipartite case, not the finite extremal number or its order of growth.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation fixes the nonempty graph K_{2,2} and introduces no empty family, empty sum, or empty product."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Planned step 2.1 explicitly evaluates the zero quadratic coefficient at chromatic number two."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Planned step 1.1 verifies that the fixed graph has an edge and chromatic number two, excluding the one-colour boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Planned steps 1.1 and 2.1 isolate the bipartite chi=2 regime where the Erdős–Stone–Simonovits leading coefficient degenerates to zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The asymptotic comparison has no interval endpoints; small n is irrelevant to the logical failure of the claimed universal determination."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof makes no choice from a family known only to be nonempty."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level false statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level false statement is not a biconditional."
         }
       ],
       "finite_smoke": []

@@ -8,11 +8,11 @@ Scope: orders 84/85 and 178.1/178.2 only
 
 ### `the-determinant-of-a-linear-operator`
 
-The determinant of an endomorphism is the determinant of any representing matrix. A change-of-basis conjugation proves that this scalar is independent of the ordered basis, after which matrix multiplicativity and row-operation rules pass cleanly to operators. The zero-dimensional convention is stated separately rather than hidden in positive-size matrix notation.
+The determinant of an endomorphism is first defined from a representing matrix, then characterised without a basis: on a positive-dimensional space it is the unique scalar by which the operator scales every alternating top-degree form. Coordinate transport and the published rigidity of alternating multilinear matrix functions prove that characterisation without exterior algebra. Basis independence and multiplicativity follow from it, while the zero-dimensional convention is handled separately.
 
 Returning to matrices over a commutative ring, the page develops minors, cofactors, Laplace expansion, the adjugate identity, the unit criterion for invertibility, and Cramer's rule without dividing by a non-unit. A rank-one update formula proves that the adjugate is equivariant under similarity, so the adjugate of an operator is well defined and satisfies its expected two-sided identity.
 
-Planned size: 18 A items and 6 B items. No split is proposed: the page is below both the owner-directed 60-item split threshold in the dispatch and the current 100-item review ceiling in `briefs/beta-scaffold.md`.
+Planned size: 20 A items and 8 B items. No split is proposed: the A page remains well below the owner-directed 60-item hard threshold.
 
 ### `the-integral-logarithm-and-its-characterisations`
 
@@ -26,17 +26,17 @@ The summaries above are each exactly two paragraphs and under 150 words. B pages
 
 ## Canonical-coverage harvest
 
-The machine-readable harvest is `research/frontier-11-batch-4.coverage.json`. Its gate result at scaffold time was:
+The machine-readable harvest is `research/frontier-11-batch-4.coverage.json`. Its gate result after the step-3 fixes is:
 
 ```text
-coverage-checklist: 2 page(s), 62 harvested result(s), 0 error(s), 0 warning(s)
+coverage-checklist: 2 page(s), 75 harvested result(s), 0 error(s), 0 warning(s)
 ```
 
-Disposition yield: 30 `included`, 16 `inline`, 7 `already-published`, 1 `deferred`, and 8 `out-of-scope`. The included/inline yield is source-anchored; it was not padded to a target count.
+Disposition yield: 40 `included`, 18 `inline`, 7 `already-published`, 1 `deferred`, and 9 `out-of-scope`. The included/inline yield is source-anchored; it was not padded to a target count.
 
-Declines most likely to be challenged:
+Disposition notes most likely to be checked:
 
-- Axler 9.40 is out of scope because it starts the general alternating-multilinear-form and exterior-power route. This page builds the requested basis-free operator determinant by conjugation and builds the operator adjugate via a rank-one determinant identity; a general exterior-algebra development is not among this pair's declared topics.
+- Alpha D-1 was accepted: Axler 9.40 is now `included` at `thm-operator-determinant-scales-every-alternating-top-form`, and 9.41 is corrected to that same characterisation rather than the matrix-based definition. Only top-degree alternating forms are transported through coordinates; no exterior-power object or lower-degree theory is introduced.
 - Axler 9.51 is deferred specifically to `eigenvalues-eigenvectors-and-the-characteristic-polynomial`, whose characteristic-polynomial criterion this page unblocks. Pulling it backward would duplicate that page's defining theorem.
 - OpenStax Examples/Checkpoints 6.35–6.37 are declined individually because they are routine chain-rule, substitution, and logarithm-law drills. They do not add a definition, characterisation, boundary case, or counterexample to this pair; the B page instead tests basis independence, ring-versus-field hypotheses, regularity, and the locality of the Mercator series.
 - Ricardo's history section is out of scope because it contains historical context rather than a mathematical result. Its logical cycle of implications is fully harvested.
@@ -63,6 +63,14 @@ Recommendation: approve this A-source substitution. If declined, the new B page 
 
 No cross-batch dependency is proposed. In particular, nothing cites the in-flight order-239 FTC page; `thm-ftc-first-part` is the published dependency. No forward reference is retained.
 
+## Step-3 finding disposition
+
+- **D-1 / dispatch D1–D2:** added `lem-alternating-top-forms-are-determined-by-one-ordered-basis` and `thm-operator-determinant-scales-every-alternating-top-form`. The first transports an alternating top form to a column-multilinear matrix function and invokes `lem-rigidity-of-alternating-multilinear-matrix-functions`; the second computes the pullback on a basis and uses the coordinate determinant form for uniqueness. The existing basis-independence and multiplicativity items now depend on this basis-free characterisation. Axler 9.40 and 9.41 were retagged accordingly.
+- **D-2:** added the false nonzero-determinant invertibility criterion. It uses the preceding doubling-over-`Z` example and the A-page unit criterion, and also records the zero-ring failure of the opposite implication from the library's explicit ring convention. The specifically requested `cex-the-determinant-is-not-additive` would duplicate the already-published `items/fs-determinant-is-additive-on-matrices.md`, whose Statement is exactly `det(A+B)=det(A)+det(B)` is false and whose refutation already uses `A=B=I_2`. Because the base contract forbids minting a second id for an existing statement, the second new B item is instead `ex-columnwise-additivity-versus-whole-matrix-nonadditivity`: it checks valid selected-column additivity and contrasts it with that published whole-matrix counterexample.
+- **R-D:** harvested Ambrus Pál, *Notes for Commutative Algebra M5P55*, §7 in full. Its own range runs from Lemma 7.1 through Theorem 7.7 and explicitly develops determinant, minors, both Laplace expansions, wrong-cofactor sums, and the adjoint identity over a commutative ring. Alpha's suggested Keith Conrad note was also opened: §5 proves `AC=CA=det(A)I` for the cofactor matrix `C` and the unit criterion, but it does not contain the claimed product-reversal identity `adj(AB)=adj(B)adj(A)`. That particular description of Conrad was mistaken; Pál supplies the exact ring-level Cramer range requested here.
+- **D6 and D7:** retained exactly as approved. Cofactor/Laplace/adjugate/Cramer machinery remains local because order 82 lacks it, and similarity-equivariance still follows by the rank-one route. No field of fractions is proposed or cited.
+- **§8 and D8:** no logarithm page item or dependency changed. The integral-first chain, the single citation of `thm-exponential-ivp-uniqueness`, the functional-equation characterisation, the equivalence theorem and roadmap remain intact. Coverage now explicitly accounts for the local Mercator continuation lemma and its global-domain counterexample. The A-page substitution `thm-log-one-plus-x-power-series` remains in place instead of a B-page dependency.
+
 ## Source ledger, ranges, conventions, and licensing
 
 | tag | source and exact range read | supports | licence/access note |
@@ -70,13 +78,14 @@ No cross-batch dependency is proposed. In particular, nothing cites the in-fligh
 | AXL | Sheldon Axler, *Linear Algebra Done Right*, 4e, [official PDF](https://linear.axler.net/LADR4e.pdf), §9C book pp. 354–359, results 9.40–9.53 | operator determinant, basis independence, multiplicativity, invertibility | Author-posted complete text; CC BY-NC 4.0 notice in the book. |
 | ILA | Margalit–Rabinoff, *Interactive Linear Algebra*, [PDF](https://textbooks.math.gatech.edu/ila/ila.pdf), §4.2.1 pp. 207–212 and §4.2.2 pp. 218–222 | minors, cofactors, Laplace expansion, adjugate identity, inverse formula, field Cramer | Open textbook; GFDL notice in the text. |
 | VRB | Robert Vrabel, [“Generalization of the Matrix Determinant Lemma and its application to the controllability of single input control systems”](https://arxiv.org/abs/1608.03207), §2 Lemma 1 and Proof Step 1 | rank-one determinant update, including singular matrices | Open author preprint; cite the formula and supply the independent commutative-ring multilinearity proof. |
+| PAL | Ambrus Pál, [*Notes for Commutative Algebra M5P55*](https://www.ma.imperial.ac.uk/~apal4/commalgnotes.pdf), §7 “Cramer's rule for commutative rings”, PDF pp. 9–10, Lemma 7.1 through Theorem 7.7 inclusive | determinant and minors over a commutative ring, row and column Laplace expansion, wrong-cofactor sums, and the adjoint identity | Official Imperial College lecture notes; exact two-page section harvested in full. |
 | OS | OpenStax, *Calculus Volume 1*, [§6.7](https://openstax.org/books/calculus-volume-1/pages/6-7-integrals-exponential-functions-and-logarithms), from the natural logarithm as an integral through Theorem 6.19 | integral definition, derivative, laws, inverse exponential, `e` | CC BY 4.0. |
 | RIC | Henry Ricardo, [“The Equivalence of Definitions of the Natural Logarithm Function”](https://www.researchgate.net/publication/359264337_The_Equivalence_of_Definitions_of_the_Natural_Logarithm_Function), *College Mathematics Journal* 53(3), pp. 190–196, complete article | equivalence architecture and normalised continuous functional equation | Read-access copy; use as a reference, not as text to reproduce. |
 | LEE | David Lee, [*Logarithms*](https://math.hawaii.edu/~lee/calculus/Logarithm.pdf), §4 pp. 6–7 | differentiable-at-one functional-equation characterisation | University lecture notes; use as a cited reference, not copied prose. |
 
 Convention decisions:
 
-- Axler defines the operator determinant through the induced action on alternating top forms. That route is deliberately not imported. This page uses a representing matrix and makes the conjugation proof a standalone theorem, as the dispatch requires.
+- Axler defines the operator determinant through the induced action on alternating top forms. The revised scaffold imports the honest top-degree characterisation without exterior algebra: coordinate transport proves the one-basis rigidity lemma, then the matrix-defined determinant is shown to be the unique scaling scalar. The matrix definition remains first, and basis independence becomes a consequence rather than a conjugation computation.
 - ILA works over fields and uses one-based indices. The scaffold states minors and cofactors for `n>=1` over a commutative ring and authors with the library's zero-based indices. A `1 x 1` cofactor uses the determinant `1` of the empty `0 x 0` minor; the published determinant definition itself begins at positive size, so this convention must be explicit locally.
 - The operator determinant admits the zero-dimensional convention `det(T)=1`; the ring-level minor, cofactor, adjugate, and Cramer statements remain positive-sized.
 - Over a commutative ring, “nonzero determinant” is not the invertibility hypothesis. The exact criterion is that the determinant is a unit. Cramer's unconditional conclusion is `det(A)x_j=det(A_j(b))`; division and uniqueness require a unit. Over a field, unit is equivalent to nonzero.
@@ -88,7 +97,7 @@ Convention decisions:
 
 ## Proof decomposition and corollary passes
 
-For the determinant pair, the long matrix-to-operator development is decomposed into the minor/cofactor definition, Laplace expansion, adjugate identity, unit criterion, inverse formula, rank-one update lemma, similarity-equivariance theorem, operator-adjugate definition, and operator identity. Cramer's rule is separated into the exact ring theorem and its field corollary. Basis independence is its own item rather than a sentence inside the definition. Useful corollaries added are operator computation by row reduction, the unit criterion, the inverse formula, field Cramer, the operator invertibility criterion, and the determinant homomorphism on `GL(V)`.
+For the determinant pair, the operator side now begins with a coordinate-transport lemma for alternating top-degree forms and the basis-free scaling characterisation; basis independence and multiplicativity are separate consequences. The matrix-to-operator development is further decomposed into the minor/cofactor definition, Laplace expansion, adjugate identity, unit criterion, inverse formula, rank-one update lemma, similarity-equivariance theorem, operator-adjugate definition, and operator identity. Cramer's rule is separated into the exact ring theorem and its field corollary. The B page now tests both the unit-versus-nonzero boundary and the failure of whole-matrix additivity. Useful corollaries include operator computation by row reduction, the unit criterion, the inverse formula, field Cramer, the operator invertibility criterion, and the determinant homomorphism on `GL(V)`.
 
 For the logarithm pair, the integral-first chain is decomposed at derivative/normalisation, strict increase, product law, powers, unboundedness, bijection, inverse definition, inverse addition law, inverse differentiation, the single IVP bridge, and inversion back to `log`. Functional-equation uniqueness is split into continuous and differentiable-at-one theorems; Mercator continuation is isolated before the final equivalence theorem. Useful corollaries added are reciprocal/integer-power laws, the inverse addition law, identification with published `log`, the unit-area characterisation of `e`, and the complete unnormalised family.
 
@@ -102,19 +111,21 @@ Values below are the Step-5 frontmatter obligations. `not-applicable` is used on
 
 | id | statement | proof | rationale |
 |---|---|---|---|
+| `lem-alternating-top-forms-are-determined-by-one-ordered-basis` | ai-altered | ai-altered | Coordinate-transport form of the published matrix rigidity theorem, supplying the top-degree bridge identified by AXL 9.40–9.41 without exterior powers. |
 | `def-determinant-of-a-linear-operator` | literature-derived | not-applicable | AXL 9.41, recast through the published coordinate matrix; zero-dimensional convention added. |
-| `thm-operator-determinant-is-basis-independent` | literature-derived | ai-altered | AXL 9.52–9.53; required conjugation proof uses the exact published change-of-basis and similarity items. |
-| `thm-operator-determinant-is-multiplicative` | literature-derived | ai-altered | AXL 9.49, transported through the published matrix-of-composite theorem. |
+| `thm-operator-determinant-scales-every-alternating-top-form` | ai-altered | ai-altered | AXL 9.40–9.41, reconciled with the page's prior matrix definition through the source-backed coordinate rigidity lemma. |
+| `thm-operator-determinant-is-basis-independent` | literature-derived | ai-altered | AXL 9.52–9.53, now deduced from the basis-free uniqueness of the top-form scaling scalar. |
+| `thm-operator-determinant-is-multiplicative` | literature-derived | ai-altered | AXL 9.49, deduced by composing the two top-form scaling identities and invoking uniqueness. |
 | `cor-operator-determinant-by-row-reduction` | literature-derived | ai-altered | Standard determinant computation from ILA and the published row-operation laws. |
-| `def-matrix-minors-cofactors-and-adjugate` | ai-altered | not-applicable | ILA §4.2.1–4.2.2, materially widened from fields to commutative rings and converted to zero-based indices. |
-| `thm-laplace-cofactor-expansion` | ai-altered | ai-altered | ILA cofactor-expansion theorem, materially widened to the published Leibniz determinant over a commutative ring. |
-| `thm-adjugate-identity-over-a-commutative-ring` | ai-altered | ai-altered | ILA §4.2.2 remark, widened to arbitrary commutative rings; both products and the singular case are proved without field division. |
+| `def-matrix-minors-cofactors-and-adjugate` | ai-altered | not-applicable | ILA §4.2.1–4.2.2 and PAL Definition 7.3, converted to zero-based indices. |
+| `thm-laplace-cofactor-expansion` | ai-altered | ai-altered | ILA's field presentation and PAL Theorems 7.4–7.5, proved from the published Leibniz determinant over a commutative ring. |
+| `thm-adjugate-identity-over-a-commutative-ring` | ai-altered | ai-altered | ILA §4.2.2 and PAL Theorems 7.6–7.7; both products and the singular case are proved without field division. |
 | `cor-square-matrix-invertible-iff-determinant-is-a-unit` | ai-altered | ai-altered | The ILA field criterion is strengthened to the standard commutative-ring unit form, combining the published forward implication with the adjugate identity. |
 | `cor-inverse-matrix-by-adjugate` | ai-altered | ai-altered | ILA inverse formula, materially restated with unit rather than nonzero determinant. |
 | `lem-determinant-rank-one-update-over-a-commutative-ring` | ai-altered | ai-altered | VRB Lemma 1 at rank one gives the singular-matrix formula over real matrices; the statement and proof are widened to commutative rings using ILA cofactors and published column multilinearity. |
 | `thm-adjugate-is-equivariant-under-similarity` | ai-altered | ai-altered | Standard covariance of the classical adjugate, derived from the source-backed rank-one identity and published similarity invariance so singular matrices and arbitrary commutative rings are covered. |
 | `def-coordinate-endomorphism-over-a-commutative-ring` | ai-altered | not-applicable | Narrow coordinate-space definition assembled from published ring matrices; source-backed matrix notions, not a generated theorem. |
-| `thm-cramers-rule-over-a-commutative-ring` | ai-altered | ai-altered | ILA field theorem materially strengthened to its exact division-free ring statement; unit case follows from the sourced adjugate formula. |
+| `thm-cramers-rule-over-a-commutative-ring` | ai-altered | ai-altered | PAL §7 supplies the commutative-ring setting and adjoint identity; the scaffold states the exact division-free system identity before the unit case. |
 | `cor-cramers-rule-over-a-field` | literature-derived | ai-altered | Direct specialisation of ILA Cramer using nonzero equals unit in a field. |
 | `thm-operator-invertible-iff-determinant-nonzero` | literature-derived | ai-altered | AXL 9.50, reconciled with the published matrix/operator isomorphism theorem and the zero-dimensional case. |
 | `cor-operator-determinant-on-the-general-linear-group` | literature-derived | ai-altered | Standard immediate consequence of AXL multiplicativity and invertibility. |
@@ -127,10 +138,12 @@ Values below are the Step-5 frontmatter obligations. `not-applicable` is used on
 |---|---|---|---|
 | `ex-singular-projection-has-zero-determinant` | ai-generated | ai-generated | Checkable leaf example demanded by the dispatch; no item depends on it. |
 | `ex-determinant-in-two-ordered-bases` | ai-generated | ai-generated | Checkable concrete basis-change witness demanded by the dispatch; no consumer. |
-| `ex-doubling-integers-has-nonunit-determinant` | ai-altered | ai-generated | Owner-specified integer example, phrased through the source-backed coordinate endomorphism; no consumer. |
+| `ex-doubling-integers-has-nonunit-determinant` | ai-altered | ai-generated | Owner-specified integer example, phrased through the source-backed coordinate endomorphism; its checked statement is reused only by the following false-statement boundary item, as Alpha expressly directed. |
+| `fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero` | ai-altered | ai-altered | Standard ring-versus-field trap, refuted by the owner-specified integer example and corrected by the sourced unit criterion; the zero-ring convention checks the other implication. |
 | `ex-four-by-four-determinant-by-cofactors-and-row-reduction` | ai-generated | ai-generated | Independently checkable sparse-matrix comparison; no consumer. |
 | `ex-three-by-three-inverse-by-adjugate` | ai-generated | ai-generated | Independently checkable cofactor and inverse computation harvested from ILA's example heading; no consumer. |
 | `ex-cramers-rule-two-by-two-system` | ai-generated | ai-generated | Independently checkable system; no consumer. |
+| `ex-columnwise-additivity-versus-whole-matrix-nonadditivity` | ai-generated | ai-generated | Checkable pair-local comparison of valid selected-column additivity with a directly recomputed whole-matrix witness; no consumer and no B-page dependency. |
 
 ### Integral logarithm A page
 
@@ -166,7 +179,7 @@ Values below are the Step-5 frontmatter obligations. `not-applicable` is used on
 | `cex-mercator-series-does-not-define-logarithm-globally` | ai-altered | ai-generated | Direct ratio/nth-term test applied to the sourced series; checkable leaf counterexample. |
 | `ex-unit-hyperbolic-area-brackets-e` | ai-generated | ai-generated | Checkable integral-bound example with the sharper published bound cited, not reproved; no consumer. |
 
-Generated-statement truth-risk obligations: for each generated B example, Step 5 must carry out the displayed arithmetic or inequality before prose is written. None may be cited by another item. The generated projection, basis-change, sparse determinant, three-by-three adjugate inverse, Cramer, logarithmic-family, Mercator-divergence, and integral-bound claims all have explicit checks in the proof-contract file. There is no generated Statement or Construction in the load-bearing A-page graph.
+Generated-statement truth-risk obligations: for each generated B example, Step 5 must carry out the displayed arithmetic or inequality before prose is written. None may be cited by another item. The generated projection, basis-change, sparse determinant, three-by-three adjugate inverse, Cramer, columnwise-versus-whole-matrix comparison, logarithmic-family, Mercator-divergence, and integral-bound claims all have explicit checks in the proof-contract file. There is no generated Statement or Construction in the load-bearing A-page graph.
 
 ## Published dependency closure and confidence routes
 
@@ -182,7 +195,7 @@ Routes mean:
 
 | route | published ids |
 |---|---|
-| component-lit | `def-coordinate-column-and-matrix-of-a-linear-map`, `def-determinant-of-a-square-matrix`, `def-dimension`, `def-invertible-matrix-and-similarity-over-a-commutative-ring`, `def-linear-isomorphism-and-invertible-linear-map`, `def-matrices-over-a-commutative-ring`, `def-ring-matrix-product-identity-and-transpose`, `lem-field-is-a-commutative-ring`, `lem-inverse-unique`, `lem-ring-units-form-a-group`, `thm-determinant-multiplicative`, `thm-determinant-of-a-triangular-matrix`, `thm-determinant-of-transpose`, `thm-determinant-under-elementary-row-operations`, `thm-gaussian-elimination-produces-row-echelon-form`, `thm-int-comm-ring`, `thm-invertible-matrices-correspond-to-linear-isomorphisms`, `thm-invertible-matrix-theorem`, `thm-leibniz-determinant-is-alternating-multilinear-and-normalized`, `thm-matrix-of-a-composite-is-the-product`, `thm-rat-field`, `thm-reals-field`, `thm-ring-matrix-arithmetic-laws`, `thm-similarity-is-an-equivalence-relation-and-models-basis-change`, `thm-two-sided-change-of-basis-formula` |
+| component-lit | `def-coordinate-column-and-matrix-of-a-linear-map`, `def-determinant-of-a-square-matrix`, `def-dimension`, `def-invertible-matrix-and-similarity-over-a-commutative-ring`, `def-linear-isomorphism-and-invertible-linear-map`, `def-matrices-over-a-commutative-ring`, `def-ring`, `def-ring-matrix-product-identity-and-transpose`, `lem-field-is-a-commutative-ring`, `lem-inverse-unique`, `lem-rigidity-of-alternating-multilinear-matrix-functions`, `lem-ring-units-form-a-group`, `thm-determinant-multiplicative`, `thm-determinant-of-a-triangular-matrix`, `thm-determinant-of-transpose`, `thm-determinant-under-elementary-row-operations`, `thm-gaussian-elimination-produces-row-echelon-form`, `thm-int-comm-ring`, `thm-invertible-matrices-correspond-to-linear-isomorphisms`, `thm-invertible-matrix-theorem`, `thm-leibniz-determinant-is-alternating-multilinear-and-normalized`, `thm-matrix-of-a-composite-is-the-product`, `thm-rat-field`, `thm-reals-field`, `thm-ring-matrix-arithmetic-laws`, `thm-similarity-is-an-equivalence-relation-and-models-basis-change`, `thm-two-sided-change-of-basis-formula` |
 | component-adapted/source | `cor-determinant-is-alternating-multilinear-in-the-rows`, `cor-determinant-is-invariant-under-similarity`, `cor-determinant-vanishes-with-a-zero-or-repeated-column`, `cor-invertible-matrix-has-unit-determinant` |
 | component-adapted/knowledge | `lem-int-cancellation`, `lem-units-of-z` |
 
@@ -204,6 +217,7 @@ Every load-bearing dependency is internal to its pair or is published at a small
 
 - Before the IVP-identification theorem, proofs must use only `L`, its integral definition, real calculus, and order. No `exp`, `log`, or already-published logarithm law may enter those proofs.
 - The identification item may cite `thm-exponential-ivp-uniqueness` once. Downstream items may then cite the proved identifications.
+- Define an alternating top-degree form locally as an alternating `n`-linear map `V^n -> F`; do not introduce exterior powers. Prove the one-basis coordinate formula from `lem-rigidity-of-alternating-multilinear-matrix-functions`, then use the normalized coordinate determinant form for uniqueness rather than dividing by the value of an arbitrary form.
 - In the rank-one lemma, expand over subsets of selected rank-one columns and explicitly kill every term with at least two selected columns. In similarity equivariance, choose standard coordinate columns after the scalar identity to justify equality entry by entry over an arbitrary commutative ring.
 - In Cramer's rule, prove the unconditional cross-multiplied identity before the unit case and never cancel a merely nonzero determinant over a ring.
 - In the continuous functional-equation theorem, use `g(t)=f(E(t))`, prove additivity, invoke continuity regularity, and use `E(1)=e` only after the bridge. In the differentiable-at-one theorem, derive `f(1)=0` and rescale the difference quotient in `f(x+h)-f(x)=f(1+h/x)-f(1)` to get `f'(x)=1/x`; do not assume differentiability at `x` in order to invoke the chain rule.
@@ -213,4 +227,4 @@ No blocker remains. The fraction-field detour was removed rather than recorded a
 
 ## New-id collision and validation record
 
-All proposed ids were searched with `rg` against `items/`, `research/plan-spec.json`, and the other existing `research/*.pages.json` manifests before this note was finalised; no collision was found outside this batch. The final report must distinguish the gates actually rerun after all four artifacts are on disk from this interim record.
+All proposed ids, including `lem-alternating-top-forms-are-determined-by-one-ordered-basis`, `thm-operator-determinant-scales-every-alternating-top-form`, `fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero`, and `ex-columnwise-additivity-versus-whole-matrix-nonadditivity`, were searched with `rg` against `items/`, `research/plan-spec.json`, and the other existing `research/*.pages.json` manifests before this note was finalised; no collision was found outside this batch. The exact nonadditivity fact already exists under the published id `fs-determinant-is-additive-on-matrices`; the new companion example adds a distinct side-by-side columnwise computation and directly recomputes the whole-matrix witness, avoiding both a duplicate statement and a forbidden B-page dependency. The final report must distinguish the gates actually rerun after all four artifacts are on disk from this interim record.

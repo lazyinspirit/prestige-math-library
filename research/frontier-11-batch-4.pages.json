@@ -12,6 +12,17 @@
     ],
     "items": [
       {
+        "id": "lem-alternating-top-forms-are-determined-by-one-ordered-basis",
+        "kind": "lemma",
+        "title": "An alternating top-degree form is determined by its value on one ordered basis",
+        "strategy": "Let B=(b_0,...,b_{n-1}) be an ordered basis of the positive-dimensional space V. For an alternating n-linear form omega, define F(A) by applying omega to the vectors whose B-coordinate columns are the columns of A. Then F is alternating and column-multilinear, so the published rigidity lemma gives F(A)=F(I_n)det(A). Substituting the coordinate matrix M_B(v_0,...,v_{n-1}) yields omega(v_0,...,v_{n-1})=omega(B)det(M_B(v_0,...,v_{n-1})). No exterior power is introduced.",
+        "deps": [
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-dimension",
+          "lem-rigidity-of-alternating-multilinear-matrix-functions"
+        ]
+      },
+      {
         "id": "def-determinant-of-a-linear-operator",
         "kind": "definition",
         "title": "The determinant of an endomorphism of a finite-dimensional vector space, defined from its matrix in an ordered basis",
@@ -22,25 +33,34 @@
         ]
       },
       {
+        "id": "thm-operator-determinant-scales-every-alternating-top-form",
+        "kind": "theorem",
+        "title": "On a positive-dimensional space, det(T) is the unique scalar by which T scales every alternating top-degree form",
+        "strategy": "For an alternating n-linear form omega on a positive-dimensional n-dimensional space, put omega_T(v_0,...,v_{n-1})=omega(Tv_0,...,Tv_{n-1}). Apply the preceding coordinate formula first to omega_T and then to omega on the tuple (Tb_0,...,Tb_{n-1}); the coordinate matrix of that tuple is [T]_B, so omega_T=det([T]_B)omega=det(T)omega. For uniqueness, use the normalized coordinate form delta_B(v_0,...,v_{n-1})=det(M_B(v_0,...,v_{n-1})) and evaluate at B. Thus the theorem gives the honest top-form characterisation without defining exterior powers.",
+        "deps": [
+          "lem-alternating-top-forms-are-determined-by-one-ordered-basis",
+          "def-determinant-of-a-linear-operator",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized"
+        ]
+      },
+      {
         "id": "thm-operator-determinant-is-basis-independent",
         "kind": "theorem",
         "title": "The determinant of a linear operator is independent of the chosen ordered basis",
-        "strategy": "If A and B are the matrices of T in two ordered bases, the change-of-basis theorem gives B=P^{-1}AP for an invertible transition matrix P. Apply the already-published similarity invariance of the matrix determinant. Treat the zero-dimensional convention det(T)=1 separately.",
+        "strategy": "In positive dimension, the preceding theorem characterises the matrix-defined determinant as the unique scalar by which T scales every alternating top-degree form, a condition with no basis in its statement. Hence two ordered bases give the same scalar. Treat the zero-dimensional convention det(T)=1 separately.",
         "deps": [
           "def-determinant-of-a-linear-operator",
-          "thm-similarity-is-an-equivalence-relation-and-models-basis-change",
-          "cor-determinant-is-invariant-under-similarity"
+          "thm-operator-determinant-scales-every-alternating-top-form"
         ]
       },
       {
         "id": "thm-operator-determinant-is-multiplicative",
         "kind": "theorem",
         "title": "For endomorphisms S and T of one finite-dimensional vector space, det(ST)=det(S)det(T)",
-        "strategy": "Choose one ordered basis. The matrix of ST is the product of the matrices of S and T, and the published matrix determinant is multiplicative over the underlying field. The zero-dimensional case reads 1=1 times 1.",
+        "strategy": "For every alternating top-degree form omega, apply the scaling theorem first to S and then to T: omega(STv_0,...,STv_{n-1})=det(S)det(T)omega(v_0,...,v_{n-1}). Uniqueness in the same theorem identifies the scalar with det(ST). The zero-dimensional case reads 1=1 times 1.",
         "deps": [
           "thm-operator-determinant-is-basis-independent",
-          "thm-matrix-of-a-composite-is-the-product",
-          "thm-determinant-multiplicative"
+          "thm-operator-determinant-scales-every-alternating-top-form"
         ]
       },
       {
@@ -270,6 +290,19 @@
         ]
       },
       {
+        "id": "fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero",
+        "kind": "false-statement",
+        "title": "FALSE: a square matrix over a commutative ring is invertible if and only if its determinant is nonzero",
+        "strategy": "Refute the reverse implication with the preceding integer example: the one-by-one matrix [2] has nonzero determinant 2 in Z, but 2 is not a unit and multiplication by 2 is not surjective. The forward implication also needs a nonzero-ring hypothesis, since over the zero ring the one-by-one identity matrix is [0], is invertible, and has determinant 0. Contrast both failures with the proved unit criterion, which is the correct statement for every commutative ring.",
+        "deps": [
+          "ex-doubling-integers-has-nonunit-determinant",
+          "cor-square-matrix-invertible-iff-determinant-is-a-unit",
+          "def-ring",
+          "thm-int-comm-ring",
+          "lem-units-of-z"
+        ]
+      },
+      {
         "id": "ex-four-by-four-determinant-by-cofactors-and-row-reduction",
         "kind": "example",
         "title": "A sparse 4 by 4 determinant is 30 by both cofactor expansion and row reduction",
@@ -302,6 +335,18 @@
           "cor-cramers-rule-over-a-field",
           "def-determinant-of-a-square-matrix",
           "thm-rat-field"
+        ]
+      },
+      {
+        "id": "ex-columnwise-additivity-versus-whole-matrix-nonadditivity",
+        "kind": "example",
+        "title": "Determinant is additive in one selected column but not under simultaneous whole-matrix addition",
+        "strategy": "Over Z, take u=(1,0)^T, v=(0,1)^T and w=(0,1)^T. The two-by-two formula gives det([u+v,w])=1=det([u,w])+det([v,w])=1+0, illustrating valid additivity in the first column while the second is fixed. Then directly compute with A=B=I_2 that det(A+B)=4 but det(A)+det(B)=2. The paired computations isolate exactly why columnwise multilinearity is not linearity in the whole matrix argument.",
+        "deps": [
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "def-matrices-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix",
+          "thm-int-comm-ring"
         ]
       }
     ]

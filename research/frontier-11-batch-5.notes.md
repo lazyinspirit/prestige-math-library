@@ -13,7 +13,7 @@ No split is proposed. The manifest sizes are:
 
 | page | kind | manifest size |
 |---|---|---:|
-| `universal-properties-and-the-yoneda-lemma` | A | 20 |
+| `universal-properties-and-the-yoneda-lemma` | A | 21 |
 | `universal-properties-and-the-yoneda-lemma-examples` | B | 14 |
 
 The A page is well below the owner’s hard split threshold. No result found in
@@ -23,7 +23,8 @@ Proposed two-paragraph A-page summary:
 
 > For a locally small category, this page constructs the covariant and
 > contravariant hom-functors and the hom-bifunctor, then defines presheaves,
-> representable functors, and representations. Evaluation at an identity
+> representable functors, representations, and generalized elements with their
+> shapes. Evaluation at an identity
 > morphism gives the Yoneda bijection; its inverse is written explicitly before
 > the natural-transformation collection is called a set, and naturality is
 > proved separately in both the representing object and the functor. The proof
@@ -46,24 +47,54 @@ isolate the two principal smallness and uniqueness mistakes.
 
 ## Canonical-coverage harvest
 
-The machine receipt is `research/frontier-11-batch-5.coverage.json`. It contains
-47 source-native or canonical headings:
+The machine receipt is `research/frontier-11-batch-5.coverage.json`. After the
+Y1 re-harvest it contains 134 source-native or canonical headings:
 
 | disposition | headings |
 |---|---:|
-| included | 42 |
-| inline | 4 |
-| already published | 0 |
-| deferred | 1 |
-| out of scope | 0 |
+| included | 70 |
+| inline | 7 |
+| already published | 1 |
+| deferred | 15 |
+| out of scope | 41 |
 
-The single decline expected to receive scrutiny is Justin Campbell,
-Proposition 2.2, that representable and corepresentable functors preserve
-products. It is deferred to `limits-and-colimits`, which owns the general
-categorical product and its preservation theory. This batch does not use the
-deferred theorem: the Set product and the doubling-functor counterexample are
-proved directly. The decline is topic ownership, not a missing lemma needed by
-a retained result.
+This differs materially and deliberately from the original 47-heading receipt.
+Riehl changed from 17 selected entries to 67 rows covering every section and
+numbered Definition, Example, Proposition, Theorem, Remark, and Corollary in
+§§2.1–2.4 (with multi-part Examples split where their dispositions differ).
+Leinster changed from 11 selected entries to 48 rows covering every section,
+numbered named result, and named subsection in §§4.1–4.3. The 6 Campbell rows,
+3 Spivak rows, and 10 canonical rows are unchanged.
+
+The locators changed too. Riehl now records the complete sections on printed
+pp. 54–80 instead of stopping the stated reading at pp. 69 and 77. Leinster's
+old ranges did not match the book's printed pagination; the corrected locator
+is §4.1 pp. 84–92, §4.2 pp. 93–98, and §4.3 pp. 99–106 in the official arXiv
+PDF. Neither row says “selected” now.
+
+The complete Leinster enumeration exposed one small in-scope gap that Alpha
+could not see without source access: Definition 4.1.25, generalized elements
+and their shapes. It is now scaffolded as
+`def-generalized-element-and-shape`, depending only on the published
+`def-category`; the item will define a generalized element of $A$ of shape $S$
+as a morphism $S\to A$ and record ordinary elements of sets as the
+singleton-shaped case. It is literature-derived and has no proof component, so
+it adds no proof-contract row. No other enumerated heading exposed machinery
+needed by a retained result.
+
+The 15 deferred rows identify their actual owner: tensor/free-module material
+goes to `tensor-products-of-modules`, adjunction material to
+`adjunctions-and-the-adjoint-functor-theorems`, and Campbell's preservation
+result to `limits-and-colimits`. The 40 out-of-scope rows are predominantly
+source survey examples in algebraic topology, power-set/Sierpinski
+classification, group torsors and presentations, discrete fibrations, or
+concrete algebra. Each has a result-specific reason in the receipt. Cayley's
+theorem is the one exact already-published match. Riehl Corollary 2.2.10 was
+not tagged `already-published`: the disk item
+`thm-elementary-row-operations-are-left-multiplication` proves only the three
+elementary row operations, while Riehl classifies arbitrary natural row
+operations. Treating those statements as identical would overstate disk
+coverage.
 
 ## Source ledger and licensing
 
@@ -73,7 +104,7 @@ and the source’s own headings are recorded in the coverage JSON.
 | code | source and exact URL | role |
 |---|---|---|
 | RIE | Emily Riehl, *Category Theory in Context*, Chapter 2, <https://emilyriehl.github.io/files/context.pdf> | Textbook primary for representables, Yoneda with both naturalities, universal elements, categories of elements, the size warning, and `Z[x]` representing the underlying set of an arbitrary unital ring. |
-| LEI | Tom Leinster, *Basic Category Theory*, Chapter 4, <https://arxiv.org/pdf/1612.09375> | Independent textbook treatment of the hom-bifunctor, both variances, Yoneda, full faithfulness, and isomorphism of representables. |
+| LEI | Tom Leinster, *Basic Category Theory*, Chapter 4, <https://arxiv.org/pdf/1612.09375.pdf> | Independent textbook treatment of the hom-bifunctor, both variances, generalized elements, Yoneda, full faithfulness, and isomorphism of representables. |
 | CAM | Justin Campbell, Harvard Math 55b tutorial notes, §§1–2, <https://people.math.harvard.edu/~campbell/tutnotes1.pdf> | Independent short course-note treatment of universal elements, products, uniqueness, and a nonrepresentable functor. |
 | SPI | David I. Spivak, *Category Theory for Scientists*, §§3.1.1 and 3.1.4, <https://ocw.mit.edu/courses/18-s996-category-theory-for-scientists-spring-2013/9cf51d1394fc107baa6764d553dd0bb6_MIT18_S996S13_textbook.pdf> | Textbook construction of the free word monoid and the natural bijection out of it. |
 
@@ -232,6 +263,7 @@ a dependency target.
 | `def-hom-functors-and-hom-bifunctor` | literature-derived | not-applicable | RIE §2.1 and LEI Definitions 4.1.1, 4.1.16, 4.1.22. |
 | `thm-hom-assignments-are-functors` | literature-derived | ai-altered | RIE/LEI formulas; split from the bifunctor to expose both variance checks. |
 | `thm-hom-assignment-is-a-bifunctor` | literature-derived | ai-altered | LEI Definition 4.1.22; proof written from associativity and commuting pre/postcomposition. |
+| `def-generalized-element-and-shape` | literature-derived | not-applicable | LEI Definition 4.1.25; a generalized element of shape $S$ is a morphism with domain $S$. |
 | `def-presheaf-representable-functor-and-representation` | ai-altered | not-applicable | RIE Definition 2.1.4 and LEI Definitions 4.1.3/4.1.17, with both variances named explicitly. |
 | `prop-initial-and-terminal-objects-as-representations` | literature-derived | ai-altered | RIE Definition 2.1.3; both variances and the empty-category boundary retained. |
 | `thm-initial-and-terminal-objects-are-unique-up-to-unique-isomorphism` | literature-derived | ai-altered | Standard RIE/LEI universal-property proof, made explicitly unique. |
@@ -338,10 +370,14 @@ normalized away.
 
 ## New-id and dependency-closure report
 
-All 34 proposed item ids were searched in `items/` and the other research JSON
+All 35 proposed item ids were searched in `items/` and the other research JSON
 manifests before use; no collision or synonymous published statement was found.
 The decomposition items with specific proof roles are:
 
+- `def-generalized-element-and-shape` closes the source-native Leinster
+  Definition 4.1.25 gap through the published `def-category`; as a definition,
+  it is not load-bearing through any generated construction and needs no proof
+  contract.
 - `lem-yoneda-evaluation-bijection` isolates construction, inverse, sethood, and
   choice-freeness so `thm-yoneda-lemma-is-natural-in-both-variables` cannot skip
   the two naturality squares.

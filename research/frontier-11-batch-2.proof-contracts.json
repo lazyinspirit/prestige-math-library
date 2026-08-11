@@ -5,6 +5,7 @@
     "cor-ftc-integral-function-differentiable-almost-everywhere",
     "thm-newton-leibniz-with-interior-derivative",
     "cor-newton-leibniz-with-finitely-many-exceptional-points",
+    "thm-newton-leibniz-with-a-countable-exceptional-set",
     "thm-integration-by-parts-with-interior-derivatives",
     "thm-substitution-with-riemann-integrable-inner-derivative",
     "thm-one-sided-ftc-at-points-with-one-sided-limits",
@@ -16,6 +17,7 @@
     "ex-thomae-integral-function-differentiates-through-dense-discontinuities",
     "ex-sparse-spikes-ftc-conclusion-at-a-discontinuity",
     "cex-ae-zero-derivative-does-not-determine-endpoint-change",
+    "cor-chord-length-is-at-most-arc-length",
     "lem-polygonal-length-is-monotone-under-refinement",
     "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
     "thm-arc-length-is-additive-over-subintervals",
@@ -23,11 +25,13 @@
     "prop-arc-length-under-lipschitz-maps-and-euclidean-similarities",
     "thm-arc-length-is-lower-semicontinuous-under-uniform-convergence",
     "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
+    "cor-length-of-the-graph-of-a-c1-function",
     "cor-piecewise-c1-paths-have-additive-speed-integral-length",
     "lem-arc-length-function-is-continuous-and-nondecreasing",
     "thm-every-rectifiable-path-has-an-arc-length-parametrization",
     "cor-regular-c1-paths-have-c1-unit-speed-parametrizations",
     "ex-line-segment-and-polygonal-path-length",
+    "ex-unit-circle-arc-has-length-theta",
     "cex-graph-of-x-sin-one-over-x-is-not-rectifiable",
     "ex-v-shaped-path-is-rectifiable-but-not-c1",
     "cex-the-same-trace-can-have-different-path-lengths",
@@ -252,6 +256,102 @@
           "case": "nonempty-choice",
           "status": "not_applicable",
           "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional requiring a reverse direction."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-newton-leibniz-with-a-countable-exceptional-set": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-countable-iff-surjection-from-n",
+          "source_section": "Statement",
+          "quote": "there is a surjection $s : \\mathbb{N} \\to A$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-darboux-integral",
+          "source_section": "Definition",
+          "quote": "the common value is written",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-darboux-sums",
+          "source_section": "Definition",
+          "quote": "$L(f,P) \\;:=\\; \\sum_{i<n} m_i \\,\\Delta_i, \\qquad U(f,P) \\;:=\\; \\sum_{i<n} M_i \\,\\Delta_i$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Prove the countable-exception monotonicity lemma inline by enumerating the exceptional set, assigning epsilon-times-$2^{-n}$ error allowances, and using a least-upper-bound first-crossing argument with continuity at exceptional points and the derivative inequality elsewhere.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the monotonicity lemma on each partition subinterval to the primitive minus the local upper affine bound and to the local lower affine bound minus the primitive; sum, telescope, and squeeze between the equal Darboux integrals.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats an empty exceptional set before invoking the nonempty-set enumeration lemma."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No free zero-valued size, exponent, length, or scale creates a separate proof branch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The enumeration in step 1.1 allows repetitions, so a singleton exceptional set is retained without a separate indexing convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The theorem is stated for a nondegenerate integration interval; the oriented degenerate identity is definitional."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The exceptional set lies in the open interval, while continuity—not differentiability—is used at both endpoints in steps 1.1–2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the published explicit countability-to-surjection lemma and makes no simultaneous selection from a varying family."
         },
         {
           "case": "iff-forward",
@@ -1113,6 +1213,83 @@
       ],
       "finite_smoke": []
     },
+    "cor-chord-length-is-at-most-arc-length": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-path-polygonal-length-and-rectifiability-in-rn",
+          "source_section": "Definition",
+          "quote": "arc length as their supremum",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Evaluate the polygonal sum of the endpoint-only partition as the Euclidean endpoint chord.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Use the least-upper-bound definition of path length to dominate that polygonal sum, with the singleton interval giving zero on both sides.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family is introduced; the endpoint partition exists on every nondegenerate interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly gives zero chord and zero length on a singleton parameter interval."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 is precisely the one-chord partition case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singleton interval is separated in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoints are the two vertices used in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The endpoint-only partition is explicitly constructed and no choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional requiring a reverse direction."
+        }
+      ],
+      "finite_smoke": []
+    },
     "lem-polygonal-length-is-monotone-under-refinement": {
       "citations": [
         {
@@ -1652,6 +1829,92 @@
       ],
       "finite_smoke": []
     },
+    "cor-length-of-the-graph-of-a-c1-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
+          "source_section": "Statement",
+          "quote": "$L(\\gamma)=\\int_a^b\\lVert\\gamma'(t)\\rVert_2\\,dt$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-p-norms-on-rn",
+          "source_section": "Definition",
+          "quote": "$\\lVert x\\rVert_2 = \\sqrt{\\sum_{k<n}x_k^{2}}$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the graph path componentwise to obtain the continuous extension $(1,f')$ and compute its Euclidean norm as the square root of $1+f'^2$.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Substitute the speed from step 1.1 into the C1 path-length formula, retaining the singleton interval separately.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The graph path introduces no empty coordinate family or empty partition family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles a singleton interval and its zero length."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 retains the one scalar input coordinate and the two graph coordinates explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case $a=b$ is separated in step 2.1 rather than forcing an interior derivative hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 use an interior derivative with a continuous extension to both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The graph path and its derivative are explicitly constructed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional requiring a reverse direction."
+        }
+      ],
+      "finite_smoke": []
+    },
     "cor-piecewise-c1-paths-have-additive-speed-integral-length": {
       "citations": [
         {
@@ -1740,6 +2003,15 @@
             "1.1",
             "2.1"
           ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-chord-length-is-at-most-arc-length",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\gamma(b)-\\gamma(a)\\rVert_2\\le L(\\gamma)$",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
@@ -1753,11 +2025,12 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Control each subpath by the sum of coordinate-variation increments and use continuity of the scalar variation functions.",
+          "claim": "Control each subpath by the sum of coordinate-variation increments to prove continuity, then use the chord bound on all pairs in a subinterval to characterize zero subpath length and obtain the strict-increase criterion.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
-            "L1"
+            "L1",
+            "L2"
           ]
         }
       ],
@@ -1817,6 +2090,15 @@
             "1.1",
             "2.1"
           ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-chord-length-is-at-most-arc-length",
+          "source_section": "Statement",
+          "quote": "$\\lVert\\gamma(b)-\\gamma(a)\\rVert_2\\le L(\\gamma)$",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
@@ -1834,7 +2116,8 @@
           "step": "2.1",
           "inputs": [
             "step 1.1",
-            "L1"
+            "L1",
+            "L2"
           ]
         }
       ],
@@ -2023,6 +2306,103 @@
           "case": "nonempty-choice",
           "status": "not_applicable",
           "reason": "The proof makes no choice from a varying family of merely nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional requiring a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional requiring a reverse direction."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-unit-circle-arc-has-length-theta": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "$\\sin^2x+\\cos^2x=1$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-integral-elementary-bounds",
+          "source_section": "Statement",
+          "quote": "$\\int_a^b c = c\\,(b-a)$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the two circle coordinates componentwise and use the Pythagorean identity to show that the Euclidean speed is identically one.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Apply the C1 speed formula and evaluate the constant-one integral as theta, treating theta equal to zero by the singleton-interval convention.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example introduces no empty family or empty coordinate carrier."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly handles $\\theta=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the constant unit speed and step 2.1 integrates it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singleton domain at $\\theta=0$ is separated in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The trigonometric derivative formulas hold on all reals, including relative endpoint derivatives on $[0,\\theta]$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The path, its derivative, and its speed are explicit."
         },
         {
           "case": "iff-forward",
