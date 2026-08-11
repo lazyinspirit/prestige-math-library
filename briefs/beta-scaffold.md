@@ -3,8 +3,10 @@
 
 # Level-<n> scaffolding brief (steps 1 and 2 of the owner's per-level build)
 
-> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
-> and future agent.** Use commands already allowed inside the workspace sandbox;
+> **NO PERMISSION PROMPTS OF ANY KIND (owner, 2026-07-30; broadened 2026-08-11)
+> — binding on every current and future agent.** Shell, edit, web-search and
+> git permissions alike; and it binds a compound command as a whole, so **no
+> segment of an `&&` chain may raise a prompt either.** Use commands already allowed inside the workspace sandbox;
 > choose non-escalated forms and never ask the owner to approve a shell command.
 > Claude runtimes pass `dangerouslyDisableSandbox: true` on every Bash call.
 > Sandboxed Codex runtimes stay within granted workspace permissions. If an

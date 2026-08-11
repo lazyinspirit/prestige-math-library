@@ -6,8 +6,10 @@
 
 # Audit-orchestrator brief — wave <k> (steps A3 and A9)
 
-> **NO SHELL-PERMISSION PROMPTS (owner, 2026-07-30) — binding on every current
-> and future agent.** Use commands already allowed inside the workspace sandbox
+> **NO PERMISSION PROMPTS OF ANY KIND (owner, 2026-07-30; broadened 2026-08-11)
+> — binding on every current and future agent.** Shell, edit, web-search and
+> git permissions alike; and it binds a compound command as a whole, so **no
+> segment of an `&&` chain may raise a prompt either.** Use commands already allowed inside the workspace sandbox
 > and choose non-escalated forms. Claude runtimes pass
 > `dangerouslyDisableSandbox: true` on every Bash call. If an indispensable
 > operation has no escalation-free form, record a blocker instead of asking.

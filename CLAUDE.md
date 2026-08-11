@@ -100,9 +100,11 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
 - **No permission prompts of ANY kind (owner, 2026-07-30; broadened
   2026-08-11).** This binds the orchestrator and every current and future
   subagent. The 2026-08-11 wording is the owner's: *"Do not ask and do not let
-  any agents ask for shell command permissions, edit permissions, git
-  permissions, or any permissions whatsoever."* Run routine repository reads,
-  writes, gates, commits and agent dispatches inside the workspace sandbox, and
+  any agents ask for shell command permissions, edit permissions, web search
+  permissions, git permissions, or any permissions whatsoever."* It binds a
+  compound command as a whole: **no segment of an `&&` chain may raise a prompt
+  either.** Run routine repository reads, writes, web searches, gates, commits
+  and agent dispatches inside the workspace sandbox, and
   choose non-escalated command forms. On runtimes exposing
   `dangerouslyDisableSandbox`, pass it on **every** Bash call as the existing
   unattended-build backstop; on runtimes without it, stay within their
