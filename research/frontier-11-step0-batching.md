@@ -83,10 +83,15 @@ context, `workspace-write`, web enabled — `tools/dispatch.mjs` passes each
 setting explicitly. Run-specific brief: `research/frontier-11-brief-beta.md`;
 per-batch assignment: `research/frontier-11-beta-<i>.task.md`.
 
-## 6. Known blocker, recorded rather than prompted
+## 6. Preflight — resolved, READY
 
-`DEEPSEEK_API_KEY` is not set on this machine and there is no `.env` in the app
-repo, so the DeepSeek judge lane cannot cast a verdict. **Step 7 cannot record a
-paired pass without it**, since `CLAUDE.md` requires both models to actually pass
-the text. Steps 0–6 are unaffected and proceed. `katex` and `yaml` were missing
-from the app repo and were installed; `preflight.mjs` is otherwise green.
+Two environment defects were found before dispatch and both are now fixed.
+
+- `katex` and `yaml` were unresolvable because the app repo had no
+  `web/node_modules`; without them `rendercheck` **skips silently** rather than
+  failing, which is the dangerous shape. `npm install` run in the app repo.
+- `DEEPSEEK_API_KEY` was absent at 23:08, which would have made a step-7 paired
+  pass impossible — `CLAUDE.md` records a pass only when **both** models pass the
+  text. The owner supplied `/Users/ianx/Projects/prestige-intelligence/.env` at
+  23:20. `preflight.mjs --judges` then validated both lanes with a real call and
+  reports **READY**. The blocker is closed and never became a prompt.
