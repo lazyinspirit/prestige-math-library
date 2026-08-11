@@ -1,7 +1,7 @@
 ---
 id: lem-plane-face-handshake-by-girth
 kind: lemma
-title: "If every facial boundary walk of a connected plane graph has length at least $g$, then $g|F|\\le2|E|$"
+title: "Facial boundary walks of a connected plane graph sum to $2|E|$, so girth at least $g$ gives $g|F|\\le2|E|$"
 status: draft
 origin: session
 provenance:
@@ -26,7 +26,11 @@ pipeline_run: null
 
 ## Statement
 
-Let $G$ be a connected plane graph. If every facial boundary walk has length at least a positive natural $g$, then
+Let $G$ be a connected plane graph, and write $\ell(f)$ for the length of the facial boundary walk of $f$. Then
+
+$$\sum_{f\in F(G)}\ell(f)=2|E(G)|.$$
+
+Consequently, if every facial boundary walk has length at least a positive natural $g$, then
 
 $$g|F(G)|\le2|E(G)|.$$
 
