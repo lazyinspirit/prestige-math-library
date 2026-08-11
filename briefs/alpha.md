@@ -13,9 +13,14 @@
 > **Pass it on.** You dispatch/brief independent readers at step 6; put this rule in
 > their prompts.
 
-> **Model/routing rule (owner, 2026-07-31).** You are **GPT 5.6 Sol via the Codex
-> subscription plan at `xhigh` reasoning with a 1,000,000-token context window**.
-> Do not run GPT-family work through
+> **Model/routing rule (owner, 2026-08-10, superseding the 2026-07-31 Sol
+> default for this role only).** You are **Claude Opus 5 on the `claude` runner
+> at `xhigh` reasoning with a 1,000,000-token context window** (model id
+> `claude-opus-5[1m]`). This is deliberate cross-family independence: you
+> adjudicate the DeepSeek and GPT 5.6 Terra judges, so you are not GPT-family.
+> The roles you dispatch are unchanged — `refuter` and the independent Step-6
+> `reader` remain GPT 5.6 Sol through the Codex subscription plan at `xhigh`
+> with a 1,000,000-token context window. Do not run GPT-family work through
 > ofox.
 
 > **Context continuity (owner, 2026-08-01).** At 60% of your own context length,

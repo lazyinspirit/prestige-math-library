@@ -807,17 +807,24 @@ shared path the docs name), because practice and documentation diverged there.
 the subagent mechanism of whatever session started it. It has three runners:
 `codex` (most build and audit roles: GPT 5.6 Sol for Beta/reader/refuter/
 orchestration and the audit's Beta/Alpha, GPT 5.6 Terra for certification),
-`claude` (the BUILD `alpha` role, Claude Opus 5 at `xhigh` — owner, 2026-08-10),
-and `deepseek` (audit proof-refuters — an HTTP call, not a process). Every Codex
-role receives `xhigh` reasoning and an explicit 1,000,000-token context window.
+`claude` (the BUILD `alpha` role, Claude Opus 5 at `xhigh` with a 1,000,000-token
+window — owner, 2026-08-10), and `deepseek` (audit proof-refuters — an HTTP call,
+not a process). Every Codex role receives `xhigh` reasoning and an explicit
+1,000,000-token context window.
 
 Alpha's move to Opus 5 is a deliberate cross-family split: Alpha is the sole
 adjudicator of the DeepSeek and GPT 5.6 Terra judges, and a Sol Alpha shared the
-GPT family with the Terra lane it was weighing. `effort: 'xhigh'` is explicit in
-the role table because `buildClaude` defaults the claude runner to `high`, so
-omitting it would silently downgrade the adjudicator. The role keeps
-`workspace-write` and its lane cap of 1. The published-audit `audit-alpha` role
-is unchanged and stays on Sol.
+GPT family with the Terra lane it was weighing. **Both of Alpha's settings are
+explicit, and each for its own reason.** `effort: 'xhigh'` is explicit in the
+role table because `buildClaude` defaults the claude runner to `high`, so
+omitting it would silently downgrade the adjudicator. The context window is
+explicit in the MODEL ID — `claude-opus-5[1m]`, `OPUS_MODEL` in `dispatch.mjs`
+(corrected 2026-08-11) — because the claude CLI has no `model_context_window`
+knob to pass: the window is selected by the id, and bare `claude-opus-5` runs the
+standard window. That is the same failure mode the Codex lanes avoid by passing
+`model_context_window=1000000` rather than inheriting it, expressed in the only
+place this runner exposes. The role keeps `workspace-write` and its lane cap of
+1. The published-audit `audit-alpha` role is unchanged and stays on Sol.
 
 Read-only is a property of the ROLE, not of the prompt, and **each runner
 enforces it differently because their guarantees differ in strength**:
@@ -1004,7 +1011,8 @@ author and audit Alpha. Both receive the exact same hash-attested frozen item,
 A/B-pair, dependency, and conventions prompt; Terra runs read-only from an empty
 temporary working directory. Every
 GPT 5.6 Sol author and Beta uses `xhigh` reasoning with a 1,000,000-token
-context window; the build Alpha is Claude Opus 5 at `xhigh` (owner, 2026-08-10).
+context window; the build Alpha is Claude Opus 5 at `xhigh` with the same
+1,000,000-token window (owner, 2026-08-10).
 DeepSeek is the cross-family screen from the Sol author; Terra
 is an independent same-context comparison lane, not a claim of cross-family
 separation. Terra shared a family with the Alpha that adjudicated it, which

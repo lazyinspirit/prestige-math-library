@@ -23,7 +23,7 @@ Everything below is verified against the code as of 2026-07-31.
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
 | **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, ledgers, and reporting |
-| **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`** (owner, 2026-08-10; was GPT 5.6 Sol) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk |
+| **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`, 1M-token context** (owner, 2026-08-10; was GPT 5.6 Sol) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk |
 | **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding and **step 5 authors all content in its batch** after Step 4. It never audits content it authored. |
 | **independent Step-6 reader** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | Alpha-assigned read-only or repair-capable audit role for content it did not author; does not judge or adjudicate. |
 | **judges** | **DeepSeek V4 Pro direct (`max`) and freshly spawned Claude Sonnet 5 (`high` effort)** | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the only cross-family lane; Sonnet 5 is the second comparison lane, same family as the audit Alpha that adjudicates its rejections. |
@@ -503,7 +503,8 @@ correct. Splitting a single level is not.
 
 **Model (owner, 2026-07-31, amended 2026-08-10): Beta-n-i is GPT 5.6 Sol run
 through the Codex subscription plan at `xhigh` reasoning with a 1,000,000-token
-context window. Alpha-n is Claude Opus 5 on the `claude` runner at `xhigh`.** Do
+context window. Alpha-n is Claude Opus 5 on the `claude` runner at `xhigh` with
+the same 1,000,000-token window (model id `claude-opus-5[1m]`).** Do
 not run GPT-family audit work through ofox. Alpha's read-only proof-refuters and
 the independent Step-6 readers stay on Sol, so the reading tier below Alpha
 remains GPT-family.

@@ -93,18 +93,24 @@ attempt('yaml', true, () => {
 // Two independent consumers decide it, and getting either wrong lets a run start
 // that cannot finish:
 //
-//   AGENTS  — a BUILD dispatches Sol through Codex (authoring, Beta, reader,
-//             Alpha). An AUDIT uses Codex for Sol Beta/Alpha and Terra readers.
+//   AGENTS  — a BUILD dispatches Sol through Codex (authoring, Beta, reader) AND
+//             Claude Opus 5 through the claude CLI for the `alpha` role (owner,
+//             2026-08-10). An AUDIT uses Codex for Sol Beta/Alpha and Terra
+//             readers, and no claude lane at all.
 //   JUDGES  — both workflows judge with the configured `deepseek+terra` lineup.
 //
-// Codex is required for all GPT roles and the Terra judge lane.
+// Codex is required for all GPT roles and the Terra judge lane. The claude CLI
+// is required by a BUILD because Alpha runs on it: checking only the judge
+// lineup for a claude-family model, as this did until 2026-08-11, reported a
+// green preflight for a build that then cannot dispatch its sole adjudicator.
 const lineupModels = {
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
 }[process.env.JUDGE_LINEUP ?? 'deepseek+terra'] ?? [];
 const judgeNeedsClaude = lineupModels.some((m) => m.startsWith('claude-'));
 const judgeNeedsCodex = lineupModels.some((m) => m.startsWith('gpt-'));
 const needCodex = !isAudit || judgeNeedsCodex;
-const needClaude = judgeNeedsClaude;
+const buildNeedsClaude = !isAudit;              // the build `alpha` role
+const needClaude = judgeNeedsClaude || buildNeedsClaude;
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 attempt('codex-cli', needCodex, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
@@ -126,9 +132,11 @@ record('codex-auth', needCodex, existsSync(join(codexHome, 'auth.json')) ? 'pass
   'run the Codex login flow; an expired or already-rotated token takes out every Sol lane at once');
 
 attempt('claude-cli', needClaude, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
-  needClaude
-    ? `REQUIRED here: the ${process.env.JUDGE_LINEUP ?? 'deepseek+terra'} judge lane spawns claude -p`
-    : 'not needed by this workflow or judge lineup');
+  buildNeedsClaude
+    ? 'REQUIRED here: the build `alpha` role spawns claude -p (Claude Opus 5, 1M window)'
+    : judgeNeedsClaude
+      ? `REQUIRED here: the ${process.env.JUDGE_LINEUP ?? 'deepseek+terra'} judge lane spawns claude -p`
+      : 'not needed by this workflow or judge lineup');
 
 // The key itself is never printed, logged, or placed in any output.
 const envFile = deepseekEnvFile();

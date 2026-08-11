@@ -26,7 +26,8 @@
 // writing/adjudication roles and Terra for independent certification.
 //
 // ONE EXCEPTION, owner 2026-08-10: the BUILD `alpha` role runs Claude Opus 5 on
-// the `claude` runner at xhigh. This is a deliberate cross-family split — Alpha
+// the `claude` runner at xhigh with the same 1,000,000-token window, selected by
+// the `[1m]` model id. This is a deliberate cross-family split — Alpha
 // adjudicates the DeepSeek and Terra judges, and a Sol Alpha shared the GPT
 // family with the Terra lane it was weighing. The published-audit `audit-alpha`
 // role is NOT covered by this change and stays on Sol.
@@ -52,7 +53,12 @@ import { createSlotPool } from './slots.mjs';
 const SOL_MODEL = process.env.SOL_MODEL ?? 'gpt-5.6-sol';
 const TERRA_MODEL = process.env.TERRA_MODEL ?? 'gpt-5.6-terra';
 const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro';
-const OPUS_MODEL = process.env.OPUS_MODEL ?? 'claude-opus-5';
+// The `[1m]` suffix IS the context window. Unlike Codex, the claude CLI has no
+// `model_context_window` knob — the 1,000,000-token variant is selected by the
+// model id itself, and bare `claude-opus-5` silently runs the standard window.
+// Alpha reads a whole level plus its published dependencies, so the owner's
+// standing 1M rule has to be expressed here or it is not expressed at all.
+const OPUS_MODEL = process.env.OPUS_MODEL ?? 'claude-opus-5[1m]';
 
 // READ-ONLY ON THE `claude` RUNNER, and why it is BOTH lists.
 //
@@ -96,7 +102,8 @@ const ROLES = Object.freeze({
   // does instead: it asserts from memory.
   beta:         { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, web: true, why: 'one per batch, scaffolds and authors' },
   reader:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, web: true, why: 'independent step-6 audit of a foreign batch' },
-  // Alpha moved from Sol to Claude Opus 5 (owner, 2026-08-10), keeping xhigh.
+  // Alpha moved from Sol to Claude Opus 5 (owner, 2026-08-10), keeping xhigh and
+  // the 1M window (the `[1m]` id above).
   // `effort` must be explicit: buildClaude defaults the claude runner to 'high',
   // so omitting it here would silently downgrade the adjudicator.
   alpha:        { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'SINGLE writer of the prose scaffolds' },
