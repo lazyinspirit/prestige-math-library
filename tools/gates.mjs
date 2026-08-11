@@ -199,6 +199,17 @@ const STEPS = {
       ...(option('--against') ? ['--against', option('--against')] : []),
       '--adjudications', ADJUDICATIONS],
       { needs: [TOUCHES, ADJUDICATIONS], why: 'R1 — step 8 is fatal-only' }),
+    // The contract trio, added 2026-08-11 after Alpha found it missing here.
+    // A step-8 fatal repair edits proof text, which is exactly what invalidates a
+    // proof contract — a merged-away step, a quoted Statement that has since
+    // changed, a dropped `risk_review`. Step 8 ran `step8-guard`, `impact-audit`
+    // and `level-coverage` and none of them reads the contract for validity, so
+    // that drift survived to be discovered by an agent rather than a gate.
+    // Measured on `frontier-10`: 9 `proof-contract --strict` errors and a missing
+    // `risk_review` were already present at step 8 as residue of round 1 and of
+    // the step-6 repairs, and were found only because Alpha stashed its own
+    // changes and re-ran at HEAD to check whether it had caused them.
+    ...CONTRACT_TRIO(),
     g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'pre-step8'], { needs: [TOUCHES] }),
     COVERAGE(),
   ],

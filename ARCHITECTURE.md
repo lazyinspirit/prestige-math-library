@@ -1291,6 +1291,16 @@ State this honestly rather than implying coverage.
   declared dependencies, second for the main definitions/results and their
   logical progression; B pages carry no authored summary body. This remains a
   reading rule, not a mechanical gate.
+- **A step-8 repair could invalidate its own proof contract unseen, until
+  2026-08-11.** Step 8's gate table ran `step8-guard`, `impact-audit` and
+  `level-coverage`, none of which reads a contract for validity — yet a fatal
+  repair edits proof text, which is exactly what strands a merged-away step, a
+  quoted Statement that has since changed, or a dropped `risk_review`. Measured
+  on `frontier-10`: 9 `proof-contract --strict` errors and one missing
+  `risk_review` were live at step 8 as residue of the previous round and of
+  step 6, and surfaced only because Alpha stashed its own changes and re-ran at
+  HEAD to establish whether it had caused them. The contract trio now runs at
+  step 8 too.
 - **Omission is now partly covered, and only partly.** Until 2026-08-11 no gate
   could see a result that was never written; `coverage-checklist.mjs` (§3.11b)
   now forces every heading a cited source contains to be scaffolded or declined
