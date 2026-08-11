@@ -1,7 +1,7 @@
 ---
 id: cex-distinct-polynomials-can-induce-the-same-finite-field-function
 kind: counterexample
-title: 'Over F_p, x^p-x and the zero polynomial induce the same function but are distinct polynomials'
+title: 'Over $\mathbb F_p$, $x^p-x$ and the zero polynomial induce the same function but are distinct polynomials'
 status: published
 origin: session
 provenance:

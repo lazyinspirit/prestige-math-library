@@ -1,7 +1,7 @@
 ---
 page: bounded-variation-and-riemann-stieltjes
 title: "Bounded Variation and the Riemann–Stieltjes Integral"
-status: draft
+status: published
 items: [def-bounded-variation-and-total-variation,
         lem-basic-properties-of-total-variation,
         lem-variation-additive-on-subintervals,

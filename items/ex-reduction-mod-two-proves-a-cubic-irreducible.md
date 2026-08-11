@@ -1,7 +1,7 @@
 ---
 id: ex-reduction-mod-two-proves-a-cubic-irreducible
 kind: example
-title: 'Reduction modulo 2 proves x^3+17x+391 irreducible over Q'
+title: 'Reduction modulo $2$ proves $x^3+17x+391$ irreducible over $\mathbb Q$'
 status: published
 origin: session
 provenance:

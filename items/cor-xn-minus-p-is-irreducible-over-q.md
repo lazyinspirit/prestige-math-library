@@ -1,7 +1,7 @@
 ---
 id: cor-xn-minus-p-is-irreducible-over-q
 kind: corollary
-title: 'For every prime p and positive n, x^n-p is irreducible over Q'
+title: 'For every prime $p$ and positive $n$, $x^n-p$ is irreducible over $\mathbb Q$'
 status: published
 origin: session
 provenance:

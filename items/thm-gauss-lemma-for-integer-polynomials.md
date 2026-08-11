@@ -1,7 +1,7 @@
 ---
 id: thm-gauss-lemma-for-integer-polynomials
 kind: theorem
-title: 'Gauss lemma: primitive factorisations over Q can be cleared to primitive factorisations over Z'
+title: 'Gauss lemma: primitive factorisations over $\mathbb Q$ can be cleared to primitive factorisations over $\mathbb Z$'
 status: published
 origin: session
 provenance:

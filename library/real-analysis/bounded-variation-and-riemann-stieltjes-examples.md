@@ -1,7 +1,7 @@
 ---
 page: bounded-variation-and-riemann-stieltjes-examples
 title: "Bounded Variation and the Riemann–Stieltjes Integral: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-absolute-value-lipschitz-not-c1,
            ex-square-root-ac-not-lipschitz,

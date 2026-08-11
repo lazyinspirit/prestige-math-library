@@ -1,7 +1,7 @@
 ---
 page: categories-functors-and-natural-transformations-examples
 title: "Categories, Functors and Natural Transformations — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-underlying-set-and-forgetful-functors,
            ex-free-group-and-free-module-functors,

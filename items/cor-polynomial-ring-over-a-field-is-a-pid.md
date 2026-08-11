@@ -1,7 +1,7 @@
 ---
 id: cor-polynomial-ring-over-a-field-is-a-pid
 kind: corollary
-title: 'For every field F, F[x] is a principal ideal domain'
+title: 'For every field $F$, $F[x]$ is a principal ideal domain'
 status: published
 origin: session
 provenance:

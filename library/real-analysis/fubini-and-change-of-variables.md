@@ -1,7 +1,7 @@
 ---
 page: fubini-and-change-of-variables
 title: "Fubini and Change of Variables"
-status: draft
+status: published
 items: [def-sections-and-iterated-riemann-integrals,
         lem-product-grid-bounds-for-section-integrals,
         thm-riemann-fubini-on-product-rectangles,

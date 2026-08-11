@@ -1,7 +1,7 @@
 ---
 id: thm-polynomial-quotient-is-a-field-iff-irreducible
 kind: theorem
-title: 'For a nonconstant p in F[x], the ideal (p) is maximal and F[x]/(p) is a field exactly when p is irreducible'
+title: 'For a nonconstant $p$ in $F[x]$, the ideal $(p)$ is maximal and $F[x]/(p)$ is a field exactly when $p$ is irreducible'
 status: published
 origin: session
 provenance:

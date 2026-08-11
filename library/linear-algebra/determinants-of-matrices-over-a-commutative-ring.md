@@ -1,7 +1,7 @@
 ---
 page: determinants-of-matrices-over-a-commutative-ring
 title: "Determinants of Matrices over a Commutative Ring"
-status: draft
+status: published
 items: [def-matrices-over-a-commutative-ring,
         def-ring-matrix-product-identity-and-transpose,
         thm-ring-matrix-arithmetic-laws,

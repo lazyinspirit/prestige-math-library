@@ -1,7 +1,7 @@
 ---
 page: polynomial-rings-and-roots-examples
 title: 'Polynomial Rings and Roots: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-polynomial-arithmetic-by-convolution,
            ex-polynomial-long-division-and-gcd,

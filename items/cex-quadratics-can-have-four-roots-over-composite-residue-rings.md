@@ -1,7 +1,7 @@
 ---
 id: cex-quadratics-can-have-four-roots-over-composite-residue-rings
 kind: counterexample
-title: 'Quadratics can have four roots over Z/6 and Z/8'
+title: 'Quadratics can have four roots over $\mathbb Z/6$ and $\mathbb Z/8$'
 status: published
 origin: session
 provenance:

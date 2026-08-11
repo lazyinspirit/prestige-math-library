@@ -1,7 +1,7 @@
 ---
 page: improper-integrals-examples
 title: "Improper Integrals: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-principal-value-of-one-over-x,
            ex-conditionally-convergent-step-function-integral,

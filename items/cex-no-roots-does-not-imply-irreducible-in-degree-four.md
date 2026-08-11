@@ -1,7 +1,7 @@
 ---
 id: cex-no-roots-does-not-imply-irreducible-in-degree-four
 kind: counterexample
-title: 'A degree-four polynomial can be reducible over Q without having a rational root'
+title: 'A degree-four polynomial can be reducible over $\mathbb Q$ without having a rational root'
 status: published
 origin: session
 provenance:

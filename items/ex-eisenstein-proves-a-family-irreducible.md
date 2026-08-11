@@ -1,7 +1,7 @@
 ---
 id: ex-eisenstein-proves-a-family-irreducible
 kind: example
-title: 'Eisenstein proves x^n-2 irreducible over Q for every positive n'
+title: 'Eisenstein proves $x^n-2$ irreducible over $\mathbb Q$ for every positive $n$'
 status: published
 origin: session
 provenance:

@@ -44,6 +44,6 @@ $$\det A=a_{00}a_{11}a_{22}+a_{10}a_{21}a_{02}+a_{20}a_{01}a_{12}-a_{10}a_{01}a_
 
 **Proof technique:** direct.
 
-1.1 The even permutations in one-line notation are $(0,1,2)$, $(1,2,0)$ and $(2,0,1)$; the odd ones are $(1,0,2)$, $(2,1,0)$ and $(0,2,1)$. These are all six permutations. [L1, L2, L3]
+1.1 The even permutations in one-line notation are $[0,1,2]$, $[1,2,0]$ and $[2,0,1]$; the odd ones are $[1,0,2]$, $[2,1,0]$ and $[0,2,1]$. These are all six permutations. [L1, L2, L3]
 
 2.1 Substitution yields the displayed six terms. For $A=\begin{pmatrix}1&2&3\\0&1&4\\5&6&0\end{pmatrix}$ they give $0+0+40-0-15-24=1$, a concrete check of the signs. [step 1.1, algebra] ∎

@@ -1,7 +1,7 @@
 ---
 page: gaussian-elimination-and-row-reduction
 title: "Gaussian Elimination, Elementary Matrices and Reduced Row Echelon Form"
-status: draft
+status: published
 items: [def-elementary-row-operations-and-row-equivalence,
         lem-elementary-row-operations-are-reversible,
         def-elementary-matrix,

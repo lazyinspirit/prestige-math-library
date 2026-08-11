@@ -1,7 +1,7 @@
 ---
 page: ramsey-theory
 title: "Ramsey Theory"
-status: draft
+status: published
 items: [def-ramsey-colouring-and-arrow-notation,
         lem-two-colour-ramsey-arrow-recursion,
         thm-finite-graph-ramsey-binomial-bound,

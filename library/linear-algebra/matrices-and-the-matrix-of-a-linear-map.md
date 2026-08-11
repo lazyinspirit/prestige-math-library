@@ -1,7 +1,7 @@
 ---
 page: matrices-and-the-matrix-of-a-linear-map
 title: 'Matrices, the Matrix of a Linear Map, and Change of Basis'
-status: draft
+status: published
 items: [def-matrix-product-and-identity-matrix,
         thm-matrix-multiplication-laws,
         cor-square-matrices-form-a-ring,

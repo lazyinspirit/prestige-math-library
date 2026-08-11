@@ -1,7 +1,7 @@
 ---
 id: thm-polynomial-ring-is-a-commutative-ring
 kind: theorem
-title: 'Polynomial convolution makes R[x] a commutative ring containing R as its constant subring'
+title: 'Polynomial convolution makes $R[x]$ a commutative ring containing $R$ as its constant subring'
 status: published
 origin: session
 provenance:

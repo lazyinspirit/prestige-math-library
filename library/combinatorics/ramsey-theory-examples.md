@@ -1,7 +1,7 @@
 ---
 page: ramsey-theory-examples
 title: "Ramsey Theory — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-r-three-three-both-bounds,
            ex-w-three-two-equals-nine,

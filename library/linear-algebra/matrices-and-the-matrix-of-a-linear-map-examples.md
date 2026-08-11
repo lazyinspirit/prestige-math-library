@@ -1,7 +1,7 @@
 ---
 page: matrices-and-the-matrix-of-a-linear-map-examples
 title: 'Matrices and Change of Basis: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-matrix-of-a-map-between-coordinate-spaces,
            ex-one-operator-in-two-ordered-bases,

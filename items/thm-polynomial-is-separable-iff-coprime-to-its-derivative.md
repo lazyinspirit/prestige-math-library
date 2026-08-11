@@ -1,7 +1,7 @@
 ---
 id: thm-polynomial-is-separable-iff-coprime-to-its-derivative
 kind: theorem
-title: 'A nonzero polynomial over a field is separable exactly when its gcd with its derivative is 1'
+title: 'A nonzero polynomial over a field is separable exactly when its gcd with its derivative is $1$'
 status: published
 origin: session
 provenance:

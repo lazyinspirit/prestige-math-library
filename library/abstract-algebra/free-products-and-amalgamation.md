@@ -1,7 +1,7 @@
 ---
 page: free-products-and-amalgamation
 title: "Free Products and Amalgamation"
-status: draft
+status: published
 items: [def-free-product-of-a-family-of-groups, def-reduced-syllable-word-in-a-family-of-groups, lem-factor-elements-act-on-reduced-syllable-words, thm-reduced-syllable-words-form-the-free-product, thm-normal-form-for-free-products, cor-torsion-in-a-free-product-is-conjugate-into-a-factor, cor-center-of-a-free-product-is-trivial, cor-free-product-factor-maps-are-injective, cor-free-products-are-unique-up-to-unique-isomorphism, cor-each-factor-is-a-retract-of-a-free-product, thm-presentation-of-a-free-product, thm-free-product-of-free-groups-on-disjoint-bases, cor-free-product-of-infinite-cyclic-groups-is-free, cor-z-free-product-z-is-free-group-of-rank-two, def-pushout-of-group-homomorphisms, thm-group-pushout-as-an-amalgamated-quotient, def-free-product-with-amalgamation, thm-presentation-of-a-free-product-with-amalgamation, def-normal-form-data-for-amalgamated-free-products, lem-factor-elements-act-on-amalgamated-normal-words, thm-normal-form-for-free-products-with-amalgamation, cor-factors-embed-in-a-free-product-with-amalgamation, cor-factor-images-intersect-in-the-amalgamated-subgroup, cor-trivial-amalgamation-is-the-free-product, prop-kernels-of-amalgamating-maps-collapse-in-the-pushout, cor-amalgamation-along-an-isomorphism-recovers-the-other-factor, rem-free-product-and-amalgamation-conventions]
 examples: []
 ---

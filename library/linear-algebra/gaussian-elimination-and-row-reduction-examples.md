@@ -1,7 +1,7 @@
 ---
 page: gaussian-elimination-and-row-reduction-examples
 title: "Gaussian Elimination and Row Reduction: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-row-reduction-with-a-unique-solution,
            ex-inconsistent-system-detected-by-a-pivot,

@@ -1,7 +1,7 @@
 ---
 id: thm-reduction-mod-prime-irreducibility-test
 kind: theorem
-title: 'Irreducibility after reduction modulo a prime implies irreducibility over Q when the leading coefficient survives'
+title: 'Irreducibility after reduction modulo a prime implies irreducibility over $\mathbb Q$ when the leading coefficient survives'
 status: published
 origin: session
 provenance:

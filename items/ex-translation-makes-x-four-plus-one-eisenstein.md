@@ -1,7 +1,7 @@
 ---
 id: ex-translation-makes-x-four-plus-one-eisenstein
 kind: example
-title: 'Translation turns x^4+1 into an Eisenstein polynomial'
+title: 'Translation turns $x^4+1$ into an Eisenstein polynomial'
 status: published
 origin: session
 provenance:

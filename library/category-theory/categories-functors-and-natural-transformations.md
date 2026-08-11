@@ -1,7 +1,7 @@
 ---
 page: categories-functors-and-natural-transformations
 title: "Categories, Functors and Natural Transformations"
-status: draft
+status: published
 items: [rem-category-theory-class-and-size-conventions,
         def-category,
         def-small-locally-small-and-large-category,

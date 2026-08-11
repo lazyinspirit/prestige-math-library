@@ -1,7 +1,7 @@
 ---
 page: plane-graphs-euler-and-the-five-colour-theorem-examples
 title: "Plane Graphs, Euler's Formula and the Five Colour Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-euler-formula-on-a-tree-cycle-and-k-four,
            cex-k-four-is-planar-but-not-three-colourable,

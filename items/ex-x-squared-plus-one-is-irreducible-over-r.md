@@ -1,7 +1,7 @@
 ---
 id: ex-x-squared-plus-one-is-irreducible-over-r
 kind: example
-title: 'The polynomial x^2+1 is irreducible over R'
+title: 'The polynomial $x^2+1$ is irreducible over $\mathbb R$'
 status: published
 origin: session
 provenance:

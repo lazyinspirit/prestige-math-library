@@ -1,7 +1,7 @@
 ---
 id: cex-polynomial-division-fails-for-a-nonunit-leading-coefficient
 kind: counterexample
-title: "Division with a degree-small remainder can fail over Z when the divisor's leading coefficient is not a unit"
+title: 'Division with a degree-small remainder can fail over $\mathbb Z$ when the leading coefficient of the divisor is not a unit'
 status: published
 origin: session
 provenance:

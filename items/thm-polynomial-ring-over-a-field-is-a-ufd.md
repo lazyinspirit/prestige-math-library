@@ -1,7 +1,7 @@
 ---
 id: thm-polynomial-ring-over-a-field-is-a-ufd
 kind: theorem
-title: 'For every field F, F[x] is a unique factorisation domain'
+title: 'For every field $F$, $F[x]$ is a unique factorisation domain'
 status: published
 origin: session
 provenance:

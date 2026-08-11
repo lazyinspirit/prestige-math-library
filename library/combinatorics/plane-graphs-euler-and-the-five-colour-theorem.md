@@ -1,7 +1,7 @@
 ---
 page: plane-graphs-euler-and-the-five-colour-theorem
 title: "Plane Graphs, Euler's Formula and the Five Colour Theorem"
-status: draft
+status: published
 items: [def-polygonal-arc-and-polygon,
         def-plane-region-and-frontier,
         lem-polygonal-ray-general-position,

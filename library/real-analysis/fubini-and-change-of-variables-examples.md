@@ -1,7 +1,7 @@
 ---
 page: fubini-and-change-of-variables-examples
 title: "Fubini and Change of Variables: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-riemann-integrable-function-with-a-nonintegrable-section,
            cex-one-existing-iterated-integral-does-not-give-riemann-integrability,

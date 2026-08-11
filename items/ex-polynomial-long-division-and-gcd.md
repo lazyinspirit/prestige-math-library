@@ -1,7 +1,7 @@
 ---
 id: ex-polynomial-long-division-and-gcd
 kind: example
-title: 'Long division, the Euclidean algorithm and a Bézout identity in Q[x]'
+title: 'Long division, the Euclidean algorithm and a Bézout identity in $\mathbb Q[x]$'
 status: published
 origin: session
 provenance:

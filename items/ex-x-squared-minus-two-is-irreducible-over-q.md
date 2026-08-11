@@ -1,7 +1,7 @@
 ---
 id: ex-x-squared-minus-two-is-irreducible-over-q
 kind: example
-title: 'The polynomial x^2-2 is irreducible over Q'
+title: 'The polynomial $x^2-2$ is irreducible over $\mathbb Q$'
 status: published
 origin: session
 provenance:

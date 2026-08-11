@@ -1,7 +1,7 @@
 ---
 id: thm-universal-property-of-a-polynomial-ring
 kind: theorem
-title: 'Universal property of R[x]: a coefficient homomorphism and the image of x determine a unique ring homomorphism'
+title: 'Universal property of $R[x]$: a coefficient homomorphism and the image of $x$ determine a unique ring homomorphism'
 status: published
 origin: session
 provenance:

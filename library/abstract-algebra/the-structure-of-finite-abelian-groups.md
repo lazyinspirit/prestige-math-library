@@ -1,7 +1,7 @@
 ---
 page: the-structure-of-finite-abelian-groups
 title: "The Fundamental Theorem of Finite Abelian Groups"
-status: draft
+status: published
 items: [def-internal-direct-product-of-subgroups, thm-internal-direct-product-recognition, def-p-primary-component-of-an-abelian-group, thm-cauchy-for-finite-abelian-groups, thm-p-primary-component-of-a-finite-abelian-group, thm-primary-decomposition-of-a-finite-abelian-group, lem-unique-subgroup-of-order-p-forces-cyclicity, thm-maximal-order-cyclic-subgroup-splits-in-a-finite-abelian-p-group, thm-cyclic-decomposition-of-finite-abelian-p-groups, def-elementary-divisor-data-for-a-finite-abelian-group, lem-successive-p-multiple-quotients-recover-elementary-divisors, thm-fundamental-theorem-of-finite-abelian-groups-elementary-divisor-form, def-invariant-factor-data-for-a-finite-abelian-group, lem-elementary-divisors-regroup-into-invariant-factors, thm-fundamental-theorem-of-finite-abelian-groups-invariant-factor-form, cor-converse-of-lagrange-for-finite-abelian-groups, def-exponent-of-a-finite-group, cor-order-and-exponent-from-invariant-factors, cor-finite-abelian-group-cyclic-iff-one-invariant-factor, def-indecomposable-finite-abelian-group, thm-finite-abelian-groups-decompose-into-indecomposable-subgroups, cor-indecomposable-finite-abelian-groups-are-cyclic-prime-power, def-partition-of-a-positive-integer, cor-abelian-p-groups-of-order-pn-are-counted-by-partitions, cor-number-of-abelian-groups-of-a-given-finite-order, def-squarefree-positive-integer, cor-all-abelian-groups-of-order-n-cyclic-iff-n-squarefree]
 examples: []
 ---

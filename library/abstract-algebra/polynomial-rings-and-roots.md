@@ -1,7 +1,7 @@
 ---
 page: polynomial-rings-and-roots
 title: 'Polynomial Rings, the Division Algorithm and Roots'
-status: draft
+status: published
 items: [def-polynomial-ring-over-a-commutative-ring,
         lem-polynomial-operations-preserve-finite-support,
         thm-polynomial-ring-is-a-commutative-ring,

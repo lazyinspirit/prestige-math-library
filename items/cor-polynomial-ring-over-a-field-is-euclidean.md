@@ -1,7 +1,7 @@
 ---
 id: cor-polynomial-ring-over-a-field-is-euclidean
 kind: corollary
-title: 'For every field F, F[x] is a Euclidean domain with degree as Euclidean function'
+title: 'For every field $F$, $F[x]$ is a Euclidean domain with degree as Euclidean function'
 status: published
 origin: session
 provenance:

@@ -1,7 +1,7 @@
 ---
 page: determinants-of-matrices-over-a-commutative-ring-examples
 title: "Determinants over a Ring: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-two-by-two-determinant-formula,
            ex-three-by-three-leibniz-expansion,
