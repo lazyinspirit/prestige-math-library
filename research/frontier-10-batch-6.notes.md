@@ -568,3 +568,52 @@ All 76 assigned items, all 63 proofs/verifications/refutations, all four page fi
 The independent batch-6 read is complete. The required per-item report is `research/frontier-10-reader-6.findings.md`: 76/76 items and 63/63 proof-bearing items are accounted for. It proposes six fatal findings and eight nonfatal findings for Alpha's adjudication. Sixteen batch item files were repaired; no item was added, deleted, renamed, or rehomed, and no page prose changed. The batch manifest, plan, proof contracts, and the newly exposed `limits-of-real-functions` prerequisite were reconciled.
 
 Post-repair scoped receipts are green: precheck 16/16 changed proof-bearing files; rendercheck 16/16; prosecheck zero errors and zero warnings; strict proof contract 63/63 with zero errors and warnings; content policy 76/76 with zero errors and warnings; coverage 95 headings with zero errors and warnings; plan validation exit 0; depcheck exit 0; and item-frontmatter/batch-manifest/plan equality 76/76. External source URLs remained inaccessible in this runtime, so the limitation recorded in the findings file still applies.
+
+## 17. Owner-directed post-step-10 triangulation addition
+
+The owner-directed addition is `lem-plane-triangulation-is-connected`: every
+plane triangulation with at least three vertices is connected. The statement is
+`ai-altered` because it combines the exact cited Diestel chain—Proposition
+4.2.8 (triangulations and maximal plane graphs), Proposition 4.4.1 (maximal
+plane graphs are maximally planar), and Corollary 4.4.7 (maximal planar graphs
+of order at least four are three-connected)—with the explicitly checked
+three-vertex endpoint. The proof is `ai-generated`: it reconstructs the
+owner-requested face-boundary argument from the page's component, region,
+polygonal-connectivity, and edge-face-incidence toolkit rather than copying a
+source proof.
+
+The contradiction proof chooses one component $C$ and the union $H$ of the
+others, places the connected drawing of $C$ in a face $h$ of $H$, and follows a
+polygonal path in $h$ from a local boundary sector at $H$ to its first contact
+with $C$. The resulting face of the full graph has a boundary subgraph meeting
+two components and is therefore disconnected, contradicting that a
+triangulation bounds every face by a triangle. The proof explicitly disposes
+of the order-three endpoint, isolated or one-edge component degeneracies,
+nonempty finite choices, and both bounded and unbounded faces. Its remaining
+five standard proof-contract boundaries are specifically not applicable.
+
+The two consumers were synchronized. In
+`cor-planar-simple-graph-edge-bound`, the equality clause now says that every
+plane triangulation with at least three vertices has equality; [L5] cites the
+new connectedness lemma, and proof step 3.1 uses it before Euler's formula. In
+`prop-maximally-planar-edge-characterisation`, [L1] now quotes that broadened
+source statement exactly. Their existing provenance rationales remain true:
+the edge bound and maximal-planarity characterization are
+`literature-derived`, while their adapted proofs are `ai-altered`.
+
+The batch now contains 77 items, with 41 items on plane graphs A, so the
+60-item split boundary is not approached. No item was dropped, renamed, or
+merged. The 97 harvested headings have 70 `included`, 1
+`already-published`, 16 `inline`, 7 `deferred`, and 3 `out-of-scope`
+dispositions. Direct included-heading yield is 70 of 97, or 72.2 percent; the
+new lemma has both an included canonical row and a real inline Diestel
+Corollary 4.4.7 source row. The strict proof-contract scope now contains 64
+proof-bearing items and 512 standard boundary dispositions.
+
+Post-addition validation is green. Repository-wide precheck passes 2,677
+proof-bearing files; dependency checking covers 3,481 items on 210 pages with
+no cycles, unresolved references, or draft items on published pages; and
+rendercheck passes 3,691 files. The scoped content-policy check passes all 77
+items, the coverage checklist passes all 97 harvested rows, and the strict
+proof contract passes 64 of 64 items, each with zero errors and zero warnings.
+The aggregate gates wrapper was not run, as directed. There is no blocker.

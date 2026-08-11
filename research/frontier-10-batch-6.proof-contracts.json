@@ -41,6 +41,7 @@
     "thm-euler-formula-for-connected-plane-graphs",
     "cor-euler-formula-for-disconnected-plane-graphs",
     "lem-plane-face-handshake-by-girth",
+    "lem-plane-triangulation-is-connected",
     "cor-planar-simple-graph-edge-bound",
     "cor-triangle-free-planar-edge-bound",
     "cor-planar-graph-has-low-degree-vertex",
@@ -3999,6 +4000,184 @@
         "notes": "Risk high (score 5: 5 declared dependencies; 2 cited facts; boundary-sensitive language). Reader: independent step-6 reader for batch 6. Refuter: refuter cluster `w2-graphs-ramsey`. Alpha disposition: Read adversarially by that refuter and by the independent step-6 reader for this batch; neither surfaced a concrete false claim, unlicensed inference, missing hypothesis, scope error or inaccurate citation against the current text. Alpha accepts the item on that evidence."
       }
     },
+    "lem-plane-triangulation-is-connected": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-connected-components-partition-the-vertex-set",
+          "source_section": "Statement",
+          "quote": "nonempty, cover $V(G)$, and any two are equal or disjoint.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-plane-graph-face-and-boundary",
+          "source_section": "Definition",
+          "quote": "A **face** is a region of the complement of the drawing",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-plane-region-and-frontier",
+          "source_section": "Definition",
+          "quote": "A **region of the complement of $A$** is a connected component of the subspace $\\mathbb R^2\\setminus A$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-components-of-open-subsets-of-rn-are-polygonally-connected",
+          "source_section": "Statement",
+          "quote": "Every connected component of an open subset $U\\subseteq\\mathbb{R}^n$ is open in $\\mathbb{R}^n$ and polygonally connected.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-plane-edge-face-incidence",
+          "source_section": "Statement",
+          "quote": "if the relative interior of an edge meets the frontier of a face, then the whole edge lies in that frontier.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-maximal-plane-and-maximally-planar-graph",
+          "source_section": "Definition",
+          "quote": "It is a **plane triangulation** if every face, including the unbounded face, has boundary a triangle",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume $G$ is disconnected, choose a component $C$, and let $H$ be the nonempty union of all other components.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The polygonal drawing of the connected graph $C$ is connected and disjoint from $H$, so it lies in one face $h$ of $H$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A first-contact segment from $C$ to $H$ and [L4] produce a boundary vertex $y$ of $h$ in $H$; a local sector at $y$ lying in $h$ is contained in a face $f$ of $G$ whose boundary contains $y$.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L2",
+            "L4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "A polygonal path in $h$ from that sector to $C$, stopped at its first point $z$ on $C$, stays in $f$ before $z$ and places a vertex or whole edge of $C$ in the boundary of $f$.",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "L2",
+            "L3",
+            "L4",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The boundary subgraph of $f$ meets the distinct components $C$ and $H$ and has no path between them, so it is disconnected.",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Triangulation makes that boundary subgraph a connected triangle, a contradiction; the same argument covers the unbounded face and order three.",
+          "step": "6.1",
+          "inputs": [
+            "5.1",
+            "F1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The lemma assumes at least three vertices."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero vertices are outside the stated range."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "One vertex is outside the stated range."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 6.1 allow isolated vertices, one-edge components, and any other disconnected component sizes."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 explicitly covers the smallest permitted order of three."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 3.1 and 4.1 choose from fixed nonempty finite-component, local-sector, and point sets; no infinite choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a one-directional implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Connected plane graphs need not be triangulations, and no converse is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
     "cor-planar-simple-graph-edge-bound": {
       "citations": [
         {
@@ -4015,7 +4194,7 @@
           "fact": "L2",
           "source": "lem-plane-face-handshake-by-girth",
           "source_section": "Statement",
-          "quote": "Let $G$ be a connected plane graph. If every facial boundary walk has length at least a positive natural $g$, then",
+          "quote": "Consequently, if every facial boundary walk has length at least a positive natural $g$, then",
           "uses": [
             "1.1",
             "1.2"
@@ -4037,6 +4216,15 @@
           "quote": "Let $X$ and $Y$ be finite sets and let $R \\subseteq X \\times Y$, with row fibres $R_x$ and column fibres $R^{y}$ as in [[def-a-finite-incidence-relation-and-its-fibres]].",
           "uses": [
             "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-plane-triangulation-is-connected",
+          "source_section": "Statement",
+          "quote": "Every plane triangulation with at least three vertices",
+          "uses": [
+            "3.1"
           ]
         }
       ],
@@ -4070,10 +4258,11 @@
         },
         {
           "id": "step-3-1",
-          "claim": "Let the graph be a connected plane triangulation, so every face has boundary a triangle and $\\ell(f)=3$ for every face. Then step 1.2 reads $3|F|=2m$, and [L1] gives $|F|=2-n+m$, so $3(2-n+m)=2m$ and $m=3n-6$.",
+          "claim": "Let the graph be a plane triangulation with $n\\ge3$ vertices. By [L5] it is connected, and every face has boundary a triangle, so $\\ell(f)=3$ for every face. Then step 1.2 reads $3|F|=2m$, and [L1] gives $|F|=2-n+m$, so $3(2-n+m)=2m$ and $m=3n-6$.",
           "inputs": [
             "1.2",
-            "L1"
+            "L1",
+            "L5"
           ],
           "step": "3.1"
         }
@@ -4113,13 +4302,13 @@
         {
           "case": "iff-forward",
           "status": "checked",
-          "evidence": "Step 3.1 proves that a connected plane triangulation attains the bound."
+          "evidence": "Step 3.1 proves that every plane triangulation of order at least three is connected and attains the bound."
         },
         {
           "case": "iff-reverse",
           "status": "not_applicable",
           "evidence": "Step 3.1 proves equality forces every facial boundary length to be three in the applicable maximal embedding.",
-          "reason": "The equality clause is one directional: a connected plane triangulation has $m=3n-6$. The converse is prop-maximally-planar-edge-characterisation, not this corollary."
+          "reason": "The equality clause is one directional: a plane triangulation of order at least three has $m=3n-6$. The converse is prop-maximally-planar-edge-characterisation, not this corollary."
         }
       ],
       "finite_smoke": [],
@@ -4144,7 +4333,7 @@
           "fact": "L2",
           "source": "lem-plane-face-handshake-by-girth",
           "source_section": "Statement",
-          "quote": "Let $G$ be a connected plane graph. If every facial boundary walk has length at least a positive natural $g$, then",
+          "quote": "Consequently, if every facial boundary walk has length at least a positive natural $g$, then",
           "uses": [
             "2.1"
           ]
@@ -4230,7 +4419,7 @@
           "fact": "L1",
           "source": "cor-planar-simple-graph-edge-bound",
           "source_section": "Statement",
-          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$.",
+          "quote": "Every simple planar graph with $n\\ge3$ vertices and $m$ edges satisfies $m\\le3n-6$. Every plane triangulation with at least three vertices has equality.",
           "uses": [
             "2.1"
           ]
@@ -4518,7 +4707,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "If $G$ is maximally planar, every plane embedding is maximal: otherwise an edge added in that embedding would give a larger planar abstract graph. By [L2] it is a triangulation, and [L1] gives $|E(G)|=3n-6$.",
+          "claim": "If $G$ is two-connected and maximally planar, every plane embedding is maximal: otherwise an edge added in that embedding would give a larger planar abstract graph. By [L2] it is a triangulation, and [L1] gives $|E(G)|=3n-6$.",
           "step": "1.1",
           "inputs": [
             "L2",
@@ -4536,7 +4725,7 @@
         },
         {
           "id": "step-3-1",
-          "claim": "The two implications prove the equivalence for every $n\\ge3$.",
+          "claim": "The edge-count implication holds for every $n\\ge3$, and the reverse implication from maximal planarity holds when $G$ is two-connected, proving the stated equivalence there.",
           "step": "3.1",
           "inputs": [
             "1.1",

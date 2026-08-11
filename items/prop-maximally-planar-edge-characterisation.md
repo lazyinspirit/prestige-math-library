@@ -37,7 +37,7 @@ hypothesis is not established here.
 
 **Given:** Such a planar graph $G$.
 
-[L1] Every simple planar graph with $n\ge3$ vertices has at most $3n-6$ edges, with equality for a connected plane triangulation ([[cor-planar-simple-graph-edge-bound]]).
+[L1] Every simple planar graph with $n\ge3$ vertices and $m$ edges satisfies $m\le3n-6$. Every plane triangulation with at least three vertices has equality ([[cor-planar-simple-graph-edge-bound]]).
 
 [L2] A two-connected plane graph of order at least three is maximal exactly when every face is triangular ([[prop-maximal-plane-triangulation-characterisation]]).
 
