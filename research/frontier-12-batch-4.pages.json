@@ -256,8 +256,8 @@
     "companion": "line-integrals-and-the-gradient-theorem-examples",
     "requires": [
       "the-fundamental-theorems-of-calculus",
-      "the-total-derivative",
-      "arc-length-and-rectifiable-curves"
+      "arc-length-and-rectifiable-curves",
+      "fubini-and-change-of-variables"
     ],
     "items": [
       {
@@ -494,6 +494,95 @@
           "thm-exact-c1-vector-fields-are-closed",
           "thm-poincare-lemma-for-star-shaped-domains",
           "thm-conservative-path-independent-and-zero-loop-equivalence"
+        ]
+      },
+      {
+        "id": "def-type-i-type-ii-and-elementary-green-regions",
+        "kind": "definition",
+        "title": "Type I, Type II, and elementary regions for Green's theorem",
+        "strategy": "Define a compact Type I region as the set between continuous piecewise-C1 lower and upper graphs on [a,b], with strict separation in the interior and the possible vertical endpoint arcs included; define Type II by continuous piecewise-C1 left and right graphs over [c,d]. Call a region elementary for Green's theorem when it admits both descriptions. Define a finite elementary Green region as a nonempty finite union of elementary pieces with pairwise disjoint interiors, whose pairwise intersections are finite unions of complete shared boundary arcs and endpoints, and require every positive-length internal arc to belong to exactly two pieces with opposite induced orientations. This is explicit geometric data, not the interior supplied by an arbitrary Jordan curve.",
+        "deps": [
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations",
+          "thm-fubini-over-a-region-between-continuous-graphs"
+        ]
+      },
+      {
+        "id": "def-positive-orientation-for-elementary-region-boundaries",
+        "kind": "definition",
+        "title": "Positive orientation of elementary-region boundaries",
+        "strategy": "For a Type I piece orient the lower graph from left to right, the right endpoint arc upward, the upper graph from right to left, and the left endpoint arc downward; equivalently the region remains locally on the left. Give the analogous Type II traversal. For a finite elementary union, delete every shared arc together with its oppositely oriented copy and orient each surviving boundary arc as inherited from its piece. Zero-length arcs are omitted. This defines the positive boundary combinatorially without invoking the Jordan curve theorem.",
+        "deps": [
+          "def-type-i-type-ii-and-elementary-green-regions",
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations"
+        ]
+      },
+      {
+        "id": "lem-green-type-i-boundary-identity",
+        "kind": "lemma",
+        "title": "The Type I boundary identity for the P dx term",
+        "strategy": "Let D be a Type I region between piecewise-C1 graphs alpha and beta and let P be C1 on an open neighbourhood of D. Parametrize the positively oriented lower, right, upper, and left arcs. The vertical arcs contribute zero to P dx, and reversal gives the upper arc the opposite sign. Fubini over the graph-bounded region followed by one-variable Newton-Leibniz in y proves integral over partial D of P dx equals minus the double integral over D of partial_y P. Treat coincident endpoint arcs and piecewise breakpoints explicitly.",
+        "deps": [
+          "def-positive-orientation-for-elementary-region-boundaries",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "thm-line-integrals-under-reversal-and-concatenation",
+          "thm-fubini-over-a-region-between-continuous-graphs",
+          "thm-newton-leibniz-with-interior-derivative"
+        ]
+      },
+      {
+        "id": "lem-green-type-ii-boundary-identity",
+        "kind": "lemma",
+        "title": "The Type II boundary identity for the Q dy term",
+        "strategy": "Let D be a Type II region between piecewise-C1 left and right graphs and let Q be C1 on an open neighbourhood of D. Parametrize the positive boundary so the horizontal arcs contribute zero to Q dy, while the right and left graph arcs carry opposite directions. Apply the symmetric-coordinate form of Jordan-Fubini and Newton-Leibniz in x to obtain integral over partial D of Q dy equals the double integral over D of partial_x Q. Check coincident endpoint arcs and all piecewise-C1 joins.",
+        "deps": [
+          "def-positive-orientation-for-elementary-region-boundaries",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "thm-line-integrals-under-reversal-and-concatenation",
+          "thm-jordan-fubini-by-sections",
+          "thm-newton-leibniz-with-interior-derivative"
+        ]
+      },
+      {
+        "id": "lem-green-boundary-cancellation-under-finite-gluing",
+        "kind": "lemma",
+        "title": "Shared boundary arcs cancel when finitely many elementary regions are glued",
+        "strategy": "For a nonempty finite elementary decomposition, sum the positively oriented boundary integrals of a continuous planar field over all pieces. Every shared arc occurs twice with opposite orientations, so reversal cancels those two line integrals; endpoints contribute nothing, leaving exactly the induced positively oriented boundary of the union. For a continuous scalar integrand, use zero extensions to one bounding rectangle, linearity of the multidimensional integral, and the content-zero shared graph arcs to prove that the piece integrals sum to the integral over the union. Include the one-piece case and exclude overlapping interiors by hypothesis.",
+        "deps": [
+          "def-positive-orientation-for-elementary-region-boundaries",
+          "thm-line-integrals-under-reversal-and-concatenation",
+          "def-riemann-integral-over-a-jordan-set",
+          "thm-multidimensional-integral-properties",
+          "thm-graphs-of-continuous-functions-have-content-zero"
+        ]
+      },
+      {
+        "id": "thm-greens-theorem-for-finite-unions-of-elementary-regions",
+        "kind": "theorem",
+        "title": "Green's theorem for finite unions of elementary regions",
+        "strategy": "Let D be a finite elementary Green region with its boundary positively oriented by the preceding definition, and let P,Q be C1 on an open neighbourhood of D. On each elementary piece, add the Type I identity for P dx to the Type II identity for Q dy. Sum over the finite decomposition, use the gluing lemma for cancellation of internal arcs and additivity of the region integral, and conclude that the boundary integral of P dx+Q dy equals the double integral of partial_x Q minus partial_y P. State the supplied elementary decomposition as part of the hypothesis; make no claim for an arbitrary Jordan domain.",
+        "deps": [
+          "lem-green-type-i-boundary-identity",
+          "lem-green-type-ii-boundary-identity",
+          "lem-green-boundary-cancellation-under-finite-gluing"
+        ]
+      },
+      {
+        "id": "cor-area-as-a-line-integral-for-elementary-regions",
+        "kind": "corollary",
+        "title": "Area of an elementary Green region as a boundary line integral",
+        "strategy": "Apply Green's theorem to P=-y/2 and Q=x/2, whose scalar curl partial_x Q-partial_y P equals one, to obtain cont(D)=one half of the positively oriented boundary integral of x dy-y dx. Also record the equivalent formulas cont(D)=integral x dy=-integral y dx by choosing (P,Q)=(0,x) and (-y,0). The one-piece case is included by the same formula.",
+        "deps": [
+          "thm-greens-theorem-for-finite-unions-of-elementary-regions",
+          "def-riemann-integral-over-a-jordan-set"
+        ]
+      },
+      {
+        "id": "rem-greens-theorem-jordan-domain-limitation",
+        "kind": "remark",
+        "title": "Limitation: arbitrary Jordan domains are not covered by the elementary Green theorem",
+        "strategy": "Record explicitly that the theorem proved here applies only when a Type I-and-Type II elementary decomposition and the stated finite gluing data are supplied. It does not infer an interior or such a decomposition from an arbitrary Jordan curve. The general Jordan-domain form would require the Jordan curve theorem and additional decomposition geometry; the library records the former only as not proved here, so neither is used as a hidden premise.",
+        "deps": [
+          "thm-greens-theorem-for-finite-unions-of-elementary-regions"
         ]
       },
       {

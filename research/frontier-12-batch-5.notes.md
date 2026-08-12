@@ -2,18 +2,22 @@
 
 ## Batch result
 
-The machine scaffold contains 79 items: 65 on the planned A page and 14 on its B page. The A page has 17 definitions, 15 lemmas, 1 proposition, 28 theorems, and 4 corollaries; the B page has 9 examples, 4 counterexamples, and 1 false statement. No B-page item is a dependency of any other item. The proof-contract artifact begins 62 contracts, one for every non-definition scaffold item, including every B-page item.
+The machine scaffold contains 79 items across four page objects: 37 on the finite-probability foundations A page, 8 on its B companion, 28 on the probabilistic-method A page, and 6 on its B companion. In aggregate the A pages have 17 definitions, 15 lemmas, 1 proposition, 28 theorems, and 4 corollaries; the B pages have 9 examples, 4 counterexamples, and 1 false statement. No B-page item is a dependency outside its own page; the one local B-to-B edge remains earlier on the foundations B page. The proof-contract artifact contains 62 contracts, one for every non-definition scaffold item, with `scope` ordered foundations A/B and then method A/B.
 
-The 65-item A page exceeds the binding 60-item ceiling. I therefore **propose a split** rather than dropping results. The exact A cut is after item 37, `cor-relative-variance-positive-probability-bound`: finite probability, expectation, independence, variance, Markov, Chebyshev, Cauchy--Schwarz, and the second-moment inequality form a 37-item foundations page; the existence principles, alteration, random graphs, Chernoff, the Local Lemma, and applications form a 28-item method page. The current machine scaffold preserves the approved step-0 A/B identifiers until the orchestrator adjudicates and changes `plan-spec.json`; it must not be inserted as one 65-item A page.
+Decision D1 is applied at the approved cut after `cor-relative-variance-positive-probability-bound`. Finite probability, expectation, independence, variance, Markov, Chebyshev, Cauchy--Schwarz, and the second-moment inequality form the 37-item foundations page; the existence principles, alteration, random graphs, Chernoff, the Local Lemma, and applications form the 28-item method page. No result was dropped and every previously scaffolded item id is unchanged.
 
-## Exact split proposal for step 3/4
+## Applied split and order plan
 
-1. Order 221: `finite-probability-spaces-and-random-variables`, title **Finite Probability Spaces and Random Variables**, A items 1--37. Proposed `requires`: `the-logarithm-and-general-powers` (whose closure supplies the real, exponential, finite-sum, and set foundations used here).
-2. Order 222: `finite-probability-spaces-and-random-variables-examples`, its B companion, B items 1--8: loaded die, Bayes urns, pairwise-not-mutual independence, equal probabilities without independence, uncorrelated without independence, dependent product expectation, the false independence requirement for linearity, and strictness of the union bound. Proposed `requires`: the foundations A page only.
-3. Order 223: retain `finite-probability-and-the-probabilistic-method`, title **Finite Probability and the Probabilistic Method**, A items 38--65. Proposed `requires`: `finite-probability-spaces-and-random-variables`, `extremal-graph-theory`, and `congruences-and-the-chinese-remainder-theorem`; the last is the exact published route used by the finite strict sum-free proof.
-4. Order 224: retain `finite-probability-and-the-probabilistic-method-examples`, its B companion, B items 9--14: the triangle count, second-moment random-subset calculation, Ramsey calculation, Local-Lemma parameter check, high-girth/high-chromatic ledger, and the threshold-one counterexample. Proposed `requires`: the method A page only.
+1. Order 220.2: `finite-probability-spaces-and-random-variables`, title **Finite Probability Spaces and Random Variables**, A items 1--37. Its sole `requires` entry is `the-logarithm-and-general-powers`, whose closure supplies the real, exponential, finite-sum, and set foundations used here.
+2. Order 220.4: `finite-probability-spaces-and-random-variables-examples`, its B companion, B items 1--8: loaded die, Bayes urns, pairwise-not-mutual independence, equal probabilities without independence, uncorrelated without independence, dependent product expectation, the false independence requirement for linearity, and strictness of the union bound. It requires the foundations A page only.
+3. Order 221: `finite-probability-and-the-probabilistic-method` retains its id, title, and order, with A items 38--65. Its `requires` entries are `finite-probability-spaces-and-random-variables`, `extremal-graph-theory`, and `congruences-and-the-chinese-remainder-theorem`; the last is the exact published route used by the finite strict sum-free proof.
+4. Order 222: `finite-probability-and-the-probabilistic-method-examples` retains its id and order, with B items 9--14: the triangle count, second-moment random-subset calculation, Ramsey calculation, Local-Lemma parameter check, high-girth/high-chromatic ledger, and the threshold-one counterexample. It requires the method A page only.
 
-This inserts two page slots and shifts the present order 223 onward by two. The orchestrator owns that order edit. If the split is approved, step 4 must also divide the single coverage page entry between the two new A ids while retaining at least two independent sources, including a full lecture-note treatment, for each half; all three harvested sources support both halves. The proof-contract `scope` can be divided mechanically at the same A cut and B cut.
+This differs from my proposal because orders 223/224 are occupied by `linear-algebra-methods-in-combinatorics` and its companion; shifting them would cascade through the combinatorics track. The free fractional orders 220.2/220.4 place the foundations pair immediately before the method pair, preserve the method page's order-221 id for its three planned downstream consumers, and require no renumbering or downstream edits. The coverage entry is divided between the two A ids with all three independent lecture-note treatments represented on both halves, and the proof-contract `scope` is divided at the same A and B cuts.
+
+### Seam check
+
+The split creates no forward dependency. No item on orders 220.2 or 220.4 depends on an item on orders 221 or 222. The method A page has 41 direct dependency edges back to foundations A, all licensed by its declared `requires`; method B has 11 direct edges to method A and 10 to foundations A, both inside its prerequisite closure. Foundations B has 21 direct edges to foundations A, and its sole local B-to-B edge points to an earlier item on the same B page. No item needed to move and no dependency citation was weakened.
 
 ### Applyable prose-scaffold amendments
 
@@ -23,8 +27,8 @@ In `research/plan-combinatorics-and-categories.md`, replace the exact block begi
 
 and ending with the `Forward references: NONE.` immediately before `## CB-13.` by two sections, in this order:
 
-1. `## CB-12a. Finite Probability Spaces and Random Variables (order 221, combinatorics)`, with `requires: the-logarithm-and-general-powers (177)`, the first proposed summary below, DEFS equal to foundation definitions 1, 6, 10, 13, 14, 16, 17, 21, 23, 26, and 31, THMS equal to foundation proof-bearing items 2--37, and B/FS/CEX equal to B items 1--8. End with `Forward references: NONE.`
-2. `## CB-12b. Finite Probability and the Probabilistic Method (order 223, combinatorics)`, with `requires: finite-probability-spaces-and-random-variables (221), extremal-graph-theory (219), congruences-and-the-chinese-remainder-theorem (30)`, the second proposed summary below, DEFS equal to method definitions 42, 44, 48, 56, 58, and 60, THMS equal to method proof-bearing items 38--65, and B/CEX equal to B items 9--14. End with `Forward references: NONE.`
+1. `## CB-12a. Finite Probability Spaces and Random Variables (order 220.2, combinatorics)`, with `requires: the-logarithm-and-general-powers (177)`, the first proposed summary below, DEFS equal to foundation definitions 1, 6, 10, 13, 14, 16, 17, 21, 23, 26, and 31, THMS equal to foundation proof-bearing items 2--37, and B/FS/CEX equal to B items 1--8. End with `Forward references: NONE.`
+2. `## CB-12b. Finite Probability and the Probabilistic Method (order 221, combinatorics)`, with `requires: finite-probability-spaces-and-random-variables (220.2), extremal-graph-theory (219), congruences-and-the-chinese-remainder-theorem (30)`, the second proposed summary below, DEFS equal to method definitions 42, 44, 48, 56, 58, and 60, THMS equal to method proof-bearing items 38--65, and B/CEX equal to B items 9--14. End with `Forward references: NONE.`
 
 This replacement removes the stale instruction that Chernoff may be dropped: the exponential machinery is published and the bound is scaffolded. It also replaces the old claim that the Ramsey lower bound should be a second A-page theorem; it is now a B-page derivation agreeing with the already-published `thm-diagonal-ramsey-counting-lower-bound`. It adds the previously absent conditional-probability/Bayes machinery, the pairwise-versus-mutual distinction, product spaces, indicator variables, covariance algebra, deletion/alteration, hypergraph colouring, MAX-CUT, property $S_k$, dominating sets, and sum-free subsets.
 
@@ -32,7 +36,7 @@ In the summary table of the same file, replace the exact old row
 
 > `| 203/204 | finite-probability-and-the-probabilistic-method | Finite Probability and the Probabilistic Method | combinatorics | 23 / 13 |`
 
-(with the id formatted in backticks on disk) by the two rows `221/222 | finite-probability-spaces-and-random-variables | Finite Probability Spaces and Random Variables | combinatorics | 37 / 8` and `223/224 | finite-probability-and-the-probabilistic-method | Finite Probability and the Probabilistic Method | combinatorics | 28 / 6`, preserving the table's backtick formatting.
+(with the id formatted in backticks on disk) by the two rows `220.2/220.4 | finite-probability-spaces-and-random-variables | Finite Probability Spaces and Random Variables | combinatorics | 37 / 8` and `221/222 | finite-probability-and-the-probabilistic-method | Finite Probability and the Probabilistic Method | combinatorics | 28 / 6`, preserving the table's backtick formatting.
 
 ## Proposed two-paragraph A-page summaries
 
@@ -50,7 +54,7 @@ The machinery is harvested through classical applications rather than left abstr
 
 ## Canonical-coverage harvest
 
-The harvest contains 146 source or canonical headings: 122 `included`, 8 `inline`, 8 `already-published`, and 8 `out-of-scope`; none is `deferred`. Thus 138 headings are retained locally, absorbed into proofs, or supplied by an opened published item. Counts are source-heading dispositions, so independent treatments of the same result are intentionally counted more than once.
+The harvest contains 136 source or canonical headings: 112 `included`, 8 `inline`, 8 `already-published`, and 8 `out-of-scope`; none is `deferred`. Thus 128 headings are retained locally, absorbed into proofs, or supplied by an opened published item. Counts are source-heading dispositions, so independent treatments of the same result are intentionally counted more than once.
 
 The eight declines expected to receive the closest Alpha scrutiny are:
 
@@ -266,4 +270,4 @@ Step 5 must not compress the Local Lemma to a citation-only proof, must not hide
 
 ## Step-2 status and blockers
 
-The coverage checklist is green for the single pre-adjudication page entry: 146 headings, 0 errors, 0 warnings. The current repository plan validates independently. The only required orchestration action is the proposed 37/28 A split and corresponding 8/6 B split; this is not a research blocker, but authorship must wait for the step-3/4 page-id adjudication. There were no permission, web, source-access, or mathematical blockers, and there is no unpublished or false dependency to report. The standalone proof-contract checker cannot pass before step 5 because the 62 planned `items/*.md` files do not yet exist; its only findings are those expected `item-missing` records, while the JSON scope/contract bijection is complete.
+Decision D1 is fully applied to the batch artifacts: the A split is 37/28, the B split is 8/6, coverage is partitioned into a 52-heading foundations entry and an 84-heading method entry, and proof-contract scope follows pair order. Each coverage half retains all three independent lecture-note treatments with half-specific locator ranges. The required post-fix gates are green: `coverage-checklist` reports 2 pages, 136 harvested results, 0 errors and 0 warnings; `validate-plan` exits 0. There were no permission, web, source-access, mathematical, or seam blockers, and there is no unpublished or false dependency to report. The standalone proof-contract checker cannot pass before step 5 because the 62 planned `items/*.md` files do not yet exist; its only findings are those expected `item-missing` records, while the JSON scope/contract bijection is complete.

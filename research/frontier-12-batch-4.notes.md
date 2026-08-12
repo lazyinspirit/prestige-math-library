@@ -2,7 +2,7 @@
 
 ## Outcome and split decision
 
-The scaffold contains four pages and 51 items: `pi-the-equivalent-characterizations` has 12 A-page items, its companion has 7; `line-integrals-and-the-gradient-theorem` has 23 A-page items, its companion has 9. Neither A page approaches the active 60-item ceiling. **No split is proposed.** The exact cut is therefore not applicable, and no result was trimmed to avoid a split.
+The scaffold contains four pages and 59 items: `pi-the-equivalent-characterizations` has 12 A-page items, its companion has 7; `line-integrals-and-the-gradient-theorem` has 31 A-page items, its companion has 9. Neither A page approaches the active 60-item ceiling. **No split is proposed.** The exact cut is therefore not applicable, and no result was trimmed to avoid a split.
 
 The two A pages have no dependency on one another. Each cites the published arc-length material directly through its own declared `requires` closure. The B pages remain leaves: no A-page item depends on either companion.
 
@@ -18,7 +18,7 @@ Three analytic representations are proved without assuming a geometric formula: 
 
 This page defines scalar and vector line integrals on piecewise-C1 paths and proves independence of the chosen smooth partition. It establishes reparametrization, reversal, concatenation, and length-estimate laws, identifies the integral of one with arc length, and differentiates the arc-length accumulation function. Regularity, orientation, constant paths, and repeated traversals are treated explicitly.
 
-The gradient theorem yields path independence and zero circulation for conservative fields. Conversely, path independence constructs a potential on a nonempty piecewise-C1 path-connected open domain. Closed and exact C1 fields are separated carefully; mixed partials give exact implies closed, while a radial potential proves the converse on star-shaped domains. The companion exposes the punctured-plane obstruction and other sign, path, and domain errors.
+The gradient theorem yields path independence and zero circulation for conservative fields. Conversely, path independence constructs a potential on a nonempty piecewise-C1 path-connected open domain. Closed and exact C1 fields are separated carefully; mixed partials give exact implies closed, while a radial potential proves the converse on star-shaped domains. Type I and Type II boundary identities and finite shared-arc cancellation then give Green's theorem and the area formula for finite unions of elementary regions. The companion exposes the punctured-plane obstruction and other sign, path, and domain errors.
 
 Both summaries are exactly two paragraphs and under 150 words.
 
@@ -32,9 +32,11 @@ Exact old text:
 
 Exact replacement:
 
-> `| 241 | line integrals and the gradient theorem | scalar $ds$ and vector line integrals on piecewise-$C^1$ paths; partition and parametrisation independence, reversal and concatenation; the gradient theorem; conservative/path-independent/zero-loop equivalence; exact versus closed fields; the Poincaré lemma on star-shaped domains; and **the vortex field $(-y,x)/(x^2+y^2)$** on the punctured plane |`
+> `| 241 | line integrals and the gradient theorem | scalar $ds$ and vector line integrals on piecewise-$C^1$ paths; partition and parametrisation independence, reversal and concatenation; the gradient theorem; Green's theorem for elementary regions and finite gluings; conservative/path-independent/zero-loop equivalence; exact versus closed fields; the Poincaré lemma on star-shaped domains; and **the vortex field $(-y,x)/(x^2+y^2)$** on the punctured plane |`
 
-The old row's Green-theorem promise is not silently carried into this batch. The current dispatch gives a detailed replacement scope and the page's declared prerequisite closure omits the multivariable-integration/Jordan-domain machinery needed for a faithful general Green theorem. A rectangular special case would not discharge that promise. I therefore treat the old row as stale rather than manufacture a weak theorem under the same name. If the orchestrator decides that the older promise remains binding, step 3 must amend `requires` and commission the full boundary/domain machinery before authoring; that is a scope adjudication, not a missing lemma inside the present subject.
+Decision D2 keeps the old row's Green-theorem promise in a precise elementary-region form. The orchestrator amended the page to require `fubini-and-change-of-variables`, whose closure supplies the graph-region and Jordan-integration machinery. The scaffold now defines Type I and Type II graph-bounded regions, requires each elementary piece to admit both descriptions, defines positive orientation by explicit graph-arc traversal, proves the two coordinate identities separately, proves cancellation and integral additivity for a nonempty finite gluing along complete shared boundary arcs, and combines them into Green's theorem and the boundary formula for area.
+
+**Named limitation — arbitrary Jordan domains.** The theorem does not start from an arbitrary simple closed curve or infer its interior. Its hypothesis supplies a nonempty finite decomposition into compact elementary pieces with pairwise disjoint interiors, piecewise-C1 graph boundaries, and intersections consisting only of complete shared boundary arcs and endpoints; every positive-length internal arc belongs to exactly two pieces with opposite induced orientations, and the boundary orientation is inherited after those paired arcs are cancelled. Extending this to arbitrary Jordan domains would require the Jordan curve theorem and further decomposition geometry. The library's `rem-jordan-curve-theorem` records that result with `proved_here: false`, so it is not used as a dependency or hidden premise.
 
 The older block in `research/plan-realanalysis-pages.md` at RA-40 makes the same Green-theorem promise and additionally asks for a simply-connected theorem, a solenoidal three-dimensional example, and an unrelated differentiation-under-the-integral counterexample. The dispatch supersedes those additions. The star-shaped Poincaré theorem is fully proved here; simple connectedness is mentioned only as a later-topology outlook, never used as an unproved implication.
 
@@ -61,10 +63,14 @@ No prose scaffold exists for the pi page. Step 4 should use the two-paragraph su
 - The star-shaped potential is `phi(x)=integral_0^1 <F(a+t(x-a)),x-a> dt`. At authoring, localize around each `x` before differentiating under the integral, use closedness to identify a total `t` derivative, and keep the `t=0` boundary term.
 - The companion vortex calculation must verify all three facts separately: its domain is piecewise-C1 path-connected, its cross partials agree, and its unit-circle integral is `2 pi`. That integral, plus the gradient theorem, is the non-exactness proof.
 - The common physics convention `F=-grad V` is not used. Here a potential for a conservative field means `F=grad phi`.
+- A Type I piece proves only the `P dx` half of Green's formula, and a Type II piece proves only the `Q dy` half. The theorem applies each half to an elementary piece that admits both descriptions; never claim that one graph description alone proves the full formula.
+- Positive orientation is not inferred from a Jordan curve. Author it from the explicit lower/right/upper/left traversal (or its Type II analogue), delete paired internal arcs in a finite gluing, and verify that every surviving arc keeps the region locally on the left.
+- The gluing lemma has two independent obligations: reversed shared arcs cancel in the line-integral sum, while zero extensions and content-zero overlaps make the region integrals additive. Pairwise disjoint interiors, complete shared arcs, and exactly two oppositely oriented incident pieces per internal arc are hypotheses, not consequences.
+- The Green theorem assumes `P,Q` are C1 on an open neighbourhood of the whole compact union. The area corollary uses `(P,Q)=(-y/2,x/2)`, and also records the one-sided choices `(0,x)` and `(-y,0)`.
 
 ## Canonical-coverage harvest and source ledger
 
-`frontier-12-batch-4.coverage.json` records 68 headings/results: 44 `included`, 12 `inline`, 5 `already-published`, and 7 `out-of-scope`. Thus 56 harvested entries feed new scaffolded items, 5 were confirmed on disk, and 7 were declined. There are no `deferred` entries.
+`frontier-12-batch-4.coverage.json` records 75 source-anchored headings/results: 48 `included`, 12 `inline`, 5 `already-published`, and 10 `out-of-scope`. Thus 60 source entries feed new scaffolded items, 5 were confirmed on disk, and 10 were declined. The canonical checklist adds 17 `included` entries. There are no `deferred` entries.
 
 ### Pi sources actually read
 
@@ -77,12 +83,16 @@ No prose scaffold exists for the pi page. Step 4 should use the two-paragraph su
 1. Jiří Lebl, *Basic Analysis II*, §9.2 Definition 9.2.5 through Example 9.2.18 and the following arc-length paragraph: <https://www.jirka.org/ra/html/sec_pathintegral.html>.
 2. Jiří Lebl, *Basic Analysis II*, §9.3 opening through Definition 9.3.8: <https://www.jirka.org/ra/html/sec_pathind.html>.
 3. Jean-Baptiste Campesato, *Poincaré Lemma* (University of Toronto MAT237 notes), §§1–2, Definition 1 through Proposition 12, PDF pp. 1–7: <https://www.math.toronto.edu/campesat/ens/1920/poincare.pdf>. This is the independent full-note treatment of exactness, closedness, star-shaped domains, coordinate and radial potential constructions, and the punctured-plane counterexample.
+4. Jiří Lebl, *Basic Analysis II*, §10.6 Definition 10.6.1 through Example 10.6.5 and Exercises 10.6.4–10.6.5: <https://www.jirka.org/ra/html/sec_mvgreenstheorem.html>. This supplies the positive-orientation convention, Type I/II graph regions, the two half-proofs, the proved Type III theorem, shared-arc cancellation, and the area formulas. Its broader general-domain statement is not imported.
+5. Nathaniel Donaldson, *Math 2E*, §16.4, the Definition and Green theorem on PDF p. 1, the Calculating Areas corollary on p. 3, and A Sketch Proof on p. 5: <https://www.math.uci.edu/~ndonalds/math2e/16-4-green.pdf>. This is the independent Green-theorem treatment: it separates the Type I and Type II identities, then glues pieces by cancelling oppositely oriented internal arcs.
+
+The three Lebl URLs are separate real locators in one textbook and count as one treatment, not three. Campesato is independent for the Poincaré material; Donaldson is the second independent treatment at Green-theorem depth.
 
 OpenStax *Calculus Volume 3* §§6.2–6.3 and David Guichard's *Calculus* §§16.2–16.3 were also read as supplementary convention checks, not used as primary harvest sources. Guichard's converse from matching cross partials is phrased without an adequate global domain hypothesis; this scaffold follows the precise star-shaped theorem instead.
 
 ### Licensing and reuse
 
-Lebl's book carries its Creative Commons notice on the book site; OpenStax is openly licensed. No explicit redistribution licence was found in the Imperial, Keisler-chapter, or Toronto PDFs at the passages read. Those sources are therefore used only for factual research and locator-backed paraphrase. No proof text, figures, exercises, or source-specific prose is copied into the scaffold. Item titles name classical results; final statements and proofs will be newly worded and will retain source-reference URLs.
+Lebl's book carries its Creative Commons notice on the book site; OpenStax is openly licensed. No explicit redistribution licence was found in the Imperial, Keisler-chapter, Toronto, or Donaldson PDFs at the passages read. Those sources are therefore used only for factual research and locator-backed paraphrase. No proof text, figures, exercises, or source-specific prose is copied into the scaffold. Item titles name classical results; final statements and proofs will be newly worded and will retain source-reference URLs.
 
 ### Declines most likely to be challenged
 
@@ -91,7 +101,8 @@ Lebl's book carries its Creative Commons notice on the book site; OpenStax is op
 - Imperial Question 2 (Girard) requires spherical geometry and gives no Euclidean pi characterization.
 - The de Moivre/central-binomial asymptotic requires an additional asymptotic-enumeration proof; Wallis's exact recurrence and squeeze already establish the requested product.
 - The global estimate `|sin x| <= |x|` is not a pi characterization and is not smuggled into a proof; Viète uses the already published local limit.
-- Green's theorem is not a harvest decline: it is a conflict between stale prose and the current dispatch/declared closure, recorded above for step-3 adjudication.
+- Lebl's general bounded-domain definition and measurability proposition are not imported: this fix is deliberately limited to supplied Type I/Type II elementary decompositions, so the stronger geometry remains outside the theorem's claim.
+- Lebl's triangle-area exercise is not added to the already accepted companion page; the general boundary-area corollary that licenses that computation is included on the A page.
 
 Every decline has a result-specific reason of at least 40 characters in the machine harvest. No prerequisite lemma needed by a retained theorem was declined.
 
@@ -103,10 +114,12 @@ Every decline has a result-specific reason of at least 40 characters in the mach
 - “Connected domain” in informal calculus sources often hides polygonal/path connectivity of open Euclidean sets. This page states piecewise-C1 path-connectedness at every equivalence that uses a connecting path.
 - Cross-partial symmetry is local; existence of a global potential is not. The Toronto notes and Lebl impose star-shapedness for the converse, whereas Guichard's terse converse omits the required global hypothesis.
 - Mathematics uses `F=grad phi` for the potential convention here; physics often writes a force as `F=-grad V`.
+- A region being Type I supplies the vertical-section half of Green's proof, while Type II supplies the horizontal-section half. Full Green on one elementary piece uses both descriptions; a finite union then uses explicit gluing data.
+- “Positively oriented” means that the region stays locally on the left. For a union with holes this makes outer boundary components counterclockwise and inner components clockwise, generated here by cancellation rather than a general Jordan-domain theorem.
 
 ## Published dependencies opened on disk and confidence route
 
-All 39 external item dependencies below were opened from `items/<id>.md`, and every file says `status: published`. There is no unambiguously false published dependency.
+All 44 external item dependencies below were opened from `items/<id>.md`, and every file says `status: published`. There is no unambiguously false published dependency.
 
 ### Pi pair — exact statement confirmed on disk and independently checked against the listed analysis sources or standard derivation
 
@@ -122,9 +135,11 @@ The shared dependencies `def-path-polygonal-length-and-rectifiability-in-rn`, `t
 
 `lem-integral-elementary-bounds`, `thm-additivity-over-subintervals`, `thm-cauchy-schwarz-and-the-euclidean-norm`, and `thm-integration-by-parts` carry published-audit verification on disk. The remaining dependencies carry an audit record and/or literature references; I also confirmed the exact clause used by direct mathematical inspection. `thm-integration-by-parts`, `lem-integral-elementary-bounds`, `thm-squeeze`, and the shared integral/limit items are used by the pi pair; their published-audit route supplements the independent Wallis/Gregory source check.
 
+Decision D2 adds five direct published dependencies, all reached through `fubini-and-change-of-variables`: `def-riemann-integral-over-a-jordan-set`, `thm-fubini-over-a-region-between-continuous-graphs`, `thm-graphs-of-continuous-functions-have-content-zero`, `thm-jordan-fubini-by-sections`, and `thm-multidimensional-integral-properties`. Their exact statements were opened above: graph-bounded regions are compact Jordan sets with the vertical Fubini formula; Jordan-Fubini explicitly includes the symmetric coordinate-block assertion; zero extensions define region integrals; multidimensional integrals are linear; and continuous graphs have content zero. These are precisely the clauses used in the two half-proofs and the gluing lemma.
+
 ## Proof-contract status
 
-`frontier-12-batch-4.proof-contracts.json` begins a version-1 contract for all 43 proof-bearing items (theorems, lemmas, corollaries, examples, counterexamples, and false statements). It records the exact scaffold strategy as the planned main derivation, every planned direct dependency as a citation-plan entry, and all eight boundary dispositions. At step 5, each generic planned block must be replaced by the final numbered-step map, exact on-disk quotations, and exact citation uses; the current empty `citations` arrays are intentional scaffold-time placeholders.
+`frontier-12-batch-4.proof-contracts.json` begins a version-1 contract for all 48 proof-bearing items (theorems, lemmas, corollaries, examples, counterexamples, and false statements). It records the exact scaffold strategy as the planned main derivation, every planned direct dependency as a citation-plan entry, and all eight boundary dispositions. At step 5, each generic planned block must be replaced by the final numbered-step map, exact on-disk quotations, and exact citation uses; the current empty `citations` arrays are intentional scaffold-time placeholders.
 
 ## Component-provenance plan and per-item rationale
 
@@ -173,6 +188,14 @@ No Statement or Construction is classified `ai-generated`. Classical sourced sta
 | `def-star-shaped-open-subset-of-rn` | `literature-derived` | `not-applicable` | Lebl Theorem 9.3.6 and Toronto Theorems 5, 8, and 11. The wording is normalized to this library’s conventions; it makes no independent proof claim. |
 | `thm-poincare-lemma-for-star-shaped-domains` | `literature-derived` | `ai-altered` | Lebl Theorem 9.3.6 and Toronto Theorems 5, 8, and 11. The final proof will be newly organized around the listed on-disk dependencies, so it is altered rather than copied. |
 | `cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains` | `ai-altered` | `ai-altered` | Lebl Propositions 9.3.3–9.3.4 and Toronto Theorem 3. The final proof will be newly organized around the listed on-disk dependencies, so it is altered rather than copied. |
+| `def-type-i-type-ii-and-elementary-green-regions` | `literature-derived` | `not-applicable` | Lebl §10.6 and Donaldson §16.4 define the two graph-region types and use their conjunction in the elementary proof. The finite-union wording is normalized to the dispatch's explicit gluing hypothesis. |
+| `def-positive-orientation-for-elementary-region-boundaries` | `literature-derived` | `not-applicable` | Lebl Definition 10.6.2 and Donaldson's opening definition give the region-on-the-left convention. The graph-arc traversal makes it usable without the Jordan curve theorem. |
+| `lem-green-type-i-boundary-identity` | `literature-derived` | `ai-altered` | Lebl's Type I half-proof and Donaldson's sketch stage 1. The final proof is reorganized around the library's graph-region Fubini theorem and explicit piecewise-C1 boundary convention. |
+| `lem-green-type-ii-boundary-identity` | `literature-derived` | `ai-altered` | Lebl's Type II half-proof and Donaldson's sketch stage 2. The final proof is reorganized around the published symmetric Jordan-Fubini assertion. |
+| `lem-green-boundary-cancellation-under-finite-gluing` | `literature-derived` | `ai-altered` | Lebl Example 10.6.5 and Donaldson's sketch stage 3 both cancel oppositely traversed internal arcs. The scaffold also states the separate zero-extension proof of region-integral additivity. |
+| `thm-greens-theorem-for-finite-unions-of-elementary-regions` | `literature-derived` | `ai-altered` | Lebl Theorem 10.6.4's locally proved Type III case and Donaldson's elementary decomposition proof support the exact narrowed theorem. Arbitrary Jordan domains are excluded. |
+| `cor-area-as-a-line-integral-for-elementary-regions` | `literature-derived` | `ai-altered` | Lebl Exercise 10.6.4 and Donaldson's Calculating Areas corollary give the three standard coordinate boundary formulas. The final derivation uses the local Green theorem and Jordan content. |
+| `rem-greens-theorem-jordan-domain-limitation` | `ai-altered` | `not-applicable` | This is a source-grounded, library-specific scope record: both treatments distinguish the elementary proof from a general-domain claim, and the local Jordan curve theorem is not proved here. |
 | `rem-domain-hypotheses-for-closed-versus-exact` | `ai-altered` | `not-applicable` | Toronto Propositions 4, 7, and 10, with the mixed-partial proof made explicit. The wording is normalized to this library’s conventions; it makes no independent proof claim. |
 | `ex-scalar-line-integral-over-a-unit-semicircle` | `literature-derived` | `ai-altered` | Lebl Examples 9.2.16 and 9.2.18. The final proof will be newly organized around the listed on-disk dependencies, so it is altered rather than copied. |
 | `ex-line-segment-scalar-and-vector-line-integrals` | `literature-derived` | `ai-altered` | Lebl Examples 9.2.16 and 9.2.18. The final proof will be newly organized around the listed on-disk dependencies, so it is altered rather than copied. |
@@ -186,4 +209,4 @@ No Statement or Construction is classified `ai-generated`. Classical sourced sta
 
 ## Blockers and step-5 handoff
 
-No shell, web, edit, git, or other permission prompt was requested. No indispensable operation was blocked by the sandbox. The two individual required gates are green at handoff; the prohibited wrapper `tools/gates.mjs` was not run. The only question reserved for orchestrator adjudication is the stale Green-theorem prose conflict described above; it does not block the current dispatch-shaped scaffold.
+No shell, web, edit, git, or other permission prompt was requested. No indispensable operation was blocked by the sandbox. The two individual required gates are green at handoff; the prohibited wrapper `tools/gates.mjs` was not run. Decision D2 is fully reflected in all four batch artifacts, with the arbitrary-Jordan-domain limitation recorded explicitly.
