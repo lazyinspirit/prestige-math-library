@@ -28,14 +28,18 @@ Let $K$ be a field. The series $x$ is not a unit in $K\llbracket x\rrbracket$, b
 
 ## Facts & Assumptions
 
-**Given:** The power-series unit criterion [[thm-formal-power-series-unit-criterion]] and the power/Laurent dictionary [[thm-formal-power-laurent-dictionary]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] A formal power series is a unit exactly when its constant coefficient is a unit ([[thm-formal-power-series-unit-criterion]]).
+
+[F2] Power series embed in Laurent series, and a nonzero Laurent series $h=x^{v_x(h)}u$ has inverse $x^{-v_x(h)}u^{-1}$ ([[thm-formal-power-laurent-dictionary]]).
 
 ## Verification
 
 **Proof technique:** compare constant coefficient and Laurent order.
 
-1.1 The constant coefficient of $x$ is $0$, which is not a unit in the field $K$, so the unit criterion excludes a power-series inverse. Equivalently, every product $xg$ has constant coefficient $0$. [given]
+1.1 The constant coefficient of $x$ is $0$, which is not a unit in the field $K$, so the unit criterion excludes a power-series inverse. Equivalently, every product $xg$ has constant coefficient $0$. [given, F1]
 
-1.2 In $K((x))$, negative exponents are permitted and $x x^{-1}=1=x^{-1}x$. Thus passing to Laurent series changes the answer. [given]
+1.2 In $K((x))$, negative exponents are permitted and $x x^{-1}=1=x^{-1}x$. Thus passing to Laurent series changes the answer. [given, F2]
 
 2.1 Steps 1.1 and 1.2 exhibit the claimed contrast. [step 1.1, step 1.2] ∎

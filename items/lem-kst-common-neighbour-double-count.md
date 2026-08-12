@@ -34,18 +34,24 @@ $$\sum_{i=1}^n\binom{d_i}s\ge\frac n{s!}\left(\frac En-s+1\right)^s.$$
 
 ## Facts & Assumptions
 
-**Given:** The oriented forbidden graph of [[def-zarankiewicz-number]], degrees from [[def-graph-adjacency-incidence-neighbourhood-and-degree]], and binomial coefficients from [[def-binomial-coefficient]].
+**Given:** The hypotheses and notation of the statement above.
 
-The theorem [[thm-double-counting]] states that two finite counts agree when they enumerate the same finite incidence set in opposite orders.
+[F1] In $z(m,n;s,t)$, the $s$-vertex part of the forbidden $K_{s,t}$ lies on the left and the $t$-vertex part lies on the right ([[def-zarankiewicz-number]]).
+
+[F2] The open neighbourhood is $N_G(v)=\{u:\{u,v\}\in E\}$ and $\deg_G(v)=|N_G(v)|$ ([[def-graph-adjacency-incidence-neighbourhood-and-degree]]).
+
+[F3] For a finite incidence relation, the sum of its row-fibre sizes equals the sum of its column-fibre sizes ([[thm-double-counting]]).
+
+[F4] $\binom nk$ is the number of $k$-element subsets of an $n$-element set ([[def-binomial-coefficient]]).
 
 ## Proof
 
 **Proof technique:** double-count common neighbours, then smooth integer degrees.
 
-1.1 Count pairs $(S,b)$ with $S\subseteq A$, $|S|=s$, and $S\subseteq N(b)$. Counting first by $b$ gives the left side. For fixed $S$, at most $t-1$ vertices of $B$ contain $S$ in their neighbourhood, or those vertices with $S$ form the forbidden $K_{s,t}$. Counting first by $S$ proves the upper bound. [given]
+1.1 Count pairs $(S,b)$ with $S\subseteq A$, $|S|=s$, and $S\subseteq N(b)$. Counting first by $b$ gives the left side. For fixed $S$, at most $t-1$ vertices of $B$ contain $S$ in their neighbourhood, or those vertices with $S$ form the forbidden $K_{s,t}$. Counting first by $S$ proves the upper bound. [given, F1, F2, F3]
 
-1.2 Partitioning the $s$-subsets of a $d$-element set according to whether they contain one distinguished element gives $\binom d s-\binom{d-1}s=\binom{d-1}{s-1}$, a nondecreasing function of $d$. Thus if $d_i\ge d_j+2$, replacing $(d_i,d_j)$ by $(d_i-1,d_j+1)$ does not increase the binomial sum. Repetition terminates at values $q=\lfloor E/n\rfloor$ and $q+1$. [given]
+1.2 Partitioning the $s$-subsets of a $d$-element set according to whether they contain one distinguished element gives $\binom d s-\binom{d-1}s=\binom{d-1}{s-1}$, a nondecreasing function of $d$. Thus if $d_i\ge d_j+2$, replacing $(d_i,d_j)$ by $(d_i-1,d_j+1)$ does not increase the binomial sum. Repetition terminates at values $q=\lfloor E/n\rfloor$ and $q+1$. [given, F4]
 
-2.1 For integers $d\ge s-1$, $\binom ds\ge(d-s+1)^s/s!$. Writing $E/n=q+\theta$ with $0\le\theta<1$, the balanced sum is the corresponding linear interpolation between $\binom qs$ and $\binom{q+1}s$; convexity of $y\mapsto y^s$ on nonnegative reals bounds it below by $n(E/n-s+1)^s/s!$. [step 1.2, algebra]
+2.1 For integers $d\ge s-1$, $\binom ds\ge(d-s+1)^s/s!$. Writing $E/n=q+\theta$ with $0\le\theta<1$, the balanced sum is the corresponding linear interpolation between $\binom qs$ and $\binom{q+1}s$; convexity of $y\mapsto y^s$ on nonnegative reals bounds it below by $n(E/n-s+1)^s/s!$. [step 1.2, algebra, F4]
 
 3.1 Steps 1.1-2.1 prove the common-neighbour upper count and the discrete smoothing lower count with the stated threshold. [step 1.1, step 1.2, step 2.1] ∎

@@ -30,12 +30,16 @@ $$\operatorname{ex}(7,K_3)=\left\lfloor\frac{49}{4}\right\rfloor=12.$$
 
 ## Facts & Assumptions
 
-**Given:** Complete bipartite graphs from [[def-standard-complete-bipartite-path-and-cycle-graphs]] and Mantel's theorem [[thm-mantel-exact-and-unique]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] The complete bipartite graph $K_{A,B}$ has exactly all edges joining a vertex of $A$ to a vertex of $B$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+
+[F2] For every $n\in\mathbb N$, Mantel's theorem gives $\operatorname{ex}(n,K_3)=\lfloor n^2/4\rfloor$, and a triangle-free $n$-vertex graph attains equality exactly when it is the balanced complete bipartite graph up to isomorphism ([[thm-mantel-exact-and-unique]]).
 
 ## Verification
 
 **Proof technique:** count cross edges and apply Mantel.
 
-1.1 Every edge of $K_{3,4}$ crosses its bipartition, so a three-vertex cycle is impossible, and there are exactly $3\cdot4=12$ possible cross edges. [given]
+1.1 Every edge of $K_{3,4}$ crosses its bipartition, so a three-vertex cycle is impossible, and there are exactly $3\cdot4=12$ possible cross edges. [given, F1]
 
-2.1 Mantel's theorem gives the matching upper bound $\lfloor7^2/4\rfloor=12$, so the graph is extremal. [step 1.1, given] ∎
+2.1 Mantel's theorem gives the matching upper bound $\lfloor7^2/4\rfloor=12$, so the graph is extremal. [step 1.1, given, F2] ∎

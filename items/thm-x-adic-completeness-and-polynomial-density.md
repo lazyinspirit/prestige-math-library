@@ -32,16 +32,22 @@ converge $x$-adically to $f$. Thus $R\llbracket x\rrbracket$ is $x$-adically com
 
 ## Facts & Assumptions
 
-**Given:** The $x$-adic Cauchy and convergence definitions in [[def-formal-order-and-x-adic-topology]], coefficient extensionality in [[prop-coefficient-extraction-linearity-and-extensionality]], and the polynomial embedding of [[thm-formal-power-series-ring-and-polynomial-embedding]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] An $x$-adically Cauchy sequence eventually agrees pairwise modulo every $x^N$, and convergence means eventual agreement with the limit modulo every $x^N$ ([[def-formal-order-and-x-adic-topology]]).
+
+[F2] The coefficientwise polynomial inclusion into formal power series is an injective unital ring homomorphism ([[thm-formal-power-series-ring-and-polynomial-embedding]]).
+
+[F3] Two formal series are equal if and only if all their coefficients are equal ([[prop-coefficient-extraction-linearity-and-extensionality]]).
 
 ## Proof
 
 **Proof technique:** stabilize coefficients.
 
-1.1 Let $(f_j)$ be Cauchy. For each $n$, use the Cauchy condition with $N=n+1$: the coefficient $[x^n]f_j$ is eventually constant. Define $[x^n]f$ to be that eventual value. Given $N$, choose a common Cauchy index for the first $N$ coefficients; then $f_j\equiv f\pmod{x^N}$ thereafter, so $f_j\to f$. [given]
+1.1 Let $(f_j)$ be Cauchy. For each $n$, use the Cauchy condition with $N=n+1$: the coefficient $[x^n]f_j$ is eventually constant. Define $[x^n]f$ to be that eventual value. Given $N$, choose a common Cauchy index for the first $N$ coefficients; then $f_j\equiv f\pmod{x^N}$ thereafter, so $f_j\to f$. [given, F1]
 
-1.2 The truncation $f_{<N}$ is finitely supported, hence belongs to the embedded $R[x]$, and it agrees with $f$ in every degree below $N$. Therefore $f_{<N}\to f$; this includes a constant or zero series and remains true in the zero ring. [given]
+1.2 The truncation $f_{<N}$ is finitely supported, hence belongs to the embedded $R[x]$, and it agrees with $f$ in every degree below $N$. Therefore $f_{<N}\to f$; this includes a constant or zero series and remains true in the zero ring. [given, F2]
 
-2.1 If both $f$ and $g$ are limits, then for each $N$ their first $N$ coefficients agree with the same sufficiently late $f_j$. Thus every coefficient of $f$ and $g$ agrees, so $f=g$ by extensionality. [step 1.1, given]
+2.1 If both $f$ and $g$ are limits, then for each $N$ their first $N$ coefficients agree with the same sufficiently late $f_j$. Thus every coefficient of $f$ and $g$ agrees, so $f=g$ by extensionality. [step 1.1, given, F3]
 
 3.1 Existence and uniqueness are steps 1.1 and 2.1, and density is step 1.2. [step 1.1, step 2.1, step 1.2] ∎

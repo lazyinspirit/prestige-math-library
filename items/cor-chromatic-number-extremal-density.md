@@ -34,14 +34,20 @@ In particular, two such graphs have the same Turán density exactly when they ha
 
 ## Facts & Assumptions
 
-**Given:** The limit formula of [[thm-erdos-stone-simonovits]], existence of $\pi(H)$ from [[thm-turan-density-exists]], and the independently derived bipartite case [[cor-bipartite-extremal-density-zero]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] If $H$ is a finite graph with an edge and $r=\chi(H)$, then $\operatorname{ex}(n,H)=(1-1/(r-1)+o(1))\binom n2$ ([[thm-erdos-stone-simonovits]]).
+
+[F2] For every finite graph $H$ with an edge, the normalized extremal numbers converge to $\pi(H)$, their infimum over $n\ge2$ ([[thm-turan-density-exists]]).
+
+[F3] Every finite bipartite graph with an edge has Turán density zero ([[cor-bipartite-extremal-density-zero]]).
 
 ## Proof
 
 **Proof technique:** identify the existing limit.
 
-1.1 Erdős–Stone–Simonovits states that the normalized extremal number tends to $1-1/(\chi(H)-1)$, while the definition of $\pi(H)$ is that same existing limit. This proves the formula. [given]
+1.1 Erdős–Stone–Simonovits states that the normalized extremal number tends to $1-1/(\chi(H)-1)$, while the definition of $\pi(H)$ is that same existing limit. This proves the formula. [given, F1, F2]
 
-2.1 For integers $r\ge2$, the function $1-1/(r-1)$ is strictly increasing, so equal values are equivalent to equal chromatic numbers. At $r=2$ it is $0$, agreeing with the KST-derived bipartite corollary. [step 1.1, given]
+2.1 For integers $r\ge2$, the function $1-1/(r-1)$ is strictly increasing, so equal values are equivalent to equal chromatic numbers. At $r=2$ it is $0$, agreeing with the KST-derived bipartite corollary. [step 1.1, given, F3]
 
 3.1 Steps 1.1-2.1 prove the exact density statement and both consequences. [step 1.1, step 2.1] ∎

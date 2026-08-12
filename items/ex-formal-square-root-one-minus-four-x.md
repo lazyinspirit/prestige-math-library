@@ -32,12 +32,18 @@ where $O(x^6)$ means a series of order at least $6$.
 
 ## Facts & Assumptions
 
-**Given:** Existence and uniqueness of the constant-one root from [[cor-unique-formal-root-with-constant-one]], finite convolution from [[prop-coefficient-extraction-linearity-and-extensionality]], and formal order and congruence modulo $x^N$ from [[def-formal-order-and-x-adic-topology]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] For a commutative $\mathbb Q$-algebra $R$, $u\in xR\llbracket x\rrbracket$, and $k\ge1$, $1+u$ has the unique root in $1+xR\llbracket x\rrbracket$, namely $(1+u)^{1/k}$ ([[cor-unique-formal-root-with-constant-one]]).
+
+[F2] Product coefficients satisfy $[x^n](fg)=\sum_{i=0}^{n}[x^i]f[x^{n-i}]g$ ([[prop-coefficient-extraction-linearity-and-extensionality]]).
+
+[F3] The formal order of a nonzero series is its least nonzero coefficient index, and $\operatorname{ord}_x(0)=+\infty$ ([[def-formal-order-and-x-adic-topology]]).
 
 ## Verification
 
 **Proof technique:** square the truncation.
 
-1.1 Let $q=1-2x-2x^2-4x^3-10x^4-28x^5$. Cauchy convolution gives $[x^0]q^2=1$, $[x]q^2=-4$, and coefficients $4-4$, $-8+8$, $-20+16+4$, and $-56+40+16$, all $0$, in degrees $2,3,4,5$ respectively. Hence $q^2\equiv1-4x\pmod{x^6}$. [given]
+1.1 Let $q=1-2x-2x^2-4x^3-10x^4-28x^5$. Cauchy convolution gives $[x^0]q^2=1$, $[x]q^2=-4$, and coefficients $4-4$, $-8+8$, $-20+16+4$, and $-56+40+16$, all $0$, in degrees $2,3,4,5$ respectively. Hence $q^2\equiv1-4x\pmod{x^6}$. [given, F2, F3]
 
-2.1 The unique constant-one square root has coefficients determined successively by the equation $v^2=1-4x$ because its unknown degree-$n$ coefficient occurs as $2[x^n]v$. Step 1.1 therefore gives its coefficients through degree $5$. [step 1.1, given] ∎
+2.1 The unique constant-one square root has coefficients determined successively by the equation $v^2=1-4x$ because its unknown degree-$n$ coefficient occurs as $2[x^n]v$. Step 1.1 therefore gives its coefficients through degree $5$. [step 1.1, given, F1] ∎

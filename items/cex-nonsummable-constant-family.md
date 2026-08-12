@@ -29,14 +29,18 @@ The family $(f_i)_{i\in\mathbb N}$ with $f_i=1$ for every $i$ is not summable in
 
 ## Facts & Assumptions
 
-**Given:** The local-finiteness condition of [[def-summable-family-of-formal-series]] and the constant-series convention of [[def-formal-power-series-and-coefficient-extraction]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] A family is summable exactly when, below every degree cutoff $N$, only finitely many members have a nonzero coefficient ([[def-summable-family-of-formal-series]]).
+
+[F2] For $f=\sum a_nx^n$, coefficient extraction is evaluation: $[x^n]f=a_n$ ([[def-formal-power-series-and-coefficient-extraction]]).
 
 ## Verification
 
 **Proof technique:** inspect the first coefficient range.
 
-1.1 Take $N=1$. Every index $i$ contributes the nonzero coefficient $[x^0]f_i=1$, so infinitely many family members have a nonzero coefficient below $N$. [given]
+1.1 Take $N=1$. Every index $i$ contributes the nonzero coefficient $[x^0]f_i=1$, so infinitely many family members have a nonzero coefficient below $N$. [given, F1, F2]
 
-1.2 In contrast, the family $(x^n)_{n\ge0}$ is summable: below any fixed degree $N$, only the indices $n<N$ contribute. Its coefficientwise sum is the series with every coefficient $1$. [given]
+1.2 In contrast, the family $(x^n)_{n\ge0}$ is summable: below any fixed degree $N$, only the indices $n<N$ contribute. Its coefficientwise sum is the series with every coefficient $1$. [given, F1]
 
-2.1 Step 1.1 violates the defining local-finiteness condition, whereas step 1.2 satisfies it. The nonzero-ring hypothesis is necessary: in the zero ring, the constant series $1=0$ and the original family is summable. [step 1.1, step 1.2, given] ∎
+2.1 Step 1.1 violates the defining local-finiteness condition, whereas step 1.2 satisfies it. The nonzero-ring hypothesis is necessary: in the zero ring, the constant series $1=0$ and the original family is summable. [step 1.1, step 1.2, given, F1, F2] ∎

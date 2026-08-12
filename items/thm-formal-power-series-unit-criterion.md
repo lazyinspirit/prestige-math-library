@@ -36,18 +36,24 @@ The criterion also holds in the zero ring.
 
 ## Facts & Assumptions
 
-**Given:** Cauchy multiplication in [[thm-formal-power-series-ring-and-polynomial-embedding]] and coefficient extensionality in [[prop-coefficient-extraction-linearity-and-extensionality]].
+**Given:** The hypotheses and notation of the statement above.
 
-The unit theorem [[lem-ring-units-form-a-group]] states that $u$ is a unit exactly when some $v$ satisfies $uv=1=vu$, that its inverse is unique, and that $0$ is a unit exactly in the zero ring.
+[F1] Product coefficients satisfy $[x^n](fg)=\sum_{i=0}^{n}[x^i]f[x^{n-i}]g$ ([[prop-coefficient-extraction-linearity-and-extensionality]]).
+
+[F2] Two formal series are equal if and only if all their coefficients are equal ([[prop-coefficient-extraction-linearity-and-extensionality]]).
+
+[F3] An element $u$ is a unit exactly when there is $v$ with $uv=1=vu$ ([[lem-ring-units-form-a-group]]).
+
+[F4] Zero is a unit exactly in the zero ring ([[lem-ring-units-form-a-group]]).
 
 ## Proof
 
 **Proof technique:** solve the inverse equations recursively.
 
-1.1 If $fg=1$, constant-coefficient extraction gives $a_0[x^0]g=1$. Commutativity gives the reverse product too, so $a_0$ is a unit. [given]
+1.1 If $fg=1$, constant-coefficient extraction gives $a_0[x^0]g=1$. Commutativity gives the reverse product too, so $a_0$ is a unit. [given, F1, F3]
 
-1.2 Conversely suppose $a_0$ is a unit and define $b_n$ by the displayed recursion. The coefficient of $fg$ at $0$ is $a_0b_0=1$. For $n\ge1$ it is $a_0b_n+\sum_{i=1}^{n}a_i b_{n-i}=0$. Hence $fg=1$ by extensionality, and commutativity gives $gf=1$. [given]
+1.2 Conversely suppose $a_0$ is a unit and define $b_n$ by the displayed recursion. The coefficient of $fg$ at $0$ is $a_0b_0=1$. For $n\ge1$ it is $a_0b_n+\sum_{i=1}^{n}a_i b_{n-i}=0$. Hence $fg=1$ by extensionality, and commutativity gives $gf=1$. [given, F1, F2]
 
-2.1 Any inverse must satisfy the same constant equation and then, successively, the same equation for each $b_n$; multiplication by $a_0^{-1}$ makes every coefficient unique. In the zero ring, $0=1$ and the unit theorem makes the same recursion and equivalence valid. [step 1.1, step 1.2, given]
+2.1 Any inverse must satisfy the same constant equation and then, successively, the same equation for each $b_n$; multiplication by $a_0^{-1}$ makes every coefficient unique. In the zero ring, $0=1$ and the unit theorem makes the same recursion and equivalence valid. [step 1.1, step 1.2, given, F3, F4]
 
 3.1 Steps 1.1 and 1.2 prove both directions, while step 2.1 proves uniqueness and the boundary case. [step 1.1, step 1.2, step 2.1] ∎

@@ -293,3 +293,73 @@ All generated statements are checkable B-page examples and remain leaves. No gen
 - The proofs preceding `thm-integral-exponential-agrees-with-exponential` contain no use of `exp` or `log`. The bridge item cites `thm-exponential-ivp-uniqueness` exactly once.
 
 There is no scoped blocker. I could not make the two whole-repository checks green without editing other batches: `depcheck` currently fails only on the four intentionally unaudited published complex rewrites owned by batch 1, and `rendercheck` currently finds five multiline displays in other batches. Those failures do not name a batch-4 item. I did not run `tools/gates.mjs`, as the dispatch explicitly forbids it.
+
+## Step 6 artifact reconciliation after reader 3
+
+Reader 3 repaired 15 assigned item files. The repaired item text was left
+unchanged. I synchronized the proof contracts for the following entries:
+
+- lem-alternating-top-forms-are-determined-by-one-ordered-basis,
+  thm-integral-logarithm-derivative-and-normalisation,
+  cor-integral-logarithm-is-strictly-increasing,
+  thm-integral-logarithm-is-a-bijection,
+  thm-logarithm-differentiable-functional-equation-characterisation, and
+  cex-mercator-series-does-not-define-logarithm-globally: replaced the six
+  irrelevant evidence excerpts identified by the reader with the exact
+  load-bearing source clauses.
+- thm-operator-determinant-is-basis-independent,
+  thm-operator-determinant-is-multiplicative,
+  cor-operator-determinant-by-row-reduction,
+  thm-adjugate-identity-over-a-commutative-ring,
+  lem-determinant-rank-one-update-over-a-commutative-ring,
+  thm-adjugate-is-equivariant-under-similarity,
+  thm-cramers-rule-over-a-commutative-ring,
+  thm-operator-invertible-iff-determinant-nonzero,
+  thm-operator-adjugate-identity,
+  ex-determinant-in-two-ordered-bases, and
+  ex-four-by-four-determinant-by-cofactors-and-row-reduction: synchronized
+  new fact labels and sources, repaired step text, step numbering, uses, and
+  input maps.
+- thm-logarithm-continuous-functional-equation-characterisation,
+  cor-continuous-logarithmic-functions-form-a-one-parameter-family, and
+  ex-logarithmic-functions-without-normalisation: synchronized the repaired
+  derivation of \(\log(e)=1\), the explicit \(b\ne1\) argument, and their new
+  fact uses and sources.
+
+The batch manifest now records all eight dependency-list additions named by
+the reader and the repaired doubling-example title. No item was added,
+removed, or retargeted, so no coverage row required retagging; the coverage
+checker still passes with 75 harvested results and no diagnostics.
+
+One reader-introduced artifact blocker remains under the no-item-edit boundary.
+thm-operator-determinant-is-multiplicative declares [L2] (basis
+independence), but no numbered proof step cites [L2]. The contract truthfully
+records that source with an empty uses list; strict mode rejects empty uses.
+Removing the unused fact from the item would resolve the sole diagnostic, but
+this dispatch expressly forbids editing items/. No reader repair appears
+mathematically wrong, and no reader repair was undone.
+
+Verification after reconciliation:
+
+- content-policy.mjs on the batch manifest: 52 items, 0 errors, 0 warnings.
+- coverage-checklist.mjs: 2 pages, 75 harvested results, 0 errors, 0 warnings.
+- proof-contract.mjs --strict: 45/45 items checked; the single error is the
+  unused [L2] fact described above.
+
+### Step 6 targeted strict follow-up
+
+This follow-up supersedes the blocker paragraph immediately above. Disk showed
+that `thm-operator-determinant-is-multiplicative` still declared `[L2]` but no
+numbered step cited it. The targeted dispatch required retaining that fact, so
+I attached `[L2]` to step 2.1 as the basis-independence licence for the
+positive-dimensional operator determinants and recorded `2.1` in the
+contract's `uses` and derivation inputs. No Statement or proof claim changed.
+The source contract remains narrowed to positive dimension, and step 1.1 still
+handles dimension zero solely through `[F1]` and the operator-determinant
+definition.
+
+No coverage row was retagged: no item was added, removed, or retargeted.
+`proof-contract.mjs --strict` now passes with 0 errors and 0 warnings for all
+45 proof-bearing items; `coverage-checklist.mjs` still passes for 2 pages and
+75 harvested results; the scoped precheck passes for the citation-only item
+edit. No reader repair appears wrong, and no blocker remains.

@@ -36,15 +36,19 @@ with equality exactly when $r$ divides $n$.
 
 ## Facts & Assumptions
 
-**Given:** The Turán graph from [[def-extremal-number-turan-graph-and-blowup]] and binomial coefficients from [[def-binomial-coefficient]].
+**Given:** The hypotheses and notation of the statement above.
 
-The theorem [[cor-complete-graph-edge-count]] states that a complete graph on $n$ vertices has exactly $\binom n2$ edges.
+[F1] For $n=qr+a$, $T_{n,r}$ is the complete $r$-partite graph with $a$ parts of size $q+1$ and $r-a$ parts of size $q$ ([[def-extremal-number-turan-graph-and-blowup]]).
+
+[F2] If $V$ has $n$ elements, the complete graph $K_V$ has exactly $\binom n2$ edges ([[cor-complete-graph-edge-count]]).
+
+[F3] $\binom nk$ is the number of $k$-element subsets of an $n$-element set ([[def-binomial-coefficient]]).
 
 ## Proof
 
 **Proof technique:** count missing within-part pairs and balance parts.
 
-1.1 A complete multipartite graph contains every vertex pair except pairs within one part. If its part sizes are $n_1,\ldots,n_r$, its edge count is $\binom n2-\sum_i\binom{n_i}{2}=\frac12(n^2-\sum_i n_i^2)$. Substituting the $a$ sizes $q+1$ and the remaining sizes $q$ gives both displayed exact formulas. [given]
+1.1 A complete multipartite graph contains every vertex pair except pairs within one part. If its part sizes are $n_1,\ldots,n_r$, its edge count is $\binom n2-\sum_i\binom{n_i}{2}=\frac12(n^2-\sum_i n_i^2)$. Substituting the $a$ sizes $q+1$ and the remaining sizes $q$ gives both displayed exact formulas. [given, F1, F2, F3]
 
 2.1 If $n_i\ge n_j+2$, moving one vertex from part $i$ to part $j$ changes $\sum_k n_k^2$ by $(n_i-1)^2+(n_j+1)^2-n_i^2-n_j^2=-2(n_i-n_j-1)<0$, so it strictly increases the edge count. Repetition ends exactly when every two part sizes differ by at most $1$, which forces the quotient-remainder sizes and proves both maximality and uniqueness. [step 1.1]
 

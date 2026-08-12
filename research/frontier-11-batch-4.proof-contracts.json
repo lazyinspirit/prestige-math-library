@@ -55,7 +55,7 @@
           "fact": "F1",
           "source": "def-dimension",
           "source_section": "Definition",
-          "quote": "$V$ is **infinite-dimensional over $F$** when it is not finite-dimensional over\n$F$, that is, when $V$ has **no** finite basis. No number is attached to such a\nspace here: the symbol $\\dim_F V$ is defined only in the finite-dimensional case,\nand the expression $\\dim_F V = \\infty$ is not used.",
+          "quote": "$V$ is **finite-dimensional over $F$** when it has a **finite** basis\n([[def-linear-basis]], [[def-countable]]): some basis $B$ of $V$ satisfies\n$B \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-equinumerous]]).\n\nFor such a $V$, the **dimension of $V$ over $F$**, written $\\dim_F V$, is that\n$n$:\n\n$$\\dim_F V \\;:=\\; \\text{the unique } n \\in \\mathbb{N} \\text{ such that } V \\text{ has a basis } B \\text{ with } B \\approx n .$$",
           "uses": [
             "1.1"
           ]
@@ -285,7 +285,7 @@
           "fact": "F1",
           "source": "def-determinant-of-a-linear-operator",
           "source_section": "Definition",
-          "quote": "where $[T]_{\\mathcal B}$ is the coordinate matrix of $T$\n([[def-coordinate-column-and-matrix-of-a-linear-map]]) and the determinant on\nthe right is the matrix determinant\n([[def-determinant-of-a-square-matrix]]). If $V=\\{0\\}$, define $\\det(T):=1$.",
+          "quote": "If $\\dim V=n\\geq 1$, choose an ordered basis $\\mathcal B$ and define\n\n$$\\det(T):=\\det([T]_{\\mathcal B}),$$\n\nwhere $[T]_{\\mathcal B}$ is the coordinate matrix of $T$\n([[def-coordinate-column-and-matrix-of-a-linear-map]]) and the determinant on\nthe right is the matrix determinant\n([[def-determinant-of-a-square-matrix]]). If $V=\\{0\\}$, define $\\det(T):=1$.",
           "uses": [
             "1.1"
           ]
@@ -303,7 +303,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "If $\\dim V=0$, the only ordered basis is empty and the convention in [F1] gives the single value $1$.",
+          "claim": "If $\\dim V=0$, [F1] defines the operator determinant directly as $1$; no determinant of a $0\\times0$ representing matrix is invoked.",
           "step": "1.1",
           "inputs": [
             "F1"
@@ -319,7 +319,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "The two matrix determinants are therefore equal; together with step 1.1, this proves the claim in every finite dimension.",
+          "claim": "The two matrix determinants are therefore equal in positive dimension; together with the separate zero-dimensional definition in step 1.1, this proves well-definedness in every finite dimension.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
@@ -378,17 +378,26 @@
           "fact": "L1",
           "source": "thm-operator-determinant-scales-every-alternating-top-form",
           "source_section": "Statement",
-          "quote": "Let $V$ be $n$-dimensional over a field $F$, with $n\\geq 1$, and let\n$T:V\\to V$ be linear. For every alternating $n$-linear form\n$\\omega:V^n\\to F$,",
+          "quote": "Let $V$ be $n$-dimensional over a field $F$, with $n\\geq 1$, and let\n$T:V\\to V$ be linear. For every alternating $n$-linear form\n$\\omega:V^n\\to F$,\n\n$$\\omega(Tv_0,\\ldots,Tv_{n-1}) =\\det(T)\\omega(v_0,\\ldots,v_{n-1}).$$\n\nMoreover, $\\det(T)$ is the unique scalar having this property for every such\n$\\omega$ and every $n$-tuple.",
           "uses": [
             "1.2",
             "2.1"
           ]
         },
         {
-          "fact": "F1",
+          "fact": "L2",
           "source": "thm-operator-determinant-is-basis-independent",
           "source_section": "Statement",
-          "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field. If $\\mathcal B$ and $\\mathcal C$ are ordered bases of $V$, then",
+          "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field. If $\\dim V\\geq1$ and $\\mathcal B$ and $\\mathcal C$ are ordered bases\nof $V$, then\n\n$$\\det([T]_{\\mathcal B})=\\det([T]_{\\mathcal C}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-determinant-of-a-linear-operator",
+          "source_section": "Definition",
+          "quote": "If $V=\\{0\\}$, define $\\det(T):=1$.",
           "uses": [
             "1.1"
           ]
@@ -417,6 +426,7 @@
           "step": "2.1",
           "inputs": [
             "L1",
+            "L2",
             "step 1.2",
             "step 1.1"
           ]
@@ -473,7 +483,7 @@
           "fact": "L1",
           "source": "thm-operator-determinant-is-basis-independent",
           "source_section": "Statement",
-          "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field. If $\\mathcal B$ and $\\mathcal C$ are ordered bases of $V$, then",
+          "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field. If $\\dim V\\geq1$ and $\\mathcal B$ and $\\mathcal C$ are ordered bases\nof $V$, then\n\n$$\\det([T]_{\\mathcal B})=\\det([T]_{\\mathcal C}).$$",
           "uses": [
             "1.1"
           ]
@@ -525,7 +535,7 @@
         },
         {
           "id": "step-2-1",
-      "claim": "Reversing the recorded effects in [L3] expresses $\\det(A)$ in terms of $\\det(U)$, with one factor $-1$ per swap, one nonzero factor $c$ per row scaling by $c$, and no factor for a row addition.",
+          "claim": "Reversing the recorded effects in [L3] expresses $\\det(A)$ in terms of $\\det(U)$, with one factor $-1$ per swap, one factor $c^{-1}$ for each reduction step that scaled a row by $c\\neq0$, and no factor for a row addition.",
           "step": "2.1",
           "inputs": [
             "L3",
@@ -766,13 +776,21 @@
           ]
         },
         {
+          "fact": "F1",
+          "source": "def-ring-matrix-product-identity-and-transpose",
+          "source_section": "Definition",
+          "quote": "For $A\\in M_{m\\times n}(R)$ and $B\\in M_{n\\times p}(R)$, their **product** is $AB\\in M_{m\\times p}(R)$ with\n$$ (AB)_{ik}:=\\sum_{j<n}a_{ij}b_{jk}. $$",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
           "fact": "L4",
           "source": "thm-ring-matrix-arithmetic-laws",
           "source_section": "Statement",
           "quote": "For matrices over a commutative ring, whenever the shapes are compatible,\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n$$A(B+C)=AB+AC,\\qquad (A+B)C=AC+BC,$$\nand\n$$ (AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A.$$\nThe corresponding entrywise additive and scalar laws also hold, including all zero-sized shapes.",
           "uses": [
-            "1.1",
-            "1.3",
             "2.1",
             "2.2"
           ]
@@ -784,8 +802,8 @@
           "claim": "The $(i,j)$ entry of $A\\operatorname{adj}(A)$ is $\\sum_k a_{ik}C_{jk}(A)$. If $i=j$, [L1] makes this $\\det(A)$.",
           "step": "1.1",
           "inputs": [
-            "L1",
-            "L4"
+            "F1",
+            "L1"
           ]
         },
         {
@@ -802,9 +820,9 @@
           "claim": "The $(i,j)$ entry of $\\operatorname{adj}(A)A$ is $\\sum_k C_{ki}(A)a_{kj}$. It equals $\\det(A)$ when $i=j$ by column expansion. When $i\\neq j$, it is the column-$i$ expansion of the matrix obtained by replacing column $i$ by column $j$, whose determinant is $0$ because it has two equal columns.",
           "step": "1.3",
           "inputs": [
+            "F1",
             "L1",
-            "L3",
-            "L4"
+            "L3"
           ]
         },
         {
@@ -1131,6 +1149,15 @@
           ]
         },
         {
+          "fact": "F2",
+          "source": "def-ring-matrix-product-identity-and-transpose",
+          "source_section": "Definition",
+          "quote": "For $A\\in M_{m\\times n}(R)$ and $B\\in M_{n\\times p}(R)$, their **product** is $AB\\in M_{m\\times p}(R)$ with\n$$ (AB)_{ik}:=\\sum_{j<n}a_{ij}b_{jk}. $$\nThe sum is the finite sum in the additive commutative monoid of $R$, and is $0$ when $n=0$.\n\nThe **identity matrix** $I_n$ has entry $1$ on the diagonal and $0$ elsewhere. The **transpose** $A^{\\mathsf T}\\in M_{n\\times m}(R)$ is defined by $(A^{\\mathsf T})_{ji}:=a_{ij}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
           "fact": "L3",
           "source": "thm-ring-matrix-arithmetic-laws",
           "source_section": "Statement",
@@ -1147,6 +1174,7 @@
           "claim": "Column $j$ of $A+uv^{\\mathsf T}$ is $A_j+v_j u$. Expanding the determinant by column multilinearity gives one term for each subset of columns chosen from $uv^{\\mathsf T}$.",
           "step": "1.1",
           "inputs": [
+            "F2",
             "L1",
             "L3"
           ]
@@ -1162,7 +1190,7 @@
         },
         {
           "id": "step-2-2",
-          "claim": "For the singleton subset $\\{j\\}$, pull out $v_j$ and expand the determinant of $A$ with column $j$ replaced by $u$ along that column. Its contribution is $v_j\\sum_i u_iC_{ij}(A)$.",
+          "claim": "For the singleton subset $\\{j\\}$, pull out $v_j$ and expand the determinant of $A$ with column $j$ replaced by $u$ along that column. Deleting that replaced column leaves exactly the same minors as deleting column $j$ from $A$, so its contribution is $v_j\\sum_i u_iC_{ij}(A)$.",
           "step": "2.2",
           "inputs": [
             "step 1.1",
@@ -1175,9 +1203,9 @@
           "claim": "Summing step 2.2 over $j$ and using [F1] gives $\\sum_{i,j}v_jC_{ij}(A)u_i =v^{\\mathsf T}\\operatorname{adj}(A)u$. Together with step 2.1, this is the claimed identity.",
           "step": "3.1",
           "inputs": [
+            "step 2.1",
             "step 2.2",
             "F1",
-            "step 2.1",
             "L3"
           ]
         }
@@ -1258,14 +1286,22 @@
           ]
         },
         {
+          "fact": "F2",
+          "source": "def-ring-matrix-product-identity-and-transpose",
+          "source_section": "Definition",
+          "quote": "For $A\\in M_{m\\times n}(R)$ and $B\\in M_{n\\times p}(R)$, their **product** is $AB\\in M_{m\\times p}(R)$ with\n$$ (AB)_{ik}:=\\sum_{j<n}a_{ij}b_{jk}. $$\nThe sum is the finite sum in the additive commutative monoid of $R$, and is $0$ when $n=0$.\n\nThe **identity matrix** $I_n$ has entry $1$ on the diagonal and $0$ elsewhere. The **transpose** $A^{\\mathsf T}\\in M_{n\\times m}(R)$ is defined by $(A^{\\mathsf T})_{ji}:=a_{ij}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
           "fact": "L3",
           "source": "thm-ring-matrix-arithmetic-laws",
           "source_section": "Statement",
           "quote": "For matrices over a commutative ring, whenever the shapes are compatible,\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n$$A(B+C)=AB+AC,\\qquad (A+B)C=AC+BC,$$\nand\n$$ (AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A.$$\nThe corresponding entrywise additive and scalar laws also hold, including all zero-sized shapes.",
           "uses": [
             "1.1",
-            "2.1",
-            "3.1"
+            "2.1"
           ]
         }
       ],
@@ -1293,11 +1329,11 @@
         },
         {
           "id": "step-3-1",
-          "claim": "For each $i,j$, choose $v$ to be standard column $i$ and $u$ to be standard column $j$. Step 2.1 says that the $(i,j)$ entries of $\\operatorname{adj}(C)$ and $P^{-1}\\operatorname{adj}(A)P$ are equal.",
+          "claim": "For each $i,j$, let $v$ be the column with entry $1$ at $i$ and $0$ elsewhere, and let $u$ be the analogous column at $j$. The product formula [F2] makes $v^{\\mathsf T}Bu=B_{ij}$ for every $B\\in M_n(R)$, so step 2.1 says that the $(i,j)$ entries of $\\operatorname{adj}(C)$ and $P^{-1}\\operatorname{adj}(A)P$ are equal.",
           "step": "3.1",
           "inputs": [
             "step 2.1",
-            "L3"
+            "F2"
           ]
         },
         {
@@ -1394,14 +1430,22 @@
           ]
         },
         {
+          "fact": "F1",
+          "source": "def-ring-matrix-product-identity-and-transpose",
+          "source_section": "Definition",
+          "quote": "For $A\\in M_{m\\times n}(R)$ and $B\\in M_{n\\times p}(R)$, their **product** is $AB\\in M_{m\\times p}(R)$ with\n$$ (AB)_{ik}:=\\sum_{j<n}a_{ij}b_{jk}. $$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
           "fact": "L4",
           "source": "thm-ring-matrix-arithmetic-laws",
           "source_section": "Statement",
           "quote": "For matrices over a commutative ring, whenever the shapes are compatible,\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n$$A(B+C)=AB+AC,\\qquad (A+B)C=AC+BC,$$\nand\n$$ (AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A.$$\nThe corresponding entrywise additive and scalar laws also hold, including all zero-sized shapes.",
           "uses": [
-            "1.1",
-            "1.2",
-            "2.2"
+            "1.2"
           ]
         }
       ],
@@ -1411,7 +1455,7 @@
           "claim": "If $Ax=b$, then $b=\\sum_k x_kA_k$, where $A_k$ is column $k$ of $A$.",
           "step": "1.1",
           "inputs": [
-            "L4",
+            "F1",
             "given"
           ]
         },
@@ -1435,12 +1479,12 @@
         },
         {
           "id": "step-2-2",
-          "claim": "Its $j$th coordinate is $u^{-1}\\sum_i C_{ij}(A)b_i$. By expanding $A_j(b)$ along column $j$, [L2] identifies the sum as $\\det(A_j(b))$.",
+          "claim": "Its $j$th coordinate is $u^{-1}\\sum_i C_{ij}(A)b_i$. Deleting column $j$ removes the replaced column, so $C_{ij}(A_j(b))=C_{ij}(A)$; expanding $A_j(b)$ along column $j$ therefore identifies the sum as $\\det(A_j(b))$.",
           "step": "2.2",
           "inputs": [
-            "L2",
             "step 1.2",
-            "L4"
+            "F1",
+            "L2"
           ]
         },
         {
@@ -1653,10 +1697,28 @@
           ]
         },
         {
+          "fact": "L4",
+          "source": "thm-matrix-representation-is-a-vector-space-isomorphism",
+          "source_section": "Statement",
+          "quote": "Let $V,W$ be finite-dimensional vector spaces over $F$, with ordered bases\n$\\mathcal B=(b_j)_{j<n}$ and $\\mathcal C=(c_i)_{i<m}$. The map\n\n$$\\Phi:\\mathcal L(V,W)\\to M_{m\\times n}(F),\\qquad \\Phi(T)=[T]_{\\mathcal B}^{\\mathcal C},$$\n\nis a vector-space isomorphism.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-matrix-of-a-composite-is-the-product",
+          "source_section": "Statement",
+          "quote": "Let $T:U\\to V$ and $S:V\\to W$ be linear, with ordered bases $\\mathcal B$ of\n$U$, $\\mathcal C$ of $V$, and $\\mathcal D$ of $W$. Then\n\n$$[S\\circ T]_{\\mathcal B}^{\\mathcal D}=[S]_{\\mathcal C}^{\\mathcal D}[T]_{\\mathcal B}^{\\mathcal C}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
           "fact": "F1",
           "source": "lem-field-is-a-commutative-ring",
           "source_section": "Statement",
-          "quote": "The field structure is not changed by this: the ring operations are the field\noperations, and the ring's zero and identity are the field's $0$ and $1$.",
+          "quote": "Let $F$ be a field ([[def-field]]), with addition $+$, multiplication $\\cdot$,\nand distinguished elements $0 \\ne 1$. Then\n\n1. $(F, +, \\cdot, 0, 1)$ is a ring ([[def-ring]]), and it is commutative\n   ([[def-commutative-ring]]), with $1 \\ne 0$;\n2. $F$ is an integral domain ([[def-zero-divisor-and-integral-domain]]);\n3. $F$ is a division ring ([[def-division-ring]]), and hence a commutative\n   division ring.",
           "uses": [
             "2.1"
           ]
@@ -1665,28 +1727,38 @@
           "fact": "L3",
           "source": "thm-operator-determinant-is-basis-independent",
           "source_section": "Statement",
-          "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field. If $\\mathcal B$ and $\\mathcal C$ are ordered bases of $V$, then",
+          "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field. If $\\dim V\\geq1$ and $\\mathcal B$ and $\\mathcal C$ are ordered bases\nof $V$, then\n\n$$\\det([T]_{\\mathcal B})=\\det([T]_{\\mathcal C}).$$",
           "uses": [
-            "1.2",
             "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-determinant-of-a-linear-operator",
+          "source_section": "Definition",
+          "quote": "If $V=\\{0\\}$, define $\\det(T):=1$.",
+          "uses": [
+            "1.2"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Suppose $\\dim V\\geq1$ and choose an ordered basis. By [L1], $T$ is invertible exactly when its representing matrix $A$ is invertible.",
+          "claim": "Suppose $\\dim V\\geq1$ and choose an ordered basis, writing $A=[T]$. If $T$ is invertible, then $A$ is invertible by [L1]. Conversely, if $A$ is invertible, [L4] gives an operator $S$ with $[S]=A^{-1}$; the composite formula gives $[S\\circ T]=I=[T\\circ S]$, and injectivity of matrix representation gives $S\\circ T=I_V=T\\circ S$. Thus $T$ is invertible exactly when $A$ is invertible.",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "L4",
+            "algebra"
           ]
         },
         {
           "id": "step-1-2",
-          "claim": "If $\\dim V=0$, the unique endomorphism is the identity and is invertible, while [L3] gives $\\det(T)=1\\neq0$.",
+          "claim": "If $\\dim V=0$, the unique endomorphism is the identity and is invertible, while [F2] gives $\\det(T)=1\\neq0$.",
           "step": "1.2",
           "inputs": [
-            "L3",
+            "F2",
             "algebra"
           ]
         },
@@ -1932,6 +2004,15 @@
           "uses": [
             "2.1"
           ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-matrix-representation-is-a-vector-space-isomorphism",
+          "source_section": "Statement",
+          "quote": "Let $V,W$ be finite-dimensional vector spaces over $F$, with ordered bases\n$\\mathcal B=(b_j)_{j<n}$ and $\\mathcal C=(c_i)_{i<m}$. The map\n\n$$\\Phi:\\mathcal L(V,W)\\to M_{m\\times n}(F),\\qquad \\Phi(T)=[T]_{\\mathcal B}^{\\mathcal C},$$\n\nis a vector-space isomorphism.",
+          "uses": [
+            "3.1"
+          ]
         }
       ],
       "derivations": [
@@ -1959,7 +2040,8 @@
           "claim": "Equality of representing matrices gives both asserted operator identities.",
           "step": "3.1",
           "inputs": [
-            "step 2.1"
+            "step 2.1",
+            "L4"
           ]
         }
       ],
@@ -2140,16 +2222,16 @@
           "source_section": "Definition",
           "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.",
           "uses": [
-            "1.2"
+            "3.1"
           ]
         },
         {
           "fact": "L2",
           "source": "thm-operator-determinant-is-basis-independent",
           "source_section": "Statement",
-          "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field. If $\\mathcal B$ and $\\mathcal C$ are ordered bases of $V$, then",
+          "quote": "Let $T:V\\to V$ be a linear operator on a finite-dimensional vector space over\na field. If $\\dim V\\geq1$ and $\\mathcal B$ and $\\mathcal C$ are ordered bases\nof $V$, then\n\n$$\\det([T]_{\\mathcal B})=\\det([T]_{\\mathcal C}).$$",
           "uses": [
-            "3.1"
+            "4.1"
           ]
         }
       ],
@@ -2165,15 +2247,6 @@
           ]
         },
         {
-          "id": "step-1-2",
-          "claim": "By the two-term determinant formula, $\\det(A)=2\\cdot3=6$ and $\\det([T]_{\\mathcal B})=2\\cdot3-0\\cdot1=6$.",
-          "step": "1.2",
-          "inputs": [
-            "F2",
-            "algebra"
-          ]
-        },
-        {
           "id": "step-2-1",
           "claim": "Matrix multiplication in [L1] gives $$ [T]_{\\mathcal B} =P^{-1}AP =\\begin{pmatrix}2&0\\\\1&3\\end{pmatrix}. $$",
           "step": "2.1",
@@ -2185,11 +2258,21 @@
         },
         {
           "id": "step-3-1",
-          "claim": "The explicit computations in steps 2.1 and 1.2 illustrate the equality asserted abstractly by [L2].",
+          "claim": "By the two-term determinant formula, $\\det(A)=2\\cdot3=6$ and $\\det([T]_{\\mathcal B})=2\\cdot3-0\\cdot1=6$.",
           "step": "3.1",
           "inputs": [
             "step 2.1",
-            "step 1.2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The explicit computations in steps 3.1 and 2.1 illustrate the equality asserted abstractly by [L2].",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.1",
             "L2"
           ]
         }
@@ -2585,7 +2668,7 @@
         },
         {
           "id": "step-1-2",
-          "claim": "Alternatively, replace row $3$ by row $3-4$ times row $1$. The result is upper triangular with diagonal $1,3,2,5$, and the operation does not change the determinant.",
+          "claim": "Alternatively, replace row $2$ by row $2-4$ times row $0$ (the third row by the third row minus four times the first row). The result is upper triangular with diagonal $1,3,2,5$, and the operation does not change the determinant.",
           "step": "1.2",
           "inputs": [
             "L2",
@@ -2607,8 +2690,8 @@
           "claim": "By [L3], the determinant in step 1.2 is $1\\cdot3\\cdot2\\cdot5=30$.",
           "step": "2.2",
           "inputs": [
-            "L3",
             "step 1.2",
+            "L3",
             "algebra"
           ]
         },
@@ -3060,7 +3143,7 @@
           "fact": "F2",
           "source": "def-oriented-integral",
           "source_section": "Definition",
-          "quote": "**Why this item is first.** The published definition of the integral does not\ncover this page. [[def-darboux-integral]] is stated for reals $a < b$, because\nthe partitions it quantifies over are those of [[def-partition-and-refinement]],\nwhose standing hypothesis is $a < b$: with $a = b$ the chain\n$a = t_0 < \\dots < t_n = b$ is unsatisfiable. So $\\int_a^b f$ is an undefined\nsymbol whenever $a \\ge b$, and every additivity statement below would be\nill-formed as it is usually written. This item extends the notation, and nothing\nelse: the object it names is still the Darboux integral of\n[[def-darboux-integral]].",
+          "quote": "For such $f$ define\n\n$$\\int_u^v f \\;:=\\; \\begin{cases} \\text{the Darboux integral of } f \\text{ over } [u,v] & \\text{if } u < v, \\\\[2pt] 0 & \\text{if } u = v, \\\\[2pt] -\\displaystyle\\int_v^u f & \\text{if } u > v. \\end{cases}$$",
           "uses": [
             "1.2"
           ]
@@ -3166,7 +3249,7 @@
           "fact": "L2",
           "source": "cor-differentiable-implies-continuous",
           "source_section": "Statement",
-          "quote": "**No converse is asserted, and none holds.** Continuity at $c$ does not give\ndifferentiability at $c$, and the standard witness is worked out on the\ncompanion page.",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}$ and let $c \\in A$ be a\nlimit point of $A$ ([[def-limit-point-r]]). If $f$ is differentiable at $c$\n([[def-derivative]]) then $f$ is continuous at $c$ ([[def-continuity-real]]).\n\nConsequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.",
           "uses": [
             "1.1"
           ]
@@ -3650,7 +3733,7 @@
           "fact": "L3",
           "source": "thm-intermediate-value",
           "source_section": "Statement",
-          "quote": "**The construction is canonical, so no choice principle is used.** The bisection\nbelow tests the left half first and takes the right half only when the left one\nhas been ruled out, so the passage from one interval to the next is a *function*\nof that interval, and [[thm-recursion]] applies with nothing selected. This is\nthe same discipline the library uses wherever a sequence is built one term at a\ntime.",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$, let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on the closed bounded interval $[a,b]$ ([[def-interval]],\n[[def-continuity-real]]), and let $y \\in \\mathbb{R}$ satisfy\n\n$$f(a) \\le y \\le f(b) \\qquad \\text{or} \\qquad f(b) \\le y \\le f(a) .$$\n\nThen there is $c \\in [a,b]$ with $f(c) = y$.",
           "uses": [
             "2.1"
           ]
@@ -4258,8 +4341,9 @@
           "fact": "F1",
           "source": "def-integral-exponential",
           "source_section": "Definition",
-          "quote": "Because",
+          "quote": "Define the\n**integral exponential**\n\n$$E:\\mathbb R\\to(0,\\infty),\\qquad E:=L^{-1}.$$\n\nThus, for $x>0$ and $y\\in\\mathbb R$,\n\n$$E(L(x))=x,\\qquad L(E(y))=y.$$",
           "uses": [
+            "1.3",
             "4.1"
           ]
         },
@@ -4314,6 +4398,7 @@
           "source_section": "Statement",
           "quote": "$$E(x)=\\exp(x).$$",
           "uses": [
+            "1.3",
             "3.1"
           ]
         },
@@ -4323,6 +4408,7 @@
           "source_section": "Definition",
           "quote": "For $x\\in\\mathbb R$, define\n$$\\exp(x):=\\sum_{n=0}^{\\infty}\\frac{x^n}{\\iota(n!)}, \\qquad e:=\\exp(1),$$\nprovided by the all-real convergence proved in [[lem-exponential-series-has-infinite-radius]]. Here $n!\\in\\mathbb N$ is the factorial of [[def-factorial-and-falling-factorial]], $\\iota(n!)$ is its nonzero real image ([[def-canonical-natural]], [[lem-of-naturals-positive]]), and powers and series are those of [[def-integer-power]] and [[def-series]].",
           "uses": [
+            "1.3",
             "3.1"
           ]
         },
@@ -4332,6 +4418,7 @@
           "source_section": "Statement",
           "quote": "$$L(x)=\\log x.$$",
           "uses": [
+            "1.3",
             "4.1"
           ]
         },
@@ -4367,10 +4454,13 @@
         },
         {
           "id": "step-1-3",
-          "claim": "Conversely, [L7] says that the natural logarithm itself is continuous and has the required equation and normalisation.",
+          "claim": "Conversely, [L7] says that the natural logarithm is continuous and has the required equation. Moreover, [L5] gives $e=E(1)$, so [F1] and [L6] give $\\log(e)=L(E(1))=1$. Thus it also has the required normalisation.",
           "step": "1.3",
           "inputs": [
-            "L7"
+            "L7",
+            "L5",
+            "F1",
+            "L6"
           ]
         },
         {
@@ -4378,9 +4468,9 @@
           "claim": "By [L4], $g(t)=ct$ for some $c\\in\\mathbb R$.",
           "step": "2.1",
           "inputs": [
-            "L4",
             "step 1.1",
-            "step 1.2"
+            "step 1.2",
+            "L4"
           ]
         },
         {
@@ -4388,8 +4478,8 @@
           "claim": "From [L5], $E(1)=e$, so $c=g(1)=f(e)=1$. Hence $g(t)=t$.",
           "step": "3.1",
           "inputs": [
-            "L5",
             "step 2.1",
+            "L5",
             "given"
           ]
         },
@@ -4399,8 +4489,8 @@
           "step": "4.1",
           "inputs": [
             "F1",
-            "L6",
-            "step 3.1"
+            "step 3.1",
+            "L6"
           ]
         },
         {
@@ -4502,7 +4592,7 @@
           "fact": "L4",
           "source": "cor-zero-derivative-implies-constant",
           "source_section": "Statement",
-          "quote": "**Order-convexity of $I$ is essential and is not a convenience.** The\nconclusion is false on a domain that falls into separate pieces, since a\nfunction may be constant on each piece with different constants; nothing in the\nproof would survive, because the mean value theorem is applied to the segment\njoining two points of the domain and that segment must lie in the domain.",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let\n$f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and\ndifferentiable at every point of $I$ that is interior to $I$\n([[def-interior-closure-boundary-r]], [[def-derivative]]), with\n\n$$f'(x) = 0 \\qquad \\text{at every interior point } x \\text{ of } I .$$\n\nThen $f$ is constant on $I$: there is a real $k$ with $f(x) = k$ for every\n$x \\in I$.",
           "uses": [
             "4.1"
           ]
@@ -4742,7 +4832,8 @@
           "source_section": "Statement",
           "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
           "uses": [
-            "1.2"
+            "1.2",
+            "1.3"
           ]
         }
       ],
@@ -4769,12 +4860,13 @@
         },
         {
           "id": "step-1-3",
-          "claim": "If $c\\neq0$, put $b=E(1/c)$. Then $b>0$, $b\\neq1$, and $\\log b=1/c$, so [F2] gives $\\log_bx=c\\log x$. Thus the nonzero members are exactly the constant-multiple forms underlying logarithms to bases, while the zero member requires no division.",
+          "claim": "If $c\\neq0$, put $b=E(1/c)$. Then $b>0$ and $\\log b=1/c\\neq0=\\log1$, so $b\\neq1$; [F2] gives $\\log_bx=c\\log x$. Thus the nonzero members are exactly the constant-multiple forms underlying logarithms to bases, while the zero member requires no division.",
           "step": "1.3",
           "inputs": [
-            "F2",
             "F1",
             "L4",
+            "L5",
+            "F2",
             "algebra"
           ]
         },
@@ -4783,8 +4875,8 @@
           "claim": "By [L3], $g(t)=ct$ for a unique scalar $c=g(1)$.",
           "step": "2.1",
           "inputs": [
-            "L3",
-            "step 1.1"
+            "step 1.1",
+            "L3"
           ]
         },
         {
@@ -4792,9 +4884,9 @@
           "claim": "For $x>0$, $x=E(L(x))$, so $f(x)=g(L(x))=cL(x)=c\\log x$. By [L4], $E(1)=e$, hence $c=g(1)=f(e)$, which also proves uniqueness.",
           "step": "3.1",
           "inputs": [
-            "L4",
             "F1",
-            "step 2.1"
+            "step 2.1",
+            "L4"
           ]
         },
         {
@@ -5322,7 +5414,15 @@
           "source_section": "Statement",
           "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
           "uses": [
-            "1.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-logarithm-continuous-functional-equation-characterisation",
+          "source_section": "Statement",
+          "quote": "The natural logarithm is the unique continuous function\n$f:(0,\\infty)\\to\\mathbb R$ satisfying\n\n$$f(xy)=f(x)+f(y)\\quad(x,y>0),\\qquad f(e)=1.$$",
+          "uses": [
             "1.2"
           ]
         },
@@ -5351,7 +5451,7 @@
           "claim": "Also $f_c(e)=c\\log(e)=c$, so only $c=1$ meets the normalisation $f(e)=1$.",
           "step": "1.2",
           "inputs": [
-            "L2",
+            "L3",
             "algebra"
           ]
         },
@@ -5371,8 +5471,8 @@
           "inputs": [
             "L1",
             "step 1.1",
-            "step 1.3",
-            "step 1.2"
+            "step 1.2",
+            "step 1.3"
           ]
         }
       ],
@@ -5612,7 +5712,7 @@
           "fact": "L1",
           "source": "thm-ratio-test",
           "source_section": "Statement",
-          "quote": "**Nothing is claimed when $\\limsup_k q_k \\ge 1 \\ge \\liminf_k q_k$.** In that\nregime the test is silent, and it has to be: the companion page carries a\nconvergent series whose ratios have limit superior $2$, and both a convergent and\na divergent series with ratio limit exactly $1$.",
+          "quote": "Then:\n\n1. if $\\limsup_{k} q_k < 1$ then $\\sum |a_k|$ converges, and hence $\\sum a_k$\n   converges as well ([[lem-absolute-convergence-implies-convergence]]);\n2. if $\\liminf_{k} q_k > 1$ then $\\sum a_k$ diverges.",
           "uses": [
             "2.1"
           ]

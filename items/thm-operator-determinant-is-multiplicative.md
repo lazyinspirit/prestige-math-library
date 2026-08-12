@@ -51,4 +51,4 @@ top-degree form by its determinant, and that scalar is unique
 
 1.1 If $\dim V=0$, all three determinants in the formula are $1$. [F1]
 1.2 Suppose $\dim V=n\geq 1$, and let $\omega$ be any alternating $n$-linear form. Applying [L1] to $S$ and then to $T$ gives $$ \omega(STv_0,\ldots,STv_{n-1}) =\det(S)\det(T)\omega(v_0,\ldots,v_{n-1}). $$ [L1]
-2.1 The uniqueness clause of [L1], applied to $S\circ T$, identifies the scaling scalar in step 1.2 as $\det(S\circ T)$. Together with step 1.1, this proves the formula in every finite dimension. [step 1.1, step 1.2, L1] ∎
+2.1 The uniqueness clause of [L1], applied to $S\circ T$, identifies the scaling scalar in step 1.2 as $\det(S\circ T)$. Together with step 1.1, this proves the formula in every finite dimension. [step 1.1, step 1.2, L1, L2] ∎

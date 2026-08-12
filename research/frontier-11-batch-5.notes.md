@@ -549,3 +549,24 @@ There is no mathematical, source, licensing, dependency, size, or sandbox
 blocker for this batch. The only non-green global diagnostic is the unrelated
 shared-worktree dependency-check state described above. Nothing requested by
 this dispatch was left undone.
+
+## Step-6 reader artifact reconciliation
+
+Reader 4 repaired citation fidelity, proof references, notation, and one
+provenance classification without changing any title, Statement, item id, or
+page assignment. The batch contract was synchronized to that disk text:
+`lem-yoneda-evaluation-bijection` dropped its removed F4 contract and input;
+the product, coproduct, exponential, one-point-space, and two-singleton
+examples gained exact function-extensionality source clauses; the
+one-point-space example also gained the exact continuity-characterisation
+clause; and the coproduct and walking-arrow input maps gained their new fact
+uses. The coproduct and exponential closing steps, the free-monoid and
+free-group notation, the free-group representation step, and the polynomial
+unit calculation were also updated to match the repaired proof text exactly.
+
+No coverage row was retagged: the reader added, removed, and retargeted no
+item, and all 134 harvested dispositions still name current items or retain
+their recorded result-specific deferral. The strict proof-contract check now
+passes 27/27 with zero errors or warnings, and the coverage checklist passes
+one page / 134 headings with zero errors or warnings. I find no reader repair
+mathematically wrong and have no blocker.

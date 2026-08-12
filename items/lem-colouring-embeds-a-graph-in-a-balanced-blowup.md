@@ -28,12 +28,18 @@ If a finite graph $H$ has $\chi(H)=r$, then $H$ is an ordinary subgraph of $K_r[
 
 ## Facts & Assumptions
 
-**Given:** A proper $r$-colouring from [[def-proper-vertex-colouring-and-chromatic-number]], balanced blowups from [[def-extremal-number-turan-graph-and-blowup]], and finite cardinality from [[def-finite-cardinality]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] A proper vertex colouring gives different colours to adjacent vertices, and its fibres are the colour classes ([[def-proper-vertex-colouring-and-chromatic-number]]).
+
+[F2] The balanced blowup $H[s]$ replaces each vertex by an independent $s$-set and each edge by all cross edges between the corresponding parts ([[def-extremal-number-turan-graph-and-blowup]]).
+
+[F3] Every finite set has a unique natural-number cardinality ([[def-finite-cardinality]]).
 
 ## Proof
 
 **Proof technique:** place colour classes into blowup parts.
 
-1.1 If $H$ is null, it embeds in $K_0[1]$. Otherwise choose a proper colouring with colours $1,\ldots,r$ and let $s\ge1$ be the largest colour-class size. Inject each colour class into the corresponding size-$s$ independent part of $K_r[s]$. [given]
+1.1 If $H$ is null, it embeds in $K_0[1]$. Otherwise choose a proper colouring with colours $1,\ldots,r$ and let $s\ge1$ be the largest colour-class size. Inject each colour class into the corresponding size-$s$ independent part of $K_r[s]$. [given, F1, F2, F3]
 
-2.1 Every edge of $H$ joins vertices of different colours, and all cross-part edges occur in $K_r[s]$. The combined injection therefore preserves every edge and is an ordinary-subgraph embedding. [step 1.1, given] ∎
+2.1 Every edge of $H$ joins vertices of different colours, and all cross-part edges occur in $K_r[s]$. The combined injection therefore preserves every edge and is an ordinary-subgraph embedding. [step 1.1, given, F1, F2] ∎

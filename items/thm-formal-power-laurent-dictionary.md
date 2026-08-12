@@ -40,20 +40,24 @@ For $K=\mathbb R$, the substitution $x^n\mapsto t^{-n}$ identifies this descript
 
 ## Facts & Assumptions
 
-**Given:** The power-series unit criterion [[thm-formal-power-series-unit-criterion]] and the Laurent definitions of [[def-formal-laurent-series-and-residue]].
+**Given:** The hypotheses and notation of the statement above.
 
-The theorem [[thm-laurent-series-field]] states that the published real Laurent-series ring is a field and constructs inverses from the leading coefficient.
+[F1] Formal Laurent series have support bounded below, coefficientwise addition, finite convolution in each degree, least exponent $v_x$, termwise derivative, and residue $\operatorname{res}_x(f)=[x^{-1}]f$ ([[def-formal-laurent-series-and-residue]]).
 
-The lemma [[lem-laurent-valuation]] states for nonzero published real Laurent series that valuation is additive on products and at least the minimum on sums, with equality when the two valuations differ.
+[F2] A formal power series is a unit exactly when its constant coefficient is a unit ([[thm-formal-power-series-unit-criterion]]).
+
+[F3] Every nonzero published real Laurent series has a multiplicative inverse constructed from its leading term ([[thm-laurent-series-field]]).
+
+[F4] For nonzero published real Laurent series, $v(fg)=v(f)+v(g)$ and the leading coefficients multiply ([[lem-laurent-valuation]]).
 
 ## Proof
 
 **Proof technique:** extend and shift coefficient functions.
 
-1.1 Extending coefficients by zero at negative integers preserves addition, $1$, and every finite convolution, and is injective. Its nonzero image has nonnegative least exponent; conversely every Laurent series of nonnegative order already has no negative coefficient and so comes from a unique power series. [given]
+1.1 Extending coefficients by zero at negative integers preserves addition, $1$, and every finite convolution, and is injective. Its nonzero image has nonnegative least exponent; conversely every Laurent series of nonnegative order already has no negative coefficient and so comes from a unique power series. [given, F1]
 
-1.2 Let $m=v_x(h)$. Define $u=x^{-m}h$. Then $u\in K\llbracket x\rrbracket$ and its constant coefficient is the nonzero leading coefficient of $h$, so $u$ is a unit. This gives $h=x^mu$ and $x^{-m}u^{-1}$ is directly a two-sided inverse. If $h=x^av=x^bu$ with the two final factors constant-term units, least exponents give $a=b=m$ and coefficient extensionality gives $u=v$. [given]
+1.2 Let $m=v_x(h)$. Define $u=x^{-m}h$. Then $u\in K\llbracket x\rrbracket$ and its constant coefficient is the nonzero leading coefficient of $h$, so $u$ is a unit. This gives $h=x^mu$ and $x^{-m}u^{-1}$ is directly a two-sided inverse. If $h=x^av=x^bu$ with the two final factors constant-term units, least exponents give $a=b=m$ and coefficient extensionality gives $u=v$. [given, F1, F2]
 
-2.1 Over $\mathbb R$, sending coefficient $a_nx^n$ to $a_nt^{-n}$ preserves finite convolution. The least $x$-exponent becomes the published least $t^{-1}$-exponent, so the order, factorisation, unit, and inverse formulas agree with the cited real theorem and valuation lemma. [step 1.1, step 1.2, given]
+2.1 Over $\mathbb R$, sending coefficient $a_nx^n$ to $a_nt^{-n}$ preserves finite convolution. The least $x$-exponent becomes the published least $t^{-1}$-exponent, so the order, factorisation, unit, and inverse formulas agree with the cited real theorem and valuation lemma. [step 1.1, step 1.2, given, F3, F4]
 
 3.1 Steps 1.1-2.1 prove the embedding, image, unique factorisation, inverse formula, and real-coordinate dictionary. [step 1.1, step 1.2, step 2.1] ∎

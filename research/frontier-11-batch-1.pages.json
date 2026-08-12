@@ -16,7 +16,10 @@
         "kind": "definition",
         "title": "Field extensions, generated subrings $F[S]$, generated subfields $F(S)$, and simple extensions",
         "deps": [
-          "def-field"
+          "def-field",
+          "def-field-homomorphism",
+          "def-subring",
+          "def-subfield"
         ]
       },
       {
@@ -143,6 +146,7 @@
         "title": "The complex numbers as $\\mathbb R[x]/(x^2+1)$, with the real embedding and imaginary unit $i$",
         "deps": [
           "def-polynomial-ring-over-a-commutative-ring",
+          "def-quotient-ring",
           "def-field-extension-generated-subfields-and-simple-extension"
         ]
       },
@@ -162,12 +166,10 @@
       {
         "id": "thm-complex-numbers-are-the-real-coordinate-plane",
         "kind": "theorem",
-        "title": "$\\mathbb C$ is the real coordinate plane, with coordinate arithmetic and the Cartesian modulus formula",
+        "title": "$\\mathbb C$ is the real coordinate plane, with coordinate arithmetic",
         "strategy": "Define $\\Phi:\\mathbb C\\to\\mathbb R^2$ by $\\Phi(a+bi)=(a,b)$. The unique coordinate form from the preceding field theorem makes $\\Phi$ well-defined and bijective, and its addition and multiplication formulas give $\\Phi((a+bi)+(u+vi))=(a+u,b+v)$ and $\\Phi((a+bi)(u+vi))=(au-bv,av+bu)$. Since $a^2+b^2\\ge0$ and the reals form a complete ordered field, the real square-root theorem licenses the coordinate modulus definition $|a+bi|=\\sqrt{a^2+b^2}$. Do not identify this formula with the Euclidean norm or the metric $d_2$ here; that comparison remains at order 189.",
         "deps": [
-          "thm-complex-numbers-form-a-field",
-          "thm-of-square-roots",
-          "cor-cauchy-reals-lub-complete"
+          "thm-complex-numbers-form-a-field"
         ]
       },
       {
@@ -176,7 +178,9 @@
         "title": "$\\mathbb C/\\mathbb R$ has power basis $1,i$ and degree $2$",
         "strategy": "Specialize the power-basis theorem to the minimal polynomial $x^2+1$ of $i$ and identify the resulting unique coordinates with the already established form $a+bi$.",
         "deps": [
+          "def-algebraic-and-transcendental-elements",
           "thm-complex-numbers-form-a-field",
+          "thm-evaluation-kernel-and-minimal-polynomial",
           "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
           "lem-x-squared-plus-one-is-irreducible-over-the-reals"
         ]
@@ -234,6 +238,8 @@
         "deps": [
           "def-complex-conjugate-real-imaginary-part-and-modulus",
           "lem-complex-conjugation-and-modulus-laws",
+          "thm-complex-numbers-form-a-field",
+          "cor-cauchy-reals-lub-complete",
           "thm-of-square-roots",
           "thm-reals-ordered-field",
           "lem-of-square-monotone"
@@ -259,9 +265,13 @@
         "title": "$\\mathbb Q(\\sqrt2)\\cong\\mathbb Q[x]/(x^2-2)$ with basis $1,\\sqrt2$",
         "strategy": "Use Eisenstein at $2$ to identify $x^2-2$ as the minimal polynomial, then specialize the quotient and power-basis theorems and compute the inverse of a sample nonzero element by rationalizing inside the field.",
         "deps": [
+          "def-algebraic-and-transcendental-elements",
           "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "thm-evaluation-kernel-and-minimal-polynomial",
           "thm-eisenstein-irreducibility-criterion",
-          "thm-rat-field"
+          "thm-rat-field",
+          "cor-cauchy-reals-lub-complete",
+          "thm-of-square-roots"
         ]
       },
       {
@@ -293,10 +303,12 @@
         "title": "The minimal polynomial of $\\sqrt{2+\\sqrt3}$ over $\\mathbb Q$ is $x^4-4x^2+1$",
         "strategy": "Successive squaring proves the element is a root. Translate the polynomial by $x\\mapsto x+1$ to get $x^4+4x^3+2x^2-4x-2$, apply Eisenstein at $2$, and transport irreducibility back through the inverse translation; the minimal-polynomial theorem then identifies it and gives degree four.",
         "deps": [
+          "def-algebraic-and-transcendental-elements",
           "thm-evaluation-kernel-and-minimal-polynomial",
           "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
           "thm-eisenstein-irreducibility-criterion",
           "thm-universal-property-of-a-polynomial-ring",
+          "cor-cauchy-reals-lub-complete",
           "thm-of-square-roots"
         ]
       },
@@ -308,6 +320,7 @@
         "deps": [
           "thm-every-complex-number-has-a-square-root",
           "thm-complex-numbers-form-a-field",
+          "cor-cauchy-reals-lub-complete",
           "thm-of-square-roots"
         ]
       },
@@ -329,6 +342,7 @@
         "deps": [
           "thm-evaluation-kernel-and-minimal-polynomial",
           "thm-eisenstein-irreducibility-criterion",
+          "cor-cauchy-reals-lub-complete",
           "thm-of-square-roots"
         ]
       }
@@ -385,8 +399,8 @@
           "def-conjugacy-class-and-centralizer",
           "thm-disjoint-cycle-decomposition",
           "def-permutation-support-disjoint-cycles-and-cycle-type",
-          "def-factorial-and-falling-factorial",
-          "def-monoid-finite-product"
+          "thm-number-of-bijections-of-a-finite-set",
+          "thm-product-rule"
         ]
       },
       {
@@ -410,7 +424,8 @@
         "deps": [
           "def-center-of-a-group",
           "thm-symmetric-permutations-are-conjugate-iff-same-cycle-type",
-          "thm-centralizer-cardinality-from-cycle-type"
+          "thm-centralizer-cardinality-from-cycle-type",
+          "lem-conjugating-a-cycle-relabels-its-entries"
         ]
       },
       {
@@ -456,7 +471,7 @@
         "deps": [
           "def-conjugacy-class-and-centralizer",
           "def-normal-subgroup",
-          "cor-alternating-group-is-normal-and-has-half-the-elements"
+          "def-index"
         ]
       },
       {
@@ -468,7 +483,9 @@
           "lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup",
           "thm-centralizer-cardinality-from-cycle-type",
           "cor-sign-from-disjoint-cycle-structure",
-          "def-alternating-group"
+          "thm-sign-is-a-homomorphism",
+          "def-alternating-group",
+          "thm-disjoint-cycle-decomposition"
         ]
       },
       {
@@ -509,7 +526,8 @@
           "def-normal-subgroup",
           "thm-disjoint-cycle-decomposition",
           "lem-conjugating-a-cycle-relabels-its-entries",
-          "def-permutation-support-disjoint-cycles-and-cycle-type"
+          "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "cor-sign-from-disjoint-cycle-structure"
         ]
       },
       {
@@ -520,7 +538,9 @@
         "deps": [
           "def-simple-group",
           "lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle",
-          "lem-normal-subgroup-containing-a-three-cycle-is-a-n"
+          "lem-normal-subgroup-containing-a-three-cycle-is-a-n",
+          "def-alternating-group",
+          "cor-sign-from-disjoint-cycle-structure"
         ]
       },
       {
@@ -533,6 +553,7 @@
           "cor-alternating-group-is-normal-and-has-half-the-elements",
           "cor-center-of-symmetric-group-is-trivial",
           "thm-sign-is-a-homomorphism",
+          "def-alternating-group",
           "def-normal-subgroup"
         ]
       },
@@ -603,7 +624,9 @@
         "title": "The conjugacy classes of $A_5$: sizes $1,20,15,12,12$ and the split $5$-cycles",
         "strategy": "Restrict the even $S_5$ cycle types. The identity, $3$-cycles, and double transpositions remain single classes; the distinct odd type $(5)$ splits into two classes of size $12$. Exhibit representatives from the two $5$-cycle classes and verify the total is $60$.",
         "deps": [
-          "ex-s-five-conjugacy-classes-and-class-equation",
+          "cor-symmetric-group-class-equation-by-cycle-type",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "cor-sign-from-disjoint-cycle-structure",
           "thm-alternating-conjugacy-class-splitting-criterion",
           "cor-alternating-group-is-normal-and-has-half-the-elements"
         ]
@@ -617,6 +640,7 @@
           "lem-conjugating-a-cycle-relabels-its-entries",
           "def-normal-subgroup",
           "def-alternating-group",
+          "cor-sign-from-disjoint-cycle-structure",
           "cor-alternating-group-is-normal-and-has-half-the-elements"
         ]
       },
@@ -628,7 +652,8 @@
         "deps": [
           "thm-alternating-conjugacy-class-splitting-criterion",
           "lem-conjugating-a-cycle-relabels-its-entries",
-          "def-alternating-group"
+          "def-alternating-group",
+          "cor-sign-from-disjoint-cycle-structure"
         ]
       },
       {
@@ -637,7 +662,11 @@
         "title": "FALSE: $A_n$ is simple for every $n\\ge4$",
         "strategy": "Use the explicitly verified subgroup $V_4\\trianglelefteq A_4$, which is neither trivial nor all of $A_4$. Contrast this exact failure at $n=4$ with the theorem's valid boundary $n\\ge5$.",
         "deps": [
-          "ex-klein-four-is-normal-in-a-four",
+          "lem-conjugating-a-cycle-relabels-its-entries",
+          "def-normal-subgroup",
+          "def-alternating-group",
+          "cor-sign-from-disjoint-cycle-structure",
+          "cor-alternating-group-is-normal-and-has-half-the-elements",
           "def-simple-group",
           "thm-alternating-group-is-simple-for-n-at-least-five"
         ]

@@ -32,12 +32,18 @@ This includes the zero ring.
 
 ## Facts & Assumptions
 
-**Given:** The unit criterion [[thm-formal-power-series-unit-criterion]] and coefficient convolution from [[prop-coefficient-extraction-linearity-and-extensionality]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] Product coefficients satisfy $[x^n](fg)=\sum_{i=0}^{n}[x^i]f[x^{n-i}]g$ ([[prop-coefficient-extraction-linearity-and-extensionality]]).
+
+[F2] Two formal series are equal if and only if all their coefficients are equal ([[prop-coefficient-extraction-linearity-and-extensionality]]).
+
+[F3] A formal power series is a unit exactly when its constant coefficient is a unit ([[thm-formal-power-series-unit-criterion]]).
 
 ## Verification
 
 **Proof technique:** multiply and compare coefficients.
 
-1.1 The series $s=\sum_{n\ge0}x^n$ has every coefficient equal to $1$. The constant coefficient of $(1-x)s$ is $1$, and for $n\ge1$ its coefficient is $[x^n]s-[x^{n-1}]s=1-1=0$. [given]
+1.1 The series $s=\sum_{n\ge0}x^n$ has every coefficient equal to $1$. The constant coefficient of $(1-x)s$ is $1$, and for $n\ge1$ its coefficient is $[x^n]s-[x^{n-1}]s=1-1=0$. [given, F1]
 
-2.1 Thus $(1-x)s=1$ by coefficient extensionality. Since $1-x$ has unit constant coefficient $1$, its inverse is unique, so $s=(1-x)^{-1}$. In the zero ring both sides are the unique series. [step 1.1, given] ∎
+2.1 Thus $(1-x)s=1$ by coefficient extensionality. Since $1-x$ has unit constant coefficient $1$, its inverse is unique, so $s=(1-x)^{-1}$. In the zero ring both sides are the unique series. [step 1.1, given, F2, F3] ∎

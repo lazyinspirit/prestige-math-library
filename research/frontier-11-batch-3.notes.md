@@ -267,3 +267,17 @@ None within batch 3. All required published dependencies were readable on disk, 
 - **CONCURRENT-TREE BLOCKER ONLY:** the global `depcheck` and `rendercheck` wrappers still report other batches' YAML/display issues and batch 1's intentionally unaudited published rewrites. Their output contains no remaining batch-3 unresolved link or multiline display defect.
 
 Per dispatch, `tools/gates.mjs` is not run.
+
+## Step-6 artifact reconciliation after reader 2
+
+Reader 2 repaired six dependency interfaces in the item text. The batch manifest now mirrors those exact on-disk lists: `prop-formal-derivative-algebra` adds `prop-coefficient-extraction-linearity-and-extensionality`; `thm-lagrange-burmann-inversion` adds `thm-formal-power-series-unit-criterion`; `ex-formal-series-over-zmod-four` adds `def-integers-modulo-n` and `def-addition-and-multiplication-modulo-n`; `ex-formal-square-root-one-minus-four-x` adds `def-formal-order-and-x-adic-topology`; `thm-formal-exponential-logarithm-identities` removes the unused `thm-formal-compositional-inverse`; and `thm-hypergraph-kovari-sos-turan-bound` adds `def-asymptotic-extremal-notation-and-edge-density`. The dictionary scaffold title now uses the repaired notation `v_x(h)`.
+
+The proof-contract blind spot was repaired across all 49 proof-bearing items. Each proof now separates the dependency clauses it actually uses into labeled facts, each label is attached only to the numbered steps using it, and each contract records the exact on-disk source excerpt and complete use list. No proof was classified as wholly self-contained: even the shortest verifications unfold a declared definition or invoke a prior extensionality, unit, order, colouring, or extremal theorem. The modulo-four step claim was refreshed to the reader's explicit congruence-class calculation. Existing step numbering and all eight boundary dispositions remain anchored to steps that still exist.
+
+The Flajolet–Sedgewick harvest now enumerates A.10 (the OGF of permutations), A.11 (Lagrange–Bürmann inversion for fractional powers), and A.12 (Abel's identity). Each is recorded as out of scope with a result-specific reason; the declared pp. 730–733 locator remains the range actually read. No existing coverage row was retargeted.
+
+I found no mathematical error in reader 2's repairs and did not undo or dispute any of them. No blocker remains in the batch-3 reconciliation.
+
+## Step-6 rendering reconciliation
+
+The labeled-fact insertion left `[F3]` in `thm-erdos-stone-for-balanced-blowups` without the closing inline-math delimiter after `o(n^r)`. That one missing `$` made the renderer carry the span across later fact and proof paragraphs, producing all eight reported errors. I restored only that delimiter; no mathematical wording, numbered step, dependency, proof-contract entry, coverage row, or verification field changed. The repaired file passes scoped precheck, the unchanged batch contract passes strict validation, and the repository-wide render check is clean.

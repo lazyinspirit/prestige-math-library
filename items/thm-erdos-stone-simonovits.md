@@ -36,14 +36,22 @@ $$\lim_{n\to\infty}\frac{\operatorname{ex}(n,H)}{\binom n2}=1-\frac1{\chi(H)-1}.
 
 ## Facts & Assumptions
 
-**Given:** The embedding lemma [[lem-colouring-embeds-a-graph-in-a-balanced-blowup]], balanced-blowup Erdős–Stone [[thm-erdos-stone-for-balanced-blowups]], exact Turán theorem [[thm-turan-exact-and-unique]], and chromatic number from [[def-proper-vertex-colouring-and-chromatic-number]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] A proper vertex colouring gives different colours to adjacent vertices, and its fibres are the colour classes ([[def-proper-vertex-colouring-and-chromatic-number]]).
+
+[F2] For $n\in\mathbb N$ and $r\ge1$, Turán's theorem gives $\operatorname{ex}(n,K_{r+1})=e(T_{n,r})$, and an $n$-vertex $K_{r+1}$-free graph attains equality exactly when it is isomorphic to $T_{n,r}$ ([[thm-turan-exact-and-unique]]).
+
+[F3] Every finite graph of chromatic number $r$ embeds as an ordinary subgraph of $K_r[s]$ for some $s\ge1$ ([[lem-colouring-embeds-a-graph-in-a-balanced-blowup]]).
+
+[F4] For $r\ge2$ and $s\ge1$, $\pi(K_r[s])=1-1/(r-1)$ ([[thm-erdos-stone-for-balanced-blowups]]).
 
 ## Proof
 
 **Proof technique:** sandwich $H$ between a Turán graph and a balanced blowup.
 
-1.1 Every $(r-1)$-partite graph is $H$-free, since every subgraph of it is $(r-1)$-colourable while $\chi(H)=r$. Therefore $T_{n,r-1}$ gives $\liminf_{n\to\infty}\operatorname{ex}(n,H)/\binom n2\ge1-1/(r-1)$. [given]
+1.1 Every $(r-1)$-partite graph is $H$-free, since every subgraph of it is $(r-1)$-colourable while $\chi(H)=r$. Therefore $T_{n,r-1}$ gives $\liminf_{n\to\infty}\operatorname{ex}(n,H)/\binom n2\ge1-1/(r-1)$. [given, F1, F2]
 
-1.2 The embedding lemma gives an $s\ge1$ with $H\subseteq K_r[s]$. Hence every $H$-free graph is $K_r[s]$-free, and balanced-blowup Erdős–Stone gives $\limsup_{n\to\infty}\operatorname{ex}(n,H)/\binom n2\le1-1/(r-1)$. [given]
+1.2 The embedding lemma gives an $s\ge1$ with $H\subseteq K_r[s]$. Hence every $H$-free graph is $K_r[s]$-free, and balanced-blowup Erdős–Stone gives $\limsup_{n\to\infty}\operatorname{ex}(n,H)/\binom n2\le1-1/(r-1)$. [given, F3, F4]
 
-2.1 The two bounds agree, proving the limit and the $o(1)$ formulation. When $r=2$, the expression is $0$ and the same proof uses $T_{n,1}$ for the lower bound and $K_2[s]$ for the upper bound, so the bipartite boundary is included. [step 1.1, step 1.2, given] ∎
+2.1 The two bounds agree, proving the limit and the $o(1)$ formulation. When $r=2$, the expression is $0$ and the same proof uses $T_{n,1}$ for the lower bound and $K_2[s]$ for the upper bound, so the bipartite boundary is included. [step 1.1, step 1.2, given, F4] ∎

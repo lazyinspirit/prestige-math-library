@@ -29,12 +29,16 @@ The cycle $C_5$ contains no ordinary $K_{2,2}$, although $C_5$ itself is not bip
 
 ## Facts & Assumptions
 
-**Given:** The cycle and complete-bipartite definitions in [[def-standard-complete-bipartite-path-and-cycle-graphs]] and the ordinary forbidden-subgraph convention used in [[thm-kovari-sos-turan-bound]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] For $n\ge3$, $C_n$ has the consecutive edges $\{i,i+1\}$ and the closing edge $\{n-1,0\}$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+
+[F2] The complete bipartite graph $K_{A,B}$ has exactly all edges joining a vertex of $A$ to a vertex of $B$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
 ## Verification
 
 **Proof technique:** inspect common neighbours.
 
-1.1 Label the cycle vertices modulo $5$. Two adjacent vertices have no common neighbour, and two nonadjacent vertices have exactly one common neighbour. Thus no pair has the two common neighbours required to form a $K_{2,2}$. [given]
+1.1 Label the cycle vertices modulo $5$. Two adjacent vertices have no common neighbour, and two nonadjacent vertices have exactly one common neighbour. Thus no pair has the two common neighbours required to form a $K_{2,2}$. [given, F1, F2]
 
 2.1 Therefore $C_5$ is $K_{2,2}$-free. Its odd cycle is also a reminder that the host graphs in the ordinary KST problem need not themselves be bipartite. [step 1.1, given] ∎

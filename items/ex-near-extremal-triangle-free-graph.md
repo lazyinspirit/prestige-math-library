@@ -29,12 +29,16 @@ Delete any one edge from $K_{3,4}$. The resulting seven-vertex graph is triangle
 
 ## Facts & Assumptions
 
-**Given:** The complete bipartite graph $K_{3,4}$ from [[def-standard-complete-bipartite-path-and-cycle-graphs]] and Mantel's threshold from [[thm-mantel-exact-and-unique]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] The complete bipartite graph $K_{A,B}$ has exactly all edges joining a vertex of $A$ to a vertex of $B$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+
+[F2] For every $n\in\mathbb N$, Mantel's theorem gives $\operatorname{ex}(n,K_3)=\lfloor n^2/4\rfloor$, and a triangle-free $n$-vertex graph attains equality exactly when it is the balanced complete bipartite graph up to isomorphism ([[thm-mantel-exact-and-unique]]).
 
 ## Verification
 
 **Proof technique:** deletion preserves the forbidden-subgraph condition.
 
-1.1 Every edge of $K_{3,4}$ crosses its two parts, so it has no triangle, and its edge count is $3\cdot4=12$. Deleting an edge cannot create a triangle and changes the edge count to $11$. [given]
+1.1 Every edge of $K_{3,4}$ crosses its two parts, so it has no triangle, and its edge count is $3\cdot4=12$. Deleting an edge cannot create a triangle and changes the edge count to $11$. [given, F1]
 
-2.1 Mantel's theorem gives threshold $12$ and identifies the unique equality graph as $K_{3,4}$ up to isomorphism. The edge-deleted graph therefore lies exactly one edge below the equality case. [step 1.1, given] ∎
+2.1 Mantel's theorem gives threshold $12$ and identifies the unique equality graph as $K_{3,4}$ up to isomorphism. The edge-deleted graph therefore lies exactly one edge below the equality case. [step 1.1, given, F2] ∎

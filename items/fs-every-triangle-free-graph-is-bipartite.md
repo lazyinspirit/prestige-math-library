@@ -28,16 +28,18 @@ Every triangle-free graph is bipartite.
 
 ## Facts & Assumptions
 
-**Given:** The cycle $C_5$ from [[def-standard-complete-bipartite-path-and-cycle-graphs]].
+**Given:** The hypotheses and notation of the statement above.
 
-The theorem [[thm-bipartite-iff-no-odd-cycle]] states that a finite graph is bipartite if and only if it contains no odd cycle.
+[F1] For $n\ge3$, $C_n$ has the consecutive edges $\{i,i+1\}$ and the closing edge $\{n-1,0\}$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
+
+[F2] A finite simple graph is bipartite if and only if it contains no odd cycle ([[thm-bipartite-iff-no-odd-cycle]]).
 
 ## Refutation
 
 **Proof technique:** give the five-cycle.
 
-1.1 The only cycle in $C_5$ using three edges would require a chord, and $C_5$ has only its five consecutive edges. Hence $C_5$ is triangle-free. [given]
+1.1 The only cycle in $C_5$ using three edges would require a chord, and $C_5$ has only its five consecutive edges. Hence $C_5$ is triangle-free. [given, F1]
 
-1.2 The graph $C_5$ is itself an odd cycle, so the cited equivalence says it is not bipartite. [given]
+1.2 The graph $C_5$ is itself an odd cycle, so the cited equivalence says it is not bipartite. [given, F2]
 
 2.1 Thus $C_5$ satisfies the premise and fails the conclusion, refuting the statement. [step 1.1, step 1.2] ∎

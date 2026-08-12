@@ -40,16 +40,22 @@ These formulas include $n=0$, $k=0$, and $k>n$.
 
 ## Facts & Assumptions
 
-**Given:** The coefficient-function and Cauchy-product definitions in [[def-formal-power-series-and-coefficient-extraction]], and the ring structure of [[thm-formal-power-series-ring-and-polynomial-embedding]].
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] For $f=\sum a_nx^n$, coefficient extraction is evaluation: $[x^n]f=a_n$ ([[def-formal-power-series-and-coefficient-extraction]]).
+
+[F2] The series $x$ is supported at degree $1$, and $x^n$ is supported at degree $n$ ([[def-formal-power-series-and-coefficient-extraction]]).
+
+[F3] Cauchy multiplication is the finite convolution $[x^n](fg)=\sum_{i=0}^{n}[x^i]f[x^{n-i}]g$ ([[def-formal-power-series-and-coefficient-extraction]]).
 
 ## Proof
 
 **Proof technique:** unfold the definitions.
 
-1.1 The two linearity identities are the pointwise definitions of addition and scalar multiplication. Equality of all extracted coefficients is equality of the underlying functions $\mathbb N\to R$, proving both directions of extensionality. [given]
+1.1 The two linearity identities are the pointwise definitions of addition and scalar multiplication. Equality of all extracted coefficients is equality of the underlying functions $\mathbb N\to R$, proving both directions of extensionality. [given, F1]
 
-1.2 In the convolution for $x^kf$, the first factor has one nonzero coefficient, at $k$. It contributes $[x^{n-k}]f$ when $k\le n$ and there is no contributing index when $k>n$; for $k=0$ this says $1f=f$. [given]
+1.2 In the convolution for $x^kf$, the first factor has one nonzero coefficient, at $k$. It contributes $[x^{n-k}]f$ when $k\le n$ and there is no contributing index when $k>n$; for $k=0$ this says $1f=f$. [given, F2]
 
-1.3 The last display is the defining finite convolution, whose $n=0$ instance is $[x^0](fg)=[x^0]f[x^0]g$. [given]
+1.3 The last display is the defining finite convolution, whose $n=0$ instance is $[x^0](fg)=[x^0]f[x^0]g$. [given, F3]
 
 2.1 Steps 1.1-1.3 establish every asserted clause and every listed boundary case. [step 1.1, step 1.2, step 1.3] ∎

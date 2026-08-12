@@ -30,14 +30,16 @@ $$R(s,t)\ge(s-1)(t-1)+1.$$
 
 ## Facts & Assumptions
 
-**Given:** The complete multipartite Turán construction from [[thm-turan-exact-and-unique]] and red/blue arrow notation from [[def-ramsey-colouring-and-arrow-notation]].
+**Given:** The hypotheses and notation of the statement above.
 
-The definition [[def-off-diagonal-ramsey-number]] says that $R(s,t)$ is the least $N$ such that every red/blue colouring of $K_N$ contains a red $K_s$ or a blue $K_t$.
+[F1] $N\to(s,t)^2$ means every red-blue colouring of the pairs of an $N$-element set has a red $s$-set or a blue $t$-set ([[def-ramsey-colouring-and-arrow-notation]]).
+
+[F2] $R(s,t)$ is the least positive $N$ satisfying $N\to(s,t)^2$ ([[def-off-diagonal-ramsey-number]]).
 
 ## Proof
 
 **Proof technique:** exhibit a colouring below the claimed threshold.
 
-1.1 Partition $(s-1)(t-1)$ vertices into $s-1$ parts of size $t-1$. Colour every edge within a part blue and every edge between parts red. A red clique uses at most one vertex from each part, so has size at most $s-1$; a blue clique lies in one part, so has size at most $t-1$. [given]
+1.1 Partition $(s-1)(t-1)$ vertices into $s-1$ parts of size $t-1$. Colour every edge within a part blue and every edge between parts red. A red clique uses at most one vertex from each part, so has size at most $s-1$; a blue clique lies in one part, so has size at most $t-1$. [given, F1]
 
-2.1 Thus this colouring has neither a red $K_s$ nor a blue $K_t$. The Ramsey-number definition makes $R(s,t)$ strictly larger than $(s-1)(t-1)$, proving the integer lower bound. [step 1.1, given] ∎
+2.1 Thus this colouring has neither a red $K_s$ nor a blue $K_t$. The Ramsey-number definition makes $R(s,t)$ strictly larger than $(s-1)(t-1)$, proving the integer lower bound. [step 1.1, given, F1, F2] ∎

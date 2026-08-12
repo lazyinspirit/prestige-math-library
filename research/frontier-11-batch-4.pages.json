@@ -59,6 +59,7 @@
         "title": "For endomorphisms S and T of one finite-dimensional vector space, det(ST)=det(S)det(T)",
         "strategy": "For every alternating top-degree form omega, apply the scaling theorem first to S and then to T: omega(STv_0,...,STv_{n-1})=det(S)det(T)omega(v_0,...,v_{n-1}). Uniqueness in the same theorem identifies the scalar with det(ST). The zero-dimensional case reads 1=1 times 1.",
         "deps": [
+          "def-determinant-of-a-linear-operator",
           "thm-operator-determinant-is-basis-independent",
           "thm-operator-determinant-scales-every-alternating-top-form"
         ]
@@ -104,6 +105,7 @@
         "title": "For every positive-sized square matrix over a commutative ring, A adj(A)=adj(A) A=det(A) I",
         "strategy": "Compute each entry of A adj(A). A diagonal entry is the Laplace expansion along the corresponding row; an off-diagonal entry is the same cofactor sum for a matrix with one row replaced by another, hence has determinant zero by alternation. Apply the column version for adj(A)A. Do not infer the off-diagonal zeros merely from singularity over a ring.",
         "deps": [
+          "def-ring-matrix-product-identity-and-transpose",
           "thm-laplace-cofactor-expansion",
           "cor-determinant-vanishes-with-a-zero-or-repeated-column",
           "cor-determinant-is-alternating-multilinear-in-the-rows",
@@ -139,6 +141,7 @@
         "title": "For A in M_n(R) and columns u,v over a commutative ring, det(A+uv^T)=det(A)+v^T adj(A)u",
         "strategy": "Expand det(A+uv^T) multilinearly in its columns. The empty choice gives det(A); every term choosing two or more columns from uv^T vanishes because those columns are scalar multiples of u. For the singleton choice j, expand the determinant with column j replaced by u along that column, obtaining v_j sum_i C_ij u_i. Summing over j is v^T adj(A)u. State n>=1 explicitly.",
         "deps": [
+          "def-ring-matrix-product-identity-and-transpose",
           "def-matrix-minors-cofactors-and-adjugate",
           "thm-laplace-cofactor-expansion",
           "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
@@ -151,6 +154,7 @@
         "title": "Over a commutative ring, adj(P^{-1}AP)=P^{-1}adj(A)P for every invertible P",
         "strategy": "Put C=P^{-1}AP. Compare det(C+uv^T) in two ways. The rank-one update formula gives det(C)+v^T adj(C)u. Similarity invariance rewrites it as det(A+(Pu)(v^T P^{-1})), and a second rank-one update gives det(A)+v^T P^{-1}adj(A)Pu. Cancel det(C)=det(A), then choose u and v to be standard coordinate columns to identify every entry. This works for singular A and avoids any undeveloped rational-function field.",
         "deps": [
+          "def-ring-matrix-product-identity-and-transpose",
           "lem-determinant-rank-one-update-over-a-commutative-ring",
           "cor-determinant-is-invariant-under-similarity",
           "def-invertible-matrix-and-similarity-over-a-commutative-ring",
@@ -174,6 +178,7 @@
         "title": "Cramer's rule over a commutative ring: every solution satisfies det(A)x_j=det(A_j(b)), and a unit determinant gives the unique quotient formula",
         "strategy": "For Ax=b, replace column j of A by b and use b=sum_k x_k A_k. Column multilinearity kills every term except k=j, giving det(A_j(b))=x_j det(A). If det(A) is a unit, the adjugate formula constructs the solution with those coordinates and invertibility gives uniqueness. State n>=1 and do not divide by a merely nonzero non-unit.",
         "deps": [
+          "def-ring-matrix-product-identity-and-transpose",
           "thm-laplace-cofactor-expansion",
           "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
           "cor-square-matrix-invertible-iff-determinant-is-a-unit",
@@ -200,9 +205,12 @@
         "title": "A finite-dimensional linear operator over a field is invertible if and only if its determinant is nonzero",
         "strategy": "Choose a basis. The operator is invertible exactly when its representing matrix is invertible; over a field the unit-determinant criterion is the nonzero-determinant criterion. The unique endomorphism of the zero space is invertible and has determinant 1.",
         "deps": [
+          "def-determinant-of-a-linear-operator",
           "thm-operator-determinant-is-basis-independent",
           "cor-square-matrix-invertible-iff-determinant-is-a-unit",
           "thm-invertible-matrices-correspond-to-linear-isomorphisms",
+          "thm-matrix-representation-is-a-vector-space-isomorphism",
+          "thm-matrix-of-a-composite-is-the-product",
           "lem-field-is-a-commutative-ring"
         ]
       },
@@ -238,6 +246,7 @@
           "def-adjugate-of-a-linear-operator",
           "thm-adjugate-identity-over-a-commutative-ring",
           "thm-operator-determinant-is-basis-independent",
+          "thm-matrix-representation-is-a-vector-space-isomorphism",
           "thm-matrix-of-a-composite-is-the-product"
         ]
       }
@@ -279,7 +288,7 @@
       {
         "id": "ex-doubling-integers-has-nonunit-determinant",
         "kind": "example",
-        "title": "Multiplication by 2 on Z is injective but not surjective: its determinant is the non-unit 2, its adjugate is integral, and its inverse exists only over Q",
+        "title": "Multiplication by 2 on Z is injective but not surjective: its determinant is the non-unit 2, its adjugate is integral, and its inverse exists after extending scalars to Q",
         "strategy": "Represent n->2n by the 1 by 1 integer matrix [2]. Its determinant is 2 and its adjugate is [1]. Cancellation in Z proves injectivity, while 1 has no preimage proves nonsurjectivity; over Q the inverse matrix is [1/2].",
         "deps": [
           "def-coordinate-endomorphism-over-a-commutative-ring",
@@ -626,6 +635,7 @@
         "deps": [
           "cor-continuous-logarithmic-functions-form-a-one-parameter-family",
           "def-logarithm-to-a-base",
+          "thm-logarithm-continuous-functional-equation-characterisation",
           "thm-natural-logarithm-laws"
         ]
       },

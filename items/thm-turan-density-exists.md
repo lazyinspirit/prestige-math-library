@@ -34,14 +34,16 @@ $$\inf_{n\ge2}\frac{\operatorname{ex}(n,H)}{\binom n2}.$$
 
 ## Facts & Assumptions
 
-**Given:** Monotonicity from [[prop-normalized-extremal-number-monotonicity]] and the normalization of [[def-asymptotic-extremal-notation-and-edge-density]].
+**Given:** The hypotheses and notation of the statement above.
 
-The theorem [[thm-monotone-convergence]] states that every nonincreasing real sequence bounded below converges to its infimum.
+[F1] For a finite graph $H$ with an edge and every $n\ge3$, the normalized extremal numbers satisfy $\operatorname{ex}(n,H)/\binom n2\le\operatorname{ex}(n-1,H)/\binom{n-1}{2}$ ([[prop-normalized-extremal-number-monotonicity]]).
+
+[F2] Every nonincreasing real sequence bounded below converges to the infimum of its range ([[thm-monotone-convergence]]).
 
 ## Proof
 
 **Proof technique:** apply bounded monotone convergence.
 
-1.1 The normalized extremal numbers are nonincreasing. They lie in $[0,1]$ because an edge count is nonnegative and no simple $n$-vertex graph has more than $\binom n2$ edges. [given]
+1.1 The normalized extremal numbers are nonincreasing. They lie in $[0,1]$ because an edge count is nonnegative and no simple $n$-vertex graph has more than $\binom n2$ edges. [given, F1]
 
-2.1 Bounded monotone convergence makes the sequence converge to its infimum. The bounds in step 1.1 place that value in $[0,1]$. [step 1.1, given] ∎
+2.1 Bounded monotone convergence makes the sequence converge to its infimum. The bounds in step 1.1 place that value in $[0,1]$. [step 1.1, given, F2] ∎

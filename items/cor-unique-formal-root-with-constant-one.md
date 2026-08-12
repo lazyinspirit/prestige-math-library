@@ -32,14 +32,16 @@ namely $v=(1+u)^{1/k}$. When $u=0$, this unique root is $1$.
 
 ## Facts & Assumptions
 
-**Given:** The inverse exponential-logarithm and power laws of [[thm-formal-exponential-logarithm-identities]], and the fact from [[thm-formal-power-series-unit-criterion]] that every constant-one series is a unit.
+**Given:** The hypotheses and notation of the statement above.
+
+[F1] In a commutative $\mathbb Q$-algebra, formal $\exp$ and $\log$ are inverse group homomorphisms on $xR\llbracket x\rrbracket$ and $1+xR\llbracket x\rrbracket$, and for $u\in xR\llbracket x\rrbracket$ and $c,d\in R$ the exponent-addition and exponent-multiplication laws hold ([[thm-formal-exponential-logarithm-identities]]).
 
 ## Proof
 
 **Proof technique:** apply the formal logarithm.
 
-1.1 The power law gives $((1+u)^{1/k})^k=(1+u)^1=1+u$, so the stated series is a root with constant coefficient $1$. [given]
+1.1 The power law gives $((1+u)^{1/k})^k=(1+u)^1=1+u$, so the stated series is a root with constant coefficient $1$. [given, F1]
 
-1.2 If $v\in1+xR\llbracket x\rrbracket$ and $v^k=1+u$, the logarithm addition law gives $k\log v=\log(1+u)$. Since $k$ is invertible in a $\mathbb Q$-algebra, $\log v=(1/k)\log(1+u)$; applying $\exp$ gives $v=(1+u)^{1/k}$. This proves uniqueness. [given]
+1.2 If $v\in1+xR\llbracket x\rrbracket$ and $v^k=1+u$, the logarithm addition law gives $k\log v=\log(1+u)$. Since $k$ is invertible in a $\mathbb Q$-algebra, $\log v=(1/k)\log(1+u)$; applying $\exp$ gives $v=(1+u)^{1/k}$. This proves uniqueness. [given, F1]
 
-2.1 For $u=0$, the construction is $\exp(0)=1$, and step 1.2 excludes any other constant-one root. [step 1.1, step 1.2, given] ∎
+2.1 For $u=0$, the construction is $\exp(0)=1$, and step 1.2 excludes any other constant-one root. [step 1.1, step 1.2, given, F1] ∎
