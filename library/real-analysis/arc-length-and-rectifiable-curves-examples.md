@@ -6,6 +6,7 @@ items: []
 examples: [ex-line-segment-and-polygonal-path-length,
            ex-unit-circle-arc-has-length-theta,
            cex-graph-of-x-sin-one-over-x-is-not-rectifiable,
+           cex-the-koch-curve-is-not-rectifiable,
            ex-v-shaped-path-is-rectifiable-but-not-c1,
            cex-the-same-trace-can-have-different-path-lengths,
            cex-arc-length-is-not-continuous-under-uniform-convergence,

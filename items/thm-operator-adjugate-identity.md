@@ -10,7 +10,8 @@ provenance:
 deps: [def-adjugate-of-a-linear-operator,
        thm-adjugate-identity-over-a-commutative-ring,
        thm-operator-determinant-is-basis-independent,
-       thm-matrix-of-a-composite-is-the-product]
+       thm-matrix-of-a-composite-is-the-product,
+       thm-matrix-representation-is-a-vector-space-isomorphism]
 justified_by: []
 aliases: []
 landmark: false
@@ -50,10 +51,13 @@ $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I$
 [L3] $\det(T)=\det([T]_{\mathcal B})$
 ([[thm-operator-determinant-is-basis-independent]]).
 
+[L4] The matrix-representation map is injective
+([[thm-matrix-representation-is-a-vector-space-isomorphism]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Put $A=[T]_{\mathcal B}$. By [F1] and [L2], the matrices of $T\circ\operatorname{adj}(T)$ and $\operatorname{adj}(T)\circ T$ are respectively $A\operatorname{adj}(A)$ and $\operatorname{adj}(A)A$. [F1, L2]
 2.1 By [L1], both matrices in step 1.1 equal $\det(A)I_n$, which equals $\det(T)I_n$ by [L3]. [step 1.1, L1, L3]
-3.1 Equality of representing matrices gives both asserted operator identities. [step 2.1] ∎
+3.1 Equality of representing matrices gives both asserted operator identities. [step 2.1, L4] ∎

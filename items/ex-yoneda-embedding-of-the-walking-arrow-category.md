@@ -56,7 +56,7 @@ empty function at $1$.
 
 2.1 A presheaf represented by $a$ acts on $u^{\mathrm{op}}:1\to0$ by precomposition with $u$. For $a=0$ this is the empty function $\varnothing\to\{1_0\}$; for $a=1$ it sends $1_1$ to $1_1\circ u=u$ by [F1]. [step 1.1, F1, F2, F3]
 
-2.2 By [F2], $y(u)$ is postcomposition with $u$. At $0$ it sends $1_0$ to $u\circ1_0=u$, and at $1$ it is the unique empty function. This proves the asserted component table, including the empty hom-set. [step 1.1, F1, F2]
+2.2 By [F2], $y(u)$ is postcomposition with $u$. At $0$ it sends $1_0$ to $u\circ1_0=u$, and at $1$ it is the unique empty function. This proves the asserted component table, including the empty hom-set. [step 1.1, F1, F2, F3]
 
 3.1 There is one natural transformation $y(0)\Rightarrow y(0)$ and one $y(0)\Rightarrow y(1)$, namely the identity and $y(u)$. There is no transformation $y(1)\Rightarrow y(0)$ because its component at $1$ would be a function $\{1_1\}\to\varnothing$, forbidden by [F3]. [step 1.1, step 2.1, step 2.2, F3]
 

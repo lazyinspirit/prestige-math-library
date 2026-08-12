@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-evaluation-kernel-and-minimal-polynomial, thm-simple-algebraic-extension-quotient-power-basis-and-degree, thm-eisenstein-irreducibility-criterion, thm-universal-property-of-a-polynomial-ring, thm-of-square-roots]
+deps: [def-algebraic-and-transcendental-elements, thm-evaluation-kernel-and-minimal-polynomial, thm-simple-algebraic-extension-quotient-power-basis-and-degree, thm-eisenstein-irreducibility-criterion, thm-universal-property-of-a-polynomial-ring, cor-cauchy-reals-lub-complete, thm-of-square-roots]
 justified_by: []
 aliases: []
 landmark: false
@@ -25,6 +25,7 @@ pipeline_run: frontier-11
 ## Example
 
 Let $a=\sqrt{2+\sqrt3}$, with the nonnegative real square roots supplied by
+the completeness of $\mathbb R$ ([[cor-cauchy-reals-lub-complete]]) and
 [[thm-of-square-roots]]. Its minimal polynomial over $\mathbb Q$ is
 $$p(x)=x^4-4x^2+1,$$
 so $[\mathbb Q(a):\mathbb Q]=4$.
@@ -37,15 +38,17 @@ so $[\mathbb Q(a):\mathbb Q]=4$.
 
 [F2] The polynomial-ring universal property gives substitution homomorphisms such as $f(x)\mapsto f(x+1)$ ([[thm-universal-property-of-a-polynomial-ring]]).
 
-[F3] The minimal polynomial is the monic irreducible polynomial generating the evaluation kernel ([[thm-evaluation-kernel-and-minimal-polynomial]]).
+[F3] A root of a nonzero polynomial is algebraic ([[def-algebraic-and-transcendental-elements]]), and the minimal polynomial of an algebraic element is the monic irreducible polynomial generating its evaluation kernel ([[thm-evaluation-kernel-and-minimal-polynomial]]).
 
 [F4] Its degree equals the degree of the associated simple extension ([[thm-simple-algebraic-extension-quotient-power-basis-and-degree]]).
+
+[F5] The real numbers are a complete ordered field, so the displayed nonnegative square roots exist and square to their radicands ([[cor-cauchy-reals-lub-complete]], [[thm-of-square-roots]]).
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 From $a^2=2+\sqrt3$ one obtains $(a^2-2)^2=3$, hence $p(a)=a^4-4a^2+1=0$. [algebra]
+1.1 From $a^2=2+\sqrt3$ one obtains $(a^2-2)^2=3$, hence $p(a)=a^4-4a^2+1=0$. [F5, algebra]
 
 1.2 Substitution from [F2] gives $p(x+1)=x^4+4x^3+2x^2-4x-2$, which satisfies [F1] at $2$ and is therefore irreducible. [F1, F2, algebra]
 

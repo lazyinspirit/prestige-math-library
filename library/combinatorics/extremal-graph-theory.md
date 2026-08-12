@@ -25,6 +25,6 @@ items: [def-extremal-number-turan-graph-and-blowup,
 examples: []
 ---
 
-Finite simple graphs, ordinary subgraphs, degree and neighbourhood notation, finite counting, chromatic number, and Ramsey arrow notation provide the setting. The page fixes ordinary-subgraph avoidance explicitly, defines extremal numbers and balanced Turán graphs, and keeps that convention separate from the published induced-subgraph use of the phrase “$H$-free.”
+Finite simple graphs, ordinary subgraphs, degree and neighbourhood notation, finite counting, chromatic number, and Ramsey arrow notation provide the setting. The page fixes ordinary-subgraph avoidance explicitly, then defines extremal numbers and balanced Turán graphs.
 
 Independent proofs of Mantel’s theorem and Turán’s theorem give exact edge counts and equality graphs, followed by a Turán-graph Ramsey construction. Normalized extremal numbers lead to Turán density and supersaturation; common-neighbour double counting gives the bipartite and ordinary Kővári–Sós–Turán bounds. A locally proved hypergraph KST lemma then supplies Erdős–Stone for balanced blowups and the full Erdős–Stone–Simonovits theorem, ending with the citable formula that asymptotic extremal density depends only on chromatic number.

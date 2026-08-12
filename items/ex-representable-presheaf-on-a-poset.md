@@ -21,7 +21,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Tom Leinster, Basic Category Theory, Example 1.2.7 and Definition 4.1.3"
+    - title: "Tom Leinster, Basic Category Theory, Example 1.1.8(e) and Definitions 4.1.16--4.1.17"
       url: "https://arxiv.org/pdf/1612.09375.pdf"
 pipeline_run: null
 ---

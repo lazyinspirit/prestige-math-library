@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-unique-formal-root-with-constant-one, prop-coefficient-extraction-linearity-and-extensionality]
+deps: [cor-unique-formal-root-with-constant-one, prop-coefficient-extraction-linearity-and-extensionality, def-formal-order-and-x-adic-topology]
 justified_by: []
 aliases: []
 landmark: false
@@ -32,7 +32,7 @@ where $O(x^6)$ means a series of order at least $6$.
 
 ## Facts & Assumptions
 
-**Given:** Existence and uniqueness of the constant-one root from [[cor-unique-formal-root-with-constant-one]], and finite convolution from [[prop-coefficient-extraction-linearity-and-extensionality]].
+**Given:** Existence and uniqueness of the constant-one root from [[cor-unique-formal-root-with-constant-one]], finite convolution from [[prop-coefficient-extraction-linearity-and-extensionality]], and formal order and congruence modulo $x^N$ from [[def-formal-order-and-x-adic-topology]].
 
 ## Verification
 

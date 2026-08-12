@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-newton-leibniz-with-interior-derivative, thm-algebra-of-derivatives, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-linearity-of-the-integral]
+deps: [thm-newton-leibniz-with-interior-derivative, thm-algebra-of-derivatives, thm-continuous-implies-integrable, cor-integrability-of-absolute-values-products-and-lattice-operations, thm-linearity-of-the-integral]
 justified_by: []
 aliases: []
 landmark: true
@@ -40,7 +40,7 @@ No endpoint derivative of either factor is assumed.
 
 [L1] The product rule gives $(FG)'=F'G+FG'$ wherever both derivatives exist ([[thm-algebra-of-derivatives]]).
 
-[L2] Products of Riemann-integrable functions are Riemann integrable, and continuous functions on a compact interval are Riemann integrable ([[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
+[L2] Continuous functions on a compact interval are Riemann integrable, and products of Riemann-integrable functions are Riemann integrable ([[thm-continuous-implies-integrable]], [[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
 
 [L3] The integral is linear on Riemann-integrable functions ([[thm-linearity-of-the-integral]]).
 

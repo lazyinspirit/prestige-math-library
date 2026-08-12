@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-complex-numbers-form-a-field, thm-simple-algebraic-extension-quotient-power-basis-and-degree, lem-x-squared-plus-one-is-irreducible-over-the-reals]
+deps: [def-algebraic-and-transcendental-elements, thm-complex-numbers-form-a-field, thm-evaluation-kernel-and-minimal-polynomial, thm-simple-algebraic-extension-quotient-power-basis-and-degree, lem-x-squared-plus-one-is-irreducible-over-the-reals]
 justified_by: []
 aliases: []
 landmark: false
@@ -37,11 +37,13 @@ Its power basis is $1,i$, and $[\mathbb C:\mathbb R]=2$.
 
 [F3] Every complex number is uniquely $a+bi$ and $i^2=-1$ ([[thm-complex-numbers-form-a-field]]).
 
+[F4] A root of a nonzero polynomial is algebraic ([[def-algebraic-and-transcendental-elements]]); for an algebraic element with minimal polynomial $m_a$, $f(a)=0$ exactly when $m_a$ divides $f$ ([[thm-evaluation-kernel-and-minimal-polynomial]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [F3], $i$ is a root of $x^2+1$, and [F1] makes that polynomial its minimal polynomial. [F1, F3]
+1.1 By [F3], $i$ is a root of $x^2+1$, and [F1] and [F4] make that polynomial its minimal polynomial. [F1, F3, F4]
 
 1.2 The unique coordinate form in [F3] gives $\mathbb C=\mathbb R(i)$. [F3]
 

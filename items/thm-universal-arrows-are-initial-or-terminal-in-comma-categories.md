@@ -19,10 +19,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Emily Riehl, Category Theory in Context, Proposition 2.4.8"
+    - title: "Emily Riehl, Category Theory in Context, Proposition 2.4.8 and Theorem 4.2.7(v)--(vi)"
       url: "https://emilyriehl.github.io/files/context.pdf"
-    - title: "Tom Leinster, Basic Category Theory, Section 4.1"
-      url: "https://arxiv.org/pdf/1612.09375.pdf"
 pipeline_run: null
 ---
 

@@ -11,7 +11,8 @@ generation:
   role: example
 deps: [def-presheaf-representable-functor-and-representation,
        thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism,
-       prop-sets-and-functions-form-category-set, def-function]
+       prop-sets-and-functions-form-category-set, def-function,
+       lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]
 justified_by: []
 aliases: []
 landmark: false
@@ -21,7 +22,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Emily Riehl, Category Theory in Context, Proposition 2.3.9"
+    - title: "Emily Riehl, Category Theory in Context, Example 2.1.5(i) and Corollary 2.3.2"
       url: "https://emilyriehl.github.io/files/context.pdf"
 pipeline_run: null
 ---
@@ -46,7 +47,7 @@ is the canonical isomorphism of these representations.
 
 [L1] Two covariant universal elements for the same functor have a unique isomorphism $i$ satisfying $F(i)(u)=u'$ ([[thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism]]).
 
-[F3] A function assigns exactly one value to each domain element, and functions with the same domain are equal when all their values agree ([[def-function]]).
+[F3] A function assigns exactly one value to each domain element, and two functions with the same domain and codomain are equal exactly when their values agree everywhere ([[def-function]], [[lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]]).
 
 ## Verification
 

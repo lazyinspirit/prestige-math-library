@@ -10,6 +10,7 @@ provenance:
 deps: [lem-determinant-rank-one-update-over-a-commutative-ring,
        cor-determinant-is-invariant-under-similarity,
        def-invertible-matrix-and-similarity-over-a-commutative-ring,
+       def-ring-matrix-product-identity-and-transpose,
        thm-ring-matrix-arithmetic-laws]
 justified_by: []
 aliases: []
@@ -49,9 +50,11 @@ $\det(B+uv^{\mathsf T})
 =\det(B)+v^{\mathsf T}\operatorname{adj}(B)u$
 ([[lem-determinant-rank-one-update-over-a-commutative-ring]]).
 
-[L3] Matrix multiplication is associative and distributive, transpose reverses
-products, and the standard coordinate columns select matrix entries
-([[thm-ring-matrix-arithmetic-laws]]).
+[F2] Matrix products and transposes are given by their entry formulas
+([[def-ring-matrix-product-identity-and-transpose]]).
+
+[L3] Matrix multiplication is associative and distributive, and transpose
+reverses products ([[thm-ring-matrix-arithmetic-laws]]).
 
 ## Proof
 
@@ -59,5 +62,5 @@ products, and the standard coordinate columns select matrix entries
 
 1.1 For arbitrary columns $u,v$, $$ C+uv^{\mathsf T} =P^{-1}\bigl(A+(Pu)(v^{\mathsf T}P^{-1})\bigr)P. $$ [F1, L3, algebra]
 2.1 Apply [L1] to step 1.1, then [L2] to both rank-one updates. Since $\det(C)=\det(A)$, cancellation in the additive group of $R$ gives $$ v^{\mathsf T}\operatorname{adj}(C)u =v^{\mathsf T}P^{-1}\operatorname{adj}(A)Pu. $$ [step 1.1, L1, L2, L3]
-3.1 For each $i,j$, choose $v$ to be standard column $i$ and $u$ to be standard column $j$. Step 2.1 says that the $(i,j)$ entries of $\operatorname{adj}(C)$ and $P^{-1}\operatorname{adj}(A)P$ are equal. [step 2.1, L3]
+3.1 For each $i,j$, let $v$ be the column with entry $1$ at $i$ and $0$ elsewhere, and let $u$ be the analogous column at $j$. The product formula [F2] makes $v^{\mathsf T}Bu=B_{ij}$ for every $B\in M_n(R)$, so step 2.1 says that the $(i,j)$ entries of $\operatorname{adj}(C)$ and $P^{-1}\operatorname{adj}(A)P$ are equal. [step 2.1, F2]
 4.1 Equality of all entries proves $\operatorname{adj}(C)=P^{-1}\operatorname{adj}(A)P$, and substituting the definition of $C$ proves the statement. [step 3.1, F1] ∎

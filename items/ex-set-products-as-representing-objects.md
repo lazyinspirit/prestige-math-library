@@ -9,7 +9,8 @@ provenance:
   proof: ai-altered
 deps: [def-presheaf-representable-functor-and-representation,
        prop-sets-and-functions-form-category-set, def-cartesian-product,
-       def-function, thm-the-characterising-property-of-ordered-pairs]
+       def-function, lem-two-functions-are-equal-exactly-when-they-agree-at-every-point,
+       thm-the-characterising-property-of-ordered-pairs]
 justified_by: []
 aliases: []
 landmark: false
@@ -19,8 +20,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Tom Leinster, Basic Category Theory, Example 4.1.5"
-      url: "https://arxiv.org/pdf/1612.09375.pdf"
+    - title: "Justin Campbell, Harvard Math 55b tutorial notes, Example 1.1 and Definition 2.1"
+      url: "https://people.math.harvard.edu/~campbell/tutnotes1.pdf"
 pipeline_run: null
 ---
 
@@ -44,7 +45,7 @@ $(\pi_A\circ f,\pi_B\circ f)$.
 
 [F3] The Cartesian product is $A\times B=\{(a,b):a\in A,\ b\in B\}$, and $(a,b)=(a',b')$ holds exactly when $a=a'$ and $b=b'$ ([[def-cartesian-product]], [[thm-the-characterising-property-of-ordered-pairs]]). Hence $\pi_A(a,b)=a$ and $\pi_B(a,b)=b$ are well-defined functions.
 
-[F4] A function assigns each element of its domain exactly one element of its codomain; two functions are equal when their values agree everywhere ([[def-function]]).
+[F4] A function assigns each element of its domain exactly one element of its codomain, and two functions with the same domain and codomain are equal exactly when their values agree everywhere ([[def-function]], [[lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]]).
 
 ## Verification
 

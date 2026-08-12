@@ -28,7 +28,7 @@ Let $c:[0,1]\to[0,1]$ be the Cantor function. It is continuous, $c(0)=0$, and $c
 
 $$c(1)-c(0)=1.$$
 
-Thus an almost-everywhere derivative identity alone cannot replace the continuity and integrability hypotheses in Newton--Leibniz.
+Thus even continuity of the primitive and integrability of the zero function do not make an almost-everywhere derivative identity sufficient for Newton--Leibniz.
 
 ## Facts & Assumptions
 

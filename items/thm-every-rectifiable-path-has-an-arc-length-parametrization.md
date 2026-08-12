@@ -40,7 +40,7 @@ Thus $\bar\gamma$ has metric unit speed. If $L=0$, its domain is a singleton and
 
 [L1] The function $s$ is continuous and nondecreasing, maps $a$ to $0$ and $b$ to $L$, and $s(v)-s(u)$ is the length on $[u,v]$ ([[def-arc-length-function]], [[lem-arc-length-function-is-continuous-and-nondecreasing]]).
 
-[L2] A path of zero length is constant ([[cor-chord-length-is-at-most-arc-length]]).
+[L2] Every chord is at most the length of the corresponding subpath; in particular, a path of zero length is constant ([[cor-chord-length-is-at-most-arc-length]]).
 
 [L3] Length is invariant under a continuous surjective monotone reparametrization ([[thm-arc-length-is-invariant-under-monotone-reparametrization]]).
 

@@ -18,10 +18,10 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Emily Riehl, Category Theory in Context, Proposition 2.3.9"
+    - title: "Emily Riehl, Category Theory in Context, Corollary 2.3.2"
       url: "https://emilyriehl.github.io/files/context.pdf"
-    - title: "Tom Leinster, Basic Category Theory, Corollary 4.3.10"
-      url: "https://arxiv.org/pdf/1612.09375.pdf"
+    - title: "Justin Campbell, Harvard Math 55b tutorial notes, Corollary 1.2.1"
+      url: "https://people.math.harvard.edu/~campbell/tutnotes1.pdf"
 pipeline_run: null
 ---
 

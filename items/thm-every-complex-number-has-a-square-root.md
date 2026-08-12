@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-complex-conjugate-real-imaginary-part-and-modulus, lem-complex-conjugation-and-modulus-laws, thm-of-square-roots, thm-reals-ordered-field, lem-of-square-monotone]
+deps: [def-complex-conjugate-real-imaginary-part-and-modulus, lem-complex-conjugation-and-modulus-laws, thm-complex-numbers-form-a-field, cor-cauchy-reals-lub-complete, thm-of-square-roots, thm-reals-ordered-field, lem-of-square-monotone]
 justified_by: []
 aliases: []
 landmark: false
@@ -35,11 +35,13 @@ $i\sqrt{-a}$ when $a<0$.
 
 [F1] $|z|=\sqrt{a^2+b^2}$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]]), and hence $|z|^2=a^2+b^2$ ([[lem-complex-conjugation-and-modulus-laws]]).
 
-[F2] Every nonnegative real has a unique nonnegative square root ([[thm-of-square-roots]]).
+[F2] The real numbers are a complete ordered field ([[cor-cauchy-reals-lub-complete]]), so every nonnegative real has a unique nonnegative square root ([[thm-of-square-roots]]).
 
 [F3] The real numbers form an ordered field ([[thm-reals-ordered-field]]).
 
 [F4] Squaring is order-preserving and order-reflecting on nonnegative elements ([[lem-of-square-monotone]]).
+
+[F5] Complex multiplication is $(a,b)(c,d)=(ac-bd,ad+bc)$ ([[thm-complex-numbers-form-a-field]]).
 
 ## Proof
 
@@ -55,6 +57,6 @@ $i\sqrt{-a}$ when $a<0$.
 
 3.1 From $4u^2=2(|z|+a)$ and [F1], $$v^2=\frac{b^2}{4u^2} =\frac{|z|^2-a^2}{2(|z|+a)} =\frac{|z|-a}{2}.$$ [F1, step 2.1, algebra]
 
-4.1 Therefore $u^2-v^2=a$ and $2uv=b$, so coordinate multiplication gives $(u+vi)^2=a+bi=z$. [step 2.1, step 3.1, algebra]
+4.1 Therefore $u^2-v^2=a$ and $2uv=b$, so coordinate multiplication gives $(u+vi)^2=a+bi=z$. [F5, step 2.1, step 3.1, algebra]
 
 5.1 The cases $b=0$ with $a\ge0$, $b=0$ with $a<0$, and $b\ne0$ are exhaustive, so every complex number has a square root. [step 1.1, step 1.2, step 4.1, cases-exhaustive] ∎

@@ -5,13 +5,13 @@ title: 'The one-point space represents the underlying-set functor on $\mathbf{To
 status: draft
 origin: session
 provenance:
-  statement: ai-generated
+  statement: literature-derived
   proof: ai-generated
-generation:
-  role: example
 deps: [def-presheaf-representable-functor-and-representation,
        prop-topological-spaces-and-continuous-maps-form-category-top,
-       def-topological-space, def-continuous-map-top, def-function]
+       def-topological-space, def-continuous-map-top,
+       thm-continuity-characterisations-top, def-function,
+       lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]
 justified_by: []
 aliases: []
 landmark: false
@@ -21,7 +21,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Emily Riehl, Category Theory in Context, Example 2.1.6"
+    - title: "Emily Riehl, Category Theory in Context, Example 2.1.6(ii)"
       url: "https://emilyriehl.github.io/files/context.pdf"
 pipeline_run: null
 ---
@@ -40,13 +40,13 @@ $$\mathbf{Top}(1,X)\xrightarrow{\cong}U(X),\qquad f\longmapsto f(*).$$
 
 [F1] A topology contains the empty set and the whole underlying set ([[def-topological-space]]).
 
-[F2] A function is continuous when inverse images of open sets are open, equivalently when it is continuous at every point ([[def-continuous-map-top]]).
+[F2] A function is continuous when it is continuous at every point, equivalently when inverse images of open sets are open ([[def-continuous-map-top]], [[thm-continuity-characterisations-top]], clause (b)).
 
 [F3] Topological spaces and continuous maps form the large locally small category $\mathbf{Top}$ ([[prop-topological-spaces-and-continuous-maps-form-category-top]]).
 
 [F4] A covariant set-valued functor is represented by $R$ when it is naturally isomorphic to the hom-functor $\mathbf{Top}(R,-)$ ([[def-presheaf-representable-functor-and-representation]]).
 
-[F5] A function assigns exactly one value to each domain element, and two functions agree when all their values agree ([[def-function]]).
+[F5] A function assigns exactly one value to each domain element, and two functions with the same domain and codomain are equal exactly when their values agree everywhere ([[def-function]], [[lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]]).
 
 ## Verification
 

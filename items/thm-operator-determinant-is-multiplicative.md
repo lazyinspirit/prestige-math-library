@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-operator-determinant-is-basis-independent,
+deps: [def-determinant-of-a-linear-operator,
+       thm-operator-determinant-is-basis-independent,
        thm-operator-determinant-scales-every-alternating-top-form]
 justified_by: []
 aliases: []
@@ -38,8 +39,11 @@ $$\det(S\circ T)=\det(S)\det(T).$$
 top-degree form by its determinant, and that scalar is unique
 ([[thm-operator-determinant-scales-every-alternating-top-form]]).
 
-[F1] The determinant is basis independent, and its zero-dimensional value is
-$1$ ([[thm-operator-determinant-is-basis-independent]]).
+[L2] The determinant is basis independent
+([[thm-operator-determinant-is-basis-independent]]).
+
+[F1] In dimension zero, the operator determinant is defined to be $1$
+([[def-determinant-of-a-linear-operator]]).
 
 ## Proof
 

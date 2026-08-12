@@ -17,7 +17,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Emily Riehl, Category Theory in Context, Definition 2.4.1"
+    - title: "Emily Riehl, Category Theory in Context, Definitions 2.4.1 and 2.4.2"
       url: "https://emilyriehl.github.io/files/context.pdf"
     - title: "Tom Leinster, Basic Category Theory, Section 6.2"
       url: "https://arxiv.org/pdf/1612.09375.pdf"

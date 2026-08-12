@@ -33,7 +33,7 @@ For $n=0$, the unique empty tuple indexes the identity class of $S_0$.
 
 **Given:** The symmetric group $S_n$ for $n\ge0$.
 
-[F1] The cycle type of a permutation is the tuple $(c_1,\ldots,c_n)$ counting cycles of each length, and it satisfies $\sum kc_k=n$ ([[def-permutation-support-disjoint-cycles-and-cycle-type]]).
+[F1] The cycle type of a permutation is the tuple $(c_1,\ldots,c_n)$ counting its orbits of each length, with fixed points counted as $1$-cycles ([[def-permutation-support-disjoint-cycles-and-cycle-type]]).
 
 [F2] Two permutations in $S_n$ are conjugate exactly when they have the same cycle type ([[thm-symmetric-permutations-are-conjugate-iff-same-cycle-type]]).
 
@@ -45,6 +45,6 @@ For $n=0$, the unique empty tuple indexes the identity class of $S_0$.
 
 1.2 Conversely, for any such tuple, partition $n$ symbols into $c_k$ blocks of size $k$ and put a $k$-cycle on each block; their product has that cycle type. For $n=0$, use the empty product on the empty set. [F1, algebra]
 
-2.1 By [F1], its image consists of tuples satisfying the displayed equation. [F1, step 1.1]
+2.1 The orbits counted in [F1] partition the $n$ symbols, so counting their points gives $\sum_k kc_k=n$. Thus the image consists of tuples satisfying the displayed equation. [F1, step 1.1, algebra]
 
 3.1 Thus the assignment is surjective and hence a bijection. [step 1.1, step 2.1, step 1.2] ∎

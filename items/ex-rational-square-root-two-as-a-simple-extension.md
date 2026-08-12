@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-simple-algebraic-extension-quotient-power-basis-and-degree, thm-eisenstein-irreducibility-criterion, thm-rat-field, thm-of-square-roots]
+deps: [def-algebraic-and-transcendental-elements, thm-simple-algebraic-extension-quotient-power-basis-and-degree, thm-evaluation-kernel-and-minimal-polynomial, thm-eisenstein-irreducibility-criterion, thm-rat-field, cor-cauchy-reals-lub-complete, thm-of-square-roots]
 justified_by: []
 aliases: []
 landmark: false
@@ -26,6 +26,7 @@ pipeline_run: frontier-11
 
 Over the rational field $\mathbb Q$ ([[thm-rat-field]]), let
 $a=\sqrt2$, whose existence and positive choice are supplied by
+the completeness of $\mathbb R$ ([[cor-cauchy-reals-lub-complete]]) and
 [[thm-of-square-roots]]. Then
 $$\mathbb Q(a)\cong\mathbb Q[x]/(x^2-2),$$
 and every element is uniquely $r+sa$ with $r,s\in\mathbb Q$.
@@ -38,11 +39,15 @@ and every element is uniquely $r+sa$ with $r,s\in\mathbb Q$.
 
 [F2] A simple algebraic extension is its minimal-polynomial quotient and has the associated power basis ([[thm-simple-algebraic-extension-quotient-power-basis-and-degree]]).
 
+[F3] The real numbers are a complete ordered field, so $\sqrt2$ exists and satisfies $(\sqrt2)^2=2$ ([[cor-cauchy-reals-lub-complete]], [[thm-of-square-roots]]).
+
+[F4] An element is algebraic when a nonzero polynomial vanishes at it ([[def-algebraic-and-transcendental-elements]]); for an algebraic element with minimal polynomial $m_a$, $f(a)=0$ exactly when $m_a$ divides $f$ ([[thm-evaluation-kernel-and-minimal-polynomial]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 The polynomial $x^2-2$ satisfies [F1] at the prime $2$, so it is irreducible over $\mathbb Q$; since it vanishes at $a$, it is the minimal polynomial of $a$. [F1, algebra]
+1.1 The polynomial $x^2-2$ satisfies [F1] at the prime $2$, so it is monic and irreducible over $\mathbb Q$; since it vanishes at $a$, [F4] makes it the minimal polynomial of $a$. [F1, F3, F4, algebra]
 
 2.1 Apply [F2] to obtain the quotient isomorphism, the basis $1,a$, and the unique form $r+sa$. [F2, step 1.1]
 

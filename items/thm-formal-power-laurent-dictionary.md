@@ -1,7 +1,7 @@
 ---
 id: thm-formal-power-laurent-dictionary
 kind: theorem
-title: "$K\\llbracket x\\rrbracket$ embeds in $K((x))$ as the nonnegative-order subring; every nonzero Laurent series is uniquely $x^{v(h)}u$ with $u\\in K\\llbracket x\\rrbracket^\\times$ and inverse $x^{-v(h)}u^{-1}$"
+title: "$K\\llbracket x\\rrbracket$ embeds in $K((x))$ as the nonnegative-order subring; every nonzero Laurent series is uniquely $x^{v_x(h)}u$ with $u\\in K\\llbracket x\\rrbracket^\\times$ and inverse $x^{-v_x(h)}u^{-1}$"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ $$K\llbracket x\rrbracket\hookrightarrow K((x))$$
 
 whose image is $\{0\}\cup\{h:v_x(h)\ge0\}$. Every nonzero $h\in K((x))$ has a unique factorisation
 
-$$h=x^{v_x(h)}u,qquad u\in K\llbracket x\rrbracket^\times,$$
+$$h=x^{v_x(h)}u,\qquad u\in K\llbracket x\rrbracket^\times,$$
 
 and
 

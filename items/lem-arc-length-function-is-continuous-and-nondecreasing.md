@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-arc-length-function, thm-arc-length-is-additive-over-subintervals, thm-rectifiable-iff-coordinate-functions-have-bounded-variation, lem-jumps-of-the-variation-function, cor-chord-length-is-at-most-arc-length]
+deps: [def-arc-length-function, thm-arc-length-is-additive-over-subintervals, thm-rectifiable-iff-coordinate-functions-have-bounded-variation, lem-variation-additive-on-subintervals, lem-jumps-of-the-variation-function, cor-chord-length-is-at-most-arc-length]
 justified_by: []
 aliases: []
 landmark: true
@@ -34,7 +34,7 @@ On a singleton interval, continuity and nondecrease hold and the strictness equi
 
 [L1] For $u\le v$, $s(v)-s(u)$ is the nonnegative length of the restricted path ([[def-arc-length-function]], [[thm-arc-length-is-additive-over-subintervals]]).
 
-[L2] Every coordinate $\gamma_j$ has bounded variation, and the length of a restriction is at most the sum of its coordinate variations ([[thm-rectifiable-iff-coordinate-functions-have-bounded-variation]]).
+[L2] Every coordinate $\gamma_j$ has bounded variation, the length of a restriction is at most the sum of its coordinate variations, and variation is additive on adjacent subintervals; hence $\operatorname{Var}_{[u,v]}(\gamma_j)=V_j(v)-V_j(u)$ for $V_j(t)=\operatorname{Var}_{[a,t]}(\gamma_j)$ ([[thm-rectifiable-iff-coordinate-functions-have-bounded-variation]], [[lem-variation-additive-on-subintervals]]).
 
 [L3] The variation function of a bounded-variation function is continuous at every point where the function is continuous ([[lem-jumps-of-the-variation-function]]).
 

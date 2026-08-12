@@ -33,6 +33,6 @@ For $N\in\mathbb N$, write
 
 $$f\equiv g\pmod{x^N}$$
 
-when $[x^n]f=[x^n]g$ for every $n<N$. Equivalently, $\operatorname{ord}_x(f-g)\ge N$. At $N=0$ the coefficient condition is empty, so all two series are congruent modulo $x^0=1$.
+when $[x^n]f=[x^n]g$ for every $n<N$. Equivalently, $\operatorname{ord}_x(f-g)\ge N$. At $N=0$ the coefficient condition is empty, so any two series are congruent modulo $x^0=1$.
 
 A sequence $(f_j)_{j\ge0}$ **converges $x$-adically** to $f$ if for every $N$ there is $J$ such that $f_j\equiv f\pmod{x^N}$ whenever $j\ge J$. It is **$x$-adically Cauchy** if for every $N$ there is $J$ such that $f_j\equiv f_k\pmod{x^N}$ whenever $j,k\ge J$. Thus convergence and the Cauchy condition mean eventual stability of each finite coefficient prefix; they do not assert analytic convergence.

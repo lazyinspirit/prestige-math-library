@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-formal-compositional-inverse, lem-formal-residue-identities, prop-coefficient-extraction-linearity-and-extensionality, thm-rat-field]
+deps: [thm-formal-compositional-inverse, lem-formal-residue-identities, prop-coefficient-extraction-linearity-and-extensionality, thm-formal-power-series-unit-criterion, thm-rat-field]
 justified_by: []
 aliases: []
 landmark: true
@@ -42,7 +42,7 @@ and this coefficient is $0$ when $k>n$.
 
 ## Facts & Assumptions
 
-**Given:** Compositional inversion from [[thm-formal-compositional-inverse]], residue change of variables and integration by parts from [[lem-formal-residue-identities]], and coefficient extraction from [[prop-coefficient-extraction-linearity-and-extensionality]]. The field $K$ contains the rational field of [[thm-rat-field]], so every positive integer is invertible in $K$.
+**Given:** Compositional inversion from [[thm-formal-compositional-inverse]], residue change of variables and integration by parts from [[lem-formal-residue-identities]], coefficient extraction from [[prop-coefficient-extraction-linearity-and-extensionality]], and the reciprocal criterion from [[thm-formal-power-series-unit-criterion]]. The field $K$ contains the rational field of [[thm-rat-field]], so every positive integer is invertible in $K$.
 
 ## Proof
 

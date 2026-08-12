@@ -52,6 +52,6 @@ $[T]_{\mathcal B}=P^{-1}[T]_{\mathcal E}P$
 **Proof technique:** direct.
 
 1.1 Direct evaluation gives $[T]_{\mathcal E}=A=\begin{pmatrix}2&0\\0&3\end{pmatrix}$ and $P=\begin{pmatrix}1&0\\1&1\end{pmatrix}$, whose inverse is $P^{-1}=\begin{pmatrix}1&0\\-1&1\end{pmatrix}$. [F1, given, algebra]
-1.2 By the two-term determinant formula, $\det(A)=2\cdot3=6$ and $\det([T]_{\mathcal B})=2\cdot3-0\cdot1=6$. [F2, algebra]
 2.1 Matrix multiplication in [L1] gives $$ [T]_{\mathcal B} =P^{-1}AP =\begin{pmatrix}2&0\\1&3\end{pmatrix}. $$ [step 1.1, L1, algebra]
-3.1 The explicit computations in steps 2.1 and 1.2 illustrate the equality asserted abstractly by [L2]. [step 2.1, step 1.2, L2] ∎
+3.1 By the two-term determinant formula, $\det(A)=2\cdot3=6$ and $\det([T]_{\mathcal B})=2\cdot3-0\cdot1=6$. [step 2.1, F2, algebra]
+4.1 The explicit computations in steps 3.1 and 2.1 illustrate the equality asserted abstractly by [L2]. [step 3.1, step 2.1, L2] ∎

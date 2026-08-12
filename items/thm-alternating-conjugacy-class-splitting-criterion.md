@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup, thm-centralizer-cardinality-from-cycle-type, cor-sign-from-disjoint-cycle-structure, def-alternating-group, thm-disjoint-cycle-decomposition]
+deps: [lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup, thm-centralizer-cardinality-from-cycle-type, cor-sign-from-disjoint-cycle-structure, thm-sign-is-a-homomorphism, def-alternating-group, thm-disjoint-cycle-decomposition]
 justified_by: []
 aliases: []
 landmark: true
@@ -35,7 +35,7 @@ no two lengths are equal.
 
 [F1] $A_n$ is the kernel of sign ([[def-alternating-group]]).
 
-[F2] A $k$-cycle has sign $(-1)^{k-1}$, and sign is multiplicative ([[cor-sign-from-disjoint-cycle-structure]]).
+[F2] A $k$-cycle has sign $(-1)^{k-1}$ ([[cor-sign-from-disjoint-cycle-structure]]), and sign is multiplicative ([[thm-sign-is-a-homomorphism]]).
 
 [F3] An $S_n$-class splits in the index-two subgroup $A_n$ exactly when its centralizer in $S_n$ is contained in $A_n$ ([[lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup]]).
 

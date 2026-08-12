@@ -21,7 +21,7 @@ sources:
   references:
     - title: "Emily Riehl, Category Theory in Context, Definition 2.3.3"
       url: "https://emilyriehl.github.io/files/context.pdf"
-    - title: "Tom Leinster, Basic Category Theory, Lemma 4.1.27"
+    - title: "Tom Leinster, Basic Category Theory, Corollaries 4.3.2 and 4.3.3"
       url: "https://arxiv.org/pdf/1612.09375.pdf"
 pipeline_run: null
 ---

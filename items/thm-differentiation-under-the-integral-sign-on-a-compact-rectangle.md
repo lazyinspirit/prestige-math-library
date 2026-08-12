@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-derivative, cor-mean-value-theorem, lem-uniform-integral-error-bound, thm-heine-cantor-r, thm-continuous-implies-integrable]
+deps: [def-derivative, cor-mean-value-theorem, lem-uniform-integral-error-bound, thm-heine-borel-rn, thm-heine-cantor-metric, thm-continuous-implies-integrable]
 justified_by: []
 aliases: []
 landmark: true
@@ -40,7 +40,7 @@ At $a$ and $b$ the derivative is relative and one-sided. The derivative hypothes
 
 [L1] A continuous real function on a compact interval is bounded and Riemann integrable ([[thm-continuous-implies-integrable]]).
 
-[L2] A continuous function on a compact set is uniformly continuous ([[thm-heine-cantor-r]]).
+[L2] A closed rectangle in $\mathbb R^2$ is compact, and a continuous map from a compact metric space to $\mathbb R$ is uniformly continuous ([[thm-heine-borel-rn]], [[thm-heine-cantor-metric]]).
 
 [L3] The mean value theorem turns a difference quotient into a derivative value at an intermediate point ([[cor-mean-value-theorem]]).
 

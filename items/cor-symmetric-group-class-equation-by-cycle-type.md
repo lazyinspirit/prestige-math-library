@@ -38,7 +38,7 @@ When $n=0$, the one empty tuple contributes $1$.
 
 [F3] A conjugacy class has cardinality equal to the group order divided by the centralizer order ([[thm-conjugacy-class-cardinality]]).
 
-[F4] A finite group is the disjoint union of its conjugacy classes ([[thm-class-equation]]).
+[F4] If $x_1,\ldots,x_r$ represent the non-singleton conjugacy classes of a finite group $G$, then $|G|=|Z(G)|+\sum_i[G:C_G(x_i)]$ ([[thm-class-equation]]).
 
 [F5] The symmetric group on $n$ symbols has $n!$ elements ([[thm-number-of-bijections-of-a-finite-set]]).
 
@@ -50,6 +50,6 @@ When $n=0$, the one empty tuple contributes $1$.
 
 2.1 For a tuple $(c_k)$, [F2], [F3], and [F5] give class size $n!/\prod k^{c_k}c_k!$. [F2, F3, F5, step 1.1]
 
-3.1 Sum these disjoint class sizes using [F4] and use [F5] for the order of $S_n$; this is the displayed identity. [F4, F5, step 1.1, step 2.1]
+3.1 In [F4], the central term counts the singleton conjugacy classes and the sum counts every remaining class. Thus summing the sizes from step 2.1 and using [F5] for $|S_n|$ gives the displayed identity. [F4, F5, step 1.1, step 2.1]
 
 4.1 At $n=0$, [F1] gives the one empty type and all empty products and $0!$ equal $1$, so the same formula reads $1=1$. [F1, F2, F5] ∎

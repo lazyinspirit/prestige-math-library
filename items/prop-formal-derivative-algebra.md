@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-formal-power-series-derivative, thm-formal-power-series-unit-criterion, thm-formal-composition-laws, thm-summable-families-and-rearrangement, def-binomial-coefficient]
+deps: [def-formal-power-series-derivative, thm-formal-power-series-unit-criterion, thm-formal-composition-laws, thm-summable-families-and-rearrangement, prop-coefficient-extraction-linearity-and-extensionality, def-binomial-coefficient]
 justified_by: []
 aliases: []
 landmark: false
@@ -56,7 +56,7 @@ $$[x^0](f/g)=f'(0)g'(0)^{-1}.$$
 
 ## Facts & Assumptions
 
-**Given:** The derivative of [[def-formal-power-series-derivative]], the unit criterion [[thm-formal-power-series-unit-criterion]], the composition laws [[thm-formal-composition-laws]], locally finite rearrangement from [[thm-summable-families-and-rearrangement]], and the counting definition of $\binom mn$ in [[def-binomial-coefficient]].
+**Given:** The derivative of [[def-formal-power-series-derivative]], the unit criterion [[thm-formal-power-series-unit-criterion]], the composition laws [[thm-formal-composition-laws]], locally finite rearrangement from [[thm-summable-families-and-rearrangement]], the coefficient-shift and extensionality laws of [[prop-coefficient-extraction-linearity-and-extensionality]], and the counting definition of $\binom mn$ in [[def-binomial-coefficient]].
 
 ## Proof
 

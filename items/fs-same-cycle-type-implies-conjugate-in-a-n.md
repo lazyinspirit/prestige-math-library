@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [thm-alternating-conjugacy-class-splitting-criterion, lem-conjugating-a-cycle-relabels-its-entries, def-alternating-group]
+deps: [thm-alternating-conjugacy-class-splitting-criterion, lem-conjugating-a-cycle-relabels-its-entries, def-alternating-group, cor-sign-from-disjoint-cycle-structure]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,7 +30,7 @@ Two elements of $A_n$ with the same cycle type must be conjugate in $A_n$.
 
 **Given:** The cycles $(123)$ and $(132)$ in $A_4$.
 
-[F1] A $3$-cycle is even and hence belongs to $A_n$ ([[def-alternating-group]]).
+[F1] A $k$-cycle has sign $(-1)^{k-1}$ ([[cor-sign-from-disjoint-cycle-structure]]), and $A_n$ is the kernel of sign ([[def-alternating-group]]).
 
 [F2] Conjugation relabels cycle entries ([[lem-conjugating-a-cycle-relabels-its-entries]]).
 
@@ -40,7 +40,7 @@ Two elements of $A_n$ with the same cycle type must be conjugate in $A_n$.
 
 **Proof technique:** counterexample.
 
-1.1 In $A_4$, the cycles $(123)$ and $(132)$ are even by [F1] and have the same cycle type $(3,1)$. [F1]
+1.1 In $A_4$, the cycles $(123)$ and $(132)$ have sign $(-1)^2=+1$ by [F1] and have the same cycle type $(3,1)$. [F1, algebra]
 
 2.1 The lengths $3$ and $1$ are odd and distinct, so [F3] says that the $S_4$-class of $3$-cycles splits into two $A_4$-classes. [F3, step 1.1]
 

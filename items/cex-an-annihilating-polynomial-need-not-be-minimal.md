@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-evaluation-kernel-and-minimal-polynomial, thm-eisenstein-irreducibility-criterion, thm-of-square-roots]
+deps: [thm-evaluation-kernel-and-minimal-polynomial, thm-eisenstein-irreducibility-criterion, cor-cauchy-reals-lub-complete, thm-of-square-roots]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,7 +30,8 @@ element's minimal polynomial.
 ## Counterexample
 
 Let $a=\sqrt2$, whose nonnegative real value satisfies $a^2=2$
-([[thm-of-square-roots]]). Then both $x^2-2$ and $x^4-4$ vanish at $a$, but
+because $\mathbb R$ is complete ([[cor-cauchy-reals-lub-complete]],
+[[thm-of-square-roots]]). Then both $x^2-2$ and $x^4-4$ vanish at $a$, but
 only the first is minimal.
 
 ## Facts & Assumptions
@@ -41,11 +42,13 @@ only the first is minimal.
 
 [F2] The minimal polynomial is the unique monic irreducible generator of the evaluation kernel, and it divides every annihilating polynomial ([[thm-evaluation-kernel-and-minimal-polynomial]]).
 
+[F3] The real numbers are a complete ordered field, so $\sqrt2$ exists and satisfies $(\sqrt2)^2=2$ ([[cor-cauchy-reals-lub-complete]], [[thm-of-square-roots]]).
+
 ## Verification
 
 **Proof technique:** counterexample.
 
-1.1 Evaluation gives $a^2-2=0$ and $a^4-4=0$. [algebra]
+1.1 Evaluation gives $a^2-2=0$ and $a^4-4=0$. [F3, algebra]
 
 2.1 The polynomial $x^2-2$ satisfies [F1] at $2$, so [F2] identifies it as the minimal polynomial of $a$ over $\mathbb Q$. [F1, F2, step 1.1]
 

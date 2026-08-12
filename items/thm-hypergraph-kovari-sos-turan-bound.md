@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-uniform-hypergraph-and-complete-partite-hypergraph, thm-kovari-sos-turan-bound, lem-kst-common-neighbour-double-count, thm-double-counting]
+deps: [def-uniform-hypergraph-and-complete-partite-hypergraph, def-asymptotic-extremal-notation-and-edge-density, thm-kovari-sos-turan-bound, lem-kst-common-neighbour-double-count, thm-double-counting]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,7 +30,7 @@ $$\operatorname{ex}\bigl(n,K^{(r)}_{s,\ldots,s}\bigr)=O_{r,s}\!\left(n^{r-1/s^{r
 
 ## Facts & Assumptions
 
-**Given:** Complete partite uniform hypergraphs from [[def-uniform-hypergraph-and-complete-partite-hypergraph]], the graph KST base case [[thm-kovari-sos-turan-bound]], the degree-smoothing estimate [[lem-kst-common-neighbour-double-count]], and finite double counting from [[thm-double-counting]].
+**Given:** Complete partite uniform hypergraphs from [[def-uniform-hypergraph-and-complete-partite-hypergraph]], asymptotic notation from [[def-asymptotic-extremal-notation-and-edge-density]], the graph KST base case [[thm-kovari-sos-turan-bound]], the degree-smoothing estimate [[lem-kst-common-neighbour-double-count]], and finite double counting from [[thm-double-counting]].
 
 ## Proof
 

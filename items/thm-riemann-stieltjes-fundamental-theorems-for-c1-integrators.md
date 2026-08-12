@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-riemann-stieltjes-c1-integrator-reduction, thm-ftc-first-part, thm-newton-leibniz-with-interior-derivative, cor-integrability-of-absolute-values-products-and-lattice-operations]
+deps: [thm-riemann-stieltjes-c1-integrator-reduction, thm-ftc-first-part, thm-newton-leibniz-with-interior-derivative, thm-continuous-implies-integrable, cor-integrability-of-absolute-values-products-and-lattice-operations]
 justified_by: []
 aliases: []
 landmark: true
@@ -37,7 +37,7 @@ Endpoint derivatives in clause 1 are relative. Clause 2 does not divide by $q$ a
 
 [L1] For a continuous integrator whose interior derivative extends continuously as $q$, every Riemann-integrable $f$ is Riemann--Stieltjes integrable and $\int_u^v f\,d\alpha=\int_u^v fq$ on each closed subinterval ([[thm-riemann-stieltjes-c1-integrator-reduction]]).
 
-[L2] Products of Riemann-integrable functions are integrable; in particular $fq$ is integrable because $q$ is continuous ([[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
+[L2] A continuous function on a compact interval is Riemann integrable, and products of Riemann-integrable functions are integrable; hence $fq$ is integrable because $q$ is continuous ([[thm-continuous-implies-integrable]], [[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
 
 [L3] The integral function of an integrable function is differentiable at each continuity point, with derivative equal to the integrand ([[thm-ftc-first-part]]).
 

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-newton-leibniz-with-interior-derivative, thm-ftc-first-part, thm-chain-rule, cor-integrability-of-absolute-values-products-and-lattice-operations, def-oriented-integral]
+deps: [thm-newton-leibniz-with-interior-derivative, thm-ftc-first-part, thm-chain-rule, thm-continuous-implies-integrable, cor-integrability-of-absolute-values-products-and-lattice-operations, def-oriented-integral]
 justified_by: []
 aliases: []
 landmark: true
@@ -40,7 +40,7 @@ The limits on the right are oriented. No injectivity or monotonicity of $\varphi
 
 [L2] The chain rule gives $(H\circ\varphi)'=(H'\circ\varphi)\varphi'$ on the interior ([[thm-chain-rule]]).
 
-[L3] Products of Riemann-integrable functions are Riemann integrable, and continuous functions on a compact interval are integrable ([[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
+[L3] Continuous functions on a compact interval are Riemann integrable, and products of Riemann-integrable functions are Riemann integrable ([[thm-continuous-implies-integrable]], [[cor-integrability-of-absolute-values-products-and-lattice-operations]]).
 
 [L4] A continuous function with an interior derivative admitting an integrable extension satisfies Newton--Leibniz ([[thm-newton-leibniz-with-interior-derivative]]).
 

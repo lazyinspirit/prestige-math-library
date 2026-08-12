@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [lem-conjugating-a-cycle-relabels-its-entries, def-normal-subgroup, def-alternating-group, cor-alternating-group-is-normal-and-has-half-the-elements]
+deps: [lem-conjugating-a-cycle-relabels-its-entries, def-normal-subgroup, def-alternating-group, cor-sign-from-disjoint-cycle-structure, cor-alternating-group-is-normal-and-has-half-the-elements]
 justified_by: []
 aliases: []
 landmark: false
@@ -32,7 +32,7 @@ Then $V_4$ is a proper nontrivial normal subgroup.
 
 **Given:** The displayed subset $V_4\subseteq A_4$.
 
-[F1] $A_4$ is the kernel of sign ([[def-alternating-group]]).
+[F1] $A_4$ is the kernel of sign ([[def-alternating-group]]), and $\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}$ when fixed points are included as $1$-cycles ([[cor-sign-from-disjoint-cycle-structure]]).
 
 [F2] Conjugation relabels every cycle entry ([[lem-conjugating-a-cycle-relabels-its-entries]]).
 
@@ -44,7 +44,7 @@ Then $V_4$ is a proper nontrivial normal subgroup.
 
 **Proof technique:** direct.
 
-1.1 Every displayed double transposition is even by [F1]. The product of two distinct nonidentity displayed elements is the third, and each is its own inverse; hence $V_4$ is a subgroup of $A_4$. [F1, algebra]
+1.1 Every displayed double transposition has two cycles and hence sign $(-1)^{4-2}=+1$ by [F1]. The product of two distinct nonidentity displayed elements is the third, and each is its own inverse; hence $V_4$ is a subgroup of $A_4$. [F1, algebra]
 
 1.2 By [F2], conjugation by any permutation relabels a double transposition to another double transposition. Thus $V_4$ is invariant under $A_4$-conjugation, and [F3] makes it normal. [F2, F3]
 

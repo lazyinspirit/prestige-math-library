@@ -10,7 +10,8 @@ provenance:
 deps: [def-presheaf-representable-functor-and-representation,
        prop-sets-and-functions-form-category-set,
        def-the-set-of-functions-from-one-set-to-another,
-       def-cartesian-product, def-function]
+       def-cartesian-product, def-function,
+       lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]
 justified_by: []
 aliases: []
 landmark: false
@@ -20,8 +21,8 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Tom Leinster, Basic Category Theory, Example 6.3.9"
-      url: "https://arxiv.org/pdf/1612.09375.pdf"
+    - title: "Emily Riehl, Category Theory in Context, Example 2.1.6(iv)"
+      url: "https://emilyriehl.github.io/files/context.pdf"
 pipeline_run: null
 ---
 
@@ -48,7 +49,7 @@ $$\mathbf{Set}(X,B^A)\longrightarrow\mathbf{Set}(X\times A,B),\qquad g\longmapst
 
 [F4] The product $X\times A$ consists of the pairs $(x,a)$ with $x\in X$ and $a\in A$ ([[def-cartesian-product]]).
 
-[F5] A function assigns exactly one value to each domain element, and functions with the same domain agree when their values agree everywhere ([[def-function]]).
+[F5] A function assigns exactly one value to each domain element, and two functions with the same domain and codomain are equal exactly when their values agree everywhere ([[def-function]], [[lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]]).
 
 ## Verification
 
@@ -62,4 +63,4 @@ $$\mathbf{Set}(X,B^A)\longrightarrow\mathbf{Set}(X\times A,B),\qquad g\longmapst
 
 2.2 If $k:Y\to X$, then $\Phi_Y(g\circ k)(y,a)=g(k(y))(a)=\Phi_X(g)(k(y),a)$, which is precomposition of $\Phi_X(g)$ by $k\times1_A$. Thus $\Phi$ is natural in $X$. [step 1.1, F2, F4]
 
-3.1 By steps 2.1 and 3.1, $\Phi$ is a natural isomorphism $\mathbf{Set}(-,B^A)\cong H$; [F1] gives the representation, also when $A$, $B$, or $X$ is empty. [step 2.1, step 2.2, F1, discharge-construct] ∎
+3.1 By steps 2.1 and 2.2, $\Phi$ is a natural isomorphism $\mathbf{Set}(-,B^A)\cong H$; [F1] gives the representation, also when $A$, $B$, or $X$ is empty. [step 2.1, step 2.2, F1, discharge-construct] ∎

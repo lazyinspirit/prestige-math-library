@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [def-simple-group, lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle, lem-normal-subgroup-containing-a-three-cycle-is-a-n]
+deps: [def-simple-group, lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle, lem-normal-subgroup-containing-a-three-cycle-is-a-n, def-alternating-group, cor-sign-from-disjoint-cycle-structure]
 justified_by: []
 aliases: []
 landmark: true
@@ -36,11 +36,13 @@ The alternating group $A_n$ is simple for every $n\ge5$.
 
 [F3] A normal subgroup of $A_n$ containing a $3$-cycle is all of $A_n$ ([[lem-normal-subgroup-containing-a-three-cycle-is-a-n]]).
 
+[F4] The group $A_n$ is the kernel of sign ([[def-alternating-group]]), and a $k$-cycle has sign $(-1)^{k-1}$ ([[cor-sign-from-disjoint-cycle-structure]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The cycles $(1\,2\,3)$ and $(3\,4\,5)$ belong to $A_n$ and do not commute, so $A_n$ is nontrivial. [algebra]
+1.1 The cycles $(1\,2\,3)$ and $(3\,4\,5)$ have sign $(-1)^2=+1$ by [F4], so they belong to $A_n$; they do not commute, so $A_n$ is nontrivial. [F4, algebra]
 
 1.2 Let $N\trianglelefteq A_n$. If $N$ is nontrivial, [F2] gives a $3$-cycle in $N$, and [F3] then gives $N=A_n$. [F2, F3]
 

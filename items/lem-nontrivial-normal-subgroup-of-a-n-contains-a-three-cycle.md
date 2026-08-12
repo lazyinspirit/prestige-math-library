@@ -37,7 +37,7 @@ a $3$-cycle.
 
 [F3] Conjugating a cycle relabels its entries ([[lem-conjugating-a-cycle-relabels-its-entries]]).
 
-[F4] A $k$-cycle has sign $(-1)^{k-1}$ and sign is multiplicative ([[cor-sign-from-disjoint-cycle-structure]]).
+[F4] A $k$-cycle has sign $(-1)^{k-1}$, and $\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}$ when fixed points are included as $1$-cycles ([[cor-sign-from-disjoint-cycle-structure]]).
 
 ## Proof
 
@@ -47,7 +47,7 @@ a $3$-cycle.
 
 1.2 For any $3$-cycle $\tau$, the commutator $h=\tau\sigma\tau^{-1}\sigma^{-1}$ lies in $N$ by [F1]. Its support is contained in $\operatorname{supp}(\tau)\cup \sigma(\operatorname{supp}(\tau))$. [F1, F2, F3, algebra]
 
-1.3 Suppose instead that $\sigma$ has a $3$-cycle $(a_1\,a_2\,a_3)$ and also moves a point $b$ outside it. The remaining disjoint cycles form a nonidentity even permutation, so [F4] shows that they move at least three points; hence $\sigma$ moves at least six points. [F2, F4, algebra]
+1.3 If $\sigma$ itself is a $3$-cycle, there is nothing to prove. Suppose instead that $\sigma$ has a $3$-cycle $(a_1\,a_2\,a_3)$ and also moves a point $b$ outside it. The remaining disjoint cycles form a nonidentity even permutation, so [F4] shows that they move at least three points; hence $\sigma$ moves at least six points. [F2, F4, algebra]
 
 1.4 It remains that every nontrivial cycle of $\sigma$ is a transposition. Because $\sigma\in A_n$, [F4] makes their number $r$ even, so $r\ge2$. [F2, F4]
 
@@ -59,4 +59,4 @@ a $3$-cycle.
 
 2.4 If $r=2$, write $\sigma=(a\,b)(c\,d)$. Since $n\ge5$, choose a fixed point $e$ and take $\tau=(a\,b\,e)$. Calculation gives $h=(a\,e\,b)$, a $3$-cycle in $N$. [step 1.2, step 1.4, choose, algebra]
 
-3.1 The exhaustive cycle cases in [F2] show that either step 2.1 or step 2.4 already supplies a $3$-cycle, while steps 2.2 and 2.3 exclude every other case. Therefore $N$ contains a $3$-cycle. [F2, step 2.1, step 2.2, step 2.3, step 2.4] ∎
+3.1 The exhaustive cycle cases in [F2] show that either $\sigma$ itself, step 2.1, or step 2.4 supplies a $3$-cycle, while steps 2.2 and 2.3 exclude every other case. Therefore $N$ contains a $3$-cycle. [F2, step 1.3, step 2.1, step 2.2, step 2.3, step 2.4] ∎

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-formal-exponential-logarithm-and-powers, prop-formal-derivative-algebra, thm-formal-compositional-inverse, thm-summable-families-and-rearrangement]
+deps: [def-formal-exponential-logarithm-and-powers, prop-formal-derivative-algebra, thm-summable-families-and-rearrangement]
 justified_by: []
 aliases: []
 landmark: true
@@ -42,7 +42,7 @@ where the numerator is the empty product $1$ at $n=0$.
 
 ## Facts & Assumptions
 
-**Given:** The formal definitions in [[def-formal-exponential-logarithm-and-powers]], derivative and chain rules from [[prop-formal-derivative-algebra]], compositional inversion from [[thm-formal-compositional-inverse]], and locally finite rearrangement from [[thm-summable-families-and-rearrangement]].
+**Given:** The formal definitions in [[def-formal-exponential-logarithm-and-powers]], derivative and chain rules from [[prop-formal-derivative-algebra]], and locally finite rearrangement from [[thm-summable-families-and-rearrangement]].
 
 ## Proof
 

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-alternating-group-is-simple-for-n-at-least-five, cor-alternating-group-is-normal-and-has-half-the-elements, cor-center-of-symmetric-group-is-trivial, thm-sign-is-a-homomorphism, def-normal-subgroup]
+deps: [thm-alternating-group-is-simple-for-n-at-least-five, cor-alternating-group-is-normal-and-has-half-the-elements, cor-center-of-symmetric-group-is-trivial, thm-sign-is-a-homomorphism, def-alternating-group, def-normal-subgroup]
 justified_by: []
 aliases: []
 landmark: false
@@ -35,7 +35,7 @@ $\{1\}$, $A_n$, and $S_n$. Thus $A_n$ is the only proper nontrivial one.
 
 [F2] $A_n$ is simple for $n\ge5$ ([[thm-alternating-group-is-simple-for-n-at-least-five]]).
 
-[F3] Sign is a homomorphism with kernel $A_n$ ([[thm-sign-is-a-homomorphism]]).
+[F3] Sign is a homomorphism ([[thm-sign-is-a-homomorphism]]) with kernel $A_n$ ([[def-alternating-group]]).
 
 [F4] $Z(S_n)=\{1\}$ for $n\ge3$ ([[cor-center-of-symmetric-group-is-trivial]]).
 

@@ -1,7 +1,7 @@
 ---
 id: ex-doubling-integers-has-nonunit-determinant
 kind: example
-title: "Multiplication by 2 on Z is injective but not surjective: its determinant is the non-unit 2, its adjugate is integral, and its inverse exists only over Q"
+title: "Multiplication by 2 on Z is injective but not surjective: its determinant is the non-unit 2, its adjugate is integral, and its inverse exists after extending scalars to Q"
 status: draft
 origin: session
 provenance:

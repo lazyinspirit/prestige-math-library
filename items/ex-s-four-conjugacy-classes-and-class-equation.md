@@ -42,7 +42,7 @@ The conjugacy data for $S_4$ are
 
 [F2] The class equation sums the corresponding class sizes $4!/\prod k^{c_k}c_k!$ ([[cor-symmetric-group-class-equation-by-cycle-type]]).
 
-[F3] A $k$-cycle has sign $(-1)^{k-1}$ and sign multiplies over disjoint cycles ([[cor-sign-from-disjoint-cycle-structure]]).
+[F3] A $k$-cycle has sign $(-1)^{k-1}$, and $\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}$ when fixed points are included as $1$-cycles ([[cor-sign-from-disjoint-cycle-structure]]).
 
 ## Verification
 

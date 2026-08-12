@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-newton-leibniz-with-interior-derivative, cor-countably-many-discontinuities-integrable, thm-algebra-of-derivatives, thm-chain-rule, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, def-pi-via-first-positive-cosine-zero, thm-quarter-turn-values-and-shift-formulas]
+deps: [thm-newton-leibniz-with-interior-derivative, cor-countably-many-discontinuities-integrable, thm-algebra-of-derivatives, thm-chain-rule, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, def-pi-via-first-positive-cosine-zero, thm-quarter-turn-values-and-shift-formulas, cor-archimedean-reciprocal]
 justified_by: []
 aliases: []
 landmark: false
@@ -48,9 +48,11 @@ Moreover, arbitrarily near $0$ the derivative takes the values $-1$ and $1$ up t
 
 [L3] The number $\pi$ is positive, and shifts by $\pi$ alternate the signs of sine and cosine ([[def-pi-via-first-positive-cosine-zero]], [[thm-quarter-turn-values-and-shift-formulas]]).
 
-[L4] A bounded function with an at-most-countable discontinuity set is Riemann integrable ([[cor-countably-many-discontinuities-integrable]]).
+[L4] Reciprocals of positive natural numbers tend to zero ([[cor-archimedean-reciprocal]]).
 
-[L5] Newton--Leibniz holds for a continuous function with an interior derivative having an integrable extension ([[thm-newton-leibniz-with-interior-derivative]]).
+[L5] A bounded function with an at-most-countable discontinuity set is Riemann integrable ([[cor-countably-many-discontinuities-integrable]]).
+
+[L6] Newton--Leibniz holds for a continuous function with an interior derivative having an integrable extension ([[thm-newton-leibniz-with-interior-derivative]]).
 
 ## Verification
 
@@ -62,8 +64,8 @@ Moreover, arbitrarily near $0$ the derivative takes the values $-1$ and $1$ up t
 
 2.1 By [L2], $|G'(x)|\le2x+1\le3$ on $(0,1]$, so $G'$ is bounded. The displayed formula is continuous away from $0$. [step 1.2, L2]
 
-2.2 By [L3], sine vanishes and cosine equals $1$ at $2\pi k$, while sine vanishes and cosine equals $-1$ at $(2k+1)\pi$; substituting gives $G'(x_k)=-1$ and $G'(y_k)=1$. Both sequences tend to $0$, so $G'$ is discontinuous there. [step 1.2, L3]
+2.2 By [L3], sine vanishes and cosine equals $1$ at $2\pi k$, while sine vanishes and cosine equals $-1$ at $(2k+1)\pi$; substituting gives $G'(x_k)=-1$ and $G'(y_k)=1$. Both sequences tend to $0$ by [L4], so $G'$ is discontinuous there. [step 1.2, L3, L4]
 
-3.1 Thus the discontinuity set is exactly $\{0\}$, and [L4] makes $G'$ Riemann integrable. [step 2.1, step 2.2, L4]
+3.1 Thus the discontinuity set is exactly $\{0\}$, and [L5] makes $G'$ Riemann integrable. [step 2.1, step 2.2, L5]
 
-4.1 Applying [L5] to $G$ and $G'$ yields $\int_0^1G'=G(1)-G(0)=\sin1$. [step 1.1, step 1.2, step 3.1, L5] ∎
+4.1 Applying [L6] to $G$ and $G'$ yields $\int_0^1G'=G(1)-G(0)=\sin1$. [step 1.1, step 1.2, step 3.1, L6] ∎

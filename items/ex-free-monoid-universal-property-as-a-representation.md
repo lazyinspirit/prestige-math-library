@@ -76,6 +76,6 @@ The representing bijection sends $\phi:X^*\to M$ to $U(\phi)\circ j$.
 
 3.1 If $q:X^*\to M$ is a unital monoid homomorphism with $qj=f$, then $q(\varepsilon)=e_M=\widehat f(\varepsilon)$. If $q(w)=\widehat f(w)$, then $q(wj(x))=q(w)f(x)=\widehat f(wj(x))$; induction [F6] proves $q=\widehat f$. [step 1.3, step 2.2, F2, F6]
 
-4.1 Thus restriction along $j$ and $f\mapsto\widehat f$ are inverse bijections $\mathbf{Mon}(X^*,M)\cong\mathbf{Set}(X,U(M))$. If $r:M\to N$ is a monoid homomorphism, then both $r\widehat f$ and $\widehat{,U(r)f,}$ extend $U(r)f$, so uniqueness in step 3.1 makes them equal; the bijection is natural in $M$. [step 2.2, step 3.1, F2]
+4.1 Thus restriction along $j$ and $f\mapsto\widehat f$ are inverse bijections $\mathbf{Mon}(X^*,M)\cong\mathbf{Set}(X,U(M))$. If $r:M\to N$ is a monoid homomorphism, then both $r\circ\widehat f$ and $\widehat{U(r)\circ f}$ extend $U(r)\circ f$, so uniqueness in step 3.1 makes them equal; the bijection is natural in $M$. [step 2.2, step 3.1, F2]
 
 5.1 By [F7], $X^*$ is the claimed representing object. The construction also covers $X=\varnothing$: then $X^*=\{\varepsilon\}$, and there is exactly one unital homomorphism from it to every monoid. [step 2.1, step 4.1, F7, discharge-construct] ∎

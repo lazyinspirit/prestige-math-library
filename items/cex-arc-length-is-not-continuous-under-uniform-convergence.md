@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-piecewise-c1-paths-have-additive-speed-integral-length, lem-integral-elementary-bounds, thm-arc-length-is-lower-semicontinuous-under-uniform-convergence, ex-one-over-n-null]
+deps: [cor-piecewise-c1-paths-have-additive-speed-integral-length, lem-integral-elementary-bounds, thm-arc-length-is-lower-semicontinuous-under-uniform-convergence, cor-archimedean-reciprocal]
 justified_by: []
 aliases: []
 landmark: true
@@ -40,7 +40,7 @@ $$L(\gamma_k)=\sqrt2\quad\text{for every }k,\qquad L(\gamma)=1.$$
 
 [L2] The integral of a constant $C$ on $[u,v]$ is $C(v-u)$ ([[lem-integral-elementary-bounds]]).
 
-[L3] The sequence $1/k$ tends to zero ([[ex-one-over-n-null]]).
+[L3] The sequence $1/k$ of real numbers tends to zero ([[cor-archimedean-reciprocal]]).
 
 [L4] Uniform convergence guarantees only $L(\gamma)\le\liminf L(\gamma_k)$ ([[thm-arc-length-is-lower-semicontinuous-under-uniform-convergence]]).
 

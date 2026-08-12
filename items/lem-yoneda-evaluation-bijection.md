@@ -9,7 +9,6 @@ provenance:
   proof: ai-altered
 deps: [def-hom-functors-and-hom-bifunctor,
        thm-hom-assignments-are-functors,
-       def-presheaf-representable-functor-and-representation,
        def-natural-transformation, def-injection-surjection-bijection]
 justified_by: []
 aliases: []
@@ -54,8 +53,6 @@ makes no choice from a family of nonempty sets.
 
 [F3] A function is bijective when it is injective and surjective, equivalently when it has a two-sided inverse ([[def-injection-surjection-bijection]]).
 
-[F4] A covariant functor represented by $a$ is naturally isomorphic to $\mathcal C(a,-)$ ([[def-presheaf-representable-functor-and-representation]]).
-
 ## Proof
 
 **Proof technique:** constructive.
@@ -70,4 +67,4 @@ makes no choice from a family of nonempty sets.
 
 2.3 If $\alpha:\mathcal C(a,-)\Rightarrow F$ and $f:a\to c$, naturality at $f$ gives $\alpha_c(f)=\alpha_c(f\circ1_a)=F(f)(\alpha_a(1_a))=\alpha^{E_{a,F}(\alpha)}_c(f)$. [step 1.1, step 1.2, F1, F2]
 
-3.1 Steps 2.2 and 2.3 make $x\mapsto\alpha^x$ a two-sided inverse to $E_{a,F}$, so [F3] gives the claimed bijection; its range is indexed by the set $F(a)$, and every inverse value is given by a formula, so the asserted sethood and choice-freeness follow. [step 2.1, step 2.2, step 2.3, F3, F4, discharge-construct] ∎
+3.1 Steps 2.2 and 2.3 make $x\mapsto\alpha^x$ a two-sided inverse to $E_{a,F}$, so [F3] gives the claimed bijection; its range is indexed by the set $F(a)$, and every inverse value is given by a formula, so the asserted sethood and choice-freeness follow. [step 2.1, step 2.2, step 2.3, F3, discharge-construct] ∎

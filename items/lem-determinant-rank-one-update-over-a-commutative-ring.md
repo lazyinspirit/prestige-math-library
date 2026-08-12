@@ -8,6 +8,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 deps: [def-matrix-minors-cofactors-and-adjugate,
+       def-ring-matrix-product-identity-and-transpose,
        thm-laplace-cofactor-expansion,
        thm-leibniz-determinant-is-alternating-multilinear-and-normalized,
        thm-ring-matrix-arithmetic-laws]
@@ -48,14 +49,17 @@ $\det(B)=\sum_i b_{ij}C_{ij}(B)$
 [F1] $\operatorname{adj}(A)_{ji}=C_{ij}(A)$
 ([[def-matrix-minors-cofactors-and-adjugate]]).
 
-[L3] Matrix addition, multiplication, and transpose obey the usual entrywise
-and distributive laws ([[thm-ring-matrix-arithmetic-laws]]).
+[F2] Matrix products and transposes are given by their entry formulas
+([[def-ring-matrix-product-identity-and-transpose]]).
+
+[L3] Matrix addition and multiplication obey the usual distributive laws
+([[thm-ring-matrix-arithmetic-laws]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Column $j$ of $A+uv^{\mathsf T}$ is $A_j+v_j u$. Expanding the determinant by column multilinearity gives one term for each subset of columns chosen from $uv^{\mathsf T}$. [L1, L3]
+1.1 Column $j$ of $A+uv^{\mathsf T}$ is $A_j+v_j u$. Expanding the determinant by column multilinearity gives one term for each subset of columns chosen from $uv^{\mathsf T}$. [F2, L1, L3]
 2.1 The empty subset contributes $\det(A)$. Every term choosing at least two columns from $uv^{\mathsf T}$ vanishes, since those chosen columns are scalar multiples of the same column $u$ and alternation makes the determinant zero. [step 1.1, L1]
-2.2 For the singleton subset $\{j\}$, pull out $v_j$ and expand the determinant of $A$ with column $j$ replaced by $u$ along that column. Its contribution is $v_j\sum_i u_iC_{ij}(A)$. [step 1.1, L1, L2]
+2.2 For the singleton subset $\{j\}$, pull out $v_j$ and expand the determinant of $A$ with column $j$ replaced by $u$ along that column. Deleting that replaced column leaves exactly the same minors as deleting column $j$ from $A$, so its contribution is $v_j\sum_i u_iC_{ij}(A)$. [step 1.1, L1, L2]
 3.1 Summing step 2.2 over $j$ and using [F1] gives $\sum_{i,j}v_jC_{ij}(A)u_i =v^{\mathsf T}\operatorname{adj}(A)u$. Together with step 2.1, this is the claimed identity. [step 2.1, step 2.2, F1, L3] ∎

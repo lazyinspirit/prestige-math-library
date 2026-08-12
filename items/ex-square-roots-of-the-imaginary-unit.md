@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-every-complex-number-has-a-square-root, thm-complex-numbers-form-a-field, thm-of-square-roots]
+deps: [thm-every-complex-number-has-a-square-root, thm-complex-numbers-form-a-field, cor-cauchy-reals-lub-complete, thm-of-square-roots]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,7 +33,7 @@ $$\frac{1+i}{\sqrt2}\quad\text{and}\quad-\frac{1+i}{\sqrt2}.$$
 
 [F1] Complex multiplication satisfies $(a+bi)^2=(a^2-b^2)+2abi$ ([[thm-complex-numbers-form-a-field]]).
 
-[F2] The nonnegative real square root satisfies $(\sqrt2)^2=2$ ([[thm-of-square-roots]]).
+[F2] The real numbers are a complete ordered field, so the nonnegative real square root satisfies $(\sqrt2)^2=2$ ([[cor-cauchy-reals-lub-complete]], [[thm-of-square-roots]]).
 
 [F3] Every complex number has a square root ([[thm-every-complex-number-has-a-square-root]]).
 

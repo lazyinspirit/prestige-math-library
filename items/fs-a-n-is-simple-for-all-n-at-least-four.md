@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [lem-conjugating-a-cycle-relabels-its-entries, def-normal-subgroup, def-alternating-group, cor-alternating-group-is-normal-and-has-half-the-elements, def-simple-group, thm-alternating-group-is-simple-for-n-at-least-five]
+deps: [lem-conjugating-a-cycle-relabels-its-entries, def-normal-subgroup, def-alternating-group, cor-sign-from-disjoint-cycle-structure, cor-alternating-group-is-normal-and-has-half-the-elements, def-simple-group, thm-alternating-group-is-simple-for-n-at-least-five]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,7 +30,7 @@ $A_n$ is simple for every $n\ge4$.
 
 **Given:** The boundary case $A_4$.
 
-[F1] $A_4$ consists of the even permutations and has order $4!/2=12$ ([[def-alternating-group]], [[cor-alternating-group-is-normal-and-has-half-the-elements]]).
+[F1] $A_4$ consists of the even permutations and has order $4!/2=12$ ([[def-alternating-group]], [[cor-alternating-group-is-normal-and-has-half-the-elements]]); moreover $\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}$ when fixed points are included as $1$-cycles ([[cor-sign-from-disjoint-cycle-structure]]).
 
 [F2] Conjugation relabels cycle entries ([[lem-conjugating-a-cycle-relabels-its-entries]]).
 
@@ -42,7 +42,7 @@ $A_n$ is simple for every $n\ge4$.
 
 **Proof technique:** counterexample.
 
-1.1 The set $V=\{1,(12)(34),(13)(24),(14)(23)\}$ lies in $A_4$ by [F1], and direct multiplication shows it is a subgroup of order $4$. [F1, algebra]
+1.1 Each double transposition has two cycles and hence sign $(-1)^{4-2}=+1$ by [F1]. Thus $V=\{1,(12)(34),(13)(24),(14)(23)\}$ lies in $A_4$, and direct multiplication shows it is a subgroup of order $4$. [F1, algebra]
 
 2.1 By [F2], conjugation relabels a double transposition to another member of $V$. Thus [F3] makes $V\trianglelefteq A_4$. [F2, F3, step 1.1]
 

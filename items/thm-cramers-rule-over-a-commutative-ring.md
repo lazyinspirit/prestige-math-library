@@ -10,7 +10,9 @@ provenance:
 deps: [thm-laplace-cofactor-expansion,
        thm-leibniz-determinant-is-alternating-multilinear-and-normalized,
        cor-square-matrix-invertible-iff-determinant-is-a-unit,
-       cor-inverse-matrix-by-adjugate, thm-ring-matrix-arithmetic-laws]
+       cor-inverse-matrix-by-adjugate,
+       def-ring-matrix-product-identity-and-transpose,
+       thm-ring-matrix-arithmetic-laws]
 justified_by: []
 aliases: []
 landmark: true
@@ -55,15 +57,18 @@ its entries times their cofactors ([[thm-laplace-cofactor-expansion]]).
 $A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$
 ([[cor-inverse-matrix-by-adjugate]]).
 
-[L4] Matrix multiplication is associative and distributive and obeys the
-entry formula ([[thm-ring-matrix-arithmetic-laws]]).
+[F1] Matrix multiplication obeys the entry formula
+([[def-ring-matrix-product-identity-and-transpose]]).
+
+[L4] Matrix multiplication is associative and distributive
+([[thm-ring-matrix-arithmetic-laws]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $Ax=b$, then $b=\sum_k x_kA_k$, where $A_k$ is column $k$ of $A$. [L4, given]
+1.1 If $Ax=b$, then $b=\sum_k x_kA_k$, where $A_k$ is column $k$ of $A$. [F1, given]
 1.2 Now suppose $u:=\det(A)$ is a unit. By [L3], $A$ is invertible, so $x=A^{-1}b=u^{-1}\operatorname{adj}(A)b$ is the unique solution. [L3, L4]
 2.1 Replace column $j$ by the sum from step 1.1 and use column multilinearity. Every term with $k\neq j$ has two equal columns and vanishes; the term $k=j$ is $x_j\det(A)$. Thus $\det(A_j(b))=x_j\det(A)$. [step 1.1, L1]
-2.2 Its $j$th coordinate is $u^{-1}\sum_i C_{ij}(A)b_i$. By expanding $A_j(b)$ along column $j$, [L2] identifies the sum as $\det(A_j(b))$. [step 1.2, L2, L4]
+2.2 Its $j$th coordinate is $u^{-1}\sum_i C_{ij}(A)b_i$. Deleting column $j$ removes the replaced column, so $C_{ij}(A_j(b))=C_{ij}(A)$; expanding $A_j(b)$ along column $j$ therefore identifies the sum as $\det(A_j(b))$. [step 1.2, F1, L2]
 3.1 Step 2.1 proves the unconditional cross-multiplied identity, and step 2.2 proves the quotient formula and uniqueness under the unit hypothesis. [step 2.1, step 2.2] ∎

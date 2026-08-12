@@ -48,10 +48,10 @@ Define $f:[0,1]\to\mathbb R$ by $f(0)=0$ and $f(x)=x\sin(1/x)$ for $x>0$. Then $
 
 1.1 Since $|f(x)|\le x$ for $x>0$, $f(x)\to0=f(0)$ as $x\downarrow0$; away from zero it is continuous. Thus $\gamma$ is a path. [given, L6]
 
-1.2 Put $x_k=2/((2k+1)\pi)$. By [L1], $x_k\downarrow0$ and $f(x_k)=(-1)^kx_k$. [given, L1, L5]
+1.2 Put $x_k=2/((2k+1)\pi)$. Positivity of $\pi$ and [L5] give $x_k\downarrow0$, so choose $K$ with $x_K\le1$; and [L1] gives $f(x_k)=(-1)^kx_k$. [given, L1, L5]
 
-2.1 For the partition containing $0,x_N,x_{N-1},\ldots,x_0,1$, the variation contribution from consecutive $x_k$ is $|f(x_k)-f(x_{k+1})|=x_k+x_{k+1}\ge x_k$. [step 1.2, L3]
+2.1 For $N>K$, take the partition whose points are $0,x_N,x_{N-1},\ldots,x_K,1$, omitting a repeated endpoint if $x_K=1$. Its variation contribution from consecutive $x_k$ is $|f(x_k)-f(x_{k+1})|=x_k+x_{k+1}\ge x_k$. [step 1.2, L3]
 
-3.1 Since $x_k=2/((2k+1)\pi)\ge1/(\pi(k+1))$, [L2] says the partial sums of $\sum x_k$ are unbounded. Hence the variation sums in step 2.1 are unbounded and $f$ is not of bounded variation. [step 2.1, L2]
+3.1 Since $x_k=2/((2k+1)\pi)\ge1/(\pi(k+1))$, [L2] says the tails $\sum_{k=K}^{N-1}x_k$ are unbounded. Hence the variation sums in step 2.1 are unbounded and $f$ is not of bounded variation. [step 2.1, L2, algebra]
 
 4.1 The first coordinate $x\mapsto x$ has bounded variation, but the second does not by step 3.1. Therefore [L4] says the graph path is not rectifiable. [step 3.1, L4] ∎

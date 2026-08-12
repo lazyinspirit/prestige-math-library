@@ -52,6 +52,6 @@ if $C_G(x)\subseteq H$.
 
 3.2 The classes agree exactly when $txt^{-1}=hxh^{-1}$ for some $h\in H$, which is equivalent to $h^{-1}t\in C_G(x)$. This element lies outside $H$. [F2, step 1.1, step 2.1, algebra]
 
-3.3 Conversely, if $c\in C_G(x)\setminus H$, then $c=th$ for some $h\in H$, and $txt^{-1}=h^{-1}xh\in C$; hence the two classes agree. [F2, step 1.1, step 2.1, algebra]
+3.3 Conversely, if $c\in C_G(x)\setminus H$, then $c=h^{-1}t$ for some $h\in H$, and $txt^{-1}=hxh^{-1}\in C$; hence the two classes agree. [F2, step 1.1, step 2.1, algebra]
 
 4.1 Steps 3.2--3.3 give the outside-centralizer criterion; negating it gives the equivalent containment criterion for splitting. [step 3.2, step 3.3] ∎

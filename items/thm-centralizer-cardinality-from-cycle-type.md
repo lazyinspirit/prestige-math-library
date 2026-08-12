@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-conjugacy-class-and-centralizer, thm-disjoint-cycle-decomposition, def-permutation-support-disjoint-cycles-and-cycle-type, def-factorial-and-falling-factorial, def-monoid-finite-product]
+deps: [def-conjugacy-class-and-centralizer, thm-disjoint-cycle-decomposition, def-permutation-support-disjoint-cycles-and-cycle-type, thm-number-of-bijections-of-a-finite-set, thm-product-rule]
 justified_by: []
 aliases: []
 landmark: true
@@ -39,9 +39,9 @@ The formula uses the empty product $1$ when $n=0$.
 
 [F2] Every permutation has a disjoint-cycle decomposition unique up to reordering and cyclic rotation, and its cycle type counts the orbits of each length, including fixed points as $1$-cycles ([[thm-disjoint-cycle-decomposition]], [[def-permutation-support-disjoint-cycles-and-cycle-type]]).
 
-[F3] $c_k!$ counts the permutations of $c_k$ objects ([[def-factorial-and-falling-factorial]]).
+[F3] There are $c_k!$ bijections of a $c_k$-element set ([[thm-number-of-bijections-of-a-finite-set]]).
 
-[F4] A finite product combines independent choices, with empty product equal to the identity $1$ ([[def-monoid-finite-product]]).
+[F4] The cardinality of a finite product of finite choice sets is the product of their cardinalities, with the empty product having cardinality $1$ ([[thm-product-rule]]).
 
 ## Proof
 

@@ -14,7 +14,8 @@ deps: [def-presheaf-representable-functor-and-representation,
        def-union-of-a-set-and-binary-union, def-ordered-pair,
        lem-unions-and-intersections-of-small-families,
        thm-the-characterising-property-of-ordered-pairs,
-       def-natural-numbers]
+       def-natural-numbers,
+       lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]
 justified_by: []
 aliases: []
 landmark: false
@@ -24,7 +25,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Tom Leinster, Basic Category Theory, Example 5.1.14"
+    - title: "Tom Leinster, Basic Category Theory, Section 3.1 (sums of sets)"
       url: "https://arxiv.org/pdf/1612.09375.pdf"
 pipeline_run: null
 ---
@@ -54,6 +55,8 @@ $q:A\sqcup B\to X$ to $(q\circ i_A,q\circ i_B)$.
 
 [F4] Ordered pairs satisfy $(a,s)=(b,t)$ if and only if $a=b$ and $s=t$; the natural numbers $0=\varnothing$ and $1=\{0\}$ are distinct, so the two tagged parts are disjoint ([[def-ordered-pair]], [[thm-the-characterising-property-of-ordered-pairs]], [[def-natural-numbers]]).
 
+[F5] Two functions with the same domain and codomain are equal exactly when their values agree everywhere ([[lem-two-functions-are-equal-exactly-when-they-agree-at-every-point]]).
+
 ## Verification
 
 **Proof technique:** constructive.
@@ -64,8 +67,8 @@ $q:A\sqcup B\to X$ to $(q\circ i_A,q\circ i_B)$.
 
 2.1 Restricting $[g,h]$ along $i_A$ and $i_B$ gives $g$ and $h$, so $\Phi_X([g,h])=(g,h)$. [step 1.1, step 1.2]
 
-2.2 Every $z\in A\sqcup B$ is in exactly one tagged part; there $[q\circ i_A,q\circ i_B](z)=q(z)$. Thus $[\Phi_X(q)]=q$. [step 1.1, step 1.2, F3, F4]
+2.2 Every $z\in A\sqcup B$ is in exactly one tagged part; there $[q\circ i_A,q\circ i_B](z)=q(z)$. Thus $[q\circ i_A,q\circ i_B]=q$ by [F5]. [step 1.1, step 1.2, F3, F4, F5]
 
 2.3 If $k:X\to Y$, then $\Phi_Y(k\circ q)=(k\circ q\circ i_A,k\circ q\circ i_B)$, obtained by applying $G(k)$ to $\Phi_X(q)$. Hence $\Phi$ is natural. [step 1.1, F2]
 
-3.1 Steps 2.1--3.1 give a natural isomorphism $\mathbf{Set}(A\sqcup B,-)\cong G$, so [F1] proves the claim, including $A=\varnothing$ or $B=\varnothing$. [step 2.1, step 2.2, step 2.3, F1, discharge-construct] ∎
+3.1 Steps 2.1--2.3 give a natural isomorphism $\mathbf{Set}(A\sqcup B,-)\cong G$, so [F1] proves the claim, including $A=\varnothing$ or $B=\varnothing$. [step 2.1, step 2.2, step 2.3, F1, discharge-construct] ∎

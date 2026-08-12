@@ -67,7 +67,7 @@ $$r\longmapsto\operatorname{ev}_r,\qquad \operatorname{ev}_r\left(\sum_i a_i x^i
 
 1.1 The assignment $U$ preserves identities and composition because it leaves their underlying functions unchanged, so [F1] makes it a functor $\mathbf{Ring}\to\mathbf{Set}$. [F1]
 
-1.2 Because $p$ has finite support, the displayed sum defining $\operatorname{ev}_r(p)$ is finite and is independent of any larger finite support bound by adjoining zero terms. It sends $1$ to $(1,1_R)r^0=1_R$. [F2, L1, L2, F4, construct]
+1.2 Because $p$ has finite support, the displayed sum defining $\operatorname{ev}_r(p)$ is finite and is independent of any larger finite support bound by adjoining zero terms. It sends $1$ to $(1\cdot1_R)r^0=1_R$. [F2, L1, L2, F4, construct]
 
 1.3 Coefficientwise addition, distributivity of integer multiples, and finite-sum splitting give $\operatorname{ev}_r(p+q)=\operatorname{ev}_r(p)+\operatorname{ev}_r(q)$. [F2, L2, L3]
 

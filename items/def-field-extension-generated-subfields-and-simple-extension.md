@@ -37,3 +37,7 @@ and subfields, and they are respectively a subring and a subfield
 smallest subring and subfield of $K$ containing $F\cup S$. For a singleton,
 write $F[a]$ and $F(a)$. An extension $K/F$ is **simple** if $K=F(a)$ for some
 $a\in K$.
+
+For completeness, the asserted injectivity is immediate: if $\varphi(a)=0$
+with $a\ne0$, then
+$1=\varphi(a^{-1}a)=\varphi(a^{-1})\varphi(a)=0$, a contradiction.
