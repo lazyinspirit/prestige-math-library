@@ -94,12 +94,26 @@ of record.
 the owner has approved rewriting (D12, 2026-08-12). You rewrite them **in place**
 in `items/`, to the quotient construction ℝ[x]/(x²+1). For each of the four:
 
+- **They STAY `status: published`. Do NOT flip them to draft.** Order 189 still
+  lists all four until the step-10 publish commit, and *a published page listing
+  a draft item is a hard error*. This corrects an earlier version of this brief.
 - **delete `verification.audited`** — the 2026-08-02 audit no longer covers this
-  text;
-- **delete any `verification.judge`** — a stale verdict must never survive a
-  material rewrite;
-- re-run `precheck` and record `verification.precheck: pass`;
-- set `status: draft`; the owner re-audits at step 10.
+  text; the owner re-audits at step 10.
+- **There is no `verification.judge` on any of the four** — Alpha read all four
+  frontmatter blocks. Nothing to delete; do not add one. Both judge lanes see the
+  new text at step 7 inside order 54/55's frozen pair context.
+- **re-run `precheck.mts` on all four and record the result.** On disk today
+  `thm-complex-numbers-form-a-field` and `lem-complex-conjugation-and-modulus-laws`
+  carry `precheck: pass` and the two definitions carry `precheck: n/a` — those
+  stamps describe text you are replacing.
+- **Ids are immutable and no `aliases` entry is needed**, because no id is
+  renamed. Titles and dependency sets do change; that is the rewrite.
+- **Keep the existing component provenance.** Retag only a component the rewrite
+  materially alters, and say so in your notes. Nothing is fabricated.
+
+`lem-complex-conjugation-and-modulus-laws` **must not cite `def-p-norms-on-rn` or
+anything on `rn-as-a-normed-space`** — that order-167 forward reference is the
+entire reason this re-home exists.
 
 `lem-complex-conjugation-and-modulus-laws` is the load-bearing one. Its published
 proof takes the triangle inequality as `[given]` from the Euclidean norm on ℝ² at

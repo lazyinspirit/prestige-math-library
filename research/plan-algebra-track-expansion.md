@@ -712,6 +712,36 @@ proof gives, the class `LEVELS.md` §10a exists for. (iv) The cycle-type
 conjugacy theorem may instead be homed at order 40; see amendment 5 in §8, and
 **record whichever is chosen**.
 
+**Amendments (Alpha, `frontier-11` step 4, 2026-08-12). Orders in this file are
+pre-`frontier-11`; `research/plan-spec.json` puts this pair at 64/65 and its
+prerequisite at 44.**
+
+1. **Trap (iv) is now answered, as it asked to be.** The cycle-type conjugacy
+   theorem is homed **on this page**, not on the sign page: the scaffold carries
+   `lem-conjugating-a-cycle-relabels-its-entries` and
+   `thm-symmetric-permutations-are-conjugate-iff-same-cycle-type` here, and the
+   prerequisite page keeps only the disjoint-cycle decomposition, transposition
+   factorisation and $\operatorname{sgn}$ it already publishes. Later pages cite
+   this page for conjugacy.
+2. **Cycle type is the published MULTIPLICITY TUPLE $(c_1,\dots,c_n)$ with
+   $\sum_k k c_k = n$**, per `def-permutation-support-disjoint-cycles-and-cycle-type`,
+   not the multiset/partition the DEFS line above and most sources use. Every
+   class-size, centraliser and class-equation formula on the page is written in
+   the tuple form; a source formula stated for partitions is translated, not
+   copied.
+3. **Fixed points count as $1$-cycles in the $A_n$ class-splitting criterion,
+   and omitting them makes the criterion FALSE.** The page proves the criterion
+   itself — an $S_n$-class of an even permutation splits in $A_n$ exactly when
+   all cycle lengths, $1$-cycles included, are odd and distinct — from a general
+   index-two splitting lemma, rather than leaving the splitting phenomenon to
+   the `fs-` item alone. "All $3$-cycles are conjugate in $A_n$ for $n\ge5$" is
+   then the corollary at type $(3,1^{n-3})$, which does not split precisely
+   because the fixed-point length is repeated.
+4. **"An $n$-cycle and a transposition generate $S_n$" is false without a
+   relative-position hypothesis.** The A page proves it for the standard pair
+   $(1\,2\,\dots\,n)$ and $(1\,2)$, as the THMS line above already specifies;
+   the B page refutes the unrestricted form.
+
 **Forward references: NONE.**
 
 ---

@@ -67,9 +67,22 @@ sit on top of all three rather than beside them:**
 
 | order | page id | what it gives, per its own scaffold |
 |---|---|---|
-| **50** | `field-extensions-and-the-complex-numbers` (abstract-algebra) | $\mathbb{C} := \mathbb{R}[x]/(x^2+1)$; $i$ as the class of $x$; real and imaginary parts; **conjugation as a field automorphism**; the **modulus** $\lvert z\rvert$ and $\lvert zw\rvert = \lvert z\rvert\lvert w\rvert$; $\mathbb{C}$ is a field, $\mathbb{R}$ embeds in it; **every complex number has a square root** (explicit formula, unconditional); $\mathbb{C}$ is **not** an ordered field. Source: `plan-algebra-track.md` §AA-12 |
+| **50** | `field-extensions-and-the-complex-numbers` (abstract-algebra) | $\mathbb{C} := \mathbb{R}[x]/(x^2+1)$; $i$ as the class of $x$; real and imaginary parts; **conjugation as a field automorphism**; the **modulus** $\lvert z\rvert$ and $\lvert zw\rvert = \lvert z\rvert\lvert w\rvert$; $\mathbb{C}$ is a field, $\mathbb{R}$ embeds in it; **every complex number has a square root** (explicit formula, unconditional); $\mathbb{C}$ is **not** an ordered field; and the coordinate-plane bridge $a+bi\mapsto(a,b)$ carrying the field operations to the coordinate formulas. Source: `plan-algebra-track.md` §AA-12 |
 | **125** | `the-fundamental-theorem-of-algebra` (abstract-algebra) | the **algebraic** (Laplace/Galois-style) proof: odd-degree real polynomials have real roots by the IVT, square roots from AA-12, induction on the 2-adic valuation of the degree using splitting fields (52) and the fundamental theorem of symmetric polynomials (54). Conclusion: **$\mathbb{C}$ is algebraically closed**. Source: `plan-algebra-track.md` §X-1 |
-| **167** | `the-complex-exponential-and-eulers-formula` (real-analysis) | $\mathbb{C}$ as $\mathbb{R}^2$; modulus, conjugate; **completeness of $\mathbb{C}$**; complex series and **Cauchy–Hadamard in $\mathbb{C}$**; the **complex exponential**, its addition formula, termwise differentiation; **Euler's formula**; $\lvert e^{i\theta}\rvert = 1$; $\ker \exp = 2\pi i\mathbb{Z}$; $\exp$ maps $\mathbb{C}$ onto $\mathbb{C}\setminus\{0\}$; **polar form**; **de Moivre**; **$n$-th roots and roots of unity**; the **principal logarithm**; **no continuous logarithm on all of $\mathbb{C}\setminus\{0\}$**; complex powers are multivalued; the trig/hyperbolic dictionary. Source: `plan-realanalysis-pages.md` §RA-33 |
+| **167** | `the-complex-exponential-and-eulers-formula` (real-analysis) | **completeness of $\mathbb{C}$**; complex series and **Cauchy–Hadamard in $\mathbb{C}$**; the **complex exponential**, its addition formula, termwise differentiation; **Euler's formula**; $\lvert e^{i\theta}\rvert = 1$; $\ker \exp = 2\pi i\mathbb{Z}$; $\exp$ maps $\mathbb{C}$ onto $\mathbb{C}\setminus\{0\}$; **polar form**; **de Moivre**; **$n$-th roots and roots of unity**; the **principal logarithm**; **no continuous logarithm on all of $\mathbb{C}\setminus\{0\}$**; complex powers are multivalued; the trig/hyperbolic dictionary. Source: `plan-realanalysis-pages.md` §RA-33 |
+
+**Amendment (Alpha, `frontier-11` step 4, 2026-08-12; owner decision D1/D12).**
+The two rows above changed. The construction of $\mathbb{C}$ — the definition,
+that it is a field, conjugate/real/imaginary part/modulus, and the conjugation
+and modulus laws — is re-homed from order 167/189 to
+`field-extensions-and-the-complex-numbers`, ids unchanged, and materially
+rewritten to the stem-field model. Receipt:
+`research/frontier-11-rehomed.json`; full note at
+`plan-realanalysis-pages.md` §RA-33. **The identification of the complex modulus
+with the Euclidean norm $d_2$ stays at 167/189**, because it needs
+`def-p-norms-on-rn` at order 167; this track may cite it there and nowhere
+earlier. Orders in this file are pre-`frontier-11`;
+`research/plan-spec.json` is the machine authority.
 
 Two more places touch $\mathbb{C}$: order **90**
 (`inner-product-spaces-and-orthogonality`) builds the **Hermitian inner

@@ -1293,6 +1293,29 @@ later proof. (iv) Nothing on this page is analytic. No radius of convergence
 enters a proof; the one `fs-` that mentions convergence is refuted by a
 published analysis item and cites it.
 
+**Amendments (Alpha, `frontier-11` step 4, 2026-08-12). Orders in this file are
+pre-`frontier-11`; `research/plan-spec.json` puts this pair at 193/194.**
+
+1. **The mandatory dictionary (#14) is delivered in a generalised shape, and
+   trap (ii) is satisfied.** The scaffold defines $K((x))$ for a field $K$ as
+   coefficient functions on $\mathbb{Z}$ with support bounded below — the same
+   construction as the published `def-formal-laurent-series`, which builds
+   $\mathbb{R}((t^{-1}))$ that way — citing that item and its ring and
+   valuation lemmas, and stating explicitly that it generalises the coefficients
+   from $\mathbb{R}$ to $K$ while renaming the indeterminate $t^{-1}$ to $x$.
+   The dictionary theorem then embeds $K[[x]]$ in $K((x))$ as the
+   nonnegative-order subring and proves the unique factorisation
+   $h=x^{v(h)}u$ with $u$ a power-series unit and $h^{-1}=x^{-v(h)}u^{-1}$. That
+   is the anti-duplication guarantee trap (ii) exists for; a step-6 reader
+   should confirm the published-object relation is actually written into the
+   authored text and not merely into the strategy.
+2. **No field of fractions, localisation, quotient representation or universal
+   property is named**, and the dictionary theorem's title no longer asserts
+   one. **The library has no field-of-fractions or localisation construction
+   anywhere** (D10 — recorded for a future owner decision; its natural home is
+   with orders 46–50 in the algebra track, not on this page). Do not "improve"
+   the dictionary into a fraction-field theorem.
+
 Forward references: NONE.
 
 ## CB-5. Linear Recurrences and Rational Generating Functions  (order 177, combinatorics)
@@ -1959,6 +1982,38 @@ constants. Decide once, on this page, and record it. (ii) Erdős–Stone is deni
 (iii) Turán's uniqueness clause is where most textbook proofs get vague; it is a
 numbered item.
 
+**Amendments (Alpha, `frontier-11` step 4, 2026-08-12). Orders in this file are
+pre-`frontier-11`; `research/plan-spec.json` puts this pair at 219/220.**
+
+1. **Trap (i) is answered, as it asked to be: the notation is DEFINED on this
+   page.** `def-asymptotic-extremal-notation-and-edge-density` defines edge
+   density and $O$, $o$, $\Omega$, $\Theta$ for extremal functions, and every
+   asymptotic statement below it cites that definition rather than leaving the
+   symbols to the reader.
+2. **Erdős–Stone IS proved here, and §9.5's own licence is what permits it.**
+   §9.5 denies Erdős–Stone "licensed by either a regularity page or **a
+   dedicated extremal page**" — this is that page, and no regularity lemma is
+   used. The route is a locally proved hypergraph Kővári–Sós–Turán bound for
+   $K^{(r)}_{s,\dots,s}$, then Erdős–Stone for balanced blowups, then the full
+   Erdős–Stone–Simonovits theorem and the corollary that asymptotic extremal
+   density depends only on $\chi(H)$. Trap (ii) is therefore satisfied, not
+   violated: the corollaries are stated *because* the theorem is proved, and the
+   2026-08-11 build-the-machinery rule is what makes the hypergraph lemma a
+   thing to build rather than a reason to decline. The bipartite $o(n^2)$
+   statement the THMS line denies is likewise proved, but as a direct corollary
+   of ordinary KST rather than of Erdős–Stone.
+3. **The $\operatorname{ex}(n,K_{2,2})=\Theta(n^{3/2})$ `fs-` is DROPPED**, on
+   the FS line's own instruction: the matching lower bound is algebraic
+   (Erdős–Rényi polarity graphs) or probabilistic, and neither is available
+   below this page. The two source headings carrying it are `deferred` with
+   named receiving pages — `finite-probability-and-the-probabilistic-method` for
+   the deletion argument, `block-designs-and-finite-projective-planes` for the
+   projective-plane construction.
+4. **"$H$-free" means ORDINARY-subgraph avoidance here, and the published
+   library uses the phrase for INDUCED subgraphs.** The definition item fixes
+   the ordinary-subgraph convention explicitly and keeps it separate; do not let
+   a citation cross between the two readings.
+
 Forward references: NONE.
 
 ## CB-12. Finite Probability and the Probabilistic Method  (order 203, combinatorics)
@@ -2369,11 +2424,9 @@ unique up to unique isomorphism; universal arrows are initial objects of comma
 categories, and conversely; initial and terminal objects are unique up to unique
 isomorphism (the template for every "the" in the block).
 
-FS: the Yoneda lemma needs $\mathcal{C}$ to be small; $\operatorname{Nat}(F,G)$
-is a set for arbitrary functors between locally small categories (§6.3(2), and
-the honest refutation is a size argument — **if it cannot be written as a proof
-from the library's cardinal arithmetic at 229, it becomes a Remark**); two
-non-isomorphic objects can have isomorphic hom-functors.
+FS: the Yoneda lemma needs $\mathcal{C}$ to be small; two non-isomorphic objects
+can have isomorphic hom-functors. (The $\operatorname{Nat}(F,G)$ sethood clause
+that stood here is withdrawn — amendment 1 below.)
 
 B: the Yoneda lemma unwound for $\mathcal{C}$ a monoid (it becomes the statement
 that a $G$-map out of the regular representation is determined by one element);
@@ -2392,6 +2445,46 @@ it; make the construction step precede the word "hom-set". (ii) Yoneda is
 choice-free; say so, because almost everything else in the block is not.
 (iii) Contravariant vs covariant Yoneda: state one, derive the other by duality,
 and fix the variance convention in a `rem-`.
+
+**Amendments (Alpha, `frontier-11` step 4, 2026-08-12; proposed by Beta-5,
+approved as orchestrator decision D9).** The heading above still carries this
+pair's pre-`frontier-11` order; `research/plan-spec.json` is the machine
+authority and no prose renumbering is required. Recompute the order from the
+spec rather than quoting one from this file.
+
+1. **The $\operatorname{Nat}(F,G)$ false-statement item is withdrawn, and
+   becomes a Remark.** The clause it stood on — that
+   $\operatorname{Nat}(F,G)$ is a set for arbitrary functors between locally
+   small categories — is **false as written**, so it was never an `fs-` item to
+   refute; it was an error. What is true, and what §6.3(2) and the published
+   `def-functor-category` actually say, is that local smallness alone does not
+   make $\operatorname{Nat}(F,G)$ a set for arbitrary $F$ and $G$, whereas the
+   explicit Yoneda bijection *proves* sethood when the source functor is
+   representable. Write that as a Remark. **Do not assert a global
+   counterexample**: its proper-class calculation is not provable from the size
+   machinery this library owns, and asserting one would be a generated claim
+   dressed as a theorem.
+2. **Size convention for the Yoneda embedding.** Under the published convention
+   of `def-functor-category`, $y : \mathcal{C}\to[\mathcal{C}^{op},\mathbf{Set}]$
+   is an actual functor **when $\mathcal{C}$ is small**. For an arbitrary locally
+   small $\mathcal{C}$, state the objectwise Yoneda assignment and its local
+   full-faithfulness bijections directly, without silently forming a functor
+   category on a large source.
+3. **"Full embedding" is reserved.** The Yoneda functor is **fully faithful**.
+   The published `def-embedding-of-categories` makes an embedding faithful *and
+   injective on objects*, and a full embedding an embedding that is also full,
+   so call the Yoneda functor a full embedding only where that extra
+   object-injectivity condition actually holds. "Yoneda embedding" is retained
+   as the traditional proper name.
+4. **The $\mathbf{Ring}\to\mathbf{Set}$ example keeps its noncommutative-target
+   proof note.** The B-page clause is correct as it stands: $\mathbb{Z}[x]$
+   represents the underlying-set functor on $\mathbf{Ring}$ even though
+   $\mathbf{Ring}$ has noncommutative objects, because a homomorphism out of
+   $\mathbb{Z}[x]$ need only land where integer scalars are central and the
+   powers of the chosen element commute with one another. Prove the evaluation
+   map multiplicative directly; **do not cite the published polynomial
+   universal-property theorem as though its target were arbitrary** — that
+   theorem assumes a commutative target.
 
 Forward references: NONE.
 

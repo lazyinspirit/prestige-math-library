@@ -276,3 +276,72 @@ stays at 189. Three consumers rest on the plane model.
   numbers verified exactly from the book's own contents, but Definition 6.16 and
   Theorems 6.17–6.20 could not be read: full-text copies returned 403/401. The
   batch-2 harvest rows citing those numbers are unconfirmed at item granularity.
+
+---
+
+# Step 4 — Alpha's propagation, and what it corrected
+
+`research/frontier-11-alpha-report.md`, 15 minutes, exit 0. Alpha wrote only
+`research/plan-*.md` and its own report — it touched no `items/`, `library/`,
+`plan-spec.json` or batch artifact, as instructed.
+
+## D13 — the `published-unaudited` window, steps 5 → 10
+
+**Orchestrator decision: proceed, and do not pre-suppress the gate.**
+
+Under D12 the four ℂ items stay `status: published` (order 189 still lists them
+until the step-10 commit) while their `verification.audited` is deleted, because
+the 2026-08-02 audit cannot cover rewritten text. `depcheck` therefore has
+grounds to raise `published-unaudited` — an **error** — for that whole window.
+`depcheck --pending-audit-ok` exists for exactly this class, but its documented
+sole caller is the audit workflow's A4 gate, so using it inside a build is a
+deviation, and Alpha rightly refused to assume it.
+
+The window is unavoidable under the rewrite reading: deferring the rewrite to the
+publish commit would mean **the step-7 judges never see the final text**, which
+is worse than a known, receipted gate window.
+
+**Decision: do not suppress anything pre-emptively.** Run `depcheck` normally at
+step 5 and see whether it actually fires on this state. Suppressing an error gate
+before knowing it fires is how a real defect gets hidden behind an expected one.
+If it does fire on exactly these four ids and nothing else, `--pending-audit-ok`
+is used with that fact recorded here and reported at step 10; if it fires on
+anything else, that is a real defect and is fixed, not flagged.
+
+## D14 — corrections Alpha made to the orchestrator's own instructions
+
+- **My authoring brief was wrong.** It told batch 1 to set the four ℂ items to
+  `status: draft`. That would be a hard error: order 189 lists them until step
+  10, and a published page listing a draft item is exactly what the rule forbids.
+  They **stay published**; only `verification.audited` is deleted. Brief fixed
+  before any Beta read it.
+- **There is no `verification.judge` on any of the four.** My brief said "delete
+  any"; Alpha read all four frontmatter blocks and there is none. Nothing to
+  delete, and none is to be added.
+
+## D15 — the trap in verifying that the re-home landed
+
+Alpha's finding, worth preserving: **the `[rehome]` line disappearing from
+`validate-plan` is NOT proof the move landed.** Once
+`library/abstract-algebra/field-extensions-and-the-complex-numbers.md` exists,
+`homePageOf` walks `library/` and keeps the first hit; `abstract-algebra`
+precedes `real-analysis`, so the destination wins by traversal order and `dup-id`
+passes *without ever consulting the receipt*. **The only proof is order 189's
+page file no longer listing the four ids**, which happens in the step-10 commit.
+
+Relatedly, `depcheck` will raise `multi-home` ×4 from the moment both pages list
+them. That is a warning and it is the truth; readers see the four exactly once,
+on published order 189, because the second listing is a draft page the renderer
+shows only to the signed-in owner. Benign and expected.
+
+## D16 — Alpha's own step-3 miss, routed to step 6
+
+Alpha recorded a faithfulness gap it missed at step 3: **RA-29's Koch snowflake
+and Schwarz lantern are neither built nor disposed** in the arc-length pair. It
+classified this as a **step-6** repair — correctly, since that is before the text
+freezes and where a nonfatal gap may still be closed. It also stated plainly that
+it has *not* verified its own proposed reasons (Koch's length looks buildable
+against the page's lower-semicontinuity theorem; Hausdorff dimension and the
+Schwarz lantern need machinery that may not exist) against the reading order, and
+that the verification plus a written disposition naming the specific missing
+machinery belongs to step 6. **Carry this into the step-6 reader assignment.**

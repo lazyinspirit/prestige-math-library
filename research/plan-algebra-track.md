@@ -1253,7 +1253,7 @@ evaluation map, and that belongs on the B page.
 
 ## AA-12. Simple Field Extensions and the Complex Numbers  (order 50)
 
-`requires`: `polynomial-rings-and-roots`
+`requires`: `polynomial-rings-and-roots`, `roots-and-rational-powers`
 
 Field extension $K/F$; **$F[x]/(p)$ is a field iff $p$ is irreducible**;
 adjoining a root; the elements of $F[x]/(p)$ as remainders of degree $< \deg p$;
@@ -1274,6 +1274,57 @@ page needs only "remainders of degree $< \deg p$", which is division-algorithm
 bookkeeping, not linear algebra. The square-root construction is what the
 fundamental theorem of algebra will need at order 125; make it explicit and
 unconditional.
+
+**Amendments (Alpha, `frontier-11` step 4, 2026-08-12).** The heading above
+carries this page's pre-`frontier-11` order; `research/plan-spec.json` is the
+machine authority and puts the pair at 54/55. Recompute the order from the spec.
+
+1. **`roots-and-rational-powers` is now a declared prerequisite** (orchestrator
+   decision D2, from Beta-1's step-4 amendment). The modulus and Cartesian
+   complex-square-root proofs genuinely use the published existence and
+   uniqueness of nonnegative real square roots and the associated order lemmas.
+   The prose above already named $\sqrt{\ }$ "from `roots-and-rational-powers`";
+   the dependency is now declared rather than hidden inside "elementary
+   algebra".
+2. **Four published $\mathbb{C}$ items are re-homed to this page and materially
+   rewritten** — owner decision D1 of 2026-08-11, re-decided on the corrected
+   premise as D12 on 2026-08-12. `def-complex-numbers-and-arithmetic`,
+   `thm-complex-numbers-form-a-field`,
+   `def-complex-conjugate-real-imaginary-part-and-modulus` and
+   `lem-complex-conjugation-and-modulus-laws` were published on
+   `the-complex-exponential-and-eulers-formula` (§RA-33 of
+   `plan-realanalysis-pages.md`), which no page at this order may cite. **Ids are
+   unchanged**; the receipt is `research/frontier-11-rehomed.json`. This is a
+   material rewrite under SCHEMA §3, not a relocation: the construction of
+   $\mathbb{C}$ changes from the plane $\mathbb{R}^2$ with coordinate arithmetic
+   to the stem field $\mathbb{R}[x]/(x^2+1)$ this page already builds. A pure
+   relocation is impossible — as published,
+   `lem-complex-conjugation-and-modulus-laws` takes the triangle inequality from
+   `def-p-norms-on-rn` at order 167, which from here is a load-bearing forward
+   reference; the rewrite derives it instead from Lagrange's identity
+   $(a^2+b^2)(u^2+v^2)-(au+bv)^2=(av-bu)^2\ge 0$, whose inputs all sit at
+   order $\le 9$.
+3. **The bridge item `thm-complex-numbers-are-the-real-coordinate-plane`** is
+   added here, immediately after `thm-complex-numbers-form-a-field`, so that the
+   published order-189 sentence "Under the identification $\mathbb{C}=\mathbb{R}^2$"
+   keeps its warrant. It states the coordinate bijection $a+bi\mapsto(a,b)$, the
+   transported operations, and $\lvert a+bi\rvert=\sqrt{a^2+b^2}$ — deliberately
+   **not** the norm identification, which needs order 167 and stays at 189.
+4. **The "no degree here" trap is superseded for this run.** The `frontier-11`
+   dispatch requires the power basis and $[F(a):F]$ on this page, and the
+   scaffold obtains the degree from the proved unique coordinates
+   $1,a,\dots,a^{n-1}$ without importing the general dimension theory that
+   remains at order 92. Order 92 still owns the tower law and the general
+   theory.
+5. **Simple transcendental extensions are on the page, and $F(x)$ is not.**
+   Alpha's step-3 review overturned Beta-1's `out-of-scope` decline (D3), so the
+   page carries the rational-expression structure theorem and the uniqueness of
+   simple transcendental extensions, proved inside an ambient field by
+   generated-subfield minimality. **No field-of-fractions or localisation object
+   is constructed or named** — that construction exists nowhere in the library
+   (D10, recorded for a future owner decision, natural home orders 46–50), and
+   nothing on this page depends on the term. The composite of two subfields is
+   also carried here as a generated-subfield corollary rather than deferred.
 
 ## AA-13. Splitting Fields and the Existence of Roots  (order 52)
 
@@ -1644,6 +1695,41 @@ its inverse is not; the false statement that $\det(A+B) = \det A + \det B$.
 Traps. The off-diagonal entries of $A \cdot \operatorname{adj}(A)$ vanish because
 they are determinants of matrices with a repeated column; that is where
 *alternating* is used and it must be cited, not asserted.
+
+**Amendments (Alpha, `frontier-11` step 4, 2026-08-12; orchestrator decisions D6
+and D7, and Alpha's step-3 finding D-1). Orders in this file are
+pre-`frontier-11`; `research/plan-spec.json` puts this pair at 84/85.**
+
+1. **The whole cofactor/adjugate/Cramer block is built HERE, not cited from
+   LA-6.** Verified item by item against the published order-82 page: it owns
+   the Leibniz determinant, alternation, multiplicativity, the elementary-row
+   effects, triangular determinants and similarity invariance, and **no minor,
+   cofactor, Laplace-expansion, adjugate, adjugate-identity or Cramer item**.
+   The prose above already places them here and is correct; a `frontier-11`
+   dispatch brief that said otherwise was wrong and is recorded in D6.
+2. **A basis-free characterisation is added before basis independence.** The
+   operator determinant is the unique scalar by which $T$ scales every
+   alternating top-degree form (Axler 9.40), proved by transporting such a form
+   through coordinates into a column-multilinear matrix function and applying
+   LA-6's rigidity lemma. Basis independence and multiplicativity then follow
+   from it. Only top-degree forms are transported: no exterior-power object and
+   no lower-degree theory is introduced, and the zero-dimensional convention is
+   handled separately.
+3. **The adjugate of an operator is well defined by the RANK-ONE route.** The
+   textbook proof that $\operatorname{adj}(AB)=\operatorname{adj}(B)\operatorname{adj}(A)$
+   for singular factors runs through a field of rational functions, and **no
+   field-of-fractions or localisation construction exists anywhere in this
+   library** (D10 — recorded for a future owner decision; its natural home is
+   orders 46–50, not here). Prove instead a rank-one update identity from column
+   multilinearity and compare $\det(P^{-1}AP + uv^{\mathsf{T}})$ two ways; that
+   is what makes `def-adjugate-of-a-linear-operator` known to be
+   basis-independent. Do not "simplify" this proof through a rational function
+   field.
+4. **The non-additivity false statement already exists** as the published
+   `fs-determinant-is-additive-on-matrices`, whose refutation is $A=B=I_2$. Ids
+   are immutable and a second id for the same statement is forbidden, so the B
+   page carries a distinct companion instead: valid selected-column additivity
+   set beside the whole-matrix failure, recomputed directly.
 
 ## LA-8. Eigenvalues, Eigenvectors and the Characteristic Polynomial  (order 82)
 

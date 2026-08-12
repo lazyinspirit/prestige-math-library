@@ -1312,6 +1312,20 @@ alone**: L(2) > 1/2 and L(4) = 2L(2) > 1 bound e strictly between 2 and 4 with n
 series; the sharper 2 < e < 3 is `cor-two-less-than-e-less-than-three` at order
 175 and is cited, not reproved.
 
+**Recorded deviation (Alpha, `frontier-11` step 4, 2026-08-12; orchestrator
+decision D8). The owner's design above is NOT rewritten — this note records how
+one clause of it was executed and why.** The B paragraph asks the new companion
+to relate log 2 to `ex-alternating-harmonic-series-sums-to-log-two`, but that
+published id lives on the B page `the-logarithm-and-general-powers-examples`, and
+the same B-page leaf rule this section invokes ten lines further down —
+`validate-plan.mjs` rule 6 — forbids it as a formal dependency. Beta-4 therefore
+cites the A-page theorem `thm-log-one-plus-x-power-series` and proves the x = 1
+specialisation directly; the older example may still be named in reader-facing
+prose, but it is not a proof dependency. Nothing else in the design changes, and
+log 2 is still computed four ways. This is a deviation from the LETTER of the
+owner's design, forced by a structural rule the design did not anticipate at this
+clause, and it is flagged for the `frontier-11` step-10 report.
+
 Sources. The 2026-08-11 canonical-coverage rule applies in full: at least two
 independent treatments, one of them a textbook or full course-note set with a
 harvestable table of contents, each read over a stated chapter range with every
@@ -1381,6 +1395,36 @@ every pair of its points; **the Schwarz lantern**: inscribed polyhedra do NOT
 compute surface area, so the arc-length definition has no two-dimensional
 analogue and the RA-30 scaling argument is a fact about length alone.
 
+**Amendment (Alpha, `frontier-11` step 4, 2026-08-12).**
+
+1. **`sine-cosine-and-the-definition-of-pi` is added to this page's `requires`**
+   (order 179, published, below this page — no cycle, level unchanged), so that
+   the circular arc t -> (cos t, sin t) on [0, theta] can be computed to have
+   length theta. That computation is the theorem making radian measure *be* arc
+   length, and until it was added the pair's main computational theorem had no
+   worked example anywhere: every B-page entry was qualitative.
+2. **Three standard results were absent from every source's contents and are now
+   scaffolded** — the chord bound L(gamma) >= |gamma(b) - gamma(a)| (already used
+   inline by the arc-length parametrization proof, so the page had to establish
+   it regardless); the graph-length formula int sqrt(1 + f'^2) for a C^1
+   function, which is the single most-taught consequence of arc length; and the
+   worked circular-arc computation of 1. The sourcing was the thinnest in the
+   `frontier-11` run — three lecture/course-note sets, fourteen pages read, 17
+   headings — and Apostol, *Mathematical Analysis*, 2nd ed., Ch. 6 was added as
+   the required textbook backing.
+3. **OPEN, for step 6: the Koch snowflake and the Schwarz lantern are in the B
+   inventory above and appear in NEITHER the scaffold nor the coverage ledger** —
+   not built, not disposed. Alpha's step-3 review did not catch this and records
+   the miss here rather than leaving it silent. The Koch curve's infinite length
+   looks buildable in scope (a uniform limit of polygonal paths of length
+   (4/3)^n, with the page's own lower-semicontinuity theorem), while its
+   **Hausdorff dimension log 4 / log 3 is not** — no Hausdorff measure exists in
+   this library — and the Schwarz lantern needs surface area, which does not
+   exist either. Neither reason has been verified against the reading order yet.
+   A faithfulness gap is a step-6 repair, before the text is frozen: build what
+   is buildable, and give the rest a written disposition naming the specific
+   missing machinery.
+
 **RA-30 pi: the Equivalent Characterizations** <- RA-29, RA-28, RA-19
 t -> (cos t, sin t) is a bijection of [0, 2pi) onto the unit circle with unit
 speed, so arc length equals the parameter; the circumference of a circle of
@@ -1448,17 +1492,16 @@ sin(x^2) is bounded and continuous and NOT uniformly continuous.
 requires: sine-cosine-and-the-definition-of-pi;
 fundamental-trigonometric-identities; the-logarithm-and-general-powers;
 completeness-and-uniform-continuity; rn-as-a-normed-space;
-compactness-in-metric-spaces.
+compactness-in-metric-spaces; field-extensions-and-the-complex-numbers.
 
-DEFS: C as R^2 with arithmetic and real embedding; complex integer powers;
-conjugate, real and imaginary parts and modulus; the Euclidean metric,
+DEFS: complex integer powers; the Euclidean metric,
 convergence, Cauchy sequences and continuity; complex series, absolute
 convergence, power series and radius; exp by its power series; complex
 logarithms, the principal argument and principal logarithm, and principal and
 multivalued powers; complex trigonometric and hyperbolic functions; complex
 polynomials, degree, leading coefficient and monic normalization.
 
-THMS: C is a field and complete; conjugation and modulus laws; the complex
+THMS: C is complete; the complex
 binomial theorem; absolute convergence and rearrangement; Cauchy-Hadamard and
 the absolutely convergent Cauchy product; convergence of exp everywhere;
 exp(z+w)=exp(z)exp(w) and agreement with the real exponential; Euler's formula
@@ -1479,6 +1522,40 @@ DEFER: termwise complex differentiation (no complex derivative is yet defined);
 three alternative proofs of Euler's formula; exact-sequence terminology; path
 integrals and path-dependence of logarithms. These are not used by any retained
 claim.
+
+**Amendment (Alpha, `frontier-11` step 4, 2026-08-12; owner decision D1 of
+2026-08-11, re-decided as D12 on 2026-08-12).** THE CONSTRUCTION OF C LEAVES
+THIS PAGE. Four items published here are re-homed to
+`field-extensions-and-the-complex-numbers` (§AA-12 of `plan-algebra-track.md`,
+order 54 in `research/plan-spec.json`) with their ids unchanged:
+`def-complex-numbers-and-arithmetic`, `thm-complex-numbers-form-a-field`,
+`def-complex-conjugate-real-imaginary-part-and-modulus`, and
+`lem-complex-conjugation-and-modulus-laws`. The receipt is
+`research/frontier-11-rehomed.json`; this page drops from 32 items to 28 and
+declares `field-extensions-and-the-complex-numbers` in its `requires`. The DEFS
+and THMS lines above have been cut accordingly: this page no longer constructs
+C, states that C is a field, or proves the conjugation and modulus laws. It
+begins at complex integer powers and the metric, and cites order 54 for the
+field itself. **Do not define C a second time here.**
+
+The reason: order 54 constructs C as R[x]/(x^2+1) from its own simple-extension
+apparatus, and a page at level 19 cannot cite this page at level 23. The move is
+a material rewrite under SCHEMA section 3, not a relocation — the model changes
+from the plane R^2 with coordinate arithmetic to the stem field, and as
+published `lem-complex-conjugation-and-modulus-laws` takes the triangle
+inequality from `def-p-norms-on-rn` at order 167, which from order 54 is a
+forward reference no form of relocation removes. The rewrite derives it from
+Lagrange's identity instead.
+
+Two things stay here deliberately. (1) `def-complex-metric-convergence-and-continuity`
+and its "identification C = R^2" sentence keep their warrant from the new
+order-54 bridge item `thm-complex-numbers-are-the-real-coordinate-plane`, which
+states the coordinate bijection and the transported arithmetic ONLY. (2) The
+identification of the complex modulus with the Euclidean norm d_2 needs
+`def-p-norms-on-rn` at order 167 and therefore remains on this page, where the
+metric item already cites it directly. Until the `frontier-11` step-10 publish
+commit the four items are still on disk under this page; the re-home receipt is
+the recorded reconciliation between plan and disk in the interim.
 
 ### Block X: several variables
 
@@ -1619,6 +1696,42 @@ a dense set); a Riemann-integrable function with no primitive on any interval;
 two continuous functions with everywhere-identical extended derivatives that do
 not differ by a constant; **int_0^infinity sin x / x = pi/2** exists improperly
 but is not Lebesgue integrable.
+
+**Amendment (Alpha, `frontier-11` step 4, 2026-08-12; orchestrator decision D4
+and Alpha's step-3 ruling on D5). THIS PAGE STATES NEITHER FUNDAMENTAL THEOREM,
+DELIBERATELY.** Both are already published in sharp form on
+`properties-of-the-integral-and-the-working-ftc` (RA-19) — `thm-ftc-first-part`
+is the pointwise first FTC for an integrable f at a point of continuity, and
+`thm-ftc-second-part`, aliased `thm-newton-leibniz`, assumes no continuity of
+f'. Relocating them here is foreclosed, not merely undesirable: 29 published
+items reference the two ids, 22 with a deps edge, and consumers lie throughout
+the interval between the two pages — `arc-length-and-rectifiable-curves` among
+them. So this is a REFINEMENTS page, and `rem-ftc-roadmap` — first in the item
+list, exactly as the design above puts it — is what makes the title an accurate
+index rather than a claim the page does not discharge: it names the two theorems,
+says where they live, and says which strengths are published, which are here, and
+which are deferred.
+
+What this page adds: Newton-Leibniz strengthened to continuity on the closed
+interval with only an integrable extension of the interior derivative; the finite
+exceptional set; **Botsko's countable-exception theorem**, proved by direct
+epsilon-2^{-n} absorption against continuity of F; integration by parts and
+substitution under the weakest hypotheses, with substitution requiring neither
+monotonicity nor injectivity; the one-sided FTC at one-sided limit points;
+almost-everywhere differentiation of the integral function, with its
+Countable-Choice cost stated; differentiation under the integral sign on a
+compact rectangle; and both Riemann-Stieltjes forms.
+
+What is deferred, and why the reason is real in each case (D4): the **Lebesgue
+FTC for absolutely continuous functions** needs Lebesgue measure and the a.e.
+representation theorem; **Banach-Zarecki** needs Luzin property N and
+measure-theoretic BV; the **full Henstock-Kurzweil FTC** needs gauge partitions
+and the HK integral. Each is a whole subject area the reading order has not
+reached, which is the licensed use of `deferred`. **Cousin's lemma** is
+constructible here from completeness alone, but no retained result consumes a
+gauge-fine partition once Botsko is proved by absorption, so it is deferred with
+the HK integral rather than left as an unconsumed lemma. No retained result was
+declined for want of a lemma that could have been built.
 
 **RA-40 Line Integrals and the Gradient Theorem** <- RA-39, RA-34, RA-29
 line integrals; conservative fields; closed and exact forms; star-shaped and
