@@ -193,17 +193,18 @@ the brief.
 
 **Standing scope obligations.**
 
-- **`the-integral-logarithm-and-its-characterisations` + its B companion**
-  (orders 178.1/178.2; owner, 2026-08-11). An audit of the published
-  `the-exponential-function` and `the-logarithm-and-general-powers` found the
-  exponential side complete and the logarithm side carrying no equivalence
-  theorem, no uniqueness from the multiplicative-to-additive functional
-  equation, and no integral construction independent of `exp`. The owner
-  directed that all three gaps close in a dedicated pair in the next build. The
-  pair is spliced into `plan-spec.json` and is on the frontier; its design,
-  including what it may not restate from orders 175 and 177, is
-  `research/plan-realanalysis-pages.md` §RA-27b. **Closing two of the three
-  gaps does not discharge it.**
+*None outstanding.*
+
+The RA-27b obligation (`the-integral-logarithm-and-its-characterisations` + its
+B companion, orders 178.1/178.2; owner, 2026-08-11) was **discharged and struck
+on 2026-08-13**, when the pair published in run `frontier-11`. All three gaps
+closed and were verified by an independent step-6 reader that did not author
+them: the integral-first `L(x) := \int_1^x dt/t` developed with no reference to
+`exp` in any proof and identified by a single citation of
+`thm-exponential-ivp-uniqueness`; the continuous and differentiable
+functional-equation characterisations; and `thm-logarithm-definition-equivalence`
+with `rem-logarithm-roadmap-and-circularity`. Its design remains recorded at
+`research/plan-realanalysis-pages.md` §RA-27b.
 
 ## Step 1 — Scaffold (Beta-n-i, all batches in parallel)
 
