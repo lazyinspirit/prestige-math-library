@@ -64,6 +64,9 @@ is basis independent
 **Proof technique:** direct.
 
 1.1 Suppose $\dim V\geq1$ and choose an ordered basis, writing $A=[T]$. If $T$ is invertible, then $A$ is invertible by [L1]. Conversely, if $A$ is invertible, [L4] gives an operator $S$ with $[S]=A^{-1}$; the composite formula gives $[S\circ T]=I=[T\circ S]$, and injectivity of matrix representation gives $S\circ T=I_V=T\circ S$. Thus $T$ is invertible exactly when $A$ is invertible. [L1, L4, algebra]
+
 1.2 If $\dim V=0$, the unique endomorphism is the identity and is invertible, while [F2] gives $\det(T)=1\neq0$. [F2, algebra]
+
 2.1 By [L2] and [F1], $A$ is invertible exactly when $\det(A)\neq0$; by [L3], this is exactly $\det(T)\neq0$. [step 1.1, L2, F1, L3]
+
 3.1 Steps 2.1 and 1.2 establish the equivalence in every finite dimension. [step 2.1, step 1.2] ∎

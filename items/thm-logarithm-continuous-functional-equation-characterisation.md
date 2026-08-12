@@ -1,7 +1,7 @@
 ---
 id: thm-logarithm-continuous-functional-equation-characterisation
 kind: theorem
-title: "Log is the unique continuous f:(0,infinity) to R with f(xy)=f(x)+f(y) and f(e)=1"
+title: "$\\log$ is the unique continuous $f:(0,\\infty)\\to\\mathbb R$ with $f(xy)=f(x)+f(y)$ and $f(e)=1$"
 status: draft
 origin: session
 provenance:
@@ -72,9 +72,15 @@ $\log(xy)=\log x+\log y$
 **Proof technique:** direct.
 
 1.1 Define $g:\mathbb R\to\mathbb R$ by $g(t):=f(E(t))$. The addition law and the equation for $f$ give $g(a+b)=g(a)+g(b)$. [L1, given]
+
 1.2 The function $E$ is continuous by [L2], so $g$ is continuous by [L3] and the assumed continuity of $f$. [L2, L3, given]
+
 1.3 Conversely, [L7] says that the natural logarithm is continuous and has the required equation. Moreover, [L5] gives $e=E(1)$, so [F1] and [L6] give $\log(e)=L(E(1))=1$. Thus it also has the required normalisation. [L7, L5, F1, L6]
+
 2.1 By [L4], $g(t)=ct$ for some $c\in\mathbb R$. [step 1.1, step 1.2, L4]
+
 3.1 From [L5], $E(1)=e$, so $c=g(1)=f(e)=1$. Hence $g(t)=t$. [step 2.1, L5, given]
+
 4.1 For $x>0$, [F1] gives $x=E(L(x))$, so $f(x)=g(L(x))=L(x)=\log x$ by [L6]. [F1, step 3.1, L6]
+
 5.1 Steps 4.1 and 1.3 prove existence and uniqueness. [step 4.1, step 1.3] ∎

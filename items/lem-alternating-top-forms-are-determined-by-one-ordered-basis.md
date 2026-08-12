@@ -54,5 +54,7 @@ $G(A)=G(I_n)\det(A)$ ([[lem-rigidity-of-alternating-multilinear-matrix-functions
 **Proof technique:** direct.
 
 1.1 For $A\in M_n(F)$, let $w_j$ be the unique vector whose $\mathcal B$-coordinate column is column $j$ of $A$, and define $G(A):=\omega(w_0,\ldots,w_{n-1})$. This is well defined, alternating, and column-multilinear. [F1, F2, given]
+
 2.1 The rigidity lemma gives $G(A)=G(I_n)\det(A)$. [step 1.1, L1]
+
 3.1 For $A=M_{\mathcal B}(v_0,\ldots,v_{n-1})$, one has $G(A)=\omega(v_0,\ldots,v_{n-1})$ and $G(I_n)=\omega(b_0,\ldots,b_{n-1})$. Substitution in step 2.1 proves the formula and the final determination claim. [step 2.1, F2] ∎

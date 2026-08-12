@@ -51,6 +51,9 @@ inverse ([[def-invertible-matrix-and-similarity-over-a-commutative-ring]]).
 **Proof technique:** direct.
 
 1.1 If $A$ is invertible, [L1] says directly that $\det(A)$ is a unit. [L1]
+
 1.2 Conversely, suppose $u:=\det(A)$ is a unit, and let $u^{-1}$ be its inverse. [L3]
+
 2.1 Multiplying both identities in [L2] by the scalar $u^{-1}$ gives $A(u^{-1}\operatorname{adj}(A)) =(u^{-1}\operatorname{adj}(A))A=I_n$. [step 1.2, L2, algebra]
+
 3.1 Thus $u^{-1}\operatorname{adj}(A)$ is a two-sided inverse, so $A$ is invertible. Together with step 1.1, this proves both directions. [step 2.1, F1, step 1.1] ∎

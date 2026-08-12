@@ -71,8 +71,13 @@ with $f(e)=1$
 **Proof technique:** direct.
 
 1.1 Description 1 is the natural logarithm by [F1]. [F1]
+
 1.2 Description 2 is the natural logarithm by the exact integral identity [L1], equivalently by the independently proved identification [L2]. [L1, L2]
+
 1.3 Description 3 first uses [L3]'s local series formula and then its product-law continuation theorem, which gives exactly the natural logarithm on the full positive domain. [L3]
+
 1.4 Description 4 equals the natural logarithm pointwise by [L4]. [L4]
+
 1.5 Description 5 exists and is uniquely the natural logarithm by [L5]. [L5]
+
 2.1 Since each description gives the same function $\log$, all five characterisations are equivalent. The third description includes its continuation rule; it does not assert convergence of the original series with $u=x-1$ for every positive $x$. [step 1.1, step 1.2, step 1.3, step 1.4, step 1.5] ∎

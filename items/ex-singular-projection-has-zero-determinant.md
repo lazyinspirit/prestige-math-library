@@ -46,5 +46,7 @@ its determinant is nonzero
 **Proof technique:** direct.
 
 1.1 In the standard ordered basis, $[T]=\begin{pmatrix}1&0\\0&0\end{pmatrix}$, so [F2] gives $\det(T)=1\cdot0-0\cdot0=0$. [F1, F2, algebra]
+
 1.2 Directly, $(0,1)$ is a nonzero vector in the kernel and the image is $\{(x,0):x\in\mathbb R\}$, so $T$ is neither injective nor surjective. [given, algebra]
+
 2.1 The invertibility criterion [L1] agrees with step 1.2 because the determinant computed in step 1.1 is zero. [step 1.1, step 1.2, L1] ∎

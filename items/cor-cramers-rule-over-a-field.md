@@ -1,7 +1,7 @@
 ---
 id: cor-cramers-rule-over-a-field
 kind: corollary
-title: "Over a field, for each right-hand side b, Ax=b has a unique solution exactly when det(A) is nonzero, and then Cramer's quotient formula holds"
+title: "Over a field, for each right-hand side $b$, $Ax=b$ has a unique solution exactly when $\\det(A)$ is nonzero, and then Cramer's quotient formula holds"
 status: draft
 origin: session
 provenance:
@@ -59,6 +59,9 @@ exactly when its determinant is a unit
 **Proof technique:** direct.
 
 1.1 If $\det(A)\neq0$, it is a unit by [F1], so [L1] gives the unique solution and the displayed quotient formula. [F1, L1]
+
 1.2 Conversely, suppose $Ax=b$ has the unique solution $x$. If $Az=0$, then $A(x+z)=b$ by distributivity, so uniqueness gives $z=0$. Thus the kernel of $A$ is zero. [L4, given]
+
 2.1 By [L2], step 1.2 makes $A$ invertible. By [L3] and [F1], $\det(A)$ is a unit and hence is nonzero. [step 1.2, L2, L3, F1]
+
 3.1 Steps 1.1 and 2.1 prove both directions. [step 1.1, step 2.1] ∎

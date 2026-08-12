@@ -1,7 +1,7 @@
 ---
 id: cor-continuous-logarithmic-functions-form-a-one-parameter-family
 kind: corollary
-title: "Every continuous f with f(xy)=f(x)+f(y) is f(x)=c log x for a unique c, including c=0"
+title: "Every continuous $f$ with $f(xy)=f(x)+f(y)$ is $f(x)=c\\log x$ for a unique $c$, including $c=0$"
 status: draft
 origin: session
 provenance:
@@ -73,8 +73,13 @@ $\log(xy)=\log x+\log y$
 **Proof technique:** direct.
 
 1.1 Put $g(t)=f(E(t))$. By [F1] and the functional equation, $g$ is additive. By [L1], [L2], and continuity of $f$, it is continuous. [F1, L1, L2, given]
+
 1.2 Conversely, [L5] shows that each function $x\mapsto c\log x$ is continuous and satisfies the product-to-sum equation. For $c=0$ this is the zero function. [L5, algebra]
+
 1.3 If $c\neq0$, put $b=E(1/c)$. Then $b>0$ and $\log b=1/c\neq0=\log1$, so $b\neq1$; [F2] gives $\log_bx=c\log x$. Thus the nonzero members are exactly the constant-multiple forms underlying logarithms to bases, while the zero member requires no division. [F1, L4, L5, F2, algebra]
+
 2.1 By [L3], $g(t)=ct$ for a unique scalar $c=g(1)$. [step 1.1, L3]
+
 3.1 For $x>0$, $x=E(L(x))$, so $f(x)=g(L(x))=cL(x)=c\log x$. By [L4], $E(1)=e$, hence $c=g(1)=f(e)$, which also proves uniqueness. [F1, step 2.1, L4]
+
 4.1 Steps 3.1, 1.2, and 1.3 prove the classification and its endpoint case. [step 3.1, step 1.2, step 1.3] ∎

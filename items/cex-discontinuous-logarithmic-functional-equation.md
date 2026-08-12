@@ -1,7 +1,7 @@
 ---
 id: cex-discontinuous-logarithmic-functional-equation
 kind: counterexample
-title: "Assuming choice, a Hamel-basis additive map transported through exp gives a discontinuous logarithmic function that is not c log"
+title: "Assuming choice, a Hamel-basis additive map transported through $\\exp$ gives a discontinuous logarithmic function that is not $c\\log$"
 status: draft
 origin: session
 provenance:
@@ -66,9 +66,15 @@ $\mathbb R$ onto $(0,\infty)$
 **Proof technique:** direct.
 
 1.1 Choose a Hamel basis element $b_\ast$, its coefficient map $g$, and a nonzero vector $w$ in the complementary span. Then $g(b_\ast)=1$ and $g(w)=0$. [L1, given]
+
 1.2 For $x>0$, let $t$ be the unique real with $x=\exp(t)$, and define $f(x):=g(t)$. This is well defined by bijectivity in [L4]. [L4, construct]
+
 2.1 The map $g$ is not scalar multiplication. If $g(t)=ct$, then $0=g(w)=cw$ and $w\neq0$ force $c=0$, contradicting $g(b_\ast)=1$. [step 1.1, algebra]
+
 2.2 If $x=\exp(s)$ and $y=\exp(t)$, then [L3] gives $xy=\exp(s+t)$, so $f(xy)=g(s+t)=g(s)+g(t)=f(x)+f(y)$. [step 1.2, L3, L1]
+
 3.1 If $f=c\log$, then composing with exponential and using [F1] gives $g(t)=f(\exp t)=ct$, contradicting step 2.1. [step 1.2, step 2.1, F1]
+
 3.2 If $f$ were continuous, then $g=f\circ\exp$ would be continuous by [L4] and [L5]. The regularity theorem [L2] would make $g$ scalar multiplication, again contradicting step 2.1. [step 1.2, step 2.1, L4, L5, L2]
+
 4.1 Thus the constructed $f$ satisfies the functional equation but is discontinuous and is not a scalar multiple of $\log$. [step 2.2, step 3.1, step 3.2] ∎

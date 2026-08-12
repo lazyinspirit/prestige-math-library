@@ -1,7 +1,7 @@
 ---
 id: thm-adjugate-identity-over-a-commutative-ring
 kind: theorem
-title: "For every positive-sized square matrix over a commutative ring, A adj(A)=adj(A) A=det(A) I"
+title: "For every positive-sized square matrix over a commutative ring, $A\\operatorname{adj}(A)=\\operatorname{adj}(A)A=\\det(A)I$"
 status: draft
 origin: session
 provenance:
@@ -59,8 +59,13 @@ identity ([[thm-ring-matrix-arithmetic-laws]]).
 **Proof technique:** direct.
 
 1.1 The $(i,j)$ entry of $A\operatorname{adj}(A)$ is $\sum_k a_{ik}C_{jk}(A)$. If $i=j$, [L1] makes this $\det(A)$. [F1, L1]
+
 1.2 If $i\neq j$, replace row $j$ of $A$ by row $i$. Expanding the resulting determinant along row $j$ gives $\sum_k a_{ik}C_{jk}(A)$, because the minors used in that row do not involve row $j$. The matrix has two equal rows, so its determinant is $0$ by alternation. [L1, L2]
+
 1.3 The $(i,j)$ entry of $\operatorname{adj}(A)A$ is $\sum_k C_{ki}(A)a_{kj}$. It equals $\det(A)$ when $i=j$ by column expansion. When $i\neq j$, it is the column-$i$ expansion of the matrix obtained by replacing column $i$ by column $j$, whose determinant is $0$ because it has two equal columns. [F1, L1, L3]
+
 2.1 Thus $A\operatorname{adj}(A)=\det(A)I_n$. [step 1.1, step 1.2, L4]
+
 2.2 Hence $\operatorname{adj}(A)A=\det(A)I_n$. [step 1.3, L4]
+
 3.1 Combining steps 2.1 and 2.2 proves both identities. [step 2.1, step 2.2] ∎

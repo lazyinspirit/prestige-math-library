@@ -1,7 +1,7 @@
 ---
 id: ex-four-by-four-determinant-by-cofactors-and-row-reduction
 kind: example
-title: "A sparse 4 by 4 determinant is 30 by both cofactor expansion and row reduction"
+title: "A sparse $4\\times4$ determinant is $30$ by both cofactor expansion and row reduction"
 status: draft
 origin: session
 provenance:
@@ -52,7 +52,11 @@ has determinant $30$, both by cofactor expansion and by row reduction.
 **Proof technique:** direct.
 
 1.1 Expand along the last row. Its only nonzero entry is $5$ in position $(3,3)$, with positive cofactor sign, so $$ \det(A)=5\det\begin{pmatrix}1&2&0\\0&3&0\\4&8&2\end{pmatrix}. $$ [F1, L1, algebra]
+
 1.2 Alternatively, replace row $2$ by row $2-4$ times row $0$ (the third row by the third row minus four times the first row). The result is upper triangular with diagonal $1,3,2,5$, and the operation does not change the determinant. [L2, algebra]
+
 2.1 Expand the $3\times3$ determinant along its last column. The only nonzero entry there is $2$, again with positive sign, giving $\det(A)=5\cdot2\det\begin{pmatrix}1&2\\0&3\end{pmatrix} =5\cdot2\cdot3=30$. [step 1.1, L1, algebra]
+
 2.2 By [L3], the determinant in step 1.2 is $1\cdot3\cdot2\cdot5=30$. [step 1.2, L3, algebra]
+
 3.1 Steps 2.1 and 2.2 give the same value by the two requested methods. [step 2.1, step 2.2] ∎

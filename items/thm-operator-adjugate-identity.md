@@ -1,7 +1,7 @@
 ---
 id: thm-operator-adjugate-identity
 kind: theorem
-title: "For a positive-dimensional finite-dimensional operator, T adj(T)=adj(T)T=det(T) I"
+title: "For a positive-dimensional finite-dimensional operator, $T\\operatorname{adj}(T)=\\operatorname{adj}(T)T=\\det(T)I$"
 status: draft
 origin: session
 provenance:
@@ -59,5 +59,7 @@ $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I$
 **Proof technique:** direct.
 
 1.1 Put $A=[T]_{\mathcal B}$. By [F1] and [L2], the matrices of $T\circ\operatorname{adj}(T)$ and $\operatorname{adj}(T)\circ T$ are respectively $A\operatorname{adj}(A)$ and $\operatorname{adj}(A)A$. [F1, L2]
+
 2.1 By [L1], both matrices in step 1.1 equal $\det(A)I_n$, which equals $\det(T)I_n$ by [L3]. [step 1.1, L1, L3]
+
 3.1 Equality of representing matrices gives both asserted operator identities. [step 2.1, L4] ∎

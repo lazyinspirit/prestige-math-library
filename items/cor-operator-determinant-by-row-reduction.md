@@ -61,6 +61,9 @@ diagonal entries ([[thm-determinant-of-a-triangular-matrix]]).
 **Proof technique:** direct.
 
 1.1 By [L1], $\det(T)=\det(A)$, independently of the chosen basis. [L1]
+
 1.2 Apply Gaussian elimination to $A$ and record, in order, every row operation used to reach an echelon matrix $U$. [L2]
+
 2.1 Reversing the recorded effects in [L3] expresses $\det(A)$ in terms of $\det(U)$: each swap contributes a factor $-1$, each forward row scaling by $c\neq0$ contributes a reverse factor $c^{-1}$, and a row addition contributes no factor. [step 1.2, L3, algebra]
+
 3.1 Since the square echelon matrix $U$ is upper triangular, [L4] gives $\det(U)$ as its diagonal product. With $s$ swaps and scalings $c_1,\ldots,c_m$, step 2.1 gives $\det(U)=(-1)^{s}\big(\prod_j c_j\big)\det(A)$, and step 1.1 identifies $\det(A)$ with $\det(T)$; solving for $\det(T)$ gives the displayed formula. [step 1.1, step 2.1, L4, algebra] ∎

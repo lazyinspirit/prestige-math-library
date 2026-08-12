@@ -1,7 +1,7 @@
 ---
 id: ex-three-by-three-inverse-by-adjugate
 kind: example
-title: "The adjugate gives the inverse of a three by three rational matrix with determinant 3"
+title: "The adjugate gives the inverse of a $3\\times3$ rational matrix with determinant $3$"
 status: draft
 origin: session
 provenance:
@@ -55,5 +55,7 @@ $A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$
 **Proof technique:** direct.
 
 1.1 Computing the nine signed $2\times2$ minors gives $$ \operatorname{cof}(A)= \begin{pmatrix}1&1&-1\\-2&1&2\\2&-1&1\end{pmatrix}, \quad \operatorname{adj}(A)= \begin{pmatrix}1&-2&2\\1&1&-1\\-1&2&1\end{pmatrix}. $$ [F2, algebra]
+
 2.1 Direct multiplication gives $A\operatorname{adj}(A)=3I_3$. By [L1], this also confirms $\det(A)=3$. [step 1.1, L1, algebra]
+
 3.1 The scalar $3$ is a unit of $\mathbb Q$ by [F1], so [L2] gives the displayed inverse. Multiplying it by $A$ on either side gives $I_3$. [step 2.1, F1, L2, algebra] ∎

@@ -1,7 +1,7 @@
 ---
 id: thm-integral-logarithm-product-law
 kind: theorem
-title: "The integral logarithm satisfies L(xy)=L(x)+L(y) for all positive x and y"
+title: "The integral logarithm satisfies $L(xy)=L(x)+L(y)$ for all positive $x$ and $y$"
 status: draft
 origin: session
 provenance:
@@ -56,5 +56,7 @@ point are differentiable there, with the corresponding derivatives
 **Proof technique:** direct.
 
 1.1 Define $h(x):=L(xy)-L(x)$ on $(0,\infty)$. By [L1] and [L2] each term is differentiable, so [L5] makes $h$ differentiable with $$h'(x)=\frac{y}{xy}-\frac1x=0.$$ [L1, L2, L5, algebra]
+
 2.1 By [L4], $h$ is continuous, so [L3] makes it constant on $(0,\infty)$. [step 1.1, L4, L3]
+
 3.1 Evaluating at $x=1$ gives $h(x)=h(1)=L(y)-L(1)=L(y)$. Therefore $L(xy)-L(x)=L(y)$, which is the claimed product law. [step 2.1, L1, algebra] ∎

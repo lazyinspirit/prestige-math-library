@@ -1,7 +1,7 @@
 ---
 id: cor-inverse-matrix-by-adjugate
 kind: corollary
-title: "If det(A) is a unit, then A^{-1}=det(A)^{-1} adj(A)"
+title: "If $\\det(A)$ is a unit, then $A^{-1}=\\det(A)^{-1}\\operatorname{adj}(A)$"
 status: draft
 origin: session
 provenance:
@@ -49,4 +49,5 @@ $A\operatorname{adj}(A)=\operatorname{adj}(A)A=\det(A)I_n$
 **Proof technique:** direct.
 
 1.1 Put $u=\det(A)$. Scaling [L1] by $u^{-1}$ gives $A(u^{-1}\operatorname{adj}(A)) =(u^{-1}\operatorname{adj}(A))A=I_n$. [L1, algebra]
+
 2.1 By [L2], $A^{-1}$ exists. Both it and $u^{-1}\operatorname{adj}(A)$ are two-sided inverses of $A$, so [L3] makes them equal. [step 1.1, L2, L3] ∎

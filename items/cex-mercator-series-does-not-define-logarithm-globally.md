@@ -1,7 +1,7 @@
 ---
 id: cex-mercator-series-does-not-define-logarithm-globally
 kind: counterexample
-title: "For every x>2 the uncontinued Mercator series at u=x-1 diverges"
+title: "For every $x>2$ the uncontinued Mercator series at $u=x-1$ diverges"
 status: draft
 origin: session
 provenance:
@@ -49,6 +49,9 @@ law continues those data uniquely to all positive inputs
 **Proof technique:** direct.
 
 1.1 Let $a_n=(-1)^{n+1}u^n/n$ for $n\geq1$. Every $a_n$ is nonzero, and $$ \left|\frac{a_{n+1}}{a_n}\right| =u\frac{n}{n+1}\longrightarrow u>1. $$ [given, algebra]
+
 2.1 The ratio test [L1] therefore makes $\sum_na_n$ divergent. [step 1.1, L1]
+
 2.2 More explicitly, choose $q$ with $1<q<u$. The ratios in step 1.1 are at least $q$ for all sufficiently large $n$, so $|a_n|$ then grows by a factor at least $q$ and cannot tend to $0$; [L2] again rules out convergence. [step 1.1, L2, choose, algebra]
+
 3.1 This does not conflict with [L3]: for $x>2$, the direct substitution $u=x-1$ lies outside the local interval, and the value at $x$ is obtained by the product-law continuation instead. [step 2.1, L3] ∎

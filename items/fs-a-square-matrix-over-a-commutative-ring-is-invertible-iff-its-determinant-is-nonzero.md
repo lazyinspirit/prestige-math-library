@@ -54,5 +54,7 @@ commutative ring is invertible if and only if its determinant is a unit
 **Proof technique:** direct.
 
 1.1 The reverse implication fails in $\mathbb Z$. By [F3], the unique term in the $1\times1$ determinant gives $\det([2])=2$. This determinant is nonzero but is not a unit by [F2], so [L1] shows that $[2]$ is not invertible. [F2, F3, L1, algebra]
+
 1.2 The forward implication also fails under the stated ring convention. In the zero ring allowed by [F1], the $1\times1$ identity matrix is $[0]$; it is its own two-sided inverse, and [F3] gives its determinant as $0$. [F1, F3, algebra]
+
 2.1 Thus both directions of the claimed equivalence can fail. Replacing "nonzero" by "a unit" gives the valid equivalence [L1], including for the zero ring. [step 1.1, step 1.2, L1] ∎

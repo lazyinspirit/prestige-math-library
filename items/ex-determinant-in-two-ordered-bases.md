@@ -1,7 +1,7 @@
 ---
 id: ex-determinant-in-two-ordered-bases
 kind: example
-title: "One operator has matrices diag(2,3) and [[2,0],[1,3]] in two bases, both with determinant 6"
+title: "One operator has matrices $\\operatorname{diag}(2,3)$ and $\\begin{pmatrix}2&0\\\\1&3\\end{pmatrix}$ in two bases, both with determinant $6$"
 status: draft
 origin: session
 provenance:
@@ -52,6 +52,9 @@ $[T]_{\mathcal B}=P^{-1}[T]_{\mathcal E}P$
 **Proof technique:** direct.
 
 1.1 Direct evaluation gives $[T]_{\mathcal E}=A=\begin{pmatrix}2&0\\0&3\end{pmatrix}$ and $P=\begin{pmatrix}1&0\\1&1\end{pmatrix}$, whose inverse is $P^{-1}=\begin{pmatrix}1&0\\-1&1\end{pmatrix}$. [F1, given, algebra]
+
 2.1 Matrix multiplication in [L1] gives $$ [T]_{\mathcal B} =P^{-1}AP =\begin{pmatrix}2&0\\1&3\end{pmatrix}. $$ [step 1.1, L1, algebra]
+
 3.1 By the two-term determinant formula, $\det(A)=2\cdot3=6$ and $\det([T]_{\mathcal B})=2\cdot3-0\cdot1=6$. [step 2.1, F2, algebra]
+
 4.1 The explicit computations in steps 3.1 and 2.1 illustrate the equality asserted abstractly by [L2]. [step 3.1, step 2.1, L2] ∎

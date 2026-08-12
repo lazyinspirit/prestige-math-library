@@ -1,7 +1,7 @@
 ---
 id: lem-log-series-extends-by-the-product-law
 kind: lemma
-title: "The Mercator series, its value at 1 and the product law determine log on all positive reals, while the series alone is only local"
+title: "The Mercator series, its value at $1$ and the product law determine $\\log$ on all positive reals, while the series alone is only local"
 status: draft
 origin: session
 provenance:
@@ -62,8 +62,13 @@ and successor steps are established ([[thm-induction-principle]]).
 **Proof technique:** direct.
 
 1.1 The published natural logarithm satisfies the local series condition by [L1] and the product law by [L2], so an extension exists. [L1, L2]
+
 1.2 From [F1], induction gives $2^n\geq n+1$ for every natural $n$: equality holds at $n=0$, and $2^{n+1}=2\cdot2^n\geq2(n+1)\geq n+2$. [F1, L4, algebra]
+
 1.3 Repeated use of the product law, justified by induction, gives $f(2^k)=kf(2)$, and the series condition at $u=1$ determines $f(2)$. [F1, L4, given]
+
 2.1 Given $x>0$, use [L3] to choose $k\geq1$ with $x<k$. Then $2^k\geq k+1>k>x$ by step 1.2. Put $y=x/2^k$ and $u=y-1$; thus $0<y<1$ and $-1<u<0$. [L3, step 1.2, algebra]
+
 3.1 Since $x=2^ky=2^k(1+u)$, the product law and the local series condition force $$ f(x)=k f(2)+f(1+u) =k\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}n +\sum_{n=1}^{\infty}(-1)^{n+1}\frac{u^n}{n}. $$ [step 2.1, step 1.3, given]
+
 4.1 Formula 3.1 forces the value of any extension at every $x>0$, so at most one extension exists. Together with step 1.1, that unique extension is $\log$. [step 3.1, step 1.1] ∎

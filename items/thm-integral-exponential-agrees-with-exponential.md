@@ -1,7 +1,7 @@
 ---
 id: thm-integral-exponential-agrees-with-exponential
 kind: theorem
-title: "The integral exponential E is the published exponential function"
+title: "The integral exponential $E$ is the published exponential function"
 status: draft
 origin: session
 provenance:

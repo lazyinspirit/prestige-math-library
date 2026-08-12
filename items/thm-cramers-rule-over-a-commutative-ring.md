@@ -1,7 +1,7 @@
 ---
 id: thm-cramers-rule-over-a-commutative-ring
 kind: theorem
-title: "Cramer's rule over a commutative ring: every solution satisfies det(A)x_j=det(A_j(b)), and a unit determinant gives the unique quotient formula"
+title: "Cramer's rule over a commutative ring: every solution satisfies $\\det(A)x_j=\\det(A_j(b))$, and a unit determinant gives the unique quotient formula"
 status: draft
 origin: session
 provenance:
@@ -68,7 +68,11 @@ $A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$
 **Proof technique:** direct.
 
 1.1 If $Ax=b$, then $b=\sum_k x_kA_k$, where $A_k$ is column $k$ of $A$. [F1, given]
+
 1.2 Now suppose $u:=\det(A)$ is a unit. By [L3], $A$ is invertible, so $x=A^{-1}b=u^{-1}\operatorname{adj}(A)b$ is the unique solution. [L3, L4]
+
 2.1 Replace column $j$ by the sum from step 1.1 and use column multilinearity. Every term with $k\neq j$ has two equal columns and vanishes; the term $k=j$ is $x_j\det(A)$. Thus $\det(A_j(b))=x_j\det(A)$. [step 1.1, L1]
+
 2.2 Its $j$th coordinate is $u^{-1}\sum_i C_{ij}(A)b_i$. Deleting column $j$ removes the replaced column, so $C_{ij}(A_j(b))=C_{ij}(A)$; expanding $A_j(b)$ along column $j$ therefore identifies the sum as $\det(A_j(b))$. [step 1.2, F1, L2]
+
 3.1 Step 2.1 proves the unconditional cross-multiplied identity, and step 2.2 proves the quotient formula and uniqueness under the unit hypothesis. [step 2.1, step 2.2] ∎

@@ -1,7 +1,7 @@
 ---
 id: cor-integral-logarithm-is-strictly-increasing
 kind: corollary
-title: "The integral logarithm is continuous and strictly increasing on (0,infinity)"
+title: "The integral logarithm is continuous and strictly increasing on $(0,\\infty)$"
 status: draft
 origin: session
 provenance:

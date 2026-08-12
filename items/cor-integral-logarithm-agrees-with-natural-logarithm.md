@@ -1,7 +1,7 @@
 ---
 id: cor-integral-logarithm-agrees-with-natural-logarithm
 kind: corollary
-title: "The integral logarithm L is the published natural logarithm"
+title: "The integral logarithm $L$ is the published natural logarithm"
 status: draft
 origin: session
 provenance:
@@ -46,4 +46,5 @@ $\exp:\mathbb R\to(0,\infty)$ ([[def-natural-logarithm]]).
 **Proof technique:** direct.
 
 1.1 By [F1] and [L1], $L$ is an inverse of $\exp$. [F1, L1]
+
 2.1 Inverse functions are unique, so [F2] and step 1.1 give $L(x)=\log x$ for every $x>0$. [step 1.1, F2] ∎

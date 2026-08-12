@@ -1,7 +1,7 @@
 ---
 id: cor-e-is-the-unique-unit-hyperbolic-area
 kind: corollary
-title: "The number e is the unique x>0 satisfying integral from 1 to x of dt/t=1"
+title: "The number $e$ is the unique $x>0$ satisfying $\\int_1^x\\frac{dt}{t}=1$"
 status: draft
 origin: session
 provenance:
@@ -49,5 +49,7 @@ $$\int_1^x\frac{dt}{t}=1.$$
 **Proof technique:** direct.
 
 1.1 By [F1] and [L1], $e=E(1)$. The inverse identity [F2] gives $L(e)=L(E(1))=1$. [F1, L1, F2, algebra]
+
 2.1 Strict increase [L2] makes $L$ injective. Hence if $x>0$ also satisfies $L(x)=1=L(e)$, then $x=e$. [L2, step 1.1]
+
 3.1 The defining integral for $L$ converts steps 1.1 and 2.1 into the stated existence and uniqueness claim. [step 1.1, step 2.1] ∎

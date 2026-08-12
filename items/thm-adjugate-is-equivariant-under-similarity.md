@@ -1,7 +1,7 @@
 ---
 id: thm-adjugate-is-equivariant-under-similarity
 kind: theorem
-title: "Over a commutative ring, adj(P^{-1}AP)=P^{-1}adj(A)P for every invertible P"
+title: "Over a commutative ring, $\\operatorname{adj}(P^{-1}AP)=P^{-1}\\operatorname{adj}(A)P$ for every invertible $P$"
 status: draft
 origin: session
 provenance:
@@ -61,6 +61,9 @@ reverses products ([[thm-ring-matrix-arithmetic-laws]]).
 **Proof technique:** direct.
 
 1.1 For arbitrary columns $u,v$, $$ C+uv^{\mathsf T} =P^{-1}\bigl(A+(Pu)(v^{\mathsf T}P^{-1})\bigr)P. $$ [F1, L3, algebra]
+
 2.1 Apply [L1] to step 1.1, then [L2] to both rank-one updates. Since $\det(C)=\det(A)$, cancellation in the additive group of $R$ gives $$ v^{\mathsf T}\operatorname{adj}(C)u =v^{\mathsf T}P^{-1}\operatorname{adj}(A)Pu. $$ [step 1.1, L1, L2, L3]
+
 3.1 For each $i,j$, let $v$ be the column with entry $1$ at $i$ and $0$ elsewhere, and let $u$ be the analogous column at $j$. The product formula [F2] makes $v^{\mathsf T}Bu=B_{ij}$ for every $B\in M_n(R)$, so step 2.1 says that the $(i,j)$ entries of $\operatorname{adj}(C)$ and $P^{-1}\operatorname{adj}(A)P$ are equal. [step 2.1, F2]
+
 4.1 Equality of all entries proves $\operatorname{adj}(C)=P^{-1}\operatorname{adj}(A)P$, and substituting the definition of $C$ proves the statement. [step 3.1, F1] ∎

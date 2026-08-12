@@ -1,7 +1,7 @@
 ---
 id: def-integral-logarithm
 kind: definition
-title: "The integral logarithm L(x):=integral from 1 to x of dt/t for x>0"
+title: "The integral logarithm $L(x):=\\int_1^x\\frac{dt}{t}$ for $x>0$"
 status: draft
 origin: session
 provenance:

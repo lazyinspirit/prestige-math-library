@@ -1,7 +1,7 @@
 ---
 id: cor-integral-exponential-addition-law
 kind: corollary
-title: "The inverse E satisfies E(a+b)=E(a)E(b)"
+title: "The inverse $E$ satisfies $E(a+b)=E(a)E(b)$"
 status: draft
 origin: session
 provenance:
@@ -43,4 +43,5 @@ $$E(a+b)=E(a)E(b).$$
 **Proof technique:** direct.
 
 1.1 Since $E(a),E(b)>0$, the product law gives $$ L(E(a)E(b))=L(E(a))+L(E(b))=a+b. $$ [F1, L1]
+
 2.1 Also $L(E(a+b))=a+b$. Injectivity of $L$ therefore gives $E(a+b)=E(a)E(b)$. [F1, step 1.1] ∎

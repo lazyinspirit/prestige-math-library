@@ -1,7 +1,7 @@
 ---
 id: thm-integral-logarithm-derivative-and-normalisation
 kind: theorem
-title: "The integral logarithm satisfies L'(x)=1/x for x>0 and L(1)=0"
+title: "The integral logarithm satisfies $L'(x)=1/x$ for $x>0$ and $L(1)=0$"
 status: draft
 origin: session
 provenance:
@@ -55,6 +55,9 @@ is $0$ when the endpoints agree ([[def-oriented-integral]]).
 **Proof technique:** direct.
 
 1.1 Choose $a,b$ with $0<a<x<b$. For every $z\in(a,b)$, additivity gives $$ L(z)=\int_1^a\frac{dt}{t}+\int_a^z\frac{dt}{t}. $$ [F1, L2]
+
 1.2 By [F1] and the equal-endpoint convention [F2], $L(1)=\int_1^1dt/t=0$. [F1, F2]
+
 2.1 The first term in step 1.1 is constant in $z$. Since $1/t$ is continuous at $x$, [L1] gives $L'(x)=1/x$. [step 1.1, L1, algebra]
+
 3.1 Since $x>0$ was arbitrary, steps 2.1 and 1.2 prove both claims. [step 2.1, step 1.2] ∎

@@ -1,7 +1,7 @@
 ---
 id: def-integral-exponential
 kind: definition
-title: "The integral exponential E:R to (0,infinity) as the inverse of L"
+title: "The integral exponential $E:\\mathbb R\\to(0,\\infty)$ as the inverse of $L$"
 status: draft
 origin: session
 provenance:

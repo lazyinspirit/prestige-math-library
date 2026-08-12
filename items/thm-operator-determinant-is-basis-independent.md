@@ -52,5 +52,7 @@ scalar by which $T$ scales every alternating top-degree form
 **Proof technique:** direct.
 
 1.1 If $\dim V=0$, [F1] defines the operator determinant directly as $1$; no determinant of a $0\times0$ representing matrix is invoked. [F1]
+
 1.2 Suppose $\dim V\geq 1$. Applying [L1] first with $\mathcal B$ and then with $\mathcal C$ characterises both $\det([T]_{\mathcal B})$ and $\det([T]_{\mathcal C})$ as the same unique basis-free scaling scalar. [L1]
+
 2.1 The two matrix determinants are therefore equal in positive dimension; together with the separate zero-dimensional definition in step 1.1, this proves well-definedness in every finite dimension. [step 1.1, step 1.2] ∎

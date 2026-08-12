@@ -1,7 +1,7 @@
 ---
 id: ex-log-two-from-four-characterisations
 kind: example
-title: "Log 2 from four characterisations: hyperbolic area, the alternating harmonic series, Landau iterates and exp^{-1}(2)"
+title: "$\\log 2$ from four characterisations: hyperbolic area, the alternating harmonic series, Landau iterates and $\\exp^{-1}(2)$"
 status: draft
 origin: session
 provenance:
@@ -54,7 +54,11 @@ $\log x=\lim_{n\to\infty}2^n(x^{1/2^n}-1)$
 **Proof technique:** direct.
 
 1.1 Apply the integral characterisation in [L1] at $x=2$ to obtain $\log2=\int_1^2dt/t$. [L1]
+
 1.2 Apply [L2] to obtain the alternating harmonic series value. [L2]
+
 1.3 Apply [L3] at $x=2$ to obtain the Landau limit. [L3]
+
 1.4 By [F1], $\log2$ is the unique real $y$ with $\exp(y)=2$, namely $\exp^{-1}(2)$. [F1]
+
 2.1 Steps 1.1 through 1.4 identify all four displayed quantities with the same value, as asserted by the equivalence theorem [L1]. [step 1.1, step 1.2, step 1.3, step 1.4, L1] ∎

@@ -50,6 +50,9 @@ displayed columns and matrices belong to the corresponding matrix sets
 **Proof technique:** direct.
 
 1.1 Direct calculation gives $$ \det[u+v,w]=1,\qquad \det[u,w]+\det[v,w]=1+0=1. $$ [F1, F2, algebra]
+
 1.2 For simultaneous whole-matrix addition, $A+B=2I_2$, so $\det(A+B)=4$, whereas $\det(A)+\det(B)=1+1=2$. [F1, F2, algebra]
+
 2.1 This is the instance $\det[u+v,w]=\det[u,w]+\det[v,w]$ of columnwise multilinearity [L1], with the second column fixed. [step 1.1, L1]
+
 3.1 Steps 2.1 and 1.2 isolate the distinction: additivity holds in a single selected column, but fails for the whole matrix argument. [step 2.1, step 1.2] ∎
