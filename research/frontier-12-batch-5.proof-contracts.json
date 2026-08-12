@@ -36,6 +36,9 @@
     "cex-dependent-variables-need-not-factor-expectation",
     "fs-linearity-of-expectation-requires-independence",
     "ex-strict-union-bound-for-overlapping-events",
+    "ex-chebyshev-inequality-is-sharp",
+    "ex-markov-inequality-is-sharp",
+    "cex-markov-inequality-fails-without-nonnegativity",
     "thm-positive-probability-existence-principle",
     "thm-first-moment-method",
     "prop-deletion-alteration-method",
@@ -3832,6 +3835,212 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "reason": "The top-level planned statement is not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-chebyshev-inequality-is-sharp": {
+      "scaffold_status": "planned-at-step-1; exact authored citations and numbered-step partition must be synchronized at step 5",
+      "citation_plan": [
+        "def-uniform-finite-probability-space",
+        "def-finite-real-random-variable-and-distribution",
+        "def-expectation-on-a-finite-probability-space",
+        "def-variance-and-covariance",
+        "thm-chebyshev-inequality"
+      ],
+      "citations": [],
+      "derivations": [
+        {
+          "id": "planned-main-argument",
+          "claim": "For every $\\varepsilon>0$, take the uniform distribution on $\\{-\\varepsilon,+\\varepsilon\\}$. Compute $\\mathbb E[X]=0$ and $\\operatorname{Var}(X)=\\varepsilon^2$; then $|X-\\mathbb E[X]|\\ge\\varepsilon$ holds everywhere, so both sides of Chebyshev's inequality equal $1$. Keep the weak threshold exactly, and do not include $\\varepsilon=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "planned citation: def-uniform-finite-probability-space",
+            "planned citation: def-finite-real-random-variable-and-distribution",
+            "planned citation: def-expectation-on-a-finite-probability-space",
+            "planned citation: def-variance-and-covariance",
+            "planned citation: thm-chebyshev-inequality"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness is an explicit nonempty two-point probability space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Planned step 1.1 computes the zero mean and excludes the inadmissible threshold epsilon=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Planned step 1.1 computes both the tail probability and the Chebyshev ratio as exactly 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Planned step 1.1 keeps epsilon positive, so the two support values are distinct and the variance is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Planned step 1.1 uses the weak event |X-E[X]|>=epsilon, which contains both support points at equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The support points and their weights are given explicitly; the verification makes no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a sharpness example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a sharpness example, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-markov-inequality-is-sharp": {
+      "scaffold_status": "planned-at-step-1; exact authored citations and numbered-step partition must be synchronized at step 5",
+      "citation_plan": [
+        "def-finite-probability-space-and-event",
+        "def-finite-real-random-variable-and-distribution",
+        "def-expectation-on-a-finite-probability-space",
+        "thm-markov-inequality"
+      ],
+      "citations": [],
+      "derivations": [
+        {
+          "id": "planned-main-argument",
+          "claim": "For $a>0$ and $p\\in[0,1]$, take a two-point finite probability space with an event $E$ of probability $p$, and define $X=a$ on $E$ and $X=0$ off $E$. Then $\\mathbb E[X]=ap$ and $\\mathbb P(X\\ge a)=p=\\mathbb E[X]/a$. Check $p=0$ and $p=1$, allowing zero-weight outcomes, and keep $a=0$ excluded.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "planned citation: def-finite-probability-space-and-event",
+            "planned citation: def-finite-real-random-variable-and-distribution",
+            "planned citation: def-expectation-on-a-finite-probability-space",
+            "planned citation: thm-markov-inequality"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses an explicit two-point carrier even when one outcome has weight zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Planned step 1.1 covers p=0, permits a zero-weight extremal event, and keeps the forbidden threshold a=0 excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Planned step 1.1 covers p=1, for which the tail event is certain and both sides equal 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Planned step 1.1 retains the endpoint distributions with a zero-weight outcome instead of silently requiring both weights positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Planned step 1.1 covers both endpoints of p in [0,1] and uses the weak threshold X>=a at the attained value a."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The event, outcome weights, and random-variable values are specified explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a sharpness example, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a sharpness example, not a biconditional."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-markov-inequality-fails-without-nonnegativity": {
+      "scaffold_status": "planned-at-step-1; exact authored citations and numbered-step partition must be synchronized at step 5",
+      "citation_plan": [
+        "def-uniform-finite-probability-space",
+        "def-finite-real-random-variable-and-distribution",
+        "def-expectation-on-a-finite-probability-space",
+        "thm-markov-inequality"
+      ],
+      "citations": [],
+      "derivations": [
+        {
+          "id": "planned-main-argument",
+          "claim": "On a uniform two-point space, let $X$ take the values $1$ and $-3$, and use threshold $a=1$. Then $\\mathbb E[X]=-1$ while $\\mathbb P(X\\ge1)=1/2$, so the conclusion $\\mathbb P(X\\ge a)\\le\\mathbb E[X]/a$ would read $1/2\\le-1$. State explicitly that this refutes dropping nonnegativity, not Markov's theorem.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "planned citation: def-uniform-finite-probability-space",
+            "planned citation: def-finite-real-random-variable-and-distribution",
+            "planned citation: def-expectation-on-a-finite-probability-space",
+            "planned citation: thm-markov-inequality"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is an explicit nonempty two-point probability space."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The counterexample has no zero-valued threshold or divisor; its threshold is fixed at the positive value 1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Planned step 1.1 uses the admissible positive threshold a=1 and computes the attained upper-tail event exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Planned step 1.1 verifies that X genuinely changes sign and identifies the negative value that violates Markov's nonnegativity hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Planned step 1.1 uses the weak event X>=1, so the positive support value at the threshold is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both outcomes, their weights, the random-variable values, and the threshold are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a hypothesis counterexample, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a hypothesis counterexample, not a biconditional."
         }
       ],
       "finite_smoke": []

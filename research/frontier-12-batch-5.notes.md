@@ -2,22 +2,22 @@
 
 ## Batch result
 
-The machine scaffold contains 79 items across four page objects: 37 on the finite-probability foundations A page, 8 on its B companion, 28 on the probabilistic-method A page, and 6 on its B companion. In aggregate the A pages have 17 definitions, 15 lemmas, 1 proposition, 28 theorems, and 4 corollaries; the B pages have 9 examples, 4 counterexamples, and 1 false statement. No B-page item is a dependency outside its own page; the one local B-to-B edge remains earlier on the foundations B page. The proof-contract artifact contains 62 contracts, one for every non-definition scaffold item, with `scope` ordered foundations A/B and then method A/B.
+The machine scaffold contains 82 items across four page objects: 37 on the finite-probability foundations A page, 11 on its B companion, 28 on the probabilistic-method A page, and 6 on its B companion. In aggregate the A pages have 17 definitions, 15 lemmas, 1 proposition, 28 theorems, and 4 corollaries; the B pages have 11 examples, 5 counterexamples, and 1 false statement. No B-page item is a dependency outside its own page; the one local B-to-B edge remains earlier on the foundations B page. The proof-contract artifact contains 65 contracts, one for every non-definition scaffold item, with `scope` ordered foundations A/B and then method A/B.
 
 Decision D1 is applied at the approved cut after `cor-relative-variance-positive-probability-bound`. Finite probability, expectation, independence, variance, Markov, Chebyshev, Cauchy--Schwarz, and the second-moment inequality form the 37-item foundations page; the existence principles, alteration, random graphs, Chernoff, the Local Lemma, and applications form the 28-item method page. No result was dropped and every previously scaffolded item id is unchanged.
 
 ## Applied split and order plan
 
 1. Order 220.2: `finite-probability-spaces-and-random-variables`, title **Finite Probability Spaces and Random Variables**, A items 1--37. Its sole `requires` entry is `the-logarithm-and-general-powers`, whose closure supplies the real, exponential, finite-sum, and set foundations used here.
-2. Order 220.4: `finite-probability-spaces-and-random-variables-examples`, its B companion, B items 1--8: loaded die, Bayes urns, pairwise-not-mutual independence, equal probabilities without independence, uncorrelated without independence, dependent product expectation, the false independence requirement for linearity, and strictness of the union bound. It requires the foundations A page only.
+2. Order 220.4: `finite-probability-spaces-and-random-variables-examples`, its B companion, B items 1--11: loaded die, Bayes urns, pairwise-not-mutual independence, equal probabilities without independence, uncorrelated without independence, dependent product expectation, the false independence requirement for linearity, strictness of the union bound, Chebyshev sharpness, Markov sharpness, and failure of Markov's conclusion without nonnegativity. It requires the foundations A page only.
 3. Order 221: `finite-probability-and-the-probabilistic-method` retains its id, title, and order, with A items 38--65. Its `requires` entries are `finite-probability-spaces-and-random-variables`, `extremal-graph-theory`, and `congruences-and-the-chinese-remainder-theorem`; the last is the exact published route used by the finite strict sum-free proof.
-4. Order 222: `finite-probability-and-the-probabilistic-method-examples` retains its id and order, with B items 9--14: the triangle count, second-moment random-subset calculation, Ramsey calculation, Local-Lemma parameter check, high-girth/high-chromatic ledger, and the threshold-one counterexample. It requires the method A page only.
+4. Order 222: `finite-probability-and-the-probabilistic-method-examples` retains its id and order, with B items 12--17: the triangle count, second-moment random-subset calculation, Ramsey calculation, Local-Lemma parameter check, high-girth/high-chromatic ledger, and the threshold-one counterexample. It requires the method A page only.
 
 This differs from my proposal because orders 223/224 are occupied by `linear-algebra-methods-in-combinatorics` and its companion; shifting them would cascade through the combinatorics track. The free fractional orders 220.2/220.4 place the foundations pair immediately before the method pair, preserve the method page's order-221 id for its three planned downstream consumers, and require no renumbering or downstream edits. The coverage entry is divided between the two A ids: the method half retains the three probabilistic-method lecture-note treatments, while the foundations half now adds two genuine probability-textbook treatments to those three corroborating prefaces. The proof-contract `scope` is divided at the same A and B cuts.
 
 ### Seam check
 
-The split creates no forward dependency. No item on orders 220.2 or 220.4 depends on an item on orders 221 or 222. The method A page has 41 direct dependency edges back to foundations A, all licensed by its declared `requires`; method B has 11 direct edges to method A and 10 to foundations A, both inside its prerequisite closure. Foundations B has 21 direct edges to foundations A, and its sole local B-to-B edge points to an earlier item on the same B page. No item needed to move and no dependency citation was weakened.
+The split creates no forward dependency. No item on orders 220.2 or 220.4 depends on an item on orders 221 or 222. The method A page has 41 direct dependency edges back to foundations A, all licensed by its declared `requires`; method B has 11 direct edges to method A and 10 to foundations A, both inside its prerequisite closure. Foundations B has 34 direct edges to foundations A, and its sole local B-to-B edge points to an earlier item on the same B page. No item depends on any of the three new boundary witnesses. No item needed to move and no dependency citation was weakened.
 
 ### Applyable prose-scaffold amendments
 
@@ -27,8 +27,8 @@ In `research/plan-combinatorics-and-categories.md`, replace the exact block begi
 
 and ending with the `Forward references: NONE.` immediately before `## CB-13.` by two sections, in this order:
 
-1. `## CB-12a. Finite Probability Spaces and Random Variables (order 220.2, combinatorics)`, with `requires: the-logarithm-and-general-powers (177)`, the first proposed summary below, DEFS equal to foundation definitions 1, 6, 10, 13, 14, 16, 17, 21, 23, 26, and 31, THMS equal to foundation proof-bearing items 2--37, and B/FS/CEX equal to B items 1--8. End with `Forward references: NONE.`
-2. `## CB-12b. Finite Probability and the Probabilistic Method (order 221, combinatorics)`, with `requires: finite-probability-spaces-and-random-variables (220.2), extremal-graph-theory (219), congruences-and-the-chinese-remainder-theorem (30)`, the second proposed summary below, DEFS equal to method definitions 42, 44, 48, 56, 58, and 60, THMS equal to method proof-bearing items 38--65, and B/CEX equal to B items 9--14. End with `Forward references: NONE.`
+1. `## CB-12a. Finite Probability Spaces and Random Variables (order 220.2, combinatorics)`, with `requires: the-logarithm-and-general-powers (177)`, the first proposed summary below, DEFS equal to foundation definitions 1, 6, 10, 13, 14, 16, 17, 21, 23, 26, and 31, THMS equal to foundation proof-bearing items 2--37, and B/FS/CEX equal to B items 1--11. End with `Forward references: NONE.`
+2. `## CB-12b. Finite Probability and the Probabilistic Method (order 221, combinatorics)`, with `requires: finite-probability-spaces-and-random-variables (220.2), extremal-graph-theory (219), congruences-and-the-chinese-remainder-theorem (30)`, the second proposed summary below, DEFS equal to method definitions 42, 44, 48, 56, 58, and 60, THMS equal to method proof-bearing items 38--65, and B/CEX equal to B items 12--17. End with `Forward references: NONE.`
 
 This replacement removes the stale instruction that Chernoff may be dropped: the exponential machinery is published and the bound is scaffolded. It also replaces the old claim that the Ramsey lower bound should be a second A-page theorem; it is now a B-page derivation agreeing with the already-published `thm-diagonal-ramsey-counting-lower-bound`. It adds the previously absent conditional-probability/Bayes machinery, the pairwise-versus-mutual distinction, product spaces, indicator variables, covariance algebra, deletion/alteration, hypergraph colouring, MAX-CUT, property $S_k$, dominating sets, and sum-free subsets.
 
@@ -36,7 +36,7 @@ In the summary table of the same file, replace the exact old row
 
 > `| 203/204 | finite-probability-and-the-probabilistic-method | Finite Probability and the Probabilistic Method | combinatorics | 23 / 13 |`
 
-(with the id formatted in backticks on disk) by the two rows `220.2/220.4 | finite-probability-spaces-and-random-variables | Finite Probability Spaces and Random Variables | combinatorics | 37 / 8` and `221/222 | finite-probability-and-the-probabilistic-method | Finite Probability and the Probabilistic Method | combinatorics | 28 / 6`, preserving the table's backtick formatting.
+(with the id formatted in backticks on disk) by the two rows `220.2/220.4 | finite-probability-spaces-and-random-variables | Finite Probability Spaces and Random Variables | combinatorics | 37 / 11` and `221/222 | finite-probability-and-the-probabilistic-method | Finite Probability and the Probabilistic Method | combinatorics | 28 / 6`, preserving the table's backtick formatting.
 
 ## Proposed two-paragraph A-page summaries
 
@@ -54,7 +54,7 @@ The machinery is harvested through classical applications rather than left abstr
 
 ## Canonical-coverage harvest
 
-The harvest contains 197 source or canonical headings: 173 `included`, 8 `inline`, 8 `already-published`, and 8 `out-of-scope`; none is `deferred`. Thus 189 headings are retained locally, absorbed into proofs, or supplied by an opened published item. The foundations entry has 113 rows and the unchanged method entry has 84. Counts are source-heading dispositions, so independent treatments of the same result are intentionally counted more than once.
+The harvest contains 200 source or canonical headings: 176 `included`, 8 `inline`, 8 `already-published`, and 8 `out-of-scope`; none is `deferred`. Thus 192 headings are retained locally, absorbed into proofs, or supplied by an opened published item. The foundations entry has 116 rows and the unchanged method entry has 84. Counts are source-heading dispositions, so independent treatments of the same result are intentionally counted more than once.
 
 ### Fix round 2 — foundations sourcing correction
 
@@ -77,6 +77,18 @@ Alpha's stage-0 finding was reproduced mechanically: before this correction, the
 | `lem-cauchy-schwarz-for-finite-random-variables` | Pishro--Nik §6.2.4, which states and proves Cauchy--Schwarz for random variables. |
 | `thm-finite-second-moment-lower-bound` | Canonical one-line specialization of Pishro--Nik §6.2.4 to $X=X\mathbf 1_{\{X>0\}}$. |
 
+### Fix round 3 — boundary witnesses on page 220.4
+
+Only the foundations B page changes. The A page at 220.2 and both pages at 221/222 remain unchanged, and the sourcing correction above remains discharged. Three terminal witnesses are appended after the accepted eight B items:
+
+| New item | Source and exact boundary |
+|---|---|
+| `ex-chebyshev-inequality-is-sharp` | Grinstead--Snell §8.1, immediately after Example 8.1 (printed p. 306; PDF p. 314), gives the distribution on $\{-\varepsilon,+\varepsilon\}$ with weights $1/2,1/2$. Its mean is $0$, its variance is $\varepsilon^2$, and the weak deviation event at threshold $\varepsilon>0$ has probability $1$. |
+| `ex-markov-inequality-is-sharp` | Pishro--Nik §6.2.2 supplies Markov's exact statement. The canonical witness takes $X=a$ on an event of probability $p$ and $X=0$ off it, for $a>0$ and $p\in[0,1]$, giving $\mathbb P(X\ge a)=p=\mathbb E[X]/a$. |
+| `cex-markov-inequality-fails-without-nonnegativity` | Pishro--Nik §6.2.2 explicitly assumes that $X$ is nonnegative. On a fair two-point space, $X\in\{1,-3\}$ has mean $-1$, while at $a=1$ its upper-tail probability is $1/2$, contradicting the conclusion if the hypothesis is removed. |
+
+All three items have proof contracts and coverage rows. The two Markov constructions are canonical rows tied only to Pishro--Nik §6.2.2; Grinstead--Snell §8.1 is cited only for the Chebyshev item. No scaffold item lists any of the three new ids as a dependency, so page 220.4 remains a leaf.
+
 The eight declines expected to receive the closest Alpha scrutiny are:
 
 - Matoušek--Vondrák's Fano-plane definition and the calculation $m(3)\le7$: these are a named incidence-design example and its special obstruction, not missing probability machinery; both would naturally live on a design-theory/examples treatment.
@@ -90,11 +102,11 @@ The eight declines expected to receive the closest Alpha scrutiny are:
 
 ### Grinstead--Snell
 
-C. M. Grinstead and J. L. Snell, *Introduction to Probability*, second edition, Chance Project version dated 4 July 2006, <https://math.dartmouth.edu/~prob/prob/prob.pdf>. I read the named statement blocks declared in coverage from §1.2 (printed pp. 18--24), §4.1 (pp. 133--147), §6.1 (pp. 225--234), §6.2 (pp. 257--260), and §8.1 (pp. 305--306). These blocks independently develop the finite outcome-weight model, probability laws, conditioning, independence, product distributions, Bernoulli/binomial variables, expectation, variance, and Chebyshev. The book's preface expressly describes a thorough probability treatment, and this Chance Project version is freely redistributable under the GNU Free Documentation License.
+C. M. Grinstead and J. L. Snell, *Introduction to Probability*, second edition, Chance Project version dated 4 July 2006, <https://math.dartmouth.edu/~prob/prob/prob.pdf>. I read the named statement blocks declared in coverage from §1.2 (printed pp. 18--24), §4.1 (pp. 133--147), §6.1 (pp. 225--234), §6.2 (pp. 257--260), and §8.1 through the Chebyshev sharpness paragraph immediately after Example 8.1 (printed pp. 305--306; sharpness at PDF p. 314). These blocks independently develop the finite outcome-weight model, probability laws, conditioning, independence, product distributions, Bernoulli/binomial variables, expectation, variance, Chebyshev, and the exact two-point equality witness. The book's preface expressly describes a thorough probability treatment, and this Chance Project version is freely redistributable under the GNU Free Documentation License.
 
 ### Pishro--Nik
 
-H. Pishro--Nik, *Introduction to Probability, Statistics, and Random Processes*, Kappa Research LLC, 2014, <https://www.probabilitycourse.com/>. I read the named statement blocks declared in coverage from online §§1.3.2--1.3.3, 1.4.0--1.4.3, 3.1.5, 3.2.2, 3.2.4, 5.3.1, 6.1.1, 6.2.1--6.2.2, and 6.2.4. This second open-access, peer-reviewed textbook independently supplies the axioms and basic laws, chain rule, total probability, Bayes, Bernoulli/binomial variables, expectation and variance, covariance bilinearity, Markov, Chebyshev, and Cauchy--Schwarz. Worked examples and solved-problem pages are excluded from the declared locator unless a coverage row names one explicitly.
+H. Pishro--Nik, *Introduction to Probability, Statistics, and Random Processes*, Kappa Research LLC, 2014, <https://www.probabilitycourse.com/>. I read the named statement blocks declared in coverage from online §§1.3.2--1.3.3, 1.4.0--1.4.3, 3.1.5, 3.2.2, 3.2.4, 5.3.1, 6.1.1, 6.2.1--6.2.2, and 6.2.4. This second open-access, peer-reviewed textbook independently supplies the axioms and basic laws, chain rule, total probability, Bayes, Bernoulli/binomial variables, expectation and variance, covariance bilinearity, Markov, Chebyshev, and Cauchy--Schwarz. Section 6.2.2 supplies the exact Markov statement and its nonnegativity hypothesis; the equality and hypothesis-boundary witnesses are separately identified as canonical rows rather than attributed to the source. Worked examples and solved-problem pages are excluded from the declared locator unless a coverage row names one explicitly.
 
 ### Matoušek--Vondrák
 
@@ -284,6 +296,9 @@ The intended component values below are for step 5. `LD` is `literature-derived`
 | `cex-dependent-variables-need-not-factor-expectation` | AA / AA | Local indicator countermodel showing why the product theorem needs independence. |
 | `fs-linearity-of-expectation-requires-independence` | AA / AA | Deliberately false claim refuted by the exact linearity theorem and a dependent pair. |
 | `ex-strict-union-bound-for-overlapping-events` | AA / AA | Local overlap calculation showing the union bound can be strict. |
+| `ex-chebyshev-inequality-is-sharp` | LD / AA | Grinstead--Snell §8.1 supplies the exact symmetric two-point distribution and equality claim; step 5 recomputes its mean, variance, and tail event locally. |
+| `ex-markov-inequality-is-sharp` | AA / AA | Canonical extremal construction adapted from the exact Markov statement in Pishro--Nik §6.2.2 and checked for every $p\in[0,1]$. |
+| `cex-markov-inequality-fails-without-nonnegativity` | AA / AA | Canonical two-point boundary witness for the nonnegativity hypothesis stated in Pishro--Nik §6.2.2, with the negative mean and failed bound computed locally. |
 | `ex-triangle-count-in-the-erdos-renyi-random-graph` | LD / AA | Standard $G(n,p)$ indicator application, with expectation derived locally. |
 | `ex-second-moment-bound-for-a-nonempty-random-subset` | AA / AA | Local finite subset model testing all hypotheses of the second-moment bound. |
 | `ex-diagonal-ramsey-lower-bound-by-the-union-bound` | LD / AA | Matoušek--Vondrák §2.1 and the opened published strict Ramsey theorem. |
@@ -299,4 +314,4 @@ Step 5 must not compress the Local Lemma to a citation-only proof, must not hide
 
 ## Step-2 status and blockers
 
-Decision D1 remains fully applied: the A split is 37/28, the B split is 8/6, and proof-contract scope follows pair order. Fix round 2 changes sourcing only. The foundations coverage entry now has 113 rows across two full textbook treatments and three corroborative lecture-note prefaces, plus five canonical finite-result rows; the accepted method entry remains byte-for-byte unchanged at 84 rows across the original three lecture-note treatments. All 37 foundations A ids occur in the corrected coverage union, including the 14 ids Alpha identified. The page manifest and proof-contract file are byte-for-byte unchanged. The required final commands are green: `coverage-checklist` reports 2 pages, 197 harvested results, 0 errors and 0 warnings; `validate-plan` exits 0 with page order acyclic and consistent. There were no permission, web, source-access, mathematical, or seam blockers, and there is no unpublished or false dependency to report. The standalone proof-contract checker remains outside this fix round: before step 5 its 62 planned `items/*.md` files do not exist, while the JSON scope/contract bijection itself remains unchanged.
+Decision D1 remains fully applied: the A split is 37/28, the B split is now 11/6 after the three dispatched boundary witnesses, and proof-contract scope follows pair order. Fix round 2 changed sourcing only and remains discharged; fix round 3 changes only page 220.4 and its matching coverage, provenance notes, and proof contracts. The foundations coverage entry now has 116 rows across two full textbook treatments and three corroborative lecture-note prefaces, plus seven canonical finite-result rows; the accepted method entry remains byte-for-byte unchanged at 84 rows across the original three lecture-note treatments. All 37 foundations A ids and all three new B ids occur in the corrected coverage union. The required final commands are green: `coverage-checklist` reports 2 pages, 200 harvested results, 0 errors and 0 warnings; `validate-plan` exits 0 with page order acyclic and consistent. There were no permission, web, source-access, mathematical, or seam blockers, and there is no unpublished or false dependency to report. The standalone proof-contract checker remains outside this fix round: before step 5 its 65 planned `items/*.md` files do not exist, while the JSON scope/contract bijection now contains all 65 proof-bearing scaffold items.
