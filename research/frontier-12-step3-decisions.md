@@ -190,3 +190,84 @@ spec and `validate-plan` runs against **that**. Result: one hard error across
 This is the same failure shape as run `frontier-11`'s vacuous `finite-smoke`,
 `proof-contract --strict` and `rendercheck` passes: a green gate is not evidence
 a gate ran. `rendercheck` was verified working before this run started.
+
+---
+
+# Decisions arising from Alpha's stage-0 review
+
+Alpha returned **7 sufficient, 4 insufficient** in 17 minutes, with WebFetch
+working — every faithfulness finding is backed by source text it actually opened
+(HTML live, PDFs via a local `pypdf`). That is the criterion the previous run
+could not perform at all, and it immediately earned its keep: all three of the
+substantive `insufficient` verdicts came from opening a source and finding the
+harvest had stopped short of it.
+
+Alpha's `sufficient` pairs are not re-opened. Its `insufficient` findings and the
+§5 corrections were routed to batches 1, 2, 3, 4, 5 and 7 as fix round 2. Two
+items were not a Beta's to fix.
+
+## D11 — module localisation is homed nowhere. Recorded as a tracked gap.
+
+Alpha's C1: three of batch 1's module-localisation deferral reasons name
+`free-modules-and-exact-sequences` as the destination. That page is **batch 2 of
+this very run**, and it ships without module localisation — so the deferral
+points at a page that will exist and will not contain the material.
+
+Checked from disk: `S⁻¹M`, exactness of localisation and flatness are on **no**
+page in `plan-spec.json`. The natural homes are `chain-conditions-and-semisimple-modules`
+(108) or `modules-over-a-pid-and-canonical-forms` (110), both unscaffolded and
+belonging to future runs.
+
+**Decision: do not home it in this run, and do not pretend it is homed.** Module
+localisation cannot go on the order-53.2 localisation page at all — modules are
+not introduced until order 102, so the material is genuinely later than its own
+prerequisite. Adding it to batch 2's order-104 page would be legal (53.2 < 104)
+but is scope creep: batch 2 is `sufficient` at 29 A items, nothing downstream
+requires module localisation, and expanding an accepted pair mid-run for material
+with no consumer is not richness.
+
+This is deliberately the **same mechanism that surfaced D10**: a real gap,
+recorded where a future run will find it, with the coverage rows making it
+recoverable. Batch 1's only job is to stop naming a destination that will not
+contain it. It does **not** belong in `DEFERRED.md`, which is for material
+awaiting a whole missing track (measure theory, functional analysis, set theory
+beyond choice, algebraic topology); modules exist here, the page simply does not.
+
+## D12 — order 88's title promised Cayley–Hamilton. Retitled. APPLIED.
+
+Alpha's C12: `plan-spec.json` gave order 88 the title *"Diagonalisation, the
+Minimal Polynomial and Cayley-Hamilton"*, but batch 3 scaffolded Cayley–Hamilton
+onto order **86**, and Alpha confirmed the adjugate route there is correct.
+
+The page **id** is `diagonalisation-and-the-minimal-polynomial` — it never
+claimed Cayley–Hamilton. The title had drifted from the id, not the plan from the
+mathematics. Cayley–Hamilton is a statement *about the characteristic
+polynomial*, so order 86 is its right home, and order 88 is a natural consumer.
+
+Retitled to **"Diagonalisation and the Minimal Polynomial"**, matching its id.
+`validate-plan` exit 0. This is a title-only edit to an unscaffolded, unpublished
+page: no id changes, no reading-order change, no published text touched.
+
+## Where Alpha's three source catches landed
+
+Recorded because they are the evidence that the harvest rule works, and the
+argument for keeping it expensive:
+
+1. **`splitting-fields`** — the Stacks 09HL locator read *"Definition 9.15.1
+   only, stopping before Lemma 9.15.2"*: it stopped immediately before every
+   result in a section titled *Normal extensions*. This is the exact shape of the
+   `group-actions-and-cayleys-theorem` failure — a source cited by title and not
+   harvested — caught this time at scaffold stage.
+2. **`eigenvalues-…`** — the Pinkham locator ran §12.1 → §12.2 → §12.4. Chapter
+   12 has a **§12.3**, with four numbered results given no row and no disposition
+   anywhere: trace as the sum of eigenvalues, determinant as their product, the
+   Spectral Mapping Theorem and its corollary. The page computed both
+   characteristic-polynomial coefficients and never connected them to the
+   eigenvalues.
+3. **`finite-probability-spaces-and-random-variables`** — 14 of 37 A items appear
+   in no source's contents at all, because Matoušek–Vondrák §1.1 opens *"In no
+   way is it intended to serve as a substitute for a course in probability
+   theory."* All three sources treat elementary probability as a preface. **This
+   one is partly a consequence of D1**: splitting the page minted a page whose
+   subject none of its inherited sources develops. Remedy is Grinstead & Snell
+   with verified ranges, not a weaker reading of the rule.
