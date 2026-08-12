@@ -2,7 +2,7 @@
 id: thm-c1-paths-have-length-equal-to-the-integral-of-speed
 kind: theorem
 title: "If $\\gamma:[a,b]\\to\\mathbb{R}^n$ is continuous, differentiable on $(a,b)$, and $\\gamma'$ extends continuously to $[a,b]$, then $L(\\gamma)=\\int_a^b\\lVert\\gamma'(t)\\rVert_2\\,dt$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: two-inequalities
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

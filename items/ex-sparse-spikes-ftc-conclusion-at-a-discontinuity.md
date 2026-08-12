@@ -2,7 +2,7 @@
 id: ex-sparse-spikes-ftc-conclusion-at-a-discontinuity
 kind: example
 title: "The indicator of $\\{1,1/2,1/4,1/8,\\ldots\\}$ is discontinuous at $0$, but its integral function has derivative $0=f(0)$ there"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

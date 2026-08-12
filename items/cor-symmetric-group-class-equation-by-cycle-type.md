@@ -2,7 +2,7 @@
 id: cor-symmetric-group-class-equation-by-cycle-type
 kind: corollary
 title: 'The class equation of $S_n$ is $n!=\sum_{\sum k c_k=n} n!/\prod_k k^{c_k}c_k!$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counting
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

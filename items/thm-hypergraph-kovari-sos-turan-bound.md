@@ -2,7 +2,7 @@
 id: thm-hypergraph-kovari-sos-turan-bound
 kind: theorem
 title: "Hypergraph KST: $\\operatorname{ex}(n,K^{(r)}_{s,\\ldots,s})=O_{r,s}(n^{r-1/s^{r-1}})=o(n^r)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

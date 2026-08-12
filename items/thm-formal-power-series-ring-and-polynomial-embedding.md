@@ -2,7 +2,7 @@
 id: thm-formal-power-series-ring-and-polynomial-embedding
 kind: theorem
 title: "Cauchy multiplication makes $R\\llbracket x\\rrbracket$ a commutative ring containing $R[x]$ as the finitely supported subring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

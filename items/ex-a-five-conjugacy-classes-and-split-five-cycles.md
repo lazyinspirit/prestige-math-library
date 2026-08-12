@@ -2,7 +2,7 @@
 id: ex-a-five-conjugacy-classes-and-split-five-cycles
 kind: example
 title: 'The conjugacy classes of $A_5$: sizes $1,20,15,12,12$ and the split $5$-cycles'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counting
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

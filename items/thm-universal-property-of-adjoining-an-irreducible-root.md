@@ -2,7 +2,7 @@
 id: thm-universal-property-of-adjoining-an-irreducible-root
 kind: theorem
 title: 'Universal property of adjoining a root of an irreducible polynomial'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

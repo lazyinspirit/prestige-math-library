@@ -2,7 +2,7 @@
 id: ex-free-monoid-universal-property-as-a-representation
 kind: example
 title: 'The free word monoid on $X$ represents $M\mapsto\mathbf{Set}(X,U(M))$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

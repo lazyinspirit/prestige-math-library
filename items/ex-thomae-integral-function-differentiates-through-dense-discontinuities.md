@@ -2,7 +2,7 @@
 id: ex-thomae-integral-function-differentiates-through-dense-discontinuities
 kind: example
 title: "Thomae's integrand is discontinuous at every rational, yet its integral function is identically zero and differentiable everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

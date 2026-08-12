@@ -2,7 +2,7 @@
 id: thm-every-rectifiable-path-has-an-arc-length-parametrization
 kind: theorem
 title: "Every rectifiable path factors through its arc-length function as a unit-speed path on $[0,L]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: factorization
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

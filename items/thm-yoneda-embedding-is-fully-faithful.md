@@ -2,7 +2,7 @@
 id: thm-yoneda-embedding-is-fully-faithful
 kind: theorem
 title: "The Yoneda functor is fully faithful, and it is a full embedding when its object map is injective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

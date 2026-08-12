@@ -2,7 +2,7 @@
 id: ex-yoneda-embedding-of-the-walking-arrow-category
 kind: example
 title: "The Yoneda embedding of the walking-arrow category computed objectwise"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

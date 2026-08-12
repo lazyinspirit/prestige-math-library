@@ -2,7 +2,7 @@
 id: def-matrix-minors-cofactors-and-adjugate
 kind: definition
 title: "Deleted-row-and-column minors, cofactors, the cofactor matrix and the adjugate over a commutative ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

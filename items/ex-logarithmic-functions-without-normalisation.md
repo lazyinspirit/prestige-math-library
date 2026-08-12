@@ -2,7 +2,7 @@
 id: ex-logarithmic-functions-without-normalisation
 kind: example
 title: "Dropping $f(e)=1$ leaves the whole family $c\\log$, including logarithms to other bases and the zero function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

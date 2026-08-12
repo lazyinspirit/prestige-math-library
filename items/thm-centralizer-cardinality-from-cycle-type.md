@@ -2,7 +2,7 @@
 id: thm-centralizer-cardinality-from-cycle-type
 kind: theorem
 title: 'If $\sigma\in S_n$ has $c_k$ cycles of length $k$, then $|C_{S_n}(\sigma)|=\prod_{k=1}^n k^{c_k}c_k!$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: counting
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

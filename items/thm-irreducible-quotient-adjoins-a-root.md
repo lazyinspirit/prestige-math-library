@@ -2,7 +2,7 @@
 id: thm-irreducible-quotient-adjoins-a-root
 kind: theorem
 title: '$F[x]/(p)$ for monic irreducible $p$ is a field extension containing the root $x+(p)$ with unique reduced representatives'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

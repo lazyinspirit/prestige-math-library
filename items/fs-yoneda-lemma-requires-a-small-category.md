@@ -2,7 +2,7 @@
 id: fs-yoneda-lemma-requires-a-small-category
 kind: false-statement
 title: "The Yoneda lemma requires its category to be small"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

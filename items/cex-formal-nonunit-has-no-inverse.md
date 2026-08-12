@@ -2,7 +2,7 @@
 id: cex-formal-nonunit-has-no-inverse
 kind: counterexample
 title: "$x$ has no multiplicative inverse in $R\\llbracket x\\rrbracket$ although it is invertible in $K((x))$ when $R=K$ is a field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

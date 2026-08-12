@@ -2,7 +2,7 @@
 id: def-formal-power-series-and-coefficient-extraction
 kind: definition
 title: "Formal power series over a commutative ring and the coefficient-extraction functional $[x^n]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

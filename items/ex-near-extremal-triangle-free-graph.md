@@ -2,7 +2,7 @@
 id: ex-near-extremal-triangle-free-graph
 kind: example
 title: "Deleting one edge from $K_{3,4}$ gives a triangle-free graph one edge below the Mantel threshold"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

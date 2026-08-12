@@ -2,7 +2,7 @@
 id: thm-hom-assignments-are-functors
 kind: theorem
 title: "The assignments $\\mathcal C(a,-)$ and $\\mathcal C(-,a)$ are functors to $\\mathbf{Set}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

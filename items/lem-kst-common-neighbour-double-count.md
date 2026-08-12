@@ -2,7 +2,7 @@
 id: lem-kst-common-neighbour-double-count
 kind: lemma
 title: "The Kővári–Sós–Turán common-neighbour count and the discrete convexity lower bound for degree sums"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

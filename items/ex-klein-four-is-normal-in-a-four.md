@@ -2,7 +2,7 @@
 id: ex-klein-four-is-normal-in-a-four
 kind: example
 title: '$V_4=\{1,(12)(34),(13)(24),(14)(23)\}$ is a proper nontrivial normal subgroup of $A_4$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

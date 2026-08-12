@@ -2,7 +2,7 @@
 id: cor-ftc-integral-function-differentiable-almost-everywhere
 kind: corollary
 title: "Assuming Countable Choice, the integral function of a Riemann-integrable function is Lipschitz and differentiable almost everywhere, with derivative equal to the integrand there"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

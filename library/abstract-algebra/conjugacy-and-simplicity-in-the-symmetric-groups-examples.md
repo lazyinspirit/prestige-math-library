@@ -1,7 +1,7 @@
 ---
 page: conjugacy-and-simplicity-in-the-symmetric-groups-examples
 title: 'Conjugacy in $S_n$, Generation, and the Simplicity of $A_n$ — Examples'
-status: draft
+status: published
 items: []
 examples: [ex-conjugating-permutations-by-relabeling,
            ex-s-four-conjugacy-classes-and-class-equation,

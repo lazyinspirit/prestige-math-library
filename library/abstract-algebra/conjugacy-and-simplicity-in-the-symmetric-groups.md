@@ -1,7 +1,7 @@
 ---
 page: conjugacy-and-simplicity-in-the-symmetric-groups
 title: 'Conjugacy in $S_n$, Generation, and the Simplicity of $A_n$'
-status: draft
+status: published
 items: [lem-conjugating-a-cycle-relabels-its-entries,
         thm-symmetric-permutations-are-conjugate-iff-same-cycle-type,
         cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types,

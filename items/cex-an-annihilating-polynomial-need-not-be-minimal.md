@@ -2,7 +2,7 @@
 id: cex-an-annihilating-polynomial-need-not-be-minimal
 kind: counterexample
 title: 'An annihilating polynomial need not be minimal: $\sqrt2$ is a root of both $x^2-2$ and $x^4-4$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-reversion-of-x-over-one-minus-x
 kind: example
 title: "The compositional inverse of $x/(1-x)$ is $x/(1+x)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

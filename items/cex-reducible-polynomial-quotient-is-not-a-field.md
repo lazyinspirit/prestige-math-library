@@ -2,7 +2,7 @@
 id: cex-reducible-polynomial-quotient-is-not-a-field
 kind: counterexample
 title: '$\mathbb Q[x]/(x^2-1)$ is not a field: reducibility creates nonzero zero divisors'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

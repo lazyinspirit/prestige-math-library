@@ -2,7 +2,7 @@
 id: def-formal-power-series-derivative
 kind: definition
 title: "The formal derivative $D(\\sum a_nx^n)=\\sum_{n\\ge1}na_nx^{n-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

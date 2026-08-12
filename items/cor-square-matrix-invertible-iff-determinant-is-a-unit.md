@@ -2,7 +2,7 @@
 id: cor-square-matrix-invertible-iff-determinant-is-a-unit
 kind: corollary
 title: "A positive-sized square matrix over a commutative ring is invertible if and only if its determinant is a unit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

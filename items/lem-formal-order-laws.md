@@ -2,7 +2,7 @@
 id: lem-formal-order-laws
 kind: lemma
 title: "Formal order is non-Archimedean under sums and additive under products over a domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

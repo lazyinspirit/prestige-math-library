@@ -2,7 +2,7 @@
 id: cor-operator-determinant-on-the-general-linear-group
 kind: corollary
 title: "Determinant is a group homomorphism $\\operatorname{GL}(V)\\to F^{\\times}$, and $\\det(T^{-1})=\\det(T)^{-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

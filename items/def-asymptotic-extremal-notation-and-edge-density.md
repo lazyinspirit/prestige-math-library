@@ -2,7 +2,7 @@
 id: def-asymptotic-extremal-notation-and-edge-density
 kind: definition
 title: "Edge density and the asymptotic notations $O$, $o$, $\\Omega$, and $\\Theta$ for extremal functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

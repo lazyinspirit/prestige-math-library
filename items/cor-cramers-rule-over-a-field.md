@@ -2,7 +2,7 @@
 id: cor-cramers-rule-over-a-field
 kind: corollary
 title: "Over a field, for each right-hand side $b$, $Ax=b$ has a unique solution exactly when $\\det(A)$ is nonzero, and then Cramer's quotient formula holds"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-nonisomorphic-objects-can-have-isomorphic-representable-presheaves
 kind: false-statement
 title: "Non-isomorphic objects can have naturally isomorphic representable presheaves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

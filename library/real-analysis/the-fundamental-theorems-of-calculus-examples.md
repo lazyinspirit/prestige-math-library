@@ -1,7 +1,7 @@
 ---
 page: the-fundamental-theorems-of-calculus-examples
 title: "The Fundamental Theorems of Calculus: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-bounded-discontinuous-derivative-that-is-riemann-integrable,
            cex-volterra-bounded-derivative-not-riemann-integrable,

@@ -2,7 +2,7 @@
 id: thm-erdos-stone-for-balanced-blowups
 kind: theorem
 title: "Erdős–Stone for balanced blowups: $\\pi(K_r[s])=1-1/(r-1)$ for $r\\ge2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

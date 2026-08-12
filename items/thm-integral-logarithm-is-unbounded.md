@@ -2,7 +2,7 @@
 id: thm-integral-logarithm-is-unbounded
 kind: theorem
 title: "The integral logarithm is unbounded above and below"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

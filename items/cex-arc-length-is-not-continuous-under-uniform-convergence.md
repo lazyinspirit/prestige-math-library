@@ -2,7 +2,7 @@
 id: cex-arc-length-is-not-continuous-under-uniform-convergence
 kind: counterexample
 title: "Sawtooth paths converge uniformly to a line segment while every sawtooth has length $\\sqrt2$ and the limit has length $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

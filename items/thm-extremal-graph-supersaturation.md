@@ -2,7 +2,7 @@
 id: thm-extremal-graph-supersaturation
 kind: theorem
 title: "Above Turán density, a graph contains a positive-density family of copies of the forbidden graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

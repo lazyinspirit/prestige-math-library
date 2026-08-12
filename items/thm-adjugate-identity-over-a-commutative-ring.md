@@ -2,7 +2,7 @@
 id: thm-adjugate-identity-over-a-commutative-ring
 kind: theorem
 title: "For every positive-sized square matrix over a commutative ring, $A\\operatorname{adj}(A)=\\operatorname{adj}(A)A=\\det(A)I$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

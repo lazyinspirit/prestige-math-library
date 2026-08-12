@@ -2,7 +2,7 @@
 id: ex-formal-geometric-series
 kind: example
 title: "The formal geometric identity $(1-x)^{-1}=\\sum_{n\\ge0}x^n$ holds over every commutative ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

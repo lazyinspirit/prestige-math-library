@@ -2,7 +2,7 @@
 id: ex-minimal-polynomial-of-nested-radical-two-plus-root-three
 kind: example
 title: 'The minimal polynomial of $\sqrt{2+\sqrt3}$ over $\mathbb Q$ is $x^4-4x^2+1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

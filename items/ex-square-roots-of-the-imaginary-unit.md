@@ -2,7 +2,7 @@
 id: ex-square-roots-of-the-imaginary-unit
 kind: example
 title: 'The square roots of $i$ are $\pm(1+i)/\sqrt2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

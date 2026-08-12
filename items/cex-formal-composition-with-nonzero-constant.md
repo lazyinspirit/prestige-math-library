@@ -2,7 +2,7 @@
 id: cex-formal-composition-with-nonzero-constant
 kind: counterexample
 title: "Substituting $1$ into $1+x+x^2+\\cdots$ is not a defined formal composition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

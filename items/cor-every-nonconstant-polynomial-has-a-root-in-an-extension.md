@@ -2,7 +2,7 @@
 id: cor-every-nonconstant-polynomial-has-a-root-in-an-extension
 kind: corollary
 title: 'Every nonconstant polynomial over a field has a root in some field extension'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

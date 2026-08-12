@@ -2,7 +2,7 @@
 id: ex-v-shaped-path-is-rectifiable-but-not-c1
 kind: example
 title: "$\\gamma(t)=(t,|t|)$ on $[-1,1]$ is rectifiable of length $2\\sqrt{2}$ but is not differentiable at $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

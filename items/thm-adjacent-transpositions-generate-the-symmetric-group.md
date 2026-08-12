@@ -2,7 +2,7 @@
 id: thm-adjacent-transpositions-generate-the-symmetric-group
 kind: theorem
 title: 'The adjacent transpositions $(1\,2),(2\,3),\ldots,(n-1\,n)$ generate $S_n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

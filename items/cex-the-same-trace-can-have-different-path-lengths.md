@@ -2,7 +2,7 @@
 id: cex-the-same-trace-can-have-different-path-lengths
 kind: counterexample
 title: "Two paths can have the same trace and endpoints but different lengths: one traverses $[0,1]$ once and another traverses it forward, backward, and forward"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

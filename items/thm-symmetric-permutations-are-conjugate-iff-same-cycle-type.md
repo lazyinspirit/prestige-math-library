@@ -2,7 +2,7 @@
 id: thm-symmetric-permutations-are-conjugate-iff-same-cycle-type
 kind: theorem
 title: 'Two elements of $S_n$ are conjugate if and only if they have the same cycle type'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: iff
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

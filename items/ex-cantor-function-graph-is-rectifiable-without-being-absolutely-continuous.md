@@ -2,7 +2,7 @@
 id: ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous
 kind: example
 title: "The graph path $t\\mapsto(t,c(t))$ of the Cantor function is rectifiable although its second coordinate is not absolutely continuous"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

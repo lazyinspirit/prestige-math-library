@@ -2,7 +2,7 @@
 id: ex-cramers-rule-two-by-two-system
 kind: example
 title: "Cramer's rule solves $2x+y=5$ and $x-y=1$ as $(x,y)=(2,1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

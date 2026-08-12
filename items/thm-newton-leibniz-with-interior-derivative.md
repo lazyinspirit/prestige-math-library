@@ -2,7 +2,7 @@
 id: thm-newton-leibniz-with-interior-derivative
 kind: theorem
 title: "Newton–Leibniz needs only continuity on $[a,b]$, differentiability on $(a,b)$, and a Riemann-integrable extension of the interior derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: squeeze
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

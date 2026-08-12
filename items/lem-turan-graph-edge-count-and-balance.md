@@ -2,7 +2,7 @@
 id: lem-turan-graph-edge-count-and-balance
 kind: lemma
 title: "The exact edge count of $T_{n,r}$ and the unique balancing maximum among complete $r$-partite graphs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

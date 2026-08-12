@@ -2,7 +2,7 @@
 id: thm-operator-invertible-iff-determinant-nonzero
 kind: theorem
 title: "A finite-dimensional linear operator over a field is invertible if and only if its determinant is nonzero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

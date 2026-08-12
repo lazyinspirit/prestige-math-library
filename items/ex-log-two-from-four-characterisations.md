@@ -2,7 +2,7 @@
 id: ex-log-two-from-four-characterisations
 kind: example
 title: "$\\log 2$ from four characterisations: hyperbolic area, the alternating harmonic series, Landau iterates and $\\exp^{-1}(2)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

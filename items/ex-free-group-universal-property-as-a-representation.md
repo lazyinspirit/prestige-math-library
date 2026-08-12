@@ -2,7 +2,7 @@
 id: ex-free-group-universal-property-as-a-representation
 kind: example
 title: 'The free group on $X$ represents $G\mapsto\mathbf{Set}(X,U(G))$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

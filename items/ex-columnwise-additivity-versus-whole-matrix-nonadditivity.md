@@ -2,7 +2,7 @@
 id: ex-columnwise-additivity-versus-whole-matrix-nonadditivity
 kind: example
 title: "Determinant is additive in one selected column but not under simultaneous whole-matrix addition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

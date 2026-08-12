@@ -2,7 +2,7 @@
 id: ex-mantel-balanced-complete-bipartite
 kind: example
 title: "$K_{3,4}$ realises $\\operatorname{ex}(7,K_3)=12$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

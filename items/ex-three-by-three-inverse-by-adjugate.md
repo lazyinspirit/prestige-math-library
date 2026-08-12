@@ -2,7 +2,7 @@
 id: ex-three-by-three-inverse-by-adjugate
 kind: example
 title: "The adjugate gives the inverse of a $3\\times3$ rational matrix with determinant $3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

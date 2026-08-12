@@ -2,7 +2,7 @@
 id: ex-set-coproducts-as-representing-objects
 kind: example
 title: 'A tagged disjoint union represents $X\mapsto\mathbf{Set}(A,X)\times\mathbf{Set}(B,X)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -22,6 +22,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

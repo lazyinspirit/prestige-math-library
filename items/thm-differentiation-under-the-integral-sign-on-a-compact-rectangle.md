@@ -2,7 +2,7 @@
 id: thm-differentiation-under-the-integral-sign-on-a-compact-rectangle
 kind: theorem
 title: "Leibniz's rule on a compact rectangle: an interior parameter derivative with a continuous extension may be passed through a Riemann integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: epsilon-delta
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

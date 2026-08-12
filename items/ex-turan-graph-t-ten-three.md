@@ -2,7 +2,7 @@
 id: ex-turan-graph-t-ten-three
 kind: example
 title: "$T_{10,3}=K_{3,3,4}$ has $33$ edges and is the unique $10$-vertex $K_4$-extremal graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

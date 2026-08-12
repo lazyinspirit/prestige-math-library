@@ -2,7 +2,7 @@
 id: ex-negative-binomial-series
 kind: example
 title: "Negative binomial series: $(1-x)^{-m}=\\sum_{n\\ge0}\\binom{m+n-1}{n}x^n$ for $m\\ge1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

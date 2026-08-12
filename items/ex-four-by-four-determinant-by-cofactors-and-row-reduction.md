@@ -2,7 +2,7 @@
 id: ex-four-by-four-determinant-by-cofactors-and-row-reduction
 kind: example
 title: "A sparse $4\\times4$ determinant is $30$ by both cofactor expansion and row reduction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

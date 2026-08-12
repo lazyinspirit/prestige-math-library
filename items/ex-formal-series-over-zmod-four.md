@@ -2,7 +2,7 @@
 id: ex-formal-series-over-zmod-four
 kind: example
 title: "Nonzero constant series can multiply to zero in $(\\mathbb Z/4\\mathbb Z)\\llbracket x\\rrbracket$"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

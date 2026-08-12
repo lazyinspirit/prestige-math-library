@@ -2,7 +2,7 @@
 id: cor-unique-formal-root-with-constant-one
 kind: corollary
 title: "Every $1+u$ with $u\\in xR\\llbracket x\\rrbracket$ has a unique $k$th root with constant coefficient $1$ in a commutative $\\mathbb Q$-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

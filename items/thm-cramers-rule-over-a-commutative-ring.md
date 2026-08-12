@@ -2,7 +2,7 @@
 id: thm-cramers-rule-over-a-commutative-ring
 kind: theorem
 title: "Cramer's rule over a commutative ring: every solution satisfies $\\det(A)x_j=\\det(A_j(b))$, and a unit determinant gives the unique quotient formula"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

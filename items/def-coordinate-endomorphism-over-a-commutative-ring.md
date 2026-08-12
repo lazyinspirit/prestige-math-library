@@ -2,7 +2,7 @@
 id: def-coordinate-endomorphism-over-a-commutative-ring
 kind: definition
 title: "For $A\\in M_n(R)$, the coordinate endomorphism $T_A:R^n\\to R^n$, with $\\det(T_A):=\\det(A)$ and $\\operatorname{adj}(T_A):=T_{\\operatorname{adj}(A)}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-summable-families-and-rearrangement
 kind: theorem
 title: "Summable formal families may be regrouped and rearranged, distribute over multiplication, and have well-defined locally finite products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

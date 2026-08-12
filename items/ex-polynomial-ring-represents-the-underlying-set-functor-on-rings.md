@@ -2,7 +2,7 @@
 id: ex-polynomial-ring-represents-the-underlying-set-functor-on-rings
 kind: example
 title: '$\mathbb Z[x]$ represents the underlying-set functor on unital rings'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

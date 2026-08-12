@@ -2,7 +2,7 @@
 id: cor-representable-presheaves-detect-isomorphism-of-objects
 kind: corollary
 title: "Objects $a$ and $b$ are isomorphic exactly when $\\mathcal C(-,a)$ and $\\mathcal C(-,b)$ are naturally isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

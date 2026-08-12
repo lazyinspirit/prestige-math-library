@@ -2,7 +2,7 @@
 id: cor-formal-series-over-a-field-is-a-local-domain
 kind: corollary
 title: "For a field $K$, $K\\llbracket x\\rrbracket$ is a domain and its nonunits form the unique maximal ideal $xK\\llbracket x\\rrbracket$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

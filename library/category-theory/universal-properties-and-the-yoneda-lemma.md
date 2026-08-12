@@ -1,7 +1,7 @@
 ---
 page: universal-properties-and-the-yoneda-lemma
 title: "Universal Properties, Representables and the Yoneda Lemma"
-status: draft
+status: published
 items: [def-hom-functors-and-hom-bifunctor,
         thm-hom-assignments-are-functors,
         thm-hom-assignment-is-a-bifunctor,

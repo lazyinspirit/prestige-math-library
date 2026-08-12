@@ -2,7 +2,7 @@
 id: lem-determinant-rank-one-update-over-a-commutative-ring
 kind: lemma
 title: "For $A\\in M_n(R)$ and columns $u,v$ over a commutative ring, $\\det(A+uv^{T})=\\det(A)+v^{T}\\operatorname{adj}(A)u$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-only-proper-nontrivial-normal-subgroup-of-s-n
 kind: corollary
 title: 'For $n\ge5$, the only proper nontrivial normal subgroup of $S_n$ is $A_n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-formal-exponential-logarithm-identities
 kind: theorem
 title: "Formal $\\exp$ and $\\log$ are inverse homomorphisms and formal binomial powers obey the expected addition laws"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

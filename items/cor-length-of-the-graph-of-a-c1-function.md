@@ -2,7 +2,7 @@
 id: cor-length-of-the-graph-of-a-c1-function
 kind: corollary
 title: "If $f$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $f'$ extends continuously to $[a,b]$, then the graph of $f$ has length $\\int_a^b\\sqrt{1+f'(t)^2}\\,dt$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: specialization
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

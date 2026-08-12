@@ -2,7 +2,7 @@
 id: thm-x-adic-completeness-and-polynomial-density
 kind: theorem
 title: "$R\\llbracket x\\rrbracket$ is complete in the $x$-adic topology and $R[x]$ is dense by truncation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

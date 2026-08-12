@@ -2,7 +2,7 @@
 id: lem-conjugating-a-cycle-relabels-its-entries
 kind: lemma
 title: 'Conjugating a cycle relabels each entry: $g(a_1\,\ldots\,a_k)g^{-1}=(g(a_1)\,\ldots\,g(a_k))$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

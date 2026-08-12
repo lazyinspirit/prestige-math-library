@@ -2,7 +2,7 @@
 id: rem-ftc-roadmap
 kind: remark
 title: "Roadmap through the three strengths of FTC I and the five Riemann strengths of FTC II"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

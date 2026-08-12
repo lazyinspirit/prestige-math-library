@@ -2,7 +2,7 @@
 id: prop-arc-length-under-lipschitz-maps-and-euclidean-similarities
 kind: proposition
 title: "A $C$-Lipschitz map multiplies path length by at most $C$; isometries preserve length and scalar dilation multiplies it by the absolute scale"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: comparison
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

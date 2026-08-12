@@ -2,7 +2,7 @@
 id: cex-the-doubling-functor-on-set-is-not-representable
 kind: counterexample
 title: 'The functor $D(X)=X\sqcup X$ on $\mathbf{Set}$ is not covariantly representable'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

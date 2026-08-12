@@ -2,7 +2,7 @@
 id: cor-chord-length-is-at-most-arc-length
 kind: corollary
 title: "Every endpoint chord is no longer than the arc: $\\lVert\\gamma(b)-\\gamma(a)\\rVert_2\\le L(\\gamma)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-complex-numbers-form-an-ordered-field
 kind: false-statement
 title: 'FALSE: the complex field admits an order making it an ordered field'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

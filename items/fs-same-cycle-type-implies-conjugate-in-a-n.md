@@ -2,7 +2,7 @@
 id: fs-same-cycle-type-implies-conjugate-in-a-n
 kind: false-statement
 title: 'FALSE: two even permutations of the same cycle type are always conjugate in $A_n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-hom-assignment-is-a-bifunctor
 kind: theorem
 title: "The hom-assignment $\\mathcal C(-,-):\\mathcal C^{\\mathrm{op}}\\times\\mathcal C\\to\\mathbf{Set}$ is a bifunctor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

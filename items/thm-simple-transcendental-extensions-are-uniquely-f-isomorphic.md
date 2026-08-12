@@ -2,7 +2,7 @@
 id: thm-simple-transcendental-extensions-are-uniquely-f-isomorphic
 kind: theorem
 title: 'Two simple transcendental extensions are uniquely $F$-isomorphic once their generators are matched'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

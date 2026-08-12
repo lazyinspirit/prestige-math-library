@@ -2,7 +2,7 @@
 id: cor-e-is-the-unique-unit-hyperbolic-area
 kind: corollary
 title: "The number $e$ is the unique $x>0$ satisfying $\\int_1^x\\frac{dt}{t}=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

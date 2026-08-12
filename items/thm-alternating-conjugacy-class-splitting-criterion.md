@@ -2,7 +2,7 @@
 id: thm-alternating-conjugacy-class-splitting-criterion
 kind: theorem
 title: 'For $n\ge2$, an $S_n$-class of an even permutation splits in $A_n$ exactly when all cycle lengths, including $1$-cycles, are odd and distinct'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: iff
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

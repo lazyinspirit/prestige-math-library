@@ -2,7 +2,7 @@
 id: lem-arc-length-function-is-continuous-and-nondecreasing
 kind: lemma
 title: "The arc-length function is continuous and nondecreasing, with increments equal to subpath lengths; it is strictly increasing exactly when no nondegenerate subpath is constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: comparison
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

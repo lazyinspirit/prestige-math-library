@@ -2,7 +2,7 @@
 id: def-formal-order-and-x-adic-topology
 kind: definition
 title: "Order of a formal series, congruence modulo $x^N$, and the $x$-adic notions of convergence and Cauchy sequence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

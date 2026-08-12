@@ -2,7 +2,7 @@
 id: def-arc-length-function
 kind: definition
 title: "The arc-length function $s_\\gamma(t)=L(\\gamma|_{[a,t]})$ of a rectifiable path"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

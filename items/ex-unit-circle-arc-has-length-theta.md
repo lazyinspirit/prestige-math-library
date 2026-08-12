@@ -2,7 +2,7 @@
 id: ex-unit-circle-arc-has-length-theta
 kind: example
 title: "For every $\\theta\\ge0$, the unit-circle path $t\\mapsto(\\cos t,\\sin t)$ on $[0,\\theta]$ has length $\\theta$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: extremal-graph-theory-examples
 title: "Extremal Graph Theory: Examples and False Statements"
-status: draft
+status: published
 items: []
 examples: [ex-turan-graph-t-ten-three,
            ex-mantel-balanced-complete-bipartite,

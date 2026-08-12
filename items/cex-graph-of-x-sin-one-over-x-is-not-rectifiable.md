@@ -2,7 +2,7 @@
 id: cex-graph-of-x-sin-one-over-x-is-not-rectifiable
 kind: counterexample
 title: "The continuous path $\\gamma(x)=(x,x\\sin(1/x))$ on $[0,1]$, with $\\gamma(0)=(0,0)$, is not rectifiable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: divergent-variation
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

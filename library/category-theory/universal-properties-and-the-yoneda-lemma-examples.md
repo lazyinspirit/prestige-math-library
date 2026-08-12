@@ -1,7 +1,7 @@
 ---
 page: universal-properties-and-the-yoneda-lemma-examples
 title: "Universal Properties, Representables and the Yoneda Lemma — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-set-products-as-representing-objects,
            ex-set-coproducts-as-representing-objects,

@@ -1,7 +1,7 @@
 ---
 page: arc-length-and-rectifiable-curves-examples
 title: "Arc Length and Rectifiable Curves: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-line-segment-and-polygonal-path-length,
            ex-unit-circle-arc-has-length-theta,

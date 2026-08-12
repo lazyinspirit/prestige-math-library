@@ -2,7 +2,7 @@
 id: rem-logarithm-roadmap-and-circularity
 kind: remark
 title: "Roadmap and non-circularity of the logarithm characterisations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

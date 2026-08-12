@@ -2,7 +2,7 @@
 id: cor-integral-logarithm-reciprocals-and-integer-powers
 kind: corollary
 title: "$L(1/x)=-L(x)$, $L(x^n)=nL(x)$, and in particular $L(2^n)=nL(2)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

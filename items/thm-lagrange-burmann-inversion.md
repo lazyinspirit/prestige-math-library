@@ -2,7 +2,7 @@
 id: thm-lagrange-burmann-inversion
 kind: theorem
 title: "Lagrange–Bürmann inversion extracts coefficients of a compositional inverse and of functions of it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: formal-power-series-examples
 title: "Formal Power Series: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-formal-geometric-series,
            ex-negative-binomial-series,

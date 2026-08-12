@@ -2,7 +2,7 @@
 id: def-formal-series-composition
 kind: definition
 title: "Composition $f\\circ g$ of formal series when the outer series is a polynomial or the inner series has zero constant term"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

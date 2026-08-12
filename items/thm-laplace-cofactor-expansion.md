@@ -2,7 +2,7 @@
 id: thm-laplace-cofactor-expansion
 kind: theorem
 title: "Laplace expansion computes the determinant along every row and every column over a commutative ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

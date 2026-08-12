@@ -2,7 +2,7 @@
 id: prop-coefficient-extraction-linearity-and-extensionality
 kind: proposition
 title: "Coefficient extraction is $R$-linear, separates formal series, shifts under multiplication by $x^k$, and converts products to finite convolution"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

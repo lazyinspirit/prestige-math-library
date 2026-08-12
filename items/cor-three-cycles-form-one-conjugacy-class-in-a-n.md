@@ -2,7 +2,7 @@
 id: cor-three-cycles-form-one-conjugacy-class-in-a-n
 kind: corollary
 title: 'All $3$-cycles are conjugate in $A_n$ for $n\ge5$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-turan-ramsey-lower-bound
 kind: corollary
 title: "Turán graphs give the Ramsey lower bound $R(s,t)\\ge(s-1)(t-1)+1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

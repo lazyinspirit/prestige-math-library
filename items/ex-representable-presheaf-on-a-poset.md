@@ -2,7 +2,7 @@
 id: ex-representable-presheaf-on-a-poset
 kind: example
 title: "A representable presheaf on a poset is the indicator of a principal down-set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

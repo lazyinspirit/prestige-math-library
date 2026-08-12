@@ -2,7 +2,7 @@
 id: ex-s-four-conjugacy-classes-and-class-equation
 kind: example
 title: 'The five conjugacy classes of $S_4$ and the class equation $24=1+6+3+8+6$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counting
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

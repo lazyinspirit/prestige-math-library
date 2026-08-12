@@ -2,7 +2,7 @@
 id: thm-adjugate-is-equivariant-under-similarity
 kind: theorem
 title: "Over a commutative ring, $\\operatorname{adj}(P^{-1}AP)=P^{-1}\\operatorname{adj}(A)P$ for every invertible $P$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

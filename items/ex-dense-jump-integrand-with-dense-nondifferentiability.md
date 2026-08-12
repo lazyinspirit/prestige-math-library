@@ -2,7 +2,7 @@
 id: ex-dense-jump-integrand-with-dense-nondifferentiability
 kind: example
 title: "A bounded increasing integrand discontinuous at every rational has an integral function nondifferentiable at every rational in $(0,1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: specialization
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

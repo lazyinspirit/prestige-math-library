@@ -2,7 +2,7 @@
 id: ex-unit-hyperbolic-area-brackets-e
 kind: example
 title: "Integral bounds alone give $2<e<4$; the sharper published bound is $2<e<3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -21,6 +21,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

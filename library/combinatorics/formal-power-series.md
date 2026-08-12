@@ -1,7 +1,7 @@
 ---
 page: formal-power-series
 title: "Formal Power Series"
-status: draft
+status: published
 items: [def-formal-power-series-and-coefficient-extraction,
         thm-formal-power-series-ring-and-polynomial-embedding,
         prop-coefficient-extraction-linearity-and-extensionality,

@@ -2,7 +2,7 @@
 id: thm-kovari-sos-turan-bound
 kind: theorem
 title: "Kővári–Sós–Turán: exact bipartite and ordinary-graph upper bounds for excluding $K_{s,t}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

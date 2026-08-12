@@ -2,7 +2,7 @@
 id: thm-universal-elements-are-initial-or-terminal-in-the-category-of-elements
 kind: theorem
 title: "Universal elements are initial in a covariant category of elements and terminal in a presheaf category of elements"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

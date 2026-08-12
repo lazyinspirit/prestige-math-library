@@ -2,7 +2,7 @@
 id: thm-arc-length-is-invariant-under-monotone-reparametrization
 kind: theorem
 title: "Arc length is invariant under every continuous surjective monotone reparametrization, including pauses and reversal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: two-inequalities
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

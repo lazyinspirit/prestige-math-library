@@ -2,7 +2,7 @@
 id: thm-arc-length-is-additive-over-subintervals
 kind: theorem
 title: "Arc length is additive across every subdivision point and decreases under restriction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: two-inequalities
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

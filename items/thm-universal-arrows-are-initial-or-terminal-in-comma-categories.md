@@ -2,7 +2,7 @@
 id: thm-universal-arrows-are-initial-or-terminal-in-comma-categories
 kind: theorem
 title: "Universal arrows to a functor are initial in comma categories, and universal arrows from a functor are terminal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

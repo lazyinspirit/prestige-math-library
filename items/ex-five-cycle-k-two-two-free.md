@@ -2,7 +2,7 @@
 id: ex-five-cycle-k-two-two-free
 kind: example
 title: "The five-cycle is $K_{2,2}$-avoiding and shows the KST problem is not just a complete-bipartite construction"
-status: draft
+status: published
 origin: session
 authorship: ai-generated
 provenance:
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

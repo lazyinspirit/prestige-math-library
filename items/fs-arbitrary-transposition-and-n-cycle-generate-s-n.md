@@ -2,7 +2,7 @@
 id: fs-arbitrary-transposition-and-n-cycle-generate-s-n
 kind: false-statement
 title: 'FALSE: any transposition together with any $n$-cycle generates $S_n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

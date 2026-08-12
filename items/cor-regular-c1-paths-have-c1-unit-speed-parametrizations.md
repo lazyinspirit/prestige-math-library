@@ -2,7 +2,7 @@
 id: cor-regular-c1-paths-have-c1-unit-speed-parametrizations
 kind: corollary
 title: "A regular $C^1$ path has a $C^1$ arc-length reparametrization with derivative of Euclidean norm one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: inverse-function
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

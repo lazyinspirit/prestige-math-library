@@ -2,7 +2,7 @@
 id: cor-operator-determinant-by-row-reduction
 kind: corollary
 title: "In positive dimension the determinant of an operator is computed from a representing matrix by row reduction, tracking swaps and row scalings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

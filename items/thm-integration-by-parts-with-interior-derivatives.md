@@ -2,7 +2,7 @@
 id: thm-integration-by-parts-with-interior-derivatives
 kind: theorem
 title: "Integration by parts for continuous factors with Riemann-integrable extensions of their interior derivatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

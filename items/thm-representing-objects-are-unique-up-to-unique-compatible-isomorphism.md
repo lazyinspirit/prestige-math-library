@@ -2,7 +2,7 @@
 id: thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism
 kind: theorem
 title: "Representing objects are unique up to a unique isomorphism compatible with their universal elements"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

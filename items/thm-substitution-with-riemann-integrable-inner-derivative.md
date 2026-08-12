@@ -2,7 +2,7 @@
 id: thm-substitution-with-riemann-integrable-inner-derivative
 kind: theorem
 title: "Substitution for a continuous inner map with a Riemann-integrable extension of its interior derivative, without monotonicity or injectivity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: reduction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

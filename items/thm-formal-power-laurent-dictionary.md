@@ -2,7 +2,7 @@
 id: thm-formal-power-laurent-dictionary
 kind: theorem
 title: "$K\\llbracket x\\rrbracket$ embeds in $K((x))$ as the nonnegative-order subring; every nonzero Laurent series is uniquely $x^{v_x(h)}u$ with $u\\in K\\llbracket x\\rrbracket^\\times$ and inverse $x^{-v_x(h)}u^{-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-generalized-element-and-shape
 kind: definition
 title: "Generalized elements and their shapes"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

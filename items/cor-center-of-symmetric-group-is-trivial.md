@@ -2,7 +2,7 @@
 id: cor-center-of-symmetric-group-is-trivial
 kind: corollary
 title: '$Z(S_n)$ is trivial for $n\ge3$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-logarithm-continuous-functional-equation-characterisation
 kind: theorem
 title: "$\\log$ is the unique continuous $f:(0,\\infty)\\to\\mathbb R$ with $f(xy)=f(x)+f(y)$ and $f(e)=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -21,6 +21,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

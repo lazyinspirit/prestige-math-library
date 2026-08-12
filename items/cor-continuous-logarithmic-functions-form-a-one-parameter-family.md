@@ -2,7 +2,7 @@
 id: cor-continuous-logarithmic-functions-form-a-one-parameter-family
 kind: corollary
 title: "Every continuous $f$ with $f(xy)=f(x)+f(y)$ is $f(x)=c\\log x$ for a unique $c$, including $c=0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -22,6 +22,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

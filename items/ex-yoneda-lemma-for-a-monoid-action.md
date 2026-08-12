@@ -2,7 +2,7 @@
 id: ex-yoneda-lemma-for-a-monoid-action
 kind: example
 title: "For a monoid action, Yoneda says that an equivariant map from the regular action is determined by the identity element"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

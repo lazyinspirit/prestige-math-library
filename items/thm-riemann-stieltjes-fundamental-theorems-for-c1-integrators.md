@@ -2,7 +2,7 @@
 id: thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators
 kind: theorem
 title: "The two FTC forms for a Riemann–Stieltjes integral with a $C^1$ integrator"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: reduction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

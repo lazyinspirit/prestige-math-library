@@ -2,7 +2,7 @@
 id: cex-ae-zero-derivative-does-not-determine-endpoint-change
 kind: counterexample
 title: "The Cantor function is continuous, has derivative $0$ off a null set, and still rises from $0$ to $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

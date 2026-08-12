@@ -1,7 +1,7 @@
 ---
 page: the-determinant-of-a-linear-operator
 title: "The Determinant of a Linear Operator, Cofactors and Cramer's Rule"
-status: draft
+status: published
 items: [lem-alternating-top-forms-are-determined-by-one-ordered-basis,
         def-determinant-of-a-linear-operator,
         thm-operator-determinant-scales-every-alternating-top-form,

@@ -2,7 +2,7 @@
 id: thm-yoneda-lemma-is-natural-in-both-variables
 kind: theorem
 title: "The Yoneda bijection $\\operatorname{Nat}(\\mathcal C(a,-),F)\\cong F(a)$ is natural in both $a$ and $F$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

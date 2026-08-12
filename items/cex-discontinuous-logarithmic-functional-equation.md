@@ -2,7 +2,7 @@
 id: cex-discontinuous-logarithmic-functional-equation
 kind: counterexample
 title: "Assuming choice, a Hamel-basis additive map transported through $\\exp$ gives a discontinuous logarithmic function that is not $c\\log$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

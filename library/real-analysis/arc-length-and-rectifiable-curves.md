@@ -1,7 +1,7 @@
 ---
 page: arc-length-and-rectifiable-curves
 title: "Arc Length and Rectifiable Curves"
-status: draft
+status: published
 items: [def-path-polygonal-length-and-rectifiability-in-rn,
         cor-chord-length-is-at-most-arc-length,
         lem-polygonal-length-is-monotone-under-refinement,

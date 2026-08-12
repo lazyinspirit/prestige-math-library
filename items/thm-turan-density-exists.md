@@ -2,7 +2,7 @@
 id: thm-turan-density-exists
 kind: theorem
 title: "Every finite graph with an edge has a Turán density $\\pi(H)=\\lim_{n\\to\\infty}\\operatorname{ex}(n,H)/\\binom n2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

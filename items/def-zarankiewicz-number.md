@@ -2,7 +2,7 @@
 id: def-zarankiewicz-number
 kind: definition
 title: "The Zarankiewicz number $z(m,n;s,t)$ for a forbidden $K_{s,t}$ in a bipartite graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

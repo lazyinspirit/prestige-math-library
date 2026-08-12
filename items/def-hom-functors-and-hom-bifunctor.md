@@ -2,7 +2,7 @@
 id: def-hom-functors-and-hom-bifunctor
 kind: definition
 title: "The covariant and contravariant hom-assignments and the hom-bifunctor of a locally small category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

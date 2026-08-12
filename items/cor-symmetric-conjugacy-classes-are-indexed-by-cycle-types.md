@@ -2,7 +2,7 @@
 id: cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types
 kind: corollary
 title: 'The conjugacy classes of $S_n$ are indexed by the tuples $(c_1,\ldots,c_n)$ with $\sum k c_k=n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: bijection
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

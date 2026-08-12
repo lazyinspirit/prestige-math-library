@@ -2,7 +2,7 @@
 id: def-path-polygonal-length-and-rectifiability-in-rn
 kind: definition
 title: "Paths in $\\mathbb{R}^n$, inscribed polygonal sums, arc length as their supremum, and rectifiability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-alternating-top-forms-are-determined-by-one-ordered-basis
 kind: lemma
 title: "An alternating top-degree form is determined by its value on one ordered basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

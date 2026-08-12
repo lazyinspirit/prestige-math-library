@@ -1,7 +1,7 @@
 ---
 page: field-extensions-and-the-complex-numbers
 title: 'Simple Field Extensions and the Construction of the Complex Numbers'
-status: draft
+status: published
 items: [def-field-extension-generated-subfields-and-simple-extension,
         cor-composite-of-two-subfields,
         def-algebraic-and-transcendental-elements,

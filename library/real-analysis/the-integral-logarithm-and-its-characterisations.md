@@ -1,7 +1,7 @@
 ---
 page: the-integral-logarithm-and-its-characterisations
 title: "The Integral Logarithm and the Equivalence of Its Characterisations"
-status: draft
+status: published
 items: [def-integral-logarithm,
         thm-integral-logarithm-derivative-and-normalisation,
         cor-integral-logarithm-is-strictly-increasing,

@@ -2,7 +2,7 @@
 id: def-integral-logarithm
 kind: definition
 title: "The integral logarithm $L(x):=\\int_1^x\\frac{dt}{t}$ for $x>0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

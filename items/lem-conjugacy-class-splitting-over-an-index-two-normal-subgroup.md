@@ -2,7 +2,7 @@
 id: lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup
 kind: lemma
 title: 'A conjugacy class in an index-two normal subgroup remains one class or splits into two equal classes, with a centralizer criterion'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

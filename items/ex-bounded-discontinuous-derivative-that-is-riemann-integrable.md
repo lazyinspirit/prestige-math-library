@@ -2,7 +2,7 @@
 id: ex-bounded-discontinuous-derivative-that-is-riemann-integrable
 kind: example
 title: "$G(x)=x^2\\sin(1/x)$ has a bounded derivative discontinuous at $0$ that is nevertheless Riemann integrable, and Newton–Leibniz evaluates its integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

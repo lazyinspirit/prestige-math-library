@@ -2,7 +2,7 @@
 id: fs-a-n-is-simple-for-all-n-at-least-four
 kind: false-statement
 title: 'FALSE: $A_n$ is simple for every $n\ge4$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

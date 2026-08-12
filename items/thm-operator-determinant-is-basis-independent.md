@@ -2,7 +2,7 @@
 id: thm-operator-determinant-is-basis-independent
 kind: theorem
 title: "The determinant of a linear operator is independent of the chosen ordered basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

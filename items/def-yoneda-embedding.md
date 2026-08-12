@@ -2,7 +2,7 @@
 id: def-yoneda-embedding
 kind: definition
 title: "The Yoneda assignment and the small-source Yoneda functor, traditionally called the Yoneda embedding"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

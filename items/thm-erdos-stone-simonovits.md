@@ -2,7 +2,7 @@
 id: thm-erdos-stone-simonovits
 kind: theorem
 title: "Erdős–Stone–Simonovits: $\\operatorname{ex}(n,H)=(1-1/(\\chi(H)-1)+o(1))\\binom n2$ for every graph with an edge"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

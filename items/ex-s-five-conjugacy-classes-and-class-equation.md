@@ -2,7 +2,7 @@
 id: ex-s-five-conjugacy-classes-and-class-equation
 kind: example
 title: 'The seven conjugacy classes of $S_5$ and their centralizer and class sizes'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counting
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

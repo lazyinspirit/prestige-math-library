@@ -2,7 +2,7 @@
 id: ex-function-sets-as-exponential-representing-objects
 kind: example
 title: 'The function set $B^A$ represents $X\mapsto\mathbf{Set}(X\times A,B)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

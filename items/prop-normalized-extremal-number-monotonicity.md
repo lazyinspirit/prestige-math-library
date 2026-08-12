@@ -2,7 +2,7 @@
 id: prop-normalized-extremal-number-monotonicity
 kind: proposition
 title: "$\\operatorname{ex}(n,H)/\\binom n2$ is nonincreasing for $n\\ge2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-mercator-series-does-not-define-logarithm-globally
 kind: counterexample
 title: "For every $x>2$ the uncontinued Mercator series at $u=x-1$ diverges"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

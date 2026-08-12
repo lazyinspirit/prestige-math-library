@@ -2,7 +2,7 @@
 id: cex-volterra-bounded-derivative-not-riemann-integrable
 kind: counterexample
 title: "Volterra's function is differentiable everywhere with bounded derivative, but its derivative is not Riemann integrable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-summable-family-of-formal-series
 kind: definition
 title: "Summable families of formal series are locally finite in every coefficient range"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-derived-subgroups-of-symmetric-and-alternating-groups
 kind: corollary
 title: '$[S_n,S_n]=A_n$ for $n\ge2$, and $[A_n,A_n]=A_n$ for $n\ge5$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

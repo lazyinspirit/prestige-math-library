@@ -2,7 +2,7 @@
 id: thm-real-automorphisms-of-the-complex-numbers
 kind: theorem
 title: 'The only real-field automorphisms of $\mathbb C$ are the identity and complex conjugation'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

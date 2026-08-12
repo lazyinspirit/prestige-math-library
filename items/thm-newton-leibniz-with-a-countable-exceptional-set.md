@@ -2,7 +2,7 @@
 id: thm-newton-leibniz-with-a-countable-exceptional-set
 kind: theorem
 title: "Botsko's theorem: if $F$ is continuous on $[a,b]$, $F'(x)=f(x)$ off a countable subset of $(a,b)$, and $f$ is Riemann integrable, then $\\int_a^b f=F(b)-F(a)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: squeeze
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-line-segment-and-polygonal-path-length
 kind: example
 title: "A line segment has length equal to the distance between its endpoints, and a finitely piecewise-linear path has length equal to the sum of its edge lengths"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

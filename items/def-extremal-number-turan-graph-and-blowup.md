@@ -2,7 +2,7 @@
 id: def-extremal-number-turan-graph-and-blowup
 kind: definition
 title: "Ordinary-subgraph extremal number $\\operatorname{ex}(n,H)$, Turán graph $T_{n,r}$, and balanced blowup $H[s]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

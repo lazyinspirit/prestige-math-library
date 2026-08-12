@@ -2,7 +2,7 @@
 id: thm-rectifiable-iff-coordinate-functions-have-bounded-variation
 kind: theorem
 title: "A path in $\\mathbb{R}^n$ is rectifiable exactly when every coordinate has bounded variation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: comparison
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

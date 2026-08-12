@@ -2,7 +2,7 @@
 id: thm-every-complex-number-has-a-square-root
 kind: theorem
 title: 'Every complex number has a square root, by an explicit Cartesian formula'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: the-fundamental-theorems-of-calculus
 title: "The Fundamental Theorems of Calculus"
-status: draft
+status: published
 items: [rem-ftc-roadmap,
         cor-ftc-integral-function-differentiable-almost-everywhere,
         thm-newton-leibniz-with-interior-derivative,

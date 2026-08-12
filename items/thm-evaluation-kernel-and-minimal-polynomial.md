@@ -2,7 +2,7 @@
 id: thm-evaluation-kernel-and-minimal-polynomial
 kind: theorem
 title: 'The evaluation kernel and the unique monic irreducible minimal polynomial of an algebraic element'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-log-series-extends-by-the-product-law
 kind: lemma
 title: "The Mercator series, its value at $1$ and the product law determine $\\log$ on all positive reals, while the series alone is only local"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

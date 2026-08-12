@@ -1,7 +1,7 @@
 ---
 page: extremal-graph-theory
 title: "Extremal Graph Theory"
-status: draft
+status: published
 items: [def-extremal-number-turan-graph-and-blowup,
         lem-turan-graph-edge-count-and-balance,
         thm-mantel-exact-and-unique,

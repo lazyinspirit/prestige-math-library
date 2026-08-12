@@ -2,7 +2,7 @@
 id: thm-formal-composition-laws
 kind: theorem
 title: "Substitution by a zero-constant series is a ring homomorphism, and composition is associative when both inner series have zero constant coefficient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

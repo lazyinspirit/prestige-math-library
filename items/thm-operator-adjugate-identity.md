@@ -2,7 +2,7 @@
 id: thm-operator-adjugate-identity
 kind: theorem
 title: "For a positive-dimensional finite-dimensional operator, $T\\operatorname{adj}(T)=\\operatorname{adj}(T)T=\\det(T)I$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

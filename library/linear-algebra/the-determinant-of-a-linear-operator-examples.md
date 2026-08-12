@@ -1,7 +1,7 @@
 ---
 page: the-determinant-of-a-linear-operator-examples
 title: "The Determinant of an Operator: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-singular-projection-has-zero-determinant,
            ex-determinant-in-two-ordered-bases,

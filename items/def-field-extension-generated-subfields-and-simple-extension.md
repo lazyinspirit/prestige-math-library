@@ -2,7 +2,7 @@
 id: def-field-extension-generated-subfields-and-simple-extension
 kind: definition
 title: 'Field extensions, generated subrings $F[S]$, generated subfields $F(S)$, and simple extensions'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

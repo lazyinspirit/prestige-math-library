@@ -2,7 +2,7 @@
 id: thm-logarithm-definition-equivalence
 kind: theorem
 title: "Five characterisations of the natural logarithm are equivalent: inverse exponential, integral, continued Mercator series, Landau root limit and the normalised functional equation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

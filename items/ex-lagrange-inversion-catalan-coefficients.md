@@ -2,7 +2,7 @@
 id: ex-lagrange-inversion-catalan-coefficients
 kind: example
 title: "Lagrange inversion gives the Catalan coefficients of the inverse of $x-x^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

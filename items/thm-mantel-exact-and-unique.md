@@ -2,7 +2,7 @@
 id: thm-mantel-exact-and-unique
 kind: theorem
 title: "Mantel's theorem: $\\operatorname{ex}(n,K_3)=\\lfloor n^2/4\\rfloor$, uniquely attained by $T_{n,2}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

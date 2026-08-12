@@ -2,7 +2,7 @@
 id: ex-two-singletons-are-canonically-isomorphic-representing-objects
 kind: example
 title: 'Two singleton sets give canonically isomorphic representations of the identity functor on $\mathbf{Set}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-complex-numbers-are-the-real-coordinate-plane
 kind: theorem
 title: '$\mathbb C$ is the real coordinate plane, with coordinate arithmetic'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-logarithm-differentiable-functional-equation-characterisation
 kind: theorem
 title: "$\\log$ is the unique $f$ with $f(xy)=f(x)+f(y)$ that is differentiable at $1$ with $f'(1)=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

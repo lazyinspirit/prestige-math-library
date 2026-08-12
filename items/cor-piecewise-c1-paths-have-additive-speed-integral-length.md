@@ -2,7 +2,7 @@
 id: cor-piecewise-c1-paths-have-additive-speed-integral-length
 kind: corollary
 title: "A continuous piecewise-$C^1$ path is rectifiable and its length is the sum of the speed integrals over its pieces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: decomposition
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

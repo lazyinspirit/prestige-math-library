@@ -2,7 +2,7 @@
 id: rem-size-of-natural-transformation-collections
 kind: remark
 title: "Local smallness does not make every natural-transformation collection a set, but the Yoneda construction proves sethood in the representable-source case"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

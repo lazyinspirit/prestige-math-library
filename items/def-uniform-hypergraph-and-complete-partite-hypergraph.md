@@ -2,7 +2,7 @@
 id: def-uniform-hypergraph-and-complete-partite-hypergraph
 kind: definition
 title: "$r$-uniform hypergraphs and complete balanced $r$-partite $r$-graphs $K^{(r)}_{s,\\ldots,s}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

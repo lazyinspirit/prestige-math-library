@@ -2,7 +2,7 @@
 id: def-adjugate-of-a-linear-operator
 kind: definition
 title: "The adjugate of an operator on a positive-dimensional finite-dimensional vector space, defined by the adjugate matrix in any basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-formal-square-root-one-minus-four-x
 kind: example
 title: "The constant-one square root of $1-4x$ and its first coefficients"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

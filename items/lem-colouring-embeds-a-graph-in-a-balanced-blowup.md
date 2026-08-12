@@ -2,7 +2,7 @@
 id: lem-colouring-embeds-a-graph-in-a-balanced-blowup
 kind: lemma
 title: "Every finite graph $H$ with $\\chi(H)=r$ is an ordinary subgraph of $K_r[s]$ for some $s$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

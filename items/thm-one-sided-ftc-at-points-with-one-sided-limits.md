@@ -2,7 +2,7 @@
 id: thm-one-sided-ftc-at-points-with-one-sided-limits
 kind: theorem
 title: "For an integrable $f$, the one-sided derivatives of $F(x)=\\int_a^x f$ equal the corresponding one-sided limits of $f$; at a jump they are unequal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: epsilon-delta
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

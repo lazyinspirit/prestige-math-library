@@ -2,7 +2,7 @@
 id: thm-integral-exponential-solves-the-normalised-ivp
 kind: theorem
 title: "The inverse $E$ is differentiable, $E'=E$, and $E(0)=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: field-extensions-and-the-complex-numbers-examples
 title: "Field Extensions and the Complex Numbers: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-rational-square-root-two-as-a-simple-extension,
            ex-the-four-element-field-from-an-irreducible-quadratic,

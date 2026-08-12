@@ -2,7 +2,7 @@
 id: def-formal-exponential-logarithm-and-powers
 kind: definition
 title: "Formal exponential, logarithm, and binomial powers over a commutative $\\mathbb Q$-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

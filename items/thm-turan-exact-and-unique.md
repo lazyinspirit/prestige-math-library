@@ -2,7 +2,7 @@
 id: thm-turan-exact-and-unique
 kind: theorem
 title: "Turán's theorem with equality: $\\operatorname{ex}(n,K_{r+1})=e(T_{n,r})$, and $T_{n,r}$ is the unique extremal graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

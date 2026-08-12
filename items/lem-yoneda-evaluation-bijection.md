@@ -2,7 +2,7 @@
 id: lem-yoneda-evaluation-bijection
 kind: lemma
 title: "Evaluation at the identity gives $\\operatorname{Nat}(\\mathcal C(a,-),F)\\cong F(a)$ and proves that the natural-transformation collection is a set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

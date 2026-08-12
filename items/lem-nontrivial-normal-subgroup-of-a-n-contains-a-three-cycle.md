@@ -2,7 +2,7 @@
 id: lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle
 kind: lemma
 title: 'Every nontrivial normal subgroup of $A_n$ contains a $3$-cycle for $n\ge5$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: extremal
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

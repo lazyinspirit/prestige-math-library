@@ -2,7 +2,7 @@
 id: ex-determinant-in-two-ordered-bases
 kind: example
 title: "One operator has matrices $\\operatorname{diag}(2,3)$ and $\\begin{pmatrix}2&0\\\\1&3\\end{pmatrix}$ in two bases, both with determinant $6$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

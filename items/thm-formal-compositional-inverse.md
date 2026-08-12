@@ -2,7 +2,7 @@
 id: thm-formal-compositional-inverse
 kind: theorem
 title: "A zero-constant formal series has a compositional inverse exactly when its linear coefficient is a unit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

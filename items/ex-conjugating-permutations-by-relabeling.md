@@ -2,7 +2,7 @@
 id: ex-conjugating-permutations-by-relabeling
 kind: example
 title: 'Conjugating $(1\,4)(2\,5\,3)$ by an explicit permutation in $S_5$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

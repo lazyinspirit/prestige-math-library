@@ -2,7 +2,7 @@
 id: cor-chromatic-number-extremal-density
 kind: corollary
 title: "The asymptotic extremal density is determined exactly by chromatic number: $\\pi(H)=1-1/(\\chi(H)-1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

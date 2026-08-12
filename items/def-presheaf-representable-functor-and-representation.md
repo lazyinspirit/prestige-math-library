@@ -2,7 +2,7 @@
 id: def-presheaf-representable-functor-and-representation
 kind: definition
 title: "Presheaves, covariantly and contravariantly representable functors, and representations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
