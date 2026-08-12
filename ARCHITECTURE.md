@@ -337,10 +337,29 @@ whole-level gate and rejects duplicate ownership. This avoids a shared JSON file
 becoming a new parallel-write failure mode.
 
 `tools/finite-smoke.mjs` runs selected, independently computed finite-model
-checks for graph-tree, induced-complement, and cyclic-subgroup invariants. Each
-test must name an exact item excerpt that it probes. It is a **falsification
-screen**: a pass has no general-proof force, while a fail provides a concrete
-countermodel or convention discrepancy for Alpha to adjudicate.
+checks for graph-tree, induced-complement, cyclic-subgroup, and finite-poset-meet
+invariants. Each test must name an exact item excerpt that it probes. It is a
+**falsification screen**: a pass has no general-proof force, while a fail
+provides a concrete countermodel or convention discrepancy for Alpha to
+adjudicate.
+
+**Its failure mode is silence, and it is the gate most likely to pass
+vacuously.** A `finite_smoke` row is opt-in per item, so a level whose subjects
+match no registered check reports `0 error(s), 0 check(s)` — indistinguishable at
+a glance from a level that was checked. Measured on run `frontier-11`: a
+240-item build of algebra, analysis and category theory executed **zero** checks,
+because all four registered checks were then graph- or group-theoretic. Read the
+check count, never the exit code alone.
+
+Run `frontier-12` added `monotone-map-need-not-preserve-meets` and
+`full-subposet-meet-differs-from-ambient` for that reason. They exploit the fact
+that a poset **is** a category — one arrow per related pair — in which a product
+or pullback is exactly a meet, so a finite poset is a real bounded countermodel
+search for a limit claim. Both back *existence* counterexamples, so `ok` means
+the witness was verified to fail as claimed, and each distinguishes "no meet
+exists" and "the meet IS preserved" from the intended outcome so a mistyped
+witness cannot pass by accident. `--self-test` runs every check on its defaults.
+The registry lives in `QUALITY-CONTROLS.md` §"Finite countermodel smoke tests".
 
 `tools/risk-report.mjs` exposes a transparent score for dependency fan-in,
 proof length, biconditionals, existence/well-definedness, boundary-sensitive

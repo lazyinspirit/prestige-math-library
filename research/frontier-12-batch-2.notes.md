@@ -333,3 +333,74 @@ All sources are research references only. No source prose or proof is to be copi
 The proof-contract file scopes every proof-bearing scaffold item. At authoring, replace prospective local-source clauses with exact on-disk quotes, synchronize every numbered step, and add no risk_review; that remains Alpha's role. The finite-smoke registry has no applicable checker for these group-series or module claims, so every finite_smoke array is empty by design.
 
 No blocker remains. Direct shell download was unavailable and pdftotext is not installed, but indexed web text exposed the exact Igusa headings and theorem text; all other source ranges were readable through their web/PDF index or HTML, so this did not prevent the harvest.
+## Step 5 continuity checkpoint (2026-08-13)
+
+- Objective: author all 76 Batch 2 items and the four page records for `composition-series-and-solvable-groups`, `composition-series-and-solvable-groups-examples`, `free-modules-and-exact-sequences`, and `free-modules-and-exact-sequences-examples`.
+- Current substage: all 76 item bodies have been drafted in `research/.frontier-12-batch-2-author.mjs`; page-record generation and strict proof-contract synchronization remain before materializing and validating the files.
+- Normative inputs read: `CLAUDE.md`, `SCHEMA.md`, `briefs/authoring.md`, the exemplar, the step-3 decisions, both Alpha reviews, and this batch's notes and proof contracts.
+- Verification state: no Step 5 gate has yet been run against generated files. Do not treat the generator's provisional `verification.precheck` field as evidence until the scoped precheck passes.
+- Exact next actions: inspect generator integrity and item counts; add page records and contract synchronization; run the generator; delete the temporary generator; run reflow, scoped precheck, rendercheck, prosecheck, citecheck, dependency/forward/external checks, strict proof-contract validation, content policy, and coverage checks; repair until green; record final results here.
+
+## Step 5 authoring report (2026-08-13)
+
+All four page records and all 76 planned items are authored on disk with `status: draft` and `origin: session`. Every mathematical-content item records both statement and proof provenance. The two A pages have exactly two nonempty summary paragraphs; the two B pages have no summary body.
+
+| page | kind | authored items |
+|---|---:|---:|
+| `composition-series-and-solvable-groups` | A | 27 |
+| `composition-series-and-solvable-groups-examples` | B | 10 |
+| `free-modules-and-exact-sequences` | A | 29 |
+| `free-modules-and-exact-sequences-examples` | B | 10 |
+| **Total** |  | **76** |
+
+### Verification
+
+- Scoped precheck: **PASS**, 60 proof-bearing items checked and 0 failing. The 16 definitions correctly record `verification.precheck: n/a`.
+- Rendercheck: **PASS**, all 76 item files and four page files; KaTeX and YAML clean.
+- Prosecheck: **PASS**, four page files, 0 errors and 0 warnings.
+- Citecheck: **PASS**, 76 items scanned.
+- Content policy: **PASS**, 76 scoped items, 0 errors and 0 warnings.
+- Strict proof contracts: **PASS**, 60/60 proof-bearing items, 0 errors and 0 warnings. The contract now contains the exact on-disk source-section text for each fact, complete fact-to-step maps, complete numbered-step derivations, and specific boundary dispositions.
+- Coverage checklist: **PASS**, two A pages and 137 harvested results, 0 errors and 0 warnings.
+- Finite smoke: **PASS**, 0 errors; no registered finite checker applies to these contracts, so 0 checks ran as designed.
+- Dependency check: **PASS** repo-wide, 0 hard errors. Its 153 warnings are inherited or belong to other in-flight batches; none is a Batch 2 hard failure.
+- External-reference check: **PASS** repo-wide, 0 errors. Its 84 warnings are the existing unproved-consequence ledger.
+- Plan validation: **PASS** repo-wide: no unresolved ids, item/page cycles, forward dependencies, or B-leaf dependencies among pages with item lists. Redundant-prerequisite notices remain warnings.
+- Dependency-source classification: **PASS** for both A pages, 0 unresolved dependencies. Composition has 36 published-page dependencies and 43 same-page/draft dependencies; modules has 39 published-page dependencies and 46 same-page/draft dependencies.
+- Audit manifest: **PASS**, 94 published-backward and 137 same-batch relationships, with no unresolved relationship.
+- Forward-reference check: the repo-wide invocation is not green because three files from other concurrently authored batches have undeclared forward links: `fs-every-closed-c1-field-on-a-connected-open-set-is-exact`, `thm-disc-area-is-pi-r-squared`, and `thm-gregory-leibniz-series-for-pi-from-a-finite-remainder`. No Batch 2 item has a forward-reference error, and this batch declares no forward reference.
+
+### Departures from the scaffolded proof strategies
+
+No item abandoned its scaffolded route. The following are the complete local deviations and proof-design refinements made while closing citation or boundary obligations; the proof contracts were synchronized to all of them.
+
+- The Zassenhaus proof establishes normalization of the four butterfly subgroups by explicit conjugation and obtains the common quotient directly from the second isomorphism theorem. The correspondence theorem was not used and was removed rather than cited ornamentally.
+- The Jordan–Hölder proof phrases the no-insertion argument through the exact correspondence between normal intermediate subgroups and normal subgroups of a quotient. It does not make the false stronger claim that a simple quotient has no intermediate subgroup at all.
+- Derived-series functoriality strengthens its induction hypothesis to carry the equality for surjective homomorphisms at every stage, making the quotient specialization explicit.
+- In the finite-solvable composition-factor criterion, normality of the last nontrivial derived subgroup is discharged through characteristicity. This required the local abelianization theorem as an additional dependency.
+- The subgroup/quotient closure proof cites the canonical quotient map rather than the quotient definition, because surjectivity and its kernel are the exact facts used.
+- The definitions of derived length and nilpotency class cite well ordering and prove that the least terminating index exists, rather than leaving the minimum implicit.
+- The central-series criterion cites only the exact quotient multiplication and centre definitions and derives both directions of the commutator equivalence locally. The nilpotence characterization and its later class bounds cite the exact three-way upper/lower/central-series theorem, with the required inequalities derived in their own steps.
+- The finite-product nilpotency statement isolates the empty product as class zero and states the maximum bound only for a nonempty family.
+- The $C_{12}$ example uses the cyclic-subgroup theorem and computes orders directly; the full cyclic classification was unnecessary. The nilpotent-extension counterexample likewise computes the required cyclic groups directly and drops that classification dependency.
+- The $S_4$ example does not attribute $A_4'=V_4$ to a source that only states $S_4'=A_4$. It proves the equality locally from the quotient-abelian criterion, an explicit commutator, and characteristic normality. The $S_3$ and nilpotent examples similarly derive their unstated subgroup/centre claims locally.
+- The invariant-basis-number proof cites the free standard-basis definition in addition to the exact matrix definitions and laws; all rectangular-matrix and zero-size boundaries are handled in the written determinant argument.
+- The Four Lemma is proved in one five-term diagram covering both injective and surjective forms, and the Five Lemma invokes those two verified forms. This replaces two repetitive chases without weakening either hypothesis set.
+- The Snake Lemma is a complete element chase. It uses the coker definition and quotient universal property for the connecting map and therefore drops the unused first isomorphism theorem.
+- The projective characterization states that the lifting/splitting/Hom conditions are choice-free and scopes only the equivalence with being a summand of a free module to AC. The two projective-nonfree companion proofs cite the finite-free-projective theorem and construct the summand lift explicitly.
+- Products of injectives are proved factor-by-factor in the converse direction instead of routing through the general injective characterization. The direct product definition is therefore added and that characterization is removed.
+- Coinduction assumes its abelian group is injective directly, so the PID divisible theorem is removed there. That theorem is used instead in the enough-injectives construction, where divisibility of the chosen abelian overmodule is the actual input.
+- The non-IBN endomorphism-ring example adds the linear-basis definition and proves the ring/free-module identifications before using the explicit shifts.
+
+### Exact dependency deltas from the approved scaffold
+
+- Dropped as unused: `thm-correspondence-theorem-groups` from Zassenhaus; `thm-classification-of-cyclic-groups` from the nilpotent-extension false statement; `thm-injective-module-characterizations` from products of injectives; and `thm-injective-modules-over-a-pid-are-exactly-divisible` from coinduction.
+- Replaced by the exact fact used: `def-quotient-group` by `prop-canonical-quotient-map` in solvable quotients; `thm-classification-of-cyclic-groups` by `thm-subgroups-of-cyclic-groups-are-cyclic` in the $C_{12}$ example; and `thm-first-isomorphism-theorem-modules` by `def-module-homomorphism-kernel-image-and-cokernel` in Snake.
+- Added to discharge explicit proof obligations: `thm-well-ordering-principle` to both least-index definitions; `thm-derived-subgroup-is-characteristic-and-abelianization-is-universal` to the finite-solvable criterion; the quotient-abelian criterion and derived-subgroup characteristicity to the $S_4$ example; the free standard-basis definition to IBN; `def-quotient-module` to the injective characterizations; the direct-sum/product definition to products of injectives; the PID divisible theorem to enough injectives; `def-linear-basis` to the non-IBN example; and the finite free-projectivity theorem to both projective-nonfree examples.
+- The $S_4$ example drops `thm-finite-solvable-iff-composition-factors-have-prime-order`, since its solvability and derived series are established directly.
+
+### Honest closure and blockers
+
+All 76 claims close with their written hypotheses and the promised empty, zero, one, degenerate, endpoint, nonempty-choice, and biconditional passes. No claim was abandoned or narrowed from the approved scaffold. The projective characterization makes the scaffold's AC boundary explicit in its Statement and proof.
+
+There is no Batch 2 blocker. The three repo-wide forward-reference errors listed above are outside this batch and were not edited. No permission or escalation was requested.

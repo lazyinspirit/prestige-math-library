@@ -315,3 +315,39 @@ Step 5 must not compress the Local Lemma to a citation-only proof, must not hide
 ## Step-2 status and blockers
 
 Decision D1 remains fully applied: the A split is 37/28, the B split is now 11/6 after the three dispatched boundary witnesses, and proof-contract scope follows pair order. Fix round 2 changed sourcing only and remains discharged; fix round 3 changes only page 220.4 and its matching coverage, provenance notes, and proof contracts. The foundations coverage entry now has 116 rows across two full textbook treatments and three corroborative lecture-note prefaces, plus seven canonical finite-result rows; the accepted method entry remains byte-for-byte unchanged at 84 rows across the original three lecture-note treatments. All 37 foundations A ids and all three new B ids occur in the corrected coverage union. The required final commands are green: `coverage-checklist` reports 2 pages, 200 harvested results, 0 errors and 0 warnings; `validate-plan` exits 0 with page order acyclic and consistent. There were no permission, web, source-access, mathematical, or seam blockers, and there is no unpublished or false dependency to report. The standalone proof-contract checker remains outside this fix round: before step 5 its 65 planned `items/*.md` files do not exist, while the JSON scope/contract bijection now contains all 65 proof-bearing scaffold items.
+## Continuity checkpoint
+
+- The authoritative four-page batch is fully drafted on disk: 82 item files (37 + 11 + 28 + 6) and four `status: draft` page files. The dispatch table's 79/8 count is stale; the spliced plan and Alpha recheck require the three added foundation boundary examples.
+- The first `precheck` pass examined 65 proof-bearing items and reported 37 failures. Most are canonical proof-stratification `REPAIR` results; the remaining hard failures are explicit strategy-tag omissions or mismatches in constructive/inductive proofs.
+- No final gate result has yet been claimed. Next actions are to adopt the canonical stratifications, repair the hard failures, re-run precheck, complete the statement/dependency/citation and boundary-case audit, synchronize this batch's proof contracts to the written proofs, and run every required individual gate.
+- Known authored departure to preserve and report: `thm-erdos-sum-free-subset-bound` was narrowed to nonempty finite sets because the scaffolded strict lower bound is false for the empty set.
+
+## Step-5 authoring completion (2026-08-13)
+
+This section supersedes the scaffold-era statements above that the proof contracts are `planned`, that the item files do not yet exist, and that a local B-to-B dependency remains. The authoritative spliced plan contains 82 items, not the stale 79 in the dispatch table: 37 foundations A items, 11 foundations B items, 28 method A items, and 6 method B items. All 82 item files and all four page files are authored with `status: draft`; every item has `origin: session` and separate statement/construction and proof/verification provenance. The 65 proof-bearing items have synchronized strict proof contracts. No authored statement is `ai-generated`, no item targets an AI-generated statement, and no item depends on a B-page leaf.
+
+### Departures from the scaffolded proof design
+
+1. `thm-erdos-sum-free-subset-bound` is narrowed in both title and Statement to a **nonempty** finite set. The scaffolded strict conclusion is false for the empty set, since it would demand a subset of cardinality strictly greater than zero. The proof otherwise follows the planned random-dilate construction and now disposes of the modular interval bounds explicitly.
+2. `lem-local-lemma-conditional-probability-bound` retains the planned induction, but the written proof expands the quotient argument into numerator and denominator events and proves positivity of every conditioning prefix before division. This replaces the scaffold's compressed conditional-probability bridge with the boundary-complete argument the claim requires.
+3. `thm-erdos-high-girth-and-high-chromatic-number` retains alteration, but replaces the planned asymptotic parameter sentence with explicit finite inequalities, treats the `ell <= 2` case separately by a complete graph, and proves the post-deletion colour-class contradiction quantitatively. Its companion parameter-ledger example makes the same probability estimates explicit.
+4. `thm-tournament-property-s-k-existence` retains the union-bound strategy, but handles `k=1` and `k=2` separately; the latter uses the exact inequality `(3/4)^8 < 1/9` rather than an opaque exponential comparison.
+5. `ex-bayes-theorem-for-two-urns` realizes the priors and likelihoods on an explicit `2 x 4` product space, giving eight elementary outcomes. This replaces the scaffold's vague four-branch realization without changing the intended Bayes calculation.
+6. `lem-arbitrarily-large-primes-congruent-to-two-modulo-three` retains the Euclid-style construction, but uses the actual finite-prime-product and prime-factorisation interfaces. The scaffold's `def-finite-sum` and standalone prime-divisor route did not license the load-bearing product-residue inference.
+7. `fs-linearity-of-expectation-requires-independence` now constructs its dependent random-sign witness locally instead of depending on an earlier example on the same B page. This removes the scaffolded B-to-B edge and preserves the required leaf invariant.
+
+Other dependency differences from the scaffold are direct citation-closure repairs rather than strategy changes: the authored Facts blocks name the exact finite-sum/Fubini, independence, sign, exponential, logarithmic, square-root, graph, and existence interfaces actually used, and omit dependencies not used by the written proof. Both directions of the Chebyshev and relative-variance equivalences, zero-weight and empty-family cases, degenerate Local-Lemma degrees, endpoint probability parameters, and nonempty witness choices are explicit in the final proofs and their contracts.
+
+### Final verification
+
+- `reflow.mts`: 82/82 item files unchanged.
+- `precheck.mts`: 65 checked, 0 failing; every proof-bearing item records `verification.precheck: pass`.
+- `rendercheck.mjs`: 86 files checked with the real KaTeX and renderer YAML parser, clean.
+- `prosecheck.mjs --warnings`: 4 page files, 0 errors and 0 warnings.
+- `citecheck.mjs`: 82 item files, clean with no warnings.
+- `proof-contract.mjs --strict`: 65/65 contracts checked, 0 errors and 0 warnings.
+- `content-policy.mjs`: 82 scoped items, 0 errors and 0 warnings.
+- `coverage-checklist.mjs`: 2 A pages and 200 harvested results, 0 errors and 0 warnings.
+- `validate-plan.mjs`: reading order and page prerequisites are acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved ids in authored page lists.
+
+No proof obligation remains unclosed after the sum-free theorem was narrowed to its true domain. There were no permission, source-access, tooling, or mathematical blockers. Nothing was published.

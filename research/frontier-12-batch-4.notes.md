@@ -122,7 +122,7 @@ Every decline has a result-specific reason of at least 40 characters in the mach
 
 ## Published dependencies opened on disk and confidence route
 
-All 54 external item dependencies below were opened from `items/<id>.md`, and every file says `status: published`. There is no unambiguously false published dependency.
+The scaffold-time dependency review below opened 54 external item dependencies from `items/<id>.md`. Step-5 citation closure brought the final authored dependency set to 72 external items. Every one of those 72 files was opened or mechanically rechecked on disk, every one says `status: published`, and no final authored item depends on an item homed on either companion B page. There is no unambiguously false published dependency.
 
 ### Pi pair — exact statement confirmed on disk and independently checked against the listed analysis sources or standard derivation
 
@@ -142,7 +142,7 @@ Decision D2 adds five direct published dependencies, all reached through `fubini
 
 ## Proof-contract status
 
-`frontier-12-batch-4.proof-contracts.json` begins a version-1 contract for all 50 proof-bearing items (theorems, lemmas, corollaries, examples, counterexamples, and false statements). It records the exact scaffold strategy as the planned main derivation, every planned direct dependency as a citation-plan entry, and all eight boundary dispositions. At step 5, each generic planned block must be replaced by the final numbered-step map, exact on-disk quotations, and exact citation uses; the current empty `citations` arrays are intentional scaffold-time placeholders.
+`frontier-12-batch-4.proof-contracts.json` is synchronized to all 50 authored proof-bearing items. Its citation rows contain exact on-disk Statement, Definition, Example, or Statement-refuted excerpts for every direct fact link and enumerate every numbered step that uses the fact. Every numbered proof step has one authored input map. All eight standard boundary rows now contain either evidence from the final Statement or numbered steps, or an item-specific reason the case is not applicable. The strict gate reports 50/50 items with no error or warning.
 
 ## Component-provenance plan and per-item rationale
 
@@ -212,6 +212,40 @@ No Statement or Construction is classified `ai-generated`. Classical sourced sta
 | `fs-vector-line-integrals-are-invariant-under-reversal` | `ai-altered` | `ai-altered` | Lebl §9.2, Definitions 9.2.5–9.2.14 and Propositions 9.2.10–9.2.15. The final proof will be newly organized around the listed on-disk dependencies, so it is altered rather than copied. |
 | `ex-a-vector-line-integral-counts-multiple-traversals` | `ai-altered` | `ai-altered` | Lebl §9.2, Definitions 9.2.5–9.2.14 and Propositions 9.2.10–9.2.15. The final proof will be newly organized around the listed on-disk dependencies, so it is altered rather than copied. |
 
-## Blockers and step-5 handoff
+## Step-5 authoring record
 
-No shell, web, edit, git, or other permission prompt was requested. No indispensable operation was blocked by the sandbox. The two individual required gates are green at handoff; the prohibited wrapper `tools/gates.mjs` was not run. Fix-round-2 findings D4 and C7–C9 are reflected in all four batch artifacts: the two new pi results are covered and contracted, the Basel row is deferred explicitly, the Lebl quote is exact, Donaldson is restricted to corroboration, and the three Lebl locators are consolidated into one source entry.
+All 61 planned items and all four page files are authored. The per-page counts are 14 items on `pi-the-equivalent-characterizations`, 7 on its examples page, 31 on `line-integrals-and-the-gradient-theorem`, and 9 on its examples page. Every item and page remains `status: draft`; every item has `origin: session` and component provenance. The two A pages have exactly two nonempty summary paragraphs, and the two B pages have no authored summary body.
+
+### Departures and closure repairs
+
+- The finite Wallis and Viete arguments use the published `def-monoid-finite-product` interface. This replaces the scaffold's unavailable finite-product shorthand without changing the induction or limit strategy.
+- The disc-area and Gregory-Leibniz proofs use the earlier published `thm-ftc-second-part` where the scaffold named a Newton-Leibniz result that appears later in reading order. The mathematical route is unchanged.
+- The Viète finite-product proof now cites the Pythagorean identity explicitly and derives both double-angle formulas in numbered steps. The Gregory substitution similarly derives `sec^2 t=1+tan^2 t` from the cited definitions and identity instead of presenting the consequence as the cited theorem.
+- Oriented reparametrization is stated for nondegenerate source and target intervals; reversal separately handles singleton intervals. Concatenation and partition-independence proofs also dispose of empty, one-piece, endpoint, and degenerate cases explicitly.
+- Companion examples that initially shared intermediate examples now perform their calculations locally. This removes every possible B-page dependency and keeps both B pages as leaves.
+- The potential and path-independence equivalences spell out both implications, basepoint and path choices, constant paths, and componentwise constants. The Poincare proof keeps the scaffolded radial potential but makes the star-shaped segment and endpoint differentiation explicit.
+- Green's theorem remains deliberately narrowed to finite unions of supplied Type I and Type II elementary regions. The written gluing proof expands the scaffold by proving compact Jordan measurability, zero-extension additivity, and oppositely oriented shared-arc cancellation from earlier published results.
+- The punctured-plane counterexample proves the required connectedness directly using explicit paths, a separation indicator, and the intermediate value theorem. This avoids a later path-connectedness theorem while retaining the scaffolded vortex-field witness.
+- The Archimedean polygon argument proves the all-index monotonicities and limits from the derivative criterion and small-angle limits, rather than treating the source's polygon-doubling subsequence as an all-index assertion.
+- Facts in the disc-area, Gregory-Leibniz, Viète, Green, and compactness arguments were tightened to state the cited definitions or theorem clauses themselves. Their elementary consequences are now derived in the proof steps.
+
+All other proofs retain the scaffolded strategy. No authored claim had to be abandoned, and no proof obligation remains unclosed.
+
+### Final verification
+
+| check | result |
+|---|---|
+| `reflow.mts` | 61/61 item files unchanged |
+| `precheck.mts` | 50/50 proof-bearing items clean |
+| `rendercheck.mjs` | 65/65 item and page files clean under the renderer's YAML parser and real KaTeX |
+| `prosecheck.mjs` | 4/4 page files, 0 errors, 0 warnings |
+| `citecheck.mjs` | 61/61 item files clean |
+| `proof-contract.mjs --strict` | 50/50 contracts, 0 errors, 0 warnings |
+| `coverage-checklist.mjs` | 2 A pages, 103 harvested results, 0 errors, 0 warnings |
+| `content-policy.mjs` | 61 scoped items, 0 errors, 0 warnings |
+| `depcheck.mjs` | clean; only pre-existing repository warnings |
+| `fwdcheck.mjs` | 0 open forward references; clean |
+| `extcheck.mjs` | clean; 84 pre-existing published-content warnings |
+| `validate-plan.mjs` | `OK`; no item cycles, open forward references, B-page dependencies, or unresolved ids on authored pages |
+
+No shell, web, edit, git, or other permission prompt was requested. No indispensable operation was blocked by the sandbox. The prohibited `tools/gates.mjs` wrapper was not run, nothing was published, and nothing was committed.

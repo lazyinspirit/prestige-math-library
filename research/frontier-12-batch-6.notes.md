@@ -158,7 +158,7 @@ Every mathematical-content item has a component plan below. “AI-altered” mea
 
 | Item | Statement / proof | Rationale |
 |---|---|---|
-| `rem-complex-plane-euclidean-dictionary` | ai-altered / ai-altered | Synthesizes published quotient, coordinate, modulus, metric, and topology clauses and adds explicit non-preservation warnings. |
+| `rem-complex-plane-euclidean-dictionary` | ai-altered / not-applicable | Synthesizes published quotient, coordinate, modulus, metric, and topology clauses and adds explicit non-preservation warnings; as a remark it has no proof component under SCHEMA §3. |
 | `def-complex-domain` | literature-derived / not-applicable | Standard convention shared by Lebl and Howell–Mathews. |
 | `def-complex-differentiability-holomorphic-and-entire` | literature-derived / not-applicable | Directly sourced standard definitions; terminology normalized to library usage. |
 | `lem-uniqueness-of-the-complex-derivative` | literature-derived / ai-generated | Standard uniqueness-of-limit consequence; local one-third triangle proof supplied here. |
@@ -218,7 +218,7 @@ No planned statement is `ai-generated`. The three AI-generated proofs on the B p
 - For \(\bar z^2/z\), the derivative quotient is \(\bar z^2/z^2\): it is \(1\) on the real axis and \(-1\) on \(y=x\).
 - For \(|z|^2\), say “complex differentiable exactly at zero,” never “nowhere.”
 - The exponential B example must retain the direct series-tail difference-quotient proof as well as the Cartesian and polar CR checks.
-- Synchronize each authored fact citation and numbered proof step into `frontier-12-batch-6.proof-contracts.json` at Step 5; the present contracts are prospective and intentionally have empty exact-quote `citations`.
+- Synchronization was completed at Step 5: all 36 proof-bearing items have exact source-section quotes, every authored fact use and numbered proof step is mapped, and every boundary row is anchored to the final canonical step numbering.
 - No external fallback is planned. No forward reference is load-bearing.
 
 ## Blockers and findings
@@ -232,3 +232,51 @@ No planned statement is `ai-generated`. The three AI-generated proofs on the B p
 ## Continuity checkpoint
 
 Steps 1–2 are complete in the four owned batch artifacts. The source harvest, item design, dependency audit, provenance plan, and 37 prospective proof contracts are recorded. JSON parsing, the batch-local dependency-closure and B-leaf checks under the proposed prerequisite replacement, the page-scaffold applied-`\iota` notation check, and the final ownership-boundary review all pass. The required plan validator passes against the untouched plan, and the coverage checklist reports 1 page, 100 harvested results, 0 errors, and 0 warnings. The plan validator cannot exercise these unmerged item lists; the batch-local closure check is the corresponding scaffold-time evidence. The gate wrapper was not run, as directed.
+
+## Step 5 authoring record (2026-08-13)
+
+### Authored inventory
+
+- `complex-differentiability-and-cauchy-riemann`: 28 items in the declared order, plus the A-page manifest and its exact two-paragraph summary.
+- `complex-differentiability-and-cauchy-riemann-examples`: 13 leaf items in the declared order, plus the bodyless B-page manifest.
+- `library/complex-analysis/_category.md`: the new draft category manifest. No renderer, stylesheet, or app-repository file was changed.
+- All 41 items and both pages are `status: draft` and `origin: session`; nothing was published, judged, committed, or pushed.
+
+The final proof-contract scope is 36 rather than the prospective 37. The scaffold had treated `rem-complex-plane-euclidean-dictionary` as proof-bearing, but SCHEMA §3 requires `provenance.proof: not-applicable` for remarks. The final contract therefore covers the 36 actual phase-proof bodies and excludes the four definitions and the remark.
+
+### Dependency and proof-strategy reconciliation
+
+The written claims remain the approved claims. These are the complete changes from the plan-spec dependency lists:
+
+- `thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann` adds `lem-complex-conjugation-and-modulus-laws` for the exact equality between the complex quotient remainder and the Euclidean remainder ratio.
+- `cor-complex-differentiability-implies-continuity` replaces the remark dependency with `def-complex-metric-convergence-and-continuity`. The proof needs the metric identity itself, and proof-contract citations require a source with a recognized Definition/Statement section rather than free remark prose.
+- `thm-derivative-of-a-continuous-complex-local-inverse` drops `cor-complex-differentiability-implies-continuity`; continuity of the inverse is an explicit hypothesis and the forward map's continuity is not used.
+- `thm-complex-polynomials-and-rational-functions-are-holomorphic` adds `cor-complex-differentiability-implies-continuity` and `lem-complex-conjugation-and-modulus-laws` to prove that the denominator's nonzero set is open. Its power rule uses the finite difference-quotient factorization directly instead of the scaffold's induction; this proves the same formula while treating exponent zero explicitly.
+- `thm-complex-exponential-is-entire-with-derivative-itself` adds `cor-differentiable-implies-continuous` and `lem-algebra-of-continuous-real-maps-on-a-space` to license continuity of all four displayed partial derivatives.
+- `thm-zero-complex-derivative-on-a-domain-implies-constant` adds `cor-complex-differentiability-implies-continuity` to justify both closed-segment endpoints before applying the one-variable zero-derivative theorem.
+- `cor-c2-holomorphic-components-have-nonpositive-hessian-determinant` adds `thm-clairaut-schwarz-mixed-partials` so that the two off-diagonal Hessian entries may be identified in the determinant formula.
+- `ex-square-function-from-the-complex-difference-quotient` adds `thm-c2-holomorphic-components-are-harmonic` to license the page's harmonic and harmonic-conjugate terminology after the direct Laplacian computations.
+- `ex-complex-exponential-cauchy-riemann-in-cartesian-and-polar-form` adds `def-complex-exponential` and `thm-complex-exponential-addition-and-real-extension` for the defining series and direct difference-quotient factorization; absolute convergence at 1 supplies the explicit series-tail bound.
+- `fs-cauchy-riemann-on-an-open-set-without-regularity-implies-holomorphy` adds `cor-complex-differentiability-implies-continuity` to infer non-differentiability from the proved discontinuity at zero.
+
+Two proof presentations changed without changing dependencies or claims. The antiholomorphic quotient theorem uses the quotient remainder directly instead of first renaming the increment by its conjugate. The Wirtinger chain-rule proof now writes out the identity, conjugation, and constant-inner-map substitutions explicitly, as the scaffold required, after the first strict-contract pass showed that only the general formula had been written.
+
+### Boundary and contract pass
+
+The final proofs explicitly dispose of punctured zero increments, exponent zero, zero and constant polynomials, the empty rational-function domain for the zero denominator, zero modulus before the positive-modulus linear system, radius zero before polar division, the cases `c=0` and `d=0` for grid lines, `c=0` versus the unique Möbius pole, closed segment endpoints, coincident polygonal endpoints, both directions of every asserted equivalence, and the disconnected-open-set failure of global constancy. Determinant zero remains explicitly inconclusive in the Hessian test.
+
+`frontier-12-batch-6.proof-contracts.json` contains full exact source-section text for every cited fact, final step-by-step inputs rather than prospective instructions, and step-anchored dispositions for all eight standard boundary rows. Strict verification reports 36/36 contracts with zero errors and zero warnings.
+
+### Gate record
+
+- reflow: completed on all 41 item files.
+- precheck: 36 proof-bearing items checked, 0 failing; the printed canonical stratification was adopted wherever requested, and every item records `verification.precheck: pass` (definitions and the remark record `n/a`).
+- rendercheck: 43 item/page files, clean KaTeX, YAML, delimiter, display-block, and wikilink checks.
+- prosecheck: 2 page files, 0 errors and 0 warnings, including the `--warnings` pass.
+- citecheck: 41 scoped items, no positional-claim conflicts; the global invocation also completed, with only pre-existing repository-wide heuristic warnings outside batch 6.
+- depcheck, fwdcheck, extcheck: completed successfully. The repository-wide unproved-material notices are inherited published-library notices, not batch-6 failures.
+- content-policy: 41 scoped items, 0 errors and 0 warnings.
+- proof-contract `--strict`: 36/36 checked, 0 errors and 0 warnings.
+- coverage-checklist: 1 source-coverage page, 100 harvested results, 0 errors and 0 warnings.
+
+Nothing failed to close honestly. There is no mathematical, provenance, source-access, filesystem, or tooling blocker. The forbidden `tools/gates.mjs` wrapper was not run.

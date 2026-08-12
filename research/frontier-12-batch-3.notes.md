@@ -290,13 +290,13 @@ No opened published dependency contains an unambiguous false load-bearing statem
 | `def-algebraically-closed-field` | literature-derived | not-applicable | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `def-algebraic-and-geometric-multiplicity-of-an-eigenvalue` | literature-derived | not-applicable | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
-| `thm-trace-is-sum-of-eigenvalues` | literature-derived | ai-altered | Pinkham 12.3.1 supplies the result over the complex numbers; the scaffold states the exact split-characteristic-polynomial hypothesis and derives it from the published trace interface and extreme-coefficient identity. |
-| `thm-determinant-is-product-of-eigenvalues` | literature-derived | ai-altered | Pinkham 12.3.2 supplies the result over the complex numbers; the scaffold states the exact split-characteristic-polynomial hypothesis and derives it from the published determinant interface and constant-coefficient identity. |
+| `thm-trace-is-sum-of-eigenvalues` | ai-altered | ai-altered | Pinkham 12.3.1 states the result over the complex numbers; the authored statement instead works over an arbitrary field under the exact split-characteristic-polynomial hypothesis, so Alpha C14 requires `ai-altered`. The proof compares the published trace interface with the extreme-coefficient identity. |
+| `thm-determinant-is-product-of-eigenvalues` | ai-altered | ai-altered | Pinkham 12.3.2 states the result over the complex numbers; the authored statement instead works over an arbitrary field under the exact split-characteristic-polynomial hypothesis, so Alpha C14 requires `ai-altered`. The proof compares the published determinant interface with the constant-coefficient identity. |
 | `thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `cor-a-simple-eigenvalue-has-one-dimensional-eigenspace` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `thm-products-ab-and-ba-have-the-same-characteristic-polynomial` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `def-polynomial-evaluation-at-an-endomorphism` | literature-derived | not-applicable | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
-| `thm-spectral-mapping-for-polynomials` | literature-derived | ai-altered | Pinkham 12.3.3 supplies spectral mapping; the scaffold records the stronger characteristic-polynomial identity under an explicit split hypothesis and proves it by invariant-eigenline induction using the local block-triangular interface. |
+| `thm-spectral-mapping-for-polynomials` | ai-altered | ai-altered | Pinkham 12.3.3 supplies spectral mapping at the eigenvalue level; the authored statement gives the stronger characteristic-polynomial identity with algebraic multiplicities under an explicit split hypothesis, so Alpha C14 requires `ai-altered`. The proof uses invariant-eigenline induction and the local block-triangular interface. |
 | `cor-characteristic-polynomial-evaluation-has-only-zero-eigenvalues` | literature-derived | ai-altered | Pinkham 12.3.4 supplies the corollary; the scaffold derives it transparently by applying spectral mapping to the characteristic polynomial. |
 | `thm-cayley-hamilton` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
@@ -353,7 +353,7 @@ No opened published dependency contains an unambiguous false load-bearing statem
 | `ex-sylvesters-criterion-for-a-three-by-three-matrix` | ai-generated | ai-generated | New non-load-bearing companion witness; all arithmetic is finite and must be checked explicitly at authoring. |
 | `cex-congruence-need-not-preserve-trace-or-determinant` | ai-generated | ai-generated | New non-load-bearing companion witness; all arithmetic is finite and must be checked explicitly at authoring. |
 
-Planned totals are 12 literature-derived / not-applicable, 53 literature-derived / ai-altered, 4 ai-altered / not-applicable, 6 ai-generated / ai-generated. No A-page Statement is AI-generated. The six AI-generated Statements are all checkable companion examples or counterexamples and, because B pages are leaves, none can become a dependency target.
+Final totals are 12 literature-derived / not-applicable, 50 literature-derived / ai-altered, 4 ai-altered / not-applicable, 3 ai-altered / ai-altered, and 6 ai-generated / ai-generated. No A-page Statement is AI-generated. The six AI-generated Statements are all checkable companion examples or counterexamples and, because B pages are leaves, none can become a dependency target.
 
 ## Generated-witness truth-risk obligations
 
@@ -366,24 +366,40 @@ Planned totals are 12 literature-derived / not-applicable, 53 literature-derived
 
 These items must receive `generation` metadata at authoring and remain non-load-bearing. The repository’s registered finite-smoke checks are graph/group checks and do not model any of these claims, so no misleading `finite_smoke` entry is selected.
 
-## Proof-contract authoring handoff
+## Step-5 authoring result
 
-At Step 5, replace each `scaffold_status` and `citation_plan` with exact source-section quotations and uses, partition each planned strategy into the actual numbered proof steps, and replace prospective boundary wording with step-anchored final evidence. The 59-item scope and contract-key set currently agree exactly. The highest-risk contracts are spectral mapping, Cayley-Hamilton, the infinite double-dual biconditional, transpose range equality, symmetric and alternating normal forms, Sylvester’s law, and Sylvester’s criterion.
+All 75 planned items and all four page files are authored on disk as `status: draft`; every item has `origin: session`. The per-page totals are 23 items on `eigenvalues-eigenvectors-and-the-characteristic-polynomial`, 7 on its B companion, 33 on `dual-spaces-bilinear-forms-and-inertia`, and 12 on its B companion. The batch contains 16 definitions and 59 proof-bearing items. Both A pages have two prose summary paragraphs and both B pages have frontmatter only.
 
-## Continuity checkpoint
+The final proof contract contains the same 59 proof-bearing ids. Every direct fact citation records the complete named source section, every citation records its actual numbered uses, every numbered step has one input-map row, and the boundary rows cite final step text rather than prospective instructions. The coverage artifact remains true of all 116 harvested headings. The six generated witnesses retain `generation` metadata and remain on B pages, so no generated Statement is a dependency target.
 
-Completed on disk: the 75-item manifest, 116-heading canonical harvest, and 59-contract proof map. Stable decisions: Pinkham section 12.3 is fully scaffolded; Pinkham 12.1.3 maps only to the block-triangular characteristic-polynomial item while Axler 5.11 supplies the distinct-eigenvalue independence item; the Stacks Project is a `monograph`; no split; Cayley-Hamilton belongs on order 86 and uses adjugate coefficient comparison; diagonalisation/minimal polynomial remain order 88; dual infinite-dimensional results state Choice; polarization and symmetric diagonalization require characteristic not 2; inertia is over the reals; inner products remain order 94; no cross-pair dependency.
+## Departures from the scaffolded strategies
 
-Final validation is complete. The plan-level validator cannot inspect the new item graph until the orchestrator splices these page lists into `plan-spec.json`, so I supplemented it with a batch-local closure, order, B-leaf, and proof-contract audit against the current plan and published library frontmatter.
+1. `prop-eigenvalue-iff-shift-is-not-invertible` expands the reverse implication with dimension equality and a direct proof that the inverse of a bijective linear map is linear. This closes the zero-dimensional case and avoids treating “bijective” as an uncited synonym for “invertible.”
+2. `thm-products-ab-and-ba-have-the-same-characteristic-polynomial` keeps the planned block-elimination argument but proves the needed block determinant identity directly from the Leibniz definition over $F[t]$. The published block-characteristic-polynomial lemma is stated for matrices over a field and does not itself license the intermediate determinant calculation over the polynomial ring.
+3. `fs-matrix-polynomial-substitution-is-a-ring-homomorphism` corrects the scaffold’s wording: coefficientwise substitution is well-defined as a function, but it is not multiplicative. The witness now shows $E((xI)B)=BA=0$ while $E(xI)E(B)=AB=B$.
+4. `thm-symmetric-bilinear-forms-have-an-orthogonal-basis` and `thm-alternating-forms-have-a-symplectic-normal-form` use strong induction on a proper complement rather than asserting exact dimension drops without a cited dimension-sum theorem. This is the same orthogonal/symplectic splitting strategy with a smaller, fully justified induction parameter.
+5. `lem-schur-complement-congruence-and-determinant` states and checks the zero-sized-block convention explicitly. This makes the title and product formula honest at the empty-block boundary instead of silently assuming both blocks have positive size.
+6. `thm-sylvesters-criterion-for-positive-definiteness` adds determinant multiplicativity and transpose-invariance as direct dependencies. They are needed to derive leading-minor positivity from a congruence rather than importing that determinant behavior without a fact.
+7. `ex-canonical-double-dual-map-for-polynomial-space-is-not-surjective` adds the dual-family and separation inputs needed to construct the promised functional outside the canonical image. The scaffold named the phenomenon but did not supply enough dependencies for the explicit witness.
+8. Several definition and short-corollary dependency lists were enlarged where the prose asserts existence, uniqueness, dimension equality, or invertibility: algebraic multiplicity adds the factor theorem; bilinear-form radicals add the finite dual-basis, rank-nullity, and invertible-matrix interfaces; definiteness records Sylvester’s law in `justified_by`; and the congruence-rank corollary adds the equal-dimension isomorphism criterion. These changes close the claims without changing their Statements.
 
-## Gate and consistency results
+All other proofs follow the scaffolded strategies. Precheck’s canonical stratification was adopted wherever it requested a repair; those changes only repartitioned or renumbered steps.
 
-- `node tools/validate-plan.mjs research/plan-spec.json`: passed — `OK — declared page order is acyclic and consistent; no item-level cycles, forward references, B-page dependencies, or unresolved ids among the 220 page(s) with item lists.`
-- `node tools/coverage-checklist.mjs research/frontier-12-batch-3.coverage.json`: passed — `coverage-checklist: 2 page(s), 116 harvested result(s), 0 error(s), 0 warning(s)`.
-- `node tools/content-policy.mjs research/frontier-12-batch-3.pages.json --manifest-only`: passed — `content-policy: 75 scoped item(s), 0 error(s), 0 warning(s)`.
-- Batch-local graph and contract audit: 4 pages, 75 items, 16 definitions, 59 proof-bearing items, 59 matching contracts, and no duplicate item id, missing contract, orphan contract, or missing §12.3 coverage/scope mapping.
-- `node tools/prosecheck.mjs research/frontier-12-batch-3.pages.json research/frontier-12-batch-3.notes.md research/frontier-12-batch-3.coverage.json research/frontier-12-batch-3.proof-contracts.json --warnings`: passed with 0 errors and 14 `count-in-prose` warnings, all caused by deliberate counts or page/order references in this ledger; it also reports no positional claim contradicting the spec.
+## Final gate results
 
-## Blockers and write boundary
+- `precheck`: 59 proof-bearing items checked, 59 passed, 0 failing.
+- `rendercheck`: 79 batch files checked; YAML, wikilinks, delimiters, display layout, and KaTeX all passed.
+- `prosecheck --warnings`: 4 page files checked, 0 errors, 0 warnings.
+- `citecheck`: 75 items scanned, passed.
+- `proof-contract --strict`: 59/59 contracts checked, 0 errors, 0 warnings.
+- `coverage-checklist`: 2 A pages and 116 harvested results checked, 0 errors, 0 warnings.
+- `content-policy`: 75 scoped items checked, 0 errors, 0 warnings.
+- `depcheck`: repository-wide pass; only pre-existing warnings were reported.
+- `extcheck`: repository-wide pass; only the expected published external-material warnings were reported.
+- `validate-plan`: passed for the spliced plan; no cycles, forward item dependencies, B-page dependencies, or unresolved ids.
 
-No mathematical or permission blocker is known. I edited only the four authorized batch-3 artifacts. I did not edit `plan-spec.json`, another batch’s files, `items/`, `library/`, or a normative document. I did not run `tools/gates.mjs`.
+## Honest closure and blockers
+
+No batch claim or proof remained unclosed, and no claim had to be narrowed. The false matrix-substitution item was corrected as described above, and the zero-dimensional, characteristic-two, singular, endpoint, nonempty-choice, and both-direction boundary obligations are explicit where they apply.
+
+The repository-wide `fwdcheck` is currently red only because three unrelated, concurrently authored items have undeclared forward links: `fs-every-closed-c1-field-on-a-connected-open-set-is-exact` links to `thm-path-connected-implies-connected`, while `thm-disc-area-is-pi-r-squared` and `thm-gregory-leibniz-series-for-pi-from-a-finite-remainder` link to `thm-newton-leibniz-with-interior-derivative`. No batch-3 item appears in any diagnostic, and I did not edit another author’s files. There is no permission or mathematical blocker within batch 3. I did not run `tools/gates.mjs`.

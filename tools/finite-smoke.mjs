@@ -122,6 +122,60 @@ function makeChecks() { return {
     }
     return { ok: true, summary: `checked all simple graphs and vertex subsets through ${max} vertices` };
   },
+  // Two poset checks, added for run frontier-12's category-theory pair. Every
+  // registered check before them was graph- or group-theoretic, so a level of
+  // algebra, analysis and category theory matched none and `finite-smoke`
+  // passed having executed nothing. A poset IS a category — one arrow per
+  // related pair — and in it a pullback/product is exactly a meet, so a finite
+  // poset is a real countermodel search for a limit claim, not a toy.
+  //
+  // Both confirm an EXISTENCE claim: the counterexample they back asserts that
+  // something can fail, so `ok: true` means the witness was verified to fail as
+  // claimed. Defaults are the witnesses the citing items actually construct, so
+  // `--self-test` exercises them with no parameters.
+  'monotone-map-need-not-preserve-meets': ({
+    // the diamond 0 < a,b < 1 (a,b incomparable), collapsed onto the 2-chain
+    domain_covers = [['0', 'a'], ['0', 'b'], ['a', '1'], ['b', '1']],
+    codomain_covers = [['0', '1']],
+    map = { 0: '0', a: '1', b: '1', 1: '1' },
+    pair = ['a', 'b'],
+  } = {}) => {
+    const P = poset(domain_covers), Q = poset(codomain_covers);
+    if (!P.ok) return { ok: false, summary: `domain is not a poset: ${P.why}` };
+    if (!Q.ok) return { ok: false, summary: `codomain is not a poset: ${Q.why}` };
+    for (const x of P.elements) if (!Q.elements.includes(map[x])) return { ok: false, summary: `map sends ${x} outside the codomain` };
+    for (const x of P.elements) for (const y of P.elements) {
+      if (P.le(x, y) && !Q.le(map[x], map[y])) return { ok: false, summary: `map is not monotone: ${x} <= ${y} but ${map[x]} !<= ${map[y]}` };
+    }
+    // In a poset category every arrow is monic, so "preserves monomorphisms" is
+    // automatic — which is exactly why the counterexample works.
+    const [a, b] = pair;
+    const below = meet(P, a, b), image = meet(Q, map[a], map[b]);
+    if (below === null) return { ok: false, summary: `${a} and ${b} have no meet in the domain` };
+    if (image === null) return { ok: false, summary: `their images have no meet in the codomain` };
+    if (map[below] === image) return { ok: false, summary: `the meet IS preserved: f(${a}^${b}) = ${map[below]} = ${image}` };
+    return { ok: true, summary: `f(${a}^${b}) = f(${below}) = ${map[below]} but f(${a})^f(${b}) = ${image}, so meets are not preserved while every arrow stays monic` };
+  },
+  'full-subposet-meet-differs-from-ambient': ({
+    // 0 < q < m < a,b in the ambient; the full subposet drops m
+    ambient_covers = [['0', 'q'], ['q', 'm'], ['m', 'a'], ['m', 'b']],
+    subset = ['0', 'q', 'a', 'b'],
+    pair = ['a', 'b'],
+  } = {}) => {
+    const P = poset(ambient_covers);
+    if (!P.ok) return { ok: false, summary: `ambient is not a poset: ${P.why}` };
+    for (const x of subset) if (!P.elements.includes(x)) return { ok: false, summary: `${x} is not in the ambient poset` };
+    // A FULL subcategory keeps every arrow between retained objects: the order
+    // is inherited, never re-declared. That is what makes the difference honest.
+    const S = { elements: subset, le: (x, y) => P.le(x, y) };
+    const [a, b] = pair;
+    const outer = meet(P, a, b), inner = meet(S, a, b);
+    if (outer === null) return { ok: false, summary: `${a} and ${b} have no meet in the ambient poset` };
+    if (inner === null) return { ok: false, summary: `${a} and ${b} have no meet in the full subposet` };
+    if (outer === inner) return { ok: false, summary: `both meets are ${outer}: the limit does NOT differ` };
+    if (subset.includes(outer)) return { ok: false, summary: `the ambient meet ${outer} is retained, so the subposet cannot differ for this reason` };
+    return { ok: true, summary: `ambient meet of ${a},${b} is ${outer}; the full subposet omits it, so its meet is ${inner} — the inclusion does not preserve this limit` };
+  },
   'cyclic-subgroup-lagrange': ({ max_modulus = 24 }) => {
     const max = boundedInteger(max_modulus, 24, 1, 200);
     for (let modulus = 1; modulus <= max; modulus += 1) {
@@ -137,6 +191,34 @@ function makeChecks() { return {
     return { ok: true, summary: `checked cyclic subgroups of Z/nZ through n = ${max}` };
   },
 }; }
+
+// A finite poset from its cover relations: reflexive-transitive closure, then
+// an antisymmetry check so a mistyped cover list is reported rather than
+// silently producing a preorder in which "the meet" is meaningless.
+function poset(covers) {
+  const elements = [...new Set(covers.flat())].sort();
+  const below = new Map(elements.map((x) => [x, new Set([x])]));
+  for (let changed = true; changed;) {
+    changed = false;
+    for (const [low, high] of covers) {
+      for (const x of below.get(low)) if (!below.get(high).has(x)) { below.get(high).add(x); changed = true; }
+    }
+  }
+  const le = (x, y) => below.get(y)?.has(x) ?? false;
+  for (const x of elements) for (const y of elements) {
+    if (x !== y && le(x, y) && le(y, x)) return { ok: false, why: `${x} and ${y} are mutually below each other` };
+  }
+  return { ok: true, elements, le };
+}
+
+// The meet of x and y: the greatest common lower bound, or null when the lower
+// bounds have no greatest element. Returning null rather than guessing is what
+// lets a check report "no meet exists" as a distinct outcome from "meets differ".
+function meet(P, x, y) {
+  const lower = P.elements.filter((z) => P.le(z, x) && P.le(z, y));
+  const greatest = lower.filter((z) => lower.every((w) => P.le(w, z)));
+  return greatest.length === 1 ? greatest[0] : null;
+}
 
 function graphs(vertices) {
   const pairs = [];

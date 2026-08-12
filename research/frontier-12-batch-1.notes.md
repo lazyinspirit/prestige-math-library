@@ -1,8 +1,8 @@
-# Frontier 12, batch 1 — Beta scaffold notes
+# Frontier 12, batch 1: Beta scaffold and authoring notes
 
 Run: `frontier-12`  
 Batch: 1, field theory  
-Scope: steps 1–2 only
+Scope: steps 1–2 scaffold, step 5 authoring
 
 ## Result and split decision
 
@@ -48,13 +48,13 @@ At step 9, `cex-ordered-field-not-archimedean` and `ex-rational-function-field-o
 
 ## Canonical-coverage harvest
 
-The gated artifact is `research/frontier-12-batch-1.coverage.json`. Its 96 harvested entries break down as follows:
+The gated artifact is `research/frontier-12-batch-1.coverage.json`. Its 97 harvested entries break down as follows:
 
 | A page | harvested | included | inline | already published | deferred | out of scope |
 |---|---:|---:|---:|---:|---:|---:|
-| field of fractions and localisation | 51 | 36 | 2 | 0 | 11 | 2 |
+| field of fractions and localisation | 52 | 37 | 2 | 0 | 11 | 2 |
 | splitting fields | 45 | 25 | 3 | 2 | 14 | 1 |
-| **total** | **96** | **61** | **5** | **2** | **25** | **3** |
+| **total** | **97** | **62** | **5** | **2** | **25** | **3** |
 
 “Included” counts harvested headings and enumerated subparts, not distinct scaffold items; multiple sources often back the same item. The 28 declines most likely to be challenged are:
 
@@ -75,7 +75,8 @@ Exact ranges and every source heading are enumerated in the coverage JSON. The s
 
 | key | source and exact range read | use | licensing note |
 |---|---|---|---|
-| ST-LOC | The Stacks Project, §10.9, Definition 10.9.1 through Lemma 10.9.16 inclusive, <https://stacks.math.columbia.edu/tag/00CM> | fraction relation, universal property, zero criterion, iteration, quotient compatibility, and the ideal extension/contraction statement of Lemma 10.9.16; also the boundary between ring and module localization. The prime-ideal restriction in the scaffolded correspondence theorem is proved locally and is not attributed to Lemma 10.9.16. | Stacks contributions are GNU FDL. No text is copied; titles and strategies are original paraphrases with source attribution retained here. |
+| ST-LOC | The Stacks Project, §10.9, Definition 10.9.1 through Lemma 10.9.16 inclusive, <https://stacks.math.columbia.edu/tag/00CM> | fraction relation, universal property, zero criterion, iteration, quotient compatibility, and the ideal extension/contraction statement of Lemma 10.9.16; also the boundary between ring and module localization. | Stacks contributions are GNU FDL. No text is copied; titles and strategies are original paraphrases with source attribution retained here. |
+| ST-SPEC | The Stacks Project, Lemma 10.17.5, <https://stacks.math.columbia.edu/tag/00E3> | exact prime-ideal correspondence for localisation, including disjointness from the multiplicative set and the inverse $\mathfrak p\mapsto S^{-1}\mathfrak p$ | Stacks contributions are GNU FDL. The item cites the exact result and gives its own proof. |
 | CR-13 | The CRing Project, Chapter 13 §13.1, PDF pp. 121–125, section opening through Remark 13.1.17, <https://math.colorado.edu/topology/cringproject.pdf> | a second independent construction, local rings, $R_{\mathfrak p}$, $\mathbb Z_{(p)}$, and idempotents | The relevant commutative-algebra part is GNU FDL 1.3-or-later under the PDF’s dual-license notice. No prose is copied. |
 | JU-21 | Thomas W. Judson, *Abstract Algebra: Theory and Applications*, §21.2 opening through Corollary 21.2.8 in the cited HTML edition, <https://judsonbooks.org/aata-files/aata-html/fields-section-splitting-fields.html> | definition, Examples 21.2.1–2, existence, extension of isomorphisms, and uniqueness | The HTML edition includes the GNU Free Documentation License. No prose is copied. |
 | MI-2 | J. S. Milne, *Fields and Galois Theory*, v5.10, Chapter 2, PDF pp. 27–31, “Splitting fields” through Proposition 2.17, <https://www.jmilne.org/math/CourseNotes/FT.pdf> | generated-root minimality, examples, factorial bound, root adjunction, noncanonicity, and the exact boundary with embedding counts | Milne distributes version 5.x under CC BY-NC-SA 4.0. No prose is copied. |
@@ -214,7 +215,7 @@ Abbreviations in the rationale column refer to the source ledger above. `literat
 | `thm-isomorphisms-extend-to-splitting-fields` | literature-derived | ai-altered | JU-21 Theorem 21.2.6 in the cited HTML edition; induction and generated-field endpoint tracked explicitly |
 | `cor-splitting-fields-are-unique-up-to-base-isomorphism` | literature-derived | ai-altered | JU-21 Corollary 21.2.8 in the cited HTML edition and MI-2 Corollary 2.13; noncanonicity stated |
 | `thm-factorial-coordinate-bound-for-a-splitting-field` | literature-derived | ai-altered | MI-2 Proposition 2.7; recast as an explicit spanning family to avoid unavailable dimension machinery |
-| `prop-splitting-field-of-x-n-minus-a` | literature-derived | ai-altered | MI-2 Example 2.10; includes the separate `a=0` boundary |
+| `prop-splitting-field-of-x-n-minus-a` | literature-derived | ai-altered | MI-2 Example 2.10; isolates the nonzero-root hypothesis and proves both directions of the root description |
 | `prop-endomorphisms-of-a-splitting-field-permute-its-roots` | literature-derived | ai-altered | standard consequence of root transport and root-generated minimality |
 | `def-normal-algebraic-extension` | literature-derived | not-applicable | ST-NOR Definition 9.15.1, matched to the published minimal-polynomial interface |
 | `prop-normality-descends-to-intermediate-fields` | literature-derived | ai-altered | ST-NOR Lemma 9.15.2 (tag 09HN); proof uses minimal-polynomial divisibility and the published UFD interface |
@@ -359,9 +360,53 @@ The machine splice is exactly `research/frontier-12-batch-1.pages.json`. For the
 - **C2:** changed Milne Example 2.8 to a deferred tracked gap because no cyclotomic/Galois page exists in `plan-spec.json`.
 - **C3:** changed Judson locators and provenance references to the numbering displayed by the cited HTML edition: Examples 21.2.1–2, Theorem 21.2.3, Lemma 21.2.4, Theorem 21.2.6, and Corollary 21.2.8.
 - **C4:** extended the Milne locator through PDF p. 31, where Proposition 2.17 appears.
-- **C5:** narrowed the Stacks Lemma 10.9.16 coverage row to its ideal extension/contraction statement. The scaffold item’s prime clause remains, but its proof is local and is not claimed to come from that row.
+- **C5:** narrowed the Stacks Lemma 10.9.16 coverage row to ideal extension/contraction, then added the exact reader-visible source for the prime clause, Stacks Lemma 10.17.5 (tag 00E3).
 - **C10:** all Stacks Project sources in this batch are classified as `monograph`.
 
 ## Blockers
 
-None. Every required source and every published dependency was available and opened. Both prescribed validators passed without escalation: the coverage checklist reported 96 harvested results with zero errors and zero warnings, and the plan validator ended `OK`. No file outside the four authorized batch outputs was edited in this fix round.
+None. Every required source and every published dependency was available and opened. In the scaffold fix round, the coverage checklist reported 97 harvested results with zero errors and zero warnings, and the plan validator ended `OK`.
+
+## Step-5 authoring record
+
+All 56 planned items and all four pages are authored. Every item has `status: draft`, `origin: session`, and both provenance components; the seven definitions use `proof: not-applicable`, while all 49 proof-bearing items record `verification.precheck: pass`. The B pages contain frontmatter only and remain leaves.
+
+| page | authored items |
+|---|---:|
+| `the-field-of-fractions-and-localisation` | 22 |
+| `the-field-of-fractions-and-localisation-examples` | 8 |
+| `splitting-fields` | 18 |
+| `splitting-fields-examples` | 8 |
+
+The written proofs follow the scaffolded strategies except for the following explicit corrections or strengthened closures:
+
+- `prop-localisation-zero-equality-and-kernel-criteria` states injectivity by trivial annihilators and, for a nonzero ring, by `0\notin S` plus absence of zero divisors in `S`. The scaffold shorthand “every member is a non-zero-divisor” was false under the library convention that zero itself is not called a zero divisor.
+- `prop-iterated-localisation` uses the reviewed Stacks form with multiplicative subsets `S,T\subseteq R`, the image of `T` after the first localisation, and the set generated by `S\cup T`. This replaces an overgeneral intermediate draft involving an arbitrary denominator set of `S^{-1}R`.
+- `lem-adjoining-one-root-reduces-the-unsplit-degree` now takes the first field to be exactly `K=F(\alpha)`, rather than an unspecified extension containing the root. This is needed for the generated-field equality in the existence induction.
+- `thm-factorial-coordinate-bound-for-a-splitting-field` runs its own strong induction and constructs the root-adjunction chain. The existence theorem's published Statement does not expose the internal chain needed to obtain the explicit monomial coordinates.
+- `prop-algebraic-splitting-extensions-are-normal` first chooses a splitting field of the minimal polynomial over `E`, then chooses an arbitrary conjugate there. This makes the nonempty choice and the common ambient field explicit before applying the isomorphism-extension theorem.
+- `ex-splitting-field-of-x-cubed-minus-two` transfers the factorial root-monomial span to the concrete splitting field through base-field uniqueness. The factorial theorem asserts existence of such a splitting field, not the bound for a previously chosen copy without that transfer.
+- The concrete localisations in `ex-inverting-six-in-the-integers`, `ex-the-local-ring-z-at-p-and-its-residue-field`, and `ex-the-local-ring-of-polynomials-at-x` prove their maps into the ambient fraction fields are injective by the universal property and zero criterion. The scaffold only named the ambient embeddings.
+- The finite-family, isomorphism-extension, and normality-divisor proofs state the published UFD theorem itself as a Fact and derive the “divisors of split polynomials split” consequence in their proof steps. This preserves citation fidelity instead of presenting a derived consequence as though it were the cited theorem.
+- `prop-splitting-field-of-x-n-minus-a` uses group powers and their laws rather than the real-number integer-power definition, whose domain was wrong for an arbitrary field.
+- `prop-endomorphisms-of-a-splitting-field-permute-its-roots` adds the polynomial root bound and the finite-self-injection theorem before concluding that the root-set injection is a permutation.
+- `ex-repeated-root-polynomial-over-f-two` uses the published repeated-root definition for divisibility by a square and the UFD theorem for the exact exponent-two claim; the dependency does not itself define root multiplicity as a greatest exponent.
+- `fs-isomorphism-between-splitting-fields-is-unique` establishes the nonidentity automorphism through the simple-root-adjunction theorem after proving `x^2-2` irreducible by Eisenstein. Existence up to isomorphism alone does not produce the second automorphism.
+- The prime-ideal correspondence cites the exact Stacks Lemma 10.17.5 source (tag `00E3`) rather than attributing that clause to the ideal-extension lemma in the localisation section.
+
+All other written proofs retain their scaffolded strategy. Additional dependencies introduced during authoring are exact closure for an invoked definition or theorem, not changes of route.
+
+### Step-5 gate results
+
+| check | result |
+|---|---|
+| `precheck.mts` | 49/49 proof-bearing items clean |
+| `rendercheck.mjs` | 60/60 item and page files clean |
+| `prosecheck.mjs` | 4/4 page files, 0 errors, 0 warnings |
+| `citecheck.mjs` | 56/56 item files clean |
+| `proof-contract.mjs --strict` | 49/49 contracts, 0 errors, 0 warnings |
+| `coverage-checklist.mjs` | 2 A pages, 97 harvested results, 0 errors, 0 warnings |
+| `content-policy.mjs` | 56 scoped items, 0 errors, 0 warnings |
+| `validate-plan.mjs` | `OK`; no cycles, forward references, B-page dependencies, or unresolved ids in pages with item lists |
+
+Every required claim closed after the corrections above. Nothing was left as an unproved strengthening, and there is no authoring blocker. No item was published, committed, or given audit metadata.

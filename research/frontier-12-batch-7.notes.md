@@ -1,7 +1,7 @@
-# Frontier 12, batch 7 — Beta scaffold notes
+# Frontier 12, batch 7 — Beta scaffold and authoring notes
 
 Batch: `limits-and-colimits` / `limits-and-colimits-examples` (orders 363–364).
-Role: Beta, steps 1–2. No item authoring has begun.
+Role: Beta, steps 1–2 and 5. Step-5 authoring is complete.
 
 ## Step-2 disposition
 
@@ -59,11 +59,47 @@ These declines are topical or foundational boundaries, not missing local lemmas.
 - **Functor categories and Yoneda.** Under the published set-based convention, `[A,C]` is formed only for small `A`, and the Yoneda functor into a presheaf category is formed only for a small source. The pointwise and Yoneda results carry those hypotheses explicitly.
 - **Choice of limit functor.** Existence of a limit for each diagram does not itself provide a selected representative for each diagram. The functoriality theorem assumes chosen limits, and a separate remark records the simultaneous-choice issue.
 
+## Step-5 authoring report
+
+Authored 63 draft, session-origin items and both draft page compositions:
+
+- `limits-and-colimits`: 46 A-page items, of which 34 are proof-bearing and 12 are definitions or a remark.
+- `limits-and-colimits-examples`: 17 B-page leaf items, all proof-bearing. The B page has no summary body.
+
+The proof contracts are synchronized to the authored text: all 51 proof-bearing items have exact source-section quotations for every cited fact, one substantive derivation row for every numbered step, and all eight boundary dispositions. The two generated finite-poset counterexamples also record their explicit meet computations in `finite_smoke` rows. No generated Statement or Construction is a dependency target.
+
+### Departures from the scaffolded design
+
+1. The scaffolded title and strategy for `thm-pullback-and-pushout-pasting` asserted that, with the left square fixed as a pullback, the right square is a pullback if and only if the outer rectangle is. The reverse implication is not valid: a test cone for the right square supplies no map to the lower-left object with which to invoke the outer rectangle. The authored theorem states and proves the valid laws: two pullback squares paste, and a pullback right square cancels from a pullback outer rectangle; it then dualizes exactly to pushouts. The title was narrowed accordingly. This is the only planned proof strategy that could not close honestly.
+2. `thm-finite-limit-and-colimit-criteria` now gives the complete Stacks formulation for nonempty finite limits: binary products plus equalizers are equivalent to binary products plus pullbacks. The connected finite clause is proved by a rooted spanning-tree construction followed by equalizers for the remaining arrows, replacing the scaffold's compressed “identify what disappears” wording with an explicit construction.
+3. The scaffold notes proposed `ai-generated` Statement provenance for `fs-preserving-binary-products-and-equalizers-does-not-imply-continuity`. SCHEMA and `content-policy.mjs` do not permit an AI-generated false-statement component. The authored false claim is the standard source-backed finite-limit misconception, so its Statement is `ai-altered`; only the constant-empty refutation is `ai-generated`.
+4. The title of `def-filtered-category-and-filtered-colimit` was narrowed from the scaffold wording “including ... eventual equality.” The definition contains filteredness and nonemptiness; eventual equality is proved, rather than merely named, in the immediately following lemma.
+
+Other authoring clarifications remain within the scaffolded strategy: local smallness is explicit for representables, Choice is explicit in the final-functor theorem, ordinary creation is distinguished from strict on-the-nose creation, and the false-statement about binary products and equalizers is refuted already at the finite-limit level before noting failure of continuity.
+
+### Truth-risk checks
+
+- In the diamond-poset functor counterexample, $a\wedge b=0$ in the source, while the image cospan has pullback $1$ in the two-element chain; the comparison $0\to1$ is not invertible. Every poset arrow is monic.
+- In the full-subposet counterexample, $a\wedge b=m$ in the ambient poset and $a\wedge b=q$ after $m$ is omitted; the comparison $q\to m$ is not invertible.
+- The constant functor $\mathbf 1\to\mathbf{Set}$ at $\varnothing$ preserves the sole binary product and every equalizer but not the terminal object, so it refutes the claimed finite-limit criterion without a hidden nonempty case.
+
+### Verification
+
+- `precheck`: 51/51 proof-bearing items pass after adopting canonical stratification.
+- `rendercheck`: 65/65 item and page files pass real KaTeX and YAML rendering.
+- `prosecheck`: 2/2 page files pass with no errors or warnings.
+- `citecheck`: 63/63 item files pass.
+- `proof-contract --strict`: 51/51 contracts pass with 0 errors and 0 warnings.
+- `content-policy`: 63/63 scoped items pass with 0 errors and 0 warnings.
+- `coverage-checklist`: 135 harvested results pass with 0 errors and 0 warnings.
+
+Nothing else failed to close honestly. There is no blocker, and no app-repository or presentation file was touched.
+
 ## Proof-risk ledger
 
 - Every universal property must prove both existence and uniqueness. This applies especially to Set colimits, free/quotient constructions in Grp and R-Mod, pointwise functor-category limits, and final-functor reindexing.
 - The product/equalizer construction uses one product indexed by the objects and another indexed by the arrows of a small category. The empty index category is checked explicitly.
-- Pullback pasting proves both cancellation directions under the correctly fixed adjacent square. The authored diagram must name all six objects, every boundary arrow, and the two commuting inner squares.
+- Pullback pasting proves composition and the valid cancellation law with the right square fixed, then proves the exact pushout dual. The authored diagram names all six objects, every boundary arrow, and the two commuting inner squares.
 - The filtered-colimit proof first establishes eventual equality as a separate lemma; finite simultaneous choices are then moved to a common stage, and the empty finite limit is checked using nonemptiness of the filtered category.
 - The final-functor proof states its Choice use. Connectedness proves independence of a selected comma object; nonemptiness alone does not.
 - The pointwise theorem is formulated with chosen target limits or colimits, small source and index categories, componentwise functoriality, naturality of the legs, and uniqueness of the mediating natural transformation.
@@ -73,13 +109,13 @@ These declines are topical or foundational boundaries, not missing local lemmas.
 
 ## Generated-statement truth-risk obligations
 
-The following non-load-bearing B-page claims are expected to use `generation.type: example` or `generation.type: direct-corollary` as appropriate. Nothing depends on them.
+The two generated non-load-bearing B-page counterexamples use `generation.role: counterexample`. The finite-limit false statement has an `ai-altered` source-backed Statement and an `ai-generated` refutation. Nothing depends on any of them.
 
 - `cex-a-functor-preserving-monomorphisms-but-not-pullbacks`: verify all order relations in the four-object source poset and the two-object target chain; compute the meet of `a,b` before and after applying the monotone map; check that every poset arrow is monic.
 - `cex-a-full-subcategory-limit-can-differ-from-ambient-limit`: list every lower bound of `a,b` in the ambient poset and in the full subposet, so the two greatest lower bounds are visibly `m` and `q`.
 - `fs-preserving-binary-products-and-equalizers-does-not-imply-continuity`: verify the constant-empty functor on the terminal category preserves the source's binary product and equalizer cones but sends its terminal object to a nonterminal set.
 
-All other planned statements are literature-derived or minimally altered from the enumerated sources. Generated claims remain leaves and therefore cannot become proof dependencies.
+All other planned statements are literature-derived or minimally altered from the enumerated sources. The generated counterexample claims remain leaves and therefore cannot become proof dependencies.
 
 ## Prose-scaffold amendments for step 4
 
@@ -227,7 +263,7 @@ The source names below refer to the exact URLs in the source ledger. `ai-altered
 | `cex-a-full-subcategory-limit-can-differ-from-ambient-limit` | `ai-generated` | `ai-generated` | Checkable finite witness designed for this companion; the truth-risk worksheet above is mandatory, and the item remains a non-load-bearing leaf. |
 | `cex-filtered-colimits-need-not-commute-with-infinite-products-in-set` | `literature-derived` | `ai-altered` | Stacks Project result or construction enumerated in the coverage receipt; proof is adapted to the published quotient/set dependencies and house notation. |
 | `fs-not-every-category-has-all-small-limits` | `literature-derived` | `ai-altered` | Harvard course-note result enumerated in the coverage receipt, with nLab used only to check the final/cofinal naming convention; proof is locally expanded. |
-| `fs-preserving-binary-products-and-equalizers-does-not-imply-continuity` | `ai-generated` | `ai-generated` | Checkable finite witness designed for this companion; the truth-risk worksheet above is mandatory, and the item remains a non-load-bearing leaf. |
+| `fs-preserving-binary-products-and-equalizers-does-not-imply-continuity` | `ai-altered` | `ai-generated` | The false claim is the source-backed omission of the nullary-product hypothesis from the finite-limit criterion; the constant-empty refutation is generated and remains a non-load-bearing leaf. |
 | `fs-the-underlying-set-functor-on-top-does-not-preserve-limits` | `literature-derived` | `ai-altered` | Riehl Proposition 3.6.2/Example 3.6.3 or its explicit specialization, checked against the published initial/final and subspace topology items. |
 | `fs-colimits-in-grp-are-computed-on-underlying-sets` | `literature-derived` | `ai-altered` | Standard algebraic specialization supported by Riehl/Leinster and the published free-object, normal/submodule-closure, and quotient universal properties; proof is locally expanded. |
 | `ex-the-empty-set-is-the-product-of-the-large-family-of-all-sets` | `literature-derived` | `ai-altered` | Riehl §3.7 result or size convention, checked against the published cardinality, Choice, and Cantor items; the adapted statement exposes the repository's Choice convention. |

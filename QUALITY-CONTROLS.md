@@ -83,6 +83,23 @@ the item connecting the test to its claim. Available checks are:
 - `forest-edge-component-count`
 - `induced-complement-commutes`
 - `cyclic-subgroup-lagrange`
+- `monotone-map-need-not-preserve-meets`
+- `full-subposet-meet-differs-from-ambient`
+
+The last two were added on run `frontier-12`. Until then every registered check
+was graph- or group-theoretic, so a level of algebra, analysis and category
+theory matched none and the gate reported `0 error(s), 0 check(s)` — green,
+having executed nothing. **A green `finite-smoke` is not evidence the gate ran;
+read the check count.**
+
+They work because a poset **is** a category, with one arrow per related pair, and
+in it a product or pullback is exactly a meet — so a finite poset is a genuine
+bounded countermodel search for a limit claim rather than a toy. Both back an
+*existence* counterexample ("this can fail"), so `ok` means the witness was
+verified to fail as claimed; each also refuses the degenerate readings, reporting
+"no meet exists" and "the meet IS preserved" as distinct outcomes. Their
+parameters default to the witnesses the citing items construct, so `--self-test`
+exercises them with no arguments.
 
 The tool enumerates small finite models only. Passing is **never** proof of the
 general result; failing supplies a concrete countermodel or exposes an
