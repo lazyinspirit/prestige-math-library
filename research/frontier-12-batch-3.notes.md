@@ -2,11 +2,11 @@
 
 ## Batch result
 
-This scaffold contains 71 items: 19 on `eigenvalues-eigenvectors-and-the-characteristic-polynomial`, 7 on its B page, 33 on `dual-spaces-bilinear-forms-and-inertia`, and 12 on its B page. Both A pages are below the owner’s 60-item ceiling, so **no page split is proposed**.
+This scaffold contains 75 items: 23 on `eigenvalues-eigenvectors-and-the-characteristic-polynomial`, 7 on its B page, 33 on `dual-spaces-bilinear-forms-and-inertia`, and 12 on its B page. Both A pages are below the owner’s 60-item ceiling, so **no page split is proposed**.
 
-The canonical harvest records 110 source or canonical-result headings: 72 `included`, 26 `inline`, 6 `already-published`, 4 `deferred`, and 2 `out-of-scope`. Thus 104 headings are retained in the batch or already on the published spine and 6 are declined. Repeated headings from independent sources are deliberately counted separately.
+The canonical harvest records 116 source or canonical-result headings: 78 `included`, 26 `inline`, 6 `already-published`, 4 `deferred`, and 2 `out-of-scope`. Thus 110 headings are retained in the batch or already on the published spine and 6 are declined. Repeated headings from independent sources are deliberately counted separately.
 
-The proof-contract artifact begins all 55 proof-bearing contracts. Each has a citation plan, a proof-strategy obligation, all eight boundary dispositions, and no inapplicable registered finite-smoke test. Exact quoted citations and the final numbered-step partition remain Step-5 synchronization work.
+The proof-contract artifact begins all 59 proof-bearing contracts. Each has a citation plan, a proof-strategy obligation, all eight boundary dispositions, and no inapplicable registered finite-smoke test. Exact quoted citations and the final numbered-step partition remain Step-5 synchronization work.
 
 ## Proposed A-page summaries
 
@@ -14,7 +14,7 @@ The proof-contract artifact begins all 55 proof-bearing contracts. Each has a ci
 
 Eigenvectors turn an endomorphism into scalar multiplication on distinguished directions, while eigenspaces gather all directions belonging to one eigenvalue. This page relates eigenvalues to singular shifts, proves independence for distinct eigenvalues, and defines the characteristic polynomial for matrices and operators, including the zero-dimensional convention. Similarity invariance makes the operator polynomial basis-independent, and its roots recover the spectrum over the base field.
 
-The page distinguishes algebraic from geometric multiplicity, proves the latter cannot exceed the former, identifies trace and determinant among the characteristic coefficients, and proves that AB and BA have the same characteristic polynomial. It closes with polynomial evaluation at an endomorphism and a coefficient-comparison proof of Cayley-Hamilton from the adjugate identity. The companion page contrasts base fields and repeated-root eigenspaces and isolates the invalid matrix-substitution pseudo-proof.
+The page distinguishes algebraic from geometric multiplicity and proves the latter cannot exceed the former. When the characteristic polynomial splits, its coefficients identify trace and determinant as the sum and product of the eigenvalues counted with multiplicity, while spectral mapping computes the full characteristic polynomial of $p(T)$. Polynomial evaluation then leads to a coefficient-comparison proof of Cayley-Hamilton from the adjugate identity. The companion page contrasts base fields and repeated-root eigenspaces and isolates the invalid matrix-substitution pseudo-proof.
 
 ### `dual-spaces-bilinear-forms-and-inertia`
 
@@ -24,7 +24,7 @@ Bilinear forms are then represented by matrices and basis change becomes congrue
 
 ## Per-page item lists
 
-### `eigenvalues-eigenvectors-and-the-characteristic-polynomial` — 19 items
+### `eigenvalues-eigenvectors-and-the-characteristic-polynomial` — 23 items
 
 | # | id | kind | title |
 |---:|---|---|---|
@@ -41,12 +41,16 @@ Bilinear forms are then represented by matrices and basis change becomes congrue
 | 11 | `def-algebraically-closed-field` | definition | An algebraically closed field: every nonconstant polynomial has a root in the field |
 | 12 | `cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue` | corollary | Every endomorphism of a nonzero finite-dimensional vector space over an algebraically closed field has an eigenvalue |
 | 13 | `def-algebraic-and-geometric-multiplicity-of-an-eigenvalue` | definition | Algebraic multiplicity as the exponent of $x-\lambda$ in $\chi_T$, and geometric multiplicity as $\dim E_\lambda(T)$ |
-| 14 | `thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity` | theorem | The geometric multiplicity of an eigenvalue does not exceed its algebraic multiplicity |
-| 15 | `cor-a-simple-eigenvalue-has-one-dimensional-eigenspace` | corollary | An eigenvalue of algebraic multiplicity one has a one-dimensional eigenspace |
-| 16 | `thm-products-ab-and-ba-have-the-same-characteristic-polynomial` | theorem | For $A,B\in M_n(F)$, the products $AB$ and $BA$ have the same characteristic polynomial |
-| 17 | `def-polynomial-evaluation-at-an-endomorphism` | definition | Polynomial evaluation at an endomorphism: $p(T)=\sum_k a_kT^k$ |
-| 18 | `thm-cayley-hamilton` | theorem | Cayley-Hamilton: every finite-dimensional endomorphism satisfies its characteristic polynomial, $\chi_T(T)=0$ |
-| 19 | `cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator` | corollary | The inverse of an invertible finite-dimensional endomorphism is a polynomial in that endomorphism |
+| 14 | `thm-trace-is-sum-of-eigenvalues` | theorem | If $\chi_T(x)=\prod_{i<n}(x-\lambda_i)$ in $F[x]$, then $\operatorname{tr}(T)=\sum_{i<n}\lambda_i$: trace is the sum of the eigenvalues counted with algebraic multiplicity |
+| 15 | `thm-determinant-is-product-of-eigenvalues` | theorem | If $\chi_T(x)=\prod_{i<n}(x-\lambda_i)$ in $F[x]$, then $\det(T)=\prod_{i<n}\lambda_i$: determinant is the product of the eigenvalues counted with algebraic multiplicity |
+| 16 | `thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity` | theorem | The geometric multiplicity of an eigenvalue does not exceed its algebraic multiplicity |
+| 17 | `cor-a-simple-eigenvalue-has-one-dimensional-eigenspace` | corollary | An eigenvalue of algebraic multiplicity one has a one-dimensional eigenspace |
+| 18 | `thm-products-ab-and-ba-have-the-same-characteristic-polynomial` | theorem | For $A,B\in M_n(F)$, the products $AB$ and $BA$ have the same characteristic polynomial |
+| 19 | `def-polynomial-evaluation-at-an-endomorphism` | definition | Polynomial evaluation at an endomorphism: $p(T)=\sum_k a_kT^k$ |
+| 20 | `thm-spectral-mapping-for-polynomials` | theorem | If $\chi_T(x)=\prod_{i<n}(x-\lambda_i)$ in $F[x]$, then $\chi_{p(T)}(y)=\prod_{i<n}(y-p(\lambda_i))$ for every $p\in F[x]$: the eigenvalues of $p(T)$ are $p(\lambda_i)$, counted with algebraic multiplicity |
+| 21 | `cor-characteristic-polynomial-evaluation-has-only-zero-eigenvalues` | corollary | If $\chi_T$ splits over $F$, every eigenvalue of $\chi_T(T)$ is $0$ |
+| 22 | `thm-cayley-hamilton` | theorem | Cayley-Hamilton: every finite-dimensional endomorphism satisfies its characteristic polynomial, $\chi_T(T)=0$ |
+| 23 | `cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator` | corollary | The inverse of an invertible finite-dimensional endomorphism is a polynomial in that endomorphism |
 
 ### `eigenvalues-eigenvectors-and-the-characteristic-polynomial-examples` — 7 items
 
@@ -124,9 +128,9 @@ Bilinear forms are then represented by matrices and basis change becomes congrue
 | 84 | diagonalisation-and-the-minimal-polynomial | diagonalisable, the minimal polynomial as the monic generator of the annihilator ideal, mu divides chi, Cayley-Hamilton, diagonalisable iff mu splits with distinct roots, primary decomposition |
 ```
 
-with the same rows after adding **Cayley-Hamilton by the adjugate/coefficient-comparison proof** and **polynomial evaluation at an endomorphism** to the first row, and deleting **Cayley-Hamilton** from the second. The dispatch expressly moves this theorem to order 86 in the current plan; leaving both prose rows unchanged would assign one theorem to two pages.
+with the same rows after adding **trace and determinant as the sum and product of the eigenvalues when the characteristic polynomial splits**, **polynomial spectral mapping and its zero-spectrum corollary**, **Cayley-Hamilton by the adjugate/coefficient-comparison proof**, and **polynomial evaluation at an endomorphism** to the first row, and deleting **Cayley-Hamilton** from the second. The dispatch expressly moves this theorem to order 86 in the current plan; leaving both prose rows unchanged would assign one theorem to two pages.
 
-2. In `research/plan-algebra-track.md`, append to the LA-8 A paragraph: “Polynomial evaluation at an endomorphism; Cayley-Hamilton by the adjugate identity over F[x], with the zero-dimensional case stated separately; the inverse of an invertible endomorphism is a polynomial in it.” Append to its B paragraph: “the false statement that substituting A for x is a ring homomorphism on matrix-coefficient polynomials.” This makes the dispatch’s new scope applyable rather than implicit.
+2. In `research/plan-algebra-track.md`, append to the LA-8 A paragraph: “When the characteristic polynomial splits, trace and determinant are the sum and product of the eigenvalues counted with multiplicity; polynomial spectral mapping and its zero-spectrum corollary; polynomial evaluation at an endomorphism; Cayley-Hamilton by the adjugate identity over F[x], with the zero-dimensional case stated separately; the inverse of an invertible endomorphism is a polynomial in it.” Append to its B paragraph: “the false statement that substituting A for x is a ring homomorphism on matrix-coefficient polynomials.” This makes the dispatch’s new scope applyable rather than implicit.
 
 3. In the same file, change the heading `Diagonalisation, the Minimal Polynomial and Cayley-Hamilton` to `Diagonalisation and the Minimal Polynomial`; delete the standalone `**Cayley-Hamilton**;` from its A paragraph; and replace its trap paragraph with: “Cayley-Hamilton is already proved on LA-8. This page may use it to derive minimal-polynomial consequences but must not duplicate its theorem or proof.” The order-88 page remains otherwise untouched and unscaffolded here.
 
@@ -137,6 +141,7 @@ No edit to `plan-spec.json` is proposed by this Beta. The orchestrator must reco
 ## Scope, fields, and conventions
 
 - Characteristic polynomials use `det(xI-A)`, not `det(A-xI)`. The matrix definition assigns the unique 0-by-0 matrix the polynomial 1 because the published matrix determinant starts at positive size. This closes the zero-dimensional operator, spectrum, Cayley-Hamilton, and inverse-polynomial boundaries locally.
+- The trace-sum, determinant-product, Spectral Mapping, and zero-spectrum results state the factorisation hypothesis $\chi_T(x)=\prod_{i<n}(x-\lambda_i)$ explicitly. They therefore work over any base field in which the characteristic polynomial splits, without importing algebraic closure or the later general triangularisation theorem; repeated roots and repeated values after applying $p$ are counted with algebraic multiplicity.
 - “Algebraically closed” is defined for a general field, but the page does not assert that the complex numbers are algebraically closed. That result remains at order 125. A nonzero finite-dimensional operator gets an eigenvalue only under the algebraically-closed-field hypothesis.
 - Diagonalisation and the minimal polynomial remain on order 88. They are not defined, cited forward, or used here.
 - The infinite-dimensional dual and double-dual results use Hamel bases and therefore state the Choice cost inherited from the published basis-extension theorem.
@@ -153,7 +158,9 @@ No edit to `plan-spec.json` is proposed by this Beta. The orchestrator must reco
 The proof-decomposition pass identified these substantive chains:
 
 - Geometric versus algebraic multiplicity uses the earlier block-triangular characteristic-polynomial lemma.
+- Trace and determinant as eigenvalue sum and product compare the $x^{n-1}$ and constant coefficients of the split characteristic polynomial with the already scaffolded extreme-coefficient lemma, including the empty sum and product in dimension zero.
 - The AB/BA theorem uses explicit determinant-one block eliminations and the block-triangular lemma; it does not smuggle in a Schur formula requiring division by x.
+- Spectral mapping is proved by induction on dimension: split off one eigenline, use a choice-free finite-dimensional basis extension, track polynomial evaluation through the resulting block upper-triangular matrix, and retain the full characteristic-polynomial identity so coalescing values receive the correct combined multiplicity. Its zero-spectrum corollary applies the theorem to $p=\chi_T$ before Cayley-Hamilton strengthens the conclusion to $\chi_T(T)=0$.
 - Cayley-Hamilton is decomposed into the published adjugate identity over F[x], a degree bound for adjugate entries, coefficient comparison, and a telescoping matrix recurrence. The false substitution map is isolated on the B page.
 - The infinite double-dual theorem uses the earlier separation lemma and the dual-family nonspanning theorem. The companion’s equal-preannihilator counterexample records the asymmetric infinite-dimensional failure.
 - The transpose range theorem makes the extension of a functional from im(T) to W explicit and records its Choice cost.
@@ -161,7 +168,7 @@ The proof-decomposition pass identified these substantive chains:
 - Sylvester’s law separates existence by diagonalization and square-root normalization from uniqueness by maximal positive and negative subspace dimensions.
 - Sylvester’s criterion uses the earlier Schur-complement congruence and determinant factorization, then induction on size. It does not invoke the spectral theorem.
 
-The corollary pass added the dimension bound on distinct eigenvalues, the algebraically-closed eigenvalue corollary, the simple-eigenvalue corollary, the inverse-polynomial corollary, congruence invariance of rank/nondegeneracy, diagonalization of symmetric matrices and quadratic forms, and classification of real symmetric forms by inertia. Both passes were performed; no further split or source-backed corollary survived the dependency and page-boundary checks.
+The corollary pass added the dimension bound on distinct eigenvalues, the algebraically-closed eigenvalue corollary, the trace-sum and determinant-product consequences of a split characteristic polynomial, the simple-eigenvalue corollary, the zero-spectrum consequence of spectral mapping, the inverse-polynomial corollary, congruence invariance of rank/nondegeneracy, diagonalization of symmetric matrices and quadratic forms, and classification of real symmetric forms by inertia. Both passes were performed; no further split or source-backed corollary survived the dependency and page-boundary checks.
 
 ## Forward references and cross-batch dependencies
 
@@ -173,11 +180,11 @@ The collision check was:
 rg -n --fixed-strings '<each proposed id>' items research/plan-spec.json
 ```
 
-It returned no hit for any of the 71 proposed ids, including the counterexample added after the Conrad harvest.
+It returned no hit for any of the 75 proposed ids, including the four items added from Pinkham section 12.3 and the counterexample added after the Conrad harvest.
 
 ## Canonical-coverage harvest and declines
 
-The coverage checklist has three independent treatments for order 86 and four for order 92, with a textbook in each pair. The six declined headings most likely to be challenged are:
+The coverage checklist has four independent treatments for order 86 and four for order 92, with a textbook in each pair. Pinkham section 12.3 is now harvested continuously between sections 12.2 and 12.4, and Theorem 12.1.3 is mapped only to the triangular characteristic-polynomial result it actually states; Axler Theorem 5.11 supplies the distinct-eigenvalue independence theorem in its own source row. The Stacks Project is classified as a `monograph`, uniformly with D9. The six declined headings most likely to be challenged are:
 
 - Pinkham Example 12.1.9 and the immediate post-Cayley-Hamilton minimal-polynomial consequence — deferred because their distinguishing machinery is the later order-88 minimal polynomial.
 - Khovanov’s diagonalizability result and the minimal-polynomial part of Remark 6.5 — deferred to the same declared order-88 subject, not because their proofs are inconvenient.
@@ -190,11 +197,11 @@ No locally buildable prerequisite theorem was declined. The source harvest itsel
 
 | source and locator read | supports | convention or licensing note |
 |---|---|---|
-| [Pinkham, Linear Algebra](https://www.math.columbia.edu/department/pinkham/HCP_LinearAlgebra.pdf), 6.1, 6.4-6.6, 7.7-7.8, 12.1-12.2, 12.4 | finite duality, transpose, inertia, sesquilinearity, characteristic polynomial, multiplicities, AB/BA, Cayley-Hamilton | Full textbook draft; proofs and statements are paraphrased. Much of the book works over R or C, while the algebraic proofs used here are stated only over the fields they actually support. |
+| [Pinkham, Linear Algebra](https://www.math.columbia.edu/department/pinkham/HCP_LinearAlgebra.pdf), 6.1, 6.4-6.6, 7.7-7.8, 12.1-12.4 | finite duality, transpose, inertia, sesquilinearity, characteristic polynomial, multiplicities, trace and determinant as eigenvalue sum and product, polynomial spectral mapping, AB/BA, Cayley-Hamilton | Full textbook draft; proofs and statements are paraphrased. Pinkham states section 12.3 over $\mathbb C$; the scaffold exposes the exact weaker hypothesis its algebraic proof needs, namely that $\chi_T$ splits over $F$. |
 | [Khovanov, Linear Algebra II notes](https://www.math.columbia.edu/~khovanov/MA2_2022/files/lin_alg.pdf), section 6, pp. 11-15 | eigenvalues over a general field, algebraic closure, polynomial evaluation, Cayley-Hamilton, trace | Full lecture-note set; paraphrase only. |
-| [Stacks Project, Lemma 10.16.1](https://stacks.math.columbia.edu/tag/05G6) | ring-general Cayley-Hamilton corroboration | CC BY-SA; only the mathematical route is used, not copied prose. |
+| [Stacks Project, Lemma 10.16.1](https://stacks.math.columbia.edu/tag/05G6) | ring-general Cayley-Hamilton corroboration | Classified uniformly as a `monograph` under D9. CC BY-SA; only the mathematical route is used, not copied prose. |
 | [Paul Garrett, Cayley-Hamilton notes](https://www-users.cse.umn.edu/~garrett/m/algebra/notes_2023-24/26.pdf) and [Howard Haber, characteristic-polynomial notes](https://scipp.ucsc.edu/~haber/ph116A/charpoly_11.pdf) | the classical invalid substitution pseudo-proof | The counterexample is newly computed; the warning is literature-backed. |
-| [Axler, Linear Algebra Done Right, 4th ed.](https://linear.axler.net/LADR4e.pdf), 9A and 9C | matrix/forms cross-check, characteristic polynomial and Cayley-Hamilton cross-check | CC BY-NC 4.0 from the official landing page; paraphrase only. Axler’s Cayley-Hamilton proof is over R/C, so it is not the primary general-field proof. |
+| [Axler, Linear Algebra Done Right, 4th ed.](https://linear.axler.net/LADR4e.pdf), Theorem 5.11, 9A, and 9C | independence of eigenvectors for distinct eigenvalues; matrix/forms, characteristic-polynomial, and Cayley-Hamilton cross-checks | CC BY-NC 4.0 from the official landing page; paraphrase only. Axler’s Cayley-Hamilton proof is over R/C, so it is not the primary general-field proof. |
 | [Keith Conrad, Infinite-Dimensional Dual Spaces](https://kconrad.math.uconn.edu/blurbs/linmultialg/dualspaceinfinite.pdf), Theorem 1 and Corollary 2 | infinite dual size, double dual, asymmetric annihilator failure | No reuse licence was relied upon; statements and proofs are independently paraphrased. |
 | [Keith Conrad, Bilinear Forms](https://kconrad.math.uconn.edu/blurbs/linmultialg/bilinearform.pdf), selected ranges in sections 1, 4-7 | characteristic 2, orthogonal bases, symplectic bases, quadratic polarization | No reuse licence was relied upon; paraphrase only. The empty-basis convention differs and is recorded above. |
 | [Jeffrey Kuan, positive definite matrices](https://math.berkeley.edu/~jkuan/Lecture_July31.pdf), final paragraph of p. 3 | Sylvester’s leading-principal-minor criterion | Lecture notes; proof is rebuilt locally through the scaffolded Schur-complement lemma. |
@@ -210,6 +217,7 @@ Every dependency below was opened from `items/<id>.md` on disk, including its ex
 |---|---|---|
 | `cor-cauchy-reals-lub-complete` | literature-derived / ai-altered | established-from-knowledge — exact complete-ordered-field conclusion and real model checked on disk |
 | `def-coordinate-column-and-matrix-of-a-linear-map` | literature-derived / not-applicable | source-checked — Pinkham, chapters 5/11/12, and the Waterloo determinant notes linked in the item |
+| `def-determinant-of-a-linear-operator` | literature-derived / not-applicable | source-checked — Axler, Linear Algebra Done Right, 4th ed., as linked in the item, with the separate zero-dimensional value checked on disk |
 | `def-determinant-of-a-square-matrix` | literature-derived / not-applicable | source-checked — Pinkham, chapters 5/11/12, and the Waterloo determinant notes linked in the item |
 | `def-dimension` | ai-altered / not-applicable | source-checked — Axler, Linear Algebra Done Right, chapters 1-3, and Pinkham chapter 6 |
 | `def-field` | ai-altered / not-applicable | established-from-knowledge — exact on-disk statement and conventions independently checked |
@@ -227,6 +235,7 @@ Every dependency below was opened from `items/<id>.md` on disk, including its ex
 | `def-ring-characteristic` | ai-altered / not-applicable | established-from-knowledge — exact on-disk statement and conventions independently checked |
 | `def-ring-matrix-product-identity-and-transpose` | ai-altered / not-applicable | source-checked — Pinkham, chapters 5/11/12, and the Waterloo determinant notes linked in the item |
 | `def-similar-matrices` | literature-derived / not-applicable | source-checked — Pinkham, chapters 5/11/12, and the Waterloo determinant notes linked in the item |
+| `def-trace-of-an-endomorphism` | literature-derived / not-applicable | source-checked — Axler, Linear Algebra Done Right, Definition 8.51, as linked in the item, including the empty-basis trace convention |
 | `def-trace-of-a-square-matrix` | literature-derived / not-applicable | source-checked — Pinkham, chapters 5/11/12, and the Waterloo determinant notes linked in the item |
 | `def-transpose-of-a-matrix` | literature-derived / not-applicable | source-checked — Pinkham, chapters 5/11/12, and the Waterloo determinant notes linked in the item |
 | `def-vector-space` | ai-altered / not-applicable | source-checked — Axler, Linear Algebra Done Right, chapters 1-3, and Pinkham chapter 6 |
@@ -270,7 +279,7 @@ No opened published dependency contains an unambiguous false load-bearing statem
 |---|---|---|---|
 | `def-eigenvalue-eigenvector-eigenspace-and-spectrum` | literature-derived | not-applicable | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `prop-eigenvalue-iff-shift-is-not-invertible` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
-| `thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
+| `thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent` | literature-derived | ai-altered | Axler, Theorem 5.11 supplies this statement independently of Pinkham 12.1.3; the proof plan is adapted to the local finite-dimensional interface. |
 | `cor-an-operator-has-at-most-dimension-many-distinct-eigenvalues` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `def-characteristic-polynomial-of-a-matrix` | ai-altered | not-applicable | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
@@ -281,10 +290,14 @@ No opened published dependency contains an unambiguous false load-bearing statem
 | `def-algebraically-closed-field` | literature-derived | not-applicable | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `def-algebraic-and-geometric-multiplicity-of-an-eigenvalue` | literature-derived | not-applicable | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
+| `thm-trace-is-sum-of-eigenvalues` | literature-derived | ai-altered | Pinkham 12.3.1 supplies the result over the complex numbers; the scaffold states the exact split-characteristic-polynomial hypothesis and derives it from the published trace interface and extreme-coefficient identity. |
+| `thm-determinant-is-product-of-eigenvalues` | literature-derived | ai-altered | Pinkham 12.3.2 supplies the result over the complex numbers; the scaffold states the exact split-characteristic-polynomial hypothesis and derives it from the published determinant interface and constant-coefficient identity. |
 | `thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `cor-a-simple-eigenvalue-has-one-dimensional-eigenspace` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `thm-products-ab-and-ba-have-the-same-characteristic-polynomial` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `def-polynomial-evaluation-at-an-endomorphism` | literature-derived | not-applicable | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
+| `thm-spectral-mapping-for-polynomials` | literature-derived | ai-altered | Pinkham 12.3.3 supplies spectral mapping; the scaffold records the stronger characteristic-polynomial identity under an explicit split hypothesis and proves it by invariant-eigenline induction using the local block-triangular interface. |
+| `cor-characteristic-polynomial-evaluation-has-only-zero-eigenvalues` | literature-derived | ai-altered | Pinkham 12.3.4 supplies the corollary; the scaffold derives it transparently by applying spectral mapping to the characteristic polynomial. |
 | `thm-cayley-hamilton` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
 | `ex-characteristic-polynomial-and-eigenspaces-of-a-two-by-two-matrix` | literature-derived | ai-altered | Pinkham 12.1-12.4 and Khovanov section 6 support the statement; the proof plan is adapted to the published determinant and polynomial interfaces. |
@@ -340,7 +353,7 @@ No opened published dependency contains an unambiguous false load-bearing statem
 | `ex-sylvesters-criterion-for-a-three-by-three-matrix` | ai-generated | ai-generated | New non-load-bearing companion witness; all arithmetic is finite and must be checked explicitly at authoring. |
 | `cex-congruence-need-not-preserve-trace-or-determinant` | ai-generated | ai-generated | New non-load-bearing companion witness; all arithmetic is finite and must be checked explicitly at authoring. |
 
-Planned totals are 12 literature-derived / not-applicable, 49 literature-derived / ai-altered, 4 ai-altered / not-applicable, 6 ai-generated / ai-generated. No A-page Statement is AI-generated. The six AI-generated Statements are all checkable companion examples or counterexamples and, because B pages are leaves, none can become a dependency target.
+Planned totals are 12 literature-derived / not-applicable, 53 literature-derived / ai-altered, 4 ai-altered / not-applicable, 6 ai-generated / ai-generated. No A-page Statement is AI-generated. The six AI-generated Statements are all checkable companion examples or counterexamples and, because B pages are leaves, none can become a dependency target.
 
 ## Generated-witness truth-risk obligations
 
@@ -355,21 +368,21 @@ These items must receive `generation` metadata at authoring and remain non-load-
 
 ## Proof-contract authoring handoff
 
-At Step 5, replace each `scaffold_status` and `citation_plan` with exact source-section quotations and uses, partition each planned strategy into the actual numbered proof steps, and replace prospective boundary wording with step-anchored final evidence. The 55-item scope and contract-key set currently agree exactly. The highest-risk contracts are Cayley-Hamilton, the infinite double-dual biconditional, transpose range equality, symmetric and alternating normal forms, Sylvester’s law, and Sylvester’s criterion.
+At Step 5, replace each `scaffold_status` and `citation_plan` with exact source-section quotations and uses, partition each planned strategy into the actual numbered proof steps, and replace prospective boundary wording with step-anchored final evidence. The 59-item scope and contract-key set currently agree exactly. The highest-risk contracts are spectral mapping, Cayley-Hamilton, the infinite double-dual biconditional, transpose range equality, symmetric and alternating normal forms, Sylvester’s law, and Sylvester’s criterion.
 
 ## Continuity checkpoint
 
-Completed on disk: the 71-item manifest, 110-heading canonical harvest, and 55-contract proof map. Stable decisions: no split; Cayley-Hamilton belongs on order 86 and uses adjugate coefficient comparison; diagonalisation/minimal polynomial remain order 88; dual infinite-dimensional results state Choice; polarization and symmetric diagonalization require characteristic not 2; inertia is over the reals; inner products remain order 94; no cross-pair dependency.
+Completed on disk: the 75-item manifest, 116-heading canonical harvest, and 59-contract proof map. Stable decisions: Pinkham section 12.3 is fully scaffolded; Pinkham 12.1.3 maps only to the block-triangular characteristic-polynomial item while Axler 5.11 supplies the distinct-eigenvalue independence item; the Stacks Project is a `monograph`; no split; Cayley-Hamilton belongs on order 86 and uses adjugate coefficient comparison; diagonalisation/minimal polynomial remain order 88; dual infinite-dimensional results state Choice; polarization and symmetric diagonalization require characteristic not 2; inertia is over the reals; inner products remain order 94; no cross-pair dependency.
 
 Final validation is complete. The plan-level validator cannot inspect the new item graph until the orchestrator splices these page lists into `plan-spec.json`, so I supplemented it with a batch-local closure, order, B-leaf, and proof-contract audit against the current plan and published library frontmatter.
 
 ## Gate and consistency results
 
 - `node tools/validate-plan.mjs research/plan-spec.json`: passed — `OK — declared page order is acyclic and consistent; no item-level cycles, forward references, B-page dependencies, or unresolved ids among the 220 page(s) with item lists.`
-- `node tools/coverage-checklist.mjs research/frontier-12-batch-3.coverage.json`: passed — `coverage-checklist: 2 page(s), 110 harvested result(s), 0 error(s), 0 warning(s)`.
-- `node tools/content-policy.mjs research/frontier-12-batch-3.pages.json --manifest-only`: passed — `content-policy: 71 scoped item(s), 0 error(s), 0 warning(s)`.
-- Batch-local graph and contract audit: 4 pages, 71 items, 16 definitions, 55 proof-bearing items, 55 matching contracts, and no unresolved dependency, undeclared prerequisite, forward local dependency, B-page dependency, missing contract, or orphan contract.
-- `node tools/prosecheck.mjs research/frontier-12-batch-3.pages.json research/frontier-12-batch-3.notes.md research/frontier-12-batch-3.coverage.json research/frontier-12-batch-3.proof-contracts.json --warnings`: passed with 0 errors and 13 `count-in-prose` warnings, all caused by deliberate counts or page/order references in this ledger; it also reports no positional claim contradicting the spec.
+- `node tools/coverage-checklist.mjs research/frontier-12-batch-3.coverage.json`: passed — `coverage-checklist: 2 page(s), 116 harvested result(s), 0 error(s), 0 warning(s)`.
+- `node tools/content-policy.mjs research/frontier-12-batch-3.pages.json --manifest-only`: passed — `content-policy: 75 scoped item(s), 0 error(s), 0 warning(s)`.
+- Batch-local graph and contract audit: 4 pages, 75 items, 16 definitions, 59 proof-bearing items, 59 matching contracts, and no duplicate item id, missing contract, orphan contract, or missing §12.3 coverage/scope mapping.
+- `node tools/prosecheck.mjs research/frontier-12-batch-3.pages.json research/frontier-12-batch-3.notes.md research/frontier-12-batch-3.coverage.json research/frontier-12-batch-3.proof-contracts.json --warnings`: passed with 0 errors and 14 `count-in-prose` warnings, all caused by deliberate counts or page/order references in this ledger; it also reports no positional claim contradicting the spec.
 
 ## Blockers and write boundary
 

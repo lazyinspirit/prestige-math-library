@@ -38,7 +38,10 @@
     "thm-factorial-coordinate-bound-for-a-splitting-field",
     "prop-splitting-field-of-x-n-minus-a",
     "prop-endomorphisms-of-a-splitting-field-permute-its-roots",
+    "prop-normality-descends-to-intermediate-fields",
+    "prop-nonempty-intersections-of-normal-subextensions-are-normal",
     "prop-algebraic-splitting-extensions-are-normal",
+    "thm-normality-generation-criterion",
     "prop-finitely-generated-normal-extensions-are-splitting-fields",
     "ex-base-field-is-splitting-field-of-empty-family",
     "ex-splitting-field-of-x-squared-minus-two",
@@ -2446,6 +2449,138 @@
       ],
       "finite_smoke": []
     },
+    "prop-normality-descends-to-intermediate-fields": {
+      "scaffold_status": "planned-at-step-1; exact authored citations and numbered-step partition must be synchronized at step 5",
+      "citation_plan": [
+        "def-normal-algebraic-extension",
+        "thm-evaluation-kernel-and-minimal-polynomial",
+        "thm-polynomial-ring-over-a-field-is-a-ufd"
+      ],
+      "citations": [],
+      "derivations": [
+        {
+          "id": "planned-main-argument",
+          "claim": "Let $F\\subseteq E\\subseteq K$, let $K/F$ be normal, and take $\\alpha\\in K$. If $m_{F,\\alpha}$ and $m_{E,\\alpha}$ are the minimal polynomials over $F$ and $E$, then $m_{E,\\alpha}$ divides $m_{F,\\alpha}$ in $E[x]$ and hence in $K[x]$. Normality makes $m_{F,\\alpha}$ split in $K[x]$; unique factorization in $K[x]$ then makes its monic divisor $m_{E,\\alpha}$ split there as well. Since $K/E$ is algebraic, the minimal-polynomial criterion gives normality over $E$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "planned citation: def-normal-algebraic-extension",
+            "planned citation: thm-evaluation-kernel-and-minimal-polynomial",
+            "planned citation: thm-polynomial-ring-over-a-field-is-a-ufd"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns a fixed tower and an arbitrary element, not an indexed family or generated object that may be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Minimal polynomials are monic and nonzero, so the divisor argument never treats the zero polynomial as a minimal polynomial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If the relevant minimal polynomial is linear, its splitting is immediate and the divisor argument remains valid."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof allows $E=F$, $E=K$, and $\\alpha\\in E$; no inclusion is required to be proper."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No induction range, ordered interval, or endpoint convention occurs in the divisibility argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The element $\\alpha$ is arbitrary but fixed, and the proof makes no choice from an asserted nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is a one-way implication from normality over $F$ to normality over $E$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-nonempty-intersections-of-normal-subextensions-are-normal": {
+      "scaffold_status": "planned-at-step-1; exact authored citations and numbered-step partition must be synchronized at step 5",
+      "citation_plan": [
+        "def-normal-algebraic-extension",
+        "thm-evaluation-kernel-and-minimal-polynomial",
+        "thm-polynomial-ring-over-a-field-is-a-ufd"
+      ],
+      "citations": [],
+      "derivations": [
+        {
+          "id": "planned-main-argument",
+          "claim": "Let $M/F$ be algebraic and let $(E_i)_{i\\in I}$ be a nonempty family of intermediate fields, each normal over $F$. Put $E=\\bigcap_{i\\in I}E_i$. For $\\alpha\\in E$, its minimal polynomial $p$ over $F$ splits in every $E_i$ by normality. Fix $i_0\\in I$ and list the roots from a complete factorization in $E_{i_0}[x]$. Comparing this factorization in the UFD $M[x]$ with the complete factorization over each $E_i$ shows that the same roots lie in every $E_i$, hence in $E$; thus $p$ splits in $E$. Algebraicity descends from $M/F$, so $E/F$ is normal.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "planned citation: def-normal-algebraic-extension",
+            "planned citation: thm-evaluation-kernel-and-minimal-polynomial",
+            "planned citation: thm-polynomial-ring-over-a-field-is-a-ufd"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The statement explicitly requires $I$ to be nonempty; an empty intersection would default to the ambient field $M$, which need not be normal over $F$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Minimal polynomials are monic and nonzero, so normality is never tested using the zero polynomial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a singleton family, the intersection is its sole member and the conclusion is exactly the given normality hypothesis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated fields and intersections equal to $F$ are allowed; no family member or field inclusion is required to be distinct or proper."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The family is not ordered and no induction interval or endpoint convention appears."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Nonemptiness is stated explicitly. The argument fixes one $i_0\\in I$ only to place all relevant roots in the common algebraic ambient field, requiring a single witnessed choice rather than a choice function."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The top-level statement is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from normality of the intersection to normality of every member is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
     "prop-algebraic-splitting-extensions-are-normal": {
       "scaffold_status": "planned-at-step-1; exact authored citations and numbered-step partition must be synchronized at step 5",
       "citation_plan": [
@@ -2512,6 +2647,76 @@
           "case": "iff-reverse",
           "status": "not_applicable",
           "reason": "The reverse direction is a separate finitely-generated-normal proposition, not part of this statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-normality-generation-criterion": {
+      "scaffold_status": "planned-at-step-1; exact authored citations and numbered-step partition must be synchronized at step 5",
+      "citation_plan": [
+        "def-normal-algebraic-extension",
+        "def-field-extension-generated-subfields-and-simple-extension",
+        "thm-evaluation-kernel-and-minimal-polynomial",
+        "def-polynomials-that-split-and-splitting-fields",
+        "prop-algebraic-splitting-extensions-are-normal"
+      ],
+      "citations": [],
+      "derivations": [
+        {
+          "id": "planned-main-argument",
+          "claim": "Suppose the algebraic extension $E/F$ is generated by a set $S$ and every $s\\in S$ has minimal polynomial over $F$ splitting in $E$. For $\\beta\\in E$, write $\\beta$ inside $F(T)$ for a finite subset $T\\subseteq S$. The product of the minimal polynomials of the elements of $T$ splits in $E$; let $K$ be its splitting field inside $E$. Then $F(T)\\subseteq K$, so $\\beta\\in K$, and $K/F$ is normal by the algebraic-splitting-extension proposition. The minimal polynomial of $\\beta$ therefore splits in $K\\subseteq E$. Since $\\beta$ was arbitrary, $E/F$ is normal. Treat $T=\\varnothing$ separately, where $\\beta\\in F$ has a linear minimal polynomial.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "planned citation: def-normal-algebraic-extension",
+            "planned citation: def-field-extension-generated-subfields-and-simple-extension",
+            "planned citation: thm-evaluation-kernel-and-minimal-polynomial",
+            "planned citation: def-polynomials-that-split-and-splitting-fields",
+            "planned citation: prop-algebraic-splitting-extensions-are-normal"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned proof separates $T=\\varnothing$: then $\\beta\\in F$ and its minimal polynomial over $F$ is linear. It also covers $S=\\varnothing$, when $E=F$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Every factor in the finite product is a nonzero monic minimal polynomial; the empty product is handled separately rather than used as a nonzero splitting polynomial."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For singleton $T$ or a degree-one minimal polynomial, the same splitting-field containment argument applies without alteration."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The proof permits $E=F$, repeated generators, overlapping root sets, and a splitting field $K$ equal to either $F$ or $E$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Finite support is used without an induction interval or ordered first/last endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each selected generator is itself a root of its minimal polynomial, and the construction takes the full finite collection of roots; it does not choose one root from each member of an arbitrary family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem proves the stated sufficient condition for normality and is not phrased as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse observation that every element of a normal extension has a splitting minimal polynomial is already built into the definition and is not a second theorem direction here."
         }
       ],
       "finite_smoke": []

@@ -39,7 +39,7 @@ The full heading-by-heading ledger is research/frontier-12-batch-2.coverage.json
 
 | pair | source and exact range | role |
 |---|---|---|
-| composition series | J. S. Milne, Group Theory, Chapter 6, pp. 86–95, chapter heading through Corollary 6.17, https://www.jmilne.org/math/CourseNotes/GT.pdf | Primary full course notes for composition series, solvability, derived series, nilpotence, and central extensions. |
+| composition series | J. S. Milne, Group Theory, Chapter 3, Definition 3.6 and Remark 3.7(a), plus Chapter 6, pp. 86–95, chapter heading through Corollary 6.17, https://www.jmilne.org/math/CourseNotes/GT.pdf | Primary full course notes for characteristic subgroups, composition series, solvability, derived series, nilpotence, and central extensions. |
 | composition series | Keith Conrad, Subgroup Series I, Theorem 4.13 through Theorem 5.7, pp. 8–15, https://kconrad.math.uconn.edu/blurbs/grouptheory/subgpseries1.pdf | Independent lecture-note treatment of upper/lower central series and their extremal properties. |
 | composition series | Kiyoshi Igusa, Notes on Jordan–Hölder, §5, pp. 1–2, Definitions 5.1–5.2 through Theorem 5.5, https://people.brandeis.edu/~igusa/Math131b/JH.pdf | Independent proof spine for Zassenhaus, Schreier refinement, and Jordan–Hölder. |
 | modules | Alexander Kleshchev, Lectures on Abstract Algebra for Graduate Students, §§3.6, 3.14, 3.15, pp. 137–139 and 163–175 through Theorem 3.15.5, https://darkwing.uoregon.edu/~klesh/teaching/Alg600LN12.pdf | Primary full course notes for free, projective, injective, exact, Hom, Baer, divisible, and enough-injective results. |
@@ -48,10 +48,24 @@ The full heading-by-heading ledger is research/frontier-12-batch-2.coverage.json
 
 ### Harvest yield and declines
 
-The checklist contains 115 source/canonical headings:
+The checklist contains 137 source/canonical headings after the Alpha stage-0 coverage closure:
 
-- composition page: 40 included headings mapping to 25 distinct scaffold items, 7 inline, 2 already-published, and 10 declines;
-- module page: 41 included headings mapping to 26 distinct scaffold items, 8 inline, and 7 declines.
+- composition page: 51 included headings mapping to 36 distinct included targets, 7 inline, 2 already-published, and 10 declines; the union of dispositions names all 37 scaffolded items in the pair;
+- module page: 52 included headings mapping to 37 distinct included targets, 8 inline, and 7 declines; the union of dispositions names all 39 scaffolded items in the pair.
+
+The 22 added mappings are coverage-only: no item, id, order, dependency, proof
+strategy, or proof contract changed. Source rows now name the unnumbered Milne
+finite-existence and factor-order statements, Milne's characteristic and
+derived-series material, and the exact Kleshchev clauses for direct sums, rank,
+short-exact endpoints, the canonical split sequence, Hom's failure boundary,
+and projective nonfreeness. Canonical rows explicitly identify the seven local
+boundary witnesses that have no separately named heading in the declared
+locators. All seven are `ai-altered`, not `ai-generated`; this batch still has
+no AI-generated Statement or Construction.
+
+The four Stacks Project source entries are uniformly classified as `monograph`
+in the coverage artifact, matching D9/C10. That classification was already
+present when this fix round began, so no source-kind mutation was needed.
 
 The declines most likely to be challenged are deliberate subject-boundary decisions, not missing local lemmas:
 

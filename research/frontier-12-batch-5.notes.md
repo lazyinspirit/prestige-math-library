@@ -13,7 +13,7 @@ Decision D1 is applied at the approved cut after `cor-relative-variance-positive
 3. Order 221: `finite-probability-and-the-probabilistic-method` retains its id, title, and order, with A items 38--65. Its `requires` entries are `finite-probability-spaces-and-random-variables`, `extremal-graph-theory`, and `congruences-and-the-chinese-remainder-theorem`; the last is the exact published route used by the finite strict sum-free proof.
 4. Order 222: `finite-probability-and-the-probabilistic-method-examples` retains its id and order, with B items 9--14: the triangle count, second-moment random-subset calculation, Ramsey calculation, Local-Lemma parameter check, high-girth/high-chromatic ledger, and the threshold-one counterexample. It requires the method A page only.
 
-This differs from my proposal because orders 223/224 are occupied by `linear-algebra-methods-in-combinatorics` and its companion; shifting them would cascade through the combinatorics track. The free fractional orders 220.2/220.4 place the foundations pair immediately before the method pair, preserve the method page's order-221 id for its three planned downstream consumers, and require no renumbering or downstream edits. The coverage entry is divided between the two A ids with all three independent lecture-note treatments represented on both halves, and the proof-contract `scope` is divided at the same A and B cuts.
+This differs from my proposal because orders 223/224 are occupied by `linear-algebra-methods-in-combinatorics` and its companion; shifting them would cascade through the combinatorics track. The free fractional orders 220.2/220.4 place the foundations pair immediately before the method pair, preserve the method page's order-221 id for its three planned downstream consumers, and require no renumbering or downstream edits. The coverage entry is divided between the two A ids: the method half retains the three probabilistic-method lecture-note treatments, while the foundations half now adds two genuine probability-textbook treatments to those three corroborating prefaces. The proof-contract `scope` is divided at the same A and B cuts.
 
 ### Seam check
 
@@ -54,7 +54,28 @@ The machinery is harvested through classical applications rather than left abstr
 
 ## Canonical-coverage harvest
 
-The harvest contains 136 source or canonical headings: 112 `included`, 8 `inline`, 8 `already-published`, and 8 `out-of-scope`; none is `deferred`. Thus 128 headings are retained locally, absorbed into proofs, or supplied by an opened published item. Counts are source-heading dispositions, so independent treatments of the same result are intentionally counted more than once.
+The harvest contains 197 source or canonical headings: 173 `included`, 8 `inline`, 8 `already-published`, and 8 `out-of-scope`; none is `deferred`. Thus 189 headings are retained locally, absorbed into proofs, or supplied by an opened published item. The foundations entry has 113 rows and the unchanged method entry has 84. Counts are source-heading dispositions, so independent treatments of the same result are intentionally counted more than once.
+
+### Fix round 2 — foundations sourcing correction
+
+Alpha's stage-0 finding was reproduced mechanically: before this correction, the 37-item foundations manifest had exactly 14 ids absent from the union of source-content and canonical rows. The page and proof-contract artifacts are unchanged because their mathematics, ids, ordering, strategies, and dependency seam were accepted. The coverage and source ledger now supply the following item-by-item routes:
+
+| Previously unsourced item | Corrected route |
+|---|---|
+| `lem-finite-probability-basic-laws` | Grinstead--Snell Theorem 1.1 and Pishro--Nik §§1.3.2--1.3.3. |
+| `thm-finite-additivity-of-probability` | Grinstead--Snell Theorem 1.2 and Pishro--Nik §1.3.2. |
+| `cor-two-event-inclusion-exclusion` | Grinstead--Snell Theorem 1.4 and Pishro--Nik §1.3.3. |
+| `thm-conditional-probability-multiplication-and-chain-rules` | Grinstead--Snell equation (4.2) for multiplication and Pishro--Nik §1.4.0 for the finite chain rule. |
+| `thm-finite-law-of-total-probability` | Grinstead--Snell Theorem 1.3, Corollary 1.1, and equation (4.3), independently Pishro--Nik §1.4.2. |
+| `thm-finite-bayes-theorem` | Grinstead--Snell's Bayes' Formula block and Pishro--Nik §1.4.3. |
+| `lem-mutual-independence-under-subfamilies-and-complements` | Canonical finite consequence of the harvested mutual-independence product identities, with the complement step proved by indicator expansion. |
+| `def-product-of-finite-probability-spaces` | Grinstead--Snell Definitions 4.3--4.5 and its product-distribution construction, plus a canonical row for the arbitrary-factor finite generalization. |
+| `thm-product-probability-has-independent-coordinate-events` | Grinstead--Snell's coordinate-variable conclusion after Definition 4.5, plus the canonical arbitrary-factor cylinder-event form. |
+| `thm-event-independence-and-indicator-independence` | Canonical four-atom comparison, grounded in Pishro--Nik's event-independence and indicator/Bernoulli blocks. |
+| `thm-covariance-bilinearity-and-symmetry` | Pishro--Nik §5.3.1 covariance lemma, including symmetry and full bilinearity. |
+| `def-bernoulli-and-binomial-random-variables` | Grinstead--Snell's Bernoulli-trials/binomial paragraph and Pishro--Nik §3.1.5 definitions and sum-of-Bernoulli lemma. |
+| `lem-cauchy-schwarz-for-finite-random-variables` | Pishro--Nik §6.2.4, which states and proves Cauchy--Schwarz for random variables. |
+| `thm-finite-second-moment-lower-bound` | Canonical one-line specialization of Pishro--Nik §6.2.4 to $X=X\mathbf 1_{\{X>0\}}$. |
 
 The eight declines expected to receive the closest Alpha scrutiny are:
 
@@ -67,9 +88,17 @@ The eight declines expected to receive the closest Alpha scrutiny are:
 
 ## Source ledger and exact ranges read
 
+### Grinstead--Snell
+
+C. M. Grinstead and J. L. Snell, *Introduction to Probability*, second edition, Chance Project version dated 4 July 2006, <https://math.dartmouth.edu/~prob/prob/prob.pdf>. I read the named statement blocks declared in coverage from §1.2 (printed pp. 18--24), §4.1 (pp. 133--147), §6.1 (pp. 225--234), §6.2 (pp. 257--260), and §8.1 (pp. 305--306). These blocks independently develop the finite outcome-weight model, probability laws, conditioning, independence, product distributions, Bernoulli/binomial variables, expectation, variance, and Chebyshev. The book's preface expressly describes a thorough probability treatment, and this Chance Project version is freely redistributable under the GNU Free Documentation License.
+
+### Pishro--Nik
+
+H. Pishro--Nik, *Introduction to Probability, Statistics, and Random Processes*, Kappa Research LLC, 2014, <https://www.probabilitycourse.com/>. I read the named statement blocks declared in coverage from online §§1.3.2--1.3.3, 1.4.0--1.4.3, 3.1.5, 3.2.2, 3.2.4, 5.3.1, 6.1.1, 6.2.1--6.2.2, and 6.2.4. This second open-access, peer-reviewed textbook independently supplies the axioms and basic laws, chain rule, total probability, Bayes, Bernoulli/binomial variables, expectation and variance, covariance bilinearity, Markov, Chebyshev, and Cauchy--Schwarz. Worked examples and solved-problem pages are excluded from the declared locator unless a coverage row names one explicitly.
+
 ### Matoušek--Vondrák
 
-J. Matoušek and J. Vondrák, *The Probabilistic Method*, revised March 2008, <https://www.cs.cmu.edu/~15850/handouts/matousek-vondrak-prob-ln.pdf>. I read §1.1 (PDF pp. 6--9), §§2.1--2.2 (pp. 11--14), Chapter 3 (pp. 18--20), the opening of Chapter 4 through §4.2 (pp. 21--23), §5.1 (pp. 24--25), §§6.1--6.2 (pp. 33--36), and §7.1 (pp. 40--42). These ranges supply a full independent foundations-and-method treatment: spaces, variables, independence, expectation, indicators, union bound, Ramsey and hypergraph applications, Szele, MAX-CUT, Markov, high girth/high chromatic number, variance/Chebyshev, the asymmetric and symmetric Local Lemma, and random-sign Chernoff.
+J. Matoušek and J. Vondrák, *The Probabilistic Method*, revised March 2008, <https://www.cs.cmu.edu/~15850/handouts/matousek-vondrak-prob-ln.pdf>. I read §1.1 (PDF pp. 6--9), §§2.1--2.2 (pp. 11--14), Chapter 3 (pp. 18--20), the opening of Chapter 4 through §4.2 (pp. 21--23), §5.1 (pp. 24--25), §§6.1--6.2 (pp. 33--36), and §7.1 (pp. 40--42). These ranges supply the main independent probabilistic-method treatment and a compact probability preface: spaces, variables, independence, expectation, indicators, union bound, Ramsey and hypergraph applications, Szele, MAX-CUT, Markov, high girth/high chromatic number, variance/Chebyshev, the asymmetric and symmetric Local Lemma, and random-sign Chernoff. As §1.1 itself warns, that preface is not a substitute for a probability course; it is now corroborative rather than the foundations page's principal treatment.
 
 ### Zhao--Lin
 
@@ -79,7 +108,7 @@ Y. Zhao, notes by A. Lin, *MIT 18.218 Probabilistic Method in Combinatorics*, Sp
 
 M. Bucić, *Probabilistic Method* lecture notes, 30 January 2026, <https://homepage.univie.ac.at/matija.bucic/wp-content/uploads/2026/01/Probabilistic_Method.pdf>. I read §1.1 from Theorem 1.5 through Remark 1.6 and §1.2 (PDF pp. 5--7), the Chapter 2 introduction and §§2.1--2.3 (pp. 9--11), the Chapter 4 opening and §4.1 (pp. 16--18), and Appendix A through Lemma A.15 (pp. 57--61). These ranges independently support property $S_k$, MAX-CUT, Szele, sum-free subsets, high-girth/high-chromatic graphs, and the finite probability/expectation/variance/inequality toolkit.
 
-All three files are university- or author-hosted lecture notes. I found no broad reuse licence in the selected material and therefore treat them as reference-only: all scaffold titles and strategies are paraphrases, no source prose is copied, and step 5 must continue to paraphrase. The published dependency files retain their own source records and licences.
+The three probabilistic-method files are university- or author-hosted lecture notes. I found no broad reuse licence in the selected material and therefore treat those three as reference-only. Grinstead--Snell is the GFDL open textbook requested in the dispatch, and Pishro--Nik is an open-access textbook; nevertheless, all scaffold titles and strategies remain paraphrases and step 5 must continue to write independently. The published dependency files retain their own source records and licences.
 
 ## Exact statement and constant ledger
 
@@ -173,20 +202,20 @@ The intended component values below are for step 5. `LD` is `literature-derived`
 | Item | Statement / proof | Rationale |
 |---|---|---|
 | `def-finite-probability-space-and-event` | LD / NA | Matoušek--Vondrák Definition 1.1.1 and Bucić Appendix A, specialized to finite outcome weights. |
-| `lem-finite-probability-basic-laws` | AA / AA | Local finite-sum consolidation of normalization, monotonicity, complement, and difference laws. |
-| `thm-finite-additivity-of-probability` | AA / AA | Standard axiom consequence recast for a finite pairwise-disjoint family and local Fubini. |
-| `cor-two-event-inclusion-exclusion` | AA / AA | Locally derived two-event specialization with explicit overlap partition. |
+| `lem-finite-probability-basic-laws` | AA / AA | Grinstead--Snell Theorem 1.1 and Pishro--Nik §§1.3.2--1.3.3, consolidated in the local finite-weight notation. |
+| `thm-finite-additivity-of-probability` | AA / AA | Grinstead--Snell Theorem 1.2 and Pishro--Nik §1.3.2, recast for the local finite family and finite-sum interface. |
+| `cor-two-event-inclusion-exclusion` | AA / AA | Grinstead--Snell Theorem 1.4 and Pishro--Nik §1.3.3, with the overlap partition made explicit locally. |
 | `thm-finite-union-bound` | LD / AA | Matoušek--Vondrák Lemma 1.1.3 and Bucić Lemma A.7; local disjointification proof. |
 | `def-conditional-probability` | LD / NA | Matoušek--Vondrák Definition 1.1.5 and Bucić Definition A.11. |
-| `thm-conditional-probability-multiplication-and-chain-rules` | AA / AA | Standard multiplication identity extended locally to a finite chain with legal denominators. |
-| `thm-finite-law-of-total-probability` | AA / AA | Standard finite-partition theorem rebuilt from additivity and the multiplication rule. |
-| `thm-finite-bayes-theorem` | LD / AA | Bucić Theorem A.13; locally stated for a finite positive-probability partition. |
+| `thm-conditional-probability-multiplication-and-chain-rules` | AA / AA | Grinstead--Snell equation (4.2) and Pishro--Nik §1.4.0, adapted to a finite chain with legal denominators. |
+| `thm-finite-law-of-total-probability` | AA / AA | Grinstead--Snell Theorem 1.3, Corollary 1.1, and equation (4.3), independently Pishro--Nik §1.4.2. |
+| `thm-finite-bayes-theorem` | LD / AA | Grinstead--Snell's Bayes' Formula block and Pishro--Nik §1.4.3, locally stated for a finite positive-probability partition. |
 | `def-pairwise-and-mutual-independence-of-events` | LD / NA | Matoušek--Vondrák Definition 1.1.4 and Bucić Definitions A.14--A.15. |
 | `thm-event-independence-via-conditioning` | AA / AA | Source observation after Matoušek--Vondrák Definition 1.1.5, expanded to the iff and symmetric forms. |
-| `lem-mutual-independence-under-subfamilies-and-complements` | AA / AA | Standard closure fact needed by applications; proved by finite expansion and induction. |
+| `lem-mutual-independence-under-subfamilies-and-complements` | AA / AA | Canonical finite consequence of the harvested mutual-independence identities; proved by subfamily restriction and complemented-indicator expansion. |
 | `def-uniform-finite-probability-space` | LD / NA | Uniform-distribution paragraph in Matoušek--Vondrák §1.1 and Bucić Example A.2. |
-| `def-product-of-finite-probability-spaces` | LD / NA | Finite product-measure construction, specialized from the standard independent product model. |
-| `thm-product-probability-has-independent-coordinate-events` | AA / AA | Local verification that the preceding finite product construction realizes mutual independence. |
+| `def-product-of-finite-probability-spaces` | LD / NA | Grinstead--Snell Definitions 4.3--4.5 and the following finite product-distribution construction, generalized canonically to unequal finite factors. |
+| `thm-product-probability-has-independent-coordinate-events` | AA / AA | Grinstead--Snell's coordinate-variable conclusion after Definition 4.5, generalized and verified locally for arbitrary finite factors. |
 | `def-finite-real-random-variable-and-distribution` | LD / NA | Matoušek--Vondrák Definition 1.1.6 and Bucić Definition A.4. |
 | `def-expectation-on-a-finite-probability-space` | LD / NA | Matoušek--Vondrák Definition 1.1.7 and Bucić Definition A.5. |
 | `lem-expectation-by-distribution` | AA / AA | Locally regrouped finite outcome sum by equal attained values. |
@@ -195,19 +224,19 @@ The intended component values below are for step 5. `LD` is `literature-derived`
 | `def-indicator-random-variable` | LD / NA | Matoušek--Vondrák Definition 3.1.2 and Bucić §2.1. |
 | `lem-indicator-expectation-and-products` | LD / AA | Matoušek--Vondrák Lemma 3.1.3 plus the standard product/intersection identity. |
 | `def-independence-of-finite-random-variables` | LD / NA | Matoušek--Vondrák Definition 1.1.8, in finite joint-value form. |
-| `thm-event-independence-and-indicator-independence` | AA / AA | Local equivalence connecting the two preceding definitions. |
+| `thm-event-independence-and-indicator-independence` | AA / AA | Canonical four-atom equivalence connecting Pishro--Nik's harvested event-independence and indicator/Bernoulli blocks. |
 | `thm-expectation-of-products-of-independent-random-variables` | LD / AA | Matoušek--Vondrák Lemma 1.1.9 and Bucić Proposition A.15. |
 | `def-variance-and-covariance` | LD / NA | Matoušek--Vondrák §6.1, Zhao §3.1, and Bucić Definition A.9. |
 | `lem-variance-and-covariance-identities` | LD / AA | Source identities $\operatorname{Var}X=E(X^2)-(EX)^2$ and covariance expansion. |
-| `thm-covariance-bilinearity-and-symmetry` | AA / AA | Local finite-expectation algebra gathered as the exact interface for variance sums. |
+| `thm-covariance-bilinearity-and-symmetry` | AA / AA | Pishro--Nik §5.3.1 covariance lemma, reformulated as the exact finite-expectation interface for variance sums. |
 | `thm-variance-of-a-finite-sum` | LD / AA | Matoušek--Vondrák §6.1 and Zhao §3.1, with all covariance terms explicit. |
 | `cor-variance-adds-for-pairwise-independent-random-variables` | LD / AA | Standard pairwise-independent specialization of the variance-sum formula. |
-| `def-bernoulli-and-binomial-random-variables` | LD / NA | Bucić Appendix A examples and the standard finite binomial model. |
+| `def-bernoulli-and-binomial-random-variables` | LD / NA | Grinstead--Snell's Bernoulli-trials/binomial paragraph and Pishro--Nik §3.1.5 definitions and sum-of-Bernoulli lemma. |
 | `lem-bernoulli-and-binomial-mean-and-variance` | LD / AA | Standard indicator-sum calculation from the harvested expectation and variance laws. |
 | `thm-markov-inequality` | LD / AA | Matoušek--Vondrák Theorem 4.1.1 and Bucić Theorem A.10. |
 | `thm-chebyshev-inequality` | LD / AA | Matoušek--Vondrák Theorem 6.1.2 and Bucić Theorem A.11. |
-| `lem-cauchy-schwarz-for-finite-random-variables` | AA / AA | Standard finite weighted Cauchy--Schwarz, inserted as machinery for the second moment. |
-| `thm-finite-second-moment-lower-bound` | AA / AA | Locally derived Paley--Zygmund-at-zero form from Cauchy--Schwarz. |
+| `lem-cauchy-schwarz-for-finite-random-variables` | AA / AA | Pishro--Nik §6.2.4, specialized to finite weighted random variables and retained as machinery for the second moment. |
+| `thm-finite-second-moment-lower-bound` | AA / AA | Canonical Paley--Zygmund-at-zero consequence of the harvested Cauchy--Schwarz theorem, using $X=X\mathbf 1_{\{X>0\}}$. |
 | `cor-relative-variance-positive-probability-bound` | AA / AA | Algebraic corollary of the local second-moment bound and the variance identity. |
 
 ### Method A items 38--65
@@ -270,4 +299,4 @@ Step 5 must not compress the Local Lemma to a citation-only proof, must not hide
 
 ## Step-2 status and blockers
 
-Decision D1 is fully applied to the batch artifacts: the A split is 37/28, the B split is 8/6, coverage is partitioned into a 52-heading foundations entry and an 84-heading method entry, and proof-contract scope follows pair order. Each coverage half retains all three independent lecture-note treatments with half-specific locator ranges. The required post-fix gates are green: `coverage-checklist` reports 2 pages, 136 harvested results, 0 errors and 0 warnings; `validate-plan` exits 0. There were no permission, web, source-access, mathematical, or seam blockers, and there is no unpublished or false dependency to report. The standalone proof-contract checker cannot pass before step 5 because the 62 planned `items/*.md` files do not yet exist; its only findings are those expected `item-missing` records, while the JSON scope/contract bijection is complete.
+Decision D1 remains fully applied: the A split is 37/28, the B split is 8/6, and proof-contract scope follows pair order. Fix round 2 changes sourcing only. The foundations coverage entry now has 113 rows across two full textbook treatments and three corroborative lecture-note prefaces, plus five canonical finite-result rows; the accepted method entry remains byte-for-byte unchanged at 84 rows across the original three lecture-note treatments. All 37 foundations A ids occur in the corrected coverage union, including the 14 ids Alpha identified. The page manifest and proof-contract file are byte-for-byte unchanged. The required final commands are green: `coverage-checklist` reports 2 pages, 197 harvested results, 0 errors and 0 warnings; `validate-plan` exits 0 with page order acyclic and consistent. There were no permission, web, source-access, mathematical, or seam blockers, and there is no unpublished or false dependency to report. The standalone proof-contract checker remains outside this fix round: before step 5 its 62 planned `items/*.md` files do not exist, while the JSON scope/contract bijection itself remains unchanged.
