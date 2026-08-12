@@ -364,3 +364,46 @@ against the page's lower-semicontinuity theorem; Hausdorff dimension and the
 Schwarz lantern need machinery that may not exist) against the reading order, and
 that the verification plus a written disposition naming the specific missing
 machinery belongs to step 6. **Carry this into the step-6 reader assignment.**
+
+
+---
+
+## D17 — the `after-authoring` impact baseline was never taken (orchestrator miss)
+
+**Recorded, not papered over.** `gates.mjs` step 6 runs
+`impact-audit.mjs --from after-authoring`, and no snapshot with that label
+exists: I failed to take it at the end of step-5 authoring. The ledger holds
+`pre-d1-rewrite` (before authoring) and `probe-post-step6` (after). The gate
+therefore fails with `usage-or-input`, and running it from `pre-d1-rewrite`
+instead reports **240 changed interfaces / 243 affected items** — a superset
+artifact, because every newly authored draft counts as changed.
+
+**The substitute analysis is stronger than the gate would have been, and is
+measured rather than asserted.** Diffing the two snapshots surface hashes
+directly: among items that already existed before this run, **exactly 4 changed
+public surface — the four D1 complex-number items — and nothing else.** No other
+published item was disturbed by 73 reader repairs, two Alpha repairs, or the
+fidelity round. Alpha dispositioned those four and their consumers at
+`research/frontier-11-alpha-step6.md` §7, including confirming the new bridge
+item carries the three consumers that rested on the plane model.
+
+**Consequence for future runs:** take the `after-authoring` snapshot immediately
+when step-5 authoring completes, before any step-6 reader is dispatched. It costs
+one command and it is unrecoverable afterwards.
+
+## D18 — step-6 gate state at the freeze
+
+13 of 15 gates pass. The two failures are both recorded deviations, neither a
+content defect:
+
+- `depcheck` — the D13 window: 4 `published-unaudited` errors on exactly the
+  four re-homed items, cleared by `--pending-audit-ok`, closing when the owner
+  audits at step 10.
+- `impact-audit` — D17 above.
+
+Everything that reads the mathematics is green: `precheck`, `fwdcheck`,
+`extcheck`, `rendercheck`, `prosecheck`, `citecheck`, `depsource`,
+`proof-contract --strict` (206/206), `finite-smoke`, `risk-report`
+**with `--require-reviewed`** (passing for the first time this run, on Alpha 150
+`risk_review` records), `content-policy` (240 scoped, 0 errors),
+`audit-manifest`, and `coverage-checklist` (9 pages, 515 harvested, 0 errors).
