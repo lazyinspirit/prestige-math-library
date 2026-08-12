@@ -11,7 +11,17 @@ publishes. Owner also asked for a stuck-check roughly every 15 minutes.
 
 ## Current step
 
-**Step 2 complete, all gates green. Step 3 not yet started.**
+**Step 3 substantively done; Alpha re-check in flight. Step 4 not yet started.**
+
+Sequence so far: Betas scaffolded (222 items) → Alpha step-3 review marked **5 of
+9 pairs `insufficient`** → all five Betas applied the findings (**238 items, 508
+harvested headings**) → Alpha re-check dispatched
+(`research/frontier-11-alpha-recheck.task.md`). Alpha will not splice a pair it
+marked `insufficient` until its findings are resolved.
+
+Key artifacts: `research/frontier-11-alpha-step3-scaffold-review.md` (verdicts and
+rulings), `research/frontier-11-alpha-recheck.md` (pending),
+`research/frontier-11-step3-decisions.md` (D1–D11).
 
 ## State
 
@@ -106,13 +116,28 @@ it.** Strike the obligation from `LEVELS.md` in the same commit that publishes.
 
 ## Exact next action
 
-1. Wait for batches 4 and 5 to exit (`research/frontier-11-dispatch/beta-batch-{4,5}.result.json`).
-2. Commit scaffolds + `frontier-11-step3-decisions.md` + `frontier-11-brief-alpha.md`.
-3. Dispatch Alpha at step 3:
-   `node tools/dispatch.mjs --role alpha --brief research/frontier-11-brief-alpha.md --label step3 --run frontier-11 --timeout 10800 --json`
-   Alpha writes `research/frontier-11-alpha-step3-scaffold-review.md` with a
-   `sufficient`/`insufficient` verdict per pair. Route findings to owning Betas,
-   Alpha re-checks, then step 4 splices.
+1. Read `research/frontier-11-alpha-recheck.md` when it lands. It carries (a) a
+   per-label resolution table, (b) final `sufficient`/`insufficient` per pair,
+   (c) web-enabled harvest spot-checks, (d) **the D1 sequencing plan**.
+2. If any pair is still `insufficient`, re-dispatch that Beta only, using
+   `research/frontier-11-brief-beta-fix.md` + a new task file.
+3. **Step 4 splice** (orchestrator): splice the five `*.pages.json` into
+   `research/plan-spec.json`, taking the UNION of `requires`, hard-failing on id
+   clash. Add `roots-and-rational-powers` to order 54 (D2). Then Alpha propagates
+   `.notes.md` amendments into `research/plan-*.md` (D9 rewrites a CT-2 clause
+   that is false as written).
+4. **Apply D1 in the order Alpha specifies**, not before — see the open risk below.
+5. Gate: `node tools/gates.mjs --step 4 --run frontier-11 --json`.
+6. **Step 5 authoring**: same Betas author what they scaffolded, via
+   `briefs/authoring.md` adapted to run paths (write
+   `research/frontier-11-brief-authoring.md`; the base brief carries `<n>` and
+   dispatch refuses it).
+
+## Judge lane note for step 7
+
+`preflight.mjs --judges` = READY, both lanes validated with a real call. Supply
+**every A page in the run** to `judge-sweep.mjs --pages`; the sweep adds B
+companions automatically because coverage is per pair.
 
 ## Roles for the rest of the run
 
@@ -128,8 +153,28 @@ Run briefs: `research/frontier-11-brief-beta.md`,
 
 ## Open risks
 
-- Step 4's splice **hard-fails on id clash**; batch 1's order-54 scaffold claims
-  the four ℂ ids, so D1 must be applied before or during the splice.
-- Batch 2 is the weak batch and may come back `insufficient`.
+- **D1 sequencing is unsolved until Alpha answers.** The four published ℂ items
+  must move to a page whose file does not exist yet — page files are created at
+  step-5 authoring. Move them too early and they are listed by no page; too late
+  and two pages list them. A published page listing a draft item is a hard error.
+  Alpha was told to write the exact ordered sequence and to touch **nothing**
+  meanwhile. Step 4's splice also hard-fails on id clash, and batch 1's order-54
+  scaffold legitimately claims those four ids.
+- **Harvest padding** is now a live risk in the opposite direction: batch 5 went
+  37 → 124 headings on the same four sources. Alpha is checking the enumeration is
+  genuinely the sources' own headings, since the no-padding rule binds as hard as
+  the no-thin-page rule.
+- **D10, for the owner, not this run:** no field-of-fractions construction exists
+  anywhere in library or plan, yet `cex-ordered-field-not-archimedean` and
+  `ex-rational-function-field-order` are published and both open "Given: … the
+  field of fractions of $\mathbb{R}[t]$".
 - `run-wave.test.mjs` A10 failure is **pre-existing** on a clean tree; not caused
   by this run.
+
+## Fixed this session, do not re-diagnose
+
+- `tools/dispatch.mjs` claude lane: `acceptEdits` → **`bypassPermissions`**.
+  `acceptEdits` still prompts for `WebFetch`, which silently cost Alpha the whole
+  source-faithfulness criterion at step 3. `--check-read-only` unchanged.
+- App repo `web/node_modules` installed — without `katex`/`yaml`, **`rendercheck`
+  skips silently** instead of failing.

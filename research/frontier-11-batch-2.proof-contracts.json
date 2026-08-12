@@ -601,11 +601,19 @@
       "citations": [
         {
           "fact": "L1",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$f'(c)$ is the limit of the ordinary one-variable difference quotient when that limit exists",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
           "source": "lem-uniform-integral-error-bound",
           "source_section": "Statement",
-          "quote": "If $\\eta\\ge0$",
+          "quote": "If $|f(x)-g(x)|\\le\\eta$ throughout the interval, then the integrals differ by at most $\\eta$ times the interval length",
           "uses": [
-            "1.1",
             "2.1"
           ]
         }
@@ -613,7 +621,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Apply the one-variable mean value theorem at each integration point to express the parameter difference quotient.",
+          "claim": "Treat the parameter slice as an ordinary one-variable function and apply the mean value theorem at each integration point to express its difference quotient.",
           "step": "1.1",
           "inputs": [
             "L1"
@@ -621,11 +629,11 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Use uniform continuity of the partial derivative and the uniform integral-error bound to pass the limit through the integral and prove continuity of the derivative.",
+          "claim": "Use uniform continuity of the continuous parameter-derivative representative and the uniform integral-error bound to pass the limit through the integral and prove continuity of the derivative.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
-            "L1"
+            "L2"
           ]
         }
       ],
@@ -909,9 +917,18 @@
       "citations": [
         {
           "fact": "L1",
-          "source": "ex-monotone-function-discontinuous-exactly-at-the-rationals",
-          "source_section": "Example",
-          "quote": "discontinuous at every rational and continuous at every irrational",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q}$ is countably infinite",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-monotone-with-prescribed-discontinuity-set",
+          "source_section": "Statement",
+          "quote": "For every at most countable $E\\subseteq\\mathbb{R}$ there is a bounded nondecreasing function whose discontinuity set is exactly $E$, every discontinuity being a jump",
           "uses": [
             "1.1",
             "2.1"
@@ -924,7 +941,8 @@
           "claim": "Restrict the published monotone prescribed-jump function to the unit interval and invoke monotone integrability.",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "L2"
           ]
         },
         {
@@ -933,7 +951,7 @@
           "step": "2.1",
           "inputs": [
             "step 1.1",
-            "L1"
+            "L2"
           ]
         }
       ],
@@ -986,22 +1004,92 @@
       "citations": [
         {
           "fact": "L1",
-          "source": "ex-thomae-is-riemann-integrable-with-integral-zero",
-          "source_section": "Example",
-          "quote": "$t$ is Riemann integrable on $[0,1]$",
+          "source": "def-dirichlet-and-thomae-functions",
+          "source_section": "Definition",
+          "quote": "Thomae's function is $1/q(x)$ at a rational point and $0$ at every irrational point, with values in $[0,1]$",
           "uses": [
             "1.1",
             "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-dirichlet-and-thomae-continuity-sets",
+          "source_section": "Statement",
+          "quote": "Thomae's function is continuous at every irrational and discontinuous at every rational",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q}$ is countably infinite",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-subset-of-countable",
+          "source_section": "Statement",
+          "quote": "Every subset of an at most countable set is at most countable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-countably-many-discontinuities-integrable",
+          "source_section": "Statement",
+          "quote": "A bounded function on $[a,b]$ whose discontinuity set is at most countable is Riemann integrable",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+          "quote": "The irrationals are dense in $\\mathbb{R}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-darboux-sums",
+          "source_section": "Definition",
+          "quote": "A lower Darboux sum is the finite sum of the subinterval infima times the subinterval lengths",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-darboux-integral",
+          "source_section": "Definition",
+          "quote": "For an integrable function the lower and upper Darboux integrals agree and their common value is the integral",
+          "uses": [
+            "1.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Use nonnegativity, additivity, and the zero total integral to prove every initial integral is zero.",
+          "claim": "Use the A-page continuity-set and countable-discontinuity results to prove integrability, then use irrational density to make every lower Darboux sum zero and hence obtain zero total integral; positivity and additivity then make every initial integral zero.",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L7",
+            "L8"
           ]
         },
         {
@@ -2421,12 +2509,49 @@
       "citations": [
         {
           "fact": "L1",
-          "source": "ex-harmonic-series-diverges",
-          "source_section": "Example",
-          "quote": "It **diverges**, and its partial sums are unbounded above.",
+          "source": "thm-p-series-rational",
+          "source_section": "Statement",
+          "quote": "The harmonic series diverges as the $p=1$ case of the rational $p$-series theorem",
           "uses": [
             "1.1",
             "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nonnegative-series-bounded-partial-sums",
+          "source_section": "Statement",
+          "quote": "A series of nonnegative terms converges exactly when its partial sums are bounded above",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "$\\pi>0$ and $\\pi/2$ is the smallest positive zero of cosine",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "$\\sin(x+\\pi)=-\\sin x$ and $\\sin(\\pi/2)=1$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Reciprocals of positive natural numbers become smaller than every positive tolerance",
+          "uses": [
+            "1.1"
           ]
         }
       ],
@@ -2436,7 +2561,11 @@
           "claim": "Choose alternating extrema tending to zero so successive vertical increments dominate a harmonic subseries.",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5"
           ]
         },
         {
@@ -2445,7 +2574,8 @@
           "step": "2.1",
           "inputs": [
             "step 1.1",
-            "L1"
+            "L1",
+            "L2"
           ]
         }
       ],
@@ -2729,11 +2859,64 @@
       "citations": [
         {
           "fact": "L1",
-          "source": "ex-cantor-function-bv-not-absolutely-continuous",
-          "source_section": "Example",
-          "quote": "has total variation one, but it is not absolutely continuous",
+          "source": "cor-cantor-function-is-continuous",
+          "source_section": "Statement",
+          "quote": "The Cantor function is continuous and nondecreasing on $[0,1]$, with endpoint values $0$ and $1$",
           "uses": [
-            "1.1",
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-jordan-decomposition-for-bv-functions",
+          "source_section": "Statement",
+          "quote": "A real function on $[a,b]$ has bounded variation if and only if it is a difference of two nondecreasing functions",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-absolutely-continuous-function",
+          "source_section": "Definition",
+          "quote": "Absolute continuity controls the sum of endpoint increments over every finite disjoint interval family whose total length is sufficiently small",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cantor-set",
+          "source_section": "Definition",
+          "quote": "$C_0=[0,1]$ and $C_{n+1}=C_n/3\\cup(2/3+C_n/3)$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cantor-function",
+          "source_section": "Definition",
+          "quote": "On the Cantor set the Cantor function halves ternary digits and reads them as a binary expansion",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-cantor-set-ternary-description",
+          "source_section": "Statement",
+          "quote": "The Cantor set is exactly the image of the $\\{0,2\\}$-valued ternary digit sequences",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "If $|r|<1$ then $r^n$ tends to zero",
+          "uses": [
             "2.1"
           ]
         }
@@ -2741,19 +2924,24 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Use bounded variation of the identity and Cantor coordinates to make the graph path rectifiable and bound its length.",
+          "claim": "Use continuity and the Jordan decomposition theorem to make the Cantor coordinate BV, verify the identity coordinate directly, and apply the componentwise rectifiability theorem to the graph.",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "L2"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "Project any hypothetical absolute-continuity estimate to the second coordinate to contradict the published Cantor-function example.",
+          "claim": "Derive the stage-interval lengths and Cantor endpoint increments from the published recursion and digit description, then use those finite families to contradict absolute continuity directly.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
-            "L1"
+            "L3",
+            "L4",
+            "L5",
+            "L6",
+            "L7"
           ]
         }
       ],

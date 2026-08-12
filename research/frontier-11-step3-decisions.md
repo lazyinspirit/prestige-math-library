@@ -219,3 +219,60 @@ capability loss dressed as a completed stage.
 **Outstanding:** Alpha asked for a web-enabled re-check of batch 5's Riehl and
 Leinster harvests and batch 3's Flajolet–Sedgewick leg before step 6. Batch 5's
 fix task (Y1) and batch 3's (C2) both carry it, and Alpha re-checks at step 4.
+
+---
+
+# Alpha's re-check — `research/frontier-11-alpha-recheck.md`
+
+**All nine pairs `sufficient` on breadth and depth.** Harvest spot-checks with
+web access: **no locator in this run fails.** Batch 5's tripled harvest
+(37 → 124) is genuinely the sources' own headings, **not padded** — Riehl and
+Leinster both verified. Batch 3's Flajolet–Sedgewick leg is under-enumerated but
+not false. Alpha also accepted **two Beta pushbacks** and recorded one of its own
+findings as wrong: it had asked for a counterexample id that already exists
+published (`fs-determinant-is-additive-on-matrices`), and minting a second id
+would violate SCHEMA §2.
+
+## D12 — OWNER RE-DECISION on D1, 2026-08-12: take the rewrite deliberately
+
+**D1 as approved on 2026-08-11 rested on a false premise, and that premise was
+the orchestrator's.** I told the owner this was published text moving pages with
+ids unchanged and nothing retro-tagged. Alpha compared the staged scaffold to the
+published files (blocker B1) and found all four items have **different titles and
+different dependency sets**, and that the construction of ℂ changes from the
+plane ℝ² with coordinate arithmetic to the stem field ℝ[x]/(x²+1). That is a
+**material rewrite under SCHEMA §3**, not a relocation.
+
+**A pure relocation is impossible**, independently of preference. Published
+`lem-complex-conjugation-and-modulus-laws` derives the triangle inequality from
+`def-p-norms-on-rn` at **order 167**; from order 54 that is a load-bearing
+forward reference that hard-fails `forward-ref`, and declaring
+`rn-as-a-normed-space` in order 54's `requires` hard-fails `prereq-order`
+(167 > 54). Re-homing the p-norm pair instead is unavailable — 43 consumers. The
+scaffold's rewritten proof dissolves it via Lagrange's identity
+`(a²+b²)(u²+v²) − (au+bv)² = (av−bu)² ≥ 0`, whose inputs all sit at order ≤ 9.
+Alpha verified the identity.
+
+**The owner re-decided on the corrected premise and approved the rewrite.**
+Consequences accepted: `verification.audited` voided on all four, re-precheck,
+and both judge lanes see them at step 7 on their new text inside order 54/55's
+frozen pair context. Receipt: `research/frontier-11-rehomed.json`. Baseline
+snapshot `pre-d1-rewrite` in `research/frontier-11-touches.json`, taken before
+any edit to `items/` or `library/`.
+
+**Required companion (Alpha §4.5a):** add
+`thm-complex-numbers-are-the-real-coordinate-plane` at order 54 so published
+`def-complex-metric-convergence-and-continuity` keeps the warrant for its
+sentence "Under the identification ℂ = ℝ²". It states the coordinate bijection
+and arithmetic **only** — not the norm identification, which needs order 167 and
+stays at 189. Three consumers rest on the plane model.
+
+## Open blockers from the re-check
+
+- **B2 — batch 1's `content-policy --manifest-only` gate is red**, 8 errors, and
+  has been since the scaffold was written; that Beta never ran it. Alpha states
+  it clears once the `--rehomed` receipt exists (S1/S4). **Verify, do not assume.**
+- **B3 — Apostol's internal numbering unverified.** Section titles and page
+  numbers verified exactly from the book's own contents, but Definition 6.16 and
+  Theorems 6.17–6.20 could not be read: full-text copies returned 403/401. The
+  batch-2 harvest rows citing those numbers are unconfirmed at item granularity.

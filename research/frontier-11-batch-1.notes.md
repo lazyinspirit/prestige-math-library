@@ -2,11 +2,11 @@
 
 ## Batch result
 
-This scaffold contains 53 items: 20 on `field-extensions-and-the-complex-numbers`, 7 on its B page, 18 on `conjugacy-and-simplicity-in-the-symmetric-groups`, and 8 on its B page. The two A pages are below the run-specific 60-item ceiling, so **no page split is proposed**.
+This scaffold contains 54 items: 21 on `field-extensions-and-the-complex-numbers`, 7 on its B page, 18 on `conjugacy-and-simplicity-in-the-symmetric-groups`, and 8 on its B page. The two A pages are below the run-specific 60-item ceiling, so **no page split is proposed**.
 
 The canonical harvest records 80 source or canonical-result headings. Of these, 60 are `included`, 11 are `inline`, 2 are `already-published`, 1 is `deferred`, and 6 are `out-of-scope`. Thus 73 headings are retained in this batch or by an opened published dependency and 7 are declined. Counts are source-heading dispositions, so independently sourced headings that support the same item are deliberately counted separately.
 
-The proof-contract file begins contracts for all 48 proof-bearing scaffold items. It records the intended citation graph, proof route, boundary obligations, and selected finite smoke tests. Exact quotation matching, numbered proof-step partitioning, and synchronization to the authored item text remain step-5 work, as required by the proof-contract workflow; the five definitions correctly have no contract.
+The proof-contract file begins contracts for all 49 proof-bearing scaffold items. It records the intended citation graph, proof route, boundary obligations, and selected finite smoke tests. Exact quotation matching, numbered proof-step partitioning, and synchronization to the authored item text remain step-5 work, as required by the proof-contract workflow; the five definitions correctly have no contract.
 
 ## Proposed A-page summaries
 
@@ -14,7 +14,7 @@ The proof-contract file begins contracts for all 48 proof-bearing scaffold items
 
 A field extension enlarges a field while preserving its arithmetic. This page distinguishes algebraic and transcendental generators, describes a simple transcendental extension by rational expressions and its generator-preserving isomorphisms, and identifies the composite of two subfields. For algebraic generators it develops evaluation kernels and minimal polynomials, constructs roots in irreducible quotients, proves the root-adjunction universal property and the uniqueness of stem fields, and obtains power-basis coordinates and degree.
 
-The construction is then carried out for $x^2+1$ over the reals. It defines $\mathbb C=\mathbb R[x]/(x^2+1)$, verifies the field operations and inverse formula, and proves the unique form $a+bi$. Conjugation, real and imaginary parts, modulus, its algebraic and triangle-inequality laws, the real automorphisms of $\mathbb C$, and an explicit Cartesian square-root formula follow without using polar form or the fundamental theorem of algebra.
+The construction is then carried out for $x^2+1$ over the reals. It defines $\mathbb C=\mathbb R[x]/(x^2+1)$, verifies the field operations and inverse formula, and proves the unique form $a+bi$. The resulting bijection with $\mathbb R^2$ records the coordinate arithmetic and Cartesian modulus formula. Conjugation, the modulus laws, the real automorphisms of $\mathbb C$, and an explicit Cartesian square-root formula follow without using polar form or the fundamental theorem of algebra.
 
 ### `conjugacy-and-simplicity-in-the-symmetric-groups`
 
@@ -25,9 +25,9 @@ Inside $A_n$, an $S_n$-class either stays whole or splits into two equal classes
 ## Step-4 plan amendments required
 
 1. Add `roots-and-rational-powers` to the `requires` list of order 54. The modulus and Cartesian complex-square-root proofs use the published existence and uniqueness of nonnegative real square roots and the relevant order lemmas. Keeping this dependency explicit is preferable to hiding those facts as arithmetic.
-2. Relocate the following four planned global IDs from order 189, `the-complex-exponential-and-eulers-formula`, to order 54: `def-complex-numbers-and-arithmetic`, `thm-complex-numbers-form-a-field`, `def-complex-conjugate-real-imaginary-part-and-modulus`, and `lem-complex-conjugation-and-modulus-laws`. Order 189 should require order 54 and begin with polar/exponential material rather than define $\mathbb C$ a second time. The quotient construction here and the unique $a+bi$ representation supply the later bridge to the $\mathbb R^2$ model.
+2. Relocate the following four planned global IDs from order 189, `the-complex-exponential-and-eulers-formula`, to order 54: `def-complex-numbers-and-arithmetic`, `thm-complex-numbers-form-a-field`, `def-complex-conjugate-real-imaginary-part-and-modulus`, and `lem-complex-conjugation-and-modulus-laws`. Order 189 should require order 54 and begin with polar/exponential material rather than define $\mathbb C$ a second time. The quotient construction here and `thm-complex-numbers-are-the-real-coordinate-plane` supply the later bridge to the $\mathbb R^2$ model.
 
-No split amendment is needed. The exact proposed cuts are therefore the existing A/B boundaries: order 54 has 20 A items and order 64 has 18 A items.
+No split amendment is needed. The exact proposed cuts are therefore the existing A/B boundaries: order 54 has 21 A items and order 64 has 18 A items.
 
 ## Step-3 Alpha findings applied
 
@@ -42,13 +42,21 @@ Source verification was repeated with working web access on 2026-08-12. Judson T
 
 Coverage now records Judson Theorem 21.9 as `included` at T2, Milne Example 1.24 as `included` at T1, and Milne's composite paragraph as `included` at T3. The already-`included` unique-stem-field row is retargeted from the universal-property theorem to T4 so that its item actually states the harvested result. The field-of-fractions construction itself remains outside this run under Alpha §0 and is not made load-bearing. Judson Example 21.7's claims about $\pi$ and $e$ remain a non-load-bearing reader-facing illustration on the algebraic/transcendental definition; Step 5 must not present them as proved locally.
 
+## Alpha re-check §4.5(a) bridge applied
+
+- Added `thm-complex-numbers-are-the-real-coordinate-plane` immediately after `thm-complex-numbers-form-a-field`. The theorem sends $a+bi$ to $(a,b)$, proves this is a bijection, carries addition and multiplication to $(a+u,b+v)$ and $(au-bv,av+bu)$, and records $|a+bi|=\sqrt{a^2+b^2}$.
+- Its complete dependency route is `thm-complex-numbers-form-a-field` (the immediately preceding planned theorem supplies unique coordinates and the coordinate operation formulas), `thm-of-square-roots` (order 9 supplies the unique nonnegative square root in a complete ordered field), and `cor-cauchy-reals-lub-complete` (order 9 supplies that the constructed reals are a complete ordered field). The two published dependencies were reopened on disk and their displayed Statements say exactly those things; both are `status: published`, neither has `provenance.statement: ai-generated`, and every dependency is at order at most 54.
+- No p-norm, Euclidean-norm, or metric result is cited or asserted. In particular, `def-p-norms-on-rn` at order 167 remains available only to the order-189 metric item; the bridge records the Cartesian modulus formula as its coordinate definition, not an identification with $d_2$.
+- Srivastava §1.1 supplies the coordinate-plane treatment. The theorem's Statement provenance is `ai-altered`, because it materially recasts that treatment as a bridge from the quotient construction; its proof provenance is also `ai-altered` because the local proof transports the quotient model through the preceding unique-coordinate theorem. The proof contract separates well-defined bijectivity, operation transport, and the modulus formula, including the zero and unit boundaries.
+- The Srivastava heading `Section 1.1, Complex Number System` was already marked `included` on disk, so its disposition did not need changing; its target was retagged from `def-complex-numbers-and-arithmetic` to this bridge id. That is the faithful correction because Srivastava presents the $\mathbb R^2$ model, whereas the definition now uses the quotient model. A repository-wide id search found no existing item with the new id.
+
 ## Source ledger and harvest rationale
 
 ### Field extensions and the complex numbers
 
 - Thomas W. Judson, *Abstract Algebra: Theory and Applications*, Chapter 21 §21.1, through the degree paragraph after Example 21.14: <https://judsonbooks.org/aata-files/aata-html/fields-section-extension-fields.html>. This textbook treatment supplied the root-extension existence theorem, algebraic/transcendental distinction, the classification of simple transcendental extensions, minimal polynomials, quotient description, power-basis theorem, degree, and the $\mathbb C$ quotient example.
 - J. S. Milne, *Fields and Galois Theory*, Chapter 1, pp. 16–19, from “The subfield generated by a subset” through Example 1.28: <https://www.jmilne.org/math/CourseNotes/FT.pdf>. This independent full lecture-note treatment supplied generated subfields, rational expressions in a transcendental generator, composites of subfields, irreducible quotients, reduced representatives, stem fields and their uniqueness, evaluation kernels, and minimal polynomials.
-- R. K. Srivastava, *MA 547 Complex Analysis Lecture Notes*, §1.1, pp. 3–5: <https://fac.iitg.ac.in/rksri/MA547%20Complex%20Analysis%20lecture%20notes%202025.pdf>. This supplied the independent complex-field arithmetic, conjugation, modulus identities, and triangle inequality.
+- R. K. Srivastava, *MA 547 Complex Analysis Lecture Notes*, §1.1, pp. 3–5: <https://fac.iitg.ac.in/rksri/MA547%20Complex%20Analysis%20lecture%20notes%202025.pdf>. This supplied the independent $\mathbb R^2$ coordinate model, complex-field arithmetic, conjugation, modulus identities, and triangle inequality.
 - John McCuan, *Notes on Complex Analysis*, “The complex square root (computation),” pp. 20–21: <https://mccuan.math.gatech.edu/courses/6321-spring2018/notes/spring18.pdf>. This supplied the Cartesian square-root calculation and its negative-real exceptional case.
 - The quotient-ring, polynomial-division, PID, irreducibility, and real-order facts were also checked against the exact published items listed in the dependency ledger below. The universal properties in the scaffold synthesize the polynomial-ring and quotient-ring universal properties with Milne's stem-field uniqueness result.
 
@@ -78,7 +86,7 @@ Judson's AATA is distributed under the GNU Free Documentation License. Milne's c
 - Field extensions are literal inclusions $F\subseteq E$, and homomorphisms in an adjoining-root universal property fix that displayed copy of $F$. This matches both field sources and the published `def-field` conventions.
 - For algebraic $a$, the quotient proof shows $F[a]=F(a)$. For transcendental $a$ these differ: $F[a]$ is polynomial and $F(a)$ rational. The scaffold therefore does not use the two notations interchangeably.
 - The older prose plan said degree would appear later, but the run-specific dispatch explicitly requires the degree and power basis here. The scaffold resolves this by defining $[F(a):F]=n$ through the proved unique coordinates $1,a,\ldots,a^{n-1}$, without importing the later general dimension theory.
-- The older order-189 prose used an $\mathbb R^2$ construction of $\mathbb C$. This batch makes the requested quotient construction canonical; the theorem giving unique $a+bi$ coordinates is the explicit isomorphism-level bridge to coordinate-pair arithmetic later.
+- The older order-189 prose used an $\mathbb R^2$ construction of $\mathbb C$. This batch makes the requested quotient construction canonical; `thm-complex-numbers-are-the-real-coordinate-plane` is the explicit bijective bridge to coordinate-pair arithmetic later.
 - Conjugation is written $g\sigma g^{-1}$ throughout. The relabelling formula is checked against that orientation, not recalled from a source using an unstated opposite convention.
 - “An $n$-cycle and a transposition generate $S_n$” is false without a relative-position hypothesis. The A page proves the standard pair $(1\,2\,\ldots\,n)$ and $(1\,2)$; the B page refutes the unrestricted claim.
 - The complex square-root proof is Cartesian and uses only real nonnegative square roots. No polar representation and no fundamental theorem of algebra is assumed or forward-cited.
@@ -121,6 +129,7 @@ For Route K, I explicitly checked the load-bearing edge rather than relying on a
 | `lem-x-squared-plus-one-is-irreducible-over-the-reals` | `literature-derived` | `ai-altered` | The conclusion underlies both sources' complex quotient; the proof is recast through the published real-order and quadratic irreducibility results. |
 | `def-complex-numbers-and-arithmetic` | `literature-derived` | `not-applicable` | Judson Example 21.14 and Milne Example 1.26 define the same quotient model and distinguished class $i$. |
 | `thm-complex-numbers-form-a-field` | `literature-derived` | `ai-altered` | Milne and Srivastava supply quotient/coordinate arithmetic; the proof explicitly combines inherited quotient axioms, positivity, and the inverse calculation. |
+| `thm-complex-numbers-are-the-real-coordinate-plane` | `ai-altered` | `ai-altered` | Srivastava §1.1 supplies the $\mathbb R^2$ coordinate treatment and formulas; the Statement materially recasts it as a bridge from the quotient construction, and the local proof transports that model through the preceding unique-$a+bi$ theorem while unfolding the Cartesian modulus definition without invoking the order-167 norm theory. |
 | `cor-complex-numbers-are-a-quadratic-real-extension` | `ai-altered` | `ai-altered` | This is the direct specialization of the retained power-basis theorem to the already proved minimal polynomial $x^2+1$. |
 | `cor-universal-property-of-the-complex-numbers` | `ai-altered` | `ai-altered` | This is the exact specialization of the preceding root-adjunction universal property and is phrased to fix the chosen real embedding. |
 | `def-complex-conjugate-real-imaginary-part-and-modulus` | `literature-derived` | `not-applicable` | Srivastava §1.1 supplies these standard coordinate definitions; the modulus uses the published nonnegative real square root. |
@@ -171,5 +180,6 @@ Re-run from the repository root after the step-3 fixes on 2026-08-12:
 
 - `node tools/validate-plan.mjs research/plan-spec.json` — passed: declared page order is acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved IDs among pages with item lists.
 - `node tools/coverage-checklist.mjs research/frontier-11-batch-1.coverage.json` — passed: 2 pages, 80 harvested results, 0 errors, 0 warnings.
+- `node tools/content-policy.mjs research/frontier-11-batch-1.pages.json --manifest-only --rehomed research/frontier-11-rehomed.json` — passed: 54 scoped items, 0 errors, 0 warnings.
 
-The additional cross-artifact check found 53 unique scaffold IDs, no unresolved or forward local dependency, no invalid coverage target, and exact agreement between the 48 proof-bearing IDs, proof-contract scope, and contract keys. No applied canonical-embedding notation occurs.
+The additional cross-artifact check found 54 unique scaffold IDs, no unresolved or forward local dependency, no invalid coverage target, and exact agreement between the 49 proof-bearing IDs, proof-contract scope, and contract keys. No applied canonical-embedding notation occurs.

@@ -60,6 +60,19 @@ The first three are the approved D4 declines. They are not missing-machinery exc
 - **A3:** chose the trigonometric route, added `ex-unit-circle-arc-has-length-theta`, and added the published page `sine-cosine-and-the-definition-of-pi` to the A page's `requires`.
 - **R-A:** added Apostol, *Mathematical Analysis*, 2nd ed., Ch. 6 §§6.9–6.12, book pp. 133–137. Every section, definition, numbered theorem, and example heading through Theorem 6.20 is enumerated in the coverage ledger; the range stops before the Exercises.
 
+## Step-4 B-leaf and prerequisite repair
+
+The step-4 splice exposed ten validator errors. The four `b-leaf` errors and the four induced B-page `undeclared-prereq` errors are removed by replacing each formal dependency on a published examples-page item with an A-page route and an explicit inline specialization:
+
+1. `cex-graph-of-x-sin-one-over-x-is-not-rectifiable` now cites `thm-p-series-rational` at `p=1`, plus the A-page nonnegative-partial-sum and trigonometric results needed to turn the alternating extrema into unbounded coordinate variation. The reader-facing proof may mention the published harmonic-series example, but it is not a formal dependency.
+2. `ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous` now obtains BV from `thm-jordan-decomposition-for-bv-functions` and proves failure of absolute continuity directly from `def-absolutely-continuous-function` and the published Cantor recursion/digit construction. It no longer cites the Cantor-function examples page.
+3. `ex-dense-jump-integrand-with-dense-nondifferentiability` now applies `thm-monotone-with-prescribed-discontinuity-set` to the countable set of rationals, using `thm-rationals-countable`, before restricting to `[0,1]`. It no longer cites the prescribed-jump example.
+4. `ex-thomae-integral-function-differentiates-through-dense-discontinuities` now derives integrability from `cor-countably-many-discontinuities-integrable` and derives the zero integral from the A-page Darboux definitions and irrational density. It no longer cites the Thomae example.
+
+The two independent A-page `undeclared-prereq` errors received different dispositions. `lem-uniform-integral-error-bound` is genuinely used to pass the uniformly controlled parameter difference quotients through the integral, so `uniform-convergence-of-functions` is now declared in the FTC page's `requires`. By contrast, `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle` has a single real parameter and needs only the ordinary derivative of each parameter slice. Its strategy and contract now use `def-derivative`; `def-directional-and-partial-derivatives` and the page `the-total-derivative` are not used or declared.
+
+No coverage disposition changed: the harvested headings still resolve to the same 38 scaffold item ids, and none of the four removed B-page ids appeared as an `already-published` coverage receipt. The coverage ledger therefore needs no retag. No Alpha finding is disputed and there is no blocker.
+
 ## Source ledger
 
 Every URL was opened and every freely exposed range in the coverage JSON was read through its listed headings. The Botsko primary record exposes the exact journal metadata but not the two-page text; its theorem statement was checked in full in Swartz's open paper, which explicitly identifies it as Botsko's corollary. This access qualification is recorded instead of claiming to have read paywalled prose.
@@ -87,7 +100,7 @@ Licensing and reuse: these sources were used for mathematical verification and c
 4. The almost-everywhere corollary states the Countable-Choice assumption because the published direction “integrable implies null discontinuity set” spends it. No choice-free claim is smuggled in.
 5. Hunter's substitution theorem and the published working theorem do not require monotonicity or injectivity of the inner function. Oriented limits cover reversed and coincident endpoint images.
 6. For a C¹ Stieltjes integrator, “C¹” means continuous on the closed interval, differentiable in the interior, with a derivative extending continuously to the closed interval; the reduction theorem uses that extension.
-7. The compact-rectangle Leibniz rule uses the same endpoint discipline: the parameter partial derivative is required only over the interior parameter range and must admit a continuous extension to the whole rectangle. The derivative of the parameter integral at the two endpoints is relative/one-sided.
+7. The compact-rectangle Leibniz rule is deliberately one-parameter: for each fixed integration variable, the ordinary derivative of the parameter slice is required only over the interior parameter range and is represented by a function extending continuously to the whole rectangle. The derivative of the parameter integral at the two endpoints is relative/one-sided. No total-derivative or multivariable partial-derivative definition is needed.
 8. A path is a parametrized continuous map, not its trace. The base definition takes `n>=1`; singleton parameter intervals have length zero. This avoids silently invoking published vector-derivative notation, which is likewise stated for positive target dimension.
 9. Reparametrization invariance uses ETH's continuous surjective nondecreasing/nonincreasing convention and is broader than IIT's differentiable map with positive derivative: pauses and reversal are included, while nonmonotone backtracking is not.
 10. The C¹ speed formula uses an interior derivative with a continuous endpoint extension. The proof must first justify the relative endpoint derivatives before invoking the published vector Newton–Leibniz statement.
@@ -114,12 +127,12 @@ No AI-generated Statement or Construction is load-bearing. The only within-batch
 | `thm-integration-by-parts-with-interior-derivatives` | ai-altered | ai-altered | Hunter Theorem 12.10/Lebl Exercise 5.3.5, strengthened via the sourced interior-derivative Newton–Leibniz form. |
 | `thm-substitution-with-riemann-integrable-inner-derivative` | ai-altered | ai-altered | Hunter Theorem 12.12 and Lebl Theorem 5.3.5; no monotonicity/injectivity and oriented endpoints are explicit. |
 | `thm-one-sided-ftc-at-points-with-one-sided-limits` | literature-derived | ai-altered | Hunter Theorem 12.4 and Lebl §5.3.2; local-average proof covers both sides and endpoints. |
-| `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle` | literature-derived | ai-altered | Lebl Theorem 9.1.1, decomposed through the library's mean-value and uniform integral-error lemmas. |
+| `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle` | literature-derived | ai-altered | Lebl Theorem 9.1.1, stated for ordinary derivatives of the one-variable parameter slices and decomposed through the library's mean-value and uniform integral-error lemmas. |
 | `thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators` | ai-altered | ai-altered | Synthesis of the published C¹-integrator reduction with the two exact Riemann FTC forms. |
 | `ex-bounded-discontinuous-derivative-that-is-riemann-integrable` | literature-derived | ai-altered | Hunter Example 12.2 and Chen §3.2; endpoint calculation and integrability route made explicit. |
 | `cex-volterra-bounded-derivative-not-riemann-integrable` | literature-derived | ai-altered | Chen §§3.2–3.3 and Theorem 3.5; adapted to the published Smith–Volterra–Cantor construction. |
-| `ex-dense-jump-integrand-with-dense-nondifferentiability` | ai-altered | ai-altered | Lebl Exercise 5.3.12 combined with the published prescribed-jump example and the new one-sided FTC. |
-| `ex-thomae-integral-function-differentiates-through-dense-discontinuities` | ai-altered | ai-generated | New consequence of the published Thomae integral-zero example; elementary and non-load-bearing. |
+| `ex-dense-jump-integrand-with-dense-nondifferentiability` | ai-altered | ai-altered | Lebl Exercise 5.3.12 combined with the A-page prescribed-discontinuity theorem specialized to the rationals and the new one-sided FTC. |
+| `ex-thomae-integral-function-differentiates-through-dense-discontinuities` | ai-altered | ai-generated | New consequence after re-deriving Thomae integrability and zero integral inline from the A-page continuity-set, countable-discontinuity, and Darboux results; elementary and non-load-bearing. |
 | `ex-sparse-spikes-ftc-conclusion-at-a-discontinuity` | ai-generated | ai-generated | New geometric-spike witness; checkable and non-load-bearing. |
 | `cex-ae-zero-derivative-does-not-determine-endpoint-change` | literature-derived | ai-altered | Standard Cantor-function counterexample using published endpoint, local-constancy, and null-set facts. |
 | `def-path-polygonal-length-and-rectifiability-in-rn` | literature-derived | not-applicable | IIT §5 and ETH §1.1; a parametrized continuous map and supremum of polygonal sums. |
@@ -139,21 +152,22 @@ No AI-generated Statement or Construction is load-bearing. The only within-batch
 | `cor-regular-c1-paths-have-c1-unit-speed-parametrizations` | literature-derived | ai-altered | ETH §1.1 specialized to C¹ and the published inverse-derivative theorem. |
 | `ex-line-segment-and-polygonal-path-length` | literature-derived | ai-altered | Canonical source example; kept literature-derived because a later companion item uses it. |
 | `ex-unit-circle-arc-has-length-theta` | literature-derived | ai-altered | Standard circular-arc computation using the published order-179 trigonometric derivative and Pythagorean items plus the C¹ speed theorem. |
-| `cex-graph-of-x-sin-one-over-x-is-not-rectifiable` | literature-derived | ai-altered | IIT §6; harmonic variation via the componentwise BV theorem. |
+| `cex-graph-of-x-sin-one-over-x-is-not-rectifiable` | literature-derived | ai-altered | IIT §6; the alternating-extrema variation is compared inline with the `p=1` specialization of the A-page rational p-series theorem before applying the componentwise BV theorem. |
 | `ex-v-shaped-path-is-rectifiable-but-not-c1` | literature-derived | ai-generated | Standard corner example; direct piecewise-speed and one-sided quotient verification. |
 | `cex-the-same-trace-can-have-different-path-lengths` | ai-generated | ai-generated | New bounded forward/backward traversal witness; checkable and non-load-bearing. |
 | `cex-arc-length-is-not-continuous-under-uniform-convergence` | literature-derived | ai-altered | Denzler §4.7, normalized to height 1/n and exact length √2. |
-| `ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous` | ai-altered | ai-altered | Published Cantor BV/not-AC example plus the componentwise rectifiability theorem. |
+| `ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous` | ai-altered | ai-altered | The A-page Jordan-decomposition and absolute-continuity results, specialized inline to the published Cantor recursion/digit construction, plus the componentwise rectifiability theorem. |
 
 ## Published dependencies and coverage citations opened from disk
 
-Every item below was opened from `items/<id>.md`, confirmed `status: published`, and its actual Definition, Statement, Example, or Counterexample content was read. There are 71 unique items: 65 manifest dependencies and 6 additional harvest-receipt citations. None is legacy-unclassified and none has `provenance.statement: ai-generated`.
+Every item below was opened from `items/<id>.md`, confirmed `status: published`, and its actual Definition, Statement, Example, or Counterexample content was read. After the step-4 repair there are 81 unique items: 75 manifest dependencies and 6 additional harvest-receipt citations. None is legacy-unclassified and none has `provenance.statement: ai-generated`.
 
 Routes mean: `component-lit` = the exact literature-derived component on disk was accepted after checking its direction and conventions; `component-adapted/knowledge` = an AI-altered but standard exact statement was independently confirmed from the disk text and mathematical knowledge; `component-adapted/source` = the AI-altered statement was additionally checked against a named harvest source or the published construction it formalizes.
 
 | dependency | confidence route | use |
 |---|---|---|
 | `cex-an-integrable-function-with-no-primitive` | component-adapted/source (HUN/LEB-FTC) | Harvest receipt: exact sign-function discontinuity/primitive obstruction read. |
+| `cor-archimedean-reciprocal` | component-adapted/knowledge | Manifest edge: reciprocals of positive natural numbers fall below every positive tolerance, used to send the oscillatory extrema to zero. |
 | `cor-cantor-function-is-continuous` | component-lit | Manifest edge: exact published continuity, monotonicity, and endpoint-value content was read. |
 | `cor-countably-many-discontinuities-integrable` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `cor-integrability-of-absolute-values-products-and-lattice-operations` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
@@ -162,13 +176,15 @@ Routes mean: `component-lit` = the exact literature-derived component on disk wa
 | `cor-vector-valued-ftc-and-lipschitz-bound` | component-adapted/source (published vector page + HUN) | Manifest edge: its FTC clause assumes relative endpoint derivatives; Step 5 must establish them before use. |
 | `def-absolutely-continuous-function` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-bounded-variation-and-total-variation` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
+| `def-cantor-function` | component-adapted/source (published Cantor construction) | Manifest edge: the ternary-to-binary digit definition used for stage endpoint increments was read. |
+| `def-cantor-set` | component-lit | Manifest edge: the recursive middle-thirds construction and its disjoint scaled halves were read. |
 | `def-complete-ordered-field` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-continuity-real` | component-adapted/knowledge | Manifest edge: the relative-domain epsilon-delta condition needed at Botsko's exceptional points and both endpoints was read. |
 | `def-countable` | component-adapted/source (BOT/SWA) | Manifest edge: the library convention means at most countable, so the empty and finite exceptional cases are included. |
 | `def-darboux-integral` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-darboux-sums` | component-adapted/knowledge | Manifest edge: the local infima, suprema, and lower/upper sums used in Botsko's partitionwise squeeze were read. |
 | `def-derivative` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
-| `def-directional-and-partial-derivatives` | component-adapted/source (LEB-DUI conventions) | Manifest edge: exact published content and direction named by the item id were read. |
+| `def-dirichlet-and-thomae-functions` | component-lit | Manifest edge: Thomae's least-denominator values, zero values at irrationals, and bound by one were read. |
 | `def-euclidean-inner-product` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-fat-cantor-set` | component-adapted/source (CHE §§3.2–3.3) | Manifest edge: the exact Smith–Volterra–Cantor interval construction was read. |
 | `def-isometry-and-metric-embedding` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
@@ -180,27 +196,27 @@ Routes mean: `component-lit` = the exact literature-derived component on disk wa
 | `def-oscillation` | component-adapted/source (CHE Definition 3.1) | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-p-norms-on-rn` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-partition-and-refinement` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
+| `def-pi-via-first-positive-cosine-zero` | component-adapted/source (published order-179 trigonometry page) | Manifest edge: the exact definition and the conclusion `pi>0` used in the oscillatory sequence were read. |
 | `def-pointwise-uniform-and-uniformly-cauchy-convergence` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-the-integral-function` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-vector-valued-derivative-and-integral` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-vector-valued-functions-limits-and-continuity` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
-| `ex-cantor-function-bv-not-absolutely-continuous` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
-| `ex-harmonic-series-diverges` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
-| `ex-monotone-function-discontinuous-exactly-at-the-rationals` | component-lit | Manifest edge: monotonicity, exact rational discontinuity set, and jump type were read. |
 | `ex-one-over-n-null` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `ex-polynomial-integrals-by-the-ftc` | component-lit | Harvest receipt: exact polynomial endpoint-evaluation example read. |
-| `ex-thomae-is-riemann-integrable-with-integral-zero` | component-lit | Manifest edge: both integrability and zero integral were read. |
 | `ex-two-root-x-and-its-unbounded-derivative` | component-adapted/source (HUN Example 12.3) | Harvest receipt: exact unbounded-endpoint-derivative example read. |
 | `lem-basic-properties-of-total-variation` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `lem-countable-iff-surjection-from-n` | component-adapted/source (BOT/SWA) | Manifest edge: a nonempty countable exceptional set has a surjective enumeration with repetitions and without a choice principle. |
 | `lem-geometric-sequence-null` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `lem-integral-elementary-bounds` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `lem-jumps-of-the-variation-function` | component-lit | Manifest edge: continuity of the variation function at continuity points is the used direction. |
+| `lem-q-and-irrationals-dense-r` | component-adapted/knowledge | Manifest edge: the exact density of the irrationals used to force every Thomae lower Darboux sum to zero was read. |
+| `lem-subset-of-countable` | component-adapted/knowledge | Manifest edge: the exact choice-free inheritance of at-most-countability by subsets was read. |
 | `lem-uniform-integral-error-bound` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-additivity-over-subintervals` | component-adapted/knowledge | Manifest edge: restriction equivalence and the fully oriented additive identity were read. |
 | `thm-algebra-of-derivatives` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-cantor-function-properties` | component-adapted/source (published Cantor construction) | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-cantor-set-properties` | component-adapted/source (published Cantor construction) | Manifest edge: exact published content and direction named by the item id were read. |
+| `thm-cantor-set-ternary-description` | component-adapted/source (published Cantor construction) | Manifest edge: the bijective ternary-digit description used to identify stage endpoints was read. |
 | `thm-cauchy-schwarz-and-the-euclidean-norm` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-chain-rule` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-componentwise-limits-and-continuity` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
@@ -208,16 +224,23 @@ Routes mean: `component-lit` = the exact literature-derived component on disk wa
 | `thm-continuous-implies-integrable` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-darboux-equals-riemann` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-derivative-of-an-inverse` | component-adapted/source (ETH inverse arc-length use) | Manifest edge: nonzero derivative gives the inverse derivative, including relative endpoints. |
+| `thm-dirichlet-and-thomae-continuity-sets` | component-lit | Manifest edge: the exact irrational-continuity and rational-discontinuity statement for Thomae's function was read. |
 | `thm-fat-cantor-set-has-positive-measure` | component-adapted/source (CHE §§3.2–3.3) | Manifest edge: the quantitative lower bound for interval covers, not merely non-nullity, was checked. |
 | `thm-ftc-first-part` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-ftc-second-part` | component-lit | Manifest edge: the published closed-interval Newton–Leibniz theorem and its no-continuity-of-the-derivative convention were read for the roadmap. |
 | `thm-heine-cantor-r` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
+| `thm-jordan-decomposition-for-bv-functions` | component-lit | Manifest edge: the converse saying a difference of nondecreasing functions is BV was read and specialized to `c=c-0`. |
 | `thm-lebesgue-criterion` | component-lit | Manifest edge: the integrable-to-null direction and its Countable-Choice cost were read. |
 | `thm-linearity-of-the-integral` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-monotone-implies-integrable` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
+| `thm-monotone-with-prescribed-discontinuity-set` | component-adapted/source (published monotone-functions page) | Manifest edge: the exact bounded nondecreasing construction for any at-most-countable discontinuity set, with jumps at every listed point, was read. |
 | `thm-monotonicity-of-the-integral` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
+| `thm-nonnegative-series-bounded-partial-sums` | component-lit | Manifest edge: divergence of a nonnegative series forces its partial sums to be unbounded, the form needed for variation sums. |
 | `thm-norm-inequality-for-the-vector-valued-integral` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-of-square-roots` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
+| `thm-p-series-rational` | component-adapted/source (published series page) | Manifest edge: the exact rational p-series theorem and its explicit harmonic `p=1` divergence clause were read. |
+| `thm-quarter-turn-values-and-shift-formulas` | component-adapted/source (published order-179 trigonometry page) | Manifest edge: the sine value at `pi/2` and shift by `pi` used to alternate extrema were read. |
+| `thm-rationals-countable` | component-adapted/knowledge | Manifest edge: the exact countable-infinitude of the rationals was read for both prescribed jumps and Thomae integrability. |
 | `thm-riemann-criterion` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-riemann-stieltjes-c1-integrator-reduction` | component-lit | Manifest + harvest: exact continuous interior derivative-extension hypotheses and equality direction checked. |
 | `thm-riemann-stieltjes-change-of-variable` | component-lit | Harvest receipt: exact strictly increasing continuous-bijection hypothesis and both existence directions read. |
@@ -242,25 +265,30 @@ Highest-risk authoring obligations:
 7. The C¹ length formula needs both inequalities. The upper bound uses vector Newton–Leibniz only after endpoint derivatives are established; the reverse bound uses uniform continuity of the extended derivative.
 8. General arc-length parametrization must prove well-definedness on level sets of the length function, metric unit speed on every subinterval, and the total-length-zero case.
 9. Lower semicontinuity fixes a partition before taking a liminf; interchanging the supremum and liminf without that argument is not licensed.
-10. The `x sin(1/x)` graph must exhibit an explicit alternating sequence whose vertical variation dominates a divergent harmonic subseries.
+10. The `x sin(1/x)` graph must use the explicit sequence `x_m=2/((2m+1)pi)`, discard a finite prefix so the retained points lie in `[0,1]`, derive the alternating signs from the A-page quarter-turn shifts, and compare its vertical variation with the `p=1` specialization of `thm-p-series-rational`.
 11. Botsko's theorem must prove the countable-exception monotonicity bridge locally with the explicit epsilon-times-`2^{-n}` absorption and least-upper-bound crossing argument; citing the finite-exception theorem or an absent gauge theory is not enough.
 12. The chord corollary must use the endpoint-only partition, and the arc-length-parametrization proof must cite that corollary instead of repeating the inequality inline.
 13. The graph formula must compute the derivative and Euclidean norm explicitly. The circle example must use the published derivative identities, Pythagorean identity, and constant-integral formula, with `theta=0` separated.
+14. The compact-rectangle Leibniz theorem must phrase its hypothesis in terms of the ordinary derivative of each one-variable parameter slice; the continuous representative is then controlled uniformly and `lem-uniform-integral-error-bound` is the exact passage-to-the-integral citation.
+15. The Thomae integral-function example must re-establish integrability and zero integral from the A-page continuity-set, countability, and Darboux results before differentiating the constant integral function.
+16. The Cantor graph example must derive its BV coordinate from Jordan decomposition and its failure of absolute continuity from the finite stage-interval families; neither conclusion may cite the published B-page example.
 
 ## Dependency closure, split decision, and blockers
 
-All manifest dependencies resolve to published items on disk or earlier items in the same A/B pair; no other frontier-11 batch is referenced. The FTC pair-level `requires` array remains as dispatched. The arc-length A page now also requires the published order-179 `sine-cosine-and-the-definition-of-pi`, exactly as A3 requires. The shared `bounded-variation-and-riemann-stieltjes` page was opened once and its actual published items were used by both pairs; `rn-as-a-normed-space`, `sine-cosine-and-the-definition-of-pi`, and the pre-existing working FTC page were opened directly.
+All manifest dependencies resolve to published items on disk or earlier items in the same A/B pair; no other frontier-11 batch is referenced. The FTC A page now declares `uniform-convergence-of-functions` because it genuinely cites `lem-uniform-integral-error-bound`; it does not declare or use `the-total-derivative`, since the compact-rectangle result is stated through ordinary derivatives of one-variable parameter slices. The arc-length A page also requires the published order-179 `sine-cosine-and-the-definition-of-pi`, exactly as A3 requires. The shared `bounded-variation-and-riemann-stieltjes` page was opened once and its actual published items were used by both pairs; `rn-as-a-normed-space`, `sine-cosine-and-the-definition-of-pi`, `uniform-convergence-of-functions`, and the pre-existing working FTC page were opened directly.
 
 Split proposal: none. The exact item cut is 10 items on `the-fundamental-theorems-of-calculus` and 15 on `arc-length-and-rectifiable-curves`; their companions contain 6 and 7 items respectively. No result was dropped to stay below the ceiling.
 
 Blockers: none. No permission prompt, escalation, shared-file edit, published-item edit, or cross-batch coordination was needed. The operation explicitly unavailable in the brief, `tools/gates.mjs`, was not run.
 
-## Final validation snapshot
+## Step-4 repair validation snapshot
 
 Run from the repository root on 2026-08-12:
 
-- `node tools/validate-plan.mjs research/plan-spec.json` — **pass**: declared page order is acyclic and consistent; no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages with item lists.
 - `node tools/coverage-checklist.mjs research/frontier-11-batch-2.coverage.json` — **pass**: 2 pages, 101 harvested results, 0 errors, 0 warnings.
-- Additional scaffold check: `node tools/content-policy.mjs research/frontier-11-batch-2.pages.json --manifest-only --json` — **pass**: scope 38, 0 errors, 0 warnings.
+- `node tools/content-policy.mjs research/frontier-11-batch-2.pages.json --manifest-only --json` — **pass**: scope 38, 0 errors, 0 warnings.
+- An in-memory replacement of the four affected page objects in the current spliced plan found **0** B-page dependency edges and **0** undeclared-prerequisite edges on those pages.
+- Both edited JSON artifacts parse, every citation source newly used by the five repaired proof contracts is a direct dependency of its item, and `git diff --check` passes for the four owned artifacts.
+- `node tools/prosecheck.mjs research/frontier-11-batch-2.notes.md --warnings` — **pass** with 0 errors and 8 expected count-word warnings in these durable planning notes.
 
-Per the dispatch, `tools/gates.mjs` was not run.
+Per the dispatch, `tools/validate-plan.mjs` was not rerun against the current `plan-spec.json`: the orchestrator must resplice this corrected manifest before running it. `tools/gates.mjs` was not run.

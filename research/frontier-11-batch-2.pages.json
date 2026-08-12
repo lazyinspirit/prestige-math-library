@@ -7,7 +7,8 @@
     "title": "The Fundamental Theorems of Calculus",
     "companion": "the-fundamental-theorems-of-calculus-examples",
     "requires": [
-      "bounded-variation-and-riemann-stieltjes"
+      "bounded-variation-and-riemann-stieltjes",
+      "uniform-convergence-of-functions"
     ],
     "items": [
       {
@@ -109,9 +110,9 @@
         "id": "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
         "kind": "theorem",
         "title": "Leibniz's rule on a compact rectangle: an interior parameter derivative with a continuous extension may be passed through a Riemann integral",
-        "strategy": "Assume the integrand is continuous on the compact rectangle and its parameter partial derivative exists in the interior parameter range and extends continuously to the rectangle. For an interior parameter increment, apply the one-variable mean value theorem at each fixed integration variable. Uniform continuity of the extension makes the resulting difference quotient converge uniformly to it. The published uniform integral-error bound passes the limit through the Riemann integral; the same estimate gives the relative one-sided endpoint derivatives and continuity of the derivative extension.",
+        "strategy": "Assume the integrand is continuous on the compact rectangle and, for each fixed integration variable, its ordinary one-variable derivative in the parameter exists on the interior parameter range and is represented by a function extending continuously to the rectangle. For an interior parameter increment, apply the one-variable mean value theorem at each fixed integration variable. Uniform continuity of the extension makes the resulting difference quotient converge uniformly to it. The published uniform integral-error bound passes the limit through the Riemann integral; the same estimate gives the relative one-sided endpoint derivatives and continuity of the derivative extension. No total-derivative or multivariable partial-derivative notion is used.",
         "deps": [
-          "def-directional-and-partial-derivatives",
+          "def-derivative",
           "cor-mean-value-theorem",
           "lem-uniform-integral-error-bound",
           "thm-heine-cantor-r",
@@ -170,9 +171,10 @@
         "id": "ex-dense-jump-integrand-with-dense-nondifferentiability",
         "kind": "example",
         "title": "A bounded increasing integrand discontinuous at every rational has an integral function nondifferentiable at every rational in $(0,1)$",
-        "strategy": "Restrict the published prescribed-jump function to $[0,1]`. It is bounded, monotone, and hence Riemann integrable. At each rational interior point its left and right limits exist and differ, so the one-sided FTC gives unequal one-sided derivatives of its integral function. Irrational points remain continuity points and hence differentiability points by the pointwise FTC.",
+        "strategy": "Use countability of the rationals to specialize the A-page prescribed-discontinuity theorem to $E=\\mathbb{Q}$, then restrict the resulting bounded nondecreasing function to $[0,1]$. The theorem supplies continuity at every irrational and a jump at every rational; monotonicity gives Riemann integrability. At each rational interior point the one-sided FTC gives unequal one-sided derivatives of the integral function, while the pointwise FTC gives differentiability at every irrational.",
         "deps": [
-          "ex-monotone-function-discontinuous-exactly-at-the-rationals",
+          "thm-rationals-countable",
+          "thm-monotone-with-prescribed-discontinuity-set",
           "thm-monotone-implies-integrable",
           "thm-one-sided-ftc-at-points-with-one-sided-limits",
           "thm-ftc-first-part"
@@ -182,9 +184,16 @@
         "id": "ex-thomae-integral-function-differentiates-through-dense-discontinuities",
         "kind": "example",
         "title": "Thomae's integrand is discontinuous at every rational, yet its integral function is identically zero and differentiable everywhere",
-        "strategy": "Use the published integrability and zero-integral theorem for Thomae's function. Positivity and monotonicity of the integral squeeze every subinterval integral between zero and the full integral, so the accumulation function is identically zero. Its derivative is therefore zero everywhere, agreeing with the integrand at irrationals and differing at every rational.",
+        "strategy": "Start from the A-page definition and continuity-set theorem for Thomae's function. It is bounded and its discontinuities on $[0,1]$ form a subset of the countable rationals, so the A-page countable-discontinuity criterion makes it Riemann integrable. Every partition subinterval contains an irrational, hence every lower Darboux sum is zero; integrability then forces the integral to be zero. Positivity, monotonicity, and additivity squeeze every initial integral to zero, so the integral function is identically zero and has derivative zero everywhere, agreeing with the integrand at irrationals and differing at every rational.",
         "deps": [
-          "ex-thomae-is-riemann-integrable-with-integral-zero",
+          "def-dirichlet-and-thomae-functions",
+          "thm-dirichlet-and-thomae-continuity-sets",
+          "thm-rationals-countable",
+          "lem-subset-of-countable",
+          "cor-countably-many-discontinuities-integrable",
+          "lem-q-and-irrationals-dense-r",
+          "def-darboux-sums",
+          "def-darboux-integral",
           "def-the-integral-function",
           "thm-monotonicity-of-the-integral",
           "thm-additivity-over-subintervals"
@@ -439,10 +448,14 @@
         "id": "cex-graph-of-x-sin-one-over-x-is-not-rectifiable",
         "kind": "counterexample",
         "title": "The continuous path $\\gamma(x)=(x,x\\sin(1/x))$ on $[0,1]$, with $\\gamma(0)=(0,0)$, is not rectifiable",
-        "strategy": "Choose a decreasing sequence tending to zero where the second coordinate alternates between positive and negative values of harmonic order. Partitions containing the reversed finite initial segment have second-coordinate variation bounded below by a divergent harmonic subseries. Hence that coordinate is not BV, and the componentwise rectifiability theorem makes the path nonrectifiable.",
+        "strategy": "For $m\\ge0$ put $x_m=2/((2m+1)\\pi)$. Positivity of $\\pi$, the reciprocal Archimedean estimate, and the quarter-turn shift formulas show that $x_m\\downarrow0$ and $x_m\\sin(1/x_m)=(-1)^m x_m$; discard a finite initial segment so every retained $x_m$ lies in $(0,1]$. Successive vertical increments are then $x_m+x_{m+1}\\ge 1/(\\pi(m+1))$. The A-page $p$-series theorem specialized at $p=1$, together with the nonnegative-partial-sum criterion, makes these tail variation sums unbounded. Partitions containing reversed finite retained segments thus show that the second coordinate is not BV, and the componentwise rectifiability theorem makes the path nonrectifiable.",
         "deps": [
           "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
-          "ex-harmonic-series-diverges",
+          "thm-p-series-rational",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-archimedean-reciprocal",
           "def-bounded-variation-and-total-variation"
         ]
       },
@@ -481,11 +494,19 @@
         "id": "ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous",
         "kind": "example",
         "title": "The graph path $t\\mapsto(t,c(t))$ of the Cantor function is rectifiable although its second coordinate is not absolutely continuous",
-        "strategy": "The identity coordinate has variation one and the continuous nondecreasing Cantor function has variation one but is not absolutely continuous. The componentwise BV theorem makes the graph path rectifiable and bounds its length between its endpoint distance and two. Projection to the second coordinate shows that an absolutely continuous vector path would make $c$ absolutely continuous, giving the contradiction.",
+        "strategy": "The Cantor function is continuous and nondecreasing with endpoint values zero and one. The A-page Jordan-decomposition theorem, specialized as $c=c-0$, makes it BV; the identity coordinate is BV directly, and componentwise continuity makes the graph a path. The componentwise BV theorem then makes the graph rectifiable and bounds its length between its endpoint chord and two. To prove the second coordinate is not absolutely continuous without citing the published example, derive from the Cantor-set recursion and ternary/binary definition that the $2^n$ surviving stage intervals have total length $(2/3)^n$ and Cantor endpoint increments $2^{-n}$ each. The geometric-null lemma makes the total lengths arbitrarily small while the sum of image increments stays one, contradicting the A-page definition of absolute continuity.",
         "deps": [
           "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
-          "ex-cantor-function-bv-not-absolutely-continuous",
-          "def-absolutely-continuous-function"
+          "thm-jordan-decomposition-for-bv-functions",
+          "def-bounded-variation-and-total-variation",
+          "def-absolutely-continuous-function",
+          "thm-cantor-function-properties",
+          "cor-cantor-function-is-continuous",
+          "thm-componentwise-limits-and-continuity",
+          "def-cantor-set",
+          "def-cantor-function",
+          "thm-cantor-set-ternary-description",
+          "lem-geometric-sequence-null"
         ]
       }
     ]
