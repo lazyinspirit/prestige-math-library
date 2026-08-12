@@ -363,3 +363,210 @@ No coverage row was retagged: no item was added, removed, or retargeted.
 45 proof-bearing items; `coverage-checklist.mjs` still passes for 2 pages and
 75 harvested results; the scoped precheck passes for the citation-only item
 edit. No reader repair appears wrong, and no blocker remains.
+
+## Step 6 contract-fidelity reconciliation — artifact-only (2026-08-12)
+
+Beta-frontier-11-4 re-read all 45 current item Statements, Facts blocks, and numbered proofs against their contract rows. Item text remained frozen. Only `research/frontier-11-batch-4.proof-contracts.json` was changed in the reconciliation; this section is the required append-only report.
+
+The diff contains 63 citation-quote rows and 155 boundary rows. There are no derivation or input-map changes. Defect codes:
+
+- **QF** — forward-truncated quote: the original stopped before the supporting clause.
+- **QB** — backward-truncated quote: the original began after a needed definition or hypothesis.
+- **QI** — internal-fragment quote: the original excerpt omitted surrounding text needed to support the fact.
+- **QS** — semantically incomplete or misdirected quote: the old exact substring did not assert the recorded fact; it was replaced by exact source text that does.
+- **BE** — generic, invented, or wrong-step boundary evidence replaced by retrospective evidence naming the step or steps that actually do the work.
+- **BA** — an applicable boundary was incorrectly `not_applicable`; it is now `checked` with an actual step anchor.
+- **BN** — an inapplicable boundary was incorrectly `checked`; it is now honestly `not_applicable`.
+- **BR** — a `not_applicable` status was retained but its vague or false reason was replaced with the true one.
+- **IF** — a genuine equivalence had `iff` rows incorrectly marked `not_applicable`; both directions are now tied to the step proving them.
+
+### Changed-row ledger
+
+- `lem-alternating-top-forms-are-determined-by-one-ordered-basis`
+  - boundaries: `one`, `nonempty-choice` (BE)
+- `thm-operator-determinant-scales-every-alternating-top-form`
+  - citations: `L1 <- lem-alternating-top-forms-are-determined-by-one-ordered-basis` (QF), `F1 <- def-determinant-of-a-linear-operator` (QF)
+  - boundaries: `one`, `nonempty-choice` (BE)
+- `thm-operator-determinant-is-basis-independent`
+  - boundaries: `empty` (BE)
+  - boundaries: `zero`, `one` (BA)
+  - boundaries: `nonempty-choice` (BN)
+- `thm-operator-determinant-is-multiplicative`
+  - citations: `L2 <- thm-operator-determinant-is-basis-independent` (QF)
+  - boundaries: `empty`, `one`, `nonempty-choice` (BE)
+  - boundaries: `zero` (BA)
+- `cor-operator-determinant-by-row-reduction`
+  - citations: `L1 <- thm-operator-determinant-is-basis-independent` (QF)
+  - boundaries: `nonempty-choice` (BE)
+  - boundaries: `zero`, `one`, `degenerate` (BA)
+- `thm-laplace-cofactor-expansion`
+  - boundaries: `zero`, `one`, `degenerate` (BE)
+  - boundaries: `empty` (BA)
+  - boundaries: `nonempty-choice` (BN)
+- `thm-adjugate-identity-over-a-commutative-ring`
+  - citations: `L1 <- thm-laplace-cofactor-expansion` (QF)
+  - boundaries: `one` (BE)
+  - boundaries: `zero`, `degenerate` (BA)
+- `cor-square-matrix-invertible-iff-determinant-is-a-unit`
+  - citations: `F1 <- def-invertible-matrix-and-similarity-over-a-commutative-ring` (QS)
+  - boundaries: `one`, `iff-forward`, `iff-reverse` (BE)
+  - boundaries: `zero`, `degenerate`, `nonempty-choice` (BA)
+- `cor-inverse-matrix-by-adjugate`
+  - boundaries: `one` (BE)
+  - boundaries: `zero`, `nonempty-choice` (BA)
+  - boundaries: `degenerate` (BR)
+- `lem-determinant-rank-one-update-over-a-commutative-ring`
+  - boundaries: `empty`, `one` (BE)
+  - boundaries: `zero`, `degenerate` (BA)
+- `thm-adjugate-is-equivariant-under-similarity`
+  - citations: `F1 <- def-invertible-matrix-and-similarity-over-a-commutative-ring` (QS)
+  - boundaries: `one`, `nonempty-choice` (BE)
+  - boundaries: `zero`, `degenerate` (BA)
+- `thm-cramers-rule-over-a-commutative-ring`
+  - citations: `L2 <- thm-laplace-cofactor-expansion` (QF), `L3 <- cor-inverse-matrix-by-adjugate` (QF)
+  - boundaries: `one`, `nonempty-choice` (BE)
+  - boundaries: `zero`, `degenerate` (BA)
+- `cor-cramers-rule-over-a-field`
+  - citations: `L1 <- thm-cramers-rule-over-a-commutative-ring` (QF)
+  - boundaries: `one`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse` (BE)
+  - boundaries: `zero` (BA)
+- `thm-operator-invertible-iff-determinant-nonzero`
+  - citations: `L1 <- thm-invertible-matrices-correspond-to-linear-isomorphisms` (QF), `L3 <- thm-operator-determinant-is-basis-independent` (QF)
+  - boundaries: `empty`, `nonempty-choice`, `iff-forward`, `iff-reverse` (BE)
+  - boundaries: `zero`, `one`, `degenerate` (BA)
+- `cor-operator-determinant-on-the-general-linear-group`
+  - citations: `F1 <- def-linear-isomorphism-and-invertible-linear-map` (QB), `L3 <- lem-ring-units-form-a-group` (QF)
+  - boundaries: `nonempty-choice` (BE)
+  - boundaries: `empty`, `zero`, `one` (BA)
+- `thm-operator-adjugate-identity`
+  - citations: `F1 <- def-adjugate-of-a-linear-operator` (QF), `L2 <- thm-matrix-of-a-composite-is-the-product` (QF), `L3 <- thm-operator-determinant-is-basis-independent` (QI)
+  - boundaries: `zero`, `one`, `degenerate`, `nonempty-choice` (BA)
+- `ex-singular-projection-has-zero-determinant`
+  - citations: `F2 <- def-determinant-of-a-linear-operator` (QB)
+  - boundaries: `zero`, `degenerate` (BE)
+- `ex-determinant-in-two-ordered-bases`
+  - citations: `L1 <- thm-two-sided-change-of-basis-formula` (QF)
+- `ex-doubling-integers-has-nonunit-determinant`
+  - citations: `F1 <- lem-units-of-z` (QF), `L3 <- cor-inverse-matrix-by-adjugate` (QF)
+  - boundaries: `empty`, `one`, `degenerate` (BE)
+  - boundaries: `nonempty-choice` (BN)
+- `fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero`
+  - citations: `F2 <- lem-units-of-z` (QF)
+  - boundaries: `zero`, `one`, `degenerate`, `iff-forward`, `iff-reverse` (BE)
+- `ex-four-by-four-determinant-by-cofactors-and-row-reduction`
+  - citations: `L1 <- thm-laplace-cofactor-expansion` (QF)
+  - boundaries: `zero` (BA)
+  - boundaries: `nonempty-choice` (BN)
+- `ex-three-by-three-inverse-by-adjugate`
+  - citations: `F2 <- def-matrix-minors-cofactors-and-adjugate` (QF), `L2 <- cor-inverse-matrix-by-adjugate` (QF)
+  - boundaries: `zero` (BA)
+- `ex-cramers-rule-two-by-two-system`
+  - citations: `L1 <- cor-cramers-rule-over-a-field` (QF)
+  - boundaries: `zero`, `degenerate` (BA)
+- `ex-columnwise-additivity-versus-whole-matrix-nonadditivity`
+  - boundaries: `zero`, `degenerate` (BA)
+- `thm-integral-logarithm-derivative-and-normalisation`
+  - citations: `F1 <- def-integral-logarithm` (QF), `L1 <- thm-ftc-first-part` (QF)
+  - boundaries: `zero`, `one`, `endpoints`, `nonempty-choice` (BE)
+- `cor-integral-logarithm-is-strictly-increasing`
+  - citations: `L1 <- thm-integral-logarithm-derivative-and-normalisation` (QF), `L3 <- cor-mean-value-theorem` (QF)
+  - boundaries: `endpoints` (BE)
+  - boundaries: `nonempty-choice` (BA)
+- `thm-integral-logarithm-product-law`
+  - citations: `L1 <- thm-integral-logarithm-derivative-and-normalisation` (QF), `L2 <- thm-chain-rule` (QF), `L3 <- cor-zero-derivative-implies-constant` (QF)
+  - boundaries: `zero`, `one` (BE)
+  - boundaries: `endpoints` (BN)
+- `cor-integral-logarithm-reciprocals-and-integer-powers`
+  - citations: `L1 <- thm-integral-logarithm-product-law` (QF), `F1 <- def-integer-power` (QS)
+  - boundaries: `zero`, `one` (BE)
+  - boundaries: `endpoints` (BN)
+- `thm-integral-logarithm-is-unbounded`
+  - citations: `L1 <- cor-integral-logarithm-reciprocals-and-integer-powers` (QF)
+  - boundaries: `one`, `nonempty-choice` (BE)
+  - boundaries: `zero` (BA)
+- `thm-integral-logarithm-is-a-bijection`
+  - citations: `L2 <- thm-integral-logarithm-is-unbounded` (QF)
+  - boundaries: `endpoints`, `nonempty-choice` (BE)
+  - boundaries: `zero` (BA)
+- `cor-integral-exponential-addition-law`
+  - citations: `F1 <- def-integral-exponential` (QI), `L1 <- thm-integral-logarithm-product-law` (QF)
+  - boundaries: `zero` (BA)
+- `thm-integral-exponential-solves-the-normalised-ivp`
+  - citations: `F1 <- def-integral-exponential` (QI), `L1 <- thm-integral-logarithm-derivative-and-normalisation` (QF), `L2 <- thm-derivative-of-an-inverse` (QF)
+  - boundaries: `zero`, `one`, `endpoints` (BE)
+  - boundaries: `degenerate` (BA)
+- `thm-integral-exponential-agrees-with-exponential`
+  - citations: `L1 <- thm-integral-exponential-solves-the-normalised-ivp` (QF)
+  - boundaries: `zero`, `nonempty-choice` (BE)
+  - boundaries: `one` (BA)
+- `cor-integral-logarithm-agrees-with-natural-logarithm`
+  - citations: `F1 <- def-integral-exponential` (QS), `L1 <- thm-integral-exponential-agrees-with-exponential` (QF)
+  - boundaries: `nonempty-choice` (BE)
+  - boundaries: `endpoints` (BN)
+- `cor-e-is-the-unique-unit-hyperbolic-area`
+  - citations: `F2 <- def-integral-exponential` (QB)
+  - boundaries: `one`, `endpoints`, `nonempty-choice` (BE)
+- `thm-logarithm-continuous-functional-equation-characterisation`
+  - citations: `L1 <- cor-integral-exponential-addition-law` (QF), `L2 <- thm-integral-exponential-solves-the-normalised-ivp` (QF), `L4 <- thm-cauchy-functional-equation-regularity` (QF)
+  - boundaries: `one`, `nonempty-choice` (BE)
+  - boundaries: `degenerate` (BA)
+  - boundaries: `endpoints` (BN)
+- `thm-logarithm-differentiable-functional-equation-characterisation`
+  - citations: `F1 <- def-derivative` (QS), `L1 <- thm-integral-logarithm-derivative-and-normalisation` (QB), `L2 <- thm-integral-logarithm-product-law` (QF)
+  - boundaries: `one`, `endpoints`, `nonempty-choice` (BE)
+  - boundaries: `zero` (BA)
+- `cor-continuous-logarithmic-functions-form-a-one-parameter-family`
+  - citations: `F1 <- def-integral-exponential` (QI), `F1 <- cor-integral-exponential-addition-law` (QF), `L1 <- thm-integral-exponential-solves-the-normalised-ivp` (QF), `L3 <- thm-cauchy-functional-equation-regularity` (QI)
+  - boundaries: `zero`, `one`, `degenerate`, `nonempty-choice` (BE)
+  - boundaries: `endpoints` (BN)
+- `lem-log-series-extends-by-the-product-law`
+  - citations: `F1 <- def-integer-power` (QF)
+  - boundaries: `zero`, `one`, `endpoints`, `nonempty-choice` (BE)
+- `thm-logarithm-definition-equivalence`
+  - citations: `L5 <- thm-logarithm-continuous-functional-equation-characterisation` (QF)
+  - boundaries: `endpoints`, `nonempty-choice` (BE)
+  - boundaries: `one` (BA)
+  - boundaries: `iff-forward`, `iff-reverse` (IF)
+- `ex-log-two-from-four-characterisations`
+  - boundaries: `one`, `nonempty-choice` (BE)
+  - boundaries: `endpoints` (BA)
+- `ex-logarithmic-functions-without-normalisation`
+  - citations: `L1 <- cor-continuous-logarithmic-functions-form-a-one-parameter-family` (QF)
+  - boundaries: `zero`, `degenerate` (BE)
+  - boundaries: `one` (BA)
+- `cex-discontinuous-logarithmic-functional-equation`
+  - citations: `L2 <- thm-cauchy-functional-equation-regularity` (QI)
+  - boundaries: `zero`, `degenerate`, `nonempty-choice` (BE)
+  - boundaries: `one` (BA)
+  - boundaries: `endpoints` (BN)
+- `cex-mercator-series-does-not-define-logarithm-globally`
+  - citations: `L2 <- lem-nth-term-test` (QF)
+  - boundaries: `one`, `endpoints`, `nonempty-choice` (BE)
+  - boundaries: `degenerate` (BA)
+- `ex-unit-hyperbolic-area-brackets-e`
+  - citations: `L1 <- cor-e-is-the-unique-unit-hyperbolic-area` (QF), `L2 <- thm-integral-logarithm-product-law` (QF)
+  - boundaries: `one`, `endpoints` (BA)
+
+### Changed rows whose final status is `not_applicable`
+
+- `thm-operator-determinant-is-basis-independent` / `nonempty-choice`: The positive-dimensional clause takes the two ordered bases as given; no witness or nonempty selection is made in the proof.
+- `thm-laplace-cofactor-expansion` / `nonempty-choice`: The indices i and j are given, and step 1.2 groups each permutation by its uniquely determined column; no witness is selected.
+- `cor-inverse-matrix-by-adjugate` / `degenerate`: The unit-determinant hypothesis excludes the noninvertible regime; the zero ring is still covered because 0 = 1 is a unit there.
+- `ex-doubling-integers-has-nonunit-determinant` / `nonempty-choice`: All objects are explicitly given, and step 2.2 exhibits the rational inverse directly; no witness is chosen from a nonempty set.
+- `ex-four-by-four-determinant-by-cofactors-and-row-reduction` / `nonempty-choice`: The matrix and both calculation routes are fixed explicitly; no existence or witness choice occurs.
+- `thm-integral-logarithm-product-law` / `endpoints`: The proof works on the open interval (0,infinity); 0 is excluded by the positive-domain hypothesis and no closed or convergence endpoint is used.
+- `cor-integral-logarithm-reciprocals-and-integer-powers` / `endpoints`: The domain is the open positive half-line and the integer exponent has no interval or convergence endpoint; negative exponents are treated in step 4.1.
+- `cor-integral-logarithm-agrees-with-natural-logarithm` / `endpoints`: Both inverse functions have the open domain (0,infinity); 0 is excluded and the proof uses no closed interval or convergence endpoint.
+- `thm-logarithm-continuous-functional-equation-characterisation` / `endpoints`: The functional equation is on the open positive half-line; 0 is excluded and no closed interval or convergence endpoint occurs.
+- `cor-continuous-logarithmic-functions-form-a-one-parameter-family` / `endpoints`: The domain is the open positive half-line and the scalar parameter c ranges over all reals; no interval or convergence endpoint occurs.
+- `cex-discontinuous-logarithmic-functional-equation` / `endpoints`: The construction transports along the bijection exp from R onto the open interval (0,infinity); 0 is excluded and no endpoint limit is used.
+
+The `BN` rows above were changed from `checked`; the single `BR` row remained `not_applicable` but needed its true reason recorded. No other changed row finishes as `not_applicable`.
+
+### Input map, findings, blockers, and verification
+
+Every derivation step named by the 45 input maps exists in the current item text, every declared fact input is used, and every numbered proof step is covered once. The reconciliation required no derivation/input-map edit.
+
+No contract row required an item edit. There is therefore no new mathematical finding for Alpha from this batch. There is no blocker. No file under `items/` was touched.
+
+Final gate: `node tools/proof-contract.mjs research/frontier-11-batch-4.proof-contracts.json --strict` reports `proof-contract: 0 error(s), 0 warning(s), 45/45 item(s) checked`.

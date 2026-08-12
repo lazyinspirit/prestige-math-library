@@ -570,3 +570,219 @@ their recorded result-specific deferral. The strict proof-contract check now
 passes 27/27 with zero errors or warnings, and the coverage checklist passes
 one page / 134 headings with zero errors or warnings. I find no reader repair
 mathematically wrong and have no blocker.
+
+## Step-6 Beta contract-fidelity report (artifact-only)
+
+This pass changed only `research/frontier-11-batch-5.proof-contracts.json` and
+this appended report. No item file was edited. Each citation below now quotes
+the current source item verbatim through the clause used by the mapped fact;
+each boundary below now records what an existing proof step actually does.
+
+### Citation rows changed
+
+Defect class **truncated quote** (67 rows):
+
+- `thm-hom-assignments-are-functors`: `F1 -> def-hom-functors-and-hom-bifunctor`;
+  `F2 -> def-functor-and-contravariant-functor`.
+- `thm-hom-assignment-is-a-bifunctor`: `F1 -> def-product-category`.
+- `prop-initial-and-terminal-objects-as-representations`:
+  `F2 -> def-presheaf-representable-functor-and-representation`.
+- `lem-yoneda-evaluation-bijection`: `F1 -> def-hom-functors-and-hom-bifunctor`;
+  `F2 -> def-natural-transformation`.
+- `thm-yoneda-lemma-is-natural-in-both-variables`:
+  `L1 -> lem-yoneda-evaluation-bijection`;
+  `L2 -> thm-hom-assignment-is-a-bifunctor`;
+  `F1 -> def-natural-transformation`;
+  `F2 -> def-vertical-composition-of-natural-transformations`.
+- `cor-contravariant-yoneda-lemma`:
+  `L1 -> thm-yoneda-lemma-is-natural-in-both-variables`;
+  `F1 -> def-opposite-category`.
+- `thm-yoneda-embedding-is-fully-faithful`:
+  `L1 -> cor-contravariant-yoneda-lemma`; `F1 -> def-yoneda-embedding`.
+- `cor-representable-presheaves-detect-isomorphism-of-objects`:
+  `L1 -> thm-yoneda-embedding-is-fully-faithful`.
+- `thm-universal-elements-and-universal-factorisations`:
+  `L1 -> lem-yoneda-evaluation-bijection`;
+  `L2 -> thm-yoneda-lemma-is-natural-in-both-variables`;
+  `L3 -> cor-contravariant-yoneda-lemma`; `F1 -> def-universal-element`.
+- `thm-universal-elements-are-initial-or-terminal-in-the-category-of-elements`:
+  `F1 -> def-category-of-elements`.
+- `thm-universal-arrows-are-initial-or-terminal-in-comma-categories`:
+  `F1 -> def-universal-arrow-to-and-from-a-functor`.
+- `ex-set-products-as-representing-objects`:
+  `F1 -> def-presheaf-representable-functor-and-representation`;
+  `F4 -> def-function`.
+- `ex-set-coproducts-as-representing-objects`:
+  `F1 -> def-presheaf-representable-functor-and-representation`;
+  `F3 -> lem-unions-and-intersections-of-small-families`;
+  `F4 -> def-ordered-pair`.
+- `ex-function-sets-as-exponential-representing-objects`:
+  `F1 -> def-presheaf-representable-functor-and-representation`;
+  `F3 -> def-the-set-of-functions-from-one-set-to-another`;
+  `F5 -> def-function`.
+- `ex-free-monoid-universal-property-as-a-representation`:
+  `F1 -> def-semigroup-and-monoid`; `F2 -> def-group-homomorphism`;
+  `F3 -> def-small-locally-small-and-large-category`;
+  `F4 -> def-functor-and-contravariant-functor`;
+  `F4 -> def-the-set-of-functions-from-one-set-to-another`;
+  `F5 -> thm-generalised-associativity`;
+  `F7 -> def-presheaf-representable-functor-and-representation`.
+- `ex-free-group-universal-property-as-a-representation`:
+  `F1 -> def-free-group`;
+  `L2 -> thm-free-groups-unique-up-to-unique-isomorphism`;
+  `F4 -> def-presheaf-representable-functor-and-representation`.
+- `ex-polynomial-ring-represents-the-underlying-set-functor-on-rings`:
+  `F2 -> def-polynomial-ring-over-a-commutative-ring`;
+  `L2 -> lem-integer-multiples-in-a-ring`; `F3 -> def-ring-homomorphism`;
+  `F4 -> thm-generalised-associativity`;
+  `L3 -> lem-finite-sum-reindexing-and-fubini`;
+  `F5 -> def-presheaf-representable-functor-and-representation`.
+- `ex-the-one-point-space-represents-the-underlying-set-functor-on-top`:
+  `F1 -> def-topological-space`;
+  `F4 -> def-presheaf-representable-functor-and-representation`;
+  `F5 -> def-function`.
+- `ex-representable-presheaf-on-a-poset`: `F3 -> def-function`.
+- `cex-the-doubling-functor-on-set-is-not-representable`:
+  `F1 -> def-functor-and-contravariant-functor`;
+  `F2 -> def-union-of-a-set-and-binary-union`;
+  `F2 -> lem-unions-and-intersections-of-small-families`;
+  `F3 -> def-ordered-pair`;
+  `F4 -> def-the-set-of-functions-from-one-set-to-another`;
+  `F4 -> def-function`.
+- `ex-two-singletons-are-canonically-isomorphic-representing-objects`:
+  `F2 -> def-presheaf-representable-functor-and-representation`;
+  `F3 -> def-function`.
+- `ex-yoneda-embedding-of-the-walking-arrow-category`:
+  `F1 -> def-category`; `L1 -> thm-yoneda-embedding-is-fully-faithful`;
+  `F3 -> def-function`.
+- `ex-yoneda-lemma-for-a-monoid-action`:
+  `F1 -> def-semigroup-and-monoid`;
+  `L2 -> thm-yoneda-lemma-is-natural-in-both-variables`;
+  `F3 -> def-natural-transformation`.
+- `fs-yoneda-lemma-requires-a-small-category`:
+  `L1 -> lem-yoneda-evaluation-bijection`;
+  `F1 -> def-small-locally-small-and-large-category`.
+- `fs-nonisomorphic-objects-can-have-isomorphic-representable-presheaves`:
+  `L1 -> cor-representable-presheaves-detect-isomorphism-of-objects`;
+  `L2 -> thm-yoneda-embedding-is-fully-faithful`.
+
+Defect class **mismatched or materially incomplete quote** (12 rows):
+
+- `thm-hom-assignment-is-a-bifunctor`:
+  `F2 -> def-hom-functors-and-hom-bifunctor` now quotes the two-variable
+  hom-assignment and its componentwise action, rather than a one-variable
+  hom-functor clause.
+- `thm-initial-and-terminal-objects-are-unique-up-to-unique-isomorphism`:
+  `F2 -> def-isomorphism-groupoid-and-connected-category` now quotes the
+  definition of an isomorphism, rather than the later groupoid paragraph.
+- `thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism`:
+  `F1 -> def-isomorphism-groupoid-and-connected-category` has the same
+  isomorphism-clause repair.
+- `thm-universal-arrows-are-initial-or-terminal-in-comma-categories`:
+  `F2 -> def-comma-slice-and-coslice-categories` now quotes the generic comma
+  object, morphism, and compatibility equation, rather than only the later
+  slice/coslice specialisations.
+- `ex-set-coproducts-as-representing-objects`:
+  `F4 -> def-natural-numbers` now includes the actual definitions of `0` and
+  `1`, not just the construction preamble.
+- `ex-free-monoid-universal-property-as-a-representation`:
+  `F3 -> def-category` now includes the associativity and identity laws;
+  `F5 -> def-monoid-finite-product` now includes the recursive product,
+  empty-product, and one-term clauses.
+- `ex-polynomial-ring-represents-the-underlying-set-functor-on-rings`:
+  `F4 -> def-monoid-finite-product` now includes those finite-product clauses.
+- `ex-the-one-point-space-represents-the-underlying-set-functor-on-top`:
+  `F2 -> def-continuous-map-top` now quotes the definition of continuity,
+  rather than an adjacent preimage observation.
+- `cex-the-doubling-functor-on-set-is-not-representable`:
+  `F3 -> def-natural-numbers` now includes the definitions of the two tags;
+  `F5 -> def-presheaf-representable-functor-and-representation` now quotes the
+  covariant representation clause used by the contradiction, rather than the
+  presheaf clause.
+- `ex-yoneda-embedding-of-the-walking-arrow-category`:
+  `F2 -> def-yoneda-embedding` now quotes the Yoneda object and morphism action,
+  rather than an adjacent incomplete clause.
+
+### Boundary rows changed
+
+Defect class **prospective, generic, invented, or non-working boundary anchor**:
+the following 38 already-`checked` rows were rewritten to name the steps that
+actually perform the check.
+
+- `prop-initial-and-terminal-objects-as-representations`: `empty`, `one`,
+  `degenerate`, `iff-forward`, `iff-reverse`.
+- `lem-yoneda-evaluation-bijection`: `nonempty-choice`.
+- `thm-universal-elements-and-universal-factorisations`: `iff-forward`,
+  `iff-reverse`.
+- `thm-universal-elements-are-initial-or-terminal-in-the-category-of-elements`:
+  `iff-forward`, `iff-reverse`.
+- `ex-set-coproducts-as-representing-objects`: `empty`, `degenerate`.
+- `ex-function-sets-as-exponential-representing-objects`: `empty`.
+- `ex-free-monoid-universal-property-as-a-representation`: `empty`, `zero`,
+  `one`, `degenerate`.
+- `ex-free-group-universal-property-as-a-representation`: `empty`, `one`,
+  `degenerate`.
+- `ex-polynomial-ring-represents-the-underlying-set-functor-on-rings`: `zero`,
+  `one`, `degenerate`.
+- `ex-the-one-point-space-represents-the-underlying-set-functor-on-top`:
+  `empty`, `one`, `degenerate`.
+- `ex-representable-presheaf-on-a-poset`: `empty`.
+- `cex-the-doubling-functor-on-set-is-not-representable`: `empty`, `one`,
+  `degenerate`.
+- `ex-two-singletons-are-canonically-isomorphic-representing-objects`: `empty`,
+  `zero`, `one`, `degenerate`.
+- `ex-yoneda-embedding-of-the-walking-arrow-category`: `empty`, `zero`, `one`,
+  `degenerate`.
+
+Defect class **false `not_applicable` on a boundary or biconditional**: these
+nine rows are now `checked` and anchored to the proof steps that handle them.
+
+- `cor-representable-presheaves-detect-isomorphism-of-objects`: `iff-forward`
+  (`1.1`) and `iff-reverse` (`1.2`, `2.1`).
+- `thm-universal-arrows-are-initial-or-terminal-in-comma-categories`:
+  `iff-forward` and `iff-reverse` (both directions are identified in `1.1`,
+  `1.2`, `2.1`, and `3.1`).
+- `ex-set-products-as-representing-objects`: `empty` and `degenerate`
+  (uniform steps `1.1`--`2.3`).
+- `ex-function-sets-as-exponential-representing-objects`: `degenerate`
+  (`3.1`).
+- `ex-representable-presheaf-on-a-poset`: `one` and `degenerate` (`1.1`,
+  `2.1`).
+
+The existing `not_applicable` `nonempty-choice` row for
+`cor-representable-presheaves-detect-isomorphism-of-objects` was also changed:
+its reason now states that step `1.2` makes two individual surjectivity choices,
+not a choice from a varying family.
+
+### Rows set to `not_applicable`
+
+- `ex-set-coproducts-as-representing-objects`, `zero`: `0` is a fixed
+  disjoint-union tag, not a zero-sized or zero-stage parameter; steps `1.2` and
+  `2.2` use it uniformly through `F4`.
+- `ex-set-coproducts-as-representing-objects`, `one`: `1` is the other fixed
+  tag, not a cardinality-one boundary; steps `1.2` and `2.2` use it uniformly
+  through `F4`.
+- `ex-the-one-point-space-represents-the-underlying-set-functor-on-top`,
+  `zero`: `1` names the singleton representing space and there is no numerical
+  zero parameter or zero-stage construction.
+- `cex-the-doubling-functor-on-set-is-not-representable`, `zero`: `0` is a
+  fixed tag in `D`, not a variable zero boundary; steps `1.1` and `1.3` verify
+  tag disjointness through `F3`.
+
+### Findings for Alpha and blockers
+
+There is no new mathematical finding: every contract row could be made true by
+repairing only the artifact, so no quotation from an unrepairable item is
+required. There is no blocker.
+
+### Verification
+
+- `proof-contract --strict`: 27/27 items, 0 errors, 0 warnings.
+- All ten direction rows in the five biconditional batch statements are
+  `checked`: both directions for initial/terminal representation,
+  representable-presheaf object-isomorphism detection, universal
+  element/factorisation, category-of-elements initial/terminality, and
+  universal-arrow comma-category characterisation.
+- The strict input-map pass confirms every numbered proof step exists in the
+  current text and is covered exactly once.
+- No item file was touched.

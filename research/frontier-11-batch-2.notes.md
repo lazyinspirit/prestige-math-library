@@ -353,3 +353,311 @@ Reader 1 added cex-the-koch-curve-is-not-rectifiable to repair the D16 omission.
 Coverage now records 103 harvested receipts: 57 included, 22 inline, 14 already-published, four deferred, and six out-of-scope. Two included receipts were added for the Koch result: one canonical page obligation and one source-native Exercise 9 receipt from Ghomi's *Curves and Surfaces, Lecture Notes 1*. No existing coverage row was retargeted. The Hausdorff-dimension and Schwarz-lantern suggestions remain absent for the specific missing-machinery reasons reader 1 recorded.
 
 The strict proof-contract check passes 36/36 with zero errors or warnings; the coverage checklist passes two pages and 103 receipts with zero errors or warnings; and authored-scope content policy passes all 39 items. I found no reader repair to dispute and no batch-local blocker.
+
+## Step-6 Beta contract-fidelity reconciliation (artifact only)
+
+This pass is limited to `research/frontier-11-batch-2.proof-contracts.json` and
+this appended note. I did not alter an item, page, manifest, plan, or any other
+artifact. I opened the current item text and each named source section rather
+than relying on the strict checker.
+
+The citation audit found 184 partial or truncated `quote` rows. I replaced each
+with the complete, byte-exact current source section. Five rows were already
+complete, so all 189 citation rows now carry the complete named `Statement`,
+`Statement refuted`, `Definition`, or `Example`. This is deliberately
+conservative: it does not silently choose a shorter substring that might omit a
+hypothesis, quantifier, direction, or qualification.
+
+The boundary audit changed 280 of 288 rows. It removed generic or prospective
+boilerplate, anchored every `checked` row to the numbered step or steps that do
+the work, supplied a true item-specific reason for every `not_applicable` row,
+and corrected 40 statuses. The eight standard boundary cases are abbreviated
+below as **B** = `empty`, `zero`, `one`, `degenerate`, `endpoints`,
+`nonempty-choice`, `iff-forward`, `iff-reverse`.
+
+### Every changed contract row
+
+Each `Lx -> source#section` entry below is one changed citation row (defect:
+partial or truncated evidence). Each named boundary is one changed boundary row
+(defect: generic/unanchored evidence, wrong status, or missed/spurious
+biconditional). “B” means all eight rows just enumerated; it is not an aggregate
+row.
+
+- `cor-ftc-integral-function-differentiable-almost-everywhere`: quotes `L1 -> thm-the-integral-function-is-lipschitz#Statement`, `L2 -> thm-lebesgue-criterion#Statement`, `L3 -> thm-ftc-first-part#Statement`; boundaries B.
+- `thm-newton-leibniz-with-interior-derivative`: quotes `L1 -> cor-mean-value-theorem#Statement`, `L2 -> def-partition-and-refinement#Definition`, `L2 -> def-darboux-integral#Definition`, `L3 -> def-darboux-integral#Definition`; boundaries B.
+- `cor-newton-leibniz-with-finitely-many-exceptional-points`: quotes `L1 -> thm-newton-leibniz-with-interior-derivative#Statement`, `L2 -> thm-additivity-over-subintervals#Statement`; boundaries B.
+- `thm-newton-leibniz-with-a-countable-exceptional-set`: quotes `L1 -> def-countable#Definition`, `L1 -> lem-countable-iff-surjection-from-n#Statement`, `L2 -> def-continuity-real#Definition`, `L3 -> def-derivative#Definition`, `L4 -> thm-nested-interval-property#Statement`, `L5 -> lem-geometric-sequence-null#Statement`, `L6 -> def-darboux-sums#Definition`, `L6 -> def-darboux-integral#Definition`, `L6 -> def-partition-and-refinement#Definition`; boundaries B.
+- `thm-integration-by-parts-with-interior-derivatives`: quotes `L1 -> thm-algebra-of-derivatives#Statement`, `L2 -> thm-continuous-implies-integrable#Statement`, `L2 -> cor-integrability-of-absolute-values-products-and-lattice-operations#Statement`, `L3 -> thm-linearity-of-the-integral#Statement`, `L4 -> thm-newton-leibniz-with-interior-derivative#Statement`; boundaries B.
+- `thm-substitution-with-riemann-integrable-inner-derivative`: quotes `L1 -> thm-ftc-first-part#Statement`, `L2 -> thm-chain-rule#Statement`, `L3 -> thm-continuous-implies-integrable#Statement`, `L3 -> cor-integrability-of-absolute-values-products-and-lattice-operations#Statement`, `L4 -> thm-newton-leibniz-with-interior-derivative#Statement`, `L5 -> def-oriented-integral#Definition`; boundaries B.
+- `thm-one-sided-ftc-at-points-with-one-sided-limits`: quotes `L1 -> def-the-integral-function#Definition`, `L1 -> thm-additivity-over-subintervals#Statement`, `L2 -> def-one-sided-limits#Definition`, `L3 -> lem-integral-elementary-bounds#Statement`; boundaries B.
+- `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle`: quotes `L1 -> thm-continuous-implies-integrable#Statement`, `L2 -> thm-heine-borel-rn#Statement`, `L2 -> thm-heine-cantor-metric#Statement`, `L3 -> cor-mean-value-theorem#Statement`, `L4 -> lem-uniform-integral-error-bound#Statement`, `L5 -> def-derivative#Definition`; boundaries B.
+- `thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators`: quotes `L1 -> thm-riemann-stieltjes-c1-integrator-reduction#Statement`, `L2 -> thm-continuous-implies-integrable#Statement`, `L2 -> cor-integrability-of-absolute-values-products-and-lattice-operations#Statement`, `L3 -> thm-ftc-first-part#Statement`, `L4 -> thm-newton-leibniz-with-interior-derivative#Statement`; boundaries B.
+- `ex-bounded-discontinuous-derivative-that-is-riemann-integrable`: quotes `L1 -> thm-sine-and-cosine-derivatives#Statement`, `L1 -> thm-chain-rule#Statement`, `L1 -> thm-algebra-of-derivatives#Statement`, `L2 -> cor-trigonometric-parity-and-pythagorean-identity#Statement`, `L3 -> def-pi-via-first-positive-cosine-zero#Definition`, `L3 -> thm-quarter-turn-values-and-shift-formulas#Statement`, `L4 -> cor-archimedean-reciprocal#Statement`, `L5 -> cor-countably-many-discontinuities-integrable#Statement`, `L6 -> thm-newton-leibniz-with-interior-derivative#Statement`; boundaries B.
+- `cex-volterra-bounded-derivative-not-riemann-integrable`: quotes `L1 -> def-fat-cantor-set#Definition`, `L2 -> thm-fat-cantor-set-has-positive-measure#Statement`, `L3 -> thm-algebra-of-derivatives#Statement`, `L3 -> thm-chain-rule#Statement`, `L4 -> def-pi-via-first-positive-cosine-zero#Definition`, `L5 -> cor-archimedean-reciprocal#Statement`, `L6 -> def-oscillation#Definition`, `L7 -> thm-riemann-criterion#Statement`; boundaries B. Its three already-complete rows, `L3 -> thm-sine-and-cosine-derivatives#Statement`, `L4 -> cor-trigonometric-parity-and-pythagorean-identity#Statement`, and `L4 -> thm-quarter-turn-values-and-shift-formulas#Statement`, were not changed.
+- `ex-dense-jump-integrand-with-dense-nondifferentiability`: quotes `L1 -> thm-rationals-countable#Statement`, `L2 -> thm-monotone-with-prescribed-discontinuity-set#Statement`, `L3 -> thm-monotone-implies-integrable#Statement`, `L4 -> thm-ftc-first-part#Statement`, `L4 -> thm-one-sided-ftc-at-points-with-one-sided-limits#Statement`, `L5 -> lem-q-and-irrationals-dense-r#Statement`; boundaries B.
+- `ex-thomae-integral-function-differentiates-through-dense-discontinuities`: quotes `L1 -> thm-dirichlet-and-thomae-continuity-sets#Statement`, `L2 -> thm-rationals-countable#Statement`, `L2 -> lem-subset-of-countable#Statement`, `L3 -> cor-countably-many-discontinuities-integrable#Statement`, `L4 -> def-darboux-sums#Definition`, `L4 -> def-darboux-integral#Definition`, `L4 -> thm-monotonicity-of-the-integral#Statement`, `L5 -> def-the-integral-function#Definition`, `L5 -> thm-additivity-over-subintervals#Statement`, `L6 -> lem-q-and-irrationals-dense-r#Statement`; boundaries B.
+- `ex-sparse-spikes-ftc-conclusion-at-a-discontinuity`: quotes `L1 -> lem-geometric-sequence-null#Statement`, `L2 -> thm-riemann-criterion#Statement`, `L3 -> def-the-integral-function#Definition`; boundaries `empty`, `zero`, `iff-forward`, `iff-reverse`. Its other four boundary rows were already specific and true.
+- `cex-ae-zero-derivative-does-not-determine-endpoint-change`: quotes `L1 -> cor-cantor-function-is-continuous#Statement`, `L1 -> thm-cantor-function-properties#Statement`, `L2 -> thm-cantor-function-properties#Statement`, `L3 -> thm-cantor-set-properties#Statement`, `L4 -> def-derivative#Definition`; boundaries B.
+- `cor-chord-length-is-at-most-arc-length`: quotes `L1 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`, `L2 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`; boundaries B.
+- `lem-polygonal-length-is-monotone-under-refinement`: quotes `L1 -> def-partition-and-refinement#Definition`, `L2 -> def-norm-and-normed-space#Definition`, `L2 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`; boundaries B.
+- `thm-rectifiable-iff-coordinate-functions-have-bounded-variation`: quotes `L1 -> def-euclidean-inner-product#Definition`, `L1 -> lem-standard-basis-of-f-n#Statement`, `L1 -> thm-cauchy-schwarz-and-the-euclidean-norm#Statement`, `L2 -> def-bounded-variation-and-total-variation#Definition`, `L3 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`; boundaries B.
+- `thm-arc-length-is-additive-over-subintervals`: quotes `L1 -> lem-polygonal-length-is-monotone-under-refinement#Statement`, `L2 -> def-partition-and-refinement#Definition`, `L3 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`; boundaries B.
+- `thm-arc-length-is-invariant-under-monotone-reparametrization`: quotes `L1 -> def-monotone-function#Definition`, `L2 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`; boundaries B.
+- `prop-arc-length-under-lipschitz-maps-and-euclidean-similarities`: quotes `L1 -> def-lipschitz-holder-contraction#Definition`, `L2 -> def-isometry-and-metric-embedding#Definition`, `L3 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`; boundaries B.
+- `thm-arc-length-is-lower-semicontinuous-under-uniform-convergence`: quotes `L1 -> def-pointwise-uniform-and-uniformly-cauchy-convergence#Definition`, `L2 -> thm-componentwise-limits-and-continuity#Statement`, `L3 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`, `L4 -> def-limsup-liminf#Definition`; boundaries B.
+- `thm-c1-paths-have-length-equal-to-the-integral-of-speed`: quotes `L1 -> def-vector-valued-derivative-and-integral#Definition`, `L2 -> cor-mean-value-theorem#Statement`, `L3 -> cor-vector-valued-ftc-and-lipschitz-bound#Statement`, `L4 -> thm-norm-inequality-for-the-vector-valued-integral#Statement`, `L5 -> thm-heine-cantor-r#Statement`, `L5 -> thm-darboux-equals-riemann#Statement`, `L6 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`; boundaries B.
+- `cor-length-of-the-graph-of-a-c1-function`: quotes `L1 -> def-vector-valued-derivative-and-integral#Definition`, `L2 -> def-p-norms-on-rn#Definition`, `L2 -> thm-of-square-roots#Statement`, `L3 -> thm-c1-paths-have-length-equal-to-the-integral-of-speed#Statement`; boundaries B.
+- `cor-piecewise-c1-paths-have-additive-speed-integral-length`: quotes `L1 -> thm-c1-paths-have-length-equal-to-the-integral-of-speed#Statement`, `L2 -> thm-arc-length-is-additive-over-subintervals#Statement`; boundaries B.
+- `lem-arc-length-function-is-continuous-and-nondecreasing`: quotes `L1 -> def-arc-length-function#Definition`, `L1 -> thm-arc-length-is-additive-over-subintervals#Statement`, `L2 -> thm-rectifiable-iff-coordinate-functions-have-bounded-variation#Statement`, `L2 -> lem-variation-additive-on-subintervals#Statement`, `L3 -> lem-jumps-of-the-variation-function#Statement`, `L4 -> cor-chord-length-is-at-most-arc-length#Statement`; boundaries B.
+- `thm-every-rectifiable-path-has-an-arc-length-parametrization`: quotes `L1 -> def-arc-length-function#Definition`, `L1 -> lem-arc-length-function-is-continuous-and-nondecreasing#Statement`, `L2 -> cor-chord-length-is-at-most-arc-length#Statement`, `L3 -> thm-arc-length-is-invariant-under-monotone-reparametrization#Statement`; boundaries `empty`, `nonempty-choice`, `iff-forward`, `iff-reverse`. Its other four boundary rows were already specific and true.
+- `cor-regular-c1-paths-have-c1-unit-speed-parametrizations`: quotes `L1 -> thm-c1-paths-have-length-equal-to-the-integral-of-speed#Statement`, `L1 -> def-arc-length-function#Definition`, `L2 -> thm-ftc-first-part#Statement`, `L3 -> thm-derivative-of-an-inverse#Statement`, `L4 -> thm-chain-rule#Statement`, `L4 -> thm-componentwise-limits-and-continuity#Statement`, `L5 -> cor-mean-value-theorem#Statement`; boundaries B.
+- `ex-line-segment-and-polygonal-path-length`: quotes `L1 -> cor-piecewise-c1-paths-have-additive-speed-integral-length#Statement`, `L2 -> thm-arc-length-is-additive-over-subintervals#Statement`; boundaries B.
+- `ex-unit-circle-arc-has-length-theta`: quotes `L1 -> def-vector-valued-derivative-and-integral#Definition`, `L2 -> thm-sine-and-cosine-derivatives#Statement`, `L3 -> cor-trigonometric-parity-and-pythagorean-identity#Statement`, `L4 -> thm-c1-paths-have-length-equal-to-the-integral-of-speed#Statement`, `L5 -> lem-integral-elementary-bounds#Statement`; boundaries B.
+- `cex-graph-of-x-sin-one-over-x-is-not-rectifiable`: quotes `L1 -> def-pi-via-first-positive-cosine-zero#Definition`, `L1 -> thm-quarter-turn-values-and-shift-formulas#Statement`, `L2 -> thm-p-series-rational#Statement`, `L2 -> thm-nonnegative-series-bounded-partial-sums#Statement`, `L3 -> def-bounded-variation-and-total-variation#Definition`, `L4 -> thm-rectifiable-iff-coordinate-functions-have-bounded-variation#Statement`, `L5 -> cor-archimedean-reciprocal#Statement`, `L6 -> cor-trigonometric-parity-and-pythagorean-identity#Statement`; boundaries B.
+- `cex-the-koch-curve-is-not-rectifiable`: quotes `L2 -> thm-of-square-roots#Statement`, `L2 -> lem-standard-basis-of-f-n#Statement`, `L2 -> thm-cauchy-schwarz-and-the-euclidean-norm#Statement`, `L3 -> thm-uniform-cauchy-criterion-real-functions#Statement`, `L3 -> thm-uniform-limit-continuous-real-functions#Statement`, `L3 -> thm-componentwise-limits-and-continuity#Statement`, `L4 -> lem-geometric-sequence-null#Statement`, `L5 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition`, `L5 -> cor-piecewise-c1-paths-have-additive-speed-integral-length#Statement`, `L6 -> thm-arc-length-is-lower-semicontinuous-under-uniform-convergence#Statement`, `L7 -> prop-arc-length-under-lipschitz-maps-and-euclidean-similarities#Statement`, `L7 -> thm-arc-length-is-additive-over-subintervals#Statement`; boundaries B. Its already-complete `L1 -> thm-recursion#Statement` and `L2 -> cor-cauchy-reals-lub-complete#Statement` rows were not changed.
+- `ex-v-shaped-path-is-rectifiable-but-not-c1`: quotes `L1 -> def-vector-valued-derivative-and-integral#Definition`, `L2 -> cor-piecewise-c1-paths-have-additive-speed-integral-length#Statement`, `L3 -> thm-of-square-roots#Statement`; boundaries B.
+- `cex-the-same-trace-can-have-different-path-lengths`: quotes `L1 -> cor-piecewise-c1-paths-have-additive-speed-integral-length#Statement`, `L2 -> lem-integral-elementary-bounds#Statement`; boundaries B.
+- `cex-arc-length-is-not-continuous-under-uniform-convergence`: quotes `L1 -> cor-piecewise-c1-paths-have-additive-speed-integral-length#Statement`, `L2 -> lem-integral-elementary-bounds#Statement`, `L3 -> cor-archimedean-reciprocal#Statement`, `L4 -> thm-arc-length-is-lower-semicontinuous-under-uniform-convergence#Statement`; boundaries B.
+- `ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous`: quotes `L1 -> cor-cantor-function-is-continuous#Statement`, `L1 -> thm-cantor-function-properties#Statement`, `L2 -> thm-jordan-decomposition-for-bv-functions#Statement`, `L2 -> thm-rectifiable-iff-coordinate-functions-have-bounded-variation#Statement`, `L3 -> def-absolutely-continuous-function#Definition`, `L4 -> def-cantor-set#Definition`, `L4 -> thm-cantor-set-ternary-description#Statement`, `L5 -> def-cantor-function#Definition`, `L5 -> thm-cantor-function-properties#Statement`, `L6 -> lem-geometric-sequence-null#Statement`, `L7 -> thm-componentwise-limits-and-continuity#Statement`; boundaries B.
+
+### Boundary status corrections
+
+These are the 40 rows whose status, rather than only their evidence or reason,
+changed. The remaining changed boundary rows retained the right status but had
+generic, prospective, or non-step-specific prose replaced.
+
+Changed from `checked` to `not_applicable`:
+
+- `cor-ftc-integral-function-differentiable-almost-everywhere`: `iff-forward`, `iff-reverse`.
+- `thm-one-sided-ftc-at-points-with-one-sided-limits`: `nonempty-choice`.
+- `cex-volterra-bounded-derivative-not-riemann-integrable`: `degenerate`.
+- `thm-arc-length-is-invariant-under-monotone-reparametrization`: `one`.
+- `prop-arc-length-under-lipschitz-maps-and-euclidean-similarities`: `endpoints`.
+- `thm-arc-length-is-lower-semicontinuous-under-uniform-convergence`: `endpoints`.
+- `cor-piecewise-c1-paths-have-additive-speed-integral-length`: `nonempty-choice`.
+- `lem-arc-length-function-is-continuous-and-nondecreasing`: `nonempty-choice`.
+- `ex-unit-circle-arc-has-length-theta`: `one`.
+- `ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous`: `iff-forward`, `iff-reverse`.
+
+Changed from `not_applicable` to `checked`:
+
+- `thm-newton-leibniz-with-interior-derivative`: `one`, `nonempty-choice`.
+- `cor-newton-leibniz-with-finitely-many-exceptional-points`: `one`.
+- `thm-newton-leibniz-with-a-countable-exceptional-set`: `one`.
+- `thm-integration-by-parts-with-interior-derivatives`: `iff-forward`, `iff-reverse`.
+- `thm-one-sided-ftc-at-points-with-one-sided-limits`: `zero`.
+- `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle`: `zero`.
+- `thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators`: `zero`.
+- `ex-bounded-discontinuous-derivative-that-is-riemann-integrable`: `one`.
+- `ex-thomae-integral-function-differentiates-through-dense-discontinuities`: `one`, `degenerate`.
+- `cex-ae-zero-derivative-does-not-determine-endpoint-change`: `one`.
+- `lem-polygonal-length-is-monotone-under-refinement`: `empty`, `zero`, `one`.
+- `prop-arc-length-under-lipschitz-maps-and-euclidean-similarities`: `one`.
+- `thm-arc-length-is-lower-semicontinuous-under-uniform-convergence`: `one`, `degenerate`.
+- `cor-length-of-the-graph-of-a-c1-function`: `zero`.
+- `cor-regular-c1-paths-have-c1-unit-speed-parametrizations`: `one`.
+- `ex-line-segment-and-polygonal-path-length`: `one`, `degenerate`.
+- `ex-unit-circle-arc-has-length-theta`: `endpoints`.
+- `cex-graph-of-x-sin-one-over-x-is-not-rectifiable`: `one`.
+- `ex-v-shaped-path-is-rectifiable-but-not-c1`: `zero`, `one`.
+- `cex-arc-length-is-not-continuous-under-uniform-convergence`: `zero`.
+
+The genuine equivalence rows are now checked in both directions for exactly the
+Statements that assert the relevant equivalence:
+`thm-integration-by-parts-with-interior-derivatives` (the two displayed formulas
+are algebraically equivalent),
+`thm-rectifiable-iff-coordinate-functions-have-bounded-variation`,
+`thm-arc-length-is-additive-over-subintervals` (rectifiability of the whole path
+iff rectifiability of both restrictions), and
+`lem-arc-length-function-is-continuous-and-nondecreasing` (strict increase iff
+there is no constant nondegenerate subinterval). All other `iff` rows are honest
+`not_applicable` rows because their Statements are not biconditionals.
+
+### Every `not_applicable` row and its true reason
+
+There are 158 such rows. The JSON carries the following exact reason for every
+row of a given case:
+
+- `empty`: “No empty family, set, or interval is quantified in the Statement.”
+- `zero`: “No permitted zero index or zero-valued boundary requires a separate proof case.”
+- `one`: “No permitted one-index or one-valued boundary requires a separate proof case.”
+- `degenerate`: “The hypotheses exclude a degenerate domain or parameter, and no other degenerate case is asserted.”
+- `endpoints`: “The Statement has no endpoint-specific conclusion requiring a separate proof case.”
+- `nonempty-choice`: “The proof makes no simultaneous selection from a nonempty family.”
+- `iff-forward`, `iff-reverse`: “The Statement is not a biconditional.”
+
+The complete per-item row ledger is:
+
+- `cor-ftc-integral-function-differentiable-almost-everywhere`: `empty`, `one`, `degenerate`, `iff-forward`, `iff-reverse`.
+- `thm-newton-leibniz-with-interior-derivative`: `empty`, `zero`, `degenerate`, `iff-forward`, `iff-reverse`.
+- `cor-newton-leibniz-with-finitely-many-exceptional-points`: `degenerate`, `iff-forward`, `iff-reverse`.
+- `thm-newton-leibniz-with-a-countable-exceptional-set`: `zero`, `degenerate`, `iff-forward`, `iff-reverse`.
+- `thm-integration-by-parts-with-interior-derivatives`: `empty`, `zero`, `one`, `degenerate`, `nonempty-choice`.
+- `thm-substitution-with-riemann-integrable-inner-derivative`: `empty`, `one`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `thm-one-sided-ftc-at-points-with-one-sided-limits`: `empty`, `one`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `thm-differentiation-under-the-integral-sign-on-a-compact-rectangle`: `empty`, `one`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators`: `empty`, `one`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `ex-bounded-discontinuous-derivative-that-is-riemann-integrable`: `empty`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `cex-volterra-bounded-derivative-not-riemann-integrable`: `empty`, `degenerate`, `iff-forward`, `iff-reverse`.
+- `ex-dense-jump-integrand-with-dense-nondifferentiability`: `empty`, `zero`, `one`, `degenerate`, `iff-forward`, `iff-reverse`.
+- `ex-thomae-integral-function-differentiates-through-dense-discontinuities`: `empty`, `iff-forward`, `iff-reverse`.
+- `ex-sparse-spikes-ftc-conclusion-at-a-discontinuity`: `empty`, `iff-forward`, `iff-reverse`.
+- `cex-ae-zero-derivative-does-not-determine-endpoint-change`: `empty`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `cor-chord-length-is-at-most-arc-length`: `empty`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `lem-polygonal-length-is-monotone-under-refinement`: `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `thm-rectifiable-iff-coordinate-functions-have-bounded-variation`: `empty`, `nonempty-choice`.
+- `thm-arc-length-is-additive-over-subintervals`: `empty`, `nonempty-choice`.
+- `thm-arc-length-is-invariant-under-monotone-reparametrization`: `empty`, `one`, `iff-forward`, `iff-reverse`.
+- `prop-arc-length-under-lipschitz-maps-and-euclidean-similarities`: `empty`, `endpoints`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `thm-arc-length-is-lower-semicontinuous-under-uniform-convergence`: `empty`, `zero`, `endpoints`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `thm-c1-paths-have-length-equal-to-the-integral-of-speed`: `empty`, `iff-forward`, `iff-reverse`.
+- `cor-length-of-the-graph-of-a-c1-function`: `empty`, `one`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `cor-piecewise-c1-paths-have-additive-speed-integral-length`: `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `lem-arc-length-function-is-continuous-and-nondecreasing`: `empty`, `nonempty-choice`.
+- `thm-every-rectifiable-path-has-an-arc-length-parametrization`: `empty`, `iff-forward`, `iff-reverse`.
+- `cor-regular-c1-paths-have-c1-unit-speed-parametrizations`: `empty`, `zero`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `ex-line-segment-and-polygonal-path-length`: `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `ex-unit-circle-arc-has-length-theta`: `empty`, `one`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `cex-graph-of-x-sin-one-over-x-is-not-rectifiable`: `empty`, `degenerate`, `iff-forward`, `iff-reverse`.
+- `cex-the-koch-curve-is-not-rectifiable`: `empty`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `ex-v-shaped-path-is-rectifiable-but-not-c1`: `empty`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `cex-the-same-trace-can-have-different-path-lengths`: `empty`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `cex-arc-length-is-not-continuous-under-uniform-convergence`: `empty`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+- `ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous`: `empty`, `degenerate`, `nonempty-choice`, `iff-forward`, `iff-reverse`.
+
+### New item-level findings for Alpha (not papered over)
+
+The full-section quotes made the following rows visibly unsupported by the
+formal source section or by the inputs named on the current proof step. These
+cannot be made true by editing the contract alone. I left every item byte-for-byte
+untouched, as required. The affected contract rows and the exact item text are
+quoted here.
+
+1. **Darboux-sum formula is not in either direct source section.** In
+   `thm-newton-leibniz-with-interior-derivative`, both citation rows
+   `L2 -> def-partition-and-refinement#Definition` and
+   `L2 -> def-darboux-integral#Definition` purport to support:
+
+   > [L2] For a partition $P=(t_0,\ldots,t_m)$, the lower and upper Darboux sums are obtained by multiplying each subinterval length by the infimum and supremum of $f$ there.
+
+   `def-partition-and-refinement` only defines partitions and refinement.
+   `def-darboux-integral` names `L(f,P)` and `U(f,P)` and links onward to
+   `def-darboux-sums`; it does not state the product formulas in its own
+   Definition. The actual direct source is `def-darboux-sums`. The item must add
+   that dependency/citation (or state the derivation); the contract must not
+   pretend either current direct source contains it.
+
+2. **The abstract norm axiom is never connected to the Euclidean norm.** In
+   `lem-polygonal-length-is-monotone-under-refinement`, both citation rows
+   `L2 -> def-norm-and-normed-space#Definition` and
+   `L2 -> def-path-polygonal-length-and-rectifiability-in-rn#Definition` purport
+   to support:
+
+   > [L2] The Euclidean norm satisfies the triangle inequality.
+
+   The first source says that an arbitrary function already known to be a norm
+   satisfies its norm axioms. The second uses the notation `||.||_2` in the
+   polygonal sum, but does not prove or state there that this function is a norm.
+   A direct Euclidean-norm result such as
+   `thm-cauchy-schwarz-and-the-euclidean-norm` is missing from the item.
+
+3. **The V-path applies square-root existence without its field hypothesis and
+   computes a Euclidean norm without its formula.** In
+   `ex-v-shaped-path-is-rectifiable-but-not-c1`, citation row
+   `L3 -> thm-of-square-roots#Statement` and derivation row `step-1-1` contain:
+
+   > [L3] $\sqrt2$ is the nonnegative number whose square is $2$.
+
+   > 1.1 On $[-1,0]$ the derivative is $(1,-1)$, and on $[0,1]$ it is $(1,1)$; each has Euclidean norm $\sqrt2$ by [L3].
+
+   The cited theorem begins “Let $F$ be a complete ordered field”; this item does
+   not cite or discharge that hypothesis for $\mathbb R$. It also has no source
+   for `||(1,\pm1)||_2=sqrt(2)`. (The repaired Koch item does discharge the same
+   square-root premise via `cor-cauchy-reals-lub-complete`.)
+
+4. **Four facts strengthen an existential reciprocal bound to sequence
+   convergence/eventual smallness.** The affected citation rows, all targeting
+   `cor-archimedean-reciprocal#Statement`, are:
+
+   - `ex-bounded-discontinuous-derivative-that-is-riemann-integrable` L4:
+     > Reciprocals of positive natural numbers tend to zero.
+   - `cex-volterra-bounded-derivative-not-riemann-integrable` L5:
+     > Reciprocals of positive natural numbers tend to $0$.
+   - `cex-graph-of-x-sin-one-over-x-is-not-rectifiable` L5:
+     > Reciprocals of positive naturals tend below every positive bound.
+   - `cex-arc-length-is-not-continuous-under-uniform-convergence` L3:
+     > The sequence $1/k$ of real numbers tends to zero.
+
+   The cited Statement proves only
+   `(for every epsilon>0)(there exists n>=1) 1/n<epsilon`; convergence needs the
+   stronger threshold quantifier `(there exists N)(for every k>=N)`. The source's
+   non-formal Remarks explain that extra line using
+   `lem-of-naturals-positive` and `lem-of-inverse-positive`, but `Remarks` is not
+   a valid citation-contract `source_section`, and none of the four items cites
+   those inputs. The unsupported uses are derivation rows `step-2-2`,
+   `step-4-2`, `step-1-2`, and `step-1-1`, respectively: they say the constructed
+   points “tend to $0$”, “eventually lie in the half-support”, satisfy
+   `$x_k\downarrow0$`, and give `$1/(2k)\to0$`. Each item needs the eventual
+   monotonicity argument or a direct convergence source.
+
+5. **Three facts silently iterate a one-step trigonometric shift over arbitrary
+   integers.** The affected rows targeting
+   `thm-quarter-turn-values-and-shift-formulas#Statement` are:
+
+   - `ex-bounded-discontinuous-derivative-that-is-riemann-integrable` L3:
+     > The number $\pi$ is positive, and shifts by $\pi$ alternate the signs of sine and cosine.
+   - `cex-volterra-bounded-derivative-not-riemann-integrable` L4:
+     > Sine and cosine have absolute value at most $1$; $\pi>0$, and their values at integer multiples of $\pi$ alternate by the quarter-turn and shift formulas.
+   - `cex-graph-of-x-sin-one-over-x-is-not-rectifiable` L1:
+     > The number $\pi$ is positive, and the shift formulas give $\sin(\pi/2+k\pi)=(-1)^k$ for integers $k\ge0$.
+
+   The source Statement gives only the one-step identities
+   `sin(x+pi)=-sin(x)` and `cos(x+pi)=-cos(x)`, plus the four base values. The
+   arbitrary-integer claims used in derivation rows `step-2-2`, `step-4-2`, and
+   `step-1-2` require a finite induction that none of the items writes or cites.
+
+6. **The unit-circle speed calculation has no Euclidean-norm input.** Contract
+   derivation row `step-2-1` in `ex-unit-circle-arc-has-length-theta` quotes the
+   current proof exactly:
+
+   > 2.1 By [L3], $\lVert\gamma_\theta'(t)\rVert_2=\sqrt{\sin^2t+\cos^2t}=1$.
+
+   L3 is only the Pythagorean identity. No fact or dependency supplies
+   `||(x,y)||_2=sqrt(x^2+y^2)`, so the named input does not support the first
+   equality.
+
+7. **The sawtooth counterexample likewise computes Euclidean norms and speeds
+   without a Euclidean-norm source.** The affected derivation rows in
+   `cex-arc-length-is-not-continuous-under-uniform-convergence` are:
+
+   > 1.1 Every $\gamma_k(t)$ has first coordinate $t$ and second coordinate between $0$ and $1/(2k)$, so $\sup_t\lVert\gamma_k(t)-\gamma(t)\rVert_2\le1/(2k)\to0$ by [L3].
+
+   > 1.2 On each of the $2k$ parameter intervals, $\gamma_k$ has derivative $(1,1)$ or $(1,-1)$ and hence constant speed $\sqrt2$.
+
+   > 1.3 The limit path has constant derivative $(1,0)$ and speed $1$.
+
+   L1 is the piecewise-$C^1$ length theorem, L2 integrates constants, and L3 is
+   the reciprocal claim; none defines or computes the Euclidean norm. The item
+   needs the direct norm formula (and finding 4 independently applies to the
+   convergence quantifier in step 1.1).
+
+These findings supersede the earlier blanket sentence that there was “no
+batch-local blocker.” They do not say the displayed mathematical conclusions
+are false; they say the current evidence/input record cannot license them
+without item changes, which this dispatch forbids. The pre-existing Alpha-owned
+`risk_review` fields were not edited by Beta.
+
+### Verification and blocker disposition
+
+- `proof-contract --strict`: 36/36 items, 0 errors, 0 warnings.
+- Live proof-step coverage: 177 current numbered steps, 177 derivation-map rows,
+  with no missing, duplicated, or stale step id.
+- Citation coverage: 189 rows; 189 exact source excerpts; five were already
+  complete and 184 changed in this pass.
+- Boundary coverage: 288 rows; 130 `checked` and 158 `not_applicable`; no
+  prospective `must`/`should`/`will` evidence remains.
+- No item file is changed in the working tree.
+- There was no permission, shell, edit, web, or git blocker and no escalation or
+  permission prompt. The only blocker to declaring semantic contract fidelity
+  complete is the seven item-level finding families above, which require Alpha
+  adjudication and an item-authorized repair round.

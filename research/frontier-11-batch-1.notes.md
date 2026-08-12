@@ -253,3 +253,64 @@ Three additional derivation summaries were synchronized to the final algebra on 
 The page manifest now matches the current title and dependency arrays for all 54 items. Twenty manifest entries changed: the 14 contract-affected items above, together with `def-field-extension-generated-subfields-and-simple-extension`, `def-complex-numbers-and-arithmetic`, `thm-complex-numbers-are-the-real-coordinate-plane`, `cor-center-of-symmetric-group-is-trivial`, `lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup`, and `ex-a-five-conjugacy-classes-and-split-five-cycles`. The coverage file required no row retag: all targets still exist and reader 5 made no scope change.
 
 Final reconciliation checks on 2026-08-12: strict proof-contract validation passed 49/49 with 0 errors and 0 warnings; coverage validation passed 2 pages and 80 harvested results with 0 errors and 0 warnings; content policy passed 54 scoped items with 0 errors and 0 warnings; and a direct manifest-to-frontmatter comparison found exact title and dependency agreement for 54/54 items. I found no reader repair that is mathematically wrong. No blocker remains, and no item, page, plan, normative document, provenance field, or verification stamp was edited in this reconciliation.
+
+## Step-6 contract-fidelity reconciliation — artifact only
+
+I reread all 49 proof-bearing items against every contract row and changed 54 rows: eight derivation-map rows and 46 boundary rows. The item text was treated as frozen. No item, page, manifest, plan, tool, or normative file was edited.
+
+### Citation-quote review
+
+All 195 citation rows were compared with their cited source sections. No citation row required a change. Of these, 190 already quote the whole cited section. The five shorter quotations are complete for the facts asserted: four quotations from `def-field-extension-generated-subfields-and-simple-extension` include the generated-subfield and simple-extension clauses used by their facts and omit only the later injectivity proof; the `thm-product-rule` quotation includes both product clauses and the empty-product clause and omits only the diagram. No quote ends at a dangling conditional, definition verb, or quantifier, and no fact relies on text outside its quotation.
+
+### Changed derivation rows
+
+1. `cor-complex-numbers-are-a-quadratic-real-extension` step `1.1` — stale input/evidence map: restored the current use of `[F1]` and `[F4]` in the minimal-polynomial inference.
+2. `ex-rational-square-root-two-as-a-simple-extension` step `1.1` — stale input/evidence map: recorded monicity and the current `[F4]` argument that makes the polynomial minimal.
+3. `lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle` steps `1.3` and `3.1` — omitted live branch: recorded the current immediate-success branch when sigma itself is a three-cycle, both where introduced and in the final exhaustion.
+4. `thm-alternating-group-is-simple-for-n-at-least-five` step `1.1` — omitted sign justification: recorded the current parity calculation `(-1)^2=+1` using `[F4]`.
+5. `ex-klein-four-is-normal-in-a-four` step `1.1` — omitted sign justification: recorded the double-transposition cycle count and parity used in the current step.
+6. `fs-same-cycle-type-implies-conjugate-in-a-n` step `1.1` — omitted sign justification: recorded the current parity calculation.
+7. `fs-a-n-is-simple-for-all-n-at-least-four` step `1.1` — omitted sign justification: recorded the double-transposition cycle count and parity used in the current step.
+
+### Changed boundary rows
+
+1. `cor-composite-of-two-subfields` / `empty` — false non-applicability: set `checked`; step `2.1` and `[F1]` show the defining family is nonempty because the ambient field contains the union.
+2. `thm-evaluation-kernel-and-minimal-polynomial` / `one`, `nonempty-choice`, `iff-forward`, `iff-reverse` — false non-applicability and missing biconditional directions: set all four `checked`; the degree-one case and generator/normalization choices are live, and step `3.2` proves both directions of `f(a)=0` iff the minimal polynomial divides `f`.
+3. `thm-simple-transcendental-extension-is-rational-expressions-in-the-generator` / `empty` — false non-applicability: set `checked`; step `2.1` includes constants as denominator-one fractions, including zero.
+4. `cor-every-nonconstant-polynomial-has-a-root-in-an-extension` / `zero` — imprecise non-applicability reason: kept `not_applicable` but stated the true reason, that the nonconstant hypothesis excludes the zero polynomial. Its `one` row had false non-applicability and was set `checked` because steps `1.1`–`4.1` include degree-one polynomials.
+5. `thm-universal-property-of-adjoining-an-irreducible-root` / `zero`, `one`, `degenerate` — false non-applicability: set all three `checked`; the proof includes `b=0` with `p=x`, linear `p`, and the identity case `L=K`, `b=a`.
+6. `cor-stem-fields-are-uniquely-f-isomorphic` / `zero` — incomplete boundary evidence: kept `checked` and recorded the actual `p=x`, `alpha=beta=0` case instead of merely excluding the zero polynomial.
+7. `cor-universal-property-of-the-complex-numbers` / `zero` — imprecise non-applicability reason: kept `not_applicable`; the relation `j^2=-1` itself excludes `j=0`. Its `degenerate` row had false non-applicability and was set `checked` for the identity case `L=C`, `j=i`. Its `iff-forward` and `iff-reverse` rows kept `not_applicable` with the corrected reason that the Statement is an existence-and-uniqueness assertion, not a biconditional.
+8. `lem-complex-conjugation-and-modulus-laws` / `iff-forward`, `iff-reverse` — genuine biconditional marked non-applicable: set both `checked`; step `2.1` proves both directions of `|z|=0` iff `z=0`.
+9. `thm-every-complex-number-has-a-square-root` / `endpoints` — false non-applicability: set `checked`; step `1.1` assigns the real-axis endpoint cases to the appropriate branches, including `a=0`.
+10. `ex-the-four-element-field-from-an-irreducible-quadratic` / `zero`, `one` — false non-applicability: set both `checked`; the explicit four-element enumeration includes zero and the unit.
+11. `ex-square-roots-of-the-imaginary-unit` / `zero` — false non-applicability: set `checked`; step `1.2` uses `2ab=1`, excluding zero coordinates.
+12. `cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types` / `endpoints` — false non-applicability: set `checked`; the proof includes the partition endpoints `k=1` and `k=n`.
+13. `thm-centralizer-cardinality-from-cycle-type` / `endpoints`, `nonempty-choice` — false non-applicability: set both `checked`; the count covers `k=1`, `k=n`, and `n=0`, and explicitly makes and assembles the finite orbit/marked-point choices.
+14. `cor-symmetric-group-class-equation-by-cycle-type` / `endpoints` — false non-applicability: set `checked`; the formula covers the `c_1`, `c_n`, and `n=0` endpoints.
+15. `cor-center-of-symmetric-group-is-trivial` / `endpoints` — false non-applicability: set `checked`; the proof treats the `n=2` exception and `n=3` as the first general case.
+16. `thm-an-n-cycle-and-a-neighbour-transposition-generate-the-symmetric-group` / `one` — boundary outside the domain: changed to `not_applicable` because the hypothesis `n>=2` excludes `n=1`. Its `endpoints` row had incomplete evidence and now anchors the lower endpoint `n=2` to the step that treats it.
+17. `thm-alternating-group-is-generated-by-three-cycles` / `endpoints` — incomplete boundary evidence: kept `checked` and recorded the final-factor and `n=3` endpoint treatment. Its `nonempty-choice` row had false non-applicability and was set `checked` because step `1.1` obtains the finite transposition word from `[F2]`.
+18. `lem-conjugacy-class-splitting-over-an-index-two-normal-subgroup` / `iff-forward`, `iff-reverse` — incomplete biconditional evidence: kept both `checked` and anchored them to step `4.1`, which proves the equivalent splitting iff containment criterion.
+19. `thm-alternating-conjugacy-class-splitting-criterion` / `endpoints` — false non-applicability: set `checked`; the proof includes cycle lengths `1` and `n` and the lower bound `n=2`.
+20. `cor-three-cycles-form-one-conjugacy-class-in-a-n` / `one`, `endpoints` — false non-applicability: set both `checked`; the proof treats repeated one-cycles and the endpoint `n=5`, with exactly two fixed points.
+21. `lem-normal-subgroup-containing-a-three-cycle-is-a-n` / `endpoints` — false non-applicability: set `checked`; the proof applies at its lower endpoint `n=5`.
+22. `lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle` / `endpoints` — false non-applicability: set `checked`; step `2.4` uses the required fifth point at `n=5`.
+23. `thm-alternating-group-is-simple-for-n-at-least-five` / `endpoints` — false non-applicability: set `checked`; the proof includes the lower endpoint `n=5`.
+24. `cor-only-proper-nontrivial-normal-subgroup-of-s-n` / `one`, `endpoints` — false non-applicability: set both `checked`; step `3.1` treats the one-element subgroup and the proof includes `n=5`.
+25. `cor-derived-subgroups-of-symmetric-and-alternating-groups` / `one` — boundary outside the domain: changed to `not_applicable` because the two formulas assume `n>=2` and `n>=5`, so `n=1` belongs to neither domain. Its `endpoints` row had false non-applicability and was set `checked` for the actual lower endpoints `n=2` and `n=5`.
+26. `ex-klein-four-is-normal-in-a-four` / `one` — false non-applicability: set `checked`; step `2.1` explicitly uses the strict order bounds `1<4<12`.
+27. `fs-a-n-is-simple-for-all-n-at-least-four` / `one`, `endpoints` — false non-applicability: set both `checked`; the proof uses `1<4<12` and treats the exact false lower endpoint `n=4`.
+
+### Rows changed to `not_applicable`
+
+1. `thm-an-n-cycle-and-a-neighbour-transposition-generate-the-symmetric-group` / `one`: `n=1` is excluded by the hypothesis `n>=2`; the live lower endpoint `n=2` is covered by `endpoints`.
+2. `cor-derived-subgroups-of-symmetric-and-alternating-groups` / `one`: `n=1` is excluded from both asserted ranges; the live lower endpoints `n=2` and `n=5` are covered by `endpoints`.
+
+The other rows whose `not_applicable` wording changed (`cor-every-nonconstant-polynomial-has-a-root-in-an-extension` / `zero`, and `cor-universal-property-of-the-complex-numbers` / `zero`, `iff-forward`, `iff-reverse`) retained that disposition and now give the exact reason.
+
+### Findings, blockers, and verification
+
+No contract row requires an item edit to become true, so there is no new mathematical finding for Alpha. There is no blocker.
+
+The exact strict command passed with `0 error(s), 0 warning(s), 49/49 item(s) checked`. An independent map comparison found 213 current numbered proof steps and 213 contract input-map rows with no missing, duplicate, stale, or mismatched entry. All five current Statements containing an explicit biconditional have checked `iff-forward` and `iff-reverse` rows. The final boundary inventory is 143 checked and 249 honestly `not_applicable`, with zero checked rows using prospective `must`, `should`, `will`, `planned`, or `intended` wording. Diff and scope checks confirmed that this reconciliation touched only the batch-1 proof contract and this appended notes section; no item file changed.
