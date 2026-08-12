@@ -308,6 +308,25 @@ If it does fire on exactly these four ids and nothing else, `--pending-audit-ok`
 is used with that fact recorded here and reported at step 10; if it fires on
 anything else, that is a real defect and is fixed, not flagged.
 
+**RESOLVED at step 5, 2026-08-12, on measured evidence.** Unsuppressed `depcheck`
+returned **exactly 4 errors, all `published-unaudited`, on exactly the four
+re-homed ids** — `def-complex-numbers-and-arithmetic`,
+`thm-complex-numbers-form-a-field`,
+`def-complex-conjugate-real-imaginary-part-and-modulus`,
+`lem-complex-conjugation-and-modulus-laws` — and nothing else. The remaining 157
+findings are warnings: `multi-home` 42 (including the expected ×4 from both pages
+listing the four, per D15), `cited-not-in-deps` 114, `b-leaf-legacy` 1, all
+pre-existing in kind. With `--pending-audit-ok` the run returns **OK** and the
+warning count rises 157 → 161, i.e. the flag reclassifies precisely those four
+and suppresses nothing else.
+
+**Therefore `--pending-audit-ok` is authorised for `depcheck` in this build, from
+step 5 until the step-10 publish commit, and its use is a recorded deviation**:
+the flag's documented sole caller is the audit workflow's A4 gate. It is reported
+at step 10. The window closes when the owner sets `verification.audited` on the
+four at publish. Because the gate was run unsuppressed first, this rests on
+measured evidence rather than on the assumption Alpha rightly refused to make.
+
 ## D14 — corrections Alpha made to the orchestrator's own instructions
 
 - **My authoring brief was wrong.** It told batch 1 to set the four ℂ items to

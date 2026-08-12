@@ -1,7 +1,7 @@
 # frontier-11 batch 5 — Step-5 authoring notes
 
 Beta: `Beta-frontier-11-5`  
-Run/date: `frontier-11`, 2026-08-11  
+Run/date: `frontier-11`, 2026-08-12  
 Writable scope: `research/frontier-11-batch-5.pages.json`,
 `research/frontier-11-batch-5.notes.md`,
 `research/frontier-11-batch-5.coverage.json`, and
@@ -19,25 +19,24 @@ No split is proposed. The manifest sizes are:
 The A page is well below the owner’s hard split threshold. No result found in
 the harvested ranges was removed for size.
 
-Proposed two-paragraph A-page summary:
+Final two-paragraph A-page summary:
 
-> For a locally small category, this page constructs the covariant and
-> contravariant hom-functors and the hom-bifunctor, then defines presheaves,
-> representable functors, representations, and generalized elements with their
-> shapes. Evaluation at an identity
-> morphism gives the Yoneda bijection; its inverse is written explicitly before
-> the natural-transformation collection is called a set, and naturality is
-> proved separately in both the representing object and the functor. The proof
-> uses no choice and requires local smallness, not smallness.
+> Locally small categories supply set-valued hom-collections, while opposite
+> and product categories control their variance. Functors, natural
+> transformations, and natural isomorphisms provide the laws used below; the
+> small-source convention for functor categories separates actual presheaf
+> categories from large-source metatheoretic notation. Initial, terminal, and
+> comma categories supply the categorical language for universal
+> factorisations.
 
-> The contravariant form yields the Yoneda assignment, its full faithfulness,
-> and the criterion that objects are isomorphic exactly when their representable
-> presheaves are naturally isomorphic. Representations are then recast through
-> universal elements and their unique factorisations, giving canonical
-> uniqueness of representing objects. Categories of elements and comma
-> categories express the same mechanism as initial or terminal objects,
-> including initial and terminal objects themselves as the constant-singleton
-> case.
+> The hom-assignments assemble into a bifunctor and lead to representable
+> functors, representations, and generalized elements. Evaluation at an
+> identity gives the Yoneda bijection, its naturality in both variables, and the
+> contravariant form. For a small source, the Yoneda functor is fully faithful
+> and detects object isomorphisms. Universal elements then express
+> representations by unique factorisation, yielding compatible uniqueness,
+> their initial or terminal descriptions in categories of elements, and the
+> corresponding comma-category descriptions of universal arrows.
 
 The B page has no summary body. It computes products, coproducts, exponentials,
 free monoids, free groups, polynomial rings, a one-point space, a poset
@@ -85,7 +84,7 @@ needed by a retained result.
 The 15 deferred rows identify their actual owner: tensor/free-module material
 goes to `tensor-products-of-modules`, adjunction material to
 `adjunctions-and-the-adjoint-functor-theorems`, and Campbell's preservation
-result to `limits-and-colimits`. The 40 out-of-scope rows are predominantly
+result to `limits-and-colimits`. The 41 out-of-scope rows are predominantly
 source survey examples in algebraic topology, power-set/Sierpinski
 classification, group torsors and presentations, discrete fibrations, or
 concrete algebra. Each has a result-specific reason in the receipt. Cayley's
@@ -339,7 +338,10 @@ dependency is legacy-unclassified or has an AI-generated statement component.
 | `def-the-set-of-functions-from-one-set-to-another` | component-adapted/source | The functions `A->B` form the set `B^A`. |
 | `def-cartesian-product` | component-lit | Ordered-pair model and coordinate membership. |
 | `def-ordered-pair` | component-lit | Kuratowski pair and its two coordinates. |
+| `thm-the-characterising-property-of-ordered-pairs` | component-lit | Equality of ordered pairs is equivalent to equality of both coordinates. |
 | `def-union-of-a-set-and-binary-union` | component-lit | Binary union notation used for the tagged coproduct. |
+| `lem-unions-and-intersections-of-small-families` | component-lit | A union indexed by a set is a set, so the tagged coproduct is a set. |
+| `def-natural-numbers` | component-lit | The tags $0$ and $1$ are sets and are distinct. |
 | `def-semigroup-and-monoid` | component-adapted/knowledge | Associative multiplication and a two-sided identity. |
 | `def-group-homomorphism` | component-adapted/source (SPI) | A monoid homomorphism preserves multiplication and the identity. |
 | `prop-monoids-and-groups-as-one-object-categories` | component-lit | A monoid is its one-object category with multiplication as composition. |
@@ -355,12 +357,14 @@ dependency is legacy-unclassified or has an AI-generated statement component.
 | `lem-integer-multiples-in-a-ring` | component-adapted/knowledge | Integer multiples satisfy `ma=(m 1)a=a(m 1)`, giving the canonical coefficient map. |
 | `def-monoid-finite-product` | component-adapted/knowledge | Natural powers in a target ring are finite products in its multiplicative monoid, including exponent zero. |
 | `thm-generalised-associativity` | component-adapted/source (Bourbaki reference) | The splitting law gives `r^(i+j)=r^i r^j` for the constant finite product. |
+| `thm-induction-principle` | component-lit | Induction proves the recursive free-monoid extension is multiplicative for every word length. |
 | `lem-finite-sum-reindexing-and-fubini` | component-adapted/source | Finite sums may be reindexed and rearranged over a finite product in the convolution calculation. |
 | `def-topological-space` | component-adapted/knowledge | The singleton has its unique topology. |
 | `def-continuous-map-top` | component-adapted/knowledge | Continuity is the open-preimage condition used for maps from a singleton. |
 | `prop-topological-spaces-and-continuous-maps-form-category-top` | component-lit | `Top` is a large locally small category. |
 | `def-preorder` | component-lit | Reflexive/transitive order and monotone maps. |
 | `prop-preorders-as-categories-and-monotone-maps-as-functors` | component-lit | A preorder is a thin category and its functors are monotone maps. |
+| `def-generated-subgroup` | component-lit | The subgroup generated by a subset is the least subgroup containing it; used to show a free group on one generator contains only integral powers of that generator. |
 
 No opened dependency was false. The apparent Ring/CRing mismatch was resolved
 in favor of the existing prose after checking RIE Example 2.4.12(vi) and the
@@ -439,8 +443,109 @@ its direct noncommutative-target proof. Preserve the exact item order and
 dependency lists unless authoring exposes a real missing edge;
 record any such amendment here before handoff.
 
-## Blockers
+## Step-5 authoring report
 
-No mathematical, source, licensing, dependency, size, or sandbox blocker is
-known. The aggregate `tools/gates.mjs` wrapper must not be run under this
-dispatch. Individual validation commands are the gate route.
+### Authored scope
+
+All 35 scaffolded items are authored: 21 on the A page and 14 leaf items on the
+B page. All are `status: draft` and `origin: session`. The A page has exactly
+two nonempty summary paragraphs, each below 150 words; the B page has no body.
+Twenty-seven items have numbered proofs or verifications and exact input maps in
+`research/frontier-11-batch-5.proof-contracts.json`; eight definitions or
+remarks correctly have no proof component. No B-page item is a dependency.
+
+### Departures from the settled scaffold
+
+No item was dropped, merged, or retitled, and no theorem was broadened or
+narrowed. One finite B-page witness was generalized as recorded in item 10
+below. The following dependency and justification amendments were necessary to
+make every citation edge explicit; the same lists are recorded in
+`research/frontier-11-batch-5.pages.json`.
+
+1. `def-hom-functors-and-hom-bifunctor` adds both hom-functor theorems to
+   `justified_by`, since the definition introduces assignments whose laws are
+   proved immediately afterward.
+2. `def-universal-element` and `def-category-of-elements` add their immediately
+   following characterization theorems to `justified_by`.
+3. `def-universal-arrow-to-and-from-a-functor` adds its comma-category theorem
+   to `justified_by` and adds `thm-hom-assignments-are-functors` as a dependency.
+   Its universal-arrow clauses remain valid for arbitrary categories; only the
+   equivalent Set-valued universal-element wording is now explicitly qualified
+   by local smallness of the target category.
+4. `ex-set-products-as-representing-objects` adds
+   `thm-the-characterising-property-of-ordered-pairs`.
+5. `ex-set-coproducts-as-representing-objects` adds
+   `lem-unions-and-intersections-of-small-families`,
+   `thm-the-characterising-property-of-ordered-pairs`, and
+   `def-natural-numbers` for sethood and the two distinct tags.
+6. `ex-function-sets-as-exponential-representing-objects`,
+   `ex-the-one-point-space-represents-the-underlying-set-functor-on-top`,
+   `ex-representable-presheaf-on-a-poset`, and
+   `ex-yoneda-embedding-of-the-walking-arrow-category` each add `def-function`
+   for function construction or extensionality.
+7. `ex-free-monoid-universal-property-as-a-representation` adds
+   `def-monoid-finite-product`, `thm-generalised-associativity`, and
+   `thm-induction-principle` for the empty word, recursive products, and the
+   multiplicativity induction.
+8. `ex-free-group-universal-property-as-a-representation` adds
+   `def-generated-subgroup` for the singleton-generator specialization.
+9. `cex-the-doubling-functor-on-set-is-not-representable` adds
+   `def-cartesian-product`, `def-union-of-a-set-and-binary-union`,
+   `lem-unions-and-intersections-of-small-families`, `def-ordered-pair`,
+   `thm-the-characterising-property-of-ordered-pairs`, `def-natural-numbers`,
+   and `def-function` for the explicit doubling construction and its
+   singleton-cardinality contradiction.
+10. `ex-two-singletons-are-canonically-isomorphic-representing-objects` adds
+    `def-function`. Its witness was generalized from the fixed pair
+    `\{0\},\{1\}` to arbitrary distinct singleton sets `\{s_0\},\{s_1\}`. This
+    removes a needless numeral-specific side proof and makes the compatible
+    unique isomorphism statement strictly more transparent without changing
+    the claimed phenomenon.
+11. `ex-yoneda-lemma-for-a-monoid-action` adds
+    `def-natural-transformation` for the equivariant-map/naturality
+    identification.
+
+The canonical precheck repair changed only proof phase numbers: steps citing a
+phase-$k$ step were moved to phase $k+1$. The stored proof contracts and all
+in-prose step references were synchronized to that strict stratification.
+
+### Verification
+
+- Required precheck: 27 proof-bearing items checked, 0 failures, 0 repairs
+  remaining; every proof-bearing item records `verification.precheck: pass`.
+- Required plan validation: PASS; the declared order is acyclic and consistent,
+  with no item cycle, forward reference, B-page dependency, or unresolved id.
+- Strict proof-contract validation: 27/27 proofs, 0 errors, 0 warnings.
+- Coverage validation: 1 page and 134 harvested headings, 0 errors, 0 warnings.
+- Content policy: 35 scoped items, 0 errors, 0 warnings.
+- Prose check: 37 item/page files, 0 errors, 0 warnings.
+- Render check: 37 item/page files, 0 errors, 0 warnings.
+- Forward-reference check: PASS, 0 open forward references; its repository-wide
+  forward markers are inherited and do not name this pair.
+- External-assumption check: PASS; its 84 repository-wide warnings are inherited
+  and do not name this pair.
+- Citation heuristic: PASS; its 26 repository-wide warnings do not name this
+  pair.
+
+The global dependency check is not green in the shared worktree: it reports four
+`published-unaudited` errors for the four complex-number items being rewritten
+under batch 1's express exception, plus pre-existing repository-wide warnings.
+None of those four files is in this batch, and this pair contributes no
+dependency-check error. The required `validate-plan.mjs` gate remains green.
+Per the dispatch, `tools/gates.mjs` was not run.
+
+### Final provenance distribution
+
+Statement components are 23 `literature-derived`, 7 `ai-altered`, and 5
+`ai-generated`. Proof components are 20 `ai-altered`, 7 `ai-generated`, and 8
+`not-applicable`. The item-by-item rationale is in the two provenance tables
+above. Each AI-generated mathematical-content item is a directly checked B-page
+leaf with no consumer; no AI-generated statement or construction is
+load-bearing.
+
+### Blockers
+
+There is no mathematical, source, licensing, dependency, size, or sandbox
+blocker for this batch. The only non-green global diagnostic is the unrelated
+shared-worktree dependency-check state described above. Nothing requested by
+this dispatch was left undone.

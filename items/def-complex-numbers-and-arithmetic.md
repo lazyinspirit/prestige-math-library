@@ -1,29 +1,36 @@
 ---
 id: def-complex-numbers-and-arithmetic
 kind: definition
-title: "The complex numbers as $\\mathbb R^2$, with their arithmetic, real embedding, and imaginary unit"
+title: 'The complex numbers as $\mathbb R[x]/(x^2+1)$, with the real embedding and imaginary unit $i$'
 status: published
 origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-real-numbers]
-justified_by: []
+deps: [def-polynomial-ring-over-a-commutative-ring, def-quotient-ring, def-field-extension-generated-subfields-and-simple-extension]
+justified_by: [thm-complex-numbers-form-a-field]
 aliases: []
 landmark: true
 verification:
   precheck: n/a
-  audited: 2026-08-02
 sources:
   scraped: []
   references:
-    - title: "J. Lebl, Basic Analysis I: Complex Numbers and the Complex Exponential"
-      url: "https://www.jirka.org/ra/html/sec_complexexp.html"
-pipeline_run: null
+    - title: "T. Judson, Abstract Algebra: Theory and Applications, Extension Fields"
+      url: "https://judsonbooks.org/aata-files/aata-html/fields-section-extension-fields.html"
+pipeline_run: frontier-11
 ---
 
 ## Definition
 
-Set $\mathbb C=\mathbb R^2$, write $(x,y)=x+iy$, embed $x\in\mathbb R$ as $(x,0)$, and put $i=(0,1)$. Define
-$$ (x+iy)+(u+iv)=(x+u)+i(y+v),\qquad (x+iy)(u+iv)=(xu-yv)+i(xv+yu). $$
-Then $i^2=-1$. The conventions and prerequisite facts used below are recorded in [[def-real-numbers]].
+Form the polynomial ring $\mathbb R[x]$
+([[def-polynomial-ring-over-a-commutative-ring]]) and define the **complex
+numbers** by the quotient ring
+$$\mathbb C:=\mathbb R[x]/(x^2+1)$$
+([[def-quotient-ring]]). Write $a$ for the constant class $a+(x^2+1)$ and set
+$$i:=x+(x^2+1).$$
+Thus $i^2=-1$ in the quotient. The constant-class map
+$\mathbb R\to\mathbb C$ is the specified real map; its injectivity and the
+field structure are proved in [[thm-complex-numbers-form-a-field]], after which
+$\mathbb C/\mathbb R$ is a field extension in the sense of
+[[def-field-extension-generated-subfields-and-simple-extension]].

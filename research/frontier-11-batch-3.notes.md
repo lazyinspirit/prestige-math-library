@@ -123,12 +123,33 @@ No opened dependency is `legacy-unclassified`; every exact item below has compon
 | `def-ramsey-colouring-and-arrow-notation` | Exact red/blue arrow orientation; literature-derived and source-confirmed from Diestel and Leader. |
 | `def-off-diagonal-ramsey-number` | Exact minimum and positive-parameter convention; literature-derived and source-confirmed from Fox et al. and Diestel. |
 | `def-binomial-coefficient` | Count-based binomial convention and zero boundaries; literature-derived statement, exact item opened, independently checked. |
+| `thm-stars-and-bars` | Exact weak-composition count used by the negative-binomial example; its statement, parameter boundary $m\ge1$, and count $\binom{n+m-1}{m-1}$ were opened before it was added as a direct dependency. |
 | `def-finite-cardinality` | Finite cardinality and empty-set conventions; exact statement opened and independently checked. |
 | `thm-double-counting` | Used in normalized monotonicity, supersaturation, and KST; exact statement is AI-altered but was independently audited on disk, source-confirmed from Stanley’s standard method, and knowledge-confirmed. |
 | `thm-monotone-convergence` | Supplies convergence of the bounded nonincreasing real density sequence; literature-derived, exact statement opened, source-confirmed from Rudin/Tao/Lebl. |
 | `def-monotone-sequence` | Opened with the preceding theorem to confirm that “nonincreasing” uses weak inequalities; source-confirmed. |
 
 The required page `euclidean-domains-pids-and-unique-factorisation` was also opened. It is a thin published page about divisibility, Euclidean domains, PIDs, UFDs, and prime-implies-irreducible; it does not define a field of fractions. It is therefore not falsely cited for the $K[[x]]\subset K((x))$ dictionary. The dictionary is built directly from the explicit factorization $x^m u$.
+
+## Step-5 authoring report
+
+Authored all 60 scaffolded items: 22 A-page and 9 B-page items for `formal-power-series`, and 20 A-page and 9 B-page items for `extremal-graph-theory`. Of these, 49 are proof-bearing and 11 are definitions. The four page files use `status: draft`; every item uses `status: draft` and `origin: session`. The B pages have empty bodies and list only examples, counterexamples, and false statements.
+
+Departures from the settled scaffold were local proof sufficiency corrections, not topic redesigns. `prop-formal-derivative-algebra` gained `def-binomial-coefficient` because its Hasse derivative explicitly uses $\binom mn$. `ex-negative-binomial-series` gained `thm-stars-and-bars` because the weak-composition coefficient count must be licensed by the theorem that states it. `lem-formal-residue-identities` gained `thm-formal-power-series-unit-criterion` because its arbitrary-field factorisation uses the constant-term unit criterion rather than silently generalising the published real Laurent inverse. These dependency additions were spliced into `research/frontier-11-batch-3.pages.json` and `research/plan-spec.json`. The definition `def-summable-family-of-formal-series` gained `justified_by: [thm-summable-families-and-rearrangement]`, since the product clause initially names a stabilized series and the following theorem proves existence and uniqueness. Rendered mathematics uses $R\llbracket x\rrbracket$ rather than the scaffold's literal `R[[x]]`, because the latter is parsed as a wiki link; this changes no mathematical content. The hypergraph extremal notation was written as $\operatorname{ex}(n,F)$, matching the scaffolded theorem title, with uniformity determined by $F$.
+
+One scaffolded residue clause was narrowed locally: change of variables in `lem-formal-residue-identities` now assumes that $K$ contains $\mathbb Q$, while integration by parts and logarithmic differentiation retain their arbitrary-field scope. The written monomial proof divides by $m+1$ for $m\ne-1$; retaining an arbitrary-characteristic statement would therefore overstate that proof. The same hypothesis is recorded in both machine strategy files and is exactly the characteristic-zero scope used by Lagrange–Bürmann.
+
+The final leaf audit removed six scaffolded B-to-B dependencies. `ex-negative-binomial-series` now proves the geometric inverse inline from the A-page unit and coefficient theorems; `ex-lagrange-inversion-catalan-coefficients` derives the needed negative-binomial coefficient inline from the A-page generalized-binomial theorem; and `ex-reversion-of-x-over-one-minus-x` proves both geometric expansions inline. `cex-formal-composition-with-nonzero-constant` and `cex-nonsummable-constant-family` now cite the A-page coefficient definition directly, while `ex-near-extremal-triangle-free-graph` counts $K_{3,4}$ directly from the published complete-bipartite definition. The matching dependency replacements were made in both machine authority files. No item depends on any of the 18 B-page items.
+
+Alpha's recheck found the Flajolet–Sedgewick range under-enumerated. The coverage file now includes Theorem A.2 as `included` and Note A.13 as `inline`, bringing the harvested total to 120. No source range, page pair, item id, item order, or page requirement changed.
+
+The published dependencies actually opened are listed in the table above, with `thm-stars-and-bars` added during authoring. In particular, the published `formal-laurent-series-field` page was opened before writing: it already owns the real Laurent definition, ring, valuation, field inverse, and $x^m u$ mechanism, so the new page cites and generalizes those interfaces without restating a field-of-fractions theorem. The published `graph-colouring` page was opened before use: only `def-proper-vertex-colouring-and-chromatic-number` and `def-clique-and-independence-numbers` supply the required interfaces, so no stronger colouring theorem was attributed to it.
+
+Provenance labels were assigned exactly as planned in the component table above. All mathematical-content items have both `provenance.statement` and `provenance.proof`. The four AI-generated statements remain B-page leaves with generation roles: `cex-nonsummable-constant-family` and `ex-formal-series-over-zmod-four` for the formal pair, and `ex-near-extremal-triangle-free-graph` and `ex-five-cycle-k-two-two-free` for the extremal pair. No AI-generated statement or construction is load-bearing.
+
+Verification: reflow reported every item unchanged. Precheck passed all 49 proof-bearing items and definitions retain `precheck: n/a`. The strict proof contract passed 49/49 with zero errors and warnings after it was rebuilt against the authored stratification; finite smoke passed with no applicable built-in check. The step-5 risk report passed and routed 49 items: 4 ordinary, 10 moderate, 20 high, and 15 critical, leaving the required high/critical dispositions to Alpha at step 6. Content policy passed all 60 scoped items with zero errors and warnings. Coverage checklist passed 2 pages and 120 harvested results with zero errors and warnings. Prosecheck passed all 60 item files and all four page files with zero errors and warnings. `validate-plan.mjs research/plan-spec.json` passed with no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages with item lists. `fwdcheck`, `extcheck`, and `citecheck` reached their normal green conclusions; citecheck's 26 heuristic warnings were all outside this batch. The full `depcheck` wrapper remains red on the four approved batch-1 complex rewrites because their published text intentionally no longer carries the prior audit stamp. The full `rendercheck` wrapper remains red on five multiline displays in complex-number files outside this batch. Neither wrapper emitted a batch-3 diagnostic. Per dispatch, `tools/gates.mjs` was not run.
+
+Blockers: none within batch 3. I did not edit any other batch's concurrent files, did not touch `library/real-analysis/the-complex-exponential-and-eulers-formula.md`, did not judge items, and did not request permissions.
 
 ## Component provenance plan and rationale
 
@@ -206,20 +227,20 @@ Definitions have `proof: not-applicable`. “AI-altered” means the sourced res
 
 No item with an AI-generated statement is load-bearing. All such items live on B pages, which remain leaves in reading order.
 
-## Step-5 proof obligations carried forward
+## Step-5 proof obligations checked
 
-The proof-contract file gives the machine map. The highest-risk obligations for the returning author are:
+The proof-contract file gives the final machine map. The highest-risk obligations were checked as follows:
 
-1. **Mantel equality:** the induction must reconstruct both bipartition classes for odd and even $n$, not merely recover the edge bound.
-2. **Turán uniqueness:** Zykov symmetrisation must preserve enough equality information to rule out nonsymmetric maximizers; use Diestel’s direct duplication proof if that route is cleaner at authorship.
-3. **Formal summability:** every unrestricted rearrangement is first finite modulo $x^N$; do not write an analytic convergence argument.
-4. **Composition inverse:** show the recursively constructed one-sided inverse is two-sided using associativity and uniqueness, including the zero-ring boundary.
-5. **Lagrange–Bürmann:** the change-of-variable residue formula must isolate the exponent $-1$, and the statement begins at $n=1$ so no division by zero appears.
-6. **KST:** keep the two bipartition orientations fixed and derive the additive term on the correct side.
-7. **Hypergraph KST:** independently recompute the exponent $r-1/s^{r-1}$ from the induction before freezing the statement.
-8. **Erdős–Stone:** the clique hypergraph has one hyperedge per $r$-vertex clique, and a complete partite subhypergraph really supports every cross edge of the graph blowup.
-9. **ESS normalization:** all density statements use $\binom n2$; do not mix the equivalent $n^2/2$ normalization mid-proof.
-10. **B-page boundaries:** refute the triangle-free implication directly from the published cycle definition and odd-cycle criterion, and refute ESS determination using only the one-sided KST improvement; neither refutation may import a deferred lower-bound construction.
+1. **Mantel equality:** the induction reconstructs both bipartition classes for odd and even $n$, rather than stopping at the edge bound.
+2. **Turán uniqueness:** Zykov symmetrisation proves the bound; a separate maximum-degree induction rules out nonsymmetric equality graphs.
+3. **Formal summability:** every rearrangement is reduced first to a finite computation modulo $x^N$.
+4. **Composition inverse:** associativity turns the recursively constructed one-sided inverse into a two-sided inverse, including the zero-ring boundary.
+5. **Lagrange–Bürmann:** the residue proof isolates exponent $-1$, assumes $n\ge1$, and uses characteristic zero exactly where division by a nonzero integer occurs.
+6. **KST:** the two bipartition orientations remain fixed and the additive term is on the stated side.
+7. **Hypergraph KST:** the proof recomputes the exponent $r-1/s^{r-1}$ from the induction recurrence.
+8. **Erdős–Stone:** the clique hypergraph has one hyperedge per $r$-vertex clique, and the complete partite subhypergraph is explicitly converted back into every cross edge of the graph blowup.
+9. **ESS normalization:** every density uses $\binom n2$.
+10. **B-page boundaries:** the triangle-free implication is refuted directly with $C_5$, and the ESS overclaim is refuted using only the one-sided KST improvement, with no deferred lower-bound construction.
 
 ## Licensing notes
 
@@ -232,11 +253,17 @@ The proof-contract file gives the machine map. The highest-risk obligations for 
 
 ## Blockers
 
-None. Web sources were accessible, all required published dependencies were readable on disk, all proposed IDs were checked absent before scaffolding, and no permission or escalation prompt was needed. The individual required gates are recorded in the final section after their last run.
+None within batch 3. All required published dependencies were readable on disk, and no permission or escalation prompt was needed. The global dependency and rendering wrappers currently include failures from other concurrently authored batches and batch 1's approved published rewrites; no such reported defect remains in a batch-3 file.
 
 ## Gate record
 
-- **PASS:** `node tools/validate-plan.mjs research/plan-spec.json` — `OK`; the declared page order is acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages carrying item lists.
-- **PASS:** `node tools/coverage-checklist.mjs research/frontier-11-batch-3.coverage.json` — 2 pages, 118 harvested results, 0 errors, 0 warnings.
+- **PASS:** reflow on all 60 item files; every file was unchanged.
+- **PASS:** precheck on all 60 item files; 49 proof-bearing items passed and the 11 definitions retain `precheck: n/a`.
+- **PASS:** strict proof contract; 49/49 items, 0 errors, 0 warnings.
+- **PASS:** `node tools/validate-plan.mjs research/plan-spec.json`; the declared page order is acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages carrying item lists.
+- **PASS:** coverage checklist; 2 pages, 120 harvested results, 0 errors, 0 warnings.
+- **PASS:** prosecheck on all 60 item files and all four page files; 0 errors, 0 warnings.
+- **PASS:** `fwdcheck`, `extcheck`, and `citecheck`; citecheck's heuristic warnings are outside batch 3.
+- **CONCURRENT-TREE BLOCKER ONLY:** the global `depcheck` and `rendercheck` wrappers still report other batches' YAML/display issues and batch 1's intentionally unaudited published rewrites. Their output contains no remaining batch-3 unresolved link or multiline display defect.
 
 Per dispatch, `tools/gates.mjs` is not run.

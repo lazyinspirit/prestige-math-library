@@ -30384,7 +30384,9 @@
             "def-vector-valued-functions-limits-and-continuity",
             "def-p-norms-on-rn",
             "def-partition-and-refinement",
-            "def-complete-ordered-field"
+            "def-complete-ordered-field",
+            "def-extended-reals",
+            "lem-extended-reals-complete"
           ]
         },
         {
@@ -30460,7 +30462,8 @@
           "deps": [
             "def-path-polygonal-length-and-rectifiability-in-rn",
             "def-pointwise-uniform-and-uniformly-cauchy-convergence",
-            "thm-componentwise-limits-and-continuity"
+            "thm-componentwise-limits-and-continuity",
+            "def-limsup-liminf"
           ]
         },
         {
@@ -30473,7 +30476,9 @@
             "cor-vector-valued-ftc-and-lipschitz-bound",
             "thm-norm-inequality-for-the-vector-valued-integral",
             "thm-heine-cantor-r",
-            "thm-darboux-equals-riemann"
+            "thm-darboux-equals-riemann",
+            "cor-mean-value-theorem",
+            "def-path-polygonal-length-and-rectifiability-in-rn"
           ]
         },
         {
@@ -30530,7 +30535,6 @@
             "lem-arc-length-function-is-continuous-and-nondecreasing",
             "thm-arc-length-is-additive-over-subintervals",
             "thm-arc-length-is-invariant-under-monotone-reparametrization",
-            "lem-basic-properties-of-total-variation",
             "cor-chord-length-is-at-most-arc-length"
           ]
         },
@@ -30542,9 +30546,11 @@
           "deps": [
             "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
             "thm-ftc-first-part",
+            "cor-mean-value-theorem",
             "thm-derivative-of-an-inverse",
             "thm-chain-rule",
-            "thm-componentwise-limits-and-continuity"
+            "thm-componentwise-limits-and-continuity",
+            "def-arc-length-function"
           ]
         }
       ]
@@ -30594,6 +30600,7 @@
             "thm-nonnegative-series-bounded-partial-sums",
             "def-pi-via-first-positive-cosine-zero",
             "thm-quarter-turn-values-and-shift-formulas",
+            "cor-trigonometric-parity-and-pythagorean-identity",
             "cor-archimedean-reciprocal",
             "def-bounded-variation-and-total-variation"
           ]
@@ -30615,7 +30622,8 @@
           "title": "Two paths can have the same trace and endpoints but different lengths: one traverses $[0,1]$ once and another traverses it forward, backward, and forward",
           "strategy": "Use the identity path on $[0,1]$ and a three-piece affine path taking the successive values $0,1,0,1$. Both have trace $[0,1]$ and endpoints $0,1$. The polygonal-path formula gives lengths one and three, showing that length belongs to the parametrized path rather than its point set.",
           "deps": [
-            "ex-line-segment-and-polygonal-path-length"
+            "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+            "lem-integral-elementary-bounds"
           ]
         },
         {
@@ -30624,7 +30632,8 @@
           "title": "Sawtooth paths converge uniformly to a line segment while every sawtooth has length $\\sqrt2$ and the limit has length $1$",
           "strategy": "On the uniform $n$-partition of $[0,1]$, join successive points whose horizontal separation is $1/n$ and whose vertical coordinates alternate between $0$ and $1/n$. The vertical sup norm is at most $1/n$, so the paths converge uniformly to $(t,0)$. Each of the $n$ affine edges has length $\\sqrt2/n$, while the limit segment has length one.",
           "deps": [
-            "ex-line-segment-and-polygonal-path-length",
+            "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+            "lem-integral-elementary-bounds",
             "thm-arc-length-is-lower-semicontinuous-under-uniform-convergence",
             "ex-one-over-n-null"
           ]
@@ -32219,7 +32228,8 @@
             "def-formal-power-series-derivative",
             "thm-formal-power-series-unit-criterion",
             "thm-formal-composition-laws",
-            "thm-summable-families-and-rearrangement"
+            "thm-summable-families-and-rearrangement",
+            "def-binomial-coefficient"
           ]
         },
         {
@@ -32272,11 +32282,12 @@
           "id": "lem-formal-residue-identities",
           "kind": "lemma",
           "title": "Formal residues satisfy integration by parts, logarithmic differentiation, and change of variables",
-          "strategy": "First show $\\operatorname{res}(Df)=0$ directly. The product rule gives $\\operatorname{res}((Df)g)=-\\operatorname{res}(fDg)$. Factor a nonzero Laurent series as $x^m$ times a unit to obtain $\\operatorname{res}(Df/f)=m$. For $g\\in xK[[x]]$ with nonzero linear term, prove $\\operatorname{res}(f(g)Dg)=\\operatorname{res}(f)$ by checking Laurent monomials, including the exceptional exponent $-1$ separately.",
+          "strategy": "First show $\\operatorname{res}(Df)=0$ directly. The product rule gives $\\operatorname{res}((Df)g)=-\\operatorname{res}(fDg)$. Factor a nonzero Laurent series as $x^m$ times a unit to obtain $\\operatorname{res}(Df/f)=m$. When $K$ contains $\\mathbb Q$, for $g\\in xK[[x]]$ with nonzero linear term prove $\\operatorname{res}(f(g)Dg)=\\operatorname{res}(f)$ by checking Laurent monomials, including the exceptional exponent $-1$ separately; the characteristic-zero hypothesis licenses division by $m+1$ away from that exponent.",
           "deps": [
             "def-formal-laurent-series-and-residue",
             "prop-formal-derivative-algebra",
             "thm-formal-compositional-inverse",
+            "thm-formal-power-series-unit-criterion",
             "thm-laurent-series-field"
           ]
         },
@@ -32333,9 +32344,11 @@
           "title": "Negative binomial series: $(1-x)^{-m}=\\sum_{n\\ge0}\\binom{m+n-1}{n}x^n$ for $m\\ge1$",
           "strategy": "Raise the formal geometric series to the $m$th power and count weak compositions of $n$ into $m$ parts, or equivalently specialise the formal binomial-power coefficient formula. Check $m=1$ and $n=0$ explicitly.",
           "deps": [
-            "ex-formal-geometric-series",
+            "thm-formal-power-series-unit-criterion",
+            "prop-coefficient-extraction-linearity-and-extensionality",
             "thm-formal-exponential-logarithm-identities",
-            "def-binomial-coefficient"
+            "def-binomial-coefficient",
+            "thm-stars-and-bars"
           ]
         },
         {
@@ -32355,7 +32368,8 @@
           "strategy": "Write the inverse $w$ as $w=x/(1-w)$ and apply Lagrange inversion with $\\phi(u)=(1-u)^{-1}$. Obtain $[x^n]w=\\frac1n\\binom{2n-2}{n-1}$ for $n\\ge1$, list the first six coefficients, and verify $w-w^2=x$ through that degree.",
           "deps": [
             "thm-lagrange-burmann-inversion",
-            "ex-negative-binomial-series",
+            "thm-formal-exponential-logarithm-identities",
+            "def-binomial-coefficient",
             "thm-formal-compositional-inverse"
           ]
         },
@@ -32367,7 +32381,8 @@
           "deps": [
             "thm-formal-compositional-inverse",
             "thm-formal-composition-laws",
-            "ex-formal-geometric-series"
+            "thm-formal-power-series-unit-criterion",
+            "prop-coefficient-extraction-linearity-and-extensionality"
           ]
         },
         {
@@ -32387,7 +32402,7 @@
           "strategy": "The putative constant coefficient would be an infinite sum of copies of $1_R$, which the ring operations do not define. Contrast with substitution of $x^2$, where each coefficient has at most one contributor. This tests the zero-constant hypothesis exactly.",
           "deps": [
             "def-formal-series-composition",
-            "ex-formal-geometric-series"
+            "def-formal-power-series-and-coefficient-extraction"
           ]
         },
         {
@@ -32397,7 +32412,7 @@
           "strategy": "At coefficient $0$ infinitely many family members are nonzero, violating local finiteness already modulo $x$. Contrast with the family $(x^n)_{n\\ge0}$, which is summable and yields the geometric series.",
           "deps": [
             "def-summable-family-of-formal-series",
-            "ex-formal-geometric-series"
+            "def-formal-power-series-and-coefficient-extraction"
           ]
         },
         {
@@ -35389,7 +35404,7 @@
           "title": "Deleting one edge from $K_{3,4}$ gives a triangle-free graph one edge below the Mantel threshold",
           "strategy": "Delete a displayed cross edge, recount $11$ edges, and verify triangle-freeness survives. Compare with the unique $12$-edge equality case to distinguish exact extremality from near-extremality without claiming a stability theorem.",
           "deps": [
-            "ex-mantel-balanced-complete-bipartite",
+            "def-standard-complete-bipartite-path-and-cycle-graphs",
             "thm-mantel-exact-and-unique"
           ]
         },
@@ -37492,7 +37507,8 @@
       "companion": "the-fundamental-theorems-of-calculus-examples",
       "requires": [
         "bounded-variation-and-riemann-stieltjes",
-        "uniform-convergence-of-functions"
+        "uniform-convergence-of-functions",
+        "sine-cosine-and-the-definition-of-pi"
       ],
       "items": [
         {
@@ -37547,10 +37563,11 @@
             "lem-countable-iff-surjection-from-n",
             "def-continuity-real",
             "def-derivative",
+            "thm-nested-interval-property",
+            "lem-geometric-sequence-null",
             "def-darboux-sums",
             "def-darboux-integral",
-            "def-partition-and-refinement",
-            "def-complete-ordered-field"
+            "def-partition-and-refinement"
           ]
         },
         {
@@ -37636,7 +37653,12 @@
           "deps": [
             "thm-newton-leibniz-with-interior-derivative",
             "cor-countably-many-discontinuities-integrable",
-            "thm-algebra-of-derivatives"
+            "thm-algebra-of-derivatives",
+            "thm-chain-rule",
+            "thm-sine-and-cosine-derivatives",
+            "cor-trigonometric-parity-and-pythagorean-identity",
+            "def-pi-via-first-positive-cosine-zero",
+            "thm-quarter-turn-values-and-shift-formulas"
           ]
         },
         {
@@ -37648,7 +37670,14 @@
             "def-fat-cantor-set",
             "thm-fat-cantor-set-has-positive-measure",
             "thm-riemann-criterion",
-            "def-oscillation"
+            "def-oscillation",
+            "thm-algebra-of-derivatives",
+            "thm-chain-rule",
+            "thm-sine-and-cosine-derivatives",
+            "cor-trigonometric-parity-and-pythagorean-identity",
+            "def-pi-via-first-positive-cosine-zero",
+            "thm-quarter-turn-values-and-shift-formulas",
+            "cor-archimedean-reciprocal"
           ]
         },
         {
@@ -37658,6 +37687,7 @@
           "strategy": "Use countability of the rationals to specialize the A-page prescribed-discontinuity theorem to $E=\\mathbb{Q}$, then restrict the resulting bounded nondecreasing function to $[0,1]$. The theorem supplies continuity at every irrational and a jump at every rational; monotonicity gives Riemann integrability. At each rational interior point the one-sided FTC gives unequal one-sided derivatives of the integral function, while the pointwise FTC gives differentiability at every irrational.",
           "deps": [
             "thm-rationals-countable",
+            "lem-q-and-irrationals-dense-r",
             "thm-monotone-with-prescribed-discontinuity-set",
             "thm-monotone-implies-integrable",
             "thm-one-sided-ftc-at-points-with-one-sided-limits",

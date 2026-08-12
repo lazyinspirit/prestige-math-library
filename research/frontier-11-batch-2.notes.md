@@ -1,8 +1,8 @@
 # frontier-11 batch 2 — Step-5 authoring notes
 
-Beta: `Beta-frontier-11-2`  
+Beta: `Beta-frontier-11-2`
 Run/date: `frontier-11`, 2026-08-12
-Writable scope: the four `research/frontier-11-batch-2.*` artifacts only
+Writable research scope: the four `research/frontier-11-batch-2.*` artifacts named by the dispatch; authored page and item files are the Step-5 deliverables.
 
 ## Outcome, counts, and settled A-page summaries
 
@@ -10,7 +10,7 @@ No split is proposed. After the step-3 fixes, the FTC pair contains 10 A-page it
 
 ### `the-fundamental-theorems-of-calculus` — two-paragraph summary
 
-This page preserves the published working FTC instead of duplicating it. Its opening roadmap points to the two named theorems at order 161 and locates the three FTC-I strengths and five Riemann FTC-II strengths. It then strengthens Newton–Leibniz to continuity on the closed interval with only an integrable extension of the interior derivative, treats finite exceptional sets, proves Botsko's countable-exception form by direct absorption, and derives integration by parts and substitution with their exact hypotheses. The substitution theorem requires neither monotonicity nor injectivity, and oriented endpoint images are retained.
+This page preserves the published working FTC instead of duplicating it. Its opening roadmap points to the two named theorems at order 161 and locates the three FTC-I strengths and five Riemann FTC-II strengths. It then strengthens Newton–Leibniz to continuity on the closed interval with only an integrable extension of the interior derivative, treats finite exceptional sets, proves Botsko's countable-exception form by a shrinking-secant-interval argument, and derives integration by parts and substitution with their exact hypotheses. The substitution theorem requires neither monotonicity nor injectivity, and oriented endpoint images are retained.
 
 The other half separates pointwise, one-sided, almost-everywhere, parameter-dependent, and Riemann–Stieltjes forms. It identifies derivatives of indefinite integrals at one-sided limit points, records the Countable-Choice cost of the almost-everywhere conclusion, proves compact-rectangle differentiation under the integral sign, and obtains both Stieltjes FTC forms from the published C¹-integrator reduction. The companion makes every hypothesis visible through bounded discontinuous derivatives, Volterra's derivative, dense jumps, Thomae's function, sparse spikes, and the Cantor function.
 
@@ -39,7 +39,7 @@ All ten declines and the result-specific defense are:
 1. The Lebesgue FTC for absolutely continuous functions is deferred because the library has not built Lebesgue integration and its a.e. representation theorem as a subject.
 2. Banach–Zarecki is deferred because it specifically needs Luzin property N and the measure-theoretic BV/null-set machinery.
 3. The full Henstock–Kurzweil FTC is deferred because gauge partitions and the Henstock–Kurzweil integral are a whole absent integration theory, not a local lemma.
-4. Cousin's lemma is deferred because F2 uses Botsko's direct countable-exception absorption, leaving no gauge-fine-partition consumer. The lemma is constructible now, but would be standalone padding; it belongs at the front of the future Henstock–Kurzweil development where it is load-bearing.
+4. Cousin's lemma is deferred because F2 proves the countable-exception monotonicity lemma directly by shrinking secant intervals, leaving no gauge-fine-partition consumer. The lemma is constructible now, but would be standalone padding; it belongs at the front of the future Henstock–Kurzweil development where it is load-bearing.
 5. Hunter's finite-power-sum calculation belongs to the sequences-and-series calculation track and contributes no new FTC hypothesis.
 6. Hunter's Gamma recurrence uses an improper unbounded-domain integral, outside this compact-interval pair.
 7. Lebl's routine symbolic substitution example is displaced by hypothesis-sensitive companion examples; the substitution theorem itself is included.
@@ -52,7 +52,7 @@ The first three are the approved D4 declines. They are not missing-machinery exc
 ## Step-3 finding dispositions
 
 - **F1:** added `rem-ftc-roadmap` first on the FTC A page, with dependencies on the published `thm-ftc-first-part` and `thm-ftc-second-part`.
-- **F2:** added `thm-newton-leibniz-with-a-countable-exceptional-set`; the proof route is the Botsko countable-exception monotonicity lemma proved inline by epsilon-times-`2^{-n}` absorption, followed by Darboux lower/upper bounds and telescoping.
+- **F2:** added `thm-newton-leibniz-with-a-countable-exceptional-set`; the final proof proves the countable-exception monotonicity lemma inline by nested intervals, spending a geometric slope-loss budget while excluding the enumerated exceptional points, followed by Darboux lower/upper bounds and telescoping.
 - **F3:** added the required `deferred` coverage row for Cousin's lemma. It is deferred to the future Henstock–Kurzweil development because the direct F2 proof leaves it with no consumer.
 - **F4:** not taken. No harvested heading or downstream scaffold item requires moving limits, while the fixed-limit theorem is the named plan obligation; adding the optional corollary here would be an unsourced enrichment contrary to generated-claim minimization.
 - **A1:** added `cor-chord-length-is-at-most-arc-length` and made it an explicit dependency of both the arc-length-function strictness clause and the general arc-length parametrization.
@@ -90,7 +90,7 @@ Every URL was opened and every freely exposed range in the coverage JSON was rea
 | UTK | Joachim Denzler, *Calculus of Variations*, §§4.4–4.10, <https://web.math.utk.edu/~denzler/M534-Sp2014/CalVar.pdf> | Independent lower-semicontinuity theorem and the uniformly convergent zigzag counterexample. |
 | APO | Tom M. Apostol, *Mathematical Analysis*, 2nd ed., Ch. 6 §§6.9–6.12, book pp. 133–137, <https://studylib.net/doc/27619444/mathematical-analysis-2e-apostol> | Required textbook treatment: curves and paths, supremum arc length, BV equivalence, C¹ speed, additivity, continuity/strictness of the arc-length function, and change of parameter. |
 
-Licensing and reuse: these sources were used for mathematical verification and citations only. No reusable-text licence was relied on. Step 5 must use original prose and only short exact fact clauses in the citation contracts; no source exposition or exercise solution is to be reproduced.
+Licensing and reuse: these sources were used for mathematical verification and citations only. No reusable-text licence was relied on. Step 5 uses original prose and exact source clauses in the citation contracts; no source exposition or exercise solution is reproduced.
 
 ## Convention decisions and disagreements
 
@@ -106,16 +106,16 @@ Licensing and reuse: these sources were used for mathematical verification and c
 10. The C¹ speed formula uses an interior derivative with a continuous endpoint extension. The proof must first justify the relative endpoint derivatives before invoking the published vector Newton–Leibniz statement.
 11. “Unit speed” for the general rectifiable factor means metric unit speed—every subpath has length equal to the parameter difference. Differentiability and derivative norm one are asserted only in the regular C¹ corollary.
 12. Lower semicontinuity is stated for uniform convergence and gives `L(gamma) <= liminf L(gamma_k)`; equality or continuity of length is false, as the zigzag companion shows.
-13. New prose will write canonical natural numbers directly and never apply the canonical embedding symbol. Applied `iota` notation found in legacy dependencies is left untouched, as required.
+13. The authored prose writes canonical natural numbers directly and never applies the canonical embedding symbol. Applied `iota` notation found in legacy dependencies is left untouched, as required.
 14. The older prose in `SCHEMA.md` and parts of the scaffold brief still mention a 100-item review ceiling. The owner-dated 2026-08-11 rule in `CLAUDE.md`, `LEVELS.md`, and this dispatch makes 60 the binding split ceiling for this run.
-15. Botsko's theorem assumes the exceptional set lies in `(a,b)`, needs no endpoint derivatives, and uses continuity of the primitive at every point. Its proof does not invoke Cousin's lemma: the countable-exception monotonicity subclaim is proved inline by direct epsilon-times-`2^{-n}` absorption and completeness.
+15. Botsko's theorem assumes the exceptional set lies in `(a,b)`, needs no endpoint derivatives, and uses continuity of the primitive at every point. Its proof does not invoke Cousin's lemma: nested secant intervals exclude one enumerated exceptional point at each stage while losing a summable amount of positive slope, and their nonexceptional limit contradicts the derivative inequality.
 16. The Cantor-function companion remains the sharp warning that an almost-everywhere derivative identity without the required regularity does not control endpoint change; it is not used to prove Botsko's positive result.
 17. Apostol's Theorem 6.19 adds strict increase of the arc-length function when the path is constant on no subinterval. The existing lemma is strengthened with that clause, and the newly named chord bound supplies the exact zero-length-implies-constant route.
 18. The unit-circle computation depends on power-series sine and cosine from the published order-179 page; no geometric definition of angle or `pi` is used, so the dependency direction is noncircular.
 
 ## Authored component provenance
 
-No AI-generated Statement or Construction is load-bearing. The only within-batch B-to-B dependency is the line/polygonal-length example, whose statement is literature-derived. Definitions have proof provenance `not-applicable`.
+No AI-generated Statement or Construction is load-bearing. There are no dependencies on items homed on either examples page: the Volterra seed calculation, repeated-trace length computation, and zigzag length computation are proved inline from A-page results. Definitions have proof provenance `not-applicable`.
 
 | item | statement | proof | rationale |
 |---|---|---|---|
@@ -123,7 +123,7 @@ No AI-generated Statement or Construction is load-bearing. The only within-batch
 | `cor-ftc-integral-function-differentiable-almost-everywhere` | ai-altered | ai-altered | Combines the published Lipschitz estimate, Lebesgue criterion, and pointwise FTC; the Countable-Choice cost is part of the statement. |
 | `thm-newton-leibniz-with-interior-derivative` | literature-derived | ai-altered | Hunter Theorem 12.1 and Lebl Theorem 5.3.1; adapted to the library's endpoint-relative derivative convention. |
 | `cor-newton-leibniz-with-finitely-many-exceptional-points` | literature-derived | ai-altered | Lebl Exercise 5.3.3; finite split and telescope use published oriented-subinterval additivity. |
-| `thm-newton-leibniz-with-a-countable-exceptional-set` | literature-derived | ai-altered | Botsko 1991, exact statement corroborated by Swartz Theorem 1; the countable-exception monotonicity bridge is proved locally by the source-backed direct absorption route. |
+| `thm-newton-leibniz-with-a-countable-exceptional-set` | literature-derived | ai-altered | Botsko 1991, exact statement corroborated by Swartz Theorem 1; the countable-exception monotonicity bridge is proved locally by a nested-secant-interval argument with geometric slope-loss budgets. |
 | `thm-integration-by-parts-with-interior-derivatives` | ai-altered | ai-altered | Hunter Theorem 12.10/Lebl Exercise 5.3.5, strengthened via the sourced interior-derivative Newton–Leibniz form. |
 | `thm-substitution-with-riemann-integrable-inner-derivative` | ai-altered | ai-altered | Hunter Theorem 12.12 and Lebl Theorem 5.3.5; no monotonicity/injectivity and oriented endpoints are explicit. |
 | `thm-one-sided-ftc-at-points-with-one-sided-limits` | literature-derived | ai-altered | Hunter Theorem 12.4 and Lebl §5.3.2; local-average proof covers both sides and endpoints. |
@@ -160,7 +160,7 @@ No AI-generated Statement or Construction is load-bearing. The only within-batch
 
 ## Published dependencies and coverage citations opened from disk
 
-Every item below was opened from `items/<id>.md`, confirmed `status: published`, and its actual Definition, Statement, Example, or Counterexample content was read. After the step-4 repair there are 81 unique items: 75 manifest dependencies and 6 additional harvest-receipt citations. None is legacy-unclassified and none has `provenance.statement: ai-generated`.
+Every item below was opened from `items/<id>.md`, confirmed `status: published`, and its actual Definition, Statement, Example, or Counterexample content was read. The final authoring closure contains 85 unique items: 78 formal dependencies and 7 additional harvest-receipt citations. None is legacy-unclassified and none has `provenance.statement: ai-generated`.
 
 Routes mean: `component-lit` = the exact literature-derived component on disk was accepted after checking its direction and conventions; `component-adapted/knowledge` = an AI-altered but standard exact statement was independently confirmed from the disk text and mathematical knowledge; `component-adapted/source` = the AI-altered statement was additionally checked against a named harvest source or the published construction it formalizes.
 
@@ -173,7 +173,7 @@ Routes mean: `component-lit` = the exact literature-derived component on disk wa
 | `cor-integrability-of-absolute-values-products-and-lattice-operations` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `cor-mean-value-theorem` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `cor-trigonometric-parity-and-pythagorean-identity` | component-adapted/source (published order-179 trigonometry page) | Manifest edge: the exact global Pythagorean identity used to make the circular-arc speed one was read. |
-| `cor-vector-valued-ftc-and-lipschitz-bound` | component-adapted/source (published vector page + HUN) | Manifest edge: its FTC clause assumes relative endpoint derivatives; Step 5 must establish them before use. |
+| `cor-vector-valued-ftc-and-lipschitz-bound` | component-adapted/source (published vector page + HUN) | Manifest edge: its FTC clause assumes relative endpoint derivatives; the authored C¹ proof establishes them before use. |
 | `def-absolutely-continuous-function` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-bounded-variation-and-total-variation` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-cantor-function` | component-adapted/source (published Cantor construction) | Manifest edge: the ternary-to-binary digit definition used for stage endpoint increments was read. |
@@ -186,8 +186,10 @@ Routes mean: `component-lit` = the exact literature-derived component on disk wa
 | `def-derivative` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-dirichlet-and-thomae-functions` | component-lit | Manifest edge: Thomae's least-denominator values, zero values at irrationals, and bound by one were read. |
 | `def-euclidean-inner-product` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
+| `def-extended-reals` | component-adapted/knowledge | Manifest edge: the two infinities and the order convention were read before defining length as an extended-real supremum. |
 | `def-fat-cantor-set` | component-adapted/source (CHE §§3.2–3.3) | Manifest edge: the exact Smith–Volterra–Cantor interval construction was read. |
 | `def-isometry-and-metric-embedding` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
+| `def-limsup-liminf` | component-adapted/knowledge | Manifest edge: the exact extended-real tail-infimum definition of liminf was read for lower semicontinuity. |
 | `def-lipschitz-holder-contraction` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-monotone-function` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `def-norm-and-normed-space` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
@@ -206,6 +208,7 @@ Routes mean: `component-lit` = the exact literature-derived component on disk wa
 | `ex-two-root-x-and-its-unbounded-derivative` | component-adapted/source (HUN Example 12.3) | Harvest receipt: exact unbounded-endpoint-derivative example read. |
 | `lem-basic-properties-of-total-variation` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `lem-countable-iff-surjection-from-n` | component-adapted/source (BOT/SWA) | Manifest edge: a nonempty countable exceptional set has a surjective enumeration with repetitions and without a choice principle. |
+| `lem-extended-reals-complete` | component-adapted/knowledge | Manifest edge: every subset of the extended reals has a supremum, which supplies the length supremum even for unbounded polygonal sums. |
 | `lem-geometric-sequence-null` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `lem-integral-elementary-bounds` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `lem-jumps-of-the-variation-function` | component-lit | Manifest edge: continuity of the variation function at continuity points is the used direction. |
@@ -235,6 +238,7 @@ Routes mean: `component-lit` = the exact literature-derived component on disk wa
 | `thm-monotone-implies-integrable` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-monotone-with-prescribed-discontinuity-set` | component-adapted/source (published monotone-functions page) | Manifest edge: the exact bounded nondecreasing construction for any at-most-countable discontinuity set, with jumps at every listed point, was read. |
 | `thm-monotonicity-of-the-integral` | component-lit | Manifest edge: exact published content and direction named by the item id were read. |
+| `thm-nested-interval-property` | component-adapted/knowledge | Manifest edge: the shrinking closed nested-interval conclusion and its singleton clause were read for the countable-exception monotonicity proof. |
 | `thm-nonnegative-series-bounded-partial-sums` | component-lit | Manifest edge: divergence of a nonnegative series forces its partial sums to be unbounded, the form needed for variation sums. |
 | `thm-norm-inequality-for-the-vector-valued-integral` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
 | `thm-of-square-roots` | component-adapted/knowledge | Manifest edge: exact published content and direction named by the item id were read. |
@@ -252,7 +256,7 @@ No opened dependency was false or ambiguous enough to block use. The main seam r
 
 ## Proof contracts and Step-5 obligations
 
-The version-1 machine map is `research/frontier-11-batch-2.proof-contracts.json`. Its scope is exactly the 35 proof-bearing scaffold items (all 38 items except the two definitions and the non-load-bearing roadmap remark), with source clauses, at least two nonroutine derivation obligations, all eight standard boundary dispositions, and an empty finite-smoke list for each. Exact authored quotations, fact labels, and proof-step mappings must be reconciled against the Step-5 item text before the strict proof-contract gate.
+The version-1 machine map is `research/frontier-11-batch-2.proof-contracts.json`. Its scope is exactly the 35 proof-, verification-, or refutation-bearing items (all 38 items except the two definitions and the non-load-bearing roadmap remark), with exact authored source clauses, fact labels, proof-step mappings, at least two nonroutine derivation obligations, all eight standard boundary dispositions, and an empty finite-smoke list for each. The strict proof-contract gate passes 35/35 with no errors or warnings.
 
 Highest-risk authoring obligations:
 
@@ -266,7 +270,7 @@ Highest-risk authoring obligations:
 8. General arc-length parametrization must prove well-definedness on level sets of the length function, metric unit speed on every subinterval, and the total-length-zero case.
 9. Lower semicontinuity fixes a partition before taking a liminf; interchanging the supremum and liminf without that argument is not licensed.
 10. The `x sin(1/x)` graph must use the explicit sequence `x_m=2/((2m+1)pi)`, discard a finite prefix so the retained points lie in `[0,1]`, derive the alternating signs from the A-page quarter-turn shifts, and compare its vertical variation with the `p=1` specialization of `thm-p-series-rational`.
-11. Botsko's theorem must prove the countable-exception monotonicity bridge locally with the explicit epsilon-times-`2^{-n}` absorption and least-upper-bound crossing argument; citing the finite-exception theorem or an absent gauge theory is not enough.
+11. Botsko's theorem proves the countable-exception monotonicity bridge locally: nested intervals retain positive secant slope, exclude the $n$th exceptional point at stage $n$, and spend a finite geometric slope-loss budget before converging to a nonexceptional point with positive derivative. It does not cite the finite-exception theorem or an absent gauge theory.
 12. The chord corollary must use the endpoint-only partition, and the arc-length-parametrization proof must cite that corollary instead of repeating the inequality inline.
 13. The graph formula must compute the derivative and Euclidean norm explicitly. The circle example must use the published derivative identities, Pythagorean identity, and constant-integral formula, with `theta=0` separated.
 14. The compact-rectangle Leibniz theorem must phrase its hypothesis in terms of the ordinary derivative of each one-variable parameter slice; the continuous representative is then controlled uniformly and `lem-uniform-integral-error-bound` is the exact passage-to-the-integral citation.
@@ -279,7 +283,7 @@ All manifest dependencies resolve to published items on disk or earlier items in
 
 Split proposal: none. The exact item cut is 10 items on `the-fundamental-theorems-of-calculus` and 15 on `arc-length-and-rectifiable-curves`; their companions contain 6 and 7 items respectively. No result was dropped to stay below the ceiling.
 
-Blockers: none. No permission prompt, escalation, shared-file edit, published-item edit, or cross-batch coordination was needed. The operation explicitly unavailable in the brief, `tools/gates.mjs`, was not run.
+Batch blockers: none. No permission prompt, escalation, published-item edit, or cross-batch coordination was needed. The operation explicitly unavailable in the brief, `tools/gates.mjs`, was not run. The repository-wide dependency check currently reports only four out-of-batch published-status/audit-stamp errors on the separately authorized complex-number rewrites; those files are outside this batch and are recorded as an external global-gate blocker, not altered here.
 
 ## Step-4 repair validation snapshot
 
@@ -292,3 +296,48 @@ Run from the repository root on 2026-08-12:
 - `node tools/prosecheck.mjs research/frontier-11-batch-2.notes.md --warnings` — **pass** with 0 errors and 8 expected count-word warnings in these durable planning notes.
 
 Per the dispatch, `tools/validate-plan.mjs` was not rerun against the current `plan-spec.json`: the orchestrator must resplice this corrected manifest before running it. `tools/gates.mjs` was not run.
+
+## Step-5 final authoring record
+
+This section supersedes the scaffold-stage obligation and validation paragraphs above. All 38 settled items are authored: the FTC pair has 10 A-page and 6 B-page items, and the arc-length pair has 15 A-page and 7 B-page items. There are 35 proof-, verification-, or refutation-bearing items, two definitions, and one non-load-bearing roadmap remark. Four new page files were authored. Each A page has exactly two nonempty summary paragraphs under 150 words; the FTC summary paragraphs contain 72 and 62 words, and the arc-length paragraphs contain 48 and 66. Both B-page bodies are empty. Every item id, kind, title, page order, and page item order is unchanged; no claim or coverage result was dropped, renamed, merged, or narrowed.
+
+### Authored departures from the settled scaffold
+
+1. The FTC A page adds `sine-cosine-and-the-definition-of-pi` to `requires`, because the final companion proves the oscillatory seed and Volterra specialisation inline from the exact sine/cosine derivative, bound, and special-value results. The batch manifest, A-page dependency paragraph, and machine-authoritative `research/plan-spec.json` are synchronized to this local authoring repair.
+2. `thm-newton-leibniz-with-a-countable-exceptional-set` replaces the scaffold's compressed least-upper-bound first-crossing route with a complete nested-secant-interval proof. It adds `thm-nested-interval-property` and `lem-geometric-sequence-null` and drops the now-unused `def-complete-ordered-field`. At stage $n$ the proof excludes the $n$th exceptional point while spending less than a geometric slope-loss budget; the limit point is nonexceptional and has positive derivative, a contradiction. The theorem statement is unchanged.
+3. `ex-bounded-discontinuous-derivative-that-is-riemann-integrable` adds `thm-chain-rule`, `thm-sine-and-cosine-derivatives`, `cor-trigonometric-parity-and-pythagorean-identity`, `def-pi-via-first-positive-cosine-zero`, and `thm-quarter-turn-values-and-shift-formulas`, which are the exact facts used to derive the derivative and its alternating values rather than treating them as elementary algebra.
+4. `cex-volterra-bounded-derivative-not-riemann-integrable` adds `thm-algebra-of-derivatives`, `thm-chain-rule`, `thm-sine-and-cosine-derivatives`, `cor-trigonometric-parity-and-pythagorean-identity`, `def-pi-via-first-positive-cosine-zero`, `thm-quarter-turn-values-and-shift-formulas`, and `cor-archimedean-reciprocal`. These replace the impermissible interim dependency on the companion seed example: the bounded seed derivative and its $\pm1$ sequences are now derived inline from A-page facts.
+5. `ex-dense-jump-integrand-with-dense-nondifferentiability` adds `lem-q-and-irrationals-dense-r`, the exact density statement used at every rational jump.
+6. `def-path-polygonal-length-and-rectifiability-in-rn` adds `def-extended-reals` and `lem-extended-reals-complete`, because the unrestricted supremum of polygonal sums may be $+\infty$.
+7. `thm-arc-length-is-lower-semicontinuous-under-uniform-convergence` adds `def-limsup-liminf`, which states the extended-real liminf used in the conclusion.
+8. `thm-c1-paths-have-length-equal-to-the-integral-of-speed` adds `cor-mean-value-theorem` to justify the relative endpoint derivatives and adds the local path definition that supplies the length supremum.
+9. `thm-every-rectifiable-path-has-an-arc-length-parametrization` drops the unused `lem-basic-properties-of-total-variation`; the named chord bound is the exact route from zero subpath length to constancy.
+10. `cor-regular-c1-paths-have-c1-unit-speed-parametrizations` adds `cor-mean-value-theorem` for strict increase and `def-arc-length-function` for the displayed partial-integral parameter.
+11. `cex-graph-of-x-sin-one-over-x-is-not-rectifiable` adds `cor-trigonometric-parity-and-pythagorean-identity`, which supplies the global sine bound used for continuity at zero.
+12. `cex-the-same-trace-can-have-different-path-lengths` drops the B-page line/polygonal example and adds the A-page piecewise-$C^1$ speed formula plus `lem-integral-elementary-bounds`; the three constant speed integrals are computed inline.
+13. `cex-arc-length-is-not-continuous-under-uniform-convergence` makes the same B-leaf repair: it drops the line/polygonal example, cites the A-page piecewise-$C^1$ theorem and the constant-integral lemma, and computes all $2k$ affine contributions and the limit length inline.
+
+These changes leave zero dependency edges to an item homed on an examples page and zero undeclared-prerequisite edges in an in-memory overlay of the final batch manifest on the current plan. All final item dependency lists agree exactly between item frontmatter and `research/frontier-11-batch-2.pages.json`.
+
+### Published dependencies opened during authoring
+
+The 85-row table in “Published dependencies and coverage citations opened from disk” is the exhaustive ledger: 78 are final formal dependencies and seven are additional coverage-route checks. Every one was opened from disk, confirmed `status: published`, and read at its actual Definition, Statement, Example, or Counterexample. `def-extended-reals`, `lem-extended-reals-complete`, `def-limsup-liminf`, and `thm-nested-interval-property` are the authoring-time additions to the original ledger. No published dependency was edited, and no retained dependency has an AI-generated Statement.
+
+### Final component provenance
+
+The per-item provenance table above is final. Statement/Construction labels total 25 `literature-derived`, 11 `ai-altered`, and two `ai-generated`. Proof/Verification labels total 29 `ai-altered`, six `ai-generated`, and three `not-applicable`. By pair, the exact combinations are: 21 `literature-derived / ai-altered`, two `literature-derived / ai-generated`, two `literature-derived / not-applicable`, eight `ai-altered / ai-altered`, two `ai-altered / ai-generated`, one `ai-altered / not-applicable`, and two `ai-generated / ai-generated`. The two generated statements are the sparse-spike example and repeated-trace counterexample; neither has a consumer. No AI-generated statement or construction is load-bearing.
+
+### Final verification and blockers
+
+- **PASS:** scoped reflow on all 38 item files; every file was unchanged.
+- **PASS:** scoped precheck on all 38 item files; all 35 proof-bearing items pass, and the two definitions plus roadmap correctly retain `precheck: n/a`.
+- **PASS:** strict proof contract, 35/35 items with 0 errors and 0 warnings. Every derivation claim is byte-for-byte synchronized to its final numbered step.
+- **PASS:** coverage checklist, 2 pages and 101 harvested results with 0 errors and 0 warnings.
+- **PASS:** content policy, 38 scoped items with 0 errors and 0 warnings.
+- **PASS:** scoped citecheck on all 38 items; every recognized elementary move cites a source that states it.
+- **PASS:** scoped prosecheck on all 38 items and four page files, with 0 errors and 0 warnings.
+- **PASS:** `node tools/validate-plan.mjs research/plan-spec.json`; the current spliced plan is acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages with item lists. The final-manifest overlay check independently reports 0 undeclared-prerequisite errors.
+- **PASS:** global `fwdcheck.mjs` and `extcheck.mjs`; extcheck retains its expected published-unproved warnings and no hard error.
+- **EXTERNAL GLOBAL-GATE BLOCKER ONLY:** global `depcheck.mjs` reports four `published-unaudited` errors, all on batch 1's owner-authorized in-place complex-number rewrites. No depcheck error names a batch-2 file. Global `git diff --check` also currently reports one trailing-whitespace line in `research/frontier-11-batch-5.notes.md`; the batch-2 scoped whitespace scan is clean. Those files are outside this Beta's ownership and were not altered.
+
+There is no mathematical or batch-local blocker, and no requested operation was left undone. No permission prompt or escalation was issued. As expressly prohibited, `tools/gates.mjs` was not run.

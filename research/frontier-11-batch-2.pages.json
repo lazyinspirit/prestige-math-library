@@ -8,7 +8,8 @@
     "companion": "the-fundamental-theorems-of-calculus-examples",
     "requires": [
       "bounded-variation-and-riemann-stieltjes",
-      "uniform-convergence-of-functions"
+      "uniform-convergence-of-functions",
+      "sine-cosine-and-the-definition-of-pi"
     ],
     "items": [
       {
@@ -57,16 +58,17 @@
         "id": "thm-newton-leibniz-with-a-countable-exceptional-set",
         "kind": "theorem",
         "title": "Botsko's theorem: if $F$ is continuous on $[a,b]$, $F'(x)=f(x)$ off a countable subset of $(a,b)$, and $f$ is Riemann integrable, then $\\int_a^b f=F(b)-F(a)$",
-        "strategy": "Prove inline the countable-exception monotonicity lemma by enumerating a nonempty exceptional set with repetitions, assigning its points an epsilon-times-$2^{-n}$ error budget, and using continuity at exceptional points, the derivative inequality elsewhere, and a least-upper-bound first-crossing argument; treat the empty exceptional set separately. On each subinterval of an arbitrary partition, apply that lemma to $F(x)-M_i x$ and $m_i x-F(x)$, where $m_i$ and $M_i$ are the infimum and supremum of $f$ there. Sum the resulting increment bounds, telescope, and squeeze between the lower and upper Darboux integrals. No gauge integral or choice principle enters.",
+        "strategy": "Prove inline the countable-exception monotonicity lemma by enumerating the exceptional set with repetitions and constructing nested intervals of positive secant slope. At stage $n$, exclude the $n$th exceptional point while spending less than a $2^{-n}$ slope-loss budget; the nested-interval theorem produces a nonexceptional limit point whose derivative is positive, a contradiction. On each subinterval of an arbitrary partition, apply that lemma to $F(x)-M_i x$ and $m_i x-F(x)$, where $m_i$ and $M_i$ are the infimum and supremum of $f$ there. Sum the resulting increment bounds, telescope, and squeeze between the lower and upper Darboux integrals. The empty exceptional set uses a harmless constant enumeration outside the inner interval, so no gauge integral or choice principle enters.",
         "deps": [
           "def-countable",
           "lem-countable-iff-surjection-from-n",
           "def-continuity-real",
           "def-derivative",
+          "thm-nested-interval-property",
+          "lem-geometric-sequence-null",
           "def-darboux-sums",
           "def-darboux-integral",
-          "def-partition-and-refinement",
-          "def-complete-ordered-field"
+          "def-partition-and-refinement"
         ]
       },
       {
@@ -152,19 +154,31 @@
         "deps": [
           "thm-newton-leibniz-with-interior-derivative",
           "cor-countably-many-discontinuities-integrable",
-          "thm-algebra-of-derivatives"
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas"
         ]
       },
       {
         "id": "cex-volterra-bounded-derivative-not-riemann-integrable",
         "kind": "counterexample",
         "title": "Volterra's function is differentiable everywhere with bounded derivative, but its derivative is not Riemann integrable",
-        "strategy": "Use the published Smith–Volterra–Cantor set. On each complementary interval insert a truncated mirrored copy of $x^2\\sin(1/x)$ whose derivative is zero at the joins, and set the function to zero on the fat Cantor set. Prove differentiability with derivative zero on that set and a uniform derivative bound. Every neighborhood of every fat-Cantor point contains derivative values separated by a fixed amount; combine the quantitative positive-measure cover bound with Darboux oscillation to force every upper-minus-lower sum above a positive constant.",
+        "strategy": "Use the published Smith–Volterra–Cantor set. On each complementary interval insert a truncated mirrored copy of $x^2\\sin(1/x)$ whose derivative is zero at the joins, and set the function to zero on the fat Cantor set. Derive the seed derivative and its alternating values inline from A-page differentiation and trigonometric results, then prove differentiability on the fat set and a uniform derivative bound. Every interval meeting that set contains derivative values separated from zero by a fixed amount; combine the quantitative positive-measure cover bound with Darboux oscillation to force every upper-minus-lower sum above a positive constant.",
         "deps": [
           "def-fat-cantor-set",
           "thm-fat-cantor-set-has-positive-measure",
           "thm-riemann-criterion",
-          "def-oscillation"
+          "def-oscillation",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-archimedean-reciprocal"
         ]
       },
       {
@@ -174,6 +188,7 @@
         "strategy": "Use countability of the rationals to specialize the A-page prescribed-discontinuity theorem to $E=\\mathbb{Q}$, then restrict the resulting bounded nondecreasing function to $[0,1]$. The theorem supplies continuity at every irrational and a jump at every rational; monotonicity gives Riemann integrability. At each rational interior point the one-sided FTC gives unequal one-sided derivatives of the integral function, while the pointwise FTC gives differentiability at every irrational.",
         "deps": [
           "thm-rationals-countable",
+          "lem-q-and-irrationals-dense-r",
           "thm-monotone-with-prescribed-discontinuity-set",
           "thm-monotone-implies-integrable",
           "thm-one-sided-ftc-at-points-with-one-sided-limits",
@@ -245,7 +260,9 @@
           "def-vector-valued-functions-limits-and-continuity",
           "def-p-norms-on-rn",
           "def-partition-and-refinement",
-          "def-complete-ordered-field"
+          "def-complete-ordered-field",
+          "def-extended-reals",
+          "lem-extended-reals-complete"
         ]
       },
       {
@@ -321,7 +338,8 @@
         "deps": [
           "def-path-polygonal-length-and-rectifiability-in-rn",
           "def-pointwise-uniform-and-uniformly-cauchy-convergence",
-          "thm-componentwise-limits-and-continuity"
+          "thm-componentwise-limits-and-continuity",
+          "def-limsup-liminf"
         ]
       },
       {
@@ -334,7 +352,9 @@
           "cor-vector-valued-ftc-and-lipschitz-bound",
           "thm-norm-inequality-for-the-vector-valued-integral",
           "thm-heine-cantor-r",
-          "thm-darboux-equals-riemann"
+          "thm-darboux-equals-riemann",
+          "cor-mean-value-theorem",
+          "def-path-polygonal-length-and-rectifiability-in-rn"
         ]
       },
       {
@@ -391,7 +411,6 @@
           "lem-arc-length-function-is-continuous-and-nondecreasing",
           "thm-arc-length-is-additive-over-subintervals",
           "thm-arc-length-is-invariant-under-monotone-reparametrization",
-          "lem-basic-properties-of-total-variation",
           "cor-chord-length-is-at-most-arc-length"
         ]
       },
@@ -403,9 +422,11 @@
         "deps": [
           "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
           "thm-ftc-first-part",
+          "cor-mean-value-theorem",
           "thm-derivative-of-an-inverse",
           "thm-chain-rule",
-          "thm-componentwise-limits-and-continuity"
+          "thm-componentwise-limits-and-continuity",
+          "def-arc-length-function"
         ]
       }
     ]
@@ -455,6 +476,7 @@
           "thm-nonnegative-series-bounded-partial-sums",
           "def-pi-via-first-positive-cosine-zero",
           "thm-quarter-turn-values-and-shift-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
           "cor-archimedean-reciprocal",
           "def-bounded-variation-and-total-variation"
         ]
@@ -474,18 +496,20 @@
         "id": "cex-the-same-trace-can-have-different-path-lengths",
         "kind": "counterexample",
         "title": "Two paths can have the same trace and endpoints but different lengths: one traverses $[0,1]$ once and another traverses it forward, backward, and forward",
-        "strategy": "Use the identity path on $[0,1]$ and a three-piece affine path taking the successive values $0,1,0,1$. Both have trace $[0,1]$ and endpoints $0,1$. The polygonal-path formula gives lengths one and three, showing that length belongs to the parametrized path rather than its point set.",
+        "strategy": "Use the identity path on $[0,1]$ and a three-piece affine path taking the successive values $0,1,0,1$. Both have trace $[0,1]$ and endpoints $0,1$. Apply the A-page piecewise-$C^1$ speed formula and compute the constant speed integrals inline to obtain lengths one and three, showing that length belongs to the parametrized path rather than its point set.",
         "deps": [
-          "ex-line-segment-and-polygonal-path-length"
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "lem-integral-elementary-bounds"
         ]
       },
       {
         "id": "cex-arc-length-is-not-continuous-under-uniform-convergence",
         "kind": "counterexample",
         "title": "Sawtooth paths converge uniformly to a line segment while every sawtooth has length $\\sqrt2$ and the limit has length $1$",
-        "strategy": "On the uniform $n$-partition of $[0,1]$, join successive points whose horizontal separation is $1/n$ and whose vertical coordinates alternate between $0$ and $1/n$. The vertical sup norm is at most $1/n$, so the paths converge uniformly to $(t,0)$. Each of the $n$ affine edges has length $\\sqrt2/n$, while the limit segment has length one.",
+        "strategy": "On the uniform $2k$-partition of $[0,1]$, join successive points whose horizontal separation is $1/(2k)$ and whose vertical coordinates alternate between $0$ and $1/(2k)$. The vertical sup norm tends to zero, so the paths converge uniformly to $(t,0)$. Apply the A-page piecewise-$C^1$ speed formula and compute the constant speed integrals inline: the $2k$ affine pieces contribute total length $\\sqrt2$, while the limit path has length one.",
         "deps": [
-          "ex-line-segment-and-polygonal-path-length",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "lem-integral-elementary-bounds",
           "thm-arc-length-is-lower-semicontinuous-under-uniform-convergence",
           "ex-one-over-n-null"
         ]

@@ -138,8 +138,8 @@ Values below are the Step-5 frontmatter obligations. `not-applicable` is used on
 |---|---|---|---|
 | `ex-singular-projection-has-zero-determinant` | ai-generated | ai-generated | Checkable leaf example demanded by the dispatch; no item depends on it. |
 | `ex-determinant-in-two-ordered-bases` | ai-generated | ai-generated | Checkable concrete basis-change witness demanded by the dispatch; no consumer. |
-| `ex-doubling-integers-has-nonunit-determinant` | ai-altered | ai-generated | Owner-specified integer example, phrased through the source-backed coordinate endomorphism; its checked statement is reused only by the following false-statement boundary item, as Alpha expressly directed. |
-| `fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero` | ai-altered | ai-altered | Standard ring-versus-field trap, refuted by the owner-specified integer example and corrected by the sourced unit criterion; the zero-ring convention checks the other implication. |
+| `ex-doubling-integers-has-nonunit-determinant` | ai-altered | ai-generated | Owner-specified integer example, phrased through the source-backed coordinate endomorphism and checked directly; it is a leaf with no consumer. |
+| `fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero` | ai-altered | ai-altered | Standard ring-versus-field trap, refuted by an inline determinant computation for $[2]$ and corrected by the sourced unit criterion; the zero-ring convention checks the other implication without a B-page dependency. |
 | `ex-four-by-four-determinant-by-cofactors-and-row-reduction` | ai-generated | ai-generated | Independently checkable sparse-matrix comparison; no consumer. |
 | `ex-three-by-three-inverse-by-adjugate` | ai-generated | ai-generated | Independently checkable cofactor and inverse computation harvested from ILA's example heading; no consumer. |
 | `ex-cramers-rule-two-by-two-system` | ai-generated | ai-generated | Independently checkable system; no consumer. |
@@ -228,3 +228,68 @@ No blocker remains. The fraction-field detour was removed rather than recorded a
 ## New-id collision and validation record
 
 All proposed ids, including `lem-alternating-top-forms-are-determined-by-one-ordered-basis`, `thm-operator-determinant-scales-every-alternating-top-form`, `fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero`, and `ex-columnwise-additivity-versus-whole-matrix-nonadditivity`, were searched with `rg` against `items/`, `research/plan-spec.json`, and the other existing `research/*.pages.json` manifests before this note was finalised; no collision was found outside this batch. The exact nonadditivity fact already exists under the published id `fs-determinant-is-additive-on-matrices`; the new companion example adds a distinct side-by-side columnwise computation and directly recomputes the whole-matrix witness, avoiding both a duplicate statement and a forbidden B-page dependency. The final report must distinguish the gates actually rerun after all four artifacts are on disk from this interim record.
+
+## Continuity checkpoint, Step 5 authoring
+
+- Current substage: all governing instructions, the four batch artifacts, the prescribed planning sections, Alpha's review and recheck, the exemplar, and every intended published dependency have been read from disk. No assigned item or page file has yet been created.
+- Writable batch record paths: `research/frontier-11-batch-4.pages.json`, `research/frontier-11-batch-4.notes.md`, `research/frontier-11-batch-4.proof-contracts.json`, and `research/frontier-11-batch-4.coverage.json`. Assigned output paths are the four page files and their item files named by the batch manifest.
+- Gate state: Step 5 precheck and plan validation have not yet been run because authoring is not complete. The unrelated untracked dispatch prompt files are preserved.
+- Open constraints: retain the settled scaffold; author 52 items as `draft`/`session`; keep B-page items as non-load-bearing leaves; state every cited fact faithfully; keep pre-bridge integral-logarithm proofs free of `exp` and `log`; use only the IVP uniqueness theorem for the bridge; include all zero-dimensional, zero-ring, endpoint, exponent, and iff directions; avoid applied canonical-embedding notation; use `justified_by` where the arbitrary-basis operator determinant definition needs later basis-independence.
+- Exact next action: create the determinant A and B pages and their 28 item files, then create the logarithm A and B pages and their 24 item files; reconcile proof contracts to the final numbered steps; run precheck on every assigned item and `validate-plan.mjs` on `research/plan-spec.json`; update this note with every dependency change, departure, provenance result, gate result, and blocker.
+
+## Step 5 authoring report
+
+This section supersedes the preceding continuity checkpoint. The batch now has all four page files and all 52 item files: 20 determinant A items, 8 determinant B items, 19 integral-logarithm A items, and 5 integral-logarithm B items. Of these, 45 are proof-bearing and 7 are definitions or a remark. Every item is `status: draft` and `origin: session`; every proof-bearing item records `verification.precheck: pass`, while the seven non-proof items record `verification.precheck: n/a`. Neither audit nor judge stamps were added.
+
+### Departures from the settled scaffold
+
+No id, page order, page prerequisite, mathematical claim, or coverage obligation was dropped, narrowed, or renamed. The following local changes were needed to make the authored facts and proofs honest:
+
+- The two B-page titles were synchronized to the exact titles in `research/plan-spec.json`: "The Determinant of an Operator: Examples and Counterexamples" and "The Integral Logarithm and the Equivalence of Its Characterisations: Examples and Counterexamples". The earlier batch-manifest titles were stale variants.
+- `def-matrix-minors-cofactors-and-adjugate` adds `def-integer-power`, because its cofactor sign explicitly uses $(-1)^{i+j}$.
+- `def-adjugate-of-a-linear-operator` adds `thm-matrix-representation-is-a-vector-space-isomorphism`, because transporting the matrix adjugate back to an operator uses the surjectivity and uniqueness of the matrix representation map.
+- `thm-integral-logarithm-product-law` and `thm-integral-exponential-solves-the-normalised-ivp` add `cor-differentiable-implies-continuous`; each proof explicitly needs continuity supplied by differentiability.
+- `cor-e-is-the-unique-unit-hyperbolic-area` adds `def-integral-exponential`, because the proof uses the defining inverse identity $L(E(y))=y$.
+- `thm-logarithm-differentiable-functional-equation-characterisation` adds `thm-integral-logarithm-product-law`, which supplies the converse product law for the independently constructed $L$.
+- `cor-continuous-logarithmic-functions-form-a-one-parameter-family` adds `thm-natural-logarithm-laws`, which supplies both continuity and the product law for the converse family $c\log x$.
+- `lem-log-series-extends-by-the-product-law` adds `thm-induction-principle` for its explicit continuation induction.
+- `cex-discontinuous-logarithmic-functional-equation` adds `def-natural-logarithm`, because its construction composes the additive Hamel-basis map with the published inverse of the exponential.
+- `ex-unit-hyperbolic-area-brackets-e` adds `cor-integral-logarithm-is-strictly-increasing`, which converts the proved integral bounds into bounds on the unique point $e$.
+- The false statement about nonzero determinant no longer depends on `ex-doubling-integers-has-nonunit-determinant`. It now adds `def-determinant-of-a-square-matrix` and computes $\det([2])=2$ inline. This is the one intentional strategy change: the dispatch's B-page leaf rule forbids any item from depending on an examples-page item.
+- In `cor-operator-determinant-by-row-reduction`, recorded row scalings are stated to have nonzero factors, which is the exact hypothesis needed to reverse an elementary scaling step over a field. In `cor-integral-logarithm-reciprocals-and-integer-powers`, $L(1)=0$ is derived from the product law before it is used, rather than treated as implicit.
+
+The arbitrary-basis operator determinant definition records `justified_by: [thm-operator-determinant-is-basis-independent]`, and the $0\times0$ determinant used for $1\times1$ cofactors is declared as a local convention. These implement the scaffold's promised well-definedness and boundary passes rather than changing its scope. No published dependency or published page was edited.
+
+### Published dependency record
+
+The two tables under "Published dependency closure and confidence routes" are the complete published dependency-reading record used before prose authoring. During the final direct-premise pass, `thm-matrix-representation-is-a-vector-space-isomorphism` was additionally opened, its `status: published` and literature-derived Statement were confirmed, and its exact matrix-representation isomorphism was used in the operator-adjugate definition. Every other added direct premise already appears in those tables. The related B-page items named there were read only for coverage comparison and are not dependencies.
+
+### Provenance result
+
+The item-by-item labels and rationales are recorded in the four provenance tables above. The final component totals are:
+
+| statement / proof | items |
+|---|---:|
+| `literature-derived` / `ai-altered` | 19 |
+| `literature-derived` / `not-applicable` | 3 |
+| `ai-altered` / `ai-altered` | 16 |
+| `ai-altered` / `ai-generated` | 2 |
+| `ai-altered` / `not-applicable` | 4 |
+| `ai-generated` / `ai-generated` | 8 |
+
+All generated statements are checkable B-page examples and remain leaves. No generated Statement or Construction is load-bearing.
+
+### Final verification
+
+- `node tools/tsx-run.mjs tools/precheck.mts <all 52 assigned item files>`: pass; 45 checked, 0 failing. The remaining 7 are correctly `n/a`.
+- `node tools/validate-plan.mjs research/plan-spec.json`: pass; declared order is acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages with item lists.
+- `node tools/proof-contract.mjs research/frontier-11-batch-4.proof-contracts.json --strict`: pass; 0 errors, 0 warnings, 45/45 items checked.
+- `node tools/content-policy.mjs research/frontier-11-batch-4.pages.json`: pass; 52 scoped items, 0 errors, 0 warnings.
+- `node tools/coverage-checklist.mjs research/frontier-11-batch-4.coverage.json`: pass; 2 pages, 75 harvested results, 0 errors, 0 warnings.
+- `node tools/finite-smoke.mjs research/frontier-11-batch-4.proof-contracts.json`: pass; 0 errors. No finite-smoke checks were required.
+- `node tools/risk-report.mjs research/frontier-11-batch-4.proof-contracts.json`: pass; 0 errors, all 45 proof-bearing items routed.
+- Whole-repository `fwdcheck`, `extcheck`, `prosecheck`, `citecheck`, and `depsource` pass. Scoped inspection of `depcheck` and `rendercheck` reports no batch-4 error.
+- A manifest-to-disk audit confirms 52/52 item files, 4/4 page files, exact page item ordering, exact authored dependency lists, two sub-150-word nonempty paragraphs on each A page, no body on either B page, no applied canonical-embedding notation, no audit/judge stamps, and no dependency on a B-page item.
+- The proofs preceding `thm-integral-exponential-agrees-with-exponential` contain no use of `exp` or `log`. The bridge item cites `thm-exponential-ivp-uniqueness` exactly once.
+
+There is no scoped blocker. I could not make the two whole-repository checks green without editing other batches: `depcheck` currently fails only on the four intentionally unaudited published complex rewrites owned by batch 1, and `rendercheck` currently finds five multiline displays in other batches. Those failures do not name a batch-4 item. I did not run `tools/gates.mjs`, as the dispatch explicitly forbids it.
