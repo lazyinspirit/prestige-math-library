@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types, thm-centralizer-cardinality-from-cycle-type, thm-conjugacy-class-cardinality, thm-class-equation, thm-number-of-bijections-of-a-finite-set]
+deps: [thm-lagrange, cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types, thm-centralizer-cardinality-from-cycle-type, thm-conjugacy-class-cardinality, thm-class-equation, thm-number-of-bijections-of-a-finite-set]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,7 +36,7 @@ When $n=0$, the one empty tuple contributes $1$.
 
 [F2] A permutation of type $(c_k)$ has centralizer cardinality $\prod k^{c_k}c_k!$ ([[thm-centralizer-cardinality-from-cycle-type]]).
 
-[F3] A conjugacy class has cardinality equal to the group order divided by the centralizer order ([[thm-conjugacy-class-cardinality]]).
+[F3] A conjugacy class has cardinality $|\operatorname{Cl}_G(x)|=[G:C_G(x)]$ ([[thm-conjugacy-class-cardinality]]), and $|G|=[G:H]\,|H|$ for $H\le G$ ([[thm-lagrange]]), so the class size is $|G|/|C_G(x)|$.
 
 [F4] If $x_1,\ldots,x_r$ represent the non-singleton conjugacy classes of a finite group $G$, then $|G|=|Z(G)|+\sum_i[G:C_G(x_i)]$ ([[thm-class-equation]]).
 

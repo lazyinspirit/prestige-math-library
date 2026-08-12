@@ -33,6 +33,8 @@ using the oriented integral when $x<1$
 
 This is well defined. The function $t\mapsto1/t$ is continuous wherever
 $t\neq0$ by the quotient clause of
-[[thm-algebra-of-continuous-functions]]. For each $x>0$, it is therefore
-continuous on the compact interval with endpoints $1$ and $x$, hence Riemann
-integrable there by [[thm-continuous-implies-integrable]].
+[[thm-algebra-of-continuous-functions]]. For $x\neq1$ it is therefore continuous on the nondegenerate compact interval
+with endpoints $1$ and $x$, hence Riemann integrable there by
+[[thm-continuous-implies-integrable]], whose hypothesis is $a<b$. At $x=1$ the
+interval is degenerate and that theorem does not apply; there
+[[def-oriented-integral]] stipulates $\int_1^1f=0$, so $L(1)=0$ directly.

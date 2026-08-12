@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-alternating-group-is-simple-for-n-at-least-five, cor-alternating-group-is-normal-and-has-half-the-elements, cor-center-of-symmetric-group-is-trivial, thm-sign-is-a-homomorphism, def-alternating-group, def-normal-subgroup]
+deps: [thm-lagrange, thm-alternating-group-is-simple-for-n-at-least-five, cor-alternating-group-is-normal-and-has-half-the-elements, cor-center-of-symmetric-group-is-trivial, thm-sign-is-a-homomorphism, def-alternating-group, def-normal-subgroup]
 justified_by: []
 aliases: []
 landmark: false
@@ -31,7 +31,7 @@ $\{1\}$, $A_n$, and $S_n$. Thus $A_n$ is the only proper nontrivial one.
 
 **Given:** $n\ge5$ and $N\trianglelefteq S_n$.
 
-[F1] $A_n$ is normal in $S_n$ and has index $2$ ([[cor-alternating-group-is-normal-and-has-half-the-elements]]).
+[F1] $A_n\trianglelefteq S_n$ and $2|A_n|=n!$ for $n\ge2$ ([[cor-alternating-group-is-normal-and-has-half-the-elements]]); with $|S_n|=n!$ and $|S_n|=[S_n:A_n]\,|A_n|$ ([[thm-lagrange]]) this gives $[S_n:A_n]=2$, so $S_n$ is the union of $A_n$ and one other coset.
 
 [F2] $A_n$ is simple for $n\ge5$ ([[thm-alternating-group-is-simple-for-n-at-least-five]]).
 

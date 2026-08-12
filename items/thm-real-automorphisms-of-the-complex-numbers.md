@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-complex-numbers-form-a-field, lem-complex-conjugation-and-modulus-laws, cor-universal-property-of-the-complex-numbers]
+deps: [def-complex-numbers-and-arithmetic, thm-complex-numbers-form-a-field, lem-complex-conjugation-and-modulus-laws, cor-universal-property-of-the-complex-numbers]
 justified_by: []
 aliases: []
 landmark: false
@@ -32,7 +32,7 @@ distinct.
 
 **Given:** A real-field automorphism $\sigma$ of $\mathbb C$.
 
-[F1] Every complex number has a unique form $a+bi$, and $\mathbb C$ is a field ([[thm-complex-numbers-form-a-field]]).
+[F1] Every complex number has a unique form $a+bi$, and $\mathbb C$ is a field ([[thm-complex-numbers-form-a-field]]); $i^2=-1$ ([[def-complex-numbers-and-arithmetic]]).
 
 [F2] Complex conjugation is an involutive real-field automorphism ([[lem-complex-conjugation-and-modulus-laws]]).
 
@@ -42,7 +42,7 @@ distinct.
 
 **Proof technique:** direct.
 
-1.1 Since $\sigma$ fixes $-1$, one has $\sigma(i)^2=-1$. [algebra]
+1.1 By [F1], $i^2=-1$; since $\sigma$ is a field homomorphism fixing $-1$, applying it gives $\sigma(i)^2=-1$. [F1, algebra]
 
 2.1 In the complex field, $t^2+1=(t-i)(t+i)$; hence a root has $t=i$ or $t=-i$. Thus $\sigma(i)\in\{i,-i\}$. [F1, step 1.1, algebra]
 

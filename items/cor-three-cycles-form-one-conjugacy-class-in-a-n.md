@@ -32,7 +32,7 @@ For $n\ge5$, all $3$-cycles in $A_n$ lie in one $A_n$-conjugacy class.
 
 [F1] Two permutations in $S_n$ are conjugate exactly when their cycle types agree ([[thm-symmetric-permutations-are-conjugate-iff-same-cycle-type]]).
 
-[F2] An even $S_n$-class splits in $A_n$ exactly when all cycle lengths, including fixed points, are odd and distinct ([[thm-alternating-conjugacy-class-splitting-criterion]]).
+[F2] For $n\ge2$ and $\sigma\in A_n$, the $S_n$-class of $\sigma$ splits into two $A_n$-classes of equal size exactly when all cycle lengths in its decomposition, including $1$-cycles for fixed points, are odd and no two are equal ([[thm-alternating-conjugacy-class-splitting-criterion]]).
 
 ## Proof
 

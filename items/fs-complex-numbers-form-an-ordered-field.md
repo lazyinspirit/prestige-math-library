@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-complex-numbers-form-a-field, lem-of-square-positive]
+deps: [def-complex-numbers-and-arithmetic, thm-complex-numbers-form-a-field, lem-of-square-positive]
 justified_by: []
 aliases: []
 landmark: false
@@ -32,7 +32,7 @@ There is a total order on $\mathbb C$ compatible with its field operations.
 
 [F1] In an ordered field every nonzero square is positive ([[lem-of-square-positive]]).
 
-[F2] The complex field contains nonzero $i$ with $i^2=-1$ ([[thm-complex-numbers-form-a-field]]).
+[F2] $i^2=-1$ ([[def-complex-numbers-and-arithmetic]]), and every complex number is uniquely $a+bi$ ([[thm-complex-numbers-form-a-field]]), so $i=0+1i$ is nonzero.
 
 ## Refutation
 

@@ -42,7 +42,7 @@ $\mathord\downarrow p=\{q\in P:q\le p\}$.
 
 [F1] Every partial order is a preorder, and a preorder is reflexive and transitive ([[def-preorder]]).
 
-[L1] A preorder becomes a thin category with one morphism $q\to r$ exactly when $q\le r$, and none otherwise ([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
+[L1] A preorder determines a category with at most one morphism between any two objects, and functors between such categories are exactly the monotone maps ([[prop-preorders-as-categories-and-monotone-maps-as-functors]]). In that category the morphism $q\to r$ is present exactly when $q\le r$, which is how this example reads every hom-set below.
 
 [F2] The presheaf represented by $p$ is the contravariant hom-functor $P(-,p)$ ([[def-presheaf-representable-functor-and-representation]]).
 

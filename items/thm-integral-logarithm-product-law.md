@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-integral-logarithm-derivative-and-normalisation, thm-chain-rule,
+deps: [thm-algebra-of-derivatives, thm-integral-logarithm-derivative-and-normalisation, thm-chain-rule,
        cor-zero-derivative-implies-constant,
        cor-differentiable-implies-continuous]
 justified_by: []
@@ -47,10 +47,14 @@ vanishes throughout the interior is constant
 [L4] A differentiable function is continuous
 ([[cor-differentiable-implies-continuous]]).
 
+[L5] Sums, differences and scalar multiples of functions differentiable at a
+point are differentiable there, with the corresponding derivatives
+([[thm-algebra-of-derivatives]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Define $h(x):=L(xy)-L(x)$ on $(0,\infty)$. By [L1] and [L2], it is differentiable and $$h'(x)=\frac{y}{xy}-\frac1x=0.$$ [L1, L2, algebra]
+1.1 Define $h(x):=L(xy)-L(x)$ on $(0,\infty)$. By [L1] and [L2] each term is differentiable, so [L5] makes $h$ differentiable with $$h'(x)=\frac{y}{xy}-\frac1x=0.$$ [L1, L2, L5, algebra]
 2.1 By [L4], $h$ is continuous, so [L3] makes it constant on $(0,\infty)$. [step 1.1, L4, L3]
 3.1 Evaluating at $x=1$ gives $h(x)=h(1)=L(y)-L(1)=L(y)$. Therefore $L(xy)-L(x)=L(y)$, which is the claimed product law. [step 2.1, L1, algebra] ∎

@@ -34,7 +34,7 @@ $$\chi(C_{2k+1})=3\qquad\text{and}\qquad\pi(C_{2k+1})=\frac12.$$
 
 [F1] For $n\ge3$, $C_n$ has the consecutive edges $\{i,i+1\}$ and the closing edge $\{n-1,0\}$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
-[F2] A proper vertex colouring gives different colours to adjacent vertices, and its fibres are the colour classes ([[def-proper-vertex-colouring-and-chromatic-number]]).
+[F2] A proper $k$-vertex-colouring is a map $c:V\to k$ with $c(u)\ne c(v)$ for every edge $\{u,v\}$, its fibres are the colour classes, and $\chi(G)=\min\{k\in\mathbb N:G\text{ is }k\text{-colourable}\}$ ([[def-proper-vertex-colouring-and-chromatic-number]]).
 
 [F3] For every finite graph $H$ with an edge, $\pi(H)=1-1/(\chi(H)-1)$ ([[cor-chromatic-number-extremal-density]]).
 

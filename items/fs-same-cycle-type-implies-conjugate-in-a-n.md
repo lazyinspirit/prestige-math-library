@@ -34,7 +34,7 @@ Two elements of $A_n$ with the same cycle type must be conjugate in $A_n$.
 
 [F2] Conjugation relabels cycle entries ([[lem-conjugating-a-cycle-relabels-its-entries]]).
 
-[F3] An even $S_n$-class splits in $A_n$ exactly when all cycle lengths, including fixed points, are odd and distinct ([[thm-alternating-conjugacy-class-splitting-criterion]]).
+[F3] For $n\ge2$ and $\sigma\in A_n$, the $S_n$-class of $\sigma$ splits into two $A_n$-classes of equal size exactly when all cycle lengths in its decomposition, including $1$-cycles for fixed points, are odd and no two are equal ([[thm-alternating-conjugacy-class-splitting-criterion]]).
 
 ## Counterexample
 

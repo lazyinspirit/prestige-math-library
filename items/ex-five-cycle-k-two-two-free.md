@@ -10,7 +10,7 @@ provenance:
   proof: ai-generated
 generation:
   role: example
-deps: [def-standard-complete-bipartite-path-and-cycle-graphs, thm-kovari-sos-turan-bound]
+deps: [def-standard-complete-bipartite-path-and-cycle-graphs]
 justified_by: []
 aliases: []
 landmark: false

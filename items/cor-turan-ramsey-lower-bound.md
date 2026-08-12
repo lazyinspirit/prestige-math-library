@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-turan-exact-and-unique, def-ramsey-colouring-and-arrow-notation, def-off-diagonal-ramsey-number]
+deps: [def-ramsey-colouring-and-arrow-notation, def-off-diagonal-ramsey-number]
 justified_by: []
 aliases: []
 landmark: false

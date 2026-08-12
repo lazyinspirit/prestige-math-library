@@ -36,7 +36,7 @@ if and only if $[x]f$ is a unit in $R$. In the zero ring the assertion holds wit
 
 **Given:** The hypotheses and notation of the statement above.
 
-[F1] Admissible formal composition is associative and satisfies $f\circ x=f$ and $x\circ f=f$ ([[thm-formal-composition-laws]]).
+[F1] If $g$ and $h$ both have zero constant coefficient then $(f\circ g)\circ h=f\circ(g\circ h)$; also $f\circ x=f$ and $x\circ f=f$ ([[thm-formal-composition-laws]]).
 
 ## Proof
 

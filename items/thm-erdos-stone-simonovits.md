@@ -38,7 +38,7 @@ $$\lim_{n\to\infty}\frac{\operatorname{ex}(n,H)}{\binom n2}=1-\frac1{\chi(H)-1}.
 
 **Given:** The hypotheses and notation of the statement above.
 
-[F1] A proper vertex colouring gives different colours to adjacent vertices, and its fibres are the colour classes ([[def-proper-vertex-colouring-and-chromatic-number]]).
+[F1] A proper $k$-vertex-colouring is a map $c:V\to k$ with $c(u)\ne c(v)$ for every edge $\{u,v\}$, its fibres are the colour classes, and $\chi(G)=\min\{k\in\mathbb N:G\text{ is }k\text{-colourable}\}$ ([[def-proper-vertex-colouring-and-chromatic-number]]).
 
 [F2] For $n\in\mathbb N$ and $r\ge1$, Turán's theorem gives $\operatorname{ex}(n,K_{r+1})=e(T_{n,r})$, and an $n$-vertex $K_{r+1}$-free graph attains equality exactly when it is isomorphic to $T_{n,r}$ ([[thm-turan-exact-and-unique]]).
 

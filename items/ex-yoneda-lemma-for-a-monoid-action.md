@@ -7,10 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-yoneda-lemma-is-natural-in-both-variables,
-       prop-monoids-and-groups-as-one-object-categories,
-       prop-sets-and-functions-form-category-set, def-semigroup-and-monoid,
-       def-natural-transformation]
+deps: [lem-yoneda-evaluation-bijection, thm-yoneda-lemma-is-natural-in-both-variables, prop-monoids-and-groups-as-one-object-categories, prop-sets-and-functions-form-category-set, def-semigroup-and-monoid, def-natural-transformation]
 justified_by: []
 aliases: []
 landmark: false
@@ -42,11 +39,11 @@ with inverse $x\mapsto(m\mapsto m\cdot x)$.
 
 [F1] A monoid has associative multiplication and a two-sided identity ([[def-semigroup-and-monoid]]).
 
-[L1] In the one-object category of a monoid, $BM(*,*)=M$ and composition is $n\circ m=nm$ ([[prop-monoids-and-groups-as-one-object-categories]]).
+[L1] Every monoid is a one-object category ([[prop-monoids-and-groups-as-one-object-categories]]). This example fixes the resulting data explicitly: $BM(*,*)=M$, and composition is taken to be $n\circ m=nm$, the convention that makes the represented functor a left action.
 
 [F2] Sets and functions form the category $\mathbf{Set}$ ([[prop-sets-and-functions-form-category-set]]).
 
-[L2] Yoneda evaluation is $\operatorname{Nat}(BM(*,-),F)\cong F(*)$, natural in the represented object and the target functor, with inverse $x\mapsto(m\mapsto F(m)(x))$ ([[thm-yoneda-lemma-is-natural-in-both-variables]]).
+[L2] Evaluation at the identity is a bijection $\operatorname{Nat}(BM(*,-),F)\to F(*)$ whose inverse sends $x$ to the natural transformation with component $m\mapsto F(m)(x)$ ([[lem-yoneda-evaluation-bijection]]), and it is natural in the represented object and in the target functor ([[thm-yoneda-lemma-is-natural-in-both-variables]]).
 
 [F3] A natural transformation has components commuting with the action of every source morphism ([[def-natural-transformation]]).
 

@@ -41,7 +41,7 @@ $i\sqrt{-a}$ when $a<0$.
 
 [F4] Squaring is order-preserving and order-reflecting on nonnegative elements ([[lem-of-square-monotone]]).
 
-[F5] Complex multiplication is $(a,b)(c,d)=(ac-bd,ad+bc)$ ([[thm-complex-numbers-form-a-field]]).
+[F5] Complex multiplication is $(a+bi)(u+vi)=(au-bv)+(av+bu)i$ ([[thm-complex-numbers-form-a-field]]).
 
 ## Proof
 

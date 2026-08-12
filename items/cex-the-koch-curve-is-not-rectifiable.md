@@ -7,10 +7,10 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-recursion, thm-of-square-roots, lem-standard-basis-of-f-n, thm-cauchy-schwarz-and-the-euclidean-norm, thm-uniform-cauchy-criterion-real-functions, thm-uniform-limit-continuous-real-functions, thm-componentwise-limits-and-continuity, lem-geometric-sequence-null, def-path-polygonal-length-and-rectifiability-in-rn, cor-piecewise-c1-paths-have-additive-speed-integral-length, thm-arc-length-is-lower-semicontinuous-under-uniform-convergence, prop-arc-length-under-lipschitz-maps-and-euclidean-similarities, thm-arc-length-is-additive-over-subintervals]
+deps: [thm-recursion, cor-cauchy-reals-lub-complete, thm-of-square-roots, lem-standard-basis-of-f-n, thm-cauchy-schwarz-and-the-euclidean-norm, thm-uniform-cauchy-criterion-real-functions, thm-uniform-limit-continuous-real-functions, thm-componentwise-limits-and-continuity, lem-geometric-sequence-null, def-path-polygonal-length-and-rectifiability-in-rn, cor-piecewise-c1-paths-have-additive-speed-integral-length, thm-arc-length-is-lower-semicontinuous-under-uniform-convergence, prop-arc-length-under-lipschitz-maps-and-euclidean-similarities, thm-arc-length-is-additive-over-subintervals]
 justified_by: []
 aliases: []
-landmark: true
+landmark: false
 proof_strategy: construction
 verification:
   precheck: pass
@@ -36,7 +36,7 @@ yet the limit path is not rectifiable: $L(\kappa)=+\infty$. The path $\kappa$ is
 
 [L1] The recursion theorem produces a sequence once its initial value and update rule are specified ([[thm-recursion]]).
 
-[L2] The nonnegative real $3$ has a square root; the standard basis gives the coordinate decomposition of vectors in $\mathbb R^2$; and the Euclidean norm is homogeneous and satisfies the triangle inequality ([[thm-of-square-roots]], [[lem-standard-basis-of-f-n]], [[thm-cauchy-schwarz-and-the-euclidean-norm]]).
+[L2] The real numbers are a complete ordered field ([[cor-cauchy-reals-lub-complete]]), so the nonnegative real $3$ has a square root ([[thm-of-square-roots]]); the standard basis gives the coordinate decomposition of vectors in $\mathbb R^2$ ([[lem-standard-basis-of-f-n]]); and the Euclidean norm is homogeneous and satisfies the triangle inequality ([[thm-cauchy-schwarz-and-the-euclidean-norm]]).
 
 [L3] A uniformly Cauchy sequence of real-valued functions has a uniform limit; a uniform limit of continuous real-valued functions is continuous; and a vector-valued map is continuous exactly when its coordinates are continuous ([[thm-uniform-cauchy-criterion-real-functions]], [[thm-uniform-limit-continuous-real-functions]], [[thm-componentwise-limits-and-continuity]]).
 

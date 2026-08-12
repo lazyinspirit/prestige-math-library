@@ -34,7 +34,7 @@ $$\chi(P)=3\qquad\text{and}\qquad\pi(P)=\frac12.$$
 
 [F1] In the Petersen graph's two-subset model, two vertices are adjacent exactly when the corresponding two-element subsets are disjoint ([[def-petersen-graph]]).
 
-[F2] A proper vertex colouring gives different colours to adjacent vertices, and its fibres are the colour classes ([[def-proper-vertex-colouring-and-chromatic-number]]).
+[F2] A proper $k$-vertex-colouring is a map $c:V\to k$ with $c(u)\ne c(v)$ for every edge $\{u,v\}$, its fibres are the colour classes, and $\chi(G)=\min\{k\in\mathbb N:G\text{ is }k\text{-colourable}\}$ ([[def-proper-vertex-colouring-and-chromatic-number]]).
 
 [F3] For every finite graph $H$ with an edge, $\pi(H)=1-1/(\chi(H)-1)$ ([[cor-chromatic-number-extremal-density]]).
 

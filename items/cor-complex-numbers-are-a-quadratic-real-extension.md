@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-algebraic-and-transcendental-elements, thm-complex-numbers-form-a-field, thm-evaluation-kernel-and-minimal-polynomial, thm-simple-algebraic-extension-quotient-power-basis-and-degree, lem-x-squared-plus-one-is-irreducible-over-the-reals]
+deps: [def-complex-numbers-and-arithmetic, def-algebraic-and-transcendental-elements, thm-complex-numbers-form-a-field, thm-evaluation-kernel-and-minimal-polynomial, thm-simple-algebraic-extension-quotient-power-basis-and-degree, lem-x-squared-plus-one-is-irreducible-over-the-reals]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,9 +33,9 @@ Its power basis is $1,i$, and $[\mathbb C:\mathbb R]=2$.
 
 [F1] $x^2+1$ is irreducible over $\mathbb R$ ([[lem-x-squared-plus-one-is-irreducible-over-the-reals]]).
 
-[F2] A root of an irreducible polynomial of degree $n$ generates an extension with power basis through degree $n-1$ and degree $n$ ([[thm-simple-algebraic-extension-quotient-power-basis-and-degree]]).
+[F2] For $a$ algebraic over $F$ with minimal polynomial $m_a$ of degree $n$, every element of $F(a)$ is uniquely $c_0+c_1a+\cdots+c_{n-1}a^{n-1}$, so $1,a,\ldots,a^{n-1}$ is the power basis and $[F(a):F]=n$ ([[thm-simple-algebraic-extension-quotient-power-basis-and-degree]]).
 
-[F3] Every complex number is uniquely $a+bi$ and $i^2=-1$ ([[thm-complex-numbers-form-a-field]]).
+[F3] Every complex number is uniquely $a+bi$ ([[thm-complex-numbers-form-a-field]]), and $i^2=-1$ ([[def-complex-numbers-and-arithmetic]]).
 
 [F4] A root of a nonzero polynomial is algebraic ([[def-algebraic-and-transcendental-elements]]); for an algebraic element with minimal polynomial $m_a$, $f(a)=0$ exactly when $m_a$ divides $f$ ([[thm-evaluation-kernel-and-minimal-polynomial]]).
 

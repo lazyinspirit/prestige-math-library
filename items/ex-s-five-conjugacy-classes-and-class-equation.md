@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [cor-symmetric-group-class-equation-by-cycle-type, thm-centralizer-cardinality-from-cycle-type, cor-sign-from-disjoint-cycle-structure, thm-alternating-conjugacy-class-splitting-criterion]
+deps: [cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types, cor-symmetric-group-class-equation-by-cycle-type, thm-centralizer-cardinality-from-cycle-type, cor-sign-from-disjoint-cycle-structure, thm-alternating-conjugacy-class-splitting-criterion]
 justified_by: []
 aliases: []
 landmark: false
@@ -42,11 +42,11 @@ The conjugacy data for $S_5$ are
 
 [F1] A cycle type $(c_k)$ has centralizer size $\prod k^{c_k}c_k!$ ([[thm-centralizer-cardinality-from-cycle-type]]).
 
-[F2] The symmetric class equation uses class size $5!/\prod k^{c_k}c_k!$ ([[cor-symmetric-group-class-equation-by-cycle-type]]).
+[F2] $S_n$-classes are indexed by the tuples with $\sum kc_k=n$ ([[cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types]]), and $n!=\sum n!/\prod_k k^{c_k}c_k!$ over those tuples, the summand indexed by $(c_k)$ being the size of the corresponding class ([[cor-symmetric-group-class-equation-by-cycle-type]]).
 
-[F3] Cycle length determines sign ([[cor-sign-from-disjoint-cycle-structure]]).
+[F3] A $k$-cycle has sign $(-1)^{k-1}$, and $\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}$ when fixed points are included as $1$-cycles ([[cor-sign-from-disjoint-cycle-structure]]).
 
-[F4] An even class splits in $A_n$ exactly when its cycle lengths, including fixed points, are odd and distinct ([[thm-alternating-conjugacy-class-splitting-criterion]]).
+[F4] For $n\ge2$ and $\sigma\in A_n$, the $S_n$-class of $\sigma$ splits into two $A_n$-classes of equal size exactly when all cycle lengths in its decomposition, including $1$-cycles for fixed points, are odd and no two are equal ([[thm-alternating-conjugacy-class-splitting-criterion]]).
 
 ## Verification
 

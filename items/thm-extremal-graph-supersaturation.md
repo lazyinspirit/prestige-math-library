@@ -38,14 +38,16 @@ contains at least $\delta n^h$ injective ordinary-subgraph embeddings of $H$ int
 
 [F2] For a finite incidence relation, the sum of its row-fibre sizes equals the sum of its column-fibre sizes ([[thm-double-counting]]).
 
+[F3] $\binom nk$ is the number of $k$-element subsets of an $n$-element set ([[def-binomial-coefficient]]).
+
 ## Proof
 
 **Proof technique:** average over fixed-size vertex subsets.
 
-1.1 If $\pi(H)+\varepsilon>1$, take $\delta=1$ and $N=1$; no graph satisfies the edge hypothesis. Hence assume $\pi(H)+\varepsilon\le1$, and choose $m\ge\max(h,2)$ with $\operatorname{ex}(m,H)/\binom m2<\pi(H)+\varepsilon/2$. For an $n$-vertex $G$ satisfying the hypothesis, the average edge density of its induced $m$-vertex subgraphs equals $e(G)/\binom n2\ge\pi(H)+\varepsilon$: each edge lies in $\binom{n-2}{m-2}$ such subsets. [given, F1, F2]
+1.1 If $\pi(H)+\varepsilon>1$, take $\delta=1$ and $N=1$; no graph satisfies the edge hypothesis. Hence assume $\pi(H)+\varepsilon\le1$, and choose $m\ge\max(h,2)$ with $\operatorname{ex}(m,H)/\binom m2<\pi(H)+\varepsilon/2$. For an $n$-vertex $G$ satisfying the hypothesis, the average edge density of its induced $m$-vertex subgraphs equals $e(G)/\binom n2\ge\pi(H)+\varepsilon$: each edge lies in $\binom{n-2}{m-2}$ such subsets. [given, F1, F2, F3]
 
 2.1 Let $p$ be the fraction of $m$-subsets inducing more than $\operatorname{ex}(m,H)$ edges. The remaining subsets have density below $\pi(H)+\varepsilon/2$, while every density is at most $1$. Therefore $\pi(H)+\varepsilon\le(1-p)(\pi(H)+\varepsilon/2)+p$, so $p\ge\varepsilon/2$ after weakening the resulting positive lower bound if necessary. Each good subset contains an injective copy of $H$. [step 1.1, given]
 
-3.1 Count pairs consisting of a good $m$-set and a chosen injective copy of $H$ inside it. There are at least $(\varepsilon/2)\binom nm$ pairs after choosing one copy in each good set, while any fixed embedding lies in $\binom{n-h}{m-h}$ $m$-sets. Thus the number of embeddings is at least $(\varepsilon/2)\binom nm/\binom{n-h}{m-h}=(\varepsilon/2)\binom nh/\binom mh$. For $n\ge2h$, this is at least $\delta n^h$ for some $\delta>0$ depending only on $H,\varepsilon$. [step 2.1, given, F2]
+3.1 Count pairs consisting of a good $m$-set and a chosen injective copy of $H$ inside it. There are at least $(\varepsilon/2)\binom nm$ pairs after choosing one copy in each good set, while any fixed embedding lies in $\binom{n-h}{m-h}$ $m$-sets. Thus the number of embeddings is at least $(\varepsilon/2)\binom nm/\binom{n-h}{m-h}=(\varepsilon/2)\binom nh/\binom mh$. For $n\ge2h$, this is at least $\delta n^h$ for some $\delta>0$ depending only on $H,\varepsilon$. [step 2.1, given, F2, F3]
 
 4.1 Taking $N\ge\max(m,2h)$ completes the assertion with the constants constructed above. [step 1.1, step 3.1] ∎

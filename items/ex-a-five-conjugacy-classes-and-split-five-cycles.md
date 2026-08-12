@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [cor-symmetric-group-class-equation-by-cycle-type, thm-centralizer-cardinality-from-cycle-type, cor-sign-from-disjoint-cycle-structure, thm-alternating-conjugacy-class-splitting-criterion, cor-alternating-group-is-normal-and-has-half-the-elements]
+deps: [cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types, cor-symmetric-group-class-equation-by-cycle-type, thm-centralizer-cardinality-from-cycle-type, cor-sign-from-disjoint-cycle-structure, thm-alternating-conjugacy-class-splitting-criterion, cor-alternating-group-is-normal-and-has-half-the-elements]
 justified_by: []
 aliases: []
 landmark: false
@@ -37,11 +37,11 @@ The last two classes are the two halves of the $S_5$ class of $5$-cycles.
 
 **Given:** The alternating group $A_5$.
 
-[F1] Symmetric conjugacy classes are indexed by cycle types and have sizes given by the class equation and centralizer formula ([[cor-symmetric-group-class-equation-by-cycle-type]], [[thm-centralizer-cardinality-from-cycle-type]]).
+[F1] $S_n$-classes are indexed by the tuples with $\sum kc_k=n$ ([[cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types]]); a permutation of type $(c_k)$ has centralizer cardinality $\prod_k k^{c_k}c_k!$ ([[thm-centralizer-cardinality-from-cycle-type]]); and $n!=\sum n!/\prod_k k^{c_k}c_k!$ over those tuples, the summand indexed by $(c_k)$ being the size of the corresponding class ([[cor-symmetric-group-class-equation-by-cycle-type]]).
 
-[F2] Sign determines which cycle types lie in $A_5$ ([[cor-sign-from-disjoint-cycle-structure]]).
+[F2] A $k$-cycle has sign $(-1)^{k-1}$, and $\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}$ when fixed points are included as $1$-cycles ([[cor-sign-from-disjoint-cycle-structure]]).
 
-[F3] An even class splits into two equal $A_n$-classes exactly for distinct odd cycle lengths ([[thm-alternating-conjugacy-class-splitting-criterion]]).
+[F3] For $n\ge2$ and $\sigma\in A_n$, the $S_n$-class of $\sigma$ splits into two $A_n$-classes of equal size exactly when all cycle lengths in its decomposition, including $1$-cycles for fixed points, are odd and no two are equal ([[thm-alternating-conjugacy-class-splitting-criterion]]).
 
 [F4] $|A_5|=5!/2=60$ ([[cor-alternating-group-is-normal-and-has-half-the-elements]]).
 

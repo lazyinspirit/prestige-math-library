@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [cor-symmetric-group-class-equation-by-cycle-type, thm-centralizer-cardinality-from-cycle-type, cor-sign-from-disjoint-cycle-structure]
+deps: [cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types, cor-symmetric-group-class-equation-by-cycle-type, thm-centralizer-cardinality-from-cycle-type, cor-sign-from-disjoint-cycle-structure]
 justified_by: []
 aliases: []
 landmark: false
@@ -40,7 +40,7 @@ The conjugacy data for $S_4$ are
 
 [F1] A cycle type $(c_k)$ has centralizer size $\prod k^{c_k}c_k!$ ([[thm-centralizer-cardinality-from-cycle-type]]).
 
-[F2] The class equation sums the corresponding class sizes $4!/\prod k^{c_k}c_k!$ ([[cor-symmetric-group-class-equation-by-cycle-type]]).
+[F2] $S_n$-classes are indexed by the tuples with $\sum kc_k=n$ ([[cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types]]), and $n!=\sum n!/\prod_k k^{c_k}c_k!$ over those tuples, the summand indexed by $(c_k)$ being the size of the corresponding class ([[cor-symmetric-group-class-equation-by-cycle-type]]).
 
 [F3] A $k$-cycle has sign $(-1)^{k-1}$, and $\operatorname{sgn}(\sigma)=(-1)^{n-c(\sigma)}$ when fixed points are included as $1$-cycles ([[cor-sign-from-disjoint-cycle-structure]]).
 

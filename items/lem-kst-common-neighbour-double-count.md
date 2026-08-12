@@ -24,7 +24,7 @@ pipeline_run: null
 
 ## Statement
 
-Let $G$ be bipartite with parts $A,B$, where $|A|=m$, $|B|=n$, and let $d(b)=|N(b)\cap A|$. If $G$ contains no oriented $K_{s,t}$ with $s$ vertices in $A$, then
+Let $s,t\ge1$ be integers, let $G$ be bipartite with parts $A,B$, where $|A|=m$, $|B|=n$, and let $d(b)=|N(b)\cap A|$. If $G$ contains no oriented $K_{s,t}$ with $s$ vertices in $A$, then
 
 $$\sum_{b\in B}\binom{d(b)}s\le(t-1)\binom ms.$$
 

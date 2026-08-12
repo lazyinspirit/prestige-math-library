@@ -5,7 +5,7 @@ title: "The determinant of a linear operator is independent of the chosen ordere
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [def-determinant-of-a-linear-operator,
        thm-operator-determinant-scales-every-alternating-top-form]

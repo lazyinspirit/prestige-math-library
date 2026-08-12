@@ -38,7 +38,7 @@ Every triangle-free graph on $n$ vertices has at most this many edges, and equal
 
 [F2] The open neighbourhood is $N_G(v)=\{u:\{u,v\}\in E\}$ and $\deg_G(v)=|N_G(v)|$ ([[def-graph-adjacency-incidence-neighbourhood-and-degree]]).
 
-[F3] Among complete $r$-partite graphs on $n$ vertices, $T_{n,r}$ has maximum edge count, with equality exactly for balanced part sizes ([[lem-turan-graph-edge-count-and-balance]]).
+[F3] Writing $n=qr+a$ with $0\le a<r$, $e(T_{n,r})=\binom n2-a\binom{q+1}2-(r-a)\binom q2$; among complete $r$-partite graphs on $n$ vertices this is the maximum edge count, and equality holds exactly when all part sizes differ by at most $1$ ([[lem-turan-graph-edge-count-and-balance]]).
 
 ## Proof
 

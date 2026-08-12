@@ -7,9 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-yoneda-lemma-is-natural-in-both-variables,
-       def-opposite-category, thm-category-theoretic-duality-principle,
-       def-presheaf-representable-functor-and-representation]
+deps: [lem-yoneda-evaluation-bijection, thm-yoneda-lemma-is-natural-in-both-variables, def-opposite-category, thm-category-theoretic-duality-principle, def-presheaf-representable-functor-and-representation]
 justified_by: []
 aliases: []
 landmark: false
@@ -48,7 +46,7 @@ to its component at $a$.
 
 **Given:** The locally small category $\mathcal C$, object $a$, presheaf $P$, and the morphisms and natural transformations in the statement.
 
-[L1] For a covariant functor $F:\mathcal D\to\mathbf{Set}$, evaluation gives $\operatorname{Nat}(\mathcal D(d,-),F)\cong F(d)$ naturally in $d$ and $F$ ([[thm-yoneda-lemma-is-natural-in-both-variables]]).
+[L1] For a covariant functor $F:\mathcal D\to\mathbf{Set}$, evaluation at the identity is a bijection $\operatorname{Nat}(\mathcal D(d,-),F)\to F(d)$ whose inverse sends $x\in F(d)$ to the transformation with component $\alpha^x_c(f)=F(f)(x)$ ([[lem-yoneda-evaluation-bijection]]), and this bijection is natural in $d$ and in $F$ ([[thm-yoneda-lemma-is-natural-in-both-variables]]).
 
 [F1] The opposite category has the same objects and satisfies $\mathcal C^{\mathrm{op}}(a,c)=\mathcal C(c,a)$ ([[def-opposite-category]]).
 

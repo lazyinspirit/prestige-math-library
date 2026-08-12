@@ -30,7 +30,7 @@ If a finite graph $H$ has $\chi(H)=r$, then $H$ is an ordinary subgraph of $K_r[
 
 **Given:** The hypotheses and notation of the statement above.
 
-[F1] A proper vertex colouring gives different colours to adjacent vertices, and its fibres are the colour classes ([[def-proper-vertex-colouring-and-chromatic-number]]).
+[F1] A proper $k$-vertex-colouring is a map $c:V\to k$ with $c(u)\ne c(v)$ for every edge $\{u,v\}$, its fibres are the colour classes, and $\chi(G)=\min\{k\in\mathbb N:G\text{ is }k\text{-colourable}\}$ ([[def-proper-vertex-colouring-and-chromatic-number]]).
 
 [F2] The balanced blowup $H[s]$ replaces each vertex by an independent $s$-set and each edge by all cross edges between the corresponding parts ([[def-extremal-number-turan-graph-and-blowup]]).
 

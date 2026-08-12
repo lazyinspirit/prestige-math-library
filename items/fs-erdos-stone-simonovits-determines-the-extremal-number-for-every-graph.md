@@ -32,7 +32,7 @@ Erdős–Stone–Simonovits by itself determines $\operatorname{ex}(n,H)$, even 
 
 [F1] The complete bipartite graph $K_{A,B}$ has exactly all edges joining a vertex of $A$ to a vertex of $B$ ([[def-standard-complete-bipartite-path-and-cycle-graphs]]).
 
-[F2] A proper vertex colouring gives different colours to adjacent vertices, and its fibres are the colour classes ([[def-proper-vertex-colouring-and-chromatic-number]]).
+[F2] A proper $k$-vertex-colouring is a map $c:V\to k$ with $c(u)\ne c(v)$ for every edge $\{u,v\}$, its fibres are the colour classes, and $\chi(G)=\min\{k\in\mathbb N:G\text{ is }k\text{-colourable}\}$ ([[def-proper-vertex-colouring-and-chromatic-number]]).
 
 [F3] If $H$ is a finite graph with an edge and $r=\chi(H)$, then $\operatorname{ex}(n,H)=(1-1/(r-1)+o(1))\binom n2$ ([[thm-erdos-stone-simonovits]]).
 

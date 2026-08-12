@@ -1,7 +1,7 @@
 ---
 id: def-determinant-of-a-linear-operator
 kind: definition
-title: "The determinant of an endomorphism of a finite-dimensional vector space, defined from its matrix in an ordered basis"
+title: "The determinant of an endomorphism of a finite-dimensional vector space: its matrix determinant in an ordered basis in positive dimension, and $1$ on the zero space"
 status: draft
 origin: session
 provenance:

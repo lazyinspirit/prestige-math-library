@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-complex-conjugate-real-imaginary-part-and-modulus, thm-complex-numbers-form-a-field, thm-of-square-roots, lem-of-square-monotone, lem-of-square-positive]
+deps: [def-complex-conjugate-real-imaginary-part-and-modulus, thm-complex-numbers-form-a-field, cor-cauchy-reals-lub-complete, thm-of-square-roots, lem-of-square-monotone, lem-of-square-positive]
 justified_by: []
 aliases: []
 landmark: false
@@ -38,7 +38,7 @@ $$|zw|=|z||w|,\qquad |z+w|\le |z|+|w|.$$
 
 [F2] Conjugation and modulus are defined by $\overline{a+bi}=a-bi$ and $|a+bi|=\sqrt{a^2+b^2}$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]]).
 
-[F3] Every nonnegative element of a complete ordered field has a unique nonnegative square root ([[thm-of-square-roots]]).
+[F3] The real numbers are a complete ordered field ([[cor-cauchy-reals-lub-complete]]), and every nonnegative element of a complete ordered field has a unique nonnegative square root ([[thm-of-square-roots]]).
 
 [F4] For nonnegative elements $r,s$ of an ordered field, $r\le s$ if and only if $r^2\le s^2$ ([[lem-of-square-monotone]]).
 

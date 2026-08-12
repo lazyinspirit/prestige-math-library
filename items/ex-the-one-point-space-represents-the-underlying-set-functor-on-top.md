@@ -21,7 +21,7 @@ verification:
 sources:
   scraped: []
   references:
-    - title: "Emily Riehl, Category Theory in Context, Example 2.1.6(ii)"
+    - title: "Emily Riehl, Category Theory in Context, Example 2.1.5(ii)"
       url: "https://emilyriehl.github.io/files/context.pdf"
 pipeline_run: null
 ---

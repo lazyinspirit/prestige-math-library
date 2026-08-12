@@ -1,7 +1,7 @@
 ---
 id: thm-alternating-conjugacy-class-splitting-criterion
 kind: theorem
-title: 'An $S_n$-class of an even permutation splits in $A_n$ exactly when all cycle lengths, including $1$-cycles, are odd and distinct'
+title: 'For $n\ge2$, an $S_n$-class of an even permutation splits in $A_n$ exactly when all cycle lengths, including $1$-cycles, are odd and distinct'
 status: draft
 origin: session
 provenance:
@@ -24,14 +24,14 @@ pipeline_run: frontier-11
 
 ## Statement
 
-Let $\sigma\in A_n$. Its $S_n$-conjugacy class splits into two
+Let $n\ge2$ and let $\sigma\in A_n$. Its $S_n$-conjugacy class splits into two
 $A_n$-conjugacy classes of equal size if and only if the lengths of all cycles
 in its cycle decomposition, including $1$-cycles for fixed points, are odd and
 no two lengths are equal.
 
 ## Facts & Assumptions
 
-**Given:** An even permutation $\sigma\in A_n$.
+**Given:** An integer $n\ge2$ and an even permutation $\sigma\in A_n$; for such $n$, $A_n$ has index $2$ in $S_n$, which is the hypothesis [F3] requires and which fails for $n\le1$, where $A_n=S_n$.
 
 [F1] $A_n$ is the kernel of sign ([[def-alternating-group]]).
 

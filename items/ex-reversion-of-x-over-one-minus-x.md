@@ -36,7 +36,7 @@ $$g(x)=\frac{x}{1+x}=x-x^2+x^3-x^4+\cdots.$$
 
 **Given:** The hypotheses and notation of the statement above.
 
-[F1] Admissible formal composition is associative and satisfies $f\circ x=f$ and $x\circ f=f$ ([[thm-formal-composition-laws]]).
+[F1] If $g$ and $h$ both have zero constant coefficient then $(f\circ g)\circ h=f\circ(g\circ h)$; also $f\circ x=f$ and $x\circ f=f$ ([[thm-formal-composition-laws]]).
 
 [F2] A formal power series is a unit exactly when its constant coefficient is a unit ([[thm-formal-power-series-unit-criterion]]).
 

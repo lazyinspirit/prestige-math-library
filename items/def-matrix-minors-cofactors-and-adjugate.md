@@ -9,7 +9,7 @@ provenance:
   proof: not-applicable
 deps: [def-matrices-over-a-commutative-ring,
        def-determinant-of-a-square-matrix,
-       def-ring-matrix-product-identity-and-transpose, def-integer-power]
+       def-ring-matrix-product-identity-and-transpose]
 justified_by: []
 aliases: []
 landmark: false
@@ -35,9 +35,12 @@ For $0\leq i,j<n$, the **deleted-row-and-column matrix** $A^{(i,j)}$ is
 obtained by deleting row $i$ and column $j$. The **minor** and **cofactor** at
 $(i,j)$ are
 
-$$M_{ij}(A):=\det(A^{(i,j)}),\qquad C_{ij}(A):=(-1)^{i+j}M_{ij}(A),$$
+$$M_{ij}(A):=\det(A^{(i,j)}),\qquad C_{ij}(A):=\varepsilon_{ij}M_{ij}(A),$$
 
-using integer powers as in [[def-integer-power]]. When $n=1$,
+where the sign is taken in $R$ by parity: $\varepsilon_{ij}:=1_R$ when $i+j$ is
+even and $\varepsilon_{ij}:=-1_R$ when $i+j$ is odd. Writing this as
+$(-1)^{i+j}$ is the usual abbreviation; it is the ring element $-1_R$ raised to
+a natural-number power in $R$, not a real power. When $n=1$,
 $A^{(0,0)}$ is the unique $0\times0$ matrix and its determinant is defined
 locally to be $1$. For $n>1$, the determinant is the published matrix
 determinant ([[def-determinant-of-a-square-matrix]]).
