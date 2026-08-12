@@ -1,0 +1,616 @@
+[
+  {
+    "order": 183,
+    "id": "pi-the-equivalent-characterizations",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "pi: the Equivalent Characterizations",
+    "companion": "pi-the-equivalent-characterizations-examples",
+    "requires": [
+      "arc-length-and-rectifiable-curves",
+      "sine-cosine-and-the-definition-of-pi"
+    ],
+    "items": [
+      {
+        "id": "def-circular-arcs-circumference-and-diameter",
+        "kind": "definition",
+        "title": "Circular arcs, circumference as arc length, and diameter",
+        "strategy": "For r>0 and a centre c in R^2, use the standard once-around path gamma(t)=c+r(cos t,sin t) on [0,2pi], its restrictions for circular arcs, C(r)=L(gamma), and d(r)=2r. State explicitly that the path traverses the circle once; the companion's multiple-traversal example shows why that clause matters. The definition is literature-derived and uses the already published polygonal-supremum notion of arc length.",
+        "deps": [
+          "def-path-polygonal-length-and-rectifiability-in-rn",
+          "def-p-norms-on-rn",
+          "def-pi-via-first-positive-cosine-zero"
+        ]
+      },
+      {
+        "id": "def-riemann-area-between-continuous-graphs",
+        "kind": "definition",
+        "title": "Riemann area between two continuous graphs and the disc as a vertically simple region",
+        "strategy": "For continuous g<=f on [a,b], define the Riemann area of {(x,y):a<=x<=b, g(x)<=y<=f(x)} as integral_a^b(f-g). Record the unit disc as the region between plus and minus sqrt(1-x^2) on [-1,1]. This is a deliberately local area convention available at order 183, not a claim that arbitrary planar sets already have Jordan area.",
+        "deps": [
+          "thm-continuous-implies-integrable",
+          "def-darboux-integral",
+          "thm-of-square-roots"
+        ]
+      },
+      {
+        "id": "thm-pi-zero-and-period-characterizations",
+        "kind": "theorem",
+        "title": "Pi is equivalently the first sine zero, twice the first cosine zero, and half the least common period",
+        "strategy": "State the equivalence for a positive real p: p=pi; p is the least positive zero of sine; p/2 is the least positive zero of cosine; and 2p is the least positive common period of sine and cosine. Each direction is a faithful repackaging of the published definition, first-sine-zero corollary, and zero-set/least-period theorem; spell out the positivity and leastness clauses so an arbitrary later zero or period cannot satisfy the characterization.",
+        "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ]
+      },
+      {
+        "id": "thm-unit-semicircle-arc-length-is-pi",
+        "kind": "theorem",
+        "title": "The arc length of a unit semicircle is pi",
+        "strategy": "Parametrize either unit semicircle once by gamma(t)=(cos t,sin t) on an interval of length pi. Its derivative has Euclidean norm one by the sine/cosine derivatives and Pythagorean identity, so the published C1 speed formula gives length integral_0^pi 1=pi. Mention that monotone reparametrization leaves this value unchanged.",
+        "deps": [
+          "def-circular-arcs-circumference-and-diameter",
+          "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-arc-length-is-invariant-under-monotone-reparametrization"
+        ]
+      },
+      {
+        "id": "thm-circle-circumference-diameter-ratio-is-pi",
+        "kind": "theorem",
+        "title": "Every circle has circumference 2 pi r and circumference-to-diameter ratio pi",
+        "strategy": "For r>0 compute the speed of c+r(cos t,sin t) as r on [0,2pi], hence C(r)=2pi r by the C1 length formula. Divide only after recording d(r)=2r>0. Include the unit circle and the two-semicircle decomposition as checks, but do not use a geometric circumference formula as an assumption.",
+        "deps": [
+          "def-circular-arcs-circumference-and-diameter",
+          "thm-unit-semicircle-arc-length-is-pi",
+          "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ]
+      },
+      {
+        "id": "thm-disc-area-is-pi-r-squared",
+        "kind": "theorem",
+        "title": "A disc of radius r has Riemann area pi r squared; in particular the unit disc has area pi",
+        "strategy": "First compute the unit-disc area as 2 integral_{-1}^1 sqrt(1-x^2) dx. Substitute x=sin t on [-pi/2,pi/2]; cosine is nonnegative there, so the integrand becomes 2 cos^2 t. Use 2cos^2 t=1+cos(2t) and the FTC to obtain pi. For r>0 substitute x=ru in the vertically simple formula and obtain the factor r^2. Keep this proof separate from circumference so neither geometric formula assumes the other.",
+        "deps": [
+          "def-riemann-area-between-continuous-graphs",
+          "thm-substitution",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ]
+      },
+      {
+        "id": "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder",
+        "kind": "theorem",
+        "title": "The Gregory-Leibniz series: pi over four equals 1-1/3+1/5-1/7+...",
+        "strategy": "For each N use the exact finite identity 1/(1+x^2)=sum_{k=0}^N(-1)^k x^{2k}+(-1)^{N+1}x^{2N+2}/(1+x^2). Integrate on [0,1] and bound the remainder in absolute value by 1/(2N+3), proving convergence without termwise integration of an endpoint power series. Independently evaluate the integral as pi/4 by x=tan t on [0,pi/4], using tan(pi/4)=1 and tan'=1+tan^2.",
+        "deps": [
+          "def-series",
+          "def-tangent-cotangent-secant-cosecant",
+          "thm-tangent-cotangent-secant-cosecant-derivatives-and-periods",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-substitution",
+          "lem-integral-elementary-bounds",
+          "thm-squeeze"
+        ]
+      },
+      {
+        "id": "lem-wallis-integrals-recurrence-and-squeeze",
+        "kind": "lemma",
+        "title": "Wallis integrals satisfy the two-step recurrence, closed forms, and the adjacent-integral squeeze",
+        "strategy": "For I_n=integral_0^{pi/2} sin^n t dt, prove I_0=pi/2, I_1=1 and I_n=((n-1)/n)I_{n-2} by integration by parts, with the endpoint term checked at n>=2. Iterate separately for even and odd n. From 0<=sin t<=1 obtain I_{2m+1}<=I_{2m}<=I_{2m-1}; combine the recurrence with these inequalities to squeeze I_{2m}/I_{2m+1} to one. Treat m=0 and the first legal recurrence index explicitly.",
+        "deps": [
+          "thm-integration-by-parts",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "lem-integral-elementary-bounds"
+        ]
+      },
+      {
+        "id": "thm-wallis-product-for-pi",
+        "kind": "theorem",
+        "title": "Wallis's product: pi over two is the limit of the finite Wallis products",
+        "strategy": "Substitute the even and odd closed forms from the Wallis-integral lemma into I_{2m}/I_{2m+1}. Its squeeze limit is one, leaving pi/2 as the limit of product_{k=1}^m (2k)^2/((2k-1)(2k+1)). State the product as a limit of finite products, not as an unexplained infinite multiplication, and check the empty product at m=0 separately from the asserted m->infinity limit.",
+        "deps": [
+          "lem-wallis-integrals-recurrence-and-squeeze",
+          "def-sequence",
+          "thm-algebra-of-limits",
+          "thm-squeeze"
+        ]
+      },
+      {
+        "id": "lem-viete-finite-cosine-product-and-nested-radicals",
+        "kind": "lemma",
+        "title": "The finite Viète cosine product and its positive nested-radical factors",
+        "strategy": "Iterate sin x=2 sin(x/2)cos(x/2) to obtain sin x=2^n sin(x/2^n) product_{k=1}^n cos(x/2^k). At x=pi/2 all cosine factors are positive. Repeatedly apply the positive half-angle identity cos(theta/2)=sqrt(2+2cos theta)/2, beginning with cos(pi/4)=sqrt(2)/2, to identify exactly the successive nested radicals. Prove the finite identity by induction and display the n=0 empty product.",
+        "deps": [
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-of-square-roots"
+        ]
+      },
+      {
+        "id": "thm-viete-product-for-pi",
+        "kind": "theorem",
+        "title": "Viète's nested-radical product: two over pi is the limit of the finite cosine products",
+        "strategy": "Set x=pi/2 in the finite product lemma. Rewrite the leading factor as (pi/2) times sin(pi/2^{n+1})/(pi/2^{n+1}); the published small-angle limit makes it tend to pi/2. Divide the identity only by positive factors, use the algebra of limits, and conclude 2/pi=product_{k>=1}cos(pi/2^{k+1}); then substitute the lemma's positive nested radicals. Keep the finite-product limit explicit.",
+        "deps": [
+          "lem-viete-finite-cosine-product-and-nested-radicals",
+          "cor-sin-x-over-x-limit",
+          "thm-algebra-of-limits",
+          "def-sequence"
+        ]
+      },
+      {
+        "id": "thm-pi-equivalent-characterizations-ledger",
+        "kind": "theorem",
+        "title": "The zero, period, arc-length, area, circumference, series, and product characterizations all give the same pi",
+        "strategy": "Collect the preceding theorems into one quantified equivalence ledger: the library's twice-first-cosine-zero pi is the first sine zero, half the least common period, the unit-semicircle length, the unit-disc area, C/d for every positive-radius circle, four times the Gregory-Leibniz sum, twice the Wallis-product limit, and twice the reciprocal Viète-product limit. The proof is a citation-by-citation conjunction, not a new definition and not a circular geometric argument.",
+        "deps": [
+          "thm-pi-zero-and-period-characterizations",
+          "thm-unit-semicircle-arc-length-is-pi",
+          "thm-circle-circumference-diameter-ratio-is-pi",
+          "thm-disc-area-is-pi-r-squared",
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder",
+          "thm-wallis-product-for-pi",
+          "thm-viete-product-for-pi"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 184,
+    "id": "pi-the-equivalent-characterizations-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "pi: the Equivalent Characterizations: Examples and Counterexamples",
+    "requires": [
+      "pi-the-equivalent-characterizations"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-unit-circle-pi-calibration-table",
+        "kind": "example",
+        "title": "One unit circle gives semicircle length pi, circumference 2 pi, diameter 2, and disc area pi",
+        "strategy": "Apply the three geometric characterization theorems at r=1 and arrange the values so the normalizing factors are visible. This is a consistency calculation, not a second proof of any formula.",
+        "deps": [
+          "thm-unit-semicircle-arc-length-is-pi",
+          "thm-circle-circumference-diameter-ratio-is-pi",
+          "thm-disc-area-is-pi-r-squared"
+        ]
+      },
+      {
+        "id": "ex-gregory-leibniz-partial-sums-with-certified-error",
+        "kind": "example",
+        "title": "Gregory-Leibniz partial sums bracket pi with an explicit remainder bound",
+        "strategy": "Specialize the finite-remainder proof after N terms to |pi-4 sum_{k=0}^N(-1)^k/(2k+1)|<=4/(2N+3), and list the first few alternating brackets. Emphasize the slow O(1/N) convergence rather than presenting uncertified decimal digits.",
+        "deps": [
+          "thm-gregory-leibniz-series-for-pi-from-a-finite-remainder"
+        ]
+      },
+      {
+        "id": "ex-wallis-partial-products-and-integral-bounds",
+        "kind": "example",
+        "title": "Wallis partial products are trapped by adjacent sine-power integrals",
+        "strategy": "Write the m=1,2,3 finite products and recover the two-sided bounds supplied by I_{2m+1}<=I_{2m}<=I_{2m-1}. Keep the inequalities exact and show how they force the product limit without relying on a decimal approximation of pi.",
+        "deps": [
+          "lem-wallis-integrals-recurrence-and-squeeze",
+          "thm-wallis-product-for-pi"
+        ]
+      },
+      {
+        "id": "ex-viete-first-nested-radical-approximants",
+        "kind": "example",
+        "title": "The first Viète nested-radical products approximate two over pi",
+        "strategy": "Display the first four finite products from the positive half-angle recurrence, invert and double them to obtain approximants to pi, and certify convergence by the finite-product identity and sin x/x limit rather than by numerical pattern recognition.",
+        "deps": [
+          "lem-viete-finite-cosine-product-and-nested-radicals",
+          "thm-viete-product-for-pi"
+        ]
+      },
+      {
+        "id": "fs-any-positive-zero-of-sine-characterizes-pi",
+        "kind": "false-statement",
+        "title": "FALSE: any positive zero of sine characterizes pi",
+        "strategy": "Refute with 2pi, which is positive and is a sine zero but is not pi because pi>0. State the correction: least positive is indispensable, and the complete zero set consists of integer multiples of pi.",
+        "deps": [
+          "thm-pi-zero-and-period-characterizations"
+        ]
+      },
+      {
+        "id": "fs-circumference-to-radius-ratio-is-pi",
+        "kind": "false-statement",
+        "title": "FALSE: circumference divided by radius equals pi",
+        "strategy": "For every r>0 the circumference theorem gives C(r)/r=2pi, whereas C(r)/d(r)=pi. Positivity of pi rules out equality with pi and isolates the missing factor of two.",
+        "deps": [
+          "thm-circle-circumference-diameter-ratio-is-pi"
+        ]
+      },
+      {
+        "id": "cex-a-multiple-traversal-has-the-same-circle-trace-but-greater-length",
+        "kind": "counterexample",
+        "title": "A twice-traversed circle has the same trace but twice the path length",
+        "strategy": "Compare gamma(t)=(cos t,sin t) on [0,2pi] with beta(t)=(cos(2t),sin(2t)) on the same interval. Their images coincide, but the C1 speed formula gives lengths 2pi and 4pi. This explains why circumference uses a once-around parametrization and why arbitrary path length is not determined by the trace when multiplicity is allowed.",
+        "deps": [
+          "def-circular-arcs-circumference-and-diameter",
+          "thm-c1-paths-have-length-equal-to-the-integral-of-speed"
+        ]
+      }
+    ],
+    "companion": "pi-the-equivalent-characterizations"
+  },
+  {
+    "order": 241,
+    "id": "line-integrals-and-the-gradient-theorem",
+    "kind": "A",
+    "category": "real-analysis",
+    "title": "Line Integrals and the Gradient Theorem",
+    "companion": "line-integrals-and-the-gradient-theorem-examples",
+    "requires": [
+      "the-fundamental-theorems-of-calculus",
+      "the-total-derivative",
+      "arc-length-and-rectifiable-curves"
+    ],
+    "items": [
+      {
+        "id": "def-piecewise-c1-path-operations-and-oriented-reparametrizations",
+        "kind": "definition",
+        "title": "Reversal, concatenation, closed paths, and oriented piecewise-C1 reparametrizations",
+        "strategy": "For piecewise-C1 paths define the reversed path, the normalized concatenation on [0,1], a closed path by equality of endpoints, and a piecewise-C1 reparametrization gamma composed with a bijection whose derivative has a fixed nonzero sign on its smooth pieces. Call it orientation-preserving or orientation-reversing according to that sign. Include constant paths even though they are not regular, since their line integrals must be zero.",
+        "deps": [
+          "def-path-polygonal-length-and-rectifiability-in-rn",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length"
+        ]
+      },
+      {
+        "id": "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+        "kind": "definition",
+        "title": "Scalar line integrals with respect to arc length and vector-field line integrals",
+        "strategy": "For a continuous scalar field f and continuous vector field F on a set containing the image of a piecewise-C1 path gamma, define integral_gamma f ds as the sum of integral f(gamma(t))||gamma'(t)|| over smooth pieces and integral_gamma F dot dr as the corresponding sum of integral <F(gamma(t)),gamma'(t)>. The next lemma proves independence of the chosen admissible partition and must be named in justified_by when authored.",
+        "deps": [
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations",
+          "def-euclidean-inner-product",
+          "thm-continuous-implies-integrable"
+        ]
+      },
+      {
+        "id": "lem-line-integrals-are-independent-of-the-piecewise-c1-partition",
+        "kind": "lemma",
+        "title": "The piecewise-C1 line-integral sums do not depend on the admissible partition",
+        "strategy": "Take the common refinement of two finite admissible partitions. Additivity of the one-variable Riemann integral shows that subdividing a smooth piece leaves each scalar or vector sum unchanged; hence both original sums equal the common-refinement sum. Treat the constant path and a partition with no interior breakpoints explicitly. This is the well-definedness discharge for the preceding definition.",
+        "deps": [
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "thm-additivity-over-subintervals"
+        ]
+      },
+      {
+        "id": "thm-line-integrals-under-oriented-reparametrization",
+        "kind": "theorem",
+        "title": "Scalar line integrals are parametrization-independent; vector line integrals retain orientation and change sign when it reverses",
+        "strategy": "On each smooth piece apply one-variable substitution and the chain rule to gamma composed with h. The absolute value in ||(gamma composed h)'|| removes the sign for scalar integrals; the vector integrand retains h', so an orientation-reversing bijection swaps limits and introduces a minus sign. Refine the partitions to handle piecewise-C1 paths, and state bijectivity/nonvanishing-derivative hypotheses exactly so multiple coverings are excluded.",
+        "deps": [
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "lem-line-integrals-are-independent-of-the-piecewise-c1-partition",
+          "thm-substitution"
+        ]
+      },
+      {
+        "id": "thm-line-integrals-under-reversal-and-concatenation",
+        "kind": "theorem",
+        "title": "Line integrals under reversal and concatenation",
+        "strategy": "Use the affine reversal t maps to a+b-t and the two affine halves of the normalized concatenation. Scalar integrals are unchanged by reversal, vector integrals are negated, and both kinds add under concatenation when endpoints match. Check constant paths and the join point, whose derivative need not exist but is an allowed piecewise breakpoint.",
+        "deps": [
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "lem-line-integrals-are-independent-of-the-piecewise-c1-partition",
+          "thm-line-integrals-under-oriented-reparametrization",
+          "thm-additivity-over-subintervals"
+        ]
+      },
+      {
+        "id": "thm-scalar-and-vector-line-integral-estimates",
+        "kind": "theorem",
+        "title": "Line-integral estimates by arc length and the supremum of the field",
+        "strategy": "For a path of finite length prove |integral_gamma f ds|<=M L(gamma) when |f|<=M on the trace, and |integral_gamma F dot dr|<=M L(gamma) when ||F||<=M there. Apply the ordinary integral bound and, in the vector case, Cauchy-Schwarz pointwise; sum over pieces and use the published piecewise-C1 length formula. Include length zero and M=0.",
+        "deps": [
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-integral-elementary-bounds",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length"
+        ]
+      },
+      {
+        "id": "cor-scalar-line-integral-of-one-is-arc-length",
+        "kind": "corollary",
+        "title": "The scalar line integral of one is the arc length",
+        "strategy": "Put f=1 in the scalar line-integral definition and compare the resulting sum of speed integrals with the published piecewise-C1 arc-length theorem. The identity includes constant paths and degenerate parameter intervals, for which both sides are zero.",
+        "deps": [
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length"
+        ]
+      },
+      {
+        "id": "cor-arc-length-accumulation-derivative-is-speed",
+        "kind": "corollary",
+        "title": "For a C1 path the arc-length accumulation function has derivative equal to speed",
+        "strategy": "For s(t)=L(gamma restricted to [a,t]), use the C1 speed formula to write s(t)=integral_a^t ||gamma'(u)||du. Continuity of the speed and the first FTC give s'(t)=||gamma'(t)||, with relative one-sided endpoint derivatives. Do not claim unit speed unless the path is parametrized by arc length.",
+        "deps": [
+          "def-arc-length-function",
+          "thm-c1-paths-have-length-equal-to-the-integral-of-speed",
+          "thm-ftc-first-part"
+        ]
+      },
+      {
+        "id": "def-piecewise-c1-path-connected-conservative-and-path-independent",
+        "kind": "definition",
+        "title": "Piecewise-C1 path-connected domains, potential functions, conservative fields, and path independence",
+        "strategy": "Call U piecewise-C1 path-connected when every ordered pair of points is joined in U by such a path; this is the exact connectivity notion used on this page and does not import the later general-topology path definition. For continuous F on open U, define a C1 potential phi by F=grad phi, call F conservative when a potential exists, and define path independence only among piecewise-C1 paths with the same ordered endpoints.",
+        "deps": [
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      },
+      {
+        "id": "thm-gradient-theorem-for-line-integrals",
+        "kind": "theorem",
+        "title": "The gradient theorem: the line integral of a gradient is the endpoint increment",
+        "strategy": "Let phi be C1 on an open set containing a piecewise-C1 path gamma. On every smooth piece the total-derivative chain rule gives (phi composed gamma)'=<grad phi(gamma),gamma'>. Apply Newton-Leibniz on each closed subinterval and telescope across all joins to obtain integral_gamma grad phi dot dr=phi(gamma(b))-phi(gamma(a)). Include constant paths and coincident endpoints.",
+        "deps": [
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "def-jacobian-matrix-and-gradient",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-newton-leibniz-with-interior-derivative"
+        ]
+      },
+      {
+        "id": "cor-conservative-fields-are-path-independent-and-have-zero-circulation",
+        "kind": "corollary",
+        "title": "Conservative fields are path-independent and have zero integral around every closed path",
+        "strategy": "If F=grad phi, apply the gradient theorem to any two paths with the same endpoints and to a closed path. Both conclusions are endpoint statements; no connectedness is needed for the closed-loop clause, while path independence is asserted within every component in which the relevant paths exist.",
+        "deps": [
+          "def-piecewise-c1-path-connected-conservative-and-path-independent",
+          "thm-gradient-theorem-for-line-integrals"
+        ]
+      },
+      {
+        "id": "thm-path-independence-iff-zero-closed-loop-integrals",
+        "kind": "theorem",
+        "title": "Path independence is equivalent to zero integral around every closed piecewise-C1 path",
+        "strategy": "On a piecewise-C1 path-connected domain, one direction applies path independence to a closed path and the constant path. For the reverse direction concatenate alpha with the reversal of beta; additivity and the reversal sign make its zero loop integral equal integral_alpha F dot dr minus integral_beta F dot dr. State the path-connectedness hypothesis because otherwise endpoint pairs in different components have no comparison paths.",
+        "deps": [
+          "def-piecewise-c1-path-connected-conservative-and-path-independent",
+          "thm-line-integrals-under-reversal-and-concatenation"
+        ]
+      },
+      {
+        "id": "thm-path-independent-field-has-a-potential-by-line-integrals",
+        "kind": "theorem",
+        "title": "A continuous path-independent field has a potential constructed by line integrals",
+        "strategy": "Let U be nonempty, open, and piecewise-C1 path-connected; fix a in U and define phi(x)=integral_a^x F dot dr, which is well-defined by path independence. For small h use a comparison path ending with the coordinate segment from x to x+h e_j. The difference quotient is an average of F_j on that segment and tends to F_j(x) by continuity. Thus all partials are the continuous components F_j, and the published continuous-partials theorem makes phi C1 with grad phi=F. Record the basepoint choice and phi(a)=0.",
+        "deps": [
+          "def-piecewise-c1-path-connected-conservative-and-path-independent",
+          "thm-line-integrals-under-reversal-and-concatenation",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ]
+      },
+      {
+        "id": "thm-conservative-path-independent-and-zero-loop-equivalence",
+        "kind": "theorem",
+        "title": "Conservative, path-independent, and zero-closed-loop conditions are equivalent",
+        "strategy": "For a continuous field on a nonempty open piecewise-C1 path-connected domain, combine the gradient theorem, the closed-loop equivalence, and the line-integral construction of a potential. State all three clauses in one theorem and identify the constructed normalized potential. Do not replace piecewise-C1 path-connectedness by the bare word connected.",
+        "deps": [
+          "cor-conservative-fields-are-path-independent-and-have-zero-circulation",
+          "thm-path-independence-iff-zero-closed-loop-integrals",
+          "thm-path-independent-field-has-a-potential-by-line-integrals"
+        ]
+      },
+      {
+        "id": "cor-potentials-differ-by-a-componentwise-constant",
+        "kind": "corollary",
+        "title": "Two potentials of the same field differ by a constant on each piecewise-C1 path component",
+        "strategy": "Apply the gradient theorem to grad(phi-psi)=0 along a path joining arbitrary points of one piecewise-C1 path component. The endpoint increment vanishes. State componentwise constancy rather than global constancy when the domain is disconnected.",
+        "deps": [
+          "def-piecewise-c1-path-connected-conservative-and-path-independent",
+          "thm-gradient-theorem-for-line-integrals"
+        ]
+      },
+      {
+        "id": "lem-potentials-glue-over-a-path-connected-overlap",
+        "kind": "lemma",
+        "title": "Potentials glue after a constant adjustment over a nonempty path-connected overlap",
+        "strategy": "Let phi_1 and phi_2 be potentials for the same field on open U_1 and U_2, with nonempty piecewise-C1 path-connected intersection. Their difference is constant on the overlap by potential uniqueness. Subtract that constant from phi_2, define the common function on U_1 union U_2, and verify it is C1 and has the required gradient. The overlap hypotheses are essential for a single adjustment to work.",
+        "deps": [
+          "cor-potentials-differ-by-a-componentwise-constant"
+        ]
+      },
+      {
+        "id": "def-closed-and-exact-c1-vector-fields",
+        "kind": "definition",
+        "title": "Exact and closed C1 vector fields",
+        "strategy": "For an open U in R^n and a C1 vector field F=(F_1,...,F_n), call F exact when F=grad phi for some C2 scalar potential phi, and closed when partial_j F_i=partial_i F_j for every i,j. Explain the C2/C1 regularity pairing and identify these as the vector-field forms of exact and closed one-forms, without importing differential-form machinery.",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      },
+      {
+        "id": "lem-clairaut-for-c2-potentials-by-rectangular-differences",
+        "kind": "lemma",
+        "title": "Continuous second partials of a scalar potential commute",
+        "strategy": "For a C2 phi and distinct coordinate directions i,j, form the rectangular second difference at x with small nonzero side lengths h,k lying in an open ball inside the domain. Apply the one-variable mean value theorem first in direction i then j to identify it with partial_j partial_i phi at an interior point; reverse the order to identify the same quotient with partial_i partial_j phi at another interior point. Let h,k tend to zero and use continuity. The i=j case is tautological.",
+        "deps": [
+          "def-directional-and-partial-derivatives",
+          "cor-mean-value-theorem"
+        ]
+      },
+      {
+        "id": "thm-exact-c1-vector-fields-are-closed",
+        "kind": "theorem",
+        "title": "Every exact C1 vector field is closed",
+        "strategy": "Write F_i=partial_i phi for a C2 potential. The preceding mixed-partial lemma gives partial_j F_i=partial_j partial_i phi=partial_i partial_j phi=partial_i F_j for every i,j. Keep the C1/C2 hypotheses in the statement; exactness with a merely C1 potential does not make these second partials available.",
+        "deps": [
+          "def-closed-and-exact-c1-vector-fields",
+          "lem-clairaut-for-c2-potentials-by-rectangular-differences"
+        ]
+      },
+      {
+        "id": "def-star-shaped-open-subset-of-rn",
+        "kind": "definition",
+        "title": "Star-shaped open subsets of Euclidean space",
+        "strategy": "Define a nonempty open U to be star-shaped with respect to a in U when a+t(x-a) belongs to U for every x in U and 0<=t<=1. Record that convex open sets are star-shaped about every point, while the definition itself requires a specified centre and therefore excludes the empty set.",
+        "deps": [
+          "def-convex-subset-of-euclidean-space"
+        ]
+      },
+      {
+        "id": "thm-poincare-lemma-for-star-shaped-domains",
+        "kind": "theorem",
+        "title": "Poincare's lemma on a star-shaped domain: every closed C1 field is exact",
+        "strategy": "Let a be a star centre and define phi(x)=integral_0^1 <F(a+t(x-a)),x-a> dt. Differentiate under the integral. Closedness converts partial_j F_i into partial_i F_j, so the jth partial integrand becomes d/dt of t F_j(a+t(x-a)); Newton-Leibniz gives partial_j phi=F_j(x). Verify continuity on the compact parameter interval, the t=0 boundary term, and C2 regularity from F being C1.",
+        "deps": [
+          "def-closed-and-exact-c1-vector-fields",
+          "def-star-shaped-open-subset-of-rn",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ]
+      },
+      {
+        "id": "cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains",
+        "kind": "corollary",
+        "title": "On a star-shaped open domain, closed, exact, conservative, path-independent, and zero-loop are equivalent",
+        "strategy": "A star-shaped domain is piecewise-C1 path-connected by its two radial line segments. Combine exact-implies-closed, the star-shaped Poincare lemma, and the conservative/path-independence/zero-loop theorem. Align regularity: F is C1, exact means a C2 potential, and conservative uses the same potential viewed as C1.",
+        "deps": [
+          "def-star-shaped-open-subset-of-rn",
+          "thm-exact-c1-vector-fields-are-closed",
+          "thm-poincare-lemma-for-star-shaped-domains",
+          "thm-conservative-path-independent-and-zero-loop-equivalence"
+        ]
+      },
+      {
+        "id": "rem-domain-hypotheses-for-closed-versus-exact",
+        "kind": "remark",
+        "title": "Closedness is local, exactness is global, and a domain hypothesis cannot be omitted",
+        "strategy": "Record the precise logical boundary established here: exact C1 fields are closed on every open domain, and closed C1 fields are exact on star-shaped open domains. Do not state the converse on arbitrary connected domains. Mention that simple connectedness is the standard broader sufficient hypothesis, but its homotopy machinery occurs later in the library and is not silently imported here; the companion gives the punctured-plane obstruction.",
+        "deps": [
+          "thm-exact-c1-vector-fields-are-closed",
+          "cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 242,
+    "id": "line-integrals-and-the-gradient-theorem-examples",
+    "kind": "B",
+    "category": "real-analysis",
+    "title": "Line Integrals and the Gradient Theorem: Examples and Counterexamples",
+    "requires": [
+      "line-integrals-and-the-gradient-theorem"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-scalar-line-integral-over-a-unit-semicircle",
+        "kind": "example",
+        "title": "The scalar line integral of x over the right unit semicircle equals two",
+        "strategy": "Parametrize the right semicircle by gamma(t)=(cos t,sin t) for -pi/2<=t<=pi/2. Its speed is one and x=cos t, so the scalar line integral is integral cos t=2. Reverse the path to check orientation independence.",
+        "deps": [
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "thm-line-integrals-under-oriented-reparametrization"
+        ]
+      },
+      {
+        "id": "ex-line-segment-scalar-and-vector-line-integrals",
+        "kind": "example",
+        "title": "Scalar and vector line integrals along an affine line segment",
+        "strategy": "For gamma(t)=(1-t)p+tq on [0,1], compute speed ||q-p|| and write both formulas explicitly: integral_gamma f ds=||q-p|| integral_0^1 f((1-t)p+tq)dt and integral_gamma F dot dr=integral_0^1 <F((1-t)p+tq),q-p>dt. Include p=q, where both integrals vanish.",
+        "deps": [
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths"
+        ]
+      },
+      {
+        "id": "ex-gradient-theorem-for-a-polynomial-potential",
+        "kind": "example",
+        "title": "A polynomial potential evaluates work along every path by endpoints",
+        "strategy": "Take phi(x,y,z)=x^2 y+yz^2 and F=grad phi. Verify the three components and evaluate the integral from a stated point p to q by phi(q)-phi(p), then check the value directly along the affine segment. This exercises both the gradient theorem and the line-segment formula.",
+        "deps": [
+          "thm-gradient-theorem-for-line-integrals",
+          "ex-line-segment-scalar-and-vector-line-integrals"
+        ]
+      },
+      {
+        "id": "ex-constructing-a-potential-on-an-open-rectangle",
+        "kind": "example",
+        "title": "Constructing a potential on a rectangle by coordinate-segment integrals",
+        "strategy": "For a concrete closed C1 planar field on an open rectangle, fix (a,b) and define phi(x,y)=integral_a^x F_1(t,b)dt+integral_b^y F_2(x,t)dt. Differentiate, use closedness to recover F_1 and F_2, and compare with the radial Poincare formula. This makes the construction algorithm visible rather than merely asserting existence.",
+        "deps": [
+          "def-closed-and-exact-c1-vector-fields",
+          "thm-poincare-lemma-for-star-shaped-domains"
+        ]
+      },
+      {
+        "id": "cex-the-one-form-y-dx-is-path-dependent",
+        "kind": "counterexample",
+        "title": "The vector field (y,0) gives different integrals along two paths with the same endpoints",
+        "strategy": "From (0,0) to (1,0), integrate along the x-axis to get zero and along beta(t)=(t,t(1-t)) to get integral_0^1 t(1-t)dt=1/6. Concatenating one path with the reverse of the other yields a closed loop with nonzero integral, displaying both failures in the equivalence theorem.",
+        "deps": [
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "thm-line-integrals-under-reversal-and-concatenation",
+          "thm-path-independence-iff-zero-closed-loop-integrals"
+        ]
+      },
+      {
+        "id": "cex-vortex-field-is-closed-but-not-exact-on-the-punctured-plane",
+        "kind": "counterexample",
+        "title": "The vortex field is closed but not exact on the punctured plane",
+        "strategy": "On U=R^2 minus {(0,0)} take F(x,y)=(-y/(x^2+y^2),x/(x^2+y^2)). Compute the cross partials and show they agree. On the counterclockwise unit circle the vector integrand is identically one, so the integral is 2pi. The gradient theorem would force zero for an exact field; hence F is closed but not exact, not conservative, and not path-independent. Note that U is path-connected but not star-shaped or simply connected.",
+        "deps": [
+          "def-closed-and-exact-c1-vector-fields",
+          "thm-gradient-theorem-for-line-integrals",
+          "thm-conservative-path-independent-and-zero-loop-equivalence"
+        ]
+      },
+      {
+        "id": "fs-every-closed-c1-field-on-a-connected-open-set-is-exact",
+        "kind": "false-statement",
+        "title": "FALSE: every closed C1 field on a connected open set is exact",
+        "strategy": "Use the vortex field on the punctured plane. The domain is connected by explicit polygonal paths, the field is closed, and its unit-circle integral is 2pi, contradicting exactness by the gradient theorem. Correct the statement with the star-shaped hypothesis proved on the A page; mention simple connectedness only as the standard broader condition, not as a theorem proved here.",
+        "deps": [
+          "cex-vortex-field-is-closed-but-not-exact-on-the-punctured-plane",
+          "cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains"
+        ]
+      },
+      {
+        "id": "fs-vector-line-integrals-are-invariant-under-reversal",
+        "kind": "false-statement",
+        "title": "FALSE: vector line integrals are invariant under reversing a path",
+        "strategy": "Take the constant field F=(1,0) and the segment from (0,0) to (1,0). The forward integral is one and the reversed integral is minus one. Contrast this with scalar ds integrals, where the speed's absolute value makes reversal invariant.",
+        "deps": [
+          "thm-line-integrals-under-oriented-reparametrization",
+          "ex-line-segment-scalar-and-vector-line-integrals"
+        ]
+      },
+      {
+        "id": "ex-a-vector-line-integral-counts-multiple-traversals",
+        "kind": "example",
+        "title": "A vector line integral around the vortex counts repeated traversals",
+        "strategy": "Parametrize the unit circle once by gamma(t)=(cos t,sin t) and twice by beta(t)=(cos(2t),sin(2t)) on [0,2pi]. For the vortex field the integrals are respectively 2pi and 4pi. The images and orientations agree, but beta is not a bijective reparametrization of gamma, so the parametrization-invariance theorem is not contradicted.",
+        "deps": [
+          "cex-vortex-field-is-closed-but-not-exact-on-the-punctured-plane",
+          "thm-line-integrals-under-oriented-reparametrization"
+        ]
+      }
+    ],
+    "companion": "line-integrals-and-the-gradient-theorem"
+  }
+]

@@ -1,0 +1,751 @@
+[
+  {
+    "order": 363,
+    "id": "limits-and-colimits",
+    "kind": "A",
+    "category": "category-theory",
+    "title": "Limits and Colimits",
+    "companion": "limits-and-colimits-examples",
+    "requires": [
+      "universal-properties-and-the-yoneda-lemma",
+      "cardinal-arithmetic-and-cofinality"
+    ],
+    "items": [
+      {
+        "id": "def-constant-diagram-cone-cocone-and-cone-morphism",
+        "kind": "definition",
+        "title": "Constant diagrams, cones, cocones, and their morphisms",
+        "deps": [
+          "def-diagram-in-a-category",
+          "def-natural-transformation",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "def-limit-and-colimit-of-a-diagram",
+        "kind": "definition",
+        "title": "Limits and colimits as terminal cones and initial cocones, with existence and uniqueness in their universal properties",
+        "deps": [
+          "def-constant-diagram-cone-cocone-and-cone-morphism",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism",
+        "kind": "theorem",
+        "title": "Any two limits, or any two colimits, of one diagram are uniquely isomorphic compatibly with their structure maps",
+        "strategy": "Regard limits as terminal objects of the cone category. The two terminal universal properties give comparison arrows in opposite directions; uniqueness forces both composites to be identities and also forces the comparison to commute with every leg. Repeat in the cocone category for colimits, including both the existence and uniqueness clauses rather than asserting uniqueness up to isomorphism abstractly.",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "thm-initial-and-terminal-objects-are-unique-up-to-unique-isomorphism",
+          "def-isomorphism-groupoid-and-connected-category"
+        ]
+      },
+      {
+        "id": "prop-limit-colimit-duality",
+        "kind": "proposition",
+        "title": "A limiting cone for a diagram is exactly a colimiting cocone for the formally dual diagram in the opposite category",
+        "strategy": "Write the dual diagram and reverse every arrow in the cone equations. Verify that cones and their morphisms become cocones and their morphisms with composition reversed, so terminality becomes initiality. State the licensing rule explicitly: a proof by duality is available only after the hypotheses and conclusion have been translated into this exact formal dual.",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "def-opposite-category",
+          "thm-category-theoretic-duality-principle"
+        ]
+      },
+      {
+        "id": "prop-empty-limits-and-colimits-are-terminal-and-initial-objects",
+        "kind": "proposition",
+        "title": "Limits of empty diagrams are terminal objects, and colimits of empty diagrams are initial objects",
+        "strategy": "For the unique diagram from the empty category, show that a cone with apex X contains no legs and that a cone morphism is just a morphism between apices because all compatibility equations are vacuous. Terminality of the cone is therefore precisely terminality of X; apply the exact formal dual for the colimit assertion.",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "prop-limit-colimit-duality",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "def-products-and-coproducts",
+        "kind": "definition",
+        "title": "Products and coproducts as limits and colimits of discrete diagrams, including their existence-and-uniqueness equations",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "def-indexed-family"
+        ]
+      },
+      {
+        "id": "def-equalizers-and-coequalizers",
+        "kind": "definition",
+        "title": "Equalizers and coequalizers as limits and colimits of a parallel pair",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "def-pullbacks-and-pushouts",
+        "kind": "definition",
+        "title": "Pullbacks and pushouts as limits and colimits of cospans and spans",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "def-kernels-and-cokernels-as-equalizers-and-coequalizers",
+        "kind": "definition",
+        "title": "Kernels and cokernels in a category with zero morphisms as equalizers and coequalizers",
+        "deps": [
+          "def-equalizers-and-coequalizers",
+          "def-category-with-zero-morphisms"
+        ]
+      },
+      {
+        "id": "lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic",
+        "kind": "lemma",
+        "title": "The legs of a limiting cone are jointly monic, and the legs of a colimiting cocone are jointly epic",
+        "strategy": "If two arrows into the limit have equal composites with every leg, each is a cone morphism from the same cone to the limiting cone. Uniqueness in the limit universal property makes the arrows equal. Obtain the colimit clause by translating the proof through the established formal duality proposition.",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "prop-limit-colimit-duality",
+          "def-monomorphism-and-epimorphism"
+        ]
+      },
+      {
+        "id": "cor-equalizers-are-monic-and-coequalizers-are-epic",
+        "kind": "corollary",
+        "title": "Every equalizer is a monomorphism, and every coequalizer is an epimorphism",
+        "strategy": "An equalizer cone has one structure arrow, so joint monicity of its legs is ordinary monicity of that arrow. Apply the dual clause to the one-legged coequalizer cocone.",
+        "deps": [
+          "def-equalizers-and-coequalizers",
+          "lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic"
+        ]
+      },
+      {
+        "id": "lem-pullbacks-of-monomorphisms-are-monomorphisms-and-pushouts-of-epimorphisms-are-epimorphisms",
+        "kind": "lemma",
+        "title": "A pullback of a monomorphism is a monomorphism, and a pushout of an epimorphism is an epimorphism",
+        "strategy": "In a named pullback square, suppose two arrows become equal after the projection opposite the given monomorphism. Compose the pullback equation with both arrows and cancel through the given monomorphism to obtain equality after the other projection; joint monicity of the pullback legs then gives equality. Reverse the named square and all arrows for the pushout clause.",
+        "deps": [
+          "def-pullbacks-and-pushouts",
+          "lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic",
+          "prop-limit-colimit-duality",
+          "def-monomorphism-and-epimorphism"
+        ]
+      },
+      {
+        "id": "thm-pullback-and-pushout-pasting",
+        "kind": "theorem",
+        "title": "Pullback and pushout pasting: two adjacent squares give the outer universal square exactly when the remaining square is universal",
+        "strategy": "Name a composable rectangle with left and right squares. First assume both small squares are pullbacks: factor a test cone through the right square and then through the left, and run uniqueness in the reverse order. Next assume the left square and the outer rectangle are pullbacks: for a test cone over the right cospan, use the outer property to obtain an arrow and use the left property plus its uniqueness to prove that its composite has the required right component; outer uniqueness then proves uniqueness. State the symmetric version with right square fixed, and obtain the pushout assertions only by exact formal duality.",
+        "deps": [
+          "def-pullbacks-and-pushouts",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "def-cardinality-of-a-small-category-and-kappa-small-diagram",
+        "kind": "definition",
+        "title": "Assuming Choice, cardinality of a small category and κ-small diagrams",
+        "deps": [
+          "def-small-locally-small-and-large-category",
+          "lem-cardinality-of-a-well-orderable-set",
+          "def-cardinal-arithmetic",
+          "def-axiom-of-choice",
+          "def-diagram-in-a-category"
+        ]
+      },
+      {
+        "id": "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+        "kind": "definition",
+        "title": "Finite, small, and large limits and colimits; complete and cocomplete categories",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "def-cardinality-of-a-small-category-and-kappa-small-diagram",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "lem-identity-diagram-large-limit-and-initial-objects",
+        "kind": "lemma",
+        "title": "A cone over an identity diagram is weakly initial, and the identity diagram has a limit exactly when the category has an initial object",
+        "strategy": "A cone λ:ΔL⇒id_C supplies a leg L→C for every object, so L is weakly initial. If λ is limiting, its component λ_L factors the cone through itself; uniqueness forces λ_L=1_L, and then the cone equations show that every f:L→C equals λ_C, making L initial. Conversely, the unique arrows from an initial object I form a cone over id_C; for any other cone, its component at I gives the unique factorization, with all triangles forced by the cone equations. This is a genuinely large-diagram statement and is not a consequence of ordinary completeness.",
+        "deps": [
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "thm-set-has-all-small-limits",
+        "kind": "theorem",
+        "title": "Set has all small limits, realized as compatible tuples in a set-indexed product",
+        "strategy": "For a small diagram D:J→Set, form the product over the set of objects of J and cut it down to tuples satisfying D(u)(x_j)=x_k for every arrow u:j→k. Coordinate projections form a cone. Given any cone, its legs assemble its unique tuple-valued map, and the cone equations put every value in the compatible subset; equality of maps follows coordinatewise. Treat the empty object set explicitly, where the product is a singleton and compatibility is vacuous.",
+        "deps": [
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "prop-sets-and-functions-form-category-set",
+          "def-product-of-an-indexed-family",
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "thm-set-has-all-small-colimits",
+        "kind": "theorem",
+        "title": "Set has all small colimits, realized as a quotient of a set-indexed disjoint union",
+        "strategy": "For a small diagram D:J→Set, take tagged pairs (j,x) and the equivalence relation generated by (j,x)∼(k,D(u)(x)) for every arrow u:j→k. The quotient maps form a cocone. A cocone defines a function on tagged pairs constant on the generating relation, hence on its equivalence closure, so the quotient universal property gives the unique induced function. Check the empty diagram separately: the tagged union and its quotient are empty, the initial set.",
+        "deps": [
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "prop-sets-and-functions-form-category-set",
+          "def-equivalence-relation",
+          "thm-universal-property-of-the-quotient",
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "thm-small-limits-from-products-and-equalizers",
+        "kind": "theorem",
+        "title": "Every small limit can be constructed as an equalizer between products over the objects and arrows of the index category",
+        "strategy": "For D:J→C with J small, form P=∏_j D(j) and Q=∏_{u:j→k}D(k). Define s,t:P→Q by the u-coordinate s_u=D(u)p_j and t_u=p_k. An equalizer e:L→P supplies legs p_j e satisfying every cone equation. Conversely a cone gives a map to P whose two composites to Q agree coordinatewise, so it factors uniquely through e; equalizer uniqueness plus product uniqueness proves the limit uniqueness clause. Include the empty J case, where P is terminal and Q is terminal.",
+        "deps": [
+          "def-products-and-coproducts",
+          "def-equalizers-and-coequalizers",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "thm-small-colimits-from-coproducts-and-coequalizers",
+        "kind": "theorem",
+        "title": "Every small colimit can be constructed as a coequalizer between coproducts over the arrows and objects of the index category",
+        "strategy": "Apply the exact formal dual of the product–equalizer construction: use the coproduct over arrows as the source, the coproduct over objects as the target, and on the summand for u:j→k use respectively the j-injection and the composite through D(u) into the k-injection. Verify that the coequalizer cocone equations and both clauses of its universal property are precisely the dualized equations.",
+        "deps": [
+          "thm-small-limits-from-products-and-equalizers",
+          "prop-limit-colimit-duality",
+          "def-products-and-coproducts",
+          "def-equalizers-and-coequalizers"
+        ]
+      },
+      {
+        "id": "cor-completeness-and-cocompleteness-criteria",
+        "kind": "corollary",
+        "title": "A category is complete exactly when it has all small products and equalizers, and cocomplete exactly when it has all small coproducts and coequalizers",
+        "strategy": "The forward directions specialize completeness or cocompleteness to the relevant small discrete and parallel-pair shapes. The reverse directions invoke the product–equalizer and coproduct–coequalizer constructions for an arbitrary small index category. Keep both directions and the empty product or coproduct cases explicit.",
+        "deps": [
+          "thm-small-limits-from-products-and-equalizers",
+          "thm-small-colimits-from-coproducts-and-coequalizers",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness"
+        ]
+      },
+      {
+        "id": "thm-finite-limit-and-colimit-criteria",
+        "kind": "theorem",
+        "title": "Finite, nonempty finite, and connected finite (co)limit criteria in terms of products, equalizers, pullbacks, terminal objects, and their duals",
+        "strategy": "Restrict the object-and-arrow product construction to finite index categories to prove finite limits from finite products and equalizers. Replace a finite product by terminal objects and iterated binary products, and prove the pullback formulations using equalizers as pullbacks along a diagonal and binary products as pullbacks over a terminal object. For nonempty and connected finite shapes, identify exactly which empty or disconnected product data disappear. Prove the reverse implications by specializing to the named shapes, then formally dualize every clause for finite colimits.",
+        "deps": [
+          "prop-empty-limits-and-colimits-are-terminal-and-initial-objects",
+          "def-products-and-coproducts",
+          "def-equalizers-and-coequalizers",
+          "def-pullbacks-and-pushouts",
+          "thm-small-limits-from-products-and-equalizers",
+          "thm-small-colimits-from-coproducts-and-coequalizers",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "def-preservation-reflection-creation-continuity-and-cocontinuity",
+        "kind": "definition",
+        "title": "Preservation, reflection, and creation of limits and colimits; continuous and cocontinuous functors",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "def-functor-and-contravariant-functor",
+          "def-natural-isomorphism"
+        ]
+      },
+      {
+        "id": "lem-canonical-comparison-characterises-limit-preservation",
+        "kind": "lemma",
+        "title": "A functor preserves a chosen limit exactly when its canonical comparison to the chosen target limit is an isomorphism, and dually for colimits",
+        "strategy": "Given a limiting cone λ for D and a chosen limiting cone μ for FD, use μ's universal property to obtain the unique comparison c with μ_j c=Fλ_j. If Fλ is limiting, its universal property constructs an inverse to c and uniqueness proves both composite identities. Conversely an isomorphism c transports the existence and uniqueness clauses from μ to Fλ. Reverse the arrows for the colimit comparison.",
+        "deps": [
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "prop-fully-faithful-functors-reflect-limits-and-colimits",
+        "kind": "proposition",
+        "title": "Fully faithful functors reflect limits and colimits",
+        "strategy": "Suppose F sends a cone λ to a limiting cone. For any cone in the source, fullness lifts the unique mediating arrow supplied in the target; faithfulness turns the target leg equations into the required source equations and also turns equality of their images into uniqueness. Apply the same argument in opposite categories for colimits.",
+        "deps": [
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "prop-equivalences-preserve-reflect-and-create-limits-and-colimits",
+        "kind": "proposition",
+        "title": "Equivalences preserve, reflect, and create limits and colimits in the isomorphism-invariant sense",
+        "strategy": "Choose a quasi-inverse and the unit and counit natural isomorphisms. Transport cones and their mediating arrows through the two functors, using full faithfulness for reflection and essential surjectivity plus the counit to lift a limiting apex and its legs. Verify the lifted universal property and uniqueness, and explain why this proves ordinary isomorphism-invariant creation but not strict on-the-nose creation. Dualize for colimits.",
+        "deps": [
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "prop-fully-faithful-functors-reflect-limits-and-colimits",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "def-natural-isomorphism",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "prop-created-limits-exist-and-are-preserved",
+        "kind": "proposition",
+        "title": "A functor that creates limits of a given shape lifts their existence and preserves the created limits, and dually for colimits",
+        "strategy": "Start with a diagram whose image has a limit. Apply the existence clause in the definition of creation to lift an isomorphic limiting cone; the defining uniqueness of the lift makes it a source cone, and reflection built into creation proves it is limiting. Its image is the chosen target limit up to the specified isomorphism, so the comparison criterion proves preservation. Repeat with all arrows reversed.",
+        "deps": [
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "lem-canonical-comparison-characterises-limit-preservation",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "thm-chosen-limits-and-colimits-assemble-into-functors",
+        "kind": "theorem",
+        "title": "Chosen limits and colimits of a fixed small shape assemble into limit and colimit functors",
+        "strategy": "Let J be small and choose a limiting cone for every J-diagram in C. For a natural transformation α:D⇒E, compose the chosen legs of D with the components of α; naturality makes a cone over E, whose chosen limit supplies a unique induced arrow. Use equality after every chosen leg to prove preservation of identities and composition. This defines lim_J:[J,C]→C; apply the exact formal dual for colim_J.",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "def-functor-category",
+          "def-natural-transformation",
+          "def-cardinality-of-a-small-category-and-kappa-small-diagram",
+          "lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "rem-choice-behind-limit-and-colimit-functors",
+        "kind": "remark",
+        "title": "A limit for each diagram need not provide a chosen limit functor without a simultaneous choice of representatives",
+        "deps": [
+          "thm-chosen-limits-and-colimits-assemble-into-functors",
+          "def-axiom-of-choice",
+          "thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism"
+        ]
+      },
+      {
+        "id": "thm-representable-functors-preserve-small-limits",
+        "kind": "theorem",
+        "title": "Every covariantly representable functor to Set preserves all existing small limits",
+        "strategy": "First take Hom_C(X,−). For a limiting cone L→D, send f:X→L to the compatible tuple of composites with the limit legs. The limit universal property supplies an inverse from every compatible tuple, and both inverse equations follow from existence and uniqueness. A natural isomorphism from a representable functor transports this preservation result to every covariantly representable functor. State the required smallness of the index so the Set-valued limit is a set.",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "thm-set-has-all-small-limits",
+          "def-hom-functors-and-hom-bifunctor",
+          "thm-hom-assignments-are-functors",
+          "def-presheaf-representable-functor-and-representation",
+          "thm-yoneda-lemma-is-natural-in-both-variables"
+        ]
+      },
+      {
+        "id": "cor-hom-functors-are-continuous-and-send-colimits-to-limits",
+        "kind": "corollary",
+        "title": "Hom(X,−) is continuous, while Hom(−,X) sends every existing small colimit to a limit of sets",
+        "strategy": "Apply representable preservation directly to Hom(X,−). For Hom(−,X), view a colimit in C as a limit in C^op and apply the same theorem there; unpacking the opposite diagram gives the natural bijection between maps out of the colimit and compatible families of maps from its objects. Record both existence and uniqueness in this bijection.",
+        "deps": [
+          "thm-representable-functors-preserve-small-limits",
+          "def-hom-functors-and-hom-bifunctor",
+          "prop-limit-colimit-duality",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity"
+        ]
+      },
+      {
+        "id": "thm-limits-and-colimits-in-functor-categories-are-computed-pointwise",
+        "kind": "theorem",
+        "title": "For small source and index categories, chosen target limits and colimits compute the corresponding functor-category limits and colimits pointwise",
+        "strategy": "Let A and J be small and D:J→[A,C], with a chosen J-shaped limit of D(−)(a) for each a. For each arrow h:a→b, the natural-transformation components form a cone at b after postcomposition; the limit at b supplies a unique map between the pointwise apices. Prove functoriality by equality after all limit legs, then prove the legs are natural and verify the functor-category universal property componentwise, including uniqueness of the mediating natural transformation. Dualize the full construction for colimits.",
+        "deps": [
+          "def-functor-category",
+          "prop-size-of-functor-categories",
+          "def-limit-and-colimit-of-a-diagram",
+          "thm-chosen-limits-and-colimits-assemble-into-functors",
+          "lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic",
+          "prop-limit-colimit-duality",
+          "def-axiom-of-choice"
+        ]
+      },
+      {
+        "id": "cor-functor-categories-inherit-completeness-and-cocompleteness",
+        "kind": "corollary",
+        "title": "If A is small, then [A,C] is complete or cocomplete whenever C is respectively complete or cocomplete",
+        "strategy": "For an arbitrary small index J, completeness or cocompleteness of C supplies every required pointwise J-shaped limit or colimit. Choice selects one for every object of the small source A; invoke the pointwise theorem and retain its small-source hypotheses, so no functor category with a large source is formed.",
+        "deps": [
+          "thm-limits-and-colimits-in-functor-categories-are-computed-pointwise",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-axiom-of-choice"
+        ]
+      },
+      {
+        "id": "cor-yoneda-preserves-and-reflects-small-limits",
+        "kind": "corollary",
+        "title": "For a small category, the Yoneda functor preserves and reflects all existing small limits",
+        "strategy": "Each evaluation component of the Yoneda image is Hom(c,−), so representable preservation and pointwise computation prove preservation. The published full faithfulness of Yoneda and the reflection proposition prove reflection. Keep the source category small so the presheaf category and Yoneda functor exist under the library's set-based convention.",
+        "deps": [
+          "thm-representable-functors-preserve-small-limits",
+          "thm-limits-and-colimits-in-functor-categories-are-computed-pointwise",
+          "prop-fully-faithful-functors-reflect-limits-and-colimits",
+          "def-yoneda-embedding",
+          "thm-yoneda-embedding-is-fully-faithful"
+        ]
+      },
+      {
+        "id": "thm-small-limits-commute-with-small-limits",
+        "kind": "theorem",
+        "title": "Iterated small limits commute: either order is canonically isomorphic to the limit over the product category",
+        "strategy": "For small J,K and D:J×K→C, identify a cone over D with a J-indexed cone of K-indexed cones. Applying the two universal properties successively gives the same bijection from an arbitrary apex to compatible families indexed by pairs (j,k), hence both iterated limits and the product-indexed limit represent the same cone functor. Use unique compatible isomorphisms to obtain the canonical comparison and its inverse, including the cases where either index category is empty.",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism",
+          "def-product-category",
+          "def-cardinality-of-a-small-category-and-kappa-small-diagram"
+        ]
+      },
+      {
+        "id": "def-filtered-category-and-filtered-colimit",
+        "kind": "definition",
+        "title": "Filtered categories and filtered colimits, including nonemptiness and eventual equality",
+        "deps": [
+          "def-isomorphism-groupoid-and-connected-category",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-limit-and-colimit-of-a-diagram"
+        ]
+      },
+      {
+        "id": "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+        "kind": "lemma",
+        "title": "Two representatives in a filtered colimit of sets are equal exactly when they become equal at one common later stage",
+        "strategy": "For a small filtered diagram D, define a relation on tagged elements by (j,x)≈(k,y) when some object l receives arrows j→l and k→l whose images of x and y agree. Reflexivity is immediate, symmetry reverses the witnesses, and transitivity uses filteredness to compare the two intermediate stages and then to coequalize the resulting parallel arrows. This equivalence relation contains exactly the generating identifications in the Set-colimit quotient, proving both directions of the criterion.",
+        "deps": [
+          "def-filtered-category-and-filtered-colimit",
+          "thm-set-has-all-small-colimits",
+          "def-equivalence-relation"
+        ]
+      },
+      {
+        "id": "thm-filtered-colimits-commute-with-finite-limits-in-set",
+        "kind": "theorem",
+        "title": "Filtered colimits commute with finite limits in Set",
+        "strategy": "Use the explicit quotient construction of a filtered colimit. Surjectivity of the comparison map is proved by choosing representatives for finitely many coordinates and using filteredness repeatedly to move them to one common stage; the finite cone equations then become true at one later stage by eventual equality. For injectivity, representatives that agree coordinatewise become equal after finitely many further stages, again combined into one stage by filteredness. Include the empty finite limit: both sides are singleton because filtered categories are nonempty.",
+        "deps": [
+          "def-filtered-category-and-filtered-colimit",
+          "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "thm-set-has-all-small-limits",
+          "thm-set-has-all-small-colimits",
+          "thm-finite-limit-and-colimit-criteria",
+          "lem-canonical-comparison-characterises-limit-preservation"
+        ]
+      },
+      {
+        "id": "def-final-and-initial-functors",
+        "kind": "definition",
+        "title": "Final and initial functors via nonempty connected comma categories",
+        "deps": [
+          "def-comma-slice-and-coslice-categories",
+          "def-isomorphism-groupoid-and-connected-category",
+          "def-opposite-category",
+          "def-functor-and-contravariant-functor"
+        ]
+      },
+      {
+        "id": "thm-final-functors-do-not-change-colimits-and-initial-functors-do-not-change-limits",
+        "kind": "theorem",
+        "title": "Assuming Choice, precomposition with a final functor does not change colimits, and precomposition with an initial functor does not change limits",
+        "strategy": "For a final u:A→B between small categories and F:B→C, restriction sends every cocone over F to one over Fu. Given a cocone over Fu, choose an object (a,b→u(a)) of each nonempty comma category, use its arrow to define the b-component, and use connectedness to prove independence of the choice; comma morphisms and cocone equations prove natural compatibility. These constructions are inverse, so the two cocone functors are naturally isomorphic and representability gives existence in either case and the canonical colimit isomorphism. Apply the exact formal dual to initial functors and limits.",
+        "deps": [
+          "def-final-and-initial-functors",
+          "def-limit-and-colimit-of-a-diagram",
+          "thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism",
+          "def-axiom-of-choice",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "thm-grp-is-complete-and-cocomplete",
+        "kind": "theorem",
+        "title": "Grp is complete and cocomplete",
+        "strategy": "Products are Cartesian products with componentwise multiplication, and equalizers are the subgroups on which a parallel pair agrees, so the completeness criterion applies. For coproducts, construct the free group on the tagged disjoint union of underlying sets and quotient by the normal closure of the relations imposing each factor's multiplication and identity; verify the resulting injections have the coproduct universal property. Coequalize f,g by quotienting the codomain by the normal closure of all f(x)g(x)^{-1}. The cocompleteness criterion then gives every small colimit.",
+        "deps": [
+          "cor-completeness-and-cocompleteness-criteria",
+          "prop-groups-and-homomorphisms-form-category-grp",
+          "def-free-group",
+          "def-normal-closure",
+          "thm-quotient-group-universal-property",
+          "def-group-homomorphism"
+        ]
+      },
+      {
+        "id": "thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both",
+        "kind": "theorem",
+        "title": "Top is complete and cocomplete, and its underlying-set functor preserves all small limits and colimits",
+        "strategy": "For a small diagram, take its Set-limit and give it the initial topology induced by all limit projections; the characteristic property of initial topologies proves that the set-theoretic mediating map is continuous exactly when its composites are, establishing the limit universal property. Dually, give the Set-colimit the final topology induced by all cocone maps and verify the colimit property. The underlying sets and functions are unchanged by these topology constructions, so the comparison maps for the underlying-set functor are identities and it preserves both.",
+        "deps": [
+          "thm-set-has-all-small-limits",
+          "thm-set-has-all-small-colimits",
+          "prop-topological-spaces-and-continuous-maps-form-category-top",
+          "def-initial-and-final-topology",
+          "def-continuous-map-top",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity"
+        ]
+      },
+      {
+        "id": "thm-rmod-is-complete-and-cocomplete",
+        "kind": "theorem",
+        "title": "For every ring R, the category R-Mod is complete and cocomplete",
+        "strategy": "Products use componentwise addition and scalar multiplication, while equalizers are submodules, so the completeness criterion applies. Construct a coproduct as the module of finitely supported functions on the tagged disjoint union of the underlying modules, quotiented by the submodule generated by the relations enforcing addition and scalar multiplication in each summand; its coordinate inclusions satisfy the coproduct universal property. Coequalize f,g:M→N by N modulo the submodule generated by f(m)−g(m). Verify both existence and uniqueness of induced homomorphisms, then apply the cocompleteness criterion.",
+        "deps": [
+          "cor-completeness-and-cocompleteness-criteria",
+          "prop-modules-and-homomorphisms-form-category-rmod",
+          "def-left-and-right-modules",
+          "def-submodule",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-quotient-module",
+          "thm-quotient-module-universal-property",
+          "def-module-homomorphism-kernel-image-and-cokernel"
+        ]
+      },
+      {
+        "id": "prop-completeness-and-cocompleteness-in-poset-categories",
+        "kind": "proposition",
+        "title": "A poset category is complete exactly when every small family has an infimum, and cocomplete exactly when every small family has a supremum",
+        "strategy": "Translate cones and cocones in a poset category into lower and upper bounds. Because parallel arrows are unique, the equalizer and coequalizer conditions are automatic, while products and coproducts are precisely infima and suprema, including the empty family as the top and bottom elements. Apply the completeness and cocompleteness criteria in both directions; when both conditions hold this is exactly a complete lattice.",
+        "deps": [
+          "cor-completeness-and-cocompleteness-criteria",
+          "def-products-and-coproducts",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors"
+        ]
+      },
+      {
+        "id": "thm-cardinality-sized-products-or-coproducts-force-a-preorder",
+        "kind": "theorem",
+        "title": "Assuming Choice, a small category with products or coproducts indexed by the cardinality of its morphism set is a preorder",
+        "strategy": "Assume Choice, let κ be the cardinality of the morphism set, and suppose distinct parallel arrows f,g:A→B exist. Form the κ-indexed product of B. Every subset S of κ determines a morphism A→B^κ whose coordinate is f on S and g off S; distinct subsets give distinct morphisms by projection, yielding an injection P(κ)→Mor(C). Cantor gives |P(κ)|>κ, contradicting the definition of κ. Apply formal duality for κ-indexed coproducts.",
+        "deps": [
+          "def-products-and-coproducts",
+          "def-cardinality-of-a-small-category-and-kappa-small-diagram",
+          "thm-cardinal-power-set-and-cantor",
+          "def-preorder",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "cor-small-complete-or-cocomplete-categories-are-preorders",
+        "kind": "corollary",
+        "title": "Assuming Choice, every small complete category and every small cocomplete category is a preorder",
+        "strategy": "For a small category C, its morphism collection has a cardinal κ. Completeness supplies the κ-indexed product of every constant κ-family, and cocompleteness supplies the corresponding coproduct. Apply the cardinality-sized product or coproduct theorem in the respective case.",
+        "deps": [
+          "thm-cardinality-sized-products-or-coproducts-force-a-preorder",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 364,
+    "id": "limits-and-colimits-examples",
+    "kind": "B",
+    "category": "category-theory",
+    "title": "Limits and Colimits: Examples and Counterexamples",
+    "companion": "limits-and-colimits",
+    "requires": [
+      "limits-and-colimits"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-products-and-coproducts-in-set",
+        "kind": "example",
+        "title": "Products in Set are Cartesian products and coproducts are tagged disjoint unions",
+        "strategy": "For products, map a function into the Cartesian product to its coordinate functions and recover it uniquely from those coordinates, including the empty family. For coproducts, use tagged pairs, define a map by cases on the tag, and prove uniqueness on every summand.",
+        "deps": [
+          "def-products-and-coproducts",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-equalizers-and-coequalizers-in-set",
+        "kind": "example",
+        "title": "Equalizers in Set are agreement subsets and coequalizers are quotients by the generated equivalence relation",
+        "strategy": "For f,g:X→Y, verify that the inclusion of {x:f(x)=g(x)} has the equalizer existence and uniqueness property. For the coequalizer, quotient Y by the least equivalence relation containing every pair (f(x),g(x)); prove a map descends exactly when it equalizes f and g, then invoke quotient uniqueness.",
+        "deps": [
+          "def-equalizers-and-coequalizers",
+          "prop-sets-and-functions-form-category-set",
+          "def-equivalence-relation",
+          "thm-universal-property-of-the-quotient"
+        ]
+      },
+      {
+        "id": "ex-pullbacks-and-pushouts-in-set",
+        "kind": "example",
+        "title": "Pullbacks in Set are fibre products and pushouts are quotients of tagged disjoint unions",
+        "strategy": "For X→Z←Y, use the subset of X×Y on which the two structure maps agree and prove the unique pairing map. For X←Z→Y, quotient the tagged union X⊔Y by the equivalence relation generated by identifying the two images of every z; the quotient universal property proves both clauses of the pushout universal property.",
+        "deps": [
+          "def-pullbacks-and-pushouts",
+          "prop-sets-and-functions-form-category-set",
+          "def-equivalence-relation",
+          "thm-universal-property-of-the-quotient"
+        ]
+      },
+      {
+        "id": "ex-pullback-in-top",
+        "kind": "example",
+        "title": "A pullback in Top is the fibre product with the subspace topology inherited from the product",
+        "strategy": "Take the Set-theoretic fibre product inside X×Y with the product topology and then its subspace topology. The projections are continuous. A pair of continuous maps with equal composites has the unique set-theoretic pairing, whose map to the product is continuous and whose range lies in the fibre product; the subspace characteristic property proves continuity of the factor.",
+        "deps": [
+          "def-pullbacks-and-pushouts",
+          "thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both",
+          "def-product-topology",
+          "def-subspace-topology-top"
+        ]
+      },
+      {
+        "id": "ex-equalizer-of-group-homomorphisms",
+        "kind": "example",
+        "title": "The equalizer of two group homomorphisms is their agreement subgroup",
+        "strategy": "For f,g:G→H, show E={x∈G:f(x)=g(x)} contains the identity and is closed under products and inverses. The inclusion equalizes f and g. Any homomorphism whose composites agree has image in E and therefore factors uniquely through the inclusion as a homomorphism.",
+        "deps": [
+          "def-equalizers-and-coequalizers",
+          "prop-groups-and-homomorphisms-form-category-grp",
+          "def-group-homomorphism"
+        ]
+      },
+      {
+        "id": "ex-colimit-of-an-increasing-chain-of-sets",
+        "kind": "example",
+        "title": "The colimit of an increasing chain of sets is its union",
+        "strategy": "For inclusions X_0⊆X_1⊆⋯, use the ordinary union with the inclusion maps. Compatible maps out of the chain agree whenever an element appears at two stages, so define the induced map on the union by any containing stage and prove this is well-defined and unique. Relate it to the tagged-union quotient without assuming the stages are disjoint.",
+        "deps": [
+          "def-limit-and-colimit-of-a-diagram",
+          "thm-set-has-all-small-colimits"
+        ]
+      },
+      {
+        "id": "ex-products-in-a-poset-are-infima",
+        "kind": "example",
+        "title": "In a poset regarded as a category, products are infima, coproducts are suprema, and equalizers are automatic",
+        "strategy": "Translate a cone over a discrete family into a lower bound and its unique factorization into the greatest-lower-bound inequalities; uniqueness is automatic because a poset category has at most one arrow. Reverse the order for coproducts. Parallel arrows are equal whenever they exist, so their identity arrow is an equalizer and coequalizer.",
+        "deps": [
+          "def-products-and-coproducts",
+          "def-equalizers-and-coequalizers",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors"
+        ]
+      },
+      {
+        "id": "ex-empty-diagrams-select-terminal-and-initial-objects",
+        "kind": "example",
+        "title": "The singleton set and trivial group are terminal, while the empty set and trivial group are initial",
+        "strategy": "List the unique functions X→{∗} and ∅→X, then the unique homomorphisms G→1 and 1→G, and check the group homomorphism laws. Invoke the empty-diagram proposition to identify the corresponding limits and colimits, noting that the trivial group is both initial and terminal whereas Set's two objects differ.",
+        "deps": [
+          "prop-empty-limits-and-colimits-are-terminal-and-initial-objects",
+          "prop-sets-and-functions-form-category-set",
+          "prop-groups-and-homomorphisms-form-category-grp"
+        ]
+      },
+      {
+        "id": "cex-a-category-with-products-and-a-diagram-without-a-limit",
+        "kind": "counterexample",
+        "title": "Assuming Choice, nonempty sets have all small products but a parallel pair with no equalizer and hence a diagram with no limit",
+        "strategy": "Under AC, a product of nonempty sets is nonempty, so the full subcategory Set_nonempty has every small product, including the empty product. Take the two constant maps from a singleton to a two-element set with different values: their agreement subset is empty, and no nonempty set can carry an equalizing map, so the pair has no cone and no equalizer. This isolates why products alone do not construct arbitrary limits.",
+        "deps": [
+          "def-products-and-coproducts",
+          "def-equalizers-and-coequalizers",
+          "thm-small-limits-from-products-and-equalizers",
+          "def-axiom-of-choice"
+        ]
+      },
+      {
+        "id": "cex-a-functor-preserving-monomorphisms-but-not-pullbacks",
+        "kind": "counterexample",
+        "title": "A monotone functor between poset categories preserves every monomorphism but need not preserve pullbacks",
+        "strategy": "Let P have 0<a<1 and 0<b<1 with a,b incomparable, and let Q be the two-element chain. Send 0 to 0 and a,b,1 to 1. Every arrow in a poset category is monic, so monomorphisms are preserved. The pullback of a→1←b is 0 in P, but the pullback of 1→1←1 is 1 in Q, so the canonical comparison 0→1 is not an isomorphism.",
+        "deps": [
+          "def-pullbacks-and-pushouts",
+          "lem-canonical-comparison-characterises-limit-preservation",
+          "def-monomorphism-and-epimorphism",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors"
+        ]
+      },
+      {
+        "id": "cex-a-full-subcategory-limit-can-differ-from-ambient-limit",
+        "kind": "counterexample",
+        "title": "A limit in a full subcategory need not be the ambient limit",
+        "strategy": "Use the poset P with 0<q<m<a and 0<q<m<b, where a and b are incomparable, and its full subposet Q={0,q,a,b}. The product of a and b is m in P but q in Q. Fullness preserves all hom-sets between retained objects yet does not supply the omitted ambient limiting object, so the inclusion does not preserve this product.",
+        "deps": [
+          "def-products-and-coproducts",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors",
+          "lem-canonical-comparison-characterises-limit-preservation"
+        ]
+      },
+      {
+        "id": "cex-filtered-colimits-need-not-commute-with-infinite-products-in-set",
+        "kind": "counterexample",
+        "title": "Filtered colimits in Set need not commute with countably infinite products",
+        "strategy": "For i≥1 let M_{i,j}={1,…,i} for every positive integer j, with inclusions as i grows. The product at stage i consists of sequences uniformly bounded by i, so its filtered colimit contains exactly bounded positive-integer sequences. Taking filtered colimits first gives the positive integers in every coordinate, whose countable product also contains unbounded sequences. The canonical comparison is therefore not surjective.",
+        "deps": [
+          "def-filtered-category-and-filtered-colimit",
+          "thm-filtered-colimits-commute-with-finite-limits-in-set",
+          "def-products-and-coproducts"
+        ]
+      },
+      {
+        "id": "fs-not-every-category-has-all-small-limits",
+        "kind": "false-statement",
+        "title": "FALSE: every category has all small limits",
+        "strategy": "The category of nonempty sets and all functions has no equalizer for two distinct constant maps from a singleton to a two-element set, because no nonempty set supports even an equalizing cone. Since the parallel-pair index is finite and therefore small, this is a small diagram without a limit.",
+        "deps": [
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-equalizers-and-coequalizers"
+        ]
+      },
+      {
+        "id": "fs-preserving-binary-products-and-equalizers-does-not-imply-continuity",
+        "kind": "false-statement",
+        "title": "FALSE: a functor preserving binary products and equalizers must preserve all finite limits",
+        "strategy": "Take the constant functor from the terminal category to Set at the empty set. It preserves every binary product and every equalizer because the relevant source and target cones are all carried to identities on the empty set. It does not preserve the terminal object: the unique source object is terminal, while the empty set is not terminal in Set. This isolates the missing nullary-product hypothesis in the finite-limit criterion.",
+        "deps": [
+          "thm-finite-limit-and-colimit-criteria",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "fs-the-underlying-set-functor-on-top-does-not-preserve-limits",
+        "kind": "false-statement",
+        "title": "FALSE: the underlying-set functor Top→Set fails to preserve some small limit",
+        "strategy": "Use the explicit construction of Top-limits: the underlying set is exactly the Set-limit and only the initial topology is added. Thus every canonical comparison is the identity bijection, so the claimed counterexample cannot exist. Contrast this with reflection: a set-theoretic limiting cone need not carry the topology required to be limiting in Top.",
+        "deps": [
+          "thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity"
+        ]
+      },
+      {
+        "id": "fs-colimits-in-grp-are-computed-on-underlying-sets",
+        "kind": "false-statement",
+        "title": "FALSE: colimits in Grp are computed by taking the Set-colimit of the underlying diagram",
+        "strategy": "Use the empty diagram. Its colimit in Grp is the initial trivial group, whose underlying set is a singleton, whereas its colimit in Set is the empty set. Therefore the underlying-set functor Grp→Set does not preserve even this small colimit, so underlying Set-colimits cannot compute all group colimits.",
+        "deps": [
+          "thm-grp-is-complete-and-cocomplete",
+          "prop-empty-limits-and-colimits-are-terminal-and-initial-objects",
+          "prop-groups-and-homomorphisms-form-category-grp",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "ex-the-empty-set-is-the-product-of-the-large-family-of-all-sets",
+        "kind": "example",
+        "title": "Under the definable-class diagram convention, the empty set is the product of the large family of all sets",
+        "strategy": "Any cone over the discrete class diagram of all sets includes a function from its apex to the empty-set factor, so its apex must be empty. There is exactly one cone with empty apex, consisting of the empty functions to every set, and every cone therefore factors through it uniquely. This shows that some large diagrams have limits even though completeness asserts only small limits.",
+        "deps": [
+          "def-products-and-coproducts",
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      }
+    ]
+  }
+]

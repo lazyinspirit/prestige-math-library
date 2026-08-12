@@ -1,0 +1,818 @@
+[
+  {
+    "order": 86,
+    "id": "eigenvalues-eigenvectors-and-the-characteristic-polynomial",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Eigenvalues, Eigenvectors and the Characteristic Polynomial",
+    "companion": "eigenvalues-eigenvectors-and-the-characteristic-polynomial-examples",
+    "requires": [
+      "the-determinant-of-a-linear-operator",
+      "polynomial-rings-and-roots"
+    ],
+    "items": [
+      {
+        "id": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+        "kind": "definition",
+        "title": "Eigenvalues, eigenvectors, eigenspaces $E_\\lambda(T)=\\ker(T-\\lambda I)$, and the spectrum $\\sigma_F(T)$ of an endomorphism",
+        "deps": [
+          "def-linear-map",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-vector-space-of-linear-maps"
+        ]
+      },
+      {
+        "id": "prop-eigenvalue-iff-shift-is-not-invertible",
+        "kind": "proposition",
+        "title": "For a finite-dimensional space, $\\lambda$ is an eigenvalue of $T$ if and only if $T-\\lambda I$ is not invertible",
+        "strategy": "Unfold the eigenspace: an eigenvector is exactly a nonzero vector in the kernel of $T-\\lambda I$. One direction follows because an invertible map has trivial kernel; for the other, rank-nullity makes an injective endomorphism of a finite-dimensional space surjective, hence invertible. The zero-dimensional case is explicit: its spectrum is empty and its unique endomorphism is invertible.",
+        "deps": [
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "thm-linear-kernel-image-and-injectivity",
+          "thm-rank-nullity",
+          "def-linear-isomorphism-and-invertible-linear-map"
+        ]
+      },
+      {
+        "id": "thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent",
+        "kind": "theorem",
+        "title": "Eigenvectors belonging to pairwise distinct eigenvalues are linearly independent",
+        "strategy": "Induct on the number of vectors. Apply $T-\\lambda_m I$ to a vanishing relation; the last term disappears and the remaining eigenvectors acquire the nonzero coefficients $\\lambda_i-\\lambda_m$. Independence for the shorter list kills those coefficients, and then the original relation kills the last one.",
+        "deps": [
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-linear-independence",
+          "def-field"
+        ]
+      },
+      {
+        "id": "cor-an-operator-has-at-most-dimension-many-distinct-eigenvalues",
+        "kind": "corollary",
+        "title": "An endomorphism of an $n$-dimensional space has at most $n$ distinct eigenvalues",
+        "strategy": "Choose one eigenvector for each distinct eigenvalue. The distinct-eigenvalue theorem makes the chosen vectors independent, and an independent subset of an $n$-dimensional vector space has at most $n$ elements.",
+        "deps": [
+          "thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent",
+          "thm-dimension-of-a-linear-subspace"
+        ]
+      },
+      {
+        "id": "def-characteristic-polynomial-of-a-matrix",
+        "kind": "definition",
+        "title": "For $A\\in M_n(F)$, the characteristic polynomial is $\\chi_A(x)=\\det(xI_n-A)$ when $n\\geq1$, with $\\chi_A(x)=1$ for the unique $0\\times0$ matrix",
+        "deps": [
+          "def-determinant-of-a-square-matrix",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-ring-matrix-product-identity-and-transpose",
+          "prop-field-and-ring-matrix-interfaces-agree"
+        ]
+      },
+      {
+        "id": "lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients",
+        "kind": "lemma",
+        "title": "$\\chi_A(x)$ is monic of degree $n$; for $n\\geq1$ its $x^{n-1}$ coefficient is $-\\operatorname{tr}(A)$ and its constant coefficient is $(-1)^n\\det(A)$, while $\\chi_{0\\times0}=1$",
+        "strategy": "Handle $n=0$ directly from the convention $\\chi_{0\\times0}=1$. For $n\\geq1$, expand $\\det(xI-A)$ by the Leibniz formula. The identity permutation alone contributes degree $n$; its choices of one diagonal entry of $A$ give the $-\\operatorname{tr}(A)$ coefficient, while every nonidentity permutation moves at least two indices and therefore has degree at most $n-2$. Evaluation at $x=0$ gives the constant coefficient.",
+        "deps": [
+          "def-characteristic-polynomial-of-a-matrix",
+          "def-determinant-of-a-square-matrix",
+          "def-trace-of-a-square-matrix",
+          "def-polynomial-degree-leading-coefficient-and-monic"
+        ]
+      },
+      {
+        "id": "lem-characteristic-polynomial-of-block-triangular-matrix",
+        "kind": "lemma",
+        "title": "The characteristic polynomial of a block upper- or lower-triangular matrix is the product of the characteristic polynomials of its diagonal blocks",
+        "strategy": "Use the Leibniz formula for a block triangular matrix over the commutative ring $F[x]$: a nonzero permutation term cannot cross from one diagonal block without also crossing back through the zero block. The surviving permutations split uniquely into permutations of the two diagonal blocks, so the determinant factors; apply this to $xI-M$.",
+        "deps": [
+          "def-characteristic-polynomial-of-a-matrix",
+          "def-determinant-of-a-square-matrix",
+          "thm-polynomial-ring-is-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-characteristic-polynomial-is-similarity-invariant",
+        "kind": "theorem",
+        "title": "Similar matrices have the same characteristic polynomial",
+        "strategy": "If $B=P^{-1}AP$, then $xI-B=P^{-1}(xI-A)P$ as matrices over $F[x]$. Multiplicativity of determinant cancels the determinant factors of $P^{-1}$ and $P$, giving $\\chi_B=\\chi_A$ without evaluating at any scalar.",
+        "deps": [
+          "def-characteristic-polynomial-of-a-matrix",
+          "def-similar-matrices",
+          "thm-determinant-multiplicative",
+          "prop-field-and-ring-matrix-interfaces-agree"
+        ]
+      },
+      {
+        "id": "def-characteristic-polynomial-of-an-operator",
+        "kind": "definition",
+        "title": "The basis-independent characteristic polynomial $\\chi_T$ of an endomorphism of a finite-dimensional space, including $\\chi_T=1$ in dimension zero",
+        "deps": [
+          "def-characteristic-polynomial-of-a-matrix",
+          "thm-characteristic-polynomial-is-similarity-invariant",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "thm-similarity-is-an-equivalence-relation-and-models-basis-change"
+        ]
+      },
+      {
+        "id": "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+        "kind": "theorem",
+        "title": "For every finite-dimensional space, $\\sigma_F(T)$ is exactly the set of roots in $F$ of $\\chi_T$",
+        "strategy": "If the dimension is zero, the spectrum is empty and $\\chi_T=1$ has no roots. In positive dimension and any basis, $\\chi_T(\\lambda)=\\det(\\lambda I-[T])=(-1)^n\\det([T]-\\lambda I)$. The determinant criterion says this vanishes exactly when $T-\\lambda I$ is not invertible, and the shift proposition identifies that condition with $\\lambda$ being an eigenvalue.",
+        "deps": [
+          "def-characteristic-polynomial-of-an-operator",
+          "prop-eigenvalue-iff-shift-is-not-invertible",
+          "thm-operator-invertible-iff-determinant-nonzero",
+          "def-polynomial-evaluation-and-root"
+        ]
+      },
+      {
+        "id": "def-algebraically-closed-field",
+        "kind": "definition",
+        "title": "An algebraically closed field: every nonconstant polynomial has a root in the field",
+        "deps": [
+          "def-field",
+          "def-polynomial-evaluation-and-root",
+          "def-polynomial-degree-leading-coefficient-and-monic"
+        ]
+      },
+      {
+        "id": "cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue",
+        "kind": "corollary",
+        "title": "Every endomorphism of a nonzero finite-dimensional vector space over an algebraically closed field has an eigenvalue",
+        "strategy": "The characteristic polynomial is monic of positive degree, hence nonconstant. Algebraic closedness supplies a root in the base field, and the spectrum-root theorem turns that root into an eigenvalue.",
+        "deps": [
+          "def-algebraically-closed-field",
+          "lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial"
+        ]
+      },
+      {
+        "id": "def-algebraic-and-geometric-multiplicity-of-an-eigenvalue",
+        "kind": "definition",
+        "title": "Algebraic multiplicity as the exponent of $x-\\lambda$ in $\\chi_T$, and geometric multiplicity as $\\dim E_\\lambda(T)$",
+        "deps": [
+          "def-characteristic-polynomial-of-an-operator",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "def-dimension"
+        ]
+      },
+      {
+        "id": "thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity",
+        "kind": "theorem",
+        "title": "The geometric multiplicity of an eigenvalue does not exceed its algebraic multiplicity",
+        "strategy": "Start with a basis of the eigenspace and extend it to a basis of the whole finite-dimensional space. In that basis the matrix of $T$ is block upper triangular with leading block $\\lambda I_g$, where $g$ is the eigenspace dimension. The block characteristic-polynomial lemma gives $\\chi_T=(x-\\lambda)^g q(x)$, so the maximal exponent defining algebraic multiplicity is at least $g$.",
+        "deps": [
+          "def-algebraic-and-geometric-multiplicity-of-an-eigenvalue",
+          "lem-characteristic-polynomial-of-block-triangular-matrix",
+          "thm-dimension-of-a-linear-subspace",
+          "def-coordinate-column-and-matrix-of-a-linear-map"
+        ]
+      },
+      {
+        "id": "cor-a-simple-eigenvalue-has-one-dimensional-eigenspace",
+        "kind": "corollary",
+        "title": "An eigenvalue of algebraic multiplicity one has a one-dimensional eigenspace",
+        "strategy": "An eigenvalue has a nonzero eigenspace, so its geometric multiplicity is at least one. The multiplicity inequality bounds it above by the algebraic multiplicity one.",
+        "deps": [
+          "def-algebraic-and-geometric-multiplicity-of-an-eigenvalue",
+          "thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity"
+        ]
+      },
+      {
+        "id": "thm-products-ab-and-ba-have-the-same-characteristic-polynomial",
+        "kind": "theorem",
+        "title": "For $A,B\\in M_n(F)$, the products $AB$ and $BA$ have the same characteristic polynomial",
+        "strategy": "Work over $F[x]$ with the block matrix $\\begin{pmatrix}xI&A\\\\-B&I\\end{pmatrix}$. Multiply it by explicit block-unitriangular matrices of determinant one in two different orders; the resulting block triangular matrices have diagonal blocks $(xI+AB,I)$ and $(xI+BA,I)$. The block determinant calculation therefore gives $\\det(xI+AB)=\\det(xI+BA)$, and replacing $A$ by $-A$ yields the stated identity without dividing by $x$.",
+        "deps": [
+          "def-characteristic-polynomial-of-a-matrix",
+          "lem-characteristic-polynomial-of-block-triangular-matrix",
+          "thm-determinant-multiplicative",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "def-polynomial-evaluation-at-an-endomorphism",
+        "kind": "definition",
+        "title": "Polynomial evaluation at an endomorphism: $p(T)=\\sum_k a_kT^k$",
+        "deps": [
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-vector-space-of-linear-maps",
+          "lem-composition-and-identity-linear-maps"
+        ]
+      },
+      {
+        "id": "thm-cayley-hamilton",
+        "kind": "theorem",
+        "title": "Cayley-Hamilton: every finite-dimensional endomorphism satisfies its characteristic polynomial, $\\chi_T(T)=0$",
+        "strategy": "In dimension zero, $\\chi_T=1$ and its value is the identity endomorphism, which equals the zero endomorphism on the zero space. Otherwise choose a basis and put $A=[T]$. In $M_n(F[x])$, expand $\\operatorname{adj}(xI-A)=B_0+B_1x+\\cdots+B_{n-1}x^{n-1}$ and use the published adjugate identity $(xI-A)\\operatorname{adj}(xI-A)=\\chi_A(x)I$. Compare matrix coefficients in the central indeterminate $x$ and combine the resulting recurrences after multiplying by powers of $A$; they telescope to $\\chi_A(A)=0$. Translate back to $T$. This never treats substitution of $A$ into an arbitrary matrix-coefficient polynomial as a ring homomorphism.",
+        "deps": [
+          "def-characteristic-polynomial-of-an-operator",
+          "def-polynomial-evaluation-at-an-endomorphism",
+          "def-matrix-minors-cofactors-and-adjugate",
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "prop-polynomial-coefficient-sequences-and-trimmed-lists-agree",
+          "thm-matrix-representation-is-a-vector-space-isomorphism",
+          "thm-matrix-of-a-composite-is-the-product"
+        ]
+      },
+      {
+        "id": "cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator",
+        "kind": "corollary",
+        "title": "The inverse of an invertible finite-dimensional endomorphism is a polynomial in that endomorphism",
+        "strategy": "In dimension zero, the unique endomorphism, its identity, its inverse, and the zero polynomial in it all coincide. In positive dimension write $\\chi_T(x)=x^n+c_{n-1}x^{n-1}+\\cdots+c_0$. Cayley-Hamilton gives the corresponding operator identity, while $c_0=(-1)^n\\det T$ is nonzero for invertible $T$. Move the constant term to the other side and multiply by $c_0^{-1}T^{-1}$ to express $T^{-1}$ using only $I,T,\\ldots,T^{n-1}$.",
+        "deps": [
+          "thm-cayley-hamilton",
+          "lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients",
+          "thm-operator-invertible-iff-determinant-nonzero"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 87,
+    "id": "eigenvalues-eigenvectors-and-the-characteristic-polynomial-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Eigenvalues and the Characteristic Polynomial: Examples and Counterexamples",
+    "companion": "eigenvalues-eigenvectors-and-the-characteristic-polynomial",
+    "requires": [
+      "eigenvalues-eigenvectors-and-the-characteristic-polynomial"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-characteristic-polynomial-and-eigenspaces-of-a-two-by-two-matrix",
+        "kind": "example",
+        "title": "The matrix $\\begin{pmatrix}2&1\\\\0&3\\end{pmatrix}$ has characteristic polynomial $(x-2)(x-3)$ and two explicitly computed eigenspaces",
+        "strategy": "Compute the triangular determinant and solve the two kernel equations. The eigenspaces are the spans of $(1,0)$ and $(1,1)$, illustrating both the root criterion and independence for distinct eigenvalues.",
+        "deps": [
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-characteristic-polynomial-of-a-matrix"
+        ]
+      },
+      {
+        "id": "ex-real-quarter-turn-has-no-real-eigenvalues",
+        "kind": "example",
+        "title": "A quarter-turn of $\\mathbb R^2$ has characteristic polynomial $x^2+1$ and no real eigenvalue",
+        "strategy": "For $A=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$, calculate $\\det(xI-A)=x^2+1$. Real square positivity shows this polynomial has no real root, so the real spectrum is empty even though the space is nonzero.",
+        "deps": [
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "lem-of-square-positive"
+        ]
+      },
+      {
+        "id": "ex-a-matrix-over-f-two-with-no-eigenvalues",
+        "kind": "example",
+        "title": "$\\begin{pmatrix}0&1\\\\1&1\\end{pmatrix}$ over $\\mathbb F_2$ has characteristic polynomial $x^2+x+1$ and no eigenvalue in its base field",
+        "strategy": "Compute the determinant in $\\mathbb F_2[x]$ and evaluate the polynomial at the only two scalars, $0$ and $1$; both values are $1$. The root-spectrum theorem then gives an empty spectrum over a finite non-algebraically-closed field.",
+        "deps": [
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "ex-repeated-eigenvalue-with-one-dimensional-eigenspace",
+        "kind": "example",
+        "title": "$\\begin{pmatrix}2&1\\\\0&2\\end{pmatrix}$ has algebraic multiplicity two but geometric multiplicity one at $2$",
+        "strategy": "The characteristic polynomial is $(x-2)^2$. Solving $(A-2I)v=0$ gives vectors $(a,0)$, a one-dimensional eigenspace, so the multiplicity inequality can be strict.",
+        "deps": [
+          "def-algebraic-and-geometric-multiplicity-of-an-eigenvalue"
+        ]
+      },
+      {
+        "id": "ex-repeated-eigenvalue-with-full-eigenspace",
+        "kind": "example",
+        "title": "The scalar matrix $2I_2$ has algebraic and geometric multiplicity two at $2$",
+        "strategy": "Its characteristic polynomial is $(x-2)^2$, while $A-2I=0$ has all of $F^2$ as its kernel. This contrasts the preceding repeated-root example without invoking diagonalisation theory.",
+        "deps": [
+          "def-algebraic-and-geometric-multiplicity-of-an-eigenvalue",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "ex-cayley-hamilton-reduces-powers-of-a-two-by-two-matrix",
+        "kind": "example",
+        "title": "Cayley-Hamilton reduces every power of $\\begin{pmatrix}1&1\\\\1&0\\end{pmatrix}$ to a linear combination of $A$ and $I$",
+        "strategy": "Compute $\\chi_A(x)=x^2-x-1$. Cayley-Hamilton gives $A^2=A+I$, and induction then gives $A^m=F_mA+F_{m-1}I$ for $m\\geq1$, with the recurrence itself established inline.",
+        "deps": [
+          "thm-cayley-hamilton"
+        ]
+      },
+      {
+        "id": "fs-matrix-polynomial-substitution-is-a-ring-homomorphism",
+        "kind": "false-statement",
+        "title": "FALSE: substituting a fixed matrix $A$ for $x$ defines a ring homomorphism $M_n(F[x])\\to M_n(F)$",
+        "strategy": "Take $A=\\operatorname{diag}(1,0)$ and the constant matrix $B=E_{12}$. In $M_2(F[x])$ the central matrix $xI$ commutes with $B$, but the proposed substitution sends the two equal products $(xI)B$ and $B(xI)$ to $AB=B$ and $BA=0$. Thus the map is not even well defined as a multiplicative evaluation rule, pinpointing the flaw in the naive Cayley-Hamilton pseudo-proof.",
+        "deps": [
+          "thm-cayley-hamilton",
+          "def-ring-matrix-product-identity-and-transpose"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 92,
+    "id": "dual-spaces-bilinear-forms-and-inertia",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Dual Spaces, Bilinear and Quadratic Forms, and Sylvester's Law of Inertia",
+    "companion": "dual-spaces-bilinear-forms-and-inertia-examples",
+    "requires": [
+      "the-determinant-of-a-linear-operator"
+    ],
+    "items": [
+      {
+        "id": "def-algebraic-dual-and-linear-functional",
+        "kind": "definition",
+        "title": "Linear functionals and the algebraic dual $V^*=\\mathcal L(V,F)$",
+        "deps": [
+          "def-linear-map",
+          "def-vector-space-of-linear-maps"
+        ]
+      },
+      {
+        "id": "def-dual-family-associated-to-a-basis",
+        "kind": "definition",
+        "title": "The dual family $(b^*)_{b\\in B}$ associated to a Hamel basis $B$, defined by $b^*(c)=\\delta_{bc}$",
+        "deps": [
+          "def-algebraic-dual-and-linear-functional",
+          "def-linear-basis"
+        ]
+      },
+      {
+        "id": "thm-dual-family-is-a-basis-in-finite-dimension",
+        "kind": "theorem",
+        "title": "The dual family of a finite basis is a basis of the dual space, with the same dimension",
+        "strategy": "Use unique coordinates in the original basis. A functional is determined by its finitely many values on the basis and equals their linear combination of the coordinate functionals; evaluation on each basis vector also proves independence. The empty basis handles the zero space.",
+        "deps": [
+          "def-dual-family-associated-to-a-basis",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "def-dimension"
+        ]
+      },
+      {
+        "id": "thm-dual-family-does-not-span-in-infinite-dimension",
+        "kind": "theorem",
+        "title": "For an infinite Hamel basis, its dual family is linearly independent but does not span the algebraic dual",
+        "strategy": "Independence follows by evaluating a finite relation at its indexed basis vectors. Define a functional $\\phi$ by assigning the value $1$ to every basis vector and extending through each vector's finite coordinate expansion. Every finite linear combination of coordinate functionals vanishes on all but finitely many basis vectors, whereas $\\phi$ does not, so the dual family cannot span.",
+        "deps": [
+          "def-dual-family-associated-to-a-basis",
+          "def-linear-independence",
+          "def-linear-basis"
+        ]
+      },
+      {
+        "id": "lem-linear-functionals-separate-points-from-subspaces",
+        "kind": "lemma",
+        "title": "Assuming choice, if $v\\notin U\\leq V$, some $f\\in V^*$ vanishes on $U$ and satisfies $f(v)=1$",
+        "strategy": "Choose a basis of $U$, adjoin $v$ to it, and use the basis-extension theorem to obtain a basis of $V$. Prescribe value $1$ on $v$ and $0$ on every other basis vector, then extend by finite linear combinations. Independence guarantees the prescription is unambiguous.",
+        "deps": [
+          "def-algebraic-dual-and-linear-functional",
+          "thm-every-independent-set-extends-to-a-basis",
+          "def-linear-subspace"
+        ]
+      },
+      {
+        "id": "def-canonical-map-to-the-double-dual",
+        "kind": "definition",
+        "title": "The canonical evaluation map $J_V:V\\to V^{**}$ given by $J_V(v)(f)=f(v)$",
+        "deps": [
+          "def-algebraic-dual-and-linear-functional"
+        ]
+      },
+      {
+        "id": "thm-canonical-map-to-double-dual-is-injective",
+        "kind": "theorem",
+        "title": "Assuming choice, the canonical map $J_V:V\\to V^{**}$ is linear and injective",
+        "strategy": "Linearity is pointwise. If $v\\neq0$, apply the separation lemma to the zero subspace to obtain $f$ with $f(v)=1$; then $J_V(v)(f)=1$, so $J_V(v)$ is nonzero and the kernel is trivial.",
+        "deps": [
+          "def-canonical-map-to-the-double-dual",
+          "lem-linear-functionals-separate-points-from-subspaces",
+          "thm-linear-kernel-image-and-injectivity"
+        ]
+      },
+      {
+        "id": "thm-canonical-map-to-double-dual-is-surjective-iff-finite-dimensional",
+        "kind": "theorem",
+        "title": "Assuming choice, $J_V:V\\to V^{**}$ is surjective if and only if $V$ is finite-dimensional",
+        "strategy": "For a finite basis, the dual-basis expansion shows that every element of $V^{**}$ is evaluation at a unique vector. If a basis $B$ is infinite, let $\\Phi$ be the proper span in $V^*$ of its coordinate functionals and choose the functional taking value $1$ on every $b\\in B$ outside $\\Phi$. Separate that functional from $\\Phi$ inside $V^*$ to obtain $L\\in V^{**}$ vanishing on every coordinate functional but not on it. Were $L=J_V(v)$, all coordinates of $v$ would vanish, forcing $v=0$ and contradicting the chosen nonzero value.",
+        "deps": [
+          "thm-canonical-map-to-double-dual-is-injective",
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "thm-dual-family-does-not-span-in-infinite-dimension",
+          "lem-linear-functionals-separate-points-from-subspaces"
+        ]
+      },
+      {
+        "id": "def-annihilators-under-the-evaluation-pairing",
+        "kind": "definition",
+        "title": "The annihilator $U^\\circ\\leq V^*$ of $U\\leq V$ and the preannihilator ${}^\\circ S\\leq V$ of $S\\leq V^*$",
+        "deps": [
+          "def-algebraic-dual-and-linear-functional",
+          "def-linear-subspace"
+        ]
+      },
+      {
+        "id": "thm-double-annihilator-and-annihilator-dimension",
+        "kind": "theorem",
+        "title": "Assuming choice, ${}^\\circ(U^\\circ)=U$; in finite dimension, $\\dim U^\\circ=\\dim V-\\dim U$",
+        "strategy": "The inclusion $U\\subseteq{}^\\circ(U^\\circ)$ is immediate. If $v\\notin U$, the separation lemma supplies a functional in $U^\\circ$ not vanishing at $v$, proving the reverse inclusion. In finite dimension, restrict functionals from $V$ to $U$; its kernel is $U^\\circ$, it is surjective by extending a basis of $U$, and rank-nullity plus the finite dual-dimension theorem gives the dimension formula.",
+        "deps": [
+          "def-annihilators-under-the-evaluation-pairing",
+          "lem-linear-functionals-separate-points-from-subspaces",
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace"
+        ]
+      },
+      {
+        "id": "def-transpose-of-a-linear-map",
+        "kind": "definition",
+        "title": "The transpose or algebraic adjoint $T^*:W^*\\to V^*$, $T^*(g)=g\\circ T$, of a linear map $T:V\\to W$",
+        "deps": [
+          "def-algebraic-dual-and-linear-functional",
+          "lem-composition-and-identity-linear-maps"
+        ]
+      },
+      {
+        "id": "prop-transpose-preserves-identities-and-reverses-composition",
+        "kind": "proposition",
+        "title": "Transpose is linear, sends identities to identities, and reverses composition: $(S\\circ T)^*=T^*\\circ S^*$",
+        "strategy": "Evaluate every claimed map at an arbitrary functional and then at an arbitrary vector. The identities reduce to pointwise linearity and associativity of function composition, including the reversed order.",
+        "deps": [
+          "def-transpose-of-a-linear-map",
+          "lem-composition-and-identity-linear-maps"
+        ]
+      },
+      {
+        "id": "thm-transpose-kernel-range-and-rank",
+        "kind": "theorem",
+        "title": "Assuming choice, $\\ker T^*=(\\operatorname{im}T)^\\circ$ and $\\operatorname{im}T^*=(\\ker T)^\\circ$; in finite dimensions $\\operatorname{rank}T^*=\\operatorname{rank}T$",
+        "strategy": "The kernel identity is immediate from $T^*(g)=g\\circ T$. Every $T^*(g)$ vanishes on $\\ker T$; conversely a functional vanishing there descends to $\\operatorname{im}T$ and extends from that subspace to $W$ by a basis extension, proving the range identity. For finite-dimensional $V,W$, apply the annihilator dimension formula and rank-nullity to obtain equality of ranks.",
+        "deps": [
+          "def-transpose-of-a-linear-map",
+          "def-annihilators-under-the-evaluation-pairing",
+          "thm-double-annihilator-and-annihilator-dimension",
+          "thm-every-independent-set-extends-to-a-basis",
+          "thm-rank-nullity"
+        ]
+      },
+      {
+        "id": "thm-matrix-of-transpose-is-the-transposed-matrix",
+        "kind": "theorem",
+        "title": "In dual bases, the matrix of $T^*$ is the transpose of the matrix of $T$",
+        "strategy": "If the $(i,j)$ entry of $[T]$ is the $i$th coordinate functional applied to $T(v_j)$, then the $(j,i)$ entry of $[T^*]$ is $T^*(w_i^*)(v_j)=w_i^*(T(v_j))$. These are the same scalar, including rectangular source and target dimensions.",
+        "deps": [
+          "def-transpose-of-a-linear-map",
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-transpose-of-a-matrix"
+        ]
+      },
+      {
+        "id": "def-bilinear-symmetric-skew-and-alternating-forms",
+        "kind": "definition",
+        "title": "Bilinear forms, and symmetric, skew-symmetric, and alternating bilinear forms",
+        "deps": [
+          "def-linear-map",
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "thm-symmetric-alternating-relations-by-characteristic",
+        "kind": "theorem",
+        "title": "Alternating forms are skew-symmetric; the converse holds when $\\operatorname{char}F\\neq2$, while in characteristic $2$ alternating forms are symmetric",
+        "strategy": "Expand $B(u+v,u+v)=0$ for an alternating form to obtain $B(u,v)+B(v,u)=0$. For a skew-symmetric form, $B(v,v)=-B(v,v)$ gives $2B(v,v)=0$, which forces alternation exactly when $2\\neq0$. In characteristic two, the minus sign equals the plus sign, so skew-symmetry is symmetry.",
+        "deps": [
+          "def-bilinear-symmetric-skew-and-alternating-forms",
+          "def-ring-characteristic"
+        ]
+      },
+      {
+        "id": "thm-bilinear-forms-correspond-to-linear-maps-into-the-dual",
+        "kind": "theorem",
+        "title": "Bilinear forms on $V$ correspond linearly and bijectively to linear maps $V\\to V^*$",
+        "strategy": "Send $B$ to $B^\\flat$, where $B^\\flat(v)$ is the functional $w\\mapsto B(v,w)$. Bilinearity proves this is a linear map. Conversely send $L:V\\to V^*$ to $(v,w)\\mapsto L(v)(w)$; the two constructions are pointwise inverse and preserve addition and scalar multiplication.",
+        "deps": [
+          "def-bilinear-symmetric-skew-and-alternating-forms",
+          "def-algebraic-dual-and-linear-functional",
+          "def-vector-space-of-linear-maps"
+        ]
+      },
+      {
+        "id": "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+        "kind": "definition",
+        "title": "The matrix, left and right radicals, rank, and nondegeneracy of a bilinear form on a finite-dimensional space",
+        "deps": [
+          "thm-bilinear-forms-correspond-to-linear-maps-into-the-dual",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-rank-and-nullity"
+        ]
+      },
+      {
+        "id": "thm-change-of-basis-for-a-bilinear-form-is-congruence",
+        "kind": "theorem",
+        "title": "A basis change by $P$ changes the matrix of a bilinear form from $A$ to $P^{\\mathsf T}AP$",
+        "strategy": "Write both arguments in old coordinates: if the new-coordinate columns are $x,y$, their old-coordinate columns are $Px,Py$. Then $B(v,w)=x^{\\mathsf T}P^{\\mathsf T}APy$, so the new matrix is $P^{\\mathsf T}AP$. Define matrix congruence by this relation and keep it distinct from similarity.",
+        "deps": [
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+          "thm-coordinate-action-of-a-linear-map",
+          "prop-transpose-laws",
+          "thm-matrix-multiplication-laws"
+        ]
+      },
+      {
+        "id": "cor-rank-and-nondegeneracy-are-congruence-invariants",
+        "kind": "corollary",
+        "title": "Congruent matrices have the same rank; hence rank and nondegeneracy of a bilinear form are basis-independent",
+        "strategy": "Left and right multiplication by an invertible matrix do not change the dimension of the image of the represented map. Apply this to $P^{\\mathsf T}AP$ and note that $P^{\\mathsf T}$ is invertible whenever $P$ is. The radical interpretation then makes nondegeneracy basis-independent.",
+        "deps": [
+          "thm-change-of-basis-for-a-bilinear-form-is-congruence",
+          "thm-matrix-of-a-composite-is-the-product",
+          "prop-transpose-laws",
+          "def-linear-isomorphism-and-invertible-linear-map"
+        ]
+      },
+      {
+        "id": "def-sesquilinear-and-hermitian-forms-over-a-field-with-involution",
+        "kind": "definition",
+        "title": "Sesquilinear and Hermitian forms over a field with an involution, using the convention linear in the first variable",
+        "deps": [
+          "def-field",
+          "def-vector-space"
+        ]
+      },
+      {
+        "id": "thm-change-of-basis-for-a-sesquilinear-form",
+        "kind": "theorem",
+        "title": "For the linear-first convention, a basis change by $P$ sends a sesquilinear matrix $A$ to $P^{\\mathsf T}A\\,\\sigma(P)$; Hermitian forms satisfy $A=\\sigma(A)^{\\mathsf T}$",
+        "strategy": "Expand both vectors in the new basis and use linearity in the first variable and $\\sigma$-linearity in the second. The coefficients collect as $x^{\\mathsf T}P^{\\mathsf T}A\\sigma(P)\\sigma(y)$. Evaluating Hermitian symmetry on pairs of basis vectors gives the conjugate-transpose identity, and conversely that identity gives the symmetry.",
+        "deps": [
+          "def-sesquilinear-and-hermitian-forms-over-a-field-with-involution",
+          "thm-matrix-multiplication-laws",
+          "prop-transpose-laws"
+        ]
+      },
+      {
+        "id": "def-quadratic-form-and-polar-form",
+        "kind": "definition",
+        "title": "A quadratic form $q$ in arbitrary characteristic and its polar form $b_q(u,v)=q(u+v)-q(u)-q(v)$",
+        "deps": [
+          "def-vector-space",
+          "def-ring-characteristic"
+        ]
+      },
+      {
+        "id": "thm-polarization-bijection-in-characteristic-not-two",
+        "kind": "theorem",
+        "title": "If $\\operatorname{char}F\\neq2$, quadratic forms and symmetric bilinear forms correspond by $q(v)=B(v,v)$ and $B(u,v)=\\tfrac12 b_q(u,v)$",
+        "strategy": "For symmetric $B$, expand $q_B(u+v)$ to obtain $b_{q_B}=2B$. Conversely the quadratic homogeneity gives $b_q(v,v)=q(2v)-2q(v)=2q(v)$; dividing by two shows that $B_q=\\tfrac12 b_q$ recovers $q$. The defining assumption that $b_q$ is bilinear supplies bilinearity, and its formula is symmetric.",
+        "deps": [
+          "def-quadratic-form-and-polar-form",
+          "def-bilinear-symmetric-skew-and-alternating-forms",
+          "def-ring-characteristic"
+        ]
+      },
+      {
+        "id": "thm-symmetric-bilinear-forms-have-an-orthogonal-basis",
+        "kind": "theorem",
+        "title": "Every symmetric bilinear form on a finite-dimensional space over a field of characteristic not $2$ has an orthogonal basis",
+        "strategy": "Induct on dimension, with the empty basis for the zero space. If the form is zero, any basis works. Otherwise polarization shows that some $v$ has $B(v,v)\\neq0$; then $V=Fv\\oplus v^\\perp$, because subtracting $B(w,v)B(v,v)^{-1}v$ puts any $w$ in $v^\\perp$ and the intersection is zero. Apply induction to the restricted symmetric form on $v^\\perp$ and adjoin $v$.",
+        "deps": [
+          "thm-polarization-bijection-in-characteristic-not-two",
+          "thm-dimension-of-a-linear-subspace",
+          "def-linear-basis"
+        ]
+      },
+      {
+        "id": "cor-symmetric-matrices-are-congruent-to-diagonal-matrices",
+        "kind": "corollary",
+        "title": "Over a field of characteristic not $2$, every symmetric matrix is congruent to a diagonal matrix",
+        "strategy": "Regard the matrix as the matrix of its associated symmetric bilinear form in the standard basis. An orthogonal basis makes all off-diagonal entries zero, and the change-of-basis formula says precisely that the two matrices are congruent.",
+        "deps": [
+          "thm-symmetric-bilinear-forms-have-an-orthogonal-basis",
+          "thm-change-of-basis-for-a-bilinear-form-is-congruence",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "cor-quadratic-forms-diagonalize-in-characteristic-not-two",
+        "kind": "corollary",
+        "title": "Over a field of characteristic not $2$, every quadratic form has diagonal coordinates $q(x)=a_1x_1^2+\\cdots+a_nx_n^2$",
+        "strategy": "Use polarization to attach the symmetric bilinear form $B_q$. Choose an orthogonal basis for it; because $q(v)=B_q(v,v)$, expansion in that basis has no cross terms and gives the diagonal expression, including zero coefficients for the radical.",
+        "deps": [
+          "thm-polarization-bijection-in-characteristic-not-two",
+          "thm-symmetric-bilinear-forms-have-an-orthogonal-basis"
+        ]
+      },
+      {
+        "id": "thm-alternating-forms-have-a-symplectic-normal-form",
+        "kind": "theorem",
+        "title": "Every alternating form on a finite-dimensional space has a basis of symplectic pairs followed by a basis of its radical; in particular its rank is even",
+        "strategy": "Induct on dimension. If the form is zero, the whole space is radical. Otherwise choose $e,f$ with $B(e,f)\\neq0$, rescale to $B(e,f)=1$, and split off the nondegenerate plane they span by subtracting explicit $e$- and $f$-components from every vector. Its orthogonal complement carries the remaining alternating form; induction supplies the remaining pairs and radical basis. The displayed block matrix has one rank-two block per pair and zeros on the radical.",
+        "deps": [
+          "def-bilinear-symmetric-skew-and-alternating-forms",
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+          "thm-dimension-of-a-linear-subspace",
+          "def-linear-basis"
+        ]
+      },
+      {
+        "id": "def-definiteness-inertia-and-signature-data-over-the-reals",
+        "kind": "definition",
+        "title": "Positive and negative definiteness, the inertia $(p,q,r)$, rank $p+q$, and signature $p-q$ of a real symmetric bilinear or quadratic form",
+        "deps": [
+          "def-quadratic-form-and-polar-form",
+          "thm-reals-ordered-field",
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form"
+        ]
+      },
+      {
+        "id": "thm-sylvesters-law-of-inertia",
+        "kind": "theorem",
+        "title": "Sylvester's law of inertia: every real symmetric form is congruent to $\\operatorname{diag}(I_p,-I_q,0_r)$, and $(p,q,r)$ is unique",
+        "strategy": "Diagonalize the form and rescale each nonzero basis vector using the positive square root of the absolute value of its diagonal coefficient, obtaining the displayed normal form. In that form, the largest dimension of a subspace on which the form is positive definite is $p$: the positive coordinate space attains $p$, while any larger subspace meets the negative-plus-radical coordinate space nontrivially and cannot be positive definite. The analogous maximum is $q$ for negative definite subspaces, and $r$ follows from nullity. These intrinsic maxima prove uniqueness.",
+        "deps": [
+          "cor-symmetric-matrices-are-congruent-to-diagonal-matrices",
+          "def-definiteness-inertia-and-signature-data-over-the-reals",
+          "cor-cauchy-reals-lub-complete",
+          "thm-of-square-roots",
+          "thm-dimension-formula",
+          "thm-rank-nullity"
+        ]
+      },
+      {
+        "id": "cor-real-symmetric-bilinear-forms-are-classified-by-inertia",
+        "kind": "corollary",
+        "title": "Two real symmetric bilinear forms are congruent if and only if they have the same inertia",
+        "strategy": "Congruence preserves the intrinsic maximal positive and negative dimensions and the radical dimension, so it preserves inertia. Conversely, forms with the same inertia are each congruent to the same diagonal normal form; compose one basis change with the inverse of the other.",
+        "deps": [
+          "thm-sylvesters-law-of-inertia",
+          "thm-change-of-basis-for-a-bilinear-form-is-congruence"
+        ]
+      },
+      {
+        "id": "lem-schur-complement-congruence-and-determinant",
+        "kind": "lemma",
+        "title": "For symmetric $M=\\begin{pmatrix}A&B\\\\B^{\\mathsf T}&C\\end{pmatrix}$ with $A$ invertible, a block-unitriangular congruence gives $A\\oplus(C-B^{\\mathsf T}A^{-1}B)$ and factors $\\det M$",
+        "strategy": "Use the explicit invertible block-unitriangular matrix $P=\\begin{pmatrix}I&-A^{-1}B\\\\0&I\\end{pmatrix}$ and multiply out $P^{\\mathsf T}MP$. It is block diagonal with the stated Schur complement. Multiplicativity and the unitriangular determinant $1$ give $\\det M=\\det A\\det(C-B^{\\mathsf T}A^{-1}B)$.",
+        "deps": [
+          "thm-change-of-basis-for-a-bilinear-form-is-congruence",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-a-triangular-matrix",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "thm-sylvesters-criterion-for-positive-definiteness",
+        "kind": "theorem",
+        "title": "Sylvester's criterion: a real symmetric $n\\times n$ matrix with $n\\geq1$ is positive definite if and only if all leading principal minors are positive",
+        "strategy": "If the form is positive definite, each restriction to the first $k$ coordinate subspace is positive definite; its inertia is $(k,0,0)$, so diagonal normalization makes its determinant positive. Conversely induct on $n$. The first minor gives $a_{11}>0$; Schur-complement factorization shows that every leading principal minor of the Schur complement is the next leading minor divided by $a_{11}$ and is positive. Induction makes the complement positive definite, and its congruent direct sum with the positive one-dimensional block makes the original matrix positive definite.",
+        "deps": [
+          "lem-schur-complement-congruence-and-determinant",
+          "thm-sylvesters-law-of-inertia",
+          "lem-of-sign-rules",
+          "thm-determinant-of-a-triangular-matrix"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 93,
+    "id": "dual-spaces-bilinear-forms-and-inertia-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Dual Spaces and Bilinear Forms: Examples and Counterexamples",
+    "companion": "dual-spaces-bilinear-forms-and-inertia",
+    "requires": [
+      "dual-spaces-bilinear-forms-and-inertia"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-dual-basis-and-transpose-on-f-three",
+        "kind": "example",
+        "title": "A dual basis and transpose computed for a linear map on $\\mathbb F_3^2$",
+        "strategy": "Use the standard basis and its coordinate functionals over $\\mathbb F_3$. For the map with matrix $\\begin{pmatrix}1&2\\\\0&1\\end{pmatrix}$, evaluate the transpose on both coordinate functionals and recover the matrix $\\begin{pmatrix}1&0\\\\2&1\\end{pmatrix}$.",
+        "deps": [
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "thm-matrix-of-transpose-is-the-transposed-matrix",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "ex-annihilator-of-a-coordinate-plane",
+        "kind": "example",
+        "title": "The annihilator of the coordinate plane $z=0$ in $\\mathbb R^3$ is the line spanned by the third coordinate functional",
+        "strategy": "Write a general functional as $a x^*+b y^*+c z^*$. Vanishing at $(1,0,0)$ and $(0,1,0)$ forces $a=b=0$, while every multiple of $z^*$ vanishes on the plane; the dimensions also verify the annihilator formula.",
+        "deps": [
+          "def-annihilators-under-the-evaluation-pairing",
+          "thm-double-annihilator-and-annihilator-dimension",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "ex-canonical-double-dual-map-for-polynomial-space-is-not-surjective",
+        "kind": "example",
+        "title": "For the polynomial space $F[x]$, the canonical map to the algebraic double dual is injective but not surjective",
+        "strategy": "Use the infinite Hamel basis $1,x,x^2,\\ldots$. Its coordinate functionals span a proper subspace of $F[x]^*$; separate from that span the functional taking value $1$ on every basis monomial, producing a double-dual functional that vanishes on all coordinate functionals but not on that functional. No evaluation at a polynomial has those values, so the constructed double-dual element is outside the canonical image.",
+        "deps": [
+          "thm-canonical-map-to-double-dual-is-surjective-iff-finite-dimensional",
+          "def-polynomial-ring-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "cex-distinct-subspaces-of-the-dual-can-have-the-same-preannihilator",
+        "kind": "counterexample",
+        "title": "In infinite dimension, distinct subspaces of $V^*$ can have the same preannihilator",
+        "strategy": "Fix an infinite Hamel basis $B$ and let $\\Phi$ be the proper span of its coordinate functionals. Every nonzero vector has a nonzero coordinate, so ${}^\\circ\\Phi=\\{0\\}$. Functionals separate nonzero vectors, so ${}^\\circ(V^*)=\\{0\\}$ as well, yet $\\Phi\\neq V^*$ by the infinite dual-family theorem. This shows why the finite-dimensional symmetric double-annihilator claim cannot be asserted for arbitrary subspaces of $V^*$.",
+        "deps": [
+          "def-annihilators-under-the-evaluation-pairing",
+          "thm-dual-family-does-not-span-in-infinite-dimension",
+          "lem-linear-functionals-separate-points-from-subspaces"
+        ]
+      },
+      {
+        "id": "ex-a-bilinear-form-neither-symmetric-nor-alternating",
+        "kind": "example",
+        "title": "The form on $\\mathbb R^2$ with matrix $\\begin{pmatrix}0&1\\\\0&0\\end{pmatrix}$ is neither symmetric nor alternating",
+        "strategy": "Evaluate on the standard basis: $B(e_1,e_2)=1$ but $B(e_2,e_1)=0$, so symmetry fails. Also $B(e_1+e_2,e_1+e_2)=1$, so alternation fails.",
+        "deps": [
+          "def-bilinear-symmetric-skew-and-alternating-forms",
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form"
+        ]
+      },
+      {
+        "id": "ex-congruence-diagonalization-and-inertia-of-a-real-quadratic-form",
+        "kind": "example",
+        "title": "$q(x,y)=2x^2+4xy+5y^2=2(x+y)^2+3y^2$ has inertia $(2,0,0)$",
+        "strategy": "Complete the square and record the invertible coordinate change $(u,v)=(x+y,y)$. Its matrix congruence changes $\\begin{pmatrix}2&2\\\\2&5\\end{pmatrix}$ to $\\operatorname{diag}(2,3)$; positive rescaling then gives $I_2$, so the inertia is $(2,0,0)$.",
+        "deps": [
+          "cor-quadratic-forms-diagonalize-in-characteristic-not-two",
+          "thm-sylvesters-law-of-inertia"
+        ]
+      },
+      {
+        "id": "ex-symplectic-normal-form-of-a-degenerate-alternating-form",
+        "kind": "example",
+        "title": "A rank-two alternating form on $\\mathbb R^3$ has one symplectic pair and a one-dimensional radical",
+        "strategy": "Use the matrix $\\begin{pmatrix}0&1&0\\\\-1&0&0\\\\0&0&0\\end{pmatrix}$. The first two standard vectors are a symplectic pair, the third spans the radical, and direct row inspection gives rank two, matching the normal-form theorem.",
+        "deps": [
+          "thm-alternating-forms-have-a-symplectic-normal-form",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "cex-symmetric-form-need-not-have-an-orthogonal-basis-in-characteristic-two",
+        "kind": "counterexample",
+        "title": "In characteristic $2$, a symmetric bilinear form need not have an orthogonal basis",
+        "strategy": "On $\\mathbb F_2^2$ take the nondegenerate alternating form with matrix $\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$. It is symmetric in characteristic two and every vector has self-pairing zero. An orthogonal basis would therefore make every matrix entry zero, contradicting nondegeneracy.",
+        "deps": [
+          "thm-symmetric-alternating-relations-by-characteristic",
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "cex-distinct-quadratic-forms-have-the-same-polar-form-in-characteristic-two",
+        "kind": "counterexample",
+        "title": "In characteristic $2$, distinct quadratic forms can have the same polar form",
+        "strategy": "On $\\mathbb F_2^2$, compare $q_0(x,y)=0$ and $q_1(x,y)=x^2$. They are distinct, but direct expansion gives $b_{q_0}=0=b_{q_1}$ because $(x+u)^2=x^2+u^2$ in characteristic two. Thus polarization is not injective without the hypothesis that $2$ is invertible.",
+        "deps": [
+          "def-quadratic-form-and-polar-form",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "cex-positive-determinant-does-not-imply-positive-definite",
+        "kind": "counterexample",
+        "title": "Positive determinant does not imply positive definiteness",
+        "strategy": "The real diagonal matrix $\\operatorname{diag}(-1,-1,1)$ has determinant $1>0$, but its quadratic form takes the negative value $-1$ at the first standard vector. Its inertia is $(1,2,0)$, showing why a single determinant cannot replace all leading principal minors.",
+        "deps": [
+          "def-definiteness-inertia-and-signature-data-over-the-reals",
+          "def-determinant-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "ex-sylvesters-criterion-for-a-three-by-three-matrix",
+        "kind": "example",
+        "title": "Sylvester's criterion verifies positive definiteness for a concrete symmetric $3\\times3$ matrix",
+        "strategy": "For $A=\\begin{pmatrix}2&1&0\\\\1&2&1\\\\0&1&2\\end{pmatrix}$, compute the leading principal minors $2$, $3$, and $4$. All are positive, so the criterion proves positive definiteness; an explicit completion of squares supplies an independent check.",
+        "deps": [
+          "thm-sylvesters-criterion-for-positive-definiteness"
+        ]
+      },
+      {
+        "id": "cex-congruence-need-not-preserve-trace-or-determinant",
+        "kind": "counterexample",
+        "title": "Congruence need not preserve trace or determinant: the real $1\\times1$ matrices $[1]$ and $[4]$ are congruent",
+        "strategy": "With $P=[2]$, direct multiplication gives $P^{\\mathsf T}[1]P=[4]$. Their traces and determinants are respectively $1$ and $4$, so neither quantity is a congruence invariant even though rank, nondegeneracy, and inertia are.",
+        "deps": [
+          "thm-change-of-basis-for-a-bilinear-form-is-congruence",
+          "cor-rank-and-nondegeneracy-are-congruence-invariants",
+          "def-trace-of-a-square-matrix",
+          "def-determinant-of-a-square-matrix"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,916 @@
+[
+  {
+    "order": 221,
+    "id": "finite-probability-and-the-probabilistic-method",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Finite Probability and the Probabilistic Method",
+    "companion": "finite-probability-and-the-probabilistic-method-examples",
+    "requires": [
+      "extremal-graph-theory",
+      "the-exponential-function",
+      "the-logarithm-and-general-powers",
+      "congruences-and-the-chinese-remainder-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-finite-probability-space-and-event",
+        "kind": "definition",
+        "title": "Finite probability spaces, outcome weights, events, and event probabilities",
+        "deps": [
+          "def-function",
+          "def-finite-cardinality",
+          "def-finite-sum",
+          "thm-reals-ordered-field"
+        ]
+      },
+      {
+        "id": "lem-finite-probability-basic-laws",
+        "kind": "lemma",
+        "title": "Normalization, nonnegativity, monotonicity, complements, and differences in a finite probability space",
+        "strategy": "Expand every probability as a finite sum of outcome weights. Split the ambient finite set into an event and its complement, and split a larger event into a smaller event and its difference. Nonnegativity of every weight gives monotonicity. Explicitly include the empty event and events of probability zero, whose outcomes need not be absent.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "lem-finite-sum-laws",
+          "thm-reals-ordered-field"
+        ]
+      },
+      {
+        "id": "thm-finite-additivity-of-probability",
+        "kind": "theorem",
+        "title": "Probability is additive on every finite pairwise-disjoint family of events",
+        "strategy": "Reindex the sum over a disjoint union by the pairs consisting of a family index and an outcome in the corresponding event. Apply the finite Fubini and disjoint-union sum laws. Check the empty family and singleton family rather than silently assuming at least two events.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "cor-two-event-inclusion-exclusion",
+        "kind": "corollary",
+        "title": "Two-event inclusion-exclusion: $\\mathbb P(A\\cup B)=\\mathbb P(A)+\\mathbb P(B)-\\mathbb P(A\\cap B)$",
+        "strategy": "Partition the union into $A$ and $B\\setminus A$, and partition $B$ into $A\\cap B$ and $B\\setminus A$. Apply finite additivity and rearrange in the ordered field of reals.",
+        "deps": [
+          "lem-finite-probability-basic-laws",
+          "thm-finite-additivity-of-probability"
+        ]
+      },
+      {
+        "id": "thm-finite-union-bound",
+        "kind": "theorem",
+        "title": "The finite union bound",
+        "strategy": "Disjointify $A_1,\\ldots,A_n$ by setting $B_i=A_i\\setminus\\bigcup_{j<i}A_j$. The $B_i$ are disjoint, have the same union as the $A_i$, and satisfy $B_i\\subseteq A_i$; finite additivity and monotonicity finish. Treat $n=0$ and $n=1$ explicitly.",
+        "deps": [
+          "lem-finite-probability-basic-laws",
+          "thm-finite-additivity-of-probability"
+        ]
+      },
+      {
+        "id": "def-conditional-probability",
+        "kind": "definition",
+        "title": "Conditional probability $\\mathbb P(A\\mid B)$ for $\\mathbb P(B)>0$",
+        "deps": [
+          "def-finite-probability-space-and-event"
+        ]
+      },
+      {
+        "id": "thm-conditional-probability-multiplication-and-chain-rules",
+        "kind": "theorem",
+        "title": "The multiplication rule and finite chain rule for conditional probability",
+        "strategy": "The two-event identity is the definition after multiplying by the positive denominator. Iterate it for $A_1,\\ldots,A_n$, assuming each conditioning prefix has positive probability. State the empty and singleton products and do not write a conditional probability whose conditioning event has probability zero.",
+        "deps": [
+          "def-conditional-probability",
+          "thm-finite-additivity-of-probability"
+        ]
+      },
+      {
+        "id": "thm-finite-law-of-total-probability",
+        "kind": "theorem",
+        "title": "The law of total probability for a finite partition",
+        "strategy": "For a finite partition $B_1,\\ldots,B_n$ with every $\\mathbb P(B_i)>0$, the events $A\\cap B_i$ are disjoint and cover $A$. Apply finite additivity and the multiplication rule. Record separately that zero-probability partition cells may simply be omitted rather than conditioned on.",
+        "deps": [
+          "thm-finite-additivity-of-probability",
+          "thm-conditional-probability-multiplication-and-chain-rules"
+        ]
+      },
+      {
+        "id": "thm-finite-bayes-theorem",
+        "kind": "theorem",
+        "title": "Bayes' theorem over a finite partition",
+        "strategy": "Use the multiplication rule to write the numerator $\\mathbb P(A\\cap B_j)$ as $\\mathbb P(A\\mid B_j)\\mathbb P(B_j)$ and use total probability for $\\mathbb P(A)$. Require a positive denominator and check that the asserted posterior is only formed under that hypothesis.",
+        "deps": [
+          "thm-conditional-probability-multiplication-and-chain-rules",
+          "thm-finite-law-of-total-probability"
+        ]
+      },
+      {
+        "id": "def-pairwise-and-mutual-independence-of-events",
+        "kind": "definition",
+        "title": "Independent events, pairwise independence, and mutual independence of a finite family",
+        "deps": [
+          "def-finite-probability-space-and-event"
+        ]
+      },
+      {
+        "id": "thm-event-independence-via-conditioning",
+        "kind": "theorem",
+        "title": "Two positive-probability events are independent exactly when conditioning on either leaves the other's probability unchanged",
+        "strategy": "Divide the product identity by the appropriate positive probability for each forward implication; multiply the conditional identity back for the reverse implication. State both directions and explain why the positivity hypotheses are needed only to make the conditional probabilities defined.",
+        "deps": [
+          "def-conditional-probability",
+          "def-pairwise-and-mutual-independence-of-events"
+        ]
+      },
+      {
+        "id": "lem-mutual-independence-under-subfamilies-and-complements",
+        "kind": "lemma",
+        "title": "Mutual independence is inherited by subfamilies and by replacing events with complements",
+        "strategy": "Subfamilies are immediate from the defining intersection identities. For one complemented event, subtract the intersection with that event from the intersection of the remaining events; then iterate over the finite number of complements. Check the empty subfamily convention, which makes both sides equal to $1$.",
+        "deps": [
+          "lem-finite-probability-basic-laws",
+          "def-pairwise-and-mutual-independence-of-events"
+        ]
+      },
+      {
+        "id": "def-uniform-finite-probability-space",
+        "kind": "definition",
+        "title": "The uniform probability space on a nonempty finite set",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-finite-cardinality",
+          "thm-reals-ordered-field"
+        ]
+      },
+      {
+        "id": "def-product-of-finite-probability-spaces",
+        "kind": "definition",
+        "title": "The finite product of finite probability spaces",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-product-of-an-indexed-family",
+          "def-finite-sum"
+        ]
+      },
+      {
+        "id": "thm-product-probability-has-independent-coordinate-events",
+        "kind": "theorem",
+        "title": "Product weights normalize, and coordinate events are mutually independent",
+        "strategy": "Use finite Fubini repeatedly to factor the sum of product weights as the product of the coordinate sums, hence as $1$. For cylinder events, the same calculation factors their intersection probability into the product of their probabilities. Cover the empty product, empty coordinate subfamily, and coordinates containing probability-zero outcomes.",
+        "deps": [
+          "def-product-of-finite-probability-spaces",
+          "lem-finite-sum-laws",
+          "lem-finite-sum-reindexing-and-fubini",
+          "def-pairwise-and-mutual-independence-of-events"
+        ]
+      },
+      {
+        "id": "def-finite-real-random-variable-and-distribution",
+        "kind": "definition",
+        "title": "Real random variables on finite probability spaces and their finite distributions",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-function",
+          "def-finite-sum"
+        ]
+      },
+      {
+        "id": "def-expectation-on-a-finite-probability-space",
+        "kind": "definition",
+        "title": "Expectation of a real random variable on a finite probability space",
+        "deps": [
+          "def-finite-real-random-variable-and-distribution",
+          "def-finite-sum"
+        ]
+      },
+      {
+        "id": "lem-expectation-by-distribution",
+        "kind": "lemma",
+        "title": "Expectation is the sum of each attained value times its probability",
+        "strategy": "Partition the finite outcome space into the fibres of the random variable and reindex the expectation sum by value and fibre. The range is finite; values not attained are omitted. The empty-range case cannot occur because a probability space has total weight $1$.",
+        "deps": [
+          "def-expectation-on-a-finite-probability-space",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "thm-linearity-of-expectation",
+        "kind": "theorem",
+        "title": "Expectation is linear for every finite family of random variables, without any independence hypothesis",
+        "strategy": "Expand the expectation of a pointwise linear combination, interchange the two finite sums, and use distributivity. Prove the finite-family form including the empty sum; explicitly note that no step invokes event or variable independence.",
+        "deps": [
+          "def-expectation-on-a-finite-probability-space",
+          "lem-finite-sum-laws",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "thm-expectation-monotonicity-and-bounds",
+        "kind": "theorem",
+        "title": "Expectation preserves pointwise order and lies between the minimum and maximum attained values",
+        "strategy": "A pointwise nonnegative difference has nonnegative expectation because every outcome weight is nonnegative. Apply this to constants equal to the finite minimum and maximum. Deduce the averaging consequences that some outcome has value at least the expectation and some has value at most it, including the constant case.",
+        "deps": [
+          "def-expectation-on-a-finite-probability-space",
+          "lem-finite-sum-laws",
+          "thm-reals-ordered-field",
+          "lem-finite-set-has-max"
+        ]
+      },
+      {
+        "id": "def-indicator-random-variable",
+        "kind": "definition",
+        "title": "The indicator random variable of an event",
+        "deps": [
+          "def-finite-real-random-variable-and-distribution"
+        ]
+      },
+      {
+        "id": "lem-indicator-expectation-and-products",
+        "kind": "lemma",
+        "title": "Indicators turn event probabilities, intersections, and finite counts into expectations and products",
+        "strategy": "Evaluate an indicator on and off its event to obtain $\\mathbb E[1_A]=\\mathbb P(A)$, verify pointwise that a finite product of indicators is the indicator of the intersection, and verify that the sum of indicators counts how many events occur. Include the empty product and empty sum conventions.",
+        "deps": [
+          "def-indicator-random-variable",
+          "def-expectation-on-a-finite-probability-space",
+          "def-finite-sum"
+        ]
+      },
+      {
+        "id": "def-independence-of-finite-random-variables",
+        "kind": "definition",
+        "title": "Pairwise and mutual independence of finite-valued random variables",
+        "deps": [
+          "def-finite-real-random-variable-and-distribution",
+          "def-pairwise-and-mutual-independence-of-events"
+        ]
+      },
+      {
+        "id": "thm-event-independence-and-indicator-independence",
+        "kind": "theorem",
+        "title": "A finite family of events is mutually independent exactly when its indicators are mutually independent",
+        "strategy": "For the forward direction, every joint value assignment to the indicators is an intersection of chosen events and complements, so use complement-stability. For the reverse direction, specialize the joint-value identity to all values equal to $1$. Treat pairwise independence as the two-variable specialization.",
+        "deps": [
+          "lem-mutual-independence-under-subfamilies-and-complements",
+          "def-indicator-random-variable",
+          "def-independence-of-finite-random-variables"
+        ]
+      },
+      {
+        "id": "thm-expectation-of-products-of-independent-random-variables",
+        "kind": "theorem",
+        "title": "Expectation factors over a finite product of mutually independent random variables",
+        "strategy": "Group outcomes by the joint values of the variables. Mutual independence factors each joint probability, and finite Fubini factors the resulting multiple sum. Check the empty product, which has expectation $1$, and do not claim the converse.",
+        "deps": [
+          "lem-expectation-by-distribution",
+          "def-independence-of-finite-random-variables",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "def-variance-and-covariance",
+        "kind": "definition",
+        "title": "Variance, standard deviation, and covariance on a finite probability space",
+        "deps": [
+          "def-expectation-on-a-finite-probability-space",
+          "thm-reals-ordered-field"
+        ]
+      },
+      {
+        "id": "lem-variance-and-covariance-identities",
+        "kind": "lemma",
+        "title": "$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2$ and $\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y]$",
+        "strategy": "Expand the centred products pointwise and apply linearity of expectation, treating expectations as constants. Also record nonnegativity of variance and the zero variance of constants; do not infer that zero variance implies pointwise constancy on zero-weight outcomes.",
+        "deps": [
+          "thm-linearity-of-expectation",
+          "def-variance-and-covariance"
+        ]
+      },
+      {
+        "id": "thm-covariance-bilinearity-and-symmetry",
+        "kind": "theorem",
+        "title": "Covariance is symmetric and bilinear in finite linear combinations",
+        "strategy": "Use the product-expectation identity for covariance and linearity of expectation to expand each argument. Symmetry follows from commutativity of real multiplication. Include empty linear combinations and constant summands.",
+        "deps": [
+          "thm-linearity-of-expectation",
+          "lem-variance-and-covariance-identities"
+        ]
+      },
+      {
+        "id": "thm-variance-of-a-finite-sum",
+        "kind": "theorem",
+        "title": "Variance of a finite sum as the sum of all variances and covariances",
+        "strategy": "Write variance as the covariance of the sum with itself and use bilinearity twice. Separate diagonal terms from ordered off-diagonal terms, and give the equivalent $2\\sum_{i<j}$ form. Check the empty and singleton sums.",
+        "deps": [
+          "def-variance-and-covariance",
+          "thm-covariance-bilinearity-and-symmetry"
+        ]
+      },
+      {
+        "id": "cor-variance-adds-for-pairwise-independent-random-variables",
+        "kind": "corollary",
+        "title": "Variance adds for every finite pairwise-independent family",
+        "strategy": "Pairwise independence factors $\\mathbb E[X_iX_j]$, so every off-diagonal covariance is zero. Substitute into the finite-sum variance formula. Emphasize that pairwise independence suffices here even though mutual independence is stronger.",
+        "deps": [
+          "thm-expectation-of-products-of-independent-random-variables",
+          "thm-variance-of-a-finite-sum"
+        ]
+      },
+      {
+        "id": "def-bernoulli-and-binomial-random-variables",
+        "kind": "definition",
+        "title": "Bernoulli random variables and binomial random variables as sums of independent Bernoulli trials",
+        "deps": [
+          "def-finite-real-random-variable-and-distribution",
+          "def-independence-of-finite-random-variables",
+          "def-finite-sum"
+        ]
+      },
+      {
+        "id": "lem-bernoulli-and-binomial-mean-and-variance",
+        "kind": "lemma",
+        "title": "A Bernoulli$(p)$ variable has mean $p$ and variance $p(1-p)$; a binomial$(n,p)$ variable has mean $np$ and variance $np(1-p)$",
+        "strategy": "Compute the two-value expectation and second moment directly. For the binomial variable, use linearity for the mean and pairwise-independent variance additivity for the variance. Check $p=0$, $p=1$, and $n=0$.",
+        "deps": [
+          "def-bernoulli-and-binomial-random-variables",
+          "thm-linearity-of-expectation",
+          "lem-variance-and-covariance-identities",
+          "cor-variance-adds-for-pairwise-independent-random-variables"
+        ]
+      },
+      {
+        "id": "thm-markov-inequality",
+        "kind": "theorem",
+        "title": "Markov's inequality on a finite probability space",
+        "strategy": "For nonnegative $X$ and $a>0$, compare $X$ pointwise with $a1_{\\{X\\ge a\\}}$, take expectations, and divide by $a$. Keep the weak event $X\\ge a$ exactly as stated and explain why $a=0$ is excluded.",
+        "deps": [
+          "thm-expectation-monotonicity-and-bounds",
+          "lem-indicator-expectation-and-products"
+        ]
+      },
+      {
+        "id": "thm-chebyshev-inequality",
+        "kind": "theorem",
+        "title": "Chebyshev's inequality on a finite probability space",
+        "strategy": "Apply Markov to the nonnegative variable $(X-\\mathbb E X)^2$ at threshold $t^2$. The two events are equal for $t>0$, and the numerator is the variance by definition. State both the absolute-threshold and standard-deviation forms, with the zero-variance boundary separated.",
+        "deps": [
+          "def-variance-and-covariance",
+          "thm-markov-inequality"
+        ]
+      },
+      {
+        "id": "lem-cauchy-schwarz-for-finite-random-variables",
+        "kind": "lemma",
+        "title": "Cauchy-Schwarz for finite random variables: $\\mathbb E[XY]^2\\le\\mathbb E[X^2]\\mathbb E[Y^2]$",
+        "strategy": "If $\\mathbb E[X^2]=0$, nonnegative weighted squares force $X=0$ on every positive-weight outcome and the inequality follows. Otherwise expand the nonnegative expectation of $(Y-tX)^2$ at $t=\\mathbb E[XY]/\\mathbb E[X^2]$. Do not claim equality characterizations on probability-zero outcomes.",
+        "deps": [
+          "thm-linearity-of-expectation",
+          "thm-expectation-monotonicity-and-bounds"
+        ]
+      },
+      {
+        "id": "thm-finite-second-moment-lower-bound",
+        "kind": "theorem",
+        "title": "The finite second-moment bound $\\mathbb P(X\\ne0)\\ge\\mathbb E[X]^2/\\mathbb E[X^2]$",
+        "strategy": "Apply Cauchy-Schwarz to $X$ and the indicator of $\\{X\\ne0\\}$, using $X=X1_{\\{X\\ne0\\}}$. Divide only when $\\mathbb E[X^2]>0$; if it is zero, state separately that $X$ vanishes on every positive-weight outcome.",
+        "deps": [
+          "lem-indicator-expectation-and-products",
+          "lem-cauchy-schwarz-for-finite-random-variables"
+        ]
+      },
+      {
+        "id": "cor-relative-variance-positive-probability-bound",
+        "kind": "corollary",
+        "title": "$\\mathbb P(X=0)\\le\\operatorname{Var}(X)/\\mathbb E[X]^2$ whenever $\\mathbb E[X]\\ne0$",
+        "strategy": "The event $X=0$ forces $|X-\\mathbb E X|\\ge|\\mathbb E X|$. Apply Chebyshev at this positive threshold. Record the equivalent lower bound on $\\mathbb P(X\\ne0)$ and do not divide when the expectation is zero.",
+        "deps": [
+          "lem-variance-and-covariance-identities",
+          "thm-chebyshev-inequality"
+        ]
+      },
+      {
+        "id": "thm-positive-probability-existence-principle",
+        "kind": "theorem",
+        "title": "An event of positive probability in a finite probability space is nonempty",
+        "strategy": "The empty event has probability zero by the basic laws, so take the contrapositive. State clearly that this gives existence of an outcome but does not by itself specify one.",
+        "deps": [
+          "lem-finite-probability-basic-laws"
+        ]
+      },
+      {
+        "id": "thm-first-moment-method",
+        "kind": "theorem",
+        "title": "The first-moment method for avoiding or forcing a finite count of bad events",
+        "strategy": "For a nonnegative integer-valued $X$, Markov gives $\\mathbb P(X\\ge1)\\le\\mathbb E X$, so $\\mathbb E X<1$ leaves positive probability that $X=0$. Conversely $\\mathbb E X>0$ implies a positive-weight outcome with $X>0$. Include the averaging form that some outcome has $X\\ge\\mathbb E X$ and show by a constant-one example why the strict threshold is necessary.",
+        "deps": [
+          "thm-expectation-monotonicity-and-bounds",
+          "thm-markov-inequality",
+          "thm-positive-probability-existence-principle"
+        ]
+      },
+      {
+        "id": "prop-deletion-alteration-method",
+        "kind": "proposition",
+        "title": "The deletion-alteration method converts an expected defect count into a deterministic lower bound",
+        "strategy": "Formalize a finite random object with size $Y$ and $X$ listed defects, together with a deterministic repair that deletes at most one unit for each listed defect. Every repaired outcome has size at least $Y-X$, so averaging gives an admissible repaired object of size at least $\\mathbb E[Y-X]$. Allow repeated defects and explain why overcounting only weakens the bound.",
+        "deps": [
+          "thm-linearity-of-expectation",
+          "thm-expectation-monotonicity-and-bounds"
+        ]
+      },
+      {
+        "id": "lem-exponential-dominates-one-plus-x",
+        "kind": "lemma",
+        "title": "$1+x\\le\\exp(x)$ for every real $x$, hence $(1-p)^m\\le\\exp(-mp)$",
+        "strategy": "At $x=0$ there is equality. For $x>0$, the mean value theorem gives $\\exp(x)-1=\\exp(c)x$ with $0<c<x$, so monotonicity and $\\exp(0)=1$ give $\\exp(c)>1$. For $x<0$, it gives the same identity with $x<c<0$, so $0<\\exp(c)<1$ and multiplication by the negative $x$ reverses the comparison. Thus $1+x\\le\\exp(x)$ for every real $x$. Apply this at $-p$ and use monotonicity of natural powers on nonnegative bases to obtain $(1-p)^m\\le\\exp(-mp)$ for $0\\le p\\le1$, including $m=0$ and $p=1$.",
+        "deps": [
+          "def-real-exponential-function-and-e",
+          "thm-derivative-of-exponential",
+          "thm-exponential-is-strictly-increasing",
+          "cor-mean-value-theorem",
+          "def-integer-power",
+          "lem-power-monotone"
+        ]
+      },
+      {
+        "id": "def-erdos-renyi-random-graph",
+        "kind": "definition",
+        "title": "The Erdős-Rényi finite random graph $G(n,p)$",
+        "deps": [
+          "def-product-of-finite-probability-spaces",
+          "def-finite-simple-graph",
+          "def-binomial-coefficient"
+        ]
+      },
+      {
+        "id": "lem-random-graph-fixed-pattern-probability",
+        "kind": "lemma",
+        "title": "A prescribed set of present and absent edges in $G(n,p)$ has product probability",
+        "strategy": "Represent each potential edge by its Bernoulli coordinate. Mutual independence of coordinate events gives $p^r(1-p)^s$ for disjoint prescribed present and absent sets of sizes $r$ and $s$. Deduce the weight $p^m(1-p)^{\\binom n2-m}$ of a fixed labelled graph, including $p=0,1$ and empty prescriptions.",
+        "deps": [
+          "thm-product-probability-has-independent-coordinate-events",
+          "def-erdos-renyi-random-graph",
+          "def-binomial-coefficient"
+        ]
+      },
+      {
+        "id": "def-moment-generating-function",
+        "kind": "definition",
+        "title": "The moment generating function $M_X(t)=\\mathbb E[e^{tX}]$ on a finite probability space",
+        "deps": [
+          "def-expectation-on-a-finite-probability-space",
+          "def-real-exponential-function-and-e"
+        ]
+      },
+      {
+        "id": "lem-mgf-of-independent-finite-sum",
+        "kind": "lemma",
+        "title": "The moment generating function of a finite sum of independent variables is the product of their moment generating functions",
+        "strategy": "Use the exponential addition law pointwise to turn $e^{t\\sum X_i}$ into $\\prod e^{tX_i}$. Functions of mutually independent finite variables remain mutually independent by grouping value fibres, so factor the expectation. Include the empty sum/product.",
+        "deps": [
+          "def-moment-generating-function",
+          "thm-expectation-of-products-of-independent-random-variables",
+          "thm-exponential-addition-formula"
+        ]
+      },
+      {
+        "id": "lem-moment-bound-for-a-random-sign",
+        "kind": "lemma",
+        "title": "For a uniform random sign $\\varepsilon$, $\\mathbb E[e^{t\\varepsilon}]\\le e^{t^2/2}$",
+        "strategy": "Compute the expectation as $(e^t+e^{-t})/2$. Series linearity cancels the odd powers and yields the nonnegative even-power series. Use $(2j)!\\ge2^j j!$ for every $j$, including $j=0$, to compare its finite partial sums with those of $e^{t^2/2}$; the nonnegative-series supremum theorem passes the inequality to the sums. This route is finite-probability throughout and imports no continuous distribution.",
+        "deps": [
+          "def-moment-generating-function",
+          "def-real-exponential-function-and-e",
+          "def-factorial-and-falling-factorial",
+          "lem-finite-sum-laws",
+          "lem-series-linearity",
+          "thm-direct-comparison-test",
+          "thm-nonnegative-series-bounded-partial-sums"
+        ]
+      },
+      {
+        "id": "thm-chernoff-bound-for-independent-random-signs",
+        "kind": "theorem",
+        "title": "For $n\\ge1$ independent random signs, $\\mathbb P(|S|\\ge t)\\le2\\exp(-t^2/(2n))$ for $t>0$",
+        "strategy": "For $S=\\sum_{i=1}^n\\varepsilon_i$, $n\\ge1$, and $u>0$, strict monotonicity of the exponential and Markov give $\\mathbb P(S\\ge t)\\le e^{-ut}\\mathbb E[e^{uS}]$. Factor the MGF, apply the random-sign bound, and choose $u=t/n$ for $t>0$; handle $t=0$ separately. Use symmetry for the lower tail and the union bound for the two-sided estimate.",
+        "deps": [
+          "thm-markov-inequality",
+          "lem-mgf-of-independent-finite-sum",
+          "lem-moment-bound-for-a-random-sign",
+          "thm-exponential-is-strictly-increasing",
+          "thm-finite-union-bound"
+        ]
+      },
+      {
+        "id": "def-dependency-digraph-for-finite-events",
+        "kind": "definition",
+        "title": "Dependency digraphs for a finite family of bad events",
+        "deps": [
+          "def-pairwise-and-mutual-independence-of-events",
+          "def-multigraph-loop-and-digraph"
+        ]
+      },
+      {
+        "id": "lem-local-lemma-conditional-probability-bound",
+        "kind": "lemma",
+        "title": "The conditional-probability induction underlying the Lovász Local Lemma",
+        "strategy": "Under the asymmetric local-lemma hypotheses, prove by induction on $|S|$ that $\\mathbb P(A_i\\mid\\bigcap_{j\\in S}A_j^c)\\le x_i$ whenever the conditioning event is positive. Split $S$ into out-neighbours and non-neighbours of $i$, use dependency for the latter, and lower-bound the denominator by the product of $(1-x_j)$ supplied by smaller induction cases. Separate $S=\\varnothing$ and a zero denominator, which means the conditional expression is not formed.",
+        "deps": [
+          "def-conditional-probability",
+          "thm-conditional-probability-multiplication-and-chain-rules",
+          "lem-mutual-independence-under-subfamilies-and-complements",
+          "def-dependency-digraph-for-finite-events"
+        ]
+      },
+      {
+        "id": "thm-asymmetric-lovasz-local-lemma",
+        "kind": "theorem",
+        "title": "The asymmetric Lovász Local Lemma for finitely many events",
+        "strategy": "Assume $x_i\\in[0,1)$ and $\\mathbb P(A_i)\\le x_i\\prod_{i\\to j}(1-x_j)$. Apply the conditional-probability lemma successively to the complements in the probability chain rule to obtain $\\mathbb P(\\bigcap_iA_i^c)\\ge\\prod_i(1-x_i)>0$. Check the empty event family and ensure every intermediate conditioning event is positive by the partial product bound.",
+        "deps": [
+          "lem-local-lemma-conditional-probability-bound",
+          "thm-conditional-probability-multiplication-and-chain-rules"
+        ]
+      },
+      {
+        "id": "cor-symmetric-lovasz-local-lemma",
+        "kind": "corollary",
+        "title": "The symmetric Lovász Local Lemma under $ep(d+1)\\le1$",
+        "strategy": "For $d=0$, set every $x_i=1/e<1$ and apply the asymmetric lemma directly. For $d\\ge1$, set every $x_i=1/(d+1)$ and use $1+1/d\\le e^{1/d}$ to prove $(1-1/(d+1))^d\\ge e^{-1}$; then the asymmetric hypothesis follows from $ep(d+1)\\le1$. Preserve the distinction between pairwise independence and independence from a whole non-neighbour collection.",
+        "deps": [
+          "thm-asymmetric-lovasz-local-lemma",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-exponential-addition-formula",
+          "def-integer-power",
+          "lem-power-laws",
+          "lem-power-monotone",
+          "thm-reals-ordered-field"
+        ]
+      },
+      {
+        "id": "thm-hypergraph-two-colouring-by-first-moment",
+        "kind": "theorem",
+        "title": "Every $k$-uniform hypergraph with fewer than $2^{k-1}$ edges is $2$-colourable",
+        "strategy": "Colour each vertex independently and uniformly with two colours. Each fixed $k$-edge is monochromatic with probability $2^{1-k}$, so the expected number of monochromatic edges is $m2^{1-k}<1$. Apply the first-moment method. Include $k=1$, where the hypothesis forces no edges, and the empty hypergraph.",
+        "deps": [
+          "def-uniform-hypergraph-and-complete-partite-hypergraph",
+          "thm-product-probability-has-independent-coordinate-events",
+          "lem-indicator-expectation-and-products",
+          "thm-first-moment-method"
+        ]
+      },
+      {
+        "id": "thm-hypergraph-two-colouring-by-local-lemma",
+        "kind": "theorem",
+        "title": "A $k$-uniform hypergraph is $2$-colourable when every edge meets at most $d$ other edges and $e(d+1)\\le2^{k-1}$",
+        "strategy": "Use independent fair vertex colours and take monochromatic-edge events. Each has probability exactly $2^{1-k}$ and is mutually independent of the collection of events for disjoint edges. The edge-intersection graph is a dependency graph of maximum degree $d$, so the symmetric local lemma applies. Treat $k=1$, empty edge sets, and the $d=0$ case explicitly.",
+        "deps": [
+          "def-uniform-hypergraph-and-complete-partite-hypergraph",
+          "thm-product-probability-has-independent-coordinate-events",
+          "cor-symmetric-lovasz-local-lemma"
+        ]
+      },
+      {
+        "id": "thm-max-cut-at-least-half-the-edges",
+        "kind": "theorem",
+        "title": "Every finite graph with $m$ edges has a cut containing at least $m/2$ edges",
+        "strategy": "Place each vertex independently on either side with equal probability. An edge crosses with probability $1/2$; express the cut size as the sum of edge indicators and use linearity, not independence of those indicators. Averaging supplies a cut of at least the expectation. Include the edgeless graph.",
+        "deps": [
+          "def-finite-simple-graph",
+          "thm-product-probability-has-independent-coordinate-events",
+          "lem-indicator-expectation-and-products",
+          "thm-linearity-of-expectation",
+          "thm-expectation-monotonicity-and-bounds"
+        ]
+      },
+      {
+        "id": "thm-szele-many-hamilton-paths-in-a-tournament",
+        "kind": "theorem",
+        "title": "Szele's bound: for every $n\\ge1$, some $n$-vertex tournament has at least $n!/2^{n-1}$ Hamilton paths",
+        "strategy": "Orient every edge independently and uniformly. For each ordering of the $n$ vertices, the $n-1$ required edges have the prescribed directions with probability $2^{-(n-1)}$. Sum the indicators over all $n!$ orderings and average. Check $n=1$ explicitly; the theorem does not make the source's path-count claim at $n=0$.",
+        "deps": [
+          "def-tournament",
+          "def-hamilton-path-cycle-and-hamilton-connected",
+          "thm-product-probability-has-independent-coordinate-events",
+          "thm-number-of-bijections-of-a-finite-set",
+          "lem-indicator-expectation-and-products",
+          "thm-linearity-of-expectation",
+          "thm-expectation-monotonicity-and-bounds"
+        ]
+      },
+      {
+        "id": "def-tournament-property-s-k",
+        "kind": "definition",
+        "title": "Tournament property $S_k$: every set of at most $k$ vertices is dominated by one vertex",
+        "deps": [
+          "def-tournament"
+        ]
+      },
+      {
+        "id": "thm-tournament-property-s-k-existence",
+        "kind": "theorem",
+        "title": "If $k\\ge1$ and $n\\ge3k^2 2^k$, an $n$-vertex tournament with property $S_k$ exists",
+        "strategy": "Randomly orient every edge. For a fixed $k$-set $S$, the events that distinct outside vertices dominate $S$ are independent and each has probability $2^{-k}$, so failure has probability $(1-2^{-k})^{n-k}$. Union-bound over the $\\binom nk$ sets and use the binomial ratio to show this exact upper bound is nonincreasing once $n+1\\ge k2^k$. At $n=3k^22^k$, prove $\\binom nk\\le(en/k)^k$ from $\\binom nk k!\\le n^k$ and the $k$th nonnegative exponential-series term, then use $\\log x\\le x-1$ to settle $k\\ge3$; check $k=1,2$ by exact finite arithmetic. Extend every smaller set to a $k$-set, justified by $n\\ge k$.",
+        "deps": [
+          "def-tournament-property-s-k",
+          "thm-product-probability-has-independent-coordinate-events",
+          "thm-finite-union-bound",
+          "lem-exponential-dominates-one-plus-x",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "def-factorial-and-falling-factorial",
+          "def-real-exponential-function-and-e",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "thm-exponential-addition-formula",
+          "def-integer-power",
+          "lem-power-laws",
+          "lem-power-monotone",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws",
+          "thm-positive-probability-existence-principle"
+        ]
+      },
+      {
+        "id": "def-dominating-set-in-a-graph",
+        "kind": "definition",
+        "title": "Dominating sets in a finite graph",
+        "deps": [
+          "def-graph-adjacency-incidence-neighbourhood-and-degree"
+        ]
+      },
+      {
+        "id": "thm-small-dominating-set-from-minimum-degree",
+        "kind": "theorem",
+        "title": "An $n$-vertex graph of minimum degree $\\delta>1$ has a dominating set of size at most $n(\\log(\\delta+1)+1)/(\\delta+1)$",
+        "strategy": "Choose each vertex independently with probability $p=\\log(\\delta+1)/(\\delta+1)$, then add every undominated vertex. The expected size is at most $np+n(1-p)^{\\delta+1}\\le np+ne^{-p(\\delta+1)}$, which equals the claimed bound. Use $1+\\log x\\le x$ to check $0<p<1$, and then average over the finite product space.",
+        "deps": [
+          "def-dominating-set-in-a-graph",
+          "thm-product-probability-has-independent-coordinate-events",
+          "thm-linearity-of-expectation",
+          "thm-expectation-monotonicity-and-bounds",
+          "lem-exponential-dominates-one-plus-x",
+          "def-natural-logarithm",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "def-sum-free-set-of-integers",
+        "kind": "definition",
+        "title": "Sum-free subsets of the integers",
+        "deps": [
+          "def-integers"
+        ]
+      },
+      {
+        "id": "lem-arbitrarily-large-primes-congruent-to-two-modulo-three",
+        "kind": "lemma",
+        "title": "There are arbitrarily large primes congruent to $2$ modulo $3$",
+        "strategy": "Given all primes $q\\le M$ with $q\\equiv2\\pmod3$, form $N=3\\prod q-1$. A prime divisor of $N$ is not on the list, and at least one prime divisor is $2$ modulo $3$ because their product is. Treat an empty list, $M<2$, repeated prime factors, and the fact that $3$ does not divide $N$.",
+        "deps": [
+          "lem-every-integer-above-one-has-a-prime-divisor",
+          "thm-prime-factorisation-exists",
+          "def-congruence-modulo-an-integer",
+          "thm-integers-modulo-n-basic-algebra",
+          "def-finite-sum"
+        ]
+      },
+      {
+        "id": "thm-erdos-sum-free-subset-bound",
+        "kind": "theorem",
+        "title": "Every finite set of $n$ nonzero integers has a sum-free subset of size greater than $n/3$",
+        "strategy": "Choose a prime $p=3r+2$ exceeding twice the maximum absolute value in the set, and let $I=\\{r+1,\\ldots,2r+1\\}\\subset\\mathbb Z/p$. For uniform nonzero $z$, retain $a$ when $za\\in I$. Field multiplication makes each $za$ uniform on the nonzero residues, so the expected retained size is $n(r+1)/(3r+1)>n/3$. Verify that $I$ is sum-free modulo $p$ and that reduction is injective on the original integer set.",
+        "deps": [
+          "def-sum-free-set-of-integers",
+          "lem-arbitrarily-large-primes-congruent-to-two-modulo-three",
+          "thm-z-mod-p-is-a-field",
+          "lem-finite-set-has-max",
+          "def-uniform-finite-probability-space",
+          "lem-indicator-expectation-and-products",
+          "thm-linearity-of-expectation",
+          "thm-expectation-monotonicity-and-bounds"
+        ]
+      },
+      {
+        "id": "lem-random-graph-short-cycle-expectation",
+        "kind": "lemma",
+        "title": "The expected number of cycles of length at most $\\ell$ in $G(n,p)$",
+        "strategy": "For each $3\\le r\\le\\ell$, count labelled $r$-cycles as $n^{\\underline r}/(2r)$ and give each probability $p^r$. Sum the indicators to obtain the exact expectation and the bound $\\sum_{r=3}^{\\ell}n^rp^r/(2r)$. Handle $\\ell<3$ as an empty sum and $p=0,1$.",
+        "deps": [
+          "def-erdos-renyi-random-graph",
+          "def-graph-distance-and-girth",
+          "lem-random-graph-fixed-pattern-probability",
+          "def-factorial-and-falling-factorial",
+          "lem-indicator-expectation-and-products",
+          "thm-linearity-of-expectation"
+        ]
+      },
+      {
+        "id": "lem-random-graph-independence-number-bound",
+        "kind": "lemma",
+        "title": "$\\mathbb P(\\alpha(G(n,p))\\ge s)\\le\\binom ns(1-p)^{\\binom s2}\\le n^s\\exp(-p\\binom s2)$ for $s\\le n$",
+        "strategy": "If the independence number is at least $s$, some $s$-subset has all its potential edges absent. Compute that probability for a fixed subset and union-bound over the $\\binom ns$ choices. Use $\\binom ns\\le n^s$ and $(1-p)^m\\le\\exp(-mp)$ for the chained exponential bound needed later. Handle $s=0,1$ and $s>n$ separately rather than applying the second displayed inequality outside its range.",
+        "deps": [
+          "def-clique-and-independence-numbers",
+          "lem-random-graph-fixed-pattern-probability",
+          "thm-finite-union-bound",
+          "def-binomial-coefficient",
+          "lem-exponential-dominates-one-plus-x"
+        ]
+      },
+      {
+        "id": "thm-erdos-high-girth-and-high-chromatic-number",
+        "kind": "theorem",
+        "title": "For all positive $k,\\ell$, some finite graph has girth greater than $\\ell$ and chromatic number greater than $k$",
+        "strategy": "Choose a sufficiently large $n$ divisible by $2k$ and take $p=n^{-1+1/(2\\ell)}$. The short-cycle expectation is $o(n)$, so Markov makes the probability of at least $n/2$ short cycles tend to $0$; the independence-number bound makes $\\mathbb P(\\alpha(G)\\ge n/(2k))$ tend to $0$. The union bound leaves positive probability that both failures are absent. Delete one vertex from every listed short cycle. Fewer than $n/2$ vertices are removed, deletion creates no cycle, and any $k$-colouring of the survivor has a colour class larger than $n/(2k)$, contradicting the independence bound. Spell out $\\ell=1,2$ and every strict inequality.",
+        "deps": [
+          "def-graph-distance-and-girth",
+          "def-proper-vertex-colouring-and-chromatic-number",
+          "def-subgraph-induced-subgraph-and-spanning-subgraph",
+          "lem-random-graph-short-cycle-expectation",
+          "lem-random-graph-independence-number-bound",
+          "thm-markov-inequality",
+          "thm-finite-union-bound",
+          "thm-positive-probability-existence-principle",
+          "prop-deletion-alteration-method",
+          "thm-real-power-laws",
+          "thm-logarithm-slower-than-every-positive-power"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 222,
+    "id": "finite-probability-and-the-probabilistic-method-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Finite Probability and the Probabilistic Method — Examples and Counterexamples",
+    "companion": "finite-probability-and-the-probabilistic-method",
+    "requires": [
+      "finite-probability-and-the-probabilistic-method"
+    ],
+    "items": [
+      {
+        "id": "ex-loaded-die-and-conditional-probability",
+        "kind": "example",
+        "title": "A loaded die as a nonuniform finite probability space",
+        "strategy": "Assign six explicit rational weights summing to $1$, compute several event, complement, and conditional probabilities, and verify one instance of the multiplication rule. Include an outcome of weight zero to distinguish possible outcomes from positive-probability outcomes.",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "lem-finite-probability-basic-laws",
+          "def-conditional-probability",
+          "thm-conditional-probability-multiplication-and-chain-rules"
+        ]
+      },
+      {
+        "id": "ex-bayes-theorem-for-two-urns",
+        "kind": "example",
+        "title": "Bayes' theorem for choosing one of two urns and observing a colour",
+        "strategy": "Use a four-branch finite product experiment with unequal prior urn weights and explicit ball-colour probabilities. Compute the posterior by direct event weights and by Bayes' formula, checking that the two rational values agree.",
+        "deps": [
+          "thm-finite-bayes-theorem",
+          "def-product-of-finite-probability-spaces"
+        ]
+      },
+      {
+        "id": "ex-pairwise-independent-events-not-mutually-independent",
+        "kind": "example",
+        "title": "Three pairwise-independent events that are not mutually independent",
+        "strategy": "On the uniform four-point space of two bits $U,V$, take the events $U=0$, $V=0$, and $U=V$. Compute every pairwise intersection as $1/4$ but the triple intersection as $1/4\\ne1/8$; no modular-arithmetic convention is needed.",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "def-pairwise-and-mutual-independence-of-events"
+        ]
+      },
+      {
+        "id": "cex-equal-probability-events-need-not-be-independent",
+        "kind": "counterexample",
+        "title": "Events with the same probability need not be independent",
+        "strategy": "Use two distinct overlapping two-point events in a uniform three- or four-point space. Compute their equal marginal probabilities and an intersection probability unequal to the product, with neither event equal to the other.",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "def-pairwise-and-mutual-independence-of-events"
+        ]
+      },
+      {
+        "id": "cex-uncorrelated-random-variables-need-not-be-independent",
+        "kind": "counterexample",
+        "title": "Uncorrelated finite random variables need not be independent",
+        "strategy": "Let $X$ be uniform on $\\{-1,0,1\\}$ and set $Y=X^2$. Compute $\\operatorname{Cov}(X,Y)=0$ by symmetry, while $Y$ is determined by $X$ and a joint-value probability fails to factor.",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "def-independence-of-finite-random-variables",
+          "def-variance-and-covariance",
+          "lem-variance-and-covariance-identities"
+        ]
+      },
+      {
+        "id": "cex-dependent-variables-need-not-factor-expectation",
+        "kind": "counterexample",
+        "title": "For dependent variables, $\\mathbb E[XY]$ need not equal $\\mathbb E[X]\\mathbb E[Y]$",
+        "strategy": "Take one fair random sign and set $X=Y$ equal to it. Then both expectations vanish while $XY=1$ identically. Verify dependence directly from a joint-value probability.",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "def-independence-of-finite-random-variables",
+          "def-expectation-on-a-finite-probability-space"
+        ]
+      },
+      {
+        "id": "fs-linearity-of-expectation-requires-independence",
+        "kind": "false-statement",
+        "title": "False: linearity of expectation requires independence",
+        "strategy": "Refute the claim by citing the unconditional finite-sum theorem and then computing $\\mathbb E[X+X]=2\\mathbb E[X]$ for a nonconstant $X$, where the two summands are maximally dependent.",
+        "deps": [
+          "thm-linearity-of-expectation",
+          "cex-dependent-variables-need-not-factor-expectation"
+        ]
+      },
+      {
+        "id": "ex-strict-union-bound-for-overlapping-events",
+        "kind": "example",
+        "title": "The union bound can be strict for overlapping events",
+        "strategy": "Choose three explicit events on a small uniform space with a common outcome. Compute the union and the sum of marginal probabilities, then identify the overcount responsible for strictness.",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "cor-two-event-inclusion-exclusion",
+          "thm-finite-union-bound"
+        ]
+      },
+      {
+        "id": "ex-triangle-count-in-the-erdos-renyi-random-graph",
+        "kind": "example",
+        "title": "The expected number of triangles in $G(n,p)$ is $\\binom n3p^3$",
+        "strategy": "Index triangle indicators by three-element vertex sets. Each requires three prescribed edges and has probability $p^3$; linearity gives the expectation without requiring the triangle indicators to be independent. For variance, identify exactly which pairs have nonzero covariance, without claiming a concentration theorem not scaffolded here.",
+        "deps": [
+          "def-erdos-renyi-random-graph",
+          "lem-random-graph-fixed-pattern-probability",
+          "lem-indicator-expectation-and-products",
+          "thm-linearity-of-expectation",
+          "def-binomial-coefficient",
+          "def-variance-and-covariance"
+        ]
+      },
+      {
+        "id": "ex-second-moment-bound-for-a-nonempty-random-subset",
+        "kind": "example",
+        "title": "First- and second-moment bounds for a nonempty Bernoulli random subset",
+        "strategy": "Let $X$ be the size of a subset of $[n]$ obtained by independent retention with probability $p$. Compute $\\mathbb E X$, $\\mathbb E X^2$, and the exact probability $1-(1-p)^n$ that $X>0$, then compare the first-moment upper bound and second-moment lower bound at $n=0$, $p=0$, $p=1$, and a nondegenerate case.",
+        "deps": [
+          "def-bernoulli-and-binomial-random-variables",
+          "lem-bernoulli-and-binomial-mean-and-variance",
+          "thm-markov-inequality",
+          "thm-finite-second-moment-lower-bound"
+        ]
+      },
+      {
+        "id": "ex-diagonal-ramsey-lower-bound-by-the-union-bound",
+        "kind": "example",
+        "title": "The random-colouring proof of $R(k,k)>2^{k/2}$",
+        "strategy": "View the uniform red-blue edge colouring as $G(n,1/2)$. For each $k$-set, compute the probability of a monochromatic clique, union-bound over all $k$-sets, and reproduce the finite product estimate in the published theorem at $n=\\lfloor2^{k/2}\\rfloor$. Compare this sharper estimate with the cruder $2^{k/2-1}$ bound in Matoušek–Vondrák, and preserve the strict inequality for every $k\\ge3$.",
+        "deps": [
+          "def-erdos-renyi-random-graph",
+          "lem-random-graph-fixed-pattern-probability",
+          "thm-finite-union-bound",
+          "thm-positive-probability-existence-principle",
+          "def-off-diagonal-ramsey-number",
+          "thm-diagonal-ramsey-counting-lower-bound",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "def-factorial-and-falling-factorial",
+          "def-rational-power",
+          "lem-rational-power-monotone",
+          "lem-integer-part"
+        ]
+      },
+      {
+        "id": "ex-local-lemma-hypergraph-parameter-check",
+        "kind": "example",
+        "title": "Checking the symmetric local-lemma condition for a sparse uniform hypergraph",
+        "strategy": "Choose explicit integers $k$ and $d$ satisfying $e(d+1)\\le2^{k-1}$, build a small edge-intersection pattern with maximum degree $d$, and verify every bad-event probability and dependency-neighbour count before invoking the hypergraph local-lemma theorem. Contrast the conclusion with what the union bound alone would require as the total edge count grows.",
+        "deps": [
+          "thm-hypergraph-two-colouring-by-first-moment",
+          "thm-hypergraph-two-colouring-by-local-lemma"
+        ]
+      },
+      {
+        "id": "ex-high-girth-high-chromatic-parameter-ledger",
+        "kind": "example",
+        "title": "A parameter ledger for the high-girth, high-chromatic alteration proof",
+        "strategy": "For fixed small $k,\\ell$, display the choice of exponent and the two failure bounds as functions of $n$, choose a concrete sufficiently-large multiple of $2k$ by coarse estimates, and track the vertex loss, surviving independence number, girth, and chromatic-number contradiction. The example audits integrality and strict inequalities rather than pretending to construct the graph explicitly.",
+        "deps": [
+          "lem-random-graph-short-cycle-expectation",
+          "lem-random-graph-independence-number-bound",
+          "thm-erdos-high-girth-and-high-chromatic-number"
+        ]
+      },
+      {
+        "id": "cex-first-moment-threshold-one-is-not-enough",
+        "kind": "counterexample",
+        "title": "Expectation equal to $1$ does not force a nonnegative integer-valued variable to vanish somewhere",
+        "strategy": "Take the constant random variable $X=1$ on a one-outcome probability space. Its expectation is exactly $1$ and $\\mathbb P(X=0)=0$, showing why the first-moment avoidance criterion requires $\\mathbb E X<1$ rather than $\\le1$.",
+        "deps": [
+          "def-uniform-finite-probability-space",
+          "def-expectation-on-a-finite-probability-space",
+          "thm-first-moment-method"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,480 @@
+[
+  {
+    "order": 303,
+    "id": "complex-differentiability-and-cauchy-riemann",
+    "kind": "A",
+    "category": "complex-analysis",
+    "title": "Complex Differentiability and the Cauchy–Riemann Equations",
+    "companion": "complex-differentiability-and-cauchy-riemann-examples",
+    "requires": [
+      "the-complex-exponential-and-eulers-formula",
+      "field-extensions-and-the-complex-numbers",
+      "mixed-partials-taylor-and-extrema",
+      "the-topology-of-euclidean-space"
+    ],
+    "items": [
+      {
+        "id": "rem-complex-plane-euclidean-dictionary",
+        "kind": "remark",
+        "title": "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ as the Euclidean plane and as a normed real algebra: what the identification preserves",
+        "strategy": "Start with the published quotient construction, not an unproved pair model. Under $\\Phi(a+bi)=(a,b)$, record that addition and real scalar multiplication are coordinatewise, complex multiplication has the published bilinear coordinate formula, conjugation is reflection in the real axis, and $|z|=\\|\\Phi(z)\\|_2$, so the metric, convergence, continuity, and topology agree with those of $\\mathbb R^2$. State equally explicitly what is not being identified: a general real-linear map need not be complex-linear, multiplication is extra structure beyond the real vector space, and the Euclidean identification supplies no compatible field order. Treat the last clause as an inline reminder from $i^2=-1$, not as a second false-statement item.",
+        "deps": [
+          "def-complex-numbers-and-arithmetic",
+          "thm-complex-numbers-are-the-real-coordinate-plane",
+          "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "lem-complex-conjugation-and-modulus-laws",
+          "def-complex-metric-convergence-and-continuity",
+          "rem-euclidean-topology-dictionary"
+        ]
+      },
+      {
+        "id": "def-complex-domain",
+        "kind": "definition",
+        "title": "A complex domain is a nonempty connected open subset of $\\mathbb C$",
+        "deps": [
+          "rem-complex-plane-euclidean-dictionary",
+          "def-metric-topology",
+          "def-connected-space"
+        ]
+      },
+      {
+        "id": "def-complex-differentiability-holomorphic-and-entire",
+        "kind": "definition",
+        "title": "Complex differentiability at a point, the complex derivative, holomorphic functions, and entire functions",
+        "deps": [
+          "rem-complex-plane-euclidean-dictionary",
+          "def-complex-metric-convergence-and-continuity",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "lem-uniqueness-of-the-complex-derivative",
+        "kind": "lemma",
+        "title": "The complex derivative at a point is unique",
+        "strategy": "If two numbers $L$ and $M$ are limits of the same difference quotient, assume $L\\ne M$ and apply both limit estimates with tolerance $|L-M|/3$. The triangle inequality then gives $|L-M|<2|L-M|/3$, a contradiction. Keep the punctured-domain quantifier from the derivative definition explicit.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "def-wirtinger-derivatives",
+        "kind": "definition",
+        "title": "The Wirtinger derivatives $\\partial_z f$ and $\\partial_{\\bar z}f$, and antiholomorphic functions",
+        "deps": [
+          "rem-complex-plane-euclidean-dictionary",
+          "def-directional-and-partial-derivatives"
+        ]
+      },
+      {
+        "id": "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+        "kind": "theorem",
+        "title": "Complex differentiability is equivalent to a complex-linear real total derivative, to $\\partial_{\\bar z}f=0$, and to real differentiability plus the Cauchy–Riemann equations",
+        "strategy": "For $f=u+iv$ on an open set and $a$ in its domain, prove one four-way equivalence in a single item: (i) the complex difference quotient exists; (ii) $f$ is real totally differentiable and $Df(a)$ is multiplication by a complex number; (iii) $f$ is real totally differentiable and $\\partial_{\\bar z}f(a)=0$; (iv) $f$ is real totally differentiable and $u_x=v_y$, $u_y=-v_x$ at $a$. From (i), subtract $f'(a)h$ to obtain the real total-derivative remainder. Translate a real derivative matrix through the published coordinate model to show that complex-linearity is exactly the CR matrix form, and expand the Wirtinger formula to identify the same two real equations. Record $f'(a)=u_x+iv_x=v_y-iu_y=\\partial_z f(a)$.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-wirtinger-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-euclidean-linear-map",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "def-jacobian-matrix-and-gradient",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-complex-numbers-are-the-real-coordinate-plane"
+        ]
+      },
+      {
+        "id": "cor-complex-differentiability-implies-continuity",
+        "kind": "corollary",
+        "title": "Complex differentiability at a point implies continuity there",
+        "strategy": "Use the four-way theorem to obtain real total differentiability under the Euclidean identification, then apply the published local linear bound and continuity theorem. Translate the conclusion back through the metric dictionary.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-total-differentiability-gives-a-local-linear-bound-and-continuity",
+          "rem-complex-plane-euclidean-dictionary"
+        ]
+      },
+      {
+        "id": "thm-continuous-partials-and-cauchy-riemann-imply-holomorphic",
+        "kind": "theorem",
+        "title": "Continuous first partial derivatives and the Cauchy–Riemann equations imply complex differentiability pointwise, and holomorphy when they hold throughout an open set",
+        "strategy": "Let $f=u+iv$ on an open set and fix $a$. Assume all four first partials exist on a neighbourhood of $a$, are continuous at $a$, and satisfy CR at $a$. Apply the published continuous-partials theorem componentwise to get real total differentiability at $a$, then use the CR direction of the four-way theorem. Deduce the open-set corollary when the hypotheses hold at every point. State these exact hypotheses; do not replace them by the false assertion that bare existence of partials plus CR is sufficient.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-continuous-partial-derivatives-imply-total-differentiability"
+        ]
+      },
+      {
+        "id": "cor-cartesian-and-polar-cauchy-riemann-equations",
+        "kind": "corollary",
+        "title": "Cartesian and polar forms of the Cauchy–Riemann equations agree away from the origin",
+        "strategy": "On an open parameter set with $r>0$ and $re^{i\\theta}$ in the domain, set $U(r,\\theta)=u(r\\cos\\theta,r\\sin\\theta)$ and $V$ similarly. Use the real total-derivative chain rule and the real sine/cosine derivatives to transform the Cartesian equations into $U_r=r^{-1}V_\\theta$ and $V_r=-r^{-1}U_\\theta$, and reverse the invertible coordinate calculation. Also derive $f'(re^{i\\theta})=e^{-i\\theta}(U_r+iV_r)$. The statement must exclude $r=0$ and must not presume a global argument branch.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ]
+      },
+      {
+        "id": "thm-algebra-of-complex-derivatives",
+        "kind": "theorem",
+        "title": "Linearity, product, reciprocal, and quotient rules for complex derivatives",
+        "strategy": "At a common point of complex differentiability, prove the sum and scalar rules by linearity of limits. For the product insert and subtract $f(a)g(a+h)$ and use continuity of the differentiable factors. For $1/g$, factor the difference quotient and use $g(a)\\ne0$ plus continuity to keep the denominator nonzero near $a$; combine with the product rule for the quotient. State the local nonvanishing set precisely and include the constant and identity derivatives as base cases.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "cor-complex-differentiability-implies-continuity",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-chain-rule-for-complex-derivatives",
+        "kind": "theorem",
+        "title": "The chain rule for complex derivatives",
+        "strategy": "Regard both complex-differentiable maps as real totally differentiable with derivatives given by complex multiplication. Apply the published total-derivative chain rule; the composite of multiplication by $f'(a)$ and multiplication by $g'(f(a))$ is multiplication by their product. Invoke the four-way equivalence in reverse to recover complex differentiability and the formula $(g\\circ f)'(a)=g'(f(a))f'(a)$.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-chain-rule-for-total-derivatives"
+        ]
+      },
+      {
+        "id": "thm-wirtinger-chain-rule-for-real-differentiable-maps",
+        "kind": "theorem",
+        "title": "The Wirtinger chain rule for compositions of real-differentiable complex-valued maps",
+        "strategy": "For real-differentiable $f:U\\to V$ and $g:V\\to\\mathbb C$, write the real differential of each map in the basis $(h,\\bar h)$ supplied by its two Wirtinger derivatives. Apply the published real total-derivative chain rule and collect the coefficients of $h$ and $\\bar h$. This gives $(g\\circ f)_z=(g_w\\circ f)f_z+(g_{\\bar w}\\circ f)\\overline{f_{\\bar z}}$ and $(g\\circ f)_{\\bar z}=(g_w\\circ f)f_{\\bar z}+(g_{\\bar w}\\circ f)\\overline{f_z}$. Check the identity and conjugation maps as sign/conjugation tests, then recover the holomorphic chain rule when both barred derivatives vanish.",
+        "deps": [
+          "def-wirtinger-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-conjugate-difference-quotient-characterizes-antiholomorphic-maps",
+        "kind": "theorem",
+        "title": "A conjugate difference quotient characterizes antiholomorphic maps",
+        "strategy": "Assume for every $z$ in an open set that the limit $g(z)=\\lim_{h\\to0}(f(z+h)-f(z))/\\bar h$ exists. Replace $h$ by $\\bar k$ and conjugate the relevant linear model to prove real differentiability with differential $h\\mapsto g(z)\\bar h$; equivalently $f_z=0$ and $f_{\\bar z}=g$. Conversely, if $f$ is real differentiable and antiholomorphic, its Wirtinger expansion has precisely this form, so division by $\\bar h$ gives the limit. Keep the pointwise real-differentiability hypothesis explicit in the converse.",
+        "deps": [
+          "def-wirtinger-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "cor-continuous-complex-derivative-gives-c1-components",
+        "kind": "corollary",
+        "title": "A holomorphic function with continuous complex derivative has $C^1$ real and imaginary components",
+        "strategy": "For $f=u+iv$, the four-way theorem gives $u_x=\\operatorname{Re}f'$, $v_x=\\operatorname{Im}f'$, $u_y=-\\operatorname{Im}f'$, and $v_y=\\operatorname{Re}f'$. The published modulus formula gives $|\\operatorname{Re}(w_1-w_2)|,|\\operatorname{Im}(w_1-w_2)|\\le|w_1-w_2|$, so both coordinate maps are continuous; continuity of $f'$ therefore makes all four first partials continuous. This is a conditional bridge only; do not use it to assume that every holomorphic derivative is continuous before the later regularity theory.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ]
+      },
+      {
+        "id": "thm-derivative-of-a-continuous-complex-local-inverse",
+        "kind": "theorem",
+        "title": "A continuous local inverse has derivative reciprocal to a nonzero complex derivative",
+        "strategy": "Let $f:U\\to V$ be a bijection between open neighbourhoods with inverse $g$ continuous at $b=f(a)$. If $f$ is complex differentiable at $a$ and $f'(a)\\ne0$, rewrite the inverse difference quotient as $(z-a)/(f(z)-f(a))$ with $z=g(w)$. Continuity of $g$ sends $w\\to b$ to $z\\to a$, and the nonzero derivative makes the reciprocal limit legitimate. Conclude $g'(b)=1/f'(a)$. Keep continuity of the inverse as a hypothesis; no inverse-function theorem is available in this page's closure.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "cor-complex-differentiability-implies-continuity",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+        "kind": "theorem",
+        "title": "Complex polynomials are entire with the power-rule derivative, and rational functions are holomorphic wherever their denominator is nonzero",
+        "strategy": "Prove the nonnegative integer power rule by induction from the identity and product rules, checking the constant power separately. Finite linear combinations give the displayed formal derivative of a polynomial. Apply the quotient rule to $P/Q$ on the open set where $Q\\ne0$, with derivative $(P'Q-PQ')/Q^2$. State the zero polynomial and constant-denominator cases explicitly.",
+        "deps": [
+          "thm-algebra-of-complex-derivatives",
+          "def-polynomial-ring-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-complex-exponential-is-entire-with-derivative-itself",
+        "kind": "theorem",
+        "title": "The complex exponential is entire and its complex derivative is itself",
+        "strategy": "Use the published Cartesian formula $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$. The real exponential, sine, and cosine derivative theorems give continuous first partials, and direct calculation gives CR everywhere. Apply the exact $C^1$ converse and compute $\\exp'(z)=u_x+iv_x=\\exp(z)$. This proof bridges the already-published definition and Euler formula to complex differentiability without re-proving the power-series construction.",
+        "deps": [
+          "thm-continuous-partials-and-cauchy-riemann-imply-holomorphic",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-derivative-of-exponential",
+          "thm-sine-and-cosine-derivatives"
+        ]
+      },
+      {
+        "id": "thm-zero-complex-derivative-on-a-domain-implies-constant",
+        "kind": "theorem",
+        "title": "A holomorphic function with zero derivative on a domain is constant",
+        "strategy": "For arbitrary points of a nonempty domain, use the published equivalence of connectedness and polygonal connectedness for open subsets of $\\mathbb R^2$ to choose a finite polygonal path. On each line segment, apply the real total-derivative chain rule to the restriction of $f$; the four-way theorem makes the derivative zero. Apply the one-variable zero-derivative theorem to the real and imaginary components on the closed parameter interval, and concatenate the finitely many constant restrictions. The connectedness hypothesis is essential and is not replaced by mere openness.",
+        "deps": [
+          "def-complex-domain",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-zero-derivative-implies-constant",
+          "def-polygonal-path-and-polygonal-connectedness",
+          "thm-open-connected-subsets-of-rn-are-polygonally-connected"
+        ]
+      },
+      {
+        "id": "cor-real-valued-holomorphic-function-is-constant",
+        "kind": "corollary",
+        "title": "A real-valued holomorphic function on a domain is constant",
+        "strategy": "Write $f=u+iv$ with $v=0$. The CR equations force both first partials of $u$ to vanish and hence $f'=0$ pointwise. Apply the zero-derivative theorem on the domain.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant"
+        ]
+      },
+      {
+        "id": "cor-constant-modulus-holomorphic-function-is-constant",
+        "kind": "corollary",
+        "title": "A holomorphic function of constant modulus on a domain is constant",
+        "strategy": "If the constant modulus is zero, modulus definiteness gives $f=0$. Otherwise differentiate $u^2+v^2=c^2$ in both real coordinates and use CR. The resulting two-by-two homogeneous system for $u_x,u_y$ has determinant $u^2+v^2=c^2>0$, so all four first partials vanish and $f'=0$. Finish with the zero-derivative theorem. This proof deliberately avoids the later maximum-modulus principle.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "cor-holomorphic-function-with-holomorphic-conjugate-is-constant",
+        "kind": "corollary",
+        "title": "If both $f$ and $\\bar f$ are holomorphic on a domain, then $f$ is constant",
+        "strategy": "Write $f=u+iv$. CR for $f$ gives $u_x=v_y$ and $u_y=-v_x$, while CR for $\\bar f=u-iv$ gives $u_x=-v_y$ and $u_y=v_x$. Combine the pairs to make every first partial zero, hence $f'=0$, and apply the domain theorem.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-zero-complex-derivative-on-a-domain-implies-constant"
+        ]
+      },
+      {
+        "id": "def-oriented-conformal-map-at-a-point",
+        "kind": "definition",
+        "title": "Orientation-preserving conformality for a real-differentiable complex map at a point",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "def-euclidean-inner-product",
+          "rem-complex-plane-euclidean-dictionary"
+        ]
+      },
+      {
+        "id": "lem-oriented-similarities-are-nonzero-complex-multiplications",
+        "kind": "lemma",
+        "title": "Plane similarities are complex or conjugate-complex multiplications; the orientation-preserving ones are exactly the nonzero complex multiplications",
+        "strategy": "For a real-linear map with columns $p$ and $q$, the inner-product similarity condition makes the columns orthogonal with the same positive length. A positive signed area factor selects $q=(-p_2,p_1)$ and gives the matrix $[[a,-b],[b,a]]$, multiplication by $a+ib\\ne0$; a negative factor selects the conjugate-complex form $h\\mapsto\\xi\\bar h$. Conversely calculate inner products and the signed area factors $|\\xi|^2$ and $-|\\xi|^2$ directly. This separates angle preservation from orientation instead of silently building orientation into the word similarity.",
+        "deps": [
+          "def-oriented-conformal-map-at-a-point",
+          "thm-complex-numbers-are-the-real-coordinate-plane",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "thm-nonzero-complex-derivative-iff-oriented-conformal",
+        "kind": "theorem",
+        "title": "A real-differentiable complex map is orientation-preserving conformal at a point exactly when it is complex differentiable there with nonzero derivative",
+        "strategy": "If $f$ is complex differentiable, the four-way theorem identifies $Df(a)$ with multiplication by $f'(a)$; when this number is nonzero the similarity lemma gives oriented conformality. Conversely, the conformal derivative is a nonzero complex multiplication by the lemma, so the real-derivative condition in the four-way equivalence gives complex differentiability and identifies its nonzero derivative. State the pointwise convention, without assuming local or global injectivity.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "def-oriented-conformal-map-at-a-point",
+          "lem-oriented-similarities-are-nonzero-complex-multiplications"
+        ]
+      },
+      {
+        "id": "cor-jacobian-determinant-of-a-holomorphic-map",
+        "kind": "corollary",
+        "title": "The Jacobian determinant of a holomorphic map is $|f'|^2$ and is positive exactly where $f'\\ne0$",
+        "strategy": "Use the CR matrix $[[u_x,u_y],[v_x,v_y]]=[[a,-b],[b,a]]$ with $a+ib=f'$. Its two-by-two determinant is $a^2+b^2=|f'|^2$. Modulus definiteness makes this positive exactly for a nonzero derivative and zero exactly when the derivative vanishes; it can never be negative.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "def-jacobian-matrix-and-gradient",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-c2-holomorphic-components-are-harmonic",
+        "kind": "theorem",
+        "title": "The $C^2$ real and imaginary parts of a holomorphic function satisfy Laplace's equation and form a harmonic-conjugate pair",
+        "strategy": "Let $f=u+iv$ be holomorphic and assume explicitly that $u$ and $v$ are $C^2$. Differentiate $u_x=v_y$ in $x$ and $u_y=-v_x$ in $y$, then use Clairaut–Schwarz to obtain $u_{xx}+u_{yy}=0$. Differentiate the other way for $v_{xx}+v_{yy}=0$. At first use, say that a $C^2$ real function satisfying Laplace's equation is harmonic and that $v$ is a harmonic conjugate of $u$ when $u+iv$ is holomorphic. Do not claim here that every holomorphic function is automatically $C^2$ or that every harmonic function globally has a conjugate; those require later complex-analysis machinery.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-clairaut-schwarz-mixed-partials"
+        ]
+      },
+      {
+        "id": "thm-c2-holomorphic-function-has-holomorphic-derivative",
+        "kind": "theorem",
+        "title": "If a holomorphic function has $C^2$ components, then its derivative is holomorphic",
+        "strategy": "Write $f'=u_x+iv_x$. The $C^2$ hypothesis makes these two components $C^1$. Differentiate the CR equations and use equality of mixed partials to verify CR for $f'$. Apply the continuous-partials converse. Emphasize that this is a conditional first step, not the later theorem that arbitrary holomorphic functions possess derivatives of all orders.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-continuous-partials-and-cauchy-riemann-imply-holomorphic",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-clairaut-schwarz-mixed-partials"
+        ]
+      },
+      {
+        "id": "cor-c2-holomorphic-components-have-nonpositive-hessian-determinant",
+        "kind": "corollary",
+        "title": "The Hessian determinant of each $C^2$ holomorphic component is nonpositive; a nondegenerate critical point is a saddle",
+        "strategy": "For either component $w$, harmonicity gives $w_{yy}=-w_{xx}$, so $\\det H_w=-w_{xx}^2-w_{xy}^2\\le0$. If a critical point has nonzero Hessian determinant, it is negative, hence the symmetric Hessian is indefinite and the published multivariable second-derivative test gives neither a local maximum nor a local minimum (a saddle). When the determinant is zero, state that the Hessian test is inconclusive.",
+        "deps": [
+          "thm-c2-holomorphic-components-are-harmonic",
+          "def-hessian-and-euclidean-critical-point",
+          "cor-two-variable-hessian-determinant-test"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 304,
+    "id": "complex-differentiability-and-cauchy-riemann-examples",
+    "kind": "B",
+    "category": "complex-analysis",
+    "title": "Complex Differentiability and the Cauchy–Riemann Equations: Examples and Counterexamples",
+    "companion": "complex-differentiability-and-cauchy-riemann",
+    "requires": [
+      "complex-differentiability-and-cauchy-riemann"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-square-function-from-the-complex-difference-quotient",
+        "kind": "example",
+        "title": "$z\\mapsto z^2$ is entire with derivative $2z$, directly from the complex difference quotient",
+        "strategy": "Factor $((z+h)^2-z^2)/h=2z+h$ for $h\\ne0$ and take the complex limit. Also display $u=x^2-y^2$, $v=2xy$, verify CR as a consistency check, and verify directly that both satisfy Laplace's equation, so $v$ is a harmonic conjugate of $u$ under the page's $C^2$ convention.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "ex-complex-exponential-cauchy-riemann-in-cartesian-and-polar-form",
+        "kind": "example",
+        "title": "The complex exponential satisfies the Cauchy–Riemann equations in Cartesian and polar form",
+        "strategy": "First differentiate from the definition: the addition law gives $(e^{z+h}-e^z)/h=e^z(e^h-1)/h$, and the published power series gives $(e^h-1)/h=1+\\sum_{n\\ge2}h^{n-1}/n!\\to1$ by a uniform bound for $|h|\\le1$. Then compute the four Cartesian partials from $e^{x+iy}=e^x(\\cos y+i\\sin y)$ and recover $f'=f$. For $z=re^{i\\theta}$, write $e^z=e^{r\\cos\\theta}(\\cos(r\\sin\\theta)+i\\sin(r\\sin\\theta))$, compute $U_r,U_\\theta,V_r,V_\\theta$, and verify both polar CR identities for $r>0$. At the origin use the Cartesian calculation, since polar coordinates are singular there.",
+        "deps": [
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "cor-cartesian-and-polar-cauchy-riemann-equations",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "lem-complex-exponential-series-converges-everywhere"
+        ]
+      },
+      {
+        "id": "ex-reciprocal-function-from-the-complex-difference-quotient",
+        "kind": "example",
+        "title": "$z\\mapsto1/z$ is holomorphic on $\\mathbb C\\setminus\\{0\\}$ with derivative $-1/z^2$, directly from the difference quotient",
+        "strategy": "For $z\\ne0$ and sufficiently small $h$ with $z+h\\ne0$, simplify $((z+h)^{-1}-z^{-1})/h=-1/(z(z+h))$ and use continuity of multiplication and reciprocal at the nonzero point. State that zero is excluded from the domain, not merely a point where the derivative formula fails.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "ex-mobius-map-is-conformal-off-its-pole",
+        "kind": "example",
+        "title": "A Möbius map $(az+b)/(cz+d)$ with $ad-bc\\ne0$ is conformal wherever $cz+d\\ne0$",
+        "strategy": "Use the quotient rule to compute $f'(z)=(ad-bc)/(cz+d)^2$. The determinant hypothesis and domain condition make the derivative nonzero, so the pointwise conformality theorem applies. Treat $c=0$ and the unique pole when $c\\ne0$ explicitly; make no global injectivity claim beyond the usual extended-plane setting, which is not yet defined.",
+        "deps": [
+          "thm-algebra-of-complex-derivatives",
+          "thm-nonzero-complex-derivative-iff-oriented-conformal"
+        ]
+      },
+      {
+        "id": "ex-square-map-sends-a-grid-to-orthogonal-parabolas",
+        "kind": "example",
+        "title": "The square map sends a Cartesian grid to two orthogonal families of parabolas away from its critical point",
+        "strategy": "Under $w=z^2$, a vertical line $x=c$ has image $(u,v)=(c^2-y^2,2cy)$ and a horizontal line $y=c$ has image $(u,v)=(x^2-c^2,2cx)$. Eliminate the parameters to identify the parabolic arcs, and use the nonzero derivative $2z$ to prove their tangent directions remain orthogonal at every image of a grid crossing with $z\\ne0$. At $z=0$ the derivative vanishes and the conformality conclusion is unavailable.",
+        "deps": [
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-nonzero-complex-derivative-iff-oriented-conformal"
+        ]
+      },
+      {
+        "id": "fs-real-differentiability-implies-complex-differentiability",
+        "kind": "false-statement",
+        "title": "FALSE: real differentiability as a map $\\mathbb R^2\\to\\mathbb R^2$ implies complex differentiability; conjugation is the counterexample",
+        "strategy": "For $f(z)=\\bar z$, the real coordinate map $(x,y)\\mapsto(x,-y)$ is linear and hence totally differentiable everywhere. Its matrix $\\operatorname{diag}(1,-1)$ is not a complex-multiplication matrix, equivalently $u_x=1\\ne-1=v_y$, so the four-way theorem makes $f$ nowhere complex differentiable. Optionally confirm directly that real and imaginary increments give quotient limits $1$ and $-1$.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "thm-complex-numbers-are-the-real-coordinate-plane"
+        ]
+      },
+      {
+        "id": "cex-modulus-squared-is-complex-differentiable-only-at-zero",
+        "kind": "counterexample",
+        "title": "$z\\mapsto|z|^2$ is complex differentiable exactly at $0$, with derivative $0$, but is holomorphic on no neighbourhood of $0$",
+        "strategy": "At the origin the quotient $|h|^2/h=\\bar h$ tends to zero. At $z=x+iy\\ne0$, the real function has $u=x^2+y^2$ and $v=0$; CR would force $x=y=0$, so differentiability fails. Conclude that differentiability at one point need not extend to any neighbourhood.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "cex-real-part-is-nowhere-complex-differentiable",
+        "kind": "counterexample",
+        "title": "$z\\mapsto\\operatorname{Re}z$ is real differentiable but nowhere complex differentiable",
+        "strategy": "The real coordinate map is $(x,y)\\mapsto(x,0)$, so its total derivative is constant. CR for a real-valued function would require both partials of its real component to vanish, but $u_x=1$. Equivalently, horizontal and vertical difference quotients are $1$ and $0$.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann"
+        ]
+      },
+      {
+        "id": "cex-modulus-is-nowhere-complex-differentiable",
+        "kind": "counterexample",
+        "title": "$z\\mapsto|z|$ is nowhere complex differentiable",
+        "strategy": "At zero compare $|t|/t$ along positive and negative real increments. At a nonzero point the modulus is real differentiable with nonzero gradient $(x/|z|,y/|z|)$; CR for a real-valued complex-differentiable function would force that gradient to vanish. Cover the origin and all nonzero points separately.",
+        "deps": [
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "ex-complex-differentiable-on-the-coordinate-axes-but-holomorphic-nowhere",
+        "kind": "example",
+        "title": "$x^3+3xy^2+i(y^3+3x^2y)$ is complex differentiable exactly on the coordinate axes but holomorphic nowhere",
+        "strategy": "The polynomial components have continuous partials. Compute $u_x=v_y=3x^2+3y^2$ and $u_y=v_x=6xy$; CR holds exactly when $xy=0$, so the $C^1$ converse gives complex differentiability exactly on the two axes. Every neighbourhood of every axis point contains a point with $xy\\ne0$, so no point has a neighbourhood on which the function is holomorphic.",
+        "deps": [
+          "thm-continuous-partials-and-cauchy-riemann-imply-holomorphic",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann"
+        ]
+      },
+      {
+        "id": "fs-cauchy-riemann-at-a-point-implies-complex-differentiability",
+        "kind": "false-statement",
+        "title": "FALSE: the Cauchy–Riemann equations at one point imply complex differentiability there",
+        "strategy": "Define $f(0)=0$ and $f(z)=\\bar z^2/z$ for $z\\ne0$. Since $|f(z)|=|z|$, the function is continuous at zero. Compute the four coordinate partials at zero directly to get $u_x=v_y=1$ and $u_y=-v_x=0$, so CR holds. But $f(z)/z=\\bar z^2/z^2$ equals $1$ on the real axis and $-1$ on the line $y=x$, so the complex derivative at zero does not exist.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "fs-cauchy-riemann-on-an-open-set-without-regularity-implies-holomorphy",
+        "kind": "false-statement",
+        "title": "FALSE: existence of partial derivatives satisfying Cauchy–Riemann everywhere on an open set implies holomorphy",
+        "strategy": "Set $f(0)=0$ and $f(z)=\\exp(-z^{-4})$ for $z\\ne0$. Off zero it is holomorphic by the power, reciprocal, exponential, and chain rules, hence satisfies CR. Along both coordinate axes, $e^{-1/t^4}$ decays faster than $|t|$, so all four partials at zero exist and vanish; cite exponential domination for the estimate. Along $z=re^{i\\pi/4}$ the value is $e^{1/r^4}$, so $f$ is unbounded in every neighbourhood of zero and therefore discontinuous and not complex differentiable there. Thus CR holds everywhere but holomorphy fails. As a sharper Wirtinger warning, note that $\\bar f$ has $(\\bar f)_z\\equiv0$ continuously although its coordinate partials are discontinuous at zero.",
+        "deps": [
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-algebra-of-complex-derivatives",
+          "thm-chain-rule-for-complex-derivatives",
+          "thm-exponential-beats-every-polynomial",
+          "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann"
+        ]
+      },
+      {
+        "id": "fs-zero-complex-derivative-on-an-open-set-implies-constant",
+        "kind": "false-statement",
+        "title": "FALSE: a holomorphic function with zero derivative on an arbitrary open set is constant",
+        "strategy": "Take $U=\\{\\operatorname{Re}z<0\\}\\cup\\{\\operatorname{Re}z>0\\}$ and set $f=0$ on the left half-plane and $f=1$ on the right. Each point has a neighbourhood on which $f$ is constant, so $f$ is holomorphic with derivative zero throughout $U$. Values on the two components differ, so $f$ is not constant. Explicitly identify the missing hypothesis as connectedness, hence the use of a domain in the theorem.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-complex-domain",
+          "def-metric-topology"
+        ]
+      }
+    ]
+  }
+]
