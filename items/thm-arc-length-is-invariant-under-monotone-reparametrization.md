@@ -28,7 +28,7 @@ Let $\gamma:[a,b]\to\mathbb R^n$ be a path, and let $\varphi:[c,d]\to[a,b]$ be c
 
 $$L_{[c,d]}(\gamma\circ\varphi)=L_{[a,b]}(\gamma).$$
 
-The equality holds for finite or infinite length. Constant stretches of $\varphi$ are allowed. If one parameter interval is a singleton, surjectivity forces the other image interval to be a singleton and both lengths are zero.
+The equality holds for finite or infinite length. Constant stretches of $\varphi$ are allowed. If $[c,d]$ is a singleton, surjectivity forces $[a,b]$ to be one as well; if instead $[a,b]$ is a singleton, $[c,d]$ need not be, since a constant map on a nondegenerate interval is continuous, surjective and monotone. In both cases each side of the displayed equality is zero.
 
 ## Facts & Assumptions
 
@@ -52,4 +52,4 @@ The equality holds for finite or infinite length. Constant stretches of $\varphi
 
 2.3 If $\varphi$ is nonincreasing, reverse the order of every finite list in steps 1.1 and 1.2; Euclidean chord lengths are symmetric, so the same two inequalities hold. [step 1.1, step 1.2, L1, L2]
 
-3.1 In the singleton case, surjectivity makes the composite and original paths constant on their traces and the defining convention gives length zero. [L2] ∎
+3.1 If $[c,d]$ is a singleton, so is its image $[a,b]$, and the singleton convention in [L2] gives both lengths as zero. If instead $a=b$ while $c<d$, then $\gamma\circ\varphi$ is constant, so every polygonal sum for it vanishes and $L_{[c,d]}(\gamma\circ\varphi)=0$, while $L_{[a,b]}(\gamma)=0$ by the same convention. [given, L2] ∎

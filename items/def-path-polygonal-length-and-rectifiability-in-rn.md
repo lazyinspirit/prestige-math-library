@@ -37,4 +37,4 @@ $$L_{[a,b]}(\gamma):=\sup_P\ell_P(\gamma)\in[0,+\infty].$$
 
 The path is **rectifiable** when these polygonal lengths are bounded above in $\mathbb R$, equivalently when $L_{[a,b]}(\gamma)<+\infty$. In that case the length is a nonnegative real number. When the interval is clear, write $L(\gamma)$.
 
-On a singleton interval $[a,a]$, define $L_{[a,a]}(\gamma):=0$ and call the unique path rectifiable. This convention does not invoke a partition, whose published definition assumes distinct endpoints.
+On a singleton interval $[a,a]$, define $L_{[a,a]}(\gamma):=0$ and call every path with that domain rectifiable. There is one such path for each point of $\mathbb R^n$, namely the map sending $a$ to that point. This convention does not invoke a partition, whose published definition assumes distinct endpoints.

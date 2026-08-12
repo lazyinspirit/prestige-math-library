@@ -44,7 +44,7 @@ contains at least $\delta n^h$ injective ordinary-subgraph embeddings of $H$ int
 
 **Proof technique:** average over fixed-size vertex subsets.
 
-1.1 If $\pi(H)+\varepsilon>1$, take $\delta=1$ and $N=1$; no graph satisfies the edge hypothesis. Hence assume $\pi(H)+\varepsilon\le1$, and choose $m\ge\max(h,2)$ with $\operatorname{ex}(m,H)/\binom m2<\pi(H)+\varepsilon/2$. For an $n$-vertex $G$ satisfying the hypothesis, the average edge density of its induced $m$-vertex subgraphs equals $e(G)/\binom n2\ge\pi(H)+\varepsilon$: each edge lies in $\binom{n-2}{m-2}$ such subsets. [given, F1, F2, F3]
+1.1 If $\pi(H)+\varepsilon>1$, take $\delta=1$ and $N=2$: for $n\ge2$ one has $\binom n2\ge1$, so $(\pi(H)+\varepsilon)\binom n2>\binom n2\ge e(G)$ and no graph satisfies the edge hypothesis. The threshold cannot be lowered to $1$, because $\binom12=0$ makes the hypothesis vacuous at $n=1$ while the conclusion there demands $\delta n^h=1$ embedding of an $h$-vertex $H$ into a one-vertex graph. Hence assume $\pi(H)+\varepsilon\le1$, and choose $m\ge\max(h,2)$ with $\operatorname{ex}(m,H)/\binom m2<\pi(H)+\varepsilon/2$. For an $n$-vertex $G$ satisfying the hypothesis, the average edge density of its induced $m$-vertex subgraphs equals $e(G)/\binom n2\ge\pi(H)+\varepsilon$: each edge lies in $\binom{n-2}{m-2}$ such subsets. [given, F1, F2, F3]
 
 2.1 Let $p$ be the fraction of $m$-subsets inducing more than $\operatorname{ex}(m,H)$ edges. The remaining subsets have density below $\pi(H)+\varepsilon/2$, while every density is at most $1$. Therefore $\pi(H)+\varepsilon\le(1-p)(\pi(H)+\varepsilon/2)+p$, so $p\ge\varepsilon/2$ after weakening the resulting positive lower bound if necessary. Each good subset contains an injective copy of $H$. [step 1.1, given]
 
