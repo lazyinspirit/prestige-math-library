@@ -1,7 +1,7 @@
 ---
 id: cor-local-rings-have-only-trivial-idempotents
 kind: corollary
-title: 'A local ring has no idempotents other than $0$ and $1$'
+title: 'Assuming the Axiom of Choice, a local ring has no idempotents other than $0$ and $1$'
 status: draft
 origin: session
 provenance:
@@ -24,7 +24,7 @@ pipeline_run: frontier-12
 
 ## Statement
 
-If $R$ is a local ring and $e\in R$ satisfies $e^2=e$, then $e=0$ or $e=1$.
+Assume the Axiom of Choice. If $R$ is a local ring and $e\in R$ satisfies $e^2=e$, then $e=0$ or $e=1$.
 
 ## Facts & Assumptions
 

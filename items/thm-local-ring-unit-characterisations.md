@@ -1,7 +1,7 @@
 ---
 id: thm-local-ring-unit-characterisations
 kind: theorem
-title: 'A nonzero commutative ring is local exactly when its nonunits form an ideal, exactly when one of $x$ and $1-x$ is a unit for every $x$'
+title: 'Assuming the Axiom of Choice, a nonzero commutative ring is local exactly when its nonunits form an ideal, exactly when one of $x$ and $1-x$ is a unit for every $x$'
 status: draft
 origin: session
 provenance:

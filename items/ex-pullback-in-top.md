@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-pullbacks-and-pushouts, thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both, def-product-topology, def-subspace-topology-top]
+deps: [def-pullbacks-and-pushouts, thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both, def-product-topology, thm-product-universal-property, def-subspace-topology-top]
 justified_by: []
 aliases: []
 landmark: false
@@ -41,8 +41,9 @@ with the subspace topology inherited from the product topology on $X\times Y$.
 [L1] Top-limits have the Set-limit as underlying set
 ([[thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both]]).
 
-[F2] A map to $X\times Y$ is continuous exactly when both coordinate maps are
-continuous ([[def-product-topology]]).
+[F2] For $P=\prod_iX_i$ with the product topology of [[def-product-topology]],
+a function $h:Z\to P$ is continuous exactly when every component $\pi_i\circ h$
+is continuous ([[thm-product-universal-property]], claim 2).
 
 [F3] A map into a subspace is continuous exactly when its composite with the
 inclusion is continuous, provided its set map lands there

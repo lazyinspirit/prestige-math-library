@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-polynomial-evaluation-at-an-endomorphism, def-characteristic-polynomial-of-an-operator, thm-spectrum-is-the-root-set-of-the-characteristic-polynomial, lem-characteristic-polynomial-of-block-triangular-matrix, def-algebraic-and-geometric-multiplicity-of-an-eigenvalue, thm-dimension-of-a-linear-subspace, def-coordinate-column-and-matrix-of-a-linear-map, thm-matrix-of-a-composite-is-the-product, thm-polynomial-ring-over-a-field-is-a-ufd]
+deps: [def-polynomial-evaluation-at-an-endomorphism, def-characteristic-polynomial-of-an-operator, thm-spectrum-is-the-root-set-of-the-characteristic-polynomial, lem-characteristic-polynomial-of-block-triangular-matrix, def-algebraic-and-geometric-multiplicity-of-an-eigenvalue, thm-dimension-of-a-linear-subspace, def-coordinate-column-and-matrix-of-a-linear-map, thm-matrix-of-a-composite-is-the-product, thm-matrix-representation-is-a-vector-space-isomorphism, thm-polynomial-ring-over-a-field-is-a-ufd]
 aliases: []
 landmark: true
 proof_strategy: induction
@@ -37,7 +37,7 @@ Consequently the eigenvalues of $p(T)$ are the values $p(\lambda_i)$, counted wi
 
 **Given:** $T$, the displayed split factorization of $\chi_T$, and $p\in F[x]$.
 
-[L1] Polynomial evaluation is $p(T)=\sum_k a_kT^k$ ([[def-polynomial-evaluation-at-an-endomorphism]]), and matrices turn sums and composites into sums and products ([[thm-matrix-of-a-composite-is-the-product]]).
+[L1] Polynomial evaluation is $p(T)=\sum_k a_kT^k$ ([[def-polynomial-evaluation-at-an-endomorphism]]). Matrix representation sends sums and scalar multiples to matrix sums and scalar multiples ([[thm-matrix-representation-is-a-vector-space-isomorphism]]) and composites to matrix products ([[thm-matrix-of-a-composite-is-the-product]]).
 
 [L2] The characteristic polynomial of an operator is computed in any basis and is $1$ in dimension zero ([[def-characteristic-polynomial-of-an-operator]]).
 

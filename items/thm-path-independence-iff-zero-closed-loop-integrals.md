@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-piecewise-c1-path-connected-conservative-and-path-independent, thm-line-integrals-under-reversal-and-concatenation, def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]
+deps: [def-piecewise-c1-path-connected-conservative-and-path-independent, thm-line-integrals-under-reversal-and-concatenation, def-scalar-and-vector-line-integrals-along-piecewise-c1-paths, thm-line-integrals-under-oriented-reparametrization]
 justified_by: []
 aliases: []
 landmark: true
@@ -38,6 +38,8 @@ Let $U\subseteq\mathbb R^n$ be open and piecewise-$C^1$ path-connected, and let 
 
 [L3] A constant path has zero vector line integral because its velocity is zero ([[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]]).
 
+[L4] An orientation-preserving oriented piecewise-$C^1$ reparametrization leaves a vector line integral unchanged ([[thm-line-integrals-under-oriented-reparametrization]]).
+
 
 
 ## Proof
@@ -46,7 +48,7 @@ Let $U\subseteq\mathbb R^n$ be open and piecewise-$C^1$ path-connected, and let 
 
 1.1 Assume condition 1, and let $\gamma$ be closed at $x$. The path $\gamma$ and the constant path at $x$ have the same endpoints, so [L1] and [L3] give $\int_\gamma F\cdot d\mathbf r=0$. Thus condition 2 holds. [given, L1, L3]
 
-1.2 Conversely, assume condition 2. Let $\alpha$ and $\beta$ be paths from $x$ to $y$. Then $\alpha*\beta^-$ is closed. [given]
+1.2 Conversely, assume condition 2. Let $\alpha$ and $\beta$ be paths from $x$ to $y$. The increasing affine bijection of $[0,1]$ onto a path's domain is an orientation-preserving oriented reparametrization, so by [L4] we may replace each path by its reparametrization on $[0,1]$ without changing either integral. With both domains $[0,1]$, the concatenation in [L2] is defined and $\alpha*\beta^-$ is closed. [given, L2, L4]
 
 2.1 By condition 2 and [L2], $$0=\int_{\alpha*\beta^-}F\cdot d\mathbf r =\int_\alpha F\cdot d\mathbf r-\int_\beta F\cdot d\mathbf r.$$ [given, step 1.2, L2, algebra]
 

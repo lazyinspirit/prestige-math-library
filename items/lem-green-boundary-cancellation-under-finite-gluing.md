@@ -37,7 +37,7 @@ $$\sum_{\ell=1}^N\iint_{D_\ell}H\,dA=\iint_DH\,dA.$$
 
 [L1] The pieces have pairwise disjoint interiors; each positive-length internal arc belongs to exactly two pieces with opposite induced orientations, and pairwise intersections are finite unions of complete boundary arcs and endpoints ([[def-type-i-type-ii-and-elementary-green-regions]]).
 
-[L2] The positive boundary of the union is obtained by deleting both copies of every shared internal arc and retaining all surviving oriented arcs ([[def-positive-orientation-for-elementary-region-boundaries]]).
+[L2] The positive boundary chain of the union is obtained by deleting both copies of every shared internal arc and retaining all surviving oriented arcs; the boundary integral over a chain is the finite sum of the integrals over its arcs, and each piece's own positive boundary integral is likewise the sum over its four arcs ([[def-positive-orientation-for-elementary-region-boundaries]]).
 
 [L3] Vector line integrals add under concatenation and negate under reversal ([[thm-line-integrals-under-reversal-and-concatenation]]).
 
@@ -61,10 +61,10 @@ $$\sum_{\ell=1}^N\iint_{D_\ell}H\,dA=\iint_DH\,dA.$$
 
 1.2 Choose one rectangle containing all pieces. Each piece boundary is a finite union of continuous graph arcs and endpoints. Their parameter intervals are compact, so [L8] makes every arc closed and bounded. The finite union $$S:=\bigcup_{\ell=1}^N\partial D_\ell$$ is therefore closed and bounded, hence compact by [L8]. By [L4], $S$ has content zero. The boundary of $D$ and every multiple-membership point lie in $S$. [given, L1, L4, L8, algebra]
 
-2.1 What remains after step 1.1 is exactly the oriented list of exterior arcs prescribed by [L2], so concatenation in [L3] gives the first displayed equality. For $N=1$ there are no internal arcs, and the same argument is the identity. [step 1.1, L2, L3]
+2.1 By [L2] each side is a finite sum over oriented arcs: the left side sums over the arcs of every piece boundary, and the right side sums over the arcs surviving deletion. Step 1.1 pairs off exactly the deleted arcs, and each such pair contributes zero, so the two finite sums are equal. This is a rearrangement of finitely many reals and needs no single closed path, so it holds whether or not $D$ is connected or simply connected. For $N=1$ there are no internal arcs and the two lists coincide. [step 1.1, L2, L3]
 
-2.2 The zero extension of $H|_{D_\ell}$ is continuous away from $\partial D_\ell$, and the zero extension of $H$ from $D$ is continuous away from $\partial D$. Their discontinuity sets are therefore subsets of $S$, which is null by [L4]. Hence [L5] makes all these extensions integrable. By [L6], these are precisely the indicated region integrals. [step 1.2, L4, L5, L6]
+2.2 By [L7], $H$ is bounded on the nonempty compact set $D$; fix $M\geq0$ with $|H|\leq M$ there, so every zero extension below is bounded by $M$. The zero extension of $H|_{D_\ell}$ is continuous away from $\partial D_\ell$, and the zero extension of $H$ from $D$ is continuous away from $\partial D$. Their discontinuity sets are therefore subsets of $S$, which is null by [L4]. Hence [L5] makes all these extensions integrable. By [L6], these are precisely the indicated region integrals. [step 1.2, L4, L5, L6, L7]
 
-3.1 By [L7], choose $M\geq0$ with $|H|\leq M$ on the nonempty compact set $D$. Let $q$ be the sum of the piecewise zero extensions minus the zero extension from $D$. It is integrable by [L6] and vanishes outside the set of multiple-membership points, hence outside $S$, with $|q|\leq NM\,1_S$. Since $S$ is closed, its boundary is contained in $S$ and has content zero by step 1.2; [L5] therefore makes $S$ Jordan measurable with content $0$. Thus [L5] and [L6] give $$\left|\int q\right|\leq NM\int1_S=0.$$ [step 1.2, step 2.2, L5, L6, L7, algebra]
+3.1 With $M$ as in step 2.2, let $q$ be the sum of the piecewise zero extensions minus the zero extension from $D$. It is integrable by [L6] and vanishes outside the set of multiple-membership points, hence outside $S$; at a point of $S$ at most $N$ piece extensions and the extension from $D$ are nonzero, so $|q|\leq(N+1)M\,1_S$. Since $S$ is closed, its boundary is contained in $S$ and has content zero by step 1.2; [L5] therefore makes $S$ Jordan measurable with content $0$. Thus [L5] and [L6] give $$\left|\int q\right|\leq(N+1)M\int1_S=0.$$ [step 1.2, step 2.2, L5, L6, algebra]
 
 4.1 Thus $\int q=0$. Expanding $q$ with linearity in [L6] gives the second displayed equality. [step 3.1, L6, algebra] ∎

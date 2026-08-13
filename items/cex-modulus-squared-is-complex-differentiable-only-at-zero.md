@@ -31,7 +31,7 @@ Complex differentiability at a point automatically extends to holomorphy on some
 
 [L2] Complex differentiability implies real total differentiability and the Cauchy–Riemann equations ([[thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]]).
 
-[L3] $|z|^2=z\bar z$, $|\bar z|=|z|$, and $|z|=0$ exactly when $z=0$ ([[lem-complex-conjugation-and-modulus-laws]]).
+[L3] $|z|^2=z\bar z$, $\overline{\overline z}=z$, and $|z|=0$ exactly when $z=0$ ([[lem-complex-conjugation-and-modulus-laws]]). Since $\overline{\overline z}=z$ and $z\overline z=|z|^2$, one has $|\overline z|^2=\overline z\,\overline{\overline z}=\overline zz=|z|^2$, and both moduli are nonnegative, so $|\overline z|=|z|$.
 
 ## Counterexample
 

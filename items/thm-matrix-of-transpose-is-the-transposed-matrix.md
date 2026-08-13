@@ -44,6 +44,6 @@ $$[T^*]_{\mathcal W^*}^{\mathcal V^*}=\bigl([T]_{\mathcal V}^{\mathcal W}\bigr)^
 
 1.1 Write $[T]_{\mathcal V}^{\mathcal W}=(a_{ij})$, so [L3] gives $T(v_j)=\sum_{i=1}^m a_{ij}w_i$ and therefore $w_i^*(T(v_j))=a_{ij}$. [L2, L3, algebra]
 
-2.1 The $(j,i)$ entry of $[T^*]_{\mathcal W^*}^{\mathcal V^*}$ is $v_j^*(T^*(w_i^*))$; equivalently it is $T^*(w_i^*)(v_j)=w_i^*(T(v_j))=a_{ij}$ by [L1]. [step 1.1, L1, L2, L3]
+2.1 The $(j,i)$ entry of $[T^*]_{\mathcal W^*}^{\mathcal V^*}$ is the coefficient of $v_j^*$ in the expansion of $T^*(w_i^*)\in V^*$ along the dual basis $\mathcal V^*$. Since every $\phi\in V^*$ satisfies $\phi=\sum_j\phi(v_j)v_j^*$, that coefficient is $T^*(w_i^*)(v_j)$, which by [L1] equals $w_i^*(T(v_j))=a_{ij}$. [step 1.1, L1, L2, L3]
 
 3.1 By [L4], step 2.1 says exactly that the $n\times m$ matrix of $T^*$ is the transpose of the $m\times n$ matrix of $T$. The calculation also covers $m=0$ or $n=0$, where the matrices are empty rectangles. [step 2.1, L4] ∎

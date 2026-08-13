@@ -7,11 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-continuous-partials-and-cauchy-riemann-imply-holomorphic,
-       cor-complex-exponential-cartesian-form-modulus-and-eulers-identity,
-       thm-derivative-of-exponential, thm-sine-and-cosine-derivatives,
-       cor-differentiable-implies-continuous,
-       lem-algebra-of-continuous-real-maps-on-a-space]
+deps: [thm-continuous-partials-and-cauchy-riemann-imply-holomorphic, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-derivative-of-exponential, thm-sine-and-cosine-derivatives, cor-differentiable-implies-continuous, lem-algebra-of-continuous-real-maps-on-a-space, thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]
 aliases: []
 landmark: true
 proof_strategy: direct
@@ -48,7 +44,7 @@ for every $z\in\mathbb C$.
 
 [L4] Finite sums and products of continuous real-valued maps on a topological space are continuous ([[lem-algebra-of-continuous-real-maps-on-a-space]]).
 
-[L5] Continuous first partial derivatives satisfying the Cauchy–Riemann equations give complex differentiability, with derivative $u_x+iv_x$ ([[thm-continuous-partials-and-cauchy-riemann-imply-holomorphic]]).
+[L5] Continuous first partial derivatives satisfying the Cauchy–Riemann equations give complex differentiability, and holomorphy when this holds at every point ([[thm-continuous-partials-and-cauchy-riemann-imply-holomorphic]]). Where $f$ is complex differentiable, $f'=u_x+iv_x$ ([[thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]]).
 
 ## Proof
 

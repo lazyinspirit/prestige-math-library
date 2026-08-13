@@ -31,7 +31,7 @@ Every closed $C^1$ vector field on a piecewise-$C^1$ path-connected open set is 
 ## Facts & Assumptions
 **Given:** On $U=\mathbb R^2\setminus\{(0,0)\}$, let $$F(x,y)=\left(\frac{-y}{x^2+y^2},\frac{x}{x^2+y^2}\right).$$
 
-[L1] Closedness requires $\partial_yF_1=\partial_xF_2$, while exactness requires a $C^2$ potential whose gradient is $F$ ([[def-closed-and-exact-c1-vector-fields]]).
+[L1] With coordinates indexed from $0$, so that $F=(F_0,F_1)$ and $\partial_0,\partial_1$ are $\partial_x,\partial_y$, closedness requires $\partial_yF_0=\partial_xF_1$, while exactness requires a $C^2$ potential whose gradient is $F$ ([[def-closed-and-exact-c1-vector-fields]]).
 
 [L2] A gradient line integral is its potential's endpoint increment and is therefore zero on a closed path ([[thm-gradient-theorem-for-line-integrals]]).
 
@@ -49,7 +49,7 @@ Every closed $C^1$ vector field on a piecewise-$C^1$ path-connected open set is 
 
 **Proof technique:** constructive.
 
-1.1 The rational formulas defining $F$ are $C^1$ on $U$. Direct differentiation gives $$\partial_yF_1=\frac{y^2-x^2}{(x^2+y^2)^2}=\partial_xF_2,$$ so $F$ is closed by [L1]. [given, L1, algebra, construct]
+1.1 The rational formulas defining $F$ are $C^1$ on $U$. Direct differentiation gives $$\partial_yF_0=\frac{y^2-x^2}{(x^2+y^2)^2}=\partial_xF_1,$$ so $F$ is closed by [L1]. [given, L1, algebra, construct]
 
 1.2 The punctured plane is piecewise-$C^1$ path-connected: choose a positive radius at least as large as the radii of two given points, join each point outward along its own ray to that circle, and join the resulting points by a circular arc. None of these pieces meets the origin. [given]
 

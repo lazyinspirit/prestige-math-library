@@ -29,7 +29,7 @@ pipeline_run: frontier-12
 
 [L1] The complex exponential is entire with derivative itself ([[thm-complex-exponential-is-entire-with-derivative-itself]]).
 
-[L2] Complex powers and reciprocals obey the complex derivative rules on their domains, and complex derivatives obey the chain rule ([[thm-algebra-of-complex-derivatives]], [[thm-chain-rule-for-complex-derivatives]]).
+[L2] Complex differentiation is linear and satisfies the product rule; where $g(a)\ne0$ the reciprocal $1/g$ is complex differentiable at $a$ with $(1/g)'=-g'/g^2$ ([[thm-algebra-of-complex-derivatives]]); and a composite of complex differentiable maps is complex differentiable ([[thm-chain-rule-for-complex-derivatives]]). Iterating the product rule makes $z\mapsto z^{4}$ complex differentiable, so the reciprocal rule makes $z\mapsto z^{-4}$ complex differentiable wherever $z\ne0$. No general complex-exponent power rule is used.
 
 [L3] For every natural $m$ and real $a>0$, $x^m/\exp(ax)\to0$ as $x\to+\infty$ ([[thm-exponential-beats-every-polynomial]]).
 

@@ -31,7 +31,7 @@ pipeline_run: frontier-12
 
 [L2] Complex differentiability is equivalent to real total differentiability plus the Cauchy–Riemann equations; the equations alone are not asserted to be sufficient ([[thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]]).
 
-[L3] The modulus is multiplicative, $|\bar z|=|z|$, and $|z|=0$ exactly when $z=0$ ([[lem-complex-conjugation-and-modulus-laws]]).
+[L3] The modulus is multiplicative, $z\overline z=|z|^2$, $\overline{\overline z}=z$, and $|z|=0$ exactly when $z=0$ ([[lem-complex-conjugation-and-modulus-laws]]). Since $\overline{\overline z}=z$ and $z\overline z=|z|^2$, one has $|\overline z|^2=\overline z\,\overline{\overline z}=\overline zz=|z|^2$, and both moduli are nonnegative, so $|\overline z|=|z|$.
 
 ## Refutation
 

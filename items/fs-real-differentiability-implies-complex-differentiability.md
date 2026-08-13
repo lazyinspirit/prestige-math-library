@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: literature-derived
-deps: [thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann, thm-complex-numbers-are-the-real-coordinate-plane]
+deps: [thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann, thm-complex-numbers-are-the-real-coordinate-plane, def-complex-conjugate-real-imaginary-part-and-modulus]
 aliases: []
 proof_strategy: direct
 verification:
@@ -27,7 +27,7 @@ pipeline_run: frontier-12
 ## Facts & Assumptions
 **Given:** The conjugation map $f(z)=\bar z$.
 
-[L1] Under the real-coordinate identification, $x+iy$ corresponds to $(x,y)$ and conjugation corresponds to $(x,y)\mapsto(x,-y)$ ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
+[L1] Under the real-coordinate identification $\Phi(a+bi)=(a,b)$ ([[thm-complex-numbers-are-the-real-coordinate-plane]]), $x+iy$ corresponds to $(x,y)$; conjugation is $\overline{x+iy}=x-iy$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]]), so it corresponds to $(x,y)\mapsto(x,-y)$.
 
 [L2] Complex differentiability is equivalent to real total differentiability together with the Cauchy–Riemann equations $u_x=v_y$ and $u_y=-v_x$ ([[thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann]]).
 

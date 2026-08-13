@@ -1,7 +1,7 @@
 ---
 id: cor-every-local-ring-is-its-localisation-at-its-maximal-ideal
 kind: corollary
-title: 'A local ring $R$ is canonically isomorphic to $R_{\mathfrak m}$ at its maximal ideal'
+title: 'Assuming the Axiom of Choice, a local ring $R$ is canonically isomorphic to $R_{\mathfrak m}$ at its maximal ideal'
 status: draft
 origin: session
 provenance:
@@ -24,7 +24,7 @@ pipeline_run: frontier-12
 
 ## Statement
 
-If $(R,\mathfrak m)$ is a local ring, its localisation map
+Assume the Axiom of Choice. If $(R,\mathfrak m)$ is a local ring, its localisation map
 $$ \lambda:R\longrightarrow R_{\mathfrak m} $$
 is a ring isomorphism. Its inverse sends $r/s$ to $rs^{-1}$.
 

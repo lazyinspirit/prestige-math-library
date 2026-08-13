@@ -51,7 +51,7 @@ $$\int_{\partial D}Q\,dy=\iint_D\partial_xQ\,dA.$$
 
 1.1 The horizontal endpoint arcs in [L1] have constant $y$, so their contributions to $\int Q\,dy$ are zero. The right graph contributes $\int_c^dQ(\rho(y),y)\,dy$, and [L2] makes the downward left graph contribute $-\int_c^dQ(\lambda(y),y)\,dy$. [given, L1, L2, algebra]
 
-1.2 For each fixed $y$, [L4] in the $x$ variable gives $$Q(\rho(y),y)-Q(\lambda(y),y) =\int_{\lambda(y)}^{\rho(y)}\partial_xQ(x,y)\,dx.$$ [given, L4]
+1.2 For each fixed $y$ with $\lambda(y)<\rho(y)$, [L4] in the $x$ variable gives $$Q(\rho(y),y)-Q(\lambda(y),y) =\int_{\lambda(y)}^{\rho(y)}\partial_xQ(x,y)\,dx.$$ Since $\lambda<\rho$ on $(c,d)$, the only fixed $y$ where this can fail are $y=c$ and $y=d$; there $\lambda(y)=\rho(y)$ makes both sides zero, so the displayed identity holds for every $y\in[c,d]$. [given, L4]
 
 2.1 Hence $$\int_{\partial D}Q\,dy =\int_c^d\bigl(Q(\rho(y),y)-Q(\lambda(y),y)\bigr)\,dy.$$ [step 1.1, algebra]
 

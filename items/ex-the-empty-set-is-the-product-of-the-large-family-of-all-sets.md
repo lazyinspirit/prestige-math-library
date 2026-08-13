@@ -32,8 +32,14 @@ product apex.
 
 **Given:** The class-indexed discrete diagram of all sets.
 
-[F1] A product cone consists of one map to every factor and is terminal among
-such cones ([[def-products-and-coproducts]]).
+[F1] For a family indexed by a **set**, a product cone consists of one map to
+every factor and is terminal among such cones ([[def-products-and-coproducts]]).
+The diagram here is indexed by a proper class, which that definition does not
+cover, so "product" is used below in the extended sense: an apex with one map to
+every factor, terminal among all such cones over the definable-class diagram.
+That extension is stipulated here rather than cited, and it is the whole point of
+the example — the pathology below is a consequence of leaving set-sized indexing,
+not a statement about any product the definition supplies.
 
 [F2] A large diagram is one whose indexing category is not small; completeness
 does not assert that such diagrams have no limits

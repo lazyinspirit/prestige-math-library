@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-algebraically-closed-field, lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients, thm-spectrum-is-the-root-set-of-the-characteristic-polynomial]
+deps: [def-algebraically-closed-field, lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients, thm-spectrum-is-the-root-set-of-the-characteristic-polynomial, def-characteristic-polynomial-of-an-operator]
 aliases: []
 proof_strategy: direct
 verification:
@@ -30,7 +30,7 @@ Let $V$ be a nonzero finite-dimensional vector space over an algebraically close
 
 [L1] Every nonconstant polynomial over an algebraically closed field has a root in that field ([[def-algebraically-closed-field]]).
 
-[L2] The characteristic polynomial of an endomorphism on an $n$-dimensional space is monic of degree $n$ ([[lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients]]).
+[L2] The characteristic polynomial of an endomorphism is by definition that of any representing matrix ([[def-characteristic-polynomial-of-an-operator]]), and for $A\in M_n(F)$ the polynomial $\chi_A(x)$ is monic of degree $n$ ([[lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients]]). So $\chi_T$ is monic of degree $n=\dim V$.
 
 [L3] The roots in $F$ of $\chi_T$ are exactly the eigenvalues of $T$ ([[thm-spectrum-is-the-root-set-of-the-characteristic-polynomial]]).
 

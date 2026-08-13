@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-tournament, def-hamilton-path-cycle-and-hamilton-connected, thm-product-probability-has-independent-coordinate-events, thm-number-of-bijections-of-a-finite-set, lem-indicator-expectation-and-products, thm-linearity-of-expectation, thm-expectation-monotonicity-and-bounds]
+deps: [def-tournament, def-directed-walk-trail-path-cycle-and-strong-connectivity, thm-product-probability-has-independent-coordinate-events, thm-number-of-bijections-of-a-finite-set, lem-indicator-expectation-and-products, thm-linearity-of-expectation, thm-expectation-monotonicity-and-bounds]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,7 +36,7 @@ directed Hamilton paths.
 
 [L1] A tournament orients exactly one direction between each two distinct vertices ([[def-tournament]]).
 
-[L2] A Hamilton path visits every vertex exactly once along directed arcs ([[def-hamilton-path-cycle-and-hamilton-connected]]).
+[L2] A directed path is a directed walk $v_0,\ldots,v_\ell$, with $(v_{i-1},v_i)$ an arc at every step, whose vertices are distinct ([[def-directed-walk-trail-path-cycle-and-strong-connectivity]]). A directed Hamilton path is one containing every vertex.
 
 [L3] Independent coordinate events in a product space have product probability ([[thm-product-probability-has-independent-coordinate-events]]).
 

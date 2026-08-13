@@ -28,7 +28,7 @@ pipeline_run: null
 
 For $0\le s\le n$ and $p\in[0,1]$,
 $$\mathbb P(\alpha(G(n,p))\ge s)\le\binom ns(1-p)^{\binom s2}\le n^s\exp\!\left(-p\binom s2\right).$$
-For $s>n$, the event is empty. For $s=0,1$, the first inequality is equality and the second is valid.
+For $s>n$, the event is empty. At $s=0$ every displayed quantity equals $1$. At $s=1$ both bounds equal $n$, so the second inequality is an equality while the first is strict whenever $n\ge2$.
 
 ## Facts & Assumptions
 

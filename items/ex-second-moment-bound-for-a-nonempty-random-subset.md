@@ -53,4 +53,4 @@ $$\mathbb P(X>0)\le np,\qquad \mathbb P(X>0)\ge\frac{np}{1-p+np}.$$
 
 2.1 If $np>0$, Markov at threshold $1$ gives $\mathbb P(X>0)\le np$, and the second-moment bound with steps 1.1 and 1.2 gives $\mathbb P(X>0)\ge(np)^2/(np(1-p)+n^2p^2)=np/(1-p+np)$. [assume-case positive, step 1.1, step 1.2, L4, algebra]
 
-3.1 The cases are exhaustive. At $p=1$ and $n>0$, the exact probability and both relevant bounds equal $1$. [step 1.3, step 2.1, cases-exhaustive] ∎
+3.1 The cases are exhaustive. At $p=1$ and $n>0$, the exact probability is $1$ and the second-moment lower bound is $np/(1-p+np)=1$, while the Markov upper bound is $np=n$ and is vacuous for $n\ge2$. [step 1.3, step 2.1, cases-exhaustive] ∎

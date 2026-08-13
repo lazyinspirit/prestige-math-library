@@ -1,7 +1,7 @@
 ---
 id: fs-every-injective-module-is-projective
 kind: false-statement
-title: "Every injective module is projective"
+title: "Every injective module is projective (refuted under the Axiom of Choice)"
 status: draft
 origin: session
 provenance:
@@ -32,7 +32,7 @@ pipeline_run: null
 
 ## Facts & Assumptions
 
-**Given:** The abelian group $I=\mathbb Q/\mathbb Z$, viewed as a $\mathbb Z$-module.
+**Given:** The Axiom of Choice, and the abelian group $I=\mathbb Q/\mathbb Z$ viewed as a $\mathbb Z$-module. Choice enters through [L1]: the implication *divisible $\Rightarrow$ injective* rests on Baer's criterion and its Zorn-lemma argument, so the refutation below is carried out under AC.
 
 [L1] Under AC, a $\mathbb Z$-module is injective exactly when it is divisible ([[thm-injective-modules-over-a-pid-are-exactly-divisible]]).
 

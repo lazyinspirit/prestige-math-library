@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-erdos-renyi-random-graph, def-graph-distance-and-girth, lem-random-graph-fixed-pattern-probability, def-factorial-and-falling-factorial, lem-indicator-expectation-and-products, thm-linearity-of-expectation]
+deps: [def-erdos-renyi-random-graph, def-graph-distance-and-girth, def-graph-walk-trail-path-and-cycle, lem-random-graph-fixed-pattern-probability, def-factorial-and-falling-factorial, thm-number-of-injections, lem-indicator-expectation-and-products, thm-linearity-of-expectation]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,11 +36,11 @@ If $\ell<3$, both sums are empty and equal zero.
 
 [L1] $G(n,p)$ has mutually independent Bernoulli edge coordinates ([[def-erdos-renyi-random-graph]]).
 
-[L2] Girth counts the length of a shortest graph cycle ([[def-graph-distance-and-girth]]).
+[L2] A cycle is a closed walk of length at least $3$ whose vertices, apart from the coinciding endpoints, are distinct ([[def-graph-walk-trail-path-and-cycle]]), and the girth is the least length of a cycle ([[def-graph-distance-and-girth]]).
 
 [L3] A prescribed set of $r$ present edges has probability $p^r$ ([[lem-random-graph-fixed-pattern-probability]]).
 
-[L4] $n^{\underline r}$ is the number of ordered lists of $r$ distinct vertices ([[def-factorial-and-falling-factorial]]).
+[L4] The falling factorial $n^{\underline r}$ is defined by $n^{\underline0}=1$ and $n^{\underline{k+1}}=n^{\underline k}(n-k)$ ([[def-factorial-and-falling-factorial]]), and for finite sets $|A|=n$, $|B|=r$ the injections $B\to A$ number $n^{\underline r}$ ([[thm-number-of-injections]]). An ordered list of $r$ distinct vertices is such an injection, so there are $n^{\underline r}$ of them.
 
 [L5] Indicators count occurrences and expectation is linear ([[lem-indicator-expectation-and-products]], [[thm-linearity-of-expectation]]).
 

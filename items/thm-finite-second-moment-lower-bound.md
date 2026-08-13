@@ -1,7 +1,7 @@
 ---
 id: thm-finite-second-moment-lower-bound
 kind: theorem
-title: "The finite second-moment bound $\\mathbb P(X\\ne0)\\ge\\mathbb E[X]^2/\\mathbb E[X^2]$"
+title: "The finite second-moment bound $\\mathbb P(X\\ne0)\\ge\\mathbb E[X]^2/\\mathbb E[X^2]$ when $\\mathbb E[X^2]>0$"
 status: draft
 origin: session
 provenance:

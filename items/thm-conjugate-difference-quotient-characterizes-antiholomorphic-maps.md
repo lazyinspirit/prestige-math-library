@@ -40,7 +40,7 @@ exists if and only if $f$ is real totally differentiable at $a$ and $f_z(a)=0$. 
 
 [L1] Every real-linear map between Euclidean spaces has a matrix and is bounded by a constant times the Euclidean norm ([[lem-euclidean-linear-maps-have-matrices-and-are-bounded]]).
 
-[L2] Conjugation is real-linear, $|\bar h|=|h|$, and modulus is multiplicative ([[lem-complex-conjugation-and-modulus-laws]]).
+[L2] Conjugation is a real-field automorphism with $\overline{\overline z}=z$, the modulus is multiplicative, and $z\overline z=|z|^2$ ([[lem-complex-conjugation-and-modulus-laws]]). Since $\overline{\overline z}=z$ and $z\overline z=|z|^2$, one has $|\overline z|^2=\overline z\,\overline{\overline z}=\overline zz=|z|^2$, and both moduli are nonnegative, so $|\overline z|=|z|$, so in particular $|\bar h|=|h|$.
 
 ## Proof
 

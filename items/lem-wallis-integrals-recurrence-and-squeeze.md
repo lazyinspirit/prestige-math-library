@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-integration-by-parts, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-cosine-signs-monotonicity-and-ranges, thm-quarter-turn-values-and-shift-formulas, def-pi-via-first-positive-cosine-zero, lem-integral-elementary-bounds, thm-linearity-of-the-integral, def-monoid-finite-product, thm-squeeze]
+deps: [thm-integration-by-parts, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-cosine-signs-monotonicity-and-ranges, thm-quarter-turn-values-and-shift-formulas, def-pi-via-first-positive-cosine-zero, lem-integral-elementary-bounds, thm-linearity-of-the-integral, thm-monotonicity-of-the-integral, def-monoid-finite-product, thm-squeeze]
 justified_by: []
 aliases: []
 landmark: true
@@ -53,7 +53,7 @@ and therefore $I_{2m}/I_{2m+1}\to1$.
 
 [L3] Sine is strictly increasing on $[-\pi/2,\pi/2]$, has range $[-1,1]$, and satisfies $\sin(\pi/2)=1$ and $\cos(\pi/2)=0$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-quarter-turn-values-and-shift-formulas]]).
 
-[L4] The integral is linear, and the integral of a constant $c$ on $[a,b]$ is $c(b-a)$ ([[thm-linearity-of-the-integral]], [[lem-integral-elementary-bounds]]).
+[L4] The integral is linear; the integral of a constant $c$ on $[a,b]$ is $c(b-a)$; and if $f\le g$ pointwise on $[a,b]$ then $\int_a^bf\le\int_a^bg$ ([[thm-linearity-of-the-integral]], [[lem-integral-elementary-bounds]], [[thm-monotonicity-of-the-integral]]).
 
 [L5] A finite product in a monoid has empty product equal to the identity and satisfies the recursion that adjoins its last factor ([[def-monoid-finite-product]]).
 

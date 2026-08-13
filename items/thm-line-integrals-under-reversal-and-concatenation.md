@@ -24,11 +24,11 @@ pipeline_run: null
 
 ## Statement
 
-For a piecewise-$C^1$ path $\gamma$,
+Let $\gamma$ be a piecewise-$C^1$ path, and let $f$ be a continuous scalar field and $F$ a continuous vector field on a set containing its trace. Then
 
 $$\int_{\gamma^-}f\,ds=\int_\gamma f\,ds,\qquad \int_{\gamma^-}F\cdot d\mathbf r=-\int_\gamma F\cdot d\mathbf r.$$
 
-If piecewise-$C^1$ paths $\alpha,\beta:[0,1]\to\mathbb R^n$ satisfy $\alpha(1)=\beta(0)$, then
+If piecewise-$C^1$ paths $\alpha,\beta:[0,1]\to\mathbb R^n$ satisfy $\alpha(1)=\beta(0)$, and $f$ and $F$ are continuous on a set containing both traces, then
 
 $$\int_{\alpha*\beta}f\,ds=\int_\alpha f\,ds+\int_\beta f\,ds,$$
 $$\int_{\alpha*\beta}F\cdot d\mathbf r=\int_\alpha F\cdot d\mathbf r+\int_\beta F\cdot d\mathbf r.$$

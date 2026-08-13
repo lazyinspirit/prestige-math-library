@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-cayley-hamilton, lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients, thm-operator-invertible-iff-determinant-nonzero]
+deps: [thm-cayley-hamilton, lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients, thm-operator-invertible-iff-determinant-nonzero, def-characteristic-polynomial-of-an-operator, def-determinant-of-a-linear-operator]
 aliases: []
 proof_strategy: direct
 verification:
@@ -30,7 +30,7 @@ If $T$ is an invertible endomorphism of a finite-dimensional vector space, then 
 
 [L1] Cayley-Hamilton states that $\chi_T(T)=0$ ([[thm-cayley-hamilton]]).
 
-[L2] In positive dimension, $\chi_T(x)=x^n+c_{n-1}x^{n-1}+\cdots+c_0$ and $c_0=(-1)^n\det(T)$ ([[lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients]]).
+[L2] The characteristic polynomial of an endomorphism is that of any representing matrix $A=[T]$, and the determinant of an endomorphism is $\det(A)$ for any such matrix ([[def-characteristic-polynomial-of-an-operator]], [[def-determinant-of-a-linear-operator]]). For $A\in M_n(F)$ with $n\ge1$, $\chi_A(x)=x^n+c_{n-1}x^{n-1}+\cdots+c_0$ with constant coefficient $c_0=(-1)^n\det(A)$ ([[lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients]]). Hence in positive dimension $c_0=(-1)^n\det(T)$.
 
 [L3] An invertible finite-dimensional endomorphism has nonzero determinant ([[thm-operator-invertible-iff-determinant-nonzero]]).
 

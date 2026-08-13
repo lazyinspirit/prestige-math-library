@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-set-has-all-small-limits, thm-set-has-all-small-colimits, prop-topological-spaces-and-continuous-maps-form-category-top, def-initial-and-final-topology, def-continuous-map-top, def-preservation-reflection-creation-continuity-and-cocontinuity]
+deps: [thm-set-has-all-small-limits, thm-set-has-all-small-colimits, prop-topological-spaces-and-continuous-maps-form-category-top, def-initial-and-final-topology, thm-initial-and-final-characteristic-properties, def-continuous-map-top, def-preservation-reflection-creation-continuity-and-cocontinuity]
 justified_by: []
 aliases: []
 landmark: true
@@ -38,9 +38,13 @@ every small colimit.
 [F1] Topological spaces and continuous maps form $\mathbf{Top}$
 ([[prop-topological-spaces-and-continuous-maps-form-category-top]]).
 
-[F2] The initial topology is characterized by continuity into its inducing
-targets, and the final topology by continuity of maps out of its inducing
-sources ([[def-initial-and-final-topology]]).
+[F2] For the initial topology of a family $(f_i:X\to Y_i)$, a function
+$h:Z\to X$ is continuous exactly when every $f_i\circ h$ is continuous; dually,
+for the final topology of a family $(g_i:Y_i\to X)$, a function $h:X\to Z$ is
+continuous exactly when every $h\circ g_i$ is continuous
+([[thm-initial-and-final-characteristic-properties]], claims 2 and 4). The
+topologies themselves are constructed in [[def-initial-and-final-topology]],
+which states these characteristic properties are proved separately.
 
 [F3] Continuity means inverse images of open sets are open
 ([[def-continuous-map-top]]).

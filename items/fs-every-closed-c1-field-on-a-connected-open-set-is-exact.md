@@ -29,7 +29,7 @@ Every closed $C^1$ vector field on a connected open subset of $\mathbb R^n$ is e
 ## Facts & Assumptions
 **Given:** The proposed implication, the punctured plane $U=\mathbb R^2\setminus\{0\}$, and the vortex field $$F(x,y)=\left(\frac{-y}{x^2+y^2},\frac{x}{x^2+y^2}\right).$$
 
-[L1] Closedness means $\partial_yF_1=\partial_xF_2$, while exactness supplies a $C^2$ potential with gradient $F$ ([[def-closed-and-exact-c1-vector-fields]]).
+[L1] With coordinates indexed from $0$, so that $F=(F_0,F_1)$, closedness means $\partial_yF_0=\partial_xF_1$, while exactness supplies a $C^2$ potential with gradient $F$ ([[def-closed-and-exact-c1-vector-fields]]).
 
 [L2] A gradient line integral is its potential's endpoint increment and is therefore zero on a closed path ([[thm-gradient-theorem-for-line-integrals]]).
 
@@ -47,7 +47,7 @@ Every closed $C^1$ vector field on a connected open subset of $\mathbb R^n$ is e
 
 **Proof technique:** direct.
 
-1.1 Direct differentiation gives $\partial_yF_1=(y^2-x^2)/(x^2+y^2)^2=\partial_xF_2$, so [L1] makes $F$ closed and $C^1$ on the open set $U$. Radial segments at positive radius followed by a circular arc give a piecewise-$C^1$ path in $U$ between any two of its points. [given, L1, algebra]
+1.1 Direct differentiation gives $\partial_yF_0=(y^2-x^2)/(x^2+y^2)^2=\partial_xF_1$, so [L1] makes $F$ closed and $C^1$ on the open set $U$. Radial segments at positive radius followed by a circular arc give a piecewise-$C^1$ path in $U$ between any two of its points. [given, L1, algebra]
 
 1.2 For $\gamma(t)=(\cos t,\sin t)$ on $[0,2\pi]$, [L3] gives $F(\gamma(t))=\gamma'(t)=(-\sin t,\cos t)$. Hence [L3] and [L4] give $$\int_\gamma F\cdot d\mathbf r=\int_0^{2\pi}1\,dt=2\pi\ne0.$$ [given, L3, L4, algebra]
 

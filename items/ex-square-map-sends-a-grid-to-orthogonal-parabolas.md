@@ -1,7 +1,7 @@
 ---
 id: ex-square-map-sends-a-grid-to-orthogonal-parabolas
 kind: example
-title: "The square map sends a Cartesian grid to two orthogonal families of parabolas away from its critical point"
+title: "The square map sends the Cartesian grid lines off the coordinate axes to two orthogonal families of parabolas"
 status: draft
 origin: session
 provenance:
@@ -22,7 +22,7 @@ pipeline_run: frontier-12
 
 ## Example
 
-Under $w=z^2$, vertical and horizontal Cartesian grid lines become two families of parabolic arcs. At the image of every grid crossing $z\ne0$, their tangent directions remain orthogonal. The origin is the critical point where this conformality conclusion is unavailable.
+Under $w=z^2$, the vertical grid lines $x=c$ with $c\ne0$ and the horizontal grid lines $y=d$ with $d\ne0$ become two families of parabolic arcs, opening in opposite directions. The two coordinate axes are the exceptions: each maps onto a ray rather than a parabola. At the image of every grid crossing $z\ne0$, the tangent directions of the two curves through it remain orthogonal. The origin is the critical point where this conformality conclusion is unavailable.
 
 ## Facts & Assumptions
 **Given:** $z=x+iy$, $w=u+iv=z^2$, and real constants $c,d$ specifying the lines $x=c$ and $y=d$.

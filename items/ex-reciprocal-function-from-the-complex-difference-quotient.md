@@ -30,7 +30,7 @@ $$f'(z)=-\frac1{z^2}.$$
 
 [L1] Complex differentiability is the existence of the punctured-domain difference-quotient limit, and holomorphy on an open set means complex differentiability at each point of that set ([[def-complex-differentiability-holomorphic-and-entire]]).
 
-[L2] The complex modulus is multiplicative and satisfies the reverse triangle inequality; a complex number has modulus zero exactly when it is zero ([[lem-complex-conjugation-and-modulus-laws]]).
+[L2] The complex modulus is multiplicative, satisfies $|z+w|\le|z|+|w|$, and vanishes exactly at $0$ ([[lem-complex-conjugation-and-modulus-laws]]). Applying the triangle inequality to $z=(z+h)+(-h)$, and using $|-h|=|-1||h|=|h|$, gives the reverse form $|z+h|\ge|z|-|h|$.
 
 ## Verification
 

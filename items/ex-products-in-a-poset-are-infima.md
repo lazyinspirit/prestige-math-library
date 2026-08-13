@@ -25,8 +25,8 @@ pipeline_run: frontier-12
 ## Example
 
 In a poset category, a product of a family is its infimum, a coproduct is its
-supremum, and the identity of the domain of any parallel pair is both an
-equalizer and a coequalizer.
+supremum, and for any parallel pair the identity of its domain is an equalizer
+while the identity of its codomain is a coequalizer.
 
 ## Facts & Assumptions
 

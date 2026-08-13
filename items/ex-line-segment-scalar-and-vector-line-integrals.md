@@ -24,7 +24,7 @@ pipeline_run: null
 
 ## Example
 
-For $p,q\in\mathbb R^n$, let $\gamma(t)=(1-t)p+tq$ on $[0,1]$. Then
+For $p,q\in\mathbb R^n$, let $\gamma(t)=(1-t)p+tq$ on $[0,1]$, and let $f:\mathbb R^n\to\mathbb R$ and $F:\mathbb R^n\to\mathbb R^n$ be continuous on a set containing the segment from $p$ to $q$. Then
 
 $$\int_\gamma f\,ds=\lVert q-p\rVert_2\int_0^1f((1-t)p+tq)\,dt,$$
 
