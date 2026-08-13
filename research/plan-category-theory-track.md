@@ -28,7 +28,7 @@ no item authored, no gate run, no page spliced. It supersedes the category-theor
 sections of `research/plan-combinatorics-and-categories.md` **in this file only**;
 that file was not opened for writing.
 
-### Pairs scaffolded — 17 A/B pairs, 34 pages, where the spec plans 8
+### Pairs scaffolded — 18 A/B pairs, 36 pages, where the spec plans 8
 
 The spec plans eight A/B pairs in the band `365`–`380`, **all with empty `items`
 arrays**. The material does not fit in eight at the owner's 60-item ceiling, and
@@ -52,7 +52,8 @@ splitting is never dropping.
 | `MA-14` | `closed-monoidal-categories-and-the-internal-hom` | `braided-symmetric-and-enriched-categories` | 28 |
 | `MA-15` | `braided-and-symmetric-monoidal-categories` | ″ | 29 |
 | `MA-16` | `duality-and-rigidity-in-monoidal-categories` | ″ | 29 |
-| `MA-17` | `enriched-categories` | ″ | 37 |
+| `MA-17` | `enriched-categories` | ″ | 43 |
+| `MA-18` | `tensor-and-fusion-categories` | ″ | 23 |
 
 Six planned A-page ids are retired before authoring, which is free because all
 eight planned pages are empty and nothing points at them. **§5.1 lists four
@@ -147,12 +148,12 @@ published item proposed for change**.
 
 ### Unresolved forward references: NONE
 
-**Every one of the seventeen pages closes with "Forward references: NONE."** The
+**Every one of the eighteen A pages closes with "Forward references: NONE."** The
 block is orderable so that no item points forward, and two ordering decisions were
 taken to keep it that way and are recorded where they look like errors: `MA-5`
-sits above `MA-6` so the coend formula is available; **`MA-17` sits above `MA-7`**
-so the $\mathbf{Ab}$-enrichment payoff does not force the additive page to point
-forward; and `MA-9` states AB4/AB5 in Grothendieck's **lattice-primitive** form so
+precedes `MA-6` so the coend formula is available; **`MA-17` follows `MA-7`**
+so the $\mathbf{Ab}$-enrichment payoff cites rather than forward-references the
+additive page; `MA-9` states AB4/AB5 in Grothendieck's **lattice-primitive** form so
 that `MA-10` can define exactness first and prove the equivalence afterwards.
 
 ### Scope denials — §8, fifteen, each with its licence
@@ -161,8 +162,9 @@ Universes and inaccessibles; global choice; $\mathbf{CAT}$ and large functor
 categories; **accessible and locally presentable categories** (a subject area, and
 Riehl gives a sketch leaning on a result she calls "a hard theorem");
 **Freyd–Mitchell is STATED with `proved_here: false` and never used as a proof
-device**; fusion/multifusion/modular tensor categories, Tannaka duality and Hopf
-algebras, with **EGNO Cor. 4.7.13 specifically denied**; $\infty$-categories, model
+device**; Frobenius–Perron dimension, Drinfeld centres, modular tensor categories,
+Tannaka reconstruction and Hopf algebras beyond the foundational tensor/fusion
+pair; $\infty$-categories, model
 categories, localisation and simplicial sets; derived functors as Kan extensions;
 toposes beyond the subobject classifier; terminal coalgebras; Yoneda
 $\operatorname{Ext}^n$; **Mac Lane's original 1963 coherence proof — not denied as
@@ -458,7 +460,7 @@ Three consequences, all of them load-bearing for this track:
 `abelian-categories`, `exact-sequences-and-the-diagram-lemmas`,
 `monoidal-categories-strictness-and-coherence`,
 `braided-symmetric-and-enriched-categories` — eight A/B pairs, **all with empty
-`items` arrays**. This track proposes **sixteen** A/B pairs in their place; §7.0
+`items` arrays**. This track proposes **eighteen** A/B pairs in their place; §7.0
 gives the mapping and §11 tells the orchestrator what that costs.
 
 `tensor-products-of-modules` is likewise planned and empty, and it belongs to
@@ -521,12 +523,13 @@ The library has already paid this bill correctly and visibly on `363`:
 as data, and `rem-choice-behind-limit-and-colimit-functors` says why. **This
 track follows that pattern without exception**, and §6 is the ledger.
 
-The one place it changes a *proof* rather than a statement is **GAFT**. The
-textbook proof of the initial-object lemma makes a choice indexed by a proper
-class. The repaired proof — form the product over the weakly initial *set*, then
-take the joint equalizer of all of its endomorphisms, which is legitimate because
-local smallness makes $\mathcal C(\ell,\ell)$ a set — makes no such choice.
-**`MA-2` authors the repaired proof and the repair is visible in the numbered
+The one place it changes a *proof* rather than a statement is **GAFT**. Riehl's
+proof of the initial-object lemma simultaneously chooses a map out of the weakly
+initial set for every object of a possibly large category. Leinster's local ZF
+proof avoids that class-indexed selection: regard the weakly initial set as a
+small full subcategory, take the limit of its inclusion, and make only the one
+existential choice needed for the particular target under discussion.
+**`MA-2` authors Leinster's proof and the repair is visible in the numbered
 steps**, not buried in a remark (well-definedness #10).
 
 ### 3.3 Creation of limits: the published definition distinguishes two notions
@@ -566,7 +569,7 @@ hypothesis it has not defined.
 
 ## 4. Conventions this track adopts, and where they come from
 
-House conventions are fixed **once, here**, so that sixteen pages do not each
+House conventions are fixed **once, here**, so that eighteen pairs do not each
 re-decide them. Where a convention was already fixed by published text, the
 published text wins and the entry says so.
 
@@ -661,10 +664,10 @@ is a Statement-level obligation.
 
 ---
 
-## 5. The page map: seventeen pairs where the spec plans eight
+## 5. The page map: eighteen pairs where the spec plans eight
 
 `research/plan-spec.json` plans eight A/B pairs in the band. This track scaffolds
-**seventeen**, because the material does not fit in eight at the owner's 60-item
+**eighteen**, because the material does not fit in eight at the owner's 60-item
 ceiling and **splitting is never dropping** (`CLAUDE.md`, owner 2026-08-11;
 `tools/validate-plan.mjs` error code `size`, `--max-items` default **60** —
 verified in the code on 2026-08-13; note that `SCHEMA.md` §6 still says "100",
@@ -692,8 +695,9 @@ supersedes. **The orchestrator owns the splice**; this file writes no spec.
 | `MA-15` | `braided-and-symmetric-monoidal-categories` | ″ | 44 |
 | `MA-16` | `duality-and-rigidity-in-monoidal-categories` | ″ | 42 |
 | `MA-17` | `enriched-categories` | ″ | 50 |
+| `MA-18` | `tensor-and-fusion-categories` | ″ | 28 |
 
-Every A page has its `-examples` companion, so the block is **34 pages**. Two of
+Every A page has its `-examples` companion, so the block is **36 pages**. Two of
 the planned ids survive unchanged (`abelian-categories`, and the `-examples`
 companions built from the new ids); the other six planned A-page ids are
 retired-before-authoring, which is free because **all eight planned pages have
@@ -728,14 +732,15 @@ Every use in this track, and — equally important — every place a reader woul
 | adjoints are unique up to unique natural isomorphism | `MA-1` | **none** | |
 | **assembling objectwise universal arrows into a left adjoint functor** | `MA-1` | **data-supplied** | SE-D3. A universal arrow *for each object* is a choice over a proper class. Primary statement: *given* a family of universal arrows, the functor structure exists and is unique. This is exactly the shape of the published `thm-chosen-limits-and-colimits-assemble-into-functors`, and `rem-choice-behind-limit-and-colimit-functors` is the published precedent to cite |
 | an equivalence can be improved to an adjoint equivalence | — | **none** | published as `thm-every-equivalence-can-be-made-an-adjoint-equivalence`; cited, not reproved |
-| **the initial-object lemma** (a complete locally small category with a weakly initial *set* has an initial object) | `MA-2` | **none — and this is the point** | the textbook proof picks, for each object $X$, an index $i$ and an arrow $s_i\to X$; that is a class-indexed choice. The repaired proof forms $\ell=\prod_i s_i$, notes only that *some* arrow $\ell\to X$ exists, and takes the joint equalizer of **all** endomorphisms of $\ell$ — a set-indexed limit, legitimate because local smallness makes $\mathcal C(\ell,\ell)$ a set. **Author the repaired proof; the repair is visible in the numbered steps** |
+| **the initial-object lemma** (a complete locally small category with a weakly initial *set* has an initial object) | `MA-2` | **none — and this is the point** | Riehl's proof simultaneously chooses a map for every target and so is not used. Leinster Lemma A.1 regards the weakly initial set as a small full subcategory, takes the limit of its inclusion, and for each fixed target uses only one existential witness. Local smallness is what makes that full subcategory small. **Author this local proof; the choice repair is visible in the numbered steps** |
 | **GAFT**, objectwise form | `MA-2` | **none** | "for every $c$, the comma category $(c\downarrow U)$ has an initial object", under: $\mathcal A$ locally small and small-complete, $U$ continuous, solution set condition. ZF given the hypotheses |
 | **GAFT**, functor form | `MA-2` | **data-supplied** | selecting an initial object of $(c\downarrow U)$ for every $c$ is a proper-class choice. Stated as: given such a family, $U$ has a left adjoint. Two items, not one |
-| **SAFT**, objectwise and functor forms | `MA-2` | **none** / **data-supplied** | same split. The solution set is manufactured from well-poweredness, which is a smallness hypothesis and not a choice |
+| **SAFT**, objectwise and functor forms | `MA-2` | **none** / **data-supplied** | same split. The objectwise theorem assumes a small coseparating set and intersections of all subobject collections exactly as Riehl states them. Bare well-poweredness does not, in ZF, choose a representative monomorphism from every subobject class |
 | reflector of a reflective subcategory | `MA-2` | **data-supplied** | same shape; the reflection *for each object* is the choice |
 | Kleisli and Eilenberg–Moore constructions | `MA-3` | **none** | both are constructed outright from $(T,\eta,\mu)$; nothing is selected |
 | the comparison functor and its universal properties | `MA-3` | **none** | |
 | **Beck's monadicity theorem** | `MA-4` | **none** | the whole proof runs on coequalizers and absoluteness of split coequalizers. Worth stating, because "monadic" *sounds* like it should need choice and does not |
+| algebras for a finitary monad are cocomplete | `MA-4` | **data-supplied, or dependent choice** | Riehl Thm 5.6.12 iterates chosen coequalizers through an $\omega$-sequence. State the result relative to supplied choices, or name dependent choice in the Statement; bare existential cocompleteness does not silently choose the sequence |
 | $\mathbf{Grp}$, $R\text{-}\mathbf{Mod}$ monadic over $\mathbf{Set}$ | `MA-4` | **none** beyond what the published free-object items already assume | |
 | $\mathbf{CompHaus}$ monadic over $\mathbf{Set}$ (the ultrafilter monad) | `MA-4` | **the ultrafilter lemma (BPI)**, strictly weaker than AC | the library owns `thm-ultrafilter-lemma`; **FLAGGED**, see §8 denial 6 — the monad's multiplication $\beta\beta X\to\beta X$ is real work and the page carries it only if that work is scaffolded, never as an assertion |
 | the Stone–Čech adjunction | `MA-1` | **the ultrafilter lemma and dependent choice** | already named in the published Statements of `thm-stone-cech-evaluation-closure-universal-property` and `lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice`. This track inherits those costs verbatim and does not restate them more weakly |
@@ -745,17 +750,21 @@ Every use in this track, and — equally important — every place a reader woul
 | the density theorem | `MA-6` | **none** | |
 | $\mathbf{Set}^{\mathcal C^{\mathrm{op}}}$ is the free cocompletion of small $\mathcal C$ | `MA-6` | **none** | the restriction to small $\mathcal C$ is a size hypothesis, not a choice one |
 | a category with finite biproducts is uniquely $\mathbf{CMon}$-enriched | `MA-7` | **none** | the addition is *constructed*, $f+g:=\nabla\circ(f\oplus g)\circ\Delta$ |
+| extension of a functor across the idempotent completion | `MA-7` | **data-supplied**, or **AC for a small source** | supply a splitting of every image idempotent $F(e)$. Idempotent completeness asserts existence objectwise, not a class-indexed simultaneous choice; uniqueness up to natural isomorphism does not remove this cost |
 | additive $\Rightarrow$ biproducts; biproducts $\Rightarrow$ additive-when-inverses-exist | `MA-7` | **none** | |
-| **AB0 + AB1 + AB2 imply $\mathbf{Ab}$-enrichment** | `MA-8` | **none** | the additive inverse is constructed from $\ker(\nabla)$; nothing is chosen. This is what stops additivity from being an unmotivated axiom |
+| Freyd's enrichment-free axioms imply $\mathbf{Ab}$-enrichment | `MA-8` | **none** | from A0, A1/A1*, A2/A2*, A3/A3*, Mitchell's shear automorphism constructs additive inverses. The weaker claim “zero object + finite biproducts + kernels and cokernels suffice” is false: $\mathbf{CMon}$ is a counterexample. Nothing is selected |
+| Freyd–Mitchell embedding theorem | `MA-8` | **not certified under the allowed choice base** | Tan's full open proof uses Zorn for maximal disjoint subobjects and injective-envelope machinery, then makes a class-indexed choice of reflections. That final step is global-choice-shaped in the library's class foundation, while SE-D3 forbids global choice. The result remains `proved_here: false`, never load-bearing; no claim about the logically optimal choice strength is made |
+| arbitrary coproducts of projectives / products of injectives | `MA-9` | **AC**, or supplied lifts/extensions | the finite statement is ZF; the arbitrary small-family proof chooses one lift or extension for each index. The module "enough projectives/injectives" examples inherit the choice costs of their published source items |
 | abelian categories are balanced; epi–mono factorisation | `MA-8` | **none** | |
 | the pullback of an epimorphism is an epimorphism | `MA-8` | **none** | and it is the *sole* prerequisite of the member calculus |
-| **the entire member calculus and every diagram lemma** | `MA-10`, `MA-11` | **none, and no smallness either** | choice-free, constructive, and valid in any abelian category. This is the reason the track can refuse Freyd–Mitchell as a proof device and still prove the snake lemma |
+| **the entire member calculus and every diagram lemma** | `MA-10`, `MA-11` | **none, and no smallness either** | choice-free and valid in any abelian category. No constructivity claim is made; see §7 obligation #53. This is the reason the track can refuse Freyd–Mitchell as a proof device and still prove the snake lemma |
 | naturality of the snake connecting morphism | `MA-11` | **none** | |
-| AB5 $\Rightarrow$ filtered colimits are exact | `MA-9` | **none** | |
+| AB5 lattice law $\Longleftrightarrow$ exactness of all small filtered colimits | `MA-10` | **none** | stated for a cocomplete abelian category and all small filtered index categories; no unsourced reduction to directed posets |
 | Kelly's redundancies ($\lambda_{X\otimes Y}$, $\rho_{X\otimes Y}$, $\lambda_{\mathbf 1}=\rho_{\mathbf 1}$) | `MA-12` | **none** | |
 | strictification and Mac Lane coherence | `MA-13` | **see §9 `MA-13`** | the choice cost depends on which construction is authored; the decision and its cost are recorded there rather than guessed here |
 | duals are unique up to unique isomorphism | `MA-16` | **none** | |
 | enriched Yoneda | `MA-17` | **none** | |
+| tensor/fusion foundation and Grothendieck ring | `MA-18` | **none** | definitions use isomorphism classes intrinsically; a displayed finite family of simple representatives is supplied data, never a global skeleton choice |
 | **global choice** | everywhere | **NOT ADOPTED** | owner decision SE-D3, 2026-07-28. Not re-opened. No item in this track asserts a proper-class selection |
 | **a universe axiom / inaccessible cardinal** | everywhere | **NOT ADOPTED** | it is not a choice axiom and it raises consistency strength; §8 denial 1 |
 
@@ -783,10 +792,10 @@ table is optional and nothing in it may be discharged by a footnote.
 | 4 | `MA-1` | the composite of adjunctions | $(F'F)\dashv(GG')$ requires the composite unit and counit to be *constructed* and the triangle identities *rechecked*; they do not follow by inspection |
 | 5 | `MA-2` | **reflective subcategory** and its reflector | the reflection arrow $\eta_c:c\to Rc$ is a universal arrow to the inclusion; that $R$ is a functor and $\eta$ natural is #2 applied. That a reflective subcategory is **full** is part of the definition here, and the non-full variant is not called reflective |
 | 6 | `MA-2` | **subobject** | mutual factorisation of monomorphisms is reflexive, symmetric and transitive — a proof — and the resulting classes carry a **partial order**, antisymmetry being exactly the statement that two mutually factoring monos differ by a unique isomorphism |
-| 7 | `MA-2` | **intersection of subobjects** | a wide pullback, i.e. a limit of the diagram of the chosen monos; it exists when $\mathcal C$ has the relevant limits, and it is a subobject because a limit of monomorphisms into a common target is monic. **Well-poweredness is what makes an intersection over *all* subobjects a small limit** |
+| 7 | `MA-2` | **intersection of subobjects** | a wide pullback, i.e. a limit of a **supplied set-indexed family of representative monomorphisms**; it is a subobject because a limit of monomorphisms into a common target is monic. Well-poweredness says the quotient collection of subobject classes is a set, but does not in ZF supply one representative mono from each class. SAFT therefore retains Riehl's direct intersection hypothesis rather than deriving it from bare well-poweredness |
 | 8 | `MA-2` | **well-powered**, **co-well-powered** | the collection of subobjects of each object *is a set*. This is a smallness assertion about a quotient of a class of monomorphisms, and the definition must say that the equivalence classes form a set, not that the monomorphisms do |
 | 9 | `MA-2` | **separating set**, **coseparating set** | stated by the cancellation property ("$f\ne g$ implies some $s\to c$ separates them"), with the equivalent representable formulation as a proposition, not conflated with it |
-| 10 | `MA-2` | the **initial-object lemma** | the joint equalizer is over $\mathcal C(\ell,\ell)$, which is a **set** by local smallness; that is the whole legitimacy argument and it is a cited hypothesis, not an aside (§6) |
+| 10 | `MA-2` | the **initial-object lemma** | the full subcategory on the jointly weakly initial set is **small** because its objects form a set and local smallness makes every hom-collection a set. Take the limit of its inclusion. For each fixed target, only one witness out of that set is used; no family indexed by every object is selected. This is Leinster Lemma A.1, not Riehl's class-choice proof (§6) |
 | 11 | `MA-2` | **GAFT** and **SAFT** | each is **two** items: objectwise existence of an initial object in every $(c\downarrow U)$, then the data-supplied assembly into a left adjoint (§6, SE-D3). A single item concluding "$U$ has a left adjoint" would assert a proper-class selection |
 | 12 | `MA-2` | the **solution set condition** | stated *per object*: for each $c$ there is a **set** $S_c$ of arrows $c\to U(d_i)$ through which every arrow $c\to U(d)$ factors. Stating it as a condition on the functor, without the per-object quantifier, changes the hypothesis |
 | 13 | `MA-3` | **monad** | defined directly as $(T,\eta,\mu)$ with the unit and associativity squares. "A monoid object in $[\mathcal C,\mathcal C]$" needs $[\mathcal C,\mathcal C]$ to be a legitimate category, which `prop-size-of-functor-categories` supplies only for small $\mathcal C$; it is therefore a Remark carrying that hypothesis, never the definition (§3.1(1)) |
@@ -795,7 +804,7 @@ table is optional and nothing in it may be discharged by a footnote.
 | 16 | `MA-3` | the **comparison functor** $K:\mathcal D\to\mathcal C^T$ | well defined ($U d$ carries a $T$-algebra structure $U\varepsilon_d$, and the algebra axioms are the triangle identities plus naturality), and **unique** making both triangles commute — the uniqueness is what turns "an adjunction inducing $T$" into a universal property |
 | 17 | `MA-3` | a **distributive law** $ST\Rightarrow TS$ | the four axioms, and the theorem that they are exactly what makes $TS$ a monad; without them "the composite monad" is not defined |
 | 18 | `MA-4` | **split coequalizer** | the data is $(s,t)$ with three equations, not merely "a coequalizer that splits"; and **absoluteness** — preservation by *every* functor — is a theorem about that data |
-| 19 | `MA-4` | **Beck's theorem: which creation?** | the published `def-preservation-reflection-creation-continuity-and-cocontinuity` separates *creates* from *strictly creates*, and Beck's theorem is the **strict** one (§3.3). The Statement says which. Getting this wrong yields a false theorem, not a stylistic wobble |
+| 19 | `MA-4` | **Beck's theorem: which creation?** | the published `def-preservation-reflection-creation-continuity-and-cocontinuity` separates *creates* from *strictly creates*. The equivalence-invariant theorem says $K$ is an **equivalence** iff $U$ **creates** coequalizers of $U$-split pairs; the strict theorem says $K$ is an **isomorphism** iff $U$ **strictly creates** them (Riehl Thm 5.5.1 and Ex. 5.5.i). The Statements keep the two forms separate (§3.3) |
 | 20 | `MA-5` | **dinatural transformation** and **wedge** | dinaturality is a hexagon, not a square, and **dinatural transformations do not compose in general** — an item, because every reader assumes they do |
 | 21 | `MA-5` | the **end** $\int_c T(c,c)$ | exists as a limit over the twisted arrow category of $\mathcal C$, which is small when $\mathcal C$ is; equivalently as an equalizer between two set-indexed products. Both descriptions are items and their agreement is a theorem |
 | 22 | `MA-5` | the **coend** $\int^c T(c,c)$ | dual; and the concrete "$\coprod_c T(c,c)$ modulo the dinaturality relations" description is a *theorem about $\mathbf{Set}$-valued and $\mathbf{Ab}$-valued coends*, not the definition |
@@ -806,7 +815,7 @@ table is optional and nothing in it may be discharged by a footnote.
 | 27 | `MA-7` | the **biproduct** $A\oplus B$ | **defined with no enrichment**: the canonical morphism $A\sqcup B\to A\times B$ built from identities and zero morphisms is an isomorphism. This presupposes only zero morphisms (published `def-category-with-zero-morphisms`). **Then the addition is free**: a category with finite biproducts is canonically and **uniquely** $\mathbf{CMon}$-enriched by $f+g:=\nabla\circ(f\oplus g)\circ\Delta$, and the *uniqueness* is what licenses the notation. The converse — $\mathbf{Ab}$-enriched with finite products has biproducts — is a separate theorem with different hypotheses. **Neither extends to infinite (co)products**, which is its own item |
 | 28 | `MA-7` | **matrix notation** for $\bigoplus_i A_i\to\bigoplus_j B_j$ | the bijection with matrices $(f_{ji})$ and the theorem that composition is matrix multiplication; both need finiteness of the index sets, and the finiteness is a hypothesis of the notation |
 | 29 | `MA-8` | **image**, **coimage**, and the canonical map | $\operatorname{im} f:=\ker(\operatorname{coker} f)$ and $\operatorname{coim} f:=\operatorname{coker}(\ker f)$ require both to exist; the canonical $\operatorname{coim} f\to\operatorname{im} f$ must be **constructed** — from the universal properties, in a numbered item — before any axiom can say it is an isomorphism (§4.3) |
-| 30 | `MA-8` | **abelian category** | axiomatised as **AB0** (a zero object, and finite products and coproducts that coincide) $+$ **AB1** (every morphism has a kernel and a cokernel) $+$ **AB2** (the canonical $\operatorname{coim}\to\operatorname{im}$ is an isomorphism), with **$\mathbf{Ab}$-enrichment proved as a THEOREM**, never postulated. The equivalence with "every monomorphism is a kernel and every epimorphism is a cokernel" is a separate numbered theorem, and "abelian categories are balanced" a separate corollary |
+| 30 | `MA-8` | **abelian category** | the working definition is **additive** $+$ Grothendieck's **AB1** (kernels and cokernels) $+$ **AB2** (every monomorphism is a kernel and every epimorphism a cokernel), equivalently the canonical $\operatorname{coim}\to\operatorname{im}$ is an isomorphism. Separately, Freyd's enrichment-free axioms A0, A1/A1*, A2/A2*, A3/A3* imply the required $\mathbf{Ab}$-enrichment by Mitchell's shear argument. The page does not claim the false weaker implication from finite biproducts and kernels/cokernels alone |
 | 31 | `MA-8` | the **quotient** $A/B$ | $A/B:=\operatorname{coker}(B\rightarrowtail A)$, defined on a **subobject** (#6) and shown independent of the representing monomorphism |
 | 32 | `MA-9` | the **subobject lattice** | meets are #7; joins are $\operatorname{im}$ of the induced map out of the coproduct, and that requires AB1 plus finite coproducts. **Modularity** of the lattice is a theorem, not a definition |
 | 33 | `MA-9` | **generator**, **cogenerator** | the cancellation form and the "the induced $\coprod_{\mathcal C(g,c)}g\to c$ is epic" form are equivalent under coproducts — an item, since the second is the one every later theorem uses |
@@ -822,10 +831,14 @@ table is optional and nothing in it may be discharged by a footnote.
 | 43 | `MA-14` | the **internal hom** $[X,Y]$ | defined by the adjunction $-\otimes X\dashv[X,-]$; existence is a hypothesis on the category, and the object is unique up to unique natural isomorphism by #3. "Closed" is a property, and a monoidal category need not have it |
 | 44 | `MA-15` | the **braiding** | naturality **in both variables**, plus the two hexagons; and $c$ is an isomorphism by definition, which is not automatic from the hexagons and must be part of the data |
 | 45 | `MA-16` | **left dual**, **right dual** | the data is $(X^\vee,\operatorname{ev},\operatorname{coev})$ satisfying the two zig-zag identities; **duals are unique up to a unique isomorphism compatible with $\operatorname{ev}$ and $\operatorname{coev}$**, and that theorem is what licenses the notation $X^\vee$. Left and right duals are **different** in a general monoidal category and the page never conflates them |
-| 46 | `MA-16` | **trace** and **dimension** | defined for a dualisable object, and the closing of the loop $\mathbf 1\to X\otimes X^\vee\to X^\vee\otimes X\to\mathbf 1$ needs a braiding or a pivotal structure to be written at all. The exact hypotheses are stated with the definition; a "trace" in a bare monoidal category is not defined |
+| 46 | `MA-16` | **trace** and **dimension** | a categorical trace is first defined in a rigid category for a morphism $X\to X^{\vee\vee}$; a pivotal structure turns an endomorphism into such a morphism, sphericality identifies left and right traces, and braiding alone does not supply a pivotal structure. The exact ladder is `MA-16` item 20; a trace in a bare monoidal category is not defined |
 | 47 | `MA-17` | a **$\mathcal V$-enriched category** | composition is a **morphism of $\mathcal V$**, and the associativity and unit conditions are commuting diagrams **in $\mathcal V$** — which can only be written unambiguously because of `MA-13`'s coherence. That dependency is declared |
 | 48 | `MA-17` | the **underlying ordinary category** $\mathcal V_0$ | built from $\mathcal V(\mathbf 1,-)$; that it is a category, and that the construction is functorial, are proofs |
 | 49 | `MA-17` | **change of base** along a lax monoidal functor | the induced $\mathcal V$-category-to-$\mathcal W$-category assignment is well defined exactly because the functor is lax monoidal; the laxity constraints are what supply the new composition |
+| 55 | `MA-18` | the scalar condition $\operatorname{End}(\mathbf1)=k$ | it means the canonical unital map $k\to\operatorname{End}(\mathbf1)$ from $k$-linearity is an isomorphism; no arbitrary scalar identification is chosen |
+| 56 | `MA-18` | multiplication on $K_0(\mathcal C)$ | biexactness sends a short-exact relation to one in either tensor variable, so multiplication descends; associator and unitors supply the ring laws |
+| 57 | `MA-18` | duality on $K_0(\mathcal C)$ | exact contravariant duality respects the defining relations and reverses tensor order, hence gives an anti-involution, not automatically a commutative-ring involution |
+| 58 | `MA-18` | fusion coefficients | finite semisimplicity and Jordan–Hölder make the multiplicities independent of decompositions; any displayed simple representatives are supplied finite data, not a globally selected skeleton |
 
 ### Obligations 50–54, added or corrected while scaffolding `MA-7` … `MA-17`
 
@@ -888,19 +901,21 @@ recorded honestly as `proved_here: false`.
    amount of module theory) are a subject area the library has not reached.
    **The load-bearing half of the denial stands:** Freyd–Mitchell is *never* used
    as a proof device. `MA-10` and `MA-11` prove every diagram lemma by the member
-   calculus, which is choice-free, smallness-free and constructive, and the
+   calculus, which is choice-free and smallness-free, and the
    `rem-` item carries no outgoing `deps` into the diagram lemmas at all.
    Licensed by a Grothendieck-categories page.
-6. **Fusion categories, multitensor and multifusion categories, modular tensor
-   categories, Tannaka duality, Hopf algebras.** EGNO's *tensor category*
-   (Def 4.1.1) is *"a locally finite $k$-linear abelian rigid monoidal category"*
-   over an **algebraically closed** field with $\operatorname{End}(\mathbf 1)\cong k$,
-   and fusion adds finiteness and semisimplicity. That needs semisimple abelian
-   categories, $k$-linear local finiteness and Perron–Frobenius theory, none of
-   which this library has. **Only EGNO Ch 1–2 and the rigidity/pivotal material
-   are in reach**, which is what `MA-16` covers. Licensed by a semisimple-abelian
-   -categories page. Specifically denied inside `MA-16`: EGNO Cor 4.7.13
-   (dimensions are algebraic integers), which needs the integrality theory.
+6. **The advanced theory of fusion categories: Frobenius–Perron dimension,
+   module categories, Drinfeld centres and modularity, Deligne tensor products,
+   and Tannaka reconstruction.** `MA-18` now builds the properly sourced
+   foundation — finite and locally finite $k$-linear abelian categories,
+   tensor/multitensor and fusion/multifusion categories, biexactness, the unit
+   theorems, Grothendieck rings and fusion rules. The material denied here needs
+   substantial new subject areas: Perron–Frobenius theory for the dimension
+   results, module-category and centre machinery for modularity, and Hopf or
+   quasi-Hopf algebra for reconstruction. In particular EGNO Cor. 4.7.13
+   (categorical dimensions are algebraic integers) is deferred because its proof
+   spends that integrality theory. Each topic is named separately again in
+   `MA-18` item 23; none is a dependency of this track.
 7. **$\infty$-categories, model categories, derived and triangulated categories,
    localisation and calculi of fractions, homotopical algebra, simplicial sets
    and Dold–Kan.** Each is a track. Recorded because `MA-6`'s B page will be
@@ -959,8 +974,8 @@ the owner's 2026-08-11 rule exists to prevent:**
   Needs only slice categories and pullbacks, both published. `MA-14`.
 - **The ultrafilter monad on $\mathbf{Set}$ and Manes' theorem.** `MA-4`, with the
   decomposition written out and a verification instruction, not an assertion.
-- **The member/pseudo-element calculus** in full. No smallness, no choice,
-  constructive.
+- **The member/pseudo-element calculus** in full. No smallness and no choice;
+  no constructivity claim is made (§7 obligation #53).
 - **Idempotent monads, reflective subcategories, and their identification**
   (Riehl Prop 5.3.3). Cheap once `MA-2` and `MA-3` exist, and it is the theorem
   that makes both pages pay for each other.
@@ -980,17 +995,48 @@ below was checked against `items/` with `ls items/ | grep -i` on 2026-08-13**;
 where the bare name was already taken the proposal is namespaced and the
 collision is named in the traps.
 
-**Provenance plan, stated once and binding on every page.** Every item below is
-`provenance.statement: literature-derived` unless marked otherwise, because every
-statement is taken from a named source at a named locator. `provenance.proof` is
-`literature-derived` where the source's proof is followed, `ai-altered` where the
-proof is reorganised to fit the library's available dependencies (this is the
-common case, and the reorganisation is recorded in the batch notes),
-`not-applicable` for definitions and remarks. **No item in this track has an
-`ai-generated` Statement**, with the single class of exceptions marked
-`[AI-GEN CANDIDATE]` in the lists below: those are directly verifiable corollaries
-or examples, they are never `deps` targets, and each carries
-`generation.role: direct-corollary` or `example`.
+**Component-provenance plan, stated once and binding on every item.** This is a
+deterministic authoring rule, not a vague page default:
+
+- A definition copied or faithfully shortened from the nearby named source has
+  `statement: literature-derived`, `proof: not-applicable`; a remark that
+  reconciles several sources has `statement: ai-altered`, `proof: not-applicable`,
+  with its rationale naming the exact reconciliation.
+- Every A-page theorem, lemma, proposition, sourced corollary and sourced
+  counterexample has `statement: literature-derived`. Its proof is
+  `literature-derived` only when the cited proof is followed without structural
+  change; otherwise it is `ai-altered`, with the rationale naming the adaptation
+  to published dependencies, size policy, choice policy or notation. The latter
+  is the common case. A result with `proved_here: false`, especially Freyd–Mitchell
+  and `MA-16` item 26, has `proof: not-supplied` and the full structured
+  `external_dependency` record.
+- Every `fs-` item is a literature-derived or literature-motivated **false
+  statement**, never `ai-generated`: `statement: ai-altered` when the false
+  near-miss is obtained by deleting/reversing a cited theorem's hypothesis or
+  conclusion, and `proof: ai-altered` for its source-backed refutation. The
+  rationale names that transformation.
+- A B-page example or counterexample with a parenthetical source uses
+  `statement: literature-derived`, `proof: ai-altered` unless the source proof is
+  followed. An unsourced B-page construction is an `[AI-GEN CANDIDATE]` with
+  `statement: ai-generated`, `proof: ai-generated`, a truth/counterexample search
+  before authoring, and `generation.role: example` or `counterexample`. **It is a
+  leaf and may not be a `deps` target.** This rule corrects the earlier blanket
+  sentence that incorrectly claimed every B-page statement was literature-derived.
+- The explicit `[AI-GEN CANDIDATE]` A-page items use
+  `statement: ai-generated`, `proof: ai-generated`, carry the stated generation
+  role and are forbidden as dependency targets. If authoring finds a literature
+  source, it upgrades both components and records the locator rather than leaving
+  stale AI provenance.
+
+The highest-risk proof adaptations are called out in their item text: the
+Leinster ZF initial-object argument and data-supplied AFT assembly (`MA-2`), Beck's
+creation/strict-creation split (`MA-4`), size-restricted ends/Kan/density
+(`MA-5`–`MA-6`), the Mitchell shear (`MA-8`), the member and snake constructions
+(`MA-10`–`MA-11`), strictification/coherence (`MA-13`), presheaf exponentials
+(`MA-14`), monoids in a braided base (`MA-15`), the trace hypothesis ladder
+(`MA-16`) and the particular-end/enriched-adjunction distinctions (`MA-17`). Each
+gets `proof: ai-altered` unless the eventual author follows the named source
+verbatim and records that fact.
 
 ---
 
@@ -1064,7 +1110,7 @@ are cited by `MA-2`, `MA-3` and `MA-4`.
 36. `thm-abelianisation-is-left-adjoint-to-the-inclusion-of-abelian-groups` — thm. Cites `thm-derived-subgroup-is-characteristic-and-abelianization-is-universal`.
 37. `thm-the-discrete-and-indiscrete-topologies-form-an-adjoint-triple-over-set` — thm. $D\dashv U\dashv I$ (Riehl Ex 4.1.6). LANDMARK — the standard witness that a functor can have adjoints on both sides.
 38. `thm-stone-cech-is-left-adjoint-to-the-inclusion-of-compact-hausdorff-spaces` — thm. **Statement names the ultrafilter lemma and dependent choice**, inherited verbatim from the published `thm-stone-cech-evaluation-closure-universal-property` and `lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice`. LANDMARK.
-39. `prop-the-underlying-set-functor-on-fields-has-no-left-adjoint` — prop. By RAPL applied to a limit $\mathbf{Field}$ does not have, or to the absence of an initial object. Riehl Ex 4.1.12; Leinster Ex 6.3.5. **The authoring Beta picks the argument that closes from published field material and records which.**
+39. `prop-the-underlying-set-functor-on-fields-has-no-left-adjoint` — prop. A left adjoint would send the empty set to an initial field, but no field is initial: fields of different characteristics rule out a universal morphism. Riehl Ex. 4.1.12; Leinster Ex. 6.3.5. RAPL is not used — a right adjoint preserves limits that exist; it does not force a missing limit to exist.
 40. `thm-restriction-of-scalars-has-a-left-and-a-right-adjoint` — thm. Extension and coextension of scalars along a ring homomorphism (Riehl Ex 4.1.10(xii)). **CONTINGENT** on `tensor-products-of-modules` (§11 amendment 1); if that page does not land below this one, the item drops to the $\operatorname{Hom}$-side adjoint alone and the drop is recorded.
 41. `thm-currying-is-an-adjunction-in-set` — thm. $-\times A\dashv(-)^A$ on $\mathbf{Set}$, stated with the function set as an ordinary set. **The authoring Beta verifies an A-page home exists for the function set**; the published `ex-function-sets-as-exponential-representing-objects` is a B-leaf and is not citable.
 
@@ -1133,7 +1179,7 @@ records the repair and item 12 is where it lands.
 11. `thm-subobjects-form-a-partially-ordered-collection` — thm. Antisymmetry is exactly that two mutually factoring monomorphisms differ by a unique isomorphism.
 12. `def-intersection-of-a-family-of-subobjects` — def. The limit of the diagram of the representing monomorphisms with common codomain (Riehl Def 4.7.9). §7 #7.
 13. `lem-an-intersection-of-subobjects-is-a-subobject` — lem. A limit of monomorphisms over a common target is monic; cites the published `lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic`.
-14. `def-well-powered-and-co-well-powered-category` — def. §7 #8. **Riehl never uses the word** — she writes the intersection hypothesis directly — so the item records both formulations and proves that well-powered $+$ complete implies all intersections exist.
+14. `def-well-powered-and-co-well-powered-category` — def. §7 #8. **Riehl never uses the word in this theorem** — she writes the intersection hypothesis directly — so the item records the distinction. A complete well-powered category has intersections for every **supplied set-indexed representative family**; no theorem here chooses representatives of all subobject classes in ZF.
 15. `def-separating-set-and-coseparating-set` — def. Riehl Def 4.7.7, by the cancellation property. §7 #9.
 16. `thm-a-separating-set-is-equivalently-a-jointly-faithful-family-of-representables` — thm. The representable reformulation, stated as a theorem rather than folded into the definition.
 17. `def-weakly-initial-object-and-jointly-weakly-initial-set` — def. Riehl Def 4.7.4(i),(ii); Leinster Def 6.3.9 packages the second as "weakly initial set". Both namings are recorded because the two sources differ (§10).
@@ -1146,12 +1192,13 @@ records the repair and item 12 is where it lands.
 21. `lem-the-comma-category-projection-strictly-creates-limits-preserved-by-the-functor` — lem. Riehl Lemma 4.7.2; hence $c\downarrow U$ is complete when $\mathcal A$ is and $U$ is continuous. **Strict creation**, and the Statement says so (§3.3).
 22. `thm-general-adjoint-functor-theorem-objectwise-form` — thm. $\mathcal A$ locally small and small-complete, $U$ continuous, solution set condition ⟹ every $c\downarrow U$ has an initial object. LANDMARK. §7 #11.
 23. `thm-general-adjoint-functor-theorem-functor-form` — thm. Given a choice of those initial objects, $U$ has a left adjoint. LANDMARK, data-supplied (§6).
-24. `rem-choice-ledger-for-the-adjoint-functor-theorems` — rem. **REQUIRED** (§6). Records that item 18's repair removes the class-indexed choice, that item 22 is ZF given its hypotheses, and that item 23 is the data-supplied assembly.
+24. `rem-choice-ledger-for-the-adjoint-functor-theorems` — rem. **REQUIRED** (§6). Records that item 18 uses Leinster's local proof rather than Riehl's class-indexed selection, that items 22 and 26 are ZF objectwise existence statements, and that items 23 and 26a are the data-supplied assemblies.
 
 **SAFT and representability**
 
 25. `thm-a-complete-locally-small-category-with-a-small-coseparating-set-and-all-subobject-intersections-has-an-initial-object` — thm. Riehl Lemma 4.7.11. LANDMARK.
-26. `thm-special-adjoint-functor-theorem` — thm. $U$ continuous, $\mathcal A$ complete, $\mathcal A$ and $\mathcal S$ locally small, $\mathcal A$ with a small coseparating set and all intersections of subobjects ⟹ $U$ has a left adjoint (Riehl Thm 4.7.10, verbatim hypotheses). Objectwise/assembly split as in items 22–23. LANDMARK.
+26. `thm-special-adjoint-functor-theorem-objectwise-form` — thm. If $U:\mathcal A\to\mathcal S$ is continuous, $\mathcal A$ is complete, $\mathcal A$ and $\mathcal S$ are locally small, and $\mathcal A$ has a small coseparating set and intersections of all collections of subobjects, then for every $s\in\mathcal S$ the comma category $(s\downarrow U)$ has an initial object (Riehl Thm 4.7.10, with its conclusion separated before assembly). ZF given the hypotheses. LANDMARK.
+26a. `thm-special-adjoint-functor-theorem-functor-form` — thm. Under item 26's hypotheses, **given as structure** a family choosing an initial object of $(s\downarrow U)$ for every $s$, those universal arrows assemble into a left adjoint of $U$ by `MA-1` item 10. This is the SE-D3 data-supplied form; the unconditional proper-class selection is not stated. LANDMARK.
 27. `cor-such-a-category-is-cocomplete` — cor. Riehl Cor 4.7.13.
 28. `cor-a-continuous-functor-to-set-from-such-a-category-is-representable` — cor. Riehl Cor 4.7.14.
 29. `thm-freyd-representability-theorem` — thm. A continuous $F:\mathcal C\to\mathbf{Set}$ on a complete locally small $\mathcal C$ satisfying the solution set condition is representable (Riehl Thm 4.7.15, verbatim). LANDMARK.
@@ -1184,23 +1231,26 @@ records the repair and item 12 is where it lands.
 
 ### Proof strategy — the repaired initial-object lemma (item 18)
 
-The textbook argument picks, for each object $X$, an index $i$ and an arrow
-$s_i\to X$; that selection is indexed by the objects of $\mathcal C$, a proper
-class, and SE-D3 forbids it. The repair, in four steps, and **every step must be
-visible in the numbered proof**:
+Riehl Lemma 4.7.5 picks $h_c:s_i\to c$ simultaneously for every object $c$;
+that selection is indexed by a proper class, so SE-D3 forbids using that proof.
+Follow **Leinster Lemma A.1** instead, in four visible steps:
 
-1. Form $\ell:=\prod_{i\in I}s_i$, legitimate because $I$ is a **set** and
-   $\mathcal C$ is small-complete.
-2. $\ell$ is weakly initial: for any $X$ there *exist* $i$ and $f:s_i\to X$, so
-   $f\circ\pi_i:\ell\to X$ exists. **This is an existence claim, not a choice** —
-   nothing is selected, and that is the whole repair.
-3. Let $k\xrightarrow{\,m\,}\ell$ be the joint equalizer of **all** endomorphisms
-   of $\ell$. The indexing collection is $\mathcal C(\ell,\ell)$, which is a
-   **set** by local smallness, so this is a small limit and exists.
-4. $k$ is initial: existence of $k\to X$ is step 2 composed with $m$; for
-   uniqueness, given $f,g:k\rightrightarrows X$ take their equalizer
-   $e:E\to k$, use step 2 to get $\ell\to E$, and show $e$ is a split
-   epimorphism and hence an isomorphism, forcing $f=g$.
+1. Regard the jointly weakly initial set $S$ as the full subcategory on those
+   objects. It is small: its objects form a set and local smallness makes the
+   disjoint union of its hom-sets a set.
+2. Form the limit $L$ of the inclusion $S\hookrightarrow\mathcal C$. For each
+   fixed target $C$, choose one witness $S_0\to C$ supplied by weak initiality;
+   composing with the projection $L\to S_0$ proves that $L$ is weakly initial.
+   This is one ordinary existential elimination for the target currently under
+   discussion, not a simultaneous choice over all objects.
+3. Given $f,g:L\rightrightarrows C$, form their equalizer $e:E\to L$. Choose
+   one witness $q:S_0\to E$ and put $r=q\,p_{S_0}:L\to E$, where $p_{S_0}$ is
+   the limiting projection.
+4. For each $S\in S$, the composite $p_S e q:S_0\to S$ is a morphism in the
+   full subcategory $S$. The cone equations give
+   $p_S e r=(p_S e q)p_{S_0}=p_S$; limit uniqueness therefore gives
+   $er=1_L$. Thus $e$ is split epic as well as monic, hence an isomorphism, and
+   $f=g$. The weakly initial object $L$ is initial.
 
 ### Traps
 
@@ -1245,10 +1295,9 @@ visible in the numbered proof**:
 15. `thm-kleisli-is-initial-and-eilenberg-moore-terminal-among-adjunctions-inducing-a-monad` — thm. Riehl Prop 5.2.13. LANDMARK — this is what licenses "**the** category of algebras".
 16. `thm-the-comparison-functor-exists-and-is-unique` — thm. §7 #16. LANDMARK.
 17. `thm-the-comparison-functor-from-kleisli-is-fully-faithful-with-image-the-free-algebras` — thm. Riehl Lemma 5.2.14.
-18. `thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-limits-the-monad-preserves` — thm. Riehl Thm 5.6.5(i). **Names the strict notion** (§3.3).
+18. `thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-all-base-limits` — thm. If a diagram in $\mathcal C^T$ has a limit after applying $U^T$, that limit carries a unique $T$-algebra structure making it the limit in $\mathcal C^T$; thus $U^T$ strictly creates **every limit that exists in $\mathcal C$** (Riehl Thm 5.6.5(i)). No preservation hypothesis on $T$ belongs in the limit clause. **Names the strict notion** (§3.3).
 19. `thm-colimits-in-an-eilenberg-moore-category-are-not-created-in-general` — thm, with the positive statement Riehl Thm 5.6.5(ii): those colimits $\mathcal C$ has that $T$ and $T^2$ preserve are created.
-20. `thm-a-monadic-functor-is-conservative` — thm. Riehl Lemma 5.6.1. LANDMARK — and item 22 is why it matters.
-21. `cor-a-continuous-bijection-of-compact-hausdorff-spaces-is-a-homeomorphism-by-conservativity` — cor. Riehl Cor 5.6.2. **CONTINGENT** on `MA-4`'s $\mathbf{CompHaus}$ result; if that drops, this drops with it and the published topology proof stands alone.
+20. `thm-a-monadic-functor-is-conservative` — thm. Riehl Lemma 5.6.1. LANDMARK — and the $\mathbf{CompHaus}$ corollary is placed on `MA-4`, after Manes' theorem, rather than forward-referenced here.
 22. `def-idempotent-monad` — def. $\mu$ an isomorphism; three equivalent characterisations (Riehl Ex 5.1.iii).
 23. `thm-algebras-for-an-idempotent-monad-form-a-reflective-subcategory` — thm. An object carries a $T$-algebra structure iff $\eta_C$ is an isomorphism, and then the structure map is $\eta_C^{-1}$ and is unique (Riehl Prop 5.3.3(i)). LANDMARK — the theorem that makes `MA-2` and this page pay for each other.
 24. `thm-the-inclusion-of-a-reflective-subcategory-is-monadic` — thm. Riehl Prop 5.3.3(ii).
@@ -1310,7 +1359,7 @@ homes of the compact-Hausdorff facts it uses and lists those pages)*
 7. `def-u-split-coequalizer-and-creation-of-their-coequalizers` — def. Riehl Def 5.4.8, **all three clauses verbatim**, including the separate "strictly creates" clause.
 8. `thm-every-algebra-is-the-coequalizer-of-a-canonical-pair-of-free-algebras` — thm. $(T^2A,\mu_{TA})\rightrightarrows(TA,\mu_A)\to(A,a)$ is a coequalizer in $\mathcal C^T$ (Riehl Prop 5.4.2). LANDMARK.
 9. `thm-the-canonical-presentation-is-split-in-the-base-but-not-in-the-algebras` — thm. Split by $\eta_{TA}$ and $\eta_A$ **in $\mathcal C$**, and the splittings do not lift (Riehl Ex 5.4.7). **This is precisely why the hypothesis is "$U$-split" and not "split"**, and it is a numbered item for that reason.
-10. `thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-coequalizers-of-split-pairs` — thm. Riehl Prop 5.4.9.
+10. `thm-the-forgetful-functor-from-eilenberg-moore-strictly-creates-coequalizers-of-u-t-split-pairs` — thm. $U^T$ strictly creates coequalizers of **$U^T$-split** pairs (Riehl Prop. 5.4.9); “split pairs” without the forgetful-functor qualifier is a stronger and different claim.
 11. `thm-becks-monadicity-theorem` — thm. A right adjoint $U$ is **monadic** iff it **creates** coequalizers of $U$-split pairs (Riehl Thm 5.5.1). LANDMARK.
 12. `thm-becks-strict-monadicity-theorem` — thm. $U$ is **strictly monadic** iff it **strictly creates** them (Riehl Ex 5.5.i; Mac Lane Thm VI.7.1, whose (i) is "$K$ is an isomorphism"). LANDMARK. **Two theorems, two Statements** — §3.3.
 13. `thm-crude-monadicity-the-reflexive-tripleability-theorem` — thm. $U$ has a left adjoint, $\mathcal D$ has coequalizers of reflexive pairs, $U$ preserves them, and $U$ reflects isomorphisms $\Rightarrow$ $U$ is monadic (Riehl Prop 5.5.8). LANDMARK — the form actually used in practice.
@@ -1318,7 +1367,7 @@ homes of the compact-Hausdorff facts it uses and lists those pages)*
 15. `thm-modules-are-monadic-over-sets` — thm.
 16. `thm-monoids-and-rings-are-monadic-over-sets` — thm. Riehl Cor 5.5.3.
 17. `def-finitary-functor-and-finitary-monad` — def. Preserves filtered colimits; cites the published `def-filtered-category-and-filtered-colimit`.
-18. `thm-a-finitary-monad-on-a-complete-cocomplete-locally-small-category-has-complete-and-cocomplete-algebras` — thm. Riehl Thm 5.6.12.
+18. `thm-a-finitary-monad-on-a-complete-cocomplete-locally-small-category-has-complete-and-cocomplete-algebras` — thm. Riehl Thm 5.6.12. Completeness is ZF by `MA-3` item 18. For cocompleteness, the Statement is relative to supplied choices of the successive coequalizers and colimits in Riehl's $\omega$-sequence; the unconditional form may instead be stated under dependent choice, which is on the exempt list. The proof notes exactly which formulation is used.
 
 **The $\mathbf{CompHaus}$ block — scaffolded with its decomposition, not asserted**
 
@@ -1327,6 +1376,7 @@ homes of the compact-Hausdorff facts it uses and lists those pages)*
 21. `lem-a-continuous-map-of-compact-hausdorff-spaces-is-an-ultrafilter-algebra-homomorphism` — lem. From the published `lem-continuous-images-of-universal-nets-are-universal` and the net–filter dictionary.
 22. `lem-an-ultrafilter-algebra-determines-a-compact-hausdorff-topology` — lem. **The hard direction.** Closed sets are those $A$ with $\xi(\mathcal U)\in A$ for every ultrafilter $\mathcal U$ containing $A$; the algebra axioms give idempotence and finite additivity of that closure operator, so it is a Kuratowski closure; compactness and Hausdorffness follow from the axioms.
 23. `thm-compact-hausdorff-spaces-are-monadic-over-sets` — thm. **Manes' theorem.** LANDMARK.
+24. `cor-a-continuous-bijection-of-compact-hausdorff-spaces-is-a-homeomorphism-by-conservativity` — cor. Riehl Cor. 5.6.2: item 23 and `MA-3` item 20 make the forgetful functor conservative, so a continuous bijection is an isomorphism. **CONTINGENT with item 23**; if Manes' theorem falls back to `proved_here: false`, this corollary drops and the published topology proof stands alone.
 
 **The verification instruction that goes with items 19–23, and it is binding.** These
 five items are scaffolded because every prerequisite looks present on disk and
@@ -1338,7 +1388,7 @@ proves item 22 from disk before committing to item 23.** If it does not close, t
 disposition is: keep items 19–21 (they are unconditional), state item 23 as a
 `rem-` with `proved_here: false` citing Manes and Riehl Cor 5.5.6, record the
 failed route in the batch notes and the `external_dependency` block, and **also**
-drop `MA-3` item 21, which depends on it. That is a documented fallback, not a
+drop item 24, which depends on it. That is a documented fallback, not a
 silent drop.
 
 ### `fs-` items
@@ -1365,7 +1415,7 @@ silent drop.
 ## MA-5. Ends, Coends and Weighted Limits
 
 **page id** `ends-coends-and-weighted-limits`
-**`requires`** `monads-comonads-and-their-algebras`, `limits-and-colimits`,
+**`requires`** `limits-and-colimits`,
 `universal-properties-and-the-yoneda-lemma`
 
 **Source note that shapes the page.** *Neither Riehl's* Category Theory in Context
@@ -1383,39 +1433,37 @@ without the calculus of ends and coends"*). This page is therefore backed by
 3. `def-wedge-and-cowedge` — def. A dinatural transformation from a constant, resp. to a constant (Loregian Def 1.1.4).
 4. `def-end-and-coend` — def. An end is a **terminal wedge**, a coend an **initial cowedge** (Mac Lane §IX.5 verbatim; Loregian Def 1.1.6). Notation $\int_c S(c,c)$, $\int^c S(c,c)$. LANDMARK.
 5. `thm-ends-and-coends-are-unique-up-to-unique-isomorphism` — thm. From `thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism` via item 6, or directly.
-6. `def-twisted-arrow-category` — def. *(Id free.)*
-7. `thm-an-end-is-a-limit-over-the-twisted-arrow-category` — thm. LANDMARK, §7 #21 — this is what makes every existence statement on the page a citation of published limit theory rather than new machinery.
+6. `def-twisted-arrow-category` — def. Fix the convention explicitly: objects are arrows $f:c\to c'$, and a morphism $f\to g$ is a pair $a:d\to c$, $b:c'\to d'$ with $bfa=g$; hence the projection $\pi:\operatorname{Tw}(\mathcal C)\to\mathcal C^{\mathrm{op}}\times\mathcal C$ is covariant. *(Id free.)*
+7. `thm-an-end-is-a-limit-over-the-twisted-arrow-category` — thm. With item 6's convention, $\int_cT(c,c)\cong\lim_{\operatorname{Tw}(\mathcal C)}T\pi$; dually the coend is the corresponding colimit over $\operatorname{Tw}(\mathcal C)^{\mathrm{op}}$. LANDMARK, §7 #21. Loregian adopts the opposite orientation, so his displayed formula is translated rather than quoted (§10.2).
 8. `thm-an-end-is-an-equalizer-between-two-products` — thm. $\int_c S(c,c)=\operatorname{eq}\big(\prod_c S(c,c)\rightrightarrows\prod_{f:c\to c'}S(c,c')\big)$; dually a coend is a coequalizer between coproducts (Kelly (2.2)). LANDMARK — the computational form.
 9. `cor-ends-exist-when-the-index-category-is-small-and-the-target-is-complete` — cor. Via items 7–8 and the published `thm-small-limits-from-products-and-equalizers`.
-10. `thm-the-set-of-natural-transformations-is-an-end` — thm. $\operatorname{Nat}(F,G)\cong\int_c\mathcal D(Fc,Gc)$ (Mac Lane §IX.5 (2)). LANDMARK — and it recasts the published `def-functor-category` and makes its size hypothesis visible again.
-11. `thm-fubini-for-ends` — thm. $\int_{(p,c)}S(p,c,p,c)\cong\int_p\int_c S(p,p,c,c)$, **with Mac Lane's exact existence clause**: the double end on the left exists iff the iterated end on the right does, and the comparison $\theta$ is then an isomorphism (Mac Lane §IX.8; Loregian Thm 1.3.1). LANDMARK.
+10. `thm-the-set-of-natural-transformations-is-an-end` — thm. For **small** $\mathcal C$ and locally small $\mathcal D$, $\operatorname{Nat}(F,G)\cong\int_c\mathcal D(Fc,Gc)$ (Mac Lane §IX.5 (2)). LANDMARK — and it recasts the published `def-functor-category` and makes its size hypothesis visible again.
+11. `thm-fubini-for-ends` — thm. Assume both parameterwise families of inner ends exist. Then if **any one** of the two iterated outer ends or the product-index end exists, all three exist and are canonically isomorphic (Richter Prop. 4.6.3, pp. 79–80; Mac Lane §IX.8; Loregian Thm 1.3.1). LANDMARK.
 12. `cor-ends-commute-with-ends` — cor.
 13. `def-parametrised-end` — def. Mac Lane §IX.7; ends with parameters assemble into a functor, **in the data-supplied form** (§6).
 14. `thm-the-ninja-yoneda-lemma-in-coend-form` — thm. All four isomorphisms $\int^c \mathcal C(c,a)\times Fc\cong Fa$ and their variants (Loregian Prop 2.2.1). LANDMARK.
-15. `def-weighted-limit-and-weighted-colimit` — def. $\mathcal B(B,\{F,G\})\cong[\mathcal K,\mathcal V](F,\mathcal B(B,G-))$ (Kelly (3.1) verbatim; Riehl *CHT* Def 7.1.1 for the $\mathbf{Set}$-weighted case, Def 7.4.1 enriched). §7 #23. LANDMARK.
+15. `def-set-weighted-limit-and-weighted-colimit` — def. For small $\mathcal J$, $W:\mathcal J\to\mathbf{Set}$ and $D:\mathcal J\to\mathcal C$, the weighted limit $\{W,D\}$ represents $c\mapsto[\mathcal J,\mathbf{Set}](W,\mathcal C(c,D-))$; dually, a weight $W:\mathcal J^{\mathrm{op}}\to\mathbf{Set}$ defines $W\star D$ by $\mathcal C(W\star D,c)\cong[\mathcal J^{\mathrm{op}},\mathbf{Set}](W,\mathcal C(D-,c))$. Riehl *CHT* Def. 7.1.1. The genuinely enriched definition is `MA-17` item 26. §7 #23. LANDMARK.
 16. `thm-a-weighted-limit-is-unique-up-to-unique-isomorphism` — thm. By representability, citing the published `thm-representing-objects-are-unique-up-to-unique-compatible-isomorphism`.
-17. `thm-a-weighted-limit-is-an-end` — thm. $\lim^W F\cong\int_c Fc^{Wc}$ (Riehl *CHT* (7.1.3)); dually $\operatorname{colim}^W F\cong\int^c Wc\cdot Fc$.
-18. `def-conical-limit` — def. The weight constant at the unit; the theorem that a conical limit is an ordinary limit (Riehl *CHT* §7.5).
-19. `rem-conical-limits-do-not-suffice-in-the-enriched-setting` — rem. Kelly §3.9 is literally titled "The inadequacy of conical limits", and Riehl *CHT* footnote 3 records that a constant $\mathcal V$-functor need not exist. **A remark that justifies why the page bothers with weights at all.**
-20. `def-tensor-and-cotensor` — def. Kelly (3.42)/(3.44); the $\mathbf{Set}$-weighted special cases (copower and power).
-21. `thm-the-underlying-set-bijection-is-strictly-weaker-than-the-enriched-isomorphism` — thm. Kelly §3.7 gives the explicit $\mathcal V=\mathbf{Cat}$ witness. **CONTINGENT** on `MA-17`'s enrichment vocabulary landing above this page — see the ordering note below.
+17. `thm-a-weighted-limit-is-an-end` — thm. After item 20 has supplied the required powers and copowers, and assuming the indicated end or coend exists, $\lim^W F\cong\int_c Fc^{Wc}$ and $W\star F\cong\int^c Wc\cdot Fc$ (Riehl *CHT* (7.1.3)). **Authoring order:** item 20 is placed before this theorem on the final page even though the conceptual list groups the end formula here.
+18. `thm-the-constant-singleton-weight-recovers-an-ordinary-limit` — thm. A $\mathbf{Set}$-weighted limit with weight $\Delta1$ is exactly the already-published ordinary conical limit. This is a comparison theorem, not a new definition of conical limit.
+19. `rem-why-the-enriched-generalisation-cannot-stop-at-conical-limits` — rem. Kelly §3.9 is titled "The inadequacy of conical limits". The remark only announces the later issue; the definitions and counterexamples are `MA-17` items 26–30, so this page does not use enrichment before it is defined.
+20. `def-power-and-copower-by-a-set` — def. $c^S$ and $S\cdot c$ as the $\mathbf{Set}$-weighted limits and colimits over the unit category. These are the ordinary special cases later generalised to enriched cotensors and tensors in `MA-17` item 24.
+21. `thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements` — thm. The category-of-elements formula reduces $\{W,D\}$, and dually $W\star D$, to ordinary small limits or colimits. Cites the published `def-category-of-elements` and Riehl *CHT* §7.1.
 22. `thm-representable-functors-carry-weighted-limits-to-weighted-limits` — thm.
 23. `thm-weighted-limits-over-a-representable-weight-are-evaluation` — thm. Riehl *CHT* Ex 7.1.4.
 24. `def-functor-tensor-product` — def. $F\otimes_{\mathcal C}G:=\int^c Fc\times Gc$ (Mac Lane §IX.6; Borceux vol 1 §3.8).
 
-**Ordering decision.** Items 15–21 are stated **unenriched** ($\mathcal V=\mathbf{Set}$)
-on this page, which is all that `MA-6` needs, and `MA-17` restates the enriched
-versions with $\mathcal V$-weights. Item 21 is the exception and is flagged
-CONTINGENT: if the authoring Beta cannot state it without enrichment, it moves to
-`MA-17` and the move is recorded. Putting the whole weighted-limit theory above
-`MA-17` would force `MA-6` to forward-reference it, which §5 of the seam contract
-ranks worse.
+**Ordering decision.** Items 15–21 are strictly **$\mathbf{Set}$-weighted** and
+use only the published ordinary functor-category and limit language. `MA-17`
+later supplies enriched weights, tensors, cotensors, the failure of constant
+enriched functors and the $​\mathbf{Cat}$ witness. Thus neither page points
+forward and no definition is used before it is minted.
 
 ### `fs-` items
 
 - `fs-dinatural-transformations-compose` — item 2 as the false statement it is.
 - `fs-every-end-exists` — refuted by a size argument.
-- `fs-a-coend-is-a-colimit-over-the-twisted-arrow-category` — the variance error: it is a colimit over the **opposite** twisted arrow category.
+- `fs-a-coend-is-a-colimit-over-the-twisted-arrow-category-under-this-pages-convention` — the variance error **under item 6's explicitly fixed convention**: it is a colimit over the opposite. Loregian reverses the name, so the false statement never appears without the convention qualifier.
 - `fs-yonedas-original-notation-agrees-with-the-modern-one` — Loregian records (Remark 1.1.14) that **Yoneda's 1960 paper writes $\int_C$ for what is now the coend**. A genuine historical trap, and a fair `fs-`.
 
 ### B page — `ends-coends-and-weighted-limits-examples`
@@ -1444,35 +1492,36 @@ ranks worse.
 
 **page id** `kan-extensions-density-and-the-free-cocompletion`
 **`requires`** `ends-coends-and-weighted-limits`, `adjunctions-units-and-counits`,
-`universal-properties-and-the-yoneda-lemma`
+`universal-properties-and-the-yoneda-lemma`, `monads-comonads-and-their-algebras`
 
 ### A-page items, in dependency order
 
 1. `def-left-and-right-kan-extension` — def. The 2-categorical universal property: $(\operatorname{Lan}_KF,\eta:F\Rightarrow\operatorname{Lan}_KF\cdot K)$ initial among such pairs, and dually (Riehl Def 6.1.1, verbatim). §7 #24. LANDMARK.
 2. `rem-the-left-right-naming-clash` — rem. **Mac Lane's own warning**, quoted: *"(But note that some authors call this $R$ a 'left' Kan extension.)"* (§X.3). The library follows the modern convention and says so. §10.
 3. `thm-kan-extensions-are-unique-up-to-unique-isomorphism` — thm. Riehl Ex 6.1.ii.
-4. `def-global-kan-extension` — def. $\operatorname{Lan}_K$ as a left adjoint to $K^*$, distinguished from the local notion. §7 #24.
-5. `thm-lan-is-left-adjoint-to-restriction-which-is-left-adjoint-to-ran` — thm. $\operatorname{Lan}_K\dashv K^*\dashv\operatorname{Ran}_K$ when the extensions exist (Riehl Prop 6.1.6). LANDMARK.
+4. `def-global-kan-extension` — def. For **small** source categories, so that the relevant functor categories are legitimate under `prop-size-of-functor-categories`, $\operatorname{Lan}_K$ is a left adjoint to $K^*$. It is distinguished from a local extension at one $F$, and a family of local extensions is supplied data rather than a class-indexed selection. §7 #24.
+5. `thm-lan-is-left-adjoint-to-restriction-which-is-left-adjoint-to-ran` — thm. For small $\mathcal C,\mathcal D$ and locally small $\mathcal E$, **given families** of local left and right Kan extensions, $\operatorname{Lan}_K\dashv K^*\dashv\operatorname{Ran}_K$ (Riehl Prop 6.1.6). LANDMARK. The theorem does not choose those families.
 6. `thm-the-comma-category-colimit-formula-computes-a-left-kan-extension` — thm. If $\operatorname{colim}(K\downarrow d\to\mathcal C\to\mathcal E)$ exists for every $d$, these objects define $\operatorname{Lan}_KF$, and the unit is extracted from the colimit cone (Riehl Thm 6.2.1, verbatim). Dually for $\operatorname{Ran}$. LANDMARK.
 7. `def-pointwise-kan-extension-by-the-colimit-formula` — def. Riehl Def 6.2.6, **including the clause about $\eta_c$ being the leg at $\mathrm{id}_{Kc}$** — the clause most restatements drop. §7 #25.
-8. `thm-existence-of-pointwise-kan-extensions` — thm. $\mathcal C$ small, $\mathcal D$ locally small, $\mathcal E$ cocomplete $\Rightarrow$ $\operatorname{Lan}_KF$ exists and is pointwise; dually with $\mathcal E$ complete (Riehl Cor 6.2.7). LANDMARK.
-9. `def-pointwise-kan-extension-by-preservation-by-representables` — def. Riehl Def 6.3.5/6.3.6.
+8. `thm-existence-of-pointwise-kan-extensions` — thm. If $\mathcal C$ is small, $\mathcal D$ locally small and $\mathcal E$ cocomplete, every comma category $(K\downarrow d)$ is small and a pointwise left Kan extension exists **objectwise**; dually for a complete $\mathcal E$ (Riehl Cor 6.2.7). A global functor is concluded only from a supplied family of chosen colimits, as in item 5 and SE-D3. LANDMARK.
+9. `def-pointwise-kan-extension-by-preservation-by-representables` — def. A **right** Kan extension is pointwise when every covariant representable $\mathcal E(e,-)$ preserves it. A **left** Kan extension is pointwise when, after passage to opposites, each $\mathcal E(-,e)$ sends it to the corresponding right Kan extension (Riehl Defs. 6.3.5–6.3.6). The variance is displayed; “preserved by representables” alone is ambiguous.
 10. `thm-the-two-notions-of-pointwise-agree` — thm. **With the size hypotheses**: $\mathcal D$ and $\mathcal E$ locally small (Riehl Thm 6.3.7). LANDMARK. **See the trap — this statement was defective in Riehl's first edition.**
 11. `def-absolute-kan-extension` — def. Preserved by every functor; strictly stronger than pointwise.
 12. `thm-left-adjoints-preserve-left-kan-extensions` — thm. Riehl Lemma 6.3.2.
 13. `thm-a-kan-extension-along-a-fully-faithful-functor-genuinely-extends-when-it-is-pointwise` — thm. The unit/counit is then an isomorphism (Riehl Cor 6.2.14). LANDMARK.
-14. `thm-kan-extensions-as-coends` — thm. $\operatorname{Lan}_KF(d)\cong\int^c \mathcal D(Kc,d)\cdot Fc$ and $\operatorname{Ran}_KF(d)\cong\int_c Fc^{\mathcal D(d,Kc)}$ (Mac Lane §X.4; Loregian §2.3). LANDMARK — the reason `MA-5` sits below this page.
+14. `thm-kan-extensions-as-coends` — thm. For small $\mathcal C$, locally small $\mathcal D$, and a target with the required powers, copowers, ends and coends, $\operatorname{Lan}_KF(d)\cong\int^c \mathcal D(Kc,d)\cdot Fc$ and $\operatorname{Ran}_KF(d)\cong\int_c Fc^{\mathcal D(d,Kc)}$ (Mac Lane §X.4; Loregian §2.3). LANDMARK — the reason `MA-5` precedes this page.
 15. `thm-limits-and-colimits-are-kan-extensions-along-the-functor-to-the-terminal-category` — thm. Mac Lane Thm X.7.1; Riehl Prop 6.5.1.
-16. `thm-an-adjunction-is-an-absolute-kan-extension` — thm. $G$ has a left adjoint iff $\operatorname{Ran}_G 1_{\mathcal A}$ exists and is preserved by $G$, and then it **is** the left adjoint with the Kan counit as the adjunction counit (Mac Lane Thm X.7.2, verbatim; Riehl Prop 6.5.2). LANDMARK — and Mac Lane's stronger observation that $HF=\operatorname{Ran}_GH$ for **any** $H$, i.e. the extension is absolute, is part of the item.
-17. `thm-the-yoneda-lemma-as-a-limit-formula` — thm. $Fc\cong\lim(c/\mathcal C\to\mathcal C\to\mathcal D)$ (Riehl Prop 6.5.4). **The equalizer presentation carries hypotheses the underlying formula does not** — $F$ a small diagram, $\mathcal D$ with products and equalizers — and the Statement names them.
-18. `thm-the-co-yoneda-lemma-as-a-colimit-formula` — thm. Riehl Prop 6.5.6, dual, with its own hypotheses.
-19. `thm-density-for-a-locally-small-category` — thm. Every $F:\mathcal C\to\mathbf{Set}$ is the colimit of $(\int F)^{\mathrm{op}}\to\mathcal C^{\mathrm{op}}\to\mathbf{Set}^{\mathcal C}$, indexed by the published `def-category-of-elements` (Riehl Thm 6.5.7; Leinster Thm 6.2.17). LANDMARK. §7 #26.
+16. `thm-an-adjunction-is-an-absolute-kan-extension` — thm. For $F:\mathcal C\to\mathcal D$ and $G:\mathcal D\to\mathcal C$, $F\dashv G$ implies $G\cong\operatorname{Lan}_F1_{\mathcal C}$ and $F\cong\operatorname{Ran}_G1_{\mathcal D}$, and both Kan extensions are absolute. Conversely, existence of the indicated extension yields the adjoint only when it is preserved by $F$ or $G$, respectively (Riehl Prop. 6.5.2). LANDMARK. Richter Prop. 4.7.3(2)'s printed statement omits preservation although its proof uses it; §10.3 records the defect.
+17. `thm-the-yoneda-lemma-as-a-limit-formula` — thm. For **small** $\mathcal C$, $Fc\cong\lim(c/\mathcal C\to\mathcal C\to\mathcal D)$ (Riehl Prop 6.5.4). **The equalizer presentation carries further hypotheses** — $\mathcal D$ has the required products and equalizers — and the Statement names them.
+18. `thm-the-co-yoneda-lemma-as-a-colimit-formula` — thm. Riehl Prop 6.5.6, dual, for small $\mathcal C$ and with its own target hypotheses.
+19. `thm-density-for-a-small-category` — thm. For small $\mathcal C$, every $F:\mathcal C\to\mathbf{Set}$ is the colimit of $(\int F)^{\mathrm{op}}\to\mathcal C^{\mathrm{op}}\to\mathbf{Set}^{\mathcal C}$, indexed by the published `def-category-of-elements` (Riehl Thm 6.5.7; Leinster Thm 6.2.17). Riehl's locally-small large form is not admitted under the library's functor-category and small-colimit policy. LANDMARK. §7 #26.
 20. `thm-density-as-a-self-kan-extension-for-a-small-category` — thm. $\operatorname{Lan}_{\text{よ}}\text{よ}\cong\mathrm{id}$, for $\mathcal C$ **small** (Riehl Thm 6.5.8). LANDMARK. **The two density statements sit at different size levels and the page says so** — Riehl's own footnote explains why.
 21. `def-dense-subcategory` — def.
 22. `thm-the-presheaf-category-on-a-small-category-is-the-free-cocompletion` — thm. Every $F:\mathcal C\to\mathcal E$ with $\mathcal C$ small and $\mathcal E$ locally small and cocomplete induces $\operatorname{Lan}_{\text{よ}}F\dashv \mathcal E(F-,-)$, and **every** adjunction whose left adjoint has a presheaf-category domain arises this way (Riehl Prop 6.5.9, improved in the 2nd edition). LANDMARK — **the smallness hypothesis is named in the Statement**, and the page summary says plainly that the large case is not available here (§8 denial 3).
-23. `def-codensity-monad` — def. $\operatorname{Ran}_GG$ (Riehl Def 6.5.10).
-24. `thm-the-codensity-monad-of-the-inclusion-of-finite-sets-is-the-ultrafilter-monad` — thm. Riehl Ex 6.5.12. **CONTINGENT**: a genuinely beautiful result that ties this page to `MA-3` item 33. The authoring Beta verifies the proof closes from `MA-3`'s ultrafilter monad and the published ultrafilter items; if not, it becomes a `rem-` with the citation and the drop is recorded.
-25. `thm-kan-extensions-along-a-full-subcategory-inclusion` — thm.
+23. `def-codensity-monad` — def. $T:=\operatorname{Ran}_G G$ together with the canonical unit and multiplication induced by the Kan universal property (Riehl Def 6.5.10).
+23a. `thm-the-codensity-construction-satisfies-the-monad-laws` — thm. The unit and multiplication of item 23 are well defined and satisfy associativity and both unit laws, by uniqueness in the right Kan extension (Riehl Ex. 6.5.viii). This proof is mandatory: the object formula $\operatorname{Ran}_GG$ alone is not a monad.
+24. `thm-the-codensity-monad-of-a-small-skeleton-of-finite-sets-is-the-ultrafilter-monad` — thm. Use a **small skeleton** $\mathbf{FinSet}_{\mathrm{sk}}\hookrightarrow\mathbf{Set}$, not the large full category of all finite sets. Riehl Ex 6.5.12 names the result but sends the proof to Leinster's codensity-monad treatment; that source, not the exercise alone, backs the proof. **CONTINGENT**: the authoring Beta verifies the identification with `MA-3` item 33 and the published ultrafilter material; otherwise it becomes a `rem-` with `proved_here: false` and the failed route recorded.
+25. `thm-pointwise-kan-extension-along-a-fully-faithful-inclusion-has-invertible-unit` — thm. If $K:\mathcal C\hookrightarrow\mathcal D$ is fully faithful and $\operatorname{Lan}_KF$ is pointwise, then the unit $F\Rightarrow(\operatorname{Lan}_KF)K$ is an isomorphism; dually for right Kan extensions. This is the precise theorem used by the B-page inclusion examples, not an unscoped heading (Riehl Cor. 6.2.14; it may be merged with item 13 at authoring if their Statements coincide).
 
 ### `fs-` items
 
@@ -1495,7 +1544,7 @@ ranks worse.
 ### Traps
 
 1. **Riehl's Thm 6.3.7 was WRONG in the first edition** — the size hypotheses were missing, and she records in the 2nd-edition acknowledgments that Vladimir Sotirov pointed this out. Item 10 must carry "$\mathcal D$ and $\mathcal E$ locally small". **Any locator or statement carried over from a first-edition memory of this theorem inherits a defective statement.**
-2. **Items 19 and 20 are at different size levels** (locally small vs small). Merging them into one "density theorem" would state a falsehood at one of the two levels.
+2. **The library states both density items for small $\mathcal C$.** Riehl's item-19 form allows a locally small large category, but that version forms a large category of elements and a functor collection the house foundation does not recognise as a locally small functor category. The restriction is deliberate, not an omitted generality.
 3. **Local versus global Kan extension** (items 1 and 4) are different objects. The page keeps them apart throughout.
 4. Item 22's smallness restriction is this block's most visible casualty and belongs in the page summary — **in the non-decaying form** (SCHEMA §6: no claims about what other pages do or lack).
 
@@ -1532,7 +1581,7 @@ they cost four published citations between them.
 **Preadditive categories, and what a ring turns out to be**
 
 1. `def-preadditive-category` — def. A category in which each $\mathcal C(A,B)$ carries the structure of an abelian group and composition is biadditive: $h(f+g)=hf+hg$ and $(f+g)k=fk+gk$. LANDMARK.
-2. `thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring` — thm. The assignment sending a one-object preadditive category to $\operatorname{End}(\ast)$ with composition as multiplication is a bijection onto rings, and additive functors between one-object preadditive categories correspond exactly to ring homomorphisms. Cites `def-ring` and `def-ring-homomorphism` (the authoring Beta confirms the exact published ids on `rings-subrings-and-integral-domains`). LANDMARK — a preadditive category is a "ring with several objects", and this item is what makes that slogan a theorem.
+2. `thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring` — thm. The assignment sending a one-object preadditive category to $\operatorname{End}(\ast)$ with composition as multiplication is a bijection onto rings, and additive functors correspond exactly to **unital** ring homomorphisms because functors preserve identities. The authoring Beta checks the published `def-ring-homomorphism`; if that convention permits nonunital maps, the Statement explicitly says "unital ring homomorphism" rather than citing the broader predicate. LANDMARK.
 3. `thm-additive-functors-from-a-ring-to-abelian-groups-are-left-modules` — thm. For $R$ regarded as a one-object preadditive category, additive functors $R\to\mathbf{Ab}$ correspond to left $R$-modules and additive natural transformations to module homomorphisms. Cites `def-module` and `def-module-homomorphism`. LANDMARK — the payoff of item 2, and the item `homological-algebra` will reach for first.
 4. `def-additive-functor` — def. $F(f+g)=F(f)+F(g)$ on every hom-group. *(Namespaced: `def-additive-function` is published and is the Cauchy-equation notion from real analysis.)*
 5. `prop-an-additive-functor-preserves-zero-morphisms` — prop. And the converse fails, which is `fs-` item 3 below.
@@ -1592,7 +1641,7 @@ they cost four published citations between them.
 **Additive functors are the biproduct-preserving ones**
 
 40. `thm-an-additive-functor-preserves-finite-biproducts` — thm. LANDMARK.
-41. `thm-a-functor-between-categories-with-finite-biproducts-is-additive-exactly-when-it-preserves-them` — thm. LANDMARK. **The functor-level form of the thesis**: additivity of a functor is a property too, and it is checkable without ever mentioning the addition.
+41. `thm-a-functor-between-additive-categories-is-additive-exactly-when-it-preserves-finite-biproducts` — thm. LANDMARK. Both categories are preadditive with finite biproducts, so `def-additive-functor` is typed; the theorem does not apply that predicate to arbitrary categories possessing only biproducts.
 42. `cor-a-functor-between-additive-categories-preserving-finite-products-is-additive` — cor. By item 24.
 43. `cor-any-adjoint-between-additive-categories-is-additive` — cor. A right adjoint preserves finite products and a left adjoint finite coproducts, by `MA-1` items 24 and 25; each is enough by items 42 and 24. LANDMARK — and it is the reason no later page ever hypothesises "additive adjoint".
 44. `thm-an-additive-functor-is-left-exact-exactly-when-it-preserves-kernels` — thm. Finite limits reduce to finite products and equalizers (published), equalizers to kernels (item 34), and finite products are preserved by item 40. Dually for right exactness and cokernels. LANDMARK — the working criterion for every exactness claim in `MA-10`, `MA-11` and `homological-algebra`.
@@ -1612,13 +1661,13 @@ they cost four published citations between them.
 52. `def-idempotent-complete-category` — def. Every idempotent splits. *(Id free; `idempotent` occurs in the corpus only in the ring-theoretic sense, which the authoring Beta cites for the motivating example.)*
 53. `thm-an-additive-category-with-kernels-is-idempotent-complete` — thm. $e$ splits through $\ker(1_A-e)$, and the verification uses items 21 and 37. LANDMARK — hence every abelian category is idempotent complete, which `MA-8` inherits for free.
 54. `def-the-idempotent-completion-of-a-preadditive-category` — def. Objects the pairs $(A,e)$ with $e$ idempotent; $\operatorname{Kar}(\mathcal C)\big((A,e),(B,f)\big):=\{\,u:A\to B \mid fue=u\,\}$; composition inherited; identity of $(A,e)$ is $e$. LANDMARK.
-55. `thm-the-idempotent-completion-is-idempotent-complete-and-its-inclusion-is-fully-faithful-and-universal` — thm. $\mathcal C\to\operatorname{Kar}(\mathcal C)$, $A\mapsto(A,1_A)$, is fully faithful and additive; $\operatorname{Kar}(\mathcal C)$ is idempotent complete and preadditive; and every additive functor from $\mathcal C$ to an idempotent-complete preadditive category extends along the inclusion, **uniquely up to natural isomorphism**. LANDMARK. The qualified uniqueness is the honest one — an on-the-nose statement would need a choice of splittings and is forbidden by SE-D3 (§3.2).
+55. `thm-the-idempotent-completion-is-idempotent-complete-and-its-inclusion-is-fully-faithful-and-universal` — thm. $\mathcal C\to\operatorname{Kar}(\mathcal C)$, $A\mapsto(A,1_A)$, is fully faithful and additive, and $\operatorname{Kar}(\mathcal C)$ is idempotent complete and preadditive. For an additive $F:\mathcal C\to\mathcal D$, an extension to $\operatorname{Kar}(\mathcal C)$ is constructed **relative to a supplied family of splittings of every $F(e)$**, and is then unique up to natural isomorphism. If $\mathcal C$ is small, AC may instead choose the family and the Statement names AC. Bare idempotent completeness of a large $\mathcal D$ does not make the class-indexed selection. LANDMARK.
 
 ### `fs-` items (A page)
 
 - `fs-the-addition-on-an-additive-category-is-extra-structure-that-must-be-chosen` — refuted by item 18. **The page's sharpest**, because it is the belief the whole page exists to destroy.
 - `fs-a-category-with-finite-products-and-finite-coproducts-has-biproducts` — refuted in pointed sets, where the zero object and both constructions exist and the canonical morphism $A\vee B\to A\times B$ is injective and not surjective. *(The authoring Beta confirms which published page homes pointed sets and cites it; if none does, the witness moves to $\mathbf{Set}_\ast$ constructed inline in the refutation, which costs three lines.)*
-- `fs-a-functor-preserving-zero-morphisms-is-additive` — refuted by the reduced free abelian group on a pointed set, $A\mapsto\mathbb Z[A]/\mathbb Z[0]$, which preserves zero morphisms and sends $f+g$ to neither $F(f)+F(g)$ nor anything else additive. **Verification instruction:** the authoring Beta confirms this closes from published free-abelian-group material; the alternative witness $A\mapsto A\otimes A$ is CONTINGENT on `tensor-products-of-modules` (§11 amendment 1) and is used only if that page lands below this one.
+- `fs-a-functor-preserving-zero-morphisms-is-additive` — refuted by the functor **from $\mathbf{Ab}$ to $\mathbf{Ab}$** sending $A$ to the reduced free abelian group $\mathbb Z[U(A)]/\mathbb Z[0]$ on its underlying pointed set. Its domain and codomain are preadditive, so "additive" is typed; it preserves zero morphisms but not addition of homomorphisms. The authoring Beta verifies this from the published free-abelian-group material.
 - `fs-a-preadditive-category-with-a-zero-object-has-binary-biproducts` — refuted by the full subcategory of $\mathbf{Ab}$ on the two objects $0$ and $\mathbb Z$: it is preadditive with a zero object, and $\mathbb Z\times\mathbb Z$ does not exist in it, since $\mathcal C(\mathbb Z,0)=0$ and $\mathcal C(\mathbb Z,\mathbb Z)=\mathbb Z$ and neither is $\mathbb Z^2$.
 - `fs-every-idempotent-splits` — refuted by a preadditive category that is not idempotent complete; item 53 says exactly which hypothesis rules it out.
 
@@ -1644,7 +1693,10 @@ Exact ranges, verbatim headings and dispositions are in §10.
 7. **Semiadditive is not additive, and both Mac Lane and Freyd say so in the same breath as the theorem.** Mac Lane Ex. VIII.2.4(a) yields a **commutative monoid**, and it takes his part (b) — an arrow $v_a$ with $v_a+1_a=0$ — to get a group; Freyd Ex. 2A.2 says the operation is "not necessarily a group". Item 22 is where the difference lives, and a page that slides from item 17 to "hence additive" has skipped a real hypothesis.
 4. **`def-additive-function` is published and is the real-analysis notion.** Every id on this page carrying the word is namespaced with `-category` or `-functor`.
 5. **Item 47 is a citation, not a proof.** If the authoring Beta finds itself writing an elementwise left-exactness argument, it has duplicated `thm-representable-functors-preserve-small-limits` and the item is wrong even if the mathematics is right.
-6. **Item 55's uniqueness is up to natural isomorphism and stays that way.** Strengthening it to an on-the-nose extension requires choosing splittings and is forbidden by §3.2.
+6. **Item 55's extension is data-supplied.** Uniqueness up to natural isomorphism
+   does not create the extension: one must still choose a splitting of every
+   $F(e)$. For a large source that would be global choice, so the splitting
+   family is structure; for a small source ordinary AC is named.
 
 **Forward references: NONE.**
 
@@ -1716,16 +1768,18 @@ state it as an axiom.
 
 **Subobjects, quotients, and the isomorphism theorems**
 
-28. `thm-kernel-and-cokernel-are-mutually-inverse-order-isomorphisms-between-subobjects-and-quotient-objects` — thm. In an abelian category, $B\rightarrowtail A\mapsto\operatorname{coker}$ and $A\twoheadrightarrow Q\mapsto\ker$ are mutually inverse and order-reversing. LANDMARK. Cites `MA-2` items 9–11 for the subobject vocabulary and does not re-mint it.
+28. `thm-kernel-and-cokernel-are-mutually-inverse-order-anti-isomorphisms-between-subobjects-and-quotient-objects` — thm. Order quotient objects by factorisation as in `MA-2`: $q\le q'$ when $q'$ factors through $q$. Then $B\rightarrowtail A\mapsto\operatorname{coker}$ and $A\twoheadrightarrow Q\mapsto\ker$ are mutually inverse and **order-reversing**. LANDMARK. Cites `MA-2` items 9–11 and Tan Thm 2.3; "order-isomorphism" would contradict the stated variance.
 29. `def-the-quotient-of-an-object-by-a-subobject` — def. $A/B:=\operatorname{coker}(B\rightarrowtail A)$, defined on the subobject rather than on a chosen representative. §7 #31.
 30. `thm-the-quotient-is-independent-of-the-representing-monomorphism` — thm. §7 #31 — the well-definedness that licenses the notation $A/B$.
 31. `thm-first-isomorphism-theorem-in-an-abelian-category` — thm. $A/\ker f\cong\operatorname{im}f$, canonically. LANDMARK. *(Namespaced: the published isomorphism theorems on `group-homomorphisms-and-the-isomorphism-theorems` hold the bare ids.)*
-32. `thm-third-isomorphism-theorem-in-an-abelian-category` — thm. For subobjects $C\le B\le A$, $(A/C)/(B/C)\cong A/B$. *(The second isomorphism theorem needs joins of subobjects and is `MA-9` item 12.)*
+32. `thm-third-isomorphism-theorem-in-an-abelian-category` — thm. For subobjects $C\le B\le A$, $(A/C)/(B/C)\cong A/B$. *(The second isomorphism theorem needs joins of subobjects and is `MA-9` item 9.)*
 33. `thm-a-composite-of-a-quotient-and-a-subobject-inclusion-is-the-canonical-factorisation` — thm. Identifies the epi–mono factorisation of item 14 with $A\twoheadrightarrow A/\ker f\rightarrowtail B$; the bridge between the two languages the block uses.
 
 **Exact functors**
 
 34. `def-exact-functor-between-abelian-categories` — def. An additive functor that is both left exact and right exact in the sense of `MA-1` item 28. *(The bare left/right-exact definitions are minted at `MA-1`; this item adds only the two-sided notion and is explicit about that.)*
+34a. `thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive` — thm. Either one-sided exactness already forces preservation of the zero object and finite biproducts, hence additivity (Stacks [010N](1)). This prevents `def-exact-functor` from treating additivity as an independent extra hypothesis in applications.
+34b. `thm-one-sided-and-two-sided-exactness-by-short-exact-sequences` — thm. For a functor between abelian categories: left exactness is equivalent to carrying every $0\to A\to B\to C\to0$ to a sequence exact through $F(B)$; right exactness is the dual; exactness is equivalent to carrying every short exact sequence to a short exact sequence (Stacks [010N](2)–(4)). LANDMARK.
 35. `thm-an-additive-functor-is-exact-exactly-when-it-preserves-kernels-and-cokernels` — thm. From `MA-7` item 44. LANDMARK.
 36. `thm-a-left-exact-functor-preserves-monomorphisms-and-a-right-exact-functor-preserves-epimorphisms` — thm. And an exact functor preserves images, epi–mono factorisations and the canonical morphism of item 7.
 37. `cex-an-exact-functor-need-not-be-faithful` — cex. `[AI-GEN CANDIDATE — example]` The projection $\mathcal A\times\mathcal B\to\mathcal A$ is exact and kills everything in $\mathcal B$. Directly verifiable; never a `deps` target.
@@ -1739,14 +1793,14 @@ state it as an axiom.
 42. `thm-additive-functors-from-a-small-preadditive-category-to-an-abelian-category-form-an-abelian-category` — thm. Kernels, cokernels and biproducts are computed pointwise; cites the published `thm-limits-and-colimits-in-functor-categories-are-computed-pointwise` and `prop-size-of-functor-categories` for the size hypothesis. LANDMARK — **this is where most abelian categories actually come from**, and it is the item `homological-algebra` needs in order to know that complexes and diagrams in an abelian category form one.
 43. `thm-a-product-of-abelian-categories-is-abelian` — thm.
 44. `cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian` — cex. **The sourced witness** — the Stacks Project's own Example [0108], supplied precisely because AB2 is "sometimes forgotten". Over a field $k$ take $V=W=k$ with $F^iV=V$ for $i<0$ and $0$ otherwise, $F^iW=W$ for $i\le 0$ and $0$ otherwise; then $f=\operatorname{id}_k$ **has trivial kernel and trivial cokernel and is not an isomorphism**, and $\operatorname{coim}f=V$ while $\operatorname{im}f=W$. LANDMARK-grade counterexample: it shows AB2 is independent of the additive axioms and AB1, and it is the witness for two of the `fs-` items. **Contains its own construction**, so it needs no published citation beyond vector spaces.
-45. `cex-torsion-free-abelian-groups-do-not-form-an-abelian-category` — cex. The second witness, and the one closest to the library's published material: multiplication by $2$ on $\mathbb Z$ is monic, and epic because the cokernel formed **inside the subcategory** is $0$, and it is not an isomorphism. Cites the published torsion material (the authoring Beta confirms the exact published id for torsion-free and proves the two-line facts inline if there is none). **Two witnesses are kept deliberately**: the first is sourced and self-contained, the second shows the failure in a category the reader already knows.
+45. `cex-torsion-free-abelian-groups-do-not-form-an-abelian-category` — cex. Multiplication by $2$ on $\mathbb Z$ is monic and epic **by cancellation against every torsion-free target**: if two maps $u,v:\mathbb Z\to T$ agree after precomposition with $2$, then $2(u(1)-v(1))=0$ and torsion-freeness gives $u=v$; it is not an isomorphism. The proof does not use the invalid general implication "cokernel $0$ implies epic" outside an abelian category. **Two witnesses are kept deliberately**: item 44 isolates AB2, while this one shows failure of balancedness in a familiar full additive subcategory.
 46. `cor-an-abelian-category-that-is-a-preorder-is-trivial` — cor. `[AI-GEN CANDIDATE — direct corollary]` In a preorder every morphism is monic and epic, so item 11 makes every morphism an isomorphism, and a preorder with a zero object in which every morphism is invertible has exactly one object up to isomorphism. Directly verifiable; never a `deps` target. It is the sharpest possible contrast with the published `prop-completeness-and-cocompleteness-in-poset-categories`.
-47. `thm-a-category-of-representations-of-a-quiver-in-an-abelian-category-is-abelian` — thm. The special case of item 41 for a free preadditive category on a quiver. **CONTINGENT**: the authoring Beta keeps it only if a published A-page home for quivers exists (`ex-quivers-as-a-functor-category` is a B-leaf and is not citable, §2.2); otherwise the item drops and the drop is recorded.
+47. `thm-a-category-of-representations-of-a-quiver-in-an-abelian-category-is-abelian` — thm. The special case of item 42 for the free preadditive category on a quiver. **CONTINGENT**: the authoring Beta keeps it only if a published A-page home for quivers exists (`ex-quivers-as-a-functor-category` is a B-leaf and is not citable, §2.2); otherwise the item drops and the drop is recorded.
 
 **Freyd–Mitchell, stated and not used**
 
-48. `rem-the-freyd-mitchell-embedding-theorem` — rem, `proved_here: false`. Every **small** abelian category admits a fully faithful exact embedding into a category of modules over a ring. Carries the exact statement, the exact source and a working URL, and the structured `external_dependency` record (SCHEMA §3). §8 denial 5. **It has no outgoing `deps` into any later item on any page of this block.**
-49. `rem-why-the-diagram-lemmas-are-not-proved-by-the-embedding-theorem` — rem. `MA-10` and `MA-11` prove every diagram lemma by the member calculus, which is choice-free, smallness-free and valid in *every* abelian category rather than only in small ones. The embedding route would make the library's diagram lemmas rest on an unproved theorem and would restrict them to small categories; stating the price plainly is what keeps item 47 honest.
+48. `rem-the-freyd-mitchell-embedding-theorem` — rem, `proved_here: false`. For every **small** abelian category $\mathcal A$ there are a possibly noncommutative unital ring $R$ and a **covariant fully faithful exact functor** $\mathcal A\to R\text{-}\mathbf{Mod}$, where $R\text{-}\mathbf{Mod}$ means unital left $R$-modules. This is Freyd Thm. 7.34 and Tan Cor. 7.17, with handedness and unit convention made explicit. Carries the exact source and a working URL, and the structured `external_dependency` record (SCHEMA §3). §8 denial 5. **It has no outgoing `deps` into any later item on any page of this block.**
+49. `rem-why-the-diagram-lemmas-are-not-proved-by-the-embedding-theorem` — rem. `MA-10` and `MA-11` prove every diagram lemma by the member calculus, which is choice-free, smallness-free and valid in *every* abelian category rather than only in small ones. The embedding route would make the library's diagram lemmas rest on an unproved theorem and would restrict them to small categories; stating the price plainly is what keeps item 48 honest.
 
 ### Proof strategy — item 18, the shear matrix
 
@@ -1755,10 +1809,11 @@ and Mitchell's Proposition 18.4, read from the page. Both sources use the same
 device, and it is not the codiagonal-kernel argument a scaffolder reaches for
 first. Every step is a numbered item or a numbered proof step.
 
-1. **Balancedness first.** Items 3, 7 and 11 consume no additive inverses — only
-   the universal properties of kernel and cokernel — so they are available before
-   any enrichment exists. Under the Freyd axioms A3/A3\* deliver balancedness
-   directly. This ordering is what the whole argument turns on.
+1. **Balancedness first.** Under Freyd's A3/A3\*, if $f$ is monic and epic,
+   write $f=\ker g$. Then $gf=0$ and epicity force $g=0$, so $f$ is isomorphic
+   to $\ker(0)$, namely an identity. This proof uses no additive structure;
+   item 11's later proof under the working additive definition is not available
+   yet. This ordering is what the whole argument turns on.
 2. **Biproducts.** The canonical morphism $A\sqcup B\to A\times B$ of `MA-7`
    item 12 is shown monic and epic and is therefore invertible by step 1.
 3. **The commutative-monoid enrichment** is then `MA-7` item 17, which needs
@@ -1767,16 +1822,16 @@ first. Every step is a numbered item or a numbered proof step.
    semiadditive structure. If, further, $\mathscr A$ is exact, then it is
    additive."* Both Mac Lane (Ex. VIII.2.4) and Freyd (Ex. 2A.2) stop here and say
    in terms that the result is **not necessarily a group**.
-4. **Inverses, by the shear matrix.** For $x:A\to B$ consider
-   $\theta=\begin{pmatrix}1&x\\0&1\end{pmatrix}:A\oplus B\to A\oplus B$.
-   Freyd computes its kernel: a morphism $(a,b)$ into $A\oplus B$ with
-   $\theta\circ(a,b)=(a,\;xa+b)=0$ forces $a=0$ and then $b=0$, so $\ker\theta=0$
-   and $\theta$ is monic; dually $\theta$ is epic; so by step 1 it is an
-   **isomorphism**. Its inverse is of the form
-   $\begin{pmatrix}1&y\\0&1\end{pmatrix}$, and composing gives $y+x=0$.
-   Mitchell runs the same argument on $\begin{pmatrix}1&1\\0&1\end{pmatrix}$ to
-   get $1+b=0$ and then sets $x+xb=x(1+b)=x0=0$, so $xb$ is the inverse of $x$.
-   **Either form is authorable; the page states which it follows.**
+4. **Inverses, by Mitchell's shear.** On $A\oplus A$, take
+   $\theta=\begin{pmatrix}1_A&1_A\\0&1_A\end{pmatrix}$. The kernel/cokernel
+   calculation makes $\theta$ monic and epic, hence invertible by step 1. Write
+   $\theta^{-1}=\begin{pmatrix}a&b\\c&d\end{pmatrix}$; multiplication gives
+   $1_A+b=0$. For $x:A\to B$, the morphism $xb$ is then the inverse of $x$ in
+   the hom-monoid, since $x+xb=x(1+b)=0$. This is Mitchell Prop. 18.4's typed
+   argument. If Freyd's $A\oplus B$ variant is mentioned, the shear with
+   $(a,b)\mapsto(a,xa+b)$ is
+   $\begin{pmatrix}1_A&0\\x&1_B\end{pmatrix}$ under the library's
+   row-target/column-source convention, not its transpose.
 
 **Mac Lane declines to prove this and says so** (CWM p. 201): after giving the
 economical axiom list, *"The somewhat fussy proof, Freyd [1964], Schubert [1970],
@@ -1799,7 +1854,7 @@ obligation #51 records the refinement and its reason.
 ### `fs-` items (A page)
 
 - `fs-an-additive-category-with-all-kernels-and-cokernels-is-abelian` — refuted by item 44. **The page's sharpest**, because AB2 looks like a formality and is not.
-- `fs-the-canonical-morphism-from-the-coimage-to-the-image-is-invertible-whenever-the-two-objects-are-isomorphic` — refuted by the same witness, where coimage and image are both $\mathbb Z$ and the canonical morphism is multiplication by $2$. **AB2 is a condition on the morphism, not on the objects**, and this is the cleanest way to see it.
+- `fs-the-canonical-morphism-from-the-coimage-to-the-image-is-invertible-whenever-the-two-objects-are-isomorphic` — refuted by item 45's torsion-free witness, where coimage and image are both $\mathbb Z$ and the canonical morphism is multiplication by $2$. This is **not** item 44's filtered-vector-space witness. AB2 is a condition on the morphism, not on the objects.
 - `fs-in-an-abelian-category-a-morphism-that-is-monic-and-epic-need-not-be-an-isomorphism` — refuted by item 11; it is the true statement in general categories and the false one here.
 - `fs-every-abelian-category-is-equivalent-to-a-category-of-modules` — the Freyd–Mitchell over-reading. The theorem supplies a fully faithful **exact embedding** of a **small** abelian category, which is neither an equivalence nor available for large ones. Refuted by naming both dropped hypotheses.
 - `fs-the-pullback-of-an-epimorphism-is-an-epimorphism-in-any-category-with-pullbacks` — item 22 is a theorem about abelian categories and the general claim is false; **the authoring Beta supplies a verified witness from published material or converts this to a `rem-` naming the hypothesis**, rather than asserting a counterexample it has not checked.
@@ -1870,7 +1925,7 @@ Grothendieck states **AB4** and **AB5** as exactness conditions, and this page
 sits *above* `MA-10`, where exactness is defined. The axioms are therefore stated
 here in their **primitive, lattice-and-monomorphism form** — AB4 as "a coproduct
 of monomorphisms is a monomorphism", AB5 as the distributivity of a meet over a
-directed join — and `MA-10` item 26 proves the equivalence with the exactness
+directed join — and `MA-10` item 43 proves the equivalence with the exactness
 form once exactness exists. Both forms are Grothendieck's own; neither is
 invented here. The alternative, moving this page below `MA-11`, would force
 `MA-10`'s definition of exactness to forward-reference the subobject lattice, and
@@ -1885,7 +1940,7 @@ invented here. The alternative, moving this page below `MA-11`, would force
 3. `thm-the-join-of-subobjects-is-their-least-upper-bound` — thm. In the partial order of `MA-2` item 11.
 4. `thm-the-meet-of-subobjects-is-their-pullback` — thm. Cites `MA-2` item 12 and the published `lem-pullbacks-of-monomorphisms-are-monomorphisms-and-pushouts-of-epimorphisms-are-epimorphisms`.
 5. `thm-the-subobjects-of-an-object-in-an-abelian-category-form-a-lattice` — thm. Bounded, with $0$ and $1_A$. LANDMARK. §7 #32.
-6. `thm-the-subobject-lattice-of-an-abelian-category-is-modular` — thm. LANDMARK. §7 #32 — **modularity is a theorem here and never a hypothesis**, and it is the whole reason items 14–18 work. Murfet's Prop. 73, whose route is worth following exactly: an interval $[B_1,B_2]$ of $\operatorname{Sub}(C)$ is isomorphic to $\operatorname{Sub}(B_1/B_2)$ (which is item 31's third isomorphism theorem in lattice dress), and a lattice is modular exactly when comparable complements of a common element in every interval coincide. **Cite Murfet and not Freyd**: Freyd's Exercise 4A assumes a *very abelian* category, so it silently rests on the embedding theorem this block refuses.
+6. `thm-the-subobject-lattice-of-an-abelian-category-is-modular` — thm. LANDMARK. §7 #32 — **modularity is a theorem here and never a hypothesis**, and it is the whole reason items 14–18 work. Murfet Prop. 73: for $B_1\le B_2\le C$, the interval $[B_1,B_2]\subseteq\operatorname{Sub}(C)$ is canonically isomorphic to $\operatorname{Sub}(B_2/B_1)$, using `MA-8` item 32's third isomorphism theorem; a lattice is modular exactly when comparable complements of a common element in every interval coincide. The reversed quotient $B_1/B_2$ is not defined. **Cite Murfet and not Freyd**: Freyd's Exercise 4A assumes a *very abelian* category and leans on the embedding theorem this block refuses.
 7. `rem-the-published-modular-law-for-subgroups-is-the-instance` — rem. Names `lem-dedekind-modular-law-for-subgroups` and does not reprove it.
 8. `cex-a-subobject-lattice-need-not-be-distributive` — cex. The subobjects of $\mathbb Z/2\oplus\mathbb Z/2$ in $\mathbf{Ab}$ form the diamond $M_3$; cites the published `cex-the-diamond-and-pentagon-lattices-are-not-distributive` for the lattice fact and supplies only the identification. **Modular and not distributive is exactly the gap** items 6 and 8 delimit.
 9. `thm-second-isomorphism-theorem-in-an-abelian-category` — thm. $(B\vee C)/C\cong B/(B\wedge C)$, canonically. LANDMARK. *(Namespaced; the published group version holds the bare id.)*
@@ -1898,11 +1953,12 @@ invented here. The alternative, moving this page below `MA-11`, would force
 
 14. `def-simple-object` — def. A nonzero object whose only subobjects are $0$ and itself. Cites the published `def-simple-module` as the instance.
 15. `def-composition-series-and-composition-factors-of-an-object` — def. A finite chain $0=A_0\le A_1\le\cdots\le A_n=A$ of subobjects with every $A_{i}/A_{i-1}$ simple. *(Namespaced: `def-composition-series-composition-factors-and-length` is published and is the group notion.)*
-16. `thm-zassenhaus-butterfly-lemma-in-an-abelian-category` — thm. LANDMARK. Proved from item 6 alone — it is a theorem about modular lattices — so the categorical proof is the group proof with $\cap,\cdot$ replaced by $\wedge,\vee$. *(Namespaced; `thm-zassenhaus-butterfly-lemma` is published for groups.)*
+16. `thm-zassenhaus-butterfly-lemma-in-an-abelian-category` — thm. LANDMARK. The projective-interval comparison is modular-lattice theory from item 6; identifying its factors as quotient **objects** also uses item 9 and `MA-8` item 32. Thus the proof is not falsely advertised as following from modularity alone. *(Namespaced; `thm-zassenhaus-butterfly-lemma` is published for groups.)*
 17. `thm-schreier-refinement-theorem-in-an-abelian-category` — thm. Any two subobject chains admit equivalent refinements. *(Namespaced.)*
 18. `thm-jordan-holder-theorem-in-an-abelian-category` — thm. Any two composition series of an object have the same length and the same composition factors up to permutation and isomorphism. LANDMARK. *(Namespaced; `thm-jordan-holder-theorem-for-groups` is published.)*
-19. `def-object-of-finite-length` — def. And `thm-length-is-additive-along-a-subobject`: $\ell(A)=\ell(B)+\ell(A/B)$ for every subobject $B\le A$. **Stated without the word "exact"**, since exactness is `MA-10`'s.
-20. `thm-objects-of-finite-length-form-an-abelian-subcategory` — thm. Closed under subobjects, quotients and extensions; cites `MA-8` item 39.
+19. `def-object-of-finite-length` — def. An object admitting a finite composition series; its length is the common number of factors supplied by item 18.
+19a. `thm-length-is-additive-along-a-subobject` — thm. $\ell(A)=\ell(B)+\ell(A/B)$ for every subobject $B\le A$. **Stated without the word "exact"**, since exactness is `MA-10`'s.
+20. `thm-objects-of-finite-length-form-an-abelian-subcategory` — thm. Closed under subobjects and quotients, and if $B\le A$ while $B$ and $A/B$ have finite length then so does $A$; cites item 19a and `MA-8` item 39. The later exactness page may call the last clause extension-closure, but this Statement has no forward dependency on that vocabulary.
 21. `rem-the-published-group-development-is-the-instance` — rem. Names the four published group items against items 16–18 and states that the library does not reprove them.
 
 **Generators, cogenerators and well-poweredness**
@@ -1911,19 +1967,19 @@ invented here. The alternative, moving this page below `MA-11`, would force
 23. `thm-the-cancellation-and-epimorphism-descriptions-of-a-generator-agree` — thm. In a **cocomplete** abelian category, $G$ is a generator iff for every $A$ the canonical morphism $\coprod_{\mathcal A(G,A)}G\to A$ is an epimorphism. §7 #33. LANDMARK — **the second form is the one every later theorem uses**, and the equivalence is not a restatement. **The cocompleteness hypothesis is not decoration**: Freyd states this equivalence as Prop. 3.36 explicitly for a *right-complete* abelian category, and without it the coproduct on the left need not exist. A third description — $\mathcal A(G,-)$ is faithful — is Freyd's own definition and is the cheapest of the three to check; the item carries all three.
 24. `thm-a-locally-small-abelian-category-with-a-generator-is-well-powered` — thm. A subobject $A'\rightarrowtail A$ is determined by the subset $\mathcal A(G,A')\subseteq\mathcal A(G,A)$, which is a set. LANDMARK. Freyd's Prop. 3.35, on which his own comment is *"Electrifying."* Cites `MA-2` item 14 (`def-well-powered-and-co-well-powered-category`) — and it is what turns SAFT from an abstraction into a usable theorem for abelian categories.
 24a. `rem-generator-separator-and-the-three-inequivalent-looking-definitions` — rem. Mac Lane defines a generating **set** by the separating property and adds in his own voice that *"the term 'generates' is well established but poorly chosen; 'separates' would have been better"*; Grothendieck and the Stacks Project define it by **subobjects**; Freyd by **faithfulness of $\mathcal A(G,-)$**. Item 23 proves they agree here, and this remark records that they are not the same sentence — which is why `MA-2` minted "separating set" and this page minted "generator" rather than treating one as an abbreviation of the other.
-25. `cor-a-cocomplete-locally-small-abelian-category-with-a-generator-satisfies-the-special-adjoint-functor-theorem-hypotheses-dually` — cor. Spelled out against `MA-2` item 26's verbatim hypothesis list, with the co-well-powered/coseparating side named explicitly rather than gestured at.
+25. `cor-a-cocomplete-locally-small-abelian-category-with-a-generator-satisfies-the-special-adjoint-functor-theorem-hypotheses-dually-with-representatives-supplied` — cor. Item 24 gives well-poweredness and `MA-8` item 28 transfers it to co-well-poweredness; the generator gives the appropriate separating side. To obtain the **intersection** hypothesis in `MA-2` item 26, the Statement additionally takes a supplied representative family for each set of subobject classes (or names AC). It does not silently infer a choice of monomorphism representatives from bare well-poweredness.
 26. `thm-a-generator-detects-equality-of-subobjects` — thm. $B\le C$ iff every $G\to A$ factoring through $B$ factors through $C$.
 
 **The Grothendieck axioms**
 
 27. `def-the-axioms-ab3-and-ab3-star` — def. AB3: all small coproducts exist (equivalently, by `MA-8` item 21 and the published `cor-completeness-and-cocompleteness-criteria`, the category is cocomplete); AB3\*: all small products exist. LANDMARK.
 28. `def-the-axioms-ab4-and-ab4-star` — def. AB4: AB3 and a small coproduct of monomorphisms is a monomorphism; AB4\*: the dual. LANDMARK.
-29. `def-the-axioms-ab5-and-ab5-star` — def. AB5: AB3 and, for every directed family $(B_i)$ of subobjects of $A$ and every subobject $C\le A$, $\big(\bigvee_iB_i\big)\wedge C=\bigvee_i(B_i\wedge C)$; AB5\*: the dual. LANDMARK. **The exactness reformulation is `MA-10` item 26** and is not stated here.
+29. `def-the-axioms-ab5-and-ab5-star` — def. AB5: AB3 and, for every directed family $(B_i)$ of subobjects of $A$ and every subobject $C\le A$, $\big(\bigvee_iB_i\big)\wedge C=\bigvee_i(B_i\wedge C)$; AB5\*: the dual. LANDMARK. **The exactness reformulation is `MA-10` item 43** and is not stated here.
 30. `thm-ab5-implies-ab4` — thm. LANDMARK. And the converse fails, which is `fs-` item 4.
 31. `def-grothendieck-category` — def. An AB5 abelian category with a generator. LANDMARK.
 32. `thm-module-categories-are-grothendieck-categories` — thm. $R$ regarded as a module over itself is a generator, and AB5 holds because filtered colimits of modules are computed on underlying sets; cites the published `thm-rmod-is-complete-and-cocomplete` and `lem-equality-in-a-filtered-colimit-of-sets-is-eventual`. LANDMARK.
 33. `thm-abelian-groups-satisfy-ab4-star` — thm. Products of monomorphisms of abelian groups are monomorphisms.
-34. `cex-abelian-groups-do-not-satisfy-ab5-star` — cex. A directed family of subgroups whose intersection with a fixed subgroup is not the codirected meet; the standard witness uses $\prod\mathbb Z$ and the finite-support subgroups. **Verification instruction:** the authoring Beta checks the witness explicitly before authoring; if it does not close from published material, the item becomes a `rem-` naming the source, and the drop is recorded.
+34. `cex-abelian-groups-do-not-satisfy-ab5-star` — cex. In $A=\prod_{n\ge1}\mathbb Z$, let $T_n$ be the subgroup of sequences whose first $n$ coordinates vanish and let $B=\bigoplus_{n\ge1}\mathbb Z$. Then $\bigcap_nT_n=0$, while $T_n+B=A$ for every $n$, so $(\bigcap_nT_n)+B=B\ne A=\bigcap_n(T_n+B)$. This explicit decreasing-family witness violates the AB5* lattice identity and removes the earlier contingent placeholder.
 35. `thm-a-nonzero-abelian-category-cannot-satisfy-both-ab5-and-ab5-star` — thm. **Sourced: Weibel Exercise A.4.7**, *"if $\mathcal A\neq 0$, then $\mathcal A$ cannot satisfy both axiom (AB5) and axiom (AB5\*)"*. It is an exercise, not a worked proof, so the authoring Beta writes the proof and records it; if it does not close, the item becomes a `rem-` with `proved_here: false` naming Weibel's exercise, and the drop is recorded. LANDMARK if it closes — it is the sharpest possible statement that AB5 and AB5\* are not two harmless dual conveniences, and it explains why the whole subject is written on the colimit side.
 35a. `cex-the-opposite-of-abelian-groups-does-not-satisfy-ab5` — cex. Weibel's own instance, beside Thm 2.6.15 (*"filtered colimits of $R$-modules are exact"*), which is item 32's engine: $\mathbf{Ab}$ satisfies AB5 and $\mathbf{Ab}^{\mathrm{op}}$ does not, so item 35 is not vacuous.
 
@@ -1931,11 +1987,12 @@ invented here. The alternative, moving this page below `MA-11`, would force
 
 36. `def-projective-object` — def. $\mathcal A(P,-)$ carries epimorphisms to surjections; equivalently every $P\to B$ lifts along every epimorphism $A\twoheadrightarrow B$. *(Namespaced: `def-projective-module` is published.)*
 37. `thm-projective-object-characterisations` — thm. The lifting property, exactness of $\mathcal A(P,-)$, and the splitting of every epimorphism onto $P$, all equivalent. Cites `MA-7` item 47 for the left-exactness half.
-38. `def-injective-object` and `thm-injective-object-characterisations` — def + thm. The formal duals, obtained by `MA-8` item 12 rather than by a second proof. *(Namespaced: `def-injective-module` is published.)*
-39. `thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective` — thm.
+38. `def-injective-object` — def. The formal dual of item 36. *(Namespaced: `def-injective-module` is published.)*
+38a. `thm-injective-object-characterisations` — thm. The extension property, exactness of $\mathcal A(-,I)$, and splitting of every monomorphism out of $I$, obtained by `MA-8` item 12 rather than by a second proof.
+39. `thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective` — thm. The finite form is ZF. For an arbitrary small family, the proof chooses one lift/extension for each index and therefore invokes AC; the Statement names that cost (or is restricted to a supplied family of lifts).
 40. `thm-a-direct-summand-of-a-projective-is-projective` — thm. Via `MA-7` item 51's splitting of idempotents.
 41. `def-a-category-with-enough-projectives-and-with-enough-injectives` — def. Every object receives an epimorphism from a projective, resp. admits a monomorphism into an injective. LANDMARK — **this is the input `homological-algebra` needs and the last thing this block owes it** (§11 amendment 4).
-42. `thm-module-categories-have-enough-projectives` — thm. Cites the published `cor-every-module-is-a-quotient-of-a-free-module` and `thm-projective-module-characterizations`. LANDMARK.
+42. `thm-module-categories-have-enough-projectives` — thm. Cites the published `cor-every-module-is-a-quotient-of-a-free-module` and `thm-projective-module-characterizations` and inherits their choice ledger: lifting a map from a free module across an epimorphism chooses a preimage for each basis element, so arbitrary bases use AC (or supplied lifts). LANDMARK.
 43. `rem-module-categories-have-enough-injectives-is-already-published` — rem. Names `thm-module-categories-have-enough-injectives` and `thm-baer-criterion-for-injective-modules`, and does not reprove either. The general "a Grothendieck category has enough injectives" is **not** claimed here — it is a hard theorem and it is handed to `homological-algebra` in §11.
 44. `thm-a-projective-generator-detects-isomorphisms` — thm. If $P$ is a projective generator then $\mathcal A(P,-)$ is faithful and reflects isomorphisms; cites `MA-3` item 20 for the conservativity language.
 
@@ -1954,7 +2011,7 @@ invented here. The alternative, moving this page below `MA-11`, would force
 
 ### Sources
 
-- **Murfet, *Abelian Categories* (`http://therisingsea.org/notes/AbelianCategories.pdf`), §2.2 "Grothendieck's Conditions", §2.3 "Grothendieck Categories", §4.1 "Modular Lattices", §4.2 "Subobject Lattices"** — open lecture notes with a harvestable contents list, verified byte-identical to the live URL. **Primary for items 1–6**: Def. 55 is the modular-lattice definition of item 1, and **Prop. 73 proves that the subobject lattice of *any* abelian category is modular**, with a full proof via the interval isomorphism $[B_1,B_2]\cong\operatorname{Sub}(B_1/B_2)$. This matters: **Freyd states modularity only as Exercise 4A and only for a *very abelian* category**, i.e. leaning on the embedding theorem, so Freyd is the wrong citation for item 6 and Murfet is the right one.
+- **Murfet, *Abelian Categories* (`http://therisingsea.org/notes/AbelianCategories.pdf`), §2.2 "Grothendieck's Conditions", §2.3 "Grothendieck Categories", §4.1 "Modular Lattices", §4.2 "Subobject Lattices"** — open lecture notes with a harvestable contents list, verified byte-identical to the live URL. **Primary for items 1–6**: Def. 55 is the modular-lattice definition of item 1, and **Prop. 73 proves that the subobject lattice of *any* abelian category is modular**, with a full proof via $[B_1,B_2]\cong\operatorname{Sub}(B_2/B_1)$ for $B_1\le B_2$. This matters: **Freyd states modularity only as Exercise 4A and only for a *very abelian* category**, i.e. leaning on the embedding theorem, so Freyd is the wrong citation for item 6 and Murfet is the right one.
 - **Grothendieck, *Sur quelques points d'algèbre homologique* (Tôhoku Math. J. 9, 1957), §1.5 "Sommes et produits infinis" (pp. 128–129) and §1.9 (p. 134)** — the verbatim source of AB3, AB4, AB5 and AB6 and of the generating-family definition, prefaced *"Voici par ordre de force croissante, les axiomes les plus utilisés"*. **AB5 is stated there for a *famille filtrante croissante*** — a directed family — which is item 29's hypothesis and trap 7 below. **Grothendieck never writes the starred axioms out**: he says only *"Nous laissons au lecteur le soin d'énoncer les axiomes duals AB 3\*), AB 4\*), AB 5\*) et AB 6\*)"*, so **citing Tôhoku for the statement of a starred axiom is an inaccurate citation**; items 27–29 cite Weibel A.4.3/A.4.6 and Stacks 079B for the starred halves.
 - **Weibel, *An Introduction to Homological Algebra*, Appendix A.4 (pp. 424–427) and Thm 2.6.15 (p. 57)** — read from the extracted text on disk; the verbatim modern statements of AB3/AB3\*/AB4/AB4\*/AB5/AB5\*, the lattice reformulation of AB5, Ex. A.4.4 (arbitrary meets and joins need completeness — items 2–5 are the binary case only), Ex. A.4.6 (item 30), Ex. A.4.7 (item 35). **Weibel gives no AB6.**
 - **The Stacks Project, "Injectives" §"Grothendieck's AB conditions", Definition [079B]** — free and tagged; the verbatim modern definition of AB3–AB5\*, of *generator* by the subobject formulation, and of **Grothendieck abelian category** as "AB5 and a generator", which is item 31.
@@ -1963,14 +2020,12 @@ invented here. The alternative, moving this page below `MA-11`, would force
 
 Exact ranges, verbatim headings and dispositions are in §10.
 
-Exact ranges, verbatim headings and dispositions are in §10.
-
 ### Traps
 
 1. **Four ids on this page are taken by the published group development.** `thm-zassenhaus-butterfly-lemma`, `thm-schreier-refinement-theorem`, `thm-jordan-holder-theorem-for-groups` and `def-composition-series-composition-factors-and-length` all exist. Every categorical item is namespaced `-in-an-abelian-category` or `-of-an-object`, and the published items are **cited as instances**, never restated (`CLAUDE.md` §"Natural mathematical voice and citation fidelity").
 2. **AB4 and AB4\* are different axioms and both appear.** So do AB5 and AB5\*. A page that writes "AB4" for the product version has stated a different theorem; item 28's Statement fixes the convention and §10 records that the sources agree on it.
 3. **Items 34 and 35 are flagged and item 35 is contingent.** Neither is asserted on this scaffold's authority.
-4. **Item 29 states AB5 in the lattice form on purpose.** See the ordering decision above; the exactness form is `MA-10` item 26 and the two must be proved equivalent rather than used interchangeably.
+4. **Item 29 states AB5 in the lattice form on purpose.** See the ordering decision above; the exactness form is `MA-10` item 43 and the two must be proved equivalent rather than used interchangeably.
 5. **`def-simple-module` and `def-simple-group` are published and are not the same notion as item 14.** The item cites the module one as an instance and says nothing about groups, where "simple" means something else.
 6. **"Enough injectives" for a general Grothendieck category is not proved here** and item 43 says so plainly. Claiming it would be exactly the kind of unsourced strengthening the block exists to avoid.
 7. **AB5's family must be DIRECTED.** Grothendieck writes *famille filtrante croissante*; Weibel writes "if $\{A_i\}$ is a **lattice** of subobjects", which is upward-directed and so is correct. **For an arbitrary family the identity is false** — three distinct lines through the origin in a plane give $(A_1\vee A_2)\wedge B=B\neq 0=(A_1\wedge B)\vee(A_2\wedge B)$. A scaffolder who writes "for any family of subobjects" has shipped a false theorem, and the witness is the same $M_3$ as item 8.
@@ -2024,12 +2079,12 @@ and §6's ledger row is corrected accordingly (§7 obligation #53).
 7. `thm-exactness-is-self-dual` — thm. A sequence is exact in $\mathcal A$ iff its opposite is exact in $\mathcal A^{\mathrm{op}}$; from `MA-8` item 12. LANDMARK — **this is what licenses every "dually" on `MA-11`**, and it is stated as an item so those appeals cite something.
 8. `def-split-short-exact-sequence-in-an-abelian-category` — def. Stated the Stacks way: $(b,i,j,p,q)$ **is the direct sum** of $a$ and $c$, not merely $b\cong a\oplus c$. *(Namespaced: `def-split-short-exact-sequence` is published for modules.)* The distinction is item 10.
 9. `thm-splitting-lemma-in-an-abelian-category` — thm. Given a right inverse $s$ of $b\to c$ there is a **unique** $\pi:b\to a$ such that $(s,\pi)$ splits the sequence; dually, given a left inverse $\pi$ of $a\to b$ there is a unique $s$. LANDMARK. *(Namespaced: `thm-splitting-lemma-for-modules` is published, and its B-page companion exhibits it as the instance.)* **The uniqueness clauses are part of the statement** and are what make item 8's five-tuple formulation well behaved.
-10. `fs-a-short-exact-sequence-splits-whenever-its-middle-object-is-isomorphic-to-the-biproduct-of-the-outer-two` — false statement. The isomorphism must be the one built from the sequence's own maps. **Verification instruction:** the authoring Beta supplies a checked witness of a non-split sequence with $b\cong a\oplus c$, or, failing that, converts this to a `rem-` recording that the two conditions are not known to the library to differ. **It does not assert a witness this scaffold has not verified.**
+10. `fs-a-short-exact-sequence-splits-whenever-its-middle-object-is-isomorphic-to-the-biproduct-of-the-outer-two` — false statement. A checked witness: over $R=k[\varepsilon]/(\varepsilon^2)$ begin with the nonsplit sequence $0\to k\to R\to k\to0$, where $k=R/(\varepsilon)$. Put $T=R^{(\mathbb N)}\oplus k^{(\mathbb N)}$ and direct-sum with $0\to T\xrightarrow{1}T\to0$. The resulting middle sequence is still nonsplit, while explicit shift isomorphisms give $k\oplus T\cong T$, $R\oplus T\cong T$, and $(k\oplus T)\oplus k\cong T$. Thus its middle object is abstractly isomorphic to the biproduct of its outer objects, but no isomorphism compatible with the sequence maps exists. The countable coproducts are explicit; no choice principle is hidden.
 
 **Members**
 
 11. `def-member-of-an-object` — def. Mac Lane, verbatim: an arrow $x$ with codomain $a$ is a **member** of $a$, written $x\in_m a$. LANDMARK.
-12. `def-equivalence-of-members` — def. $x\equiv y$ for members of $a$ means there are epimorphisms $u,v$ with $xu=yv$.
+12. `def-equivalence-of-members` — def. For $x:X\to a$ and $y:Y\to a$, write $x\equiv y$ when there are one object $W$ and epimorphisms $u:W\twoheadrightarrow X$, $v:W\twoheadrightarrow Y$ with $xu=yv$. The common domain is part of the definition and is what makes item 14's pullback proof type-check.
 13. `prop-member-equivalence-is-reflexive-and-symmetric` — prop. Immediate, and stated separately from item 14 because item 14 is not.
 14. `thm-member-equivalence-is-transitive` — thm. LANDMARK. §7 #35. **The proof forms the pullback of the two epimorphisms and cites `MA-8` item 23**; that citation is the entire content of the theorem and the page's single point of contact with the abelian axioms. Without it the relation is not an equivalence relation and nothing later on the page is defined.
 15. `thm-members-modulo-equivalence-correspond-to-subobjects` — thm. Every member factors as $x=me$ with $m$ monic, and the equivalence classes of members of $a$ are in bijection with the subobjects of $a$ (`MA-2` item 9). LANDMARK — the item that explains what a member *is*.
@@ -2045,13 +2100,13 @@ and §6's ledger row is corrected accordingly (§7 obligation #53).
 22. `thm-chasing-rule-exactness-detected-by-members` — thm. (v) $a\xrightarrow{f}b\xrightarrow{g}c$ is exact at $b$ iff $gf=0$ and to every $y\in_m b$ with $gy\equiv0$ there is $x\in_m a$ with $fx\equiv y$. LANDMARK.
 23. `thm-chasing-rule-the-subtraction-surrogate` — thm. (vi), **all three clauses, verbatim**: given $g:b\to c$ and $x,y\in_m b$ with $gx\equiv gy$, there is $z\in_m b$ with $gz\equiv0$; moreover any $f:b\to d$ with $fx\equiv0$ has $fy\equiv fz$, **and any $h:b\to a$ with $hy\equiv0$ has $hx\equiv-hz$**. LANDMARK. §7 #36. Mac Lane's own proof is one line — from $gxu=gyv$ for epis $u,v$, take $z=yv-xu$ — and the item carries it.
 24. `rem-what-the-subtraction-rule-does-not-say` — rem. $z$ is **not unique**; $z$ is **not** asserted equivalent to any "$y-x$", because there is no subtraction operation on members at all; and against an arbitrary $k:b\to e$ the rule says **nothing** about $kz$. The rule constrains $z$ only through arrows that already kill $x$ or already kill $y$. Without this remark the next reader will use rule (vi) as if members were elements.
-25. `cex-the-members-of-an-object-do-not-form-a-group` — cex. $a\equiv-a$ holds for every member, by composing with $-1$; $a+a\equiv0$ does not. Borceux's observation, and it is the cleanest demonstration that $\equiv$ is coarser than equality of elements.
-26. `cex-two-morphisms-agreeing-on-every-member-need-not-be-equal` — cex. Take $g=-f$: then $f(a)\equiv g(a)$ for every member $a$, and $f\ne g$ whenever $f\ne0$ and $2\ne0$. LANDMARK-grade. **This is the false lemma every diagram chase in an abelian category is tempted by**, and item 21 is the only legitimate substitute.
+25. `cex-the-members-of-an-object-do-not-form-a-group` — cex. $a\equiv-a$ holds for every member, by composing with $-1$; nevertheless an additive law on equivalence classes cannot be inferred: for the member $1_{\mathbb Z}:\mathbb Z\to\mathbb Z$, item 16 gives $2\,1_{\mathbb Z}\not\equiv0$. Borceux's observation, made with a witness that does not fail in characteristic two.
+26. `cex-two-morphisms-agreeing-on-every-member-need-not-be-equal` — cex. In $\mathbf{Ab}$ take $f=1_{\mathbb Z}$ and $g=-1_{\mathbb Z}$. For every member $x:X\to\mathbb Z$, $x\equiv-x$ by precomposing the latter with $-1_X$, yet $1_{\mathbb Z}\ne-1_{\mathbb Z}$. LANDMARK-grade. **This is the false lemma every diagram chase in an abelian category is tempted by**, and item 21 is the only legitimate substitute.
 27. `rem-the-cost-of-the-member-calculus` — rem. No choice, no generator, no projectives, no smallness: the construction primitives are finite limits and colimits together with `MA-8` item 23. **The remark claims exactly this and does not claim constructivity**, which no source consulted establishes. Contrast with the two alternatives — Freyd's metatheorem needs smallness and the full embedding theorem, and the projective-resolution route needs enough projectives — and the contrast is the page's justification.
 
 **The covering criterion — the same tool, without members**
 
-28. `thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact` — thm. The square over $w,x,y,z$ is a pullback iff $0\to w\to x\oplus y\to z$ is exact. Stacks [08N2]. LANDMARK — it converts every pullback hypothesis on `MA-11` into an exactness hypothesis.
+28. `thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact` — thm. For a commutative square $P\xrightarrow{p_X}X$, $P\xrightarrow{p_Y}Y$ over $X\xrightarrow fZ\xleftarrow gY$, the square is a pullback iff $0\to P\xrightarrow{(p_X,p_Y)}X\oplus Y\xrightarrow{(f,-g)}Z$ is exact. Stacks [08N2]. LANDMARK — the signs and maps are part of the Statement.
 29. `thm-a-cartesian-square-induces-an-isomorphism-on-the-kernels-of-its-parallel-legs` — thm. Stacks [08N3]; the exact-sequence form of `MA-8` item 25.
 30. `thm-a-cartesian-square-over-an-epimorphism-is-also-cocartesian` — thm. Stacks [08N4], and it re-derives `MA-8` item 23 in the form `MA-11` uses.
 31. `thm-epimorphisms-in-an-abelian-category-are-universal` — thm. Stacks [05PK]; the statement that epimorphy is stable under every pullback, which is `MA-8` item 23 promoted to a named property.
@@ -2061,7 +2116,7 @@ and §6's ledger row is corrected accordingly (§7 obligation #53).
 **Exactness lemmas that feed the diagram lemmas**
 
 34. `thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each` — thm. For $\langle f,g,h\rangle$ a morphism of short exact sequences, the kernel row is exact at $\operatorname{Ke}f$ and $\operatorname{Ke}g$, and dually the cokernel row at $\operatorname{Co}g$ and $\operatorname{Co}h$.
-35. `cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact` — cex. **Mac Lane's own witness**, and it is why `MA-11` exists: with $g=0$, take the morphism of short exact sequences $0\to0\to\mathbb Z\to\mathbb Z\to0$ over $0\to\mathbb Z\to\mathbb Z\to0\to0$. LANDMARK-grade — **the connecting morphism is the repair for exactly this failure**, and a page that omits the failure makes $\delta$ look like a trick.
+35. `cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact` — cex. Use two copies of $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb Z/2\to0$ and vertical maps $(f,g,h)=(2,2,0)$. The diagram commutes, but its kernel row contains $0\to0\to\mathbb Z/2$, which is not epic at the last arrow; the snake connecting map $\ker h\to\operatorname{coker}f$ is in fact the isomorphism $\mathbb Z/2\to\mathbb Z/2$. LANDMARK-grade — the earlier $g=0$ display produced a short exact kernel row and was not a counterexample.
 36. `thm-exactness-of-a-kernel-sequence-under-a-monomorphism-hypothesis` — thm. Stacks [08N6]: if the first row is exact and $k$ is monic then $\operatorname{Ker}(\alpha)\to\operatorname{Ker}(\beta)\to\operatorname{Ker}(\gamma)$ is exact; dually with the second row exact and $g$ epic. LANDMARK — this is what the snake lemma's exactness argument reduces to once $\delta$ exists.
 37. `thm-the-kernel-cokernel-sequence-of-a-composite` — thm. For $f:a\to b$ and $g:b\to c$ the sequence $0\to\operatorname{Ke}f\to\operatorname{Ke}gf\to\operatorname{Ke}g\to\operatorname{Co}f\to\operatorname{Co}gf\to\operatorname{Co}g\to0$ is exact. Mac Lane's Exercise VIII.4.6. LANDMARK — cheap, genuinely useful, and it is a snake lemma in disguise.
 38. `def-comember-and-the-dual-calculus` — def. The formal dual of item 11: an arrow with domain $a$, compared after post-composition with monomorphisms. Stated so that `MA-11` may dualise a member argument by citation rather than by re-deriving the rules.
@@ -2072,7 +2127,7 @@ and §6's ledger row is corrected accordingly (§7 obligation #53).
 40. `thm-hom-is-left-exact-in-each-variable` — thm. If $0\to a\to b\to c$ is exact then $0\to\mathcal A(x,a)\to\mathcal A(x,b)\to\mathcal A(x,c)$ is exact, and dually in the contravariant variable. **From `MA-7` item 47 and the published `thm-representable-functors-preserve-small-limits`, with no elementwise argument.** LANDMARK.
 41. `cex-hom-is-not-exact` — cex. Cites the published `cex-contravariant-hom-need-not-be-right-exact` for the module instance and adds only the categorical reading.
 42. `thm-an-object-is-projective-exactly-when-hom-out-of-it-is-exact` — thm. And injective exactly when $\mathcal A(-,I)$ is exact; ties items 40–41 to `MA-9` items 36–38.
-43. `thm-ab5-is-equivalent-to-exactness-of-filtered-colimits` — thm. Grothendieck's lattice form (`MA-9` item 29) is equivalent, in a cocomplete abelian category, to the statement that the filtered-colimit functor is exact. LANDMARK — **the promissory note `MA-9` left open**, and the reason its ordering decision is legitimate. Note that most modern sources take the exactness form as the *definition*, so this is an equivalence of two source conventions and never a theorem derived from a definition (§10).
+43. `thm-ab5-is-equivalent-to-exactness-of-filtered-colimits` — thm. Grothendieck's directed-subobject lattice form (`MA-9` item 29) is equivalent, in a cocomplete abelian category, to exactness of colimits over **all small filtered index categories** (Weibel A.4.6). LANDMARK. The proof does not silently replace filtered categories by directed posets; any such reduction needs its own cofinality proof. No choice cost is claimed beyond the stated cocompleteness.
 
 ### `fs-` items (A page)
 
@@ -2085,7 +2140,7 @@ and §6's ledger row is corrected accordingly (§7 obligation #53).
 
 ### B page — `exactness-and-the-member-calculus-examples`
 
-`ex-members-of-an-abelian-group-are-its-elements-up-to-equivalence` · `ex-a-member-chase-verifying-monicity` · `ex-the-covering-criterion-checked-in-abelian-groups` · `ex-the-kernel-cokernel-sequence-of-a-composite-of-module-maps` · `cex-a-non-split-short-exact-sequence-of-abelian-groups` *(cites the published `cex-nonsplit-short-exact-sequence-of-integers-mod-two`)* · `ex-the-splitting-lemma-instantiated-at-the-published-module-theorem` · `ex-mac-lanes-failure-of-short-exactness-on-the-kernel-row-computed`.
+`ex-members-of-an-abelian-group-correspond-to-its-subgroups` · `ex-an-ordinary-element-as-the-member-from-the-integers` · `cex-a-general-member-of-an-abelian-group-need-not-come-from-an-element` *(the identity of $\mathbb Z^2$ has noncyclic image)* · `ex-a-member-chase-verifying-monicity` · `ex-the-covering-criterion-checked-in-abelian-groups` · `ex-the-kernel-cokernel-sequence-of-a-composite-of-module-maps` · `cex-a-non-split-short-exact-sequence-of-abelian-groups` *(cites the published `cex-nonsplit-short-exact-sequence-of-integers-mod-two`)* · `ex-the-splitting-lemma-instantiated-at-the-published-module-theorem` · `ex-the-kernel-row-failure-for-multiplication-by-two-computed`.
 
 ### Sources
 
@@ -2143,7 +2198,7 @@ over finished.** Mac Lane sets it as Exercise VIII.4.4; the Stacks Project state
 it at [08N7] and its proof is the single word "Omitted"; Weibel proves the
 corresponding statement for the long exact sequence but does so *"Using the
 Embedding Theorem 1.6.1"*; the nLab asserts it without proof. The one source that
-supplies the idea is Rotman, in a Remark rather than a proof. Item 8 is therefore
+supplies the idea is Rotman, in a Remark rather than a proof. Item 10 is therefore
 a genuine obligation and §7 #38 was right to insist on it.
 
 **The published module theorems are cited as instances and never reproved.**
@@ -2167,7 +2222,7 @@ the honest relationship and costs nothing.
 5. `thm-the-connecting-morphism-exists-and-is-unique` — thm. LANDMARK. §7 #37. Construction, in Mac Lane's arrangement: form the pullback $d$ of the epimorphism with $\ker h$, so that $u:d\to\ker h$ is **epic by `MA-8` item 23** with kernel $s$; dually form the pushout $d'$ of $\operatorname{coker}f$, with cokernel $s'$; the composite $\delta_0=p'gk':d\to d'$ satisfies $s'\delta_0=0$ and $\delta_0 s=0$; since $u'=\ker s'$ and $u=\operatorname{coker}s$, it factors **uniquely** as $\delta_0=u'\delta u$. Equivalently, Stacks [010H](1)'s characterisation: $\delta$ is the unique morphism making the pullback/pushout square commute, and uniqueness is immediate because $\pi$ is epic and $\iota$ monic.
 6. `rem-the-connecting-morphism-depends-on-no-choices` — rem. §7 #37. Because item 5 gives existence *and* uniqueness from universal properties, there is nothing to check independence of — in sharp contrast to the elementwise construction, where $\delta$ is a relation and independence of the zig-zag is a real obligation. **This is the page's sharpest `fs-` companion** and the clearest single argument for the arrow-theoretic route.
 7. `thm-snake-lemma-in-an-abelian-category` — thm. The sequence $0\to\operatorname{Ke}f\to\operatorname{Ke}g\to\operatorname{Ke}h\xrightarrow{\ \delta\ }\operatorname{Co}f\to\operatorname{Co}g\to\operatorname{Co}h\to0$ is exact. LANDMARK. *(Namespaced; `thm-snake-lemma-for-modules` is published.)* **The exactness at $\operatorname{Ke}h$ is where `MA-10` item 23 — rule (vi) — is spent**, and it is the only place in the block where the subtraction surrogate is indispensable.
-8. `thm-snake-lemma-under-the-weaker-stacks-hypotheses` — thm. With the top row only right exact and the bottom only left exact, the six-term sequence is still exact, and additionally the induced map on kernels is monic when the original is, and the induced map on cokernels is epic when the original is. Stacks [010H]. **Borceux's "restricted snake lemma" assumes all rows *and* columns exact and is therefore strictly weaker**; §10 records it.
+8. `thm-snake-lemma-under-the-weaker-stacks-hypotheses` — thm. In the Stacks [010H] diagram $x\xrightarrow f y\xrightarrow g z\to0$ over $0\to u\xrightarrow k v\xrightarrow l w$, the six-term sequence is exact; if $f$ is monic, the induced $\ker(\alpha)\to\ker(\beta)$ is monic, and if $l$ is epic, the induced $\operatorname{coker}(\beta)\to\operatorname{coker}(\gamma)$ is epic. The endpoint clauses are not shortened to the ambiguous phrase "when the original is". **Borceux's restricted snake lemma assumes all rows and columns exact and is strictly weaker.**
 9. `def-the-arrow-category-of-an-abelian-category` — def. $\mathcal A^{\to}$, the functor category on the two-object category with one nonidentity arrow; abelian by `MA-8` item 42, which is Mac Lane's *"If $\mathcal A$ is abelian, so is any functor category $\mathcal A^J$, for arbitrary $J$"*. Minted here because item 10 needs it and for no other reason.
 10. `thm-naturality-of-the-connecting-morphism` — thm. LANDMARK. §7 #38. **The library writes this proof; no source supplies it.** The route, which is Rotman's Remark made into an argument: a map of snake data is a single piece of snake data in $\mathcal A^{\to}$; item 5 applied there produces a connecting morphism which, read back in $\mathcal A$, is the pair $(\delta,\delta')$; and **item 5's uniqueness clause forces the naturality square to commute**. No members, no embedding, no choice. **Verification instruction:** the authoring Beta writes the proof out in full and records in the batch notes that the source situation is as described — Mac Lane's Exercise VIII.4.4, Stacks [08N7] "Omitted", Weibel via the embedding theorem — so that a later auditor does not assume a citation exists.
 11. `cor-the-kernel-cokernel-sequence-of-a-composite-is-a-snake` — cor. Recovers `MA-10` item 37 from item 7, so the two are visibly one theorem.
@@ -2183,21 +2238,21 @@ the honest relationship and costs nothing.
 
 **The nine lemma**
 
-18. `thm-nine-lemma-in-an-abelian-category` — thm. Freyd's 2.65: given a commuting $3\times3$ diagram with **exact columns and exact middle row**, the top row is exact **if and only if** the bottom row is. LANDMARK — the strongest and cleanest form, and it is an equivalence rather than an implication. *(Id free; there is no published nine lemma.)* Freyd's own footnote — *"'Three-by-three lemma' would be a better name"* — belongs in the item.
+18. `thm-nine-lemma-in-an-abelian-category` — thm. Freyd 2.65: in the displayed commuting $3\times3$ diagram, all three columns and the middle row are **short exact, with endpoint zeros shown**; then the top row is short exact iff the bottom row is. LANDMARK. Freyd's footnote that "three-by-three lemma" would be a better name belongs in the item.
 19. `lem-half-nine-lemma` — lem. Freyd's 2.64, the left-exact half from which item 18 is obtained by adjoining its dual.
-20. `thm-nine-lemma-variants-by-which-rows-are-assumed-exact` — thm. The three classical forms as one item with three clauses: columns exact and the bottom two rows short exact $\Rightarrow$ the top row is; columns and the top two rows $\Rightarrow$ the bottom; **and the middle version, which additionally requires the composite $A\to C$ to be zero**. Weibel's Exercise 1.3.2.
+20. `thm-nine-lemma-variants-by-which-rows-are-assumed-exact` — thm. In Weibel Exercise 1.3.2's displayed commuting $3\times3$ diagram, **all three columns are short exact**, including their endpoint zeros. Under that standing hypothesis: the bottom two short-exact rows imply the top; the top two imply the bottom; and if top and bottom are short exact while the indicated composite $A\to C$ is zero, then the middle is short exact.
 21. `fs-the-middle-nine-lemma-holds-without-assuming-the-composite-is-zero` — false statement. **A real trap:** Weibel states the hypothesis explicitly and his hint (*"Show the remaining row is a complex"*) confirms it is load-bearing, while Mac Lane's Exercise VIII.4.5(c) states the middle version with no such clause — his preceding display may build it into the definition of a "$3\times3$ diagram", and this scaffold could **not** verify that display. **The library follows Weibel's form**, and the authoring Beta records the discrepancy rather than resolving it by assertion.
-22. `thm-sharp-nine-lemma` — thm. Mac Lane's *Homology* Lemma XII.3.3, the left-exact refinement: all three columns and the last two rows left exact $\Rightarrow$ the first row is left exact; and if in addition the first column and the middle row are short exact, the first row is short exact.
-23. `thm-symmetric-nine-lemma` — thm. Mac Lane's *Homology* Lemma XII.3.4: with the middle row and middle column short exact, if three of the remaining four rows and columns are short exact then so is the fourth. LANDMARK — the most memorable form and the one most often misquoted.
+22. `thm-sharp-nine-lemma` — thm. In Mac Lane *Homology* Lemma XII.3.3's **displayed commuting $3\times3$ diagram**, all three columns and the last two rows left exact, including the displayed endpoint zeros, imply the first row left exact; if additionally the first column and middle row are short exact, the first row is short exact.
+23. `thm-symmetric-nine-lemma` — thm. In Mac Lane *Homology* Lemma XII.3.4's displayed commuting $3\times3$ diagram, with the middle row and middle column short exact, if three of the remaining four rows and columns are short exact then so is the fourth. "Short exact" includes its endpoint zeros. LANDMARK.
 24. `thm-the-nine-lemma-follows-from-the-snake-lemma` — thm. Mac Lane's Exercise VIII.4.5(b). Recorded as an item because it closes the block's dependency graph: **every lemma on this page descends from item 7.**
 
 **Splitting, and the classical consequences**
 
 25. `thm-the-splitting-lemma-follows-from-the-nine-lemma` — thm. Freyd's 2.68 route, which derives the splitting of a short exact sequence admitting a retraction from item 18. Cites `MA-10` item 9 for the statement and supplies the second proof; **two routes to one theorem, and the page says what each spends** — the house discipline of `MA-2`'s Stone–Čech pair.
-26. `thm-noether-isomorphism-theorems-recovered-from-the-nine-lemma` — thm. Freyd's 2.66. Cites `MA-8` item 30 and `MA-9` items 9 and 31 and does **not** restate them; the content is that they are instances.
+26. `thm-noether-isomorphism-theorems-recovered-from-the-nine-lemma` — thm. Freyd 2.66. Cites `MA-8` items 31–32 and `MA-9` items 6 and 9 and does **not** restate them; `MA-9` item 31 is the unrelated definition of Grothendieck category and is not a dependency.
 27. `thm-the-pullback-and-pushout-theorems` — thm. Freyd's 2.54 and its dual, in the form the diagram lemmas actually consume: a pullback square with one epic leg has its opposite leg epic and induces an isomorphism on the kernels of the parallel legs. Cites `MA-8` items 23–25 and `MA-10` items 28–31; the item exists to gather them under the names Freyd uses.
 28. `thm-the-diagram-lemmas-hold-in-the-opposite-category` — thm. By `MA-10` item 7 each lemma's dual is again one of the lemmas on this page, and the item says which is dual to which. LANDMARK-adjacent: it is what licenses every "dually" above, and it makes the page half as long as it looks.
-29. `thm-an-exact-functor-transports-every-diagram-lemma` — thm. An exact functor carries snake data to snake data and commutes with $\delta$. **The commutation with $\delta$ is the content** and follows from item 5's uniqueness, not from the construction. `homological-algebra` needs exactly this to base-change a long exact sequence (§11 amendment 4).
+29. `thm-an-exact-functor-transports-every-diagram-lemma` — thm. An exact functor carries snake data to snake data and commutes with $\delta$ **under the canonical comparison isomorphisms** $F(\ker f)\cong\ker(Ff)$, $F(\operatorname{coker}f)\cong\operatorname{coker}(Ff)$ and the corresponding comparisons for the chosen pullbacks and pushouts. The resulting $\delta$ square commutes by item 5's uniqueness. No literal on-the-nose preservation of chosen kernels or cokernels is asserted. `homological-algebra` needs exactly this to base-change a long exact sequence (§11 amendment 4).
 30. `thm-five-lemma-for-a-morphism-of-long-exact-sequences` — thm. The five lemma applied at each interior node, with the hypotheses stated once. Cheap given item 16, and it is the form used in practice.
 
 ### `fs-` items (A page)
@@ -2274,7 +2329,7 @@ writes unbracketed strings before then has used a theorem it has not stated.
 
 7. `thm-a-category-with-finite-products-is-monoidal` — thm. The **cartesian** monoidal structure: $\otimes=\times$, $\mathbf 1=$ a terminal object, with $\alpha,\lambda,\rho$ the canonical isomorphisms; and dually the cocartesian structure. LANDMARK — cites the published product and terminal-object material and is the example every other page uses.
 8. `cor-set-cat-and-every-complete-category-are-cartesian-monoidal` — cor. **$(\mathbf{Cat},\times,\mathbf 1)$ is singled out**, because `MA-17` item 12 needs exactly it.
-9. `thm-a-monoidal-category-with-one-object-is-a-monoid` — thm. And a strict one with one object and one morphism is trivial; the degenerate cases named once so no later page rediscovers them.
+9. `thm-the-endomorphisms-of-the-unit-form-a-commutative-monoid` — thm. For every monoidal category, composition and tensor induce the same commutative multiplication on $\operatorname{End}(\mathbf 1)$ after transport through the unitors (EGNO Prop. 2.2.10; the published Eckmann–Hilton argument supplies the engine). Consequently a **strict** one-object monoidal category is exactly a commutative monoid. An arbitrary monoid gives only a one-object ordinary category, and a weak one-object monoidal category may carry nontrivial constraint data. LANDMARK.
 10. `thm-the-endofunctor-category-of-a-small-category-is-strict-monoidal-under-composition` — thm. $\otimes=\circ$, $\mathbf 1=\mathrm{Id}$, strictly associative and unital; the size hypothesis is `prop-size-of-functor-categories` and is named in the Statement. LANDMARK.
 11. `thm-a-monoid-object-in-the-endofunctor-category-is-exactly-a-monad` — thm. LANDMARK. **This closes the loop `MA-3` deliberately left open.** `MA-3` item 2 records that "a monoid in $[\mathcal C,\mathcal C]$" needs $[\mathcal C,\mathcal C]$ to be a legitimate category and therefore cannot be the definition (§3.1(1)); this item supplies the theorem, **with the smallness hypothesis in the Statement**, so the slogan becomes true and bounded rather than true and unstated.
 12. `def-monoid-object-and-comonoid-object-in-a-monoidal-category` — def. $(M,\mu:M\otimes M\to M,\eta:\mathbf 1\to M)$ with the associativity and unit diagrams **written with the associator and unitors explicit**, which is the only way to write them before `MA-13`.
@@ -2477,7 +2532,14 @@ not, and §10 records the split.
 11. `def-cartesian-closed-category` — def. Finite products and, for each $B$, a right adjoint to $-\times B$. Equivalently the cartesian monoidal structure of `MA-12` item 7 is closed. LANDMARK.
 12. `thm-set-is-cartesian-closed` — thm. With $C^B$ the set of functions; the authoring Beta cites the published function-set material on an A page, and proves the two-line universal property inline if the only published home is the B-leaf example.
 13. `thm-the-category-of-small-categories-is-cartesian-closed` — thm. With $\mathcal D^{\mathcal C}$ the published `def-functor-category`, and the size hypothesis from `prop-size-of-functor-categories`. LANDMARK — **`MA-17` item 12 needs exactly this.**
-14. `thm-a-presheaf-category-on-a-small-category-is-cartesian-closed` — thm. Pointwise construction, citing the published `thm-limits-and-colimits-in-functor-categories-are-computed-pointwise`. LANDMARK.
+14. `thm-a-presheaf-category-on-a-small-category-is-cartesian-closed` — thm. For presheaves $P,Q$ on small $\mathcal C$, define
+   $(Q^P)(c):=\operatorname{Nat}(y(c)\times P,Q)$, with restriction along
+   $f:d\to c$ by precomposition with $y(f)\times1_P$; evaluation sends
+   $(\eta,x)$ at $c$ to $\eta_c(1_c,x)$. Yoneda and currying give
+   $\widehat{\mathcal C}(H,Q^P)\cong\widehat{\mathcal C}(H\times P,Q)$.
+   LANDMARK. **Exponentials are not computed pointwise**; Awodey Ex. 2.2.21
+   and the Cambridge category-logic notes supply the formula and explicitly
+   warn against the pointwise error.
 15. `thm-currying-and-uncurrying-are-mutually-inverse` — thm. The $n$-variable form, with the associativity of currying.
 16. `cor-a-cartesian-closed-category-with-an-initial-object-has-strict-initial-objects` — cor. $A\times 0\cong 0$, because $-\times A$ is a left adjoint; and hence any morphism into $0$ is an isomorphism. `[AI-GEN CANDIDATE — direct corollary]` Directly verifiable, never a `deps` target.
 17. `thm-a-cartesian-closed-preorder-is-a-heyting-semilattice` — thm. The exponential is the relative pseudocomplement. **CONTINGENT** on the published lattice material supplying the vocabulary; otherwise the item states the adjunction $a\wedge-\dashv a\to-$ without naming Heyting and records the change.
@@ -2591,8 +2653,13 @@ statement, and it is the page's sharpest.
 **Consequences**
 
 26. `thm-a-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one` — thm. Strictification (`MA-13` item 11) carries the braiding along; **the result is strict monoidal and remains non-strictly braided**, per item 25.
-27. `thm-monoid-objects-in-a-symmetric-monoidal-category-form-a-monoidal-category` — thm. The tensor product of two monoid objects is a monoid object, using the symmetry to interchange the middle two factors. LANDMARK — **the symmetry is genuinely needed** and a braiding suffices only with care; the Statement says which.
-28. `cor-commutative-monoid-objects-in-a-symmetric-monoidal-category` — cor. And that commutative monoid objects in $(\mathbf{Set},\times)$ are commutative monoids.
+27. `thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category` — thm. The tensor product of monoid objects $A,B$ uses
+   $(1_A\otimes c_{B,A}\otimes1_B)$ to interchange the middle factors before
+   applying $\mu_A\otimes\mu_B$; this makes $\operatorname{Mon}(\mathcal C)$
+   monoidal for every braided base (EGNO Ex. 8.8.2(iv); Aguiar–Mahajan
+   §1.2.2). LANDMARK. In general the induced monoidal category is **not
+   braided** (Aguiar–Mahajan §1.2.7).
+28. `cor-monoid-objects-in-a-symmetric-monoidal-category-form-a-symmetric-monoidal-category` — cor. If the base braiding is a symmetry it is a monoid morphism, so the induced structure is symmetric; commutative monoid objects in $(\mathbf{Set},\times)$ are the ordinary commutative monoids.
 29. `thm-a-symmetric-monoidal-category-with-finite-coproducts-of-monoid-objects` — thm. **CONTINGENT**; the authoring Beta keeps it only if it closes cheaply and records the disposition otherwise.
 
 ### `fs-` items (A page)
@@ -2624,7 +2691,11 @@ Exact ranges, verbatim headings and dispositions are in §10.
 3. **CWM makes the unit compatibility an axiom; EGNO derives it.** Item 4 derives it and says so; a page that also imposes it has an axiom too many, which is harmless but is not what it claims.
 4. **Items 13 and 16 are group theory minted by a category-theory page.** §11 amendment 3 offers both to the algebra tracks. **If they take them, this page cites; if not, this page proves them.** Either way coherence is not dropped.
 5. **Item 15's kernel is not trivial.** The pure braid group is where the braided/symmetric gap lives, and the `fs-` guard is the fifth one above.
-6. **Item 27 needs the symmetry, not merely a braiding**, for the standard interchange; the Statement names which.
+6. **Item 27 needs a braiding, not a symmetry.** The symmetry is needed only to
+   make the induced monoidal category of monoids symmetric; a nonsymmetric
+   braiding already supplies the interchange, but does not generally braid
+   monoid objects. EGNO Ex. 8.8.2(iv) and Aguiar–Mahajan §1.2.2/§1.2.7 are the
+   controlling sources.
 
 **Forward references: NONE.**
 
@@ -2665,7 +2736,7 @@ integers — is specifically denied inside this page.**
 6. `thm-reversing-the-tensor-product-exchanges-left-and-right-duals` — thm. Cites `MA-12` item 6, and it is why that item was minted there.
 7. `thm-duals-are-unique-up-to-a-unique-compatible-isomorphism` — thm. Two left duals of $X$ differ by a **unique** isomorphism commuting with both $\operatorname{ev}$ and $\operatorname{coev}$. LANDMARK. §7 #45 — **this is what licenses the notation $X^\vee$**, and without it the definite article is unearned.
 8. `thm-duality-yields-adjunctions-of-tensoring-functors` — thm. $\operatorname{Hom}(U\otimes V,W)\cong\operatorname{Hom}(U,W\otimes V^\vee)$ and $\operatorname{Hom}(V^\vee\otimes U,W)\cong\operatorname{Hom}(U,V\otimes W)$; equivalently $V^\vee\otimes-$ is left adjoint to $V\otimes-$. LANDMARK. Cites `MA-1` item 5.
-9. `thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor` — thm. In the strict monoidal category of endofunctors (`MA-12` item 10), a left dual of $F$ is exactly a left adjoint of $F$, and the zig-zag identities are the triangle identities of `MA-1` item 1. LANDMARK — **the page's best item**, and the one that pays for putting adjunctions and monoidal categories in the same file.
+9. `thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor` — thm. Fix $F\otimes G:=F\circ G$. Then a left dual $L$ of $F$ has evaluation $LF\Rightarrow1$ and coevaluation $1\Rightarrow FL$, exactly the counit and unit of $L\dashv F$; a right dual $R$ is exactly $F\dashv R$. The zig-zags are the triangle identities of `MA-1` item 1 (EGNO Ex. 2.10.4). For a large $\mathcal C$ this is stated as a direct schema about endofunctors, not by forming an object $\operatorname{End}(\mathcal C)$. LANDMARK.
 10. `cor-a-second-proof-that-adjoints-are-unique` — cor. Item 7 applied through item 9 recovers `MA-1` item 13. `[AI-GEN CANDIDATE — direct corollary]` Directly verifiable, never a `deps` target; it is stated as a corollary and the original theorem keeps the dependency edges.
 11. `def-rigid-object-and-rigid-monoidal-category` — def. An object with both a left and a right dual; a category in which every object is rigid. LANDMARK. **Joyal–Street's word for the same notion is "compact"**, recorded in §10.
 12. `cex-not-every-monoidal-category-is-rigid` — cex. EGNO Example 2.10.12: the category of **all** vector spaces over a field is not rigid, and the proof is explicit — an infinite-dimensional space has no dual in this sense. LANDMARK-grade, and it cites the published `dual-spaces-bilinear-forms-and-inertia` material and `thm-canonical-map-to-double-dual-is-surjective-iff-finite-dimensional`, which is exactly the published statement that makes the failure visible.
@@ -2685,7 +2756,13 @@ integers — is specifically denied inside this page.**
 23. `def-spherical-structure` — def. A pivotal structure with $\dim_a(V)=\dim_a(V^\vee)$ for every $V$.
 24. `thm-in-a-spherical-category-the-left-and-right-traces-agree` — thm. $\operatorname{Tr}_L(a_Vx)=\operatorname{Tr}_R(xa_V^{-1})$. EGNO Thm 4.7.15. LANDMARK.
 25. `thm-basic-properties-of-the-categorical-trace` — thm. $\operatorname{Tr}_L(a)=\operatorname{Tr}_R(a^\vee)$; additivity over biproducts, citing `MA-7` item 26; multiplicativity $\operatorname{Tr}_L(a\otimes b)=\operatorname{Tr}_L(a)\operatorname{Tr}_L(b)$; and cyclicity in the form $\operatorname{Tr}_L(ac)=\operatorname{Tr}_L(c^{\vee\vee}a)$ — **note the double dual, which is the categorical trace's replacement for naive cyclicity**.
-26. `thm-the-trace-is-additive-along-a-subobject` — thm. In a rigid abelian monoidal category, $\operatorname{Tr}_L$ is additive on short exact sequences; cites `MA-10` item 4. LANDMARK — the one place the abelian half and the monoidal half of this track meet inside a single Statement.
+26. `rem-the-exact-sequence-additivity-of-trace-and-its-missing-hypotheses` — rem. EGNO Prop. 4.7.5 proves the following **in a multitensor category**: if $a:V\to V^{\vee\vee}$ and $W\subseteq V$ satisfies $a(W)\subseteq W^{\vee\vee}$, so that $a$ restricts to $W$ and descends to $V/W$, then
+   $\operatorname{Tr}_L(a)=\operatorname{Tr}_L(a|_W)+\operatorname{Tr}_L(\bar a)$,
+   and dually for the right trace. A multitensor category includes locally finite
+   $k$-linear abelian rigidity and a biexact tensor product. Those hypotheses are
+   denied by §8 denial 6, so the library records the exact theorem here with
+   `proved_here: false` and **does not** claim the broader false-to-source form
+   for an arbitrary rigid abelian monoidal category. Nothing depends on it.
 27. `def-twist-and-ribbon-structure` — def. $\theta\in\operatorname{Aut}(\mathrm{id})$ with $\theta_{X\otimes Y}=(\theta_X\otimes\theta_Y)\circ c_{Y,X}\circ c_{X,Y}$; a **ribbon structure** additionally has $(\theta_X)^\vee=\theta_{X^\vee}$. LANDMARK.
 28. `thm-a-twist-on-a-braided-rigid-category-is-the-same-thing-as-a-pivotal-structure-of-drinfeld-type` — thm. $\psi_X=u_X\theta_X$ is a pivotal structure if and only if $\theta$ is a twist. EGNO §8.10. LANDMARK — item 20's ladder, made into a theorem.
 29. `rem-what-is-not-developed-here` — rem. §8 denial 6, stated at the page's own boundary: EGNO's *tensor category* is *"a locally finite $k$-linear abelian rigid monoidal category"* over an algebraically closed field with $\operatorname{End}(\mathbf 1)\cong k$, and fusion adds finiteness and semisimplicity. **The definition is quoted with its hypotheses** — §4.6 permits the phrase "tensor category" only here — and the remark records that semisimple abelian categories, $k$-linear local finiteness and Perron–Frobenius theory are the missing prerequisites. **EGNO Cor. 4.7.13 is specifically denied.**
@@ -2735,8 +2812,8 @@ Exact ranges, verbatim headings and dispositions are in §10.
 `preadditive-and-additive-categories-and-biproducts`,
 `ends-coends-and-weighted-limits`, `universal-properties-and-the-yoneda-lemma`
 
-The page that closes the track. It sits **above** the additive page on purpose
-(§1): the identification of a preadditive category with an $\mathbf{Ab}$-enriched
+The page that closes the track. It sits **after** the additive page on purpose:
+the identification of a preadditive category with an $\mathbf{Ab}$-enriched
 one is the payoff, and putting enrichment first would force `MA-7` to
 forward-reference it. It also cannot be written before `MA-13`, because the
 associativity and unit conditions for a $\mathcal V$-category are diagrams **in
@@ -2759,24 +2836,24 @@ extra-variable form"*.
 
 **The definition**
 
-1. `def-enriched-category` — def. For a monoidal $\mathcal V$: a set of objects, a hom-object $\mathcal A(A,B)$ in $\mathcal V$, a **composition morphism of $\mathcal V$** $M_{ABC}:\mathcal A(B,C)\otimes\mathcal A(A,B)\to\mathcal A(A,C)$, and an **identity element** $j_A:\mathbf 1\to\mathcal A(A,A)$, subject to associativity and unit diagrams **in $\mathcal V$** written with $\alpha,\lambda,\rho$ explicit. LANDMARK. §7 #47. **The library states the hypothesis as "monoidal", not "symmetric monoidal closed"**, and item 4 records when more is needed.
+1. `def-enriched-category` — def. For a monoidal $\mathcal V$: a **set** of objects, a hom-object $\mathcal A(A,B)$ in $\mathcal V$, a **composition morphism of $\mathcal V$** $M_{ABC}:\mathcal A(B,C)\otimes\mathcal A(A,B)\to\mathcal A(A,C)$, and an **identity element** $j_A:\mathbf 1\to\mathcal A(A,A)$, subject to associativity and unit diagrams **in $\mathcal V$** written with $\alpha,\lambda,\rho$ explicit. LANDMARK. §7 #47. The set-of-objects convention is deliberate: it keeps the resulting functor and transformation collections within the published foundation. Larger enriched categories may be discussed only as formula schemas.
 2. `rem-the-order-of-the-tensor-factors-in-composition` — rem. Kelly writes $\mathcal A(B,C)\otimes\mathcal A(A,B)\to\mathcal A(A,C)$, the classical order; some sources write the diagrammatic order. **Silently mixing the two corrupts every diagram on the page**, so the convention is fixed here and named. §10.
 3. `def-enriched-functor` — def. A function on objects together with morphisms $T_{AB}:\mathcal A(A,B)\to\mathcal B(TA,TB)$ of $\mathcal V$ compatible with $M$ and $j$; **fully faithful** means each $T_{AB}$ is an isomorphism.
-4. `rem-how-much-of-the-theory-needs-symmetry-closedness-and-completeness` — rem. **REQUIRED**, and it is the page's spine. Kelly's ladder, quoted: monoidal suffices for items 1–8; symmetry is added when $\mathcal V$-categories are to be tensored and for the extra-variable Yoneda; **closedness is needed as soon as $\mathcal V$ is to be a $\mathcal V$-category, representables are wanted, or weights are taken** (weights are $\mathcal V$-functors into $\mathcal V$); completeness of $\mathcal V_0$ is needed for the strong Yoneda lemma. Without this remark every later Statement looks either over- or under-hypothesised.
+4. `rem-how-much-of-the-theory-needs-symmetry-closedness-and-completeness` — rem. **REQUIRED**, and it is the page's spine. Kelly's ladder, quoted: monoidal suffices for items 1–8; symmetry is added when $\mathcal V$-categories are to be tensored and for the extra-variable Yoneda; **closedness is needed as soon as $\mathcal V$ is to be a $\mathcal V$-category, representables are wanted, or weights are taken** (weights are $\mathcal V$-functors into $\mathcal V$). Completeness of $\mathcal V_0$ is needed for general small enriched functor-category hom-objects and general end constructions, **not** for Kelly's particular-end form of strong Yoneda in item 21, whose proof establishes that end directly. Without this remark every later Statement looks either over- or under-hypothesised.
 5. `def-enriched-natural-transformation` — def. A family $\alpha_A:\mathbf 1\to\mathcal B(TA,SA)$ satisfying Kelly's $\mathcal V$-naturality condition. LANDMARK.
 6. `thm-the-compact-square-form-of-enriched-naturality` — thm. Kelly's own repackaging: using the induced morphisms $\mathcal B(1,\alpha_B)$ and $\mathcal B(\alpha_A,1)$, the lozenge of item 5 becomes a commuting **square**. LANDMARK — **the two forms are the same condition and the page proves it rather than choosing one silently**, because Kelly and Cruttwell write the lozenge and Riehl writes the square.
 7. `rem-enriched-naturality-is-strictly-stronger-than-ordinary-naturality` — rem. Riehl's warning, quoted: *"While the basic data of a $\mathcal V$-natural transformation is unenriched, the naturality condition is stronger than the unenriched one."* An item, because the data looking unenriched is exactly what makes the trap invisible.
-8. `thm-enriched-categories-functors-and-natural-transformations-form-a-two-category` — thm. $\mathcal V\text{-}\mathbf{CAT}$, with the size hypotheses named.
+8. `thm-enriched-categories-functors-and-natural-transformations-form-a-two-category` — thm. If $\mathcal V$ is locally small, $\mathcal V$-categories with a set of objects, enriched functors and enriched natural transformations form a locally small strict two-category, denoted $\mathcal V\text{-}\mathbf{Cat}$. This is a theorem schema, never an object $\mathcal V\text{-}\mathbf{CAT}$ of a forbidden ambient category of all large categories.
 
 **The underlying ordinary category**
 
-9. `def-the-underlying-ordinary-category-of-an-enriched-category` — def. $\mathcal A_0$ has the same objects and $\mathcal A_0(A,B):=\mathcal V_0(\mathbf 1,\mathcal A(A,B))$; equivalently $\mathcal A_0=\mathcal V\text{-}\mathbf{CAT}(\mathbf I,\mathcal A)$ for the unit $\mathcal V$-category $\mathbf I$. LANDMARK. §7 #48 — **that it is a category, and that the construction is functorial, are proofs**, and the second is free once the representable description is adopted.
-10. `thm-the-underlying-category-construction-is-a-two-functor` — thm. $(-)_0:\mathcal V\text{-}\mathbf{CAT}\to\mathbf{CAT}$, represented by $\mathbf I$. §7 #48.
+9. `def-the-underlying-ordinary-category-of-an-enriched-category` — def. $\mathcal A_0$ has the same set of objects and $\mathcal A_0(A,B):=\mathcal V_0(\mathbf 1,\mathcal A(A,B))$; equivalently its homs arise from enriched functors out of the unit $\mathcal V$-category $\mathbf I$. LANDMARK. §7 #48 — **that it is a category, and that the construction is functorial, are proofs**.
+10. `thm-the-underlying-category-construction-is-a-two-functor` — thm. The assignments on enriched categories, functors and transformations define the schema $(-)_0:\mathcal V\text{-}\mathbf{Cat}\to\mathbf{Cat}$ for the set-object categories of item 8. No $\mathbf{CAT}$ is formed. §7 #48.
 11. `rem-the-underlying-category-can-lose-information` — rem. **REQUIRED.** $\mathcal V_0(\mathbf 1,-)$ is **not faithful in general**: for $\mathcal V=\mathbf{Cat}$ it returns the set of objects and discards every 2-cell; for differential graded modules it returns the 0-cycles. Kelly's consequences, each worth stating: completeness of $\mathcal A$ is **strictly stronger** than completeness of $\mathcal A_0$; $T$ having a left adjoint is stronger than $T_0$ having one; and a small dense subcategory of one implies nothing about the other. LANDMARK-grade remark — without it every enriched statement reads as a restatement of an ordinary one.
 
 **The examples that make the definition pay**
 
-12. `thm-a-category-enriched-in-categories-is-exactly-a-strict-two-category-with-small-hom-categories` — thm. For $\mathbf{Cat}$ with its **cartesian** monoidal structure (`MA-12` item 8). LANDMARK. **The smallness clause is not decoration and its omission would make the Statement false**: hom-objects of a $\mathbf{Cat}$-enriched category are objects of $\mathbf{Cat}$, hence small, whereas the published `def-strict-two-category` imposes no smallness. Cites the published `def-strict-two-category` and `thm-small-categories-form-a-strict-two-category`. **The one genuine proof step is the identity**: an identity 1-morphism is the same thing as a functor $\mathbf 1\to\mathcal K(A,A)$ out of the terminal category, and the page proves that correspondence rather than asserting it. §11 amendment 9.
+12. `thm-a-category-enriched-in-categories-is-exactly-a-small-object-strict-two-category-with-small-homs` — thm. For $\mathbf{Cat}$ with its cartesian monoidal structure (`MA-12` item 8), a $\mathbf{Cat}$-enriched category in item 1's sense is exactly a strict two-category with a **set of 0-cells** and **small hom-categories**. Both size clauses are load-bearing; the published `def-strict-two-category` itself imposes neither. The identity correspondence is proved via functors $\mathbf 1\to\mathcal K(A,A)$. §11 amendment 9.
 13. `thm-a-category-enriched-in-a-preorder-is-a-preorder-and-one-enriched-in-sets-is-an-ordinary-category` — thm. The two degenerate cases, which are what make item 1 legible.
 14. `thm-a-category-enriched-in-abelian-groups-is-exactly-a-preadditive-category` — thm. **The track's closing theorem.** LANDMARK. For $(\mathbf{Ab},\otimes_{\mathbb Z},\mathbb Z)$: a $\mathbf{Ab}$-enrichment is an abelian group structure on each hom-set with composition **bilinear**, and bilinearity is precisely what the universal property of $\otimes_{\mathbb Z}$ converts into the single morphism $\mathcal A(B,C)\otimes_{\mathbb Z}\mathcal A(A,B)\to\mathcal A(A,C)$ required by item 1. Cites `MA-7` item 1 for the unenriched side. **CONTINGENT on `tensor-products-of-modules`** supplying $\otimes_{\mathbb Z}$ and its universal property, and on `MA-12` item 15 making $\mathbf{Ab}$ monoidal (§11 amendment 1). **This is the single most expensive seam in the track**: the library currently has no tensor product of abelian groups at all, and without it item 14 cannot even be stated.
 15. `cor-an-additive-category-is-an-ab-enriched-category-with-a-zero-object-and-finite-biproducts` — cor. Restates `MA-7` item 23 in enriched language; the loop `MA-7` promised is closed here and nowhere else.
@@ -2788,15 +2865,16 @@ extra-variable form"*.
 **The enriched Yoneda lemma**
 
 20. `thm-weak-enriched-yoneda-lemma` — thm. A **bijection of sets** between the $\mathcal V$-natural transformations $\mathcal A(K,-)\Rightarrow F$ and the elements $\mathbf 1\to FK$, under: $\mathcal V$ symmetric monoidal closed with $\mathcal V_0$ locally small. **No completeness and no smallness of $\mathcal A$.** LANDMARK.
-21. `thm-strong-enriched-yoneda-lemma` — thm. An **isomorphism of objects of $\mathcal V$**, $FK\cong[\mathcal A,\mathcal V](\mathcal A(K,-),F)$, exhibiting $FK$ as an end. **Additionally requires $\mathcal V_0$ complete**, and is true without any smallness restriction on $\mathcal A$. LANDMARK. Cites `MA-5` for ends.
-22. `rem-there-are-two-enriched-yoneda-lemmas-and-they-have-different-hypotheses` — rem. §10. **Citing "the enriched Yoneda lemma" without saying which, or without the completeness hypothesis on the strong one, is a citation defect** and this remark exists to prevent it. The weak form is the underlying bijection of the strong one.
-23. `cor-the-enriched-yoneda-embedding-is-fully-faithful` — cor. $\mathcal A(L,K)\cong[\mathcal A,\mathcal V](\mathcal A(K,-),\mathcal A(L,-))$.
+21. `thm-strong-enriched-yoneda-lemma-as-a-particular-end` — thm. For any $\mathcal V$-category $\mathcal A$, $F:\mathcal A\to\mathcal V$ and $K\in\mathcal A$, Kelly's map exhibits $FK$ as the **particular end** $\int_A[\mathcal A(K,A),FA]$, hence gives an isomorphism in $\mathcal V$. Kelly (2.30)–(2.33) explicitly imposes no smallness condition on $\mathcal A$ for this particular end: Yoneda proves its existence. It does **not** thereby construct the whole enriched functor category for large $\mathcal A$. LANDMARK.
+22. `rem-the-particular-yoneda-end-and-the-enriched-functor-category-are-different-size-claims` — rem. The weak form is the underlying set-bijection. For **small** $\mathcal A$ and complete $\mathcal V_0$, the particular end is the hom-object of the enriched functor category $[\mathcal A,\mathcal V]$; for large $\mathcal A$ only item 21's particular end is asserted. This replaces the false blanket claim that completeness is needed for Yoneda itself.
+23. `cor-the-enriched-yoneda-embedding-is-fully-faithful` — cor. In the particular-end form for arbitrary $\mathcal A$, and as a fully faithful enriched functor into $[\mathcal A^{\mathrm{op}},\mathcal V]$ when $\mathcal A$ is small and the required ends exist.
 
 **Tensors, cotensors and enriched limits**
 
 24. `def-cotensor-and-tensor` — def. The **cotensor** $X\pitchfork C$ by $\mathcal B(B,X\pitchfork C)\cong[X,\mathcal B(B,C)]$, and the **tensor** $X\otimes C$ by $\mathcal B(X\otimes C,B)\cong[X,\mathcal B(C,B)]$. LANDMARK. Both are the case of a weighted limit over the unit $\mathcal V$-category, so `MA-5` item 15's definition is cited and not repeated. **In the $\mathbf{Set}$ case the cotensor is the power and the tensor is the copower** — and "copower = tensor" is easy to get backwards, so the item says it explicitly.
 25. `cex-a-bijection-of-underlying-hom-sets-does-not-establish-a-cotensor` — cex. Kelly's warning, with his own $\mathcal V=\mathbf{Cat}$, $X=\mathbf 2$ witness: the bijection obtained by applying $\mathcal V_0(\mathbf 1,-)$ to the defining isomorphism is **insufficient**, unless the cotensor is already known to exist or $\mathcal V_0(\mathbf 1,-)$ is conservative. LANDMARK-grade — it is item 11's failure of faithfulness biting a definition.
 26. `def-enriched-weighted-limit` — def. The $\mathcal V$-enriched form of `MA-5` item 15, with $\mathcal V$-weights in place of $\mathbf{Set}$-weights. §7 #23 and `MA-5`'s ordering note; **this is where `MA-5` item 21 lands if it was moved.**
+26a. `thm-the-free-enriched-category-two-adjunction` — thm. Under Kelly's standing hypotheses ($\mathcal V$ symmetric monoidal closed, $\mathcal V_0$ locally small and complete) and with $\mathcal V_0$ also cocomplete, the copower functor $E\mapsto E\cdot\mathbf 1=\coprod_E\mathbf 1$ induces a 2-adjunction $(-)_{\mathcal V}\dashv(-)_0$ between small ordinary categories and set-object $\mathcal V$-categories. For a small ordinary $\mathcal L$, the source gives the **hom-category isomorphism** $[\mathcal L_{\mathcal V},\mathcal B]_0\cong[\mathcal L,\mathcal B_0]$ (Kelly §2.5, (2.38)–(2.40)). The adjunction itself is not claimed to be an isomorphism. LANDMARK. It is placed here because item 27 uses the free enriched category; this ordering is a dependency, not an expositional preference.
 27. `def-conical-limit-in-an-enriched-category` — def. Defined through **free $\mathcal V$-categories**, not through constant functors — because of item 28.
 28. `thm-there-is-in-general-no-constant-enriched-functor` — thm. LANDMARK. Kelly's §3.9, and the obstruction is exact: an object $B$ is a $\mathcal V$-functor $\mathbf I\to\mathcal B$, and there is a unique $\mathcal V$-functor $\mathcal K\to\mathbf 1$ into the terminal $\mathcal V$-category, but **no $\mathcal V$-functor $\mathbf 1\to\mathbf I$ unless $\mathbf 1$ is a retract of $\mathbf I$ in $\mathcal V_0$** — which fails for modules and for differential graded modules. It works when $\mathcal V$ is **cartesian closed**, because then $\mathbf 1=\mathbf I$.
 29. `thm-conical-limits-do-not-suffice-in-the-enriched-setting` — thm. Kelly's §3.9, whose title is verbatim *"The inadequacy of conical limits"*: the canonical comparison is not in general an isomorphism, **and it fails already for $\mathcal V=\mathbf{Ab}$** — not merely for exotic bases. LANDMARK. §7 #23's justification, and the reason weights are not a generalisation for its own sake. **Discharges `MA-5` item 19's remark with a theorem.**
@@ -2811,15 +2889,13 @@ extra-variable form"*.
 35. `thm-change-of-base-extends-to-functors-and-natural-transformations-and-is-a-two-functor` — thm. $F_\ast:\mathcal V\text{-}\mathbf{CAT}\to\mathcal W\text{-}\mathbf{CAT}$. §7 #49.
 36. `cor-the-underlying-ordinary-category-is-an-instance-of-change-of-base` — cor. Because $\mathcal V_0(\mathbf 1,-)$ is lax monoidal. LANDMARK — it retires items 9–10 as a special case, and it is Riehl's observation: *"The point of course is that $\mathcal V(\ast,-)$ is lax monoidal."*
 37. `rem-what-is-not-proved-about-change-of-base` — rem. §8 denial 13, with **Kelly's own reason quoted**: he declines the topic because *"a careful analysis of the 2-category of symmetric monoidal categories, symmetric monoidal functors, and symmetric monoidal natural transformations — including adjunctions therein and the dual concept of op-monoidal functor"* would be needed. **The page proves items 34–36 and denies the 2-categorical theory of change of base.** §12, seam S-4 is closed: Riehl's Lemma 3.4.3 and Remark 3.5.11, Cruttwell's Props 4.2.1–4.2.3 and Thm 4.2.4, and **Borceux vol 2's Def. 6.4.1, Props 6.4.2–6.4.3 and Cor. 6.4.4** all supply the construction with numbered results, so items 34–36 are sourced three times over and only the deeper theory is denied.
-38. `thm-a-free-enriched-category-on-an-ordinary-category-exists` — thm. The forgetful $U:\mathcal V\text{-}\mathbf{CAT}\to\mathbf{CAT}$ of item 36 has a left adjoint when $\mathcal V$ has coproducts, and the adjunction is an isomorphism of categories. Borceux vol 2 Props 6.4.6–6.4.8. LANDMARK — it makes item 36 into an adjunction rather than a bare functor, and it is what `MA-17` item 27's conical limits are defined through.
-
 **Enriched adjunctions**
 
 39. `def-enriched-adjunction` — def. A pair of $\mathcal V$-functors with a $\mathcal V$-natural isomorphism $\mathcal B(FA,B)\cong\mathcal A(A,GB)$ **of objects of $\mathcal V$** — which is strictly stronger than an adjunction of the underlying ordinary functors, by item 11. LANDMARK.
 40. `thm-a-right-enriched-adjoint-preserves-weighted-limits` — thm. Borceux vol 2 Prop. 6.7.3; the enriched RAPL, and it is `MA-1` item 24's analogue rather than its corollary.
-41. `thm-enriched-adjoint-functor-theorem-for-a-cotensored-category` — thm. For $\mathcal A$ cotensored, $F:\mathcal A\to\mathcal B$ has a left $\mathcal V$-adjoint **if and only if the underlying ordinary functor $U(F)$ has a left adjoint**. Borceux vol 2 Thm 6.7.6. LANDMARK — a striking theorem, because item 11 has just finished explaining that the underlying category generally forgets too much; **cotensoredness is exactly what buys the passage back**, and the Statement names it.
+41. `thm-enriched-adjoint-functor-theorem-for-cotensored-categories` — thm. Let $\mathcal V$ be closed symmetric monoidal, let $\mathcal A$ and $\mathcal B$ be cotensored $\mathcal V$-categories, and let $G:\mathcal B\to\mathcal A$ be a $\mathcal V$-functor. Then $G$ has a left $\mathcal V$-adjoint iff **(i)** $G$ preserves cotensors and **(ii)** the underlying ordinary functor $G_0$ has a left adjoint (Borceux vol. 2 Thm 6.7.6, as restated in the accessible TAC and Guillou–May sources). Dually, right enriched adjoints require both categories tensored, preservation of tensors, and an underlying right adjoint. LANDMARK. Cotensoredness alone is not enough.
 42. `thm-a-category-is-tensored-exactly-when-every-covariant-hom-has-a-left-enriched-adjoint` — thm. And cotensored exactly when every contravariant hom does; Borceux vol 2 6.7.4. Ties items 24 and 39 together.
-43. `thm-every-enriched-functor-into-the-base-is-a-weighted-colimit-of-representables` — thm. $F\cong\operatorname{colim}^F Y$ for the enriched Yoneda embedding $Y$. Borceux vol 2 Thm 6.6.18. LANDMARK — **the enriched density theorem**, and the direct analogue of `MA-6` items 19–20. It is the natural closing item of the track.
+43. `thm-every-enriched-functor-into-the-base-is-a-weighted-colimit-of-representables` — thm. For **small** $\mathcal A$, and when the displayed weighted colimit exists in the locally small base under the page's standing hypotheses, $F\cong\operatorname{colim}^F Y$ for the enriched Yoneda embedding $Y$. Borceux vol. 2 Thm 6.6.18. LANDMARK — **the enriched density theorem**, and the direct analogue of `MA-6` items 19–20. Neither a functor category on a large source nor an unlicensed existence assertion is hidden in the notation. It is the natural closing item of the track.
 
 ### `fs-` items (A page)
 
@@ -2828,7 +2904,7 @@ extra-variable form"*.
 - `fs-the-underlying-ordinary-category-determines-the-enriched-category` — item 11.
 - `fs-a-cat-enriched-category-is-the-same-thing-as-a-strict-two-category` — item 12's smallness clause; the unqualified claim is false.
 - `fs-an-enriched-natural-transformation-is-a-natural-transformation-of-the-underlying-functors` — item 7.
-- `fs-the-enriched-yoneda-lemma-needs-no-completeness-hypothesis` — item 22; true of the weak form and false of the strong one.
+- `fs-the-strong-enriched-yoneda-lemma-for-a-large-category-constructs-the-whole-enriched-functor-category` — refuted by items 21–23: Kelly constructs the particular representable-to-$F$ end without a smallness hypothesis, but that does not supply every hom-object, the object collection, or a functor category on a large source.
 - `fs-a-monoidal-category-carries-at-most-one-symmetry` — Kelly's graded-module witness, where $c(x\otimes y)$ may be $y\otimes x$ or $(-1)^{pq}y\otimes x$; **true only when $\mathcal V_0(\mathbf 1,-)$ is faithful and $\mathcal V$ is closed**, and the item names both hypotheses.
 
 ### B page — `enriched-categories-examples`
@@ -2861,6 +2937,252 @@ Exact ranges, verbatim headings and dispositions are in §10.
 
 ---
 
+## MA-18. Tensor and Fusion Categories
+
+**page id** `tensor-and-fusion-categories`
+**`requires`** `duality-and-rigidity-in-monoidal-categories`,
+`abelian-categories`,
+`subobject-lattices-generators-and-the-grothendieck-axioms`,
+`exactness-and-the-member-calculus`,
+`monoidal-categories-and-monoidal-functors`
+
+The final pair changes ambient category deliberately. “Tensor category” here is
+not Mac Lane's older synonym for monoidal category: it has EGNO's finite-linear
+meaning over a fixed algebraically closed field $k$. The page earns that change
+by stating every added hypothesis before using it. It builds the portion of the
+theory supported by the abelian and rigid spines already established —
+biexactness, the structure of the unit, exact tensor functors, Grothendieck rings
+and fusion rules — and stops before Frobenius–Perron, module-category and
+reconstruction machinery. Thus this pair satisfies the dispatch's invitation to
+develop tensor or fusion categories without importing a second research track by
+stealth.
+
+### A-page items, in dependency order
+
+**The linear and finite ambient categories**
+
+1. `def-k-linear-category-and-k-linear-functor` — def. A locally small category
+   whose hom-sets are $k$-vector spaces and whose composition is $k$-bilinear;
+   a $k$-linear functor is linear on every hom-space. The field $k$ and the
+   unital convention are in the Statement. EGNO §1.2; Meusburger §8.1.
+2. `def-locally-finite-k-linear-abelian-category` — def. EGNO's exact convention:
+   an essentially small $k$-linear abelian category in which every object has
+   finite length and every hom-space is finite-dimensional. The page does not
+   replace “essentially small” by a globally chosen skeleton.
+3. `def-finite-k-linear-abelian-category` — def. EGNO §1.8's finiteness
+   condition, stated in the source's equivalent module-category form only after
+   its hypotheses are available; the authoring item lists the finite number of
+   simple isomorphism classes and enough-projective condition rather than
+   conflating “finite” with merely finite length. Meusburger Def. 8.1.8 is the
+   independent convention check.
+
+**Tensor, multitensor, fusion and multifusion**
+
+4. `def-tensor-and-multitensor-category` — def. Over the fixed algebraically
+   closed field $k$, a **multitensor category** is a locally finite $k$-linear
+   abelian rigid monoidal category with bilinear tensor product; a **tensor
+   category** additionally has $\operatorname{End}(\mathbf1)=k$ through the
+   scalar unit map. EGNO Def. 4.1.1. The equality is a property of the canonical
+   map $k\to\operatorname{End}(\mathbf1)$, not a silently chosen identification.
+5. `def-fusion-and-multifusion-category` — def. A **multifusion category** is a
+   finite semisimple multitensor category; a **fusion category** is its tensor
+   (simple-unit) case. EGNO §4.1; Meusburger Defs. 8.2.1–8.2.3.
+6. `rem-tensor-category-terminology-is-source-dependent` — rem. Mac Lane and
+   Joyal–Street use “tensor category” broadly for monoidal structure; EGNO uses
+   items 4–5. The library says *monoidal category* everywhere before this page
+   and adopts EGNO's meaning here only. This is a convention record, not a claim
+   that the older use is wrong.
+
+**Exactness forced by rigidity**
+
+7. `thm-the-tensor-product-in-a-multitensor-category-is-biexact` — thm. For each
+   $X$, both $X\otimes-$ and $-\otimes X$ have left and right adjoints supplied
+   by the chosen left and right duals, so they preserve finite limits and finite
+   colimits; hence tensoring in either variable is exact. EGNO Prop. 4.2.1.
+   LANDMARK. The proof cites `MA-1` RAPL and its dual rather than asserting that
+   bilinearity alone implies exactness.
+8. `thm-dualization-in-a-multitensor-category-is-exact` — thm. Left and right
+   dualization are contravariant equivalences and carry short exact sequences to
+   short exact sequences in the opposite direction. EGNO Prop. 4.2.9. The
+   canonical kernel/cokernel comparison isomorphisms are displayed, not treated
+   as equality of chosen objects.
+9. `thm-images-commute-with-tensor-products-in-a-multitensor-category` — thm.
+   $\operatorname{im}(f\otimes g)\cong
+   \operatorname{im}(f)\otimes\operatorname{im}(g)$, with the canonical map
+   specified. EGNO Prop. 4.2.8. The proof factors one variable at a time and uses
+   item 7 plus the abelian coimage–image theorem.
+10. `thm-tensoring-with-a-dualizable-object-preserves-projectives` — thm. If $P$
+    is projective, so are $P\otimes X$ and $X\otimes P$: the relevant hom functor
+    is transported across the tensor–dual adjunction and the other tensor factor
+    is exact. EGNO Prop. 4.2.12.
+11. `cor-the-unit-is-projective-exactly-when-the-tensor-category-is-semisimple`
+    — cor. In a tensor category, $\mathbf1$ is projective iff every object is
+    projective iff the category is semisimple. EGNO Cor. 4.2.13, with the source's
+    locally finite tensor hypotheses retained.
+
+**The unit object and tensor functors**
+
+12. `thm-the-unit-object-of-a-multitensor-category-is-semisimple` — thm. EGNO
+    Thm. 4.3.1 and Cor. 4.3.2. LANDMARK and the hard theorem of the pair. The
+    proof follows EGNO's endomorphism-algebra argument; it is not replaced by an
+    appeal to the definition of multifusion category, which would be circular.
+13. `thm-the-unit-object-of-a-tensor-category-is-simple` — thm. The tensor case
+    of EGNO Thm. 4.3.8: semisimplicity from item 12 plus
+    $\operatorname{End}(\mathbf1)=k$ forces a single simple summand. The converse
+    to Schur's lemma is not asserted outside these hypotheses.
+14. `cor-evaluation-is-monic-and-coevaluation-is-epic-for-nonzero-objects` —
+    cor. For nonzero $X$ in a tensor category, the evaluation and coevaluation
+    morphisms in EGNO Cor. 4.3.9 have the stated mono/epi properties. The
+    Statement fixes left-versus-right dual convention by displaying the arrows.
+15. `def-tensor-functor-between-tensor-categories` — def. EGNO Def. 4.2.5: an
+    exact faithful $k$-linear strong monoidal functor. It is explicitly narrower
+    than `MA-12`'s general strong monoidal functor.
+16. `thm-an-exact-k-linear-strong-monoidal-functor-out-of-a-tensor-category-is-faithful`
+    — thm. EGNO Rem. 4.3.10. Thus “faithful” in item 15 is redundant for a tensor
+    source but retained to match the standard definition. The proof uses the
+    simple unit and exactness; it is not true for arbitrary monoidal sources.
+
+**Grothendieck rings and fusion rules**
+
+17. `def-grothendieck-ring-of-a-tensor-category` — def. The Grothendieck group
+    $K_0(\mathcal C)$ of the underlying essentially small abelian category, with
+    relations $[B]=[A]+[C]$ for every short exact sequence
+    $0\to A\to B\to C\to0$, and multiplication
+    $[X][Y]=[X\otimes Y]$, unit $[\mathbf1]$. No skeleton or representative of
+    every isomorphism class is globally chosen.
+18. `thm-the-grothendieck-ring-multiplication-is-well-defined` — thm. Item 7
+    sends each short-exact relation to one in either tensor variable, so the
+    multiplication descends from the free abelian group; associator and unitors
+    give associativity and the unit. LANDMARK well-definedness item. It must
+    precede every use of the phrase “Grothendieck ring”.
+19. `def-fusion-rules` — def. If $X_1,\ldots,X_r$ is supplied finite simple-class
+    data in a fusion category, define nonnegative integers by
+    $[X_i][X_j]=\sum_kN_{ij}^{k}[X_k]$. Independence of decompositions is supplied
+    by the already established Jordan–Hölder/finite-length theory, not by a
+    chosen decomposition for every object.
+20. `thm-duality-induces-an-anti-involution-on-the-grothendieck-ring` — thm.
+    Exact dualization makes $[X]^*:=[X^\vee]$ well defined and
+    $([X][Y])^*=[Y]^*[X]^*$. It is an **anti**-involution in general; only a
+    braiding or another commutativity theorem permits the word involution without
+    qualification.
+21. `thm-left-and-right-dual-objects-are-isomorphic-in-a-semisimple-multitensor-category`
+    — thm. EGNO Prop. 4.8.1. This is an objectwise isomorphism theorem, not a
+    natural monoidal choice of such isomorphisms.
+22. `rem-objectwise-double-dual-isomorphisms-do-not-supply-a-pivotal-structure`
+    — rem. A pivotal structure is a **monoidal natural** isomorphism
+    $1\Rightarrow(**)$; objectwise isomorphisms from semisimplicity do not supply
+    its naturality or monoidality. The item records EGNO's Question 4.8.3 as a
+    warning and makes no claim that every fusion category is pivotal or spherical.
+23. `rem-the-boundary-of-the-fusion-category-development` — rem. Individually
+    defers: Frobenius–Perron dimension (needs a Perron–Frobenius spine), module
+    categories (new action and relative-tensor machinery), Drinfeld centres and
+    modularity (braided-centre and nondegeneracy theory), Deligne tensor products
+    (a separate universal construction), and Tannaka reconstruction (Hopf or
+    quasi-Hopf algebra). This is §8 denial 6 made local and specific.
+
+### Proof strategy — the hard unit theorem (item 12)
+
+1. Use rigidity to prove item 7 first; exact tensoring is the indispensable input.
+2. Follow EGNO §4.3's radical/endomorphism argument to show that the unit has no
+   nonsplit self-extension compatible with multiplication. Every use of finite
+   length and finite-dimensional homs is cited to items 2–4.
+3. Split the resulting finite-length unit into simple summands, obtaining item
+   12. Do **not** start by assuming the ambient category semisimple; that is the
+   stronger multifusion hypothesis, not the multitensor hypothesis.
+4. In the tensor case use the canonical scalar map
+   $k\to\operatorname{End}(\mathbf1)$ to rule out more than one nonzero simple
+   summand. This supplies item 13.
+5. Derive item 14 from the source's nonzero-object argument. It is a corollary,
+   not an extra axiom about evaluation.
+
+If this proof cannot be reproduced from EGNO's exact hypotheses, items 12–14
+become `rem-` items with `proved_here: false` and structured external dependencies;
+items 1–11 and 15–23 survive. No later item in the library may depend on that
+fallback until a build proves it.
+
+### `fs-` items (A page)
+
+- `fs-every-finite-k-linear-abelian-category-is-semisimple` — false; finiteness
+  and semisimplicity are separate hypotheses in item 5.
+- `fs-every-rigid-k-linear-abelian-monoidal-category-is-a-tensor-category` —
+  misses local finiteness, finite-dimensional homs, bilinearity and the unit
+  endomorphism condition.
+- `fs-a-tensor-functor-is-just-a-strong-monoidal-functor` — item 15 records the
+  exactness, faithfulness and $k$-linearity clauses.
+- `fs-the-grothendieck-ring-of-a-tensor-category-is-always-commutative` — item 20
+  gives only an anti-involution; without braiding the product need not commute.
+- `fs-objectwise-isomorphisms-x-isomorphic-to-x-double-dual-supply-a-pivotal-structure`
+  — item 22: naturality and monoidality are additional coherent data.
+
+### B page — `tensor-and-fusion-categories-examples`
+
+`ex-finite-dimensional-vector-spaces-form-a-fusion-category` *(CONTINGENT on
+the module tensor page; cite it and do not reconstruct tensor products here)* ·
+`ex-the-grothendieck-ring-of-finite-dimensional-vector-spaces` ·
+`ex-a-matrix-multifusion-category-with-nonsimple-unit` ·
+`ex-finite-group-representations-in-good-characteristic-form-a-fusion-category`
+*(CONTINGENT on the published Maschke and representation pages)* ·
+`cex-finite-group-representations-in-dividing-characteristic-need-not-be-semisimple`
+*(same contingency)* · `ex-fusion-rules-for-a-supplied-finite-simple-family` ·
+`cex-the-grothendieck-ring-does-not-record-associator-data` *(only if a sourced
+3-cocycle-twist example is already available; otherwise record the drop rather
+than inventing one)*.
+
+### Sources
+
+- **Etingof–Gelaki–Nikshych–Ostrik, *Tensor Categories***, author-final full
+  text, `https://math.mit.edu/~etingof/egnobookfinal.pdf`: §1.2 and §1.8 for
+  items 1–3; §§4.1–4.3 (printed pp. 67–72) for items 4–16; §4.8 (printed pp.
+  75–76) for items 21–22. Load-bearing exact results: Def. 4.1.1, Props. 4.2.1,
+  4.2.8, 4.2.9, 4.2.12, Cor. 4.2.13, Thm. 4.3.1, Cor. 4.3.2, Thm. 4.3.8,
+  Cor. 4.3.9, Rem. 4.3.10, Prop. 4.8.1 and Question 4.8.3. Primary full-text
+  treatment.
+- **Catherine Meusburger, *Tensor Categories***, complete FAU lecture notes,
+  `https://www.math.fau.de/wp-content/uploads/2024/01/Tensor-Categories.pdf`:
+  §§2.1–2.2 for rigid/pivotal background and §§8.1–8.2 (Defs. 8.1.7–8.1.9,
+  8.2.1–8.2.3) for the linear, finite, tensor and fusion conventions. Second
+  independent full lecture-note treatment.
+- **EGNO Ch. 1 §1.5** and this track's `MA-9` items 14–20 back every use of finite
+  length and Jordan–Hölder. The page does not appeal to semisimple module theory
+  by analogy.
+
+Exact heading dispositions are in §10.1. Component provenance is deterministic:
+items 1–16 and 19–23 have literature-derived Statements; item 18 has a
+literature-derived Statement and a source-following, house-reordered proof; item
+17 is the standard literature definition. Definition and remark proofs are
+`not-applicable`; theorem proofs are `literature-derived` unless the authoring
+cycle materially changes the route, in which case `ai-altered` records exactly
+the change. B-page contingencies are never dependencies.
+
+### Well-definedness and choice
+
+The field action on $\operatorname{End}(\mathbf1)$, the descent of multiplication
+to $K_0$, the descent of duality through short-exact relations, and the
+independence of fusion coefficients from decompositions are numbered obligations
+(§7 rows 55–58). All core statements are ZF: no proof requires choosing a
+skeleton or representatives of all isomorphism classes. A displayed finite list
+of simple representatives is **supplied data**; the intrinsic definitions use
+isomorphism classes. The B-page representation examples inherit exactly the
+choice and tensor-product assumptions of their published prerequisites.
+
+### Traps
+
+1. **Bilinear does not imply exact.** Item 7 spends rigidity through adjunctions.
+2. **“Finite” has three nearby meanings.** Items 2, 3 and 5 state them separately.
+3. **The unit scalar map is canonical.** Never write “choose
+   $\operatorname{End}(\mathbf1)\cong k$”.
+4. **The Grothendieck product must descend.** Item 18 is load-bearing.
+5. **Duality reverses order.** Item 20 is an anti-involution unless an additional
+   commutativity theorem applies.
+6. **Pivotal is coherent data.** Item 21 cannot prove item 22 false by choosing
+   objectwise isomorphisms.
+7. **No tensor product of modules is constructed here.** Every such B-page
+   example cites `abstract-algebra`'s planned page or is dropped.
+
+**Forward references: NONE.**
+
+---
+
 # 10. The canonical-coverage harvest and the source-convention register
 
 `CLAUDE.md` §"Source depth and the canonical-coverage harvest": every A/B pair is
@@ -2881,6 +3203,121 @@ itself contains cannot be satisfied by inventing anything.
 backing.** One tiebreaker use is recorded at §10.2 item 3 and is labelled as such.
 
 ## 10.1 Harvest tables
+
+### Riehl, *Category Theory in Context*, 2nd ed. — Chs 4–6
+
+Author full text: `https://emilyriehl.github.io/files/context.pdf`. Read Ch. 4
+§§4.1–4.4, 4.6–4.7 (printed pp. 132–180), Ch. 5 §§5.1–5.6 (pp. 182–218),
+and Ch. 6 §§6.1–6.3, 6.5 (pp. 220–250).
+
+| source heading and named results | disposition |
+|---|---|
+| 4.1 Adjoint functors: Def. 4.1.1, Lem. 4.1.3, Not. 4.1.5, Exs 4.1.6–4.1.15 | definition/lemma and the discrete, powerset, free/forgetful and field examples `included` — `MA-1` items 5–6, 31, 33–39; floor/ceiling `deferred` pending ordered-number definitions; ordinal and homotopical examples `out-of-scope`; remaining examples `inline`/B |
+| 4.2 Unit and counit as universal arrows: Lems 4.2.2–4.2.3, Def. 4.2.5, Rem. 4.2.6, Thm 4.2.7, Cor. 4.2.10, Lem. 4.2.11 | `included` — `MA-1` items 1, 5, 8, 17, 22 |
+| 4.3 The calculus of adjunctions: Props 4.3.1, 4.3.4–4.3.7 | `included` — `MA-1` items 13–16; Prop. 4.3.5 `already-published` as `thm-every-equivalence-can-be-made-an-adjoint-equivalence`; Prop. 4.3.6's post- and precomposition forms both `included` in item 15 |
+| 4.4 Contravariant and multivariable adjunctions: Def. 4.4.1, Props 4.4.4, 4.4.6, Def. 4.4.7 | `included`/`inline` — `MA-1` items 11, 20 and `MA-14`'s closed structure; convenient-topological examples `out-of-scope` |
+| 4.5 Adjunctions between homotopy categories | `out-of-scope` — homotopical category theory |
+| 4.6 Adjunctions, limits, and colimits: Prop. 4.6.1, Thm 4.6.2, Cors 4.6.3–4.6.10, Lem. 4.6.11, Def. 4.6.12, Ex. 4.6.13, Prop. 4.6.14, Cor. 4.6.15 | `included` — `MA-1` items 18, 24–32, `MA-2` items 1, 6–8, `MA-8` exact-functor block; module instances cite abstract algebra; categorical completeness results `already-published` |
+| 4.7 The adjoint functor theorems: Lems 4.7.1–4.7.2, Thm 4.7.3, Def. 4.7.4, Lem. 4.7.5, Defs 4.7.7–4.7.9, Thm 4.7.10, Lem. 4.7.11, Ex. 4.7.12, Cors 4.7.13–4.7.14, Thm 4.7.15 | `included` — `MA-1` item 9 and `MA-2` items 9–29, 31–34; Lem. 4.7.5's Statement is included but its class-choice proof is replaced by Leinster Lem. A.1; Def. 4.7.16/Thm 4.7.17 `deferred` under the accessible-category denial |
+| 5.1 Monads from adjunctions: Def. 5.1.1, Rem. 5.1.2, Lem. 5.1.3, examples, Def. 5.1.6, Ex. 5.1.7 | `included` — `MA-3` items 1–5, 28–34 and B examples |
+| 5.2 Adjunctions from monads: Defs 5.2.4, 5.2.8, 5.2.10, Lems 5.2.9, 5.2.12, Prop. 5.2.13, Lem. 5.2.14 | `included` — `MA-3` items 6–17 |
+| 5.3 Monadic functors: Def. 5.3.1, Prop. 5.3.3 | `included` — `MA-4` item 1 and `MA-3` items 22–24 |
+| 5.4 Canonical presentations via free algebras: Prop. 5.4.2, Def. 5.4.4, Lem. 5.4.6, Ex. 5.4.7, Def. 5.4.8, Prop. 5.4.9, Cor. 5.4.10 | `included` — `MA-4` items 3–10; Cor. 5.4.10 `inline` in Beck |
+| 5.5 Recognizing categories of algebras: Thm 5.5.1, Cor. 5.5.3, Defs 5.5.4–5.5.5, Prop. 5.5.8, Thm 5.5.9 | Beck and examples `included` — `MA-4` items 11–17; algebraic theories `deferred`; Paré's powerset theorem `out-of-scope` because nothing consumes the substantial special theorem |
+| 5.6 Limits and colimits of algebras: Lem. 5.6.1, Cor. 5.6.2, Thm 5.6.5, Cor. 5.6.6–5.6.14 | `included` — `MA-3` items 18–20, `MA-4` items 14–18, 24 and `MA-2` items 6–8; set/module instances `already-published`/inline |
+| 6.1 Kan extensions: Def. 6.1.1, Rem. 6.1.2, Prop. 6.1.6 | `included` — `MA-6` items 1–5 and 13; examples B/inline |
+| 6.2 Pointwise Kan extensions: Thm 6.2.1, Def. 6.2.6, Cor. 6.2.7, Cor. 6.2.14, Ex. 6.2.15 | `included` — `MA-6` items 6–8, 13 and the nonpointwise `fs-`; item 25 merges with item 13 at authoring because its Statement is the same corollary |
+| 6.3 Absolute and pointwise extensions: Def. 6.3.1, Lem. 6.3.2, Defs 6.3.5–6.3.6, Thm 6.3.7, Lem. 6.3.8 | `included` — `MA-6` items 9–12; Lem. 6.3.8 `inline` in item 10's proof |
+| 6.4 Derived functors as Kan extensions | `out-of-scope` — homological/homotopical algebra |
+| 6.5 Applications: Props 6.5.1–6.5.2, formula 6.5.3, Props 6.5.4, 6.5.6, Thms 6.5.7–6.5.8, Prop. 6.5.9, Def. 6.5.10, Exs 6.5.viii and 6.5.11–6.5.13 | `included` — `MA-6` items 15–24, with small-source house restrictions; field/Giry/simplicial/sheaf examples `out-of-scope` or `deferred` for their named subject prerequisites |
+
+### Leinster, *Basic Category Theory*, 2nd ed.
+
+Full CC BY-NC-SA text: `https://arxiv.org/pdf/1612.09375`. Read Ch. 2
+§§2.1–2.3 (pp. 41–64), §6.2 (pp. 145–157), §6.3 (pp. 157–170), and the
+Appendix (pp. 171–173).
+
+| heading and named result | disposition |
+|---|---|
+| 2.1 Definition and examples | adjunction definition/examples/composition `included` — `MA-1` items 5, 14, 33–37, 41; initial/terminal prerequisites `already-published`; remaining worked examples B |
+| 2.2 Adjunctions via units and counits: Lems 2.2.2, 2.2.4, Thm 2.2.5 and poset exercises | `included` — `MA-1` items 1, 4–6, 8, 21–23 |
+| 2.3 Adjunctions via initial objects: Lem. 2.3.5, Thm 2.3.6, Cor. 2.3.7 | `included` — `MA-1` items 7–10; comma categories `already-published` |
+| 6.2 Limits in presheaf categories: Cors 6.2.11–6.2.12, Warning 6.2.14, Def. 6.2.16, Thm 6.2.17, Ex. 6.2.25 | presheaf limits and category of elements `already-published`; density and warning `included` — `MA-6` item 19 and `fs-`; **Ex. 6.2.25 explicitly supplies the pointwise left-Kan/global-adjunction exercise form** — `MA-6` items 5–8 |
+| 6.3 Adjoint functor theorems: Thm 6.3.1, Prop. 6.3.7, Def. 6.3.9, Thm 6.3.10, Exs 6.3.11–6.3.14, Def. 6.3.15, Thm 6.3.20 | RAPL and AFT material `included` — `MA-1` items 24–25 and `MA-2` items 17, 22–23, 32–34; imprecise Thm 6.3.13 `deferred` in favour of Riehl's exact SAFT; cartesian-closed material `included` in `MA-14`; topos exercises `out-of-scope` |
+| Appendix: Lems A.1–A.2 and remaining steps | Lem. A.1 `included` — `MA-2` item 18's ZF proof; Lem. A.2 and remaining steps `included`/`inline` — `MA-2` items 21–22 |
+
+### Richter, *From Categories to Homotopy Theory*
+
+Corrected author-hosted full text:
+`https://www.math.uni-hamburg.de/personen/richter/bookdraft.pdf`. Read Ch. 4
+§§4.1–4.7 (pp. 59–82) and Ch. 6 §§6.1–6.6 (pp. 91–117). Richter assumes AC
+globally, so this source cross-checks Statements and proof shapes; it never sets
+the house choice cost.
+
+| heading and named results | disposition |
+|---|---|
+| 4.1–4.3 Kan extensions: Defs 4.1.1, 4.1.3, 4.1.5, Thms 4.1.4, 4.1.11, Lem. 4.1.10; Def. 4.2.1, Thm 4.2.2; Def. 4.3.1, Prop. 4.3.2, Thm 4.3.3 | `included` — `MA-6` items 1, 5–13; comma categories `already-published`; sheaf and homotopical examples `deferred`/`out-of-scope` |
+| 4.4 Ends and coends: Defs 4.4.1, 4.4.4, 4.4.6, Rem. 4.4.2, Exs 4.4.3–4.4.7 | `included` — `MA-5` items 1–4, 10 and B; module tensor example cites abstract algebra rather than reconstructing it |
+| 4.5 Twisted-arrow category: Defs 4.5.1–4.5.2, Prop. 4.5.3 | `included` — `MA-5` items 6–7, under the page's explicitly fixed orientation |
+| 4.6 Fubini: Not. 4.6.1, Rem. 4.6.2, Prop. 4.6.3 | `included` — `MA-5` item 11 with the exact existence hypotheses |
+| 4.7 Kan applications: Props 4.7.1–4.7.3 | `included` — `MA-6` items 15–17, but Prop. 4.7.3's defective converse is not cited; §10.3 uses Riehl Prop. 6.5.2 |
+| 6.1 Monads: Defs 6.1.1–6.1.2, Thm 6.1.3 | `included` — `MA-3` items 1, 4, 25; examples B |
+| 6.2 Eilenberg–Moore algebras and free presentations | `included` — `MA-3` items 6–10 and `MA-4` items 8–9 |
+| 6.3 Kleisli categories: Def. 6.3.1, Prop. 6.3.5, Thm 6.3.10 | `included` — `MA-3` items 12, 15, 17 |
+| 6.4 Lifting left adjoints | `deferred` — it is not used as a substitute for a sourced distributive-law theorem |
+| 6.5 Limits and colimits of algebras | `included` — `MA-3` items 18–19 and `MA-4` item 18 |
+| 6.6 Monadicity: Def. 6.6.1, Thm 6.6.2 | `included` — `MA-4` items 1, 11, 13 |
+
+### Loregian, *This is the (Co)end, My Only (Co)friend*
+
+Full text: `https://arxiv.org/pdf/1501.02503`. Read §§1.1.1, 1.2–1.3,
+§§2.1–2.3 and §4.1; no claim is made to have read the remainder.
+
+| heading and named results | disposition |
+|---|---|
+| 1.1.1 Dinatural transformations: Def. 1.1.1, Rems 1.1.2–1.1.3, Defs 1.1.4, 1.1.6 | `included`/`inline` — `MA-5` items 1–4 |
+| 1.2 Twisted arrows: Rem. 1.2.1, Def. 1.2.2, Prop. 1.2.3, equalizer/coequalizer displays, Def. 1.2.6 | `included` — `MA-5` items 6–8 and `MA-6` items 11–12; Prop. 1.2.10 subdivision `out-of-scope` alternative machinery. Loregian's orientation is opposite the library's, so the translation is explicit |
+| 1.3 Fubini: Thm 1.3.1 | `included` — `MA-5` item 11 |
+| 2.1 Yoneda/Kan preliminaries | `already-published`/`included` — Yoneda prerequisites and `MA-6` |
+| 2.2 Ninja Yoneda: Prop. 2.2.1, Rem. 2.2.2 | `included`/`inline` — `MA-5` item 14 |
+| 2.3 Kan extensions by coends: Prop. 2.3.6 | `included` — `MA-6` item 14; analytic-functor examples `out-of-scope` |
+| 4.1 Weighted limits: Def. 4.1.2, Ex. 4.1.4, Prop. 4.1.5, Exs 4.1.6–4.1.8, Rems 4.1.9–4.1.14, Prop. 4.1.11 | `included`/`inline` — `MA-5` items 8, 10, 15, 17, 21–23 and `MA-6` item 14; kernel-pair example B |
+| 4.2 chain/2-categorical examples; 4.3 enriched forms | 4.2 `out-of-scope`; 4.3 `deferred` to/partly `included` in `MA-17` rather than used on ordinary `MA-5` |
+
+### Cheng, *Iterated distributive laws* — §2
+
+Official CC-BY full text: `https://compositionality.episciences.org/13507/pdf`.
+
+| heading/result | disposition |
+|---|---|
+| §2, Def. 2.1: distributive law $ST\Rightarrow TS$ and its four Beck diagrams | `included` — `MA-3` item 26 |
+| §2, Thm 2.2: the composite monad $TS$ | `included` — `MA-3` item 27 |
+| §2, Exs 2.3–2.4 | `inline`/B examples |
+
+### Beck and Barr–Wells on monadicity
+
+Beck, *The tripleableness theorem*, TAC Reprint 31:
+`https://www.tac.mta.ca/tac/reprints/articles/31/tr31.pdf`; Barr–Wells,
+*Toposes, Triples and Theories*, TAC Reprint 12:
+`https://www.tac.mta.ca/tac/reprints/articles/12/tr12.pdf`, read §§3.3–3.4 and
+Thm 3.14.
+
+| heading/result | disposition |
+|---|---|
+| Beck's tripleability theorem | `included` — historical primary support for `MA-4` items 11–13; exact modern Statement follows Riehl Thm 5.5.1 |
+| Barr–Wells §§3.3–3.4, Thm 3.14 | `included` — `MA-4` items 11, 13; surrounding canonical-presentation work `inline`; remaining triple/topos theory `out-of-scope` |
+
+### Leinster, *Codensity and the ultrafilter monad*
+
+Full text: `https://arxiv.org/pdf/1209.3606`. Read §§1–3 and §5.
+
+| heading | disposition |
+|---|---|
+| §1 Ultrafilters | `already-published`/`included` — published ultrafilter items and `MA-3` item 33 |
+| §2 Codensity | `included` — `MA-6` item 23 |
+| §3 Finite sets | `included` — `MA-6` item 24, using a small skeleton |
+| §5 Kan-extension construction and monad laws | `included` — `MA-6` items 23–23a |
+| §4 integration; §§7–8 double duals/ultraproducts | `out-of-scope` — measure theory, linear-duality example and model theory; §6 `inline` interpretation only |
 
 ### Mac Lane, *Categories for the Working Mathematician*, 2nd ed.
 
@@ -2988,7 +3425,7 @@ page, and the available OCR mangles Thm 2.39's proof entirely.
 | Exercises 2A (additive categories), 2B (idempotents), 2C (groups in categories) | 2A `included` (`MA-7` items 1, 23); 2B `included` (`MA-7` items 50–55); 2C `out-of-scope` |
 | 3.3 Special Objects (67): Props 3.33, **3.35**, **3.36** | `included` — `MA-9` items 22–24 |
 | Ch 4 Metatheorems (94–103): 4.1 Very Abelian, 4.2 First Metatheorem, 4.3 Fully Abelian, 4.4 Mitchell's Theorem, Thm 4.44 | `deferred` — this is the embedding machinery the block deliberately refuses as a proof device; `MA-8` items 48–49 record the statement and the refusal. Exercise 4A (modularity for *very abelian* categories) is `deferred` in favour of Murfet's general proof (`MA-9` item 6) |
-| Ch 7 (138–150): **Thm 7.14**, **Thm 7.34 (Mitchell)** | `deferred` — `MA-8` item 48 carries the statement with `proved_here: false`; the proof runs through Ch 6 (Injective Envelopes) and needs Grothendieck categories, a subject area the library has not reached (§8 denial 5) |
+| Ch 7 (138–150): **Thm 7.14**, **Thm 7.34 (Mitchell)** | Thm 7.34 `included` as `MA-8` item 48 with `proved_here: false`; Thm 7.14 and the proof machinery are `deferred` — the route runs through Ch 6 (Injective Envelopes) and substantial embedding machinery not built here |
 
 ### Mitchell, *Theory of Categories* (1965), Ch I §§13–21 (pp. 15–35)
 
@@ -3001,7 +3438,7 @@ page, and the available OCR mangles Thm 2.39's proof entirely.
 | **18. Additive Categories**, Prop. 18.4 | `included` — `MA-7` items 18, 22; `MA-8` item 18's proof strategy |
 | 19. Exact Additive Categories | `inline` — `MA-8` item 17 |
 | **20. Abelian Categories**, Thm 20.1 | `included` — `MA-8` item 19 |
-| 21. The Category of Abelian Groups | `included` — `MA-8` item 39 |
+| 21. The Category of Abelian Groups | `included` — `MA-8` item 40 |
 
 ### Weibel, *An Introduction to Homological Algebra* — §1.2 (pp. 5–9), §1.3 (pp. 10–14), §1.6 (pp. 25–30), App. A.4 (pp. 424–427), plus both errata files
 
@@ -3009,7 +3446,7 @@ page, and the available OCR mangles Thm 2.39's proof entirely.
 |---|---|
 | §1.2 Operations on Chain Complexes: Def. 1.2.1, **Def. 1.2.2**, Thm 1.2.3 | Defs `included` (`MA-8` item 9, `MA-10` item 2); the chain-complex operations are `out-of-scope`, belonging to `homological-algebra` (§11 amendment 4) |
 | §1.3 Long Exact Sequences: Thm 1.3.1, Ex. 1.3.1, **Ex. 1.3.2 (3×3)**, **Snake Lemma 1.3.2**, Etymology, Remark, **Ex. 1.3.3 (5-Lemma)**, Addendum 1.3.3, **Prop. 1.3.4** | the diagram lemmas `included` (`MA-11` items 7, 16, 20); Thm 1.3.1 and the long exact sequence of a complex `out-of-scope` — `homological-algebra` |
-| §1.6 More on Abelian Categories: **Freyd-Mitchell 1.6.1**, Lem. 1.6.2, Functor Categories 1.6.4, Def. 1.6.5 (Sheaves), Cor. 1.6.9, Yoneda 1.6.10–1.6.11, Prop. 1.6.12, Cor. 1.6.13 | 1.6.1 `included` as `MA-8` item 48 with `proved_here: false`; 1.6.4 `included` as `MA-8` item 41; the Yoneda items `already-published`; **Def. 1.6.5 (Sheaves) `deferred`** — sheaves need a site or a topological base the library has not built, and `MA-9`'s B page records the dropped example; 1.6.12–1.6.13 `deferred` (localizing subcategories, §8 denial 5) |
+| §1.6 More on Abelian Categories: **Freyd-Mitchell 1.6.1**, Lem. 1.6.2, Functor Categories 1.6.4, Def. 1.6.5 (Sheaves), Cor. 1.6.9, Yoneda 1.6.10–1.6.11, Prop. 1.6.12, Cor. 1.6.13 | 1.6.1 `included` as `MA-8` item 48 with `proved_here: false`; 1.6.4 `included` as `MA-8` item 42; the Yoneda items `already-published`; **Def. 1.6.5 (Sheaves) `deferred`** — sheaves need a site or a topological base the library has not built, and `MA-9`'s B page records the dropped example; 1.6.12–1.6.13 `deferred` (localizing subcategories, §8 denial 5) |
 | §2.6.15 (p. 57) filtered colimits of modules are exact | `included` — `MA-9` items 32, 35a |
 | App. A.4: A.4.1, **Def. A.4.2**, **A.4.3 (AB3/AB3\*)**, Ex. A.4.4, (AB4)/(AB4\*), Ex. A.4.5, **A.4.6 (AB5/AB5\*)**, Ex. A.4.7, Exercises A.4.1–A.4.7 | `included` — `MA-7` items 1, 23; `MA-9` items 27–30, 35 and trap 9. **Weibel gives no AB6** |
 | App. A.5 Limits and Colimits · A.6 Adjoint Functors | `already-published` / `included` at `MA-1` |
@@ -3064,7 +3501,7 @@ byte-identical to the live URL by hash.
 | §1.9 (p. 134): famille de générateurs | `included` — `MA-9` item 22 |
 | the dual axioms AB3\*–AB6\* | **not stated by Grothendieck** — he leaves them to the reader, so `MA-9` items 27–29 cite Weibel and Stacks for the starred halves. §10.2 item 6 |
 
-### EGNO, *Tensor Categories* — Ch 1 (pp. 1–19), Ch 2 (pp. 21–47), §4.1, §4.7, §8.1, §8.10
+### EGNO, *Tensor Categories* — Ch 1 (pp. 1–19), Ch 2 (pp. 21–47), §§4.1–4.3, 4.7–4.8, §8.1, §8.10
 
 | heading | disposition |
 |---|---|
@@ -3072,7 +3509,7 @@ byte-identical to the live URL by hash.
 | **1.5 Length of objects and the Jordan-Hölder theorem** | `included` — `MA-9` items 14–19 |
 | 1.6 Projective and injective objects | `included` — `MA-9` items 36–41 |
 | 1.7 Higher Ext groups and group cohomology | `out-of-scope` — `homological-algebra` |
-| 1.8 Locally finite (artinian) and finite abelian categories | `deferred` — the $k$-linear local finiteness that §8 denial 6 names as the missing prerequisite for fusion categories |
+| 1.8 Locally finite (artinian) and finite abelian categories | `included` — `MA-18` items 2–3 |
 | 1.9 Coalgebras · 1.12 The finite dual of an algebra · 1.13 Pointed coalgebras | `out-of-scope` — Hopf-algebra theory, §8 denial 6 |
 | **1.10 The Coend construction** | `already-published` in this track — `MA-5` items 4, 8 |
 | 1.11 Deligne's tensor product of locally finite abelian categories | `deferred` — rests on 1.8 |
@@ -3088,12 +3525,32 @@ byte-identical to the live URL by hash.
 | **2.10 Rigid monoidal categories** (Defs 2.10.1–2.10.2, Rem. 2.10.3, Prop. 2.10.5, Prop. 2.10.8, Rem. 2.10.9, Exs 2.10.4, 2.10.12, 2.10.15) | `included` — `MA-16` items 1–17 |
 | 2.11 Invertible objects and Gr-categories | `deferred` — Gr-categories need group cohomology |
 | 2.12 2-categories | `already-published` — `def-strict-two-category` |
-| **4.1 Tensor and multitensor categories** (Def. 4.1.1, Def. 4.2.3, Rem. 4.2.2) | `deferred`, and quoted — `MA-16` item 29 quotes Def. 4.1.1 with its hypotheses as the boundary marker; the notion itself is denied at §8 denial 6 |
+| **4.1 Tensor and multitensor categories** (Def. 4.1.1) | `included` — `MA-18` items 4–6 |
+| **4.2 Exactness properties** (Prop. 4.2.1, Rem. 4.2.2, Def. 4.2.3, Def. 4.2.5, Rem. 4.2.6, Props 4.2.8–4.2.10, Prop. 4.2.12, Cor. 4.2.13) | `included` — `MA-18` items 7–11 and 15–16; **Prop. 4.2.10 is `deferred` specifically** because its finite-ring and Frobenius–Perron machinery lies beyond §8 denial 6 |
+| **4.3 Semisimplicity of the unit** (Thm 4.3.1, Cor. 4.3.2, Def. 4.3.5, Thm 4.3.8, Cor. 4.3.9, Rem. 4.3.10) | the unit and functor results are `included` — `MA-18` items 12–16; the full component-matrix formalism of Def. 4.3.5 is `inline` in item 12's proof because no later item consumes the notation |
 | **4.7 Quantum traces, pivotal and spherical categories** (Def. 4.7.1, Props 4.7.3, 4.7.5, Defs 4.7.7, 4.7.11, 4.7.14, **Thm 4.7.15**, Ex. 4.7.16) | `included` — `MA-16` items 19–26 |
 | **Cor. 4.7.13** (dimensions are algebraic integers) | `deferred` — **specifically denied** at §8 denial 6; it needs the integrality theory of fusion categories |
+| **4.8 Semisimple multitensor categories** (Prop. 4.8.1, Question 4.8.3, Prop. 4.8.4) | Prop. 4.8.1 and Question 4.8.3 `included` — `MA-18` items 21–22; Prop. 4.8.4 `inline` in the source discussion rather than minted because nothing downstream uses the simple-object trace result |
 | **8.1 Definition of a braided category** (Def. 8.1.1, Ex. 8.1.6, Def. 8.1.7, Rem. 8.1.8, Prop. 8.1.10) | `included` — `MA-15` items 1, 4, 5, 9, 10 |
 | **8.10 Ribbon monoidal categories** (Def. 8.10.1, Prop. 8.10.6, (8.35)) | `included` — `MA-16` items 18, 27–28 |
-| Chs 3, 5, 6, 7, 9 and the rest of Ch 8 | `out-of-scope` — module categories, Frobenius–Perron dimensions, module categories over fusion categories, modular categories; all rest on §8 denial 6 |
+| Chs 3, 5, 6, 7, 9 and the rest of Ch 8 | `deferred`/`out-of-scope` result by result under §8 denial 6 — Frobenius–Perron dimension, module categories, centres/modularity and reconstruction each require the separately named machinery in `MA-18` item 23 |
+
+### Meusburger, *Tensor Categories* (FAU lecture notes, 31 October 2023)
+
+Full text: `https://www.math.fau.de/wp-content/uploads/2024/01/Tensor-Categories.pdf`.
+Read §§1.1–1.2, 2.1–2.2, 3.1, 3.3, 8.1 from Def. 8.1.7, and the opening of §8.2.
+
+| heading or named result | disposition |
+|---|---|
+| 1.1 Categories and monoidal categories; Defs 1.1.1, 1.1.9–1.1.11 | `included` — `MA-12` and `MA-15`; categorical prerequisites `already-published` |
+| 1.2 Strictification and coherence; Lem. 1.2.1, Cor. 1.2.2, Thms 1.2.3–1.2.4 | `included` — `MA-12` unit results and `MA-13` strictification/coherence |
+| 2.1 Rigid monoidal categories; Def. 2.1.1, Props 2.1.2, 2.1.4–2.1.5 | `included` — `MA-16` items 1–12 |
+| 2.2 Pivotal categories and traces; Def. 2.2.1, Lem. 2.2.5, Cor. 2.2.6 | `included` — `MA-16` items 19–28 |
+| 3.1 Braided categories; Defs 3.1.1, 3.1.6, Prop. 3.1.8 | `included` — `MA-15` |
+| 3.2 Centre | `deferred` — Drinfeld-centre theory is individually denied at §8.6 |
+| 3.3 Ribbon categories; Def. 3.3.1, Lem. 3.3.2 | `included` — `MA-16` items 27–28 |
+| 8.1 $F$-linear abelian categories; Defs 8.1.7–8.1.9 | `included` — `MA-18` items 1–3; Prop. 8.1.10 Eilenberg–Watts is `deferred` because it needs the module-functor/reconstruction spine |
+| 8.2 Tensor categories and reconstruction; Defs 8.2.1–8.2.3 | definitions `included` — `MA-18` items 4–6; Thm 8.2.5 reconstruction `deferred` under §8 denial 6 because Hopf/Tannaka machinery is absent |
 
 ### Joyal–Street, *Braided monoidal categories*, Macquarie Report 860081 (1986) — §§1–4 read closely
 
@@ -3130,7 +3587,7 @@ Introduction §(vi).
 | 2.2 The functor-category $[\mathcal A,\mathcal B]$ for small $\mathcal A$ — (2.10), (2.16) | `deferred` — the enriched functor category needs extraordinary naturality; recorded, not built |
 | 2.3 The isomorphism $[\mathcal A\otimes\mathcal B,\mathcal C]\cong[\mathcal A,[\mathcal B,\mathcal C]]$ | `deferred` — rests on 2.2 |
 | **2.4 The (strong) Yoneda lemma** — (2.31)–(2.33) | `included` — `MA-17` items 21, 23 |
-| 2.5 The free $\mathcal V$-category on a Set-category — (2.39) | `inline` — used by `MA-17` item 27's definition of conical limit |
+| 2.5 The free $\mathcal V$-category on a Set-category — (2.38)–(2.40) | `included` — `MA-17` item 26a, used by item 27's definition of conical limit |
 | 2.6 · 3.11 · 3.12 Universe-enlargement | `out-of-scope` — universes are denied at §8 denial 1 |
 | **3.1 Indexing types; limits and colimits** — (3.1)–(3.7) | `included` — `MA-5` item 15; `MA-17` item 26 |
 | 3.2 Preservation of limits and colimits | `included` — `MA-5` item 22 |
@@ -3194,7 +3651,7 @@ Ch 6 is cited anywhere in this file. §12, seam S-7.
 | **1.10 Some diagram lemmas** (Lem. 1.10.1, Lem. 1.10.8) | `included` — `MA-10` item 36; `MA-11` item 8's comparison |
 | 1.11 Exact functors | `included` — `MA-8` item 33 |
 | 1.12 Torsion theories · 1.13 Localizations · **1.14 The embedding theorem** | `deferred` — §8 denial 5 and §8 denial 7 |
-| **Ch 6 "Enriched category theory" (pp. 291–348)**: 6.1 Symmetric monoidal closed categories (292) · 6.2 Enriched categories (300) · 6.3 The enriched Yoneda lemma (309) · **6.4 Change of base (313)** · 6.5 Tensors and cotensors (320) · **6.6 Weighted limits (325)** · **6.7 Enriched adjunctions (340)** · 6.8 Exercises (347) | `included` — `MA-17` items 3, 5, 8, 17, 21, 24, 26, 32, 34–36, **38–43**. Named results recovered: Defs 6.2.3–6.2.4, Props 6.2.5–6.2.11, **Thm 6.3.5**, Def. 6.4.1, Props 6.4.2–6.4.8, Def. 6.5.1, Props 6.5.4–6.5.8, Defs 6.6.3–6.6.4, Def. 6.6.8, **Thm 6.6.14**, **Thm 6.6.18**, Props 6.7.3–6.7.7. **6.7 is no longer `deferred`** — it supplies the enriched adjoint functor theorem, which Kelly §1.11 does not. §6.2.10–6.2.11 (V-distributors) `deferred`: bicategories of distributors are a subject area. 6.8 Exercises `inline`. **Provenance: numbers from OCR snippets; Def. 6.2.1's text unrecovered; nothing quoted verbatim.** §12 seam S-7 |
+| **Ch 6 "Enriched category theory" (pp. 291–348)**: 6.1 Symmetric monoidal closed categories (292) · 6.2 Enriched categories (300) · 6.3 The enriched Yoneda lemma (309) · **6.4 Change of base (313)** · 6.5 Tensors and cotensors (320) · **6.6 Weighted limits (325)** · **6.7 Enriched adjunctions (340)** · 6.8 Exercises (347) | `included` — `MA-17` items 3, 5, 8, 17, 21, 24, 26, 26a, 32, 34–36, **39–43**. Named results recovered: Defs 6.2.3–6.2.4, Props 6.2.5–6.2.11, **Thm 6.3.5**, Def. 6.4.1, Props 6.4.2–6.4.8, Def. 6.5.1, Props 6.5.4–6.5.8, Defs 6.6.3–6.6.4, Def. 6.6.8, **Thm 6.6.14**, **Thm 6.6.18**, Props 6.7.3–6.7.7. **6.7 is no longer `deferred`** — it supplies the enriched adjoint functor theorem. §6.2.10–6.2.11 (V-distributors) `deferred`: bicategories of distributors are a subject area. 6.8 Exercises `inline`. **Provenance: numbers from OCR snippets; Def. 6.2.1's text unrecovered; nothing quoted verbatim.** §12 seam S-7 |
 | Chs 2, 3, 5, 7, 8 (regular categories, algebraic theories, accessible categories, topological categories, fibred categories) | `out-of-scope` — each is a subject area; accessible categories are §8 denial 4 |
 | **vol 1 Ch 6 "Flat functors and Cauchy completeness" (pp. 250–280)** | `out-of-scope`, and recorded **only to prevent a mis-citation**: it is not the enriched chapter, and "Borceux Ch 6" without a volume is ambiguous |
 
