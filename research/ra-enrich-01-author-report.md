@@ -193,3 +193,43 @@ The mandated command was run separately on every file that was authored:
 No precheck was possible for item 6 because its dependency blocker prevented an
 honest item file. No judge, audit, publication, page edit, plan-spec edit,
 dependency gate, plan-validation gate, or level-build gate was performed.
+
+## Item 6 amendment — authored on the amended dependency contract
+
+### `thm-analytic-sine-cosine-agree-with-right-triangle-ratios`
+
+- **Outcome.** The amended dependency set closes the earlier gap, and the item
+  has now been authored as a draft without changing the approved statement.
+- **Provenance rationale.** The statement is `literature-derived`: Lebl
+  §11.4.3 identifies the analytic unit-circle parametrisation with radian arc
+  length and the standard geometric sine and cosine, while OpenStax §§7.2–7.3
+  give the acute right-triangle ratios and their unit-circle coordinate form.
+  The proof is `ai-altered` because it replaces those sources' geometric
+  presentation with a proof through the library's exact continuity,
+  intermediate-value, first-positive-zero, monotonicity, square-root, norm,
+  Pythagorean, and radian interfaces.
+- **Proof route.** Continuity and the sign change from
+  $\cos0=1$ to $\cos2<0$ first produce a positive zero below $2$; minimality
+  of $\pi/2$ then gives $\pi/2<2$ and the explicit containment
+  $[0,\pi/2]\subset[0,2)$. The intermediate value theorem gives an angle with
+  cosine $A/H$, strict decrease gives uniqueness, and positivity of sine on
+  $(0,2)$ selects the positive square root in the Pythagorean identity. The
+  radian definition then identifies the arc measure, and Euclidean side
+  lengths identify the two ratios in the coordinate triangle.
+- **Boundary pass.** The hypotheses $A,O>0$ give $H>0$ and put both normalized
+  coordinates strictly between $0$ and $1$, so the IVT witness cannot be an
+  endpoint. The preliminary IVT use and the angle construction each require
+  only one existential witness; strict monotonicity makes the latter unique.
+  The containment needed for the $(0,2)$ positivity and monotonicity lemma is
+  proved explicitly. Axis and quadrantal cases are excluded: if a leg is zero,
+  the unit-circle value remains meaningful but the coordinate configuration is
+  degenerate, so no acute-triangle side-ratio convention is imposed.
+- **Adjustment.** None. The title, hypotheses, open angle interval, uniqueness,
+  arc assertion, and right-triangle conclusions match the approved statement.
+- **Disk-state note.** The dispatch describes every amended interface as
+  published, but `def-radian-angle-by-unit-circle-arc-length` remains a draft on
+  disk. It is the approved earlier same-run dependency and was left untouched;
+  this theorem is likewise draft and unplaced pending the owner's publication
+  stage.
+- **Precheck.** The prescribed item-only precheck passed cleanly on the first
+  run; no stratification repair was required.
