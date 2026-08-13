@@ -899,6 +899,23 @@ build and wave did and where its evidence lives.
 
 Alpha's lane cap is 1 because Alpha is the single writer of the prose scaffolds.
 
+**`scaffolder` (owner, 2026-08-13) is Alpha's runner, model, effort and window
+with a different cap, and the difference is why it is a separate row rather than
+a raised `alpha` cap.** The job it serves is concurrent SUBJECT-track prose
+scaffolding outside any level build — one Opus 5 lane per subject, each
+researching sources and writing one track file. Alpha's cap of 1 is not a
+resource limit but a **mutual-exclusion guarantee**: within a level Alpha is the
+single writer of a shared artifact set, and two concurrent Alphas overwrite each
+other silently. Raising that cap to run a scaffolding job would delete the
+guarantee for every future build. A scaffolder instead **owns exactly one track
+file that no sibling may open for writing**, so mutual exclusion comes from the
+ownership contract in the run's SEAMS record, and the cap is free to express the
+constraint that actually binds here: memory. Each lane is a 1M-window `claude`
+process that itself fans out to research subagents in-process, so the ceiling is
+the same class of limit `UNATTENDED-AUDIT.md` records behind the judge-lane caps.
+It is set to 4 against measured free RAM on a 16 GB host and should be raised
+only against a fresh measurement, never by assumption.
+
 **The drivers dispatch a step's agents in PARALLEL** (owner, 2026-08-05, binding
 on this and every future session). Both `run-level.mjs` and `run-wave.mjs` used a
 serial `for` loop that blocked on each dispatch, which made the surrounding

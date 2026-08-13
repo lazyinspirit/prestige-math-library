@@ -110,6 +110,25 @@ const ROLES = Object.freeze({
   refuter:      { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
   orchestrator: { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
 
+  // `scaffolder` (owner, 2026-08-13): concurrent SUBJECT-track prose scaffolding,
+  // outside any level build. Same runner, model, effort and window as `alpha` —
+  // the owner asked for Opus 5 at xhigh per subject — but a different cap, and the
+  // difference is the whole reason it is a separate row rather than a raised
+  // `alpha` cap.
+  //
+  // Alpha's cap of 1 is NOT a resource limit. It is a mutual-exclusion guarantee:
+  // within a level, Alpha is the single writer of a SHARED set of artifacts, and
+  // two concurrent Alphas silently overwrite each other. Raising that cap to run
+  // this job would delete the guarantee for every future build. A scaffolder
+  // instead owns exactly one subject file that no sibling may open for writing,
+  // so mutual exclusion is supplied by the ownership contract in the run's SEAMS
+  // record, and the cap is free to express the real constraint here, which is
+  // memory: each lane is a 1M-window claude process that itself fans out to
+  // research subagents in-process, and this host has 16 GB. Four measured safe
+  // with headroom; the ceiling is the same class of limit UNATTENDED-AUDIT.md
+  // records behind the judge-lane caps. Raise it only against measured free RAM.
+  scaffolder:   { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 4, why: 'one per subject track; owns exactly one prose scaffold file' },
+
   // ---- the published-page retro-audit (AUDIT-WORKFLOW.md, A0 to A10) --------
   // Every Codex audit lane receives the explicit xhigh/1M configuration below;
   // the tool-less DeepSeek refuter maps xhigh to its API's `max` value.
