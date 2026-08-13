@@ -7,13 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [cor-rational-function-field-as-a-fraction-field, cex-ordered-field-not-archimedean, def-ordered-field, def-field, def-archimedean-field, lem-of-square-positive, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, thm-reals-ordered-field]
+deps: [cor-rational-function-field-as-a-fraction-field, cex-ordered-field-not-archimedean, def-ordered-field, def-field, def-archimedean-field, lem-of-square-positive, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, thm-reals-ordered-field, thm-polynomial-degree-of-a-product-over-a-domain, def-polynomial-degree-leading-coefficient-and-monic, lem-of-abs-value, def-abs-value]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  verified:
+    model: gpt-5.6-sol-codex-subscription
+    verdict: certify
+    date: 2026-08-13
+    scope: published-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -58,7 +64,7 @@ in usable form. Three things are established below:
 
 [L1] $(\mathbb{R}(t), P)$ is an ordered field, and $n \cdot 1 < t$ for every natural $n$, so it is not Archimedean ([[cex-ordered-field-not-archimedean]], [[def-ordered-field]], [[def-archimedean-field]]).
 
-[L2] A nonzero real polynomial has finitely many real roots, and beyond all of them its values have the constant sign of its leading coefficient; $\mathbb{R}[t]$ is an integral domain, so $\operatorname{lc}(pq) = \operatorname{lc}(p)\operatorname{lc}(q)$ and a product of nonzero polynomials is nonzero ([[cex-ordered-field-not-archimedean]], [[thm-reals-ordered-field]], [[def-field]]).
+[L2] For a commutative ring $R$ and a nonzero $f \in R[x]$, $\deg f$ is the largest index carrying a nonzero coefficient and $\operatorname{lc}(f)$ is that coefficient ([[def-polynomial-degree-leading-coefficient-and-monic]]). For a field $F$ the polynomial ring $F[t]$ is an integral domain ([[cor-rational-function-field-as-a-fraction-field]]), and $\mathbb{R}$ is a field ([[thm-reals-ordered-field]], [[def-field]]). If $R$ is an integral domain and $f, g \in R[x]$ are nonzero, then $fg \ne 0$, $\deg(fg) = \deg f + \deg g$ and $\operatorname{lc}(fg) = \operatorname{lc}(f)\operatorname{lc}(g)$ ([[thm-polynomial-degree-of-a-product-over-a-domain]]).
 
 [L3] In $\mathbb{R}$, a nonzero square is positive ([[lem-of-square-positive]]); a product of two nonzero reals is positive exactly when both are positive or both are negative ([[lem-of-sign-rules]]).
 
@@ -66,23 +72,27 @@ in usable form. Three things are established below:
 
 [L5] The canonical embedding of $\mathbb{Q}$ into an ordered field is an order embedding, so a rational $q > 0$ names a positive element $q \cdot 1$ of $\mathbb{R}(t)$ ([[lem-of-q-embeds]]).
 
+[L6] In an ordered field $|u| = u$ when $u \ge 0$ and $|u| = -u$ when $u < 0$ ([[def-abs-value]]), and $-|u| \le u \le |u|$ for every $u$ ([[lem-of-abs-value]]); $\mathbb{R}$ is a totally ordered field ([[thm-reals-ordered-field]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 For nonzero $p, q \in \mathbb{R}[t]$ there is a real $X$ beyond which neither $p$ nor $q$ vanishes, so $f = p/q$ has a value $f(x) = p(x)/q(x)$ for every $x > X$, and the sign of that value is the sign of $\operatorname{lc}(p)\operatorname{lc}(q)$; hence $f \in P$ exactly when $\operatorname{lc}(p)\operatorname{lc}(q) > 0$. [L2, L3]
+1.1 Let $p \in \mathbb{R}[t]$ be nonzero, with $m = \deg p$ and $a = \operatorname{lc}(p) \ne 0$, so that $p(x) = a x^m + \sum_{i<m} a_i x^i$ for every real $x$. If $m = 0$ then $p(x) = a$ for every $x$. If $m \ge 1$, put $C = \sum_{i<m}|a_i| \ge 0$; for $x \ge 1$ and $i < m$ one has $0 < x^i \le x^{m-1}$, and $-|a_i| \le a_i \le |a_i|$, so $-|a_i| x^{m-1} \le a_i x^i \le |a_i| x^{m-1}$, and adding these $m$ inequalities gives $-C x^{m-1} \le \sum_{i<m} a_i x^i \le C x^{m-1}$. Hence if $a > 0$ then $p(x) \ge a x^m - C x^{m-1} = x^{m-1}(a x - C) > 0$ for every $x > \max(1, C/a)$; and if $a < 0$, the same bound applied to $-p$, whose leading coefficient is $-a > 0$, gives $p(x) < 0$ for every $x > \max(1, C/(-a))$. In every case there is a real $X_p$ such that $p(x) \ne 0$ and $p(x)$ has the sign of $\operatorname{lc}(p)$ for every $x > X_p$. [given, L2, L3, L6, algebra]
 
 1.2 If $p/q = p'/q'$ then $pq' = p'q$, so $\operatorname{lc}(p)\operatorname{lc}(q') = \operatorname{lc}(p')\operatorname{lc}(q)$; multiplying both sides by $\operatorname{lc}(q)\operatorname{lc}(q')$ gives $\operatorname{lc}(p)\operatorname{lc}(q)\cdot\operatorname{lc}(q')^2 = \operatorname{lc}(p')\operatorname{lc}(q')\cdot \operatorname{lc}(q)^2$, and both squares are positive, so $\operatorname{lc}(p)\operatorname{lc}(q)$ and $\operatorname{lc}(p')\operatorname{lc}(q')$ have the same sign. [L2, L3]
 
-2.1 The rule of step 1.1 is therefore independent of the representative and computes membership in $P$; combined with [L1] it computes the order: $p/q < p'/q'$ exactly when the numerator and denominator of $p'/q' - p/q$, written in any representative, have leading coefficients of positive product. [step 1.1, step 1.2, L1, L4]
+2.1 For nonzero $p, q \in \mathbb{R}[t]$ put $X = \max(X_p, X_q)$ with $X_p, X_q$ as in step 1.1: for every $x > X$ neither $p$ nor $q$ vanishes, so $f = p/q$ has a value $f(x) = p(x)/q(x)$ there, and since $p(x)$ has the sign of $\operatorname{lc}(p)$ and $q(x)$ the sign of $\operatorname{lc}(q)$, the sign of that value is the sign of $\operatorname{lc}(p)\operatorname{lc}(q)$; hence $f \in P$ exactly when $\operatorname{lc}(p)\operatorname{lc}(q) > 0$. [step 1.1, L3]
 
-2.2 $1/t \in P$, since $\operatorname{lc}(1)\operatorname{lc}(t) = 1 > 0$; equivalently, $t \in P$ and inverses of positives are positive. [step 1.1, L3, L4]
+3.1 The rule of step 2.1 is therefore independent of the representative and computes membership in $P$; combined with [L1] it computes the order: $p/q < p'/q'$ exactly when the numerator and denominator of $p'/q' - p/q$, written in any representative, have leading coefficients of positive product. [step 1.2, step 2.1, L1, L4]
 
-3.1 For every rational $q > 0$: $q \cdot 1 - 1/t = (qt - 1)/t$, whose leading coefficients have product $q \cdot 1 = q > 0$, so $1/t < q \cdot 1$. Together with step 2.2, $0 < 1/t < q\cdot 1$ for every positive rational $q$. [step 1.1, step 2.1, step 2.2, L3, L5]
+3.2 $1/t \in P$, since $\operatorname{lc}(1)\operatorname{lc}(t) = 1 > 0$; equivalently, $t \in P$ and inverses of positives are positive. [step 2.1, L3, L4]
 
-3.2 For every natural $n$: $t - n \cdot 1$ has leading coefficients with product $1 > 0$, so $n \cdot 1 < t$; and $t^2 - t = t(t-1)$ likewise gives $t < t^2$. [step 1.1, step 2.1, L2, L3]
+4.1 For every rational $q > 0$: $q \cdot 1 - 1/t = (qt - 1)/t$, whose leading coefficients have product $q \cdot 1 = q > 0$, so $1/t < q \cdot 1$. Together with step 3.2, $0 < 1/t < q\cdot 1$ for every positive rational $q$. [step 2.1, step 3.1, step 3.2, L3, L5]
 
-4.1 So $\mathbb{R}(t)$ is an ordered field, computed by a single product of leading coefficients, in which $t$ is larger than every canonical natural and $1/t$ is a positive infinitesimal. [step 2.1, step 3.1, step 3.2, L1] ∎
+4.2 For every natural $n$: $t - n \cdot 1$ has leading coefficients with product $1 > 0$, so $n \cdot 1 < t$; and $t^2 - t = t(t-1)$ likewise gives $t < t^2$. [step 2.1, step 3.1, L2, L3]
+
+5.1 So $\mathbb{R}(t)$ is an ordered field, computed by a single product of leading coefficients, in which $t$ is larger than every canonical natural and $1/t$ is a positive infinitesimal. [step 3.1, step 4.1, step 4.2, L1] ∎
 
 ## Remarks
 

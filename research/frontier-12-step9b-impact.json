@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "reviewer": "alpha (Claude Opus 5, claude runner, xhigh, 1M window) \u2014 step 9b, 2026-08-13. Separate file from research/frontier-12-impact-audit.json, which is the step-8/8b receipt and is cited by name in research/frontier-12-audit-coverage.json and research/frontier-12-alpha-step8b.md; naming follows research/frontier-12-step9-impact.json.",
+  "source": {
+    "touch_ledger": "research/frontier-12-touches.json",
+    "from": "after-step8",
+    "to": "working tree at 2026-08-13, after the step-9 [L2] repair"
+  },
+  "changed_interfaces": [
+    "cex-ordered-field-not-archimedean",
+    "ex-rational-function-field-order"
+  ],
+  "required_review": [
+    "cex-q-not-dense-in-an-ordered-field",
+    "cex-unbounded-set-has-no-sup",
+    "def-archimedean-field",
+    "def-formal-laurent-series",
+    "ex-cauchy-complete-not-complete-field",
+    "ex-inf-of-reciprocals",
+    "ex-rational-function-field-order",
+    "fs-every-set-has-sup",
+    "fs-nested-intervals-implies-lub",
+    "lem-bw-implies-archimedean",
+    "lem-integer-part"
+  ],
+  "what_actually_changed": {
+    "cex-ordered-field-not-archimedean": "Citation-only, verified against the diff of a891a3f7. Three changes: (1) frontmatter gained `forward_refs: [cor-rational-function-field-as-a-fraction-field]`; (2) the `**Given:**` line gained the parenthetical `(constructed at [[cor-rational-function-field-as-a-fraction-field]])`; (3) the verification stamp was re-issued (sol/2026-08-03/published-audit -> terra/2026-08-13/published-dependency-repair). The `## Statement refuted` section, the positive cone P, facts [L1]-[L4] and every proof step 1.1-4.1 are byte-identical. No proposition this item asserts moved, so no consumer of its Statement can have been invalidated.",
+    "ex-rational-function-field-order": "Substantive but strictly strengthening, per research/frontier-12-alpha-step9.md. [L2] was re-cited so every clause quotes a published Statement; a new [L6] was added for the absolute value; the eventual-sign claim stopped being an unlicensed Fact and became a proved step 1.1 with an explicit threshold X_p; steps renumbered 1.1->(new 1.1 + 2.1), 2.1->3.1, 2.2->3.2, 3.1->4.1, 3.2->4.2, 4.1->5.1. `deps` gained four ids and lost none. Nothing in the Example section, the title, the Remarks or `sources.references` changed. Every conclusion the item previously asserted it still asserts, verbatim."
+  },
+  "dispositions": [
+    {
+      "id": "cex-q-not-dense-in-an-ordered-field",
+      "status": "still-licensed",
+      "notes": "The ONLY load-bearing consumer of either changed item, and the only one carrying a deps edge to them. Checked clause by clause against both changed texts. Its [L1] draws 'R(t) is an ordered field and is not Archimedean' from cex-ordered-field-not-archimedean \u2014 that item's Statement refuted and its proof are byte-identical across the change, so [L1] is untouched. Its [L2] draws exactly two conclusions from ex-rational-function-field-order: '0 < 1/t' and '1/t < q*1 for every rational q > 0'. Those are that item's steps 3.2 and 4.1 (were 2.2 and 3.1), neither of which changed a character. It is used at steps 1.1, 1.2 and 2.1 only for those two inequalities. On the dispatch's specific question \u2014 whether a consumer leaned on the OLD, unlicensed [L2]: it did, but only transitively, since both of its conclusions previously rested on a chain running through the unlicensed eventual-sign Fact. That chain is now proved (new step 1.1 derives the eventual sign from an explicit leading-term bound), so this consumer's support is strictly stronger after the repair than before it, and neither conclusion moved. Nothing to repair."
+    },
+    {
+      "id": "ex-rational-function-field-order",
+      "status": "still-licensed",
+      "notes": "Appears in its own impact set as a logical and direct-citation consumer of cex-ordered-field-not-archimedean, which it carries in `deps` and cites in [L1] for '(R(t), P) is an ordered field, and n*1 < t for every natural n, so it is not Archimedean'. Those three clauses are that item's steps 2.1, 2.2 and 3.1, all byte-identical across the citation-only change. It also relies on the counterexample's definition of P, which is character-for-character the same set in both files. The counterexample's own change adds only a forward reference to the construction of R(t) that this item already carries in `deps` \u2014 strictly more support, no altered claim."
+    },
+    {
+      "id": "cex-unbounded-set-has-no-sup",
+      "status": "not-load-bearing",
+      "notes": "Single mention, in a Remarks bullet (line 94): 'In a non-Archimedean ordered field the same set is bounded above ([[cex-ordered-field-not-archimedean]])'. Wikilink only \u2014 the item is not in this page's `deps` (confirmed by parsing the frontmatter) and no [L#] Fact cites it. The proposition alluded to is the counterexample's own conclusion, which did not change."
+    },
+    {
+      "id": "def-archimedean-field",
+      "status": "not-load-bearing",
+      "notes": "Single mention, in a Remarks bullet (line 51): 'Every complete ordered field is Archimedean ([[thm-of-archimedean]]); an ordered field need not be ([[cex-ordered-field-not-archimedean]]).' Wikilink only; `deps` is [def-ordered-field, def-field] and does not include the counterexample. The definition itself is independent of the witness \u2014 and the witness's Statement did not move in any case."
+    },
+    {
+      "id": "def-formal-laurent-series",
+      "status": "not-load-bearing",
+      "notes": "Single mention, in the Remarks bullet 'Relation to the rational functions' (line 128), which names R(t) as the standard first example of a non-Archimedean ordered field and then says explicitly that 'This page neither constructs that identification nor uses it'. Wikilink only; not in `deps`. The citation is expository by the page's own declaration."
+    },
+    {
+      "id": "ex-cauchy-complete-not-complete-field",
+      "status": "not-load-bearing",
+      "notes": "Single mention of ex-rational-function-field-order, in the Remarks bullet 'What this example does not give' (line 103), a contrast noting that K = R((t^-1)) says nothing about R(t). Wikilink only; not in `deps` (confirmed by parsing the frontmatter) and no [L#] Fact cites it. The repair changed nothing about R(t)'s completeness status, which this item does not derive from there in any case. Unchanged from the step-9 disposition in research/frontier-12-step9-impact.json."
+    },
+    {
+      "id": "ex-inf-of-reciprocals",
+      "status": "not-load-bearing",
+      "notes": "Single mention, in a Remarks bullet (line 115) explaining where the argument would break in a non-Archimedean field: 'And [[cex-ordered-field-not-archimedean]] exhibits an ordered field where no such natural exists.' The same bullet then states 'What that item establishes is the failure of the Archimedean property there; it says nothing about H or its greatest lower bound, and this page does not compute one.' Wikilink only; not in `deps`. The page disclaims load-bearing use in its own words."
+    },
+    {
+      "id": "fs-every-set-has-sup",
+      "status": "not-load-bearing",
+      "notes": "Single mention, in a Remarks bullet (line 80): 'in a non-Archimedean ordered field the canonical naturals can be bounded above ([[cex-ordered-field-not-archimedean]])'. Wikilink only; `deps` does not include it. The alluded proposition is the counterexample's conclusion, unchanged."
+    },
+    {
+      "id": "fs-nested-intervals-implies-lub",
+      "status": "not-load-bearing",
+      "notes": "Single mention, in a Remarks bullet (line 82) explaining why R(t) will NOT do as a witness for this failure: 'Nothing in this library establishes any nested interval property for it'. Wikilink only; not in `deps`, which draws on the Laurent-series items instead. This is a negative, deliberately non-load-bearing reference."
+    },
+    {
+      "id": "lem-bw-implies-archimedean",
+      "status": "not-load-bearing",
+      "notes": "Single mention, in a Remarks bullet (line 91) listing where the Archimedean property fails, 'in R(t) ([[cex-ordered-field-not-archimedean]]) and in ...'. Wikilink only; not in `deps`. The lemma's proof uses def-archimedean-field and the ordered-field lemmas, not this witness."
+    },
+    {
+      "id": "lem-integer-part",
+      "status": "not-load-bearing",
+      "notes": "Single mention, in the Remarks bullet 'What the two halves of the proof really use' (line 97): 'in a non-Archimedean ordered field ([[cex-ordered-field-not-archimedean]]) an element larger than every canonical natural has no integer part at all'. Wikilink only; not in `deps`. Commentary on the indispensability of the Archimedean hypothesis, drawing on the counterexample's unchanged conclusion."
+    }
+  ]
+}
