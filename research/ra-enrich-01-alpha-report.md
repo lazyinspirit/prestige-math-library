@@ -276,3 +276,177 @@ are spared under the owner's 2026-08-06 reading, and their existing passes stand
 against byte-identical text. Nothing here is a fatal defect, so there is no
 twice-touched escalation to raise and no fatal-error entry beyond what this report
 records.
+
+---
+
+# Round 2 — the two post-repair Terra objections
+
+Date: 2026-08-14
+Scope: exactly `thm-standard-maclaurin-expansions` and
+`def-radian-angle-by-unit-circle-arc-length`, the two items Terra rejected on the
+rejudge. Nothing else was opened for editing.
+
+## Outcome in one paragraph
+
+**Both objections are correct, both are nonfatal, neither is a false positive.**
+Each names a step that is true and whose supporting result is already published,
+and in each case the step failed to cite it. That is the round-1 pattern one layer
+down: repairing the loud gap in step 1.4 and in the arc paragraph put the next
+unlicensed move on the surface. Both are repaired. No approved statement moved —
+the acute-angle-only, $|x|<1$ binomial and explicit-$M_{n+1}$ controls are untouched,
+and the $t=0$ clause written in round 1 stands verbatim.
+
+Because these items have now been touched twice, I did not patch only the step Terra
+named. In each item I read the proof end to end, identified the *class* of move the
+objection belongs to, and licensed every instance of that class. That found two more
+instances in each item, described below. A third round on these two should surface
+nothing of this kind, because the class is closed rather than the instance.
+
+## 1. `thm-standard-maclaurin-expansions` — Terra, step 4.1
+
+**Terra:** step 4.1 simplifies the product-rule derivative to zero, which needs
+$(1+x)^{-\alpha}=(1+x)^{-\alpha-1}(1+x)$; it cites only [L10] and prior steps, not
+[L16], and for arbitrary real exponents this is not ordinary algebra.
+
+**Confirmed.** [L16] did already carry the law — `thm-real-power-laws`,
+$a^{r+s}=a^ra^s$ for $a>0$ and real $r,s$ — so this is the missing-citation half of
+Terra's disjunction, not the missing-law half. Terra is right that the move is not
+cancellation: $-\alpha-1$ is an arbitrary real, and $(1+x)^{-\alpha-1}(1+x)$ collapses
+only through the addition law.
+
+Repairing it exposed a second, smaller hole in [L16] itself. The law gives
+$(1+x)^{-\alpha-1}(1+x)^1=(1+x)^{-\alpha}$, but getting from $(1+x)^1$ to $1+x$ needs
+$\exp(\log w)=w$, and [L16] stated only the other direction, $\log(\exp y)=y$. The
+published `def-natural-logarithm` states **both** in one sentence — "$\log(\exp y)=y$
+for every $y\in\mathbb R$ and $\exp(\log x)=x$ for every $x>0$" — so [L16] was
+extended to quote the whole of it. No new dependency: `def-natural-logarithm` was
+already declared.
+
+**Step 4.1 as repaired** displays the product-rule derivative
+$G'(x)=-\alpha(1+x)^{-\alpha-1}B(x)+(1+x)^{-\alpha}B'(x)$, notes both factors are
+differentiable by steps 1.6 and 3.1, derives $(1+x)^1=1+x$ and
+$(1+x)^{-\alpha-1}(1+x)=(1+x)^{-\alpha}$ from [L16], multiplies through by $1+x$,
+substitutes $(1+x)B'(x)=\alpha B(x)$ from step 3.1 to get $(1+x)G'(x)=0$, and divides
+by the nonzero $1+x$. Citations now `[L10, L16, step 1.6, step 3.1, algebra]`.
+
+**Class sweep — real-exponent power algebra written as ordinary algebra.** Two more
+instances, both now licensed:
+
+- **Step 1.4.** The finite binomial theorem produced "$(1+x)^m$", and
+  `thm-binomial-theorem` says in as many words that its powers are the **integer**
+  powers of `def-integer-power`, while the Statement asserts the **real** power
+  $\exp(m\log(1+x))$. No cited fact identified the two. Rather than delete the
+  sentence — the general argument in steps 3.1–6.1 does cover $\alpha=m$, so the
+  identity was decorative and could have gone — I closed it, because leaving the
+  question visible and unanswered is what invites the next round. [L7] now also
+  records the natural-power recursion $a^0=1$, $a^{n+1}=a^n\cdot a$ and its
+  uniqueness, and step 1.4 verifies that the real powers $(1+x)^n$ satisfy that same
+  recursion: $(1+x)^0=\exp(0)=1$ and $(1+x)^{n+1}=(1+x)^n(1+x)^1=(1+x)^n(1+x)$.
+  Added dep: `def-integer-power`, plan order 16 against this item's page at 187.
+- **Step 6.1.** $B(0)=c_0$ rests on $0^0=1$ and $0^n=0$ for $n\ge1$ — the same
+  convention, from the same recursion. The step now says so and cites [L7].
+
+Steps 1.6 and the rest of 6.1 use real powers too, but each was already licensed —
+1.6 by [L6] (`thm-real-power-continuity-and-derivatives`, real exponent, on
+$(0,\infty)$) plus the chain rule added in round 1, and 6.1's
+$(1+x)^\alpha(1+x)^{-\alpha}=(1+x)^0=1$ and $1^{-\alpha}=1$ by [L16]. Those I left
+alone.
+
+## 2. `def-radian-angle-by-unit-circle-arc-length` — Terra, continuity of $\gamma$
+
+**Terra:** the claim that the restriction is a continuous path is unsupported;
+scalar continuity of sine and cosine does not, from any cited fact, give continuity
+of the vector-valued $\gamma$, and the cited vector-valued item licenses
+componentwise *differentiation*, not componentwise *continuity*.
+
+**Confirmed, and the reading of the cited item is exactly right.**
+`def-vector-valued-derivative-and-integral` states the componentwise criterion for
+the derivative and nothing about continuity. The fact Terra asks for exists:
+**`thm-componentwise-limits-and-continuity`, clause 1** — "Let $(X,d_X)$ be a metric
+space, $A\subseteq X$, $f:A\to\mathbb R^m$ and $a\in A$. Then $f$ is continuous at
+$a$ if and only if every component $f_i:A\to\mathbb R$ is continuous at $a$." That is
+the statement, opened and read, not a remembered one.
+
+Two links sit between "sine and cosine are differentiable on $\mathbb R$" and that
+clause, and I wrote both out rather than leaning on them:
+
+- the components in play are **restrictions** to $[0,t]$, and continuity passes to a
+  subset of the domain, the condition on the restriction quantifying over fewer
+  points (`def-continuity-real`);
+- clause 1's components are continuous as maps of metric spaces, while
+  `cor-differentiable-implies-continuous` delivers the $\mathbb R$-native notion.
+  `lem-real-and-metric-notions-agree` clause 1 is the published statement that these
+  are the same notion for a real function on a subset of $\mathbb R$ — the library
+  wrote that lemma precisely so later pages could move between the two vocabularies,
+  and this is such a page.
+
+$-\sin$ is continuous as a scalar multiple of a continuous function
+(`thm-algebra-of-continuous-functions` clause 1). With those, clause 1 gives
+continuity of $\gamma\!\upharpoonright_{[0,t]}$ on $[0,t]$ and of
+$v(u):=(-\sin u,\cos u)$, which the paragraph now names explicitly so the $C^1$
+hypothesis has something to point at.
+
+**Class sweep — vector-valued notions asserted from their scalar counterparts.** Two
+more instances in the same paragraph, both now licensed:
+
+- **Differentiability on $(0,t)$** had the identical defect from the other side. It
+  also runs through a restriction, so it needs `def-derivative`'s restriction clause
+  (a point of a nondegenerate interval is a limit point of it, and restriction to a
+  subset still having it as a limit point preserves the derivative) *before*
+  componentwise differentiation applies. Written out in that order, so the
+  componentwise criterion is not read as being applied to the vector-valued map
+  directly.
+- **$\lVert v(u)\rVert_2=1$** was read straight off the Pythagorean identity with no
+  fact defining the norm. It now unfolds through `def-p-norms-on-rn`,
+  $\lVert w\rVert_2=(|w_0|^2+|w_1|^2)^{1/2}$, before
+  `cor-trigonometric-parity-and-pythagorean-identity` is applied.
+
+The three hypotheses of `thm-c1-paths-have-length-equal-to-the-integral-of-speed` —
+continuous on $[a,b]$, differentiable on $(a,b)$, derivative extending to a
+continuous $v$ on $[a,b]$ — are now discharged one by one and in its own words.
+
+Seven deps added: `thm-algebra-of-continuous-functions`, `def-continuity-real`,
+`lem-real-and-metric-notions-agree`, `thm-componentwise-limits-and-continuity`,
+`def-vector-valued-functions-limits-and-continuity`, `def-derivative`,
+`def-p-norms-on-rn`. All published; their pages are at plan order 137, 153 and 167
+against this item's page at 183, so none is a forward reference, and `fwdcheck`
+confirms it.
+
+## False positives
+
+None. Both objections identify a step whose cited facts do not license it. Neither is
+ordinary algebra: real-exponent power collapse is the addition law, and vector-valued
+continuity from scalar components is a theorem this library states as a theorem.
+
+## Gates
+
+`precheck` clean on `thm-standard-maclaurin-expansions` (the radian item is a
+definition with no numbered proof, so precheck does not score it, as in round 1);
+`rendercheck` **OK across all 4431 files** — no repeat of the nine multiline-display
+errors round 1 found, and these edits introduced none; `depcheck` OK, no cycles, all
+references resolve, and neither item appears in its `cited-not-in-deps` list;
+`fwdcheck` OK; `citecheck` reports nothing against either item; `prosecheck` 0
+errors, 0 warnings; `extcheck` OK.
+
+## Hash receipts
+
+Judge-normalized hashes, current disk against the round-2 ledger rows adjudicated:
+
+| id | status |
+|---|---|
+| `thm-standard-maclaurin-expansions` | changed → `2481ae24782f9fa4…` (judged at `862dbbc4c3c57117…`) |
+| `def-radian-angle-by-unit-circle-arc-length` | changed → `1bab3f5b6fe5934c…` (judged at `9b68a41030e301a8…`) |
+
+`research/ra-enrich-01-rejudge-targets.json` has been overwritten with exactly these
+two ids. The other five items are untouched since the round-1 rejudge and hold the
+paired passes recorded against their current text; they must not be rejudged.
+
+## For the orchestrator
+
+Both repairs move their pair's frozen context hash, so the two rejudged items return
+fresh `context_sha256` values while their five untouched siblings keep theirs under
+the owner's 2026-08-06 reading. Still no fatal defect anywhere in this batch: nine
+adjudication rows, nine `confirmed_nonfatal`, zero `confirmed_fatal`, zero
+`false_positive`. The twice-touched escalation is advisory and I am not raising it —
+what it asks for is a check that the repair closed the class rather than the
+instance, and that check is the two class sweeps above.

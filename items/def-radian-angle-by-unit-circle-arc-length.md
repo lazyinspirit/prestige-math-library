@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-circular-arcs-circumference-and-diameter, def-path-polygonal-length-and-rectifiability-in-rn, thm-c1-paths-have-length-equal-to-the-integral-of-speed, thm-sine-and-cosine-derivatives, cor-differentiable-implies-continuous, def-vector-valued-derivative-and-integral, cor-trigonometric-parity-and-pythagorean-identity, lem-integral-elementary-bounds, thm-circle-circumference-diameter-ratio-is-pi]
+deps: [def-circular-arcs-circumference-and-diameter, def-path-polygonal-length-and-rectifiability-in-rn, thm-c1-paths-have-length-equal-to-the-integral-of-speed, thm-sine-and-cosine-derivatives, cor-differentiable-implies-continuous, thm-algebra-of-continuous-functions, def-continuity-real, lem-real-and-metric-notions-agree, thm-componentwise-limits-and-continuity, def-vector-valued-functions-limits-and-continuity, def-derivative, def-vector-valued-derivative-and-integral, def-p-norms-on-rn, cor-trigonometric-parity-and-pythagorean-identity, lem-integral-elementary-bounds, thm-circle-circumference-diameter-ratio-is-pi]
 justified_by: []
 aliases: []
 landmark: true
@@ -46,21 +46,48 @@ for path length
 angle at $t=0$ is defined to have radian measure $0$. In every case, then, the
 radian measure of the swept angle is $L(\gamma\!\upharpoonright_{[0,t]})$.
 
-That measure is $t$. Sine and cosine are differentiable on $\mathbb R$ with
-$(\sin u)'=\cos u$ and $(\cos u)'=-\sin u$
-([[thm-sine-and-cosine-derivatives]]), hence continuous on $\mathbb R$
-([[cor-differentiable-implies-continuous]]). Differentiation of a
-vector-valued function being componentwise
-([[def-vector-valued-derivative-and-integral]]), $\gamma'(u)=(-\sin u,\cos u)$;
-so for $0<t\le2\pi$ the path $\gamma\!\upharpoonright_{[0,t]}$ is continuous on
-$[0,t]$, differentiable on $(0,t)$, and its derivative is continuous on
-$[0,t]$. The Pythagorean identity gives
-$\lVert\gamma'(u)\rVert_2=1$
-([[cor-trigonometric-parity-and-pythagorean-identity]]), and the integral of a
-constant over $[0,t]$ is that constant times $t$
+That measure is $t$. Fix $t$ with $0<t\le2\pi$, and write
+$v(u):=(-\sin u,\cos u)$ for $u\in[0,t]$.
+
+Sine and cosine are differentiable on $\mathbb R$ with $(\sin u)'=\cos u$ and
+$(\cos u)'=-\sin u$ ([[thm-sine-and-cosine-derivatives]]), hence continuous on
+$\mathbb R$ ([[cor-differentiable-implies-continuous]]), and so is $-\sin$, a
+scalar multiple of a continuous function
+([[thm-algebra-of-continuous-functions]], clause 1). Continuity of a real
+function passes to a subset of its domain, the condition on the restriction
+quantifying over fewer points ([[def-continuity-real]]), so $\cos$, $\sin$ and
+$-\sin$ restricted to $[0,t]$ are continuous at every point of $[0,t]$; and for
+a real function on a subset of $\mathbb R$ the $\mathbb R$-native and the
+metric-space notions of continuity are the same notion
+([[lem-real-and-metric-notions-agree]], clause 1). A function into
+$\mathbb R^m$ is continuous at a point of its domain if and only if each of its
+components is ([[thm-componentwise-limits-and-continuity]], clause 1;
+[[def-vector-valued-functions-limits-and-continuity]]). Hence
+$\gamma\!\upharpoonright_{[0,t]}$ is continuous on $[0,t]$, and so is
+$v:[0,t]\to\mathbb R^2$.
+
+Every point of a nondegenerate interval is a limit point of it, and if a real
+function is differentiable at a point of its domain, so is its restriction to
+any subset still having that point as a limit point, with the same derivative
+([[def-derivative]]). So $\cos$ and $\sin$ restricted to $[0,t]$ are
+differentiable at every $u\in(0,t)$, with derivatives $-\sin u$ and $\cos u$;
+and a vector-valued function is differentiable at a limit point of its domain
+exactly when each component is, its derivative there being the vector of the
+component derivatives
+([[def-vector-valued-derivative-and-integral]]). Hence
+$\gamma\!\upharpoonright_{[0,t]}$ is differentiable at every $u\in(0,t)$ with
+derivative $(-\sin u,\cos u)=v(u)$, and $v$ is a continuous extension of that
+derivative to $[0,t]$ — the hypotheses of
+[[thm-c1-paths-have-length-equal-to-the-integral-of-speed]]. Since
+$\lVert w\rVert_2=\bigl(|w_0|^2+|w_1|^2\bigr)^{1/2}$ ([[def-p-norms-on-rn]])
+and $\sin^2u+\cos^2u=1$
+([[cor-trigonometric-parity-and-pythagorean-identity]]), we get
+$\lVert v(u)\rVert_2=\bigl(|-\sin u|^2+|\cos u|^2\bigr)^{1/2}=(\sin^2u+\cos^2u)^{1/2}=1$
+for every $u\in[0,t]$; and the
+integral of a constant over $[0,t]$ is that constant times $t$
 ([[lem-integral-elementary-bounds]]). Therefore
 
-$$L\bigl(\gamma\!\upharpoonright_{[0,t]}\bigr)=\int_0^t\lVert\gamma'(u)\rVert_2\,du=\int_0^t1\,du=t$$
+$$L\bigl(\gamma\!\upharpoonright_{[0,t]}\bigr)=\int_0^t\lVert v(u)\rVert_2\,du=\int_0^t1\,du=t$$
 
 ([[thm-c1-paths-have-length-equal-to-the-integral-of-speed]]), while at $t=0$
 both the length and the parameter are $0$.

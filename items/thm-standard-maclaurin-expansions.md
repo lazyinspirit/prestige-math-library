@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-taylor-and-maclaurin-series, thm-geometric-series, def-real-exponential-function-and-e, def-sine-and-cosine-by-power-series, thm-log-one-plus-x-power-series, thm-principal-inverse-tangent-calculus, thm-real-power-continuity-and-derivatives, def-factorial-and-falling-factorial, thm-binomial-theorem, thm-binomial-closed-formula, thm-ratio-test, thm-termwise-differentiation-of-a-real-power-series, thm-algebra-of-derivatives, lem-derivative-of-a-power, thm-chain-rule, cor-differentiable-implies-continuous, def-real-power, def-natural-logarithm, thm-real-power-laws, cor-zero-derivative-implies-constant]
+deps: [def-taylor-and-maclaurin-series, thm-geometric-series, def-real-exponential-function-and-e, def-sine-and-cosine-by-power-series, thm-log-one-plus-x-power-series, thm-principal-inverse-tangent-calculus, thm-real-power-continuity-and-derivatives, def-factorial-and-falling-factorial, thm-binomial-theorem, thm-binomial-closed-formula, thm-ratio-test, thm-termwise-differentiation-of-a-real-power-series, thm-algebra-of-derivatives, lem-derivative-of-a-power, thm-chain-rule, cor-differentiable-implies-continuous, def-real-power, def-natural-logarithm, thm-real-power-laws, def-integer-power, cor-zero-derivative-implies-constant]
 justified_by: []
 aliases: []
 landmark: true
@@ -77,7 +77,10 @@ $(0,\infty)$ and has derivative $\beta x^{\beta-1}$ there
 [L7] Factorials satisfy $(n+1)!=(n+1)n!$, and for a natural number $m$ the
 finite binomial theorem is
 $(a+b)^m=\sum_{n=0}^m\binom mn a^{m-n}b^n$
-([[def-factorial-and-falling-factorial]], [[thm-binomial-theorem]]).
+([[def-factorial-and-falling-factorial]], [[thm-binomial-theorem]]). The
+exponents there are the natural-number ones: for every real $a$, $n\mapsto a^n$
+is the unique function on $\mathbb N$ with $a^0=1$ and $a^{n+1}=a^n\cdot a$
+([[def-integer-power]]).
 
 [L8] If a sequence has no zero terms and
 $\limsup_{n\to\infty}|a_{n+1}/a_n|<1$, then $\sum a_n$ converges absolutely
@@ -113,9 +116,9 @@ at every real, with the derivative computed term by term
 continuous at $c$ ([[cor-differentiable-implies-continuous]]).
 
 [L16] For $a>0$ and $x\in\mathbb R$, $a^x=\exp(x\log a)$ ([[def-real-power]]);
-$\log$ is the inverse of $\exp$, so $\log(\exp y)=y$ for every real $y$
-([[def-natural-logarithm]]); and for $a,b>0$ and $r,s\in\mathbb R$,
-$a^{r+s}=a^ra^s$ ([[thm-real-power-laws]]).
+$\log$ is the inverse of $\exp$, so $\log(\exp y)=y$ for every real $y$ and
+$\exp(\log w)=w$ for every $w>0$ ([[def-natural-logarithm]]); and for $a,b>0$
+and $r,s\in\mathbb R$, $a^{r+s}=a^ra^s$ ([[thm-real-power-laws]]).
 
 ## Proof
 
@@ -127,7 +130,7 @@ $a^{r+s}=a^ra^s$ ([[thm-real-power-laws]]).
 
 1.3 Fix $\alpha\in\mathbb R$ and define $c_0=1$ and $c_{n+1}=c_n(\alpha-n)/(n+1)$ for $n\ge0$. [L7, choose]
 
-1.4 If $\alpha=m$ is a nonnegative integer, the recurrence gives $c_n=\binom mn$ for $0\le n\le m$ and $c_n=0$ for $n>m$. Indeed $c_0=1=\binom m0$; and if $n<m$ and $c_n=\binom mn=m!/(n!\,(m-n)!)$, then, since $(n+1)!=(n+1)n!$ and $(m-n)!=(m-n)(m-n-1)!$ with $m-n\ge1$, $$c_{n+1}=\frac{m!}{n!\,(m-n)!}\cdot\frac{m-n}{n+1}=\frac{m!}{(n+1)!\,\bigl(m-(n+1)\bigr)!}=\binom m{n+1};$$ while $c_{m+1}=c_m(m-m)/(m+1)=0$, after which the recurrence keeps every term $0$. Taking $a=1$ and $b=x$ in the finite binomial theorem then gives $\sum_{n\ge0}c_nx^n=\sum_{n=0}^m\binom mn x^n=(1+x)^m$. [L7, L12, algebra]
+1.4 If $\alpha=m$ is a nonnegative integer, the recurrence gives $c_n=\binom mn$ for $0\le n\le m$ and $c_n=0$ for $n>m$. Indeed $c_0=1=\binom m0$; and if $n<m$ and $c_n=\binom mn=m!/(n!\,(m-n)!)$, then, since $(n+1)!=(n+1)n!$ and $(m-n)!=(m-n)(m-n-1)!$ with $m-n\ge1$, $$c_{n+1}=\frac{m!}{n!\,(m-n)!}\cdot\frac{m-n}{n+1}=\frac{m!}{(n+1)!\,\bigl(m-(n+1)\bigr)!}=\binom m{n+1};$$ while $c_{m+1}=c_m(m-m)/(m+1)=0$, after which the recurrence keeps every term $0$. Taking $a=1$ and $b=x$ in the finite binomial theorem then gives $\sum_{n\ge0}c_nx^n=\sum_{n=0}^m\binom mn x^n=(1+x)^m$, the exponent being the natural-number one of [L7]. For $|x|<1$ that value is also the real power $(1+x)^m$ of [L16]: since $1+x>0$, the real powers $(1+x)^n$ with $n\in\mathbb N$ satisfy $(1+x)^0=\exp\bigl(0\cdot\log(1+x)\bigr)=\exp0=1$ and, by the addition law together with $(1+x)^1=\exp\bigl(\log(1+x)\bigr)=1+x$, also $(1+x)^{n+1}=(1+x)^n(1+x)^1=(1+x)^n(1+x)$; that is the recursion determining the natural-number powers in [L7]. [L3, L7, L12, L16, algebra]
 
 1.5 If $\alpha$ is not a nonnegative integer and $0<|x|<1$, then every $c_nx^n$ is nonzero and $|c_{n+1}x^{n+1}/(c_nx^n)|=|x||\alpha-n|/(n+1)\to|x|<1$; hence $\sum_{n\ge0}c_nx^n$ converges absolutely. [L8, algebra]
 
@@ -139,11 +142,11 @@ $a^{r+s}=a^ra^s$ ([[thm-real-power-laws]]).
 
 3.1 Termwise differentiation and the coefficient recurrence give $B'(x)=\sum_{n\ge0}(n+1)c_{n+1}x^n=\sum_{n\ge0}(\alpha-n)c_nx^n=\alpha B(x)-xB'(x)$ for $|x|<1$, and hence $(1+x)B'(x)=\alpha B(x)$. [L9, step 1.3, step 2.2, algebra]
 
-4.1 For $G(x):=(1+x)^{-\alpha}B(x)$, the product rule and step 3.1 give $G'(x)=0$ throughout $(-1,1)$. [L10, step 1.6, step 3.1, algebra]
+4.1 For $G(x):=(1+x)^{-\alpha}B(x)$, both factors are differentiable on $(-1,1)$ by step 1.6 and step 3.1, so the product rule gives $G'(x)=-\alpha(1+x)^{-\alpha-1}B(x)+(1+x)^{-\alpha}B'(x)$ there. On $(-1,1)$ the base $1+x$ is positive, so $(1+x)^1=\exp\bigl(\log(1+x)\bigr)=1+x$ and the addition law at the real exponents $-\alpha-1$ and $1$ gives $(1+x)^{-\alpha-1}(1+x)=(1+x)^{-\alpha}$, both by [L16]. Multiplying the displayed derivative by $1+x$ and using $(1+x)B'(x)=\alpha B(x)$ from step 3.1 therefore gives $(1+x)G'(x)=-\alpha(1+x)^{-\alpha}B(x)+\alpha(1+x)^{-\alpha}B(x)=0$; since $1+x\ne0$, $G'(x)=0$ throughout $(-1,1)$. [L10, L16, step 1.6, step 3.1, algebra]
 
 5.1 Step 4.1 makes $G$ differentiable at every point of $(-1,1)$, and every such point is a limit point of $(-1,1)$, so [L15] makes $G$ continuous on $(-1,1)$. [L15, step 4.1]
 
-6.1 The interval $(-1,1)$ is order-convex, so [L11] and step 5.1 make $G$ constant there. Now $\exp0=1$ by [L3], hence $\log1=\log(\exp0)=0$ and $1^{-\alpha}=\exp(-\alpha\log1)=1$ by [L16]; so the constant value is $G(0)=1^{-\alpha}B(0)=c_0=1$, that is $(1+x)^{-\alpha}B(x)=1$ for every $|x|<1$. Multiplying by $(1+x)^{\alpha}$ and using $(1+x)^{\alpha}(1+x)^{-\alpha}=(1+x)^0=\exp\bigl(0\cdot\log(1+x)\bigr)=1$, again by [L16], gives $B(x)=(1+x)^\alpha$ for every $|x|<1$. [L3, L11, L16, step 1.3, step 5.1, algebra]
+6.1 The interval $(-1,1)$ is order-convex, so [L11] and step 5.1 make $G$ constant there. Now $\exp0=1$ by [L3], hence $\log1=\log(\exp0)=0$ and $1^{-\alpha}=\exp(-\alpha\log1)=1$ by [L16]; so, $B(0)=\sum_{n\ge0}c_n0^n=c_0$ because $0^0=1$ and $0^n=0$ for $n\ge1$ by the natural-power recursion of [L7], the constant value is $G(0)=1^{-\alpha}B(0)=c_0=1$, that is $(1+x)^{-\alpha}B(x)=1$ for every $|x|<1$. Multiplying by $(1+x)^{\alpha}$ and using $(1+x)^{\alpha}(1+x)^{-\alpha}=(1+x)^0=\exp\bigl(0\cdot\log(1+x)\bigr)=1$, again by [L16], gives $B(x)=(1+x)^\alpha$ for every $|x|<1$. [L3, L7, L11, L16, step 1.3, step 5.1, algebra]
 
 7.1 By step 1.2, this is the Maclaurin expansion of $(1+x)^\alpha$; its coefficients are the recursively defined numbers $\binom{\alpha}{n}=c_n$. The argument makes no assertion at $x=1$ or $x=-1$. [L1, step 1.2, step 2.2, step 6.1]
 
