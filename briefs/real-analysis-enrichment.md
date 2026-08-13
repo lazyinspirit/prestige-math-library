@@ -62,11 +62,14 @@ list with ids, kinds and deps; a page with a non-empty `items` array is real.
 as error `draft-on-published-page`, and `SCHEMA.md` §445 states it: *"a draft
 item on a published page is a broken page"*.
 
-So you **author new items as `status: draft`** and you **do NOT add them to the
-published page file** in `library/real-analysis/`. Adding them is the publish
-action and it belongs to the owner, after audit.
+It shapes the plan you are writing, so understand it now even though you author
+nothing on this run. When the items are eventually written they will be
+`status: draft`, and a draft may **not** be added to the published page file in
+`library/real-analysis/`. Adding it is the publish action and it belongs to the
+owner, after audit.
 
-Instead, record every new item's intended placement in a manifest:
+That is why placement is recorded as data rather than applied to the page. Your
+plan proposes every new item's intended placement in a manifest:
 
 `research/ra-enrich-01-placement.json`
 
@@ -82,7 +85,8 @@ Instead, record every new item's intended placement in a manifest:
 
 `after` names the existing item it should follow in reading order, so the page
 keeps a sane dependency order when the owner splices it in. Every new item must
-appear in this manifest — **it is the list that gets judged and audited**, and an
+appear in this manifest — **it becomes the judge and audit scope when the items are
+built** — and an
 item missing from it is an item nobody reviews.
 
 **Do not edit any file under `library/`. Do not edit `research/plan-spec.json`.
