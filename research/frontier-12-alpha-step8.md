@@ -418,3 +418,23 @@ specific failure the paired-judge stage exists to catch, and it caught it.
 
 No blocker. Nothing here needs an owner decision before step 9. The rejudge set is
 the three ids in §7.
+
+---
+
+## 10. Continued at step 8b — and two corrections to §8 above
+
+`research/frontier-12-alpha-step8b.md` carries the sequel. In summary:
+
+- The rejudge of §7 passed both lanes on `cor-potentials-differ-by-a-componentwise-constant`
+  and `lem-green-type-i-boundary-identity`. `lem-green-type-ii-boundary-identity`
+  drew a DeepSeek rejection on citation fidelity — [L3] cited a vertical-graph
+  Fubini theorem for a horizontal-graph region — **adjudicated `confirmed_fatal`
+  (`dependency_citation`) and repaired**. The rejudge set is now that one item.
+- **§8's `plan_reconciliation` count of 14 is wrong. It is 127.** I read a
+  truncated tail of the gate's output and reported it as the whole set; the `--json`
+  form gives the real figure. 126 remain open (one row, mine, is now filled).
+- **§8's `spine-receipt-invalid` is closed.** `research/frontier-12-spine-audit.json`
+  now exists and is valid against current disk.
+- The impact receipt §8 left unwritten is `research/frontier-12-impact-audit.json`,
+  validated against `--from pre-step8 --to after-alpha-step8b` — **not** the
+  `after-alpha-step8` pair named above.
