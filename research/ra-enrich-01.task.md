@@ -1,6 +1,8 @@
 # ra-enrich-01 — this dispatch
 
-Run `ra-enrich-01`. Phase 1 only. You are the sole writer of every file listed as
+Run `ra-enrich-01`. **Phase 1a: PLAN ONLY. You author no items.**
+The deliverable is `research/ra-enrich-01-PLAN.md` — the owner reads it and
+approves before anything is built. You are the sole writer of every file listed as
 yours in the brief.
 
 ## The owner's four named gaps — VERIFIED FROM DISK BY THE ORCHESTRATOR
@@ -11,8 +13,8 @@ point of stating this is that you must not re-mint what exists.
 
 | owner's gap | what is actually on disk | your job |
 |---|---|---|
-| **Taylor series** | **Largely covered. 31 items mention Taylor.** `def-taylor-polynomial-and-remainder`, `lem-taylor-polynomial-derivatives`, `thm-taylor-peano-remainder`, `cor-taylor-lagrange-and-cauchy-remainders`, `thm-taylor-schlomilch-roche-remainder`, `cor-taylor-remainder-bound`, plus multivariable versions, all on `darboux-lhopital-and-taylor` (order 155, 20 items) and the multivariable pages. | The *finite Taylor polynomial with remainder* is done. What to check is the **infinite Taylor SERIES**: does the library prove a smooth function's Taylor series converges *to the function* on an interval, and does it give the standard counterexample $e^{-1/x^2}$ where the series converges but not to $f$? Look at `power-series-and-real-analytic-functions` (order 173, 30 items). Author only what is genuinely missing. |
-| **Maclaurin series** | **Zero items** use the word. | This is a naming gap over existing machinery — a Maclaurin series is the Taylor series at 0. Almost certainly one definition plus the standard expansions, not a development. Do not manufacture a page's worth of material out of a synonym. |
+| **Taylor series** | **Largely covered. 31 items mention Taylor.** `def-taylor-polynomial-and-remainder`, `lem-taylor-polynomial-derivatives`, `thm-taylor-peano-remainder`, `cor-taylor-lagrange-and-cauchy-remainders`, `thm-taylor-schlomilch-roche-remainder`, `cor-taylor-remainder-bound`, plus multivariable versions, all on `darboux-lhopital-and-taylor` (order 155, 20 items) and the multivariable pages. | The *finite Taylor polynomial with remainder* is done. What to check is the **infinite Taylor SERIES**: does the library prove a smooth function's Taylor series converges *to the function* on an interval, and does it give the standard counterexample $e^{-1/x^2}$ where the series converges but not to $f$? Look at `power-series-and-real-analytic-functions` (order 173, 30 items). **Propose** only what is genuinely missing. |
+| **Maclaurin series** | **Zero items** use the word. | This is a naming gap over existing machinery — a Maclaurin series is the Taylor series at 0. Almost certainly one definition plus the standard expansions, not a development. Do not manufacture a page's worth of proposals out of a synonym. |
 | **harmonic series** | **Well covered.** `ex-harmonic-series-diverges` exists, plus `ex-alternating-harmonic-series`, `ex-alternating-harmonic-series-sums-to-log-two`, `ex-alternating-harmonic-rearranged-to-three-halves`, `ex-abel-dini-pair-for-the-harmonic-series`, `ex-abel-theorem-on-the-alternating-harmonic-series`. | Probably nothing to add. If you find a genuine hole — the Cauchy condensation route, $p$-series sharpness, the $\log n$ asymptotic and the Euler–Mascheroni constant — say so specifically. Report "already covered" if that is the truth. |
 | **sin/cos power series match the geometric definitions**, $\cos x = A/H$, $\sin x = O/H$ | **A GENUINE AND SUBSTANTIAL GAP.** Zero items in the entire 4172-item corpus mention "hypotenuse". The library defines sine and cosine **by their power series** (`def-sine-and-cosine-by-power-series`) and develops everything analytically from there — derivatives, addition formulas, the Pythagorean identity, $\pi$ via the first positive zero of cosine, periodicity, the tangent family. It never connects any of it to the right-triangle ratios or to the geometric notion of angle. | **This is the headline item of your commission.** See below. |
 
