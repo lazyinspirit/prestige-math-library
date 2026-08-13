@@ -51,7 +51,7 @@ $$\int_{\partial D}P\,dx=-\iint_D\partial_yP\,dA.$$
 
 1.1 The endpoint arcs in [L1] have constant $x$, so their contributions to $\int P\,dx$ are zero. The lower graph contributes $\int_a^bP(x,\alpha(x))\,dx$, while [L2] makes the reversed upper graph contribute $-\int_a^bP(x,\beta(x))\,dx$. [given, L1, L2, algebra]
 
-1.2 For each fixed $x$ with $\alpha(x)<\beta(x)$, [L4] applied in the $y$ variable gives $$P(x,\beta(x))-P(x,\alpha(x)) =\int_{\alpha(x)}^{\beta(x)}\partial_yP(x,y)\,dy.$$ Since $\alpha<\beta$ on $(a,b)$, the only fixed $x$ where this can fail are $x=a$ and $x=b$; there $\alpha(x)=\beta(x)$ makes both sides zero, so the displayed identity holds for every $x\in[a,b]$. [given, L4]
+1.2 For each fixed $x$ with $\alpha(x)<\beta(x)$, [L4] applied in the $y$ variable gives $$P(x,\beta(x))-P(x,\alpha(x)) =\int_{\alpha(x)}^{\beta(x)}\partial_yP(x,y)\,dy.$$ Since $\alpha<\beta$ on $(a,b)$, this covers every interior $x$. At $x=a$ and $x=b$ the region definition requires only $\alpha(x)\le\beta(x)$, so both cases occur: where $\alpha(x)<\beta(x)$, as for a rectangle, the same application of [L4] applies verbatim, and where $\alpha(x)=\beta(x)$ both sides are zero. Hence the displayed identity holds for every $x\in[a,b]$. [given, L4]
 
 2.1 Therefore $$\int_{\partial D}P\,dx =-\int_a^b\bigl(P(x,\beta(x))-P(x,\alpha(x))\bigr)\,dx.$$ [step 1.1, algebra]
 

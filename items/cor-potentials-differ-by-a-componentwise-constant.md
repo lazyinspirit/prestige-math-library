@@ -29,7 +29,7 @@ Let $U\subseteq\mathbb R^n$ be open. If $\phi,\psi:U\to\mathbb R$ are $C^1$ and 
 ## Facts & Assumptions
 **Given:** The open set and potentials in the Statement.
 
-[L1] Call $x\sim y$ when some piecewise-$C^1$ path in $U$ joins $x$ to $y$. Constant paths, reversal and concatenation make $\sim$ reflexive, symmetric and transitive, so it is an equivalence relation on $U$; its classes are the **piecewise-$C^1$ path components** of $U$, and a set is piecewise-$C^1$ path-connected exactly when it is one such class ([[def-piecewise-c1-path-connected-conservative-and-path-independent]], [[def-piecewise-c1-path-operations-and-oriented-reparametrizations]], [[def-equivalence-relation]]).
+[L1] Call $x\sim y$ when some piecewise-$C^1$ path in $U$ joins $x$ to $y$. Constant paths, reversal and concatenation make $\sim$ reflexive, symmetric and transitive, so it is an equivalence relation on $U$; its classes are the **piecewise-$C^1$ path components** of $U$, and a nonempty $U$ is itself piecewise-$C^1$ path-connected exactly when it has just one class ([[def-piecewise-c1-path-connected-conservative-and-path-independent]], [[def-piecewise-c1-path-operations-and-oriented-reparametrizations]], [[def-equivalence-relation]]).
 
 [L2] The gradient theorem evaluates the line integral of a $C^1$ gradient as its endpoint increment ([[thm-gradient-theorem-for-line-integrals]]).
 
