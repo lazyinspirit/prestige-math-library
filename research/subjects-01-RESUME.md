@@ -41,10 +41,24 @@ finishes; do not wait for a whole wave.
 | 3 | `probability-theory` ← measure-theory · `pde` ← functional-analysis · `number-theory` ← commutative-algebra · `differential-geometry` ← homological-algebra | as shown |
 | 4 | `complex-analysis` ← measure-theory, functional-analysis, pde, number-theory | runs last so it can reconcile against all four |
 
-## Current state
+## Current state (2026-08-14, 07:15)
 
-**Wave 1 launched 2026-08-13, all four lanes running detached** (`nohup`, cap 4
-saturated). Timeout 21600 s each. Nothing has returned yet.
+**Lane moved from Opus 5 to Sol** (owner, 2026-08-14) after two rounds of Claude
+session-limit deaths. Codex subscription, unaffected by Claude quota.
+
+**COMPLETE (5):** `measure-theory` (23 pairs, DEFERRED.md §1 discharged),
+`functional-analysis` (25 pairs, 687 ids, §2 discharged), `monoidal-abelian-categories`
+(18 pairs, 844 items), `abstract-algebra` and `combinatorics` (enriched in place).
+
+**RUNNING (4):** `commutative-algebra`, `homological-algebra`, `probability-theory`,
+`pde`.
+
+**QUEUED (4), in dispatch order as slots free:**
+1. `group-theory` — ready now, blocked only on a slot
+2. `number-theory` — needs `commutative-algebra`
+3. `differential-geometry` — needs `homological-algebra`
+4. `complex-analysis` — needs `pde` and `number-theory`; runs last by design so it
+   can reconcile against every finished analysis track
 
 ## Gotchas hit this run
 
