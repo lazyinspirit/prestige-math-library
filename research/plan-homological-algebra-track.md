@@ -21,7 +21,7 @@ complexes, regular sequences, and depth belong to `commutative-algebra`.
 
 ## 0. Summary for the orchestrator
 
-**Track `homological-algebra`, wave 2, run `subjects-01`. Status: complete.**
+**Track `homological-algebra`, wave 2, run `subjects-01`. This scaffold is complete.**
 This file scaffolds seventeen A/B pairs where the live spec has six planned
 pairs, all six with empty `items` arrays. The expansion is mathematical rather
 than cosmetic: it keeps every A page at or below the owner's 60-item ceiling,
@@ -43,7 +43,7 @@ convergence hypotheses a page of their own.
 | `HA-9` | `yoneda-extensions-and-homological-dimension` | split from `ext-and-tor` | 43 |
 | `HA-10` | `tor-flatness-and-global-dimension` | split from `ext-and-tor` | 39 |
 | `HA-11` | `universal-coefficients-and-kunneth-theorems` | new graduate continuation | 30 |
-| `HA-12` | `group-cohomology-as-a-derived-functor` | required seam to `group-theory` | 42 |
+| `HA-12` | `group-cohomology-as-a-derived-functor` | required seam to `group-theory` | 41 |
 | `HA-13` | `triangulated-categories` | new graduate continuation | 46 |
 | `HA-14` | `derived-categories` | new graduate continuation | 53 |
 | `HA-15` | `spectral-sequences` | planned id kept | 42 |
@@ -84,36 +84,64 @@ least one with a harvestable contents list.
 - From the planned abstract-algebra tensor page: balanced maps, bimodules,
   tensor products of a right and a left module, flat modules, tensor right
   exactness, and Hom–tensor adjunction. This track does not author those notions.
+- From the planned abstract-algebra page
+  `chain-conditions-and-semisimple-modules`: the equivalence between
+  semisimplicity, splitting of all short exact module sequences, and all
+  modules being projective/injective. `HA-9`/`HA-10` consume those statements
+  only after that page is authored.
+- From abstract algebra RT-1, `the-group-algebra-and-representations`: the
+  finite-support group algebra, augmentation, trivial module, and the
+  action/module dictionary, extended there to arbitrary groups and
+  commutative coefficient rings before its finite-representation theory.
+- From group theory `GT-9`,
+  `group-extensions-complements-and-schur-zassenhaus`: the definition of a
+  group extension used in the Lyndon--Hochschild--Serre application.
 - Owner decision SE-D3: **global choice is not adopted**. A family of
   resolutions indexed by every object is input data. Every assertion that
   $L_nF$ or $R^nF$ is “well defined” is explicitly relative to that data.
 
 ### Seams owed
 
-Section §27 records the amendments. The important ones are: repoint the live
-381 dependency from the old diagram-lemma placeholder to
-`the-diagram-lemmas-in-an-abelian-category`; make abstract algebra's tensor page
-supply the right/left-module and bimodule typing used by noncommutative Tor;
-give `group-theory` the ids for $H^n(G,M)$ while reserving its low-degree
-group-theoretic interpretations to that track; and move the
-`differential-geometry` placement anchor from the old
-`spectral-sequences-examples` companion to the final companion
-`grothendieck-spectral-sequences-and-computations-examples` so the homological
-block is not split.
+Section §27 records all ten amendments owed: repoint the retained chain page
+to the finished abelian/exactness pages; retire the two empty omnibus page ids
+and splice the seventeen pairs; obtain stable tensor/flat/bimodule ids from
+abstract algebra; use the fixed RT-1 group-algebra page, cite group theory's
+fixed `GT-9` extension page in `HA-17`, and hand the derived $H^n(G,M)$ ids to
+`GT-21`--`GT-23`; move `differential-geometry`'s anchor to the final companion
+and give it the complex/LES/spectral-sequence ids; give
+`commutative-algebra` the complex, cone, resolution, Ext, Tor, and dimension
+ids while leaving minimality there; add a supersession pointer to the prior
+combined scaffold; preserve the category track's projective/injective-object
+and connecting-arrow ids; enforce the two-paragraph A-summary, 60-item, and
+B-leaf rules at splice; and obtain stable semisimplicity-equivalence ids from
+`chain-conditions-and-semisimple-modules`.
 
 ### Forward references, denials, and blockers
 
-There are **no unresolved forward references within the block**. Each A page
-closes with `Forward references: NONE`; the order in §5 is a topological order.
-External seams are named as `requires`, never as item-level forward references.
+There are **no unresolved item-level forward references within the block**.
+Each A page closes with `Forward references: NONE`; the order in §5 is a
+topological order. The unresolved splice/stable-id seams are exactly: the
+stable item ids on the fixed RT-1 group-ring/action page, tensor/flat stable
+item ids, semisimplicity stable item ids, the final differential-geometry
+anchor, the final `MA-9`
+projective/injective ids, and commutative algebra's locally defined
+minimal-resolution theorem. The ordinary localization seam is closed locally
+on `HA-14`. None is disguised as an A-item dependency on a later page.
 
 The scope denials in §26 are: de Rham theory; Koszul complexes, regular
-sequences, and depth; local cohomology and sheaf cohomology; Hochschild and
-cyclic (co)homology; Tate and profinite group cohomology; model, dg, and
-$\infty$-categories; unbounded derived categories and general K-injective/
-K-projective replacement; Brown representability; multiplicative spectral
-sequences; and derived completion/limits beyond the elementary example. Each
-denial states the missing subject machinery and the page that would license it.
+sequences, depth, and Auslander–Buchsbaum–Serre; sheaf/Čech and local
+cohomology; derived inverse limits and derived completion; change-of-rings
+spectral sequences; relative homological algebra and cotorsion/model structures;
+Hochschild, cyclic, and André–Quillen theories; Tate and profinite/Galois
+cohomology; low-degree group-theoretic interpretations, Schur multipliers,
+universal central extensions, Hopf's formula, and the free-group dimension
+calculation; Leray–Serre and Eilenberg–Moore spectral sequences;
+multiplicative spectral sequences; general unbounded K-injective/K-projective/
+K-flat replacement; dg, model, stable, and derived $\infty$-categories; Brown
+representability, compact generation, and Bousfield localization; perverse
+$t$-structures, tilts, and semiorthogonal decompositions; ring-specific higher
+global-dimension calculations; and Lie-algebra cohomology. Each denial states
+the missing subject machinery and the page that would license it.
 
 **Blockers: none.** The two textbook texts required by the commission were
 reachable. Publisher status is recorded honestly, and every load-bearing fact
@@ -176,7 +204,8 @@ said to “compute” anything.
 | exact sequences and all diagram lemmas, including the categorical connecting arrow | `monoidal-abelian-categories` | cited in `HA-4`; the connecting map in homology is an instance, not a second snake lemma |
 | projective and injective **object**; enough projectives/injectives | `monoidal-abelian-categories` | cited in `HA-5`; only resolutions and their consequences are new |
 | left/right modules, free modules, module exactness, module projectives/injectives | published abstract algebra | examples and module-specialised corollaries only |
-| balanced maps, bimodules, tensor product, flat module, Hom–tensor adjunction | `abstract-algebra` | cited in `HA-8`, `HA-10`, and `HA-11` |
+| balanced maps, bimodules, tensor product, flat module, Hom–tensor adjunction | `abstract-algebra` | cited in `HA-10` and `HA-11`, then through them on `HA-14` |
+| semisimple-module splitting/projectivity equivalences | `abstract-algebra` | cited by the dimension-zero and Ext/Tor-vanishing consequences on `HA-9`/`HA-10` |
 | de Rham complex, Poincaré lemma, de Rham theorem | `differential-geometry` | that track cites the complex and spectral-sequence machinery here |
 | Koszul complexes, regular sequences, depth | `commutative-algebra` | that track follows this block and cites Tor/Ext/dimension |
 | low-degree group-cohomology interpretations | `group-theory` | this track supplies $H^n(G,M)$, bar resolutions, and functorial algebra only |
@@ -282,7 +311,7 @@ This is a plan for the future item's `provenance.statement` and
 
 | code | planned component provenance | rationale |
 |---|---|---|
-| `LN` | statement `literature-derived`; proof `not-applicable` | definition or notation copied faithfully from the pair's named sources |
+| `LN` | statement `literature-derived`; proof `not-applicable` | definition/notation or a source-derived false-statement prompt copied faithfully from the pair's named sources |
 | `LA` | statement `literature-derived`; proof `ai-altered` | sourced theorem; future proof reorganises or decomposes a standard source proof while preserving the statement |
 | `LL` | statement `literature-derived`; proof `literature-derived` | statement and proof follow one named source closely |
 | `L0` | statement `literature-derived`; proof `not-supplied` | source-cited orientation only; used solely where §26 expressly allows it and never load-bearing |
@@ -309,20 +338,21 @@ A page and is a leaf.
 | `HA-4` | `mapping-cones-cylinders-and-chain-triangles`, `the-diagram-lemmas-in-an-abelian-category` |
 | `HA-5` | `long-exact-sequences-in-homology`, `subobject-lattices-generators-and-the-grothendieck-axioms`, `free-modules-and-exact-sequences` |
 | `HA-6` | `projective-and-injective-resolutions`, `preadditive-and-additive-categories-and-biproducts` |
-| `HA-7` | `derived-functors`, `long-exact-sequences-in-homology` |
-| `HA-8` | `delta-functors-and-universality`, `tensor-products-of-modules` |
-| `HA-9` | `ext-and-balanced-resolutions` |
-| `HA-10` | `ext-and-balanced-resolutions`, `tensor-products-of-modules` |
-| `HA-11` | `tor-flatness-and-global-dimension`, `long-exact-sequences-in-homology` |
-| `HA-12` | `ext-and-balanced-resolutions`, `tor-flatness-and-global-dimension`, the group-ring page supplied by `group-theory`/`abstract-algebra` at splice |
+| `HA-7` | `derived-functors`, `projective-and-injective-resolutions`, `long-exact-sequences-in-homology` |
+| `HA-8` | `delta-functors-and-universality`, `derived-functors` |
+| `HA-9` | `ext-and-balanced-resolutions`, `projective-and-injective-resolutions`, `chain-conditions-and-semisimple-modules` |
+| `HA-10` | `ext-and-balanced-resolutions`, `yoneda-extensions-and-homological-dimension`, `tensor-products-of-modules`, `chain-conditions-and-semisimple-modules` |
+| `HA-11` | `tor-flatness-and-global-dimension`, `ext-and-balanced-resolutions`, `long-exact-sequences-in-homology` |
+| `HA-12` | `ext-and-balanced-resolutions`, `tor-flatness-and-global-dimension`, `the-group-algebra-and-representations` |
 | `HA-13` | `mapping-cones-cylinders-and-chain-triangles`, `long-exact-sequences-in-homology` |
-| `HA-14` | `triangulated-categories`, `derived-functors` |
+| `HA-14` | `triangulated-categories`, `derived-functors`, `yoneda-extensions-and-homological-dimension`, `tor-flatness-and-global-dimension` |
 | `HA-15` | `chain-complexes-and-homology` |
-| `HA-16` | `spectral-sequences`, `mapping-cones-cylinders-and-chain-triangles` |
-| `HA-17` | `double-complexes-exact-couples-and-convergence`, `derived-functors`, `delta-functors-and-universality` |
+| `HA-16` | `spectral-sequences`, `mapping-cones-cylinders-and-chain-triangles`, `long-exact-sequences-in-homology` |
+| `HA-17` | `double-complexes-exact-couples-and-convergence`, `derived-functors`, `delta-functors-and-universality`, `group-cohomology-as-a-derived-functor`, `universal-coefficients-and-kunneth-theorems`, `group-extensions-complements-and-schur-zassenhaus` |
 
-The one cross-track page-id gap in `HA-12` is an explicit seam, not an
-item-level forward reference. §27 assigns the group-ring owner and a fallback.
+The cross-track page ids needed by `HA-12` and the LHS application in `HA-17`
+are now fixed. Their stable item ids remain build-time seams, not item-level
+forward references.
 
 ---
 
@@ -526,7 +556,7 @@ category.
 
 - **Weibel, *An Introduction to Homological Algebra*, §§1.1 “Complexes of
   $R$-Modules”, 1.2 “Operations on Chain Complexes”, and the definitions at
-  §1.3 “Long Exact Sequences” (pp. 1–13).** Primary source for items 1–22 and
+  §1.3 “Long Exact Sequences” (printed pp. 1–14).** Primary source for items 1–22 and
   the module forms of items 23–35. We use the general abelian-category
   formulation he records in §1.6, but cite the category scaffold for those
   axioms.
@@ -711,7 +741,7 @@ numbered proof obligation, not notation.
 ### Sources and exact locators
 
 - **Weibel §1.2 “Operations on Chain Complexes”, especially 1.2.4–1.2.8, and
-  §1.4 “Chain Homotopies” (pp. 7–11, 17–20).** Primary textbook source for
+  §1.4 “Chain Homotopies” (printed pp. 5–9, 15–17).** Primary textbook source for
   items 1–15 and 24–35.
 - **The Stacks Project, *Homological Algebra*, §14 “Homotopy and the shift
   functor” and §16 “Graded objects” (current PDF pp. 28–34).** Independent
@@ -762,11 +792,11 @@ triangulated axioms; that belongs to `HA-13`.
    $q:\operatorname{Cone}(f)\to C[1]$, with their component formulas.
 4. `thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact` —
    **theorem** `[LA]`.
-   $0\to D\xrightarrow j\operatorname{Cone}(f)\xrightarrow qC[1]\to0$;
+   $0\to D\xrightarrow{j}\operatorname{Cone}(f)\xrightarrow{q}C[1]\to0$;
    the degreewise splitting is not asserted to be a chain splitting.
 5. `def-cone-triangle-of-a-chain-map` — **definition** `[LN]`.
-   $C\xrightarrow fD\xrightarrow j\operatorname{Cone}(f)
-   \xrightarrow qC[1]$, with “cone triangle” reserved for this chain-level
+   $C\xrightarrow{f}D\xrightarrow{j}\operatorname{Cone}(f)
+   \xrightarrow{q}C[1]$, with “cone triangle” reserved for this chain-level
    construction.
 6. `prop-the-cone-of-the-zero-map-is-the-direct-sum-with-a-shift` —
    **proposition** `[LA]`.
@@ -787,11 +817,11 @@ triangulated axioms; that belongs to `HA-13`.
 12. `lem-homotopic-maps-have-chain-isomorphic-mapping-cones` — **lemma** `[LA]`.
     The triangular matrix using the homotopy supplies the isomorphism.
 13. `thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic` —
-    **theorem** `[LA]`. The proof uses the cone long exact sequence developed
-    within this page from item 4 and the connecting construction supplied on
-    `HA-4`; to keep the page order noncircular, the future author proves the
-    elementary kernel/cokernel argument inline here and `HA-4` later records
-    agreement with the general theorem. LANDMARK.
+    **theorem** `[LA]`. The future author constructs directly the four-term
+    exact segment needed here from item 4 and the available kernel/image/cokernel
+    calculus. No general connecting morphism or result from `HA-4` is used;
+    `HA-4` later records agreement with its general long exact sequence.
+    LANDMARK.
 14. `thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible` —
     **theorem** `[LA]`. Both directions construct the homotopy inverse or
     contraction explicitly. LANDMARK.
@@ -801,8 +831,8 @@ triangulated axioms; that belongs to `HA-13`.
 15. `def-mapping-cylinder-of-a-chain-map` — **definition** `[LN]`.
     The direct-sum formula is chosen compatibly with the cone convention and
     is accompanied by maps $i:C\to\operatorname{Cyl}(f)$,
-    $p:\operatorname{Cyl}(f)\to D$, and $r:\operatorname{Cyl}(f)\to C$ where
-    typed.
+    $p:\operatorname{Cyl}(f)\to D$, and
+    $j:D\to\operatorname{Cyl}(f)$ with $pj=1_D$.
 16. `lem-the-mapping-cylinder-differential-squares-to-zero` — **lemma** `[LA]`.
 17. `thm-the-mapping-cylinder-factors-a-chain-map` — **theorem** `[LA]`.
     $f=p i$, $i$ is a degreewise split monomorphism, and $p$ is a chain-homotopy
@@ -822,9 +852,14 @@ triangulated axioms; that belongs to `HA-13`.
     **proposition** `[LA]`, for a square whose vertical maps are homotopy
     equivalences and whose chosen homotopy data make the square commute up to
     homotopy.
-22. `lem-the-cone-of-a-composite-fits-a-degreewise-split-three-cone-sequence` —
-    **lemma** `[LA]`. This is the chain-level octahedral calculation; it states
-    the explicit complexes and maps but does not name the octahedral axiom.
+22. `lem-the-three-cone-calculation-for-a-composite-chain-map` — **lemma**
+    `[LA]`. For $C\xrightarrow fD\xrightarrow gE$, it constructs the maps
+    $\operatorname{Cone}(f)\to\operatorname{Cone}(gf)\to
+    \operatorname{Cone}(g)$ and the explicit chain-homotopy equivalence from
+    the cone of the first map to $\operatorname{Cone}(g)$. This is the
+    chain-level octahedral calculation; it does not falsely assert that the
+    three displayed cones themselves form a short exact sequence or name the
+    octahedral axiom.
 23. `prop-the-cone-triangle-of-a-null-homotopic-map-splits-in-the-homotopy-category` —
     **proposition** `[LA]`.
 24. `prop-a-chain-map-with-contractible-cone-becomes-an-isomorphism-in-the-homotopy-category` —
@@ -871,7 +906,7 @@ triangulated axioms; that belongs to `HA-13`.
 
 ### Sources and exact locators
 
-- **Weibel §1.5 “Mapping Cones and Cylinders” (pp. 20–24).** Primary textbook
+- **Weibel §1.5 “Mapping Cones and Cylinders” (printed pp. 18–24).** Primary textbook
   source for items 1–20 and the quasi-isomorphism/cone criterion.
 - **The Stacks Project, *Derived Categories*, §9 “Cones and termwise split
   sequences” and §10 “Distinguished triangles in the homotopy category”
@@ -979,8 +1014,9 @@ the category rather than assumed from an element chase.
     **corollary** `[LA]`. It cites `HA-3` item 13 and records that item 20 gives
     the same equivalence by exactness; the proof is not duplicated.
 23. `thm-long-exact-sequence-of-relative-homology-for-a-composable-pair` —
-    **theorem** `[LA]`. Obtained from the three-cone sequence, with all maps
-    expressed in terms of the supplied composable chain maps.
+    **theorem** `[LA]`. Obtained from `HA-3`'s three-cone calculation and the
+    cone long exact sequence, with all maps expressed in terms of the supplied
+    composable chain maps.
 24. `cor-a-chain-map-between-acyclic-complexes-has-acyclic-cone` — **corollary**
     `[LA]`.
 25. `prop-an-exact-functor-carries-the-long-exact-homology-sequence-to-the-corresponding-long-exact-sequence` —
@@ -1030,8 +1066,9 @@ the category rather than assumed from an element chase.
 
 ### Sources and exact locators
 
-- **Weibel §1.3 “Long Exact Sequences” (pp. 12–17) and §1.5 “Mapping Cones and
-  Cylinders” (pp. 20–24).** Primary textbook source for items 2–25.
+- **Weibel §1.3 “Long Exact Sequences” (printed pp. 10–14) and §1.5 “Mapping
+  Cones and Cylinders” (printed pp. 18–24).** Primary textbook source for items
+  2–25.
 - **Rotman §6.1 “Homology Functors” (pp. 323–339), especially the connecting
   homomorphism, Fundamental Theorem of Homological Algebra, and naturality.**
   Independent textbook treatment.
@@ -1243,14 +1280,15 @@ comparison data they consume.
 `ex-the-horseshoe-resolution-of-an-extension-of-cyclic-groups` `[AA]` ·
 `ex-schanuel-lemma-for-two-presentations-of-a-module` `[AA]` ·
 `cex-two-projective-resolutions-with-nonisomorphic-first-syzygies` `[AN]` ·
-`cex-a-category-with-enough-injectives-but-not-enough-projectives` `[LN]`
-*(a source-backed sheaf-category example, orientation only and non-load-bearing)*.
+`cex-a-category-with-enough-injectives-but-not-enough-projectives` `[LL]`
+*(a source-backed example with the categorical claims proved, non-load-bearing)*.
 
 ### Sources and exact locators
 
 - **Weibel §§2.2 “Projective Resolutions” and 2.3 “Injective Resolutions”
-  (pp. 36–47), including the Comparison Theorem, Horseshoe Lemma, and
-  Comparison Theorem 2.3.7.** Primary textbook source for items 1–38.
+  (printed pp. 33–42), including Comparison Theorem 2.2.6, Horseshoe Lemma 2.2.8,
+  and the injective Comparison Theorem 2.3.7.** Primary textbook source for
+  items 1–38.
 - **Rotman §§3.1 “Projective Modules”, 3.2 “Injective Modules”, and §6.2.1
   “Left Derived Functors” through the comparison and horseshoe results
   (pp. 98–130, 340–356).** Independent textbook treatment.
@@ -1258,7 +1296,7 @@ comparison data they consume.
   “Projectives”, and 29 “Injectives and adjoint functors” (current PDF
   pp. 68–75).** Independent categorical control for resolution existence and
   comparison.
-- **The Stacks Project, *Injectives*, §11 “Injectives in Grothendieck
+- **The Stacks Project, *Injectives*, §19.11 “Injectives in Grothendieck
   categories”, especially Theorem 19.11.7, Tag `079H`.** Primary accessible
   source for items 39–45.
 - **Sharifi §§3.2 “Projective objects”, 3.3 “Left derived functors”, and 3.4
@@ -1431,15 +1469,15 @@ of “well defined” available without global choice.
 `ex-the-right-derived-functors-of-hom-from-a-fixed-object` `[AA]` ·
 `ex-two-resolution-data-and-their-change-isomorphism` `[AA]` ·
 `ex-independence-of-two-comparison-lifts-on-homology` `[AA]` ·
-`ex-an-acyclic-resolution-that-is-not-an-injective-resolution` `[LN]` ·
-`cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor` `[LN]` ·
+`ex-an-acyclic-resolution-that-is-not-an-injective-resolution` `[LL]` ·
+`cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor` `[LL]` ·
 `ex-a-contravariant-functor-derived-via-the-opposite-category` `[AA]`.
 
 ### Sources and exact locators
 
 - **Weibel §§2.1 “$\delta$-Functors”, 2.4 “Left Derived Functors”, 2.5 “Right
   Derived Functors”, and 2.6 “Adjoint Functors and Left/Right Exactness”
-  (pp. 32–59).** Primary textbook source for items 3–39, translated to the
+  (printed pp. 30–32, 43–57).** Primary textbook source for items 3–39, translated to the
   data-supplied foundation.
 - **Rotman §6.2 “Derived Functors”, including §§6.2.1–6.2.4 (pp. 340–403).**
   Independent textbook treatment of covariant and contravariant cases.
@@ -1466,7 +1504,8 @@ statement of SE-D3 by hiding the supplied resolution datum in prose.
 ## HA-7. Delta Functors, Effacement, and Universality
 
 **page id** `delta-functors-and-universality`  
-**`requires`** `derived-functors`, `long-exact-sequences-in-homology`
+**`requires`** `derived-functors`, `projective-and-injective-resolutions`,
+`long-exact-sequences-in-homology`
 
 Long exact sequences do not merely accompany derived functors; together with
 naturality they form a structure whose universal property characterises the
@@ -1525,12 +1564,15 @@ every resolution by hand.
 16. `prop-positive-right-derived-functors-are-effaceable-by-injectives` —
     **proposition** `[LA]`.
 17. `lem-dimension-shift-for-a-homological-delta-functor-effaced-in-the-middle` —
-    **lemma** `[LA]`. A short exact sequence with $T_n(P)=0$ identifies
-    $T_n(A)$ with $T_{n+1}$ or $T_{n-1}$ of the kernel in the correct
-    homological direction; the page prints the segment rather than relying on
-    memory.
+    **lemma** `[LA]`. For $0\to K\to P\to A\to0$, if
+    $T_n(P)=T_{n-1}(P)=0$, the connecting arrow gives
+    $T_n(A)\cong T_{n-1}(K)$. The proof prints the exact segment and also
+    records the one-sided surjectivity/injectivity conclusions when only one
+    vanishing hypothesis is available.
 18. `lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle` —
-    **lemma** `[LA]`, dual.
+    **lemma** `[LA]`. For $0\to A\to I\to C\to0$, if
+    $T^{n-1}(I)=T^n(I)=0$, then $T^{n-1}(C)\cong T^n(A)$; the one-sided
+    forms are recorded separately.
 19. `lem-extend-a-degree-zero-transformation-through-one-dimension-shift` —
     **lemma** `[LA]`. Naturality and independence of the selected effacement
     are separate clauses.
@@ -1577,7 +1619,7 @@ every resolution by hand.
 
 ### B page — `delta-functors-and-universality-examples`
 
-`ex-homology-as-a-homological-delta-functor` `[LN]` ·
+`ex-homology-as-a-homological-delta-functor` `[LA]` ·
 `ex-the-trivial-delta-functor-of-an-exact-functor` `[AA]` ·
 `ex-one-dimension-shift-along-a-projective-presentation` `[AA]` ·
 `ex-one-dimension-shift-along-an-injective-copresentation` `[AA]` ·
@@ -1588,7 +1630,7 @@ every resolution by hand.
 ### Sources and exact locators
 
 - **Weibel §2.1 “$\delta$-Functors”, §2.4 “Left Derived Functors”, and §2.5
-  “Right Derived Functors” (pp. 32–55).** Primary textbook source for all
+  “Right Derived Functors” (printed pp. 30–32, 43–50).** Primary textbook source for all
   items, especially the effacement criterion and universality.
 - **Rotman §6.2.2 “Axioms”, §6.2.3 “Covariant Right Derived Functors”, and
   §6.2.4 “Contravariant Right Derived Functors” (pp. 357–403).** Independent
@@ -1614,8 +1656,7 @@ naturality is not a $\delta$-functor.
 ## HA-8. Ext and Balanced Resolutions
 
 **page id** `ext-and-balanced-resolutions`  
-**`requires`** `delta-functors-and-universality`,
-`tensor-products-of-modules`
+**`requires`** `delta-functors-and-universality`, `derived-functors`
 
 Ext has two legitimate constructions: derive $\operatorname{Hom}(M,-)$ with
 injectives or derive the contravariant $\operatorname{Hom}(-,N)$ with
@@ -1738,13 +1779,13 @@ theorem.
 `ex-ext-of-a-cyclic-abelian-group-by-an-abelian-group` `[AA]` ·
 `ex-the-hom-double-complex-in-low-bidegrees` `[AA]` ·
 `ex-an-ext-dimension-shift` `[AA]` ·
-`cex-positive-ext-does-not-vanish-for-an-injective-first-variable` `[LN]` ·
+`cex-positive-ext-does-not-vanish-for-an-injective-first-variable` `[LL]` ·
 `ex-naturality-of-the-balance-isomorphism` `[AA]`.
 
 ### Sources and exact locators
 
-- **Weibel §2.7 “Balancing Tor and Ext” (pp. 59–69) and §§3.3–3.4 “Ext for
-  Nice Rings” and “Ext and Extensions” (pp. 78–88).** Primary source for the
+- **Weibel §2.7 “Balancing Tor and Ext” (printed pp. 58–65) and §§3.3–3.4 “Ext
+  for Nice Rings” and “Ext and Extensions” (printed pp. 73–79).** Primary source for the
   two constructions, acyclic assembly, and balance.
 - **Rotman §7.2 “Ext” (pp. 415–427) and §6.2's contravariant derived-functor
   treatment (pp. 340–403).** Independent textbook source.
@@ -1768,7 +1809,9 @@ cite `HA-16` backwards and do not write an unnamed spectral sequence here.
 ## HA-9. Yoneda Extensions and Homological Dimension
 
 **page id** `yoneda-extensions-and-homological-dimension`  
-**`requires`** `ext-and-balanced-resolutions`
+**`requires`** `ext-and-balanced-resolutions`,
+`projective-and-injective-resolutions`,
+`chain-conditions-and-semisimple-modules`
 
 This page explains what $\operatorname{Ext}^1$ classifies and what higher Ext
 multiplies. It first constructs equivalence classes and Baer sum, checks that
@@ -1802,7 +1845,7 @@ vanishing, avoiding ring-specific regular-sequence machinery.
 8. `def-baer-sum-of-extension-classes` — **definition** `[LN]`. Take the direct
    sum of two extensions, pull back along the diagonal $M\to M\oplus M$, and
    push out along the codiagonal $N\oplus N\to N$.
-9. `lem-baer-sum-is-independent-of-extension-representatives` — **lemma**
+9. `lem-baer-sum-of-short-exact-sequence-classes-is-independent-of-representatives` — **lemma**
    `[LA]`; `justified_by` for item 8.
 10. `thm-baer-sum-makes-extension-classes-an-abelian-group` — **theorem**
     `[LA]`. The split class is zero; the inverse pushes out along $-1_N$;
@@ -1866,8 +1909,9 @@ vanishing, avoiding ring-specific regular-sequence machinery.
 30. `thm-injective-dimension-at-most-n-iff-higher-ext-vanishes` — **theorem**
     `[LA]`, with Ext in the second variable.
 31. `cor-projective-dimension-is-the-largest-nondegenerate-ext-degree-when-finite` —
-    **corollary** `[LA]`, stated with existence of a witness object and the
-    smallness/enough-projectives hypotheses.
+    **corollary** `[LA]`, stated for a nonzero object with existence of a
+    witness object and the smallness/enough-projectives hypotheses; the zero
+    object is handled according to the convention in item 26.
 32. `def-left-and-right-global-dimension-of-a-ring` — **definition** `[LN]`.
     Suprema of projective dimensions of left and right modules; they are not
     presumed equal for a noncommutative ring.
@@ -1877,11 +1921,14 @@ vanishing, avoiding ring-specific regular-sequence machinery.
 34. `thm-global-dimension-is-the-supremum-of-nondegenerate-ext-degrees` —
     **theorem** `[LA]`.
 35. `prop-global-dimension-zero-characterises-semisimple-module-categories` —
-    **proposition** `[LA]`, citing the planned/published semisimplicity page for
-    the splitting equivalences rather than re-proving them.
+    **proposition** `[LA]`, citing the splitting/all-modules-projective
+    equivalences that the required but currently empty
+    `chain-conditions-and-semisimple-modules` page must author first.
 36. `prop-hereditary-rings-have-global-dimension-at-most-one` — **proposition**
-    `[LA]`, with the left/right version typed and the hereditary definition
-    cited from abstract algebra if available at authoring.
+    `[LA]`. The left form assumes every submodule of a projective left module
+    is projective and concludes left global dimension at most one; the right
+    form states the corresponding right-module hypothesis. No untyped use of
+    “hereditary” remains.
 37. `thm-the-integers-have-global-dimension-one` — **theorem** `[LA]`. Every
     subgroup of a free abelian group is free, while
     $\operatorname{Ext}^1_{\mathbb Z}(\mathbb Z/n,\mathbb Z)\ne0$.
@@ -1908,15 +1955,15 @@ vanishing, avoiding ring-specific regular-sequence machinery.
 `ex-baer-sum-of-two-extensions-of-cyclic-groups` `[AA]` ·
 `ex-ext-one-of-z-mod-n-by-an-abelian-group-as-extension-classes` `[AA]` ·
 `ex-splicing-two-short-exact-sequences` `[AA]` ·
-`ex-a-noncommutative-yoneda-product` `[LN]` ·
+`ex-a-noncommutative-yoneda-product` `[LL]` ·
 `ex-projective-dimension-of-a-cyclic-abelian-group` `[AA]` ·
 `ex-global-dimension-of-a-field-and-of-the-integers` `[AA]` ·
-`cex-two-equivalent-higher-extensions-with-no-single-isomorphism-of-middle-terms` `[LN]`.
+`cex-two-equivalent-higher-extensions-with-no-single-isomorphism-of-middle-terms` `[LL]`.
 
 ### Sources and exact locators
 
-- **Weibel §3.4 “Ext and Extensions” (pp. 82–88) and §4.1 “Dimensions”
-  (pp. 109–116).** Primary textbook source for Baer/Yoneda Ext and dimension.
+- **Weibel §3.4 “Ext and Extensions” (printed pp. 76–79) and §4.1 “Dimensions”
+  (printed pp. 91–94).** Primary textbook source for Baer/Yoneda Ext and dimension.
 - **Rotman §§7.2 “Ext”, 7.2.1 “Baer Sum”, and 8.1 “Dimensions of Rings”
   (pp. 415–437, 453–466).** Independent textbook source.
 - **Hilton–Stammbach, *A Course in Homological Algebra*, Ch. III, §§1–5
@@ -1942,7 +1989,9 @@ regular sequences is inferred from global dimension.
 ## HA-10. Tor, Flatness, Balance, and Global Dimension
 
 **page id** `tor-flatness-and-global-dimension`  
-**`requires`** `ext-and-balanced-resolutions`, `tensor-products-of-modules`
+**`requires`** `ext-and-balanced-resolutions`,
+`yoneda-extensions-and-homological-dimension`,
+`tensor-products-of-modules`, `chain-conditions-and-semisimple-modules`
 
 The abstract-algebra track owns tensor products and flat modules. This page
 derives tensor, proves that resolving the right module or the left module gives
@@ -2041,7 +2090,8 @@ torsion and flatness. Noncommutative handedness is printed in every definition.
     $R$-module $M$. No corresponding equality with global dimension is
     asserted.
 32. `prop-semisimple-rings-have-vanishing-positive-tor-and-ext` —
-    **proposition** `[LA]`, citing the semisimple-module equivalences.
+    **proposition** `[LA]`, citing the stable semisimple-module equivalences
+    required from `chain-conditions-and-semisimple-modules`.
 33. `prop-the-integers-have-weak-and-global-dimension-one` — **proposition**
     `[LA]`, combining `HA-9` and items 23–25.
 
@@ -2066,8 +2116,8 @@ torsion and flatness. Noncommutative handedness is printed in every definition.
 
 `ex-tor-of-two-cyclic-groups-from-a-two-term-resolution` `[AA]` ·
 `ex-tor-detects-n-torsion` `[AA]` ·
-`ex-a-flat-nonprojective-module` `[LN]` ·
-`ex-localization-is-flat-and-has-vanishing-positive-tor` `[LN]` ·
+`ex-a-flat-nonprojective-module` `[LL]` ·
+`ex-localization-is-flat-and-has-vanishing-positive-tor` `[LL]` ·
 `ex-the-tensor-double-complex-in-low-degrees` `[AA]` ·
 `ex-tor-symmetry-over-a-commutative-ring` `[AA]` ·
 `cex-a-noncommutative-handedness-error-in-tor` `[AN]` ·
@@ -2076,15 +2126,16 @@ torsion and flatness. Noncommutative handedness is printed in every definition.
 ### Sources and exact locators
 
 - **Weibel §§2.7 “Balancing Tor and Ext”, 3.1 “Tor for Abelian Groups”, 3.2
-  “Tor and Flatness”, and 4.1 “Dimensions” (pp. 59–78, 109–116).** Primary
+  “Tor and Flatness”, and 4.1 “Dimensions” (printed pp. 58–72, 91–94).** Primary
   textbook source.
 - **Rotman §§7.1 “Tor”, 7.1.1 “Domains”, 7.1.2 “Localization”, and 8.1
   “Dimensions of Rings” (pp. 404–415, 453–466).** Independent textbook source.
 - **Sharifi §3.5 “Tor and Ext” (pp. 65–70).** Open independent control.
-- **The Stacks Project, *More on Algebra*, Tor/flatness tags cited by the
-  abstract-algebra tensor scaffold, together with *Homological Algebra* §§18
-  “Double complexes and associated total complexes” and 25 “Double complexes”.**
-  Independent control for totalisation and balance.
+- **The Stacks Project, *Homological Algebra*, §§18 “Double complexes and
+  associated total complexes” and 25 “Double complexes” (current PDF
+  pp. 37–40, 65–68).** Independent control for totalisation and the two-edge
+  balance argument; the Tor/flatness statements themselves use the three exact
+  textbook/lecture-note locators above.
 
 ### Proof strategy and traps
 
@@ -2103,7 +2154,7 @@ noncommutative $R$.
 
 **page id** `universal-coefficients-and-kunneth-theorems`  
 **`requires`** `tor-flatness-and-global-dimension`,
-`long-exact-sequences-in-homology`
+`ext-and-balanced-resolutions`, `long-exact-sequences-in-homology`
 
 This page is deliberately classical and precise. Over $\mathbb Z$ or a PID,
 free chain complexes admit universal-coefficient and Künneth short exact
@@ -2166,7 +2217,8 @@ is a canonical decomposition” is the page's main boundary obligation.
     \]
     LANDMARK.
 14. `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` —
-    **theorem** `[LA]` under the exact stated hypotheses.
+    **theorem** `[LA]` for the same free complex over a PID as item 13; the
+    splitting is neither part of item 13 nor natural in $C$.
 15. `cor-cohomology-with-a-divisible-abelian-coefficient-group-is-hom-of-homology` —
     **corollary** `[LA]`. Divisible is injective over $\mathbb Z$, so the Ext
     term vanishes.
@@ -2225,19 +2277,20 @@ is a canonical decomposition” is the page's main boundary obligation.
 `ex-a-nonzero-tor-correction-in-universal-coefficients` `[AA]` ·
 `ex-kunneth-for-two-cyclic-two-term-complexes` `[AA]` ·
 `ex-kunneth-over-a-field` `[AA]` ·
-`cex-a-nonnatural-choice-of-uct-splitting` `[LN]` ·
+`cex-a-nonnatural-choice-of-uct-splitting` `[LL]` ·
 `ex-euler-characteristic-of-a-tensor-product-complex` `[AA]`.
 
 ### Sources and exact locators
 
-- **Weibel §3.6 “Universal Coefficient Theorems” (pp. 93–101), especially
-  Theorems 3.6.1 and 3.6.5, and the Künneth discussion in §3.6.** Primary
-  textbook source.
+- **Weibel §3.6 “Universal Coefficient Theorems” (printed pp. 87–90),
+  especially the Künneth Formula 3.6.1, Universal Coefficient Theorem for
+  Homology 3.6.2, and the cohomological theorem 3.6.5.** Primary textbook
+  source.
 - **Rotman §7.4 “Universal Coefficients” (pp. 438–452) and §10.10 “Künneth
   Theorems” (pp. 678–688).** Independent textbook source.
-- **Hilton–Stammbach, Ch. V, §§1–4 “Universal coefficient theorems” and
-  “Künneth formula” (exact headings/dispositions in §24).** Third textbook
-  control.
+- **Hilton–Stammbach, Ch. V §§1 “Double Complexes”, 2 “The Künneth Theorem”,
+  3 “The Dual Künneth Theorem”, and 4 “Applications of the Künneth Formulas”
+  (dispositions in §24).** Third textbook control.
 - **Sharifi §§2.8 “Total complexes” and 3.5 “Tor and Ext” (pp. 47–50,
   65–70).** Open control for totalisation and derived correction terms.
 
@@ -2258,7 +2311,8 @@ local finiteness condition ensuring the chosen direct-sum totalisation.
 
 **page id** `group-cohomology-as-a-derived-functor`  
 **`requires`** `ext-and-balanced-resolutions`,
-`tor-flatness-and-global-dimension`, and the group-ring page assigned at splice
+`tor-flatness-and-global-dimension`, and
+`the-group-algebra-and-representations`
 
 This page supplies exactly the seam promised to `group-theory`:
 $H^n(G,M)$ as the right derived functor of invariants, with a bar resolution
@@ -2356,21 +2410,22 @@ extensions belong to `group-theory` and are not re-minted here.
     \operatorname{pd}_{\mathbb Z[G]}\mathbb Z$.
 31. `thm-group-cohomological-dimension-is-detected-by-cohomology-vanishing` —
     **theorem** `[LA]`, via the Ext characterisation of projective dimension.
-32. `prop-free-groups-have-cohomological-dimension-at-most-one` —
-    **proposition** `[LA]`, conditional on/citing the group track's free-group
-    augmentation-ideal theorem; if that theorem is not authored, this item is
-    removed rather than proved here.
-33. `prop-finite-groups-have-torsion-annihilation-in-positive-cohomology` —
-    **proposition** `[LA]`. For finite $G$, multiplication by $|G|$ annihilates
-    $H^n(G,M)$ for $n>0$, proved from restriction/corestriction maps whose
-    algebraic construction is included.
-34. `def-restriction-and-corestriction-on-group-cohomology` — **definition**
-    `[LN]`, for finite-index subgroups; representative independence is item 35.
-35. `lem-corestriction-is-independent-of-the-coset-representatives` —
+32. `def-restriction-and-corestriction-on-group-cohomology` — **definition**
+    `[LN]`, for finite-index subgroups; representative independence is item 33.
+33. `lem-corestriction-is-independent-of-the-coset-representatives` —
     **lemma** `[LA]`.
-36. `thm-restriction-corestriction-composite-is-multiplication-by-the-index` —
+34. `thm-restriction-corestriction-composite-is-multiplication-by-the-index` —
     **theorem** `[LA]`, with the normality/trivial-action refinements stated
     only where sourced.
+35. `prop-finite-groups-have-torsion-annihilation-in-positive-cohomology` —
+    **proposition** `[LA]`. For finite $G$, multiplication by $|G|$ annihilates
+    $H^n(G,M)$ for $n>0$, by items 32–34 and vanishing for the trivial subgroup.
+36. `thm-groups-of-finite-integral-cohomological-dimension-are-torsion-free` —
+    **theorem** `[LA]`. If $G$ contained a nontrivial finite cyclic subgroup,
+    restriction of a finite projective resolution would bound that subgroup's
+    cohomological dimension, contradicting its periodic nonvanishing. The proof
+    constructs the needed periodic cyclic resolution inline from the cited
+    source; no examples-page item is a dependency.
 
 ### `fs-` items (A page)
 
@@ -2386,10 +2441,6 @@ extensions belong to `group-theory` and are not re-minted here.
 - `fs-shapiro-lemma-needs-no-distinction-between-induction-and-coinduction` —
   **false statement** `[LN]`; homology and cohomology use the appropriate
   adjoints.
-- `fs-a-group-of-finite-cohomological-dimension-may-contain-nontrivial-torsion-with-no-extra-hypotheses` —
-  **false statement** `[LN]` in the standard integral setting; the exact
-  theorem and hypotheses are source-controlled if included at authoring.
-
 ### B page — `group-cohomology-as-a-derived-functor-examples`
 
 `ex-group-cohomology-of-the-trivial-group` `[AA]` ·
@@ -2406,7 +2457,7 @@ extensions belong to `group-theory` and are not re-minted here.
 
 - **Weibel Ch. 6, §§6.1 “Definitions and First Properties”, 6.2 “Cyclic and
   Free Groups”, 6.3 “Shapiro's Lemma”, and 6.5 “The Bar Resolution”
-  (pp. 161–175, 181–185).** Primary textbook source. Sections 6.4 and 6.6 are
+  (printed pp. 160–173, 177–181).** Primary textbook source. Sections 6.4 and 6.6 are
   harvested but assigned to `group-theory` because they are the low-degree
   interpretations.
 - **Rotman Ch. 9, §§9.2 “Group Cohomology”, 9.3 “Bar Resolutions”, 9.4 “Group
@@ -2486,29 +2537,29 @@ it does not introduce dg, model, or stable $\infty$-categories.
     $X\to X\oplus Y\to Y\to X[1]$ with the canonical maps.
 13. `prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations` —
     **proposition** `[LA]`.
-14. `prop-two-components-of-an-isomorphism-of-triangles-force-the-third` —
-    **proposition** `[LA]`, proved after exact Hom sequences (item 20) or by the
-    triangulated five lemma; the dependency is recorded.
-15. `prop-a-distinguished-triangle-with-zero-first-map-is-split` —
-    **proposition** `[LA]`, and its rotations.
-16. `prop-a-distinguished-triangle-splits-exactly-when-one-connecting-map-vanishes` —
-    **proposition** `[LA]`, with the equivalent section/retraction conditions.
-17. `def-cohomological-functor-on-a-triangulated-category` — **definition**
-    `[LN]`. An additive $H:\mathcal T\to\mathcal A$ sending distinguished
-    triangles to exact sequences
-    $H(X)\to H(Y)\to H(Z)$; shifts generate the long sequence.
-18. `def-homological-functor-on-a-triangulated-category` — **definition** `[LN]`,
-    with the dual variance/order.
-19. `thm-representable-hom-functors-on-a-triangulated-category-are-cohomological` —
-    **theorem** `[LA]`. For every $W$, both
-    $\operatorname{Hom}(W,-)$ and the contravariant
-    $\operatorname{Hom}(-,W)$ yield the appropriately oriented long exact Hom
-    sequences. LANDMARK.
-20. `thm-long-exact-hom-sequences-of-a-distinguished-triangle` — **theorem**
-    `[LA]`. All translated terms and signs are displayed.
-21. `cor-triangulated-five-lemma` — **corollary** `[LA]`, proving item 14.
-22. `prop-a-map-is-zero-exactly-when-the-corresponding-representable-map-vanishes` —
+14. `def-homological-functor-on-a-triangulated-category` — **definition**
+    `[LN]`. An additive covariant functor $H:\mathcal T\to\mathcal A$ carrying
+    every distinguished triangle to an exact sequence
+    $H(X)\to H(Y)\to H(Z)$; shifts and rotations generate its long exact
+    sequence.
+15. `def-cohomological-functor-on-a-triangulated-category` — **definition**
+    `[LN]`. An additive contravariant functor
+    $H:\mathcal T^{\mathrm{op}}\to\mathcal A$ with the oppositely oriented
+    exact sequence and its shifted long exact continuation.
+16. `thm-representable-hom-functors-on-a-triangulated-category-are-homological-or-cohomological` —
+    **theorem** `[LA]`. For every $W$, $\operatorname{Hom}(W,-)$ is
+    homological and $\operatorname{Hom}(-,W)$ is cohomological. LANDMARK.
+17. `thm-long-exact-hom-sequences-of-a-distinguished-triangle` — **theorem**
+    `[LA]`. Both variances, all translated terms, and all signs are displayed.
+18. `cor-triangulated-five-lemma` — **corollary** `[LA]`.
+19. `prop-two-isomorphism-components-of-a-morphism-of-triangles-force-the-third` —
+    **proposition** `[LA]`, by items 17–18.
+20. `prop-a-map-is-zero-exactly-when-the-corresponding-representable-map-vanishes` —
     **proposition** `[LA]`, a Yoneda check used in split-triangle criteria.
+21. `prop-a-distinguished-triangle-with-zero-first-map-is-split` —
+    **proposition** `[LA]`, and its rotations.
+22. `prop-a-distinguished-triangle-splits-exactly-when-one-connecting-map-vanishes` —
+    **proposition** `[LA]`, with the equivalent section/retraction conditions.
 23. `prop-the-cone-object-of-a-map-is-unique-up-to-nonunique-isomorphism` —
     **proposition** `[LA]`. TR3 gives existence; no canonical isomorphism or
     cone functor is claimed.
@@ -2529,10 +2580,11 @@ it does not introduce dg, model, or stable $\infty$-categories.
     triangles.
 28. `def-thick-subcategory` — **definition** `[LN]`. A triangulated subcategory
     also closed under direct summands.
-29. `prop-the-total-kernel-of-a-cohomological-functor-is-a-triangulated-subcategory` —
+29. `prop-the-total-kernel-of-a-cohomological-functor-is-thick` —
     **proposition** `[LA]`. The total kernel consists of the objects $X$ such
-    that $H(X[n])=0$ for every $n\in\mathbb Z$; it is thick when the target and
-    functor preserve the relevant retracts.
+    that $H(X[n])=0$ for every $n\in\mathbb Z$. Exactness gives
+    two-out-of-three, and functoriality sends a retract of a zero object to a
+    retract of zero, so the total kernel is closed under direct summands.
 30. `prop-the-full-subcategory-of-acyclic-complexes-is-thick-in-the-homotopy-category` —
     **proposition** `[LA]`, using the cone LES and finite biproducts.
 
@@ -2586,13 +2638,13 @@ it does not introduce dg, model, or stable $\infty$-categories.
 `ex-the-long-exact-hom-sequence-of-a-cone-triangle` `[AA]` ·
 `ex-an-octahedron-for-two-composable-maps-of-stalk-complexes` `[AA]` ·
 `ex-the-thick-subcategory-of-acyclic-complexes` `[AA]` ·
-`cex-a-three-term-zero-composite-diagram-that-is-not-distinguished` `[LN]` ·
-`cex-nonuniqueness-of-a-tr-three-completion` `[LN]`.
+`cex-a-three-term-zero-composite-diagram-that-is-not-distinguished` `[LL]` ·
+`cex-nonuniqueness-of-a-tr-three-completion` `[LL]`.
 
 ### Sources and exact locators
 
 - **Weibel §§10.1 “The Category $K(\mathcal A)$” and 10.2 “Triangulated
-  Categories” (pp. 365–378).** Primary textbook source for definitions,
+  Categories” (printed pp. 369–378).** Primary textbook source for definitions,
   representable exactness, and cone triangulation.
 - **The Stacks Project, *Derived Categories*, §§2 “Triangulated categories”,
   3 “The definition of a triangulated category”, 4 “Elementary results on
@@ -2620,7 +2672,9 @@ categories; item 25 defines it afresh and the prose disambiguates it.
 ## HA-14. Derived Categories and Total Derived Functors
 
 **page id** `derived-categories`  
-**`requires`** `triangulated-categories`, `derived-functors`
+**`requires`** `triangulated-categories`, `derived-functors`,
+`yoneda-extensions-and-homological-dimension`,
+`tor-flatness-and-global-dimension`
 
 The derived category is not “the homotopy category with quasi-isomorphisms
 treated as equal.” It is a localization, so this page builds the necessary
@@ -2748,8 +2802,10 @@ functors in the bounded settings where the replacement theorem is available.
 40. `thm-existence-of-the-bounded-below-right-total-derived-functor` —
     **theorem** `[LA]`.
 41. `prop-classical-derived-functors-are-the-cohomology-objects-of-the-total-derived-functor` —
-    **proposition** `[LA]`. $L_nF$ and $R^nF$ agree with the appropriate
-    homology/cohomology of $\mathbf LF$ and $\mathbf RF$.
+    **proposition** `[LA]`. On objects placed in degree zero,
+    $H_n(\mathbf L F(A))\cong L_nF(A)$ and
+    $H^n(\mathbf R F(A))\cong R^nF(A)$, after translating the chain/cochain
+    convention fixed in §3.1.
 42. `prop-total-derived-functors-send-distinguished-triangles-to-distinguished-triangles` —
     **proposition** `[LA]`.
 43. `def-derived-tensor-product-in-the-bounded-above-setting` — **definition**
@@ -2795,7 +2851,7 @@ functors in the bounded settings where the replacement theorem is available.
 
 - **Weibel §§10.3 “Localization and the Calculus of Fractions”, 10.4 “The
   Derived Category”, 10.5 “Derived Functors”, 10.6 “The Total Tensor Product”,
-  and 10.7 “Ext and RHom” (pp. 378–399).** Primary textbook source.
+  and 10.7 “Ext and RHom” (printed pp. 379–401).** Primary textbook source.
 - **The Stacks Project, *Derived Categories*, §§5–7 “Localization”,
   “Quotients”, “Adjoints for exact functors”; §§11–17 “Derived categories”
   through “Triangulated subcategories”; and §§18–20 on resolutions (current
@@ -2839,7 +2895,7 @@ on this first page; infinite-filtration convergence belongs to `HA-16`.
 **Filtered objects and complexes**
 
 1. `def-increasing-and-decreasing-filtration-of-an-object` — **definition**
-   `[LN]`. A $mathbb Z$-indexed chain of subobjects, with inclusion direction
+   `[LN]`. A $\mathbb Z$-indexed chain of subobjects, with inclusion direction
    explicit; translations between $F_p$ and $F^p$ are stated, not assumed.
 2. `def-exhaustive-separated-bounded-and-finite-filtration` — **definition**
    `[LN]`. Exhaustive means union/colimit is the object, separated means
@@ -2963,7 +3019,8 @@ on this first page; infinite-filtration convergence belongs to `HA-16`.
 ### Sources and exact locators
 
 - **Weibel §§5.1 “Introduction”, 5.2 “Terminology”, 5.4 “Spectral Sequence of
-  a Filtration”, and 5.5 “Convergence” (pp. 125–143).** Primary textbook source.
+  a Filtration”, and 5.5 “Convergence” (printed pp. 120–126, 131–140).** Primary
+  textbook source.
 - **Rotman §§10.2 “Filtrations and Exact Couples” and 10.3 “Convergence”
   (pp. 616–627).** Independent textbook source.
 - **The Stacks Project, *Homological Algebra*, §§19 “Filtrations”, 20
@@ -2989,7 +3046,8 @@ filtration and its associated-graded conclusion.
 
 **page id** `double-complexes-exact-couples-and-convergence`  
 **`requires`** `spectral-sequences`,
-`mapping-cones-cylinders-and-chain-triangles`
+`mapping-cones-cylinders-and-chain-triangles`,
+`long-exact-sequences-in-homology`
 
 This page supplies the two other standard engines for spectral sequences and
 the hypotheses under which comparison is legitimate. Double complexes give
@@ -3062,9 +3120,11 @@ cases and states the obstruction when separatedness or completeness fails.
 24. `def-strong-convergence-of-a-spectral-sequence` — **definition** `[LN]`.
     Includes exhaustive, Hausdorff/separated, complete filtration and the
     regularity condition used by the theorem; source terminology is recorded.
-25. `thm-first-quadrant-spectral-sequences-converge-under-the-standard-boundedness-hypotheses` —
-    **theorem** `[LA]`. Degreewise only finitely many filtration pieces occur,
-    so stabilization and strong convergence follow. LANDMARK.
+25. `thm-a-first-quadrant-filtered-complex-spectral-sequence-converges-to-filtered-homology` —
+    **theorem** `[LA]`. For an exhaustive first-quadrant filtration with only
+    finitely many filtration pieces in each total degree, the induced spectral
+    sequence stabilizes and strongly converges to homology with its induced
+    finite filtration. LANDMARK.
 26. `thm-complete-exhaustive-filtered-complex-convergence-criterion` —
     **theorem** `[LL]`. States the source's regularity/derived-limit hypotheses
     exactly; no unconditional complete-filtration theorem is claimed.
@@ -3121,8 +3181,9 @@ cases and states the obstruction when separatedness or completeness fails.
 
 ### Sources and exact locators
 
-- **Weibel §§5.5 “Convergence”, 5.6 “Two Spectral Sequences”, and 5.9 “Exact
-  Couples” (pp. 135–161).** Primary textbook source.
+- **Weibel §§5.5 “Convergence”, 5.6 “Spectral Sequences of a Double Complex”,
+  and 5.9 “Exact Couples” (printed pp. 135–144, 153–159).** Primary textbook
+  source.
 - **Rotman §§10.1 “Bicomplexes”, 10.2 “Filtrations and Exact Couples”, 10.3
   “Convergence”, and 10.4 “Homology of the Total Complex” (pp. 609–646).**
   Independent textbook source.
@@ -3154,7 +3215,8 @@ hypotheses explicitly.
 **`requires`** `double-complexes-exact-couples-and-convergence`,
 `derived-functors`, `delta-functors-and-universality`,
 `group-cohomology-as-a-derived-functor`,
-`universal-coefficients-and-kunneth-theorems`
+`universal-coefficients-and-kunneth-theorems`,
+`group-extensions-complements-and-schur-zassenhaus`
 
 The final pair turns the machinery into comparison theorems. A
 Cartan–Eilenberg resolution resolves not only the terms of a complex but its
@@ -3207,7 +3269,7 @@ without convergence and extension data.
     **lemma** `[LA]`.
 13. `thm-grothendieck-spectral-sequence` — **theorem** `[LA]`. If
     $F:\mathcal A\to\mathcal B$ and $G:\mathcal B\to\mathcal C$ are additive
-    left exact functors, the relevant categories have enough injectives,
+    left exact functors, $\mathcal A$ and $\mathcal B$ have enough injectives,
     supplied resolution data are fixed, and $F$ sends injectives to
     $G$-acyclics, then
     \[
@@ -3229,7 +3291,8 @@ without convergence and extension data.
 **Derived computations recovered**
 
 19. `thm-universal-coefficient-spectral-sequence` — **theorem** `[LA]`. For a
-    bounded-below projective/free complex under the stated ring hypotheses,
+    bounded-below chain complex $C$ of projective left $R$-modules and a left
+    $R$-module $M$,
     \[
     E_2^{p,q}=\operatorname{Ext}_R^p(H_q(C),M)
     \Longrightarrow H^{p+q}\operatorname{Hom}_R(C,M),
@@ -3258,7 +3321,10 @@ without convergence and extension data.
     $1\to N\to G\to Q\to1$ and a $G$-module $M$,
     $M^G=(M^N)^Q$, with the induced $Q$-action on $M^N$ proved well defined.
 26. `lem-the-invariants-functor-for-n-sends-injectives-to-q-acyclic-modules` —
-    **lemma** `[LA]` under the standard group-ring/coinduction hypotheses.
+    **lemma** `[LA]`. For $N\triangleleft G$ and $Q=G/N$, inflation from
+    $Q$-modules to $G$-modules is exact and has $N$-invariants as right
+    adjoint; hence $N$-invariants sends injective $G$-modules to injective,
+    therefore $Q$-acyclic, $Q$-modules.
 27. `thm-lyndon-hochschild-serre-spectral-sequence` — **theorem** `[LA]`.
     \[
     E_2^{p,q}=H^p(Q,H^q(N,M))\Longrightarrow H^{p+q}(G,M),
@@ -3317,8 +3383,9 @@ without convergence and extension data.
 ### Sources and exact locators
 
 - **Weibel §§5.7 “Hyperhomology”, 5.8 “Grothendieck Spectral Sequences”,
-  6.8 “The Spectral Sequence” (the Lyndon/Hochschild–Serre sequence), and the UCT/Künneth
-  applications in §§5.6–5.7 (pp. 145–158, 193–199).** Primary textbook source.
+  6.8 “The Spectral Sequence” (the Lyndon/Hochschild–Serre sequence), and the
+  UCT/Künneth applications in §§5.6–5.7 (printed pp. 141–152, 195–197).**
+  Primary textbook source.
 - **Rotman §§10.5 “Cartan–Eilenberg Resolutions”, 10.6 “Grothendieck Spectral
   Sequences”, 10.7 “Groups”, and 10.10 “Künneth Theorems” (pp. 647–665,
   678–688).** Independent textbook source.
@@ -3412,7 +3479,7 @@ property; an element computation may be added only in a module example.
 | 40 | bar resolution | differential is equivariant and squares to zero; the underlying contraction proves exactness without being falsely called equivariant | `HA-12` items 12–16 |
 | 41 | homogeneous/inhomogeneous cochains | two explicit transformations are inverse, equivariant, and commute with differentials | `HA-12` items 17–20 |
 | 42 | normalized bar complex | degenerates form a subcomplex and a contraction makes its quotient/inclusion a homotopy equivalence | `HA-12` items 21–24 |
-| 43 | corestriction | independent of a supplied set of coset representatives and compatible with restriction | `HA-12` items 34–36 |
+| 43 | corestriction | independent of a supplied set of coset representatives and compatible with restriction | `HA-12` items 32–34 |
 | 44 | distinguished rotation | the $-f[1]$ convention is used consistently in TR2, cone rotation, and long exact Hom | `HA-13` items 4, 11, 13, 34 |
 | 45 | cone object in a triangulated category | exists by TR1 and is unique only up to a nonunique isomorphism; no cone functor is licensed | `HA-13` items 23, 31–37 |
 | 46 | roof class | roof equivalence is an equivalence relation; composition is independent of Ore square and representatives and is associative | `HA-14` items 3–7 |
@@ -3467,8 +3534,10 @@ already-published result inherits that result's stronger recorded boundary.
 | Ext/Tor balance by a first-quadrant double complex | ZF relative to supplied resolutions | all diagonals are finite and acyclic assembly uses finite exact-sequence induction |
 | Baer sum and Yoneda splice | ZF | only finite pullbacks, pushouts and biproducts occur |
 | set of extension classes | ZF in the licensed locally small setting | comparison with set-valued derived Ext avoids selecting representatives |
+| projective/global dimension one of $\mathbb Z$, higher-Tor vanishing over $\mathbb Z$, and the PID torsion-free/flat theorem | inherits the abstract-algebra AC boundary | the standard proof uses that submodules of free modules over a PID are free; the scaffold never labels that step ZF without the source's foundation qualification |
 | UCT/Künneth natural short exact sequences | ZF relative to the cited PID submodule theorem | no splitting is needed for exactness |
 | UCT/Künneth splitting over a PID | AC in general; finite choice in finite-rank cases | choosing bases/complements or sections is why the splitting is nonnatural; the statement must inherit the abstract-algebra choice boundary |
+| one splitting in every degree of a countable family of already split sequences | countable choice in general, or supplied splittings | each fixed degree is an ordinary existential statement; a simultaneous graded family is a separate countable selection and never implies compatibility with differentials |
 | bar resolution and group (co)homology | ZF | bars are free on explicit tuples; the contraction inserts the identity element |
 | choosing coset representatives for $H\backslash G$ or $G/H$ | AC for an arbitrary quotient set, or supplied representatives | Shapiro is preferably proved via adjunction without such a choice; any freeness proof using representatives states the boundary |
 | restriction/corestriction for finite index | finite choice, hence ZF in the adopted finite-choice development | independence from representatives is proved afterwards |
@@ -3502,7 +3571,7 @@ the scaffold was read, not merely found in a bibliography.
 | `SP-D` | The Stacks Project, *Derived Categories*, current full PDF: https://stacks.math.columbia.edu/download/derived.pdf . Read §§2–27. GNU FDL. |
 | `SP-I` | The Stacks Project, *Injectives*, chapter page https://stacks.math.columbia.edu/tag/01D4 and Theorem 19.11.7 https://stacks.math.columbia.edu/tag/079H . Read §§19.10–19.12 and the complete proof of Tag `079H`. GNU FDL. |
 | `S` | Romyar Sharifi, *Homological Algebra*, full 86-page lecture notes: https://math.ucla.edu/~sharifi/homalg.pdf . Read §§2.7–2.8, 3.1–3.7, and 4.1–4.3. |
-| `K` | Daniel Krashen, Rutgers MATH 560 (2018), full lecture-note index and linked lecture PDFs: https://torsor.org/homological-algebra/lectures/ . Read Lectures 3–23 except the sheaf-specific Lecture 22 body. |
+| `K` | Daniel Krashen, Rutgers MATH 560 (2018), full lecture-note index and linked lecture PDFs: https://torsor.org/homological-algebra/lectures/ . Read every posted Lecture 3–23 (the index posts no Lecture 8), except the sheaf-specific Lecture 22 body; its heading was still harvested. |
 | `HS` | Hilton–Stammbach, *A Course in Homological Algebra*, 2nd ed.; university-hosted full scan indexed at https://people.math.rochester.edu/faculty/doug/otherpapers/hilton-stammbach.pdf ; exact official contents also checked at https://unina2.on-line.it/sebina/repository/catalogazione/documenti/A%20Course%20in%20Homological%20Algebra.pdf . Read Chs III–VI and VIII over the headings below. Publisher-controlled, not claimed open-licensed. |
 | `Y` | Amnon Yekutieli, *A Course on Derived Categories*, complete open notes: https://www.math.bgu.ac.il/~amyekut/lectures/course-der-cats/arxiv-1206.6632v1.pdf and https://arxiv.org/abs/1206.6632 . Read §§8–14. |
 | `GM` | Gelfand–Manin, *Methods of Homological Algebra*, Chs III–IV. Only the university-hosted frontmatter/contents and publisher/Google preview were reachable: https://unina2.on-line.it/sebina/repository/catalogazione/documenti/Gelfand%2C%20Manin%20-%20Methods%20of%20homological%20algebra.pdf and https://link.springer.com/book/10.1007/978-3-662-12492-5 . **Bibliographic/convention control only; no load-bearing claim relies on inaccessible body text.** |
@@ -3647,10 +3716,11 @@ Every heading is Weibel's own table-of-contents wording.
 - **6.1 “Definitions and First Properties”** — `included`:
   `def-group-cohomology-as-a-derived-functor`,
   `def-group-homology-as-a-derived-functor`, and both long exact sequences.
-- **6.2 “Cyclic and Free Groups”** — `included` as the periodic cyclic
-  computation on `HA-12-examples`; the free-group low-dimensional result is
-  `prop-free-groups-have-cohomological-dimension-at-most-one` conditional on
-  the group-track prerequisite.
+- **6.2 “Cyclic and Free Groups”** — `included` for the periodic cyclic
+  computation on `HA-12-examples` and the periodic nonvanishing used in
+  `thm-groups-of-finite-integral-cohomological-dimension-are-torsion-free`;
+  the free-group cohomological-dimension calculation is `out-of-scope` to
+  `group-theory` because it needs the free-group augmentation-ideal theorem.
 - **6.3 “Shapiro's Lemma”** — `included`: both Shapiro theorems on `HA-12`.
 - **6.4 “Crossed Homomorphisms and $H^1$”** — `out-of-scope`: explicitly owned
   by `group-theory`; this track supplies the derived $H^1$ object it interprets.
@@ -4146,7 +4216,9 @@ number is governed by its containing section's disposition above.
   “Classical Convergence Theorem” 5.9.7 is `included` on `HA-16`; “Shapiro's
   Lemma” 6.3.2 is `included` in both homology and cohomology forms on `HA-12`;
   the Lyndon/Hochschild–Serre result under §6.8 “The Spectral Sequence” is `included`
-  on `HA-17`; and the “Generalized Existence Theorem” 10.5.9 is `inline` in
+  on `HA-17`; Schur–Zassenhaus and the Hopf formula in the group-application
+  range are `out-of-scope` to `group-theory` as recorded in §26; and the
+  “Generalized Existence Theorem” 10.5.9 is `inline` in
   the bounded replacement/existence hypotheses on `HA-14`, not promoted to an
   unbounded existence assertion.
 - **Rotman:** “Fundamental Theorem of Homological Algebra” is `included` as
@@ -4155,8 +4227,9 @@ number is governed by its containing section's disposition above.
   Baer-sum/Yoneda extension results are `included` on `HA-9`; the universal-
   coefficient and Künneth theorems are `included` on `HA-11`; Hilbert's
   Syzygy Theorem is `out-of-scope` to `commutative-algebra` for the specific
-  polynomial-ring statement; and the Grothendieck spectral sequence is
-  `included` on `HA-17`.
+  polynomial-ring statement; the Stallings–Swan characterization of free
+  groups is `out-of-scope` to `group-theory`; and the Grothendieck spectral
+  sequence is `included` on `HA-17`.
 - **Hilton–Stammbach:** the named Künneth theorem, dual Künneth theorem,
   universal coefficient theorem, and Grothendieck spectral sequence are
   already headings in §24.7 and are `included` on `HA-11`/`HA-17`; the
@@ -4223,6 +4296,7 @@ track can recover it from the stated licence.
 | profinite/Galois cohomology | cochains must be continuous and coefficients topological/discrete; inverse limits and Galois theory are essential | a Galois/profinite track after topology and number theory |
 | Schur multipliers, $H^2$ as group extensions, $H^1$ as crossed homomorphisms/complements | these are group-theoretic interpretations explicitly assigned away by the seam contract | `group-theory`, citing `def-group-cohomology-as-a-derived-functor` |
 | universal central extensions and Hopf's formula | require perfect groups, free presentations, commutator calculus, and the group extension classification | `group-theory` |
+| the cohomological dimension of a general free group and the Stallings–Swan converse | the forward calculation needs the free-group augmentation-ideal theorem; the converse needs group actions on trees and is far beyond the derived-functor construction | `group-theory`, using this track's cohomological-dimension definition |
 | Leray–Serre and Eilenberg–Moore spectral sequences | require fibrations, singular chains, local coefficients, and in Eilenberg–Moore a derived tensor/cobar topological setup | algebraic topology after this track |
 | multiplicative spectral sequences, products and sign rules on pages | require filtered dg algebras/modules and convergence compatible with multiplication; no commissioned seam needs them | a dg-algebra or algebraic-topology spectral-sequence sequel |
 | general unbounded K-injective/K-projective/K-flat replacements | enough injectives/projectives alone does not prove the unbounded replacement theorem; Spaltenstein/Stacks needs transfinite products/coproducts and Grothendieck hypotheses | an unbounded-derived-categories page using Stacks *Injectives* §19.12 |
@@ -4261,19 +4335,25 @@ This section is the only legal effect this file has on another track.
    maps, `def-bimodule`, tensor of a right and left module, functoriality,
    associativity/unit/symmetry in the commutative case, right exactness,
    `def-flat-module`, projective implies flat, and Hom–tensor adjunction. The
-   homological builder then substitutes those exact ids into `HA-8`, `HA-10`,
-   and `HA-11`; it does not re-mint any. Noncommutative Tor is blocked if the
+   homological builder then substitutes those exact ids into `HA-10` and
+   `HA-11`; it does not re-mint any. Noncommutative Tor is blocked if the
    right/left typing or bimodule seam is omitted.
 
-4. **Group theory.** Supply/cite a stable group-ring page id before `HA-12`,
-   including the augmentation and the equivalence between $G$-actions and
-   $\mathbb Z[G]$-modules if abstract algebra has not already done so. Then cite
-   this track's future `def-group-cohomology-as-a-derived-functor`,
+4. **Abstract algebra/group theory reconciliation.** Extend RT-1,
+   `the-group-algebra-and-representations`, to state the finite-support group
+   algebra, augmentation, trivial module, and action/module dictionary for an
+   arbitrary group and commutative coefficient ring before specialising to
+   finite-group representation theory. `HA-12` cites that page rather than
+   minting a second integral group ring. `HA-17` cites group theory `GT-9`,
+   `group-extensions-complements-and-schur-zassenhaus`, for the definition of a
+   group extension. Group theory then cites this track's future
+   `def-group-cohomology-as-a-derived-functor`,
    `thm-the-bar-cochain-complex-computes-derived-group-cohomology`, and
    `thm-lyndon-hochschild-serre-spectral-sequence`. Group theory owns and must
-   author $H^1$ as crossed homomorphisms/complements, $H^2$ as extension
-   classes/factor sets, the Schur multiplier, and universal central extensions.
-   The two tracks must add agreement items, not two definitions of $H^1/H^2$.
+   author those low-degree interpretations on `GT-21`--`GT-23`: $H^1$ as
+   crossed homomorphisms/complements, $H^2$ as extension classes/factor sets,
+   the Schur multiplier, and universal central extensions. The two tracks must
+   add agreement items, not two definitions of $H^1/H^2$.
 
 5. **Differential geometry placement and citations.** The seam file's anchor
    `spectral-sequences-examples` would split this expanded block because
@@ -4314,20 +4394,28 @@ This section is the only legal effect this file has on another track.
    the two-paragraph summary described in §21 and stays at or below 60 items.
    No B page receives an authored summary or becomes a dependency target.
 
+10. **Abstract-algebra semisimplicity page.** Preserve
+    `chain-conditions-and-semisimple-modules` before this block and give its
+    splitting/projective/injective equivalences stable item ids. `HA-9` and
+    `HA-10` cite those ids for global dimension zero and positive Ext/Tor
+    vanishing; they do not re-prove Wedderburn–Artin or chain conditions.
+
 ---
 
 ## 28. Unresolved seams
 
 | seam | current state | reconciliation/fallback | blocked if unresolved |
 |---|---|---|---|
-| exact stable page id for group rings/actions | `group-theory` scaffold did not exist when this file was written; abstract algebra's live/planned ownership is descriptive | orchestrator assigns the owner and substitutes that page id into `HA-12`; fallback is a group-ring page in `group-theory`, not a definition here | all of `HA-12` and the LHS application in `HA-17` |
-| exact tensor/flat item ids | abstract-algebra tensor page is planned with empty `items`; enrichment §MOD-3 promises the content | preserve its promised ids (especially `def-bimodule` and `def-flat-module`) and substitute authored stable ids before building `HA-8`/`HA-10`/`HA-11` | Tor, tensor-derived, and Künneth pages; Ext survives |
+| stable group-ring/action item ids | page ownership is settled at abstract algebra RT-1, `the-group-algebra-and-representations`, but its `items` array is still empty | extend RT-1 as agreed with group theory, preserve its authored stable ids, and substitute those ids into `HA-12`; group theory does not mint a second group ring | all of `HA-12`; the page-id seam itself is closed |
+| group-extension item id for LHS | group theory fixes the supplying page as `GT-9`, `group-extensions-complements-and-schur-zassenhaus`, but that scaffold is not yet authored | preserve or mechanically substitute GT-9's stable definition id into the LHS theorem on `HA-17` | only the LHS application; the abstract Grothendieck spectral sequence survives |
+| exact tensor/flat item ids | abstract-algebra tensor page is planned with empty `items`; enrichment §MOD-3 promises the content | preserve its promised ids (especially `def-bimodule` and `def-flat-module`) and substitute authored stable ids before building `HA-10`/`HA-11` | Tor, tensor-derived, and Künneth pages; Ext survives |
+| semisimplicity equivalence item ids | `chain-conditions-and-semisimple-modules` is planned with empty `items` | author its splitting/all-modules-projective/all-modules-injective equivalences first and substitute their stable ids into `HA-9`/`HA-10` | only the semisimple dimension-zero and vanishing consequences; the remaining Ext/Tor theory survives |
 | differential-geometry final anchor | its scaffold did not yet exist; seam file names the now-internal `spectral-sequences-examples` anchor | repoint to the final HA companion as Amendment 5 | no mathematics, but an unreconciled splice would split this block |
 | projective/injective object ids from `MA-9` | category scaffold is complete prose but unauthored, so final stable ids may differ at build | preserve the proposed ids or substitute them mechanically; never mint duplicates | abstract-category form of `HA-5`–`HA-7`; module instances remain available |
 | ordinary localization/calculus-of-fractions prerequisite | no published category item exists and the category track assigns derived localization to homological algebra | `HA-14` therefore mints the narrow category localization machinery it needs, sourced by Weibel/Stacks/Yekutieli; no external amendment required | closed by this scaffold |
 | commutative algebra's request for “minimal-resolution uniqueness” | minimality needs local-ring/radical data unavailable here | commutative algebra authors the minimal theorem and cites `HA-5` comparison uniqueness; Amendment 6 records exact inputs | only its Betti/minimal-resolution items |
 
-No item-level `forward_refs` remain unresolved. The first four rows are splice
+No item-level `forward_refs` remain unresolved. The first five rows are splice
 or stable-id seams because the relevant sibling plans are not authored facts;
 they are not licences to point a spine theorem forward.
 
