@@ -138,7 +138,20 @@ const ROLES = Object.freeze({
   // shorter run before every lane fails at once, and it burns the orchestrator's
   // own session too. Lower is often faster end to end. The Codex and DeepSeek
   // lanes draw on different accounts and are unaffected by a Claude exhaustion.
-  scaffolder:   { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 4, why: 'one per subject track; owns exactly one prose scaffold file' },
+  // MOVED FROM OPUS 5 TO SOL (owner, 2026-08-14): "Change agent LLM from opus 5
+  // to gpt 5.6 sol". The reason is the paragraph above — quota, measured twice.
+  // Two rounds of Opus scaffolders were killed mid-track by the Claude session
+  // limit (25-34 min, then 10-43 min), and the second exhaustion reset five and a
+  // half hours out. Sol runs on the Codex subscription, which is a different
+  // account and is the standing model for every other authoring lane in this
+  // repo, so the switch also puts the scaffolder back in line with the model
+  // table rather than leaving it as a second Opus exception.
+  //
+  // `web: true` is REQUIRED here and is not optional decoration: half of a
+  // scaffolder's brief is source research, and a Codex lane without it does not
+  // fail — it silently asserts from memory, which is the exact failure mode
+  // CLAUDE.md records for the build lanes before 2026-08-11.
+  scaffolder:   { runner: 'codex',  model: SOL_MODEL,  sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'one per subject track; owns exactly one prose scaffold file' },
 
   // ---- the published-page retro-audit (AUDIT-WORKFLOW.md, A0 to A10) --------
   // Every Codex audit lane receives the explicit xhigh/1M configuration below;

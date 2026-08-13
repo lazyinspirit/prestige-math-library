@@ -8,6 +8,77 @@ groups). Machine-readable half: `research/plan-spec.json`.
 This file is NOT normative: `SCHEMA.md`, `CLAUDE.md`, `LEVELS.md` and
 `ARCHITECTURE.md` win wherever they differ.
 
+---
+
+# SUMMARY FOR THE ORCHESTRATOR — `abstract-algebra` lane, run `subjects-01`, 2026-08-13
+
+*Second of the two files this lane owns; the companion
+`research/plan-algebra-track.md` carries the Galois block, the linear-algebra
+completion and the two carve-out pages, and has its own summary at its head.
+Everything from this commission is **Part II**, beginning at §II.1. Part I is the
+2026-07-28 expansion commission and is unchanged and undeleted.*
+
+**Pairs enriched here.** Nine, of which AG-1/AG-2 and MOD-1/MOD-2 are **published**
+and are reconciled rather than scaffolded, and seven are unauthored:
+
+| label | page id | § | size |
+|---|---|---|---|
+| AG-3 | `semidirect-products-and-automorphism-groups` | II.2 | A 21 / B 14 |
+| AG-4 | `sylow-theorems-and-nilpotent-groups` | II.3 | A 22 / B 14 |
+| MOD-3 | `tensor-products-of-modules` | II.4 | A ~24 / B 12 |
+| MOD-4 | `chain-conditions-and-semisimple-modules` | II.5 | A ~30 / B 13 — **size this at step 0; it is the page at risk of the 60-item ceiling** |
+| MOD-5 | `modules-over-a-pid-and-canonical-forms` | II.6 | A 24 / B 13 |
+| RT-1…RT-4 | `the-group-algebra-and-representations` … `induced-representations-and-frobenius-reciprocity` | II.7 | Part I's sizes, plus Mackey and Burnside on RT-4 |
+
+**The three changes with the largest downstream effect.**
+1. **MOD-4 defines Noetherian by "every submodule is finitely generated", not by
+   ACC** (§II.5.a). The ACC equivalence costs **dependent choice** and no
+   harvested source flags it; defining on the choice-free side isolates DC in one
+   biconditional. `commutative-algebra` inherits this definition, along with
+   `def-artinian-module` and `def-noetherian-ring`.
+2. **The RT block runs over a splitting field with a bilinear character pairing**
+   (§§II.7.a–II.7.b), not over an algebraically closed field with a Hermitian one.
+   This makes the orthogonality theory a statement about an arbitrary field of
+   good characteristic, and **removes RT-3's `requires` on
+   `inner-product-spaces-and-orthogonality` entirely**.
+3. **Wedderburn–Artin takes the Crawley-Boevey route** — arbitrary ring, four
+   cheap prerequisites, no density theorem, no chain condition (§II.5.b). This
+   directly answers the commission's question and overturns its framing.
+
+**Reconciliation findings.** Nine items Part I planned for AG-4 are **published**
+on `group-actions-and-cayleys-theorem` and `composition-series-and-solvable-groups`
+— the whole $p$-group toolkit and the entire nilpotency series theory — so AG-4
+keeps only Sylow proper and the Sylow characterisation of nilpotence (§II.3.a).
+Three items Part I planned for AG-3 are published on
+`group-homomorphisms-and-the-isomorphism-theorems` (§II.2.a). "Enough injectives"
+is published on **MOD-2**, not MOD-3 (§II.1.c.8). **The library uses "the dihedral
+group" in five published examples and defines it nowhere** (§II.2.b); AG-3 mints
+`def-dihedral-group`.
+
+**Part I decisions withdrawn or narrowed** (§II.8, each with its reason): AL-D6
+withdrawn; AL-D7 narrowed — MOD-3 mints `def-bimodule`; AL-D4's placement
+argument weakened; denial 1 (Burnside) and denial 7 (Wedderburn's little theorem)
+withdrawn and both now proved; denials 6 and 8 stand, with denial 6 reinforced —
+**Brauer's splitting-field theorem must not be used either**, Webb states it
+without proof. Part I's §4 renumber table is dead.
+
+**Sources.** Part I backed MOD-3, MOD-4, MOD-5, AG-4 and RT-2 primarily on
+Wikipedia, which the owner's 2026-08-11 source-depth rule postdates and forbids
+as primary backing. The debt is discharged: Ash Ch. 4–5, Conrad's semidirect and
+Sylow blurbs, Wisbauer, Crawley-Boevey, Duncan, Brosnan, Altman–Kleiman, Milne,
+Clark, Webb, Etingof, Teleman and Anupam Singh were obtained in full. The
+two-treatments check per pair is at companion §II.12.a.
+
+**Unresolved forward references: none load-bearing.** **Blockers: none.** Two
+harvest gaps bear on this file and are recorded rather than assumed: the
+right-Noetherian-not-left-Noetherian witness is **unsourced** and must be verified
+or dropped (§II.5.c), and Burnside needs two small $\mathbb{C}$-lemmas that no
+source states separately (§II.7.c).
+
+**The methodological finding for every track** is at §II.9: `plan-spec.json`
+**understates** what is published, so "X does not exist" must be checked against
+`library/<cat>/<page>.md` as well.
+
 **AUTHORITY BOUNDARY (proposed owner decision AL-D8, below).** This file is
 authoritative ONLY for the thirteen new A-pages it defines: **AG** (advanced
 group theory, 4 A-pages), **MOD** (modules over a ring, 5 A-pages), **RT** (the

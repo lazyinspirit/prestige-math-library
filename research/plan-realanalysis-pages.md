@@ -1747,6 +1747,57 @@ domination.
 
 ---
 
+# Phase-2 enrichment proposals (ra-enrich-01, 2026-08-13)
+
+These are **proposals only** from the phase-1a enrichment survey. They have not
+entered the build pipeline, have no item inventories, and do not change the
+settled 40-pair count above. If approved, each must go through the standard
+step 0–10 A/B cycle. Exact rationale, sources, and result scope are in
+`research/ra-enrich-01-PLAN.md`, Table B.
+
+**RA-E1 Fourier Series and Fejér Summation / Examples and Counterexamples**
+follows `the-complex-exponential-and-eulers-formula`. Proposed scope:
+periodic functions and Fourier coefficients; trigonometric polynomials and
+orthogonality; finite Bessel inequality/best approximation; Dirichlet kernel,
+localization, and pointwise convergence under explicit regularity; Fejér
+kernel and uniform Cesàro convergence for continuous periodic functions;
+trigonometric-polynomial density. The B page carries square/sawtooth waves,
+Gibbs behavior, coefficient-decay examples, and the du Bois-Reymond warning.
+Full \(L^2\) Parseval/Riesz–Fischer and measure-theoretic convergence remain
+with the measure/functional-analysis tracks.
+
+**RA-E2 Picard–Lindelöf and First-Order ODEs / Examples and Counterexamples**
+follows `the-fundamental-theorems-of-calculus`. Proposed scope: IVP/integral
+equation equivalence; local existence and uniqueness for a continuous
+right-hand side locally Lipschitz in the dependent variable; Picard iteration
+and error bounds; uniqueness on overlaps; Grönwall/continuous dependence;
+maximal continuation; linear first-order equations. The B page carries
+exponential iteration, \(y'=y^2\) blow-up, nonuniqueness without Lipschitz,
+and failure under a discontinuous right-hand side. Carathéodory weak solutions
+remain with measure/absolute-continuity theory.
+
+**RA-E3 Constant-Rank Normal Forms and Regular Level Sets / Examples and
+Counterexamples** follows `inverse-and-implicit-function-theorems`. Proposed
+scope: rank, submersions and immersions; the Euclidean constant-rank normal
+form; regular points/values; regular level sets and tangent kernels; the link
+to constrained extrema. The B page carries spheres, graphs, surfaces of
+revolution, rank-drop singularities, and failure examples. General embedded
+manifold theory is outside this pair.
+
+**RA-E4 Surface Integrals, the Divergence Theorem, and Stokes' Theorem /
+Examples and Counterexamples** follows
+`line-integrals-and-the-gradient-theorem`. Proposed scope: regular
+parametrized surfaces; surface area and scalar surface integrals; orientation,
+boundary orientation, and flux; divergence/curl; divergence for a precisely
+proved elementary/Jordan class; classical Stokes for finitely parametrized
+surfaces; planar Green relations. The B page carries sphere/cylinder/torus and
+spherical-shell calculations, orientation reversals, singular fields away
+from their singularity, spanning-surface checks, and degenerate
+parametrizations. Differential forms and general manifold Stokes remain
+deferred.
+
+---
+
 # Scope denials
 
 Added by Alpha-F1, 2026-07-28, in the style of the "Scope denials" sections of

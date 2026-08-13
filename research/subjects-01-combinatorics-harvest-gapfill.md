@@ -3,18 +3,32 @@
 Closes the four topics that `research/subjects-01-combinatorics-harvest-graphtheory.md`
 promised in a "§C.13" it never wrote:
 
-| gap | topic | status |
-|---|---|---|
-| 1 | edge colouring beyond Vizing's simple-graph theorem | see §A.1/§B.1/§C.1 |
-| 2 | matching beyond Tutte's 1-factor theorem | **closed** |
-| 3 | infinite graphs — the Rado graph | **closed** |
-| 4 | de Bruijn–Erdős and the exact choice principle | **closed, with a sourced equivalence** |
+| gap | topic | status | where |
+|---|---|---|---|
+| 1 | edge colouring beyond Vizing's simple-graph theorem | **closed** (Goldberg–Seymour statement-only, as licensed) | **Part II** |
+| 2 | matching beyond Tutte's 1-factor theorem | **closed** | Part I |
+| 3 | infinite graphs — the Rado graph | **closed** | Part I |
+| 4 | de Bruijn–Erdős and the exact choice principle | **closed, with a sourced equivalence** | Part I |
 
 Everything below is quoted from sources actually opened and read in this session; page
 locators are PDF-page or printed-page as marked. Wikipedia and encyclopedia entries were
 used nowhere as primary backing.
 
+**Headline answer, Gap 4** (full detail at §C.4): for each fixed **k ≥ 3**, the
+de Bruijn–Erdős theorem is **equivalent** to the ultrafilter lemma / Boolean prime ideal
+theorem over ZF — Läuchli 1971, reproved openly as Corollary 4.2 of
+Rorabaugh–Tardif–Wehlau, *LMCS* 13(1:1) 2017, and catalogued as Howard–Rubin **Form
+14 G(n)**. For **k = 2** it is equivalent to Choice(2) (Mycielski 1961), strictly weaker.
+For **countable** *G* with a given enumeration it is a **ZF theorem** — Gasarch–Hirst
+place it exactly at WKL₀ over RCA₀, a choice-free system, and the library's own
+`thm-konig-infinity-lemma-for-ordered-trees` proves it.
+
+**The file is in two parts.** Part I (below) covers gaps 2, 3 and 4. **Part II** covers
+gap 1 and carries its own A–F; its internal section labels are local to it.
+
 ---
+
+# PART I — GAPS 2, 3 AND 4
 
 ## A. Source ledger
 
@@ -949,6 +963,23 @@ combinatorics and fully in scope:
 and it gives readers the same insight ("almost all finite graphs have the extension
 property") with no measure at all.
 
+**Better still — and this is a correction in the library's favour.** The library
+publishes **`def-erdos-renyi-random-graph`, "The Erdős–Rényi *finite* random graph
+G(n,p)"**, together with `def-finite-probability-space-and-event`,
+`def-uniform-finite-probability-space`, `def-product-of-finite-probability-spaces` and
+`lem-finite-probability-basic-laws` (verified against `items/`; see §E.1). **So the
+substitute can be stated as an honest probability statement over a finite space, not as
+raw counting:**
+
+> For fixed m, n ≥ 0, ℙ[G(k, ½) has the (m,n)-extension property] → 1 as k → ∞, with the
+> explicit bound ℙ[failure] ≤ C(k,m)·C(k−m,n)·(1 − 2^{−(m+n)})^{k−m−n}.
+
+Every ingredient — the finite product space, the union bound, independence of finitely
+many coordinates — is a published finite-probability item. **This is what the scaffolder
+should offer in place of the Erdős–Rényi almost-sure theorem**, and the Remark should say
+plainly that the infinite statement needs a measure on an infinite product and is
+deferred until the library has a measure-theory level.
+
 **A second in-scope substitute exists but costs more.** Cameron's **Fact 3** and §1.7
 give a **Baire-category** version — "Almost all countable graphs (in the sense of either
 measure or Baire category) have property (∗)", with his own note "In fact, it is simpler
@@ -1085,18 +1116,25 @@ spent. **The library already owns both halves of the countable result.**
 |---|---|---|---|---|
 | König's infinity lemma | countable *G* with a given enumeration | **none — ZF** | `thm-konig-infinity-lemma-for-ordered-trees` | 5–7, **[A]** |
 | ultrafilter argument | arbitrary *G* | **exactly BPI (= the ultrafilter lemma)** | `thm-ultrafilter-lemma` | 8–10, **[A]** |
-| Tychonoff on {1,…,k}^V | arbitrary *G* | **exactly BPI** (each factor is finite discrete, hence compact Hausdorff) | needs product topology — not in library | 7–9, **[A]** but out of scope |
+| Tychonoff on {1,…,k}^V | arbitrary *G* | **exactly BPI** (each factor is finite discrete, hence compact Hausdorff) | **`thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma` — published, and stated with the ultrafilter lemma as an explicit hypothesis** | 7–9, **[A], IN SCOPE** |
 | Diestel's Appendix-A compactness principle | arbitrary *G* | BPI (it is a repackaging of the ultrafilter argument) | — | ~6 |
 
-**The Tychonoff row's justification.** Tychonoff's theorem *restricted to Hausdorff
-spaces* is equivalent to BPI over ZF — Łoś & Ryll-Nardzewski, "Effectiveness of the
-representation theory for Boolean algebras", _Fund. Math._ **41** (1954), 60–62, and
-Rubin & Scott, "Some topological theorems equivalent to the Boolean prime ideal theorem",
-_Bull. Amer. Math. Soc._ **60** (1954), 389. {1,…,k}^V with discrete finite factors is
-compact Hausdorff, so Diestel's third proof spends BPI and no more. **I did not obtain
-either 1954 paper's full text — see §F.3 — so if the scaffolder wants to *state* this
-equivalence it should carry the two references, not a proof.** It is not needed: the
-ultrafilter route is strictly better for this library.
+**The Tychonoff row's justification, and a correction in the library's favour.**
+Tychonoff's theorem *restricted to Hausdorff spaces* is equivalent to BPI over ZF —
+Łoś & Ryll-Nardzewski, "Effectiveness of the representation theory for Boolean algebras",
+_Fund. Math._ **41** (1954), 60–62, and Rubin & Scott, "Some topological theorems
+equivalent to the Boolean prime ideal theorem", _Bull. Amer. Math. Soc._ **60** (1954),
+389. {1,…,k}^V with discrete finite factors is compact Hausdorff, so Diestel's third
+proof spends BPI and no more. **I did not obtain either 1954 paper's full text (§F.3), so
+the *equivalence* must be a source-cited Remark if it is stated at all — but the
+implication the proof needs is already published:**
+`thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma` states "Assume the
+ultrafilter lemma. If (X_i) is any family of compact Hausdorff spaces, then ∏X_i is
+compact." **So Diestel's third proof is directly available to this library**, giving it
+a genuine second route to the general theorem at the same choice cost. Whether to write
+both routes is a scaffolder judgement; the ultrafilter route (§C.4.5 below) is shorter
+and needs no topology, so it should be the *proof*, with the Tychonoff route recorded as
+a cited alternative in the Remark.
 
 **The explicit ultrafilter route, decomposed — this is the item to scaffold.** It is a
 specialisation of Rorabaugh–Tardif–Wehlau's Propositions 2.1 + 2.2 (both quoted in full
@@ -1292,6 +1330,58 @@ lemma for ordered trees, vector spaces and rank; and it declares **AC, countable
 and dependent choice** as adopted foundational axioms. It does **NOT** have the spectral
 theorem, measure theory, or algebraic topology.
 
+### E.1 What I verified against the actual `items/` directory (not against the brief)
+
+The brief's inventory summary is accurate but **understates** what is available, in five
+ways that change the dispositions below. All of the following were confirmed by reading
+the item files:
+
+- **`thm-eulers-euler-circuit-characterisation`** — "Euler's theorem and Hierholzer's
+  construction: a connected finite undirected **multigraph** has an Euler circuit if and
+  only if every degree is even". **Euler's theorem is published.** The 2-factor theorem's
+  prerequisite gap I would otherwise have flagged does not exist.
+- **`def-graph-deletion-contraction-minor-and-subdivision`** — deletion and contraction
+  are published definitions.
+- **`thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma`** — "**Assume the
+  ultrafilter lemma.** If (X_i)_{i∈I} is any family of compact Hausdorff spaces, then
+  ∏X_i, with its product topology, is compact." **Diestel's Tychonoff proof of
+  de Bruijn–Erdős is therefore fully in scope**, and at exactly the right choice
+  strength, resting on a published item. This corrects the "out of scope" row in §C.4.5.
+- **`thm-konig-infinity-lemma-for-ordered-trees`** — verbatim from the item: "Let *T* be
+  an ordered finitely branching tree of finite sequences. If every level T_n is nonempty,
+  then *T* has an infinite branch. The branch is constructed in ZF by least successors
+  and natural recursion; **no choice principle is used**." This is an exact fit for the
+  countable de Bruijn–Erdős tree (§C.4.4) — the levels are finite sets of functions into
+  {1,…,k}, i.e. finite sequences, canonically ordered.
+- **Finite probability is published**: `def-finite-probability-space-and-event`,
+  `def-uniform-finite-probability-space`, `def-product-of-finite-probability-spaces`,
+  `def-expectation-on-a-finite-probability-space`, `lem-finite-probability-basic-laws`,
+  and **`def-erdos-renyi-random-graph`** ("The Erdős–Rényi **finite** random graph
+  G(n,p)"). **This upgrades the Gap-3 substitute in §C.3.6**: it need not be stated as
+  raw counting, it can be stated as a probability over the finite space G(n,½) — the
+  library's own object — with no measure theory anywhere.
+
+And two confirmations of genuine holes:
+- **No Tutte 1-factor theorem, no Tutte–Berge, no Gallai–Edmonds, no factor-critical
+  item.** Matching stops at `def-matching-maximum-perfect-and-matching-number`,
+  `thm-berge-augmenting-path-characterisation`, `lem-symmetric-difference-of-two-
+  matchings`, `thm-konig-bipartite-matching-cover`, `thm-hall-marriage-finite-bipartite`,
+  `cor-hall-deficiency-formula`, `thm-gallai-matching-edge-cover-identity`,
+  `prop-bipartite-matching-flow-model`. **Gap 2 is real and the whole of §C.2 is new.**
+- **No edge colouring of any kind** — no chromatic-index item, no edge-colouring
+  definition. Vertex colouring is well covered
+  (`def-proper-vertex-colouring-and-chromatic-number`, five- and six-colour theorems,
+  greedy bound, …), and **`lem-kempe-component-colour-swap` and
+  `ex-five-colouring-by-a-kempe-swap` are published**, so the Kempe-chain machinery
+  Gap 1 needs already exists. **Gap 1 is real and starts from a definition.**
+- **No Rado graph, no de Bruijn–Erdős, no infinite-graph colouring item.** Gaps 3 and 4
+  are real. (`def-erdos-renyi-random-graph` is the *finite* G(n,p) and is unrelated.)
+
+**The library's matching notation is ν(G)**, confirmed from
+`def-matching-maximum-perfect-and-matching-number`: "Matchings, saturated vertices,
+maximal and maximum matchings, perfect matchings and $\nu(G)$". §D.2.3's recommendation
+is therefore not a recommendation but a requirement: **use ν, never α′.**
+
 ### E.2 Gap 2
 
 | result | needs | library has it? |
@@ -1302,16 +1392,17 @@ theorem, measure theory, or algebraic topology.
 | Gallai–Edmonds (West route) | **Hall's theorem only**, plus finite parity counting | **yes** |
 | Gallai–Edmonds (Chekuri route) | Edmonds' algorithm and blossoms first | **no** — costs the algorithm items first |
 | factor-critical basics | nothing beyond finite graphs | yes |
-| Edmonds' blossom algorithm, correctness | Berge; graph contraction/shrinking as an operation | **shrinking must be defined** — Diestel has contraction for minors; check whether the library publishes edge/vertex-set contraction as a named operation. If not, that is a small definition item, **[A], 3 steps** |
+| Edmonds' blossom algorithm, correctness | Berge; graph contraction/shrinking as an operation | **yes** — `def-graph-deletion-contraction-minor-and-subdivision` is published. It defines contraction of an *edge*; blossom shrinking contracts a connected *vertex set*, so check whether that generalisation is already in the item and, if not, mint it (**[A], 3 steps**) |
 | Edmonds' blossom algorithm, O(\|V\|²\|E\|) | an algorithmic cost model | **no — omit.** The library has no complexity vocabulary; state the algorithm and its correctness, and put the running time in a `rem-` with `proved_here: false` |
 | Petersen (bridgeless cubic) | Tutte's theorem; edge-cut parity (d(S) ≡ Σ_{v∈S} d(v) mod 2) | **yes**, given Tutte; the parity lemma is 2 steps inline |
 | Sylvester-graph counterexample | nothing | yes |
-| 2-factor theorem (2k-regular ⟹ 2-factorable) | **Euler's theorem** (connected + all degrees even ⟹ Euler tour) and König's 1-factor corollary | **Euler's theorem is NOT in the stated inventory.** It is itself **[A], ~8 steps**, and worth minting as its own item — it unlocks this and much else |
+| 2-factor theorem (2k-regular ⟹ 2-factorable) | **Euler's theorem** (connected + all degrees even ⟹ Euler circuit) and König's 1-factor corollary for regular bipartite graphs | **yes** — `thm-eulers-euler-circuit-characterisation` is published *for multigraphs*, which is what this proof needs; and `thm-konig-bipartite-matching-cover` plus Hall give the bipartite 1-factor |
 | König–Ore formula | Hall | yes |
 
-**Two prerequisite gaps to flag to the scaffolder: (a) Euler's theorem, (b) contraction
-of a vertex set as a named operation.** Both are cheap and both are needed by more than
-one item on this page.
+**One prerequisite item to check rather than assume:** whether
+`def-graph-deletion-contraction-minor-and-subdivision` covers contraction of a connected
+**vertex set** (blossom shrinking) or only of a single edge. Everything else Gap 2 needs
+is published.
 
 ### E.3 Gap 3
 
@@ -1330,7 +1421,7 @@ one item on this page.
 | the converse characterisation (Diestel 8.3.2) | (∗), plus a minimal-counterexample argument | yes |
 | Henson graphs R^r | the same machinery | yes |
 | **Erdős–Rényi almost-sure statement** | **product probability measure on 2^{[ℕ]²}, countable additivity, independence** | **NO — defer with reason "rests on a measure-theory level"** |
-| the finite counting substitute (§C.3.6) | binomial coefficients, (1−x)^N ≤ e^{−xN} | **yes** — confirm the library has the exponential bound or prove it inline (2 steps by 1−x ≤ e^{−x}) |
+| the finite substitute (§C.3.6) | finite probability spaces, finite products, union bound, (1−x)^N ≤ e^{−xN} | **yes, all published** — `def-finite-probability-space-and-event`, `def-product-of-finite-probability-spaces`, `def-erdos-renyi-random-graph`, `lem-finite-probability-basic-laws`; prove the exponential bound inline (2 steps from 1−x ≤ e^{−x}) if it is not already there |
 | Baire-category version | complete metric spaces + Baire category theorem (which needs DC) | **NO — omit; do not offer as the substitute** |
 | ∈-graph of a countable model of set theory | Löwenheim–Skolem | **NO — remark only** |
 | quadratic-residue construction | quadratic reciprocity, CRT, **Dirichlet** | **NO — remark only, `proved_here: false`** |
@@ -1342,7 +1433,7 @@ one item on this page.
 |---|---|---|
 | DBE for countable *G* | König's infinity lemma for ordered trees; a fixed enumeration; finite sets of colourings canonically ordered | **yes — the library publishes exactly this lemma, "in ZF"** |
 | DBE for arbitrary *G*, ultrafilter route | **the ultrafilter lemma**; finite intersection property; the fact that an ultrafilter meets exactly one block of a finite partition of a member | **yes** — the last fact is 2 steps inline |
-| DBE by Tychonoff | product topology, compactness, finite intersection property | **no — omit** |
+| DBE by Tychonoff | product topology, compactness of a product of compact Hausdorff spaces from the ultrafilter lemma, finite intersection property | **yes** — `thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma` is published; also `thm-compactness-via-nets-filters-and-ultrafilters` and `cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma`. Available as a second route, at the same choice cost |
 | the converse (DBE_k ⟹ ultrafilter lemma, k ≥ 3) | Läuchli's Boolean-algebra-to-graph construction, or Rorabaugh–Tardif–Wehlau's filtered-power argument | **no — this is the documented `proved_here: false` last resort** |
 | DBE₂ ⟺ Choice(2) | Mycielski's argument | **no — remark only** |
 
@@ -1426,4 +1517,1342 @@ pointer in `subjects-01-combinatorics-harvest-graphtheory.md` (at its lines ~157
 ~2016) should be sent here instead.
 
 **F.6 — The Gap-1 research lane (edge colouring for multigraphs) was run as a separate
-dispatch.** See §A.1/§B.1/§C.1 above for its result, and §F.7 for its own blockers.
+dispatch and is reproduced in full as Part II below**, with its own source ledger,
+verbatim headings harvest, mathematical detail, conventions, prerequisite audit and
+blockers (Part II §F1–§F8). Its headline results: **Shannon's ⌊3Δ/2⌋ bound has a
+complete 16-step route** from Kostochka's UIUC Math 412 slides; **Vizing's multigraph
+theorem χ′ ≤ Δ + μ has a complete route from Vizing's own 1964 paper**, obtained in
+English translation from the author-hosted back matter of Stiebitz–Scheide–Toft–Favrholdt
+at `https://www.tu-ilmenau.de/fileadmin/Bereiche/MN/komgra/BackMatterWiley.pdf`; and
+**Goldberg–Seymour is statement-only and explicitly labelled as such**, with the cheap
+lower bound χ′ ≥ ⌈Γ(G)⌉ separated out as a 4-step item. Part II also flags one
+**unproved, unsourced** exercise (Bondy–Murty Ex. 17.2.8a, χ′ ≤ 2Δ − μ) that must not be
+scaffolded, and marks every proof step it supplied where a source left a gap.
+
+**Two cross-part dependencies the scaffolder must not miss.**
+- Part II §C1.3's supplementary even-Δ route to Shannon needs **Petersen's 2-factor
+  theorem**, which Part I §C.2.5 costs out at **[A], ~8 steps** and confirms is fully in
+  scope (the library publishes Euler's theorem for multigraphs). Part II records it as
+  absent; Part I supplies the route.
+- Part II §C5.1 Route K-b (König for bipartite multigraphs via optimal colourings) also
+  rests on Euler circuits in multigraphs, which the library has. **The two gaps share this
+  prerequisite; build it once.**
+
+
+---
+---
+
+# PART II — GAP 1: EDGE COLOURING BEYOND VIZING'S SIMPLE-GRAPH THEOREM
+
+*Researched as a separate dispatch and reproduced here in full. **Section labels inside
+this Part are internal to it**: a reference below to "§B3", "§C4", "§D2" or "§E" means
+Part II's own §B3, §C4, §D2, §E — not Part I's. Part I's sections are §A.2–§A.4,
+§B.2–§B.4, §C.2–§C.4, §D.2–§D.4, §E.1–§E.4 and §F.1–§F.6.*
+
+*Legend, unchanged from Part I: **[A]** ≤ 12 numbered steps · **[B]** 12–30 · **[C]** out
+of reach for a single library item.*
+
+### A. SOURCE LEDGER
+
+Legend for **form**: `FULL` = the actual mathematical text of the stated range was
+read; `TOC` = table of contents / headings only; `APPENDIX` = a specific appendix
+of a book, verbatim, but not the body chapters.
+
+#### A1 — PRIMARY (textbook / monograph / thesis, harvestable headings)
+
+| # | Source | URL / local path | Form | Exact range read |
+|---|---|---|---|---|
+| S1 | J. A. Bondy and U. S. R. Murty, *Graph Theory*, Graduate Texts in Mathematics 244, Springer, 2008 | local `/tmp/gtm244.pdf` (654 pp, text layer extracts cleanly); mirror obtained earlier this run at `https://raw.githubusercontent.com/chanqi4444/GTM/master/GTM244.Graph.Theory,.Bondy,.J.A.,.Murty,.U.S.R.,.(2007,.ISBN.978-1-84628-969-9).1846289696.pdf` | FULL for §17.1–17.2; TOC-level for §17.3–17.6 | Chapter 17 "Edge Colourings", pp. 451–470 (PDF pages 453–472). §17.1 and §17.2 read in full including every exercise; §17.3–17.6 read at heading + named-result level. |
+| S2 | J. A. Bondy and U. S. R. Murty, *Graph Theory with Applications*, North-Holland, 1976 | local `/tmp/bondy_murty_1976.pdf` (270 pp, OCR text layer, legible but with OCR noise: `X'` for χ′, `~`/`b..`/`A` for Δ, `IL`/`lot` for μ); free full scan at `https://www.zib.de/groetschel/teaching/WS1314/BondyMurtyGTWA.pdf` | FULL | Chapter 6 "Edge Colourings", pp. 91–100 (PDF pages 98–107): §6.1 Edge Chromatic Number, §6.2 Vizing's Theorem, §6.3 The Timetabling Problem, plus the chapter reference list. |
+| S3 | M. Stiebitz, D. Scheide, B. Toft, L. M. Favrholdt, *Graph Edge Coloring: Vizing's Theorem and Goldberg's Conjecture*, Wiley-Interscience Series in Discrete Mathematics and Optimization, John Wiley & Sons, 2012, ISBN 9781118091371 | TOC confirmed independently from `https://searchworks.stanford.edu/view/9626841` and `https://vdoc.pub/documents/graph-edge-coloring-vizings-theorem-and-goldbergs-conjecture-2cu9l3i7p1qg`; **author-hosted front and back matter (Ilmenau, Stiebitz's institution)** at `https://www.tu-ilmenau.de/fileadmin/Bereiche/MN/komgra/FrontMatterWiley.pdf` and `https://www.tu-ilmenau.de/fileadmin/Bereiche/MN/komgra/BackMatterWiley.pdf` | TOC (whole book) + APPENDIX (verbatim) | Front matter pp. vii–ix (the printed Contents, read verbatim from the author-hosted PDF). Back matter pp. 269–322 read in full: **Appendix A "Vizing's Two Fundamental Papers" pp. 269–280** (English translations of Vizing 1964 and Vizing 1965, complete with proofs), **Appendix B "Fractional Edge Colorings" pp. 281–294**, References pp. 295–311, Symbol/Name/Subject indexes pp. 312–322. Body chapters 1–9 NOT obtained. |
+| S4 | Jessica M. McDonald, *Multigraphs with High Chromatic Index*, PhD thesis, University of Waterloo, 2009 | local `/tmp/edgecolor/mcdonald-thesis.pdf` (115 pp) | FULL for Ch. 1–3; TOC for Ch. 4–7 | Abstract, Contents, Chapter 1 "Introduction" pp. 1–4, Chapter 2 "Edge-colourings, alternating paths and Tashkinov trees" §2.1–2.3.1 pp. 5–17, Chapter 3 "Achieving maximum chromatic index" pp. 27–37 in full. |
+| S5 | R. Diestel, *Graph Theory*, 5th ed., §5.3 "Colouring edges" | local `/tmp/edgecolor/diestel-full.pdf` (422 pp) | FULL | §5.3, pp. 119–121 (PDF pages 129–131). Read only to characterise the *simple-graph* fan for the comparison in §C4; this is the section the library already harvested. |
+| S6 | A. V. Kostochka, Math 412 "Introduction to Graph Theory", University of Illinois Urbana-Champaign, Sections C13/C14, lecture slides | `http://kostochk.web.illinois.edu/math412-10/Lec36-f25.pdf` and `.../Lec37-f25.pdf` (verified live this session; byte sizes 313734 and 244206 match the local copies at `/tmp/edgecolor/m412/Lec36.pdf`, `Lec37.pdf`); course page `http://kostochk.web.illinois.edu/math412-10/` | FULL | Lecture 36 (11 slides) and Lecture 37 (11 slides). Lecture 36 defines edge colouring, line graphs, χ′ ≥ Δ, χ′ ≤ 2Δ−2, and begins Shannon's Theorem; **Lecture 37 completes the proof of Shannon's Theorem** and states Vizing/Tait, then moves to Hamiltonicity. |
+| S7 | D. B. West, *Introduction to Graph Theory*, 2nd ed., Prentice-Hall — **Instructor's Solution Manual**, Section 7.1 "Line Graphs and Edge-Coloring" | local `/tmp/gsrc/dok.html` (a `dokumen.pub` mirror captured earlier this run; the live page now returns "website under maintenance") | PARTIAL (solutions to §7.1 exercises only, not the main text) | Solutions 7.1.32–7.1.35 and 7.1.39 read verbatim. This yields West's exercise statements 7.1.34 (Shannon's bound "almost") and 7.1.35 (the Ore and Andersen–Goldberg bounds). |
+
+#### A2 — PRIMARY (research papers, with full proofs of their own results)
+
+| # | Source | URL / local path | Form | Range read |
+|---|---|---|---|---|
+| S8 | G. Chen, G. Jing, W. Zang, "Proof of the Goldberg-Seymour Conjecture on Edge-Colorings of Multigraphs", arXiv:1901.10316 (v1 29 Jan 2019, v2 7 Jun 2022), 81 pp. Journal version: *J. Comb. Optim.* (2025), DOI `10.1007/s10878-025-01348-6` | downloaded to `/tmp/gapfill/cjz.pdf` from `https://arxiv.org/pdf/1901.10316v2`; abstract page `https://arxiv.org/abs/1901.10316` | FULL for §1–§2.1; section headings for the rest | Abstract and §1 "Introduction" pp. 1–5, §2.1 "Terminology and Notation" p. 6, plus every section heading. |
+| S9 | J. Misra and D. Gries, "A Constructive Proof of Vizing's Theorem" (Sept 1990; published *Inf. Process. Lett.* 41 (1992) 131–133) | local `/tmp/edgecolor/misra-gries.pdf` (4 pp) | FULL | All 4 pages. |
+| S10 | Y. Cao, G. Chen, S. Shan, "Overfullness of critical class 2 graphs with a small core degree", arXiv:2008.08135v1 (18 Aug 2020), 31 pp | local `/tmp/edgecolor/critical-overfull.pdf` | FULL for §1–§2.3 | §1 "Introduction" pp. 1–3 and §2 "Preliminaries" §2.1–2.3 pp. 4–8. Source for the modern statement of **VAL**, of **overfull**, of **multifan** and of **Kierstead path**. |
+| S11 | S. Shan, "Towards the Overfull Conjecture", arXiv:2308.16808v4 (5 Sep 2024), 44 pp | local `/tmp/edgecolor/overfull1.pdf` | FULL for §1–§2.1 | Abstract, §1 "Introduction" pp. 1–3, §2 "Notation and preliminaries" p. 4. |
+| S12 | M. G. Dunaway, *Generalizing Vizing's Theorem to Multigraphs*, MSc Mathematical Literature and Problems project, Portland State University (dir. J. Caughman) — an exposition of **C. Berge and J. C. Fournier, "A short proof for a generalization of Vizing's theorem", J. Graph Theory 15 (1991) 333–336** | local `/tmp/edgecolor/dunaway.pdf` (25 pp) | FULL | All 25 pages. |
+| S13 | P. Aboulker, G. Aubian, C.-C. Huang, "Vizing's and Shannon's Theorems for Defective Edge Colouring", *Electron. J. Combin.* 29(4) (2022) #P4.1, `https://doi.org/10.37236/11049` | local `/tmp/edgecolor/aboulker.pdf` (13 pp) | SKIMMED | §1 Introduction. Used only for a cross-check on the statements of Shannon and Vizing–Gupta; the paper's own subject (defective colouring) is out of scope. |
+
+#### A3 — SUPPORTING / TIEBREAKER ONLY (never a pair's primary backing)
+
+| # | Source | Path | Use |
+|---|---|---|---|
+| S14 | R. Green, "Vizing's Theorem and Edge-Chromatic Graph Theory", UChicago REU 2015 | `/tmp/edgecolor/green-reu.pdf` | Contains a *broken* attempted proof of Shannon (p. 6, the argument is cut off mid-sentence and the Vizing proof on p. 2 has an uninstantiated "colour {v,wj} blue"). **Do not use.** Recorded only so nobody re-fetches it. |
+| S15 | RPI edge-colouring slides | `/tmp/edgecolor/rpi-edgecol.pdf` | States Shannon and Vizing with "Proof. Not obvious." — no proofs. Gives a variant density parameter ω(G). |
+
+---
+
+### B. VERBATIM HEADINGS HARVEST
+
+#### B1 — Bondy & Murty 2008 (S1), Chapter 17, the chapter's own Contents page, verbatim
+
+> 17 Edge Colourings
+> Contents
+> 17.1 Edge Chromatic Number . . . 451
+>   Edge Colourings of Bipartite Graphs . . . 452
+> 17.2 Vizing's Theorem . . . 455
+> 17.3 Snarks . . . 461
+> 17.4 Coverings by Perfect Matchings . . . 464
+>   Fulkerson's Conjecture . . . 465
+> 17.5 List Edge Colourings . . . 466
+>   The List Edge Colouring Conjecture . . . 467
+>   Galvin's Theorem . . . 467
+> 17.6 Related Reading . . . 470
+>   Total Colourings . . . 470
+>   Fractional Edge Colourings . . . 470
+
+Named results and named exercises in the range, verbatim:
+
+- "Example 17.1 The Timetabling Problem"
+- "Theorem 17.2 If G is bipartite, then χ′= ∆."
+- "Lemma 17.3 Let G be a simple graph, v a vertex of G, e an edge of G incident to v, and k an integer, k ≥ ∆. Suppose that G \ e has a k-edge-colouring c with respect to which every neighbour of v in G has at least one available colour. Then G is k-edge-colourable."
+- "Theorem 17.4 Vizing's Theorem — For any simple graph G, χ′ ≤ ∆ + 1."
+- "Theorem 17.5 For any graph G, χ′ ≤ ∆ + µ."
+- "17.1.14 Kirkman's Schoolgirl Problem"
+- "17.1.16 Gupta's Theorem"
+- "17.2.1 Overfull Graph"
+- "17.2.10 Uniquely Edge-Colourable Graph"
+- "17.2.15 Vizing's Adjacency Lemma"
+- "Conjecture 17.6 Every 2-connected cubic graph admits a double cover by six perfect matchings." (Fulkerson)
+- "Conjecture 17.7 Every 2-connected cubic graph admits a covering by five perfect matchings."
+- "Conjecture 17.8 For every loopless graph G, χ′…" (the List Edge Colouring Conjecture)
+- "Theorem 17.9 Let G[X,Y] be a simple bipartite graph, and let D be an orien…" (Galvin)
+- "Theorem 17.10 Every simple bipartite graph G is ∆-list-edge-colourable."
+- Named exercises 17.3.2 "Blanuša Snark", 17.3.3 "Flower Snark", 17.3.5 "Meredith Graph", 17.4.5 "Perfect Matching Polytope", 17.4.7 "Matching Polytope".
+
+**Disposition note for the harvest**: the range 17.1–17.2 is the part relevant to GAP 1. §17.3 (Snarks), §17.4 (Coverings by Perfect Matchings), §17.5 (List Edge Colourings), §17.6 (Related Reading: Total Colourings, Fractional Edge Colourings) are enumerated here so the scaffolder can dispose of them explicitly; they are outside GAP 1's remit.
+
+#### B2 — Bondy & Murty 1976 (S2), Chapter 6, verbatim
+
+> 6 Edge Colourings
+> 6.1 EDGE CHROMATIC NUMBER
+> 6.2 VIZING'S THEOREM
+> APPLICATIONS
+> 6.3 THE TIMETABLING PROBLEM
+> REFERENCES
+
+Named results, verbatim (OCR of χ′ is `X'`, of Δ is `~`/`A`/`b..`, of μ is `IL`/`lot`; I restore them and mark the restoration):
+
+- "Lemma 6.1.1 Let G be a connected graph that is not an odd cycle. Then G has a 2-edge colouring in which both colours are represented at each vertex of degree at least two."
+- "Lemma 6.1.2 Let 𝒞 = (E₁, E₂, …, E_k) be an optimal k-edge colouring of G. If there is a vertex u in G and colours i and j such that i is not represented at u and j is represented at least twice at u, then the component of G[E_i ∪ E_j] that contains u is an odd cycle."
+- "Theorem 6.1 If G is bipartite, then X' = Δ."  [OCR `X' = ~`]
+- "Theorem 6.2 If G is simple, then either X' = Δ or X' = Δ + 1."  — with the attribution "An important theorem due to Vizing (1964) and, independently, Gupta (1966) … The proof given here is by Fournier (1973)."
+- Vizing's multigraph theorem is stated in prose, not as a numbered theorem: "We can now state Vizing's theorem in its full generality: if G is loopless, then Δ ≤ X' ≤ Δ + μ."
+- "Lemma 6.3 Let M and N be disjoint matchings of G with |M| > |N|. Then there are disjoint matchings M' and N' of G such that |M'| = |M| − 1, |N'| = |N| + 1 and M' ∪ N' = M ∪ N."
+- "Theorem 6.3 If G is bipartite and if p ≥ Δ, then there exist p disjoint matchings M₁, M₂, …, M_p of G such that (6.4) … and, for 1 ≤ i ≤ p (6.5)"
+- Named exercises: 6.2.3 attributed "(V. G. Vizing)" and "(L. W. Beineke and R. J. Wilson)"; 6.2.4(b) with the parenthetical "(Shannon, 1949 has shown that this inequality also holds when Δ is odd.)"; 6.2.5 "(D. L. Greenwell and H. V. Kronk)"; 6.1.6 and 6.2.8 "(R. P. Gupta)".
+- Chapter reference list, verbatim: Dempster (1971); Fournier, J.-C. (1973). Colorations des aretes d'un graphe. Cahiers du CERO, 15, 311–14; Gupta, R. P. (1966). The chromatic index and the degree of a graph. Notices Amer. Math. Soc., 13, abstract 66T-429; Shannon, C. E. (1949). A theorem on coloring the lines of a network. J. Math. Phys., 28, 148–51; Vizing, V. G. (1964). On an estimate of the chromatic class of a p-graph (Russian). Diskret. Analiz., 3, 25–30; de Werra, D. (1970).
+
+*(The text at PDF page 105 refers to "theorem 6.4" and "theorem 6.3" for the same statement; there is no Theorem 6.4 in the chapter. This is an OCR/typo artefact of the print — treat "theorem 6.4" as "theorem 6.3".)*
+
+#### B3 — Stiebitz, Scheide, Toft, Favrholdt 2012 (S3), the book's printed CONTENTS, verbatim
+
+Read from the author-hosted `FrontMatterWiley.pdf`, pp. vii–ix, and cross-checked against Stanford SearchWorks.
+
+> Preface xi
+> 1 Introduction 1
+>   1.1 Graphs 1
+>   1.2 Coloring Preliminaries 2
+>   1.3 Critical Graphs 5
+>   1.4 Lower Bounds and Elementary Graphs 6
+>   1.5 Upper Bounds and Coloring Algorithms 11
+>   1.6 Notes 15
+> 2 Vizing Fans 19
+>   2.1 The Fan Equation and the Classical Bounds 19
+>   2.2 Adjacency Lemmas 24
+>   2.3 The Second Fan Equation 26
+>   2.4 The Double Fan 31
+>   2.5 The Fan Number 32
+>   2.6 Notes 39
+> 3 Kierstead Paths 43
+>   3.1 Kierstead's Method 43
+>   3.2 Short Kierstead's Paths 46
+>   3.3 Notes 49
+> 4 Simple Graphs and Line Graphs 51
+>   4.1 Class One and Class Two Graphs 51
+>   4.2 Graphs whose Core has Maximum Degree Two 54
+>   4.3 Simple Overfull Graphs 63
+>   4.4 Adjacency Lemmas for Critical Class Two Graphs 73
+>   4.5 Average Degree of Critical Class Two Graphs 84
+>   4.6 Independent Vertices in Critical Class Two Graphs 89
+>   4.7 Constructions of Critical Class Two Graphs 93
+>   4.8 Hadwiger's Conjecture for Line Graphs 101
+>   4.9 Simple Graphs on Surfaces 105
+>   4.10 Notes 110
+> 5 Tashkinov Trees 115
+>   5.1 Tashkinov's Method 115
+>   5.2 Extended Tashkinov Trees 127
+>   5.3 Asymptotic Bounds 139
+>   5.4 Tashkinov's Coloring Algorithm 144
+>   5.5 Polynomial Time Algorithms 148
+>   5.6 Notes 152
+> 6 Goldberg's Conjecture 155
+>   6.1 Density and Fractional Chromatic Index 155
+>   6.2 Balanced Tashkinov Trees 160
+>   6.3 Obstructions 162
+>   6.4 Approximation Algorithms 183
+>   6.5 Goldberg's Conjecture for Small Graphs 185
+>   6.6 Another Classification Problem for Graphs 186
+>   6.7 Notes 193
+> 7 Extreme Graphs 197
+>   7.1 Shannon's Bound and Ring Graphs 197
+>   7.2 Vizing's Bound and Extreme Graphs 201
+>   7.3 Extreme Graphs and Elementary Graphs 203
+>   7.4 Upper Bounds for χ′ Depending on Δ and μ 205
+>   7.5 Notes 209
+> 8 Generalized Edge Colorings of Graphs 213
+>   8.1 Equitable and Balanced Edge Colorings 213
+>   8.2 Full Edge Colorings and the Cover Index 222
+>   8.3 Edge Colorings of Weighted Graphs 224
+>   8.4 The Fan Equation for the Chromatic Index χ′_f 228
+>   8.5 Decomposing Graphs into Simple Graphs 239
+>   8.6 Notes 243
+> 9 Twenty Pretty Edge Coloring Conjectures 245
+> Appendix A: Vizing's Two Fundamental Papers 269
+>   A.1 On an Estimate of the Chromatic Class of a p-Graph 269
+>   References 272
+>   A.2 Critical Graphs with a Given Chromatic Class 273
+>   References 278
+> Appendix B: Fractional Edge Colorings 281
+>   B.1 The Fractional Chromatic Index 281
+>   B.2 The Matching Polytope 284
+>   B.3 A Formula for χ′_f 290
+> References 295
+> Symbol Index 312
+> Name Index 314
+> Subject Index 318
+
+Named results in **Appendix A**, verbatim (this is the range I read in full):
+
+- "Lemma A.1  A properly colored multigraph is still properly colored after recoloring a maximal (s,t)-path."
+- "Lemma A.2  Let x, y and z be three different vertices in a properly colored multigraph G. Suppose that in each of x, y and z either the color s or the color t is missing. Then at least one of x, y and z is not contained in the same (s,t)-path as any of the two other vertices."
+- "Theorem A.3  If m is the maximum degree in the p-graph G, then q(G) ≤ m + p."
+- "Corollary A.4  If m is the maximum degree in the graph G, then m ≤ q(G) ≤ m + 1. Moreover, for each m ≥ 2 there is a graph G with σ(G) = m and q(G) = m + 1"
+- "Lemma A.5  Let G be a graph with σ(G) = m and q(G) = m + 1. Then for any k satisfying m ≥ k ≥ 2 there exists a critical graph of degree k as a subgraph of G."
+- "PROPERTY I. A critical graph of degree m cannot have a separating vertex."
+- "PROPERTY II. The sum of the degrees of two adjacent vertices in a critical graph of degree m is ≥ m + 2."
+- "PROPERTY III. In a critical graph of degree m each vertex is adjacent to at least two vertices of degree m."
+- "Theorem A.6  In a critical graph of degree m each vertex incident with a vertex of degree k is in addition also incident with m − k + 1 vertices of degree m."
+- "Theorem A.7  A critical graph of degree m contains an elementary cycle of length ≥ m + 1."
+- "Theorem A.8  In a critical graph of degree m the number of edges is ≥ (3m² + 6m − 1)/8."
+- "Theorem A.9  If G ∈ L_k and σ(G) ≥ 2k, then q(G) = σ(G)."
+- "Theorem A.10  If G is planar and σ(G) ≥ 8, then q(G) = σ(G)."
+- "Theorem A.11  χ′(G) ≤ Δ(G) + μ(G) − 1 for all graphs with μ(G) ≥ 2 and Δ(G) = 2μ(G) − 1."
+- Appendix A also contains the section headings "DEFINITION OF A CRITICAL GRAPH OF DEGREE m AND ITS PROPERTIES" and "A METHOD FOR CLASSIFICATION OF GRAPHS", and the closing editorial "Notes".
+- **Appendix B** named result: "Theorem B.1  Every weighted graph (G, f) satisfies χ′*_f(G) = min{ Σ_{M∈M_f(G)} w(M) | w ∈ R′_f(G) }."
+
+Key bibliography entries confirmed verbatim from the book's References (pp. 295–311):
+
+- "Shannon, C. E. (1949). A theorem on coloring the lines of a network. J. Math. Phys., 28:148–151."
+- "Vizing, V. G. (1964). On an estimate of the chromatic class of a p-graph (in Russian). Diskret. Analiz, 3:25–30."
+- "Vizing, V. G. (1965). The chromatic class of a multigraph (in Russian). Kibernetika (Kiev), 3:29-39. English translation in: Cybernetics and System Analysis, 1:32–41."
+- "Vizing, V. G. (1965). Critical graphs with a given chromatic class …" (Diskret. Analiz 5, 9–17)
+- "Gupta, R. P. (1967). Studies in the Theory of Graphs. Ph.D. Thesis, Tata Institute of Fundamental Research, Bombay."
+- "Berge, C. and Fournier, J. C. (1991). A short proof for a generalization of Vizing's theorem. J. Graph Theory, 15:333–336."
+- "Fournier, J. C. (1973). Coloration des arêtes d'un graphe. Cahiers Centre Études Recherche Opér., 15:311–314."
+- "Fournier, J. C. (1977). Méthode et théorème général de coloration des arêtes d'un multigraphe. J. Math. Pures Appl., 56:437–453."
+- "Kierstead, H. A (1984). A new method of proving theorems on chromatic index. Discrete Math., 52:159–164."
+- "Goldberg, M. K. (1984). Edge-coloring of multigraphs: recoloring technique. J. Graph Theory, 8:123–137."
+- "Seymour, P. (1979). On multicolorings of cubic graphs, and conjectures of Fulkerson and Tutte. Proc. London Math. Soc., 38:423–460."
+- "Holyer, I. (1981). The NP-completeness of edge-colouring. SIAM J. Comput., 10:718–720."
+- "Frink, O. (1926). A proof of Petersen's theorem. Ann. Math., 27:491–493."
+- "Steffen, E. (2000). A refinement of Vizing's theorem. Discrete Math., 218:289–291."
+- "Andersen, L. D. (1977). On edge-colourings of graphs. Math. Scand., 40:161–175."
+- "Soifer, A. (2009). The Mathematical Coloring Book, Springer, Berlin."
+
+#### B4 — McDonald 2009 (S4), thesis Contents, verbatim
+
+> 1 Introduction 1
+> 2 Edge-colourings, alternating paths and Tashkinov trees 5
+>   2.1 Central results in edge-colouring 5
+>   2.2 From alternating paths to Tashkinov trees 8
+>   2.3 The proof of Tashkinov's Theorem 12
+>     2.3.1 Filling the gap 12
+>     2.3.2 As an algorithm 18
+> 3 Achieving maximum chromatic index 27
+>   3.1 Canonical examples 27
+>   3.2 Shannon's bound and Goldberg's bound 29
+>   3.3 Vizing's bound 31
+> 4 Bounding chromatic index 38
+>   4.1 A general result 39
+>   4.2 Specific new results 45
+>   4.3 Corresponding colouring algorithms 54
+> 5 Characterizing high chromatic index 65
+>   5.1 General characterization techniques 66
+>   5.2 High chromatic index with respect to g_o 74
+>   5.3 Multiples of simple graphs and Vizing's bound 78
+> 6 Vertex-colouring 81
+>   6.1 Vertex-colouring results as edge-colouring results 81
+>   6.2 Edge-colouring results as vertex-colouring results 86
+>   6.3 Vertex-Tashkinov trees? 89
+> 7 Conclusion and future work 96
+> References 105
+
+Named results in Chapters 2–3, verbatim:
+
+- "Theorem 2.1.1. [24] (König's Theorem) Let G be a bipartite multigraph. Then, χ′(G) = ∆."
+- "Theorem 2.1.2. [38] (Shannon's Theorem) Let G be a multigraph. Then, χ′(G) ≤ 3∆/2."
+- "Theorem 2.1.3. [44] (Vizing's Theorem) Let G be a multigraph. Then, χ′(G) ≤ ∆ + µ."
+- "Theorem 2.1.4. [11] (Goldberg's Theorem) Let G be a multigraph containing an odd cycle. Then, χ′(G) ≤ ∆ + 1 + (∆ − 2)/(g_o − 1)."
+- "Theorem 2.1.5. [39] (Steffen's Theorem) Let G be a multigraph containing a cycle. Then, χ′(G) ≤ ∆ + ⌈µ/⌊g/2⌋⌉."
+- "Theorem 2.1.6. [30] (Ore's Theorem) Let G be a multigraph. Then, χ′(G) ≤ max{d(v) + µ(v) | v ∈ V(G)}."
+- "Theorem 2.2.1. [42] (Tashkinov's Theorem) Let G be a multigraph and let φ be a partial (∆ + s)-edge-colouring of G, with s ≥ 1. Suppose that there exists a φ-Tashkinov tree T = (p₀, e₀, p₁, …, p_n) in G which is not φ-elementary. Then, there exists a (∆ + s)-edge colouring ψ of dom(φ) ∪ {e₀}."
+- "Theorem 2.2.2. [21] (Kierstead's Theorem)" — same statement with "φ-Kierstead path P" in place of the tree.
+- "Theorem 3.1.1. Let µK_{d+1} be a multiple of an odd clique. Then, χ′(µK_{d+1}) = µ(d + 1) = ∆ + µ."
+- "Theorem 3.1.2. Let µC_k be a multiple of an odd cycle. Then, χ′(µC_k) = ⌈∆k/(k−1)⌉ = ∆ + 1 + ⌊(∆−2)/(k−1)⌋."
+- "Theorem 3.2.1. [43] Let G be a connected multigraph. Then, χ′(G) = 3∆/2 if and only if G = µK₃."
+- "Theorem 3.2.2. Let G be a connected multigraph containing an odd cycle. Then, χ′(G) = ∆ + 1 + (∆−2)/(g_o−1) if and only if G = µC_{g_o} and (g_o − 1) | 2(µ − 1)."
+- "Theorem 3.3.1. [21] Let G be a multigraph with µ ≥ 2. If χ′(G) = ∆ + µ, then G contains a 2µ-sided triangle as a subgraph."
+- "Lemma 3.3.2.", "Theorem 3.3.3.", "Theorem 3.3.4.", "Theorem 3.3.5.", "Corollary 3.3.6."
+
+The Seymour–Goldberg Conjecture is given in §2.1 in three equivalent forms, verbatim:
+
+> χ′ ≤ max{⌈ρ⌉, ∆ + 1},
+> χ′ > ∆ + 1 ⇒ χ′ = ⌈ρ⌉,
+> and
+> χ′ ∈ {⌈ρ⌉, ∆, ∆ + 1}.
+
+with
+
+> ρ(G) := max { 2|E[S]| / (|S| − 1) : S ⊆ V(G), |S| ≥ 3 and odd }.
+
+#### B5 — Diestel 5th ed. (S5), §5.3, verbatim
+
+> 5.3 Colouring edges
+> Proposition 5.3.1. (König 1916) Every bipartite graph G satisfies χ′(G) = ∆(G).
+> Theorem 5.3.2. (Vizing 1964) Every graph G satisfies ∆(G) ⩽ χ′(G) ⩽ ∆(G) + 1.
+
+(Diestel's "graph" is simple; see §D1.)
+
+#### B6 — Kostochka Math 412 (S6), Lectures 36–37, verbatim
+
+Lecture 36 slide headings and statements:
+- "A (proper) k-edge-coloring of a graph G is a mapping f : E(G) → {1, …, k} such that f⁻¹(i) is a matching for all i ∈ {1, …, k}."
+- "Observation: χ′(G) ≥ ∆(G) for every G."
+- "Line graphs" — "For a loopless G, the line graph L(G) has V(L(G)) = E(G) … By construction, χ′(G) = χ(L(G)) for every graph G."
+- "It follows that χ′(G) ≤ 2∆(G) − 2 for every graph G. In particular, if ∆(G) = 3, then χ′(G) ≤ 4."
+- "Shannon's application and example. ∆(S_k) = k and χ′(S_k) = ⌊3k/2⌋."
+- "Theorem 7.1 (Shannon's Theorem) Let G = (V, E) be a loopless graph with maximum degree ∆. Then χ′(G) ≤ 3∆/2."
+
+Lecture 37: the proof of Theorem 7.1 with "Claim 1", "Claim 2", "Claim 3", "Claim 4"; then
+- "Theorem 7.2 (Vizing, 1963) Let G = (V, E) be a simple graph with maximum degree ∆. Then χ′(G) ≤ ∆ + 1."
+- "Theorem 7.3 (Tait, 1878) A simple 2-edge-connected 3-regular plane graph is 3-edge-colorable if and only if it is 4-face-colorable."
+- "Theorem 7.4 (Dirac)", "Theorem 7.5 (Turán)" — out of scope.
+
+#### B7 — West, Instructor's Solution Manual (S7), §7.1, verbatim exercise statements
+
+Section heading: "Section 7.1: Line Graphs and Edge-Coloring" (within "Chapter 7: Edges and Cycles").
+
+- "7.1.32. Every bipartite graph G with minimum degree k has a k-edge-coloring in which at each vertex v, each color appears ⌈d(v)/k⌉ or ⌊d(v)/k⌋ times."
+- "7.1.33. Every simple graph with maximum degree ∆ has a proper (∆+1)-edge-coloring in which each color is used ⌈e(G)/(∆+1)⌉ or ⌊e(G)/(∆+1)⌋ times."
+- "7.1.34. Shannon's bound on χ′(G), almost. a) Every loopless graph G has a ∆(G)-regular loopless supergraph. … b) If G is a loopless graph with even maximum degree, then χ′(G) ≤ 3∆(G)/2."
+- "7.1.35. Bounds on χ′(G). … the last bound below (Anderson–Goldberg) implies the earlier bounds. Shannon: χ′(G) ≤ ⌊3∆(G)/2⌋. Vizing, Gupta: χ′(G) ≤ ∆(G) + µ(G). Ore: χ′(G) ≤ max{∆(G), max_P ½(d(x) + d(y) + d(z))}. χ′(G) ≤ max{∆(G), max_P ½(d(x) + µ(xy) + µ(yz) + d(z))}."
+- "7.1.39. Characterization of graphs with the same line graph." — out of scope.
+
+#### B8 — Chen, Jing, Zang (S8), section headings, verbatim
+
+> 1 Introduction
+> 2 Preliminaries
+>   2.1 Terminology and Notation
+>   2.2 Elementary Multigraphs
+>   2.3 Stable Colorings
+>   2.4 Tashkinov Trees
+> 3 Extended Tashkinov Trees
+> 4 Auxiliary Results
+> 5 Good Hierarchies
+> 6 Basic Properties
+> 7 Elementariness and Interchangeability
+>   7.1 Proof of Theorem 5.3
+>   7.2 Proof of Theorem 3.10(ii)
+
+Named results in §1, verbatim: "Conjecture 1.1", "Conjecture 1.2", "Conjecture 1.3", "Conjecture 1.4", "Conjecture 1.5", "Conjecture 1.6", "Theorem 1.1", "Theorem 1.2", "Theorem 1.3", "Theorem 1.4", "Theorem 1.5".
+
+#### B9 — Misra & Gries (S9), section headings, verbatim
+
+> A Constructive Proof of Vizing's Theorem
+> The fan
+> The algorithm
+> Inverting the cd-path
+> Rotating fan ⟨f..w⟩
+> 1 Discussion
+> References
+
+#### B10 — Cao, Chen, Shan (S10), headings and named results in the range read, verbatim
+
+> 1 Introduction
+> 2 Preliminaries
+>   2.1 Basic notation and terminologies
+>   2.2 Modified Vizing fans and Kierstead paths
+>   2.3 τ-sequence, rotation, and shifting
+
+- "Theorem 1.1. Let G be a ∆-critical graph of order n. If δ(G_∆) ≤ 2 and ∆(G) > n/2 + 1, then G is overfull."
+- "Conjecture 1.2. Let G be a ∆-critical graph of order n. If ∆(G) ≥ n/2, then G is just overfull."
+- "Lemma 1.3 (Vizing's Adjacency Lemma (VAL)). Let G be a class 2 graph with maximum degree ∆. If e = xy is a critical edge of G, then x is adjacent to at least ∆ − d(y) + 1 ∆-vertices from V(G) \ {y}."
+- "Theorem 1.4.", "Theorem 1.5.", "Theorem 1.6."
+- "Definition 2.1." (multifan), "Lemma 2.2.", "Lemma 2.3.", "Definition 2.4." (Kierstead path), "Lemma 2.5.", "Lemma 2.6."
+
+#### B11 — Shan (S11), headings in the range read, verbatim
+
+> 1 Introduction
+> 2 Notation and preliminaries
+>   2.1 Results on degree sequences
+
+- "Conjecture 1.1 (Overfull Conjecture). Let G be a graph with ∆(G) > ⅓|V(G)|. Then χ′(G) = ∆(G) if and only if G contains no ∆(G)-overfull subgraph."
+- "Theorem 1.3.", "Theorem 1.4."
+
+#### B12 — Dunaway / Berge–Fournier (S12), headings, verbatim
+
+> Introduction
+> Main Result
+> Proof of Main Result
+> Corollaries
+> Examples
+> Conclusion
+> References
+
+- "Theorem [1]: Fix any positive integers D, t. Suppose G is a non-empty loopless multigraph with maximum degree Δ(G) ≤ D and multiplicity μ(G) ≤ t. Let S be the following set: S = {x | x ∈ V(G); d_G(x) = D; m_G(x) = t}. If this set is independent or empty, then χ′(G) ≤ D + t − 1."
+- "Corollary 1: Let G be a multigraph of maximum degree Δ and of maximum multiplicity μ. If the set of vertices of maximum degree is independent, then Δ + μ − 1 colors suffice to color the edge-set of G."
+- "Corollary 2: Let G be a multigraph of maximum degree Δ and of multiplicity μ, and let M be a maximal matching of G. The edges of G can be colored with Δ + μ colors so that all the edges in M get the same color."
+
+---
+
+### C. MATHEMATICAL DETAIL
+
+Throughout: *loopless multigraph* means finite, undirected, parallel edges permitted,
+loops forbidden. Δ = Δ(G) is the maximum degree; μ(u,v) is the number of edges with
+ends u and v; μ(G) = max_{u≠v} μ(u,v); χ′(G) is the chromatic index. For a proper
+edge colouring φ and a vertex x, write φ̄(x) for the set of colours **missing** at x
+(the palette minus the colours on edges at x).
+
+#### C0. The two shared prerequisites everything below needs
+
+**(P1) Kempe chains for edge colourings.** For a proper edge colouring with palette
+including distinct colours α, β, let H be the spanning subgraph on the edges coloured
+α or β. Every component of H is a path or an even cycle; interchanging α and β on any
+one component yields another proper edge colouring.
+
+Source wording, Bondy–Murty 2008 §17.1: "Let i and j be any two distinct colours, and
+set H_ij := H[M_i ∪ M_j]. Because M_i and M_j are disjoint matchings, each component of
+H_ij is either an even cycle or a path…; we refer to the path-components of H_ij as
+ij-paths. These are akin to Kempe chains". Vizing's own version is **Lemma A.1**
+(verbatim in §B3). Cao–Chen–Shan §2.1 call the components "(α, β)-chains" and the swap
+a "Kempe change"; Diestel calls the component through v the "α/β-path from v".
+
+Proof route: every vertex has degree ≤ 2 in H (at most one α-edge, at most one β-edge),
+so components are paths or cycles; cycles alternate so have even length; the swap keeps
+each colour class a matching. **≈ 5 numbered steps. [A].**
+
+**(P2) A vertex missing a colour is an endpoint of its chain.** If α ∈ φ̄(v) or
+β ∈ φ̄(v), then v has degree ≤ 1 in the (α,β)-subgraph, so its component is a path and v
+is an end of it. Immediate from (P1). This is the single fact that powers Vizing's
+Lemma A.2 and Kostochka's Claim 3, and the library will want it as its own one-line
+lemma. **≈ 2 steps. [A].**
+
+---
+
+#### C1. SHANNON'S BOUND
+
+##### C1.1 Exact statements (four independent wordings)
+
+- **Chen, Jing, Zang (S8) §1**, the modern reference form:
+  > "the first of these, χ′(G) ≤ ⌊3∆(G)/2⌋, was established by Shannon [35] in 1949"
+- **Vizing 1964 (S3, Appendix A.1)**, in Vizing's own words:
+  > "C. E. Shannon [2] proved that any multigraph G satisfies q(G) ≤ ⌊(3/2)σ(G)⌋, where the parenthesis denotes the lower integer part. It is possible for each m to construct a multigraph G with σ(G) = m and q(G) = ⌊(3/2)m⌋"
+- **McDonald (S4) Theorem 2.1.2**:
+  > "Let G be a multigraph. Then, χ′(G) ≤ 3∆/2."
+- **Kostochka (S6) Theorem 7.1**:
+  > "Let G = (V, E) be a loopless graph with maximum degree ∆. Then χ′(G) ≤ 3∆/2."
+- **West (S7) Ex. 7.1.35**: "Shannon: χ′(G) ≤ ⌊3∆(G)/2⌋."
+
+**Recommended library statement**: *Let G be a loopless multigraph with maximum degree
+Δ. Then χ′(G) ≤ ⌊3Δ/2⌋.* (See §D3 for why the floor belongs in the statement.)
+
+**Sharpness.** The extremal family is the *fat triangle* μK₃: McDonald §3.1, verbatim:
+"χ′(µK₃) = 3µ … Since ∆ = 2µ, we can also express 3µ as 3∆/2 … all multiples of
+triangles achieve Shannon's upper bound." Kostochka's slide calls it "Shannon's
+application and example. ∆(S_k) = k and χ′(S_k) = ⌊3k/2⌋". The characterisation
+(McDonald Theorem 3.2.1, due to Vizing's 1968 dissertation) is: *for connected G,
+χ′(G) = 3Δ/2 iff G = μK₃.* Bondy–Murty 1976 Figure 6.3 and Bondy–Murty 2008 Figure 17.3
+show the same graph as the Δ+μ extremal example.
+
+##### C1.2 ROUTE R1 — Kostochka's proof (RECOMMENDED). Uniform in Δ, self-contained.
+
+Source: S6, Lecture 36 slides 7–11 and Lecture 37 slides 1–4. The slides state Claims
+1–3 without proof and prove only Claim 4 and the closing contradiction; the proofs of
+Claims 1–3 below are the standard one-line arguments and are supplied here so the
+scaffolder does not have to invent them. **Each such supplied step is flagged
+`[gap-filled]`; the scaffolder must re-derive and check it, not copy it on my word.**
+
+Setup: k := ⌊3Δ/2⌋, M := {1, …, k}, and for a proper colouring f of a subgraph,
+O_f(x) := M \ {colours f uses on edges at x}.
+
+1. If Δ ≤ 1 the statement is immediate (colour every edge 1). Assume Δ ≥ 2.
+2. Induct on |E(G)| over the class of loopless multigraphs with maximum degree at most Δ.
+   Base: |E(G)| ≤ k — give every edge its own colour.
+3. Induction step. Fix an edge e₁ with ends u, v. Set G₁ := G − e₁. Then Δ(G₁) ≤ Δ and
+   |E(G₁)| = |E(G)| − 1, so by induction there is a proper colouring f : E(G₁) → M.
+4. For every x ∈ V(G): |O_f(x)| ≥ k − d_{G₁}(x) ≥ ⌊3Δ/2⌋ − Δ = ⌊Δ/2⌋.
+5. Because e₁ was deleted, d_{G₁}(u) ≤ Δ − 1 and d_{G₁}(v) ≤ Δ − 1, so
+   |O_f(u)| ≥ ⌊Δ/2⌋ + 1 and |O_f(v)| ≥ ⌊Δ/2⌋ + 1.  (This is the slides' equation (1).)
+6. **Suppose, for contradiction, that G has no proper k-edge-colouring.** Then for
+   *every* proper k-colouring f of G₁, statements 7–9 hold. `[gap-filled: the slides
+   leave this quantifier implicit; making it explicit is what licenses re-applying
+   Claim 3 to the modified colouring at step 14.]`
+7. **Claim 1.** O_f(u) ∩ O_f(v) = ∅. `[gap-filled: a colour in both could be assigned
+   to e₁, giving a k-colouring of G.]`
+8. **Claim 2.** For α ∈ O_f(v) and β ∈ O_f(u), the (α, β)-chain containing v is a v–u
+   path whose edges alternate β, α, starting with a β-edge at v and ending with an
+   α-edge at u. `[gap-filled: by Claim 1, α ≠ β. By (P2) v is an end of its chain, and
+   the chain's first edge at v is coloured β since α ∈ O_f(v). If the chain did not end
+   at u, swapping α and β on it would make β missing at v while β stays missing at u,
+   and e₁ could be coloured β — contradiction with step 6.]`
+9. Fix α ∈ O_f(v) and β ∈ O_f(u). Since α ∉ O_f(u) by Claim 1, some edge e₂ at u carries
+   colour α; because colour classes are matchings, e₂ is **the** α-edge at u. Let w be
+   its other end. Then w ≠ u (G is loopless) and w ≠ v (α is missing at v).
+10. **Claim 3.** O_f(w) ∩ O_f(u) = ∅. `[gap-filled: if γ lies in both, recolour e₂ = uw
+    from α to γ; the result is proper because γ is missing at both ends. Now α is missing
+    at u (e₂ was the only α-edge at u) and α is still missing at v, so e₁ can be coloured
+    α — contradiction with step 6.]`
+11. **Claim 4.** O_f(w) ∩ O_f(v) ≠ ∅. Proof, verbatim from the slides: "By (1),
+    |O_f(w)| + |O_f(v)| + |O_f(u)| ≥ ⌊Δ/2⌋ + ⌊Δ/2⌋ + 1 + ⌊Δ/2⌋ + 1 > |M|. On the other
+    hand, by Claims 1 and 3, (O_f(v) ∪ O_f(w)) ∩ O_f(u) = ∅. This proves the claim."
+12. The strict inequality 3⌊Δ/2⌋ + 2 > ⌊3Δ/2⌋ must be checked in both parities:
+    Δ = 2t gives 3t + 2 > 3t; Δ = 2t + 1 gives 3t + 2 > 3t + 1.
+    `[boundary case — must appear in the proof contract.]`
+13. Pick γ ∈ O_f(w) ∩ O_f(v). Then γ ≠ α (α is present at w, on e₂) and γ ≠ β
+    (γ ∈ O_f(v), β ∈ O_f(u), disjoint by Claim 1). `[gap-filled; both are needed at
+    step 15 and neither is stated on the slides.]`
+14. Apply Claim 2 with γ in place of α: the (β, γ)-chain P containing v is a v–u path.
+    w ∉ V(P): w ≠ v, w ≠ u, and by (P2) γ ∈ O_f(w) forces w to be an *end* of its own
+    (β, γ)-chain, so w cannot be an interior vertex of P. Verbatim on the slides:
+    "This path cannot go through w since γ ∈ O_f(w)."
+15. Interchange β and γ on P, giving a proper k-colouring f′ of G₁. Then: α ∉ {β, γ}, so
+    α ∈ O_{f′}(v) and e₂ is still the α-edge at u with other end w; the P-edge at u was
+    coloured γ (since β ∈ O_f(u)) and becomes β, so γ ∈ O_{f′}(u); and w is untouched, so
+    γ ∈ O_{f′}(w).
+16. But step 6 makes Claim 3 available for f′ as well, giving O_{f′}(w) ∩ O_{f′}(u) = ∅ —
+    contradicting γ ∈ both. Hence the assumption at step 6 fails and G is k-edge-colourable.
+
+**Step count and tag.** Main theorem ≈ 16 numbered steps → **[B]** (comfortably inside
+12–30). Plus (P1) ≈ 5 steps **[A]** and (P2) ≈ 2 steps **[A]** as separate items. Total
+scaffold for Shannon: 3 items, roughly 23 steps.
+
+**Structural note for the scaffolder.** Claims 1, 2, 3 are each of the form "if X then G
+is k-colourable"; under the contradiction hypothesis at step 6 they become universally
+quantified facts about every proper k-colouring of G₁. Scaffold them as three separate
+lemmas of the *contrapositive* form so that step 16's re-application to f′ is a plain
+citation, not a re-proof.
+
+##### C1.3 ROUTE R2 — the even-Δ route via Petersen's 2-factor theorem (SUPPLEMENTARY)
+
+Stated as an exercise in three independent sources: Bondy–Murty 2008 Ex. 17.2.7
+("Using Exercise 16.4.16b, show that if ∆ is even, then χ′ ≤ 3∆/2"), Bondy–Murty 1976
+Ex. 6.2.4, and West Ex. 7.1.34 — the last with a **complete written solution**, quoted
+verbatim below (S7):
+
+> "a) Every loopless graph G has a ∆(G)-regular loopless supergraph. Given G with vertex
+> set x₁, …, x_n, add another copy of G, disjoint from it, with vertex set y₁, …, y_n.
+> Add ∆(G) − d_G(v_i) copies of the edge x_i y_i to complete the construction."
+> "b) If G is a loopless graph with even maximum degree, then χ′(G) ≤ 3∆(G)/2. By part
+> (a), we can find a ∆(G)-regular supergraph H of G; by Petersen's Theorem, we can
+> partition H into ∆(G)/2 2-factors. Since each 2-factor is a disjoint union of cycles,
+> each 2-factor is 3-edge-colorable. Hence we can color E(H) with 3∆(G)/2 colors, and we
+> can delete the edges of H − G to obtain a proper edge-coloring of G with 3∆(G)/2
+> colors."
+
+Decomposed:
+1. Δ-regular loopless supergraph exists (West's construction above). ≈ 4 steps.
+2. Petersen's 2-factor theorem: every 2k-regular loopless multigraph decomposes into k
+   edge-disjoint 2-factors. **Not in the library** — see §E.
+3. Each 2-factor is a disjoint union of cycles, hence 3-edge-colourable (even cycles
+   need 2, odd cycles need 3). ≈ 4 steps, with the odd/even boundary case explicit.
+4. χ′(G) ≤ χ′(H) ≤ 3·(Δ/2). ≈ 2 steps.
+
+**Step count and tag.** ≈ 10 steps **[A]** *given* Petersen's theorem; Petersen's theorem
+itself is a separate **[B]** item (Frink's 1926 proof, or the standard Euler-circuit +
+bipartite-König route — the library already has Euler circuits for multigraphs).
+
+**Verdict:** does NOT prove Shannon (only Δ even). Bondy–Murty 1976 says so explicitly:
+"(Shannon, 1949 has shown that this inequality also holds when Δ is odd.)" Scaffold it,
+if at all, as a corollary of Petersen's theorem, and do not present it as Shannon.
+
+##### C1.4 ROUTE R3 — via min{Δ+μ, 2Δ−μ}. **DO NOT SCAFFOLD — unverified.**
+
+Bondy–Murty 2008 Ex. 17.2.8, verbatim: "a) Show that χ′ ≤ 2∆ − µ. b) Deduce that
+χ′ ≤ 3∆/2. (C. Shannon)". Part (b) is trivial from (a) plus Vizing (§C2): if μ ≤ Δ/2
+then Δ + μ ≤ 3Δ/2, and if μ > Δ/2 then 2Δ − μ < 3Δ/2.
+
+I could **not** source or reconstruct a correct proof of (a). The natural counting
+argument — for a maximum-multiplicity pair {u,v} and an uncoloured e ∈ E(u,v), the sets
+φ̄(u), φ̄(v) and the colours on the other μ−1 parallel uv-edges are pairwise disjoint,
+giving 2Δ − μ ≤ d(u) + d(v) − μ − 1 ≤ 2Δ − μ − 1 — closes only for **critical**
+multigraphs, and the induction does not descend, because deleting an edge from the unique
+maximum-multiplicity pair *lowers* μ and therefore *raises* the target bound 2Δ − μ.
+Passing to a critical subgraph has the same defect. This is recorded as blocker F3.
+
+---
+
+#### C2. VIZING'S MULTIGRAPH THEOREM
+
+##### C2.1 Exact statements
+
+- **Vizing 1964 (S3, Appendix A.1) Theorem A.3**, the original, verbatim:
+  > "If m is the maximum degree in the p-graph G, then q(G) ≤ m + p."
+  with, verbatim from the same page: "A multigraph is a finite nonoriented multigraph
+  without loops [1]. It is called a p-graph if it has at most p parallel edges. A 1-graph
+  is just a graph. … The smallest number of colors needed to color the multigraph G
+  properly is called the chromatic class of G and denoted q(G). … The maximum degree in G
+  we denote σ(G)."
+- **Bondy–Murty 2008 Theorem 17.5**: "For any graph G, χ′ ≤ ∆ + µ." — preceded, verbatim,
+  by the definition: "For vertices u and v of G, we denote by µ(u, v) the number of
+  parallel edges joining u and v. The multiplicity of G, denoted by µ(G), is the maximum
+  value of µ, taken over all pairs of vertices of G. Vizing (1964) extended his theorem as
+  follows." Bondy–Murty give **no proof**: "This more general theorem can be established by
+  adapting the proof of Theorem 17.4 (Exercise 17.2.6)."
+- **McDonald Theorem 2.1.3**: "Let G be a multigraph. Then, χ′(G) ≤ ∆ + µ."
+- **Bondy–Murty 1976**, prose: "if G is loopless, then Δ ≤ X′ ≤ Δ + μ", with "The maximum
+  number of edges joining two vertices in G is called the multiplicity of G, and denoted
+  by μ(G)."
+- **Chen–Jing–Zang §1**: "χ′(G) ≤ ∆(G) + µ(G), where µ(G) is the maximum multiplicity of
+  edges in G, was proved independently by Vizing [38] and Gupta [11] in the 1960s. This
+  second result is widely known as Vizing's theorem".
+
+**Recommended library statement**: *Let G be a loopless multigraph with maximum degree Δ
+and maximum edge multiplicity μ. Then χ′(G) ≤ Δ + μ.* Record the p-graph form as the
+source form (see §D2).
+
+**Sharpness.** Bondy–Murty 2008: "The graph G depicted in Figure 17.3 shows that the
+theorem is best possible for any value of µ. Here ∆ = 2µ and, the edges being pairwise
+adjacent, χ′ = m = 3µ = ∆ + µ." Generalisation, McDonald Theorem 3.1.1: for a multiple of
+an odd clique, χ′(μK_{d+1}) = μ(d+1) = Δ + μ.
+
+##### C2.2 ROUTE V1 — Vizing's own 1964 proof (RECOMMENDED)
+
+Available **verbatim, in full, with proof**, in S3 Appendix A.1 pp. 269–272. This is the
+only complete multigraph proof I obtained; Bondy–Murty relegate it to an exercise,
+Diestel does not treat multigraphs, and McDonald derives it from Kierstead's Theorem
+(itself unproved in the thesis).
+
+**Is it fan or Kempe?** *Both, and the two are interleaved.* The editorial Notes in the
+same appendix say so verbatim: "In the first paper [297] Vizing dealt with graphs with
+multiple edges, and he **introduced fans** to obtain the inequality χ′ ≤ Δ + μ." The fan is
+the sequence of edges (a,x₁), …, (a,x_k) at the centre a with the "downshift" recolouring;
+the two collision cases are closed by **Kempe (s,t)-chain swaps** licensed by Lemma A.2.
+Bondy–Murty 1976 note the same for the simple-graph analogue: Fournier's proof also builds
+a fan-sequence and closes it with an odd-cycle argument via Lemma 6.1.2.
+
+**Does it subsume μ = 1?** *Yes, verbatim.* Corollary A.4 immediately after Theorem A.3
+reads: "If m is the maximum degree in the graph G, then m ≤ q(G) ≤ m + 1" — the simple
+case is literally p = 1. There is no separate simple-graph argument in Vizing's paper.
+
+Decomposed route, with Vizing's own labels:
+
+**Item V1a — Lemma A.1 (Kempe recolouring).** Identical to (P1)/(P2) above. Verbatim
+statement in §B3. ≈ 5 steps. **[A].**
+
+**Item V1b — Lemma A.2 (the three-vertex separation lemma).** Verbatim statement in §B3.
+Proof route (Vizing states it without proof; the derivation is `[gap-filled]` but forced):
+1. By (P1) each (s,t)-chain is a path or an even cycle.
+2. By (P2) a vertex at which s or t is missing has degree ≤ 1 in the (s,t)-subgraph, so it
+   is an *end* of its chain and the chain is a path.
+3. A path has at most 2 ends.
+4. If all three of x, y, z lay on one common (s,t)-path they would be three distinct ends —
+   impossible. Hence some one of them lies on a chain containing neither of the others.
+≈ 5 steps. **[A].**
+
+**Item V1c — the association lemma (the multigraph-specific ingredient).** Vizing, verbatim:
+> "We associate to each colored edge between a and a neighbor x of a a color missing at x
+> in such a way that different colored edges between a and x are associated with different
+> missing colors at x. This is possible because there are at least p missing colors at each
+> vertex."
+1. Palette has m + p colours; every vertex has degree ≤ m; hence ≥ p colours are missing at
+   every vertex.
+2. At most p edges join a to x (G is a p-graph), so an injective assignment
+   {coloured a–x edges} → φ̄(x) exists.
+≈ 4 steps. **[A].** *This lemma has no counterpart in any simple-graph proof; it is exactly
+the extra bookkeeping the multigraph fan needs (see §C4).*
+
+**Item V1d — Theorem A.3, the main theorem.** Numbered route, faithful to the source text:
+1. Colours 1, …, m + p. Take a partial proper colouring with exactly one uncoloured edge
+   (a,b); it suffices to colour it, and iterate over the edges.
+2. A := colours missing at a, B := colours missing at b; |A|, |B| ≥ p by V1c step 1.
+3. If A ∩ B ≠ ∅, colour (a,b) with a common colour. So assume A ∩ B = ∅.
+4. Fix the association of V1c. At most p − 1 of the a–b edges are coloured (one, namely
+   (a,b), is uncoloured), so some s₀ ∈ B is associated with no a–b edge. Verbatim: "Let
+   s₀, β₁, …, β_{p−1} be colors not present at b. We may assume that the color s₀ is not
+   associated with any edge between a and b."
+5. s₀ ∈ B and A ∩ B = ∅ give s₀ ∉ A, so some edge (a, x₁) is coloured s₀, and x₁ ≠ b.
+6. Inductively build a *fan-sequence* of **distinct edges** (a, x₁), …, (a, x_k) with
+   colours s₀, s₁, …, s_{k−1}, where s_i is the colour associated with (a, x_i). Vizing's
+   footnote 3, verbatim: "Note that we may have that x_ℓ = x_r for ℓ ≠ r; 1 ≤ ℓ, r ≤ k. But
+   even then the edges (a, x_ℓ) and (a, x_r) are different parallel edges, because the edges
+   (a, x_i) for i = 1, 2, …, k are all different."
+7. Let s_k be the colour associated with (a, x_k). **Case 1: s_k ∈ A.** Then s_k ≠ s_j for
+   all j. Downshift: recolour (a, x_k) by s_k, (a, x_{k−1}) by s_{k−1}, …, (a, x₁) by s₁;
+   the result is proper because each s_j is missing at x_j; then colour (a,b) with s₀. Done.
+8. **Case 2: s_k ∉ A.** Three subcases.
+9. **(a) s_k = s₀.** Then x_k ≠ x₁ (s₀ is present at x₁) and x_k ≠ b (s₀ is unassociated
+   with a–b edges). Choose t ∈ A. Then t is missing at a, s₀ is missing at b, s₀ is missing
+   at x_k. Apply Lemma A.2 to (a, b, x_k) with the pair (s₀, t):
+   - if a and b lie on different (s₀,t)-paths, recolour the maximal (s₀,t)-path starting at
+     a with the edge (a, x₁); s₀ becomes missing at both a and b; colour (a,b) with s₀;
+   - if x_k is separated, recolour the maximal (s₀,t)-path at x_k; then t ∈ A becomes
+     missing at x_k; re-associate t with (a, x_k) and fall into Case 1.
+10. **(b) s_k = s_i for some 1 ≤ i ≤ k − 2.** (s_k = s_{k−1} is impossible because
+    (a, x_k) is coloured s_{k−1}.) Then x_i ≠ x_k, since otherwise two parallel edges
+    (a, x_i), (a, x_k) would be associated with the same missing colour, contradicting V1c.
+    Choose t ∈ A; t missing at a, s_i missing at x_k, s_i missing at x_i; apply Lemma A.2 to
+    (a, x_i, x_k) with (s_i, t). Each of the three branches returns to Case 1; the third
+    branch (a separated from both) recolours the maximal (s_i,t)-path from a, whose first
+    edge is (a, x_{i+1}) coloured s_i, after which s_i is missing at a and is associated with
+    (a, x_i), and s_i is still missing at x_i.
+11. **(c) s_k ∉ {s₀, …, s_{k−1}}.** Then some edge (a, x_{k+1}) carries colour s_k and is
+    distinct from all earlier fan edges; extend the sequence and repeat.
+12. Termination: the fan edges are distinct edges at a and d(a) ≤ m is finite, so after
+    finitely many extensions Case 1 or Case 2(a)/(b) occurs. Verbatim: "Since the graph is
+    finite we get either Case 1 or Case 2 (a or b) after a finite number of steps."
+
+**Step count and tag.** Item V1d ≈ 22–26 numbered steps → **[B]**, but near the top of the
+band. **Recommend splitting** V1d into two items: (i) "the fan-sequence exists and
+terminates" (steps 1–7 + 11–12, ≈ 12 steps, [A]/[B] boundary) and (ii) "the two collision
+cases close" (steps 8–10, ≈ 12 steps, [B]). Whole cluster: 4–5 items, ≈ 40 steps.
+
+**Boundary cases the proof contract must anchor:** p = 1 (Corollary A.4, the simple case);
+k = 1 (the fan has a single edge); x_ℓ = x_r for ℓ ≠ r (parallel fan edges to the same
+neighbour, Vizing's footnote 3); s_k = s_{k−1} (shown impossible); x_k = b and x_k = x₁
+(both excluded in case (a)); A = ∅ or B = ∅ (excluded by |A|, |B| ≥ p ≥ 1); the empty
+multigraph and the one-edge multigraph.
+
+##### C2.3 ROUTE V2 — Berge–Fournier 1991 via Dunaway (S12). **Stronger result, defective write-up.**
+
+Berge–Fournier prove the *stronger* theorem quoted verbatim in §B12: with D ≥ Δ(G),
+t ≥ μ(G), and S = {x : d_G(x) = D and m_G(x) = t} independent or empty, χ′(G) ≤ D + t − 1.
+Vizing's theorem is the case D = Δ + 1, t = μ: then S = ∅ automatically (no vertex has
+degree Δ + 1), and D + t − 1 = Δ + μ. The mechanism is a **"sequential f-recoloring"** — a
+fan where each edge e_i has a *reserved* colour f(e_i), subject to Dunaway's conditions
+B.1 "α_{i+1} ∉ C_{y_i}" and B.2 "α_{i+1} ≠ f(e_j) for all j < i where y_j = y_i"; condition
+B.2 is exactly the multigraph bookkeeping that Vizing's association lemma (V1c) supplies.
+
+**Defect found.** Dunaway's Case 2 (S = ∅) opens: "we choose any vertex x₀ of maximum degree
+such that d_G(x₀) = D", which is impossible in precisely the instantiation that yields
+Vizing's theorem (D = Δ + 1 > Δ). The exposition also mixes "Δ" and "D" in the displayed
+inequalities of Case 2 ("|C_{y₀}| ≤ Δ < Δ < D + t − 1"). **Do not scaffold from Dunaway.**
+The original is 4 pages: Berge & Fournier, *J. Graph Theory* 15 (1991) 333–336 — not
+obtained (paywalled, see blocker F2). Tag as written: **[C]**.
+
+Two corollaries of Berge–Fournier are worth recording as `deferred` results if the pair is
+ever revisited: Corollary 1 (independent max-degree set ⇒ Δ + μ − 1) and Corollary 2
+(maximal matching monochromatic within Δ + μ colours) — both verbatim in §B12.
+
+##### C2.4 ROUTE V3 — Kierstead paths (McDonald §2.2). **Elegant but rests on an unproved theorem.**
+
+McDonald derives *both* Vizing and Shannon from Kierstead's Theorem (Theorem 2.2.2) in
+under a page. Verbatim, the counting:
+
+> "n(χ′ − 1 − ∆) + 2 ≤ nµ  ⇒  χ′ − 1 − ∆ ≤ µ − 2/n  ⇒  χ′ ≤ ∆ + µ, proving Vizing's
+> Theorem. Shannon's Theorem is even easier to obtain - just note that p_n has degree at
+> most ∆, and get n(χ′ − 1 − ∆) + 2 ≤ ∆ ⇒ 2(χ′ − 1 − ∆) + 2 ≤ ∆ ⇒ χ′ ≤ 3∆/2."
+
+This is ≈ 8 steps **[A]** *given* Kierstead's Theorem — but Kierstead's Theorem is stated,
+not proved, in the thesis ("Kierstead's original proof of his Theorem is easy to follow,
+and fits comfortably on a single page", but the page is not reproduced). Kierstead 1984,
+*Discrete Math.* 52:159–164 — not obtained. Tag: **[C]** as a whole; if Kierstead's paper
+were obtained this would become the cheapest route to *both* theorems at once.
+McDonald's Kierstead-path definition, verbatim from the (T1)/(T2) conditions with
+"k required to be i": (T2) "e₀ is uncoloured by φ and for each i ∈ {1, …, n−1},
+φ(e_i) ∈ ∪_{j≤i} φ̄(p_j)"; a path P is φ-elementary if φ̄(p_i) ∩ φ̄(p_j) = ∅ for i < j.
+
+---
+
+#### C3. THE GOLDBERG–SEYMOUR THEOREM — **STATEMENT ONLY**
+
+**I am offering no proof route for this result, and none should be scaffolded.** The proof
+is a research monograph: Chen–Jing–Zang's preprint is **81 pages** of extended Tashkinov
+trees, "good hierarchies", and a control mechanism over Kempe changes. It is out of reach
+for a library item: tag **[C]**.
+
+**Exact statement (Chen, Jing, Zang, Theorem 1.1), verbatim:**
+> "Theorem 1.1. Every multigraph G satisfies χ′(G) ≤ max{∆(G) + 1, ⌈Γ(G)⌉}."
+
+**The density parameter, verbatim from the same paper:**
+> "let Γ(G) be the density of G, defined by
+> Γ(G) = max { 2|E(U)| / (|U| − 1) : U ⊆ V, |U| ≥ 3 and odd },
+> where E(U) is the set of all edges of G with both ends in U."
+
+**The conjecture as originally posed, verbatim (Conjecture 1.1):**
+> "In the early 1970s Goldberg [9] and Seymour [34] independently made the following
+> conjecture. Conjecture 1.1. Every multigraph G satisfies χ′(G) ≤ max{∆(G) + 1, ⌈Γ(G)⌉}."
+
+**Same parameter written ρ(G) by McDonald**, verbatim: "ρ(G) := max{ 2|E[S]|/(|S| − 1) :
+S ⊆ V(G), |S| ≥ 3 and odd }." Stiebitz et al. call it "Density" (§6.1 "Density and
+Fractional Chromatic Index").
+
+**Companion facts worth recording alongside it (all verbatim from Chen–Jing–Zang §1):**
+- "As shown by Seymour [34] using Edmonds' matching polytope theorem [7], it is always true
+  that χ*(G) = max{∆(G), Γ(G)}." (χ* = fractional chromatic index.)
+- "there are only two possible values for the chromatic index of a multigraph G:
+  max{∆(G), ⌈Γ(G)⌉} and max{∆(G) + 1, ⌈Γ(G)⌉}."
+- "every multigraph G = (V, E) satisfies χ′(G) − χ*(G) ≤ 1".
+- Corollaries proved: "Theorem 1.2. Every r-graph G satisfies χ′(G) ≤ r + 1." (Seymour's
+  weaker conjecture); "Theorem 1.3." (Gupta's 1967 conjecture); "Theorem 1.4." and
+  "Theorem 1.5." (Jakobsen's conjectures).
+
+**Bibliographic data for the citation.** Guantao Chen (Georgia State), Guangming Jing
+(Augusta), Wenan Zang (Hong Kong). "Proof of the Goldberg-Seymour Conjecture on
+Edge-Colorings of Multigraphs." arXiv:1901.10316; v1 submitted 29 January 2019, v2
+7 June 2022; 81 pages. Journal publication: *Journal of Combinatorial Optimization*,
+2025, DOI `10.1007/s10878-025-01348-6`. Abstract page:
+`https://arxiv.org/abs/1901.10316`; PDF `https://arxiv.org/pdf/1901.10316v2`.
+
+**What IS cheap and library-buildable here — the matching lower bound.** McDonald, verbatim:
+> "note that for a multigraph G, given any odd set S ⊆ V(G) with |S| ≥ 3, the maximum size
+> of a colour class in G[S] is (|S| − 1)/2. Hence, since chromatic index is an integer,
+> χ′(G[S]) ≥ ⌈2|E[S]|/(|S| − 1)⌉."
+
+So χ′(G) ≥ ⌈Γ(G)⌉ is a **≈ 4-step [A]** item. Bondy–Murty 2008 state the same bound as
+(17.2), verbatim: "χ′ ≥ max{ ⌈2e(H)/(v(H) − 1)⌉ : H ⊆ G, v(H) odd, v(H) ≥ 3 }", with the
+historical parenthetical, verbatim: "(Goldberg (1974) and Seymour (1979a) have conjectured
+that if neither bound is tight, then χ′ = ∆ + 1.)" Bondy–Murty Ex. 17.2.3 gives a
+checkable example: "Let G be a graph obtained from a cycle by replacing each edge by a set
+of one or more parallel edges. Show that G satisfies the Goldberg bound (17.2) with
+equality."
+
+**Recommended scaffold shape:** one `[A]` lemma for the lower bound χ′ ≥ ⌈Γ⌉, one `def-`
+item for Γ(G), and the Goldberg–Seymour theorem as a source-cited `rem-` with
+`proved_here: false`, `external_dependency` recorded, and the fuchsia ‡ marker. The lower
+bound must be proved locally; only the upper bound is imported.
+
+---
+
+#### C4. THE FAN AND THE KEMPE CHAIN IN A MULTIGRAPH — HOW THEY DIFFER FROM DIESTEL
+
+Diestel's §5.3 proof of Theorem 5.3.2 (verbatim in §B5) builds, in his words:
+
+> "Let y₀, y₁, …, y_k be a maximal sequence of **distinct neighbours of x** in G, such that
+> c₀(x y_i) is missing in c₀ at y_{i−1} for each i = 1, …, k."
+
+Five concrete differences from a multigraph fan.
+
+**(i) Vertices vs edges.** Diestel's fan is indexed by *distinct neighbours* y_i, and the
+edge x y_i is determined by y_i. In a multigraph there can be up to μ distinct edges
+between x and y, so the fan must be a sequence of **distinct edges**, and the same
+neighbour may occur several times. Vizing's footnote 3 makes exactly this point (quoted in
+C2.2 step 6). Cao–Chen–Shan's Definition 2.1 keeps distinct vertices s₁, …, s_p but is
+stated for *simple* graphs; the genuinely multigraph object is Stiebitz et al.'s multifan
+in the general form, where the fan edges rs_i are a set of distinct edges.
+
+**(ii) Predecessor vs any earlier vertex.** Diestel's condition is a *chain*:
+c₀(x y_i) is missing at **y_{i−1}**, the immediate predecessor. The multifan condition is
+weaker and is the essential generalisation. Cao–Chen–Shan Definition 2.1, verbatim:
+
+> "a multifan centered at r w.r.t. e and φ is a sequence F_φ(r, s₁ : s_p) = (r, rs₁, s₁,
+> rs₂, s₂, …, rs_p, s_p) with p ≥ 1 consisting of distinct vertices r, s₁, s₂, …, s_p and
+> edges rs₁, rs₂, …, rs_p satisfying the following condition:
+> (F1) For every edge rs_i with i ∈ [2, p], **there exists j ∈ [1, i − 1]** such that
+> φ(rs_i) ∈ φ̄(s_j)"
+
+— any earlier fan vertex, not just the previous one. The controlling property is
+Cao–Chen–Shan Lemma 2.2, verbatim: "If F_φ(r, s₁ : s_p) is a multifan w.r.t. e and φ, then
+V(F) is φ-elementary" — i.e. the missing-colour sets of the fan vertices are pairwise
+disjoint. Diestel never needs "elementary" because his chain condition already forces it.
+
+**(iii) One missing colour vs μ missing colours.** Diestel's counting is "the edges at a
+given vertex v use at most d(v) ⩽ ∆ colours, so some colour β ∈ {1, …, ∆+1} is missing at
+v" — exactly one colour is needed per fan vertex. In the multigraph fan each neighbour x
+must feed up to μ(a,x) parallel edges, so the palette must guarantee **at least p missing
+colours at every vertex**, and the proof must *reserve* a distinct one per parallel edge.
+Vizing's association step (V1c) and Berge–Fournier's condition B.2 are the two published
+ways of doing this bookkeeping. This is where Δ + μ comes from, and it is the single reason
+Δ + 1 is not enough.
+
+**(iv) One collision mode vs two.** Diestel's fan closes with a single α/β-path uniqueness
+argument: "By (1), P ends in x, and it does so on a β-edge… Since P′ is uniquely
+determined, it starts with y_{i−1}Py_k … Therefore P′ ends in y_k, contradicting (1)."
+Vizing's multigraph fan terminates in **two** distinct collision modes — s_k = s₀ (the
+colour returns to the seed) and s_k = s_i for some i ≤ k−2 (the colour returns to an
+interior fan edge) — and each needs its own Kempe argument. That is why Vizing needs Lemma
+A.2, a three-vertex pigeonhole on chain endpoints, where Diestel needs only path
+uniqueness. Diestel's simple-graph situation collapses the first mode away.
+
+**(v) The Kempe chain itself is unchanged.** (P1) and (P2) hold verbatim in multigraphs —
+colour classes are still matchings, so the (α,β)-subgraph still has maximum degree 2 and
+its components are still paths and even cycles. Vizing's Lemma A.1 is stated for
+multigraphs and his footnote 1 records the degenerate cases explicitly, verbatim: "Such a
+2-colored (s, t)-path might be a cycle, or it might contain only one edge, or no edges."
+**Nothing about the Kempe machinery needs multigraph repair; only the fan does.** That is
+the single most useful sentence for the scaffolder's dependency planning.
+
+**Terminology cross-walk for the scaffolder:**
+
+| object | Diestel §5.3 | Bondy–Murty 2008 §17.1 | Vizing 1964 | Stiebitz et al. / Cao–Chen–Shan | Misra–Gries |
+|---|---|---|---|---|---|
+| 2-coloured component | "the α/β-path from v" | "ij-path", "H_ij" | "(s,t)-path", "maximal" | "(α,β)-chain", "P_v(α,β,φ)" | "cd-path" |
+| the swap | "interchange the colours" | "swapping the colours on an ij-path" | "recolored" | "Kempe change", "(α,β)-swap", "φ/C" | "Invert the cd-path" |
+| the fan | "maximal sequence of distinct neighbours" | (not named; inside Lemma 17.3 as a bipartite auxiliary graph + Hall) | "fan-sequence" (named in the 1965 paper) | "multifan F_φ(r, s₁ : s_p)" | "fan ⟨f..l⟩" |
+| the downshift | "c_i(x y_j) := c₀(x y_{j+1})" | — | "We recolour the edge (a,x_k) by s_k, …" | "shifting", "rotation" | "Rotate fan ⟨f..w⟩" |
+| missing colour | "missing at v" | "available at v" (vs "represented at v") | "missing at vertex x", δ(x) | "φ̄(v)", "missing"; "φ(v)" = present | "free on that vertex" |
+
+**Bondy–Murty's Lemma 17.3 is a genuinely different simple-graph proof** worth recording:
+instead of a fan it builds a bipartite auxiliary graph H[X, Y] with X = N_G(v),
+Y = {1, …, k}, x ~ i iff colour i is available at x, and runs an **augmenting-path /
+Hall's-theorem** argument on H. Verbatim: "As in the proof of Hall's Theorem (16.4),
+N_H(R) = B and B is matched under M with R \ {u}, so |B| = |R| − 1." This route reuses
+Hall/König, which the library already has, but it is intrinsically simple-graph (the
+matching M := {(x, c(xv)) : x ∈ X \ {u}} presupposes one edge per neighbour). Bondy–Murty
+Ex. 17.2.6(a) asserts its multigraph generalisation — "Suppose that G \ e has a
+k-edge-colouring with respect to which every neighbour of v has at least µ available
+colours. Show that G is k-edge-colourable" — but supplies no proof.
+
+---
+
+#### C5. THE CHEAP EXTRAS
+
+##### C5.1 König's edge-colouring theorem for bipartite MULTIgraphs — **YES, it holds, and three of my sources say so explicitly**
+
+| source | statement | multigraph? |
+|---|---|---|
+| McDonald Theorem 2.1.1 | "Let G be a **bipartite multigraph**. Then, χ′(G) = ∆." | **YES, explicit in the statement** |
+| Bondy–Murty 2008 Theorem 17.2 | "If G is bipartite, then χ′ = ∆." | **YES** — in this book "graph" permits parallel edges ("simple graph" is always said explicitly); §17.1 assumes only looplessness. Confirmed by use: Example 17.1 builds a bipartite H "where vertices x_i and y_j are joined by p_ij edges" and solves it by Theorem 17.2. Ex. 17.5.3 says "a bipartite graph G (**whether simple or not**)". |
+| Bondy–Murty 1976 Theorem 6.1 | "If G is bipartite, then X′ = Δ." | **YES** — stated for a "loopless graph"; §6.3 applies it to a bipartite multigraph with p_ij parallel edges. |
+| Diestel Proposition 5.3.1 | "Every bipartite graph G satisfies χ′(G) = ∆(G)." | **NO** — Diestel's "graph" is simple throughout. |
+
+**Two independent proof routes, both fully written out in my sources.**
+
+**Route K-a — alternating path (Bondy–Murty 2008 Theorem 17.2, and Diestel Prop. 5.3.1).**
+Induct on the number of edges; delete e = uv; some colour i is available at u and some j at
+v; if i = j colour e; otherwise consider the ij-path P from u; it cannot terminate at v,
+since P + e would then be an odd cycle; swap on P and colour e with i. ≈ 10 steps, **[A]**,
+needs (P1) + "bipartite ⇒ no odd cycle". Bondy–Murty's version is stated for multigraphs
+verbatim; Diestel's identical argument needs only the observation that a closed walk of odd
+length contains an odd cycle.
+
+**Route K-b — optimal colourings (Bondy–Murty 1976 §6.1).** Three items:
+- **Lemma 6.1.1** (verbatim in §B2). Proof: if G is Eulerian and not an even cycle it has a
+  vertex of degree ≥ 4; take an Euler tour v₀e₁v₁…e_ε v₀ and set E₁ = {e_i : i odd},
+  E₂ = {e_i : i even}; every vertex is internal to the tour. If G is not Eulerian, add a
+  new vertex v₀ joined to every odd-degree vertex, take an Euler tour of the enlarged
+  graph, and restrict. ≈ 8 steps, **[A]**. **The library already has Euler circuits for
+  multigraphs** — see §E.
+- **Lemma 6.1.2** (verbatim in §B2), using the "improvement"/"optimal k-edge colouring"
+  notion, verbatim: "We shall call a k-edge colouring 𝒞′ an improvement on 𝒞 if
+  Σ_{v∈V} c′(v) > Σ_{v∈V} c(v). An optimal k-edge colouring is one which cannot be
+  improved." ≈ 8 steps, **[A]**.
+- **Theorem 6.1** itself: 5 steps, **[A]**.
+
+**Route K-b is strictly more valuable to the library**, because Lemmas 6.1.1 and 6.1.2 are
+*also* exactly what Bondy–Murty 1976's Fournier proof of the simple-graph Vizing theorem
+(Theorem 6.2) needs. Building them once buys two theorems.
+
+##### C5.2 Fournier's proof of the simple-graph Vizing theorem (Bondy–Murty 1976 Theorem 6.2)
+
+A third, independent proof of Vizing for simple graphs, ≈ 12 steps **[B]**, resting only on
+Lemmas 6.1.1 + 6.1.2 above. Route: suppose χ′ > Δ + 1; take an **optimal** (Δ+1)-edge
+colouring and a vertex u with c(u) < d(u); build a fan-sequence v₁, v₂, … with colours
+i₁, i₂, … such that u v_j has colour i_j and i_{j+1} is not represented at v_j; let ℓ be
+least with i_ℓ₊₁ = i_k for some k < ℓ; recolour u v_j by i_{j+1} for 1 ≤ j ≤ k−1, obtaining
+another optimal colouring, so by Lemma 6.1.2 the component of G[E′_{i₀} ∪ E′_{i_k}]
+containing u is an odd cycle; recolour differently to get a second optimal colouring in
+which the corresponding component is again an odd cycle, but v_k now has degree 1 rather
+than 2 in it — contradiction. Attractive because it needs no Hall's theorem and no
+bipartite auxiliary graph, and it shares its lemmas with König.
+
+##### C5.3 Overfull graphs
+
+- **Definition (Cao–Chen–Shan §1, verbatim):** "A graph G is **overfull** if
+  |E(G)|/⌊|V(G)|/2⌋ > ∆(G)."
+- **Definition (Shan §1, verbatim, subgraph form):** "An overfull subgraph H of G is a
+  subgraph satisfying the condition |E(H)| > ∆(G)⌊½|V(H)|⌋."
+- **Definition (Bondy–Murty 2008 Ex. 17.2.1, verbatim):** "A simple graph G is overfull if
+  m > ⌊n/2⌋∆." — with the three parts: "(a) Show that every overfull graph: (i) is of odd
+  order, (ii) belongs to Class 2. (b) Show that a nonempty simple graph is overfull if
+  either: (i) it is obtained from a regular graph of even order by subdividing one edge, or
+  (ii) it is obtained from a simple k-regular graph of odd order by deleting fewer than k/2
+  edges. (L. W. Beineke and R. J. Wilson)"
+- Cheap facts: χ′(G) ≥ |E(G)|/⌊|V(G)|/2⌋ (a matching has at most ⌊n/2⌋ edges); overfull ⇒
+  χ′ = Δ + 1 for simple G; overfull ⇒ n odd. **≈ 5–7 steps, [A].** Also Green (S14)
+  Theorem 3.8: "If |E(G)| > α′(G)∆(G), then G is class two", a one-line variant using the
+  matching number.
+- **Overfull Conjecture (Chetwynd–Hilton 1986)**, verbatim (Shan Conjecture 1.1): "Let G be
+  a graph with ∆(G) > ⅓|V(G)|. Then χ′(G) = ∆(G) if and only if G contains no ∆(G)-overfull
+  subgraph." — record as an open conjecture, not a theorem.
+
+##### C5.4 Critical graphs and Vizing's Adjacency Lemma
+
+- **Critical (Cao–Chen–Shan §1, verbatim):** "A graph G is critical if χ′(H) < χ′(G) for
+  every proper subgraph H of G." Also: "An edge e of a graph G is critical if
+  χ′(G − e) < χ′(G)."
+- **Edge-chromatic critical (Shan §1, verbatim):** "We say a graph G is edge-chromatic
+  critical if χ′(G) = ∆(G) + 1 but any proper subgraph H of G satisfies χ′(H) ≤ ∆(G)."
+- **Vizing's original definition (Vizing 1965, verbatim):** "A graph G is called critical of
+  degree m, where m ≥ 2 is an integer, when: (a) G is connected; (b) σ(G) = m;
+  (c) q(G) = m + 1; (d) The chromatic class of a graph obtained by removing any edge from G
+  is equal to m."
+- **VAL, modern form (Cao–Chen–Shan Lemma 1.3, verbatim):** "Let G be a class 2 graph with
+  maximum degree ∆. If e = xy is a critical edge of G, then x is adjacent to at least
+  ∆ − d(y) + 1 ∆-vertices from V(G) \ {y}."
+- **VAL as Bondy–Murty state it (Ex. 17.2.15, verbatim):** "Let G be a minimal simple graph
+  that is not ∆-edge-colourable, and let u and v be adjacent vertices of G, where d(u) = k.
+  a) Show that v is adjacent to at least ∆ − k + 1 vertices of degree ∆ different from u.
+  (V. G. Vizing) b) Deduce that each vertex of G has at least two neighbours of degree ∆."
+- **VAL with a full proof — Vizing 1965 Theorem A.6 (S3 Appendix A.2), verbatim statement:**
+  "In a critical graph of degree m each vertex incident with a vertex of degree k is in
+  addition also incident with m − k + 1 vertices of degree m." The proof, which I read in
+  full, runs: colour all edges but (a,b) with m colours; |δ(b)| = m − k + 1, |δ(a)| ≥ 1,
+  δ(a) ∩ δ(b) = ∅; show no fan-sequence at a starting with a colour of δ(b) contains an
+  edge (a,x) with a missing colour from δ(a) or a repeated earlier colour; show that
+  fan-sequences at a starting with two different colours of δ(b) are **edge-disjoint** (a
+  Kempe swap on the maximal (s_r, t)-chain at x_{r−1} produces the contradiction); then for
+  each colour of δ(b) take a maximal fan-sequence, whose last vertex x has δ(x) = ∅ and
+  σ(x) = m, and count. **≈ 14 numbered steps, [B].** Depends on VAL's prerequisites:
+  Lemma A.1, Lemma A.2, criticality, and the fan-sequence definition (all in the same
+  appendix), so it can be scaffolded on top of the C2.2 cluster with no new machinery.
+- Vizing's Properties I–III (verbatim in §B3) are the corollaries; Property III is the
+  familiar "at least two neighbours of degree Δ".
+
+##### C5.5 Misra–Gries: constructive Vizing — **SIMPLE GRAPHS ONLY**
+
+The paper opens, verbatim: "We consider finite graphs with **no self-loops and no multiple
+edges**." So it does **not** close the multigraph gap. It is nonetheless the cleanest
+algorithmic simple-graph proof I found and is a good `alg-`/constructive companion item.
+
+Structure (all verbatim labels): the **fan** ⟨f..l⟩ defined by
+
+> "F0 : ⟨f..l⟩ is a nonempty sequence of distinct neighbors of X;
+> F1 : edge X f is uncolored; and
+> F2 : (∀u :: color of edge X u⁺ is free on u)."
+
+the three operations "Invert the cd-path", "Rotate fan ⟨f..w⟩", and the four-line algorithm
+
+> "Let ⟨f..l⟩ be a maximal fan; Let c be a color that is free on X and d a color that is
+> free on l; Invert the cd-path; … Let w satisfy: w ∈ ⟨f..l⟩, ⟨f..w⟩ is a fan, and d free
+> on w; Rotate fan ⟨f..w⟩ and give edge X w the color d"
+
+with the correctness argument split into Case 0 (no fan edge has colour d) and Case 1
+(some fan edge has colour d), invariant F3, and separate validity proofs for inversion and
+rotation. **≈ 16–20 numbered steps, [B].** Note its Discussion section's warning about
+Bollobás's one-page proof, verbatim: "Bollobás's proof is only one page long, the shortness
+being achieved through omission of necessary arguments." Two other named routes for the
+simple case are already in hand (Diestel §5.3; Fournier via Bondy–Murty 1976), so
+Misra–Gries is optional.
+
+##### C5.6 Other bounds worth a `deferred` or `inline` disposition
+
+- **Ore's theorem** (McDonald Theorem 2.1.6, verbatim): "Let G be a multigraph. Then,
+  χ′(G) ≤ max{d(v) + µ(v) | v ∈ V(G)}", where μ(v) is the local maximum multiplicity at v.
+  Refines Vizing. McDonald notes it "can be easily proved by using a Tashkinov tree that is
+  a fan (as noted by Favrholt, Stiebitz and Toft [8])" — no proof given. **[C] as sourced.**
+- **Steffen's theorem** (McDonald Theorem 2.1.5, verbatim): "Let G be a multigraph
+  containing a cycle. Then, χ′(G) ≤ ∆ + ⌈µ/⌊g/2⌋⌉." **[C].**
+- **Goldberg's theorem** (McDonald Theorem 2.1.4, verbatim): "Let G be a multigraph
+  containing an odd cycle. Then, χ′(G) ≤ ∆ + 1 + (∆ − 2)/(g_o − 1)." **[C]**; see §D4 for a
+  discrepancy in the thesis's own abstract.
+- **Vizing's Theorem A.11** (verbatim, §B3): "χ′(G) ≤ Δ(G) + μ(G) − 1 for all graphs with
+  μ(G) ≥ 2 and Δ(G) = 2μ(G) − 1." Stated without proof in Vizing 1964, proved in Vizing
+  1965 (not the paper reproduced in Appendix A). **[C] as sourced.**
+- **The trivial upper bounds**, cheap and worth having as warm-ups: χ′ ≤ 2Δ − 1 (greedy;
+  RPI Theorem 3, verbatim: "Apply the greedy algorithm: color edges one-by-one, using for
+  each edge the smallest positive integer which is available"); χ′ ≤ 2Δ − 2 (Kostochka
+  Lec36, via the line graph and Brooks); Vizing 1964, verbatim: "There is also a trivial
+  upper bound q(G) ≤ 2σ(G) − 1." Each **≈ 4 steps, [A]**.
+- **χ′(G) = χ(L(G))** (Kostochka Lec36, verbatim: "By construction, χ′(G) = χ(L(G)) for
+  every graph G"). ≈ 4 steps, **[A]** — but needs the line graph and vertex chromatic number.
+
+---
+
+### D. CONVENTION DISAGREEMENTS, WITH RECOMMENDATIONS
+
+**D1 — Does "graph" mean simple or multi? (The single most dangerous ambiguity here.)**
+
+- Diestel: "graph" = simple; multigraphs are a separate notion. His Prop. 5.3.1 and Thm
+  5.3.2 are simple-graph statements.
+- Bondy–Murty 2008: "graph" permits parallel edges; "simple graph" is always said. Chapter
+  17 additionally assumes looplessness throughout, verbatim: "(Because loops are
+  self-adjacent, only loopless graphs admit proper edge colourings.) As we are concerned
+  here only with proper edge colourings, all graphs are assumed to be loopless".
+- Bondy–Murty 1976: same; the running phrase is "loopless graph".
+- Vizing 1964: "A multigraph is a finite nonoriented multigraph without loops"; "p-graph"
+  = at most p parallel edges; "A 1-graph is just a graph."
+- McDonald, Chen–Jing–Zang, Shan, Cao–Chen–Shan, Aboulker et al.: "multigraph" explicit,
+  "graph"/"simple graph" reserved for simple. Aboulker et al., verbatim: "Graphs in this
+  paper are finite, undirected, and without loops, but may have multiple edges. A graph is
+  simple if it has no parallel edges."
+
+**RECOMMENDATION.** The library's `def-finite-simple-graph` + `rem-finite-simple-graph-convention`
+already pin "graph" = finite simple, and `def-multigraph-loop-and-digraph` explicitly says
+"A theorem stated merely for a graph therefore neither permits loops or parallel edges nor
+supplies directions to its edges." So **every edge-colouring item must say "loopless
+multigraph" in its Statement**, never "graph", and the loopless hypothesis must be stated,
+not assumed — because in this library it is not a running convention. Restating a source's
+"graph" as "loopless multigraph" is a faithful shortening only where that source's "graph"
+means multigraph (Bondy–Murty, Vizing); it is an **unlicensed strengthening** where the
+source means simple (Diestel, Misra–Gries, Cao–Chen–Shan). Cite accordingly.
+
+**D2 — μ(G) vs μ(u,v) vs μ(v) vs Vizing's p.**
+
+- Bondy–Murty 2008, verbatim: "we denote by µ(u, v) the number of parallel edges joining u
+  and v. The multiplicity of G, denoted by µ(G), is the maximum value of µ, taken over all
+  pairs of vertices of G."
+- Bondy–Murty 1976, verbatim: "The maximum number of edges joining two vertices in G is
+  called the multiplicity of G".
+- Shan, verbatim: "Let µ(G) = max{e_G(u, v) : u, v ∈ V(G)} be the multiplicity of G, and
+  for v ∈ V(G), let µ_G(v) = max{e_G(u, v) : u ∈ N_G(v)} be the **multiplicity of v**".
+  McDonald uses the same local μ(v) in Ore's theorem.
+- Berge–Fournier/Dunaway: `m_G(x,y)` for the pair count, `m_G(x) = max_y m_G(x,y)` local, and
+  `t` for an **upper bound** on μ(G).
+- **Vizing 1964 has no μ at all.** His parameter p is an *upper bound*: "It is called a
+  p-graph if it has at most p parallel edges." So Theorem A.3 is literally "q(G) ≤ m + p
+  for every p-graph", and μ(G) is merely the least valid p.
+
+**RECOMMENDATION.** Define three things and keep them apart: μ(u,v) (pair), μ(v) := max_u
+μ(u,v) (local; needed for Ore), μ(G) := max_{u≠v} μ(u,v) (global). State the theorem as
+χ′ ≤ Δ + μ(G). Record the p-graph form in the Facts block as the source form and note that
+the theorem is monotone in p, so the μ(G) form is the sharp instance. Do **not** silently
+translate Vizing's "p-graph, q(G) ≤ m + p" into "χ′ ≤ Δ + μ" without saying that
+substitution — it is a changed quantifier.
+
+**D3 — ⌊3Δ/2⌋ or 3Δ/2?**
+
+`⌊3Δ/2⌋`: Chen–Jing–Zang, Vizing 1964, West Ex. 7.1.35, Kostochka's Shannon *example*.
+`3Δ/2` with no floor: McDonald Thm 2.1.2, Kostochka's Thm 7.1 *statement*, Green, RPI.
+
+They are equivalent because χ′ is an integer, but the **proof** must use the palette
+M = {1, …, ⌊3Δ/2⌋} (Kostochka's does, verbatim: "colors in M = {1, 2, …, ⌊3∆/2⌋}"), and the
+counting at step 12 of C1.2 is parity-sensitive.
+
+**RECOMMENDATION.** State **χ′(G) ≤ ⌊3Δ(G)/2⌋**. It is the stronger form, it is the form
+the extremal example μK₃ achieves with equality, and it is the form Vizing and
+Chen–Jing–Zang use. A statement of "χ′ ≤ 3Δ/2" would be a weaker theorem than the proof
+delivers, which SCHEMA-wise is fine but wastes the result; the reverse (stating the floor
+and proving only 3Δ/2) would be a fatal title/statement overreach.
+
+**D4 — Goldberg's bound: g_o − 1 or g_o + 1?**
+
+McDonald's thesis is **internally inconsistent**. Its *abstract* prints
+"χ′ ≤ ∆ + 1 + (∆−2)/(g_o+1)" and "(g_o + 1)|2(µ − 1)"; its *body* (Theorem 2.1.4 and
+Theorem 3.2.2) prints "(g_o − 1)" and "(g_o − 1) | 2(µ − 1)" throughout, and the body's
+Theorem 3.1.2 computation ⌈∆k/(k−1)⌉ = ∆ + 1 + ⌊(∆−2)/(k−1)⌋ is consistent only with
+g_o − 1. Chen–Jing–Zang's approximation family (m∆ + (m−3))/(m−1) matches the g_o − 1 form.
+
+**RECOMMENDATION.** If Goldberg's theorem is mentioned at all, use **g_o − 1**, cite the
+thesis *body* (Theorem 2.1.4, p. 6), never the abstract, and prefer citing Goldberg 1984 or
+Stiebitz et al. §6 directly.
+
+**D5 — Name of the density parameter.**
+
+Γ(G) in Chen–Jing–Zang; ρ(G) in McDonald; "Density" in Stiebitz et al. §6.1; unnamed and
+inline as bound (17.2) in Bondy–Murty 2008; and RPI's slides define a **different** quantity
+ω(G) = max_{H⊆G} ⌈|E(H)|/⌊|V(H)|/2⌋⌉ — over *all* subgraphs with a floor in the denominator,
+not over odd sets. **RECOMMENDATION.** Use **Γ(G)** with Chen–Jing–Zang's definition
+verbatim; record "ρ(G)" as the alias McDonald uses; do **not** import RPI's ω, which is the
+overfullness parameter, not the density.
+
+**D6 — Vizing's own notation is a trap.** In Vizing 1964/1965: σ(G) = maximum degree,
+q(G) = chromatic index ("chromatic class"), and **δ(x) = the set of colours missing at x**.
+That δ collides head-on with the standard minimum-degree δ(G) which the library certainly
+uses. **RECOMMENDATION.** Translate Vizing's notation on import: Δ for σ, χ′ for q, φ̄(x)
+(or "the set of colours missing at x") for δ(x). Say in the Facts block that the source uses
+σ/q/δ. The Stiebitz editorial Notes explain the historical reason for "chromatic class",
+verbatim: "The terminology seems due to Sainte-Laguë … who used the term rank for the
+vertex-chromatic number and class for the edge-chromatic number … in the English
+translation of Berge's book the translator Alison Doig … changed the terminology from class
+to index."
+
+**D7 — "critical" is not one notion.** Cao–Chen–Shan / Chen–Jing–Zang: χ′(H) < χ′(G) for
+every proper subgraph. Shan: "edge-chromatic critical", χ′ = Δ+1 and every proper subgraph
+Δ-colourable. Vizing 1965: connected **and** σ = m **and** q = m+1 **and** every single-edge
+deletion drops to m. These are not interchangeable — Vizing's carries connectivity, and
+"every proper subgraph" vs "every edge deletion" differ a priori. **RECOMMENDATION.** Adopt
+"χ′(H) < χ′(G) for every proper subgraph H of G" as the definition, derive the edge form as
+a corollary, and when quoting Vizing's Theorem A.6 state his four-part definition in the
+Facts block rather than substituting the modern one.
+
+**D8 — Dates and attributions.**
+- Shannon: **1949**, "A theorem on coloring the lines of a network", J. Math. Phys. 28,
+  148–151 (Bondy–Murty 1976, Stiebitz et al. references, Chen–Jing–Zang). RPI's slides say
+  "Shannon [1948]" — wrong. Vizing's own reference list cites a 1960 Russian translation.
+- Vizing: **1964**, "On an estimate of the chromatic class of a p-graph", Diskret. Analiz 3,
+  25–30 (Bondy–Murty both editions, Diestel, Chen–Jing–Zang, McDonald, Stiebitz et al.).
+  Kostochka's slide says "(Vizing, 1963)" — wrong.
+- Gupta: independent discovery. Bondy–Murty 1976 cite "Gupta, R. P. (1966). The chromatic
+  index and the degree of a graph. Notices Amer. Math. Soc., 13, abstract 66T-429"; Stiebitz
+  et al. cite "Gupta, R. P. (1967). Studies in the Theory of Graphs. Ph.D. Thesis, Tata
+  Institute of Fundamental Research, Bombay"; Chen–Jing–Zang say "proved independently by
+  Vizing [38] and Gupta [11] in the 1960s". **RECOMMENDATION.** Attribute the multigraph
+  theorem to "Vizing (1964) and, independently, Gupta" and cite both the 1966 abstract and
+  the 1967 thesis.
+- Berge–Fournier: the author order differs between sources. Dunaway's bibliography has
+  "J. C. Fournier and C. Berge"; Stiebitz et al.'s References has "Berge, C. and Fournier,
+  J. C. (1991)". **Prefer the Stiebitz form** (a monograph bibliography over a student
+  project's).
+
+**D9 — Loops.** Bondy–Murty 2008 state the reason properly, verbatim: "Because loops are
+self-adjacent, only loopless graphs admit proper edge colourings." **RECOMMENDATION.** Put
+this as an explicit remark, not a silent hypothesis, since the library's multigraph
+definition admits loops.
+
+---
+
+### E. PREREQUISITE AUDIT
+
+**What the library already has that matters here** (verified by grep of `items/` on disk,
+2026-08-13):
+
+- `items/def-multigraph-loop-and-digraph.md` — published; defines finite undirected
+  multigraph, loop, parallel edges, and states that a theorem "stated merely for a graph"
+  does not cover multigraphs. **This is the right base object for every item below.**
+- `items/thm-eulers-euler-circuit-characterisation.md` — published; "Let M be a connected
+  finite undirected **multigraph**. Then M has an Euler circuit if and only if every vertex
+  of M has even degree." Plus `lem-hierholzer-maximal-unused-edge-trail-closes`,
+  `lem-splicing-edge-disjoint-closed-trails`, `cor-euler-trail-characterisation`,
+  `def-euler-trail-and-circuit`, `def-multigraph-and-digraph-degrees-and-connectivity`.
+- Hall / König / Gallai / Berge, Menger in four forms, Ford–Fulkerson, finite sets, posets,
+  trees, vector spaces and rank (per the assignment brief).
+- `items/def-petersen-graph.md` and `ex-petersen-graph-basic-invariants` — the *graph*, not
+  Petersen's 2-factor theorem.
+
+**What the library does NOT have** (grep found zero items mentioning edge colouring,
+chromatic index, matchings-as-colour-classes, or 2-factors): **the entire edge-colouring
+vocabulary is missing.** Everything in §C therefore rests on a foundation layer that must
+be built first.
+
+| result | needs | in library? |
+|---|---|---|
+| **Foundation layer (must be built first)** | | |
+| `def` proper k-edge-colouring, χ′(G), k-edge-colourable, k-edge-chromatic | finite multigraph; matchings | multigraph ✓; **matching in a multigraph: verify** — the library's Hall/König matching theory is presumably simple-graph. If so this needs a small extension item. |
+| `rem` only loopless multigraphs admit proper edge colourings | def loop | ✓ |
+| `lem` χ′(G) ≥ Δ(G) | degrees | ✓ (`def-multigraph-and-digraph-degrees-and-connectivity`) |
+| `def` colour missing/available at a vertex | above | n/a (new) |
+| **(P1) Kempe chains: (α,β)-components are paths or even cycles; swapping preserves properness** | colour classes are matchings; degree ≤ 2 ⇒ path or cycle; alternation ⇒ even | **the "degree ≤ 2 ⇒ disjoint paths and cycles" classification must be checked**; if absent it is a 5-step [A] item on its own |
+| **(P2) a vertex missing α or β is an end of its (α,β)-chain** | (P1) | new, 2 steps |
+| **C5.1 König for bipartite multigraphs, Route K-a** | (P1), (P2), bipartite ⇒ no odd cycle, induction on \|E\| | bipartite/odd-cycle characterisation: **verify** the library has "G bipartite ⟺ no odd cycle" for multigraphs. Everything else new. |
+| **C5.1 Route K-b (Lemma 6.1.1)** | **Euler circuits in multigraphs**, adding a vertex joined to all odd-degree vertices, handshake parity | **✓ — this is the one place the library's existing Euler machinery pays off directly** |
+| C5.1 Route K-b (Lemma 6.1.2, optimal colourings) | Lemma 6.1.1, improper colourings, the "improvement" order | new |
+| **C1.2 Shannon, Route R1** | (P1), (P2), induction on \|E\|, floor arithmetic in both parities, pigeonhole | all new; no exotic prerequisite. **The cleanest self-contained target in this gap.** |
+| C1.3 Shannon, even-Δ route | Δ-regular loopless supergraph; **Petersen's 2-factor theorem**; cycles are 3-edge-colourable | **Petersen's 2-factor theorem is ABSENT.** Building it costs another item (Frink 1926, or Euler circuit + bipartite split + König — the Euler half is already in the library, the König half likely needs a multigraph version). |
+| C1.4 Shannon via 2Δ−μ | — | **route unverified; see F3. Do not scaffold.** |
+| **C2.2 Vizing multigraph, Route V1** | (P1)=Lemma A.1, (P2), Lemma A.2 (pigeonhole on chain ends), the association lemma (pigeonhole/injection into a set of size ≥ p), finite descent | all new, but **nothing beyond finite pigeonhole and Kempe chains**. No Hall, no flows, no linear algebra. Genuinely in scope. |
+| C2.3 Berge–Fournier | as above + independence of a vertex set | source defective (§C2.3) |
+| C2.4 Kierstead-path route | Kierstead's Theorem | **not obtained; blocker F4** |
+| Bondy–Murty Lemma 17.3 (alternative simple-graph Vizing) | **Hall's theorem** and M-alternating/augmenting paths | ✓ library has Hall/König/Berge — this route is unusually well supported, but it is simple-graph only |
+| C5.2 Fournier's simple Vizing | Lemma 6.1.1 + Lemma 6.1.2 | shares prerequisites with K-b |
+| **C5.3 overfull** | matchings have ≤ ⌊n/2⌋ edges; χ′ ≥ \|E\|/⌊n/2⌋; parity | new but trivial; **[A]** |
+| C5.4 critical graphs + VAL | criticality, fan-sequences, Lemma A.1/A.2 | rests entirely on the C2.2 cluster |
+| **C3 lower bound χ′ ≥ ⌈Γ(G)⌉** | colour classes are matchings; a matching inside an odd set S has ≤ (\|S\|−1)/2 edges; ceiling | new, **[A]**, 4 steps — **cheap and worth having** |
+| C3 Goldberg–Seymour upper bound | Tashkinov trees, extended Tashkinov trees, good hierarchies, Kempe control | **[C], out of reach — `proved_here: false` only** |
+| Ore, Steffen, Goldberg, Vizing A.11 | Tashkinov/Kierstead machinery | **[C]** |
+| χ′(G) = χ(L(G)) | line graph; **vertex chromatic number** | vertex colouring: **verify**. If the library has no χ(G), skip this and the 2Δ−2 bound. |
+
+**Nothing in §C needs the spectral theorem, measure theory, or algebraic topology.** The
+only heavyweight external prerequisite anywhere is Petersen's 2-factor theorem, and only for
+the supplementary even-Δ route.
+
+**Suggested build order for the scaffolder** (each arrow = strict dependency):
+
+```
+def multigraph (have) ─┬─> def proper edge colouring, χ′ ──> χ′ ≥ Δ
+                       └─> def missing/available colour
+                              │
+                              v
+                        (P1) Kempe chains ──> (P2) missing ⇒ endpoint
+                              │        │
+      ┌───────────────────────┘        └────────────────┐
+      v                                                  v
+König bipartite multigraph (K-a)                Lemma A.2 (3-vertex separation)
+      │                                                  │
+      │                             association lemma ───┤
+      v                                                  v
+Shannon ⌊3Δ/2⌋  (C1.2)                    Vizing multigraph Δ+μ  (C2.2)
+                                                         │
+                                          ┌──────────────┴───────────┐
+                                          v                          v
+                              Corollary: simple Vizing Δ+1     VAL (Thm A.6) ──> critical graph properties
+```
+
+Independently, and cheaply: `def Γ(G)` → `χ′ ≥ ⌈Γ⌉`; `def overfull` → overfull ⇒ odd order,
+Class 2; `rem` Goldberg–Seymour theorem with `proved_here: false`.
+
+---
+
+### F. BLOCKERS
+
+**F1 — Stiebitz, Scheide, Toft, Favrholdt, body chapters 1–9: NOT OBTAINED.**
+What I tried: Wiley product page (HTTP 403 Forbidden, as predicted in the brief); the
+Ilmenau `komgra` directory with guessed names `Chapter1Wiley.pdf`, `Chapter2Wiley.pdf`,
+`PrefaceWiley.pdf`, `TOCWiley.pdf`, `ContentsWiley.pdf` (all returned 236-byte HTML error
+pages — only `FrontMatterWiley.pdf` and `BackMatterWiley.pdf` exist there); web search for a
+GBV/Göttingen contents scan (no hit). **What I did get instead** more than compensates: the
+complete printed Contents verbatim from the author-hosted front matter, cross-checked
+against Stanford SearchWorks and vdoc.pub, plus **Appendices A and B in full**, which
+contain Vizing's 1964 and 1965 papers with proofs — the actual mathematics the body
+chapters expound. A full-book PDF appears to be posted at
+`https://vdoc.pub/documents/graph-edge-coloring-vizings-theorem-and-goldbergs-conjecture-2cu9l3i7p1qg`;
+**I deliberately did not download it** — a whole copyrighted Wiley monograph on a
+file-sharing mirror is not a reputable source and the repo's citation rules should not rest
+on one. If the owner wants Chapters 2 and 7 (the Vizing-fan and Shannon/extreme-graph
+chapters), that is a library-access decision, not a scraping one.
+
+**F2 — Berge & Fournier, "A short proof for a generalization of Vizing's theorem",
+J. Graph Theory 15 (1991) 333–336: NOT OBTAINED.**
+What I tried: I have the full secondary exposition (Dunaway, S12) and identified a concrete
+defect in it (§C2.3, Case 2 selects "any vertex x₀ of maximum degree such that d_G(x₀) = D"
+when D = Δ+1 makes that vertex nonexistent). Wiley Online Library hosts the original and is
+paywalled; I did not attempt to bypass. **Impact: low** — Vizing's own 1964 proof (§C2.2) is
+in hand verbatim and is the recommended route, so Berge–Fournier is only needed if the
+scaffolder wants the *stronger* Δ+μ−1 statement.
+
+**F3 — χ′(G) ≤ 2Δ − μ (Bondy–Murty 2008 Ex. 17.2.8a): STATED, NOT PROVED, NOT SOURCED.**
+What I tried: the exercise is bare in Bondy–Murty; I searched McDonald, Stiebitz Appendix A,
+Vizing 1964, West's solution manual §7.1 (which solves 7.1.34 and 7.1.35 but not this
+bound), Kostochka's slides, and the RPI/Green/Aboulker notes — none proves it. I then
+attempted a direct maximum-domain counting proof; it closes for **critical** multigraphs
+(§C1.4) but the induction does not descend, because deleting an edge of the unique
+maximum-multiplicity pair lowers μ and thereby *raises* the target bound. **Recorded as an
+open item, not as a proof route.** The scaffolder must not scaffold this bound, and must not
+present my partial counting as a proof. Shannon is fully covered by §C1.2 without it.
+
+**F4 — Kierstead, "A new method of proving theorems on chromatic index", Discrete Math. 52
+(1984) 159–164: NOT OBTAINED.** Would make §C2.4 (a ~8-step derivation of *both* Shannon and
+Vizing from one theorem) viable. I have the theorem's exact statement (McDonald Theorem
+2.2.2, verbatim in §B4) but not its proof; McDonald explicitly declines to reproduce it.
+Elsevier-hosted, paywalled.
+
+**F5 — West, *Introduction to Graph Theory* 2nd ed., MAIN TEXT of §7.1: NOT OBTAINED.**
+What I tried: the `dokumen.pub` mirror of the book now returns "website under maintenance";
+web search for a §7.1 PDF found nothing usable. **What I did get**: West's *Instructor's
+Solution Manual* for §7.1 (captured earlier this run at `/tmp/gsrc/dok.html`), from which the
+exercise statements and their solutions are quoted verbatim in §B7 and §C1.3. West's own
+theorem numbering for §7.1 (whether König is 7.1.7, Vizing 7.1.10, etc.) is therefore
+**unverified — do not cite a West theorem number**. The section is titled "Section 7.1: Line
+Graphs and Edge-Coloring" inside "Chapter 7: Edges and Cycles" (this much is verbatim in the
+manual's running heads). **Impact: low** — the source-depth rule is already satisfied by four
+independent primary treatments (Bondy–Murty 2008, Bondy–Murty 1976, Stiebitz et al.
+Appendix A, McDonald), of which three are textbooks/monographs/theses with harvestable
+contents.
+
+**F6 — Soifer, *The Mathematical Coloring Book*: NOT ATTEMPTED.** It is in the Stiebitz
+bibliography ("Soifer, A. (2009). The Mathematical Coloring Book, Springer, Berlin.") but is
+a history-and-exposition volume on *vertex* colouring problems; with four primary
+edge-colouring treatments already secured, chasing it was not worth the fetch budget. Record
+its `deferred` disposition as "vertex-colouring history; not an edge-colouring treatment".
+
+**F7 — Kostochka's Math 412 slides state Claims 1, 2 and 3 without proof.** This is a
+property of the source, not a fetch failure. The three proofs are supplied in §C1.2, each
+marked `[gap-filled]`, and each is a two-to-four-line standard argument. **The scaffolder
+must re-derive them and must not attribute them to Kostochka.** Under the repo's
+generated-claim rules these are AI-supplied *proof* steps for a literature-derived
+*statement*, which is permitted — `provenance.statement: literature-derived`,
+`provenance.proof: ai-altered` — but the Statement itself (Theorem 7.1) is fully sourced.
+
+**F8 — Bondy–Murty 1976 is an OCR scan.** Every quotation from it in §B2 required restoring
+χ′ from `X'`, Δ from `~`/`A`/`b..`, and μ from `IL`/`lot`. The restorations are marked at the
+point of use. A scaffolder citing this source should re-open PDF pages 98–107 of
+`/tmp/bondy_murty_1976.pdf` (or `https://www.zib.de/groetschel/teaching/WS1314/BondyMurtyGTWA.pdf`)
+before quoting, and should prefer Bondy–Murty 2008 for any statement that appears in both.

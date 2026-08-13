@@ -11,6 +11,106 @@ wherever they differ.
 
 ---
 
+# SUMMARY FOR THE ORCHESTRATOR — `abstract-algebra` lane, run `subjects-01`, 2026-08-13
+
+*This lane owns two files. This one carries the Galois block, the linear-algebra
+completion, the fundamental theorem of algebra and the spectral theorem;
+`research/plan-algebra-track-expansion.md` carries AG, MOD and RT and has its own
+summary at its head. Everything from this commission is **Part II**, beginning at
+§II.0; Part I is the 2026-07-27 commission and is unchanged and undeleted.*
+
+**Pairs scaffolded here.** Eleven, all currently **unauthored** in
+`research/plan-spec.json` (`items: []`), listed by relative label with the page id
+the orchestrator should quote:
+
+| label | page id | § | size |
+|---|---|---|---|
+| AA-14 | `symmetric-polynomials` | II.3 | A 26 / B 15 |
+| AA-15 | `algebraic-extensions-degree-and-finite-fields` | II.4 | A 30 / B 16 |
+| **GA-1** | `algebraic-closure-embeddings-and-separability` *(new)* | II.2 | A 42 / B 16 |
+| **GA-2** | `the-galois-correspondence` *(new)* | II.2 | A 36 / B 16 |
+| **GA-3** | `finite-fields-and-cyclotomic-extensions` *(new)* | II.2 | A 44 / B 17 |
+| **GA-4** | `solvability-by-radicals-and-kummer-theory` *(new)* | II.2 | A 33 / B 16 |
+| LA-9 | `diagonalisation-and-the-minimal-polynomial` | II.5 | A 25 / B 15 |
+| LA-10 | `triangularisation-and-jordan-canonical-form` | II.6 | A 28 / B 16 |
+| LA-12 | `inner-product-spaces-and-orthogonality` | II.7 | A 30 / B 17 |
+| X-1 | `the-fundamental-theorem-of-algebra` | II.8 | A 16 / B 12 |
+| X-2 | `the-spectral-theorem-and-singular-value-decomposition` | II.9 | A 32 / B 18 |
+
+**The headline gap is filled.** There was no Galois theory anywhere in the plan.
+GA-1…GA-4 supply the algebraic closure, separable degree and the primitive
+element theorem; Dedekind and Artin, the fundamental theorem of Galois theory and
+the normality clause; finite fields, cyclotomic extensions and the normal basis
+theorem; norm and trace, Hilbert 90, Artin–Schreier, Kummer theory,
+solvability by radicals and Abel–Ruffini. **The block needs four A/B pairs, not
+the two the free integers 98–101 hold** — §II.2.0 argues it and the orchestrator
+confirms at splice. All four page ids and every item id proposed were checked free
+against `items/` on 2026-08-13.
+
+**Sources obtained in full** (not TOCs): Milne *Fields and Galois Theory*; Pete
+Clark *Field Theory*; Ash *Basic Graduate Year* Ch. 3–6; 26 Conrad Galois blurbs;
+Artin *Algebra*; Axler *LADR* 4th ed.; Hoffman & Kunze; Treil *LADW*; Cambridge
+Part IB; 15 Conrad linear-algebra blurbs; Petersen; Macdonald Ch. I §§1–2; Knapp
+*Basic Algebra* IX and *Advanced Algebra* VIII.2; Grinberg Ch. 7; Wisbauer;
+Crawley-Boevey; Webb; Etingof et al; Teleman; Anupam Singh; Banaschewski (1992).
+TOC-only: Lang, Isaacs, Serre, Dummit & Foote, Lam. **Unobtainable: Isaacs and
+Fulton–Harris full text** — no coverage disposition may cite them as read. The
+five source-anchored heading enumerations are in
+`research/subjects-01-dispatch/aa-harvest-*.md`; §II.12 indexes them and carries
+the two-treatments check per pair.
+
+**Seams consumed.** The published `splitting-fields` page is far stronger than
+Part I described — **normality is already done** (`def-normal-algebraic-extension`,
+`thm-isomorphisms-extend-to-splitting-fields`,
+`prop-endomorphisms-of-a-splitting-field-permute-its-roots`), and
+`polynomial-rings-and-roots` already carries the whole separability apparatus for
+*polynomials* plus Gauss, Eisenstein and the mod-$p$ test. Those two facts are why
+four Galois pairs are affordable at all. `dual-spaces-bilinear-forms-and-inertia`
+(published 2026-08-13, 33 items) fixes the library's sesquilinear convention, and
+`the-field-of-fractions-and-localisation` (22 items) discharges Part I's decision
+D10.
+
+**Seams owed** — full list at §II.13. The load-bearing ones: `commutative-algebra`
+takes `def-noetherian-module`, `def-artinian-module` and `def-noetherian-ring`
+from MOD-4, **defined by the finitely-generated condition rather than by ACC**;
+`functional-analysis` cites X-2's finite-dimensional spectral theory and inherits
+Jordan–von Neumann; `number-theory` inherits the quadratic subfield of
+$\mathbb{Q}(\zeta_p)$, Kronecker–Weber, and the Möbius closed form for irreducible
+counts; `group-theory` inherits Schur–Zassenhaus and takes `def-dihedral-group`
+from AG-3.
+
+**Unresolved forward references.** None load-bearing anywhere in this file. Four
+non-load-bearing `## Remarks` orientation notes with `forward_refs` and no `deps`
+edge: GA-3 to the complex description of $\mu_n$; AA-15 to GA-1 and to GA-2;
+LA-12 to `rn-as-a-normed-space`; X-1 to the published
+`thm-fundamental-theorem-of-algebra-minimum-modulus-proof`.
+
+**Scope denials, each with its reason.** The Artin–Schreier characterisation of
+real-closed fields (needs formally real field theory, a block of its own); angle
+trisection (needs trigonometry, absent below AA-15); the constructible regular
+$n$-gon (needs the cyclotomic Galois group, so it goes above GA-3); squaring the
+circle (needs the transcendence of $\pi$); the Möbius closed form for irreducible
+counts (Möbius inversion is published at snapshot 203, above the Galois block);
+Jordan–von Neumann (quantifies over norms, and `def-norm-and-normed-space` sits
+above LA-12); infinite Galois theory and the Krull topology (a later level).
+**Nothing was dropped to avoid a forward reference.**
+
+**Stale claims found in this file and corrected in place** — five, all in Part I,
+each corrected in §II.1.b with the disk evidence: the "unbridgeable seam" at LA-12
+(the finite Cauchy–Schwarz is *below*, not above); "no field of fractions exists"
+(D10); "the formal derivative does not exist" (AL-D6, in the companion file);
+"Cayley–Hamilton is an LA-9 item" (it is published); "the A-page ceiling is 100"
+(the code says 60). Two corrections were made to Part II text written earlier in
+this same run: GA-1's algebraic closure now takes the one-step Gilmer/Milne route
+rather than the $\omega$-iteration, and GA-1 now **cites** the Frobenius from
+AA-15 instead of minting it.
+
+**Blockers recorded: none.** Ten harvest gaps — results the scaffold uses that
+are unproved or single-sourced in everything obtained — are listed at §II.12.b
+and are obligations on a future build, not blockers on this one.
+
+---
+
 ## Why this track exists
 
 The library already asserts algebraic structure it never defines. `thm-cauchy-ring`

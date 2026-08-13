@@ -899,11 +899,21 @@ build and wave did and where its evidence lives.
 
 Alpha's lane cap is 1 because Alpha is the single writer of the prose scaffolds.
 
-**`scaffolder` (owner, 2026-08-13) is Alpha's runner, model, effort and window
-with a different cap, and the difference is why it is a separate row rather than
-a raised `alpha` cap.** The job it serves is concurrent SUBJECT-track prose
-scaffolding outside any level build — one Opus 5 lane per subject, each
-researching sources and writing one track file. Alpha's cap of 1 is not a
+**`scaffolder` (owner, 2026-08-13) serves concurrent SUBJECT-track prose
+scaffolding outside any level build** — one lane per subject, each researching
+sources and writing one track file. It is a separate row from `alpha` rather
+than a raised `alpha` cap for the reason below.
+
+**It moved from Opus 5 to Sol on 2026-08-14 (owner: "Change agent LLM from opus
+5 to gpt 5.6 sol"), and quota is why.** Two rounds of Opus scaffolders were
+killed mid-track by the Claude session limit — the first at 25–34 minutes, the
+second at 10–43 minutes with the reset five and a half hours out. Sol bills to
+the Codex subscription, a different account, and is already the standing model
+for every other authoring lane here, so the move also retires what had become a
+second Opus exception alongside `alpha`. The lane carries `web: true`, which is
+load-bearing rather than decorative: half of a scaffolder's brief is source
+research, and a Codex lane without web access does not fail — it asserts from
+memory. Alpha's cap of 1 is not a
 resource limit but a **mutual-exclusion guarantee**: within a level Alpha is the
 single writer of a shared artifact set, and two concurrent Alphas overwrite each
 other silently. Raising that cap to run a scaffolding job would delete the
