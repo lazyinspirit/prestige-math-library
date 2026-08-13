@@ -9,11 +9,26 @@ doing only the first half:
 
 | phase | what | your job |
 |---|---|---|
-| **(1) enrich existing A/B pairs** | add new items to pages that already exist | **DO THIS, then STOP** |
-| (2) new A/B pairs | whole new pages | **SCAFFOLD ONLY — do not build.** They go through the standard step 0→10 cycle later, alongside other buildable pairs |
+| **(1a) PLAN the enrichment** | decide exactly which items to add to which existing pages | **DO THIS, then STOP** |
+| (1b) author those items | write the item files | **NOT YET — owner reviews the plan first** |
+| (2) new A/B pairs | whole new pages | **PROPOSE ONLY — do not build.** They go through the standard step 0→10 cycle later, alongside other buildable pairs |
 
 The owner's words: *"Do (1) first then pause. We'll do (2) together with other
-buildable A/B pairs later."*
+buildable A/B pairs later."* And, 2026-08-13, adding the gate that defines your
+run: ***"Before you build any new real analysis items, give me a rundown of what
+items are to be added, as well as any planned real analysis A/B pairs."***
+
+## ⛔ YOU AUTHOR NOTHING ON THIS RUN
+
+**Do not create a single file under `items/`.** Not a draft, not a stub. Your
+entire output is a plan the owner reads and approves before any item exists. A
+previous dispatch of this brief was stopped mid-run precisely to enforce this,
+and it had authored nothing — keep it that way.
+
+You still do the full research and the full analysis. The gap report, the source
+harvest, the exact item-by-item proposal and the phase-2 pair proposals are all
+expected in complete detail. The only thing withheld is the writing of the items
+themselves, which is a separate dispatch after the owner approves.
 
 ## No permission prompts, ever
 
@@ -96,7 +111,7 @@ item ids in the manifest, and every new item genuinely self-contained.
 
 | path | may write |
 |---|---|
-| `items/<new-id>.md` | **yes** — new draft items only |
+| `items/**` | **NO — nothing at all on this run** |
 | `research/plan-realanalysis-pages.md` | **yes** — the real-analysis prose scaffold |
 | `research/ra-enrich-01-*` | **yes** — manifest, gap report, harvest |
 | existing `items/*.md` | **no**, unless a published dependency is an unambiguous falsehood — see below |
@@ -138,7 +153,9 @@ text locally.
 
 ## 6. Authoring standard
 
-Everything in `CLAUDE.md` binds, in particular:
+You are not writing items on this run, but every proposal in your plan must be
+authorable to this standard by the next dispatch — so apply it while deciding
+WHAT to propose. Everything in `CLAUDE.md` binds, in particular:
 
 - **Self-contained scope.** No item may rest on a result the library has not
   established. Search for the exact statement, then prove it from available
@@ -159,25 +176,43 @@ Everything in `CLAUDE.md` binds, in particular:
   both directions of every iff.
 - **No applied `\iota(n)`** around a natural number; write the number.
 
-Run `node tools/tsx-run.mjs tools/precheck.mts <your new files>` and adopt the
-printed canonical stratification until clean. Record
-`verification.precheck: pass`. Leave `verification.judge` and
-`verification.audited` **absent** — they are not yours to write.
+Do not run `precheck` — there are no files to check. It runs in the authoring
+dispatch, after the owner approves this plan.
 
 ---
 
-## 7. Deliverables, and then stop
+## 7. Deliverables — a PLAN, and then stop
 
 1. `research/ra-enrich-01-gaps.md` — every published real-analysis page you
    examined, what it covers, and every gap or thin spot you found, each marked
    **phase 1** (an item on an existing page) or **phase 2** (needs a new pair).
+   Where the library already covers something, **say so and say where** — a
+   report that only lists holes is not a survey.
 2. `research/ra-enrich-01-harvest.md` — the source harvest of §5.
-3. The new draft items under `items/`.
-4. `research/ra-enrich-01-placement.json` — the manifest of §2.
-5. Updates to `research/plan-realanalysis-pages.md`, including a phase-2 section
-   scaffolding the new A/B pairs you are **not** building.
-6. `research/ra-enrich-01-report.md` — what you added and why, the phase-2
-   backlog, any published-dependency repair, and any blocker.
+3. **`research/ra-enrich-01-PLAN.md` — the owner-facing rundown. This is the
+   deliverable the run exists for.** Two tables.
 
-**Then stop.** Do not judge, do not audit, do not publish, do not build a new
-A/B pair, and do not run the level-build gates. Report and hand back.
+   **Table A — items proposed for existing pages.** One row per item:
+   proposed id · kind · the exact statement in one sentence · target page · the
+   item it should follow · the dependencies it needs and whether each is already
+   published · the source backing it · one line on the gap it closes. Group the
+   rows by target page, and give each page a one-line note on how many items it
+   has now and how many it would have after.
+
+   **Table B — proposed new A/B pairs (phase 2).** One row per pair: working
+   title · why it cannot be an item on an existing page · its place in reading
+   order (which published page it must follow and why) · the results it would
+   carry · its sources. These are proposals for a later build cycle, not work.
+
+   Open the file with a short summary an owner can read in a minute: how many
+   items across how many pages, how many new pairs, and the three most valuable
+   things in the plan.
+4. `research/ra-enrich-01-placement.json` — the machine-readable form of Table A,
+   per §2. It becomes the judge/audit scope when the items are eventually built.
+5. Updates to `research/plan-realanalysis-pages.md` recording the phase-2 pairs.
+6. `research/ra-enrich-01-report.md` — anything that did not fit the tables: a
+   published item you believe is wrong (report it, do not repair it on this run),
+   amendments owed to another track, and any blocker.
+
+**Then stop.** Author nothing, judge nothing, audit nothing, publish nothing,
+build no pair, run no level-build gate. Hand the plan back and end your run.
