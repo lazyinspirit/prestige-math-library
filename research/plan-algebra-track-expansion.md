@@ -1854,3 +1854,898 @@ explicit escape hatch ("if Beta finds MOD-2 over the cap, this block moves to
 MOD-4 and the move is recorded"). MOD-2 shipped without it and without the
 record. **Part II records the move: it is MOD-4's, and RT-4 cites it there.**
 
+---
+
+## II.2 AG-3 enrichment — `semidirect-products-and-automorphism-groups`
+
+Part I §11 scaffolded this page at **A 17, B 12** and it is still unauthored.
+Disk has moved under it twice: the automorphism-group block it planned to mint is
+now published, and the dihedral group it planned to introduce turns out to be
+*used* in five published examples and *defined* nowhere. Both change the item
+list, and the second is a finding the orchestrator should see.
+
+### II.2.a What Part I planned to mint and disk has since published
+
+`group-homomorphisms-and-the-isomorphism-theorems` publishes
+`def-group-isomorphism-and-automorphism`, `thm-automorphisms-form-a-group`,
+`thm-conjugation-is-an-automorphism`, `def-inner-automorphism-group`,
+`thm-inner-automorphisms-normal-in-automorphism-group` and
+**`cor-group-mod-center-is-inner-automorphism-group`**. Part I's obligation #7 —
+"$\operatorname{Aut}(G)$, $\operatorname{Inn}(G)$, $\operatorname{Out}(G)$, three
+items ending in $\operatorname{Inn}(G)\cong G/Z(G)$" — is therefore **discharged
+except for its last third**. AG-3 mints only the outer automorphism group
+$\operatorname{Out}(G) = \operatorname{Aut}(G)/\operatorname{Inn}(G)$, which is a
+one-line quotient once `thm-inner-automorphisms-normal-in-automorphism-group` is
+cited, and it cites the rest. That is roughly three items returned to the budget.
+
+`the-structure-of-finite-abelian-groups` publishes
+`def-internal-direct-product-of-subgroups` and
+`thm-internal-direct-product-recognition`; `cyclic-groups-and-direct-products`
+publishes `def-external-direct-product-of-groups`. So the *direct*-product half
+of the internal/external contrast is entirely published, and AG-3's recognition
+criterion is stated as the semidirect **generalisation** of a named published
+theorem rather than as a fresh pair of definitions. Conrad's Thm. 2.1 (direct)
+and Thm. 4.1 (semidirect) are exactly this pairing and AG-3 follows it.
+
+### II.2.b The dihedral group is used five times and defined nowhere
+
+Verified from disk 2026-08-13, and it is the finding on this page. `grep` over
+all 4172 item files returns **no `def-` item mentioning "dihedral"**. What exists
+is five published examples, every one of them on a **B page**:
+
+| item | page | order |
+|---|---|---|
+| `ex-symmetries-of-a-square` | `monoids-groups-and-subgroups-examples` | 21 |
+| `ex-class-equation-of-the-dihedral-group-of-order-eight` | `group-actions-and-cayleys-theorem-examples` | 43 |
+| `ex-two-colourings-of-a-square-up-to-dihedral-symmetry` | `group-actions-and-cayleys-theorem-examples` | 43 |
+| `ex-presentation-of-a-dihedral-group` | `free-groups-and-presentations-examples` | 61 |
+| `ex-two-involutions-generate-the-infinite-dihedral-group` | `free-products-and-amalgamation-examples` | 63 |
+| `ex-upper-and-lower-central-series-of-the-dihedral-group-of-order-eight` | `composition-series-and-solvable-groups-examples` | 67 |
+
+Every one is published, so none is retrofitted; and every one is a B-page leaf,
+so **AG-3 may not cite any of them** and must build $D_n$ natively. Part I
+already reached this conclusion for `ex-symmetries-of-a-square` alone, by the
+B-leaf rule; the correction is that it is true of the whole family, and that the
+last row also takes an item *off* AG-4's B page (§II.3.d).
+
+**AG-3 therefore mints `def-dihedral-group`**, as $\mathbb{Z}/n \rtimes_\varphi
+\mathbb{Z}/2$ with $\varphi$ the inversion action, and owes a `## Remarks`
+agreement note — no `deps` edge, because the targets are leaves — recording that
+the concrete symmetry, class-equation, presentation and central-series
+descriptions already published agree with it. Note the notation collision the
+sources force a choice on: **Conrad, Ash and Dummit–Foote write $D_{2n}$ for the
+group of order $2n$; Rotman and Artin write $D_n$.** The library's five published
+examples say "of order eight". **Adopt $D_n$ of order $2n$** and state the
+convention in the definition item, because the published examples name the
+*order* explicitly and so cannot be misread either way.
+
+### II.2.c The item list, as enriched
+
+**DEFS.** $\operatorname{Out}(G)$; the action of $H$ on $N$ by automorphisms;
+**external semidirect product** $N \rtimes_\varphi H$ (obligation #5);
+**internal semidirect product** (#6); split short exact sequence of groups and a
+splitting homomorphism; **`def-dihedral-group`**; the **holomorph**
+$N \rtimes \operatorname{Aut}(N)$.
+
+**THMS.** $\operatorname{Out}(G)$ is a group (from the published normality of
+$\operatorname{Inn}$); $N \rtimes_\varphi H$ is a group, with the associativity
+check that obligation #5 exists for; its order is $\lvert N\rvert\lvert H\rvert$;
+$N \times 1$ is normal and $1 \times H$ is a complement; **$1 \times H$ is normal
+iff $\varphi$ is trivial iff the product is direct** (Conrad Thm. 3.11 — a
+biconditional, and stating only the easy direction is the defect to avoid);
+the **recognition criterion** #6, in Conrad's Thm. 4.1 form: if $N \trianglelefteq
+G$, $H \le G$, $NH = G$ and $N \cap H = 1$, then $G \cong N \rtimes_\varphi H$
+with $\varphi$ conjugation; $\operatorname{Aut}(\mathbb{Z}/n) \cong
+(\mathbb{Z}/n)^\times$, citing the published `def-unit-group-modulo-n-and-euler-totient`;
+$\lvert\operatorname{Aut}(\mathbb{Z}/p \times \mathbb{Z}/p)\rvert = (p^2-1)(p^2-p)$
+by counting ordered bases — **and now, unlike in Part I, the full
+$\operatorname{Aut}(\mathbb{Z}/p\times\mathbb{Z}/p)\cong GL_2(\mathbb{F}_p)$ is
+affordable**, because `matrices-and-the-matrix-of-a-linear-map` is published far
+below with `def-invertible-matrix-and-general-linear-group` and
+`thm-invertible-matrices-correspond-to-linear-isomorphisms`; Part I's drop was
+conditioned on a `requires` it did not want to add, and the page it needed is now
+published, so **the drop is withdrawn and the theorem is included**;
+**the isomorphism lemma** (Conrad Lem. 6.2): precomposing $\varphi$ with an
+automorphism of $H$, or postcomposing with conjugation in $\operatorname{Aut}(N)$,
+gives an isomorphic semidirect product — *the item AG-4's order-$pq$ count is
+wrong without, and the reason it is a numbered theorem here and not a remark*;
+$D_n$ has order $2n$, presentation $\langle r,s \mid r^n, s^2, srsr\rangle$ (via
+the published `thm-von-dyck`), centre trivial for odd $n$ and $\langle r^{n/2}\rangle$
+for even $n$; **$Q_8$ inside the published quaternions** (`def-quaternions`,
+`thm-quaternions-form-a-division-ring`, on `rings-subrings-and-integral-domains`,
+an A page and therefore citable), with its presentation; **$Q_8$ is not a
+semidirect product of two proper subgroups** — every nontrivial subgroup contains
+$-1$, so no complement exists.
+
+**FS.** every short exact sequence of groups splits ($Q_8$, or
+$\mathbb{Z}/4 \to \mathbb{Z}/2$); an extension is determined by its kernel and
+quotient ($D_4$, $Q_8$, $\mathbb{Z}/8$, $\mathbb{Z}/4\times\mathbb{Z}/2$,
+$(\mathbb{Z}/2)^3$ all have the same composition factors); $\operatorname{Aut}(G)$
+is abelian when $G$ is ($\operatorname{Aut}((\mathbb{Z}/2)^2)\cong S_3$);
+**a semidirect product with nontrivial $\varphi$ is nonabelian** — false, and the
+witness is worth having: $\varphi$ nontrivial forces nonabelian only when
+$\varphi$ is faithful on more than the centre, and $\mathbb{Z}/2 \rtimes
+\mathbb{Z}/2$ with the trivial-on-image action is the boundary case to state
+carefully; **two semidirect products with non-conjugate $\varphi$ are
+non-isomorphic** (false — Lem. 6.2's converse fails).
+
+**B.** $D_3 \cong S_3$ with the isomorphism written out; $D_4$ as eight
+permutations of a square, rebuilt natively per §II.2.b; the multiplication table
+of $Q_8$; $\mathbb{Z}/m \rtimes (\mathbb{Z}/m)^\times$ (the holomorph of a cyclic
+group, Conrad Ex. 3.5); $S_4 \cong V \rtimes S_3$; $\operatorname{Aff}(\mathbb{Z}/p)
+= \mathbb{Z}/p \rtimes (\mathbb{Z}/p)^\times$, **added** because Conrad's Sylow
+applications use it repeatedly and AG-4's B page wants it; the three nonabelian
+$\mathbb{Z}/8 \rtimes \mathbb{Z}/2$ (dihedral, semidihedral, modular of order 16;
+Conrad Ex. 5.5) — the concrete demonstration that one pair $(N,H)$ admits several
+non-isomorphic semidirect products; $\operatorname{Out}(S_6) \ne 1$ **named and
+not proved** in a Remark, with `proved_here` untouched because nothing cites it.
+
+**Traps.** (i) #5's guard is the page's reason for existing: an action by
+*bijections* does not give a group; the action must be by automorphisms and the
+associativity computation is where that is consumed. (ii) Do not describe $D_n$
+as the symmetry group of a regular $n$-gon: plane isometries sit far above this
+page. $D_n$ is the semidirect product, and the geometric reading is "not
+available at this point in the reading order", never "the library does not
+develop it". (iii) $Q_8$ comes from the published quaternions, or the library has
+two $Q_8$s. (iv) The $D_{2n}$-vs-$D_n$ convention is fixed in the definition item
+(§II.2.b) and every later page — AG-4, RT-2, RT-3 — uses it without restating.
+(v) Conrad's Lem. 6.2 is an *isomorphism* statement, not a classification: it
+says when two semidirect products agree, and the converse is false. AG-4 uses
+only the direction Lem. 6.2 actually proves.
+
+**Forward references:** NONE load-bearing.
+
+**Revised estimate.** A 21, B 14. Up from Part I's 17/12 despite three items
+being returned to disk, because $GL_2(\mathbb{F}_p)$, `def-dihedral-group`, the
+isomorphism lemma and the order-16 family are all now affordable.
+
+---
+
+## II.3 AG-4 enrichment — `sylow-theorems-and-nilpotent-groups`
+
+Part I scaffolded this at **A 24, B 13**, unauthored. The reconciliation here is
+larger than on AG-3: **the entire nilpotency block Part I planned for this page
+was published on AG-2 instead**, and **the whole $p$-group toolkit it planned to
+prove was published at `group-actions-and-cayleys-theorem`**. What is left is
+Sylow proper, and the page can go correspondingly deeper.
+
+### II.3.a Published below, therefore cited and not re-minted
+
+From `group-actions-and-cayleys-theorem` (order 42): `def-finite-p-group`,
+`lem-subgroups-of-finite-p-groups-are-p-groups`,
+**`thm-p-group-fixed-point-congruence`**, `cor-p-group-action-has-a-fixed-point`,
+**`thm-nontrivial-center-of-a-finite-p-group`**, `cor-groups-of-order-p-squared-are-abelian`,
+`cor-index-p-subgroups-of-finite-p-groups-are-normal`,
+`thm-normal-subgroups-of-finite-p-groups-meet-the-center`,
+**`thm-cauchys-theorem-for-finite-groups`**, `thm-class-equation`,
+`def-normalizer-of-a-subgroup`, `lem-centralizers-and-normalizers-are-subgroups`,
+`thm-conjugate-subgroups-are-counted-by-the-normalizer`,
+`thm-conjugates-of-proper-subgroup-do-not-cover-finite-group`,
+`thm-orbit-stabilizer`, `def-core-of-a-subgroup`,
+`thm-finite-index-core-bound-and-finite-overgroups`.
+
+Part I planned the fixed-point congruence, Cauchy's theorem, "$Z(P)\ne1$" and
+"groups of order $p^2$ are abelian" as AG-4 items. **All four are published.**
+Part I's trap (ii) — "Cauchy must not be proved from Sylow I if Sylow I's proof
+uses Cauchy" — is consequently **discharged and no longer a live hazard**: Cauchy
+is below, proved by the $\mathbb{Z}/p$-action on $p$-tuples, so Sylow I may use
+it freely and the circularity cannot arise. That is worth stating, because it was
+the page's sharpest ordering risk and it is now simply gone.
+
+From `composition-series-and-solvable-groups` (order 66):
+`def-subgroup-commutator-and-lower-central-series`, `def-upper-central-series`,
+**`def-nilpotent-group-and-nilpotency-class`**, `lem-central-series-commutator-criterion`,
+**`thm-upper-and-lower-central-characterizations-of-nilpotence`**,
+`thm-subgroups-quotients-and-finite-products-of-nilpotent-groups`,
+**`thm-finite-p-groups-are-nilpotent`**, `cor-nilpotent-groups-and-finite-p-groups-are-solvable`,
+`thm-central-extensions-and-nilpotency-class`, plus the solvability block.
+
+So **AG-4 mints no nilpotency definition and proves no series theorem.** Part I's
+plan to define the lower and upper central series, nilpotency class, and to prove
+"finite $p$-groups are nilpotent", "subgroups and quotients of nilpotent groups
+are nilpotent" and "nilpotent $\Rightarrow$ solvable, converse fails" is
+**withdrawn in full — every one of them is published at AG-2.** The page id still
+reads `sylow-theorems-and-nilpotent-groups`, and it earns the second half
+honestly by proving the **Sylow characterisation** of nilpotence, which is the
+one nilpotency theorem that genuinely needs Sylow and which AG-2 correctly could
+not state. Ash's ordering is the same: his §5.4–5.5 are Sylow and applications,
+his §5.7 is solvable-and-nilpotent, and the Sylow characterisation is what joins
+them.
+
+### II.3.b The item list, as enriched
+
+**DEFS.** **Sylow $p$-subgroup** (obligation #8, resting on the published
+`def-p-adic-valuation` at order 28 — a second exponent function here is the
+two-notions defect); $n_p$ (#9); **maximal subgroup**; the **Fitting subgroup**
+$F(G)$ — *added*, see below; **$p$-complement**.
+
+**THMS.**
+*Sylow.* **Sylow I** (existence), by Wielandt's counting argument on the
+$p^a$-subsets, with the binomial-coefficient valuation computed from the
+published `lem-p-adic-valuation-additive` — **chosen over the
+induction-on-$\lvert G\rvert$ route deliberately**, because it proves existence
+without Cauchy and without the class equation, so the page's dependency on order
+42 stays a convenience rather than a load; the alternative route is recorded in
+Remarks; **Sylow II** (any $p$-subgroup is contained in a conjugate of any Sylow
+$p$-subgroup, hence the Sylow $p$-subgroups are a single conjugacy class —
+landmark, and stated in the *stronger* containment form Conrad's Thm. 1.8 gives,
+because the applications use the containment and deriving it afterwards from bare
+conjugacy is extra work); **Sylow III**: $n_p \equiv 1 \pmod p$ and $n_p \mid m$
+where $\lvert G\rvert = p^a m$ (landmark); **Sylow III\***: $n_p = [G : N_G(P)]$
+(Conrad states this separately as III\*, and it is the form every counting
+application actually uses — a separate numbered item); a Sylow $p$-subgroup is
+normal iff $n_p = 1$; **the normaliser-of-a-normaliser lemma**
+$N_G(N_G(P)) = N_G(P)$ (Conrad `sylowpf` Thm. 2.1); **the Frattini argument**
+($N \trianglelefteq G$, $P$ a Sylow $p$-subgroup of $N$ $\Rightarrow$
+$G = N\,N_G(P)$) — *added*, it is Conrad's Lem. 5.8 in disguise, it is three
+lines from Sylow II, and it is what makes the Fitting subgroup and several of the
+order classifications cheap; if $P$ is a normal Sylow $p$-subgroup of a normal
+subgroup $N$ then $P \trianglelefteq G$ (Conrad Lem. 5.8).
+
+*Nilpotence, the Sylow half only.* **the normaliser condition**: in a finite
+nilpotent group every proper subgroup is properly contained in its normaliser
+(proved from the published central-series characterisation, not re-derived);
+**maximal subgroups of a finite nilpotent group are normal of prime index**;
+**a nontrivial finite $p$-group has a subgroup of index $p$** — stated as its own
+item in the *existence* form, not merely as the normality statement
+`cor-index-p-subgroups-of-finite-p-groups-are-normal` already published at order
+42, which presupposes such a subgroup exists and does not produce one. *This item
+is load-bearing off-page:* it is one of the exactly two group-theoretic inputs to
+the Artin proof of the fundamental theorem of algebra (companion file §II.8), the
+other being Sylow I on this same page. Verified 2026-08-13 that no published item
+supplies it. Proof: $G/[G,G]G^p$ is a nontrivial elementary abelian $p$-group by
+the published nontriviality of the centre, and any index-$p$ subgroup of it pulls
+back;
+**a finite group is nilpotent $\iff$ every Sylow subgroup is normal $\iff$ it is
+the internal direct product of its Sylow subgroups $\iff$ every maximal subgroup
+is normal** (landmark, and the payoff of the page; the internal direct product is
+the published `thm-internal-direct-product-recognition`); the Fitting subgroup is
+the product of the normal Sylow subgroups and is the largest normal nilpotent
+subgroup — *added, cheap once the characterisation is in hand, and it is what
+`group-theory` will want*.
+
+*Applications.* every group of order $pq$ with $p<q$ has a normal Sylow
+$q$-subgroup, and is cyclic when $p \nmid q-1$ and otherwise is the unique
+nonabelian $\mathbb{Z}/q \rtimes \mathbb{Z}/p$ (Conrad Thms. 6.1, 6.3 — **this is
+where AG-3's isomorphism lemma is consumed, and without it the count of
+nonabelian groups is wrong**); no group of order $pq$, $p^2q$, $20$, $30$ or
+$105$ is simple, each by the argument that settles it; **every group of order
+$45$ is abelian** (Conrad Thm. 4.3, a clean two-Sylow argument); a finite group
+all of whose Sylow subgroups are cyclic is metacyclic — **DROPPED** as needing
+more transfer theory than the page can pay for, and recorded here rather than
+silently omitted.
+
+**FS.** the converse of Lagrange — **restated natively, not cited**: the witness
+`ex-a-four-has-no-subgroup-of-order-six` is published on
+`symmetric-groups-and-the-sign-homomorphism-examples`, a **B page and therefore a
+leaf**, so AG-4 proves its own and records the agreement in Remarks with no
+`deps` entry. Note also `cor-converse-of-lagrange-for-finite-abelian-groups` on
+`the-structure-of-finite-abelian-groups`, which is an A-page item and *is*
+citable: the honest framing is that the converse holds for abelian groups, fails
+in general, and Sylow is the partial converse that is true for prime powers —
+three published-or-proved facts that belong in one `fs-` Remark; all subgroups of order $p^k$
+are conjugate for every $k$ (only the Sylow ones are); $n_p = 1$ makes $G$ a
+direct product (it makes $P$ normal, nothing more; the witness is any nonabelian
+$\mathbb{Z}/q\rtimes\mathbb{Z}/p$); **a group of order 42 must have a normal
+Sylow 2-subgroup** — Conrad Rem. 2.3 flags exactly this as the standard
+*misapplication* of the Sylow theorems, and an `fs-` that reproduces a named
+common error is worth more than an invented one; nilpotent and solvable coincide
+— the witness is $S_3$, whose series are published as
+`ex-composition-and-derived-series-of-s-three` on a **B-page leaf**, so the `fs-`
+carries its own two-line refutation ($S_3$ is solvable by the published
+derived-series theorem, and not nilpotent because $Z(S_3)=1$ while a nontrivial
+nilpotent group has nontrivial centre) and cites only A-page items.
+
+**B.** the Sylow subgroups of $S_4$ and $A_5$ enumerated with $n_p$ checked
+against Sylow III; $\operatorname{Aff}(\mathbb{Z}/5)$ with $n_2 = 5$, $n_5 = 1$
+(Conrad Thm. 2.2), citing AG-3's affine-group example; the unique $p$-Sylow of
+$\operatorname{Aff}(\mathbb{Z}/p^2)$; the Heisenberg group over $\mathbb{F}_p$ as
+the unique $p$-Sylow of $GL_3(\mathbb{F}_p)$ (Conrad Thm. 2.7) — the group is
+*used* by `ex-heisenberg-group-is-nilpotent-of-class-two` on
+`composition-series-and-solvable-groups-examples`, a **B-page leaf**, so this
+item constructs it natively; the statements are different in any case, and the
+Remark records that they agree; the classification of groups of order $\le 15$ tabulated, each order
+justified by the theorem that settles it; groups of order $30$ classified into
+the four types (Conrad Cor. 5.10); a group of order $12$ that is not nilpotent
+($A_4$). **The upper and lower central series of $D_4$ is REMOVED from this B
+page** — it is published as
+`ex-upper-and-lower-central-series-of-the-dihedral-group-of-order-eight` at order
+67 (§II.2.b), and duplicating it would be the two-notions defect on a worked
+example.
+
+**Traps.** (i) The fixed-point congruence is published; cite it, and do not let a
+proof re-derive it inline. (ii) Trap (ii) of Part I is withdrawn — see §II.3.a.
+(iii) Every application carries "finite" explicitly in the Statement, not in
+Remarks. (iv) Sylow II is stated in the containment form; a page that proves only
+"the Sylow subgroups are conjugate" and then uses containment has a gap.
+(v) Wielandt's proof needs $v_p\binom{p^a m}{p^a} = v_p(m)$; that is a real
+computation on the published valuation lemmas and is its own numbered step, not a
+parenthesis.
+
+**Forward references:** NONE load-bearing.
+
+**Revised estimate.** A 22, B 14. Part I's 24 minus the nine nilpotency and
+$p$-group items now published, plus Sylow III\*, the Frattini argument, the
+Fitting subgroup, the fourth clause of the nilpotence characterisation and the
+sharpened Sylow II.
+
+### II.3.c Sources for AG-3 and AG-4
+
+Part I backed both pages on **Wikipedia**, which `CLAUDE.md` §"Source depth and
+the canonical-coverage harvest" (owner, 2026-08-11) no longer permits as a pair's
+primary backing. The debt is discharged here; the harvest is §II.10.
+
+- **Robert B. Ash, *Abstract Algebra: The Basic Graduate Year*, Ch. 5**, read in
+  full. Section headings §5.1–5.8 and named results §5.1.1–5.8.6 transcribed in
+  §II.10. Textbook with a harvestable structure, and legitimately author-hosted.
+  `https://web.archive.org/web/2023/https://faculty.math.illinois.edu/~r-ash/Algebra/Chapter5.pdf`
+  (the live `faculty.math.illinois.edu` host does not respond; the Wayback copy is
+  what was read).
+- **Keith Conrad, "Semidirect products"**, 29 pp, read in full — Thms. 2.1, 3.7,
+  3.11, 4.1, 6.1, 6.3, 7.1 and Lem. 6.2, with Exs. 2.2–2.5, 3.2–3.10, 5.1–5.5.
+  `https://kconrad.math.uconn.edu/blurbs/grouptheory/semidirect-product.pdf`
+- **Keith Conrad, "The Sylow theorems"** (7 pp) and **"Consequences of the Sylow
+  theorems"** (20 pp), read in full — Sylow I/II/III/III\*, Thm. 2.1, and the
+  classification results Thms. 2.1–5.12.
+  `https://kconrad.math.uconn.edu/blurbs/grouptheory/sylowpf.pdf`,
+  `https://kconrad.math.uconn.edu/blurbs/grouptheory/sylowapp.pdf`
+- Rotman, *An Introduction to the Theory of Groups*, retained from Part I for the
+  **ordering** decision only (§13).
+
+**Convention disagreements recorded.** (1) $D_n$ vs $D_{2n}$ for the group of
+order $2n$: Conrad, Ash and Dummit–Foote write $D_{2n}$; Rotman and Artin write
+$D_n$. **The library adopts $D_n$ of order $2n$**, and the definition item states
+the order explicitly so no reader has to infer it. (2) Sylow III is split by
+Conrad into III ($n_p \equiv 1 \bmod p$, $n_p \mid m$) and III\*
+($n_p = [G:N_G(P)]$); Ash §5.4.3 states them together. **The library follows
+Conrad and splits them**, because the two have different proofs and the
+applications cite III\*. (3) Ash §5.4.3 proves Sylow I by the subset-counting
+argument and derives Cauchy as Cor. 5.4.4; the library's Cauchy is already
+published independently, so the derivation is recorded as an agreement Remark
+rather than proved again.
+
+
+---
+
+## II.4 MOD-3 enrichment — `tensor-products-of-modules`
+
+Part I scaffolded A 21, B 12; the page is unauthored. Two things changed under
+it: MOD-2 shipped "enough injectives" (§II.1.c.8), which Part I had homed here,
+and the source harvest (`aa-harvest-modules.md`) is sharper than Part I's
+Wikipedia backing about what the construction actually produces.
+
+### II.4.a Three corrections, one of which revises an owner-recorded decision
+
+1. **"Every module embeds in an injective" is NOT on this page.**
+   `thm-module-categories-have-enough-injectives` is **published on MOD-2**, via
+   `lem-coinduced-modules-are-injective` and
+   `lem-every-abelian-group-embeds-in-a-divisible-group` — the coinduction route,
+   which needs no Hom–tensor adjunction at all. Part I's trap (iii) and §9's
+   routing are both discharged. MOD-3 must not re-mint it, and the Hom–tensor
+   adjunction is now wanted for its own sake rather than as a means to it.
+
+2. **The tensor product of a right and a left module over a noncommutative $R$ is
+   only an ABELIAN GROUP.** Wisbauer 12.2 builds $M\otimes_R N$ as a quotient of
+   the free $\mathbb{Z}$-module on $M\times N$, not of a free $R$-module, and an
+   $S$-module structure comes from a **bimodule** structure, never from $R$
+   itself. Part I's denial 11 got the commutativity point right and stated it as
+   though the issue were only the module structure; the sharper statement is that
+   *the underlying object changes*, and the page's first theorem must say so.
+
+3. **AL-D7's blanket "no bimodules" is narrowed, not kept.** It is unworkable as
+   stated: extension of scalars along $R\to S$ cannot be *stated* honestly
+   without the bimodule, and `monoidal-abelian-categories` will want the notion.
+   **MOD-3 mints `def-bimodule` — one definition, no theory** — and uses it only
+   to give $S\otimes_R M$ its $S$-module structure. What AL-D7 was actually
+   protecting is RT-4, and that protection survives intact: **RT-4 keeps the
+   function model of induction as primary** and now merely *may* record the
+   agreement with $k[G]\otimes_{k[H]}W$ in a Remark (§II.7.d).
+
+### II.4.b The well-definedness obligation, which is the page's reason to exist
+
+Wisbauer's treatment enumerates the checks in two groups, and the harvest
+transcribes all ten. Condensed to what must be numbered items here: **(i)** the
+relations quotiented out are exactly the balanced ones, and the quotient is by a
+subgroup of the free $\mathbb{Z}$-module, so the construction is well defined
+before any module structure is mentioned; **(ii)** $m\otimes n$ denotes a coset
+and the map $M\times N \to M\otimes_R N$ is balanced but **not** injective and
+**not** surjective onto anything but the generating set; **(iii)** every map out
+of $M\otimes_R N$ is produced by the universal property from a balanced map, and
+**never** by writing a formula on elementary tensors. Obligation **#19** of
+Part I is exactly (iii) and it is the single most-cited item in the whole module
+block: RT-3's $g(v\otimes w)=gv\otimes gw$ and every base-change map depend on
+it. Wisbauer's own warning — that one may not argue by choosing a representation
+of an element as a sum of elementary tensors, because the representation is not
+unique — is the sentence to put in the item's Remark.
+
+### II.4.c The item list, as enriched
+
+**DEFS.** $R$-balanced map; for commutative $R$, $R$-bilinear map;
+**`def-bimodule`** (§II.4.a.3); **$M\otimes_R N$** by the construction;
+elementary tensor; the $R$-module structure for commutative $R$; **flat module**;
+extension of scalars $S\otimes_R M$; **$\operatorname{Hom}_R(M,N)$ as an
+$R$-module** for commutative $R$ (§II.1.d — MOD-2 published only
+`def-hom-groups-and-induced-hom-maps`, the abelian group, so the module structure
+is minted here); **$R$-algebra**, both faces (a ring $A$ with $R\to Z(A)$; an
+$R$-module with a compatible bilinear product), one stated and the other proved
+equivalent, since RT-1 uses both; the tensor product of $R$-algebras.
+
+**THMS.** the construction and its well-definedness (§II.4.b); **the universal
+property** (landmark); **uniqueness up to a unique isomorphism**, which is what
+licenses the definite article; **#19**, the guard, with an explicit demonstration
+that a formula on elementary tensors can fail to be well defined; **the two
+dictionary theorems** (obligation #14, §II.1.d): $\mathbb{Z}$-modules are exactly
+abelian groups and $F$-modules are exactly $F$-vector spaces, both directions,
+citing the published items — *homed here rather than on MOD-1, which shipped
+without them*; $R\otimes_R M\cong M$; commutativity and associativity for
+commutative $R$; $\big(\bigoplus_i M_i\big)\otimes N \cong \bigoplus_i(M_i\otimes N)$
+for **arbitrary** families; $R^m\otimes R^n\cong R^{mn}$ with the product basis,
+and $\dim(V\otimes W)=\dim V\dim W$ over a field; $M\otimes_R R/I\cong M/IM$;
+**right exactness** (landmark); **$-\otimes N$ is not left exact**, as a numbered
+counterexample; free $\Rightarrow$ projective $\Rightarrow$ flat, with both
+implications strict; **the Hom–tensor adjunction** (landmark); extension of
+scalars is left adjoint to restriction; the tensor product of $R$-algebras is an
+$R$-algebra.
+
+**FS.** $m\otimes n=0$ implies $m=0$ or $n=0$ ($2\otimes\bar1=0$ in
+$\mathbb{Z}\otimes_{\mathbb{Z}}\mathbb{Z}/2$); every element of $M\otimes N$ is
+an elementary tensor (a rank-2 tensor in $F^2\otimes F^2$);
+$\mathbb{Z}/m\otimes\mathbb{Z}/n\ne0$ always (it is $\mathbb{Z}/\gcd(m,n)$);
+tensoring preserves injections (the $\mathbb{Z}\xrightarrow{2}\mathbb{Z}$
+sequence against $\mathbb{Z}/2$); **flat implies projective** — refuted by
+$\mathbb{Q}$ as a $\mathbb{Z}$-module, which is flat and not projective, and it
+is the item that stops the implication chain being read as a chain of
+equivalences; the tensor product of two nonzero modules is nonzero.
+
+**B.** $\mathbb{Z}/m\otimes\mathbb{Z}/n$ computed; $\mathbb{Q}\otimes_{\mathbb{Z}}
+\mathbb{Z}/n=0$; a rank-2 tensor proved not elementary; the failure of left
+exactness traced through; $\mathbb{Q}$ shown flat and not projective;
+extension of scalars $F^n\to K^n$; $\mathbb{C}\otimes_{\mathbb{R}}\mathbb{C}
+\cong\mathbb{C}\times\mathbb{C}$ as an $\mathbb{R}$-algebra — **Part I flagged
+this as needing a check on whether $\mathbb{C}$'s $\mathbb{R}$-algebra structure
+is available; it is**: `cor-complex-numbers-are-a-quadratic-real-extension` and
+`thm-complex-numbers-are-the-real-coordinate-plane` are published at snapshot 54,
+so the item stands and Part I's escape hatch is not needed.
+
+**Traps.** (i) #19 is the defect this page exists to prevent. (ii) Keep "the
+tensor product exists over any $R$" and "it is an $R$-module" apart — §II.4.a.2.
+(iii) Enough injectives is **published on MOD-2**; do not plant it here.
+(iv) Flat, projective and free are three distinct conditions and the page states
+both non-implications, not just the implications.
+
+---
+
+## II.5 MOD-4 enrichment — `chain-conditions-and-semisimple-modules`
+
+Part I scaffolded A 23, B 11; unauthored. **This is the seam-critical page of the
+expansion file**: `subjects-01-SEAMS.md` §4 assigns `def-noetherian-module`,
+`def-artinian-module` and `def-noetherian-ring` to this track, minted here, and
+the wave-2 `commutative-algebra` track cites all three and builds the theory from
+Hilbert basis onward. Getting the definitions right is worth more than any other
+single decision in this file.
+
+### II.5.a The definition of Noetherian, and a choice cost nobody flags
+
+Every source harvested proves "every submodule is finitely generated $\iff$ ACC
+$\iff$ the maximal condition" by choosing, from a non-stabilising chain, an
+infinite strictly increasing sequence — **which is dependent choice** — and
+**not one of them flags it.** Since this library mints the definition for every
+track that follows, the disposition matters:
+
+> **MOD-4 defines a Noetherian module by "every submodule is finitely generated",
+> which is choice-free, and proves the equivalence with ACC and with the maximal
+> condition as a theorem whose Facts name DC where it is used.**
+
+The direction "ACC $\Rightarrow$ every submodule f.g." is the one that needs DC;
+the converse is choice-free. Stating the definition on the choice-free side means
+`commutative-algebra`'s Hilbert basis theorem, and every f.g.-module argument in
+this library, rests on a definition with no hidden axiom, and the DC cost is
+isolated in exactly one biconditional where a reader can see it. **Artinian is
+defined by DCC**, since it has no f.g. analogue, and its own maximal/minimal
+condition equivalence carries the same flag.
+
+### II.5.b Wedderburn–Artin: the route changes
+
+Part I planned the double-centraliser proof and the commission's brief asked
+which route is cheapest. The harvest's answer overturns the framing:
+**Crawley-Boevey §1.9 proves Wedderburn–Artin for an arbitrary ring from four
+cheap prerequisites — Schur's lemma, $\operatorname{End}_R(R)\cong R^{\mathrm{op}}$,
+$\operatorname{End}_R(\bigoplus X_i)$ as a matrix of Hom-groups, and "a
+semisimple f.g. module is a finite direct sum of simples" — with no density
+theorem and no chain condition.** Ash's route costs thirteen steps. **MOD-4 takes
+Crawley-Boevey's**, and the four prerequisites become four numbered items, which
+is the right shape anyway: $\operatorname{End}_R(R)\cong R^{\mathrm{op}}$ is a
+theorem every later page wants, and the matrix description of
+$\operatorname{End}$ of a direct sum is what makes $M_n(D)$ appear rather than
+being pulled out of a hat.
+
+### II.5.c The item list, as enriched
+
+**DEFS.** **`def-noetherian-module`** (every submodule f.g.) and
+**`def-artinian-module`** (DCC), per §II.5.a; **`def-noetherian-ring`** and
+Artinian ring, with the left/right convention stated once and cited thereafter;
+**`def-composition-series-of-a-module`** and **length** (namespaced —
+`def-composition-series-composition-factors-and-length` is published and is the
+group notion); **semisimple module**; **semisimple ring** (${}_RR$ semisimple);
+socle; the opposite ring $R^{\mathrm{op}}$; **integral element** and **algebraic
+integer** (obligation #16, moved here — §II.1.d); $\operatorname{End}_R(M)$ as a
+ring.
+
+**THMS.**
+*Chain conditions.* the three-way equivalence of §II.5.a, with the DC flag;
+$N$ and $M/N$ Noetherian $\iff$ $M$ Noetherian, and the same for Artinian
+(landmark — the biconditional, since the forward direction is what makes finite
+direct sums work and the reverse is what makes quotients cheap); a finite direct
+sum of Noetherian modules is Noetherian; a f.g. module over a Noetherian ring is
+Noetherian; **$M$ has a composition series $\iff$ $M$ is both Noetherian and
+Artinian** (landmark); **Jordan–Hölder for modules**
+(`thm-jordan-holder-theorem-for-modules`, namespaced), with a Remark identifying
+it as the analogue of the published group theorem and stating honestly that
+neither implies the other.
+
+*The isomorphism theorems MOD-1 did not ship* (§II.1.d): the **second and third
+isomorphism theorems for modules** and the **correspondence theorem** — homed
+here because MOD-4's Noetherian and Jordan–Hölder arguments are their first real
+consumer, each with a Remark naming the published
+`thm-first-isomorphism-theorem-modules` it extends.
+
+*Endomorphisms and semisimplicity.* $\operatorname{End}_R(M)$ is a ring and
+**$\operatorname{End}_R(R)\cong R^{\mathrm{op}}$** (the item whose $\mathrm{op}$
+is the whole reason Wedderburn's statement carries division *rings* and not
+fields); $\operatorname{End}_R(\bigoplus_{i} X_i)$ is the ring of matrices of
+$\operatorname{Hom}$-groups; **the equivalence of the three definitions of
+semisimple** (sum of simples / direct sum of simples / every submodule is a
+direct summand) — landmark, with the Zorn cost named, **and with the finite-length
+case stated separately as choice-free**, because that is the only case $k[G]$
+needs and RT-2 must cite the cheap one; submodules and quotients of semisimple
+modules are semisimple; **$R$ semisimple $\iff$ every $R$-module is semisimple
+$\iff$ every short exact sequence splits $\iff$ every module is projective**;
+a semisimple ring is Noetherian and Artinian; **Schur's lemma** (landmark —
+RT-1 cites this exact item); **Wedderburn–Artin** (landmark, by §II.5.b), with
+$(n_i,D_i)$ unique up to permutation; $M_n(D)$ is semisimple; the simple modules
+of $\prod_i M_{n_i}(D_i)$ are the $D_i^{n_i}$, one per factor — the item RT-2
+turns into "the number of irreducibles".
+
+*Integrality* (obligation #16, and the load-bearing row of §II.1.d). Part I homed
+this on MOD-2 with an explicit escape hatch — "if Beta finds MOD-2 over the cap,
+this block moves to MOD-4 and the move is recorded". **MOD-2 shipped without it
+and without the record; Part II records the move: it is MOD-4's.** $\alpha$ is
+integral over $R$ $\iff$ $R[\alpha]$ is a f.g. $R$-module (**the determinant
+trick**, via the published `thm-adjugate-identity-over-a-commutative-ring` —
+verified on disk to be stated over a commutative ring, so Part I's trap (iii) is
+discharged); **the integral elements form a subring**; **a rational algebraic
+integer is a rational integer**, citing the published rational-root corollary;
+every f.g. nonzero module has a **maximal proper submodule** (Zorn), with
+$\mathbb{Q}$ as the witness that "finitely generated" is not decoration.
+**RT-4 cites all three integrality items from here**, and its $\chi_i(1)\mid|G|$
+theorem is what they were built for.
+
+**FS.** Artinian implies Noetherian **for modules** (false — and Part I's doubt
+about whether the Prüfer group $\mathbb{Z}(p^\infty)$ is constructible in scope
+is resolved: it is, as the $p$-power torsion of $\mathbb{Q}/\mathbb{Z}$, and
+$\mathbb{Q}/\mathbb{Z}$ is already used on MOD-2's published divisible-module
+items, so **the witness is in scope and the drop is withdrawn**); every module
+has a composition series; a semisimple ring is commutative ($M_2(F)$);
+a Noetherian ring has Noetherian subrings — false, and the honest witness is a
+polynomial ring in infinitely many variables inside its fraction field, which is
+in scope; **a right Noetherian ring is left Noetherian** — the standard witness
+is the triangular ring $\begin{psmallmatrix}\mathbb{Z}&\mathbb{Q}\\0&\mathbb{Q}\end{psmallmatrix}$,
+but the harvest **could not source it** (PART 5) and explicitly warns against
+scaffolding it from memory. **Disposition: state the `fs-` and verify the witness
+against a source at authoring, or drop it and keep only the module-level
+asymmetry.** Recorded rather than assumed.
+
+**B.** $\mathbb{Z}$ Noetherian and not Artinian; the Prüfer group Artinian and
+not Noetherian; the non-Noetherian ring $(\mathbb{Z}/2)^{\mathbb{N}}$ from MOD-1;
+$M_n(F)$ decomposed into its $n$ minimal left ideals of column vectors;
+$F\times F$ as the smallest interesting semisimple ring; the length of
+$\mathbb{Z}/p^k$; $\sqrt2$ and $\tfrac{1+\sqrt5}2$ shown to be algebraic integers
+and $\tfrac12$ shown not to be; **Specker's theorem** ($\mathbb{Z}^{\mathbb{N}}$
+is not free) named in a Remark as a warning that infinite products are not
+infinite direct sums — *added from the harvest, which found it while looking for
+something else*.
+
+**Traps.** (i) The Jacobson radical is denial 8 and no statement may mention it;
+the Crawley-Boevey route needs it nowhere, which is a further argument for
+§II.5.b. (ii) "Semisimple ring" is a property of ${}_RR$ and every use checks the
+side. (iii) The Zorn cost in the semisimplicity equivalence is real and the
+finite-length case must be separately stated for RT-2. (iv) The DC flag of
+§II.5.a goes in the theorem's Facts, not in a Remark.
+
+---
+
+## II.6 MOD-5 enrichment — `modules-over-a-pid-and-canonical-forms`
+
+Part I scaffolded A 23, B 13; unauthored. Two of its recorded risks are now
+resolved and one proof route is corrected.
+
+**Trap (i) is discharged.** Part I warned that the structure theorem must not be
+proved via $\operatorname{Frac}(R)$ unless amendment §8.3 landed. **It landed and
+more**: `the-field-of-fractions-and-localisation` is published with 22 items
+(§II.1.c.4). So $\operatorname{Frac}(R)$ is available. **MOD-5 should nonetheless
+take the choice-free induction route** for the structure theorem and use
+$\operatorname{Frac}(R)$ only for the rank, because the induction is what gives
+the invariant factors, and Part I's instinct was right for a reason it did not
+state.
+
+**Smith normal form: the two proofs are different in kind, and the Statements
+must differ.** Ash §4.5 is over $\mathbb{Z}$ and is admittedly informal in his own
+words; Conrad's PID proof replaces row reduction by "take a maximal element of
+$\{\varphi(M')\}$", justified by finiteness of divisors in a UFD — so it is
+**non-constructive but choice-free**. The Euclidean-domain proof is an algorithm.
+**MOD-5 states them as two items**: existence over a PID (non-constructive), and
+the algorithm over a Euclidean domain on the B page. A Statement carrying a PID
+hypothesis with a Euclidean proof is the defect to avoid, and Part I's trap (ii)
+named it correctly.
+
+**The rest of Part I's MOD-5 stands**, with these additions and pins.
+`def-invariant-factor-data-for-a-finite-abelian-group` and
+`def-elementary-divisor-data-for-a-finite-abelian-group` are **published** on
+`the-structure-of-finite-abelian-groups`, so MOD-5's versions are namespaced
+(`def-invariant-factors-of-a-module-over-a-pid`, and likewise for elementary
+divisors) and obligation **#26** — the agreement item against the published
+finite-abelian-group classification — is **mandatory, not optional**: without it
+the library carries two classifications of finite abelian groups saying nothing
+to each other. The same holds for **#25** against LA-10's Jordan form.
+
+**One further addition, from §II.1.d.** MOD-1 published
+`def-annihilator-and-torsion-of-a-module`, which defines the torsion **subset**.
+"Over a domain the torsion elements form a submodule" is **not** published and is
+minted here, as the first item of the torsion block — it is one line, and every
+statement of the structure theorem presupposes it.
+
+**Two pins Part I left open.** (i) The `fs-` "two matrices with the same
+characteristic and minimal polynomial are similar" is **homed on LA-10's B page**
+(companion file §II.6), which is a B-page leaf, so MOD-5 restates its own with an
+agreement Remark and no `deps` edge — Part I's instruction, now with the witness
+named ($J_2\oplus J_2$ against $J_2\oplus J_1\oplus J_1$ in dimension 4).
+(ii) **`triangularisation-and-jordan-canonical-form` stays in MOD-5's `requires`**
+and the cyclic-vector theorem is cited from there, not reproved — the companion
+file §II.6.b explains why LA-10 must own it (GA-3 needs it and sits below MOD-5).
+
+---
+
+## II.7 RT enrichment — the representation-theory block, RT-1 … RT-4
+
+All four pages are unauthored. Part I scaffolded them over $\mathbb{C}$ almost
+throughout, with "algebraically closed" as the standing hypothesis and the
+Hermitian inner product as the character pairing. **The source harvest
+(`aa-harvest-representation-theory.md`) overturns both choices**, and the
+replacement is strictly more general, strictly cheaper, and removes the block's
+dependence on analysis almost entirely. This section states the four changes and
+then the per-page consequences; everything in Part I not contradicted here
+stands.
+
+### II.7.a Change 1 — the character pairing is BILINEAR, not Hermitian
+
+Part I's obligation #32 defined
+$\langle\varphi,\psi\rangle=\frac1{|G|}\sum_g\varphi(g)\overline{\psi(g)}$ and
+required it to be discharged against the published inner-product definition.
+**Take instead the bilinear pairing**
+$$\langle\varphi,\psi\rangle=\frac1{|G|}\sum_{g\in G}\varphi(g^{-1})\psi(g).$$
+Teleman Remark 8.18 recommends exactly this; Webb §3.2 derives it and warns that
+the extra equalities of the Hermitian form hold only for *actual characters*;
+Milne quarantines the Hermitian version behind "$F$ a subfield of $\mathbb{C}$
+stable under conjugation".
+
+Why it is better here, in one sentence: **the central theorem
+$\langle\chi_V,\chi_W\rangle=\dim_k\operatorname{Hom}_{kG}(V,W)$ is provable with
+no conjugation, no ordering and no $\mathbb{C}$** (Webb Lemmas 3.2.1 and 3.2.2),
+so the whole orthogonality apparatus becomes a statement about an arbitrary field
+of good characteristic rather than a statement about $\mathbb{C}$ that happens to
+generalise.
+
+Three consequences that must be carried through:
+
+- **Obligation #32 lapses**, and `inner-product-spaces-and-orthogonality` is
+  **removed from RT-3's `requires`**. RT-3 no longer cites the library's inner
+  product at all. (The companion file §II.7.a records this from the other side.)
+- Over a general $k$, $\langle\chi_V,\chi_V\rangle=\dim_k\operatorname{End}_{kG}(V)$,
+  so **"$\langle\chi,\chi\rangle=1$ iff irreducible" is FALSE without a splitting
+  hypothesis.** Part I stated it unhedged. It becomes a theorem *over a splitting
+  field*, and the general statement is the $\operatorname{End}$ formula. This is
+  the single most likely false statement in the block and it now has an `fs-`.
+- $\chi(g^{-1})=\overline{\chi(g)}$ survives, but as a **$\mathbb{C}$-specific
+  lemma** used for computation, not as the definition's backbone.
+
+### II.7.b Change 2 — the hypothesis is "$k$ is a splitting field", not "algebraically closed"
+
+Webb's device, and it costs nothing: call $k$ a **splitting field for $G$** when
+$\operatorname{End}_{kG}(S)=k$ for every simple $kG$-module $S$. Every theorem
+Part I stated for algebraically closed $k$ holds under this strictly weaker
+hypothesis, and the proofs are the same. Algebraically closed fields are splitting
+fields by Schur (b); $\mathbb{C}$ is the reader's example.
+
+**And the tempting shortcut is not available.** "If $k$ contains $\mu_e$ for $e$
+the exponent of $G$, then $k$ is a splitting field" is **Brauer's theorem**, which
+Webb states as Thm. 9.2.7 **without proof** because it needs Brauer induction.
+**Do not present it as proved, and do not let a scaffold quietly use it.** Record
+it by name in a Remark as a theorem the library does not establish. This is
+precisely the trap the self-contained-scope rule exists to catch, and it would
+have been easy to walk into given how often the statement is quoted.
+
+**Consequence for placement.** Part I fixed the whole block's position by
+RT-1's Schur (b) needing an eigenvalue, hence the fundamental theorem of algebra
+at X-1. Under §II.7.b the *theory* needs no such thing — only the concrete
+$\mathbb{C}$-based examples and character tables do. So
+`the-fundamental-theorem-of-algebra` **stays** in RT-1's `requires` (the B pages
+genuinely use it), but the block is no longer *logically* pinned above it, and a
+future level that wanted to re-home RT lower now can. Worth recording, because
+Part I's AL-D4 presented that pin as forced.
+
+### II.7.c Change 3 — degree-divides-order is analysis-free; Burnside is not
+
+The harvest separates two theorems Part I treated as one difficulty.
+
+- **$\chi_i(1)$ divides $|G|$ is entirely analysis-free** (Webb 3.5.1–3.5.4). It
+  needs the algebraic integers, that $\mathbb{Z}$ is integrally closed in
+  $\mathbb{Q}$, the central characters $\omega_i$, and $\langle\chi_i,\chi_i\rangle=1$.
+  Every one of those is available: the integrality block is **MOD-4's** (§II.5.c)
+  and the rational-root corollary is published. So RT-4 proves it at the weaker
+  hypothesis, and it is not the deep-water item Part I made it.
+- **Burnside's $p^aq^b$ theorem is NOT analysis-free.** All three harvested proofs
+  turn on: the average of $n$ roots of unity has modulus $\le1$, with equality iff
+  they are all equal. The harvest found no algebraic substitute. **But the cost is
+  low**, because the library's published `lem-complex-conjugation-and-modulus-laws`
+  already proves $|zw|=|z||w|$ and $|z+w|\le|z|+|w|$ from ordered-field algebra
+  and Lagrange's identity. What is missing is the **equality case** of the
+  triangle inequality and $|\zeta|=1$ for $\zeta^n=1$ — two small lemmas, both
+  algebraic. **Denial 1 is therefore un-deferred** (§II.1.c.9 already licensed it
+  via GA-3's cyclotomic theory) **and Burnside is scaffolded on RT-4, stated over
+  $\mathbb{C}$ only**, with the two missing lemmas as its own numbered items and
+  the $\mathbb{C}$ hypothesis in the Statement and the title.
+
+### II.7.d Change 4 — induction, and the two models are reconcilable after all
+
+AL-D7 chose the function model to avoid bimodules. That choice **stands as
+primary**, but §II.4.a.3 now mints `def-bimodule`, and the harvest supplies the
+exact citable reconciliation: Webb Prop. 4.3.1 gives
+$k[G]\otimes_{k[H]}V\cong\bigoplus_i g_i\otimes V$, and Prop. 4.3.2 is the
+converse characterisation — which *is* Serre's definition. So **RT-4 defines
+induction by the function model, proves the direct-sum-over-a-transversal
+description, and records the tensor description in a Remark** citing both
+propositions. Nothing is built twice and the reader is not left with two
+unrelated constructions.
+
+The harvest also settles three things Part I left hedged: **Frobenius
+reciprocity, transitivity of induction and the projection formula hold over an
+arbitrary commutative ring**, so none of them needs a characteristic hypothesis;
+and **Mackey's irreducibility criterion is affordable** — everything it needs is
+on RT-4's path anyway — so Part I's implicit omission is withdrawn and Mackey is
+**included**.
+
+### II.7.e Per-page consequences
+
+**RT-1** (`the-group-algebra-and-representations`). Part I's list stands. Change:
+Schur (b) is stated **over a splitting field** with the algebraically-closed case
+as a corollary, and the definition of a splitting field is minted here since RT-2
+and RT-3 both use it. Part I's `fs-` "Schur (b) holds over any field" keeps its
+witness $\mathbb{R}[\mathbb{Z}/3]$, and Part I's instruction to check the witness
+closes below the page is discharged: the $2$-dimensional real irreducible has
+$\operatorname{End}\cong\mathbb{C}$, and $\mathbb{C}$ is published at snapshot 54.
+
+**RT-2** (`maschkes-theorem-and-complete-reducibility`). Part I's list stands, with
+Wedderburn read at splitting-field generality. Two pins: the Zorn-free
+finite-length case of the semisimplicity equivalence is cited from MOD-4
+(§II.5.c), as Part I's trap (iii) requires; and AL-D6's question — whether "every
+element of finite order acts diagonalisably" goes by the Maschke+Schur route or
+by separability — is now a genuine **choice**, since §II.1.c.1 established that
+the formal derivative and polynomial separability are published. **Take the
+Maschke+Schur route** and say why in a Remark: it needs no separability theory,
+and it keeps the item's hypothesis at $\operatorname{char}k\nmid|G|$, which is
+the hypothesis already in force on the page.
+
+**RT-3** (`characters-and-the-orthogonality-relations`). Reshaped by §II.7.a. The
+page opens by fixing $G$ finite, $\operatorname{char}k\nmid|G|$, $k$ a splitting
+field, all modules finite-dimensional — **not** $k=\mathbb{C}$ — and states which
+later items add $k=\mathbb{C}$. `requires` loses
+`inner-product-spaces-and-orthogonality` and keeps `tensor-products-of-modules`
+(for $\chi_{V\otimes W}=\chi_V\chi_W$, where **#19 is cited**). New `fs-`: the
+$\langle\chi,\chi\rangle=1$ criterion stated without a splitting hypothesis.
+Part I's trap (iv) — that $A_5$'s character table may not close cheaply — is
+resolved in the other direction and the table is **kept**: AG-1's published
+`thm-alternating-conjugacy-class-splitting-criterion` gives the two classes of
+$5$-cycles, and the golden-ratio entries live in $\mathbb{Q}(\sqrt5)$, which
+`splitting-fields` supplies. The **$D_4$/$Q_8$ shared character table** is the
+block's landmark counterexample and Webb Appendix B carries it with a proof of
+why the two coincide — *note Webb writes $D_8$ for the group of order 8, which is
+this library's $D_4$ under the convention fixed in §II.2.b.*
+
+**RT-4** (`induced-representations-and-frobenius-reciprocity`). Reshaped by
+§II.7.c and §II.7.d. Additions: **Mackey's irreducibility criterion**; the two
+small $\mathbb{C}$-lemmas Burnside needs; **Burnside's $p^aq^b$ theorem itself**,
+promoted from a scope denial to a proved landmark. Removals: none. Part I's
+`fs-` note that Burnside "is NOT stated" is **withdrawn** — and this is exactly
+the decaying-scope-denial hazard Part I's own trap (iii) warned about, resolved
+by the denial becoming false rather than by rewording it. The integrality items
+are cited from **MOD-4**, not MOD-2 (§II.5.c). "The degree of an irreducible
+divides $[G:Z(G)]$" — Part I's conditional drop — is **kept**, since the central
+character bookkeeping is already in place for $\chi_i(1)\mid|G|$; Conrad's blurb
+"The degree may not divide the size of the group" is the companion warning that
+the analogous statement fails for infinite groups and belongs in a Remark.
+
+---
+
+## II.8 Amendments owed to other scaffolds
+
+This file writes nothing outside itself. Cross-track amendments are consolidated
+in the companion file `research/plan-algebra-track.md` §II.13; the ones
+originating here are listed there under `commutative-algebra` (the three chain-
+condition definitions and the integrality block), `monoidal-abelian-categories`
+(MOD-3's tensor product and `def-bimodule`), and `group-theory` (`def-dihedral-group`,
+and Schur–Zassenhaus left to that track). What follows is internal to the algebra
+track and is addressed to the orchestrator.
+
+1. **Part I decisions this file withdraws or narrows**, each with its reason:
+   - **AL-D6 is withdrawn** as stated (§II.1.c.1): the formal derivative and
+     polynomial separability are published. What survives is a *preference* for
+     the Maschke+Schur route at RT-2, now recorded as a choice (§II.7.e).
+   - **AL-D7 is narrowed, not kept** (§II.4.a.3): MOD-3 mints `def-bimodule`.
+     RT-4's function model of induction stays primary.
+   - **AL-D4's placement argument is weakened** (§II.7.b): the RT block is no
+     longer *logically* pinned above the fundamental theorem of algebra, because
+     the theory runs at splitting-field generality. The `requires` stays, for the
+     B pages.
+   - **Denial 1 (Burnside) is withdrawn** — proved on RT-4 (§II.7.c).
+   - **Denial 7 (Wedderburn's little theorem) is withdrawn** — homed on GA-3.
+   - **Denial 6 (Artin and Brauer induction) stands.** Reinforced: Brauer's
+     splitting-field theorem must not be used either (§II.7.b).
+   - **Denial 8 (the Jacobson radical) stands**, and the Crawley-Boevey route to
+     Wedderburn–Artin needs it nowhere (§II.5.b).
+   - **Part I §4's renumber table is dead** (§II.1.b) and Part I's absolute
+     orders are all stale.
+2. **The integrality block moves from MOD-2 to MOD-4.** Part I planned it on MOD-2
+   with an explicit escape hatch; MOD-2 shipped without it and without the record.
+   §II.5.c records the move. **RT-4 cites MOD-4, not MOD-2**, for all three
+   integrality items.
+3. **MOD-1's and MOD-2's shortfalls are re-homed** by the table in §II.1.d, and
+   every row is now assigned: the module isomorphism and correspondence theorems,
+   $\operatorname{End}_R(M)$ and $\operatorname{End}_R(R)\cong R^{\mathrm{op}}$,
+   maximal submodules and integrality to **MOD-4**; $\operatorname{Hom}$ as a
+   module, $R$-algebras and the dictionary theorems to **MOD-3**; the torsion
+   submodule over a domain to **MOD-5**.
+4. **Wikipedia is no longer adequate backing.** Part I §13 backed MOD-3, MOD-4,
+   MOD-5, AG-4 and RT-2 primarily on Wikipedia, which `CLAUDE.md`'s source-depth
+   rule (owner, 2026-08-11) postdates and forbids as a pair's primary backing.
+   The debt is discharged by the harvest indexed at companion §II.12; Part I §13
+   is left standing as the record of the layering decisions it was actually used
+   for.
+
+---
+
+## II.9 Report to the orchestrator
+
+**The methodological finding, which affects every track.**
+`research/plan-spec.json` **understates what is published**. Its `items` array is
+honest that an *empty* array means the page does not exist — `subjects-01-SEAMS.md`
+§0.3 holds in that direction — but it is **not** a complete inventory of an
+authored page. Seventeen published pages carry more items on disk than the spec
+records (§II.1.a), and 294 published item files are named by no spec page at all,
+`def-field`, `def-abs-value` and `def-integers` among them. **The true index of
+what exists is the union of the spec's `items` arrays and the `items:`/`examples:`
+lists in `library/<cat>/<page>.md`.** Any scaffolder that concludes "X does not
+exist" from the spec alone will re-mint published mathematics. This lane hit it
+twice — once on the free-groups page, once on the automorphism-group block — and
+both times the correction removed items rather than adding them.
+
+**What this file now contains.** Part I (AG, MOD, RT) is unchanged and undeleted.
+Part II reconciles it against disk (§II.1), enriches AG-3 and AG-4 (§§II.2–II.3),
+enriches MOD-3, MOD-4 and MOD-5 (§§II.4–II.6), reshapes the RT block (§II.7), and
+records the withdrawals above (§II.8).
+
+**The three changes with the largest downstream effect.**
+1. **MOD-4 defines Noetherian by the finitely-generated condition**, not by ACC,
+   because the ACC equivalence costs dependent choice and no source flags it
+   (§II.5.a). `commutative-algebra` inherits this definition.
+2. **The RT block runs over a splitting field, not an algebraically closed one,
+   with a bilinear character pairing** (§§II.7.a–II.7.b). This removes RT-3's
+   dependence on the inner-product page entirely and makes the orthogonality
+   theory a statement about an arbitrary field of good characteristic.
+3. **Wedderburn–Artin takes the Crawley-Boevey route** — arbitrary ring, four
+   cheap prerequisites, no density theorem, no chain condition (§II.5.b).
+
+**Sizes.** AG-3: A 21, B 14 (was 17/12). AG-4: A 22, B 14 (was 24/13, after nine
+items were found published). MOD-3, MOD-4, MOD-5 and RT-1…RT-4 keep Part I's
+estimates with the additions above; MOD-4 is the one at risk of the 60-item
+ceiling and should be sized at step 0 before authoring.
+

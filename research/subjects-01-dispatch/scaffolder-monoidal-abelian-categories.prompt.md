@@ -41,6 +41,28 @@ Keep at most **4** running at once — every lane on this host is a 1M-window
 process and the host has 16 GB. Subagents research, read and report; you alone
 write the track file.
 
+### RESUMING AN INTERRUPTED LANE — check this before you write anything
+
+Lanes on this run get killed by the Claude subscription session limit, not by
+failure. On 2026-08-13 four lanes died together at 25–34 minutes with *"You've
+hit your session limit"*, each mid-scaffold, and **every one of them had already
+written real work to disk**. That work is committed and it is yours to continue.
+
+So **before doing anything else, look at the file you own.** If it already exists
+and has content:
+
+- **Read it in full and CONTINUE it. Do not restart it and do not rewrite what is
+  there.** A previous instance of you wrote it against this same brief.
+- Work out where it stopped — the last pair it developed — and carry on from
+  there.
+- If it has a checkpoint section, that is the fastest way in.
+
+**Write incrementally.** Append each pair's section to the file as you finish it,
+rather than composing the whole track and writing once at the end. A lane that
+holds everything in memory until the last minute loses everything when the quota
+ends; a lane that writes as it goes loses at most one section. This is the single
+most valuable habit on this run.
+
 ### Context continuity
 
 At **60% context**, at the next safe boundary, append a checkpoint section to
@@ -119,9 +141,34 @@ working URL for every source.
 A **prose scaffold**: the design document from which a future level build authors
 real items. Not the items themselves.
 
-**You write prose scaffolds only.** You do not write `research/plan-spec.json`,
-anything under `items/` or `library/`, another track's file, or any `status:`
-field. Nothing is spliced or published by this commission.
+### THIS IS NOT A BUILD. Read this twice before you write anything.
+
+The owner's words, 2026-08-13: *"this is NOT a build workflow, we are merely
+building prose scaffolds for future build cycles."*
+
+You are not running steps 0–10 of `LEVELS.md`. There is no level, no batch, no
+Alpha, no judge, no gate to clear, and no publish. **Every artifact of a level
+build is out of scope for you**: no `.pages.json`, no `.coverage.json` file, no
+`.notes.md`, no proof-contract JSON, no touch snapshot, no judge ledger, no
+`precheck`, no `validate-plan`, no `content-policy`, no `impact-audit`. Do not run
+the gates. Do not author a single item.
+
+You write **exactly one thing**: the prose scaffold file named as yours. You do
+not write `research/plan-spec.json`, anything under `items/` or `library/`,
+another track's file, or any `status:` field. Nothing is spliced, authored,
+gated or published by this commission — a future build cycle does all of that,
+and your file is its input.
+
+`briefs/beta-scaffold.md` is referenced above for its **mathematical discipline
+only** — source depth, the coverage harvest as a way of thinking, id reuse,
+proof-obligation and boundary passes, the defect classes this library ships. It
+is a level-build brief and its build mechanics, artifacts and gates are not
+yours. Where it describes producing a build artifact, you produce the
+corresponding *section of your prose scaffold* instead.
+
+A mechanical guard is watching the working tree for writes outside the
+prose-scaffold scope, so a drift into build behaviour will be caught rather than
+discovered later — but it should never fire.
 
 Follow the structure the existing track files use — read
 `research/plan-topology-track.md` or `research/plan-complex-analysis-track.md`

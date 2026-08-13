@@ -5050,3 +5050,3564 @@ passes the source-depth gate** — `arXiv:1312.0542`, `arXiv:math/0512052` and
 `arXiv:2305.05059` are the candidates the harvest identified but did not read.
 Until then this pair is **scaffolded but not source-complete**, and that is
 stated in §29 as a blocker rather than hidden.
+
+---
+
+# 23. The algebraic, spectral and design block
+
+Sources are keyed **A1**–**A10**, distinct from §22's **S1**–**S8**:
+**A1** Brouwer & Haemers, *Spectra of Graphs*
+(`https://www.win.tue.nl/~aeb/2WF02/spectra.pdf`, 255 pp., full text);
+**A2** Spielman, *Spectral and Algebraic Graph Theory*
+(`http://cs-www.cs.yale.edu/homes/spielman/sagt/sagt.pdf`, 400 pp., full text);
+**A3** Stanley, *Topics in Algebraic Combinatorics*
+(`https://math.mit.edu/~rstan/algcomb/algcomb.pdf`, 225 pp., full text);
+**A4** Babai & Frankl, *Linear Algebra Methods in Combinatorics*, v2.2.1, Nov 2024
+(`https://people.cs.uchicago.edu/~laci/babai-frankl-book2024.pdf`, 251 pp., full
+text); **A5** Godsil, *Association Schemes*
+(`https://www.math.uwaterloo.ca/~cgodsil/pdfs/assoc2.pdf`, 242 pp.);
+**A6** Godsil, *Finite Geometry*
+(`https://www.math.uwaterloo.ca/~cgodsil/pdfs/fgeom.pdf`, 81 pp.);
+**A7** Godsil, *Tools from Linear Algebra*
+(`https://www.math.uwaterloo.ca/~cgodsil/pdfs/tools.pdf`, 52 pp.);
+**A8** Alon, "Combinatorial Nullstellensatz", *CPC* **8** (1999) 7–29
+(`https://www.tau.ac.il/~nogaa/PDFS/null2.pdf`);
+**A9** Forbes, "The Bruck–Ryser theorem for projective planes"
+(`https://www.theoremoftheday.org/MathsStudyGroup/ADF-Bruck%20Ryser.pdf`);
+**A10** Godsil, *Symmetries and Eigenvectors*
+(`https://www.math.uwaterloo.ca/~cgodsil/pdfs/mont.pdf`). Verbatim headings and
+the full prerequisite audit: `research/subjects-01-combinatorics-harvest-algebraic.md`.
+
+## 23.0 A correction to §19.2 F2, verified from disk
+
+**F2 is wrong and is withdrawn.** It reported that the library has no cofactor
+expansion, no adjugate and no Cauchy–Binet, having checked
+`determinants-of-matrices-over-a-commutative-ring`. That page indeed has none of
+them — but **the next page does**. `the-determinant-of-a-linear-operator`
+publishes `def-matrix-minors-cofactors-and-adjugate`,
+`thm-laplace-cofactor-expansion`, `thm-adjugate-identity-over-a-commutative-ring`,
+`cor-inverse-matrix-by-adjugate`, `thm-adjugate-is-equivariant-under-similarity`,
+`thm-cramers-rule-over-a-commutative-ring`, `cor-cramers-rule-over-a-field`,
+`def-adjugate-of-a-linear-operator` and `thm-operator-adjugate-identity`, with
+`ex-four-by-four-determinant-by-cofactors-and-row-reduction` and
+`ex-three-by-three-inverse-by-adjugate` on its companion.
+
+Consequences, all in the library's favour:
+
+- GT-7a does **not** mint the minor, the cofactor or the Laplace expansion. It
+  cites `def-matrix-minors-cofactors-and-adjugate` and
+  `thm-laplace-cofactor-expansion`, and the matrix-tree theorem can be *phrased*
+  by citation from the first line.
+- §20 row **#101** is amended: the prerequisite it demands is already met; what
+  remains on GT-7a is only the proof that **all cofactors of $L$ are equal**,
+  which is a genuine lemma and stays.
+- The amendment §19.2 F2 owed to the algebra track is **cancelled** for cofactors
+  and the adjugate. It survives only for **Cauchy–Binet**, which is genuinely
+  absent (`ls items/ | grep -i cauchy-binet` returns nothing) and which GT-7a
+  mints itself — correctly, since it is a determinant identity over a commutative
+  ring whose proof is a multilinearity computation, and A1 Prop. 1.3.5 and A3
+  Thm 9.4 both prove rather than assume it.
+
+The methodological lesson is worth recording for the whole commission: **a
+"missing" result must be searched for by id across `items/`, not by reading the
+one page where you expect it to live.** The library splits determinants across
+two pages and the machinery sits on the second.
+
+## 23.1 Conventions this block adopts, and the disagreements behind them
+
+| # | question | sources disagree | this library adopts | why |
+|---|---|---|---|---|
+| 1 | the Laplacian | $L=D-A$ (A1 §1.1, A2 §3.1, A3 Ch. 9, Godsil–Royle, Biggs) vs. the normalised $\mathcal{L}=I-D^{-1/2}AD^{-1/2}$ (Chung) vs. $L_{\mathrm{rw}}=I-D^{-1}A$ vs. the analysis-facing $A-D$ | **$L=D-A$** as the primary object; $\mathcal{L}$ introduced explicitly and only where conductance needs it, with the relation stated; **$A-D$ never used** | $L=D-A$ is what the matrix-tree theorem needs ($L=NN^{\mathsf T}$), and for $d$-regular $G$ it gives the clean $\mu_i = d-\theta_i$ |
+| 2 | eigenvalue ordering | A1 §1.3: adjacency **decreasing** $\theta_1\ge\dots\ge\theta_n$, Laplace **increasing** $0=\mu_1\le\dots\le\mu_n$; A2 pairs them the same way | **exactly A1's pairing, stated on the page as a numbered convention remark** | the two orders are opposite on purpose — index $1$ is the trivial eigenvalue in both. But it means $\lambda_2$ is the second-*smallest* Laplace and second-*largest* adjacency eigenvalue, which is a live false-statement risk |
+| 3 | design notation | $t$-$(v,k,\lambda)$ (modern: Beth–Jungnickel–Lenz, A1, Stinson, Colbourn–Dinitz) vs. $S_\lambda(t,k,v)$ (older, **$v$ in the reversed position**) vs. $\mathrm{BIBD}(v,b,r,k,\lambda)$ | **$2$-$(v,k,\lambda)$**, defined once, with the other two recorded as synonyms in a `rem-` | the five-parameter form would actively misrepresent the mathematics, because CB-14a *proves* that $b$ and $r$ are determined by $v,k,\lambda$ |
+| 4 | plane "order" | universal for projective planes ($n+1$ points per line, $n^2+n+1$ points); the trap is the **affine** case ($n$ points per line, $n^2$ points) | **state both counts explicitly every time "order" appears** | sources agree; authors routinely conflate them |
+| 5 | strongly regular parameters | $(v,k,\lambda,\mu)$ essentially universal; distance-regular literature writes $(v,k,a_1,c_2)$ | **$(v,k,\lambda,\mu)$**, plus a required `rem-` disambiguating this $\lambda$ from the $\lambda$ of a $2$-$(v,k,\lambda)$ design | the two $\lambda$s appear on adjacent pages and denote different things |
+| 6 | expansion constant | edge expansion $h(G)=\min_{0<\lvert S\rvert\le n/2}\lvert\partial S\rvert/\lvert S\rvert$ (A1 §4.4) vs. conductance $\varphi(S)=w(\partial S)/\min(\operatorname{vol}S,\operatorname{vol}\bar S)$ (Chung, A2 §21.1) vs. **vertex** expansion $\min\lvert N(S)\setminus S\rvert/\lvert S\rvert$ (A2 §27.4) | **$h(G)$ and the adjacency form of Cheeger** for the $d$-regular development; conductance as a `rem-` with the conversion $\varphi=h/d$; vertex expansion kept visibly separate | the adjacency form needs no normalised Laplacian at all. Conflating edge and vertex expansion is a false-statement risk, not a style choice |
+
+---
+
+## CB-13 (ENRICHED). Linear-Algebra Methods: Rank Bounds and Inclusion Matrices
+
+**Anchor:** `linear-algebra-methods-in-combinatorics` (planned, unauthored).
+`requires`: `inner-product-spaces-and-orthogonality`,
+`gaussian-elimination-and-row-reduction`, `finite-counting-and-binomial-coefficients`,
+`inclusion-exclusion-and-the-pigeonhole-principle`,
+`the-field-of-fractions-and-localisation` (no — see traps), `polynomial-rings-and-roots`.
+
+The §11 inventory for this page is kept and extended. Two of its three flagged
+uncertainties are now resolved from disk: `thm-any-two-finite-bases-have-the-same-size`,
+`def-rank-and-nullity`, `thm-rank-nullity`, `cor-matrix-rank-nullity` and
+`thm-row-rank-equals-column-rank` are all published on A pages, so the master
+rank bound may cite rather than rebuild. The third — whether
+`inner-product-spaces-and-orthogonality` homes what this page needs — **cannot be
+resolved, because that page carries 0 items** (§27).
+
+DEFS: the **incidence vector** $v_A\in\mathbb{F}^n$ of $A\subseteq[n]$ over a
+stated field; the standard bilinear form $\langle x,y\rangle=\sum x_iy_i$ on
+$\mathbb{F}^n$, **explicitly as a bilinear form and not as an inner product**;
+the **inclusion matrix** $W_{t,k}(n)$ whose rows are $t$-sets, columns $k$-sets,
+entry $1$ iff containment; an $L$-intersecting family; **VC dimension** and
+shattering (#103); the down-shift (compression) $S_i$ on a set family.
+
+THMS: **the linear-algebra bound** (landmark) — a linearly independent subset of
+an $n$-dimensional vector space has at most $n$ elements, instantiated as this
+page's master lemma, citing `thm-any-two-finite-bases-have-the-same-size` and
+`thm-dimension-of-a-linear-subspace`; the three **independence criteria** that do
+the real work, stated as separate items because every later proof names one of
+them — the **diagonal criterion** (A4 Prop. 2.4), the **triangular criterion**
+(A4 Props. 2.5/2.8/2.9) and the **determinant criterion** (A4 Prop. 2.7);
+**Oddtown** (landmark, A4 Cor. 1.2, A3 Thm 12.2) — sets of odd size with pairwise
+even intersections number at most $n$; **Eventown** (A4 Thm 2.32) — the same with
+all sizes even gives $2^{\lfloor n/2\rfloor}$, by the totally isotropic subspace
+argument $U\subseteq U^{\perp}$, together with A4 Thm 2.33/Cor. 2.34 that every
+*maximal* Eventown system is *maximum*; **the nonuniform Fisher inequality**
+(landmark, A4 Thm 4.1, A3 Thm 12.4) — distinct $C_i\subseteq[n]$ with
+$\lvert C_i\cap C_j\rvert=\lambda\ge1$ constant number at most $n$, by positive
+definiteness of $D+\lambda J$ over $\mathbb{R}$; **Graham–Pollak** (landmark, A1
+Prop. 1.5.1, A4 Thm 1.8, A3 Thm 12.3) — a partition of $E(K_n)$ into complete
+bipartite graphs needs at least $n-1$ parts, by the rank-nullity argument on
+$\sum_{i<j}x_ix_j$; **Sauer–Shelah** (landmark) by **shifting**, with the two
+compression lemmas separated (the shift does not increase $\lvert\mathcal F\rvert$;
+the shift creates no new shattered set) and the downward-closed case as the base;
+the **rank of the inclusion matrix** $\operatorname{rank}_{\mathbb{Q}}W_{t,k}(n)=\binom{n}{t}$
+for $t\le k\le n-t$ (A4 §7.1), and the second, linear-algebraic proof of
+Sauer–Shelah from it (A4 §7.4); **the nonuniform Ray-Chaudhuri–Wilson bound**
+moves to CB-24.
+
+FS: the Oddtown bound $n$ can be improved to $n-1$; Fisher's inequality holds over
+$\mathbb{F}_2$ — the witness is an Eventown family, and the contrast is the
+page's pedagogical payload; a family of VC dimension $d$ has at most $n^d$
+members (the true bound is $\sum_{i<d}\binom{n}{i}$, and the crude power bound
+fails for small $n$ — **the witness must be checked before shipping**); the
+standard bilinear form on $\mathbb{F}_2^n$ is an inner product.
+
+B: Oddtown on $[4]$ with a maximal family; an Eventown family of size
+$2^{\lfloor n/2\rfloor}$ exhibited; the nonuniform Fisher bound applied to the
+Fano plane's line set; $K_4$ partitioned into $3$ complete bipartite graphs and
+the Graham–Pollak bound checked; a family of VC dimension $2$ attaining
+Sauer–Shelah; $W_{1,2}(4)$ written out and its rank computed.
+
+CEX: an even-town family of size $2^{\lfloor n/2\rfloor}$, showing the parity
+hypothesis is doing the work; a set family whose incidence vectors are dependent
+over $\mathbb{F}_2$ and independent over $\mathbb{R}$; a family of $\mathbb{F}_2$
+vectors that is self-orthogonal but not isotropic in the quadratic sense.
+
+Proof strategy where it is not routine. Oddtown is ~6 steps: pair
+$\sum c_iv_i=0$ with $v_j$ and read $c_j=0$ off $\langle v_i,v_i\rangle=1$,
+$\langle v_i,v_j\rangle=0$. **The form on $\mathbb{F}_2^n$ is degenerate and the
+proof never needs it not to be** — it uses bilinearity and the diagonal, nothing
+more. Graham–Pollak is ~8 steps: if $m<n-1$ then the $m+1<n$ equations
+$\sum_ix_i=0$, $\sum_{i\in A_k}x_i=0$ have a nonzero real solution, and
+substituting into
+$\sum_{i<j}x_ix_j=\sum_k(\sum_{A_k}x_i)(\sum_{B_k}x_j)$ gives
+$0=\tfrac12[(\sum x_i)^2-\sum x_i^2]=-\tfrac12\sum x_i^2$.
+
+Traps. (i) **`the-field-of-fractions-and-localisation` is NOT a prerequisite** —
+it appears in the `requires` line above struck through deliberately, as a warning:
+a scaffolder reaching for "the field this page needs" will find it and it is the
+wrong page. What the page needs is a *stated* field, $\mathbb{F}_2$ or
+$\mathbb{R}$, on each theorem. (ii) The field is a hypothesis of every theorem
+here and the `fs-` list exists to make that unmissable. (iii) Sauer–Shelah by
+shifting needs **no algebra at all**; the required `rem-` says so, and the
+inclusion-matrix proof is offered beside it as the page's one deliberate
+two-routes item — which is exactly how A4 organises its own book. (iv) Do not
+write "inner product space over $\mathbb{F}_2$" anywhere on this page. It is a
+false statement and A4's own phrasing avoids it.
+
+Provenance: every Statement `literature-derived` (A4, A3, A7 carry all of them
+verbatim); proofs `literature-derived` except the two-routes `rem-` and the
+`fs-` items, which are `ai-generated` and **non-load-bearing by construction**.
+
+---
+
+## CB-23 (NEW). The Polynomial Method and the Combinatorial Nullstellensatz
+
+**Anchor:** immediately after CB-13's examples page.
+`requires`: `polynomial-rings-and-roots`, CB-13,
+`algebraic-extensions-degree-and-finite-fields`,
+`congruences-and-the-chinese-remainder-theorem`,
+`finite-counting-and-binomial-coefficients`.
+
+This page exists because the harvest's prerequisite audit found the
+Combinatorial Nullstellensatz to be **the single best-value target in the whole
+algebraic group**: two theorems and one lemma, about twelve numbered steps
+together, needing nothing beyond $\mathbb{F}[x_1,\dots,x_n]$, which the library
+publishes. §11 put it on CB-13 as one theorem with "two applications". That
+undersells it by an order of magnitude — Cauchy–Davenport, Chevalley–Warning,
+Alon–Tarsi list colouring and Dvir's finite-field Kakeya theorem all fall out of
+the same lemma, and each is a genuine landmark.
+
+DEFS: the multivariate polynomial ring over a field (cite
+`def-multivariate-polynomial-ring-by-iteration`); $\deg_{x_i}$ and total degree;
+a **multilinear** polynomial and the multilinear reduction of $f$ modulo
+$x_i^2-x_i$ on $\{0,1\}^n$; the **graph polynomial**
+$f_G(x)=\prod_{ij\in E,\,i<j}(x_i-x_j)$; an **Eulerian sub-digraph** of an
+orientation and the Alon–Tarsi numbers $\mathrm{EE}(D)$, $\mathrm{EO}(D)$; a
+**Kakeya set** in $\mathbb{F}_q^n$.
+
+THMS: **the polynomial identity lemma** (landmark; A8 Lemma 2.1, verbatim: if
+$\deg_{x_i}P\le t_i$ for each $i$ and $P$ vanishes on $S_1\times\dots\times S_n$
+with $\lvert S_i\rvert\ge t_i+1$, then $P\equiv0$) — an induction on $n$ whose
+base case is only "a nonzero univariate polynomial of degree $t_1$ has at most
+$t_1$ roots", which is published as part of `polynomial-rings-and-roots`;
+**Combinatorial Nullstellensatz I** (landmark; A8 Theorem 1.1, quoted exactly:
+with $g_i(x_i)=\prod_{s\in S_i}(x_i-s)$, if $f$ vanishes on every common zero of
+$g_1,\dots,g_n$ then $f=\sum h_ig_i$ with $\deg h_i\le\deg f-\deg g_i$, and the
+coefficients stay in any subring $R$ containing those of $f$ and the $g_i$);
+**Combinatorial Nullstellensatz II** (landmark; A8 Theorem 1.2 — if
+$\deg f=\sum t_i$ and the coefficient of $\prod x_i^{t_i}$ in $f$ is nonzero,
+then for any $S_i$ with $\lvert S_i\rvert>t_i$ there are $s_i\in S_i$ with
+$f(s_1,\dots,s_n)\ne0$); **Cauchy–Davenport** (landmark; for $p$ prime and
+nonempty $A,B\subseteq\mathbb{Z}/p$, $\lvert A+B\rvert\ge\min(p,\lvert A\rvert+\lvert B\rvert-1)$),
+whose proof applies CN II to $f(x,y)=\prod_{c\in C}(x+y-c)$ and needs
+$\binom{\lvert A\rvert+\lvert B\rvert-2}{\lvert A\rvert-1}\not\equiv0\pmod p$ —
+**and that non-vanishing is a separate cited step**, not an observation;
+**Chevalley–Warning** (A8 §3) — if $f_1,\dots,f_m\in\mathbb{F}_q[x_1,\dots,x_n]$
+have $\sum\deg f_i<n$ then $p$ divides the number of common zeros, so a common
+zero is never unique; the **Erdős–Ginzburg–Ziv theorem** as a corollary of
+Chevalley–Warning; **Alon–Tarsi** (landmark; A8 §§4–7) — if $G$ has an
+orientation $D$ with $\mathrm{EE}(D)\ne\mathrm{EO}(D)$ then $G$ is
+$(d^+_D+1)$-choosable, proved by applying CN II to $f_G$, with the corollary that
+every planar bipartite graph is $3$-choosable **stated but forward-referenced**,
+since planarity lives above the band (§24, GT-22); **Dvir's finite-field Kakeya
+theorem** (landmark) — a set $K\subseteq\mathbb{F}_q^n$ containing a line in every
+direction has $\lvert K\rvert\ge\binom{q+n-1}{n}\ge q^n/n!$.
+
+FS: CN II holds without the hypothesis that the coefficient of $\prod x_i^{t_i}$
+is nonzero; Cauchy–Davenport holds for $\mathbb{Z}/n$ with $n$ composite (the
+witness is a proper subgroup, and it is the cleanest possible illustration that
+primality is load-bearing); the polynomial identity lemma holds with
+$\lvert S_i\rvert=t_i$; Dvir's bound holds for a set containing a line in every
+direction of a *proper subspace*.
+
+B: CN II applied by hand to a $2$-variable example; Cauchy–Davenport checked
+against $A=B=\{0,1,2\}$ in $\mathbb{Z}/7$; the regular bipartite $3$-choosability
+instance computed for $K_{2,4}$; a Kakeya set in $\mathbb{F}_3^2$ exhibited with
+its size compared to the bound; Chevalley–Warning applied to a single quadratic
+in $3$ variables over $\mathbb{F}_2$.
+
+CEX: a composite modulus where Cauchy–Davenport fails; a polynomial vanishing on
+a grid with $\lvert S_i\rvert=\deg_{x_i}$ that is not identically zero; a graph
+whose every orientation has $\mathrm{EE}=\mathrm{EO}$ (so Alon–Tarsi gives
+nothing) — **check this witness exists before scaffolding it**; if it cannot be
+exhibited, the `cex-` drops and the page says so.
+
+Proof strategy for Dvir, in full, because it is short and the page's best
+advertisement: if $\lvert K\rvert<\binom{n+q-1}{n}=\dim\{$polys of degree
+$\le q-1$ in $n$ variables$\}$ then some nonzero $g$ of degree $d\le q-1$
+vanishes on $K$; for each direction $b$ the univariate $t\mapsto g(a+tb)$ has
+degree $\le q-1$ and vanishes at all $q$ values of $t$, so it is the zero
+polynomial, so its leading coefficient — the top homogeneous part $g_d(b)$ —
+vanishes; hence $g_d$ vanishes on all of $\mathbb{F}_q^n$, and the polynomial
+identity lemma with $\deg g_d<q$ forces $g_d\equiv0$, a contradiction. Ten
+numbered steps, and it re-spends the page's own Lemma.
+
+Traps. (i) A8 Theorem 1.1's "moreover" clause about the subring $R$ is part of
+the statement and is what makes the integer applications legal; do not drop it.
+(ii) The Cauchy–Davenport binomial non-vanishing is where an author will
+hand-wave; it is $\lvert A\rvert+\lvert B\rvert-2<p$ plus Lucas or a direct
+factorial-valuation argument, and it must be a numbered step. (iii) The
+planar-bipartite corollary of Alon–Tarsi is the one forward reference this page
+declares, and it is legal only on a `cor-` — a consequence kind — per SEAMS §5.
+
+Provenance: Statements all `literature-derived` from A8 (read verbatim in full
+for §§1–2). Proofs `literature-derived` for CN I, CN II, the identity lemma,
+Cauchy–Davenport and Dvir; `ai-altered` where a source proof is split across
+lemmas.
+
+---
+
+## CB-24 (NEW). Polynomial Spaces, Ray-Chaudhuri–Wilson and Frankl–Wilson
+
+**Anchor:** immediately after CB-23's examples page.
+`requires`: CB-13, CB-23, `algebraic-extensions-degree-and-finite-fields`,
+`finite-counting-and-binomial-coefficients`.
+
+§11 recorded the Frankl–Wilson theorem as **DENIED** (§9) on length grounds. That
+denial is **withdrawn**, and the reason is a fact §9 did not have: A4's preface
+states that its §§5.4 and 5.6 "together give a complete and self-contained proof"
+of the Kahn–Kalai disproof of Borsuk's conjecture, and the harvest's step audit
+confirms the chain is [B] — roughly 15–20 numbered steps for modular
+Ray-Chaudhuri–Wilson once the multilinearisation lemma is in hand, which CB-23
+already supplies. Withdrawing the denial is the self-contained-scope rule working
+as intended: the machinery was buildable and "it would have taken three more
+lemmas" was never a licence to drop it.
+
+DEFS: a **polynomial space** — a space of functions on a finite domain spanned by
+polynomials, with its dimension; the **multilinearisation** map (A4 Prop. 5.16)
+and the space of multilinear polynomials of degree $\le s$ in $n$ variables, of
+dimension $\sum_{i\le s}\binom{n}{i}$; an **$L$-intersecting** and a **modular
+$L$-intersecting** family; the **$\pm1$ cube** construction and the diameter of a
+bounded subset of $\mathbb{R}^d$; **Borsuk's number** $f(d)$ (A4 Thm 5.23) — the
+least $m$ such that every bounded subset of $\mathbb{R}^d$ splits into $m$ sets of
+strictly smaller diameter.
+
+THMS: **the multilinearisation lemma** (A4 Prop. 5.16) — on $\{0,1\}^n$ every
+polynomial agrees with a unique multilinear one of no larger degree, so
+independence may be tested in the multilinear space; **the nonuniform
+Ray-Chaudhuri–Wilson / Frankl–Wilson bound** (landmark; A4 Thm 5.34, Thm 7.8) —
+an $L$-intersecting family with $\lvert L\rvert=s$ on $n$ points has at most
+$\sum_{i=0}^{s}\binom{n}{i}$ members, by attaching
+$f_F(x)=\prod_{\ell\in L}(\langle x,v_F\rangle-\ell)$ to each set and proving the
+$f_F$ independent; **the uniform Ray-Chaudhuri–Wilson theorem** (A4 Thm 4.10,
+Thm 7.13) — for a $k$-uniform $L$-intersecting family the bound sharpens to
+$\binom{n}{s}$, **as its own item**, since the sharpening needs the higher
+inclusion matrices of A4 §7.3 and Gottlieb's theorem (A4 Thm 7.16) and is
+genuinely harder than the nonuniform bound; **the modular Frankl–Wilson theorem**
+(landmark; A4 Thm 7.15, cf. Thm 5.37) — $p$ prime, $L$ a set of $s$ residues,
+$\mathcal F$ $k$-uniform with $k\bmod p\notin L$ and all pairwise intersections in
+$L$ mod $p$, then $\lvert\mathcal F\rvert\le\binom{n}{s}$; **Deza–Frankl** (A4
+Thm 5.15, the nonuniform modular version); **the Kahn–Kalai disproof of Borsuk's
+conjecture** (landmark; A4 Thm 5.23) — $f(d)$ grows at least like $(1.2)^{\sqrt d}$,
+so Borsuk's $f(d)=d+1$ is false; **the Frankl–Wilson chromatic numbers of the
+distance graphs** on $\mathbb{R}^n$ and $\{0,1\}^n$ (A4 Thm 5.21, Thm 5.22,
+Cor. 5.33), which is the in-reach analogue of "a chromatic number computed by
+algebra"; **the Frankl–Wilson explicit Ramsey graph** — an explicit graph on $N$
+vertices with no clique or independent set of size $\exp(c\sqrt{\log N\log\log N})$,
+which §25's CB-11 cites as the constructive counterpart to the probabilistic lower
+bound.
+
+**Not scaffolded, with reasons.** *Kneser's conjecture* (Lovász's theorem
+$\chi(K(n,k))=n-2k+2$): the **upper bound is an explicit colouring and IS
+scaffolded**; the lower bound is denied, because every known proof is
+Borsuk–Ulam or a discretisation of it — Lovász's original, Bárány's (which A4
+gives as Thm 3.32, itself resting on Gale's Thm 3.28 and **Borsuk's Thm 3.29,
+which A4 states without proving**), Greene's one-page 2002 proof, and Matoušek's
+2004 "combinatorial" proof via the octahedral Tucker lemma, which is a discrete
+Borsuk–Ulam in substance and is not short. The library has no algebraic topology.
+Disposition: `deferred`, recorded in §29 with the exact licence — an algebraic
+topology track supplying Borsuk–Ulam. *Frankl–Rödl* (A4 Thm 5.19, the omitted
+intersection theorem): [B/C] on the same machinery; scaffolded as a stated
+theorem with `proved_here: false` **only if** a step-2 Beta confirms the proof
+closes in bounded steps, otherwise deferred.
+
+FS: the uniform and nonuniform Ray-Chaudhuri–Wilson bounds agree; Frankl–Wilson
+holds with $p$ composite; Borsuk's conjecture holds in the plane (it does — and
+that is why the `fs-` must be phrased about general $d$, not $d=2$: **the
+$d=2$ and $d=3$ cases are true theorems**, so a careless false-statement item here
+would itself be false); the distance-graph chromatic number is polynomial in $n$.
+
+B: the nonuniform bound checked against all $2$-subsets of $[4]$; the
+multilinearisation of a small polynomial computed; the Frankl–Wilson hypothesis
+verified on an explicit $k$-uniform family; the $\pm1$-cube construction written
+out for small $d$ with its diameter computed.
+
+CEX: an $L$-intersecting family attaining $\sum_{i\le s}\binom ni$; a $k$-uniform
+family with $k\bmod p\in L$ violating the modular bound, showing that hypothesis
+is load-bearing.
+
+Traps. (i) The uniform sharpening is **not** a corollary of the nonuniform bound
+and must not be written as one. (ii) Borsuk's conjecture is *true* for $d\le3$;
+any Statement or `fs-` on this page must quantify correctly or it becomes a false
+statement about a true theorem. (iii) $L$ is a set of *integers* in the classical
+theorem and a set of *residues* in the modular one; the two hypotheses look alike
+and are not.
+
+Provenance: Statements `literature-derived` (A4, read verbatim). Proofs
+`literature-derived`; the split into multilinearisation lemma + independence
+argument + counting is `ai-altered` structuring of A4's own proof.
+
+---
+
+## CB-14a (ENRICHED, split). Block Designs, Steiner Systems and Fisher's Inequality
+
+**Anchor:** `block-designs-and-finite-projective-planes` (planned, unauthored).
+`requires`: CB-13, `congruences-and-the-chinese-remainder-theorem`,
+`inclusion-exclusion-and-the-pigeonhole-principle`,
+`determinants-of-matrices-over-a-commutative-ring`,
+`eigenvalues-eigenvectors-and-the-characteristic-polynomial`,
+`cyclic-groups-and-orders` (for Bose's quasigroup).
+
+§11 put designs, projective planes, MOLS and the Steiner existence theorem on one
+page. Against the 60-item ceiling and the enrichment this block now carries, that
+is a split, not a budget problem: CB-14a takes the design theory proper, CB-14b
+the geometry, CB-14c the coding and scheme-theoretic continuation. **Splitting is
+never dropping** — every result §11 named survives, and several it did not reach
+are added.
+
+DEFS: a $2$-$(v,k,\lambda)$ design with $2\le k<v$, together with a `rem-`
+recording $\mathrm{BIBD}(v,b,r,k,\lambda)$ and $S_\lambda(2,k,v)$ as synonyms
+(convention 3); the **point–block incidence matrix** $N$; a **symmetric** design
+($b=v$); a $t$-$(v,k,\lambda)$ design and the **Steiner system** $S(t,k,v)$ as
+the $\lambda=1$ case; a **Steiner triple system** $\mathrm{STS}(v)$; a
+**resolution** and a resolvable design; a **difference set** in a finite group and
+its **development**; a **Hadamard matrix** and a Hadamard design.
+
+THMS: **the replication number is constant** (landmark; #104) — every point lies
+in the same number $r$ of blocks, by double counting the pairs $(q,B)$ with
+$q\ne p$ and $p,q\in B$, which gives $r_p(k-1)=\lambda(v-1)$ independent of $p$;
+**$bk=vr$**, by double counting incident point–block pairs; the **divisibility
+conditions** these force, and their necessity for existence; **Fisher's
+inequality** (landmark) $b\ge v$, from $NN^{\mathsf T}=(r-\lambda)I+\lambda J$
+with $r>\lambda$ when $k<v$, so $NN^{\mathsf T}$ is positive definite, hence
+nonsingular, hence $v=\operatorname{rank}NN^{\mathsf T}\le\operatorname{rank}N\le b$;
+**$\det(aI+bJ)=(a+bv)a^{v-1}$** as its own lemma, since three later theorems spend
+it; **the symmetric-design identities** — $\det(NN^{\mathsf T})=(k-\lambda)^{v-1}k^2$,
+$\det N=\pm k(k-\lambda)^{(v-1)/2}$, and $N^{\mathsf T}N=NN^{\mathsf T}$, i.e.
+**any two distinct blocks of a symmetric design meet in exactly $\lambda$
+points** and the dual is again a symmetric design; **Bruck–Ryser–Chowla, the even
+case** (landmark) — if a symmetric $2$-$(v,k,\lambda)$ design with $v$ even
+exists then $k-\lambda$ is a perfect square, in five steps from
+$(\det N)^2=(k-\lambda)^{v-1}k^2$, $\det N\in\mathbb{Z}$ and $v-1$ odd;
+**the existence of $\mathrm{STS}(v)$ iff $v\equiv1,3\pmod 6$** (landmark), with
+necessity from the divisibility arithmetic and sufficiency split into **Bose's
+construction** for $v\equiv3$ and **Skolem's** for $v\equiv1$, each its own
+theorem; the **development of a difference set is a symmetric design**;
+**a Hadamard matrix has order $1$, $2$ or a multiple of $4$**; **the equivalence
+between a Hadamard matrix of order $4m$ and a symmetric $2$-$(4m-1,2m-1,m-1)$
+design**; the **Paley construction** of Hadamard matrices from quadratic residues
+in $\mathbb{F}_q$.
+
+**Bose's construction, scaffolded in full** because the harvest verified it step
+by step and because "if the sufficiency proof cannot be written in a bounded
+number of numbered steps it DROPS" (§11) is now answerable: it can. Write
+$v=3n$ with $n=2t+1$ odd. On $\mathbb{Z}/n$ define $x\circ y=\frac{n+1}{2}(x+y)$,
+well defined because $2$ is invertible mod an odd $n$; $\circ$ is commutative and
+idempotent and $x\circ-$ is a bijection. Points $\mathbb{Z}/n\times\{1,2,3\}$;
+blocks $\{(x,1),(x,2),(x,3)\}$ for each $x$, and $\{(x,i),(y,i),(x\circ y,i+1)\}$
+for each $i\in\mathbb{Z}/3$ and each unordered pair $x\ne y$. The count is
+$n+3\binom n2=n(3n-1)/2=v(v-1)/6$. The verification splits into two cases — same
+layer, and adjacent layers, where $x=y$ takes the type-(i) block and $x\ne y$ needs
+the unique $b$ with $x\circ b=y$, which is $\ne x$ because $b=x$ would force
+$y=x\circ x=x$. About fifteen numbered steps including the case analysis.
+
+**Skolem's construction is scaffolded but flagged.** It adjoins $\infty$ to
+$\mathbb{Z}/n\times\{1,2,3\}$ with $n=2t$ even and uses the half-idempotent
+commutative quasigroup $x\circ y=(t+1)(x+y)\bmod 2t$; $x\circ x=2x$, so only $t$
+elements are idempotent and $\infty$ absorbs the rest. **The exact block list must
+be copied from a source before authoring** — van Lint & Wilson Ch. 19,
+Lindner & Rodger *Design Theory*, or Colbourn & Dinitz *Handbook* Part II — and
+the harvest explicitly did **not** verify it against a primary source. Recorded as
+a blocker in §29. Do not reconstruct it from memory; that is precisely the failure
+mode the generated-claim rule exists to stop.
+
+FS: every parameter triple satisfying the divisibility conditions is realised
+(the honest witness is now available — a symmetric design with $v$ even and
+$k-\lambda$ not a square, ruled out by the even case of BRC, which this page
+**does** prove; §11's note that the natural witnesses were all denied is stale);
+Fisher's inequality reverses to $b\le v$; $r$ may be stipulated in the definition
+rather than derived; a Hadamard matrix exists of every order divisible by $4$
+(open — so this is a `rem-` about an open problem, **not** an `fs-`).
+
+B: $\mathrm{STS}(7)$ = the Fano plane's lines and $\mathrm{STS}(9)$ written out;
+Bose's construction run at $v=9$ and its blocks checked against that list; the
+incidence matrix of $\mathrm{STS}(7)$ and $NN^{\mathsf T}$ computed; a
+$(7,3,1)$-difference set in $\mathbb{Z}/7$ developed; the Paley Hadamard matrix
+of order $8$; Kirkman's schoolgirl problem stated with a resolution of
+$\mathrm{STS}(15)$ exhibited but not derived.
+
+CEX: a parameter set passing the divisibility test with no design; a design that
+is not symmetric; a $\pm1$ matrix of order $3$ with orthogonal rows (there is
+none — so this `cex-` must instead be the order-$3$ *non-existence*, phrased as
+the theorem it is).
+
+Traps. (i) The constancy of $r$ is a **theorem**; a definition that stipulates it
+stipulates something provable, and this is the page's first well-definedness
+obligation. (ii) Fisher's inequality fails over $\mathbb{F}_2$ and the reason is
+mathematical, not technical: the argument turns on positive definiteness, an
+ordered-field notion, and $\det((r-\lambda)I+\lambda J)=(r-\lambda)^{v-1}(r-\lambda+\lambda v)$
+can vanish mod $2$. Say so; do not write "over any field". (iii) Kirkman's
+schoolgirl problem is a *resolvable* $\mathrm{STS}(15)$; the general theorem
+($\mathrm{KTS}(v)$ exists iff $v\equiv3\bmod 6$, Ray-Chaudhuri–Wilson 1971) is
+**statement only** with `proved_here: false`. Wilson's and Keevash's existence
+theorems likewise.
+
+Provenance: Statements `literature-derived` throughout. Bose's construction's
+proof is `literature-derived`; Skolem's is `not-supplied` until the block list is
+sourced, and the item does not ship before then.
+
+---
+
+## CB-14b (NEW, split). Finite Projective Planes, MOLS and Bruck–Ryser
+
+**Anchor:** immediately after CB-14a's examples page.
+`requires`: CB-14a, `algebraic-extensions-degree-and-finite-fields`,
+`vector-spaces-and-linear-independence`, `primes-and-the-fundamental-theorem-of-arithmetic`,
+`congruences-and-the-chinese-remainder-theorem`.
+
+DEFS: a **finite projective plane** by its three axioms — two distinct points lie
+on a unique line; two distinct lines meet in a unique point; there exist four
+points no three collinear — with the third axiom labelled as exactly what
+excludes the degenerate models; the **order** of a plane (#105) with the affine
+counts stated alongside (convention 4); $PG(2,q)$; an **affine plane**; a
+**Latin square**, **orthogonal** Latin squares, $N(n)$, and a **transversal
+design** $TD(k,n)$; a **Desarguesian** plane.
+
+THMS: **every line of a finite projective plane has the same number of points**
+(#105, landmark) — the bijection between two lines through a point off both, and
+only then may "the order $n$" be written; **a plane of order $n$ has $n^2+n+1$
+points and $n^2+n+1$ lines, with $n+1$ points on each line and $n+1$ lines
+through each point**, and **is a symmetric $2$-$(n^2+n+1,n+1,1)$ design**, which
+is the bridge item to CB-14a; **the axioms are self-dual**, so every theorem
+dualises — stated as a theorem about the dual incidence structure, not as a
+slogan; **$PG(2,q)$ is a projective plane of order $q$ for every prime power
+$q$** (landmark), from $1$- and $2$-dimensional subspaces of $\mathbb{F}_q^3$ and
+$(q^3-1)/(q-1)=q^2+q+1$; **$N(n)\le n-1$**, and **$N(n)=n-1$ iff a projective
+plane of order $n$ exists**, equivalently an affine plane of order $n$,
+equivalently a $TD(n+1,n)$ — three equivalences, each its own item because each
+is a different construction; **$N(q)=q-1$ for a prime power $q$** by
+$L_a(i,j)=ai+j$ over $\mathbb{F}_q$, $a\ne0$; **Bruck–Ryser for projective
+planes** (landmark) — if a projective plane of order $n$ exists and
+$n\equiv1,2\pmod4$ then $n$ is a sum of two integer squares — hence **no plane of
+order $6$**; the **Fano plane is the unique plane of order $2$**.
+
+**Bruck–Ryser is the page's one substantial build, and the harvest audited it in
+full (A9).** The chain is: $AA^{\mathsf T}=A^{\mathsf T}A=nI+J$ and
+$\det A=(n+1)n^{n(n+1)/2}\ne0$; the substitution $z=xA$ giving
+$\sum z_i^2=n\sum x_i^2+(\sum x_i)^2$, then adding $nx_{v+1}^2$ to both sides —
+**and this is exactly where $n\equiv1,2\pmod4$ is used**, because it makes
+$v+1=n^2+n+2$ a multiple of $4$ so the variables group in fours; **Lagrange's
+four-square theorem** to write $n=n_1^2+n_2^2+n_3^2+n_4^2$; **Euler's four-square
+identity** realised as the matrix
+$N=\begin{psmallmatrix}n_1&-n_2&-n_3&-n_4\\ n_2&n_1&-n_4&n_3\\ n_3&n_4&n_1&-n_2\\ n_4&-n_3&n_2&n_1\end{psmallmatrix}$
+with $\lvert N\rvert=n^2$, so $y=Nx$ satisfies $\sum y^2=n\sum x^2$ blockwise; a
+lemma that positive definiteness of a quadratic form survives a nonsingular
+substitution and the elimination of one variable; a descent eliminating
+$x_1,\dots,x_v$ one at a time, ending at $nx_{v+1}^2=Y^2+s^2$; and finally the
+**Fermat two-square descent** ($p\mid A^2+B^2$ with $p\nmid A,B$ implies $p$ is a
+sum of two squares) together with the **Brahmagupta–Fibonacci identity**
+$(a^2+b^2)(c^2+d^2)=(ac-bd)^2+(ad+bc)^2$. Split as
+`lem-quadratic-form-nonsingular-substitution`, `lem-fermat-two-square-descent`,
+`lem-brahmagupta-fibonacci-identity`, `thm-bruck-ryser-projective-plane`.
+**No Hasse–Minkowski, no $p$-adics, no Witt cancellation** — the harvest checked
+this specifically, because the common belief that Bruck–Ryser needs local–global
+theory is what would otherwise have got it denied.
+
+**The one external input is Lagrange's four-square theorem, and this library does
+not have it.** `ls items/ | grep -i four-square` returns nothing, and neither
+quadratic residues nor sums of two squares appear anywhere in `items/`. Under the
+SEAMS §4 ownership table, "Diophantine equations" belong to `number-theory`,
+whose elementary block anchors after `splitting-fields-examples` — **below** the
+combinatorics band, so citing it is legal in plan order and creates no forward
+reference. Disposition, in preference order: (1) `number-theory` mints
+`thm-lagrange-four-squares` and CB-14b cites it — **recorded as an amendment owed
+in §28**; (2) if that track declines or lands elsewhere, CB-14b mints it locally
+(the descent proof is bounded and needs only modular arithmetic, which is
+published), with a `rem-` recording the duplication risk; (3) never a
+`proved_here: false` fallback, because the theorem is provable in scope and the
+narrow last resort is not for results one is merely reluctant to build. **This is
+an unresolved seam and §29 records it as such.**
+
+**Denied, with the reason stated on the page.** *General Bruck–Ryser–Chowla for
+odd $v$* — the Diophantine condition
+$z^2=(k-\lambda)x^2+(-1)^{(v-1)/2}\lambda y^2$ — needs Hasse–Minkowski, or Hall's
+classical route through Witt cancellation and rational quadratic forms. The
+library has no theory of rational quadratic forms. Disposition: a source-cited
+`rem-` with `proved_here: false`, the exact source, and the failed in-library
+route recorded, exactly as the narrow last resort requires. *Nonexistence of a
+plane of order $10$* (Lam–Thiel–Swiercz, by computer search): statement only,
+`proved_here: false`. *Bose–Shrikhande–Parker* (Euler's conjecture is false;
+$N(n)\ge2$ for all $n\ne2,6$): statement only. *Full coordinatisation* — a
+Desarguesian projective plane is $PG(2,K)$ for a skew field $K$, and a finite one
+is $PG(2,q)$ by Wedderburn's little theorem (A6 §3.4, §3.7): the **statement** is
+scaffolded, the coordinatisation proof is deferred with its reason. **Wedderburn's
+little theorem itself belongs to `abstract-algebra`** and is recorded in §28.
+
+FS: a projective plane exists of every order (open — a `rem-`, not an `fs-`);
+Bruck–Ryser rules out order $10$ ($10\equiv2\bmod4$ and $10=1+9$ **is** a sum of
+two squares, so BR says nothing — this is the sharpest possible illustration that
+BR is a necessary and not a sufficient condition, and it is the page's best
+`fs-`); every affine plane extends uniquely to a projective plane (it does — so
+the `fs-` must be about something else); $N(6)=5$.
+
+B: the Fano plane written out with its seven lines; $PG(2,3)$ counted and one
+line exhibited; two orthogonal Latin squares of order $3$ from $ai+j$ over
+$\mathbb{F}_3$; a complete set of $2$ MOLS of order $3$ converted into the affine
+plane of order $3$; Bruck–Ryser applied to $n=6$ in full arithmetic; the
+incidence matrix of the Fano plane and its determinant.
+
+CEX: two Latin squares that are not orthogonal; a degenerate incidence structure
+satisfying the first two axioms but not the third (a near-pencil), which is
+exactly what axiom three excludes; a plane order allowed by BR for which existence
+is open.
+
+Traps. (i) Affine and projective orders differ and every "order" sentence states
+both counts. (ii) The Fano plane is $\mathrm{STS}(7)$ and $PG(2,2)$ and the
+unique $2$-$(7,3,1)$ design; **one item establishes the identifications and every
+later page cites that item**, or the library will end up holding three unrelated
+Fano planes. (iii) Latin squares are not defined on CB-14a; if the enumerative
+block wants them earlier, that is an amendment, not a second definition.
+
+Provenance: Statements `literature-derived` (A6, A9, A1 §4.8, van Lint–Wilson).
+Bruck–Ryser's proof is `literature-derived` from A9, read in full.
+
+---
+
+## CB-14c (NEW). Linear Codes, Association Schemes and the Delsarte Bound
+
+**Anchor:** immediately after CB-14b's examples page.
+`requires`: CB-14b, CB-13, `algebraic-extensions-degree-and-finite-fields`,
+`gaussian-elimination-and-row-reduction`, GT-7a (for simultaneous
+diagonalisation — see the placement note).
+
+**Placement note.** This pair genuinely needs *commuting symmetric matrices are
+simultaneously diagonalisable* (A1 Prop. 2.1.1), which GT-7a mints. Two orders
+were possible; putting CB-14c after GT-7a rather than before it costs nothing —
+codes do not appear in the spectral pages — and avoids a forward reference. If
+the orchestrator prefers to keep the design block contiguous, CB-14c may sit here
+and declare the simultaneous-diagonalisation citation as its single forward
+reference on the `thm-bose-mesner-algebra` item; the scaffold's preference is the
+reorder, per SEAMS §5(1).
+
+DEFS: a linear $[n,k,d]_q$ code; generator and parity-check matrices; Hamming
+weight and distance, and the **minimum distance**; a **perfect** code; an
+**MDS** code; the **weight enumerator** $W_C(x,y)$; an **association scheme**
+$(A_0,\dots,A_d)$ on a finite set; the **Bose–Mesner algebra**; the primitive
+idempotents $E_j$ and the eigenmatrices $P$, $Q$; the **inner distribution** of a
+subset.
+
+THMS: for a linear code, **minimum distance = minimum nonzero weight** — the
+first item, and the reason linear codes are tractable at all; the **Singleton
+bound** $d\le n-k+1$ and the definition of MDS as the equality case; the
+**Hamming (sphere-packing) bound**; **Hamming codes**
+$[(q^r-1)/(q-1),\,(q^r-1)/(q-1)-r,\,3]_q$ **are perfect**, with the observation —
+as a numbered theorem, not an aside — that the parity-check matrix is exactly the
+point set of $PG(r-1,q)$, which is what makes this page the natural continuation
+of CB-14b; **Reed–Solomon codes are MDS**, needing only that a nonzero polynomial
+of degree $<k$ has fewer than $k$ roots (the same published fact CB-23 spends);
+the **Plotkin bound** by double counting; **the Bose–Mesner algebra is closed
+under both matrix and Schur product** and has the two distinguished bases
+$\{A_i\}$ and $\{E_j\}$ (A1 Thm 11.2.1, 11.2.2), resting on **commuting symmetric
+matrices are simultaneously diagonalisable** (A1 Prop. 2.1.1); **Delsarte's linear
+programming bound** in its inequality form $aQ\ge0$ (A1 Thm 11.3.1);
+**MacWilliams' identity** $W_{C^{\perp}}(x,y)=\lvert C\rvert^{-1}W_C(x+(q-1)y,\,x-y)$.
+
+**MacWilliams is the page's seam risk.** Its proof needs the additive characters
+of $\mathbb{F}_q$ and their orthogonality — a discrete Fourier transform. §25's
+CB-27 mints the finite Fourier transform on $\mathbb{F}_p^n$ from published roots
+of unity and `cor-sum-of-roots-of-unity` (§19.2 F5), and CB-27 sits **above** this
+page in the band. Three dispositions, in preference order: (1) move the character
+orthogonality lemma down to CB-14c and let CB-27 cite it — the scaffold's
+preference, since orthogonality of additive characters of $\mathbb{F}_q$ is a
+five-step consequence of `cor-sum-of-roots-of-unity` and belongs wherever it is
+first needed; (2) declare MacWilliams a forward reference on a `cor-`;
+(3) place CB-14c after CB-27. **Recorded as an unresolved seam in §29.** Godsil's
+route (A5, "MacWilliams Theorem") derives it inside the scheme duality instead,
+which is elegant but presupposes the whole Bose–Mesner apparatus and does not
+avoid the characters.
+
+**Denied.** The **Golay codes** $G_{23}$, $G_{11}$ and their
+uniqueness/perfectness classification; **Reed–Muller** decoding theory; the
+**Witt designs** $S(5,24,8)$, $S(5,12,6)$, $S(4,11,5)$, $S(3,8,4)$ and the
+**Mathieu groups** $M_{24}$, $M_{12}$, $M_{11}$ — statement-only `rem-` items,
+because their constructions are long and the Mathieu groups rest on a
+sporadic-simple-group development the library has not reached. Using Delsarte's
+bound as an actual **optimisation** to derive numerical bounds is [C] and is
+deferred: the inequality is scaffolded, the LP is not.
+
+FS: every perfect code is a Hamming or Golay code (this is essentially true — van
+Lint–Tietäväinen — so the `fs-` must be phrased about *linear* perfect codes over
+arbitrary alphabets, or dropped; **check before shipping**); the Singleton bound
+is attained by every code; MacWilliams holds for nonlinear codes.
+
+B: the binary Hamming $[7,4,3]$ code with its parity-check matrix identified with
+the Fano plane's points; a Reed–Solomon code over $\mathbb{F}_5$; the Hamming
+bound checked against $[7,4,3]$; the weight enumerator of $[7,4,3]$ and its dual
+computed and checked against MacWilliams; the Hamming scheme $H(2,2)$ with its
+$P$ and $Q$ matrices.
+
+CEX: a nonlinear code whose minimum distance is not the minimum weight; a code
+meeting the Hamming bound that is not perfect (there is none — so this `cex-`
+must be replaced by a code *not* meeting the bound, or dropped).
+
+Traps. (i) $\lambda$ is overloaded three ways across CB-14a/b/c and the strongly
+regular pages; the disambiguating `rem-` of convention 5 is required. (ii) The
+Hamming code's parity-check matrix **is** $PG(r-1,q)$'s point set — an identity,
+proved, not an analogy. (iii) Delsarte's bound is an inequality here; do not
+write "the LP bound gives $\dots$" for a numerical value the page does not derive.
+
+Provenance: Statements `literature-derived` (A1 Ch. 11, A5, van Lint–Wilson).
+Proofs `literature-derived`; the Hamming/$PG$ identification item is `ai-altered`
+(both facts are standard; the explicit identification as a numbered theorem is
+the library's phrasing).
+
+---
+
+## GT-7a (NEW, split). Spectral Graph Theory I: the Adjacency Matrix, Perron–Frobenius and the Matrix-Tree Theorem
+
+**Anchor:** `algebraic-and-spectral-graph-theory` (planned, unauthored).
+`requires`: `the-spectral-theorem-and-singular-value-decomposition`,
+`the-determinant-of-a-linear-operator`,
+`determinants-of-matrices-over-a-commutative-ring`,
+`eigenvalues-eigenvectors-and-the-characteristic-polynomial`,
+`graphs-walks-and-connectivity`, `trees-forests-and-spanning-trees`,
+`inner-product-spaces-and-orthogonality`.
+
+§11's GT-7 is split in two. The reason is not length alone: GT-7a is the
+dictionary between linear algebra and graphs and everything downstream cites it,
+while GT-7b is a body of applications that a reader can take or leave. Two of
+§11's three "verify on disk" flags are now answered — the cofactor machinery is
+published (§23.0), Cauchy–Binet is not — and the third, Courant–Fischer, is
+answered in the worst way: **the spectral theorem page carries 0 items** (§27).
+
+DEFS: the **adjacency matrix** $A(G)$ of a finite simple graph and the
+**spectrum** (#100) — the eigenvalues are real by the spectral theorem for real
+symmetric matrices, and only then may they be listed
+$\theta_1\ge\dots\ge\theta_n$ (convention 2); the **degree matrix** $D$ and the
+**Laplacian** $L=D-A$ (convention 1); the **signless Laplacian** $Q=D+A$, named
+as A1 §1.1 names it; the **directed incidence matrix** $M$ of an orientation;
+**cospectral** graphs; the **normalised Laplacian** $\mathcal{L}=D^{-1/2}LD^{-1/2}$,
+minted here and used only where conductance requires it; the **weighted**
+adjacency matrix and weighted Laplacian.
+
+THMS: **$(A^h)_{xy}$ counts walks of length $h$ from $x$ to $y$** (landmark; A1
+Prop. 1.3.1, A3 Thm 1.1) — induction on $h$, and the item everything else on
+these two pages uses; hence $\operatorname{tr}A^h=\sum\theta_i^h$, with
+$\operatorname{tr}A=0$, $\operatorname{tr}A^2=2\lvert E\rvert$ and
+$\operatorname{tr}A^3=6\cdot\#\text{triangles}$ as three corollaries;
+**the spectrum is an isomorphism invariant, and the converse is false** — the
+smallest witness is exhibited concretely on the B page ($K_{1,4}$ and
+$C_4\cup K_1$, both with spectrum $\{2,0,0,0,-2\}$), which discharges §11's
+"if a small witness cannot be verified in numbered steps, this `fs-` DROPS";
+**$\bar d\le\theta_1\le\Delta$** (A1 Prop. 3.1.1), lower by the Rayleigh quotient
+at $\mathbf 1$, upper by the largest eigenvector coordinate;
+**Perron–Frobenius, symmetric case** (landmark; A2 Thm 4.5.1) — for a connected
+graph, $\theta_1$ has a strictly positive eigenvector, $\theta_1\ge-\theta_n$,
+and $\theta_1>\theta_2$ — with **A2 Lemma 4.5.2 as a separate item** (a
+nonnegative eigenvector of $A$ on a connected graph is strictly positive);
+**$G$ connected and bipartite iff $\theta_n=-\theta_1$**, and then the whole
+spectrum is symmetric about $0$ (A2 Props. 4.5.3, 4.5.4);
+**$x^{\mathsf T}Lx=\sum_{uv\in E}(x_u-x_v)^2$**, hence $L$ is positive
+semidefinite and $L\mathbf 1=0$, and $L=MM^{\mathsf T}$;
+**$\dim\ker L$ is the number of connected components** (landmark; A1
+Prop. 1.3.7), hence $\mu_2>0$ iff $G$ is connected; **Cauchy–Binet** (landmark;
+A1 Prop. 1.3.5, A3 Thm 9.4) — for $A$ an $m\times n$ and $B$ an $n\times m$
+matrix with $m\le n$, $\det(AB)=\sum_S\det(A[\cdot,S])\det(B[S,\cdot])$ over
+$m$-subsets $S$ — **minted here, since the library lacks it and it is a
+determinant identity over a commutative ring**, with a `rem-` recording that it
+is *not* a corollary of $\det(AB)=\det A\det B$, which needs square factors;
+**all cofactors of $L$ are equal** (#101, A3 Lemma 9.9: if all row sums and all
+column sums vanish then all cofactors agree) — the residual half of §20 #101 now
+that the Laplace expansion is published; **the matrix-tree theorem** (landmark;
+A3 Thm 9.8) — every cofactor of $L$ equals the number $\tau(G)$ of spanning
+trees, by Cauchy–Binet applied to $L=MM^{\mathsf T}$ with one row deleted, plus
+A3 Lemma 9.7 that $\det(M_0[S])=\pm1$ if $S$ is a spanning tree and $0$ otherwise;
+the **weighted matrix-tree theorem**, whose cofactor is
+$\sum_T\prod_{e\in T}w_e$; **Cayley's formula, second proof**, with a required
+agreement `rem-` citing the published Prüfer proof on
+`trees-forests-and-spanning-trees`; the **spectra of $K_n$, $C_n$, $K_{m,n}$, the
+hypercube $Q_n$ and the Petersen graph, computed as theorems**; **eigenvalues of
+a circulant** $\sum_{s\in S}\omega^{js}$ from `thm-complex-nth-roots-and-roots-of-unity`,
+and of the hypercube $n-2\lvert u\rvert$ from the $\pm1$ characters
+$\chi_u(x)=(-1)^{u\cdot x}$ — **both needing no representation theory**, which is
+why they are the two Cayley-graph cases scaffolded here.
+
+**Perron–Frobenius is the finding that makes this page possible.** The general
+nonnegative irreducible theorem needs compactness or Brouwer, and Brouwer in
+dimension $\ge2$ is deferred (`DEFERRED.md` §4). Stanley confirms the cost by
+declining to pay it — A3 §3 states the theorem "without proof". But the
+**symmetric** case, which is the only case a graph needs, has a one-page
+elementary proof (A2 Thm 4.5.1) using the spectral theorem, the variational
+characterisation $\theta_1=\max_{\lVert x\rVert=1}x^{\mathsf T}Ax$ *together with
+the fact that a maximiser is an eigenvector*, and connectivity. **No compactness,
+no fixed point, no topology**, about eighteen numbered steps. Two cautions for
+the author: A2 proves it for $M=A+H$ with $H$ nonnegative diagonal but writes the
+proof for $H=0$, so either state it for $H=0$ or supply the routine extension;
+and §21's Collatz–Wielandt row remains a legitimate *alternative* route for the
+general irreducible nonnegative case via
+`thm-euclidean-heine-borel-pseudocompactness-and-extreme-values`, which §19.2 F4
+verified — **the two routes are both available and the page should scaffold the
+symmetric one and record the other in a `rem-`**, since the symmetric proof is
+shorter and needs no metric topology at all.
+
+FS: cospectral graphs are isomorphic; $\mu_2>0$ characterises $2$-connectivity
+(it characterises connectivity); the matrix-tree theorem needs a *particular*
+cofactor; $\theta_1=\Delta$ for every graph; Cauchy–Binet follows from
+multiplicativity of the determinant.
+
+B: $A(C_4)$, $A(K_3)$ and their spectra; $\tau(K_4)$ by the matrix-tree theorem
+checked against Cayley's $4^2=16$; walks of length $3$ counted by $A^3$ in a
+named small graph; the Petersen spectrum $\{3,1^5,(-2)^4\}$; $K_{1,4}$ and
+$C_4\cup K_1$ exhibited as the smallest cospectral pair with both characteristic
+polynomials computed; $Q_3$'s spectrum from the character formula; a circulant on
+$5$ vertices.
+
+CEX: two cospectral non-isomorphic graphs; a graph with $\theta_1<\Delta$; a
+disconnected graph whose Laplacian kernel has dimension $>1$; a nonnegative
+eigenvector of a *disconnected* graph's adjacency matrix that is not strictly
+positive, showing connectivity is load-bearing in Lemma 4.5.2.
+
+Traps. (i) Convention 2 is not a formality: $\lambda_2$ means opposite ends of
+the spectrum for $A$ and for $L$, and a page that does not state its ordering
+will ship a false statement. (ii) Cauchy–Binet must be proved, not assumed
+(§23.0). (iii) The Laplace cofactor expansion **is** published — cite
+`thm-laplace-cofactor-expansion`, do not re-mint it. (iv) $L=MM^{\mathsf T}$
+needs an *orientation*; the theorem's content is that the cofactor does not depend
+on which one, and that is a numbered step.
+
+Provenance: Statements `literature-derived` (A1, A2, A3, all read in full).
+Proofs `literature-derived`; the choice to present Perron–Frobenius in A2's
+symmetric form with A1's general version as a remark is `ai-altered` structuring.
+
+---
+
+## GT-7b (NEW, split). Spectral Graph Theory II: Interlacing, the Hoffman Bounds and Strongly Regular Graphs
+
+**Anchor:** immediately after GT-7a's examples page.
+`requires`: GT-7a, `the-spectral-theorem-and-singular-value-decomposition`,
+`inner-product-spaces-and-orthogonality`, `polynomial-rings-and-roots`,
+`graph-colouring`, CB-14a.
+
+DEFS: the **Rayleigh quotient** $R_A(x)=x^{\mathsf T}Ax/x^{\mathsf T}x$; an
+**equitable partition** and its **quotient matrix**; a **strongly regular graph**
+$\mathrm{srg}(v,k,\lambda,\mu)$ (#102), with the required `rem-` separating this
+$\lambda$ from the design $\lambda$ (convention 5); a **conference graph**; a
+**Moore graph**; the **Lovász theta function** $\vartheta(G)$ **defined by
+orthonormal representations**, not by a semidefinite program.
+
+THMS: **Courant–Fischer** (landmark; A1 Thm 2.4.1)
+$\theta_k=\max_{\dim W=k}\min_{0\ne x\in W}R_A(x)$ — **minted here if and only if
+the spectral-theorem page does not mint it**; §19.2 F3 asks the linear-algebra
+track for it and §28 carries the amendment, but that page is unauthored and this
+scaffold does not depend on a promise; **Cauchy interlacing** for principal
+submatrices (A1 Cor. 2.5.2, $\theta_i\ge\eta_i\ge\theta_{n-m+i}$) and the general
+$S^{\mathsf T}S=I$ form (A1 Thm 2.5.1), plus **quotient-matrix interlacing** for
+an equitable partition (A1 Cor. 2.5.4); **the Hoffman ratio bound** (landmark;
+A1 Thm 3.5.2, verbatim: "If $\Gamma$ is regular of nonzero degree $k$, then
+$\alpha(\Gamma)\le n(-\theta_n)/(k-\theta_n)$, and if a coclique $C$ meets this
+bound, then every vertex not in $C$ is adjacent to precisely $-\theta_n$ vertices
+of $C$") — **proved by the direct route**, writing the characteristic vector as
+$(\lvert S\rvert/n)\mathbf 1+w$ with $w\perp\mathbf 1$ and using
+$\chi^{\mathsf T}A\chi=0$ and $w^{\mathsf T}Aw\ge\theta_n\lVert w\rVert^2$, which
+needs no interlacing at all — with the interlacing proof recorded as the source's
+route in a `rem-`; the **Cvetković inertia bound** (A1 Thm 3.5.1) and the
+**nonregular ratio bound** (A1 Prop. 3.5.3); **Hoffman's chromatic bound**
+$\chi(\Gamma)\ge1-\theta_1/\theta_n$ (A1 Thm 3.6.2); **Wilf's bound**
+$\chi(\Gamma)\le1+\theta_1$ (A1 Prop. 3.6.1) — **the inequality only**, since its
+equality case invokes Brooks' theorem, which §24 GT-9 supplies, so the equality
+clause is either a citation of GT-9 (if GT-9 lands below) or is dropped with a
+note; **the strongly regular parameter identity** $A^2=kI+\lambda A+\mu(J-I-A)$
+and $k(k-\lambda-1)=\mu(v-k-1)$; **the srg eigenvalues**
+$r,s=\tfrac12[(\lambda-\mu)\pm\sqrt{(\lambda-\mu)^2+4(k-\mu)}]$ with their
+multiplicities; **the integrality (rationality) condition** (landmark; A1
+Thm 9.1.3) — the multiplicities are nonnegative integers, so either $f=g$ (the
+half case, forcing $v=4\mu+1$, $k=2\mu$, $\lambda=\mu-1$) or
+$\sqrt{(\lambda-\mu)^2+4(k-\mu)}$ is a positive integer; **the integrality
+lemma** as its own item — a rational algebraic integer is a rational integer,
+citing the published `cor-rational-root-of-an-integer-is-an-integer`;
+**the friendship theorem** (landmark) — a finite graph in which every two
+distinct vertices have exactly one common neighbour has a vertex adjacent to all
+others — split as `lem-friendship-graph-is-regular` (the purely combinatorial
+half: non-adjacent vertices have equal degree by the induced bijection between
+neighbourhoods) plus the algebraic endgame $A^2=(k-1)I+J$, $n=k^2-k+1$,
+eigenvalues $\pm\sqrt{k-1}$ off $\mathbf 1$, $\operatorname{tr}A=0=k+(f-g)s$ so
+$s\mid k=s^2+1$ so $s=1$; **the Hoffman–Singleton / Moore graph theorem**
+(landmark; A1 Thm 9.1.5) — a $k$-regular graph of girth $5$ and diameter $2$ has
+$k^2+1$ vertices, is an $\mathrm{srg}(k^2+1,k,0,1)$, and $k\in\{2,3,7,57\}$,
+because $\sqrt{4k-3}=s$ must be an integer with $s\mid15$; **the Lovász sandwich**
+$\alpha(\Gamma)\le\vartheta(\Gamma)\le\chi(\bar\Gamma)$ (A1 Thm 3.7.4),
+**$\vartheta(\Gamma\boxtimes\Delta)\le\vartheta(\Gamma)\vartheta(\Delta)$**
+(A1 Lemma 3.7.2), the **Shannon capacity bound** $c(\Gamma)\le\vartheta(\Gamma)$
+(A1 Thm 3.7.3), and **$\vartheta(C_5)=\sqrt5$**, hence the Shannon capacity of
+$C_5$ is $\sqrt5$; **Paley graphs are strongly regular** (A1 Prop. 9.1.1), which
+is the page's finite-field example and the seam to CB-14b.
+
+**Denied.** The **SDP characterisation of $\vartheta$**, which needs convex/SDP
+duality: a source-cited `rem-`. **Ramanujan graph existence** (LPS, Margulis):
+statement only. **Non-abelian Cayley graph spectra**, which need the full
+Artin–Wedderburn representation theory of finite groups (A1 §6.3, A5's algebra
+chapters): `deferred`, and the reason is a seam rather than a difficulty —
+representation theory is owned by `abstract-algebra` (SEAMS §4) and its block's
+placement relative to the combinatorics band is not settled. §29 records it.
+**Alon–Boppana** ($\theta_2\ge2\sqrt{k-1}-o(1)$, A1 Prop. 4.1.1) moves to §24
+GT-21 with the rest of the expander material.
+
+FS: the srg parameter conditions are sufficient for existence (they are not; the
+$(v,k,\lambda,\mu)=(21,10,4,5)$-type feasibility discussion belongs in a `rem-`
+and a genuine non-existent-but-feasible parameter set must be **checked against a
+source before shipping**); Hoffman's ratio bound holds for non-regular graphs in
+the same form; interlacing holds for arbitrary (non-principal) submatrices; every
+Moore graph of degree $57$ exists (**open** — a `rem-`, not an `fs-`).
+
+B: the Petersen graph as $\mathrm{srg}(10,3,0,1)$ with its eigenvalues and
+multiplicities computed and the Hoffman bound giving $\alpha\le4$, checked against
+the true $\alpha=4$; $\vartheta(C_5)=\sqrt5$ computed from an explicit orthonormal
+representation (the Lovász umbrella); the friendship theorem checked on the
+windmill graphs; $\mathrm{Paley}(13)$ exhibited as an srg; interlacing checked on
+a $3\times3$ principal submatrix of $A(C_5)$.
+
+CEX: a feasible parameter set with no strongly regular graph; a non-regular graph
+where the regular Hoffman bound fails; a graph of girth $5$ and diameter $2$ that
+is not regular (there is none — the regularity is a theorem, so this `cex-` must
+instead be a girth-$5$ graph of diameter $3$).
+
+Traps. (i) Every result on this page is stated for a **regular** graph unless it
+says otherwise; the nonregular versions are genuinely different statements with
+different bounds. (ii) The friendship theorem's endgame is an integrality
+argument and cites the published rational-root corollary, not "clearly $s$ is an
+integer". (iii) $\vartheta$ must be defined once, by orthonormal representations;
+a page that switches to the SDP definition mid-development is asserting an
+equivalence it has not proved.
+
+Provenance: Statements `literature-derived` (A1, verbatim where quoted; A4 for
+the friendship theorem). Proofs `literature-derived`; presenting the Hoffman
+bound by the direct route with interlacing as a remark is `ai-altered`
+structuring of A1's presentation.
+
+---
+
+## 23.9 Well-definedness obligations added by this block
+
+Continuing §20's numbering and its rule — **each row is a required numbered item
+on the page named, never a parenthetical.**
+
+| # | page | the definition | what must be proved first |
+|---|---|---|---|
+| 110 | CB-13 | the bilinear form $\langle x,y\rangle=\sum x_iy_i$ on $\mathbb{F}_2^n$ | it is **bilinear and symmetric, and degenerate**; it is not an inner product and there is no positivity to appeal to. The whole Oddtown argument needs only bilinearity and $\langle v_i,v_i\rangle=1$, and saying otherwise is a false statement |
+| 111 | CB-13 | the down-shift $S_i$ on a family | that $S_i(\mathcal F)$ has the same cardinality and that iterating terminates are **two separate lemmas**; Sauer–Shelah by shifting is unprovable without both |
+| 112 | CB-23 | the multilinear reduction of $f$ on $\{0,1\}^n$ | existence **and uniqueness**, before "the" multilinear polynomial agreeing with $f$; uniqueness is the identity lemma with $t_i=1$ |
+| 113 | CB-23 | $\mathrm{EE}(D)$, $\mathrm{EO}(D)$ | Eulerian sub-digraphs of a finite digraph form a finite set, so the two counts exist; and the Alon–Tarsi hypothesis is $\mathrm{EE}\ne\mathrm{EO}$ for **some** orientation, an existential the statement must carry explicitly |
+| 114 | CB-24 | the space of multilinear polynomials of degree $\le s$ | its dimension is $\sum_{i\le s}\binom ni$ — a **theorem** (the squarefree monomials are a basis), and every bound on the page is that number |
+| 115 | CB-24 | $f(d)$, Borsuk's number | the set of admissible $m$ is nonempty for a bounded set, so a least exists by `thm-well-ordering-principle`; and "smaller diameter" needs diameter defined for a bounded subset of $\mathbb{R}^d$ as a supremum that is attained or not — state which |
+| 116 | CB-14a | $r$ and $b$ | **#104 restated and kept**: $r$ constant is a theorem by double counting, and $b$ follows from $bk=vr$. A definition that stipulates them stipulates something provable |
+| 117 | CB-14a | $\det(aI+bJ)=(a+bv)a^{v-1}$ | its own lemma, proved from the eigenvalue $a+bv$ on $\mathbf 1$ and $a$ with multiplicity $v-1$; three later theorems spend it and it must not be recomputed inline three times |
+| 118 | CB-14a | Bose's operation $x\circ y=\frac{n+1}{2}(x+y)$ on $\mathbb{Z}/n$ | **well defined only because $n$ is odd**, so $2$ is invertible; commutativity, idempotence and the bijectivity of $x\circ-$ are three separate numbered facts, and the block-count verification uses all three |
+| 119 | CB-14b | "the order $n$" of a projective plane | **#105 restated and kept**: that every line has the same number of points is a theorem, by the bijection between two lines through a point off both. The affine counts are stated in the same breath |
+| 120 | CB-14b | $N(n)$, the maximum number of MOLS | the set of sizes of pairwise-orthogonal families is nonempty and bounded by $n-1$ (itself a theorem), so a maximum exists; $N(1)$ and $N(2)$ are stated boundary cases |
+| 121 | CB-14c | the minimum distance of a code | a minimum over a **nonempty** finite set of pairs, so $\lvert C\rvert\ge2$ is a hypothesis; for a linear code the equality with the minimum nonzero weight is the page's first theorem and is what makes it computable |
+| 122 | CB-14c | the primitive idempotents $E_j$ of an association scheme | their existence and uniqueness rests on **commuting symmetric matrices are simultaneously diagonalisable**; the eigenmatrices $P,Q$ are defined by the two bases and are well defined only after that |
+| 123 | GT-7a | the spectrum of a graph | **#100 restated and kept**: real by the spectral theorem, and only then listable in order. Convention 2 is part of the definition |
+| 124 | GT-7a | $L=MM^{\mathsf T}$ and the matrix-tree cofactor | $M$ depends on a chosen orientation; that $L$, and hence every cofactor, is **independent of the orientation** is a numbered step, not a remark |
+| 125 | GT-7a | the normalised Laplacian $\mathcal{L}=D^{-1/2}LD^{-1/2}$ | $D^{-1/2}$ requires every degree to be nonzero, i.e. **no isolated vertices**; state the hypothesis at the definition, since the graphs the expansion pages care about are regular and the hypothesis is invisible there |
+| 126 | GT-7b | the Rayleigh quotient and Courant–Fischer | $R_A(x)$ needs $x\ne0$; the max–min is over a nonempty set of subspaces of each dimension. If the spectral-theorem page does not mint Courant–Fischer, GT-7b mints it and the attainment of the extremum is part of the statement |
+| 127 | GT-7b | the srg eigenvalue multiplicities $f,g$ | **#102 restated and kept**: they are given by a formula that must be a nonnegative integer, and that integrality **is** the feasibility condition — so they are computed before any parameter set is called feasible |
+| 128 | GT-7b | $\vartheta(G)$ by orthonormal representations | the infimum is over a nonempty set (the standard basis representation of $\bar G$ always works) and is **attained** — say which, and do not silently switch to the SDP definition, whose equality with this one is not proved here |
+
+## 23.10 Choice ledger rows added by this block
+
+Every result in §23 is finite-dimensional or finite-combinatorial and costs
+**nothing**: rank bounds over a stated field, polynomial spaces of finite
+dimension, finite designs and planes, and the spectral theorem for a real
+symmetric $n\times n$ matrix. Two rows are worth recording explicitly because a
+reader will expect a cost and there is none.
+
+| result | page | cost | note |
+|---|---|---|---|
+| **Perron–Frobenius, symmetric case** | GT-7a | **none — ZF** | via the spectral theorem and the variational characterisation. **No Brouwer, no compactness.** The general nonnegative irreducible version, if ever wanted, goes through Collatz–Wielandt and `thm-euclidean-heine-borel-pseudocompactness-and-extreme-values` (§19.2 F4), which is also choice-free |
+| **the Kahn–Kalai disproof of Borsuk's conjecture** | CB-24 | **none** | a finite $\pm1$-cube construction plus the modular Frankl–Wilson bound; nothing about $\mathbb{R}^d$ beyond the diameter of a finite point set |
+| every other result in §23 | CB-13, CB-23, CB-24, CB-14a/b/c, GT-7a/b | **none** | recorded once here rather than page by page, so that a page which *does* spend choice stands out |
+
+---
+
+# 24. The graph-theory block
+
+Sources are keyed **G1**–**G10**: **G1** Diestel, *Graph Theory*, 5th ed.
+(`https://diestel-graph-theory.com/`, obtained in full, all 12 chapters);
+**G2** Zhao, *Graph Theory and Additive Combinatorics*
+(`https://yufeizhao.com/gtacbook/gtacbook.pdf`, 342 pp., full text; also mirrored
+at MIT OCW); **G3** Schrijver, *A Course in Combinatorial Optimization*
+(`https://homepages.cwi.nl/~lex/files/dict.pdf`, full text) and his "A Pythagoras
+proof of Szemerédi's regularity lemma"
+(`https://homepages.cwi.nl/~lex/files/szem_pf3.pdf`, 2 pp.); **G4** Cambridge
+Part II Graph Theory, Leader (Michaelmas 2007) and Thomason (2005), two
+independent note sets, both full; **G5** Harju, *Lecture Notes on Graph Theory*,
+full; **G6** Keller & Trotter, *Applied Combinatorics* (2017), full;
+**G7** West, *Introduction to Graph Theory*, 2nd ed., TOC; **G8** Bondy & Murty,
+*Graph Theory* GTM 244 (2008) and *Graph Theory with Applications* (1976), TOC
+at section and named-subsection level; **G9** Bollobás, *Modern Graph Theory*
+GTM 184, TOC; **G10** Oxford B8.5 / C8.3 synopses. Verbatim headings, the full
+margin-apparatus dependency extraction, and the step-by-step proof audits:
+`research/subjects-01-combinatorics-harvest-graphtheory.md`.
+
+**One source is explicitly disqualified.** Bollobás, *Extremal Graph Theory*
+(1978 / Dover 2004) could be obtained at **chapter-list level only** — every
+archive.org derivative returns a content block, WorldCat and the ACM DL are
+gated, Google Books has no structured contents, and the Library of Congress MARC
+record carries no 505 formatted-contents note. Because its headings cannot be
+enumerated, **no disposition can be given for them, so it cannot satisfy clause
+(b)/(c) of the source-depth rule and must not be counted as one of a pair's two
+independent treatments.** The dispatch named it as a standard reference; it is
+one, and it is nevertheless unusable under this library's harvest rule. Recorded
+in §29.
+
+## 24.0 The colouring anomaly, investigated
+
+The dispatch flagged `graph-colouring` (published) as "anomalously thin next to
+its neighbours". It is, and the investigation is worth recording because the
+number understates the gap.
+
+**What is actually on the page**, read from the spec: four A items —
+`def-proper-vertex-colouring-and-chromatic-number`, `lem-greedy-colouring-bound`
+($\chi\le\Delta+1$), `def-clique-and-independence-numbers`, and
+`thm-clique-independence-chromatic-bounds` ($\omega(G)\le\chi(G)$ and
+$\lvert V(G)\rvert\le\chi(G)\alpha(G)$) — plus two B items,
+`ex-chromatic-number-of-a-complete-graph` and `cex-greedy-order-on-p-four`.
+Its neighbours run 20–35 items. It is a stub: a definition, the greedy bound, and
+two inequalities.
+
+**Three findings sharpen what the enrichment must do.**
+
+1. **The gap is not one page's worth.** Every source harvested treats vertex
+   colouring, edge colouring, list colouring and perfect graphs as four separate
+   developments. G1 ch. 5 alone has 6 sections, 21 numbered results and 54
+   exercises; the Cambridge Part II schedule gives colouring **5 of 24
+   lectures**, equal-largest with extremal graph theory. §19.3 already concluded
+   four pages from the 60-item ceiling; the source structure gives the same
+   answer independently.
+2. **Colouring is load-bearing, not a leaf.** G1's margin apparatus — a number in
+   square brackets beside a result names a later result that uses it — shows
+   Lemma 5.2.3 (every $k$-chromatic graph has a $k$-chromatic subgraph of minimum
+   degree $\ge k-1$) used at **7.3, 9.2.1, 9.2.3 and 11.2.3**, four separate later
+   chapters; Prop. 5.5.2 (chordal $\Rightarrow$ perfect) used at 7.3.3; Prop. 5.5.1
+   (chordal $\iff$ pasting along complete subgraphs) used at 12.3.6, which feeds
+   12.4.4. **The library's four-item colouring page is a structural bottleneck for
+   extremal graph theory, Ramsey theory and graph minors alike**, and that is a
+   second, independent argument for closing it.
+3. **One published item is already half of a landmark.**
+   `thm-clique-independence-chromatic-bounds` gives $\lvert V\rvert\le\chi\alpha$.
+   For a perfect graph $\chi=\omega$, so this is exactly the necessity direction of
+   Lovász's criterion $\lvert H\rvert\le\alpha(H)\omega(H)$ (G1 Thm 5.5.6) — the
+   theorem whose sufficiency direction *implies* the perfect graph theorem. GT-13
+   cites the published item for necessity and proves only sufficiency. **Nothing
+   is retrofitted onto the published page**; the citation runs the other way.
+
+**A duplicate-notion finding, recorded for the orchestrator.** The library defines
+clique and independence numbers **twice**: `def-clique-and-independence-numbers`
+on `graph-colouring`, and `def-clique-stable-set-and-numbers` on
+`induced-subgraphs-and-hereditary-graph-classes`. Both are published, neither is
+wrong, and the second page also publishes
+`lem-complement-swaps-cliques-and-stable-sets`. Nothing in this scaffold may mint
+a third. **Every new page cites `def-clique-and-independence-numbers`**, which is
+the earlier of the two, and GT-13 carries a `rem-` recording the synonymy —
+"independent" (G1) and "stable" (G3, G8) are the same notion, and this library
+holds both names. This is an observation about published content, not a repair;
+retrofitting published items is forbidden and none is proposed.
+
+## 24.1 Conventions this block adopts
+
+Taken from the harvest's §D, where each is backed by a verbatim quotation.
+
+| # | question | the disagreement | adopted | why |
+|---|---|---|---|---|
+| 7 | "graph" | G1 §1.1: "A **graph** is a pair $G=(V,E)$ of sets such that $E\subseteq[V]^2$" — simple. G8 (both editions) admit loops and parallel edges and say *simple graph* for the restricted notion. G1's own note: "authors who usually work with multigraphs tend to call them 'graphs'" | **graph = simple**, matching the published `def-finite-simple-graph` and `rem-finite-simple-graph-convention` | it is what the library already publishes, and it is the graduate standard (G1, G7, G9, G4, G10) |
+| 8 | when multigraphs are unavoidable | G1 switches deliberately in exactly two places and says why: "there are areas in graph theory (such as plane duality; see Chapters 4.6 and 6.5) where multigraphs arise more naturally than graphs" | **every flow item and every plane-duality item declares `multigraph`**, citing the published `def-multigraph-loop-and-digraph` | G1's Thms 6.3.1, 6.3.3, 6.5.3, 6.6.1 and all three Tutte flow conjectures are stated for multigraphs and are **false or vacuous** if silently restricted to simple graphs: contracting a plane graph produces loops and parallel edges |
+| 9 | "$H$-free" | **the most dangerous ambiguity in this block.** Extremal graph theory (Turán, Erdős–Stone, Kővári–Sós–Turán, the regularity method) means *no subgraph*; structural theory (the strong perfect graph theorem, $\chi$-boundedness, hereditary classes) means *no induced subgraph*. G1 always writes "as an induced subgraph" in ch. 5; G2 ch. 1 is titled "Forbidding a Subgraph" | **never write "$H$-free" bare.** Extremal pages write "no subgraph isomorphic to $H$"; structural pages write "no induced copy of $H$", citing the published `def-h-free-and-family-free-graph`, which is the *induced* notion. Each page carries a `rem-` naming the reading in force | the library **already straddles both**: `extremal-graph-theory` (20 items) uses the subgraph reading and `induced-subgraphs-and-hereditary-graph-classes` (23 items) uses the induced one. "Triangle-free" is the case where they coincide, which is exactly why the ambiguity survives unnoticed |
+| 10 | $\kappa(K^n)$ | G1 §1.4: "$G$ is **$k$-connected** if $\lvert G\rvert>k$ and $G-X$ is connected for every $X$ with $\lvert X\rvert<k$", hence "$\kappa(K^n)=n-1$ for all $n\ge1$". Some sources set $\kappa(K^n)=\infty$ or leave it undefined | **$\kappa(K^n)=n-1$**, citing the published `def-vertex-and-edge-connectivity` | the $\lvert G\rvert>k$ clause is the whole point: without it $K^n$ would be $k$-connected for every $k$. It is what makes global Menger and $\kappa\le\lambda\le\delta$ come out right for complete graphs. $\kappa(K^1)=0$ and $\kappa(K^2)=1$ are stated boundary cases |
+| 11 | girth of a forest | G1 §1.3: girth $=\infty$ and circumference $=0$ when there is no cycle. Some sources leave girth undefined, a few set it to $0$ | **$\infty$**, matching the published `def-graph-distance-and-girth` | it is what makes "girth at least $g$" monotone and the $\delta\ge3\Rightarrow g<2\log\lvert G\rvert$ corollary contrapositive-clean |
+| 12 | is the null graph connected? | G1 §1.4: "connected if it is **non-empty** and any two of its vertices are linked by a path"; hence "the empty graph has no components". The opposite convention is common in topology-influenced treatments | **G1's**, matching the published `def-connected-graph-and-connected-component` | it is **load-bearing for Tutte's 1-factor theorem**, where $q(G-S)$ counts odd components and $S=V(G)$ must give $q(\varnothing)=0$ |
+| 13 | degeneracy vs colouring number | G1's $\operatorname{col}(G)$ = least $k$ with a vertex enumeration in which each vertex is preceded by fewer than $k$ neighbours; the literature's **degeneracy** $=\operatorname{col}-1=\max_{H\subseteq G}\delta(H)$ | **both names in the definition item, with the relation proved**; the greedy bound reads $\chi\le\operatorname{col}=\text{degeneracy}+1$ | the off-by-one is a real trap and both names are standard |
+| 14 | $\operatorname{ch}(G)$ vs $\chi_\ell(G)$ | G1 and G8 write $\operatorname{ch}$; Molloy–Reed and most recent papers write $\chi_\ell$ | **define both in one sentence, then use $\operatorname{ch}$** | neither is wrong and a reader who knows only one must not be stranded |
+| 15 | tree-width's $-1$ | universal; G1's own footnote: "the '$-1$' in the definition of width serves no other purpose than to make this statement true" — namely $\operatorname{tw}(\text{tree})=1$ | **the $-1$, labelled as a convention with the reason** | omitting it gives $\operatorname{tw}(\text{tree})=2$ |
+| 16 | regularity-lemma form | G1 7.4.1 bakes equitability into the definition (exceptional bin $V_0$, equal other parts) and allows a lower bound $m\le k$; G2 2.1.9 states the plain version and derives equitability separately (2.1.20); G3's Pythagoras note states a directed **refinement** version. Worse, **G1 alone uses two regularity notions**: §7.4's $\varepsilon$-regular and §7.6's $(\varepsilon,d)$-uniform, with his own warning "To avoid confusion, we shall call this '$\varepsilon$-uniformity' here" | **G1's $\varepsilon$-regular as primary; equitability and the lower bound $m$ as explicit stated clauses, not hidden in the definition; $\varepsilon$-uniformity as its own definition item with both implications proved** ($\varepsilon$-regular $\Rightarrow$ $\varepsilon$-uniform, $\varepsilon$-uniform $\Rightarrow$ $\sqrt[3]{\varepsilon}$-regular) | **a proof that silently swaps the two notions is a fatal citation defect, not a nitpick** |
+| 17 | chromatic polynomial normalisation | four conventions circulate: the counting one ($P(G,k)=\#$ proper $k$-colourings, monic, alternating signs); two forms of deletion–contraction; the Whitney rank expansion, whose $(-1)^{\lvert S\rvert}$ is intrinsic; and the Tutte normalisation $P(G,k)=(-1)^{r(E)}k^{c(G)}T(G;1-k,0)$, where books absorb the sign and the $k^{c}$ differently | **the counting convention as the definition**; the Whitney and Tutte forms as separate theorems each carrying its own stated normalisation | a Tutte-normalised identity and a counting-normalised identity must never sit on a page together without a reconciling `rem-` |
+| 18 | small vocabulary | "independent" (G1) = "stable" (G3, G8); "nonseparable" (G8) $\ne$ "2-connected" exactly (a block may be $K^2$ or $K^1$); "chordal" (G1) = "triangulated", but *triangulated* collides with the plane-triangulation sense; G1's $\log$ is **base 2** and $\ln$ is natural; G1's $\mathbb{N}$ **includes** $0$ | **independent, 2-connected, chordal**; every asymptotic statement quoted from G1 states its log base explicitly | "triangulated" would collide with `def-maximal-plane-and-maximally-planar-graph`'s sense, and a silently reinterpreted $\log$ changes an asymptotic statement's content |
+
+---
+
+## GT-9 (NEW). Vertex Colouring I: Degeneracy, Critical Graphs, Brooks and De Bruijn–Erdős
+
+**Anchor:** `graph-colouring-examples` (published).
+`requires`: `graph-colouring`, `graphs-walks-and-connectivity`,
+`trees-forests-and-spanning-trees`, `ramsey-theory` (for the ultrafilter lemma's
+home page — verify at build time), `matchings-covers-menger-and-network-flows`.
+
+DEFS: the **colouring number** $\operatorname{col}(G)$, verbatim from G1 p. 127 —
+"the least number $k$ such that $G$ has a vertex enumeration in which each vertex
+is preceded by fewer than $k$ of its neighbours" — together with **degeneracy**
+$\max_{H\subseteq G}\delta(H)$ and the proved relation (convention 13, #80); the
+**smallest-last (degeneracy) ordering**; a **$k$-critical** graph and a
+**colour-critical** edge (#81); the **Mycielski construction** $\mu(G)$;
+**arboricity**.
+
+THMS: **$\chi(G)\le\operatorname{col}(G)=\max_{H\subseteq G}\delta(H)+1$**
+(landmark; G1 Prop. 5.2.2) — the sharpened greedy bound, proved by building the
+ordering backwards, choosing $v_n$ of minimum degree in $G$, then $v_{n-1}$ of
+minimum degree in $G-v_n$, and so on, with the converse
+$\operatorname{col}(G)\ge\operatorname{col}(H)\ge\delta(H)+1$ for $H\subseteq G$;
+**every $k$-chromatic graph has a $k$-chromatic subgraph of minimum degree at
+least $k-1$** (G1 Lemma 5.2.3) — **three steps, and the highest-fan-out cheap item
+in the whole block** (G1 uses it in four later chapters), proved by taking
+$H\subseteq G$ minimal with $\chi(H)=k$ and noting a vertex of degree $\le k-2$
+would let a $(k-1)$-colouring of $H-v$ extend; **every $k$-chromatic graph
+contains a $k$-critical subgraph** (#81) — take an edge-minimal one — with the
+corollary $\delta\ge k-1$ for a $k$-critical graph, which is Dirac's bound and
+which the id `lem-k-chromatic-subgraph-of-large-minimum-degree` should carry
+rather than a bare `dirac` name, since `cor-diracs-hamiltonicity-theorem` is
+already published and means something else; **every $k$-critical graph is
+$2$-connected** and **has no cut vertex**; **Brooks' theorem** (landmark; G1
+Thm 5.2.4, verbatim: "Let $G$ be a connected graph. If $G$ is neither complete
+nor an odd cycle, then $\chi(G)\le\Delta(G)$"); **Gallai–Roy** (every orientation
+has a directed path on $\chi(G)$ vertices, and some orientation achieves it) —
+sourced from G7/G8 rather than G1, so a step-2 Beta confirms the exact statement
+before authoring; **the Mycielskian is triangle-free with chromatic number one
+larger**, hence **triangle-free graphs of arbitrarily large chromatic number**
+(landmark — the single best answer to "surely a graph with no triangle is easy to
+colour"); **De Bruijn–Erdős** (landmark; G1 Thm 8.1.3, verbatim: "Let $G=(V,E)$ be
+a graph and $k\in\mathbb{N}$. If every finite subgraph of $G$ has chromatic
+number at most $k$, then so does $G$").
+
+**Brooks is scaffolded with BOTH proofs, and the split is what makes it
+affordable.** G1's route is an induction on $\lvert G\rvert$ with four claims,
+about 14–18 steps as one proof — too long for one item, and it decomposes exactly
+along its own claims into four items of $\le8$ steps: *every $\Delta$-colouring of
+$G-v$ uses all $\Delta$ colours on $N(v)$*; *for $i\ne j$ the vertices $v_i,v_j$
+lie in a common component $C_{i,j}$ of the two-colour subgraph $H_{i,j}$*; *each
+$C_{i,j}$ is a $v_i$–$v_j$ **path***; *for distinct $i,j,k$ the paths $C_{i,j}$
+and $C_{i,k}$ meet only in $v_i$*. Lovász's route (G1 Exercise 17, attributed in
+the Notes to Lovász 1973) is shorter overall — ~10 steps for the greedy-order
+lemma, ~8 for the non-separating-pair lemma, ~4 to assemble — but the second
+lemma is where the work hides and it needs the connectivity machinery of GT-14.
+**Scaffold G1's as the main proof, Lovász's as the second proof**: G1's needs only
+greedy colouring, and Lovász's exhibits the greedy-order technique the degeneracy
+items also spend, so the two pay for different machinery. Both exception cases are
+exactly $K^{\Delta+1}$ and the odd cycles, and **connectedness is essential** — the
+statement is false for a disjoint union containing a $K^{\Delta+1}$, which is the
+page's required `cex-`.
+
+**De Bruijn–Erdős is scaffolded at three choice strengths, and this is unusually
+valuable** — G1 gives three proofs and the library can show the same theorem at
+three costs on one page.
+
+- **Countable $G$, via König's infinity lemma.** Enumerate $V$, set
+  $G_n:=G[v_0,\dots,v_n]$, let $V_n$ be the (finite, nonempty) set of
+  $k$-colourings of $G_n$, join each to its restriction, and take a ray. **Five to
+  six steps given the published `thm-konig-infinity-lemma-for-ordered-trees`,
+  which is titled "in ZF"** — so this half is **choice-free**, and §21's corrected
+  row says exactly that. The *ordered* hypothesis is what buys it.
+- **Arbitrary $G$, via the ultrafilter lemma.** G1's third proof takes the compact
+  product $\{1,\dots,k\}^V$ and applies Tychonoff to closed sets $A_U$ with the
+  finite intersection property. This library publishes
+  `thm-ultrafilter-lemma` and `thm-compact-hausdorff-tychonoff-from-the-ultrafilter-lemma`,
+  so the route is available **and its cost is BPI, named in the Statement**
+  (§21's row, unchanged).
+- **The reversal is NOT claimed.** Läuchli's equivalence of De Bruijn–Erdős with
+  BPI over ZF is a separate claim; state the implication the proof gives and do
+  not assert the converse without a source. §29 records this as an open sourcing
+  question.
+
+A `rem-choice-ledger`-style remark is **required** on this page, and the
+finiteness convention of the published `rem-finite-simple-graph-convention` is
+**explicitly suspended** in the De Bruijn–Erdős statement — it is the only
+infinite statement on the page.
+
+FS: $\chi(G)\le\Delta(G)$ for every graph (the witnesses are $K^{n}$ and the odd
+cycles, and they are exactly Brooks' exceptions); every $k$-critical graph is
+$k$-regular; $\operatorname{col}(G)=\Delta(G)+1$ always; a triangle-free graph has
+chromatic number at most $3$ (the witness is the Mycielskian tower); De
+Bruijn–Erdős holds for the **list** chromatic number with the same proof (it does
+not, and GT-12 says why).
+
+B: $\operatorname{col}$ and the degeneracy ordering computed on a named small
+graph; the Petersen graph's chromatic number by Brooks; $\mu(C_5)$ = the
+Grötzsch graph exhibited, triangle-free with $\chi=4$; a $4$-critical graph
+exhibited; the greedy bound and the degeneracy bound compared on a star.
+
+CEX: a disconnected graph violating Brooks' conclusion, showing connectedness is
+a hypothesis; a graph where the natural vertex order makes greedy use
+$\Delta+1$ colours while the degeneracy order uses fewer (the published
+`cex-greedy-order-on-p-four` is the $P_4$ case and is **cited, not re-minted**);
+a $k$-chromatic graph with a vertex of degree $<k-1$, showing why Lemma 5.2.3
+passes to a subgraph rather than to $G$.
+
+Traps. (i) `def-clique-and-independence-numbers` is published; cite it (§24.0).
+(ii) The published `lem-greedy-colouring-bound` is $\chi\le\Delta+1$; the new
+$\chi\le\operatorname{col}$ is a **sharpening**, so the new item cites the
+published one and does not restate it. (iii) Brooks' exception list depends on
+$\Delta$: for $\Delta=2$ it is the odd cycles and $K^3=C_3$, for $\Delta\ge3$ only
+$K^{\Delta+1}$. A Statement that says "except $K^{\Delta+1}$ and odd cycles"
+without that observation is still correct, but the `ex-` must show both regimes.
+
+Provenance: Statements `literature-derived` (G1, quoted). Proofs
+`literature-derived`; the decomposition of Brooks into four claim-items is
+`ai-altered` structuring of G1's own claim numbering.
+
+---
+
+## GT-10 (NEW). Vertex Colouring II: the Chromatic Polynomial, Broken Circuits and Acyclic Orientations
+
+**Anchor:** immediately after GT-9's examples page.
+`requires`: GT-9, `graph-colouring`, `incidence-algebras-and-mobius-inversion`,
+`polynomial-rings-and-roots`, `graphs-walks-and-connectivity`,
+CB-19 (the partition lattice and characteristic polynomials, §22).
+
+DEFS: $P(G,k)$ as **the number of proper colourings $V(G)\to\{1,\dots,k\}$**
+(convention 17) — a *function* until the polynomiality theorem licenses the word
+"polynomial" (#82); deletion and contraction, citing the published
+`def-graph-deletion-contraction-minor-and-subdivision`; a **broken circuit**
+relative to a chosen linear order of $E(G)$, and the **broken-circuit complex**
+(#83); an **acyclic orientation**; the **lattice of flats** of a graph.
+
+THMS: **deletion–contraction** $P(G,k)=P(G-e,k)-P(G/e,k)$ (landmark), and hence
+**$P(G,\cdot)$ is a polynomial** of degree $n=\lvert G\rvert$, monic, with
+coefficient of $k^{n-1}$ equal to $-\lVert G\rVert$ and coefficients alternating
+in sign (#82 — the word "polynomial" is not licensed before this item, and §8 #30
+recorded this obligation years ago against a page that was never built);
+**the Whitney rank expansion** $P(G,k)=\sum_{S\subseteq E}(-1)^{\lvert S\rvert}k^{c(S)}$,
+where $c(S)$ is the number of components of $(V,S)$, whose $(-1)^{\lvert S\rvert}$
+is intrinsic and not a convention; **Whitney's broken-circuit theorem**
+(landmark) — the coefficients of $P(G,k)$ count subsets containing no broken
+circuit — together with **the independence of the coefficients from the chosen
+edge order** (#83), which is the well-definedness obligation that makes the
+theorem non-false-sounding; **the chromatic polynomial of a graph is the
+characteristic polynomial of its lattice of flats** (landmark), the item that
+connects this page to CB-19's Möbius machinery and repays the incidence-algebra
+page the library already publishes; **Stanley's reciprocity theorem** (landmark)
+— $(-1)^{n}P(G,-k)$ counts pairs consisting of an acyclic orientation and a
+compatible $k$-colouring, hence $\lvert P(G,-1)\rvert$ is the number of acyclic
+orientations (#84) — legitimate precisely because $P$ is a polynomial with integer
+coefficients, which #82 established; the chromatic polynomials of $K_n$, trees,
+cycles and complete bipartite graphs computed as theorems.
+
+**Source status, stated honestly.** G1 gives the chromatic polynomial as
+**Exercise 19 only** — "let $P_G(k)$ denote the number of vertex colourings
+$V(G)\to\{1,\dots,k\}$. Show that $P_G$ is a polynomial in $k$ of degree
+$n:=\lvert G\rvert$, in which the coefficient of $k^n$ is $1$ and the coefficient
+of $k^{n-1}$ is $-\lVert G\rVert$" — and never defines $T(G;x,y)$. The broken-circuit
+theorem, the lattice-of-flats identity and Stanley reciprocity therefore need a
+different primary source. Stanley EC1 §3.11 and Stanley's *Topics in Algebraic
+Combinatorics* are both already obtained in full (S1, A3), and a dedicated
+harvest is running for the polynomial material (§29). **Until it returns this
+pair is scaffolded but not source-complete**, and that is stated rather than
+hidden.
+
+FS: every polynomial with alternating integer coefficients is the chromatic
+polynomial of some graph; $P(G,k)$ determines $G$ up to isomorphism (the witness
+is any two non-isomorphic trees on the same number of vertices — both have
+$k(k-1)^{n-1}$, and it is the cheapest chromatically-equivalent pair available);
+the broken-circuit count depends on the edge order; $P(G,-1)$ is the number of
+*all* orientations.
+
+B: $P(K_3,k)$, $P(P_4,k)$, $P(C_4,k)$ and $P(K_{2,3},k)$ computed by
+deletion–contraction; the broken-circuit expansion of $C_4$ under two different
+edge orders, giving the same coefficients; $\lvert P(C_4,-1)\rvert=14$ checked
+against a direct count of acyclic orientations; two non-isomorphic trees with
+equal chromatic polynomials.
+
+CEX: two chromatically equivalent non-isomorphic graphs; a subset of edges
+containing a broken circuit but no circuit, showing the two notions differ; an
+integer polynomial with alternating signs that is not any graph's chromatic
+polynomial.
+
+Traps. (i) "Polynomial" is unlicensed until #82; the definition item must speak
+of the *number of colourings*. (ii) A broken circuit depends on the edge order and
+the coefficients do not — those are two different sentences and both must appear.
+(iii) The Tutte normalisation is a **separate theorem with its own stated
+normalisation** (convention 17) and belongs to GT-18, not here.
+
+Provenance: Statements `literature-derived` pending the polynomial harvest;
+`ai-altered` is the correct label for any statement whose exact form this scaffold
+had to reconstruct, and no statement on this page may ship as `ai-generated`.
+
+---
+
+## GT-11 (NEW). Edge Colouring: König, Vizing, and Class 1 versus Class 2
+
+**Anchor:** immediately after GT-10's examples page.
+`requires`: GT-9, `graph-colouring`, `graphs-walks-and-connectivity` (for
+`thm-bipartite-iff-no-odd-cycle` and `def-line-graph`),
+`matchings-covers-menger-and-network-flows`.
+
+DEFS: a **proper edge colouring** and the **chromatic index** $\chi'(G)$ (#85);
+the **$\alpha\beta$-subgraph** of a proper edge colouring (#86); a **fan** at a
+vertex, in G1's sequence formulation; **class 1** and **class 2** graphs, verbatim
+from G1 p. 133; the **snark**, verbatim from G1 §6.6: "A cubic bridgeless graph or
+multigraph without a $4$-flow (equivalently, without a $3$-edge-colouring)".
+
+THMS: **the components of the $\alpha\beta$-subgraph are paths and even cycles**
+(#86) — each vertex meets at most one $\alpha$-edge and one $\beta$-edge — and
+hence **swapping $\alpha$ and $\beta$ on one component leaves a proper edge
+colouring**; **König's edge-colouring theorem** (landmark; G1 Prop. 5.3.1: "Every
+bipartite graph $G$ satisfies $\chi'(G)=\Delta(G)$") — 8–10 steps, and **the
+single cheapest substantial colouring item available**, since its only dependency
+is the published `thm-bipartite-iff-no-odd-cycle`; **Vizing's theorem** (landmark;
+G1 Thm 5.3.2: "Every graph $G$ satisfies $\Delta(G)\le\chi'(G)\le\Delta(G)+1$"),
+in **G1's sequence formulation of the fan argument**, which is exactly one printed
+page and 12–16 numbered steps, against 2–3 pages for the set-of-edges
+presentations in G7 §7.1 and G8 §17.2 that carry more case analysis — the two are
+the same argument and the shorter one loses nothing; **every regular graph of odd
+order is class 2**, in $\le6$ steps (a colour class is a matching, so has at most
+$(n-1)/2$ edges, so $\Delta$ classes cover at most $\Delta(n-1)/2<\Delta n/2=\lVert G\rVert$);
+**the Petersen graph is class 2**; **$\chi'(G)\in\{\omega(L(G)),\omega(L(G))+1\}$**,
+i.e. Vizing restated for line graphs, which is three steps given Vizing and is the
+seam to GT-13's perfect-graph material.
+
+**§19.2 F1's fallback is what this page uses, and it is a design decision rather
+than a loss.** The published `lem-kempe-component-colour-swap` is homed on
+`plane-graphs-euler-and-the-five-colour-theorem`, far above this band, and cannot
+be cited here. It is also the **vertex**-colouring statement. GT-11 needs the
+**edge** analogue — *for a proper edge colouring and colours $\alpha,\beta$, the
+components of the subgraph of $\alpha$- and $\beta$-coloured edges are paths and
+even cycles* — which is a genuinely different statement, so minting it here is not
+a duplicate id under any reading. The re-home §19.2 F1 recommends would still
+help, because `def-kempe-chain` would then be citable as the shared vocabulary;
+it remains an owner-only reading-order change and §28 carries it.
+
+**Sourcing gap, recorded.** G1 gives only the simple-graph Vizing bound.
+**Shannon's bound $\chi'\le\lfloor3\Delta/2\rfloor$ and Vizing's multigraph
+theorem $\chi'\le\Delta+\mu$** are not in any source obtained by the main graph
+harvest, and the harvest's own §C.4 promised them in a §C.13 that was never
+written. A dedicated harvest is running (§29). **The multigraph bounds are
+scaffolded conditionally**: if the harvest returns exact statements with bounded
+proof routes they are items on this page; if not, they are `rem-` items with
+`proved_here: false` and their sources. Goldberg–Seymour is statement-only either
+way.
+
+FS: $\chi'(G)=\Delta(G)$ for every graph (the witness is any odd cycle, or the
+Petersen graph); a class-2 graph has a vertex of degree $>\Delta$; the
+$\alpha\beta$-subgraph of a proper edge colouring can contain an odd cycle;
+$\chi'(G)=\chi(L(G))$ **is true by definition** — so this is not an `fs-` and the
+page must not pretend otherwise.
+
+B: $\chi'(K_4)=3$ and $\chi'(K_5)=5$ computed; $\chi'(C_5)=3$; a $\Delta$-edge-colouring
+of $K_{3,3}$ by König; the Petersen graph shown class 2 by the odd-order argument
+applied to a suitable subgraph, or directly; a fan constructed explicitly on a
+small graph.
+
+CEX: a class-2 graph of even order (so that "odd order" is sufficient and not
+necessary); an $\alpha\beta$-swap that fails when the two colours are not both
+proper.
+
+Traps. (i) G1's "class 1 / class 2" quotation includes the reason there is no
+characterisation — "no easily checkable 'certificate' is known for a graph to be
+class 2" — and that is a `rem-`, not a theorem. (ii) Vizing's theorem is
+$\Delta\le\chi'\le\Delta+1$; the lower bound is trivial and the upper is the
+content, and both belong in the Statement. (iii) The snark definition quoted here
+mentions $4$-flows, which are GT-18's material; either quote the
+$3$-edge-colouring half only, or declare the forward reference on a `rem-`.
+
+Provenance: Statements `literature-derived` (G1, quoted). Proofs
+`literature-derived`.
+
+---
+
+## GT-12 (NEW). List Colouring, Kernels and Galvin's Theorem
+
+**Anchor:** immediately after GT-11's examples page.
+`requires`: GT-11, GT-9, `graphs-walks-and-connectivity` (`def-line-graph`),
+`matchings-covers-menger-and-network-flows`, CB-23 (for Alon–Tarsi).
+
+DEFS: **$k$-choosable** and the **choice number**, verbatim from G1 p. 134, with
+$\chi_\ell$ recorded as the synonym (convention 14, #87); the edge version
+$\operatorname{ch}'(G):=\operatorname{ch}(L(G))$; a **kernel** of a digraph,
+verbatim from G1: "an independent set $U\subseteq V(D)$ [is] a kernel of $D$ if,
+for every vertex $v\in D-U$, there is an edge in $D$ directed from $v$ to a vertex
+in $U$"; a **stable matching** and the preference structure it needs.
+
+THMS: **$\operatorname{ch}(G)\ge\chi(G)$ and $\operatorname{ch}'(G)\ge\chi'(G)$**,
+because ordinary colouring is the equal-lists case; **the kernel lemma**
+(landmark; G1 Lemma 5.4.3) — if $H$ has an orientation $D$ with
+$d^{+}(v)<\lvert S_v\rvert$ for every $v$ and every induced subgraph of $D$ has a
+kernel, then $H$ is colourable from the lists — proved by induction on
+$\lvert H\rvert$ in 6–8 steps, **with G1's warning reproduced as a `rem-`: keeping
+the list lengths variable is essential, and the induction fails with uniform
+lengths**; **the Gale–Shapley stable matching theorem** (landmark) — **minted
+here, because the library does not have it** (`ls items/ | grep -i stable-matching`
+returns nothing, and `matchings-covers-menger-and-network-flows` publishes Hall,
+König, Berge, Gallai and Ford–Fulkerson but no stable matching); **Galvin's
+theorem** (landmark; G1 Thm 5.4.4: "Every bipartite graph $G$ satisfies
+$\operatorname{ch}'(G)=\chi'(G)$"), by orienting the line graph so that for
+adjacent $e,e'$ with $c(e)<c(e')$ the edge runs from $e'$ to $e$ if they meet in
+$X$ and from $e$ to $e'$ if they meet in $Y$, computing $d^{+}(e)<k$, and reading
+"every induced subgraph has a kernel" **directly off Gale–Shapley**, since a
+stable matching *is* a kernel; **$\operatorname{ch}'(G)=\Delta(G)$ for bipartite
+$G$** (G1 Cor. 5.4.5), free from Galvin and König; **$\operatorname{ch}(K_{2,4})=3$
+while $\chi(K_{2,4})=2$**, the smallest explicit witness that the gap is real; and
+**the gap is unbounded even for bipartite graphs** — for every $k$ there is a
+$2$-chromatic graph with choice number $\ge k$ (G1 Exercise 30), with G1
+Exercise 33's $\operatorname{ch}(K_{2,2,\dots,2})=r$ as the clean family.
+
+**Alon–Tarsi is cited from CB-23, not re-minted.** CB-23 proves that a graph with
+an orientation $D$ satisfying $\mathrm{EE}(D)\ne\mathrm{EO}(D)$ is
+$(d^{+}_D+1)$-choosable, via the Combinatorial Nullstellensatz applied to the
+graph polynomial. That page sits below this one, so this is a plain citation and
+the two routes to choosability — the kernel lemma and the polynomial method — sit
+side by side, which is the page's best `rem-`.
+
+**Thomassen's 5-choosability theorem is NOT here.** It needs a plane embedding
+and therefore sits above `plane-graphs-euler-and-the-five-colour-theorem`;
+**GT-22 carries it**, and this page declares no forward reference to it, because
+nothing here uses it.
+
+FS: $\operatorname{ch}(G)=\chi(G)$ for every graph (the witness is $K_{2,4}$);
+$\operatorname{ch}(G)\le\Delta(G)+1$ fails (it holds — greedy works with lists too
+— so this must not be written as a false statement); every digraph has a kernel
+(the witness is a directed triangle, and it is the reason the kernel lemma
+quantifies over induced subgraphs); the list-colouring conjecture
+$\operatorname{ch}'=\chi'$ is known (it is **open** — a `rem-`, not an `fs-` —
+with Kahn's 1994 asymptotic result as the recorded state of the art).
+
+B: an explicit $2$-chromatic graph with choice number $3$, namely $K_{2,4}$ with
+the lists written out; the kernel of a small orientation exhibited; Galvin applied
+to $K_{3,3}$; a stable matching computed by Gale–Shapley on a $3\times3$ instance.
+
+CEX: a digraph with no kernel; a list assignment defeating a greedy order that
+succeeds for equal lists; a bipartite graph with $\operatorname{ch}$ strictly
+above $\chi$.
+
+Traps. (i) $\operatorname{ch}$ quantifies over **all** list assignments of a given
+size (#87); the definition ranges over a finite set only once the colour universe
+is fixed, so either fix it or quantify over lists drawn from a fixed countable set
+and prove independence of that choice. (ii) The kernel lemma's variable list
+lengths are load-bearing; a uniform-length restatement is a false simplification.
+(iii) The **infinite** case of the choice number needs BPI (§21) and either states
+it or omits the infinite case entirely — never proves it silently.
+
+Provenance: Statements `literature-derived` (G1, quoted). Gale–Shapley's statement
+is `literature-derived` and its proof `literature-derived`; a step-2 Beta must
+open a source for it, since G1 states it as Thm 2.1.4 without the library having
+it.
+
+---
+
+## GT-13 (NEW). Perfect Graphs, Chordal Graphs and the Weak Perfect Graph Theorem
+
+**Anchor:** immediately after GT-12's examples page.
+`requires`: GT-9, `graph-colouring`, `induced-subgraphs-and-hereditary-graph-classes`,
+`matchings-covers-menger-and-network-flows` (for König),
+`chains-antichains-sperner-and-dilworth`, `gaussian-elimination-and-row-reduction`.
+
+DEFS: a **perfect** graph — $\chi(H)=\omega(H)$ for **every induced subgraph** $H$,
+including $G$ itself (#88), citing the published
+`def-subgraph-induced-subgraph-and-spanning-subgraph` and
+`def-clique-and-independence-numbers`; **holes** and **antiholes**, verbatim from
+G1 p. 141: "induced cycles of length at least 4 in $G$ are usually referred to as
+holes in $G$, while holes in $\bar G$ are antiholes of $G$"; a **chordal**
+(triangulated) graph, verbatim: "each of its cycles of length at least 4 has a
+chord, i.e. … it contains no induced cycles other than triangles"; **pasting**
+along a complete subgraph, verbatim from G1; the **replication** $G\circ v$ (#89);
+**comparability** and **interval** graphs, both verbatim from G1's exercises;
+a **$\chi$-bounded** class.
+
+THMS: **chordal $\iff$ constructible by pasting along complete subgraphs**
+(landmark; G1 Prop. 5.5.1) — forward is 4 steps, the converse ~10 by taking a
+minimal $a$–$b$ separator $X$ and showing $G[X]$ is complete via two shortest
+$X$-paths forming a chordless cycle of length $\ge4$; **every chordal graph is
+perfect** (G1 Prop. 5.5.2, 6 steps, by pasting and combining an $\omega(H_1)$- and
+an $\omega(H_2)$-colouring across the complete intersection);
+**Lovász's criterion** (landmark; G1 Thm 5.5.6: "A graph $G$ is perfect if and
+only if $\lvert H\rvert\le\alpha(H)\cdot\omega(H)$ for all induced subgraphs
+$H\subseteq G$") — **whose necessity direction is the published
+`thm-clique-independence-chromatic-bounds`, cited not re-proved** (§24.0), leaving
+only sufficiency, which is Gasparian's 1996 argument in 12–16 steps and is
+entirely self-contained: every nonempty independent $U$ has
+$\chi(G-U)=\omega(G-U)=\omega$; a $K^\omega$ meets every colour class of $G-u$ or
+all but one; taking $A_0$ a maximum independent set and $A_1,\dots,A_{\alpha\omega}$
+the colour classes of $\omega$-colourings of $G-u_i$, every $K^\omega$ misses
+exactly one $A_i$; the incidence matrices $A$ (rows $A_i$) and $B$ (columns $K_j$)
+have $AB=J-I$ of size $(\alpha\omega+1)$, which is nonsingular, so $A$ has rank
+$\alpha\omega+1$ and hence $n\ge\alpha\omega+1$; **the weak perfect graph theorem**
+(landmark; G1 Thm 5.5.4, Lovász 1972: "A graph is perfect if and only if its
+complement is perfect") — **free from Lovász's criterion, whose condition is
+symmetric in $G$ and $\bar G$**; the **replication lemma** (G1 Lemma 5.5.5: "Any
+graph obtained from a perfect graph by replicating a vertex is again perfect",
+#89, ~10 steps splitting on whether $\omega$ rises) and **Lovász's original route
+to the perfect graph theorem through it** (~26 steps across three items), kept as
+the second proof because the replication lemma is independently useful and G1's
+Exercise 51 generalises it to substituting whole perfect graphs for vertices;
+**the complement of a bipartite graph is perfect** (~5 steps from the published
+`thm-konig-bipartite-matching-cover`); **comparability graphs are perfect** (~8
+steps, Mirsky/Dilworth-flavoured, and the seam to the published
+`chains-antichains-sperner-and-dilworth`); **every interval graph is chordal**,
+and **the complement of an interval graph is a comparability graph**, ~6 steps
+each; **$P$-free graphs are $\chi$-bounded for a fixed path $P$** (G1 Prop. 5.6.2
+via Lemma 5.6.3, ~12 steps, needing nothing but induction).
+
+**Denied, and it is the clearest case in the whole track.** The **strong perfect
+graph theorem** (G1 Thm 5.5.3, Chudnovsky–Robertson–Seymour–Thomas 2006: "A graph
+$G$ is perfect if and only if neither $G$ nor $\bar G$ contains an odd cycle of
+length at least 5 as an induced subgraph") is 178 journal pages, and G1 declines
+even to sketch it: "The proof of the strong perfect graph theorem is long and
+technical, and it would not be too illuminating to attempt to sketch it."
+Disposition: a source-cited `rem-` with `proved_here: false`, the exact source
+(Ann. Math. **164** (2006), 51–229), and the failed in-library route recorded.
+**This is the narrow last resort used exactly as the owner rule contemplates** —
+well-established, source-checked, genuinely unbuildable in scope — and it is worth
+contrasting with CB-24's Frankl–Wilson, where the same reflex was wrong and the
+denial was withdrawn. Scott–Seymour 2016 (no odd hole $\Rightarrow$ $\chi$-bounded)
+is likewise statement-only.
+
+FS: a graph is perfect iff $\chi(G)=\omega(G)$ (the quantifier over induced
+subgraphs is the content — $C_5$ plus a pendant vertex is the kind of witness
+needed, and it must be checked); perfection passes to arbitrary subgraphs (it
+passes to **induced** subgraphs; the witness is a graph with an odd hole as a
+non-induced subgraph); every chordal graph is an interval graph; the strong
+perfect graph theorem's condition can be checked in the obvious way on $G$ alone.
+
+B: $C_5$ shown imperfect with $\chi=3>2=\omega$; the pasting construction of a
+chordal graph run explicitly; Lovász's criterion checked on $C_5$
+($5>2\cdot2$); a replication computed and its $\omega,\chi$ verified; an interval
+representation exhibited and its chordality checked; the complement of $C_6$
+identified.
+
+CEX: an imperfect graph whose complement is imperfect (any odd hole, by the weak
+theorem — but the `cex-` must be a graph exhibiting *both* directions to be worth
+its place); a graph satisfying $\lvert G\rvert\le\alpha\omega$ that is imperfect
+(there is none by Lovász's criterion — so this `cex-` must instead be an induced
+subgraph violating it, and the page must not ship the impossible version).
+
+Traps. (i) #88's quantifier is over **induced** subgraphs; convention 9's
+"$H$-free" discipline applies to every statement on this page. (ii) $\alpha$ and
+$\omega$ swap under complementation (G1: "$\alpha(\bar G)=\omega(G)$ and
+$\omega(\bar G)=\alpha(G)$"); the library publishes
+`lem-complement-swaps-cliques-and-stable-sets` and this page cites it.
+(iii) "Triangulated" is a synonym for chordal that collides with the plane sense
+(convention 18); use **chordal** everywhere and record the synonym once.
+
+Provenance: Statements `literature-derived` (G1, quoted throughout). Proofs
+`literature-derived`; choosing Gasparian's route as primary and Lovász's as
+secondary is `ai-altered` structuring, and the observation that the published
+$\lvert V\rvert\le\chi\alpha$ item supplies the necessity half is this scaffold's
+own — it is recorded here rather than asserted inside any Statement.
+
+---
+
+## GT-14 (NEW). Connectivity Structure: Blocks, Ear Decompositions and Tutte's Wheel Theorem
+
+**Anchor:** immediately after GT-13's examples page.
+`requires`: `graphs-walks-and-connectivity`,
+`matchings-covers-menger-and-network-flows`, `trees-forests-and-spanning-trees`,
+`graph-colouring`.
+
+This page is cheap and high-fan-out. G1's margin apparatus shows Menger 3.3.1 as
+**the single highest-fan-out result in the whole book** — five forward markers
+across chapters 3, 8 and 12 — and the library already publishes all four Menger
+forms (`thm-menger-finite-directed-and-undirected-path-forms`,
+`cor-whitney-k-connected-path-characterisation`). So the whole of G1 §§3.1–3.2 is
+reachable with no new connectivity work, and GT-15 then becomes reachable too.
+
+DEFS: a **cut vertex** and a **block** — verbatim from G1 §3.1, "a **block** is a
+maximal connected subgraph without a cutvertex. Thus, every block is either a
+maximal 2-connected subgraph, or a bridge (with its ends), or an isolated vertex"
+(#90); the **block graph**; an **$H$-path**; an **ear decomposition**; the
+**wheel** $W_n$; the **cycle space** of a graph and a **non-separating induced
+cycle**.
+
+THMS: **the blocks partition the edge set** (#90); **the block graph of a
+connected graph is a tree** (landmark; G1 Lemma 3.1.4), which is what licenses
+"the block tree"; **two edges lie in a common block iff …** (G1 Lemma 3.1.3, three
+equivalent conditions); **cycles and bonds of $G$ are those of its blocks** (G1
+Lemma 3.1.2); **the ear-decomposition theorem** (landmark; G1 Prop. 3.1.1: "A
+graph is 2-connected if and only if it can be constructed from a cycle by
+successively adding $H$-paths to graphs $H$ already constructed") — forward is 2
+steps, converse ~8 by taking a maximal constructible subgraph, noting it is
+induced, and extending along an edge $vw$ with $v\notin H$ using a $v$–$H$ path in
+$G-w$; **if $G\cdot e$ is 3-connected then so is $G$** (G1 Lemma 3.2.1, ~8 steps,
+citing the published `thm-whitney-connectivity-inequalities`); **every 3-connected
+$G\ne K^4$ has an edge $e$ with $G\cdot e$ 3-connected** (G1 Lemma 3.2.2, ~15
+steps, via finding a $TK^4$); **Tutte's wheel theorem** (landmark; G1 Thm 3.2.3:
+"$G$ is 3-connected if and only if there exists a sequence $G_0,\dots,G_n$ of
+graphs such that (i) $G_0=K^4$ and $G_n=G$; (ii) $G_{i+1}$ has an edge $e$ such
+that $G_i=G_{i+1}\cdot e$, for every $i<n$"); **the cycle space of a 3-connected
+graph is generated by its non-separating induced cycles** (G1 Thm 3.2.6, Tutte
+1963); **Mader's theorem** — high average degree forces a highly connected
+subgraph (G1 Thm 1.4.3), which G1's apparatus shows feeding 7.2.3 and 11.2.3, so
+it is worth its place here even though it is stated in his ch. 1.
+
+**A published item is homed above this page and cannot be cited: §19.2 F1's
+`def-bridge-in-a-graph` and `lem-edge-is-a-bridge-iff-it-lies-on-no-cycle`.**
+Both sit on `plane-graphs-euler-and-the-five-colour-theorem`, both have all their
+dependencies on `graphs-walks-and-connectivity`, and neither is about plane
+graphs. The re-home §19.2 F1 recommends is an owner-only reading-order change
+(§28). **Until it happens, GT-14 works with `def-vertex-and-edge-connectivity` and
+defines a cut edge as a $\lambda$-witness** — clumsier, and the reason the re-home
+is recommended rather than merely noted. `lem-three-connected-graph-has-a-contractible-edge`
+is in the same position and is exactly G1's Lemma 3.2.2, so **if the re-home
+happens, GT-14 cites it instead of minting it**, and the scaffold is written so
+that this is a one-item substitution rather than a redesign.
+
+FS: every 2-connected graph has an ear decomposition starting from any cycle
+(it does — so the false version must be about starting from any *edge*, or the
+`fs-` drops); the block graph of a connected graph is connected but need not be a
+tree; a 3-connected graph has a contractible edge even when it is $K^4$ (it does
+not, and $K^4$ is exactly the base case of the wheel theorem).
+
+B: the block tree of a small graph drawn out; an ear decomposition of $K_4$
+constructed; the wheel theorem run backwards from $W_5$ to $K^4$; a contractible
+edge exhibited in a 3-connected graph and a non-contractible one in $K^4$.
+
+CEX: a 2-connected graph with a non-contractible edge; a connected graph whose
+blocks overlap in an edge (there is none — so this `cex-` must exhibit blocks
+overlapping in a *vertex*, which is what makes the block graph a tree rather than
+a forest of disjoint pieces).
+
+Traps. (i) A block may be $K^2$ or $K^1$, so "block = maximal 2-connected
+subgraph" is false as a definition (convention 18). (ii) G1's $\kappa(K^n)=n-1$
+(convention 10) is what makes the wheel theorem's base case right.
+(iii) Contraction of a simple graph can create parallel edges; state whether
+$G\cdot e$ is taken simple, and be consistent — G1 takes it simple in ch. 3 and
+multigraph in ch. 6.
+
+Provenance: Statements `literature-derived` (G1, quoted). Proofs
+`literature-derived`.
+
+---
+
+## GT-15 (NEW). Tree-Decompositions, Tree-Width and Well-Quasi-Ordering
+
+**Anchor:** immediately after GT-14's examples page.
+`requires`: GT-14, GT-13 (chordal graphs),
+`matchings-covers-menger-and-network-flows` (Menger),
+`graphs-walks-and-connectivity` (`def-graph-deletion-contraction-minor-and-subdivision`),
+`chains-antichains-sperner-and-dilworth`.
+
+DEFS: a **tree-decomposition**, verbatim from G1 §12.3 with its three conditions
+(T1) $V(G)=\bigcup_{t\in T}V_t$, (T2) every edge has both ends in some bag,
+(T3) $V_{t_1}\cap V_{t_3}\subseteq V_{t_2}$ whenever $t_2\in t_1Tt_3$; the
+**width** $\max_t\lvert V_t\rvert-1$ and the **tree-width** (#91, convention 15);
+**touching** sets and a **bramble**, verbatim: "A set of mutually touching
+connected vertex sets in $G$ is a bramble … The least number of vertices covering
+a bramble is the **order** of that bramble"; the **$k\times k$ grid** and its
+**crosses**, both verbatim from G1; a **well-quasi-ordering**; the **minor** and
+**topological minor** relations, citing the published
+`def-graph-deletion-contraction-minor-and-subdivision`.
+
+THMS: **an edge of $T$ induces a separation of $G$** (landmark; G1 Lemma 12.3.1)
+— **three steps, and it is the whole point of tree-decompositions**;
+G1 Lemmas 12.3.2–12.3.4 and Cor. 12.3.5, each $\le8$ steps; **$G$ is chordal iff
+$G$ has a tree-decomposition into complete parts** (G1 Prop. 12.3.6, ~10 steps,
+spending GT-13's Prop. 5.5.1 — this is the payoff that makes the chordal material
+load-bearing rather than decorative); **tree-width is minor-monotone**
+($H\preccurlyeq G\Rightarrow\operatorname{tw}(H)\le\operatorname{tw}(G)$, G1
+Lemma 12.4.1, ~4 steps); **$\operatorname{tw}(G)=\min\{\omega(H)-1:G\subseteq H,\ H$
+chordal$\}$** (G1 Prop. 12.4.4, ~10 steps); **tree-width duality** (landmark;
+G1 Thm 12.4.3, Seymour & Thomas 1993: "A graph has tree-width $<k$ if and only if
+it contains no bramble of order $>k$") — the forward implication is short and the
+converse is the long half, so **split it into two items**, with G1's own
+reformulation reproduced as a `rem-`: the tree-width of a graph is exactly one
+less than its bramble number; **the crosses of the $k\times k$ grid form a bramble
+of order $k$**, hence the grid has tree-width $\ge k-1$ (in fact $k$, G1
+Exercise 34) — the concrete lower bound that makes the duality theorem usable;
+**Kruskal's tree theorem** (landmark; G1 Thm 12.2.1) — the finite trees are
+well-quasi-ordered by the topological minor relation — via **G1 Lemma 12.1.3**
+($X$ wqo $\Rightarrow[X]^{<\omega}$ wqo), ~25 steps across two items by the
+minimal-bad-sequence argument; **graphs of bounded tree-width are wqo by minors**
+(G1 Thm 12.4.2).
+
+**Denied, with reasons, and two of the three denials are sourcing facts rather
+than difficulty judgments.**
+
+- **The grid theorem** (G1 Thm 12.6.3, Robertson & Seymour 1986: for every $r$
+  there is a $k$ such that every graph of tree-width $\ge k$ has an $r\times r$
+  grid minor) is **stated without proof in the 5th edition**. G1's ch. 12 Notes
+  record that the Diestel–Gorbunov–Jensen–Thomassen proof "was included in
+  editions 2–4 of this book", and only the 5th edition is free. **So a proved grid
+  theorem is a 4th-edition or a Leaf–Seymour citation** ("Treewidth and planar
+  minors", *JCTB* **111** (2015), 38–53), never a 5th-edition one. Disposition:
+  **statement with `proved_here: false`, the exact source, and the failed
+  in-library route** — the source we can legally reach states it without proof.
+  Its Corollary 12.6.4 (the graphs without an $H$ minor have bounded tree-width
+  iff $H$ is planar) is ~6 steps *given* the grid theorem and is the reason it is
+  worth stating at all; it inherits `proved_here: false`.
+- **The graph minor theorem** (G1 Thm 12.7.1: the finite graphs are
+  well-quasi-ordered by the minor relation) — statement only; G1 gives a sketch,
+  not a proof. Its Corollaries 12.7.2 (every minor-closed property has a finite
+  Kuratowski set) and 12.7.3 (finite excluded-minor characterisation of
+  embeddability in each surface) are each ~3 steps given it and are what make it
+  worth stating. §11's denial stands and §29 records it.
+- **Tangles** (G1 §12.5, new in the 5th edition) — deferred, as a body of theory
+  rather than a result.
+
+**A forward-reference warning specific to this page.** G1's preface says the book
+is topologically sorted "apart from **two clearly marked exceptions**", and one of
+them lands here: G1's §5.2 discussion cites Lemma 12.6.1 when characterising the
+minimal $k$-chromatic graphs, and Lemma 12.6.1 carries the reverse marker `[5.2]`.
+**Any item mirroring that passage inherits a genuine forward reference** and must
+carry `forward_refs` per SCHEMA §3, with its consequences marked too. This is the
+one place where copying G1's order naively produces a cycle.
+
+**Kruskal's theorem costs dependent choice** and §21's row says so: Nash-Williams'
+minimal-bad-sequence argument constructs an infinite descending selection. The
+Statement names DC. If an authoring agent finds a choice-free route it may state
+ZF instead, **but it must not guess** — and the library's own experience is that
+guessing choice strength is how §7's infinite-Ramsey and König rows came to be
+wrong (§21.1).
+
+FS: tree-width is subgraph-monotone but not minor-monotone (it is both);
+every graph of tree-width $k$ has a bramble of order exactly $k+1$; the finite
+graphs are wqo by the *subgraph* relation (they are not — the cycles form an
+infinite antichain, and that is the cleanest possible illustration of why "minor"
+is the right relation); a tree-decomposition of minimum width is unique.
+
+B: a tree-decomposition of a small graph exhibited with its width; the crosses
+bramble of the $3\times3$ grid written out; $\operatorname{tw}(\text{tree})=1$ and
+$\operatorname{tw}(C_n)=2$ computed; the cycles exhibited as an infinite
+subgraph-antichain; a chordal completion of a small graph.
+
+CEX: a graph whose tree-width exceeds its clique number minus one; a family of
+connected sets that pairwise touch except one pair, so not a bramble; a bad
+sequence with no minimal bad subsequence under a non-wqo relation.
+
+Traps. (i) The $-1$ in the width is a convention with a stated reason
+(convention 15). (ii) "Touching" means sharing a vertex **or** joined by an edge;
+dropping the second clause changes the theorem. (iii) Minor and topological minor
+are different relations and Kruskal's theorem is about the **topological** one for
+trees; the published `lem-kuratowski-minors-are-topological-minors` records where
+they coincide.
+
+Provenance: Statements `literature-derived` (G1, quoted). Proofs
+`literature-derived` where proved; `not-supplied` for the grid theorem and the
+graph minor theorem, whose items carry `proved_here: false`.
+
+---
+
+## GT-16 (NEW). Matching Theory II: Tutte's 1-Factor Theorem, Gallai–Edmonds and the Infinite Marriage Theorems
+
+**Anchor:** immediately after GT-15's examples page.
+`requires`: `matchings-covers-menger-and-network-flows`,
+`graphs-walks-and-connectivity`, `trees-forests-and-spanning-trees`,
+`ramsey-theory` (König's infinity lemma), GT-14.
+
+The published matching page is strong — Berge, Hall, König, Gallai,
+Ford–Fulkerson, Menger, 25 items — and has exactly one obvious hole: **Tutte's
+theorem is missing**, and with it everything about matchings in non-bipartite
+graphs.
+
+DEFS: the **odd-component count** $q(G-S)$, which needs convention 12 (the null
+graph is not connected, so $q(\varnothing)=0$ — **load-bearing here, not
+pedantry**); a **1-factor**; a **factor-critical** graph, verbatim from G1: "$G$
+has no 1-factor but for every vertex $v\in G$ the graph $G-v$ has a 1-factor";
+**matchable to $\mathcal{C}_{G-S}$**, verbatim from G1; the **deficiency**
+$\operatorname{def}(G)=\max_S(o(G-S)-\lvert S\rvert)$ (#92); a **$2$-factor**.
+
+THMS: **Tutte's 1-factor theorem** (landmark; G1 Thm 2.2.1: "A graph $G$ has a
+1-factor if and only if $q(G-S)\le\lvert S\rvert$ for all $S\subseteq V(G)$"),
+12–16 steps and needing nothing the library lacks — necessity is immediate; then
+one may assume $G$ edge-maximal without a 1-factor; the condition (∗) that all
+components of $G-S$ are complete and every $s\in S$ is adjacent to all of $G-s$;
+then a case analysis on a maximal alternating path from $d$ producing an even
+cycle whose only non-edge is $bd$; **the Tutte–Berge formula**
+$\nu(G)=\tfrac12(\lvert V\rvert-\max_S(o(G-S)-\lvert S\rvert))$ (#92);
+**the Gallai–Edmonds structure theorem** in G1's form (Thm 2.2.3: every graph has
+a set $S$ matchable to $\mathcal{C}_{G-S}$ with every component of $G-S$
+factor-critical, and $G$ has a 1-factor iff $\lvert S\rvert=\lvert\mathcal{C}_{G-S}\rvert$),
+~25 steps and a candidate for splitting; **Petersen's theorem** (every bridgeless
+cubic graph has a perfect matching), free from Tutte in ~8 steps and the seam to
+GT-11's snarks; **the countable infinite marriage theorem** for a locally finite
+bipartite graph, via the published ZF `thm-konig-infinity-lemma-for-ordered-trees`
+applied to the tree of partial matchings; **the marriage theorem for an arbitrary
+family of finite sets**, by the Rado selection route through the published
+`thm-ultrafilter-lemma`.
+
+**§21.1 withdrew §7's infinite-Hall row and this page is the replacement.**
+§7 asserted BPI via Rado selection for "the infinite Hall theorem"; the published
+matching page had already deferred that result and recorded that its source pass
+"did not license the prose scaffold's exact BPI claim". So the scaffold now
+carries **two** results that do close, at two different costs, with the costs named
+in the Statements: the countable locally finite case is **ZF**, and the
+family-of-finite-sets case is **BPI**. **The converse of neither is claimed**, and
+the version for families of *infinite* sets is false — the correct statement there
+is Aharoni's theorem, which stays denied. A `rem-choice-ledger` item is required.
+
+**Sourcing status.** G1 proves Tutte 2.2.1 and gives Gallai–Edmonds in the form
+above, but states **neither the Tutte–Berge formula nor the full
+$D(G)$/$A(G)$/$C(G)$ structure theorem**, and the main harvest's promised §C.13
+covering them was never written. A dedicated harvest is running (§29). Until it
+returns, Tutte's theorem, Petersen's theorem and the two marriage theorems are
+source-complete; **Tutte–Berge and full Gallai–Edmonds are scaffolded but not
+source-complete**, and Edmonds' blossom algorithm is scaffolded only if that
+harvest reports a bounded correctness proof.
+
+FS: a graph with all degrees even has a 1-factor; Tutte's condition need only be
+checked for $S=\varnothing$ (the witness is any graph with a cut vertex separating
+three odd components); every bridgeless graph has a perfect matching (the cubic
+hypothesis is load-bearing); the deficiency is attained only at $S=\varnothing$.
+
+B: Tutte's condition checked on the Petersen graph; a factor-critical graph
+exhibited ($C_5$); $\operatorname{def}(G)$ computed on a small tree; the countable
+marriage theorem run on an explicit locally finite bipartite graph; a family of
+finite sets with no SDR, violating Hall.
+
+CEX: a graph satisfying Hall's condition on one side but with no 1-factor
+(bipartiteness is what makes Hall enough); a bridgeless non-cubic graph without a
+perfect matching; an infinite family of **infinite** sets satisfying Hall's
+condition with no SDR — **the witness that keeps the library honest about why the
+infinite theorem is stated for finite sets**.
+
+Traps. (i) $q(\varnothing)=0$ depends on convention 12 and Tutte's theorem is
+false with the other convention. (ii) The two marriage theorems have different
+hypotheses *and* different choice costs; a page that states "the infinite Hall
+theorem" once has already made an error. (iii) `def-matching-maximum-perfect-and-matching-number`
+and `rem-maximal-versus-maximum-matching` are published; cite them, and note that
+a **1-factor** is a perfect matching, so the new word needs a dictionary item and
+not a second definition.
+
+Provenance: Statements `literature-derived` (G1, quoted) for Tutte, Gallai–Edmonds
+and Petersen; the two marriage theorems `literature-derived` pending the harvest;
+nothing on this page ships as `ai-generated`.
+
+---
+
+## GT-17a (NEW). Matroids: Axioms, Duality and Minors
+
+**Anchor:** immediately after GT-16's examples page.
+`requires`: `trees-forests-and-spanning-trees`, `graphs-walks-and-connectivity`,
+`matchings-covers-menger-and-network-flows`,
+`vector-spaces-and-linear-independence`, `gaussian-elimination-and-row-reduction`,
+`chains-antichains-sperner-and-dilworth`, `incidence-algebras-and-mobius-inversion`.
+
+Sources are keyed **M1** Oxley, *What is a matroid?*
+(`https://www.math.lsu.edu/~oxley/survey4.pdf`, full text, §1–§7);
+**M2** Schrijver, *A Course in Combinatorial Optimization*
+(`https://homepages.cwi.nl/~lex/files/dict.pdf`, ch. 10, pp. 173–198, full text);
+**M3** Reiner, *Lectures on Matroids and Oriented Matroids*, §1–§5, full text.
+Verbatim headings, per-heading dispositions and the step audits:
+`research/subjects-01-combinatorics-harvest-matroids.md`.
+
+**The library has no matroid content of any kind** — `ls items/ | grep -i matroid`
+is empty — so this is greenfield and nothing is retrofitted. It is also the
+subject the published corpus is best prepared for: `lem-spanning-tree-exchange`,
+`lem-fundamental-cycle-of-a-spanning-tree` and
+`lem-fundamental-cut-of-a-spanning-tree` are **exactly the graphic shadows of
+basis exchange and of the fundamental circuit $C(e,B)$**, so the page can open by
+*recognising* published results rather than by asserting an abstraction. That is
+the strongest available answer to "why should a reader care", and the scaffold
+should use it.
+
+DEFS: a **finite** matroid by the independence axioms — with **"finite" in the
+displayed statement, not in prose** (convention 34), because equicardinality, the
+existence of maximal independent sets and the termination of the greedy algorithm
+are all false without it; a **basis**, a **circuit**, the **rank function**, the
+**closure** operator and a **flat**; **loops**, **parallel** elements and a
+**simple** matroid; the **uniform matroid** $U_{r,n}$ (rank first, convention 35);
+the **vector matroid** $M[A]$ — **whose ground set is the set of column *labels*,
+not the set of vectors** (convention 36); the **graphic matroid** $M(G)$; the
+**transversal**, **partition** and **matching** matroids; the **dual** $M^{*}$
+(written $M^{*}$, not $M^{\perp}$, convention 37); a **cocircuit** and a
+**coloop**; deletion, contraction, and a **minor**; the **direct sum**.
+
+THMS: **all bases have the same size** (landmark), in the **local** form and
+**before the rank function is defined** — this is a non-negotiable ordering
+constraint (#137) and is [A]; **the rank function is well defined** and satisfies
+the rank axioms; **circuit elimination**; the **two basis-exchange axioms**, stated
+separately and named distinctly, with their equivalence proved — **not pedantry:
+the existence proof of the dual matroid is exactly the observation that
+complementation swaps them, and that argument is unavailable to a page carrying
+only one** (convention 38); **the equivalence of the independence, rank, circuit,
+basis and closure axiomatisations** (landmark; M2 Thm 10.2), **scaffolded as seven
+or eight lemmas plus one chaining theorem, never as one item**; the standard
+examples proved to be matroids, with `lem-spanning-tree-exchange` and the two
+published fundamental-cycle/cut lemmas cited as the graphic instances;
+**the dual matroid exists**, with $r^{*}(X)=\lvert X\rvert-r(M)+r(E\setminus X)$
+proved as a **consequence** and not taken as the definition (#138), and
+$r(M)+r(M^{*})=\lvert E\rvert$; **$(U_{r,n})^{*}\cong U_{n-r,n}$**; **cocircuits
+of $M(G)$ are the bonds of $G$**; **deletion and contraction commute**, and the
+**duality–minor interchange** $(M/X)^{*}=M^{*}\setminus X$; **the dual of a
+representable matroid is representable**, by the **orthogonal-complement route**,
+which needs only the published `thm-rank-nullity` — **and this matters, because the
+determinant proof needs Cauchy–Binet, which GT-7a mints but which sits on a page
+this one need not depend on**; **the forward half of Whitney's planarity theorem**
+— if $G$ is planar then $M(G)^{*}$ is graphic — citing the published
+`def-plane-dual-multigraph` and Euler's formula.
+
+**One prerequisite must be built, and it is exactly the "build the machinery"
+case rather than the `deferred` case:** the **forest edge count** — a forest on
+vertex set $V$ with $c$ components has $\lvert V\rvert-c$ edges — is one item,
+~8 steps, a direct corollary of the published `cor-tree-edge-count`, and it is
+what makes $M(G)$'s rank function computable. A **maximal-independent-extension
+micro-lemma** (~4 steps) is used about ten times across this pair and GT-17b and
+should be scaffolded early and explicitly rather than re-derived inline.
+
+**Denied.** **The converse of Whitney's planarity theorem** ($M(G)^{*}$ graphic
+$\Rightarrow$ $G$ planar) needs Tutte's excluded-minor characterisation of graphic
+matroids — statement only. **Whitney's 2-isomorphism theorem** needs matroid
+3-connectivity and Whitney twists — statement only, `proved_here: false`.
+**Geometric lattices and Birkhoff's theorem** (M3 Thm 9) — deferred.
+**Oriented matroids** (M3 §§1.8–1.10, 2.4, 3.2.4) — `out-of-scope`, a whole
+subject area the library has not reached, which is the disposition `LEVELS.md`
+reserves for exactly this case. **Simplicial complexes, shellability, hyperplane
+arrangements** — `out-of-scope`.
+
+FS: the intersection of two matroids' independent-set families is a matroid (the
+`cex-` is on GT-17b and is one of the most instructive on either page); every
+matroid is representable over some field (the witness is the non-Pappus or
+Vámos matroid — **check which is exhibitable in bounded steps before shipping**);
+$M^{*}$ is defined by $r^{*}(X)=\lvert X\rvert-r(X)$; the ground set of a vector
+matroid may be taken to be the set of vectors (convention 36 — **the most common
+silent error in a first matroid definition**, and it is what makes parallel
+elements impossible).
+
+B: $M(K_4)$ written out with its bases and circuits; $U_{2,4}$ and its dual;
+the graphic matroid of a small graph identified with its published spanning-tree
+material; a transversal matroid built from an explicit bipartite graph; the dual
+of a representable matroid computed.
+
+Traps. (i) "Circuit" is the matroid word and "cycle" is the graph word; the page
+uses **circuit** throughout with one explicit bridging sentence and a `def-`
+cross-reference the first time $M(G)$ appears, and it does **not** redefine
+"cycle" (convention 39). (ii) A **coloop** is a bridge in $M(G)$ — say it once
+(convention 40). (iii) Contraction of a loop is the special case
+$M/\{x\}=M\setminus\{x\}$ (M2 Ex. 10.7); **a proof that omits that case split is
+wrong**. (iv) M1 is a survey and **defers many proofs to Oxley's book**; a pointer
+is not a proof, and the harvest lists exactly which results M1 proves in full
+(3.11, 3.20, 4.1, 4.7, 4.8, 5.3, 5.4, 5.15). Everything else in M1 must be proved
+locally, rescoped, or routed to the narrow `rem-` fallback.
+
+Provenance: Statements `literature-derived` (M1, M2, M3). Proofs
+`literature-derived`; **two textual defects in M2 must be repaired when
+scaffolding and not inherited** — its proof of (iv)$\Rightarrow$(i) on p. 177
+reuses the variable $y$ for two different elements (correct argument, wrong
+naming: rename one), and its (i)$\Rightarrow$(vi) on p. 177 has the typo
+"$F\subseteq F\subseteq Y\cup Z$" for "$F\subseteq F'\subseteq Y\cup Z$".
+
+---
+
+## GT-17b (NEW). Matroids and Combinatorial Optimization: Greedy, Intersection and Union
+
+**Anchor:** immediately after GT-17a's examples page.
+`requires`: GT-17a, `matchings-covers-menger-and-network-flows`,
+`trees-forests-and-spanning-trees`.
+
+**The pair with the highest payoff-per-step in the whole matroid harvest, and it
+is only possible because `thm-konig-bipartite-matching-cover` is already
+published** — M2's Lemma 10.1, the enabler for matroid intersection, is König.
+The harvest's honest count is ~180 numbered steps over 12 items plus definitions,
+which is a full A page and is why it is its own pair.
+
+DEFS: a **weighted matroid** and a maximum-weight basis; the **exchange graph**;
+the **augmenting digraph**; the **matroid union** $M_1\vee M_2$ (convention 41 —
+and it is **not** a lattice join); the **covering number** and the **base-packing
+number**; **arboricity**.
+
+THMS: **the greedy algorithm characterises matroids** (landmark; Rado–Edmonds;
+M1 Thms 4.7, 4.8 — both proved in full there — and M2) — **both directions**: on a
+matroid the greedy algorithm returns a maximum-weight basis for every weighting,
+and conversely a family closed downwards for which greedy always succeeds is a
+matroid; **local optimality implies global optimality** for a maximum-weight
+basis; the two technical exchange-graph lemmas; **Edmonds' matroid intersection
+theorem** (landmark; M2 §10.4) —
+$\max\{\lvert I\rvert:I\in\mathcal{I}_1\cap\mathcal{I}_2\}=\min_{U\subseteq E}(r_1(U)+r_2(E\setminus U))$
+— ~78 steps over five items, via the augmenting digraph and König;
+**König's theorem and Rado's theorem re-derived from it**, which is the item that
+shows the abstraction paying for itself; **matroid union** (M1 Ex. 3.12, M2
+Ex. 10.27) — ~40 steps over three items given intersection; **Edmonds' covering
+theorem** and **base-packing theorem**; **Nash-Williams' arboricity formula**
+$\Upsilon(G)=\max_{H\subseteq G}\lceil\lVert H\rVert/(\lvert H\rvert-1)\rceil$;
+**the Nash-Williams/Tutte tree-packing theorem**, with M1's constructive $k=2$
+case (Cor. 3.11) proved in full there; **partition into partial transversals**.
+
+**The Nash-Williams theorems are the payoff that justifies the union machinery**,
+and they are cheap once union is in hand — [A]/[B] and [B] respectively. A
+scaffold that builds intersection and union and then stops has spent 180 steps
+for nothing a reader can see.
+
+FS: $\mathcal{I}_1\cap\mathcal{I}_2$ is the independent-set family of a matroid
+(**the `cex-` here is the page's most instructive item**: two matroids on a small
+ground set whose common independent sets violate augmentation); greedy works for
+an arbitrary downward-closed family; the intersection theorem extends to three
+matroids (it does not — three-matroid intersection is NP-hard, which is a
+complexity statement and therefore a `rem-`, not an `fs-`).
+
+B: Kruskal's algorithm recognised as greedy on $M(G)$, citing the published
+`thm-kruskals-minimum-spanning-tree-algorithm` — **the library already frames the
+motivating instance, so this item is a recognition and not a construction**;
+matroid intersection run on a small bipartite instance recovering a maximum
+matching; arboricity of $K_4$ computed.
+
+Provenance: Statements `literature-derived` (M1, M2). Proofs
+`literature-derived`.
+
+---
+
+## GT-17c (NEW). Representable Matroids and the Binary Excluded Minor
+
+**Anchor:** immediately after GT-17b's examples page.
+`requires`: GT-17a, `algebraic-extensions-degree-and-finite-fields`,
+`gaussian-elimination-and-row-reduction`, `determinants-of-matrices-over-a-commutative-ring`.
+
+DEFS: **representable**, **binary**, **ternary** and **regular** matroids; the
+**Fano** and **non-Fano** matroids, citing CB-14b's Fano plane so that the library
+holds one Fano plane and not two; **relaxation** of a circuit-hyperplane.
+
+THMS: **$U_{2,n}$ is representable over $\mathbb{F}_q$ iff $q\ge n-1$**;
+**$U_{2,4}$ is not binary**; **the matrix operations preserving $M[A]$** (row
+operations, column scaling, field automorphisms); **the fundamental circuits
+determine a binary matroid**; **Tutte's binary excluded-minor theorem**
+(landmark; M1 Thm 5.15, proved in full there) — a matroid is binary iff it has no
+$U_{2,4}$ minor; **the Fano matroid is representable exactly in characteristic 2**
+(M1 Prop. 5.3, proved in full) and the **non-Fano exactly in characteristic
+$\ne2$**, hence **their direct sum is representable over no field** (M1 Thm 5.4,
+proved in full) — the cleanest possible answer to "is every matroid a vector
+matroid"; the **characteristic polynomial of a matroid** via the published
+`cor-mobius-inversion-for-finite-posets` on its lattice of flats, which is the
+seam to CB-19 and GT-10.
+
+**A prerequisite build is required and is [B], about two or three items:** M1
+Prop. 5.3 needs *a field of characteristic $p$ contains $\mathbb{F}_p$* and
+*characteristic $0$ contains $\mathbb{Q}$*. The library publishes `def-field` and
+`def-integers-modulo-n` but **no prime-subfield or $\mathbb{F}_q$ apparatus**, and
+`algebraic-extensions-degree-and-finite-fields` carries 0 items (§27). Binary
+matroids alone need only $\mathbb{F}_2=\mathbb{Z}/2$ and are nearly free; the Fano
+results need the full characteristic apparatus. **This is a build-the-machinery
+case, and §28 records the amendment owed to `abstract-algebra` in case that track
+supplies it first.**
+
+**Denied, statement-only, each with `proved_here: false` and a working source
+URL.** Tutte's excluded-minor characterisations of **ternary**, **regular**,
+**graphic** and **cographic** matroids (Bixby–Seymour machinery). **Seymour's
+decomposition theorem** — `out-of-scope`, because it needs linear-programming
+duality, integral polyhedra and total unimodularity, none of which the library has;
+this exclusion is clean and takes M2 §10.7 (matroid polytopes) and M1 §6 with it.
+**Whitney's 2-isomorphism theorem.** **Basis activities and the internal/external
+activity expansion of the Tutte polynomial** — the interval-partition lemma is
+unproved in the harvest, so this is [C] and goes to GT-18's deferral list.
+
+FS: every matroid representable over $\mathbb{R}$ is representable over
+$\mathbb{Q}$; a matroid representable over two fields is representable over every
+field (the Fano/non-Fano direct sum is the witness); binary matroids are exactly
+the graphic ones (the witness is a binary non-graphic matroid, and it must be
+exhibited concretely).
+
+Provenance: Statements `literature-derived` (M1, M3). Proofs
+`literature-derived` for the results M1 proves in full; every other result on this
+page is either proved locally from library dependencies or carries
+`proved_here: false` — **M1's pointers to Oxley's book are not proofs** and the
+batch notes record which route each item took.
+
+---
+
+## GT-19 (NEW). Szemerédi's Regularity Lemma, the Removal Lemmas and Roth's Theorem
+
+**Anchor:** immediately after GT-18's examples page (§24, below).
+`requires`: `extremal-graph-theory`, `graphs-walks-and-connectivity`,
+`finite-probability-spaces-and-random-variables`,
+`inclusion-exclusion-and-the-pigeonhole-principle`,
+`inner-product-spaces-and-orthogonality` (only for the Schrijver route — see the
+route decision), `congruences-and-the-chinese-remainder-theorem`.
+
+**This is the largest single development in the block, and the harvest establishes
+that it is affordable if and only if it is split along the source's own lemma
+boundaries.** Six items, each $\le15$ numbered steps. Attempted as one item it is
+not writable.
+
+DEFS: the **density** $d(X,Y)=\lVert X,Y\rVert/\lvert X\rvert\lvert Y\rvert$ for
+disjoint nonempty $X,Y$ (#97); an **$\varepsilon$-regular pair**, verbatim from G1
+p. 193: "all $X\subseteq A$ and $Y\subseteq B$ with $\lvert X\rvert\ge\varepsilon\lvert A\rvert$
+and $\lvert Y\rvert\ge\varepsilon\lvert B\rvert$ satisfy
+$\lvert d(X,Y)-d(A,B)\rvert\le\varepsilon$"; an **$\varepsilon$-regular partition**
+with its three verbatim conditions (exceptional set $V_0$ with
+$\lvert V_0\rvert\le\varepsilon\lvert V\rvert$; equal other parts; all but at most
+$\varepsilon k^2$ pairs regular); **$(\varepsilon,d)$-uniformity** as its own
+definition (convention 16); the **energy** $q(\mathcal{P})$ (#97); a **regularity
+graph** $R$ and its **blow-up** $R_s$, both verbatim from G1.
+
+THMS, in the build order G1's own margin apparatus dictates — twelve items in a
+strict chain with no cycles: **defect Cauchy–Schwarz**
+($\sum e_i^2/\mu_i\ge(\sum e_i)^2/\sum\mu_i$, ~3 steps from the published
+`thm-cauchy-schwarz-finite`); **the energy is at most 1** (#97 — the bound that
+makes the iteration terminate, and a numbered item, not an observation);
+**refinement never decreases energy** (G1 Lemma 7.4.2, ~8 steps, in two parts —
+for a pair and for a partition); **an irregular pair gives a definite gain**
+(G1 Lemma 7.4.3: two-part partitions with
+$q(\mathcal{C},\mathcal{D})\ge q(C,D)+\varepsilon^4\lvert C\rvert\lvert D\rvert/n^2$,
+~10 steps and the only genuinely computational item); **an irregular partition
+gives a constant gain** (G1 Lemma 7.4.4, ~15 steps including the bookkeeping that
+cuts refined sets into equal pieces of size $\lfloor c/4^k\rfloor$);
+**the regularity lemma** (landmark; G1 Thm 7.4.1, verbatim: "For every
+$\varepsilon>0$ and every integer $m\ge1$ there exists an integer $M$ such that
+every graph of order at least $m$ admits an $\varepsilon$-regular partition
+$\{V_0,V_1,\dots,V_k\}$ with $m\le k\le M$"), by the iteration
+$s:=2/\varepsilon^5$ (#98 — $M$ is produced by the iteration and the tower bound
+is a **separate** stated fact); **the $\varepsilon$-regular degree lemma**
+(G1 Lemma 7.5.1, ~4 steps); **the blow-up lemma** (G1 Lemma 7.5.2, ~15 steps);
+**the triangle counting lemma** (G2 Thm 2.2.1, ~8 steps — the right starting
+point, against ~20 for G1's general Lemma 7.6.2); **the triangle removal lemma**
+(landmark; G2 Thm 2.3.1, Ruzsa–Szemerédi 1978: "For all $\varepsilon>0$, there
+exists $\delta>0$ such that any graph on $n$ vertices with fewer than $\delta n^3$
+triangles can be made triangle-free by removing fewer than $\varepsilon n^2$
+edges"), by G2's own recipe, quoted as a `rem-`: **partition–clean–count**;
+**the general removal lemma** (G2 Thm 2.6.5, whose phrasing is cleaner than G1
+7.6.3's); **every edge in exactly one triangle forces $o(n^2)$ edges** (G1
+Cor. 7.6.5, equivalently G2's diamond-free lemma Cor. 2.3.3);
+**Roth's theorem** (landmark; G1 Prop. 7.7.3, G2 Thm 2.4.1); **the second proof of
+Erdős–Stone–Simonovits from regularity** (G1 §7.5, G2 Thm 2.6.7) — a **second
+proof of an already-published item**, which SCHEMA treats as an addition and not a
+rewrite, with G2's framing worth a `rem-`: regularity is the template for boosting
+an exact extremal result to an asymptotic one.
+
+**Roth's proof, decomposed, because it is the block's best item.** Given
+$\varepsilon>0$ set $\gamma:=\varepsilon/12$; let $D\subseteq[n]$ be 3-AP-free;
+build the tripartite graph on $X=[n]$, $Y=[2n]$, $Z=[3n]$ with the **defining
+triangles** $K(x,d)$ on $\{x,x+d,2x+d\}$ for $x\in X$, $d\in D$; any two vertices
+of a defining triangle determine the third, so they are edge-disjoint,
+$\lvert G\rvert=6n$ and $\lVert G\rVert=3n\lvert D\rvert$; a non-defining triangle
+would have its three edges in three distinct defining triangles $K(x,a)$, $K(x,b)$,
+$K(x',c)$ with $x'\ne x$, forcing $a=c+(x'-x)$ and $b=c+2(x'-x)$, i.e. a 3-AP in
+$D$ with nonzero difference; so every edge lies in exactly one triangle, and
+Cor. 7.6.5 gives $\lVert G\rVert\le\gamma(6n)^2$, i.e.
+$\lvert D\rvert\le12\gamma n=\varepsilon n$. **Nine to twelve numbered steps.**
+
+**The route decision, made deliberately.** The harvest found **three genuinely
+different proofs** of the regularity lemma. G1's energy-increment argument is
+fully elementary — defect Cauchy–Schwarz and nothing else. G2's is the same idea
+with cleaner bookkeeping and equitability separated out. **G3's Pythagoras proof
+is two pages**, realising the energy as the squared Frobenius norm of the
+orthogonal projection of the adjacency matrix onto the span of the partition's
+indicator blocks, so that the refinement increase is literally the Pythagorean
+theorem — but it needs orthogonal projection in a finite-dimensional real
+inner-product space of matrices, and `inner-product-spaces-and-orthogonality`
+carries 0 items (§27). **Scaffold G1's route as the main proof** — it is the one
+whose only prerequisite is published — **and G3's as a second proof conditional on
+that page being built.** Similarly, **three constructions for Roth** exist (G1's
+tripartite defining triangles, G2's three copies of $\mathbb{Z}/M$, G3's directed
+Cayley graph on $[2n]$); G1's is the most transparent to verify step by step and
+is the one scaffolded.
+
+**Sparseness caveat, required as a `rem-`, verbatim from G1 p. 194:** "the
+regularity lemma in this form is designed for use with dense graphs: for sparse
+graphs it becomes trivial, because all densities of pairs – and hence their
+differences – tend to zero." Without it a reader will misuse the lemma.
+
+**Denied.** **Szemerédi's theorem** itself — statement-only in every source
+harvested; G1: "Even given the regularity lemma, Szemerédi's theorem is still a
+deep result far beyond the scope of this book." **Gowers' tower-type lower bound**
+on the number of parts (G2 Thm 2.1.17, citing Moshkovitz–Shapira 2016) —
+statement only. **Fox's non-regularity improvement** of the removal-lemma bound —
+statement only.
+
+FS: the regularity lemma gives a partition into a bounded number of parts with
+*every* pair regular; $\varepsilon$-regular and $\varepsilon$-uniform are the same
+notion (they are not — convention 16, and this `fs-` is the page's most important,
+because swapping them silently is a fatal citation defect); the removal lemma's
+$\delta$ can be taken polynomial in $\varepsilon$; a 3-AP-free subset of $[n]$ has
+size $O(\sqrt n)$.
+
+B: an $\varepsilon$-regular pair exhibited and an irregular one; the energy of a
+two-part partition computed and the gain from refining it; the defining-triangle
+construction run for a small 3-AP-free $D$; the triangle counting lemma checked
+against a blow-up of $K_3$.
+
+CEX: a pair that is $\varepsilon$-uniform but not $\varepsilon$-regular; a sparse
+graph for which the regularity lemma is vacuous; a partition refinement that
+strictly increases the energy.
+
+Traps. (i) Convention 16 governs every statement here. (ii) $M(\varepsilon)$ is
+produced by the iteration (#98); do not write "the" $M(\varepsilon)$ without a
+least-witness argument. (iii) The Erdős–Stone reproof must cite the published
+`thm-erdos-stone-simonovits` and be labelled a second proof; it must not restate
+the theorem.
+
+Provenance: Statements `literature-derived` (G1, G2, quoted). Proofs
+`literature-derived`; the choice of G1's route with G2's triangle counting lemma
+in place of G1's general one is `ai-altered` structuring, recorded here because it
+mixes two sources within one chain.
+
+---
+
+## GT-20 (NEW). Infinite Graphs: the Rado Graph, Homogeneity and Fraïssé Limits
+
+**Anchor:** immediately after GT-19's examples page.
+`requires`: `graphs-walks-and-connectivity`, `ramsey-theory` (König's infinity
+lemma), `countability-and-uncountability`, `congruences-and-the-chinese-remainder-theorem`,
+`primes-and-the-fundamental-theorem-of-arithmetic`, `the-axiom-of-choice-and-its-equivalents`.
+
+Sources are keyed **R1** Cameron, "The Random Graph" (`arXiv:1301.7544`, 27 pp.,
+full text — Cameron's own updated chapter for the second edition of *The
+Mathematics of Paul Erdős II*, strictly better than the 1997 original, which is
+paywalled); **R2** Cameron, "The Random Graph Revisited" (3ECM Barcelona 2000,
+7 pp., full text); **R3** Macpherson, "A survey of homogeneous structures", the
+author's final preprint dated 14 January 2011, 77 pp., **retrieved via the Wayback
+Machine because the Leeds original is dead and ScienceDirect returns 403** — **so
+it must be cited by section and result number, never by page, since the preprint's
+pagination differs from the journal's**; **R4** Bodirsky, *Model Theory Course
+Notes* (TU Dresden), ch. 4 "Fraïssé Amalgamation"; **R5** Cambridge Part III
+*Model Theory* (Barbina/Tomczak), §4; **R6** Schlicht, Bonn *Introduction to Model
+Theory*, §2.2; **R7** Hubička, *Homogeneous structures*; **R8**
+Chatterjee–Diaconis–Miclo, "A random walk on the Rado graph" (`arXiv:2205.06894`),
+§§1–2.1. Full ledger and verbatim headings:
+`research/subjects-01-combinatorics-harvest-gapfill.md`.
+
+**The finiteness convention of the published `rem-finite-simple-graph-convention`
+is suspended on this page in its entirety**, and the page says so in its first
+item — it is the library's only page about a countably infinite graph.
+
+DEFS: the **extension property**, stated as Cameron's $(\ast)$ — *given finitely
+many distinct vertices $u_1,\dots,u_m,v_1,\dots,v_n$ there is a vertex $z$
+adjacent to every $u_i$ and to no $v_j$* — **with the naming disagreement recorded
+in a `rem-`**: R1 writes $(\ast)$, R3 writes $(\ast)_n$ and calls it the *Alice's
+Restaurant Axiom*, R4/R6/R7 say *extension property*, R5 writes $(r_n)$, R6 writes
+$\sigma_{m,n}$, and R2 calls the general version the *I-property*;
+**homogeneity** — every isomorphism between finite induced substructures extends
+to an automorphism — with R3's naming note that some sources say
+**ultrahomogeneous**; the **age** of a structure; the **amalgamation property**
+and the **joint embedding property**; a **Fraïssé class** and its **Fraïssé
+limit**; **switching** with respect to a vertex set; a **universal** set of
+positive integers.
+
+THMS: **a graph with $(\ast)$ is infinite**, immediate and worth its own line
+since R1 makes the point explicitly; **any two countable graphs satisfying
+$(\ast)$ are isomorphic** (landmark; R1 Fact 2) — **split into the one-point
+extension lemma and the back-and-forth induction**, seven numbered steps in all;
+**$R$ is homogeneous** (R1 Prop. 9), by starting the same machine from a given
+finite isomorphism; **$R$ is universal** (landmark; R1 Prop. 6) — every **finite
+or countable** graph embeds as an induced subgraph — by *going forth only*, which
+is the point: forth alone needs $(\ast)$ in the target and nothing in the source;
+**$R$ is isomorphic to its complement** (R1 Prop. 5), because $(\ast)$ is
+self-complementary; **Fraïssé's theorem** (landmark; R1 Thm 3, R3 Thm 2.1.3,
+R7 Thm 3.1) — a class of finite relational structures is the age of a countable
+homogeneous structure iff it is closed under isomorphism and induced substructure,
+has countably many members up to isomorphism, and has the amalgamation property;
+and that structure is unique up to isomorphism — with **the class of all finite
+graphs as the instance whose limit is $R$**; **the pigeonhole property**
+(landmark; R1 Prop. 3) — if $V(R)$ is partitioned into finitely many parts, one
+part induces a copy of $R$ — by a three-line contrapositive taking
+$U=\bigcup U_i$, $V=\bigcup V_i$; **and its converse characterisation** (R1
+Prop. 4, R2 Thm 2.1) — **the only countable graphs with the pigeonhole property
+are the complete graph, the null graph and $R$**, which is what makes the property
+worth having.
+
+**The choice audit, and it is the reason this page can exist at all.**
+
+- **The construction is explicit and costs nothing.** R1's BIT construction: the
+  vertex set is $\mathbb{N}$, and $x\sim y$ iff the $x$-th binary digit of $y$ is
+  $1$ or vice versa. **The digit indexing must be pinned**, because only two of
+  the sources state it: R1 and R2 fix it by giving the encoding
+  $\{a_1,\dots,a_n\}\mapsto 2^{a_1}+\dots+2^{a_n}$, so "the $x$-th digit" is the
+  coefficient of $2^x$ and indexing is **from $0$, from the right**; R8 says so in
+  words. **R5 leaves it unstated**, and a scaffolder copying R5 will ship an
+  ambiguous definition. R1 also notes that the construction needs only Empty Set,
+  Pairing, Union and Foundation — **not even the Axiom of Infinity** for the
+  encoding itself.
+- **Uniqueness is ZF, and R1 is the source that says so.** Its back-and-forth
+  proof carries the parenthetical, verbatim: *"(To avoid the use of the Axiom of
+  Choice, select the correctly-joined vertex of $\Gamma_2$ with smallest index to
+  be the image of $x_m$.)"* **R1 is the only one of the four treatments read that
+  makes this remark.** R4's general Fraïssé proof takes the least index in the
+  *source* but obtains the image through an arbitrary embedding and an arbitrary
+  extending automorphism, and R5 chooses arbitrarily throughout — so **a scaffolder
+  following R4 or R5 would silently spend choice.** §21's row ("none — ZF … because
+  the enumeration is given") is confirmed, and the Statement says ZF with the
+  canonical least-index selection written into the proof as a numbered step, not
+  left implicit.
+- **The probabilistic characterisation stays out.** R1 Thm 1 — a countable random
+  graph with independent edge probability $\tfrac12$ is almost surely isomorphic
+  to $R$ — is genuinely measure-theoretic: R1's own proof invokes "an elementary
+  lemma from measure theory: the union of countably many null sets is null", and
+  the space is an infinite product. **Confirmed `out-of-scope`**, and §18.2 S5's
+  earlier ruling stands. The **Baire-category twin** (R1 Fact 3, "it is simpler for
+  Baire category than for measure — no limit is required!") is a different matter
+  and is **scaffolded conditionally**: the library publishes the Baire category
+  theorem on two pages, and if a step-2 Beta can realise the space of countable
+  graphs as a complete metric or completely metrizable space from published
+  material, the category version is in reach. Recorded in §29.
+
+**Five constructions are scaffolded, and each earns its place by being a
+different kind of object.** (1) The **BIT predicate** on $\mathbb{N}$, above.
+(2) **The $\in$-graph of a countable model of set theory** (R1 Thm 2): $x\sim y$
+iff $x\in y$ or $y\in x$; the witness for $(\ast)$ is $z=\{u_1,\dots,u_m,x\}$ with
+$x=\{v_1,\dots,v_n\}$, and **Foundation is what rules out both failure cases**.
+(3) **Primes $\equiv1\pmod4$ with the Legendre symbol** (R1 §1.2): $p\sim q$ iff
+$p$ is a quadratic residue mod $q$, which is symmetric **by quadratic
+reciprocity**, and $(\ast)$ holds by the **Chinese remainder theorem** — published —
+plus **Dirichlet's theorem on primes in arithmetic progressions**, which is
+**not** published and belongs to `number-theory` (§28). (4) **A universal set $S$
+of positive integers**, giving the Cayley graph of $\mathbb{Z}$ with connection set
+$S$; the simplest universal sequence is the concatenation of all finite binary
+sequences. (5) **The direct inductive construction**: $\Gamma_0=\varnothing$, and
+$\Gamma_{k+1}$ adds a vertex $z(U)$ with neighbourhood exactly $U$ for each
+$U\subseteq V(\Gamma_k)$.
+
+**Indestructibility, with the infinite case handled honestly — this is the part a
+careless page gets wrong.**
+
+- **The correctly-joined set is itself a copy** (R1 Prop. 1): for distinct
+  $u_1,\dots,u_m,v_1,\dots,v_n$, the set
+  $Z=\{z:z\sim u_i\ \forall i,\ z\not\sim v_j\ \forall j\}$ is infinite and induces
+  a graph isomorphic to $R$. **Every other indestructibility result is a corollary
+  of this one**, and it should be the page's second theorem.
+- **Finite damage is repairable** (R1 Prop. 2): deleting finitely many vertices;
+  changing finitely many edges to non-edges or vice versa; switching with respect
+  to a **finite** vertex set. Each is a separate numbered item.
+- **Infinite damage is NOT in general repairable, and the page must say so.**
+  R4 Exercise 70 states it exactly: *"Show that the random graph can be
+  partitioned into two subsets so that both parts are isomorphic to the random
+  graph. Show that the same is not true for all partitions of the random graph
+  into two infinite subsets."* The general criterion — $R[A]\cong R$ **iff** $A$
+  itself satisfies $(\ast)$ — is an immediate consequence of Fact 2 and Prop. 6 and
+  is scaffolded as a **derived** theorem, not quoted from any source. A concrete
+  witness: fix $v$ and delete the non-neighbours of $v$; in the survivor $v$ is
+  adjacent to all others, which $(\ast)$ with $m=0,n=1$ forbids in $R$. **This is
+  the required `cex-`**, and it mirrors R1's own remark that switching with respect
+  to $N(x)$ isolates $x$.
+- **Some infinite edge deletion is safe**: R1 records that deleting the edges of a
+  locally finite graph from $R$ leaves $R$.
+
+**The automorphism group is statement-only, and the reason is a sourcing fact.**
+$\lvert\operatorname{Aut}(R)\rvert=2^{\aleph_0}$ (R1 Prop. 13, independently R3
+§4.2); $\operatorname{Aut}(R)$ is a **rank 3** permutation group on vertices;
+$\operatorname{Aut}(R)$ is **simple** (Truss); $R$ has the **strong small index
+property**; there is a **residual conjugacy class** of generic automorphisms whose
+elements have infinitely many cycles of each finite length and no infinite cycles;
+Simon Thomas's theorem that $R$ has exactly **five** reducts. **Truss's 1985 paper
+was not obtained** — Cambridge Core is paywalled and no preprint exists — so every
+one of these is attributed to R1/R3 **as reporters** and each ships as a
+source-cited `rem-` with `proved_here: false`. **And one number must not be
+quoted:** R1 (2013) reports Truss's strengthening as "five conjugates of $g$ or
+$g^{-1}$", but Truss's 2003 paper is titled *"four conjugates good, three
+conjugates better"* and improves it to **three**. Neither paper was obtained.
+**Do not cite "five" as the best known bound**; state simplicity without the
+conjugate count, or record both with the discrepancy flagged. §29 carries it.
+
+**Denied.** The **first-order theory** of $R$, its completeness and
+$\aleph_0$-categoricity, and the **zero–one law** (R5 Thm 4.11, R6 Thm 2.2.10) —
+`out-of-scope`: they need first-order logic, Vaught's test and
+Ehrenfeucht–Fraïssé games, a subject area the library has not reached. **The
+squarefree-integer variant** of construction (3) is **not sourced**: targeted
+searching found only the *primes* version in R1, R2 and R8, and the squarefree
+variant only in Wikipedia and its mirrors, which the source-depth rule bars as
+primary backing. **It must not be authored from this scaffold.**
+
+FS: every countable graph in which every vertex has infinite degree is isomorphic
+to $R$; deleting any infinite set of vertices from $R$ leaves a copy of $R$ (R4
+Ex. 70 and the witness above); $R$ is the unique countable graph with the
+pigeonhole property (the complete and null graphs are the other two — R1 Prop. 4,
+and getting this `fs-` wrong is easy); switching $R$ with respect to any vertex
+set gives $R$ (the witness is switching with respect to $N(x)$).
+
+B: the BIT graph's adjacencies computed for vertices $0$–$7$, with the $0$-indexing
+made explicit; $(\ast)$ verified for a small instance in the BIT model; the
+$\in$-graph witness $z=\{u_1,\dots,u_m,\{v_1,\dots,v_n\}\}$ written out; a
+correctly-joined set exhibited and its own $(\ast)$ checked; $C_5$ embedded into
+$R$ by the go-forth argument.
+
+Traps. (i) Digit indexing (above). (ii) The amalgamation property is stated
+**with $A=\varnothing$ allowed** — R1 says so explicitly — and it is only under
+that convention that JEP is a special case of AP, which is why R7 and R4 can drop
+JEP from the list and R1 and R3 cannot. **A restatement that keeps AP but drops
+JEP must carry the empty-structure convention or it is wrong.** (iii) R5's axiom
+scheme uses a single index and does **not** require the $x_i$ pairwise distinct;
+R1, R3, R4 and R6 parametrise by two independent sizes. The schemes are equivalent
+but not literally the same, and anyone reusing $(r_n)$ must not assume
+distinctness. (iv) "Countable" includes finite in R3 and in R1's universality
+statement ("finite or countable"); the library's own convention must be stated
+once and matched.
+
+Provenance: Statements `literature-derived` (R1, R3, R4, R7, quoted verbatim).
+Proofs `literature-derived` for $(\ast)$, uniqueness, homogeneity, universality,
+the pigeonhole property and its converse, and the five constructions; the general
+criterion "$R[A]\cong R$ iff $A$ satisfies $(\ast)$" and the concrete infinite
+counterexample are **`ai-altered`** — both are immediate from R1's Fact 2 and
+Prop. 6, neither is quoted from a source, and the page must prove them rather than
+cite them. Every automorphism-group item is `not-supplied` with
+`proved_here: false`.
+
+---
+
+## GT-21 (NEW). Expansion, the Expander Mixing Lemma and Cheeger's Inequality
+
+**Anchor:** immediately after GT-19's examples page.
+`requires`: GT-7a, GT-7b, GT-19,
+`the-spectral-theorem-and-singular-value-decomposition`,
+`inner-product-spaces-and-orthogonality`,
+`finite-probability-spaces-and-random-variables`.
+
+Sources are A1 §4 and A2 §§20–21 (§23's keys), with G1 and G2 for the
+combinatorial framing. This page is spectral, so it is anchored after GT-7b even
+though it carries a GT label.
+
+DEFS: the **edge boundary** $\partial S$ and the **edge expansion**
+$h(G)=\min_{0<\lvert S\rvert\le n/2}\lvert\partial S\rvert/\lvert S\rvert$ (#99,
+convention 6); **conductance** $\varphi$ and **vertex expansion**, both minted as
+separate definitions with the conversion $\varphi=h/d$ for $d$-regular $G$ and an
+explicit warning that vertex expansion is a genuinely different and generally
+incomparable quantity; an **$(n,d,\lambda)$-graph** and a **Ramanujan** graph; a
+**sweep cut** of a vector.
+
+THMS: **the expander mixing lemma** (landmark; A1 Prop. 4.3.2) — for $d$-regular
+$G$ with $\lambda=\max(\lvert\theta_2\rvert,\lvert\theta_n\rvert)$ and all
+$S,T\subseteq V$,
+$\lvert e(S,T)-d\lvert S\rvert\lvert T\rvert/n\rvert\le\lambda\sqrt{\lvert S\rvert\lvert T\rvert}$
+— ~8 steps, expanding characteristic vectors in an eigenbasis and applying
+`thm-cauchy-schwarz-and-the-euclidean-norm`, and **the best entry point to the
+whole expander story**; its corollaries bounding the independence number and the
+chromatic number of an $(n,d,\lambda)$-graph; **Cheeger's inequality, easy
+direction** $h(G)\ge(d-\theta_2)/2$ — a single Rayleigh-quotient test vector, ~6
+steps; **Cheeger's inequality, hard direction** $h(G)\le\sqrt{2d(d-\theta_2)}$,
+~20 steps; **Alon–Boppana** (A1 Prop. 4.1.1) $\theta_2\ge2\sqrt{d-1}-o(1)$ for
+$d$-regular graphs, ~15 steps by Nilli's short trace/test-vector argument on
+balls, with A1 Prop. 4.1.2 (Serre) as the recorded refinement; **a $d$-regular
+graph is connected iff $\theta_1>\theta_2$** and **bipartite iff
+$\theta_n=-\theta_1$**, both cited from GT-7a rather than restated;
+**random walks on a regular graph mix at rate $\lambda/d$**, using the published
+finite-probability page and the observation (A3 Thm 3.2) that the walk matrix is
+diagonalisable with real eigenvalues via the similarity $D^{1/2}MD^{-1/2}$ —
+**which needs only the spectral theorem and no Markov-chain theory at all**, and
+is why this page can talk about mixing without a probability track.
+
+**The hard direction of Cheeger is scaffolded by sweep cuts, not by a continuous
+density, and the reason is a library constraint rather than a preference.** A2
+Thm 21.1.3 follows Trevisan's proof, which chooses the threshold $\tau$ at random
+with density $2\lvert t\rvert$ and argues
+$\mathbb{E}[w(\partial S_\tau)]\le\sqrt{2\rho}\,\mathbb{E}[\min(d(S_\tau),d(V-S_\tau))]$.
+That needs an expectation over a **continuous** distribution, and **this library
+has finite probability only** (`finite-probability-spaces-and-random-variables`,
+`finite-probability-and-the-probabilistic-method`) — measure-theoretic probability
+belongs to the `probability-theory` track (SEAMS §4). But the threshold only ever
+matters at the $n-1$ distinct sweep values $z(1)\le\dots\le z(n)$, so the
+continuous density is replaceable by a **finite weighted average over the $n-1$
+sweep cuts**, turning the argument into finite averaging plus Cauchy–Schwarz.
+**Scaffold the sweep-cut version; record the continuous-density formulation as the
+source's own presentation in a `rem-`.** A2 §16.5's Andersen proof is the recorded
+alternative. This is a good example of the self-contained-scope rule producing a
+better item rather than a weaker one.
+
+**Denied.** **Ramanujan graph existence** (Lubotzky–Phillips–Sarnak, Margulis) —
+statement only; the construction rests on number theory and representation theory
+the library has not reached. **Zig-zag products and the combinatorial
+constructions of expander families** — deferred as a body of theory; the page
+defines expansion and proves the spectral bounds, and does not claim to construct
+an infinite family.
+
+FS: every $d$-regular graph with $d\ge3$ is an expander; $h(G)$ and the vertex
+expansion agree up to a factor of $d$ (they do not — convention 6, and conflating
+them is a false-statement risk rather than a stylistic choice); the expander mixing
+lemma holds for irregular graphs in the stated form; Cheeger's two directions are
+tight simultaneously.
+
+B: $h(K_n)$, $h(C_n)$ and $h(Q_n)$ computed; the mixing lemma checked against the
+Petersen graph; the sweep cuts of an explicit eigenvector on a small graph; the
+easy Cheeger direction verified numerically on $C_6$.
+
+CEX: a graph where the easy and hard Cheeger bounds are far apart; a $d$-regular
+graph with small $h$ and small $\lambda$ (there is none, by Cheeger — so this
+`cex-` must instead show small $h$ forcing large $\lambda$, i.e. it is a
+consequence and not a counterexample, and the item drops or is rephrased).
+
+Traps. (i) Convention 6 fixes the expansion constant; state it. (ii) Convention 2
+fixes what $\theta_2$ and $\lambda_2$ mean, and this page uses **both** the
+adjacency and the Laplacian orderings. (iii) $\min(\lvert S\rvert\le n/2)$ makes
+$h$ well defined and nonempty (#99); the null and complete cases are stated
+boundary cases.
+
+Provenance: Statements `literature-derived` (A1, A2, quoted). Proofs
+`literature-derived`; the finite sweep-cut replacement for Trevisan's continuous
+threshold is `ai-altered` — the mathematics is A2's, the finiteness reduction is
+this scaffold's, and it must be written out in full rather than asserted.
+
+---
+
+## GT-22 (NEW, placed high). Plane Duality, Cycles and Bonds, and Flow–Colouring Duality
+
+**Anchor:** `plane-graphs-euler-and-the-five-colour-theorem-examples` (published).
+`requires`: `plane-graphs-euler-and-the-five-colour-theorem`, GT-18,
+`graphs-walks-and-connectivity` (`def-multigraph-loop-and-digraph`),
+`matchings-covers-menger-and-network-flows`, `trees-forests-and-spanning-trees`.
+
+**§19.1's "exactly one pair above the planarity page" is superseded**, and the
+reason is a disk finding §19.1 did not have: the published plane-graph page is far
+stronger than the enrichment assumed. It already proves
+`thm-kuratowski-wagner-planarity-characterisation`, publishes
+`def-plane-dual-multigraph` and
+`thm-plane-dual-exists-and-double-dual-recovers-primal`, and carries
+`prop-maximal-plane-triangulation-characterisation`,
+`prop-face-boundaries-in-two-connected-plane-graphs` and
+`prop-face-boundaries-in-three-connected-plane-graphs` — 40 items in all. So the
+Kuratowski/Wagner circle the dispatch names as a target **is already closed**, and
+what remains above the planarity page is flow–colouring duality, the colouring
+results that need an embedding, and crossing numbers. That is **two pairs, not
+one**, and §19.1 is corrected accordingly rather than being allowed to force a
+60-item overflow.
+
+DEFS: **cycles and bonds** of a multigraph and the **cut space** / **cycle space**;
+the induced bijection $\vec e\mapsto\vec e^{*}$ on directed edges (G1 Lemma 6.5.1);
+the **flow number** $\varphi(G)$; a **snark**, verbatim from G1 §6.6 and now
+statable in full, since both halves — no $4$-flow, no $3$-edge-colouring — are
+available.
+
+THMS: **every cut is a disjoint union of bonds** (G1 Lemma 1.9.3);
+**the cycles of $G$ correspond to the bonds of $G^{*}$** (landmark; G1 Thm 4.6.1),
+citing the published `def-plane-dual-multigraph`; **$g$ is a circulation on
+$G^{*}$ iff $f$ satisfies (F1) and vanishes on every oriented cycle** (G1
+Lemma 6.5.2); **flow–colouring duality** (landmark; G1 Thm 6.5.3, Tutte 1954:
+"For every dual pair $G$, $G^{*}$ of plane multigraphs, $\chi(G)=\varphi(G^{*})$"),
+~20 steps across three items, using the published normal-spanning-tree material;
+**a cubic graph has a $4$-flow iff it is $3$-edge-colourable** (G1 6.4.5, cited
+from GT-18), which is what makes "snark" and "class 2" the same notion for cubic
+bridgeless graphs; **the four colour theorem stated**, with `proved_here: false`
+and the Appel–Haken and Robertson–Sanders–Seymour–Thomas sources, and its
+translation into the $4$-flow conjecture recorded.
+
+**G1's dictionary, reproduced as a required `rem-` because it is the page's
+point:** by flow–colouring duality the $3$-flow conjecture translates to
+Grötzsch's theorem, the $4$-flow conjecture to the four colour theorem (since the
+Petersen graph is not planar, it is not a minor of a planar graph), and the
+$5$-flow conjecture to the five colour theorem — which the library already
+publishes as `thm-five-colour-theorem`. Tutte's three flow conjectures are quoted
+verbatim as open problems in `rem-` items, never as theorems.
+
+**Whitney's 2-isomorphism theorem** (two graphs have isomorphic cycle matroids
+iff each is obtainable from the other by vertex identifications, splittings and
+Whitney twists) is **conditional on GT-17**: it is a matroid statement, and the
+matroid harvest (§29) decides whether it is scaffolded here, on GT-17, or
+deferred.
+
+FS: every plane multigraph has a unique dual (the published
+`ex-one-planar-graph-two-nonisomorphic-duals` is the witness and is **cited, not
+re-minted**); flow–colouring duality holds for abstract, non-plane graphs; a
+bridgeless graph always has a $4$-flow.
+
+B: the dual of a small plane multigraph drawn and its cycles matched to bonds;
+$\varphi(K_4)$ computed and checked against $\chi$ of its dual; the Petersen graph
+identified as a snark.
+
+Traps. (i) **Multigraphs, not graphs** (convention 8): contracting a plane graph
+produces loops and parallel edges, and these theorems are false or vacuous for
+simple graphs. (ii) Duality is a property of a **plane** graph, i.e. of an
+embedding, not of a planar graph — the published counterexample says so.
+(iii) The four colour theorem is `proved_here: false` and its consequences inherit
+the ‡ marker.
+
+Provenance: Statements `literature-derived` (G1, quoted). Proofs
+`literature-derived`; the four colour theorem's proof is `not-supplied`.
+
+---
+
+## GT-23 (NEW, placed high). Colouring Plane Graphs: 5-Choosability, Grötzsch and Crossing Numbers
+
+**Anchor:** immediately after GT-22's examples page.
+`requires`: GT-22, GT-12, GT-9,
+`plane-graphs-euler-and-the-five-colour-theorem`,
+`finite-probability-and-the-probabilistic-method`.
+
+THMS: **Thomassen's theorem** (landmark; G1 Thm 5.4.2: "Every planar graph is
+5-choosable") — **8–12 numbered steps, one of the best value-for-length results in
+all of graph colouring**, proved through the strengthened assertion (∗) quoted
+verbatim from G1: every inner face bounded by a triangle, the outer face by a
+cycle $C=v_1\dots v_kv_1$, $v_1$ coloured 1 and $v_2$ coloured 2, lists of size
+$\ge3$ on the rest of $C$ and $\ge5$ off it, then the colouring extends. The
+induction splits on whether $C$ has a chord; **its only dependency is
+`prop-maximal-plane-triangulation-characterisation`, which the library already
+publishes** (G1's Prop. 4.2.8). **The five colour theorem falls out as a free
+corollary with a genuinely different proof** — G1 says so explicitly: "The proof of
+this does not use the five colour theorem (or even Euler's formula …). We thus
+reobtain the five colour theorem as a corollary, with a very different proof." An
+agreement `rem-` against the published `thm-five-colour-theorem` is **required**;
+the library must not hold two unrelated five-colour theorems.
+**Planar graphs are not in general 4-choosable** (Voigt 1993, a plane graph of
+order 238) — statement only, `proved_here: false`, and it is what makes Thomassen's
+theorem best possible.
+
+**Grötzsch's theorem** (every triangle-free planar graph is 3-colourable) is
+scaffolded **conditionally**. G1 states it as Thm 5.1.3; the harvest did not
+establish whether the 5th edition proves it, and the classical proof is a
+discharging argument. Disposition: a step-2 Beta confirms from the source whether
+a bounded proof is available — Thomassen's short proofs of Grötzsch's theorem are
+the candidate — and if not, the theorem is a source-cited `rem-` with
+`proved_here: false` and the failed route recorded. **It is not written from
+memory**, and §29 records it as an open sourcing question.
+
+**The crossing number and the crossing lemma.** The crossing number $\operatorname{cr}(G)$
+is defined here; the **crossing lemma**
+$\operatorname{cr}(G)\ge\lVert G\rVert^3/(64\lvert G\rvert^2)$ for
+$\lVert G\rVert\ge4\lvert G\rvert$ is scaffolded, because its proof is exactly the
+kind this library can write: the linear bound
+$\operatorname{cr}(G)\ge\lVert G\rVert-3\lvert G\rvert+6$ from the published
+`cor-planar-simple-graph-edge-bound`, then a **random induced subgraph** and the
+published `finite-probability-and-the-probabilistic-method` machinery to amplify
+it. ~12 steps. **No source for it was obtained by any harvest in this run**, so it
+is scaffolded but not source-complete; the candidates recorded in §29 are
+Schaefer's open dynamic survey *The Graph Crossing Number and its Variants* and
+the original Ajtai–Chvátal–Newborn–Szemerédi and Leighton papers. Its consequence,
+the **Szemerédi–Trotter incidence theorem**, is scaffolded only if that source
+pass succeeds; it is the classic payoff and it should not be dropped for want of
+one fetch.
+
+FS: every planar graph is 4-choosable; the crossing lemma holds without the
+density hypothesis $\lVert G\rVert\ge4\lvert G\rvert$ (it does not — the witness is
+a sparse graph, and the hypothesis is exactly what makes the probabilistic
+amplification legal); Grötzsch's theorem extends to graphs of girth 4 on the
+torus.
+
+B: Thomassen's induction run on a small triangulation with explicit lists;
+$\operatorname{cr}(K_5)=1$ and $\operatorname{cr}(K_6)=3$; the crossing lemma
+evaluated on a dense small graph; the Grötzsch graph ($\mu(C_5)$, from GT-9)
+identified as triangle-free with $\chi=4$ and **non-planar**, which is exactly why
+Grötzsch's theorem needs planarity.
+
+Traps. (i) Thomassen's (∗) is a strengthening; proving the theorem directly does
+not work and the strengthened statement is the item. (ii) The five-colour
+corollary needs the agreement `rem-`. (iii) $\mu(C_5)$ is the standard witness that
+triangle-freeness alone does not bound $\chi$; on this page it is the witness that
+planarity is load-bearing in Grötzsch. Both readings are correct and the item must
+say which it is using.
+
+Provenance: Statements `literature-derived` (G1, quoted) for Thomassen and Voigt;
+Grötzsch and the crossing lemma are `literature-derived` **pending the source
+pass** and must not ship before it.
+
+---
+
+## GT-24 (NEW). Hamiltonicity II: Chvátal–Erdős, Degree Sequences and Toughness
+
+**Anchor:** immediately after `eulerian-and-hamiltonian-graphs-examples`
+(published).
+`requires`: `eulerian-and-hamiltonian-graphs`, `graphs-walks-and-connectivity`,
+`graph-colouring`, GT-14.
+
+The published page carries Dirac and Ore (`cor-diracs-hamiltonicity-theorem`,
+`lem-dirac-condition-implies-ore-condition`, `ex-ore-condition-without-dirac-condition`,
+`cex-dirac-threshold-sharp`). Everything here strictly strengthens them, so this
+pair is an extension and nothing on the published page is touched.
+
+THMS: **Chvátal–Erdős** (landmark; G1 Prop. 10.1.2: "Every graph $G$ with
+$\lvert G\rvert\ge3$ and $\alpha(G)\le\kappa(G)$ has a Hamilton cycle") — ~12
+steps by taking a longest cycle and deriving a contradiction from a component of
+$G-C$, and it needs only $\kappa$ and $\alpha$, both published;
+**Asratian–Khachatrian** (G1 Thm 10.1.3: a connected graph of order $\ge3$ is
+hamiltonian if $d(u)+d(w)\ge\lvert N(u)\cup N(v)\cup N(w)\rvert$ for every induced
+path $uvw$) — ~20 steps, and it **implies both Dirac and Ore**, so the page carries
+two required derivation items citing the published theorems and showing they are
+special cases; **Chvátal's degree-sequence theorem** (landmark; G1 Thm 10.2.1) —
+~20–25 steps for both directions — with G1 Cor. 10.2.2 as the path version;
+**toughness** defined and the relation to hamiltonicity stated; **Tutte's theorem
+that every 4-connected planar graph has a Hamilton cycle** — statement only in G1,
+so `proved_here: false`; **Fleischner's theorem** ($G^2$ is hamiltonian for
+2-connected $G$) — G1 proves it but it is his longest chapter-10 proof at ~5
+printed pages; disposition **deferred**, with the reason recorded, unless a step-2
+Beta finds a split into bounded items.
+
+FS: $\alpha(G)\le\kappa(G)$ is necessary for hamiltonicity (it is sufficient, not
+necessary — the witness is any long cycle); every $1$-tough graph is hamiltonian
+(open in general and **false** in the strong form — this must be checked against a
+source before shipping, since the tough-graph literature is where a careless
+statement becomes a false theorem); Chvátal's condition is symmetric in the
+sequence.
+
+B: Chvátal–Erdős applied to the Petersen graph (which fails it, $\alpha=4>3=\kappa$,
+and is indeed non-hamiltonian — the published `def-petersen-graph` is cited);
+Chvátal's condition checked on an explicit degree sequence; a hamiltonian graph
+failing Dirac's bound.
+
+CEX: a non-hamiltonian graph satisfying Ore's condition minus one; a $1$-tough
+non-hamiltonian graph — **check the witness against a source**.
+
+Provenance: Statements `literature-derived` (G1, quoted); the two items showing
+Asratian–Khachatrian implies the published Dirac and Ore theorems are
+`ai-altered`, since the derivations are routine but the pairing with *these*
+published items is this library's.
+
+---
+
+# 25. The probabilistic, Ramsey and additive block
+
+Sources are keyed **P1**–**P6**: **P1** Alon & Spencer, *The Probabilistic
+Method*; **P2** Zhao, *Graph Theory and Additive Combinatorics* (= G2);
+**P3** Zhao, *Probabilistic Methods in Combinatorics*
+(`https://yufeizhao.com/pm/probmethod_notes.pdf` — note the singular `probmethod`,
+the plural path 404s); **P4** Matoušek & Vondrák, *The Probabilistic Method*
+lecture notes; **P5** Gowers, *Entropy Methods in Combinatorics*, Cambridge
+Part III (`https://danielnaylor.uk/notes/III/Lent/EMC/EMC.pdf`, with per-section
+HTML at `.../HTML/EMCse{1..7}.html`); **P6** Tao & Vu, *Additive Combinatorics*.
+Frieze–Karoński, Bollobás *Random Graphs*, Janson–Łuczak–Ruciński and
+Molloy–Reed were harvested at contents level. Full ledger, the finiteness audit
+and the verbatim headings: `research/subjects-01-combinatorics-harvest-probabilistic.md`.
+
+## 25.0 The finiteness discipline this whole block runs on
+
+The library has **finite probability only** — `finite-probability-spaces-and-random-variables`
+(37 items) and `finite-probability-and-the-probabilistic-method` (28 items) are
+published, and measure-theoretic probability belongs to the `probability-theory`
+track (SEAMS §4), which must **cite** this material and not rebuild it. That is a
+real constraint and the harvest's central job was to say exactly what survives
+it. The answer is: **almost everything, and the surviving statements are often
+sharper than the ones a measure-theoretic treatment would state.**
+
+Three verdicts govern every item below, and every page states which applies:
+
+- **[F] finite** — a theorem about a single finite probability space, or about no
+  probability at all. Authored as a theorem, with explicit constants.
+- **[L] a limit of finite** — a statement about a *sequence* of finite spaces,
+  expressed with real limits, which the library has. **In almost every case there
+  is a finite inequality underneath, and that inequality is the theorem while the
+  limit is a corollary.** Chebyshev's $\Pr[X=0]\le\operatorname{Var}X/(\mathbb{E}X)^2$
+  is the model: valid for each fixed $n$ with no limit at all.
+- **[X] out of reach** — genuinely needs measure theory or another subject.
+
+**Three traps this discipline creates, all of them ways to author a false
+statement, and each is a required `rem-` on the page where it arises.**
+
+1. **Do not flatten a sharp limit to "whp".** The connectivity threshold
+   (Frieze–Karoński Thm 4.1) says: with $m=\frac12 n(\log n+c_n)$, the limit of
+   $\Pr[G_m$ connected$]$ is $0$ if $c_n\to-\infty$, **$e^{-e^{-c}}$ if
+   $c_n\to c$**, and $1$ if $c_n\to\infty$. Restating that as "whp connected"
+   authors a *weaker* statement than the source.
+2. **Do not sharpen a "whp" statement to a finite one.** The two-point
+   concentration of $\omega(G(n,\tfrac12))$ asserts the existence of a function
+   $k(n)$ with $\lim\Pr[k(n)\le\omega\le k(n)+1]=1$; **$k(n)$ is not in closed
+   form and no source gives an error bound.** Any finite-$n$ version would
+   overstate every standard source.
+3. **Do not use "almost surely".** The harvest's recommendation, adopted: write
+   $\lim_{n\to\infty}\mu_n(P_n)=1$ explicitly. P1's older "almost always" and the
+   modern "whp / a.a.s." are the same notion, but "almost surely" carries
+   measure-theoretic freight this library cannot support.
+
+**The two questions the dispatch singled out are both answered favourably.**
+Martingale concentration is **[F]**: P1 defines a martingale as a *finite*
+sequence $X_0,\dots,X_m$, conditional expectation on a finite space is a weighted
+finite average, and Azuma–Hoeffding is six steps. The entropy method is **[F] in
+full**, and it is the best value in the harvest.
+
+## 25.1 Conventions this block adopts
+
+| # | question | disagreement | adopted | why |
+|---|---|---|---|---|
+| 19 | random graph model | $G(n,p)$ vs $G(n,M)$ | **$G(n,p)$**, matching the published finite-space construction | it is a product of finite two-point spaces, so it *is* the library's published product-space construction; and every calculation factors |
+| 20 | "with high probability" | (a) whp / a.a.s. (P2, Bollobás, JLR); (b) "almost always" (P1); (c) $\ge1-n^{-C}$ (the CS convention, genuinely quantitative and **different**) | **write the limit explicitly**; never "almost surely" | (a) and (b) agree; (c) does not, and the phrase "almost surely" imports measure theory |
+| 21 | arrow notation | superscript = uniformity, subscript = colours (GRS) vs a target size per colour | **GRS**, extending the published `def-ramsey-colouring-and-arrow-notation` without breaking it | the library's published notation is the two-colour, pair case and must remain a special case |
+| 22 | multicolour Ramsey numbers | $R_c(k)$ vs $R(k_1,\dots,k_c)$ | **$R(k_1,\dots,k_c)$** | it degrades gracefully to the published two-colour `def-off-diagonal-ramsey-number`; $R_c(k)$ adds a parameter position for information already in the argument count |
+| 23 | additive energy | unnormalised count (P2 Def 7.13.1) vs $E/(\lvert A\rvert^{3/2}\lvert B\rvert^{3/2})$ (P6 and the analytic literature) | **the unnormalised count** | it is an integer and makes "small doubling implies large energy" a clean inequality between integers |
+| 24 | Sidon / $B_h$ | the combinatorial $B_2$ notion; $B_h[g]$; **and the harmonic-analysis "Sidon set", a completely different concept**; and Erdős's distinct-subset-sums condition, which is **stronger** than Sidon | **the combinatorial $B_2$ definition, named explicitly**, with the other three recorded as distinct notions | three easily confused concepts, one of which is a false friend |
+| 25 | discrepancy sign | $\chi:\Omega\to\{-1,+1\}$ with $\operatorname{disc}=\min_\chi\max_A\lvert\chi(A)\rvert$ (P1 §13.1); the red/blue form, numerically identical; the deviation-from-half form, which is **half** | **the $\pm1$ convention** | every constant in the literature ($6\sqrt n$, $2t-1$) is stated against it; the half-deviation convention silently halves every bound |
+| 26 | entropy base | base 2 (P1 §15.7, P5) vs natural log (nats) | **base 2, fixed explicitly in the definition** | it makes $H(X)\le\log_2\lvert S\rvert$ and the counting corollaries come out cleanly. G1's $\log$ is also base 2 (convention 18), so the whole library is consistent |
+| 27 | Azuma indexing | $X_0=0$ with $\Pr[X_m>\lambda\sqrt m]$ (P1 Thm 7.2.1); $Z_0,\dots,Z_n$ (P4); per-step bounds $c_i$ giving $\exp(-\lambda^2/(2\sum c_i^2))$ (P3) | **the per-step-bounds form**, deriving the $\sqrt m$ form as a corollary | it subsumes the others |
+| 28 | $(n,d,\lambda)$-graph | $\lambda$ = second-largest **absolute** eigenvalue vs second-largest signed eigenvalue | **absolute value**, matching convention 2's ordering | it is what makes the expander mixing lemma true as stated |
+
+---
+
+## CB-25 (NEW). Entropy in Combinatorics
+
+**Anchor:** immediately after `finite-probability-and-the-probabilistic-method-examples`
+(published). `requires`: `finite-probability-spaces-and-random-variables`,
+`finite-probability-and-the-probabilistic-method`, `convexity-and-jensen` (the
+page homing `thm-finite-jensen-inequality` — verify at build),
+`finite-counting-and-binomial-coefficients`, `the-natural-logarithm`.
+
+**The harvest's strongest single recommendation, and the reason is worth
+recording: entropy is the one major modern technique whose every object is a
+finite sum, so a library with no measure theory loses nothing at all.** P5's
+Cambridge Part III course states in its first line that "random variable" means
+"discrete random variable" throughout.
+
+DEFS: **Shannon entropy** $H(X)=-\sum_{x\in S}p(x)\log_2 p(x)$ on a finite range
+(#106, convention 26), with $0\log0=0$ **labelled as the convention it is**;
+conditional entropy $H(X\mid Y)$; joint entropy; the projection $X(G)$ of a random
+vector onto a coordinate set $G$; the **binary entropy function**.
+
+THMS: the four basic bounds (P1 Lemma 15.7.1) — $H(X)\le\log_2\lvert S\rvert$ with
+equality iff uniform; $H(X,Y)\ge H(X)$; $H(X,Y)\le H(X)+H(Y)$;
+$H(X\mid Y,Z)\le H(X\mid Y)$ — each a short Jensen argument on $\log z$ and
+$z\log z$, citing the published `thm-finite-jensen-inequality`;
+**subadditivity** $H(X)\le\sum_iH(X_i)$ (P1 Prop. 15.7.2); the **chain rule**
+(P5 Lemma 1.3, P3 Lemma 10.1.7); **submodularity** (P5 Prop. 1.14);
+**Shearer's lemma** (landmark; P1 Prop. 15.7.4, P3 Thm 10.4.5, P5 Lemma 4.1) — if
+$\mathcal{G}$ is a family of subsets of $[n]$ with each $i$ in at least $k$
+members then $k\cdot H(X)\le\sum_{G\in\mathcal{G}}H(X(G))$ — by induction on $k$,
+the step replacing $G_1,G_2$ by $G_1\cup G_2$ and $G_1\cap G_2$ using
+submodularity and terminating because the move decreases a finite sum, ~6 steps;
+**Shearer's counting form** $\lvert\mathcal{F}\rvert^k\le\prod_i\lvert\mathcal{F}_i\rvert$
+(P1 Cor. 15.7.5), by taking $X$ uniform on $\mathcal{F}$ so that
+$H(X)=\log\lvert\mathcal{F}\rvert$; **the discrete Loomis–Whitney inequality**
+$\lvert A\rvert^{n-1}\le\prod_i\lvert\pi_i(A)\rvert$ for finite $A\subseteq\mathbb{Z}^n$
+(P3 Cor. 10.4.6, P5 Cor. 4.3); **Kruskal–Katona** in Lovász's form (P5 Thm 4.8) —
+**and here the library gets a second proof of a result CB-21 proves by
+compressions (§22), which is exactly the kind of pairing the house style
+rewards**; **Brégman's theorem** (landmark; P1's Probabilistic Lens, P3 Thm 10.2.1,
+P5 Thm 3.1) — $\operatorname{per}(A)\le\prod_i(d_i!)^{1/d_i}$ for a $0/1$ matrix
+with row sums $d_i$, i.e. the Minc conjecture, by the entropy of a uniformly
+random permutation contributing to the permanent revealed in a random order, ~8
+steps; **Kahn–Lovász** as its corollary; the **edge-isoperimetric inequalities**
+in the cube ($\lvert\partial A\rvert\ge\lvert A\rvert(n-\log\lvert A\rvert)$, P5
+Thm 4.7) and in $\mathbb{Z}^n$ (P5 Thm 4.6), both ~4 steps from Shearer;
+**$\Delta$-intersecting families** (Kleitman–Shearer–Sturtevant, P1 Cors. 15.7.3
+and 15.7.7); **Sidorenko's conjecture in its known cases** (P5 Thm 2.1, P3
+§10.3 — Blakey–Roy).
+
+**Take the DISCRETE Loomis–Whitney.** P1 Cor. 15.7.6 states it for "a measurable
+body $B$ in $n$-dimensional Euclidean space", which is **[X]**. P3 Cor. 10.4.6 and
+P5 Cor. 4.3 give the discrete form with the same content for this library's
+purposes and no measure theory. This is a case where two sources state the same
+named result at different strengths and only one is usable — the page must cite
+the discrete one and must not quote P1's phrasing.
+
+**Prerequisite to verify, and it is the page's only risk.**
+`thm-finite-jensen-inequality` is published, and `ex-finite-jensen-gives-the-mean-square-inequality`
+with it. Every bound here is Jensen applied to a convex function (#106). If the
+homing page turns out to be a B page, the b-leaf rule forbids citing it and the
+lemma must be reproved here with an agreement `rem-`; **check on disk before
+writing `requires`.**
+
+FS: $H(X,Y)=H(X)+H(Y)$ always; Shearer's lemma holds with "each $i$ in at least
+$k$ members" weakened to "on average $k$"; the continuous and discrete
+Loomis–Whitney inequalities are the same statement; $H(X)\le\log_2\lvert S\rvert$
+with equality for every non-degenerate $X$.
+
+B: $H$ of a fair and a biased coin; Shearer applied to $\mathcal{G}=$ all
+$(n-1)$-subsets of $[3]$; discrete Loomis–Whitney checked on an explicit
+$A\subseteq\mathbb{Z}^3$; Brégman's bound evaluated on a small $0/1$ matrix and
+checked against a direct permanent computation; the entropy proof of
+Kruskal–Katona run on a small family and compared with CB-21's compression proof.
+
+CEX: two dependent variables with $H(X,Y)<H(X)+H(Y)$; a family where the naive
+"average $k$" version of Shearer fails.
+
+Provenance: Statements `literature-derived` (P1, P3, P5). Proofs
+`literature-derived`. The pairing of the entropy and compression proofs of
+Kruskal–Katona is `ai-altered` structuring and needs an agreement `rem-`.
+
+---
+
+## CB-29 (NEW). Correlation Inequalities, the Four Functions Theorem and Janson's Inequalities
+
+**Anchor:** immediately after CB-25's examples page.
+`requires`: CB-25, `finite-probability-spaces-and-random-variables`,
+`chains-antichains-sperner-and-dilworth` (finite lattices),
+`incidence-algebras-and-mobius-inversion`.
+
+**Every object on this page is finite by hypothesis in the source itself** — P1
+Thm 6.1.1 says "four functions on $\mathcal{P}(N)$", Cor. 6.1.2 says "a **finite**
+distributive lattice", Thm 8.1.1 says "Let $\Omega$ be a **finite** universal
+set … $I$ a **finite** index set". Nothing here mentions a $\sigma$-algebra.
+
+DEFS: an **increasing** (monotone) family and an increasing event; the set
+operations $\mathcal{A}\vee\mathcal{B}$, $\mathcal{A}\wedge\mathcal{B}$ on
+families; a **finite distributive lattice**, cited from the published lattice
+material; the dependency graph relation $i\sim j$ ($A_i\cap A_j\ne\varnothing$);
+$\mu$, $\Delta$ and $M$ in Janson's setting.
+
+THMS: **the Four Functions Theorem** (landmark; P1 Thm 6.1.1, Ahlswede–Daykin) —
+if $\alpha(A)\beta(B)\le\gamma(A\cup B)\delta(A\cap B)$ for all $A,B\subseteq N$
+then the same holds for families — by induction on $\lvert N\rvert$ whose base
+case is a two-line algebraic identity reducing to
+$(\gamma_1\delta_0-\alpha_0\beta_1)(\gamma_1\delta_0-\alpha_1\beta_0)\ge0$;
+**its extension to a finite distributive lattice** (P1 Cor. 6.1.2);
+**the FKG inequality** (landmark; P1 Thm 6.2.1), in ~4 steps by setting
+$\alpha=\mu f$, $\beta=\mu g$, $\gamma=\mu fg$, $\delta=\mu$; **Harris's
+inequality** for increasing events on the cube; **Janson's inequality**
+(landmark; P1 Thm 8.1.1) — $M\le\Pr[\bigwedge\neg B_i]\le Me^{\Delta/(2(1-\varepsilon))}$
+and $\Pr[\bigwedge\neg B_i]\le e^{-\mu+\Delta/2}$ — by the Boppana–Spencer route
+(P1 §8.2) through the two conditional inequalities
+$\Pr[B_i\mid\bigwedge_{j\in J}\neg B_j]\le\Pr[B_i]$ and
+$\Pr[B_i\mid B_k\wedge\bigwedge_{j\in J}\neg B_j]\le\Pr[B_i\mid B_k]$, ~8–12 steps
+— **and the first of those is exactly Harris/FKG, which is why the correlation
+material must precede it on the same page**; **the extended Janson inequality**
+(P1 Thm 8.1.2) $\Pr[\bigwedge\neg B_i]\le e^{-\mu^2/(2\Delta)}$ when $\Delta\ge\mu$;
+**Suen's inequality** (P1 Thm 8.7.1).
+
+**CB-21 (§22) already carries the four functions theorem, Harris/FKG and
+Kleitman's lemma in their set-system forms.** This page must not re-mint them. The
+division adopted: **CB-21 states them for finite distributive lattices and
+set systems as extremal-set-theory results; CB-29 cites CB-21 and adds only the
+probabilistic reading and Janson.** §28 records the amendment CB-21 owes — a
+`rem-` pointing forward to the probabilistic use — and §29 flags this as the one
+place in the enrichment where two blocks converge on the same theorem.
+
+FS: Janson's inequality holds without the independence of the ground-set
+indicators; FKG holds for one increasing and one decreasing function in the same
+direction (it reverses — and that reversal is the page's most useful `fs-`,
+because getting the direction wrong is the standard error); $\Delta$ may be taken
+over unordered pairs (P1 sums over **ordered** pairs, and halving it silently
+breaks every constant).
+
+B: FKG checked on two increasing events in the $3$-cube; Janson applied to the
+probability that $G(n,p)$ is triangle-free, with $\mu$ and $\Delta$ computed
+explicitly; the four functions theorem verified on $N=\{1,2\}$.
+
+Provenance: Statements `literature-derived` (P1, quoted). Proofs
+`literature-derived`.
+
+---
+
+## CB-30 (NEW). Martingales and Concentration on Finite Spaces
+
+**Anchor:** immediately after CB-29's examples page.
+`requires`: CB-29, `finite-probability-spaces-and-random-variables`,
+`finite-probability-and-the-probabilistic-method`, `the-exponential-function`,
+`graph-colouring`.
+
+**This page is the harvest's decisive finiteness verdict made concrete.** A
+martingale here is a *finite sequence*; conditional expectation on a finite space
+is a weighted finite average; **no filtration, no $\sigma$-algebra, no
+measurability hypothesis appears anywhere.** P3's own parenthetical — "(To be more
+formal, we should talk about filtrations of a probability space …)" — names
+exactly the formality a finite space lets the library skip, and the page should
+say so in a `rem-`.
+
+DEFS: a **finite martingale** $X_0,\dots,X_m$ with
+$\mathbb{E}[X_{i+1}\mid X_i,\dots,X_0]=X_i$ (P1's definition, verbatim); the
+**edge-exposure** and **vertex-exposure** martingales on $G(n,p)$; the **Doob
+martingale** of a function on a finite product; the **edge** and **vertex
+Lipschitz** conditions; a **gradation** $\varnothing=B_0\subset\dots\subset B_m=B$.
+
+THMS: **Azuma–Hoeffding** (landmark; P1 Thm 7.2.1) — six numbered steps: set
+$\alpha=\lambda/\sqrt m$, $Y_i=X_i-X_{i-1}$; bound
+$\mathbb{E}[e^{\alpha Y_i}\mid X_{i-1},\dots,X_0]\le\cosh\alpha\le e^{\alpha^2/2}$;
+telescope the finite product to $\mathbb{E}[e^{\alpha X_m}]\le e^{\alpha^2m/2}$;
+apply the published Markov inequality to $e^{\alpha X_m}$ — authored in the
+**per-step-bounds form** $\exp(-\lambda^2/(2\sum c_i^2))$ (convention 27) with the
+$\sqrt m$ form as a corollary; **the Lipschitz transfer** (P1 Thms 7.2.3, 7.4.1) —
+the edge/vertex Lipschitz condition gives $\lvert X_{i+1}-X_i\rvert\le1$ — proved
+in the general setting $\Omega=A^B$ with a gradation and independent coordinates,
+by a finite double-sum rearrangement; **bounded differences / McDiarmid's
+inequality** (landmark; P3 Thms 9.1.1, 9.1.3) with **all three of its names
+recorded** — McDiarmid, Azuma–Hoeffding, bounded differences — via the Doob
+martingale and Hoeffding's lemma; **Shamir–Spencer** (landmark; P1 Thm 7.2.4) —
+$\Pr[\lvert\chi(G(n,p))-\mathbb{E}\chi\rvert>\lambda\sqrt{n-1}]<2e^{-\lambda^2/2}$
+— three steps from the vertex-exposure martingale plus the observation that one
+vertex can always take a new colour, and **the one genuinely finite theorem in the
+random-graph literature: it holds for every $n$ and every $t$, with an explicit
+constant and no limit at all**; **the chromatic-number concentration bound**
+$\Pr[\lvert\chi-\mathbb{E}\chi\rvert\ge t]\le2\exp(-t^2/2n)$ in that same finite
+form; **Bollobás's theorem** $\chi(G(n,\tfrac12))\sim n/(2\log_2 n)$ (P1
+Thm 7.3.2/10.3.1) as an **[L]** statement with the finite martingale estimates
+underneath authored as the theorems.
+
+**Denied, with the reason in each case.** **Talagrand's inequality** is *not*
+blocked by measure theory — the product space is finite and P1's
+$\int_\Omega e^{\rho^2(A,x)/4}\,dx\le1/\Pr[A]$ is a finite sum — but the convex
+distance $\rho(A,x)=\min_{v\in V(A,x)}\lvert v\rvert$ is a minimum over a **convex
+hull** in $\mathbb{R}^n$, so it needs convex hulls, attainment on a compact convex
+set, and a separating-hyperplane argument. **Disposition: `deferred`, with the
+gate named precisely — finite polytope and convex-geometry machinery, not measure
+theory.** The convex hull of $U(A,x)\subseteq\{0,1\}^n$ is a polytope, so a future
+level that builds finite convex geometry closes it; §29 records the licence.
+**Kim–Vu polynomial concentration** — `deferred` on length. **The martingale
+convergence theorem, Borel–Cantelli, the Erdős–Rényi phase transition (which runs
+through Galton–Watson branching processes), zero–one laws, graphons, and the
+Gaussian/isoperimetric block** — all **[X]**, each recorded with the specific
+infinite object that puts it out of reach. **Borel–Cantelli in particular must not
+be used anywhere in this track**: it is a statement about $\sum_{n=1}^\infty\Pr[A_n]$.
+
+FS: Azuma requires the increments to be independent (it requires only the
+martingale property and the bound — this is the page's most valuable `fs-`,
+because assuming independence is the standard misreading); Shamir–Spencer
+concentrates $\chi$ around $n/(2\log_2 n)$ (it concentrates $\chi$ around its own
+expectation, and locating that expectation is Bollobás's much harder theorem —
+**conflating the two is a real and common error**); McDiarmid holds when the
+$\Omega_i$ are infinite.
+
+B: Azuma applied to a simple random walk; the edge-exposure martingale of the
+triangle count on $G(4,\tfrac12)$ written out in full; Shamir–Spencer evaluated
+numerically for a small $n$; a Doob martingale on a finite product.
+
+Provenance: Statements `literature-derived` (P1, P3, quoted). Proofs
+`literature-derived`.
+
+---
+
+## CB-26 (NEW). Discrepancy
+
+**Anchor:** immediately after CB-30's examples page.
+`requires:` CB-25, CB-30, CB-13, CB-14b (Hadamard matrices),
+`gaussian-elimination-and-row-reduction`,
+`finite-probability-and-the-probabilistic-method`.
+
+DEFS: a colouring $\chi:\Omega\to\{-1,+1\}$, $\chi(A)=\sum_{j\in A}\chi(j)$, and
+$\operatorname{disc}(\mathcal{F})=\min_\chi\max_{A\in\mathcal{F}}\lvert\chi(A)\rvert$
+(#107, convention 25); the **degree** $\deg(\mathcal{F})$; **linear** and
+**hereditary** discrepancy; a **partial colouring**.
+
+THMS: **the random-colouring bound** $\operatorname{disc}(\mathcal{F})\le\sqrt{2m\ln(2n)}$
+for $n$ subsets of an $m$-set (P1 Thm 13.1.1) — three steps from the published
+Chernoff bound for random signs and a union bound; **Beck–Fiala** (landmark;
+P1 Thm 13.5.1) — $\deg(\mathcal{F})\le t$ implies
+$\operatorname{disc}(\mathcal{F})\le2t-1$, **with no restriction on the number or
+size of the sets** — by keeping every active set at value $0$, observing that
+active sets outnumbered by floating points give an underdetermined system, moving
+along a line until some coordinate hits $\pm1$, and iterating: **~7 numbered
+steps and no probability at all.** P1's own remark is the reason it belongs here:
+the proof "uses only methods from linear algebra and thus is technically outside
+the scope we have set for this book" — which is precisely why it fits a library
+with no measure theory, and it is the harvest's single most elegant cheap item;
+**six standard deviations** (landmark; P1 Thm 13.2.1, P3 Thm 5.1.3) —
+$n$ subsets of an $n$-set have $\operatorname{disc}\le6\sqrt n$; **linear and
+hereditary discrepancy** $\operatorname{lindisc}\le\operatorname{herdisc}$ and
+$\operatorname{disc}(\mathcal{F})\le12\sqrt n$ for arbitrary set sizes (P1
+Thms 13.3.1–13.3.2, Cors. 13.3.3–13.3.4), by a finite rounding argument;
+**the Hadamard lower bound** (P1 Thm 13.4.1) — a Hadamard matrix of order $n>1$
+gives $n$ subsets of an $n$-set with $\operatorname{disc}\ge\sqrt n/2$ — which
+cites CB-14b and closes the gap between the upper and lower bounds.
+
+**The route decision for six standard deviations is load-bearing, not stylistic.**
+Two proofs exist. Spencer's original **partial-colouring / entropy** method is a
+pigeonhole over finitely many colourings using CB-25's entropy bound — **entirely
+finite**. P1's fourth edition presents **Lovett–Meka** (Thms 13.2.2–13.2.5), a
+Gaussian random walk in $\mathbb{R}^n$ needing chi-squared distributions and
+Gaussian martingales — **[X]**. **Scaffold the entropy route only**, and say in
+the batch notes that the fourth-edition presentation was rejected for a stated
+reason. This is also why CB-25 must precede CB-26 on the reading path.
+
+**Denied:** the Beck–Fiala and Komlós conjectures — statements only.
+
+FS: $\operatorname{disc}$ is monotone under adding sets to $\mathcal{F}$;
+Beck–Fiala's bound depends on the number of sets (it does not, and that is the
+theorem's whole point); the half-deviation convention gives the same constants
+(convention 25 — it halves every bound).
+
+B: $\operatorname{disc}$ of all $2$-subsets of $[4]$ computed by hand; Beck–Fiala
+run on an explicit degree-$2$ family; the Hadamard construction of order $4$ and
+its discrepancy; the random-colouring bound evaluated and compared with the truth
+on a small family.
+
+Provenance: Statements `literature-derived` (P1, P3). Proofs
+`literature-derived`; the explicit rejection of the Lovett–Meka route is this
+scaffold's decision and belongs in the batch notes, not in any Statement.
+
+---
+
+## CB-12 (ENRICHED). The Probabilistic Method: the Local Lemma, Thresholds and Derandomization
+
+**Anchor:** `finite-probability-and-the-probabilistic-method` (published,
+28 items). `requires`: the published probability pages, CB-29, CB-30, `ramsey-theory`.
+
+The published page carries the method and the local lemma. This pair adds what it
+does not reach, and **nothing on the published page is touched**.
+
+THMS: **the lopsided local lemma** (P3 Thm 6.5.1, Cor. 6.5.2) — replacing mutual
+independence by $\Pr[A_i\mid\bigwedge_{j\in S}\neg A_j]\le\Pr[A_i]$ for $S$ not
+adjacent to $i$ — **cheap, because the ordinary LLL proof only ever uses that
+inequality**, so this is a short strengthening of published content; **nonnegative
+dependence for random injections** (P3 Thm 6.5.5) and the **derangement lower
+bound** (P3 Cor. 6.5.6); **the LLL Ramsey lower bounds** — the diagonal
+improvement $R(k,k)>(\sqrt2/e)(1+o(1))k2^{k/2}$ (P1 Prop. 5.3.1), which P1
+themselves call "somewhat disappointing" at a factor of 2, and the off-diagonal
+bounds $R(k,3)>c k^2/\log^2k$ and $R(k,4)>k^{5/2+o(1)}$ where the asymmetric LLL
+earns its keep (P3 Thm 1.1.9, Spencer 1977) — each **[F] for fixed $n$**, with the
+$o(1)$ refinement **[L]**; **second-moment thresholds** for a balanced graph $H$
+(P4 Thms 5.3.4–5.3.5, P1 Thm 4.4.1) — **authored as the finite Chebyshev
+inequality $\Pr[X=0]\le\operatorname{Var}X/(\mathbb{E}X)^2$, which is valid for
+each fixed $n$ with no limit, and the threshold as its corollary**; **the method
+of conditional expectations** (P1 §16.1) — the splitting identity
+$f^i_{p-1}(\varepsilon_1,\dots,\varepsilon_{p-1})=\frac12[f^i_p(\dots,-1)+f^i_p(\dots,+1)]$
+and the pessimistic-estimator inequality, both finite; **$d$-wise independence in
+small sample spaces** (P1 Thm 16.2.1, Lemma 16.2.2) — for $n=2^k-1$ and $d=2t+1$
+there is a symmetric probability space of size $2(n+1)^t$ carrying $d$-wise
+independent fair bits, via the parity-check matrix of a BCH code, **entirely finite
+$\mathbb{F}_2$ linear algebra and one of the few places where a small explicit
+finite probability space is the object of study rather than an approximation**;
+this last item cites CB-14c's coding material and is the seam between the design
+block and this one.
+
+**Two denials, and both are about *what kind of object* the statement is.**
+
+- **The Moser–Tardos runtime theorem is OUT OF REACH and must not be written as a
+  theorem of finite probability.** P1 say plainly: "A priori, $T_{\mathrm{LOG}}=\infty$
+  is possible, but we shall give conditions that imply
+  $\mathbb{E}[T_{\mathrm{LOG}}]<\infty$, which in turn implies that the FIX-IT
+  Algorithm will terminate with probability 1." An unbounded run of resamplings is
+  an infinite sequence of independent choices, and P1 Thm 5.7.1 sums over the
+  **infinite** set of Moser trees. **Author only the finite truncation** — for each
+  $N$, a bound on $\Pr[\text{not terminated within }N\text{ steps}]$ — with the
+  limiting statement as a `rem-`. The existence conclusion of the LLL is already
+  published; Moser–Tardos adds algorithmic content, and the algorithmic content is
+  what does not fit.
+- **The LLL cannot be applied to infinitely many events.** P1 give an explicit
+  counterexample, and their Thm 5.2.2 (multicoloured sets of reals) proves the
+  finite case by LLL and then extends to $\mathbb{R}$ **by Tychonoff, which P1
+  explicitly flag as equivalent to AC**. P3 Lemma 6.2.7 is the same move. **Any
+  item in this family names the compactness principle it spends**, and §25.9's
+  choice ledger carries the row. This is the same discipline §21 applies to De
+  Bruijn–Erdős, and the same failure mode §21.1 caught in §7.
+
+**Shearer's exact bound** (1985) — the characterisation, via the independent-set
+polynomial $Q_D(p)=\sum_{I\text{ indep}}(-1)^{\lvert I\rvert}\prod_{i\in I}p_i$,
+of which probability vectors admit the LLL conclusion for a fixed dependency
+graph, together with the optimality of $e$ in $epd\le1$ — is **[F]** (a finite
+algebraic statement about a finite graph) but substantially harder than the LLL.
+Disposition: **scaffold the "$e$ is optimal" half; state Shearer's
+characterisation as a source-cited `rem-`.**
+
+FS: the LLL applies to infinitely many events (P1's counterexample is the
+witness); the lopsided LLL needs mutual independence; the second-moment method
+gives $\Pr[X>0]\to1$ from $\mathbb{E}X\to\infty$ alone (the variance condition is
+the content).
+
+Provenance: Statements `literature-derived` (P1, P3, quoted). Proofs
+`literature-derived`.
+
+---
+
+## CB-11 (ENRICHED). Ramsey Theory II: Multicolour, Hypergraph, and the Modern Bounds
+
+**Anchor:** `ramsey-theory-examples` (published).
+`requires`: `ramsey-theory`, CB-12, CB-24, `finite-probability-and-the-probabilistic-method`.
+
+The published page is strong — 21 items including finite and infinite Ramsey,
+canonical Ramsey for pairs, van der Waerden, Schur, König's infinity lemma, and
+the counting lower bound. **§21.1 already corrected §7's two wrong choice rows
+against it.** This pair adds the multicolour and hypergraph extensions, the
+explicit constructions, and the modern records.
+
+THMS: **multicolour Ramsey numbers** $R(k_1,\dots,k_c)$ (convention 22) with the
+recursion and the exponential lower bound (P2 Prop. 0.1.12); the **multicolour
+triangle Ramsey theorem** (P2 Thm 0.1.4); **hypergraph Ramsey** beyond the
+published `thm-finite-ramsey-for-uniform-subsets`, in the GRS arrow notation
+(convention 21); **the Erdős–Szekeres happy-ending theorem** and the
+$\binom{2n}{n}$-type bounds; **the Frankl–Wilson explicit Ramsey graph**, cited
+from CB-24 — **the constructive counterpart to the published probabilistic lower
+bound `thm-diagonal-ramsey-counting-lower-bound`, and the reason CB-24 is worth
+its cost**; **Hindman's theorem**, in ZF.
+
+**Hindman's theorem is the page's choice-strength centrepiece, and the harvest's
+answer corrects a widespread belief.** The statement: for every finite colouring
+of $\mathbb{N}$ there is an infinite $D\subseteq\mathbb{N}$ with all finite sums
+of distinct elements of $D$ the same colour. Three standard proofs have
+strikingly different logical strength, and Blass–Hirst–Simpson's
+reverse-mathematics analysis is the reference: Hindman's original combinatorial
+proof formalises in $\mathrm{ACA}_0^{+}$; Baumgartner's streamlined proof in
+$\Pi^1_2\text{-}\mathrm{TI}_0$; the Galvin–Glazer ultrafilter proof needs more
+still, because idempotent ultrafilters in $\beta\mathbb{N}$ come from Ellis's
+lemma, i.e. Zorn applied to closed subsemigroups. **So Hindman's theorem does not
+need full AC and does not even need BPI: it is a ZF theorem.** What needs AC is
+only the *ultrafilter proof*. **A library item must therefore not state "Hindman's
+theorem requires AC"** — it must state the theorem in ZF, cite the combinatorial
+proof, and record Galvin–Glazer as a `rem-` with its choice cost named. This is
+exactly the statement/proof provenance split SCHEMA already supports, and it is
+the cleanest illustration of it anywhere in this scaffold. Sources:
+Blass–Hirst–Simpson; Hirst, *Hindman's Theorem, ultrafilters, and reverse
+mathematics*; Towsner, `arXiv:0906.3885`.
+
+**The modern records, as `rem-` items with `proved_here: false` and exact
+sources.** Shearer's 1983 bound giving $R(3,k)\le(1+o(1))k^2/\log k$ and Kim's
+1995 matching lower bound; **Campos, Jenssen, Michelen & Sahasrabudhe 2025**
+(`arXiv:2505.13371`), $R(3,k)\ge(\tfrac13+o(1))k^2/\log k$, **disproving a
+conjecture of Fiz Pontiveros, Griffiths and Morris** that $\tfrac14$ was sharp;
+**Campos, Griffiths, Morris & Sahasrabudhe** (`arXiv:2303.09521`), the first
+exponential improvement on Erdős–Szekeres, $R(k)\le(4-\varepsilon)^k$ with the
+announced explicit $3.993^k$, and the follow-up `arXiv:2407.19026` reporting
+$R(k,k)\le3.8^{k+o(k)}$. These are recorded because a library page on Ramsey
+theory that quietly implies $4^k$ is the state of the art is misleading a reader,
+and because a `rem-` is exactly the right vehicle.
+
+**The choice audit for the extensions, from the harvest, item by item:** finite
+Ramsey in all uniformities and colour counts is **ZF**; infinite Ramsey for
+$k$-tuples on $\mathbb{N}$ with finitely many colours is **ZF** and is published —
+**but a scaffolder must make the definability of the nested-set recursion explicit,
+because the "obvious" proof that picks an arbitrary element at each stage is a DC
+argument in disguise**; infinite Ramsey on an *arbitrary* infinite set needs more
+than ZF and is **not** scaffolded without the extra hypothesis stated; König's
+lemma for **arbitrary** branching is DC and must never be conflated with the
+published finitely-branching ZF version; compactness/Rado transfer from infinite
+to finite is **BPI**, which the library has; Hales–Jewett, van der Waerden,
+Gallai, Rado, Deuber and Folkman in their finite versions are all **ZF**.
+
+FS: the infinite Ramsey theorem holds for infinitely many colours; $R(3,3,3)$ is
+known to equal $17$ **and** the general multicolour values are computable (the
+first is true, the second is not — so this `fs-` must be phrased about the second
+alone); König's lemma holds for arbitrarily branching trees in ZF.
+
+Provenance: Statements `literature-derived`. The reverse-mathematics facts about
+Hindman are `literature-derived` from Blass–Hirst–Simpson and belong in a `rem-`,
+never inside a mathematical Statement.
+
+---
+
+## CB-31 (NEW). Quasirandomness, Paley Graphs and Quadratic-Residue Tournaments
+
+**Anchor:** immediately after GT-21's examples page (§24), since it needs the
+expander mixing lemma. `requires`: GT-21, GT-7a, GT-7b, CB-14b,
+`the-complex-exponential-and-eulers-formula`,
+`congruences-and-the-chinese-remainder-theorem`, `finite-probability-and-the-probabilistic-method`.
+
+DEFS: an **$(n,d,\lambda)$-graph** (convention 28); a **quasirandom** graph
+sequence; the **character** of a finite abelian group and its orthogonality
+relations; the **Paley graph** and the **Paley tournament**; property $S_k$ for a
+tournament, citing the published item.
+
+THMS: **the expander mixing lemma is cited from GT-21, not restated**; its
+**converse** (P2 Thm 3.2.12); **Chung–Graham–Wilson** (landmark; P1 Thms 9.3.1,
+9.3.2; P2 Thm 3.1.1, Def. 3.1.2) — the equivalence of the discrepancy,
+$4$-cycle-count, eigenvalue-separation, subgraph-count and codegree properties;
+**abelian Cayley graph eigenvalues as character sums** (P2 Thm 3.3.8), with
+**Paley graphs** (P2 Def. 3.3.5) and the **Gauss sum** evaluation (P2 Thms 3.3.12,
+3.3.14); **the quadratic-residue tournament has property $S_k$ for
+$k=O(\log p)$** (P1 §9.1, Thm 9.1.1, Lemma 9.1.2) — **the explicit construction
+matching the library's already-published probabilistic existence proof of
+property $S_k$, which makes this one of the most attractive pairings in the whole
+enrichment**.
+
+**Chung–Graham–Wilson is authored in the quantitative single-graph form, not the
+classical asymptotic one, and the reason is a finiteness fact.** P1 are explicit
+that "the notions below apply to a sequence of graphs $G=G_n$ … for which the
+number of vertices $n$ is going to infinity", so the seven-way equivalence as
+classically stated is **[L]**. P2 §3.1 states the same properties in
+$\varepsilon$-quantified single-graph form, each of which is **[F]**. **Author
+P2's quantitative implications as the theorems and record the asymptotic
+equivalence as the organising corollary** — which is why P2 is the better primary
+source here.
+
+**The character theory is a seam, and §29 records it.** The characters of a finite
+abelian group and their orthogonality are needed here, by CB-27, and by CB-14c's
+MacWilliams identity. SEAMS §4 gives `abstract-algebra` "representation theory of
+finite groups: group algebra, Maschke, characters, induced representations". For
+an *abelian* group the character is a homomorphism to $\mathbb{C}^\times$ and the
+orthogonality is a five-step consequence of the published
+`cor-sum-of-roots-of-unity` and `thm-complex-nth-roots-and-roots-of-unity`, with
+no representation theory at all (§19.2 F5). **The scaffold's proposal: CB-27 mints
+`def-character-of-a-finite-abelian-group` and the orthogonality relations, and
+this page and CB-14c cite it** — unless the orchestrator places the algebra
+track's representation-theory block below the combinatorics band, in which case
+all three cite that instead. **An id minted twice is the most expensive failure
+this commission can produce, so this is an amendment owed (§28) and not a decision
+this lane takes alone.**
+
+FS: every $d$-regular graph with small $\lambda$ is quasirandom in the vertex-set
+sense too; the Chung–Graham–Wilson properties are equivalent for sparse graphs
+(they are stated for $d=(\tfrac12+o(1))n$, and the hypothesis is load-bearing);
+the Paley graph on $p$ vertices is quasirandom for every prime $p$ including
+$p\equiv3\pmod4$ (the construction needs $p\equiv1\pmod4$ for the graph to be
+undirected — and this is the page's sharpest `fs-`).
+
+Provenance: Statements `literature-derived` (P1, P2, quoted).
+
+---
+
+## CB-27 (NEW). Finite Fourier Analysis and Roth's Theorem
+
+**Anchor:** immediately after CB-31's examples page.
+`requires`: CB-31, `the-complex-exponential-and-eulers-formula`,
+`congruences-and-the-chinese-remainder-theorem`,
+`algebraic-extensions-degree-and-finite-fields`,
+`vector-spaces-and-linear-independence`, `finite-counting-and-binomial-coefficients`.
+
+**§19.2 F5 called this the most consequential availability finding in the
+enrichment, and the harvest confirms it independently:** the Fourier proof of
+Roth's theorem in the finite-field model needs **only finite Fourier analysis on
+a finite abelian group and nothing else** — no measure theory, no infinite groups,
+no analysis beyond finite sums.
+
+DEFS: a **character** of a finite abelian group and the dual group;
+$\hat f(r)=\mathbb{E}_{x\in\mathbb{F}_p^n}f(x)\omega^{-r\cdot x}=p^{-n}\sum_xf(x)\omega^{-r\cdot x}$
+with $\omega$ a fixed primitive $p$-th root of unity (#108 — **the choice of
+$\omega$ is fixed once**, citing `thm-complex-nth-roots-and-roots-of-unity`);
+**convolution**; the **3-AP density** $\Lambda_3(f)$; a **density increment**;
+a **Bohr set**.
+
+THMS: **character orthogonality**, proved from the published
+`cor-sum-of-roots-of-unity` and not assumed (#108); **Fourier inversion**
+$f(x)=\sum_r\hat f(r)\omega^{r\cdot x}$ (P2 Thm 6.1.2); **Parseval/Plancherel**
+(P2 Thm 6.1.3); **the convolution identity** (P2 Def. 6.1.5, Thm 6.1.7);
+**the 3-AP density identity** $\Lambda_3(f)=\sum_r\hat f(r)^2\hat f(-2r)$ (P2
+Prop. 6.1.9); the **3-AP counting lemma** (P2 Lemma 6.2.4); **3-AP-free implies a
+large Fourier coefficient** (P2 Lemma 6.2.6); **a large Fourier coefficient implies
+a density increment** (P2 Lemma 6.2.7); **3-AP-free implies a density increment**
+(P2 Lemma 6.2.8); **Roth's theorem in the finite-field model / Meshulam's bound**
+(landmark; P2 Thm 6.2.1: every 3-AP-free subset of $\mathbb{F}_3^n$ has size
+$O(3^n/n)$), by iterating the density increment down a descending chain of
+subspaces with $\alpha_{i+1}\ge\alpha_i+\alpha_i^2/4$, giving $O(1/\alpha)$ rounds
+and hence $\alpha=O(1/n)$; **Roth's theorem in $\mathbb{Z}/N\mathbb{Z}$**
+(P2 §§6.3–6.4, Thm 6.4.1), the same architecture transported, plus **Dirichlet's
+lemma** (P2 Lemma 6.4.4) and the **partition into progression level sets**
+(P2 Lemma 6.4.5); **Behrend's construction** (landmark; P2 Thm 2.5.1) — a
+3-AP-free subset of $[N]$ of size $N e^{-O(\sqrt{\log N})}$, by taking points of
+$[n]^d$ on a sphere $\sum x_i^2=r$ chosen by pigeonhole and mapping them to
+integers by base-$2n$ digits, **with the strict convexity of the Euclidean sphere
+doing the work** — ~6 steps, and the matching lower bound that shows Roth's bound
+cannot be improved past a certain point; **Bogolyubov's lemma** in
+$\mathbb{F}_p^n$ (P2 Thm 7.8.3).
+
+**GT-19's Roth is a genuinely different proof of a genuinely different statement,
+and an agreement `rem-` is REQUIRED.** GT-19 proves $r_3(n)/n\to0$ over $[n]$ by
+triangle removal; this page proves the finite-field bound $O(3^n/n)$ by Fourier,
+and the $\mathbb{Z}/N\mathbb{Z}$ version separately. The library must not end up
+holding three unrelated Roth theorems. **The `rem-` states which is which, which
+implies which, and that the regularity route gives no explicit bound while the
+Fourier route does.**
+
+FS: the Fourier transform is independent of the choice of $\omega$ (it is not —
+#108, and different primitive roots give different transforms, though the
+theorems are invariant); Roth's bound $O(3^n/n)$ is best possible (Behrend and,
+in the finite-field model, CB-28's $O(2.756^n)$ both bear on this, and the `fs-`
+must say which); Parseval holds without normalisation.
+
+B: the characters of $\mathbb{Z}/5\mathbb{Z}$ written out and orthogonality
+checked; $\hat f$ computed for an explicit $f$ on $\mathbb{F}_3^2$; the 3-AP
+density identity verified on a small set; Behrend's construction run for small
+parameters.
+
+Provenance: Statements `literature-derived` (P2, quoted). Proofs
+`literature-derived`.
+
+---
+
+## CB-28 (NEW). The Polynomial Method II: Slice Rank and the Cap Set Problem
+
+**Anchor:** immediately after CB-27's examples page.
+`requires`: CB-27, CB-23, `algebraic-extensions-degree-and-finite-fields`,
+`polynomial-rings-and-roots`, `vector-spaces-and-linear-independence`,
+`gaussian-elimination-and-row-reduction`, `finite-counting-and-binomial-coefficients`.
+
+**The cheapest famous theorem in the whole harvest: no probability, no analysis,
+everything inside a finite-dimensional polynomial ring, about thirteen numbered
+steps.** §23's algebraic harvest had rated the cap-set bound **[C]** on the
+strength of the monomial-counting estimate; P2 §6.5 supplies that count as its own
+lemma (Thm 6.5.7), so the rating is **corrected to [B]** and the result is
+scaffolded in full rather than as a framework plus a source-cited constant.
+
+DEFS: the **slice rank** of $F:A^3\to\mathbb{F}$ (#109) — slice rank one means
+$F=f(x)g(y,z)$ or $f(y)g(x,z)$ or $f(z)g(x,y)$, and the slice rank is the least
+$k$ with $F$ a sum of $k$ such; the ring $\mathbb{F}_3[x_1,\dots,x_n]/(x_i^3-x_i)$
+as a **finite-dimensional** vector space; a **cap set**.
+
+THMS: **the trivial upper bound** $\operatorname{sr}(F)\le\lvert A\rvert$ (P2
+Lemma 6.5.3) — four lines, by restricting to slices $\delta_a(x)F(a,y,z)$ and
+summing; **a $k$-dimensional subspace of an $n$-dimensional space over any field
+contains a point with at least $k$ nonzero coordinates** (P2 Lemma 6.5.4) — four
+lines, because a $k\times n$ matrix of rank $k$ has an invertible $k\times k$
+submatrix; **the slice rank of a diagonal is exactly its support size** (landmark;
+P2 Lemma 6.5.5) — if $F(x,y,z)\ne0$ iff $x=y=z$ then
+$\operatorname{sr}(F)=\lvert A\rvert$; **the Croot–Lev–Pach lemma** (landmark;
+P2 Lemma 6.5.6) — an upper bound on the slice rank of $\mathbf 1_{x+y+z=0}$, by
+expanding $\prod_i(1-(x_i+y_i+z_i)^2)$ and splitting monomials by degree;
+**the trinomial coefficient estimate** (P2 Lemma 6.5.7); **Ellenberg–Gijswijt /
+the cap set theorem** (landmark; P2 Thm 6.5.9) — every 3-AP-free subset of
+$\mathbb{F}_3^n$ has size $O(2.756^n)$, a power saving over CB-27's $O(3^n/n)$.
+
+**P2's own caveat is required as a `rem-`:** "the polynomial method proof appears
+to be specific to the finite field model, and it is not known how to extend the
+strategy to the integers." Without it a reader will assume the technique transfers
+and that Roth in $\mathbb{Z}$ has a power-saving bound.
+
+FS: the slice rank equals the tensor rank (they differ, and the difference is the
+whole reason slice rank was invented); the cap-set bound transfers to
+$\mathbb{Z}/N\mathbb{Z}$; a diagonal tensor has slice rank $1$.
+
+B: the slice rank of a small explicit diagonal computed; the CLP expansion carried
+out for $n=1$; a maximal cap in $\mathbb{F}_3^2$ (size $4$) and in
+$\mathbb{F}_3^3$ (size $9$) exhibited and compared with the bound.
+
+Provenance: Statements `literature-derived` (P2, quoted). Proofs
+`literature-derived`.
+
+---
+
+## CB-32 (NEW). Sumset Calculus: Ruzsa, Plünnecke and Freiman in Bounded Exponent
+
+**Anchor:** immediately after CB-28's examples page.
+`requires`: CB-27, `finite-counting-and-binomial-coefficients`,
+`cyclic-groups-and-orders`, `inclusion-exclusion-and-the-pigeonhole-principle`.
+
+DEFS: sumsets $A+B$, difference sets $A-B$, iterated sumsets $mB-nB$; the
+**doubling constant**; **additive energy** $E(A,B)=\#\{(a_1,a_2,b_1,b_2):a_1+b_1=a_2+b_2\}$
+as an **unnormalised count** (convention 23); a **generalised arithmetic
+progression** and its **rank**; a **Freiman homomorphism**.
+
+THMS: **the Ruzsa triangle inequality**
+$\lvert A\rvert\cdot\lvert B-C\rvert\le\lvert A-B\rvert\cdot\lvert A-C\rvert$
+(landmark; P2 Thm 7.2.1, P5 Lemma 6.1) — an injection argument on finite sets, 3–4
+steps, and the outstanding first item of the page; **the Ruzsa covering lemma**
+(P2 Thm 7.4.1, P5 Lemma 6.2) — $\lvert A+B\rvert\le K\lvert B\rvert$ implies
+$A\subseteq X+B-B$ for some $X$ with $\lvert X\rvert\le K$, by a greedy maximal
+disjoint family, 3 steps; **the Plünnecke–Ruzsa inequality** (landmark; P2
+Thms 7.3.1, 7.3.3) — $\lvert A+B\rvert\le K\lvert A\rvert$ implies
+$\lvert mB-nB\rvert\le K^{m+n}\lvert A\rvert$ — **by Petridis's proof, a purely
+finite combinatorial induction choosing $X\subseteq A$ minimising
+$\lvert X+B\rvert/\lvert X\rvert$**, ~8 steps and needing no graph-theoretic
+magnification at all; the corollary
+$\lvert A\mp B\rvert\le\lvert A\pm B\rvert^3/(\lvert A\rvert\lvert B\rvert)$;
+**small doubling implies large additive energy** (P2 Prop. 7.13.4);
+**Freiman's theorem in a group of bounded exponent** (landmark; P2 Thms 7.5.1,
+7.5.4) — $\lvert A+A\rvert\le K\lvert A\rvert$ in a group of exponent $r$ implies
+$A$ lies in a subgroup of size $\le C(K,r)\lvert A\rvert$ — **provable from the
+covering lemma and Plünnecke alone**, and this is why it is scaffolded where full
+Freiman is not.
+
+**Full Freiman's theorem in $\mathbb{Z}$ is DENIED, and the reason is precise: it
+needs the geometry of numbers, not more effort.** P2 §7.9 is titled "Geometry of
+Numbers" and contains Def. 7.9.1 (lattice), Def. 7.9.2 (successive minima),
+Thm 7.9.4 (**Minkowski's second theorem**), Thm 7.9.6 (Blichfeldt), Thm 7.9.7
+(Minkowski's first theorem); §7.10 then finds a GAP inside a Bohr set, and §7.11
+assembles the theorem, together with Bogolyubov's lemma, Freiman homomorphisms and
+the Ruzsa modeling lemma. The whole chain §7.6–§7.11 is a page in itself resting
+on a subject the library has not reached. **Disposition: `deferred`, with the
+licence named — a geometry-of-numbers development, which would most naturally
+belong to `number-theory`.** §28 records the amendment; §29 the seam.
+**Balog–Szemerédi–Gowers** is **[F]** but long (the proof is finite graph theory,
+P2 Thms 7.13.6–7.13.11) — `deferred` unless a step-2 Beta finds room, with P5
+Lemma 6.11's entropic route as the recorded alternative. **Polynomial
+Freiman–Ruzsa** — statements only, with the note that the $\mathbb{F}_2^n$ case is
+now the Gowers–Green–Manners–Tao theorem (P5 Thm 7.1), proved by **entropy** and
+therefore finite but long.
+
+FS: the Ruzsa triangle inequality holds with sumsets in place of difference sets
+(it does not, and the asymmetry is exactly what makes it useful); Plünnecke's
+inequality is symmetric in $A$ and $B$; small doubling implies $A$ is close to a
+subgroup in $\mathbb{Z}$ (it implies a GAP, and the difference is Freiman's
+theorem).
+
+Provenance: Statements `literature-derived` (P2, P5, P6). Proofs
+`literature-derived`.
+
+---
+
+## CB-33 (NEW). Kneser, Vosper and Erdős–Ginzburg–Ziv
+
+**Anchor:** immediately after CB-32's examples page.
+`requires`: CB-32, CB-23 (Cauchy–Davenport by the Combinatorial Nullstellensatz),
+`cyclic-groups-and-orders`, `congruences-and-the-chinese-remainder-theorem`,
+`algebraic-extensions-degree-and-finite-fields`.
+
+**Cauchy–Davenport is proved on CB-23 and is NOT re-minted here.** What this page
+adds is a second proof by a genuinely different method and three theorems that
+build on it. The two proofs are the page's best `rem-`: the **$e$-transform**
+route (P6 Thm 5.4, ~6 steps) is self-contained and needs only the coset lemma
+P6 Prop. 2.2; the **Nullstellensatz** route (P6 §§9.1–9.2) is heavier but is the
+only one that reaches Erdős–Heilbronn — **P6 say so explicitly on p. 334**, and
+that is why the extra machinery is worth carrying.
+
+DEFS: the **$e$-transform** $A^{(e)}=A\cup(B+e)$, $B^{(e)}=B\cap(A-e)$; the
+**stabiliser** $\operatorname{Sym}_1(A)=\{h:A+h=A\}$ (P6 Def. 2.32); the
+**restricted sumset** $A\oplus B$.
+
+THMS: **Cauchy–Davenport by the $e$-transform** (a second proof, with the
+agreement `rem-` against CB-23); **Erdős–Heilbronn** (P6 Thm 9.5:
+$\lvert A\oplus B\rvert\ge\min(\lvert A\rvert+\lvert B\rvert-3,p)$), citing
+CB-23's Nullstellensatz; **Erdős–Ginzburg–Ziv** (landmark; P6 Thm 9.28) — any
+$2\lvert Z\rvert-1$ elements of a finite abelian group $Z$ contain
+$\lvert Z\rvert$ of them summing to $0$ — in eight numbered steps: the prime case
+orders $a_1\le\dots\le a_{2p-1}$, uses $a_i=a_{i+p-1}$ to get $p$ equal terms
+summing to $0$, and otherwise applies iterated Cauchy–Davenport to
+$A_i=\{a_i,a_{i+p-1}\}$ to get $\lvert A_1+\dots+A_{p-1}\rvert\ge\min(p,2(p-1)-(p-2))=p$;
+the induction $n=pm$ greedily extracts $2m-1$ disjoint $p$-element subsets with
+sums $\equiv0$ and applies the hypothesis in $\mathbb{Z}/m$ — **with sharpness
+recorded**, since $2\lvert Z\rvert-2$ elements do not suffice ($\lvert Z\rvert-1$
+copies each of $0$ and $1$); Chevalley–Warning from CB-23 gives an alternative
+route and the page records it; **Kneser's theorem** (P6 Thm 5.5) — for finite
+nonempty $A,B$ in **any** abelian group,
+$\lvert A+B\rvert\ge\lvert A+\operatorname{Sym}_1(A+B)\rvert+\lvert B+\operatorname{Sym}_1(A+B)\rvert-\lvert\operatorname{Sym}_1(A+B)\rvert\ge\lvert A\rvert+\lvert B\rvert-\lvert\operatorname{Sym}_1(A+B)\rvert$
+— **no primality and no finiteness assumption on the ambient group**, with
+Cauchy–Davenport as the $\mathbb{Z}/p$ case; **Vosper's theorem** (P6 Thm 5.9) —
+for $p$ prime, $A,B\subseteq\mathbb{Z}/p$ with $\lvert A\rvert,\lvert B\rvert\ge2$
+and $\lvert A+B\rvert\le p-2$, equality $\lvert A+B\rvert=\lvert A\rvert+\lvert B\rvert-1$
+holds **iff** $A$ and $B$ are arithmetic progressions with the same step.
+
+**Two warnings the harvest flagged as false-statement risks.** Kneser's proof is a
+**triple induction** — upward on $\lvert A+B\rvert$, downward on
+$\lvert A\rvert+\lvert B\rvert$ for fixed $\lvert A+B\rvert$, upward on
+$\lvert B\rvert$ — which P6 themselves call "surprisingly delicate"; scaffold it
+only with that warning attached and with the three inductions as separate numbered
+structure. And **both of Vosper's side conditions are necessary**: singletons and
+near-full sumsets are genuine exceptions, and **a scaffolder dropping either would
+author a false statement.** Both belong in the Statement and both need a `cex-`.
+
+FS: Vosper's characterisation holds without the hypothesis $\lvert A\rvert,\lvert B\rvert\ge2$;
+Cauchy–Davenport holds in $\mathbb{Z}/n$ for composite $n$ (the witness is a
+proper subgroup — the same witness CB-23 uses, so **one of the two pages states it
+and the other cites**); Erdős–Ginzburg–Ziv holds with $2\lvert Z\rvert-2$
+elements.
+
+Provenance: Statements `literature-derived` (P6, quoted). Proofs
+`literature-derived`.
+
+---
+
+## CB-34 (NEW, placed high). Incidences, the Crossing Lemma and the Sum–Product Problem
+
+**Anchor:** immediately after GT-23's examples page (§24), because the crossing
+lemma needs Euler's formula and the published planar edge bound, both of which
+sit above the combinatorics band.
+`requires`: GT-23, CB-32, `plane-graphs-euler-and-the-five-colour-theorem`,
+`finite-probability-and-the-probabilistic-method`.
+
+THMS: **the crossing lemma is cited from GT-23**; **the Szemerédi–Trotter
+incidence theorem** (P2 Thm 8.2.5, P3 Thm 2.6.2) — $m$ points and $n$ lines in
+the plane determine $O(m^{2/3}n^{2/3}+m+n)$ incidences — from the crossing lemma
+in ~8 steps; **Elekes' sum–product bound** (P2 Thm 8.2.1)
+$\max(\lvert A+A\rvert,\lvert A\cdot A\rvert)\ge c\lvert A\rvert^{5/4}$ from
+Szemerédi–Trotter; **Solymosi's bound** (P2 Thm 8.3.1) if the pair has room.
+
+**The Erdős–Szemerédi conjecture and the current record, as a sourced `rem-`.**
+Writing $\max(\lvert A+A\rvert,\lvert AA\rvert)\ge\lvert A\rvert^{1+c-o(1)}$ over
+$\mathbb{R}$: Erdős–Szemerédi 1983 (non-explicit $c>0$) → Elekes 1997 ($c=1/4$) →
+Solymosi 2009 ($1/3$) → Konyagin–Shkredov → Shakan 2019 → **Rudnev–Stevens 2022,
+$c=1/3+2/1167\approx0.33504$ (`arXiv:2005.11145`) — the safe citable state of the
+art** → Bloom 2025, $c=1/3+2/951\approx0.33543$. **A December 2025 preprint
+(`arXiv:2512.13849`) claiming $c\approx0.33560$ is provisional and not yet
+refereed; it must not be cited as established.** Over $\mathbb{F}_p$ the record is
+$1/4$ (Mohammadi–Stevens 2023), and Garaev's obstruction means some size
+restriction there is unavoidable. Source for the history:
+`http://thomasbloom.org/notes/sumproduct.html` — **note the host's TLS certificate
+is currently broken and the page had to be retrieved with `curl --insecure`**, so
+a step-2 Beta must find a citable mirror before this URL goes in
+`sources.references`.
+
+FS: Szemerédi–Trotter holds for circles in place of lines with the same exponents;
+the sum–product conjecture is proved; Elekes' bound is tight.
+
+Provenance: Statements `literature-derived` (P2, P3); the record table is
+`literature-derived` and belongs in a `rem-`.
+
+## 25.9 Well-definedness and choice rows added by this block
+
+| # | page | the definition | what must be proved first |
+|---|---|---|---|
+| 129 | CB-25 | $H(X)$ | **#106 restated and kept**: $0\log0=0$ is a convention and is labelled one; base 2 is fixed in the definition (convention 26); the sum is finite and needs `def-natural-logarithm` or its base-2 companion |
+| 130 | CB-29 | $\Delta=\sum_{i\sim j}\Pr[B_i\wedge B_j]$ | P1 sums over **ordered** pairs; a page that sums over unordered pairs halves $\Delta$ and breaks every constant on the page. State the convention at the definition |
+| 131 | CB-30 | the edge-exposure martingale | $X_i(H)=\mathbb{E}[f(G)\mid e_j\in G\iff e_j\in H,\ 1\le j\le i]$ is a conditional expectation over a **finite partition of a finite set**, i.e. a weighted finite average; that it *is* a martingale is a finite identity and is a numbered item, not a definitional stipulation |
+| 132 | CB-26 | $\operatorname{disc}(\mathcal{F})$ | **#107 restated and kept**: a minimum over the finite set of $\pm1$ colourings of a maximum over a finite family; both attained, and the quantifier order **is** the definition |
+| 133 | CB-27 | $\hat f$ | **#108 restated and kept**: $\omega$ is fixed once; orthogonality is proved from `cor-sum-of-roots-of-unity`, not assumed |
+| 134 | CB-28 | slice rank | **#109 restated and kept**: the set of representations is nonempty (the trivial one has $\lvert A\rvert$ terms), so a least $k$ exists by `thm-well-ordering-principle` |
+| 135 | CB-32 | additive energy | an unnormalised **integer** count (convention 23); the normalised version is a different quantity and must not appear in the same inequality |
+| 136 | CB-33 | $\operatorname{Sym}_1(A+B)$ | it is a **subgroup** — a numbered lemma — and Kneser's statement is about that subgroup's order, so the lemma precedes the theorem |
+
+**Choice ledger rows.** Everything on CB-25, CB-26, CB-27, CB-28, CB-29, CB-30,
+CB-31, CB-32, CB-33 and CB-34 is finite and costs **nothing**. Three rows are
+exceptions and each names its principle in the Statement:
+
+| result | page | cost | note |
+|---|---|---|---|
+| **Hindman's theorem** | CB-11 | **ZF** | via Hindman's or Towsner's combinatorial proof, which formalises in $\mathrm{ACA}_0^{+}$. The Galvin–Glazer ultrafilter proof spends **AC** (Zorn on closed subsemigroups of $\beta\mathbb{N}$) and is recorded as a `rem-`; **the theorem is not an AC theorem and the page must not say it is** |
+| upgrading a finite LLL colouring statement to all of $\mathbb{R}$ | CB-12 | **AC**, via Tychonoff | P1 flag the equivalence themselves. The finite statement is choice-free; only the upgrade is not, and the two must be separate items |
+| compactness / Rado transfer from an infinite Ramsey theorem to its finite form | CB-11 | **BPI** | the published `thm-ultrafilter-lemma` supplies it |
+
+---
+
+# 17ter. Continuity checkpoint 2 — `subjects-01` `combinatorics` lane, 2026-08-13
+
+*(Second checkpoint, per `CLAUDE.md` §"Context continuity". Supersedes §17bis for
+resumption purposes; both are working records, not scaffold content, and both may
+be deleted at splice once §17 exists.)*
+
+**Objective, unchanged.** Enrich the CB-\* and GT-\* material of this file only,
+from full source research, at graduate depth. Write no other file except the
+research harvests this lane commissions; author no items; change no `status:`.
+
+**Done since §17bis.** §23 (the algebraic, spectral and design block: CB-13,
+CB-23, CB-24, CB-14a, CB-14b, CB-14c, GT-7a, GT-7b, plus §23.0's correction of
+F2, §23.1's six conventions, §23.9's well-definedness rows #110–#128 and §23.10's
+choice rows). §24 (the graph-theory block: §24.0's investigation of the colouring
+anomaly, §24.1's conventions 7–18, then GT-9, GT-10, GT-11, GT-12, GT-13, GT-14,
+GT-15, GT-16, GT-19, GT-21, GT-22, GT-23, GT-24). §25 (the probabilistic, Ramsey
+and additive block: §25.0's finiteness discipline, §25.1's conventions 19–28, then
+CB-25, CB-29, CB-30, CB-26, CB-12, CB-11, CB-31, CB-27, CB-28, CB-32, CB-33,
+CB-34, and §25.9's rows #129–#136 plus three choice rows).
+
+**Two disk findings that changed the design and are already written in.**
+(a) **§19.2 F2 is wrong** — the Laplace cofactor expansion, minors, the adjugate
+and Cramer's rule are all published on `the-determinant-of-a-linear-operator`, a
+different page from the one F2 checked. Only Cauchy–Binet is genuinely absent.
+§23.0 records the withdrawal. (b) **Kuratowski–Wagner, plane duality and the
+maximal-plane-triangulation characterisation are already published** on
+`plane-graphs-euler-and-the-five-colour-theorem` (40 items), so §19.1's "exactly
+one pair above the planarity page" is superseded by GT-22 + GT-23 + CB-34.
+
+**Still open — the exact next actions, in order.**
+
+1. **Three source-research subagents are running** and their returns are owed
+   sections: `research/subjects-01-combinatorics-harvest-matroids.md` (→ GT-17),
+   `research/subjects-01-combinatorics-harvest-tutte.md` (→ GT-18, and the
+   completion of GT-10's sourcing), and
+   `research/subjects-01-combinatorics-harvest-gapfill.md` (→ GT-11's multigraph
+   edge-colouring bounds, GT-16's Tutte–Berge and full Gallai–Edmonds, GT-20 the
+   Rado graph, and the De Bruijn–Erdős choice-principle question in GT-9).
+   **GT-17, GT-18 and GT-20 are NOT yet written.** GT-19's anchor already names
+   GT-18's examples page, so GT-18 must be placed before GT-19 in reading order.
+2. **§26** — the canonical-coverage harvest: source ledger plus per-heading
+   dispositions. The verbatim headings live in the harvest files; §26 supplies the
+   dispositions, which is what `CLAUDE.md` requires and what the harvests do not
+   already contain.
+3. **§27** — page inventory and build frontier. Must record that
+   `inner-product-spaces-and-orthogonality`, `the-spectral-theorem-and-singular-value-decomposition`
+   and `algebraic-extensions-degree-and-finite-fields` all carry **0 items**, so
+   the whole algebraic/spectral block is scaffold-complete but not buildable yet.
+4. **§28** — amendments owed. Already accumulated in the text: the §19.2 F1
+   re-home (owner-only), Cauchy–Binet to the algebra track, Courant–Fischer and
+   Cauchy interlacing to the spectral page, `thm-lagrange-four-squares` to
+   `number-theory`, Wedderburn's little theorem to `abstract-algebra`, the
+   character-of-a-finite-abelian-group mint, geometry of numbers to
+   `number-theory`, and CB-21's forward `rem-` to CB-29.
+5. **§29** — unresolved seams, denials reviewed, blockers. Must include: Bollobás
+   *Extremal Graph Theory* unusable under the harvest rule; CB-22 species not
+   source-complete; Skolem's block list unverified; Grötzsch and the crossing
+   lemma not source-complete; the De Bruijn–Erdős reversal unsourced; the
+   character-theory seam; the MacWilliams/CB-27 ordering seam.
+6. **§17** — the orchestrator summary, written LAST, at the top of the file.
+7. **The cross-reference pass.** §19 was written under an earlier numbering and
+   several of its `§n` pointers are wrong. The mapping to apply: §19's "§22"
+   (algebraic/spectral) → **§23**; §19's "§23" (Fourier/density increment) →
+   **§25**; §19's "§25" (graph theory, the colouring split, GT-22) → **§24**;
+   §19's "§26" (build frontier) → **§27**; §19's "§27" (amendments) → **§28**.
+   §19.1's "exactly one pair" sentence also needs the correction recorded above.
+
+**Working-tree baseline.** This file is the only scaffold file this lane has
+written. The four wave-1 harvests were committed at `b6678d4f`; the three new
+harvests are being written by subagents into `research/` and are research
+artifacts, not scaffold files.
