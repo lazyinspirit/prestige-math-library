@@ -5,6 +5,7 @@ status: published
 items: [def-natural-logarithm,
         thm-natural-logarithm-laws,
         thm-logarithm-derivative-and-integral,
+        thm-euler-mascheroni-constant-and-harmonic-asymptotic,
         def-real-power,
         thm-real-power-agrees-with-rational-exponent,
         thm-real-power-laws,

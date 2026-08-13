@@ -915,3 +915,162 @@ nothing else. Per the stopping rule, whatever either lane returns next on the
 Maclaurin item closes on the ledger as `confirmed_nonfatal` without a further
 repair; the sine-cosine item has now had the scope question the owner cares about
 answered directly, and its Statement is the plan's.
+
+---
+
+# Round 5 — closing adjudication. Nothing repaired, nothing blocked.
+
+Scope: one rejection. `thm-standard-maclaurin-expansions`, DeepSeek **PASS**,
+Terra **REJECT** on step 2.2's ratio-test limit. This is the fifth distinct Terra
+objection on this item and the stopping rule accepted in round 3 fires. I
+assessed it on the merits anyway, because a stopping rule that closes a *fatal*
+finding would be worthless.
+
+## Outcome in one paragraph
+
+**`confirmed_nonfatal`. Publication is not blocked.** Terra reads the letter of
+`[L23]` correctly — neither of its two clauses literally states $1/(n+1)\to0$ —
+but the claim is true, the gap is one ordered-field inequality, and the cited
+page writes that inequality out itself in a Remark whose whole purpose is to
+leave it to the caller. Not a false positive, because the fact restatement really
+is an existential and really does not say "eventually"; not fatal, because
+nothing rests on an unproved or false claim and the binomial radius is properly
+established. No item file was touched, so
+`research/ra-enrich-01-rejudge-targets.json` gains nothing and DeepSeek's pass at
+the same `item_sha256` stands.
+
+## 1. Terra's objection, checked against the published dependency
+
+> **Terra:** Step 2.2 claims 1/(n+1) tends to 0 by L23, but L23 only supplies a
+> single n for each positive epsilon. It gives neither an eventual bound nor
+> convergence of the reciprocal sequence, so the ratio-test limit is not
+> licensed.
+
+Three questions, in the order that decides the outcome.
+
+**Is the reading of `[L23]` accurate?** Yes, and I checked the source rather than
+the restatement. `[L23]` bundles two dependencies. Its first clause restates
+`thm-algebra-of-limits`, which covers $x_k+y_k$, $cx_k$, $x_k-y_k$ and $x_ky_k$ —
+sums, scalar multiples, differences, products, and *not* reciprocals. Its second
+restates `cor-archimedean-reciprocal`, whose published Statement is
+
+> Let $F$ be a complete ordered field and let $\varepsilon\in F$ with
+> $\varepsilon>0$. Then there is a natural number $n\ge1$ such that
+> $1/(n\cdot 1_F)<\varepsilon$.
+
+which is exactly the single witness Terra describes. So neither clause, read
+literally, delivers the convergence statement step 2.2 attributes to `[L23]`.
+Terra is not resampling a phantom.
+
+**Is the claim true, and how far is the closure?** True, and one line. Given
+$\varepsilon>0$, take $N\ge1$ with $1/N<\varepsilon$; for every $n\ge N-1$ we
+have $n+1\ge N>0$ and therefore $0<1/(n+1)\le1/N<\varepsilon$. The only move
+beyond the cited existential is monotonicity of reciprocals on the positive
+elements of an ordered field — elementary algebra, of precisely the kind step
+2.2's `algebra` tag names, and inside the 30-second rule by a wide margin.
+
+**Does a neighbouring fact already supply it?** Effectively yes, and this is what
+settles the severity. `cor-archimedean-reciprocal` — the page a reader reaches by
+following the citation — carries a Remark headed **"Monotonicity gives the
+eventual form for free"**, which derives $1/m\le1/n<\varepsilon$ for every
+$m\ge n$ from `lem-of-inverse-positive` and `lem-of-naturals-positive`, and then
+says in as many words that *"that one extra line is what a convergence proof
+needs, and it is left to the caller rather than folded into the statement,
+because the caller usually has a threshold of its own to combine it with."* The
+library anticipated exactly this call site and deliberately declined to fold the
+step into the Statement. A judge that checks local licensing only cannot see
+that Remark; an adjudicator reading from disk can.
+
+**And the rest of the step follows.** Granting $1/(n+1)\to0$, step 2.2 is fully
+licensed: for $n>|\alpha|$ it has
+$q_n=|x|\bigl(1-(\alpha+1)/(n+1)\bigr)$, so the scalar-multiple and difference
+clauses of `[L23]` give $q_n\to|x|$ (the restriction to $n>|\alpha|$ is handled
+by the step's own observation that convergence is a tail condition), `[L22]`
+turns that into $\limsup_n q_n=|x|<1$, and `[L8]`, the ratio test, gives absolute
+convergence of $\sum c_nx^n$ on $|x|<1$. **The binomial radius is proved.** Terra
+is right that a reader is asked to supply one inequality; it is wrong that the
+limit is unlicensed in any sense that should stop a draft from publishing.
+
+## 2. One premise of the dispatch corrected
+
+The dispatch describes this as "a step unchanged since it was authored." It is
+not. Through commit `9739dcc8` the ratio-test step read
+
+> $|c_{n+1}x^{n+1}/(c_nx^n)|=|x||\alpha-n|/(n+1)\to|x|<1$; hence
+> $\sum_{n\ge0}c_nx^n$ converges absolutely. `[L8, algebra]`
+
+with no reciprocal-limit citation at all. The explicit `[L22]`/`[L23]` wording
+Terra quotes entered with my round-3 restratification at `dbd17a19`.
+
+This is **not** a regression of the round-4 kind, and does not reopen that
+override: the earlier text asserted the same limit with strictly *less* support,
+so the expansion strictly improved the licensing. But it does mean Terra is
+objecting to an elision I made *visible*, not to one that hid for four rounds.
+The honest reading is that the audit worked and the last increment of pedantry is
+not worth a sixth round.
+
+## 3. Final per-item judge state
+
+Last verdict per item per lane, at the current disk text:
+
+| item | DeepSeek | Terra | verdicts spent |
+|---|---|---|---|
+| `def-taylor-and-maclaurin-series` | PASS | PASS | 2 |
+| `thm-taylor-series-representation-by-remainder` | PASS | PASS | 4 |
+| `cex-smooth-function-not-equal-to-its-maclaurin-series` | PASS | PASS | 4 |
+| `thm-euler-mascheroni-constant-and-harmonic-asymptotic` | PASS | PASS | 4 |
+| `def-radian-angle-by-unit-circle-arc-length` | PASS | PASS | 6 |
+| `thm-analytic-sine-cosine-agree-with-right-triangle-ratios` | PASS | PASS | 6 |
+| `thm-standard-maclaurin-expansions` | **PASS** | **REJECT** (adjudicated `confirmed_nonfatal`) | 10 |
+
+Six of seven pass both lanes outright. The seventh passes DeepSeek and carries an
+adjudicated nonfatal Terra rejection at the same `item_sha256` the pass was cast
+against, `e602af2b…`, which I recomputed from disk and confirmed matches the
+ledger row byte for byte.
+
+Fourteen adjudication rows, **fourteen `confirmed_nonfatal`, zero
+`confirmed_fatal`, zero `false_positive`, across five rounds.** No fatal
+mathematical defect was found anywhere in this batch.
+
+## 4. My view for the owner on splitting this item
+
+**Do not split it now; the case for a later split is real but it is a cost
+argument, not a correctness one, and it should be triggered by the next
+substantive extension of the binomial material rather than by this run.** In
+round 3 I argued against a split on defect distribution and that argument still
+holds for *prevention* — each of the five Terra objections would have travelled
+with its own half into whichever item it landed in, and the shared step 1.2 that
+DeepSeek caught in round 4 would have had to be duplicated into both halves or
+promoted to a third item. But the reviewability evidence the dispatch assembles
+is a different and better argument than the one I answered, and I will not
+pretend it is weak: four of the five objections land in the binomial half, which
+is a nine-step ODE argument (recurrence → radius → $(1+x)B'=\alpha B$ → zero
+derivative → identification) sharing a page with what is otherwise a collation of
+six already-published series identities, and a nine-phase restratification was
+needed before the binomial half could even cite itself in order. Twice exhausting
+a 40,000-token reasoning budget is a real signal, though a softer one than it
+looks — both were rescued by retry, and the budget is a property of the judge
+harness's per-call ceiling, not a measure of whether the mathematics is
+followable. What tips me against acting now is that the audit cost has already
+been paid: this item is at the most-reviewed state it will ever be in, a split is
+a full rewrite of both halves plus new ids, new summaries, a new B companion and
+a plan-order change, and that rewrite would discard the six clean verdicts this
+text has earned and start the judge cycle over on two fresh items. The asymmetry
+worth flagging is that splitting gets *more* expensive after publication, not
+less — ids are immutable on `main`, so a post-publication split means new pages
+plus `aliases` plus re-pointing every consumer. So my recommendation is: publish
+whole, and if the owner ever plans to extend the binomial half — endpoint
+behaviour at $x=\pm1$, Abel's theorem, the binomial series for complex exponents
+— split it as a deliberate plan change *before* authoring that extension, when
+the seam I named in round 3 (steps 1.1, 1.2, 2.3 with `[L1]`–`[L5]`, `[L18]`,
+`[L19]` as the collation; everything else as the binomial theorem) is still
+clean.
+
+## 5. For the orchestrator
+
+Nothing to rejudge. No item file was edited in this round, so every
+`item_sha256` on disk is unchanged and
+`research/ra-enrich-01-rejudge-targets.json` is empty of new targets. The Terra
+rejection is closed on the ledger as `confirmed_nonfatal` against
+`e602af2b66e5297a2d8cc13609f25a111f9e348ee18780f38ce348b44af4e677`. **No
+`confirmed_fatal` exists in this batch. Nothing here should stop the publish.**

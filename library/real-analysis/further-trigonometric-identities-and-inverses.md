@@ -6,7 +6,8 @@ items: [def-principal-inverse-sine-and-cosine,
         thm-principal-inverse-sine-and-cosine-derivatives,
         lem-tangent-principal-branch-is-bijective,
         def-principal-inverse-tangent,
-        thm-principal-inverse-tangent-calculus]
+        thm-principal-inverse-tangent-calculus,
+        thm-standard-maclaurin-expansions]
 examples: []
 ---
 

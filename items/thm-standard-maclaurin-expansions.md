@@ -2,7 +2,7 @@
 id: thm-standard-maclaurin-expansions
 kind: theorem
 title: "Standard Maclaurin expansions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-14
 sources:
   scraped: []
   references:

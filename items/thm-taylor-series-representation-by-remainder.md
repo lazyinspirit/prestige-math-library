@@ -2,7 +2,7 @@
 id: thm-taylor-series-representation-by-remainder
 kind: theorem
 title: "Taylor-series representation by vanishing remainders"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-14
 sources:
   scraped: []
   references:
