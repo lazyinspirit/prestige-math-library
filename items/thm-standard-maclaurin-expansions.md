@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-taylor-and-maclaurin-series, thm-geometric-series, def-real-exponential-function-and-e, def-sine-and-cosine-by-power-series, thm-log-one-plus-x-power-series, thm-principal-inverse-tangent-calculus, thm-real-power-continuity-and-derivatives, def-factorial-and-falling-factorial, thm-binomial-theorem, thm-binomial-closed-formula, def-binomial-coefficient, thm-ratio-test, thm-termwise-differentiation-of-a-real-power-series, thm-algebra-of-derivatives, lem-derivative-of-a-power, thm-chain-rule, cor-differentiable-implies-continuous, def-real-power, def-natural-logarithm, thm-real-power-laws, def-integer-power, cor-zero-derivative-implies-constant, cor-exponential-is-a-bijection-onto-positive-reals, def-real-power-series-and-radius-of-convergence, def-series, def-higher-derivatives-and-smoothness, lem-series-linearity, thm-convergence-iff-limsup-equals-liminf, thm-algebra-of-limits, cor-archimedean-reciprocal]
+deps: [def-taylor-and-maclaurin-series, thm-geometric-series, def-real-exponential-function-and-e, def-sine-and-cosine-by-power-series, thm-log-one-plus-x-power-series, thm-principal-inverse-tangent-calculus, thm-real-power-continuity-and-derivatives, def-factorial-and-falling-factorial, thm-binomial-theorem, thm-binomial-closed-formula, def-binomial-coefficient, thm-ratio-test, thm-termwise-differentiation-of-a-real-power-series, thm-algebra-of-derivatives, lem-derivative-of-a-power, thm-chain-rule, cor-differentiable-implies-continuous, def-real-power, def-natural-logarithm, thm-real-power-laws, def-integer-power, cor-zero-derivative-implies-constant, cor-exponential-is-a-bijection-onto-positive-reals, def-real-power-series-and-radius-of-convergence, cor-power-series-convergence-dichotomy, def-series, def-higher-derivatives-and-smoothness, lem-series-linearity, thm-convergence-iff-limsup-equals-liminf, thm-algebra-of-limits, cor-archimedean-reciprocal]
 justified_by: []
 aliases: []
 landmark: true
@@ -158,13 +158,17 @@ $x_k-y_k\to x-y$ and $x_ky_k\to xy$ ([[thm-algebra-of-limits]]); and for every
 $\varepsilon>0$ there is a natural $n\ge1$ with $1/n<\varepsilon$
 ([[cor-archimedean-reciprocal]]).
 
+[L24] A real power series $\sum a_n(x-c)^n$ of radius $R$ converges absolutely
+at every $x$ with $|x-c|<R$ and diverges at every $x$ with $|x-c|>R$
+([[cor-power-series-convergence-dichotomy]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 The geometric, sine, cosine, logarithmic, and inverse-tangent identities, with exactly the displayed domains and endpoint assertions, are [L2]–[L5]. The exponential identity needs one further move, because the statement writes $e^x$, the real power of the base $e$ in the sense of [L16], while [L3] defines $\exp$ and defines $e$ only as $\exp(1)$. By [L17] every value of $\exp$ is positive, so $e=\exp(1)>0$ and [L16] assigns $e^x$ the value $\exp(x\log e)$. Since $\log$ is the inverse of $\exp$ [L16], $\log e=\log(\exp1)=1$, so $$e^x=\exp(x\cdot1)=\exp(x)\qquad(x\in\mathbb R),$$ and the series [L3] gives for $\exp(x)$ is therefore the series of $e^x$. [L2, L3, L4, L5, L16, L17, algebra]
 
-1.2 Suppose $f(x)=\sum_{n\ge0}a_nx^n$ for $|x|<R$ with $R>0$; this is a power series about $0$ in the sense of [L18]. By [L9] its sum is differentiable there and its derivative is again a power series of radius $R$, so induction on $k$, using $(n+1)!=(n+1)n!$ from [L7] at each step, gives $$f^{(k)}(x)=\sum_{n\ge0}\frac{(n+k)!}{n!}a_{n+k}x^n\qquad(|x|<R)$$ for every $k\ge0$, each again a power series about $0$ of radius $R$. Evaluating at the centre, [L18] gives $f^{(k)}(0)=k!\,a_k$. Every $f^{(k)}$ is differentiable on $(-R,R)$, hence continuous there by [L15], so $f$ is smooth on $(-R,R)$ in the sense of [L19] and [L1] applies at $a=0$: the Maclaurin series of $f$ is $\sum_{k\ge0}f^{(k)}(0)x^k/k!=\sum_{k\ge0}a_kx^k$. A power series representing $f$ near $0$ is therefore its Maclaurin series. [L1, L7, L9, L15, L18, L19, algebra]
+1.2 Suppose $f(x)=\sum_{n\ge0}a_nx^n$ for $|x|<R$ with $R>0$; this is a power series about $0$ in the sense of [L18], and the hypothesis is exactly that it converges, with sum $f(x)$, at every $x$ with $|x|<R$. Its radius of convergence $\rho$ is therefore at least $R$: by [L24] a power series diverges at every point farther from its centre than its radius, so a point of convergence $x$ has $|x|\le\rho$, and letting $|x|$ run over $[0,R)$ gives $\rho\ge R$. Every point of $(-R,R)$ thus lies strictly inside the radius, so by [L9] the sum is differentiable there and its derivative is again a power series of radius $\rho$; induction on $k$, using $(n+1)!=(n+1)n!$ from [L7] at each step, gives $$f^{(k)}(x)=\sum_{n\ge0}\frac{(n+k)!}{n!}a_{n+k}x^n\qquad(|x|<R)$$ for every $k\ge0$, each again a power series about $0$ of radius $\rho$. Evaluating at the centre, [L18] gives $f^{(k)}(0)=k!\,a_k$. Every $f^{(k)}$ is differentiable on $(-R,R)$, hence continuous there by [L15], so $f$ is smooth on $(-R,R)$ in the sense of [L19] and [L1] applies at $a=0$: the Maclaurin series of $f$ is $\sum_{k\ge0}f^{(k)}(0)x^k/k!=\sum_{k\ge0}a_kx^k$. A power series representing $f$ near $0$ is therefore its Maclaurin series. [L1, L7, L9, L15, L18, L19, L24, algebra]
 
 1.3 Fix $\alpha\in\mathbb R$ and define $c_0=1$ and $c_{n+1}=c_n(\alpha-n)/(n+1)$ for $n\ge0$. [L7, choose]
 
@@ -203,12 +207,12 @@ only as $\exp(1)$. Step 1.1 supplies the bridge, from $\log e=1$.
 The exponent in $(1+x)^\alpha$ is real, so that power too is
 $\exp\bigl(\alpha\log(1+x)\bigr)$, whereas the exponent in the finite binomial
 theorem is a natural number and the $(1+x)^m$ appearing there is the integer
-power of [[def-integer-power]]. Step 1.4 proves the two readings agree on
+power of [[def-integer-power]]. Step 2.1 proves the two readings agree on
 $(-1,1)$; without that they are different functions with the same name.
 
 For real $\alpha$ the symbol $\binom{\alpha}{n}$ is defined by the recurrence in
 the statement, while $\binom nk$ elsewhere in the library is a count
-([[def-binomial-coefficient]]). Step 1.4 proves the recurrence reproduces the
+([[def-binomial-coefficient]]). Step 2.1 proves the recurrence reproduces the
 count at a nonnegative integer $\alpha$, so the notation extends rather than
 overloads.
 

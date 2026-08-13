@@ -695,3 +695,223 @@ the earlier rows omit and `level-coverage.mjs` requires.
 Ten adjudication rows now, ten `confirmed_nonfatal`, zero `confirmed_fatal`, zero
 `false_positive`. No fatal mathematical defect has been found anywhere in this
 batch across three rounds. Rejudge `thm-standard-maclaurin-expansions` only.
+
+---
+
+# Round 4 — the regression I introduced, and the one objection that could have been fatal
+
+Scope: two items. `thm-standard-maclaurin-expansions`, where both lanes flagged a
+defect my round-3 repair created; and
+`thm-analytic-sine-cosine-agree-with-right-triangle-ratios`, pulled back into the
+sweep because repairing `def-radian-angle-by-unit-circle-arc-length` moved its
+pair context hash, and rejected by Terra on rejudge.
+
+## Outcome in one paragraph
+
+Both objections are correct and both are nonfatal. The Maclaurin item's is
+bookkeeping I broke myself — the nine-phase restratification moved the integer
+case from step 1.4 to step 2.1 and the Remarks kept pointing at 1.4 — plus a real
+licensing hole DeepSeek found at step 1.2, where the step applied the termwise
+differentiation theorem without ever establishing that the radius reaches $R$.
+The sine-cosine item is the more serious question and it resolves in the item's
+favour on the fatal test but against it on the proof text: **the Statement does
+not overstate**, it matches the approved plan row exactly and claims only the
+ratio identity and the arc measure, but **step 8.1 did** assert that the
+triangle's interior angle at the origin is the swept unit-circle angle, and the
+library defines no interior angle of a triangle and no scaling invariance for
+angles. I scoped that sentence back rather than inventing the theorem that would
+rescue it. No approved statement changed; the five plan controls are intact.
+`precheck`, `rendercheck`, `depcheck`, `fwdcheck` and `extcheck` are clean.
+
+## 1. `thm-standard-maclaurin-expansions` — the Remarks regression
+
+> **Terra:** The Remarks twice miscite step 1.4: it only proves a derivative
+> formula for a negative real power. Agreement with natural powers and
+> identification with the counting binomial coefficient are proved in step 2.1.
+
+**Confirmed nonfatal, `other` (stale cross-reference).** Both lanes found it
+independently, and they are right. Round 3 restratified the proof into nine
+phases; the old step 1.4 became step 2.1, and the new step 1.4 is the chain-rule
+derivative of $(1+x)^{-\alpha}$ on $(-1,1)$. The Remarks were written against the
+old numbering and were not carried across, so two sentences credited step 1.4
+with results it does not prove.
+
+This is why the stopping rule did not fire on its own: it is not a fourth
+independent nitpick in unchanged text, it is a mistake in my newest edit. The
+dispatch is right to override for it.
+
+**The bulk audit.** A renumber breaks references in bulk, so I checked them in
+bulk rather than patching the two the lanes named — 43 step references across the
+nine phases, all 24 fact labels, and the three Remarks references:
+
+| class | count | stale |
+|---|---|---|
+| in-proof `step k.j` citations, prose and bracket tags | 40 | 0 |
+| Remarks step references | 3 | **2** |
+| `[L#]` labels defined | 24 | 0 undefined-but-cited, 0 defined-but-uncited |
+| `[L#]` citations resolving to a defined fact | all | 0 |
+
+Every in-proof citation survived the renumber correctly, including the one that
+looks most suspicious: step 5.1 cites step 1.4 for the derivative of
+$(1+x)^{-\alpha}$, and that is exactly what the new step 1.4 proves. The two
+Remarks sentences were the whole of the damage. Both now read step 2.1.
+
+## 2. `thm-standard-maclaurin-expansions` — the radius at step 1.2
+
+> **DeepSeek:** Step 1.2 applies L9 to a series known only to converge on
+> $|x|<R$, but L9 needs its radius; no cited fact gives radius at least $R$.
+
+**Confirmed nonfatal, `dependency_citation`.** Correct, and a genuine gap rather
+than a restatement quibble. The two published texts do not meet:
+
+| where | exact clause |
+|---|---|
+| `[L9]` = `thm-termwise-differentiation-of-a-real-power-series` | "Let $f(x)=\sum a_n(x-c)^n$ have radius $R$. For every $x$ with $\lvert x-c\rvert<R$, the function $f$ is differentiable at $x$" |
+| `[L18]` = `def-real-power-series-and-radius-of-convergence` | the radius is the supremum of the $r\ge0$ such that the series converges **absolutely** at every $x$ with $\lvert x-c\rvert<r$ |
+
+Step 1.2's hypothesis was plain convergence with sum $f(x)$ on $|x|<R$. Absolute
+convergence is what [L18] measures, so the hypothesis did not by itself put
+$(-R,R)$ inside the radius, and nothing in the item bridged the two.
+
+Nonfatal under the 30-second rule, and the bridge is one published sentence:
+
+| link | published item | exact clause used |
+|---|---|---|
+| convergence at $x$ forces $\lvert x\rvert\le\rho$ | `cor-power-series-convergence-dichotomy` | "It converges absolutely at every $x$ with $\lvert x-c\rvert<R$ and **diverges at every $x$ with $\lvert x-c\rvert>R$**" |
+
+Contrapositive of the second clause: a point of convergence is not beyond the
+radius. So $\rho\ge|x|$ for every $|x|<R$, hence $\rho\ge R$.
+
+**Repaired.** `cor-power-series-convergence-dichotomy` added as a dep and as
+`[L24]`; it sits on `power-series-and-real-analytic-functions` at plan order 173
+against this item's page at 187, the same page `[L9]` already comes from, so it is
+a backward dependency and `fwdcheck` stays clean. Step 1.2 now derives $\rho\ge R$
+before invoking [L9] and carries $\rho$ through the induction instead of $R$.
+
+**The hypothesis is unchanged, so both applications still hold.** I checked both:
+step 2.3 applies step 1.2 to the six series of step 1.1, each convergent on its
+stated open interval by [L2]–[L5]; step 8.1 applies it to $B$, which step 3.1
+shows converges absolutely on $|x|<1$. I deliberately did not strengthen step
+1.2's hypothesis to absolute convergence, which would have forced an absolute-
+convergence argument for each of the six collated families and turned a citation
+fix into a new sweep the dispatch forbids.
+
+Nothing else in this item was touched.
+
+## 3. `thm-analytic-sine-cosine-agree-with-right-triangle-ratios` — does it overstate?
+
+> **Terra:** Step 8.1 is unsupported: $P=H(\cos\theta,\sin\theta)$ gives
+> collinearity, but no cited fact or definition relates the triangle's interior
+> angle at the origin to the unit-circle swept angle, or establishes invariance of
+> that angle under positive scaling.
+
+**Confirmed nonfatal, `other`.** Not a false positive, and not fatal either. The
+two questions the dispatch poses come apart, and the answer is different for each.
+
+**Does the Statement overstate? No.** The Statement asserts three things, and the
+approved PLAN Table-A row asserts the same three in the same words:
+
+| Statement | PLAN Table A | proved at |
+|---|---|---|
+| unique $\theta\in(0,\pi/2)$ with $(A/H,O/H)=(\cos\theta,\sin\theta)$ | same | steps 4.2, 5.1, 6.1 |
+| the counterclockwise unit-circle arc from $(1,0)$ to $(A/H,O/H)$ has radian measure $\theta$ | same | step 7.1, from `def-radian-angle-by-unit-circle-arc-length` |
+| the coordinate right triangle therefore satisfies $\cos\theta=A/H$, $\sin\theta=O/H$ | same | steps 2.3, 4.2, 6.1 |
+
+No interior-angle equality appears in the title or the Statement. The fatal class
+— "a title or Statement asserting more than the proof gives" — is not met.
+
+**Did the proof assert it? Yes, in one clause.** Step 8.1 ended: "so its acute
+angle at the origin is the angle of step 7.1". That identifies the triangle's
+interior angle at the origin with the swept unit-circle angle, and Terra is right
+that nothing licenses it. I looked for anything that could, before accepting the
+objection:
+
+- `def-radian-angle-by-unit-circle-arc-length` assigns radian measure only to
+  $\gamma\!\upharpoonright_{[0,t]}$, the counterclockwise unit-circle arc starting
+  at $(1,0)$. It is a statement about one specific family of arcs, not a general
+  angle notion.
+- There is **no** definition anywhere in `items/` of the angle between two rays,
+  of a triangle's interior angle, or of an angle at a vertex — I searched the
+  whole corpus for such a definition and for any `\angle` notation, and found
+  none.
+- There is consequently no invariance-under-positive-scaling result to cite.
+
+What the proof does deliver is that $P=H\gamma(\theta)$ with $H>0$, i.e. $P$ is a
+positive multiple of the unit-circle point where the measured arc ends. That is
+the honest geometric content, and it is exactly what the ratio identity rests on.
+
+**Repaired by scoping back, not by inventing the missing theorem.** The dispatch
+was explicit about that and I agree: an angle-invariance theorem written to rescue
+one sentence would be a generated load-bearing claim in a bridge item, which is
+the last place it belongs.
+
+- **Step 8.1** now concludes that $P$ is the positive multiple $H$ of the
+  unit-circle point $\gamma(\theta)=(A/H,O/H)$ at which step 7.1's arc ends, and
+  that the triangle's leg-to-hypotenuse ratios are precisely that point's two
+  coordinates. Its step citations are unchanged, so the stratification is
+  unchanged.
+- **Step 9.1** now states the Statement's three assertions and nothing more; it
+  previously opened "the unique acute angle $\theta$", which read as though
+  $\theta$ were a geometric angle of the triangle.
+- **The Remarks** gain a short paragraph, "What is measured, and what is not",
+  saying in as many words that the library measures angles only along the unit
+  circle, that no interior angle of the triangle is measured here, and that none
+  is claimed. The existing paragraph's "the angle acute" became "place $\theta$ in
+  the acute range $(0,\pi/2)$" for the same reason.
+
+The plan control "the right-triangle theorem is acute-angle only" is untouched:
+$\theta\in(0,\pi/2)$ throughout, and the axis/quadrantal disclaimer stands.
+
+DeepSeek passed this text and its reading is not contradicted — the mathematics is
+unchanged and no step's conclusion was weakened. But the item's own hash moved, so
+it rejudges.
+
+## 4. What I did not change
+
+- **No approved statement, in either item.** Both Statements are byte-identical to
+  what the lanes read. All five plan controls hold: acute-angle-only, the
+  $|x|<1$ binomial restriction, the explicit $M_{n+1}$ index, literature-derived
+  statements, and the B-page leaf.
+- **The Maclaurin item got nothing beyond the two fixes.** One dep, one fact, one
+  step edited, two Remarks references corrected. No new sweep.
+- **No `verification.judge`, no `verification.audited`**, no `library/`, no
+  `research/plan-spec.json`, no other item. The other five items are untouched and
+  hold current paired passes against their exact on-disk text.
+
+## 5. Gates
+
+| gate | result |
+|---|---|
+| `precheck` on both items | PASS (direct) — 2 checked, 0 failing, canonical stratification, no repair proposed |
+| `rendercheck` on both items | OK — every math span parses under real KaTeX, frontmatter parses under the renderer's YAML parser |
+| `depcheck` (repo-wide) | OK — no cycles, all references resolve, no draft items on published pages; neither item raises `cited-not-in-deps` |
+| `fwdcheck` (repo-wide) | OK — the new `[L24]` dep is at plan order 173 against this item's page at 187 |
+| `extcheck` (repo-wide) | OK |
+| `content-policy` `notation-iota-applied` | nothing to flag; neither item writes any $\iota$ |
+
+## 6. Hash receipts
+
+Judge-normalized hash (whole file, `judge:` block removed — `judge.mts`'s
+`itemSha256`). The "judged at" column is the text both lanes actually read in
+round 4, and it matched disk before I began.
+
+| id | judged at (round 4) | now |
+|---|---|---|
+| `thm-standard-maclaurin-expansions` | `b6b4da28be354a97…` | `e602af2b66e5297a…` |
+| `thm-analytic-sine-cosine-agree-with-right-triangle-ratios` | `2666fb7d9e30753f…` | `1a66daa2a10970fa…` |
+
+`research/ra-enrich-01-rejudge-targets.json` has been overwritten with exactly
+these two ids. The other five items are untouched and must not be rejudged.
+
+## 7. For the orchestrator
+
+Thirteen adjudication rows now, thirteen `confirmed_nonfatal`, zero
+`confirmed_fatal`, zero `false_positive`. **No fatal mathematical defect has been
+found anywhere in this batch across four rounds.**
+
+Rejudge `thm-standard-maclaurin-expansions` and
+`thm-analytic-sine-cosine-agree-with-right-triangle-ratios`, both lanes, and
+nothing else. Per the stopping rule, whatever either lane returns next on the
+Maclaurin item closes on the ledger as `confirmed_nonfatal` without a further
+repair; the sine-cosine item has now had the scope question the owner cares about
+answered directly, and its Statement is the plan's.

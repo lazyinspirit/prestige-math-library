@@ -92,15 +92,26 @@ $$\cos\theta=\frac A H,\qquad \sin\theta=\frac O H.$$
 
 7.1 Since $\pi>0$ and $0<\theta<\pi/2<2\pi$, [F9] applies. Steps 4.2 and 6.1 identify its endpoint as $\gamma(\theta)=(A/H,O/H)$, so the counterclockwise unit-circle arc from $(1,0)$ to $(A/H,O/H)$ has radian measure $\theta$. [step 4.2, step 6.1, F6, F9, algebra]
 
-8.1 The horizontal and vertical legs of the coordinate triangle meet at a right angle at $(A,0)$. By step 2.3 their lengths are $A$ and $O$, while the hypotenuse from $(0,0)$ to $P$ has length $H$; moreover $P=H(\cos\theta,\sin\theta)$ by steps 4.2 and 6.1, so its acute angle at the origin is the angle of step 7.1. [step 2.3, step 4.2, step 6.1, step 7.1, algebra]
+8.1 The horizontal and vertical legs of the coordinate triangle meet at a right angle at $(A,0)$. By step 2.3 their lengths are $A$ and $O$, while the hypotenuse from $(0,0)$ to $P$ has length $H$; moreover steps 4.2 and 6.1 give $P=H(\cos\theta,\sin\theta)$, so $P$ is the positive multiple $H$ of the unit-circle point $\gamma(\theta)=(A/H,O/H)$ at which the arc of step 7.1 ends. The triangle's leg-to-hypotenuse ratios are therefore exactly the two coordinates of $\gamma(\theta)$: adjacent over hypotenuse is $A/H=\cos\theta$, and opposite over hypotenuse is $O/H=\sin\theta$. [step 2.3, step 4.2, step 6.1, step 7.1, algebra]
 
-9.1 Therefore the unique acute angle $\theta$ has radian measure $\theta$ on the unit circle and satisfies adjacent-over-hypotenuse $A/H=\cos\theta$ and opposite-over-hypotenuse $O/H=\sin\theta$ in the stated coordinate right triangle. [step 5.1, step 7.1, step 8.1] ∎
+9.1 Therefore the parameter $\theta$ of step 4.2 is the unique element of $(0,\pi/2)$ with $(A/H,O/H)=(\cos\theta,\sin\theta)$, the counterclockwise unit-circle arc from $(1,0)$ to $(A/H,O/H)$ has radian measure $\theta$, and in the stated coordinate right triangle adjacent over hypotenuse is $A/H=\cos\theta$ and opposite over hypotenuse is $O/H=\sin\theta$. [step 5.1, step 7.1, step 8.1] ∎
 
 ## Remarks
 
-The strict hypotheses $A,O>0$ make the triangle nondegenerate and the angle
-acute. If one of the legs is zero, the normalized point lies on a coordinate
-axis and the radian definition still supplies the corresponding unit-circle
-value, but the resulting configuration is not a nondegenerate right triangle;
-the theorem does not impose an acute-triangle side-ratio convention on those
-axis or quadrantal cases.
+The strict hypotheses $A,O>0$ make the triangle nondegenerate and place $\theta$
+in the acute range $(0,\pi/2)$. If one of the legs is zero, the normalized point
+lies on a coordinate axis and the radian definition still supplies the
+corresponding unit-circle value, but the resulting configuration is not a
+nondegenerate right triangle; the theorem does not impose an acute-triangle
+side-ratio convention on those axis or quadrantal cases.
+
+**What is measured, and what is not.** The library assigns radian measure only
+to a counterclockwise unit-circle arc starting at $(1,0)$
+([[def-radian-angle-by-unit-circle-arc-length]]); it defines no interior angle
+of a triangle, and no invariance of an angle under scaling. So the theorem
+identifies $\theta$ as the radian measure of the arc ending at
+$(A/H,O/H)$ — the unit-circle point of which the hypotenuse vertex
+$P=H(\cos\theta,\sin\theta)$ is the positive multiple $H$ — and asserts the two
+side ratios of the triangle. It does not assert that the triangle's interior
+angle at the origin equals $\theta$, which would need a notion of angle the
+library has not built.
