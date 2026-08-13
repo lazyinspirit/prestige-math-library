@@ -450,3 +450,248 @@ adjudication rows, nine `confirmed_nonfatal`, zero `confirmed_fatal`, zero
 `false_positive`. The twice-touched escalation is advisory and I am not raising it —
 what it asks for is a check that the repair closed the class rather than the
 instance, and that check is the two class sweeps above.
+
+---
+
+# Round 3 — `thm-standard-maclaurin-expansions`, the third Terra objection and an exhaustive notation audit
+
+Scope: this one item. The other six pass both lanes on their current text and were
+not opened.
+
+## Outcome in one paragraph
+
+Terra's third objection is correct, and reading it together with the first two
+shows they are not three nitpicks but one systematic defect: the item's Statement
+uses symbols — $e^x$, $(1+x)^\alpha$, $\binom{\alpha}{n}$ — that this library
+defines separately and carefully, and the proof kept identifying each with a
+near-neighbour the library treats as a different object. I did not patch step 1.1.
+I enumerated every symbol and operation in the Statement and in every numbered
+step, traced each to its defining item, and closed every use the item was not
+licensing. That found the $e^x$ bridge Terra names **and six more**, plus a
+structural instance of the same defect that no gate can see: four steps were using
+the sequence constructed in step 1.3 without citing it, because they sat in the
+same phase and so could not. The proof is now strictly stratified, nine phases, and
+every reuse is an explicit step citation. No approved statement changed; the five
+plan controls are intact. `precheck`, `rendercheck`, `depcheck`, `fwdcheck` and
+`extcheck` are clean.
+
+## 1. The rejection, and the bridge verified against the published text
+
+> **Terra:** L3 says e to the x is defined by the series, but its cited definition
+> defines exp(x), only defining e as exp(1). The item never proves or cites e to
+> the x equals exp(x), so step 1.1 does not establish the displayed exponential
+> identity.
+
+**Confirmed nonfatal, `dependency_citation`.** The old `[L3]` read "the
+exponential, sine, and cosine functions are defined by the three displayed power
+series in the statement". The statement displays $e^x$.
+`def-real-exponential-function-and-e` displays
+
+$$\exp(x):=\sum_{n=0}^{\infty}\frac{x^n}{n!},\qquad e:=\exp(1),$$
+
+and names no function $x\mapsto e^x$ at all. Under `def-real-power`, $e^x$ is a
+different construction — $\exp(x\log e)$ — and the item asserted the series
+expansion of the symbol it never connected to the definition. That is exactly the
+class of defect this run keeps producing, so Terra is right for the third time.
+
+I verified the bridge the dispatch described against the exact published
+statements before using it, and it closes:
+
+| link | published item | exact clause used |
+|---|---|---|
+| $e=\exp(1)>0$ | `cor-exponential-is-a-bijection-onto-positive-reals` | "$\exp:\mathbb R\to(0,\infty)$ is a bijection" — so every value of $\exp$ is positive, and $a>0$ is what `def-real-power` requires |
+| $e^x=\exp(x\log e)$ | `def-real-power` | "For $a>0$ and $x\in\mathbb R$, define $a^x:=\exp(x\log a)$" |
+| $\log e=1$ | `def-natural-logarithm` | "$\log(\exp y)=y$ for every $y\in\mathbb R$", at $y=1$ |
+| $e^x=\exp(x)$ | — | $\exp(x\cdot1)=\exp(x)$ |
+
+Two published steps, as described. **Nonfatal**, not fatal: the identity is true,
+every link is published, and a competent reader closes it in well under thirty
+seconds. But "nonfatal" here means repair it, not ignore it — these are unfrozen
+drafts on the way to publication, and publishing a proof that expands a symbol it
+never defined is the worse outcome.
+
+The repair is the whole of step 1.1, which now states the mismatch, discharges
+$e>0$ from `[L17]`, derives $\log e=1$, and displays $e^x=\exp(x)$ before the six
+identities are claimed.
+
+## 2. The notation audit
+
+Every symbol and operation in the Statement and in the nine phases of the proof.
+"Licensed by" names the fact label carrying the citation after the repair;
+**bold** rows are the ones where the item was using a symbol in a sense it had not
+cited, and all of them are now closed.
+
+### Statement
+
+| symbol | what the library means by it | defining item | licensed by | verdict |
+|---|---|---|---|---|
+| $\sum_{n=0}^{\infty}$ | series convergence | `def-series` | [L18] | ok |
+| $x^n$, $x^{2n}$, $x^{2n+1}$, $(-1)^n$ | integer power, $a^0=1$, $a^{n+1}=a^n a$ | `def-integer-power` | [L7], [L18] | ok |
+| $\dfrac1{1-x}$ | field quotient; $1-x\ne0$ from $\lvert x\rvert<1$ | — | [L2] quotes it verbatim | ok |
+| $n!$, $(2n)!$, $(2n+1)!$ | factorial, a natural read in $\mathbb R$; $n!\ne0$ | `def-factorial-and-falling-factorial` | [L7] | ok |
+| **$e^x$** | **real power $\exp(x\log e)$, not the defining series** | **`def-real-power`, `def-real-exponential-function-and-e`** | **[L3], [L16], [L17], step 1.1** | **was unlicensed — the round-3 objection** |
+| $\sin x$, $\cos x$ | the two power series, verbatim | `def-sine-and-cosine-by-power-series` | [L3] | ok |
+| $\log(1+x)$ | inverse of $\exp$ on $(0,\infty)$; $1+x>0$ from $x>-1$ | `def-natural-logarithm` | [L4], [L16] | ok |
+| $\arctan x$ | principal branch, inverse of $\tan$ on $(-\pi/2,\pi/2)$ | `def-principal-inverse-tangent` | [L5] | ok |
+| $\pi$ | first positive cosine zero, doubled | `def-pi-via-first-positive-cosine-zero` | [L5], which quotes `thm-principal-inverse-tangent-calculus`'s own $\pi/4$ clause | ok — $\pi$ occurs only inside a quoted published conclusion |
+| $(1+x)^\alpha$, $(1+x)^{-\alpha}$ | real power, base $1+x>0$ on $(-1,1)$ | `def-real-power` | [L16] | ok |
+| **$\binom{\alpha}{n}$, real $\alpha$** | **defined by the recurrence in the Statement; the library's $\binom nk$ is a count** | **`def-binomial-coefficient`** | **[L20], step 2.1, Remarks** | **notation extended without saying so — now proved compatible and said** |
+| $\dfrac{\alpha-n}{n+1}$ | real arithmetic, $n$ read in $\mathbb R$ | — | algebra | ok |
+
+### Proof
+
+| symbol | what the library means by it | defining item | licensed by | verdict |
+|---|---|---|---|---|
+| Maclaurin series | Taylor series at $a=0$, requires $f\in C^\infty(I)$, $I$ open | `def-taylor-and-maclaurin-series` | [L1] | ok |
+| **$f^{(k)}$, $C^\infty$** | **$f^{(0)}=f$, $f^{(j+1)}=(f^{(j)})'$; smooth = all exist and are continuous** | **`def-higher-derivatives-and-smoothness`** | **[L19]** | **was uncited, and step 1.2 invoked [L1] without ever establishing smoothness** |
+| **radius of convergence; "value at the centre"** | **$R=\sup\{r\ge0:\text{abs. conv. on }\lvert x-c\rvert<r\}$; series at $c$ sums to $a_0$** | **`def-real-power-series-and-radius-of-convergence`** | **[L18]** | **was uncited; steps 3.1, 7.1 both leaned on it** |
+| **finite binomial theorem** | **published as $\sum_k\binom nk x^k y^{\,n-k}$** | **`thm-binomial-theorem`** | **[L7]** | **[L7] restated it as $\sum_n\binom mn a^{m-n}b^n$ — the coefficient index moved to the other variable. Now quoted in the published form** |
+| **$\binom m0=1$, $\binom mn=0$ for $n>m$** | **boundary values of the count** | **`def-binomial-coefficient`** | **[L20]** | **step 2.1's base case read $\binom m0=1$ off nothing** |
+| $\binom mn=m!/(n!(m-n)!)$ in $\mathbb R$ | integrality clause | `thm-binomial-closed-formula` | [L12] | ok (round-1 repair) |
+| $1^{\,m-k}=1$ | integer power of $1$ | `def-integer-power` | [L7], written out in step 2.1 | now explicit |
+| $0^0=1$ vs $0^0$ undefined | integer power fixes $0^0=1$; **real power leaves it undefined** | `def-integer-power`, `def-real-power` | [L18], Remarks | ok — the two conventions are used in disjoint places, and that is now said |
+| $\limsup$ | limit superior in $\overline{\mathbb R}$ | `def-limsup-liminf` | [L8], [L22] | ok |
+| **"$\to\lvert x\rvert<1$" where [L8] asks for $\limsup$** | **a limit is the limit superior when it exists** | **`thm-convergence-iff-limsup-equals-liminf`** | **[L22], [L23]** | **step 1.5 wrote a limit and the ratio test wants a limit superior** |
+| **termwise splitting of a convergent series** | **$\sum(a_k+b_k)=\sum a_k+\sum b_k$, $\sum ca_k=c\sum a_k$** | **`lem-series-linearity`** | **[L21]** | **step 3.1 did this as "algebra"; it is a series theorem** |
+| termwise differentiation, same radius | as published | `thm-termwise-differentiation-of-a-real-power-series` | [L9] | ok |
+| $\exp$, $\log$ | as published | `def-real-exponential-function-and-e`, `def-natural-logarithm` | [L3], [L16] | ok |
+| $a^{r+s}=a^ra^s$ for real $r,s$ | real-power addition law | `thm-real-power-laws` | [L16], named at steps 2.1, 5.1, 7.1 | ok (round-2 repair, plus step 7.1 now names it too) |
+| $(x^\alpha)'=\alpha x^{\alpha-1}$ on $(0,\infty)$ | real-power derivative | `thm-real-power-continuity-and-derivatives` | [L6] | ok |
+| chain rule, both limit-point hypotheses | as published | `thm-chain-rule` | [L13] | ok (round-1 repair) |
+| polynomial derivative | as published | `lem-derivative-of-a-power` | [L14] | ok (round-1 repair) |
+| product rule; differentiable ⟹ continuous; zero derivative ⟹ constant; order-convex | as published | `thm-algebra-of-derivatives`, `cor-differentiable-implies-continuous`, `cor-zero-derivative-implies-constant`, `def-interval` | [L10], [L15], [L11] | ok |
+| $1/(n+1)\to0$ | Archimedean reciprocal form | `cor-archimedean-reciprocal` | [L23] | now cited |
+| $\iota$ applied to a natural | **banned in new content** | — | — | not written anywhere in this item; [L7] and [L12] carry the coefficients in reader-facing form. `content-policy`'s `notation-iota-applied` has nothing to flag |
+
+## 3. What changed in the file
+
+Nine facts added, `[L17]`–`[L23]` plus rewrites of `[L3]` and `[L7]`; nine deps
+added, all published and all earlier in plan order (9, 20, 122, 127, 112, 155,
+173, 175) than this item's page (187):
+`cor-exponential-is-a-bijection-onto-positive-reals`,
+`def-real-power-series-and-radius-of-convergence`, `def-series`,
+`def-higher-derivatives-and-smoothness`, `def-binomial-coefficient`,
+`lem-series-linearity`, `thm-convergence-iff-limsup-equals-liminf`,
+`thm-algebra-of-limits`, `cor-archimedean-reciprocal`.
+
+- **[L3]** now states what the definitions actually say — $\exp(x)=\sum x^n/n!$
+  and $e:=\exp(1)$ — and says in as many words that it does not name $e^x$.
+- **[L7]** now quotes `thm-binomial-theorem` in its published shape,
+  $(u+v)^m=\sum_{k=0}^m\binom mk u^k v^{\,m-k}$, with the coefficients said to be
+  naturals read in $\mathbb R$ through the canonical embedding.
+- **Step 1.1** proves $e^x=\exp(x)$ before claiming the exponential expansion.
+- **Step 1.2** was one sentence asserting $f^{(k)}(0)=k!a_k$ "by repeated
+  termwise differentiation". It now carries the induction
+  $f^{(k)}(x)=\sum_n\frac{(n+k)!}{n!}a_{n+k}x^n$, reads $f^{(k)}(0)=k!a_k$ off
+  [L18], and establishes smoothness through [L15] and [L19] — which [L1]
+  requires and which nothing previously supplied.
+- **Step 2.1** (was 1.4) cites [L20] for $\binom m0=1$, takes $u=x,v=1$ in the
+  published binomial theorem, discharges $1^j=1$ from the integer-power
+  recursion, and gets $\exp0=1$ from [L18] rather than from a bare $0^0$ claim.
+- **Step 2.2** (was 1.5) computes $q_n=\lvert x\rvert(1-\frac{\alpha+1}{n+1})$
+  for $n>\lvert\alpha\rvert$, takes the limit through [L23], and converts it to
+  the limit superior [L8] actually asks for through [L22].
+- **Step 4.1** (was 3.1) splits $\sum(\alpha-n)c_nx^n$ through [L21] after
+  noting both halves converge, instead of tagging it "algebra".
+- **Step 7.1** (was 6.1) names the real-power addition law it uses and takes
+  $B(0)=c_0$ and $\exp0=1$ from [L18].
+- **Step 8.1** (was 7.1) records that $\binom{\alpha}{n}$ extends the library's
+  count rather than colliding with it, pointing at step 2.1.
+- **A Remarks section** states which symbol is which, so the next reader does not
+  have to re-derive the audit.
+
+**Structural class sweep.** Steps 1.4, 1.5, 1.6 and 2.2 of the old numbering all
+used the sequence $(c_n)$ constructed in step 1.3 without citing it — they could
+not, being in the same phase. That is the same defect as the other seven, in the
+step graph rather than the fact list, and `precheck` cannot see it because it only
+reads explicit `[step k.j]` tags. The proof is now strictly stratified into nine
+phases (chain-rule step to 1.4; integer case, ratio test and collation to
+2.1–2.3; everything after shifted by one), so every use of the construction is an
+explicit citation. `precheck` confirms the numbering is the canonical one — it
+neither fails nor demands a repair.
+
+## 4. What I did not change
+
+- **No approved statement.** The six collated families, their exact domains and
+  endpoint assertions, the $\lvert x\rvert<1$ binomial restriction, the recurrence
+  defining $\binom{\alpha}{n}$, and the absence of any claim at $x=\pm1$ all stand
+  as authored. All five plan controls hold.
+- **No `verification.judge`, no `verification.audited`**, no `library/`, no
+  `research/plan-spec.json`, no other item.
+- **Step 2.2's tail argument** is licensed to the limit and no further. I
+  considered writing an $\varepsilon$-$N$ proof that finitely many initial terms
+  cannot move a limit and declined: `def-real-limit`'s quantifier is already an
+  eventual one, that is a textbook 30-second closure, and the stopping rule in
+  this dispatch exists to stop exactly this kind of chase.
+- **`def-derivative` and `def-limit-point-r`** are not added as deps. Every
+  limit-point hypothesis the proof needs is stated inside the published facts
+  [L13], [L14] and [L15] that carry it, and step 1.4 discharges both explicitly.
+
+## 5. Finding for the owner: the split, which I do not recommend
+
+The dispatch asks whether the honest fix is to split this item into the six
+collated families and the generalized binomial. My judgement, plainly: **a split is
+defensible but it is not the fix, and I am not recommending it.**
+
+The reason is that none of the three objections would have been prevented by one.
+Round 1 (binomial coefficients) and round 2 (real-power law) live in the binomial
+half; round 3 ($e^x$ vs $\exp$) lives in the collation half. Each defect would have
+travelled with its own half into whichever item it landed in. What actually
+produced all three was a single habit — matching a symbol to its near-neighbour
+instead of to its definition — and the audit above is what addresses that, not a
+seam.
+
+Recording the size facts anyway, since the owner may weigh them differently:
+
+- The item now carries 23 facts and 14 steps. The binomial half owns [L6]–[L23]
+  bar [L15], and every step from 2.1 onward except 2.3.
+- If the owner does want a smaller judge context unit, the seam is clean: steps
+  1.1, 1.2 and 2.3 with [L1]–[L5], [L18], [L19] are the collation; everything else
+  is the binomial theorem. `def-taylor-and-maclaurin-series` would serve both.
+- A split mints a new id and shifts plan order, so it is a plan change and the
+  owner's call. `research/ra-enrich-01-placement.json` and the Table-A row in the
+  PLAN would both need reissuing.
+
+## 6. The stopping rule
+
+Recorded and accepted. A **fourth distinct** objection on this item closes as
+`confirmed_nonfatal` on the adjudication ledger with its evidence, and I do not
+repair it again. Three rounds of real findings earned this item a genuine audit and
+it has now had one; a fourth round of resample-and-patch is the loop R1 exists to
+prevent.
+
+## 7. Gates
+
+| gate | result |
+|---|---|
+| `precheck` on the item | PASS (direct), canonical stratification, no repair proposed |
+| `rendercheck` on the item | OK — every math span parses under real KaTeX |
+| `depcheck` (repo-wide) | OK — no cycles, all references resolve, no draft items on published pages; the item raises no `cited-not-in-deps` |
+| `fwdcheck` (repo-wide) | OK |
+| `extcheck` (repo-wide) | OK — the item declares no `proved_here: false` dependency |
+| `content-policy` `notation-iota-applied` | nothing to flag; the item writes no applied $\iota$ |
+
+## 8. Hash receipts
+
+Judge-normalized hash (whole file, `judge:` block removed — `judge.mts`'s
+`itemSha256`):
+
+| id | judged at (round 3) | now |
+|---|---|---|
+| `thm-standard-maclaurin-expansions` | `2481ae24782f9fa4…` | `b6b4da28be354a97…` |
+
+`research/ra-enrich-01-rejudge-targets.json` has been overwritten with exactly this
+one id. The other six items are untouched and hold paired passes against their
+current text; they must not be rejudged.
+
+The round-3 adjudication row records `item_sha256` as the text Terra actually read,
+`2481ae24…`, matching the convention of the round-1 and round-2 rows in the same
+ledger and what `level-coverage.mjs` matches against; the post-repair hash is
+carried alongside it as `repaired_item_sha256`. `context_sha256` is included, which
+the earlier rows omit and `level-coverage.mjs` requires.
+
+## 9. For the orchestrator
+
+Ten adjudication rows now, ten `confirmed_nonfatal`, zero `confirmed_fatal`, zero
+`false_positive`. No fatal mathematical defect has been found anywhere in this
+batch across three rounds. Rejudge `thm-standard-maclaurin-expansions` only.
