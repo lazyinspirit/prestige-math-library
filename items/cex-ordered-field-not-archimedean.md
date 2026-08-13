@@ -8,6 +8,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 deps: [def-ordered-field, def-archimedean-field, thm-of-archimedean, thm-reals-ordered-field]
+forward_refs: [cor-rational-function-field-as-a-fraction-field]
 aliases: []
 landmark: false
 proof_strategy: direct
@@ -15,10 +16,10 @@ cx_machine_verified: false
 verification:
   precheck: pass
   verified:
-    model: gpt-5.6-sol-codex-subscription
+    model: gpt-5.6-terra-codex-subscription
     verdict: certify
-    date: 2026-08-03
-    scope: published-audit
+    date: 2026-08-13
+    scope: published-dependency-repair
     delegated_by: owner
 sources:
   scraped: []
@@ -44,7 +45,7 @@ number, so the naturals are not cofinal.
 
 ## Facts & Assumptions
 
-**Given:** $\mathbb{R}(t)$, the field of fractions of the polynomial ring $\mathbb{R}[t]$, and the set $P = \{f \in \mathbb{R}(t) : f \ne 0 \text{ and } f(x) > 0 \text{ for all sufficiently large real } x\}$.
+**Given:** $\mathbb{R}(t)$, the field of fractions of the polynomial ring $\mathbb{R}[t]$ (constructed at [[cor-rational-function-field-as-a-fraction-field]]), and the set $P = \{f \in \mathbb{R}(t) : f \ne 0 \text{ and } f(x) > 0 \text{ for all sufficiently large real } x\}$.
 
 [L1] An ordered field is a field with a positive cone $P$ satisfying trichotomy (for each nonzero $x$, exactly one of $x \in P$, $-x \in P$) and closure of $P$ under addition and multiplication; then $a < b$ means $b - a \in P$ ([[def-ordered-field]]).
 

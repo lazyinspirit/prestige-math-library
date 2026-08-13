@@ -7,19 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-generated
-deps: [cex-ordered-field-not-archimedean, def-ordered-field, def-field, def-archimedean-field, lem-of-square-positive, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, thm-reals-ordered-field]
+deps: [cor-rational-function-field-as-a-fraction-field, cex-ordered-field-not-archimedean, def-ordered-field, def-field, def-archimedean-field, lem-of-square-positive, lem-of-sign-rules, lem-of-inverse-positive, lem-of-q-embeds, thm-reals-ordered-field]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
-  verified:
-    model: gpt-5.6-terra-codex-subscription
-    verdict: certify
-    date: 2026-08-09
-    scope: published-audit
-    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -36,7 +30,7 @@ pipeline_run: null
 
 ## Example
 
-Let $\mathbb{R}(t)$ be the field of fractions of the polynomial ring
+Let $\mathbb{R}(t)$ be the field of fractions ([[cor-rational-function-field-as-a-fraction-field]]) of the polynomial ring
 $\mathbb{R}[t]$, and let
 
 $$P \;=\; \{\, f \in \mathbb{R}(t) : f \ne 0 \text{ and } f(x) > 0 \text{ for all sufficiently large real } x \,\}.$$
