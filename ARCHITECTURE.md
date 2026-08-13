@@ -1305,6 +1305,14 @@ Implemented in the **app repo** (the `prestige-intelligence` checkout that
 `tools/paths.mjs` resolves; `/root/Projects/prestige-intelligence` on the VPS).
 Do not restyle without an explicit in-session owner instruction.
 
+*Owner instruction 2026-08-13, exercised:* a **recent-changes** section
+(`/changes`, plus a boxed teaser on the index) listing pages published and
+changed in the past week, `dd/mm/yyyy`. The box was styled on the owner's
+explicit "give this new section its own box, make it look sleek and clean" and
+introduces no new accent — it reuses `.library-card` and its two existing
+variables. Dates come from item verification stamps, so this surface can never
+contradict the sitemap or the feed. Everything frozen above is untouched.
+
 | file | owns |
 |---|---|
 | `web/lib/library-kinds.ts` | per-kind palette; colour always paired with the kind label |
@@ -1316,6 +1324,7 @@ Do not restyle without an explicit in-session owner instruction.
 | `web/lib/library-external.ts` | the fuchsia / dotted / ‡ accent + `unprovedDependence` closure |
 | `web/lib/library-categories.ts` | index grouping (itself frozen since 2026-07-26) |
 | `web/lib/math-library.ts` | `plainTitle`, the one de-TeX for every plain-text context |
+| `web/lib/library-changes.ts` · `web/components/library/changes.tsx` | recent changes: what counts as published/revised in a window, and the shared row the index box and `/changes` both render |
 
 **Three ranked citation tiers, none relying on colour alone:**
 
