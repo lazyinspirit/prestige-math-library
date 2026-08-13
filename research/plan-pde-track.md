@@ -53,12 +53,12 @@ Brezis, *Functional Analysis, Sobolev Spaces and Partial Differential
 Equations* (Springer, 2011, Chapters 7--10), and John K. Hunter's complete
 242-page *Notes on Partial Differential Equations* (Chapters 1--7), a full
 two-quarter graduate course. Lawrence C. Evans, *Partial Differential
-Equations*, 2nd ed., is the standard primary cross-check through Chapters
-2--8 and 10; the source ledger distinguishes its publisher-hosted contents
-from the openly retrievable full texts. Specialist sources include full
-notes by Grigoryan (Sobolev/elliptic), Johnson (semigroups), Bressan
-(Hamilton--Jacobi and conservation laws), and the Crandall--Ishii--Lions
-`User's Guide`.
+Equations*, 2nd ed., is the standard primary cross-check through selected
+sections of Chapters 2--8 and 10; the source ledger distinguishes its
+publisher-hosted contents from the openly retrievable full texts. Specialist
+sources include full notes by Grigoryan (Sobolev/elliptic), Johnson
+(semigroups), Bressan (Hamilton--Jacobi and conservation laws), and the
+Crandall--Ishii--Lions `User's Guide`.
 
 **Seams consumed.** This block consumes the proposed predecessor machinery of
 measure theory MT-8/MT-11/MT-14--MT-17 and functional analysis FA-1/FA-2,
@@ -321,11 +321,11 @@ was read, not merely that the book was found. Section headings are harvested in
 **[E] Lawrence C. Evans, *Partial Differential Equations*, 2nd ed., Graduate
 Studies in Mathematics 19, AMS, 2010.** Publisher page and contents:
 <https://bookstore.ams.org/gsm-19-r>. Read: Chapter 2 §§2.1--2.4; Chapter 3
-§§3.1--3.4; Chapter 5 §§5.1--5.8; Chapter 6 §§6.1--6.5; Chapter 7
-§§7.1--7.4; Chapter 8 §§8.1--8.4; Chapter 10 §§10.1--10.3. This is the
-standard statement/convention cross-check. The AMS page is the authoritative
-bibliographic and contents source; this scaffold does not represent it as an
-open-access download.
+§§3.1--3.4; Chapter 4 §4.6.1--4.6.3; Chapter 5 §§5.1--5.8; Chapter 6
+§§6.1--6.5; Chapter 7 §§7.1--7.4; Chapter 8 §§8.1--8.4; Chapter 10
+§§10.1--10.3. This is the standard statement/convention cross-check. The AMS
+page is the authoritative bibliographic and contents source; this scaffold
+does not represent it as an open-access download.
 
 **[T] Gerald Teschl, *Partial Differential Equations: From Classical to
 Modern*, 2026 author manuscript.** Author page, full table of contents and
@@ -514,7 +514,7 @@ claimed only under the hypotheses actually proved.
 8. `thm-symmetric-principal-part-has-a-signature-normal-form` (theorem; **L/A**) — Apply the real spectral theorem/Sylvester inertia to reduce a frozen symmetric quadratic principal part and show its signature is coordinate invariant.
 9. `def-two-variable-second-order-discriminant` (definition; **L/NA**) — For $Au_{xx}+2Bu_{xy}+Cu_{yy}$ define elliptic, parabolic and hyperbolic type by the sign of $B^2-AC$.
 10. `thm-two-variable-type-and-characteristic-directions-are-coordinate-invariant` (theorem; **L/A**) — Show the discriminant changes by the square of the Jacobian determinant and identify zero directions with characteristic curves.
-11. `thm-two-variable-local-canonical-principal-forms` (theorem; **L/A**) — Under constant type and a $C^2$ characteristic-coordinate diffeomorphism, reduce the principal part locally to Laplace, heat-type or wave-type form, retaining explicit lower-order terms.
+11. `thm-two-variable-constant-coefficient-canonical-principal-forms` (theorem; **L/A**) — An invertible real linear change of variables reduces a nondegenerate constant-coefficient principal part to Laplace or wave form and a rank-one principal part to parabolic form, up to a nonzero scalar factor.
 12. `rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy` (remark; **L/NA**) — Record that mixed type, systems, higher order and fully nonlinear equations do not admit this global three-name classification without extra structure.
 13. `def-linear-transport-equation-and-its-characteristic-flow` (definition; **L/NA**) — Define $a(x,t)\cdot D_xu+u_t+c(x,t)u=f(x,t)$ and the flow $X'=a(X,t)$.
 14. `lem-transport-equation-along-a-characteristic` (lemma; **L/A**) — The multivariable chain rule turns the PDE along $X$ into the scalar ODE $(u\circ X)'+c(u\circ X)=f$.
@@ -547,11 +547,11 @@ before terminology. Transport follows [E]'s characteristic formula, with the
 published chain and implicit-function theorems replacing recalled calculus.
 
 **Hard proof obligations.** Item 4 expands the coordinate chain rule far enough
-to isolate the homogeneous top-order term. Item 11 does not infer integrability
-of characteristic directions merely from pointwise diagonalisation: it assumes
-and checks a local characteristic-coordinate diffeomorphism. Item 18 proves the
-parameter-to-flow map has invertible derivative exactly when the data surface is
-noncharacteristic, then invokes the published inverse theorem.
+to isolate the homogeneous top-order term. Item 11 is deliberately a
+constant-coefficient linear-algebra theorem: it does not infer a variable-
+coefficient local normal form from pointwise diagonalisation. Item 18 proves
+the parameter-to-flow map has invertible derivative exactly when the data
+surface is noncharacteristic, then invokes the published inverse theorem.
 
 **Well-definedness.** Items 4 and 6 make the principal symbol and characteristic
 hypersurface independent of coordinates and defining function. The inverse
@@ -585,7 +585,7 @@ theorem is stated exactly and is not used later.
 9. `cor-burgers-classical-solution-persists-for-monotone-data` (corollary; **L/A**) — If $u_0'\ge0$, the characteristic projection remains increasing for $t\ge0$.
 10. `def-fully-nonlinear-first-order-pde-and-complete-integral` (definition; **L/NA**) — Define $F(x,u,p)=0$, a complete integral and an envelope without assuming every solution has that form.
 11. `def-lagrange-charpit-characteristic-system` (definition; **L/NA**) — Define $\dot x=F_p$, $\dot z=p\cdot F_p$, $\dot p=-F_x-pF_z$.
-12. `lem-charpit-flow-preserves-the-pde-constraint` (lemma; **L/A**) — Along the system, $dF/ds=-F_zF$, hence initial data in $F=0$ remain there.
+12. `lem-charpit-flow-preserves-the-pde-constraint` (lemma; **L/A**) — Along the system in item 11, the chain rule gives $dF/ds=0$, so initial data in $F=0$ remain there; record separately the equivalent contact normalization whose $dot z$ contains $-F$.
 13. `lem-charpit-contact-compatibility-is-preserved` (lemma; **L/A**) — Prove $dz-p\cdot dx=0$ remains valid along a compatible characteristic strip.
 14. `thm-local-fully-nonlinear-cauchy-problem-by-charpit` (theorem; **L/A**) — Under $C^2$ regularity and the noncharacteristic rank condition, invert the projected strip and obtain a local classical solution.
 15. `rem-characteristics-do-not-select-a-post-crossing-weak-solution` (remark; **L/NA**) — Explain that characteristic crossing creates the selection problem later resolved by viscosity or entropy inequalities.
@@ -658,7 +658,7 @@ for the real-variable proofs.
 2. `ex-real-and-imaginary-parts-of-holomorphic-monomials` (example; **L/A**) — Link, without re-proving plane theory, to complex analysis's harmonic examples.
 3. `ex-radial-harmonic-functions-away-from-the-origin` (example; **L/A**) — Solve $U''+(n-1)U'/r=0$ and exhibit the logarithmic and power families.
 4. `cex-harmonic-on-a-punctured-domain-need-not-extend` (counterexample; **L/A**) — The radial singular functions show that a missing point is not removable without boundedness/integrability hypotheses.
-5. `cex-a-single-radius-mean-identity-does-not-force-harmonicity` (counterexample; **L/A**) — Give a continuous periodic one-dimensional/radial construction satisfying one averaging identity but not all local ones.
+5. `cex-one-centred-ball-mean-identity-does-not-force-harmonicity` (counterexample; **G/G**) — For a prescribed ball $B_R(0)$, $u(x)=|x|^2(|x|^2-\frac{n+2}{n+4}R^2)$ has $u(0)=\fint_{B_R}u$ but is not harmonic; this directly checked item is non-load-bearing.
 6. `ex-distributional-harmonicity-removes-an-apparent-corner` (example; **L/A**) — Use Weyl's lemma to show why a truly distributionally harmonic locally integrable function cannot retain a nonsmooth interior corner.
 
 ### Sources and proof architecture
@@ -860,7 +860,8 @@ class is part of item 6, not a remark added after an overbroad theorem.
 **A page:** `the-heat-kernel-and-the-cauchy-problem`  
 **B page:** `the-heat-kernel-and-the-cauchy-problem-examples`  
 **Requires:** MT-8, MT-11 and MT-14--MT-15; FA-23 for Plancherel/Fourier
-identities; the published differentiation-under-the-integral theorem.
+identities and FA-24 for the causal distribution; the published
+differentiation-under-the-integral theorem.
 
 ### A-page items, in dependency order
 
@@ -938,7 +939,7 @@ FA-12 for Bochner integration and FA-23 for Fourier analysis.
 2. `ex-heat-comparison-preserves-an-interval-of-values` (example; **L/A**) — Constants serve as upper/lower solutions.
 3. `ex-sine-modes-decay-under-dirichlet-heat-flow` (example; **L/A**) — $e^{-k^2t}\sin(kx)$ on $(0,\pi)$.
 4. `cex-final-time-face-is-not-part-of-the-parabolic-boundary` (counterexample; **L/A**) — A decaying sine mode has its largest negative/positive transformed value at different times.
-5. `cex-whole-space-zero-data-heat-solutions-without-growth-control` (counterexample; **L/NS**) — State Tychonoff's classical nonuniqueness construction with an exact source and `proved_here: false`; it is non-load-bearing.
+5. `cex-whole-space-zero-data-heat-solutions-without-growth-control` (counterexample; **L/NS**, `proved_here: false`) — State Tychonoff's classical nonuniqueness construction from [E] §2.3.3; it is non-load-bearing.
 6. `cex-backward-heat-amplifies-small-high-frequency-errors` (counterexample; **L/A**) — Normalize terminal sine modes to tend to zero while their recovered initial norms diverge.
 7. `cex-a-mild-heat-solution-need-not-be-classical-at-initial-time` (counterexample; **L/A**) — Discontinuous $L^p$ data smooth only for $t>0$.
 
@@ -1516,8 +1517,9 @@ pointwise classical representative is claimed only after embedding supplies it.
 
 **A page:** `schauder-and-lp-elliptic-estimates`  
 **B page:** `schauder-and-lp-elliptic-estimates-examples`  
-**Requires:** PDE-5--PDE-6 and PDE-11--PDE-18; MT-17; FA-6 and the planned
-interpolation machinery; the published Hölder-function definitions.
+**Requires:** PDE-5--PDE-6 and PDE-11--PDE-18; MT-17, including its
+Marcinkiewicz interpolation theorem; FA-6 and FA-25; the published
+Hölder-function definitions.
 
 ### A-page items, in dependency order
 
@@ -1531,7 +1533,7 @@ interpolation machinery; the published Hölder-function definitions.
 8. `thm-global-schauder-estimate-and-classical-dirichlet-solvability` (theorem; **L/A**) — Combine the a priori estimate with the continuity method and a base Laplace problem, under an explicit maximum-principle injectivity hypothesis.
 9. `def-calderon-zygmund-kernel-and-principal-value-operator` (definition; **L/NA**) — Define the size, smoothness and spherical-cancellation conditions and truncated principal values.
 10. `lem-calderon-zygmund-decomposition-at-height-lambda` (lemma; **L/A**) — Decompose an $L^1$ function into good and mean-zero bad pieces on disjoint cubes.
-11. `thm-calderon-zygmund-singular-integrals-are-bounded-on-lp` (theorem; **L/A**) — Combine $L^2$ boundedness, weak type $(1,1)$ and interpolation, then duality, for $1<p<\infty$.
+11. `thm-calderon-zygmund-singular-integrals-are-bounded-on-lp` (theorem; **L/A**) — Combine $L^2$ boundedness, weak type $(1,1)$ and MT-17's Marcinkiewicz interpolation, then duality, for $1<p<\infty$.
 12. `thm-global-w-two-p-estimate-for-the-laplacian-on-rn` (theorem; **L/A**) — Fourier/second-derivative kernels give $\|D^2u\|_p\le C_p\|\Delta u\|_p$ for $u\in C_c^\infty$.
 13. `thm-interior-w-two-p-estimate-for-uniformly-elliptic-equations` (theorem; **L/A**) — Localise and freeze coefficients in the sourced VMO/continuous regime, with the precise hypothesis used by the proof.
 14. `thm-global-w-two-p-dirichlet-estimate` (theorem; **L/A**) — On a $C^{1,1}$ domain with coefficients of the stated regularity, bound $\|u\|_{W^{2,p}}$ by $\|Lu\|_p+\|u\|_p$.
@@ -1598,9 +1600,8 @@ nonemptiness and preservation of the solution space.
 1. `ex-weak-and-classical-maximum-principles-agree-for-smooth-solutions` (example; **L/A**) — Translate the test inequality by integration by parts.
 2. `ex-measurable-coefficients-with-a-holder-regular-weak-solution` (example; **L/A**) — A piecewise constant radial coefficient illustrates regularity without coefficient continuity.
 3. `cex-weak-maximum-principle-needs-the-zero-order-sign` (counterexample; **L/A**) — An eigenfunction for an operator with adverse potential defeats comparison.
-4. `cex-de-giorgi-nash-continuity-can-fail-for-elliptic-systems` (counterexample; **L/NS**) — State De Giorgi's sourced system counterexample as a non-load-bearing remark/example.
-5. `cex-harnack-requires-nonnegativity` (counterexample; **L/A**) — A sign-changing harmonic affine function has zero/negative infimum.
-6. `ex-oscillation-decay-implies-a-holder-modulus` (example; **L/A**) — Work the geometric iteration algebra explicitly.
+4. `cex-harnack-requires-nonnegativity` (counterexample; **L/A**) — A sign-changing harmonic affine function has zero/negative infimum.
+5. `ex-oscillation-decay-implies-a-holder-modulus` (example; **L/A**) — Work the geometric iteration algebra explicitly.
 
 ### Sources and proof architecture
 
@@ -1771,7 +1772,6 @@ published Banach fixed-point and exponential-series results.
 4. `ex-dirichlet-heat-semigroup-from-the-laplacian` (example; **L/A**) — Use PDE-17 and Lumer--Phillips to identify the abstract heat flow.
 5. `cex-strong-continuity-does-not-imply-operator-norm-continuity` (counterexample; **L/A**) — Translation on $L^p$.
 6. `cex-a-mild-solution-need-not-be-classical` (counterexample; **L/A**) — Initial data outside $D(A)$.
-7. `cex-first-resolvent-bound-is-not-the-general-hille-yosida-hypothesis` (counterexample; **L/NS**) — Cite a standard source example; non-load-bearing, retaining all-power estimates on the spine.
 
 ### Sources and proof architecture
 
@@ -1888,17 +1888,16 @@ functions are mentioned only as orientation.
 1. `ex-eikonal-equation-as-a-viscosity-equation` (example; **L/A**) — Test distance functions at nondifferentiable ridge points and distinguish $|Du|=1$ from $|Du|\le1$.
 2. `ex-quadratic-hopf-lax-formula-and-moreau-envelope` (example; **L/A**) — For $H(p)=|p|^2/2$, compute $L(v)=|v|^2/2$ and the infimal convolution.
 3. `ex-hopf-lax-solution-with-a-forming-corner` (example; **L/A**) — Exhibit smooth data whose classical characteristics cross while the viscosity solution remains continuous.
-4. `ex-viscosity-solution-of-the-absolute-value-eikonal-profile` (example; **L/A**) — Check all upper and lower test functions at the cusp instead of differentiating there.
+4. `ex-negative-absolute-value-solves-the-eikonal-equation-in-viscosity-sense` (example; **L/A**) — Verify that $u(x)=-|x|$ solves $|Du|=1$ in viscosity sense: at the cusp the upper tests satisfy the subsolution inequality and no smooth lower test exists.
 5. `ex-vanishing-viscosity-selects-the-hamilton-jacobi-solution` (example; **L/A**) — Compute or estimate a one-dimensional viscous family and its limit.
-6. `cex-pointwise-limits-need-not-preserve-viscosity-solutions` (counterexample; **G/G**) — A directly checked oscillatory sequence motivates local uniform or half-relaxed convergence and is not a dependency target.
-7. `cex-hopf-lax-without-convex-superlinear-coercivity` (counterexample; **L/A**) — Show separately how nonconvexity breaks the semigroup proof and failure of superlinearity may destroy localisation.
-8. `cex-reversing-the-contact-extremum-reverses-the-viscosity-inequality` (counterexample; **G/G**) — A one-variable affine Hamiltonian catches the common subsolution/supersolution sign error; non-load-bearing.
+6. `cex-hopf-lax-without-convex-superlinear-coercivity` (counterexample; **L/A**) — Show separately how nonconvexity breaks the semigroup proof and failure of superlinearity may destroy localisation.
+7. `cex-reversing-the-contact-extremum-reverses-the-viscosity-inequality` (counterexample; **G/G**) — A one-variable affine Hamiltonian catches the common subsolution/supersolution sign error; non-load-bearing.
 
 ### Sources and proof architecture
 
 **Primary backing:** [BHJ] §§1--5; [CIL] §§2--4 and §6; [E] Chapter 10
 §§10.1--10.3; Hung V. Tran's *Hamilton--Jacobi Equations: Theory and
-Applications*, Chapters 1--4, source [TR]. [CIL] supplies the stable
+Applications*, Chapters 1--2, source [TR]. [CIL] supplies the stable
 semicontinuous-envelope and Perron formulations; [BHJ] and [TR] give an
 independent first-order treatment and the Hopf--Lax formula.
 
@@ -1923,7 +1922,7 @@ sequence index and the space--time point in the limsup/liminf.
 
 **A page:** `scalar-conservation-laws-and-entropy-solutions`  
 **B page:** `scalar-conservation-laws-and-entropy-solutions-examples`  
-**Requires:** PDE-2, PDE-7--PDE-8 and PDE-25; MT-4, MT-7--MT-11; FA-23's
+**Requires:** PDE-2, PDE-7--PDE-8 and PDE-25; MT-4, MT-7--MT-11; FA-24's
 distributional framework; the published one-dimensional integration and
 convexity results.
 
@@ -2022,12 +2021,10 @@ orientation remarks alone may name later subjects.
 
 Every mathematical-content row carries the component shorthand of §2.4. The
 only generated statements are the explicitly **G/G**, directly checkable,
-non-load-bearing counterexamples on PDE-25B and PDE-26B. Every spine theorem,
-definition and load-bearing lemma is literature-derived. The four **L/NS**
-items are the sourced Cauchy--Kovalevskaya statement, Tychonoff nonuniqueness,
-De Giorgi's elliptic-system counterexample and the general Hille--Yosida
-first-power warning; each is a leaf with `proved_here: false` and an exact
-source obligation.
+non-load-bearing counterexamples on PDE-3B, PDE-25B and PDE-26B. Every spine
+theorem, definition and load-bearing lemma is literature-derived. The two
+**L/NS** items are the sourced Cauchy--Kovalevskaya statement and Tychonoff
+nonuniqueness; each is a leaf with `proved_here: false` and an exact source.
 
 The future build must write each A-page summary as a mathematical development:
 starting objects, central theorem chain, endpoint and sharp boundary. It must
@@ -2214,18 +2211,19 @@ full-note/monograph corpus.
 | Entropy inequalities appear with opposite signs because some texts write $u_t+f(u)_x=0$ and others $u_t=f(u)_x$. | PDE-26 fixes the former and writes $\eta(u)_t+q(u)_x\le0$ in distributions, equivalently the nonnegative-test integral inequality with the corresponding positive sign. |
 | Huygens's principle is sometimes paraphrased as a property of “the wave equation in higher dimensions.” | PDE-10 states the sharp free-space result: strong Huygens holds in odd spatial dimensions $n\ge3$; even dimensions have a tail, and $n=1$ does not have the shell-only property. |
 
-### 11.2 Evans harvest: Chapters 2--3, 5--8 and 10
+### 11.2 Evans harvest: Chapters 2--3, §4.6, Chapters 5--8 and 10
 
 | Evans heading and named results in the read range | disposition |
 |---|---|
 | §2.1 *Transport equation*; characteristic solution, nonhomogeneous transport | `included` PDE-1; the change-of-variables justification is inline there |
 | §2.2 *Laplace's equation*: fundamental solution; mean-value formulas; harmonic-function smoothness/analyticity; maximum principle; Harnack inequality; Green's function; energy method | `included` PDE-3--PDE-6; plane holomorphic variants are `already-planned` CA harmonic pages |
-| §2.3 *Heat equation*: fundamental solution; mean-value formula; maximum principle; uniqueness; energy method; nonhomogeneous problem | `included` PDE-7--PDE-8 |
+| §2.3 *Heat equation*: fundamental solution; mean-value formula; maximum principle; uniqueness and Tychonoff nonuniqueness without growth control; energy method; nonhomogeneous problem | `included` PDE-7--PDE-8, with the unproved Tychonoff construction isolated on PDE-8B |
 | §2.4 *Wave equation*: spherical means; Kirchhoff and Poisson formulas; nonhomogeneous formula; energy and finite propagation | `included` PDE-9--PDE-10 |
 | §3.1 *Complete integrals, envelopes* | `included` PDE-2 items 11--15; only local smooth characteristic geometry is claimed |
 | §3.2 *Characteristics*; characteristic ODE, local solution of noncharacteristic Cauchy data | `included` PDE-2 |
 | §3.3 *Introduction to Hamilton--Jacobi equations*; Hopf--Lax formula | `included` PDE-25 items 14--18 |
 | §3.4 *Conservation laws*; shocks, Rankine--Hugoniot, entropy, Riemann problems | `included` PDE-26 |
+| §4.6 *Power series*: §4.6.1 *Noncharacteristic surfaces*, §4.6.2 *Real analytic functions*, §4.6.3 *Cauchy--Kovalevskaya Theorem* | theorem statement `included` PDE-2 item 16; power-series/majorant proof `deferred` under the dispatch's statement-only boundary and PDE-2 item 17 |
 | §5.1 *Hölder spaces* | `included` PDE-19 items 1--3 |
 | §5.2 *Sobolev spaces*; weak derivatives, $W^{k,p}$ completeness | `included` PDE-11 |
 | §5.3 *Approximation*; local/global smooth approximation | `included` PDE-12 items 1--7 |
@@ -2571,8 +2569,8 @@ The later ACM chapter headings *Interior regularity for nonlinear equations*,
 *Regularity for systems* and *Viscosity solutions* were harvested but not used
 as read backing. Scalar Schauder/$L^p$ headings are independently `included`
 PDE-19; nonlinear/system regularity and fully nonlinear viscosity theory are
-`deferred` for the exact scope reasons in §3. De Giorgi's system
-counterexample alone is a source-cited `L/NS` boundary item on PDE-20B.
+`deferred` for the exact scope reasons in §3. PDE-20's final remark records the
+scalar/system boundary without importing a system counterexample.
 
 ### 11.11 Laugesen spectral and Cristoferi variational harvests
 
@@ -2787,7 +2785,7 @@ lecture-note set with a harvestable TOC.
 
 | pair(s) | independent backing |
 |---|---|
-| PDE-1--PDE-2 | [T] Chapters 1--2; [E] Chapter 3; [KTH]; [BHJ] §1 |
+| PDE-1--PDE-2 | [T] Chapters 1--2; [E] Chapter 3 and §4.6; [KTH]; [BHJ] §1 |
 | PDE-3--PDE-6 | [E] §2.2; [T] Chapter 5; [H] Chapter 2; [I] Chapter 7; [S] I.2 |
 | PDE-7--PDE-8 | [E] §2.3; [T] Chapter 6; [H] Chapters 5--6; [I] Chapter 3; [MITPDE] Lecture 5 |
 | PDE-9--PDE-10 | [E] §2.4; [T] Chapter 7; [I] Chapters 2/9; [MITPDE] Lectures 10--14 |

@@ -32,10 +32,11 @@ non-citable examples/exercises companion.
 **Full texts obtained and read.** Two complete standard treatments were
 obtained in full: Allen Altman and Steven Kleiman, *A Term of Commutative
 Algebra* (2013 edition, 266 pages),
-<https://web.mit.edu/18.705/www/13Ed.pdf>, especially §§9, 12--25 and selected
-parts of §§10--11 and §26; and James
+<https://web.mit.edu/18.705/www/13Ed.pdf>, especially §§9, 12--22, selected
+results in §23, §§24--25, and selected parts of §§10--11 and §26; and James
 Milne, *A Primer of Commutative Algebra* (v4.03, 2020, 113 pages),
-<https://www.jmilne.org/math/xnotes/CA.pdf>, especially §§3, 5--16 and 18--24.
+<https://www.jmilne.org/math/xnotes/CA.pdf>, especially the exact numbered
+ranges in §§3, 5--8, 11, 13--16, 18--21 and 24 listed below.
 The independent full-note corpus is the Stacks Project, Chapter 10,
 *Commutative Algebra* (current chapter PDF and section pages, retrieved
 2026-08-14), <https://stacks.math.columbia.edu/download/algebra.pdf>; the
@@ -746,8 +747,6 @@ an explicit sufficiently large integer, not a choice function.
 | `def-value-group-of-a-valuation-ring` | `def` | The value group of (V\subseteq K) is (K^\times/V^\times) with its divisibility order. | L/NA; Mustaţă Prop. 8.6; Stacks §10.50. |
 | `thm-every-valuation-ring-arises-from-its-value-group` | `thm` | The quotient order is well defined, total and translation-invariant; its quotient valuation has valuation ring exactly (V). | L/A; Mustaţă Prop. 8.6; Altman--Kleiman (26.6)--(26.8). |
 | `thm-valuation-ring-is-integrally-closed` | `thm` | Every valuation ring is integrally closed in its fraction field. | L/A; Altman--Kleiman (26.10); Stacks Lemma 10.50.4. |
-| `thm-valuation-ring-domination-criterion` | `thm` | A local subring of a field is dominated by a valuation ring; equivalently valuation rings are maximal for local domination. | L/A; Altman--Kleiman (26.12)--(26.16); Stacks §10.50, with Zorn exposed. |
-| `thm-integral-closure-as-intersection-of-valuation-rings` | `thm` | The integral closure of a domain in its fraction field is the intersection of all valuation rings of that field containing the domain. | L/A; Altman--Kleiman (26.20); Stacks §10.50. |
 | `def-discrete-valuation` | `def` | A discrete valuation is a valuation whose value group is identified with (mathbb Z), normalised to be surjective. | L/NA; Mustaţă Def. 8.7; Stacks §10.119. |
 | `def-discrete-valuation-ring` | `def` | A DVR is the valuation ring of a discrete valuation; fields are excluded. | L/NA; Mustaţă Def. 8.8; Altman--Kleiman (23.1)--(23.3). |
 | `def-uniformising-parameter` | `def` | A uniformiser is an element of value one, equivalently a generator of the nonzero maximal ideal. | L/NA; Mustaţă Rem. 8.9; Altman--Kleiman §23. |
@@ -757,7 +756,7 @@ an explicit sufficiently large integer, not a choice function.
 | `thm-equivalent-characterisations-of-a-dvr` | `thm` | For a nonfield domain (R), the following are equivalent: (R) is a DVR; (R) is a Noetherian valuation ring; (R) is a one-dimensional Noetherian local integrally closed domain; and (R) is a local PID with nonzero maximal ideal. | L/A; Mustaţă Prop. 8.7; Milne Prop. 20.2; Stacks Lemma 10.119.7. |
 | `thm-noetherian-valuation-ring-characterisation` | `thm` | A valuation ring is Noetherian iff it is a field or a DVR. | L/A; Mustaţă Prop. 8.13; Stacks Lemma 10.50.18. |
 | `thm-dvr-ideal-and-module-length` | `thm` | The length of R/(pi^n) is n, and for every nonzero x the valuation equals the length of R/(x). | L/A; Altman--Kleiman (23.11)--(23.13); Stacks §10.119. |
-| `thm-height-one-localisation-of-normal-noetherian-domain-is-dvr` | `thm` | If R is a Noetherian integrally closed domain and p is a height-one prime, then R_p is a DVR. | L/A; Altman--Kleiman (23.20); Milne §20; the height-one hypothesis uses CA-3's chain definition and is revisited after CA-10. |
+| `thm-height-one-localisation-of-normal-noetherian-domain-is-dvr` | `thm` | If R is a Noetherian integrally closed domain and p is a height-one prime, then R_p is a DVR. | L/A; Altman--Kleiman Thm. 23.10 together with localisation of normality; Milne Prop. 20.2; the height-one hypothesis uses CA-3's chain definition and is revisited after CA-10. |
 | `cor-dvr-is-a-pid` | `cor` | Every DVR is a PID. | L/A; Milne Prop. 20.2; the UFD consequence waits for the owed abstract-algebra enrichment. |
 
 #### Proof strategy and obligations
@@ -769,8 +768,6 @@ The DVR equivalences are decomposed: a least positive value produces a
 uniformiser; Noetherianity forces that least value; the uniformiser factors all
 elements and ideals; and the one-dimensional normal local criterion uses a
 minimal number of generators of the maximal ideal plus the determinant trick.
-The valuation-domination theorem uses Zorn on local overrings and must prove a
-maximal member compares x and its inverse.
 
 **Well-definedness.** The order on (K^\times/V^\times) is independent of
 representatives, antisymmetric, total and translation-invariant; extending a
@@ -781,9 +778,8 @@ a generator of the maximal ideal and is unique only up to a unit; no canonical
 choice is asserted.  Length is the CA-4 invariant and not dependent on the
 displayed filtration.
 
-**Choice strength.** The DVR equivalences and all integer-valued calculations
-are ZF.  Existence of a dominating valuation ring and the intersection theorem
-use AC/Zorn.  Choosing one uniformiser from a known principal nonzero ideal is
+**Choice strength.** The valuation-ring and DVR equivalences and all
+integer-valued calculations are ZF.  Choosing one uniformiser from a known principal nonzero ideal is
 a single existential instantiation, not a choice scheme.
 
 #### B page
@@ -791,9 +787,12 @@ a single existential instantiation, not a choice scheme.
 | id | kind | content | provenance and locator |
 |---|---|---|---|
 | `ex-p-adic-dvr` | `ex` | Compute the valuation, units and ideals of the localisation of the integers at (p). | L/A; Altman--Kleiman §23 examples. |
+| `ex-localisation-of-a-pid-at-a-prime` | `ex` | Prove directly that localising a PID at a nonzero prime gives a DVR. | L/A; Mustaţă Ex. 8.10. |
 | `ex-plane-curve-local-ring-not-dvr` | `ex` | Show the local ring of a singular cusp fails the normal/DVR criterion. | L/A; Altman--Kleiman §23 exercises. |
 | `ex-rank-two-valuation-ring-not-dvr` | `ex` | Use lexicographically ordered integer pairs to construct a valuation ring that is not Noetherian. | L/A; Altman--Kleiman §26 examples. |
+| `ex-nondiscrete-ordered-subgroup-valuation` | `ex` | Use the subgroup generated by (1) and an irrational number to exhibit a nondiscrete rank-one valuation. | L/A; Mustaţă Exs. 8.11--8.12. |
 | `ex-dvr-length-computation` | `ex` | Calculate a filtration and length of R/(pi^n). | L/A; Altman--Kleiman (23.13). |
+| `ex-uniformisers-and-dvr-ideal-arithmetic` | `ex` | Show uniformisers differ by units and compute sums and intersections of powers of the maximal ideal. | L/A; Mustaţă Rem. 8.9. |
 | `ex-valuation-ring-ideals-linearly-ordered` | `ex` | Compare principal ideals through their values and exhibit a nonprincipal ideal in a nondiscrete valuation ring. | L/A; Stacks §10.50 examples. |
 
 ### CA-9. Dedekind domains, fractional ideals, and ideal classes
@@ -804,7 +803,7 @@ a single existential instantiation, not a choice scheme.
   ideals, projective modules, PID and UFD definitions, and the planned
   tensor-product page.
 - **Primary backing:** Altman--Kleiman §§24--25, pp. 153--161, Dedekind
-  domains (24.1)--(24.21) and fractional ideals (25.1)--(25.23); Milne §20,
+  domains (24.1)--(24.21) and fractional ideals (25.1)--(25.22); Milne §20,
   pp. 93--99, Props. 20.1--20.16.  Independent check: Stacks §§10.120 and
   15.22; CRing Project Ch. 9 §3.
 
@@ -825,7 +824,7 @@ a single existential instantiation, not a choice scheme.
 | `thm-invertible-ideal-characterisations` | `thm` | A nonzero fractional ideal is invertible iff it is finite locally free of rank one, equivalently its localisations at maximal ideals are principal. | L/A; Mustaţă Lemmas 8.59--8.60; Stacks §15.22. |
 | `thm-nonzero-ideals-in-dedekind-domains-are-invertible` | `thm` | Every nonzero fractional ideal of a Dedekind domain is invertible. | L/A; Mustaţă Thm. 8.61; Milne Thm. 20.7. |
 | `def-prime-ideal-valuations-on-fractional-ideals` | `def` | For a nonzero prime p of a Dedekind domain, define v_p(I) using the exponent of pR_p in the DVR-localisation of I. | L/NA; Altman--Kleiman §25; Milne proof of Thm. 20.7. |
-| `lem-finite-support-of-ideal-valuations` | `lem` | For a nonzero fractional ideal I, v_p(I) is zero for all but finitely many nonzero prime ideals and is additive under products. | L/A; Altman--Kleiman (25.14)--(25.17); Milne Thm. 20.7. |
+| `lem-finite-support-of-ideal-valuations` | `lem` | For a nonzero fractional ideal I, v_p(I) is zero for all but finitely many nonzero prime ideals and is additive under products. | L/A; Altman--Kleiman Thm. 25.14; Milne Thm. 20.7. |
 | `thm-unique-factorisation-of-ideals-in-dedekind-domains` | `thm` | Every nonzero fractional ideal has a unique expression as a finite product of nonzero prime ideals with integer exponents; integral ideals have nonnegative exponents. | L/A; Altman--Kleiman Thm. 24.10; Milne Thm. 20.7. |
 | `cor-ideal-divisibility-reverses-inclusion-dedekind` | `cor` | For nonzero integral ideals in a Dedekind domain, I contains J iff I divides J. | L/A; Milne Cor. 20.8. |
 | `cor-ideals-in-a-dedekind-domain-are-two-generated` | `cor` | Every nonzero ideal of a Dedekind domain is generated by two elements. | L/A; Milne Cor. 20.12; Mustaţă §8.5. |
@@ -834,8 +833,8 @@ a single existential instantiation, not a choice scheme.
 | `def-divisor-group-of-a-dedekind-domain` | `def` | The divisor group is the free abelian group on the nonzero prime ideals. | L/NA; Mustaţă Rem. 8.62; CRing Project Ch. 9 §3. |
 | `thm-principal-divisor-exact-sequence` | `thm` | Valuations give the exact sequence (R^\times\to K^\times\to\operatorname{Div}(R)\to\operatorname{Cl}(R)\to0), with kernels and images identified explicitly. | L/A; Mustaţă Rem. 8.62; CRing Project Ch. 9 §3. |
 | `thm-dedekind-pid-class-group-characterisation` | `thm` | A Dedekind domain is a PID iff its ideal class group is trivial. | L/A; Mustaţă Prop. 8.63; Milne §20. |
-| `thm-invertible-ideals-and-rank-one-projective-modules` | `thm` | Invertible fractional ideals are precisely finite projective modules of constant rank one up to the natural fractional-ideal realisation. | L/A; Altman--Kleiman Thm. 25.19; Stacks §15.22. |
-| `thm-ideal-class-group-is-the-picard-group` | `thm` | Tensor product identifies the ideal class group with the Picard group of rank-one projective modules. | L/A; Altman--Kleiman Thm. 25.19; Stacks §15.118. |
+| `thm-invertible-ideals-and-rank-one-projective-modules` | `thm` | Invertible fractional ideals are precisely finite projective modules of constant rank one up to the natural fractional-ideal realisation. | L/A; Altman--Kleiman Prop. 25.19; Stacks §15.22. |
+| `thm-ideal-class-group-is-the-picard-group` | `thm` | Tensor product identifies the ideal class group with the Picard group of rank-one projective modules. | L/A; Altman--Kleiman (25.22); Stacks §15.118. |
 | `thm-finite-torsionfree-modules-over-dedekind-domains` | `thm` | Every finite torsion-free module over a Dedekind domain is projective and isomorphic to (R^{n-1}\oplus I), with the class of (I) uniquely determined. | L/A; Milne Thm. 20.15; Stacks §15.22; CRing Project Ch. 9 §3 supplies the expanded proof. |
 | `thm-submodules-of-projectives-over-dedekind-domains` | `thm` | Every submodule of a projective module over a Dedekind domain is projective; in particular every torsion-free module is flat, with the arbitrary-rank choice cost stated separately. | L/A; Stacks §§15.22--15.23; CRing Project Ch. 9 §3. |
 
@@ -1100,6 +1099,7 @@ prime/maximal-ideal existence (AC); no derived-functor choice is hidden.
 | id | kind | statement | provenance and locator |
 |---|---|---|---|
 | `def-filtration-and-adic-filtration` | `def` | Define decreasing filtrations and the I-adic filtration of a ring or module. | L/NA; Altman--Kleiman (22.1); Milne §24. |
+| `def-adic-topology-on-a-module` | `def` | The powers (I^nM) form the distinguished neighbourhood basis of zero for the (I)-adic linear topology. | L/NA; Altman--Kleiman (22.1); Milne 24.1. |
 | `def-separated-and-complete-filtered-module` | `def` | A filtered module is separated when the intersection is zero and complete when its canonical map to the inverse limit of quotients is an isomorphism. | L/NA; Altman--Kleiman (22.1); Stacks Def. 10.96.2. |
 | `def-inverse-system-and-inverse-limit-of-modules` | `def` | Define a sequence-indexed inverse system and its inverse limit as the compatible-element submodule of the product. | L/NA; Altman--Kleiman (22.5); Stacks §10.87. |
 | `thm-universal-property-of-an-inverse-limit-of-modules` | `thm` | The compatible projections from the inverse limit are terminal among compatible cones. | L/A; Altman--Kleiman (22.5); Stacks §10.87. |
@@ -1108,6 +1108,7 @@ prime/maximal-ideal existence (AC); no derived-functor choice is hidden.
 | `thm-exactness-of-inverse-limits-under-mittag-leffler` | `thm` | A short exact sequence of inverse systems remains exact on inverse limits when the kernel system is Mittag--Leffler. | L/A; Altman--Kleiman (22.7); Stacks Lemma 10.86.4. |
 | `def-adic-completion-of-a-module` | `def` | The I-adic completion of M is the inverse limit of M/I^nM, with its canonical map. | L/NA; Altman--Kleiman (22.8); Milne 24.1. |
 | `thm-kernel-and-universal-property-of-adic-completion` | `thm` | The kernel of M→M-hat is the intersection of I^nM, and maps into separated complete I-adic modules satisfying continuity factor uniquely through completion. | L/A; Altman--Kleiman (22.3), (22.54); Stacks §10.96. |
+| `prop-units-in-an-adically-complete-ring` | `thm` | If a ring is complete for an ideal (I), then every element congruent to one modulo (I) is a unit; hence (I) lies in the Jacobson radical. | L/A; Altman--Kleiman Ex. 22.31; Stacks Lemma 10.96.6. |
 | `thm-completion-is-exact-on-finite-modules` | `thm` | I-adic completion is exact on finite modules over a Noetherian ring. | L/A; Altman--Kleiman (22.17)--(22.18); Milne Prop. 24.4. |
 | `thm-completion-as-extension-of-scalars` | `thm` | For finite M over Noetherian R, the canonical map M tensor_R R-hat→M-hat is an isomorphism. | L/A; Altman--Kleiman (22.19); Milne Prop. 24.5. |
 | `cor-completion-commutes-with-finite-quotients-and-submodules` | `cor` | Completion commutes with finite quotients, and completed submodules/ideal powers have the source-stated closures. | L/A; Altman--Kleiman (22.20)--(22.21); Stacks Lemma 10.97.1. |
@@ -1165,14 +1166,16 @@ Faithful-flat spectrum criteria inherit AC.
 | id | kind | statement | provenance and locator |
 |---|---|---|---|
 | `def-henselian-pair-and-henselian-local-ring` | `def` | Define a Henselian pair by unique lifting of coprime monic factorizations and a Henselian local ring by its maximal-ideal pair. | L/NA; Altman--Kleiman (22.73); Stacks Def. 10.153.1. |
+| `prop-uniqueness-of-hensel-factor-lifting` | `thm` | A lifted coprime monic factorisation with fixed reduced factors is unique. | L/A; Altman--Kleiman (22.73); Stacks Lemma 10.153.2. |
 | `thm-equivalent-elementary-forms-of-hensels-property` | `thm` | Coprime monic factor lifting is equivalent to simple-root lifting and the elementary finite-algebra idempotent form. | L/A; Altman--Kleiman (22.78); Stacks Lemma 10.153.3; étale forms omitted. |
 | `thm-hensels-lemma-for-complete-adic-pairs` | `thm` | Every separated complete pair is Henselian under the source's ideal hypotheses. | L/A; Altman--Kleiman (22.75); Stacks Lemma 10.153.9. |
-| `cor-complete-and-artinian-local-rings-are-henselian` | `cor` | Complete local rings and Artinian local rings are Henselian. | L/A; Stacks Lemmas 10.153.9--10.153.10. |
+| `cor-complete-local-rings-are-henselian` | `cor` | Every complete local ring is Henselian. | L/A; Stacks Lemma 10.153.9. |
+| `cor-artinian-local-rings-are-henselian` | `cor` | Every Artinian local ring is Henselian. | L/A; Stacks Lemma 10.153.10. |
 | `thm-henselian-property-passes-to-quotients` | `thm` | Quotients of Henselian local rings are Henselian. | L/A; Stacks §10.153. |
 | `def-equicharacteristic-local-ring-and-coefficient-field` | `def` | Define equicharacteristic and a coefficient field as an embedded field mapping isomorphically to the residue field. | L/NA; Altman--Kleiman (22.80)--(22.81); Stacks §10.160. |
 | `thm-existence-of-coefficient-fields-equicharacteristic` | `thm` | Every complete equicharacteristic Noetherian local ring contains a coefficient field. | L/A; Altman--Kleiman (22.81); Stacks §10.160. |
 | `thm-universal-property-of-multivariable-formal-power-series` | `thm` | Elements of the maximal ideal of a complete separated algebra define a unique continuous map from the corresponding formal power-series ring. | L/A; Altman--Kleiman (22.55); cites published formal-series operations. |
-| `thm-equicharacteristic-cohen-structure-theorem` | `thm` | A complete equicharacteristic Noetherian local ring is a quotient of a finite-variable formal power-series ring over a coefficient field. | L/A; Altman--Kleiman (22.57); Stacks Lemma 10.160.10. |
+| `thm-equicharacteristic-cohen-structure-theorem` | `thm` | A complete equicharacteristic Noetherian local ring is a quotient of a finite-variable formal power-series ring over a coefficient field. | L/A; Altman--Kleiman (22.57); equicharacteristic case of Stacks Thm. 10.160.8. |
 | `thm-complete-local-domain-finite-over-regular-power-series-subring` | `thm` | A complete equicharacteristic Noetherian local domain is finite over a formal power-series subring on a system of parameters. | L/A; Altman--Kleiman (22.60); Stacks Lemma 10.160.11. |
 | `rem-mixed-characteristic-cohen-structure-boundary` | `rem` | State the full mixed-characteristic theorem only as a non-load-bearing cited boundary and list the missing Cohen-ring/formal-smoothness machinery. | L/NA; Stacks Thm. 10.160.8 and Remark 10.160.9; `proved_here: false`, never a dependency target. |
 
@@ -1348,7 +1351,7 @@ proofs are ZF; constructing an unbounded resolution is not needed here.
 | `thm-localisation-of-cohen-macaulay-modules` | `thm` | Cohen--Macaulayness localises for finite modules over Noetherian rings. | L/A; Mustaţă 11.28--11.29; Stacks §10.103. |
 | `thm-parameters-and-regular-sequences-in-cohen-macaulay-modules` | `thm` | Every system of parameters of a Cohen--Macaulay local module is a regular sequence, and partial parameter sequences behave likewise. | L/A; Mustaţă 11.30, 11.39; Stacks §§10.103--10.104. |
 | `thm-polynomial-extension-of-cohen-macaulay-rings` | `thm` | Finite polynomial extensions of Cohen--Macaulay rings are Cohen--Macaulay in the global localisation sense. | L/A; Mustaţă 11.33; Stacks Lemma 10.104.7. |
-| `thm-depth-formula-for-flat-local-homomorphisms` | `thm` | Under the finite Noetherian local hypotheses, depth and dimension split into base and closed-fibre terms; hence Cohen--Macaulayness is equivalent on base/fibre/total space in the stated directions. | L/A; Huneke/Stone Thm. 24; Mustaţă 11.34--11.37. |
+| `thm-depth-formula-for-flat-local-homomorphisms` | `thm` | For a flat local map of Noetherian local rings, depth and dimension of the target are the sums of the corresponding invariants of the base and closed fibre; consequently the target is Cohen--Macaulay iff the base and closed fibre are. | L/A; Huneke/Stone Thm. 24; Mustaţă 11.34--11.37. |
 | `thm-completion-preserves-cohen-macaulayness` | `thm` | A Noetherian local ring/module is Cohen--Macaulay iff its completion is. | L/A; Huneke/Stone Cor. 27; faithful flatness from CA-13. |
 
 #### Proof strategy, well-definedness, and choice
@@ -1400,9 +1403,11 @@ steps inherit AC/DC exactly from CA-5.
 | `thm-auslander-buchsbaum-formula` | `thm` | For a nonzero finite module of finite projective dimension over a Noetherian local ring, depth(M)+pd(M)=depth(R). | L/A; Stacks Prop. 10.111.1; Huneke/Stone Thm. 16. |
 | `thm-auslander-buchsbaum-serre-regularity-criterion` | `thm` | A Noetherian local ring is regular iff its residue field has finite projective dimension, equivalently iff the ring has finite global dimension; then global dimension equals dim R. | L/A; Stacks Prop. 10.110.5; Mustaţă 12.33. |
 | `thm-localisation-and-polynomial-extension-of-regular-rings` | `thm` | Localisations and finite polynomial extensions of regular Noetherian rings are regular. | L/A; Mustaţă 12.34--12.36; Stacks §10.110. |
+| `thm-completion-preserves-regular-local-rings` | `thm` | A Noetherian local ring is regular iff its maximal-adic completion is regular. | L/A; Altman--Kleiman Ex. 22.62; Stacks §§10.97, 10.110. |
 | `thm-regular-local-rings-are-normal` | `thm` | Every regular local ring is integrally closed. | L/A; Mustaţă 12.38; do not assert UFD without the owed factorisation proof. |
-| `def-serre-r-k-and-s-k-conditions` | `def` | Define R_k by regularity at primes of height at most k and S_k by depth at least min(k,dim) at every prime. | L/NA; Altman--Kleiman (23.20); Stacks normal-rings sections. |
-| `thm-serre-normality-criterion` | `thm` | A Noetherian reduced ring is normal iff it satisfies R_1 and S_2, with normality interpreted componentwise at minimal primes. | L/A; Altman--Kleiman (23.20); Stacks §10.157. |
+| `def-normal-noetherian-ring` | `def` | A Noetherian ring is normal when every prime localisation is an integrally closed domain. | L/NA; Altman--Kleiman §23 before Thm. 23.20; Stacks §10.37. |
+| `def-serre-r-k-and-s-k-conditions` | `def` | Define R_k by regularity at primes of height at most k and S_k by depth at least min(k,dim) at every prime. | L/NA; Altman--Kleiman Thm. 23.20 and preceding definitions; Stacks §10.157. |
+| `thm-serre-normality-criterion` | `thm` | A Noetherian ring is normal iff it satisfies (R_1) and (S_2). | L/A; Altman--Kleiman Thm. 23.20; Stacks §10.157. |
 
 #### Proof strategy, well-definedness, and choice
 
@@ -1472,7 +1477,7 @@ foundational optimality claim.
 |---|---|
 | **ZF** | finite polynomial/graded arguments; module-localisation construction and exactness; finite denominator clearing; Nakayama after the Jacobson unit criterion; finite integral-extension calculations; Noether normalisation for a fixed finite presentation; Zariski's lemma; valuation/DVR arithmetic; fractional-ideal and divisor-group calculations; Rees/Artin--Rees; Hilbert--Serre; finite-stage completion; equational/ideal flatness criteria; Newton simple-root lifting once initial data are supplied; finite Koszul calculations; Auslander--Buchsbaum given a finite resolution |
 | **DC sufficient** | translating the sibling finite-generation definition of Noetherianity into maximal-condition/Noetherian induction; primary-decomposition and associated-prime arguments that use that induction; DCC/minimum-condition Artinian arguments; successive compatible lifts in countable Mittag--Leffler systems; recursively constructing an unbounded minimal resolution when HA uses that route |
-| **AC (the library's declared granularity)** | the published maximal-ideal theorem; radical as intersection of primes; local tests quantified through a chosen maximal ideal; lying over/going up and the chosen going-down route; Nullstellensatz forms; existence of arbitrary transcendence bases; dominating valuation rings; faithfully flat spectral criteria; coefficient-field existence; any algebraic-closure dependency inherited from the Galois block |
+| **AC (the library's declared granularity)** | the published maximal-ideal theorem; Cohen's criterion by maximal counterexample; radical as intersection of primes; local tests quantified through a chosen maximal ideal; lying over/going up and the chosen going-down route; Nullstellensatz forms; existence of arbitrary transcendence bases; faithfully flat spectral criteria; coefficient-field existence; any algebraic-closure dependency inherited from the Galois block |
 | **Countable choice alone** | no result is assigned merely countable choice; whenever a countable recursive construction is noncanonical, this scaffold records DC instead |
 
 ### 7.3 Amendments owed to other scaffolds
@@ -1536,8 +1541,11 @@ the result; “published” names an immutable or earlier planned dependency;
 ### 8.1 Altman--Kleiman, *A Term of Commutative Algebra*
 
 Full text: <https://web.mit.edu/18.705/www/13Ed.pdf> (2013, 266 pages).
-Read §§9, 12--26, with §10.19--10.31 and §11 used for the integrality and
-published-localisation seams.
+Read §9, §§12--22, selected results in §23, §§24--25, and selected §26
+valuation-ring results, with §10.19--10.31 and §11 used for the integrality and
+published-localisation seams.  A heading is harvested below only when its
+numbered range was actually read; no claim of complete §23 or §26 coverage is
+made.
 
 #### §9, “Flatness,” (9.1)--(9.28), pp. 50--60
 
@@ -1664,24 +1672,569 @@ published-localisation seams.
   first and last **included** as boundary examples; arithmetic form
   **out-of-scope** for number theory; integral-algebra clause **inline** CA-7.
 
-#### §§16--19, chain conditions through length, pp. 96--121
+#### §16, chain conditions, (16.1)--(16.30), pp. 96--107
 
-- §16 (16.1)--(16.11), Noetherian/Artinian module and chain-condition basics —
-  **planned-published** on `chain-conditions-and-semisimple-modules`; CA-1
-  cites them.  Hilbert basis (16.12), its finite-algebra corollaries
-  (16.13)--(16.20), and Artin--Tate (16.21) — **included/inline** CA-1.
-- §17, associated primes: definition/basic support (17.1)--(17.11) —
-  **included/inline** CA-5; maximal annihilator and existence (17.12)--(17.13)
-  — **included**; localisation/zero-divisors (17.14)--(17.19) — **included**;
-  prime filtration and finiteness (17.20)--(17.21) — **included/inline** in
-  `thm-finiteness-of-associated-primes`.  The arbitrary-set Bourbaki result
-  (17.9) is **deferred** because it uses full choice and is not required.
-- §18, primary decomposition: definitions and characterisations
-  (18.1)--(18.10), decompositions/minimality/localisation (18.11)--(18.19),
-  first uniqueness (18.20), Lasker--Noether (18.21), refinements
-  (18.22)--(18.24), second uniqueness (18.25) — every heading is
-  **included or inline** in CA-5; exercises beyond (18.25) are companions.
-- §19, length: definition/Jordan--Hölder/additivity/finite-length criterion
-  (19.1)--(19.6) — **planned-published** on the abstract-algebra chain page or
-  **included** CA-4 additivity; remaining local/filtration length results
-  (19.7 onward in the read chapter) — **inline** CA-4, CA-8 and CA-11.
+- (16.1)--(16.6), Noetherian/Artinian definitions, exact sequences and finite
+  sums — **planned-published** on `chain-conditions-and-semisimple-modules`.
+- (16.7), convention comparison — **inline** in
+  `rem-noetherian-conventions-and-choice`.
+- (16.8)--(16.9), finite presentations and quotient/localisation permanence —
+  **inline** in the corresponding CA-1 items.
+- (16.10), Cohen's criterion — **included** in
+  `thm-cohen-noetherian-criterion`; (16.11), its maximal-bad-ideal lemma —
+  **inline** there.
+- (16.12), Hilbert basis — **split** among the two leading-coefficient lemmas
+  and `thm-hilbert-basis-theorem`.
+- (16.13), finite-variable polynomial rings — **included** in its CA-1
+  corollary.
+- (16.14), finite-type Noetherian algebras — **included** in its CA-1
+  corollary.
+- (16.15)--(16.18), permanence, presentations and finite modules — **inline**
+  in CA-1's localisation/quotient, finite-presentation and module-finite items.
+- (16.19), finite module algebras — **included** in
+  `thm-module-finite-algebra-over-noetherian-ring-is-noetherian`.
+- (16.20), finite Hom — **included** in
+  `cor-hom-of-finite-modules-is-finite-over-a-noetherian-ring`.
+- (16.21), Artin--Tate — **included** in `thm-artin-tate-lemma`.
+- (16.22)--(16.23), applications and non-Noetherian/subring boundaries —
+  **included** on CA-1B.
+- (16.24), graded Noetherianity — **inline** in Hilbert--Serre on CA-11.
+- (16.25), unrestricted formal-series Noetherianity — **deferred** to the
+  published formal-series/completion enrichment; not load-bearing here.
+- (16.26)--(16.30), chain, infinite-polynomial, finite-algebra and Artin--Tate
+  exercises — **included/inline** on CA-1B.
+
+#### §17, associated primes, (17.1)--(17.21), pp. 108--111
+
+- (17.1)--(17.2), associated primes/annihilators — **included/inline** in
+  `def-associated-prime-of-a-module`.
+- (17.3)--(17.4), support and elementary exact-sequence facts — **inline** in
+  the support comparison and short-exact theorem.
+- (17.5)--(17.6), the two exact-sequence inclusions — **included** in
+  `thm-associated-primes-in-a-short-exact-sequence` without finite hypotheses.
+- (17.7)--(17.8), cyclic quotients and minimal support — **inline** in
+  `thm-minimal-support-primes-are-associated`.
+- (17.9), unrestricted Bourbaki assassin separation — **deferred**: it uses
+  full choice and is unnecessary for finite Noetherian modules.
+- (17.10)--(17.11), minimal support/associated comparison — **included/inline**
+  in CA-5 and the finite-minimal-prime theorem.
+- (17.12), maximal annihilators/zero divisors — **included** in the two named
+  CA-5 results.
+- (17.13), existence — **included** in
+  `thm-existence-of-associated-primes`.
+- (17.14)--(17.16), localisation — **included/inline** in
+  `thm-associated-primes-localise` and CA-5B.
+- (17.17)--(17.19), zero divisors and support refinements — **included/inline**
+  in the zero-divisor theorem and companions.
+- (17.20), prime filtration — **inline** in the finiteness proof; (17.21),
+  finiteness — **included** in `thm-finiteness-of-associated-primes`.
+
+#### §18, primary decomposition, (18.1)--(18.31), pp. 112--117
+
+- (18.1)--(18.2), singleton-associated-prime definition and comparison —
+  **inline** as the alternate convention beside
+  `def-primary-submodule-and-primary-ideal`.
+- (18.3)--(18.4), prime radical and (mathfrak p)-primary notation —
+  **included/inline** in the radical theorem.
+- (18.5)--(18.9), injectivity/nilpotence/Ass characterisations — **included**
+  in `thm-primary-submodule-characterisations`.
+- (18.10), same-radical intersections — **included** in the named lemma.
+- (18.11)--(18.16), decomposition, irredundancy, distinct radicals and
+  isolated/embedded components — **included** in the decomposition definition.
+- (18.17)--(18.19), localisation and contraction of components —
+  **included/inline** in isolated-component uniqueness.
+- (18.20), first uniqueness — **included** in its named theorem.
+- (18.21), existence — **split** into the maximal-nondecomposable lemma and
+  Lasker--Noether theorem.
+- (18.22)--(18.24), refinements — **inline** in existence and uniqueness.
+- (18.25), second uniqueness — **included** in its named theorem.
+- (18.26)--(18.31), monomial, integer, zero-divisor, cyclic, nonunique embedded
+  and localisation exercises — **included**, respectively, on CA-5B.
+
+#### §19, length, (19.1)--(19.18), pp. 118--120
+
+- (19.1)--(19.3), composition series, refinement and well-defined length —
+  **planned-published** on `chain-conditions-and-semisimple-modules`; if that
+  live page omits length, the future build must move these definitions to CA-4.
+- (19.4), exact-sequence filtration — **inline** in additivity; (19.5),
+  additivity — **included** in its named theorem.
+- (19.6), finite-length criterion — **included** in
+  `thm-finite-length-module-characterisation`.
+- (19.7)--(19.13), local finite-length, support and localisation refinements —
+  **inline** in CA-4's local/product structure and length results.
+- (19.14)--(19.16), DVR/Hilbert--Samuel length cases — **inline** in CA-8 and
+  CA-11.
+- (19.17)--(19.18), finite/local length computations — **included** on CA-4B
+  and CA-11B.
+
+#### §20, graded objects and Artin--Rees, (20.1)--(20.20), pp. 121--129
+
+- (20.1)--(20.4), graded rings/modules, homogeneous pieces and shifts —
+  **included/inline** in `def-graded-ring-and-graded-module`.
+- (20.5), Hilbert function/series — **included** in its definition.
+- (20.6)--(20.7), finite differences and denominator induction — **inline** in
+  Hilbert--Serre.
+- (20.8)--(20.10), rational series and eventual polynomiality — **included**
+  in `thm-hilbert-serre-theorem`, with standard degree-one hypotheses explicit.
+- (20.11), degree/leading coefficient — **inline** in Hilbert--Samuel dimension.
+- (20.12), graded examples — **included** on CA-11B.
+- (20.13), associated graded objects — **included** in their definition.
+- (20.14)--(20.16), filtration/Rees algebra/Rees module — **included/inline** in
+  `def-rees-algebra-and-rees-module`.
+- (20.17), stable filtrations and Rees finiteness — **included** in the named
+  lemma.
+- (20.18), Artin--Rees and induced topology — **included** in the theorem and
+  its corollary.
+- (20.19)--(20.20), Krull intersection and Jacobson/local consequence —
+  **included/inline** in `thm-krull-intersection-theorem` and CA-11B.
+
+#### §21, dimension and Hilbert--Samuel theory, (21.1)--(21.19), pp. 130--136
+
+- (21.1), Hilbert--Samuel function, polynomial and multiplicity —
+  **included** in the corresponding CA-11 definition/theorem/definition.
+- (21.2), principal ideal theorem — **included** on CA-10, using Milne's
+  independent elementary route to preserve page order.
+- (21.3), systems of parameters — **included** in the CA-10 definition.
+- (21.4), degree/dimension/parameter theorem — **included** in CA-11's
+  Hilbert--Samuel dimension and module-parameter theorems, after Artin--Rees.
+- (21.5)--(21.8), radical generators, parameter drop, dimension induction and
+  local/global comparison — **inline** in CA-10/CA-11.
+- (21.9), polynomial dimension — **included** in the CA-10 theorem.
+- (21.10), field-polynomial dimension — **included** in its corollary.
+- (21.11)--(21.12), affine lower/upper bounds — **inline** in the affine-domain
+  dimension theorem.
+- (21.13), affine dimension/transcendence degree — **included** CA-10.
+- (21.14), affine height formula — **inline** in its named CA-10 theorem.
+- (21.15), equal-length affine chains — **included** in its corollary.
+- (21.16)--(21.18), parameter, affine and Hilbert--Samuel computations —
+  **included** on CA-10B/CA-11B.
+- (21.19), noncatenary boundary — **included** in `rem-catenarity-boundary`;
+  excellent/catenary-ring theory is out of scope.
+
+#### §22, “Completion,” (22.1)--(22.81), pp. 137--176
+
+- (22.1), filtration topology, Cauchy sequences, separatedness, completeness
+  and completion — **included** in `def-filtration-and-adic-filtration`,
+  `def-adic-topology-on-a-module`,
+  `def-separated-and-complete-filtered-module` and
+  `def-adic-completion-of-a-module`.
+- (22.2), formal power series as completion — **already-published** on
+  `formal-power-series`; its application is CA-18B.
+- (22.3)--(22.4), kernel, separated quotient and functoriality — **inline** in
+  `thm-kernel-and-universal-property-of-adic-completion`.
+- (22.5), inverse systems/limits — **included** in
+  `def-inverse-system-and-inverse-limit-of-modules` and its universal-property
+  theorem.
+- (22.6), left exactness — **included** in
+  `thm-inverse-limits-are-left-exact`.
+- (22.7), Mittag--Leffler exactness — **included** in its definition and
+  `thm-exactness-of-inverse-limits-under-mittag-leffler`.
+- (22.8), Cauchy completion equals inverse-limit completion — **inline** in
+  `def-adic-completion-of-a-module`.
+- (22.9), inverse limits need not preserve surjections — **included** on
+  CA-13B as `ex-completion-not-exact-without-finiteness`.
+- (22.10), the (arprojlim^1) obstruction — **deferred** to homological
+  algebra; ordinary Mittag--Leffler exactness is sufficient here.
+- (22.11)--(22.13), technical exactness and canonical-map lemmas — **inline**
+  in `thm-completion-is-exact-on-finite-modules` and the completion definition.
+- (22.14), local/semilocal behaviour — **inline** in
+  `thm-completion-of-a-noetherian-local-ring` and **included** on CA-13B.
+- (22.15), extension of maps — **inline** in the completion universal property.
+- (22.16)--(22.17), associated graded/induced adic topology — **inline** in
+  `cor-induced-and-intrinsic-adic-filtrations-are-equivalent` and completion
+  exactness.
+- (22.18), exactness of completion — **included** in
+  `thm-completion-is-exact-on-finite-modules`.
+- (22.19), tensor comparison — **included** in
+  `thm-completion-as-extension-of-scalars`.
+- (22.20)--(22.21), completed submodules, quotients, powers and equivalent
+  filtrations — **included/inline** in
+  `cor-completion-commutes-with-finite-quotients-and-submodules`.
+- (22.22)--(22.23), completed flat modules and associated-graded criteria —
+  **inline** in completion flatness/exactness.
+- (22.24)--(22.26), finite completeness and Noetherianity — **included** in
+  `thm-finite-modules-over-complete-noetherian-rings-are-complete` and
+  `thm-noetherianity-of-adic-completion`.
+- (22.27), formal-series Noetherian/local/domain/regular properties — the
+  construction is **already-published**; regularity is **included** on CA-18B.
+- (22.28)--(22.29), formal-series and 2-adic computations — first
+  **already-published**, second **included** on CA-13B.
+- (22.30), Mittag--Leffler and the derived obstruction — ordinary part
+  **inline** in the ML theorem; derived notation **deferred** to homological
+  algebra.
+- (22.31), complete-ring units — **included** in
+  `prop-units-in-an-adically-complete-ring`.
+- (22.32)--(22.34), density, closures and closed maximals — **inline** in the
+  completion universal/local theorems; closures are **included** on CA-13B.
+- (22.35)--(22.37), Jacobson/Zariski-ring criteria, faithful completion and
+  support form of Krull intersection — **included/inline** in
+  `thm-faithful-flatness-of-jacobson-adic-completion` and
+  `thm-krull-intersection-theorem`.
+- (22.38), semilocal product completion — **included** on CA-13B.
+- (22.39)--(22.40), associated-graded domain and normality criteria —
+  **deferred** to the regular/normal local-ring extension; not used by the
+  completion spine.
+- (22.41), length under completion — **inline** in
+  `thm-completion-preserves-dimension-and-hilbert-samuel-data`.
+- (22.42)--(22.43), iterated completions — **included** on CA-13B.
+- (22.44), formal-series topology — **already-published** on
+  `formal-power-series`.
+- (22.45), non-zero-divisors under completion — **inline** in completion
+  preservation of Cohen--Macaulayness/regularity.
+- (22.46), completed domain may cease to be a domain — **included** on CA-13B.
+- (22.47), finite products — **inline** in the inverse-limit construction.
+- (22.48), nonexact completion without finiteness — **included** on CA-13B.
+- (22.49), nonzero derived inverse limit — **deferred** to homological algebra.
+- (22.50)--(22.53), annihilators, quotient/submodule correspondence and
+  support/maximals after completion — **inline** in the tensor, quotient and
+  faithful-flat completion items.
+- (22.54), universal property — **included** in
+  `thm-kernel-and-universal-property-of-adic-completion`.
+- (22.55)--(22.58), formal-series universal property and Cohen structure I/II
+  — **included/inline** in CA-14's formal-series universal property,
+  equicharacteristic Cohen theorem and regular power-series corollary.
+- (22.59), automorphisms from parameter changes — **out-of-scope**: a
+  nonessential coordinate-change exercise.
+- (22.60), finite parameter power-series subring — **included** in
+  `thm-complete-local-domain-finite-over-regular-power-series-subring`.
+- (22.61)--(22.62), preservation of parameters, dimension, multiplicity and
+  regularity — **included/inline** in CA-13's Hilbert--Samuel preservation and
+  CA-18's regularity-preservation items.
+- (22.63), infinitesimal lifting characterisation of regularity — **deferred**:
+  formal smoothness is absent.
+- (22.64)--(22.66), regularity descent and formal-series/completed flatness —
+  **inline** in CA-12, CA-13 and CA-18; formal-series construction is
+  **already-published**.
+- (22.67), analytic local maps — **out-of-scope** for this algebraic spine.
+- (22.68), principal ideals/non-zero-divisors under completion — **inline** in
+  CA-18 completion preservation.
+- (22.69), complete Nakayama — **included** in
+  `thm-complete-nakayama-lemma`.
+- (22.70), completed quasi-finite algebras — **deferred** to Zariski-main
+  applications in algebraic geometry.
+- (22.71), non-Noetherian pathology — **included** as a CA-13 boundary
+  example.
+- (22.72), associated-graded freeness criterion — **inline** in the finite
+  flat/local free theorem.
+- (22.73), Henselian pairs, uniqueness and quotients — **included** in CA-14's
+  Henselian definition, uniqueness and quotient items.
+- (22.74), complete examples and (mathbb Z_{(p)}) counterexample —
+  **included** on CA-14B.
+- (22.75)--(22.76), Hensel lemma and root/factor consequences — **included**
+  in CA-14's complete-pair and equivalent-form items.
+- (22.77)--(22.79), finite/integral algebra formulations — elementary
+  quotient/factor clauses **inline** in CA-14; étale/quasi-finite forms
+  **deferred** to algebraic geometry.
+- (22.80)--(22.81), equicharacteristic setup and coefficient fields —
+  **included** in CA-14's equicharacteristic/coefficient-field definition and
+  existence theorem.
+
+#### §23, “Discrete Valuation Rings,” selected headings
+
+- (23.1), valuations, DVRs, uniformisers, normal forms and ideals —
+  **included** across CA-8's corresponding definitions and theorems.
+- Ex. 23.2, (k[[t]]) and the (p)-adic example — first
+  **already-published**/companion; second **included** on CA-8B.
+- Lem. 23.3, principal maximal ideal plus separatedness implies DVR —
+  **inline** in `thm-equivalent-characterisations-of-a-dvr`.
+- Thm. 23.10, DVR characterisations — **included** in that theorem.
+- Thm. 23.19, normal domain as intersection of height-one localisations —
+  **deferred** to a divisor-theory enrichment after CA-10; it is not needed for
+  the Dedekind spine.
+- Thm. 23.20, Serre (R_1+S_2) normality — **included** after homological
+  algebra in CA-18.
+
+#### §24, “Dedekind Domains,” (24.1)--(24.21), pp. 148--151
+
+- Def. 24.1 — **included** in `def-dedekind-domain`.
+- Ex. 24.2, PIDs/DVRs — **included** on CA-9B.
+- Ex. 24.3, quadratic integer rings — **out-of-scope** for number theory.
+- Ex. 24.4, nonsingular affine curves — **deferred** to algebraic geometry.
+- Exs. 24.5--24.6 and Prop. 24.7, dimension/localisation/local-DVR criterion —
+  **included/inline** in CA-9's localisation and characterisation theorems.
+- Ex. 24.8, distributive ideal lattice — **included** as a cheap CA-9B
+  companion, not load-bearing.
+- Prop. 24.9, dimension-one primary factorisation — **inline** in unique ideal
+  factorisation.
+- Thm. 24.10, classical ideal theory — **included** in
+  `thm-unique-factorisation-of-ideals-in-dedekind-domains`.
+- Cor. 24.11, primary ideals are radical powers — **inline** in that theorem.
+- Ex. 24.12, semilocal Dedekind domains are PIDs — **included** on CA-9B.
+- Ex. 24.13, quotient ideals principal/ideals two-generated — two-generator
+  part **included**; quotient part **inline** as a companion.
+- Lem. 24.14, Artin independence — **inline** in the source trace proof; the
+  scaffold uses the intrinsic trace-pairing route.
+- (24.15), trace pairing — **included/inline** in
+  `lem-trace-pairing-for-a-finite-separable-extension`.
+- Lem. 24.16--Thm. 24.17, traces of integral elements and finite integral
+  closure — **included/inline** in the finite-closure theorem.
+- Cor. 24.18, closure of a Dedekind domain is Dedekind — **included**.
+- Thm. 24.19, rings of algebraic integers — **out-of-scope** for number theory.
+- Thm. 24.20, affine characteristic-zero normalisation finiteness —
+  **deferred** to a later affine normalisation corollary; not needed here.
+- (24.21), inseparable/Akizuki pathology — **included** as a boundary remark:
+  separability is essential to the stated module-finiteness theorem.
+
+#### §25, “Fractional Ideals,” (25.1)--(25.22), pp. 152--156
+
+- Def. 25.1 — **included** in the fractional-ideal/product/colon definitions.
+- Ex. 25.2, principal modules and tensor/product/colon/Hom maps — **inline** in
+  well-definedness and the rank-one-projective theorem.
+- Prop. 25.3, boundedness/finite generation — **inline** in
+  `def-fractional-ideal` and its operations lemma.
+- Lem. 25.4, localisation of products/colons — **inline** in the local
+  invertibility criterion.
+- Def. 25.5--Ex. 25.6, locally principal ideals and tensor/product comparison
+  — **inline** in `thm-invertible-ideal-characterisations`.
+- (25.7)--Prop. 25.8, invertibility and the unique colon inverse —
+  **included/inline** in `def-invertible-fractional-ideal` and its proof
+  obligations.
+- Ex. 25.9, quotients by invertibles/product inverses — **inline** in the class
+  group construction.
+- Lemmas 25.10--25.11, finite/local principal criteria — **inline** in the
+  invertible-ideal characterisation.
+- Ex. 25.12, UFD invertibles are principal — **included** on CA-9B, conditional
+  on the owed UFD enrichment.
+- Thm. 25.13, invertible iff finite locally principal — **included**.
+- Thm. 25.14, signed prime factorisation — **included** in CA-9's valuation and
+  fractional ideal factorisation items.
+- Ex. 25.15, PID iff Dedekind and UFD — **inline** in the class-group
+  characterisation; its UFD clause consumes the owed amendment.
+- (25.16)--Prop. 25.19, invertible modules/local free rank one —
+  **included/inline** in the rank-one projective theorem.
+- Thm. 25.20, Dedekind/field iff nonzero ideals are invertible/projective/finite
+  flat — invertible/projective clauses **included** CA-9; flat clause
+  **included** CA-12.
+- Thm. 25.21, torsion-free modules are flat — **included** at the CA-9/CA-12
+  boundary with arbitrary-rank choice flagged.
+- (25.22), Picard group — **included** in
+  `thm-ideal-class-group-is-the-picard-group`.
+
+### 8.2 Milne, *A Primer of Commutative Algebra*
+
+Full text: <https://www.jmilne.org/math/xnotes/CA.pdf> (v4.03, 2020, 113
+pages).  The exact ranges read were §3, Props./Thms. 3.1--3.16; §5,
+5.10--5.17; §§6--8; §11; §§13--16; §§18--21; and §24.  Blank promised
+chapters §§25 and 28 are not evidence for any item.
+
+#### §3, “Noetherian Rings,” (3.1)--(3.16), pp. 9--14
+
+- Props. 3.1--3.3, chain-condition equivalences and exact sequences —
+  **planned-published** on the abstract-algebra chain page.
+- Props. 3.4--3.5, finite modules/permanence — **included/inline** CA-1.
+- (3.6), examples — **included** CA-1B.
+- Thm. 3.7, Hilbert basis — **included** with its polynomial/finite-type
+  corollaries CA-1.
+- Cor. 3.8, finite presentation — **included** in the corresponding CA-1
+  corollary.
+- Lem. 3.9, Nakayama — **included** CA-2; (3.10)--(3.13), determinant/generator
+  consequences — **inline** there, citing the planned determinant trick.
+- Def. 3.14, dimension/height — **included** CA-3.
+- (3.15), Krull-intersection preliminary — **inline**; Thm. 3.16 —
+  **included** CA-11.
+
+#### §5, module localisation, (5.10)--(5.17), pp. 21--23
+
+- Prop. 5.10, universal property — **included** CA-2.
+- Prop. 5.11, exactness — **included** CA-2.
+- Ex. 5.12, principal localisation — **included** on CA-2B.
+- Prop. 5.13, finite vanishing spreads — **included** in
+  `cor-finite-module-locally-zero-near-a-prime`.
+- Prop. 5.14--Cor. 5.15, product/local zero test — **inline/included** in
+  CA-2's zero/map theorem.
+- Prop. 5.16, exactness at maximals — **included** in the local exactness
+  theorem.
+- Cor. 5.17, local injective/surjective/isomorphism tests — **included** in the
+  local map theorem.
+
+#### §6, integral dependence, (6.1)--(6.16), pp. 24--28
+
+- Prop. 6.1, determinant trick — **planned-published** in abstract algebra.
+- Prop. 6.2--Cor. 6.3, one/finitely many integral generators — **included** in
+  CA-6's finite-module characterisations.
+- Prop. 6.4, transitivity — **included** CA-6.
+- Thm. 6.5, integral elements form a subring — **planned-published** in
+  abstract algebra.
+- Def. 6.6, integral closure — **included** CA-6.
+- Prop. 6.7--Cor. 6.8, clearing denominators/fraction field — **inline** in the
+  integral-closure proof.
+- Def. 6.9, normal domain — **included** in CA-6's closure definition.
+- Prop. 6.10, UFDs are normal — **deferred** to the owed PID/UFD enrichment.
+- Prop. 6.11--Lem. 6.13, minimal polynomials/monic factors — **included/inline**
+  in CA-6's coefficient lemma.
+- Prop. 6.14--Cor. 6.15, integral closure/normality localise — **included** in
+  CA-6's localisation theorem.
+- Prop. 6.16, normality is prime/maximal-local — **included** in
+  `thm-normality-is-local-for-domains`.
+
+#### §7, Cohen--Seidenberg theorems, (7.1)--(7.12), pp. 29--32
+
+- Prop. 7.1, field criterion — **included** CA-6.
+- Rem. 7.2--Cor. 7.3, units/maximality — **inline/included** in maximal-ideal
+  contraction.
+- Cor. 7.4, incomparability — **included** CA-6.
+- Prop. 7.5, lying over — **included** CA-6.
+- Thm. 7.6--Cor. 7.7, going up/chains — **included/inline** CA-6.
+- Aside 7.8, failure without integrality — **included** CA-6B.
+- unnumbered definition and Prop. 7.9, integrality over an ideal — **inline**
+  in going down.
+- Prop. 7.10, coefficients in a radical — **inline** there.
+- Thm. 7.11--Cor. 7.12, going down/chains — **included/inline** CA-6.
+
+#### §8, Noether normalisation, (8.1)--(8.5), pp. 33--34
+
+- Thm. 8.1, normalisation — **included** CA-7.
+- Lemmas 8.2--8.3, separated-power elimination — **inline** in the
+  change-of-variables lemma.
+- Rem. 8.4, infinite-field linear substitutions — **inline** there.
+- Aside 8.5, flat normalisation/CM — **deferred** to the post-homological
+  Cohen--Macaulay block.
+
+#### §11, “Flatness,” (11.1)--(11.22), pp. 43--50
+
+- (11.1), tensor right exactness — **planned-published** on
+  `tensor-products-of-modules` and **inline** in the ideal criterion.
+- (11.2), flat/faithfully flat definitions — flatness **planned-published**;
+  faithful flatness **included** CA-12.
+- (11.3), sums, summands and free modules — **included/inline** in CA-12 and
+  the planned tensor page.
+- (11.4)--(11.5), quotient cautions and localisations — **included** in CA-12's
+  idempotent quotient theorem/localisation theorem and companions.
+- (11.6), direct limits/Lazard — **deferred**: filtered-colimit category
+  machinery is unavailable and this is not load-bearing.
+- (11.7)--(11.8), faithful detection/nonzero-module criterion — **included/
+  inline** in CA-12's detection and characterisation theorems.
+- (11.9)--(11.10), descent of flatness and finite generation — **included** in
+  `thm-faithfully-flat-descent-of-flatness`.
+- (11.11), Amitsur equaliser — **deferred** to descent/Amitsur complexes.
+- (11.12), faithful injectivity/equaliser — injectivity **included** CA-12;
+  full equaliser **deferred** with (11.11).
+- (11.13)--(11.15), base change and localisation — **included/inline** CA-12.
+- (11.16)--(11.17), local criteria at maximal ideals — **included/inline** in
+  `thm-flatness-is-local`.
+- (11.18)--(11.19), maximal-ideal and spectrum criteria for faithful flatness —
+  **included** in the characterisation theorem.
+- (11.20), flat going down — **included** CA-12.
+- (11.21), generic flatness — **deferred** to finite-type algebraic families;
+  not needed for foundational flatness.
+- (11.22), finite principal-open faithful cover — **included** on CA-12B.
+
+#### §13, Nullstellensatz, (13.1)--(13.11), pp. 58--61
+
+- Thm. 13.1, Zariski's lemma — **included** CA-7.
+- Cors. 13.2--13.3, residue/intermediate fields — **inline** in CA-7's weak
+  and affine-algebra point forms.
+- Rem. 13.4, closed points/(k)-points — **inline** there.
+- Aside 13.5, uncountable-field shortcut — **out-of-scope** as a nonuniform
+  cardinality-only proof; the general proof is included.
+- Lem. 13.6--Prop. 13.7, one-polynomial localisation obstruction — **inline**
+  in Rabinowitsch/generalised Nullstellensatz.
+- Thm. 13.8, common zero in an algebraic closure — **included** in the weak
+  form.
+- Cor. 13.9, algebraically closed point maximals — **included** CA-7.
+- Thm. 13.10, strong/Rabinowitsch form — **included** in the trick and strong
+  theorem.
+- Prop. 13.11, radical as intersection of affine maximals — **included** in
+  `thm-affine-algebra-nullstellensatz`.
+
+#### §14, “The Spectrum of a Ring,” pp. 63--70
+
+- Prop. 14.1, (V)-identities — algebraic part **included** CA-3; topology
+  **included** CA-15.
+- Lem. 14.2--Prop. 14.3, idempotents and decompositions — **included** CA-15.
+- Prop. 14.4, radical ideals/closed sets, closed points, compactness and
+  Noetherian spectra — **included/inline** CA-15.
+- Def. 14.5--Prop. 14.6, irreducibility/prime closed sets — **included** CA-15.
+- Prop. 14.7, closure/generic-point refinement — **inline** CA-15.
+- Prop. 14.8--Cor. 14.9, finite unique irreducible components/minimal primes —
+  **included** CA-15.
+- Cor. 14.10, connected components — **included/inline** CA-15.
+- Any scheme/sheaf continuation — **out-of-scope** for algebraic geometry.
+
+#### §15, Jacobson rings
+
+- Def. 15.1 and the chapter's equivalent formulations — **included/inline** in
+  `def-jacobson-ring`.
+- Finite-type/Jacobson and closed-point results in the read section —
+  **included/inline** in CA-7 and CA-15; arithmetic Jacobson applications are
+  **out-of-scope** for number theory.
+
+#### §16, “Artinian Rings,” (16.1)--(16.8), pp. 75--77
+
+- Prop. 16.1, primes maximal — **included**; its domain argument is the CA-4
+  field lemma.
+- Cor. 16.2, nilradical equals Jacobson radical — **inline** CA-4.
+- Prop. 16.3, finitely many maximals — **included** CA-4.
+- Prop. 16.4, nilradical nilpotent — **included** CA-4.
+- Lem. 16.5, product/maximal-zero criterion — **inline** in the product proof.
+- Thm. 16.6, Artinian iff Noetherian of dimension zero — **included** in the
+  Artinian/prime characterisations.
+- Thm. 16.7, finite product of localisations — **included** CA-4.
+- Prop. 16.8, principal-maximal local case — **inline** in CA-4/CA-8.
+
+#### §18, affine dimension, pp. 84--89
+
+- (18.1)--(18.4), normalisation-to-chain preliminaries — **inline** CA-10.
+- Thm. 18.5, affine dimension/transcendence degree — **included** CA-10.
+- (18.6)--(18.7), height induction — **inline** in the affine dimension
+  formula.
+- Thm. 18.8, height/transcendence formula and equal affine chains —
+  **included** in the two corresponding CA-10 items.  No general catenarity
+  converse is inferred.
+
+#### §19, “Primary Decomposition,” (19.1)--(19.19), pp. 89--93
+
+- Prop. 19.1, maximal annihilator/existence — **included** CA-5.
+- (19.2), basic support facts — **inline** CA-5.
+- Props. 19.3--19.5, finiteness, localisation, zero divisors — **included**
+  CA-5.
+- Props. 19.6--19.8, primary radicals/intersections/characterisations —
+  **included** CA-5.
+- (19.9), minimal-decomposition reduction — **inline**.
+- Thms. 19.10--19.11, uniqueness and Lasker--Noether — **included** CA-5.
+- (19.12)--(19.19), integer/monomial/localisation/nonuniqueness exercises —
+  **included/inline** on CA-5B; geometric interpretations are **deferred** to
+  algebraic geometry.
+
+#### §20, Dedekind domains, (20.1)--(20.17), pp. 93--96
+
+- Ex. 20.1, (mathbb Z_{(p)}) — **included** CA-8B.
+- Prop. 20.2, DVR characterisation — **included** CA-8.
+- Def. 20.3, Dedekind domain — **included** CA-9.
+- Props. 20.4--20.5--Cor. 20.6, localisation/local DVRs — **included** CA-9.
+- Thm. 20.7, unique ideal factorisation — **included** CA-9.
+- Rem. 20.8, valuation exponents — **inline** in CA-9's valuation items.
+- Cor. 20.9, local ideal equality/inclusion — **inline** in factorisation.
+- Cor. 20.10, finite-prime case — **included** as CA-9B companion.
+- Cors. 20.11--20.13, (a=b+(x)), two generators and complementary ideals —
+  two-generator result **included** CA-9; others **included** on CA-9B.
+- Prop. 20.14, Dedekind UFD implies PID — **inline** in the class-group
+  characterisation, conditional on the owed UFD proof.
+- Thm. 20.15, Steinitz — **included** only with the independent CRing/Stacks
+  proof recorded on CA-9.
+- Thm. 20.16, invariant factors — **deferred** to module classification; the
+  source suppresses its proof.
+- Aside 20.17, Jordan--Hölder/Krull--Schmidt contrast — **included** as
+  non-load-bearing companion material.
+
+#### §21, “Dimension Theory,” pp. 99--104
+
+- (21.1)--(21.2), height/localisation preliminaries — **inline** CA-10.
+- Thm. 21.3, principal ideal theorem — **included** CA-10.
+- (21.4)--(21.5), height induction — **inline**, with (21.5) supplying the
+  named induction-step lemma.
+- Thm. 21.6, height theorem — **included** CA-10.
+- Thm. 21.7, converse and parameters — **included** in CA-10's converse,
+  existence and radical-generator items.
+
+#### §24, completion, (24.1)--(24.7), pp. 108--109
+
+- (24.1), filtration topology/completion — **included** CA-13.
+- (24.2), stable equivalent filtrations — **inline** in CA-13's quotient/
+  submodule completion item.
+- (24.3), Artin--Rees — **included** CA-11.
+- (24.4), completion exactness — **included** CA-13.
+- (24.5), tensor comparison — **included** CA-13.
+- (24.6), completion flatness — **included** CA-13.
+- (24.7), quotient/localisation comparison — **inline** CA-13 and its iterated
+  completion companion.

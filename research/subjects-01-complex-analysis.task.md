@@ -8,7 +8,7 @@
 | wave | 4 |
 | file you own | `research/plan-complex-analysis-track.md` (**ENRICH**) |
 | placement anchor | in place, within the existing 303–356 band |
-| sibling tracks to read first | `research/plan-measure-theory-track.md` (the finished `measure-theory` track), `research/plan-functional-analysis-track.md` (the finished `functional-analysis` track), `research/plan-pde-track.md` (the finished `pde` track), `research/plan-number-theory-track.md` (the finished `number-theory` track) |
+| sibling tracks to read first | `research/plan-measure-theory-track.md`, `research/plan-functional-analysis-track.md`, `research/plan-pde-track.md` — **all three finished and on disk.** `number-theory` is NOT yet written; see the note below |
 
 This file already exists and is substantial. **Enrich it — do not restart it.** Read it fully first, reconcile every claim in it against `research/plan-spec.json` and the actual item files, and extend. Where you find a stale claim, correct it in place and say so in your summary.
 
@@ -23,7 +23,22 @@ This file already exists and is substantial. **Enrich it — do not restart it.*
 
 ## What you must NOT mint — cite it instead
 
-- **You run LAST precisely so that four finished tracks are available to you.** Read the finished `plan-measure-theory-track.md`, `plan-functional-analysis-track.md`, `plan-pde-track.md` and `plan-number-theory-track.md` before scaffolding your enrichment.
+- **Read the three finished analysis tracks before scaffolding**:
+  `plan-measure-theory-track.md`, `plan-functional-analysis-track.md`,
+  `plan-pde-track.md`. All three are complete on disk.
+- **`number-theory` has not been written yet, and the dependency runs the other
+  way** (orchestrator correction, 2026-08-14). The seam contract makes YOU the
+  owner of the Riemann zeta function and the Gamma function as function-theoretic
+  objects; `number-theory` cites you for the analytic continuation and the
+  functional equation and owns only the arithmetic consequences — PNT, Dirichlet's
+  theorem, L-functions. So you do not need its file: **you are the supplier, not
+  the consumer.**
+  What you must do instead is make the interface explicit. In a clearly marked
+  section, state exactly what your zeta and Gamma pages will supply to a later
+  analytic-number-theory track: the precise continuation statement, the functional
+  equation as you will state it, the Euler product if you carry it, any zero-free
+  region, and the item ids that will carry each. `number-theory` is dispatched
+  after you and will be told to cite that section rather than re-derive it.
 - `measure-theory` and `functional-analysis` land BELOW you in reading order. That is deliberate and it is your opportunity: L^p, the Lebesgue integral, Radon measures, Hilbert spaces and the Fourier transform are all citable, so Hardy spaces, boundary values and Fatou's theorem can be done properly instead of being deferred. Take that opportunity.
 - `pde` owns the ℝⁿ theory of harmonic functions and cites YOU for the plane theory. Keep the plane theory sharp and complete; do not generalise into ℝⁿ.
 - `number-theory` cites you for ζ's continuation and functional equation and owns the arithmetic consequences — PNT, Dirichlet's theorem, L-functions. Make sure your ζ page actually supplies what its file says it needs.

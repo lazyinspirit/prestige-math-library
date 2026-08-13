@@ -264,6 +264,14 @@ by the calculus of fractions. The bounded variants $D^+$, $D^-$, and $D^b$ are
 the primary computational settings. General unbounded replacement theory is a
 scope denial (§26), not a hidden hypothesis.
 
+### 3.6 Page metadata boundary
+
+All seventeen A pages and their examples companions remain in the existing
+`category-theory` plan category used by the six empty homological-algebra
+placeholders. The track name `homological-algebra` is an orchestration label,
+not a licence to invent a new schema category. A pages have layout `A`, their
+companions layout `B`, and only the A pages may be dependency targets.
+
 ---
 
 ## 4. Item provenance notation
@@ -967,9 +975,9 @@ the category rather than assumed from an element chase.
     identifications.
 21. `prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign` —
     **proposition** `[LA]`. This is the sign reconciliation promised on `HA-3`.
-22. `cor-the-cone-criterion-for-quasi-isomorphisms` — **corollary** `[LA]`.
-    Reproves `HA-3` item 13 from the general LES and carries an agreement
-    remark, not a duplicate proof.
+22. `cor-the-cone-criterion-from-the-general-long-exact-sequence` —
+    **corollary** `[LA]`. It cites `HA-3` item 13 and records that item 20 gives
+    the same equivalence by exactness; the proof is not duplicated.
 23. `thm-long-exact-sequence-of-relative-homology-for-a-composable-pair` —
     **theorem** `[LA]`. Obtained from the three-cone sequence, with all maps
     expressed in terms of the supplied composable chain maps.
@@ -2026,10 +2034,12 @@ torsion and flatness. Noncommutative handedness is printed in every definition.
     Suprema of flat dimensions of left/right modules.
 30. `prop-weak-global-dimension-is-at-most-corresponding-global-dimension` —
     **proposition** `[LA]`, because projective implies flat.
-31. `thm-global-dimension-can-be-detected-by-tor-under-the-stated-ring-hypotheses` —
-    **theorem** `[LA]`. The precise equality with the supremum of nonzero Tor
-    degrees is stated in the source-supported left/right form; it is not
-    inflated to rings for which only weak dimension is detected.
+31. `thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric` —
+    **theorem** `[LA]`. The left and right weak global dimensions agree and
+    equal the supremum of the integers $n$ for which
+    $\operatorname{Tor}^R_n(N,M)\ne0$ for some right $R$-module $N$ and left
+    $R$-module $M$. No corresponding equality with global dimension is
+    asserted.
 32. `prop-semisimple-rings-have-vanishing-positive-tor-and-ext` —
     **proposition** `[LA]`, citing the semisimple-module equivalences.
 33. `prop-the-integers-have-weak-and-global-dimension-one` — **proposition**
@@ -2519,9 +2529,10 @@ it does not introduce dg, model, or stable $\infty$-categories.
     triangles.
 28. `def-thick-subcategory` — **definition** `[LN]`. A triangulated subcategory
     also closed under direct summands.
-29. `prop-the-kernel-of-a-cohomological-functor-is-a-triangulated-subcategory` —
-    **proposition** `[LA]`; it is thick when the target and functor preserve the
-    relevant retracts.
+29. `prop-the-total-kernel-of-a-cohomological-functor-is-a-triangulated-subcategory` —
+    **proposition** `[LA]`. The total kernel consists of the objects $X$ such
+    that $H(X[n])=0$ for every $n\in\mathbb Z$; it is thick when the target and
+    functor preserve the relevant retracts.
 30. `prop-the-full-subcategory-of-acyclic-complexes-is-thick-in-the-homotopy-category` —
     **proposition** `[LA]`, using the cone LES and finite biproducts.
 
@@ -3306,7 +3317,7 @@ without convergence and extension data.
 ### Sources and exact locators
 
 - **Weibel §§5.7 “Hyperhomology”, 5.8 “Grothendieck Spectral Sequences”,
-  6.8 “The Lyndon/Hochschild–Serre Spectral Sequence”, and the UCT/Künneth
+  6.8 “The Spectral Sequence” (the Lyndon/Hochschild–Serre sequence), and the UCT/Künneth
   applications in §§5.6–5.7 (pp. 145–158, 193–199).** Primary textbook source.
 - **Rotman §§10.5 “Cartan–Eilenberg Resolutions”, 10.6 “Grothendieck Spectral
   Sequences”, 10.7 “Groups”, and 10.10 “Künneth Theorems” (pp. 647–665,
@@ -3485,7 +3496,7 @@ the scaffold was read, not merely found in a bibliography.
 
 | code | source, access, exact range read |
 |---|---|
-| `W` | Charles A. Weibel, *An Introduction to Homological Algebra* (Cambridge, 1994), full searchable public scan: https://djvu.online/file/WrPctxOTQCdBj ; author/official detailed contents: https://math.mit.edu/~hrm/palestine/weibel/contents.pdf ; errata: https://sites.math.rutgers.edu/~weibel/Hbook-corrections.html . Read Chs 1–6 and 10 in full over the headings harvested below. Publisher-controlled, not claimed open-licensed. |
+| `W` | Charles A. Weibel, *An Introduction to Homological Algebra* (Cambridge, 1994), complete chapter PDFs and detailed contents in the MIT-hosted book directory: https://math.mit.edu/~hrm/palestine/weibel/ ; exact contents: https://math.mit.edu/~hrm/palestine/weibel/contents.pdf ; searchable mirror used for cross-search: https://djvu.online/file/WrPctxOTQCdBj ; author errata: https://sites.math.rutgers.edu/~weibel/Hbook-corrections.html . Read Chs 1–6 and 10 in full over the headings harvested below. Publisher-controlled, not claimed open-licensed. |
 | `R` | Joseph J. Rotman, *An Introduction to Homological Algebra*, 2nd ed. (Springer, 2009), full searchable text: https://dokumen.pub/an-introduction-to-homological-algebra-2nbsped-9780387245270-9780387683249.html . Read Chs 3 and 5–10 over the headings below. Publisher-controlled, not claimed open-licensed. |
 | `SP-H` | The Stacks Project, *Homological Algebra*, current full PDF: https://stacks.math.columbia.edu/download/homology.pdf . Read §§12–32. GNU FDL. |
 | `SP-D` | The Stacks Project, *Derived Categories*, current full PDF: https://stacks.math.columbia.edu/download/derived.pdf . Read §§2–27. GNU FDL. |
@@ -3599,7 +3610,7 @@ Every heading is Weibel's own table-of-contents wording.
   `prop-hereditary-rings-have-global-dimension-at-most-one`, and
   `thm-the-integers-have-global-dimension-one`; classification of special rings
   is `out-of-scope` to abstract/commutative algebra.
-- **4.3 “Change of Rings”** — `deferred`: change-of-rings spectral sequences
+- **4.3 “Change of Rings Theorems”** — `deferred`: change-of-rings spectral sequences
   require a dedicated restriction/extension-of-scalars page and ring hypotheses
   not used by any commissioned seam.
 - **4.4 “Local Rings”** — `out-of-scope`: local-ring structure belongs to
@@ -3622,7 +3633,7 @@ Every heading is Weibel's own table-of-contents wording.
   10–29.
 - **5.5 “Convergence”** — `included`: bounded abutment on `HA-15` and weak/
   strong/complete convergence on `HA-16`.
-- **5.6 “Two Spectral Sequences”** — `included`: row and column spectral
+- **5.6 “Spectral Sequences of a Double Complex”** — `included`: row and column spectral
   sequences of a double complex on `HA-16`.
 - **5.7 “Hyperhomology”** — `included`: Cartan–Eilenberg resolution and the two
   hypercohomology spectral sequences on `HA-17`.
@@ -3652,12 +3663,13 @@ Every heading is Weibel's own table-of-contents wording.
   and the index composite; `inline` for inflation in the LHS five-term sequence;
   transfer as an independent group-homology theory is `out-of-scope` to
   `group-theory`.
-- **6.8 “The Lyndon/Hochschild–Serre Spectral Sequence”** — `included`:
+- **6.8 “The Spectral Sequence”** — `included` as the
+  Lyndon/Hochschild–Serre construction:
   `thm-lyndon-hochschild-serre-spectral-sequence` and its five-term sequence.
 - **6.9 “Universal Central Extensions”** — `out-of-scope`: requires perfect
   groups, Schur multipliers, and central-extension classification owned by
   `group-theory`.
-- **6.10 “Covering Spaces”** — `out-of-scope`: belongs to algebraic topology;
+- **6.10 “Covering Spaces in Topology”** — `out-of-scope`: belongs to algebraic topology;
   no topological model is needed for the derived definition.
 - **6.11 “Galois Cohomology and Profinite Groups”** — `deferred`: requires
   topological groups, continuous cochains, discrete/topological modules, and
@@ -3680,7 +3692,7 @@ Every heading is Weibel's own table-of-contents wording.
 - **10.8 “Replacing Spectral Sequences”** — `inline` in the projective/
   injective models of the derived category and the identification of derived
   tensor/Hom; no claim is made that spectral sequences are dispensable.
-- **10.9 “Topological Derived Functors”** — `out-of-scope`: requires spectra or
+- **10.9 “The Topological Derived Category”** — `out-of-scope`: requires spectra or
   topological derived categories, an algebraic-topology/stable-homotopy subject.
 
 ### 24.3 Rotman heading harvest — Chs 3 and 5–10
@@ -4115,6 +4127,55 @@ supplemental and no claim is sourced solely here.
 - **IV.4 “Cores”** — `deferred`: $t$-structures beyond the canonical one,
   torsion pairs, and perverse hearts require sheaf/representation applications;
   `HA-14` includes only the canonical $t$-structure and its heart.
+
+### 24.10 Named-result-heading cross-check
+
+The preceding subsections dispose of every section/subsection heading in each
+read range. This final cross-check records the non-generic named-result headings
+encountered in those ranges; a display headed only “Theorem”, “Lemma”, or a
+number is governed by its containing section's disposition above.
+
+- **Weibel:** “Comparison Theorem” 2.2.6 and its injective dual 2.3.7 are
+  `included` as the existence and homotopy-uniqueness items on `HA-5`;
+  “Horseshoe Lemma” 2.2.8 is `included` in both projective and injective forms
+  on `HA-5`; “Acyclic Assembly Lemma” 2.7.3 is `included` on `HA-16` and used
+  in the balance proofs on `HA-8`/`HA-10`; “Künneth formula” 3.6.1,
+  “Universal Coefficient Theorem for Homology” 3.6.2, and the cohomological
+  universal-coefficient theorem in the same section are `included` on `HA-11`;
+  “Grothendieck Spectral Sequence Theorem” 5.8.3 is `included` on `HA-17`;
+  “Classical Convergence Theorem” 5.9.7 is `included` on `HA-16`; “Shapiro's
+  Lemma” 6.3.2 is `included` in both homology and cohomology forms on `HA-12`;
+  the Lyndon/Hochschild–Serre result under §6.8 “The Spectral Sequence” is `included`
+  on `HA-17`; and the “Generalized Existence Theorem” 10.5.9 is `inline` in
+  the bounded replacement/existence hypotheses on `HA-14`, not promoted to an
+  unbounded existence assertion.
+- **Rotman:** “Fundamental Theorem of Homological Algebra” is `included` as
+  `thm-long-exact-sequence-in-homology` plus its naturality items on `HA-4`;
+  the comparison and horseshoe results are `included` on `HA-5`; the named
+  Baer-sum/Yoneda extension results are `included` on `HA-9`; the universal-
+  coefficient and Künneth theorems are `included` on `HA-11`; Hilbert's
+  Syzygy Theorem is `out-of-scope` to `commutative-algebra` for the specific
+  polynomial-ring statement; and the Grothendieck spectral sequence is
+  `included` on `HA-17`.
+- **Hilton–Stammbach:** the named Künneth theorem, dual Künneth theorem,
+  universal coefficient theorem, and Grothendieck spectral sequence are
+  already headings in §24.7 and are `included` on `HA-11`/`HA-17`; the
+  Stein–Serre theorem for abelian groups is `deferred` there for its stated
+  specialised structure-theory reason.
+- **Stacks Project:** results in the read ranges use numbered lemma/proposition/
+  theorem tags rather than separate eponymous result headings. Tag `079H`,
+  “A Grothendieck abelian category has functorial injective embeddings”, is
+  `included` as the generator/pushout/transfinite construction on `HA-5`;
+  every surrounding section heading is disposed of in §24.4.
+- **Sharifi, Rutgers, and Yekutieli:** their named curricular headings are the
+  section/lecture headings enumerated in §§24.5, 24.6, and 24.8. In particular,
+  “Universal and effaceable delta functors”, “the acyclic assembly lemma”, and
+  “the Grothendieck spectral sequence” are `included` on `HA-7`, `HA-16`, and
+  `HA-17`; the sheaf/de Rham heading is `out-of-scope` for the owner named in
+  §24.6.
+- **Gelfand–Manin:** only the contents/preview headings in §24.9 were
+  harvestable, so no unseen named theorem is claimed read or used. Every such
+  heading is supplemental and already has a disposition there.
 
 ---
 
