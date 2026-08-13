@@ -1,5 +1,31 @@
 # Combinatorics, graph theory, category theory, and homological algebra
 
+> ## READ FIRST — 2026-08-13 enrichment (`subjects-01`, `combinatorics` lane)
+>
+> The owner commissioned an enrichment of every prose scaffold on 2026-08-13:
+> *amend and expand the prose scaffolds to enrich future mathematical content*,
+> developing each subject from the ground up at graduate level. The
+> `combinatorics` lane owns the **CB-\*** and **GT-\*** material in this file and
+> nothing else. The category-theory blocks (CT, AB/MO, HA) belong to
+> `monoidal-abelian-categories` and `homological-algebra`, which write their own
+> files and were **not** touched here.
+>
+> **Everything the `combinatorics` lane added or corrected lives in §17–§25,
+> at the end of this file.** Start there. §17 is the summary for the
+> orchestrator; §18 records what in §1–§16 is now stale and what replaces it.
+>
+> Sections **§1, §2, §3 (CC-D1…D3, CC-D6, CC-D9), §4, §7, §8, §9, §10, §13, §14
+> are stale in their CB/GT parts** — they were written on 2026-07-28 against a
+> 230-page spec, before the splice and before eighteen of these pages were
+> authored. §18 lists every stale claim, with the disk evidence. The CT/AB/MO/HA
+> parts of those sections were left exactly as they were.
+>
+> The four verbatim source harvests behind §17–§25 are checked in beside this
+> file as `research/subjects-01-combinatorics-harvest-{enumerative,graphtheory,
+> algebraic,probabilistic}.md`. A step-2 Beta converts the harvest rows for its
+> own pair into `research/<run>-batch-<i>.coverage.json`; §24 gives the
+> source-section dispositions and points at the verbatim named-result rows.
+
 Prose scaffold, owner-commissioned 2026-07-28. Companion to
 `research/plan-algebra-track.md`, `research/plan-topology-track.md`,
 `research/plan-topology-set-theory-track.md` and
@@ -3803,3 +3829,1224 @@ language should quantify G, not F; Section 6.2 is co-Bird-free; Theorem 1.7
 needs its complement notation restored; Lemma 2.1's first alternative needs an
 explicit existential graph; and geometric layers need integral floor/ceiling
 bounds.
+
+---
+
+# 18. Reconciliation: what §1–§16 got right, and what is now stale
+
+`subjects-01`, `combinatorics` lane, 2026-08-13. Every claim below was checked
+against `research/plan-spec.json` and the actual files in `items/` and
+`library/` on that date, not against any scaffold's prose. **A page in the spec
+with a non-empty `items` array is authored; an empty one is a plan and its
+content does not exist.**
+
+## 18.1 The premise of §1 and §2 is discharged
+
+§1 opens *"The library today proves a great deal with finite counting and has
+never defined it"* and §2 lists `def-binomial-*`, `def-factorial`, `def-graph`,
+`def-tree`, `def-matching`, `def-chromatic-*`, `def-ramsey-*`,
+`def-formal-power-series`, `def-incidence-algebra`, `def-mobius-function` as
+verified absent. **All of that is now published.** Eighteen combinatorics A/B
+pairs were built between 2026-07-28 and 2026-08-12:
+
+| page id | order | A items |
+|---|---|---|
+| `finite-counting-and-binomial-coefficients` | 20 | 26 |
+| `inclusion-exclusion-and-the-pigeonhole-principle` | 22 | 21 |
+| `chains-antichains-sperner-and-dilworth` | 191 | 32 |
+| `formal-power-series` | 193 | 22 |
+| `incidence-algebras-and-mobius-inversion` | 203 | 24 |
+| `graphs-walks-and-connectivity` | 207 | 35 |
+| `trees-forests-and-spanning-trees` | 209 | 27 |
+| `eulerian-and-hamiltonian-graphs` | 211 | 22 |
+| `matchings-covers-menger-and-network-flows` | 213 | 25 |
+| `graph-colouring` | 215 | **4** |
+| `ramsey-theory` | 217 | 21 |
+| `extremal-graph-theory` | 219 | 20 |
+| `finite-probability-spaces-and-random-variables` | 220.2 | 37 |
+| `finite-probability-and-the-probabilistic-method` | 221 | 28 |
+| `plane-graphs-euler-and-the-five-colour-theorem` | 357 | 40 |
+| `induced-subgraphs-and-hereditary-graph-classes` | 393 | 23 |
+
+Orders are quoted here only as the disk state on 2026-08-13; per the seam
+contract they are recomputed at splice and must not be carried into any new
+scaffold text. Everything below uses page ids and relative labels.
+
+Still planned and **unauthored** in the band, i.e. the eight first-class
+enrichment targets: `linear-recurrences-and-rational-generating-functions`,
+`lattice-paths-and-catalan-numbers`,
+`set-partitions-stirling-numbers-and-exponential-generating-functions`,
+`integer-partitions-and-the-twelvefold-way`,
+`counting-up-to-symmetry-burnside-and-polya`,
+`linear-algebra-methods-in-combinatorics`,
+`block-designs-and-finite-projective-planes`,
+`algebraic-and-spectral-graph-theory`.
+
+## 18.2 Stale claims, corrected
+
+**S1. §2 and §10 amendment 4: "AA-6 does not list Burnside's orbit-counting
+lemma, so CB-10 mints it without duplication." FALSE.**
+`group-actions-and-cayleys-theorem` was authored with 37 items and publishes
+`thm-cauchy-frobenius-orbit-counting`, together with `def-group-action`,
+`def-orbit-and-stabilizer`, `thm-orbits-partition-the-set`, `thm-orbit-stabilizer`,
+`cor-orbit-stabilizer-cardinality`, `def-free-group-action`,
+`def-fixed-point-sets-of-a-group-action`, `lem-stabilizers-in-one-orbit-are-conjugate`
+and `thm-jordans-derangement-theorem`. Its examples page carries
+`cex-orbit-count-is-not-set-size-divided-by-group-order`,
+`ex-binary-necklaces-of-length-four` and
+`ex-two-colourings-of-a-square-up-to-dihedral-symmetry`.
+**CB-10 therefore cites the orbit-counting lemma and must not re-mint it**; its
+own content is the cycle index, Pólya's enumeration theorem and de Bruijn's
+weighted form. §10 amendment 4 is discharged. The `fs-` "the number of orbits is
+$\lvert X\rvert/\lvert G\rvert$" that §11 planned for CB-10 already exists as the
+counterexample above; since that item is homed on a B page it is a leaf and
+cannot be cited, but duplicating it under a second id would violate the reuse
+rule, so CB-10 drops it and the B page instead exhibits a *different* non-free
+action. §22 gives CB-10's replacement inventory.
+
+**S2. §10 amendment 5: "confirm whether AA-14 mints the multivariate polynomial
+ring." ANSWERED — it exists, on a different page.**
+`def-multivariate-polynomial-ring-by-iteration` and
+`cor-multivariate-polynomial-ring-over-a-domain-is-a-domain` are published on
+`polynomial-rings-and-roots`, not on `symmetric-polynomials` (which is still
+unauthored, 0 items). Well-definedness row #23 (the cycle index lives in
+$\mathbb{Q}[x_1,\dots,x_n]$) is therefore discharged by citation, and the
+Combinatorial Nullstellensatz of §23 has its ring. `symmetric-polynomials`
+remains unauthored and nothing in the CB/GT enrichment depends on it.
+
+**S3. §7 choice ledger, rows for the infinite Ramsey theorem and König's lemma:
+superseded by what was actually built.** The ledger assigns **DC** to both. The
+authored `ramsey-theory` page proves `thm-konig-infinity-lemma-for-ordered-trees`
+("an ordered finitely branching tree with a node at every level has an infinite
+branch, **in ZF**"), `lem-infinite-pigeonhole-on-the-naturals` ("in ZF") and
+`thm-infinite-ramsey-on-the-naturals` ("in ZF"), together with
+`cor-finite-ramsey-by-konig-compactness`. The device is the *ordered* branching:
+fixing a linear order on each successor set makes the branch canonical, so no
+choice is consumed. The scaffold's DC rows are wrong about the library's actual
+content and are replaced by §21's ledger.
+
+**S4. §7 row "infinite Hall / marriage theorem … BPI (Rado selection, same
+route)": not licensed, and the build said so.**
+`matchings-covers-menger-and-network-flows` deferred the infinite marriage
+theorem outright, recording that its source pass "confirmed an AC-dependent
+locally finite form but did not license the prose scaffold's exact BPI claim
+from the available closure." §21 restates the row honestly and §25 scaffolds the
+result in the two forms that *can* be closed.
+
+**S5. §9 denial 6: "the Rado graph / countable random graph" denied as needing
+measure-theoretic probability. WRONG, and the denial is withdrawn.** The Rado
+graph needs no probability at all: it is constructed explicitly from the binary
+expansion (the BIT predicate) on $\mathbb{N}$, characterised up to isomorphism by
+the finite extension property, and the uniqueness proof is a back-and-forth
+argument on a countable set. Diestel §8.3 develops exactly this. §25 scaffolds it.
+The *probabilistic* statement — that $G(\mathbb{N},1/2)$ is almost surely
+isomorphic to it — does need a measure and stays denied.
+
+**S6. §9 denial 4: Szemerédi's regularity lemma denied, "licensed by a dedicated
+regularity page." That page is now scaffolded (§25, GT-19).** The 2026-08-11
+build-the-machinery rule is what changes the disposition: "it is a page of
+machinery on its own" is a reason to build the page, not to drop the theorem.
+Szemerédi's *theorem* on arithmetic progressions stays denied; Roth's theorem
+does not — §23 proves it twice, by triangle removal and by finite Fourier
+analysis.
+
+**S7. §9 denial 5 (Erdős–Stone–Simonovits) was already overridden in-file by the
+`frontier-11` amendment and is now authored.** `extremal-graph-theory` publishes
+`thm-erdos-stone-for-balanced-blowups`, `thm-erdos-stone-simonovits`,
+`cor-chromatic-number-extremal-density` and `thm-hypergraph-kovari-sos-turan-bound`.
+No further action; recorded so no future reader re-denies it from §9.
+
+**S8. §9 denials 18 and 19 — matroids and additive combinatorics, both declined
+as "not commissioned" — are commissioned now.** The 2026-08-13 dispatch names
+additive combinatorics explicitly, and the build-the-machinery rule reopens
+matroids, whose only obstacle was that nothing had built them. §23 and §25
+scaffold both.
+
+**S9. §9 denial 11 (Kruskal–Katona, "long, and its natural home is a shadows
+page") no longer meets the bar for a decline.** `def-shadow-of-a-uniform-family`,
+`thm-local-lym-inequality` and `def-intersecting-family` are published on
+`chains-antichains-sperner-and-dilworth`, so the shadows page exists in all but
+name. §20 scaffolds the compression machinery and the theorem.
+
+**S10. §3 CC-D9 and §9 denial 12 — "the four colour theorem is stated as a
+`not-proved-here` ‡ entry on the existing catalogue" — WAS NEVER DONE.**
+`grep -ri "four.colou\?r" items/ library/` returns nothing: there is no
+four-colour item anywhere in the corpus. `plane-graphs-euler-and-the-five-colour-theorem`
+proves `thm-six-colour-theorem-for-planar-graphs` and `thm-five-colour-theorem`
+and says nothing about four. The decision CC-D9 recorded is sound and is kept;
+its *disposition* is outstanding, and §25 (GT-22) is where the ‡ record is
+scaffolded, alongside Grötzsch's theorem and Thomassen's 5-choosability. Note
+also that all five `deferred-*` / `open-problems-*` catalogue pages carry 0 items
+in the spec, so "the existing catalogue" is not a place an item can currently be
+homed; GT-22 homes the record on its own page.
+
+**S11. `graph-colouring` is published with four items and is genuinely thin.**
+It carries `def-proper-vertex-colouring-and-chromatic-number`,
+`lem-greedy-colouring-bound`, `def-clique-and-independence-numbers` and
+`thm-clique-independence-chromatic-bounds`; its B page has two items. It was
+built at `frontier-9` as a *support* page for the Erdős–Hajnal programme, and
+`research/frontier-11-batch-3.notes.md` records the consequence: "`graph-colouring`
+contains only four items … contributes no extremal theorem … only
+`def-proper-vertex-colouring-and-chromatic-number` and
+`def-clique-and-independence-numbers` supply the required interfaces". Nothing in
+the §11 GT-5 inventory beyond those four items exists: no Brooks, no Vizing, no
+chromatic polynomial, no list colouring, no perfect graphs, no De Bruijn–Erdős.
+**Published pages are not retrofitted**, so the remedy is not to add items to
+that page but to scaffold the missing development as new pairs above it. §25
+does that as GT-9 through GT-13, and §19.3 records why that is the right shape.
+
+**S12. §4 (the renumber table), §13 (the page inventory) and §14 (the
+build-frontier note) are superseded wholesale in their CB/GT parts.** The splice
+happened; `research/plan-spec.json` now holds 448 pages. §26 gives the current
+inventory for the CB/GT material only.
+
+**S13. Two normative docs disagree about the A-page ceiling, and the code
+settles it.** `CLAUDE.md` and `briefs/beta-scaffold.md` §"When the machinery
+makes the page big" say **60**; `SCHEMA.md` §6 and `briefs/beta-scaffold.md`
+§4a.3 say **100**. `tools/validate-plan.mjs` documents and defaults to
+`--max-items 60` and emits error code `size` above it. **60 binds**, and every
+page in §19–§25 is designed under it. Recorded in §27 as an amendment owed to
+whoever maintains those two docs; not fixed here, because they are not this
+lane's files.
+
+## 18.3 What §1–§16 got right and is kept unchanged
+
+- The **formal/analytic seam**. §9 denial 1 quarantines singularity analysis,
+  saddle-point asymptotics and the circle method behind complex analysis, and
+  puts every generating function in $R[[x]]$. That was correct and the authored
+  `formal-power-series` page honours it. §19 extends the same discipline to the
+  symbolic method: the whole of Flajolet–Sedgewick Part A is formal, Part B is
+  not, and the seam falls exactly at their §IV.1.
+- The **self-contained-scope discipline** and the insistence that a definition's
+  well-definedness is a numbered item, not a parenthetical. §20 continues the
+  numbered obligation table from #62.
+- The **choice ledger as a page-level artifact** with the cost named in the
+  Statement. §21 continues it.
+- Diestel as the **dependency-ordered** graph theory source. His preface's claim
+  — "apart from two clearly marked exceptions, any results used in the proof of
+  others precede them in the text", with the reference numbers printed in the
+  margin of each proof — is what §25's ordering is checked against, and the 2026
+  harvest reproduces his full contents and named results verbatim in
+  `research/subjects-01-combinatorics-harvest-graphtheory.md`.
+- **CC-D3**, separating planarity from the rest of graph theory because "face" is
+  undefined until the polygonal Jordan curve theorem is proved. The authored page
+  proves `thm-polygonal-jordan-curve` and does exactly this.
+
+---
+
+# 19. The shape of the enrichment, and the structural findings behind it
+
+## 19.1 Placement, stated as anchors
+
+Per the seam contract §0.2, **no absolute order appears below**. Every new pair
+is placed by naming the published or planned page id it sits immediately after.
+The orchestrator computes integers at splice. The combinatorics band already
+uses fractional orders (`finite-probability-spaces-and-random-variables` sits at
+220.2), so an in-band insertion needs no renumber of the rest of the library.
+
+Three placement facts constrain everything:
+
+1. **`plane-graphs-euler-and-the-five-colour-theorem` is far above the band.**
+   Anything that genuinely needs a plane embedding — flow/colouring duality,
+   Grötzsch, Thomassen's 5-choosability, crossing numbers, the four colour
+   record — must sit above it, not in the band. §25 puts exactly one pair there
+   (GT-22) and nothing else.
+2. **The linear-algebra prerequisites of the algebraic block are planned but
+   unauthored.** `inner-product-spaces-and-orthogonality`,
+   `algebraic-extensions-degree-and-finite-fields` and
+   `the-spectral-theorem-and-singular-value-decomposition` all carry 0 items.
+   They sit below the band in plan order, so citing them is legal and the
+   scaffold does; but nothing in §22 can be *built* until they are. That is a
+   build-frontier fact, not a scaffold defect, and §26 states it.
+3. **The Erdős–Hajnal block is above everything here.** Its pages are planned and
+   unauthored. Where the enrichment builds a general tool that block also needs —
+   the ordinary regularity lemma above all — the general tool goes in the band
+   and the Erdős–Hajnal page cites it. §27 records that amendment; this lane does
+   not edit §16.
+
+## 19.2 Five structural findings from disk
+
+**F1. Five general graph-theory items are homed on the planarity page, above the
+whole band, and therefore cannot be cited by anything in it.**
+`plane-graphs-euler-and-the-five-colour-theorem` publishes
+`def-bridge-in-a-graph`, `lem-edge-is-a-bridge-iff-it-lies-on-no-cycle`,
+`lem-three-connected-graph-has-a-contractible-edge`, `def-kempe-chain` and
+`lem-kempe-component-colour-swap`. None of those is about plane graphs. Their
+declared `deps` were read from the spec and every one resolves at or below
+`graph-colouring`:
+
+| item | its deps' home pages | earliest legal home |
+|---|---|---|
+| `def-bridge-in-a-graph` | `graphs-walks-and-connectivity` only | just above `graphs-walks-and-connectivity` |
+| `lem-edge-is-a-bridge-iff-it-lies-on-no-cycle` | that page, plus `def-bridge-in-a-graph` | same |
+| `lem-three-connected-graph-has-a-contractible-edge` | `graphs-walks-and-connectivity`, `matchings-covers-menger-and-network-flows`, `finite-counting-and-binomial-coefficients` | just above `matchings-covers-menger-and-network-flows` |
+| `def-kempe-chain` | `graph-colouring`, `graphs-walks-and-connectivity` | just above `graph-colouring` |
+| `lem-kempe-component-colour-swap` | `def-kempe-chain`, `graph-colouring`, `graphs-walks-and-connectivity` | same |
+
+`lem-alternating-kempe-paths-cannot-both-occur` is a genuine exception: it cites
+`thm-polygonal-jordan-curve` and `def-plane-graph-face-and-boundary`, so it is
+correctly homed where it is.
+
+This matters concretely. A Kempe chain is the central device of Vizing's fan
+argument and of every Brooks-style recolouring, and GT-11 cannot use the
+published one. A bridge is what an ear decomposition and the whole of flow theory
+talk about. **Recommended remedy: re-home those five items to their earliest
+legal page.** Re-homing changes only which page lists an id; the item file, its
+id and its text are untouched, and acyclicity is preserved because every dep is
+already below the new home. It is nevertheless a **reading-order change, which is
+owner-only** (`AUDIT-WORKFLOW.md`: "Deletions, id changes, and reading-order
+changes remain owner-only"), so it is recorded in §27 as an amendment and not
+applied here. Two cautions for whoever applies it: a re-home is only complete
+when the **donor** page file stops listing the item — no gate fails on a
+half-done re-home, because both pages listing the same id looks legal to
+`depcheck`; and `plane-graphs-euler-and-the-five-colour-theorem` is published, so
+its page file changes and its own prerequisite closure must be re-derived.
+
+**Fallback if the owner declines.** GT-11 and GT-14 are scaffolded so that the
+fallback is a design change, not a lost result: GT-11 states the two-colour
+recolouring lemma it needs in the form it needs it — *for a proper edge colouring
+and two colours $\alpha,\beta$, the components of the subgraph of $\alpha$- and
+$\beta$-coloured edges are paths and even cycles, and swapping the two colours on
+one component leaves a proper edge colouring* — which is the **edge** analogue and
+is a genuinely different statement from the published vertex-colouring
+`lem-kempe-component-colour-swap`, so it is not a duplicate id under any reading.
+For bridges, GT-14 works with `def-vertex-and-edge-connectivity` and cut edges
+defined as $\lambda(G[\cdot])$-witnesses; that is clumsier and is the reason the
+re-home is recommended.
+
+**F2. The determinant page has no cofactor expansion, no adjugate and no
+Cauchy–Binet.** `determinants-of-matrices-over-a-commutative-ring` publishes 24
+items — the Leibniz formula, uniqueness as the normalised alternating multilinear
+function, behaviour under row operations, multiplicativity, the transpose and
+triangular cases — and stops. There is no Laplace expansion along a row, no
+adjugate, no Cramer's rule, and no Cauchy–Binet. The matrix-tree theorem is
+*stated* in terms of cofactors, so GT-7a cannot even phrase it by citation. §27
+records the amendment owed to the algebra track; §22 scaffolds the fallback, in
+which GT-7a mints the cofactor expansion, the adjugate identity and Cauchy–Binet
+itself, with an explicit dictionary remark against the published determinant
+items. Cauchy–Binet is a determinant identity over a commutative ring and its
+proof is a Leibniz-formula computation, so it is in scope either way.
+
+**F3. Courant–Fischer and Cauchy interlacing exist nowhere.** Neither
+`eigenvalues-eigenvectors-and-the-characteristic-polynomial` (authored) nor the
+unauthored `the-spectral-theorem-and-singular-value-decomposition` is scaffolded
+with the min–max theorem. Half of spectral graph theory — the Hoffman ratio
+bound, interlacing, the Cheeger inequality — is unstatable without it. §27 asks
+the linear-algebra track to mint Courant–Fischer and Cauchy interlacing on the
+spectral page; §22 scaffolds GT-7b to mint them if it does not.
+
+**F4. Perron–Frobenius is reachable without a fixed-point theorem, and this
+library already has what the elementary route needs.** The Collatz–Wielandt
+characterisation
+$\rho(A) = \max_{x \ge 0,\, x \ne 0} \min_{i : x_i > 0} (Ax)_i / x_i$
+is attained because the standard simplex is a closed bounded subset of
+$\mathbb{R}^n$ and the relevant function is upper semicontinuous on it; the
+library publishes `thm-euclidean-heine-borel-pseudocompactness-and-extreme-values`
+and `thm-heine-borel-characterisation-r`. No Brouwer fixed-point theorem is
+needed, which matters because Brouwer in dimension $\ge 2$ is deferred
+(`DEFERRED.md` §4). §22 scaffolds the irreducible nonnegative case, which is all
+that spectral graph theory uses.
+
+**F5. Finite Fourier analysis is fully available below the band.**
+`the-complex-exponential-and-eulers-formula` publishes
+`thm-complex-nth-roots-and-roots-of-unity` and `cor-sum-of-roots-of-unity`, and
+`congruences-and-the-chinese-remainder-theorem` publishes the modular arithmetic.
+Characters of $\mathbb{Z}/N\mathbb{Z}$ and their orthogonality are therefore
+elementary consequences of published material, with no representation theory and
+no analysis. **Roth's theorem is in reach**, twice over: by triangle removal from
+GT-19 and by the Fourier/density-increment argument of §23. This is the single
+most consequential availability finding in the enrichment.
+
+## 19.3 Why the colouring gap becomes four pages and not one
+
+The §11 GT-5 inventory tried to carry Brooks, Vizing, König edge colouring,
+deletion–contraction and the chromatic polynomial, De Bruijn–Erdős, list
+colouring and the weak perfect graph theorem on one A page, with the note
+"Brooks' case analysis is the size risk; budget it". Against the 60-item ceiling
+that is not a budget problem, it is a split. Each of Brooks' theorem, Vizing's
+theorem, the polynomiality of $P(G,k)$ with the broken-circuit expansion, and the
+weak perfect graph theorem is a multi-lemma development with its own machinery —
+colour-critical graphs and Dirac's degree bound; fans and two-colour interchange;
+deletion–contraction and the no-broken-circuit basis; the replication lemma and
+Gasparian's rank argument. Splitting is never dropping: §25 keeps every result
+the §11 inventory named, plus the ones it did not reach, and gives each its own
+place in reading order.
+
+The published `graph-colouring` page keeps both of its definitions and both of
+its theorems, and every new page cites them rather than restating them. Nothing
+is retrofitted onto it.
+
+---
+
+# 17bis. Continuity checkpoint — `subjects-01` `combinatorics` lane, 2026-08-13
+
+*(Written at the 60% context boundary per `CLAUDE.md` §"Context continuity". It
+is a working record for this lane's own resumption, not scaffold content. It is
+superseded by §17 once §17 is written and may be deleted at splice.)*
+
+**Objective.** Enrich the CB-\* and GT-\* material of this file only, from full
+source research, at graduate depth. Write no other file; author no items; change
+no `status:`.
+
+**Done.** Header pointer block; §18 (reconciliation, 13 stale claims corrected
+from disk); §19 (placement, five structural findings F1–F5, the colouring
+split). Four source-research subagents dispatched and their harvests checked in
+at `research/subjects-01-combinatorics-harvest-{enumerative,graphtheory,
+algebraic,probabilistic}.md`. Enumerative and probabilistic harvests read and
+their verdicts absorbed; graph-theory and algebraic harvests have their verbatim
+`B` sections complete and their `C`–`F` sections were still being written when
+this checkpoint was taken.
+
+**Section numbering, fixed.** §17 summary · §18 reconciliation · §19 shape ·
+§20 well-definedness obligations, continuing the numbering from #62 · §21 choice
+ledger · §22 enumerative block · §23 algebraic, spectral and design block ·
+§24 graph-theory block · §25 probabilistic, Ramsey and additive block ·
+§26 canonical-coverage harvest · §27 inventory and build frontier ·
+§28 amendments owed · §29 unresolved seams, denials reviewed, blockers.
+**Cross-references written into §18 and §19 before this numbering was fixed must
+be re-checked in a final pass** — several point at the wrong section.
+
+**Exact next action.** Write §20 onward in that order, then §17, then reconcile
+every internal `§n` reference.
+
+---
+
+# 20. Well-definedness obligations, continued
+
+The §8 table runs to #62. This continues its numbering and its rule: **each row
+is a required numbered item on the page named, never a parenthetical.** Pages are
+named by relative label; §22–§25 define the labels.
+
+| # | page | the definition | what must be proved first |
+|---|---|---|---|
+| 63 | CB-15 | a combinatorial class $(\mathcal{A}, \lvert\cdot\rvert)$ | each level $\mathcal{A}_n$ is **finite**, which is what makes $a_n = \lvert\mathcal{A}_n\rvert$ exist by `def-finite-cardinality`. The finiteness of every level is part of the definition, not a later remark |
+| 64 | CB-15 | $\operatorname{SEQ}(\mathcal{B})$ | it is a combinatorial class **iff** $\mathcal{B}$ has no object of size $0$. Both directions: if $b_0 = 0$ a sequence of size $n$ has length at most $n$, so the level is a finite union of finite products; if $b_0 > 0$ the level is infinite. The hypothesis is not cosmetic and the failing case is the B page's counterexample |
+| 65 | CB-15 | $A(x) = 1/(1 - B(x))$ | two separate obligations: $1 - B(x)$ is a **unit** of $R[[x]]$, by the published `thm-formal-power-series-unit-criterion`; and the family $(B(x)^k)_{k \ge 0}$ is **summable**, by `def-summable-family-of-formal-series` and `thm-summable-families-and-rearrangement`. Neither may be assumed from the shape of the formula |
+| 66 | CB-15 | $\operatorname{MSET}(\mathcal{B})$, $\operatorname{PSET}(\mathcal{B})$ | a multiset over $\mathcal{B}$ is a function $\mathcal{B}\to\mathbb{N}$ of finite support and its size is the weighted sum, so the size is a finite sum; the level is finite exactly when $b_0 = 0$. The product $\prod_{n\ge1}(1-x^n)^{-b_n}$ is legitimate only through summability (#65's second clause). The $\exp\bigl(\sum_{k\ge1} B(x^k)/k\bigr)$ form additionally needs a $\mathbb{Q}$-algebra and is a **separate** statement |
+| 67 | CB-15 | $\operatorname{CYC}(\mathcal{B})$ | a cycle is an **orbit** of the cyclic shift on nonempty sequences: cite `thm-orbits-partition-the-set`, and prove that size is constant on an orbit so the size of an orbit is well defined. The $\sum_{k\ge1}\frac{\varphi(k)}{k}\log\frac{1}{1-B(x^k)}$ form needs Euler's totient (published) **and** a $\mathbb{Q}$-algebra |
+| 68 | CB-15 | the class defined by a recursive specification | **existence and uniqueness** of the solution, before any "the". The route is the published `thm-x-adic-completeness-and-polynomial-density` together with `def-formal-order-and-x-adic-topology`: a specification whose right-hand side strictly raises order is a contraction, so the sequence of truncations stabilises in each coefficient. Without this, "$C(x) = 1 + xC(x)^2$ defines the Catalan series" is an assertion, not a definition |
+| 69 | CB-16 | $\operatorname{des}(\sigma)$, $\operatorname{maj}(\sigma)$, $\operatorname{exc}(\sigma)$ | the descent set is a subset of a finite set and $\operatorname{maj}$ is a finite sum over it. **The inversion number is NOT minted here**: `def-inversions-inversion-number-and-sign` is published on `symmetric-groups-and-the-sign-homomorphism`, and CB-16 cites it. A dictionary item recording that the new statistics live on the same object as the published one is required — this is the two-notions trap |
+| 70 | CB-16 | the Eulerian number $A(n,k)$ and the $q$-factorial $[n]_q!$ | $A(n,k)$ counts a subset of a finite set. $[n]_q! \in \mathbb{Z}[q]$ is a finite product of polynomials; MacMahon's $\sum_{\sigma} q^{\operatorname{inv}\sigma} = [n]_q!$ is a **theorem**, and it is what licenses calling $[n]_q!$ a $q$-analogue of $n!$ |
+| 71 | CB-17 | the Gaussian binomial coefficient $\binom{n}{k}_q$ | defined as $[n]_q!/([k]_q![n-k]_q!)$, this is a **quotient in a polynomial ring and is not obviously a polynomial**. Integrality is a theorem, exactly as $\binom{n}{k}$'s was at order 20. Prove it from the $q$-Pascal recurrence, and only then state the subspace-counting theorem $\binom{n}{k}_q = \#\{k\text{-subspaces of } \mathbb{F}_q^n\}$ for a prime power $q$, which is the convention anchor |
+| 72 | CB-17 | the bivariate ring carrying the Jacobi triple product | $\sum_{n\in\mathbb{Z}} c_n(q) z^n$ with $c_n \in \mathbb{Z}[[q]]$ is not a formal Laurent series in either variable alone. The ring must be minted with an explicit **support condition** — for each $N$, only finitely many $n$ have $\operatorname{ord}_q c_n \le N$ — and the product must be shown well defined under it. This is the page's largest obligation and the reason the triple product is not free |
+| 73 | CB-17 | a formal limit of a sequence of polynomials | the finite Rogers–Ramanujan polynomials converge coefficientwise; "converge" means the $x$-adic limit of the published `def-formal-order-and-x-adic-topology`, and the limit exists by `thm-x-adic-completeness-and-polynomial-density`. Say so, rather than writing $\lim$ and hoping |
+| 74 | CB-18 | the rook numbers $r_k(B)$ and $N_j$ | both count subsets of finite sets; and $N_n(x) = \sum_k r_k (n-k)!(x-1)^k$ is an identity of **polynomials**, so it is proved for all $x$, not checked at integers and extended by hand-waving — or, if proved for positive integers, the extension is the separate citable fact that a polynomial identity over an infinite domain follows from agreement on infinitely many values (`cor-polynomials-over-an-infinite-domain-are-determined-by-values`, published) |
+| 75 | CB-18 | a sign-reversing involution and its fixed-point count | that an involution partitions a finite set into fixed points and $2$-element orbits is a lemma, and it is what makes $\sum_{s\in S}\operatorname{sgn}(s) = \sum_{s\in\operatorname{Fix}}\operatorname{sgn}(s)$ true. Every determinant evaluation on the page spends it |
+| 76 | CB-19 | the characteristic polynomial $\chi_P(t)$ of a graded poset | needs a rank function, i.e. `def-graded-poset-and-rank` (published), **and** a $\hat{0}$; the sum $\sum_{x} \mu(\hat{0},x)t^{\rho(x)}$ is over a finite poset. That $\chi_P$ is a polynomial is immediate here; that the chromatic polynomial of a graph **is** $\chi$ of its lattice of flats is the page's theorem, not its definition |
+| 77 | CB-19 | the partition lattice $\Pi_n$ | that refinement is a partial order is one item; that $\Pi_n$ is a **lattice** — every pair has a meet and a join — is a second, and the join is the transitive closure of the union of the two partitions' relations, which needs proof |
+| 78 | CB-20 | pattern containment and $\operatorname{Av}(\tau)$ | "$\sigma$ contains $\tau$" is the existence of an order-isomorphic subsequence; order-isomorphism of two finite sequences of distinct reals must be defined before "the pattern of a subsequence" has a referent |
+| 79 | CB-x (extremal set theory) | the colex order and the compression $C_{ij}$ | colex is a linear order on $k$-sets — prove it is one; a compression is a map on families, and that it does not increase the shadow and terminates are two separate lemmas. Kruskal–Katona is unprovable without both |
+| 80 | GT-9 | degeneracy $d(G)$ and the colouring number | $\max_{H\subseteq G}\delta(H)$ is a maximum over a **nonempty finite** set of subgraphs, so $G$ must be nonempty; the null graph is a stated boundary case, matching the published `def-proper-vertex-colouring-and-chromatic-number`, which fixes $\chi(\varnothing)=0$ |
+| 81 | GT-9 | a $k$-critical graph | the definition is $\chi(G)=k$ and $\chi(G-e)<k$ for every edge; that a $k$-chromatic graph **contains** a $k$-critical subgraph is a theorem (take an edge-minimal one), and everything Dirac proves about critical graphs is vacuous without it |
+| 82 | GT-10 | the chromatic **polynomial** $P(G,k)$ | that the number of proper $k$-colourings is a polynomial function of $k$ is deletion–contraction's content. The word is not licensed before it. Carried over from §8 #30, which was never discharged because the page was never built |
+| 83 | GT-10 | the broken-circuit complex | a broken circuit depends on a chosen linear order of $E(G)$; the **coefficients** of $P(G,k)$ do not. Independence of the order is the well-definedness obligation, and Whitney's theorem is false-sounding without it |
+| 84 | GT-10 | $P(G,-1)$ and acyclic orientations | evaluating a polynomial at a negative integer is legitimate because $P$ is a polynomial with integer coefficients (#82); Stanley's reciprocity theorem is then a statement about $(-1)^{n}P(G,-k)$, not a formal manipulation of a counting function |
+| 85 | GT-11 | $\chi'(G)$ | the set of feasible $k$ is nonempty ($k=\lvert E\rvert$ works), so a least exists by `thm-well-ordering-principle` |
+| 86 | GT-11 | the $\alpha\beta$-subgraph of a proper edge colouring | its components are **paths and even cycles** — a lemma, proved from the fact that each vertex meets at most one $\alpha$-edge and one $\beta$-edge — and only then is "swap the two colours on one component" a well-defined operation producing a proper colouring. This is the edge analogue of the published `lem-kempe-component-colour-swap` and a genuinely different statement (§19.2 F1) |
+| 87 | GT-12 | the choice number $\operatorname{ch}(G)$ | the set of feasible $k$ is nonempty ($k=\lvert V\rvert$); and $\operatorname{ch}$ is defined by a quantifier over **all** list assignments of that size, so the definition ranges over a finite set of assignments only after the colour universe is fixed — fix it, or quantify over lists drawn from a fixed countable set and prove the value does not depend on the choice |
+| 88 | GT-13 | a perfect graph | $\chi(H)=\omega(H)$ for **every induced subgraph** $H$, including $G$ itself and the null graph; cite `def-subgraph-induced-subgraph-and-spanning-subgraph`. The one-line trap is quantifying over subgraphs rather than induced subgraphs |
+| 89 | GT-13 | the replication $G\circ v$ | replacing $v$ by two adjacent copies with the same outside neighbourhood is a construction whose result must be shown to be a graph with the intended $\omega$ and $\chi$; the replication lemma is what the weak perfect graph theorem's inductive step spends |
+| 90 | GT-14 | a block, and the block–cut tree | "block" = maximal connected subgraph without a cut vertex; that the blocks of a graph **partition its edge set** is a theorem, and that the block–cut incidence graph is a **tree** is a second. The definite article in "the block tree" waits on both |
+| 91 | GT-15 | a tree-decomposition and $\operatorname{tw}(G)$ | the width is $\max_t \lvert V_t\rvert - 1$ over a finite tree, and the treewidth is a minimum over a **nonempty** set of decompositions (the one-bag decomposition always exists); the $-1$ is a convention and must be labelled one, since it is what makes $\operatorname{tw}(\text{tree}) = 1$ |
+| 92 | GT-16 | the deficiency $\operatorname{def}(G)=\max_S (o(G-S)-\lvert S\rvert)$ | $o(\cdot)$ counts odd components; the maximum is over a finite set and is attained at $S=\varnothing$ at worst, so it is $\ge 0$. Tutte–Berge is a statement about this maximum and needs it defined first |
+| 93 | GT-17 | a matroid | give the independence axioms, then prove **all bases have the same size** before defining the rank function; $r(X)$ is otherwise not well defined. The circuit, basis, rank and closure axiomatisations are separate definitions and their equivalence is a numbered theorem, not an assertion of "the same thing in different language" |
+| 94 | GT-17 | the dual matroid $M^*$ | that the complements of bases are the bases of a matroid is a theorem; $r^*(X) = \lvert X\rvert - r(M) + r(E\setminus X)$ follows and is not the definition |
+| 95 | GT-18 | the Tutte polynomial $T(G;x,y)$ | **define it by the rank–nullity sum $\sum_{A\subseteq E}(x-1)^{r(E)-r(A)}(y-1)^{\lvert A\rvert-r(A)}$, which is manifestly well defined, and prove deletion–contraction as a theorem.** Defining it by the recursion first forces an independence-of-the-deletion-order obligation that is real work and that most textbooks wave through |
+| 96 | GT-18 | a nowhere-zero $H$-flow | needs a fixed orientation, and the count must be shown **independent of the orientation chosen**; Tutte's theorem that the number depends only on $\lvert H\rvert$ and not on the group is the page's landmark and it presupposes this |
+| 97 | GT-19 | $\varepsilon$-regularity, an equitable partition, and the index/energy | density $d(X,Y)=e(X,Y)/(\lvert X\rvert\lvert Y\rvert)$ needs $X,Y$ nonempty; the energy $q(\mathcal{P})=\sum \frac{\lvert V_i\rvert\lvert V_j\rvert}{n^2}d(V_i,V_j)^2$ is a finite sum bounded by $1$ — that bound is what makes the iteration terminate, and it is a numbered item, not an observation |
+| 98 | GT-19 | the regularity lemma's $M(\varepsilon)$ | the statement is "there is $M$ such that every graph admits an $\varepsilon$-regular equitable partition into at most $M$ parts"; $M$ is produced by the energy iteration and the tower bound is a **separate**, stated fact. Do not write "the" $M(\varepsilon)$ without a least-witness argument |
+| 99 | GT-21 | the edge expansion $h(G)$ and $\lambda_2$ | $h(G)=\min_{0<\lvert S\rvert\le n/2} e(S,\bar S)/\lvert S\rvert$ — a minimum over a nonempty finite set; $\lambda_2$ needs the eigenvalues ordered, i.e. the spectral theorem, exactly as §8 #31 said |
+| 100 | GT-7a | the spectrum of a graph | §8 #31, restated because the page is still unbuilt: the eigenvalues are real by the spectral theorem for real symmetric matrices, and only then can they be listed in order |
+| 101 | GT-7a | "**the** cofactor" in the matrix-tree theorem | §8 #32, and now with a prerequisite that did not exist when it was written: the determinant page has **no cofactor expansion at all** (§19.2 F2), so the page must first define the $(i,j)$ minor and cofactor and prove the Laplace expansion, then prove all cofactors of $L$ are equal |
+| 102 | GT-7b | a strongly regular graph, and its eigenvalue multiplicities | the parameters $(n,k,\lambda,\mu)$ determine the eigenvalues; the multiplicities are given by a formula that must be a **nonnegative integer**, and that integrality is the feasibility condition — so the multiplicities are computed before any parameter set is called feasible |
+| 103 | CB-13 | VC dimension and shattering | the set of shattered subsets is nonempty ($\varnothing$ is shattered) and finite, so a maximum exists; $\operatorname{VC}(\mathcal{F})=0$ for a one-element family is the boundary case |
+| 104 | CB-14 | the replication number $r$ and block count $b$ of a $2$-$(v,k,\lambda)$ design | §8's row said this and it stands: **$r$ is constant is a THEOREM**, proved by double counting flags through a fixed point, and $b$ follows. A definition that stipulates them stipulates something provable |
+| 105 | CB-14 | the order of a finite projective plane | that every line has the same number of points is a theorem, proved by exhibiting a bijection between two lines through a point off both; "the order $n$" is illegitimate until it is proved |
+| 106 | CB-25 | Shannon entropy $H(X)$ on a finite space | $-\sum_x p(x)\log p(x)$ with the stipulation $0\log 0 = 0$, which is a convention and must be labelled one; it is a finite sum of reals and needs `def-natural-logarithm`. Every bound on the page is Jensen applied to a convex function, so `thm-finite-jensen-inequality` is a declared dependency |
+| 107 | CB-26 | the discrepancy $\operatorname{disc}(\mathcal{F})$ | a minimum over the finite set of $\pm1$ colourings of a maximum over a finite family — both attained, and the order of the quantifiers is the definition |
+| 108 | CB-27 | the Fourier transform on $\mathbb{F}_p^n$ | $\hat f(r) = p^{-n}\sum_x f(x)\omega^{-r\cdot x}$ with $\omega$ a primitive $p$-th root of unity: **the choice of $\omega$ must be fixed once**, cite `thm-complex-nth-roots-and-roots-of-unity`, and character orthogonality is proved from `cor-sum-of-roots-of-unity`, not assumed |
+| 109 | CB-28 | the slice rank of $F:A^3\to\mathbb{F}$ | the set of representations of $F$ as a sum of slice-rank-one functions is nonempty (the trivial one has $\lvert A\rvert$ terms), so a least $k$ exists by `thm-well-ordering-principle`. Every step of Ellenberg–Gijswijt is a bound on this minimum |
+
+---
+
+# 21. The choice ledger, extended and corrected
+
+The library states choice costs in the Statement itself. §7's table is corrected
+here where the build overtook it (§18.2 S3, S4) and extended to the new material.
+**Pages are relative labels; no order is quoted.**
+
+## 21.1 Corrections to §7
+
+| result | §7 said | disk says | disposition |
+|---|---|---|---|
+| infinite Ramsey theorem on $\mathbb{N}$ | **DC** | `thm-infinite-ramsey-on-the-naturals` is titled "**in ZF**" and is published | §7's row is wrong. The published route fixes a linear order on each successor set, which makes the branch canonical and spends no choice. Any new statement about infinite Ramsey cites the published item and repeats **ZF** |
+| König's lemma | **DC** | `thm-konig-infinity-lemma-for-ordered-trees`, "**in ZF**", published | same. The **ordered** hypothesis is what buys it; a version for unordered finitely branching trees does need a choice principle and must not be conflated with the published one |
+| infinite Hall / marriage theorem | **BPI** via Rado selection | not built; `matchings-covers-menger-and-network-flows` deferred it and recorded that the source pass "did not license the prose scaffold's exact BPI claim" | §7's row is **unlicensed** and is withdrawn. §24 GT-16 replaces it with two results that do close: the **countable** locally finite case from the published ZF König's lemma, and the general family-of-finite-sets case with **BPI named in the Statement** and the exact reversal explicitly not claimed |
+| De Bruijn–Erdős | **BPI**, via the published `thm-ultrafilter-lemma` | never built | stands, and is now scaffolded on §24 GT-9. Läuchli's equivalence with BPI over ZF is a **separate** claim; state the implication the proof gives and do not assert the reversal without a source |
+
+## 21.2 New rows
+
+| result | page | cost | note |
+|---|---|---|---|
+| the whole symbolic method: classes, $\operatorname{SEQ}$, $\operatorname{MSET}$, $\operatorname{PSET}$, $\operatorname{CYC}$, recursive specifications | CB-15 | **none** | every level is finite and every sum is a finite sum; the $x$-adic fixed point is constructed, not chosen |
+| permutation statistics, $q$-analogues, partition identities, the twelvefold way, rook polynomials, LGV, the involution principle | CB-16…CB-19 | **none** | finite objects throughout |
+| Kruskal–Katona, compressions, the four functions theorem, Harris/FKG, Kleitman | CB-x | **none** | finite lattices; the four functions theorem is an induction on $n$ |
+| Brooks, Vizing, König edge colouring, the chromatic polynomial, Gallai–Roy, Mycielski, critical graphs | GT-9…GT-11 | **none** | finite graphs |
+| **De Bruijn–Erdős** ($\chi(G)\le k$ iff every finite subgraph has $\chi \le k$) | GT-9 | **BPI**, via the published `thm-ultrafilter-lemma` | named in the Statement. This is the only infinite statement on its page and the finiteness convention of `rem-finite-simple-graph-convention` is explicitly suspended in it |
+| the list-colouring compactness analogue ($\operatorname{ch}$ of an infinite graph) | GT-12 | **BPI** | same route; state it, or omit the infinite case entirely — do not prove it silently |
+| perfect graphs, chordal graphs, the weak perfect graph theorem | GT-13 | **none** | finite; Gasparian's rank argument is linear algebra over $\mathbb{R}$ |
+| blocks, ear decompositions, Tutte's wheel theorem, Mader, tree-decompositions, brambles | GT-14, GT-15 | **none** | finite |
+| **the countable infinite marriage theorem** for a locally finite bipartite graph | GT-16 | **none — ZF** | via the published ZF König's lemma on the tree of partial matchings. This is the form the library can prove choice-free, and it is why it is scaffolded first |
+| **the marriage theorem for an arbitrary family of finite sets** | GT-16 | **BPI** | the Rado selection route through `thm-ultrafilter-lemma`. Name BPI in the Statement; do **not** claim the converse, and do not claim it for families of infinite sets — that is false and the correct statement (Aharoni) stays denied |
+| **Kruskal's tree theorem** (finite trees are well-quasi-ordered under topological minors) | GT-15 | **DC** | Nash-Williams' minimal bad sequence argument constructs an infinite descending selection; that is a dependent choice and the Statement says so. If the authoring agent finds a choice-free route it may state ZF instead, but it must not guess |
+| **the graph minor theorem** | — | — | denied (§29); statement only |
+| **the Rado graph**: explicit construction, the extension property, uniqueness, homogeneity, universality | GT-20 | **none — ZF** | the construction is the BIT predicate on $\mathbb{N}$; uniqueness is back-and-forth on a countable set, which needs no choice because the enumeration is given. Universality for **countable** graphs likewise. The statement "$G(\mathbb{N},1/2)$ is a.s. isomorphic to it" needs a measure and stays out (§18.2 S5) |
+| every infinite connected graph has a spanning tree | — | **AC** (equivalent) | **not used**, and recorded so no proof quietly leans on it |
+| the regularity lemma, removal lemmas, Roth via removal | GT-19 | **none** | every object is a finite graph; the iteration terminates by the energy bound |
+| finite probability, martingale concentration, entropy, discrepancy, derandomization | CB-25, CB-26 | **none** | finite spaces throughout; expectation and entropy are finite sums |
+| finite Fourier analysis, Roth in $\mathbb{F}_p^n$ and in $\mathbb{Z}/N\mathbb{Z}$, cap sets, Behrend, Ruzsa–Plünnecke | CB-27, CB-28 | **none** | finite abelian groups and finite-dimensional vector spaces |
+| linear-algebra methods, designs, projective planes, spectral graph theory | CB-13, CB-14, GT-7a/b | **none** | finite dimensions; `thm-any-two-finite-bases-have-the-same-size` is the finite statement, never the Zorn one |
+| **Perron–Frobenius for an irreducible nonnegative matrix** | GT-7a | **none** | via Collatz–Wielandt and the attainment of an extremum on the standard simplex, which is closed and bounded in $\mathbb{R}^n$: cite `thm-euclidean-heine-borel-pseudocompactness-and-extreme-values`. **No fixed-point theorem**, which matters because Brouwer in dimension $\ge 2$ is deferred (`DEFERRED.md` §4) |
+
+A `rem-choice-ledger`-style remark, in the style of the published one, is
+**required** on GT-9 (De Bruijn–Erdős), GT-15 (Kruskal's tree theorem) and GT-16
+(the two marriage theorems), and on GT-20 (the Rado graph), whose whole point is
+that a "random" object is constructed in ZF.
+
+---
+
+# 22. The enumerative block
+
+Format follows §11: **anchor** (the page id this pair sits immediately after),
+`requires` as page ids, then DEFS / THMS / FS / B / CEX, then traps. Item ids are
+suggestions except where a §8 or §20 row fixes one. Every A page has its
+`-examples` companion; **B pages are leaves**, so every witness a later page needs
+is called out here and homed on an A page. Target 25–45 A-items, hard ceiling 60
+(§18.2 S13).
+
+Sources are keyed to the harvest: **S1** Stanley EC1 (author-hosted,
+`https://math.mit.edu/~rstan/ec/ec1.pdf`), **S2** Flajolet–Sedgewick
+(`https://ac.cs.princeton.edu/home/AC.pdf`), **S3** Sagan *Combinatorics: The Art
+of Counting*, **S4** Wilf *generatingfunctionology*, **S5** Cameron LTCC
+*Enumerative Combinatorics*, **S6** Postnikov/Dillon survey, **S7** de Mier
+Oxford notes, **S8** Grinberg class notes. Full ledger and verbatim headings:
+`research/subjects-01-combinatorics-harvest-enumerative.md`.
+
+---
+
+## CB-15 (NEW). Combinatorial Classes and the Symbolic Method
+
+**Anchor:** immediately after `formal-power-series-examples`.
+`requires`: `formal-power-series`, `finite-counting-and-binomial-coefficients`,
+`congruences-and-the-chinese-remainder-theorem` (Euler's totient, for the cycle
+construction), `group-actions-and-cayleys-theorem` (orbits, for the cycle
+construction).
+
+This page is why the rest of the enumerative block is short. Flajolet–Sedgewick's
+Preface says it in one sentence — *"a collection of general (and simple) theorems
+provide a systematic translation mechanism between combinatorial constructions
+and operations on generating functions. **This translation process is a purely
+formal one.**"* — and their Part A / Part B boundary is exactly the library's
+formal/analytic seam (§9 denial 1). Everything here is Part A.
+
+The page also pays a debt the authored `formal-power-series` page left open: it
+has summability, the $x$-adic topology and completeness, and nothing that uses
+them. This is what uses them.
+
+DEFS: a **combinatorial class** $(\mathcal{A},\lvert\cdot\rvert)$ with every level
+finite (#63); the counting sequence and the **ordinary generating function**
+$A(x)=\sum a_nx^n \in \mathbb{Z}[[x]]$; isomorphism of classes as a
+size-preserving bijection; the neutral class $\mathcal{E}$ and the atomic class
+$\mathcal{Z}$; disjoint union and Cartesian product; $\operatorname{SEQ}$ (#64);
+multisets over a class, $\operatorname{MSET}$ and $\operatorname{PSET}$ (#66);
+$\operatorname{CYC}$ as an orbit class of the cyclic shift (#67); substitution
+$\mathcal{A}\circ\mathcal{B}$; pointing $\Theta\mathcal{A}$; a **combinatorial
+specification** and a recursive specification (#68).
+
+THMS: **the sum and product rules** $A+B$ and $AB$, each proved from
+`thm-sum-rule` / `thm-product-rule` and the convolution of
+`def-formal-power-series-and-coefficient-extraction`; **the sequence theorem**
+$\operatorname{SEQ}(\mathcal{B}) \Rightarrow 1/(1-B(x))$, whose two hypotheses are
+#65 (landmark); **the multiset theorem** in the product form
+$\prod_{n\ge1}(1-x^n)^{-b_n}$ over any commutative ring, and the
+$\exp\bigl(\sum_{k\ge1}B(x^k)/k\bigr)$ form **over a $\mathbb{Q}$-algebra**, as a
+separate statement with the hypothesis at the statement; **the powerset theorem**
+$\prod_{n\ge1}(1+x^n)^{b_n}$ and its $\exp$ form; **the cycle theorem**
+$\sum_{k\ge1}\frac{\varphi(k)}{k}\log\frac{1}{1-B(x^k)}$ over a
+$\mathbb{Q}$-algebra, whose proof is Burnside's lemma applied to the cyclic
+group — the citation of the published `thm-cauchy-frobenius-orbit-counting` that
+makes this page a genuine seam rather than a restatement; **substitution**
+$\mathcal{A}\circ\mathcal{B}\Rightarrow A(B(x))$ when $b_0=0$, citing the
+published `thm-formal-composition-laws`; **pointing** $\Theta A(x)=xA'(x)$;
+**the fixed-point theorem for recursive specifications** (landmark, #68): a
+specification whose right side raises order has a unique solution in $R[[x]]$,
+by the published `thm-x-adic-completeness-and-polynomial-density`.
+
+Immediate consequences, each a numbered corollary rather than an exercise:
+binary words and $1/(1-2x)$; **compositions of an integer** as
+$\operatorname{SEQ}(\operatorname{SEQ}_{\ge1}(\mathcal{Z}))$, recovering
+$2^{n-1}$ and, with $k$ parts, the published `thm-stars-and-bars`;
+**partitions of an integer** as $\operatorname{MSET}(\operatorname{SEQ}_{\ge1}
+(\mathcal{Z}))$, giving Euler's product $\prod(1-x^k)^{-1}$ **as a corollary of
+the multiset theorem** rather than as a fresh summability argument on CB-8;
+**plane trees** $\mathcal{G}=\mathcal{Z}\times\operatorname{SEQ}(\mathcal{G})$ and
+**binary trees** $\mathcal{B}=\mathcal{E}+\mathcal{Z}\times\mathcal{B}^2$, both
+legitimate by the fixed-point theorem, handing CB-6 its Catalan equation with the
+existence question already settled; **necklaces** as
+$\operatorname{CYC}$ of a finite alphabet, with the count
+$\frac1n\sum_{d\mid n}\varphi(d)m^{n/d}$.
+
+FS: $\operatorname{SEQ}(\mathcal{B})$ is a combinatorial class for every
+$\mathcal{B}$ (refuted by any $\mathcal{B}$ with an object of size $0$ — the
+witness that makes #64 a real hypothesis); the OGF of $\mathcal{A}\times
+\mathcal{B}$ is $A(x)B(x)$ when the product is not disjoint, i.e. when the pair
+is not determined by its two components; $\prod_{n\ge1}(1-x^n)^{-b_n}$ is defined
+for every sequence $(b_n)$ (refuted by summability); every class is specified by
+a finite specification.
+
+B: the constructions run on binary sequences, compositions, partitions into parts
+$\le 3$, plane trees with $\le 4$ nodes, necklaces of length $6$ in $2$ colours
+computed both by $\operatorname{CYC}$ and by the published Burnside lemma with an
+agreement note; a specification solved by iterating truncations to order $6$,
+exhibiting the $x$-adic convergence concretely.
+
+CEX: a "class" whose level $\mathcal{A}_2$ is infinite, so no OGF exists; two
+non-isomorphic classes with the same OGF (the counting sequence forgets
+structure — the item CB-20 will want).
+
+Traps. (i) **Every construction carries a hypothesis and the hypothesis is the
+content.** $b_0=0$ for $\operatorname{SEQ}$, $\operatorname{MSET}$,
+$\operatorname{CYC}$ and substitution; a $\mathbb{Q}$-algebra for every $\exp$ or
+$\log$ form. Stating the $\exp$ form over $\mathbb{Z}$ is the page's one fatal
+temptation. (ii) **The labelled/EGF half of the symbolic method is NOT here** —
+it is on CB-7, which already owns exponential generating functions. Do not
+duplicate the table. (iii) F&S §V.6 is titled "Transfer matrix models" and §V.3
+"Regular specifications and languages", and both sit in **Part B**; a scaffolder
+who greps F&S for "transfer matrix" imports complex asymptotics. The formal
+transfer-matrix theory is Stanley §4.7 and belongs to CB-5. (iv) Nothing on this
+page is analytic; no radius of convergence enters any proof.
+
+Forward references: NONE.
+
+---
+
+## CB-5 (ENRICHED). Linear Recurrences, Rational Generating Functions and the Transfer-Matrix Method
+
+**Anchor:** `linear-recurrences-and-rational-generating-functions` (planned,
+unauthored). Retitled to name the transfer-matrix method, which the 2026-07-28
+inventory did not carry.
+`requires`: `formal-power-series`, CB-15,
+`eigenvalues-eigenvectors-and-the-characteristic-polynomial`, `splitting-fields`,
+`determinants-of-matrices-over-a-commutative-ring`.
+
+Kept from §11: the recurrence $\iff$ rational GF equivalence, partial fractions
+over a splitting field, the closed form with polynomial factors at repeated
+roots, the companion-matrix dictionary, Fibonacci and Lucas, the Cayley–Hamilton
+reading, closure of rational series under sum and product.
+
+**Added.** **The transfer-matrix theorem** (S1 Theorem 4.7.2, landmark): for a
+finite digraph with edge weights in a commutative ring and adjacency matrix $A$,
+$\sum_{n\ge0}(A^n)_{uv}x^n$ is the rational function
+$(-1)^{u+v}\det(I-xA : v,u)/\det(I-xA)$, and the trace form
+$\sum_n \operatorname{tr}(A^n)x^n$ likewise. The proof is *formal*: $I - xA$ is
+invertible in $M_p(R[[x]])$ because $xA$ has positive order, so no spectral
+radius and no convergence hypothesis appears (harvest §E2(7)). **This is the
+theorem that makes "count the walks / count the words avoiding a pattern /
+count the tilings" a theorem rather than a technique**, and it is the single
+largest addition to this page. It needs the cofactor/adjugate machinery, which
+the determinant page does not have (§19.2 F2) — the page mints it, or cites
+GT-7a's if the orchestrator orders them the other way; **decide once, and record
+the decision in the batch notes.** Also added: the transfer-matrix count of
+binary words avoiding a fixed factor, the Fibonacci tiling model as its smallest
+instance, and the **Hadamard product** of rational series is rational.
+
+The equivalence "rational $\iff$ linear recurrence" is proved by S1's
+**dimension count of four vector spaces**, not by partial fractions, with the
+partial-fraction closed form as the separate consequence: the two are different
+statements and only the first is convention-free.
+
+Traps, kept and added. (i) Name the splitting field in the Statement; do not
+assume $\mathbb{R}$ or $\mathbb{C}$. (ii) Fix the reciprocal-root convention
+$Q(x)=\prod(1-\lambda_ix)$ in a `rem-` and cite it everywhere. (iii) Nothing here
+is asymptotic. (iv) **New:** S1's Corollary 4.7.3 states the eigenvalue form of
+the transfer-matrix result and that one *does* touch algebraic closure; keep the
+cofactor form as primary and state the eigenvalue form with its hypothesis.
+
+---
+
+## CB-6 (ENRICHED). Lattice Paths, the Cycle Lemma and Catalan Numbers
+
+**Anchor:** `lattice-paths-and-catalan-numbers` (planned, unauthored).
+`requires`: CB-5, `formal-power-series`, CB-15,
+`symmetric-groups-and-the-sign-homomorphism` (the sign, for LGV),
+`determinants-of-matrices-over-a-commutative-ring`.
+
+Kept from §11: lattice and Dyck paths, $C_n$ **defined as a count** (#16), the
+reflection principle as a bijection, the ballot problem, the cycle lemma, the
+generating-function route using the published
+`cor-unique-formal-root-with-constant-one`, the Catalan recurrence, three proved
+bijections, $\binom{2n}{n}-\binom{2n}{n+1}=C_n$.
+
+**Added, and one recommendation reversed.**
+- **Lindström–Gessel–Viennot is KEPT HERE**, against §11's recommendation to drop
+  it. §11 argued it "duplicates a determinant argument better placed at 209";
+  that is wrong on two counts. Its proof is a **sign-reversing involution on
+  intersecting path tuples**, which is combinatorics and not linear algebra; and
+  its consumers — the Hankel determinants of the Catalan numbers, the
+  Lindström–Gessel–Viennot form of the matrix-tree theorem, MacMahon's box
+  formula — are spread across three later pages, so a lattice-path home is the
+  one that serves them all. S1 Theorem 2.7.1 and S3 Theorem 2.5.4 are the two
+  independent treatments. It brings the sign-reversing-involution lemma (#75)
+  with it, which CB-18 then reuses.
+- **The Chung–Feller theorem** (the number of paths with exactly $k$ steps above
+  the axis is independent of $k$) — a cycle-lemma corollary, cheap and striking.
+- **Narayana numbers**, the Catalan triangle, and the refinement of $C_n$ by peaks.
+- **Motzkin and Schröder numbers** via CB-15 specifications, with their algebraic
+  equations solved by the fixed-point theorem.
+- Two further Catalan bijections — **triangulations of a polygon** and
+  **non-crossing partitions** — proved, not asserted; non-crossing partitions
+  are the object CB-19 wants for $\Pi_n$ and CB-20 for pattern classes, so they
+  are **A-page** definitions.
+- **The Hankel determinant** $\det(C_{i+j})_{0\le i,j\le n-1}=1$ by LGV.
+
+Traps: §11's three stand. Added: (iv) the cycle lemma's orientation — F&S cut
+after the **left-most** minimum, Postnikov/Dillon select the leftmost lowest
+point after the $i$-th down step; these are the same lemma but a page that mixes
+them gets a $1$-to-$\nu$ bijection pointing the wrong way. Fix the convention in
+a `rem-` and cite Dershowitz–Zaks. (v) The published
+`ex-lagrange-inversion-catalan-coefficients` lives on `formal-power-series-examples`,
+a **B page and therefore a leaf**: this page may not cite it, and must derive
+what it needs from `thm-lagrange-burmann-inversion` on the A page.
+
+---
+
+## CB-16 (NEW). Permutation Statistics, Inversions and Eulerian Numbers
+
+**Anchor:** immediately after CB-6.
+`requires`: `symmetric-groups-and-the-sign-homomorphism`, CB-15,
+`formal-power-series`, `finite-counting-and-binomial-coefficients`.
+
+The library has the symmetric group, disjoint cycle decomposition, cycle type,
+the inversion number and the sign, and no statistic beyond them. This page is the
+enumerative theory of $S_n$ that everything $q$-analogous rests on.
+
+DEFS: the descent set, $\operatorname{des}$, $\operatorname{maj}$,
+$\operatorname{exc}$, $\operatorname{fix}$ (#69), with the **required dictionary
+item** recording that $\operatorname{inv}$ is the published
+`def-inversions-inversion-number-and-sign` and is not re-minted; the Eulerian
+number $A(n,k)$ (#70); the $q$-integer, $q$-factorial and $q$-multinomial (#70);
+the code (Lehmer code) of a permutation; the weak order and the Bruhat order as
+partial orders on $S_n$ (definitions, for CB-19).
+
+THMS: the Lehmer code is a **bijection** $S_n\to\prod_{i}\{0,\dots,i\}$, hence
+$\lvert S_n\rvert=n!$ recomputed and $\sum_\sigma q^{\operatorname{inv}\sigma} =
+[n]_q!$ (**MacMahon**, landmark); $\operatorname{maj}$ is **equidistributed** with
+$\operatorname{inv}$, proved by **Foata's bijection**, which is constructed and
+proved bijective rather than described; the Eulerian recurrence
+$A(n,k)=(k+1)A(n-1,k)+(n-k)A(n-1,k-1)$; **Worpitzky's identity**
+$x^n=\sum_k A(n,k)\binom{x+k}{n}$; the exponential generating function
+$\sum_n A_n(t)x^n/n! = \frac{t-1}{t-e^{(t-1)x}}$ over a $\mathbb{Q}$-algebra;
+the symmetry $A(n,k)=A(n,n-1-k)$; $\operatorname{des}$ and $\operatorname{exc}$
+are equidistributed (the second Eulerian statistic, by a bijection);
+the number of permutations by cycle type is $n!/\prod k^{m_k}m_k!$, which is the
+**cycle-index input CB-10 needs and is homed here so CB-10 can cite it**;
+the transition matrix between $x^{\underline{n}}$ and $x^n$ is the Stirling
+matrix, stated here and proved on CB-7 with an agreement remark; **the
+number of alternating permutations** and its EGF $\sec x+\tan x$ — kept only if
+the page stays under the cap, since it needs the formal trigonometric series.
+
+FS: $\operatorname{maj}$ and $\operatorname{inv}$ agree permutation by
+permutation (they are equidistributed, not equal — the sharpest false statement
+available here, refuted by a concrete $\sigma\in S_3$); the Eulerian numbers count
+permutations with $k$ **ascents** under the same recurrence; every statistic
+equidistributed with $\operatorname{inv}$ is a Mahonian statistic by definition
+(it is a definition, so this is a category error and belongs in a Remark, **not**
+an `fs-` — recorded so no scaffolder plants it).
+
+B: $S_3$ and $S_4$ tabulated by $\operatorname{inv}$, $\operatorname{des}$,
+$\operatorname{maj}$; Foata's bijection run on a concrete $\sigma\in S_5$;
+$[4]_q!$ expanded and matched against the inversion table; $A(4,k)$ computed
+three ways.
+
+CEX: two permutations with the same descent set and different inversion numbers;
+a statistic that is equidistributed with $\operatorname{des}$ but not with
+$\operatorname{inv}$.
+
+Traps. (i) The published inversion definition fixes an orientation ($i<j$ and
+$\sigma(i)>\sigma(j)$); every new statistic is stated against it and the
+dictionary item is mandatory (#69). (ii) $q$-analogues here are polynomials in
+$\mathbb{Z}[q]$; the $q\to1$ specialisation is evaluation at $1$, not a limit.
+(iii) Foata's bijection is defined by a case-split recursion and each case is a
+numbered step; "the first-letter transformation" is not a proof.
+
+---
+
+## CB-7 (ENRICHED). Set Partitions, Stirling Numbers and Exponential Generating Functions
+
+**Anchor:** `set-partitions-stirling-numbers-and-exponential-generating-functions`
+(planned, unauthored).
+`requires`: CB-16, `inclusion-exclusion-and-the-pigeonhole-principle`, CB-15,
+`the-exponential-function` (for Dobinski only — see below),
+`matrices-and-the-matrix-of-a-linear-map`.
+
+Kept from §11: set partitions and blocks, $S(n,k)$ (#17), $B_n$, the unsigned and
+signed first-kind numbers, the rising factorial, the EGF over a
+$\mathbb{Q}$-algebra (#18), the recurrences, $x^n=\sum_kS(n,k)x^{\underline{k}}$
+and the inverse relation, the explicit sieve formula for $S(n,k)$ from the
+published `thm-the-number-of-surjections`, $\sum_k c(n,k)x^k=x^{\overline{n}}$,
+the EGF product rule, the exponential formula, $\sum_nS(n,k)x^n/n!=(e^x-1)^k/k!$.
+
+**Added.**
+- **The labelled half of the symbolic method** (S2 Ch. II), which CB-15
+  deliberately left here: labelled classes; the **labelled product** $\star$ by
+  order-consistent relabelling, with the count $\binom{n}{k}$ of label
+  distributions as its content; $\operatorname{SEQ}$, $\operatorname{SET}$ and
+  $\operatorname{CYC}$ for labelled classes and their EGF images
+  $1/(1-A)$, $\exp A$, $\log\frac1{1-A}$; the boxed product. The **exponential
+  formula becomes the $\operatorname{SET}$ construction**, and the EGF of
+  permutations by cycle type becomes $\exp\bigl(\sum_k A_k(x)/k\bigr)$. Every one
+  of these needs a $\mathbb{Q}$-algebra and says so at the statement — this is a
+  genuine mathematical difference from CB-15's table, not a presentational one.
+- **Dobinski's formula** $B_n=e^{-1}\sum_{\ell\ge0}\ell^n/\ell!$ — **restored**
+  from §11's drop. §11 dropped it as "an infinite series of reals … analysis this
+  page deliberately does not use", but this page sits above
+  `the-exponential-function` and the library has absolute convergence and the
+  Cauchy product. The formula is stated **in $\mathbb{R}$**, proved by absolute
+  convergence, and accompanied by a Remark recording that the *formal*
+  manipulation $e^{e^z}=\sum_\ell e^{\ell z}/\ell!$ is illegal in $\mathbb{R}[[z]]$
+  — Stanley's Example 1.1.7 is exactly this warning, and the contrast is the
+  item's value. **Authoring check:** confirm on disk that rearrangement of an
+  absolutely convergent double series is available on a page below this one; if
+  it is not, drop Dobinski with a note naming the missing lemma rather than
+  proving it in passing.
+- The **involution numbers** and their EGF $\exp(x+x^2/2)$; the **ordered Bell
+  (Fubini) numbers** and their EGF $1/(2-e^x)$; **Lah numbers**; the number of
+  set partitions with all blocks of size $\ge 2$.
+- **Touchard's congruence** $B_{p+n}\equiv B_n+B_{n+1} \pmod p$, citing the
+  published congruence machinery — a cheap, striking corollary of the recurrence.
+
+Traps. (i) §11's Stirling notation trap is sharper than it looked: the harvest
+records that $S(n,k)$ and $c(n,k)$ are **not** inverse matrices — $S$ and the
+*signed* $s$ are. A page adopting Knuth's signless brackets $\genfrac[]{0pt}{}{n}{k}$
+must still carry a signed symbol for the inversion theorem or state it with an
+explicit $(-1)^{n-k}$. Fix the convention in a `rem-` and cite it. (ii) The
+$\mathbb{Q}$-algebra hypothesis appears at the definition. (iii) The exponential
+formula is proved **formally**; Dobinski is the page's one deliberately analytic
+item and is labelled as such in its own Remark.
+
+---
+
+## CB-8 (ENRICHED). Integer Partitions and the Twelvefold Way
+
+**Anchor:** `integer-partitions-and-the-twelvefold-way` (planned, unauthored).
+`requires`: CB-7, `formal-power-series`, CB-15.
+
+Kept from §11 in full: partitions, Ferrers diagrams, conjugation, $p(n)$ (#19),
+$p(n,k)$, restricted partitions, Euler's product (#20) — **now a corollary of
+CB-15's multiset theorem, with the direct summability proof kept as the second
+route and an agreement remark** — distinct $=$ odd proved twice, the pentagonal
+number theorem by Franklin's involution, the resulting recurrence, and the
+twelvefold way as one theorem with twelve numbered clauses.
+
+**Added.** The **Durfee square** identity $\sum_n p(n)x^n =
+\sum_{k\ge0}\frac{x^{k^2}}{\prod_{i\le k}(1-x^i)^2}$; **self-conjugate partitions
+$=$ partitions into distinct odd parts**, by a diagram bijection; the
+**Rogers–Ramanujan-adjacent** counts $p(n\mid \text{parts} \equiv \pm1 \bmod 5)$
+stated here and proved on CB-17; the recurrence $p(n,k)=p(n-1,k-1)+p(n-k,k)$ and
+the **partitions-in-a-box** count, which is CB-17's Gaussian binomial;
+**Ramanujan's congruence $p(5n+4)\equiv0\pmod5$**, proved from the pentagonal
+number theorem and an elementary series manipulation in $\mathbb{Z}[[q]]$ —
+the page's capstone, and dropped with a note if the manipulation cannot be
+written in bounded numbered steps.
+
+Traps: §11's three stand. Added: (iv) the twelvefold way's twelve cells are
+stated against **one** fixed reading of "composition" and "weak composition" —
+composition means positive parts — and against one fixed reading of which of
+$n,k$ is the domain. The harvest records that "$n$ balls into $k$ boxes" is the
+**inverse** of "$f : D\to R$ with $\lvert D\rvert=n$", and a source read the
+wrong way transposes the table. Fix both conventions in the definition and cite
+them from every clause.
+
+---
+
+## CB-17 (NEW). $q$-Analogues, Gaussian Binomial Coefficients and Partition Identities
+
+**Anchor:** immediately after CB-8.
+`requires`: CB-8, CB-16, `formal-power-series`,
+`algebraic-extensions-degree-and-finite-fields` (for the subspace theorem only).
+
+DEFS: the Gaussian binomial coefficient (#71); the $q$-Pochhammer symbols
+$(a;q)_n$ and $(a;q)_\infty$; the bivariate ring of §20 #72; a formal limit of
+polynomials (#73).
+
+THMS: the **$q$-Pascal recurrences** in both forms, hence **integrality** of
+$\binom{n}{k}_q$ (#71, landmark — the exact shape of the order-20 integrality
+argument, one $q$ later); $\binom{n}{k}_q$ is the generating function for
+partitions fitting in a $k\times(n-k)$ box, giving CB-8's box count; **the
+subspace theorem** $\binom{n}{k}_q=\#\{k\text{-dimensional subspaces of }
+\mathbb{F}_q^n\}$ for a prime power $q$ (landmark — the convention anchor, and
+the item CB-19 cites for $\mu(L_n(q))$); **the $q$-binomial theorem**
+$\prod_{i=0}^{n-1}(1+xq^i)=\sum_k q^{\binom{k}{2}}\binom{n}{k}_qx^k$; **Euler's
+two $q$-exponentials** and the identities $\prod(1-xq^i)^{-1}=\sum
+\frac{x^n}{(q;q)_n}$ and $\prod(1+xq^i)=\sum\frac{q^{\binom n2}x^n}{(q;q)_n}$;
+**the Jacobi triple product** (landmark), proved in the bivariate ring of #72 by
+Cameron's state-counting argument, with **the pentagonal number theorem
+recovered as a specialisation** and an agreement remark against CB-8's Franklin
+involution; the **finite Rogers–Ramanujan identities** (Schur's polynomial
+recurrence) and the two **Rogers–Ramanujan identities** obtained as their formal
+limit (#73).
+
+**Rogers–Ramanujan is the page's declared size and difficulty risk.** Stanley
+states plainly that no known bijective proof is simple; the route here is
+$q$-difference equations on the Schur polynomials, which is bounded but long.
+**If it cannot be written in bounded numbered steps, it drops to the finite
+identities plus a `deferred` note naming Andrews, *The Theory of Partitions*, as
+the source a later page must open** — the harvest flags Andrews as the source to
+add for exactly this, and none of the eight sources obtained carries a proof.
+
+FS: $\binom{n}{k}_q$ is a rational function and not a polynomial (refuted by
+#71); the $q$-binomial theorem holds with $x$ and $q$ interchanged; every
+$q$-analogue specialises at $q=1$ to its classical counterpart (a false general
+claim — exhibit one that does not).
+
+B: $\binom{4}{2}_q$ expanded and matched against both the box partitions and the
+$2$-subspaces of $\mathbb{F}_2^4$; the triple product truncated and checked to
+order $6$; the first Rogers–Ramanujan identity verified to $n=10$.
+
+CEX: a $q$-identity that fails at $q=0$; two partitions counted by the same
+Gaussian coefficient under different box shapes.
+
+Traps. (i) #72 is the page's legitimacy: the two-variable ring is minted with its
+support condition or the triple product is not a statement. (ii) Define
+$\binom{n}{k}_q$ by the $q$-integer quotient and state the subspace theorem
+immediately, so convention drift is detectable. (iii) The finite fields this page
+cites are **planned and unauthored**; the subspace theorem is the only item that
+needs them, so if that page slips, the theorem moves and the rest of the page
+does not.
+
+---
+
+## CB-18 (NEW). Sieve Methods: Restricted Position, Rook Polynomials and the Involution Principle
+
+**Anchor:** immediately after `incidence-algebras-and-mobius-inversion-examples`.
+`requires`: `incidence-algebras-and-mobius-inversion`,
+`inclusion-exclusion-and-the-pigeonhole-principle`, CB-16,
+`determinants-of-matrices-over-a-commutative-ring`, CB-6 (the sign-reversing
+involution lemma).
+
+Stanley EC1 chapter 2 is the one chapter of the four with no page in the library
+at all: `incidence-algebras-and-mobius-inversion` covers §3.6–3.9, and §2.2–2.7
+— restricted position, rook polynomials, Ferrers boards, V-partitions, the
+involution principle, determinants — is untouched.
+
+DEFS: the operator form of the sieve, $\varphi f(T)=\sum_{Y\supseteq T}f(Y)$ on
+the $2^n$-dimensional space of functions $2^S\to K$ (S1 2.1.1); a board
+$B\subseteq[n]\times[n]$, non-attacking rook placements, the rook numbers
+$r_k(B)$ and the hit polynomial $N_n(x)$ (#74); a Ferrers board; the permanent of
+a square matrix; a sign-reversing involution (#75).
+
+THMS: **$\varphi$ is invertible with $\varphi^{-1}f(T)=\sum_{Y\supseteq
+T}(-1)^{\lvert Y-T\rvert}f(Y)$** (S1 2.1.1, landmark) — the linear-operator form
+of inclusion–exclusion, whose proof reduces to the published
+`cor-binomial-theorem-consequences`, and whose relation to the published
+`thm-inclusion-exclusion` and `cor-inclusion-exclusion-is-boolean-mobius-inversion`
+is a **mandatory dictionary item**; the **hit-polynomial theorem**
+$N_n(x)=\sum_k r_k(n-k)!(x-1)^k$ (S1 2.3.1, landmark) with both of Stanley's
+proofs and an agreement remark; the derangement numbers and the **problème des
+ménages** as its two named instances, with the non-consecutive-selection lemma
+(S1 2.3.4); **the factorisation theorem for the rook polynomial of a Ferrers
+board** (S1 2.4.1) and **rook equivalence** with the unique increasing
+representative (S1 2.4.3–2.4.5); $N_0=\operatorname{per}(J-A_B)$, the permanent
+dictionary; **the involution principle** (S1 §2.6, S3 Theorem 2.3.2) with the
+digraph lemma (S3 2.3.1) and Euler's identity re-proved by it, with an agreement
+remark against CB-8's Glaisher bijection; **the Vandermonde determinant** and
+**Cauchy–Binet** by sign-reversing involution, if the cofactor machinery is homed
+here rather than on GT-7a (§19.2 F2 — **decide once**).
+
+FS: rook-equivalent boards are congruent; the hit polynomial determines the
+board; every sign-reversing involution has a fixed point.
+
+B: the $3\times3$ derangement board with $r_k$ tabulated; the ménages numbers for
+$n\le5$; two rook-equivalent Ferrers boards exhibited; the involution principle
+run on Stanley's Example 2.6.1.
+
+CEX: two distinct boards with the same rook polynomial; an involution with no
+fixed point on an odd-sized set (impossible — so the correct item is the parity
+lemma, and the `cex-` slot instead exhibits a **sign**-reversing involution whose
+fixed-point set is empty, showing the alternating sum can vanish).
+
+Traps. (i) The library already has inclusion–exclusion twice, as
+`thm-inclusion-exclusion` and as Boolean Möbius inversion. This page adds a
+**third** presentation, and the dictionary item is what keeps that from being the
+two-notions defect. (ii) Permanent theory beyond the rook connection has **no
+source in the harvest** — do not develop it; state the dictionary and stop.
+(iii) The hit-polynomial identity is an identity of polynomials (#74).
+
+---
+
+## CB-19 (NEW). Posets II: the Partition Lattice, Characteristic Polynomials and Möbius Algebra
+
+**Anchor:** immediately after CB-18.
+`requires`: `incidence-algebras-and-mobius-inversion`,
+`chains-antichains-sperner-and-dilworth`, CB-17 (for $L_n(q)$), CB-7.
+
+The published incidence-algebra page computes $\mu$ for the Boolean lattice, the
+chain, a product and the divisor lattice, and stops. Stanley EC1 §3.7–3.11 is
+the rest.
+
+DEFS: the partition lattice $\Pi_n$ (#77); the lattice of subspaces $L_n(q)$; a
+**semimodular** and a **geometric** lattice (definitions only here — the matroid
+connection is GT-17's); the characteristic polynomial $\chi_P(t)$ (#76); a
+crosscut; an atom and a coatom.
+
+THMS: $\Pi_n$ is a lattice and its intervals factor as products of smaller
+partition lattices; **$\mu_{\Pi_n}(\hat0,\hat1)=(-1)^{n-1}(n-1)!$** (landmark),
+by the $\mathbb{Q}$-algebra/exponential-formula route of CB-7 or by Weisner —
+prove one, record the other; **$\mu_{L_n(q)}(\hat0,\hat1)=(-1)^nq^{\binom n2}$**,
+citing CB-17's subspace theorem; **Weisner's theorem** and its corollaries;
+**Rota's crosscut theorem**; the **Möbius algebra** of a finite lattice and the
+proof that it is isomorphic to a product of copies of the base ring, giving a
+third route to $\mu$; the characteristic polynomial of a graded poset and its
+behaviour under products; **the chromatic polynomial of a graph is the
+characteristic polynomial of its lattice of contractions/flats**, with **Whitney's
+broken-circuit theorem** as its corollary — this is the theorem that GT-10 cites
+rather than reproves, and it is why this page precedes GT-10 in the reading
+order; the **Euler characteristic** of a finite poset defined as $\mu+1$ and
+computed for the examples, with the simplicial reading explicitly **not** claimed.
+
+FS: every finite lattice is semimodular; $\mu(x,y)$ of a geometric lattice
+alternates in sign without further hypotheses; the characteristic polynomial
+determines the poset.
+
+B: $\Pi_3$ and $\Pi_4$ drawn with $\mu$ computed; $L_2(2)$ and $L_3(2)$; the
+crosscut theorem applied to $\Pi_4$; $\chi$ of the Boolean lattice recomputed
+against the published $\mu$; the broken-circuit expansion of $P(C_4,k)$.
+
+CEX: a lattice whose $\mu$ is not alternating; two non-isomorphic posets with the
+same characteristic polynomial.
+
+Traps. (i) §11's own trap for CB-9 applies again: the published items are cited,
+never re-minted, and the page opens `def-poset-mobius-function` and
+`thm-mobius-inversion-for-lower-finite-posets` before writing a single `requires`
+line. (ii) Order complexes, shellability and the topological reading of $\mu$ are
+**out of scope** (§29) — the crosscut theorem is proved combinatorially, and the
+word "homotopy" does not appear. (iii) `def-graded-poset-and-rank` is published
+and fixes a rank convention; #76 is stated against it.
+
+---
+
+## CB-20 (NEW). Permutation Patterns, Stanley–Wilf and Marcus–Tardos
+
+**Anchor:** immediately after CB-16, or after CB-6 if the orchestrator prefers
+the Catalan classes adjacent to their bijections.
+`requires`: CB-16, CB-6, `inclusion-exclusion-and-the-pigeonhole-principle`.
+
+DEFS: pattern containment and $\operatorname{Av}(\tau)$ (#78); a permutation class
+and its basis; a $0$–$1$ matrix, its pattern containment, and the extremal
+function $\operatorname{ex}(n,P)$ for matrices.
+
+THMS: **every $\tau\in S_3$ has $\lvert\operatorname{Av}_n(\tau)\rvert=C_n$**
+(landmark), by bijections to Dyck paths — the six cases reduce to two by
+symmetry, and the two are proved; **stack-sortable permutations are exactly the
+$231$-avoiding ones** (Knuth), constructed and proved; the Erdős–Szekeres theorem
+restated as $\operatorname{Av}(12\cdots(k+1),\,(l+1)\cdots21)$ being finite,
+citing the published `thm-erdos-szekeres`; **the Füredi–Hajnal quantity
+$\operatorname{ex}(n,P)$ is $O(n)$ for every permutation matrix $P$
+(Marcus–Tardos)** (landmark) — the harvest's clearest short-proof landmark, a
+block-decomposition and counting argument writable in a bounded list of numbered
+steps; **Stanley–Wilf**: $\lvert\operatorname{Av}_n(\tau)\rvert^{1/n}$ is bounded,
+derived from Marcus–Tardos by the Klazar reduction; the multiplicativity of
+$\lvert\operatorname{Av}_n\rvert$ giving the existence of the Stanley–Wilf limit
+by **Fekete's subadditivity lemma**, which the page mints if the library does not
+have it — check on disk before writing `requires`.
+
+FS: $\lvert\operatorname{Av}_n(\tau)\rvert$ depends only on $\lvert\tau\rvert$
+(false for $\lvert\tau\rvert=4$ — the classes $1342$ and $1234$ have different
+counts, and the honest item states only that they differ, not the values);
+$\operatorname{Av}(\tau)$ is closed under composition; every permutation class is
+$\operatorname{Av}$ of a finite basis (false — infinite antichains exist; state
+carefully or drop).
+
+B: the six $S_3$ classes tabulated to $n=5$; a stack sort run on a concrete
+permutation; the Marcus–Tardos block decomposition on a small matrix.
+
+CEX: a permutation avoiding $132$ but not $213$; a $0$–$1$ matrix meeting the
+Füredi–Hajnal bound's order.
+
+Traps. (i) Pattern containment is about **order isomorphism of subsequences**, not
+consecutive subwords; the consecutive variant is a different subject and a Remark
+says so. (ii) Fekete's lemma is a real prerequisite; if the library lacks it, it
+is minted here as a numbered item — it is elementary and this is exactly the
+"build the machinery" case. (iii) The Stanley–Wilf **limit's value** is unknown
+for most $\tau$; the theorem asserts existence and finiteness, and the Statement
+must not suggest otherwise.
+
+---
+
+## CB-21 (NEW). Extremal Set Theory II: Shadows, Compressions and Correlation Inequalities
+
+**Anchor:** immediately after `chains-antichains-sperner-and-dilworth-examples`.
+`requires`: `chains-antichains-sperner-and-dilworth`,
+`inclusion-exclusion-and-the-pigeonhole-principle`,
+`finite-counting-and-binomial-coefficients`.
+
+The published page has shadows, the local LYM inequality, intersecting families,
+Erdős–Ko–Rado, sunflowers and Birkhoff. It has no compression machinery, no
+Kruskal–Katona, and no correlation inequality. This page is the rest of the
+subject, and it is what the entropy page (CB-25) and the probabilistic pages cite.
+
+DEFS: the colex order on $k$-sets and the initial segment (#79); the compressions
+$C_{ij}$ and $D_{ij}$ (down-compression and shifting); a down-set (order ideal in
+the cube — cite the published `def-lattice-distributive-lattice-and-order-ideal`);
+the cascade (binomial) representation of an integer; a cross-intersecting pair.
+
+THMS: colex is a linear order and initial segments minimise the shadow among
+their own size (the base case); **compressions do not increase the shadow, and
+compression terminates** — two separate lemmas, and #79 is unpayable without
+both; **the Kruskal–Katona theorem** (landmark) in the cascade form and in
+Lovász's $\binom{t}{d}$ form, with an agreement remark; the **Erdős–Ko–Rado
+theorem re-proved by shifting**, with an agreement remark against the published
+Katona cycle proof — the value of the second proof is that shifting also gives
+the Hilton–Milner refinement; **the Hilton–Milner theorem** if the page stays
+under the cap; the **Bollobás set-pair inequality** with **both** its proofs, the
+counting/permutation one and the exterior-algebra/linear one (the second is
+CB-13's method and is cross-referenced, not duplicated); **the four functions
+theorem** (Ahlswede–Daykin, landmark), by induction on $n$; **Harris's inequality
+/ the FKG inequality** on the cube for monotone events, and **Kleitman's lemma**,
+both as corollaries of the four functions theorem; **the Kleitman
+diametric-family bound** via Shearer, stated here and proved on CB-25 with an
+agreement remark.
+
+FS: the shadow of an initial segment of colex is an initial segment of colex in
+one lower level (true, and therefore not an `fs-` — recorded so no scaffolder
+plants it as one); compression preserves the family's size but may destroy
+intersecting-ness; Harris's inequality holds for a monotone and an antitone event
+in the same direction.
+
+B: colex on $[5]^{(3)}$ listed with shadows; a compression sequence run to its
+fixed point; the cascade representation of $30$ with $d=3$; the four functions
+theorem checked on $2^{[2]}$; two monotone events on $2^{[3]}$ with their
+correlation computed.
+
+CEX: a family whose shadow is smaller than Kruskal–Katona would allow if the
+cascade representation is read off wrongly (the arithmetic trap, exhibited);
+two events on the cube that are negatively correlated, one of them not monotone.
+
+Traps. (i) The cascade representation's uniqueness is a lemma and the whole
+statement of Kruskal–Katona is unreadable without it. (ii) The published
+`def-shadow-of-a-uniform-family` fixes lower and upper shadows; state
+Kruskal–Katona for the one the published definition calls the lower shadow and
+derive the upper form, rather than silently switching. (iii) The four functions
+theorem is stated for **nonnegative real-valued** functions on a finite
+distributive lattice; the set-system corollaries are separate items.
+
+---
+
+## CB-10 (ENRICHED). Counting up to Symmetry: the Cycle Index and Pólya Enumeration
+
+**Anchor:** `counting-up-to-symmetry-burnside-and-polya` (planned, unauthored).
+`requires`: `group-actions-and-cayleys-theorem`,
+`symmetric-groups-and-the-sign-homomorphism`, CB-16, CB-15,
+`polynomial-rings-and-roots`.
+
+**The §11 inventory for this page must be rewritten, because its central premise
+is false (§18.2 S1).** Burnside's orbit-counting lemma is published as
+`thm-cauchy-frobenius-orbit-counting`, orbit–stabiliser and the fixed-point-set
+definition with it, and the naive-division counterexample is on the published
+examples page. The replacement inventory:
+
+DEFS: the **cycle index** $Z(G)$ of a permutation group (#23, in the published
+`def-multivariate-polynomial-ring-by-iteration`); a colouring of $X$ by a finite
+set and the induced action; the **pattern inventory** with weights in a
+commutative ring; the cycle-index series of a class, for the CB-15 seam.
+
+THMS: **the cycle index of $C_n$, $D_n$, $S_n$ and $A_n$ computed as theorems**,
+using CB-16's count of permutations by cycle type; **Pólya's enumeration theorem**
+(landmark) in the plain form, proved by applying the published orbit-counting
+lemma to the action on colourings; **the weighted pattern-inventory form**
+(landmark); the necklace and bracelet counts, with the necklace count matched
+against CB-15's $\operatorname{CYC}$ construction in a **mandatory agreement
+item** — the two derivations are genuinely different and the library must not
+hold two unrelated necklace counts; the number of non-isomorphic graphs on $n$
+vertices as a Pólya count for $S_n$ acting on $[n]^{(2)}$, **which may now be
+stated in graph language**, since `def-finite-simple-graph` and
+`def-graph-isomorphism-and-complement` are published below this page — §11's
+workaround of phrasing it as "orbits of edge-sets" is no longer needed, and its
+forward reference to GT-1 is **discharged**; $Z(S_n)$'s exponential generating
+function $\exp\bigl(\sum_k s_kx^k/k\bigr)$, the identity that connects this page
+to CB-7's labelled $\operatorname{SET}$ construction.
+
+**Not scaffolded: de Bruijn's generalisation of Pólya enumeration.** The harvest
+searched Stanley EC1, Flajolet–Sedgewick Part A, Sagan, Cameron, Wilf, de Mier,
+Postnikov and Grinberg and found **no source for it**. Under the
+generated-claim-minimization rule it is not written from memory. Recorded in §29
+with the licence: any reputable source stating it exactly.
+
+FS: two distinct groups have distinct cycle indices; the cycle index determines
+the abstract group; the pattern inventory specialises to the plain count under
+every weight assignment.
+
+B: $Z(C_4)$, $Z(D_4)$, $Z(S_3)$ computed; face colourings of a cube under
+rotation; necklaces with $6$ beads and $2$ colours by both routes; graphs on $4$
+vertices up to isomorphism.
+
+CEX: two non-isomorphic groups with the same cycle index for a given action
+(a genuine and instructive witness); a weighted count where the naive
+substitution $x_i\mapsto x^i$ gives the wrong inventory.
+
+Traps. (i) **The name.** Sagan writes "Burnside's Lemma", Cameron "the
+Orbit-Counting Lemma"; the published item is titled Cauchy–Frobenius. Use the
+published item's own name in every citation and record the alternatives in a
+`rem-`; do not open the attribution question inside a Statement. Sagan likewise
+titles the pattern inventory the **Redfield–Pólya** theorem, which is the
+better-attributed form. (ii) §11's trap (ii) is discharged: the multivariate
+polynomial ring is published (§18.2 S2). (iii) The action of $S_n$ on pairs cites
+`thm-two-element-subsets-count`, an A-page item, as §11 checked.
+
+---
+
+## CB-22 (NEW, placed high). Combinatorial Species
+
+**Anchor:** immediately after `universal-properties-and-the-yoneda-lemma`.
+`requires`: `categories-functors-and-natural-transformations`, CB-15, CB-7,
+CB-10.
+
+**Why it is placed there and not in the band.** Joyal's definition is *a functor
+from the groupoid of finite sets and bijections to itself*, and the library's
+category-theory vocabulary — `categories-functors-and-natural-transformations` —
+is authored well above the combinatorics band. The alternatives were to give an
+informal "bijection-respecting assignment" definition in the band, which is what
+Cameron does under protest (*"I will take a more informal approach"*), or to
+place the pair where the honest definition is legal. **Placing it high is the
+choice the forward-reference rule prefers**: no content is dropped and no
+load-bearing forward reference is created. Everything it uses as an example — the
+symbolic method, EGFs, cycle indices, Pólya — sits below it.
+
+DEFS: the groupoid $\mathbb{B}$ of finite sets and bijections; a **species** as a
+functor $\mathbb{B}\to\mathbb{B}$ (or to $\mathbf{Set}$, with the transport of
+structure explicit); the associated EGF, OGF and **cycle-index series** in
+$\mathbb{Q}[[s_1,s_2,\dots]]$; sum, product, substitution $F[G]$ (requiring
+$G(\varnothing)=\varnothing$) and the derivative/rooting operations.
+
+THMS: the cycle-index specialisations $f(x)=Z(F;s_n\mapsto x^n)$ and
+$F(x)=Z(F;s_1\mapsto x,\,s_n\mapsto0)$ give the unlabelled OGF and the labelled
+EGF (landmark — **the single formula that unifies CB-15 and CB-7**, and the
+reason this page is worth its placement); the cycle indices of $\mathrm{Set}$,
+$\mathrm{Lin}$, $\mathrm{Circ}$, computed; the multiplicativity of $Z$ under sum
+and product; **the substitution rule** $Z(F[G])=Z(F;s_n\mapsto Z(G;s_m\mapsto
+s_{nm}))$ and its two generating-function corollaries; rooting-then-deleting is
+differentiation; the worked identities $\mathrm{Set}[\mathrm{Set}_{\ge1}]$ =
+set partitions, $\mathrm{Set}[\mathrm{Circ}]=\mathrm{Perm}$,
+$\mathrm{Graph}=\mathrm{Set}[\mathrm{ConnGraph}]$, $\mathrm{Cat}=E+\mathrm{Cat}^2$;
+**Cayley's formula proved by species**, with an agreement remark against the
+published Prüfer proof.
+
+**Source constraint, recorded honestly.** Bergeron–Labelle–Leroux is **not open
+access** and neither is Joyal's original paper; the harvest could not obtain
+either. The one open-access treatment obtained is **Cameron LTCC §8** (with §10.2
+and §10.4 for the applications), which is a genuine treatment but a short one.
+**A step-2 Beta must obtain a second independent treatment before this pair
+passes the source-depth gate** — `arXiv:1312.0542`, `arXiv:math/0512052` and
+`arXiv:2305.05059` are the candidates the harvest identified but did not read.
+Until then this pair is **scaffolded but not source-complete**, and that is
+stated in §29 as a blocker rather than hidden.

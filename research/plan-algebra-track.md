@@ -2026,3 +2026,865 @@ Recorded here so it is not rediscovered:
 12. **AA-5b**: the complement lemma in the decomposition of a finite abelian
     $p$-group is the hard step of that page. Decide its route at step 1 rather
     than discovering at step 5 that the textbook proof waves at it.
+
+---
+---
+
+# PART II — the `subjects-01` enrichment (owner commission, 2026-08-13)
+
+Everything above this line is PART I: the original algebra/linear-algebra
+commission of 2026-07-27 and its later amendments. Part I is **not deleted and
+not rewritten**; it is the record of how the track was designed and of the
+decisions that were taken. Where Part I is now factually wrong about disk, §II.1
+below says so, row by row, and **§II.1 wins**.
+
+Part II was written by the `abstract-algebra` scaffolder lane of run
+`subjects-01`, under `research/subjects-01-SEAMS.md`, which is the ownership and
+seam contract for that run and outranks this file on every seam.
+
+## II.0 How to read orders in this file
+
+Part I quotes absolute plan orders throughout, and **every one of them is
+stale** — the track has been renumbered at least three times since (the free
+groups splice, the `frontier-11` re-home, the field-of-fractions insertion at
+53.2). Part II therefore uses **relative labels and page ids**, per
+`subjects-01-SEAMS.md` §0.2. The order column in §II.1's table is a **dated
+snapshot taken from `research/plan-spec.json` on 2026-08-13, informational
+only**; the orchestrator recomputes orders at splice and the page **id** is the
+only thing to quote.
+
+The one honest signal of what exists is a page's `items` array in
+`research/plan-spec.json`: non-empty means authored, empty means planned and
+nonexistent. Every claim in Part II about what the library contains was checked
+against that file and against `items/` on 2026-08-13.
+
+---
+
+## II.1 Reconciliation against disk, 2026-08-13
+
+### II.1.a The label → page-id map, with the snapshot orders
+
+| label | page id (A page) | order snapshot | authored? |
+|---|---|---|---|
+| AA-1 | `monoids-groups-and-subgroups` | 24 | yes |
+| NT-1 | `divisibility-gcd-and-bezout` | 26 | yes |
+| NT-2 | `primes-and-the-fundamental-theorem-of-arithmetic` | 28 | yes |
+| NT-3 | `congruences-and-the-chinese-remainder-theorem` | 30 | yes |
+| AA-2 | `cosets-and-lagranges-theorem` | 32 | yes |
+| AA-3 | `normal-subgroups-and-quotient-groups` | 34 | yes |
+| AA-4 | `group-homomorphisms-and-the-isomorphism-theorems` | 36 | yes |
+| AA-5 | `cyclic-groups-and-direct-products` | 38 | yes |
+| AA-5b | `the-structure-of-finite-abelian-groups` | 40 | yes |
+| AA-6 | `group-actions-and-cayleys-theorem` | 42 | yes |
+| AA-7 | `symmetric-groups-and-the-sign-homomorphism` | 44 | yes |
+| AA-8 | `rings-subrings-and-integral-domains` | 46 | yes |
+| AA-9 | `ideals-and-quotient-rings` | 48 | yes |
+| AA-10 | `euclidean-domains-pids-and-unique-factorisation` | 50 | yes |
+| AA-11 | `polynomial-rings-and-roots` | 52 | yes |
+| — | `the-field-of-fractions-and-localisation` | 53.2 | yes (22 items) |
+| AA-12 | `field-extensions-and-the-complex-numbers` | 54 | yes |
+| AA-13 | `splitting-fields` | 56 | yes |
+| **AA-14** | `symmetric-polynomials` | 58 | **NO — §II.3** |
+| FG-1/FG-2 | `free-groups-and-presentations`, `free-products-and-amalgamation` | 60, 62 | yes |
+| AG-1/AG-2 | `conjugacy-and-simplicity-in-the-symmetric-groups`, `composition-series-and-solvable-groups` | 64, 66 | yes |
+| AG-3/AG-4 | `semidirect-products-and-automorphism-groups`, `sylow-theorems-and-nilpotent-groups` | 68, 70 | **NO — expansion file** |
+| LA-1 | `vector-spaces-and-subspaces` | 72 | yes |
+| LA-2 | `linear-independence-bases-and-dimension` | 74 | yes |
+| LA-3 | `linear-maps-rank-nullity-and-quotient-spaces` | 76 | yes (7 items — see §II.1.c.9) |
+| LA-4 | `matrices-and-the-matrix-of-a-linear-map` | 78 | yes |
+| LA-5 | `gaussian-elimination-and-row-reduction` | 80 | yes |
+| LA-6 | `determinants-of-matrices-over-a-commutative-ring` | 82 | yes |
+| LA-7 | `the-determinant-of-a-linear-operator` | 84 | yes |
+| LA-8 | `eigenvalues-eigenvectors-and-the-characteristic-polynomial` | 86 | yes |
+| **LA-9** | `diagonalisation-and-the-minimal-polynomial` | 88 | **NO — §II.5** |
+| **LA-10** | `triangularisation-and-jordan-canonical-form` | 90 | **NO — §II.6** |
+| LA-11 | `dual-spaces-bilinear-forms-and-inertia` | 92 | yes (33 items) |
+| **LA-12** | `inner-product-spaces-and-orthogonality` | 94 | **NO — §II.7** |
+| **AA-15** | `algebraic-extensions-degree-and-finite-fields` | 96 | **NO — §II.4** |
+| **GA-1…GA-4** | *new, this commission* | 98–101 + decimals | **NO — §II.2** |
+| MOD-1/MOD-2 | `modules-and-module-homomorphisms`, `free-modules-and-exact-sequences` | 102, 104 | yes |
+| MOD-3/4/5 | `tensor-products-of-modules`, `chain-conditions-and-semisimple-modules`, `modules-over-a-pid-and-canonical-forms` | 106, 108, 110 | **NO — expansion file** |
+| **X-1** | `the-fundamental-theorem-of-algebra` | 139 | **NO — §II.8** |
+| **X-2** | `the-spectral-theorem-and-singular-value-decomposition` | 141 | **NO — §II.9** |
+| RT-1…RT-4 | `the-group-algebra-and-representations` … `induced-representations-and-frobenius-reciprocity` | 143–149 | **NO — expansion file** |
+
+**The well-definedness table of Part I is keyed by absolute order and is
+therefore unusable as written.** Read its "page" column through this map: Part
+I's 20 is AA-1, its 22 is NT-1, its 68 is LA-1, its 90 is LA-12, its 92 is
+AA-15, and so on. §II.10 restates the obligations that Part II adds, keyed by
+page id.
+
+### II.1.b Claims in Part I that disk has since falsified
+
+Each of these was checked item by item on 2026-08-13. **The claim in Part I is
+wrong; the correction here is what binds.**
+
+1. **"The unbridgeable seam" is not a seam and never was.**
+   Part I asserts that `thm-cauchy-schwarz-finite`, `thm-minkowski-finite`,
+   `thm-holder-finite` and `lem-metrics-on-rn` are published on `metric-spaces`,
+   **above** the inner-product page, so the library must carry two proofs of
+   Cauchy–Schwarz with a `forward_refs` apology. Verified: the first three are
+   published on **`roots-and-rational-powers`**, which sits far **below** every
+   linear-algebra page. Only `lem-metrics-on-rn` is on `metric-spaces`, and
+   `def-p-norms-on-rn` is on `rn-as-a-normed-space`, both later.
+   **Consequence, and it changes LA-12's design:** the finite-tuple
+   Cauchy–Schwarz is an ordinary *backward* citation from LA-12, so LA-12 owes a
+   **proved dictionary item in the D6 style** — the standard inner product on
+   $\mathbb{R}^n$ is an inner product, and the general Cauchy–Schwarz specialises
+   on it to exactly `thm-cauchy-schwarz-finite` — and **not** a forward
+   reference. The same correction applies to `thm-minkowski-finite` (the finite
+   triangle inequality) and to `thm-young-inequality`, `thm-am-gm`,
+   `thm-weighted-am-gm-rational` on the same page.
+
+   **The seam is real, but it is with a different page.** `rn-as-a-normed-space`
+   publishes `def-norm-and-normed-space`, **`def-euclidean-inner-product`**,
+   **`thm-cauchy-schwarz-and-the-euclidean-norm`**, `def-p-norms-on-rn` and
+   `lem-p-norms-are-norms-and-induce-the-published-metrics`, and its B page
+   publishes `cex-the-one-norm-comes-from-no-inner-product`. That page is
+   **later** than LA-12 and is published, so it is not retrofitted. So the
+   library will carry an inner product on $\mathbb{R}^n$ twice, once generally at
+   LA-12 and once concretely later, and LA-12 owes a `## Remarks`-only
+   `forward_refs` note naming `def-euclidean-inner-product`,
+   `thm-cauchy-schwarz-and-the-euclidean-norm`, `lem-metrics-on-rn` and
+   `def-p-norms-on-rn`. Part I's instinct was right and its item identification
+   was wrong: the duplication is with order-167 material, not with
+   `thm-cauchy-schwarz-finite`.
+
+2. **The `def-field` question recorded as OPEN in AA-8 is CLOSED, by the first
+   candidate.** `items/def-field.md` axiom (M) now reads "Multiplication is
+   associative and commutative **on all of $F$**, and $x \cdot 1 = x$ for every
+   $x \in F$". The two countermodels Part I records were countermodels to the
+   *strict* reading, which the published text no longer permits, and
+   `lem-of-zero-mult` is licensed. Nothing in Part II turns on this; the
+   paragraph is left standing as history and must not be re-opened.
+
+3. **`def-equivalence-relation` is not minted on AA-1.** It is published on
+   `relations-functions-and-quotients`, far below. AA-1 audit note (1) — "there
+   is no `def-equivalence-relation`" — is stale. Nothing downstream changes; the
+   citation target is simply the earlier page.
+
+4. **The formal derivative and polynomial separability EXIST.**
+   `polynomial-rings-and-roots` publishes `def-formal-derivative-of-a-polynomial`,
+   `prop-formal-derivative-laws`, `def-repeated-root-and-separable-polynomial`,
+   `thm-repeated-root-derivative-criterion`,
+   `lem-polynomial-gcd-is-stable-under-field-extension`,
+   `thm-polynomial-is-separable-iff-coprime-to-its-derivative` and
+   `cor-irreducible-polynomial-is-separable-iff-derivative-nonzero`. The
+   expansion file's amendment §8.4 is **discharged**, and its decision AL-D6
+   ("the formal derivative does not exist in this library, at any order") is
+   **false as of today**. This is the single largest reason the Galois block of
+   §II.2 is affordable: separability of *polynomials* is already done and only
+   separability of *extensions* has to be built.
+
+5. **"Every finite subgroup of the multiplicative group of a field is cyclic" is
+   published**, in the sharper form
+   `cor-finite-subgroups-of-units-in-a-domain-are-cyclic`, on
+   `polynomial-rings-and-roots`. AA-5b's trap dropping it, and the note that it
+   "needs AA-11", are discharged. NT-3's drop of primitive roots stands, because
+   NT-3 is below `polynomial-rings-and-roots`; **its natural home is now AA-15**,
+   where $\mathbb{F}_q^\times$ cyclic is stated anyway, and where
+   $(\mathbb{Z}/p)^\times$ cyclic is the case $q=p$ — see §II.4.
+
+6. **Gauss's lemma, Eisenstein and the mod-$p$ irreducibility test are
+   published** on `polynomial-rings-and-roots`
+   (`lem-gauss-content-lemma`, `thm-gauss-lemma-for-integer-polynomials`,
+   `thm-eisenstein-irreducibility-criterion`,
+   `thm-reduction-mod-prime-irreducibility-test`,
+   `cor-xn-minus-p-is-irreducible-over-q`). This is exactly what the
+   irreducibility of the cyclotomic polynomial over $\mathbb{Q}$ needs, and it is
+   why GA-3 can prove it rather than record it.
+
+7. **The field of fractions and localisation are published**
+   (`the-field-of-fractions-and-localisation`, 22 items, including
+   `def-field-of-fractions`, `thm-universal-property-of-the-field-of-fractions`,
+   `cor-rational-function-field-as-a-fraction-field`, and the local-ring theory).
+   Part I's decision **D10** — "no field-of-fractions or localisation
+   construction exists anywhere in this library", recorded twice, in AA-12's
+   amendment 5 and LA-7's amendment 3 — is **discharged**. The published pages it
+   constrained are not retrofitted; but nothing *new* need route around it, and
+   in particular GA-4's "the general polynomial of degree $n$ has Galois group
+   $S_n$" may use $F(t_1,\dots,t_n)$ directly.
+
+8. **`thm-cayley-hamilton` is already published**, on
+   `eigenvalues-eigenvectors-and-the-characteristic-polynomial`, together with
+   `def-polynomial-evaluation-at-an-endomorphism`,
+   `thm-spectral-mapping-for-polynomials`,
+   `cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator`,
+   `def-algebraically-closed-field` and
+   `cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue`.
+   **LA-9 must not re-mint Cayley–Hamilton**; Part I's LA-9 inventory lists it and
+   is superseded by §II.5. The classical fallacy ("substitute $x = A$") is
+   likewise already spoken for and LA-9 should check the published B page before
+   planning an `fs-`.
+
+9. **There is no quotient vector space in the library, on any page.**
+   `linear-maps-rank-nullity-and-quotient-spaces` is **published with seven
+   items** — `def-linear-map`, `lem-linear-map-elementary-properties`,
+   `def-kernel-and-image-of-a-linear-map`, `thm-linear-kernel-image-and-injectivity`,
+   `lem-kernel-basis-extension-gives-image-basis`, `def-rank-and-nullity`,
+   `thm-rank-nullity` — and carries **no $V/W$, no universal property, no first
+   isomorphism theorem for vector spaces**, despite its id. `def-quotient-module`
+   exists but is on `modules-and-module-homomorphisms`, which is **above** every
+   linear-algebra page and cannot be cited from one. The page is published, so it
+   is not retrofitted. See §II.6 for where Part II homes the quotient space and
+   why, and §II.13 for the amendment this owes the module block.
+
+10. **The universal properties of quotient objects mostly landed.**
+    `thm-quotient-group-universal-property` is published on AA-4 and
+    `thm-quotient-ring-universal-property` on AA-9, both with the namespaced ids
+    the expansion file asked for. `thm-quotient-module-universal-property` is
+    published on MOD-1. **`thm-quotient-space-universal-property` does not exist**
+    — it is the vector-space case of finding 9 and is homed by §II.6.
+
+11. **`thm-of-square-roots` is not an id.** Part I's LA-12 cites it; the
+    published item is `thm-nth-roots-exist` on `roots-and-rational-powers`.
+
+12. **The A-page ceiling is 60 items, not 100.** `SCHEMA.md` §6 and
+    `briefs/beta-scaffold.md` §4a both say 100; `tools/validate-plan.mjs` emits
+    the hard `size` error at `--max-items` default **60**, and `CLAUDE.md`'s
+    standing rule says 60. The code is the truth. Every page proposed in Part II
+    is sized against 60.
+
+13. **THE FUNDAMENTAL THEOREM OF ALGEBRA IS ALREADY PROVED AND PUBLISHED — by
+    the proof Part I forbade.** `thm-fundamental-theorem-of-algebra-minimum-modulus-proof`
+    is published on **`the-complex-exponential-and-eulers-formula`**, from
+    `lem-complex-polynomial-growth-and-minimum-modulus` and
+    `lem-dalembert-minimum-modulus-descent`. X-1's trap — "the analytic
+    minimum-modulus proof is **not** available here … If a subagent proposes it,
+    that is the error to catch" — was a claim about what is available *at X-1's
+    order*, and it remains true there; it was never a claim about the library,
+    and the analysis track proved it much higher up, where the complex
+    exponential supplies the $k$-th roots.
+    **This does not make X-1 redundant, and X-1 must still be built.** The
+    published proof sits far above `the-spectral-theorem-and-singular-value-decomposition`
+    and above every RT page, so neither can cite it; "$\mathbb{C}$ is
+    algebraically closed" has to be available *below* them, which is exactly
+    what X-1 is for. What changes is that X-1 now owes a **D6 agreement record**
+    against a theorem the library already has. Since the published item is later
+    in reading order, that record is a `rem-` on X-1's companion page with
+    `forward_refs: [thm-fundamental-theorem-of-algebra-minimum-modulus-proof]` —
+    orientation only, no `deps` edge. See §II.8.
+
+14. **Roots of unity in $\mathbb{C}$ are published later than the Galois
+    block.** `thm-complex-nth-roots-and-roots-of-unity` and
+    `cor-sum-of-roots-of-unity` are on
+    `the-complex-exponential-and-eulers-formula`, and `ex-fifth-roots-of-unity`
+    on its companion. GA-3 therefore builds $\mu_n(K)$ **algebraically**, for an
+    arbitrary field, as the roots of $x^n-1$ in $K$ — which it must do anyway,
+    since it needs $\mu_n$ over $\mathbb{F}_q$ and over abstract $F$ — and owes a
+    `## Remarks` `forward_refs` note recording that the concrete complex
+    description arrives later. **No $e^{2\pi i/n}$ ever appears in the Galois
+    block**, and AL-D5's no-trigonometry discipline from the expansion file
+    extends to it verbatim.
+
+### II.1.c What Part I got right and Part II keeps
+
+The self-contained-scope discipline, the two-notions/dictionary discipline (D6),
+the B-pages-are-leaves discipline, the well-definedness-is-a-numbered-item
+discipline, the determinant-over-a-commutative-ring decision (D3), and the
+decision to place `[K:F]` above linear algebra (AA-15) are all confirmed correct
+by what actually got built. In particular D3 paid for itself exactly as
+predicted: `def-characteristic-polynomial-of-a-matrix` is a determinant over
+$F[x]$, and `thm-adjugate-identity-over-a-commutative-ring` is what makes the
+determinant trick available to the module block.
+
+
+---
+
+## II.2 The Galois block — GA-1 … GA-4 (NEW)
+
+### II.2.0 Why four pairs, and where they go
+
+`subjects-01-SEAMS.md` §3 fixes the anchor: the block sits immediately after
+**`algebraic-extensions-degree-and-finite-fields-examples`**, in the free
+integers 98–101, below `modules-and-module-homomorphisms`. Four integers is
+**two** A/B pairs, and the orchestrator asked for an explicit judgment on
+whether two suffice.
+
+**They do not.** Two pairs would cap the block at about 110 A-items against the
+60-item ceiling, and the only way to fit graduate Galois theory into that is to
+drop material — either separability (which makes the correspondence a theorem
+about a hypothesis nobody has verified), or cyclotomy (which is what
+`number-theory` and RT-4's Burnside are waiting for), or solvability by radicals
+(which is the point of the subject). **The block needs four A/B pairs**, sized at
+roughly 42, 36, 44 and 33 A-items — every one under the ceiling, none padded.
+
+Placement costs no renumber, because the spec already uses fractional orders
+(`the-field-of-fractions-and-localisation` at 53.2, `the-integral-logarithm…` at
+178.1). Proposed, for the orchestrator to confirm at splice:
+
+| label | page id | proposed order (A/B) |
+|---|---|---|
+| GA-1 | `algebraic-closure-embeddings-and-separability` | 98 / 99 |
+| GA-2 | `the-galois-correspondence` | 100 / 101 |
+| GA-3 | `finite-fields-and-cyclotomic-extensions` | 101.2 / 101.4 |
+| GA-4 | `solvability-by-radicals-and-kummer-theory` | 101.6 / 101.8 |
+
+Every id was checked against `items/` and `research/plan-spec.json` on
+2026-08-13 and is free. So is every item id proposed below; the four names most
+at risk were checked individually, because the library namespaces per category
+and the unqualified name is usually gone: `def-normal-closure` **is taken** (it
+is the group-theoretic normal closure, on `free-groups-and-presentations`), so
+the field-theoretic one is `def-normal-closure-of-an-algebraic-extension`;
+`def-norm-and-normed-space`, `def-trace-of-a-square-matrix` and
+`def-trace-of-an-endomorphism` are taken, so the field norm and trace are
+`def-field-norm-and-trace`; `def-separable-space` is the topological notion, and
+`def-repeated-root-and-separable-polynomial` is the published polynomial one, so
+the extension notion is `def-separable-element-and-separable-extension`.
+
+### II.2.1 What the block stands on, verified item by item
+
+This is why four pairs are affordable at all. **`splitting-fields` is far
+stronger than Part I's description of it**, and `polynomial-rings-and-roots`
+already carries the whole separability apparatus for *polynomials*.
+
+From `polynomial-rings-and-roots`: `def-formal-derivative-of-a-polynomial`,
+`prop-formal-derivative-laws`, `def-repeated-root-and-separable-polynomial`,
+`thm-repeated-root-derivative-criterion`,
+`lem-polynomial-gcd-is-stable-under-field-extension`,
+`thm-polynomial-is-separable-iff-coprime-to-its-derivative`,
+`cor-irreducible-polynomial-is-separable-iff-derivative-nonzero`,
+`cor-finite-subgroups-of-units-in-a-domain-are-cyclic`,
+`thm-root-bound-for-polynomials-over-a-domain`,
+`cor-polynomials-over-an-infinite-domain-are-determined-by-values`,
+`lem-gauss-content-lemma`, `thm-gauss-lemma-for-integer-polynomials`,
+`thm-eisenstein-irreducibility-criterion`,
+`thm-reduction-mod-prime-irreducibility-test`,
+`def-multivariate-polynomial-ring-by-iteration`,
+`thm-universal-property-of-a-polynomial-ring`.
+
+From `field-extensions-and-the-complex-numbers`:
+`def-field-extension-generated-subfields-and-simple-extension`,
+`def-algebraic-and-transcendental-elements`,
+`thm-evaluation-kernel-and-minimal-polynomial`,
+`thm-universal-property-of-adjoining-an-irreducible-root`,
+`thm-simple-algebraic-extension-quotient-power-basis-and-degree`,
+`cor-stem-fields-are-uniquely-f-isomorphic`, `cor-composite-of-two-subfields`,
+and the $\mathbb{C}$ block including `thm-real-automorphisms-of-the-complex-numbers`.
+
+From `splitting-fields`: `def-polynomials-that-split-and-splitting-fields`,
+`thm-splitting-fields-exist-for-nonzero-polynomials`,
+`lem-polynomials-and-roots-transport-along-field-isomorphisms`,
+`lem-an-isomorphism-extends-across-a-simple-root-adjunction`,
+**`thm-isomorphisms-extend-to-splitting-fields`**,
+`cor-splitting-fields-are-unique-up-to-base-isomorphism`,
+**`prop-endomorphisms-of-a-splitting-field-permute-its-roots`**,
+**`def-normal-algebraic-extension`**, `prop-normality-descends-to-intermediate-fields`,
+`prop-algebraic-splitting-extensions-are-normal`, `thm-normality-generation-criterion`,
+`prop-finitely-generated-normal-extensions-are-splitting-fields`,
+`prop-splitting-field-of-x-n-minus-a`.
+**Normality is therefore already done**, and GA-1/GA-2 cite it rather than
+building it. This is the single largest saving in the block.
+
+From the group side, all strictly below: Lagrange, quotients, the isomorphism
+and correspondence theorems, cyclic groups, `the-structure-of-finite-abelian-groups`
+(including `def-exponent-of-a-finite-group`), group actions and the class
+equation, $S_n$ and $\operatorname{sgn}$, **`thm-alternating-group-is-simple-for-n-at-least-five`**,
+**`thm-a-five-and-symmetric-groups-from-degree-five-are-not-solvable`**,
+`def-derived-series-solvable-group-and-derived-length`,
+`thm-subgroups-and-quotients-of-solvable-groups-are-solvable`,
+`thm-extensions-and-direct-products-of-solvable-groups-are-solvable`,
+`thm-finite-solvable-iff-composition-factors-have-prime-order`. **Everything
+solvability by radicals needs on the group side is published.**
+
+From linear algebra, all strictly below: dimension and the tower law (AA-15),
+`def-trace-of-an-endomorphism`, `def-determinant-of-a-linear-operator`,
+`def-characteristic-polynomial-of-an-operator`, `def-algebraically-closed-field`,
+`cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue`,
+and the whole bilinear-form apparatus of `dual-spaces-bilinear-forms-and-inertia`
+(needed for the trace form). From `order-zorn-and-the-axiom-of-choice`:
+`thm-zorn`. From `ideals-and-quotient-rings`: maximal ideals by Zorn, which is
+what Artin's algebraic-closure construction consumes.
+
+**Not available below the block, and therefore never used in it:** the
+fundamental theorem of algebra (`the-fundamental-theorem-of-algebra` is at 139
+and `thm-fundamental-theorem-of-algebra-minimum-modulus-proof` is published at
+189); roots of unity in $\mathbb{C}$; any module theory; the intermediate value
+theorem; Möbius inversion; anything analytic. **No $e^{2\pi i/n}$, no polar
+form, no trigonometry appears anywhere in the block** — the discipline the
+expansion file fixed as AL-D5 for representation theory, extended here.
+
+---
+
+### GA-1. Algebraic Closure, Embeddings and Separable Extensions
+
+- **id** `algebraic-closure-embeddings-and-separability`, companion
+  `algebraic-closure-embeddings-and-separability-examples`
+- **category** `abstract-algebra`
+- **`requires`** `algebraic-extensions-degree-and-finite-fields`,
+  `order-zorn-and-the-axiom-of-choice`
+- **estimate** A 42, B 16
+
+**Why the algebraic closure is built here and not skipped.** Finite Galois
+theory can be done with splitting fields alone, and Part I's instinct would have
+been to do that. Two things make the closure worth its ~12 items. First, the
+separable degree $[K:F]_s$ is *defined* as a number of embeddings, and defining
+it without a fixed ambient algebraically closed field forces a
+"sufficiently large normal extension" bookkeeping that has to be re-verified at
+every use. Second, `commutative-algebra` (Nullstellensatz) and `number-theory`
+(rings of integers, splitting of primes) both want $\overline{F}$ and no other
+track owns it in `subjects-01-SEAMS.md` §4. Building it once, here, is cheaper
+than three tracks routing around it. **If the orchestrator cuts it, GA-1 falls to
+about 30 items and every later definition acquires an ambient-normal-extension
+hypothesis; say so in the decision rather than letting it happen silently.**
+
+**Machinery minted first, because nothing published supplies it.**
+`def-multivariate-polynomial-ring-by-iteration` is finitely many indeterminates
+only, and Artin's construction needs one indeterminate per monic nonconstant
+polynomial. So GA-1 opens with `def-monomials-on-an-index-set` (finitely
+supported $I \to \mathbb{N}$ under pointwise addition),
+`def-polynomial-ring-on-a-family-of-indeterminates`,
+`thm-polynomial-ring-on-a-family-is-a-commutative-ring`,
+`thm-universal-property-of-a-polynomial-ring-on-a-family`, and — **mandatory, D6
+— `cor-polynomial-ring-on-a-finite-family-agrees-with-the-iterated-construction`**,
+a proved dictionary against the published `def-multivariate-polynomial-ring-by-iteration`.
+Silent re-definition here would be the two-notions defect at the top of the ring
+track.
+
+**DEFS.** monomials on an index set; the polynomial ring on a family of
+indeterminates; $F$-homomorphism and $F$-embedding of extensions; **conjugate
+elements** of an extension; **algebraic closure**; **separable degree**
+$[K:F]_s$; **separable element**, **separable extension**; the **separable
+closure** inside an extension; **perfect field**; **inseparable degree**
+$[K:F]_i$; **purely inseparable extension**; **normal closure of an algebraic
+extension** (id `def-normal-closure-of-an-algebraic-extension` — the bare
+`def-normal-closure` is taken by the group-theoretic notion).
+
+**THMS.**
+*Closure.* the one-step lemma — in $F[x_f : f \in \mathcal{M}]$ over the monic
+nonconstant $f$, the ideal generated by $\{f(x_f)\}$ is proper (**this is the
+whole content of Artin's construction and it is one honest computation:** a
+finite combination $\sum g_i f_i(x_{f_i}) = 1$ is contradicted inside a splitting
+field of $f_1\cdots f_n$); **every field embeds in an extension in which every
+nonconstant polynomial over the base has a root** (quotient by a maximal ideal,
+Zorn); the union of a chain of fields is a field; **algebraic closures exist**
+(landmark; the $\omega$-iteration $F \subseteq F_1 \subseteq F_2 \subseteq \cdots$,
+then the algebraic elements of the union); **an algebraic extension embeds into
+any algebraically closed field over a given embedding of the base** (landmark;
+Zorn on partial extensions); **algebraic closures are isomorphic over the base**,
+with the honest statement that the isomorphism is **not** unique (the
+non-uniqueness is exactly $\operatorname{Aut}(\overline{F}/F)$ and is what GA-2
+studies); the normal closure of a finite extension exists and is finite.
+
+*Embeddings.* an $F$-embedding carries a root of $p \in F[x]$ to a root of the
+same $p$, so it permutes the conjugates (this is the published
+`prop-endomorphisms-of-a-splitting-field-permute-its-roots` in the embedding
+form, and it **cites** it); **the $F$-embeddings of a simple algebraic extension
+$F(\alpha)$ into an algebraically closed $\Omega$ correspond bijectively to the
+distinct roots of $m_\alpha$ in $\Omega$** (landmark); the number of extensions
+of an embedding across a tower multiplies.
+
+*Separable degree.* $[K:F]_s$ is independent of the chosen algebraically closed
+field (**well-definedness #G1**); **$[L:F]_s = [L:K]_s[K:F]_s$** (landmark);
+$[K:F]_s \le [K:F]$, and $[K:F]_s$ divides $[K:F]$; for a simple extension
+$[F(\alpha):F]_s$ is the number of distinct roots of $m_\alpha$.
+
+*Separability.* $\alpha$ is separable over $F$ iff $m_\alpha$ is a separable
+polynomial in the published sense; **a finite extension is separable iff
+$[K:F]_s = [K:F]$** (landmark); separability is transitive in towers; an
+extension generated by separable elements is separable; the separable elements
+of $K/F$ form an intermediate field $K_s$, and $[K:F]_s = [K_s:F]$.
+
+*Characteristic $p$.* $p \mid \binom{p}{k}$ for $0 < k < p$ (from the published
+binomial coefficients, `finite-counting-and-binomial-coefficients`); **the
+Frobenius $x \mapsto x^p$ is an injective field endomorphism in characteristic
+$p$** (landmark); a field is **perfect** iff it has characteristic $0$ or
+Frobenius is surjective; fields of characteristic $0$ and finite fields are
+perfect; **every irreducible polynomial over a perfect field is separable**, so
+every algebraic extension of a perfect field is separable; **every irreducible
+$f$ in characteristic $p$ is $g(x^{p^e})$ for a unique $e \ge 0$ and a unique
+separable irreducible $g$** (landmark) — this is the structural theorem the
+inseparable degree rests on; $[K:F] = [K:F]_s [K:F]_i$ with $[K:F]_i$ a power of
+$p$; purely inseparable characterisations ($[K:F]_s = 1$; every element has
+$\alpha^{p^e} \in F$; the only $F$-embedding into $\overline F$ is the
+inclusion); an extension that is both separable and purely inseparable is
+trivial.
+
+*Primitive element.* **a finite extension is simple iff it has only finitely
+many intermediate fields** (landmark, Steinitz — and it is stated in this
+biconditional form deliberately, because the biconditional is what gives the
+$\mathbb{F}_p(s,t)$ counterexample its force); **the primitive element theorem:
+a finite separable extension is simple** (landmark); a finite separable
+extension has finitely many intermediate fields; every finite extension of a
+perfect field is simple.
+
+**B page.** an algebraic closure of $\mathbb{Q}$ and the real algebraic numbers
+inside it; $\overline{\mathbb{F}_p}$ as an infinite algebraic extension of a
+finite field; the three $\mathbb{Q}$-embeddings of $\mathbb{Q}(\sqrt[3]{2})$
+into $\overline{\mathbb{Q}}$ against its single automorphism, which is the
+concrete reason $\lvert\operatorname{Aut}\rvert$ and $[K:F]_s$ are different
+counts; the four embeddings of $\mathbb{Q}(\sqrt2,\sqrt3)$; **$x^p - t$ is
+irreducible and inseparable over $\mathbb{F}_p(t)$**, with
+$x^p - t = (x - t^{1/p})^p$ in an extension; $\mathbb{F}_p(t)/\mathbb{F}_p(t^p)$
+purely inseparable of degree $p$ with $[K:F]_s = 1$; **$\mathbb{F}_p(s,t)$ over
+$\mathbb{F}_p(s^p,t^p)$: degree $p^2$, infinitely many intermediate fields
+$\mathbb{F}_p(s^p,t^p)(s + ct)$, and therefore no primitive element** — the
+counterexample the whole separability apparatus exists to make honest; a perfect
+field of characteristic $p$ that is infinite; $\mathbb{Q}$ has an algebraic
+extension that is not finite; **fs**: every irreducible polynomial is separable;
+**fs**: $[K:F]_s = [K:F]$ for every finite extension; **fs**: every algebraic
+extension is simple; **fs**: an algebraic closure of $F$ is unique up to a
+*unique* isomorphism over $F$ (refuted by complex conjugation on
+$\overline{\mathbb{Q}}$, or by any nontrivial automorphism).
+
+**Traps.** (i) The one-step lemma is where the construction actually happens;
+do not compress it into "quotient by a maximal ideal". (ii) Uniqueness of the
+algebraic closure is up to a **non-unique** isomorphism, and stating it as
+"unique up to unique isomorphism" — the phrasing every other universal-property
+theorem in this library uses — would be **false**. The `fs-` above exists to
+make that visible. (iii) The Frobenius is **not** surjective in general; the
+witness is $\mathbb{F}_p(t)$ and it is on the B page. (iv) $[K:F]_s$ divides
+$[K:F]$ needs characteristic $p$ structure, not just multiplicativity; do not
+assert it in characteristic $0$ style. (v) Do not use $\mathbb{C}$ anywhere:
+embeddings go into $\overline{\mathbb{Q}}$, because $\mathbb{C}$ is not known to
+be algebraically closed at this order.
+
+**Forward references:** NONE load-bearing. A `## Remarks` pointer from
+`def-algebraic-closure` to `the-fundamental-theorem-of-algebra`, recording that
+the reader's first concrete algebraically closed field arrives there, is
+permitted once that page's ids are planned.
+
+---
+
+### GA-2. Automorphism Groups, Fixed Fields and the Galois Correspondence
+
+- **id** `the-galois-correspondence`, companion `the-galois-correspondence-examples`
+- **category** `abstract-algebra`
+- **`requires`** `algebraic-closure-embeddings-and-separability`,
+  `symmetric-polynomials`
+- **estimate** A 36, B 16
+
+**DEFS.** $\operatorname{Aut}(K/F)$; the **fixed field** $K^G$; **Galois
+extension** and **Galois group** $\operatorname{Gal}(K/F)$; **Galois closure**;
+the **Galois group of a polynomial**; the **discriminant** of a monic polynomial;
+the **resolvent cubic** of a quartic.
+
+**THMS.**
+*Fixed fields.* $\operatorname{Aut}(K/F)$ is a group and
+$\lvert\operatorname{Aut}(K/F)\rvert \le [K:F]_s \le [K:F]$ for finite $K/F$;
+$K^G$ is an intermediate field; **Dedekind's theorem on the linear independence
+of characters** (landmark: distinct homomorphisms $G \to K^\times$ from a group
+into the multiplicative group of a field are $K$-linearly independent as
+functions); **Artin's theorem: for a finite group $G$ of automorphisms of $K$,
+$[K : K^G] = \lvert G\rvert$** (landmark) — decomposed into the lower bound
+(from Dedekind: more than $\lvert G\rvert$ independent elements would give a
+dependence among the $\sigma \in G$) and the upper bound (any $\lvert G\rvert+1$
+elements satisfy a nontrivial homogeneous linear system over $K$, and a minimal
+nonzero solution is $G$-stable), because these are two genuinely different
+arguments; **$\operatorname{Aut}(K/K^G) = G$**, so distinct finite groups have
+distinct fixed fields.
+
+*The Galois property.* **for a finite extension the following are equivalent:
+$K/F$ is normal and separable; $\lvert\operatorname{Aut}(K/F)\rvert = [K:F]$;
+$K^{\operatorname{Aut}(K/F)} = F$; $K$ is a splitting field over $F$ of a
+separable polynomial** (landmark; normality is cited from `splitting-fields`,
+separability from GA-1, and each implication is its own numbered step); a finite
+Galois extension is Galois over every intermediate field, and **not** in general
+*over* one — $E/F$ need not be Galois, which is exactly what the normality
+clause below measures; Galois closures of finite separable extensions exist and
+are minimal.
+
+*The correspondence.* **the fundamental theorem of Galois theory** (landmark):
+for finite Galois $K/F$ with $G = \operatorname{Gal}(K/F)$, $H \mapsto K^H$ and
+$E \mapsto \operatorname{Gal}(K/E)$ are mutually inverse inclusion-reversing
+bijections between subgroups of $G$ and intermediate fields, with
+$[K:K^H] = \lvert H\rvert$ and $[K^H : F] = [G:H]$; **the normality clause**
+(landmark): $\sigma H \sigma^{-1}$ corresponds to $\sigma(E)$; $H \trianglelefteq G$
+iff $E/F$ is normal iff $E/F$ is Galois; and then restriction
+$G \to \operatorname{Gal}(E/F)$ is surjective with kernel $H$, so
+$\operatorname{Gal}(E/F) \cong G/H$; a finite Galois extension has finitely many
+intermediate fields; $\operatorname{Gal}(K/E_1E_2) = H_1 \cap H_2$ and
+$\operatorname{Gal}(K/E_1 \cap E_2) = \langle H_1, H_2\rangle$; **the translation
+theorem**: for $E/F$ Galois and $L/F$ arbitrary inside a common extension,
+$EL/L$ is Galois and $\operatorname{Gal}(EL/L) \cong \operatorname{Gal}(E/E\cap L)$
+by restriction; a compositum of two Galois extensions is Galois and its group
+embeds in the product of the two, with equality iff the extensions intersect in
+$F$.
+
+*Polynomials.* the Galois group of a separable polynomial embeds in the
+symmetric group on its root set (landmark), and the embedding depends on an
+ordering of the roots only up to conjugacy; **$f$ is irreducible iff the Galois
+group acts transitively on its roots**; the discriminant
+$\Delta(f) = \prod_{i<j}(\alpha_i - \alpha_j)^2$ lies in $F$ (via the
+fundamental theorem of symmetric polynomials on `symmetric-polynomials` — **this
+is why GA-2 declares that page**); in characteristic $\ne 2$, the Galois group
+lies in $A_n$ iff $\Delta(f)$ is a square in $F$ (landmark; the Vandermonde
+$\delta = \prod_{i<j}(\alpha_i - \alpha_j)$ satisfies
+$\sigma\delta = \operatorname{sgn}(\sigma)\delta$, citing the published
+$\operatorname{sgn}$); the Galois group of an irreducible cubic is $A_3$ or
+$S_3$ according to the discriminant; the Galois group of an irreducible quartic
+is determined by the resolvent cubic, in the standard five-case table.
+
+**B page.** $\mathbb{Q}(\sqrt2,\sqrt3)/\mathbb{Q}$ with its Klein four group and
+the complete lattice of three quadratic subfields; $\mathbb{Q}(\sqrt[3]{2},\omega)/\mathbb{Q}$
+with $S_3$, its full subgroup lattice, and the two normal / four non-normal
+intermediate fields identified; $x^4-2$ over $\mathbb{Q}$ with $D_4$, its ten
+subgroups and its ten intermediate fields; $\mathbb{Q}(\sqrt[3]{2})/\mathbb{Q}$
+is separable, not normal, and has trivial automorphism group;
+$\mathbb{F}_p(t)/\mathbb{F}_p(t^p)$ is normal, not separable, and also has
+trivial automorphism group — **the two witnesses together are what show both
+hypotheses in "normal and separable" are doing work**; the discriminant of
+$x^3+px+q$ computed as $-4p^3-27q^2$; $x^3-3x+1$, discriminant $81$, group
+$A_3$; $x^3-2$, discriminant $-108$, group $S_3$; a quartic of each resolvent
+type; **fs**: every extension of degree $n$ has $n$ automorphisms; **fs**: every
+subgroup of the Galois group corresponds to a normal subextension; **fs**: the
+Galois group of a polynomial is determined by its degree; **fs**: the Galois
+correspondence is inclusion-preserving.
+
+**Traps.** (i) Dedekind's independence theorem is about characters into
+$K^\times$, not about field embeddings; state it in the form the two proofs of
+Artin's theorem actually use. (ii) Artin's theorem is the engine of the whole
+page — the correspondence's injectivity is $\operatorname{Aut}(K/K^G) = G$ and
+its surjectivity is $K^{\operatorname{Gal}(K/E)} = E$, and both are Artin, not
+the fundamental theorem. Do not present the fundamental theorem as if it were
+proved from scratch. (iii) The normality clause has three separate contents
+(the conjugation formula, the biconditional, the quotient isomorphism); they are
+three steps. (iv) "$\operatorname{Gal}$" is written **only** for extensions
+already known to be Galois; $\operatorname{Aut}(K/F)$ is the general notation.
+Sources differ and mixing them is how a false statement gets written.
+(v) The discriminant criterion needs $\operatorname{char} F \ne 2$; without it
+$\delta = -\delta$ and the criterion is vacuous.
+
+**Forward references:** NONE load-bearing.
+
+---
+
+### GA-3. Finite Fields, Cyclotomic Extensions and Their Galois Groups
+
+- **id** `finite-fields-and-cyclotomic-extensions`, companion
+  `finite-fields-and-cyclotomic-extensions-examples`
+- **category** `abstract-algebra`
+- **`requires`** `the-galois-correspondence`,
+  `congruences-and-the-chinese-remainder-theorem`,
+  `triangularisation-and-jordan-canonical-form`
+- **estimate** A 44, B 17
+
+The third `requires` is load-bearing and is the one that would be missed: the
+**normal basis theorem** over a finite base field is the statement that
+$K$ is a *cyclic* $F[\sigma]$-module, i.e. that the Frobenius has a cyclic
+vector, and that is the linear-algebra theorem "an operator whose minimal
+polynomial equals its characteristic polynomial has a cyclic vector" — scaffolded
+at LA-10 in §II.6 precisely so this page can cite it.
+
+**DEFS.** **roots of unity** $\mu_n(K)$ in an arbitrary field; **primitive
+$n$-th root of unity**; the **cyclotomic polynomial** $\Phi_n \in \mathbb{Z}[x]$;
+the **cyclotomic field** $\mathbb{Q}(\zeta_n)$; **normal basis**.
+
+**THMS.**
+*Finite fields.* **$\mathbb{F}_{q^n}/\mathbb{F}_q$ is Galois with cyclic group
+of order $n$ generated by the $q$-power Frobenius** (landmark) — separability
+because $x^{q^n}-x$ has nonzero derivative $-1$, normality because it is a
+splitting field, and the order because Frobenius has order exactly $n$ by
+Dedekind independence or by the root bound; **the subfields of
+$\mathbb{F}_{q^n}$ are exactly the $\mathbb{F}_{q^d}$ for $d \mid n$, one for
+each divisor** (landmark, the correspondence applied to a cyclic group);
+$\mathbb{F}_{q^m} \subseteq \mathbb{F}_{q^n}$ iff $m \mid n$;
+**$x^{q^n}-x$ is the product of all monic irreducibles over $\mathbb{F}_q$ whose
+degree divides $n$** (landmark); hence the divisor-sum identity
+$\sum_{d \mid n} d\,N_d(q) = q^n$ for the counts $N_d(q)$ of monic irreducibles;
+**there is an irreducible polynomial of every degree over every finite field**,
+by an elementary estimate from that identity — deliberately proved this way,
+because the Möbius closed form is **not** available here (see §II.13); the
+Frobenius fixed field is $\mathbb{F}_q$; **the normal basis theorem** (landmark),
+in two cases with genuinely different proofs — infinite base field, by the
+nonvanishing of a determinant polynomial together with the published
+`cor-polynomials-over-an-infinite-domain-are-determined-by-values`; finite base
+field, by the cyclic-vector theorem cited from LA-10.
+
+*Roots of unity in a field.* $\mu_n(K)$ is a finite subgroup of $K^\times$,
+hence **cyclic**, by the published
+`cor-finite-subgroups-of-units-in-a-domain-are-cyclic`; $x^n-1$ is separable iff
+$\operatorname{char} K \nmid n$, and then $\lvert\mu_n(K)\rvert = n$ in a
+splitting field; in characteristic $p$, $\mu_{p^k}$ is trivial and
+$x^{p^k}-1 = (x-1)^{p^k}$; a primitive $n$-th root of unity exists in $K$ iff
+$\mu_n(K)$ has order $n$.
+
+*Cyclotomy.* the recursion $x^n - 1 = \prod_{d \mid n}\Phi_d$ defines $\Phi_n$
+in $\mathbb{Z}[x]$, and the division is exact there (**well-definedness #G2** —
+the induction needs monic division over $\mathbb{Z}$, which is the published
+`thm-monic-polynomial-division`, not division over a field); $\Phi_n$ is monic
+of degree $\varphi(n)$ with integer coefficients; over a field of characteristic
+not dividing $n$, the roots of $\Phi_n$ are exactly the primitive $n$-th roots
+of unity; **$\Phi_n$ is irreducible over $\mathbb{Q}$** (landmark), by the
+$\zeta \mapsto \zeta^p$ argument on top of the published Gauss lemma —
+decomposed as: a primitive root and its $p$-th power for $p \nmid n$ have the
+same minimal polynomial, then iterate over the prime factorisation of a unit
+mod $n$; **$\operatorname{Gal}(\mathbb{Q}(\zeta_n)/\mathbb{Q}) \cong (\mathbb{Z}/n)^\times$**
+(landmark), citing the published `def-unit-group-modulo-n-and-euler-totient`;
+cyclotomic extensions of $\mathbb{Q}$ are abelian; **$\mathbb{Q}(\zeta_p)$ has a
+unique subfield of degree $2$ over $\mathbb{Q}$** for odd $p$, because
+$(\mathbb{Z}/p)^\times$ is cyclic of even order (its explicit identification as
+$\mathbb{Q}(\sqrt{(-1)^{(p-1)/2}p})$ is **deferred to `number-theory`** — see
+§II.13); over an arbitrary field, $\operatorname{Gal}(F(\zeta_n)/F)$ embeds in
+$(\mathbb{Z}/n)^\times$ and is therefore abelian, with equality exactly when
+$\Phi_n$ is irreducible over $F$; the compositum
+$\mathbb{Q}(\zeta_m)\mathbb{Q}(\zeta_n) = \mathbb{Q}(\zeta_{\operatorname{lcm}(m,n)})$
+and $\mathbb{Q}(\zeta_m)\cap\mathbb{Q}(\zeta_n) = \mathbb{Q}(\zeta_{\gcd(m,n)})$
+(from CRT and the correspondence).
+
+**B page.** $\mathbb{F}_4$, $\mathbb{F}_8$ and $\mathbb{F}_9$ written out with
+their Frobenius actions; the subfield lattice of $\mathbb{F}_{2^{12}}$ against
+the divisor lattice of $12$; the two monic irreducible cubics over
+$\mathbb{F}_2$ and the divisor-sum identity checked at $n=3$;
+$\Phi_1,\dots,\Phi_{12}$ tabulated; $\Phi_p = 1 + x + \cdots + x^{p-1}$, with
+Eisenstein applied to $\Phi_p(x+1)$; $\Phi_n$ **reducible over a finite field**
+($\Phi_5$ splits into linear factors over $\mathbb{F}_{11}$ because $5 \mid 10$)
+— the witness that irreducibility of $\Phi_n$ is a statement about $\mathbb{Q}$;
+$\operatorname{Gal}(\mathbb{Q}(\zeta_{12})/\mathbb{Q}) \cong (\mathbb{Z}/12)^\times$
+with its three quadratic subfields $\mathbb{Q}(i)$, $\mathbb{Q}(\sqrt3)$,
+$\mathbb{Q}(\sqrt{-3})$ matched to the three index-two subgroups; a normal basis
+of $\mathbb{F}_8$ over $\mathbb{F}_2$ exhibited; a basis of $\mathbb{F}_8$ that
+is **not** normal; **fs**: every finite field of order $n$ is $\mathbb{Z}/n$;
+**fs**: the coefficients of $\Phi_n$ lie in $\{-1,0,1\}$ (true up to $n = 104$
+and false at $n = 105$ — stated as the false statement it is, with the refuting
+coefficient computed); **fs**: $\Phi_n$ is irreducible over every field;
+**fs**: $\mu_n(K)$ has $n$ elements in every field; **fs**: every basis of a
+finite field over a subfield is a normal basis.
+
+**Traps.** (i) $\Phi_n$ is defined over $\mathbb{Z}$ and then **reduced** into
+other fields; defining it as "the minimal polynomial of a primitive root" would
+be circular with its irreducibility and false over $\mathbb{F}_q$. (ii) The
+irreducibility proof needs Gauss's lemma *and* the derivative criterion for
+$x^n-1$ separable mod $p$; both are published and both must be cited, not
+waved. (iii) $\varphi$ and $(\mathbb{Z}/n)^\times$ are published at
+`congruences-and-the-chinese-remainder-theorem`; do not re-mint. (iv) Every
+statement about $\mu_n$ carries the hypothesis $\operatorname{char} K \nmid n$
+or handles the failure explicitly. (v) **Wedderburn's little theorem is NOT on
+this page** — see §II.13 for the precise reason, which is not the one the
+expansion file recorded.
+
+**Forward references:** a `## Remarks` note from `def-roots-of-unity-in-a-field`
+to `thm-complex-nth-roots-and-roots-of-unity`, recording that the concrete
+complex description of $\mu_n$ arrives later in the reading order. Orientation
+only, `forward_refs` declared, no `deps` edge.
+
+---
+
+### GA-4. Norm and Trace, Cyclic and Kummer Extensions, and Solvability by Radicals
+
+- **id** `solvability-by-radicals-and-kummer-theory`, companion
+  `solvability-by-radicals-and-kummer-theory-examples`
+- **category** `abstract-algebra`
+- **`requires`** `finite-fields-and-cyclotomic-extensions`,
+  `composition-series-and-solvable-groups`,
+  `the-field-of-fractions-and-localisation`,
+  `dual-spaces-bilinear-forms-and-inertia`
+- **estimate** A 33, B 16
+
+**DEFS.** the **norm** $N_{K/F}$ and **trace** $\operatorname{Tr}_{K/F}$ of a
+finite extension (id `def-field-norm-and-trace`); the **trace form**;
+**cyclic extension**; the **Lagrange resolvent**; **Kummer extension**;
+**radical extension** and **solvable by radicals**.
+
+**THMS.**
+*Norm and trace.* $N_{K/F}(\alpha) = \big(\prod_\sigma \sigma\alpha\big)^{[K:F]_i}$
+and $\operatorname{Tr}_{K/F}(\alpha) = [K:F]_i \sum_\sigma \sigma\alpha$ over the
+$F$-embeddings into an algebraic closure, and both lie in $F$ (**the inseparable
+exponent is not decoration: sources that omit it are stating the separable case
+only**); $N$ is multiplicative, $\operatorname{Tr}$ is $F$-linear;
+**$N_{K/F}(\alpha)$ and $\operatorname{Tr}_{K/F}(\alpha)$ are the determinant
+and the trace of multiplication by $\alpha$ as an $F$-linear operator on $K$**
+(landmark) — a **mandatory D6 dictionary item** against the published
+`def-determinant-of-a-linear-operator` and `def-trace-of-an-endomorphism`,
+because otherwise the library has two unrelated notions each called a norm and a
+trace; transitivity in towers; **the trace form $(x,y)\mapsto\operatorname{Tr}(xy)$
+is nondegenerate iff $K/F$ is separable** (landmark; cites the published
+nondegeneracy and radical vocabulary of `dual-spaces-bilinear-forms-and-inertia`);
+the trace of a separable extension is surjective.
+
+*Cyclic extensions.* **Hilbert's theorem 90** (landmark): for $K/F$ cyclic with
+$\operatorname{Gal} = \langle\sigma\rangle$, $N_{K/F}(\beta) = 1$ iff
+$\beta = \alpha/\sigma(\alpha)$ for some $\alpha \in K^\times$ — proved from
+Dedekind independence, which is why GA-2 is the prerequisite and not merely the
+correspondence; the **additive** form, $\operatorname{Tr}(\beta) = 0$ iff
+$\beta = \alpha - \sigma(\alpha)$, from the surjectivity of the trace;
+**if $\mu_n \subseteq F$ and $\operatorname{char} F \nmid n$, then $K/F$ is
+cyclic of degree $n$ iff $K = F(\alpha)$ with $\alpha^n \in F$ and $x^n-\alpha^n$
+irreducible** (landmark, both directions; forward direction by the Lagrange
+resolvent, reverse by `prop-splitting-field-of-x-n-minus-a`, which is
+**published** and is exactly the missing step); **Artin–Schreier**: in
+characteristic $p$, $K/F$ is cyclic of degree $p$ iff $K = F(\alpha)$ with
+$\alpha^p - \alpha \in F$ and $x^p-x-a$ irreducible (landmark; the additive
+Hilbert 90 is what makes this the exact analogue).
+
+*Kummer theory.* for $F \supseteq \mu_n$, the map
+$B \mapsto F(\sqrt[n]{B})$ is an inclusion-preserving bijection from the
+subgroups $B$ with $(F^\times)^n \subseteq B \subseteq F^\times$ and
+$[B : (F^\times)^n]$ finite, to the finite abelian extensions of $F$ of exponent
+dividing $n$ (landmark); the Kummer pairing
+$\operatorname{Gal}(K/F) \times B/(F^\times)^n \to \mu_n$ is perfect, so
+$\operatorname{Gal}(K/F) \cong \operatorname{Hom}(B/(F^\times)^n, \mu_n)$;
+$[F(\sqrt[n]{a}):F]$ is the order of $a(F^\times)^n$ in $F^\times/(F^\times)^n$.
+
+*Solvability.* a **radical extension** is a tower each step of which adjoins an
+$n$-th root of an element of the previous step; $f$ is **solvable by radicals**
+if its splitting field lies in some radical extension (**the convention
+disagreement is real and is recorded: some sources require the tower to be
+Galois, some require $\mu_n$ present at each step. The library takes the weakest
+definition — a plain tower, no Galois or root-of-unity hypothesis — and proves
+the strengthenings as lemmas, because a definition that quietly assumes what the
+proof needs makes the theorem weaker than it looks**); every radical extension
+is contained in a Galois radical extension (the normal closure of a radical
+extension is radical); adjoining $\mu_n$ to a Galois extension changes the group
+by an abelian kernel and preserves solvability; **if $f$ is solvable by radicals
+in characteristic $0$ then its Galois group is solvable** (landmark);
+**conversely, in characteristic $0$, a solvable Galois group makes $f$ solvable
+by radicals** (landmark, by induction along a composition series with cyclic
+prime-order factors, using the cyclic-extension theorem after adjoining roots of
+unity); every polynomial of degree at most $4$ is solvable by radicals, because
+$S_4$ is solvable — citing the **published** solvability of $S_3$ and $S_4$;
+**the general polynomial of degree $n$ has Galois group $S_n$** (landmark): the
+fixed field of $S_n$ acting on $F(t_1,\dots,t_n)$ by permuting the variables is
+$F(e_1,\dots,e_n)$, by Artin's theorem plus the fundamental theorem of symmetric
+polynomials — this is where `symmetric-polynomials` and the published rational
+function field `cor-rational-function-field-as-a-fraction-field` are consumed;
+**the general polynomial of degree $\ge 5$ is not solvable by radicals**
+(landmark, Abel–Ruffini), from the published
+`thm-a-five-and-symmetric-groups-from-degree-five-are-not-solvable`;
+**a transitive subgroup of $S_p$ containing a transposition is all of $S_p$**
+for $p$ prime — the tool a concrete insoluble quintic needs, proved here even
+though its use is deferred (see traps).
+
+**B page.** $N$ and $\operatorname{Tr}$ for $\mathbb{Q}(\sqrt d)/\mathbb{Q}$
+computed both ways, by embeddings and as $\det$/$\operatorname{tr}$ of
+multiplication, agreeing — the concrete face of the dictionary item;
+$N_{\mathbb{F}_{q^n}/\mathbb{F}_q}(\alpha) = \alpha^{(q^n-1)/(q-1)}$;
+$\operatorname{Tr} \equiv 0$ for $\mathbb{F}_p(t)/\mathbb{F}_p(t^p)$, the
+inseparable witness for the trace-form theorem; **Hilbert 90 for
+$\mathbb{Q}(i)/\mathbb{Q}$ giving the classical parametrisation of Pythagorean
+triples**; $x^3-2$ over $\mathbb{Q}(\omega)$ is cyclic of degree $3$;
+**Cardano's formula derived from the Lagrange resolvent** and checked on
+$x^3-3x-1$; the quartic solved through its resolvent cubic;
+$x^5-2$ over $\mathbb{Q}$ **is** solvable by radicals, with Galois group
+$\mathbb{Z}/5 \rtimes \mathbb{Z}/4$ of order $20$ — the witness that "quintic"
+is not the same as "insoluble"; an Artin–Schreier extension $x^p-x-t$ over
+$\mathbb{F}_p(t)$; a Kummer extension $\mathbb{Q}(\zeta_3, \sqrt[3]{2},\sqrt[3]{3})$
+with $B/(F^\times)^3 \cong (\mathbb{Z}/3)^2$; **fs**: a polynomial solvable by
+radicals has abelian Galois group; **fs**: every quintic is insoluble by
+radicals; **fs**: $N_{K/F}(\alpha) = \prod_\sigma\sigma(\alpha)$ for every
+finite extension (the inseparable exponent); **fs**: $\operatorname{Tr}_{K/F}$
+is surjective for every finite extension.
+
+**Traps.** (i) Both directions of the radical criterion are stated **in
+characteristic $0$**. The forward direction survives in characteristic $p$ with
+care; the converse genuinely fails, and the honest scoping is a hypothesis in
+the Statement and in the title, not a caveat in Remarks. (ii) The norm's
+inseparable exponent $[K:F]_i$ is the most-dropped hypothesis in this whole
+block; the `fs-` above exists for it. (iii) **A concrete insoluble quintic over
+$\mathbb{Q}$ cannot be exhibited on this page.** The standard argument —
+$x^5-6x+3$ is irreducible by Eisenstein, has exactly three real roots by
+calculus, so complex conjugation restricts to a transposition, so the group is
+transitive with a transposition, so it is $S_5$ — needs the splitting field to
+sit inside $\mathbb{C}$, i.e. needs $\mathbb{C}$ to be algebraically closed, and
+that is `the-fundamental-theorem-of-algebra`, which is later in the reading
+order. **Deferred, not deleted:** it is homed on X-1's companion page in §II.8,
+and `thm-a-transitive-subgroup-of-s-p-containing-a-transposition-is-s-p` is
+proved here so that page has it. (iv) Abel–Ruffini as proved here is a statement
+about the *general* polynomial over $F(e_1,\dots,e_n)$, not about every quintic
+over $\mathbb{Q}$; a title conflating the two asserts more than the proof gives.
+(v) Do not use the field of fractions to construct $F(t_1,\dots,t_n)$ from
+scratch — `cor-rational-function-field-as-a-fraction-field` is published and
+iterating it over the published `def-multivariate-polynomial-ring-by-iteration`
+is the whole construction.
+
+**Forward references:** NONE load-bearing.

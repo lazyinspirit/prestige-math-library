@@ -1687,3 +1687,170 @@ proofs. Where a source's ordering was adopted, the page section says so.
   <https://www.du.ac.in/du/uploads/departments/mathematics/study-material/MMATH18-201%20_MT_CC.pdf>,
   <https://web.maths.unsw.edu.au/~danielch/modules12/beeren_notes.pdf>,
   <https://www.math.lsu.edu/~adkins/m7211/AWchap7.pdf>
+
+---
+---
+
+# PART II — the `subjects-01` enrichment (owner commission, 2026-08-13)
+
+Everything above is PART I: the expansion commission of 2026-07-28 (AG, MOD, RT)
+and its `frontier-11` amendments. Part I is **not deleted and not rewritten**.
+Where Part I is now factually wrong about disk, §II.1 says so and **§II.1 wins**.
+
+Part II was written by the `abstract-algebra` scaffolder lane of run
+`subjects-01`, under `research/subjects-01-SEAMS.md`, which outranks this file on
+every seam. Its companion is `research/plan-algebra-track.md` Part II, which
+carries the **Galois block (GA-1…GA-4)**, the linear-algebra completion, the
+fundamental theorem of algebra and the spectral theorem. This file remains
+authoritative for **AG**, **MOD** and **RT** only; the authority boundary at the
+head of Part I is unchanged.
+
+---
+
+## II.1 Reconciliation against disk, 2026-08-13
+
+### II.1.a The one methodological finding, which affects every track
+
+**`research/plan-spec.json` UNDERSTATES what is published.** The spec's `items`
+array is honest that an *empty* array means the page does not exist — that part of
+`subjects-01-SEAMS.md` §0.3 holds. It is **not** a complete inventory of an
+authored page: seventeen published pages carry more items on disk than the spec
+records, and one of them matters here.
+
+| page | spec says | `library/…/<page>.md` says |
+|---|---|---|
+| `free-groups-and-presentations` | 6 items | **32 items** |
+| `free-groups-and-presentations-examples` | 1 | 12 |
+| `symmetric-groups-and-the-sign-homomorphism` | 13 | 14 |
+| `construction-of-the-natural-numbers` | 0 | 39 |
+| `construction-of-r-via-cauchy-sequences` | 0 | 40 |
+| `construction-of-r-via-dedekind-cuts` | 0 | 39 |
+| `foundations-of-the-real-numbers` | 2 | 43 |
+| `countability-and-uncountability` | 18 | 21 |
+| `approximation-and-compactness-in-ck` | 22 | 29 |
+| `mixed-partials-taylor-and-extrema` | 21 | 30 |
+| `plane-graphs-euler-and-the-five-colour-theorem` | 40 | 41 |
+| `monotone-functions-and-discontinuities-examples` | 12 | 11 |
+| the five `deferred-*` / `open-problems-*` catalogues | 0 | 13–33 |
+
+294 published item files are not named by any spec page — `def-field`,
+`def-abs-value` and `def-integers` among them. **The true index of what exists is
+the union of the spec's `items` arrays and the `items:`/`examples:` lists in
+`library/<cat>/<page>.md`.** Any scaffolder that concludes "X does not exist"
+from the spec alone will re-mint published mathematics. This is reported to the
+orchestrator in §II.9.
+
+### II.1.b Placement: Part I's §4 renumber table is dead
+
+The spec is now **448 pages**, not 256, and none of Part I's proposed orders
+survived. Verified 2026-08-13 — orders are a **dated snapshot, informational
+only**; quote the id:
+
+| Part I said | actually, today |
+|---|---|
+| AG-1…AG-4 at 60–67 | **64–71**; 60–63 is the FG pair |
+| MOD-1…MOD-5 at 98–107 | **102–111** |
+| `the-fundamental-theorem-of-algebra` at 135 | **139** |
+| the spectral pair at 137/138 | **141/142** |
+| RT-1…RT-4 at 139–146 | **143–150** |
+| 94–97 "reserved for Galois" | **96/97 is `algebraic-extensions-degree-and-finite-fields`; the Galois block goes at 98–101 + decimals** (see the companion file §II.2) |
+
+Authored / unauthored, from the spec: **AG-1 and AG-2 are published** (18 and 27
+items); **AG-3 and AG-4 are empty**; **MOD-1 and MOD-2 are published** (14 and 29
+items); **MOD-3, MOD-4, MOD-5 are empty**; **all four RT pages are empty**.
+
+### II.1.c Decisions and denials that disk has overturned
+
+1. **AL-D6 is FALSE as stated and is withdrawn.** It says "the formal derivative
+   of a polynomial does not exist in this library, at any order". Published on
+   `polynomial-rings-and-roots`: `def-formal-derivative-of-a-polynomial`,
+   `prop-formal-derivative-laws`, `def-repeated-root-and-separable-polynomial`,
+   `thm-repeated-root-derivative-criterion`,
+   `lem-polynomial-gcd-is-stable-under-field-extension`,
+   `thm-polynomial-is-separable-iff-coprime-to-its-derivative`,
+   `cor-irreducible-polynomial-is-separable-iff-derivative-nonzero`. §8 amendment
+   4 is **discharged**.
+   *What survives of AL-D6:* the Maschke+Schur route to "every element of finite
+   order acts diagonalisably" is still correct and still preferable, because it
+   needs no separability theory at all. It is now a **choice**, not a necessity,
+   and RT-2 should say which route it takes and why.
+
+2. **§8 amendment 1 landed.** `thm-quotient-group-universal-property` is
+   published on `group-homomorphisms-and-the-isomorphism-theorems`.
+
+3. **§8 amendment 2 landed by half.** `thm-quotient-ring-universal-property` is
+   published on `ideals-and-quotient-rings`;
+   `thm-quotient-module-universal-property` is published on MOD-1. But
+   **`thm-quotient-space-universal-property` does not exist, and neither does the
+   quotient vector space $V/W$** — `linear-maps-rank-nullity-and-quotient-spaces`
+   is published with seven items and has none of it. See the companion file
+   §II.1.b.9 and §II.6.
+
+4. **§8 amendment 3 landed, and far beyond what it asked.**
+   `the-field-of-fractions-and-localisation` is published with 22 items:
+   `def-field-of-fractions`, its universal property, uniqueness,
+   `cor-rational-function-field-as-a-fraction-field`, plus multiplicative sets,
+   $S^{-1}R$, localisation at a prime, local rings and the ideal correspondence.
+   MOD-5 may use $\operatorname{Frac}(R)$ freely; MOD-5's trap (i) is discharged.
+   **`commutative-algebra` must not re-mint any of it** (`subjects-01-SEAMS.md`
+   §4 already says so).
+
+5. **§8 amendment 5 landed.** Cycle-type conjugacy is homed on AG-1.
+
+6. **§6.3 is discharged.** Free abelian groups have a home: `def-free-abelian-group`
+   (by its universal property) and `thm-abelianisation-of-a-free-group-is-free-abelian`
+   are published on `free-groups-and-presentations`, together with
+   `def-abelianisation-of-a-group` — **below** MOD-2, so MOD-2 cites and does not
+   rebuild. MOD-2 as published correctly does not re-mint them.
+
+7. **Denial 12 is discharged and became an item.**
+   `cex-free-module-rank-fails-over-an-endomorphism-ring` is published on MOD-2's
+   B page, so the IBN failure is exhibited rather than merely named, and
+   `thm-nonzero-commutative-rings-have-invariant-basis-number` carries the
+   commutativity hypothesis on the A page as obligation #15 asked.
+
+8. **§9's routing of "enough injectives" is wrong.**
+   `thm-module-categories-have-enough-injectives` is published **on MOD-2**, via
+   `lem-coinduced-modules-are-injective` and
+   `lem-every-abelian-group-embeds-in-a-divisible-group` — the coinduction route,
+   which needs no Hom–tensor adjunction. **MOD-3 must not re-mint it.** MOD-2 also
+   published the Four, Five and Snake lemmas, which Part I did not plan and which
+   the homological track should now cite rather than build.
+
+9. **Denial 1 (Burnside's $p^aq^b$ theorem) is LICENSED and is un-deferred.**
+   Its stated licence was "a cyclotomic-fields page proving
+   $\operatorname{Gal}(\mathbb{Q}(\zeta_m)/\mathbb{Q}) \cong (\mathbb{Z}/m)^\times$".
+   **GA-3 supplies exactly that**, and GA-3 sits below RT-4. See §II.7.4.
+
+10. **Denial 7 (Wedderburn's little theorem) is LICENSED and is un-deferred.**
+    Its stated licence was "a cyclotomic page in the Galois band". **GA-3 builds
+    $\Phi_n$ over $\mathbb{Z}$**, which is what the class-equation proof needs.
+    Its natural home is GA-3 itself, not MOD-4 — the proof is a counting argument
+    about $|\Phi_n(q)|$ and belongs beside the cyclotomic polynomials. Recorded as
+    an offer to the companion file in §II.8, and accepted there.
+
+### II.1.d What MOD-1 and MOD-2 did NOT ship, and where it must now go
+
+MOD-1 was scaffolded at 24 A-items and **published with 14**. MOD-2 was
+scaffolded at 23 and published with 29 — it gained the diagram lemmas and
+enough injectives, and lost the integrality block. Both pages are published, so
+**none of this is retrofitted**; every gap below must be homed on an unauthored
+page above MOD-2, and each carries a **dictionary obligation** back to the
+published item it extends.
+
+| missing | needed by | Part II homes it on |
+|---|---|---|
+| second and third isomorphism theorems for modules; the **correspondence theorem** for modules | MOD-4 (Noetherian/Artinian arguments, Jordan–Hölder for modules) | **MOD-4**, §II.5 |
+| $\operatorname{Hom}_R(M,N)$ as an **$R$-module** for commutative $R$ (only the abelian group exists, on MOD-2) | MOD-3's adjunction, RT-1 | **MOD-3**, §II.4 |
+| $\operatorname{End}_R(M)$ as a **ring**, and $\operatorname{End}_R(R)\cong R^{\mathrm{op}}$ | Schur's lemma, Wedderburn–Artin | **MOD-4**, §II.5 |
+| **$R$-algebra** (obligation #14's third face) | RT-1's $k[G]$, MOD-3's tensor product of algebras | **MOD-3**, §II.4 |
+| the **dictionary theorems** ($\mathbb{Z}$-modules $=$ abelian groups; $F$-modules $=$ vector spaces), obligation #14 | the whole block's honesty | **MOD-3**, §II.4 |
+| "over a **domain** the torsion elements form a submodule" — MOD-1 published only `def-annihilator-and-torsion-of-a-module`, the torsion **subset** | MOD-5 | **MOD-5**, §II.6 |
+| **integral elements and algebraic integers**, the determinant trick, obligation #16 | **RT-4's $\chi_i(1) \mid \lvert G\rvert$, and Burnside** | **MOD-4**, §II.5 |
+| every f.g. module over a nonzero ring has a **maximal proper submodule** | Nakayama, MOD-4 | **MOD-4**, §II.5 |
+
+The integrality row is the load-bearing one: Part I planned it on MOD-2 with an
+explicit escape hatch ("if Beta finds MOD-2 over the cap, this block moves to
+MOD-4 and the move is recorded"). MOD-2 shipped without it and without the
+record. **Part II records the move: it is MOD-4's, and RT-4 cites it there.**
+
