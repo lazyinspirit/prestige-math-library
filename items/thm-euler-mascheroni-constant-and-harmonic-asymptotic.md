@@ -26,8 +26,7 @@ pipeline_run: null
 
 For $n\ge1$, let
 
-$$H_n=\sum_{k=1}^{n}\frac1k,
-\qquad \gamma_n=H_n-\log n.$$
+$$H_n=\sum_{k=1}^{n}\frac1k,\qquad \gamma_n=H_n-\log n.$$
 
 The sequence $(\gamma_n)$ is strictly decreasing and is bounded below by
 $1-\log2$. It therefore converges to a constant $\gamma$ satisfying
@@ -48,12 +47,14 @@ $H_n=\sum_{k=1}^n1/k$ and $\gamma_n=H_n-\log n$.
 [L1] For $x>0$, $\log x=\int_1^x dt/t$, and the derivative of $\log$ is
 $1/x$ ([[thm-logarithm-derivative-and-integral]]).
 
-[L2] If integrable functions satisfy $f\le g$ on $[a,b]$, then
-$\int_a^b f\le\int_a^b g$; in particular, constant upper and lower bounds
-may be integrated ([[thm-monotonicity-of-the-integral]]).
+[L2] Let $a<b$ and let $f,g:[a,b]\to\mathbb R$ be integrable. If $f(x)\ge0$
+for every $x\in[a,b]$, then $\int_a^b f\ge0$; if $f(x)\le g(x)$ for every
+$x\in[a,b]$, then $\int_a^b f\le\int_a^b g$; and if $m\le f(x)\le M$ for every
+$x\in[a,b]$, with $m,M$ real, then
+$m(b-a)\le\int_a^b f\le M(b-a)$ ([[thm-monotonicity-of-the-integral]]).
 
-[L3] If $a<c<b$, then an integrable function on $[a,b]$ is integrable on the
-two subintervals and
+[L3] If $a<c<b$, then a bounded function on $[a,b]$ is integrable there exactly
+when its restrictions to $[a,c]$ and $[c,b]$ are integrable, and in that case
 $\int_a^b f=\int_a^c f+\int_c^b f$
 ([[thm-additivity-over-subintervals]]).
 
@@ -78,7 +79,7 @@ infimum ([[thm-monotone-convergence]]).
 
 2.2 Therefore $\gamma_n\ge1-\log2$ for every $n\ge1$. [step 1.3, step 1.4]
 
-2.3 It follows that $\log n\to\infty$: if $n\ge2^m$, monotonicity of the integral gives $\log n\ge\log(2^m)\ge m/2$. [L2, step 1.5, algebra]
+2.3 It follows that $\log n\to\infty$. Let $m\ge1$ and $n\ge2^m$. If $n=2^m$ then $\log n=\log(2^m)$. If $n>2^m$ then $1<2^m<n$, so $\log n=\int_1^ndt/t=\int_1^{2^m}dt/t+\int_{2^m}^ndt/t=\log(2^m)+\int_{2^m}^ndt/t$, and $1/t\ge0$ on $[2^m,n]$ makes that last integral nonnegative. Either way $\log n\ge\log(2^m)\ge m/2$. [L1, L2, L3, step 1.5, algebra]
 
 3.1 By monotone convergence, there is a real number $\gamma$ such that $\gamma_n\to\gamma$. [L4, step 2.1, step 2.2]
 

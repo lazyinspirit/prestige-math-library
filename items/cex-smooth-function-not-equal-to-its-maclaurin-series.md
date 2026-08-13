@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [ex-flat-exponential-function, thm-chain-rule, thm-algebra-of-derivatives, def-taylor-and-maclaurin-series]
+deps: [ex-flat-exponential-function, thm-chain-rule, thm-algebra-of-derivatives, def-taylor-and-maclaurin-series, lem-derivative-of-a-power, cor-differentiable-implies-continuous, def-higher-derivatives-and-smoothness]
 justified_by: []
 aliases: []
 landmark: true
@@ -33,13 +33,7 @@ then the function equals the sum of that series everywhere.
 
 Define
 
-$$
-\psi(x)=
-\begin{cases}
-e^{-1/x^2},&x\ne0,\\
-0,&x=0.
-\end{cases}
-$$
+$$\psi(x)=\begin{cases} e^{-1/x^2},&x\ne0,\\ 0,&x=0. \end{cases}$$
 
 Then $\psi\in C^\infty(\mathbb R)$ and $\psi^{(n)}(0)=0$ for every $n\ge0$.
 Consequently its Maclaurin series is the zero series, which converges for every
@@ -50,14 +44,7 @@ real $x$, while $\psi(x)>0$ whenever $x\ne0$.
 **Given:** The function $\psi$ displayed above.
 
 [C1] Let
-$$
-\phi(u)=
-\begin{cases}
-e^{-1/u},&u>0,\\
-0,&u\le0,
-\end{cases}
-\qquad q(x)=x^2,
-$$
+$$\phi(u)=\begin{cases} e^{-1/u},&u>0,\\ 0,&u\le0, \end{cases}\qquad q(x)=x^2,$$
 so that $\psi=\phi\circ q$.
 
 [L1] The function $\phi$ belongs to $C^\infty(\mathbb R)$,
@@ -74,19 +61,34 @@ the sum and product rules ([[thm-algebra-of-derivatives]]).
 $\sum_{n\ge0}f^{(n)}(0)x^n/n!$; its definition alone asserts neither
 convergence nor equality with $f$ ([[def-taylor-and-maclaurin-series]]).
 
+[L5] For a natural $n\ge1$ the function $x\mapsto x^n$ is differentiable at
+every real with derivative $nx^{n-1}$, and for $n=0$ it is the constant $1$,
+with derivative $0$; consequently every polynomial function is differentiable
+at every real, with the derivative computed term by term
+([[lem-derivative-of-a-power]]).
+
+[L6] A function differentiable at a limit point $c$ of its domain is continuous
+at $c$; hence a function differentiable on a set is continuous at every point
+of that set ([[cor-differentiable-implies-continuous]]).
+
+[L7] A function is of class $C^k$ on an interval when $f^{(j)}$ exists there
+for every $j\le k$ and each such $f^{(j)}$ is continuous there, and it is
+smooth, or $C^\infty$, when it is $C^k$ for every $k\in\mathbb N$
+([[def-higher-derivatives-and-smoothness]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The polynomial $q(x)=x^2$ is smooth, $q'(x)=2x$, and $\psi(x)=\phi(q(x))$ for every $x\in\mathbb R$. [C1, L1, L3, algebra]
+1.1 The function $q(x)=x^2$ is a polynomial, so it is differentiable at every real with $q'(x)=2x$, and $\psi(x)=\phi(q(x))$ for every $x\in\mathbb R$. [C1, L5, algebra]
 
-1.2 The derivative of any finite sum of functions of the form $p(x)\phi^{(j)}(q(x))$, with $p$ a polynomial, is again a finite sum of this form. [L1, L2, L3, algebra]
+1.2 The derivative of any finite sum of functions of the form $p(x)\phi^{(j)}(q(x))$, with $p$ a polynomial, is again a finite sum of this form: each $p$ is differentiable with polynomial derivative $p'$ by [L5], each $\phi^{(j)}$ is differentiable by [L1], and $q$ is differentiable with $q'(x)=2x$ by [L5], so [L2] gives $\bigl(\phi^{(j)}\circ q\bigr)'(x)=2x\,\phi^{(j+1)}(q(x))$ and then [L3] gives $$\bigl(p\cdot(\phi^{(j)}\circ q)\bigr)'(x)=p'(x)\,\phi^{(j)}(q(x))+2xp(x)\,\phi^{(j+1)}(q(x)),$$ in which $p'$ and $2xp$ are again polynomials; [L3] then adds the finitely many summands. [L1, L2, L3, L5, algebra]
 
 1.3 If $x\ne0$, then $q(x)=x^2>0$, and therefore $\psi(x)=\phi(q(x))>0$. [C1, L1, algebra]
 
 2.1 Starting from $\psi=\phi\circ q$ and applying step 1.2 repeatedly shows that every derivative of $\psi$ exists; moreover, for each $m\ge0$, $\psi^{(m)}$ is a finite sum of functions $p(x)\phi^{(j)}(q(x))$. [step 1.1, step 1.2]
 
-3.1 For every $m$, step 2.1 makes $\psi^{(m)}$ differentiable at every point because its next derivative exists. The derivative definition then makes $\psi^{(m)}$ continuous: near a point $x_0$, its difference quotient is bounded by $|\psi^{(m+1)}(x_0)|+1$, so its increment tends to zero with $x-x_0$. Hence $\psi\in C^\infty(\mathbb R)$. [step 2.1, algebra]
+3.1 For every $m\ge0$, step 2.1 makes $\psi^{(m)}$ differentiable at every real, because $\psi^{(m+1)}$ exists there, and [L6] then makes $\psi^{(m)}$ continuous on $\mathbb R$. So every derivative of $\psi$ exists on $\mathbb R$ and is continuous there, which by [L7] is exactly $\psi\in C^\infty(\mathbb R)$. [step 2.1, L6, L7]
 
 3.2 At $x=0$, every summand in step 2.1 vanishes because $q(0)=0$ and $\phi^{(j)}(0)=0$. Hence $\psi^{(m)}(0)=0$ for every $m\ge0$. [L1, step 2.1, algebra]
 

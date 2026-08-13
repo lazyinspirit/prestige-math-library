@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-taylor-and-maclaurin-series, def-taylor-polynomial-and-remainder, cor-taylor-remainder-bound, thm-extreme-value-r, def-pointwise-uniform-and-uniformly-cauchy-convergence]
+deps: [def-taylor-and-maclaurin-series, def-taylor-polynomial-and-remainder, cor-taylor-remainder-bound, thm-extreme-value-r, def-pointwise-uniform-and-uniformly-cauchy-convergence, def-higher-derivatives-and-smoothness, thm-algebra-of-continuous-functions, thm-heine-borel-r]
 justified_by: []
 aliases: []
 landmark: true
@@ -71,6 +71,17 @@ for every $\varepsilon>0$, there is $N$ such that
 $|g_n(x)-g(x)|<\varepsilon$ for every $x\in E$ and every $n\ge N$
 ([[def-pointwise-uniform-and-uniformly-cauchy-convergence]]).
 
+[L5] A function is of class $C^k$ on an interval when $f^{(j)}$ exists there
+for every $j\le k$ and each such $f^{(j)}$ is continuous there, and it is
+smooth, or $C^\infty$, when it is $C^k$ for every $k\in\mathbb N$
+([[def-higher-derivatives-and-smoothness]]).
+
+[L6] If $g$ is continuous at a point of its domain, then so is $|g|$, the
+function $x\mapsto|g(x)|$ ([[thm-algebra-of-continuous-functions]]).
+
+[L7] For reals $u\le v$, the closed bounded interval $[u,v]$ is compact
+([[thm-heine-borel-r]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -79,7 +90,7 @@ $|g_n(x)-g(x)|<\varepsilon$ for every $x\in E$ and every $n\ge N$
 
 1.2 Conversely, if $R_{n,a}f(x)\to0$, then $T_{n,a}f(x)=f(x)-R_{n,a}f(x)\to f(x)$. [L1, assume-hyp, algebra]
 
-1.3 For each $n\ge0$, the function $|f^{(n+1)}|$ is continuous on the nonempty compact interval $[a-r,a+r]$, so the displayed number $M_{n+1}$ exists. [A1, L2]
+1.3 Let $n\ge0$. Since $f\in C^\infty(I)$, the derivative $f^{(n+1)}$ exists and is continuous on $I$, so $|f^{(n+1)}|$ is continuous on $I$; and $[a-r,a+r]$ is a closed bounded interval, hence compact, and it is a nonempty subset of $I$ because $r>0$ and $a$ belongs to it. Applying the extreme value theorem to $|f^{(n+1)}|$ on $[a-r,a+r]$ therefore produces the displayed maximum $M_{n+1}$. [A1, L2, L5, L6, L7]
 
 1.4 For every $y\in[a-r,a+r]$ and every $n\ge0$, $|f(y)-T_{n,a}f(y)|=|R_{n,a}f(y)|\le M_{n+1}|y-a|^{n+1}/(n+1)!\le M_{n+1}r^{n+1}/(n+1)!$. [A1, L1, L3]
 
