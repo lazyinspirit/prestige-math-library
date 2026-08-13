@@ -119,9 +119,34 @@ working URL for every source.
 A **prose scaffold**: the design document from which a future level build authors
 real items. Not the items themselves.
 
-**You write prose scaffolds only.** You do not write `research/plan-spec.json`,
-anything under `items/` or `library/`, another track's file, or any `status:`
-field. Nothing is spliced or published by this commission.
+### THIS IS NOT A BUILD. Read this twice before you write anything.
+
+The owner's words, 2026-08-13: *"this is NOT a build workflow, we are merely
+building prose scaffolds for future build cycles."*
+
+You are not running steps 0–10 of `LEVELS.md`. There is no level, no batch, no
+Alpha, no judge, no gate to clear, and no publish. **Every artifact of a level
+build is out of scope for you**: no `.pages.json`, no `.coverage.json` file, no
+`.notes.md`, no proof-contract JSON, no touch snapshot, no judge ledger, no
+`precheck`, no `validate-plan`, no `content-policy`, no `impact-audit`. Do not run
+the gates. Do not author a single item.
+
+You write **exactly one thing**: the prose scaffold file named as yours. You do
+not write `research/plan-spec.json`, anything under `items/` or `library/`,
+another track's file, or any `status:` field. Nothing is spliced, authored,
+gated or published by this commission — a future build cycle does all of that,
+and your file is its input.
+
+`briefs/beta-scaffold.md` is referenced above for its **mathematical discipline
+only** — source depth, the coverage harvest as a way of thinking, id reuse,
+proof-obligation and boundary passes, the defect classes this library ships. It
+is a level-build brief and its build mechanics, artifacts and gates are not
+yours. Where it describes producing a build artifact, you produce the
+corresponding *section of your prose scaffold* instead.
+
+A mechanical guard is watching the working tree for writes outside the
+prose-scaffold scope, so a drift into build behaviour will be caught rather than
+discovered later — but it should never fire.
 
 Follow the structure the existing track files use — read
 `research/plan-topology-track.md` or `research/plan-complex-analysis-track.md`
