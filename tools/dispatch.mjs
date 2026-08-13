@@ -122,11 +122,22 @@ const ROLES = Object.freeze({
   // this job would delete the guarantee for every future build. A scaffolder
   // instead owns exactly one subject file that no sibling may open for writing,
   // so mutual exclusion is supplied by the ownership contract in the run's SEAMS
-  // record, and the cap is free to express the real constraint here, which is
-  // memory: each lane is a 1M-window claude process that itself fans out to
-  // research subagents in-process, and this host has 16 GB. Four measured safe
-  // with headroom; the ceiling is the same class of limit UNATTENDED-AUDIT.md
-  // records behind the judge-lane caps. Raise it only against measured free RAM.
+  // record, and the cap is free to express the real constraint.
+  //
+  // WHICH IS NOT MEMORY. An earlier version of this comment said it was, and
+  // that was an assumption stated as a measurement. Measured 2026-08-13 under
+  // four live lanes: each `claude` process held ~0.25 GB RSS, 0.9 GB across all
+  // four, because inference is server-side and the 1M window costs nothing
+  // locally. The host's memory pressure was entirely unrelated.
+  //
+  // The constraint is the CLAUDE SUBSCRIPTION SESSION LIMIT, and it binds hard:
+  // four concurrent Opus 5 lanes at xhigh, each fanning out to its own research
+  // subagents, exhausted it in 25-34 minutes and all four died mid-scaffold with
+  // "You've hit your session limit". Concurrency multiplies burn rate against a
+  // shared quota, so raising this cap does not buy throughput — it buys a
+  // shorter run before every lane fails at once, and it burns the orchestrator's
+  // own session too. Lower is often faster end to end. The Codex and DeepSeek
+  // lanes draw on different accounts and are unaffected by a Claude exhaustion.
   scaffolder:   { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 4, why: 'one per subject track; owns exactly one prose scaffold file' },
 
   // ---- the published-page retro-audit (AUDIT-WORKFLOW.md, A0 to A10) --------

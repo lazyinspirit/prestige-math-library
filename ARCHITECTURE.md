@@ -910,11 +910,21 @@ other silently. Raising that cap to run a scaffolding job would delete the
 guarantee for every future build. A scaffolder instead **owns exactly one track
 file that no sibling may open for writing**, so mutual exclusion comes from the
 ownership contract in the run's SEAMS record, and the cap is free to express the
-constraint that actually binds here: memory. Each lane is a 1M-window `claude`
-process that itself fans out to research subagents in-process, so the ceiling is
-the same class of limit `UNATTENDED-AUDIT.md` records behind the judge-lane caps.
-It is set to 4 against measured free RAM on a 16 GB host and should be raised
-only against a fresh measurement, never by assumption.
+constraint that actually binds.
+
+**That constraint is the Claude subscription session limit, not memory** —
+corrected 2026-08-13, having first been written the other way round from
+assumption rather than measurement. Measured under four live lanes, each `claude`
+process held **~0.25 GB RSS, 0.9 GB across all four**: inference is server-side,
+so a 1M window costs nothing locally and the judge-lane memory ceiling in
+`UNATTENDED-AUDIT.md` has no analogue here. What does bind is quota. Four
+concurrent Opus 5 lanes at `xhigh`, each fanning out to its own research
+subagents, **exhausted the session limit in 25–34 minutes** and all four died
+mid-scaffold at once. Concurrency multiplies burn against a shared quota, so
+raising the cap buys a shorter run before simultaneous failure rather than more
+throughput, and it draws down the orchestrator's own session as well. The Codex
+and DeepSeek lanes bill to different accounts and survive a Claude exhaustion —
+which is why work that can legitimately run on them should.
 
 **The drivers dispatch a step's agents in PARALLEL** (owner, 2026-08-05, binding
 on this and every future session). Both `run-level.mjs` and `run-wave.mjs` used a
