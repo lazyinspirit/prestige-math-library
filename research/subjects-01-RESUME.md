@@ -46,6 +46,22 @@ finishes; do not wait for a whole wave.
 **Wave 1 launched 2026-08-13, all four lanes running detached** (`nohup`, cap 4
 saturated). Timeout 21600 s each. Nothing has returned yet.
 
+## Gotchas hit this run
+
+- **The lane cap QUEUES a duplicate label, it does not reject it.** Launching a
+  second lane for an already-running track waits quietly for a slot and then runs
+  a second writer against the same track file — the exact failure the ownership
+  contract exists to prevent, arriving through the mechanism meant to bound
+  concurrency. Done once on 2026-08-13 and caught before it acquired a slot;
+  `research/subjects-01-launch.sh` now refuses on a running label as well as on a
+  landed one. **Always launch through the script, never by hand.**
+- **The shell here is zsh, which hard-errors on a glob with no matches** rather
+  than leaving the literal. A monitor written with `for f in dir/*.json` dies on
+  its first iteration, before any lane has produced anything, and reports exit 1
+  with no events. Use `$(ls ... 2>/dev/null)`.
+- `dispatch.mjs` writes its `.log` only at exit, so log size is useless as a
+  progress signal. Track the track file itself, or the `.result.json`.
+
 ## Exact next action
 
 Poll `research/subjects-01-dispatch/scaffolder-<label>.result.json`. As each wave-1
