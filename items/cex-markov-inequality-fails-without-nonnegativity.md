@@ -2,7 +2,7 @@
 id: cex-markov-inequality-fails-without-nonnegativity
 kind: counterexample
 title: "Markov's conclusion can fail without nonnegativity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

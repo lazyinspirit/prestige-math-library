@@ -2,7 +2,7 @@
 id: ex-annihilator-of-a-coordinate-plane
 kind: example
 title: 'The annihilator of the coordinate plane $z=0$ in $\mathbb R^3$ is the line spanned by the third coordinate functional'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

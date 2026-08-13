@@ -2,7 +2,7 @@
 id: thm-bilinear-forms-correspond-to-linear-maps-into-the-dual
 kind: theorem
 title: 'Bilinear forms on $V$ correspond linearly and bijectively to linear maps $V\to V^*$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

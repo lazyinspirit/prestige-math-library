@@ -2,7 +2,7 @@
 id: def-preservation-reflection-creation-continuity-and-cocontinuity
 kind: definition
 title: "Preservation, reflection, and creation of limits and colimits; continuous and cocontinuous functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-continuous-functor, def-cocontinuous-functor]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

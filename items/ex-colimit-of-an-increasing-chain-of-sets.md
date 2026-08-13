@@ -2,7 +2,7 @@
 id: ex-colimit-of-an-increasing-chain-of-sets
 kind: example
 title: "The colimit of an increasing chain of sets is its union"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: well-defined-map
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

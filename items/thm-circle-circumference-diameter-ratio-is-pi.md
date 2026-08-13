@@ -2,7 +2,7 @@
 id: thm-circle-circumference-diameter-ratio-is-pi
 kind: theorem
 title: "Every circle has circumference 2 pi r and circumference-to-diameter ratio pi"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

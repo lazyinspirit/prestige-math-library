@@ -2,7 +2,7 @@
 id: thm-gregory-leibniz-series-for-pi-from-a-finite-remainder
 kind: theorem
 title: "The Gregory-Leibniz series: pi over four equals 1-1/3+1/5-1/7+..."
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

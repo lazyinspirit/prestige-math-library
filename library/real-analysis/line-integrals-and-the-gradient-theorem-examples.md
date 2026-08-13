@@ -1,7 +1,7 @@
 ---
 page: line-integrals-and-the-gradient-theorem-examples
 title: "Line Integrals and the Gradient Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-scalar-line-integral-over-a-unit-semicircle,
            ex-line-segment-scalar-and-vector-line-integrals,

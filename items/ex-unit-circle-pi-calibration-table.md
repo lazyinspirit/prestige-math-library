@@ -2,7 +2,7 @@
 id: ex-unit-circle-pi-calibration-table
 kind: example
 title: "One unit circle gives semicircle length pi, circumference 2 pi, diameter 2, and disc area pi"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

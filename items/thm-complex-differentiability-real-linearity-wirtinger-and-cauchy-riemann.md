@@ -2,7 +2,7 @@
 id: thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann
 kind: theorem
 title: "Complex differentiability is equivalent to real total differentiability together with a complex-linear derivative, with $\\partial_{\\bar z}f=0$, or with the Cauchy–Riemann equations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -19,6 +19,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

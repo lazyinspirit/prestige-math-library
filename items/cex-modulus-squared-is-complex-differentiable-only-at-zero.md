@@ -2,7 +2,7 @@
 id: cex-modulus-squared-is-complex-differentiable-only-at-zero
 kind: counterexample
 title: "$z\\mapsto|z|^2$ is complex differentiable exactly at $0$, with derivative $0$, but is holomorphic on no neighbourhood of $0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-canonical-comparison-characterises-limit-preservation
 kind: lemma
 title: "A functor preserves a chosen limit exactly when its canonical comparison to the chosen target limit is an isomorphism, and dually for colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: biconditional
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

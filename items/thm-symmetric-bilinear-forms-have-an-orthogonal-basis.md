@@ -2,7 +2,7 @@
 id: thm-symmetric-bilinear-forms-have-an-orthogonal-basis
 kind: theorem
 title: 'Every symmetric bilinear form on a finite-dimensional space over a field of characteristic not $2$ has an orthogonal basis'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

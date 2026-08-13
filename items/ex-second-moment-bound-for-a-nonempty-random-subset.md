@@ -2,7 +2,7 @@
 id: ex-second-moment-bound-for-a-nonempty-random-subset
 kind: example
 title: "First- and second-moment bounds for a nonempty Bernoulli random subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

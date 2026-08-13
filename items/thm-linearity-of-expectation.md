@@ -2,7 +2,7 @@
 id: thm-linearity-of-expectation
 kind: theorem
 title: "Expectation is linear for every finite family of random variables, without any independence hypothesis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-type-i-type-ii-and-elementary-green-regions
 kind: definition
 title: "Type I, Type II, and elementary regions for Green's theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-splitting-field-of-x-four-plus-two-x-squared-minus-eight
 kind: example
 title: 'The splitting field of $x^4+2x^2-8$ over $\mathbb Q$ is $\mathbb Q(\sqrt2,i)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

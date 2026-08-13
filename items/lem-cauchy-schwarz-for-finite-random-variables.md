@@ -2,7 +2,7 @@
 id: lem-cauchy-schwarz-for-finite-random-variables
 kind: lemma
 title: "Cauchy-Schwarz for finite random variables: $\\mathbb E[XY]^2\\le\\mathbb E[X^2]\\mathbb E[Y^2]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

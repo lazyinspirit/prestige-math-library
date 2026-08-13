@@ -2,7 +2,7 @@
 id: thm-finite-p-groups-are-nilpotent
 kind: theorem
 title: "Every finite $p$-group is nilpotent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

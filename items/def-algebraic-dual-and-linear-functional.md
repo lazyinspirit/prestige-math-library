@@ -2,7 +2,7 @@
 id: def-algebraic-dual-and-linear-functional
 kind: definition
 title: 'Linear functionals and the algebraic dual $V^*=\mathcal L(V,F)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

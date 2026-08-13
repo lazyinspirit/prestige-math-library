@@ -2,7 +2,7 @@
 id: thm-sylvesters-law-of-inertia
 kind: theorem
 title: 'Sylvester''s law of inertia: every real symmetric form is congruent to $\operatorname{diag}(I_p,-I_q,0_r)$, and $(p,q,r)$ is unique'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

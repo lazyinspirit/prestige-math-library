@@ -2,7 +2,7 @@
 id: lem-mgf-of-independent-finite-sum
 kind: lemma
 title: "The moment generating function of a finite sum of independent variables is the product of their moment generating functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

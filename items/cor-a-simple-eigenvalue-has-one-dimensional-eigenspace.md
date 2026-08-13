@@ -2,7 +2,7 @@
 id: cor-a-simple-eigenvalue-has-one-dimensional-eigenspace
 kind: corollary
 title: 'An eigenvalue of algebraic multiplicity one has a one-dimensional eigenspace'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

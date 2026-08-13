@@ -2,7 +2,7 @@
 id: cor-scalar-line-integral-of-one-is-arc-length
 kind: corollary
 title: "The scalar line integral of one is the arc length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

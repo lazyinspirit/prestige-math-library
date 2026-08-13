@@ -2,7 +2,7 @@
 id: cex-positive-determinant-does-not-imply-positive-definite
 kind: counterexample
 title: 'Positive determinant does not imply positive definiteness'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

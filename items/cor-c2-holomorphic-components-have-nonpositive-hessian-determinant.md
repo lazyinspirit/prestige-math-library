@@ -2,7 +2,7 @@
 id: cor-c2-holomorphic-components-have-nonpositive-hessian-determinant
 kind: corollary
 title: "The Hessian determinant of each $C^2$ holomorphic component is nonpositive; a nondegenerate critical point is a saddle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

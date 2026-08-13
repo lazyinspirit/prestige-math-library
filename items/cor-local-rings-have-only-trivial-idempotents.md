@@ -2,7 +2,7 @@
 id: cor-local-rings-have-only-trivial-idempotents
 kind: corollary
 title: 'Assuming the Axiom of Choice, a local ring has no idempotents other than $0$ and $1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

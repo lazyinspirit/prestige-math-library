@@ -2,7 +2,7 @@
 id: thm-trace-is-sum-of-eigenvalues
 kind: theorem
 title: 'If $\chi_T(x)=\prod_{i<n}(x-\lambda_i)$ in $F[x]$, then $\operatorname{tr}(T)=\sum_{i<n}\lambda_i$: trace is the sum of the eigenvalues counted with algebraic multiplicity'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

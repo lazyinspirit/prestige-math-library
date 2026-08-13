@@ -2,7 +2,7 @@
 id: ex-pullback-in-top
 kind: example
 title: "A pullback in Top is the fibre product with the subspace topology inherited from the product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-isomorphisms-extend-to-splitting-fields
 kind: theorem
 title: 'A base-field isomorphism extends to an isomorphism between splitting fields of corresponding polynomials'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

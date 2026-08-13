@@ -2,7 +2,7 @@
 id: thm-nonzero-complex-derivative-iff-oriented-conformal
 kind: theorem
 title: "A real-differentiable complex map is orientation-preserving conformal at a point exactly when it is complex differentiable there with nonzero derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

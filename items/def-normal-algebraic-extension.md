@@ -2,7 +2,7 @@
 id: def-normal-algebraic-extension
 kind: definition
 title: 'A normal algebraic extension is one in which every minimal polynomial with a root in the extension splits there'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: [normal extension]
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-real-differentiability-implies-complex-differentiability
 kind: false-statement
 title: "FALSE: real differentiability as a map $\\mathbb R^2\\to\\mathbb R^2$ implies complex differentiability; conjugation is the counterexample"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

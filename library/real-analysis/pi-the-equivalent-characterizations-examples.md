@@ -1,7 +1,7 @@
 ---
 page: pi-the-equivalent-characterizations-examples
 title: "pi: the Equivalent Characterizations: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-unit-circle-pi-calibration-table,
            ex-gregory-leibniz-partial-sums-with-certified-error,

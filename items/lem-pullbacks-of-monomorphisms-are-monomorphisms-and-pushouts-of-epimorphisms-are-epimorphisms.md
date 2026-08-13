@@ -2,7 +2,7 @@
 id: lem-pullbacks-of-monomorphisms-are-monomorphisms-and-pushouts-of-epimorphisms-are-epimorphisms
 kind: lemma
 title: "A pullback of a monomorphism is a monomorphism, and a pushout of an epimorphism is an epimorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: cancellation
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -26,7 +31,10 @@ pipeline_run: frontier-12
 
 In a pullback square
 
-$$\begin{CD}P@>{q}>>Y\\@V{p}VV@VV{m}V\\X@>{f}>>Z,\end{CD}$$
+```tikzcd
+P \arrow[r, "q"] \arrow[d, "p"'] & Y \arrow[d, "m"] \\
+X \arrow[r, "f"'] & Z
+```
 
 if $m$ is monic, then $p$ is monic. Dually, in a pushout square, the pushout
 of an epimorphism is an epimorphism.

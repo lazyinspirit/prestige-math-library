@@ -2,7 +2,7 @@
 id: ex-canonical-split-sequence-of-a-direct-sum
 kind: example
 title: "$0\\to A\\to A\\oplus C\\to C\\to0$ is canonically split"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

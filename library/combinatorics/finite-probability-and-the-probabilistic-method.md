@@ -1,7 +1,7 @@
 ---
 page: finite-probability-and-the-probabilistic-method
 title: "Finite Probability and the Probabilistic Method"
-status: draft
+status: published
 items: [thm-positive-probability-existence-principle,
         thm-first-moment-method,
         prop-deletion-alteration-method,

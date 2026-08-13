@@ -2,7 +2,7 @@
 id: cex-a-root-field-need-not-be-a-splitting-field
 kind: counterexample
 title: 'Adjoining one root need not split the polynomial: $\mathbb Q(\sqrt[3]{2})$ does not split $x^3-2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

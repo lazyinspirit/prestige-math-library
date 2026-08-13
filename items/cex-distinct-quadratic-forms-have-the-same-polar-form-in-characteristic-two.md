@@ -2,7 +2,7 @@
 id: cex-distinct-quadratic-forms-have-the-same-polar-form-in-characteristic-two
 kind: counterexample
 title: 'In characteristic $2$, distinct quadratic forms can have the same polar form'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

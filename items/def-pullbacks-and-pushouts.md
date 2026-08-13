@@ -2,7 +2,7 @@
 id: def-pullbacks-and-pushouts
 kind: definition
 title: "Pullbacks and pushouts as limits and colimits of cospans and spans"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-pullback, def-pushout, def-fiber-product]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

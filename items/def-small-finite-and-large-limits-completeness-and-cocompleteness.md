@@ -2,7 +2,7 @@
 id: def-small-finite-and-large-limits-completeness-and-cocompleteness
 kind: definition
 title: "Finite, small, and large limits and colimits; complete and cocomplete categories"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-complete-category, def-cocomplete-category]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

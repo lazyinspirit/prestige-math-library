@@ -2,7 +2,7 @@
 id: thm-line-integrals-under-oriented-reparametrization
 kind: theorem
 title: "Scalar line integrals are parametrization-independent; vector line integrals retain orientation and change sign when it reverses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

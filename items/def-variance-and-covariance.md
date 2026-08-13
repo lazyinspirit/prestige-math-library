@@ -2,7 +2,7 @@
 id: def-variance-and-covariance
 kind: definition
 title: "Variance, standard deviation, and covariance on a finite probability space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

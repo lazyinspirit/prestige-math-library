@@ -2,7 +2,7 @@
 id: thm-filtered-colimits-commute-with-finite-limits-in-set
 kind: theorem
 title: "Filtered colimits commute with finite limits in Set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: representatives
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

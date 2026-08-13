@@ -2,7 +2,7 @@
 id: lem-potentials-glue-over-a-path-connected-overlap
 kind: lemma
 title: "Potentials glue after a constant adjustment over a nonempty path-connected overlap"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

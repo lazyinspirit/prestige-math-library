@@ -2,7 +2,7 @@
 id: fs-zero-complex-derivative-on-an-open-set-implies-constant
 kind: false-statement
 title: "FALSE: a holomorphic function with zero derivative on an arbitrary open set is constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

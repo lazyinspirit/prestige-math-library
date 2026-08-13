@@ -2,7 +2,7 @@
 id: def-characteristic-polynomial-of-a-matrix
 kind: definition
 title: 'For $A\in M_n(F)$, the characteristic polynomial is $\chi_A(x)=\det(xI_n-A)$ when $n\geq1$, with $\chi_A(x)=1$ for the unique $0\times0$ matrix'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-polynomial-evaluation-at-an-endomorphism
 kind: definition
 title: 'Polynomial evaluation at an endomorphism: $p(T)=\sum_k a_kT^k$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

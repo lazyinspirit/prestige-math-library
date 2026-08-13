@@ -2,7 +2,7 @@
 id: def-scalar-and-vector-line-integrals-along-piecewise-c1-paths
 kind: definition
 title: "Scalar line integrals with respect to arc length and vector-field line integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

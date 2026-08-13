@@ -2,7 +2,7 @@
 id: thm-event-independence-and-indicator-independence
 kind: theorem
 title: "A finite family of events is mutually independent exactly when its indicators are mutually independent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

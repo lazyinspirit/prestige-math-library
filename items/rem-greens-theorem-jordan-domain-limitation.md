@@ -2,7 +2,7 @@
 id: rem-greens-theorem-jordan-domain-limitation
 kind: remark
 title: "Limitation: arbitrary Jordan domains are not covered by the elementary Green theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

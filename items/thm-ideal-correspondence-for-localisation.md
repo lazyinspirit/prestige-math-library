@@ -2,7 +2,7 @@
 id: thm-ideal-correspondence-for-localisation
 kind: theorem
 title: 'Ideals of $S^{-1}R$ correspond to $S$-saturated ideals of $R$, and prime ideals correspond to primes disjoint from $S$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

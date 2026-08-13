@@ -2,7 +2,7 @@
 id: cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator
 kind: corollary
 title: 'The inverse of an invertible finite-dimensional endomorphism is a polynomial in that endomorphism'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

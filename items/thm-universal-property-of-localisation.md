@@ -2,7 +2,7 @@
 id: thm-universal-property-of-localisation
 kind: theorem
 title: 'Universal property of localisation: maps that invert $S$ factor uniquely through $S^{-1}R$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

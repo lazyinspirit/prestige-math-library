@@ -2,7 +2,7 @@
 id: cor-real-symmetric-bilinear-forms-are-classified-by-inertia
 kind: corollary
 title: 'Two real symmetric bilinear forms are congruent if and only if they have the same inertia'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

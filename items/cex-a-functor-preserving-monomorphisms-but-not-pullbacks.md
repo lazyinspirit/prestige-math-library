@@ -2,7 +2,7 @@
 id: cex-a-functor-preserving-monomorphisms-but-not-pullbacks
 kind: counterexample
 title: "A monotone functor between poset categories preserves every monomorphism but need not preserve pullbacks"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: finite-poset-counterexample
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

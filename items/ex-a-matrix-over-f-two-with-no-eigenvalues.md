@@ -2,7 +2,7 @@
 id: ex-a-matrix-over-f-two-with-no-eigenvalues
 kind: example
 title: '$\begin{pmatrix}0&1\\1&1\end{pmatrix}$ over $\mathbb F_2$ has characteristic polynomial $x^2+x+1$ and no eigenvalue in its base field'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

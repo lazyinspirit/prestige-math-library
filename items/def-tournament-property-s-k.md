@@ -2,7 +2,7 @@
 id: def-tournament-property-s-k
 kind: definition
 title: "Tournament property $S_k$: every set of at most $k$ vertices is dominated by one vertex"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

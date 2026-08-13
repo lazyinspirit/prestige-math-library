@@ -2,7 +2,7 @@
 id: def-final-and-initial-functors
 kind: definition
 title: "Final and initial functors via nonempty connected comma categories"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-cofinal-functor]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

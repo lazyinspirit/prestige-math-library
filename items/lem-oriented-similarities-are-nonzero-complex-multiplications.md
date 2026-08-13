@@ -2,7 +2,7 @@
 id: lem-oriented-similarities-are-nonzero-complex-multiplications
 kind: lemma
 title: "Plane similarities are complex or conjugate-complex multiplications; the orientation-preserving ones are exactly the nonzero complex multiplications"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

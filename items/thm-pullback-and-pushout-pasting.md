@@ -2,7 +2,7 @@
 id: thm-pullback-and-pushout-pasting
 kind: theorem
 title: "Pullback and pushout pasting, with cancellation of the square adjacent to the outer edge"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -26,7 +27,10 @@ pipeline_run: frontier-12
 
 Consider a commutative diagram of two adjacent squares
 
-$$\begin{CD}A@>{a}>>B@>{b}>>C\\@V{x}VV@V{y}VV@VV{z}V\\ D@>{d}>>E@>{e}>>F.\end{CD}$$
+```tikzcd
+A \arrow[r, "a"] \arrow[d, "x"'] & B \arrow[r, "b"] \arrow[d, "y"'] & C \arrow[d, "z"] \\
+D \arrow[r, "d"'] & E \arrow[r, "e"'] & F
+```
 
 If both small squares are pullbacks, then the outer rectangle is a pullback. If
 the right square and the outer rectangle are pullbacks, then the left square is

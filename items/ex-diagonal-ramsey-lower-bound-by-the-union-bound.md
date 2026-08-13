@@ -2,7 +2,7 @@
 id: ex-diagonal-ramsey-lower-bound-by-the-union-bound
 kind: example
 title: "The random-colouring proof of $R(k,k)>2^{k/2}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

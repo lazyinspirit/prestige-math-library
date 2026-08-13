@@ -2,7 +2,7 @@
 id: lem-linear-functionals-separate-points-from-subspaces
 kind: lemma
 title: 'Assuming choice, if $v\notin U\leq V$, some $f\in V^*$ vanishes on $U$ and satisfies $f(v)=1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

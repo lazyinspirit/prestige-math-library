@@ -2,7 +2,7 @@
 id: cor-variance-adds-for-pairwise-independent-random-variables
 kind: corollary
 title: "Variance adds for every finite pairwise-independent family"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

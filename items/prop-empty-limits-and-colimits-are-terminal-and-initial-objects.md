@@ -2,7 +2,7 @@
 id: prop-empty-limits-and-colimits-are-terminal-and-initial-objects
 kind: proposition
 title: "Limits of empty diagrams are terminal objects, and colimits of empty diagrams are initial objects"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

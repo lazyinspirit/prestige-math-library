@@ -2,7 +2,7 @@
 id: cex-a-category-with-products-and-a-diagram-without-a-limit
 kind: counterexample
 title: "Assuming Choice, nonempty sets have all small products but a parallel pair with no equalizer and hence a diagram with no limit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

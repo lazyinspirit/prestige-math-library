@@ -2,7 +2,7 @@
 id: thm-expectation-of-products-of-independent-random-variables
 kind: theorem
 title: "Expectation factors over a finite product of mutually independent random variables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

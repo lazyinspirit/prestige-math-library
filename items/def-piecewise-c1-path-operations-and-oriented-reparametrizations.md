@@ -2,7 +2,7 @@
 id: def-piecewise-c1-path-operations-and-oriented-reparametrizations
 kind: definition
 title: "Reversal, concatenation, closed paths, and oriented piecewise-C1 reparametrizations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

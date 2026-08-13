@@ -2,7 +2,7 @@
 id: thm-wirtinger-chain-rule-for-real-differentiable-maps
 kind: theorem
 title: "The Wirtinger chain rule for compositions of real-differentiable complex-valued maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

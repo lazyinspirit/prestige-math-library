@@ -2,7 +2,7 @@
 id: cex-real-part-is-nowhere-complex-differentiable
 kind: counterexample
 title: "$z\\mapsto\\operatorname{Re}z$ is real differentiable but nowhere complex differentiable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

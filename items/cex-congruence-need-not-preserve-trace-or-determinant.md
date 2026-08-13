@@ -2,7 +2,7 @@
 id: cex-congruence-need-not-preserve-trace-or-determinant
 kind: counterexample
 title: 'Congruence need not preserve trace or determinant: the real $1\times1$ matrices $[1]$ and $[4]$ are congruent'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

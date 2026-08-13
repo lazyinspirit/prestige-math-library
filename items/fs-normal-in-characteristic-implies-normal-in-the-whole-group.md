@@ -2,7 +2,7 @@
 id: fs-normal-in-characteristic-implies-normal-in-the-whole-group
 kind: false-statement
 title: "$K\\trianglelefteq H\\operatorname{char}G$ always implies $K\\trianglelefteq G$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

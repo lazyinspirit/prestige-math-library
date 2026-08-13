@@ -2,7 +2,7 @@
 id: ex-congruence-diagonalization-and-inertia-of-a-real-quadratic-form
 kind: example
 title: '$q(x,y)=2x^2+4xy+5y^2=2(x+y)^2+3y^2$ has inertia $(2,0,0)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

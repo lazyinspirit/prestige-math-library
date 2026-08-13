@@ -2,7 +2,7 @@
 id: ex-base-field-is-splitting-field-of-empty-family
 kind: example
 title: 'The base field is the splitting field of the empty family and of every nonzero constant polynomial'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-derivative-of-a-continuous-complex-local-inverse
 kind: theorem
 title: "A continuous local inverse has derivative reciprocal to a nonzero complex derivative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

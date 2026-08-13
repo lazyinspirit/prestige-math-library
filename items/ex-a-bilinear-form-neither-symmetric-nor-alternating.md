@@ -2,7 +2,7 @@
 id: ex-a-bilinear-form-neither-symmetric-nor-alternating
 kind: example
 title: 'The form on $\mathbb R^2$ with matrix $\begin{pmatrix}0&1\\0&0\end{pmatrix}$ is neither symmetric nor alternating'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

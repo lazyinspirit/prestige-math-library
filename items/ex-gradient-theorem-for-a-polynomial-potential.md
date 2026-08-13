@@ -2,7 +2,7 @@
 id: ex-gradient-theorem-for-a-polynomial-potential
 kind: example
 title: "A polynomial potential evaluates work along every path by endpoints"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -39,7 +44,7 @@ $$\int_\gamma F\cdot d\mathbf r=4.$$
 
 [L2] On a $C^1$ path $\gamma$, the vector line integral is the integral of $\langle F(\gamma(t)),\gamma'(t)\rangle$ ([[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]]).
 
-[L3] The power rule gives $(t^3)'=3t^2$, and Newton-Leibniz integrates an interior derivative by its endpoint increment ([[lem-derivative-of-a-power]], [[thm-newton-leibniz-with-interior-derivative]]).
+[L3] The power rule gives $(t^3)'=3t^2$ ([[lem-derivative-of-a-power]]), and for a continuous function whose interior derivative admits an integrable extension, Newton-Leibniz integrates that extension to the endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
 
 
 

@@ -2,7 +2,7 @@
 id: ex-constructing-a-potential-on-an-open-rectangle
 kind: example
 title: "Constructing a potential on a rectangle by coordinate-segment integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -45,7 +46,7 @@ $$\phi(x,y)=x^2y+xy^2-a^2b-ab^2.$$
 
 [L3] Two potentials of one field differ by a constant on a piecewise-$C^1$ path component ([[cor-potentials-differ-by-a-componentwise-constant]]).
 
-[L4] Newton-Leibniz evaluates an integral of an interior derivative by the endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
+[L4] For a continuous function whose interior derivative admits an integrable extension, Newton-Leibniz evaluates the integral of that extension by the endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
 
 
 

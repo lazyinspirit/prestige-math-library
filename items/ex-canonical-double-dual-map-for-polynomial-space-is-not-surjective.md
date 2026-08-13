@@ -2,7 +2,7 @@
 id: ex-canonical-double-dual-map-for-polynomial-space-is-not-surjective
 kind: example
 title: 'For the polynomial space $F[x]$, the canonical map to the algebraic double dual is injective but not surjective'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

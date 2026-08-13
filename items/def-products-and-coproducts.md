@@ -2,7 +2,7 @@
 id: def-products-and-coproducts
 kind: definition
 title: "Products and coproducts as limits and colimits of discrete diagrams, including their existence-and-uniqueness equations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-categorical-product, def-categorical-coproduct]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

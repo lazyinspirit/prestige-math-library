@@ -2,7 +2,7 @@
 id: ex-repeated-eigenvalue-with-one-dimensional-eigenspace
 kind: example
 title: '$\begin{pmatrix}2&1\\0&2\end{pmatrix}$ has algebraic multiplicity two but geometric multiplicity one at $2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

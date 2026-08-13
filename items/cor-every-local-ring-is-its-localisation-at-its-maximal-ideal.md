@@ -2,7 +2,7 @@
 id: cor-every-local-ring-is-its-localisation-at-its-maximal-ideal
 kind: corollary
 title: 'Assuming the Axiom of Choice, a local ring $R$ is canonically isomorphic to $R_{\mathfrak m}$ at its maximal ideal'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

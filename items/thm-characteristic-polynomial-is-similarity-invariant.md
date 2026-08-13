@@ -2,7 +2,7 @@
 id: thm-characteristic-polynomial-is-similarity-invariant
 kind: theorem
 title: 'Similar matrices have the same characteristic polynomial'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

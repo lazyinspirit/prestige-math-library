@@ -2,7 +2,7 @@
 id: thm-zero-complex-derivative-on-a-domain-implies-constant
 kind: theorem
 title: "A holomorphic function with zero derivative on a domain is constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

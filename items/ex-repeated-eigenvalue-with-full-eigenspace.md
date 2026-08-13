@@ -2,7 +2,7 @@
 id: ex-repeated-eigenvalue-with-full-eigenspace
 kind: example
 title: 'The scalar matrix $2I_2$ has algebraic and geometric multiplicity two at $2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

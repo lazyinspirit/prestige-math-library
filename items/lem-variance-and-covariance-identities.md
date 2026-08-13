@@ -2,7 +2,7 @@
 id: lem-variance-and-covariance-identities
 kind: lemma
 title: "$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2$ and $\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

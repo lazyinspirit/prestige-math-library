@@ -2,7 +2,7 @@
 id: fs-the-underlying-set-functor-on-top-does-not-preserve-limits
 kind: false-statement
 title: "FALSE: the underlying-set functor Top→Set fails to preserve some small limit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: theorem-refutation
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

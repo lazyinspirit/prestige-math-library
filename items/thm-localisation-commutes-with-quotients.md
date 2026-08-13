@@ -2,7 +2,7 @@
 id: thm-localisation-commutes-with-quotients
 kind: theorem
 title: 'Localisation commutes with quotient rings: $S^{-1}R/S^{-1}I\cong \bar S^{-1}(R/I)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

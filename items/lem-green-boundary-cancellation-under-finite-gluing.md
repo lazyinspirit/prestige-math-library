@@ -2,7 +2,7 @@
 id: lem-green-boundary-cancellation-under-finite-gluing
 kind: lemma
 title: "Shared boundary arcs cancel when finitely many elementary regions are glued"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-homomorphisms-respect-commutators-and-derived-series
 kind: lemma
 title: "Homomorphisms respect commutator subgroups and derived series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

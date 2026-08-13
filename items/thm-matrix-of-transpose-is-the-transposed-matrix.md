@@ -2,7 +2,7 @@
 id: thm-matrix-of-transpose-is-the-transposed-matrix
 kind: theorem
 title: 'In dual bases, the matrix of $T^*$ is the transpose of the matrix of $T$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-nonzero-commutative-rings-have-invariant-basis-number
 kind: theorem
 title: "Every nonzero commutative ring has invariant basis number for finite bases"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

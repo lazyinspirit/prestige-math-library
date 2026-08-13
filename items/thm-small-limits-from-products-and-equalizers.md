@@ -2,7 +2,7 @@
 id: thm-small-limits-from-products-and-equalizers
 kind: theorem
 title: "Every small limit can be constructed as an equalizer between products over the objects and arrows of the index category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

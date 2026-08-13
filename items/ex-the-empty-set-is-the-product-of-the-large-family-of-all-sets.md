@@ -2,7 +2,7 @@
 id: ex-the-empty-set-is-the-product-of-the-large-family-of-all-sets
 kind: example
 title: "Under the definable-class diagram convention, the empty set is the product of the large family of all sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

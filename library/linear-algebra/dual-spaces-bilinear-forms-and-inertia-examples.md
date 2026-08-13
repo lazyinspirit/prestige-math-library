@@ -1,7 +1,7 @@
 ---
 page: dual-spaces-bilinear-forms-and-inertia-examples
 title: 'Dual Spaces and Bilinear Forms: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-dual-basis-and-transpose-on-f-three,
            ex-annihilator-of-a-coordinate-plane,

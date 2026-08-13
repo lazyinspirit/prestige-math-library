@@ -2,7 +2,7 @@
 id: thm-tournament-property-s-k-existence
 kind: theorem
 title: "If $k\\ge1$ and $n\\ge3k^2 2^k$, an $n$-vertex tournament with property $S_k$ exists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

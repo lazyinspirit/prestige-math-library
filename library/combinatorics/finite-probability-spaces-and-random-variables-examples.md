@@ -1,7 +1,7 @@
 ---
 page: finite-probability-spaces-and-random-variables-examples
 title: "Finite Probability Spaces and Random Variables — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-loaded-die-and-conditional-probability,
            ex-bayes-theorem-for-two-urns,

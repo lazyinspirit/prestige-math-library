@@ -2,7 +2,7 @@
 id: thm-change-of-basis-for-a-bilinear-form-is-congruence
 kind: theorem
 title: 'A basis change by $P$ changes the matrix of a bilinear form from $A$ to $P^{\mathsf T}AP$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

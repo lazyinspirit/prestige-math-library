@@ -2,7 +2,7 @@
 id: prop-units-in-a-localisation
 kind: proposition
 title: 'A fraction $r/s$ is a unit in $S^{-1}R$ exactly when $ar\in S$ for some $a\in R$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

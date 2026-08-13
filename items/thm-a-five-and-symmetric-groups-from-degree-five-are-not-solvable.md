@@ -2,7 +2,7 @@
 id: thm-a-five-and-symmetric-groups-from-degree-five-are-not-solvable
 kind: theorem
 title: "$A_5$ and $S_n$ for $n\\ge5$ are not solvable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

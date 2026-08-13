@@ -2,7 +2,7 @@
 id: ex-real-quarter-turn-has-no-real-eigenvalues
 kind: example
 title: 'A quarter-turn of $\mathbb R^2$ has characteristic polynomial $x^2+1$ and no real eigenvalue'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

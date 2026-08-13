@@ -2,7 +2,7 @@
 id: thm-chernoff-bound-for-independent-random-signs
 kind: theorem
 title: "For $n\\ge1$ independent random signs, $\\mathbb P(|S|\\ge t)\\le2\\exp(-t^2/(2n))$ for $t>0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

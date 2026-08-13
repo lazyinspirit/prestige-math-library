@@ -2,7 +2,7 @@
 id: def-kernels-and-cokernels-as-equalizers-and-coequalizers
 kind: definition
 title: "Kernels and cokernels in a category with zero morphisms as equalizers and coequalizers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-kernel-and-cokernel]
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-products-of-injective-modules
 kind: theorem
 title: "Products of injective modules are injective, with the exact choice boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

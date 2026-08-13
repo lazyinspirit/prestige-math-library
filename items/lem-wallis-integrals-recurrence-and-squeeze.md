@@ -2,7 +2,7 @@
 id: lem-wallis-integrals-recurrence-and-squeeze
 kind: lemma
 title: "Wallis integrals satisfy the two-step recurrence, closed forms, and the adjacent-integral squeeze"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

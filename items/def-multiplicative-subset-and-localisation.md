@@ -2,7 +2,7 @@
 id: def-multiplicative-subset-and-localisation
 kind: definition
 title: 'Multiplicative subsets and the localisation $S^{-1}R$ as equivalence classes of fractions'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [localization]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

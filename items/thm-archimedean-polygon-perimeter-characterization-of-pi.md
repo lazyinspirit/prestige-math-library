@@ -2,7 +2,7 @@
 id: thm-archimedean-polygon-perimeter-characterization-of-pi
 kind: theorem
 title: "Inscribed regular-polygon perimeters increase to 2 pi, while circumscribed perimeters decrease to 2 pi"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

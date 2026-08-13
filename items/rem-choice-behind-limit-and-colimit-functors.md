@@ -2,7 +2,7 @@
 id: rem-choice-behind-limit-and-colimit-functors
 kind: remark
 title: "A limit for each diagram need not provide a chosen limit functor without a simultaneous choice of representatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism
 kind: theorem
 title: "Any two limits, or any two colimits, of one diagram are uniquely isomorphic compatibly with their structure maps"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-arc-length-accumulation-derivative-is-speed
 kind: corollary
 title: "For a C1 path the arc-length accumulation function has derivative equal to speed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

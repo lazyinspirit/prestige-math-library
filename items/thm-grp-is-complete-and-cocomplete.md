@@ -2,7 +2,7 @@
 id: thm-grp-is-complete-and-cocomplete
 kind: theorem
 title: "Grp is complete and cocomplete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructions-and-criteria
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

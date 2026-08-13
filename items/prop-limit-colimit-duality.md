@@ -2,7 +2,7 @@
 id: prop-limit-colimit-duality
 kind: proposition
 title: "A limiting cone for a diagram is exactly a colimiting cocone for the formally dual diagram in the opposite category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: duality
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

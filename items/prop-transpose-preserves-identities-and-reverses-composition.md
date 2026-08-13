@@ -2,7 +2,7 @@
 id: prop-transpose-preserves-identities-and-reverses-composition
 kind: proposition
 title: 'Transpose is linear, sends identities to identities, and reverses composition: $(S\circ T)^*=T^*\circ S^*$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

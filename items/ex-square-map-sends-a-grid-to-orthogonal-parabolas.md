@@ -2,7 +2,7 @@
 id: ex-square-map-sends-a-grid-to-orthogonal-parabolas
 kind: example
 title: "The square map sends the Cartesian grid lines off the coordinate axes to two orthogonal families of parabolas"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

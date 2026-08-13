@@ -2,7 +2,7 @@
 id: ex-empty-diagrams-select-terminal-and-initial-objects
 kind: example
 title: "The singleton set and trivial group are terminal, while the empty set and trivial group are initial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

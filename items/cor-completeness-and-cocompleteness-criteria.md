@@ -2,7 +2,7 @@
 id: cor-completeness-and-cocompleteness-criteria
 kind: corollary
 title: "A category is complete exactly when it has all small products and equalizers, and cocomplete exactly when it has all small coproducts and coequalizers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: biconditional
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-bernoulli-and-binomial-random-variables
 kind: definition
 title: "Bernoulli random variables and binomial random variables as sums of independent Bernoulli trials"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

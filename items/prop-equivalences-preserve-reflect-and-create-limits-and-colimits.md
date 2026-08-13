@@ -2,7 +2,7 @@
 id: prop-equivalences-preserve-reflect-and-create-limits-and-colimits
 kind: proposition
 title: "Equivalences preserve, reflect, and create limits and colimits in the isomorphism-invariant sense"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: transport-of-structure
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

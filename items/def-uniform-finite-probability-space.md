@@ -2,7 +2,7 @@
 id: def-uniform-finite-probability-space
 kind: definition
 title: "The uniform probability space on a nonempty finite set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

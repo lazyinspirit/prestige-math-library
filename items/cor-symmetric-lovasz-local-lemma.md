@@ -2,7 +2,7 @@
 id: cor-symmetric-lovasz-local-lemma
 kind: corollary
 title: "The symmetric Lovász Local Lemma under $ep(d+1)\\le1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

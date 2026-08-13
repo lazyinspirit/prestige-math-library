@@ -2,7 +2,7 @@
 id: thm-greens-theorem-for-finite-unions-of-elementary-regions
 kind: theorem
 title: "Green's theorem for finite unions of elementary regions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

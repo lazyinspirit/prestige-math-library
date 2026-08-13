@@ -2,7 +2,7 @@
 id: thm-finite-limit-and-colimit-criteria
 kind: theorem
 title: "Finite, nonempty finite, and connected finite (co)limit criteria in terms of products, equalizers, pullbacks, terminal objects, and their duals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: equivalence
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

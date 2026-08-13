@@ -2,7 +2,7 @@
 id: thm-polarization-bijection-in-characteristic-not-two
 kind: theorem
 title: 'If $\operatorname{char}F\neq2$, quadratic forms and symmetric bilinear forms correspond by $q(v)=B(v,v)$ and $B(u,v)=\tfrac12 b_q(u,v)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

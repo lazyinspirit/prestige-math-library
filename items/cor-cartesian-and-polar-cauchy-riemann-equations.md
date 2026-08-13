@@ -2,7 +2,7 @@
 id: cor-cartesian-and-polar-cauchy-riemann-equations
 kind: corollary
 title: "Cartesian and polar forms of the Cauchy–Riemann equations agree away from the origin"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-upper-and-lower-central-characterizations-of-nilpotence
 kind: theorem
 title: "Nilpotence via central series, the upper central series, and the lower central series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

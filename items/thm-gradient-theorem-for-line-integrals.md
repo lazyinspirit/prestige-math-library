@@ -2,7 +2,7 @@
 id: thm-gradient-theorem-for-line-integrals
 kind: theorem
 title: "The gradient theorem: the line integral of a gradient is the endpoint increment"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

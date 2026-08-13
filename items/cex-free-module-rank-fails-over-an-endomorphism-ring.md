@@ -2,7 +2,7 @@
 id: cex-free-module-rank-fails-over-an-endomorphism-ring
 kind: counterexample
 title: "A regular module with bases of sizes one and two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

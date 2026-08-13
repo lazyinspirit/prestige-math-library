@@ -2,7 +2,7 @@
 id: lem-moment-bound-for-a-random-sign
 kind: lemma
 title: "For a uniform random sign $\\varepsilon$, $\\mathbb E[e^{t\\varepsilon}]\\le e^{t^2/2}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: finite-probability-and-the-probabilistic-method-examples
 title: "Finite Probability and the Probabilistic Method — Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-triangle-count-in-the-erdos-renyi-random-graph,
            ex-second-moment-bound-for-a-nonempty-random-subset,

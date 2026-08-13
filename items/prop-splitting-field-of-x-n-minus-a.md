@@ -2,7 +2,7 @@
 id: prop-splitting-field-of-x-n-minus-a
 kind: proposition
 title: 'After adjoining one nonzero root $\alpha$ of $x^n-a$, all roots are $\zeta\alpha$ with $\zeta^n=1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

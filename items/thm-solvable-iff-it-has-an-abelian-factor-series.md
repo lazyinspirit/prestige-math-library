@@ -2,7 +2,7 @@
 id: thm-solvable-iff-it-has-an-abelian-factor-series
 kind: theorem
 title: "A group is solvable if and only if it has a subnormal series with abelian factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

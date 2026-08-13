@@ -2,7 +2,7 @@
 id: cex-the-one-form-y-dx-is-path-dependent
 kind: counterexample
 title: "The vector field (y,0) gives different integrals along two paths with the same endpoints"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -35,7 +36,7 @@ The field $F(x,y)=(y,0)$ has the same vector line integral along every path from
 
 [L3] Path independence is equivalent to zero integral around every closed piecewise-$C^1$ path on a piecewise-$C^1$ path-connected domain ([[thm-path-independence-iff-zero-closed-loop-integrals]]).
 
-[L4] The power rule and Newton-Leibniz evaluate polynomial integrals by endpoint increments ([[lem-derivative-of-a-power]], [[thm-newton-leibniz-with-interior-derivative]]).
+[L4] The power rule ([[lem-derivative-of-a-power]]), together with Newton-Leibniz for a continuous function whose interior derivative admits an integrable extension ([[thm-newton-leibniz-with-interior-derivative]]), evaluates polynomial integrals by endpoint increments.
 
 
 

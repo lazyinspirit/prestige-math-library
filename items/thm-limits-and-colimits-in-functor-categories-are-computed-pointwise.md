@@ -2,7 +2,7 @@
 id: thm-limits-and-colimits-in-functor-categories-are-computed-pointwise
 kind: theorem
 title: "For small source and index categories, chosen target limits and colimits compute the corresponding functor-category limits and colimits pointwise"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: pointwise-construction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

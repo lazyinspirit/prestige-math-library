@@ -2,7 +2,7 @@
 id: cex-distinct-subspaces-of-the-dual-can-have-the-same-preannihilator
 kind: counterexample
 title: 'In infinite dimension, distinct subspaces of $V^*$ can have the same preannihilator'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

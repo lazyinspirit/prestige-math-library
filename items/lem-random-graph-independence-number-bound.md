@@ -2,7 +2,7 @@
 id: lem-random-graph-independence-number-bound
 kind: lemma
 title: "$\\mathbb P(\\alpha(G(n,p))\\ge s)\\le\\binom ns(1-p)^{\\binom s2}\\le n^s\\exp(-p\\binom s2)$ for $s\\le n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

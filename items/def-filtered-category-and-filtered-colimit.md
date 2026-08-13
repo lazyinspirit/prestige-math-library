@@ -2,7 +2,7 @@
 id: def-filtered-category-and-filtered-colimit
 kind: definition
 title: "Filtered categories and filtered colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-filtered-category]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

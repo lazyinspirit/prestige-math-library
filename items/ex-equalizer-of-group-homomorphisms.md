@@ -2,7 +2,7 @@
 id: ex-equalizer-of-group-homomorphisms
 kind: example
 title: "The equalizer of two group homomorphisms is their agreement subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: subgroup-and-factorization
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

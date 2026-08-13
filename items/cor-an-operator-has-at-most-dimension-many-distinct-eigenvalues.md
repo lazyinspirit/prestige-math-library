@@ -2,7 +2,7 @@
 id: cor-an-operator-has-at-most-dimension-many-distinct-eigenvalues
 kind: corollary
 title: 'An endomorphism of an $n$-dimensional space has at most $n$ distinct eigenvalues'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

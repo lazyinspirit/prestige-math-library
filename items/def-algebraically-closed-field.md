@@ -2,7 +2,7 @@
 id: def-algebraically-closed-field
 kind: definition
 title: 'An algebraically closed field: every nonconstant polynomial has a root in the field'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

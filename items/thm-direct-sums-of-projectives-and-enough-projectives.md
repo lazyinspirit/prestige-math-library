@@ -2,7 +2,7 @@
 id: thm-direct-sums-of-projectives-and-enough-projectives
 kind: theorem
 title: "Direct sums of projectives are projective, and module categories have enough projectives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

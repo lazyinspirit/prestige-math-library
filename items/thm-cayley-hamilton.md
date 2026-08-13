@@ -2,7 +2,7 @@
 id: thm-cayley-hamilton
 kind: theorem
 title: 'Cayley-Hamilton: every finite-dimensional endomorphism satisfies its characteristic polynomial, $\chi_T(T)=0$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

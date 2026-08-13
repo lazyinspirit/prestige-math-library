@@ -2,7 +2,7 @@
 id: def-free-module-on-a-set-and-standard-basis
 kind: definition
 title: "The free module on a set and its standard basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

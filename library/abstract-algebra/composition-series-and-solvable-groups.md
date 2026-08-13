@@ -1,7 +1,7 @@
 ---
 page: composition-series-and-solvable-groups
 title: "Composition Series, the Jordan–Hölder Theorem and Solvable Groups"
-status: draft
+status: published
 items: [def-subnormal-normal-series-refinement-and-equivalence,
         def-composition-series-composition-factors-and-length,
         thm-every-finite-group-has-a-composition-series,

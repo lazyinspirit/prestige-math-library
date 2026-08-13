@@ -2,7 +2,7 @@
 id: cor-potentials-differ-by-a-componentwise-constant
 kind: corollary
 title: "Two potentials of the same field differ by a constant on each piecewise-C1 path component"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

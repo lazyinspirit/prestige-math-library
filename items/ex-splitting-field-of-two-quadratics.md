@@ -2,7 +2,7 @@
 id: ex-splitting-field-of-two-quadratics
 kind: example
 title: 'The splitting field of $\{x^2-2,x^2-3\}$ over $\mathbb Q$ is $\mathbb Q(\sqrt2,\sqrt3)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

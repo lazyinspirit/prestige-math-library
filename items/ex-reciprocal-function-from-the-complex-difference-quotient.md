@@ -2,7 +2,7 @@
 id: ex-reciprocal-function-from-the-complex-difference-quotient
 kind: example
 title: "$z\\mapsto1/z$ is holomorphic on $\\mathbb C\\setminus\\{0\\}$ with derivative $-1/z^2$, directly from the difference quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

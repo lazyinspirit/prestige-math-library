@@ -2,7 +2,7 @@
 id: def-algebraic-and-geometric-multiplicity-of-an-eigenvalue
 kind: definition
 title: 'Algebraic multiplicity as the exponent of $x-\lambda$ in $\chi_T$, and geometric multiplicity as $\dim E_\lambda(T)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

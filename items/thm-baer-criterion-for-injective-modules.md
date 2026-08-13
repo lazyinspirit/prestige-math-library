@@ -2,7 +2,7 @@
 id: thm-baer-criterion-for-injective-modules
 kind: theorem
 title: "Baer's criterion for injective modules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

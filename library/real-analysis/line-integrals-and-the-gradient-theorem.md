@@ -1,7 +1,7 @@
 ---
 page: line-integrals-and-the-gradient-theorem
 title: "Line Integrals and the Gradient Theorem"
-status: draft
+status: published
 items: [def-piecewise-c1-path-operations-and-oriented-reparametrizations,
         def-scalar-and-vector-line-integrals-along-piecewise-c1-paths,
         lem-line-integrals-are-independent-of-the-piecewise-c1-partition,

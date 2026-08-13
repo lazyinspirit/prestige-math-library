@@ -2,7 +2,7 @@
 id: lem-equality-in-a-filtered-colimit-of-sets-is-eventual
 kind: lemma
 title: "Two representatives in a filtered colimit of sets are equal exactly when they become equal at one common later stage"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: equivalence-relation
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

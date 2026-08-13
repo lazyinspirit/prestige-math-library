@@ -2,7 +2,7 @@
 id: rem-complex-plane-euclidean-dictionary
 kind: remark
 title: "$\\mathbb C=\\mathbb R[x]/(x^2+1)$ as the Euclidean plane and as a normed real algebra: what the identification preserves"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

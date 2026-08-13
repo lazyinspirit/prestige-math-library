@@ -2,7 +2,7 @@
 id: cor-rational-function-field-as-a-fraction-field
 kind: corollary
 title: 'For a field $F$, $F(t)=\operatorname{Frac}(F[t])$ is its rational function field; in particular $\mathbb R(t)=\operatorname{Frac}(\mathbb R[t])$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

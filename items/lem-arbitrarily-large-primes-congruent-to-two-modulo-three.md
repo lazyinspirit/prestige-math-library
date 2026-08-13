@@ -2,7 +2,7 @@
 id: lem-arbitrarily-large-primes-congruent-to-two-modulo-three
 kind: lemma
 title: "There are arbitrarily large primes congruent to $2$ modulo $3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-rank-and-nondegeneracy-are-congruence-invariants
 kind: corollary
 title: 'Congruent matrices have the same rank; hence rank and nondegeneracy of a bilinear form are basis-independent'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

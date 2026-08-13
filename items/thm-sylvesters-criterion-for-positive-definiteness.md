@@ -2,7 +2,7 @@
 id: thm-sylvesters-criterion-for-positive-definiteness
 kind: theorem
 title: 'Sylvester''s criterion: a real symmetric $n\times n$ matrix with $n\geq1$ is positive definite if and only if all leading principal minors are positive'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

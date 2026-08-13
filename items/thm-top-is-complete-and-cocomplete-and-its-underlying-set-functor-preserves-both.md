@@ -2,7 +2,7 @@
 id: thm-top-is-complete-and-cocomplete-and-its-underlying-set-functor-preserves-both
 kind: theorem
 title: "Top is complete and cocomplete, and its underlying-set functor preserves all small limits and colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: lift-set-constructions
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

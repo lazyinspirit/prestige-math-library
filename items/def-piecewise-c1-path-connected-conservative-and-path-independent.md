@@ -2,7 +2,7 @@
 id: def-piecewise-c1-path-connected-conservative-and-path-independent
 kind: definition
 title: "Piecewise-C1 path-connected domains, potential functions, conservative fields, and path independence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

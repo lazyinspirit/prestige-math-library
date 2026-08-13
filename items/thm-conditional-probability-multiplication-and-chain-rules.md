@@ -2,7 +2,7 @@
 id: thm-conditional-probability-multiplication-and-chain-rules
 kind: theorem
 title: "The multiplication rule and finite chain rule for conditional probability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-nonzero-elements-of-a-ring-need-not-form-a-multiplicative-set
 kind: counterexample
 title: 'Outside a domain, the nonzero elements need not be multiplicative: $2\cdot3=0$ in $\mathbb Z/6$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

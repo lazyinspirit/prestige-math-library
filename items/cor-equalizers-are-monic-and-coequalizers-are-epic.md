@@ -2,7 +2,7 @@
 id: cor-equalizers-are-monic-and-coequalizers-are-epic
 kind: corollary
 title: "Every equalizer is a monomorphism, and every coequalizer is an epimorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct-corollary
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

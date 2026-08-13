@@ -2,7 +2,7 @@
 id: lem-indicator-expectation-and-products
 kind: lemma
 title: "Indicators turn event probabilities, intersections, and finite counts into expectations and products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

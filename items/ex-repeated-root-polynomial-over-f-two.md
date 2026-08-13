@@ -2,7 +2,7 @@
 id: ex-repeated-root-polynomial-over-f-two
 kind: example
 title: 'Over $\mathbb F_2$, $x^4+x^2+1=(x^2+x+1)^2$ has two distinct roots, each repeated, in its four-element splitting field'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

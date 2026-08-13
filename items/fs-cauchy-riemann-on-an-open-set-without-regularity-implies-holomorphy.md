@@ -2,7 +2,7 @@
 id: fs-cauchy-riemann-on-an-open-set-without-regularity-implies-holomorphy
 kind: false-statement
 title: "FALSE: existence of partial derivatives satisfying Cauchy–Riemann everywhere on an open set implies holomorphy"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

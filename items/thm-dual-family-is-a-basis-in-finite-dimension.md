@@ -2,7 +2,7 @@
 id: thm-dual-family-is-a-basis-in-finite-dimension
 kind: theorem
 title: 'The dual family of a finite basis is a basis of the dual space, with the same dimension'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

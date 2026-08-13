@@ -2,7 +2,7 @@
 id: ex-complex-exponential-cauchy-riemann-in-cartesian-and-polar-form
 kind: example
 title: "The complex exponential satisfies the Cauchy–Riemann equations in Cartesian and polar form"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

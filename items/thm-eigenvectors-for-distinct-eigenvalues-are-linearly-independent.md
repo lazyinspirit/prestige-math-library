@@ -2,7 +2,7 @@
 id: thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent
 kind: theorem
 title: 'Eigenvectors belonging to pairwise distinct eigenvalues are linearly independent'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

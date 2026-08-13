@@ -2,7 +2,7 @@
 id: ex-characteristic-polynomial-and-eigenspaces-of-a-two-by-two-matrix
 kind: example
 title: 'The matrix $\begin{pmatrix}2&1\\0&3\end{pmatrix}$ has characteristic polynomial $(x-2)(x-3)$ and two explicitly computed eigenspaces'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

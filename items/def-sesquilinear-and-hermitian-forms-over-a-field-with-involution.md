@@ -2,7 +2,7 @@
 id: def-sesquilinear-and-hermitian-forms-over-a-field-with-involution
 kind: definition
 title: 'Sesquilinear and Hermitian forms over a field with an involution, using the convention linear in the first variable'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

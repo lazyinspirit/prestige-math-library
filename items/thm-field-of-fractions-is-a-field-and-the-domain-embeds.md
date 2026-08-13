@@ -2,7 +2,7 @@
 id: thm-field-of-fractions-is-a-field-and-the-domain-embeds
 kind: theorem
 title: '$\operatorname{Frac}(D)$ is a field and $d\mapsto d/1$ embeds the integral domain $D$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains
 kind: corollary
 title: "On a star-shaped open domain, closed, exact, conservative, path-independent, and zero-loop are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

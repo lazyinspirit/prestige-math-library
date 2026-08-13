@@ -2,7 +2,7 @@
 id: cex-filtered-colimits-need-not-commute-with-infinite-products-in-set
 kind: counterexample
 title: "Filtered colimits in Set need not commute with countably infinite products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: bounded-sequences
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

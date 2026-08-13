@@ -1,7 +1,7 @@
 ---
 page: composition-series-and-solvable-groups-examples
 title: "Composition Series, Solvability and Nilpotence: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-two-composition-series-of-the-cyclic-group-of-order-twelve,
         ex-composition-and-derived-series-of-s-three,

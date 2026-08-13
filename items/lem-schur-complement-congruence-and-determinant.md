@@ -2,7 +2,7 @@
 id: lem-schur-complement-congruence-and-determinant
 kind: lemma
 title: 'For symmetric $M=\begin{pmatrix}A&B\\B^{\mathsf T}&C\end{pmatrix}$ with $A$ invertible, a block-unitriangular congruence gives $A\oplus(C-B^{\mathsf T}A^{-1}B)$ and factors $\det M$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

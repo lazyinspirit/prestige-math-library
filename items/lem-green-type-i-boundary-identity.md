@@ -2,7 +2,7 @@
 id: lem-green-type-i-boundary-identity
 kind: lemma
 title: "The Type I boundary identity for the P dx term"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -41,7 +42,7 @@ $$\int_{\partial D}P\,dx=-\iint_D\partial_yP\,dA.$$
 
 [L3] For continuous $H$ on a graph-bounded region, $$\iint_DH\,dA=\int_a^b\int_{\alpha(x)}^{\beta(x)}H(x,y)\,dy\,dx$$ ([[thm-fubini-over-a-region-between-continuous-graphs]]).
 
-[L4] The integral of an interior derivative of a continuous function is its endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
+[L4] A continuous function whose interior derivative admits an integrable extension satisfies Newton-Leibniz: that extension integrates to the endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
 
 
 

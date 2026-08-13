@@ -2,7 +2,7 @@
 id: prop-fully-faithful-functors-reflect-limits-and-colimits
 kind: proposition
 title: "Fully faithful functors reflect limits and colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

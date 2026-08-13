@@ -2,7 +2,7 @@
 id: cor-symmetric-matrices-are-congruent-to-diagonal-matrices
 kind: corollary
 title: 'Over a field of characteristic not $2$, every symmetric matrix is congruent to a diagonal matrix'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

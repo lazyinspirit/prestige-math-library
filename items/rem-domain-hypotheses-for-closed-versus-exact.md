@@ -2,7 +2,7 @@
 id: rem-domain-hypotheses-for-closed-versus-exact
 kind: remark
 title: "Closedness is local, exactness is global, and a domain hypothesis cannot be omitted"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

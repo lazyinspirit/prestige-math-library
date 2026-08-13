@@ -1,7 +1,7 @@
 ---
 page: free-modules-and-exact-sequences-examples
 title: "Free Modules and Exact Sequences: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-standard-basis-and-universal-map-from-r-three,
         cex-z-mod-n-is-not-a-free-z-module,

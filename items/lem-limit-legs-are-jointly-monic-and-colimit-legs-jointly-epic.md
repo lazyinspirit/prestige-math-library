@@ -2,7 +2,7 @@
 id: lem-limit-legs-are-jointly-monic-and-colimit-legs-jointly-epic
 kind: lemma
 title: "The legs of a limiting cone are jointly monic, and the legs of a colimiting cocone are jointly epic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-path-independence-iff-zero-closed-loop-integrals
 kind: theorem
 title: "Path independence is equivalent to zero integral around every closed piecewise-C1 path"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

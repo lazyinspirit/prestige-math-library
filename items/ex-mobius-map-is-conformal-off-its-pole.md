@@ -2,7 +2,7 @@
 id: ex-mobius-map-is-conformal-off-its-pole
 kind: example
 title: "A Möbius map $(az+b)/(cz+d)$ with $ad-bc\\ne0$ is conformal wherever $cz+d\\ne0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-complex-polynomials-and-rational-functions-are-holomorphic
 kind: theorem
 title: "Complex polynomials are entire with the power-rule derivative, and rational functions are holomorphic wherever their denominator is nonzero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

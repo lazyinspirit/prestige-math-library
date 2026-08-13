@@ -2,7 +2,7 @@
 id: cor-constant-modulus-holomorphic-function-is-constant
 kind: corollary
 title: "A holomorphic function of constant modulus on a domain is constant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

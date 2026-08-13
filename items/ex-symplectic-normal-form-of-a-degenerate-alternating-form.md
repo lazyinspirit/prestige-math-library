@@ -2,7 +2,7 @@
 id: ex-symplectic-normal-form-of-a-degenerate-alternating-form
 kind: example
 title: 'A rank-two alternating form on $\mathbb R^3$ has one symplectic pair and a one-dimensional radical'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

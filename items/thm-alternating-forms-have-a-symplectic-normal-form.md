@@ -2,7 +2,7 @@
 id: thm-alternating-forms-have-a-symplectic-normal-form
 kind: theorem
 title: 'Every alternating form on a finite-dimensional space has a basis of symplectic pairs followed by a basis of its radical; in particular its rank is even'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

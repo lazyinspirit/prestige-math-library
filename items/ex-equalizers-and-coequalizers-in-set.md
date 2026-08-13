@@ -2,7 +2,7 @@
 id: ex-equalizers-and-coequalizers-in-set
 kind: example
 title: "Equalizers in Set are agreement subsets and coequalizers are quotients by the generated equivalence relation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

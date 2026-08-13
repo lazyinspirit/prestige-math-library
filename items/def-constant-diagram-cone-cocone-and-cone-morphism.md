@@ -2,7 +2,7 @@
 id: def-constant-diagram-cone-cocone-and-cone-morphism
 kind: definition
 title: "Constant diagrams, cones, cocones, and their morphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

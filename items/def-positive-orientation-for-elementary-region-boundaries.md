@@ -2,7 +2,7 @@
 id: def-positive-orientation-for-elementary-region-boundaries
 kind: definition
 title: "Positive orientation of elementary-region boundaries"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-area-as-a-line-integral-for-elementary-regions
 kind: corollary
 title: "Area of an elementary Green region as a boundary line integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

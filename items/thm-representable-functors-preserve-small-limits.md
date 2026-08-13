@@ -2,7 +2,7 @@
 id: thm-representable-functors-preserve-small-limits
 kind: theorem
 title: "Every covariantly representable functor to Set preserves all existing small limits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

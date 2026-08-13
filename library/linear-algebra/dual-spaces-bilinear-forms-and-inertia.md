@@ -1,7 +1,7 @@
 ---
 page: dual-spaces-bilinear-forms-and-inertia
 title: 'Dual Spaces, Bilinear and Quadratic Forms, and Sylvester''s Law of Inertia'
-status: draft
+status: published
 items: [def-algebraic-dual-and-linear-functional,
         def-dual-family-associated-to-a-basis,
         thm-dual-family-is-a-basis-in-finite-dimension,

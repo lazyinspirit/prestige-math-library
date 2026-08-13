@@ -2,7 +2,7 @@
 id: thm-hypergraph-two-colouring-by-local-lemma
 kind: theorem
 title: "A $k$-uniform hypergraph is $2$-colourable when every edge meets at most $d$ other edges and $e(d+1)\\le2^{k-1}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

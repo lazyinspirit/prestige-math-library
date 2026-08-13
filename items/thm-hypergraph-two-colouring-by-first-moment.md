@@ -2,7 +2,7 @@
 id: thm-hypergraph-two-colouring-by-first-moment
 kind: theorem
 title: "Every $k$-uniform hypergraph with fewer than $2^{k-1}$ edges is $2$-colourable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

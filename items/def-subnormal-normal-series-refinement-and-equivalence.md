@@ -2,7 +2,7 @@
 id: def-subnormal-normal-series-refinement-and-equivalence
 kind: definition
 title: "Subnormal and normal series, factors, refinements, and equivalence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

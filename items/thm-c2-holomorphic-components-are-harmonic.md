@@ -2,7 +2,7 @@
 id: thm-c2-holomorphic-components-are-harmonic
 kind: theorem
 title: "The $C^2$ real and imaginary parts of a holomorphic function satisfy Laplace's equation and form a harmonic-conjugate pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

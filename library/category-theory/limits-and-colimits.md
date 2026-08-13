@@ -1,7 +1,7 @@
 ---
 page: limits-and-colimits
 title: "Limits and Colimits"
-status: draft
+status: published
 items: [def-constant-diagram-cone-cocone-and-cone-morphism,
         def-limit-and-colimit-of-a-diagram,
         thm-limits-and-colimits-are-unique-up-to-unique-compatible-isomorphism,

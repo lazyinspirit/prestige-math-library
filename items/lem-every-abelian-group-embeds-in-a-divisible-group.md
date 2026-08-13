@@ -2,7 +2,7 @@
 id: lem-every-abelian-group-embeds-in-a-divisible-group
 kind: lemma
 title: "Every abelian group embeds in a divisible abelian group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

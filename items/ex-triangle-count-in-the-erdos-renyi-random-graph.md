@@ -2,7 +2,7 @@
 id: ex-triangle-count-in-the-erdos-renyi-random-graph
 kind: example
 title: "The expected number of triangles in $G(n,p)$ is $\\binom n3p^3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-z-mod-n-is-not-a-free-z-module
 kind: counterexample
 title: "$\\mathbb Z/n\\mathbb Z$ is generated but not free as a $\\mathbb Z$-module for $n>1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

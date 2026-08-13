@@ -2,7 +2,7 @@
 id: cex-total-quotient-ring-of-a-nondomain-need-not-be-a-field
 kind: counterexample
 title: 'The total quotient ring of a nondomain need not be a field: $Q(\mathbb Z/6)\cong\mathbb Z/6$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

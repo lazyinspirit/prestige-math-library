@@ -2,7 +2,7 @@
 id: cex-a-full-subcategory-limit-can-differ-from-ambient-limit
 kind: counterexample
 title: "A limit in a full subcategory need not be the ambient limit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: finite-poset-counterexample
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

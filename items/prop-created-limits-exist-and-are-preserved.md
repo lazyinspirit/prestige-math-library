@@ -2,7 +2,7 @@
 id: prop-created-limits-exist-and-are-preserved
 kind: proposition
 title: "A functor that creates limits of a given shape lifts their existence and preserves the created limits, and dually for colimits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: definition
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-cardinality-sized-products-or-coproducts-force-a-preorder
 kind: theorem
 title: "Assuming Choice, a small category with products or coproducts indexed by the cardinality of its morphism set is a preorder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: cardinality-contradiction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

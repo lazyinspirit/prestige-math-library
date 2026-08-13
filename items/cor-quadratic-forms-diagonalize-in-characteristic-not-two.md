@@ -2,7 +2,7 @@
 id: cor-quadratic-forms-diagonalize-in-characteristic-not-two
 kind: corollary
 title: 'Over a field of characteristic not $2$, every quadratic form has diagonal coordinates $q(x)=a_1x_1^2+\cdots+a_nx_n^2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

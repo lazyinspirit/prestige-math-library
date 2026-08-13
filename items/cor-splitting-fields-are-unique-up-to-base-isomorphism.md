@@ -2,7 +2,7 @@
 id: cor-splitting-fields-are-unique-up-to-base-isomorphism
 kind: corollary
 title: 'Any two splitting fields of a polynomial are isomorphic over the base field'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

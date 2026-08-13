@@ -1,7 +1,7 @@
 ---
 page: free-modules-and-exact-sequences
 title: "Free Modules, Exact Sequences, Projective and Injective Modules"
-status: draft
+status: published
 items: [def-direct-sum-of-a-family-of-modules,
         thm-universal-property-of-module-direct-sums,
         def-free-module-on-a-set-and-standard-basis,

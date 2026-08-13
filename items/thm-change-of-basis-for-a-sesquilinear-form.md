@@ -2,7 +2,7 @@
 id: thm-change-of-basis-for-a-sesquilinear-form
 kind: theorem
 title: 'For the linear-first convention, a basis change by $P$ sends a sesquilinear matrix $A$ to $P^{\mathsf T}A\,\sigma(P)$; Hermitian forms satisfy $A=\sigma(A)^{\mathsf T}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-eigenvalue-eigenvector-eigenspace-and-spectrum
 kind: definition
 title: 'Eigenvalues, eigenvectors, eigenspaces $E_\lambda(T)=\ker(T-\lambda I)$, and the spectrum $\sigma_F(T)$ of an endomorphism'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

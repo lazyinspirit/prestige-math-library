@@ -1,7 +1,7 @@
 ---
 page: the-field-of-fractions-and-localisation
 title: 'The Field of Fractions and Localisation'
-status: draft
+status: published
 items: [def-multiplicative-subset-and-localisation, thm-localisation-equivalence-and-ring-laws, prop-localisation-zero-equality-and-kernel-criteria, thm-universal-property-of-localisation, cor-localisation-is-unique-up-to-unique-isomorphism, prop-units-in-a-localisation, def-principal-localisation, prop-iterated-localisation, def-field-of-fractions, thm-field-of-fractions-is-a-field-and-the-domain-embeds, thm-universal-property-of-the-field-of-fractions, cor-fields-of-fractions-are-unique-over-the-domain, cor-rational-function-field-as-a-fraction-field, def-local-ring, thm-local-ring-unit-characterisations, def-localisation-at-a-prime-ideal, thm-localisation-at-a-prime-is-local, cor-every-local-ring-is-its-localisation-at-its-maximal-ideal, cor-local-rings-have-only-trivial-idempotents, thm-ideal-correspondence-for-localisation, thm-localisation-commutes-with-quotients, cor-residue-field-of-a-localisation-at-a-prime]
 examples: []
 ---

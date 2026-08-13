@@ -2,7 +2,7 @@
 id: thm-canonical-map-to-double-dual-is-injective
 kind: theorem
 title: 'Assuming choice, the canonical map $J_V:V\to V^{**}$ is linear and injective'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

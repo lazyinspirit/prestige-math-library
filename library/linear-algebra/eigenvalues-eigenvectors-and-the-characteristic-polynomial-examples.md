@@ -1,7 +1,7 @@
 ---
 page: eigenvalues-eigenvectors-and-the-characteristic-polynomial-examples
 title: 'Eigenvalues and the Characteristic Polynomial: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-characteristic-polynomial-and-eigenspaces-of-a-two-by-two-matrix,
            ex-real-quarter-turn-has-no-real-eigenvalues,

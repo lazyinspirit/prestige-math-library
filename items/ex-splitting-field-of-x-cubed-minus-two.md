@@ -2,7 +2,7 @@
 id: ex-splitting-field-of-x-cubed-minus-two
 kind: example
 title: 'The splitting field of $x^3-2$ over $\mathbb Q$ is $\mathbb Q(\sqrt[3]{2},\omega)$ with $\omega=(-1+i\sqrt3)/2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

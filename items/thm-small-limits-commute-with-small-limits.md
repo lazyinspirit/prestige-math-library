@@ -2,7 +2,7 @@
 id: thm-small-limits-commute-with-small-limits
 kind: theorem
 title: "Iterated small limits commute: either order is canonically isomorphic to the limit over the product category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

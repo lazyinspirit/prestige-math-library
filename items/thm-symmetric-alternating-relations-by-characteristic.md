@@ -2,7 +2,7 @@
 id: thm-symmetric-alternating-relations-by-characteristic
 kind: theorem
 title: 'Alternating forms are skew-symmetric; the converse holds when $\operatorname{char}F\neq2$, while in characteristic $2$ alternating forms are symmetric'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-erdos-high-girth-and-high-chromatic-number
 kind: theorem
 title: "For all positive $k,\\ell$, some finite graph has girth greater than $\\ell$ and chromatic number greater than $k$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

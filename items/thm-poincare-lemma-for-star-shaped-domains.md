@@ -2,7 +2,7 @@
 id: thm-poincare-lemma-for-star-shaped-domains
 kind: theorem
 title: "Poincare's lemma on a star-shaped domain: every closed C1 field is exact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

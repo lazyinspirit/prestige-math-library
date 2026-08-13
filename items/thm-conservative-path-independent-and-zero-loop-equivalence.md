@@ -2,7 +2,7 @@
 id: thm-conservative-path-independent-and-zero-loop-equivalence
 kind: theorem
 title: "Conservative, path-independent, and zero-closed-loop conditions are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

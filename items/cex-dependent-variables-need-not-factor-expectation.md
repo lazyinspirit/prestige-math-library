@@ -2,7 +2,7 @@
 id: cex-dependent-variables-need-not-factor-expectation
 kind: counterexample
 title: "For dependent variables, $\\mathbb E[XY]$ need not equal $\\mathbb E[X]\\mathbb E[Y]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

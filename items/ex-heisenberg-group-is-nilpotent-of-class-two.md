@@ -2,7 +2,7 @@
 id: ex-heisenberg-group-is-nilpotent-of-class-two
 kind: example
 title: "The integral Heisenberg group is nilpotent of class two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

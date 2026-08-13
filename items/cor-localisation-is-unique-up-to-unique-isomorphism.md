@@ -2,7 +2,7 @@
 id: cor-localisation-is-unique-up-to-unique-isomorphism
 kind: corollary
 title: 'A localisation is unique up to a unique isomorphism compatible with the map from $R$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

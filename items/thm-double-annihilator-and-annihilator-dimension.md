@@ -2,7 +2,7 @@
 id: thm-double-annihilator-and-annihilator-dimension
 kind: theorem
 title: 'Assuming choice, ${}^\circ(U^\circ)=U$; in finite dimension, $\dim U^\circ=\dim V-\dim U$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

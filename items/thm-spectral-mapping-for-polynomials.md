@@ -2,7 +2,7 @@
 id: thm-spectral-mapping-for-polynomials
 kind: theorem
 title: 'If $\chi_T(x)=\prod_{i<n}(x-\lambda_i)$ in $F[x]$, then $\chi_{p(T)}(y)=\prod_{i<n}(y-p(\lambda_i))$ for every $p\in F[x]$: the eigenvalues of $p(T)$ are $p(\lambda_i)$, counted with algebraic multiplicity'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: finite-probability-spaces-and-random-variables
 title: "Finite Probability Spaces and Random Variables"
-status: draft
+status: published
 items: [def-finite-probability-space-and-event,
         lem-finite-probability-basic-laws,
         thm-finite-additivity-of-probability,

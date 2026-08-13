@@ -2,7 +2,7 @@
 id: ex-inverting-six-in-the-integers
 kind: example
 title: '$\mathbb Z[1/6]$ consists exactly of rationals $a/6^n$ and inverts precisely the primes $2$ and $3$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

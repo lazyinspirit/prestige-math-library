@@ -2,7 +2,7 @@
 id: lem-local-lemma-conditional-probability-bound
 kind: lemma
 title: "The conditional-probability induction underlying the Lovász Local Lemma"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

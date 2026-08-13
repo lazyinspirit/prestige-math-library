@@ -2,7 +2,7 @@
 id: ex-dual-basis-and-transpose-on-f-three
 kind: example
 title: 'A dual basis and transpose computed for a linear map on $\mathbb F_3^2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

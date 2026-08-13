@@ -2,7 +2,7 @@
 id: def-polynomials-that-split-and-splitting-fields
 kind: definition
 title: 'Polynomials that split and splitting fields of a polynomial or a family of polynomials'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: [splitting field]
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

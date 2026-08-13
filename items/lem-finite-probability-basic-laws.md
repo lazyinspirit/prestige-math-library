@@ -2,7 +2,7 @@
 id: lem-finite-probability-basic-laws
 kind: lemma
 title: "Normalization, nonnegativity, monotonicity, complements, and differences in a finite probability space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

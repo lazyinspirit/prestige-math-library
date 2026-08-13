@@ -2,7 +2,7 @@
 id: thm-positive-probability-existence-principle
 kind: theorem
 title: "An event of positive probability in a finite probability space is nonempty"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: contrapositive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

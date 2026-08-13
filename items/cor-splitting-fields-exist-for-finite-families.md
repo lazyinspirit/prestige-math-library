@@ -2,7 +2,7 @@
 id: cor-splitting-fields-exist-for-finite-families
 kind: corollary
 title: 'Every finite family of nonzero polynomials has a splitting field, obtained from their product'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

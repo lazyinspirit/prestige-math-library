@@ -2,7 +2,7 @@
 id: ex-high-girth-high-chromatic-parameter-ledger
 kind: example
 title: "A parameter ledger for the high-girth, high-chromatic alteration proof"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

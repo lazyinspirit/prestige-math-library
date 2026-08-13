@@ -2,7 +2,7 @@
 id: cor-functor-categories-inherit-completeness-and-cocompleteness
 kind: corollary
 title: "If A is small, then [A,C] is complete or cocomplete whenever C is respectively complete or cocomplete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct-corollary
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

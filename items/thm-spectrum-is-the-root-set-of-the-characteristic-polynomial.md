@@ -2,7 +2,7 @@
 id: thm-spectrum-is-the-root-set-of-the-characteristic-polynomial
 kind: theorem
 title: 'For every finite-dimensional space, $\sigma_F(T)$ is exactly the set of roots in $F$ of $\chi_T$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-final-functors-do-not-change-colimits-and-initial-functors-do-not-change-limits
 kind: theorem
 title: "Assuming Choice, precomposition with a final functor does not change colimits, and precomposition with an initial functor does not change limits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: cocone-equivalence
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

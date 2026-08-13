@@ -2,7 +2,7 @@
 id: cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue
 kind: corollary
 title: 'Every endomorphism of a nonzero finite-dimensional vector space over an algebraically closed field has an eigenvalue'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

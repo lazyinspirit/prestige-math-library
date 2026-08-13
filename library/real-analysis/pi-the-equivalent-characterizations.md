@@ -1,7 +1,7 @@
 ---
 page: pi-the-equivalent-characterizations
 title: "pi: the Equivalent Characterizations"
-status: draft
+status: published
 items: [def-circular-arcs-circumference-and-diameter,
         def-riemann-area-between-continuous-graphs,
         thm-pi-zero-and-period-characterizations,

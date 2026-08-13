@@ -2,7 +2,7 @@
 id: thm-disc-area-is-pi-r-squared
 kind: theorem
 title: "A disc of radius r has Riemann area pi r squared; in particular the unit disc has area pi"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

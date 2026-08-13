@@ -2,7 +2,7 @@
 id: cor-residue-field-of-a-localisation-at-a-prime
 kind: corollary
 title: '$R_{\mathfrak p}/\mathfrak pR_{\mathfrak p}\cong\operatorname{Frac}(R/\mathfrak p)$ is the residue field at $\mathfrak p$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

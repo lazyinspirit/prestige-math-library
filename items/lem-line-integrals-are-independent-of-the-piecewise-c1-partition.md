@@ -2,7 +2,7 @@
 id: lem-line-integrals-are-independent-of-the-piecewise-c1-partition
 kind: lemma
 title: "The piecewise-C1 line-integral sums do not depend on the admissible partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

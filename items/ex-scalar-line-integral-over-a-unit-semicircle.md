@@ -2,7 +2,7 @@
 id: ex-scalar-line-integral-over-a-unit-semicircle
 kind: example
 title: "The scalar line integral of x over the right unit semicircle equals two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -35,7 +40,7 @@ $$\int_\gamma x\,ds=2.$$
 
 [L2] Sine and cosine have derivatives $\cos t$ and $-\sin t$, satisfy $\sin^2t+\cos^2t=1$, and have values $\sin(\pi/2)=1$ and $\sin(-\pi/2)=-1$ ([[thm-sine-and-cosine-derivatives]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-quarter-turn-values-and-shift-formulas]]).
 
-[L3] Newton-Leibniz integrates an interior derivative by its endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
+[L3] For a continuous function whose interior derivative admits an integrable extension, Newton-Leibniz integrates that extension to the endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
 
 [L4] Scalar line integrals are unchanged by orientation reversal ([[thm-line-integrals-under-oriented-reparametrization]]).
 

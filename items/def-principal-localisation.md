@@ -2,7 +2,7 @@
 id: def-principal-localisation
 kind: definition
 title: 'Principal localisation $R_f=\{1,f,f^2,\ldots\}^{-1}R$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

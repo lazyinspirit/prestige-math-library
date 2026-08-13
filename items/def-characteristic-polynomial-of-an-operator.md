@@ -2,7 +2,7 @@
 id: def-characteristic-polynomial-of-an-operator
 kind: definition
 title: 'The basis-independent characteristic polynomial $\chi_T$ of an endomorphism of a finite-dimensional space, including $\chi_T=1$ in dimension zero'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

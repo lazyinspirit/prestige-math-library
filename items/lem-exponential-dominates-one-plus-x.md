@@ -2,7 +2,7 @@
 id: lem-exponential-dominates-one-plus-x
 kind: lemma
 title: "$1+x\\le\\exp(x)$ for every real $x$, hence $(1-p)^m\\le\\exp(-mp)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

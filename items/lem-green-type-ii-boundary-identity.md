@@ -2,7 +2,7 @@
 id: lem-green-type-ii-boundary-identity
 kind: lemma
 title: "The Type II boundary identity for the Q dy term"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
@@ -41,7 +42,7 @@ $$\int_{\partial D}Q\,dy=\iint_D\partial_xQ\,dA.$$
 
 [L3] For a bounded Jordan set $E$ and an integrable $g:E\to\mathbb R$ whose sections $E_x$ are Jordan measurable with $g_x$ integrable outside a content-zero set of parameters, $\int_Eg=\int h$ where $h(x)=\int_{E_x}g_x$ and an empty section contributes $0$; the symmetric assertion holds for the other coordinate block ([[thm-jordan-fubini-by-sections]]).
 
-[L4] The integral of an interior derivative of a continuous function is its endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
+[L4] A continuous function whose interior derivative admits an integrable extension satisfies Newton-Leibniz: that extension integrates to the endpoint increment ([[thm-newton-leibniz-with-interior-derivative]]).
 
 [L5] A compact Type II region is $D=\{(x,y):c\le y\le d,\ \lambda(y)\le x\le\rho(y)\}$ for continuous piecewise-$C^1$ functions $\lambda\le\rho$ on $[c,d]$, defined analogously to the Type I case, so $c<d$ and $\lambda<\rho$ on $(c,d)$ ([[def-type-i-type-ii-and-elementary-green-regions]]).
 

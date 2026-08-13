@@ -2,7 +2,7 @@
 id: lem-characteristic-subgroups-are-normal-and-characteristic-is-transitive
 kind: lemma
 title: "Characteristic subgroups are normal, and characteristicity is transitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

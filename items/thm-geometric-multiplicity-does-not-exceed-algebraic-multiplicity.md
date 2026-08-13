@@ -2,7 +2,7 @@
 id: thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity
 kind: theorem
 title: 'The geometric multiplicity of an eigenvalue does not exceed its algebraic multiplicity'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

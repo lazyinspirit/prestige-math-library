@@ -2,7 +2,7 @@
 id: thm-splitting-fields-exist-for-nonzero-polynomials
 kind: theorem
 title: 'Every nonzero polynomial over a field has a splitting field'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

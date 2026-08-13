@@ -2,7 +2,7 @@
 id: cor-small-complete-or-cocomplete-categories-are-preorders
 kind: corollary
 title: "Assuming Choice, every small complete category and every small cocomplete category is a preorder"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct-corollary
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-modulus-is-nowhere-complex-differentiable
 kind: counterexample
 title: "$z\\mapsto|z|$ is nowhere complex differentiable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

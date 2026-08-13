@@ -2,7 +2,7 @@
 id: def-star-shaped-open-subset-of-rn
 kind: definition
 title: "Star-shaped open subsets of Euclidean space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

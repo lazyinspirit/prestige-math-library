@@ -2,7 +2,7 @@
 id: lem-expectation-by-distribution
 kind: lemma
 title: "Expectation is the sum of each attained value times its probability"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

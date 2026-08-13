@@ -1,7 +1,7 @@
 ---
 page: splitting-fields
 title: 'Splitting Fields'
-status: draft
+status: published
 items: [def-polynomials-that-split-and-splitting-fields, lem-adjoining-one-root-reduces-the-unsplit-degree, thm-splitting-fields-exist-for-nonzero-polynomials, cor-splitting-fields-exist-for-finite-families, cor-splitting-field-of-a-product-is-the-composite-of-splitting-fields, lem-polynomials-and-roots-transport-along-field-isomorphisms, lem-an-isomorphism-extends-across-a-simple-root-adjunction, thm-isomorphisms-extend-to-splitting-fields, cor-splitting-fields-are-unique-up-to-base-isomorphism, thm-factorial-coordinate-bound-for-a-splitting-field, prop-splitting-field-of-x-n-minus-a, prop-endomorphisms-of-a-splitting-field-permute-its-roots, def-normal-algebraic-extension, prop-normality-descends-to-intermediate-fields, prop-nonempty-intersections-of-normal-subextensions-are-normal, prop-algebraic-splitting-extensions-are-normal, thm-normality-generation-criterion, prop-finitely-generated-normal-extensions-are-splitting-fields]
 examples: []
 ---

@@ -1,7 +1,7 @@
 ---
 page: limits-and-colimits-examples
 title: "Limits and Colimits: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-products-and-coproducts-in-set,
            ex-equalizers-and-coequalizers-in-set,

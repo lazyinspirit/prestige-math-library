@@ -2,7 +2,7 @@
 id: def-hom-groups-and-induced-hom-maps
 kind: definition
 title: "The abelian group $\\operatorname{Hom}_R(M,N)$ and maps induced by pre- and postcomposition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

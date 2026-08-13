@@ -2,7 +2,7 @@
 id: thm-line-integrals-under-reversal-and-concatenation
 kind: theorem
 title: "Line integrals under reversal and concatenation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

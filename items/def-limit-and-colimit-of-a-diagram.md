@@ -2,7 +2,7 @@
 id: def-limit-and-colimit-of-a-diagram
 kind: definition
 title: "Limits and colimits as terminal cones and initial cocones, with existence and uniqueness in their universal properties"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-limit, def-colimit]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

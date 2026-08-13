@@ -2,7 +2,7 @@
 id: lem-viete-finite-cosine-product-and-nested-radicals
 kind: lemma
 title: "The finite Viete cosine product and its positive nested-radical factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

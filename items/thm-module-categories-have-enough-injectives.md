@@ -2,7 +2,7 @@
 id: thm-module-categories-have-enough-injectives
 kind: theorem
 title: "Module categories have enough injectives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

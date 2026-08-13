@@ -2,7 +2,7 @@
 id: def-invariant-basis-number-and-rank-of-a-free-module
 kind: definition
 title: "Invariant basis number and the rank of a free module"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

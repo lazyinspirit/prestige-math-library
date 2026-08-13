@@ -2,7 +2,7 @@
 id: lem-an-isomorphism-extends-across-a-simple-root-adjunction
 kind: lemma
 title: 'A base-field isomorphism extends across simple adjunctions of corresponding roots of an irreducible polynomial'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

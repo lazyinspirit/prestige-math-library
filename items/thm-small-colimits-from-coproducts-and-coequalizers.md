@@ -2,7 +2,7 @@
 id: thm-small-colimits-from-coproducts-and-coequalizers
 kind: theorem
 title: "Every small colimit can be constructed as a coequalizer between coproducts over the arrows and objects of the index category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: duality
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

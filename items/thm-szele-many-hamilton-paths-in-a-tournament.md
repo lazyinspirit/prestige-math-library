@@ -2,7 +2,7 @@
 id: thm-szele-many-hamilton-paths-in-a-tournament
 kind: theorem
 title: "Szele's bound: for every $n\\ge1$, some $n$-vertex tournament has at least $n!/2^{n-1}$ Hamilton paths"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

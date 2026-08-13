@@ -2,7 +2,7 @@
 id: fs-preserving-binary-products-and-equalizers-does-not-imply-continuity
 kind: false-statement
 title: "FALSE: a functor preserving binary products and equalizers must preserve all finite limits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: constant-empty-functor
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

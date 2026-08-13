@@ -1,7 +1,7 @@
 ---
 page: eigenvalues-eigenvectors-and-the-characteristic-polynomial
 title: 'Eigenvalues, Eigenvectors and the Characteristic Polynomial'
-status: draft
+status: published
 items: [def-eigenvalue-eigenvector-eigenspace-and-spectrum,
         prop-eigenvalue-iff-shift-is-not-invertible,
         thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent,

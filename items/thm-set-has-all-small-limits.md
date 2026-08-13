@@ -2,7 +2,7 @@
 id: thm-set-has-all-small-limits
 kind: theorem
 title: "Set has all small limits, realized as compatible tuples in a set-indexed product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: construction
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

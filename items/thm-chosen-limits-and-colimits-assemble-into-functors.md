@@ -2,7 +2,7 @@
 id: thm-chosen-limits-and-colimits-assemble-into-functors
 kind: theorem
 title: "Chosen limits and colimits of a fixed small shape assemble into limit and colimit functors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: universal-property
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-characteristic-polynomial-is-monic-and-has-extreme-coefficients
 kind: lemma
 title: '$\chi_A(x)$ is monic of degree $n$; for $n\geq1$ its $x^{n-1}$ coefficient is $-\operatorname{tr}(A)$ and its constant coefficient is $(-1)^n\det(A)$, while $\chi_{0\times0}=1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

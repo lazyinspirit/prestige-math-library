@@ -2,7 +2,7 @@
 id: ex-fraction-field-of-the-integers-is-the-rationals
 kind: example
 title: '$\operatorname{Frac}(\mathbb Z)$ is canonically isomorphic to $\mathbb Q$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

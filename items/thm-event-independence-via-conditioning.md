@@ -2,7 +2,7 @@
 id: thm-event-independence-via-conditioning
 kind: theorem
 title: "Two positive-probability events are independent exactly when conditioning on either leaves the other's probability unchanged"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

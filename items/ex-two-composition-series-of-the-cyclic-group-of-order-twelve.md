@@ -2,7 +2,7 @@
 id: ex-two-composition-series-of-the-cyclic-group-of-order-twelve
 kind: example
 title: "Two composition series of $C_{12}$ have the same factors in different orders"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

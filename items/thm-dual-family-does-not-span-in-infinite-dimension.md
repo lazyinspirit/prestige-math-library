@@ -2,7 +2,7 @@
 id: thm-dual-family-does-not-span-in-infinite-dimension
 kind: theorem
 title: 'For an infinite Hamel basis, its dual family is linearly independent but does not span the algebraic dual'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

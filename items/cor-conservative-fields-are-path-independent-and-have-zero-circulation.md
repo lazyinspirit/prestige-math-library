@@ -2,7 +2,7 @@
 id: cor-conservative-fields-are-path-independent-and-have-zero-circulation
 kind: corollary
 title: "Conservative fields are path-independent and have zero integral around every closed path"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

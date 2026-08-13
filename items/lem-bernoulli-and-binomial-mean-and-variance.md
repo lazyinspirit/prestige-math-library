@@ -2,7 +2,7 @@
 id: lem-bernoulli-and-binomial-mean-and-variance
 kind: lemma
 title: "A Bernoulli$(p)$ variable has mean $p$ and variance $p(1-p)$; a binomial$(n,p)$ variable has mean $np$ and variance $np(1-p)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

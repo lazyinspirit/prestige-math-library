@@ -2,7 +2,7 @@
 id: thm-small-dominating-set-from-minimum-degree
 kind: theorem
 title: "An $n$-vertex graph of minimum degree $\\delta>1$ has a dominating set of size at most $n(\\log(\\delta+1)+1)/(\\delta+1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

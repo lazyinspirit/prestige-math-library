@@ -2,7 +2,7 @@
 id: ex-complex-differentiable-on-the-coordinate-axes-but-holomorphic-nowhere
 kind: example
 title: "$x^3+3xy^2+i(y^3+3x^2y)$ is complex differentiable exactly on the coordinate axes but holomorphic nowhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

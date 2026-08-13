@@ -2,7 +2,7 @@
 id: ex-cayley-hamilton-reduces-powers-of-a-two-by-two-matrix
 kind: example
 title: 'Cayley-Hamilton reduces every power of $\begin{pmatrix}1&1\\1&0\end{pmatrix}$ to a linear combination of $A$ and $I$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -14,6 +14,11 @@ aliases: []
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references: []

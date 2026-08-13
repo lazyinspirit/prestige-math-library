@@ -1,7 +1,7 @@
 ---
 page: complex-differentiability-and-cauchy-riemann-examples
 title: "Complex Differentiability and the Cauchy–Riemann Equations: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-square-function-from-the-complex-difference-quotient,
            ex-complex-exponential-cauchy-riemann-in-cartesian-and-polar-form,

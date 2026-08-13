@@ -2,7 +2,7 @@
 id: cor-yoneda-preserves-and-reflects-small-limits
 kind: corollary
 title: "For a small category, the Yoneda functor preserves and reflects all existing small limits"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: pointwise
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

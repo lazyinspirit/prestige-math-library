@@ -2,7 +2,7 @@
 id: def-cardinality-of-a-small-category-and-kappa-small-diagram
 kind: definition
 title: "Assuming Choice, cardinality of a small category and κ-small diagrams"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-kappa-small-diagram]
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

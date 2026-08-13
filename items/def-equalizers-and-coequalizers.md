@@ -2,7 +2,7 @@
 id: def-equalizers-and-coequalizers
 kind: definition
 title: "Equalizers and coequalizers as limits and colimits of a parallel pair"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: [def-equalizer, def-coequalizer]
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

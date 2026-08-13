@@ -2,7 +2,7 @@
 id: fs-matrix-polynomial-substitution-is-a-ring-homomorphism
 kind: false-statement
 title: 'FALSE: substituting a fixed matrix $A$ for $x$ defines a ring homomorphism $M_n(F[x])\to M_n(F)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

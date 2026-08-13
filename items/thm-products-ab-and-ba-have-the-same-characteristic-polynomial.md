@@ -2,7 +2,7 @@
 id: thm-products-ab-and-ba-have-the-same-characteristic-polynomial
 kind: theorem
 title: 'For $A,B\in M_n(F)$, the products $AB$ and $BA$ have the same characteristic polynomial'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

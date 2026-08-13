@@ -2,7 +2,7 @@
 id: thm-canonical-map-to-double-dual-is-surjective-iff-finite-dimensional
 kind: theorem
 title: 'Assuming choice, $J_V:V\to V^{**}$ is surjective if and only if $V$ is finite-dimensional'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-13
 sources:
   scraped: []
   references:

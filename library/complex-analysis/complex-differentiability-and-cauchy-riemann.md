@@ -1,7 +1,7 @@
 ---
 page: complex-differentiability-and-cauchy-riemann
 title: "Complex Differentiability and the Cauchy–Riemann Equations"
-status: draft
+status: published
 items: [rem-complex-plane-euclidean-dictionary,
         def-complex-domain,
         def-complex-differentiability-holomorphic-and-entire,

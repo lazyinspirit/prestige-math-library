@@ -2,7 +2,7 @@
 id: prop-eigenvalue-iff-shift-is-not-invertible
 kind: proposition
 title: 'For a finite-dimensional space, $\lambda$ is an eigenvalue of $T$ if and only if $T-\lambda I$ is not invertible'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-13
+  audited: 2026-08-13
 sources:
   scraped: []
   references:
