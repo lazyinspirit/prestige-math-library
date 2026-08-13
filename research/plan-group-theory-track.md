@@ -21,8 +21,8 @@ future build authors them.
 
 ## 0. Summary for the orchestrator
 
-**Track `group-theory`, wave 2, run `subjects-01`. Prose-scaffold status:
-complete.** Twenty-three A/B pairs are proposed in four placement blocks.
+**Track `group-theory`, wave 2, run `subjects-01`; prose scaffold complete.**
+Twenty-three A/B pairs are proposed in four placement blocks.
 Every A-page inventory is below the owner's 60-item ceiling. The cohomological
 block is deliberately placed after homological algebra rather than pointed
 backward from the earlier structure block.
@@ -32,28 +32,28 @@ backward from the earlier structure block.
 | label | proposed A-page id | block | exact A-page items, including `fs-` |
 |---|---|---|---:|
 | `GT-1` | `frattini-subgroups-and-the-burnside-basis-theorem` | structure, after abstract-algebra AG-4 | 25 |
-| `GT-2` | `extraspecial-p-groups-and-central-products` | structure | 25 |
+| `GT-2` | `extraspecial-p-groups-and-central-products` | structure | 24 |
 | `GT-3` | `blocks-primitivity-and-multiple-transitivity` | structure | 28 |
 | `GT-4` | `socles-and-the-onan-scott-landscape` | structure | 21 |
 | `GT-5` | `subgroups-of-free-groups-and-schreier-rewriting` | combinatorial structure | 22 |
-| `GT-6` | `hnn-extensions-and-brittons-lemma` | combinatorial structure | 20 |
+| `GT-6` | `hnn-extensions-and-brittons-lemma` | combinatorial structure | 19 |
 | `GT-7` | `decision-problems-for-finitely-presented-groups` | combinatorial structure | 26 |
-| `GT-8` | `small-cancellation-and-dehn-algorithms` | combinatorial structure | 26 |
+| `GT-8` | `small-cancellation-and-dehn-algorithms` | combinatorial structure | 27 |
 | `GT-9` | `group-extensions-complements-and-schur-zassenhaus` | structure | 24 |
 | `GT-10` | `cayley-graphs-word-metrics-and-quasi-isometry` | geometric, after the fundamental-group applications | 28 |
-| `GT-11` | `geometric-actions-svarc-milnor-and-growth` | geometric | 27 |
+| `GT-11` | `geometric-actions-svarc-milnor-and-growth` | geometric | 26 |
 | `GT-12` | `hyperbolic-spaces-and-hyperbolic-groups` | geometric | 31 |
 | `GT-13` | `amenable-groups-and-folner-criteria` | geometric | 27 |
 | `GT-14` | `simplicial-trees-and-group-actions` | geometric | 25 |
 | `GT-15` | `graphs-of-groups-and-bass-serre-theory` | geometric | 26 |
 | `GT-16` | `inverse-systems-profinite-groups-and-completion` | topological | 33 |
-| `GT-17` | `pro-p-groups-and-the-p-adic-integers` | topological | 26 |
+| `GT-17` | `pro-p-groups-and-the-p-adic-integers` | topological | 25 |
 | `GT-18` | `modular-representations-and-projective-covers` | finite representation continuation | 32 |
 | `GT-19` | `brauer-characters-and-decomposition-matrices` | finite representation continuation | 27 |
 | `GT-20` | `the-finite-simple-group-classification-landscape` | finite-group survey | 24 |
 | `GT-21` | `crossed-homomorphisms-complements-and-first-cohomology` | after homological algebra HA-12 | 21 |
 | `GT-22` | `second-cohomology-and-abelian-kernel-extensions` | cohomological continuation | 25 |
-| `GT-23` | `schur-multipliers-and-universal-central-extensions` | cohomological continuation | 30 |
+| `GT-23` | `schur-multipliers-and-universal-central-extensions` | cohomological continuation | 32 |
 
 ### Full texts obtained and source corpus
 
@@ -74,13 +74,13 @@ institutions' sites, not reconstructed from snippets.
   <https://www.dpmms.cam.ac.uk/~grw46/LectureNotes2021.pdf>.
 
 Further complete texts obtained and harvested were van Beek's *Topics in
-Finite $p$-Groups*; Cameron's *Notes on Classical Groups* and *Notes on Finite
-Group Theory*; Burness's and Jones's permutation-group notes; Baumslag's,
+Finite $p$-Groups*; Cameron's *Notes on Classical Groups*; Burness's and
+Jones's permutation-group notes; Baumslag's,
 Miller's, and Touikan's combinatorial-group texts; Sisto's and Hamann's
 geometric-group notes; Manning's Bass--Serre notes; Webb's 294-page *Course in
 Finite Group Representation Theory*; Ciurca's and Isaacs's modular-character
-notes; Löh's and Lassueur's group-cohomology texts; Haller's and Meier's notes;
-and Smith's CFSG notes. Working URLs and exact harvested ranges are recorded in
+notes; Löh's and Lassueur's group-cohomology texts; Haller's thesis and Meier's
+notes; and Smith's CFSG notes. Working URLs and exact harvested ranges are recorded in
 §24. Solomon's and Aschbacher's complete classification-status articles and
 the official 2023 GLS status page were also read in full over the ranges there.
 
@@ -91,7 +91,7 @@ actually read; no inaccessible text is represented as obtained.
 
 ### Seams consumed
 
-- Published pages `group-actions-orbits-stabilisers-and-cayley`,
+- Published pages `group-actions-and-cayleys-theorem`,
   `free-groups-and-presentations`, `free-products-and-amalgamation`, and
   `composition-series-and-solvable-groups`, including the class equation,
   finite $p$-group centre theorem, free-group universal property, published
@@ -109,6 +109,9 @@ actually read; no inaccessible text is represented as obtained.
 - Published combinatorics supplies finite simple graphs and finite trees. Its
   tree definition is **not** silently reused for Bass--Serre theory; `GT-14`
   proves the exact finite agreement after defining arbitrary simplicial trees.
+- Published linear algebra page `dual-spaces-bilinear-forms-and-inertia`
+  supplies alternating/quadratic forms, radicals, and
+  `thm-alternating-forms-have-a-symplectic-normal-form` for `GT-2`.
 - Homological algebra HA-12 supplies
   `def-group-cohomology-as-a-derived-functor` and the bar computation; HA-17
   supplies the Lyndon--Hochschild--Serre spectral sequence and five-term exact
@@ -179,7 +182,8 @@ mathematical evidence. There is **no blocker** to the prose scaffold.
 - Profinite/Galois cohomology, étale fundamental groups, buildings, arithmetic
   groups, mapping-class groups, CAT(0) cube complexes, and the Baum--Connes and
   Farrell--Jones conjectures are sequels requiring whole uncommissioned
-  subjects. Their named source headings receive explicit dispositions in §26.
+  subjects. Their named source headings receive explicit dispositions in §24
+  and their scope denials are collected in §25.
 
 ---
 
@@ -276,35 +280,34 @@ still empty at splice, placement may follow the last actually authored
 fundamental-group companion, but no missing application is thereby presumed.
 The modular continuation `GT-18`--`GT-19` follows abstract algebra RT-4 **and**
 the commutative-algebra complete-DVR/completion machinery; `GT-20` needs no
-modular-character dependency. The low-degree cohomological block
-`GT-21`--`GT-23` follows HA-12,
-with its LHS application after HA-17.
+modular-character dependency. The low-degree cohomological block places
+`GT-21` after HA-12 and `GT-22`--`GT-23` after HA-17.
 
 | pair | direct A-page `requires` |
 |---|---|
 | `GT-1` | `sylow-theorems-and-nilpotent-groups`, `composition-series-and-solvable-groups` |
-| `GT-2` | `frattini-subgroups-and-the-burnside-basis-theorem`, `bilinear-and-quadratic-forms` at splice |
-| `GT-3` | `group-actions-orbits-stabilisers-and-cayley`, `semidirect-products-and-automorphism-groups` |
+| `GT-2` | `frattini-subgroups-and-the-burnside-basis-theorem`, `dual-spaces-bilinear-forms-and-inertia` |
+| `GT-3` | `group-actions-and-cayleys-theorem`, `semidirect-products-and-automorphism-groups` |
 | `GT-4` | `blocks-primitivity-and-multiple-transitivity`, `composition-series-and-solvable-groups` |
-| `GT-5` | `free-groups-and-presentations`, `group-actions-orbits-stabilisers-and-cayley` |
+| `GT-5` | `free-groups-and-presentations`, `group-actions-and-cayleys-theorem` |
 | `GT-6` | `subgroups-of-free-groups-and-schreier-rewriting`, `free-products-and-amalgamation` |
 | `GT-7` | `free-groups-and-presentations`, `subgroups-of-free-groups-and-schreier-rewriting` |
 | `GT-8` | `decision-problems-for-finitely-presented-groups`, `hnn-extensions-and-brittons-lemma` |
 | `GT-9` | `semidirect-products-and-automorphism-groups`, `sylow-theorems-and-nilpotent-groups` |
-| `GT-10` | `free-groups-and-presentations`, `metric-spaces`, the last authored fundamental-group page |
+| `GT-10` | `free-groups-and-presentations`, `metric-spaces` |
 | `GT-11` | `cayley-graphs-word-metrics-and-quasi-isometry`, `composition-series-and-solvable-groups` |
-| `GT-12` | `geometric-actions-svarc-milnor-and-growth` |
+| `GT-12` | `geometric-actions-svarc-milnor-and-growth`, `small-cancellation-and-dehn-algorithms` |
 | `GT-13` | `cayley-graphs-word-metrics-and-quasi-isometry`, `free-products-and-amalgamation` |
 | `GT-14` | `trees-forests-and-spanning-trees`, `cayley-graphs-word-metrics-and-quasi-isometry` |
 | `GT-15` | `simplicial-trees-and-group-actions`, `hnn-extensions-and-brittons-lemma`, `free-products-and-amalgamation` |
 | `GT-16` | `uniform-spaces`, `normal-subgroups-and-quotient-groups` |
-| `GT-17` | `inverse-systems-profinite-groups-and-completion`, `cyclic-groups-and-direct-products` |
-| `GT-18` | `induced-representations-and-frobenius-reciprocity`, `modules-and-module-homomorphisms`, `chain-conditions-and-semisimple-modules` |
+| `GT-17` | `inverse-systems-profinite-groups-and-completion`, `frattini-subgroups-and-the-burnside-basis-theorem`, `cyclic-groups-and-direct-products` |
+| `GT-18` | `induced-representations-and-frobenius-reciprocity`, `modules-and-module-homomorphisms`, `chain-conditions-and-semisimple-modules`, `valuation-rings-and-discrete-valuation-rings`, `inverse-limits-and-noetherian-completion` |
 | `GT-19` | `modular-representations-and-projective-covers`, `characters-and-the-orthogonality-relations` |
-| `GT-20` | `socles-and-the-onan-scott-landscape`, `composition-series-and-solvable-groups` |
+| `GT-20` | `socles-and-the-onan-scott-landscape`, `composition-series-and-solvable-groups`, `sylow-theorems-and-nilpotent-groups` |
 | `GT-21` | `group-extensions-complements-and-schur-zassenhaus`, `group-cohomology-as-a-derived-functor` |
 | `GT-22` | `crossed-homomorphisms-complements-and-first-cohomology`, `group-cohomology-as-a-derived-functor`, `grothendieck-spectral-sequences-and-computations` |
-| `GT-23` | `second-cohomology-and-abelian-kernel-extensions`, `group-cohomology-as-a-derived-functor`, `ext-and-balanced-resolutions` |
+| `GT-23` | `second-cohomology-and-abelian-kernel-extensions`, `group-cohomology-as-a-derived-functor`, `ext-and-balanced-resolutions`, `tensor-products-of-modules` |
 
 No B page is a dependency target.
 
@@ -393,6 +396,9 @@ builder from hiding them in prose.
 20. Hopf's formula is independent of the selected free presentation because it
     is proved to agree naturally with $H_2(G,\mathbb Z)$, not declared so from
     the quotient formula alone.
+21. The exterior square of an abelian group is formed only after the subgroup
+    generated by all $a\otimes a$ is identified; its alternating universal
+    property proves that the quotient is independent of tensor representatives.
 
 ---
 
@@ -413,10 +419,15 @@ not an invocation of the axiom of choice.
 | section of an arbitrary surjection $E\twoheadrightarrow G$ | AC in full generality | factor-set classification is relative to a supplied section; finite $G$ and finite fibres are ZF, and the final class is section-independent |
 | countable recursive word manipulations | ZF | algorithms are explicit finite-string procedures |
 | product compactness for arbitrary finite discrete factors | Boolean prime ideal theorem / ultrafilter lemma | `GT-16` distinguishes the elementary compatible-tuple construction from compactness of an arbitrary profinite product |
+| compactness and completeness of $\mathbb Z_p$ from compatible residues | ZF | canonical digits permit an explicit diagonal subsequence and compatible-limit construction |
+| nonemptiness of an inverse limit of groups | ZF | the compatible identity tuple always exists; no choice principle is charged merely to nonemptiness |
+| surjectivity of a projection from a surjective inverse system of groups | choice-sensitive in general; DC suffices for a countable chain | the theorem states the index-set/selection hypothesis; it is not inferred from the identity tuple |
 | countable inverse system of nonempty finite sets with surjective maps | weak König lemma in reverse-mathematical formulations; provable from dependent choice, and by compactness from BPI | state the exact route used; never call nonemptiness “obvious” |
-| equivalence “compact Hausdorff totally disconnected group” $\Leftrightarrow$ inverse limit of finite groups | BPI for the compactness route, plus finite quotient separation hypotheses | choice cost printed in the theorem; metrizable countable systems get a direct sequential proof under DC |
+| inverse limit of finite discrete groups is compact | BPI for an arbitrary product; weaker sequential principles for countable systems | compactness route and index-set hypothesis are printed in `GT-16` |
+| compact Hausdorff totally disconnected group is an inverse limit of finite quotients | ZF once compactness is supplied | clopen separation and the finite-subcover argument construct open normal subgroups and the comparison map without adding BPI |
 | invariant-mean Hahn--Banach constructions | BPI/appropriate Hahn--Banach choice principle | Følner-to-mean implication records the functional-analytic choice; mean-to-Følner finite separation is ZF once the mean is supplied |
 | Tarski alternative | uses choice in standard matching/decomposition proofs | theorem states the chosen foundation and is not used to prove elementary permanence properties |
+| coarse quasi-inverse for an arbitrary coarsely surjective quasi-isometric embedding | AC in the standard all-spaces proof | `GT-10` states the supplied-selection hypothesis; finitely generated word-metric spaces use least-word representatives in ZF |
 | quasi-geodesic stability, Švarc--Milnor, hyperbolic word algorithm | ZF | constructions make only finite or explicitly recursive choices |
 | projective covers for finite-dimensional algebras | ZF | finite-dimensional linear algebra; Krull--Schmidt is used in finite length |
 | derived $H^n(G,M)$ | inherited from homological algebra's supplied-resolution convention | this track adds no global resolution choice |
@@ -490,7 +501,7 @@ Fitting/nilpotence page. They are cited here when needed and are not re-minted.
 15. `lem-frattini-quotient-has-a-canonical-fp-vector-space-structure` —
     **lemma** `[LA]`, citing the elementary-abelian/vector-space dictionary.
 16. `def-generator-rank-of-a-finite-p-group` — **definition** `[LN]`,
-    $d(P)=\dim_{\mathbb F_p}P/\Phi(P)$; well-definedness is item 17.
+    $d(P)=\dim_{\mathbb F_p}P/\Phi(P)$; well-definedness is item 15.
 17. `thm-burnside-basis-theorem` — **theorem** `[LL]`: a subset of $P$ is a
     minimal generating set precisely when its image is a basis of
     $P/\Phi(P)$. LANDMARK.
@@ -560,8 +571,8 @@ proof separates its coprime-action input from the basis theorem.
 ## GT-2. Extraspecial $p$-Groups and Central Products
 
 **page id** `extraspecial-p-groups-and-central-products`  
-**`requires`** `frattini-subgroups-and-the-burnside-basis-theorem` and the
-abstract-algebra bilinear/quadratic-form page fixed at splice
+**`requires`** `frattini-subgroups-and-the-burnside-basis-theorem`,
+`dual-spaces-bilinear-forms-and-inertia`
 
 Extraspecial groups are the first substantial family where commutator theory,
 Frattini theory, and symplectic linear algebra agree. The page proves the
@@ -575,7 +586,7 @@ associated forms are well defined.
    extraspecial when this common subgroup has order $p$.
 2. `prop-basic-structure-of-an-extraspecial-p-group` — **proposition** `[LL]`:
    $P/Z(P)$ is elementary abelian, $|P|=p^{1+2n}$ for some $n$, and every
-   noncentral conjugacy class has size divisible by $p$.
+   noncentral conjugacy class has size exactly $p$.
 3. `def-central-product-of-two-groups-with-identified-central-subgroups` —
    **definition** `[LN]`, $(G\times H)/\{(z,\theta(z)^{-1}):z\in Z\}$ for a
    specified central isomorphism $\theta:Z\to W$.
@@ -609,13 +620,11 @@ associated forms are well defined.
     distinguishing exponent $p$ and exponent $p^2$ without using the
     misleading plus/minus terminology.
 18. `thm-classification-of-extraspecial-groups-for-odd-p` — **theorem** `[LL]`,
-    with the $p=3$ and exponent caveats exactly as in the source.
+    for every odd $p$ and $n\ge1$ there are exactly two isomorphism types of
+    order $p^{1+2n}$, one of exponent $p$ and one of exponent $p^2$.
 19. `cor-every-extraspecial-p-group-is-a-central-product-of-order-p-cubed-factors` —
-    **corollary** `[LL]`, with $D_8,Q_8$ replacing order-$8$ factors at $p=2$.
-20. `prop-minimal-faithful-permutation-degree-lower-bound-for-extraspecial-groups` —
-    **proposition** `[LA]`, included only in the exact sourced form and not used
-    later.
-21. `prop-outer-automorphisms-act-on-the-associated-symplectic-space` —
+    **corollary** `[LL]`; for $p=2$ the factors are $D_8$ or $Q_8$.
+20. `prop-outer-automorphisms-act-on-the-associated-symplectic-space` —
     **proposition** `[LL]`; kernel and image are stated only to the strength
     proved by the cited source.
 
@@ -653,7 +662,7 @@ associated forms are well defined.
   text is made.
 - **Winter, “The automorphism group of an extraspecial $p$-group”, *Rocky
   Mountain J. Math.* 2 (1972), 159--168.** Original-paper control for the
-  automorphism action; only results actually used in items 20--21 are
+  automorphism action; only results actually used in item 20 are
   harvested.
 
 ### Proof strategy and traps
@@ -672,7 +681,7 @@ automorphism theorem not needed downstream remains a leaf proposition.
 ## GT-3. Blocks, Primitivity, and Multiple Transitivity
 
 **page id** `blocks-primitivity-and-multiple-transitivity`  
-**`requires`** `group-actions-orbits-stabilisers-and-cayley`,
+**`requires`** `group-actions-and-cayleys-theorem`,
 `semidirect-products-and-automorphism-groups`
 
 This page builds permutation-group structure from invariant equivalence
@@ -724,10 +733,11 @@ its sharp elementary consequences without importing CFSG classifications.
     faithful under its hypotheses.
 21. `thm-transitive-imprimitive-groups-embed-in-an-imprimitive-wreath-product` —
     **theorem** `[LL]`, relative to a chosen block and transversal.
-22. `thm-iwasawa-simplicity-criterion` — **theorem** `[LL]`: if a primitive
-    group $G$ has an abelian normal subgroup $A\trianglelefteq G_\alpha$ whose
-    conjugates generate $G$, every nontrivial normal subgroup contains $G'$;
-    hence a perfect such $G$ is simple. LANDMARK.
+22. `thm-iwasawa-simplicity-criterion` — **theorem** `[LL]`: if a faithful
+    primitive permutation group $G$ has an abelian normal subgroup
+    $A\trianglelefteq G_\alpha$ whose conjugates generate $G$, every nontrivial
+    normal subgroup contains $G'$; hence a perfect such $G$ is simple.
+    LANDMARK.
 23. `cor-iwasawa-criterion-for-faithful-finite-actions` — **corollary** `[LA]`,
     isolating the frequently used finite version without changing the theorem.
 
@@ -804,8 +814,11 @@ groups.
    **lemma** `[LL]`.
 4. `thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups` —
    **theorem** `[LL]`, proved by minimal normal factors and not by CFSG.
-5. `prop-socle-is-a-characteristic-direct-product-of-minimal-normal-subgroups` —
-   **proposition** `[LA]`, with the noncanonical factor ordering stated.
+5. `prop-socle-is-characteristic-and-admits-a-direct-product-decomposition` —
+   **proposition** `[LA]`: the socle is generated by all minimal normal
+   subgroups, is characteristic, and is the internal direct product of a
+   maximal irredundant subfamily. The subfamily is not canonical; the theorem
+   does not falsely multiply all minimal normal subgroups at once.
 6. `thm-minimal-normal-subgroups-of-faithful-primitive-groups-are-transitive` —
    **theorem** `[LL]`, citing `GT-3`.
 7. `lem-two-distinct-minimal-normal-subgroups-of-a-primitive-group-are-regular` —
@@ -866,10 +879,10 @@ groups.
 - **Dixon--Mortimer, *Permutation Groups*, Chapter 4, §§4.1--4.8 “Primitive
   groups” through the O'Nan--Scott theorem.** Standard monograph treatment;
   exact theorem hypotheses are cross-checked against the open survey below.
-- **Praeger, “The O'Nan--Scott theorem for finite primitive permutation
-  groups, and finite quasiprimitive permutation groups”, in *Groups St Andrews
-  1997 in Bath*, LMS Lecture Note Series 261 (1999), §§1--3.** Primary survey
-  for the modern type convention and socle structure.
+- **Liebeck--Praeger--Saxl, “On the O'Nan--Scott theorem for finite primitive
+  permutation groups”, *J. Austral. Math. Soc.* 44 (1988), §§1--3,
+  389--396.** Primary, self-contained five-type theorem and socle-structure
+  control. Burness and Soicher below supply the modern-name dictionary.
 - **Cameron, “Finite permutation groups and finite simple groups”, *Bull.
   London Math. Soc.* 13 (1981), 1--22, §§2--4.** Independent survey control for
   the coarse five-type landscape and the two-transitive reduction.
@@ -895,7 +908,7 @@ the theorem into a dependency for later pages.
 
 **page id** `subgroups-of-free-groups-and-schreier-rewriting`  
 **`requires`** `free-groups-and-presentations`,
-`group-actions-orbits-stabilisers-and-cayley`
+`group-actions-and-cayleys-theorem`
 
 The published free-group page proves universal properties and Tietze moves but
 does not describe subgroups. This page gives both the algebraic Schreier basis
@@ -927,7 +940,9 @@ finite-index rank formula.
     via reduced closed paths outside the spanning tree.
 11. `thm-nielsen-schreier-with-an-explicit-basis` — **theorem** `[LL]`: every
     subgroup of a free group is free, with the nontrivial Schreier generators
-    for a Schreier system as a basis. LANDMARK.
+    for a Schreier system as a basis. The arbitrary-rank statement is made
+    under AC; finite and countable ordered-basis variants state the weaker
+    selection used. LANDMARK.
 The independent action-on-a-tree proof is recorded as an agreement remark on
 `GT-14`, after arbitrary simplicial trees exist; it is not an item or a forward
 dependency of this page.
@@ -1039,15 +1054,13 @@ embeds.
     sending $A$ to $0$ and $t$ to $1$; well-definedness uses the relators.
 11. `prop-universal-property-of-an-hnn-extension` — **proposition** `[LL]`,
     for a map out of $A$ and an element conjugating the two edge maps.
-12. `prop-hnn-extension-as-a-pushout-with-a-cylinder-group` — **proposition**
-    `[LA]`, stated only after the explicit universal property.
-13. `def-ascending-hnn-extension` — **definition** `[LN]` for an injective
+12. `def-ascending-hnn-extension` — **definition** `[LN]` for an injective
     endomorphism $\phi:A\to A$.
-14. `prop-normal-form-for-an-ascending-hnn-extension` — **proposition** `[LL]`.
-15. `rem-higman-neumann-neumann-embedding-theorem` — **remark** `[LS]`,
+13. `prop-normal-form-for-an-ascending-hnn-extension` — **proposition** `[LL]`.
+14. `rem-higman-neumann-neumann-embedding-theorem` — **remark** `[LS]`,
     `proved_here: false`, stating the exact countable-into-two-generator
     embedding theorem and not using it later.
-16. `thm-conjugacy-theorem-for-cyclically-reduced-hnn-words` — **theorem**
+15. `thm-conjugacy-theorem-for-cyclically-reduced-hnn-words` — **theorem**
     `[LL]` in the exact Collins form and hypotheses; its long case analysis is
     decomposed at build into rotation and associated-subgroup lemmas.
 
@@ -1150,10 +1163,13 @@ not imitated.
     **theorem** `[LS]`, `proved_here: false`.
 18. `rem-groups-with-unsolvable-conjugacy-problem` — **remark** `[LS]`, exact
     existence statement and source, no synthetic strengthening.
-19. `def-dehn-function-of-a-finite-presentation` — **definition** `[LN]`, the
-    maximal minimal relator area of a null word of length at most $n$.
-20. `lem-dehn-area-is-independent-of-a-van-kampen-diagram-representative` —
-    **lemma** `[LA]`, by taking a minimum in $\mathbb N$.
+19. `def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation` —
+    **definition** `[LN]`: the area of a null word is the least number of
+    conjugates of defining relators and inverses whose product it represents;
+    the Dehn function maximises this over null words of length at most $n$.
+20. `lem-minimal-algebraic-relator-area-exists` — **lemma** `[LA]`, because a
+    null word has at least one finite relator expression and $\mathbb N$ is
+    well ordered. No diagram is mentioned before `GT-8`.
 21. `prop-recursive-dehn-function-implies-solvable-word-problem` —
     **proposition** `[LL]` for finite presentations.
 
@@ -1175,7 +1191,7 @@ not imitated.
 `ex-word-problem-in-a-finite-cyclic-presentation` `[LL]` ·
 `ex-conjugacy-in-a-free-group-by-cyclic-reduction` `[LL]` ·
 `ex-todd-coxeter-as-a-partial-coset-enumeration-procedure` `[LL]` ·
-`ex-a-van-kampen-area-computation` `[AA]` ·
+`ex-an-algebraic-relator-area-computation` `[AA]` ·
 `cex-enumerating-relator-consequences-does-not-decide-nontriviality` `[AA]`.
 
 ### Sources and exact locators
@@ -1221,7 +1237,7 @@ lemma to Dehn's algorithm.
 ### A-page items, in dependency order
 
 1. `def-cyclically-reduced-word-and-cyclic-conjugate` — **definition** `[LN]`,
-   citing the published free-group cyclic-reduction item where available.
+   citing the published free-group cyclic-reduction item.
 2. `def-symmetrisation-of-a-relator-set` — **definition** `[LN]`, closing under
    inverses and cyclic conjugates.
 3. `lem-symmetrisation-has-the-same-normal-closure` — **lemma** `[LL]`.
@@ -1237,27 +1253,29 @@ lemma to Dehn's algorithm.
    **lemma** `[LL]`.
 10. `thm-van-kampen-lemma` — **theorem** `[LL]`, both directions, connecting
     null words and finite planar diagrams.
-11. `def-reduced-van-kampen-diagram` — **definition** `[LN]`.
-12. `lem-minimal-area-diagrams-are-reduced` — **lemma** `[LL]`.
-13. `lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams` — **lemma**
+11. `thm-diagram-area-agrees-with-algebraic-relator-area` — **theorem** `[LA]`,
+    sharpening the two constructions in item 10 to equality of their minima.
+12. `def-reduced-van-kampen-diagram` — **definition** `[LN]`.
+13. `lem-minimal-area-diagrams-are-reduced` — **lemma** `[LL]`.
+14. `lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams` — **lemma**
     `[LA]`, the Euler-characteristic accounting isolated from the group
     conclusion.
-14. `thm-greendlinger-lemma-for-c-prime-one-sixth-presentations` — **theorem**
+15. `thm-greendlinger-lemma-for-c-prime-one-sixth-presentations` — **theorem**
     `[LL]`: a nontrivial reduced null word contains more than half of a relator.
     LANDMARK.
-15. `def-dehn-reduced-word-and-dehn-presentation` — **definition** `[LN]`.
-16. `lem-dehn-replacement-strictly-shortens-a-word` — **lemma** `[LL]`.
-17. `thm-dehn-algorithm-solves-the-word-problem` — **theorem** `[LL]`, with
+16. `def-dehn-reduced-word-and-dehn-presentation` — **definition** `[LN]`.
+17. `lem-dehn-replacement-strictly-shortens-a-word` — **lemma** `[LL]`.
+18. `thm-dehn-algorithm-solves-the-word-problem` — **theorem** `[LL]`, with
     explicit termination and correctness.
-18. `cor-finite-c-prime-one-sixth-presentations-have-solvable-word-problem` —
+19. `cor-finite-c-prime-one-sixth-presentations-have-solvable-word-problem` —
     **corollary** `[LL]`.
-19. `cor-linear-isoperimetric-bound-for-finite-c-prime-one-sixth-presentations` —
+20. `cor-linear-isoperimetric-bound-for-finite-c-prime-one-sixth-presentations` —
     **corollary** `[LA]`, with constants derived rather than advertised as
     canonical.
-20. `thm-torsion-theorem-for-c-prime-one-sixth-groups` — **theorem** `[LL]`:
+21. `thm-torsion-theorem-for-c-prime-one-sixth-groups` — **theorem** `[LL]`:
     every torsion element is conjugate to a power of a root of a defining
     relator, in the exact sourced hypotheses.
-21. `cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free` —
+22. `cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free` —
     **corollary** `[LL]`.
 The hyperbolicity consequence is authored as an agreement theorem on `GT-12`,
 where hyperbolicity is available; it is not a forward dependency here.
@@ -1342,10 +1360,9 @@ extensions are semidirect products.
    **theorem** `[LA]`, citing AG-3 rather than defining the product again.
 8. `prop-direct-product-criterion-for-a-split-extension` — **proposition**
    `[LL]`, when the complement centralises the kernel.
-9. `ex-nonsplit-cyclic-extension-is-a-proposition` — **proposition** `[LL]`:
-   $1\to C_p\to C_{p^2}\to C_p\to1$ does not split; the actual calculation
-   belongs to the B page, so this item is omitted if house kind rules reject an
-   example-shaped proposition.
+9. `prop-cyclic-order-p-squared-extension-is-nonsplit` — **proposition**
+   `[LL]`: $1\to C_p\to C_{p^2}\to C_p\to1$ does not split, because the cyclic
+   middle group has a unique subgroup of order $p$.
 10. `lem-extension-induces-an-outer-action-on-its-kernel` — **lemma** `[LL]`,
     $Q\to\operatorname{Out}(N)$ independent of the chosen lift.
 11. `def-abstract-kernel-and-the-general-extension-problem` — **definition**
@@ -1432,8 +1449,7 @@ non-load-bearing.
 ## GT-10. Cayley Graphs, Word Metrics, and Quasi-Isometry
 
 **page id** `cayley-graphs-word-metrics-and-quasi-isometry`  
-**`requires`** `free-groups-and-presentations`, `metric-spaces`, and the last
-actually authored fundamental-group page at splice
+**`requires`** `free-groups-and-presentations`, `metric-spaces`
 
 The published Cayley theorem embeds a group in a symmetric group; this page's
 Cayley graph is a different, explicitly reconciled construction. Finite
@@ -1465,12 +1481,14 @@ choice of finite generating set.
     **definition package** `[LN]`, all constants and coarse-surjectivity
     printed.
 12. `def-bounded-distance-between-maps` — **definition** `[LN]`.
-13. `thm-quasi-isometry-is-equivalent-to-having-a-coarse-quasi-inverse` —
-    **theorem** `[LL]`.
+13. `thm-coarsely-surjective-quasi-isometric-embeddings-admit-coarse-quasi-inverses` —
+    **theorem** `[LL]`, relative to a supplied bounded-choice function; the
+    all-metric-spaces form uses AC, while countable word-metric spaces choose
+    least coded representatives in ZF.
 14. `lem-composites-of-quasi-isometries-are-quasi-isometries` — **lemma**
     `[LL]` with explicit constants.
 15. `thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces` —
-    **theorem** `[LA]`.
+    **theorem** `[LA]`, with the same choice qualification for symmetry.
 16. `prop-changing-a-finite-generating-set-gives-bilipschitz-word-metrics` —
     **proposition** `[LL]`, by bounding every generator in the other metric.
 17. `def-quasi-isometry-type-of-a-finitely-generated-group` — **definition**
@@ -1524,7 +1542,8 @@ The minimum in word length exists because a generating expression exists and
 $\mathbb N$ is well ordered. Local finiteness uses finiteness of $S$ and is not
 stated for arbitrary Cayley graphs. The generating-set comparison is proved
 before quasi-isometry type is named. Additive constants are retained throughout;
-quasi-isometry is not weakened informally to “looks the same far away”.
+quasi-isometry is not weakened informally to “looks the same far away”. The
+proof of symmetry does not hide the selection of a coarse inverse.
 
 **Forward references: NONE.**
 
@@ -1560,39 +1579,35 @@ proved.
    and every orbit map is a quasi-isometry. LANDMARK.
 7. `cor-groups-acting-geometrically-on-the-same-space-are-quasi-isometric` —
    **corollary** `[LL]`.
-8. `cor-cocompact-lattices-in-a-proper-geodesic-space-have-its-quasi-isometry-type` —
-   **corollary** `[LA]`, with “lattice” used only where already defined; else
-   this item is omitted.
-9. `def-growth-function-of-a-finitely-generated-group` — **definition** `[LN]`,
+8. `def-growth-function-of-a-finitely-generated-group` — **definition** `[LN]`,
    $\beta_{G,S}(n)=|B_S(1,n)|$.
-10. `def-growth-comparison-and-growth-type` — **definition** `[LN]`,
+9. `def-growth-comparison-and-growth-type` — **definition** `[LN]`,
     $f\preccurlyeq g$ iff $f(n)\le Cg(Cn+C)+C$ for a displayed convention.
-11. `lem-growth-comparison-is-a-preorder-and-mutual-comparison-an-equivalence` —
+10. `lem-growth-comparison-is-a-preorder-and-mutual-comparison-an-equivalence` —
     **lemma** `[LA]`.
-12. `thm-growth-type-is-independent-of-the-finite-generating-set` — **theorem**
+11. `thm-growth-type-is-independent-of-the-finite-generating-set` — **theorem**
     `[LL]`.
-13. `thm-growth-type-is-a-quasi-isometry-invariant` — **theorem** `[LL]` for
+12. `thm-growth-type-is-a-quasi-isometry-invariant` — **theorem** `[LL]` for
     uniformly locally finite spaces/groups, with the bounded-geometry
     hypothesis visible.
-14. `def-polynomial-subexponential-exponential-and-intermediate-growth` —
+13. `def-polynomial-subexponential-exponential-and-intermediate-growth` —
     **definition package** `[LN]`.
-15. `prop-finite-and-virtually-cyclic-growth-types` — **proposition** `[LL]`.
-16. `thm-free-groups-of-rank-at-least-two-have-exponential-growth` — **theorem**
+14. `prop-finite-and-virtually-cyclic-growth-types` — **proposition** `[LL]`.
+15. `thm-free-groups-of-rank-at-least-two-have-exponential-growth` — **theorem**
     `[LL]` by reduced-word counting.
-17. `thm-finitely-generated-nilpotent-groups-have-polynomial-growth` —
-    **theorem** `[LL]`, using the Bass--Guivarc'h central-series degree formula
-    in its sourced finite-generation hypotheses.
-18. `def-hirsch-growth-degree-of-a-finitely-generated-nilpotent-group` —
-    **definition** `[LN]`, only after independence of a suitable central series
-    is sourced.
-19. `thm-bass-guivarch-growth-degree-formula` — **theorem** `[LL]` in terms of
-    ranks of lower-central quotients.
-20. `thm-gromov-polynomial-growth-theorem` — **theorem** `[LS]`,
+16. `def-homogeneous-dimension-of-a-finitely-generated-nilpotent-group` —
+    **definition** `[LN]`, the Bass--Guivarc'h weighted sum
+    $\sum_i i\,\operatorname{rank}_{\mathbb Z}(\gamma_iG/\gamma_{i+1}G)$.
+17. `thm-bass-guivarch-growth-degree-formula` — **theorem** `[LL]`: the
+    polynomial growth degree is the homogeneous dimension in item 16.
+18. `cor-finitely-generated-nilpotent-groups-have-polynomial-growth` —
+    **corollary** `[LL]` in the sourced finite-generation hypotheses.
+19. `thm-gromov-polynomial-growth-theorem` — **theorem** `[LS]`,
     `proved_here: false`: a finitely generated group has polynomial growth iff
     it is virtually nilpotent. LANDMARK; no dependency target.
-21. `rem-grigorchuk-groups-of-intermediate-growth` — **remark** `[LS]`, exact
+20. `rem-grigorchuk-groups-of-intermediate-growth` — **remark** `[LS]`, exact
     existence statement and source, no construction used later.
-22. `rem-growth-gap-and-open-problems` — **remark** `[LN]`, limited to sourced
+21. `rem-growth-gap-and-open-problems` — **remark** `[LN]`, limited to sourced
     questions and date-stamped at authoring.
 
 ### `fs-` items
@@ -1624,9 +1639,9 @@ proved.
   and growth comparison.
 - **Bass, “The degree of polynomial growth of finitely generated nilpotent
   groups”, *Proc. London Math. Soc.* (3) 25 (1972), 603--614.** Original proof
-  for items 17--19.
+  for items 16--18.
 - **Gromov, “Groups of polynomial growth and expanding maps”, *Publ. Math.
-  IHÉS* 53 (1981), 53--73.** Original source for item 20; proof is explicitly
+  IHÉS* 53 (1981), 53--73.** Original source for item 19; proof is explicitly
   outside local scope.
 
 ### Proof strategy and traps
@@ -1644,7 +1659,8 @@ is not replaced by a paragraph masquerading as Gromov's proof.
 ## GT-12. Hyperbolic Spaces and Hyperbolic Groups
 
 **page id** `hyperbolic-spaces-and-hyperbolic-groups`  
-**`requires`** `geometric-actions-svarc-milnor-and-growth`
+**`requires`** `geometric-actions-svarc-milnor-and-growth`,
+`small-cancellation-and-dehn-algorithms`
 
 This page develops Gromov hyperbolicity from slim triangles through stability
 of quasi-geodesics and then transfers it to finitely generated groups. The
@@ -1781,11 +1797,13 @@ on Tarski's alternative.
     finite $S$.
 11. `lem-equivalent-folner-boundary-formulations` — **lemma** `[LL]`.
 12. `thm-folner-criterion-for-amenability` — **theorem** `[LL]`, with the
-    Hahn--Banach/ultrafilter choice in the Følner-to-mean direction recorded.
+    ultrafilter/BPI cost in the Følner-to-mean direction and the finite-
+    dimensional separation argument in the reverse direction recorded.
     LANDMARK.
-13. `def-folner-sequence` — **definition** `[LN]` for countable groups.
-14. `prop-countable-amenable-groups-admit-folner-sequences` — **proposition**
-    `[LL]`, using an enumeration; nets replace sequences for arbitrary groups.
+13. `def-folner-sequence` — **definition** `[LN]` for an enumerated group.
+14. `prop-enumerated-countable-amenable-groups-admit-folner-sequences` —
+    **proposition** `[LL]`, relative to a supplied enumeration; nets replace
+    sequences for arbitrary groups.
 15. `thm-subexponential-growth-implies-amenability` — **theorem** `[LL]`, by
     extracting radii with small boundary.
 16. `def-paradoxical-decomposition-of-a-group` — **definition** `[LN]`, with
@@ -1862,9 +1880,10 @@ tree automorphisms by fixed points and axes.
 
 ### A-page items, in dependency order
 
-1. `def-arbitrary-simplicial-graph-with-oriented-edges` — **definition** `[LN]`,
-   vertex and oriented-edge sets with origin, terminus, and fixed-point-free
-   reversal $e\mapsto\bar e$.
+1. `def-oriented-graph-with-edge-reversal` — **definition** `[LN]`, vertex and
+   oriented-edge sets with origin, terminus, and fixed-point-free reversal
+   $e\mapsto\bar e$. General graphs may have loops and parallel geometric
+   edges; the tree condition below rules them out.
 2. `def-simplicial-path-reduced-path-cycle-and-connectedness` — **definition
    package** `[LN]`, allowing infinite vertex sets but finite paths.
 3. `def-simplicial-tree` — **definition** `[LN]`, a connected simplicial graph
@@ -1888,17 +1907,20 @@ tree automorphisms by fixed points and axes.
     **lemma** `[LL]`.
 13. `def-fixed-subtree-and-minimal-invariant-subtree` — **definition** `[LN]`,
     with existence conditional on a nonempty invariant subtree/supplied hull.
-14. `lem-fixed-point-set-of-a-tree-automorphism-is-a-subtree` — **lemma** `[LL]`.
-15. `def-translation-length-of-a-tree-automorphism` — **definition** `[LN]`,
-    $\ell(g)=\min_v d(v,gv)$; item 16 proves the minimum exists.
+14. `lem-nonempty-fixed-vertex-set-of-a-tree-automorphism-is-a-subtree` —
+    **lemma** `[LL]`.
+15. `def-translation-length-of-a-tree-automorphism-without-inversions` —
+    **definition** `[LN]`, $\ell(g)=\min_v d(v,gv)$; item 16 proves the minimum
+    exists.
 16. `thm-elliptic-hyperbolic-dichotomy-for-tree-automorphisms` — **theorem**
-    `[LL]`: either $g$ fixes a vertex (after subdivision) or preserves a unique
-    axis and translates by $\ell(g)>0$. LANDMARK.
+    `[LL]` for automorphisms without inversions: either $g$ fixes a vertex or
+    preserves a unique axis and translates by $\ell(g)>0$. LANDMARK.
 17. `cor-translation-length-is-conjugacy-invariant-and-homogeneous` —
     **corollary** `[LL]`, $\ell(g^n)=|n|\ell(g)$.
 18. `lem-finite-groups-acting-on-trees-have-a-global-fixed-vertex-after-subdivision` —
     **lemma** `[LL]`, by the centre of a finite invariant subtree.
-19. `cor-groups-acting-freely-on-trees-are-torsion-free` — **corollary** `[LL]`.
+19. `cor-groups-acting-freely-without-inversions-on-trees-are-torsion-free` —
+    **corollary** `[LL]`.
 20. `thm-ping-pong-for-hyperbolic-tree-automorphisms` — **theorem** `[LL]`,
     disjoint endpoint/axis hypotheses yielding a free subgroup.
 
@@ -1958,9 +1980,9 @@ groups. Amalgams and HNN extensions become the one-edge cases.
 
 ### A-page items, in dependency order
 
-1. `def-graph-of-groups` — **definition** `[LN]`: a connected simplicial graph,
-   vertex and unoriented-edge groups, and injective boundary maps for each
-   oriented edge, related by reversal.
+1. `def-graph-of-groups` — **definition** `[LN]`: a connected oriented graph in
+   the sense of `GT-14`, vertex and geometric-edge groups, and injective
+   boundary maps for each oriented edge, related by reversal.
 2. `def-maximal-subtree-of-a-connected-graph` — **definition** `[LN]`, supplied
    as data in the arbitrary case.
 3. `def-path-group-of-a-graph-of-groups` — **definition** `[LN]`, generated by
@@ -1993,14 +2015,17 @@ groups. Amalgams and HNN extensions become the one-edge cases.
     **theorem** `[LA]`, agreeing with the published amalgam universal property.
 16. `thm-one-loop-graph-of-groups-is-an-hnn-extension` — **theorem** `[LA]`,
     agreeing with `GT-6`.
-17. `cor-a-group-acting-freely-on-a-tree-is-free` — **corollary** `[LL]`,
-    relative to a supplied quotient maximal tree in the arbitrary case.
+17. `cor-a-group-acting-freely-without-inversions-on-a-tree-is-free` —
+    **corollary** `[LL]`, relative to a supplied quotient maximal tree in the
+    arbitrary case.
 18. `cor-fundamental-group-of-a-graph-with-trivial-groups-is-free` —
     **corollary** `[LL]`, rank equal to the number of non-tree geometric edges
     when finite.
 19. `thm-kurosh-subgroup-theorem` — **theorem** `[LL]`: a subgroup of a free
     product is a free product of a free group and conjugates of subgroups of
-    the factors, with double-coset indexing stated.
+    the factors, with double-coset indexing stated. The arbitrary-family form
+    is under AC; finite and explicitly indexed forms state only the selections
+    actually used.
 20. `thm-grushko-decomposition-and-rank-additivity` — **theorem** `[LL]` for
     finitely generated groups, decomposed at build into existence, terminal
     freely indecomposable factors, and uniqueness/rank statements.
@@ -2120,9 +2145,12 @@ a dependency of this pair.
     homomorphisms from $G$ to profinite groups that are continuous for the
     profinite topology.
 24. `thm-profinite-completion-is-functorial` — **theorem** `[LL]`.
-25. `prop-finitely-generated-linear-groups-are-residually-finite` —
-    **proposition** `[LL]` (Mal'cev), proved only if the ring-reduction
-    prerequisites close; otherwise source-cited leaf `[LS]`.
+25. `rem-malcev-finitely-generated-linear-groups-are-residually-finite` —
+    **remark** `[LS]`, `proved_here: false`, stating Wilkes Theorem 3.1.9
+    exactly. The in-library proof route fails here because finite-residue
+    separation for finitely generated coefficient domains belongs to the
+    unauthored commutative-algebra CA-7 machinery. The result is retained as a
+    canonical class of residually finite groups and is never load-bearing.
 26. `thm-free-groups-are-residually-finite` — **theorem** `[LL]`, by finite
     permutation quotients/core graphs.
 27. `def-subgroup-separable-and-lerf` — **definition** `[LN]`.
@@ -2201,41 +2229,40 @@ Frattini/Burnside generation principle to finitely generated pro-$p$ groups.
    $\mathbb Z_p=\varprojlim_n\mathbb Z/p^n\mathbb Z$ with reduction maps.
 5. `lem-coordinatewise-addition-and-negation-make-zp-a-topological-abelian-group` —
    **lemma** `[LL]`.
-6. `lem-coordinatewise-multiplication-makes-zp-a-topological-ring` — **lemma**
-   `[LL]`, included only as structure needed to state the metric; number theory
-   owns later arithmetic.
-7. `def-p-adic-valuation-and-metric-on-zp` — **definition** `[LN]`, directly
-   from the first differing coordinate.
-8. `thm-inverse-limit-topology-equals-the-p-adic-metric-topology` — **theorem**
+6. `def-p-adic-metric-on-zp` — **definition** `[LN]`, directly from the first
+   differing coordinate; multiplication and the valuation-ring structure are
+   left to commutative algebra.
+7. `thm-inverse-limit-topology-equals-the-p-adic-metric-topology` — **theorem**
    `[LL]`.
-9. `thm-zp-is-compact-hausdorff-totally-disconnected-and-complete` — **theorem**
-   `[LL]`, with compactness choice inherited from `GT-16` and sequential
-   completeness proved directly.
-10. `def-canonical-map-from-the-integers-to-zp` — **definition** `[LN]`,
-    $m\mapsto(m\bmod p^n)_n$—the number is written directly, never as
-    $\iota(m)$.
-11. `thm-the-integers-map-injectively-and-densely-into-zp` — **theorem** `[LL]`.
-12. `prop-additive-group-of-zp-is-torsion-free` — **proposition** `[LL]`.
-13. `prop-zp-is-topologically-generated-by-one` — **proposition** `[LL]`:
+8. `thm-zp-is-compact-hausdorff-totally-disconnected-and-complete` — **theorem**
+   `[LL]`; canonical residue digits give the diagonal compactness and
+   completeness proofs in ZF, so the arbitrary-product BPI cost from `GT-16`
+   is not imported here.
+9. `def-canonical-map-from-the-integers-to-zp` — **definition** `[LN]`,
+    $m\mapsto(m\bmod p^n)_n$—the number is written directly as the compatible
+    residue tuple, without naming a separate embedding symbol.
+10. `thm-the-integers-map-injectively-and-densely-into-zp` — **theorem** `[LL]`.
+11. `prop-additive-group-of-zp-is-torsion-free` — **proposition** `[LL]`.
+12. `prop-zp-is-topologically-generated-by-one` — **proposition** `[LL]`:
     the closure of $\mathbb Z\cdot1$ is all of $\mathbb Z_p$; it is not
     cyclic as an abstract group.
-14. `thm-zp-is-the-pro-p-completion-of-the-integers` — **theorem** `[LL]`, by
+13. `thm-zp-is-the-pro-p-completion-of-the-integers` — **theorem** `[LL]`, by
     cofinality of $p^n\mathbb Z$ among normal $p$-power-index subgroups.
-15. `prop-profinite-completion-of-z-is-the-product-of-all-zp` — **proposition**
+14. `prop-profinite-completion-of-z-is-the-product-of-all-zp` — **proposition**
     `[LL]`, $\widehat{\mathbb Z}\cong\prod_p\mathbb Z_p$, via Chinese
     remainder/cofinality.
-16. `def-frattini-subgroup-of-a-profinite-group` — **definition** `[LN]`, the
+15. `def-frattini-subgroup-of-a-profinite-group` — **definition** `[LN]`, the
     intersection of maximal proper closed subgroups.
-17. `lem-maximal-proper-closed-subgroups-of-a-profinite-group-are-open` —
+16. `lem-maximal-proper-closed-subgroups-of-a-profinite-group-are-open` —
     **lemma** `[LL]`.
-18. `thm-frattini-subgroup-commutes-with-surjective-inverse-limits` — **theorem**
+17. `thm-frattini-subgroup-commutes-with-surjective-inverse-limits` — **theorem**
     `[LL]` in the exact Wilkes hypotheses.
-19. `thm-frattini-formula-for-finitely-generated-pro-p-groups` — **theorem**
+18. `thm-frattini-formula-for-finitely-generated-pro-p-groups` — **theorem**
     `[LL]`, $\Phi(G)=\overline{[G,G]G^p}$.
-20. `thm-topological-burnside-basis-theorem` — **theorem** `[LL]`: a subset
+19. `thm-topological-burnside-basis-theorem` — **theorem** `[LL]`: a subset
     topologically generates $G$ iff its image spans $G/\Phi(G)$ over
     $\mathbb F_p$.
-21. `cor-finitely-generated-pro-p-homomorphisms-are-surjective-iff-surjective-mod-frattini` —
+20. `cor-finitely-generated-pro-p-homomorphisms-are-surjective-iff-surjective-mod-frattini` —
     **corollary** `[LL]`.
 
 ### `fs-` items
@@ -2253,7 +2280,7 @@ Frattini/Burnside generation principle to finitely generated pro-$p$ groups.
 
 `ex-compatible-p-adic-digit-sequences` `[LL]` ·
 `ex-convergence-of-partial-p-adic-expansions` `[LL]` ·
-`ex-units-and-nonunits-in-zp-as-a-ring-preview` `[LL]` ·
+`ex-a-cauchy-sequence-in-the-additive-p-adic-metric` `[LL]` ·
 `ex-pro-p-completion-of-a-finite-p-group` `[LL]` ·
 `ex-frattini-quotient-of-zp` `[LL]` ·
 `ex-topological-generation-in-zp-squared` `[AA]` ·
@@ -2291,7 +2318,8 @@ closed generation and a closure on $[G,G]G^p$.
 **page id** `modular-representations-and-projective-covers`  
 **`requires`** `induced-representations-and-frobenius-reciprocity`,
 `modules-and-module-homomorphisms`, `chain-conditions-and-semisimple-modules`,
-and the commutative-algebra DVR/completion page supplying complete DVRs
+`valuation-rings-and-discrete-valuation-rings`,
+`inverse-limits-and-noetherian-completion`
 
 This page begins exactly where Maschke fails: $k$ has characteristic $p$ and
 $p\mid |G|$. A sufficiently large splitting $p$-modular system is supplied as
@@ -2328,16 +2356,16 @@ lattices is kept separate from ordinary characters.
 12. `cor-finitely-generated-projective-kg-modules-are-injective-and-conversely` —
    **corollary** `[LL]`.
 13. `def-module-radical-socle-head-and-loewy-series` — **definition package**
-   `[LN]`, citing any general module definitions already authored.
+    `[LN]`, citing the general module definitions in its declared prerequisites.
 14. `lem-radical-of-a-finite-length-module-is-superfluous` — **lemma** `[LL]`.
 15. `def-essential-epimorphism-and-projective-cover` — **definition** `[LN]`.
 16. `thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras` —
-    **theorem** `[LL]`, up to unique isomorphism over the target in the standard
-    sense.
+    **theorem** `[LL]`, unique up to a generally nonunique isomorphism over the
+    target.
 17. `thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules` —
     **theorem** `[LL]`, $P(S)\mapsto P(S)/\operatorname{rad}P(S)$.
 18. `thm-krull-schmidt-for-finite-dimensional-kg-modules` — **theorem** `[LL]`,
-    citing the general module theorem if already supplied.
+    citing the general module theorem in the chain-condition prerequisite.
 19. `cor-the-regular-module-decomposes-into-projective-indecomposables` —
     **corollary** `[LL]`, with multiplicities stated in the exact split-field
     form.
@@ -2421,7 +2449,7 @@ splitting $p$-modular system.
 ### A-page items, in dependency order
 
 1. `def-p-regular-and-p-singular-elements` — **definition** `[LN]`.
-2. `lem-p-regular-parts-are-preserved-by-conjugacy-and-taking-powers-prime-to-order` —
+2. `lem-p-regular-elements-are-preserved-by-conjugacy-and-coprime-powers` —
    **lemma** `[LL]`.
 3. `def-teichmuller-lift-in-a-splitting-p-modular-system` — **definition**
    `[LN]`, lifting roots of unity of order prime to $p$.
@@ -2444,7 +2472,8 @@ splitting $p$-modular system.
 12. `def-decomposition-map-from-ordinary-to-modular-grothendieck-groups` —
     **definition** `[LN]`, through an invariant $\mathcal O$-lattice.
 13. `thm-decomposition-map-is-independent-of-the-stable-lattice` — **theorem**
-    `[LL]`.
+    `[LL]` as a class in the modular Grothendieck group; the reduced modules
+    need not be isomorphic.
 14. `def-decomposition-numbers-and-decomposition-matrix` — **definition**
     `[LN]`, $\chi^0=\sum_\varphi d_{\chi\varphi}\varphi$ on $p$-regular
     elements.
@@ -2472,7 +2501,8 @@ splitting $p$-modular system.
 - `fs-modular-representations-are-determined-by-ordinary-characters` `[LN]`.
 - `fs-reduction-mod-p-of-an-ordinary-character-is-always-irreducible` `[LN]`.
 - `fs-the-cartan-matrix-equals-the-decomposition-matrix` `[LN]`.
-- `fs-every-block-has-defect-zero` `[LN]`.
+- `fs-every-block-has-one-ordinary-and-one-brauer-irreducible-character`
+  `[LN]`.
 
 ### B page — `brauer-characters-and-decomposition-matrices-examples`
 
@@ -2480,7 +2510,7 @@ splitting $p$-modular system.
 `ex-p-regular-classes-of-s-three` `[LL]` ·
 `ex-decomposition-matrix-of-s-three-in-characteristic-two` `[LL]` ·
 `ex-cartan-matrix-from-d-transpose-d` `[LL]` ·
-`ex-a-defect-zero-block` `[LL]` ·
+`ex-a-block-with-one-ordinary-and-one-brauer-character` `[LL]` ·
 `cex-ordinary-trace-on-a-p-singular-unipotent-element` `[LL]`.
 
 ### Sources and exact locators
@@ -2495,8 +2525,12 @@ splitting $p$-modular system.
 - **Serre, *Linear Representations of Finite Groups*, Part III, Chapters 15--18
   “Modular representations” and “Brauer characters”.** Independent standard
   treatment and convention control.
-- **Brauer, “On the representation of a group of finite order”, *Proc. London
-  Math. Soc.* (2) 42 (1937), 145--173.** Original-result provenance.
+- **Brauer, “On modular and $p$-adic representations of algebras”, *Proc.
+  Natl. Acad. Sci. USA* 25 (1939), full article pp. 252--258; and
+  Brauer--Nesbitt, “On the modular characters of groups”, *Ann. of Math.* 42
+  (1941), full article pp. 556--590.** Original-result provenance for the
+  modular-system and Brauer-character constructions; neither is used as the
+  sole proof source.
 
 ### Proof strategy and traps
 
@@ -2515,7 +2549,8 @@ order.
 
 **page id** `the-finite-simple-group-classification-landscape`  
 **`requires`** `socles-and-the-onan-scott-landscape`,
-`composition-series-and-solvable-groups`
+`composition-series-and-solvable-groups`,
+`sylow-theorems-and-nilpotent-groups`
 
 This page states what CFSG classifies, identifies the families without opening
 Lie-algebra structure theory, and records the status and scale of the proof.
@@ -2667,10 +2702,12 @@ both forms.
 14. `thm-nonabelian-h-one-classifies-complements-as-a-pointed-set` — **theorem**
     `[LL]`.
 15. `def-restriction-inflation-and-conjugation-on-first-cohomology` —
-    **definition** `[LN]`, citing HA-12's general maps where available.
+    **definition** `[LN]`, using HA-12's cochain maps and writing the
+    degree-one formulas explicitly.
 16. `thm-inflation-restriction-exact-sequence-in-degree-one` — **theorem**
-    `[LL]` in the exact normal-subgroup hypotheses; after HA-17 this agrees
-    with the first part of the five-term sequence.
+    `[LL]` in the exact normal-subgroup hypotheses, proved directly with
+    crossed homomorphisms. `GT-22` later checks agreement with HA-17's
+    five-term sequence.
 
 ### `fs-` items
 
@@ -2768,7 +2805,7 @@ bijection is then proved to respect Baer sum.
 18. `cor-central-extensions-are-classified-by-h-two-with-trivial-action` —
     **corollary** `[LL]`.
 19. `thm-five-term-exact-sequence-as-extension-and-transgression-data` —
-    **theorem** `[LA]`, placed after HA-17 and interpreting only arrows already
+    **theorem** `[LA]`, using HA-17 and interpreting only arrows already
     constructed there.
 20. `rem-nonabelian-extension-obstruction-in-h-three` — **remark** `[LS]`,
     agreement with `GT-9`'s exact Eilenberg--Mac Lane theorem; no proof or
@@ -2824,7 +2861,8 @@ needed after that datum.
 
 **page id** `schur-multipliers-and-universal-central-extensions`  
 **`requires`** `second-cohomology-and-abelian-kernel-extensions`,
-`group-cohomology-as-a-derived-functor`, `ext-and-balanced-resolutions`
+`group-cohomology-as-a-derived-functor`, `ext-and-balanced-resolutions`,
+`tensor-products-of-modules`
 
 The final pair separates homology from cohomology: the Schur multiplier is
 $H_2(G,\mathbb Z)$, while central extensions by $A$ are measured by
@@ -2838,10 +2876,10 @@ two, and perfect groups acquire universal central extensions.
    by definition.
 2. `def-free-presentation-kernel-data` — **definition** `[LN]`,
    $1\to R\to F\to G\to1$ supplied.
-3. `def-hopf-formula-quotient` — **definition** `[LN]`,
-   $(R\cap[F,F])/[F,R]$, after normality and containment are item 4.
-4. `lem-hopf-formula-subgroups-are-normal-and-the-quotient-exists` — **lemma**
-   `[LL]`.
+3. `lem-hopf-formula-subgroups-are-normal-and-the-quotient-exists` — **lemma**
+   `[LL]`, proving $[F,R]\trianglelefteq R\cap[F,F]$.
+4. `def-hopf-formula-quotient` — **definition** `[LN]`,
+   $(R\cap[F,F])/[F,R]$, now licensed by item 3.
 5. `thm-hopf-formula-for-the-schur-multiplier` — **theorem** `[LL]`,
    $H_2(G,\mathbb Z)\cong(R\cap[F,F])/[F,R]$, naturally enough to prove
    independence of presentation. LANDMARK.
@@ -2849,40 +2887,43 @@ two, and perfect groups acquire universal central extensions.
    `[LA]`, through item 5, not a direct claim about quotient syntax.
 7. `prop-schur-multiplier-of-a-free-group-is-trivial` — **proposition** `[LL]`.
 8. `prop-schur-multiplier-of-a-cyclic-group-is-trivial` — **proposition** `[LL]`.
-9. `thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square` —
-   **theorem** `[LL]`, citing the exterior-square page and stated only when
-   that prerequisite exists.
-10. `def-central-and-stem-extensions` — **definition** `[LN]`, stem meaning
+9. `def-exterior-square-of-an-abelian-group` — **definition** `[LN]`,
+   $\bigwedge^2 A=(A\otimes_{\mathbb Z}A)/\langle a\otimes a:a\in A\rangle$.
+10. `lem-exterior-square-has-the-alternating-universal-property` — **lemma**
+    `[LL]`, proving that the quotient is independent of tensor representatives.
+11. `thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square` —
+    **theorem** `[LL]`, $M(A)\cong\bigwedge^2 A$ naturally.
+12. `def-central-and-stem-extensions` — **definition** `[LN]`, stem meaning
     kernel contained in $Z(E)\cap E'$.
-11. `def-universal-central-extension` — **definition** `[LN]`, initial among
+13. `def-universal-central-extension` — **definition** `[LN]`, initial among
     central extensions of $G$ with commuting map over $G$.
-12. `lem-universal-central-extension-is-unique-up-to-unique-isomorphism` —
+14. `lem-universal-central-extension-is-unique-up-to-unique-isomorphism` —
     **lemma** `[LA]`.
-13. `thm-a-group-admits-a-universal-central-extension-iff-it-is-perfect` —
+15. `thm-a-group-admits-a-universal-central-extension-iff-it-is-perfect` —
     **theorem** `[LL]`.
-14. `def-universal-central-extension-from-a-free-presentation` — **definition**
+16. `def-universal-central-extension-from-a-free-presentation` — **definition**
     `[LN]`, $[F,F]/[F,R]\to G$ for perfect $G$.
-15. `lem-free-presentation-construction-is-a-central-extension` — **lemma**
+17. `lem-free-presentation-construction-is-a-central-extension` — **lemma**
     `[LL]`.
-16. `thm-free-presentation-construction-has-the-universal-property` —
+18. `thm-free-presentation-construction-has-the-universal-property` —
     **theorem** `[LL]`.
-17. `cor-kernel-of-the-universal-central-extension-is-the-schur-multiplier` —
+19. `cor-kernel-of-the-universal-central-extension-is-the-schur-multiplier` —
     **corollary** `[LL]`, by Hopf's formula.
-18. `def-superperfect-group` — **definition** `[LN]`, $H_1=H_2=0$.
-19. `prop-universal-central-extension-group-is-superperfect` — **proposition**
+20. `def-superperfect-group` — **definition** `[LN]`, $H_1=H_2=0$.
+21. `prop-universal-central-extension-group-is-superperfect` — **proposition**
     `[LL]` under the standard hypotheses.
-20. `thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two` —
-    **theorem** `[LL]`,
+22. `thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two` —
+    **theorem** `[LL]` for the trivial $G$-module $A$,
     $0\to\operatorname{Ext}^1_{\mathbb Z}(G_{\rm ab},A)\to H^2(G,A)
     \to\operatorname{Hom}(M(G),A)\to0$, with naturality and noncanonical
     splitting qualifications.
-21. `cor-central-extensions-of-perfect-groups-are-controlled-by-hom-from-the-schur-multiplier` —
+23. `cor-central-extensions-of-perfect-groups-are-controlled-by-hom-from-the-schur-multiplier` —
     **corollary** `[LL]`.
-22. `def-schur-covering-group-of-a-finite-group` — **definition** `[LN]`, a
+24. `def-schur-covering-group-of-a-finite-group` — **definition** `[LN]`, a
     stem extension with kernel isomorphic to $M(G)$.
-23. `thm-existence-of-schur-covering-groups-for-finite-groups` — **theorem**
+25. `thm-existence-of-schur-covering-groups-for-finite-groups` — **theorem**
     `[LL]`; uniqueness is not claimed in general.
-24. `rem-projective-representations-and-the-schur-multiplier` — **remark**
+26. `rem-projective-representations-and-the-schur-multiplier` — **remark**
     `[LS]`, exact orientation to projective representations, deferred because
     ordinary RT does not develop factor sets in $K^\times$.
 
@@ -2930,8 +2971,6 @@ groups are not declared unique without the additional hypotheses in the
 specialist source.
 
 **Forward references: NONE.**
-
----
 
 ---
 
@@ -3049,7 +3088,7 @@ pp. 72--94.
 | §2.1 “The $p$-adic integers”; Definitions 2.1.2--2.1.3, Propositions 2.1.4--2.1.5 | compatible tuples, pro-$p$, torsion-free included `GT-17`; domain statement amendment/comparison to CA-13 |
 | §2.2 “The profinite completion of the integers”; Theorem 2.2.1 | $\widehat{\mathbb Z}\cong\prod_p\mathbb Z_p$ included `GT-17`; later arithmetic B/number theory |
 | §3.1 residual finiteness, Propositions 3.1.2--3.1.8 | included `GT-16`; finite-quotient examples B |
-| Theorem 3.1.9 Mal'cev and surface-group continuation | conditional leaf/deferred until linear and covering/geometric prerequisites close |
+| Theorem 3.1.9 Mal'cev and surface-group continuation | Mal'cev included as source-cited non-load-bearing remark `GT-16`; surface-group continuation deferred until covering/geometric prerequisites close |
 | §3.2 free groups and finite quotients, Marshall Hall | residual finiteness/separability included `GT-16`, receives `GT-5` |
 | §4.1 “Generators of pro-$p$ groups”; Propositions 4.1.3--4.1.14 | finite Frattini items `GT-1`, pro-$p$ continuation `GT-17` |
 | §§4.2 onward pro-$p$ central series | deferred: Zassenhaus filtration and cohomological dimension belong an advanced pro-$p$/profinite-cohomology sequel |
@@ -3082,7 +3121,7 @@ pp. 72--94.
 
 | source/range | disposition |
 |---|---|
-| Webb, *A Course in Finite Group Representation Theory*, Ch. 6 §§6.1--6.4, Ch. 7 §§7.1--7.4, Ch. 9 §§9.1--9.6, Ch. 10 §§10.1--10.3, full text <https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf> | cyclic $p$ modules, simple modules, radical/socle, projectives/covers/Cartan `GT-18`; Jennings §6.4 deferred to advanced $p$-group/module interaction; splitting systems, lattices, decomposition, Brauer characters `GT-19`; defect-zero example B; deeper blocks deferred; Noether--Deuring claims not made load-bearing where Webb omits proof |
+| Webb, *A Course in Finite Group Representation Theory*, Ch. 6 §§6.1--6.4, Ch. 7 §§7.1--7.4, Ch. 9 §§9.1--9.6, Ch. 10 §§10.1--10.3, full text <https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf> | cyclic $p$ modules, simple modules, radical/socle, projectives/covers/Cartan `GT-18`; Jennings §6.4 deferred to advanced $p$-group/module interaction; splitting systems, lattices, decomposition, Brauer characters and the one-character block example `GT-19`; defect groups/deeper blocks deferred; Noether--Deuring claims not made load-bearing where Webb omits proof |
 | Ciurca, *Representation Theory*, Chs. 1--3, full text <https://www.ma.imperial.ac.uk/~tc4117/assets/ModRep.pdf> | Artinian/radical/idempotent/Krull--Schmidt/projective material `GT-18`; Brauer/projective indecomposable/decomposition material `GT-19`; notes' algebraic-number/DVR assumption becomes explicit CA prerequisite |
 | Isaacs, advanced modular-character notes, Lecture 1 §§1.1--1.5, full text <https://www.uv.es/jomimar8/pdfs/course%20notes.pdf> | modules already RT/`GT-18`; Brauer characters, decomposition numbers, projective characters `GT-19`; kernels B; Lectures 2--7 blocks/local theory deferred because defect groups and Brauer correspondences are not built |
 | Smith, *CFSG---A User's Manual*, Lecture 1 pp. 3--17, full text <https://homepages.math.uic.edu/~smiths/talkv.pdf> | exact CFSG statement and family/nomenclature tables `GT-20`; alternating simplicity already-published; Lie constructions/Dynkin/Chevalley/$p$-local proof architecture out-of-scope to differential geometry/advanced finite groups |
@@ -3101,34 +3140,158 @@ pp. 72--94.
 
 ### 24.9 Standard-monograph and original-paper statement harvest
 
-These sources were read only over the exact ranges printed in the pair sections;
-each has a single explicit disposition here.
+These sources were read only over the exact ranges printed below and in the
+pair sections. A semicolon separates distinct source headings or named-result
+clusters and gives each its own disposition. An original paper with no useful
+internal heading hierarchy is explicitly treated as one full-article heading.
 
-| source range | disposition |
+| source and exact heading/result range read | heading-by-heading disposition |
 |---|---|
-| Lyndon--Schupp Ch. I §§3--4, Ch. IV §§1--2.5, Ch. V §§1--5 | subgroup/rewrite `GT-5`; HNN `GT-6`; decision `GT-7`; small cancellation `GT-8` |
-| Serre, *Trees*, I §§2--6 | simplicial trees `GT-14`; graph-of-groups/Bass--Serre/Kurosh `GT-15` |
-| Robinson Ch. 11 §§11.1--11.4 | extensions and Schur--Zassenhaus `GT-9` |
-| Dixon--Mortimer §§1.5--1.8 and Ch. 4 §§4.1--4.8 | blocks/multiple transitivity `GT-3`; O'Nan--Scott `GT-4` survey |
-| Bridson--Haefliger I.8 and III.H §§1--3 | quasi-isometry `GT-10`; hyperbolicity/Morse/boundary `GT-12` |
-| de la Harpe Chs. IV and VI | Cayley/Švarc/growth independent proofs `GT-10`--`GT-11` |
-| Paterson Chs. 0--1 and Wagon Ch. 9 | amenability/Følner/Tarski `GT-13`; Banach--Tarski denied |
-| Ribes--Zalesskii Chs. 1--3 and Ribes Ch. 1 | profinite/pro-$p$ `GT-16`--`GT-17`; derived limits/profinite cohomology denied |
-| Brown Ch. I §§2--5, II §5, IV §§2--6, VII §§5--7 | low-degree $H^1,H^2$, Hopf, universal central extensions `GT-21`--`GT-23` |
-| Weibel §§6.4, 6.6 and degree-two UCT | harvested away from HA-12 into `GT-21`--`GT-23`; derived construction remains HA |
-| Karpilovsky Chs. 2--3 | multiplier/covers `GT-23`; numerical tables B only |
-| Benson §§1.6--3.3, Thévenaz Ch. 1, Webb Chs. 7--12 | modular/projective/Brauer `GT-18`--`GT-19`; support varieties/advanced local theory deferred |
-| Wilson Introduction/Chs. 1,2,4,8,10 and GLS No. 1 Chs. 1--2 | CFSG statement/family convention/status `GT-20`; proof not supplied |
-| Winter (1972) | extraspecial automorphism item `GT-2`; no stronger image equality than the paper states |
-| Britton (1958) | Britton lemma `GT-6` |
-| Boone (1959), Novikov (1955), Adian--Rabin sources | exact undecidability items `GT-7`, all `[LS]` |
-| Bass (1972), Gromov (1981), Gromov (1987), Følner (1955) | respectively growth formula `GT-11`, polynomial-growth survey `GT-11`, hyperbolicity `GT-12`, Følner criterion `GT-13` |
-| Hall (1949), Stallings (1983) | free subgroup separability `GT-5`/`GT-16`; full folding/Howson theory deferred |
-| Eilenberg--Mac Lane (1947) | nonabelian extension obstruction survey `GT-9`/`GT-22` |
-| Hopf (1942), Milnor §5 | Hopf formula and universal central extension `GT-23` |
+| Isaacs, *Finite Group Theory*, §1B “The Fitting Subgroup”; §3A Burnside basis/Frattini results | §1B Fitting definition/product already AG-4, while $p$-cores and solvable self-centralisation are included `GT-1`; §3A Frattini and basis results included `GT-1` |
+| Gorenstein, *Finite Groups*, Ch. 5 §5.5 “Extra-special groups” | definition, commutator form, central-product classification included/inline `GT-2`; subsequent local analysis is out-of-scope because it requires transfer and fusion not used here |
+| Lyndon--Schupp Ch. I §§3--4 “Subgroups of free groups”/Schreier method; Ch. IV §§1--2.5 free products with amalgamation and HNN extensions; Ch. V §§1--2 decision problems; Ch. V §§3--5 small cancellation | Ch. I included `GT-5`; amalgam normal form already-published and HNN/Britton included `GT-6`; decision headings included `GT-7`; pieces, $C'(1/6)$, Greendlinger, Dehn algorithm and torsion included `GT-8` |
+| Serre, *Trees*, I.§2 “Trees”; I.§3 “Trees and free groups”; I.§4 “Fundamental groups of graphs of groups”; I.§5 “Amalgams”; I.§6 structure consequences | I.§2 included `GT-14`; I.§3 included `GT-5`/`GT-14`; I.§§4--5 included `GT-15` with HNN normal form in `GT-6`; I.§6 Kurosh/structure consequences included `GT-15`, while arithmetic-tree applications are out-of-scope because they require linear/algebraic groups |
+| Robinson Ch. 11 §§11.1--11.4 “Extensions”, “Splitting extensions”, “The extension problem”, “The Schur--Zassenhaus theorem” | first three headings included `GT-9`; Hall-kernel existence and soluble conjugacy included `GT-9`; unconditional conjugacy is only a source-cited Feit--Thompson remark and is not load-bearing |
+| Craven, *Finite Group Theory*, sections “Group extensions”, “Schur--Zassenhaus”, and “Hall's theorem” | extension/splitting preliminaries already AG-3 or included `GT-9`; complement existence and the soluble conjugacy proof included `GT-9`; the wider Hall theorem remains AG-4 |
+| Dixon--Mortimer §§1.5--1.8 blocks, primitivity, multiple transitivity and wreath products; Ch. 4 §§4.1--4.8 primitive groups and O'Nan--Scott | §§1.5--1.8 included `GT-3`; elementary socle results included `GT-4`; classification/type theorem included as `[LS]` `GT-4`; classification-dependent applications are deferred to a permutation-group sequel |
+| Liebeck--Praeger--Saxl (1988), full article §§1--3: types, theorem, proof | type definitions/convention map included `GT-4`; theorem included `[LS]` `GT-4`; full proof is out-of-scope because the page is a bounded landscape survey and no later item depends on it |
+| Cameron (1981), §§2--4: primitive socles, O'Nan--Scott reduction, two-transitive groups | elementary socle claims included/inline `GT-4`; coarse landscape and two-transitive dichotomy included as `[LS]` `GT-4`; finite-simple refinements deferred to `GT-20` |
+| Soicher, “Primitive permutation groups”, sections “Primitivity”, “The socle”, “The O'Nan--Scott theorem” | no theorem uses this encyclopaedia essay as primary backing; all three sections are inline convention checks for `GT-4`'s five/eight-name dictionary |
+| Bridson--Haefliger I.8 “Group actions and quasi-isometries”; III.H §§1--3 hyperbolic spaces, hyperbolic groups and boundary/Morse material | I.8 included `GT-10`--`GT-11`; III.H.1 slim/four-point/Morse material included `GT-12`; III.H.2 group consequences included `GT-12`; III.H.3 boundary included `GT-12`, while CAT(0) comparison material is out-of-scope to a metric-geometry sequel |
+| de la Harpe Ch. IV §§23--24 Cayley metrics/quasi-isometry; Ch. VI growth headings | Ch. IV included `GT-10` and Švarc/growth comparisons `GT-11`; Ch. VI nilpotent growth included `GT-11`; Grigorchuk/intermediate-growth constructions are deferred because their automaton/branch-group machinery is not built |
+| Miller, “Decision Problems for Groups---Survey and Reflections”, §§1--4 “Introduction”, “Basic local unsolvability results”, “Basic global unsolvability results”, “Decision problems and constructions” | fixed/uniform distinctions and Novikov--Boone included `GT-7`; Adian--Rabin/Markov-property statements included `[LS]` `GT-7`; embedding constructions are out-of-scope because recursive-simulation machinery is absent |
+| Paterson Ch. 0 “Introduction” and Ch. 1 discrete amenability/Følner conditions | invariant means, inheritance, Følner and Tarski alternative included `GT-13`; locally compact/Haar variants are out-of-scope because measure theory is absent |
+| Wagon Ch. 9 amenability and paradoxical decompositions | Tarski alternative and free-group paradox included/inline `GT-13`; Banach--Tarski is out-of-scope because it needs Euclidean actions and measure-theoretic choice machinery |
+| Ribes--Zalesskii Ch. 1 inverse limits/profinite groups, Ch. 2 pro-$p$ groups, Ch. 3 free profinite material | Ch. 1 included `GT-16`; Ch. 2 included `GT-17`; free-profinite universal constructions are deferred because continuous profinite presentations/cohomology are not built |
+| Ribes, *Profinite Graphs and Groups*, Ch. 1 §§1.1--1.5 profinite spaces, inverse limits, completions and profinite groups | inverse-limit topology/completion material included `GT-16`; profinite graph coverings are deferred because they require the denied continuous cohomology/covering sequel |
+| Neukirch Ch. II §4 “Completions” | $p$-adic compatible residues and completeness agreement included `GT-17`; valuations and ring-adic completion remain owned by commutative/number theory |
+| Brown Ch. I §§2--5 resolutions/cochains/low dimensions; II §5 Hopf formula; IV §§2--6 extensions; VII §§5--7 universal central extensions | derived construction already HA-12; low-degree crossed-homomorphism agreement included `GT-21`; Hopf formula included `GT-23`; factor sets/$H^2$ included `GT-22`; universal central extensions included `GT-23` |
+| Weibel §6.4 low-dimensional group cohomology; §6.6 extensions and $H^2$; §3.6 degree-two universal-coefficient sequence | §6.4 crossed homomorphisms included `GT-21`; §6.6 extension classification included `GT-22`; §3.6 UCT included `GT-23`; general derived functors remain already HA |
+| Serre, *Galois Cohomology*, I.§5 Propositions 36--38 nonabelian $H^1$ | cocycle/coboundary pointed-set construction and twisting included `GT-21`; Galois descent applications are out-of-scope because infinite Galois theory is absent |
+| Mac Lane, *Homology*, Ch. IV §§7--9 factor sets, extension equivalence and Baer sum | factor-set construction/equivalence and Baer sum included `GT-22`; general homological algebra remains HA |
+| Karpilovsky Ch. 2 §§2.1--2.5 multiplier/Hopf formula; Ch. 3 §§3.1--3.4 representation groups and covers | Ch. 2 included `GT-23`; Ch. 3 existence/nonuniqueness of covering groups and examples included/B `GT-23`; numerical multiplier tables are B-page reference only and never load-bearing |
+| Benson §§1.6--1.8 radicals/socles, §§2.1--2.8 projectives/covers, §§3.1--3.3 vertices/sources | radical/projective-cover material included `GT-18`; vertex/source theorem included `GT-18`; support varieties and Auslander--Reiten theory are deferred because cohomological support is not built |
+| Thévenaz Ch. 1 §§1--6 modular systems, lattices, reduction and projectives | modular-system/lattice foundations split between CA prerequisites and `GT-18`; reduction/decomposition ingredients included `GT-19`; later $G$-algebra/local theory is deferred because block-local machinery is absent |
+| Isaacs, *Character Theory*, Ch. 15 §§15A--15C “Changing the characteristic”, Brauer characters, decomposition numbers and blocks | Brauer-character and decomposition-matrix material included `GT-19`; block partition and the one-character block example included `GT-19`; defect groups and main block correspondence theorems are deferred to advanced modular theory |
+| Serre, *Linear Representations*, Part III Chs. 15--18 modular representations and Brauer characters | modular systems/reduction included `GT-18`--`GT-19`; Brauer characters and decomposition included `GT-19`; deeper arithmetic representation material remains number theory |
+| Green (1959), full article heading “On the indecomposable representations of a finite group” | vertices, sources, relative projectivity and Green indecomposability supply `GT-18`; full Green correspondence is deferred because local block theory is not built |
+| Brauer (1939), full article “On modular and $p$-adic representations of algebras”; Brauer--Nesbitt (1941), full article “On the modular characters of groups” | modular/$p$-adic reduction provenance included `GT-19`; modular-character basis/decomposition provenance included `GT-19`; neither article is the sole proof route |
+| Wilson Introduction and Chs. 1, 2, 4, 8, 10: classification statement, alternating, classical, exceptional and sporadic families | exact family convention and low-rank coincidences included `GT-20`; constructions/proofs for Lie-type families are out-of-scope to differential geometry/advanced finite groups |
+| GLS Number 1, Part I Chs. 1--2 “The classification theorem”/programme organization; official Number 10 status | exact theorem/family statement and first-generation programme scope included `GT-20`; Number 10 supplies the 2023 ongoing-revision status; all local proof stages are out-of-scope and never dependencies |
+| Aschbacher--Smith, *The Classification of Quasithin Groups*, Preface and Main Theorem | quasithin-gap repair and completion status included `[LS]` `GT-20`; the two-volume local analysis is out-of-scope because it is part of the external CFSG proof programme |
+| Winter (1972), full article theorem cluster on automorphisms of extraspecial $p$-groups | induced symplectic/orthogonal action included `GT-2`; the scaffold does not strengthen containment to image equality beyond the paper's hypotheses |
+| Britton (1958), full article word-problem/Britton-lemma cluster | Britton lemma and normal-form consequence included `GT-6`; paper-specific algorithmic continuations are deferred to the decision-problem page or later HNN algorithms |
+| Boone (1959), full six-part article “The word problem”; Novikov (1955), full monograph of the same fixed-group undecidability construction | exact existence of a finitely presented group with unsolvable word problem included `[LS]` `GT-7`; constructions are out-of-scope because they require a long simulation/encoding programme; uniform Adian--Rabin is instead sourced to Miller/Wilkes |
+| Ol'shanskii Ch. 4 §§21--23 maps, small-cancellation conditions and Greendlinger-type lemmas | occurrence-sensitive diagram conventions and Greendlinger control included `GT-8`; graded/periodic constructions are out-of-scope because they require later chapters' machinery |
+| Holt--Rees (2012), introduction and small-cancellation convention paragraph only | modern overlap convention recorded inline `GT-8`; automaticity/geodesic-language theorem is out-of-scope because automatic structures are not built |
+| Bass (1972), full article theorem “The degree of polynomial growth of finitely generated nilpotent groups” | Bass--Guivarc'h weighted-rank formula included `GT-11`; solvable-group growth continuation is deferred because polycyclic structure is not built |
+| Gromov (1981), full article main theorem on polynomial growth | virtually-nilpotent classification stated `[LS]` `GT-11`; proof is out-of-scope as a major external programme and never a dependency target |
+| Gromov (1987), “Hyperbolic groups” §§1--8 | definition/equivalent hyperbolicity, Morse phenomena, boundary and basic consequences included `GT-12`; advanced small-cancellation/random-group material is deferred |
+| Ghys--de la Harpe (eds.), Chs. 1, 2, 7, 8: definitions, hyperbolic-group examples, quasi-geodesics and boundary | definitions/equivalent criteria and examples included `GT-12`; quasi-geodesic stability and boundary included `GT-12`; manifold/rigidity applications are out-of-scope to differential geometry |
+| Følner (1955), full article main criterion | finite-set criterion and invariant-mean equivalence included `GT-13`; locally compact variants are out-of-scope because Haar measure is absent |
+| Hall (1949), full article “Coset representations in free groups” | finite-index subgroup/separability construction included `GT-5`/`GT-16`; full Howson/folding continuation is deferred to the free-group sequel |
+| Stallings (1983), §§1--5 finite graphs, morphisms and folds | graph model and subgroup-basis proof included/inline `GT-5`; the complete folding algorithm and ends applications are deferred because their dedicated machinery is not built |
+| Eilenberg--Mac Lane (1947), full article §§3--10 nonabelian kernel, abstract kernel and obstruction | outer action and obstruction/torsor shape included as `[LS]` `GT-9`/`GT-22`; nonabelian $H^3$ construction is deferred to higher group cohomology |
+| Milnor, *Introduction to Algebraic K-Theory*, §5 “Universal central extensions”; Hopf (1942), full article formula cluster | Milnor's construction/universal property included `GT-23`; Hopf formula included `GT-23`; algebraic $K$-theory applications are out-of-scope because $K$-theory is absent |
 
 No Wikipedia or encyclopaedia entry is primary backing. Soicher is used only
 to reconcile O'Nan--Scott terminology.
+
+### 24.10 Stable URL registry for every cited source
+
+The pair sections and §§24.1--24.9 give the exact ranges read and the
+heading-by-heading dispositions. This registry supplies a working retrieval
+URL for every source cited anywhere in the scaffold; a source repeated across
+pairs appears once. “Full text” means that the linked file or landing page
+provides the whole work, not that every chapter was read.
+
+| finite and permutation group source | stable URL |
+|---|---|
+| Milne, *Group Theory* (full text) | <https://www.jmilne.org/math/CourseNotes/GT.pdf> |
+| Craven, *The Theory of p-Groups* (full text) | <https://web.mat.bham.ac.uk/D.A.Craven/docs/lectures/pgroups.pdf> |
+| Craven, *Finite Group Theory* notes (full course site) | <https://web.mat.bham.ac.uk/D.A.Craven/finitegroups2012.html> |
+| Wilkes, *Profinite Groups and Group Cohomology* (full text) | <https://www.dpmms.cam.ac.uk/~grw46/LectureNotes2021.pdf> |
+| Isaacs, *Finite Group Theory* | <https://bookstore.ams.org/gsm-92> |
+| Gorenstein, *Finite Groups* | <https://bookstore.ams.org/chel-301/> |
+| Winter, “The automorphism group of an extraspecial $p$-group” | <https://doi.org/10.1216/RMJ-1972-2-2-159> |
+| van Beek, *Topics in Finite $p$-Groups* (full text) | <https://martinvanbeek.github.io/uploads/LectureNotes.pdf> |
+| Dixon--Mortimer, *Permutation Groups* | <https://link.springer.com/book/10.1007/978-1-4612-0731-3> |
+| Cameron, *Notes on Classical Groups* (full text) | <https://maths.qmul.ac.uk/~pjc/class_gps/cg.pdf> |
+| Jones, *Notes on Permutation Groups* (full text) | <https://www.savbb.sk/conf/sschool/material/PermGpsNotes.pdf> |
+| Burness, *Topics in Permutation Group Theory* (full text) | <https://seis.bristol.ac.uk/~tb13602/docs/permgroups_14.pdf> |
+| Liebeck--Praeger--Saxl, “On the O'Nan--Scott theorem” (full article) | <https://doi.org/10.1017/S144678870003216X> |
+| Cameron, “Finite permutation groups and finite simple groups” | <https://doi.org/10.1112/blms/13.1.1> |
+| Soicher, “Primitive permutation groups” (full essay) | <https://maths.qmul.ac.uk/~lsoicher/designtheory.org/library/encyc/topics/primitive.pdf> |
+| Iwasawa, “Über die endlichen Gruppen und die Verbände ihrer Untergruppen” | <https://doi.org/10.3792/pia/1195578881> |
+
+| combinatorial and geometric group source | stable URL |
+|---|---|
+| Lyndon--Schupp, *Combinatorial Group Theory* | <https://link.springer.com/book/10.1007/978-3-642-61896-3> |
+| Baumslag, *Combinatorial Group Theory* (full text) | <https://www.macs.hw.ac.uk/~lc45/Teaching/kggt/Baumslag-book.pdf> |
+| Löh, *Geometric Group Theory* (full text) | <https://loeh.app.uni-regensburg.de/teaching/ggt_ws1415/lecture_notes_old.pdf> |
+| Stallings, “Topology of finite graphs” | <https://doi.org/10.1007/BF02095993> |
+| Serre, *Trees* | <https://doi.org/10.1007/978-3-642-61856-7> |
+| Britton, “The word problem for groups” | <https://doi.org/10.1112/plms/s3-8.4.493> |
+| Miller, *Combinatorial Group Theory* notes (full text) | <https://www.macs.hw.ac.uk/~lc45/Teaching/kggt/miller.pdf> |
+| Miller, “Decision Problems for Groups---Survey and Reflections” (full article) | <https://www2.hcmuaf.edu.vn/data/file/Decision%20problems%20for%20groups%20survey%20and%20reflections.pdf> |
+| Boone, “The word problem” | <https://doi.org/10.2307/1970103> |
+| Novikov, *On the Algorithmic Unsolvability of the Word Problem in Group Theory* (full text) | <https://www.mathnet.ru/eng/tm1180> |
+| Ol'shanskii, *Geometry of Defining Relations in Groups* | <https://link.springer.com/book/10.1007/978-94-011-3618-1> |
+| Holt--Rees, “Artin groups of large type...” | <https://doi.org/10.1112/plms/pdr035> |
+| Touikan, *Introduction to Combinatorial and Geometric Group Theory* (full text) | <https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/IntroCGGT.pdf> |
+| Sisto, *Lecture Notes on Geometric Group Theory* (full text) | <https://alexsisto.net/LectureNotesGGT.pdf> |
+| Bridson--Haefliger, *Metric Spaces of Non-Positive Curvature* | <https://link.springer.com/book/10.1007/978-3-662-12494-9> |
+| de la Harpe, *Topics in Geometric Group Theory* | <https://press.uchicago.edu/ucp/books/book/chicago/T/bo3641370.html> |
+| Bass, “The degree of polynomial growth...” | <https://doi.org/10.1112/plms/s3-25.4.603> |
+| Gromov, “Groups of polynomial growth and expanding maps” (author-hosted full text) | <https://www.ihes.fr/~gromov/wp-content/uploads/2018/08/631.pdf> |
+| Ghys--de la Harpe (eds.), *Sur les groupes hyperboliques...* | <https://link.springer.com/book/10.1007/978-1-4684-9167-8> |
+| Gromov, “Hyperbolic groups”, in *Essays in Group Theory* | <https://link.springer.com/book/10.1007/978-1-4613-9586-7> |
+| Paterson, *Amenability* | <https://bookstore.ams.org/view?ProductCode=SURV%2F29> |
+| Wagon, *The Banach--Tarski Paradox*, 2nd ed. | <https://doi.org/10.1017/CBO9781107337145> |
+| Følner, “On groups with full Banach mean value” (full article) | <https://doi.org/10.7146/math.scand.a-10442> |
+| Hamann, *Geometric Group Theory* (full text) | <https://www.math.uni-hamburg.de/home/hamann/Lehre/GeoGrTh/GeoGrThEn.pdf> |
+| Dicks--Dunwoody, *Groups Acting on Graphs* (author-hosted full text) | <https://mat.uab.cat/~dicks/DD.pdf> |
+| Manning, *Bass--Serre Theory and Complexes of Groups* (full text) | <https://pi.math.cornell.edu/~jfmanning/teaching/notes/graph_of_groups.pdf> |
+
+| profinite, modular-representation, and CFSG source | stable URL |
+|---|---|
+| Ribes--Zalesskii, *Profinite Groups* | <https://link.springer.com/book/10.1007/978-3-642-01642-4> |
+| Ribes, *Profinite Graphs and Groups* | <https://link.springer.com/book/10.1007/978-3-319-61199-0> |
+| Hall, “Coset representations in free groups” | <https://doi.org/10.1090/S0002-9947-1949-0032642-4> |
+| Neukirch, *Algebraic Number Theory* | <https://link.springer.com/book/10.1007/978-3-662-03983-0> |
+| Webb, *A Course in Finite Group Representation Theory* (full text) | <https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf> |
+| Benson, *Representations and Cohomology I* | <https://www.cambridge.org/core/books/representations-and-cohomology/9EE67E1280D8DB01AAC662530799AA8E> |
+| Thévenaz, *G-Algebras and Modular Representation Theory* | <https://katalog.ub.uni-heidelberg.de/titel/34103894> |
+| Green, “On the indecomposable representations of a finite group” (full article) | <https://eudml.org/doc/169786> |
+| Ciurca, *Representation Theory* (full text) | <https://www.ma.imperial.ac.uk/~tc4117/assets/ModRep.pdf> |
+| Isaacs, *Character Theory of Finite Groups* | <https://bookstore.ams.org/CHEL/359.H> |
+| Isaacs, advanced modular-character notes (full text) | <https://www.uv.es/jomimar8/pdfs/course%20notes.pdf> |
+| Serre, *Linear Representations of Finite Groups* | <https://link.springer.com/book/10.1007/978-1-4684-9458-7> |
+| Brauer, “On modular and $p$-adic representations of algebras” (full article) | <https://doi.org/10.1073/pnas.25.5.252> |
+| Brauer--Nesbitt, “On the modular characters of groups” | <https://doi.org/10.2307/1968918> |
+| Gorenstein--Lyons--Solomon, *CFSG*, Number 1 | <https://doi.org/10.1090/surv/040.1> |
+| Gorenstein--Lyons--Solomon, *CFSG*, Number 10 | <https://bookstore.ams.org/surv-40-10> |
+| Wilson, *The Finite Simple Groups* | <https://link.springer.com/book/10.1007/978-1-84800-988-2> |
+| Smith, *CFSG---A User's Manual* (full text) | <https://homepages.math.uic.edu/~smiths/talkv.pdf> |
+| Solomon, “A brief history of the classification...” (full article) | <https://www.ams.org/bull/2001-38-03/S0273-0979-01-00909-0/> |
+| Aschbacher, “The Status of the Classification...” (full article record) | <https://authors.library.caltech.edu/records/5b4mm-frv50> |
+| Aschbacher--Smith, *The Classification of Quasithin Groups* | <https://doi.org/10.1090/surv/111> |
+
+| extensions and cohomology source | stable URL |
+|---|---|
+| Robinson, *A Course in the Theory of Groups* | <https://link.springer.com/book/10.1007/978-1-4419-8594-1> |
+| Eilenberg--Mac Lane, “Cohomology theory in abstract groups. II” | <https://doi.org/10.2307/1969174> |
+| Löh, *Group Cohomology* (full text) | <https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf> |
+| Lassueur, *Cohomology of Groups* (full text) | <https://classueur.github.io/maths/teaching/skripte/COHOM_SS21.pdf> |
+| Haller, thesis §2.7 (full text) | <https://pure.tue.nl/ws/files/2037261/200512914.pdf> |
+| Meier, *Group Theory I* (full text) | <https://users.math.msu.edu/users/meier/Classnotes/M913S19/M912F18notes.pdf> |
+| Brown, *Cohomology of Groups* | <https://link.springer.com/book/10.1007/978-1-4684-9327-6> |
+| Weibel, *An Introduction to Homological Algebra* | <https://www.cambridge.org/core/books/an-introduction-to-homological-algebra/AAA3F16482097015CD12D4376D505282> |
+| Serre, *Galois Cohomology* | <https://link.springer.com/book/10.1007/978-3-642-59141-9> |
+| Mac Lane, *Homology* | <https://link.springer.com/book/10.1007/978-3-642-62029-4> |
+| Karpilovsky, *The Schur Multiplier* | <https://openlibrary.org/works/OL4287557W/The_Schur_multiplier> |
+| Milnor, *Introduction to Algebraic K-Theory* | <https://doi.org/10.1515/9781400881796> |
+| Hopf, “Fundamentalgruppe und zweite Bettische Gruppe” (full article) | <https://doi.org/10.1007/BF02565622> |
 
 ---
 
@@ -3207,9 +3370,8 @@ This section is the only legal effect on another track.
 | seam | current state | resolution before build | blocked material |
 |---|---|---|---|
 | AG-3/AG-4 exact item ids | prose-complete, live `items[]` empty | preserve proposed concepts or substitute their authored stable ids mechanically | `GT-1`, `GT-9` |
-| abstract-algebra bilinear/quadratic form page id | mathematical content is planned outside this file | substitute the stable symplectic/quadratic ids into `GT-2`; do not re-mint | extraspecial classification proof |
 | RT-1 arbitrary-group group-ring scope | current prose is framed around finite-group representations | enact Amendment 3 before HA-12 | HA-12 and `GT-21`--`GT-23` |
-| commutative-algebra complete-DVR/splitting prerequisites | CA scaffold is prose, not authored | place `GT-18`--`GT-19` only after the DVR/completion pages and take a sufficiently large splitting modular system as supplied data | modular/Brauer block only |
+| commutative-algebra complete-DVR/splitting prerequisites | `valuation-rings-and-discrete-valuation-rings` and `inverse-limits-and-noetherian-completion` are prose, not authored | place `GT-18`--`GT-19` only after both pages and take a sufficiently large splitting modular system as supplied data | modular/Brauer block only |
 | HA-12/HA-17 stable ids | homological prose gives proposed ids but no authored items | substitute the stable derived/bar/LHS ids after HA build | `GT-21`--`GT-23`; earlier blocks unaffected |
 | geometric placement anchor remains planned | `applications-of-the-fundamental-group-examples` has empty `items[]` | place after the last actually authored fundamental-group companion if the anchor is still empty; do not infer missing applications | placement only |
 | category-limit agreement | category limit page is later than `GT-16` | keep concrete compatible tuples load-bearing; the category track later owes an agreement theorem | no profinite theorem blocked |
@@ -3222,11 +3384,14 @@ spine theorem points forward, and there is no blocker to using this scaffold.
 ## 28. Proposed-id and reuse audit
 
 The item directory and authored page bodies were searched mechanically before
-coining ids. The only matches in the proposed-id sweep were deliberate
-citations to existing items—`def-topological-group`,
-`def-tree-forest-and-leaf`, `thm-tree-characterisations`, the published central
-series ids, and `def-nilpotent-group-and-nilpotency-class`. One initially
-colliding CFSG false-statement stem was namespaced to
+coining ids. Every match in the proposed-id sweep was a deliberate citation to
+an existing item: `def-alphabet-words-and-reduction`, `def-axiom-of-choice`,
+`def-characteristic-subgroup`, `def-group-presentation`,
+`def-topological-group`, `def-tree-forest-and-leaf`,
+`thm-tree-characterisations`,
+`thm-alternating-forms-have-a-symplectic-normal-form`, the published upper and
+lower central-series ids, and `def-nilpotent-group-and-nilpotency-class`. One
+initially colliding CFSG false-statement stem was namespaced to
 `fs-cfsg-composition-factors-determine-the-finite-group-up-to-isomorphism`.
 No proposed new id now collides with an immutable item id. At authoring the
 builder repeats this sweep because intervening levels may have minted a stem.
