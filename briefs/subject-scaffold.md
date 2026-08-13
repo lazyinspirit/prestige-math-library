@@ -41,6 +41,28 @@ Keep at most **4** running at once — every lane on this host is a 1M-window
 process and the host has 16 GB. Subagents research, read and report; you alone
 write the track file.
 
+### RESUMING AN INTERRUPTED LANE — check this before you write anything
+
+Lanes on this run get killed by the Claude subscription session limit, not by
+failure. On 2026-08-13 four lanes died together at 25–34 minutes with *"You've
+hit your session limit"*, each mid-scaffold, and **every one of them had already
+written real work to disk**. That work is committed and it is yours to continue.
+
+So **before doing anything else, look at the file you own.** If it already exists
+and has content:
+
+- **Read it in full and CONTINUE it. Do not restart it and do not rewrite what is
+  there.** A previous instance of you wrote it against this same brief.
+- Work out where it stopped — the last pair it developed — and carry on from
+  there.
+- If it has a checkpoint section, that is the fastest way in.
+
+**Write incrementally.** Append each pair's section to the file as you finish it,
+rather than composing the whole track and writing once at the end. A lane that
+holds everything in memory until the last minute loses everything when the quota
+ends; a lane that writes as it goes loses at most one section. This is the single
+most valuable habit on this run.
+
 ### Context continuity
 
 At **60% context**, at the next safe boundary, append a checkpoint section to
