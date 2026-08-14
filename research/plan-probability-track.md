@@ -1696,8 +1696,9 @@ alteration.  FA-19's `thm-positive-square-root` is also a declared PT-9
 predecessor: PT-9 uses it only on a finite-dimensional covariance operator to
 construct possibly singular Gaussian laws.
 
-**Combinatorics — applied 2026-08-14.**  The two finite
-probability pages: PT-1 proves that their weighted spaces, random variables,
+**Combinatorics — applied 2026-08-14.**  The two finite probability pages now
+carry orientation, not dependencies: PT-1 proves that their weighted spaces,
+random variables,
 laws, expectation, Markov, Chebyshev, Cauchy--Schwarz, and second-moment bound
 are exact finite restrictions; PT-2 proves the same for event and finite-valued
 random-variable independence.  The finite pages stay earlier, authored,

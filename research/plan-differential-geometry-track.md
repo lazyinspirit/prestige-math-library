@@ -10220,7 +10220,8 @@ two- and three-dimensional example.
   and Thm. 6.57 is `included(thm-weyls-complete-reducibility)`.
 - §§7.1 “Semisimple elements and toroidal subalgebras,” 7.2 “Cartan
   subalgebra,” and 7.3 “Root decomposition and root systems” → DG-30,
-  including `included(thm-additive-jordan-chevalley-decomposition)`,
+  using `inline(rem-additive-jordan-chevalley-is-supplied-by-x-two)` to cite
+  X-2's `thm-additive-jordan-chevalley-decomposition`, and including
   `included(thm-cartan-subalgebras-exist-in-complex-semisimple-lie-algebras)`,
   and `included(thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system)`.
 - §§8.1 “Abstract root systems,” 8.2 “Automorphisms and Weyl group,” 8.3
@@ -10280,8 +10281,9 @@ and disposed heading by heading.
   of the semisimplicity criterion; §15.1 “Properties of semisimple Lie
   algebras” → DG-29/DG-30, including
   `included(thm-cartans-criterion-for-solvability)`,
-  `included(thm-cartans-criterion-for-semisimplicity)`, and
-  `included(thm-additive-jordan-chevalley-decomposition)`.
+  `included(thm-cartans-criterion-for-semisimplicity)`, with §14.4 consumed as
+  `inline(rem-additive-jordan-chevalley-is-supplied-by-x-two)` by citation to
+  X-2's `thm-additive-jordan-chevalley-decomposition`.
 - §§16.1 “Extensions of Lie algebra representations,” 16.2 complete
   reducibility, 16.3 proof, 16.4 semisimple elements, 16.5 toral subalgebras;
   §§17.1 “Cartan subalgebras,” 17.2 “Root decomposition”; §§18.1 “Regular
