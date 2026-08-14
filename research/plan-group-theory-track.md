@@ -3327,31 +3327,37 @@ This section is the only legal effect on another track.
    extensions, homomorphic sections, complements, and the internal/external
    semidirect-product agreement. `GT-9` substitutes those ids and removes any
    duplicate definition at build.
-2. **Abstract algebra AG-4.** Retain its Fitting subgroup and nilpotence ids;
+2. **Abstract algebra AG-4 — APPLIED 2026-08-14.** Retain its Fitting subgroup and nilpotence ids;
    add Craven Theorem 2.19 and Corollaries 2.20--2.23 (Frattini lifting,
    $\Phi(G)\le F(G)$, nilpotence modulo $\Phi(G)$, and the Fitting quotient
-   formula). `GT-1` authors none of those general finite-group results.
-3. **Abstract algebra RT-1.** Define the finite-support group ring $k[G]$,
+   formula), now exposed as `thm-frattini-subgroup-is-nilpotent`,
+   `cor-frattini-subgroup-is-contained-in-the-fitting-subgroup`,
+   `thm-nilpotence-is-detected-modulo-the-frattini-subgroup`, and
+   `thm-fitting-subgroup-of-the-frattini-quotient`. `GT-1` authors none of them.
+3. **Abstract algebra RT-1 — APPLIED 2026-08-14.** Define the finite-support group ring $k[G]$,
    augmentation, and action/module dictionary for arbitrary $G$ over a
-   commutative ring before specialising to finite-dimensional representations.
+   commutative ring before specialising to finite-dimensional representations,
+   with stable ids `def-group-ring`,
+   `def-augmentation-map-and-augmentation-ideal-of-a-group-ring`, and
+   `thm-group-actions-and-group-ring-modules-correspond`.
    This closes HA-12's group-ring prerequisite without a second definition.
 4. **Homological algebra.** Replace HA-12's descriptive group-ring seam by the
    RT-1 ids from Amendment 3; retain all derived definitions. Cite `GT-9` for
    extensions, `GT-21` for $H^1$, `GT-22` for $H^2$, and `GT-23` for the Schur
    multiplier. The LHS five-term item receives the low-degree interpretation
    only after `GT-22`.
-5. **Commutative algebra CA-13B.** Repoint
+5. **Commutative algebra CA-13B — APPLIED 2026-08-14.** Repoint
    `ex-p-adic-integers-as-an-inverse-limit` to `GT-17`; its local example should
    prove the ring-adic/module-completion agreement, not re-form compatible
    residue tuples.
-6. **Combinatorics.** State explicitly that
+6. **Combinatorics — APPLIED 2026-08-14.** State explicitly that
    `trees-forests-and-spanning-trees` is finite and does not prove an arbitrary
    connected graph has a spanning tree (equivalent to AC). `GT-14` owns the
    infinite simplicial bridge.
-7. **Published free-groups plan harvest.** Reconcile the 32 authored on-disk
+7. **Published free-groups plan harvest — APPLIED AT SCAFFOLD LEVEL 2026-08-14.** Reconcile the 32 authored on-disk
    components, especially the three Tietze ids and cyclic-conjugacy ids, into
    the live `items[]` summary. No id is renamed or re-authored.
-8. **Published free-product choice note.** Keep its explicit dependence on
+8. **Published free-product choice note — APPLIED AT SCAFFOLD LEVEL 2026-08-14.** Keep its explicit dependence on
    `def-axiom-of-choice` for arbitrary transversals visible in its eventual page
    summary; finite-index forms are ZF.
 9. **Fundamental-group applications.** If future covering or van Kampen pages

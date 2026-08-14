@@ -35,7 +35,7 @@ the orchestrator should quote:
 | LA-10 | `triangularisation-and-jordan-canonical-form` | II.6 | A 28 / B 16 |
 | LA-12 | `inner-product-spaces-and-orthogonality` | II.7 | A 30 / B 17 |
 | X-1 | `the-fundamental-theorem-of-algebra` | II.8 | A 16 / B 12 |
-| X-2 | `the-spectral-theorem-and-singular-value-decomposition` | II.9 | A 32 / B 18 |
+| X-2 | `the-spectral-theorem-and-singular-value-decomposition` | II.9 | A 34 / B 18 |
 
 **The headline gap is filled.** There was no Galois theory anywhere in the plan.
 GA-1…GA-4 supply the algebraic closure, separable degree and the primitive
@@ -1786,7 +1786,10 @@ $C_{ij} = (-1)^{i+j}\det A^{(i,j)}$; **Laplace/cofactor expansion** along any ro
 or column; the **adjugate** $\operatorname{adj}(A)_{ij} = C_{ji}$;
 **$A \cdot \operatorname{adj}(A) = \operatorname{adj}(A) \cdot A = (\det A) I$**;
 $A^{-1} = (\det A)^{-1}\operatorname{adj}(A)$; **Cramer's rule**; computing a
-determinant by row reduction, citing LA-5.
+determinant by row reduction, citing LA-5; **Cauchy--Binet**
+(`thm-cauchy-binet-formula`) for an $m\times n$ matrix and an $n\times m$
+matrix over a commutative ring, summing over the $m$-subsets when $m\le n$.
+GT-7a cites this item for matrix--tree and does not mint it.
 
 B page: a worked $4 \times 4$ by cofactor expansion and by row reduction, agreeing;
 Cramer on a $2\times 2$ system; an integer matrix whose adjugate is integral while
@@ -2420,6 +2423,11 @@ Placement costs no renumber, because the spec already uses fractional orders
 | GA-3 | `finite-fields-and-cyclotomic-extensions` | 101.2 / 101.4 |
 | GA-4 | `solvability-by-radicals-and-kummer-theory` | 101.6 / 101.8 |
 
+**Owner-authorised 2026-08-14: APPLIED.** This four-pair layout is final at
+scaffold level. Orders 98--101 hold GA-1/GA-2; GA-3/GA-4 use the fractional
+slots shown in the same band. The global plan-spec splice remains the
+orchestrator's separate operation.
+
 Every id was checked against `items/` and `research/plan-spec.json` on
 2026-08-13 and is free. So is every item id proposed below; the four names most
 at risk were checked individually, because the library namespaces per category
@@ -2527,6 +2535,10 @@ track owns it in `subjects-01-SEAMS.md` §4. Building it once, here, is cheaper
 than three tracks routing around it. **If the orchestrator cuts it, GA-1 falls to
 about 30 items and every later definition acquires an ambient-normal-extension
 hypothesis; say so in the decision rather than letting it happen silently.**
+
+**Owner-authorised 2026-08-14: GA-1 retains algebraic closure.** The fallback
+ambient-normal-extension hypotheses are retired; every later GA item uses the
+fixed closure supplied here.
 
 **Machinery minted first, because nothing published supplies it.**
 `def-multivariate-polynomial-ring-by-iteration` is finitely many indeterminates
@@ -2844,6 +2856,11 @@ $\Phi_n$ is irreducible over $F$; the compositum
 $\mathbb{Q}(\zeta_m)\mathbb{Q}(\zeta_n) = \mathbb{Q}(\zeta_{\operatorname{lcm}(m,n)})$
 and $\mathbb{Q}(\zeta_m)\cap\mathbb{Q}(\zeta_n) = \mathbb{Q}(\zeta_{\gcd(m,n)})$
 (from CRT and the correspondence).
+
+Add `thm-kronecker-weber`: every finite abelian extension of $\mathbb Q$ is
+contained in a cyclotomic extension. GA-3 owns the Galois-theoretic statement
+and proof route; number theory cites it for arithmetic consequences and the
+conductor formulation rather than minting a second theorem.
 
 **B page.** $\mathbb{F}_4$, $\mathbb{F}_8$ and $\mathbb{F}_9$ written out with
 their Frobenius actions; the subfield lattice of $\mathbb{F}_{2^{12}}$ against
@@ -3621,10 +3638,10 @@ multiplicity); $(T-\lambda)|_{K_\lambda}$ is nilpotent; **existence of the Jorda
 canonical form when $\chi_T$ splits** (landmark); **uniqueness up to the order of
 the blocks** (landmark, from the rank formula); **two operators with split
 characteristic polynomials are similar iff they have the same Jordan form**;
-**the Jordan–Chevalley decomposition** $T = D+N$ with $D$ diagonalisable, $N$
-nilpotent, $DN=ND$, and both **polynomials in $T$** — existence when $\chi_T$
-splits, and uniqueness subject to commuting (landmark; the "polynomials in $T$"
-clause is what gives uniqueness its teeth and is the form later tracks want).
+Inline in the Jordan-form proof, split each block into its scalar and nilpotent
+parts and record the polynomial construction that X-2 later uses. No named
+Jordan--Chevalley item is minted here: X-2 owns the stable definition and
+theorem under R-5.
 
 *Cyclic vectors.* $\langle v\rangle_T$ is the smallest $T$-invariant subspace
 containing $v$, and $\dim\langle v\rangle_T$ is the degree of the monic generator
@@ -4169,7 +4186,7 @@ looking like an oversight.
 - **`requires`** (spec, unchanged and correct)
   `the-fundamental-theorem-of-algebra`, `inner-product-spaces-and-orthogonality`,
   `triangularisation-and-jordan-canonical-form`
-- **estimate** A 32, B 18
+- **estimate** A 34, B 18
 
 ### II.9.a The shape of this page, which is the harvest's central finding
 
@@ -4237,8 +4254,20 @@ the **square root** of a non-negative operator; **isometry** (cited from LA-12);
 **singular values**; the **singular value decomposition**; the **operator norm**
 $\lVert T\rVert$ (defined here as a maximum, not a supremum — see §II.9.a); the
 **Rayleigh quotient**.
+Also `def-semisimple-and-nilpotent-linear-endomorphisms`: semisimple means
+diagonalisable after scalar extension to an algebraic closure, and nilpotent
+means some positive power is zero.
 
 **THMS.**
+*Operator Jordan--Chevalley.*
+`thm-additive-jordan-chevalley-decomposition`: over a perfect field, every
+endomorphism of a finite-dimensional vector space has unique commuting
+semisimple and nilpotent parts $T=T_s+T_n$, each a polynomial in $T$ (with the
+zero-constant-term normalization when $T=0$). The proof cites LA-10's split
+Jordan-block calculation and uses separability/primary decomposition for the
+field-independent formulation. This is the sole citable finite-dimensional
+operator item used by DG-30.
+
 *The spectral theorems.* **the real spectral theorem**: a self-adjoint operator
 on a finite-dimensional real inner product space has an orthonormal basis of
 eigenvectors, equivalently a real symmetric matrix is $Q^{\mathsf T}DQ$ with $Q$
@@ -4469,7 +4498,7 @@ never be a pair's primary backing.
 | LA-10 triangularisation and Jordan | **Hoffman & Kunze Ch. 7 (sole full source for the core)** | Axler Ch. 8 (Jordan only); Petersen; Cambridge IB; Brosnan | **met, but thin** — Axler and Treil carry **no** rational canonical form, invariant factors or cyclic vectors, so H&K is doing the work alone for that sub-block. The cyclic-vector theorem is H&K p237 Corollary |
 | LA-12 inner products | Axler Ch. 6; Hoffman & Kunze Ch. 8 | Treil Ch. 5; Conrad `bilinearform`; Cambridge IB | **met** |
 | X-1 fundamental theorem of algebra | Milne FT Thm. 5.6; Artin §15.10 | Conrad `galoisappn`, `fundthmalglinear` | **met** |
-| X-2 spectral theorem and SVD | Axler Ch. 7; Hoffman & Kunze Ch. 8–9 | Treil Ch. 6; Tao 254A | **met for the spectral/SVD core; NOT met for Cauchy interlacing and Weyl**, which the harvest found in one source only and there as exercises — see §II.12.b |
+| X-2 spectral theorem and SVD | Axler Ch. 7; Hoffman & Kunze Ch. 8–9 | Treil Ch. 6; Tao 254A | **met for the spectral/SVD core; binding second-treatment gate for Cauchy interlacing and Weyl** — the first harvest found only one exercise route, so X-2 may not be authored until a second independent treatment and exact locator are verified; see §II.12.b |
 | AG-3 semidirect products | Ash Ch. 5; Conrad `semidirect-product` (29 pp) | Rotman (ordering only) | **met** |
 | AG-4 Sylow | Ash §5.4–5.7; Conrad `sylowpf`, `sylowapp` | Rotman | **met** |
 | MOD-3 tensor products | Wisbauer *Foundations of Module and Ring Theory*; Conrad `tensorprod`, `tensorprod2` | Ash Ch. 4; Altman–Kleiman; Stacks | **met** |
@@ -4483,9 +4512,10 @@ These are places where the sourcing rule is **not** met, or where a result the
 scaffold uses is unproved in everything harvested. Each is a real obligation on a
 future build, not a caveat.
 
-1. **Cauchy interlacing and Weyl's inequalities** (X-2) have one source, as
-   exercises. Either find a second treatment before authoring, or drop them and
-   record the drop.
+1. **APPLIED AS A BINDING AUTHORING GATE. Cauchy interlacing and Weyl's
+   inequalities** (X-2) had one source, as exercises, in the first harvest.
+   A second independent treatment with an exact locator is required before
+   authoring; this scaffold does not invent one or silently drop the results.
 2. **A right-Noetherian, not-left-Noetherian ring** (MOD-4's `fs-`) is
    **unsourced**. The usual triangular ring was not found stated as such in
    anything harvested, and the harvest explicitly warns against scaffolding it
@@ -4540,25 +4570,27 @@ future build, not a caveat.
 
 ## II.13 Amendments owed to other scaffolds, and unresolved seams
 
-Per `subjects-01-SEAMS.md` §0.1 this lane writes only its two files. Everything
-below is addressed to the orchestrator or to another track and is **not** applied
-here.
+This section began as the lane's outbound request ledger. Entries marked
+**APPLIED** are now reconciliation receipts in the originating scaffold; the
+remaining entries retain their original addressee.
 
 ### To the orchestrator, on `research/plan-spec.json`
 
-1. **X-1's `requires` changes** from `["symmetric-polynomials",
+1. **APPLIED at scaffold level 2026-08-14. X-1's `requires` changes** from `["symmetric-polynomials",
    "continuity-ivt-evt-and-uniform-continuity"]` to
    `["solvability-by-radicals-and-kummer-theory", "sylow-theorems-and-nilpotent-groups",
    "continuity-ivt-evt-and-uniform-continuity"]`, following the route decision of
    §II.8.e. `symmetric-polynomials` stays below X-1 transitively through GA-2.
-2. **RT-3's `requires` loses `inner-product-spaces-and-orthogonality`**, following
+2. **APPLIED at scaffold level 2026-08-14. RT-3's `requires` loses `inner-product-spaces-and-orthogonality`**, following
    the bilinear-pairing decision (expansion file §II.7.a).
-3. **The Galois block needs four A/B pairs, not two** (§II.2.0). The free integers
+3. **APPLIED 2026-08-14. The Galois block has four A/B pairs, not two** (§II.2.0). The free integers
    98–101 hold two; the other two go at fractional orders, as
    `the-field-of-fractions-and-localisation` at 53.2 already does.
-4. **The spec understates what is published** — seventeen pages carry more items
-   on disk than the spec records (expansion file §II.1.a). Any track concluding
-   "X does not exist" from the spec alone will re-mint published mathematics.
+4. **APPLIED at scaffold level 2026-08-14. The spec understates what is
+   published** — seventeen pages carry more items on disk than the spec records
+   (expansion file §II.1.a). This warning is retained for every future builder:
+   no track may conclude "X does not exist" from the spec alone and re-mint
+   published mathematics.
 
 ### To `commutative-algebra` (wave 2)
 
@@ -4591,10 +4623,16 @@ here.
    as $\mathbb{Q}\big(\sqrt{(-1)^{(p-1)/2}p}\big)$ is **deferred to you**. GA-3
    proves that a unique quadratic subfield exists; naming it is a Gauss-sum
    computation that belongs with quadratic reciprocity.
-8. **Kronecker–Weber** is named in no item and is yours if you want it.
-9. The **closed form for the number of monic irreducibles over $\mathbb{F}_q$**
-   needs Möbius inversion, published at snapshot 203 — above the Galois block but
-   below you. GA-3 proves only the existence statement (§II.12.b item 6).
+8. **APPLIED 2026-08-14. Kronecker–Weber** is minted on GA-3 as
+   `thm-kronecker-weber`; number theory cites it and owns its arithmetic
+   consequences.
+9. **APPLIED 2026-08-14.** The **closed form for the number of monic
+   irreducibles over $\mathbb{F}_q$** needs Möbius inversion, published at
+   snapshot 203 — above the Galois block but below this block. GA-3 proves only
+   the divisor-sum and existence statements (§II.12.b item 6); number theory
+   MT-9 now mints
+   `cor-number-of-monic-irreducible-polynomials-over-a-finite-field` by citing
+   that identity and the published inversion theorem.
 
 ### To `combinatorics` (wave 1, concurrent)
 
@@ -4624,21 +4662,29 @@ here.
 ### To `differential-geometry` (wave 3)
 
 14. Not opened, per the seam contract: no Lie group, Lie algebra or abstract Lie
-    structure theory appears anywhere in this lane's output. X-2's Jordan–Chevalley
-    decomposition (companion §II.6) is stated for a single operator on a
-    finite-dimensional space and is available to you.
+    structure theory appears anywhere in this lane's output. X-2 owns
+    `def-semisimple-and-nilpotent-linear-endomorphisms` and
+    `thm-additive-jordan-chevalley-decomposition` for a single operator on a
+    finite-dimensional space; DG-30 cites them under R-5.
 
 ### Unresolved seams
 
-15. **Whether GA-1 keeps the algebraic closure.** §II.2's GA-1 argues to keep it
+15. **APPLIED 2026-08-14: GA-1 keeps the algebraic closure.** §II.2's GA-1 keeps it
     (~12 items) because `commutative-algebra` and `number-theory` both want
     $\overline{F}$ and no other track owns it. If the orchestrator cuts it, GA-1
     falls to about 30 items and **every later definition acquires an
     ambient-normal-extension hypothesis** — that consequence should be recorded
-    in the decision rather than discovered during authoring.
+    in the decision rather than discovered during authoring. The owner chose
+    the first course, so no ambient-normal-extension fallback is inserted.
 16. **The concrete insoluble quintic is homed on X-1's companion**, not on GA-4's,
     because it needs $\mathbb{C}$ algebraically closed. GA-4 proves the transitive-
     subgroup lemma so that page has it. If the orchestrator re-orders the block
     relative to X-1, this pairing must move with it.
-17. **X-2's Cauchy interlacing and Weyl block is single-sourced** (§II.12.b item 1)
-    and needs a second treatment or a recorded drop before authoring.
+17. **Historical warning, superseded by item 18:** X-2's Cauchy interlacing and
+    Weyl block was initially single-sourced (§II.12.b item 1).
+
+18. **APPLIED 2026-08-14.** X-2's operator interlacing/Weyl material carries
+    the binding second-independent-treatment gate in the source matrix and
+    §II.12.b. No second locator was adjudicated by the reconciliation, so the
+    builder must verify and record one before authoring rather than inventing a
+    citation or silently dropping the results.

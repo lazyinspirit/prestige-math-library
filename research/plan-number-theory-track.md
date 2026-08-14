@@ -36,7 +36,10 @@ abstract-algebra Galois/cyclotomic/finite-field theory, published metric
 completion, and planned GT-17 \(\mathbb Z_p\).  Because the analytic anchor
 currently precedes the commutative-algebra terminus, MT-18 legally consumes
 MT-13 and gives a complete Hasse--Minkowski proof rather than an unproved
-remark.
+remark.  The subjects-01 reconciliation also places the Möbius formula for
+monic irreducibles on MT-9, successive minima and Minkowski's second theorem
+on MT-22, and the arithmetic consequences of GA-3's Kronecker--Weber theorem
+on MT-24.
 
 **Amendments owed and unresolved references.** CA-18 owes stable ids for
 Jensen/Hadamard/log-derivative machinery; CA-21/22 must preserve their named
@@ -133,10 +136,11 @@ block normalises \(|x|_p=p^{-v_p(x)}\).
    Pell equations remain because continued fractions give a complete
    elementary treatment.
 6. **Class field theory and higher reciprocity.** Ideles, Artin reciprocity,
-   the existence theorem of class field theory, cubic and higher reciprocity,
-   and the Kronecker--Weber theorem form a later subject.  Frobenius in a
-   finite Galois extension and its cyclotomic use are included; they do not
-   presume class field theory.
+   the existence theorem of class field theory, and cubic and higher
+   reciprocity form a later subject.  The owner-authorised exception is
+   Kronecker--Weber: GA-3 proves it, and MT-24 cites it for its arithmetic
+   consequences.  Frobenius in a finite Galois extension and its cyclotomic
+   use are included; neither presumes the rest of class field theory.
 7. **Additive and automorphic theory beyond the named remit.** Waring's
    problem, Goldbach-type questions, the circle method, modular forms,
    automorphic \(L\)-functions, and sieve theory beyond the elementary
@@ -908,6 +912,7 @@ Dirichlet-series pages.
 | `prop-divisor-functions-under-dirichlet-convolution` | `prop` | \(\tau=\mathbf1*\mathbf1\) and \(\sigma_k=\mathbf1*\operatorname{id}_k\); hence both are multiplicative and \(\tau(p^a)=a+1\), \(\sigma_k(p^a)=1+p^k+\cdots+p^{ak}\). | L/L; Hackman F.II and F.IV; Crisman Ch. 19 §§19.1--19.2. |
 | `thm-von-mangoldt-divisor-sum-identity` | `thm` | For every positive \(n\), \(\sum_{d\mid n}\Lambda(d)=\log n\), equivalently \(\mathbf1*\Lambda=\log\). | L/L; Sanders p. 4 and Kedlaya Def. 2.9.  Expand the canonical prime factorisation and count its prime powers. |
 | `cor-von-mangoldt-mobius-inversion-formula` | `cor` | \(\Lambda=\mu*\log\), where \(\mu\) is the already-published number-theoretic Möbius function. | L/A; Hackman F.III and Sanders p. 4.  Apply `cor-classical-mobius-inversion` to the preceding divisor sum; do not restate the inversion theorem. |
+| `cor-number-of-monic-irreducible-polynomials-over-a-finite-field` | `cor` | If \(N_n(q)\) is the number of monic irreducible polynomials of degree \(n\) over \(\mathbb F_q\), then \(N_n(q)=\frac1n\sum_{d\mid n}\mu(d)q^{n/d}\). | L/A; cite GA-3's identity \(\sum_{d\mid n}dN_d(q)=q^n\) and apply the published `cor-classical-mobius-inversion`.  This later page supplies the closed form without moving Möbius inversion below its published position or re-proving finite-field factorisation. |
 | `prop-liouville-convolution-square-indicator` | `prop` | \((\mathbf1*\lambda)(n)\) equals \(1\) when \(n\) is a square and \(0\) otherwise. | L/L; Kedlaya Ch. 2 examples; proof prime-by-prime from the finite alternating sums. |
 | `def-mertens-function` | `def` | The Mertens function is \(M(x)=\sum_{n\le x}\mu(n)\) for real \(x\ge1\). | L/NA; Sanders p. 4.  The convention is right-continuous because the index condition is \(n\le x\). |
 
@@ -1811,6 +1816,8 @@ page inherits MT-17's separately recorded completion cost.
 | `def-full-euclidean-lattice-and-covolume` | `def` | A full lattice in \(\mathbb R^n\) is the integer span of a real basis; its covolume is the absolute determinant of any basis matrix. | L/NA; Milne §4; Conrad--Landesman Ch. 25.  Unimodular changes prove basis independence. |
 | `lem-blichfeldt-lattice-point-principle` | `lem` | If a measurable set \(S\subset\mathbb R^n\) has volume greater than the covolume of a full lattice \(\Lambda\), two distinct points of \(S\) differ by an element of \(\Lambda\). | L/L; Milne Lemma 4.2; Stein §7.1.  Reduce to a fundamental parallelotope and apply finite or measure-theoretic pigeonhole with boundary handled explicitly. |
 | `thm-minkowski-convex-body-theorem` | `thm` | If \(C\subset\mathbb R^n\) is convex, centrally symmetric, and measurable with \(\operatorname{vol}(C)>2^n\operatorname{covol}(\Lambda)\), then \(C\) contains a nonzero point of \(\Lambda\). | L/L; Milne Thm. 4.4; Stein Thm. 7.1.3.  Apply Blichfeldt to \(\tfrac12C\); convexity and symmetry put the difference back in \(C\). |
+| `def-successive-minima-of-a-convex-body-with-respect-to-a-lattice` | `def` | For a centrally symmetric convex body \(C\subset\mathbb R^n\) and a full lattice \(\Lambda\), \(\lambda_i(C,\Lambda)\) is the infimum of \(\lambda>0\) for which \(\lambda C\cap\Lambda\) spans a real subspace of dimension at least \(i\). | L/NA; standard geometry-of-numbers convention.  Record \(0<\lambda_1\le\cdots\le\lambda_n<\infty\) and keep the body/lattice arguments explicit. |
+| `thm-minkowski-second-theorem-on-successive-minima` | `thm` | For the preceding data, \[\frac{2^n}{n!}\operatorname{covol}(\Lambda)\le \lambda_1\cdots\lambda_n\operatorname{vol}(C)\le 2^n\operatorname{covol}(\Lambda).\] | L/L; the standard successive-minima proof, cross-checked against Dummit's *Number Theory, Part 9*.  This is the exact supplier needed by combinatorics CB-32's full Freiman theorem. |
 | `thm-ring-of-integers-and-ideals-are-full-lattices` | `thm` | The Minkowski images of \(\mathcal O_K\) and every nonzero fractional ideal are full lattices in \(\mathbb R^{[K:\mathbb Q]}\). | L/L; Milne Prop. 4.5; Stein §7.1.  An integral basis and a fractional-ideal \(\mathbb Z\)-basis span the real embedding space. |
 | `thm-covolume-of-an-ideal-lattice` | `thm` | With the unscaled embedding,
 \[\operatorname{covol}(\sigma(\mathfrak a))=2^{-r_2}\sqrt{|d_K|}\,N\mathfrak a
@@ -1932,8 +1939,8 @@ beyond its cited predecessors.
 - **Requires:** MT-3, MT-19--MT-21; GA-3's cyclotomic polynomials,
   \(\mathbb Q(\zeta_n)/\mathbb Q\), degree \(\varphi(n)\), Galois
   isomorphism with \((\mathbb Z/n\mathbb Z)^\times\), and existence and
-  uniqueness of the index-two subfield for odd prime level.  Those Galois
-  facts are cited, not re-minted.
+  uniqueness of the index-two subfield for odd prime level, together with
+  GA-3's `thm-kronecker-weber`.  Those Galois facts are cited, not re-minted.
 - **Primary backing:** Milne Ch. 6 “Cyclotomic Extensions,” pp. 95--104,
   Props. 6.2, Thm. 6.4, Lemma 6.5, Remark 6.6, and Ch. 8 Examples
   8.18--8.19.  Independent full-note treatment: Conrad--Landesman Chs. 10--11
@@ -1944,7 +1951,7 @@ beyond its cited predecessors.
 
 | id | kind | statement | provenance and locator |
 |---|---|---|---|
-| `def-conductor-of-a-cyclotomic-field` | `def` | If \(K=\mathbb Q(\zeta_n)\), its cyclotomic conductor is the least \(f\ge1\) such that \(K\subseteq\mathbb Q(\zeta_f)\). | L/NA; Milne Remark 6.6; Conrad--Landesman Remark 11.7.  Existence comes from \(n\) and leastness from well-ordering.  This is neither the Artin conductor of a character nor Kronecker--Weber for every abelian field. |
+| `def-conductor-of-a-cyclotomic-field` | `def` | If \(K=\mathbb Q(\zeta_n)\), its cyclotomic conductor is the least \(f\ge1\) such that \(K\subseteq\mathbb Q(\zeta_f)\). | L/NA; Milne Remark 6.6; Conrad--Landesman Remark 11.7.  Existence comes from \(n\) and leastness from well-ordering.  This is neither the Artin conductor of a character nor the conductor of an arbitrary abelian field supplied existentially by Kronecker--Weber. |
 | `thm-cyclotomic-ring-of-integers` | `thm` | For every \(n\ge1\), \(\mathcal O_{\mathbb Q(\zeta_n)}=\mathbb Z[\zeta_n]\); if \(f\) is the reduced conductor, \(1,\zeta_f,\dots,\zeta_f^{\varphi(f)-1}\) is an integral basis. | L/L; Milne Prop. 6.2(b), Thm. 6.4(b); Conrad--Landesman Thms. 10.1 and 11.6.  Prove the prime-power case by discriminant/index control, then combine coprime prime powers with the sourced compositum integer-ring theorem.  Integrality of \(\zeta_n\) alone is not maximality. |
 | `thm-discriminant-of-a-cyclotomic-field` | `thm` | If \(f>1\) is the reduced conductor and \(K=\mathbb Q(\zeta_f)\), then
 \[d_K=(-1)^{\varphi(f)/2}{f^{\varphi(f)}\over\prod_{\ell\mid f}\ell^{\varphi(f)/(\ell-1)}};
@@ -1962,6 +1969,7 @@ with distinct \(\mathfrak P_i\), each of residue degree \(d\), so \(edg=\varphi(
 | `thm-conductor-of-a-full-cyclotomic-field` | `thm` | The conductor of \(\mathbb Q(\zeta_n)\) is \(n\), except that it is \(n/2\) when \(n\equiv2\pmod4\); in particular \(\mathbb Q(\zeta_{2m})=\mathbb Q(\zeta_m)\) for odd \(m\), and \(\mathbb Q(\zeta_2)=\mathbb Q\) has conductor one. | L/L; Milne Remark 6.6; Conrad--Landesman Remark 11.7.  The equality follows from \(-\zeta_m\).  For reduced indices, compare each prime-power ramification index in an inclusion \(\mathbb Q(\zeta_f)\subseteq\mathbb Q(\zeta_g)\): divisibility of ramification indices forces every prime exponent in \(f\) to be no larger than its exponent in reduced \(g\), hence \(f\mid g\). |
 | `cor-unramified-prime-decomposition-in-a-cyclotomic-field` | `cor` | If \(\ell\nmid f\), every prime above \(\ell\) has residue degree \(\operatorname{ord}_f(\ell)\), and their number is \(\varphi(f)/\operatorname{ord}_f(\ell)\). | L/A; Milne Example 8.18; the Frobenius element corresponds to the class of \(\ell\) modulo \(f\). |
 | `cor-complete-splitting-in-a-cyclotomic-field` | `cor` | If \(\ell\nmid f\), then \(\ell\) splits completely in \(\mathbb Q(\zeta_f)\) iff \(\ell\equiv1\pmod f\). | L/A; Milne Example 8.18; MT-21's trivial-Frobenius criterion. |
+| `cor-ramification-support-of-an-abelian-number-field` | `cor` | If \(K/\mathbb Q\) is finite abelian, GA-3's `thm-kronecker-weber` places \(K\) in some \(\mathbb Q(\zeta_f)\); hence every rational prime ramified in \(K\) divides \(f\). | L/A; cite Kronecker--Weber and the cyclotomic ramification criterion above, then use ramification in towers.  MT-24 owns this arithmetic consequence but does not re-prove the Galois theorem or claim a canonical minimal embedding conductor. |
 | `def-quadratic-gauss-sum-in-a-cyclotomic-field` | `def` | For an odd prime \(p\) and a fixed primitive \(p\)-th root \(\zeta_p\), set \(\tau_p=\sum_{a\bmod p}(a/p)\zeta_p^a\in\mathbb Z[\zeta_p]\). | L/NA; Reed Lecture 9 §2; UCSB Lecture XVII.  The Legendre symbol is the total MT-2 symbol, so the zero term contributes zero. |
 | `lem-galois-action-on-the-quadratic-gauss-sum` | `lem` | If \(\sigma_b(\zeta_p)=\zeta_p^b\), then \(\sigma_b(\tau_p)=(b/p)\tau_p\). | L/L; Reed Lecture 9; Milne Example 8.19.  Substitute \(a\mapsto b^{-1}a\) and use multiplicativity of the Legendre symbol. |
 | `thm-quadratic-gauss-sum-square` | `thm` | \(\tau_p^2=p^*=(-1)^{(p-1)/2}p\). | L/L; Reed Lecture 9 §2; UCSB Lecture XVII.  Expand, set one nonzero index equal to a multiple of the other, and evaluate the inner complete additive-character sum.  The stronger analytic sign of \(\tau_p\) under a complex embedding is not needed. |
@@ -2631,7 +2639,8 @@ a dependency target.
 
 ## 11. Amendments owed to sibling scaffolds
 
-These are requests only; this commission does not edit another track.
+This section began as requests only. Entries marked **applied** are now
+reconciliation receipts; unmarked entries remain requests.
 
 1. **Complex analysis CA-18:** expose stable item ids for Jensen's formula,
    the order of an entire function, the Hadamard product/factorisation of an
@@ -2653,10 +2662,12 @@ These are requests only; this commission does not edit another track.
    \(\mathbb Z\)-map for \(\mathbb Z_p\), and expose stable ids.  It should not
    also define \(\mathbb Q_p\); MT-17 owns the metric completion and proves the
    canonical comparison/fraction-field theorem.
-5. **Abstract algebra:** keep cyclotomic extension/Galois-group and unique
+5. **Abstract algebra — applied in the receiving algebra scaffold:** keep cyclotomic extension/Galois-group and unique
    index-two-subfield facts in GA-3 and general finite-character orthogonality
-   on its representation page.  Do not add cyclotomic integer rings, prime
-   decomposition, or arithmetic Frobenius there; MT-21/MT-24 own them.
+   on its representation page.  GA-3 also owns `thm-kronecker-weber`; MT-24
+   cites it and owns the arithmetic consequence above.  Do not add cyclotomic
+   integer rings, prime decomposition, or arithmetic Frobenius there;
+   MT-21/MT-24 own them.
 6. **Future quadratic-order/class-group interface:** the form--ideal
    correspondence, Gauss composition, indefinite reduction cycles, narrow
    class groups, and nonmaximal orders remain owed to a later scaffold.  MT-6

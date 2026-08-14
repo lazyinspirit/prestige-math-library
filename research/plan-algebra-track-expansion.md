@@ -2175,6 +2175,13 @@ the product of the normal Sylow subgroups and is the largest normal nilpotent
 subgroup — *added, cheap once the characterisation is in hand, and it is what
 `group-theory` will want*.
 
+The group-theory receipt fixes four stable consequences here:
+`thm-frattini-subgroup-is-nilpotent`,
+`cor-frattini-subgroup-is-contained-in-the-fitting-subgroup`,
+`thm-nilpotence-is-detected-modulo-the-frattini-subgroup`, and
+`thm-fitting-subgroup-of-the-frattini-quotient`. GT cites these exact ids and
+does not rebuild their finite-group proofs.
+
 *Applications.* every group of order $pq$ with $p<q$ has a normal Sylow
 $q$-subgroup, and is cyclic when $p \nmid q-1$ and otherwise is the unique
 nonabelian $\mathbb{Z}/q \rtimes \mathbb{Z}/p$ (Conrad Thms. 6.1, 6.3 — **this is
@@ -2341,6 +2348,21 @@ is minted here); **$R$-algebra**, both faces (a ring $A$ with $R\to Z(A)$; an
 $R$-module with a compatible bilinear product), one stated and the other proved
 equivalent, since RT-1 uses both; the tensor product of $R$-algebras.
 
+The stable flatness id is **`def-flat-module`**. Under R-1 MOD-3 owns that
+definition and the basic module-theoretic facts (tensor preserves injections;
+free/projective implies flat). Commutative algebra cites this id and owns only
+faithful flatness, local criteria and flat descent.
+
+For the differential-geometry consumer add the algebra-construction block:
+`def-tensor-algebra-of-a-module`,
+`thm-universal-property-of-the-tensor-algebra`,
+`thm-tensor-algebra-is-functorial`,
+`thm-tensor-product-of-algebra-homomorphisms`, and
+`thm-maps-out-of-a-tensor-algebra-quotient-are-maps-killing-the-relations`.
+These state the quotient-by-relations guard explicitly; DG cites them when
+forming exterior/Clifford/enveloping-style quotients and does not re-mint the
+underlying tensor algebra.
+
 **THMS.** the construction and its well-definedness (§II.4.b); **the universal
 property** (landmark); **uniqueness up to a unique isomorphism**, which is what
 licenses the definite article; **#19**, the guard, with an explicit demonstration
@@ -2476,6 +2498,14 @@ RT-1 cites this exact item); **Wedderburn–Artin** (landmark, by §II.5.b), wit
 $(n_i,D_i)$ unique up to permutation; $M_n(D)$ is semisimple; the simple modules
 of $\prod_i M_{n_i}(D_i)$ are the $D_i^{n_i}$, one per factor — the item RT-2
 turns into "the number of irreducibles".
+
+Homological algebra cites the following stable ids for that block:
+`thm-equivalent-characterizations-of-semisimple-modules`,
+`thm-finite-length-semisimple-module-characterizations`, and
+`thm-equivalent-characterizations-of-semisimple-rings`. The first carries the
+general choice ledger, the second is the choice-free finite-length form, and
+the third contains the splitting/projective equivalences. HA does not re-prove
+them when deriving dimension-zero and Ext/Tor vanishing consequences.
 
 *Integrality* (obligation #16, and the load-bearing row of §II.1.d). Part I homed
 this on MOD-2 with an explicit escape hatch — "if Beta finds MOD-2 over the cap,
@@ -2687,8 +2717,14 @@ on RT-4's path anyway — so Part I's implicit omission is withdrawn and Mackey 
 
 ### II.7.e Per-page consequences
 
-**RT-1** (`the-group-algebra-and-representations`). Part I's list stands. Change:
-Schur (b) is stated **over a splitting field** with the algebraically-closed case
+**RT-1** (`the-group-algebra-and-representations`). Part I's list stands. Before
+specialising to finite groups over fields, add the arbitrary-group,
+commutative-coefficient-ring interface: `def-group-ring`,
+`def-augmentation-map-and-augmentation-ideal-of-a-group-ring`, and
+`thm-group-actions-and-group-ring-modules-correspond`. Elements have finite
+support; the action/module dictionary is stated for arbitrary $G$ and
+commutative $k$. Group theory and HA-12 cite these ids and do not mint
+$\mathbb Z[G]$ or the augmentation again. Then Schur (b) is stated **over a splitting field** with the algebraically-closed case
 as a corollary, and the definition of a splitting field is minted here since RT-2
 and RT-3 both use it. Part I's `fs-` "Schur (b) holds over any field" keeps its
 witness $\mathbb{R}[\mathbb{Z}/3]$, and Part I's instruction to check the witness
@@ -2713,6 +2749,11 @@ later items add $k=\mathbb{C}$. `requires` loses
 `inner-product-spaces-and-orthogonality` and keeps `tensor-products-of-modules`
 (for $\chi_{V\otimes W}=\chi_V\chi_W$, where **#19 is cited**). New `fs-`: the
 $\langle\chi,\chi\rangle=1$ criterion stated without a splitting hypothesis.
+Under R-3 this page also mints
+`def-character-of-a-finite-abelian-group` (a homomorphism to
+$\mathbb C^\times$) and
+`thm-orthogonality-relations-for-characters-of-a-finite-abelian-group`.
+CB-27, CB-31 and CB-14c cite these exact ids; no combinatorics page mints them.
 Part I's trap (iv) — that $A_5$'s character table may not close cheaply — is
 resolved in the other direction and the table is **kept**: AG-1's published
 `thm-alternating-conjugacy-class-splitting-criterion` gives the two classes of
@@ -2746,6 +2787,15 @@ condition definitions and the integrality block), `monoidal-abelian-categories`
 (MOD-3's tensor product and `def-bimodule`), and `group-theory` (`def-dihedral-group`,
 and Schur–Zassenhaus left to that track). What follows is internal to the algebra
 track and is addressed to the orchestrator.
+
+**Subjects-01 application receipt (2026-08-14).** R-1 fixes
+`def-flat-module` and basic flatness at MOD-3. R-3 fixes the finite-abelian
+character definition and orthogonality at RT-3. MOD-3 also receives the
+tensor-algebra/functoriality/quotient-relations block requested by differential
+geometry; MOD-4 exposes the three stable semisimplicity ids requested by HA;
+AG-4 exposes the four Frattini/Fitting consequences requested by group theory;
+and RT-1 exposes the arbitrary group-ring/augmentation/action-module dictionary
+requested by both group theory and HA. All receiving tracks cite these ids.
 
 1. **Part I decisions this file withdraws or narrows**, each with its reason:
    - **AL-D6 is withdrawn** as stated (§II.1.c.1): the formal derivative and
@@ -2819,4 +2869,3 @@ records the withdrawals above (§II.8).
 items were found published). MOD-3, MOD-4, MOD-5 and RT-1…RT-4 keep Part I's
 estimates with the additions above; MOD-4 is the one at risk of the 60-item
 ceiling and should be sized at step 0 before authoring.
-

@@ -960,6 +960,13 @@ the locally finite refinement of that specifically constructed cover. This is a
 sufficient-hypothesis statement only; it makes no claim that AC is the exact
 strength of Stone's theorem.
 
+**Subjects-01 smoothing receipt.** The AC/DC charge on the two-stage shrinking,
+Urysohn-function and subordinate-partition construction is part of the
+partition supplied to differential geometry. DG-2 may smooth the resulting
+locally finite functions by explicit chartwise operations, but that does not
+erase or weaken the supplier's choice ledger; every smooth partition theorem
+using this route inherits the same charge.
+
 The remaining consequences keep their own hypotheses: compact spaces are
 paracompact without separation assumptions; closed subspaces inherit
 paracompactness; under countable choice, countably compact paracompact Hausdorff
@@ -1220,7 +1227,10 @@ paracompactness.
 
 ### T8c. Complete Metrizability and Baire   (spec order 277)
 
-DEFS: Baire space; comeager; completely metrizable; **Polish space**.
+DEFS: Baire space; comeager; completely metrizable; **Polish space**, with the
+stable id `def-polish-space`. Topology is the sole owner of that definition;
+probability PT-3, PT-7, PT-11 and PT-18 are declared downstream consumers, and
+PT-3 mints only `def-standard-borel-space` from it.
 
 **Do NOT re-mint "completely metrizable".** It is already made precise in
 `lem-complete-remetrisation` on `completeness-and-uniform-continuity`; this page
@@ -1406,7 +1416,11 @@ THMS: for metric Y the compact-open topology is compact convergence; uniform =>
 compact => pointwise convergence, all strict; uniform limits of continuous
 functions are continuous; C(X,Y) is complete for complete Y; ASCOLI-ARZELA in
 the metric and the general forms; STONE-WEIERSTRASS in the algebra and lattice
-forms, real and complex; the evaluation map is continuous iff X is locally
+forms, real and complex. In particular,
+`thm-complex-stone-weierstrass-self-adjoint` states that a unital
+self-adjoint complex subalgebra of $C(X,\mathbb C)$ which separates points is
+uniformly dense when $X$ is compact Hausdorff; FA-18 cites this exact supplier.
+The evaluation map is continuous iff X is locally
 compact Hausdorff; the exponential law; Dini's theorem in general form; Gelfand
 duality for compact Hausdorff X (statement).
 

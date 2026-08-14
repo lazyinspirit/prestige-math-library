@@ -260,9 +260,14 @@ deferred, not deleted.
    induction; the infinite case needs a direct-limit argument. Licensed by a
    van Kampen extension (directed covers). The Hawaiian earring is NOT this
    space and must never be offered as it (the ‡ catalogue already says so).
-5. **Jordan curve theorem.** Stays ‡ (`rem-jordan-curve-theorem`). Even with
-   $\pi_1(S^1)$ the standard proofs need genuinely more. Licensed by a
-   homology track, or a dedicated hard-analysis proof page.
+5. **Jordan curve theorem and conformal boundary transport.** The Jordan curve
+   theorem stays ‡ (`rem-jordan-curve-theorem`). Even with $\pi_1(S^1)$ the
+   standard proofs need genuinely more. Licensed by a homology track, or a
+   dedicated hard-analysis proof page. Consequently this topology scaffold
+   supplies no general Carathéodory or prime-end correspondence: complex-
+   analysis consumers may transport pointwise Euclidean boundary data only
+   when their conformal map is separately assumed or proved to extend to a
+   homeomorphism of closures. Prime ends remain a named future compactification.
 6. **Invariance of domain; dimension invariance for general $n$.** Needs
    homology; stays ‡. The in-scope fragments ARE built: $\mathbb{R} \not\cong
    \mathbb{R}^n$ (EU-1, connectedness) and $\mathbb{R}^2 \not\cong
@@ -889,6 +894,17 @@ $\pi_1(X, x)$ on the fiber, with orbit–stabiliser bookkeeping citing AA-6
 path-connected, $f$ lifts $\iff$ $f_*\pi_1(Y) \subseteq p_*\pi_1(E)$
 (landmark).
 
+**Stable subjects-01 interface.** The build exposes
+`def-evenly-covered-open-set`, `def-covering-map`,
+`def-lift-through-a-covering-map` and `def-fiber-and-degree-of-a-covering`,
+together with `thm-unique-lifting-for-covering-maps`,
+`thm-path-lifting-for-covering-maps`,
+`thm-homotopy-lifting-for-covering-maps`,
+`thm-covering-map-induces-injective-fundamental-group-map` and
+`thm-covering-space-lifting-criterion`. The last theorem retains exactly the
+printed connected and locally path-connected hypothesis on $Y$; local
+path-connectedness is not moved into `def-covering-map`.
+
 FS: every local homeomorphism is a covering map (witness: the restriction of
 a genuine covering to a half-open interval — buildable the moment HT-4's
 $\mathbb{R} \to \mathbb{R}/\mathbb{Z}$ exists; since that is LATER, the
@@ -1065,6 +1081,16 @@ non-regular covering contrasted once a non-regular example closes from
 available material (the standard non-regular examples live over wedges —
 buildable from HT-5's wedge; else drop with note); the deck group of
 $\mathbb{R} \to S^1$ computed.
+
+**Stable subjects-01 interface.** Use `def-universal-cover`,
+`def-deck-transformation-and-deck-group` and `def-regular-covering`;
+`thm-existence-of-the-universal-cover` keeps the connected, locally
+path-connected and semilocally simply connected hypotheses;
+`thm-classification-of-connected-covering-spaces` classifies connected
+coverings over a base with those same hypotheses by conjugacy classes of
+subgroups; `thm-deck-group-as-normalizer-quotient` and
+`thm-regular-covering-characterizations` carry the formulas printed above.
+These are the exact suppliers cited by DG-20, DG-23, DG-26, DG-29 and DG-34.
 
 Traps. (i) The universal-cover topology (#19) is the hardest well-definedness
 obligation in the block: the basis condition and the evenly-covered

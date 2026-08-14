@@ -56,6 +56,10 @@ empty state was verified from `research/plan-spec.json`; no immutable item id is
 affected. The four kept planned ids retain their companions. Every new A page
 has the same-id `-examples` companion, and every B page is a leaf.
 
+**Owner-authorised 2026-08-14: APPLIED.** The two empty omnibus ids and their
+companions are retired, and the table above is the new HA-1--HA-17 order. No
+published page or immutable item id moves.
+
 ### Full texts obtained and source corpus
 
 Two standard textbook texts were obtained in full and read over the exact
@@ -120,11 +124,12 @@ B-leaf rules at splice; and obtain stable semisimplicity-equivalence ids from
 
 There are **no unresolved item-level forward references within the block**.
 Each A page closes with `Forward references: NONE`; the order in §5 is a
-topological order. The unresolved splice/stable-id seams are exactly: the
-stable item ids on the fixed RT-1 group-ring/action page, tensor/flat stable
-item ids, semisimplicity stable item ids, the final differential-geometry
-anchor, the final `MA-9`
-projective/injective ids, and commutative algebra's locally defined
+topological order. The fixed RT-1 group-ring/action ids, MOD-3 tensor/flat ids,
+and MOD-4 semisimplicity ids remain unauthored supplier dependencies, not
+unresolved ownership questions. The owner-authorised final
+differential-geometry anchor is settled in this scaffold; the excluded global
+plan splice still has to enact it. The remaining naming checks are the final
+`MA-9` projective/injective ids and commutative algebra's locally defined
 minimal-resolution theorem. The ordinary localization seam is closed locally
 on `HA-14`. None is disguised as an A-item dependency on a later page.
 
@@ -1997,6 +2002,8 @@ The abstract-algebra track owns tensor products and flat modules. This page
 derives tensor, proves that resolving the right module or the left module gives
 the same Tor bifunctor, and then makes precise the slogan that Tor detects
 torsion and flatness. Noncommutative handedness is printed in every definition.
+Under R-1 it cites MOD-3 `def-flat-module` and MOD-3's basic projective-implies-
+flat theorem; it does not mint or re-prove either module-level fact.
 
 ### A-page items, in dependency order
 
@@ -2026,9 +2033,9 @@ torsion and flatness. Noncommutative handedness is printed in every definition.
 
 8. `def-tensor-double-complex-of-two-projective-resolutions` — **definition**
    `[LN]`. $K_{p,q}=Q_p(N)\otimes_RP_q(M)$ in the first quadrant.
-9. `lem-projective-modules-are-flat` — **lemma** `[LA]`, citing the tensor
-   page's definition and the published direct-summand characterisation of
-   projectives.
+9. `rem-projective-modules-are-flat-is-supplied-by-mod-three` — **remark**
+   `[LN]`, citing MOD-3 `def-flat-module` and its stable projective-implies-flat
+   theorem; this page uses the fact and does not re-prove it.
 10. `lem-the-rows-of-the-augmented-tensor-double-complex-are-exact` —
     **lemma** `[LA]`, because every $Q_p(N)$ is flat as a right module.
 11. `lem-the-columns-of-the-augmented-tensor-double-complex-are-exact` —
@@ -2320,6 +2327,12 @@ that computes it. It also records group homology as the Tor-dual construction
 because the same resolution and handedness check make that addition cheap.
 Interpretations of $H^1$ by crossed homomorphisms and of $H^2$ by group
 extensions belong to `group-theory` and are not re-minted here.
+
+RT-1 supplies `def-group-ring`,
+`def-augmentation-map-and-augmentation-ideal-of-a-group-ring`, and
+`thm-group-actions-and-group-ring-modules-correspond` for arbitrary groups and
+commutative coefficient rings. HA-12 cites those ids; item 1 below fixes only
+the integral/trivial-module convention.
 
 ### A-page items, in dependency order
 
@@ -4316,14 +4329,14 @@ at general unbounded replacement and enhancements.
 
 This section is the only legal effect this file has on another track.
 
-1. **Live plan dependency repoint.** At splice, change the retained
+1. **APPLIED AT SCAFFOLD LEVEL 2026-08-14 — live plan dependency repoint.** At splice, change the retained
    `chain-complexes-and-homology` page's `requires` from the stale
    `exact-sequences-and-the-diagram-lemmas` placeholder to
    `abelian-categories` and `exactness-and-the-member-calculus`. `HA-4` requires
    `the-diagram-lemmas-in-an-abelian-category`. The category scaffold explicitly
    requested this repoint.
 
-2. **Retire two empty omnibus ids and expand the band.** Before any authoring,
+2. **OWNER-AUTHORISED AND APPLIED 2026-08-14 — retire two empty omnibus ids and expand the band.** Before any authoring,
    retire `long-exact-sequences-and-mapping-cones` and `ext-and-tor` plus their
    companions. Keep `chain-complexes-and-homology`,
    `projective-and-injective-resolutions`, `derived-functors`, and
@@ -4331,7 +4344,7 @@ This section is the only legal effect this file has on another track.
    through `HA-17` order. Since all affected `items` arrays are empty, no item
    id or authored page is renamed.
 
-3. **Abstract algebra tensor page.** It must publish stable ids for balanced
+3. **R-1 APPLIED 2026-08-14 — abstract algebra tensor page.** It publishes stable ids for balanced
    maps, `def-bimodule`, tensor of a right and left module, functoriality,
    associativity/unit/symmetry in the commutative case, right exactness,
    `def-flat-module`, projective implies flat, and Hom–tensor adjunction. The
@@ -4339,7 +4352,7 @@ This section is the only legal effect this file has on another track.
    `HA-11`; it does not re-mint any. Noncommutative Tor is blocked if the
    right/left typing or bimodule seam is omitted.
 
-4. **Abstract algebra/group theory reconciliation.** Extend RT-1,
+4. **APPLIED 2026-08-14 — abstract algebra/group theory reconciliation.** Extend RT-1,
    `the-group-algebra-and-representations`, to state the finite-support group
    algebra, augmentation, trivial module, and action/module dictionary for an
    arbitrary group and commutative coefficient ring before specialising to
@@ -4355,7 +4368,7 @@ This section is the only legal effect this file has on another track.
    the Schur multiplier, and universal central extensions. The two tracks must
    add agreement items, not two definitions of $H^1/H^2$.
 
-5. **Differential geometry placement and citations.** The seam file's anchor
+5. **OWNER-AUTHORISED AND APPLIED 2026-08-14 — differential geometry placement and citations.** The seam file's anchor
    `spectral-sequences-examples` would split this expanded block because
    `HA-16` and `HA-17` now follow that retained companion. Repoint the placement
    anchor to `grothendieck-spectral-sequences-and-computations-examples`, the
@@ -4380,7 +4393,7 @@ This section is the only legal effect this file has on another track.
    theorem; it uses comparison/homotopy uniqueness here rather than expecting a
    ring-free minimality theorem from this track.
 
-7. **Prior combined scaffold.** Add a supersession note at the
+7. **APPLIED 2026-08-14 — prior combined scaffold.** Add a supersession note at the
    homological-algebra section of `research/plan-combinatorics-and-categories.md`
    pointing to this file. Do not edit or delete its prose during this commission.
 
@@ -4390,13 +4403,16 @@ This section is the only legal effect this file has on another track.
    as dependencies rather than defining object-level lifting/extension
    properties again.
 
-9. **Page-summary and size sweep at splice.** Every inserted A page receives
+9. **APPLIED AT SCAFFOLD LEVEL 2026-08-14 — page-summary and size sweep at splice.** Every inserted A page receives
    the two-paragraph summary described in §21 and stays at or below 60 items.
    No B page receives an authored summary or becomes a dependency target.
 
-10. **Abstract-algebra semisimplicity page.** Preserve
+10. **APPLIED 2026-08-14 — abstract-algebra semisimplicity page.** Preserve
     `chain-conditions-and-semisimple-modules` before this block and give its
-    splitting/projective/injective equivalences stable item ids. `HA-9` and
+    splitting/projective/injective equivalences stable item ids:
+    `thm-equivalent-characterizations-of-semisimple-modules`,
+    `thm-finite-length-semisimple-module-characterizations`, and
+    `thm-equivalent-characterizations-of-semisimple-rings`. `HA-9` and
     `HA-10` cite those ids for global dimension zero and positive Ext/Tor
     vanishing; they do not re-prove Wedderburn–Artin or chain conditions.
 
@@ -4409,8 +4425,8 @@ This section is the only legal effect this file has on another track.
 | stable group-ring/action item ids | page ownership is settled at abstract algebra RT-1, `the-group-algebra-and-representations`, but its `items` array is still empty | extend RT-1 as agreed with group theory, preserve its authored stable ids, and substitute those ids into `HA-12`; group theory does not mint a second group ring | all of `HA-12`; the page-id seam itself is closed |
 | group-extension item id for LHS | group theory fixes the supplying page as `GT-9`, `group-extensions-complements-and-schur-zassenhaus`, but that scaffold is not yet authored | preserve or mechanically substitute GT-9's stable definition id into the LHS theorem on `HA-17` | only the LHS application; the abstract Grothendieck spectral sequence survives |
 | exact tensor/flat item ids | abstract-algebra tensor page is planned with empty `items`; enrichment §MOD-3 promises the content | preserve its promised ids (especially `def-bimodule` and `def-flat-module`) and substitute authored stable ids before building `HA-10`/`HA-11` | Tor, tensor-derived, and Künneth pages; Ext survives |
-| semisimplicity equivalence item ids | `chain-conditions-and-semisimple-modules` is planned with empty `items` | author its splitting/all-modules-projective/all-modules-injective equivalences first and substitute their stable ids into `HA-9`/`HA-10` | only the semisimple dimension-zero and vanishing consequences; the remaining Ext/Tor theory survives |
-| differential-geometry final anchor | its scaffold did not yet exist; seam file names the now-internal `spectral-sequences-examples` anchor | repoint to the final HA companion as Amendment 5 | no mathematics, but an unreconciled splice would split this block |
+| semisimplicity equivalence item ids | `chain-conditions-and-semisimple-modules` is planned with empty `items`, but MOD-4 now fixes `thm-equivalent-characterizations-of-semisimple-modules`, `thm-finite-length-semisimple-module-characterizations`, and `thm-equivalent-characterizations-of-semisimple-rings` | author those exact supplier ids first and cite them from `HA-9`/`HA-10` | only the semisimple dimension-zero and vanishing consequences; the remaining Ext/Tor theory survives |
+| differential-geometry final anchor | owner-authorised scaffold repoint is applied: the old internal `spectral-sequences-examples` anchor is retired for this purpose | the later global splice must use HA-17's final companion `grothendieck-spectral-sequences-and-computations-examples`; `plan-spec.json` is outside this commission | no mathematics; the prose seam is closed |
 | projective/injective object ids from `MA-9` | category scaffold is complete prose but unauthored, so final stable ids may differ at build | preserve the proposed ids or substitute them mechanically; never mint duplicates | abstract-category form of `HA-5`–`HA-7`; module instances remain available |
 | ordinary localization/calculus-of-fractions prerequisite | no published category item exists and the category track assigns derived localization to homological algebra | `HA-14` therefore mints the narrow category localization machinery it needs, sourced by Weibel/Stacks/Yekutieli; no external amendment required | closed by this scaffold |
 | commutative algebra's request for “minimal-resolution uniqueness” | minimality needs local-ring/radical data unavailable here | commutative algebra authors the minimal theorem and cites `HA-5` comparison uniqueness; Amendment 6 records exact inputs | only its Betti/minimal-resolution items |

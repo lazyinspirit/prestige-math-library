@@ -283,7 +283,7 @@ records exactly where the line falls.
 | 3 | **The Fourier transform, Fourier series, Plancherel, the Riemann–Lebesgue lemma, Paley–Wiener** | SEAMS §4: `functional-analysis`, and it lands above. | the `functional-analysis` block. **Consequence recorded**: `rem-riesz-fischer` on the ‡ catalogue asserts "$L^2$ is isomorphic to $\ell^2$ through Fourier coefficients"; MT-14 proves the completeness half and **not** the Fourier half, and §7 says so. |
 | 4 | **Sobolev spaces, weak derivatives, distributions** | SEAMS §4: `pde` and `functional-analysis`. | those tracks. |
 | 5 | **Kolmogorov's extension theorem and infinite product measures; conditional expectation; martingales; weak convergence of measures and tightness; characteristic functions; the CLT** | SEAMS §4: `probability-theory`. | that track. **Partial**: MT-11 builds **finite** products, which is exactly what the remit assigns and exactly what `probability-theory` will need as its base case. The countably infinite product on $\{0,1\}^{\mathbb{N}}$ is used by MT-22 as an *example* built by hand from Carathéodory, not as a general theorem — see §D8. |
-| 6 | **Riesz–Thorin interpolation** | its proof runs the Hadamard three-lines theorem, and complex analysis lands **above** this track (`complex-differentiability-and-cauchy-riemann` and the rest of the CA block are at 303+). | the `complex-analysis` block. **Partial**: MT-17 proves **Marcinkiewicz interpolation** between weak $(1,1)$ and $L^\infty$, which is purely real and is all the maximal function needs. §8 amendment 4 proposes `complex-analysis` add Riesz–Thorin now that $L^p$ sits below it. |
+| 6 | **General complex interpolation beyond the Riesz–Thorin theorem** | R-6 assigns the exact Riesz–Thorin theorem to this track, with the special strip argument proved on MT-17; later interpolation scales still need the complex/functional-analysis blocks. | MT-17 now mints `thm-riesz-thorin-interpolation`; `complex-analysis` and `functional-analysis` cite it. Marcinkiewicz remains the independent real-variable companion. |
 | 7 | **Haar measure on a locally compact group** | needs topological groups, which the library does not build below the anchor. | a topological-groups page. MT-20 gives the representation theorem Haar measure is usually constructed with, so the remaining cost is the group structure alone; recorded so it is not rediscovered. |
 | 8 | **The Daniell integral; the Bourbaki functional approach; the Henstock–Kurzweil comparison** | `rem-henstock-kurzweil-vs-lebesgue` records the HK comparison as ‡ and `DEFERRED.md` §1 keeps it. The HK integral itself is in scope elsewhere and is not built here. | an HK-integral page. The Daniell route is a *different construction of the same object*; building it as well would double the track for no new theorem, and the library's own rule is that duplication across generality levels is intentional only where the proofs genuinely differ in tools. Recorded rather than silently omitted. |
 | 9 | **Geometric measure theory**: rectifiability, the area and coarea formulas, currents, the structure theorem | rests on Hausdorff measure *plus* Lipschitz analysis in $\mathbb{R}^n$ well beyond this track | a geometric-measure-theory track. **Partial**: MT-21 builds Hausdorff measure and dimension, $\mathcal{H}^0$ = counting, $\mathcal{H}^n = c_n\lambda_n$ on $\mathbb{R}^n$, and the dimension of the Cantor set. |
@@ -691,8 +691,9 @@ discharged.
 
 ## 8. Amendments owed to other scaffolds, and unresolved seams
 
-Per SEAMS §0.1 this file writes nothing outside itself. Everything below is
-addressed to the orchestrator, who applies it at reconciliation.
+This section began as the lane's outbound request ledger. Entries marked
+**Applied** are now reconciliation receipts; the remaining entries retain
+their original addressee.
 
 ### 8A. Amendments owed
 
@@ -744,12 +745,10 @@ routed to that scaffolder explicitly.
   | 15 — distributions, $\bar\partial$ distributionally | "rows 1 and 6" | **re-point**: `functional-analysis` and a sheaf track. |
   | 17 — Looman–Menchoff | "the proof is a genuine piece of real-variable measure theory" | **unblocked in principle.** Flag for reconsideration at that track's step 2. Its CA-1 currently plans a `rem-` recording the theorem in the "this proof assumes continuous partials" form; that remark's scope wording must be re-checked either way. |
 
-  **New proposal to that track: it should take Riesz–Thorin interpolation.**
-  §2 row 6 here: the three-lines theorem is CA machinery and $L^p$ now sits below
-  it, so the natural home for Riesz–Thorin is a complex-analysis page, not this
-  one. MT-17's Marcinkiewicz theorem is the real-variable half and would be its
-  companion. If that track declines, the result is a genuine gap and should be
-  recorded as such by whoever declines it.
+  **Applied 2026-08-14 under R-6.** The earlier proposal that complex analysis
+  mint Riesz–Thorin is superseded. MT-17 mints
+  `thm-riesz-thorin-interpolation`; complex analysis cites it beside its
+  Hadamard three-lines theorem and does not mint a second interpolation item.
 
 **3. To `research/plan-probability-track.md` (`probability-theory`, wave 3, NEW).**
 
@@ -798,14 +797,13 @@ singularity — MT-8 plus MT-11's Tonelli, and the polar-coordinates formula, wh
 Integration on manifolds against a density or a Riemannian volume form is a
 Lebesgue integral in each chart glued by a partition of unity; the partition of
 unity is published (269) and the chart-wise integral and its change-of-variables
-invariance are MT-4 (linear) plus the $C^1$ change of variables, which **this
-track does not prove** — see §2 and MT-11's traps. That track needs the
+invariance are MT-4 (linear) plus the $C^1$ change of variables. **Applied under
+R-9:** MT-11 now proves that theorem unconditionally. Differential geometry needs the
 $C^1$-diffeomorphism change of variables for the *Lebesgue* integral. It is
 reachable from `fubini-and-change-of-variables` (237, Riemann) plus MT-9's
 comparison for continuous compactly supported integrands, and then a monotone-class
-extension. **If `differential-geometry` needs it in full generality, it should say
-so at reconciliation and this track will add it to MT-11** rather than have two
-tracks each assume the other proved it. Recorded as unresolved seam 4.
+extension. MT-11 owns the stable general theorem; differential geometry cites it
+and does not duplicate it. The former conditional seam is closed.
 
 **6. To the orchestrator, on splice mechanics.**
 
@@ -828,6 +826,10 @@ tracks each assume the other proved it. Recorded as unresolved seam 4.
   c. **Record the spec/disk divergence at the ‡ catalogues** (§0, correction 1) in
      whatever SEAMS successor the next commission reads, so no future scaffolder
      repeats the mistake of trusting `items: []` there.
+
+  **Applied at scaffold level 2026-08-14.** The publication-time `status: draft`
+  flip and the spec/disk warning are retained as explicit splice instructions.
+  No `_category.md`, item, library page, or plan-spec entry is changed here.
 
 **7. To `DEFERRED.md`.** §1's rows are discharged as tabulated in §7. That file is
 owner-maintained and its §6 step 4 ("delete the entry when it is discharged")
@@ -874,20 +876,21 @@ generalise `def-norm-and-normed-space`'s successor to an arbitrary
 $\mathbb{R}$- or $\mathbb{C}$-vector space and record the agreement; that is a new
 definition in that track, not an edit to the published one.
 
-**Seam 4 — the $C^1$ change of variables for the Lebesgue integral.** Neither
+**Seam 4 — the $C^1$ change of variables for the Lebesgue integral (settled by
+R-9).** Neither
 this track's remit list nor `differential-geometry`'s names it, and both need it.
 This track proves the **linear** change of variables
 $\lambda_n(T(E)) = \lvert\det T\rvert\,\lambda_n(E)$ on MT-4, which is what
 Lebesgue measure's own theory requires, and the polar-coordinates formula on
 MT-11, which is what MT-17 and MT-21 require. The general
 $C^1$-diffeomorphism theorem is a further page's worth of work.
-*Recommended ruling*: assign it to **this track**, as three or four items at the
+*Binding ruling*: assign it to **this track**, as three or four items at the
 end of MT-11, proved from the published Riemann change of variables
 (`fubini-and-change-of-variables`, 237) for continuous compactly supported
 integrands plus a monotone-class extension. It is measure theory, `pde` and
 `differential-geometry` both want it, and neither of them is the natural home.
-I have scaffolded it that way in MT-11 and marked the items **conditional on this
-ruling** so they can be lifted out cleanly if the orchestrator decides otherwise.
+The MT-11 block below is unconditional. PDE and differential geometry cite it;
+neither mints a second general change-of-variables theorem.
 
 ---
 
@@ -1197,7 +1200,7 @@ level.
 | 6.2 *The Dual of $L^p$* — **6.15** | `included` — MT-16. **Locator note: the duality theorem is 6.15, not 6.8**; 6.8 is the $L^1$/$L^\infty$ Hölder statement. |
 | 6.3 *Some Useful Inequalities* | `included` — MT-14 (Lyapunov interpolation) and MT-15 (Minkowski's integral inequality, Young's convolution inequality) |
 | 6.4 *Distribution Functions and Weak $L^p$* | `included` — MT-17's weak-type language and MT-11's layer cake |
-| 6.5 *Interpolation of $L^p$ Spaces* | **split**: Marcinkiewicz `included` at MT-17; **Riesz–Thorin `deferred`** — §2 row 6, its proof runs the Hadamard three-lines theorem and complex analysis lands above this track; §8 amendment 2 proposes `complex-analysis` take it |
+| 6.5 *Interpolation of $L^p$ Spaces* | `included` at MT-17: Marcinkiewicz is the real-variable theorem and R-6 assigns `thm-riesz-thorin-interpolation` here with its self-contained special strip argument. Complex and functional analysis cite it. |
 | 7.1 *Positive Linear Functionals on $C_c(X)$* — **7.2 The Riesz Representation Theorem** | `included` — MT-20 |
 | 7.2 *Regularity and Approximation Theorems* — 7.5, 7.8 | `included` — MT-20's regularity theory and Radon-Lusin |
 | 7.3 *The Dual of $C_0(X)$* — **7.17** (a second Riesz representation theorem, $M(X)\cong C_0(X)^*$) | `included` — MT-20's bounded version, stated concretely without the words "dual space" (§8 seam 2) |
@@ -1217,7 +1220,7 @@ level.** Rudin's sections are titled, not numbered.
 | Ch. 3 *$L^p$-Spaces* — convex functions and inequalities 61 (**3.5 Hölder and Minkowski, one theorem**), the $L^p$-spaces 65 (**3.11 completeness**), approximation by continuous functions 69 | `included` — MT-14 and MT-15. **Naming note: Rudin does not print "Riesz–Fischer" on 3.11**; his named Riesz–Fischer is 4.17 (orthonormal sets), and at p. 91 he says the name "is sometimes given to" $L^p$ completeness. **An item citing Rudin 3.11 as "Riesz–Fischer" must carry that gloss** or it is a citation-fidelity defect. |
 | Ch. 4 *Elementary Hilbert Space Theory*; Ch. 5 *Examples of Banach Space Techniques* | `out-of-scope` — `functional-analysis`. **Exception**: 4.17/4.18 are the source of the $\ell^2$ half of `rem-riesz-fischer`, which §7 keeps deferred. |
 | Ch. 6 *Complex Measures* — total variation 116 (**6.4**, finiteness), absolute continuity 120, **6.10 The Theorem of Lebesgue-Radon-Nikodym**, **6.12** (polar decomposition), **6.14 The Hahn Decomposition Theorem**, bounded linear functionals on $L^p$ 126, **6.19** (Riesz representation for $C_0(X)^*$) | `included` — MT-12, MT-13, MT-16, MT-20. **Locator notes: Hahn is 6.14 (6.19 is the $C_0$ representation) and the polar decomposition is 6.12.** Rudin's 6.10 uses **von Neumann's $L^2$ route**, which this track cannot follow (§D7). |
-| Ch. 7 *Differentiation* — derivatives of measures 135 (7.4 maximal weak-type with constant $3^k$, 7.7 Lebesgue points, 7.8, 7.10 nicely shrinking sets), the fundamental theorem of calculus 144 (7.11, **7.20 AC ⇒ FTC**), differentiable transformations 150 | `included` — MT-17, MT-18, MT-19. **"Differentiable transformations" is the $C^1$ change of variables**, which §8 seam 4 makes conditional at MT-11 — Rudin's is the source route to check against the published Riemann statement. **Rudin's distribution function at 7.1 is left-continuous** (convention ledger row 4) and an item citing it must convert. |
+| Ch. 7 *Differentiation* — derivatives of measures 135 (7.4 maximal weak-type with constant $3^k$, 7.7 Lebesgue points, 7.8, 7.10 nicely shrinking sets), the fundamental theorem of calculus 144 (7.11, **7.20 AC ⇒ FTC**), differentiable transformations 150 | `included` — MT-11, MT-17, MT-18, MT-19. R-9 makes the $C^1$ change-of-variables block unconditional at MT-11; Rudin is checked against the published Riemann statement. **Rudin's distribution function at 7.1 is left-continuous** (convention ledger row 4) and an item citing it must convert. |
 | Ch. 8 *Integration on Product Spaces* — measurability on cartesian products 160, product measures 163, **the Fubini theorem 164 (8.8)**, completion of product measures 167, convolutions 170, distribution functions 172 | `included` — MT-11 and MT-15. Rudin's "completion of product measures" is well-definedness #19. |
 | Ch. 9 *Fourier Transforms*; chs. 10–20 | `out-of-scope` — `functional-analysis` and `complex-analysis` |
 
@@ -1772,7 +1775,10 @@ $\mu(A)=\mu(B)$. A finitely additive $\mu$ on a $\sigma$-algebra is countably
 additive **iff** it is continuous from below **iff** it is continuous from above
 at $\emptyset$ (three-way equivalence, **landmark**; this is the theorem that
 explains what countable additivity buys). The **first Borel–Cantelli lemma**:
-$\sum_k\mu(E_k)<\infty \Rightarrow \mu(\limsup_k E_k)=0$. $\liminf$/$\limsup$
+$\sum_k\mu(E_k)<\infty \Rightarrow \mu(\limsup_k E_k)=0$. Its orientation
+remark points forward to probability PT-2 for the pairwise-independent
+converse and the stronger frequency law; neither is re-minted here.
+$\liminf$/$\limsup$
 inequalities: $\mu(\liminf E_k)\le\liminf\mu(E_k)$, and
 $\limsup\mu(E_k)\le\mu(\limsup E_k)$ **when $\mu(\bigcup E_k)<\infty$** — the
 Fatou lemma for sets, and MT-8 will note it is the special case of Fatou's lemma
@@ -2686,6 +2692,9 @@ alternative). **Every section of an $\mathcal{A}\otimes\mathcal{B}$-measurable s
 is measurable**, and every section of an $\mathcal{A}\otimes\mathcal{B}$-measurable
 function is measurable — pure $\sigma$-algebra, no measure, and it holds with **no
 $\sigma$-finiteness**; the converse fails badly and the witness is on the B page.
+The finite product construction is explicitly the base case for probability
+PT-3's countable and arbitrary products; general Kolmogorov extension remains
+reserved to probability and is not inferred from this finite theorem.
 For **$\sigma$-finite** $\mu,\nu$: $x\mapsto\nu(E_x)$ is $\mathcal{A}$-measurable,
 $y\mapsto\mu(E^y)$ is $\mathcal{B}$-measurable, and
 $\int\nu(E_x)\,d\mu = \int\mu(E^y)\,d\nu$ (**landmark**, well-definedness #18, by
@@ -2734,8 +2743,8 @@ consequently $\lambda_n(B(0,r)) = r^n\lambda_n(B(0,1))$ with
 $\lambda_n(B(0,1)) = \pi^{n/2}/\Gamma(n/2+1)$, and
 $\int_{\mathbb{R}^n}e^{-\lvert x\rvert^2}d\lambda_n = \pi^{n/2}$.
 
-*Conditional on §8 seam 4* — four items, liftable as a block if the orchestrator
-homes them elsewhere: **the $C^1$ change of variables for the Lebesgue integral**,
+*R-9 ownership block* — four unconditional items: **the $C^1$ change of variables
+for the Lebesgue integral**,
 $\int_{T(U)}f\,d\lambda_n = \int_U (f\circ T)\lvert\det DT\rvert\,d\lambda_n$ for a
 $C^1$ diffeomorphism $T$ of open sets, proved from the published Riemann statement
 on `fubini-and-change-of-variables` for continuous compactly supported integrands
@@ -2787,8 +2796,8 @@ topological spaces; second countability is doing the work, and the standard fail
 (the diagonal of a discrete space of cardinality $>\mathfrak{c}$) is worth a `rem-`
 so no later track over-cites it. (iv) The polar-coordinates theorem **defines**
 $\sigma$; it is not a corollary of a change of variables the track does not have.
-(v) The conditional block is marked in the item notes; if it is lifted, MT-17 and
-MT-21 are unaffected because they use only the polar formula.
+(v) R-9 fixes the general $C^1$ theorem here. PDE and differential geometry cite
+this block; MT-17 and MT-21 still use only the polar formula.
 
 **Generated items**: the two computed integrals ($\pi^2/6$, the low-dimensional ball
 volumes) as `ex-` items if the exact computation is unsourced; every counterexample
@@ -2922,7 +2931,9 @@ dresses, and the item says so. **The decomposition of a Borel measure on
 $\mathbb{R}$** into absolutely continuous, discrete and singular-continuous parts,
 using MT-6's atomic/atomless splitting: three parts, uniquely, with the Cantor
 measure as the singular-continuous witness — the concrete payoff, and the statement
-`probability-theory` will want.
+`probability-theory` will want. An orientation remark records that PT-10's
+conditional expectation is the probability-space application of this page's
+Radon--Nikodym theorem to $A\mapsto\int_A X\,d\mathbb P$ on a sub-$\sigma$-algebra.
 
 **FS.** Every measure is absolutely continuous or singular with respect to $\lambda$.
 An atomless Borel measure on $\mathbb{R}$ is absolutely continuous with respect to
@@ -3301,7 +3312,16 @@ in the form actually needed: a sublinear operator of weak type $(1,1)$ and of ty
 $(\infty,\infty)$ is of strong type $(p,p)$ for $1<p<\infty$) — proved by splitting
 $f = f\mathbf{1}_{\{\lvert f\rvert>t/2\}}+f\mathbf{1}_{\{\lvert f\rvert\le t/2\}}$
 and integrating the distribution function with MT-11's layer-cake formula; hence
-$\lVert Mf\rVert_p\le C_{n,p}\lVert f\rVert_p$ for $1<p\le\infty$. **The Lebesgue
+$\lVert Mf\rVert_p\le C_{n,p}\lVert f\rVert_p$ for $1<p\le\infty$.
+**Riesz--Thorin interpolation** (`thm-riesz-thorin-interpolation`, **landmark**,
+R-6): if a linear operator has endpoint bounds
+$T:L^{p_0}\to L^{q_0}$ and $T:L^{p_1}\to L^{q_1}$, then it has the interpolated
+bound $\lVert T\rVert_{p_\theta\to q_\theta}\le
+M_0^{1-\theta}M_1^\theta$ for $0<\theta<1$, with the reciprocal-exponent
+relations and infinite-endpoint conventions explicit. The proof includes the
+finite-simple-function reduction and the special strip three-lines argument
+needed here, so no later complex-analysis theorem is a spine dependency.
+**The Lebesgue
 differentiation theorem** (**landmark**): for $f\in L^1_{loc}(\mathbb{R}^n)$,
 $A_rf(x)\to f(x)$ as $r\to0^+$ for a.e. $x$ — proved by the standard three-step
 argument (continuous functions, MT-15's $C_c$ density, and the maximal inequality to
@@ -3346,8 +3366,9 @@ author who treats it as obvious has skipped the only genuinely topological step 
 the page. (ii) The $5^n$ constant comes from the covering lemma and is not optimal;
 the item must not claim optimality (Tao's Remark on Melas's sharp constant is the
 source note). (iii) Marcinkiewicz here is the **real-variable** theorem between
-weak $(1,1)$ and $L^\infty$; Riesz–Thorin is complex-analytic and is out of scope
-(§2 row 6). Do not let a proof reach for analytic interpolation. (iv) "For a.e. $x$"
+weak $(1,1)$ and $L^\infty$; R-6 separately assigns the exact Riesz--Thorin
+theorem to this page, using its self-contained special strip argument. Neither
+proof may be replaced by a forward citation. (iv) "For a.e. $x$"
 in the Lebesgue-point theorem is one null set for the whole statement, obtained by
 countable union over rational constants — the order of quantifiers is the proof.
 
@@ -3355,7 +3376,8 @@ countable union over rational constants — the order of quantifiers is the proo
 computation); the density-$1/2$ corollary is classical, check the source before
 labelling.
 
-**Forward references**: none.
+**Forward references**: orientation only to the later complex-analysis
+Hadamard three-lines theorem and to FA-9/FA-18/FA-20 operator uses.
 
 ---
 
@@ -3602,6 +3624,12 @@ the least such $C$ equals $\lvert\mu\rvert(X)$. The bridge lemma is the decompos
 of a bounded real functional as a difference of two positive functionals, which is
 its own item.
 
+**Functional-analysis receipt.** Add
+`rem-rmk-functional-analysis-uses`: FA-9 cites the positive representation
+form, FA-18 cites the compact/$C_0$ form in commutative Gelfand theory, and
+FA-20 cites the complex-measure form. This is orientation only; MT-20 remains
+the unique mathematical supplier.
+
 **FS.** Every Borel measure on a locally compact Hausdorff space is Radon. The
 representing measure in the Riesz–Markov–Kakutani theorem is unique among all Borel
 measures. A positive linear functional on $C_c(X)$ is bounded for the uniform norm.
@@ -3700,6 +3728,13 @@ $\mathcal{H}^s(A)\ge\mu(A)/C$, so $\dim_HA\ge s$ — the only lower-bound tool t
 page needs, and cheap. **$\dim_H C=\log2/\log3$ for the Cantor set** (**landmark**),
 with $\mathcal{H}^{\log2/\log3}(C)=1$: the upper bound by the natural covers, the
 lower bound by the mass distribution principle applied to the Cantor measure of MT-6.
+
+**Geometric-measure receipt.** Add
+`rem-hypersurface-chart-measure-and-hausdorff-measure-agreement`: PDE-5 and
+PDE-13 may use MT-11's chartwise $C^1$ change of variables and this page's
+Hausdorff measure, but the equality with Riemannian hypersurface measure belongs
+to the future geometric-measure-theory treatment. The remark is forward
+orientation, not a proof of that equality.
 
 **FS.** $\mathcal{H}^s$ is countably additive on all subsets of $\mathbb{R}^n$.
 $\dim_H(A\cup B)=\dim_HA+\dim_HB$. A set of Hausdorff dimension $s$ satisfies

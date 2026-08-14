@@ -2,12 +2,10 @@
 
 > **Commission:** `subjects-01`, `differential-geometry` scaffolder lane
 > **Owner:** this file is the sole writable artifact of the lane.
-> **Placement contract:** the original seam names
-> `spectral-sequences-examples`.  The completed homological-algebra scaffold
-> subsequently split that endpoint and asks downstream tracks to use
-> `grothendieck-spectral-sequences-and-computations-examples`.  This scaffold
-> records that reconciliation request in §10; it does not silently alter
-> `research/subjects-01-SEAMS.md`.
+> **Placement contract (owner-authorised 2026-08-14):** this track is anchored
+> after HA-17's final companion,
+> `grothendieck-spectral-sequences-and-computations-examples`. The obsolete
+> internal `spectral-sequences-examples` anchor is retired for this splice.
 
 ## 0. Summary for the orchestrator
 
@@ -94,20 +92,18 @@ empty planned page “published.”
 The amendments owed, detailed in §9, are: repoint the placement anchor to
 HA-17's final companion and provide stable HA-1/HA-2/HA-4 ids; author topology's
 empty covering/lifting page; provide the abstract-algebra tensor construction
-before PBW; preserve MT's conditional Lebesgue $C^1$ change of variables and
+before PBW; cite MT's R-9-owned unconditional Lebesgue $C^1$ change of variables and
 provide stable MT-20/MT-22 ids; land the functional-analysis Hilbert/compact-
 operator spine before Peter–Weyl; leave Hodge/elliptic theory to PDE plus
 functional analysis; and enrich the thin published Euclidean inverse/implicit
 page with its inexpensive parameter/local-inverse corollaries. DG-8 itself
 closes the missing Euclidean smooth-ODE seam, DG-16 closes the exact singular
-machinery needed for de Rham, and DG-30 locally closes Jordan–Chevalley if no
-earlier page does.
+machinery needed for de Rham, and DG-30 cites X-2 for Jordan--Chevalley under R-5.
 
 ### Unresolved forward references
 
-1. The original `spectral-sequences-examples` placement anchor is empty and
-   internal to the expanded HA block; splice after
-   `grothendieck-spectral-sequences-and-computations-examples` instead.
+1. **Resolved by owner authorisation:** splice after HA-17's final companion,
+   `grothendieck-spectral-sequences-and-computations-examples`.
 2. DG-15–DG-17 await authored/stable ids from HA-1, HA-2, and HA-4.
 3. DG-20, DG-23, DG-26, DG-29, and DG-34 await
    `covering-spaces-and-lifting` for their covering/globalization conclusions.
@@ -230,7 +226,7 @@ cochain complex. Integration of compactly supported smooth top forms rests on
 the **published Riemann/Jordan integral** and compact-support change of
 variables. The optional $L^1$ extension for densities consumes measure
 theory's planned `the-lebesgue-integral-and-the-convergence-theorems` and its
-conditionally homed $C^1$ Lebesgue change-of-variables block; it is not used
+R-9-owned unconditional $C^1$ Lebesgue change-of-variables block; it is not used
 to prove Stokes.
 
 ## 2. What is deliberately not here
@@ -7199,9 +7195,10 @@ precede 34–40. These are not re-minted.
 
 **A page:** `cartan-subalgebras-and-root-space-decompositions`
 **B page:** `cartan-subalgebra-and-root-space-examples`
-**Requires:** DG-27–DG-29 and planned linear-algebra page containing the
-Jordan–Chevalley decomposition, if authored; otherwise items 1–4 below build
-the exact finite-dimensional endomorphism version needed here.
+**Requires:** DG-27–DG-29 and abstract algebra X-2
+`the-spectral-theorem-and-singular-value-decomposition`, which supplies the
+finite-dimensional additive Jordan--Chevalley decomposition. R-5 forbids the
+former local fallback.
 
 The main classification block now works over $\mathbb C$ (more generally an
 algebraically closed characteristic-zero field where printed). A Cartan
@@ -7212,12 +7209,11 @@ subalgebra of an arbitrary Lie algebra is **nilpotent and self-normalizing**;
 
 **Jordan decomposition and Cartan subalgebras**
 
-1. `def-semisimple-and-nilpotent-linear-endomorphisms` — **definition** `[LN]`;
-   semisimple means diagonalizable after the stated base-field condition.
-2. `thm-additive-jordan-chevalley-decomposition` — **theorem** `[LA]`. Over a
-   perfect field, every finite-dimensional endomorphism has unique commuting
-   semisimple and nilpotent parts, each a polynomial in the endomorphism with
-   zero constant term when the operator is zero.
+1. `rem-additive-jordan-chevalley-is-supplied-by-x-two` — **remark** `[LN]`;
+   cite X-2's stable finite-dimensional endomorphism definition and theorem.
+2. `rem-jordan-chevalley-parts-agree-under-the-adjoint-representation` —
+   **remark** `[LA]`; records the exact cited operator decomposition consumed
+   by items 3--4. No operator definition or theorem is re-minted here.
 3. `def-abstract-jordan-decomposition-in-a-lie-algebra` — **definition**
    `[LN]`; $x=x_s+x_n$ with commuting parts such that
    $\operatorname{ad}x_s$ is semisimple and $\operatorname{ad}x_n$ nilpotent.
@@ -10639,11 +10635,15 @@ scope disposition.
 
 ## 9. Amendments owed to other scaffolds
 
-These are requests for the orchestrator or the owning future build lane. They
-are not edits to another track and do not purport to settle that track's item
-ids.
+This section began as requests for the orchestrator or owning future build
+lane. Entries marked **Applied** are now reconciliation receipts; unmarked
+entries remain requests.
 
 ### 9.1 Published multivariable calculus
+
+**Applied 2026-08-14.** RA-36 now scaffolds the open invertible-derivative
+locus, local-inverse derivative, parameterised implicit function theorem, and
+local/global counterexample remark requested below.
 
 The authored page `inverse-and-implicit-function-theorems` has exactly five
 items: two definitions, the Newton-contraction lemma,
@@ -10660,7 +10660,7 @@ owns it in the manifold rank-theorem block.
 
 ### 9.2 Homological algebra
 
-1. Repoint this track's placement anchor from the empty planned companion
+1. **Owner-authorised and applied 2026-08-14.** Repoint this track's placement anchor from the empty planned companion
    `spectral-sequences-examples` to the finished scaffold's final companion
    `grothendieck-spectral-sequences-and-computations-examples` when HA-17 is
    spliced.
@@ -10698,6 +10698,11 @@ when DG-2 converts a locally finite topological partition into a smooth one;
 the splice must not relabel that construction ZF merely because the smoothing
 steps themselves are explicit.
 
+**Applied 2026-08-14.** The topology scaffolds now expose the covering,
+lifting, deck, universal-cover and classification ids with the printed
+hypotheses, and preserve the partition-of-unity choice ledger through
+smoothing.
+
 ### 9.4 Abstract and linear algebra
 
 The planned `tensor-products-of-modules` page has no authored items. Before
@@ -10709,25 +10714,28 @@ alternating covectors directly as subspaces of published multilinear forms,
 constructs wedge by the explicit alternation formula, and proves the needed
 universal property locally.
 
-If a Jordan–Chevalley page lands below DG-30, the orchestrator may replace
-DG-30 items 1–4 by its stable finite-dimensional endomorphism theorem. If it
-does not, DG-30 already builds precisely that theorem and has no forward
-dependency. Clifford algebras and spin representations are not requested from
+**Applied 2026-08-14.** MOD-3 now exposes the requested tensor-algebra,
+functoriality, quotient-relations and tensoring-algebra-map ids.
+
+**R-5 applied 2026-08-14.** DG-30 cites X-2's stable finite-dimensional
+Jordan--Chevalley theorem and no longer carries a local operator fallback.
+Clifford algebras and spin representations are not requested from
 abstract algebra by this scaffold; the only spin example is the already
 reachable covering $SU(2)\to SO(3)$.
 
 ### 9.5 Measure theory
 
-1. MT-11 owes the conditional $C^1$-diffeomorphism change-of-variables
-   theorem for the **Lebesgue** integral, by the route recorded in its own
-   seam ledger. DG-14's Stokes proof does not need it; DG-18's arbitrary
+1. **R-9 applied 2026-08-14.** MT-11 owns the unconditional
+   $C^1$-diffeomorphism change-of-variables theorem for the **Lebesgue**
+   integral. DG cites it and does not mint it. DG-14's Stokes proof does not
+   need it; DG-18's arbitrary
    measurable density/Radon-volume extension does.
 2. MT-20's Radon/Riesz–Markov–Kakutani page is consumed by DG-18's Radon
    Riemannian volume statement and DG-33's Haar-measure construction. DG-33,
    not measure theory, supplies the topological-group invariance argument.
 3. MT-22's Poincaré-recurrence page is cited only by DG-36's recurrence
    corollary. It is a leaf and no Hamiltonian construction depends on it.
-4. The splice must preserve the distinction between the published
+4. **Applied at scaffold level 2026-08-14.** The splice must preserve the distinction between the published
    Riemann/Jordan integral used for compactly supported smooth top forms and
    the future Lebesgue integral used for $L^1$ densities. “Integration on a
    manifold” is not one untyped imported operation.
@@ -10794,7 +10802,8 @@ These are splice/build dependencies, not blockers to the present prose
 scaffold. DG-8 closes the previously missing ODE seam locally. DG-16 closes
 the exact singular-cochain and smoothing seam needed for de Rham without
 assuming a nonexistent algebraic-topology track. DG-30 closes the finite-
-dimensional Jordan–Chevalley seam locally if no earlier page is available.
+dimensional Jordan–Chevalley seam by citing X-2 under R-5; no local fallback
+remains.
 
 ### 10.3 Source-stated, non-load-bearing boundaries
 

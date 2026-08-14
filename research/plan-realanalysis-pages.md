@@ -74,6 +74,21 @@ TO VERIFY before authoring RA-01: whether `def-complete-ordered-field` already
 contains a usable definition of supremum, or whether standalone `def-supremum` /
 `def-infimum` items are needed.
 
+## Subjects-01 reconciliation entries (applied 2026-08-14)
+
+- R-7 fixes `def-floor-and-ceiling` on RA-12. It cites the already-published
+  `lem-integer-part`, defines $\lfloor x\rfloor$ as its unique integer and
+  $\lceil x\rceil=-\lfloor-x\rfloor$, and records the two bounding
+  inequalities and monotonicity. Category theory and combinatorics cite this
+  item; neither mints floor or ceiling.
+- RA-08/RA-09 add the finite geometric-sum identity and its elementary tail
+  bounds. RA-26/RA-27 add the elementary integral-power and exponential
+  estimates requested by the combinatorics §16 applications. These are the
+  real-analysis suppliers for the finite-Ramsey and random-graph estimates.
+- R-8 fixes the canonical $\mathbb C\cong\mathbb R^2$ dictionary at CA-1
+  `rem-complex-plane-euclidean-dictionary`. RA-33 cites it and retains only its
+  complex exponential, metric and analytic consequences.
+
 ---
 
 # The pages, in reading order
@@ -464,6 +479,10 @@ page in `plan-spec.json` (21 items), the library's first floor / integer-part
 item. The nearest-integer machinery of note (e) above therefore has the lemma
 to cite instead of redoing Archimedean + WOP inline, and every later page that
 needs the integer part (RA-14, RA-27, RA-37 in particular) cites it too.
+**R-7 addition (2026-08-14):** immediately after `lem-integer-part`, add
+`def-floor-and-ceiling` with the exact ownership and statement recorded in the
+subjects-01 reconciliation entry above. This is a scaffold addition; the
+published lemma is cited and not altered.
 
 **RA-13 Continuity, IVT, EVT, and Uniform Continuity** <- RA-12
 continuity at a point and on a set; the sequential criterion; algebra and
@@ -1557,6 +1576,12 @@ metric item already cites it directly. Until the `frontier-11` step-10 publish
 commit the four items are still on disk under this page; the re-home receipt is
 the recorded reconciliation between plan and disk in the interim.
 
+**R-8 receipt (2026-08-14).** CA-1's authored
+`rem-complex-plane-euclidean-dictionary` is the sole canonical agreement item.
+This page cites it together with `field-extensions-and-the-complex-numbers`;
+its metric/completeness and exponential statements remain, but it does not
+mint another $\mathbb C\cong\mathbb R^2$ dictionary.
+
 ### Block X: several variables
 
 **RA-34 The Total Derivative in R^m -> R^n** <- RA-22, RA-16
@@ -1619,6 +1644,13 @@ to be inconclusive, not as a classification case.
 **RA-36 The Inverse and Implicit Function Theorems** <- RA-35, RA-23
 the contraction mapping theorem (Banach) in R^n; **the inverse function
 theorem**; **the implicit function theorem**; the rank theorem; diffeomorphisms.
+The multivariable-calculus reconciliation adds four citable consequences on
+the A page: `cor-invertible-derivative-locus-is-open`,
+`cor-derivative-of-a-local-inverse`,
+`thm-implicit-function-theorem-with-parameters`, and
+`rem-local-versus-global-invertibility-and-regularity-hypotheses`. The last
+item points to the companion's local/global counterexamples. Constant-rank
+and manifold normal forms remain differential geometry's later scope.
 B: polar coordinates as a local diffeomorphism; the implicit function theorem on
 the circle; **the complex squaring map (x^2 - y^2, 2xy)** has invertible
 derivative everywhere and is globally 2-to-1 (the IFT is irreducibly local);

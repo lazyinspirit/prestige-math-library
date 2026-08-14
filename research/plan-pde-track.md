@@ -650,7 +650,7 @@ for the real-variable proofs.
 11. `cor-locally-integrable-weakly-harmonic-functions-are-smooth` (corollary; **L/A**) — An $L^1_{\rm loc}$ distributional solution has an a.e.-equal smooth harmonic representative.
 12. `lem-derivatives-of-harmonic-functions-are-harmonic` (lemma; **L/A**) — Classical derivatives commute with $\Delta$; after Weyl, all distributional derivatives are represented smoothly.
 13. `thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic` (theorem; **L/A**) — Pass the mean identity to the locally uniform limit, then use the converse theorem.
-14. `rem-plane-harmonic-theory-is-owned-by-complex-analysis` (remark; **L/NA**) — Point to the planned disc Poisson kernel, subharmonic, Perron and conformal-invariance pages without restating them.
+14. `rem-plane-harmonic-theory-is-owned-by-complex-analysis` (remark; **L/NA**) — The dimension-uniform PDE-3--PDE-6 theorems retain their stated $\mathbb R^n$ scope, including $n=2$.  Point to complex analysis CA-13/CA-14 and the CA-HM/CA-PT harmonic pages for the sharper holomorphic proofs of the disc Poisson kernel, plane subharmonic/Perron theory and conformal invariance; do not reproduce a plane-specific proof or restate those sharper results here.
 
 ### B-page companion
 
@@ -2114,8 +2114,8 @@ sequential/choice hypothesis recorded by its predecessor.
 
 ## 9. Amendments owed to other scaffolds
 
-This commission does not edit the sibling files. The orchestrator should carry
-the following reconciliation notes:
+This section began as the lane's outbound notes. Entries marked **applied** now
+record the reconciliation in both origin and receiver:
 
 1. **`functional-analysis`: keep its existing PDE seam.** FA-13's Hilbert-space
    Riesz theorem is the operator step in PDE-16; FA-15--FA-16 own the abstract
@@ -2124,16 +2124,18 @@ the following reconciliation notes:
    own distributions and Fourier analysis. No Lax--Milgram item should be
    added to FA unless this ownership contract is deliberately amended.
 2. **`measure-theory`: keep its existing PDE seam and add a surface-measure
-   dictionary note.** MT-11's polar-coordinate measure underlies sphere means;
+   dictionary note — applied.** MT-11's polar-coordinate measure underlies sphere means;
    MT-14--MT-15 underlie $L^p$, convolution and approximation. PDE-5 locally
    constructs surface integration on a compact $C^1$ hypersurface from charts;
    a later GMT treatment should prove agreement with Hausdorff measure rather
    than ask either track to rename its construction.
-3. **`complex-analysis`: add only cross-links.** Its disc Poisson kernel,
+3. **`complex-analysis`: add only cross-links — applied under R-2.** Its disc Poisson kernel,
    plane subharmonic/Perron theory and conformal invariance remain plane
-   results. A dictionary remark may identify the $n=2$ logarithmic fundamental
-   solution and compare its Poisson kernel with PDE-5--PDE-6; it should not
-   claim the $\mathbb R^n$ Harnack or Green theory was proved there.
+   results. PDE-3--PDE-6 retain every dimension-uniform statement, including
+   $n=2$, while citing CA-13/CA-14 and CA-HM/CA-PT for the sharper holomorphic
+   arguments. The reciprocal complex-analysis links identify the $n=2$
+   logarithmic fundamental solution and compare its Poisson kernel with
+   PDE-5--PDE-6; neither track claims the other's sharper proof or theorem.
 4. **`differential-geometry`: record subsumption, not a dependency reversal.**
    General Stokes on manifolds later recovers PDE-5's Euclidean divergence
    theorem and Green identities. PDE-5 must remain buildable first from charts,
@@ -2162,7 +2164,8 @@ reference. The following are build-time checks, not missing mathematics:
   authored; both are predecessor reservations, presently not published facts.
 - PDE-13's smooth-boundary surface measure and a future GMT Hausdorff-measure
   construction need the agreement theorem described in §9, but neither is a
-  dependency of the other in this scaffold.
+  dependency of the other in this scaffold.  The receiving MT scaffold now
+  records that agreement obligation.
 - PDE-26 uses compactness in one sourced vanishing-viscosity route. A future
   builder may use Kruzhkov's direct approximation route instead, but must not
   add BV compactness unless the relevant BV theory has actually been built.

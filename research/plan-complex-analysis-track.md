@@ -589,13 +589,12 @@ needs explicit owner approval at that time; ids are immutable, and a retired
    `field-extensions-and-the-complex-numbers` now defines $\mathbb{C}$,
    the modulus and conjugation algebraically, and RA-33 sits above it. RA-33 must
    **cite** that page and add only the metric/topological/analytic structure,
-   with the dictionary item of well-definedness row 1 homed on that page, not
-   here, if it is authored first. Whichever page is authored first owns row 1;
-   the other cites. This must be settled before either is scaffolded, or the
-   library gets two $\mathbb{C}$'s.
-2. **`plan-realanalysis-pages.md` §RA-33.** Its `requires` should gain
-   `field-extensions-and-the-complex-numbers`. Currently it names
-   only `sine-cosine-and-the-definition-of-pi`.
+   with the dictionary item of well-definedness row 1 homed on CA-1. **Applied
+   2026-08-14 under R-8:** the already-authored
+   `rem-complex-plane-euclidean-dictionary` is the unique $\mathbb C\cong
+   \mathbb R^2$ agreement item; RA-33 cites it and does not mint a rival.
+2. **`plan-realanalysis-pages.md` §RA-33 — applied 2026-08-14.** Its
+   `requires` now includes `field-extensions-and-the-complex-numbers`.
 3. **`plan-realanalysis-pages.md` §RA-33 B page.** It plans "sin is unbounded
    on the imaginary axis", "$i^i$ is real", "$\log(-1)$ is multivalued",
    "$(z^a)^b \ne z^{ab}$", "the fifth roots of unity". **B pages are leaves**,
@@ -629,21 +628,25 @@ needs explicit owner approval at that time; ids are immutable, and a retired
    therefore not published. Do not cite it as an established result. Once
    CA-20 and the covering-space interfaces are authored, reconcile or alias it
    through the ordinary immutable-id un-deferral procedure.
-8. **`plan-pde-track.md`, harmonic pages.** Keep the $\mathbb R^n$ theory there
+8. **`plan-pde-track.md`, harmonic pages. Applied 2026-08-14 under R-2.** Keep the $\mathbb R^n$ theory there
    and cite CA-13/CA-14/CA-HM-1/CA-PT-1 for the $n=2$ holomorphic-conjugate,
    conformal-invariance, Perron boundary and logarithmic-potential dictionary.
-   No general-dimensional theorem is to be re-minted here.
+   No general-dimensional theorem is to be re-minted here. Conversely CA-13,
+   CA-14, CA-HM-1 and CA-PT-1 cite PDE-3/PDE-4/PDE-6 for the dimension-uniform
+   mean-value, Harnack, fundamental-solution and elliptic statements. Those
+   statements retain $n=2$; this file supplies only the sharper holomorphic
+   plane arguments.
 9. **Later number-theory scaffold.** Cite the function-theoretic supplier
    contract under CA-22 for the Euler product, continuation, the two functional
    equations, $\xi$, trivial/nontrivial zero region and the qualitative
    zero-free line. Do not rederive them; do not assume a quantitative zero-free
    region that this track does not promise.
-10. **Topology/conformal-boundary seam.** Any later scaffold transporting
+10. **Topology/conformal-boundary seam — applied 2026-08-14.** Any later scaffold transporting
     continuous boundary data or Euclidean-boundary harmonic measure through a
     conformal map must require a homeomorphic extension to closures. A general
     prime-end/Carathéodory statement is not supplied by the present topology
     track and must remain a declared forward reference or scope denial.
-11. **Future reconciliation of the live complex-analysis page metadata.** The
+11. **Applied at scaffold level 2026-08-14 — future reconciliation of the live complex-analysis page metadata.** The
     page objects already exist, but their current `requires` fields predate this
     enrichment. At the future build, replace them with the stable page-id and
     relative-supplier lists declared in each section below: in particular,
@@ -927,7 +930,7 @@ Integrals,” “Rectifiable Arcs,” “Line Integrals as Functions of Arcs”)
 Stein--Shakarchi Ch. 1, “Integration along curves”; Howell--Mathews Ch. 6
 §§6.1--6.2 (“Complex integrals,” “Contours”).
 
-Proposed A-page inventory (dependency order; 18 items):
+Proposed A-page inventory (dependency order; 20 items):
 
 | id | kind | one-line statement |
 |---|---|---|
@@ -1221,6 +1224,8 @@ Proposed A-page inventory (dependency order; 18 items):
 | `thm-local-maximum-modulus-principle` | thm | An interior local maximum of $\lvert f\rvert$ forces constancy. |
 | `thm-boundary-maximum-modulus-principle` | thm | If $\Omega$ is bounded and $f\in C(\overline\Omega)\cap H(\Omega)$, the maximum of $\lvert f\rvert$ occurs on $\partial\Omega$. |
 | `thm-minimum-modulus-principle` | thm | A nowhere-zero holomorphic function cannot attain an interior local modulus minimum unless constant. |
+| `thm-hadamard-three-lines` | thm | A bounded continuous function on a closed strip, holomorphic inside, has logarithmically convex boundary suprema under the stated growth hypothesis. |
+| `rem-riesz-thorin-is-owned-by-measure-theory` | rem | Cite MT-17 `thm-riesz-thorin-interpolation`; the operator theorem is not re-minted here. |
 | `thm-holomorphic-inverse-function-theorem` | thm | $f'(a)\ne0$, local degree one and local biholomorphy are equivalent, and the inverse derivative is reciprocal. |
 | `cor-injective-holomorphic-derivative-nonzero` | cor | Every injective holomorphic function has no critical point and is biholomorphic onto its open image. |
 
@@ -1250,7 +1255,11 @@ $\overline\Omega$ then $\max_{\overline\Omega}\lvert f\rvert$ is attained on
 $\partial\Omega$ (EVT and Euclidean compactness from
 `continuity-ivt-evt-and-uniform-continuity` and
 `the-topology-of-euclidean-space`); the **minimum modulus principle** (with the
-nonvanishing hypothesis, which is where it differs); **$f'(a)\ne0 \iff m=1
+nonvanishing hypothesis, which is where it differs); **Hadamard's three-lines
+theorem** with its bounded-strip/growth hypotheses, followed by
+`rem-riesz-thorin-is-owned-by-measure-theory`, which cites MT-17
+`thm-riesz-thorin-interpolation` and does not restate the operator theorem;
+**$f'(a)\ne0 \iff m=1
 \iff f$ is injective near $a$**, and then $f^{-1}$ is holomorphic — **the
 holomorphic inverse function theorem** (landmark), with $f$ biholomorphic onto
 an open set; the corollary that an injective holomorphic map has nowhere-zero
@@ -1912,6 +1921,11 @@ Forward references: NONE load-bearing.
 
 ## CA-13. Harmonic Functions and the Poisson Integral
 
+**R-2 cross-link.** This plane-specific page cites PDE-3/PDE-4/PDE-6 for the
+dimension-uniform mean-value and Harnack statements (including their $n=2$
+cases). Its own proofs use holomorphic and harmonic-conjugate methods and do
+not restate the PDE theorems.
+
 `requires`: CA-7, CA-6, `mixed-partials-taylor-and-extrema`
 
 Pair sources (exact harvested locators): Axler--Bourdon--Ramey Ch. 1
@@ -2015,6 +2029,10 @@ wave. (iv) Harnack's theorem's "or $+\infty$" clause must be in the Statement.
 Forward references: NONE load-bearing.
 
 ## CA-14. Subharmonic Functions and the Dirichlet Problem
+
+**R-2 cross-link.** Cite PDE-3/PDE-4/PDE-6 for the all-dimensional harmonic
+background. The Perron/barrier and holomorphic plane arguments below remain
+the sharper $n=2$ contribution; no PDE theorem statement changes.
 
 `requires`: CA-13, `the-topology-of-euclidean-space`, the measure-theory
 Lebesgue-integral and monotone/Fatou convergence interfaces
@@ -3535,6 +3553,10 @@ load-bearing statement in this section is AI-generated.
 
 ## CA-HM-1. Green Functions, Harmonic Measure and Conformal Invariance
 
+**R-2 cross-link.** Cite the PDE harmonic/fundamental-solution pages for their
+dimension-uniform results, including $n=2$; this page owns only the planar
+conformal and boundary refinements.
+
 Conceptual placement: after CA-16 (it consumes the Riemann map while extending
 the CA-14 plane-boundary seam). Proposed id
 `green-functions-harmonic-measure-and-conformal-invariance`. `requires`:
@@ -3575,6 +3597,10 @@ Forward references: prime-end transport is denied and non-load-bearing;
 otherwise none.
 
 ## CA-PT-1. Logarithmic Potential, Capacity and Riesz Decomposition
+
+**R-2 cross-link.** Cite the PDE Newtonian-potential/fundamental-solution
+statements for general $n$. The logarithmic kernel and holomorphic proof route
+here are the sharper plane treatment, not a replacement for those theorems.
 
 Conceptual placement: after CA-HM-1. Proposed id
 `logarithmic-potential-capacity-and-riesz-decomposition`. `requires`: CA-14,
@@ -4270,7 +4296,7 @@ its plan array is empty. Absolute orders were deliberately removed.
 | CA-4 B | `goursat-and-cauchys-theorem-in-a-convex-domain-examples` | — | B | companion scope declared |
 | CA-5 A | `analyticity-liouville-and-morera` | Analyticity of Holomorphic Functions; Liouville and Morera | A | 18 proposed |
 | CA-5 B | `analyticity-liouville-and-morera-examples` | — | B | companion scope declared |
-| CA-6 A | `the-identity-theorem-and-the-open-mapping-theorem` | The Identity Theorem, the Maximum Principle and the Open Mapping Theorem | A | 18 proposed |
+| CA-6 A | `the-identity-theorem-and-the-open-mapping-theorem` | The Identity Theorem, the Maximum Principle and the Open Mapping Theorem | A | 20 proposed |
 | CA-6 B | `the-identity-theorem-and-the-open-mapping-theorem-examples` | — | B | companion scope declared |
 | CA-7 A | `the-winding-number-and-the-global-cauchy-theorem` | The Winding Number and the Global Cauchy Theorem | A | 20 proposed |
 | CA-7 B | `the-winding-number-and-the-global-cauchy-theorem-examples` | — | B | companion scope declared |

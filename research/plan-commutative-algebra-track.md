@@ -1034,6 +1034,11 @@ invariants themselves involve no choice.
   §11, pp. 43--50, Props. 11.1--11.22.  Independent check: Stacks §§10.39,
   10.78, 10.99; Mustaţă Ch. 10, 10.1--10.19.
 
+**R-1 ownership receipt.** Abstract algebra MOD-3 mints `def-flat-module` and
+the basic module flatness facts. CA-12 cites that id and does not re-mint it;
+this page owns faithful flatness, flatness local criteria and flat descent.
+The Noetherian/Artinian/integrality interfaces remain exactly as scaffolded.
+
 #### A-page items, in dependency order
 
 | id | kind | statement | provenance and locator |
@@ -1143,7 +1148,7 @@ Faithful-flat spectrum criteria inherit AC.
 
 | id | kind | content | provenance and locator |
 |---|---|---|---|
-| `ex-p-adic-integers-as-an-inverse-limit` | `ex` | Construct the p-adic integers as the inverse limit of integer quotients. | L/A; Altman--Kleiman §22. |
+| `ex-p-adic-integers-as-an-inverse-limit` | `ex` | Cite GT-17's compatible-residue/inverse-limit construction of the p-adic integers, then prove only that its topology and universal compatible maps agree canonically with the adic-completion object used here. | L/A; GT-17 supplier; Altman--Kleiman §22 for completion agreement. |
 | `ex-adic-completion-of-the-integers` | `ex` | Compute compatible residue systems and the completion map. | L/A; Milne §24. |
 | `ex-equivalent-adic-filtrations` | `ex` | Compare two cofinal filtrations and their canonically isomorphic completions. | L/A; Altman--Kleiman (22.21). |
 | `ex-completion-not-exact-without-finiteness` | `ex` | Exhibit failure of completion exactness for a nonfinite module. | L/A; Altman--Kleiman (22.48). |
@@ -1212,6 +1217,10 @@ recorded blocker, not an asserted in-library theorem.
 ## 5. Topological block — after `compactness`
 
 ### CA-15. The Zariski topology on prime spectra
+
+**Owner-authorised placement (applied 2026-08-14).** This pair is placed after
+both `topological-spaces-and-continuity` and `compactness`, exactly as its
+`requires` below states. No earlier low-algebra placement is permitted.
 
 - **A page id:** `zariski-topology-on-prime-spectra`
 - **B page id:** `zariski-topology-on-prime-spectra-examples`
@@ -1494,13 +1503,13 @@ foundational optimality claim.
    abstract-algebra enrichment should add those sourced results.  CA-6, CA-8,
    CA-9 and CA-18 must not cite them until that amendment lands; where possible
    this scaffold uses its own ideal/local proofs instead.
-2. **Abstract algebra — reserved seams.** Preserve the exact ids
+2. **Abstract algebra — reserved seams (R-1 applied 2026-08-14).** Preserve the exact ids
    `def-noetherian-module`, `def-artinian-module`, `def-noetherian-ring`, the
    Artinian-ring definition, `def-flat-module`, integral element and determinant
    trick promised by `plan-algebra-track-expansion.md`.  The splice must replace
    this scaffold's descriptive references by those stable ids, never mint
    duplicates.
-3. **Topology.** Place CA-15 after both the general topology foundation and the
+3. **Topology — APPLIED 2026-08-14.** Place CA-15 after both the general topology foundation and the
    page establishing compactness terminology.  No change to a topology file is
    requested; the orchestrator owes only the placement reconciliation.
 4. **Homological algebra.** Expose stable ids for chain complexes, homology,

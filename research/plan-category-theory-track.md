@@ -1148,7 +1148,12 @@ are cited by `MA-2`, `MA-3` and `MA-4`.
 2. **Riehl's 2nd edition renumbered Chapters 3 and 4.** The adjoint functor theorems are **§4.7**, not §4.6, and Prop 4.3.7 (mates), §4.5 (lccc), Thm 4.2.7 and Ex 6.2.15 are new. Any locator carried over from a first-edition citation is wrong. Every Riehl locator in this file is against the 2nd edition, PDF built 2026-07-28.
 3. **Item 2 is not optional.** A definitional deviation that is not recorded reads as an error to the next auditor.
 4. **RAPL's proof must be the unit/counit one.** The representable proof is item 27 and carries a hypothesis item 24 does not.
-5. Riehl's Ex 4.1.7 (floor and ceiling adjoint to $\mathbb Z\hookrightarrow\mathbb R$) is a lovely example and is **omitted**: the library has no floor or ceiling on $\mathbb R$, only `def-the-ceiling-of-a-quotient-of-naturals` for naturals. §11 amendment 7 offers it to whoever wants to mint them.
+5. **Applied under R-7.** Add
+   `thm-floor-and-ceiling-are-adjoint-to-the-inclusion-of-integers`, citing
+   real analysis RA-12 `def-floor-and-ceiling`. The floor functor is right
+   adjoint and the ceiling functor left adjoint to the inclusion
+   $\mathbb Z\hookrightarrow\mathbb R$ under the stated order-category
+   convention. MA-1 does not mint either numerical definition.
 
 **Forward references: NONE.**
 
@@ -3294,7 +3299,7 @@ and Ch. 6 §§6.1–6.3, 6.5 (pp. 220–250).
 
 | source heading and named results | disposition |
 |---|---|
-| 4.1 Adjoint functors: Def. 4.1.1, Lem. 4.1.3, Not. 4.1.5, Exs 4.1.6–4.1.15 | definition/lemma and the discrete, powerset, free/forgetful and field examples `included` — `MA-1` items 5–6, 31, 33–39; floor/ceiling `deferred` pending ordered-number definitions; ordinal and homotopical examples `out-of-scope`; remaining examples `inline`/B |
+| 4.1 Adjoint functors: Def. 4.1.1, Lem. 4.1.3, Not. 4.1.5, Exs 4.1.6–4.1.15 | definition/lemma and the discrete, powerset, free/forgetful and field examples `included` — `MA-1` items 5–6, 31, 33–39; floor/ceiling `included` by R-7 using RA-12 `def-floor-and-ceiling`; ordinal and homotopical examples `out-of-scope`; remaining examples `inline`/B |
 | 4.2 Unit and counit as universal arrows: Lems 4.2.2–4.2.3, Def. 4.2.5, Rem. 4.2.6, Thm 4.2.7, Cor. 4.2.10, Lem. 4.2.11 | `included` — `MA-1` items 1, 5, 8, 17, 22 |
 | 4.3 The calculus of adjunctions: Props 4.3.1, 4.3.4–4.3.7 | `included` — `MA-1` items 13–16; Prop. 4.3.5 `already-published` as `thm-every-equivalence-can-be-made-an-adjoint-equivalence`; Prop. 4.3.6's post- and precomposition forms both `included` in item 15 |
 | 4.4 Contravariant and multivariable adjunctions: Def. 4.4.1, Props 4.4.4, 4.4.6, Def. 4.4.7 | `included`/`inline` — `MA-1` items 11, 20 and `MA-14`'s closed structure; convenient-topological examples `out-of-scope` |
@@ -4056,10 +4061,9 @@ statement.
 
 # 11. Amendments owed to other scaffolds
 
-`subjects-01-SEAMS.md` §0.1: a track writes exactly the files named as its own and
-**never opens another track's file**, even to fix an obvious error. Everything this
-track wants changed elsewhere is here, and the orchestrator applies it at
-reconciliation.
+This section began as the track's outbound amendment ledger. Entries marked
+**Applied** are now reconciliation receipts; unmarked entries retain their
+original addressee.
 
 ### Amendment 1 — to `abstract-algebra`: what `tensor-products-of-modules` must carry
 
@@ -4111,6 +4115,9 @@ orchestrator should mark those sections superseded at reconciliation, and
   307; the live spec has 365, 373 and 377), and this file quotes none;
 - the finite-probability and probabilistic-method material it owns is untouched by
   this track.
+
+**Applied 2026-08-14.** The combined scaffold now identifies its CT/AB/MO
+sections as historical and points here as the category-theory authority.
 
 ### Amendment 3 — to `abstract-algebra` and `group-theory`: two group-theoretic lemmas
 
@@ -4173,6 +4180,10 @@ currently requires the planned `exact-sequences-and-the-diagram-lemmas`, which t
 track retires; the edge points to **`the-diagram-lemmas-in-an-abelian-category`**
 (`MA-11`).
 
+**Applied at scaffold level 2026-08-14.** The homological-algebra scaffold now
+records the exact retained MA prerequisites and the live-plan repoint; the
+single global `plan-spec.json` splice remains outside this commission.
+
 **One warning.** `MA-11` item 10's proof is written by this library because no
 source supplies it finished. If `homological-algebra` finds a source that does, it
 should tell the orchestrator rather than assume `MA-11` cited one.
@@ -4199,13 +4210,15 @@ Adámek–Rosický results, one of which she calls *"a hard theorem"*. Accessibl
 category theory is a subject area and that is the licence. **Nothing else in this
 track depends on it.**
 
-### Amendment 7 — an offer to whoever mints the floor and ceiling on $\mathbb R$
+**Applied 2026-08-14.** The legacy combined scaffold's contrary “deliberately
+NOT denied” sentence is superseded by this subject-size denial.
+
+### Amendment 7 — floor and ceiling supplier (applied 2026-08-14 under R-7)
 
 Riehl's Ex. 4.1.7 — floor and ceiling as adjoints to
 $\mathbb Z\hookrightarrow\mathbb R$ — is a lovely illustration of a Galois
-connection and is **omitted from `MA-1`** because the library has no floor or
-ceiling on $\mathbb R$; it has only `def-the-ceiling-of-a-quotient-of-naturals`.
-Any track that mints them gets this example for free, and `MA-1` will cite it.
+connection and is included on `MA-1`. Real analysis RA-12 owns
+`def-floor-and-ceiling`; MA-1 cites it and mints only the adjunction theorem.
 
 ### Amendment 8 — to the orchestrator: `SCHEMA.md` §6 records a stale page ceiling
 
@@ -4215,6 +4228,10 @@ Any track that mints them gets this example for free, and `MA-1` will cite it.
 the truth and the doc is the bug** (`CLAUDE.md` §"Keep the normative docs
 current"). This track's §5 page map is computed at 60. This file does not edit
 `SCHEMA.md`.
+
+**Applied at scaffold level 2026-08-14.** The discrepancy is an explicit
+scaffold invariant: 100 is the stale prose value, 60 is the enforced ceiling,
+and every inventory here follows 60. `SCHEMA.md` remains untouched.
 
 ### Amendment 9 — to the orchestrator: a size gap in the published `def-strict-two-category`
 

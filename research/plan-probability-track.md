@@ -1675,20 +1675,20 @@ source proves that equivalence.
 
 ## 9. Amendments owed to other scaffolds and unresolved seams
 
-Per the seam contract, this file edits no other track.  The orchestrator should
-apply the following amendments at reconciliation.
+This section began as the lane's outbound amendment ledger. Entries marked
+**applied** now record the reconciliation in both origin and receiver.
 
 ### 9A. Amendments owed
 
-**Measure theory.**  Add an orientation note to MT-2's first Borel--Cantelli
+**Measure theory — applied 2026-08-14.**  MT-2's first Borel--Cantelli
 item: probability PT-2 proves the pairwise-independent converse and stronger
-frequency law.  Add a note to MT-11 that its finite product measure is the
-input to PT-3's countable/arbitrary products, and retain its reservation of
-Kolmogorov extension.  Add a note to MT-13 that conditional expectation in
+frequency law.  MT-11 now records that its finite product measure is the
+input to PT-3's countable/arbitrary products and retains its reservation of
+Kolmogorov extension.  MT-13 now records that conditional expectation in
 PT-10 is the probability-space RN application.  None of these changes the
 measure pages' ownership or statements.
 
-**Functional analysis.**  On FA-22's finite-measure Fourier transform, record
+**Functional analysis — applied 2026-08-14.**  FA-22's finite-measure Fourier transform now records
 the probability convention
 $\varphi_X(t)=\widehat{P_X}(-t/(2\pi))$.  PT-8 cites FA-22's uniqueness theorem
 instead of re-minting finite-measure Fourier uniqueness.  No FA theorem needs
@@ -1696,14 +1696,14 @@ alteration.  FA-19's `thm-positive-square-root` is also a declared PT-9
 predecessor: PT-9 uses it only on a finite-dimensional covariance operator to
 construct possibly singular Gaussian laws.
 
-**Combinatorics.**  Add orientation, not dependencies, to the two finite
+**Combinatorics — applied 2026-08-14.**  The two finite
 probability pages: PT-1 proves that their weighted spaces, random variables,
 laws, expectation, Markov, Chebyshev, Cauchy--Schwarz, and second-moment bound
 are exact finite restrictions; PT-2 proves the same for event and finite-valued
 random-variable independence.  The finite pages stay earlier, authored,
 self-contained, and unchanged mathematically.
 
-**Topology.**  The empty page `complete-metrizability-and-baire` must retain
+**Topology — applied 2026-08-14.**  The empty page `complete-metrizability-and-baire` retains
 ownership of `def-polish-space`.  When it is built, its summary should mention
 that probability PT-3/PT-7/PT-11/PT-18 are downstream consumers of the
 complete-separable metric structure.  Probability does not mint a competing

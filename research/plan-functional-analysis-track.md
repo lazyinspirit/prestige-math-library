@@ -239,7 +239,7 @@ FA-17.  The builder must name the actual ids after verifying their nonempty
 | Hille–Yosida, analytic semigroups, and general $C_0$-semigroup theory | FA-21 includes Stone because the remit names it.  General semigroup generation belongs with evolution equations and is not needed for Stone's unitary theorem. |
 | unbounded normal operators beyond self-adjoint spectral theory | The remit asks for unbounded self-adjoint operators; the normal case adds domain-commutation subtleties without supporting a downstream seam. |
 | noncommutative Gelfand–Naimark representation | The remit specifies commutative $C^*$-algebras.  Faithful representations of arbitrary $C^*$-algebras require positive functionals, GNS, and representation theory and are not used later here. |
-| general harmonic analysis | Hausdorff–Young, interpolation, multipliers, singular integrals, wavelets, and locally compact groups lie beyond the foundational Fourier/distribution remit. |
+| general harmonic analysis | MT-17 supplies the exact Riesz--Thorin theorem under R-6 and FA cites it; Hausdorff--Young beyond that citation, interpolation scales, singular integrals, wavelets, and locally compact groups lie beyond the foundational Fourier/distribution remit. |
 | $C_p(X)$ selection-principle theory | Nagata and Gerlits–Nagy require a sustained theory of Tychonoff spaces, $\gamma$-covers, Fréchet–Urysohn spaces, and pointwise function spaces.  They remain catalogue items owed to topology; neither is a theorem of normed-space functional analysis. |
 | linear Dugundji extension | Its proof is a paracompactness/partition-of-unity construction in locally convex targets and has a distinct choice cost.  It remains owed to topology rather than being mislabeled Hahn–Banach. |
 | Enflo's construction | FA-11 proves AP vocabulary and `Schauder basis => AP`; the construction of the counterexample is retained as a primary-source boundary remark, never a dependency.  Reproducing its finite-dimensional combinatorial construction would be a separate specialist monograph-sized branch. |
@@ -1399,6 +1399,9 @@ Items:
 3. `thm-self-adjoint-norm-and-spectrum-extrema` (theorem) — $\|T\|=r(T)=\max_{\lambda\in\sigma(T)}|\lambda|$ and spectral bounds match quadratic-form bounds.
 4. `def-order-on-bounded-self-adjoint-operators` (definition) — $S\le T$ iff $T-S$ is positive.
 5. `thm-positive-square-root` (theorem) — a positive bounded operator has a unique positive square root commuting with every operator that commutes with it.
+   Add `rem-positive-square-root-and-covariance-matrices`: PT-9 cites this item
+   for finite-dimensional covariance square roots and does not mint another
+   positive-square-root theorem.
 6. `def-absolute-value-of-a-bounded-operator` (definition) — $|T|=(T^*T)^{1/2}$; reconcile FA-16's compact special case.
 7. `thm-polar-decomposition-for-bounded-operators` (theorem) — $T=U|T|$ with a unique partial isometry on the support and precise kernels.
 8. `thm-continuous-functional-calculus-for-bounded-self-adjoint-operators` (theorem) — unique isometric unital $*$-homomorphism $C(\sigma(T))\to\mathcal B(H)$ sending the coordinate function to $T$.
@@ -1579,6 +1582,12 @@ Items:
 13. `cor-convolution-approximate-identities-from-fourier-multipliers` (corollary) — cite MT-15 for convergence and identify the multiplier limit; no second approximate-identity theorem.
 14. `thm-fourier-transform-of-a-finite-complex-measure` (theorem) — bounded uniformly continuous Fourier–Stieltjes transform, using MT-12/MT-20.
 15. `cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms` (corollary) — Gaussian smoothing plus MT regularity.
+16. `rem-probability-characteristic-function-normalization` (remark) — with
+    this track's $e^{-2\pi i x\cdot\xi}$ convention,
+    $\varphi_X(t)=\widehat{\mathbb P_X}(-t/(2\pi))$; PT cites this dictionary
+    rather than silently changing signs.
+17. `rem-riesz-thorin-supplied-by-measure-theory` (remark, R-6) — cite MT-17
+    `thm-riesz-thorin-interpolation`; no Riesz--Thorin theorem is minted in FA.
 
 **Proof and well-definedness plan.**  The definition is on equivalence classes,
 so null-set invariance is explicit.  Every interchange of integrals names
@@ -1651,7 +1660,9 @@ from inversion/dense range, not merely from isometry.
 5. `ex-plancherel-for-an-interval-indicator` — derive a sinc-square integral without pointwise inversion abuse.
 6. `ex-poisson-summation-for-the-gaussian-and-theta-functional-equation`.
 7. `thm-heisenberg-uncertainty-inequality` — for Schwartz functions, with equality characterization by Gaussians; useful corollary, not a later dependency.
-8. `rem-hausdorff-young-and-interpolation` (remark, L/NS) — deferred to harmonic analysis, orientation only.
+8. `rem-hausdorff-young-and-interpolation` (remark, L/NS) — cite MT-17
+   `thm-riesz-thorin-interpolation` for the interpolation input; the remaining
+   Hausdorff--Young/harmonic-analysis scope stays orientation only.
 
 ### FA-24 — Test functions, distributions, and differentiation
 
@@ -2029,14 +2040,17 @@ above.  Nothing else in §2 is silently left behind.
 
 ## 10. Amendments owed to other scaffolds and plan reconciliation
 
-No amendment is made by this commission; these are instructions for the
-orchestrator or the future owner of the named track.
+This section began as instructions for the orchestrator or the future owner of
+the named track. Entries marked **Applied** are now reconciliation receipts.
 
 ### 10.1 Topology and the deferred catalogue
 
 1. Build `stone-weierstrass-general` through the complex self-adjoint form
    before FA-18.  Its current `items` array is empty, so it is not yet a legal
    dependency.  Keep FA-14's Fejér proof independent of it.
+
+   **Applied 2026-08-14:** the topology scaffold now carries the complex
+   self-adjoint Stone--Weierstrass item required by FA-18.
 2. Reconcile `deferred-functional-analysis`.  After the FA block is authored,
    it must no longer present discharged results as unproved.  Preserve every
    immutable `rem-` id: rehome superseded remarks on the corresponding FA B
@@ -2059,6 +2073,8 @@ orchestrator or the future owner of the named track.
 2. Link MT-20 RMK to FA-9's probability-measure extreme-point examples,
    FA-18 Banach–Stone, and FA-20 scalar spectral measures.  FA does not create
    a competing RMK item.
+   **Applied 2026-08-14:** MT-20 now names FA-9, FA-18 and FA-20 in its
+   orientation receipt.
 3. Keep scalar convolution/approximate identities in MT-15.  FA-22 adds the
    Fourier consequences and explicit agreement items instead of copying the
    measure-theory construction.
@@ -2073,9 +2089,21 @@ orchestrator or the future owner of the named track.
    mollification, and FA-25's constant-coefficient Fourier-multiplier identity.
    It must not ask FA to pre-mint weak solutions, $W^{k,p}$, elliptic estimates,
    or boundary traces.
-3. Once PDE page ids exist, replace the orientation-only unnamed references in
-   FA-13, FA-24, and FA-25 with those exact ids; no current FA A item depends on
-   such a forward reference.
+3. **Applied 2026-08-14.** Replace the orientation-only names by PDE-11
+   `weak-derivatives-and-sobolev-spaces`, PDE-12
+   `smooth-approximation-and-sobolev-extension`, PDE-16
+   `lax-milgram-and-weak-elliptic-solutions`, PDE-18
+   `interior-and-boundary-sobolev-elliptic-regularity`, and PDE-19
+   `schauder-and-lp-elliptic-estimates`. FA-13 points to PDE-16; FA-24 to
+   PDE-11/PDE-12; FA-25 to PDE-18/PDE-19. These remain orientation-only and
+   no FA item mints PDE mathematics.
+
+### 10.5 Reconciliation receipt (2026-08-14)
+
+The measure-theory RMK links, probability Fourier-normalization dictionary,
+PT-9 positive-square-root citation, topology Stone--Weierstrass supplier and
+the exact PDE orientations above are applied. R-6 assigns
+`thm-riesz-thorin-interpolation` to MT-17; FA cites it and does not mint it.
 
 ### 10.4 Complex analysis and algebra
 

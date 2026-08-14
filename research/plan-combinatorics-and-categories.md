@@ -6,9 +6,11 @@
 > *amend and expand the prose scaffolds to enrich future mathematical content*,
 > developing each subject from the ground up at graduate level. The
 > `combinatorics` lane owns the **CB-\*** and **GT-\*** material in this file and
-> nothing else. The category-theory blocks (CT, AB/MO, HA) belong to
-> `monoidal-abelian-categories` and `homological-algebra`, which write their own
-> files and were **not** touched here.
+> nothing else. The category-theory blocks (CT, AB/MO) are superseded by
+> `research/plan-category-theory-track.md`, and the HA blocks by
+> `research/plan-homological-algebra-track.md`. They remain historical prose in
+> this combined file and are not splice authority. The CB/GT material remains
+> authoritative here.
 >
 > **Everything the `combinatorics` lane added or corrected lives in §17 (below)
 > and §18–§29 (at the end of this file).** §17 is the summary for the
@@ -87,15 +89,35 @@ which is what makes matroid intersection reachable; `cor-rational-root-of-an-int
 `cor-sum-of-roots-of-unity`; `thm-finite-jensen-inequality`;
 `def-erdos-renyi-random-graph`.
 
-**Owed — fourteen amendments, listed in full at §28.** The ones the orchestrator
-must actually decide: **A1**, an owner-only re-home of five items off the
-planarity page (fallbacks are already scaffolded, so declining costs clumsiness
-rather than results); **A10**, who mints `def-character-of-a-finite-abelian-group`
-— needed by three pages and arguably inside `abstract-algebra`'s
-representation-theory remit, and **an id minted twice is the most expensive
-failure this commission can produce**; **A5/A6/A7**, three requests to
-`number-theory` (Lagrange four squares, Dirichlet on primes in APs, geometry of
-numbers), each with a scaffolded fallback.
+**Owed — fourteen amendments, listed in full at §28.** After reconciliation,
+the remaining owner/orchestrator questions start with **A1**, the excluded
+owner-only re-home of five published items off the planarity page (fallbacks
+are already scaffolded), plus the unauthorised A5/A6 decisions. A2, A7, A10,
+A11 and A12 are applied below; R-3 makes duplicate character minting forbidden.
+
+### 17.3.1 Reconciliation receipt (applied 2026-08-14)
+
+- A2 is accepted: abstract algebra LA-7 mints `thm-cauchy-binet-formula`;
+  GT-7a cites it in the matrix-tree proof and does not mint it.
+- R-3 settles A10: abstract algebra RT-3 mints
+  `def-character-of-a-finite-abelian-group` and character orthogonality.
+  CB-27, CB-31 and CB-14c cite those ids and do not mint either notion.
+- A7 is accepted: number theory MT-22 supplies successive minima and
+  Minkowski's second theorem; CB-32 may state the full Freiman theorem using
+  those suppliers rather than retaining the geometry-of-numbers denial.
+- A11/A12 are applied: the §16 Erdős--Hajnal pages cite GT-19's regularity
+  lemma, and CB-21 adds `rem-lattice-fkg-and-probabilistic-fkg-agree` pointing
+  to CB-29.
+- CB-11 adds the power-form finite Ramsey corollary; CB-12 adds Erdős's finite
+  $G(n,1/2)$ construction with no clique or stable set larger than
+  $2\log_2 n+O(1)$. Both cite RA-12 `def-floor-and-ceiling`, the finite
+  geometric-sum identity, and the elementary power/exponential estimates.
+- The finite-probability pages point to PT-1/PT-2 for their later
+  measure-theoretic restriction agreement. The finite statements stay owned
+  here and no probability theorem is re-minted.
+- `trees-forests-and-spanning-trees` is explicitly finite. GT-14 owns the
+  bridge to arbitrary simplicial trees and normal spanning trees; later pages
+  cite that bridge rather than silently generalising the published page.
 
 ## 17.4 Unresolved forward references
 
@@ -996,11 +1018,12 @@ reader of this file will find it. Orders verified against
     licensed by any page above `divisibility-gcd-and-bezout` (26) choosing to
     mint them; page 22 is below it and cannot.
 
-**Deliberately NOT denied, because they are reachable and it would be a mistake
-to drop them by reflex:** locally presentable and accessible categories, and the
-accessible adjoint functor theorem — they need regular cardinals and
-$\kappa$-filtered colimits, and `cardinal-arithmetic-and-cofinality` (new 229)
-supplies exactly that; **the algebraic universal coefficient and Künneth
+**Reconciled category-theory denial (applied 2026-08-14).** Locally presentable
+and accessible categories, and the accessible adjoint functor theorem, are
+denied here because they form a separate subject-sized development, not because
+regular cardinals are absent. The authoritative scope explanation is
+`research/plan-category-theory-track.md` §8/§11. The remaining deliberately
+reachable material is **the algebraic universal coefficient and Künneth
 theorems** over a PID, which are pure homological algebra even though their
 topological corollaries are not (denial 26); **group cohomology** via
 $\mathbb{Z}[G]$, which needs only groups, rings and modules; and the **entire
@@ -3821,6 +3844,12 @@ than a set, this is a **theorem schema**"), `items/thm-burali-forti.md` and
 
 # 16. Erdős–Hajnal extension from arXiv:2606.06258v2
 
+**Reconciliation receipt (2026-08-14).** Every use of the ordinary graph
+regularity lemma in this section cites GT-19's landmark item; this section does
+not mint or restate it. The finite Ramsey estimates cite RA-12
+`def-floor-and-ceiling`, the real-analysis geometric-sum identity, and its
+elementary power/exponential bounds.
+
 This extension follows a full reading of the target paper: paragraphs, proofs,
 captions and bibliography as well as displayed definitions and environments.
 The v2 source has 54 formal environments: 10 theorems, 29 lemmas, 13 claims,
@@ -5068,7 +5097,9 @@ theorem** (Ahlswede–Daykin, landmark), by induction on $n$; **Harris's inequal
 / the FKG inequality** on the cube for monotone events, and **Kleitman's lemma**,
 both as corollaries of the four functions theorem; **the Kleitman
 diametric-family bound** via Shearer, stated here and proved on CB-25 with an
-agreement remark.
+agreement remark. Add `rem-lattice-fkg-and-probabilistic-fkg-agree`, pointing
+to CB-29's probabilistic formulation and asserting the finite-cube agreement
+without re-proving either inequality.
 
 FS: the shadow of an initial segment of colex is an initial segment of colex in
 one lower level (true, and therefore not an `fs-` — recorded so no scaffolder
@@ -5256,10 +5287,9 @@ Consequences, all in the library's favour:
   which is a genuine lemma and stays.
 - The amendment §19.2 F2 owed to the algebra track is **cancelled** for cofactors
   and the adjugate. It survives only for **Cauchy–Binet**, which is genuinely
-  absent (`ls items/ | grep -i cauchy-binet` returns nothing) and which GT-7a
-  mints itself — correctly, since it is a determinant identity over a commutative
-  ring whose proof is a multilinearity computation, and A1 Prop. 1.3.5 and A3
-  Thm 9.4 both prove rather than assume it.
+  absent on disk at reconciliation time. **Applied 2026-08-14:** abstract
+  algebra LA-7 now scaffolds `thm-cauchy-binet-formula`; GT-7a cites that id
+  and no longer mints the identity.
 
 The methodological lesson is worth recording for the whole commission: **a
 "missing" result must be searched for by id across `items/`, not by reading the
@@ -5825,19 +5855,11 @@ matrices are simultaneously diagonalisable** (A1 Prop. 2.1.1); **Delsarte's line
 programming bound** in its inequality form $aQ\ge0$ (A1 Thm 11.3.1);
 **MacWilliams' identity** $W_{C^{\perp}}(x,y)=\lvert C\rvert^{-1}W_C(x+(q-1)y,\,x-y)$.
 
-**MacWilliams is the page's seam risk.** Its proof needs the additive characters
-of $\mathbb{F}_q$ and their orthogonality — a discrete Fourier transform. §25's
-CB-27 mints the finite Fourier transform on $\mathbb{F}_p^n$ from published roots
-of unity and `cor-sum-of-roots-of-unity` (§19.2 F5), and CB-27 sits **above** this
-page in the band. Three dispositions, in preference order: (1) move the character
-orthogonality lemma down to CB-14c and let CB-27 cite it — the scaffold's
-preference, since orthogonality of additive characters of $\mathbb{F}_q$ is a
-five-step consequence of `cor-sum-of-roots-of-unity` and belongs wherever it is
-first needed; (2) declare MacWilliams a forward reference on a `cor-`;
-(3) place CB-14c after CB-27. **Recorded as an unresolved seam in §29.** Godsil's
-route (A5, "MacWilliams Theorem") derives it inside the scheme duality instead,
-which is elegant but presupposes the whole Bose–Mesner apparatus and does not
-avoid the characters.
+**MacWilliams character seam (settled by R-3).** Its proof cites abstract
+algebra RT-3 `def-character-of-a-finite-abelian-group` and the accompanying
+orthogonality theorem. CB-14c does not mint character vocabulary and no
+forward reference to CB-27 remains. Godsil's Bose--Mesner route remains an
+alternative proof, not a second definition.
 
 **Denied.** The **Golay codes** $G_{23}$, $G_{11}$ and their
 uniqueness/perfectness classification; **Reed–Muller** decoding theory; the
@@ -5890,7 +5912,8 @@ the library's phrasing).
 dictionary between linear algebra and graphs and everything downstream cites it,
 while GT-7b is a body of applications that a reader can take or leave. Two of
 §11's three "verify on disk" flags are now answered — the cofactor machinery is
-published (§23.0), Cauchy–Binet is not — and the third, Courant–Fischer, is
+published (§23.0), Cauchy–Binet is supplied by abstract algebra LA-7 under the
+2026-08-14 reconciliation — and the third, Courant–Fischer, is
 answered in the worst way: **the spectral theorem page carries 0 items** (§27).
 
 DEFS: the **adjacency matrix** $A(G)$ of a finite simple graph and the
@@ -5923,12 +5946,10 @@ spectrum is symmetric about $0$ (A2 Props. 4.5.3, 4.5.4);
 **$x^{\mathsf T}Lx=\sum_{uv\in E}(x_u-x_v)^2$**, hence $L$ is positive
 semidefinite and $L\mathbf 1=0$, and $L=MM^{\mathsf T}$;
 **$\dim\ker L$ is the number of connected components** (landmark; A1
-Prop. 1.3.7), hence $\mu_2>0$ iff $G$ is connected; **Cauchy–Binet** (landmark;
-A1 Prop. 1.3.5, A3 Thm 9.4) — for $A$ an $m\times n$ and $B$ an $n\times m$
-matrix with $m\le n$, $\det(AB)=\sum_S\det(A[\cdot,S])\det(B[S,\cdot])$ over
-$m$-subsets $S$ — **minted here, since the library lacks it and it is a
-determinant identity over a commutative ring**, with a `rem-` recording that it
-is *not* a corollary of $\det(AB)=\det A\det B$, which needs square factors;
+Prop. 1.3.7), hence $\mu_2>0$ iff $G$ is connected; **Cauchy–Binet is cited**
+from abstract algebra LA-7 `thm-cauchy-binet-formula` in its rectangular
+$m\le n$ form. GT-7a does not mint it and retains only a `rem-` explaining why
+ordinary determinant multiplicativity is insufficient;
 **all cofactors of $L$ are equal** (#101, A3 Lemma 9.9: if all row sums and all
 column sums vanish then all cofactors agree) — the residual half of §20 #101 now
 that the Laplace expansion is published; **the matrix-tree theorem** (landmark;
@@ -5982,8 +6003,8 @@ positive, showing connectivity is load-bearing in Lemma 4.5.2.
 
 Traps. (i) Convention 2 is not a formality: $\lambda_2$ means opposite ends of
 the spectrum for $A$ and for $L$, and a page that does not state its ordering
-will ship a false statement. (ii) Cauchy–Binet must be proved, not assumed
-(§23.0). (iii) The Laplace cofactor expansion **is** published — cite
+will ship a false statement. (ii) Cauchy–Binet must be cited from LA-7
+`thm-cauchy-binet-formula`, not re-minted (§23.0). (iii) The Laplace cofactor expansion **is** published — cite
 `thm-laplace-cofactor-expansion`, do not re-mint it. (iv) $L=MM^{\mathsf T}$
 needs an *orientation*; the theorem's content is that the cofactor does not depend
 on which one, and that is a numbered step.
@@ -7361,8 +7382,8 @@ before the sources were read turned out to be a hypothesis rather than a finding
 (§29.2), and it is worth the reader noticing.
 
 **A second finding that changes GT-7a.** T1 proves the **matrix-tree theorem by
-deletion–contraction**, so **Cauchy–Binet is not needed for it**. GT-7a still
-mints Cauchy–Binet — A1 Prop. 1.3.5 and A3 Thm 9.4 both prove it, it is a
+deletion–contraction**, so **Cauchy–Binet is not needed for it**. GT-7a cites
+LA-7 `thm-cauchy-binet-formula` — A1 Prop. 1.3.5 and A3 Thm 9.4 both prove it, it is a
 determinant identity over a commutative ring, it is genuinely absent from the
 library, and it is reusable for Gram determinants — but the page should record
 T1's route in a `rem-`, because a reader is entitled to know the theorem does not
@@ -8410,6 +8431,13 @@ scaffold's decision and belongs in the batch notes, not in any Statement.
 The published page carries the method and the local lemma. This pair adds what it
 does not reach, and **nothing on the published page is touched**.
 
+Add `thm-erdos-finite-random-graph-ramsey-construction`: for each sufficiently
+large $n$ there is an $n$-vertex graph with neither a clique nor an independent
+set larger than $2\log_2 n+O(1)$. The proof is the finite $G(n,1/2)$ union-bound
+calculation; it cites RA-12 `def-floor-and-ceiling`, finite geometric sums and
+the real-analysis power/exponential estimates. PT-1/PT-2 receive an
+orientation-only restriction link; this finite theorem remains combinatorics'.
+
 THMS: **the lopsided local lemma** (P3 Thm 6.5.1, Cor. 6.5.2) — replacing mutual
 independence by $\Pr[A_i\mid\bigwedge_{j\in S}\neg A_j]\le\Pr[A_i]$ for $S$ not
 adjacent to $i$ — **cheap, because the ordinary LLL proof only ever uses that
@@ -8489,7 +8517,10 @@ THMS: **multicolour Ramsey numbers** $R(k_1,\dots,k_c)$ (convention 22) with the
 recursion and the exponential lower bound (P2 Prop. 0.1.12); the **multicolour
 triangle Ramsey theorem** (P2 Thm 0.1.4); **hypergraph Ramsey** beyond the
 published `thm-finite-ramsey-for-uniform-subsets`, in the GRS arrow notation
-(convention 21); **the Erdős–Szekeres happy-ending theorem** and the
+(convention 21); the **power-form finite Ramsey corollary**: for every fixed
+$t$ there is an explicit exponent $c_t>0$ such that every $K_t$-free graph on
+$n$ vertices has an independent set of size at least $n^{c_t}$, with floors
+and exponential estimates cited from real analysis; **the Erdős–Szekeres happy-ending theorem** and the
 $\binom{2n}{n}$-type bounds; **the Frankl–Wilson explicit Ramsey graph**, cited
 from CB-24 — **the constructive counterpart to the published probabilistic lower
 bound `thm-diagonal-ramsey-counting-lower-bound`, and the reason CB-24 is worth
@@ -8557,7 +8588,7 @@ expander mixing lemma. `requires`: GT-21, GT-7a, GT-7b, CB-14b,
 `congruences-and-the-chinese-remainder-theorem`, `finite-probability-and-the-probabilistic-method`.
 
 DEFS: an **$(n,d,\lambda)$-graph** (convention 28); a **quasirandom** graph
-sequence; the **character** of a finite abelian group and its orthogonality
+sequence; cite RT-3's finite-abelian-character definition and orthogonality
 relations; the **Paley graph** and the **Paley tournament**; property $S_k$ for a
 tournament, citing the published item.
 
@@ -8583,20 +8614,16 @@ P2's quantitative implications as the theorems and record the asymptotic
 equivalence as the organising corollary** — which is why P2 is the better primary
 source here.
 
-**The character theory is a seam, and §29 records it.** The characters of a finite
+**The character theory seam is settled by R-3.** The characters of a finite
 abelian group and their orthogonality are needed here, by CB-27, and by CB-14c's
 MacWilliams identity. SEAMS §4 gives `abstract-algebra` "representation theory of
 finite groups: group algebra, Maschke, characters, induced representations". For
 an *abelian* group the character is a homomorphism to $\mathbb{C}^\times$ and the
 orthogonality is a five-step consequence of the published
 `cor-sum-of-roots-of-unity` and `thm-complex-nth-roots-and-roots-of-unity`, with
-no representation theory at all (§19.2 F5). **The scaffold's proposal: CB-27 mints
-`def-character-of-a-finite-abelian-group` and the orthogonality relations, and
-this page and CB-14c cite it** — unless the orchestrator places the algebra
-track's representation-theory block below the combinatorics band, in which case
-all three cite that instead. **An id minted twice is the most expensive failure
-this commission can produce, so this is an amendment owed (§28) and not a decision
-this lane takes alone.**
+no representation theory at all (§19.2 F5). Abstract algebra RT-3 nevertheless
+owns and mints `def-character-of-a-finite-abelian-group` and its orthogonality
+theorem. CB-31, CB-27 and CB-14c cite those exact ids and do not mint them.
 
 FS: every $d$-regular graph with small $\lambda$ is quasirandom in the vertex-set
 sense too; the Chung–Graham–Wilson properties are equivalent for sparse graphs
@@ -8623,15 +8650,15 @@ Roth's theorem in the finite-field model needs **only finite Fourier analysis on
 a finite abelian group and nothing else** — no measure theory, no infinite groups,
 no analysis beyond finite sums.
 
-DEFS: a **character** of a finite abelian group and the dual group;
+DEFS: cite RT-3 `def-character-of-a-finite-abelian-group`; define only the dual
+group notation used on this page and
 $\hat f(r)=\mathbb{E}_{x\in\mathbb{F}_p^n}f(x)\omega^{-r\cdot x}=p^{-n}\sum_xf(x)\omega^{-r\cdot x}$
 with $\omega$ a fixed primitive $p$-th root of unity (#108 — **the choice of
 $\omega$ is fixed once**, citing `thm-complex-nth-roots-and-roots-of-unity`);
 **convolution**; the **3-AP density** $\Lambda_3(f)$; a **density increment**;
 a **Bohr set**.
 
-THMS: **character orthogonality**, proved from the published
-`cor-sum-of-roots-of-unity` and not assumed (#108); **Fourier inversion**
+THMS: cite RT-3's **character orthogonality** theorem (#108); **Fourier inversion**
 $f(x)=\sum_r\hat f(r)\omega^{r\cdot x}$ (P2 Thm 6.1.2); **Parseval/Plancherel**
 (P2 Thm 6.1.3); **the convolution identity** (P2 Def. 6.1.5, Thm 6.1.7);
 **the 3-AP density identity** $\Lambda_3(f)=\sum_r\hat f(r)^2\hat f(-2r)$ (P2
@@ -8728,7 +8755,7 @@ Provenance: Statements `literature-derived` (P2, quoted). Proofs
 
 ---
 
-## CB-32 (NEW). Sumset Calculus: Ruzsa, Plünnecke and Freiman in Bounded Exponent
+## CB-32 (NEW). Sumset Calculus: Ruzsa, Plünnecke and Freiman
 
 **Anchor:** immediately after CB-28's examples page.
 `requires`: CB-27, `finite-counting-and-binomial-coefficients`,
@@ -8756,19 +8783,18 @@ $\lvert A\mp B\rvert\le\lvert A\pm B\rvert^3/(\lvert A\rvert\lvert B\rvert)$;
 **Freiman's theorem in a group of bounded exponent** (landmark; P2 Thms 7.5.1,
 7.5.4) — $\lvert A+A\rvert\le K\lvert A\rvert$ in a group of exponent $r$ implies
 $A$ lies in a subgroup of size $\le C(K,r)\lvert A\rvert$ — **provable from the
-covering lemma and Plünnecke alone**, and this is why it is scaffolded where full
-Freiman is not.
+covering lemma and Plünnecke alone**.
 
-**Full Freiman's theorem in $\mathbb{Z}$ is DENIED, and the reason is precise: it
-needs the geometry of numbers, not more effort.** P2 §7.9 is titled "Geometry of
+**Full Freiman's theorem in $\mathbb{Z}$ is now included after A7.** P2 §7.9 is titled "Geometry of
 Numbers" and contains Def. 7.9.1 (lattice), Def. 7.9.2 (successive minima),
 Thm 7.9.4 (**Minkowski's second theorem**), Thm 7.9.6 (Blichfeldt), Thm 7.9.7
 (Minkowski's first theorem); §7.10 then finds a GAP inside a Bohr set, and §7.11
 assembles the theorem, together with Bogolyubov's lemma, Freiman homomorphisms and
-the Ruzsa modeling lemma. The whole chain §7.6–§7.11 is a page in itself resting
-on a subject the library has not reached. **Disposition: `deferred`, with the
-licence named — a geometry-of-numbers development, which would most naturally
-belong to `number-theory`.** §28 records the amendment; §29 the seam.
+the Ruzsa modeling lemma. Number theory MT-22 supplies successive minima and
+Minkowski's second theorem; its existing geometry-of-numbers material supplies
+the remaining cited inputs. CB-32 mints the additive-combinatorial modeling,
+Bohr-set and GAP steps and states the full theorem; it does not reprove the
+number-theory suppliers.
 **Balog–Szemerédi–Gowers** is **[F]** but long (the proof is finite graph theory,
 P2 Thms 7.13.6–7.13.11) — `deferred` unless a step-2 Beta finds room, with P5
 Lemma 6.11's entropic route as the recorded alternative. **Polynomial
@@ -9073,7 +9099,7 @@ Verbatim section headings and all named results: graph-theory harvest §B.0–§
 | 6.3–6.4 Fourier on $\mathbb{Z}$, Roth in the integers | `included` on CB-27 |
 | 6.5 Polynomial method | `included` on CB-28 in full |
 | 6.6–6.7 arithmetic regularity, popular common difference | `deferred` |
-| 7.1 Freiman's theorem | `deferred` — needs the geometry of numbers (§7.9), named precisely |
+| 7.1 Freiman's theorem | `included` on CB-32 after A7; MT-22 supplies successive minima and Minkowski's second theorem |
 | 7.2–7.5 Ruzsa triangle, Plünnecke, covering, bounded exponent | `included` on CB-32 |
 | 7.6–7.11 modeling, Bogolyubov, geometry of numbers, Bohr sets, the proof | 7.8 Bogolyubov in $\mathbb{F}_p^n$ `included` on CB-27; the rest `deferred` with the geometry-of-numbers reason |
 | 7.12 polynomial Freiman–Ruzsa | statement-only `rem-` |
@@ -9239,17 +9265,17 @@ owner, the exact change, and what this scaffold does if it is declined.
 | # | owed to | the amendment | fallback if declined |
 |---|---|---|---|
 | A1 | **the owner** (reading-order change, `AUDIT-WORKFLOW.md`: deletions, id changes and reading-order changes remain owner-only) | **Re-home five items** off `plane-graphs-euler-and-the-five-colour-theorem` to their earliest legal page: `def-bridge-in-a-graph` and `lem-edge-is-a-bridge-iff-it-lies-on-no-cycle` above `graphs-walks-and-connectivity`; `lem-three-connected-graph-has-a-contractible-edge` above `matchings-covers-menger-and-network-flows`; `def-kempe-chain` and `lem-kempe-component-colour-swap` above `graph-colouring`. Every dep of each already resolves at or below the new home, so acyclicity is preserved and no item text changes. **Two cautions:** a re-home is complete only when the **donor** page stops listing the id — no gate fails on a half-done re-home — and the donor page is **published**, so its prerequisite closure must be re-derived | GT-11 mints the **edge**-colouring two-colour swap lemma, which is a genuinely different statement from the published vertex version and not a duplicate id; GT-14 works with `def-vertex-and-edge-connectivity` and $\lambda$-witnesses. Both are scaffolded that way already, so declining costs clumsiness, not results |
-| A2 | `abstract-algebra` | Mint **Cauchy–Binet** on the determinant pages. `ls items/ \| grep -i cauchy-binet` is empty; A1 Prop. 1.3.5 and A3 Thm 9.4 both prove rather than assume it, and it is a determinant identity over a commutative ring | GT-7a mints it, with a `rem-` recording that it is not a corollary of $\det(AB)=\det A\det B$. **This is the scaffold's default and it is legitimate** — the amendment is an offer, not a dependency |
+| A2 | `abstract-algebra` — **APPLIED 2026-08-14** | LA-7 mints `thm-cauchy-binet-formula`, the rectangular commutative-ring identity requested here. | GT-7a cites it; no local mint or fallback remains |
 | A3 | `abstract-algebra` (linear-algebra completion) | Mint **Courant–Fischer** and **Cauchy interlacing** on `the-spectral-theorem-and-singular-value-decomposition`. Half of spectral graph theory is unstatable without the min–max theorem | GT-7b mints Courant–Fischer itself. Scaffolded that way already; the scaffold does not depend on a promise |
 | A4 | `abstract-algebra` | **§19.2 F2 is WITHDRAWN.** The cofactor expansion, minors, the adjugate and Cramer's rule are published on `the-determinant-of-a-linear-operator`. No amendment is owed for them; §23.0 records the correction | — |
 | A5 | `number-theory` | Mint **`thm-lagrange-four-squares`**. CB-14b's Bruck–Ryser needs it, `ls items/ \| grep -i four-square` is empty, and `number-theory`'s elementary block anchors **below** the combinatorics band, so citing it creates no forward reference | CB-14b mints it locally — the descent proof is bounded and needs only published modular arithmetic — with a `rem-` recording the duplication risk. **Never a `proved_here: false` fallback**: the theorem is provable in scope and the narrow last resort is not for results one is reluctant to build |
 | A6 | `number-theory` | Mint **Dirichlet's theorem on primes in arithmetic progressions**. GT-20's Legendre-symbol construction of the Rado graph needs it, and it is `number-theory`'s analytic block by SEAMS §4 | GT-20 drops that construction to a `rem-` with `proved_here: false` and keeps the other four constructions, which are choice-free and self-contained |
-| A7 | `number-theory` | Mint a **geometry of numbers** development — lattices, successive minima, Minkowski's first and second theorems, Blichfeldt. CB-32's full Freiman's theorem is `deferred` on exactly this | CB-32 keeps Freiman in bounded exponent, which needs only covering + Plünnecke. Already scaffolded that way |
+| A7 | `number-theory` — **APPLIED 2026-08-14** | MT-22 adds successive minima and Minkowski's second theorem; the existing geometry-of-numbers spine supplies the rest. | CB-32 may state full Freiman using those citations; the bounded-exponent fallback is no longer the ceiling |
 | A8 | `abstract-algebra` | Mint **prime subfields** and the $\mathbb{F}_q$ characteristic apparatus ("a field of characteristic $p$ contains $\mathbb{F}_p$"; "characteristic $0$ contains $\mathbb{Q}$"). GT-17c's Fano representability needs it | GT-17c builds it, ~2–3 items, [B]. Binary matroids need only $\mathbb{Z}/2$ and are unaffected |
 | A9 | `abstract-algebra` | Mint **Wedderburn's little theorem** (every finite division ring is a field). CB-14b's coordinatisation statement names it | CB-14b keeps the coordinatisation **statement** and defers the proof, which it does anyway |
-| A10 | **the orchestrator** (an ownership ruling, not a track) | Decide who mints **`def-character-of-a-finite-abelian-group`** and character orthogonality. Needed by CB-27, CB-31 and CB-14c. SEAMS §4 gives `abstract-algebra` "characters" inside representation theory; but for an abelian group this is a five-step consequence of the published `cor-sum-of-roots-of-unity` with no representation theory at all. **The scaffold proposes CB-27 mints it and the other two cite it**, unless the RT block lands below the combinatorics band | none — **this is a genuine seam and an id minted twice is the most expensive failure this commission can produce.** §29 carries it |
-| A11 | this file's own §16 (the Erdős–Hajnal block, which this lane does not edit) | The ordinary **regularity lemma** is now minted on GT-19, in the band. §16's pages should cite it rather than restate it | none needed; §16 is above the band and the citation is legal in either direction of the decision |
-| A12 | this file's own §22 (CB-21) | CB-21 states the four functions theorem, Harris/FKG and Kleitman's lemma for finite distributive lattices and set systems. It should carry a `rem-` pointing forward to CB-29's probabilistic reading, so the library does not appear to hold two unrelated FKG inequalities | CB-29 carries the agreement `rem-` instead. Either works; one of them must |
+| A10 | `abstract-algebra` — **APPLIED 2026-08-14, R-3** | RT-3 mints **`def-character-of-a-finite-abelian-group`** and character orthogonality. CB-27, CB-31 and CB-14c cite them. | no fallback; local minting is forbidden by the ruling |
+| A11 | this file's own §16 — **APPLIED 2026-08-14** | The Erdős--Hajnal pages cite GT-19's ordinary regularity lemma rather than restating it. | none |
+| A12 | this file's own §22 (CB-21) — **APPLIED 2026-08-14** | Add `rem-lattice-fkg-and-probabilistic-fkg-agree` pointing to CB-29's probabilistic reading. | none |
 | A13 | `probability-theory` (wave 3) | **Do not rebuild finite probability.** SEAMS §4 already assigns it here; this scaffold adds CB-25, CB-26, CB-29, CB-30 and CB-31 to what that track must cite rather than re-mint — in particular **Azuma–Hoeffding, McDiarmid and the exposure martingales are finite-space theorems and belong here** | none; this is a notification, not a request |
 | A14 | `monoidal-abelian-categories` (wave 1, concurrent) | CB-22 (combinatorial species, §22) is anchored after `universal-properties-and-the-yoneda-lemma` and cites `categories-functors-and-natural-transformations`. It needs the groupoid of finite sets and bijections, nothing more | none; the citation is to already-authored category-theory content |
 
@@ -9259,23 +9285,19 @@ owner, the exact change, and what this scaffold does if it is declined.
 
 ## 29.1 Unresolved seams — for the orchestrator, not for this lane
 
-1. **Who mints the characters of a finite abelian group** (amendment A10). Three
-   pages need them and SEAMS §4's representation-theory row arguably covers them.
-2. **MacWilliams and the ordering of CB-14c against CB-27.** CB-14c's MacWilliams
-   identity needs additive-character orthogonality, which CB-27 mints, and CB-27
-   sits above CB-14c in the band. Three dispositions, in the scaffold's preference
-   order: move the orthogonality lemma down to CB-14c and let CB-27 cite it;
-   declare a forward reference on a `cor-`; or place CB-14c after CB-27.
-3. **Non-abelian Cayley graph spectra** (GT-7b) rest on the Artin–Wedderburn
+1. **Character ownership and MacWilliams ordering — RESOLVED by R-3.** RT-3
+   mints the character definition and orthogonality theorem. CB-14c, CB-27 and
+   CB-31 cite them, so no CB-14c/CB-27 forward edge is required.
+2. **Non-abelian Cayley graph spectra** (GT-7b) rest on the Artin–Wedderburn
    representation theory of finite groups, owned by `abstract-algebra`. Whether
    they are `deferred` or citable depends on where that track's RT block lands
    relative to the combinatorics band — a placement question, not a mathematical
    one.
-4. **CB-14c's placement after GT-7a.** It needs simultaneous diagonalisation of
+3. **CB-14c's placement after GT-7a.** It needs simultaneous diagonalisation of
    commuting symmetric matrices, which GT-7a mints. The scaffold prefers the
    reorder to a forward reference (SEAMS §5(1)); the orchestrator may prefer to
    keep the design block contiguous.
-5. **Amendment A1's re-home is owner-only** and until it is decided, GT-11 and
+4. **Amendment A1's re-home is owner-only** and until it is decided, GT-11 and
    GT-14 carry the fallback design.
 
 ## 29.2 Denials, each with the specific reason
@@ -9290,8 +9312,8 @@ Colin de Verdière invariant (transversality on matrix manifolds); the topologic
 cycle space and the Freudenthal compactification (topology of an infinite graph);
 oriented matroids, shellability, hyperplane arrangements (M3's own §§1.8–1.10,
 2.4, 3.2.4); Seymour's matroid decomposition and matroid polytopes (LP duality,
-integral polyhedra, total unimodularity); full Freiman's theorem (geometry of
-numbers, named precisely as Minkowski's second theorem and successive minima);
+integral polyhedra, total unimodularity); the remaining unapplied
+geometry-of-numbers sequels beyond MT-22;
 Talagrand's inequality (**finite convex geometry, explicitly NOT measure theory** —
 the convex hull of $U(A,x)\subseteq\{0,1\}^n$ is a polytope, so a future finite
 polytope development closes it); graphons and graph limits, the Erdős–Rényi phase
