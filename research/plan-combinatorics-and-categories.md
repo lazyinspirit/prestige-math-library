@@ -102,7 +102,7 @@ A11 and A12 are applied below; R-3 makes duplicate character minting forbidden.
 - R-3 settles A10: abstract algebra RT-3 mints
   `def-character-of-a-finite-abelian-group` and character orthogonality.
   CB-27, CB-31 and CB-14c cite those ids and do not mint either notion.
-- A7 is accepted: number theory MT-22 supplies successive minima and
+- A7 is accepted: number theory NT-22 supplies successive minima and
   Minkowski's second theorem; CB-32 may state the full Freiman theorem using
   those suppliers rather than retaining the geometry-of-numbers denial.
 - A11/A12 are applied: the §16 Erdős--Hajnal pages cite GT-19's regularity
@@ -8790,7 +8790,7 @@ Numbers" and contains Def. 7.9.1 (lattice), Def. 7.9.2 (successive minima),
 Thm 7.9.4 (**Minkowski's second theorem**), Thm 7.9.6 (Blichfeldt), Thm 7.9.7
 (Minkowski's first theorem); §7.10 then finds a GAP inside a Bohr set, and §7.11
 assembles the theorem, together with Bogolyubov's lemma, Freiman homomorphisms and
-the Ruzsa modeling lemma. Number theory MT-22 supplies successive minima and
+the Ruzsa modeling lemma. Number theory NT-22 supplies successive minima and
 Minkowski's second theorem; its existing geometry-of-numbers material supplies
 the remaining cited inputs. CB-32 mints the additive-combinatorial modeling,
 Bohr-set and GAP steps and states the full theorem; it does not reprove the
@@ -9099,7 +9099,7 @@ Verbatim section headings and all named results: graph-theory harvest §B.0–§
 | 6.3–6.4 Fourier on $\mathbb{Z}$, Roth in the integers | `included` on CB-27 |
 | 6.5 Polynomial method | `included` on CB-28 in full |
 | 6.6–6.7 arithmetic regularity, popular common difference | `deferred` |
-| 7.1 Freiman's theorem | `included` on CB-32 after A7; MT-22 supplies successive minima and Minkowski's second theorem |
+| 7.1 Freiman's theorem | `included` on CB-32 after A7; NT-22 supplies successive minima and Minkowski's second theorem |
 | 7.2–7.5 Ruzsa triangle, Plünnecke, covering, bounded exponent | `included` on CB-32 |
 | 7.6–7.11 modeling, Bogolyubov, geometry of numbers, Bohr sets, the proof | 7.8 Bogolyubov in $\mathbb{F}_p^n$ `included` on CB-27; the rest `deferred` with the geometry-of-numbers reason |
 | 7.12 polynomial Freiman–Ruzsa | statement-only `rem-` |
@@ -9270,7 +9270,7 @@ owner, the exact change, and what this scaffold does if it is declined.
 | A4 | `abstract-algebra` | **§19.2 F2 is WITHDRAWN.** The cofactor expansion, minors, the adjugate and Cramer's rule are published on `the-determinant-of-a-linear-operator`. No amendment is owed for them; §23.0 records the correction | — |
 | A5 | `number-theory` | Mint **`thm-lagrange-four-squares`**. CB-14b's Bruck–Ryser needs it, `ls items/ \| grep -i four-square` is empty, and `number-theory`'s elementary block anchors **below** the combinatorics band, so citing it creates no forward reference | CB-14b mints it locally — the descent proof is bounded and needs only published modular arithmetic — with a `rem-` recording the duplication risk. **Never a `proved_here: false` fallback**: the theorem is provable in scope and the narrow last resort is not for results one is reluctant to build |
 | A6 | `number-theory` | Mint **Dirichlet's theorem on primes in arithmetic progressions**. GT-20's Legendre-symbol construction of the Rado graph needs it, and it is `number-theory`'s analytic block by SEAMS §4 | GT-20 drops that construction to a `rem-` with `proved_here: false` and keeps the other four constructions, which are choice-free and self-contained |
-| A7 | `number-theory` — **APPLIED 2026-08-14** | MT-22 adds successive minima and Minkowski's second theorem; the existing geometry-of-numbers spine supplies the rest. | CB-32 may state full Freiman using those citations; the bounded-exponent fallback is no longer the ceiling |
+| A7 | `number-theory` — **APPLIED 2026-08-14** | NT-22 adds successive minima and Minkowski's second theorem; the existing geometry-of-numbers spine supplies the rest. | CB-32 may state full Freiman using those citations; the bounded-exponent fallback is no longer the ceiling |
 | A8 | `abstract-algebra` | Mint **prime subfields** and the $\mathbb{F}_q$ characteristic apparatus ("a field of characteristic $p$ contains $\mathbb{F}_p$"; "characteristic $0$ contains $\mathbb{Q}$"). GT-17c's Fano representability needs it | GT-17c builds it, ~2–3 items, [B]. Binary matroids need only $\mathbb{Z}/2$ and are unaffected |
 | A9 | `abstract-algebra` | Mint **Wedderburn's little theorem** (every finite division ring is a field). CB-14b's coordinatisation statement names it | CB-14b keeps the coordinatisation **statement** and defers the proof, which it does anyway |
 | A10 | `abstract-algebra` — **APPLIED 2026-08-14, R-3** | RT-3 mints **`def-character-of-a-finite-abelian-group`** and character orthogonality. CB-27, CB-31 and CB-14c cite them. | no fallback; local minting is forbidden by the ruling |
@@ -9313,7 +9313,7 @@ cycle space and the Freudenthal compactification (topology of an infinite graph)
 oriented matroids, shellability, hyperplane arrangements (M3's own §§1.8–1.10,
 2.4, 3.2.4); Seymour's matroid decomposition and matroid polytopes (LP duality,
 integral polyhedra, total unimodularity); the remaining unapplied
-geometry-of-numbers sequels beyond MT-22;
+geometry-of-numbers sequels beyond NT-22;
 Talagrand's inequality (**finite convex geometry, explicitly NOT measure theory** —
 the convex hull of $U(A,x)\subseteq\{0,1\}^n$ is a polytope, so a future finite
 polytope development closes it); graphons and graph limits, the Erdős–Rényi phase

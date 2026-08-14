@@ -4630,7 +4630,7 @@ remaining entries retain their original addressee.
    irreducibles over $\mathbb{F}_q$** needs Möbius inversion, published at
    snapshot 203 — above the Galois block but below this block. GA-3 proves only
    the divisor-sum and existence statements (§II.12.b item 6); number theory
-   MT-9 now mints
+   NT-9 now mints
    `cor-number-of-monic-irreducible-polynomials-over-a-finite-field` by citing
    that identity and the published inversion theorem.
 

@@ -353,6 +353,26 @@ Caught before it fell through: MT and DG could each have assumed the other
 supplied it. Both final scaffolds agree MT should own it, but **the MT items are
 still written conditionally — make them unconditional.**
 
+### R-10. Pair labels are namespaced by track (2026-08-14)
+
+**§0 rule 2 above used `MT-1`, `MT-2` as a generic illustration of relative
+numbering, and the number-theory track took the placeholder prefix literally.**
+Both it and measure theory then labelled their pairs `MT-1 … MT-23`, over an
+identical range, for entirely different pages. The reconciliation had been
+silently working around it by writing "NT MT-5".
+
+Number theory's labels are now **`NT-1 … NT-24`**, and every cross-file reference
+was repointed — five in `plan-combinatorics-and-categories.md`, one in
+`plan-algebra-track.md`, and the qualified ones in the reconciliation and apply
+reports. The surviving bare `MT-n` references, notably complex analysis citing
+MT-8/11/17/20 for integration and Riesz–Thorin, genuinely mean measure theory and
+were left alone.
+
+**The rule going forward: a pair label must be unique across the whole
+commission, not merely within its own file.** It is the key the splice joins on,
+so a duplicated label is a silent mis-splice rather than a visible error. When
+illustrating the relative-numbering rule, use a prefix no real track will claim.
+
 ### Deferred to the owner
 
 37 amendment routes and 5 conflicts are classified `owner`: deletions, id changes

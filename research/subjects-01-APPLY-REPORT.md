@@ -32,10 +32,10 @@ No file under `items/` or `library/` was touched. `DEFERRED.md`,
 | A-041 | abstract algebra → orchestrator / plan spec | Applied at scaffold level: X-1's future `requires` repoint is recorded with the exact three suppliers; `plan-spec.json` is unchanged. |
 | A-042 | abstract algebra → orchestrator / plan spec | Applied at scaffold level: RT-3's future removal of the inner-product prerequisite is recorded because the pairing is bilinear; `plan-spec.json` is unchanged. |
 | A-044 | abstract algebra → orchestrator | Applied: the algebra scaffold now explicitly forbids treating spec item arrays as a complete authored-disk inventory. |
-| A-049 | abstract algebra → number theory | Applied: NT MT-9 adds `cor-number-of-monic-irreducible-polynomials-over-a-finite-field` with $N_n(q)=n^{-1}\sum_{d\mid n}\mu(d)q^{n/d}$. |
+| A-049 | abstract algebra → number theory | Applied: NT-9 adds `cor-number-of-monic-irreducible-polynomials-over-a-finite-field` with $N_n(q)=n^{-1}\sum_{d\mid n}\mu(d)q^{n/d}$. |
 | A-057 | abstract algebra → abstract-algebra builder | Applied as a binding authoring gate: X-2 interlacing/Weyl requires a verified second independent treatment and exact locator. No unruled source was invented. |
 | A-073 | combinatorics → abstract algebra | Applied: LA-7 mints `thm-cauchy-binet-formula`; GT-7a cites it and has no local fallback. |
-| A-078 | combinatorics → number theory | Applied: NT MT-22 adds successive minima and Minkowski's second theorem; CB-32 cites them for full Freiman. |
+| A-078 | combinatorics → number theory | Applied: NT-22 adds successive minima and Minkowski's second theorem; CB-32 cites them for full Freiman. |
 | A-082 | combinatorics → retained §16 | Applied: the Erdős--Hajnal block cites GT-19's ordinary regularity lemma. |
 | A-083 | combinatorics → CB-21 | Applied: CB-21 adds `rem-lattice-fkg-and-probabilistic-fkg-agree` pointing to CB-29. |
 | A-088 | combinatorics → Ramsey theory | Applied: CB-11 adds the requested power-form finite Ramsey corollary. |
@@ -91,7 +91,7 @@ No file under `items/` or `library/` was touched. `DEFERRED.md`,
 | O-022 | Measure-theory category value / empty nested directory | **Skipped.** Taxonomy and directory disposition were not in the authorised owner subset; no directory or category file was changed. |
 | O-025 | Delete discharged `DEFERRED.md` rows | **Skipped.** Explicitly excluded; `DEFERRED.md` is unchanged. |
 | O-043 | Four Galois A/B pairs | **Applied.** GA-1/GA-2 use 98--101 and GA-3/GA-4 use 101.2/101.4/101.6/101.8. |
-| O-048 | Include Kronecker--Weber | **Applied.** GA-3 mints `thm-kronecker-weber`; NT MT-24 cites it and owns the arithmetic ramification consequence. |
+| O-048 | Include Kronecker--Weber | **Applied.** GA-3 mints `thm-kronecker-weber`; NT-24 cites it and owns the arithmetic ramification consequence. |
 | O-055 | Retain GA-1 algebraic closure | **Applied.** GA-1 keeps the algebraic-closure block and no ambient-normal-extension fallback is inserted. |
 | O-056 | Pair the concrete insoluble quintic with X-1 if order changes | **Skipped.** No specific owner authorisation or order change was supplied for this separate pairing question. |
 | O-072 | Rehome five published graph items | **Skipped.** Explicitly excluded as published-content work; no `items/` or `library/` file was touched. |
@@ -140,7 +140,7 @@ this commission.
 | S-061 | abstract algebra → orchestrator/future builders | Skipped — stale; source harvest already replaces it, no edit. |
 | S-074 | combinatorics → abstract algebra | Skipped — stale; X-2 already contains the requested results, no edit. |
 | S-075 | combinatorics → abstract algebra | Skipped — stale withdrawal, no edit. |
-| S-076 | combinatorics → number theory | Skipped — stale; MT-5 already supplies it, no edit. |
+| S-076 | combinatorics → number theory | Skipped — stale; NT-5 already supplies it, no edit. |
 | S-077 | combinatorics → number theory | Skipped — stale; NT already supplies it, no edit. |
 | S-079 | combinatorics → abstract algebra | Skipped — stale; already true, no edit. |
 | S-080 | combinatorics → abstract algebra | Skipped — stale; already true, no edit. |

@@ -73,7 +73,7 @@ Erdős–Hajnal block.
 | combinatorics | abstract-algebra | Mint Cauchy–Binet on the determinant pages rather than on GT-7a. | same, A2, line 9242 | `apply` — the algebra scaffold still has no Cauchy–Binet item; the current GT fallback would put a core linear-algebra identity in the wrong subject. |
 | combinatorics | abstract-algebra | Mint Courant–Fischer and Cauchy interlacing on X-2. | same, A3, line 9243 | `stale` — X-2 now includes both. |
 | combinatorics | abstract-algebra | Withdraw the obsolete request for cofactors/minors/adjugate/Cramer's rule. | same, A4, line 9244 | `stale` — the row is itself a withdrawal and the material is published. |
-| combinatorics | number-theory | Mint Lagrange's four-square theorem. | same, A5, line 9245 | `stale` — NT MT-5 now supplies `thm-lagrange-four-square-theorem`. |
+| combinatorics | number-theory | Mint Lagrange's four-square theorem. | same, A5, line 9245 | `stale` — NT-5 now supplies `thm-lagrange-four-square-theorem`. |
 | combinatorics | number-theory | Mint Dirichlet's theorem on primes in arithmetic progressions. | same, A6, line 9246 | `stale` — NT includes `thm-dirichlet-primes-arithmetic-progressions`. Placement of GT-20's use is a separate §4 issue below. |
 | combinatorics | number-theory | Extend geometry of numbers through successive minima and Minkowski's second theorem for full Freiman. | same, A7, line 9247 | `apply` — NT supplies Blichfeldt and Minkowski's first theorem, but not successive minima or the second theorem. |
 | combinatorics | abstract-algebra | Mint prime subfields and finite-field characteristic apparatus. | same, A8, line 9248 | `stale` — the algebra finite-field block now mints these. |
@@ -279,7 +279,7 @@ cross-track mathematical seams and are therefore not duplicated here.
 | Coxeter presentation of $S_n$ and Artin braid group | MA-15; abstract algebra; group theory | §4 is silent. | **Contained.** Neither algebraic track takes the offer, so MA-15 mints both under its stated fallback. No duplicate appears. |
 | Real floor and ceiling | combinatorics/Erdős–Hajnal; MA adjunction example; real analysis | §4 is silent. | **Unowned.** Two tracks request the same supplier, and neither mints it. This is the other silent gap: assign a real-analysis home once, then both cite. |
 | $\mathbb C\cong\mathbb R^2$ analytic dictionary | real analysis RA-33; complex analysis CA-1; published algebraic complex numbers | §4 is silent, while the algebraic complex-number object is already published. | **Unresolved.** Both analytic pages offer to own the topology/metric dictionary “if authored first.” That is precisely a two-sides-waiting seam: choose one A-page home and make the other cite it. |
-| Geometry of numbers through successive minima | NT MT-22; combinatorics CB-32 | Number theory owns arithmetic/geometry-of-numbers applications by subject implication, but §4 does not expressly list geometry of numbers. | **Partial.** NT supplies lattices, Blichfeldt and Minkowski's first theorem; combinatorics needs the second theorem/successive minima for full Freiman and records a bounded-exponent fallback. |
+| Geometry of numbers through successive minima | NT-22; combinatorics CB-32 | Number theory owns arithmetic/geometry-of-numbers applications by subject implication, but §4 does not expressly list geometry of numbers. | **Partial.** NT supplies lattices, Blichfeldt and Minkowski's first theorem; combinatorics needs the second theorem/successive minima for full Freiman and records a bounded-exponent fallback. |
 | Algebraic closure in the Galois block | abstract algebra; commutative algebra and NT consumers | Galois theory belongs to abstract algebra; §4 does not separately name algebraic closure. | **Compliant if retained.** No competing mint exists; owner deletion would force the ambient-normal-extension hypotheses recorded in algebra §II.13.15. |
 | Covering spaces/lifting used by DG and CA | topology; DG-20/23/26/29/34; CA surfaces | Topology is in the “already planned—nobody re-mints” layer; §4 is otherwise silent. | **Compliant but blocked.** Consumers declare forward seams and do not reconstruct the general theory; the topology page is empty. |
 | General Grothendieck-category theorems | MA; HA; future category work | §4 gives abelian categories to MA and derived machinery to HA, but is silent on a Grothendieck-category sequel. | **Unowned, safely denied.** No current item depends on the Freyd–Mitchell proof/enough-injectives/Yoneda-set results. An owner must be named before they are opened. |
@@ -311,11 +311,11 @@ read as claims, not treated as mints by grep alone.
 | `def-field-norm-and-trace` | abstract algebra Galois/field-extension block | number theory | Algebra supplies the field notion; NT uses arithmetic refinements. `ok-mint-and-cite`. |
 | `def-finite-set` | nobody here; it is recorded as an alias of published `def-countable` | abstract algebra and combinatorics both cite the alias | No unpublished mint exists. `ok-mint-and-cite` (false-positive candidate). |
 | `def-flat-module` | abstract algebra MOD-3 in prose (the id is referenced by CA/HA) | commutative algebra CA-12 and HA-10 | Only one intended mint, but it contradicts §4's assignment of flatness to commutative algebra. `unclear` pending the ownership ruling; not a double mint yet. |
-| `def-fractional-ideal` | commutative algebra CA-9 | number theory MT-21/22 | Dedekind foundation in CA, arithmetic use in NT. `ok-mint-and-cite`. |
+| `def-fractional-ideal` | commutative algebra CA-9 | number theory NT-21/22 | Dedekind foundation in CA, arithmetic use in NT. `ok-mint-and-cite`. |
 | `def-generated-sigma-algebra` | measure theory MT-1 | probability prerequisite inventory | Exact MT ownership. `ok-mint-and-cite`. |
 | `def-group-cohomology-as-a-derived-functor` | homological algebra HA-12 | group theory | Exact §4 assignment. `ok-mint-and-cite`. |
 | `def-hausdorff-dimension` | measure theory | abstract algebra uses the name only to explain namespacing of linear dimension | §4 is silent, but there is one coherent mint and algebra explicitly does not scaffold it. `ok-mint-and-cite`. |
-| `def-ideal-class-group-of-a-domain` | commutative algebra CA-9 | number theory MT-22 | Exact foundation/arithmetic split. `ok-mint-and-cite`. |
+| `def-ideal-class-group-of-a-domain` | commutative algebra CA-9 | number theory NT-22 | Exact foundation/arithmetic split. `ok-mint-and-cite`. |
 | `def-measurable-function` | measure theory MT-7 | probability prerequisite inventory | Exact MT ownership. `ok-mint-and-cite`. |
 | `def-measurable-space` | measure theory MT-1 | probability prerequisite inventory | Exact MT ownership. `ok-mint-and-cite`. |
 | `def-measure` | measure theory MT-2 | probability prerequisite inventory | Exact MT ownership. `ok-mint-and-cite`. |
@@ -327,18 +327,18 @@ read as claims, not treated as mints by grep alone.
 | `def-riemann-zeta-function` | complex analysis CA-22 | number theory analytic block | Exact §4 assignment. `ok-mint-and-cite`. |
 | `def-sigma-algebra` | measure theory MT-1 | probability prerequisite inventory | Exact MT ownership. `ok-mint-and-cite`. |
 | `ex-p-adic-integers-as-an-inverse-limit` | commutative algebra CA-13B | group theory mentions the exact id only in an amendment requesting a citation to GT-17 | The exact id is not double-minted, but its current “construct” wording repeats GT-17's object. `unclear` until §26.5 is applied. |
-| `lem-fourier-transform-of-a-gaussian` | functional analysis FA-23 | number theory MT-14 request/citation | Exact FA supplier. `ok-mint-and-cite`. |
-| `lem-ideal-class-group-well-defined` | commutative algebra CA-9 | number theory MT-22 | Exact CA supplier. `ok-mint-and-cite`. |
-| `thm-dirac-comb-is-fourier-invariant` | functional analysis FA-25 | number theory MT-14 request/citation | Exact FA supplier. `ok-mint-and-cite`. |
-| `thm-euler-product-for-riemann-zeta` | complex analysis CA-22 | number theory MT-13 | Exact CA supplier contract. `ok-mint-and-cite`. |
-| `thm-hensels-lemma-for-complete-adic-pairs` | commutative algebra CA-13 | number theory MT-17 | CA supplies complete-adic algebra; NT applies it. `ok-mint-and-cite`. |
+| `lem-fourier-transform-of-a-gaussian` | functional analysis FA-23 | number theory NT-14 request/citation | Exact FA supplier. `ok-mint-and-cite`. |
+| `lem-ideal-class-group-well-defined` | commutative algebra CA-9 | number theory NT-22 | Exact CA supplier. `ok-mint-and-cite`. |
+| `thm-dirac-comb-is-fourier-invariant` | functional analysis FA-25 | number theory NT-14 request/citation | Exact FA supplier. `ok-mint-and-cite`. |
+| `thm-euler-product-for-riemann-zeta` | complex analysis CA-22 | number theory NT-13 | Exact CA supplier contract. `ok-mint-and-cite`. |
+| `thm-hensels-lemma-for-complete-adic-pairs` | commutative algebra CA-13 | number theory NT-17 | CA supplies complete-adic algebra; NT applies it. `ok-mint-and-cite`. |
 | `thm-long-exact-sequence-in-cohomology` | homological algebra HA-4 | DG de Rham/Mayer–Vietoris | Exact HA/DG split. `ok-mint-and-cite`. |
 | `thm-positive-square-root` | functional analysis FA-19 | probability PT-9 | FA owns operator spectral theory. `ok-mint-and-cite`. |
 | `thm-quotient-space-universal-property` | abstract algebra LA-3 | the expansion-file amendment and later algebra section, all within the same track | One track, one item. `ok-mint-and-cite`. |
 | `thm-radon-nikodym` | measure theory MT-13 | probability PT-10 | Exact MT ownership. `ok-mint-and-cite`. |
-| `thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane` | complex analysis CA-22 | number theory MT-16 and amendment | CA owns the qualitative line; NT owns quantitative regions. `ok-mint-and-cite`. |
-| `thm-riemann-zeta-meromorphic-continuation` | complex analysis CA-22 | number theory MT-16 | Exact CA supplier. `ok-mint-and-cite`. |
-| `thm-stirling-formula-gamma` | complex analysis CA-21 | number theory MT-15 | Gamma asymptotics are supplied function-theoretically and cited arithmetically. `ok-mint-and-cite`. |
+| `thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane` | complex analysis CA-22 | number theory NT-16 and amendment | CA owns the qualitative line; NT owns quantitative regions. `ok-mint-and-cite`. |
+| `thm-riemann-zeta-meromorphic-continuation` | complex analysis CA-22 | number theory NT-16 | Exact CA supplier. `ok-mint-and-cite`. |
+| `thm-stirling-formula-gamma` | complex analysis CA-21 | number theory NT-15 | Gamma asymptotics are supplied function-theoretically and cited arithmetically. `ok-mint-and-cite`. |
 
 No regenerated id is a present exact `DOUBLE-MINT`. Two of the three `unclear`
 rows (`def-flat-module` and the p-adic example) are ownership/construction

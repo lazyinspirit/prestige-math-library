@@ -4,28 +4,30 @@
 
 **Placement and completed pairs.** This sole `number-theory` scaffold has
 three noncontiguous blocks and uses relative labels only.  After
-`splitting-fields-examples`: MT-1 primitive roots/unit groups; MT-2 quadratic
-residues/Legendre/Gauss; MT-3 quadratic reciprocity/Jacobi/modular roots; MT-4
-two squares; MT-5 four squares; MT-6 positive-definite binary forms; MT-7
-continued fractions; MT-8 Pell and generalized Pell orbits.  After
-`bloch-schottky-and-picard-examples`: MT-9 arithmetic functions/convolution;
-MT-10 average orders/representation counts; MT-11 Chebyshev/Mertens; MT-12
-Dirichlet series/Euler products; MT-13 characters/L-functions/Dirichlet AP;
-MT-14 primitive L functional equations; MT-15 Perron/explicit formula; MT-16
+`splitting-fields-examples`: NT-1 primitive roots/unit groups; NT-2 quadratic
+residues/Legendre/Gauss; NT-3 quadratic reciprocity/Jacobi/modular roots; NT-4
+two squares; NT-5 four squares; NT-6 positive-definite binary forms; NT-7
+continued fractions; NT-8 Pell and generalized Pell orbits.  After
+`bloch-schottky-and-picard-examples`: NT-9 arithmetic functions/convolution;
+NT-10 average orders/representation counts; NT-11 Chebyshev/Mertens; NT-12
+Dirichlet series/Euler products; NT-13 characters/L-functions/Dirichlet AP;
+NT-14 primitive L functional equations; NT-15 Perron/explicit formula; NT-16
 classical zero-free region/PNT.  After the last `commutative-algebra` page:
-MT-17 absolute values/\(p\)-adics/Hensel applications; MT-18 Hilbert symbols
-and proved Hasse--Minkowski; MT-19 number fields/integers/discriminants; MT-20
-prime decomposition/different; MT-21 decomposition/inertia/Frobenius; MT-22
-Minkowski/class groups; MT-23 units/regulators/\(S\)-units; MT-24 cyclotomic
+NT-17 absolute values/\(p\)-adics/Hensel applications; NT-18 Hilbert symbols
+and proved Hasse--Minkowski; NT-19 number fields/integers/discriminants; NT-20
+prime decomposition/different; NT-21 decomposition/inertia/Frobenius; NT-22
+Minkowski/class groups; NT-23 units/regulators/\(S\)-units; NT-24 cyclotomic
 arithmetic and reciprocity via Frobenius.  Every A page is below 60 items.
 
 **Full texts obtained.** Complete open books/textbook-scale notes include
 Hackman; Shoup; Stein's two elementary texts and his algebraic-number-theory
 text; Milne; Crisman; Kedlaya; Andersen; Tomczak/Boase; MIT 18.781 and the
-selected Sutherland 18.782/18.785 sets; and Conrad--Landesman.  Exact URLs,
-read ranges, heading/result inventories, and dispositions are in §7.  Every
-pair has at least two independent treatments and at least one full source with
-a harvestable contents structure.
+selected Sutherland 18.782/18.785 sets; Conrad--Landesman; Nicolas Mascot's
+complete elementary course; Jan-Hendrik Evertse's complete prime-number-theory
+course; and P. Stevenhagen's *Number Rings*.  Exact URLs, read ranges,
+heading/result inventories, and dispositions are in §7.  Every pair has at
+least two independent treatments and at least one full source with a
+harvestable contents structure; §7.15 audits this pair by pair.
 
 **Seams consumed.** The low block consumes the three published elementary
 number-theory pages plus authored group/polynomial facts and reuses the
@@ -34,12 +36,12 @@ analytic block consumes planned CA-21/CA-22 Gamma/zeta, CA-18 product theory,
 and FA Poisson/Gaussian machinery.  The high block consumes CA-6/8/9/13/14,
 abstract-algebra Galois/cyclotomic/finite-field theory, published metric
 completion, and planned GT-17 \(\mathbb Z_p\).  Because the analytic anchor
-currently precedes the commutative-algebra terminus, MT-18 legally consumes
-MT-13 and gives a complete Hasse--Minkowski proof rather than an unproved
+currently precedes the commutative-algebra terminus, NT-18 legally consumes
+NT-13 and gives a complete Hasse--Minkowski proof rather than an unproved
 remark.  The subjects-01 reconciliation also places the Möbius formula for
-monic irreducibles on MT-9, successive minima and Minkowski's second theorem
-on MT-22, and the arithmetic consequences of GA-3's Kronecker--Weber theorem
-on MT-24.
+monic irreducibles on NT-9, successive minima and Minkowski's second theorem
+on NT-22, and the arithmetic consequences of GA-3's Kronecker--Weber theorem
+on NT-24.
 
 **Amendments owed and unresolved references.** CA-18 owes stable ids for
 Jensen/Hadamard/log-derivative machinery; CA-21/22 must preserve their named
@@ -138,7 +140,7 @@ block normalises \(|x|_p=p^{-v_p(x)}\).
 6. **Class field theory and higher reciprocity.** Ideles, Artin reciprocity,
    the existence theorem of class field theory, and cubic and higher
    reciprocity form a later subject.  The owner-authorised exception is
-   Kronecker--Weber: GA-3 proves it, and MT-24 cites it for its arithmetic
+   Kronecker--Weber: GA-3 proves it, and NT-24 cites it for its arithmetic
    consequences.  Frobenius in a finite Galois extension and its cyclotomic
    use are included; neither presumes the rest of class field theory.
 7. **Additive and automorphic theory beyond the named remit.** Waring's
@@ -157,7 +159,7 @@ notation.  A primitive root is a **unit class**, not an arbitrarily selected
 integer representative.  Later, an additive valuation is normalised by
 \(v_p(p)=1\), its associated absolute value by \(|p|_p=p^{-1}\), and two
 absolute values are **defined** to be equivalent when one is a positive power
-of the other.  MT-17 then proves that, for nontrivial field absolute values,
+of the other.  NT-17 then proves that, for nontrivial field absolute values,
 this is equivalent to inducing the same topology.
 Dirichlet characters are functions on \(\mathbb Z\), periodic modulo \(q\),
 and extended by zero off the units; all logarithms in the analytic block are
@@ -183,7 +185,7 @@ prerequisites and downstream use.
 
 ## 4. Elementary and reciprocity block — after `splitting-fields-examples`
 
-### MT-1. Primitive roots and the structure of the unit groups modulo \(n\)
+### NT-1. Primitive roots and the structure of the unit groups modulo \(n\)
 
 - **A page id:** `primitive-roots-and-unit-groups-modulo-n`
 - **B page id:** `primitive-roots-and-unit-groups-modulo-n-examples`
@@ -263,7 +265,7 @@ The displayed decomposition into cyclic factors is not called canonical:
 choosing primitive roots chooses those coordinate isomorphisms.  Only the CRT
 map induced by the canonical reduction homomorphisms is canonical.  The
 Carmichael function is defined as an exponent, which is well defined without
-choosing a maximum-order element; attainment is a theorem.  MT-1 is ZF.  Its
+choosing a maximum-order element; attainment is a theorem.  NT-1 is ZF.  Its
 finite selections can be replaced by least standard representatives and use
 neither countable choice nor dependent choice.
 
@@ -293,11 +295,11 @@ Do not duplicate the already-published
 `ex-units-modulo-eight-are-not-cyclic`; link them from the B-page summary as
 prior examples.
 
-### MT-2. Quadratic residues, the Legendre symbol, and Gauss's lemma
+### NT-2. Quadratic residues, the Legendre symbol, and Gauss's lemma
 
 - **A page id:** `quadratic-residues-and-the-legendre-symbol`
 - **B page id:** `quadratic-residues-and-the-legendre-symbol-examples`
-- **Requires:** MT-1; `congruences-and-the-chinese-remainder-theorem`;
+- **Requires:** NT-1; `congruences-and-the-chinese-remainder-theorem`;
   `cyclic-groups-and-direct-products`; and `polynomial-rings-and-roots` for
   the root bound over a field.  No result from the later finite-field or
   \(p\)-adic blocks is used.
@@ -316,11 +318,12 @@ prior examples.
 | `prop-quadratic-residue-is-representative-independent` | `prop` | Whether a unit integer \(a\) is a quadratic residue modulo \(n\) depends only on its class in \((\mathbb Z/n\mathbb Z)^\times\), and the quadratic residues are exactly the image of the squaring map on that group. | L/A; Gorodnik Def. 1.1 and Thm. 1.6(ii); translate both sides of the congruence through the published quotient equality criterion. |
 | `thm-power-residue-criterion-modulo-prime` | `thm` | If \(p\) is prime, \(p\nmid a\), and \(r\ge1\), then \(x^r\equiv a\pmod p\) is soluble iff \(a^{(p-1)/\gcd(r,p-1)}\equiv1\pmod p\). | L/A; Gorodnik Thm. 1.2.  Write \(a\) and \(x\) as powers of a primitive root and solve the resulting linear congruence in the exponent using published Bézout. |
 | `cor-number-of-nth-roots-modulo-prime` | `cor` | Under the preceding hypotheses, a soluble congruence \(x^r\equiv a\pmod p\) has exactly \(\gcd(r,p-1)\) incongruent solutions. | L/A; Hackman B.VI.4 and C.II; Gorodnik proof of Thm. 1.2.  The kernel of multiplication by \(r\) on exponents modulo \(p-1\) has the stated size. |
+| `cor-unique-kth-root-modulo-prime-for-coprime-exponent` | `cor` | If \(p\) is prime, \(k\ge1\), and \(\gcd(k,p-1)=1\), then every nonzero residue \(a\pmod p\) has a unique \(k\)-th root.  If \(k\ell\equiv1\pmod{p-1}\), that root is \(a^\ell\pmod p\). | L/A; Mascot, Ch. 3 “Powers in \(\mathbb Z/p\mathbb Z\),” PDF pp. 8--9.  The source proves existence by Bézout and Fermat; uniqueness is the \(\gcd(k,p-1)=1\) case of the preceding root-count corollary.  Independence of the inverse representative \(\ell\) is made explicit using \(a^{p-1}=1\). |
 | `thm-quadratic-residues-subgroup-modulo-prime` | `thm` | For odd prime \(p\), the nonzero squares form the subgroup \(((\mathbb Z/p\mathbb Z)^\times)^2=\langle g^2\rangle\) of index \(2\), independently of the selected primitive root \(g\). | L/A; Stein Lemma 4.1.4 and its kernel discussion; Gorodnik Thm. 1.2 at \(r=2\).  The subgroup is defined intrinsically as the image of squaring; \(\langle g^2\rangle\) is a proof description, not the definition. |
 | `thm-count-of-quadratic-residues-modulo-prime` | `thm` | Exactly \((p-1)/2\) nonzero classes modulo an odd prime are quadratic residues and exactly \((p-1)/2\) are nonresidues; each nonzero residue has two square roots. | L/A; Hackman D.I.1--D.I.2; Stein Lemma 4.1.4; Gorodnik note after Thm. 1.6. |
 | `def-legendre-symbol` | `def` | For odd prime \(p\) and integer \(a\), define \((a/p)=0\) if \(p\mid a\), \(1\) if \(a\) is a quadratic residue modulo \(p\), and \(-1\) if it is a nonresidue. | L/NA; Hackman D.I.3; Stein Def. 4.1.2; Gorodnik Def. 1.4. |
 | `prop-legendre-symbol-well-defined` | `prop` | The Legendre symbol has values in \(\{-1,0,1\}\), depends only on \(a\pmod p\), and vanishes exactly when \(p\mid a\). | L/A; Hackman D.I.3 and D.I.8(a); Gorodnik Thm. 1.6(ii).  Representative independence cites the earlier residue-class proposition. |
-| `prop-legendre-symbol-on-units-is-homomorphism` | `prop` | Restricted to \((\mathbb Z/p\mathbb Z)^\times\), \(a\mapsto(a/p)\) is the surjective homomorphism onto \(\{\pm1\}\) with kernel the square subgroup; it is the unique nontrivial homomorphism from this cyclic group to \(\{\pm1\}\). | L/A; Stein Lemma 4.1.4 and Remark 4.1.6; Hackman D.I.8(b).  Uniqueness follows from the image of one primitive root, using MT-1. |
+| `prop-legendre-symbol-on-units-is-homomorphism` | `prop` | Restricted to \((\mathbb Z/p\mathbb Z)^\times\), \(a\mapsto(a/p)\) is the surjective homomorphism onto \(\{\pm1\}\) with kernel the square subgroup; it is the unique nontrivial homomorphism from this cyclic group to \(\{\pm1\}\). | L/A; Stein Lemma 4.1.4 and Remark 4.1.6; Hackman D.I.8(b).  Uniqueness follows from the image of one primitive root, using NT-1. |
 | `thm-eulers-criterion-for-legendre-symbol` | `thm` | For every integer \(a\) and odd prime \(p\), \((a/p)\equiv a^{(p-1)/2}\pmod p\); for \(p\nmid a\), both sides are the same element of \(\{\pm1\}\). | L/A; Hackman D.I.4; Stein Prop. 4.2.1 and Cor. 4.2.3; Gorodnik Thm. 1.5.  Handle \(p\mid a\) explicitly. |
 | `thm-legendre-symbol-multiplicativity` | `thm` | For all integers \(a,b\), \((ab/p)=(a/p)(b/p)\); squares may therefore be removed from the numerator when they are coprime to \(p\). | L/A; Hackman D.I.8(b)--(c); Gorodnik Thm. 1.6(i),(iii); alternatively evaluate both sides by Euler's criterion and distinguish the zero case. |
 | `cor-number-of-solutions-to-quadratic-congruence-modulo-prime` | `cor` | The congruence \(x^2\equiv a\pmod p\) has exactly \(1+(a/p)\) solution classes. | L/A; Gorodnik note after Thm. 1.6; Stein Cor. 4.2.3.  When \(p\mid a\), the sole class is \(0\); otherwise use the two-to-one squaring result. |
@@ -339,7 +342,7 @@ the zero value in the Legendre symbol is then a separate exhaustive case.  If
 representative independence before any symbol is introduced.  The notation
 \((a/p)\) is never treated as a quotient.
 
-Power residues are solved in the cyclic exponent group from MT-1.  This gives
+Power residues are solved in the cyclic exponent group from NT-1.  This gives
 the square subgroup, its cardinality, and the Legendre homomorphism without a
 choice of “a nonsquare.”  Euler's criterion is then an equality between two
 \(\{\pm1\}\)-valued homomorphisms on the units, with the divisible case added
@@ -347,7 +350,7 @@ separately.  The proof of Gauss's lemma records the signed-representative
 permutation explicitly; cancellation is legitimate because none of
 \(1,\ldots,(p-1)/2\) is divisible by \(p\).
 
-All constructions are finite and MT-2 is ZF.  A primitive root may be selected
+All constructions are finite and NT-2 is ZF.  A primitive root may be selected
 inside the proof of a theorem asserting one exists; no family of such choices
 over all primes is formed.  The source convention that “quadratic residue” is
 restricted to \(p\nmid a\) is retained for the residue/nonresidue dichotomy,
@@ -365,11 +368,11 @@ while the Legendre symbol handles \(p\mid a\) by zero.
 | `cex-squaring-on-units-is-not-a-homomorphism-nonabelian-warning` | `cex` | Explain why the squaring-map argument used here relies on the abelian unit group and is not a general group fact. |
 | `cex-quadratic-residue-definition-excludes-nonunits` | `cex` | Contrast the soluble congruence \(x^2\equiv0\pmod p\) with the unit residue/nonresidue dichotomy and the zero Legendre value. |
 
-### MT-3. Quadratic reciprocity, the Jacobi symbol, and square roots modulo \(n\)
+### NT-3. Quadratic reciprocity, the Jacobi symbol, and square roots modulo \(n\)
 
 - **A page id:** `quadratic-reciprocity-and-the-jacobi-symbol`
 - **B page id:** `quadratic-reciprocity-and-the-jacobi-symbol-examples`
-- **Requires:** MT-1--MT-2 and the three published elementary number-theory
+- **Requires:** NT-1--NT-2 and the three published elementary number-theory
   pages.  Rational inequalities and finite lattice-point sets are used in the
   reciprocity proof; the later real-analysis floor-function item is **not** a
   dependency.
@@ -398,13 +401,13 @@ while the Legendre symbol handles \(p\mid a\) by zero.
 | `prop-jacobi-one-necessary-not-sufficient-for-residue` | `prop` | If \(\gcd(a,n)=1\) and \(a\) is a square modulo odd \(n\), then \((a/n)=1\); the converse fails, for example \((2/15)=1\) although \(2\) is not a square modulo \(15\). | L/A; Hackman D.II.2; Gorodnik Lecture 10 following Def. 1.1.  Necessity reduces the square congruence at every prime divisor; failure is checked modulo \(3\) or \(5\). |
 | `lem-nonsingular-square-root-lift-modulo-odd-prime-powers` | `lem` | If \(p\) is odd, \(p\nmid a\), and \(x_k^2\equiv a\pmod {p^k}\), there is a unique \(t\pmod p\) for which \((x_k+tp^k)^2\equiv a\pmod {p^{k+1}}\). | L/A; Gorodnik Lecture 7, Thm. 1.1 at \(f(X)=X^2-a\); Hackman B.VII lifting discussion.  Divide the error by \(p^k\) and solve one linear congruence with invertible coefficient \(2x_k\). |
 | `thm-unit-square-criterion-modulo-odd-prime-powers` | `thm` | For odd prime \(p\), \(k\ge1\), and \(p\nmid a\), \(x^2\equiv a\pmod {p^k}\) is soluble iff \((a/p)=1\), and then it has exactly two solution classes. | L/A; Gorodnik Lecture 7, Thm. 1.1 and Ex. 1.3; Hackman B.VII.  Reduce necessity modulo \(p\), then lift each of the two roots uniquely and show every higher root reduces to one of them. |
-| `thm-unit-square-criterion-modulo-two-powers` | `thm` | For odd \(a\), modulo \(2\) there is one square root; modulo \(4\) there are two iff \(a\equiv1\pmod4\); and modulo \(2^k\), \(k\ge3\), there are four iff \(a\equiv1\pmod8\), and none otherwise. | L/A; Hackman B.IV.1--B.IV.3 and C.IV.3; infer sufficiency and the kernel size from MT-1's \(C_2\times C_{2^{k-2}}\) structure, while direct expansion proves every odd square is \(1\pmod8\). |
+| `thm-unit-square-criterion-modulo-two-powers` | `thm` | For odd \(a\), modulo \(2\) there is one square root; modulo \(4\) there are two iff \(a\equiv1\pmod4\); and modulo \(2^k\), \(k\ge3\), there are four iff \(a\equiv1\pmod8\), and none otherwise. | L/A; Hackman B.IV.1--B.IV.3 and C.IV.3; infer sufficiency and the kernel size from NT-1's \(C_2\times C_{2^{k-2}}\) structure, while direct expansion proves every odd square is \(1\pmod8\). |
 | `thm-unit-square-criterion-modulo-n` | `thm` | Let \(n=2^e\prod p_i^{a_i}\) and \(\gcd(a,n)=1\).  Then \(a\) is a square modulo \(n\) iff it satisfies the preceding local criterion at every prime-power factor. | L/A; Hackman B.IV and D.II.2; apply `thm-unit-group-crt-decomposition` to the squaring map. |
 | `cor-number-of-square-roots-of-a-unit-modulo-n` | `cor` | Under the same hypotheses, the number of square roots is the product of the local counts: each soluble odd prime-power factor contributes \(2\), while the \(2\)-part contributes \(1,1,2\), or \(4\) for \(e=0,1,2\), or \(e\ge3\), respectively. | L/A; Hackman B.IV.1--B.IV.3; the CRT bijection identifies the global root set with the product of local root sets. |
 
 #### Complete reciprocity proof and other obligations
 
-This page supplies a complete proof of quadratic reciprocity.  MT-2 first
+This page supplies a complete proof of quadratic reciprocity.  NT-2 first
 proves Gauss's lemma.  For fixed \(p,q\), count the lower-half multiples of
 \(q\) as the lattice points satisfying \(1\le x\le(p-1)/2\) and
 \(0<py<qx\); parity gives \((q/p)\).  Interchanging \(p,q\) counts the points
@@ -427,7 +430,7 @@ The lifting lemma is a specialised, directly proved congruence lemma, not a
 second definition or general theorem called Hensel's lemma.  The later local
 block cites the commutative-algebra owner's general Henselian result.  CRT
 counts classes rather than chosen integer representatives, so multiplying
-local root counts is well defined.  MT-3 is ZF; all products and selections
+local root counts is well defined.  NT-3 is ZF; all products and selections
 are finite, and the Jacobi algorithm is deterministic after taking least
 nonnegative remainders.
 
@@ -444,11 +447,11 @@ nonnegative remainders.
 | `cex-square-modulo-each-prime-does-not-ignore-the-two-part` | `cex` | Give an odd unit that is square at every odd prime divisor of \(n\) but fails the \(2^e\) criterion. |
 | `ex-primes-dividing-x-squared-plus-three` | `ex` | Use reciprocity to constrain odd prime divisors of \(x^2+3\), separating the exceptional prime \(3\). |
 
-### MT-4. Fermat's two-square theorem and the representation of integers
+### NT-4. Fermat's two-square theorem and the representation of integers
 
 - **A page id:** `sums-of-two-squares`
 - **B page id:** `sums-of-two-squares-examples`
-- **Requires:** MT-2--MT-3; the published factorisation, congruence, finite-set
+- **Requires:** NT-2--NT-3; the published factorisation, congruence, finite-set
   counting, pigeonhole, and real square-root results.  In particular cite
   `thm-fundamental-theorem-of-arithmetic`, `thm-the-strong-pigeonhole-principle`,
   and `thm-of-square-roots`.
@@ -470,9 +473,9 @@ nonnegative remainders.
 | `def-sum-of-two-squares-representation` | `def` | A representation of a nonnegative integer \(n\) as a sum of two squares is an ordered pair \((x,y)\in\mathbb Z^2\) with \(n=x^2+y^2\); it is primitive when \(\gcd(x,y)=1\). | L/NA; Hackman E.I opening and E.II.4; Stein Thm. 5.7.1.  “Ordered” makes later representation counts unambiguous; existence ignores order and signs. |
 | `lem-brahmagupta-fibonacci-two-square-identity` | `lem` | \((a^2+b^2)(c^2+d^2)=(ac-bd)^2+(ad+bc)^2=(ac+bd)^2+(ad-bc)^2\) for all integers \(a,b,c,d\). | L/L; Hackman E.II.1; Stein (5.7.1).  Verify by expansion. |
 | `cor-sums-of-two-squares-closed-under-products` | `cor` | The product of two nonnegative integers representable as sums of two squares is again so representable. | L/A; Hackman E.II.1; apply either displayed identity, including the zero boundary case. |
-| `lem-three-mod-four-prime-dividing-two-square-sum` | `lem` | If \(p\equiv3\pmod4\) is prime and \(p\mid x^2+y^2\), then \(p\mid x\) and \(p\mid y\), hence \(p^2\mid x^2+y^2\). | L/A; Hackman proof of E.II.2; Stein Lemma 5.7.4.  If one coordinate were a unit modulo \(p\), division would make \(-1\) a square, contradicting MT-2's first supplement. |
+| `lem-three-mod-four-prime-dividing-two-square-sum` | `lem` | If \(p\equiv3\pmod4\) is prime and \(p\mid x^2+y^2\), then \(p\mid x\) and \(p\mid y\), hence \(p^2\mid x^2+y^2\). | L/A; Hackman proof of E.II.2; Stein Lemma 5.7.4.  If one coordinate were a unit modulo \(p\), division would make \(-1\) a square, contradicting NT-2's first supplement. |
 | `lem-thue-small-representatives` | `lem` | If \(p\) is prime and \(p\nmid a\), there are nonzero integers \(r,s\) with \(|r|,|s|<\sqrt p\) and \(ra\equiv s\pmod p\). | L/A; Hackman Lemma E.I.1, restricted to the exact case used here.  Apply strong pigeonhole to the more than \(p\) pairs in the largest integral square lying below \(\sqrt p\), mapped to \(ia-j\pmod p\), then subtract the colliding pairs; write the finite bound without depending on the later general floor-function item. |
-| `thm-fermat-two-square-theorem-for-primes` | `thm` | A prime \(p\) is a sum of two integer squares iff \(p=2\) or \(p\equiv1\pmod4\). | L/A; Hackman Thm. E.I.2; Stein's sufficiency proof of Thm. 5.7.1.  For \(p\equiv1\pmod4\), choose \(a^2\equiv-1\pmod p\) by MT-2, apply Thue's lemma, and use \(0<r^2+s^2<2p\) to turn divisibility by \(p\) into equality. |
+| `thm-fermat-two-square-theorem-for-primes` | `thm` | A prime \(p\) is a sum of two integer squares iff \(p=2\) or \(p\equiv1\pmod4\). | L/A; Hackman Thm. E.I.2; Stein's sufficiency proof of Thm. 5.7.1.  For \(p\equiv1\pmod4\), choose \(a^2\equiv-1\pmod p\) by NT-2, apply Thue's lemma, and use \(0<r^2+s^2<2p\) to turn divisibility by \(p\) into equality. |
 | `thm-uniqueness-of-two-square-representation-of-a-prime` | `thm` | If \(p\equiv1\pmod4\) is prime, there are unique positive integers \(x\) odd and \(y\) even with \(p=x^2+y^2\); all ordered signed representations arise from this one by signs and interchange. | L/A; Hackman Thm. E.I.3.  Its factorisation argument shows that two essentially different representations force a nontrivial factorisation of the odd integer. |
 | `lem-two-square-representations-of-prime-powers` | `lem` | Every power of \(2\) and every power of a prime \(p\equiv1\pmod4\) is a sum of two squares; a power of \(q\equiv3\pmod4\) is representable exactly when its exponent is even. | L/A; Hackman E.II.1--E.II.2; iterate the product identity for the first two cases, use \(q^{2j}=(q^j)^2+0^2\), and use the preceding divisibility lemma for necessity. |
 | `thm-sum-of-two-squares-characterisation` | `thm` | A positive integer \(n\) is a sum of two squares iff every prime \(q\equiv3\pmod4\) occurs to an even exponent in its canonical prime factorisation. | L/A; Hackman Thm. E.II.2; Stein Thm. 5.7.1.  Sufficiency multiplies the prime-power representations; necessity repeatedly divides both coordinates by each such \(q\). |
@@ -504,7 +507,7 @@ beautiful alternate treatment, but general number rings and their prime
 factorisation belong to the post-commutative-algebra block.  The arithmetic
 formula for the number \(r_2(n)\) of ordered signed representations is retained
 for the later arithmetic-function pair, where its divisor-sum form belongs.
-MT-4 is ZF: the only selection is from explicitly finite sets, and least
+NT-4 is ZF: the only selection is from explicitly finite sets, and least
 indices can be used throughout.
 
 #### B page
@@ -519,11 +522,11 @@ indices can be used throughout.
 | `cex-four-dividing-n-forces-a-nonprimitive-two-square-representation` | `cex` | Reduce squares modulo \(4\) to show both coordinates must be even. |
 | `ex-squarefree-sums-of-two-squares` | `ex` | Classify and construct the squarefree examples in a finite interval. |
 
-### MT-5. Lagrange's four-square theorem
+### NT-5. Lagrange's four-square theorem
 
 - **A page id:** `lagrange-four-square-theorem`
 - **B page id:** `lagrange-four-square-theorem-examples`
-- **Requires:** MT-2 and the published prime-factorisation, congruence, and
+- **Requires:** NT-2 and the published prime-factorisation, congruence, and
   finite-counting pages.  This is a second elementary sums-of-squares page: it
   does not use quaternions, lattices, Minkowski's theorem, or either higher
   number-theory block.
@@ -573,7 +576,7 @@ Least absolute residues are not unique when \(m\) is even, but the lemma needs
 only one finite choice and its proof works for either sign of \(m/2\).  A
 deterministic convention—take \(m/2\) rather than \(-m/2\)—removes even that
 choice.  The sum-of-squares definition is about ordered integer tuples, so no
-quotient by signs or permutations requires a well-definedness proof.  MT-5 is
+quotient by signs or permutations requires a well-definedness proof.  NT-5 is
 ZF; its descent is finite because a positive integer decreases strictly.
 
 The converse to the three-square obstruction is Legendre's three-square
@@ -598,11 +601,11 @@ divisor-sum and theta-series proof can be stated honestly.
 | `cex-three-squares-fail-for-seven-modulo-eight` | `cex` | Verify the residue obstruction modulo \(8\) and propagate it through a power of \(4\). |
 | `ex-an-integer-that-genuinely-needs-four-squares` | `ex` | Find an explicit four-square representation of an integer \(4^a(8b+7)\) and prove that no coordinate can vanish. |
 
-### MT-6. Positive-definite binary quadratic forms and reduction
+### NT-6. Positive-definite binary quadratic forms and reduction
 
 - **A page id:** `positive-definite-binary-quadratic-forms-and-reduction`
 - **B page id:** `positive-definite-binary-quadratic-forms-and-reduction-examples`
-- **Requires:** MT-3--MT-4, the authored integer/congruence pages, and the
+- **Requires:** NT-3--NT-4, the authored integer/congruence pages, and the
   authored matrix and group-action material through `splitting-fields`.
   Only the concrete action of \(\mathrm{SL}_2(\mathbb Z)\) is developed here;
   the group itself and matrix inversion are cited.
@@ -668,10 +671,10 @@ This page does **not** define Gauss composition.  A correct composition proof
 must show independence from concordant representatives and distinguish proper
 from improper equivalence.  A future post-commutative-algebra quadratic-order
 page must build the form--ideal correspondence and obtain the group law from
-ideal multiplication; none of MT-19--MT-24 silently supplies it.  Nor is the positive-definite uniqueness
+ideal multiplication; none of NT-19--NT-24 silently supplies it.  Nor is the positive-definite uniqueness
 statement extended to \(\Delta>0\): Granville §4.6 shows that an indefinite
 class generally contains a cycle of reduced forms.  The indefinite
-reduction/Pell/narrow-class seam is recorded below.  MT-6 is ZF; reduction and
+reduction/Pell/narrow-class seam is recorded below.  NT-6 is ZF; reduction and
 class enumeration use deterministic integer algorithms and finite searches.
 
 #### B page
@@ -685,9 +688,9 @@ class enumeration use deterministic integer algorithms and finite searches.
 | `cex-same-discriminant-does-not-imply-proper-equivalence` | `cex` | Compare \((1,0,6)\) and \((2,0,3)\) of discriminant \(-24\) by the integer \(1\) they do or do not represent. |
 | `cex-same-represented-integers-do-not-imply-proper-equivalence` | `cex` | Show that \((2,1,3)\) and \((2,-1,3)\) represent the same integers but are distinct reduced representatives. |
 | `ex-proper-versus-improper-equivalence-of-forms` | `ex` | Use a determinant \(-1\) substitution to explain why forgetting orientation merges some proper classes. |
-| `cex-indefinite-classes-have-cycles-of-reduced-forms` | `cex` | Exhibit a positive-discriminant reduction cycle, warning against importing the MT-6 uniqueness theorem. |
+| `cex-indefinite-classes-have-cycles-of-reduced-forms` | `cex` | Exhibit a positive-discriminant reduction cycle, warning against importing the NT-6 uniqueness theorem. |
 
-### MT-7. Regular continued fractions and Diophantine approximation
+### NT-7. Regular continued fractions and Diophantine approximation
 
 - **A page id:** `regular-continued-fractions-and-diophantine-approximation`
 - **B page id:** `regular-continued-fractions-and-diophantine-approximation-examples`
@@ -758,7 +761,7 @@ For Lagrange's theorem, a repeated **complete quotient**, not merely a repeated
 digit, yields periodicity because the algorithm is deterministic.  Conversely
 a periodic tail must be a fixed point of a nontrivial positive
 linear-fractional transformation.  The finite-state lemma keeps all integrality,
-divisibility, sign, and bound conditions visible.  MT-7 is ZF: the integer part,
+divisibility, sign, and bound conditions visible.  NT-7 is ZF: the integer part,
 Euclidean quotients, normalized final digit, and finite-state repetitions are
 canonical; there is no countable selection.
 
@@ -775,11 +778,11 @@ canonical; there is no countable selection.
 | `cex-an-excellent-approximation-at-the-legendre-boundary` | `cex` | Show why the strict constant \(1/2\) cannot simply be replaced by an arbitrary larger constant. |
 | `ex-a-negative-real-continued-fraction` | `ex` | Apply the same floor convention to a negative irrational and verify that all later digits remain positive. |
 
-### MT-8. Pell equations and generalized Pell orbits
+### NT-8. Pell equations and generalized Pell orbits
 
 - **A page id:** `pell-equations-and-generalized-pell-orbits`
 - **B page id:** `pell-equations-and-generalized-pell-orbits-examples`
-- **Requires:** MT-7, the authored integer arithmetic and congruence pages, and
+- **Requires:** NT-7, the authored integer arithmetic and congruence pages, and
   finite pigeonhole arguments.  This page works in the order
   \(\mathbb Z[\sqrt D]\) only as the explicit rank-two ring of expressions
   \(x+y\sqrt D\); it neither identifies that ring with the ring of integers
@@ -832,7 +835,7 @@ quotient is formed.  The recurrence therefore depends neither on a choice of
 representative nor on an unproved assertion that a quadratic surd “must
 repeat.”  The first return, the reversed state chain, and the norm identity
 together give the exact period parity.  To prove the **only if** direction for
-negative Pell, use MT-7's approximation criterion with its precise strict
+negative Pell, use NT-7's approximation criterion with its precise strict
 bound; do not assert that every solution of an arbitrary generalized Pell
 equation is a convergent.
 
@@ -840,7 +843,7 @@ The generalized orbit theorem uses the real embedding only to select the
 unique integer exponent landing in a specified half-open logarithmic interval.
 The resulting coordinate bounds make the representative search finite.  This
 also proves its well-definedness without choosing one representative from each
-orbit.  MT-8 is ZF: minima are least positive integers, the exponent is a
+orbit.  NT-8 is ZF: minima are least positive integers, the exponent is a
 floor, and all terminal searches are finite.
 
 #### B page
@@ -850,7 +853,7 @@ floor, and all terminal searches are finite.
 | `ex-pell-equation-for-two` | `ex` | Derive \([1;\overline2]\), the fundamental solution \(3+2\sqrt2\), and the first several powers. |
 | `ex-pell-equation-for-three` | `ex` | Compute the even period of \(\sqrt3\), solve norm \(+1\), and prove norm \(-1\) insoluble. |
 | `ex-negative-pell-equation-for-five` | `ex` | Use the odd period to obtain \(2^2-5\cdot1^2=-1\) and square it to get the fundamental norm-one solution. |
-| `ex-pell-equation-for-fourteen` | `ex` | Reuse the complete-quotient states from MT-7 and identify which convergent first has norm \(+1\). |
+| `ex-pell-equation-for-fourteen` | `ex` | Reuse the complete-quotient states from NT-7 and identify which convergent first has norm \(+1\). |
 | `ex-large-fundamental-pell-solution-for-sixty-one` | `ex` | Compute the period and explain why the least solution can be numerically large although the algorithm is finite. |
 | `ex-generalized-pell-orbits-for-six` | `ex` | Following Conrad II Ex. 4.1, show every solution of \(x^2-6y^2=3\) lies in a listed orbit under \(5+2\sqrt6\). |
 | `ex-generalized-pell-bounded-representatives` | `ex` | Apply the explicit bounds to \(x^2-7y^2=57\), enumerate the finite representatives, and regenerate every solution. |
@@ -874,7 +877,7 @@ both id reuse and the seam contract, so arithmetic functions, average orders,
 and Chebyshev--Mertens estimates begin the analytic block and then feed its
 Dirichlet-series pages.
 
-### MT-9. Arithmetic functions and Dirichlet convolution
+### NT-9. Arithmetic functions and Dirichlet convolution
 
 - **A page id:** `arithmetic-functions-and-dirichlet-convolution`
 - **B page id:** `arithmetic-functions-and-dirichlet-convolution-examples`
@@ -927,7 +930,7 @@ of \(mn\) when \((m,n)=1\), an application of the authored FTA and Bézout
 pages.  The existing Möbius definition and inversion theorem are cited by id;
 the page does not mint alternate versions of either.
 
-MT-9 is ZF.  Prime factorisations and divisor lists are canonical finite data,
+NT-9 is ZF.  Prime factorisations and divisor lists are canonical finite data,
 and every recursive value is uniquely prescribed.  Later Euler products must
 not be inferred from these finite convolution identities until absolute
 convergence is proved.
@@ -945,11 +948,11 @@ convergence is proved.
 | `cex-multiplicative-does-not-mean-completely-multiplicative` | `cex` | Use \(\varphi\), \(\tau\), or \(\sigma\) to separate the two definitions. |
 | `cex-the-mertens-conjecture-is-false` | `cex` | State the historical conjecture \(|M(x)|<\sqrt x\), cite Odlyzko--te Riele's disproof, and make clear that this sourced computational fact is non-load-bearing. |
 
-### MT-10. Average orders, divisor sums, and representation counts
+### NT-10. Average orders, divisor sums, and representation counts
 
 - **A page id:** `average-orders-divisor-sums-and-representation-counts`
 - **B page id:** `average-orders-divisor-sums-and-representation-counts-examples`
-- **Requires:** MT-4 and MT-9; the published Möbius-inversion and
+- **Requires:** NT-4 and NT-9; the published Möbius-inversion and
   Gregory--Leibniz-series items; finite sums, real logarithms, and the existing
   big-O calculus.
 - **Primary backing:** Crisman, Ch. 20 “Long-Term Function Behavior,” §§20.1
@@ -980,7 +983,7 @@ convergence is proved.
 | `thm-coprime-pair-counting-asymptotic` | `thm` | The number of ordered pairs \((a,b)\) with \(1\le a,b\le x\) and \(\gcd(a,b)=1\) is \(\frac6{\pi^2}x^2+O(x\log x)\). | L/L; Crisman §24.6.4; Overholt Ch. 1, §1.1 supplies the equivalent summatory-totient calculation.  Insert \(\sum_{d\mid(a,b)}\mu(d)\), interchange only finite sums, and estimate \(\sum_{d\le x}\mu(d)\lfloor x/d\rfloor^2\). |
 | `cor-asymptotic-density-of-coprime-pairs` | `cor` | The proportion of pairs in \(\{1,\ldots,n\}^2\) that are coprime tends to \(6/\pi^2\). | L/A; the preceding theorem after division by \(n^2\).  This is a limit of finite uniform proportions, not an assertion about a uniform probability distribution on all positive integers. |
 | `def-two-square-representation-function` | `def` | \(r_2(n)=\#\{(x,y)\in\mathbb Z^2:x^2+y^2=n\}\), counting order and signs separately. | L/NA; Crisman §20.1; Hackman Ch. E.  The convention gives \(r_2(1)=4\) and \(r_2(0)\) is outside the domain. |
-| `lem-normalized-two-square-count-is-multiplicative` | `lem` | The arithmetic function \(r_2/4\) is multiplicative, with prime-power values \(1\) for \(2^a\), \(a+1\) for \(p^a\) when \(p\equiv1\pmod4\), and \(1\) or \(0\) according as \(a\) is even or odd when \(p\equiv3\pmod4\). | L/L; Hackman Chs. E and K.III; Crisman §20.1.  Use MT-4's prime representation and uniqueness results and the sourced sign-normalized composition/factorisation bijection; do not make an unproved surjectivity claim from the two-square identity alone. |
+| `lem-normalized-two-square-count-is-multiplicative` | `lem` | The arithmetic function \(r_2/4\) is multiplicative, with prime-power values \(1\) for \(2^a\), \(a+1\) for \(p^a\) when \(p\equiv1\pmod4\), and \(1\) or \(0\) according as \(a\) is even or odd when \(p\equiv3\pmod4\). | L/L; Hackman Chs. E and K.III; Crisman §20.1.  Use NT-4's prime representation and uniqueness results and the sourced sign-normalized composition/factorisation bijection; do not make an unproved surjectivity claim from the two-square identity alone. |
 | `thm-two-square-representation-count` | `thm` | \(r_2(n)=4\sum_{d\mid n}\chi_4(d)=4(d_1(n)-d_3(n))\), where \(\chi_4(d)=0,1,-1\) according as \(d\) is even, \(d\equiv1\), or \(d\equiv3\pmod4\), and \(d_j(n)\) counts divisors congruent to \(j\pmod4\). | L/L; Crisman §20.1; Hackman E/K.  Both sides divided by \(4\) are multiplicative and have the same three prime-power cases, so FTA identifies them. |
 | `cor-average-order-of-two-square-representations` | `cor` | \(\sum_{n\le x}r_2(n)=\pi x+O(\sqrt x)\); hence the constant function \(\pi\) is an average order of \(r_2\). | L/A; Crisman §20.1.  Apply the hyperbola method to \(4(\mathbf1*\chi_4)\), use bounded partial sums of \(\chi_4\), and cite `thm-gregory-leibniz-series-for-pi-from-a-finite-remainder` for \(\sum_{n\ge1}\chi_4(n)/n=\pi/4\). |
 
@@ -998,7 +1001,7 @@ Its multiplicativity proof must establish a bijection after the four rotations
 and sign conventions are quotiented; Hackman's unique-factorisation treatment
 or its fully expanded integer equivalent discharges that obligation.  The
 resulting prime-power comparison is finite and is not a hidden Euler-product
-argument.  MT-10 is ZF: all rearrangements are of finite sums and all limiting
+argument.  NT-10 is ZF: all rearrangements are of finite sums and all limiting
 estimates use canonical partial sums.
 
 #### B page
@@ -1013,11 +1016,11 @@ estimates use canonical partial sums.
 | `cex-average-order-is-not-pointwise-order` | `cex` | Use the spikes of \(\tau\) or \(\sigma\) to show why an average order is not a pointwise asymptotic. |
 | `rem-dirichlet-divisor-problem` | `rem` | Record the sourced open problem of improving the divisor-error exponent; no conjectural bound is used later. |
 
-### MT-11. Chebyshev bounds and Mertens' theorems
+### NT-11. Chebyshev bounds and Mertens' theorems
 
 - **A page id:** `chebyshev-bounds-and-mertens-theorems`
 - **B page id:** `chebyshev-bounds-and-mertens-theorems-examples`
-- **Requires:** MT-9--MT-10, the authored Abel-summation lemma, binomial
+- **Requires:** NT-9--NT-10, the authored Abel-summation lemma, binomial
   coefficients and logarithms, and the planned Gamma/zeta pages only for the
   exact constant in the third Mertens theorem.  No prime-number-theorem result
   is used.
@@ -1039,7 +1042,7 @@ estimates use canonical partial sums.
 | `def-prime-counting-function` | `def` | For real \(x\ge0\), \(\pi(x)=\#\{p\text{ prime}:p\le x\}\). | L/NA; Crisman Def. 21.0.1; Shoup §5.1.  This \(\pi\) is distinguished typographically from the circle constant by its argument. |
 | `def-chebyshev-theta-function` | `def` | \(\vartheta(x)=\sum_{p\le x}\log p\). | L/NA; Crisman Def. 21.4.3; Shoup §5.1. |
 | `def-chebyshev-psi-function` | `def` | \(\psi(x)=\sum_{n\le x}\Lambda(n)\). | L/NA; Shoup §5.1 and Sutherland Lecture 16.  This is the right-continuous function, not the half-weighted explicit-formula convention introduced later. |
-| `lem-chebyshev-psi-prime-power-expansion` | `lem` | \(\psi(x)=\sum_{p^k\le x}\log p=\sum_{k\ge1}\vartheta(x^{1/k})\), with both sums finite. | L/L; Shoup §5.1; direct expansion of MT-9's von Mangoldt definition. |
+| `lem-chebyshev-psi-prime-power-expansion` | `lem` | \(\psi(x)=\sum_{p^k\le x}\log p=\sum_{k\ge1}\vartheta(x^{1/k})\), with both sums finite. | L/L; Shoup §5.1; direct expansion of NT-9's von Mangoldt definition. |
 | `lem-chebyshev-functions-prime-power-comparison` | `lem` | For \(x\ge2\), \(0\le\psi(x)-\vartheta(x)=O(\sqrt x\log x)\) using only the trivial prime count; after the linear upper bound for \(\vartheta\), the error improves to \(O(\sqrt x)\). | L/A; Shoup proofs of Thms. 5.5--5.7; Sutherland Lemma 16.7.  Separate \(k=2\) and bound the finite tail \(k\ge3\) rather than hiding it in an infinite sum. |
 | `lem-prime-counting-chebyshev-partial-summation` | `lem` | For \(x\ge2\), \(\pi(x)=\vartheta(x)/\log x+\int_2^x\vartheta(t)/(t\log^2t)\,dt\), with the finite endpoint convention made explicit. | L/A; Shoup Thm. 5.5; apply the authored `lem-abel-summation-by-parts` to the prime-supported weights \(\log p\). |
 | `lem-central-binomial-coefficient-bounds` | `lem` | \(4^n/(2n+1)\le {2n\choose n}\le4^n\). | L/L; Shoup Lemma 5.2; Andersen §3.2.  The upper bound sums all binomial coefficients and the lower bound compares with their largest term. |
@@ -1071,7 +1074,7 @@ theorem, the logarithm of the finite positive product is the ordinary real
 logarithm.  The sum over \(k\ge2\) in
 \(-\log(1-1/p)=\sum_{k\ge1}1/(kp^k)\) is absolutely and uniformly controlled;
 the exact constant is obtained from a stated zeta/Gamma limit, not guessed by
-exponentiating an \(O(1)\) term.  MT-11 is ZF: all prime and binomial lists are
+exponentiating an \(O(1)\) term.  NT-11 is ZF: all prime and binomial lists are
 finite at each stage and the constants are limits of canonical partial sums.
 
 #### B page
@@ -1086,11 +1089,11 @@ finite at each stage and the constants are limits of canonical partial sums.
 | `cex-chebyshev-bounds-do-not-give-the-prime-number-theorem` | `cex` | Exhibit the logical gap between two-sided constant bounds and an asymptotic ratio of one. |
 | `cex-shoups-product-bound-does-not-determine-mertens-constant` | `cex` | Explain why a \(\Theta(1/\log x)\) estimate cannot supply the factor \(e^{-\gamma}\). |
 
-### MT-12. Dirichlet series and Euler products
+### NT-12. Dirichlet series and Euler products
 
 - **A page id:** `dirichlet-series-and-euler-products`
 - **B page id:** `dirichlet-series-and-euler-products-examples`
-- **Requires:** MT-9--MT-11; the authored Abel-summation lemma and extended
+- **Requires:** NT-9--NT-11; the authored Abel-summation lemma and extended
   reals; complex-series local uniform convergence; and the planned CA-22
   items `def-riemann-zeta-function` and `thm-euler-product-for-riemann-zeta`.
   Zeta's
@@ -1113,6 +1116,7 @@ finite at each stage and the constants are limits of canonical partial sums.
 | `thm-dirichlet-series-half-plane-convergence` | `thm` | If a Dirichlet series converges at \(s_0\), it converges locally uniformly and defines a holomorphic function on \(\Re s>\Re s_0\). | L/L; Kedlaya Lemma 2.2; Tomczak Thm. 3.4.  Abel summation bounds the tails by the bounded partial sums of \(a_nn^{-s_0}\), uniformly on compact sub-half-planes. |
 | `thm-dirichlet-series-absolute-half-plane-holomorphy` | `thm` | Absolute convergence at \(s_0\) implies absolute and locally uniform convergence on every closed half-plane \(\Re s\ge\Re s_0+\varepsilon\), and termwise differentiation there. | L/L; Kedlaya Lemma 2.2; Tomczak Thm. 3.3.  Use the Weierstrass test separately for the series and each compactly bounded logarithmic derivative factor. |
 | `thm-dirichlet-series-abscissa-gap` | `thm` | The convergence and absolute-convergence abscissae satisfy \(\sigma_c\le\sigma_a\le\sigma_c+1\), with the evident extended-real interpretation. | L/L; Tomczak Thm. 3.4; Kedlaya Lemma 2.2.  If the series converges at \(s_0\), its terms are bounded after weighting by \(n^{-s_0}\), and comparison with \(\sum n^{-1-\varepsilon}\) gives absolute convergence one unit to the right. |
+| `thm-uniqueness-of-dirichlet-series-coefficients` | `thm` | If two arithmetic functions \(f,g:\mathbb Z_{>0}\to\mathbb C\) have absolutely convergent Dirichlet series on a common right half-plane and those series agree throughout that half-plane, then \(f=g\). | L/L; Evertse, *Analytic Number Theory: Prime Number Theory*, Ch. 2, Thm. 2.1.6, PDF p. 5.  For the least \(m\) with \(f(m)\ne g(m)\), multiply the zero difference series by \(m^s\) and let real \(s\to+\infty\); absolute convergence at one fixed ordinate uniformly dominates the tail. |
 | `thm-dirichlet-series-summatory-integral` | `thm` | If \(A(x)=\sum_{n\le x}a_n\) and \(A(x)=O(x^\theta)\), then for \(\Re s>\theta\), \(\sum a_nn^{-s}=s\int_1^\infty A(x)x^{-s-1}\,dx\); the corresponding finite formula includes its endpoint term. | L/L; Tomczak Thm. 3.5; Kedlaya Ch. 1 Def. 1.3.  Derive the finite identity from Abel summation and prove the boundary term tends to zero before taking the improper limit. |
 | `thm-dirichlet-series-multiplication-convolution` | `thm` | In any common half-plane of absolute convergence, \((\sum f(n)n^{-s})(\sum g(n)n^{-s})=\sum(f*g)(n)n^{-s}\). | L/L; Kedlaya Def. 2.5; Tomczak Thm. 3.2.  Absolute convergence licenses the Cauchy-product regrouping by \(mn\), whose coefficient is the finite divisor sum. |
 | `thm-multiplicative-dirichlet-series-euler-product` | `thm` | If \(f\) is multiplicative and \(\sum |f(n)|n^{-\sigma}<\infty\), then \(\sum f(n)n^{-s}=\prod_p\sum_{k\ge0}f(p^k)p^{-ks}\) for \(\Re s\ge\sigma\), with the product taken in increasing-prime order or as the net over finite prime sets. | L/L; Kedlaya Def. 2.6; Tomczak Thm. 3.2.  First identify every finite prime product by FTA, then pass to the limit using absolute convergence. |
@@ -1120,7 +1124,7 @@ finite at each stage and the constants are limits of canonical partial sums.
 | `thm-landau-dirichlet-series` | `thm` | If \(a_n\ge0\) and the Dirichlet series has finite abscissa of convergence \(\sigma_c\), then \(s=\sigma_c\) is a singular point of the holomorphic function defined in \(\Re s>\sigma_c\). | L/L; Kedlaya Thm. 2.4; Tomczak Thm. 3.6.  Assuming a regular neighbourhood, expand at a real point to the right and use nonnegative coefficients plus Tonelli for nonnegative finite partial sums to continue past the abscissa. |
 | `thm-von-mangoldt-logarithmic-derivative-zeta` | `thm` | For \(\Re s>1\), \(-\zeta'(s)/\zeta(s)=\sum_{n\ge1}\Lambda(n)n^{-s}\). | L/L; Kedlaya Def. 2.9; Tomczak Ch. 3.  Differentiate the absolutely convergent logarithm of the zeta Euler product termwise and regroup prime powers. |
 | `cor-mobius-dirichlet-series-reciprocal-zeta` | `cor` | For \(\Re s>1\), \(\sum\mu(n)n^{-s}=1/\zeta(s)\). | L/A; Kedlaya Def. 2.8; multiply the absolutely convergent series for \(\mu\) and \(\mathbf1\), then use their published convolution identity. |
-| `cor-divisor-dirichlet-series-zeta-square` | `cor` | For \(\Re s>1\), \(\sum\tau(n)n^{-s}=\zeta(s)^2\). | L/A; Kedlaya Def. 2.8 and MT-9's \(\tau=\mathbf1*\mathbf1\). |
+| `cor-divisor-dirichlet-series-zeta-square` | `cor` | For \(\Re s>1\), \(\sum\tau(n)n^{-s}=\zeta(s)^2\). | L/A; Kedlaya Def. 2.8 and NT-9's \(\tau=\mathbf1*\mathbf1\). |
 | `cor-euler-totient-dirichlet-series` | `cor` | For \(\Re s>2\), \(\sum\varphi(n)n^{-s}=\zeta(s-1)/\zeta(s)\). | L/A; Kedlaya Ch. 2 examples.  Use \(\varphi=\mu*\operatorname{id}_1\); the stricter half-plane comes from absolute convergence of \(\sum n^{1-s}\). |
 
 #### Proof strategy and well-definedness
@@ -1134,7 +1138,7 @@ normalized to tend to zero as \(\Re s\to+\infty\), not by selecting a global
 branch across a region where zeros might occur.
 
 Landau's theorem uses positivity only after restricting to real arguments and
-finite partial sums, so no illicit complex ordering appears.  MT-12 is ZF:
+finite partial sums, so no illicit complex ordering appears.  NT-12 is ZF:
 the primes are canonically increasing and all analytic limits are limits of
 specified sequences or nets with unique values.
 
@@ -1150,11 +1154,11 @@ specified sequences or nets with unique values.
 | `cex-conditionally-convergent-euler-product-rearrangement` | `cex` | Show why formal prime-factor regrouping outside absolute convergence is not licensed. |
 | `cex-an-abscissa-need-not-be-a-line-of-convergence` | `cex` | Compare boundary points of a Dirichlet series to block the claim that the entire boundary line behaves uniformly. |
 
-### MT-13. Dirichlet characters, L-functions, and primes in progressions
+### NT-13. Dirichlet characters, L-functions, and primes in progressions
 
 - **A page id:** `dirichlet-characters-l-functions-and-primes-in-progressions`
 - **B page id:** `dirichlet-characters-l-functions-and-primes-in-progressions-examples`
-- **Requires:** MT-1, MT-9, and MT-12; CRT and the finite-abelian-group
+- **Requires:** NT-1, NT-9, and NT-12; CRT and the finite-abelian-group
   character theory owned by `abstract-algebra`; CA-22 zeta in its initial
   half-plane.  Only the arithmetic specialization of finite Fourier
   orthogonality is proved here.
@@ -1181,9 +1185,9 @@ specified sequences or nets with unique values.
 | `lem-nonprincipal-dirichlet-character-complete-sum` | `lem` | A nonprincipal character sums to zero over every complete residue system modulo \(q\). | L/L; Kedlaya Lemma 3.2; Andersen Lemma 13.2.  Multiply the sum by a unit on which the character is not one. |
 | `lem-nonprincipal-dirichlet-character-partial-sums` | `lem` | For nonprincipal \(\chi\), every partial sum \(\sum_{n\le x}\chi(n)\) is bounded in modulus by \(q\). | L/L; Andersen Lemma 13.3; decompose into complete periods plus one terminal block. |
 | `def-dirichlet-l-function` | `def` | For \(\Re s>1\), \(L(s,\chi)=\sum_{n\ge1}\chi(n)n^{-s}\). | L/NA; Kedlaya Def. 3.4; Sutherland Def. 18.19. |
-| `thm-dirichlet-l-euler-product` | `thm` | In \(\Re s>1\), \(L(s,\chi)=\prod_p(1-\chi(p)p^{-s})^{-1}\), and it is nonzero there. | L/L; Kedlaya Def. 3.4; Sutherland Def. 18.19.  Apply MT-12 to the completely multiplicative coefficient and its absolutely convergent logarithm. |
+| `thm-dirichlet-l-euler-product` | `thm` | In \(\Re s>1\), \(L(s,\chi)=\prod_p(1-\chi(p)p^{-s})^{-1}\), and it is nonzero there. | L/L; Kedlaya Def. 3.4; Sutherland Def. 18.19.  Apply NT-12 to the completely multiplicative coefficient and its absolutely convergent logarithm. |
 | `thm-principal-dirichlet-l-factorization` | `thm` | \(L(s,\chi_0)=\zeta(s)\prod_{p\mid q}(1-p^{-s})\); hence it has the same simple pole at \(s=1\) as zeta, with residue \(\prod_{p\mid q}(1-p^{-1})=\varphi(q)/q\). | L/L; Kedlaya Thm. 3.5; Andersen Thm. 14.1.  The finite missing Euler factors are never discarded. |
-| `thm-nonprincipal-dirichlet-l-holomorphic-right-half-plane` | `thm` | If \(\chi\ne\chi_0\), its Dirichlet series converges locally uniformly and is holomorphic for \(\Re s>0\). | L/L; Kedlaya Thm. 3.5; Sutherland Prop. 18.20.  Combine bounded character sums with MT-12's summatory integral/Abel argument. |
+| `thm-nonprincipal-dirichlet-l-holomorphic-right-half-plane` | `thm` | If \(\chi\ne\chi_0\), its Dirichlet series converges locally uniformly and is holomorphic for \(\Re s>0\). | L/L; Kedlaya Thm. 3.5; Sutherland Prop. 18.20.  Combine bounded character sums with NT-12's summatory integral/Abel argument. |
 | `lem-positive-log-dirichlet-series-nonvanishing` | `lem` | If the logarithm of an Euler product has nonnegative Dirichlet coefficients in its initial half-plane, Landau's theorem prevents a zero or cancellation at a proposed regular boundary point unless a matching pole accounts for it. | L/L; Kedlaya Lemma 3.6.  State the exact meromorphic quotient being tested each time; positivity is not a slogan applied to arbitrary complex values. |
 | `thm-product-dirichlet-l-nonvanishing-line-one` | `thm` | The meromorphic product \(\prod_{\chi\bmod q}L(s,\chi)\) has no zero at any regular point of \(\Re s=1\); at \(s=1\) the principal factor has its stated simple pole, and the subsequent order argument proves that no zero of another factor cancels it. | L/L; Kedlaya Thm. 3.7; Andersen Lemma 15.1.  Sum the logarithmic Euler products over characters; orthogonality makes the grouped coefficients nonnegative and Landau's theorem supplies the boundary contradiction.  At \(s=1\), count meromorphic orders rather than calling a pole an exceptional zero. |
 | `thm-dirichlet-l-nonvanishing-line-one` | `thm` | For every nonprincipal \(\chi\), \(L(1+it,\chi)\ne0\) for all real \(t\ne0\); the remaining point \(t=0\) is resolved by the next three items. | L/L; Kedlaya Thm. 3.8; Andersen Chs. 14--15.  Conjugate factors and orders of zeros/poles in the finite product are counted explicitly. |
@@ -1201,7 +1205,7 @@ specified sequences or nets with unique values.
 A character is the pair consisting of its modulus and homomorphism.  The same
 periodic arithmetic function can be regarded at several nonminimal
 moduli; conductor and primitive ancestor are deliberately postponed to
-MT-14.  Extension by zero is proved representative-independent before
+NT-14.  Extension by zero is proved representative-independent before
 complete multiplicativity or Euler products are used.
 
 For line-one nonvanishing, distinguish \(t\ne0\), nonreal characters at
@@ -1210,7 +1214,7 @@ must include the nonnegative-coefficient auxiliary function and its boundary
 argument; “Euler products do not vanish” is valid only in \(\Re s>1\) and is
 not a proof at \(s=1\).  Dirichlet's theorem then follows from finite character
 orthogonality, a controlled prime-power remainder, and the logarithmic
-singularity of the principal factor.  MT-13 is ZF: character groups and
+singularity of the principal factor.  NT-13 is ZF: character groups and
 residue systems are finite and all limits are canonical.
 
 #### B page
@@ -1226,11 +1230,11 @@ residue systems are finite and all limits are canonical.
 | `cex-a-noncoprime-residue-class-has-no-dirichlet-conclusion` | `cex` | Show why \((a,q)=1\) is indispensable and identify the at most one exceptional prime. |
 | `cex-dirichlet-density-does-not-mean-integer-natural-density` | `cex` | Explain why every residue-class prime set has natural density zero among all integers despite positive relative prime density. |
 
-### MT-14. Primitive Dirichlet L-functions and functional equations
+### NT-14. Primitive Dirichlet L-functions and functional equations
 
 - **A page id:** `primitive-dirichlet-l-functions-and-functional-equations`
 - **B page id:** `primitive-dirichlet-l-functions-and-functional-equations-examples`
-- **Requires:** MT-13; CA-21 Gamma theory; the planned functional-analysis
+- **Requires:** NT-13; CA-21 Gamma theory; the planned functional-analysis
   items `lem-fourier-transform-of-a-gaussian` and
   `thm-dirac-comb-is-fourier-invariant`, which supply Poisson summation under
   a fixed Fourier normalization.  The abstract finite-character facts are
@@ -1275,7 +1279,7 @@ this page proves the finite character twist and all scale factors.  The even
 and odd theta kernels are developed separately so that the factor \(i^{-a}\)
 is derived rather than guessed.  The exact sign of a general Gauss sum depends
 on choices, but its norm and the resulting root number are well-defined under
-the displayed convention.  MT-14 is ZF: CRT decompositions and character sums
+the displayed convention.  NT-14 is ZF: CRT decompositions and character sums
 are finite, and the analytic continuation is unique.
 
 #### B page
@@ -1290,11 +1294,11 @@ are finite, and the analytic continuation is unique.
 | `cex-a-character-modulus-need-not-be-its-conductor` | `cex` | Give an induced character whose displayed modulus is strictly larger than its conductor. |
 | `cex-gauss-sum-sign-is-not-canonical-without-conventions` | `cex` | Change the additive character or primitive root and track the sign/root-number change without altering the norm. |
 
-### MT-15. Perron inversion and the explicit formula
+### NT-15. Perron inversion and the explicit formula
 
 - **A page id:** `perron-inversion-and-the-explicit-formula`
 - **B page id:** `perron-inversion-and-the-explicit-formula-examples`
-- **Requires:** MT-12; all relevant CA-21/CA-22 Gamma-zeta items; and
+- **Requires:** NT-12; all relevant CA-21/CA-22 Gamma-zeta items; and
   CA-18's general Jensen/Hadamard theory.  CA-18 currently promises those
   results at page level but does not expose stable candidate item ids; that
   amendment is recorded below.
@@ -1314,7 +1318,7 @@ are finite, and the analytic continuation is unique.
 | `lem-truncated-perron-kernel` | `lem` | If \(I(y,T)=(2\pi i)^{-1}\int_{c-iT}^{c+iT}y^s\,ds/s\), then for \(y\ne1\), \(|I(y,T)-\delta(y)|<y^c\min\{1,(T|\log y|)^{-1}\}\), while for \(y=1\) the error is \(<c/T\). | L/L; Kedlaya Lemma 9.5; Tomczak Thm. 7.2.  The two bounds come from distinct contours and both endpoint cases are proved. |
 | `thm-perron-formula` | `thm` | If \(F(s)=\sum a_nn^{-s}\) is absolutely convergent on \(\Re s=c\), then, under the stated dominated-limit hypothesis, \(A^*(x)=(2\pi i)^{-1}\int_{c-i\infty}^{c+i\infty}F(s)x^s\,ds/s\). | L/L; Kedlaya equation (9.1.2) and Lemma 9.1; Tomczak Thm. 7.1.  Insert finite partial sums first and justify both limit interchanges. |
 | `thm-truncated-perron-formula` | `thm` | Under absolute convergence at \(c\), the height-\(T\) integral differs from \(A^*(x)\) by at most the convergent sum of \(|a_n|(x/n)^c\min\{1,(T|\log(x/n)|)^{-1}\}\), with the separate \(n=x\) endpoint term \(c|a_x|/T\). | L/L; Kedlaya Lemma 9.5 applied termwise; Tomczak Thms. 7.2--7.3.  This explicit error, rather than a generic \(o(1)\), is what later contour optimization uses. |
-| `def-half-weighted-chebyshev-psi` | `def` | \(\psi_0(x)=\sum_{n<x}\Lambda(n)+\tfrac12\Lambda(x)\) for integral \(x\), and \(\sum_{n<x}\Lambda(n)\) otherwise. | L/NA; Kedlaya Ch. 9 opening.  It is distinguished from MT-11's right-continuous \(\psi(x)=\sum_{n\le x}\Lambda(n)\). |
+| `def-half-weighted-chebyshev-psi` | `def` | \(\psi_0(x)=\sum_{n<x}\Lambda(n)+\tfrac12\Lambda(x)\) for integral \(x\), and \(\sum_{n<x}\Lambda(n)\) otherwise. | L/NA; Kedlaya Ch. 9 opening.  It is distinguished from NT-11's right-continuous \(\psi(x)=\sum_{n\le x}\Lambda(n)\). |
 | `def-riemann-zeta-zero-counting-function` | `def` | \(N(T)\) counts nontrivial zeta zeros \(\rho=\beta+i\gamma\) with \(0<\gamma\le T\), each with its multiplicity. | L/NA; Andersen §11.2.  Zeros on the boundary are included; alternate two-sided conventions are not mixed with this one. |
 | `thm-riemann-von-mangoldt-zero-counting` | `thm` | For \(T\ge2\), \(N(T)=\frac{T}{2\pi}\log\frac{T}{2\pi}-\frac{T}{2\pi}+O(\log T)\). | L/L; Andersen §11.2; Kedlaya Remark 9.7.  Apply the argument principle to the completed zeta function, use the functional equation and Stirling, and indent or perturb contours at boundary zeros. |
 | `cor-zeta-zero-count-unit-interval` | `cor` | The number of nontrivial zeros with ordinate in \([T,T+1]\) is \(O(\log(T+2))\). | L/A; Kedlaya Lemma 9.4; Andersen Lemma 11.1.  Subtract the zero-count formula with a bounded-height adjustment. |
@@ -1339,7 +1343,7 @@ hidden choice of an enumeration of all zeros.  The displayed finite zero sum
 is unambiguous; any limiting infinite sum is either inherited from the
 smoothed formula or explicitly ordered by symmetric ordinate.  Andersen
 supplies proofs for Kedlaya's exercise-deferred local-zero and logarithmic-
-derivative lemmas.  MT-15 is ZF.
+derivative lemmas.  NT-15 is ZF.
 
 #### B page
 
@@ -1353,14 +1357,14 @@ derivative lemmas.  MT-15 is ZF.
 | `cex-an-unordered-infinite-zero-sum-is-not-a-formula` | `cex` | Show why \(\sum_\rho x^\rho/\rho\) needs truncation, smoothing, or a declared symmetric limiting order. |
 | `cex-right-continuous-psi-has-the-wrong-perron-endpoint` | `cex` | At a prime power, compare \(\psi\) with \(\psi_0\) and locate the missing half jump. |
 
-### MT-16. The classical zero-free region and the prime number theorem
+### NT-16. The classical zero-free region and the prime number theorem
 
 - **A page id:** `classical-zero-free-region-and-the-prime-number-theorem`
 - **B page id:** `classical-zero-free-region-and-the-prime-number-theorem-examples`
-- **Requires:** MT-11--MT-15; CA-18's Jensen, canonical-product, and
+- **Requires:** NT-11--NT-15; CA-18's Jensen, canonical-product, and
   Hadamard-factorisation machinery; and all relevant CA-21/CA-22 Gamma-zeta
   items.  The qualitative prime number theorem in arithmetic progressions
-  uses MT-13 and the Tauberian theorem built on this page.  No result in this
+  uses NT-13 and the Tauberian theorem built on this page.  No result in this
   pair is used by either of the two earlier blocks.
 - **Primary backing:** Montgomery--Vaughan, *Multiplicative Number Theory I*,
   Ch. 6 §§6.1--6.2, pp. 168--198: Lemmas 6.1--6.5, Thms. 6.6--6.9;
@@ -1377,15 +1381,15 @@ derivative lemmas.  MT-15 is ZF.
 | `lem-zeta-logarithmic-derivative-zero-bound` | `lem` | For the completed zeta function, its Hadamard product gives the meromorphic partial-fraction identity for \(\zeta'(s)/\zeta(s)\); uniformly for \(-1\le\sigma\le2\) and \(|t|\ge3\), taking real parts expresses the local contribution of zeros as \(\tfrac12\log |t|+O(1)\) together with the explicitly displayed pole and Gamma terms. | L/L; Montgomery--Vaughan Lemmas 6.1--6.4; Andersen Thm. 10.3.  Derive the identity from the cited CA-18 canonical product and CA-21 Stirling theorem, rather than asserting a sum over zeros without its convergence prescription. |
 | `thm-riemann-zeta-classical-zero-free-region` | `thm` | There is an absolute \(c>0\) such that \(\zeta(\sigma+it)\ne0\) whenever \(\sigma\ge1-c/\log(|t|+2)\). | L/L; Montgomery--Vaughan Thm. 6.6; Andersen Thm. 10.1; Kedlaya Thm. 7.5.  The pole at \(s=1\) is not called a zero; bounded heights are covered by compactness and CA-22's zero-free line. |
 | `thm-zeta-bounds-in-classical-zero-free-region` | `thm` | For suitable absolute \(c,C>0\), \(|\zeta'(s)/\zeta(s)|\le C\log ^2(|t|+2)\) in \(\sigma\ge1-c/\log(|t|+2)\), away from the pole, and \(|1/\zeta(s)|\le C\log(|t|+2)\) in the corresponding half-width region. | L/L; Montgomery--Vaughan Thms. 6.7--6.8 and their proof; Andersen Ch. 10.  The page fixes the two possibly different region constants and treats a compact neighborhood of the real axis separately. |
-| `lem-zeta-reciprocal-zero-sum-bound` | `lem` | If nontrivial zeros are counted with multiplicity, then \(\sum_{0<|\Im\rho|\le T}|\rho|^{-1}=O(\log ^2 T)\) for \(T\ge2\). | L/L; Kedlaya Ch. 7 after Thm. 7.6; Andersen Ch. 11.  Split into unit ordinate intervals and apply MT-15's zero-count estimate; the finitely many low zeros are absorbed into the constant. |
-| `thm-chebyshev-psi-prime-number-theorem-error` | `thm` | There is an absolute \(c>0\) such that \(\psi(x)=x+O\!\left(xe^{-c\sqrt{\log x}}\right)\) for \(x\ge2\). | L/L; Montgomery--Vaughan Thm. 6.9; Kedlaya Thm. 7.7; Andersen Thm. 12.4.  Insert the truncated explicit formula from MT-15, move the contour only through the proved zero-free region, and choose \(T=\exp(C\sqrt{\log x})\) with \(C\) small enough for every error term. |
-| `cor-chebyshev-theta-prime-number-theorem-error` | `cor` | After possibly decreasing \(c\), \(\vartheta(x)=x+O\!\left(xe^{-c\sqrt{\log x}}\right)\). | L/A; Montgomery--Vaughan Thm. 6.9.  Subtract MT-11's explicit prime-power contribution \(\psi(x)-\vartheta(x)=O(\sqrt x\log ^2x)\). |
+| `lem-zeta-reciprocal-zero-sum-bound` | `lem` | If nontrivial zeros are counted with multiplicity, then \(\sum_{0<|\Im\rho|\le T}|\rho|^{-1}=O(\log ^2 T)\) for \(T\ge2\). | L/L; Kedlaya Ch. 7 after Thm. 7.6; Andersen Ch. 11.  Split into unit ordinate intervals and apply NT-15's zero-count estimate; the finitely many low zeros are absorbed into the constant. |
+| `thm-chebyshev-psi-prime-number-theorem-error` | `thm` | There is an absolute \(c>0\) such that \(\psi(x)=x+O\!\left(xe^{-c\sqrt{\log x}}\right)\) for \(x\ge2\). | L/L; Montgomery--Vaughan Thm. 6.9; Kedlaya Thm. 7.7; Andersen Thm. 12.4.  Insert the truncated explicit formula from NT-15, move the contour only through the proved zero-free region, and choose \(T=\exp(C\sqrt{\log x})\) with \(C\) small enough for every error term. |
+| `cor-chebyshev-theta-prime-number-theorem-error` | `cor` | After possibly decreasing \(c\), \(\vartheta(x)=x+O\!\left(xe^{-c\sqrt{\log x}}\right)\). | L/A; Montgomery--Vaughan Thm. 6.9.  Subtract NT-11's explicit prime-power contribution \(\psi(x)-\vartheta(x)=O(\sqrt x\log ^2x)\). |
 | `def-logarithmic-integral` | `def` | For \(x\ge2\), \(\operatorname{Li}(x)=\int_2^x dt/\log t\), so no principal-value convention across the singularity at \(1\) is involved. | L/NA; Montgomery--Vaughan §6.2; Andersen Ch. 12. |
 | `thm-prime-number-theorem-logarithmic-integral` | `thm` | For some absolute \(c>0\), \(\pi(x)=\operatorname{Li}(x)+O\!\left(xe^{-c\sqrt{\log x}}\right)\). | L/L; Montgomery--Vaughan Thm. 6.9; Andersen Thm. 12.4.  Abel summation is applied to \(d\vartheta\), retaining the lower endpoint and showing that the integrated error has the same form after decreasing \(c\). |
-| `cor-prime-number-theorem` | `cor` | \(\pi(x)\sim x/\log x\), equivalently \(\vartheta(x)\sim x\) and \(\psi(x)\sim x\). | L/A; all three primary treatments.  The equivalences use MT-11's prime-power comparison and partial summation, not a change of definition of the counting functions. |
+| `cor-prime-number-theorem` | `cor` | \(\pi(x)\sim x/\log x\), equivalently \(\vartheta(x)\sim x\) and \(\psi(x)\sim x\). | L/A; all three primary treatments.  The equivalences use NT-11's prime-power comparison and partial summation, not a change of definition of the counting functions. |
 | `cor-nth-prime-asymptotic` | `cor` | If \(p_n\) is the \(n\)-th prime, then \(p_n\sim n\log n\). | L/A; Montgomery--Vaughan §6.2.  Invert the monotone counting asymptotic with explicit two-sided \((1\pm\varepsilon)x/\log x\) bounds. |
 | `thm-newman-zagier-tauberian-theorem` | `thm` | Let \(f:[0,\infty)\to\mathbb C\) be bounded and locally integrable.  If \(g(s)=\int_0^\infty f(t)e^{-st}\,dt\), initially for \(\Re s>0\), extends holomorphically to a neighborhood of the closed half-plane \(\Re s\ge0\), then \(\int_0^\infty f(t)\,dt\) converges and equals \(g(0)\). | L/L; Kedlaya Thm. 1.8; Sutherland Lecture 16, Thm. 16.13.  Follow Newman's finite-contour proof with its polynomial damping factor and prove the horizontal and semicircular estimates; do not invoke an unnamed general Tauberian theorem. |
-| `thm-prime-number-theorem-arithmetic-progressions` | `thm` | For each fixed \(q\ge1\) and \((a,q)=1\), \(\pi(x;q,a)\sim \operatorname{Li}(x)/\varphi(q)\) as \(x\to\infty\). | L/L; Kedlaya Thm. 4.12; Sutherland Lecture 18 after the line-one nonvanishing theorem.  Apply character orthogonality to the von Mangoldt sums, use MT-13's nonvanishing on \(\Re s=1\), and apply the preceding Tauberian theorem character by character.  This is a fixed-modulus statement and claims neither a zero-free region uniform in \(q\) nor a Siegel--Walfisz error. |
+| `thm-prime-number-theorem-arithmetic-progressions` | `thm` | For each fixed \(q\ge1\) and \((a,q)=1\), \(\pi(x;q,a)\sim \operatorname{Li}(x)/\varphi(q)\) as \(x\to\infty\). | L/L; Kedlaya Thm. 4.12; Sutherland Lecture 18 after the line-one nonvanishing theorem.  Apply character orthogonality to the von Mangoldt sums, use NT-13's nonvanishing on \(\Re s=1\), and apply the preceding Tauberian theorem character by character.  This is a fixed-modulus statement and claims neither a zero-free region uniform in \(q\) nor a Siegel--Walfisz error. |
 
 #### Proof strategy and boundary obligations
 
@@ -1411,7 +1415,7 @@ each such set is finite; all sums are finite or symmetrically truncated before
 a limit.  Constants in the progression theorem may depend on fixed \(q\).
 All selections in the contour and Tauberian arguments are from explicit
 finite grids or are least natural numbers satisfying proved conditions, so
-MT-16 is ZF.
+NT-16 is ZF.
 
 #### B page
 
@@ -1423,7 +1427,7 @@ MT-16 is ZF.
 | `ex-from-psi-to-the-logarithmic-integral` | `ex` | Carry out both partial-summation conversions, including endpoints and the prime-power error. |
 | `ex-newman-tauberian-prime-number-theorem` | `ex` | Verify the Laplace-transform hypotheses for the normalized Chebyshev error and recover the qualitative PNT. |
 | `ex-prime-number-theorem-in-a-small-progression` | `ex` | Decompose a fixed residue class into its character sums and identify the sole principal main term. |
-| `cex-dirichlet-density-alone-does-not-give-a-counting-asymptotic` | `cex` | Explain why MT-13's logarithmic density proof cannot by itself yield \(\pi(x;q,a)\sim\operatorname{Li}(x)/\varphi(q)\). |
+| `cex-dirichlet-density-alone-does-not-give-a-counting-asymptotic` | `cex` | Explain why NT-13's logarithmic density proof cannot by itself yield \(\pi(x;q,a)\sim\operatorname{Li}(x)/\varphi(q)\). |
 | `cex-the-classical-zeta-region-is-not-a-uniform-dirichlet-l-region` | `cex` | Isolate the modulus dependence and why this page proves no Siegel--Walfisz or zero-density theorem for a growing modulus. |
 
 ## 6. Post--commutative-algebra local and algebraic block
@@ -1432,11 +1436,11 @@ This block is placed after the final page of the `commutative-algebra` track.
 It applies that track's integral-extension, Dedekind-domain, DVR, ideal,
 localisation, adic-completion, and Henselian machinery; it does not reproduce
 it.  In the live topology the analytic block is already below this anchor.
-Consequently MT-18 may cite MT-13's proved Dirichlet theorem in the one global
+Consequently NT-18 may cite NT-13's proved Dirichlet theorem in the one global
 square-class construction needed for the full Hasse--Minkowski theorem.  No
 low elementary page points forward into this block.
 
-### MT-17. Absolute values, completions, and p-adic numbers
+### NT-17. Absolute values, completions, and p-adic numbers
 
 - **A page id:** `absolute-values-completions-and-p-adic-numbers`
 - **B page id:** `absolute-values-completions-and-p-adic-numbers-examples`
@@ -1493,7 +1497,7 @@ before \(|a/b|_p\) is used.  Congruence modulo \(p^n\) for coefficients in
 
 The library's published `thm-metric-completion-exists` explicitly invokes
 \(\mathsf{AC}_\omega\) to choose a diagonal representative while proving
-completeness.  MT-17 therefore inherits **countable choice** through that
+completeness.  NT-17 therefore inherits **countable choice** through that
 declared dependency.  Ostrowski, the rational product formula, finite weak
 approximation, the inverse-limit comparison once its objects exist, digit
 selection by least residues, the Hensel specialization, and Newton iteration
@@ -1514,11 +1518,11 @@ scaffold does not claim that unbuilt refinement.
 | `ex-the-same-sequence-in-real-and-p-adic-metrics` | `ex` | Compare convergence and divergence of a single rational sequence at two places. |
 | `cex-zp-is-not-the-integral-closure-of-z-in-qp` | `cex` | Separate the topological closure/valuation-ring description from algebraic integral closure. |
 
-### MT-18. Hilbert symbols and the quadratic local--global principle
+### NT-18. Hilbert symbols and the quadratic local--global principle
 
 - **A page id:** `hilbert-symbols-and-the-quadratic-local-global-principle`
 - **B page id:** `hilbert-symbols-and-the-quadratic-local-global-principle-examples`
-- **Requires:** MT-2--MT-3, MT-13, MT-17; the published
+- **Requires:** NT-2--NT-3, NT-13, NT-17; the published
   `def-quadratic-form-and-polar-form` and
   `cor-quadratic-forms-diagonalize-in-characteristic-not-two`; GA-4's norm;
   and finite-field results cited through abstract algebra.
@@ -1526,33 +1530,33 @@ scaffold does not claim that unbuilt refinement.
   §§11.1--11.3, through Thm. 11.12.  Independent complete treatment: Raskin,
   *Quadratic Forms and the Hasse--Minkowski Theorem*, §§3.14--4.9, through
   Thm. 4.1.1.  The standard proofs in both sources use Dirichlet's theorem in
-  the four-variable step; MT-13 is earlier in the live plan, so that dependency
+  the four-variable step; NT-13 is earlier in the live plan, so that dependency
   is now explicit and legal.
 
 #### A-page items, in dependency order
 
 | id | kind | statement | provenance and locator |
 |---|---|---|---|
-| `def-rational-local-fields` | `def` | For the place \(\infty\), set \(\mathbb Q_\infty=\mathbb R\); for a finite place \(p\), use MT-17's \(\mathbb Q_p\). | L/NA; Sutherland Lecture 10.  “Every completion” below means precisely this indexed family. |
+| `def-rational-local-fields` | `def` | For the place \(\infty\), set \(\mathbb Q_\infty=\mathbb R\); for a finite place \(p\), use NT-17's \(\mathbb Q_p\). | L/NA; Sutherland Lecture 10.  “Every completion” below means precisely this indexed family. |
 | `def-hilbert-symbol-over-a-rational-completion` | `def` | For \(a,b\in\mathbb Q_v^\times\), define \((a,b)_v=1\) iff \(ax^2+by^2=1\) has a solution in \(\mathbb Q_v^2\), and \(-1\) otherwise. | L/NA; Sutherland Def. 10.1; Raskin §3.14.  Inputs are nonzero; later extension conventions are not smuggled into this definition. |
 | `lem-equivalent-definitions-of-the-hilbert-symbol` | `lem` | The condition \((a,b)_v=1\) is equivalent to isotropy of \(aX^2+bY^2-Z^2\), to the appropriate binary representation statement, and to \(b\) being a norm from \(\mathbb Q_v(\sqrt a)\) after the displayed sign change. | L/L; Sutherland Lemma 10.2; Raskin §§3.14--3.15.  Verify each sign by expanding the norm \(x^2-ay^2\). |
 | `lem-hilbert-symbol-depends-only-on-square-classes` | `lem` | The Hilbert symbol descends to a function on \(\mathbb Q_v^\times/\mathbb Q_v^{\times2}\) in each variable. | L/L; Sutherland §10.1.  Rescale variables explicitly and prove the resulting solvability equivalence both ways. |
 | `thm-real-hilbert-symbol-formula` | `thm` | \((a,b)_\infty=-1\) exactly when \(a<0\) and \(b<0\). | L/L; Sutherland Lemma 10.3; Raskin §3.14. |
 | `thm-odd-p-hilbert-symbol-formula` | `thm` | For odd \(p\), \(a=p^\alpha u\), \(b=p^\beta v\) with units \(u,v\),
 \[(a,b)_p=(-1)^{\alpha\beta(p-1)/2}\left({u\over p}\right)^\beta\left({v\over p}\right)^\alpha ,\]
-where only the parities of \(\alpha,\beta\) matter. | L/L; Sutherland Thm. 10.5; Raskin §3.15.  Reduce to the four square-class cases and use MT-17 Hensel lifting plus the exact Legendre convention of MT-2. |
+where only the parities of \(\alpha,\beta\) matter. | L/L; Sutherland Thm. 10.5; Raskin §3.15.  Reduce to the four square-class cases and use NT-17 Hensel lifting plus the exact Legendre convention of NT-2. |
 | `thm-two-adic-hilbert-symbol-formula` | `thm` | For odd units \(u,v\),
 \[(2^\alpha u,2^\beta v)_2=(-1)^{((u-1)/2)((v-1)/2)+\alpha(v^2-1)/8+\beta(u^2-1)/8},\]
-with the integer exponent read modulo two. | L/L; Sutherland Thm. 10.6; Raskin §3.15.  Reduce units modulo eight and use MT-17's exact two-adic square criterion. |
+with the integer exponent read modulo two. | L/L; Sutherland Thm. 10.6; Raskin §3.15.  Reduce units modulo eight and use NT-17's exact two-adic square criterion. |
 | `thm-hilbert-symbol-is-symmetric-bilinear-and-nondegenerate` | `thm` | For every rational place, the Hilbert symbol is a symmetric nondegenerate bilinear pairing \(\mathbb Q_v^\times/\mathbb Q_v^{\times2}\times\mathbb Q_v^\times/\mathbb Q_v^{\times2}\to\{\pm1\}\). | L/L; Sutherland Thm. 10.7; Raskin §§3.14--3.16.  Establish bilinearity from the norm criterion or verify it on the finite square-class representatives; nondegeneracy needs a witness for every nontrivial class. |
 | `lem-binary-quadratic-representation-via-hilbert-symbol` | `lem` | For nonzero \(a,b,t\in\mathbb Q_v\), \(aX^2+bY^2\) represents \(t\) iff \((a,b)_v=(t,-ab)_v\). | L/L; Sutherland Lemma 11.3 after diagonal rescaling; Raskin §4.2. |
 | `cor-ternary-isotropy-via-hilbert-symbol` | `cor` | The nondegenerate ternary form \(aX^2+bY^2+cZ^2\) is isotropic over \(\mathbb Q_v\) iff \((a,b)_v=(-c,-ab)_v\). | L/A; Sutherland Cor. 11.4.  The displayed signs follow by moving \(cZ^2\) and treating separately the impossible zero-coordinate degeneracy. |
 | `lem-finite-field-quadratic-isotropy-in-dimension-at-least-three` | `lem` | Every nondegenerate quadratic form of dimension at least three over a finite field of odd cardinality is isotropic. | L/A; Sutherland Thm. 11.1; Raskin §4.3.  After diagonalization, the sets of values \(ax^2\) and \(t-by^2\) each have \((q+1)/2\) elements, so they intersect and the first two variables represent every \(t\); take \(t=-c\) and the third variable equal to one.  This supplies the finite-field step directly instead of importing Chevalley--Warning. |
-| `thm-local-isotropy-at-almost-all-primes` | `thm` | A rational nondegenerate quadratic form of dimension at least three is isotropic over \(\mathbb Q_p\) for all but finitely many primes \(p\). | L/L; Sutherland Thm. 11.1 and Cor. 11.2; Raskin §4.3.  Clear denominators and exclude two and primes dividing the diagonal coefficients; the preceding finite-field lemma gives a nontrivial reduced zero, whose gradient has a unit coordinate and therefore lifts by MT-17. |
-| `thm-hilbert-reciprocity-over-the-rationals` | `thm` | For \(a,b\in\mathbb Q^\times\), \(\prod_{v\le\infty}(a,b)_v=1\), and all but finitely many factors are one. | L/L; Sutherland Thm. 10.8; Raskin §3.17.  By bilinearity reduce to \(-1,2\), and odd primes; the cases are exactly MT-3's two supplementary laws and quadratic reciprocity. |
+| `thm-local-isotropy-at-almost-all-primes` | `thm` | A rational nondegenerate quadratic form of dimension at least three is isotropic over \(\mathbb Q_p\) for all but finitely many primes \(p\). | L/L; Sutherland Thm. 11.1 and Cor. 11.2; Raskin §4.3.  Clear denominators and exclude two and primes dividing the diagonal coefficients; the preceding finite-field lemma gives a nontrivial reduced zero, whose gradient has a unit coordinate and therefore lifts by NT-17. |
+| `thm-hilbert-reciprocity-over-the-rationals` | `thm` | For \(a,b\in\mathbb Q^\times\), \(\prod_{v\le\infty}(a,b)_v=1\), and all but finitely many factors are one. | L/L; Sutherland Thm. 10.8; Raskin §3.17.  By bilinearity reduce to \(-1,2\), and odd primes; the cases are exactly NT-3's two supplementary laws and quadratic reciprocity. |
 | `cor-ternary-hilbert-one-place-principle` | `cor` | If a rational ternary form is isotropic over every completion except possibly one, it is isotropic over that remaining completion as well. | L/A; Sutherland Cor. 11.5.  Multiply the local ternary criterion over all places and use reciprocity. |
 | `thm-hasse-minkowski-for-ternary-forms-over-q` | `thm` | A nondegenerate ternary quadratic form over \(\mathbb Q\) is isotropic over \(\mathbb Q\) iff it is isotropic over \(\mathbb R\) and every \(\mathbb Q_p\). | L/L; Sutherland Lecture 11, ternary step in Thm. 11.12; Raskin §§4.4--4.7.  Scale to a squarefree diagonal form and perform the source's descent on the absolute coefficient measure, using the one-place principle to construct the smaller form. |
-| `lem-global-square-class-approximation` | `lem` | Let \(S\) be a finite set of rational places and choose \(x_v\in\mathbb Q_v^\times\) for each \(v\in S\).  There is \(x\in\mathbb Q^\times\) with \(x\in x_v\mathbb Q_v^{\times2}\) for every \(v\in S\) and \(|x|_p=1\) for every finite \(p\notin S\) except at most one prime \(p_0\). | L/L; Sutherland Lemma 11.11; Raskin Lemma 4.9.1.  Strong approximation fixes the prescribed unit square classes; MT-13 supplies a prime in the required arithmetic progression for the single possible outside valuation. |
+| `lem-global-square-class-approximation` | `lem` | Let \(S\) be a finite set of rational places and choose \(x_v\in\mathbb Q_v^\times\) for each \(v\in S\).  There is \(x\in\mathbb Q^\times\) with \(x\in x_v\mathbb Q_v^{\times2}\) for every \(v\in S\) and \(|x|_p=1\) for every finite \(p\notin S\) except at most one prime \(p_0\). | L/L; Sutherland Lemma 11.11; Raskin Lemma 4.9.1.  Strong approximation fixes the prescribed unit square classes; NT-13 supplies a prime in the required arithmetic progression for the single possible outside valuation. |
 | `thm-hasse-minkowski-over-the-rationals` | `thm` | A quadratic form of finite positive dimension over \(\mathbb Q\) represents zero nontrivially over \(\mathbb Q\) iff it does so over \(\mathbb R\) and over \(\mathbb Q_p\) for every prime \(p\). | L/L; Sutherland Thm. 11.12; Raskin Thm. 4.1.1 and §§4.8--4.9.  Remove the radical, diagonalize, use the ternary theorem as the base, treat dimension four with the preceding global square-class lemma, and reduce higher dimensions by matching values of two proper subforms. |
 
 #### Proof strategy, well-definedness, and boundary
@@ -1568,12 +1572,12 @@ Necessity in Hasse--Minkowski is scalar extension.  Sufficiency inventories
 the real place and every finite place, then uses “almost all” to reduce every
 calculation to a finite exceptional set.  The full proof is load-bearing and
 proved here: its formerly problematic Dirichlet step is licensed by the
-earlier analytic MT-13.  The theorem remains special to rational quadratic
+earlier analytic NT-13.  The theorem remains special to rational quadratic
 isotropy; it asserts neither an integral representation theorem nor a local--
 global principle for arbitrary Diophantine equations.
 
 All local formulas, reciprocity, finite approximation, and descent are ZF.
-MT-18 inherits \(\mathsf{AC}_\omega\) only through MT-17's use of the
+NT-18 inherits \(\mathsf{AC}_\omega\) only through NT-17's use of the
 published general completion theorem; its own Dirichlet prime may be taken as
 the least prime in a proved nonempty progression and adds no choice.
 
@@ -1591,7 +1595,7 @@ the least prime in a proved nonempty progression and adds no choice.
 | `cex-local-global-fails-for-a-cubic-curve` | `cex` | State Conrad's sourced Selmer example (3X^3+4Y^3+5Z^3=0): it has a nontrivial zero over every rational completion but none over (mathbb Q).  Record the local Hensel checks; cite, without importing, the source's later algebraic-number-theory proof of the global assertion. |
 | `cex-rational-isotropy-is-not-integral-representation` | `cex` | Show why clearing denominators and homogenizing do not preserve a fixed integral representation problem. |
 
-### MT-19. Number fields, rings of integers, and discriminants
+### NT-19. Number fields, rings of integers, and discriminants
 
 - **A page id:** `number-fields-rings-of-integers-and-discriminants`
 - **B page id:** `number-fields-rings-of-integers-and-discriminants-examples`
@@ -1642,7 +1646,7 @@ conventions must not be mixed.
 
 Every order has full rank by definition.  An integral basis exists by the
 finite torsion-free module theorem and is not a chosen permanent part of the
-field data.  All assertions and finite-basis choices on MT-19 are provable in
+field data.  All assertions and finite-basis choices on NT-19 are provable in
 ZF.  The item statements and proof plans are literature-derived; adapted
 corollaries are marked L/A and remain load-bearing because their statements
 are source-supported.
@@ -1659,11 +1663,11 @@ are source-supported.
 | `ex-index-obstructs-naive-polynomial-factorization` | `ex` | Exhibit a prime dividing \([\mathcal O_K:\mathbb Z[\alpha]]\) where reduction of the minimal polynomial gives the wrong ideal-factorization inference. |
 | `cex-a-number-field-need-not-be-monogenic` | `cex` | Include a fully sourced proved nonmonogenic example only; otherwise retain this slot as a documented future source obligation rather than inventing one. |
 
-### MT-20. Prime-ideal decomposition, ramification, and the different
+### NT-20. Prime-ideal decomposition, ramification, and the different
 
 - **A page id:** `prime-ideal-decomposition-ramification-and-the-different`
 - **B page id:** `prime-ideal-decomposition-ramification-and-the-different-examples`
-- **Requires:** MT-19; CA-9's `def-fractional-ideal`, prime-ideal valuations,
+- **Requires:** NT-19; CA-9's `def-fractional-ideal`, prime-ideal valuations,
   invertibility of nonzero ideals, and unique ideal factorisation.  General
   Dedekind-domain theory is cited rather than rebuilt.
 - **Primary backing:** Milne Ch. 3 §§3.1--3.4, pp. 60--67, especially
@@ -1713,7 +1717,7 @@ The trace dual is a set defined without choosing a basis.  A basis is used
 only to prove that it is a fractional ideal, so the codifferent and its inverse
 are intrinsic.  Dedekind--Kummer never appears without its index hypothesis.
 The tame equality and wild lower bound are recorded separately.  All proofs
-on MT-20 are finite algebra in ZF.
+on NT-20 are finite algebra in ZF.
 
 #### B page
 
@@ -1721,18 +1725,18 @@ on MT-20 are finite algebra in ZF.
 |---|---|---|
 | `ex-prime-factorization-in-quadratic-fields` | `ex` | Factor several primes in real and imaginary quadratic fields and verify \(\sum ef=2\). |
 | `ex-dedekind-kummer-in-a-cubic-field` | `ex` | Factor a minimal polynomial modulo several good primes and recover ideal factors. |
-| `cex-dedekind-kummer-without-the-index-hypothesis` | `cex` | Reuse MT-19's bad-index field to show the naive conclusion fails. |
+| `cex-dedekind-kummer-without-the-index-hypothesis` | `cex` | Reuse NT-19's bad-index field to show the naive conclusion fails. |
 | `ex-eisenstein-total-ramification` | `ex` | Work a prime-power example and verify the norm and residue degree. |
 | `ex-quadratic-field-codifferent` | `ex` | Compute the trace dual, different, and discriminant norm directly. |
-| `ex-cyclotomic-different-preview` | `ex` | Compute a prime cyclotomic different, flagged as preparation for MT-24 rather than a new cyclotomic theorem. |
+| `ex-cyclotomic-different-preview` | `ex` | Compute a prime cyclotomic different, flagged as preparation for NT-24 rather than a new cyclotomic theorem. |
 | `ex-tame-different-exponent` | `ex` | Verify equality \(d=e-1\) in a tame extension. |
 | `ex-wild-different-exponent` | `ex` | Give a sourced extension where the different exponent is strictly larger and explain why \(e\) alone does not determine it. |
 
-### MT-21. Decomposition, inertia, and Frobenius
+### NT-21. Decomposition, inertia, and Frobenius
 
 - **A page id:** `decomposition-inertia-and-frobenius`
 - **B page id:** `decomposition-inertia-and-frobenius-examples`
-- **Requires:** MT-17, MT-20; CA-13's completions; and the abstract-algebra
+- **Requires:** NT-17, NT-20; CA-13's completions; and the abstract-algebra
   pages for the Galois correspondence, finite fields, and restriction in
   towers.  This page applies those results to primes and completions.
 - **Primary backing:** Milne Ch. 7, especially Thm. 7.38 and the extension of
@@ -1751,7 +1755,7 @@ on MT-20 are finite algebra in ZF.
 \[|x|_L=|N_{L/K}(x)|_K^{1/[L:K]}.
 \] | L/L; Milne Thm. 7.38; Stein §9.2.  Prove the formula first for algebraic elements and then verify the triangle inequality; uniqueness follows from continuity and density after passage to a normal closure. |
 | `thm-galois-action-on-primes-above-a-prime-is-transitive` | `thm` | If \(L/K\) is finite Galois, \(\operatorname{Gal}(L/K)\) acts transitively on the primes of \(\mathcal O_L\) above a fixed \(\mathfrak p\). | L/L; Milne Ch. 8; Conrad--Landesman Ch. 23.  Use Galois invariance of the ideal factorisation and prime avoidance to exclude more than one orbit. |
-| `cor-galois-prime-decomposition-efg` | `cor` | In a finite Galois extension, all primes above \(\mathfrak p\) have common \(e\) and \(f\), and \(efg=[L:K]\). | L/A; Milne Ch. 8 and MT-20's fundamental identity. |
+| `cor-galois-prime-decomposition-efg` | `cor` | In a finite Galois extension, all primes above \(\mathfrak p\) have common \(e\) and \(f\), and \(efg=[L:K]\). | L/A; Milne Ch. 8 and NT-20's fundamental identity. |
 | `def-decomposition-group-of-a-prime` | `def` | For \(\mathfrak P\mid\mathfrak p\) in finite Galois \(L/K\), \(D(\mathfrak P/\mathfrak p)=\{\sigma\in\operatorname{Gal}(L/K):\sigma\mathfrak P=\mathfrak P\}\). | L/NA; Milne Ch. 8; Stein §9.3.  The group depends on the chosen prime above \(\mathfrak p\). |
 | `thm-decomposition-group-and-completion` | `thm` | Restriction and continuous extension give a canonical isomorphism \(D(\mathfrak P/\mathfrak p)\cong\operatorname{Gal}(L_{\mathfrak P}/K_{\mathfrak p})\). | L/L; Milne Ch. 8; Stein Thm. 9.3.1.  Prove that a stabilizer preserves the absolute value and that every local automorphism descends from the global normal extension. |
 | `def-inertia-group-of-a-prime` | `def` | Reduction gives \(D(\mathfrak P/\mathfrak p)\to\operatorname{Gal}(\kappa(\mathfrak P)/\kappa(\mathfrak p))\); its kernel is \(I(\mathfrak P/\mathfrak p)\). | L/NA; Milne Ch. 8; Stein §9.3. |
@@ -1781,7 +1785,7 @@ For unramified primes the finite-field Frobenius lifts uniquely.  The phrase
 “the Frobenius at \(\mathfrak p\)” therefore denotes a conjugacy class unless
 the extension is abelian.  All groups and prime fibres here are finite; the
 proofs and the choice of the least polynomial representatives are ZF.  The
-page inherits MT-17's separately recorded completion cost.
+page inherits NT-17's separately recorded completion cost.
 
 #### B page
 
@@ -1789,17 +1793,17 @@ page inherits MT-17's separately recorded completion cost.
 |---|---|---|
 | `ex-decomposition-inertia-in-a-quadratic-field` | `ex` | Compute \(D,I\), residue Frobenius, and all \(e,f,g\) cases. |
 | `ex-gaussian-and-eisenstein-frobenius` | `ex` | Relate congruence classes of rational primes to splitting and Frobenius. |
-| `ex-frobenius-in-a-small-cyclotomic-field` | `ex` | Compute arithmetic Frobenius as a power map, anticipating MT-24. |
+| `ex-frobenius-in-a-small-cyclotomic-field` | `ex` | Compute arithmetic Frobenius as a power map, anticipating NT-24. |
 | `ex-nonabelian-frobenius-conjugacy-class` | `ex` | Show that different primes above one base prime give conjugate but unequal elements. |
 | `ex-decomposition-groups-in-a-tower` | `ex` | Verify restriction, kernels, and the multiplication of \(e\) and \(f\). |
 | `cex-ramified-frobenius-has-no-canonical-lift` | `cex` | Display distinct lifts of the same residue Frobenius coset. |
 | `cex-frobenius-cycle-type-needs-good-reduction` | `cex` | Show why ramified or index-dividing primes are excluded from the polynomial factorization statement. |
 
-### MT-22. Minkowski theory and number-field class groups
+### NT-22. Minkowski theory and number-field class groups
 
 - **A page id:** `minkowski-theory-and-number-field-class-groups`
 - **B page id:** `minkowski-theory-and-number-field-class-groups-examples`
-- **Requires:** MT-19--MT-20; CA-9's `def-ideal-class-group-of-a-domain`,
+- **Requires:** NT-19--NT-20; CA-9's `def-ideal-class-group-of-a-domain`,
   `lem-ideal-class-group-well-defined`, and class-group/PID criterion; and the
   published finite-dimensional Euclidean topology and volume theory.  This
   page proves arithmetic finiteness of the already-defined class group.
@@ -1833,7 +1837,7 @@ for every nonzero integral ideal \(\mathfrak a\). | L/L; Milne Prop. 4.5; Stein 
 | `thm-finiteness-of-the-number-field-class-group` | `thm` | The ideal class group of \(\mathcal O_K\) is finite. | L/L; Milne Cor. 4.9; Stein §7.2.  There are only finitely many ideals of bounded norm because each contains the integer \(N\mathfrak a\) and finite quotients have only finitely many subgroups. |
 | `cor-class-group-generated-by-small-primes` | `cor` | The class group is generated by prime ideals of norm at most \(M_K\). | L/A; Milne Cor. 4.9; factor a bounded representative into prime ideals. |
 | `cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one` | `cor` | If \([K:\mathbb Q]>1\), then \(|d_K|>1\). | L/A; Milne Ch. 4 discriminant bound.  Apply Minkowski to the unit ideal and use the strict numerical inequality in each signature, with the small degrees checked separately. |
-| `cor-no-nontrivial-number-field-is-unramified-over-q` | `cor` | Every nontrivial number field has a rational prime ramified in it. | L/A; combine the preceding discriminant result with MT-20's ramification--discriminant criterion.  This concerns finite primes. |
+| `cor-no-nontrivial-number-field-is-unramified-over-q` | `cor` | Every nontrivial number field has a rational prime ramified in it. | L/A; combine the preceding discriminant result with NT-20's ramification--discriminant criterion.  This concerns finite primes. |
 | `thm-hermite-minkowski-finiteness` | `thm` | For fixed positive integers \(n\) and \(B\), only finitely many isomorphism classes of degree-\(n\) number fields satisfy \(|d_K|\le B\). | L/L; Milne Thm. 8.43; Conrad--Landesman Ch. 28.  Produce a primitive integral element with uniformly bounded conjugates, hence one of finitely many monic integer minimal polynomials. |
 
 #### Proof strategy, normalization, and choice
@@ -1865,13 +1869,13 @@ canonically enumerable.
 | `ex-no-everywhere-unramified-extension-of-q` | `ex` | Translate the discriminant conclusion into finite ramification. |
 | `cex-minkowski-constants-change-under-scaled-embedding` | `cex` | Calculate both covolume conventions and show how mixing them produces a false bound. |
 
-### MT-23. Dirichlet's unit theorem, regulators, and S-units
+### NT-23. Dirichlet's unit theorem, regulators, and S-units
 
 - **A page id:** `dirichlets-unit-theorem-regulators-and-s-units`
 - **B page id:** `dirichlets-unit-theorem-regulators-and-s-units-examples`
-- **Requires:** MT-19--MT-22; CA-9's fractional ideals, prime valuations, and
+- **Requires:** NT-19--NT-22; CA-9's fractional ideals, prime valuations, and
   finite ideal class group; and the finite-dimensional lattice results just
-  proved on MT-22.
+  proved on NT-22.
 - **Primary backing:** Milne Ch. 5 “Units,” pp. 85--91, especially Lemmas
   5.1--5.2 and Thm. 5.3.  Independent complete-text treatments: Stein §8.1;
   Conrad--Landesman Ch. 29.  The \(S\)-unit extension is cross-checked against
@@ -1917,7 +1921,7 @@ The \(S\)-integer ring is a CA localisation and its unit characterization is
 proved from prime-ideal valuations.  The map to \(\mathbb Z^S\) is intrinsic;
 choosing generators of a finite-index image only proves existence of a
 noncanonical direct-product isomorphism.  All new selections are finite and
-MT-23 is ZF once MT-22's lattice results are supplied; it inherits no choice
+NT-23 is ZF once NT-22's lattice results are supplied; it inherits no choice
 beyond its cited predecessors.
 
 #### B page
@@ -1925,18 +1929,18 @@ beyond its cited predecessors.
 | id | kind | task |
 |---|---|---|
 | `ex-units-of-q-and-imaginary-quadratic-fields` | `ex` | Determine the finite unit groups and verify rank zero. |
-| `ex-real-quadratic-units-and-pell` | `ex` | Relate norm-one units in the full ring of integers to MT-8, keeping the \(d\equiv1\pmod4\) basis correction visible. |
+| `ex-real-quadratic-units-and-pell` | `ex` | Relate norm-one units in the full ring of integers to NT-8, keeping the \(d\equiv1\pmod4\) basis correction visible. |
 | `ex-units-in-a-real-cubic-field` | `ex` | Exhibit two independent units and verify the signature rank. |
 | `ex-regulator-of-a-real-quadratic-field` | `ex` | Compute the one-dimensional covolume under the adopted log normalization. |
 | `ex-change-of-fundamental-units-preserves-regulator` | `ex` | Apply an explicit unimodular basis change. |
 | `ex-s-units-of-q` | `ex` | Prove \(\mathbb Z[S^{-1}]^\times=\{\pm\prod_{p\in S}p^{n_p}:n_p\in\mathbb Z\}\). |
 | `cex-z-sqrt-d-units-need-not-equal-ok-units` | `cex` | Show why the elementary Pell order cannot silently be identified with the maximal quadratic order. |
 
-### MT-24. Cyclotomic arithmetic and reciprocity via Frobenius
+### NT-24. Cyclotomic arithmetic and reciprocity via Frobenius
 
 - **A page id:** `cyclotomic-arithmetic-and-reciprocity-via-frobenius`
 - **B page id:** `cyclotomic-arithmetic-and-reciprocity-via-frobenius-examples`
-- **Requires:** MT-3, MT-19--MT-21; GA-3's cyclotomic polynomials,
+- **Requires:** NT-3, NT-19--NT-21; GA-3's cyclotomic polynomials,
   \(\mathbb Q(\zeta_n)/\mathbb Q\), degree \(\varphi(n)\), Galois
   isomorphism with \((\mathbb Z/n\mathbb Z)^\times\), and existence and
   uniqueness of the index-two subfield for odd prime level, together with
@@ -1956,7 +1960,7 @@ beyond its cited predecessors.
 | `thm-discriminant-of-a-cyclotomic-field` | `thm` | If \(f>1\) is the reduced conductor and \(K=\mathbb Q(\zeta_f)\), then
 \[d_K=(-1)^{\varphi(f)/2}{f^{\varphi(f)}\over\prod_{\ell\mid f}\ell^{\varphi(f)/(\ell-1)}};
 \]
-for \(f=1\), \(d_{\mathbb Q}=1\). | L/L; Milne Prop. 6.2(d) and Remark 6.6; Conrad--Landesman Lemma 10.2 and Thm. 11.9.  Apply MT-20's monogenic different formula to \(\Phi_f'(\zeta_f)\), evaluate its norm, and take sign \((-1)^{r_2}\). |
+for \(f=1\), \(d_{\mathbb Q}=1\). | L/L; Milne Prop. 6.2(d) and Remark 6.6; Conrad--Landesman Lemma 10.2 and Thm. 11.9.  Apply NT-20's monogenic different formula to \(\Phi_f'(\zeta_f)\), evaluate its norm, and take sign \((-1)^{r_2}\). |
 | `cor-total-ramification-in-a-prime-power-cyclotomic-field` | `cor` | For \(a\ge1\), in \(\mathbb Q(\zeta_{\ell^a})\),
 \[\ell\mathcal O_K=(1-\zeta_{\ell^a})^{\varphi(\ell^a)};
 \]
@@ -1968,14 +1972,14 @@ with distinct \(\mathfrak P_i\), each of residue degree \(d\), so \(edg=\varphi(
 | `cor-cyclotomic-ramification-criterion` | `cor` | A rational prime \(\ell\) ramifies in \(\mathbb Q(\zeta_f)\) iff \(\ell\mid f\), where \(f\) is the reduced conductor. | L/A; Milne Thm. 6.4(c).  Using an unreduced display index would make this statement false, for example at \(\mathbb Q(\zeta_6)=\mathbb Q(\zeta_3)\). |
 | `thm-conductor-of-a-full-cyclotomic-field` | `thm` | The conductor of \(\mathbb Q(\zeta_n)\) is \(n\), except that it is \(n/2\) when \(n\equiv2\pmod4\); in particular \(\mathbb Q(\zeta_{2m})=\mathbb Q(\zeta_m)\) for odd \(m\), and \(\mathbb Q(\zeta_2)=\mathbb Q\) has conductor one. | L/L; Milne Remark 6.6; Conrad--Landesman Remark 11.7.  The equality follows from \(-\zeta_m\).  For reduced indices, compare each prime-power ramification index in an inclusion \(\mathbb Q(\zeta_f)\subseteq\mathbb Q(\zeta_g)\): divisibility of ramification indices forces every prime exponent in \(f\) to be no larger than its exponent in reduced \(g\), hence \(f\mid g\). |
 | `cor-unramified-prime-decomposition-in-a-cyclotomic-field` | `cor` | If \(\ell\nmid f\), every prime above \(\ell\) has residue degree \(\operatorname{ord}_f(\ell)\), and their number is \(\varphi(f)/\operatorname{ord}_f(\ell)\). | L/A; Milne Example 8.18; the Frobenius element corresponds to the class of \(\ell\) modulo \(f\). |
-| `cor-complete-splitting-in-a-cyclotomic-field` | `cor` | If \(\ell\nmid f\), then \(\ell\) splits completely in \(\mathbb Q(\zeta_f)\) iff \(\ell\equiv1\pmod f\). | L/A; Milne Example 8.18; MT-21's trivial-Frobenius criterion. |
-| `cor-ramification-support-of-an-abelian-number-field` | `cor` | If \(K/\mathbb Q\) is finite abelian, GA-3's `thm-kronecker-weber` places \(K\) in some \(\mathbb Q(\zeta_f)\); hence every rational prime ramified in \(K\) divides \(f\). | L/A; cite Kronecker--Weber and the cyclotomic ramification criterion above, then use ramification in towers.  MT-24 owns this arithmetic consequence but does not re-prove the Galois theorem or claim a canonical minimal embedding conductor. |
-| `def-quadratic-gauss-sum-in-a-cyclotomic-field` | `def` | For an odd prime \(p\) and a fixed primitive \(p\)-th root \(\zeta_p\), set \(\tau_p=\sum_{a\bmod p}(a/p)\zeta_p^a\in\mathbb Z[\zeta_p]\). | L/NA; Reed Lecture 9 §2; UCSB Lecture XVII.  The Legendre symbol is the total MT-2 symbol, so the zero term contributes zero. |
+| `cor-complete-splitting-in-a-cyclotomic-field` | `cor` | If \(\ell\nmid f\), then \(\ell\) splits completely in \(\mathbb Q(\zeta_f)\) iff \(\ell\equiv1\pmod f\). | L/A; Milne Example 8.18; NT-21's trivial-Frobenius criterion. |
+| `cor-ramification-support-of-an-abelian-number-field` | `cor` | If \(K/\mathbb Q\) is finite abelian, GA-3's `thm-kronecker-weber` places \(K\) in some \(\mathbb Q(\zeta_f)\); hence every rational prime ramified in \(K\) divides \(f\). | L/A; cite Kronecker--Weber and the cyclotomic ramification criterion above, then use ramification in towers.  NT-24 owns this arithmetic consequence but does not re-prove the Galois theorem or claim a canonical minimal embedding conductor. |
+| `def-quadratic-gauss-sum-in-a-cyclotomic-field` | `def` | For an odd prime \(p\) and a fixed primitive \(p\)-th root \(\zeta_p\), set \(\tau_p=\sum_{a\bmod p}(a/p)\zeta_p^a\in\mathbb Z[\zeta_p]\). | L/NA; Reed Lecture 9 §2; UCSB Lecture XVII.  The Legendre symbol is the total NT-2 symbol, so the zero term contributes zero. |
 | `lem-galois-action-on-the-quadratic-gauss-sum` | `lem` | If \(\sigma_b(\zeta_p)=\zeta_p^b\), then \(\sigma_b(\tau_p)=(b/p)\tau_p\). | L/L; Reed Lecture 9; Milne Example 8.19.  Substitute \(a\mapsto b^{-1}a\) and use multiplicativity of the Legendre symbol. |
 | `thm-quadratic-gauss-sum-square` | `thm` | \(\tau_p^2=p^*=(-1)^{(p-1)/2}p\). | L/L; Reed Lecture 9 §2; UCSB Lecture XVII.  Expand, set one nonzero index equal to a multiple of the other, and evaluate the inner complete additive-character sum.  The stronger analytic sign of \(\tau_p\) under a complex embedding is not needed. |
 | `thm-quadratic-subfield-of-a-prime-cyclotomic-field` | `thm` | The unique quadratic subfield of \(\mathbb Q(\zeta_p)\) is \(\mathbb Q(\tau_p)=\mathbb Q(\sqrt{p^*})\). | L/L; Milne Example 8.19; Reed Lecture 9 §3.  GA-3 supplies existence and uniqueness of the index-two subfield; the Galois-action lemma identifies it arithmetically. |
 | `thm-quadratic-frobenius-restriction-identity` | `thm` | For distinct odd primes \(p,q\), arithmetic \(\operatorname{Frob}_q\) in \(\mathbb Q(\zeta_p)\) sends \(\zeta_p\mapsto\zeta_p^q\) and acts on \(\tau_p\) by \((q/p)\), while its restriction to \(\mathbb Q(\sqrt{p^*})\) acts by \((p^*/q)\); hence \((p^*/q)=(q/p)\). | L/L; Milne Example 8.19; Reed Lecture 9 §3; UCSB Thm. 6.9.  The equality compares two descriptions of the same arithmetic Frobenius restriction. |
-| `cor-quadratic-reciprocity-via-frobenius` | `cor` | For distinct odd primes \(p,q\), \((p/q)(q/p)=(-1)^{(p-1)(q-1)/4}\). | L/A; Milne Example 8.19.  Expand \(p^*\) and invoke MT-3's first supplement.  This is a second proof and reinterpretation, never a dependency of the low block. |
+| `cor-quadratic-reciprocity-via-frobenius` | `cor` | For distinct odd primes \(p,q\), \((p/q)(q/p)=(-1)^{(p-1)(q-1)/4}\). | L/A; Milne Example 8.19.  Expand \(p^*\) and invoke NT-3's first supplement.  This is a second proof and reinterpretation, never a dependency of the low block. |
 | `cor-first-supplement-via-cyclotomic-frobenius` | `cor` | In \(\mathbb Q(i)=\mathbb Q(\zeta_4)\), restriction of Frobenius recovers \((-1/q)=(-1)^{(q-1)/2}\). | L/A; Milne Example 8.19.  Frobenius is trivial exactly for \(q\equiv1\pmod4\). |
 | `cor-second-supplement-via-cyclotomic-frobenius` | `cor` | Since \(\mathbb Q(\sqrt2)\) is the quadratic subfield of \(\mathbb Q(\zeta_8)\), restriction of Frobenius gives \((2/q)=(-1)^{(q^2-1)/8}\). | L/A; Reed Lecture 9 §2.  Compute the action on \(\sqrt2=\zeta_8+\zeta_8^{-1}\) for the four odd residue classes modulo eight. |
 
@@ -2042,6 +2046,9 @@ Crisman, and the several full note sets.
 | L. Tomczak/Boase, *Analytic Number Theory* | <https://math.berkeley.edu/~ltomczak/notes/Mich2022/AnaNT_Notes.pdf> | Chs. 3--4 and 7--8 |
 | Andrew Sutherland, MIT 18.782/18.785 lecture sets | <https://math.mit.edu/classes/18.782/2013fa/lectures.html> and <https://math.mit.edu/classes/18.785/2021fa/lectures.html> | 18.782 Lectures 5, 8, 10--11; 18.785 Lectures 16, 18 |
 | Conrad--Landesman, Math 154 | <https://math.stanford.edu/~conrad/154Page/handouts/undergraduate-number-theory.pdf> | Chs. 10--11, 22--29 |
+| Nicolas Mascot, MAU23101 *Introduction to Number Theory* | <https://www.maths.tcd.ie/~mascotn/teaching/2020/MAU23101/index.html> (complete chapter PDFs linked there) | Complete Chs. 3--6: all 23 chapter-index headings, enumerated in §7.12 |
+| Jan-Hendrik Evertse, *Analytic Number Theory: Prime Number Theory* | <https://pub.math.leidenuniv.nl/~evertsejh/jhelecturenotes.shtml> (complete Chs. 0--6 linked there) | Ch. 1 §1.3 and Ex. 1.4; Ch. 2 §§2.1--2.3; Ch. 3 §§3.1--3.4; Ch. 4 §§4.1--4.3; Ch. 5 §§5.1--5.3; Ch. 6 §§6.1--6.2 |
+| P. Stevenhagen, *Number Rings* | <https://websites.math.leidenuniv.nl/algebra/ant.pdf> | Chs. 3--5, pp. 30--65, and Ch. 8, pp. 80--85, excluding exercises; all 18 contents headings enumerated in §7.14 |
 
 Supplementary author-hosted full notes used over exact ranges are Keith
 Conrad, [*Pell's Equation I*](https://kconrad.math.uconn.edu/blurbs/ugradnumthy/pelleqn1.pdf),
@@ -2075,25 +2082,25 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
 ### 7.2 Hackman, *Elementary Number Theory*, Chs. C--H and K
 
 - **Ch. C, pp. 69--94.** C.I “False Cases Excluded”: C.I.1--2 are
-  included in `def-primitive-root-modulo-n` and MT-1 B; C.I.3--6 are inline
+  included in `def-primitive-root-modulo-n` and NT-1 B; C.I.3--6 are inline
   in `thm-classification-of-moduli-with-primitive-roots`.  C.II “Primitive
   Roots Modulo a Prime”: C.II.1 is included in
   `cor-unit-group-modulo-prime-is-cyclic`; C.II.2 is inline there; C.II.3--4
-  are MT-1 B.  C.III “Binomial Congruences” is inline in the lifting lemmas
-  or MT-1 B, since it introduces no distinct structural theorem.  C.IV
+  are NT-1 B.  C.III “Binomial Congruences” is inline in the lifting lemmas
+  or NT-1 B, since it introduces no distinct structural theorem.  C.IV
   “Prime Powers”: C.IV.1, 3--8, 10 are included or inline in
   `lem-primitive-root-lift-to-prime-square`,
   `lem-order-of-one-plus-pu-modulo-prime-powers`, and the two prime-power
-  structure theorems; intervening examples are MT-1 B.  C.V “Carmichael
+  structure theorems; intervening examples are NT-1 B.  C.V “Carmichael
   Exponent”: C.V.2--6 are included in `def-carmichael-function`, its maximal-
-  order proposition, and formula; examples are MT-1 B.
+  order proposition, and formula; examples are NT-1 B.
 - **Ch. D, pp. 107--133.** D.I “Legendre”: D.I.1--12 are included across
-  MT-2--MT-3; D.I.13--15 are computational/root-lifting B examples.  D.II
-  “Jacobi”: D.II.1--4 are included in MT-3 and D.II.5--6 are B computations.
+  NT-2--NT-3; D.I.13--15 are computational/root-lifting B examples.  D.II
+  “Jacobi”: D.II.1--4 are included in NT-3 and D.II.5--6 are B computations.
   D.III “Cryptographic Application” is out of scope because it develops a
   protocol/security application rather than a prerequisite result.  D.IV
-  “Gauss Lemma” and D.V “Rectangle Proof” are included in MT-2's signed-half-
-  system lemmas and MT-3's complete reciprocity proof.  D.VI “Gerstenhaber
+  “Gauss Lemma” and D.V “Rectangle Proof” are included in NT-2's signed-half-
+  system lemmas and NT-3's complete reciprocity proof.  D.VI “Gerstenhaber
   Proof” and D.VII “Zolotareff Proof” are deferred to B as alternate proofs:
   one proof is already complete and these require distinct permutation
   machinery without adding a theorem.
@@ -2102,7 +2109,7 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   the prime theorem and its uniqueness corollary; E.I.4 is B; E.I.5 is inline
   descent.  E.II “Composite Numbers”: E.II.1--2 and E.II.4 are included;
   E.II.3,7 are B; E.II.5--6 are inline in the characterization proof.
-- **Ch. F, pp. 167--182.** F.I “Definitions and Examples” supplies MT-9's
+- **Ch. F, pp. 167--182.** F.I “Definitions and Examples” supplies NT-9's
   arithmetic/multiplicative definitions and B.  F.II “Dirichlet Product”
   supplies convolution, divisor reindexing, and multiplicativity.  F.III
   “Möbius Function” is already published at
@@ -2111,53 +2118,53 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   `cor-classical-mobius-inversion`, and
   `cor-number-theoretic-mobius-is-multiplicative`; the totient example is
   already published at `ex-euler-totient-recovered-by-mobius-inversion`.
-  F.IV “Two More Results” is included/inline in MT-9's divisor-sum identities.
-  F.V “Primitive Roots Again” is already covered by MT-1 and not duplicated.
+  F.IV “Two More Results” is included/inline in NT-9's divisor-sum identities.
+  F.V “Primitive Roots Again” is already covered by NT-1 and not duplicated.
 - **Ch. G, pp. 195--217.** G.I “Motive and Definitions,” G.II “Basic
   Results,” G.IV “Best Approximations,” G.V “Where Are Continued Fractions?”,
-  and G.VI “Finite Continued Fractions” are included across MT-7's definition,
+  and G.VI “Finite Continued Fractions” are included across NT-7's definition,
   recurrence, determinant, error, convergence, best-approximation, Legendre-
   criterion, existence, and rational-termination items.  G.III “Negative
   Irrationalities” is absorbed in the sign convention and B examples.  G.IV.4
   is included only with its exact small-error hypothesis; it is not expanded
   into a claim about every generalized Pell solution.
 - **Ch. H, pp. 223--249.** H.I “Algorithm for Quadratic Irrationalities” and
-  H.II “Conjugates” are inline in MT-7's Lagrange-periodicity proof.  H.III
-  “\(x^2-Dy^2=\pm1\)” supplies MT-8's existence, norm identity, negative-
+  H.II “Conjugates” are inline in NT-7's Lagrange-periodicity proof.  H.III
+  “\(x^2-Dy^2=\pm1\)” supplies NT-8's existence, norm identity, negative-
   Pell parity, and all-solutions theorem; its examples are B.  H.IV
   “\(x^2-Dy^2=N\)” supplies the norm action and qualified generalized theory;
   H.V “Inequalities” is inline in the finite-orbit bound; H.VI “Periodicity”
-  is inline in MT-7.  No statement says every generalized-Pell solution is a
+  is inline in NT-7.  No statement says every generalized-Pell solution is a
   convergent.
 - **Ch. K, pp. 291--311.** K.I “Preparations” and K.II “Unique
   Factorization in \(\mathbb Z[i]\)” are out of scope for the low block because
   abstract algebra already owns Euclidean/UFD machinery.  K.III “Number
-  Representations” reaches MT-4's already-included theorems by that alternate
+  Representations” reaches NT-4's already-included theorems by that alternate
   route and is confined to a B comparison.
 
 ### 7.3 Independent elementary texts and notes
 
 - **Shoup.** §7.5 “The group of units modulo \(n\)”: Thms. 7.28--7.31 are
-  included/inline in MT-1; the finite-subgroup cyclicity theorem is already
+  included/inline in NT-1; the finite-subgroup cyclicity theorem is already
   published at `cor-finite-subgroups-of-units-in-a-domain-are-cyclic`; Exs.
   7.61 and 7.69 are B.  §§2.8 and 12.1 “Quadratic residuosity,” Thms.
-  12.1--12.4, are included in MT-2--MT-3.  §12.2 “The Jacobi symbol,” Thm.
-  12.5 and its binary algorithm are MT-3/B.  §12.3 is out of scope because it
-  develops probabilistic primality.  §4.5 is included/inline in MT-4.
-  §2.9 Thms. 2.37--2.39 is MT-9 or already-published Möbius inversion.
-  Ch. 5 §§5.1--5.3, Thms. 5.1--5.13, is included across MT-11, except that
+  12.1--12.4, are included in NT-2--NT-3.  §12.2 “The Jacobi symbol,” Thm.
+  12.5 and its binary algorithm are NT-3/B.  §12.3 is out of scope because it
+  develops probabilistic primality.  §4.5 is included/inline in NT-4.
+  §2.9 Thms. 2.37--2.39 is NT-9 or already-published Möbius inversion.
+  Ch. 5 §§5.1--5.3, Thms. 5.1--5.13, is included across NT-11, except that
   Thm. 5.13 supports only \(\Theta(1/\log x)\), not the exact Mertens product
   constant.
 - **Stein, *Primes, Congruences, and Secrets*.** §2.5's polynomial root bound
-  is already published; cyclicity and prime-power primitive roots are MT-1.
-  Ch. 4 §§4.1--4.3 is included across MT-2--MT-3.  Ch. 5 §§5.1--5.3 and the
-  periodic continuation are MT-7; §5.7, Thm. 5.7.1, Lemmas 5.7.3--5.7.5 and
-  identity (5.7.1), is MT-4.  Modular square-root algorithms outside these
+  is already published; cyclicity and prime-power primitive roots are NT-1.
+  Ch. 4 §§4.1--4.3 is included across NT-2--NT-3.  Ch. 5 §§5.1--5.3 and the
+  periodic continuation are NT-7; §5.7, Thm. 5.7.1, Lemmas 5.7.3--5.7.5 and
+  identity (5.7.1), is NT-4.  Modular square-root algorithms outside these
   ranges are out of scope as computational enrichment.
-- **Stein, 2003, Ch. 9 §§9.2--9.4.** §§9.2.1--9.2.4 supply MT-6's form,
+- **Stein, 2003, Ch. 9 §§9.2--9.4.** §§9.2.1--9.2.4 supply NT-6's form,
   proper-equivalence, action, representation-invariance, discriminant,
   definiteness, and principal-form items.  §9.2.5 “Rings of Integers in
-  Quadratic Fields” is deferred to MT-19.  §9.3 supplies reduced forms,
+  Quadratic Fields” is deferred to NT-19.  §9.3 supplies reduced forms,
   existence/uniqueness, and the reduction algorithm.  §9.4 Prop. 9.4.1 and
   Defs. 9.4.2--3 supply finite class enumeration and the negative-
   discriminant class number.  Thm. 9.4.4's Heegner--Stark--Baker--Goldfeld--
@@ -2165,30 +2172,30 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   transcendence, modular, and elliptic machinery.
 - **Granville Ch. 4 §§4.1--4.2, 4.6.** §4.1's equivalence, discriminant,
   reduction algorithm, termination, uniqueness, and small-discriminant
-  exercises are MT-6/B; its two-square identity is already MT-4.  §4.2's
+  exercises are NT-6/B; its two-square identity is already NT-4.  §4.2's
   ideal correspondence and units are deferred to the algebraic block; Gauss
   composition is deferred because its representative/basis well-definedness
   is not developed here.  §4.6's indefinite reduction cycles are deferred to
   a future quadratic-order/narrow-class-group page: unlike the definite case,
   an indefinite class has a cycle rather than one normalized representative.
 - **MIT 18.781 selected notes.** “Congruences mod Primes, Order, Primitive
-  Roots” and “Primitive Roots (Prime Powers)” are MT-1; index calculus is out
+  Roots” and “Primitive Roots (Prime Powers)” are NT-1; index calculus is out
   of scope as an algorithm.  “Quadratic Residues, Quadratic Reciprocity” and
-  “Jacobi Symbol, Computation, Zolotareff” are MT-2--MT-3/B.  “Arithmetic
-  Functions” and “Mobius Inversion” are MT-9 or already-published.  “Two
+  “Jacobi Symbol, Computation, Zolotareff” are NT-2--NT-3/B.  “Arithmetic
+  Functions” and “Mobius Inversion” are NT-9 or already-published.  “Two
   Squares,” “Continued Fractions I/II,” “Periodic Continued Fractions,”
-  “Brahmagupta--Pell,” and “Four Squares” are MT-4, MT-7, MT-8, and MT-5.
+  “Brahmagupta--Pell,” and “Four Squares” are NT-4, NT-7, NT-8, and NT-5.
   The lecture calendar and PDF numbering disagree, so citations use the PDF
   title rather than an ambiguous session number.
-- **Conrad's selected notes.** *Pell I* §§1--7 supplies MT-8 existence and all
+- **Conrad's selected notes.** *Pell I* §§1--7 supplies NT-8 existence and all
   positive solutions; *Pell II* §§1--4 supplies negative/generalized results,
   with statistics depending on class numbers deferred.  *Proofs by Descent*
-  §6 supplies the MT-5 small-multiple and descent proof.  *Ostrowski* §§1--2
-  supplies MT-17's classification.  *Hensel* §§1--6 supplies simple and strong
+  §6 supplies the NT-5 small-multiple and descent proof.  *Ostrowski* §§1--2
+  supplies NT-17's classification.  *Hensel* §§1--6 supplies simple and strong
   lifting, roots of unity/unit decompositions, two-adic squares, and both
   proofs of the Newton criterion; later power-series forms are deferred to
   commutative algebra or nonarchimedean analysis.  *The Different* §§3--4
-  supplies MT-20's trace-dual, monogenic, norm, support, and tame/wild items.
+  supplies NT-20's trace-dual, monogenic, norm, support, and tame/wild items.
 
 ### 7.4 Arithmetic functions, average orders, Chebyshev, and Mertens
 
@@ -2200,15 +2207,15 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   §§20.1--20.3 supply two-square counts and the preliminary average of
   \(\tau\).  Despite §20.4's heading “Heuristics for the Sum of Divisors,”
   its displayed divisor-pair reindexing, Basel-tail estimate, and
-  \(O(x\log x)\) calculation are exact and back MT-10; only its surrounding
+  \(O(x\log x)\) calculation are exact and back NT-10; only its surrounding
   motivational discussion is B.  §20.5 is deferred future material.  Ch. 21 supplies \(\pi\),
   \(\operatorname{Li}\), Bertrand, Chebyshev bounds, and \(\vartheta\) for
-  MT-11; its PNT is deferred to MT-16.  Ch. 23 Möbius/inversion is already
-  published and its convolution discussion is MT-9.  Prop. 24.6.7 supports
-  the totient asymptotic, but not by itself MT-10's quantitative remainder.
+  NT-11; its PNT is deferred to NT-16.  Ch. 23 Möbius/inversion is already
+  published and its convolution discussion is NT-9.  Prop. 24.6.7 supports
+  the totient asymptotic, but not by itself NT-10's quantitative remainder.
 - **Sanders Ch. 1, Props. 1.3--1.5, pp. 2--6.** Hyperbola reindexing and
-  the sharp divisor summatory estimate are included across MT-9--MT-10;
-  Prop. 1.5's implication from a Möbius estimate to PNT is deferred to MT-16,
+  the sharp divisor summatory estimate are included across NT-9--NT-10;
+  Prop. 1.5's implication from a Möbius estimate to PNT is deferred to NT-16,
   and later sieve and distribution chapters are outside the selected range.
   Overholt Ch. 1, §1.1, printed pp. 19--21, independently supplies the exact
   Möbius calculation and \(O(x\log x)\) remainder for the summatory totient;
@@ -2216,17 +2223,17 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   the displayed sum-of-divisors reindexing and \(O(x\log x)\) calculation.
 - **Andersen Ch. 3 §§3.1--3.3, pp. 11--16.** §3.1 Stirling is already planned
   at `thm-stirling-formula-gamma`; its weak real consequence is inline in
-  MT-11.  §3.2 “Chebyshev's approximation” is included in MT-11.  §3.3 Cor.
+  NT-11.  §3.2 “Chebyshev's approximation” is included in NT-11.  §3.3 Cor.
   3.5 and Thm. 3.6 are the first and second prime Mertens items; Remark 3.7 is
   B divergence.  Goldmakher's complete two-page note independently proves
   those two estimates.  Sutherland 18.785 Problem Set 9, Problems 1--2,
   provides the exact guided three-theorem decomposition, but as a problem set
   is not the sole proof source.  Tao's “Mertens' theorems” proves the third
   asymptotic product and supplies the \(e^{-\gamma}\) constant; its zeta,
-  Fourier, and Gamma dependencies are declared in MT-11.  Shoup's weaker
+  Fourier, and Gamma dependencies are declared in NT-11.  Shoup's weaker
   \(\Theta\)-product result is never inflated into this exact theorem.
 - **Odlyzko--te Riele, *Disproof of the Mertens Conjecture*, abstract and §1
-  “Introduction,” pp. 138--141.** The definition and conjecture are MT-9 B;
+  “Introduction,” pp. 138--141.** The definition and conjecture are NT-9 B;
   the paper's stated main
   limsup/liminf disproof is the content cited by
   `cex-the-mertens-conjecture-is-false`.  Its zeta-zero computation and
@@ -2241,51 +2248,51 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   `thm-riemann-zeta-meromorphic-continuation`, and
   `thm-riemann-zeta-is-zero-free-on-the-closed-right-half-plane`; Def. 1.3 is
   already published at
-  `lem-abel-summation-by-parts`.  §1.3 Def. 1.6 is MT-11 and Lemma 1.7 is
-  inline in MT-16.  §1.4 Thm. 1.8 is included as
+  `lem-abel-summation-by-parts`.  §1.3 Def. 1.6 is NT-11 and Lemma 1.7 is
+  inline in NT-16.  §1.4 Thm. 1.8 is included as
   `thm-newman-zagier-tauberian-theorem`; Remark 1.9 is inline.  §1.5's
   Erdős--Selberg proof is out of scope because it needs a separate Selberg
   apparatus and duplicates the commissioned zero-free-region route.
 - **Ch. 2.** §2.1 Defs. 2.1, 2.3, Lemma 2.2, and Thm. 2.4 are included in
-  MT-12's Dirichlet-series definition, abscissae, half-plane results, and
+  NT-12's Dirichlet-series definition, abscissae, half-plane results, and
   Landau theorem.  §2.2 Defs. 2.5--2.7 split: arithmetic definitions are
-  MT-9, while convolution multiplication and Euler products are MT-12.
-  §2.3 Def. 2.8 is MT-9 or already published Möbius/totient material; Def.
-  2.9 supplies MT-9's von Mangoldt identity and MT-12's logarithmic derivative.
-- **Ch. 3.** §3.1 Def. 3.1 and Lemma 3.2 are MT-13; Def. 3.3 is MT-14.
-  §3.2 Def. 3.4 and Thm. 3.5 are split among MT-13's L-definition, Euler
+  NT-9, while convolution multiplication and Euler products are NT-12.
+  §2.3 Def. 2.8 is NT-9 or already published Möbius/totient material; Def.
+  2.9 supplies NT-9's von Mangoldt identity and NT-12's logarithmic derivative.
+- **Ch. 3.** §3.1 Def. 3.1 and Lemma 3.2 are NT-13; Def. 3.3 is NT-14.
+  §3.2 Def. 3.4 and Thm. 3.5 are split among NT-13's L-definition, Euler
   product, finite principal factors, and half-plane continuation.  §3.3 Lemma
-  3.6 and Thms. 3.7--3.8 are MT-13's positive-log device and line-one
-  nonvanishing.  §3.4 Def. 3.9 is inline; Thms. 3.10--3.11 are MT-13's
+  3.6 and Thms. 3.7--3.8 are NT-13's positive-log device and line-one
+  nonvanishing.  §3.4 Def. 3.9 is inline; Thms. 3.10--3.11 are NT-13's
   nonreal and real \(L(1)\) lemmas; Remark 3.12 is B.  §3.5's class-number
   formula is deferred to a future Dedekind-zeta/analytic-class-number page:
   the current track has neither Dedekind zeta nor the required ideal-counting
   interface.
-- **Ch. 4.** §4.1 Def. 4.1 is inline in MT-13 and Thm. 4.2 is
+- **Ch. 4.** §4.1 Def. 4.1 is inline in NT-13 and Thm. 4.2 is
   `thm-dirichlet-primes-arithmetic-progressions`.  §4.2 Defs. 4.3--4.4,
-  Examples 4.5--4.6, Lemmas 4.7--4.8 are MT-13/B.  §4.3 Thm. 4.10's general
+  Examples 4.5--4.6, Lemmas 4.7--4.8 are NT-13/B.  §4.3 Thm. 4.10's general
   finite Fourier theorem is already owned by abstract algebra; its arithmetic
-  specialization and Thm. 4.11 are MT-13.  §4.4 Thm. 4.12 is MT-16's fixed-
+  specialization and Thm. 4.11 are NT-13.  §4.4 Thm. 4.12 is NT-16's fixed-
   modulus PNT.  Its displayed statement omits “\(=1\)” after a gcd expression;
   §4.1 and the proof require coprimality, which the scaffold states.
 - **Ch. 6.** §6.1's parity, theta Mellin transform, primitive Gauss relation,
   and even equation (6.1.4), and §6.2's odd theta equation (6.2.2), are
-  included across MT-14.  Substantial odd-case details are exercises, so
+  included across NT-14.  Substantial odd-case details are exercises, so
   Andersen is the primary complete proof source.
-- **Ch. 7.** §7.1 Def. 7.1 is MT-15's half-weighted \(\psi\), and Thm. 7.2
+- **Ch. 7.** §7.1 Def. 7.1 is NT-15's half-weighted \(\psi\), and Thm. 7.2
   is its truncated explicit formula.  Def. 7.3 is already CA-22's critical-
-  strip vocabulary.  §7.2 Thms. 7.5--7.7 supply MT-16's zero-free region,
+  strip vocabulary.  §7.2 Thms. 7.5--7.7 supply NT-16's zero-free region,
   zero-count input, and \(\psi\) error.  §7.3 Conjecture 7.8, RH, is out of
   scope as an open problem and may only be a non-load-bearing remark.
 - **Ch. 8.** §8.1 Def. 8.1 and Example 8.2 are deferred to CA-18/CA-21;
-  Lemma 8.3 is inline in MT-15.  §8.2 Thm. 8.4 is CA-18's Jensen theorem;
+  Lemma 8.3 is inline in NT-15.  §8.2 Thm. 8.4 is CA-18's Jensen theorem;
   Remarks 8.5--8.6 are inline in zero counting; Thm. 8.7's general Hadamard
-  product is CA-18, while its zeta specialization is MT-15.  §8.3 Thm. 8.8
-  is MT-16's classical region.
-- **Ch. 9.** §9.1 Lemma 9.1 is MT-15's Perron kernel.  §9.2 Lemma 9.2 is its
+  product is CA-18, while its zeta specialization is NT-15.  §8.3 Thm. 8.8
+  is NT-16's classical region.
+- **Ch. 9.** §9.1 Lemma 9.1 is NT-15's Perron kernel.  §9.2 Lemma 9.2 is its
   residue inventory and Remark 9.3 is inline.  Lemma 9.4, §9.3 Lemma 9.5,
   §9.4 Lemma 9.6 and Remark 9.7, Lemma 9.8, and §9.5 Thm. 9.9 are included
-  across MT-15's zero-count, truncated-kernel, logarithmic-derivative, and
+  across NT-15's zero-count, truncated-kernel, logarithmic-derivative, and
   explicit-formula items.  Lemma 9.2 misprints the final denominator as
   \(\zeta'(0)\); Thm. 9.9 and direct residue calculation give \(\zeta(0)\).
   Lemmas 9.4 and 9.6 defer details to exercises, supplied independently by
@@ -2293,77 +2300,77 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
 
 ### 7.6 Andersen, Sutherland, Tomczak, and Montgomery--Vaughan
 
-- **Andersen Chs. 10--12, pp. 35--48.** Ch. 10 Thm. 10.1 is MT-16's
+- **Andersen Chs. 10--12, pp. 35--48.** Ch. 10 Thm. 10.1 is NT-16's
   classical region; Lemma 10.2's \(3\!-​4\!-​1\) inequality is inline,
-  and the qualitative line theorem is CA-22; Thm. 10.3 supplies MT-15--MT-16's
+  and the qualitative line theorem is CA-22; Thm. 10.3 supplies NT-15--NT-16's
   partial fractions.  Ch. 11 Lemma 11.1, the Riemann--von Mangoldt formula,
-  and reciprocal-zero sums are MT-15--MT-16.  Ch. 12 Lemma 12.1 is inline in
-  the smoothing; Prop. 12.2, Thm. 12.3, and Thm. 12.4 are MT-15's two explicit
-  formulas and MT-16's PNT.  RH-conditional Thms. 12.5--12.6 are out of scope
+  and reciprocal-zero sums are NT-15--NT-16.  Ch. 12 Lemma 12.1 is inline in
+  the smoothing; Prop. 12.2, Thm. 12.3, and Thm. 12.4 are NT-15's two explicit
+  formulas and NT-16's PNT.  RH-conditional Thms. 12.5--12.6 are out of scope
   because their hypothesis is open and they are not needed downstream.
 - **Andersen Chs. 13--16, pp. 51--67.** Ch. 13 Lemma 13.1 is general finite-
   group Fourier theory owned by algebra; Lemmas 13.2--13.3 and Prop. 13.4 are
-  MT-13's character sums and orthogonality.  Ch. 14 Thm. 14.1 is MT-13's
+  NT-13's character sums and orthogonality.  Ch. 14 Thm. 14.1 is NT-13's
   continuation/pole; Lemma 14.2 is already published totient multiplicativity;
-  Thms. 14.3--14.4 are MT-13's nonvanishing and Mertens progression theorem.
-  Ch. 15 Lemma 15.1 is decomposed into MT-13's product, real, and nonreal
+  Thms. 14.3--14.4 are NT-13's nonvanishing and Mertens progression theorem.
+  Ch. 15 Lemma 15.1 is decomposed into NT-13's product, real, and nonreal
   nonvanishing items.  Ch. 16 Lemma 16.1, Thm. 16.2, Lemmas 16.3--16.4,
-  Thms. 16.5--16.8, and Remark 16.9 are included across MT-14's primitive
+  Thms. 16.5--16.8, and Remark 16.9 are included across NT-14's primitive
   induction, Gauss sums, twisted Poisson, two parity cases, and root number.
   Chs. 17--20 are out of scope because uniform Dirichlet-L regions and Siegel
   phenomena require exceptional-zero theory not used for fixed \(q\).
 - **Sutherland 18.785 Lecture 16, §§16.1--16.2, pp. 1--9.** Def. 16.1 and
-  Thms. 16.2--16.5 are CA-22 zeta items.  Thm. 16.6 is inline in MT-16;
-  Lemma 16.7 is MT-11; Lemma 16.8 is inline.  Def. 16.9, Lemmas 16.10--16.11,
-  Cor. 16.12, Thm. 16.13, Remark 16.14, and Thm. 16.15 form MT-16's complete
-  Newman route.  **Lecture 18:** Thm. 18.1 and Remark 18.2 are MT-13;
-  Thm. 18.3 is MT-11.  Defs. 18.4--18.5, Lemma 18.8, Defs. 18.9, 18.11,
+  Thms. 16.2--16.5 are CA-22 zeta items.  Thm. 16.6 is inline in NT-16;
+  Lemma 16.7 is NT-11; Lemma 16.8 is inline.  Def. 16.9, Lemmas 16.10--16.11,
+  Cor. 16.12, Thm. 16.13, Remark 16.14, and Thm. 16.15 form NT-16's complete
+  Newman route.  **Lecture 18:** Thm. 18.1 and Remark 18.2 are NT-13;
+  Thm. 18.3 is NT-11.  Defs. 18.4--18.5, Lemma 18.8, Defs. 18.9, 18.11,
   Lemmas 18.10, 18.12, Thm. 18.13, Def. 18.14, Cor. 18.15--16, Remark 18.17,
-  and Ex. 18.18 are MT-13--MT-14/B.  Def. 18.19, Prop. 18.20, and Remark
-  18.21 are MT-13.  Def. 18.22 is MT-13's density proof, but the lecture only
+  and Ex. 18.18 are NT-13--NT-14/B.  Def. 18.19, Prop. 18.20, and Remark
+  18.21 are NT-13.  Def. 18.22 is NT-13's density proof, but the lecture only
   asserts \(L(1,\chi)\ne0\), so it is not primary backing for that result.
   §§18.5--18.6's Stieltjes and general finite-character machinery are already
   published real analysis/abstract algebra; the arithmetic specialization is
-  MT-13.
+  NT-13.
 - **Tomczak Chs. 3--4, 7--8.** Ch. 3 Thm. 3.1 is already-published Möbius
-  inversion; Thms. 3.2--3.6 are MT-12; Thm. 3.7 is out of scope as a
+  inversion; Thms. 3.2--3.6 are NT-12; Thm. 3.7 is out of scope as a
   specialized Ramanujan identity not used downstream; Cor. 3.8 is CA-22.
-  Ch. 4 Thms. 4.1--4.8 are included across MT-13; Thms. 4.9--4.10 give
-  MT-14's Gauss norm and a B quadratic evaluation.  Ch. 7 Thms. 7.1--7.4 are
-  MT-15's Perron variants.  Ch. 8 Thm. 8.1 is CA-22; Thms. 8.2--8.5 are
-  MT-15--MT-16; Thm. 8.6 is MT-16.  The notes contain an apparent sign or
+  Ch. 4 Thms. 4.1--4.8 are included across NT-13; Thms. 4.9--4.10 give
+  NT-14's Gauss norm and a B quadratic evaluation.  Ch. 7 Thms. 7.1--7.4 are
+  NT-15's Perron variants.  Ch. 8 Thm. 8.1 is CA-22; Thms. 8.2--8.5 are
+  NT-15--NT-16; Thm. 8.6 is NT-16.  The notes contain an apparent sign or
   extraction defect saying \(\mu(p)=1\) and an unresolved “why small?” contour
   note, so they are never sole backing for either point.
 - **Montgomery--Vaughan Ch. 6 §§6.1--6.2, pp. 168--198.** Lemma 6.1 is
   CA-18's Jensen inequality; Lemma 6.2 is complex analysis's
   Borel--Carathéodory theorem; Lemma 6.3 is inline through CA-18's general
-  local \(f'/f\) machinery; Lemma 6.4 is MT-15; Lemma 6.5 is inline in MT-16;
-  Thms. 6.6--6.8 are MT-16's zero-free region and bounds; Thm. 6.9 is its
+  local \(f'/f\) machinery; Lemma 6.4 is NT-15; Lemma 6.5 is inline in NT-16;
+  Thms. 6.6--6.8 are NT-16's zero-free region and bounds; Thm. 6.9 is its
   \(\psi,\vartheta,\pi\) error theorem.  Exercise subsections were not used.
 
 ### 7.7 Local fields and Hasse--Minkowski sources
 
-- **Sutherland 18.782 Lecture 5.** §5.1 Def. 5.1 is MT-17's \(\mathbb Q_p\);
+- **Sutherland 18.782 Lecture 5.** §5.1 Def. 5.1 is NT-17's \(\mathbb Q_p\);
   §5.2 Def. 5.2 and Thm. 5.3 are its absolute-value definition and
   nonarchimedean criterion; Cor. 5.4 is B/inline because positive-
   characteristic finite fields are owned by algebra.  §5.3 Def. 5.5 and Thm.
-  5.6 are equivalence and Ostrowski.  **Lecture 8:** §8.1 Thm. 8.1 is MT-17's
+  5.6 are equivalence and Ostrowski.  **Lecture 8:** §8.1 Thm. 8.1 is NT-17's
   completion comparison; Remark 8.2 is its integral-closure warning.  §8.2
   Lemma 8.3's inverse system of finite sets is replaced by the explicit finite
   residue tree/digit construction; Thm. 8.4 and Defs. 8.5--8.6, Lemma 8.7 are
-  inline in Hensel/Newton.  §8.3 Thm. 8.8 is MT-17's simple-root corollary.
+  inline in Hensel/Newton.  §8.3 Thm. 8.8 is NT-17's simple-root corollary.
 - **Sutherland Lectures 10--11.** Lecture 10's Hilbert-symbol definition,
   equivalent forms, real/odd-prime/two-adic formulas, bilinearity,
-  nondegeneracy, and product theorem are included across MT-18.  Lecture 11
+  nondegeneracy, and product theorem are included across NT-18.  Lecture 11
   §11.1 Thm. 11.1 is split between
   `lem-finite-field-quadratic-isotropy-in-dimension-at-least-three` (the
   finite-field input, proved directly by intersecting square-value sets) and
-  MT-18's local isotropy theorem; Cor. 11.2, Lemma 11.3, Cor. 11.4, and Cor.
+  NT-18's local isotropy theorem; Cor. 11.2, Lemma 11.3, Cor. 11.4, and Cor.
   11.5 are its almost-all, binary/ternary, and one-place results.  §11.2 Thms.
-  11.6--11.8 are MT-17's density/finite approximation or inline; Remarks
+  11.6--11.8 are NT-17's density/finite approximation or inline; Remarks
   11.9--11.10 distinguish profinite and adelic completions and are B/deferred;
-  Lemma 11.11 is MT-18's global square-class approximation and explicitly
-  uses MT-13.  §11.3 Thm. 11.12 is the proved full Hasse--Minkowski theorem.
+  Lemma 11.11 is NT-18's global square-class approximation and explicitly
+  uses NT-13.  §11.3 Thm. 11.12 is the proved full Hasse--Minkowski theorem.
 - **Raskin §§3.14--4.9.** §§3.14--3.17 independently supply the Hilbert
   definition, norm equivalence, local formulas, bilinearity, and reciprocity.
   §§4.1--4.7 supply local isotropy and the ternary theorem.  §§4.8--4.9,
@@ -2373,13 +2380,13 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   asks for the rational local--global theorem, not a general quadratic-form
   track.
 - **Conrad, *Selmer's Example*, complete note, pp. 1--5.** §1
-  “Introduction” and Thm. 1 state MT-18 B's cubic counterexample.  §2 “No
+  “Introduction” and Thm. 1 state NT-18 B's cubic counterexample.  §2 “No
   local solutions” (the source's heading, despite the section proving local
   solubility) supplies the real and every-(p)-adic checks, included in the B
   item.  §3 “Global solutions” proves absence of a nontrivial rational zero
   using a pure cubic integer ring, ideal factorisation, class number, and
-  units.  That proof is literature-derived but not supplied on the MT-18 B
-  page because MT-19--MT-23 occur later; the counterexample is non-citable and
+  units.  That proof is literature-derived but not supplied on the NT-18 B
+  page because NT-19--NT-23 occur later; the counterexample is non-citable and
   non-load-bearing.  The closing Tate--Shafarevich interpretation is deferred
   to elliptic-curve arithmetic, which lies outside this track.
 
@@ -2389,10 +2396,10 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   ring,” “Dedekind's proof,” “Integral elements,” “Review of bases,” and the
   general integrality results 2.1--2.18 are already supplied by CA-6 or inline
   there.  “Review of norms and traces,” results 2.19--2.21, is GA-4, with
-  integral trace/norm included on MT-19.  “Review of bilinear forms” and
-  “Discriminants,” 2.23--2.28, are MT-19 or CA-9 trace pairing.  “Rings of
+  integral trace/norm included on NT-19.  “Review of bilinear forms” and
+  “Discriminants,” 2.23--2.28, are NT-19 or CA-9 trace pairing.  “Rings of
   integers are finitely generated,” 2.29--2.33, and “Finding the ring of
-  integers,” 2.34--2.42, are MT-19/B; inseparable-function-field remarks are
+  integers,” 2.34--2.42, are NT-19/B; inseparable-function-field remarks are
   out of scope.  “Algorithms for finding the ring of integers,” 2.44--2.45,
   is out of scope because maximal-order row-reduction algorithms are not used
   by the structural track.
@@ -2401,78 +2408,78 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
   closures,” and “Modules over Dedekind domains,” results 3.1--3.32, are
   already owned by CA-8/CA-9.  “Factorization in extensions,” “Primes that
   ramify,” and “Finding factorizations,” results 3.33--3.43, are included or
-  inline in MT-20; surface example 3.40 is out of scope.  “Examples” 3.44--52
-  are MT-20 B.  “Eisenstein extensions” 3.53 supplies its total-ramification
+  inline in NT-20; surface example 3.40 is out of scope.  “Examples” 3.44--52
+  are NT-20 B.  “Eisenstein extensions” 3.53 supplies its total-ramification
   corollary, while irreducibility itself is already algebra.
-- **Ch. 4, pp. 68--83.** “Norms of ideals,” results 4.1--4.2, are MT-20.
-  “Statement main theorem/consequences,” 4.3--4.11, supplies MT-22's bound,
+- **Ch. 4, pp. 68--83.** “Norms of ideals,” results 4.1--4.2, are NT-20.
+  “Statement main theorem/consequences,” 4.3--4.11, supplies NT-22's bound,
   class finiteness, examples, and no-unramified-extension corollaries; class-
   field remarks are deferred.  “Lattices,” 4.14--4.19, and “Some calculus,”
-  4.22--4.27, supply MT-22's lattice, Blichfeldt, Minkowski, volume, covolume,
+  4.22--4.27, supply NT-22's lattice, Blichfeldt, Minkowski, volume, covolume,
   and small-element items; AM--GM is already real analysis.  “Binary
-  quadratic forms” is deferred to MT-6 or a future form--ideal-composition
+  quadratic forms” is deferred to NT-6 or a future form--ideal-composition
   interface rather than duplicated.
 - **Ch. 5, pp. 85--94.** The statement, finite-generation, rank, S-unit,
   CM/real-quadratic/cubic examples, roots of unity, fundamental units, and
   regulators, results 5.1--5.11 and following named headings, are included or
-  B on MT-23.  Computational searches for units are B/out of scope and never
+  B on NT-23.  Computational searches for units are B/out of scope and never
   dependencies.
 - **Ch. 6, pp. 95--104.** “The basic results”: Lemma 6.1 and degree parts of
   Prop. 6.2/Thm. 6.4 are already GA-3; their integer-ring, ramification, and
-  discriminant parts are MT-24; Lemma 6.5 is inline in the compositum proof;
+  discriminant parts are NT-24; Lemma 6.5 is inline in the compositum proof;
   Remark 6.6 supplies conductor and general discriminant.  “Class numbers of
   cyclotomic fields,” “Units in cyclotomic fields,” and “The first case of
   FLT for regular primes” are out of scope because they require cyclotomic-
   class-number/regular-prime machinery beyond the commissioned reciprocity
-  application; ordinary units are already MT-23.
-- **Ch. 7, pp. 105--124 selected.** Results 7.1--7.13 supply MT-17's
+  application; ordinary units are already NT-23.
+- **Ch. 7, pp. 105--124 selected.** Results 7.1--7.13 supply NT-17's
   examples, nonarchimedean criterion, equivalence, Ostrowski, and rational
   product formula; characteristic-\(p\) and historical asides are out of
-  scope.  Results 7.14--7.21 supply MT-21's number-field places/product
-  formula and MT-17's weak approximation.  Results 7.23--7.30 are already
-  published completion or MT-17's digit/inverse-limit comparison.  Results
+  scope.  Results 7.14--7.21 supply NT-21's number-field places/product
+  formula and NT-17's weak approximation.  Results 7.23--7.30 are already
+  published completion or NT-17's digit/inverse-limit comparison.  Results
   7.31--7.32 are its Hensel specialization/Newton theorem; 7.33--7.37 are
-  already CA-14 general Hensel theory.  Thm. 7.38 is MT-21's unique extension.
+  already CA-14 general Hensel theory.  Thm. 7.38 is NT-21's unique extension.
   The later headings “Newton polygon,” “Unramified extensions,” “Ramification
   groups,” and “Krasner” are deferred to a higher local-field/ramification
   expansion: only local compactness of \(\mathbb Q_p\) is needed here.
 - **Ch. 8, pp. 135--152 selected.** “Extending absolute values,” “Product
   formula,” “Decomposition groups,” “Frobenius,” and “Examples,” especially
-  8.10--8.19, are MT-21/MT-23/MT-24.  “Computing Galois groups” is B or
+  8.10--8.19, are NT-21/NT-23/NT-24.  “Computing Galois groups” is B or
   deferred to computational Galois theory; Chebotarev is deferred to an
-  analytic/class-field seam; Thm. 8.43 is MT-22 Hermite--Minkowski, while
+  analytic/class-field seam; Thm. 8.43 is NT-22 Hermite--Minkowski, while
   stronger bounded-ramification finiteness 8.42 is deferred because it needs
   higher ramification control.
 
 ### 7.9 Stein, *Algebraic Number Theory*, selected ranges
 
 - **§§2.3--2.4, pp. 25--35.** §§2.3.1--2.3.2, Props. 2.3.1--2.3.19 and
-  §2.4, Props. 2.4.3--2.4.5, are CA-6/GA-4 or included across MT-19's number
+  §2.4, Props. 2.4.3--2.4.5, are CA-6/GA-4 or included across NT-19's number
   field, ring, order, clearing-denominators, and free-rank items.  Function
   fields §2.3.3 are out of scope; LLL §2.5 was not selected because it is a
   computational recognition algorithm.
 - **§3.1, pp. 41--48.** Dedekind definitions, fractional ideals, inversion,
   and unique factorization through Thm. 3.1.12 are already CA-9; only the
-  application that \(\mathcal O_K\) is Dedekind is MT-19.
-- **§§4.1--4.3, pp. 49--59.** §4.1 examples are MT-20 B; §4.2 Lemma 4.2.1
+  application that \(\mathcal O_K\) is Dedekind is NT-19.
+- **§§4.1--4.3, pp. 49--59.** §4.1 examples are NT-20 B; §4.2 Lemma 4.2.1
   and Thm. 4.2.3 supply Dedekind--Kummer.  §4.3's index caveat is inline, while
   p-maximal-order and Buchmann--Lenstra algorithms are out of scope.
 - **§§6.1--6.3, pp. 69--76.** §6.1's discrete subgroup/rank/embedding
-  results are MT-22; §6.2's trace pairing is CA-9 and discriminant/index items
-  are MT-19; relative discriminants are deferred.  §6.3's ideal norm,
+  results are NT-22; §6.2's trace pairing is CA-9 and discriminant/index items
+  are NT-19; relative discriminants are deferred.  §6.3's ideal norm,
   principal scaling, multiplicativity, and finite bounded-ideal count are
-  MT-20/MT-22.
+  NT-20/NT-22.
 - **§§7.1--7.3, pp. 77--86.** The class-group definition is CA-9; Thm. 7.1.2,
-  Lemmas 7.1.5--7.1.8 and Cor. 7.1.9 are MT-22.  Conjecture 7.2.1 on
+  Lemmas 7.1.5--7.1.8 and Cor. 7.1.9 are NT-22.  Conjecture 7.2.1 on
   infinitely many real quadratic class-number-one fields is deferred because
-  it is open.  §7.3's small-prime generation is MT-22 and computations are B.
+  it is open.  §7.3's small-prime generation is NT-22 and computations are B.
 - **§§8.1--8.2, pp. 87--98.** Thm. 8.1.2, Prop. 8.1.4, and Lemmas
-  8.1.6--8.1.10 are MT-23; the general unit definition is already ring theory.
+  8.1.6--8.1.10 are NT-23; the general unit definition is already ring theory.
   §8.2's Sage/Pell/signature computations are B and never load-bearing.
 - **§§9.2--9.4, pp. 101--108.** Def. 9.2.1, Thm. 9.2.2, Defs. 9.3.1 and
   9.3.6, Lemma 9.3.2, Props. 9.3.3--9.3.4, Thm. 9.3.5, Cor. 9.3.7, Prop.
   9.3.8, and §9.4's Frobenius definition/Prop. 9.4.1 are included or inline on
-  MT-21.  Quadratic/cubic computations are B.  §9.5's Galois representations,
+  NT-21.  Quadratic/cubic computations are B.  §9.5's Galois representations,
   Artin L-series, and Artin conjecture are deferred for lack of the later
   representation-theoretic and analytic machinery.
 
@@ -2480,45 +2487,199 @@ and Sutherland's [MIT 18.785 Problem Set 9](https://math.mit.edu/classes/18.785/
 
 - **Chs. 10--11, pp. 54--63.** Thm. 10.1, Lemmas 10.2--10.6, Cor. 10.7,
   Thm. 11.6, Remark 11.7, Lemma 11.8, and Thm. 11.9 are included or inline in
-  MT-24's integer-ring, discriminant, ramification, conductor, and compositum
+  NT-24's integer-ring, discriminant, ramification, conductor, and compositum
   proofs.  Thm. 11.1 and Cor. 11.5 are already GA-3; Lemma 11.3 is basic
   algebra and Remark 11.4 is an out-of-scope characteristic-\(p\) aside.
-- **Ch. 22, pp. 110--115.** Example 22.1 is MT-20 B; Lemmas 22.3--22.4 give
+- **Ch. 22, pp. 110--115.** Example 22.1 is NT-20 B; Lemmas 22.3--22.4 give
   the absolute ramification/discriminant and finite-ramification results.
   Def. 22.5 and Example 22.6's full relative discriminant ideal are deferred
-  to a relative-extension page because MT-20 only needs the absolute case.
+  to a relative-extension page because NT-20 only needs the absolute case.
 - **Chs. 23--24, pp. 116--127.** Ch. 23 Thm. 23.2, Cor. 23.3, Def. 23.4,
-  Lemma 23.6, Thm. 23.7, Def. 23.8, and Prop. 23.9 supply MT-21's transitivity,
+  Lemma 23.6, Thm. 23.7, Def. 23.8, and Prop. 23.9 supply NT-21's transitivity,
   \(efg\), groups, conjugacy, reduction, and exact sequence.  Ch. 24 Examples
-  24.1 and 24.3 are MT-24; Remark 24.2's Chebotarev direction is deferred;
-  Thms. 24.5--24.6 and Remark 24.7 are MT-22--MT-23; Examples 24.8--24.10 are B.
+  24.1 and 24.3 are NT-24; Remark 24.2's Chebotarev direction is deferred;
+  Thms. 24.5--24.6 and Remark 24.7 are NT-22--NT-23; Examples 24.8--24.10 are B.
 - **Chs. 25--28, pp. 128--147.** Def. 25.1, Thm. 25.2, Cor. 25.3, Thm. 26.2,
   Lemma 26.3, Lemma 27.2, Def. 27.3, Thms. 27.5, 27.7, 27.9, Lemma 27.8,
-  Thms. 28.3--28.4 are included/inline across MT-22.  Examples 25.4--25.8,
+  Thms. 28.3--28.4 are included/inline across NT-22.  Examples 25.4--25.8,
   26.1, 27.6, and suitable 28.7 are B.  Thm. 28.5, finiteness with ramification
   restricted to a fixed set, is deferred because it needs stronger
   ramification control than Hermite--Minkowski.
-- **Ch. 29, pp. 148--152.** Examples 29.1--29.4 are MT-23 B; Lemmas
+- **Ch. 29, pp. 148--152.** Examples 29.1--29.4 are NT-23 B; Lemmas
   29.5--29.6 and the remaining full-rank construction are included in its
   logarithmic-kernel, discreteness, full-lattice, and unit-theorem items.
 
 ### 7.11 Cyclotomic reciprocity supplements
 
 - **Milne Ch. 6 and Ch. 8 Examples 8.18--8.19.** Prime-power and general
-  cyclotomic ring/discriminant/ramification results are MT-24; foundational
-  degree/Galois results are already GA-3.  Examples 8.18--8.19 are MT-24's
+  cyclotomic ring/discriminant/ramification results are NT-24; foundational
+  degree/Galois results are already GA-3.  Examples 8.18--8.19 are NT-24's
   Frobenius splitting and quadratic restriction.  Dedekind's Galois-group
   computation is deferred as an optional application; Chebotarev is deferred
   to the analytic/class-field boundary.
 - **Reed Lecture 9 §§2--3, pp. 5--8.** “Quadratic Reciprocity revisited”
-  supplies MT-24's second supplement, Gauss definition and square, and
+  supplies NT-24's second supplement, Gauss definition and square, and
   Frobenius comparison.  “Sketch of a modern proof” supplies the quadratic-
   subfield diagram.  §4 “The sign of the quadratic Gauss sum” is B/out of
   scope: the analytic sign needs a complex embedding and is unnecessary for
   reciprocity.
-- **UCSB 225A Lecture XVII, pp. 3--7.** Thm. 6.9 supplies MT-24's unique-
+- **UCSB 225A Lecture XVII, pp. 3--7.** Thm. 6.9 supplies NT-24's unique-
   quadratic-subfield/Frobenius proof; its alternate finite-field Gauss proof
   is inline or B rather than another theorem.
+
+### 7.12 Widening harvest: Mascot, complete Chs. 3--6
+
+Mascot's Trinity College Dublin course page marks each of the four selected
+chapter PDFs complete and supplies its own heading index.  All four PDFs were
+obtained and read in full: Ch. 3, 30 PDF pages; Ch. 4, 39; Ch. 5, 37; and
+Ch. 6, 80.  The 23 indexed headings are atomized below; none is inferred from
+a table of contents without the corresponding full text.
+
+| exact source heading | disposition |
+|---|---|
+| Ch. 3, “Powers in \(\mathbb Z/p\mathbb Z\)” | **included** on NT-2 in the general power-residue criterion, root count, and new `cor-unique-kth-root-modulo-prime-for-coprime-exponent` from PDF pp. 8--9. |
+| Ch. 3, “The Legendre symbol” | **included** on NT-2 in the definition, well-definedness, subgroup, and root-count items. |
+| Ch. 3, “Proofs part 1/3” | **included** on NT-2 in Euler's criterion, multiplicativity, and the first supplement. |
+| Ch. 3, “Proofs part 2/3” | **included** on NT-2 in the signed-half-system lemma and Gauss's lemma. |
+| Ch. 3, “Proofs part 3/3: quadratic reciprocity” | **included** on NT-3 in the lattice-counting proof and reciprocity theorem. |
+| Ch. 4, “Introduction” | **included** on NT-4 in the two-square definition, product identity, and prime criterion. |
+| Ch. 4, “The Gaussian integers” | **deferred** as an alternate proof route: NT-4 deliberately uses elementary descent/lattices at the low anchor, while systematic integer-ring arithmetic begins at NT-19.  A B-page alternate-proof remark may cite this heading but is not load-bearing. |
+| Ch. 4, “Arithmetic with the Gaussian integers” | **deferred** with the preceding heading; importing Euclidean-domain/UFD arithmetic here would duplicate algebra suppliers without strengthening NT-4's theorem set. |
+| Ch. 4, “Classification of the Gaussian primes” | **deferred** to the NT-20/NT-24 prime-splitting interpretation; the low page cites rather than anticipates number-ring factorization. |
+| Ch. 4, “Conclusion” | **included** on NT-4 in Fermat's two-square theorem, the integer characterization, and uniqueness/counting consequences. |
+| Ch. 5, “Introduction, representation by a form” | **included** on NT-6 in the form, represented-integer, primitive-representation, and primitive-form definitions. |
+| Ch. 5, “Equivalent forms, discriminant” | **included** on NT-6 in proper equivalence, its action, and invariance of representations and discriminant. |
+| Ch. 5, “Equivalence vs. representability” | **included** on NT-6 in the invariance theorem and the B counterexamples showing that the converse fails. |
+| Ch. 5, “Reduced forms” | **included** on NT-6 in the reduction algorithm, termination lemma, boundary convention, and uniqueness theorem. |
+| Ch. 5, “The class number” | **included** on NT-6 in coefficient bounds, finiteness, and the form-class-number definition. |
+| Ch. 5, “The class number one case” | **included** only as the directly checkable small-discriminant B computations on NT-6.  No general class-number-one classification is promoted from examples. |
+| Ch. 6, “Concept and notations” | **included** on NT-7 in the regular-continued-fraction and convergent definitions. |
+| Ch. 6, “Continued fraction expansion of a real number” | **included** on NT-7 in complete quotients, the algorithm theorem, and normalized finite uniqueness. |
+| Ch. 6, “Convergents” | **included** on NT-7 in the recurrence, determinant identity, and reducedness corollary. |
+| Ch. 6, “Convergence of continued fractions” | **included** on NT-7 in the monotone even/odd convergence theorem and error bound. |
+| Ch. 6, “Diophantine approximation” | **included** on NT-7 in best approximation and Legendre's criterion. |
+| Ch. 6, “Continued fractions attached to quadratic irrationals” | **included** on NT-7 in the finite-state lemma and Lagrange theorem. |
+| Ch. 6, “The Pell--Fermat equation” | **included** on NT-8 in existence, minimal positive solution, power parametrization, and generalized Pell orbit items. |
+
+### 7.13 Widening harvest: Evertse, selected Chs. 1--6
+
+The Leiden course page supplies complete PDFs for Chs. 0--6.  The six PDFs
+consulted here have 14 pages in Ch. 1, 16 in Ch. 2, 24 in Ch. 3, 35 in Ch. 4,
+14 in Ch. 5, and 14 in Ch. 6.  Only §1.3 and Exercise 1.4 were harvested from
+Ch. 1, while every named section in Chs. 2--6 below was read in full.
+
+| exact source heading or exercise | disposition |
+|---|---|
+| Ch. 1 §1.3, “An elementary result for prime numbers” | **included** on NT-11 as an independent check on the elementary Chebyshev-scale bounds and their binomial-coefficient lemmas. |
+| Ch. 1, Exercise 1.4 | **included** on NT-11 in `thm-bertrands-postulate` and its disclosed finite-range B verification. |
+| Ch. 2 §2.1, “Dirichlet series” | **included** on NT-12.  Thm. 2.1.1 is **already published** as the library's Abel-summation supplier; Thm. 2.1.6 supplies the new `thm-uniqueness-of-dirichlet-series-coefficients`. |
+| Ch. 2 §2.2, “Arithmetic functions” | **included** on NT-9 for multiplicativity and convolution structure; Thm. 2.2.5 is **already published** as Möbius inversion and is cited rather than re-minted. |
+| Ch. 2 §2.3, “Convolution product vs. Dirichlet series” | **included** on NT-12 in multiplication, Euler products, reciprocal-zeta, and von Mangoldt logarithmic-derivative items. |
+| Ch. 3 §3.1, “Characters on finite abelian groups” | **already published** in abstract algebra at full generality; its Dirichlet-character specialization is **included** on NT-13. |
+| Ch. 3 §3.2, “Dirichlet characters” | **included** on NT-13--NT-14 in orthogonality, conductor/primitivity, induced-character, and parity items. |
+| Ch. 3 §3.3, “Computation of \(G(q)\)” | **included** by citation on NT-1/NT-13: the unit-group structure is NT-1, while the resulting character examples are NT-13 B.  It does not justify a duplicate structure theorem. |
+| Ch. 3 §3.4, “Gauss sums” | **included** on NT-14 in well-definedness, twisting, absolute value, and the functional-equation root number. |
+| Ch. 4 §4.1, “Basic facts” | The Gamma/zeta continuation portion is **already published/planned** on CA-21/CA-22; the arithmetic Dirichlet-\(L\) continuation and Euler-product consequences are **included** on NT-13--NT-14. |
+| Ch. 4 §4.2, “Non-vanishing on the line \(\Re s=1\)” | **included** on NT-13 for \(L(1,\chi)\ne0\) and on NT-16 as an independent check of the zeta boundary argument. |
+| Ch. 4 §4.3, “Functional equations” | Gamma and zeta are **already published/planned** on CA-21/CA-22; primitive Dirichlet-\(L\) parity, completion, and functional equation are **included** on NT-14. |
+| Ch. 5 §5.1, “Introduction” | **inline** in NT-16's historical/proof-route boundary; it makes no mathematical claim beyond the theorem routes subsequently stated. |
+| Ch. 5 §5.2, “A Tauberian theorem for Laplace transforms” | **included** as a third complete proof check for `thm-newman-zagier-tauberian-theorem`; the scaffold keeps the existing theorem id and does not mint Evertse's equivalent normalization separately. |
+| Ch. 5 §5.3, “A Tauberian theorem for Dirichlet series” | **inline** in NT-16's application of the preceding Tauberian theorem.  Its positive-coefficient Dirichlet-series form is a specialized interface, not an independent dependency target. |
+| Ch. 6 §6.1, “The Prime number theorem” | **included** on NT-16 in the \(\pi\)--\(\vartheta\)--\(\psi\) equivalences, logarithmic derivative, Tauberian application, and PNT. |
+| Ch. 6 §6.2, “The Prime number theorem for arithmetic progressions” | **included** on NT-16 in the fixed-modulus PNT-AP theorem and its character decomposition; no uniform-in-\(q\) result is inferred. |
+
+### 7.14 Widening harvest: Stevenhagen, Chs. 3--5 and 8
+
+The full 91-page Leiden text was obtained.  The selected non-exercise ranges
+are Chs. 3--5, PDF pp. 30--65, and Ch. 8, PDF pp. 80--85.  These are 18
+contents headings.  The source treats general orders as well as maximal
+orders; the dispositions below preserve the commutative-algebra seam.
+
+| exact source heading | disposition |
+|---|---|
+| Ch. 3, “The Kummer--Dedekind theorem” | **included** on NT-20 in the index-qualified factorization theorem and its proof interface. |
+| Ch. 3, “Singular primes” | **inline** in NT-19--NT-20's index caveat and conductor examples; it does not weaken the monogenic/maximal-order hypothesis. |
+| Ch. 3, “Quadratic and cyclotomic number rings” | **included** as worked B material across NT-19, NT-20, and NT-24; the general theorems remain on their respective A pages. |
+| Ch. 3, “Integral closure” | **already published** abstractly on commutative-algebra CA-6; its number-field specialization is **included** on NT-19. |
+| Ch. 4, “Norm and trace” | General field norm/trace is **already published** in abstract algebra; integrality, ideal-norm, and embedding consequences are **included** on NT-19--NT-20. |
+| Ch. 4, “Discriminant” | **included** on NT-19 in basis change, trace determinant, index, and field-discriminant items. |
+| Ch. 4, “Computational techniques” | **included** only as directly checkable NT-19/NT-20 B computations.  Algorithms and complexity are not promoted to citable A items. |
+| Ch. 4, “Ramification” | **included** on NT-20 and NT-24 in different/discriminant ramification, tame/wild boundaries, and cyclotomic specialization. |
+| Ch. 5, “Minkowski's theorem” | **included** on NT-22 via the planned geometry-of-numbers supplier and the number-field specialization. |
+| Ch. 5, “Number rings as lattices” | **included** on NT-22 in the Minkowski embedding and ideal-lattice covolume theorem, after converting the source's scaled complex coordinates. |
+| Ch. 5, “Finiteness of Picard groups” | General Picard groups of orders are **deferred** to commutative algebra/nonmaximal-order work; the maximal-order class-group consequence is **included** on NT-22. |
+| Ch. 5, “Minkowski's constant” | **included** on NT-22 in the ideal-class norm bound and small-prime generation corollary. |
+| Ch. 5, “Hermite's theorem” | **included** on NT-22 in discriminant finiteness and the Hermite--Minkowski field-finiteness theorem. |
+| Ch. 5, “Dirichlet's unit theorem” | **included** on NT-23 in torsion, logarithmic kernel, discreteness, full rank, and regulator items. |
+| Ch. 8, “Galois action on extension primes” | **included** on NT-21 in transitivity and conjugacy of primes above a base prime. |
+| Ch. 8, “Decomposition and inertia groups” | **included** on NT-21 in the group definitions, exact sequence, and \(efg\) consequences. |
+| Ch. 8, “The Frobenius symbol” | **included** on NT-21/NT-24 with the library's arithmetic-Frobenius normalization. |
+| Ch. 8, “The non-Galois case” | The cycle-type statement is **included** on NT-21, but Stevenhagen is statement-only here: the proof of Thm. 8.9 literally says “to be supplied.”  Its proof provenance therefore remains Milne/Stein/Conrad--Landesman, never this heading. |
+
+### 7.15 Per-pair independent-treatment audit
+
+Each row names the actual range read in at least two independent treatments.
+“Backing” means a proof-bearing treatment of the pair's spine, not a passing
+mention.  Supplementary sources are listed only where they cover a material
+part of the pair.  There is no one-treatment row.
+
+| pair | treatment 1: exact range read | treatment 2: exact range read | further proof-bearing checks |
+|---|---|---|---|
+| NT-1 | Hackman Ch. C §§C.I--C.V, pp. 69--94 | Stein, *Elementary Number Theory*, §2.5, PDF pp. 39--49 | Evertse Ch. 3 §3.3, complete section; Gorodnik Lect. 8 §§1--2 |
+| NT-2 | Hackman Ch. D §§D.I and D.IV, pp. 107--117, 123--127 | Stein §§4.1--4.3, PDF pp. 76--83 | Mascot Ch. 3 headings “Powers” through “Proofs part 2/3,” complete PDF range; Gorodnik Lect. 9 §1 |
+| NT-3 | Hackman §§D.II and D.V, pp. 118--122, 127--130 | Stein §§4.1 and 4.3, PDF pp. 76--87 | Mascot Ch. 3 “Proofs part 3/3,” complete heading; Gorodnik Lect. 9 §2 and Lect. 10 §§1--2 |
+| NT-4 | Hackman Ch. E §§E.I--E.II, pp. 143--154 | Stein §5.7, PDF pp. 123--127 | Mascot Ch. 4 “Introduction” and “Conclusion”; Conrad, *Sums of Two Squares and Lattices*, §§2--4 |
+| NT-5 | Conrad, *Proofs by Descent*, §6, pp. 13--16 | MIT 18.781 Lecture 22, “Four Squares Theorem,” PDF pp. 2--5 | Dummit, *Number Theory, Part 9*, §9.1.2, pp. 4--5 |
+| NT-6 | Stein, *Elementary Number Theory and Elliptic Curves*, §§9.2--9.4, pp. 116--124 | Granville, *Primes*, Ch. 4 §§4.1--4.2, pp. 1--5 | Mascot Ch. 5, all six indexed headings and complete 37-page PDF |
+| NT-7 | Hackman Ch. G §§G.I--G.VI, pp. 195--217 | Stein Ch. 7 §§7.1--7.2 and 7.4, pp. 74--89 | Mascot Ch. 6, first six indexed headings; MIT 18.781 Lectures 18--20 |
+| NT-8 | Hackman Ch. H §§H.I--H.VI, pp. 223--249 | Conrad, *Pell's Equation I*, §§1--7, and *II*, §§1--4 | Mascot Ch. 6 “The Pell--Fermat equation”; MIT 18.781 Pell lecture note |
+| NT-9 | Hackman Ch. F §§F.I--F.V, pp. 167--182 | Shoup §2.9, complete section | Evertse Ch. 2 §§2.2--2.3; Crisman Chs. 18--19 and 23 |
+| NT-10 | Crisman Ch. 20 §§20.1--20.5 and §24.6.4 | Sanders, *Topics in Analytic Number Theory*, Ch. 1 Props. 1.3--1.5, pp. 2--6 | Overholt, *A Course in Analytic Number Theory*, Ch. 1 §1.1, pp. 19--21 |
+| NT-11 | Shoup Ch. 5 §§5.1--5.3 | Crisman Ch. 21 §§21.1--21.3 | Evertse Ch. 1 §1.3 and Exercise 1.4; Andersen Ch. 3 §§3.1--3.3 |
+| NT-12 | Kedlaya Ch. 2 §§2.1--2.3 | Tomczak/Boase Ch. 3 Thms. 3.1--3.8, pp. 14--17 | Evertse Ch. 2 §§2.1--2.3, complete 16-page chapter |
+| NT-13 | Kedlaya Ch. 3 §§3.1--3.5 and Ch. 4 §§4.1--4.4 | Andersen Chs. 13--15, pp. 51--60 | Evertse Ch. 3 §§3.1--3.4 and Ch. 4 §§4.1--4.2; Sutherland Lect. 18 §§18.1--18.6 |
+| NT-14 | Andersen Ch. 16 §§16.1--16.3.2, pp. 60--67 | Kedlaya Ch. 6 §§6.1--6.2 | Evertse Ch. 3 §3.4 and Ch. 4 §4.3, complete sections |
+| NT-15 | Kedlaya Ch. 9 §§9.1--9.5 | Andersen Ch. 11 §§11.1--11.2 and Ch. 12 §§12.1--12.4, pp. 40--48 | Tomczak Ch. 7 Thms. 7.1--7.4 |
+| NT-16 | Montgomery--Vaughan Ch. 6 §§6.1--6.2, pp. 168--198 | Andersen Chs. 10--12, pp. 35--48 | Evertse Ch. 5 §§5.1--5.3 and Ch. 6 §§6.1--6.2; Kedlaya Chs. 1, 4, 7--9 at the ranges inventoried in §7.5 |
+| NT-17 | Milne Ch. 7, pp. 105--124, results 7.1--7.38 selected as in §7.8 | Sutherland 18.782 Lectures 5 §§5.1--5.3 and 8 §§8.1--8.3 | Conrad, *Ostrowski's Theorem for \(\mathbb Q\)*, complete note, and *Hensel's Lemma*, complete note |
+| NT-18 | Sutherland 18.782 Lectures 10 §§10.1--10.4 and 11 §§11.1--11.3 through Thm. 11.12 | Raskin, *Quadratic Forms and Hasse--Minkowski*, §§3.14--4.9 | Conrad, *Selmer's Example*, pp. 1--5, for the nonquadratic boundary only |
+| NT-19 | Milne Ch. 2, pp. 25--44 | Stein, *Algebraic Number Theory*, §§2.3--2.4 and 6.1--6.2, pp. 25--35, 69--74 | Stevenhagen Chs. 3--4, PDF pp. 30--51 |
+| NT-20 | Milne Ch. 3, pp. 46--67 | Stein §§4.1--4.3 and 6.3, pp. 49--59, 74--76, plus Conrad, *The Different*, §§3--4 | Stevenhagen Chs. 3--4, PDF pp. 30--51 |
+| NT-21 | Milne Thm. 7.38 and Ch. 8 §§8.1--8.3, pp. 135--145 | Stein §§9.2--9.4, pp. 101--108, and Conrad--Landesman Chs. 23--24, pp. 116--127 | Stevenhagen Ch. 8, pp. 80--85, statement check only for Thm. 8.9 because its proof is absent |
+| NT-22 | Milne Ch. 4, pp. 68--83, and Thm. 8.43 | Stein §§7.1--7.3, pp. 77--86, and Conrad--Landesman Chs. 25--28, pp. 128--147 | Stevenhagen Ch. 5 “Minkowski's theorem” through “Hermite's theorem,” PDF pp. 52--57 |
+| NT-23 | Milne Ch. 5, pp. 85--94 | Stein §§8.1--8.2, pp. 87--98, and Conrad--Landesman Ch. 29, pp. 148--152 | Stevenhagen Ch. 5 “Dirichlet's unit theorem,” PDF pp. 57--60, for the ordinary-unit part; \(S\)-units remain backed by Milne/Conrad--Landesman |
+| NT-24 | Milne Ch. 6, pp. 95--104, and Ch. 8 Examples 8.18--8.19 | Conrad--Landesman Chs. 10--11 and 24, pp. 54--63, 122--127 | Stevenhagen Chs. 3--4 and Ch. 8 “The Frobenius symbol”; Reed Lect. 9 §§2--3 and UCSB 225A Lect. XVII pp. 3--7 |
+
+### 7.16 Convention comparisons introduced by the widened sources
+
+- **Power residues.** Mascot works first with nonzero classes in
+  \(\mathbb F_p\).  The library states the unit hypothesis explicitly, keeps
+  \(p\mid a\) as a separate boundary case, and defines the Legendre symbol
+  totally with value zero there.  This is a domain extension, not a change to
+  Mascot's unit-case theorem.
+- **Dirichlet characters.** Evertse begins with finite-group characters and
+  then characterizes their maps \(\mathbb Z\to\mathbb C\), generally writing
+  \(q>2\).  The library takes the modulus as data, defines the zero extension
+  from \((\mathbb Z/q\mathbb Z)^\times\), and retains the harmless boundary
+  moduli \(q=1,2\).  This presentation makes modulus, period, and conductor
+  distinguishable and makes Euler factors at nonunits automatic.
+- **Minkowski volume.** Stevenhagen embeds into the conjugation-fixed subspace
+  of all complex embeddings and uses the restricted Hermitian metric.  Under
+  \(\mathbb R^{r_1}\times\mathbb C^{r_2}\), its volume is \(2^{r_2}\) times
+  standard Euclidean volume and its ideal covolume is
+  \(\sqrt{|d_K|}N\mathfrak a\).  The library keeps its pre-existing unscaled
+  real/imaginary coordinates, hence
+  \(2^{-r_2}\sqrt{|d_K|}N\mathfrak a\).  The two formulas are converted, never
+  mixed.
+- **Orders and class groups.** Stevenhagen's \(\operatorname{Pic}(R)\) applies
+  to invertible ideals of a possibly nonmaximal order.  NT-22 uses only the
+  ideal class group of the maximal order \(\mathcal O_K\), whose abstract
+  definition belongs to commutative algebra.  General nonmaximal-order Picard
+  groups remain deferred.
+- **Frobenius.** Stevenhagen's residue action \(x\mapsto x^{N\mathfrak p}\)
+  agrees with the library's arithmetic Frobenius.  The library additionally
+  records the chosen-prime dependence and treats an unchosen unramified
+  Frobenius only as a conjugacy class.
 
 ## 8. Consolidated well-definedness and convention ledger
 
@@ -2569,18 +2730,18 @@ proof.
 
 | pages/results | intrinsic cost | inherited cost and exact reason |
 |---|---|---|
-| MT-1--MT-8 | ZF | None.  All selections are finite, least residues, or least positive integers after nonemptiness is proved. |
-| MT-9--MT-13 | ZF | None beyond the library's constructed real/complex numbers.  Divisor sets and character groups are finite, and prime ordering is canonical. |
-| MT-14, primitive L functional equations | ZF relative to Poisson summation | The selected FA-22/FA-25 route rests on the measure-theory construction whose Carathéodory extension ledger charges \(\mathsf{AC}_\omega\).  Copy that supplier charge; finite Gauss sums and parity manipulations add none. |
-| MT-15--MT-16 | ZF relative to CA-18/21/22 | CA-18's current scaffold allows at most \(\mathsf{AC}_\omega\) for product/exhaustion machinery and directs the build to canonical exhaustions to remove it.  Until built, inherit its eventual item-level label.  Finite contour grids, zero multiplicities, and least admissible heights add no choice. |
-| MT-17, construction/completeness of \(\mathbb Q_p\) | ZF intrinsically | The published `thm-metric-completion-exists` explicitly uses \(\mathsf{AC}_\omega\) in its diagonal completeness proof, so MT-17 and any result depending on that field inherit countable choice. |
-| MT-17, Ostrowski, product formula, finite approximation, digit recursion, Newton | ZF | These constructions are explicit; they add no choice beyond existence/completeness of the named completion. |
-| MT-18 | ZF intrinsically | Inherits \(\mathsf{AC}_\omega\) from MT-17.  The global square-class prime is the least prime in a proved nonempty progression, not an application of choice. |
-| MT-19--MT-20 | ZF | Finite bases exist by finite module theory; finite choice is a theorem of ZF.  No permanent basis is selected as field data. |
-| MT-21 | ZF intrinsically | Inherits MT-17's \(\mathsf{AC}_\omega\) for completions.  Finite prime orbits and residue fields add none. |
-| MT-22 | ZF relative to Euclidean volume | Its use of planned Lebesgue measure inherits the measure scaffold's \(\mathsf{AC}_\omega\) construction charge; Blichfeldt, convex-body scaling, and bounded-ideal enumeration add none. |
-| MT-23 | ZF intrinsically | Inherits MT-22's supplier charge.  Lattice bases, fundamental units, and the finite set \(S\) use only finite choice. |
-| MT-24 | ZF intrinsically | Inherits MT-21 only when its completion/Frobenius supplier is followed through the DAG; the cyclotomic integer, ideal, and Gauss-sum arguments themselves are finite ZF algebra. |
+| NT-1--NT-8 | ZF | None.  All selections are finite, least residues, or least positive integers after nonemptiness is proved. |
+| NT-9--NT-13 | ZF | None beyond the library's constructed real/complex numbers.  Divisor sets and character groups are finite, and prime ordering is canonical. |
+| NT-14, primitive L functional equations | ZF relative to Poisson summation | The selected FA-22/FA-25 route rests on the measure-theory construction whose Carathéodory extension ledger charges \(\mathsf{AC}_\omega\).  Copy that supplier charge; finite Gauss sums and parity manipulations add none. |
+| NT-15--NT-16 | ZF relative to CA-18/21/22 | CA-18's current scaffold allows at most \(\mathsf{AC}_\omega\) for product/exhaustion machinery and directs the build to canonical exhaustions to remove it.  Until built, inherit its eventual item-level label.  Finite contour grids, zero multiplicities, and least admissible heights add no choice. |
+| NT-17, construction/completeness of \(\mathbb Q_p\) | ZF intrinsically | The published `thm-metric-completion-exists` explicitly uses \(\mathsf{AC}_\omega\) in its diagonal completeness proof, so NT-17 and any result depending on that field inherit countable choice. |
+| NT-17, Ostrowski, product formula, finite approximation, digit recursion, Newton | ZF | These constructions are explicit; they add no choice beyond existence/completeness of the named completion. |
+| NT-18 | ZF intrinsically | Inherits \(\mathsf{AC}_\omega\) from NT-17.  The global square-class prime is the least prime in a proved nonempty progression, not an application of choice. |
+| NT-19--NT-20 | ZF | Finite bases exist by finite module theory; finite choice is a theorem of ZF.  No permanent basis is selected as field data. |
+| NT-21 | ZF intrinsically | Inherits NT-17's \(\mathsf{AC}_\omega\) for completions.  Finite prime orbits and residue fields add none. |
+| NT-22 | ZF relative to Euclidean volume | Its use of planned Lebesgue measure inherits the measure scaffold's \(\mathsf{AC}_\omega\) construction charge; Blichfeldt, convex-body scaling, and bounded-ideal enumeration add none. |
+| NT-23 | ZF intrinsically | Inherits NT-22's supplier charge.  Lattice bases, fundamental units, and the finite set \(S\) use only finite choice. |
+| NT-24 | ZF intrinsically | Inherits NT-21 only when its completion/Frobenius supplier is followed through the DAG; the cyclotomic integer, ideal, and Gauss-sum arguments themselves are finite ZF algebra. |
 
 No item here requires dependent choice, BPI, Hahn--Banach, or full AC beyond a
 stronger label already carried by a named external supplier.  In particular,
@@ -2607,10 +2768,10 @@ proof is not a trivial computation:
   fully proved literature example; otherwise omit the item;
 - `cex-local-global-fails-for-a-cubic-curve` is Conrad's literature-derived
   Selmer cubic; its local calculations are `ai-altered` when adapted to
-  MT-17's Hensel ids, while its later algebraic proof is `not-supplied`;
+  NT-17's Hensel ids, while its later algebraic proof is `not-supplied`;
 - `cex-the-mertens-conjecture-is-false` is literature-derived from
   Odlyzko--te Riele and has proof `not-supplied`; it records a boundary fact,
-  not an input to MT-16;
+  not an input to NT-16;
 - `cex-same-discriminant-does-not-imply-proper-equivalence`,
   `cex-same-represented-integers-do-not-imply-proper-equivalence`, and all
   definite-reduction source examples taken from Stein/Granville are
@@ -2629,7 +2790,7 @@ proof is not a trivial computation:
   nonprincipality proof is sourced are `literature-derived` / `ai-altered`;
 - `ex-discriminant-lower-bound` and
   `ex-no-everywhere-unramified-extension-of-q` are literature-derived
-  consequences from Milne/Stein, with `ai-altered` proofs adapted to MT-22;
+  consequences from Milne/Stein, with `ai-altered` proofs adapted to NT-22;
 - alternate-proof remarks (Zolotarev, Gaussian integers, theta/Mellin, Newman)
   are literature-derived and `not-supplied` unless the B item actually carries
   the proof.
@@ -2645,7 +2806,7 @@ reconciliation receipts; unmarked entries remain requests.
 1. **Complex analysis CA-18:** expose stable item ids for Jensen's formula,
    the order of an entire function, the Hadamard product/factorisation of an
    order-one entire function, and the logarithmic derivative of that product.
-   MT-15--MT-16 presently cite the CA-18 page at page level because the
+   NT-15--NT-16 presently cite the CA-18 page at page level because the
    finished prose promises the results but supplies no candidate ids.
 2. **Complex analysis CA-21/CA-22:** retain the exact promised ids listed in
    §5 and make
@@ -2655,23 +2816,23 @@ reconciliation receipts; unmarked entries remain requests.
 3. **Functional analysis FA-22/FA-25:** build
    `lem-fourier-transform-of-a-gaussian`, `def-dirac-comb`, and
    `thm-dirac-comb-is-fourier-invariant` under the same \(e^{2\pi ix}\)
-   normalization before MT-14.  The analytic page derives its twisted finite
+   normalization before NT-14.  The analytic page derives its twisted finite
    character factor and does not re-mint general Poisson summation.
 4. **Group theory GT-17:** retain the planned compatible-residue definition,
    ring operations, topology, completeness, compactness, and dense
    \(\mathbb Z\)-map for \(\mathbb Z_p\), and expose stable ids.  It should not
-   also define \(\mathbb Q_p\); MT-17 owns the metric completion and proves the
+   also define \(\mathbb Q_p\); NT-17 owns the metric completion and proves the
    canonical comparison/fraction-field theorem.
 5. **Abstract algebra — applied in the receiving algebra scaffold:** keep cyclotomic extension/Galois-group and unique
    index-two-subfield facts in GA-3 and general finite-character orthogonality
-   on its representation page.  GA-3 also owns `thm-kronecker-weber`; MT-24
+   on its representation page.  GA-3 also owns `thm-kronecker-weber`; NT-24
    cites it and owns the arithmetic consequence above.  Do not add cyclotomic
    integer rings, prime decomposition, or arithmetic Frobenius there;
-   MT-21/MT-24 own them.
+   NT-21/NT-24 own them.
 6. **Future quadratic-order/class-group interface:** the form--ideal
    correspondence, Gauss composition, indefinite reduction cycles, narrow
-   class groups, and nonmaximal orders remain owed to a later scaffold.  MT-6
-   proves only positive-definite reduction, and MT-22 uses ideal classes
+   class groups, and nonmaximal orders remain owed to a later scaffold.  NT-6
+   proves only positive-definite reduction, and NT-22 uses ideal classes
    directly.
 
 ## 12. Unresolved seams and build-time forward-reference checks
@@ -2682,21 +2843,97 @@ reconciliation receipts; unmarked entries remain requests.
    verify that the exact supplier item is authored below its consumer before
    resolving any `deps` entry.
 2. The three placement anchors are nonnegotiable.  The orchestrator must splice
-   MT-1--MT-8 after `splitting-fields-examples`, MT-9--MT-16 after
-   `bloch-schottky-and-picard-examples`, and MT-17--MT-24 after the last
+   NT-1--NT-8 after `splitting-fields-examples`, NT-9--NT-16 after
+   `bloch-schottky-and-picard-examples`, and NT-17--NT-24 after the last
    commutative-algebra page.  In the current live topology the analytic anchor
-   precedes the commutative-algebra terminus, which is why MT-18 may depend on
-   MT-13.  Reordering those anchor blocks would reopen the Hasse--Minkowski
+   precedes the commutative-algebra terminus, which is why NT-18 may depend on
+   NT-13.  Reordering those anchor blocks would reopen the Hasse--Minkowski
    seam.
 3. `cex-a-number-field-need-not-be-monogenic` is optional and has an unresolved
    source obligation: retain it only after obtaining a complete proof of a
    named example.  It is non-load-bearing and may be omitted without weakening
-   MT-19.
+   NT-19.
 4. CA-18's missing stable ids are the only unresolved naming seam.  There is no
    unresolved mathematical forward reference: Hasse--Minkowski is fully
-   scaffolded after Dirichlet AP, and quadratic reciprocity in MT-24 is a later
+   scaffolded after Dirichlet AP, and quadratic reciprocity in NT-24 is a later
    reinterpretation rather than a low-block dependency.
 
 No capability or research blocker was encountered.  Deferred and out-of-scope
 results are recoverably named in §§2 and 7; none is being used as an undeclared
 premise.
+
+## 13. Density-enrichment report (WIDEN pass, 2026-08-14)
+
+### Measurement audit
+
+- **Verified item count before:** 590 item-table rows, 590 unique ids, zero
+  duplicates.  The dispatch's 586 was low by four.
+- **Verified item count after:** 592 item-table rows, 592 unique ids, zero
+  duplicates.
+- **The claimed heading denominator is not a heading count.** Before this pass,
+  the lowercase word `included` occurred 41 times, but single clauses
+  such as “D.I.1--D.I.9 are included” dispose of many source entries at once,
+  while other clauses say “inline” or “already published.”  Thus
+  \(590/41=14.39\) is reproducible as a lexical ratio but is not a
+  decomposition ratio.  The dispatch's 14.3× combines that invalid
+  denominator with its four-item undercount.
+- **After, the same invalid grep gives** 96 occurrences and
+  \(592/96=6.17\).  It falls merely because this pass writes one disposition
+  row per new source heading.  The true legacy before/after decomposition
+  ratios are therefore **not recoverable from this artifact**, and neither
+  14.39× nor 6.17× is reported as mathematical density.
+- **The widened increment is exactly auditable:** 57 new source headings
+  (Mascot 23, Evertse 16, Stevenhagen 18) plus the separately selected
+  Evertse Exercise 1.4, for 58 disposition rows.  Of the headings, 51
+  explicitly map to included library content; the exercise does too.  The
+  other six rows are three Gaussian-integer alternate-route headings and
+  three contextual/inline headings.  Future ratio measurements can count
+  heading rows rather than disposition words.
+
+### Sources and content added
+
+Three additional complete, legitimate full-text treatments were obtained:
+Mascot's complete MAU23101 Chs. 3--6, Evertse's complete prime-number-theory
+course PDFs over the exact ranges in §7.13, and Stevenhagen's complete
+91-page *Number Rings* over Chs. 3--5 and 8.  Sections 7.12--7.14 give every
+new source heading a disposition.  Section 7.15 gives all 24 A/B pairs
+two-or-more proof-bearing treatments and the exact range read in each; no row
+is padded with a passing mention and no pair remains singly backed.
+
+The widened reading mostly corroborated the already dense decomposition.  Two
+source results filled genuine, useful gaps:
+
+1. NT-2 adds
+   `cor-unique-kth-root-modulo-prime-for-coprime-exponent` from Mascot Ch. 3,
+   PDF pp. 8--9.  Its statement is literature-derived and its proof is
+   AI-altered only to cite the existing root-count corollary and expose
+   independence of the inverse exponent.
+2. NT-12 adds `thm-uniqueness-of-dirichlet-series-coefficients` from Evertse
+   Thm. 2.1.6, PDF p. 5, with both statement and least-nonzero-coefficient
+   proof literature-derived.
+
+No A page was split: after enrichment the largest A page has 24 items, well
+below the 60-item ceiling.  Existing ids were not changed or renumbered.
+
+### Deliberate non-decomposition and seam decisions
+
+- Mascot's three Gaussian-integer development headings were not turned into
+  new low-anchor A items.  They are an alternate proof of NT-4 and would
+  duplicate algebraic structure before the NT-19 integer-ring block.
+- Mascot's class-number-one discussion remains worked NT-6 B material; finite
+  examples do not license a general classification theorem.
+- Evertse §5.1 is contextual, and §5.3 is the specialized Dirichlet-series
+  interface to the §5.2 Tauberian theorem.  They are inline in NT-16 rather
+  than duplicate dependency targets.
+- Stevenhagen's computational-techniques heading remains B material, and his
+  Picard groups of nonmaximal orders remain on the commutative-algebra/future
+  quadratic-order seam.  NT-22 uses only the maximal-order class group.
+- Stevenhagen Thm. 8.9 is not used for proof provenance because its printed
+  proof is “to be supplied.”  Its non-Galois cycle-type statement is checked
+  there, while the proof remains backed by Milne, Stein, and
+  Conrad--Landesman.
+
+The widened sources' character, Minkowski-volume, Picard/class-group, and
+Frobenius conventions are compared in §7.16.  The pass does not annex
+commutative algebra, general Galois theory, complex-analytic Gamma/zeta, or
+class-field theory; those suppliers continue to be cited at the seams.
