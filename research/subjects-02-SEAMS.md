@@ -188,6 +188,56 @@ the interface you need is not in its inventory.
 
 ---
 
+## 4b. Category assignment — an ORCHESTRATOR job, decided 2026-08-14
+
+**Scaffolders do not assign `category`.** It is set per *block* in the splice
+layout, which is why none of this needed a lane restart. The pattern already
+exists: number theory spans three blocks, group theory four, and one category can
+carry two whole tracks.
+
+**Algebraic geometry splits into TWO categories** (owner, 2026-08-14):
+
+| category | carries |
+|---|---|
+| `algebraic-geometry` | affine and projective varieties, morphisms and rational maps, Segre/Veronese and products, dimension, tangent spaces and smoothness, normality and normalisation, curves *as varieties* and genus |
+| `scheme-theory` | sheaves, Čech theory and sheaf cohomology; affine and general schemes; morphism properties (separated, proper, flat, smooth, étale); quasi-coherent and coherent sheaves; divisors and line bundles; vanishing and finiteness; Riemann–Roch and Serre duality; blowups |
+
+The boundary is the varieties→schemes change of register, the one real conceptual
+break in the subject; a reader self-selects across it. Curves were deliberately
+*not* given a third category: curves appear in both registers, so that boundary
+would cut across this one rather than along it.
+
+**`AV` was told to record whether it scaffolds the classical register first or
+interleaves.** If it interleaves, assign the category per pair from its inventory
+at reconciliation — do not force its reading order to match the category split.
+Reading order and index grouping are independent; the splice sets orders from
+anchors and categories from this table.
+
+**Also done 2026-08-14, on already-spliced content** (`de72d447`): the
+74-page `differential-geometry` group became `differential-geometry` (34,
+manifolds through de Rham) · `riemannian-geometry` (14) · `lie-theory` (20) ·
+`symplectic-geometry` (6); the 76-page `category-theory` group became
+`category-theory` (42) · `homological-algebra` (34). `lie-theory` is where `RL`'s
+own pages belong, and `differential-geometry` is where `DT`'s siblings sit.
+
+**Every new category needs a style in the app repo's
+`web/lib/library-categories.ts`, which is frozen presentation and owner-gated.**
+Nothing renders until a level is built, so this is not urgent — but it is a hard
+prerequisite to publishing any of these levels. Counted from `plan-spec.json`
+against the styled set CX-D3 quotes, **11 categories currently lack a style**:
+
+`commutative-algebra` · `differential-geometry` · `functional-analysis` ·
+`group-theory` · `homological-algebra` · `lie-theory` · `measure-theory` ·
+`pde` · `probability` · `riemannian-geometry` · `symplectic-geometry`
+
+subjects-02 will add up to **six more** — `algebraic-geometry`, `scheme-theory`,
+`algebraic-topology`, `differential-topology`, `fourier-analysis` and a
+representation-theory group; `RL` folds into the existing `lie-theory`. So the
+app-side work lands at roughly **17 new index groups**, and it should be done
+once, deliberately, rather than piecemeal as each level publishes.
+
+---
+
 ## 5. Forward references
 
 **Minimise them, but never drop content to avoid one.** That is the owner's
