@@ -160,7 +160,7 @@ written conditionally and must be made unconditional).
      (`plan-combinatorics-and-categories.md` §28 A1). **Verify from BOTH donor and
      receiving page** — no gate fails a half-done re-home.
    - `DEFERRED.md` row reconciliation — now narrowed by §7 below.
-3. **THE SPLICE — not started, and it is the last step.** Convert anchors to
+3. **THE SPLICE — prepared, not run. It is the last step.** Convert anchors to
    concrete orders for ~280 pairs in **ONE pass, by anchor page id, never by
    composing shift tables**. Free integers **98–101** take part of the Galois
    block; everything else needs fractional orders in the `5.1`/`53.2` idiom,
@@ -168,6 +168,36 @@ written conditionally and must be made unconditional).
    page ids **retired**, so the splice input changed after reconciliation.
    The owner authorised "do all of them"; the splice was still held back and
    should be confirmed before it runs.
+
+   **Splice prep done 2026-08-14 — read this before writing any splice code.**
+
+   *All eight anchors resolve*: Galois 97, GT-structure 71, GT-geometric 302,
+   commutative-algebra 111, NT-elementary 57, NT-analytic 348, measure-theory 288,
+   differential-geometry 392. Free integers below 443 are exactly **98, 99, 100,
+   101** (right after the Galois anchor, as designed) **and 443**. Max order 442,
+   448 pages. Four chained anchors resolve only at splice time: FA after MT's last
+   page, probability after FA's, PDE after probability's, NT-algebraic after
+   commutative-algebra's.
+
+   *Each track states its pair inventory in its OWN table format, and one
+   permissive regex silently undercounts.* Four distinct shapes seen:
+   `| MT-1 | \`page\` | …` (bare label), `| \`GT-1\` | \`page\` | … | n |`
+   (backticked label), `| \`MA-1\` | \`page\` | \`existing-page\` | n |` (third
+   column re-homes into an existing page), and `| \`page\` | description |` with
+   **no label column at all** (commutative algebra, number theory).
+   A validated extractor recovers **MT 23, FA 25, PR 22, PDE 26, DG 37, GT 23,
+   CT 18, HA 17** — matching §1's table exactly. **Six tracks still need
+   per-format extraction**: complex-analysis, commutative-algebra, number-theory,
+   abstract-algebra, abstract-algebra-expansion, combinatorics. Draft extractor:
+   the scratchpad `extract-pairs.mjs`; its `SHAPE_B` is far too permissive (it
+   matched 758 rows in complex analysis by catching item ids) and must be
+   tightened per track, never loosened.
+
+   **Do not splice before the last two lanes land.** Commutative algebra is the
+   1.05× DECOMPOSE lane; if it decomposes hard, A pages cross the 60-item ceiling
+   and **split**, which mints new page ids and changes the splice input. Number
+   theory is the other outstanding extractor. Splicing now would mean composing a
+   second pass over the first — the exact thing the one-pass rule forbids.
 
 ## 6. Machinery added or changed this run
 
