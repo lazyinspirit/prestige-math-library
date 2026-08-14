@@ -192,44 +192,29 @@ written conditionally and must be made unconditional).
      belong to topology. **This corrected §7: 58 items discharge, not 62, and
      NEITHER catalogue page retires** — the summary count had predicted both
      disappearing.
-3. **THE SPLICE — prepared, not run. It is the last step.** Convert anchors to
-   concrete orders for ~280 pairs in **ONE pass, by anchor page id, never by
-   composing shift tables**. Free integers **98–101** take part of the Galois
-   block; everything else needs fractional orders in the `5.1`/`53.2` idiom,
-   which renumber nothing. Galois is now **four** pairs and two homological-algebra
-   page ids **retired**, so the splice input changed after reconciliation.
-   The owner authorised "do all of them"; the splice was still held back and
-   should be confirmed before it runs.
+3. **THE SPLICE — DONE** (`3fac4f29`). **448 → 894 pages, 237 pairs placed,**
+   one pass keyed by anchor page id from the live spec. Fractional orders
+   renumbered nothing; no authored page was touched. Full layout and rationale:
+   `research/subjects-01-splice-record.md`. All gates pass; the 297
+   `redundant-prereq` warnings pre-date it (310 before) and none names a new page.
 
-   **Splice prep done 2026-08-14 — read this before writing any splice code.**
+   Three things the seam table alone did not show, now recorded:
+   - **Group theory has FOUR blocks, not two.** GT-18/19 need abstract-algebra
+     RT-4 (order 150) *and* commutative-algebra completion (111.x), so they anchor
+     at the later; the cohomological block sits after homological algebra.
+   - **Complex analysis is out of scope** by its own CX-D2 — it already occupies
+     its band and performs no splice or renumber. Combinatorics likewise in place.
+   - **The 9 retired page ids were safe**: all 19 `requires` edges into them came
+     from inside the superseded 365–392 band, no authored page consumed any.
+     Measured before the edit.
 
-   *All eight anchors resolve*: Galois 97, GT-structure 71, GT-geometric 302,
-   commutative-algebra 111, NT-elementary 57, NT-analytic 348, measure-theory 288,
-   differential-geometry 392. Free integers below 443 are exactly **98, 99, 100,
-   101** (right after the Galois anchor, as designed) **and 443**. Max order 442,
-   448 pages. Four chained anchors resolve only at splice time: FA after MT's last
-   page, probability after FA's, PDE after probability's, NT-algebraic after
-   commutative-algebra's.
-
-   *Each track states its pair inventory in its OWN table format, and one
-   permissive regex silently undercounts.* Four distinct shapes seen:
-   `| MT-1 | \`page\` | …` (bare label), `| \`GT-1\` | \`page\` | … | n |`
-   (backticked label), `| \`MA-1\` | \`page\` | \`existing-page\` | n |` (third
-   column re-homes into an existing page), and `| \`page\` | description |` with
-   **no label column at all** (commutative algebra, number theory).
-   A validated extractor recovers **MT 23, FA 25, PR 22, PDE 26, DG 37, GT 23,
-   CT 18, HA 17** — matching §1's table exactly. **Six tracks still need
-   per-format extraction**: complex-analysis, commutative-algebra, number-theory,
-   abstract-algebra, abstract-algebra-expansion, combinatorics. Draft extractor:
-   the scratchpad `extract-pairs.mjs`; its `SHAPE_B` is far too permissive (it
-   matched 758 rows in complex analysis by catching item ids) and must be
-   tightened per track, never loosened.
-
-   **Do not splice before the last two lanes land.** Commutative algebra is the
-   1.05× DECOMPOSE lane; if it decomposes hard, A pages cross the 60-item ceiling
-   and **split**, which mints new page ids and changes the splice input. Number
-   theory is the other outstanding extractor. Splicing now would mean composing a
-   second pass over the first — the exact thing the one-pass rule forbids.
+   **OWNER-GATED CONSEQUENCE.** Seven new `category` values —
+   `measure-theory`, `functional-analysis`, `probability`, `pde`,
+   `differential-geometry`, `group-theory`, `commutative-algebra` — carry **348
+   pages**. `category` is both the `library/<category>/` directory and the index
+   group, and the app repo's `web/lib/library-categories.ts` is **frozen
+   presentation**. Nothing renders today (every new page has empty `items[]`), but
+   **a style must be added there before any of these levels publishes.**
 
 ## 6. Machinery added or changed this run
 
