@@ -11,8 +11,6 @@ items: [def-polygonal-arc-and-polygon,
         def-plane-graph-face-and-boundary,
         lem-plane-graph-faces-are-finite-with-one-unbounded-face,
         lem-face-containment-under-plane-subgraphs,
-        def-bridge-in-a-graph,
-        lem-edge-is-a-bridge-iff-it-lies-on-no-cycle,
         lem-plane-edge-face-incidence,
         prop-plane-forest-has-one-face,
         lem-equal-plane-face-boundaries-force-a-cycle,
@@ -31,7 +29,6 @@ items: [def-polygonal-arc-and-polygon,
         cor-planar-graphs-have-no-kuratowski-subdivision,
         prop-maximally-planar-edge-characterisation,
         lem-kuratowski-minors-are-topological-minors,
-        lem-three-connected-graph-has-a-contractible-edge,
         lem-three-connected-kuratowski-free-is-planar,
         lem-separation-augmentation-for-kuratowski-free-graphs,
         lem-edge-maximal-kuratowski-free-is-three-connected,
@@ -39,13 +36,11 @@ items: [def-polygonal-arc-and-polygon,
         def-plane-dual-multigraph,
         thm-plane-dual-exists-and-double-dual-recovers-primal,
         thm-six-colour-theorem-for-planar-graphs,
-        def-kempe-chain,
-        lem-kempe-component-colour-swap,
         lem-alternating-kempe-paths-cannot-both-occur,
         thm-five-colour-theorem]
 examples: []
 ---
 
-Euclidean polygonal topology provides the separation setting for embedded edges. Graph colouring supplies proper colourings, Menger theory supports the connectivity reductions behind Kuratowski's theorem, and tree and forest results provide bridge, spanning-tree, and edge-count machinery used in the face theory and Euler formula.
+Euclidean polygonal topology provides the separation setting for embedded edges. Connectivity supplies [[def-bridge-in-a-graph]] and [[lem-edge-is-a-bridge-iff-it-lies-on-no-cycle]], which the face theory uses; Menger theory supplies [[lem-three-connected-graph-has-a-contractible-edge]] and the connectivity reductions behind Kuratowski's theorem; graph colouring supplies proper colourings together with [[def-kempe-chain]] and [[lem-kempe-component-colour-swap]]. Tree and forest results provide the spanning-tree and edge-count machinery used in the Euler formula.
 
-Polygonal arcs first establish Jordan separation, faces, boundaries, bridges, and facial cycles. Maximal plane graphs and Euler's formula then yield girth bounds, low-degree vertices, and the standard nonplanarity tests. Contractible-edge and separation lemmas build the Kuratowski-Wagner characterisation, after which plane duality is constructed. Low-degree induction proves six colours; Kempe components, safe swaps, and alternating-path separation sharpen the result to five.
+Polygonal arcs first establish Jordan separation, faces, boundaries, and facial cycles. Maximal plane graphs and Euler's formula then yield girth bounds, low-degree vertices, and the standard nonplanarity tests. Separation and edge-maximality lemmas build the Kuratowski-Wagner characterisation, after which plane duality is constructed. Low-degree induction proves six colours; separating two alternating Kempe paths sharpens the result to five.
