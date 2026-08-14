@@ -2,8 +2,9 @@
 
 > **Scaffold only.** This file proposes future pages and items. It does not
 > author an item, alter `research/plan-spec.json`, assign absolute orders, or
-> publish anything. The block is placed after the final `probability-theory`
-> page; every `PDE-n` below is a relative label whose absolute order is to be
+> publish anything. The block is placed after Fourier analysis's final
+> companion, `uncertainty-principles-for-fourier-analysis-examples`, which is
+> itself anchored after probability; every `PDE-n` below is a relative label whose absolute order is to be
 > computed only when a future build splices the track.
 
 ## Summary for the orchestrator
@@ -30,7 +31,7 @@
 | PDE-16 | `lax-milgram-and-weak-elliptic-solutions` | bounded coercive forms, Lax--Milgram, weak Dirichlet problems |
 | PDE-17 | `fredholm-elliptic-problems-and-the-elliptic-spectrum` | Gårding, elliptic Fredholm alternative, compact resolvent, eigenvalues |
 | PDE-18 | `interior-and-boundary-sobolev-elliptic-regularity` | difference quotients, interior and boundary $H^2$ and higher regularity |
-| PDE-19 | `schauder-and-lp-elliptic-estimates` | Hölder spaces, Schauder theory, Calderón--Zygmund $W^{2,p}$ estimates |
+| PDE-19 | `schauder-and-lp-elliptic-estimates` | Hölder/Schauder theory and FR-8-based $W^{2,p}$ elliptic estimates |
 | PDE-20 | `weak-elliptic-maximum-principles-and-holder-regularity` | weak maximum principles, De Giorgi--Nash--Moser and weak Harnack |
 | PDE-21 | `the-direct-method-and-euler-lagrange-equations` | weak lower semicontinuity, coercivity, minimisers and Euler--Lagrange equations |
 | PDE-22 | `constrained-variational-problems-and-variational-inequalities` | constraints, multipliers, Rayleigh quotients and obstacle problems |
@@ -62,7 +63,8 @@ Crandall--Ishii--Lions `User's Guide`.
 
 **Seams consumed.** This block consumes the proposed predecessor machinery of
 measure theory MT-8/MT-11/MT-14--MT-17 and functional analysis FA-1/FA-2,
-FA-7--FA-10, FA-12--FA-16, FA-21 and FA-23--FA-25. In particular it cites,
+FA-7--FA-10, FA-12--FA-16, FA-21 and FA-23--FA-25, together with FR-8's
+generic Calderón--Zygmund theory. In particular it cites,
 rather than remints, Lebesgue integration and all $L^p$ theory; distributions
 and their derivatives; the Fourier transform and Plancherel; Hilbert-space
 Riesz representation; abstract compact/Fredholm/spectral theory; and
@@ -90,8 +92,10 @@ assign general manifold Stokes to that track. The orchestrator must therefore
 reconcile the preceding subsumption note when that scaffold arrives; this is
 an open documentation seam, not a mathematical dependency or blocker.
 
-**Forward references.** There are no load-bearing forward references. Every
-cross-track requirement is a predecessor reservation named above. Orientation
+**Forward references.** There are no load-bearing forward references from PDE.
+FR's citations to PDE-11/PDE-14 and to a future dispersive/Strichartz supplier
+are declared on the earlier FR scaffold; FR-8 is a predecessor consumed here.
+Every other cross-track requirement is a predecessor reservation named above. Orientation
 links from the Euclidean divergence theorem to the later manifold Stokes
 theorem and from $H^s$ notation to later pseudodifferential analysis, if any,
 belong only in `rem-` items and never in `deps`.
@@ -1518,7 +1522,8 @@ pointwise classical representative is claimed only after embedding supplies it.
 **A page:** `schauder-and-lp-elliptic-estimates`  
 **B page:** `schauder-and-lp-elliptic-estimates-examples`  
 **Requires:** PDE-5--PDE-6 and PDE-11--PDE-18; MT-17, including its
-Marcinkiewicz interpolation theorem; FA-6 and FA-25; the published
+Marcinkiewicz interpolation theorem; FA-6 and FA-25; FR-8
+`calderon-zygmund-decomposition-and-singular-integrals`; the published
 Hölder-function definitions.
 
 ### A-page items, in dependency order
@@ -1531,14 +1536,11 @@ Hölder-function definitions.
 6. `thm-interior-schauder-estimate-for-uniformly-elliptic-equations` (theorem; **L/A**) — For $a^{ij}\in C^{0,\alpha}$ and lower coefficients/data in their stated classes, obtain the local $C^{2,\alpha}$ estimate.
 7. `thm-boundary-schauder-estimate-for-the-dirichlet-problem` (theorem; **L/A**) — On a $C^{2,\alpha}$ boundary patch with compatible $C^{2,\alpha}$ data, flatten and estimate up to the boundary.
 8. `thm-global-schauder-estimate-and-classical-dirichlet-solvability` (theorem; **L/A**) — Combine the a priori estimate with the continuity method and a base Laplace problem, under an explicit maximum-principle injectivity hypothesis.
-9. `def-calderon-zygmund-kernel-and-principal-value-operator` (definition; **L/NA**) — Define the size, smoothness and spherical-cancellation conditions and truncated principal values.
-10. `lem-calderon-zygmund-decomposition-at-height-lambda` (lemma; **L/A**) — Decompose an $L^1$ function into good and mean-zero bad pieces on disjoint cubes.
-11. `thm-calderon-zygmund-singular-integrals-are-bounded-on-lp` (theorem; **L/A**) — Combine $L^2$ boundedness, weak type $(1,1)$ and MT-17's Marcinkiewicz interpolation, then duality, for $1<p<\infty$.
-12. `thm-global-w-two-p-estimate-for-the-laplacian-on-rn` (theorem; **L/A**) — Fourier/second-derivative kernels give $\|D^2u\|_p\le C_p\|\Delta u\|_p$ for $u\in C_c^\infty$.
-13. `thm-interior-w-two-p-estimate-for-uniformly-elliptic-equations` (theorem; **L/A**) — Localise and freeze coefficients in the sourced VMO/continuous regime, with the precise hypothesis used by the proof.
-14. `thm-global-w-two-p-dirichlet-estimate` (theorem; **L/A**) — On a $C^{1,1}$ domain with coefficients of the stated regularity, bound $\|u\|_{W^{2,p}}$ by $\|Lu\|_p+\|u\|_p$.
-15. `cor-w-two-p-regularity-implies-classical-or-holder-regularity-when-p-is-large` (corollary; **L/A**) — Apply PDE-14's embedding with the exact exponent.
-16. `rem-schauder-and-sobolev-estimates-are-different-scales` (remark; **L/NA**) — Neither $C^{2,\alpha}$ nor $W^{2,p}$ is advertised as uniformly stronger without dimension/exponent hypotheses.
+9. `thm-global-w-two-p-estimate-for-the-laplacian-on-rn` (theorem; **L/A**) — Apply FR-8's generic $L^p$ Calderón--Zygmund theorem to the cancelled Newtonian-Hessian kernels from item 3, retaining the local multiple of $f$; this gives $\|D^2u\|_p\le C_p\|\Delta u\|_p$ for $u\in C_c^\infty$.
+10. `thm-interior-w-two-p-estimate-for-uniformly-elliptic-equations` (theorem; **L/A**) — Localise and freeze coefficients in the sourced VMO/continuous regime, with the precise hypothesis used by the proof.
+11. `thm-global-w-two-p-dirichlet-estimate` (theorem; **L/A**) — On a $C^{1,1}$ domain with coefficients of the stated regularity, bound $\|u\|_{W^{2,p}}$ by $\|Lu\|_p+\|u\|_p$.
+12. `cor-w-two-p-regularity-implies-classical-or-holder-regularity-when-p-is-large` (corollary; **L/A**) — Apply PDE-14's embedding with the exact exponent.
+13. `rem-schauder-and-sobolev-estimates-are-different-scales` (remark; **L/NA**) — Neither $C^{2,\alpha}$ nor $W^{2,p}$ is advertised as uniformly stronger without dimension/exponent hypotheses.
 
 ### B-page companion
 
@@ -1546,27 +1548,29 @@ Hölder-function definitions.
 2. `cex-continuous-forcing-need-not-give-continuous-second-derivatives` (counterexample; **L/A**) — A Dini/Hölder failure example shows why a modulus hypothesis appears.
 3. `cex-schauder-estimates-fail-at-the-holder-endpoint-alpha-one` (counterexample; **L/A**) — Use the standard Zygmund-type obstruction with a source citation.
 4. `ex-riesz-transform-formula-for-second-laplacian-derivatives` (example; **L/A**) — Relate $D_{ij}u$ to the multiplier $\xi_i\xi_j/|\xi|^2$ using FA-25.
-5. `cex-calderon-zygmund-strong-lone-bound-fails` (counterexample; **L/A**) — The Hilbert/Riesz transform of an indicator gives the endpoint obstruction.
-6. `cex-boundary-w-two-p-regularity-needs-c-one-one-type-control` (counterexample; **L/A**) — A corner domain loses $W^{2,p}$ regularity.
-7. `ex-method-of-continuity-for-a-constant-coefficient-path` (example; **L/A**) — Verify openness/closedness in a finite transparent family without carrying the theorem.
+5. `cex-boundary-w-two-p-regularity-needs-c-one-one-type-control` (counterexample; **L/A**) — A corner domain loses $W^{2,p}$ regularity.
+6. `ex-method-of-continuity-for-a-constant-coefficient-path` (example; **L/A**) — Verify openness/closedness in a finite transparent family without carrying the theorem.
 
 ### Sources and proof architecture
 
 **Primary backing:** [E] §§6.2--6.3; [T] Chapter 10 §§3--4; [H] §§2.7--2.8
 and §4.13; [ACM] Chapter 2. [H] supplies the singular second-derivative
 cancellation, while [E]/[T] independently supply Schauder and $W^{2,p}$
-regularity. The Calderón--Zygmund heading is built here because MT-17 has only
-the maximal function and the measure scaffold explicitly defers this theorem.
+regularity. FR-8 supplies the generic Calderón--Zygmund kernel, decomposition,
+weak endpoint, interpolation/duality, strict-$L^p$ theorem, and endpoint
+boundaries; PDE-19 proves that the Newtonian Hessian fits that framework and
+derives the elliptic estimates.
 
 **Hard proof obligations.** Item 3 retains the local $f(x)$ term. Schauder
-freezing quantifies the small coefficient oscillation before absorption.
-Item 11 is decomposed into the cube decomposition, weak endpoint, $L^2$ bound,
-interpolation and duality; none is hidden in “standard singular integral
-theory.” Global boundary estimates state chart and coefficient regularity.
+freezing quantifies the small coefficient oscillation before absorption.  The
+$L^2$ multiplier seed and the Newtonian-kernel cancellation verify the FR-8
+hypotheses before item 9 invokes its strict-$L^p$ theorem; no generic CZ proof
+is duplicated here. Global boundary estimates state chart and coefficient
+regularity.
 
-**Well-definedness.** Principal values are limits of truncated operators in
-$L^p$ (and a.e. only when separately proved), not pointwise improper integrals
-by definition. Hölder norms use the unique continuous representative. The
+**Well-definedness.** Principal-value conventions and truncation limits are
+those of FR-8; PDE-19 separately verifies that the cancelled Newtonian Hessian
+has the required representation. Hölder norms use the unique continuous representative. The
 continuity method defines a closed/open set of parameters and proves both
 nonemptiness and preservation of the solution space.
 
@@ -2048,7 +2052,7 @@ to audit across page boundaries.
 | distributional harmonicity | cite FA-24's test-function pairing and prove local integrability before applying Weyl's lemma | PDE-3 items 12--13 |
 | Harnack chains | prove each compact chain has finitely many overlapping interior balls and track connectedness | PDE-4 items 9--11 |
 | fundamental solution | fix $-\Delta\Phi=\delta_0$ and interpret the singular identity only after local integrability and boundary-flux limits are proved | PDE-5 items 1--5 |
-| Newtonian potential and differentiation | state the data class giving absolute convergence; treat second derivatives as singular integrals rather than differentiating an inadmissible kernel | PDE-5 items 6--9; PDE-19 items 10--12 |
+| Newtonian potential and differentiation | state the data class giving absolute convergence; treat second derivatives as singular integrals rather than differentiating an inadmissible kernel | PDE-5 items 6--9; PDE-19 items 3 and 9, using FR-8 |
 | outward normal, surface integral and Green function | construct them for the stated $C^1$/$C^2$ domain, prove representative/normalisation independence and state symmetry only under self-adjoint hypotheses | PDE-5 items 12--20 |
 | Poisson representation | prove kernel normalisation and convergence to boundary data in the topology claimed | PDE-6 items 2--9 |
 | heat convolution | show the kernel/data convolution is finite in the named class and define $H_0$ as the identity, not by evaluating the singular formula | PDE-7 items 2--8 |
@@ -2068,7 +2072,7 @@ to audit across page boundaries.
 | shifted elliptic inverse | distinguish $L^2\to H^1_0$ solution map from its compact $L^2\to L^2$ composition | PDE-17 items 3--9 |
 | eigenfunctions/eigenspaces | normalize equivalence classes in $L^2$ and state multiplicity; do not choose a canonical vector in a multiple eigenspace | PDE-17 items 10--16 |
 | boundary flattening and higher regularity | state chart, coefficient and boundary regularity sufficient for each derivative order | PDE-18 items 8--16 |
-| Hölder and Calderón--Zygmund norms | fix representatives for continuous classes, principal-value truncations and the range $1<p<\infty$ | PDE-19 items 1--16 |
+| Hölder and elliptic $L^p$ norms | fix representatives for continuous classes; import FR-8's principal-value truncations and strict range $1<p<\infty$ before applying them to Newtonian Hessians | PDE-19 items 1--13; FR-8 |
 | weak maximum and weak Harnack | make positive/negative parts valid Sobolev test functions and distinguish essential from pointwise extrema | PDE-20 items 1--14 |
 | direct-method infimum and integral functional | prove properness, a finite competitor and representative invariance before selecting a minimizing sequence | PDE-21 items 1--12 |
 | constrained multiplier and obstacle reaction | prove weak closure and constraint regularity; express complementarity in duality unless stronger regularity is available | PDE-22 items 1--12 |
@@ -2384,7 +2388,7 @@ read range.
 | 2.5 *Green's identities* | `included` PDE-5 |
 | 2.6 *Fundamental solution* | `included` PDE-5 |
 | 2.7 *The Newtonian potential* | `included` PDE-5 |
-| 2.8 *Singular integral operators*; principal values, $L^2$ estimate | the Hessian-of-potential identity is `included` PDE-19; general Calderón--Zygmund multiplier machinery is `already-planned` FA-25 or `deferred` to harmonic analysis |
+| 2.8 *Singular integral operators*; principal values, $L^2$ estimate | the Hessian-of-potential identity and $L^2$ multiplier seed are `included` PDE-19; generic Calderón--Zygmund machinery is `already-planned` FR-8 |
 | 3.1 *Weak derivatives* and 3.2 *Examples* | `included` PDE-11 and B |
 | 3.3 *Distributions* | `already-planned` FA-24 |
 | 3.4 *Properties of weak derivatives* and 3.5 *Sobolev spaces* | `included` PDE-11 |
@@ -3239,14 +3243,10 @@ page and the existing conceptual anchor after which the row belongs.
 | A / Laplace Schauder | `lem-schauder-decomposition-into-newtonian-potential-and-harmonic-remainder` (lemma) — Localise $f$, subtract its Newtonian potential and leave a harmonic function on the inner ball. | **L**, S:[E] §6.2.1; [T] Ch. 10 §3 | **A**, P:kernel solution plus cutoff | Exposes the two analytically distinct estimates in the Laplace proof. |
 | A / continuity method | `thm-method-of-continuity-for-a-uniformly-estimated-family-of-bounded-operators` (theorem) — If one operator in a continuous affine family is onto and a uniform a priori estimate holds, all are bijective. | **L**, S:[E] §6.2.3; [Si] Lecture 12 | **A**, P:openness by Neumann series and closedness by completeness | Splits the functional step from elliptic estimates while citing FA inputs. |
 | A / singular integrals | `lem-ltwo-boundedness-of-second-derivative-newtonian-singular-integrals` (lemma) — The multiplier $\xi_i\xi_j/\vert{}\xi\vert{}^2$ has $L^\infty$ symbol and hence is $L^2$ bounded. | **L**, S:[E] §6.3.2; [T] Ch. 10 §4 | **A**, P:FA Plancherel multiplier theorem | Isolates the seed estimate for interpolation. |
-| A / CZ decomposition | `thm-calderon-zygmund-operator-has-weak-type-one-one` (theorem) — A standard cancellation kernel maps $L^1$ to weak $L^1$ with the stated truncation uniformity. | **L**, S:[E] §6.3.2; [H] §4.13 | **A**, P:good/bad decomposition, cancellation and annular estimate | Extracts the endpoint component rather than compressing it into $L^p$ boundedness. |
-| A / interpolation | `lem-calderon-zygmund-lp-range-splits-into-interpolation-and-duality` (lemma) — Weak $(1,1)$ plus strong $(2,2)$ gives $1<p\le2$, and adjoint duality gives $2<p<\infty$. | **L**, S:[E] §6.3.2; [T] Ch. 10 §4 | **A**, P:published Marcinkiewicz and duality predecessors | Makes both logical moves and the endpoint exclusions explicit. |
-| A / endpoint | `rem-calderon-zygmund-endpoints-are-weak-lone-and-bmo-not-strong-lone-or-linfinity` (remark) — Record the correct endpoint targets without developing BMO theory. | **L**, S:[E] §6.3.2; [H] §4.13 | **NA** | Prevents accidental endpoint strengthening; BMO remains harmonic-analysis scope. |
 | A / localisation | `lem-cutoff-commutator-for-local-w-two-p-estimates` (lemma) — Expand $L(\eta u)$ and bound the terms with $D\eta\,Du$ and $D^2\eta\,u$ on the outer ball. | **L**, S:[E] §6.3.2; [T] Ch. 10 §4 | **A**, P:product rule and interpolation absorption | Exposes the lower-order terms in the interior estimate. |
 | A / global estimate | `cor-injectivity-removes-the-lp-kernel-term-from-a-global-w-two-p-estimate` (corollary) — If the homogeneous Dirichlet kernel is trivial, compactness/contradiction yields $\|u\|_{W^{2,p}}\le C\|Lu\|_p$. | **L**, S:[E] §6.3.2; [Si] Lecture 12 | **A**, P:normalised contradiction and compact embedding | Separates an a priori estimate from its injective strengthening. |
 | B / modulus | `cex-a-non-dini-continuous-poisson-source-can-destroy-continuity-of-second-derivatives` (counterexample) — A radial/logarithmic modulus yields a Newtonian potential whose Hessian fails to converge at the origin. | **L**, S:[E] §6.2.1; [T] Ch. 10 §3 | **A**, P:cancelled radial integral from the source example | Refines the base continuous-forcing warning to the relevant modulus threshold. |
 | B / coefficients | `cex-bounded-measurable-nondivergence-coefficients-do-not-give-schauder-estimates` (counterexample) — A sourced piecewise-coefficient solution lacks $C^2$ regularity despite uniform ellipticity. | **L**, S:[E] §6.2; [Si] Lecture 12 | **A**, P:explicit interface calculation | Tests coefficient Hölder regularity separately from forcing regularity. |
-| B / upper endpoint | `cex-calderon-zygmund-operators-need-not-map-linfinity-to-linfinity` (counterexample) — The transform of an indicator has a logarithmic singularity while lying in BMO. | **L**, S:[E] §6.3.2; [H] §4.13 | **A**, P:explicit one-dimensional transform embedded in the model | Completes the endpoint pair without duplicating the base $L^1$ failure. |
 | B / absorption | `cex-freezing-coefficients-cannot-absorb-a-fixed-large-oscillation-on-arbitrarily-small-balls` (counterexample) — A jump coefficient retains the same oscillation at every ball centred on its interface. | **L**, S:[E] §6.2.2; [Si] Lecture 12 | **A**, P:direct essential-oscillation computation | Shows why continuity/VMO is the exact small-scale input. |
 
 #### PDE-20 additions
@@ -3371,8 +3371,8 @@ harvest. The other §11 disposition-tag counts are **46 `inline`, 36
 are auditable tag counts rather than a claim that every table row is one atomic
 heading.
 
-This overlay adds **270 literature-derived items**, for **853 proposed IDs
-after enrichment**. The new-source harvest in §12.2 contributes **23 further
+This overlay added **270 literature-derived items**, for **853 proposed IDs
+immediately after enrichment**. The new-source harvest in §12.2 contributes **23 further
 `included`, 4 `inline`, 8 `already-planned`, 1 `already-published`, 1
 `deferred`, and 7 `out-of-scope` disposition tags**, so the honest
 expanded-corpus after-ratio is
@@ -3384,9 +3384,11 @@ PDE-21--PDE-26. They come from the existing harvested treatments plus the fully
 read ranges of [SO], [Si] and [PJ] recorded in §§12.1--12.3. No publisher
 preview or table of contents alone backs an item.
 
-No A page required splitting. After insertion, the largest A pages are PDE-11,
+S-2 subsequently transferred eight generic Calderón--Zygmund rows to FR-8,
+leaving the current PDE scaffold at **845 proposed IDs**. No A page required splitting. After insertion, the largest A pages are PDE-11,
 PDE-25 and PDE-26 with 28 items each; all A pages remain well below the 60-item
-ceiling. No old ID was renumbered or removed.
+ceiling. At enrichment time no old ID was renumbered or removed; the later
+S-2 transfer removes only the eight settled duplicate proposals.
 
 The result intentionally stops at a 2.76× expanded-corpus ratio rather than
 approaching the differential-geometry 5.7× benchmark. Several PDE source

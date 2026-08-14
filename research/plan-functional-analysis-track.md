@@ -613,12 +613,11 @@ the reverse implications are either false or unresolved as recorded in §8.
 
 **B page:** `the-baire-principles-of-functional-analysis-examples`
 
-1. `ex-fourier-partial-sum-operators-and-uniform-boundedness` — reserved for reuse after FA-14, never a dependency of FA-14.
-2. `ex-condensation-of-singularities` — if $\sup_n\|T_n\|=\infty$, some $x$ has $\sup_n\|T_nx\|=\infty$.
-3. `cex-uniform-boundedness-fails-on-an-incomplete-domain` — coordinate functionals on $c_{00}$.
-4. `cex-open-mapping-fails-without-completeness` — identity between one vector space with inequivalent incomplete norms.
-5. `cex-closed-graph-fails-without-completeness`.
-6. `ex-a-closed-unbounded-differential-operator` — anticipates FA-21 and distinguishes closed from bounded when the domain is proper.
+1. `ex-condensation-of-singularities` — if $\sup_n\|T_n\|=\infty$, some $x$ has $\sup_n\|T_nx\|=\infty$.
+2. `cex-uniform-boundedness-fails-on-an-incomplete-domain` — coordinate functionals on $c_{00}$.
+3. `cex-open-mapping-fails-without-completeness` — identity between one vector space with inequivalent incomplete norms.
+4. `cex-closed-graph-fails-without-completeness`.
+5. `ex-a-closed-unbounded-differential-operator` — anticipates FA-21 and distinguishes closed from bounded when the domain is proper.
 
 ### FA-7 — Dual spaces, transpose operators, and annihilators
 
@@ -1065,7 +1064,9 @@ without Hahn–Banach.
 **A page:** `orthonormal-bases-parseval-and-fourier-series`
 
 **Requires:** FA-13; planned predecessors MT-8, MT-11, MT-14, and MT-15 for
-integration, Fubini, $L^2$, density, and convolution; published complex
+integration, Fubini, $L^2$, density, and convolution; topology's planned
+T-10 page `stone-weierstrass-general`, specifically
+`thm-complex-stone-weierstrass-self-adjoint`; and published complex
 exponential and compact-circle/topology results.
 
 **Source backing read:** Teschl §§2.1 and 2.5, pp. 47–54 and 63–68
@@ -1073,9 +1074,9 @@ exponential and compact-circle/topology results.
 §2.3.6, pp. 87–88; Knapp, *Basic Real Analysis*, ch. VI §§7 and 9
 (*Fourier Series and the Riesz–Fischer Theorem*; *Fourier Series and the
 Dirichlet–Jordan Theorem*) and *Advanced Real Analysis* ch. II §§2–3,
-pp. 36–45; MIT
-18.102, pp. 38–53.  Completeness of the trigonometric system is cross-checked
-by the Fejér route, not assumed as folklore.
+pp. 36–45; MIT 18.102, pp. 38–53.  Completeness of the trigonometric system
+is routed through topology's complex self-adjoint Stone–Weierstrass theorem,
+not assumed as folklore.
 
 Items:
 
@@ -1092,24 +1093,25 @@ Items:
 11. `def-the-one-dimensional-torus-and-normalized-haar-integral` (definition) — use the existing quotient/circle page and MT integration; do not re-prove Haar theory.
 12. `def-fourier-coefficients-and-trigonometric-polynomials` (definition) — $\widehat f(k)=\int_{\mathbb T}f(x)e^{-2\pi ikx}\,dx$.
 13. `lem-trigonometric-characters-are-orthonormal` (lemma).
-14. `def-dirichlet-and-fejer-kernels` (definition) — give exact convolution identities and normalization.
-15. `lem-fejer-kernel-is-a-positive-approximate-identity` (lemma) — positivity, integral one, and concentration away from zero.
-16. `thm-fejer-uniform-convergence-for-continuous-periodic-functions` (theorem).
-17. `cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions` (corollary) — source route independent of the planned general Stone–Weierstrass page.
-18. `thm-trigonometric-system-is-complete-in-l-two-of-the-torus` (theorem) — continuous density plus MT-15's $L^2$ density.
-19. `thm-l-two-fourier-series-converges-in-mean-square` (theorem) — Hilbert expansion.
-20. `thm-parseval-identity-for-fourier-series` (theorem).
-21. `thm-riesz-fischer-for-fourier-coefficients` (theorem) — every $\ell^2(\mathbb Z)$ sequence is the coefficient sequence of a unique $L^2$ class; this is the unitary-surjectivity statement, not MT-14's completeness theorem despite the shared name.
-22. `thm-fourier-basis-and-parseval-on-the-n-torus` (theorem) — for $k\in\mathbb Z^n$, the characters $x\mapsto e^{2\pi i k\cdot x}$ form an orthonormal basis of $L^2(\mathbb T^n)$; obtain completeness from product Fejér kernels and MT-11 rather than an unstated tensor-product theorem.
+14. `cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions` (corollary) — apply topology's `thm-complex-stone-weierstrass-self-adjoint` to the trigonometric algebra: it contains $e_0=1$, is closed under complex conjugation because $\overline{e_k}=e_{-k}$, and separates distinct points of $\mathbb T$ because $x\mapsto e^{2\pi i x}$ is injective on $\mathbb R/\mathbb Z$.
+15. `thm-trigonometric-system-is-complete-in-l-two-of-the-torus` (theorem) — item 14 gives uniform density in $C(\mathbb T)$, hence $L^2$ density after MT-15's density of continuous functions; orthogonality then identifies the closed span with all of $L^2(\mathbb T)$.
+16. `thm-l-two-fourier-series-converges-in-mean-square` (theorem) — Hilbert expansion.
+17. `thm-parseval-identity-for-fourier-series` (theorem).
+18. `thm-riesz-fischer-for-fourier-coefficients` (theorem) — every $\ell^2(\mathbb Z)$ sequence is the coefficient sequence of a unique $L^2$ class; this is the unitary-surjectivity statement, not MT-14's completeness theorem despite the shared name.
+19. `thm-fourier-basis-and-parseval-on-the-n-torus` (theorem) — for $k\in\mathbb Z^n$, the characters $x\mapsto e^{2\pi i k\cdot x}$ form an orthonormal basis of $L^2(\mathbb T^n)$; the coordinate-character algebra contains $1$, is self-adjoint under $k\mapsto-k$, and separates points, so the same complex Stone–Weierstrass theorem gives uniform density in $C(\mathbb T^n)$ and MT-15 gives $L^2$ completeness without an unstated tensor-product theorem.
 
 **Proof and seam plan.**  Infinite sums over an uncountable orthonormal family
 are nets of finite partial sums; only after item 4 may they be represented by
 a countable series for each fixed vector.  The separable construction uses the
 least earlier nonzero residual in a given enumeration, so it does not invoke a
-maximal-family choice.  Fourier-series completeness is proved via Fejér
-approximation and the existing density theorem, not circularly from Parseval.
-All assertions are statements about the $L^2$ equivalence classes that planned
-MT-14 must define before this page is built.
+maximal-family choice.  For $\mathbb T$, the trigonometric algebra is unital,
+self-adjoint, and point-separating exactly as checked in item 14; for
+$\mathbb T^n$, coordinate characters give the corresponding separation.
+Topology's complex self-adjoint Stone–Weierstrass theorem therefore gives
+continuous uniform density, and MT-15 promotes it to $L^2$ density before
+Parseval or Riesz–Fischer is invoked.  All assertions are statements about the
+$L^2$ equivalence classes that planned MT-14 must define before this page is
+built.
 
 **B page:** `orthonormal-bases-parseval-and-fourier-series-examples`
 
@@ -1118,9 +1120,6 @@ MT-14 must define before this page is built.
 3. `ex-haar-orthonormal-basis-of-l-two-zero-one` — prove orthogonality, normalization, and completeness by dyadic step-function density.
 4. `ex-fourier-series-of-a-sawtooth` — $L^2$ identity and the resulting Basel sum, with endpoint conventions.
 5. `ex-fourier-series-of-a-square-wave` — distinguish $L^2$ convergence from pointwise convergence.
-6. `thm-dirichlet-jordan-pointwise-convergence` — at a point with one-sided limits for a periodic BV function, convergence to their average; cite the published BV machinery.
-7. `cex-continuous-function-with-divergent-fourier-series-at-a-point` — source-cited du Bois-Reymond boundary, L/NS and not load-bearing.
-8. `rem-gibbs-phenomenon` (remark, L/NA) — exact limiting overshoot formula only if sourced; otherwise qualitative and non-mathematical.
 
 ### FA-15 — Compact operators, Riesz–Schauder theory, and Fredholm operators
 
@@ -1905,7 +1904,7 @@ may cite that discharge but may not repeat an informal quotient argument.
 | nearest point and projection | Distance is an infimum.  An approximate minimizing sequence is shown Cauchy before a limit is named; uniqueness follows from strict convexity.  The choice convention is stated in §8. | FA-13 items 11–16. |
 | Hilbert Riesz representative | The kernel/complement decomposition produces a unique vector, and the conjugation is placed according to the first-variable-linear convention. | FA-13 item 18. |
 | arbitrary orthonormal sum | $\sum_{e\in E}|\langle x,e\rangle|^2$ is the supremum over finite subsets and reconstruction is a finite-subset net until countable support is proved. | FA-14 items 3–8. |
-| Fourier series on $\mathbb T^n$ | Characters and Haar normalization are fixed before coefficients; product Fejér kernels establish completeness without assuming tensor-product Hilbert theory. | FA-14 items 11–22. |
+| Fourier series on $\mathbb T^n$ | Characters and Haar normalization are fixed before coefficients; the unital self-adjoint point-separating character algebra and topology's complex Stone–Weierstrass theorem establish completeness without assuming tensor-product Hilbert theory. | FA-14 items 11–19. |
 | compact operator | Relative compactness of $T(B_X)$ is reconciled with sequential compactness only in the metric target; finite-rank approximations require the stated approximation hypothesis. | FA-15 items 1–8. |
 | Fredholm index | Kernels and cokernels are proved finite-dimensional before dimensions are subtracted; the cokernel is the quotient by a closed range. | FA-15 items 15–21. |
 | singular-value and trace expansions | The positive square root is constructed before $|T|$ is named; eigenspaces are orthogonal, nonzero eigenvalues have finite multiplicity, only countably many terms contribute, and trace independence from the chosen orthonormal basis is proved. | FA-16 items 4–22. |
@@ -1956,8 +1955,10 @@ DAG.  These are the only deliberate cross-pair scheduling constraints:
   that reflexive spaces have RNP must instead cite FA-10 and the sourced
   dentability route, or the future builder must move the claim after FA-13.
 - FA-14 consumes measure theory's $L^2$ classes only after planned MT-14 is
-  authored.  Its Fejér proof is deliberately independent of the still-empty
-  general Stone–Weierstrass page.
+  authored and consumes topology's T-10 complex self-adjoint
+  Stone–Weierstrass theorem for trigonometric density.  It verifies the
+  unital, self-adjoint, and point-separating hypotheses before applying that
+  theorem.
 - FA-15's core Fredholm theory is proved before the optional Calkin-algebra
   restatement from FA-17.  The restatement belongs on FA-17's B page if a cycle
   would otherwise result.
@@ -2129,8 +2130,8 @@ the named track. Entries marked **Applied** are now reconciliation receipts.
 ### 10.1 Topology and the deferred catalogue
 
 1. Build `stone-weierstrass-general` through the complex self-adjoint form
-   before FA-18.  Its current `items` array is empty, so it is not yet a legal
-   dependency.  Keep FA-14's Fejér proof independent of it.
+   before FA-14 and FA-18.  Its current `items` array is empty, so it is not
+   yet a legal dependency.
 
    **Applied 2026-08-14:** the topology scaffold now carries the complex
    self-adjoint Stone--Weierstrass item required by FA-18.
@@ -2332,7 +2333,7 @@ an item there or an explicitly named lemma inside its hard-proof plan.
 | 5.3.3 *The Spectrum of a Normal Operator* | norm/radius and spectral location | included FA-19 |
 | 5.3.4 *The Spectrum of a Self-Adjoint Operator* | real spectrum, positivity | included FA-19 |
 | 5.4.1 *$C^*$ Algebras* | $C^*$ identity and normal calculus | included FA-18/FA-19 |
-| 5.4.2 *The Stone–Weierstraß Theorem* | real/complex density | general result deferred to topology's planned page for seam ownership; FA-14 proves its specific trigonometric density independently |
+| 5.4.2 *The Stone–Weierstraß Theorem* | real/complex density | topology's planned page owns the general result; FA-14 applies its complex self-adjoint form after checking the trigonometric algebra's hypotheses |
 | 5.4.3 *Functional Calculus for Self-Adjoint Operators* | continuous real calculus | included FA-19 |
 | 5.5.1 *The Gelfand Representation* | characters and commutative representation | included FA-18 |
 | 5.5.2 *$C^*$ Algebras of Normal Operators* | generated algebra and continuous calculus | included FA-18/FA-19 |
@@ -2368,7 +2369,7 @@ the B pages above.
 | §2.2 *The Projection Theorem and the Riesz Lemma* | closest point, orthogonal decomposition, Hilbert Riesz | included FA-13 |
 | §2.3 *Operators Defined via Forms* | bounded forms and represented operators | inline FA-13; Lax–Milgram deferred to PDE by seam |
 | §2.4 *Orthogonal Sums and Tensor Products* | orthogonal direct sums and Hilbert tensor products | orthogonal sums inline FA-14/FA-20; general tensor products out-of-scope because not required by this spine |
-| §2.5 *Applications to Fourier Series* | trigonometric completeness, Fejér, Parseval | included FA-14, including $\mathbb T^n$ extension |
+| §2.5 *Applications to Fourier Series* | trigonometric completeness, Fejér, Parseval | completeness and Parseval included at FA-14, including the $\mathbb T^n$ extension; Fejér material is owned by FR-1/FR-2 |
 | §3.1 *Compact Operators* | sequential criterion, finite rank, norm limits | included FA-15 |
 | §3.2 *The Spectral Theorem for Compact Symmetric Operators* | eigenvalue decomposition | included FA-16 |
 | §3.5 *Singular Value Decomposition of Compact Operators* | singular systems and approximation numbers | included FA-16 |
@@ -2420,7 +2421,7 @@ below follow the current author-released digital editions.
 | K-ARA V.3 *Convolution of Distributions* | support-conditioned convolution | included FA-24/FA-25 |
 | K-ARA V.4 *Role of Fourier Transform* | constant-coefficient multipliers | included FA-25; PDE solution theory deferred to PDE |
 | K-BRA VI.7 *Fourier Series and the Riesz–Fischer Theorem* | $L^2$ trigonometric expansion and Parseval | included FA-14; measure completeness reserved to planned MT-14 |
-| K-BRA VI.9 *Fourier Series and the Dirichlet–Jordan Theorem* | BV pointwise convergence | included FA-14 B; stronger divergence phenomena remain source-cited boundaries |
+| K-BRA VI.9 *Fourier Series and the Dirichlet–Jordan Theorem* | BV pointwise convergence | owned by FR-1; FA-14 retains only the $L^2$ basis and Parseval interface |
 | K-BRA VIII.1 *Elementary Properties* | transform rules and convolution | included FA-22 |
 | K-BRA VIII.2 *Fourier Transform on $L^1$, Inversion Formula* | Riemann–Lebesgue, uniqueness, inversion | included FA-22 |
 | K-BRA VIII.3 *Fourier Transform on $L^2$, Plancherel Formula* | unitary extension and agreement | included FA-23 |
@@ -2626,7 +2627,7 @@ not masquerade as new mathematical coverage.
 | §13.2.4 *Applications, Complements, Exercises* | inline FA-17 polynomial mapping and shift examples |
 | §13.3 *Spectra of Bounded Operators II: Banach Algebra Methods* | inline FA-17 items 11–24 |
 | §13.4 *Applications to Normal Hilbert Space Operators* | inline FA-19 items 1–15 |
-| §19.1 *Fourier Series of Continuous Periodic Functions* | inline FA-14 items 10–20 and the Fourier-coefficient convention needed by the following application |
+| §19.1 *Fourier Series of Continuous Periodic Functions* | inline FA-14 items 10–17 for the $L^2$/Parseval portion; the Fejér and pointwise-convergence portions are owned by FR-1/FR-2 |
 | §19.2 *Application: Absolutely Convergent Fourier Series* | included — FA-18 B item 14 |
 | §A.1 *Unordered Infinite Sums* | inline FA-14's finite-subset-net convention |
 | §A.2 *More on Unconditional Convergence of Series* | included — FA-11 item 22 |
@@ -2760,8 +2761,8 @@ counterexample makes textbook shorthand unsafe.
 
 ## 12. Final scaffold audit
 
-The disk audit on 2026-08-14 found 25 pair headings, 25 A-page ids, 25 B-page
-ids, and 736 proposed item ids.  All page and item ids are unique within this
+The post-reconciliation disk audit on 2026-08-14 found 25 pair headings, 25
+A-page ids, 25 B-page ids, and 729 proposed item ids.  All page and item ids are unique within this
 scaffold; no proposed item id collides with a file in `items/`, and no proposed
 item or page id collides with an id in the live `research/plan-spec.json`.
 The largest A page is FA-21 at 38 items, so every A page remains below the
@@ -2780,8 +2781,8 @@ repository writes are confined to this prose scaffold.
 ### Measurement and result
 
 The dispatch's item numerator was off by two.  A disk count of unique item ids
-before this pass gives **689**, not 687; after the pass it gives **736**.  The
-pass therefore adds **47** items, all under existing pair ids and all backed
+before this pass gives **689**, not 687; immediately after the enrichment pass
+it gives **736**.  The pass therefore added **47** items, all under existing pair ids and all backed
 by the ranges in §11.7.  Existing ids were not renumbered.  No page was split:
 FA-21 is now the largest A page at 38 items, safely below the 60-item ceiling.
 
@@ -2794,13 +2795,17 @@ plus the headings grouped in §11.5's prose; this explains why the separate
 semantic census reported 210 total harvested headings.  For comparison with
 the dispatch only, the corrected legacy ratio is $689/159=4.33\times$, and
 holding that denominator
-fixed after enrichment gives $736/159=4.63\times$.  The normalized WIDEN
+fixed after enrichment gave $736/159=4.63\times$.  The normalized WIDEN
 ledger is auditable separately: it has **88** newly read headings, of which
 **21** caused additions.  Adding those 21 to the legacy denominator gives the
-normalized dispatch-comparable ratio $736/180=4.09\times$; the new material alone
+normalized dispatch-comparable ratio was $736/180=4.09\times$; the new material alone
 decomposes as $47/21=2.24\times$.  The normalized ratio falls because the
 other 67 headings are independent corroborations or explicit seam exclusions,
 not new library claims.  They were deliberately not converted into padding.
+
+S-1 subsequently transferred seven Fourier-convergence rows to FR, leaving
+the current FA scaffold at **729** proposed item ids without changing the
+historical enrichment arithmetic above.
 
 ### Sources widened and material added
 

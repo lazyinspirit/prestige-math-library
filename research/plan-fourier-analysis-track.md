@@ -1,7 +1,7 @@
 # Fourier analysis track — subjects-02 prose scaffold
 
 > **Commission:** prefix `FR`; anchor
-> `scalar-conservation-laws-and-entropy-solutions-examples`; eighteen A/B
+> `itos-formula-and-brownian-martingales-examples`; eighteen A/B
 > pairs, in the order FR-1 through FR-18.  This is a scaffold, not authored
 > content.  No page or item below is established merely by appearing here.
 
@@ -10,6 +10,11 @@
 This track begins with classical Fourier series, then develops the real-variable
 endpoint theory, and ends with abelian, finite, lattice, and uncertainty
 theory.  The proposed reading order is:
+
+**Placement.** Append the block after probability's final companion, PT-22
+`itos-formula-and-brownian-martingales-examples`, and before PDE.  This replaces
+the former anchor after PDE's last page; absolute orders are recomputed only at
+splice time.
 
 | pair | A page | purpose |
 |---|---|---|
@@ -39,7 +44,7 @@ measurements at the end; none exceeds the sixty-item split threshold.
 
 ### Ownership and amendments owed
 
-- Functional analysis retains the torus, Fourier coefficients, trigonometric
+- **S-1 applied.** Functional analysis retains the torus, Fourier coefficients, trigonometric
   orthogonality, Hilbert-basis completeness, Parseval, and Riesz–Fischer on
   `orthonormal-bases-parseval-and-fourier-series`.  Its exact items
   `def-dirichlet-and-fejer-kernels`,
@@ -47,10 +52,10 @@ measurements at the end; none exceeds the sixty-item split threshold.
   `thm-fejer-uniform-convergence-for-continuous-periodic-functions`,
   `thm-dirichlet-jordan-pointwise-convergence`,
   `cex-continuous-function-with-divergent-fourier-series-at-a-point`, and
-  `rem-gibbs-phenomenon` transfer to FR-1/FR-2/FR-5.  FA can obtain
+  `rem-gibbs-phenomenon` are owned by FR-1/FR-2/FR-5.  FA now obtains
   trigonometric density from Stone–Weierstrass, so this transfer does not make
   FA cite forward.  FA's expressly reserved reuse id
-  `ex-fourier-partial-sum-operators-and-uniform-boundedness` is also consumed
+  `ex-fourier-partial-sum-operators-and-uniform-boundedness` is consumed
   on FR-5.  The exact id
   `thm-wiener-lemma-for-absolutely-convergent-fourier-series` remains on FA-18
   and is cited by FR-3; FR does not re-mint it.
@@ -59,12 +64,13 @@ measurements at the end; none exceeds the sixty-item split threshold.
   Schwartz Heisenberg theorem retain their exact ids and are cited by FR-17
   and FR-18; FR supplies hypotheses/extensions and applications rather than a
   duplicate basic transform theorem.
-- PDE retains Hölder/Sobolev spaces, elliptic regularity, and the
-  $W^{2,p}$ consequences.  The generic harmonic-analysis items currently
-  sitting in PDE-19 — the CZ kernel definition, decomposition, weak endpoint,
-  interpolation/duality split, generic $L^p$ theorem, and two endpoint
-  counterexamples — transfer with their exact ids to FR-8.  PDE-19 should cite
-  FR-8 and retain only the Newtonian-Hessian seed and elliptic applications.
+- **S-2 applied.** PDE retains Hölder/Sobolev spaces, elliptic regularity, and the
+  $W^{2,p}$ consequences.  The eight generic harmonic-analysis items formerly
+  proposed on PDE-19 — the CZ kernel definition, decomposition, weak endpoint,
+  interpolation/duality split, generic $L^p$ theorem, precise endpoint remark,
+  and two endpoint counterexamples — are owned by FR-8 under their exact ids.
+  PDE-19 cites FR-8 and retains the Newtonian-Hessian seed and elliptic
+  applications.
 - Measure theory remains the owner of convolution/density in $L^p$, the
   Hardy–Littlewood maximal theorem with differentiation, Marcinkiewicz and
   Riesz–Thorin interpolation.  FR cites those pages and proves no duplicate.
@@ -76,8 +82,25 @@ measurements at the end; none exceeds the sixty-item split threshold.
   seam owner to amend the contract to let FR build the abelian Haar theorem.
   No Haar theorem is minted here.
 - The dispatch asks FR to cite PDE for Strichartz estimates, but the current
-  PDE scaffold contains no Strichartz page.  FR-13 records a non-load-bearing
-  interface remark and an amendment owed; it does not invent a PDE page id.
+  PDE scaffold contains no Strichartz page.  Under S-5 no new supplier is
+  commissioned: FR-13 retains the sourced interface remark as a non-load-bearing
+  leaf with `proved_here: false` at build and invents no PDE page id.
+
+### Declared forward references
+
+Because FR is now placed before PDE, these citations are intentionally forward
+references and must be emitted as `forward_refs` at build rather than ordinary
+item dependencies:
+
+- FR-3's weak-derivative criterion and FR-6's Sobolev characterisations cite
+  PDE-11 `weak-derivatives-and-sobolev-spaces`; FR-6 additionally cites PDE-14
+  `sobolev-poincare-and-morrey-inequalities`.  PDE owns the definitions and
+  embeddings; the FR results remain Fourier-side characterisations.
+- FR-13's
+  `rem-restriction-estimates-and-the-missing-strichartz-interface` points to a
+  future PDE dispersive/Strichartz supplier.  Since no such page is currently
+  scaffolded, this is a sourced, non-load-bearing leaf with
+  `proved_here: false`, not a fabricated relative label or dependency target.
 
 ## Prerequisite and notation contract
 
@@ -89,8 +112,9 @@ authored.  The common spine is
 `fourier-transform-convolution-and-approximate-identities`,
 `schwartz-space-and-the-plancherel-theorem`,
 `distributions-test-functions-and-differentiation`, and
-`tempered-distributions-and-the-fourier-transform`.  FR-6 also cites the
-PDE Sobolev pages rather than defining the spaces as new objects.
+`tempered-distributions-and-the-fourier-transform`.  FR-3 and FR-6 carry the
+declared forward citations to PDE's weak-derivative/Sobolev pages rather than
+defining those spaces as new objects.
 
 We use $\mathbb T=\mathbb R/\mathbb Z$ with normalised Haar measure and
 $e_k(x)=e^{2\pi ikx}$.  Thus
@@ -276,7 +300,8 @@ jump from extrema at points approaching the jump.
 **B page:** `absolute-convergence-and-the-wiener-algebra-examples`
 **Requires:** FR-1, FR-2, FA-18
 `thm-wiener-lemma-for-absolutely-convergent-fourier-series`, and Parseval from
-the Hilbert-series page.  **Sources read:** L ch. 4, pp. 27–30; G §3.3,
+the Hilbert-series page; item 6 has the declared forward citation to PDE-11
+`weak-derivatives-and-sobolev-spaces`.  **Sources read:** L ch. 4, pp. 27–30; G §3.3,
 pp. 192–202; T §1, PDF pp. 1–18.
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
@@ -368,7 +393,7 @@ $p=1$ is excluded from Carleson–Hunt.
 **A page:** `fourier-multipliers-and-sobolev-characterisations`
 **B page:** `fourier-multipliers-and-sobolev-characterisations-examples`
 **Requires:** the functional-analysis Schwartz/Plancherel/tempered-transform
-pages, MT-17's Riesz–Thorin theorem, PDE-11
+pages, MT-17's Riesz–Thorin theorem, and the declared forward references PDE-11
 `weak-derivatives-and-sobolev-spaces`, and PDE-14
 `sobolev-poincare-and-morrey-inequalities`.  The definitions of $W^{k,p}$ and
 $H^s$ stay on PDE; this page identifies their Fourier norms.  **Sources read:**
@@ -688,7 +713,7 @@ read:** Wo §§1–7, pp. 1–46; Taob notes 8–9, pp. 1–22 and 1–14.
 | 8 | `thm-stein-tomas-spherical-restriction-theorem` (theorem) — for $n\ge2$, $R:L^{2(n+1)/(n+3)}(\mathbb R^n)\to L^2(S^{n-1})$ is bounded, equivalently $E:L^2(S^{n-1})\to L^{2(n+1)/(n-1)}$. | Required sharp $L^p\to L^2$ result. | literature-derived | ai-altered | Items 5–7; finite measure supplies the smaller-$p$ range. |
 | 9 | `cor-stein-tomas-for-compact-hypersurfaces-with-nonzero-curvature` (corollary) — the same local exponent pair holds for compact smooth hypersurfaces with everywhere nonvanishing Gaussian curvature. | Gives the invariant geometric version. | literature-derived | ai-altered | Partition of unity and local stationary phase, source-backed. |
 | 10 | `rem-the-general-fourier-restriction-problem` (remark) — restriction estimates with target exponents other than two remain a deeper dimension-dependent problem constrained by scaling and Knapp examples. | Prevents calling Stein–Tomas the whole restriction conjecture. | literature-derived | not-supplied | Wo/Taob surveys. |
-| 11 | `rem-restriction-estimates-and-the-missing-strichartz-interface` (remark) — extension estimates feed spacetime estimates for dispersive equations, but no PDE Strichartz page exists in the current scaffold, so no page id is cited. | Records the dispatch interface without fabricating a prerequisite. | literature-derived | not-supplied | Taob note 9; seam amendment owed. |
+| 11 | `rem-restriction-estimates-and-the-missing-strichartz-interface` (remark) — extension estimates feed spacetime estimates for dispersive equations; the declared forward interface has no current PDE page id, so this sourced leaf is non-load-bearing and must be emitted with `proved_here: false`. | Records the dispatch interface without fabricating a prerequisite. | literature-derived | not-supplied | Taob note 9; S-5 supplier deliberately uncommissioned. |
 
 **B-page leaves.**
 
@@ -1022,7 +1047,7 @@ independent treatment.
 | T §3, “The Fourier transform,” PDF pp. 24–38 | This is a second full treatment of FA's transform/inversion material.  T's Poisson, LCA special cases, DFT, and FFT sections are used later instead. |
 | Lo §§28–33 — “The topology of locally compact groups,” “The Haar integral,” “The modular function,” “The group algebra,” “Representations,” and “Quotient measures,” pp. 108–133 | Haar existence/uniqueness and representation theory are RG-owned.  Group-algebra and quotient-measure machinery is used only inside Loomis's sourced proof cost; extracting it into FR would violate that seam and would not remove the unresolved `RG-?` label. |
 | Lo §37, “Miscellaneous Theorems,” its Wiener–Tauberian and Poisson-summation portions, pp. 147–151 | The exact Wiener lemma remains FA-owned, and FA already owns the basic Schwartz Poisson formula.  FR uses only §37's Pontryagin-duality portion and builds the distinct lattice/sampling extensions on FR-17. |
-| FM §2, the dynamical/Schrödinger versions of Hardy uncertainty, pp. 5–8 | These require dispersive PDE and Strichartz estimates.  PDE currently exposes no Strichartz page, so FR records the interface blocker rather than building a PDE branch. |
+| FM §2, the dynamical/Schrödinger versions of Hardy uncertainty, pp. 5–8 | These require dispersive PDE and Strichartz estimates.  PDE currently exposes no Strichartz page, so FR records the declared sourced, non-load-bearing forward interface rather than building a PDE branch. |
 | S §1, “The Fourier transform,” pp. 1–2 | Basic definition and transform identities belong to FA.  S §§2–5 supply the uncertainty items retained on FR-18. |
 
 ### Seam-controlled refusals
@@ -1039,9 +1064,9 @@ independent treatment.
 - No Haar existence/uniqueness theorem or noncommutative unitary
   representation theory was re-minted.  The former remains the unresolved
   `RG-?` prerequisite for FR-14/FR-15 and the latter is wholly RG-owned.
-- No Strichartz theorem was re-minted.  W §11.4 yields only
-  `rem-restriction-estimates-and-the-missing-strichartz-interface` because the
-  promised PDE page does not exist.
+- No Strichartz theorem was re-minted.  W §11.4 yields only the sourced,
+  non-load-bearing `rem-restriction-estimates-and-the-missing-strichartz-interface`,
+  emitted with `proved_here: false` until a PDE supplier is commissioned.
 - No holomorphic Hardy space or BMOA page was minted.  FR-9/FR-10 use the real
   variable spaces; the holomorphic versions belong to complex analysis.
 

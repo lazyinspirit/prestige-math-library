@@ -56,8 +56,8 @@ examples.
 | RG-25 | `group-c-star-algebras-and-the-fell-unitary-dual` | integrated forms, full/reduced algebras, weak containment, unitary dual |
 | RG-26 | `direct-integral-decomposition-and-type-i-groups` | measurable Hilbert fields, central decomposition, type I/non-type I boundary |
 | RG-27 | `amenability-reiter-nets-and-folner-conditions` | invariant means, Reiter nets, Haar–Følner criteria, regular weak containment |
-| RG-28 | `kazhdans-property-t-and-spectral-gap` | almost invariant vectors, Kazhdan pairs, isolation of the trivial representation |
-| RG-29 | `sl2-r-principal-and-complementary-series` | Iwasawa model, intertwiners, unitarity ranges, reducibility points |
+| RG-28 | `sl2-r-principal-and-complementary-series` | Iwasawa model, intertwiners, unitarity ranges, reducibility points |
+| RG-29 | `kazhdans-property-t-and-spectral-gap` | almost invariant vectors, Kazhdan pairs, isolation of the trivial representation |
 | RG-30 | `sl2-r-discrete-series-and-unitary-dual` | lowest/highest weights, limits, classification and tempered boundary |
 
 **Finite/infinite balance.**  RG-1–RG-17 develop finite-group theory above the
@@ -117,7 +117,7 @@ decomposition, or the pathologies of non-type-I duals.  RG-18 proves Haar
 existence rather than assuming it; RG-23 includes the modular-density factor in
 unitary induction; RG-26 distinguishes decomposition into factors from the
 essentially unique irreducible decomposition available for type I groups; and
-RG-29–RG-30 work out a noncompact nonabelian group.
+RG-28 and RG-30 work out a noncompact nonabelian group.
 
 The result is one dependency-closed route from finite induction and modular
 blocks to noncommutative harmonic analysis.  Its B pages are leaves: they test
@@ -150,7 +150,7 @@ No planned page is misreported as published.
 | measure theory's integration, product measure, Radon measure/RMK, and disintegration pages | scalar integration and regular measures; RG proves invariant group structure, not measure theory anew |
 | `FR-14` | Pontryagin duality for locally compact abelian groups; cited only after RG-18 and never reproduced |
 | `FR-15` | Bochner, inversion and Plancherel on LCA groups; cited as the commutative specialization of RG-20/RG-25/RG-26 |
-| `RL-n` | binding predecessor and Lie-algebra interface; RG-29/RG-30 may differentiate a strongly continuous Lie-group representation only through the actual last RL page once resolved |
+| `RL-n` | binding predecessor and Lie-algebra interface; RG-28/RG-30 may differentiate a strongly continuous Lie-group representation only through the actual last RL page once resolved |
 
 ---
 
@@ -169,7 +169,7 @@ No planned page is misreported as published.
 | Deligne–Lusztig theory and the classification of all irreducibles of $GL_n(\mathbb F_q)$ | The commission asks at least through principal series.  Deligne–Lusztig varieties require étale cohomology and algebraic geometry not yet available. |
 | modular representation type, support varieties, fusion systems and derived block equivalences | These are substantial successor theories.  They are not needed to prove defects, Green correspondence, or Brauer's main theorems. |
 | modular Specht-module decomposition numbers | RG-8–RG-11 work in characteristic zero; the modular symmetric-group theory would require its own block/decomposition program and is not used downstream. |
-| general reductive real groups, Harish–Chandra characters and Plancherel formula | RG-29/RG-30 deliberately work one concrete noncompact group.  The general theory requires distributions, real reductive structure and a much larger analytic track. |
+| general reductive real groups, Harish–Chandra characters and Plancherel formula | RG-28/RG-30 deliberately work one concrete noncompact group.  The general theory requires distributions, real reductive structure and a much larger analytic track. |
 | representations of locally compact quantum groups, groupoids, loop groups and infinite symmetric groups | Each changes the basic object and requires independent infrastructure; none is a prerequisite of the stated commission. |
 | full proof of the Glimm dichotomy beyond the type-I criterion used here | RG-26 proves the decomposition statements needed for groups and states the source-backed criterion; descriptive-set-theoretic refinements beyond standard Borel smoothness remain outside scope. |
 
@@ -1390,6 +1390,14 @@ functional-analysis spectral/von-Neumann-algebra interfaces cited in §2.  Work
 with standard measure spaces, measurable fields with countable fundamental
 families, separable Hilbert spaces and second-countable locally compact groups.
 
+**S-5 non-load-bearing supplier note.** No adequate measure-class/direct-
+integral disintegration supplier is commissioned in this reconciliation; the
+existing probability disintegration interface is insufficient for measurable
+Hilbert fields and factor decomposition. Until that supplier is authored, the
+decomposition/uniqueness rows below remain sourced, non-load-bearing leaves and
+must be emitted with `proved_here: false`; no later RG proof may cite them as
+established.
+
 **Source backing read:** Bekka–de la Harpe, Chapter 1 §§1.G–1.I,
 pp. 52–66, Chapters 6–7, pp. 169–230, and Chapter 8 §§8.B–8.D,
 pp. 242–260; Bekka–de la Harpe–Valette, Appendix F §F.5, pp. 413–417.
@@ -1475,54 +1483,9 @@ amenable examples are not accidentally excluded.
 | `ex-folner-sets-in-rn` (example) | Verify the compact-uniform Følner estimate for expanding cubes. | Gives the continuous analogue of intervals in $\mathbb Z$. | literature-derived | literature-derived |
 | `ex-the-real-affine-group-is-amenable-and-nonunimodular` (example) | Express the $ax+b$ group as an extension of abelian groups and combine this with RG-19's modular computation. | Separates amenability from unimodularity. | literature-derived | literature-derived |
 | `ex-compact-groups-have-a-constant-reiter-net` (example) | Use normalized Haar density to satisfy $P_1$ exactly. | Checks the strongest compact boundary. | literature-derived | literature-derived |
-| `cex-the-free-group-on-two-generators-is-not-amenable` (counterexample) | Work the source's paradoxical/Følner-boundary argument for $F_2$. | Supplies the standard nonamenable contrast and feeds RG-28. | literature-derived | literature-derived |
+| `cex-the-free-group-on-two-generators-is-not-amenable` (counterexample) | Work the source's paradoxical/Følner-boundary argument for $F_2$. | Supplies the standard nonamenable contrast and feeds RG-29. | literature-derived | literature-derived |
 
-### RG-28 — Kazhdan's property (T)
-
-**A page:** `kazhdans-property-t-and-spectral-gap`
-
-**Requires:** RG-20, RG-25 and RG-27.
-
-**Source backing read:** Bekka–de la Harpe–Valette, Chapter 1
-§§1.1–1.4, pp. 27–49; Emmanuel Breuillard, *PCMI Lecture Notes on
-Property (T)*, Lecture I §§I–III, pp. 1–12.
-
-| item id (kind) | statement | what it is for | statement provenance | proof provenance |
-|---|---|---|---|---|
-| `def-almost-invariant-vectors-for-a-unitary-representation` (definition) | A representation has almost invariant unit vectors when every compact $Q\subset G$ and $\varepsilon>0$ admit a unit vector moved by less than $\varepsilon$ on $Q$. | Fixes the uniform-on-compacts quantifiers. | literature-derived | not-applicable |
-| `def-kazhdans-property-t` (definition) | $G$ has property (T) when every unitary representation with almost invariant vectors has a nonzero invariant vector. | States the requested rigidity property. | literature-derived | not-applicable |
-| `def-kazhdan-pair-and-kazhdan-constant` (definition) | Define a compact Kazhdan set $Q$, tolerance $\varepsilon$, and the associated displacement constant. | Quantifies the gap used in applications. | literature-derived | not-applicable |
-| `thm-property-t-is-equivalent-to-the-existence-of-a-kazhdan-pair` (theorem) | In the source's locally compact hypotheses, property (T) is equivalent to a compact Kazhdan pair. | Replaces a universal qualitative condition by one uniform test. | literature-derived | literature-derived |
-| `thm-property-t-is-equivalent-to-isolation-of-the-trivial-representation` (theorem) | $G$ has property (T) iff the trivial class is isolated in the Fell topology on $\widehat G$. | Connects rigidity to the topology built in RG-25. | literature-derived | literature-derived |
-| `lem-almost-invariant-vectors-and-positive-type-functions` (lemma) | Almost invariant unit vectors yield normalized positive-type functions converging to $1$ uniformly on compact sets, and the GNS converse holds. | Gives the coefficient formulation used in proofs. | literature-derived | literature-derived |
-| `thm-property-t-implies-compact-generation` (theorem) | A locally compact group with property (T) is compactly generated. | Records a major structural consequence and its needed topology. | literature-derived | literature-derived |
-| `thm-property-t-passes-to-quotients` (theorem) | Every Hausdorff quotient of a property-(T) locally compact group has property (T). | Supplies a basic permanence result. | literature-derived | literature-derived |
-| `thm-compact-groups-have-property-t` (theorem) | Haar averaging turns a sufficiently invariant vector into a nonzero invariant one. | Provides the compact endpoint. | literature-derived | literature-derived |
-| `thm-an-amenable-property-t-locally-compact-group-is-compact` (theorem) | Under the source's locally compact hypotheses, simultaneous amenability and property (T) force compactness. | Locates the opposition between Følner approximation and spectral gap. | literature-derived | literature-derived |
-| `def-spectral-gap-for-a-unitary-representation` (definition) | A representation has spectral gap when its restriction to the orthogonal complement of invariant vectors does not weakly contain the trivial representation. | States the representation-level form used by ergodic applications. | literature-derived | not-applicable |
-| `thm-property-t-is-uniform-spectral-gap-for-representations` (theorem) | Property (T) is equivalent to a uniform compact-set displacement bound on every representation's noninvariant subspace. | Makes the slogan precise. | literature-derived | literature-derived |
-| `thm-sl-n-r-has-property-t-for-n-at-least-three` (theorem) | $SL_n(\mathbb R)$ has property (T) for $n\ge3$. | Supplies a principal noncompact example and contrasts RG-29; it is statement-only and never a dependency target. | literature-derived | not-supplied |
-| `prop-sl2-r-does-not-have-property-t` (proposition) | The complementary series approaches the trivial representation in Fell topology. | Uses the coming case study to exhibit failure in real rank one. | literature-derived | literature-derived |
-
-**Hard proof plan.**  Translate between almost invariant vectors, positive-type
-functions and Fell neighborhoods using RG-20/RG-25.  Extract a compact Kazhdan
-set without assuming compact generation, then derive compact generation as a
-consequence.  For amenable plus (T), combine Hulanicki weak containment with
-isolation of the trivial representation to force it into the regular
-representation and hence finite Haar volume.  The higher-rank example is
-explicitly statement-only (`not-supplied`) and is never load-bearing; its full
-proof needs the later higher-rank machinery of the cited monograph.
-
-**B page:** `property-t-examples-and-boundaries`
-
-| item id (kind) | statement | what it is for | statement provenance | proof provenance |
-|---|---|---|---|---|
-| `ex-a-kazhdan-pair-for-a-compact-group` (example) | Use the whole compact group and Haar averaging to give an explicit tolerance. | Computes the compact boundary rather than merely naming it. | literature-derived | literature-derived |
-| `ex-property-t-for-a-finite-group` (example) | Specialize the compact argument to normalized counting measure. | Reconciles the definition with finite representation theory. | literature-derived | literature-derived |
-| `cex-z-does-not-have-property-t` (counterexample) | Exhibit characters tending to the trivial character without becoming trivial. | Shows infinite amenable discrete groups fail (T) in the basic case. | literature-derived | literature-derived |
-| `cex-sl2-r-complementary-series-destroys-property-t` (counterexample) | Track the spherical complementary parameter to the trivial endpoint. | Makes the RG-28/RG-29 connection explicit. | literature-derived | literature-derived |
-
-### RG-29 — $SL_2(\mathbb R)$: principal and complementary series
+### RG-28 — $SL_2(\mathbb R)$: principal and complementary series
 
 **A page:** `sl2-r-principal-and-complementary-series`
 
@@ -1551,7 +1514,7 @@ $SL_2(\mathbb R)$*, §§1–2, pp. 1–12.
 | `thm-unitarity-of-the-sl2-unitary-principal-series` (theorem) | For $\nu$ on the imaginary axis, the normalized principal series is unitary in the compact-picture $L^2$ norm. | Identifies the continuous tempered family. | literature-derived | literature-derived |
 | `thm-unitarity-of-the-sl2-complementary-series` (theorem) | In the source normalization, the spherical real interval $|\nu|<1$ carries the positive invariant form defined by $A(\nu)$; $0<|\nu|<1$ gives the complementary series, while $\nu=0$ is the spherical unitary principal series. | Establishes the non-tempered unitary family and its exact endpoints. | literature-derived | literature-derived |
 | `thm-equivalence-i-epsilon-nu-is-i-epsilon-minus-nu` (theorem) | Away from the singular normalization points, the standard intertwiner gives $I_{\varepsilon,\nu}\simeq I_{\varepsilon,-\nu}$, with the source's endpoint qualifications. | Prevents double counting in the unitary dual. | literature-derived | literature-derived |
-| `cor-complementary-series-converge-to-the-trivial-representation` (corollary) | Spherical coefficients converge uniformly on compact sets to $1$ at the trivial endpoint. | Supplies RG-28's concrete failure of property (T). | literature-derived | literature-derived |
+| `cor-complementary-series-converge-to-the-trivial-representation` (corollary) | Spherical coefficients converge uniformly on compact sets to $1$ at the trivial endpoint. | Supplies RG-29's concrete failure of property (T). | literature-derived | literature-derived |
 
 **Hard proof plan.**  Derive the compact picture from RG-23 normalized
 induction.  Differentiate only after the smooth $K$-finite subspace is fixed,
@@ -1571,11 +1534,58 @@ label.
 | `ex-intertwiner-eigenvalues-in-the-spherical-complementary-range` (example) | Compute the first eigenvalue ratios and verify positivity for $|\nu|<1$. | Finite-checks the invariant-form theorem. | literature-derived | literature-derived |
 | `cex-the-complementary-form-loses-positivity-beyond-the-unitary-interval` (counterexample) | At the source's first parameter beyond the endpoint, exhibit two $K$-types with opposite signs. | Shows the interval is sharp. | literature-derived | literature-derived |
 
+### RG-29 — Kazhdan's property (T)
+
+**A page:** `kazhdans-property-t-and-spectral-gap`
+
+**Requires:** RG-20, RG-25, RG-27, and RG-28 for the concrete
+$SL_2(\mathbb R)$ failure illustration.
+
+**Source backing read:** Bekka–de la Harpe–Valette, Chapter 1
+§§1.1–1.4, pp. 27–49; Emmanuel Breuillard, *PCMI Lecture Notes on
+Property (T)*, Lecture I §§I–III, pp. 1–12.
+
+| item id (kind) | statement | what it is for | statement provenance | proof provenance |
+|---|---|---|---|---|
+| `def-almost-invariant-vectors-for-a-unitary-representation` (definition) | A representation has almost invariant unit vectors when every compact $Q\subset G$ and $\varepsilon>0$ admit a unit vector moved by less than $\varepsilon$ on $Q$. | Fixes the uniform-on-compacts quantifiers. | literature-derived | not-applicable |
+| `def-kazhdans-property-t` (definition) | $G$ has property (T) when every unitary representation with almost invariant vectors has a nonzero invariant vector. | States the requested rigidity property. | literature-derived | not-applicable |
+| `def-kazhdan-pair-and-kazhdan-constant` (definition) | Define a compact Kazhdan set $Q$, tolerance $\varepsilon$, and the associated displacement constant. | Quantifies the gap used in applications. | literature-derived | not-applicable |
+| `thm-property-t-is-equivalent-to-the-existence-of-a-kazhdan-pair` (theorem) | In the source's locally compact hypotheses, property (T) is equivalent to a compact Kazhdan pair. | Replaces a universal qualitative condition by one uniform test. | literature-derived | literature-derived |
+| `thm-property-t-is-equivalent-to-isolation-of-the-trivial-representation` (theorem) | $G$ has property (T) iff the trivial class is isolated in the Fell topology on $\widehat G$. | Connects rigidity to the topology built in RG-25. | literature-derived | literature-derived |
+| `lem-almost-invariant-vectors-and-positive-type-functions` (lemma) | Almost invariant unit vectors yield normalized positive-type functions converging to $1$ uniformly on compact sets, and the GNS converse holds. | Gives the coefficient formulation used in proofs. | literature-derived | literature-derived |
+| `thm-property-t-implies-compact-generation` (theorem) | A locally compact group with property (T) is compactly generated. | Records a major structural consequence and its needed topology. | literature-derived | literature-derived |
+| `thm-property-t-passes-to-quotients` (theorem) | Every Hausdorff quotient of a property-(T) locally compact group has property (T). | Supplies a basic permanence result. | literature-derived | literature-derived |
+| `thm-compact-groups-have-property-t` (theorem) | Haar averaging turns a sufficiently invariant vector into a nonzero invariant one. | Provides the compact endpoint. | literature-derived | literature-derived |
+| `thm-an-amenable-property-t-locally-compact-group-is-compact` (theorem) | Under the source's locally compact hypotheses, simultaneous amenability and property (T) force compactness. | Locates the opposition between Følner approximation and spectral gap. | literature-derived | literature-derived |
+| `def-spectral-gap-for-a-unitary-representation` (definition) | A representation has spectral gap when its restriction to the orthogonal complement of invariant vectors does not weakly contain the trivial representation. | States the representation-level form used by ergodic applications. | literature-derived | not-applicable |
+| `thm-property-t-is-uniform-spectral-gap-for-representations` (theorem) | Property (T) is equivalent to a uniform compact-set displacement bound on every representation's noninvariant subspace. | Makes the slogan precise. | literature-derived | literature-derived |
+| `thm-sl-n-r-has-property-t-for-n-at-least-three` (theorem) | $SL_n(\mathbb R)$ has property (T) for $n\ge3$. | Supplies a principal noncompact example and contrasts RG-28; it is statement-only and never a dependency target. | literature-derived | not-supplied |
+| `prop-sl2-r-does-not-have-property-t` (proposition) | The RG-28 complementary series approaches the trivial representation in Fell topology. | Uses the preceding case study to exhibit failure in real rank one. | literature-derived | literature-derived |
+
+**Hard proof plan.**  Translate between almost invariant vectors, positive-type
+functions and Fell neighborhoods using RG-20/RG-25.  Extract a compact Kazhdan
+set without assuming compact generation, then derive compact generation as a
+consequence.  For amenable plus (T), combine Hulanicki weak containment with
+isolation of the trivial representation to force it into the regular
+representation and hence finite Haar volume.  The higher-rank example is
+explicitly statement-only (`not-supplied`) and is never load-bearing; its full
+proof needs the later higher-rank machinery of the cited monograph. The
+$SL_2(\mathbb R)$ failure now cites the already preceding RG-28 supplier.
+
+**B page:** `property-t-examples-and-boundaries`
+
+| item id (kind) | statement | what it is for | statement provenance | proof provenance |
+|---|---|---|---|---|
+| `ex-a-kazhdan-pair-for-a-compact-group` (example) | Use the whole compact group and Haar averaging to give an explicit tolerance. | Computes the compact boundary rather than merely naming it. | literature-derived | literature-derived |
+| `ex-property-t-for-a-finite-group` (example) | Specialize the compact argument to normalized counting measure. | Reconciles the definition with finite representation theory. | literature-derived | literature-derived |
+| `cex-z-does-not-have-property-t` (counterexample) | Exhibit characters tending to the trivial character without becoming trivial. | Shows infinite amenable discrete groups fail (T) in the basic case. | literature-derived | literature-derived |
+| `cex-sl2-r-complementary-series-destroys-property-t` (counterexample) | Track RG-28's spherical complementary parameter to the trivial endpoint. | Makes the RG-28-to-RG-29 connection explicit. | literature-derived | literature-derived |
+
 ### RG-30 — $SL_2(\mathbb R)$: discrete series and the unitary dual
 
 **A page:** `sl2-r-discrete-series-and-unitary-dual`
 
-**Requires:** RG-25–RG-29 and `RL-n` for highest/lowest weight
+**Requires:** RG-25, RG-26, and RG-28, plus `RL-n` for highest/lowest weight
 $\mathfrak{sl}_2$ modules.
 
 **Source backing read:** Lang, Chapters VII and X, pp. 89–126 and
@@ -1587,7 +1597,7 @@ pp. 297–317.
 |---|---|---|---|---|
 | `def-k-finite-and-smooth-vectors-for-sl2-r` (definition) | Define smooth and $K$-finite vectors and the resulting $(\mathfrak g,K)$-module. | Specifies the algebraic core on which the RL classification acts. | literature-derived | not-applicable |
 | `lem-k-finite-vectors-are-dense-and-stable-under-the-derived-action` (lemma) | The $K$-finite smooth vectors are dense and stable under $U(\mathfrak{sl}_2)$ with compatible $K$-action. | Justifies passage between group and Harish–Chandra modules. | literature-derived | literature-derived |
-| `lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points` (lemma) | At each exceptional parameter, vanishing ladder coefficients cut out the stated highest- or lowest-weight submodule and finite-dimensional quotient. | Extracts discrete-series candidates from RG-29. | literature-derived | literature-derived |
+| `lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points` (lemma) | At each exceptional parameter, vanishing ladder coefficients cut out the stated highest- or lowest-weight submodule and finite-dimensional quotient. | Extracts discrete-series candidates from RG-28. | literature-derived | literature-derived |
 | `def-holomorphic-and-antiholomorphic-discrete-series-models` (definition) | Define $D_n^+$ and $D_n^-$ in the weighted holomorphic/antiholomorphic upper-half-plane model for the source's integer range. | Gives concrete globalizations of the two ladder directions. | literature-derived | not-applicable |
 | `lem-the-weighted-area-form-is-sl2-r-invariant` (lemma) | The automorphy factor and hyperbolic Jacobian preserve the discrete-series norm. | Proves the geometric model is unitary. | literature-derived | literature-derived |
 | `thm-irreducibility-and-k-types-of-the-discrete-series` (theorem) | Each $D_n^\pm$ is irreducible, with one-sided multiplicity-one $K$-type ladder beginning at its extremal weight. | Identifies the representations and their parity. | literature-derived | literature-derived |
@@ -1764,7 +1774,7 @@ parameters of $SL_2(\mathbb R)$.
 
 1. **RL anchor.**  The orchestrator must replace the literal relative label
    `RL-n` by the final page id of the concurrent Lie-algebra representation
-   scaffold.  RG-29/RG-30 consume only its $\mathfrak{sl}_2$ weight,
+   scaffold.  RG-28/RG-30 consume only its $\mathfrak{sl}_2$ weight,
    raising/lowering and infinitesimal-character interface.  This lane did not
    inspect or edit the RL file.
 
@@ -1792,12 +1802,10 @@ parameters of $SL_2(\mathbb R)$.
    dependency.  This is a build-time resolution condition, not a request to
    edit any other scaffold now.
 
-6. **One internal forward illustration.**  RG-28's
-   `prop-sl2-r-does-not-have-property-t` is a non-load-bearing preview whose
-   proof consumes the complementary-series convergence established on RG-29.
-   At build time either order RG-29 before that illustration or retain the
-   explicit forward dependency; do not duplicate the complementary-series
-   construction on RG-28.
+6. **Internal illustration ordering — applied by S-6.** RG-28 now develops the
+   principal/complementary series before RG-29's
+   `prop-sl2-r-does-not-have-property-t`. The illustration cites the preceding
+   supplier; no forward dependency or duplicate construction remains.
 
 No blocker required a prompt.  The two unresolved relative labels are recorded
 interfaces, not permissions being sought.
@@ -1840,19 +1848,19 @@ counted as coverage merely because a second treatment repeats it.
 | [Lassueur–Farrell, Chapter 7](https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload2.pdf) | §§27–29, printed/PDF pp. 2–12 | relative projectivity and inherited vertices/sources; Green correspondence and its proof; worked distinguished summand: RG-15/H1–H4. |
 | [Craven, thesis](https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf) | Chapter 1 §§1.1–1.6, printed pp. 1–17 (PDF pp. 8–24); Chapter 2 §§2.1–2.5, printed pp. 18–30 (PDF pp. 25–37) | blocks, Brauer correspondence, p-sections/generalized decomposition numbers; relative projectivity, Green, Nagao and Second: RG-15/H2,H3; RG-16/H2–H5; RG-17/H1–H5.  Third Main Theorem is in §13. |
 | [Meierfrankenfeld, *MTH 912 Class Notes*](https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/912F04master.pdf) | §§6.6–6.7, printed pp. 156–171 | generalized decomposition numbers, subsections, support lemmas and Brauer's Second Main Theorem: RG-17/H1–H4. |
-| [Kowalski, *Representation Theory*](https://people.math.ethz.ch/~kowalski/representation-theory.pdf) | Chapter 3 §§3.1–3.2, pp. 107–122; Chapter 5 §§5.2–5.5, pp. 212–242; Chapter 7 §§7.2–7.4, pp. 292–317 | topological/unitary representations; Haar/regular action/group algebra; general compact Peter–Weyl; $SL_2(\mathbb R)$: RG-18/H1,H3,H4; RG-19/H1–H3,H5; RG-20/H1,H2; RG-21/H1–H4; RG-22/H1–H4; RG-29/H1–H5; RG-30/H3,H5. |
+| [Kowalski, *Representation Theory*](https://people.math.ethz.ch/~kowalski/representation-theory.pdf) | Chapter 3 §§3.1–3.2, pp. 107–122; Chapter 5 §§5.2–5.5, pp. 212–242; Chapter 7 §§7.2–7.4, pp. 292–317 | topological/unitary representations; Haar/regular action/group algebra; general compact Peter–Weyl; $SL_2(\mathbb R)$: RG-18/H1,H3,H4; RG-19/H1–H3,H5; RG-20/H1,H2; RG-21/H1–H4; RG-22/H1–H4; RG-28/H1–H5; RG-30/H3,H5. |
 | [Colojoară–Gheondea, *Lectures on Representations of Locally Compact Groups*](https://www.researchgate.net/publication/332548226_Lectures_of_representations_of_locally_compact_groups) | Chapter 2 §§1–2, pp. 31–48; Chapter 3, pp. 65–90; Chapter 4 §§1–5, pp. 91–126 | two Haar constructions/uniqueness; compact representations; rho-functions and induced representations; imprimitivity theorem: RG-18/H2,H5; RG-21/H2,H5; RG-22/H2,H5; RG-23/H1–H5; RG-24/H1–H4. |
 | [Vogan, *Invariant measures on homogeneous spaces*](https://math.mit.edu/~dav/integration.pdf) | complete note, pp. 1–3 | modular character, invariant-measure criterion and quotient integration: RG-19/H1,H4; RG-23/H1,H5. |
 | [Vogan, *Unitary induced representations*](https://math.mit.edu/~dav/ind.pdf) | complete note, pp. 1–5 | normalized induction, quotient densities and induction models: RG-23/H2–H4. |
 | [Vogan, *Review of harmonic analysis on compact groups*](https://math.mit.edu/~dav/compactrev.pdf) | complete note, pp. 1–12 | Haar averaging, Schur orthogonality, matrix coefficients and Peter–Weyl decomposition: RG-21/H3–H5; RG-22/H1,H3,H4. |
-| [Bekka–de la Harpe–Valette, *Kazhdan's Property (T)*](https://archive-ouverte.unige.ch/unige%3A10789) | Chapter 1 §§1.1–1.4, pp. 27–49; Appendix A §§A.1–A.5, pp. 289–307; Appendix C §§C.1–C.5, pp. 340–365; Appendix E §§E.1–E.3, pp. 383–393; Appendix F §§F.1–F.5, pp. 395–417; Appendix G §§G.1–G.5, pp. 420–445 | unitary representations/Schur/Haar/compact groups; positive type/GNS; induced representations; weak containment/Fell/group $C^*$-algebras/direct integrals; amenability/Følner; property (T): RG-19/H2,H4; RG-20/H1–H5; RG-21/H1,H2; RG-23/H2–H4; RG-25/H1–H5; RG-26/H2,H5; RG-27/H1–H5; RG-28/H1–H5. |
+| [Bekka–de la Harpe–Valette, *Kazhdan's Property (T)*](https://archive-ouverte.unige.ch/unige%3A10789) | Chapter 1 §§1.1–1.4, pp. 27–49; Appendix A §§A.1–A.5, pp. 289–307; Appendix C §§C.1–C.5, pp. 340–365; Appendix E §§E.1–E.3, pp. 383–393; Appendix F §§F.1–F.5, pp. 395–417; Appendix G §§G.1–G.5, pp. 420–445 | unitary representations/Schur/Haar/compact groups; positive type/GNS; induced representations; weak containment/Fell/group $C^*$-algebras/direct integrals; amenability/Følner; property (T): RG-19/H2,H4; RG-20/H1–H5; RG-21/H1,H2; RG-23/H2–H4; RG-25/H1–H5; RG-26/H2,H5; RG-27/H1–H5; RG-29/H1–H5. |
 | [Bekka–de la Harpe, *Unitary Representations of Groups, Duals, and Characters*](https://arxiv.org/abs/1912.07262) | Chapter 1 §§1.A–1.I, pp. 13–66; Chapters 6–7, pp. 169–230; Chapter 8 §§8.A–8.D, pp. 231–260 | unitary dual, positive type/GNS, weak containment/Fell, induced representations, measurable fields/direct integrals, factors/type I/non-type I, group $C^*$-algebras/Glimm: RG-20/H2–H5; RG-25/H1–H5; RG-26/H1–H5. |
 | [Bruhat, *Lectures on Lie Groups and Representations of Locally Compact Groups*](https://mathweb.tifr.res.in/Documents/Publications/Lectures/tifr14.pdf) | Part III, Chapters 10–12, printed pp. 91–126 | “Continuous sum of Hilbert Spaces I–II” and “The Plancherel formula”: measurable Hilbert fields, decomposable operators, factorial decomposition and Plancherel disintegration: independent proof backing for RG-26/H1–H5. |
 | [Mackey, “Imprimitivity for Representations of Locally Compact Groups I”](https://pmc.ncbi.nlm.nih.gov/articles/PMC1063076/) | complete article, pp. 537–545 | systems of imprimitivity, transitive reconstruction and uniqueness: RG-24/H1–H5. |
 | [Paterson, *Amenability*](https://openlibrary.org/books/OL2038124M/Amenability) | Chapter 1, pp. 25–50; Chapter 4, pp. 125–194 | invariant means; locally compact amenability; Reiter conditions; Følner conditions; closure properties: RG-27/H1–H5. |
-| [Breuillard, *PCMI Lecture Notes on Property (T)*](https://www.math.utah.edu/pcmi12/lecture_notes/breuillard.pdf) | Lecture I §§I–III, pp. 1–12 | almost invariant vectors, Kazhdan pairs, spectral gap and basic examples: RG-28/H1–H5. |
-| [Lang, *$SL_2(\mathbb R)$*](https://link.springer.com/book/10.1007/978-1-4612-5142-2) | Chapters I–III, pp. 1–49; Chapter VII, pp. 89–126; Chapter IX, pp. 163–177; Chapter X, pp. 179–190 | general/compact/induced pictures; derived action; Plancherel; discrete series: RG-29/H1–H5; RG-30/H1–H5. |
-| [Kerr, *Notes on Representation Theory of $SL_2(\mathbb R)$*](https://www.math.wustl.edu/~matkerr/sl2notes.pdf) | §§1–2, pp. 1–12; §5, pp. 19–21 | principal series, $K$-types, ladder formulas, reducibility, unitary classification/tempered discussion: RG-29/H2–H5; RG-30/H1–H4. |
+| [Breuillard, *PCMI Lecture Notes on Property (T)*](https://www.math.utah.edu/pcmi12/lecture_notes/breuillard.pdf) | Lecture I §§I–III, pp. 1–12 | almost invariant vectors, Kazhdan pairs, spectral gap and basic examples: RG-29/H1–H5. |
+| [Lang, *$SL_2(\mathbb R)$*](https://link.springer.com/book/10.1007/978-1-4612-5142-2) | Chapters I–III, pp. 1–49; Chapter VII, pp. 89–126; Chapter IX, pp. 163–177; Chapter X, pp. 179–190 | general/compact/induced pictures; derived action; Plancherel; discrete series: RG-28/H1–H5; RG-30/H1–H5. |
+| [Kerr, *Notes on Representation Theory of $SL_2(\mathbb R)$*](https://www.math.wustl.edu/~matkerr/sl2notes.pdf) | §§1–2, pp. 1–12; §5, pp. 19–21 | principal series, $K$-types, ladder formulas, reducibility, unitary classification/tempered discussion: RG-28/H2–H5; RG-30/H1–H4. |
 
 The canonical Isaacs Schur-index chapters were identified but not entered in
 this table because the host did not deliver a complete readable text.  A
@@ -1893,8 +1901,8 @@ cross-checked conventions.  URLs are in §10.
 | RG-25 | Bekka–de la Harpe Ch. 1 §§1.A–1.F and Ch. 8, pp. 13–51, 231–260 | Bekka–de la Harpe–Valette App. F §§F.1–F.4, pp. 395–413 | — |
 | RG-26 | Bekka–de la Harpe Ch. 1 §§1.G–1.I, Chs. 6–8, pp. 52–66, 169–260 | Bruhat Part III, Chapters 10–12, pp. 91–126 | Bekka–de la Harpe–Valette App. F §F.5, pp. 413–417, independently checks the interface |
 | RG-27 | Bekka–de la Harpe–Valette App. G §§G.1–G.5, pp. 420–445 | Paterson Ch. 1 and Ch. 4, pp. 25–50, 125–194 | — |
-| RG-28 | Bekka–de la Harpe–Valette Ch. 1 §§1.1–1.4, pp. 27–49 | Breuillard Lecture I §§I–III, pp. 1–12 | — |
-| RG-29 | Kowalski Ch. 7 §§7.2–7.4, pp. 292–317 | Lang Chs. I–III,VII, pp. 1–49, 89–126 | Kerr §§1–2, pp. 1–12 |
+| RG-28 | Kowalski Ch. 7 §§7.2–7.4, pp. 292–317 | Lang Chs. I–III,VII, pp. 1–49, 89–126 | Kerr §§1–2, pp. 1–12 |
+| RG-29 | Bekka–de la Harpe–Valette Ch. 1 §§1.1–1.4, pp. 27–49 | Breuillard Lecture I §§I–III, pp. 1–12 | — |
 | RG-30 | Lang Chs. VII,IX,X, pp. 89–126, 163–190 | Kerr §§1–2 and §5, pp. 1–12, 19–21 | Kowalski Ch. 7 §§7.3–7.4, pp. 297–317 |
 
 Every pair therefore has at least two independent full treatments.  The
@@ -2051,16 +2059,16 @@ this crosswalk.
 | RG-27/H3 | Paterson Ch. 4, Følner criterion and Hulanicki criterion | included | `lem-reiter-functions-can-be-cut-down-to-folner-sets`; `thm-folner-criterion-for-locally-compact-groups`; `cor-folner-sequences-for-second-countable-compactly-generated-groups`; `thm-hulanicki-weak-containment-criterion-for-amenability` |
 | RG-27/H4 | Paterson/Valette, amenable classes and closure properties | included | `prop-compact-and-locally-compact-abelian-groups-are-amenable`; `thm-amenability-is-stable-under-closed-subgroups-quotients-and-extensions`; `ex-folner-sets-in-rn` |
 | RG-27/H5 | Bekka–de la Harpe–Valette App. G, examples and free-group failure | included | `ex-the-real-affine-group-is-amenable-and-nonunimodular`; `ex-compact-groups-have-a-constant-reiter-net`; `cex-the-free-group-on-two-generators-is-not-amenable` |
-| RG-28/H1 | Bekka–de la Harpe–Valette §1.1/Breuillard I, almost invariance, property (T), Kazhdan pairs | included | `def-almost-invariant-vectors-for-a-unitary-representation`; `def-kazhdans-property-t`; `def-kazhdan-pair-and-kazhdan-constant`; `thm-property-t-is-equivalent-to-the-existence-of-a-kazhdan-pair` |
-| RG-28/H2 | Bekka–de la Harpe–Valette §§1.2–1.3, Fell isolation and structure | included | `thm-property-t-is-equivalent-to-isolation-of-the-trivial-representation`; `lem-almost-invariant-vectors-and-positive-type-functions`; `thm-property-t-implies-compact-generation`; `thm-property-t-passes-to-quotients` |
-| RG-28/H3 | Breuillard II–III, compact groups, amenability and spectral gap | included | `thm-compact-groups-have-property-t`; `thm-an-amenable-property-t-locally-compact-group-is-compact`; `def-spectral-gap-for-a-unitary-representation`; `thm-property-t-is-uniform-spectral-gap-for-representations` |
-| RG-28/H4 | Bekka–de la Harpe–Valette §1.4, higher-rank and rank-one examples | included | `thm-sl-n-r-has-property-t-for-n-at-least-three`; `prop-sl2-r-does-not-have-property-t`; `ex-a-kazhdan-pair-for-a-compact-group` |
-| RG-28/H5 | Breuillard, finite/abelian/complementary-series boundary examples | included | `ex-property-t-for-a-finite-group`; `cex-z-does-not-have-property-t`; `cex-sl2-r-complementary-series-destroys-property-t` |
-| RG-29/H1 | Lang Chs. I–III, Iwasawa decomposition and normalized induced picture | included | `def-iwasawa-and-minimal-parabolic-data-for-sl2-r`; `thm-iwasawa-decomposition-for-sl2-r`; `def-normalized-principal-series-i-epsilon-nu`; `thm-compact-picture-of-the-sl2-principal-series` |
-| RG-29/H2 | Kerr §§1–2, $K$-types, ladder operators and reducibility | included | `lem-k-type-decomposition-of-the-sl2-principal-series`; `lem-sl2-raising-and-lowering-formulas-in-the-compact-picture`; `thm-generic-irreducibility-and-the-exceptional-parameter-lattice`; `def-standard-intertwining-operator-for-sl2-r` |
-| RG-29/H3 | Lang Ch. VII/Kowalski §7.3, intertwiner continuation and unitary ranges | included | `thm-meromorphic-continuation-and-intertwining-identity-for-a-nu`; `lem-k-type-eigenvalue-recurrence-for-the-sl2-intertwiner`; `thm-unitarity-of-the-sl2-unitary-principal-series`; `thm-unitarity-of-the-sl2-complementary-series` |
-| RG-29/H4 | Kowalski §7.4, parameter equivalence and trivial endpoint | included | `thm-equivalence-i-epsilon-nu-is-i-epsilon-minus-nu`; `cor-complementary-series-converge-to-the-trivial-representation`; `ex-iwasawa-coordinates-and-haar-density-on-sl2-r` |
-| RG-29/H5 | Kerr/Lang, $K$-type and complementary-form calculations | included | `ex-first-k-types-and-ladder-coefficients-in-i-epsilon-nu`; `ex-intertwiner-eigenvalues-in-the-spherical-complementary-range`; `cex-the-complementary-form-loses-positivity-beyond-the-unitary-interval` |
+| RG-28/H1 | Lang Chs. I–III, Iwasawa decomposition and normalized induced picture | included | `def-iwasawa-and-minimal-parabolic-data-for-sl2-r`; `thm-iwasawa-decomposition-for-sl2-r`; `def-normalized-principal-series-i-epsilon-nu`; `thm-compact-picture-of-the-sl2-principal-series` |
+| RG-28/H2 | Kerr §§1–2, $K$-types, ladder operators and reducibility | included | `lem-k-type-decomposition-of-the-sl2-principal-series`; `lem-sl2-raising-and-lowering-formulas-in-the-compact-picture`; `thm-generic-irreducibility-and-the-exceptional-parameter-lattice`; `def-standard-intertwining-operator-for-sl2-r` |
+| RG-28/H3 | Lang Ch. VII/Kowalski §7.3, intertwiner continuation and unitary ranges | included | `thm-meromorphic-continuation-and-intertwining-identity-for-a-nu`; `lem-k-type-eigenvalue-recurrence-for-the-sl2-intertwiner`; `thm-unitarity-of-the-sl2-unitary-principal-series`; `thm-unitarity-of-the-sl2-complementary-series` |
+| RG-28/H4 | Kowalski §7.4, parameter equivalence and trivial endpoint | included | `thm-equivalence-i-epsilon-nu-is-i-epsilon-minus-nu`; `cor-complementary-series-converge-to-the-trivial-representation`; `ex-iwasawa-coordinates-and-haar-density-on-sl2-r` |
+| RG-28/H5 | Kerr/Lang, $K$-type and complementary-form calculations | included | `ex-first-k-types-and-ladder-coefficients-in-i-epsilon-nu`; `ex-intertwiner-eigenvalues-in-the-spherical-complementary-range`; `cex-the-complementary-form-loses-positivity-beyond-the-unitary-interval` |
+| RG-29/H1 | Bekka–de la Harpe–Valette §1.1/Breuillard I, almost invariance, property (T), Kazhdan pairs | included | `def-almost-invariant-vectors-for-a-unitary-representation`; `def-kazhdans-property-t`; `def-kazhdan-pair-and-kazhdan-constant`; `thm-property-t-is-equivalent-to-the-existence-of-a-kazhdan-pair` |
+| RG-29/H2 | Bekka–de la Harpe–Valette §§1.2–1.3, Fell isolation and structure | included | `thm-property-t-is-equivalent-to-isolation-of-the-trivial-representation`; `lem-almost-invariant-vectors-and-positive-type-functions`; `thm-property-t-implies-compact-generation`; `thm-property-t-passes-to-quotients` |
+| RG-29/H3 | Breuillard II–III, compact groups, amenability and spectral gap | included | `thm-compact-groups-have-property-t`; `thm-an-amenable-property-t-locally-compact-group-is-compact`; `def-spectral-gap-for-a-unitary-representation`; `thm-property-t-is-uniform-spectral-gap-for-representations` |
+| RG-29/H4 | Bekka–de la Harpe–Valette §1.4, higher-rank and rank-one examples | included | `thm-sl-n-r-has-property-t-for-n-at-least-three`; `prop-sl2-r-does-not-have-property-t`; `ex-a-kazhdan-pair-for-a-compact-group` |
+| RG-29/H5 | Breuillard, finite/abelian/complementary-series boundary examples | included | `ex-property-t-for-a-finite-group`; `cex-z-does-not-have-property-t`; `cex-sl2-r-complementary-series-destroys-property-t` |
 | RG-30/H1 | Kerr §§1–2/Lang Ch. VII, $K$-finite vectors and extremal-weight submodules | included | `def-k-finite-and-smooth-vectors-for-sl2-r`; `lem-k-finite-vectors-are-dense-and-stable-under-the-derived-action`; `lem-highest-and-lowest-weight-submodules-at-principal-series-reducibility-points`; `def-holomorphic-and-antiholomorphic-discrete-series-models` |
 | RG-30/H2 | Lang Ch. X, discrete-series models, $K$-types and square integrability | included | `lem-the-weighted-area-form-is-sl2-r-invariant`; `thm-irreducibility-and-k-types-of-the-discrete-series`; `thm-square-integrability-of-sl2-r-discrete-series-matrix-coefficients`; `def-limits-of-discrete-series-for-sl2-r` |
 | RG-30/H3 | Kerr §5/Kowalski §7.4, limits, temperedness and unitary classification | included | `thm-unitarity-and-irreducibility-of-the-limits-of-discrete-series`; `def-tempered-unitary-representation`; `thm-tempered-status-of-the-sl2-r-unitary-series`; `thm-classification-of-the-irreducible-unitary-dual-of-sl2-r` |
@@ -2134,15 +2142,15 @@ commissioned route.
 | Mackey 1949, decomposition of nontransitive systems over orbit space | deferred | The commissioned theorem is transitive imprimitivity; arbitrary orbit decompositions require the RG-26 measurable-field machinery and regularity of orbit spaces. |
 | Paterson Chapter 4, amenable semigroups and groupoids | out-of-scope | The object is no longer a locally compact group; no later RG page consumes these variants. |
 | Paterson, fixed-point formulations of amenability | inline | The separation/fixed-point argument is absorbed into `lem-an-invariant-mean-produces-a-reiter-net`; a separate fixed-point theory is not needed. |
-| Breuillard Lecture I, relative property (T) | deferred | Relative (T), lattices and semidirect-product criteria require their own subgroup/ergodic development; RG-28 establishes the group property requested. |
+| Breuillard Lecture I, relative property (T) | deferred | Relative (T), lattices and semidirect-product criteria require their own subgroup/ergodic development; RG-29 establishes the group property requested. |
 | Bekka–de la Harpe–Valette §1.4, lattice inheritance and cohomological criteria | deferred | These require invariant measures on quotients and first cohomology of unitary representations beyond the current spectral-gap page. |
-| Lang Chapters I–III, finite-dimensional nonunitary $SL_2(\mathbb R)$ representations | deferred | Their Lie-algebra classification is owned by RL; RG-29 uses only the Iwasawa/induced models. |
+| Lang Chapters I–III, finite-dimensional nonunitary $SL_2(\mathbb R)$ representations | deferred | Their Lie-algebra classification is owned by RL; RG-28 uses only the Iwasawa/induced models. |
 | Lang Chapter IX, explicit Plancherel density derivation | inline | Its conclusion and formal degrees are part of `thm-plancherel-support-for-sl2-r`; reproducing every transform calculation would turn the concrete case study into a general Plancherel track. |
 | Lang Chapter X, distribution characters of the discrete series | deferred | Harish–Chandra character distributions require distribution theory and are explicitly outside the one-group unitary classification requested. |
 | Kerr's note that complementary series are not treated there | out-of-scope | It is not promoted into evidence; Lang and Kowalski are the two proof treatments for complementary unitarity. |
 | compact-Lie maximal tori and Weyl integration | deferred | The differential-geometry page owns them; general compact Peter–Weyl on RG-22 uses neither. |
 | Pontryagin duality, Bochner's theorem and LCA Plancherel | deferred | FR owns these abelian results.  RG cites them only when specializing noncommutative constructions. |
-| abstract $\mathfrak{sl}_2$ highest/lowest-weight classification | deferred | RL owns the Lie-algebra statements; RG-29/RG-30 consume them through `RL-n` and prove the group-globalization facts. |
+| abstract $\mathfrak{sl}_2$ highest/lowest-weight classification | deferred | RL owns the Lie-algebra statements; RG-28/RG-30 consume them through `RL-n` and prove the group-globalization facts. |
 
 ## 14. Verified measurements from this finished file
 

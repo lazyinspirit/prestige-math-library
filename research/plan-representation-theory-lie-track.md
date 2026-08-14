@@ -25,9 +25,9 @@ not orders. Every B page is a dependency leaf.
 
 **Disk reconciliation.** All ten DG Lie-theory pairs inspected in the live plan
 have empty `items[]`; they are planned predecessors, not published facts.
-DG-32's prose proposed Verma-module and character-formula ids even though the
-subjects-02 ownership table assigns that material to RL. Those ids are rehomed
-here where useful, and an amendment is recorded below. DG-32 remains owner of
+DG-32 formerly proposed Verma-module and character-formula ids even though the
+subjects-02 ownership table assigns that material to RL. S-3 is now applied:
+those ids are proposed only here, with the receipt recorded below. DG-32 remains owner of
 the finite-dimensional highest-weight classification. DG-29 remains owner of
 the Chevalley--Eilenberg differential and Whitehead lemmas. No live item id or
 page id is changed by this file.
@@ -557,7 +557,10 @@ Humphreys §24.4 independently checks the Steinberg formula.
 scaffold, but cannot be authored before the future AV pages supply $G/B$ as a
 smooth projective variety, associated equivariant line bundles, coherent
 cohomology, and Serre duality. The result is not dropped merely because that
-supplier is future. Full treatments: Rui lecture 1, pp.2--7 and Ng §§3--6,
+supplier is future. Under S-5 no AV supplier is commissioned now: every
+geometry-dependent Borel--Weil--Bott row remains a sourced, non-load-bearing
+leaf and must be emitted with `proved_here: false` until that interface is
+authored; no later RL proof may cite it as established. Full treatments: Rui lecture 1, pp.2--7 and Ng §§3--6,
 pp.6--14; Lurie's complete pp.1--3 proof and Boxer--Pilloni §1.1.2--1.1.3,
 pp.2--6 are independent proof checks.
 
@@ -596,6 +599,10 @@ central reductions, and highest-weight ideals, while being candid about the
 geometric depth of the proof. The final Duflo surjectivity theorem is supplied
 with a proof architecture but `not-supplied` proof: authoring its localisation
 argument would require the deliberately excluded Beilinson--Bernstein theory.
+Under S-5 no localisation/$\mathcal D$-module supplier is commissioned now;
+the localisation-dependent rows are sourced, non-load-bearing leaves with
+`proved_here: false` at build, and no later RL proof may cite them as
+established.
 Full treatments: Duflo's original article, pp.107--120 and Stanciu §§2--7,
 pp.3--29; Etingof 18.757 §§18, 22, pp.92--95, 110--113 is an independent
 graduate treatment of the highest-weight/annihilator part.
@@ -1061,10 +1068,10 @@ decomposition denominator.
 
 ---
 
-## Amendments owed; no other file edited
+## Settled reconciliation interfaces
 
-1. **DG-32 ownership correction.** When the differential-geometry scaffold is
-   next revised, remove/rehome these unbuilt proposals to RL: the seven Verma
+1. **DG-32 ownership correction — applied by S-3.** DG removes and RL remains
+   the sole proposed home for the seven Verma
    ids `def-one-dimensional-borel-module-of-weight-lambda`,
    `def-verma-module`, `thm-universal-property-of-verma-modules`,
    `thm-pbw-model-of-a-verma-module`,
@@ -1076,8 +1083,8 @@ decomposition denominator.
    `prop-characters-of-finite-dimensional-modules-are-weyl-invariant`,
    `thm-weyl-denominator-identity`, `thm-weyl-character-formula`,
    `thm-weyl-dimension-formula`, and
-   `thm-kostant-weight-multiplicity-formula`. Their ids are deliberately reused
-   here because no live item owns them.
+   `thm-kostant-weight-multiplicity-formula`. DG-32 cites RL-2/RL-7 where the
+   surrounding finite-dimensional discussion needs those objects.
 2. **DG-32 retained boundary.** DG-32 should retain the finite-dimensional
    highest-weight classification, its definition of $\rho$, dominant/integral
    weights, root strings, and the extremal-weight theorem. RL cites rather than
@@ -1139,8 +1146,8 @@ dispatch (which supplied no numeric item estimate):
 |---|---:|---|
 | before → after proposed item ids | **0 → 321** | the owned file did not exist and all live splice pages had empty `items[]`; after is the distinct-id count over inventory rows. |
 | duplicate proposed item ids | **0** | sorted duplicate scan of all 321 inventory ids. |
-| collisions with live `items/` or `research/plan-spec.json` item ids | **0** | exact-id intersection; the deliberately rehomed DG-32 ids exist only in prose, not as live objects. |
-| cross-scaffold prose id overlaps | **14, all intentional** | exactly the DG-32 Verma/character proposals enumerated in amendment 1; no other scaffold overlap. |
+| collisions with live `items/` or `research/plan-spec.json` item ids | **0** | exact-id intersection; the RL-owned Verma/character ids remain proposals only, not live objects. |
+| cross-scaffold proposed-id overlaps in the settled S-3 group | **0** | the 14 Verma/character ids are proposed only by RL after DG's duplicate rows were removed and its uses repointed here. |
 | `included` heading dispositions | **75** | rows I01--I75 under the explicit grouped-heading counting convention above. |
 | decomposition ratio | **4.28×** | $321\div75=4.28$; B leaves count as proposed items, as in the commission's calibration. |
 | pair / page count | **15 A/B pairs; 30 page ids** | RL-1 through RL-15, each with one examples companion. |

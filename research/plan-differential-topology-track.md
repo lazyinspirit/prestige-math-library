@@ -1255,6 +1255,13 @@ needed at item 10, and simple connectivity at items 4, 8--10.
 **Requires:** DT-23; `AT-n[simple-homotopy]` for Whitehead group/torsion
 construction; AT local-coefficient cellular chains.
 
+**S-5 non-load-bearing supplier note.** No simple-homotopy/Whitehead-group
+supplier is commissioned in this reconciliation. Until that AT interface is
+authored, every row whose proof consumes the Whitehead group or its torsion
+class is a sourced, non-load-bearing leaf with `proved_here: false`; the
+s-cobordism consequences may not be cited by later proofs as established.
+The rows remain so the interface can be discharged when its supplier exists.
+
 **Sources:** Lück Ch. 1, pp. 1--22 and Ch. 2 §§2.1--2.3, pp. 23--37;
 Ranicki Ch. 8 §§8.1--8.2, electronic pp. 150--162; W §5.5,
 pp. 149--153 (geometric simply-connected specialization).

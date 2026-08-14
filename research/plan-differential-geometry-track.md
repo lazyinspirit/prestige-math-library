@@ -10,7 +10,7 @@
 ## 0. Summary for the orchestrator
 
 **Complete.** This scaffold contains 37 A/B pairs (74 proposed pages) and
-2,098 unique proposed item ids. Every A page, including its `fs-` items, has at
+2,059 unique proposed item ids after subjects-02 reconciliation. Every A page, including its `fs-` items, has at
 most 55 items; every B page is a leaf with at most 12 items. Mechanical checks
 found no duplicate proposed id, no collision with an authored item id, no
 duplicate proposed page id, no collision with a live-plan page id, and no
@@ -35,7 +35,7 @@ harvest disposition aimed at a nonexistent item.
 | `DG-13` | Manifolds with boundary, collars/doubles, boundary flows, and orientations |
 | `DG-14` | Top-form/density integration and Stokes in full generality |
 | `DG-15` | De Rham complex, Poincaré lemma, homotopy invariance, and de Rham Mayer–Vietoris |
-| `DG-16` | Real and smooth singular cochains, subdivision/prism, cover-small Mayer–Vietoris, and smoothing |
+| `DG-16` | AT-backed real singular interfaces, cover-small Mayer–Vietoris, smooth singular cochains, and smoothing comparison |
 | `DG-17` | De Rham theorem, compact-support top cohomology, degree, and integration pairing |
 | `DG-18` | Riemannian metrics, length/distance/topology, volume, gradient, divergence, and the Hodge star |
 | `DG-19` | Connections, covariant derivatives, Levi–Civita, parallel transport, and holonomy seam |
@@ -51,7 +51,7 @@ harvest disposition aimed at a nonexistent item.
 | `DG-29` | Killing form/Cartan criteria, Weyl/Whitehead, Chevalley–Eilenberg, Levi, Ado, and Lie I–III |
 | `DG-30` | Jordan–Chevalley, Cartan subalgebras, root spaces, and \(\mathfrak{sl}_2\) triples |
 | `DG-31` | Crystallographic root systems, Weyl/Dynkin theory, Serre relations, and Cartan–Killing classification |
-| `DG-32` | Verma modules and finite-dimensional highest-weight classification/character theory |
+| `DG-32` | Finite-dimensional highest-weight structure and classification, with Verma/character superstructure cited to RL |
 | `DG-33` | Compact Lie groups, Haar, maximal tori/root data, Weyl integration, and Peter–Weyl |
 | `DG-34` | Real forms, Cartan involutions/decomposition, restricted roots, Iwasawa, and Vogan/Satake classification |
 | `DG-35` | Symplectic foundations, compatible structures, Moser, Darboux, and Weinstein normal forms |
@@ -407,8 +407,8 @@ shows the in-track spine that the orchestrator must preserve.
 | DG-13 | `manifolds-with-boundary-collars-and-orientations` | `boundary-and-orientation-examples` | DG-1–DG-6, DG-8–DG-12 |
 | DG-14 | `integration-of-forms-and-the-general-stokes-theorem` | `integration-and-stokes-examples` | DG-2, DG-4, DG-11–DG-13 |
 | DG-15 | `the-de-rham-complex-homotopy-and-mayer-vietoris` | `de-rham-cohomology-computations` | DG-2, DG-7, DG-11, DG-12, DG-14 |
-| DG-16 | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison` | `singular-and-smooth-singular-cochain-examples` | DG-7, DG-13, DG-15 |
-| DG-17 | `the-de-rham-theorem-and-degree` | `de-rham-comparison-and-degree-examples` | DG-6, DG-7, DG-13–DG-16 |
+| DG-16 | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison` | `singular-and-smooth-singular-cochain-examples` | DG-7, DG-13, DG-15; consumes AT-2/AT-3/AT-6 |
+| DG-17 | `the-de-rham-theorem-and-degree` | `de-rham-comparison-and-degree-examples` | DG-6, DG-7, DG-13–DG-16; consumes AT-6/AT-7/AT-8 |
 | DG-18 | `riemannian-metrics-length-distance-and-volume` | `riemannian-metric-and-volume-examples` | DG-2, DG-3, DG-5, DG-11–DG-14 |
 | DG-19 | `connections-levi-civita-and-parallel-transport` | `connections-and-parallel-transport-examples` | DG-2, DG-5, DG-8, DG-9, DG-11–DG-13, DG-18 |
 | DG-20 | `geodesics-the-exponential-map-completeness-and-hopf-rinow` | `geodesics-and-completeness-examples` | DG-8, DG-9, DG-18, DG-19 |
@@ -423,7 +423,7 @@ shows the in-track spine that the orchestrator must preserve.
 | DG-29 | `semisimple-lie-algebras-cohomology-and-levi-theory` | `semisimple-and-levi-theory-examples` | DG-26–DG-28 |
 | DG-30 | `cartan-subalgebras-and-root-space-decompositions` | `cartan-subalgebra-and-root-space-examples` | DG-27–DG-29 |
 | DG-31 | `root-systems-dynkin-diagrams-and-cartan-killing-classification` | `root-system-and-dynkin-diagram-examples` | DG-27, DG-29, DG-30 |
-| DG-32 | `highest-weight-theory-for-complex-semisimple-lie-algebras` | `highest-weight-representation-examples` | DG-27, DG-29–DG-31 |
+| DG-32 | `highest-weight-theory-for-complex-semisimple-lie-algebras` | `highest-weight-representation-examples` | DG-27, DG-29–DG-31; cites RL-2/RL-7 for rehomed material |
 | DG-33 | `compact-lie-groups-maximal-tori-and-peter-weyl-theory` | `compact-lie-group-and-representation-examples` | DG-18, DG-21, DG-25–DG-32 |
 | DG-34 | `real-forms-and-real-semisimple-lie-algebras` | `real-form-and-cartan-decomposition-examples` | DG-25–DG-33 |
 | DG-35 | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory` | `symplectic-foundations-and-normal-form-examples` | DG-2, DG-5, DG-7–DG-9, DG-11–DG-15, DG-18 |
@@ -3929,106 +3929,70 @@ LES substitute is minted here.
 
 **A page:** `singular-cochains-mayer-vietoris-and-smooth-singular-comparison`
 **B page:** `singular-and-smooth-singular-cochain-examples`
-**Requires:** DG-7, DG-13, DG-15; published `free-modules-and-exact-sequences`
+**Requires:** DG-7, DG-13, DG-15; AT-2 `singular-chains-and-singular-homology`,
+AT-3 `relative-homology-excision-and-mayer-vietoris`, and AT-6
+`singular-cohomology-and-coefficient-theorems`; published `free-modules-and-exact-sequences`
 and `homotopy-and-homotopy-equivalence`;
 HA pages `chain-complexes-and-homology`, `chain-homotopy-and-the-homotopy-category`,
 and `long-exact-sequences-in-homology`.
 
-Only the singular machinery needed by the de Rham comparison is built. In
-particular, relative homology, excision as a general axiom, cellular/simplicial
-homology, cup products, and universal coefficients remain algebraic topology.
-Real singular cohomology is defined directly as cohomology of the real singular
-**cochain** complex; it is not defined as
-$\operatorname{Hom}(H_*(-),\mathbb R)$, so no hidden injectivity or choice
-argument enters.
+AT-2/AT-3/AT-6 supply the ordinary singular simplex, chain, boundary, prism,
+subdivision, cover-small, cochain, functoriality, and Mayer--Vietoris apparatus.
+This page specialises those objects to real coefficients, builds the explicit
+two-open cochain interface needed by de Rham, and develops smooth singular
+chains and the smooth/continuous comparison. Relative homology, general
+excision, cellular/simplicial homology, universal coefficients, and the cup
+product remain AT-owned. Real singular cohomology is still treated as the
+cohomology of the real singular **cochain** complex, not silently identified
+with $\operatorname{Hom}(H_*(-),\mathbb R)$.
 
 ### A-page items in dependency order
 
 **Singular simplices, chains, and cochains**
 
-1. `def-standard-topological-simplex-and-its-affine-face-maps` —
-   **definition** `[LN]`:
-   $\Delta^k=\{(t_0,\ldots,t_k):t_i\ge0,\sum t_i=1\}$ and
-   for $k\ge1$, $\delta_i:\Delta^{k-1}\to\Delta^k$ inserts a zero.
-2. `lem-affine-face-maps-satisfy-the-cosimplicial-identities` — **lemma**
-   `[LL]`: $\delta_j\delta_i=\delta_i\delta_{j-1}$ for $i<j$, with the index
-   convention checked wherever the composites are defined ($k\ge2$).
-3. `def-continuous-singular-simplex-and-real-singular-chain-group` —
-   **definition** `[LN]`; $C_k(X;\mathbb R)$ is the free real vector space on
-   continuous maps $\Delta^k\to X$, citing the published free-module
-   construction and its universal property.
-4. `def-singular-boundary-operator` — **definition** `[LN]`:
-   for $k\ge1$,
-   $\partial\sigma=\sum_{i=0}^k(-1)^i\sigma\circ\delta_i$; set
-   $C_k=0$ for $k<0$ and $\partial_0=0$.
-5. `thm-the-singular-boundary-squares-to-zero` — **theorem** `[LA]`; degrees
-   zero and one follow immediately from $\partial_0=0$, and for $k\ge2$
-   pair-cancel the terms using item 2.
-6. `def-real-singular-chain-complex` — **definition** `[LN]`; an instance of
-   HA's chain-complex definition.
-7. `def-induced-singular-chain-map` — **definition** `[LN]`:
-   $f_\#(\sigma)=f\circ\sigma$.
-8. `prop-singular-chains-are-covariantly-functorial` — **proposition** `[LL]`.
-9. `def-real-singular-cochain-complex` — **definition** `[LN]`:
-   $C^k(X;\mathbb R)=\operatorname{Hom}_{\mathbb R}(C_k(X;\mathbb R),
-   \mathbb R)$ and $(\delta\varphi)(c)=\varphi(\partial c)$.
-10. `lem-the-singular-coboundary-squares-to-zero` — **lemma** `[LL]`.
-11. `def-real-singular-cohomology` — **definition** `[LN]`:
-    $H^k_{\mathrm{sing}}(X;\mathbb R)=H^k(C^\bullet(X;\mathbb R))$, citing
-    HA's quotient definition.
-12. `prop-singular-cohomology-is-contravariantly-functorial` —
-    **proposition** `[LA]`; precomposition with $f_\#$ gives $f^*$.
-13. `def-prism-operator-for-a-homotopy` — **definition** `[LN]`; triangulate
-    $\Delta^k\times I$ with the standard signed prisms.
-14. `thm-singular-chain-homotopy-formula` — **theorem** `[LA]`:
-    $g_\#-f_\#=\partial P+P\partial$ for a homotopy from $f$ to $g$.
-15. `cor-singular-cohomology-is-homotopy-invariant` — **corollary** `[LA]`;
-    cite HA's chain-homotopy invariance.
+1. `def-continuous-singular-simplex-and-real-singular-chain-group` —
+   **definition** `[LN]`; specialise AT-2's
+   `def-singular-simplex-and-singular-chain-group-with-coefficients` to
+   $\mathbb R$, so $C_k(X;\mathbb R)$ is the free real vector space on
+   continuous maps $\Delta^k\to X$.
+2. `def-real-singular-chain-complex` — **definition** `[LN]`; the
+   real-coefficient instance of AT-2's singular chain complex and HA's general
+   chain-complex definition.
+3. `prop-singular-chains-are-covariantly-functorial` — **proposition** `[LL]`;
+   the real-coefficient specialisation of AT-2's
+   `prop-singular-chains-and-homology-are-covariantly-functorial`.
+4. `def-real-singular-cochain-complex` — **definition** `[LN]`; specialise
+   AT-6's `def-singular-cochain-complex-with-coefficients` to
+   $C^k(X;\mathbb R)=\operatorname{Hom}_{\mathbb R}(C_k(X;\mathbb R),\mathbb R)$.
+5. `def-real-singular-cohomology` — **definition** `[LN]`:
+   $H^k_{\mathrm{sing}}(X;\mathbb R)=H^k(C^\bullet(X;\mathbb R))$, the
+   real-coefficient specialisation of AT-6 and HA's quotient definition.
+6. `cor-singular-cohomology-is-homotopy-invariant` — **corollary** `[LA]`;
+   apply AT-2's prism/chain-homotopy formula through AT-6's cochain functor.
 
 **Barycentric subdivision and cover-small chains**
 
-16. `def-barycenter-and-affine-cone-on-a-singular-chain` — **definition**
-    `[LN]`; the cone boundary identity is printed.
-17. `def-barycentric-subdivision-chain-operator` — **definition** `[LN]`;
-    recursively cone the subdivided oriented faces to the barycenter.
-18. `thm-barycentric-subdivision-is-a-chain-map` — **theorem** `[LA]`.
-19. `def-barycentric-subdivision-prism-homotopy` — **definition** `[LN]`.
-20. `thm-barycentric-subdivision-is-chain-homotopic-to-the-identity` —
-    **theorem** `[LA]`: $S-1=\partial T+T\partial$.
-21. `lem-mesh-of-iterated-barycentric-subdivision-tends-to-zero` — **lemma**
-    `[LA]`; give the contraction factor $k/(k+1)$ in dimension $k$.
-22. `def-cover-small-singular-chain-subcomplex` — **definition** `[LN]`. For
-    an open cover $\mathcal U$, it is spanned by simplices whose images lie
-    in a single member of $\mathcal U$.
-23. `lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision` —
-    **lemma** `[LA]`; use the Lebesgue number lemma on each compact simplex
-    domain and take a maximum over the finite support.
-24. `thm-cover-small-singular-chains-compute-singular-homology` — **theorem**
-    `[LA]`; subdivision and its homotopy prove the inclusion induces an
-    isomorphism, with injectivity and surjectivity treated separately.
-25. `thm-cover-small-inclusion-is-a-chain-homotopy-equivalence` —
-    **theorem** `[LA]`; build a homotopy inverse recursively on the free simplex
-    basis using least sufficient subdivision depths and a compatible prism.
-    This stronger item, not an appeal to universal coefficients, implies the
-    restriction map on real cochains is a cochain-homotopy equivalence.
+AT-3 supplies the subdivision operator, its prism homotopy, mesh decay,
+eventual cover-smallness for each finite chain, and the cover-small inclusion
+as a chain-homotopy equivalence. Items 7--11 use those exact results; DG does
+not propose a second subdivision or cover-small package.
 
 **Singular Mayer–Vietoris without injective coefficients**
 
-26. `lem-two-open-cover-small-chains-are-the-sum-of-the-two-singular-subcomplexes` —
-    **lemma** `[LL]`: $C_*^{\{U,V\}}(X)=C_*(U)+C_*(V)$.
-27. `thm-short-exact-two-open-cover-small-singular-chain-sequence` —
-    **theorem** `[LA]`:
+7. `thm-short-exact-two-open-cover-small-singular-chain-sequence` —
+   **theorem** `[LA]`; specialise AT-3's cover-small chain construction to
+   the two-open cover and real coefficients:
     \[
       0\to C_*(U\cap V)\xrightarrow{c\mapsto(-c,c)}
       C_*(U)\oplus C_*(V)\xrightarrow{(a,b)\mapsto a+b}
       C_*^{\{U,V\}}(X)\to0.
     \]
-28. `lem-canonical-extension-by-zero-of-a-singular-cochain-on-a-simplex-basis` —
-    **lemma** `[LA]`; extend a function on basis simplices in $U\cap V$ by
-    zero on the other basis simplices of $U$. No injectivity theorem or basis
-    choice is involved because the basis is supplied.
-29. `thm-short-exact-two-open-singular-cochain-mayer-vietoris-sequence` —
-    **theorem** `[LA]`; dualize item 27 and print the actual sequence
+8. `lem-canonical-extension-by-zero-of-a-singular-cochain-on-a-simplex-basis` —
+   **lemma** `[LA]`; extend a function on basis simplices in $U\cap V$ by
+   zero on the other basis simplices of $U$. No injectivity theorem or basis
+   choice is involved because the basis is supplied.
+9. `thm-short-exact-two-open-singular-cochain-mayer-vietoris-sequence` —
+   **theorem** `[LA]`; dualize item 7 and print the actual sequence
     \[
       0\longrightarrow
       \operatorname{Hom}(C_*^{\{U,V\}}(X),\mathbb R)
@@ -4037,47 +4001,48 @@ argument enters.
         \psi|_{U\cap V}-\varphi|_{U\cap V}}
       C^*(U\cap V)\longrightarrow0.
     \]
-    Item 28 proves the only nonformal surjectivity step. The first term is
+    Item 8 proves the only nonformal surjectivity step. The first term is
     **not** replaced at chain level by $C^*(X)$.
-30. `thm-mayer-vietoris-sequence-in-real-singular-cohomology` — **theorem**
-    `[LA]`; item 25 identifies the first term of item 29 with ordinary
-    cochains only up to cochain homotopy; combine that comparison with HA's
-    cohomology LES.
-31. `thm-naturality-of-singular-mayer-vietoris-connectors` — **theorem**
-    `[LA]`; cite HA's connector naturality and display the cover-preserving
-    map hypothesis.
+10. `thm-mayer-vietoris-sequence-in-real-singular-cohomology` — **theorem**
+    `[LA]`; identify this explicit sequence with the real-coefficient instance
+    of AT-6's `thm-mayer-vietoris-sequence-in-singular-cohomology`, using
+    AT-3's `thm-cover-small-inclusion-is-a-chain-homotopy-equivalence`.
+11. `thm-naturality-of-singular-mayer-vietoris-connectors` — **theorem**
+    `[LA]`; specialise AT-6 and HA connector naturality and display the
+    cover-preserving map hypothesis.
 
 **Smooth singular chains and comparison**
 
-32. `def-smooth-singular-simplex` — **definition** `[LN]`; a map
+12. `def-smooth-singular-simplex` — **definition** `[LN]`; a map
     $\sigma:\Delta^k\to M$ extending smoothly to a neighbourhood of
     $\Delta^k$ in its affine span.
-33. `def-smooth-singular-chain-and-cochain-complexes` — **definition** `[LN]`;
+13. `def-smooth-singular-chain-and-cochain-complexes` — **definition** `[LN]`;
     faces of a smooth simplex are smooth, so this is a subcomplex.
-34. `prop-smooth-singular-chains-and-cochains-are-functorial-for-smooth-maps` —
+14. `prop-smooth-singular-chains-and-cochains-are-functorial-for-smooth-maps` —
     **proposition** `[LL]`.
-35. `prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains` —
-    **proposition** `[LA]`; all reparametrizing maps are affine smooth.
-36. `thm-smooth-singular-mayer-vietoris-sequence` — **theorem** `[LA]`; repeat
-    items 22–31 inside the smooth subcomplex, not by assuming the continuous
-    result automatically restricts.
-37. `lem-relative-smoothing-of-a-continuous-simplex-along-its-faces` —
+15. `prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains` —
+    **proposition** `[LA]`; the AT-2/AT-3 reparametrising maps are affine
+    smooth.
+16. `thm-smooth-singular-mayer-vietoris-sequence` — **theorem** `[LA]`; repeat
+    AT-3's cover-small construction and items 7–11 inside the smooth
+    subcomplex, not by assuming the continuous result automatically restricts.
+17. `lem-relative-smoothing-of-a-continuous-simplex-along-its-faces` —
     **lemma** `[LA]`. If all proper faces have compatible prescribed smooth
     approximations, approximate the simplex relative to a collar of its
     boundary and connect it by a relative homotopy.
-38. `thm-smooth-singular-chains-compute-singular-homology` — **theorem** `[LA]`;
-    apply item 37 inductively to the finitely many simplices of a cycle or
+18. `thm-smooth-singular-chains-compute-singular-homology` — **theorem** `[LA]`;
+    apply item 17 inductively to the finitely many simplices of a cycle or
     bounding chain. No simultaneous smoothing of the proper class of all
     singular simplices is selected.
-39. `def-restriction-from-continuous-to-smooth-singular-cochains` —
+19. `def-restriction-from-continuous-to-smooth-singular-cochains` —
     **definition** `[LN]`; precompose a cochain with the inclusion of smooth
     chains.
-40. `prop-smooth-continuous-singular-cohomology-comparison-is-an-isomorphism-on-convex-coordinate-domains` —
+20. `prop-smooth-continuous-singular-cohomology-comparison-is-an-isomorphism-on-convex-coordinate-domains` —
     **proposition** `[LA]`; on any coordinate domain carried to a nonempty
     convex Euclidean open set, the common affine contraction gives explicit
     prism contractions of both complexes. This includes rational boxes and
     all their nonempty finite intersections.
-41. `lem-de-rham-and-singular-cohomology-respect-countable-disjoint-unions` —
+21. `lem-de-rham-and-singular-cohomology-respect-countable-disjoint-unions` —
     **lemma** `[LA]`. For a supplied countable family $(M_i)$, the de Rham,
     smooth-singular, and continuous-singular cochain complexes on
     $\bigsqcup_iM_i$ are the products of the component complexes. Under
@@ -4085,7 +4050,7 @@ argument enters.
     and each comparison map is the product of the component comparison maps.
     The proof identifies kernels componentwise and records exactly where
     representatives of countably many componentwise boundaries are chosen.
-42. `thm-countable-mayer-vietoris-open-set-principle` — **theorem** `[LA]`.
+22. `thm-countable-mayer-vietoris-open-set-principle` — **theorem** `[LA]`.
     A natural transformation between contravariant cohomology functors that
     commutes with two-open MV and disjoint unions is first proved to be an
     isomorphism on every open subset of $\mathbb R^n$: use a fixed countable
@@ -4096,48 +4061,42 @@ argument enters.
     MV argument then proves the transformation is an isomorphism on the
     manifold. No unjustified claim that intersections of coordinate balls are
     convex is made.
-43. `thm-smooth-and-continuous-real-singular-cohomology-agree` — **theorem**
-    `[LA]`; apply item 42 to item 39 using items 30, 36, 40, and 41. No universal
+23. `thm-smooth-and-continuous-real-singular-cohomology-agree` — **theorem**
+    `[LA]`; apply item 22 to item 19 using items 10, 16, 20, and 21. No universal
     coefficient or injective-$\mathbb R$ argument is used. LANDMARK.
 
 ### `fs-` items (A page)
 
 - `fs-the-singular-boundary-of-a-simplex-is-the-unsigned-sum-of-its-faces` —
-  **false statement** `[LL]`; alternating signs make $\partial^2=0$.
+  **false statement** `[LL]`; AT-2's alternating boundary signs make
+  $\partial^2=0$.
 - `fs-a-singular-cochain-is-a-finite-linear-combination-of-singular-simplices` —
   **false statement** `[LL]`; chains have finite support, while a cochain is
   an arbitrary linear functional.
 - `fs-dualizing-every-short-exact-sequence-is-automatically-exact-in-zf` —
-  **false statement** `[LL]`; item 28 supplies the exact extension actually
+  **false statement** `[LL]`; item 8 supplies the exact extension actually
   needed.
 - `fs-one-fixed-number-of-barycentric-subdivisions-makes-every-singular-simplex-cover-small` —
-  **false statement** `[LL]`; the depth depends on the simplex or finite
-  chain.
+  **false statement** `[LL]`; AT-3 proves that the depth depends on the simplex
+  or finite chain.
 - `fs-every-continuous-singular-simplex-is-smooth` — **false statement**
   `[LL]`.
 - `fs-a-homology-isomorphism-of-chain-complexes-automatically-gives-a-cohomology-isomorphism-after-dualizing-without-further-machinery` —
-  **false statement** `[LL]`; item 25 or the local-to-global comparison is
-  required.
+  **false statement** `[LL]`; AT-3's chain-homotopy equivalence or items
+  19–23 are required.
 
 ### B page — `singular-and-smooth-singular-cochain-examples`
 
-1. `ex-boundaries-of-the-standard-one-and-two-simplices` — **example** `[LL]`.
-2. `ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex` —
-   **example** `[LL]`.
-3. `ex-the-prism-operator-for-a-path-homotopy` — **example** `[LA]`.
-4. `ex-first-barycentric-subdivision-of-a-triangle` — **example** `[LL]`.
-5. `ex-a-finite-chain-needing-different-subdivision-depths-on-its-simplices` —
+1. `ex-a-finite-chain-needing-different-subdivision-depths-on-its-simplices` —
    **example** `[AA]`.
-6. `ex-cover-small-chains-for-the-two-arc-cover-of-a-circle` — **example**
-   `[LA]`.
-7. `ex-canonical-zero-extension-of-an-overlap-cochain` — **example** `[LL]`.
-8. `ex-smooth-singular-simplices-in-a-coordinate-ball` — **example** `[LL]`.
-9. `cex-a-continuous-nowhere-differentiable-singular-one-simplex` —
+2. `ex-canonical-zero-extension-of-an-overlap-cochain` — **example** `[LL]`.
+3. `ex-smooth-singular-simplices-in-a-coordinate-ball` — **example** `[LL]`.
+4. `cex-a-continuous-nowhere-differentiable-singular-one-simplex` —
    **counterexample** `[LL]`.
-10. `ex-relative-smoothing-fixes-the-endpoints-of-a-path` — **example** `[LA]`.
-11. `ex-singular-cohomology-of-a-point-from-the-cochain-complex` —
+5. `ex-relative-smoothing-fixes-the-endpoints-of-a-path` — **example** `[LA]`.
+6. `ex-singular-cohomology-of-a-point-from-the-cochain-complex` —
     **example** `[LL]`.
-12. `cex-hom-of-homology-is-not-used-as-the-definition-of-singular-cohomology` —
+7. `cex-hom-of-homology-is-not-used-as-the-definition-of-singular-cohomology` —
     **counterexample/reminder** `[LN]`; it records the missing universal-
     coefficient/injectivity step, without asserting a false finite-dimensional
     identification.
@@ -4156,17 +4115,18 @@ argument enters.
   paragraph in the proof of Thm. 6.13.3 (p. 84).** The recalled theorem of
   small chains explicitly states that
   $C_*^{\mathcal U}(X)\hookrightarrow C_*(X)$ is a chain-homotopy
-  equivalence; this is the exact source for item 25. The scaffold supplies
-  the recursive least-subdivision-depth and compatible-prism construction
-  rather than weakening the statement to a homology isomorphism.
+  equivalence; AT-3 owns that exact theorem and its recursive
+  least-subdivision-depth/compatible-prism construction. DG cites it rather
+  than weakening the statement to a homology isomorphism.
 - **Lee, *Introduction to Smooth Manifolds*, 2nd ed., Ch. 18 “The de Rham
   Theorem,” all four substantive headings, especially Thms. 18.4/18.6
   (singular Mayer–Vietoris), 18.7 (smooth comparison), 18.12 (chain Stokes),
-  Prop. 18.13, and Thm. 18.14.** Items 1–43 harvest the singular and smooth-
-  singular material; chain integration and the final comparison are disposed
-  to DG-17. Lee's shortcut defining real cohomology as
+  Prop. 18.13, and Thm. 18.14.** Items 1–23 retain the real-coefficient
+  specialisation and smooth-singular comparison material not owned by AT;
+  chain integration and the final comparison are disposed to DG-17. Lee's
+  shortcut defining real cohomology as
   $\operatorname{Hom}(H_p,\mathbb R)$ and invoking injectivity is explicitly
-  rejected in favour of items 9–11 and 28–30.
+  rejected in favour of AT-6 and items 4–10.
 - **Merry, *Differential Geometry*, Lecture 25 “Smooth Singular Cubes” and
   Lecture 27 after Cor. 27.10.** The cubical construction is an alternative
   `out-of-scope` route because it would require general corners; its comparison
@@ -4181,13 +4141,12 @@ argument enters.
 
 ### Proof strategy and traps
 
-Subdivision is a chain construction before it is a mesh argument. The cone
-boundary identity proves $S\partial=\partial S$; a separately defined prism
-proves $S\simeq1$; only then does the Lebesgue-number estimate make finite
-chains small. Item 25 records the stronger chain-level comparison needed to
-dualize safely. In the two-open sequence, surjectivity after dualizing is
-proved on the **supplied singular-simplex basis** by extension by zero, so the
-sentence “$\mathbb R$ is injective” and its set-theoretic cost never appear.
+AT-2/AT-3 supply subdivision as a chain construction, its prism homotopy, mesh
+decay, eventual cover-smallness, and the resulting chain-homotopy equivalence.
+DG does not reprove those facts. In the two-open real-cochain presentation,
+surjectivity after dualising is proved on the **supplied singular-simplex
+basis** by item 8's extension by zero, so the sentence “$\mathbb R$ is
+injective” and its set-theoretic cost never appear.
 
 Relative smoothing proceeds dimension by dimension and only over the finite
 support of a particular chain. Smooth versus continuous **cohomology** is then
@@ -4195,20 +4154,21 @@ proved by the natural restriction map, local contractions, both MV sequences,
 and the countable open-set principle—not by turning the finite smoothing
 argument into a global choice of one smoothing for every simplex.
 
-**Well-definedness discharged:** face signs and free-basis extension (items
-1–12), prism/subdivision chain identities (13–25), overlap bases and exact
-cochain sequence (26–31), neighbourhood extension in the definition of a
-smooth simplex and compatibility on faces (32–38), and the natural cohomology
-    comparison and countable-union globalization (39–43).
-**Choice:** finite chains, canonical subdivision, prisms, and basiswise zero
-extension are ZF. Relative smoothing inherits DG-7's smooth approximation
-boundary but makes no global selection. Item 41 and the countable open-set
+**Well-definedness discharged:** ordinary face, boundary, prism, subdivision,
+cover-small, and cochain facts are cited to AT-2/AT-3/AT-6; real-coefficient
+specialisation and basis extension are items 1–11; neighbourhood extension in
+the definition of a smooth simplex and compatibility on faces are items 12–18;
+the natural cohomology comparison and countable-union globalization are items
+19–23.
+**Choice:** AT's choice ledger governs ordinary singular chains. Basiswise zero
+extension here is ZF. Relative smoothing inherits DG-7's smooth approximation
+boundary but makes no global selection. Item 21 and the countable open-set
 principle need at most the same $\mathrm{AC}_\omega$ already charged by DG-2;
 the charge is the simultaneous choice of representatives for countably many
 componentwise boundaries, not full AC or an injective-module argument. HA's
 own ledger is cited unchanged.
-**Unresolved seam:** HA-1/HA-2/HA-4 must be authored first. No other algebraic-
-topology page is assumed.
+**Unresolved seam:** HA-1/HA-2/HA-4 and the named AT-2/AT-3/AT-6 interfaces
+must be authored first; no unnamed algebraic-topology result is assumed.
 
 ---
 
@@ -4216,18 +4176,23 @@ topology page is assumed.
 
 **A page:** `the-de-rham-theorem-and-degree`
 **B page:** `de-rham-comparison-and-degree-examples`
-**Requires:** DG-6, DG-7, and DG-13–DG-16; HA pages
+**Requires:** DG-6, DG-7, and DG-13–DG-16; AT-6
+`singular-cohomology-and-coefficient-theorems`, AT-7
+`cup-cap-cross-products-and-cohomology-rings`, and AT-8
+`orientations-poincare-lefschetz-and-alexander-duality`; HA pages
 `chain-complexes-and-homology`, `chain-homotopy-and-the-homotopy-category`,
 and `long-exact-sequences-in-homology`; published
 `free-modules-and-exact-sequences` (including
 `thm-five-lemma-for-modules`).
 
-The landmark comparison is a natural isomorphism of real vector spaces for
-every smooth manifold. A ring comparison is not claimed: it requires a
-separately constructed singular cup product and its compatibility with wedge,
-which belongs to algebraic topology. The second half develops only the
-compact-support top-degree result needed to make degree honest; it is not a
-surrogate for Poincaré duality.
+AT-6/AT-7 supply singular cohomology, the cup product, and its graded-
+commutative ring structure; DG proves that de Rham integration identifies
+wedge with that cup product, so the landmark comparison is a natural graded-
+algebra isomorphism. AT-6 supplies the Kronecker pairing, while AT-8 supplies
+fundamental classes and homological degree for closed oriented manifolds; DG
+proves agreement with the regular-value/compact-support definition and retains
+the proper noncompact extension. The second half is not a surrogate for
+Poincaré duality.
 
 ### A-page items in dependency order
 
@@ -4282,21 +4247,26 @@ surrogate for Poincaré duality.
     sequences.
 14. `thm-de-rham-theorem-for-smooth-singular-cohomology` — **theorem** `[LA]`;
     the two-stage Euclidean-open-set/manifold Mayer–Vietoris principle from
-    DG-16 item 42, together with items 10–13 above, gives
+    DG-16 item 22, together with items 10–13 above, gives
     $H^k_{\mathrm{dR}}(M)\cong H^k_{\mathrm{sing},\infty}(M;\mathbb R)$.
 15. `thm-de-rham-theorem` — **theorem** `[LA]`. Compose item 14 with DG-16's
-    natural smooth/continuous singular comparison:
+    natural smooth/continuous singular comparison and prove, using AT-7's
+    `def-singular-cohomology-ring`, that simplex integration sends wedge to
+    cup up to the standard natural cochain homotopy. Thus
     \[
        H^k_{\mathrm{dR}}(M)\;\cong\;
        H^k_{\mathrm{sing}}(M;\mathbb R)
     \]
-    naturally in every smooth manifold $M$. LANDMARK.
+    naturally in every smooth manifold $M$ as a graded-algebra isomorphism;
+    AT-7's `thm-singular-cohomology-is-graded-commutative` then agrees with
+    DG-11's wedge signs. LANDMARK.
 16. `cor-de-rham-cohomology-depends-only-on-the-underlying-homotopy-type` —
     **corollary** `[LL]`; agrees with DG-15's direct homotopy proof.
 17. `rem-ring-form-of-the-de-rham-theorem-needs-the-singular-cup-product` —
-    **remark** `[LN]`; precise deferred statement:
-    $I([\alpha\wedge\beta])=I[\alpha]\smile I[\beta]$ after the cup product
-    and cochain comparison are built. Compactness is not a hypothesis.
+    **remark** `[LN]`; the former dependency is now discharged by AT-7:
+    item 15 proves
+    $I([\alpha\wedge\beta])=I[\alpha]\smile I[\beta]$ using its exact cup-ring
+    interface. Compactness is not a hypothesis.
 
 **Compact-support top cohomology**
 
@@ -4331,7 +4301,8 @@ surrogate for Poincaré duality.
     $n$-manifolds,
     the scalar $\deg F$ is determined by
     $\int_MF^*\omega=(\deg F)\int_N\omega$ for all
-    $\omega\in\Omega_c^n(N)$.
+    $\omega\in\Omega_c^n(N)$. For closed manifolds, the comparison target is
+    AT-8's `def-degree-of-a-map-between-oriented-closed-manifolds`.
 27. `lem-degree-is-well-defined-and-independent-of-the-normalized-top-form` —
     **lemma** `[LA]`; use the one-dimensionality in item 24.
 28. `def-local-orientation-sign-of-a-regular-preimage` — **definition** `[LN]`:
@@ -4342,9 +4313,16 @@ surrogate for Poincaré duality.
 29. `thm-regular-value-formula-for-degree` — **theorem** `[LA]`. If $y$ is a
     regular value of the proper map $F$, then $F^{-1}(y)$ is finite and
     $\deg F=\sum_{p\in F^{-1}(y)}\operatorname{sgn}(dF_p)\in\mathbb Z$.
+    When source and target are closed, evaluate item 15 against AT-8's
+    `def-fundamental-class-of-a-compact-oriented-manifold` through AT-6's
+    `def-kronecker-evaluation-pairing` to prove that this equals AT-8's
+    homological degree.
 30. `cor-degree-is-an-integer-and-independent-of-the-regular-value` —
     **corollary** `[LL]`.
-31. `prop-degree-is-multiplicative-under-composition` — **proposition** `[LA]`.
+31. `prop-degree-is-multiplicative-under-composition` — **proposition** `[LA]`;
+    on closed manifolds it agrees with AT-8's
+    `prop-manifold-degree-is-functorial-and-detected-by-top-cohomology`, and
+    the compact-support pullback proof supplies the proper-map extension.
 32. `prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism` —
     **proposition** `[LL]`: $+1$ or $-1$.
 33. `thm-degree-is-invariant-under-proper-smooth-homotopy` — **theorem**
@@ -4367,7 +4345,9 @@ surrogate for Poincaré duality.
 - `fs-naturality-alone-implies-that-two-comparison-maps-commute-with-mayer-vietoris-connectors` —
   **false statement** `[LL]`; connector compatibility is item 12.
 - `fs-the-de-rham-theorem-as-built-here-is-an-isomorphism-of-rings` — **false
-  statement** `[LL]`; singular cup product has not been constructed.
+  statement** `[LL]`: the vector-space comparison alone is not automatically
+  a ring isomorphism; item 15 must consume AT-7 and prove the wedge/cup
+  compatibility homotopy.
 - `fs-compactly-supported-cohomology-is-contravariant-for-every-smooth-map` —
   **false statement** `[LL]`; pullback needs properness.
 - `fs-the-degree-of-a-proper-map-is-the-number-of-points-in-a-regular-fibre` —
@@ -4421,8 +4401,8 @@ surrogate for Poincaré duality.
   5.3.10 and Cor. 5.3.12.** Independent textbook backing for items 18–25.
 - **Hatcher, *Algebraic Topology*, §3.1 “Cohomology of Spaces” and
   “Mayer–Vietoris Sequences.”** Control for the singular comparison target.
-  Cup products later in Ch. 3 are specifically deferred to algebraic topology
-  and are not silently imported.
+  Cup products later in Ch. 3 are consumed through AT-7 rather than silently
+  imported or reconstructed here.
 
 ### Proof strategy and traps
 
@@ -4431,6 +4411,9 @@ orientation computation supplies the alternating boundary signs, so general
 corners are unnecessary. Chain Stokes makes integration a cochain map; quotient
 well-definedness then comes from HA. The global comparison is a five-lemma
 argument only after the connector square has been checked at representatives.
+The ring refinement uses AT-7's Alexander--Whitney cup product and proves the
+standard cochain homotopy comparing cup after integration with integration of
+wedge; graded multiplicativity is not inferred from vector-space naturality.
 
 For compact-support top cohomology, the Euclidean zero-integral primitive is
 the hard local lemma. A compact support meets finitely many coordinate balls;
@@ -4439,10 +4422,13 @@ chain of balls, reducing the global kernel to the Euclidean lemma. Degree is
 then a scalar on a one-dimensional space. To prove its regular-value formula,
 choose a compactly supported form in a regular-value neighbourhood, use the
 inverse theorem on each of the finitely many sheets, and apply manifold change
-of variables with the local orientation sign.
+of variables with the local orientation sign. On closed manifolds the de Rham
+pairing with AT-8's fundamental class identifies this integer with homological
+degree, so the two definitions and their composition laws agree.
 
 **Well-definedness discharged:** simplex orientation and coordinate choice
-(items 1–5), representatives/naturality/connectors (6–17), compact support
+(items 1–5), representatives/naturality/connectors and AT-7 cup compatibility
+(6–17), compact support
 under proper pullback and primitive support control (18–25), and independence
 of forms and regular values in degree (26–36).
 **Choice:** simplex integration and finite five-lemma diagrams are ZF. The
@@ -4450,9 +4436,10 @@ global comparison inherits DG-16's $\mathrm{AC}_\omega$ open-set boundary.
 Compact-support globalization uses finite covers of each compact support plus
 the supplied connected manifold and adds no choice beyond DG-2. Degree adds
 none. No full AC/injective-coefficient route is used.
-**Unresolved seam:** HA-1/HA-2/HA-4 remain build prerequisites. The graded-ring
-comparison, Poincaré duality, Thom isomorphism, Künneth, and general excision
-are precise algebraic-topology deferrals.
+**Unresolved seam:** HA-1/HA-2/HA-4 and the named AT-6/AT-7/AT-8 interfaces
+remain build prerequisites. Poincaré duality beyond the consumed orientation/
+fundamental-class interface, Thom isomorphism, Künneth, and general excision
+remain precise algebraic-topology deferrals.
 
 ---
 
@@ -7630,13 +7617,17 @@ DG-34 handles real forms and nonreduced restricted systems.
 
 **A page:** `highest-weight-theory-for-complex-semisimple-lie-algebras`
 **B page:** `highest-weight-representation-examples`
-**Requires:** DG-27, DG-29–DG-31.
+**Requires:** DG-27, DG-29–DG-31. RL-2 and RL-7 are declared ownership
+citations for the rehomed Verma-module and character-formula superstructure;
+they are not load-bearing inputs to DG's finite-dimensional classification.
 
 The pair fixes a Cartan subalgebra and a positive root system throughout.
 Dominance is therefore relative to a stated base of simple roots, though the
-classification is independent up to Weyl conjugacy. It covers finite-
-dimensional representation theory; category $\mathcal O$, BGG resolutions,
-and general infinite-dimensional structure are explicit deferrals.
+classification is independent up to Weyl conjugacy. It covers the finite-
+dimensional structure and classification boundary. RL-2 owns Verma modules and
+simple quotients, while RL-7 owns formal characters and the Weyl/Kostant
+formulas; DG cites those pages without making its direct finite-dimensional
+classification depend on them.
 
 ### A-page items in dependency order
 
@@ -7671,109 +7662,67 @@ and general infinite-dimensional structure are explicit deferrals.
 10. `prop-the-highest-weight-space-of-an-irreducible-module-is-one-dimensional` —
     **proposition** `[LA]`.
 
-**Verma modules and simple quotients**
-
-11. `def-one-dimensional-borel-module-of-weight-lambda` — **definition**
-    `[LN]`; $\mathfrak n^+$ acts by zero and $h$ by $\lambda(h)$.
-12. `def-verma-module` — **definition** `[LN]`:
-    $M(\lambda)=U(\mathfrak g)\otimes_{U(\mathfrak b)}\mathbb C_\lambda$.
-13. `thm-universal-property-of-verma-modules` — **theorem** `[LA]`; a vector
-    satisfying the highest-weight relations determines a unique module map
-    from $M(\lambda)$.
-14. `thm-pbw-model-of-a-verma-module` — **theorem** `[LA]`; multiplication
-    identifies $M(\lambda)$ as a vector space with
-    $U(\mathfrak n^-)$, and its weight spaces are finite-dimensional.
-15. `prop-weights-of-a-verma-module-lie-below-lambda` — **proposition** `[LL]`;
-    its highest-weight space is one-dimensional.
-16. `lem-sum-of-all-proper-submodules-of-a-verma-module-is-proper` — **lemma**
-    `[LA]`; no proper submodule meets the highest-weight line.
-17. `thm-verma-module-has-a-unique-simple-quotient` — **theorem** `[LA]`;
-    denote it $L(\lambda)$.
-18. `thm-simple-highest-weight-modules-are-classified-by-their-highest-weight` —
-    **theorem** `[LA]`; $L(\lambda)\cong L(\mu)$ iff $\lambda=\mu$ for the
-    fixed positive system.
-
 **Dominant weights and finite-dimensional classification**
 
-19. `def-integral-dominant-and-strictly-dominant-weights` — **definition**
+11. `def-integral-dominant-and-strictly-dominant-weights` — **definition**
     `[LN]`; $\lambda$ is dominant integral iff
     $\langle\lambda,\alpha_i^\vee\rangle\in\mathbb Z_{\ge0}$ for every simple
     root.
-20. `prop-dominant-integral-weights-are-nonnegative-combinations-of-fundamental-weights` —
+12. `prop-dominant-integral-weights-are-nonnegative-combinations-of-fundamental-weights` —
     **proposition** `[LL]`.
-21. `lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral` —
+13. `lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral` —
     **lemma** `[LA]`; restrict to every simple-root $\mathfrak{sl}_2$.
-22. `lem-integrability-relations-for-a-dominant-highest-weight` — **lemma**
+14. `lem-integrability-relations-for-a-dominant-highest-weight` — **lemma**
     `[LA]`:
     $f_i^{\langle\lambda,\alpha_i^\vee\rangle+1}v_\lambda=0$ in any finite-
     dimensional quotient.
-23. `thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda` —
-    **theorem** `[LA]`; impose the simple-root integrability relations and
-    use Weyl stability/finite convex hull of weights to prove the quotient is
-    finite-dimensional.
-24. `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations` —
-    **theorem** `[LA]`. The $L(\lambda)$ with dominant integral $\lambda$ are
-    exactly the finite-dimensional irreducible $\mathfrak g$-modules, uniquely.
-    LANDMARK.
-25. `cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules` —
+15. `thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda` —
+    **theorem** `[LA]`; construct the cyclic module with the highest-weight and
+    simple-root integrability relations directly, then use the finite
+    Weyl-stable convex hull of weights to prove finite-dimensionality and take
+    its unique finite-dimensional simple constituent with the supplied highest
+    line. No Verma-module theorem is used.
+16. `thm-simple-highest-weight-modules-are-classified-by-their-highest-weight` —
+    **theorem** `[LA]`; two finite-dimensional simple highest-weight modules
+    for the fixed positive system are isomorphic iff their highest weights
+    agree. Prove this directly from the cyclic construction in item 15 and the
+    unique highest-weight line; RL-2 owns the stronger Verma-module universal
+    statement.
+17. `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations` —
+    **theorem** `[LA]`. The finite-dimensional simple modules $V(\lambda)$
+    with dominant integral $\lambda$ are exactly the irreducible
+    $\mathfrak g$-modules, uniquely. LANDMARK.
+18. `cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules` —
     **corollary** `[LL]`; cite Weyl complete reducibility.
-26. `prop-highest-weight-of-the-dual-representation` — **proposition** `[LA]`:
+19. `prop-highest-weight-of-the-dual-representation` — **proposition** `[LA]`:
     $-w_0\lambda$.
-27. `prop-top-highest-weight-summand-in-a-tensor-product` — **proposition**
+20. `prop-top-highest-weight-summand-in-a-tensor-product` — **proposition**
     `[LA]`; for dominant integral weights \(\lambda,\mu\),
     \(v_\lambda\otimes v_\mu\) generates a unique summand
-    \(L(\lambda+\mu)\) in \(L(\lambda)\otimes L(\mu)\), occurring with
+    \(V(\lambda+\mu)\) in \(V(\lambda)\otimes V(\mu)\), occurring with
     multiplicity one; every other irreducible summand has strictly lower
     highest weight.
-28. `prop-the-adjoint-representation-has-highest-weight-the-highest-root` —
+21. `prop-the-adjoint-representation-has-highest-weight-the-highest-root` —
     **proposition** `[LL]` for simple $\mathfrak g$.
 
-**Characters and Weyl formulas**
+**Finite-dimensional boundary data**
 
-29. `def-formal-character-of-a-finite-dimensional-weight-module` —
-    **definition** `[LN]`:
-    $\operatorname{ch}V=\sum_\mu(\dim V_\mu)e^\mu$ in the finite-support
-    group algebra of the weight lattice.
-30. `prop-formal-characters-are-additive-and-multiplicative` — **proposition**
-    `[LA]` under direct sums and tensor products.
-31. `prop-characters-of-finite-dimensional-modules-are-weyl-invariant` —
-    **proposition** `[LA]`; simple-root $\mathfrak{sl}_2$ strings are reflected.
-32. `def-weyl-vector-rho` — **definition** `[LN]`:
+22. `def-weyl-vector-rho` — **definition** `[LN]`:
     $\rho=\frac12\sum_{\alpha>0}\alpha=\sum_i\omega_i$.
-33. `thm-weyl-denominator-identity` — **theorem** `[LA]`:
-    $\sum_{w\in W}\det(w)e^{w\rho}
-    =e^\rho\prod_{\alpha>0}(1-e^{-\alpha})$.
-34. `thm-weyl-character-formula` — **theorem** `[LA]`:
-    \[
-    \operatorname{ch}L(\lambda)=
-    \frac{\sum_{w\in W}\det(w)e^{w(\lambda+\rho)}}
-         {\sum_{w\in W}\det(w)e^{w\rho}}
-    \]
-    for dominant integral $\lambda$, interpreted as the unique finite formal
-    character after cancellation. LANDMARK.
-35. `thm-weyl-dimension-formula` — **theorem** `[LA]`:
-    \[
-      \dim L(\lambda)=
-      \prod_{\alpha>0}
-      \frac{\langle\lambda+\rho,\alpha^\vee\rangle}
-           {\langle\rho,\alpha^\vee\rangle}.
-    \]
-36. `prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one` —
+23. `prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one` —
     **proposition** `[LA]`.
-37. `thm-kostant-weight-multiplicity-formula` — **theorem** `[LA]`; define the
-    partition function $P$ and state
-    $m_\lambda(\mu)=\sum_{w\in W}\det(w)
-    P(w(\lambda+\rho)-(\mu+\rho))$, deriving it from item 34.
-38. `rem-harish-chandra-isomorphism-and-category-o` — **remark** `[LN]`; central
-    characters, the Harish–Chandra isomorphism, linkage, category $\mathcal O$,
-    and BGG resolutions belong to an infinite-dimensional representation-
-    theory sequel and are not used.
+24. `rem-harish-chandra-isomorphism-and-category-o` — **remark** `[LN]`; RL-1
+    through RL-7 own central characters, the Harish--Chandra isomorphism,
+    linkage, category $\mathcal O$, BGG resolutions, Verma modules, and the
+    Weyl/Kostant character formulas. DG's finite-dimensional classification
+    cites that superstructure only for orientation and does not duplicate it.
 
 ### `fs-` items (A page)
 
 - `fs-every-weight-vector-is-a-highest-weight-vector` — **false statement**
   `[LL]`; positive root spaces must annihilate it.
-- `fs-every-verma-module-is-finite-dimensional` — **false statement** `[LL]`.
+- `fs-every-verma-module-is-finite-dimensional` — **false statement** `[LL]`;
+  retained as an RL-2 citation-bound warning, not a DG construction.
 - `fs-every-highest-weight-lambda-gives-a-finite-dimensional-simple-module` —
   **false statement** `[LL]`; $\lambda$ must be dominant integral.
 - `fs-dominance-is-defined-without-choosing-positive-roots` — **false
@@ -7781,30 +7730,35 @@ and general infinite-dimensional structure are explicit deferrals.
 - `fs-the-highest-weight-of-a-tensor-product-determines-its-complete-irreducible-decomposition` —
   **false statement** `[LL]`.
 - `fs-the-weyl-character-formula-is-an-ordinary-quotient-of-functions-before-formal-cancellation-is-justified` —
-  **false statement** `[LL]`; it lives in the localized formal group algebra
-  before the theorem proves a finite character.
+  **false statement** `[LL]`; RL-7 works in the localized formal group algebra
+  before proving cancellation to a finite character.
 
 ### B page — `highest-weight-representation-examples`
 
 1. `ex-all-finite-dimensional-irreducible-sl-two-modules` — **example** `[LA]`;
    basis, weights, and raising/lowering coefficients.
-2. `ex-verma-modules-for-sl-two` — **example** `[LA]`; reducibility exactly at
-   nonnegative integral highest weights.
+2. `ex-verma-modules-for-sl-two` — **example** `[LA]`; a citation-bound RL-2
+   orientation example recording reducibility exactly at nonnegative integral
+   highest weights; it is non-load-bearing for DG.
 3. `ex-standard-and-dual-representations-of-sl-n-by-highest-weights` —
    **example** `[LA]`.
 4. `ex-symmetric-powers-as-highest-weight-modules` — **example** `[LA]`.
 5. `ex-exterior-powers-and-fundamental-weights-of-sl-n` — **example** `[LA]`.
 6. `ex-the-adjoint-representation-and-the-highest-root` — **example** `[LL]`.
-7. `ex-weyl-character-and-dimension-formulas-for-sl-two` — **example** `[LA]`.
+7. `ex-weyl-character-and-dimension-formulas-for-sl-two` — **example** `[LA]`;
+   cite RL-7 for the formulas and retain only the finite rank-one check here.
 8. `ex-the-eight-dimensional-adjoint-representation-of-sl-three` —
    **example** `[LA]`.
 9. `ex-a-tensor-product-decomposition-for-sl-two` — **example** `[LA]`;
-   Clebsch–Gordan derived from characters.
+   Clebsch–Gordan checked directly from $\mathfrak{sl}_2$ strings, with RL-7's
+   character derivation cited as an alternative.
 10. `cex-a-nondominant-integral-verma-quotient-that-is-infinite-dimensional` —
-    **counterexample** `[LL]`.
+    **counterexample** `[LL]`; retained as a non-load-bearing RL-2 ownership
+    pointer.
 11. `cex-the-full-weight-lattice-does-not-integrate-to-every-central-quotient-group` —
     **counterexample** `[LL]`; preview $SU(2)$ versus $SO(3)$.
-12. `ex-kostant-multiplicity-in-type-a-two` — **example** `[LA]`.
+12. `ex-kostant-multiplicity-in-type-a-two` — **example** `[LA]`; cite RL-7
+    for Kostant's formula and keep the finite arithmetic check as a DG leaf.
 
 ### Sources and exact locators
 
@@ -7812,37 +7766,34 @@ and general infinite-dimensional structure are explicit deferrals.
   “Theorem of the Highest Weight,” 3 “Verma Modules,” 4 “Complete
   Reducibility,” and 6 “Weyl Character Formula.”** Primary textbook route.
   Named controls include Thms. 5.5 and 5.29. Section 5 “Harish–Chandra
-  Isomorphism” is `deferred` for the central-character reason in item 38;
+  Isomorphism” is rehomed to RL for the central-character reason in item 24;
   §7 parabolic subalgebras is inline only as a B-page orientation remark.
 - **Kirillov, *Introduction to Lie Groups and Lie Algebras*, Ch. IX
   §§9.1–9.7, especially Thms. 9.17 and 9.19.** Independent full lecture-text
-  treatment of highest weights and Weyl character/dimension formulas.
+  treatment of highest weights; its Weyl character/dimension formulas are
+  routed to RL-7.
 - **Etingof, Lie group/algebra notes, Lecture 24 §§24.1–24.3 and Lecture 25
   §§25.1 “Characters,” 25.3 “Weyl character formula,” and 25.4 “Proof of the
-  Weyl character formula.”** Independent proof source. §25.2 “Category O” is
-  deferred as in item 38.
+  Weyl character formula.”** Independent source routed to RL-7 for character
+  formulas. §25.2 “Category O” is routed to RL as in item 24.
 - **Conrad–Landesman, *Compact Lie Groups*, §§27–28, especially §28
   “Examples and Fundamental Representations,” Thms. 28.2–28.4.** Independent
   compact-form control; the lattice integration issue is disposed to DG-33.
 
 ### Proof strategy and traps
 
-Triangular decomposition plus PBW gives the Verma module and its universal
-property. A proper submodule misses the highest line, so their sum remains
-proper and the simple quotient is unique. Restriction to every root
-$\mathfrak{sl}_2$ proves dominance is necessary; the integrability relations
-and finite Weyl-stable weight region prove it sufficient.
-
-For Weyl's formula, form the alternating numerator after the $\rho$ shift,
-prove the denominator identity, and identify the highest term and recurrence
-from the Casimir/character argument. Taking the regular limit at the identity
-gives the dimension product. The formal quotient is never treated as an
-ordinary function before cancellation.
+Restriction to every root $\mathfrak{sl}_2$ proves dominance is necessary.
+For sufficiency, impose the simple-root nilpotence relations on a cyclic
+highest-weight generator and use PBW ordering plus the finite Weyl-stable
+weight region to obtain a finite-dimensional module directly; complete
+reducibility and the one-dimensional highest line give the unique simple
+module. This closes DG's classification without consuming RL's Verma-module
+construction. RL-2 and RL-7 supply the cited infinite-dimensional and
+character-formula superstructure.
 
 **Well-definedness discharged:** chosen Cartan/positive system and weight
-spaces (items 1–10), induced-module quotient and unique maximal submodule
-(11–18), integrality and finite-dimensionality (19–28), and formal group-
-algebra denominators/limits (29–37).
+spaces (items 1–10), direct finite-dimensional uniqueness and integrability
+(11–21), and the retained finite-dimensional boundary data (22–24).
 **Choice:** finite root/weight and finite-dimensional decomposition arguments
 are ZF.
 **Forward reference:** DG-33 states exactly which dominant weights integrate
@@ -9247,10 +9198,10 @@ is not a discharge.
     before “highest” or “dominant” is used.
 36. **Classification and weights.** Diagram isomorphism is separated from
     algebra isomorphism until Serre existence and uniqueness are proved.
-    Low-rank coincidences are normalized. Verma-module quotients and maximal
-    proper submodules are well defined; finite-dimensional irreducibles are
-    classified by dominant integral weights relative to the chosen root
-    datum, not merely the root system of a global group.
+    Low-rank coincidences are normalized. RL-2 owns Verma-module quotients and
+    maximal proper submodules; DG classifies finite-dimensional irreducibles
+    directly by dominant integral weights relative to the chosen root datum,
+    not merely the root system of a global group.
 37. **Compact and real forms.** Haar measure is normalized before averaging;
     Peter–Weyl closures are in the stated topology. The lattice
     \(Q\subseteq X^*(T)\subseteq P\) records central isogeny. A real form is the
@@ -9307,7 +9258,7 @@ dimensional algebra/calculus inputs.
 | DG-8 | ZF | Picard iteration is a specified sequence in a specified complete sup-norm space; the published constructive Banach fixed-point theorem is cited. |
 | DG-9–DG-10 | ZF locally; DG-10 inherits DG-2's \(\mathrm{AC}_\omega\)-sufficient bound for the global countable-atlas step | Maximal solutions are unions of compatible local solutions, not one chosen solution per point. Local Frobenius composes finitely many canonical flows. Proving that every maximal leaf has a second-countable plaque atlas selects and countably organizes charts along a countable ambient basis, so the global leaf theorem does not claim a stronger ZF bound. Compactly extending a frame has the same inheritance. |
 | DG-14–DG-15 | inherits DG-2 for global partitions; ZF for each chart, Stokes reduction, homotopy operator, and finite Mayer–Vietoris diagram | A compact support meets finitely many members of a supplied locally finite refinement. Generic cohomological exactness inherits HA's ledger. |
-| DG-16 | ZF for each finite chain, subdivision/prism calculation, and two-open Mayer–Vietoris argument; \(\mathrm{AC}_\omega\) is sufficient for countable open-set globalization | Every chain is finite and subdivision is canonical. The global comparison over a countable manifold basis inherits DG-2's countable organization, and relative smoothing inherits DG-7. No basis-wide smoothing and no injectivity/Zorn argument is used. |
+| DG-16 | inherits AT-2/AT-3/AT-6 for ordinary singular chains, subdivision/prism, and cohomology; its real two-open presentation is ZF, and \(\mathrm{AC}_\omega\) is sufficient for countable open-set globalization | AT owns the canonical finite-chain construction. The DG global comparison over a countable manifold basis inherits DG-2's countable organization, and relative smoothing inherits DG-7. No basis-wide smoothing and no injectivity/Zorn argument is used. |
 | DG-17 | inherits DG-7 for smooth approximation and DG-2 for globalization; finite five-lemma steps are ZF | The comparison smooths one finite chain relative to its faces. It does not choose a smoothing of every singular simplex simultaneously. |
 | DG-18–DG-19 | metric/connection formulas ZF once the objects are supplied; existence inherits DG-2 | Convex patching of local metrics and bundle connections uses a smooth partition. Parallel transport along one curve is constructive ODE theory. |
 | DG-20 | ZF relative to the supplied metric under the selected compact-unit-sphere proof | The scaffold explicitly avoids the unused proof that selects one \(1/n\)-minimizer for each \(n\), which would require \(\mathrm{AC}_\omega\). Local geodesic and normal-neighborhood results are likewise ZF. |
@@ -9776,24 +9727,24 @@ Mayer–Vietoris sequence (pp. 197–204).
 
 - “Singular Homology” →
   `included(def-continuous-singular-simplex-and-real-singular-chain-group)`,
-  `included(def-singular-boundary-operator)`, and
-  `included(thm-the-singular-boundary-squares-to-zero)`.
+  with boundary and boundary-squared-zero `already-planned(AT-2)`.
 - “Homotopy Invariance,” named Thm. 2.10 and Prop. 2.12 →
-  `included(def-prism-operator-for-a-homotopy)` and
-  `included(thm-singular-chain-homotopy-formula)`; generic consequences cite
-  HA's chain-homotopy page.
+  `already-planned(AT-2: def-prism-operator-for-a-homotopy,
+  thm-singular-chain-homotopy-formula)`; DG retains only the real-coefficient
+  consequence and smooth comparison.
 - “Exact Sequences and Excision,” specifically barycentric subdivision,
-  cover-small chains, and named Prop. 2.21 → DG-16 items 16–24, including
-  `included(thm-cover-small-singular-chains-compute-singular-homology)`.
+  cover-small chains, and named Prop. 2.21 → `already-planned(AT-3)`; DG-16
+  items 7–11 specialise the two-open real-cochain interface.
   General relative homology and excision →
-  `deferred(the future algebraic-topology track owns the full theory)`;
+  `already-planned(AT-3 owns the full relative/excision theory)`;
   “The Equivalence of Simplicial and Singular Homology” →
   `out-of-scope(no simplicial-homology construction is needed for de Rham)`.
 - §2.2 “Mayer–Vietoris Sequences” and its short exact chain sequence →
   `included(thm-short-exact-two-open-cover-small-singular-chain-sequence)`
   and `included(thm-mayer-vietoris-sequence-in-real-singular-cohomology)`.
 - §3.1 “Cohomology of Spaces” and “Mayer–Vietoris Sequences” →
-  `included(def-real-singular-cochain-complex)` and DG-16 items 28–31.
+  `included(def-real-singular-cochain-complex)` and DG-16 items 8–11, citing
+  AT-6's cohomology functoriality and Mayer--Vietoris interfaces.
   “The Universal Coefficient Theorem” →
   `deferred(it is unnecessary because real singular cohomology is defined
   directly from cochains and would add Ext/injectivity machinery)`.
@@ -9802,7 +9753,7 @@ Mayer–Vietoris sequence (pp. 197–204).
 sheaf cohomology” (pp. 83–85; TOC lists p. 84).
 
 - The recalled small-chain statement in the proof of Thm. 6.13.3 →
-  `included(thm-cover-small-inclusion-is-a-chain-homotopy-equivalence)`.
+  `already-planned(AT-3: thm-cover-small-inclusion-is-a-chain-homotopy-equivalence)`.
 - Lemmas 6.13.1–6.13.2, the sheaf-comparison conclusion of Thm. 6.13.3,
   Remark 6.13.4, and Cor. 6.13.5 →
   `out-of-scope(the selected proof does not construct sheaves or sheaf
@@ -9831,9 +9782,10 @@ sheaf cohomology” (pp. 83–85; TOC lists p. 84).
   and top-form integration → DG-11, DG-12, DG-14, including
   `included(thm-cartans-magic-formula)`.
 - §7 “Chains and cohomologies,” “chains,” “cochains,” and “useful lemmas” →
-  DG-16; the generic complex/quotient algebra is
+  AT-2/AT-6 for ordinary singular objects and DG-16 for their real/smooth
+  comparison; the generic complex/quotient algebra is
   `deferred(HA-1 owns general complexes and cohomology but is scaffolded and
-  unauthored; DG-16 supplies only the singular complex)`.
+  unauthored)`.
 - §8 “deRham cohomology,” headings definition, homotopy invariance, and
   Mayer–Vietoris → DG-15. §9 computations, including named sphere, punctured
   Euclidean-space, and top-cohomology results →
@@ -9843,16 +9795,16 @@ sheaf cohomology” (pp. 83–85; TOC lists p. 84).
   “smooth simplices,” “de Rham homomorphism,” and “de Rham theorem” →
   DG-16/DG-17. Named Whitney approximation, chain Stokes, naturality, convex
   case, disjoint-union/union lemmas, Bredon open-set principle, and theorem →
-  respectively DG-16 item 37,
+  respectively DG-16 item 17,
   `included(lem-de-rham-and-singular-cohomology-respect-countable-disjoint-unions)`,
-  DG-16 item 42, and DG-17 items 5, 9–15, including
+  DG-16 item 22, and DG-17 items 5, 9–15, including
   `included(thm-de-rham-theorem)`. Small expository slips
   mean this source is a cross-check; Lee/Hatcher/Park govern the exact
   statement.
 
-The selected route therefore defines
+The selected route therefore specialises AT's definition
 \(H^*(X;\mathbb R)=H^*(\operatorname{Hom}_{\mathbb R}(C_*(X;\mathbb R),
-\mathbb R))\), constructs cover-small chains and cochains, and proves the
+\mathbb R))\), consumes AT-3's cover-small chains, and proves the
 comparison. It does not define cohomology as
 \(\operatorname{Hom}(H_*(X),\mathbb R)\), does not invoke injectivity of
 \(\mathbb R\), and does not select one global smoothing for every simplex.
@@ -10112,9 +10064,9 @@ Ch. I §§1–11, 13–16; Chs. II–VI in the exact section ranges below; Appen
 - Ch. V §§1 “Weights,” 2 “Theorem of the Highest Weight,” 3 “Verma
   Modules,” 4 “Complete Reducibility,” 5 “Harish-Chandra Isomorphism,” 6
   “Weyl Character Formula,” and 8 “Application to Compact Lie Groups” →
-  DG-32/DG-33. Items include
+  DG-32/DG-33 for finite-dimensional classification and compact groups, with
+  Verma/character material `already-planned(RL-2/RL-7)`. Items include
   `included(thm-highest-weight-classification-of-finite-dimensional-irreducible-representations)`,
-  `included(thm-weyl-character-formula)`, and
   `included(thm-highest-weight-classification-for-a-compact-connected-lie-group)`.
   The full Harish-Chandra isomorphism and §7 parabolic theory →
   `deferred(central-character/category-O and parabolic representation theory
@@ -10236,10 +10188,10 @@ two- and three-dimensional example.
   Verma modules,” 9.3 “Classification of irreducible finite-dimensional
   representations,” 9.5 “Characters and Weyl character formula,” 9.6
   “Representations of \(sl(n,\mathbb C)\),” and 9.7 “Proof of Theorem 9.19”
-  → DG-32/`highest-weight-representation-examples`, including
-  `included(def-verma-module)`,
-  `included(thm-highest-weight-classification-of-finite-dimensional-irreducible-representations)`,
-  and `included(thm-weyl-character-formula)`. §9.4 “Bernstein–Gelfand–
+  → DG-32/`highest-weight-representation-examples` for the finite-dimensional
+  boundary, including
+  `included(thm-highest-weight-classification-of-finite-dimensional-irreducible-representations)`;
+  Verma modules and Weyl characters are `already-planned(RL-2/RL-7)`. §9.4 “Bernstein–Gelfand–
   Gelfand resolution” →
   `deferred(category O and homological resolutions exceed finite-dimensional
   highest-weight classification)`.
@@ -10301,11 +10253,11 @@ and disposed heading by heading.
   algebras, 23.3 Serre presentation → DG-31, including
   `included(thm-classification-of-irreducible-reduced-crystallographic-root-systems)`
   and `included(thm-serre-presentation-theorem)`.
-- §§24.1 “Representations of semisimple Lie algebras,” 24.2 “Verma modules,”
-  24.3 “Finite dimensional modules”; §§25.1 “Characters,” 25.3 “Weyl
-  character formula,” 25.4 its proof → DG-32. §25.2 “Category O” →
-  `deferred(the scaffold retains only the finite-dimensional highest-weight
-  theory and Verma modules needed to prove it)`.
+- §§24.1 “Representations of semisimple Lie algebras” and 24.3 “Finite
+  dimensional modules” → DG-32; §24.2 “Verma modules” →
+  `already-planned(RL-2)`; §§25.1 “Characters,” 25.3 “Weyl character formula,”
+  and 25.4 its proof → `already-planned(RL-7)`; §25.2 “Category O” →
+  `already-planned(RL-4)`.
 - §§35.1 “Integration on Lie groups,” 35.2 compact-group representations,
   35.3 matrix coefficients; §§36.1 compact operators/Hilbert–Schmidt, 36.2
   Peter–Weyl proof, 36.3 faithful representations, 36.4 density in continuous
