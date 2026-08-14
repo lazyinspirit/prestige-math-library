@@ -45,11 +45,23 @@ the thin tracks into two failure modes.
 
 | track | mode | state |
 |---|---|---|
-| `pde` | DECOMPOSE | **LANDED 15:43, AUDITED, PASSES** — see below |
+| `pde` | DECOMPOSE | **LANDED 15:43, AUDITED, PASSES.** +270 (585→855), 2.04× → **2.76×** |
+| `functional-analysis` | WIDEN | **LANDED 15:50, AUDITED, PASSES.** +47 (689→736), 4.33× → **4.09×** |
 | `commutative-algebra` | DECOMPOSE | running. 718 headings harvested (most of any track), 443 items = **1.05×**. Transcribed a ToC. Also only **7 source hosts for 18 pairs** — narrowest sourcing in the commission |
 | `probability-theory` | WIDEN | running. ratio fine (4.2×), harvest narrow (171 headings) |
-| `functional-analysis` | WIDEN | running. ratio fine (4.3×), harvest narrow (210) |
 | `number-theory` | dispatched 15:52 into pde's freed slot | measurement suspect — 41 included / 14.3× is probably a grep artifact; told to verify first |
+
+**A successful WIDEN LOWERS the ratio — that is not a failure.** Widening puts
+new headings in the denominator and only the genuinely-new ones become items. FA
+read 88 new headings and **67 corroborated coverage it already had**, so the ratio
+fell honestly. Judge a WIDEN by what the new sources turned up, not by the ratio;
+ratio movement is the DECOMPOSE metric only.
+
+**Both lanes corrected my numerator from disk** (583→585, 687→689) and FA
+diagnosed why my denominators were untrustworthy: the legacy harvests mix
+one-row-per-heading tables with **grouped prose dispositions**, so the word
+`included` is not a recoverable census. Keep telling each lane its figures are
+approximate — two of two found them wrong.
 
 **PDE audit result (orchestrator, from disk, not from the lane's self-report).**
 585 → 855 distinct ids = **+270, exactly as claimed**. Ratio 2.04× → **2.76×**
@@ -64,6 +76,17 @@ convention audit resolving [SO]'s $d$-vs-$n$ and Laplacian-sign conflicts.
 chase the 5.7× benchmark**, naming what it refused to mint (no plane Poisson/
 Perron, no abstract spectral theorem, no conservation-law systems) — the
 anti-padding posture the brief asked for.
+
+**FA audit result.** +47 items, **0 removed, 0 renumbered, 0 collisions** against
+`items/` or `plan-spec.json`. A **25-row per-pair matrix with page ranges** (finer
+than PDE's section ranges), every row carrying 2–5 treatments. The 21 included
+headings are spelled out in an exact heading→id crosswalk, and what they bought is
+real: Kato–Rellich, the Weyl criterion and essential-spectrum invariance, von
+Neumann deficiency-index extensions, Dvoretzky–Rogers, Toeplitz–Hausdorff,
+Wiener's lemma, the min-max principle, Stone's formula, the distribution structure
+theorems. It names the four headings it read and deliberately did **not**
+decompose, each tied to a seam ruling (Brezis §5.3 Lax–Milgram → PDE; TQ §6.5
+KLMN → PDE form methods).
 
 **MEASURE AGAINST THE PRE-DISPATCH COMMIT, NEVER `HEAD`.** Commit `32689b0b`
 swept 460 lines of pde's in-flight work into an unrelated docs commit, and

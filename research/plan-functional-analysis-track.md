@@ -873,8 +873,10 @@ extension is not asserted because Lomonosov's counterexample forbids it.
 
 **Source backing read:** Bühler–Salamon §2.4.4, pp. 94–109 (*The James
 Space*), including its norm, dual, bidual, and codimension-one conclusion;
-Megginson ch. 4 §§1–2 (Schauder bases and approximation property); Albiac–Kalton
-ch. 1 §§1.1–1.4 and ch. 2's classical sequence-space examples.  Enflo's exact
+Megginson ch. 4 §§4.1–4.2, pp. 350–385 (Schauder and unconditional bases,
+including the approximation-property implication); Albiac–Kalton ch. 1
+§§1.1–1.4, pp. 1–19, and ch. 2 §§2.1–2.5, pp. 29–50 (bases and classical
+sequence-space examples).  Enflo's exact
 boundary is checked against his primary paper, Acta Math. 130 (1973),
 pp. 309–317.  Mueger §§3.2.2 and A.2, pp. 22–23 and 167–169, and
 §B.2.1, pp. 184–185, supply the unconditional-series equivalences and the
@@ -1339,6 +1341,8 @@ functorial duality proof); Knapp ch. IV §10,
 pp. 146–160; Khalkhali §2.1, PDF pp. 3–6 (*Gelfand–Naimark theorems*,
 $C_0(X)$, the character space, the general commutative representation, and
 the locally compact duality statement).
+Mueger §19.2, pp. 162–163 (*Application: Absolutely Convergent Fourier
+Series*) supplies the Wiener-lemma application of the character computation.
 
 Items:
 
@@ -2225,19 +2229,29 @@ claimed as open full-text acquisitions.
 | BFK | Bruce Blackadar, Ilijas Farah, and Asaf Karagila, “Hilbert spaces without the Countable Axiom of Choice” | [complete repository PDF](https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf), 49 pp. | §§1–4, especially Theorem 2.0.4 and Corollary 2.0.5 |
 | He | Christopher Heil, Math 7337, *The Fourier Transform of Tempered Distributions* | [author course-note landing page](https://heil.math.gatech.edu/7337/fall09/) | §3.7 in full |
 | Br | Haim Brezis, *Functional Analysis, Sobolev Spaces and Partial Differential Equations* | [university-hosted complete PDF](https://math.jhu.edu/~sire/brezis.pdf), 603 PDF pp. | §§1.1–1.4, pp. 1–29; §§2.1–2.7, pp. 31–58; §§3.1–3.7, pp. 59–86; §§5.1–5.4, pp. 131–155; §§6.1–6.4, pp. 157–180 |
-| Mu | Michael Mueger, *Functional Analysis* | [author-hosted complete lecture notes](https://www.math.ru.nl/~mueger/functionalanalysis.pdf), 264 pp. | §3.2.2, pp. 22–23; §§11.1–11.9, pp. 86–98; §§13.1–13.4, pp. 113–129; §19.2, pp. 162–163; §§A.1–A.2, pp. 166–169; §B.2.1, pp. 184–185; §B.12.1, pp. 231–233 |
+| Mu | Michael Mueger, *Functional Analysis* | [author-hosted complete lecture notes](https://www.math.ru.nl/~mueger/functionalanalysis.pdf), 264 pp. | §3.2.2, pp. 22–23; §§11.1–11.9, pp. 86–98; §§13.1–13.4, pp. 113–129; §§19.1–19.2, pp. 161–163; §§A.1–A.2, pp. 166–169; §B.2.1, pp. 184–185; §B.12.1, pp. 231–233 |
 | Ge | Razvan Gelca, *Functional Analysis* | [author-hosted complete PDF](https://www.math.ttu.edu/~rgelca/FUNCTANAL.pdf), 151 pp. | §§5.1–5.5, pp. 71–84; §§6.1–6.4, pp. 85–100; §§7.1–7.7, pp. 101–120; §§8.1–8.4, pp. 123–132 |
 
 Additional exact-result checks used Conway, [*A Course in Functional Analysis*](https://link.springer.com/book/10.1007/978-1-4757-4383-8),
 ch. V §3 (Goldstine); Megginson, [*An Introduction to Banach Space Theory*](https://link.springer.com/book/10.1007/978-1-4612-0603-3),
-§§2.8–2.9 (James and Bishop–Phelps); Albiac–Kalton, [*Topics in Banach Space
+§§2.8–2.9 and 4.1–4.2, pp. 245–263, 350–385 (James, Bishop–Phelps, bases,
+and AP); Albiac–Kalton, [*Topics in Banach Space
 Theory*](https://link.springer.com/book/10.1007/978-3-319-31557-7), ch. 1
-§§1.1–1.4 and ch. 5 §5.3 (bases, James space, RNP); and Diestel–Uhl,
+§§1.1–1.4, pp. 1–19, ch. 2 §§2.1–2.5, pp. 29–50, and ch. 5 §5.3 (bases,
+classical sequence spaces, and RNP); and Diestel–Uhl,
 [*Vector Measures*](https://bookstore.ams.org/surv-15), ch. II §§1–2 and ch.
 III §§1–3.  These were
 corroborating library copies, not counted among the open full texts.  Their
 named headings dispose respectively to FA-9, FA-10, FA-11/FA-12, and FA-12;
 no unlisted chapter from those books is claimed as harvested.
+
+The open-web sweep also checked the publisher or catalogue records for
+Rudin, Lax, Conway, Reed–Simon I–IV, Kadison–Ringrose, Megginson, Folland,
+Yosida, Dunford–Schwartz, Schaefer, and Trèves.  What was reachable there was
+a publisher preview, table of contents, chapter sample, or controlled-loan
+record rather than an openly inspectable complete text.  None was counted as
+a new full-text acquisition, and no unofficial scan was used.  The four
+complete works Br, Mu, Ge, and TQ were therefore widened deeply instead.
 
 ### 11.1 Convention conflicts resolved
 
@@ -2612,6 +2626,7 @@ not masquerade as new mathematical coverage.
 | §13.2.4 *Applications, Complements, Exercises* | inline FA-17 polynomial mapping and shift examples |
 | §13.3 *Spectra of Bounded Operators II: Banach Algebra Methods* | inline FA-17 items 11–24 |
 | §13.4 *Applications to Normal Hilbert Space Operators* | inline FA-19 items 1–15 |
+| §19.1 *Fourier Series of Continuous Periodic Functions* | inline FA-14 items 10–20 and the Fourier-coefficient convention needed by the following application |
 | §19.2 *Application: Absolutely Convergent Fourier Series* | included — FA-18 B item 14 |
 | §A.1 *Unordered Infinite Sums* | inline FA-14's finite-subset-net convention |
 | §A.2 *More on Unconditional Convergence of Series* | included — FA-11 item 22 |
@@ -2648,7 +2663,7 @@ not masquerade as new mathematical coverage.
 | source heading in read order | disposition and exact destination |
 |---|---|
 | §2.2 *Self-Adjoint Operators* | inline FA-21 items 1–11 |
-| §2.4 *Self-Adjointness and Spectrum* | inline FA-21 items 7–13 |
+| §2.4 *Resolvents and Spectra* | inline FA-21 items 7–13 |
 | §2.5 *Orthogonal Sums of Operators* | inline FA-20/FA-21 direct-sum domain checks; no new standalone item |
 | §2.6 *Self-Adjoint Extensions* | included — FA-21 items 23–25 |
 | §3.1 *The Spectral Theorem* | inline FA-20 items 1–17 and FA-21 items 14–17 |
@@ -2666,7 +2681,38 @@ not masquerade as new mathematical coverage.
 | §6.5 *Quadratic Forms and the KLMN Theorem* | out-of-scope under the PDE/form-method seam; no quadratic-form domain theory is opened here |
 | §6.6 *Strong and Norm Resolvent Convergence* | included — FA-21 items 35–37 |
 
-The WIDEN ledger contains 87 source-heading rows: 21 `included`, 62
+#### Exact id crosswalk for the included headings
+
+Pair/item references in the ledger are positional references to the stable,
+backticked ids in §5.  For the 21 headings that enlarge the scaffold, the
+canonical ids are also spelled out here so the inclusion disposition is
+machine-auditable.
+
+| included source heading | exact added item ids |
+|---|---|
+| Br §2.4 | `def-bounded-below-operator`; `thm-bounded-below-iff-injective-with-closed-range`; `def-bounded-left-and-right-inverses`; `thm-bounded-right-inverse-iff-kernel-is-complemented`; `thm-bounded-left-inverse-iff-range-is-complemented` |
+| Br §2.7 | `cor-dense-range-iff-transpose-is-injective`; `thm-surjective-iff-transpose-is-bounded-below`; `thm-bounded-below-iff-transpose-is-surjective` |
+| Br §3.6 | `thm-separable-dual-implies-separable-primal`; `cor-separable-reflexive-space-has-separable-dual` |
+| Mu §3.2.2 | `def-unconditional-convergence-of-a-banach-space-series` |
+| Mu §11.2 | `def-isometry-coisometry-and-partial-isometry`; `thm-partial-isometry-characterizations` |
+| Mu §11.6 | `def-numerical-range-and-numerical-radius`; `thm-numerical-radius-is-an-equivalent-operator-norm` |
+| Mu §13.1 | `def-point-continuous-and-residual-spectrum`; `def-approximate-point-and-compression-spectrum`; `lem-relations-among-the-five-spectral-parts`; `thm-boundary-of-spectrum-lies-in-approximate-point-spectrum` |
+| Mu §19.2 | `thm-wiener-lemma-for-absolutely-convergent-fourier-series` |
+| Mu §A.2 | `thm-unconditional-convergence-equivalences` |
+| Mu §B.2.1 | `lem-dvoretzky-rogers-finite-block-estimate`; `thm-dvoretzky-rogers`; `cor-absolute-and-unconditional-convergence-agree-universally-iff-finite-dimensional` |
+| Mu §B.12.1 | `thm-toeplitz-hausdorff` |
+| Ge §7.5 | `thm-distributions-form-a-sheaf`; `thm-compactly-supported-distributions-have-global-finite-order` |
+| Ge §7.6 | `thm-local-structure-of-distributions-as-derivatives-of-continuous-functions`; `thm-global-locally-finite-structure-of-distributions` |
+| Ge §7.7 | `thm-associativity-of-distribution-convolution-under-compact-support` |
+| TQ §2.6 | `def-deficiency-subspaces-and-deficiency-indices`; `thm-von-neumann-self-adjoint-extension-parameterization`; `cor-self-adjoint-extension-exists-iff-deficiency-indices-agree` |
+| TQ §3.3 | `def-pure-point-absolutely-continuous-and-singular-continuous-spectral-subspaces`; `thm-canonical-spectral-type-decomposition` |
+| TQ §4.1 | `thm-stone-resolvent-formula-for-spectral-projections` |
+| TQ §4.4 | `thm-min-max-principle-below-essential-spectrum` |
+| TQ §6.1 | `def-relative-boundedness-with-respect-to-an-operator`; `lem-second-resolvent-identity-for-closed-operator-perturbations`; `thm-kato-rellich` |
+| TQ §6.4 | `def-discrete-and-essential-spectrum-of-a-self-adjoint-operator`; `thm-weyl-criterion-for-essential-spectrum`; `def-relative-compactness-with-respect-to-an-operator`; `thm-weyl-essential-spectrum-invariance` |
+| TQ §6.6 | `def-norm-and-strong-resolvent-convergence`; `thm-continuous-functional-calculus-under-resolvent-convergence`; `cor-unitary-groups-converge-under-strong-resolvent-convergence` |
+
+The WIDEN ledger contains 88 source-heading rows: 21 `included`, 63
 `inline` or `already-published`, and 4 `out-of-scope`.  The 21 included
 headings generated 47 added items; the remaining rows add independent proof
 coverage or record a seam boundary and therefore do not inflate the
@@ -2674,36 +2720,36 @@ decomposition numerator.
 
 ### 11.8 Two-source backing matrix for every pair
 
-The detailed section locators are in each pair and §§11.2–11.6.  This matrix
-makes the independence requirement auditable at a glance.
+Each cell gives the exact section and page range actually read.  A primary
+paper is listed only in addition to, never instead of, two full treatments.
 
-| pair | textbook/full-note backbone | independent treatment or primary check |
+| pair | treatment 1: exact range read | treatment 2 (and further independent checks): exact range read |
 |---|---|---|
-| FA-1 | BS §§1.1.1, 1.2.1 | Te §§1.2, 1.4; MIT lectures 1–4 |
-| FA-2 | BS §§1.2.1, 1.2.3, 1.3.1 | Te §§1.6–1.7; MIT lectures 3–4 |
-| FA-3 | BS §§1.1.2, 1.2.2 | Te §§1.5, 4.2; Howard–Tachtsis and Wojdysławski checks |
-| FA-4 | BS §2.3.1 | Te §4.2; Luxemburg/Pincus/Foreman–Wehrung/Pawlikowski |
-| FA-5 | BS §§2.3.2–2.3.5 | Te §5.1; K-ARA IV.5 |
-| FA-6 | BS §§2.1–2.2 | Te §4.1; Sokal; published Baire proof |
-| FA-7 | BS §§1.3.1–1.3.2, 2.4.1, 4.1.1–4.1.3 | Te §§4.3, 4.6; MIT lectures 11–15 |
-| FA-8 | BS §§3.1.1–3.1.4 | Te §§4.4, 5.3; K-ARA IV.1, IV.3 |
-| FA-9 | BS §§3.2.1, 3.2.3, 3.3, 3.5 | Te §§5.2–5.3; K-ARA IV.3, IV.8; Rossi/Bell |
-| FA-10 | BS §§2.4.1–2.4.3, 3.4 | Te §§4.4, 5.5; Whitley and Megginson |
-| FA-11 | BS §2.4.4 plus its sequence-space examples | Albiac–Kalton ch. 1; Enflo primary paper |
-| FA-12 | BS §§3.6.1–3.6.2, 7.3.1 | Te §11.6; Diestel–Uhl chs. II–III and Albiac–Kalton §5.3 |
-| FA-13 | BS §§1.3.3, 2.3.6 | Te §§1.3, 2.2–2.4; MIT lectures 5–7; BFK |
-| FA-14 | Te §§2.1, 2.5 | BS §2.3.6; K-BRA VI.7, VI.9; K-ARA II.2–II.3 |
-| FA-15 | BS §§4.1–4.4, 5.2.3 | Te §§3.1, 6.5; K-ARA II.1 |
-| FA-16 | Te §§3.2, 3.5–3.6 | K-ARA II.2–II.5; BS §5.2.3 |
-| FA-17 | BS §§1.4, 5.1.1–5.2.4 | Te §§6.1, 6.6; Sh ch. 2 |
-| FA-18 | BS §§5.4.1–5.5.2 | Te §6.4; Sh ch. 3; K-ARA IV.10; Kh §2.1 |
-| FA-19 | BS §§5.3.1–5.5.3 | Te §6.2; Wi §§2–5; K-ARA IV.11 |
-| FA-20 | BS §§5.6–5.7 | Te §6.3 and TQ §§3.1–3.3; Wi §§4–5 |
-| FA-21 | BS §§6.1–6.5 | TQ §§2.2, 2.4, 3.1, 5.1; Wi §7 |
-| FA-22 | Te §14.1 | K-BRA VIII.1–VIII.2; Dy §11.1 normalization check |
-| FA-23 | Te §§14.1, 14.5 | K-BRA VIII.3–VIII.5; K-ARA III.1; Dy §11.1 |
-| FA-24 | Dy chs. 2–4, 6 | K-ARA V.1–V.3; Te §14.5 |
-| FA-25 | Dy §§11.1–11.2 | K-ARA III.1, V.4; Te §14.5; Heil §3.7 |
+| FA-1 | BS §§1.1.1, 1.2.1, pp. 6–24 | Te §§1.2, 1.4, pp. 7–24; MIT lectures 1–4, pp. 1–31 |
+| FA-2 | BS §§1.2.1, 1.2.3, 1.3.1, pp. 22–32 | Te §§1.6–1.7, pp. 27–36; Br §§2.3–2.4, pp. 35–40 |
+| FA-3 | BS §§1.1.2, 1.2.2, pp. 9–29 | Te §§1.5, 4.2, pp. 24–27, 111–119; MIT lectures 1–4, pp. 1–31 |
+| FA-4 | BS §2.3.1, pp. 73–76 | Te §4.2, pp. 111–119; Br §1.1, pp. 1–4; the whole Luxemburg/Pincus/Foreman–Wehrung/Pawlikowski checks control choice only |
+| FA-5 | BS §§2.3.2–2.3.5, pp. 76–87 | Te §5.1, pp. 137–141; Br §1.2, pp. 4–8; K-ARA IV.5, pp. 125–128 |
+| FA-6 | BS §§2.1–2.2, pp. 58–70 | Te §4.1, pp. 101–111; Br §§2.1–2.3, pp. 31–37; Sokal whole paper, pp. 1–5 |
+| FA-7 | BS §§1.3.1–1.3.2, 2.4.1, 4.1.1–4.1.3, pp. 31–38, 88–89, 172–182 | Te §§4.3, 4.6, pp. 119–125, 161–169; Br §§1.3, 2.5, 2.7, pp. 8–10, 40–48 |
+| FA-8 | BS §§3.1.1–3.1.4, pp. 118–132 | Te §§4.4, 5.3, pp. 125–133, 146–149; Br §§3.1–3.4, pp. 55–67; K-ARA IV.1, IV.3, pp. 106–121 |
+| FA-9 | BS §§3.2.1, 3.2.3, 3.3, 3.5, pp. 132–152 | Te §§5.2–5.3, pp. 141–149; K-ARA IV.3, IV.8, pp. 116–121, 140–143; Rossi whole paper and Bell pp. 59–64 control choice |
+| FA-10 | BS §§2.4.1–2.4.3, 3.4, pp. 88–94, 142–148 | Te §§4.4, 5.5, pp. 125–133, 156–160; Br §§3.5–3.7, pp. 67–78; Whitley whole proof, pp. 116–118 |
+| FA-11 | Albiac–Kalton ch. 1 §§1.1–1.4, pp. 1–19, and ch. 2 §§2.1–2.5, pp. 29–50 | Megginson ch. 4 §§4.1–4.2, pp. 350–385; BS §2.4.4, pp. 94–109; Mu §§3.2.2, A.2, B.2.1, pp. 22–23, 167–169, 184–185; Enflo pp. 309–317 is boundary only |
+| FA-12 | Diestel–Uhl ch. II §§1–2 and ch. III §§1–3 | BS §§3.6.1–3.6.2, 7.3.1, pp. 152–160, 387–392; Te §11.6, pp. 331–337; Albiac–Kalton §5.3 |
+| FA-13 | BS §§1.3.3, 2.3.6, pp. 38–42, 87–88 | Te §§1.3, 2.2–2.4, pp. 16–23, 54–63; Br §§5.1–5.2, pp. 131–138; MIT lectures 5–7, pp. 32–53 |
+| FA-14 | Te §§2.1, 2.5, pp. 47–54, 63–68 | K-BRA VI.7, VI.9, pp. 372–390; K-ARA II.2–II.3, pp. 36–45; Br §5.4, pp. 141–144 |
+| FA-15 | BS §§4.1–4.4, 5.2.3, pp. 172–200, 224–227 | Te §§3.1, 6.5, pp. 69–72, 184–189; Br §§6.1–6.3, pp. 157–165; K-ARA II.1, pp. 34–36 |
+| FA-16 | Te §§3.2, 3.5–3.6, pp. 72–78, 89–100 | K-ARA II.2–II.5, pp. 36–52; Br §6.4, pp. 165–168; BS §5.2.3, pp. 224–227 |
+| FA-17 | BS §§1.4, 5.1.1–5.2.4, pp. 42–47, 210–233 | Te §§6.1, 6.6, pp. 162–169, 189–192; Mu §§13.1–13.4, pp. 113–129; Ge §§5.1–5.3, pp. 71–79 |
+| FA-18 | BS §§5.4.1–5.5.2, pp. 246–269 | Sh ch. 3 §§3.1–3.4; Mu §§19.1–19.2, pp. 161–163; Ge §§5.5, 6.1–6.2, pp. 82–91; K-ARA IV.10, pp. 146–160 |
+| FA-19 | BS §§5.3.1–5.5.3, pp. 233–273 | Mu §§11.2, 11.6–11.8, B.12.1, pp. 90–97, 231–233; Ge §6.4, pp. 91–100; Wi §§2–4, pp. 4–15 |
+| FA-20 | BS §§5.6–5.7, pp. 273–298 | TQ §§3.1–3.3, 4.1, pp. 99–135; Wi §§4–5, pp. 9–20 |
+| FA-21 | BS §§6.1–6.5, pp. 305–353 | TQ §§2.2, 2.4–2.6, 3.1, 3.3, 4.4, 5.1, 6.1, 6.4, 6.6, pp. 66–75, 83–95, 99–111, 117–119, 139–150, 157–160, 170–174, 179–184; Wi §7, pp. 28–39 |
+| FA-22 | Te §14.1, pp. 379–388 | K-BRA VIII.1–VIII.2, pp. 411–421; Ge §§8.1–8.3, pp. 123–128; Dy §11.1, pp. 119–126 checks normalization |
+| FA-23 | Te §§14.1, 14.5, pp. 379–388, 404–411 | K-BRA VIII.3–VIII.5, pp. 421–430; K-ARA III.1, pp. 54–60; Dy §11.1, pp. 119–126 |
+| FA-24 | Dy chs. 2–4 and 6, pp. 27–75 | K-ARA V.1–V.3, pp. 179–202; Ge §§7.1–7.7, pp. 101–120; Te §14.5, pp. 404–411 |
+| FA-25 | Dy §§11.1–11.2, pp. 119–135 | K-ARA III.1 and V.4, pp. 54–60, 202–206; Ge §8.4, pp. 128–132; Te §14.5, pp. 404–411; Heil §3.7 in full |
 
 No pair is backed only by an encyclopedia, and no encyclopedia supplied a
 mathematical statement.  The breadth sources control coverage; the primary
@@ -2715,10 +2761,10 @@ counterexample makes textbook shorthand unsafe.
 ## 12. Final scaffold audit
 
 The disk audit on 2026-08-14 found 25 pair headings, 25 A-page ids, 25 B-page
-ids, and 687 proposed item ids.  All page and item ids are unique within this
+ids, and 736 proposed item ids.  All page and item ids are unique within this
 scaffold; no proposed item id collides with a file in `items/`, and no proposed
 item or page id collides with an id in the live `research/plan-spec.json`.
-The largest A page is FA-18 at 28 items, so every A page remains below the
+The largest A page is FA-21 at 38 items, so every A page remains below the
 60-item split threshold.  Numbering is consecutive on every A and B page.
 
 All 33 immutable ids on the present `deferred-functional-analysis` catalogue
@@ -2726,3 +2772,88 @@ occur in §9 with an explicit disposition.  The notation scan found no
 canonical embedding applied to a natural-number literal.  This lane created
 no item, page, plan, coverage, proof-contract, judge, or gate artifact; its
 repository writes are confined to this prose scaffold.
+
+---
+
+## 13. Density enrichment report — 2026-08-14
+
+### Measurement and result
+
+The dispatch's item numerator was off by two.  A disk count of unique item ids
+before this pass gives **689**, not 687; after the pass it gives **736**.  The
+pass therefore adds **47** items, all under existing pair ids and all backed
+by the ranges in §11.7.  Existing ids were not renumbered.  No page was split:
+FA-21 is now the largest A page at 38 items, safely below the 60-item ceiling.
+
+The reported denominator 159 is a grep count of the word `included`, not a
+stable source-heading census: the legacy harvest mixes one-row-per-heading
+tables with grouped prose dispositions, so it cannot be independently
+recovered as 159 Markdown rows.  The reproducible pre-pass harvest count is
+140 explicit disposition rows (70 BS, 34 Te, 23 Knapp, and 13 primary checks)
+plus the headings grouped in §11.5's prose; this explains why the separate
+semantic census reported 210 total harvested headings.  For comparison with
+the dispatch only, the corrected legacy ratio is $689/159=4.33\times$, and
+holding that denominator
+fixed after enrichment gives $736/159=4.63\times$.  The normalized WIDEN
+ledger is auditable separately: it has **88** newly read headings, of which
+**21** caused additions.  Adding those 21 to the legacy denominator gives the
+normalized dispatch-comparable ratio $736/180=4.09\times$; the new material alone
+decomposes as $47/21=2.24\times$.  The normalized ratio falls because the
+other 67 headings are independent corroborations or explicit seam exclusions,
+not new library claims.  They were deliberately not converted into padding.
+
+### Sources widened and material added
+
+- **Brezis**, §§1.1–1.4, 2.1–2.7, 3.1–3.7, 5.1–5.4, and 6.1–6.4: added the
+  bounded-below/complemented-inverse package (FA-2), closed-range adjoint
+  equivalences (FA-7), and separable-dual consequences (FA-10).
+- **Mueger**, §3.2.2, §§11.1–11.9, §§13.1–13.4, §§19.1–19.2, and supplements
+  A.1–A.2, B.2.1, B.12.1: added unconditional-convergence and
+  Dvoretzky–Rogers items (FA-11), spectral-part definitions and relations
+  (FA-17), isometry/partial-isometry and numerical-range items (FA-19), and
+  Wiener's lemma as a directly checkable companion application (FA-18 B).
+- **Gelca**, §§5.1–5.5, 6.1–6.4, 7.1–7.7, and 8.1–8.4: added sheaf/locality,
+  finite-order structure, and convolution-associativity items for
+  distributions (FA-24), while independently checking the spectral,
+  commutative-$C^*$, normal-calculus, and Fourier pairs.
+- **Teschl, Mathematical Methods in Quantum Mechanics**, §§2.2, 2.4–2.6,
+  3.1–3.3, 4.1–4.4, 5.1, and 6.1–6.6: added self-adjoint extensions,
+  deficiency indices, spectral types, Stone's resolvent formula,
+  Kato–Rellich, essential-spectrum/Weyl theory, resolvent convergence, and
+  the min–max theorem (FA-20/FA-21).
+
+The following grouped assignments apply to every id in the stated range; a
+statement entry is L (`literature-derived`), a definition's proof entry is NA
+(`not-applicable`), and theorem/lemma/corollary and worked-example proof
+entries are L under §4.
+
+| added ids | `provenance.statement` | `provenance.proof` and rationale |
+|---|---|---|
+| FA-2 A 22–26 | Br §2.4, pp. 37–40 | Br §2.4: use the source's explicit projections and left/right inverses, so complementedness is proved rather than inferred from an algebraic splitting |
+| FA-7 A 20–22 | Br §§2.5, 2.7, pp. 40–48 | Br §§2.5, 2.7, cross-checked against BS §4.1.3, pp. 178–182: annihilator identities plus the closed-range theorem keep dense range distinct from surjectivity |
+| FA-10 A 23–24 | Br §3.6, pp. 73–76 | Br §3.6: the countable norming construction exposes every selection step and proves the reflexive corollary through $X^{**}$ |
+| FA-11 A 21–25 | Mu §3.2.2, §§A.1–A.2, and §B.2.1, pp. 22–23, 166–169, 184–185 | Mu §§A.1–A.2 and §B.2.1: isolate the unordered-sum equivalences and the finite-block lemma before the Dvoretzky–Rogers theorem |
+| FA-17 A 25–28 | Mu §§13.1–13.2, pp. 113–120 | Mu §§13.1–13.2: retain the source's disjoint residual-spectrum convention and prove the boundary result through bounded-below resolvent estimates |
+| FA-18 B 14 | Mu §§19.1–19.2, pp. 161–163 | Mu §19.2, using FA-18's already-proved character space of $\ell^1(\mathbb Z)$: this is a direct Banach-algebra proof, not an unsourced harmonic-analysis corollary |
+| FA-19 A 16–20 | Mu §§11.2, 11.6–11.8 and §B.12.1, pp. 90–97, 231–233 | Mu's proofs: projection identities feed polar decomposition, polarization gives the numerical-radius estimate, and the finite-dimensional compression argument proves Toeplitz–Hausdorff |
+| FA-20 A 18 | TQ §4.1, pp. 131–135 | TQ §4.1: integrate the resolvent jump in SOT and retain the half-weight endpoint atoms, preventing the common open/closed-interval ambiguity |
+| FA-21 A 23–38 | TQ §§2.6, 3.3, 4.4, 6.1, 6.4, 6.6, pp. 91–95, 117–119, 139–141, 157–160, 170–174, 179–184 | The same TQ ranges: split extension theory, spectral types, perturbation, Weyl theory, resolvent convergence, and min–max into their source's conceptual proof blocks, with domain hypotheses retained |
+| FA-24 A 27–31 | Ge §§7.5–7.7, pp. 108–120 | Ge Theorems 7.5.1, 7.5.3, 7.6.2–7.6.4, and 7.7.5: use locally finite partitions of unity, cutoff-based order estimates, continuous primitive representations, and the source's exact compact-support conditions |
+
+No AI-generated statement is load-bearing.  Section 11.8 now gives every A/B
+pair two or more independent treatments and the exact sections/pages read; no
+row is left with only a passing mention.  Section 11.1 records the
+scalar-field, residual-spectrum, and numerical-range convention disagreements
+exposed by the new readings and the library's resolution of each.
+
+### Deliberate non-decomposition
+
+Four headings were read and not decomposed: Brezis §1.4 (conjugate convexity)
+would open an optimization/convex-duality branch unused here; Brezis §5.3
+(Stampacchia and Lax–Milgram) belongs to PDE by the binding seam; Gelca §6.3's
+general noncommutative representation theory is outside the commissioned
+commutative-$C^*$ spine; and TQ §6.5 (quadratic forms/KLMN) belongs with PDE
+form methods.  The remaining non-included headings duplicate existing claims
+and are retained as independent proof or convention checks.  This is why the
+pass stops at 47 additions rather than manufacturing a differential-geometry
+benchmark ratio.
