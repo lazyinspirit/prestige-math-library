@@ -50,16 +50,15 @@ splice time.
 | PT-21 | `the-ito-integral-with-respect-to-brownian-motion` | predictable integrands, isometry, completion, martingale and quadratic variation |
 | PT-22 | `itos-formula-and-brownian-martingales` | Ito formula, integration by parts, exponential martingales, Levy characterization |
 
-**Full texts obtained.**  The two complete standard textbooks are Rick
-Durrett, *Probability: Theory and Examples*, 5th ed. (490 pp.,
-author-hosted), and Levin--Peres--Wilmer, *Markov Chains and Mixing Times*,
-2nd ed. (461 pp., author-hosted), the specialist textbook for PT-15--PT-17.
-The harvest also records the complete seven-chapter graduate course/text of
-S. R. S. Varadhan, *Probability Theory*; complete open note sets by J. R.
-Norris and A. W. van der Vaart; and the full Berkeley probability/Brownian
-sequences of Aldous--Chewi and Pitman.  Original publications by Prokhorov,
-Itô, Lindeberg, and Etemadi were checked at the claim boundary.  Exact read
-ranges, source headings, and dispositions are in §11.
+**Full texts obtained.**  The original pool contains the complete textbooks
+by Rick Durrett and Levin--Peres--Wilmer; the complete graduate
+courses/notes of S. R. S. Varadhan, J. R. Norris, A. W. van der Vaart,
+Aldous--Chewi, Pitman, and Geng; and four primary-source checks.  The
+enrichment pass adds five complete treatments: Jean-François Le Gall,
+Sébastien Roch, Gregory Lawler, Perla Sousi, and Nobuo Yoshida.  These add
+four host domains and specialist depth in martingale limit theory, Markov
+potential theory, and Brownian/stochastic calculus.  Exact read ranges,
+source headings, dispositions, and per-pair use are in §11 and §13.
 
 **Structural decision about finite probability.**  The published definitions
 `def-finite-probability-space-and-event`,
@@ -305,8 +304,8 @@ integral theorem must be resolved to its authored id before build.
 **Source backing read:** Durrett §§1.1--1.7, pp. 1--42 (*Probability
 Spaces* through *Product Measures, Fubini's Theorem*); Varadhan Chapter 1
 §§1.4--1.6 (*Transformations*, *Product Spaces*, and *Distributions and
-Expectations*); Norris §§1.9, 2.1--2.3, 3, and 4, pp. 3--29.  Exact heading
-dispositions are in §11.
+Expectations*); Norris §§1.9, 2.1--2.3, 3, and 4, pp. 3--29; Le Gall
+§§8.1--8.2, pp. 91--108.  Exact heading dispositions are in §11.
 
 Items, in dependency order:
 
@@ -339,6 +338,9 @@ Items, in dependency order:
 27. `cor-lyapunov-moment-inequality-on-a-probability-space` (corollary) — $\|X\|_p\le\|X\|_q$ for $1\le p\le q\le\infty$ because $P(\Omega)=1$.
 28. `cor-second-moment-positive-probability-bound` (corollary) — for $X\ge0$ in $L^2$, $P(X>0)\ge (EX)^2/E(X^2)$ when $E(X^2)>0$.
 29. `rem-general-inequalities-restrict-to-the-published-finite-ones` (remark) — items 23, 24, 26, and 28 extend exactly `thm-markov-inequality`, `thm-chebyshev-inequality`, `lem-cauchy-schwarz-for-finite-random-variables`, and `thm-finite-second-moment-lower-bound`; their finite proofs remain canonical on the earlier page.
+30. `thm-doob-dynkin-factorization-for-real-random-variables` (theorem) — if $X:\Omega\to(E,\mathcal E)$ is a random element and a real random variable $Y$ is $\sigma(X)$-measurable, then $Y=f\circ X$ for some $\mathcal E/\mathcal B(\mathbb R)$-measurable $f$; the converse is immediate.
+31. `thm-normal-equations-for-best-affine-l2-prediction` (theorem) — for $X,Y_1,\ldots,Y_n\in L^2$, the best affine predictor of $X$ from the $Y_j$ is the orthogonal projection onto $\operatorname{span}\{1,Y_1,\ldots,Y_n\}$; its centered coefficients solve the covariance normal equations, the predicted random variable is unique a.s., and singular covariance matrices may leave coefficients nonunique.
+32. `cor-best-affine-predictor-from-one-random-variable` (corollary) — if $\operatorname{Var}Y>0$, the predictor is $EX+\operatorname{Cov}(X,Y)(Y-EY)/\operatorname{Var}Y$; if $\operatorname{Var}Y=0$, the constant $EX$ is optimal.
 
 **Hard proof and well-definedness plan.**  The only new structures are
 specializations of already-built measure structures.  Item 3 proves both
@@ -363,6 +365,7 @@ there is no boundary mismatch with the published finite statement.
 8. `cex-a-random-variable-need-not-have-a-finite-expectation` — a legitimate heavy-tailed law with $E|X|=\infty$.
 9. `cex-a-distribution-function-need-not-have-a-density` — the Bernoulli law has a step CDF and atoms, hence no density with respect to Lebesgue measure.
 10. `cex-equality-almost-surely-is-not-pointwise-equality` — alter a variable on a nonempty null set.
+11. `ex-bertrand-chord-paradox-is-a-model-specification-problem` — three natural random-chord constructions give different probabilities, showing that a probability question is not determined until the sample space and law are specified.
 
 ### PT-2 — Independence, Borel--Cantelli, and zero--one laws
 
@@ -494,8 +497,9 @@ real and metric convergence definitions.  Distribution convergence is first
 defined for real laws here and generalized to Polish-valued laws in PT-7.
 
 **Source backing read:** Durrett §§2.2 and 3.2, pp. 56--66 and 116--124;
-Varadhan §§2.3 and 3.2; Norris §2.6 and §§6--7, pp. 14--16 and 30--37.
-Exact heading dispositions are in §11.
+Varadhan §§2.3 and 3.2; Norris §2.6 and §§6--7, pp. 14--16 and 30--37;
+Roch Note 3 §§1.3--1.4; Le Gall Chapter 10, pp. 125--142.  Exact heading
+dispositions are in §11.
 
 Items:
 
@@ -520,6 +524,8 @@ Items:
 19. `cor-uniform-integrability-characterizes-l1-convergence-under-probability-convergence` (corollary) — combine items 17--18.
 20. `thm-slutsky-for-real-random-variables` (theorem) — if $X_n\Rightarrow X$ and $Y_n\to c$ in probability, then $X_n+Y_n\Rightarrow X+c$, $X_nY_n\Rightarrow cX$, and, when $c\ne0$, the quotient defined as $X_n/Y_n$ on $\{Y_n\ne0\}$ with any fixed value on $\{Y_n=0\}$ converges to $X/c$ in distribution.
 21. `rem-complete-convergence-implication-diagram` (remark, L/NA) — record exactly $L^q$ convergence $\Rightarrow L^p$ convergence $\Rightarrow$ convergence in probability $\Rightarrow$ convergence in distribution, together with a.s. convergence $\Rightarrow$ convergence in probability; item 11 is the constant-limit exception, and the B-page counterexamples block every other arrow.
+22. `lem-pairing-preserves-convergence-in-probability` (lemma) — if $X_n\to X$ and $Y_n\to Y$ in probability, then $(X_n,Y_n)\to(X,Y)$ in probability for any product metric, by a two-event union bound.
+23. `thm-continuous-maps-preserve-convergence-in-probability` (theorem) — for a continuous $f:\mathbb R^d\to\mathbb R^k$, $Z_n\to Z$ in probability implies $f(Z_n)\to f(Z)$ in probability; together with item 22 this yields stability under sums and products, and under quotients when the limit denominator is nonzero a.s.
 
 **Hard proof and well-definedness plan.**  Item 1 cannot mention the
 probability of a convergence set until item 2 has supplied its countable
@@ -552,9 +558,10 @@ counterexamples below, not by a diagram drawn from memory.
 Cauchy criterion and summation-by-parts results from published analysis.
 
 **Source backing read:** Durrett §§2.2 and 2.5, pp. 56--66 and 81--90;
-Varadhan §§3.2--3.4; Norris §10, pp. 42--54.  The necessity half of
-three-series is taken from Varadhan's direct symmetrization route rather than
-Durrett's later CLT exercise, avoiding a circular dependency on PT-9.
+Varadhan §§3.2--3.4; Norris §10, pp. 42--54; Roch Note 3 §1.4 and
+Note 5 §§1.1--1.4.2 and 2.2.  The necessity half of three-series is taken
+from Varadhan's direct symmetrization route rather than Durrett's later CLT
+exercise, avoiding a circular dependency on PT-9.
 
 Items:
 
@@ -575,6 +582,8 @@ Items:
 15. `lem-kronecker-summation-lemma` (lemma) — if $0<b_n\uparrow\infty$ and $\sum x_n/b_n$ converges, then $b_n^{-1}\sum_{k\le n}x_k\to0$.
 16. `thm-kolmogorov-strong-law-under-summable-normalized-variances` (theorem) — for independent $X_n$ with finite means, if $b_n\uparrow\infty$ and $\sum\operatorname{Var}(X_n)/b_n^2<\infty$, then $b_n^{-1}\sum_{k\le n}(X_k-EX_k)\to0$ a.s.
 17. `cor-independent-nonidentical-finite-variance-strong-law` (corollary) — take $b_n=n$ under $\sum\operatorname{Var}(X_n)/n^2<\infty$.
+18. `thm-truncated-centering-criterion-for-an-iid-weak-law` (theorem) — for iid real $X_k$, constants $\mu_n$ with $S_n/n-\mu_n\to0$ in probability exist iff $nP(|X_1|>n)\to0$; when this holds, $\mu_n=E[X_1 1_{\{|X_1|\le n\}}]$ works.
+19. `lem-one-sided-maximal-inequality-for-symmetric-independent-sums` (lemma) — if the independent summands are symmetric and $S_k$ are their partial sums, then $P(\max_{k\le n}S_k>a)\le2P(S_n>a)$, proved by reflecting the unused symmetric tail after the first crossing.
 
 **Hard proof and well-definedness plan.**  The first-crossing events in item
 8 are disjoint and measurable with respect to the corresponding initial
@@ -606,9 +615,9 @@ the published real-series machinery.
 variance criterion and Kronecker lemma are the load-bearing series route.
 
 **Source backing read:** Durrett §§2.3--2.5, pp. 67--90; Varadhan §§3.3 and
-3.5; Norris §§9.2--9.3 and §10, pp. 39--54.  Norris's Birkhoff proof is used
-only as an agreement route after MT-23 exists; the independent proof is
-complete without ergodic theory.
+3.5; Norris §§9.2--9.3 and §10, pp. 39--54; Roch Note 5 §§1.4.1--1.4.2.
+Norris's Birkhoff proof is used only as an agreement route after MT-23
+exists; the independent proof is complete without ergodic theory.
 
 Items:
 
@@ -625,6 +634,7 @@ Items:
 11. `cor-iid-strong-law-implies-the-weak-law` (corollary) — cite PT-4's a.s.-to-probability implication, not a second weak-law proof.
 12. `cor-birkhoff-strong-law-for-iid-coordinate-shifts` (corollary) — after MT-23 is authored, recover item 8 from Birkhoff applied to the Bernoulli shift; this is an agreement consequence, not the proof dependency of item 8.
 13. `rem-strong-law-does-not-assert-a-rate` (remark, L/NA) — ordinary a.s. convergence supplies no universal deterministic rate; PT-20's Brownian LIL is not imported backward.
+14. `thm-finite-variance-logarithmic-rate-for-iid-sums` (theorem) — if the iid variables have mean $\mu$ and finite variance, then for every $\varepsilon>0$, $(S_n-n\mu)/(\sqrt n(\log n)^{1/2+\varepsilon})\to0$ a.s.; the proof applies PT-5's random-series criterion on geometric blocks and interpolates with the maximal inequality.
 
 **Hard proof and well-definedness plan.**  Item 6 expands the expectation as
 annular integrals/sums and changes the order only under Tonelli.  Item 8 first
@@ -656,10 +666,11 @@ while `complete-metrizability-and-baire` has an empty `items` array.
 **Source backing read:** Aldous--Chewi Lecture 7, §§7.1--7.3 (*Weak
 Convergence in Metric Spaces*, Portmanteau, Skorokhod, tightness, Prohorov);
 Durrett §3.2, pp. 116--124; Varadhan §2.3; Melbourne *Lecture Notes on
-Advanced Probability* §4, especially Theorems 4.6--4.8.  The latter's
-finite-dimensional Prokhorov theorem is independent corroboration, while the
-full Polish proof follows the complete Aldous--Chewi treatment, corroborated
-by Durrett and Varadhan.
+Advanced Probability* §4, especially Theorems 4.6--4.8; Roch Note 8
+§§1.1--1.4 and 2.1--2.3; Le Gall §§10.3--10.4.1, pp. 131--138; and
+Sousi Chapter 4, pp. 35--41.  Geng's finite-dimensional Prokhorov theorem is
+independent corroboration, while the full Polish proof follows the complete
+Aldous--Chewi treatment, corroborated by Durrett and Varadhan.
 
 Items:
 
@@ -682,6 +693,7 @@ Items:
 17. `thm-levy-prokhorov-metric-metrizes-weak-convergence` (theorem) — on a separable metric space, $\pi(\mu_n,\mu)\to0$ iff $\mu_n\Rightarrow\mu$.
 18. `thm-skorokhod-representation-on-polish-spaces` (theorem) — if $\mu_n\Rightarrow\mu$, there are random elements $Y_n,Y$ on one probability space with the prescribed laws and $Y_n\to Y$ a.s.
 19. `rem-skorokhod-representation-does-not-couple-the-original-variables` (remark, L/NA) — the theorem constructs copies and does not upgrade the original $X_n$ to a.s. convergence.
+20. `thm-empirical-measures-of-iid-euclidean-samples-converge-weakly` (theorem) — for iid $\mathbb R^d$-valued $X_i$ with common law $\mu$, the empirical laws $n^{-1}\sum_{i=1}^n\delta_{X_i}$ converge weakly to $\mu$ a.s.; use one common full-measure event for a countable dense subset of $C_c(\mathbb R^d)$ and then the convergence-determining argument.
 
 **Hard proof and well-definedness plan.**  Portmanteau proves each direction
 with bounded continuous approximations to closed sets such as
@@ -706,6 +718,7 @@ completeness is used to identify the point limit.
 7. `cex-bounded-continuous-cannot-be-replaced-by-all-bounded-measurable-functions` — Dirac masses approaching a point and a singleton indicator.
 8. `cex-a-nontight-sequence-with-no-probability-law-subsequence-limit` — $\delta_n$ on $\mathbb R$.
 9. `cex-boundedness-of-first-moments-alone-does-not-give-uniform-integrability` — separate tightness from moment convergence.
+10. `ex-empirical-laws-of-a-finite-valued-iid-sample` — identify empirical weak convergence with simultaneous convergence of the finitely many sample frequencies.
 
 ### PT-8 — Characteristic functions, inversion, and continuity
 
@@ -823,8 +836,9 @@ zero has been verified.
 track applies Radon--Nikodym and does not reprove it.
 
 **Source backing read:** Durrett §§4.1--4.1.2, pp. 205--214; Varadhan
-§§4.1--4.2; van der Vaart §§1.1--1.3, pp. 1--7.  Exact headings and
-dispositions are in §11.
+§§4.1--4.2; van der Vaart §§1.1--1.3, pp. 1--7; Le Gall Chapter 11,
+pp. 143--160; Sousi Chapter 1, pp. 1--7.  Exact headings and dispositions are
+in §11.
 
 Items:
 
@@ -846,6 +860,7 @@ Items:
 16. `cor-conditional-variance-decomposition` (corollary) — $\operatorname{Var}X=E[\operatorname{Var}(X\mid\mathcal G)]+\operatorname{Var}(E[X\mid\mathcal G])$.
 17. `thm-uniform-integrability-of-conditional-expectations-of-one-variable` (theorem) — $\{E[X\mid\mathcal G]:\mathcal G\subseteq\mathcal F\}$ is uniformly integrable for fixed $X\in L^1$.
 18. `rem-conditional-expectation-is-a-class-not-a-canonical-pointwise-function` (remark, L/NA) — identities are a.s. unless a common version has been selected; later kernel theorems supply simultaneous setwise versions only under their hypotheses.
+19. `cor-conditional-cauchy-schwarz-inequality` (corollary) — for $X,Y\in L^2$, $|E[XY\mid\mathcal G]|^2\le E[X^2\mid\mathcal G]E[Y^2\mid\mathcal G]$ a.s.; prove it from conditional positivity applied to $(X+tY)^2$ for rational $t$, so only one common null set is discarded.
 
 **Hard proof and well-definedness plan.**  For signed $X$, item 2 may use
 the signed RN theorem or apply the positive theorem separately to $X^+$ and
@@ -936,8 +951,9 @@ ratio, results.
 $\mathbb N_0$ throughout PT-12--PT-14.
 
 **Source backing read:** Durrett §§4.2--4.3, pp. 217--231; Varadhan §§5.1,
-5.3, and 5.6; van der Vaart §§2.1, 2.3, and 2.7, pp. 8--13 and 19--20.
-Exact heading dispositions are in §11.
+5.3, and 5.6; van der Vaart §§2.1, 2.3, and 2.7, pp. 8--13 and 19--20;
+Le Gall §§12.1, pp. 163--166; Sousi §§2.1, pp. 8--10; Yoshida
+§§4.1--4.6, pp. 93--121.  Exact heading dispositions are in §11.
 
 Items:
 
@@ -959,6 +975,9 @@ Items:
 16. `def-compensator-and-doob-decomposition` (definition) — an integrable adapted process decomposes as a martingale plus a predictable process starting at zero.
 17. `thm-doob-decomposition-of-an-integrable-adapted-process` (theorem) — existence and uniqueness with increments $E[X_n-X_{n-1}\mid\mathcal F_{n-1}]$.
 18. `cor-submartingale-doob-decomposition-has-increasing-compensator` (corollary) — and conversely.
+19. `def-predictable-quadratic-variation-in-discrete-time` (definition) — for a square-integrable martingale $M$, set $\langle M\rangle_0=0$ and $\langle M\rangle_n=\sum_{k=1}^nE[(M_k-M_{k-1})^2\mid\mathcal F_{k-1}]$; this predictable increasing process is distinguished from the optional sum $[M]_n=\sum_{k=1}^n(M_k-M_{k-1})^2$.
+20. `thm-square-minus-predictable-quadratic-variation-is-a-martingale` (theorem) — $M_n^2-\langle M\rangle_n$ is a martingale when $M_0=0$; for general $M_0$, use $(M_n-M_0)^2$ and state the needed measurability of $M_0$.
+21. `cor-second-moment-is-the-expected-predictable-quadratic-variation` (corollary) — if $M_0=0$, then $E[M_n^2]=E\langle M\rangle_n$, with both sides finite.
 
 **Hard proof and well-definedness plan.**  Every conditional identity is an
 identity of a.e.-classes; finitely many times allow a common null set whenever
@@ -986,12 +1005,14 @@ integrable.
 
 **A page:** `martingale-inequalities-and-convergence`
 
-**Requires:** PT-4, PT-10, PT-12; planned MT-8, MT-10, MT-14, and the
+**Requires:** PT-4, PT-9--PT-10, PT-12; planned MT-8, MT-10, MT-14, and the
 functional-analysis $L^2$ projection dictionary.
 
 **Source backing read:** Durrett §§4.2, 4.4--4.7, pp. 217--224 and
 236--258; Varadhan §§5.2 and 5.5; van der Vaart §§2.4--2.6 and 2.9,
-pp. 13--19 and 22--24.  Exact heading dispositions are in §11.
+pp. 13--19 and 22--24; Le Gall §§12.3--12.6, pp. 170--187; Sousi
+§§2.4--2.9, pp. 14--33; Roch Note 19 §1 and Note 20 §§1.1--1.3;
+Yoshida §§5.1--5.6, pp. 123--161.  Exact heading dispositions are in §11.
 
 Items:
 
@@ -1008,6 +1029,11 @@ Items:
 11. `thm-levy-upward-convergence-of-conditional-expectations` (theorem) — for increasing $\mathcal F_n$, $E[X\mid\mathcal F_n]\to E[X\mid\sigma(\cup_n\mathcal F_n)]$ a.s. and in $L^1$.
 12. `thm-levy-downward-convergence-of-conditional-expectations` (theorem) — identify item 10 in the standard named form.
 13. `cor-kolmogorov-zero-one-law-from-reverse-martingales` (corollary) — recover PT-2 by conditioning a tail-event indicator, as an agreement proof rather than a dependency.
+14. `lem-conditional-hoeffding-bound-for-bounded-martingale-differences` (lemma) — if $A_k\le\Delta M_k\le B_k$ with $A_k,B_k\in\mathcal F_{k-1}$ and $B_k-A_k\le c_k$ for deterministic $c_k$, then $E[e^{\lambda\Delta M_k}\mid\mathcal F_{k-1}]\le e^{\lambda^2c_k^2/8}$ a.s.
+15. `thm-azuma-hoeffding-inequality` (theorem) — under item 14, $P(M_n-M_0\ge x)\le\exp(-2x^2/\sum_{k\le n}c_k^2)$, and the lower-tail estimate follows by applying the result to $-M$.
+16. `cor-symmetric-bounded-increment-azuma-bound` (corollary) — if $|\Delta M_k|\le d_k$ a.s. for deterministic $d_k$, then $P(|M_n-M_0|\ge x)\le2\exp(-x^2/(2\sum_{k\le n}d_k^2))$.
+17. `def-square-integrable-martingale-difference-array-and-variance-clock` (definition) — for each row, define differences $Z_{n,k}$ and the predictable conditional-variance clock $\Gamma_{n,m}=\sum_{k\le m}E[Z_{n,k}^2\mid\mathcal F_{n,k-1}]$.
+18. `thm-martingale-central-limit-theorem` (theorem) — if each row and its variance clock converge a.s. at the row endpoint, $\Gamma_{n,\infty}\to1$ in probability, and $\sum_kE[Z_{n,k}^2;|Z_{n,k}|>\varepsilon]\to0$ for every $\varepsilon>0$, then $\sum_kZ_{n,k}\Rightarrow N(0,1)$.
 
 **Hard proof and well-definedness plan.**  The upcrossing number is defined by
 a supremum over finite integer tuples, hence is a measurable integer-valued
@@ -1031,6 +1057,7 @@ argument.
 6. `cex-l1-bounded-martingale-need-not-converge-in-l1` — a non-UI nonnegative martingale with loss of mass.
 7. `cex-almost-sure-martingale-convergence-need-not-preserve-expectation`.
 8. `cex-doob-lp-maximal-inequality-excludes-p-equals-one` (counterexample, A/A) — on $(0,1]$ take $A_k=(0,2^{-k}]$ and the filtration revealing these nested events; $M_k=E[2^n1_{A_n}\mid\mathcal F_k]$ has $EM_n=1$ while $E\max_{k\le n}M_k$ grows linearly in $n$, so no uniform $L^1$ constant exists; verify every conditional expectation and shell sum explicitly.
+9. `ex-azuma-bound-for-simple-random-walk` — recover the two-sided sub-Gaussian bound from the martingale differences $\pm1$ and compare its constants with the exact binomial tail scale.
 
 ### PT-14 — Stopping times and optional stopping
 
@@ -1096,8 +1123,9 @@ state spaces are allowed on this foundational page; recurrence classification
 in PT-16 is countable-state.
 
 **Source backing read:** Durrett §§5.1--5.2, pp. 268--285; Varadhan §4.4;
-Levin--Peres--Wilmer §§1.1--1.2 and Appendix A.3.  Exact headings are in
-§11.
+Levin--Peres--Wilmer §§1.1--1.2 and Appendix A.3; Le Gall
+§§13.1--13.3, pp. 189--200; Roch Note 24 §1; Yoshida §§4.5,
+pp. 109--115.  Exact headings are in §11.
 
 Items:
 
@@ -1116,6 +1144,9 @@ Items:
 13. `cor-post-hitting-chain-restarts-from-the-hit-state` (corollary) — apply item 12 to first hitting times.
 14. `def-killed-and-absorbed-transition-kernels` (definition) — make a measurable set absorbing or adjoin a cemetery state, with the extended sigma-algebra explicit.
 15. `lem-killed-and-absorbed-kernels-are-probability-kernels` (lemma) — verify mass one and measurability before using them.
+16. `def-discrete-generator-of-a-countable-state-transition-matrix` (definition) — for bounded $f$ on a countable state space, $Lf(x)=\sum_yp(x,y)(f(y)-f(x))=Pf(x)-f(x)$.
+17. `thm-countable-state-martingale-problem-characterization` (theorem) — an adapted countable-state process has transition matrix $p$ iff, for every bounded $f$, $f(X_n)-\sum_{k<n}Lf(X_k)$ is a martingale.
+18. `cor-bounded-harmonic-functions-yield-markov-chain-martingales` (corollary) — if $Ph=h$, then $h(X_n)$ is a martingale; the stopped form on a domain is used by PT-16.
 
 **Hard proof and well-definedness plan.**  The definition is a conditional
 expectation identity, so a version is chosen for each event only long enough
@@ -1148,7 +1179,8 @@ with its full power-set sigma-algebra.
 
 **Source backing read:** Durrett §§5.3--5.4, pp. 285--311;
 Levin--Peres--Wilmer §§1.3, 1.7, 2.1--2.2, 2.5, Chapter 10.1, and
-Chapter 21.1--21.3; Varadhan §4.6.  Exact headings are in §11.
+Chapter 21.1--21.3; Varadhan §4.6; Le Gall §§13.4--13.7,
+pp. 200--211; Roch Note 24 §§2--3.  Exact headings are in §11.
 
 Items:
 
@@ -1172,6 +1204,10 @@ Items:
 18. `cor-recurrence-of-the-one-dimensional-simple-symmetric-random-walk` (corollary) — derive from the return-probability series and the central-binomial asymptotic.
 19. `cor-recurrence-of-the-two-dimensional-simple-symmetric-random-walk` (corollary) — factor the return probability into one-dimensional binomial coefficients and prove its harmonic-order lower bound.
 20. `cor-transience-of-simple-symmetric-random-walk-in-dimension-at-least-three` (corollary) — derive from the Stirling coefficient upper bound proved in the item, without citing an unbuilt local CLT.
+21. `thm-first-step-equations-for-nonnegative-exit-costs` (theorem) — for a domain $D$, nonnegative boundary payoff $f$ and running cost $c$, the expected payoff at $T_{D^c}$ plus accumulated pre-exit cost satisfies $u=Pu+c$ on $D$ and $u=f$ on $D^c$, allowing $u=+\infty$ before a finiteness hypothesis is imposed.
+22. `thm-superharmonic-majorants-bound-exit-costs` (theorem) — if nonnegative $\psi$ satisfies $L\psi\le-c$ on $D$ and $\psi\ge f$ on $D^c$, then $\psi\ge u$; prove this with the stopped nonnegative supermartingale and Fatou, not an unlicensed optional-stopping limit.
+23. `cor-expected-exit-time-solves-the-poisson-equation` (corollary) — when $E_xT_{D^c}<\infty$, $u(x)=E_xT_{D^c}$ solves $Lu=-1$ on $D$ and $u=0$ on $D^c$; for a finite irreducible chain and proper $D$, the required expectations are finite by a geometric tail bound.
+24. `thm-lyapunov-drift-bound-for-markov-chain-hitting-times` (theorem) — if $\psi\ge0$ and $L\psi\le-1$ on $A^c$, then $E_xT_A\le\psi(x)$ for every starting state.
 
 **Hard proof and well-definedness plan.**  Return times take values in
 $\mathbb N\cup\{\infty\}$ and the successive-return recursion is defined only
@@ -1195,6 +1231,7 @@ coefficient estimate they need instead of citing an unbuilt local CLT.
 7. `cex-recurrence-is-not-a-property-shared-by-different-communicating-classes`.
 8. `cex-a-bounded-harmonic-boundary-value-problem-can-be-nonunique-without-almost-sure-boundary-hitting`.
 9. `cex-a-transient-chain-can-return-with-positive-probability` — transience means return probability below one, not zero.
+10. `ex-negative-drift-reflected-walk-has-a-finite-mean-small-set-hitting-time` — for $X_{n+1}=(X_n+Z_{n+1})^+$ with integrable integer increments of negative mean, truncate the drift estimate outside a finite set and apply the Lyapunov bound with a linear function.
 
 ### PT-17 — Stationary Markov chains and ergodic limits
 
@@ -1384,7 +1421,9 @@ real-analysis variation and differentiability definitions.
 **Source backing read:** Durrett §§7.4--7.5, pp. 370--378, and §8.5,
 pp. 416--420 (Theorem 8.5.1, the Brownian LIL); Pitman Lectures 17--19 (*Hitting and Reflection*,
 *The Brownian Zero Set*, *Brownian Martingales*); van der Vaart §§4.5 and
-5.8, pp. 43--46 and 80--88.  Exact heading dispositions are in §11.
+5.8, pp. 43--46 and 80--88; Lawler §§2.7--2.8, pp. 63--72; Sousi
+§§6.3--6.8, pp. 48--66; Yoshida §§6.6--6.8, pp. 198--218.  Exact
+heading dispositions are in §11.
 
 Items:
 
@@ -1403,6 +1442,8 @@ Items:
 13. `cor-brownian-law-of-the-iterated-logarithm-at-zero` (corollary) — use time inversion to obtain the $t\downarrow0$ form.
 14. `cor-critical-holder-boundary-at-zero-from-the-brownian-lil` (corollary) — the zero-time LIL rules out a pointwise $1/2$-Holder bound at zero, without claiming it is a uniform modulus theorem or excluding exceptional times elsewhere.
 15. `rem-quadratic-variation-depends-on-the-approximating-partitions-without-regularity` (remark, L/NA) — PT-20 proves dyadic and the specified deterministic-mesh extensions only; arbitrary path-dependent partitions are not silently included.
+16. `thm-brownian-last-zero-before-a-fixed-time-has-the-arcsine-law` (theorem) — for $g_t=\sup\{s<t:B_s=0\}$, $g_t/t$ has density $[\pi\sqrt{x(1-x)}]^{-1}$ on $(0,1)$; the endpoint convention is immaterial because neither endpoint has mass.
+17. `thm-brownian-positive-occupation-proportion-has-the-arcsine-law` (theorem) — for $A_t=\int_0^t1_{\{B_s>0\}}ds$, the ratio $A_t/t$ has the same arcsine density, despite being an occupation time rather than a last-zero time.
 
 **Hard proof and well-definedness plan.**  Nowhere differentiability is
 proved uniformly over possible times by controlling slopes on a countable
@@ -1499,8 +1540,10 @@ processes driven by Brownian motion.
 **Source backing read:** van der Vaart §§5.6--5.10 and §§6.1--6.3,
 pp. 68--98 and 119--127 (*Bounded Variation*, *Semimartingales*, *Quadratic
 Variation*, *Ito's Formula*, *Levy's Theorem*, *Brownian Martingales*,
-*Exponential Processes*); Durrett §7.6, pp. 379--388; Pitman Lectures 23--25.
-Exact heading dispositions are in §11.
+*Exponential Processes*); Durrett §7.6, pp. 379--388; Pitman Lectures 23--25;
+Lawler §§3.1--3.7, §§4.1, §4.5, and §5.7, pp. 75--110, 113--116,
+133--136, and 178--180; Yoshida §§7.3--7.6, pp. 226--255.  Exact heading
+dispositions are in §11.
 
 Items:
 
@@ -1520,6 +1563,9 @@ Items:
 14. `thm-dynkin-formula-for-bounded-brownian-stopping` (theorem) — for $f\in C_c^2(\mathbb R^d)$ and a bounded stopping time $\tau$, $E_xf(B_\tau)=f(x)+E_x\int_0^\tau Lf(B_s)ds$.
 15. `rem-ito-versus-stratonovich-boundary` (remark, L/NA) — Stratonovich integration is not developed; record only the sourced conversion for sufficiently regular Brownian Ito integrands as a non-load-bearing convention note.
 16. `rem-general-semimartingale-calculus-is-outside-this-block` (remark, L/NA) — jumps, general local-martingale integrators, Girsanov, SDEs, Tanaka/local time, and stochastic differential geometry remain in the scope denials.
+17. `thm-brownian-filtration-martingale-representation` (theorem) — for the completed natural filtration of a Brownian motion, every cadlag local martingale $M$ has, up to indistinguishability, a representation $M_t=M_0+\int_0^tH_s\,dB_s$ with predictable $H$ and $\int_0^tH_s^2ds<\infty$ a.s. for every $t$.
+18. `cor-square-integrable-brownian-terminal-variables-have-ito-representations` (corollary) — for $\xi\in L^2(\mathcal F_T)$, there is a predictable $H$ with $E\int_0^TH_s^2ds<\infty$ and $\xi=E\xi+\int_0^TH_s\,dB_s$; $H$ is unique $dt\otimes dP$-a.e.
+19. `cor-brownian-filtration-local-martingales-have-continuous-versions` (corollary) — the representation and continuity of Brownian stochastic integrals give a continuous modification, so cadlag discontinuities cannot arise from the completed Brownian filtration alone.
 
 **Hard proof and well-definedness plan.**  The quadratic-covariation theorem
 is proved before the product and Ito formulas.  For Ito's formula, first use a
@@ -1786,17 +1832,22 @@ claimed from an abstract or snippet.
 | AC | David Aldous, scribed by Sinho Chewi, *Probability Theory*, Math C218B/Stat C205B | [complete Berkeley note set](https://www.stat.berkeley.edu/~aldous/205B/chewi_notes.pdf), 104 pp. | Lectures 1--15, §§1.1--15.2 |
 | P | Jim Pitman, Statistics 205B, *Probability Theory* | [complete Berkeley lecture-note sequence and index](https://www.stat.berkeley.edu/~pitman/s205s03/) | Lectures 13--25 |
 | M | X. Geng, *Lecture Notes on Advanced Probability* | [complete author-hosted notes](https://researchers.ms.unimelb.edu.au/~xgge%40unimelb/Files/Notes/Lecture%20Notes%20on%20Advanced%20Probability.pdf) | Chapter 4, weak/vague convergence through Theorem 4.8 (finite-dimensional Prokhorov) |
+| LG | Jean-François Le Gall, *Intégration, Probabilités et Processus Aléatoires* | [complete author-hosted PDF](https://www.imo.universite-paris-saclay.fr/~jean-francois.le-gall/IPPA2.pdf), 248 pp. | Part II, Chapters 8--11, pp. 91--160; Part III, Chapters 12--14, pp. 163--247 |
+| R | Sébastien Roch, *Lecture Notes on Measure-Theoretic Probability Theory* | [complete course page and Notes 1--29](https://people.math.wisc.edu/~roch/grad-prob/) | Note 3 §§1.3--1.4; Note 5 §§1.1--1.4.2 and §2.2; Note 8 §§1.1--1.4 and 2.1--2.3; Note 19 §1; Note 20 §§1.1--1.3; Note 24 §§1--3 |
+| L | Gregory F. Lawler, *Stochastic Calculus: An Introduction with Applications* | [complete author-hosted PDF](https://www.math.uchicago.edu/~lawler/finbook.pdf), 260 pp. | §§1.1--1.7; 2.4--2.10; 3.1--3.7; 4.1, 4.5; 5.7 |
+| S | Perla Sousi, *Advanced Probability* | [complete author-hosted PDF](https://www.statslab.cam.ac.uk/~ps422/mynotes.pdf), 81 pp. | Chapters 1--2; §3.4; Chapter 4; §§6.1--6.10 |
+| Y | Nobuo Yoshida, *A Course in Probability* | [complete author-hosted PDF](https://www.math.nagoya-u.ac.jp/~noby/pdf/prob.pdf), 288 pp. | §§2.6--2.7; 4.1--4.6; 5.1--5.6; 6.1--6.9; 7.1--7.6 |
 
-Durrett and Levin--Peres--Wilmer are the two complete standard textbooks
-obtained in this run (the latter is the standard specialist text for the
-Markov-chain part of the track).  Varadhan is a complete graduate probability
-course used at NYU as a recommended text.  Norris, van der Vaart,
-Aldous--Chewi, Pitman, and Geng supply further independent full lecture-note
-treatments and specialist depth.  Klenke, Kallenberg,
-Billingsley, and Williams were used only as bibliographic/convention checks
-where cited by these open sources; because their complete texts were not
-obtained openly in this run, no chapter of theirs is falsely claimed as
-harvested.
+The modern full-treatment pool is therefore thirteen works rather than the
+original eight.  Le Gall adds a second broad textbook-scale progression from
+foundations through Brownian motion; Roch adds complete theorem-level notes
+on limit theory, martingale CLT/concentration, and Markov potential methods;
+Lawler, Sousi, and Yoshida independently deepen the martingale/Brownian half.
+Klenke, Kallenberg, Billingsley, Williams, Shiryaev, Chung, Dudley, and
+Mörters--Peres were checked as candidates, but no openly reachable complete
+text was obtained from an authoritative host in this pass.  They are not
+counted, and no table of contents or passing quotation is misreported as a
+full treatment.
 
 ### 11.1 Convention conflicts resolved
 

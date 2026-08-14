@@ -52,18 +52,21 @@ splice time.
 | FA-24 | `distributions-test-functions-and-differentiation` | $\mathcal D$, $\mathcal D'$, order/support, differentiation, multiplication, convolution |
 | FA-25 | `tempered-distributions-and-the-fourier-transform` | $\mathcal S'$, Fourier duality, polynomial operators, fundamental examples |
 
-**Full texts obtained.**  The source harvest in §11 records three complete,
+**Full texts obtained.**  The source harvest in §11 records seven complete,
 searchable graduate texts: Theo Bühler and Dietmar Salamon, *Functional
 Analysis* (452 pp., author-hosted); Gerald Teschl, *Topics in Real and
-Functional Analysis* (563 pp., complete 2017 manuscript); and Anthony W.
-Knapp, *Advanced Real Analysis*, digital second edition (650 pp., legally
-released by the author).  Complete MIT note sets by Andrew Lin/Casey Rodriguez
-(18.102, 125 pp.) and Semyon Dyatlov (18.155, 266 pp.), Dana P. Williams's
-spectral-theorem notes (39 pp.), and Ali Shirbisheh's *Lectures on
-$C^*$-algebras*, together with Masoud Khalkhali's *Lectures on
-Noncommutative Geometry*, are independent open treatments.  Exact ranges,
-headings, and dispositions are in §11; primary papers are listed there for
-choice strength and non-elementary boundary results.
+Functional Analysis* (563 pp., complete 2017 manuscript); Anthony W. Knapp,
+*Advanced Real Analysis*, digital second edition (650 pp., legally released
+by the author); Haim Brezis, *Functional Analysis, Sobolev Spaces and Partial
+Differential Equations* (603 PDF pp., university-hosted); Michael Mueger,
+*Functional Analysis* (264 pp., author-hosted complete notes); Razvan Gelca,
+*Functional Analysis* (151 pp., author-hosted complete notes); and Teschl,
+*Mathematical Methods in Quantum Mechanics* (370 pp., author/AMS-authorized).
+Complete MIT note sets by Andrew Lin/Casey Rodriguez (18.102, 125 pp.) and
+Semyon Dyatlov (18.155, 266 pp.), Dana P. Williams's spectral-theorem notes
+(39 pp.), and the other open treatments remain independent checks.  Exact
+ranges, headings, and dispositions are in §11; primary papers are listed there
+for choice strength and non-elementary boundary results.
 
 **Seams consumed.**  The published seams are real normed spaces from
 `rn-as-a-normed-space`, complete-metric Baire from
@@ -365,7 +368,8 @@ products from FA-1.
 (*Bounded Linear Operators*; *Quotient and Product Spaces*; *The Banach Space
 of Bounded Linear Operators*); Teschl §§1.6–1.7, pp. 27–36 (*Bounded
 operators*; *Sums and quotients of Banach spaces*); MIT 18.102, pp. 18–31
-(bounded maps, operator norm, quotients).
+(bounded maps, operator norm, quotients); Brezis §§2.3–2.4, pp. 35–40
+(*Open Mapping*; *Complementary Subspaces; Right and Left Invertibility*).
 
 Items:
 
@@ -390,6 +394,11 @@ Items:
 19. `thm-universal-property-of-the-normed-quotient` (theorem) — bounded $T$ vanishing on $M$ factors uniquely through $X/M$, and the factor norm equals $\|T\|$ when $q$ is the quotient map.
 20. `def-complemented-subspace` (definition) — a closed $M$ for which $X=M\oplus N$ with bounded coordinate projections.
 21. `thm-complemented-subspace-iff-range-of-a-bounded-projection` (theorem) — $M=\operatorname{ran}P$, $P^2=P$.
+22. `def-bounded-below-operator` (definition) — $T:X\to Y$ is bounded below when $\|Tx\|\ge c\|x\|$ for some $c>0$ and all $x$.
+23. `thm-bounded-below-iff-injective-with-closed-range` (theorem) — for a bounded operator from a Banach space, bounded below is equivalent to injectivity plus closed range, via bounded inverse on the range.
+24. `def-bounded-left-and-right-inverses` (definition) — a left inverse $S:Y\to X$ satisfies $ST=I_X$, while a right inverse satisfies $TS=I_Y$; neither is silently assumed two-sided.
+25. `thm-bounded-right-inverse-iff-kernel-is-complemented` (theorem) — for a surjective bounded map between Banach spaces, a bounded right inverse exists exactly when its kernel has a topological complement.
+26. `thm-bounded-left-inverse-iff-range-is-complemented` (theorem) — for an injective bounded map between Banach spaces, a bounded left inverse exists exactly when its range is closed and complemented.
 
 **Proof obligations.**  The quotient norm is not defined by “choose a nearest
 point”; a closed subspace need not be proximinal.  Every inequality uses an
@@ -623,7 +632,9 @@ $L^p$ representation theorem.
 Operators*; *Examples of Dual Spaces*; *The Bidual Space*; *The Dual
 Operator*; *Duality*; *The Closed Image Theorem*); Teschl §§4.3 and 4.6,
 pp. 119–125 and 161–169 (*The adjoint operator* and the Banach-algebra/operator
-material); MIT 18.102, pp. 53–68 (dual spaces, adjoints, biduality).
+material); MIT 18.102, pp. 53–68 (dual spaces, adjoints, biduality); Brezis
+§§2.5 and 2.7, pp. 41–48 (*Orthogonality Revisited*; *Operators with Closed
+Range; Surjective Operators*).
 
 Items:
 
@@ -646,6 +657,9 @@ Items:
 17. `thm-dual-of-c0-is-ell-one` (theorem) — construct coefficients $a_n=f(e_n)$, prove $a\in\ell^1$, and recover $f$ by density.
 18. `thm-dual-of-ell-one-is-ell-infinity` (theorem) — bounded sequences act by the absolutely convergent pairing and exhaust the dual.
 19. `rem-lp-duality-in-abstract-language` (remark, L/NA) — translate MT-16's exact hypotheses into $(L^p)^*\cong L^q$ without restating or widening them.
+20. `cor-dense-range-iff-transpose-is-injective` (corollary) — $\overline{\operatorname{ran}T}=Y$ exactly when $\ker T^*=0$.
+21. `thm-surjective-iff-transpose-is-bounded-below` (theorem) — for bounded maps between Banach spaces, surjectivity of $T$ is equivalent to $\|g\|\le C\|T^*g\|$ on $Y^*$.
+22. `thm-bounded-below-iff-transpose-is-surjective` (theorem) — combine the closed-range theorem with the annihilator identities; the Banach hypotheses and the distinction between injectivity and dense range remain explicit.
 
 **Well-definedness and hard-proof plan.**  For `q^*`, if $f(x+M)$ is
 recovered from an annihilating functional, representative independence is
@@ -804,7 +818,8 @@ $L^p$ consequences.
 Spaces*; *The Eberlein–Smulyan Theorem*); Teschl §§4.4 and 5.5, pp. 125–133
 and 156–160 (*Weak convergence*; *Uniformly convex spaces*); Whitley, “An
 elementary proof of the Eberlein–Smulian theorem,” Math. Ann. 172 (1967),
-pp. 116–118; Megginson §§2.8 and 2.9 for James and Bishop–Phelps.
+pp. 116–118; Megginson §§2.8 and 2.9 for James and Bishop–Phelps; Brezis
+§3.6, pp. 73–76 (*Separable Spaces*).
 
 Items:
 
@@ -830,6 +845,8 @@ Items:
 20. `thm-james-reflexivity-theorem` (theorem) — a Banach space is reflexive iff every continuous functional attains its norm on its closed unit ball.
 21. `lem-bishop-phelps-support-cone-construction` (lemma) — the complete-metric variational step for a real closed bounded convex set.
 22. `thm-bishop-phelps` (theorem) — support functionals are norm dense in $X^*$; specialize to norm-attaining functionals on $B_X$.
+23. `thm-separable-dual-implies-separable-primal` (theorem) — if $X^*$ is norm separable, choose a dense sequence of functionals, norm them on a sequence of points, and use annihilator separation to obtain a countable dense subspace of $X$.
+24. `cor-separable-reflexive-space-has-separable-dual` (corollary) — apply item 23 to $X^*$ and the canonical identification $X\cong X^{**}$; retain the false converse warning supplied by $L^1$ and $L^\infty$.
 
 **Hard proof plan.**  Eberlein–Šmulian follows Whitley's separable reduction,
 not the false general claim that weak compact sets are metrizable.  James's
@@ -859,7 +876,9 @@ Space*), including its norm, dual, bidual, and codimension-one conclusion;
 Megginson ch. 4 §§1–2 (Schauder bases and approximation property); Albiac–Kalton
 ch. 1 §§1.1–1.4 and ch. 2's classical sequence-space examples.  Enflo's exact
 boundary is checked against his primary paper, Acta Math. 130 (1973),
-pp. 309–317.
+pp. 309–317.  Mueger §§3.2.2 and A.2, pp. 22–23 and 167–169, and
+§B.2.1, pp. 184–185, supply the unconditional-series equivalences and the
+Dvoretzky–Rogers proof.
 
 Items:
 
@@ -883,6 +902,11 @@ Items:
 18. `thm-canonical-image-of-james-space-has-codimension-one` (theorem) — hence $J$ is not reflexive.
 19. `thm-james-space-is-isometrically-isomorphic-to-its-bidual` (theorem) — by a noncanonical isometry; this is why FA-7's definition names $J_X$.
 20. `rem-enflo-space-without-the-approximation-property` (remark, L/NS) — exact primary theorem and the proved implication basis $\Rightarrow$ AP; never a dependency.
+21. `def-unconditional-convergence-of-a-banach-space-series` (definition) — convergence under every permutation, kept distinct from absolute and conditional convergence.
+22. `thm-unconditional-convergence-equivalences` (theorem) — for a series in a Banach space, permutation invariance, the unordered finite-subset net, uniform smallness of finite tails, convergence after bounded scalar multipliers, and convergence of every subseries are equivalent.
+23. `lem-dvoretzky-rogers-finite-block-estimate` (lemma) — in sufficiently high finite dimension choose unit vectors whose scalar combinations obey the source's Euclidean upper estimate; isolate the finite-dimensional geometric input.
+24. `thm-dvoretzky-rogers` (theorem) — every infinite-dimensional Banach space admits an unconditionally convergent series that is not absolutely convergent.
+25. `cor-absolute-and-unconditional-convergence-agree-universally-iff-finite-dimensional` (corollary) — combine item 24 with finite-dimensional coordinate equivalence, including the zero-dimensional case.
 
 **Hard proof and boundary plan.**  The finitely additive integral uses uniform
 approximation by finite-range sequences; “simple functions are dense” is
@@ -1239,7 +1263,10 @@ items actually used.
 Spectral Radius*; *The Spectrum of a Compact Operator*; *Holomorphic
 Functional Calculus*); Teschl §§6.1 and 6.6, pp. 162–169 and 189–192 (*Banach
 algebras*; *Spectral theory for bounded operators*); Shirbisheh ch. 2
-§§2.1–2.5 (Banach algebras, spectra, holomorphic functional calculus).
+§§2.1–2.5 (Banach algebras, spectra, holomorphic functional calculus);
+Mueger §§13.1–13.4, pp. 113–129 (*Spectrum*; *Point, Continuous, Residual,
+Approximate Point, and Compression Spectra*; *Spectral Radius*; compact
+spectral theory).
 
 Items:
 
@@ -1267,6 +1294,10 @@ Items:
 22. `thm-riesz-spectral-projection-properties` (theorem) — idempotence, commutation with $a$, invariant splitting, and separated spectra of the restrictions.
 23. `def-calkin-algebra` (definition) — $\mathcal B(X)/\mathcal K(X)$ when compact operators form the closed ideal supplied by FA-15.
 24. `cor-atkinson-in-calkin-algebra-language` (corollary) — reconcile FA-15's Atkinson theorem with quotient invertibility.
+25. `def-point-continuous-and-residual-spectrum` (definition) — split $\sigma(T)$ according as $T-\lambda I$ is noninjective, injective with dense non-surjective range, or injective with nondense range.
+26. `def-approximate-point-and-compression-spectrum` (definition) — $\sigma_{ap}(T)$ records failure to be bounded below and $\sigma_{cp}(T)$ failure of dense range.
+27. `lem-relations-among-the-five-spectral-parts` (lemma) — prove the disjoint point/continuous/residual partition, $\sigma=\sigma_{ap}\cup\sigma_{cp}$, $\sigma_p\subseteq\sigma_{ap}$, and $\sigma_r=\sigma_{cp}\setminus\sigma_p$.
+28. `thm-boundary-of-spectrum-lies-in-approximate-point-spectrum` (theorem) — a boundary resolvent sequence either yields approximate eigenvectors or would extend the resolvent across the boundary by a uniform lower bound.
 
 **Well-definedness and hard-proof plan.**  The spectrum is defined only for a
 unital complex algebra; nonunital algebras require unitization and are treated
@@ -1364,7 +1395,7 @@ really lands in $C_0$.
 
 1. `ex-maximal-ideal-space-of-c-of-k` — evaluations give a homeomorphism with $K$.
 2. `ex-maximal-ideal-space-of-the-disc-algebra` — distinguish the algebra from all of $C(\mathbb T)$.
-3. `ex-gelfand-transform-of-ell-one-of-z` — characters and Fourier series, with no Wiener theorem silently added.
+3. `ex-gelfand-transform-of-ell-one-of-z` — characters and Fourier series; the inverse-closedness consequence is now separated as item 14.
 4. `cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric` — radical/non-normal example.
 5. `ex-banach-stone-weighted-composition-isometries`.
 6. `ex-gelfand-kolmogorov-recovers-beta-x-not-x`.
@@ -1375,6 +1406,7 @@ really lands in $C_0$.
 11. `rem-linear-dugundji-extension-remains-topological` (remark, L/NS) — exact theorem and its paracompactness/choice seam.
 12. `ex-c-zero-of-a-locally-compact-space` — evaluations identify $X$ with $\Delta(C_0(X))$, including a noncompact example where the algebra has no unit.
 13. `ex-unitization-corresponds-to-one-point-compactification` — $\widetilde{C_0(X)}\cong C(X^+)$ and the added character is evaluation at infinity.
+14. `thm-wiener-lemma-for-absolutely-convergent-fourier-series` — if a continuous function on the circle has absolutely summable Fourier coefficients and vanishes nowhere, its reciprocal also has absolutely summable Fourier coefficients; prove it from invertibility in $\ell^1(\mathbb Z)$ and the character computation.
 
 ### FA-19 — Continuous functional calculus for self-adjoint and normal operators
 
@@ -1390,7 +1422,9 @@ Self-Adjoint Operators*; *Gelfand Representation*; *C* Algebras of Normal
 Operators*; *Functional Calculus for Normal Operators*); Teschl §6.2,
 pp. 169–173 (*The C* algebra of operators and the spectral theorem*);
 Williams §§2–4, pp. 4–15 (*The spectrum*; *The Gelfand transform*; *The
-Abstract Spectral Theorem*).
+Abstract Spectral Theorem*); Mueger §§11.2 and 11.6–11.7, pp. 87–96, and
+§B.12.1, pp. 231–233 (partial isometries, numerical range/radius, positivity,
+and Toeplitz–Hausdorff).
 
 Items:
 
@@ -1412,6 +1446,11 @@ Items:
 13. `cor-normal-operator-with-zero-spectrum-is-zero` (corollary) — explicitly false without normality.
 14. `thm-spectral-mapping-for-continuous-normal-functional-calculus` (theorem).
 15. `thm-bounded-normal-operator-abstract-spectral-theorem` (theorem) — the generated algebra is a concrete copy of continuous functions on the spectrum; PVM and multiplication forms wait for FA-20.
+16. `def-isometry-coisometry-and-partial-isometry` (definition) — define the initial and final spaces of a partial isometry, and distinguish $U^*U=I$ from $UU^*=I$.
+17. `thm-partial-isometry-characterizations` (theorem) — equivalently $U$ is isometric on $(\ker U)^\perp$, $U^*U$ is the initial projection, or $UU^*$ is the final projection; this supplies the precise object used in polar decomposition.
+18. `def-numerical-range-and-numerical-radius` (definition) — $W(T)=\{\langle Tx,x\rangle:\|x\|=1\}$ and $w(T)=\sup_{z\in W(T)}|z|$ on a complex Hilbert space.
+19. `thm-numerical-radius-is-an-equivalent-operator-norm` (theorem) — $w(T)\le\|T\|\le2w(T)$, with equality $w(T)=\|T\|$ for self-adjoint and normal $T$; do not extend the complex estimate to real Hilbert spaces.
+20. `thm-toeplitz-hausdorff` (theorem) — the numerical range of every bounded operator on a complex Hilbert space is convex, though it need not be closed.
 
 **Proof plan.**  The positive square root is built by continuous polynomial
 approximation on $[0,\|T\|]$ and uniqueness uses commutation plus positivity;
@@ -1441,7 +1480,7 @@ MT-11, MT-12, and MT-20 for scalar/complex integration and RMK.
 **Source backing read:** Bühler–Salamon §§5.6–5.7, pp. 273–298
 (*Projection Valued Measures*; *Measurable Functional Calculus*; *Cyclic
 Vectors*); Teschl §6.3, pp. 173–177 (*Spectral measures*) and *Mathematical
-Methods in Quantum Mechanics* §§3.1–3.3, pp. 99–130; Williams §§4–5,
+Methods in Quantum Mechanics* §§3.1–3.3 and §4.1, pp. 99–135; Williams §§4–5,
 pp. 9–20 (*The Abstract Spectral Theorem*; *Spectral Integrals*).
 
 Items:
@@ -1463,6 +1502,7 @@ Items:
 15. `thm-multiplication-operator-form-of-the-bounded-normal-spectral-theorem` (theorem) — orthogonal direct sum of cyclic $L^2$ representations; separable multiplicity form stated separately.
 16. `def-spectral-multiplicity-function-in-the-separable-case` (definition).
 17. `thm-unitary-equivalence-classified-by-measure-class-and-multiplicity` (theorem) — exact separable normal-operator statement from the source.
+18. `thm-stone-resolvent-formula-for-spectral-projections` (theorem) — recover the half-sum of the open- and closed-interval spectral projections as the strong limit of the integrated jump of the resolvent across the real axis, with endpoint atoms stated explicitly.
 
 **Well-definedness and proof plan.**  SOT additivity is stated before any
 operator-valued integral; WOT additivity alone is shown equivalent for
@@ -1497,9 +1537,11 @@ dependency.
 Operator*; *Spectral Projections*; *The Dual of an Unbounded Operator*; *The
 Adjoint of an Unbounded Operator*; *Unbounded Self-Adjoint Operators*;
 *Unbounded Normal Operators*; *Functional Calculus*; *Spectral Measures*);
-Teschl, *Mathematical Methods in Quantum Mechanics*, §§2.2, 2.4, 3.1, and
-5.1, pp. 66–75, 83–89, 99–111, 145–150; Williams §7, pp. 28–39 (*A Spectral
-Theorem for Unbounded Operators*, including *Stone's Theorem: Part I/II*).
+Teschl, *Mathematical Methods in Quantum Mechanics*, §§2.2, 2.4–2.6,
+3.1, 3.3, 4.4, 5.1, 6.1, 6.4, and 6.6, pp. 66–75, 83–95, 99–111,
+117–119, 139–141, 145–150, 157–160, 170–174, and 179–184; Williams §7,
+pp. 28–39 (*A Spectral Theorem for Unbounded Operators*, including *Stone's
+Theorem: Part I/II*).
 
 Items:
 
@@ -1525,6 +1567,22 @@ Items:
 20. `lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group` (lemma) — $U(t)=e^{itT}$ by Borel calculus and dominated convergence.
 21. `lem-generator-of-a-unitary-group-is-skew-adjoint` (lemma) — resolvent/Laplace-transform construction, not formal differentiation alone.
 22. `thm-stone-one-parameter-unitary-groups` (theorem) — bijection between self-adjoint $T$ and strongly continuous unitary groups $U(t)=e^{itT}$, with uniqueness of the generator.
+23. `def-deficiency-subspaces-and-deficiency-indices` (definition) — for a densely defined closed symmetric $T$, set $K_\pm=\ker(T^*\mp i)$ and $d_\pm(T)=\dim K_\pm$, with the sign convention tied to the Cayley transform.
+24. `thm-von-neumann-self-adjoint-extension-parameterization` (theorem) — self-adjoint extensions correspond to unitary maps $K_+\to K_-$; give the resulting domain and action formulas rather than merely counting extensions.
+25. `cor-self-adjoint-extension-exists-iff-deficiency-indices-agree` (corollary) — equality includes arbitrary Hilbert dimension, and essential self-adjointness is the case $d_+=d_-=0$.
+26. `def-pure-point-absolutely-continuous-and-singular-continuous-spectral-subspaces` (definition) — classify vectors by the Lebesgue decomposition of their scalar spectral measures.
+27. `thm-canonical-spectral-type-decomposition` (theorem) — $H=H_{pp}\oplus H_{ac}\oplus H_{sc}$ into reducing subspaces and define the corresponding three spectra.
+28. `def-relative-boundedness-with-respect-to-an-operator` (definition) — $B$ is $A$-bounded when $D(A)\subseteq D(B)$ and $\|B\psi\|\le a\|A\psi\|+b\|\psi\|$; the infimum of admissible $a$ is the relative bound.
+29. `lem-second-resolvent-identity-for-closed-operator-perturbations` (lemma) — on the common resolvent set, $R_{A+B}(z)-R_A(z)=-R_A(z)BR_{A+B}(z)=-R_{A+B}(z)BR_A(z)$ with all domain compositions justified.
+30. `thm-kato-rellich` (theorem) — if $A$ is self-adjoint (respectively essentially self-adjoint) and symmetric $B$ has $A$-bound below one, then $A+B$ on $D(A)$ is self-adjoint (respectively essentially self-adjoint).
+31. `def-discrete-and-essential-spectrum-of-a-self-adjoint-operator` (definition) — the discrete spectrum consists of isolated eigenvalues of finite multiplicity; its complement is the essential spectrum.
+32. `thm-weyl-criterion-for-essential-spectrum` (theorem) — $\lambda\in\sigma_{ess}(A)$ iff there is a unit sequence converging weakly to zero with $(A-\lambda)\psi_n\to0$, equivalently an orthonormal singular Weyl sequence.
+33. `def-relative-compactness-with-respect-to-an-operator` (definition) — $B$ is relatively compact with respect to $A$ when $BR_A(z)$ is compact for one, hence every, $z\in\rho(A)$.
+34. `thm-weyl-essential-spectrum-invariance` (theorem) — self-adjoint operators with compact resolvent difference have the same essential spectrum; compact self-adjoint perturbations are the basic corollary.
+35. `def-norm-and-strong-resolvent-convergence` (definition) — convergence of one nonreal resolvent in operator norm or SOT, followed by the theorem that the choice of nonreal spectral parameter is immaterial.
+36. `thm-continuous-functional-calculus-under-resolvent-convergence` (theorem) — strong resolvent convergence gives strong convergence of bounded continuous calculi, while norm resolvent convergence gives norm convergence for the sourced class with common limits at both infinities.
+37. `cor-unitary-groups-converge-under-strong-resolvent-convergence` (corollary) — $e^{itA_n}\to e^{itA}$ strongly for each real $t$.
+38. `thm-min-max-principle-below-essential-spectrum` (theorem) — characterize successive eigenvalues below $\inf\sigma_{ess}(A)$ by the sourced variational formula, using the form domain when required and treating exhaustion of discrete eigenvalues explicitly.
 
 **Hard proof and domain plan.**  Equality of unbounded operators always means
 equality of domains and values.  The adjoint is defined only for dense domains;
@@ -1534,7 +1592,11 @@ asserted.  The spectral theorem may be proved by Cayley transform plus FA-20,
 with the point $1$ treated by the domain formula, or by Williams's resolvent
 representation; one route is chosen and the other becomes a remark.  Stone's
 converse constructs resolvents from the group and proves the range criterion,
-rather than assuming differentiability for every vector.
+rather than assuming differentiability for every vector.  The extension
+parameterization isolates the unitary $K_+\to K_-$ before asserting existence;
+the perturbation block proves the second resolvent identity before using it,
+and the essential-spectrum and convergence theorems never identify strong,
+norm, and strong-resolvent convergence.
 
 **B page:** `unbounded-self-adjoint-operators-and-stones-theorem-examples`
 
@@ -1545,7 +1607,7 @@ rather than assuming differentiability for every vector.
 5. `cex-the-minimal-derivative-is-symmetric-not-self-adjoint`.
 6. `cex-an-everywhere-defined-closed-operator-on-a-banach-space-cannot-be-unbounded` — cite FA-6 closed graph.
 7. `cex-strongly-continuous-unitary-group-need-not-be-norm-continuous` — unbounded generator.
-8. `rem-self-adjoint-extensions-and-deficiency-indices` (remark, L/NS) — exact von Neumann theorem as orientation only unless a later build expands the page; not a dependency.
+8. `rem-self-adjoint-extensions-and-deficiency-indices` (remark, L/NA) — agreement pointer to A items 23–25, preserving the original id while the theorem is now fully scaffolded.
 
 ### FA-22 — Fourier transform, convolution, and approximate identities
 
@@ -1679,7 +1741,9 @@ distribution*; *Distributions with compact support*; *Fréchet metric and
 Banach–Steinhaus for distributions*; *Distributions supported at one point*;
 *Convolution of a distribution and a smooth function*; *Approximation of
 distributions by smooth functions*); Knapp ch. IV §§2 and 7, pp. 112–116 and
-131–140, and ch. V §§1–3, pp. 179–202; Teschl §14.5, pp. 404–411.
+131–140, and ch. V §§1–3, pp. 179–202; Teschl §14.5, pp. 404–411; Gelca
+§§7.5–7.7, pp. 107–120 (*Support of Distributions*; *Structure of
+Distributions*; *Convolutions*).
 
 Items:
 
@@ -1709,6 +1773,11 @@ Items:
 24. `lem-convolution-of-distributions-is-well-defined-under-the-support-hypothesis` (lemma) — the test function presented to the tensor product has compact support where required.
 25. `thm-mollifier-approximation-in-distributions` (theorem) — $u*\rho_\varepsilon\to u$ locally in $\mathcal D'$.
 26. `cor-smooth-functions-are-weakly-dense-in-distributions` (corollary).
+27. `thm-distributions-form-a-sheaf` (theorem) — compatible distributions on an open cover glue uniquely, with a locally finite partition of unity proving continuity on each fixed-support test space.
+28. `thm-compactly-supported-distributions-have-global-finite-order` (theorem) — a cutoff equal to one near the support converts the local finite-order estimate into one estimate on all test functions.
+29. `thm-local-structure-of-distributions-as-derivatives-of-continuous-functions` (theorem) — on every compact $K\Subset\Omega$, a distribution agrees on $\mathcal D_K$ with a finite derivative of a continuous regular distribution.
+30. `thm-global-locally-finite-structure-of-distributions` (theorem) — write every distribution as a locally finite sum $\sum_\alpha\partial^\alpha u_{g_\alpha}$ with continuous $g_\alpha$; finite global order permits only finitely many nonzero orders.
+31. `thm-associativity-of-distribution-convolution-under-compact-support` (theorem) — when the support conditions make every pairing defined, convolution is associative and derivatives commute with convolution.
 
 **Well-definedness and topology plan.**  $\mathcal D(\Omega)$ is not assigned
 a single global sup norm, and its topology is not defined by sequences.  The
@@ -1728,7 +1797,7 @@ not pointwise equality of representatives.
 4. `ex-principal-value-distribution-one-over-x` — prove the defining limit and continuity.
 5. `cex-not-every-distribution-is-a-locally-integrable-function` — delta.
 6. `cex-pointwise-convergent-functions-need-not-converge-as-distributions-without-local-control`.
-7. `ex-compactly-supported-distributions-have-global-finite-order`.
+7. `ex-compactly-supported-distributions-have-global-finite-order` — work out the cutoff estimate as an application of A item 28, retaining this pre-existing example id.
 8. `rem-sobolev-weak-derivatives-belong-to-pde` (remark, L/NA) — PDE cites item 13; no $W^{k,p}$ is defined here.
 
 ### FA-25 — Tempered distributions and the Fourier transform
@@ -1803,6 +1872,7 @@ may cite that discharge but may not repeat an informal quotient argument.
 | quotient norm | $\inf_{m\in M}\|x+m\|$ is invariant under changing $x$ within its coset; its kernel is $\overline M/M$, and no best approximant is assumed. | FA-2 items 13–18. |
 | quotient completeness | A quotient Cauchy sequence needs a rapidly Cauchy subsequence and one lift of each increment; the proof must record the resulting $\mathsf{AC}_\omega$ use. | FA-2 item 18 and §8. |
 | quotient factorization | $\widetilde T(x+M)=Tx$ must be representative-independent before its norm is computed; equality of norms uses the quotient ball, not an attained infimum. | FA-2 item 19. |
+| one-sided inverses | A right inverse requires surjectivity and a complemented kernel; a left inverse requires injectivity plus a closed complemented range.  The inverse on the range is proved bounded before extending by a projection. | FA-2 items 22–26. |
 | Kuratowski–Wojdysławski embedding | The based distance-coordinate map is first formed in a concrete Banach function space and is isometric even for an unbounded metric.  Wojdysławski closedness is invoked only for the bounded-metric embedding and only relative to its algebraic convex hull; $d/(1+d)$ gives the all-metrizable topological corollary. | FA-3 items 14–16. |
 | complex Hahn–Banach | The real extension of $\operatorname{Re}f$ must reconstruct a unique complex-linear $F$ by the fixed formula and verify both $F|_M=f$ and $|F|\le p$. | FA-4 items 6–8. |
 | Minkowski functional | Absorption makes the gauge finite; balancedness/sublinearity give a seminorm; openness/closedness determine whether strict or non-strict gauge inequalities recover the set. | FA-5 items 1–4. |
@@ -1822,6 +1892,7 @@ may cite that discharge but may not repeat an informal quotient argument.
 | Schauder basis | Expansion is a norm-convergent ordered series with unique coefficients; it is not an unordered Hilbert expansion and not a Hamel basis.  Coordinate maps are proved bounded. | FA-11 items 1–6. |
 | $ba(2^{\mathbb N})$ representation | The charge determined by a functional on $\ell^\infty$ is finitely additive and bounded; integration of finite-range sequences is representation-independent and extends by uniform density. | FA-11 items 10–13. |
 | James space | The exact endpoint convention in the variation norm is frozen before triangle inequality, completion, dual, and bidual calculations; the noncanonical isometry is never identified with $J_X$. | FA-11 items 14–19. |
+| unconditional series | Permutations, subseries, bounded scalar multipliers, and the finite-subset net are separately defined before equivalence; Dvoretzky–Rogers isolates its finite-block estimate and may not infer nonabsolute convergence merely from conditional convergence. | FA-11 items 21–25. |
 | Banach-valued simple integral | Two disjoint measurable representations admit a common refinement; null-set changes do not alter the integral. | FA-12 items 1–2. |
 | Bochner integral | Strong measurability is not weakened to scalar measurability; the limit of simple integrals is independent of the approximating sequence, using Banach completeness. | FA-12 items 3–9. |
 | vector-measure/RNP vocabulary | Norm countable additivity, variation, and null-set absolute continuity are separate conditions; the density is a Bochner class, hence defined only a.e. | FA-12 items 10–15. |
@@ -1835,15 +1906,19 @@ may cite that discharge but may not repeat an informal quotient argument.
 | Fredholm index | Kernels and cokernels are proved finite-dimensional before dimensions are subtracted; the cokernel is the quotient by a closed range. | FA-15 items 15–21. |
 | singular-value and trace expansions | The positive square root is constructed before $|T|$ is named; eigenspaces are orthogonal, nonzero eigenvalues have finite multiplicity, only countably many terms contribute, and trace independence from the chosen orthonormal basis is proved. | FA-16 items 4–22. |
 | unitization and spectrum | Multiplication and norm on the chosen unitization are specified; real spectra are routed through complexification, and invertibility is always in the named unital algebra. | FA-17 items 1–12. |
+| spectral subdivisions | Point, continuous, and residual spectra form a disjoint partition under the adopted convention; approximate-point and compression spectra may overlap and are not renamed as that partition. | FA-17 items 25–28. |
 | holomorphic functional calculus | The contour lies in the resolvent and the Banach-valued integral is defined.  Scalar Cauchy theory is applied after every bounded functional, and FA-4 separation lifts the vanishing back to the Banach algebra. | FA-17 items 13–19. |
 | character space and Gelfand transform | Characters are nonzero multiplicative linear functionals with the weak-star topology; automatic continuity is proved before the topology is used. | FA-18 items 1–8. |
 | commutative Gelfand–Naimark | The Gelfand transform is an isometric $*$-homomorphism before surjectivity; the latter cites the planned general complex Stone–Weierstrass theorem and may not be built until that page exists.  In the nonunital case the unitization norm, distinguished character, one-point compactification, vanishing-at-infinity condition, approximate units, and the proper-arrow convention are each established before locally compact duality is stated. | FA-18 items 10–16 and 22–28. |
 | continuous functional calculus | Polynomial approximation independence, spectral mapping, norm preservation, positivity, and uniqueness are proved rather than packed into notation $f(T)$. | FA-19 items 8–15. |
+| partial isometry and numerical range | Initial/final spaces and projections precede polar decomposition.  Numerical range is formed from unit vectors in a complex Hilbert space; the real-field failures and possible nonclosedness remain explicit. | FA-19 items 16–20. |
 | PVM integration | PVM axioms specify strong countable additivity.  Simple integrals are independent of the measurable partition and bounded Borel limits are controlled in the strong operator topology. | FA-20 items 1–10. |
 | cyclic/multiplicity representation | Scalar spectral measures and $L^2$ classes come from MT-20/MT-14; the unitary map is first defined on bounded Borel functions, proved isometric, and extended by density. | FA-20 items 11–17. |
 | unbounded operator | Domain is part of the data.  The adjoint domain is defined by representability of a bounded functional, sums/products state their domains, and closure means closure of the graph. | FA-21 items 1–9. |
 | Cayley transform | Resolvent hypotheses ensure the formula is everywhere defined and unitary; the inverse transform is defined only on its natural dense range. | FA-21 items 10–13. |
 | unbounded Borel calculus | $f(T)$ has domain $\{x:\int |f|^2\,d\mu_x<\infty\}$; truncations prove closedness and consistency with bounded calculus. | FA-21 items 14–20. |
+| self-adjoint extensions | Deficiency spaces use the adjoint of the closed symmetric operator; a specified unitary $K_+\to K_-$ determines the extension domain before equality of deficiency dimensions is used as an existence criterion. | FA-21 items 23–25. |
+| unbounded perturbations and limits | Relative bounds, relative compactness, and resolvent convergence are distinct.  Every product in the second resolvent identity is checked on its natural domain, and convergence of functional calculi uses precisely the strong or norm conclusion stated. | FA-21 items 28–38. |
 | $L^1$ convolution and Fourier transform | Representatives determine the same a.e. convolution class by Tonelli; the transform is pointwise well-defined on $L^1$ classes because null changes do not alter the integral. | FA-22 items 1–14. |
 | Fourier inversion | The first statement is made under explicit $f,\widehat f\in L^1$ hypotheses; a.e., Lebesgue-point, and uniform conclusions are not interchanged. | FA-22 items 8–15. |
 | Schwartz topology | The countable seminorm family, multi-index convention, completeness, and independence from equivalent seminorm systems are established before continuity of Fourier transform. | FA-23 items 1–10. |
@@ -1851,6 +1926,7 @@ may cite that discharge but may not repeat an informal quotient argument.
 | test-function topology | $\mathcal D_K$ and its Fréchet seminorms precede the LF topology; the common-compact-support criterion is then proved for **sequences**, not used as a definition of this nonmetrizable topology. | FA-24 items 1–6. |
 | regular distribution | Equality of locally integrable representatives means equality a.e.; local integrability and compact test support make the pairing finite. | FA-24 items 11–12. |
 | distribution operations | Derivatives, multiplication, pullback, tensor product, and convolution are defined by their action on tests, with signs, Jacobians, and support hypotheses checked before continuity. | FA-24 items 13–26. |
+| distribution locality and structure | Gluing is locally finite on each test support; finite order is global only for compact support; local and global derivative representations use continuous regular distributions with the claimed local finiteness. | FA-24 items 27–31. |
 | tempered distribution/Fourier transpose | Restriction to $\mathcal D$ is injective only after density $\mathcal D\subset\mathcal S$; the Fourier transpose uses the fixed bilinear pairing and its inverse is checked on delta and plane waves. | FA-25 items 1–12. |
 | tempered convolution | Only $\mathcal S'*\mathcal S$ and the compact-support cases are defined; no product or convolution of two arbitrary distributions is implied. | FA-25 items 13–19. |
 
@@ -1946,6 +2022,7 @@ four Baire distinctions already recorded in `DEFERRED.md` §0.
 | weakly convergent sequence is norm bounded | $\mathsf{AC}_\omega$ in the selected proof | The countable family in $X^{**}$ is pointwise bounded and uses Sokal's sequential UBP.  No net version is asserted: in every infinite-dimensional normed space a weakly null net can be unbounded in every tail. |
 | weak topology is Hausdorff, and its non-first-countability in infinite dimension | HB for Hausdorffness; HB + $\mathsf{AC}_\omega$ for the selected non-first-countability proof | Dual separation gives Hausdorffness.  For non-first-countability, select one finite-coordinate neighborhood inside each member of a hypothetical countable local base; those countably many functionals span the Banach dual.  FA-3's ZF countable-Hamel-basis obstruction makes the dual finite-dimensional, and dual separation then makes the original space finite-dimensional. |
 | coordinate functionals of a Schauder basis are bounded | $\mathsf{AC}_\omega$ in the selected proof | Apply the same sequential UBP to the partial-sum projections; later basis results cite this item. |
+| unconditional-series equivalences and Dvoretzky–Rogers | HB for the sourced hardest equivalence; $\mathsf{AC}_\omega$ for the selected block construction | Mu's proof of uniform finite-tail control uses Hahn–Banach.  The Dvoretzky–Rogers proof then chooses one finite block for each natural index; no reverse-strength claim is made. |
 | duals separate points, isometric bidual embedding, Goldstine | HB | Goldstine uses finite-dimensional separation/dual norming, not Alaoglu. |
 | Banach–Alaoglu and weak-star compact polars | BPI | Rossi proves equivalence with the Boolean prime ideal theorem for the general theorem. |
 | Banach–Dieudonné linear-subspace criterion | HB + BPI + DC in the BS implementation | BS §3.3 explicitly uses Alaoglu compactness, a dependent construction of finite sets, and Hahn–Banach separation.  No claim of logical optimality or converse is made. |
@@ -1973,6 +2050,8 @@ four Baire distinctions already recorded in `DEFERRED.md` §0.
 | continuous functional calculus for a supplied self-adjoint operator | ZF relative to the published approximation/integration inputs | Uniform polynomial approximation may inherit the source theorem's countable construction; no maximal choice is intrinsic. |
 | cyclic decomposition for an arbitrary normal operator | AC | Choose a maximal orthogonal family of cyclic reducing subspaces.  The single cyclic representation is ZF relative to a supplied cyclic vector. |
 | spectral theorem via arbitrary direct sums/multiplicity decomposition | AC in this implementation | The continuous and PVM calculi before the decomposition are kept separate and may have lower cost. |
+| von Neumann self-adjoint-extension parameterization | ZF relative to a supplied unitary $K_+\to K_-$; AC for the scaffolded unrestricted existence-from-equal-dimensions step | Domain and action formulas are canonical from the supplied unitary.  Producing Hilbert bases to turn bare equality of arbitrary deficiency dimensions into a unitary inherits the arbitrary-orthonormal-basis cost. |
+| spectral-type decomposition, Kato–Rellich, Weyl criterion, and resolvent convergence | inherits the named PVM, weak-compactness, and sequence-selection inputs used in each proof | The scaffold records proof-local costs item by item; it does not assign a blanket choice strength to all unbounded-operator theory. |
 | Fourier analysis on $\mathbb T^n$, $L^1$, and $\mathcal S$ | inherits only named measure/completion inputs | Algebraic identities and canonical kernels are ZF; density/completion items retain MT's or FA-1's labels. |
 | distribution and tempered-distribution operations | ZF relative to the given test functions and published scalar analysis | No Hamel basis or maximal family is used.  Existence of partitions of unity, where invoked, retains the topology track's stated choice cost. |
 
@@ -2140,11 +2219,14 @@ claimed as open full-text acquisitions.
 | Wi | Dana P. Williams, *Lecture Notes on the Spectral Theorem* | [complete author-hosted notes](https://www.math.dartmouth.edu/~dana/bookspapers/ln-spec-thm.pdf), 39 pp. | §§1–7, entire text |
 | Sh | Ali Shirbisheh, *Lectures on $C^*$-algebras* | [complete arXiv text](https://arxiv.org/pdf/1211.3404), 179 pp. | ch. 2 §§2.1–2.5 and ch. 3 §§3.1–3.4 |
 | Kh | Masoud Khalkhali, *Lectures on Noncommutative Geometry* | [complete author-hosted/arXiv text](https://www.math.uwo.ca/faculty/khalkhali/files/LecturesNCG.pdf), 112 PDF pp. | §2.1, PDF pp. 3–6 |
-| TQ | Gerald Teschl, *Mathematical Methods in Quantum Mechanics* | [complete author/AMS-authorized PDF](https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf), 370 pp. | §§2.2, 2.4, 3.1–3.3, 5.1, pp. 66–75, 83–89, 99–130, 145–150 |
+| TQ | Gerald Teschl, *Mathematical Methods in Quantum Mechanics* | [complete author/AMS-authorized PDF](https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe2.pdf), 370 pp. | §§2.2, 2.4–2.6, 3.1–3.3, 4.1–4.4, 5.1, 6.1–6.6, pp. 66–75, 83–95, 99–141, 145–150, 157–184; §6.5 is dispositioned out-of-scope below |
 | So | Alan D. Sokal, “A really simple elementary proof of the uniform boundedness theorem” | [complete arXiv paper](https://arxiv.org/pdf/1005.1585), 5 pp. | entire paper, especially theorem and proof pp. 1–3 |
 | Ro | John Rossi, “The Axiom of Choice and the Banach–Alaoglu theorem” | [complete arXiv paper](https://arxiv.org/pdf/0911.0332), 4 pp. | entire paper |
 | BFK | Bruce Blackadar, Ilijas Farah, and Asaf Karagila, “Hilbert spaces without the Countable Axiom of Choice” | [complete repository PDF](https://eprints.whiterose.ac.uk/216587/1/Hilbert%20spaces%20without%20the.pdf), 49 pp. | §§1–4, especially Theorem 2.0.4 and Corollary 2.0.5 |
 | He | Christopher Heil, Math 7337, *The Fourier Transform of Tempered Distributions* | [author course-note landing page](https://heil.math.gatech.edu/7337/fall09/) | §3.7 in full |
+| Br | Haim Brezis, *Functional Analysis, Sobolev Spaces and Partial Differential Equations* | [university-hosted complete PDF](https://math.jhu.edu/~sire/brezis.pdf), 603 PDF pp. | §§1.1–1.4, pp. 1–29; §§2.1–2.7, pp. 31–58; §§3.1–3.7, pp. 59–86; §§5.1–5.4, pp. 131–155; §§6.1–6.4, pp. 157–180 |
+| Mu | Michael Mueger, *Functional Analysis* | [author-hosted complete lecture notes](https://www.math.ru.nl/~mueger/functionalanalysis.pdf), 264 pp. | §3.2.2, pp. 22–23; §§11.1–11.9, pp. 86–98; §§13.1–13.4, pp. 113–129; §19.2, pp. 162–163; §§A.1–A.2, pp. 166–169; §B.2.1, pp. 184–185; §B.12.1, pp. 231–233 |
+| Ge | Razvan Gelca, *Functional Analysis* | [author-hosted complete PDF](https://www.math.ttu.edu/~rgelca/FUNCTANAL.pdf), 151 pp. | §§5.1–5.5, pp. 71–84; §§6.1–6.4, pp. 85–100; §§7.1–7.7, pp. 101–120; §§8.1–8.4, pp. 123–132 |
 
 Additional exact-result checks used Conway, [*A Course in Functional Analysis*](https://link.springer.com/book/10.1007/978-1-4757-4383-8),
 ch. V §3 (Goldstine); Megginson, [*An Introduction to Banach Space Theory*](https://link.springer.com/book/10.1007/978-1-4612-0603-3),
@@ -2169,6 +2251,9 @@ no unlisted chapter from those books is claimed as harvested.
 | Some sources build $C^*$-algebras nonunital from the outset. | FA-18 first proves the compact/unital form, then explicitly constructs the minimal unitization and proves the locally compact form $A\cong C_0(\Delta(A))$.  Spectra are never taken in an unnamed unitization, and locally compact duality uses proper maps/proper $*$-homomorphisms in Shirbisheh's exact approximate-unit convention. |
 | Texts alternate between weak and strong dual topologies on $\mathcal D'$ and $\mathcal S'$. | Both are defined.  Unqualified distributional convergence means weak convergence on each test function; strong convergence is written explicitly. |
 | “Hilbert space” is harmlessly equivalent under several completeness notions with choice, but not in ZF. | The core definition uses the library's sequential Cauchy completeness.  BFK's sigma-complete alternative and the resulting projection-choice difference are recorded, not silently identified. |
+| Brezis develops the main Banach-space chapters over $\mathbb R$, while Mu and the spectral sources switch explicitly to complex scalars where spectra and $C^*$-algebras require them. | Every theorem states its scalar field.  Real Hahn–Banach and weak-topology arguments are complexified only by the proved FA-4 route; complex spectrum statements are not asserted for a bare real algebra. |
+| Sources differ on whether “residual spectrum” means all points with nondense range or only the injective/nondense part, disjoint from the point spectrum. | FA-17 uses the disjoint point/continuous/residual partition from Mu; the possibly overlapping nondense-range set is separately named the compression spectrum. |
+| Toeplitz–Hausdorff is sometimes stated without a scalar-field warning. | FA-19 states convexity only for complex Hilbert spaces.  The numerical-radius lower bound $\|T\|\le2w(T)$ is likewise complex; the real counterexample in Mu is retained as a boundary warning. |
 
 ### 11.2 Bühler–Salamon harvest, chs. 1–6 and §7.3.1
 
@@ -2466,7 +2551,128 @@ ranges already named in their pair, with long proofs decomposed as specified.
 If a future builder cannot obtain those ranges, the affected item must pause;
 it may not be replaced by a generated summary.
 
-### 11.7 Two-source backing matrix for every pair
+### 11.7 Density-enrichment WIDEN harvest
+
+This is the normalized disposition ledger for every source heading in the
+ranges added on 2026-08-14.  `Inline` means an independent proof or convention
+check for an already-scaffolded item; `included` is reserved for a heading
+that caused a new item to be added in this pass.  Thus duplicate treatments do
+not masquerade as new mathematical coverage.
+
+#### Brezis, selected functional-analysis chapters
+
+| source heading in read order | disposition and exact destination |
+|---|---|
+| §1.1 *The Analytic Form of the Hahn–Banach Theorem: Extension of Linear Functionals* | inline FA-4 items 1–11; independent real-scalar proof |
+| §1.2 *The Geometric Forms of the Hahn–Banach Theorem: Separation of Convex Sets* | inline FA-5 items 1–10 |
+| §1.3 *The Bidual $E^{**}$. Orthogonality Relations* | inline FA-7 items 4–16 |
+| §1.4 *A Quick Introduction to the Theory of Conjugate Convex Functions* | out-of-scope convex duality; no later FA item needs Fenchel–Moreau or subdifferentials |
+| §2.1 *The Baire Category Theorem* | already-published complete-metric Baire; proof cross-check for FA-6 only |
+| §2.2 *The Uniform Boundedness Principle* | inline FA-6 items 1–3 |
+| §2.3 *The Open Mapping Theorem and the Closed Graph Theorem* | inline FA-6 items 4–12 |
+| §2.4 *Complementary Subspaces; Right and Left Invertibility of Linear Operators* | included — FA-2 items 22–26 |
+| §2.5 *Orthogonality Revisited* | inline FA-5/FA-7 annihilator and closed-sum results |
+| §2.6 *An Introduction to Unbounded Linear Operators; Definition of the Adjoint* | inline FA-21 items 1–6 |
+| §2.7 *A Characterization of Operators with Closed Range; A Characterization of Surjective Operators* | included — FA-7 items 20–22 |
+| §3.1 *The Coarsest Topology for Which a Collection of Maps Becomes Continuous* | already-published initial-topology machinery; inline FA-8 |
+| §3.2 *Definition and Elementary Properties of the Weak Topology* | inline FA-8 items 1–4 |
+| §3.3 *Weak Topology, Convex Sets, and Linear Operators* | inline FA-8 items 10–18 |
+| §3.4 *The Weak-Star Topology* | inline FA-8 items 5–9 and FA-9 |
+| §3.5 *Reflexive Spaces* | inline FA-10 items 1–5 |
+| §3.6 *Separable Spaces* | included — FA-10 items 23–24 |
+| §3.7 *Uniformly Convex Spaces* | inline FA-10 items 14–17 |
+| §5.1 *Definitions and Elementary Properties; Projection onto a Closed Convex Set* | inline FA-13 items 1–16 |
+| §5.2 *The Dual Space of a Hilbert Space* | inline FA-13 items 17–23 |
+| §5.3 *The Theorems of Stampacchia and Lax–Milgram* | out-of-scope under the PDE seam; PDE owns Lax–Milgram and coercive variational problems |
+| §5.4 *Hilbert Sums; Orthonormal Bases* | inline FA-14 items 1–10 |
+| §6.1 *Definitions; Elementary Properties; Adjoint* | inline FA-15 items 1–8 |
+| §6.2 *The Riesz–Fredholm Theory* | inline FA-15 items 9–14 |
+| §6.3 *The Spectrum of a Compact Operator* | inline FA-15 items 9–14 and FA-16 |
+| §6.4 *Spectral Decomposition of Self-Adjoint Compact Operators* | inline FA-16 items 1–8 |
+
+#### Mueger, selected operator-theory chapters and supplements
+
+| source heading in read order | disposition and exact destination |
+|---|---|
+| §3.2.2 *Convergence of Series* | included — FA-11 item 21; absolute convergence was already FA-1 |
+| §11.1 *The Adjoint of a Bounded Hilbert Space Operator* | inline FA-13 items 20–23 |
+| §11.2 *Unitaries, Isometries, Coisometries, Partial Isometries* | included — FA-19 items 16–17 |
+| §11.3 *Polarization Revisited* | inline FA-13 items 3–5 |
+| §11.4 *A Little More on Self-Adjoint Operators* | inline FA-19 items 1–4 |
+| §11.5 *Normal Operators* | inline FA-19 items 10–15 |
+| §11.6 *Numerical Range and Radius* | included — FA-19 items 18–19 |
+| §11.7 *Positive Operators and Their Square Roots* | inline FA-19 items 2–6 |
+| §11.8 *The Polar Decomposition* | inline FA-19 item 7, now supported by items 16–17 |
+| §11.9 *The Trace of Positive Operators* | inline FA-16 items 17–22 |
+| §13.1 *Spectra of Bounded Operators I: Definitions, First Results* | included — FA-17 items 25–28 |
+| §13.2 *The Spectrum in a Unital Banach Algebra* | inline FA-17 items 1–12 |
+| §13.2.1 *The Group of Invertibles* | inline FA-17 items 2–4 |
+| §13.2.2 *The Spectrum; Basic Properties* | inline FA-17 items 5–8 |
+| §13.2.3 *The Spectral Radius Formula (Beurling–Gelfand Theorem)* | inline FA-17 items 9–10 |
+| §13.2.4 *Applications, Complements, Exercises* | inline FA-17 polynomial mapping and shift examples |
+| §13.3 *Spectra of Bounded Operators II: Banach Algebra Methods* | inline FA-17 items 11–24 |
+| §13.4 *Applications to Normal Hilbert Space Operators* | inline FA-19 items 1–15 |
+| §19.2 *Application: Absolutely Convergent Fourier Series* | included — FA-18 B item 14 |
+| §A.1 *Unordered Infinite Sums* | inline FA-14's finite-subset-net convention |
+| §A.2 *More on Unconditional Convergence of Series* | included — FA-11 item 22 |
+| §B.2.1 *The Dvoretzky–Rogers Theorem* | included — FA-11 items 23–25 |
+| §B.12.1 *The Numerical Range of a Hilbert Space Operator* | included — FA-19 item 20 and nonclosedness boundary example |
+
+#### Gelca, Banach algebras through Fourier transform
+
+| source heading in read order | disposition and exact destination |
+|---|---|
+| §5.1 *Banach Algebras* | inline FA-17 items 1–4 |
+| §5.2 *Spectral Theory for Banach Algebras* | inline FA-17 items 5–13 |
+| §5.3 *Functional Calculus with Holomorphic Functions* | inline FA-17 items 14–22 |
+| §5.4 *Compact Operators, Fredholm Operators* | inline FA-15 items 1–21 |
+| §5.5 *The Gelfand Transform* | inline FA-18 items 1–9 |
+| §6.1 *The Definition of $C^*$-Algebras* | inline FA-18 items 10–13 |
+| §6.2 *Commutative $C^*$-Algebras* | inline FA-18 items 14–15 and 22–28 |
+| §6.3 *$C^*$-Algebras as Algebras of Operators* | out-of-scope beyond the concrete $\mathcal B(H)$ examples; general noncommutative representation theory remains excluded |
+| §6.4 *Functional Calculus for Normal Operators* | inline FA-19 items 8–15 |
+| §7.1 *The Motivation for Using Test Functions* | inline orientation for FA-24; no separate item |
+| §7.2 *Test Functions* | inline FA-24 items 1–5 |
+| §7.3 *Definition and Properties of Distributions* | inline FA-24 items 6–20 |
+| §7.4 *Sequences of Distributions* | inline FA-24 items 9–10 and 25–26 |
+| §7.5 *Localization and Support* | included — FA-24 items 27–28 |
+| §7.6 *Structure of Distributions* | included — FA-24 items 29–30; point-support theorem already item 20 |
+| §7.7 *Convolutions* | included — FA-24 item 31; definitions already items 21–24 |
+| §8.1 *What Is the Fourier Transform?* | inline FA-22 items 1–4 |
+| §8.2 *Basic Properties of the Fourier Transform* | inline FA-22 items 5–9 and FA-23 |
+| §8.3 *The Inverse Fourier Transform* | inline FA-22 items 10–15 |
+| §8.4 *Tempered Distributions* | inline FA-25 items 1–19 |
+
+#### Teschl, *Mathematical Methods in Quantum Mechanics*, extended range
+
+| source heading in read order | disposition and exact destination |
+|---|---|
+| §2.2 *Self-Adjoint Operators* | inline FA-21 items 1–11 |
+| §2.4 *Self-Adjointness and Spectrum* | inline FA-21 items 7–13 |
+| §2.5 *Orthogonal Sums of Operators* | inline FA-20/FA-21 direct-sum domain checks; no new standalone item |
+| §2.6 *Self-Adjoint Extensions* | included — FA-21 items 23–25 |
+| §3.1 *The Spectral Theorem* | inline FA-20 items 1–17 and FA-21 items 14–17 |
+| §3.2 *More on Borel Measures* | inline reserved MT measure dependencies; no FA re-minting |
+| §3.3 *Spectral Types* | included — FA-21 items 26–27 |
+| §4.1 *Integral Formulas* | included — FA-20 item 18 (Stone's formula) |
+| §4.2 *Commuting Operators* | inline FA-19/FA-20 commutant and Borel-calculus properties |
+| §4.3 *Polar Decomposition* | inline FA-19 items 7 and 16–17 |
+| §4.4 *The Min–Max Theorem* | included — FA-21 item 38 |
+| §5.1 *The Time Evolution and Stone's Theorem* | inline FA-21 items 18–22 |
+| §6.1 *Relatively Bounded Operators and the Kato–Rellich Theorem* | included — FA-21 items 28–30 |
+| §6.2 *More on Compact Operators* | inline FA-15/FA-16; duplicate treatment |
+| §6.3 *Hilbert–Schmidt and Trace Class Operators* | inline FA-16 items 9–22 |
+| §6.4 *Relatively Compact Operators and Weyl's Theorem* | included — FA-21 items 31–34 |
+| §6.5 *Quadratic Forms and the KLMN Theorem* | out-of-scope under the PDE/form-method seam; no quadratic-form domain theory is opened here |
+| §6.6 *Strong and Norm Resolvent Convergence* | included — FA-21 items 35–37 |
+
+The WIDEN ledger contains 87 source-heading rows: 21 `included`, 62
+`inline` or `already-published`, and 4 `out-of-scope`.  The 21 included
+headings generated 47 added items; the remaining rows add independent proof
+coverage or record a seam boundary and therefore do not inflate the
+decomposition numerator.
+
+### 11.8 Two-source backing matrix for every pair
 
 The detailed section locators are in each pair and §§11.2–11.6.  This matrix
 makes the independence requirement auditable at a glance.

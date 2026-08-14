@@ -2754,3 +2754,486 @@ mechanical check performed for this commission found no duplicate proposed id
 inside this scaffold and no exact collision with the current `items/` tree.
 The builder must also re-read the live `items` arrays: a planned page title is
 not evidence that its definitions exist.
+
+---
+
+## 10. Density enrichment pass — 2026-08-14
+
+This section is an additive amendment to §§4--8.  Every earlier id remains
+stable.  Rows below name the page that receives the item; within that page they
+are inserted after the cited prerequisite rather than mechanically appended.
+The long-form provenance fields are intentional: they supersede the compact
+`L/A` notation for every item minted in this pass.
+
+### 10.1 Additional full texts obtained and exact ranges read
+
+Only legitimately reachable full texts were used.  A contents page or search
+snippet was never treated as a treatment.  The new source abbreviations used
+below are:
+
+| key | full text obtained | exact range read for this pass |
+|---|---|---|
+| **H20** | Melvin Hochster, *Introduction to Commutative Algebra*, University of Michigan Math 614 (2020), [complete 188-page notes](https://dept.math.lsa.umich.edu/~hochster/615W22/614Lx.pdf) | Chs. 1--13, pp. 5--182; individual chapter/subsection dispositions are below. |
+| **TN** | Burt Totaro, notes by Zach Norwood, *Commutative Algebra*, Cornell Part III (2011), [complete 67-page notes](https://pi.math.cornell.edu/~zbnorwood/partiii/files/commalgnotes.pdf) | §§1--15, pp. 4--67. |
+| **BU** | Brooke Ullery, Harvard Math 221, *Commutative Algebra* (2016), [complete section-PDF course](https://people.math.harvard.edu/~bullery/math221/) | Entire PDFs §§2--15 and §§17--25; §16 was inspected but excluded as geometric. |
+| **RG5** | Miles Reid, notes by Alexandros Groutides, *Commutative Algebra II, Chapter 5* (2022), [complete 8-page chapter](https://mreid.warwick.ac.uk/MA4J8/Groutides5.pdf) | §§5.1--5.2, pp. 1--8. |
+| **RG6** | Miles Reid, notes by Alexandros Groutides, *Commutative Algebra II, Chapter 6* (2022), [complete 8-page chapter](https://mreid.warwick.ac.uk/MA4J8/Groutides6.pdf) | §§6.1--6.2, pp. 1--8. |
+| **R710** | Miles Reid, *Commutative Algebra II, Lectures 7--10* (2009), [complete 13-page handout](https://mreid.warwick.ac.uk/MA4J8/Lect7-10.pdf) | Lectures 7--10, pp. 1--13. |
+| **V25/28** | Ravi Vakil, *The Rising Sea: Foundations of Algebraic Geometry* (May 2012 draft), [complete 704-page text](https://math.stanford.edu/~vakil/216blog/FOAGmay1612public.pdf) | §§25.1--25.6, pp. 569--594, and §§28.1--28.2, 28.5, pp. 627--636; scheme-only exercises within those ranges are excluded below. |
+| **JM** | J. P. May, *Notes on Dedekind Rings*, University of Chicago, [complete 12-page notes](https://math.uchicago.edu/~may/MISC/Dedekind.pdf) | §§1--7, pp. 1--12. |
+| **BM** | Ben Moonen, *Introduction to Algebraic Geometry*, Radboud University (2018), [complete 106-page notes](https://www.math.ru.nl/personal/bmoonen/Lecturenotes/alggeom.pdf) | Ch. 1 §§1--3, pp. 1--8, and commutative-algebra interludes 1--4, pp. 9--11, 25--28, 66--69, 87--91; used as an independent convention/application check, not as sole proof backing. |
+| **WL** | Wenqi Li, *Commutative Algebra*, Columbia Math W4065 (2016), [complete 69-page notes](https://www.math.columbia.edu/~wenqili/commalg_notes.pdf) | Lectures 24--25, pp. 62--69. |
+| **H615** | Melvin Hochster, *Commutative Algebra II*, University of Michigan Math 615 (Winter 2020), [complete course notes](https://dept.math.lsa.umich.edu/~hochster/615W20/615W20.pdf) | Lecture of April 13, the equicharacteristic complete-local structure segment from “coefficient field” through the regular/power-series characterisation. |
+
+The requested commercial books by Atiyah--Macdonald, Eisenbud, Matsumura,
+Bruns--Herzog and Serre were not counted merely because catalogue pages or
+unauthorised scans could be found.  No legitimately hosted complete text was
+reachable in this run.  Reid was used through the author-hosted Warwick notes;
+the other unavailable books remain bibliographic cross-references only.
+
+#### Heading harvest for the newly read ranges
+
+The unit harvested here is the source's own numbered heading.  A semicolon in
+a disposition separates source headings; it does not collapse them into one
+synthetic heading.
+
+- **H20 Ch. 1, “Spectrum and topology,” §§1--6 (pp. 5--18):** prime ideals and
+  the spectrum — **included** CA-3/CA-15; closed sets and basic opens —
+  **included** CA-15; functoriality — **included** CA-3/CA-15; irreducibility
+  and components — **included** CA-15; nilpotents and reduction — **included**
+  CA-3/CA-15; geometric examples — **included** CA-15B.
+- **H20 Ch. 2, “Localization,” §§1--7 (pp. 19--36):** ring localization —
+  **already-published** on `the-field-of-fractions-and-localisation`; module
+  localization — **included** CA-2; exactness — **included** CA-2; localization
+  of Hom — **included** CA-2; localization at primes and local criteria —
+  **included** CA-2; support — **included** CA-2; Nakayama and minimal
+  generators — **included** CA-2.
+- **H20 Ch. 3, “Integral and module-finite extensions; height and dimension,”
+  §§1--7 (pp. 37--56):** determinant trick and integrality criteria —
+  **included** CA-6; finite integral algebras — **included** CA-6; transitivity
+  and localization — **included** CA-6; lying over — **included** CA-6;
+  incomparability and going up — **included** CA-6; height and dimension under
+  integral extension — **included** CA-6/CA-10; going down over normal domains
+  — **included** CA-6.
+- **H20 Ch. 4, “Noether normalization, Nullstellensatz, and dimension,” §§1--6
+  (pp. 57--70):** normalization substitution lemma — **included** CA-7;
+  Noether normalization — **included** CA-7; Zariski's lemma — **included**
+  CA-7; weak Nullstellensatz — **included** CA-7; Rabinowitsch trick and strong
+  Nullstellensatz — **included** CA-7; dimension of affine domains —
+  **included** CA-10.
+- **H20 Ch. 5, “Chain conditions,” §§1--5 (pp. 71--92):** Noetherian modules
+  and exact sequences — **already-published** on
+  `chain-conditions-and-semisimple-modules`; Noetherian induction —
+  **included** CA-1; Hilbert basis theorem — **included** CA-1; finite type
+  versus finite presentation — **included** CA-1; formal power series over a
+  Noetherian ring — **included** CA-1/CA-13.
+- **H20 Chs. 6--7, “Tensor products/base change” and “Flatness, localization,
+  Hom, and projectives” (pp. 93--120):** tensor construction and right
+  exactness — **planned-published** on `tensor-products-of-modules`; base
+  change — **included** CA-12; flatness criteria — **included** CA-12;
+  localization of flatness — **included** CA-12; finite flat modules and
+  projectivity — **included** CA-12; Hom localization — **included** CA-2;
+  projective-module basics — **already-published** on
+  `free-modules-and-exact-sequences`.
+- **H20 Chs. 8--10 (pp. 121--148):** associated primes — **included** CA-5;
+  primary submodules and decompositions — **included** CA-5; uniqueness and
+  isolated components — **included** CA-5; Artinian rings and length —
+  **included** CA-4; principal ideal theorem — **included** CA-10; height
+  theorem and systems of parameters — **included** CA-10.
+- **H20 Chs. 11--12 (pp. 149--172):** algebraic sets and local nature — affine
+  algebra claims **included** CA-7/CA-15 and scheme language **out-of-scope**;
+  normal Noetherian domains — **included** CA-6/CA-18; Dedekind domains —
+  **included** CA-9; divisor and ideal classes — **included** CA-9.
+- **H20 Ch. 13, “Limits, completion, and Artin--Rees” (pp. 173--182):** inverse
+  limits — **included** CA-13; adic completion — **included** CA-13;
+  Artin--Rees — **included** CA-11; exactness on finite modules — **included**
+  CA-13; completion flatness — **included** CA-13.
+
+- **TN §§1--3 (pp. 4--12):** ring/module basics — **already-published**;
+  affine schemes as spectra — underlying prime-set results **included** CA-3,
+  scheme structure **out-of-scope**; irreducibles — **included** CA-15.
+- **TN §§4--6 (pp. 13--21):** operations on modules — **already-published**;
+  direct limits — **deferred** to homological algebra; tensor products —
+  **planned-published** on `tensor-products-of-modules`.
+- **TN §7 and §§7.2--7.4 (pp. 22--29):** localization — ring case
+  **already-published**, module case **included** CA-2; local rings —
+  **included** CA-2; Nakayama — **included** CA-2.
+- **TN §8 and §8.1 (pp. 30--35):** Noetherian rings — **included** CA-1;
+  irreducible decomposition — **included** CA-3/CA-15.
+- **TN §9 (pp. 36--41):** projective resolutions, Ext and Tor —
+  **already-published/planned-published** in homological algebra and cited, not
+  re-minted, by CA-12/CA-16--CA-18.
+- **TN §§10--12 (pp. 42--53):** integral extensions — **included** CA-6;
+  Noether normalization and Nullstellensatz — **included** CA-7; Artinian
+  rings — **included** CA-4.
+- **TN §§13--15 (pp. 54--67):** DVRs and Dedekind domains — **included**
+  CA-8/CA-9; principal ideal theorem — **included** CA-10; affine dimension —
+  **included** CA-10; regular local rings — **included** CA-18.
+
+- **BU §§2--7:** Noetherian rings/Hilbert basis — **included** CA-1; graded
+  rings/Hilbert functions — **included** CA-11; localization — ring results
+  **already-published**, module results **included** CA-2; Hom/tensor —
+  **already-published/planned-published**, with localization compatibility
+  **included** CA-2; spectrum — **included** CA-3/CA-15; length — **included**
+  CA-4.
+- **BU §§8--10:** associated primes — **included** CA-5; prime avoidance —
+  **included** CA-5/CA-10/CA-17; primary decomposition — **included** CA-5.
+- **BU §§11--15:** Cayley--Hamilton, integrality and Nakayama — determinant
+  trick **already-published**, consequences **included** CA-2/CA-6;
+  normality/normalization — **included** CA-6/CA-18; lying over/going up —
+  **included** CA-6; Nullstellensatz — **included** CA-7; filtrations and
+  associated graded — **included** CA-11.
+- **BU §16, “Blowup and tangent cone”:** associated-graded algebraic identity
+  **inline** in CA-11/CA-18; blowups and tangent-cone geometry
+  **out-of-scope** for algebraic geometry.
+- **BU §§17--20:** Artin--Rees and Krull intersection — **included** CA-11;
+  flat families and Tor — algebraic flatness results **included** CA-12,
+  scheme-family language **out-of-scope**; completions — **included** CA-13;
+  Hensel's lemma — **included** CA-14.
+- **BU §§21--25:** dimension — **included** CA-10; principal ideal theorem —
+  **included** CA-10; systems of parameters — **included** CA-10/CA-17; going
+  down — **included** CA-6; regular local rings — **included** CA-18.
+
+- **RG5 §5.1, “The Koszul complex”:** the exterior and tensor-product models —
+  **included** CA-16; Koszul homology and the generator homotopy — **included**
+  CA-16; the Künneth short exact sequence — **inline** CA-16 because Tor is
+  owned by homological algebra.
+- **RG5 §5.2, “Regular local rings”:** regular sequences and Koszul acyclicity
+  — **included** CA-16; Koszul resolutions and the polynomial-ring syzygy
+  argument — **included** CA-16/CA-18; embedding dimension and regular local
+  rings — **included** CA-18; quotient regularity — **included** CA-18.
+- **RG6 §6.1, “Depth”:** depth and Ext characterisations — **included** CA-17;
+  extending regular sequences and quotient depth — **included** CA-17;
+  Ischebeck and associated-prime bounds — **included** CA-17.
+- **RG6 §6.2, “Cohen--Macaulay rings”:** definition and unmixed associated
+  primes — **included** CA-17; regular quotients — **included** CA-17; systems
+  of parameters — **included** CA-17; geometric examples — algebraic local
+  computations **included** CA-17B, projective geometry **out-of-scope**.
+- **R710 Lectures 7--8:** Nakayama and determinant trick —
+  **already-published/included** CA-2; completion and Hensel factor lifting —
+  **included** CA-13/CA-14; simple-root Hensel form — **included** CA-14.
+- **R710 Lectures 9--10:** linear topologies and inverse-limit completion —
+  **included** CA-13; exactness of surjective inverse systems — **included**
+  CA-13; Artin--Rees — **included** CA-11.
+
+- **V25 §§25.1--25.6:** motivation and elementary closure properties —
+  **included** CA-12; Tor criterion — **included** CA-12 by citation to the
+  homological-algebra owner; ideal criteria — **included** CA-12; topological
+  behavior of flat maps — algebraic prime consequences **included** CA-12,
+  scheme language **out-of-scope**; local criteria — **included** CA-12.
+- **V28 §§28.1--28.2:** regular sequences and permutation — **included**
+  CA-16; geometric complete intersections — algebraic quotient examples
+  **included** CA-16B, scheme assertions **out-of-scope**.
+- **V28 §28.5:** Cohen--Macaulay rings and systems of parameters —
+  **included** CA-17; geometric applications **out-of-scope**.
+
+- **JM §§1--3:** fractional ideals — **included** CA-9; definitions of
+  Dedekind domains and DVRs — **included** CA-8/CA-9; equivalent DVR
+  characterisations — **included** CA-8.
+- **JM §§4--7:** completions of DVRs — algebraic completion results
+  **included** CA-8/CA-13, arithmetic construction cites the group-theory owner;
+  Dedekind characterisations — **included** CA-9; ideals and fractional ideals
+  — **included** CA-9; finitely generated torsion-free modules — **included**
+  CA-9.
+
+- **BM Ch. 1 §§1--3:** affine algebraic sets, weak/strong Nullstellensatz and
+  irreducibility — algebraic claims **included** CA-7/CA-15, geometric
+  language **inline** only; CA interlude 1, finiteness — **included** CA-1;
+  interlude 2, localization — ring construction **already-published**, local
+  criteria **included** CA-2; interlude 3, dimension — **included** CA-10;
+  interlude 4, integrality — **included** CA-6.  Proofs explicitly omitted by
+  this source are never backed by BM alone.
+- **WL Lectures 24--25:** height and the principal ideal theorem — **included**
+  CA-10; regular local rings and associated graded rings — **included** CA-18;
+  completion and the equicharacteristic Cohen theorem — **included**
+  CA-13/CA-14.
+- **H615, lecture of April 13:** coefficient fields, power-series presentations
+  and finite regular subrings — **included** CA-14; mixed-characteristic Cohen
+  rings — **deferred** for the already-recorded machinery blocker.
+
+### 10.2 Auditable pair-by-pair treatment table
+
+“Entire §N PDF” means that independently downloadable lecture was read from
+first to last page.  Existing sources are retained where they are stronger;
+the table makes clear that no pair rests on a passing mention in a general
+text.
+
+| pair | treatment 1, exact range | treatment 2, exact range | further independent check |
+|---|---|---|---|
+| CA-1 | H20 Ch. 5 §§1--5, pp. 71--92 | BU entire §§2--3 PDFs | Altman--Kleiman §16, pp. 96--107 |
+| CA-2 | H20 Ch. 2 §§1--7, pp. 19--36, and Ch. 7 §§1--4, pp. 109--120 | BU entire §§4--5 and §11 PDFs | TN §7 and §§7.2--7.4, pp. 22--29 |
+| CA-3 | H20 Ch. 1 §§1--6, pp. 5--18 | BU entire §6 PDF | TN §§2--3, pp. 11--13 |
+| CA-4 | H20 Ch. 9, pp. 137--140 | TN §12, pp. 52--53 | BU entire §7 PDF |
+| CA-5 | H20 Ch. 8, pp. 121--136 | BU entire §§8--10 PDFs | Altman--Kleiman §18, pp. 117--130 |
+| CA-6 | H20 Ch. 3 §§1--7, pp. 37--56 | BU entire §§11--13 and §24 PDFs | TN §10, pp. 42--48 |
+| CA-7 | H20 Ch. 4 §§1--5, pp. 57--68 | TN §11, pp. 49--51 | BU entire §14 PDF; BM Ch. 1 §§1--2, pp. 1--6, as convention check |
+| CA-8 | TN §13, pp. 54--57 | JM §§2--4, pp. 2--7 | Mustaţă Ch. 10 §§1--3 |
+| CA-9 | H20 Ch. 12 §§1--6, pp. 157--172 | JM §§1--3 and §§5--7, pp. 1--5 and 7--12 | TN §13, pp. 54--57 |
+| CA-10 | H20 Ch. 10, pp. 141--148 | BU entire §§21--23 PDFs | WL Lectures 24--25, pp. 62--69 |
+| CA-11 | H20 Ch. 13 §§3--5, pp. 177--182 | BU entire §§3, 15 and 17 PDFs | R710 Lectures 9--10, pp. 8--13 |
+| CA-12 | H20 Ch. 6 §4 and Ch. 7 §§1--4, pp. 106--120 | V25 §§25.1--25.6, pp. 569--594 | BU entire §18 PDF |
+| CA-13 | H20 Ch. 13 §§1--5, pp. 173--182 | R710 Lectures 7--10, pp. 1--13 | BU entire §19 PDF; WL Lecture 25, pp. 66--69 |
+| CA-14 | R710 Lectures 7--8, pp. 1--8 | BU entire §20 PDF | H615 April 13 structure segment; WL Lecture 25, pp. 66--69 |
+| CA-15 | H20 Ch. 1 §§1--6, pp. 5--18 | TN §§2--3, pp. 11--13 | BM Ch. 1 §§1--3, pp. 1--8 |
+| CA-16 | RG5 §§5.1--5.2, pp. 1--8 | V28 §§28.1--28.2, pp. 627--632 | Stacks, More on Algebra §§15--17 |
+| CA-17 | RG6 §§6.1--6.2, pp. 1--8 | V28 §28.5, pp. 634--636 | Huneke--Stone CA II Ch. 2, Thms. 14--31 |
+| CA-18 | RG5 §5.2, pp. 4--8 | WL Lecture 25, pp. 66--69 | Mustaţă Ch. 12 §§1--4 and Huneke--Stone CA II Chs. 1--2 |
+
+No row is single-backed.  BM is explicitly only a convention/application
+check because its algebra interludes omit several hard proofs; it never serves
+as one of the two proof treatments.
+
+### 10.3 Convention disagreements resolved
+
+| issue | treatments compared | adopted library convention and reason |
+|---|---|---|
+| local versus quasilocal | H20 sometimes reserves “local” for a Noetherian quasilocal ring; TN, BU, Milne and Stacks use “local” for any ring with one maximal ideal. | Keep the published unique-maximal-ideal definition with no Noetherian hypothesis.  Every theorem needing Noetherianity states it. |
+| Dedekind domains and fields | JM begins from invertibility/local-DVR formulations; other texts variously allow a field as a zero-dimensional Dedekind ring. | Keep §3's Noetherian, normal, dimension-one domain definition, so fields are excluded.  CA-9 proves equivalence with nonzero-ideal invertibility and local DVRs. |
+| DVR | JM uses a local-Dedekind formulation and TN starts from a surjective discrete valuation; Stacks also gives principal-maximal-ideal and dimension-one normal formulations. | Define the valuation and local-ring forms separately, then prove their equivalence for a nonfield domain.  This prevents an unnoticed field edge case. |
+| Henselian | R710 foregrounds coprime monic factor lifting; BU foregrounds simple-root lifting. | Keep factor lifting as the definition and prove equivalence with simple-root lifting before either is used. |
+| regular sequence | RG5's working formulation does not always repeat the terminal proper-ideal condition; Vakil and Stacks make the nonunit boundary explicit. | Keep §3's ordered sequence generating a proper ideal.  Unit and zero-module edge cases are stated separately below. |
+| depth | RG6 defines depth via regular sequences and immediately compares Ext; some homological treatments start with the first nonzero Ext. | Define via maximal regular-sequence length; prove the Ext and Koszul characterisations only after their homological prerequisites exist. |
+| zero ring dimension | sources vary between leaving it undefined and assigning \(-\infty\). | Keep §3's explicit codomain-sensitive convention; every dimension theorem below either excludes the zero ring or handles it separately. |
+| flatness ownership | H20 and V25 define flat modules inside commutative algebra, while the commission assigns the basic definition to abstract algebra. | Continue citing `def-flat-module`; this track owns ring-map flatness, faithful flatness, local criteria and descent only. |
+| \(p\)-adic completion | JM constructs the completed DVR algebraically; the seam ruling assigns the underlying \(p\)-adic group construction to group theory. | Cite the group-theory construction and prove only its agreement with the \((p)\)-adic ring completion here. |
+
+### 10.4 Added decompositions
+
+Each row below is a distinct library obligation, not a restatement of its
+parent heading.  “Proof altered” means the published proof has been split at
+the named conceptual move and its dependencies replaced by stable library
+citations; it does not mean the statement was generated.
+
+#### CA-1 additions — `noetherian-rings-and-hilbert-basis` and companion
+
+| target | id | kind | focused statement | explicit provenance |
+|---|---|---|---|---|
+| A | `lem-union-of-an-ascending-chain-of-ideals` | `lem` | The union of an ascending chain of ideals is an ideal, and it is finitely generated only if all of its generators occur at one finite stage. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §2, pp. 77--80, supplies the ACC argument, split here at the union/stabilisation step. |
+| A | `lem-noetherian-acc-from-finite-generation` | `lem` | If every ideal of a ring is finitely generated, every ascending chain of ideals stabilises. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §2 and BU §2 prove the equivalence; this row isolates the finite-stage generator argument and cites the sibling definition. |
+| A | `lem-noetherian-maximal-counterexample-principle` | `lem` | In a Noetherian ring, every nonempty collection of ideals has a maximal member, so a hereditary failure property has a maximal counterexample. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §2, pp. 77--80, is the source; the row exposes the exact engine used by Noetherian induction. |
+| A | `cor-noetherian-induction-minimal-counterexample-form` | `cor` | A property of ideals holds everywhere if any ideal minimal among its failures can be enlarged to a strictly larger failure. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §2 derives this contrapositive form; it is separated because later primary-decomposition proofs invoke it directly. |
+| A | `lem-bounded-degree-polynomials-form-a-finite-free-module` | `lem` | Polynomials of degree at most \(n\) form a free \(R\)-module with basis \(1,x,\ldots,x^n\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 5 §3 and BU §2 use this module in the Hilbert-basis proof; the basis check is the needed finite-stage lemma. |
+| A | `lem-leading-coefficient-stage-is-an-ideal` | `lem` | For an ideal \(I\subseteq R[x]\), the leading coefficients of elements of \(I\) of degree at most \(n\), together with zero, form an ideal of \(R\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §3 and Altman--Kleiman (16.12); the zero-polynomial boundary is made explicit. |
+| A | `lem-leading-coefficient-stage-chain-stabilises` | `lem` | If \(R\) is Noetherian, the bounded-degree leading-coefficient ideals of \(I\subseteq R[x]\) stabilise. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 5 §3 proves this by ACC; it is the first independent move in Hilbert basis. |
+| A | `lem-hilbert-basis-degree-cancellation` | `lem` | Once finitely many polynomials realise generators of the stable leading-coefficient ideal, every sufficiently high-degree element of \(I\) can have its leading term cancelled by their polynomial multiples. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §3 and BU §2 contain the reduction; the row isolates cancellation from the induction that follows. |
+| A | `lem-hilbert-basis-low-degree-remainder-module` | `lem` | The ideal elements below the stabilisation degree form a submodule of a finite free \(R\)-module and hence are finitely generated when \(R\) is Noetherian. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §3 completes Hilbert basis this way; the sibling Noetherian-module theorem supplies submodule finiteness. |
+| A | `cor-polynomial-ideal-has-a-finite-degree-reduction-system` | `cor` | Over a Noetherian coefficient ring, every polynomial ideal admits finitely many members such that repeated leading-term cancellation reaches their bounded-degree span. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §3; this is the reusable constructive content of its Hilbert-basis proof, without asserting a Gröbner basis. |
+| A | `lem-quotient-of-a-noetherian-ring-ideal-lifting` | `lem` | Ideals of \(R/I\) lift to ideals of \(R\), and finite generators of the lift descend to finite generators of the quotient ideal. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §2 and H20 Ch. 5 §2; the row records the proof move behind quotient stability rather than re-stating correspondence. |
+| A | `lem-localised-ideal-generated-by-contracted-numerators` | `lem` | Every ideal of \(S^{-1}R\) is generated by the images of any generating set of its contraction to \(R\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 and Ch. 5; this is the numerator argument used in Noetherian localization and does not claim extension-contraction equality for arbitrary ideals. |
+| A | `cor-finite-products-of-noetherian-rings-are-noetherian` | `cor` | A finite direct product of Noetherian rings is Noetherian. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 5 exercises and BU §2 derive it from the componentwise description of ideals. |
+| A | `cor-direct-summands-of-noetherian-modules-are-noetherian` | `cor` | Every direct summand of a Noetherian module is Noetherian. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 5 §1; projection sends an ascending chain to the corresponding chain in the summand. |
+| A | `lem-kernel-between-finite-modules-over-a-noetherian-ring-is-finite` | `lem` | The kernel of a map between finite modules over a Noetherian ring is finite. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 5 §1 and BU §2; this is the relation-module step behind finite presentation. |
+| A | `cor-cokernel-of-a-map-of-finitely-presented-modules-is-finitely-presented` | `cor` | Over a Noetherian ring, the cokernel of a map between finitely presented modules is finitely presented. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §4; the finite kernel lemma supplies the finite relation module after lifting to finite free presentations. |
+| A | `lem-artin-tate-coefficient-subalgebra` | `lem` | In the Artin--Tate setup, adjoining the finitely many coefficients occurring in algebra-generator expressions and module multiplication produces a finite-type Noetherian intermediate algebra \(A'\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: Altman--Kleiman (16.21), checked against H20 Ch. 5 §4; this is the bookkeeping move usually hidden inside the theorem. |
+| A | `lem-artin-tate-intermediate-ring-is-finite-over-coefficient-ring` | `lem` | With \(A'\) as above, the intermediate ring \(B\) is a finite \(A'\)-module. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: Altman--Kleiman (16.21); the chosen module generators and recorded multiplication coefficients give the finite spanning argument. |
+| A | `lem-cohen-criterion-maximal-bad-ideal` | `lem` | If a ring has a non-finitely-generated ideal, the ideals not finitely generated have a maximal member provided every prime ideal is finite. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 Noetherian criteria and Altman--Kleiman (16.10); a chain union is finite only if it appears at one stage, so Zorn applies. |
+| A | `lem-cohen-criterion-maximal-bad-ideal-is-prime` | `lem` | An ideal maximal among non-finitely-generated ideals is prime. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: Altman--Kleiman (16.10) and the Oka-family proof; the two finitely generated enlargements and a colon ideal yield finite generation of the alleged bad ideal. |
+| A | `lem-kernels-of-iterates-of-an-endomorphism-stabilise-noetherian` | `lem` | For an endomorphism of a Noetherian module, the ascending chain of kernels of its iterates stabilises. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 5 §1; it is the exact ACC input to the Hopfian corollary already scaffolded. |
+| A | `thm-formal-power-series-hilbert-basis` | `thm` | If \(R\) is Noetherian, then \(R[[x]]\) is Noetherian. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §5, pp. 88--92; the proof is split into coefficient-ideal stabilisation and convergent elimination, both added below. |
+| A | `lem-power-series-initial-coefficient-ideals-stabilise` | `lem` | Initial coefficients of elements of an ideal in \(R[[x]]\), sorted by order, form an ascending chain of ideals that stabilises when \(R\) is Noetherian. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §5; it is the formal-series analogue of the polynomial leading-coefficient lemma. |
+| A | `lem-power-series-successive-elimination-converges-adically` | `lem` | Successive cancellation of initial terms in \(R[[x]]\) produces coefficient series whose partial sums converge in the \((x)\)-adic topology and recover the original series. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §5; the topology and coefficientwise limit are stated so the infinite reduction is not disguised as finite division. |
+| A | `cor-finite-variable-formal-power-series-ring-noetherian` | `cor` | If \(R\) is Noetherian, \(R[[x_1,\ldots,x_n]]\) is Noetherian for every finite \(n\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 5 §5, iterating the one-variable theorem and the canonical iterated-series identification. |
+| B | `ex-noetherian-induction-on-radical-ideals` | `ex` | Work a maximal-counterexample proof that a radical ideal in a Noetherian ring has finitely many minimal primes, while deferring the theorem itself to CA-3. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Chs. 5 and 8 use this standard induction; the exercise makes the cross-page dependency explicit. |
+| B | `ex-leading-coefficient-stages-before-stabilisation` | `ex` | Compute the leading-coefficient ideals of \((2x,3x^2,x^3)\subseteq\mathbb Z[x]\) at each bounded degree. | provenance.statement: directly-checkable source-derived exercise; provenance.proof: ai-altered; rationale: H20 Ch. 5 §3 exercises motivate stagewise leading ideals; this finite computation checks the boundary before stabilisation. |
+| B | `ex-formal-power-series-hilbert-reduction` | `ex` | Carry out the first three stages of the initial-coefficient elimination for an explicit ideal of \(k[[x]]\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 5 §5 supplies the algorithm; finite truncation makes the convergence mechanism checkable. |
+| B | `ex-infinite-variable-formal-power-series-ring-not-noetherian` | `ex` | Show that the ideal \((x_1,x_2,\ldots)\) in a countably infinite-variable formal-series ring is not finitely generated. | provenance.statement: directly-checkable standard counterexample; provenance.proof: literature-derived; rationale: H20 Ch. 5's finite-variable restriction requires this boundary; quotienting away all but a missing variable proves it. |
+| B | `ex-surjective-shift-on-a-nonnoetherian-module` | `ex` | Give a surjective noninjective shift endomorphism of a non-Noetherian module, showing why the Hopfian conclusion needs the chain condition. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 5 exercises use the direct-sum shift as the standard hypothesis test. |
+| B | `ex-arbitrary-product-of-noetherian-rings-not-noetherian` | `ex` | Exhibit the ascending chain of finite-support idempotent ideals in an infinite product of fields. | provenance.statement: directly-checkable standard counterexample; provenance.proof: ai-altered; rationale: BU §2's finite-product closure does not extend to arbitrary products; the idempotents make failure explicit. |
+
+#### CA-2 additions — `localisation-of-modules-support-and-nakayama` and companion
+
+| target | id | kind | focused statement | explicit provenance |
+|---|---|---|---|---|
+| A | `lem-localised-module-fraction-equivalence-is-an-equivalence-relation` | `lem` | The usual relation \((m,s)\sim(n,t)\) iff some \(u\in S\) kills \(u(tm-sn)\) is reflexive, symmetric and transitive. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 §2 and TN §7; this is separated from the module-operation checks. |
+| A | `lem-localised-module-addition-independent-of-representatives` | `lem` | Addition \(m/s+n/t=(tm+sn)/(st)\) is independent of representatives. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §2; the common-annihilator calculation is a distinct well-definedness obligation. |
+| A | `lem-localised-module-scalar-action-independent-of-representatives` | `lem` | The \(S^{-1}R\)-action \((a/u)(m/s)=am/(us)\) is independent of both representatives. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §2 and BU §4; the proof uses the two fraction relations separately. |
+| A | `lem-module-localisation-canonical-map-is-linear` | `lem` | The map \(M\to S^{-1}M\), \(m\mapsto m/1\), is \(R\)-linear and sends every \(s\in S\) to an invertible scalar action. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §7 and H20 Ch. 2 §2; this is the data needed for the universal property. |
+| A | `lem-module-localisation-universal-map-formula` | `lem` | Any \(R\)-linear map from \(M\) to an \(S^{-1}R\)-module factors uniquely by \(m/s\mapsto s^{-1}f(m)\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §2; representative-independence and uniqueness are isolated from the theorem wrapper. |
+| A | `lem-localisation-tensor-comparison-map` | `lem` | The mutually inverse maps \(S^{-1}R\otimes_R M\rightleftarrows S^{-1}M\) are \((a/s)\otimes m\mapsto am/s\) and \(m/s\mapsto (1/s)\otimes m\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 6 and BU §5; balancedness and inverse checks supply the existing tensor comparison theorem. |
+| A | `lem-localisation-preserves-injectivity` | `lem` | If \(M'\to M\) is injective, then \(S^{-1}M'\to S^{-1}M\) is injective. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §3; the zero-fraction criterion turns vanishing into annihilation by one denominator. |
+| A | `lem-localisation-preserves-surjectivity` | `lem` | If \(M\to M''\) is surjective, then \(S^{-1}M\to S^{-1}M''\) is surjective. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 §3; lift the numerator and retain its denominator. |
+| A | `cor-localisation-commutes-with-kernels-images-and-cokernels` | `cor` | Localization carries the kernel, image and cokernel of a module map to the corresponding kernel, image and cokernel after localization. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §3 and BU §4; exactness gives all three identifications. |
+| A | `cor-localisation-commutes-with-finite-intersections-of-submodules` | `cor` | For submodules \(N_1,\ldots,N_r\subseteq M\), localization identifies \(S^{-1}(\bigcap_iN_i)\) with \(\bigcap_iS^{-1}N_i\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §3; express a finite intersection as the kernel of the map to \(\bigoplus M/N_i\). |
+| A | `lem-localisation-of-hom-natural-map` | `lem` | There is a natural map \(S^{-1}\operatorname{Hom}_R(M,N)\to\operatorname{Hom}_{S^{-1}R}(S^{-1}M,S^{-1}N)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 7 and BU §5; this row constructs the map before finite-presentation hypotheses enter. |
+| A | `lem-localised-hom-finite-free-case` | `lem` | The Hom-localization map is an isomorphism when its first argument is finite free. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 7 §3; both sides identify with a finite direct sum of \(S^{-1}N\). |
+| A | `lem-localised-hom-finite-presentation-kernel-step` | `lem` | A finite presentation of \(M\) reduces the Hom-localization comparison to the finite-free case by a kernel diagram. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 7 §3 and BU §5; this is the finite-presentation step of the existing theorem. |
+| A | `cor-module-is-zero-iff-all-maximal-localisations-are-zero` | `cor` | A module is zero iff its localization at every maximal ideal is zero. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 local criteria; a nonzero element has a proper annihilator contained in a maximal ideal. |
+| A | `cor-module-map-is-injective-iff-locally-injective` | `cor` | A module map is injective iff all of its prime localizations, equivalently all maximal localizations, are injective. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §5; apply the local zero criterion to the kernel and use exactness. |
+| A | `cor-module-map-is-surjective-iff-locally-surjective` | `cor` | A module map is surjective iff all of its prime localizations, equivalently all maximal localizations, are surjective. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §5; apply the local zero criterion to the cokernel. |
+| A | `lem-support-membership-by-annihilator` | `lem` | A prime \(\mathfrak p\) lies in \(\operatorname{Supp}M\) iff some element of \(M\) has annihilator contained in \(\mathfrak p\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §6; the zero-fraction criterion supplies both directions. |
+| A | `cor-support-empty-iff-module-zero` | `cor` | The support of an arbitrary module is empty exactly when the module is zero. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 §6; no finite-generation hypothesis is needed. |
+| A | `thm-support-of-an-arbitrary-direct-sum` | `thm` | The support of a direct sum of modules is the union of their supports. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 §6; localization commutes with direct sums and a direct sum is zero iff every summand is zero. |
+| A | `lem-support-of-a-cyclic-module-is-its-vanishing-set` | `lem` | \(\operatorname{Supp}(R/I)=V(I)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 §6 and BU §6; localization of the cyclic module is zero precisely when the localized ideal is the unit ideal. |
+| A | `lem-support-of-a-finite-module-is-union-of-generator-cyclic-supports` | `lem` | If \(m_1,\ldots,m_r\) generate \(M\), then \(\operatorname{Supp}M=\bigcup_iV(\operatorname{Ann}(m_i))\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §6; the finite union is then \(V(\operatorname{Ann}M)\). |
+| A | `lem-jacobson-radical-is-intersection-of-maximal-ideals` | `lem` | The Jacobson radical equals the intersection of all maximal ideals, with the empty intersection convention handling the zero ring. | provenance.statement: literature-derived; provenance.proof: not-applicable; rationale: H20 Ch. 2 §7 and TN §7.2 give this definition/form; the zero-ring boundary is recorded explicitly. |
+| A | `lem-jacobson-unit-test-one-minus-ax` | `lem` | An element \(x\) lies in the Jacobson radical iff \(1-ax\) is a unit for every \(a\in R\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §7; a nonunit is placed in a maximal ideal for the reverse direction. |
+| A | `lem-determinant-trick-for-nakayama` | `lem` | If a finite module \(M\) satisfies \(M=IM\), then some \(a\in I\) obeys \((1-a)M=0\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §11 and R710 Lecture 7; the adjugate calculation is cited from the published determinant trick and exposed as Nakayama's engine. |
+| A | `cor-nakayama-ideal-form` | `cor` | If \(I\subseteq\operatorname{Jac}(R)\), \(M\) is finite, and \(M=IM\), then \(M=0\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 §7 and TN §7.4; \(1-a\) from the determinant trick is a unit. |
+| A | `cor-nakayama-endomorphism-form` | `cor` | If \(M\) is finite and an endomorphism has image containing \(M/IM\) modulo an ideal in \(\operatorname{Jac}(R)\), then it is surjective. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §7; apply Nakayama to the cokernel. |
+| A | `lem-local-minimal-generators-map-to-a-residue-field-basis` | `lem` | Over a local ring \((R,\mathfrak m,k)\), a finite generating set of \(M\) is minimal iff its images form a \(k\)-basis of \(M/\mathfrak mM\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 §7 and TN §7.4; spanning is Nakayama and linear dependence permits deleting a generator. |
+| A | `cor-minimal-number-of-generators-is-residue-dimension` | `cor` | For finite \(M\) over a local ring, \(\mu_R(M)=\dim_k(M/\mathfrak mM)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 §7; it packages the preceding basis criterion into the numerical invariant used by CA-18. |
+| A | `cor-finite-module-cyclic-near-a-prime` | `cor` | If \(M_\mathfrak p\) is cyclic and \(M\) is finitely presented, then \(M_f\) is cyclic for some \(f\notin\mathfrak p\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 local finite-presentation argument; localize the cokernel of one chosen generator and clear finitely many denominators. |
+| A | `cor-finite-module-generated-by-r-elements-near-a-prime` | `cor` | If \(M_\mathfrak p\) is generated by \(r\) elements and \(M\) is finitely presented, the same holds on some localization \(M_f\) with \(f\notin\mathfrak p\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 and V25 §25.2; apply the locally-zero-near-a-prime lemma to the presentation cokernel. |
+| B | `ex-localised-module-equivalence-needs-a-common-annihilator` | `ex` | Check transitivity of the fraction relation in a module with torsion and show why equality cannot be defined by the bare cross-product equation. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: TN §7 flags the annihilator multiplier; the example tests the well-definedness boundary. |
+| B | `ex-support-of-an-infinite-direct-sum` | `ex` | Compute the support of \(\bigoplus_p\mathbb Z/p\mathbb Z\) over \(\mathbb Z\). | provenance.statement: directly-checkable source-derived example; provenance.proof: literature-derived; rationale: H20 Ch. 2 §6's arbitrary direct-sum formula gives exactly the nonzero prime ideals. |
+| B | `ex-support-of-a-product-strictly-larger-than-union` | `ex` | Use \(\prod_p\mathbb Z/p\mathbb Z\) to show that support of an infinite product need not equal the union of the factor supports. | provenance.statement: directly-checkable standard counterexample; provenance.proof: ai-altered; rationale: H20 Ch. 2 distinguishes sums from products; localization at \((0)\) detects the boundary. |
+| B | `ex-nakayama-jacobson-hypothesis-is-essential` | `ex` | Take \(R=\mathbb Z\), \(I=(2)\), and a suitable finite module to show \(M=IM\) need not imply \(M=0\) when \(I\not\subseteq\operatorname{Jac}(R)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §7.4 exercises use \(\mathbb Z/3\mathbb Z\), on which multiplication by two is surjective. |
+| B | `ex-residue-dimension-counts-minimal-generators` | `ex` | Compute \(\mu_R((x,y))\) in \(k[x,y]_{(x,y)}\) from \((x,y)/(x,y)^2\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 §7 uses this standard local-generator computation. |
+| B | `ex-cyclic-at-a-prime-on-a-basic-neighbourhood` | `ex` | For a presented module given by a small matrix, find an explicit minor whose inversion makes the module cyclic. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 local-presentation exercises; the minor calculation realizes denominator clearing. |
+| B | `ex-localisation-kills-exactly-s-torsion` | `ex` | For \(M=\mathbb Z/12\mathbb Z\) and selected multiplicative sets, compute the kernel of \(M\to S^{-1}M\). | provenance.statement: directly-checkable source-derived example; provenance.proof: literature-derived; rationale: TN §7 and H20 Ch. 2 illustrate the zero-fraction criterion arithmetically. |
+
+#### CA-3 additions — `prime-spectra-radicals-and-dimension-language` and companion
+
+| target | id | kind | focused statement | explicit provenance |
+|---|---|---|---|---|
+| A | `lem-radical-membership-by-a-power` | `lem` | An element lies in \(\sqrt I\) exactly when one of its positive powers lies in \(I\), including the unit-ideal and zero-ring boundaries. | provenance.statement: literature-derived; provenance.proof: not-applicable; rationale: H20 Ch. 1 §1 and BU §6 give the elementwise definition; edge cases are recorded for later use. |
+| A | `lem-radical-of-an-intersection` | `lem` | For a finite family of ideals, \(\sqrt{\bigcap_i I_i}=\bigcap_i\sqrt{I_i}\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §2; multiplying suitable powers gives the reverse inclusion. |
+| A | `lem-radical-of-a-product` | `lem` | \(\sqrt{IJ}=\sqrt{I\cap J}=\sqrt I\cap\sqrt J\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §2 and BU §6; use \(IJ\subseteq I\cap J\) and products of witnessing powers. |
+| A | `lem-radical-commutes-with-quotient-correspondence` | `lem` | Ideals radical over \(I\) correspond to radical ideals of \(R/I\), and \(\sqrt{J/I}=\sqrt J/I\) for \(I\subseteq J\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 1 §2; translate power membership through the quotient map. |
+| A | `lem-radical-commutes-with-localisation` | `lem` | \(S^{-1}\sqrt I=\sqrt{S^{-1}I}\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 2 and BU §4; clear the denominator from a power lying in the extended ideal. |
+| A | `cor-reduced-quotient-by-the-nilradical` | `cor` | \(R/\sqrt{(0)}\) is reduced and is universal among maps from \(R\) to reduced rings. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 1 §5; nilpotents are exactly the elements every map to a reduced ring must kill. |
+| A | `lem-prime-containing-a-multiplicative-set-disjoint-ideal` | `lem` | If an ideal \(I\) is disjoint from a multiplicative set \(S\), there is a prime ideal containing \(I\) and disjoint from \(S\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 1 §1 and TN §7; Zorn gives a maximal disjoint ideal and the multiplicative-set argument proves it prime. |
+| A | `cor-prime-containing-an-ideal-avoiding-an-element` | `cor` | If no power of \(f\) lies in \(I\), some prime contains \(I\) but not \(f\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §1; apply the preceding lemma to \(S=\{1,f,f^2,\ldots\}\). |
+| A | `lem-radical-intersection-proof-forward-inclusion` | `lem` | Every prime containing \(I\) contains \(\sqrt I\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §1; primality removes powers one factor at a time. |
+| A | `lem-radical-intersection-proof-separating-prime` | `lem` | If \(f\notin\sqrt I\), a prime containing \(I\) and avoiding \(f\) separates \(f\) from the intersection of all primes over \(I\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 1 §1 and BU §6; this isolates the Zorn-dependent reverse inclusion. |
+| A | `cor-ring-reduced-iff-zero-is-an-intersection-of-primes` | `cor` | A ring is reduced iff its zero ideal is an intersection of prime ideals. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §5; combine the nilradical theorem with the definition of reduced. |
+| A | `lem-vanishing-set-reverses-inclusions` | `lem` | If \(I\subseteq J\), then \(V(J)\subseteq V(I)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §2 and BU §6; it is the order reversal used throughout CA-15. |
+| A | `lem-vanishing-set-of-an-arbitrary-sum` | `lem` | \(V(\sum_\lambda I_\lambda)=\bigcap_\lambda V(I_\lambda)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §2; a prime contains the sum exactly when it contains every summand. |
+| A | `lem-vanishing-set-of-a-finite-product` | `lem` | \(V(I_1\cdots I_n)=\bigcup_iV(I_i)\) for a finite family. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §2; primality supplies the finite product implication. |
+| A | `lem-distinguished-subset-identities` | `lem` | \(D(0)=\varnothing\), \(D(1)=\operatorname{Spec}R\), \(D(fg)=D(f)\cap D(g)\), and \(D(f)=D(f^n)\) for \(n>0\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §2; these are algebraic prime-membership identities, not yet topological basis claims. |
+| A | `lem-distinguished-subset-cover-detects-radical` | `lem` | \(D(f)\subseteq\bigcup_iD(f_i)\) iff \(f\in\sqrt{(f_i)}\); for a finite subcover one power of \(f\) lies in the finitely generated ideal. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 1 and BU §6; the radical-intersection theorem gives the equivalence, later used for compactness in CA-15. |
+| A | `lem-spectrum-map-respects-composition-and-identities` | `lem` | Contraction makes \(\operatorname{Spec}\) a contravariant functor on commutative rings. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §3 and TN §2; inverse images of ideals compose and preserve primality. |
+| A | `lem-spectrum-map-preimage-of-vanishing-set` | `lem` | For \(\varphi:R\to A\), the inverse image under \(\operatorname{Spec}A\to\operatorname{Spec}R\) of \(V(I)\) is \(V(IA)\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 1 §3; the contraction contains \(I\) exactly when the prime contains its extension. |
+| A | `lem-primes-of-a-quotient-are-primes-over-the-kernel` | `lem` | Contraction along \(R\to R/I\) identifies primes of the quotient with primes of \(R\) containing \(I\), preserving strict inclusions. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 §3 and BU §6; this is the order-preserving content behind the existing bijection. |
+| A | `lem-primes-of-a-localisation-avoid-the-multiplicative-set` | `lem` | Contraction along \(R\to S^{-1}R\) identifies primes of the localization with primes of \(R\) disjoint from \(S\), preserving strict inclusions. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 and TN §7; extension and contraction are checked on numerator membership. |
+| A | `cor-primes-of-a-prime-local-ring` | `cor` | Primes of \(R_\mathfrak p\) correspond to primes of \(R\) contained in \(\mathfrak p\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2; specialize the localization correspondence to \(S=R\setminus\mathfrak p\). |
+| A | `cor-primes-of-a-principal-localisation` | `cor` | Primes of \(R_f\) correspond to primes of \(R\) not containing \(f\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 2 and BU §6; specialize to powers of \(f\). |
+| A | `lem-minimal-prime-over-an-ideal-exists` | `lem` | Every proper ideal has a prime minimal among the primes containing it. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 1 and Ch. 8; localize at a prime over the ideal and apply Zorn to descending chains, whose intersection remains prime in the relevant set. |
+| A | `lem-noetherian-minimal-primes-induction-split` | `lem` | If a radical ideal in a Noetherian ring is not prime, elements \(x,y\notin I\) with \(xy\in I\) reduce its minimal primes to those over \(I+(x)\) or \(I+(y)\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 and BU §10; this is the strict-enlargement step in the finite-minimal-prime induction. |
+| A | `thm-nilradical-of-a-noetherian-ring-is-nilpotent` | `thm` | In a Noetherian ring the nilradical is a nilpotent ideal. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 and BU §10; finite generation of the nilradical turns elementwise nilpotence into one common exponent. |
+| A | `cor-radical-ideal-has-finitely-many-minimal-primes-noetherian` | `cor` | Every radical ideal in a Noetherian ring is the intersection of its finitely many minimal primes. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8; finiteness comes from the induction split and equality from the radical-intersection theorem. |
+| A | `lem-height-equals-local-dimension` | `lem` | For a prime \(\mathfrak p\), \(\operatorname{ht}(\mathfrak p)=\dim R_\mathfrak p\), with infinite suprema allowed. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 and Ch. 10; the prime-localization order bijection preserves chain lengths. |
+| A | `cor-dimension-of-a-quotient-as-chains-above-an-ideal` | `cor` | \(\dim(R/I)\) is the supremum of lengths of prime chains in \(R\) all containing \(I\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 1 and Ch. 10; use the quotient prime correspondence. |
+| B | `ex-radical-of-a-product-and-intersection` | `ex` | Compute \(\sqrt{(x^2,xy)\cap(y^3)}\) in \(k[x,y]\) using product/intersection identities. | provenance.statement: directly-checkable source-derived exercise; provenance.proof: ai-altered; rationale: BU §6 exercises use monomial radicals to test the identities. |
+| B | `ex-separating-prime-for-a-missing-radical-element` | `ex` | For an explicit ideal and element outside its radical, construct a prime containing the ideal but avoiding the element. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 1 §1; a polynomial-ring example concretizes the multiplicative-set proof. |
+| B | `ex-spectrum-of-a-zero-ring-empty` | `ex` | Verify that the zero ring has empty prime spectrum and check every displayed \(V\) and \(D\) boundary convention. | provenance.statement: directly-checkable boundary example; provenance.proof: literature-derived; rationale: H20 Ch. 1 conventions make this degenerate case explicit. |
+| B | `ex-primes-in-a-prime-localisation` | `ex` | List the primes of \(k[x,y]_{(x,y)}\) that arise from a specified finite family of primes below \((x,y)\). | provenance.statement: directly-checkable source-derived example; provenance.proof: literature-derived; rationale: TN §7 and BU §6 illustrate the order correspondence. |
+| B | `ex-noetherian-nilradical-common-exponent` | `ex` | Find a common nilpotence exponent for the nilradical of \(k[x,y]/(x^3,x^2y,y^4)\). | provenance.statement: directly-checkable source-derived exercise; provenance.proof: ai-altered; rationale: H20 Ch. 8; finite monomial generators display the theorem's exponent argument. |
+| B | `ex-nilradical-need-not-be-nilpotent-nonnoetherian` | `ex` | Show that the nilradical of \(k[x_1,x_2,\ldots]/(x_1,x_2^2,x_3^3,\ldots)\) is not nilpotent. | provenance.statement: literature-derived standard counterexample; provenance.proof: literature-derived; rationale: H20 Ch. 8 uses unbounded nilpotence to show the Noetherian hypothesis is essential. |
+
+#### CA-4 additions — `artinian-rings-and-module-length` and companion
+
+| target | id | kind | focused statement | explicit provenance |
+|---|---|---|---|---|
+| A | `lem-simple-modules-over-a-commutative-ring-are-residue-fields` | `lem` | Every simple \(R\)-module is isomorphic to \(R/\mathfrak m\) for a maximal ideal \(\mathfrak m\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 9 and BU §7; a nonzero element gives a cyclic surjection whose kernel is maximal. |
+| A | `lem-composition-series-refinement-step` | `lem` | Two finite submodule chains admit a common refinement by inserting intersections and sums. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §7 develops length from refinements; the butterfly/isomorphism step is isolated for the additivity theorem. |
+| A | `thm-jordan-holder-for-finite-length-modules` | `thm` | Any two composition series of a finite-length module have the same length and the same simple factors up to permutation and isomorphism. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §7 and H20 Ch. 9; induction uses the refinement step and the published isomorphism theorems. |
+| A | `lem-length-additivity-surjective-half` | `lem` | In \(0\to M'\to M\to M''\to0\), finite composition series of \(M'\) and \(M''\) splice to one of \(M\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §7; lift the quotient chain and prepend the submodule chain. |
+| A | `lem-length-additivity-converse-half` | `lem` | A finite composition series of \(M\) induces finite refinements in \(M'\) and \(M''\), so finite length of \(M\) passes to both. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §7; intersections and images provide the two induced chains. |
+| A | `cor-length-is-invariant-under-isomorphism` | `cor` | Isomorphic modules have equal length. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §7; an isomorphism transports a composition series. |
+| A | `cor-length-of-a-finite-direct-sum` | `cor` | \(\ell(\bigoplus_{i=1}^nM_i)=\sum_i\ell(M_i)\) whenever the summands have finite length. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §7; iterate short-exact-sequence additivity. |
+| A | `cor-finite-length-modules-are-noetherian-and-artinian` | `cor` | Every finite-length module satisfies both chain conditions. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 9 and BU §7; strict submodule inclusions strictly change length. |
+| A | `lem-noetherian-artinian-module-has-a-simple-submodule` | `lem` | A nonzero Artinian module has a minimal nonzero submodule, which is simple. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 9; DCC supplies the minimal member. |
+| A | `lem-noetherian-artinian-module-composition-series-induction` | `lem` | A Noetherian and Artinian module has a finite composition series by successively quotienting by simple submodules. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 9 and TN §12; ACC prevents the recursively built chain from continuing indefinitely. |
+| A | `cor-finite-length-iff-noetherian-and-artinian` | `cor` | A module has finite length iff it is both Noetherian and Artinian. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 9 and BU §7; the two directions are the preceding chain lemmas. |
+| A | `lem-artinian-domain-field-proof` | `lem` | In an Artinian domain, the chain \((a)\supseteq(a^2)\supseteq\cdots\) stabilises and cancellation produces an inverse for every nonzero \(a\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §12 and H20 Ch. 9; this exposes the cancellation move behind the existing theorem. |
+| A | `cor-prime-quotient-of-an-artinian-ring-is-a-field` | `cor` | If \(R\) is Artinian and \(\mathfrak p\) is prime, then \(R/\mathfrak p\) is a field. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §12; quotients preserve Artinianity and the quotient is a domain. |
+| A | `lem-artinian-ring-has-no-infinite-pairwise-comaximal-family` | `lem` | An Artinian ring has no infinite family of distinct maximal ideals whose successive finite products strictly decrease. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 9; DCC and comaximality force the finite-maximal-ideal conclusion. |
+| A | `lem-artinian-nilradical-finitely-generated` | `lem` | Once an Artinian ring is known Noetherian, its nilradical is generated by finitely many nilpotent elements. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Chs. 8--9 and TN §12; this isolates the dependency used to obtain a uniform nilpotence exponent. |
+| A | `lem-artinian-ring-minimal-ideal-splitting` | `lem` | If the descending powers of a maximal ideal stabilise nontrivially, a minimal nonzero ideal in the stable power yields an idempotent splitting. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 9's proof that Artinian rings are Noetherian; this is the structural alternative that contradicts indecomposability. |
+| A | `lem-artinian-local-maximal-ideal-nilpotence` | `lem` | In an Artinian local ring, stabilization of \(\mathfrak m^n\) and Nakayama force \(\mathfrak m^n=0\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: TN §12 and H20 Ch. 9; the finite-generation and Jacobson hypotheses are stated rather than hidden. |
+| A | `cor-artinian-local-ring-residue-filtration` | `cor` | An Artinian local ring has a finite filtration \(R\supset\mathfrak m\supset\cdots\supset\mathfrak m^N=0\) whose factors are vector spaces over its residue field. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 9 and BU §7; multiplication by \(\mathfrak m\) kills each successive factor. |
+| A | `lem-powers-of-distinct-maximal-ideals-are-comaximal` | `lem` | If \(\mathfrak m\ne\mathfrak n\) are maximal, then \(\mathfrak m^a+\mathfrak n^b=R\) for all positive \(a,b\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §12; expand \((u+v)^{a+b-1}=1\) for \(u\in\mathfrak m,v\in\mathfrak n,u+v=1\). |
+| A | `lem-artinian-zero-ideal-as-comaximal-primary-intersection` | `lem` | In an Artinian ring with maximal ideals \(\mathfrak m_i\), suitable powers \(\mathfrak m_i^{N_i}\) have zero intersection and are pairwise comaximal. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 9 and TN §12; nilradical nilpotence gives the intersection and the powers lemma gives comaximality. |
+| A | `lem-artinian-product-idempotents` | `lem` | The Chinese-remainder isomorphism produces orthogonal idempotents summing to one and identifying each Artinian local factor. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 9; lift coordinate units through the CRT isomorphism. |
+| A | `cor-artinian-ring-local-factors-unique-up-to-order` | `cor` | The decomposition of an Artinian ring into nonzero Artinian local rings is unique up to permutation and isomorphism. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 9; primitive clopen idempotents/maximal-ideal factors determine the components. |
+| A | `cor-artinian-reduced-ring-is-a-finite-product-of-fields` | `cor` | A reduced Artinian ring is a finite product of fields. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §12 and H20 Ch. 9; the local maximal ideals are nilpotent and hence zero. |
+| A | `cor-artinian-local-ring-only-idempotents-are-zero-and-one` | `cor` | A local ring, hence each Artinian local factor, has no idempotents other than zero and one. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §7.2 and §12; one of \(e,1-e\) is a unit. |
+| A | `cor-artinian-finite-type-algebra-over-a-field-is-finite-dimensional` | `cor` | An Artinian finitely generated algebra over a field is finite-dimensional as a vector space. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: TN §§11--12; each local residue field is finite over the base by Zariski's lemma and the nilpotent filtration has finite factors. |
+| A | `lem-length-localisation-at-maximal-ideals-has-finite-support` | `lem` | A finite-length module has nonzero localization at only finitely many maximal ideals. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §7; its simple factors are residue fields at finitely many maximal ideals. |
+| A | `thm-length-sum-over-maximal-localisations` | `thm` | For a finite-length module, its length is the sum of the lengths of its localizations over the finitely many maximal ideals in its support. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §7 and H20 Ch. 9; verify the formula on simple factors and use additivity. |
+| B | `ex-two-composition-series-same-factors` | `ex` | Exhibit two different composition series of \(\mathbb Z/12\mathbb Z\) and match their simple factors. | provenance.statement: literature-derived exercise; provenance.proof: literature-derived; rationale: BU §7 uses finite abelian groups to test Jordan--Hölder. |
+| B | `ex-artinian-local-residue-filtration` | `ex` | Compute the maximal-ideal filtration and length of \(k[x,y]/(x^2,xy,y^3)\). | provenance.statement: directly-checkable source-derived exercise; provenance.proof: ai-altered; rationale: H20 Ch. 9 examples use monomial Artin rings; the monomial basis gives each residue factor. |
+| B | `ex-reduced-artinian-product-of-fields` | `ex` | Decompose \(k[x]/(x^3-x)\) when the factorisation is squarefree and compare the nonsquarefree characteristic cases. | provenance.statement: literature-derived exercise; provenance.proof: ai-altered; rationale: TN §12 applies CRT to factored polynomials; repeated roots test reducedness. |
+| B | `ex-artinian-local-idempotent-test` | `ex` | Solve \(e^2=e\) in a truncated local polynomial ring and verify that only zero and one occur. | provenance.statement: directly-checkable source-derived example; provenance.proof: literature-derived; rationale: H20 Ch. 9; reduction modulo the maximal ideal followed by nilpotence is the intended check. |
+| B | `ex-artinian-ring-length-local-sum` | `ex` | Verify the local length-sum formula for \(\mathbb Z/72\mathbb Z\). | provenance.statement: directly-checkable standard example; provenance.proof: literature-derived; rationale: BU §7; the \((2)\)- and \((3)\)-primary factors supply the two local summands. |
+| B | `ex-zero-ring-artinian-structure-boundary` | `ex` | Check the Artinian, Noetherian, spectrum, product-decomposition and length conventions for the zero ring. | provenance.statement: directly-checkable boundary example; provenance.proof: literature-derived; rationale: H20 Ch. 9 permits the zero ring, while some product theorems state nonzero factors; the exercise prevents an implicit exception. |
+
+#### CA-5 additions — `associated-primes-and-primary-decomposition` and companion
+
+| target | id | kind | focused statement | explicit provenance |
+|---|---|---|---|---|
+| A | `lem-annihilator-of-a-cyclic-submodule` | `lem` | For \(m\in M\), the cyclic submodule \(Rm\) is canonically isomorphic to \(R/\operatorname{Ann}(m)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §1 and BU §8; the first isomorphism theorem identifies associated primes with embedded cyclic residue modules. |
+| A | `lem-associated-prime-equivalent-cyclic-embedding` | `lem` | A prime \(\mathfrak p\) is associated to \(M\) iff \(R/\mathfrak p\) embeds in \(M\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §1 and BU §8; use the preceding cyclic-submodule identification. |
+| A | `cor-associated-primes-of-a-cyclic-module-are-primes-of-element-annihilators-modulo-ideal` | `cor` | \(\operatorname{Ass}(R/I)\) consists of primes of the form \((I:r)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §8; annihilators of residue classes are colon ideals. |
+| A | `lem-noetherian-module-maximal-element-annihilator-exists` | `lem` | A nonzero Noetherian module has an element whose proper annihilator is maximal among annihilators of nonzero elements. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §1; ACC on ideals supplies the maximum without a separate global choice. |
+| A | `lem-maximal-element-annihilator-primality-step` | `lem` | If \(\operatorname{Ann}(m)\) is maximal among annihilators of nonzero elements, then it is prime. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §1 and BU §8; if \(abm=0\) and \(bm\ne0\), maximality applied to \(bm\) forces \(a\) into the annihilator. |
+| A | `cor-associated-primes-empty-iff-module-zero-noetherian` | `cor` | A Noetherian module is zero iff it has no associated primes. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §1; existence applies to every nonzero Noetherian module. |
+| A | `lem-associated-primes-exact-sequence-left-inclusion` | `lem` | In \(0\to M'\to M\to M''\to0\), \(\operatorname{Ass}(M')\subseteq\operatorname{Ass}(M)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §8; an embedded cyclic residue module in \(M'\) remains embedded in \(M\). |
+| A | `lem-associated-primes-exact-sequence-right-bound` | `lem` | In that sequence, \(\operatorname{Ass}(M)\subseteq\operatorname{Ass}(M')\cup\operatorname{Ass}(M'')\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §1; intersect the cyclic submodule with \(M'\) and split according as the intersection is zero. |
+| A | `lem-associated-primes-quotient-inclusion` | `lem` | In that sequence, \(\operatorname{Ass}(M'')\subseteq\operatorname{Supp}(M')\cup\operatorname{Ass}(M)\) for finite modules over a Noetherian ring. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §8; localize at the candidate prime and use an annihilator-maximal lift. |
+| A | `lem-associated-prime-localises-forward` | `lem` | If \(\mathfrak p\in\operatorname{Ass}_R(M)\) and \(\mathfrak p\cap S=\varnothing\), then \(S^{-1}\mathfrak p\in\operatorname{Ass}_{S^{-1}R}(S^{-1}M)\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §1; localize the embedding \(R/\mathfrak p\hookrightarrow M\). |
+| A | `lem-associated-prime-localises-reverse-finite` | `lem` | For finite \(M\) over a Noetherian ring, every associated prime of \(S^{-1}M\) is the extension of an associated prime of \(M\) disjoint from \(S\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 and BU §8; clear finitely many denominators in an annihilator and choose a maximal annihilator upstairs. |
+| A | `cor-local-depth-zero-iff-maximal-ideal-associated` | `cor` | For a finite module over a Noetherian local ring, every element of the maximal ideal is a zero divisor on the module iff the maximal ideal is associated. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: BU §§8--9 and RG6 §6.1; finite prime avoidance converts the union of associated primes into one associated maximal ideal. |
+| A | `lem-finite-prime-avoidance` | `lem` | If an ideal is contained in a finite union of prime ideals, then it is contained in one of them. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §9; induction chooses elements avoiding all but one prime and multiplies them. |
+| A | `lem-zero-divisor-annihilator-contained-in-associated-prime` | `lem` | Every zero divisor on a finite module over a Noetherian ring lies in an associated prime of the module. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §1; apply associated-prime existence to the nonzero annihilator submodule. |
+| A | `lem-associated-primes-contained-in-support` | `lem` | Every associated prime of a module lies in its support. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §8; localizing an embedded copy of \(R/\mathfrak p\) at \(\mathfrak p\) remains nonzero. |
+| A | `lem-minimal-support-prime-local-annihilator` | `lem` | At a prime minimal in the support of a finite module, the localized maximal ideal is the radical of the module annihilator and is associated to the localized module. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §1; the zero-dimensional local quotient supplies an element with maximal annihilator. |
+| A | `cor-support-is-union-of-closures-of-associated-primes` | `cor` | For a finite module over a Noetherian ring, \(\operatorname{Supp}M=\bigcup_{\mathfrak p\in\operatorname{Ass}M}V(\mathfrak p)\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 and BU §8; every support prime contains a minimal support prime, which is associated. |
+| A | `lem-primary-submodule-zero-divisor-characterisation` | `lem` | A proper submodule \(Q\subset M\) is primary iff every zero divisor on \(M/Q\) is nilpotent on \(M/Q\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §2 and BU §10; translate the elementwise primary condition through the quotient. |
+| A | `cor-ideal-with-maximal-radical-is-primary` | `cor` | If \(\sqrt Q\) is maximal, then \(Q\) is primary. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §2; if \(ab\in Q\) and \(b\notin Q\), the colon ideal \((Q:b)\) is proper with radical contained in the maximal radical. |
+| A | `lem-radical-of-a-primary-colon` | `lem` | If \(Q\) is \(\mathfrak p\)-primary and \(x\notin Q\), then \(\sqrt{(Q:x)}=\mathfrak p\); if \(x\notin\mathfrak p\), then \((Q:x)=Q\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §10 and Altman--Kleiman §18; these colon identities drive localization and uniqueness. |
+| A | `lem-localisation-of-a-primary-submodule` | `lem` | A \(\mathfrak p\)-primary submodule localizes to a proper \(S^{-1}\mathfrak p\)-primary submodule when \(S\cap\mathfrak p=\varnothing\), and to the whole module otherwise. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §2; use a radical element of \(S\cap\mathfrak p\) in the second case and clear denominators in the first. |
+| A | `lem-contraction-recovers-primary-component-after-localising-away-from-radical` | `lem` | If \(Q\) is \(\mathfrak p\)-primary and \(S\cap\mathfrak p=\varnothing\), then \(Q\) is the contraction of \(S^{-1}Q\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §2; \(sm\in Q\) with \(s\notin\mathfrak p\) forces \(m\in Q\). |
+| A | `lem-intersection-decomposition-strict-enlargement-step` | `lem` | If a submodule \(N\) is reducible, write \(N=N_1\cap N_2\) with both \(N_i\supsetneq N\); Noetherian induction may therefore reduce decomposition existence to the two larger submodules. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §3 and BU §10; this is the termination step of Lasker--Noether. |
+| A | `lem-irreducible-submodule-is-primary-noetherian` | `lem` | An irreducible submodule of a Noetherian module is primary. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §3; stabilize colon submodules \((Q:x^n)\) and use irreducibility on a constructed intersection. |
+| A | `lem-primary-decomposition-delete-redundant-components` | `lem` | From any finite primary decomposition one may delete components containing the intersection of the others until the decomposition is irredundant. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §10; finiteness makes the deletion process terminate. |
+| A | `lem-primary-decomposition-combine-equal-radicals` | `lem` | Intersecting all components with the same radical yields one primary component with that radical. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §2; finite intersections of primary submodules with common radical are primary. |
+| A | `lem-associated-primes-from-a-minimal-primary-decomposition` | `lem` | The radicals occurring in a minimal primary decomposition of \(N\subset M\) are exactly \(\operatorname{Ass}(M/N)\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §4 and BU §10; colon elements expose each radical and exact-sequence bounds exclude others. |
+| A | `cor-minimal-primary-radicals-independent-of-decomposition` | `cor` | The set of radicals in a minimal primary decomposition depends only on \(M/N\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §10; both decompositions yield the intrinsic associated-prime set. |
+| A | `lem-isolated-primary-component-by-localisation-and-contraction` | `lem` | For a minimal associated prime \(\mathfrak p\), the \(\mathfrak p\)-primary component equals the contraction of \(N_\mathfrak p\subset M_\mathfrak p\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §4; localizing kills every component whose radical is not contained in \(\mathfrak p\). |
+| A | `cor-intersection-of-isolated-components-is-canonical` | `cor` | The intersection of the primary components belonging to any downward-closed set of associated primes is independent of the minimal decomposition. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: Altman--Kleiman §18 and H20 Ch. 8 §4; choose a multiplicative set avoiding exactly that downward-closed set and contract. |
+| B | `ex-annihilator-colon-ideals-in-a-cyclic-module` | `ex` | Compute all annihilators of selected residue classes in \(k[x,y]/(x^2,xy)\) and recover its associated primes. | provenance.statement: literature-derived exercise; provenance.proof: ai-altered; rationale: BU §8 uses colon calculations for cyclic modules. |
+| B | `ex-primary-maximal-radical-test` | `ex` | Verify directly that every ideal with radical \((x,y)\) in an Artinian quotient of \(k[x,y]\) is primary. | provenance.statement: directly-checkable source-derived example; provenance.proof: literature-derived; rationale: H20 Ch. 8 §2; maximal radical makes the zero-divisor test immediate. |
+| B | `ex-primary-localisation-kills-a-component` | `ex` | Localize a two-component monomial primary decomposition at each associated prime and identify which component becomes the whole ring. | provenance.statement: literature-derived exercise; provenance.proof: ai-altered; rationale: BU §10; the computation illustrates isolated-component recovery. |
+| B | `ex-redundant-primary-component-deletion` | `ex` | Start from a deliberately redundant intersection and perform the deletion and equal-radical combination steps to reach a minimal primary decomposition. | provenance.statement: directly-checkable source-derived exercise; provenance.proof: ai-altered; rationale: H20 Ch. 8 §3; it audits both minimality conditions. |
+| B | `ex-embedded-component-varies-but-radical-does-not` | `ex` | Give two decompositions of one ideal with different embedded primary components but the same embedded associated prime. | provenance.statement: literature-derived standard example; provenance.proof: literature-derived; rationale: BU §10 and Altman--Kleiman §18 distinguish first from second uniqueness. |
+| B | `ex-zero-module-associated-prime-boundary` | `ex` | Check associated-prime, support, zero-divisor and primary-submodule conventions for the zero module. | provenance.statement: directly-checkable boundary example; provenance.proof: not-applicable; rationale: H20 Ch. 8 explicitly excludes zero elements in annihilator definitions; the exercise prevents vacuous misuse. |
+
+#### CA-6 additions — `integral-extensions-and-going-up-down` and companion
+
+| target | id | kind | focused statement | explicit provenance |
+|---|---|---|---|---|
+| A | `lem-monic-relation-spans-powers` | `lem` | If \(b\) satisfies a monic equation of degree \(n\) over \(A\), then \(A[b]\) is spanned by \(1,b,\ldots,b^{n-1}\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 §1 and TN §10; reduce higher powers using the monic relation. |
+| A | `lem-finite-stable-submodule-gives-integrality` | `lem` | If a faithful finite \(A\)-submodule containing one is stable under multiplication by \(b\), then \(b\) is integral over \(A\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §1 and BU §11; the determinant trick applied to multiplication by \(b\) supplies the monic equation. |
+| A | `cor-integral-element-power-span-equivalence` | `cor` | An element is integral iff the algebra it generates is finite as a module, equivalently iff it stabilizes a faithful finite submodule containing one. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §1; the two preceding lemmas give the nontrivial directions. |
+| A | `lem-finitely-many-integral-elements-generate-a-finite-module` | `lem` | If \(b_1,\ldots,b_r\) are integral over \(A\), then \(A[b_1,\ldots,b_r]\) is finite over \(A\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §10 and H20 Ch. 3 §1; induct using finite spanning powers and transitivity of module finiteness. |
+| A | `cor-integral-elements-form-a-subring` | `cor` | The elements of an \(A\)-algebra integral over \(A\) form a subring. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §1; the finite algebra generated by two integral elements is stable under their sum and product. |
+| A | `lem-transitivity-finite-subalgebra-step` | `lem` | If \(c\) is integral over \(B\) and \(B\) is integral over \(A\), the finitely many coefficients of a monic equation for \(c\) lie in a finite \(A\)-subalgebra of \(B\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §2 and TN §10; this is the coefficient reduction in transitivity. |
+| A | `lem-integral-closure-closed-under-fraction-field-operations` | `lem` | The integral closure of a domain in a field is a subring of that field containing the domain. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 §2; use that integral elements form a subring. |
+| A | `lem-integral-closure-idempotence` | `lem` | Taking integral closure inside a fixed field is idempotent. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 §2 and BM interlude 4; transitivity proves that an element integral over the closure is integral over the base. |
+| A | `lem-integrality-localises-forward` | `lem` | If \(b\) is integral over \(A\), then \(b/s\) is integral over \(S^{-1}A\) after localizing the extension compatibly. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 §3; divide a monic equation by a suitable power of the denominator. |
+| A | `lem-integrality-localises-reverse-clearing-denominators` | `lem` | If \(b/1\) is integral over \(S^{-1}A\), then some \(s\in S\) makes \(sb\) integral over \(A\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §3 and BU §12; clear the finitely many coefficient denominators and an annihilating denominator. |
+| A | `cor-integral-closure-commutes-with-localisation-in-a-field-extension` | `cor` | If \(\overline A\) is the integral closure of a domain \(A\) in a field extension, then \(S^{-1}\overline A\) is the integral closure of \(S^{-1}A\) there. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §3; combine the two localization lemmas and absorb the clearing denominator into the fraction. |
+| A | `lem-field-integral-extension-algebraicity` | `lem` | If \(A\subseteq B\) are fields, then \(B\) is integral over \(A\) iff it is algebraic over \(A\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: TN §10; a nonzero constant coefficient in a polynomial relation can be normalized to make it monic. |
+| A | `lem-field-contraction-under-integral-extension` | `lem` | If \(B\) is integral over \(A\) and \(B\) is a field, then \(A\) is a field; conversely, if \(A\) is a field and \(B\) is a domain, then \(B\) is a field. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §4 and TN §10; integral equations for an element and its inverse give the two directions. |
+| A | `lem-lying-over-reduction-to-domains` | `lem` | To find a prime of \(B\) over \(\mathfrak p\subset A\), quotient by \(\mathfrak p\) and an appropriate prime above its extension so that the remaining contraction problem is over a domain. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §4 and BU §13; this is the quotient step in lying over. |
+| A | `lem-lying-over-local-maximal-step` | `lem` | After localizing an integral extension at \(A\setminus\mathfrak p\), every maximal ideal of the localized upper ring contracts to the unique maximal ideal \(\mathfrak pA_\mathfrak p\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §4; the field-contraction lemma forces maximality of the contraction. |
+| A | `cor-spectrum-map-of-an-integral-extension-is-surjective` | `cor` | For an integral extension \(A\subseteq B\), contraction \(\operatorname{Spec}B\to\operatorname{Spec}A\) is surjective. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 §4 and BU §13; this is exactly lying over in spectrum language, without adding scheme structure. |
+| A | `lem-incomparability-quotient-localisation-reduction` | `lem` | For primes \(\mathfrak q_1\subseteq\mathfrak q_2\) with equal contraction, quotient by the lower prime and localize at the common contraction to reduce incomparability to an integral domain extension over a field. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §5; this reduction isolates the only field case needed. |
+| A | `lem-incomparability-field-case` | `lem` | A domain integral over a field is a field, so it has no strict chain of primes contracting to zero. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 §5 and TN §10; invoke the field-contraction lemma. |
+| A | `lem-going-up-one-prime-step` | `lem` | Given \(\mathfrak p_1\subseteq\mathfrak p_2\) in \(A\) and \(\mathfrak q_1\) over \(\mathfrak p_1\), lying over applied to \(A/\mathfrak p_1\subseteq B/\mathfrak q_1\) produces \(\mathfrak q_2\supseteq\mathfrak q_1\) over \(\mathfrak p_2\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §5 and BU §13; this is the inductive step behind going up. |
+| A | `cor-integral-extension-lifts-finite-prime-chains` | `cor` | Any finite prime chain in \(A\), together with a chosen prime over its first term, lifts to a chain in \(B\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 §5; iterate the one-prime going-up step. |
+| A | `lem-integral-extension-chain-contraction-is-strict` | `lem` | A strict prime chain in an integral extension contracts to a strict chain, by incomparability. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 3 §5; equal adjacent contractions would contradict incomparability. |
+| A | `cor-integral-extension-dimension-two-inequalities` | `cor` | Going up gives \(\dim B\ge\dim A\), while strict contraction gives \(\dim B\le\dim A\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §5; separating the two inequalities explains the existing dimension equality theorem. |
+| A | `lem-normality-localisation-forward` | `lem` | A localization of an integrally closed domain is integrally closed. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 12 and BU §12; clear the denominator from an integral equation in the common fraction field. |
+| A | `lem-normality-detected-at-prime-localisations` | `lem` | A domain is integrally closed iff all of its prime localizations are integrally closed. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 12; an element outside the domain determines a proper denominator ideal contained in a prime. |
+| A | `lem-going-down-coefficient-integrality` | `lem` | In the normal-domain proof of going down, the coefficients of the relevant factor of a monic polynomial are integral over the base and lie in its fraction field, hence lie in the base. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §7 and BU §24; this is the point at which normality is used. |
+| A | `lem-going-down-one-prime-step` | `lem` | For \(\mathfrak p_1\subseteq\mathfrak p_2\) and \(\mathfrak q_2\) over \(\mathfrak p_2\) in an integral extension of domains with normal base, there is \(\mathfrak q_1\subseteq\mathfrak q_2\) over \(\mathfrak p_1\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §7 and BU §24; localize/quotient and use the coefficient-integrality lemma to separate the required ideal. |
+| A | `cor-height-preserved-under-going-down-integral-extensions` | `cor` | Under the normal-domain going-down hypotheses, primes lying over one another have equal height whenever the relevant heights are finite. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 3 §7; going down lifts chains below and incomparability contracts them strictly. |
+| B | `ex-integrality-equation-and-power-basis` | `ex` | For \(b^3-2b+1=0\), reduce several high powers to the span of \(1,b,b^2\). | provenance.statement: directly-checkable source-derived exercise; provenance.proof: literature-derived; rationale: TN §10 introduces integrality through this finite-span computation. |
+| B | `ex-integral-elements-subring-computation` | `ex` | Show directly that the sum and product of two specified quadratic integral elements lie in one finite module. | provenance.statement: literature-derived exercise; provenance.proof: ai-altered; rationale: H20 Ch. 3 §1; the example realizes the finite-stable-submodule proof. |
+| B | `ex-integrality-localisation-clearing-denominators` | `ex` | Work an example where \(b/1\) is integral only after localization and find an explicit \(s\) for which \(sb\) is integral before localization. | provenance.statement: literature-derived exercise; provenance.proof: ai-altered; rationale: BU §12; it tests the precise reverse localization statement. |
+| B | `ex-lying-over-by-quotient-and-localisation` | `ex` | Find primes over a chosen prime in \(k[t^2,t^3]\subset k[t]\) by following the quotient-localization proof. | provenance.statement: literature-derived standard example; provenance.proof: literature-derived; rationale: H20 Ch. 3 §4 uses cusp normalization as the model integral extension. |
+| B | `ex-incomparability-in-a-quadratic-integral-extension` | `ex` | List prime chains in a simple quadratic integral extension and verify that comparable primes never have the same contraction. | provenance.statement: directly-checkable source-derived exercise; provenance.proof: literature-derived; rationale: TN §10 exercises test incomparability in finite extensions. |
+| B | `ex-going-down-failure-via-cusp-normalisation` | `ex` | Exhibit a prime-chain obstruction to going down in a standard nonnormal cusp subring. | provenance.statement: literature-derived standard counterexample; provenance.proof: literature-derived; rationale: BU §24 and H20 Ch. 3 §7 use normalization examples to show normality is not decorative. |
