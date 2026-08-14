@@ -263,3 +263,98 @@ the orchestrator resolves it at reconciliation, possibly by moving a block.
 - Quote an absolute plan order as fact (§0.2).
 - Re-mint anything owned by another track in §4.
 - Ask for a permission of any kind, or let a subagent ask — see the brief.
+
+---
+
+## 7. Orchestrator rulings, 2026-08-14 — post-reconciliation
+
+`research/subjects-01-RECONCILIATION.md` audited all thirteen finished tracks:
+152 amendment routes (85 stale, 48 apply, 37 owner, 5 conflicts), 32 seam checks,
+41 duplicate-id candidates with **no genuine double-mint**. Most named seams came
+back clean — Birkhoff/conditional expectation, Stokes, Γ/ζ, Lie theory, $L^p$
+duality, de Rham, chain complexes, finite probability, Dedekind/class group and
+group cohomology all complied.
+
+These are the rulings on what did not. They amend §4 and bind any future build.
+
+### R-1. Flat modules — §4 was wrong, and it is amended narrowly
+
+§4 assigned "flatness" to `commutative-algebra` while assigning module tensor
+products to `abstract-algebra`. Those cannot both hold: `def-flat-module` is a
+module notion built directly on the tensor product, and MOD-3 already mints it.
+
+**Ruling: `abstract-algebra` (MOD-3) mints `def-flat-module` and basic module
+flatness. `commutative-algebra` owns faithful flatness, the local criterion and
+flat descent, and cites MOD-3 for the definition.** This is where the definition
+already sits, so it costs no rewrite, and it keeps flatness with the tensor
+product that defines it.
+
+### R-2. Harmonic theory — "does not redo" means no plane-SPECIFIC proof
+
+The contract said `pde` "cites and does not redo the 2-D theory". PDE read that
+as *no plane-specific proof* and still states dimension-uniform theorems at
+$n=2$; complex analysis read it as *no theorem instance at $n=2$*.
+
+**Ruling: PDE's reading is correct.** A theorem whose proof is uniform in $n$ may
+include $n=2$. What PDE may not do is give a plane-specific argument, or restate
+a result complex analysis proves more sharply by holomorphic methods — the disc
+Poisson kernel, planar Perron and subharmonicity, conformal invariance. Where the
+plane case is sharper, PDE cites CA. PDE-5's logarithmic $n=2$ fundamental
+solution stands.
+
+### R-3. Characters of finite abelian groups → `abstract-algebra`
+
+`combinatorics` proposed minting `def-character-of-a-finite-abelian-group`. §4
+gives finite-group representation theory including characters to
+`abstract-algebra`, and RT sits earlier in reading order, so citation is
+available. **Combinatorics cites RT and does not mint.**
+
+### R-4. $p$-adic integers → `group-theory` mints, `commutative-algebra` cites
+
+A conceptual double construction even though the ids differ: GT-17 mints
+compatible residues and the topology; CA-13B still says it constructs the inverse
+limit. **GT-17 is the supplier. CA-13B cites it and proves only the agreement
+with adic completion.**
+
+### R-5. Jordan–Chevalley → `abstract-algebra` supplies, `differential-geometry` cites
+
+X-2 supplies the single-operator theorem. **DG's fallback is replaced by a
+citation**, and DG keeps the Lie-algebra Jordan decomposition, which is its own.
+
+### The four SILENT seams — nobody owned these, and that is the dangerous class
+
+Each is a case where §4 said nothing and two tracks each assumed the other would
+supply it. None would have been reported by a single track, because from inside
+each one it looks covered.
+
+### R-6. Riesz–Thorin interpolation → `measure-theory`
+
+The clearest instance: MT offered it to CA, CA never accepted, and FA explicitly
+excludes general interpolation. It would have fallen through entirely.
+**`measure-theory` mints it** — it owns $L^p$, and the theorem is about $L^p$
+scales. CA and FA cite it.
+
+### R-7. Floor and ceiling → real analysis
+
+Two tracks request the same supplier and neither mints it. **Real analysis owns
+`def-floor-and-ceiling`**; it is elementary real analysis and belongs nowhere
+else. Recorded as an amendment to `plan-realanalysis-pages.md`.
+
+### R-8. The $\mathbb{C}\cong\mathbb{R}^2$ analytic dictionary → `complex-analysis`
+
+Both real analysis (RA-33) and complex analysis (CA-1) offered to own it "if
+authored first" — a two-sides-waiting seam that resolves to neither.
+**`complex-analysis` CA-1 owns it**: CA-1 is the one authored page of that track,
+so the dictionary has a real home today. Real analysis cites it.
+
+### R-9. General $C^1$ Lebesgue change of variables → `measure-theory`
+
+Caught before it fell through: MT and DG could each have assumed the other
+supplied it. Both final scaffolds agree MT should own it, but **the MT items are
+still written conditionally — make them unconditional.**
+
+### Deferred to the owner
+
+37 amendment routes and 5 conflicts are classified `owner`: deletions, id changes
+and reading-order changes, which are owner-only by standing rule. They are listed
+per-track in the reconciliation report and are NOT actioned here.
