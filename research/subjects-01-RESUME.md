@@ -48,12 +48,34 @@ the thin tracks into two failure modes.
 | `pde` | DECOMPOSE | **LANDED 15:43, AUDITED, PASSES.** +270 (585→855), 2.04× → **2.76×** |
 | `functional-analysis` | WIDEN | **LANDED 15:50, AUDITED, PASSES.** +47 (689→736), 4.33× → **4.09×** |
 | `probability-theory` | WIDEN | **LANDED 15:55, AUDITED, PASSES.** +34 (618→652 by my count, 579→613 by its own item census), 4.49× → **3.58×**, source pool 8 → 13 |
-| `commutative-algebra` | DECOMPOSE | running. 718 headings harvested (most of any track), 443 items = **1.05×**. Transcribed a ToC. Also only **7 source hosts for 18 pairs** — narrowest sourcing in the commission |
-| `number-theory` | running, dispatched 15:52 into pde's freed slot | measurement suspect — 41 included / 14.3× is probably a grep artifact; told to verify first |
+| `commutative-algebra` | DECOMPOSE | **LANDED 16:06, AUDITED, PASSES.** +691 (443→1134), 1.05× → **2.06×**, source hosts 6 → 13 |
+| `number-theory` | WIDEN | **LANDED 16:13, AUDITED, PASSES.** +2 only, and correctly so |
 
-**Three of three landed lanes corrected the figures I briefed them with** (583→585,
-687→689, 137→129 headings). Treat every number in a dispatch brief as approximate
-and make the lane re-derive it.
+**ALL FIVE lanes corrected the figures I briefed them with** (583→585, 687→689,
+137→129, 586→590; commutative algebra confirmed 443/421 exactly). Treat every
+number in a dispatch brief as approximate and make the lane re-derive it.
+
+**Number theory's +2 is the right answer, not under-delivery.** It proved the
+briefed 14.3× was a *lexical* artifact — clauses like "D.I.1–D.I.9 are included"
+dispose of many headings in one word — and refused to report any ratio rather
+than substitute a prettier one. Its 24 pairs were already densely decomposed; the
+new sources corroborated, and it added exactly the two genuine gaps.
+
+**Three defects found by auditing, not visible in any self-report:**
+1. Commutative algebra's page-ceiling table was **malformed** — 14 of 18 rows
+   missing the final-B column. Repaired from the per-pair section counts. Every
+   final-A verifies; A-added sums to 580, B-added to 111. **CA-18 is at exactly
+   60** — at the ceiling, not over, so no split and the splice input is unchanged.
+2. 30 overlay rows carried `provenance.statement: directly-checkable`, **not a
+   SCHEMA §3 value**. All 30 are `ex-` examples on B pages — the permitted class.
+   Relabelled `ai-generated` so the never-load-bearing rule is mechanically
+   enforceable; verified each occurs once with no row citing it.
+3. **Pair-label collision (ruling R-10).** Number theory had labelled its pairs
+   `MT-1…MT-24`, colliding exactly with measure theory's, because SEAMS §0 used
+   `MT-n` as its generic illustration. Renamed to `NT-n`; every cross-file
+   reference repointed; the bare `MT-n` that genuinely mean measure theory left
+   alone. **A pair label is the key the splice joins on — a duplicate is a silent
+   mis-splice, not a visible error.**
 
 **A successful WIDEN LOWERS the ratio — that is not a failure.** Widening puts
 new headings in the denominator and only the genuinely-new ones become items. FA
@@ -152,14 +174,24 @@ written conditionally and must be made unconditional).
 
 ## 5. EXACT NEXT ACTIONS
 
-1. **Wait for the five enrichment lanes.** Dispatch `number-theory` when a slot
-   frees. Verify each reports a *verified* before/after ratio and a per-pair
-   source table — and check for padding, not just for growth.
-2. **Two held-back published-content amendments, orchestrator does these by hand:**
-   - **rehome five PUBLISHED graph items** to earliest legal pages
-     (`plan-combinatorics-and-categories.md` §28 A1). **Verify from BOTH donor and
-     receiving page** — no gate fails a half-done re-home.
-   - `DEFERRED.md` row reconciliation — now narrowed by §7 below.
+1. ~~Five enrichment lanes.~~ **ALL FIVE LANDED, AUDITED, COMMITTED.** Net across
+   the commission: **+1,044 items** (PDE 270, CA 691, FA 47, PR 34, NT 2). Zero
+   ids removed or renumbered, zero collisions against `items/` or
+   `plan-spec.json`, **no A page over 60**, so no page split and **the splice
+   input is unchanged from what §5.3 describes.**
+2. ~~Two held-back published-content amendments.~~ **BOTH DONE.**
+   - **Re-home of five published graph items — DONE** (`2da7194a`). Verified legal
+     from disk first, then from BOTH sides after: donor's array clean, each id on
+     exactly one page, zero within-page order violations. `library/` and
+     `plan-spec.json` moved together, receipt at
+     `research/subjects-01-rehome-receipt.json`, and depcheck / fwdcheck /
+     validate-plan / rendercheck all pass.
+   - **`DEFERRED.md` reconciliation — DONE** (`07411164`). Row by row against the
+     scaffolds. Measure theory plans a real proof for everything except
+     Banach–Tarski; FA for everything except three results its own scaffold ruled
+     belong to topology. **This corrected §7: 58 items discharge, not 62, and
+     NEITHER catalogue page retires** — the summary count had predicted both
+     disappearing.
 3. **THE SPLICE — prepared, not run. It is the last step.** Convert anchors to
    concrete orders for ~280 pairs in **ONE pass, by anchor page id, never by
    composing shift tables**. Free integers **98–101** take part of the Galois
