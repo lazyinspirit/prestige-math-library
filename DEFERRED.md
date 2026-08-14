@@ -392,3 +392,47 @@ Recorded as `rem-` items with citations; not provable at any level here.
 3. Re-run `node tools/depcheck.mjs`; the new items must not introduce a cycle and
    must not force an existing page to depend on a later one.
 4. Delete the entry from this file when it is discharged.
+
+---
+
+## 7. How the `not-proved-here` category retires (owner, 2026-08-14)
+
+The owner asked whether to delete the entire "recorded, not proved here"
+category. **The ruling is: discharge it, do not delete it.**
+
+**Why deletion was declined.** The category is 5 pages carrying 114 items, and
+116 items repo-wide carry `proved_here: false` (66 published, 50 draft). **80
+other items declare a dependency on one of them.** Deleting the category does not
+remove the library's debt; it hides it, leaving 80 items silently resting on
+results the library neither proves nor records — the exact inversion of the
+self-contained-scope rule. `CLAUDE.md` states the same thing from the reader's
+side: the ‡ machinery "is what makes that fallback honest to readers".
+
+**The retirement path.** A `rem-` item earns its removal by being replaced with a
+real proof, one at a time, as the track that owns its subject is BUILT:
+
+| catalogue page | items | retires when |
+|---|---|---|
+| `deferred-measure-and-integration` | 29 | the measure-theory level is built |
+| `deferred-functional-analysis` | 33 | the functional-analysis level is built |
+| `deferred-algebraic-topology` | 17 | an algebraic-topology track is scaffolded and built |
+| `deferred-set-theory-beyond-choice` | 22 | needs forcing / large cardinals; no track yet |
+| `open-problems-and-research-frontier` | 13 | never — these are open problems |
+
+Both measure theory and functional analysis now have **complete prose scaffolds**
+(`research/plan-measure-theory-track.md`, 23 A/B pairs;
+`research/plan-functional-analysis-track.md`, 25 A/B pairs), and each explicitly
+disposed of its backlog rows in §1 and §2 above. So **62 of the 116 are ready to
+be discharged as soon as those two levels are built** — that is the next
+opportunity, and it retires two of the five pages outright.
+
+**The procedure for each item, when its track lands.** Replace the `rem-` item's
+source-cited statement with a locally proved item; move every consumer's `deps`
+edge from the `rem-` id to the new id; run `impact-audit.mjs` from a pre-edit
+snapshot and resolve every consumer; then retire the `rem-` id through the
+`aliases` mechanism — **ids are immutable on `main`, so it is aliased, never
+deleted outright.** Only when a catalogue page has no items left does the page
+itself go.
+
+**What must not happen:** deleting a `rem-` item while a consumer still cites it.
+That is a `dep-unresolved` hard error, and 80 items are exposed to it.
