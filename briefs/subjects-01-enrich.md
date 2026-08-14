@@ -53,9 +53,51 @@ corollaries. If your subject genuinely decomposes less — some do — then repo
 that with evidence rather than manufacturing items. **I will believe a reasoned
 "my subject is 2.5× and here is why" over a padded 5×.**
 
+## BOTH MODES: acquire more treatments. This is not optional.
+
+Measured across the finished tracks — distinct source hosts against A/B pairs:
+
+| track | source hosts | pairs |
+|---|---|---|
+| number theory | 30 | 24 |
+| PDE | 28 | 26 |
+| differential geometry | 27 | 37 |
+| functional analysis | 25 | 25 |
+| probability | 13 | 22 |
+| homological algebra | 13 | 17 |
+| **commutative algebra** | **7** | **18** |
+
+`CLAUDE.md` requires **at least two independent treatments per A/B PAIR**, at
+least one a textbook, monograph or full lecture-note set with a harvestable table
+of contents. A track with 7 sources and 18 pairs cannot be meeting that except by
+reusing the same two books everywhere — which is exactly what the rule forbids,
+because two books that agree are not two independent checks on a convention.
+
+So, whichever mode you are in:
+
+1. **Search the open web for additional full-text treatments in <subject>** —
+   author-hosted monographs, open-access textbooks, complete graduate lecture-note
+   sets, the Stacks Project and its analogues, university course pages. Obtain the
+   **full text** of every one you use, not a table of contents alone.
+2. **Aim for at least two treatments PER PAIR, drawn from a pool wide enough that
+   no single book is loaded beyond its actual coverage.** Specialised pairs need
+   specialised sources: a general text that mentions a topic in a paragraph is not
+   a treatment of it.
+3. **Produce an auditable per-pair source table**: one row per A/B pair naming its
+   two-or-more backing treatments and the exact range read in each. This table is
+   how the requirement stops being a slogan. Where a pair still has only one real
+   treatment, **say so in the row** rather than padding it with a passing mention.
+4. Where two sources disagree on a convention, record the disagreement and say
+   which the library adopts and why. That is the whole reason for demanding two.
+
+Wikipedia and encyclopedia entries remain convention tiebreakers only and can
+never be a pair's primary backing.
+
 ## Your mode
 
-The dispatch task file names one of two modes.
+The dispatch task file names one of two modes. **The source-acquisition
+requirement above applies in BOTH** — a DECOMPOSE track that decomposes 718
+headings from 7 books has fixed one defect and left the other.
 
 ### Mode DECOMPOSE — your sourcing is already excellent
 

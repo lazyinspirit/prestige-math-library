@@ -28,3 +28,16 @@ evidence and stop there.
 Seam ownership from `research/subjects-01-SEAMS.md` §4 and the §7 rulings is
 unchanged: enrichment never annexes a neighbour's material. Where you need
 something another track owns, cite it.
+
+
+## Source acquisition — obtain more full texts
+
+The brief's source requirement binds you. Candidate treatments to search for and
+obtain in full, beyond what you already used:
+
+Brezis, Rudin *Functional Analysis*, Conway, Lax, Reed-Simon I-IV, Kadison-Ringrose, Megginson, Folland *A Course in Abstract Harmonic Analysis*, Yosida, Dunford-Schwartz, Schaefer, Treves *Topological Vector Spaces*.
+
+These are starting points, not a list to accept on trust. Verify what is actually
+reachable, obtain full text, harvest each source's own headings over the exact
+range you read, and give every heading a disposition. Produce the per-pair source
+table the brief requires.

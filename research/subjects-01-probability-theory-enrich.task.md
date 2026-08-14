@@ -28,3 +28,16 @@ evidence and stop there.
 Seam ownership from `research/subjects-01-SEAMS.md` §4 and the §7 rulings is
 unchanged: enrichment never annexes a neighbour's material. Where you need
 something another track owns, cite it.
+
+
+## Source acquisition — obtain more full texts
+
+The brief's source requirement binds you. Candidate treatments to search for and
+obtain in full, beyond what you already used:
+
+Durrett, Billingsley *Probability and Measure*, Kallenberg *Foundations of Modern Probability*, Williams *Probability with Martingales*, Klenke, Shiryaev, Chung, Dudley *Real Analysis and Probability*, Le Gall, Varadhan, Norris, Levin-Peres-Wilmer, Morters-Peres *Brownian Motion*. **13 source hosts for 22 pairs is lean.**
+
+These are starting points, not a list to accept on trust. Verify what is actually
+reachable, obtain full text, harvest each source's own headings over the exact
+range you read, and give every heading a disposition. Produce the per-pair source
+table the brief requires.
