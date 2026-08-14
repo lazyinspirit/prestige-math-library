@@ -899,6 +899,27 @@ build and wave did and where its evidence lives.
 
 Alpha's lane cap is 1 because Alpha is the single writer of the prose scaffolds.
 
+**`mechanic` (owner, 2026-08-14): "use Terra instead of Sol for tasks requiring
+less reasoning".** GPT 5.6 Terra at `medium` effort, `workspace-write`, cap 4,
+for work whose difficulty is bookkeeping rather than mathematics — applying an
+amendment somebody else already adjudicated, collecting entries into a table,
+sweeping ids, reformatting. The judgment has been made before this lane starts.
+
+Adding it also made **Codex reasoning effort role-driven**. It had been
+hardcoded `xhigh` in `buildCodex`, so a deliberately cheap lane still paid for
+reasoning it did not need; the role table now supplies it and silence still means
+`xhigh`, so every pre-existing lane is bit-for-bit unchanged.
+
+**Two things this lane may never do, and both are load-bearing.** It may not
+**author mathematical content** — `CLAUDE.md` is unambiguous that "the authoring
+role uses Sol, never Terra", and item authoring stays on `beta`. And it may not
+**produce anything a Terra judge lane will later judge**, because Terra is half
+the paired-judge lineup and a model reviewing its own output is self-agreement
+wearing the costume of corroboration. That trap has been walked into once
+already: on frontier-12 the Terra `certifier` declined to certify a repair while
+citing *its own judge ledger row* as support. Mechanical, post-adjudication,
+non-judged work only.
+
 **`scaffolder` (owner, 2026-08-13) serves concurrent SUBJECT-track prose
 scaffolding outside any level build** — one lane per subject, each researching
 sources and writing one track file. It is a separate row from `alpha` rather

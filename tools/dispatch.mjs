@@ -153,6 +153,26 @@ const ROLES = Object.freeze({
   // CLAUDE.md records for the build lanes before 2026-08-11.
   scaffolder:   { runner: 'codex',  model: SOL_MODEL,  sandbox: 'workspace-write', effort: 'xhigh', cap: 4, web: true, why: 'one per subject track; owns exactly one prose scaffold file' },
 
+  // `mechanic` (owner, 2026-08-14): "use Terra instead of Sol for tasks
+  // requiring less reasoning". Terra on a `medium` effort budget, for work whose
+  // difficulty is bookkeeping rather than mathematics — applying an already
+  // adjudicated amendment, collecting entries into a table, sweeping ids,
+  // reformatting. The judgment has already been made by the time this lane runs.
+  //
+  // TWO THINGS THIS LANE MAY NEVER DO, and both are load-bearing:
+  //
+  // 1. **Author mathematical content.** CLAUDE.md is unambiguous — "The
+  //    authoring role uses Sol, never Terra." Item authoring stays on `beta`.
+  // 2. **Produce anything a Terra judge lane will later judge.** Terra is half
+  //    the paired-judge lineup, and a model reviewing its own output is
+  //    self-agreement wearing the costume of corroboration. This exact trap was
+  //    walked into on frontier-12, where the Terra `certifier` declined to
+  //    certify a repair while citing its OWN judge ledger row as support.
+  //
+  // So: mechanical, post-adjudication, non-judged work only. If a task needs a
+  // mathematical decision, it is not this lane's.
+  mechanic:     { runner: 'codex',  model: TERRA_MODEL, sandbox: 'workspace-write', effort: 'medium', cap: 4, why: 'bookkeeping after the judgment is made; never authors, never judged by Terra' },
+
   // ---- the published-page retro-audit (AUDIT-WORKFLOW.md, A0 to A10) --------
   // Every Codex audit lane receives the explicit xhigh/1M configuration below;
   // the tool-less DeepSeek refuter maps xhigh to its API's `max` value.
@@ -290,7 +310,11 @@ const buildCodex = (temporaryHome) => [
   [
     '--ask-for-approval', 'never', 'exec',
     '--model', spec.model,
-    '-c', 'model_reasoning_effort="xhigh"',
+    // Role-driven, defaulting to xhigh so every pre-existing lane is unchanged
+    // (owner, 2026-08-14). Previously hardcoded, which meant a deliberately
+    // cheap lane still paid for xhigh reasoning it did not need. A role that
+    // wants less says so in the table; silence still means xhigh.
+    '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
     // The temporary CODEX_HOME holds only auth.json, so config.toml — including
     // model_context_window — is deliberately NOT inherited. Pass the owner's
     // 1,000,000-token window explicitly or the lane silently runs at the
