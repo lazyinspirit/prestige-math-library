@@ -2,15 +2,19 @@
 cd /Users/ianx/Projects/prestige-math-library || exit 1
 echo "--- $(date '+%H:%M') ---"
 echo "LANES"
-ps -eo etime,command | grep "[d]ispatch.mjs --role scaffolder" | grep " node " \
-  | sed 's/--brief.*--label sub02-/  /;s/ --run.*//' | sed 's/^ */  /'
-[ -z "$(ps -eo command | grep '[d]ispatch.mjs --role scaffolder' | grep ' node ')" ] && echo "  (none live)"
+live=$(ps -eo pid,etime,command | grep "[d]ispatch.mjs --role scaffolder" | grep "node tools/dispatch")
+if [ -n "$live" ]; then
+  echo "$live" | sed 's/--brief.*--label sub02-/ /;s/ --run.*//' | awk '{printf "  %-30s %s\n",$3,$2}'
+else
+  echo "  (none live)"
+fi
 echo "SCAFFOLDS"
 for t in algebraic-geometry algebraic-topology representation-theory-lie fourier-analysis differential-topology representation-theory-groups; do
   p="research/plan-$t-track.md"
   if [ -f "$p" ]; then
-    printf '  %-30s %6s lines  %5s pairs\n' "$t" "$(wc -l < "$p" | tr -d ' ')" \
-      "$(grep -coE '^\| *`?(RG|RL|AV|AT|DT|FR)-[0-9]+`? *\|' "$p" 2>/dev/null || echo 0)"
+    # count DISTINCT pair labels, not table rows: a label recurs in harvests and crosswalks
+    pairs=$(grep -oE '\b(RG|RL|AV|AT|DT|FR)-[0-9]+\b' "$p" 2>/dev/null | sort -u | wc -l | tr -d ' ')
+    printf '  %-30s %6s lines  %3s pairs\n' "$t" "$(wc -l < "$p" | tr -d ' ')" "$pairs"
   else
     printf '  %-30s not started\n' "$t"
   fi
@@ -25,3 +29,4 @@ for f in $(ls research/subjects-02-dispatch/*.result.json 2>/dev/null); do
   n=$((n+1))
 done
 [ "$n" -eq 0 ] && echo "  none yet"
+exit 0
