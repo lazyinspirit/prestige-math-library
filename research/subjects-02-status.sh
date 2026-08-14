@@ -13,7 +13,13 @@ for t in algebraic-geometry algebraic-topology representation-theory-lie fourier
   p="research/plan-$t-track.md"
   if [ -f "$p" ]; then
     # count DISTINCT pair labels, not table rows: a label recurs in harvests and crosswalks
-    pairs=$(grep -oE '\b(RG|RL|AV|AT|DT|FR)-[0-9]+\b' "$p" 2>/dev/null | sort -u | wc -l | tr -d ' ')
+    case "$t" in
+      algebraic-geometry) pre=AV;; algebraic-topology) pre=AT;;
+      differential-topology) pre=DT;; fourier-analysis) pre=FR;;
+      representation-theory-lie) pre=RL;; representation-theory-groups) pre=RG;;
+    esac
+    # own prefix only: a track citing another's labels must not inflate its count
+    pairs=$(grep -oE "\b$pre-[0-9]+\b" "$p" 2>/dev/null | sort -u | wc -l | tr -d ' ')
     printf '  %-30s %6s lines  %3s pairs\n' "$t" "$(wc -l < "$p" | tr -d ' ')" "$pairs"
   else
     printf '  %-30s not started\n' "$t"
