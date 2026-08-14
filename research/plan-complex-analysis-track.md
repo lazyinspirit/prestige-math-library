@@ -24,7 +24,10 @@ CA-HP-1 and CA-HP-2 (harmonic and analytic Hardy theory), CA-NV-1 and CA-NV-2
 forms), CA-RS-1--CA-RS-4 (Riemann surfaces through uniformisation),
 CA-QC-1--CA-QC-3 (quasiconformal theory), and SC-5--SC-8
 ($\bar\partial$/Levi, kernels, and analytic hypersurfaces). All labels are
-relative; this commission performs no splice.
+relative; this commission performs no splice. The live CA-1 A/B inventory has
+41 immutable items; the 45 unauthored A inventories contain 709 proposed items
+in all, with a largest A page of 31. The 709 item ids and 19 enrichment page ids
+have no internal duplicate or exact collision with live item/page ids.
 
 **Disk reconciliation and stale claims corrected.** CA-1's A **and** companion
 pages are authored (28 and 13 items); CA-2 onward and SC-1 onward have empty
@@ -43,10 +46,12 @@ not called published and remains subject to the un-deferral procedure.
 Stein--Shakarchi (the requested standard primaries), the open textbooks of
 Weber and Howell--Mathews, and complete texts/notes by Axler--Bourdon--Ramey,
 Schlag, Romik, Milne, McMullen, Looijenga, Bishop, Lyubich, Lebl, Demailly,
-Boas, Błocki, Garnett, Saff, Khoruzhenko, Srivastava, Eremenko, and
-Goldberg--Ostrovskii. Exact read ranges, harvested headings, dispositions and
-working URLs appear in the canonical-coverage section; every pair has two
-independent treatments in the pair-backing matrix.
+Boas, Garrett, the CIMAT notes, Błocki, Freitag, Garnett, Saff, Khoruzhenko,
+Srivastava, Ryzhik, Eremenko, and Goldberg--Ostrovskii, together with the
+complete Ahlfors--Beurling primary paper. Exact read ranges, harvested
+headings, dispositions and working URLs appear in the canonical-coverage
+section; every pair has two independent treatments in the pair-backing
+matrix.
 
 **Seams consumed.** This track cites rather than re-mints the measure track's
 Lebesgue/$L^p$/Radon/maximal/differentiation machinery; the functional track's
@@ -65,9 +70,15 @@ product, meromorphic continuation, completed functional equation and
 nonvanishing on $\Re s=1$, but no quantitative zero-free region; arithmetic
 consequences and $L$-functions remain number theory's. PDE should cite CA-13,
 CA-14, CA-HM-1 and CA-PT-1 for the $n=2$ holomorphic/harmonic dictionary and
-planar boundary theory. The numbered “Amendments” section also records the
-real-analysis $\mathbb C$ dictionary, topology winding direction, the orphaned
-deferred item, and the conditional boundary-homeomorphism seam.
+planar boundary theory. Real analysis owes the $\mathbb C$ dictionary citation,
+its missing algebra supplier and any A-page rehoming of branch examples;
+algebra owes only reading-relative wording on its earlier FTA proof; topology
+owes a non-load-bearing CA-7 winding reference; the deferred catalogue owes
+the ordinary immutable-id reconciliation of the orphaned logarithm-surface
+remark; every conformal boundary consumer owes a closure-homeomorphism
+hypothesis; and the future complex build owes the corrected SC-2/SC-4/CA-21/
+CA-22 dependency metadata. The numbered “Amendments” section records each
+interface without editing another track.
 
 **Unresolved forward interfaces.** A future build must (i) move the general
 holomorphic-logarithm branch into CA-7 before CA-9 uses keyhole contours,
@@ -80,14 +91,21 @@ scaffolds as already authored, and (vi) require a homeomorphic
 extension to the closures whenever boundary data or harmonic measure are
 transported pointwise. None is silently load-bearing here.
 
-**Scope denials.** Arithmetic consequences of $\zeta$ and modular forms;
-fine potential theory (Wiener/Kellogg), Brownian representations and weighted
-potential theory; prime ends and unrestricted Jordan boundary correspondence;
-Carleson/corona/interpolation and operator-model Hardy theory; higher/angular
-value distribution; Teichmüller/deformation theory; sheaf/coherent/global
-analytic-space theory; CR and $\bar\partial$-Neumann regularity; and
-research-scale approximation/univalence results are denied for the specific
-subject/prerequisite reasons in the normative scope table. **Blockers: none.**
+**Scope denials.** Arithmetic consequences of $\zeta$ and modular forms
+(number theory); general coherent sheaves/Cartan A--B/Stein spaces and global
+analytic-space dimension, Remmert, resolution (complex analytic geometry);
+higher CR and full $\bar\partial$-Neumann regularity (CR/PDE); Teichmüller and
+parameter-dependent quasiconformal deformation (geometry/dynamics); full
+Riemann existence, moduli/theta divisors and arithmetic Jacobians
+(algebraic/moduli geometry); de Branges (research-scale proof); unrestricted
+Jordan correspondence and prime ends (missing topology compactification);
+Mergelyan/Arakelian (a separate non-load-bearing approximation pair);
+Brownian harmonic measure (no stochastic-process supplier); Wiener/Kellogg,
+fine/weighted potential theory and obstacles (a separate potential pair);
+Carleson/corona/interpolation, model spaces and singular-integral Hardy theory
+(operator/harmonic analysis); and Cartan--Nevanlinna theory for projective
+curves (projective complex geometry) are denied for those specific homes or
+prerequisite reasons. **Blockers: none.**
 
 This file is NOT normative: `SCHEMA.md`, `CLAUDE.md`, `LEVELS.md` and
 `ARCHITECTURE.md` win wherever they differ.
@@ -149,44 +167,49 @@ construction of $\mathbb C$ and its algebraic modulus and conjugation live on
 `research/frontier-11-rehomed.json`. CA-1 cites both dictionaries; it does not
 construct a fourth model of $\mathbb C$.
 
-Two more places touch $\mathbb{C}$: order **90**
-(`inner-product-spaces-and-orthogonality`) builds the **Hermitian inner
-product** on a complex vector space, and order **127**
-(`the-spectral-theorem-and-singular-value-decomposition`) the complex spectral
-theorem. Order **92** (`algebraic-extensions-degree-and-finite-fields`) is
+Two more places touch $\mathbb{C}$:
+`inner-product-spaces-and-orthogonality` builds the **Hermitian inner product**
+on a complex vector space, and
+`the-spectral-theorem-and-singular-value-decomposition` builds the complex
+spectral theorem. The page `algebraic-extensions-degree-and-finite-fields` is
 where "a finite subgroup of the multiplicative group of a field is cyclic"
 lives, which is what makes $\mu_n$ a cyclic group.
 
 ### Consequence for the representation-theory scaffolder (asked for explicitly)
 
 > **Historical seam note.** The conclusion (“representation theory does not
-> depend on this track”) remains valid, but every absolute order in this
-> inherited subsection is a retired 2026-07-28 locator. The named page IDs and
-> live `plan-spec.json`, not those numbers, govern placement.
+> depend on this track”) remains valid. The obsolete 2026-07-28 locators have
+> been replaced below by stable page ids; live `plan-spec.json` governs
+> placement.
 
 **This track provides representation theory with nothing it needs, and rep
 theory must not wait on it.** Everything a character-theoretic representation
-track wants from $\mathbb{C}$ is already planned strictly below order 130:
+track wants from $\mathbb{C}$ is already supplied or planned below it:
 
-- **a field**, with conjugation and modulus: order **50**;
+- **a field**, with conjugation and modulus:
+  `field-extensions-and-the-complex-numbers`;
 - **algebraically closed**, hence "every operator on a nonzero
-  finite-dimensional complex space has an eigenvalue": order **125** (and the
-  operator statement is order **127**);
-- **characteristic $0$**, so $\lvert G\rvert$ is invertible: order 50 plus the
-  prime-field material there;
+  finite-dimensional complex space has an eigenvalue":
+  `the-fundamental-theorem-of-algebra` (and the operator statement is on
+  `the-spectral-theorem-and-singular-value-decomposition`);
+- **characteristic $0$**, so $\lvert G\rvert$ is invertible:
+  `field-extensions-and-the-complex-numbers` plus its prime-field material;
 - **roots of unity** as an abstract cyclic group of order $n$ (for character
-  values, $\mu_n \subseteq \mathbb{C}^\times$): order **92** via the
-  cyclic-finite-subgroup theorem, with the explicit $e^{2\pi i k/n}$ form only
-  at order **167**;
-- **a Hermitian inner product** and unitarity: order **90**;
-- the **spectral theorem** for normal/unitary operators: order **127**.
+  values, $\mu_n \subseteq \mathbb{C}^\times$):
+  `algebraic-extensions-degree-and-finite-fields` via the
+  cyclic-finite-subgroup theorem, with the explicit $e^{2\pi i k/n}$ form on
+  `the-complex-exponential-and-eulers-formula`;
+- **a Hermitian inner product** and unitarity:
+  `inner-product-spaces-and-orthogonality`;
+- the **spectral theorem** for normal/unitary operators:
+  `the-spectral-theorem-and-singular-value-decomposition`.
 
-A representation-theory block therefore places naturally just above order 127,
-or anywhere above it, and its `requires` should name pages 50 / 92 / 125 / 90 /
-127 — **never a page from this file**. The one caveat: if that track wants
+A representation-theory block therefore places naturally after those
+suppliers, and its `requires` should name their page ids — **never a page from
+this file**. The one caveat: if that track wants
 character values written as explicit complex exponentials, or wants
 $\lvert \chi(g)\rvert \le \chi(1)$ argued from the triangle inequality in polar
-form, it needs order **167** as well. It still never needs 243+.
+form, it needs `the-complex-exponential-and-eulers-formula` as well.
 
 ### What is genuinely missing, and what this file scaffolds
 
@@ -291,13 +314,13 @@ form** (CA-7). Reasons:
 - The winding number is defined by an integral, so the homology form needs **no
   topology at all** beyond connectedness of $\mathbb{C}\setminus\gamma^\ast$
   — Dixon's 1971 argument uses only Liouville and the local theory. That keeps
-  CA-1 … CA-10 free of any dependency above order 197, which is what makes
-  CX-D2 cheap.
+  CA-1 … CA-10 free of the later homotopy/fundamental-group pages, which is
+  what makes CX-D2 cheap.
 - The homotopy form (a null-homotopic cycle has vanishing integral) is then a
-  **corollary** at CA-20, once $\pi_1$ (231) is available, together with the
-  monodromy theorem. Deriving homology-from-homotopy is easy; the reverse is
-  not, and taking homotopy as primary would drag the whole spine above order
-  231 for no gain.
+  **corollary** at CA-20, once `the-fundamental-group` is available, together
+  with the monodromy theorem. Deriving homology-from-homotopy is easy; the
+  reverse is not, and taking homotopy as primary would drag the whole spine
+  behind that supplier for no gain.
 - Nothing in the track is proved twice. The homotopy form appears once, as a
   named corollary, with the agreement remark the library requires.
 
@@ -305,12 +328,13 @@ form** (CA-7). Reasons:
 rectifiable/Riemann–Stieltjes version is a single generalisation theorem.**
 Answering the prerequisites question directly:
 
-- **Does the Riemann integral at 137/139 suffice? YES**, for the primary
+- **Do `the-riemann-integral` and
+  `properties-of-the-integral-and-the-working-ftc` suffice? YES**, for the primary
   definition. $\int_\gamma f\,dz := \int_a^b f(\gamma(t))\gamma'(t)\,dt$ for
   piecewise-$C^1$ $\gamma$ is a Riemann integral of a piecewise-continuous
-  $\mathbb{C}$-valued function of a real variable — order 137 gives
-  integrability, 139 gives linearity, additivity and the change-of-variables
-  rule that discharges parametrisation-independence.
+  $\mathbb{C}$-valued function of a real variable — the first page gives
+  integrability and the second gives linearity, additivity and the
+  change-of-variables rule that discharges parametrisation-independence.
 - **Do you also need a line integral over a rectifiable path? Not for any
   theorem in this track** — every statement is about piecewise-$C^1$ contours,
   and the two global Cauchy theorems, the residue theorem and the argument
@@ -384,7 +408,7 @@ use of Zorn's lemma. The places where the cost is not zero:
 
 | where | cost | note |
 |---|---|---|
-| CA-15 Montel, via Arzelà–Ascoli (149) | **AC$_\omega$/DC**, inherited | the diagonal subsequence extraction. **Inherit the cost recorded on order 149; do not re-derive it.** Named in the Statement of Montel's theorem. |
+| CA-15 Montel, via the compactness theorem on `approximation-and-compactness-in-ck` | **AC$_\omega$/DC**, inherited | the diagonal subsequence extraction. **Inherit the supplier item's recorded cost; do not re-derive it.** Named in the Statement of Montel's theorem. |
 | CA-16 Riemann mapping | **DC**, one use | a maximising sequence for the extremal problem, plus the Montel extraction. |
 | CA-18 / CA-19 Weierstrass, Mittag-Leffler, Runge | **AC$_\omega$** at most | choosing a compact exhaustion and choosing one rational approximant per stage; a canonical exhaustion $K_n = \{z : \lvert z\rvert \le n,\ d(z,\partial\Omega)\ge 1/n\}$ makes both choice-free, and the pages must use it. |
 | CA-14 Perron | **AC$_\omega$/DC** | The supremum itself is choice-free, but the standard proof chooses functions within $1/n$ of the envelope and then uses finite maxima, Poisson modifications and Harnack convergence. Charge the sequence choice honestly. |
@@ -419,38 +443,38 @@ the WORKFLOW definition-justification rule. The heavy rows — 6, 8, 12, 18, 21,
 
 | # | page | the definition | what must be proved, as its own item |
 |---|---|---|---|
-| 1 | CA-1 | **the identification $\mathbb{C} = \mathbb{R}^2$** | the field of order 50 ($\mathbb{R}[x]/(x^2+1)$), the normed space $\mathbb{R}^2$ of 145, and the metric space of 167 carry the SAME addition, the SAME modulus and the SAME metric. A dictionary item, not a restatement. Without it the library holds three $\mathbb{C}$'s that say nothing to each other — the canonical two-notions defect. |
-| 2 | CA-1 | **the Wirtinger operators** $\partial_z, \partial_{\bar z}$ | for real-differentiable $f$, the total derivative (169) is unique and is an $\mathbb{R}$-linear map $\mathbb{C}\to\mathbb{C}$; every such map is UNIQUELY $w \mapsto aw + b\bar w$; $\partial_z f := a$, $\partial_{\bar z} f := b$. Uniqueness of the decomposition is the obligation. |
-| 3 | CA-1 | **conformal** (angle- and orientation-preserving) | the angle between two curves through a point is well defined (independent of the parametrisations), via 159's reparametrisation lemmas and the inner product of 90/145. |
-| 4 | CA-3 | the **$\mathbb{C}$-valued Riemann integral** $\int_a^b f$ | defined by real and imaginary parts; agrees with the order-137 Riemann integral when $f$ is real-valued; linearity over $\mathbb{C}$ (not just $\mathbb{R}$); and $\lvert\int f\rvert \le \int\lvert f\rvert$, which needs the rotation trick and is NOT componentwise. |
-| 5 | CA-3 | **the contour integral** $\int_\gamma f\,dz$ | **independence of the parametrisation**: if $\varphi$ is an increasing piecewise-$C^1$ bijection then $\int_{\gamma\circ\varphi} f = \int_\gamma f$ (change of variables, order 139). Plus additivity under subdivision and the sign under reversal. Owner-named. |
-| 6 | CA-3 | the **length** of a contour | $\int_a^b\lvert\gamma'\rvert$ agrees with the arc length of order 159 (a supremum over inscribed polygons). Dictionary item; 159 proves the $C^1$ case, so this is a citation plus the piecewise patch. |
+| 1 | CA-1 | **the identification $\mathbb{C} = \mathbb{R}^2$** | `field-extensions-and-the-complex-numbers`, `rn-as-a-normed-space`, and `the-complex-exponential-and-eulers-formula` carry the SAME addition, the SAME modulus and the SAME metric. A dictionary item, not a restatement. Without it the library holds three $\mathbb{C}$'s that say nothing to each other — the canonical two-notions defect. |
+| 2 | CA-1 | **the Wirtinger operators** $\partial_z, \partial_{\bar z}$ | for real-differentiable $f$, the total derivative from `the-total-derivative` is unique and is an $\mathbb{R}$-linear map $\mathbb{C}\to\mathbb{C}$; every such map is UNIQUELY $w \mapsto aw + b\bar w$; $\partial_z f := a$, $\partial_{\bar z} f := b$. Uniqueness of the decomposition is the obligation. |
+| 3 | CA-1 | **conformal** (angle- and orientation-preserving) | the angle between two curves through a point is well defined (independent of the parametrisations), via `arc-length-and-rectifiable-curves`' reparametrisation lemmas and the inner products on `inner-product-spaces-and-orthogonality` and `rn-as-a-normed-space`. |
+| 4 | CA-3 | the **$\mathbb{C}$-valued Riemann integral** $\int_a^b f$ | defined by real and imaginary parts; agrees with the integral on `the-riemann-integral` when $f$ is real-valued; linearity over $\mathbb{C}$ (not just $\mathbb{R}$); and $\lvert\int f\rvert \le \int\lvert f\rvert$, which needs the rotation trick and is NOT componentwise. |
+| 5 | CA-3 | **the contour integral** $\int_\gamma f\,dz$ | **independence of the parametrisation**: if $\varphi$ is an increasing piecewise-$C^1$ bijection then $\int_{\gamma\circ\varphi} f = \int_\gamma f$ (cite the change-of-variables item on `properties-of-the-integral-and-the-working-ftc`). Plus additivity under subdivision and the sign under reversal. Owner-named. |
+| 6 | CA-3 | the **length** of a contour | $\int_a^b\lvert\gamma'\rvert$ agrees with the supremal arc length on `arc-length-and-rectifiable-curves`. That page proves the $C^1$ case, so this is a citation plus the piecewise patch. |
 | 7 | CA-5 | the **order of a zero** $m$ | not all derivatives vanish unless $f\equiv 0$ on the component (identity theorem), so a least $m$ exists; and the factorisation $f = (z-a)^m g$ with $g(a)\ne 0$ determines $m$ **uniquely**. Without uniqueness "the order" is not a phrase. |
-| 8 | CA-7 | **the winding number** $n(\gamma, a)$ | THREE items: (a) $n(\gamma,a) := \frac{1}{2\pi i}\int_\gamma \frac{dz}{z-a}$ **is an integer** — via $h(t) = (\gamma(t)-a)\exp\!\big({-\int_{t_0}^{t}\gamma'/(\gamma-a)}\big)$ being constant, then $\ker\exp = 2\pi i\mathbb{Z}$ from order 167; (b) it is **constant on each connected component** of $\mathbb{C}\setminus\gamma^\ast$ (continuity plus integrality); (c) it is **$0$ on the unbounded component** (the ML estimate). Owner-named; this is the single most important row in the table. |
+| 8 | CA-7 | **the winding number** $n(\gamma, a)$ | THREE items: (a) $n(\gamma,a) := \frac{1}{2\pi i}\int_\gamma \frac{dz}{z-a}$ **is an integer** — via $h(t) = (\gamma(t)-a)\exp\!\big({-\int_{t_0}^{t}\gamma'/(\gamma-a)}\big)$ being constant, then $\ker\exp = 2\pi i\mathbb{Z}$ from `the-complex-exponential-and-eulers-formula`; (b) it is **constant on each connected component** of $\mathbb{C}\setminus\gamma^\ast$ (continuity plus integrality); (c) it is **$0$ on the unbounded component** (the ML estimate). Owner-named; this is the single most important row in the table. |
 | 9 | CA-7 | **chains and cycles** | a chain is an element of the free abelian group on piecewise-$C^1$ paths in $\Omega$; $\int_\Gamma$ and $n(\Gamma, a)$ are well defined ON THE FREE GROUP, i.e. depend only on the formal sum and not on the list of paths chosen to represent it. Then "$\Gamma$ is null-homologous in $\Omega$" ($n(\Gamma,a)=0$ for every $a\notin\Omega$) is a property of the cycle. |
 | 10 | CA-8 | **the Laurent expansion** in an annulus | **existence AND uniqueness** of $(a_n)_{n\in\mathbb{Z}}$ with $f(z) = \sum a_n (z-a)^n$ locally uniformly on $A(a; r, R)$. Uniqueness is a separate item (integrate against $(z-a)^{-n-1}$) and is what licenses the definite article in "the Laurent series", "the principal part", "the residue". Owner-named. |
 | 11 | CA-8 | the **classification** of an isolated singularity | removable / pole of order $m$ / essential is **exhaustive and mutually exclusive**, and each case has an equivalent characterisation not mentioning the expansion (Riemann's removability criterion; $\lvert f\rvert\to\infty$; Casorati–Weierstrass). |
 | 12 | CA-8 | **the residue** $\operatorname{Res}(f, a)$ | $:= a_{-1}$ of the unique Laurent expansion (row 10); the equivalent form $\frac{1}{2\pi i}\int_{\lvert z-a\rvert=r} f$ is **independent of $r$** for all small $r$, proved separately. If a residue at $\infty$ is used, its sign convention is its own `rem-`. Owner-named. |
-| 13 | CA-11 | **the Riemann sphere** $\widehat{\mathbb{C}}$ | the one-point compactification (order 195) of $\mathbb{C}$ is compact Hausdorff (195 proves when this holds: $\mathbb{C}$ is locally compact Hausdorff); **stereographic projection is a homeomorphism onto $S^2\subseteq\mathbb{R}^3$** (order 197's sphere); and the two charts $z$ and $1/z$ have **holomorphic transition map** $z\mapsto 1/z$ on the overlap — which is what licenses "holomorphic at $\infty$" and "meromorphic on $\widehat{\mathbb{C}}$". First instance of the owner's chart-compatibility obligation. |
+| 13 | CA-11 | **the Riemann sphere** $\widehat{\mathbb{C}}$ | the one-point compactification from `compactness` of $\mathbb{C}$ is compact Hausdorff; **stereographic projection is a homeomorphism onto $S^2\subseteq\mathbb{R}^3$** using `the-topology-of-euclidean-space`; and the two charts $z$ and $1/z$ have **holomorphic transition map** $z\mapsto 1/z$ on the overlap — which is what licenses "holomorphic at $\infty$" and "meromorphic on $\widehat{\mathbb{C}}$". First instance of the owner's chart-compatibility obligation. |
 | 14 | CA-11 | a **Möbius transformation** as a map of $\widehat{\mathbb{C}}$ | the values at $-d/c$ and $\infty$ are forced by continuity, so the extension is unique; $\mathrm{GL}_2(\mathbb{C}) \to \operatorname{M\ddot ob}$ is a surjective group homomorphism with kernel the scalars, so a Möbius map is well defined by its matrix **up to scalars** — the projective statement, proved, not asserted. |
 | 15 | CA-11 | the **cross-ratio** | the unique Möbius map sending $(z_1,z_2,z_3)$ to $(0,1,\infty)$ exists and is unique — that uniqueness IS the well-definedness of $(z, z_1, z_2, z_3)$. |
-| 16 | CA-12 | **a branch of $\arg$, and the branch cut** | $\arg$ is NOT a function. The obligations: a continuous argument exists on any simply connected $\Omega \subseteq \mathbb{C}\setminus\{0\}$; the **principal** $\operatorname{Arg}$ on $\mathbb{C}\setminus(-\infty,0]$ is single-valued and continuous, and the cut is what makes it so; any two continuous arguments on a connected $\Omega$ differ by a constant in $2\pi\mathbb{Z}$. **Check order 167 first** — its scaffold already promises the principal logarithm and "no continuous logarithm on $\mathbb{C}\setminus\{0\}$"; if the principal branch is discharged there, CITE it and prove here only the general-domain version. Do not re-mint. Owner-named. |
+| 16 | CA-12 | **a branch of $\arg$, and the branch cut** | $\arg$ is NOT a function. The obligations: a continuous argument exists on any simply connected $\Omega \subseteq \mathbb{C}\setminus\{0\}$; the **principal** $\operatorname{Arg}$ on $\mathbb{C}\setminus(-\infty,0]$ is single-valued and continuous, and the cut is what makes it so; any two continuous arguments on a connected $\Omega$ differ by a constant in $2\pi\mathbb{Z}$. **Check `the-complex-exponential-and-eulers-formula` first** — its authored items already give the pointwise principal logarithm and "no continuous logarithm on $\mathbb{C}\setminus\{0\}$"; cite those and prove here only the general-domain version. Do not re-mint. Owner-named. |
 | 17 | CA-12 | **a holomorphic branch of $\log$** on a domain | existence on simply connected $\Omega$ with $0\notin\Omega$ (a primitive of $1/z$, normalised at one point); **uniqueness up to an additive constant in $2\pi i\mathbb{Z}$**; so "the" branch is only definite after a normalisation, which is stated where the symbol is introduced. |
-| 18 | CA-12 | **$z^\alpha$** | $z^\alpha := \exp(\alpha \log z)$ inherits row 17 exactly: it is a function only after a branch is fixed, and different branches differ by $e^{2\pi i k\alpha}$. Plus TWO dictionary items: it agrees with the algebraic power when $\alpha\in\mathbb{Z}$ (`roots-and-rational-powers`, order 16) and with the real $x^\alpha$ for $x>0$ under the principal branch (`the-logarithm-and-general-powers`, order 155). Owner-named. |
+| 18 | CA-12 | **$z^\alpha$** | $z^\alpha := \exp(\alpha \log z)$ inherits row 17 exactly: it is a function only after a branch is fixed, and different branches differ by $e^{2\pi i k\alpha}$. Plus TWO dictionary items: it agrees with the algebraic power when $\alpha\in\mathbb{Z}$ (`roots-and-rational-powers`) and with the real $x^\alpha$ for $x>0$ under the principal branch (`the-logarithm-and-general-powers`). Owner-named. |
 | 19 | CA-13 | the **harmonic conjugate** | exists on a simply connected domain (a primitive again); **unique up to an additive real constant**; and $u + iv$ is then holomorphic. |
 | 20 | CA-13 | **the** solution of the Dirichlet problem on the disc | the Poisson integral $P[u]$ is harmonic inside and extends continuously to the boundary datum; **uniqueness** by the maximum principle. Both halves are needed before the definite article. |
 | 21 | CA-14 | **the Perron solution** | four items: the Perron family is nonempty; its pointwise supremum is finite (bounded by $\max\varphi$); the supremum is **harmonic** (harmonic modification by Poisson lifting, plus Harnack); and it attains the boundary value at $\zeta$ **iff there is a barrier at $\zeta$**. Only then is "the Perron solution of the Dirichlet problem on $\Omega$" a phrase. |
 | 22 | CA-15 | the **topology of local uniform convergence** on $H(\Omega)$ | the metric built from a compact exhaustion is a metric; **different exhaustions give the same topology** (so "normal family" and "locally uniformly convergent" do not depend on the exhaustion); and $H(\Omega)$ is closed in $C(\Omega)$ (Weierstrass convergence, CA-5). |
-| 23 | CA-18 | the **infinite product** $\prod(1+a_n)$ over $\mathbb{C}$ | reuse `def-infinite-product` (authored, homed on order 115) and prove only the $\mathbb{C}$-specific clauses: at most finitely many factors vanish, the tail converges to a NONZERO limit, and the zero set of the product is the union of the zero sets with multiplicity. Do NOT re-mint the definition. |
+| 23 | CA-18 | the **infinite product** $\prod(1+a_n)$ over $\mathbb{C}$ | reuse `def-infinite-product` on `absolute-convergence-and-rearrangement` and prove only the $\mathbb{C}$-specific clauses: at most finitely many factors vanish, the tail converges to a NONZERO limit, and the zero set of the product is the union of the zero sets with multiplicity. Do NOT re-mint the definition. |
 | 24 | CA-18 | the **canonical product** and the genus | the elementary factors $E_p$ and the choice of $p_n$ making $\prod E_{p_n}(z/a_n)$ converge; and the honest limit: the Weierstrass factorisation is unique only **up to a factor $e^{g}$**, stated where defined rather than discovered later. |
 | 25 | CA-20 | **the germ** of a holomorphic function at a point | "agree on some neighbourhood" is an equivalence relation; the stalk's ring operations are representative-independent. |
 | 26 | CA-20 | **analytic continuation along a path** | the continuation of a germ along $\gamma$ is **independent of the admissible chain of discs and germs chosen** (the refinement/subdivision lemma). This is what licenses "**the** continuation of $f$ along $\gamma$"; the monodromy theorem is a further, different statement (independence of $\gamma$ within a homotopy class). Owner-named; the two must be separate items and in this order. |
 | 27 | CA-20 | the **Riemann surface** of a complete analytic function | the sets $\{$germs at $w$ obtained from $g$ by continuation inside $D\}$ form a **basis** (cite the published `thm-basis-criterion`); each chart "germ $\mapsto$ its base point" is a homeomorphism onto a disc; the transition maps are **identities, hence holomorphic** — the charts are compatible. Only then is "the Riemann surface of $\log$" a space. Owner-named. |
-| 28 | CA-21 | **$\Gamma$ on $\mathrm{Re}\,z>0$** | the improper integral converges locally uniformly (order 143) and is **holomorphic in $z$** — which needs its own lemma, *holomorphy of a parameter integral* (Morera plus Fubini for the Riemann integral, order 177), stated once and cited by CA-19, CA-21 and CA-22. |
+| 28 | CA-21 | **$\Gamma$ on $\mathrm{Re}\,z>0$** | the improper integral converges locally uniformly using `improper-integrals` and is **holomorphic in $z$** — which needs its own lemma, *holomorphy of a parameter integral* (Morera plus `fubini-and-change-of-variables`), stated once and cited by CA-19, CA-21 and CA-22. |
 | 29 | CA-21 | the **meromorphic continuation** of $\Gamma$ | $\Gamma(z) = \Gamma(z+n)/(z(z+1)\cdots(z+n-1))$ is independent of $n$, so the continuations agree on overlaps and define one function on $\mathbb{C}\setminus\{0,-1,-2,\dots\}$; uniqueness by the identity theorem. |
 | 30 | CA-22 | the **continuation of $\zeta$** and the completed functions | first continue to $\Re s>0$ by the sum--integral correction and then to $\mathbb C$ by the split Mellin transform of $\theta(t)-1$; prove overlap agreement and uniqueness by the identity theorem. The eta identity is not divided through at the zeros of $1-2^{1-s}$ without a removability proof. Define $\Lambda(s)=\pi^{-s/2}\Gamma(s/2)\zeta(s)$ and $\xi(s)=\tfrac12s(s-1)\Lambda(s)$ separately and prove their domains and singularities before using either functional equation. |
-| 31 | SC-1 | a **holomorphic map $\mathbb{C}^m \to \mathbb{C}^n$** | defined componentwise; the numbered obligation is that this is EQUIVALENT to the existence of a $\mathbb{C}$-linear total derivative $\mathbb{C}^m\to\mathbb{C}^n$ (order 169's uniqueness of the total derivative). This is the item that discharges the owner's $f:\mathbb{C}^m\to\mathbb{C}^n$ literally, and it is what lets the rest of the block work with $n=1$. |
-| 32 | SC-1 | the **multivariable power series** $\sum_\alpha c_\alpha z^\alpha$ | the sum over the unordered index set $\mathbb{N}^m$ is well defined because the family is absolutely summable on compact subsets of the polydisc (cite the unordered-summation material of order 115, do not re-mint); and the coefficients are unique. |
+| 31 | SC-1 | a **holomorphic map $\mathbb{C}^m \to \mathbb{C}^n$** | defined componentwise; the numbered obligation is that this is EQUIVALENT to the existence of a $\mathbb{C}$-linear total derivative $\mathbb{C}^m\to\mathbb{C}^n$ (cite uniqueness on `the-total-derivative`). This is the item that discharges the owner's $f:\mathbb{C}^m\to\mathbb{C}^n$ literally, and it is what lets the rest of the block work with $n=1$. |
+| 32 | SC-1 | the **multivariable power series** $\sum_\alpha c_\alpha z^\alpha$ | the sum over the unordered index set $\mathbb{N}^m$ is well defined because the family is absolutely summable on compact subsets of the polydisc (cite the unordered-summation material on `absolute-convergence-and-rearrangement`, do not re-mint); and the coefficients are unique. |
 | 33 | SC-3 | the **Weierstrass polynomial** | in $f = u\cdot W$ with $u$ a unit and $W$ a Weierstrass polynomial of degree $d$, both $u$ and $W$ are **unique**. Uniqueness is what licenses "the Weierstrass polynomial of $f$" and it is a separate item from existence. |
 | 34 | SC-4 | the **holomorphically convex hull** $\widehat{E}_\Omega$ | define it for arbitrary $E\subset\Omega$ using extended suprema, so $\widehat{\widehat E}=\widehat E$ is well-formed; for compact $K$, prove the hull is closed in $\Omega$, coordinate-bounded and contains $K$. Relative compactness is an additional property required by holomorphic convexity, not a consequence of boundedness. |
 | 35 | SC-4 | **plurisubharmonic** (standard USC convention, CX-D6) | $u:\Omega\to[-\infty,\infty)$ is USC and is not identically $-\infty$ on a domain component; its pullback along every affine complex line is subharmonic or identically $-\infty$. Independence under affine reparametrisation and equivalence with the complex-Hessian criterion for $C^2$ functions are separate items. |
@@ -466,7 +490,7 @@ the WORKFLOW definition-justification rule. The heavy rows — 6, 8, 12, 18, 21,
 | 45 | CA-QC-2 | measurable conformal structure and its solution | $\mu$ transforms as a $(-1,1)$ tensor rather than a scalar, and sphere-solution uniqueness is claimed only after fixing $0,1,\infty$. |
 | 46 | CA-QC-3 | conformal welding | welding curves are defined only up to Möbius postcomposition, and uniqueness is asserted only under conformal removability. |
 | 47 | CA-HM-1 | Green function and harmonic measure | Green normalisation fixes additive ambiguity; Riesz--Markov gives a unique boundary Radon probability from the positive norm-one Dirichlet-evaluation functional. Conformal pushforward is defined only through an actual boundary homeomorphism. |
-| 48 | CA-PT-1 | logarithmic potentials and energy | truncated kernels define the extended integrals without an $\infty-\infty$ subtraction; $p_\mu=\int\log|z-w|d\mu$ and $U^\mu=-p_\mu$ are never conflated, and $\Delta p_\mu=2\pi\mu$. |
+| 48 | CA-PT-1 | logarithmic potentials and energy | truncated kernels define the extended integrals without an $\infty-\infty$ subtraction; $p_\mu=\int\log\lvert z-w\rvert d\mu$ and $U^\mu=-p_\mu$ are never conflated, and $\Delta p_\mu=2\pi\mu$. |
 | 49 | CA-PT-1 | equilibrium measure and capacity | weak-* lower semicontinuity yields existence; finite-energy strict convexity yields uniqueness; $e^{-V_K}$ is defined with the infinite-energy convention and proved equal to transfinite diameter before the two names are interchanged. |
 | 50 | CA-HP-1 | boundary measure/function representing $h^p$ | the Poisson integral is independent of representatives; uniqueness follows from weak-* or $L^p$ boundary convergence. At $p=1$ the datum is a finite measure, not silently an $L^1$ function. |
 | 51 | CA-HP-2 | Blaschke, singular-inner and outer factors | product order-independence follows from normal convergence; the singular measure and boundary logarithm determine factors only after the stated unimodular/$O(0)>0$ normalisation; factorisation uniqueness is modulo unimodular constants. |
@@ -502,7 +526,7 @@ track is:
 | Higher-dimensional CR geometry, the Lewy phenomenon, boundary complexes and the full $\bar\partial$-Neumann regularity theory | SCV here uses only the tangential notions needed to state smooth pseudoconvexity. These results constitute a PDE/CR track of their own. |
 | Teichmüller theory, measurable Riemann mapping with parameters, quasiconformal deformation spaces and Sullivan dynamics | CA-QC proves planar equivalences, modulus distortion, compactness and the normalized measurable Riemann mapping theorem. Parameter dependence and moduli spaces need a dedicated geometry/dynamics track. |
 | Riemann existence in its full branched-cover/algebraic-curve form, moduli of curves, theta divisors and arithmetic of Jacobians | CA-RS includes compact-surface uniformisation, Abel--Jacobi and Jacobi inversion. The denied superstructure is algebraic-geometric/moduli/arithmetic rather than a missing analytic lemma. |
-| de Branges's theorem | The Bieberbach conjecture is a research-scale proof. CA-16 keeps the area theorem, Bieberbach's $|a_2|\le2$, Koebe quarter and distortion theorems. |
+| de Branges's theorem | The Bieberbach conjecture is a research-scale proof. CA-16 keeps the area theorem, Bieberbach's $\lvert a_2\rvert\le2$, Koebe quarter and distortion theorems. |
 | Carathéodory boundary correspondence for arbitrary Jordan domains and prime-end boundary theory | The existing topology seam still lacks Jordan--Schoenflies, and prime ends require their own compactification. Boundary-value and harmonic-measure transport here is conditional on a homeomorphic extension to closures. |
 | Mergelyan approximation and Arakelian approximation | CA-19 proves classical Runge with prescribed poles. Mergelyan's theorem is valuable but needs a separate approximation pair (including the topological and potential-theoretic construction) and is not load-bearing here. |
 | Brownian-motion representations of harmonic measure and probabilistic potential theory | Harmonic measure is built analytically from Perron/Riesz representation; stochastic process theory is not available and is not needed. |
@@ -553,48 +577,52 @@ needs explicit owner approval at that time; ids are immutable, and a retired
 | `rem-riemann-surface-of-log` | orphan item file; `deferred-algebraic-topology` was its intended historical home | It is not published because no live page `items[]` contains it. Once both the homotopy block and CA-20 are authored, reconcile or alias the immutable id through the normal un-deferral procedure; do not call it removed before that. | CA-20 (rows 25--27) + HT-3/HT-4 |
 | `rem-jacobian-conjecture` | `open-problems-and-research-frontier` | **stays** (open problem). CA-6/SC-3 add the holomorphic local-invertibility results that make its statement sharper; check the text for decayed scope claims per the standing sweep | — |
 | `rem-open-mapping-theorem` | `deferred-functional-analysis` | **stays**, and is a NAMING HAZARD: that is the Banach open mapping theorem, a different result from CA-6's. CA-6 must carry a disambiguating `rem-`, and the judge conventions should be told, or it will report a duplication | — |
-| `fs-negative-has-square-root` (published item) | order 16 | **check at authoring time.** It is a true false-statement *about $\mathbb{R}$*. Its Remarks may contain a claim about $\mathbb{C}$ that order 50 already falsifies and CA-1 falsifies again. Published-claim decay; sweep it. | — |
+| `fs-negative-has-square-root` (published item) | `roots-and-rational-powers` | **check at authoring time.** It is a true false-statement *about $\mathbb{R}$*. Its Remarks may contain a claim about $\mathbb{C}$ that `field-extensions-and-the-complex-numbers` already falsifies and CA-1 falsifies again. Published-claim decay; sweep it. | — |
 
 ---
 
 ## Amendments to existing scaffolds (addressed to Alpha; this file never writes them)
 
-1. **`plan-realanalysis-pages.md` §RA-33 (order 167).** Its inventory opens
-   "C as R^2; modulus, conjugate" — but order 50 now defines $\mathbb{C}$,
-   the modulus and conjugation algebraically, and 167 sits above it. RA-33 must
-   **cite** order 50 and add only the metric/topological/analytic structure,
-   with the dictionary item of well-definedness row 1 homed on **167, not
-   here** if 167 is authored first. Whichever page is authored first owns row
-   1; the other cites. This must be settled before either is scaffolded, or the
+1. **`plan-realanalysis-pages.md` §RA-33
+   (`the-complex-exponential-and-eulers-formula`).** Its inventory opens
+   "C as R^2; modulus, conjugate" — but
+   `field-extensions-and-the-complex-numbers` now defines $\mathbb{C}$,
+   the modulus and conjugation algebraically, and RA-33 sits above it. RA-33 must
+   **cite** that page and add only the metric/topological/analytic structure,
+   with the dictionary item of well-definedness row 1 homed on that page, not
+   here, if it is authored first. Whichever page is authored first owns row 1;
+   the other cites. This must be settled before either is scaffolded, or the
    library gets two $\mathbb{C}$'s.
 2. **`plan-realanalysis-pages.md` §RA-33.** Its `requires` should gain
-   `field-extensions-and-the-complex-numbers` (order 50). Currently it names
+   `field-extensions-and-the-complex-numbers`. Currently it names
    only `sine-cosine-and-the-definition-of-pi`.
 3. **`plan-realanalysis-pages.md` §RA-33 B page.** It plans "sin is unbounded
    on the imaginary axis", "$i^i$ is real", "$\log(-1)$ is multivalued",
    "$(z^a)^b \ne z^{ab}$", "the fifth roots of unity". **B pages are leaves**,
    so CA-2 and CA-12 may not cite any of them. Either move the ones this track
-   needs onto the A page at 167, or accept that CA-2/CA-12 rebuild them with an
+   needs onto the A page `the-complex-exponential-and-eulers-formula`, or accept
+   that CA-2/CA-12 rebuild them with an
    agreement remark. Recommendation: move **$(z^a)^b \ne z^{ab}$** and
    **$\log(-1)$ multivalued** to the A page, since well-definedness rows 17 and
    18 want them as citable statements.
-4. **`plan-algebra-track.md` §X-1 (order 125).** Its Traps say the analytic
-   minimum-modulus proof "is **not** available here". That is true at order 125
-   and must stay in the order-relative form; but once CA-5 exists the sentence
+4. **`plan-algebra-track.md` §X-1
+   (`the-fundamental-theorem-of-algebra`).** Its Traps say the analytic
+   minimum-modulus proof "is **not** available here". That is true on X-1
+   and must stay in the reading-relative form; but once CA-5 exists the sentence
    risks reading as a claim about the library. Alpha rewords to
    "not available **at this point in the reading order**", the form LEVELS.md
    §10b says survived level 9 untouched.
-5. **`plan-topology-track.md` §T5 (`compactness`, order 195).** This track
+5. **`plan-topology-track.md` §T5 (`compactness`).** This track
    depends on the **one-point (Alexandroff) compactification** and on "a
    continuous bijection from compact to Hausdorff is a homeomorphism", both
    already listed there. No change needed — recorded so CA-11's `requires` is
    not questioned.
-6. **`plan-topology-set-theory-track.md` §HT-7 (order 241).** Its Traps already
+6. **`plan-topology-set-theory-track.md` §HT-7.** Its Traps already
    anticipate "the analysis winding items live on pages whose state must be
    checked at authoring time". Those pages now exist in plan: the winding
-   number is **CA-7, order 255**, which is ABOVE 241. So HT-7's winding-number
-   dictionary must remain **Remarks-only orientation with no dependency**, or
-   become a declared `forward_refs` to CA-7. It cannot be load-bearing.
+   number is **CA-7**, which follows HT-7. So HT-7's winding-number dictionary
+   must remain **Remarks-only orientation with no dependency**, or become a
+   declared `forward_refs` to CA-7. It cannot be load-bearing.
    Symmetrically, CA-7 carries the backward citation and the agreement remark.
 7. **Deferred/topology catalogue.** `items/rem-riemann-surface-of-log.md`
    exists on disk but is not homed by any nonempty `items[]` array and is
@@ -615,6 +643,13 @@ needs explicit owner approval at that time; ids are immutable, and a retired
     conformal map must require a homeomorphic extension to closures. A general
     prime-end/Carathéodory statement is not supplied by the present topology
     track and must remain a declared forward reference or scope denial.
+11. **Future reconciliation of the live complex-analysis page metadata.** The
+    page objects already exist, but their current `requires` fields predate this
+    enrichment. At the future build, replace them with the stable page-id and
+    relative-supplier lists declared in each section below: in particular,
+    SC-2 adds CA-14 and MT-8, SC-4 adds CA-18/CA-19, CA-21 adds MT-11, and
+    CA-22 adds the FA-23/FA-25 theta--Poisson suppliers. This commission does
+    not edit `research/plan-spec.json`.
 
 ---
 
@@ -662,6 +697,65 @@ is not overwritten by this scaffold.
 `field-extensions-and-the-complex-numbers`, `the-total-derivative`,
 `the-topology-of-euclidean-space`
 
+Pair sources (exact harvested locators): Ahlfors Ch. 2 §§1.1--1.4 and Ch. 3
+§§2.2--2.3 (limits/continuity, analytic functions, polynomials, rational
+functions and conformal mapping); Stein--Shakarchi Ch. 1, “Functions”
+(“Continuity,” “Holomorphic functions”); Howell--Mathews Ch. 3 §§3.1--3.3
+(“Differentiable and analytic functions,” “Cauchy--Riemann equations,”
+“Harmonic functions”).
+
+Published A-page inventory (verified from live `items[]`; 28 immutable items):
+
+| id | kind | one-line statement |
+|---|---|---|
+| `rem-complex-plane-euclidean-dictionary` | rem | Identify $\mathbb C=\mathbb R[x]/(x^2+1)$ with the Euclidean plane and a normed real algebra, and state exactly what is preserved. |
+| `def-complex-domain` | def | A complex domain is a nonempty connected open subset of $\mathbb C$. |
+| `def-complex-differentiability-holomorphic-and-entire` | def | Define complex differentiability at a point, the complex derivative, holomorphic functions and entire functions. |
+| `lem-uniqueness-of-the-complex-derivative` | lem | The complex derivative at a point is unique. |
+| `def-wirtinger-derivatives` | def | Define $\partial_zf$, $\partial_{\bar z}f$ and antiholomorphic functions. |
+| `thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann` | thm | Complex differentiability is equivalent to a complex-linear real total derivative, to $\partial_{\bar z}f=0$, and to real differentiability plus Cauchy--Riemann. |
+| `cor-complex-differentiability-implies-continuity` | cor | Complex differentiability at a point implies continuity there. |
+| `thm-continuous-partials-and-cauchy-riemann-imply-holomorphic` | thm | Continuous first partials satisfying Cauchy--Riemann give complex differentiability pointwise and holomorphy on an open set. |
+| `cor-cartesian-and-polar-cauchy-riemann-equations` | cor | Cartesian and polar forms of the Cauchy--Riemann equations agree away from the origin. |
+| `thm-algebra-of-complex-derivatives` | thm | Complex derivatives obey the linearity, product, reciprocal and quotient rules. |
+| `thm-chain-rule-for-complex-derivatives` | thm | Complex derivatives obey the chain rule. |
+| `thm-wirtinger-chain-rule-for-real-differentiable-maps` | thm | Wirtinger derivatives obey the chain rule for real-differentiable complex-valued maps. |
+| `thm-conjugate-difference-quotient-characterizes-antiholomorphic-maps` | thm | A conjugate difference quotient characterizes antiholomorphic maps. |
+| `cor-continuous-complex-derivative-gives-c1-components` | cor | A holomorphic function with continuous complex derivative has $C^1$ real and imaginary components. |
+| `thm-derivative-of-a-continuous-complex-local-inverse` | thm | A continuous local inverse has derivative reciprocal to a nonzero complex derivative. |
+| `thm-complex-polynomials-and-rational-functions-are-holomorphic` | thm | Complex polynomials are entire with the power-rule derivative, and rational functions are holomorphic off their denominator zeros. |
+| `thm-complex-exponential-is-entire-with-derivative-itself` | thm | The complex exponential is entire and is its own derivative. |
+| `thm-zero-complex-derivative-on-a-domain-implies-constant` | thm | A holomorphic function with zero derivative on a domain is constant. |
+| `cor-real-valued-holomorphic-function-is-constant` | cor | A real-valued holomorphic function on a domain is constant. |
+| `cor-constant-modulus-holomorphic-function-is-constant` | cor | A holomorphic function of constant modulus on a domain is constant. |
+| `cor-holomorphic-function-with-holomorphic-conjugate-is-constant` | cor | If both $f$ and $\bar f$ are holomorphic on a domain, then $f$ is constant. |
+| `def-oriented-conformal-map-at-a-point` | def | Define orientation-preserving conformality for a real-differentiable complex map at a point. |
+| `lem-oriented-similarities-are-nonzero-complex-multiplications` | lem | Plane similarities are complex or conjugate-complex multiplications; the orientation-preserving ones are exactly nonzero complex multiplications. |
+| `thm-nonzero-complex-derivative-iff-oriented-conformal` | thm | A real-differentiable complex map is orientation-preserving conformal at a point iff it is complex differentiable there with nonzero derivative. |
+| `cor-jacobian-determinant-of-a-holomorphic-map` | cor | The Jacobian determinant of a holomorphic map is $\lvert f'\rvert^2$ and is positive exactly where $f'\ne0$. |
+| `thm-c2-holomorphic-components-are-harmonic` | thm | The $C^2$ real and imaginary parts of a holomorphic function satisfy Laplace's equation and form a harmonic-conjugate pair. |
+| `thm-c2-holomorphic-function-has-holomorphic-derivative` | thm | A holomorphic function with $C^2$ components has a holomorphic derivative. |
+| `cor-c2-holomorphic-components-have-nonpositive-hessian-determinant` | cor | Each $C^2$ holomorphic component has nonpositive Hessian determinant; a nondegenerate critical point is a saddle. |
+
+Published B/examples companion (verified from live `items[]`; 13 immutable
+items):
+
+| id | kind | one-line statement |
+|---|---|---|
+| `ex-square-function-from-the-complex-difference-quotient` | ex | Directly from the difference quotient, $z\mapsto z^2$ is entire with derivative $2z$. |
+| `ex-complex-exponential-cauchy-riemann-in-cartesian-and-polar-form` | ex | The complex exponential satisfies Cauchy--Riemann in Cartesian and polar form. |
+| `ex-reciprocal-function-from-the-complex-difference-quotient` | ex | Directly from the difference quotient, $z\mapsto1/z$ is holomorphic off $0$ with derivative $-1/z^2$. |
+| `ex-mobius-map-is-conformal-off-its-pole` | ex | A Möbius map $(az+b)/(cz+d)$ with $ad-bc\ne0$ is conformal wherever $cz+d\ne0$. |
+| `ex-square-map-sends-a-grid-to-orthogonal-parabolas` | ex | The square map sends a Cartesian grid to orthogonal parabolic families away from its critical point. |
+| `fs-real-differentiability-implies-complex-differentiability` | fs | Real differentiability does not imply complex differentiability; conjugation is the counterexample. |
+| `cex-modulus-squared-is-complex-differentiable-only-at-zero` | cex | $z\mapsto\lvert z\rvert^2$ is complex differentiable exactly at $0$ but holomorphic on no neighbourhood of it. |
+| `cex-real-part-is-nowhere-complex-differentiable` | cex | $z\mapsto\operatorname{Re}z$ is real differentiable but nowhere complex differentiable. |
+| `cex-modulus-is-nowhere-complex-differentiable` | cex | $z\mapsto\lvert z\rvert$ is nowhere complex differentiable. |
+| `ex-complex-differentiable-on-the-coordinate-axes-but-holomorphic-nowhere` | ex | $x^3+3xy^2+i(y^3+3x^2y)$ is complex differentiable exactly on the coordinate axes and holomorphic nowhere. |
+| `fs-cauchy-riemann-at-a-point-implies-complex-differentiability` | fs | Cauchy--Riemann at one point does not imply complex differentiability there. |
+| `fs-cauchy-riemann-on-an-open-set-without-regularity-implies-holomorphy` | fs | Existence of partials satisfying Cauchy--Riemann everywhere need not imply holomorphy. |
+| `fs-zero-complex-derivative-on-an-open-set-implies-constant` | fs | Zero complex derivative on an arbitrary, possibly disconnected, open set does not force global constancy. |
+
 DEFS: the identification $\mathbb{C} = \mathbb{R}^2$ as a normed
 $\mathbb{R}$-algebra (well-definedness #1 — a dictionary item, not a
 restatement); **domain** (nonempty connected open subset of $\mathbb{C}$);
@@ -671,17 +765,18 @@ $\partial_z, \partial_{\bar z}$ (#2); **conformal** at a point (#3).
 
 THMS: the derivative is unique; complex differentiable $\Rightarrow$ continuous;
 the algebra of derivatives (sum, product, quotient, chain rule, inverse) — each
-citing the real analogue at 131 only where the argument is identical, and proved
+citing `the-derivative-and-mean-value-theorems` only where the argument is identical, and proved
 where it is not; polynomials are entire and rational functions are holomorphic
 off their poles; **complex differentiable at $a$ $\iff$ real differentiable at
 $a$ with a $\mathbb{C}$-linear total derivative $\iff$
 $\partial_{\bar z}f(a) = 0$ $\iff$ the CAUCHY–RIEMANN equations
 $u_x = v_y,\ u_y = -v_x$ hold at $a$ together with real differentiability**
 (landmark — the four-way equivalence, one item, with the real derivative coming
-from 169); the **$C^1$ converse**: continuous partials on an open set plus CR
-$\Rightarrow$ holomorphic (cites 169's "continuous partials imply
+from `the-total-derivative`); the **$C^1$ converse**: continuous partials on an open set plus CR
+$\Rightarrow$ holomorphic (cites `the-total-derivative`'s "continuous partials imply
 differentiability"); $f' \equiv 0$ on a **domain** $\Rightarrow$ $f$ constant
-(connectedness, 197 — the hypothesis is where the page's only topology enters);
+(cite `connectedness` and `the-topology-of-euclidean-space` — the hypothesis is
+where the page's only topology enters);
 $f$ holomorphic and real-valued on a domain $\Rightarrow$ constant; $f$
 holomorphic with $\lvert f\rvert$ constant $\Rightarrow$ constant; $f$
 holomorphic and $\bar f$ holomorphic on a domain $\Rightarrow$ constant;
@@ -717,11 +812,11 @@ items; splitting it invites a citation for a claim the cited item does not make.
 $f$ holomorphic $\Rightarrow$ $f\in C^\infty$ is CA-5 and is not available here.
 CA-13 restates it unconditionally with an agreement remark. Anticipating CA-5
 here is circular reasoning wearing a "clearly" (this is the single most likely
-defect on the page). (iii) $\mathbb{C}$ is not ordered — the false statement is
-already homed at order 50; cite it, do not re-mint. (iv) The identification #1
-is not a formality: the modulus of order 50 is defined from the field norm and
-the modulus of 145 from the Euclidean norm, and they must be shown equal before
-a single estimate is written.
+defect on the page). (iii) $\mathbb{C}$ is not ordered — cite the existing
+false-statement treatment on `field-extensions-and-the-complex-numbers`; do
+not re-mint it. (iv) The identification #1 is not a formality: the algebraic
+modulus on that page and the Euclidean norm on `rn-as-a-normed-space` must be
+shown equal before a single estimate is written.
 
 Forward references: NONE load-bearing. None expected.
 
@@ -730,6 +825,11 @@ Forward references: NONE load-bearing. None expected.
 `requires`: CA-1, `power-series-and-real-analytic-functions`,
 `absolute-convergence-and-rearrangement`,
 `uniform-convergence-of-functions`
+
+Pair sources (exact harvested locators): Ahlfors Ch. 2 §§2.1--2.5
+(“Sequences” through “Abel's Limit Theorem”); Stein--Shakarchi Ch. 1,
+“Functions” (“Holomorphic functions,” “Power series”); Weber Ch. 1,
+“Holomorphic Functions” and “Goursat's Theorem.”
 
 Proposed A-page inventory (dependency order; 20 items):
 
@@ -743,7 +843,7 @@ Proposed A-page inventory (dependency order; 20 items):
 | `thm-complex-power-series-coefficient-formula` | thm | The coefficient of $(z-a)^n$ is $f^{(n)}(a)/n!$. |
 | `cor-uniqueness-complex-power-series-coefficients` | cor | Two series agreeing near their common centre have identical coefficients. |
 | `thm-analytic-functions-are-holomorphic` | thm | Local power-series representability implies holomorphy. |
-| `thm-reexpansion-complex-power-series` | thm | A series centred at $a$ re-expands about $b$ and equals the same function at least on $D(b,R-|b-a|)$. |
+| `thm-reexpansion-complex-power-series` | thm | A series centred at $a$ re-expands about $b$ and equals the same function at least on $D(b,R-\lvert b-a\rvert)$. |
 | `thm-sums-and-scalars-of-complex-power-series` | thm | Termwise linear combinations represent the corresponding functions on the common disc. |
 | `thm-cauchy-products-of-complex-power-series` | thm | The Cauchy product represents the product function on the common disc. |
 | `thm-reciprocal-complex-power-series` | thm | If the value at the centre is nonzero, the reciprocal has a unique power-series expansion on some centred disc. |
@@ -757,13 +857,14 @@ Proposed A-page inventory (dependency order; 20 items):
 | `thm-abel-limit-theorem-complex-power-series` | thm | If $\sum c_n$ converges, then $\sum c_nz^n$ tends to its sum as $z\to1$ within every fixed Stolz region. |
 
 DEFS: a formal power series over $\mathbb{C}$ and its **radius of convergence**
-(cite Cauchy–Hadamard from 167, do not re-mint); the disc of convergence;
+(cite the complex Cauchy–Hadamard item on
+`the-complex-exponential-and-eulers-formula`, do not re-mint); the disc of convergence;
 **analytic** on an open set (locally the sum of a convergent power series);
 the complex $\sin, \cos, \sinh, \cosh$ by their series.
 
 THMS: absolute convergence inside the disc, divergence outside, **locally
 uniform** convergence on compact subsets but **not** on the open disc in
-general (cites 147); the derived series has the same radius; **termwise
+general (cite `uniform-convergence-of-functions`); the derived series has the same radius; **termwise
 differentiation**: the sum is holomorphic on the open disc with the derived
 series as derivative (landmark), hence $C^\infty$ there; the **coefficient
 formula** $c_n = f^{(n)}(a)/n!$; **uniqueness of the coefficients**;
@@ -771,15 +872,18 @@ formula** $c_n = f^{(n)}(a)/n!$; **uniqueness of the coefficients**;
 and the page says so in the order-relative form); **re-expansion about an
 interior point**, with the radius bound $R - \lvert b-a\rvert$ — this is the
 item that makes analyticity a LOCAL property and is what CA-5's identity theorem
-consumes; sums, products (Cauchy product, from 115), reciprocals and
+consumes; sums, products (Cauchy product, from
+`absolute-convergence-and-rearrangement`), reciprocals and
 compositions of power series; $\exp$, $\sin$, $\cos$ are entire; the addition
-formulas by the Cauchy product (agreement remark with 167, which proves them by
-a different route); the **zero sets**: $\sin z = 0 \iff z\in\pi\mathbb{Z}$ and
+formulas by the Cauchy product (agreement remark with
+`the-complex-exponential-and-eulers-formula`, which proves them by a different
+route); the **zero sets**: $\sin z = 0 \iff z\in\pi\mathbb{Z}$ and
 $\cos z = 0 \iff z\in \pi/2 + \pi\mathbb{Z}$ — no non-real zeros, proved here
 because the residue calculus of CA-9 needs it; $\lvert\sin\rvert$ and
 $\lvert\cos\rvert$ are unbounded on $\mathbb{C}$; **Abel's limit theorem** over
-$\mathbb{C}$, on a Stolz angle (cite 151's real version; the complex statement
-is genuinely different and must be proved).
+$\mathbb{C}$, on a Stolz angle (cite the real version on
+`power-series-and-real-analytic-functions`; the complex statement is genuinely
+different and must be proved).
 
 FS: a power series converges uniformly on its open disc of convergence;
 $\sin$ and $\cos$ are bounded on $\mathbb{C}$; every
@@ -787,22 +891,24 @@ $C^\infty$ function $\mathbb{C}\to\mathbb{C}$ (as a map of $\mathbb{R}^2$) is
 analytic.
 
 B: $\sum z^n$, $\sum z^n/n$, $\sum z^n/n^2$ with three different boundary
-behaviours on $\lvert z\rvert=1$ (the complex refinement of 151's real triple);
+behaviours on $\lvert z\rvert=1$ (the complex refinement of the real
+power-series page's triple);
 $\sum z^{n!}$; re-expansion of $1/(1-z)$ about $i/2$ with its exact radius;
 $\sin(iy) = i\sinh y$ computed.
 CEX: $1/(1+z^2)$ is real-analytic on all of $\mathbb{R}$ with radius exactly
 $1$ about $0$ — **the classical demonstration that the real radius of
 convergence is explained only by the complex singularities** (this example is
-why the page exists, and it must be stated as the answer to a question order
-151 could pose but not answer); $e^{-1/x^2}$ on $\mathbb{R}$ is $C^\infty$ and
+why the page exists, and it answers a question the real power-series page could
+pose but not answer); $e^{-1/x^2}$ on $\mathbb{R}$ is $C^\infty$ and
 not analytic, and its complex extension shows why (cite the published
 `cex-smooth-function-not-equal-to-its-maclaurin-series` on
 `the-exponential-function-examples`).
 
 Traps. (i) Do **not** re-mint Cauchy–Hadamard or the definition of a complex
-series; order 167 owns both. This page adds differentiability, not convergence.
+series; `the-complex-exponential-and-eulers-formula` owns both. This page adds
+differentiability, not convergence.
 (ii) The zero sets of $\sin$ and $\cos$
-need $\ker\exp = 2\pi i\mathbb{Z}$ from 167; cite it, do not redo the
+need $\ker\exp = 2\pi i\mathbb{Z}$ from that page; cite it, do not redo the
 periodicity analysis. (iii) "Analytic" and "holomorphic" are DIFFERENT words on
 this page and stay different until CA-5 identifies them; a step that slides
 between them here is the defect to hunt.
@@ -816,6 +922,11 @@ converse is proved at ...") is permitted, declared.
 `arc-length-and-rectifiable-curves`,
 `bounded-variation-and-riemann-stieltjes`
 
+Pair sources (exact harvested locators): Ahlfors Ch. 4 §§1.1--1.3 (“Line
+Integrals,” “Rectifiable Arcs,” “Line Integrals as Functions of Arcs”);
+Stein--Shakarchi Ch. 1, “Integration along curves”; Howell--Mathews Ch. 6
+§§6.1--6.2 (“Complex integrals,” “Contours”).
+
 Proposed A-page inventory (dependency order; 18 items):
 
 | id | kind | one-line statement |
@@ -823,15 +934,15 @@ Proposed A-page inventory (dependency order; 18 items):
 | `rem-complex-valued-riemann-integral-dictionary` | rem | Identify the complex-valued integral with the published vector-valued integral under $\mathbb C\cong\mathbb R^2$, including the norm inequality. |
 | `rem-complex-contour-and-length-dictionary` | rem | Specialise the published $\mathbb R^2$ path, reversal, concatenation, trace and arc-length notions rather than defining a second path theory. |
 | `def-complex-contour-integral` | def | Define $\int_\gamma f\,dz=\int f(\gamma(t))\gamma'(t)\,dt$, summed over the smooth pieces. |
-| `def-complex-absolute-line-integral` | def | Define $\int_\gamma f\,|dz|=\int f(\gamma(t))|\gamma'(t)|\,dt$ and distinguish it from the complex contour integral. |
+| `def-complex-absolute-line-integral` | def | Define $\int_\gamma f\,\lvert dz\rvert=\int f(\gamma(t))\lvert\gamma'(t)\rvert\,dt$ and distinguish it from the complex contour integral. |
 | `def-complex-primitive-on-open-set` | def | A primitive of $f$ is a holomorphic $F$ with $F'=f$. |
 | `lem-complex-contour-integral-partition-independence` | lem | The piecewise sum defining the contour integral is independent of the admissible subdivision. |
 | `thm-linearity-complex-contour-integral` | thm | Contour integration is complex linear in the integrand. |
 | `thm-reversal-and-concatenation-contour-integrals` | thm | Reversal negates a contour integral and concatenation adds the integrals. |
 | `thm-complex-contour-integral-reparametrization-invariance` | thm | Orientation-preserving bijective piecewise-$C^1$ reparametrisation preserves the integral, while orientation reversal negates it. |
 | `rem-complex-contour-length-agreement` | rem | Cite the published speed-integral/arc-length agreement for complex contours. |
-| `thm-contour-integral-absolute-value-bound` | thm | $|\int_\gamma f\,dz|\le\int_\gamma|f|\,|dz|$. |
-| `cor-ml-estimate-contour-integral` | cor | $|\int_\gamma f\,dz|\le \max_{\gamma^*}|f|\,L(\gamma)$. |
+| `thm-contour-integral-absolute-value-bound` | thm | $\lvert\int_\gamma f\,dz\rvert\le\int_\gamma\lvert f\rvert\,\lvert dz\rvert$. |
+| `cor-ml-estimate-contour-integral` | cor | $\lvert\int_\gamma f\,dz\rvert\le \max_{\gamma^*}\lvert f\rvert\,L(\gamma)$. |
 | `thm-fundamental-theorem-contour-integrals` | thm | If $F'=f$ near the trace, the integral equals $F(\gamma(b))-F(\gamma(a))$. |
 | `cor-closed-contour-integral-of-derivative-vanishes` | cor | Every derivative integrates to zero around a closed contour. |
 | `thm-primitive-path-independence-criterion` | thm | For continuous $f$ on a domain, a primitive exists exactly when closed-contour integrals vanish, equivalently when integrals depend only on endpoints. |
@@ -849,7 +960,8 @@ of $f$ on an open set.
 
 THMS: linearity in $f$; **additivity under concatenation** and the sign change
 under reversal; **parametrisation independence** (#5, its own item);
-$\ell(\gamma) = \int\lvert\gamma'\rvert$ agrees with the arc length of 159 (#6);
+$\ell(\gamma) = \int\lvert\gamma'\rvert$ agrees with the published arc length on
+`arc-length-and-rectifiable-curves` (#6);
 the **ML estimate** $\lvert\int_\gamma f\rvert \le \sup_{\gamma^\ast}\lvert
 f\rvert\cdot\ell(\gamma)$ (landmark — the workhorse of the whole track);
 $\lvert\int_a^b f\rvert \le \int_a^b\lvert f\rvert$ by the rotation trick (#4);
@@ -859,13 +971,16 @@ containing $\gamma^\ast$ then $\int_\gamma f = F(\gamma(b)) - F(\gamma(a))$
 a continuous $f$ on a domain has a primitive $\iff$ $\int_\gamma f = 0$ for
 every closed contour in it $\iff$ $\int_\gamma f$ depends only on the endpoints
 (landmark; the primitive is built by integrating along polygonal paths, using
-197's open-connected $\Rightarrow$ polygonally connected); **termwise
-integration** of a sequence converging uniformly on $\gamma^\ast$ (cites 147);
+`the-topology-of-euclidean-space`'s open-connected $\Rightarrow$ polygonally
+connected theorem); **termwise integration** of a sequence converging uniformly
+on $\gamma^\ast$ (cite `uniform-convergence-of-functions`);
 **the fundamental computation** $\int_{\lvert z-a\rvert = r}(z-a)^n\,dz$ equals
 $2\pi i$ if $n = -1$ and $0$ otherwise (landmark — everything downstream is this
 computation plus an estimate); the **Riemann–Stieltjes definition** over a
 rectifiable path and the theorem that the two definitions agree on
-piecewise-$C^1$ paths (CX-D5; cites 141 and 159).
+piecewise-$C^1$ paths (CX-D5; cite
+`bounded-variation-and-riemann-stieltjes` and
+`arc-length-and-rectifiable-curves`).
 
 FS: $\int_\gamma f\,dz$ depends only on the trace $\gamma^\ast$ (witness: the
 circle traversed twice, or with the opposite orientation); every continuous $f$
@@ -884,7 +999,7 @@ CEX: $\int_{\lvert z\rvert=1}\bar z\,dz = 2\pi i \ne 0$ although $\bar z$ is
 continuous — the first sign that holomorphy, not continuity, is what makes
 Cauchy's theorem work; the graph of $x\sin(1/x)$ as a continuous
 non-rectifiable path, so "contour" is not "continuous curve" (agreement with
-159's item, which is homed there — cite, do not rebuild).
+the item on `arc-length-and-rectifiable-curves` — cite, do not rebuild).
 
 Traps. (i) Piecewise-$C^1$ means the derivative may jump at finitely many
 points; every proof that integrates $\gamma'$ must handle the subdivision
@@ -893,15 +1008,22 @@ e^{-i\theta}I$ for a suitable $\theta$) is the one step that is genuinely not
 componentwise; a componentwise "proof" is wrong by a factor of $\sqrt2$ and is
 the classic error here. (iii) The RS generalisation is ONE theorem, and nothing
 else in the track may cite it — if a later page finds itself needing rectifiable
-contours, that is a scaffolding error, not a licence. (iv) `def-infinite-product`
-and the RS integral both already exist in the library at 115/141; grep before
-minting.
+contours, that is a scaffolding error, not a licence. (iv) The vector-valued
+integral, path operations, length and RS integral already exist; cite their
+published item ids before minting anything.
 
 Forward references: NONE load-bearing.
 
 ## CA-4. Goursat's Theorem and Cauchy's Theorem in a Convex Domain
 
 `requires`: CA-3, CA-2, `rn-as-a-normed-space`
+
+Pair sources (exact harvested locators): Ahlfors Ch. 4 §§1.4--2.3 (“Cauchy's
+Theorem for a Rectangle,” “Cauchy's Theorem in a Disk,” “The Integral
+Formula,” “Higher Derivatives”); Stein--Shakarchi Ch. 2, “Goursat's theorem”
+through “Cauchy's integral formulas”; Howell--Mathews Ch. 6 §§6.3--6.5
+(“Cauchy--Goursat theorem,” “Fundamental theorem for integration,” “Integral
+representations”).
 
 Proposed A-page inventory (dependency order; 13 items):
 
@@ -919,18 +1041,20 @@ Proposed A-page inventory (dependency order; 13 items):
 | `thm-cauchy-integral-formula-circle` | thm | A compactly contained circle represents every holomorphic value in its interior. |
 | `lem-differentiating-cauchy-integrals` | lem | A direct difference-quotient estimate justifies differentiation of the Cauchy kernel under a fixed contour. |
 | `thm-cauchy-integral-formula-higher-derivatives` | thm | $f^{(n)}(z)=\frac{n!}{2\pi i}\int f(\zeta)/(\zeta-z)^{n+1}\,d\zeta$. |
-| `cor-cauchy-inequalities` | cor | $|f^{(n)}(a)|\le n!M_r/r^n$ for every compactly contained circle. |
+| `cor-cauchy-inequalities` | cor | $\lvert f^{(n)}(a)\rvert\le n!M_r/r^n$ for every compactly contained circle. |
 
 DEFS: the triangle $T$ with vertices $p,q,r$ and its boundary contour
 $\partial T$; **star-shaped** and **convex** open subsets of $\mathbb{C}$ (cite
-the convexity of 135/145; do not re-mint); the **keyhole contour** used in the
-integral-formula proof, defined once and named.
+`convexity` and `rn-as-a-normed-space`; do not re-mint). No keyhole contour
+belongs here; the filled difference quotient below is the exact exceptional
+point construction.
 
 THMS: **Goursat's theorem** (landmark): $f$ holomorphic on an open set
 containing a closed triangle $T$ $\Rightarrow$ $\int_{\partial T} f = 0$ — by
 repeated bisection into four triangles, a nested sequence of compact sets with
-diameters $\to 0$ (completeness of $\mathbb{C}$, 167/145; the nested-set
-principle is `equivalent-forms-of-completeness`, 111), and the differentiability
+diameters $\to 0$ (completeness from
+`the-complex-exponential-and-eulers-formula` and `rn-as-a-normed-space`; the
+nested-set principle is `equivalent-forms-of-completeness`), and the differentiability
 estimate at the limit point; **Goursat with an exceptional point**: the same
 conclusion when $f$ is merely continuous at one point $p\in T$ and holomorphic
 elsewhere (this is exactly what the integral formula needs, and it must be its
@@ -980,6 +1104,13 @@ Forward references: NONE load-bearing.
 
 `requires`: CA-4, CA-2
 
+Pair sources (exact harvested locators): Ahlfors Ch. 5 §§1.1--1.3
+(“Weierstrass's Theorem,” “Taylor Series,” “Laurent Series”);
+Stein--Shakarchi Ch. 2, “Applications” (“Morera,” “Sequences of holomorphic
+functions,” “Holomorphic functions defined by integrals”); Weber Ch. 2
+§§2.1--2.4 (“Cauchy Integral Formula” through “Sequences of Holomorphic
+Functions”).
+
 Proposed A-page inventory (dependency order; 18 items):
 
 | id | kind | one-line statement |
@@ -994,7 +1125,7 @@ Proposed A-page inventory (dependency order; 18 items):
 | `thm-zero-order-factorization-holomorphic-function` | thm | A finite zero order $m$ is equivalent to $f(z)=(z-a)^mg(z)$ locally with $g(a)\ne0$. |
 | `cor-cauchy-estimates-taylor-coefficients` | cor | Cauchy's inequalities bound each Taylor coefficient by the circle supremum. |
 | `thm-liouville-bounded-entire-function` | thm | Every bounded entire function is constant. |
-| `thm-entire-polynomial-growth-is-polynomial` | thm | If $|f(z)|\le C(1+|z|)^N$ with $N\ge0$, then $f$ is a polynomial of degree at most $\lfloor N\rfloor$. |
+| `thm-entire-polynomial-growth-is-polynomial` | thm | If $\lvert f(z)\rvert\le C(1+\lvert z\rvert)^N$ with $N\ge0$, then $f$ is a polynomial of degree at most $\lfloor N\rfloor$. |
 | `rem-fundamental-theorem-of-algebra-via-liouville` | rem | Give the Liouville proof while citing the canonical FTA statement rather than minting another theorem. |
 | `thm-morera-triangle-theorem` | thm | A continuous function with zero integral around every compactly contained triangle is holomorphic. |
 | `thm-weierstrass-convergence-holomorphic-functions` | thm | A locally uniform limit of holomorphic functions is holomorphic and every derivative order converges locally uniformly. |
@@ -1017,8 +1148,9 @@ $g(a)\ne 0$ (#7); **Cauchy's estimates** restated for the Taylor coefficients;
 **Liouville's theorem** (landmark), and the extension: an entire function with
 $\lvert f(z)\rvert \le C(1+\lvert z\rvert)^N$ is a polynomial of degree
 $\le N$; **the fundamental theorem of algebra, analytic proof** (landmark) —
-with the CX-D7 agreement remark naming the algebraic proof at 125 and the
-topological one at 241; **Morera's theorem** (continuous with vanishing
+with the CX-D7 agreement remark naming the algebraic proof on
+`the-fundamental-theorem-of-algebra` and the topological proof on
+`applications-of-the-fundamental-group`; **Morera's theorem** (continuous with vanishing
 integrals over all triangles $\Rightarrow$ holomorphic — the converse of
 Goursat, and the tool CA-19/CA-21 use for parameter integrals); the
 **Weierstrass convergence theorem** (landmark): a locally uniform limit of
@@ -1027,7 +1159,8 @@ uniformly for every $k$ — Morera for the first half, the integral formula for
 the second; the corresponding statement for a locally uniformly convergent
 series; the **holomorphy of a parameter integral** $F(z) = \int_a^b
 \varphi(t,z)\,dt$ when $\varphi(t,\cdot)$ is holomorphic and $\varphi$ is
-continuous (Morera plus Fubini for the Riemann integral, order 177) — stated
+continuous (Morera plus the Riemann Fubini theorem on
+`fubini-and-change-of-variables`) — stated
 here once, cited by CA-19, CA-21, CA-22 (#28); **the mean value property**
 $f(a) = \frac{1}{2\pi}\int_0^{2\pi} f(a+re^{i\theta})d\theta$.
 
@@ -1048,11 +1181,11 @@ Traps. (i) The radius in "holomorphic $\Rightarrow$ analytic" is the distance
 to the boundary of the DOMAIN OF HOLOMORPHY, not of any disc chosen for
 convenience; a weaker statement here silently weakens CA-6's identity theorem.
 (ii) The FTA remark must be written in the "what THIS proof uses" form, not
-"the library also proves"; order 125 and 241 may not be authored when this is
+"the library also proves"; the algebraic and topological FTA suppliers may not be authored when this is
 (published-claim decay, LEVELS.md §10b). (iii) The parameter-integral lemma
 (#28) is easy to state too strongly; its hypothesis is joint continuity plus
-holomorphy in $z$, and Fubini at 177 is for the RIEMANN integral over a
-rectangle — check what 177 actually delivers before relying on it.
+holomorphy in $z$, and the cited Fubini theorem is for the RIEMANN integral
+over a rectangle — check its exact hypotheses before relying on it.
 (iv) `rem-open-mapping-theorem` (‡, functional analysis) is a different theorem;
 the disambiguation belongs on CA-6, but the judge may flag it here.
 
@@ -1061,6 +1194,12 @@ Forward references: NONE load-bearing.
 ## CA-6. The Identity Theorem, the Maximum Principle and the Open Mapping Theorem
 
 `requires`: CA-5
+
+Pair sources (exact harvested locators): Ahlfors Ch. 4 §§3.1--3.4
+(“Removable Singularities. Taylor's Theorem,” “Zeros and Poles,” “The Local
+Mapping,” “The Maximum Principle”); Stein--Shakarchi Ch. 3, “Zeros and poles”
+and “The argument principle and applications”; Weber Ch. 2 §§2.5--2.6
+(“Zeros,” “Isolated Singularities”).
 
 Proposed A-page inventory (dependency order; 18 items):
 
@@ -1079,8 +1218,8 @@ Proposed A-page inventory (dependency order; 18 items):
 | `cor-local-multiplicity-count-holomorphic-map` | cor | After shrinking source and target, every nearby value has total preimage multiplicity $m$, and every nearby noncritical value has $m$ distinct preimages. |
 | `thm-open-mapping-theorem-holomorphic-functions` | thm | Every nonconstant holomorphic function on a domain is open. |
 | `rem-complex-versus-banach-open-mapping-theorems` | rem | Disambiguate this result from the functional-analytic open mapping theorem. |
-| `thm-local-maximum-modulus-principle` | thm | An interior local maximum of $|f|$ forces constancy. |
-| `thm-boundary-maximum-modulus-principle` | thm | If $\Omega$ is bounded and $f\in C(\overline\Omega)\cap H(\Omega)$, the maximum of $|f|$ occurs on $\partial\Omega$. |
+| `thm-local-maximum-modulus-principle` | thm | An interior local maximum of $\lvert f\rvert$ forces constancy. |
+| `thm-boundary-maximum-modulus-principle` | thm | If $\Omega$ is bounded and $f\in C(\overline\Omega)\cap H(\Omega)$, the maximum of $\lvert f\rvert$ occurs on $\partial\Omega$. |
 | `thm-minimum-modulus-principle` | thm | A nowhere-zero holomorphic function cannot attain an interior local modulus minimum unless constant. |
 | `thm-holomorphic-inverse-function-theorem` | thm | $f'(a)\ne0$, local degree one and local biholomorphy are equivalent, and the inverse derivative is reciprocal. |
 | `cor-injective-holomorphic-derivative-nonzero` | cor | Every injective holomorphic function has no critical point and is biholomorphic onto its open image. |
@@ -1094,7 +1233,7 @@ theorem** (landmark): two holomorphic functions on a domain agreeing on a set
 with a limit point in the domain are equal — with the clopen argument stated
 explicitly, and the "in the domain" hypothesis flagged; the corollary that
 $H(\Omega)$ is an integral domain for a domain $\Omega$ (cite the ring
-vocabulary of order 42, do not re-mint); the **local factorisation**
+vocabulary on `rings-subrings-and-integral-domains`, do not re-mint); the **local factorisation**
 $f(z) - f(a) = (z-a)^m g(z)$ with $g(a)\ne0$, and the **local $m$-th root**:
 on a small disc $g$ has a holomorphic $m$-th root, because $g$ is nonvanishing
 on a disc and therefore has a holomorphic logarithm (a primitive of $g'/g$,
@@ -1108,7 +1247,9 @@ local mapping theorem); **the maximum modulus principle** (landmark) in both
 forms: no nonconstant holomorphic function on a domain has a local maximum of
 $\lvert f\rvert$; and if $\Omega$ is bounded and $f$ is continuous on
 $\overline\Omega$ then $\max_{\overline\Omega}\lvert f\rvert$ is attained on
-$\partial\Omega$ (EVT from 123/197); the **minimum modulus principle** (with the
+$\partial\Omega$ (EVT and Euclidean compactness from
+`continuity-ivt-evt-and-uniform-continuity` and
+`the-topology-of-euclidean-space`); the **minimum modulus principle** (with the
 nonvanishing hypothesis, which is where it differs); **$f'(a)\ne0 \iff m=1
 \iff f$ is injective near $a$**, and then $f^{-1}$ is holomorphic — **the
 holomorphic inverse function theorem** (landmark), with $f$ biholomorphic onto
@@ -1125,7 +1266,7 @@ connectedness); a holomorphic function on a domain attaining a local minimum of
 $\lvert f\rvert$ is constant (FALSE — the zero case).
 
 B: the identity theorem used to prove $\sin^2+\cos^2=1$ over $\mathbb{C}$ from
-the real identity (agreement remark with 163); $z\mapsto z^2$ shown $2$-to-$1$
+the real identity (agreement remark with `fundamental-trigonometric-identities`); $z\mapsto z^2$ shown $2$-to-$1$
 near $0$ and injective near $1$; the maximum principle used to bound
 $\lvert p(z)\rvert$ on a disc; Schwarz-lemma-free proof that a nonconstant
 entire function has open image.
@@ -1146,14 +1287,20 @@ BOUNDED $\Omega$ and continuity on the closure; the unbounded case is false and
 the counterexample ($e^{-iz}$ on the upper half plane) belongs on the B page.
 (iii) A disambiguating `rem-` separating this open mapping theorem from the
 Banach one (`rem-open-mapping-theorem`, ‡) is required, and the judge
-conventions should mention it. (iv) `def-integral-domain` and friends live at
-order 42; cite.
+conventions should mention it. (iv) Cite `def-integral-domain` and its
+companions from `rings-subrings-and-integral-domains`.
 
 Forward references: NONE load-bearing.
 
 ## CA-7. The Winding Number and the Global Cauchy Theorem
 
 `requires`: CA-6, `the-topology-of-euclidean-space`
+
+Pair sources (exact harvested locators): Ahlfors Ch. 4 §§4.1--4.7 (“The Index
+of a Point with Respect to a Closed Curve” through “Multiply Connected
+Regions”); Stein--Shakarchi Ch. 3, “Homotopies and simply connected domains”
+and “The complex logarithm”; Weber Ch. 4 §§4.1--4.2 (“Cauchy's Theorem,”
+“Cauchy Integrals”).
 
 Proposed A-page inventory (dependency order; 20 items):
 
@@ -1188,10 +1335,12 @@ cycles; **homologically simply connected** (every cycle in $\Omega$ is
 null-homologous).
 
 THMS: $n(\gamma,a)\in\mathbb{Z}$ (#8a, landmark — the auxiliary-function proof,
-finishing with $\ker\exp = 2\pi i\mathbb{Z}$ from 167); $n(\gamma,\cdot)$ is
+finishing with $\ker\exp = 2\pi i\mathbb{Z}$ from
+`the-complex-exponential-and-eulers-formula`); $n(\gamma,\cdot)$ is
 **constant on each connected component** of $\mathbb{C}\setminus\gamma^\ast$
 (#8b) and **zero on the unbounded component** (#8c, by ML); $\mathbb{C}
-\setminus\gamma^\ast$ has exactly one unbounded component (197);
+\setminus\gamma^\ast$ has exactly one unbounded component by
+`the-topology-of-euclidean-space`;
 $n(\gamma^-,a) = -n(\gamma,a)$, $n(\gamma_1*\gamma_2,a) = n(\gamma_1,a) +
 n(\gamma_2,a)$; the index of the circle $\lvert z - a\rvert = r$ traversed $k$
 times is $k$; **Dixon's proof of the global Cauchy theorem** (landmark): for $f$
@@ -1216,29 +1365,32 @@ FS: $n(\gamma,a)$ depends only on $\gamma^\ast$ (from CA-3's `fs-`, restated in
 index language); every cycle in a connected domain is null-homologous.
 
 B: the index computed for the circle traversed $k$ times, for a figure-eight,
-and for a keyhole contour; the vortex field of order 181 identified as
-$\mathrm{Re}$ and $\mathrm{Im}$ of $1/z$ — **the dictionary item connecting the
-winding number to the closed-not-exact form already scaffolded at 181** (this is
+and for a keyhole contour; the vortex field on
+`line-integrals-and-the-gradient-theorem` identified as $\mathrm{Re}$ and
+$\mathrm{Im}$ of $1/z$ — **the dictionary item connecting the winding number
+to that closed-not-exact form** (this is
 the same fact seen twice and the library must say so); Dixon's proof traced on
 an explicit annulus cycle.
 CEX: the annulus is connected and NOT homologically simply connected, witnessed
 by $\int_{\lvert z\rvert = 1} dz/z = 2\pi i$; a domain where a nonvanishing
-holomorphic function has no logarithm ($z$ on $\mathbb{C}^\times$, from 167's
+holomorphic function has no logarithm ($z$ on $\mathbb{C}^\times$, from
+`the-complex-exponential-and-eulers-formula`'s
 "no continuous logarithm on $\mathbb{C}\setminus\{0\}$" — cite it, and note that
-167 proves the CONTINUOUS statement, which is stronger and is what is wanted).
+the supplier proves the CONTINUOUS statement, which is stronger and is what is wanted).
 
 Traps. (i) #8a is the load-bearing item of the page and its proof has exactly
 one delicate step: $h(t) = (\gamma(t)-a)\exp(-\int_{t_0}^t \gamma'/(\gamma-a))$
 has $h' = 0$ at every point where $\gamma$ is differentiable, and $h$ is
 continuous, so $h$ is constant on $[a,b]$ — the piecewise structure means "$h'=0$
 on each piece plus continuity", not "$h'=0$". Write the subdivision.
-(ii) Dixon's function $g$ must be shown **continuous on $\Omega\times\Omega$**
-including the diagonal; this is the one real analytic estimate in the proof and
-is where expositions cheat. (iii) The chain/cycle formalism (#9) needs the free
-abelian group on paths — cite the free-abelian-group vocabulary from the algebra
-band (orders 34/36) rather than re-minting, and check on disk which A-page item
-carries it. (iv) Do NOT define "simply connected" topologically here; $\pi_1$ is
-order 231, and CA-17 is where the two notions meet. This page's adjective is
+(ii) Dixon's patched Cauchy transform must be corrected locally by
+$n(\Gamma,w)f(w)$ and glued across the trace; do not claim that an auxiliary
+two-variable quotient is globally continuous or that its contour integral is
+entire without constructing these patches. (iii) Define complex chains here as
+finite integral linear combinations of contours; no orphaned general
+free-abelian-group item is a dependency. (iv) Do NOT define "simply connected"
+topologically here; `the-fundamental-group` comes later, and CA-17 is where the
+two notions meet. This page's adjective is
 **homologically** simply connected, and the word is used with that qualifier
 throughout the track until CA-17.
 
@@ -1249,11 +1401,18 @@ permitted, declared.
 
 `requires`: CA-7
 
+Pair sources (exact harvested locators): Ahlfors Ch. 5 §§1.1--1.3
+(“Weierstrass's Theorem,” “Taylor Series,” “Laurent Series”) together with Ch.
+4 §§3.1--3.2 (“Removable Singularities,” “Zeros and Poles”);
+Stein--Shakarchi Ch. 3, “Singularities and meromorphic functions”;
+Howell--Mathews Ch. 7 §§7.3--7.4 (“Laurent series,” “Singularities, zeros and
+poles”).
+
 Proposed A-page inventory (dependency order; 21 items):
 
 | id | kind | one-line statement |
 |---|---|---|
-| `def-complex-annulus` | def | Define $A(a;r,R)=\{r<|z-a|<R\}$, with the $r=0$ and $R=\infty$ conventions explicit. |
+| `def-complex-annulus` | def | Define $A(a;r,R)=\{r<\lvert z-a\rvert<R\}$, with the $r=0$ and $R=\infty$ conventions explicit. |
 | `def-convergent-complex-laurent-series` | def | Define a convergent two-sided analytic Laurent series, distinct from the published formal Laurent-series object. |
 | `def-principal-part-laurent-series` | def | Define the principal part as the negative-power subseries. |
 | `def-isolated-singularity-types` | def | Define removable singularities, poles with order and essential singularities without presupposing exhaustiveness. |
@@ -1265,7 +1424,7 @@ Proposed A-page inventory (dependency order; 21 items):
 | `cor-laurent-coefficients-independent-of-radius` | cor | The coefficient integrals do not depend on the chosen intermediate radius. |
 | `thm-laurent-regular-principal-decomposition` | thm | The function splits uniquely into an interior-holomorphic regular part and an exterior-holomorphic principal part tending to zero at infinity. |
 | `thm-removable-singularity-characterizations` | thm | Boundedness near $a$, $(z-a)f(z)\to0$ and holomorphic extendability across $a$ are equivalent. |
-| `thm-pole-characterizations` | thm | Pole order $m$, finite nonzero principal part of order $m$, $|f|\to\infty$, and a reciprocal zero of order $m$ are equivalent. |
+| `thm-pole-characterizations` | thm | Pole order $m$, finite nonzero principal part of order $m$, $\lvert f\rvert\to\infty$, and a reciprocal zero of order $m$ are equivalent. |
 | `thm-isolated-singularity-trichotomy` | thm | Exactly one of the removable, pole and essential cases occurs. |
 | `thm-casorati-weierstrass` | thm | Every punctured-neighbourhood image at an essential singularity is dense in $\mathbb C$. |
 | `cor-residue-contour-integral-formula` | cor | The residue is $(2\pi i)^{-1}$ times every sufficiently small positive-circle integral. |
@@ -1342,6 +1501,11 @@ sharpens Casorati–Weierstrass) is permitted, declared.
 
 `requires`: CA-8, CA-7, `improper-integrals`, `convexity`
 
+Pair sources (exact harvested locators): Ahlfors Ch. 4 §§5.1--5.3 (“The
+Residue Theorem,” “The Argument Principle,” “Evaluation of Definite
+Integrals”); Stein--Shakarchi Ch. 3, “The residue formula and examples”;
+Howell--Mathews Ch. 8 §§8.1--8.6 (“Residues” through “Branch points”).
+
 Proposed A-page inventory (dependency order; 18 items):
 
 | id | kind | one-line statement |
@@ -1367,8 +1531,9 @@ Proposed A-page inventory (dependency order; 18 items):
 
 DEFS: the **residue theorem's** hypotheses packaged (a cycle null-homologous in
 $\Omega$, avoiding a discrete set $S$ of singularities); the **principal value**
-of a divergent-looking improper integral (cite 143's definition if it exists
-there — check on disk — else define with a dictionary item); the standard
+of a divergent-looking improper integral (cite the authored
+`def-cauchy-principal-value` on `improper-integrals` through the dictionary
+remark; do not redefine it); the standard
 contours: **semicircle**, **rectangle**, **keyhole**, **indented semicircle**,
 **sector**, each defined once as a named contour so later items cite rather than
 redraw.
@@ -1388,21 +1553,21 @@ rational $R$ with $\deg q \ge \deg p + 2$ and no real poles**; the same with
 simple real poles, as a principal value; **$\int_{-\infty}^{\infty}
 R(x)e^{i\lambda x}dx$** by Jordan's lemma; **$\int_0^{2\pi} R(\cos\theta,
 \sin\theta)d\theta$** by the substitution $z = e^{i\theta}$ (the dictionary item
-turning a real trigonometric integral into a contour integral, using 167's polar
-form); **$\int_0^\infty x^{\alpha-1}R(x)dx$ by the keyhole**, which needs a
+turning a real trigonometric integral into a contour integral, using the polar
+form on `the-complex-exponential-and-eulers-formula`); **$\int_0^\infty x^{\alpha-1}R(x)dx$ by the keyhole**, which needs a
 branch of $z^{\alpha-1}$ and therefore cites well-definedness #16/#18 forward
 from... **no** — see traps; **summation of series by residues**: for rational
 $f=O(z^{-2})$ with no integer pole, $\sum_{n\in\mathbb{Z}}f(n)=-\sum
 \operatorname{Res}(\pi\cot(\pi z)f(z))$, and analogously with $\pi\csc$ for
 the alternating sum. **The Basel sum $\sum 1/n^2 = \pi^2/6$** is instead a
 separate direct rectangle computation with $\pi\cot(\pi z)/z^2$, since
-$1/z^2$ violates the no-integer-pole hypothesis (agreement remark with
-order 161, which proves it by a real route — the library will hold two proofs
-and must say so).
+$1/z^2$ violates the no-integer-pole hypothesis (agreement remark with the
+planned real proof on `pi-the-equivalent-characterizations` — the library will
+hold two proofs and must say so).
 
 FS: the residue theorem applies to any cycle in $\Omega$ (the null-homologous
 hypothesis); $\int_{-\infty}^\infty$ exists whenever the principal value does
-(witness $x/(1+x^2)$, citing 143); a rational function with $\deg q = \deg p+1$
+(witness $x/(1+x^2)$, citing `improper-integrals`); a rational function with $\deg q = \deg p+1$
 has a convergent improper integral; the large-arc estimate holds whenever
 $f\to0$ (witness: $1/z$ — $zf(z)\to 0$ is the right hypothesis, not $f\to0$).
 
@@ -1413,7 +1578,7 @@ $\int_0^{2\pi}\frac{d\theta}{a+\cos\theta}$,
 $\int_0^\infty \frac{x^{\alpha-1}}{1+x}dx = \pi/\sin\pi\alpha$ (keyhole),
 $\int_0^\infty e^{-x^2}\cos(2bx)dx$ by a rectangle, the Basel sum.
 CEX: $\int_{-\infty}^{\infty}\frac{\sin x}{x}dx$ converges improperly and not
-absolutely (cite 143); a contour choice that fails because the arc estimate does
+absolutely (cite `improper-integrals`); a contour choice that fails because the arc estimate does
 not apply; a residue computation that gives the wrong answer if the pole's
 order is misjudged.
 
@@ -1429,8 +1594,8 @@ $[0,\pi/2]$ — derive it from
 `cor-second-derivative-characterises-convexity` applied to $-\sin$ and CA-2's
 complex-sine derivative agreement; no unsourced trigonometric estimate is
 assumed.
-(iv) The Basel agreement remark: order 161 may be unauthored when this is
-written; use the non-decaying form.
+(iv) The Basel agreement remark: `pi-the-equivalent-characterizations` may be
+unauthored when this is written; use the non-decaying form.
 
 Forward references: NONE load-bearing; CA-7 supplies the logarithm branch used
 by the keyhole items.
@@ -1438,6 +1603,11 @@ by the keyhole items.
 ## CA-10. The Argument Principle and Rouché's Theorem
 
 `requires`: CA-9
+
+Pair sources (exact harvested locators): Ahlfors Ch. 4 §§5.1--5.3 (“The
+Residue Theorem,” “The Argument Principle,” “Evaluation of Definite
+Integrals”); Stein--Shakarchi Ch. 3, “The argument principle and
+applications”; Howell--Mathews Ch. 8 §8.7 (“Argument principle and Rouché”).
 
 Proposed A-page inventory (dependency order; 16 items):
 
@@ -1450,7 +1620,7 @@ Proposed A-page inventory (dependency order; 16 items):
 | `thm-argument-principle-as-image-winding-number` | thm | For holomorphic $f$ nonzero on the cycle, the integral is $n(f\circ\Gamma,0)$, with the contour substitution proved. |
 | `cor-argument-principle-counts-preimages` | cor | Applying the principle to $f-w$ counts preimages of $w$ with multiplicity. |
 | `thm-weighted-argument-principle` | thm | Integrating $g f'/f$ sums the values of $g$ over zeros minus poles with orders and winding weights. |
-| `thm-rouche-theorem` | thm | If $|f-g|<|g|$ on the trace under the classical holomorphic hypotheses, the winding-weighted zero counts agree. |
+| `thm-rouche-theorem` | thm | If $\lvert f-g\rvert<\lvert g\rvert$ on the trace under the classical holomorphic hypotheses, the winding-weighted zero counts agree. |
 | `rem-fundamental-theorem-of-algebra-via-rouche` | rem | Give the leading-term proof while citing the canonical FTA statement. |
 | `cor-local-zero-count-via-rouche` | cor | Small perturbations retain the total local multiplicity in a sufficiently small disc. |
 | `thm-continuity-of-zeros-locally-uniform-convergence` | thm | Around every isolated zero of a nonzero limit, all sufficiently late functions have the same total zero multiplicity. |
@@ -1522,6 +1692,11 @@ Forward references: NONE load-bearing.
 
 `requires`: CA-10, `compactness`, `the-topology-of-euclidean-space`
 
+Pair sources (exact harvested locators): Ahlfors Ch. 3 §§2.2--3.5 (“The
+Linear Group,” “The Cross Ratio,” “Symmetry,” “Oriented Circles,” “Families
+of Circles”); Stein--Shakarchi Ch. 8, “Conformal equivalence and examples”;
+Weber Ch. 1, “Möbius Transformations” and “Inversion.”
+
 Proposed A-page inventory (dependency order; 22 items):
 
 | id | kind | one-line statement |
@@ -1561,7 +1736,7 @@ a circline.
 THMS: $\widehat{\mathbb{C}}$ is compact, Hausdorff, connected, and
 **homeomorphic to $S^2$** by stereographic projection (#13; the explicit
 formulas, with continuity of each cited into the analysis machinery, and
-compact-to-Hausdorff from 195); the chordal metric induces the topology; the
+compact-to-Hausdorff from `compactness`); the chordal metric induces the topology; the
 Möbius transformations form a **group** under composition, generated by
 translations, dilations/rotations and $z\mapsto1/z$ (landmark); $\mathrm{GL}_2
 (\mathbb{C})\to\operatorname{M\ddot ob}$ is surjective with kernel the scalars
@@ -1608,10 +1783,12 @@ library ever says "holomorphic on a space that is not an open subset of
 $\mathbb{C}$". Write the two charts, the overlap, and the transition map as
 numbered items; SC-1 and CA-20 both reuse the pattern. (ii) The one-point
 compactification and "compact Hausdorff, continuous bijection from a compact
-space" both live at order 195; cite, do not rebuild. (iii) Classification uses
+space" both live on `compactness`; cite, do not rebuild. (iii) Classification uses
 the projective invariant $\operatorname{tr}^2/\det$ and the conjugacy
 multiplier; a bare trace is not defined on $PGL_2(\mathbb C)$. (iv) $\mathrm{GL}_2$,
-kernels and quotient groups come from the algebra band (orders 30/32/74); cite.
+kernels and quotient groups come from the stable matrix,
+`group-homomorphisms-and-the-isomorphism-theorems`, and
+`normal-subgroups-and-quotient-groups` pages; cite their exact items.
 
 Forward references: NONE load-bearing.
 
@@ -1619,6 +1796,12 @@ Forward references: NONE load-bearing.
 
 `requires`: CA-11, CA-8, CA-7, `the-logarithm-and-general-powers`,
 `roots-and-rational-powers`
+
+Pair sources (exact harvested locators): Ahlfors Ch. 3 §§3.1--4.3
+(circle-family geometry, “The Logarithm,” “A Survey of Elementary Mappings”);
+Stein--Shakarchi Ch. 8 §§1--4 (conformal equivalence, disc/half-plane,
+Schwarz lemma and automorphism groups); Howell--Mathews Ch. 9 §§9.1--9.4
+(conformal basics, bilinear, elementary and trigonometric maps).
 
 **Placement decision.** CA-7 owns well-definedness rows **16 and 17** (branch
 of argument/logarithm, normalisation and uniqueness), so CA-9 can cite them.
@@ -1635,8 +1818,8 @@ Proposed A-page inventory (dependency order; 23 items):
 | `thm-logarithm-and-complex-power-branch-discrepancies` | thm | Logarithm branches differ by $2\pi in$, corresponding powers by $e^{2\pi in\alpha}$, and product/exponent laws require all points to lie in the declared branch domains. |
 | `def-conformal-equivalence-and-automorphism-group` | def | Define biholomorphic equivalence and its self-map group for plane domains. |
 | `def-unit-disc-upper-half-plane-and-blaschke-factor` | def | Fix $\mathbb D$, $\mathbb H$ and $\varphi_a(z)=(a-z)/(1-\bar az)$. |
-| `def-poincare-metric-and-distance-unit-disc` | def | Fix $ds=2|dz|/(1-|z|^2)$ and its induced path distance. |
-| `thm-poincare-distance-formula-and-invariance` | thm | $d_{\mathbb D}(z,w)=2\operatorname{artanh}|\varphi_z(w)|$, and disc automorphisms are isometries. |
+| `def-poincare-metric-and-distance-unit-disc` | def | Fix $ds=2\lvert dz\rvert/(1-\lvert z\rvert^2)$ and its induced path distance. |
+| `thm-poincare-distance-formula-and-invariance` | thm | $d_{\mathbb D}(z,w)=2\operatorname{artanh}\lvert\varphi_z(w)\rvert$, and disc automorphisms are isometries. |
 | `thm-schwarz-lemma-with-equality` | thm | A disc self-map fixing zero contracts modulus and derivative, with both equality clauses characterizing rotations. |
 | `thm-schwarz-pick-lemma` | thm | Every disc self-map contracts the pseudohyperbolic/Poincaré distance, with equality rigidity. |
 | `thm-blaschke-factor-disc-involution` | thm | $\varphi_a$ is a disc automorphism interchanging $0$ and $a$ and satisfying $\varphi_a^2=\mathrm{id}$. |
@@ -1648,7 +1831,7 @@ Proposed A-page inventory (dependency order; 23 items):
 | `thm-root-conformal-equivalence-slit-domain-sector` | thm | A chosen $n$th-root branch maps the slit plane biholomorphically to the corresponding $2\pi/n$ sector. |
 | `thm-principal-logarithm-slit-plane-strip-equivalence` | thm | $\operatorname{Log}:\mathbb C\setminus(-\infty,0]\to\{-\pi<\Im w<\pi\}$ is biholomorphic. |
 | `thm-exponential-strip-slit-plane-equivalence` | thm | The exponential is the inverse on that open strip. |
-| `thm-joukowski-exterior-segment-complement-equivalence` | thm | $(z+z^{-1})/2$ maps $|z|>1$ biholomorphically onto $\mathbb C\setminus[-1,1]$. |
+| `thm-joukowski-exterior-segment-complement-equivalence` | thm | $(z+z^{-1})/2$ maps $\lvert z\rvert>1$ biholomorphically onto $\mathbb C\setminus[-1,1]$. |
 | `thm-sine-half-strip-upper-half-plane-equivalence` | thm | $\sin$ maps $\{-\pi/2<\Re z<\pi/2,\ \Im z>0\}$ biholomorphically onto $\mathbb H$. |
 | `thm-three-simply-connected-models-pairwise-nonequivalent` | thm | $\widehat{\mathbb C}$, $\mathbb C$ and $\mathbb D$ are pairwise non-biholomorphic. |
 
@@ -1664,10 +1847,11 @@ with this normalisation fixed for every later surface page.
 THMS: existence and uniqueness-up-to-$2\pi i\mathbb{Z}$ of a branch of $\log$
 on a homologically simply connected domain avoiding $0$ (#17; the theorem is
 CA-7's, this page names it); **no continuous branch of $\arg$ exists on
-$\mathbb{C}^\times$** (cite 167, which proves the stronger continuous
+$\mathbb{C}^\times$** (cite `the-complex-exponential-and-eulers-formula`, which proves the stronger continuous
 statement); the two dictionary items for $z^\alpha$ (#18): agreement with the
-integer power (order 16), and agreement with the real $x^\alpha$ for $x>0$
-only for real $\alpha$, under the principal branch (order 155); the
+integer power (`roots-and-rational-powers`), and agreement with the real
+$x^\alpha$ for $x>0$ only for real $\alpha$, under the principal branch
+(`the-logarithm-and-general-powers`); the
 branch-dependent failure of $(z^a)^b =
 z^{ab}$ and of $\log(zw) = \log z + \log w$ (stated as theorems about the
 discrepancy lying in $2\pi i\mathbb{Z}$, not as slogans); **the Schwarz lemma**
@@ -1691,7 +1875,8 @@ $\mathbb{D}$ (Liouville) — the three simply connected model domains as
 genuinely three, which is what CA-16's exclusion of $\Omega = \mathbb{C}$ means.
 
 FS: $\log(zw) = \log z + \log w$ for the principal branch (witness
-$z = w = -1$); $(z^a)^b = z^{ab}$ (witness from 167's B page, or rebuilt here);
+$z = w = -1$); $(z^a)^b = z^{ab}$ (refute by an explicit declared-branch
+computation here; no examples-companion item is a dependency);
 $\sqrt{zw} = \sqrt z\sqrt w$; a conformal map preserves lengths; every
 angle-preserving map is holomorphic (witness: $\bar z$ preserves angle
 magnitudes and reverses orientation — the reason "conformal" carries
@@ -1728,6 +1913,12 @@ Forward references: NONE load-bearing.
 ## CA-13. Harmonic Functions and the Poisson Integral
 
 `requires`: CA-7, CA-6, `mixed-partials-taylor-and-extrema`
+
+Pair sources (exact harvested locators): Axler--Bourdon--Ramey Ch. 1
+(“Mean-Value,” “Maximum,” “Poisson Kernel for Ball,” “Dirichlet Problem for
+Ball”) and Ch. 3 (“Harnack Inequality/Principle”); Khoruzhenko §§1.1--1.3
+(“Harmonic and holomorphic,” “Poisson integral,” “Positive harmonic
+functions”); Schlag Ch. 3 §1 (“The Poisson kernel”).
 
 Proposed A-page inventory (dependency order; 26 items, below the 60-item split
 ceiling):
@@ -1815,7 +2006,8 @@ Traps. (i) The agreement remark with CA-1's $C^2$-hypothesised harmonicity item
 is mandatory; without it the library states the same theorem twice with
 different hypotheses and never connects them (the level-7 two-notions defect).
 (ii) $\Delta$, $u_{xx}$, $u_{yy}$ and the symmetry of mixed partials come from
-order 171; cite `Clairaut–Schwarz` rather than assuming it. (iii) The
+`mixed-partials-taylor-and-extrema`; cite `thm-clairaut-schwarz-mixed-partials`
+rather than assuming it. (iii) The
 concentration property of $P_r$ is an $\varepsilon$-$\delta$ argument with a
 split integral; it is the only real analysis on the page and is where proofs
 wave. (iv) Harnack's theorem's "or $+\infty$" clause must be in the Statement.
@@ -1826,6 +2018,12 @@ Forward references: NONE load-bearing.
 
 `requires`: CA-13, `the-topology-of-euclidean-space`, the measure-theory
 Lebesgue-integral and monotone/Fatou convergence interfaces
+
+Pair sources (exact harvested locators): Axler--Bourdon--Ramey Ch. 11
+(“Dirichlet,” “Subharmonic,” “Perron,” “Barriers and Geometric Criteria”);
+Khoruzhenko §§2.1--2.5 and §§4.1--4.2 (USC/subharmonic theory, Perron function,
+harmonic measure); Schlag Ch. 9 §§3--4 (“Perron construction,” “Boundary
+behaviour”).
 
 Proposed A-page inventory (dependency order; 31 items):
 
@@ -1838,8 +2036,8 @@ Proposed A-page inventory (dependency order; 31 items):
 | `thm-harmonic-majorant-characterization-of-plane-subharmonicity` | thm | Submean subharmonicity is equivalent to comparison with harmonic majorants on compact discs. |
 | `thm-c-two-characterization-of-plane-subharmonicity` | thm | For $C^2$ functions, subharmonicity is equivalent to $\Delta u\ge0$. |
 | `thm-plane-subharmonic-functions-are-locally-integrable` | thm | A nontrivial subharmonic function lies in $L^1_{\rm loc}$. |
-| `thm-log-modulus-of-a-holomorphic-function-is-subharmonic` | thm | $\log|f|$, with value $-\infty$ at zeros, is subharmonic. |
-| `cor-modulus-powers-of-holomorphic-functions-are-subharmonic` | cor | $|f|^p$ is subharmonic for every $p>0$. |
+| `thm-log-modulus-of-a-holomorphic-function-is-subharmonic` | thm | $\log\lvert f\rvert$, with value $-\infty$ at zeros, is subharmonic. |
+| `cor-modulus-powers-of-holomorphic-functions-are-subharmonic` | cor | $\lvert f\rvert^p$ is subharmonic for every $p>0$. |
 | `lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity` | lem | Nonnegative finite sums and finite maxima preserve the class. |
 | `thm-decreasing-limit-theorem-for-plane-subharmonic-functions` | thm | A decreasing limit is subharmonic or identically $-\infty$ componentwise. |
 | `def-upper-semicontinuous-regularization` | def | Define $v^*(z)=\limsup_{w\to z}v(w)$ and prove it is the least USC majorant. |
@@ -1932,6 +2130,11 @@ denial.
 `requires`: CA-13, CA-11, CA-10,
 `approximation-and-compactness-in-ck`
 
+Pair sources (exact harvested locators): Weber Ch. 5 §§5.1--5.2 (“Montel's
+Theorem,” “Riemann Mapping Theorem”); Stein--Shakarchi Ch. 2,
+“Applications—Sequences of holomorphic functions,” and Ch. 8, “Riemann
+mapping and Montel”; Axler--Bourdon--Ramey Ch. 2, “Normal Families.”
+
 Proposed A-page inventory (dependency order; 18 items):
 
 | id | kind | one-line statement |
@@ -1963,7 +2166,8 @@ and meromorphic normality.
 
 THMS: the canonical compact exhaustion $K_n = \{z\in\Omega : \lvert z\rvert\le n,\
 d(z,\partial\Omega)\ge1/n\}$ exists, is increasing with $K_n \subseteq
-\mathrm{int}\,K_{n+1}$ and exhausts $\Omega$ (a real point-set item, citing 197);
+\mathrm{int}\,K_{n+1}$ and exhausts $\Omega$ (a real point-set item, citing
+`the-topology-of-euclidean-space`);
 the metric $d(f,g)=\sum 2^{-n}\min(1,\sup_{K_n}\lvert f-g\rvert)$ is a metric
 inducing local uniform convergence, and **different exhaustions give the same
 topology** (#22); $C(\Omega,\mathbb{C})$ is complete in it and $H(\Omega)$ is
@@ -1971,8 +2175,9 @@ topology** (#22); $C(\Omega,\mathbb{C})$ is complete in it and $H(\Omega)$ is
 equicontinuous** for holomorphic families (landmark — Cauchy's integral formula
 applied to $f(z)-f(w)$, the one genuinely complex-analytic step);
 **Montel's theorem** (landmark): a locally bounded family in $H(\Omega)$ is
-normal — Arzelà–Ascoli on each $K_n$ (order 149) plus a diagonal extraction,
-with the **choice cost (AC$_\omega$/DC) inherited from 149 and named in the
+normal — the compactness theorem on `approximation-and-compactness-in-ck`
+applied to each $K_n$, plus a diagonal extraction,
+with the **choice cost (AC$_\omega$/DC) inherited from that supplier and named in the
 Statement**; the converse (normal $\Rightarrow$ locally bounded) for families in
 $H(\Omega)$; **Vitali–Porter**: a locally bounded family converging pointwise on
 a set with a limit point converges locally uniformly (Montel plus the identity
@@ -1999,11 +2204,13 @@ $\widehat{\mathbb{C}}$-valued version.
 
 Traps. (i) #22 is the well-definedness obligation people skip; if "normal
 family" depends on an exhaustion, every statement downstream is ambiguous.
-(ii) **Do not re-derive Arzelà–Ascoli.** Order 149 owns it, including its choice
+(ii) **Do not re-derive Arzelà–Ascoli.**
+`approximation-and-compactness-in-ck` owns it, including its choice
 ledger. This page's contribution is the equicontinuity step. (iii) The diagonal
 argument's choice cost is real; name AC$_\omega$/DC in Facts, not silently.
-(iv) The general Ascoli page at 225 is NOT required — 149's $C(K)$ version
-suffices, and declaring 225 as a prerequisite would push this page's
+(iv) The later general `ascoli-arzela` page is NOT required — the $C(K)$
+version on `approximation-and-compactness-in-ck` suffices, and declaring the
+later page as a prerequisite would push this page's
 `requires` needlessly high.
 
 Forward references: NONE load-bearing.
@@ -2011,6 +2218,11 @@ Forward references: NONE load-bearing.
 ## CA-16. The Riemann Mapping Theorem
 
 `requires`: CA-15, CA-12, CA-7
+
+Pair sources (exact harvested locators): Weber Ch. 5 §5.2 (“Riemann Mapping
+Theorem”) and Ch. 7 §7.5 (“Univalent Functions”); Stein--Shakarchi Ch. 8,
+“Riemann mapping and Montel”; Schlag Ch. 9 §2 (“Potential proof of Riemann
+mapping”).
 
 Proposed A-page inventory (dependency order; 18 items):
 
@@ -2020,19 +2232,19 @@ Proposed A-page inventory (dependency order; 18 items):
 | `def-normalized-univalent-class` | def | Define $\mathcal S=\{f\in H(\mathbb D):f\text{ univalent},f(0)=0,f'(0)=1\}$. |
 | `def-riemann-map-extremal-family` | def | Define the univalent maps $\Omega\to\mathbb D$ fixing $z_0$. |
 | `lem-riemann-map-extremal-family-is-nonempty` | lem | A global square root and inversion construct one bounded univalent competitor. |
-| `lem-riemann-map-extremal-derivatives-are-positive-and-bounded` | lem | The supremum of $|f'(z_0)|$ over the extremal family is finite and positive. |
+| `lem-riemann-map-extremal-derivatives-are-positive-and-bounded` | lem | The supremum of $\lvert f'(z_0)\rvert$ over the extremal family is finite and positive. |
 | `lem-riemann-map-extremal-derivative-is-attained` | lem | A maximizing sequence and Montel produce a normalized extremizer. |
 | `lem-nonconstant-local-uniform-limits-of-univalent-functions-are-univalent` | lem | Hurwitz makes every nonconstant local-uniform limit of univalent functions univalent. |
 | `lem-riemann-map-extremizer-is-univalent` | lem | The extremal limit is nonconstant and hence univalent. |
 | `lem-riemann-map-extremizer-is-surjective` | lem | The Koebe square-root enlargement contradicts extremality if a disc value is omitted. |
 | `thm-riemann-mapping-theorem` | thm | Every proper homologically simply connected plane domain is conformally equivalent to $\mathbb D$. |
 | `cor-uniqueness-of-the-normalized-riemann-map` | cor | The Riemann map is unique under $f(z_0)=0$ and $f'(z_0)>0$. |
-| `thm-area-theorem-for-exterior-univalent-functions` | thm | If $g(z)=z^{-1}+\sum_{n\ge1}b_nz^n$ is univalent on $0<|z|<1$, then $\sum n|b_n|^2\le1$. |
-| `cor-bieberbach-second-coefficient-bound` | cor | Every normalized univalent $f(z)=z+a_2z^2+\cdots$ satisfies $|a_2|\le2$. |
+| `thm-area-theorem-for-exterior-univalent-functions` | thm | If $g(z)=z^{-1}+\sum_{n\ge1}b_nz^n$ is univalent on $0<\lvert z\rvert<1$, then $\sum n\lvert b_n\rvert^2\le1$. |
+| `cor-bieberbach-second-coefficient-bound` | cor | Every normalized univalent $f(z)=z+a_2z^2+\cdots$ satisfies $\lvert a_2\rvert\le2$. |
 | `thm-koebe-one-quarter-theorem` | thm | A normalized univalent disc map contains the disc of radius $1/4$. |
-| `thm-koebe-growth-theorem` | thm | For $f\in\mathcal S$ and $|z|=r$, $r/(1+r)^2\le|f(z)|\le r/(1-r)^2$. |
-| `thm-koebe-distortion-theorem` | thm | For $f\in\mathcal S$ and $|z|=r$, $(1-r)/(1+r)^3\le|f'(z)|\le(1+r)/(1-r)^3$. |
-| `cor-quarter-disc-inclusion-for-univalent-functions` | cor | $D(f(a),(1-|a|^2)|f'(a)|/4)\subset f(\mathbb D)$. |
+| `thm-koebe-growth-theorem` | thm | For $f\in\mathcal S$ and $\lvert z\rvert=r$, $r/(1+r)^2\le\lvert f(z)\rvert\le r/(1-r)^2$. |
+| `thm-koebe-distortion-theorem` | thm | For $f\in\mathcal S$ and $\lvert z\rvert=r$, $(1-r)/(1+r)^3\le\lvert f'(z)\rvert\le(1+r)/(1-r)^3$. |
+| `cor-quarter-disc-inclusion-for-univalent-functions` | cor | $D(f(a),(1-\lvert a\rvert^2)\lvert f'(a)\rvert/4)\subset f(\mathbb D)$. |
 | `rem-choice-strength-of-the-riemann-mapping-proof` | rem | The maximizing sequence and Montel extraction use $AC_\omega$/DC; the remainder is ZF. |
 
 DEFS: **univalent** (injective holomorphic); the class $\mathcal{S}$ of
@@ -2051,9 +2263,10 @@ $\lvert f'(z_0)\rvert$ is attained (a maximising sequence — **the DC step**);
 told to state in this form); (4) the extremal $f$ is **onto**, by the
 Koebe square-root enlargement applied to a Blaschke factor (CA-12) —
 the contradiction step; uniqueness by Schwarz (CA-12);
-the exclusion of $\Omega=\mathbb{C}$ is necessary (Liouville, CA-12);
+the exclusion of $\Omega=\mathbb{C}$ is necessary (Liouville, CA-5);
 **the area theorem** for $g(z) = 1/z + \sum b_n z^n$ univalent on the punctured
-disc, $\sum n\lvert b_n\rvert^2 \le 1$ (Green's theorem, order 181);
+disc, $\sum n\lvert b_n\rvert^2 \le 1$ (cite Green's theorem on
+`line-integrals-and-the-gradient-theorem`);
 **Bieberbach's $\lvert a_2\rvert\le2$**; the **Koebe $\tfrac14$ theorem**
 (landmark); the **Koebe distortion and growth estimates**; the corollary that a
 univalent $f$ on $\mathbb{D}$ has $f(\mathbb{D})\supseteq D(f(0),
@@ -2094,13 +2307,19 @@ Forward references: NONE load-bearing.
 `requires`: CA-16, `the-fundamental-group`,
 `covering-spaces-and-lifting`, `the-fundamental-group-of-the-circle`
 
+Pair sources (exact harvested locators): Ahlfors Ch. 4 §§4.1--4.7 (index,
+chains/cycles, simple connectivity, homology and the global Cauchy theorem);
+Stein--Shakarchi Ch. 3, “Homotopies and simply connected domains” and “The
+complex logarithm”; Looijenga Ch. 2 (“Covering spaces,” “Fundamental
+groupoid,” “Computation of fundamental groups”) for the cited topology side.
+
 Proposed A-page inventory (dependency order; 16 items):
 
 | id | kind | one-line statement |
 |---|---|---|
 | `thm-homotopy-invariance-of-holomorphic-line-integrals` | thm | Endpoint-fixed homotopic paths have equal integrals of every holomorphic function. |
 | `cor-cauchy-theorem-for-null-homotopic-loops` | cor | A null-homotopic closed path has zero holomorphic integral. |
-| `thm-winding-number-equals-circle-degree` | thm | $n(\gamma,0)$ is the degree of $\gamma/|\gamma|:S^1\to S^1$, with the orientation convention explicit. |
+| `thm-winding-number-equals-circle-degree` | thm | $n(\gamma,0)$ is the degree of $\gamma/\lvert\gamma\rvert:S^1\to S^1$, with the orientation convention explicit. |
 | `lem-trivial-fundamental-group-implies-null-homology-for-plane-domains` | lem | If $\pi_1(\Omega)=0$, every cycle in $\Omega$ is null-homologous. |
 | `lem-connected-spherical-complement-implies-null-homology` | lem | Local constancy of index on connected $\widehat{\mathbb C}\setminus\Omega$ and its value near infinity give null-homology. |
 | `lem-null-homology-implies-connected-spherical-complement` | lem | A bounded complementary component supports a cycle with nonzero index. |
@@ -2117,7 +2336,7 @@ Proposed A-page inventory (dependency order; 16 items):
 
 The page that finally joins the analytic, homological and homotopic notions.
 It is 80% assembly and its value is **citation discipline**, in the manner of
-EU-1 at order 197.
+the Euclidean-equivalence ledger on `the-topology-of-euclidean-space`.
 
 DEFS: none new, except the naming item that fixes **"simply connected"** for
 plane domains once and for all, after the equivalence is proved.
@@ -2126,7 +2345,7 @@ THMS: **the grand equivalence** (landmark): for a domain $\Omega\subseteq
 \mathbb{C}$, the following are equivalent —
 (1) $\widehat{\mathbb{C}}\setminus\Omega$ is connected;
 (2) every cycle in $\Omega$ is null-homologous (CA-7);
-(3) $\pi_1(\Omega)$ is trivial (order 231);
+(3) $\pi_1(\Omega)$ is trivial (`the-fundamental-group`);
 (4) every holomorphic $f$ on $\Omega$ has a primitive (CA-7);
 (5) $\int_\gamma f = 0$ for every holomorphic $f$ and closed $\gamma$;
 (6) every nonvanishing holomorphic $f$ has a holomorphic logarithm;
@@ -2135,7 +2354,7 @@ THMS: **the grand equivalence** (landmark): for a domain $\Omega\subseteq
 (9) $\Omega = \mathbb{C}$ or $\Omega$ is conformally equivalent to $\mathbb{D}$
 (CA-16);
 (10) $\Omega$ is homeomorphic to $\mathbb{D}$ or to $\mathbb{C}$;
-(11) $\Omega$ is contractible (order 229) —
+(11) $\Omega$ is contractible (`homotopy-and-homotopy-equivalence`) —
 assembled in the grand-equivalence item with an explicit implication graph and
 the carrying item cited at every already-established arrow. Only the genuinely
 new bridges are separate numbered items on this page; cited equivalences are
@@ -2146,11 +2365,12 @@ where path homotopy enters this track for the first time);
 (1)$\Rightarrow$(2) (the index is locally constant on the connected spherical
 complement and is zero near infinity); (2)$\Rightarrow$(1) (a bounded
 component of the complement supports a cycle with nonzero index);
-(9)$\Rightarrow$(11)$\Rightarrow$(3) (transport along a homeomorphism, orders
-229/231); **the homotopy form of Cauchy's theorem** (landmark, CX-D4): if
+(9)$\Rightarrow$(11)$\Rightarrow$(3) (transport along a homeomorphism, citing
+`homotopy-and-homotopy-equivalence` and `the-fundamental-group`); **the homotopy form of Cauchy's theorem** (landmark, CX-D4): if
 $\gamma_0\simeq\gamma_1$ rel endpoints in $\Omega$ then $\int_{\gamma_0}f =
 \int_{\gamma_1}f$ — proved here, from the subdivision of the homotopy square
-by Lebesgue number (orders 106/195) plus Cauchy in a disc (CA-4); and the
+by the Lebesgue-number/compactness items on `compactness-in-metric-spaces` and
+`compactness`, plus Cauchy in a disc (CA-4); and the
 corollary for null-homotopic loops; **the winding number is the degree**: for a
 loop $\gamma$ in $\mathbb{C}^\times$, $n(\gamma,0)$ equals the image of
 $[\gamma]$ under $\pi_1(\mathbb{C}^\times)\cong\pi_1(S^1)\cong\mathbb{Z}$
@@ -2177,8 +2397,9 @@ Traps. (i) This page proves few new theorems and cites many; every clause names
 the item that carries it, and restating a cited theorem would BE the two-notions
 defect. (ii) (3)$\Rightarrow$(2) and the homotopy form of Cauchy are the same
 argument; prove the homotopy form first and derive the implication, not the
-reverse. (iii) $\pi_1(\mathbb{C}^\times)$: the deformation retract onto $S^1$ is
-HT-1's (order 229) and $\pi_1(S^1)$ is HT-4's (235); cite both, do not rebuild.
+reverse. (iii) $\pi_1(\mathbb{C}^\times)$: the deformation retract onto $S^1$
+is supplied by `homotopy-and-homotopy-equivalence`, and $\pi_1(S^1)$ by
+`the-fundamental-group-of-the-circle`; cite both, do not rebuild.
 (iv) The naming item must say plainly that from this page onward "simply
 connected" is unqualified, and that every earlier page in this track said
 "homologically simply connected" for a reason.
@@ -2189,20 +2410,26 @@ Forward references: NONE load-bearing.
 
 `requires`: CA-15, CA-6, `absolute-convergence-and-rearrangement`
 
+Pair sources (exact harvested locators): Stein--Shakarchi Ch. 5 (“Jensen's
+formula,” “Functions of finite order,” “Infinite products,” “The Weierstrass
+product theorem,” “Hadamard's factorisation theorem”); Weber Ch. 3 §§3.2 and
+3.5--3.6 (“Infinite Products,” “Functions of Finite Order,” “Hadamard
+Product”); Ahlfors Ch. 5 §§1.1--1.3 for the local convergence machinery.
+
 Proposed A-page inventory (dependency order; 20 items):
 
 | id | kind | one-line statement |
 |---|---|---|
 | `rem-complex-use-of-the-published-infinite-product-definition` | rem | Reuse `def-infinite-product` and record the complex nonzero-tail and finite-zero conventions. |
-| `thm-absolute-convergence-criterion-for-complex-infinite-products` | thm | With no zero factor, $\prod(1+a_n)$ converges absolutely to a nonzero value exactly when $\sum|a_n|<\infty$. |
+| `thm-absolute-convergence-criterion-for-complex-infinite-products` | thm | With no zero factor, $\prod(1+a_n)$ converges absolutely to a nonzero value exactly when $\sum\lvert a_n\rvert<\infty$. |
 | `def-normal-convergence-of-holomorphic-products` | def | Define compact-uniform absolute control of the factors' deviations from one. |
 | `thm-normal-convergence-theorem-for-holomorphic-products` | thm | The product is holomorphic and its zeros with multiplicity are exactly those contributed by the factors. |
 | `cor-logarithmic-derivative-of-a-normally-convergent-product` | cor | Off its zeros, $F'/F=\sum f_n'/f_n$ locally uniformly. |
 | `def-weierstrass-elementary-factor` | def | Define $E_p(w)=(1-w)\exp(w+\cdots+w^p/p)$. |
-| `lem-weierstrass-elementary-factor-estimate` | lem | For $|w|\le1$, $|1-E_p(w)|\le|w|^{p+1}$. |
+| `lem-weierstrass-elementary-factor-estimate` | lem | For $\lvert w\rvert\le1$, $\lvert1-E_p(w)\rvert\le\lvert w\rvert^{p+1}$. |
 | `def-weierstrass-and-canonical-products-and-their-genus` | def | Distinguish a varying-primary-factor Weierstrass product from a fixed-genus canonical product. |
-| `def-exponent-of-convergence-of-a-zero-sequence` | def | Define $\lambda=\inf\{s>0:\sum|a_n|^{-s}<\infty\}$. |
-| `thm-canonical-product-convergence-criterion` | thm | A fixed-$p$ product converges normally when $\sum|a_n|^{-(p+1)}<\infty$. |
+| `def-exponent-of-convergence-of-a-zero-sequence` | def | Define $\lambda=\inf\{s>0:\sum\lvert a_n\rvert^{-s}<\infty\}$. |
+| `thm-canonical-product-convergence-criterion` | thm | A fixed-$p$ product converges normally when $\sum\lvert a_n\rvert^{-(p+1)}<\infty$. |
 | `thm-weierstrass-product-theorem-on-the-plane` | thm | Every discrete effective divisor on $\mathbb C$ is the exact zero divisor of an entire Weierstrass product. |
 | `thm-weierstrass-factorization-theorem` | thm | $f(z)=z^me^{g(z)}\prod E_{p_n}(z/a_n)$ with multiplicities and precise nonuniqueness. |
 | `cor-every-meromorphic-function-on-the-plane-is-a-quotient-of-entire-functions` | cor | Cancel a meromorphic function's pole divisor with an entire denominator. |
@@ -2215,13 +2442,15 @@ Proposed A-page inventory (dependency order; 20 items):
 | `cor-noninteger-order-bounds-the-canonical-genus` | cor | For nonintegral finite order $\rho$, the canonical-product genus is at most $\lfloor\rho\rfloor$. |
 
 DEFS: convergence of $\prod(1+a_n)$ over $\mathbb{C}$ (#23 — **reuse the
-authored `def-infinite-product`, homed at order 115**; add only the
+authored `def-infinite-product` on `absolute-convergence-and-rearrangement`**;
+add only the
 $\mathbb{C}$-specific clauses); normal (locally uniform absolute) convergence of
 a product of functions; the **Weierstrass elementary factors** $E_p$; the
 **canonical product** and its genus (#24); the **order** of an entire function.
 
 THMS: $\prod(1+a_n)$ converges absolutely $\iff$ $\sum\lvert a_n\rvert<\infty$
-(cite 115 for the real case and prove the complex clause); if $\sum\sup_K
+(cite `absolute-convergence-and-rearrangement` for the real case and prove the
+complex clause); if $\sum\sup_K
 \lvert a_n\rvert<\infty$ on every compact $K$ then $\prod(1+a_n(z))$ converges
 locally uniformly to a **holomorphic** function whose zero set is the union of
 the zero sets with multiplicities (landmark; Weierstrass convergence from CA-5);
@@ -2238,7 +2467,8 @@ every entire $f$ is $z^m e^{g(z)}\prod E_{p_n}(z/a_n)$, with the uniqueness
 limited to "up to $e^g$" (#24); the corollary that **every meromorphic function
 on $\mathbb{C}$ is a quotient of two entire functions** (landmark); the
 **product formula for $\sin$**: $\sin\pi z = \pi z\prod(1 - z^2/n^2)$ (landmark;
-agreement remark with order 161's Wallis/Euler-product material, which reaches
+agreement remark with `pi-the-equivalent-characterizations`'s
+Wallis/Euler-product material, which reaches
 the same identity by a real route); **Jensen's formula** relating
 $\log\lvert f(0)\rvert$ to the boundary mean and the zeros, first for circles
 free of zeros and then for every radius by radial approximation and the
@@ -2255,13 +2485,15 @@ has exactly $\rho$ as its genus.
 
 B: $\prod(1-z^2/n^2)$ computed; the $\sin$ product used to evaluate the Basel
 sum a third time (with the agreement remark naming CA-9's residue proof and
-161's real proof); $1/\Gamma$ anticipated as a canonical product of genus $1$;
+the planned real proof on `pi-the-equivalent-characterizations`); $1/\Gamma$
+anticipated as a canonical product of genus $1$;
 Jensen's formula on a polynomial.
 CEX: $\prod(1+1/n)$ diverges although the terms tend to $1$;
 $\prod(1 + (-1)^n/\sqrt n)$, whose logarithmic quadratic term prevents a
 nonzero limit despite conditional convergence of the linear terms.
 
-Traps. (i) `def-infinite-product` EXISTS as an authored item at order 115. Grep
+Traps. (i) `def-infinite-product` EXISTS as an authored item on
+`absolute-convergence-and-rearrangement`. Grep
 before minting; re-defining it is the reuse-discipline violation LEVELS.md
 step 2 names. (ii) The $E_p$ estimate is where every exposition says "one
 checks"; it is a numbered computation. (iii) Jensen's formula's boundary zeros
@@ -2274,6 +2506,11 @@ Forward references: NONE load-bearing.
 ## CA-19. Mittag-Leffler and Runge's Theorem
 
 `requires`: CA-18, CA-11, CA-9
+
+Pair sources (exact harvested locators): Weber Ch. 3 §3.3 (“Products and
+Partial Fractions”) and Ch. 4 §4.4 (“Runge's Theorem”); Stein--Shakarchi Ch.
+2, “Applications—Runge approximation,” together with Ch. 5's infinite-product
+construction and Weierstrass theorem.
 
 Proposed A-page inventory (dependency order; 18 items):
 
@@ -2307,8 +2544,8 @@ limit on $K$ of rational functions with poles in a prescribed set meeting every
 bounded component of $\mathbb{C}\setminus K$; **polynomial approximation** when
 $\mathbb{C}\setminus K$ is connected (landmark) — the proof in three stages:
 (1) approximate $f$ on $K$ by a Riemann sum of the Cauchy integral over a
-suitable cycle (the cycle's construction from a grid is a real point-set item,
-citing 197 and the Lebesgue number lemma); (2) **pole pushing** along a chain of
+suitable cycle (the cycle's construction from a grid cites
+`the-topology-of-euclidean-space` and the Lebesgue-number lemma); (2) **pole pushing** along a chain of
 discs; (3) pushing to $\infty$ gives polynomials; the **Runge property of a
 domain** and the version for $\Omega$; **Mittag-Leffler's theorem** (landmark):
 given a discrete set in a domain $\Omega$ with prescribed principal parts, there
@@ -2316,8 +2553,8 @@ is a meromorphic function on $\Omega$ with exactly those principal parts —
 proved by an exhaustion plus Runge-supplied corrections (the general-$\Omega$
 case; the $\Omega=\mathbb{C}$ case with a convergence-forcing subtraction of
 Taylor polynomials is a separate, cheaper item and comes first);
-**the partial-fraction expansion of $\pi\cot\pi z$** (landmark; the Herglotz
-route is the real-variable one already scaffolded at order 165 — the agreement
+**the partial-fraction expansion of $\pi\cot\pi z$** (landmark; the real-variable
+route is already planned on `pi-the-equivalent-characterizations` — the agreement
 remark names both and this page uses the Mittag-Leffler route); the
 $\pi^2/\sin^2$ expansion; the corollary that the meromorphic functions on a
 domain form a **field** uses only the pointwise operations and connectedness.
@@ -2342,13 +2579,14 @@ expansion used to sum $\sum 1/(n^2+a^2)$; a Mittag-Leffler function with poles
 at the integers and prescribed principal parts $1/(z-n)^2$.
 CEX: the annulus, where Runge needs a pole in the bounded complementary
 component; a compact set with infinitely many complementary components
-(a Cantor-like set — cite order 119's Cantor material rather than rebuilding).
+(a Cantor-like set — cite `cantor-set-baire-and-measure-zero` rather than rebuilding).
 
 Traps. (i) Stage (1)'s cycle is a genuine construction (a grid of squares,
 keeping the edges not meeting $K$); it is the page's real work and the place a
 "clearly" ships a defect. (ii) Runge is often stated with $\widehat{\mathbb{C}}
 \setminus K$; be consistent with CA-11's sphere and say which. (iii) The
-$\cot$ agreement remark must not claim what order 165 does or does not contain
+$\cot$ agreement remark must not claim what
+`pi-the-equivalent-characterizations` does or does not contain
 (published-claim decay); use the "what THIS proof uses" form. (iv) Nothing here
 needs Hahn–Banach; the functional-analytic proof of Runge is denial 11's
 territory and must not be reached for.
@@ -2358,6 +2596,11 @@ Forward references: NONE load-bearing.
 ## CA-20. Analytic Continuation, Monodromy, and Riemann Surfaces
 
 `requires`: CA-17, CA-6, `covering-spaces-and-lifting`
+
+Pair sources (exact harvested locators): McMullen 213b Ch. 4 “Sheaves and
+analytic continuation” (with the exact targeted range recorded in the
+harvest); Ahlfors Ch. 3 §§4.1--4.3 (“Use of Level Curves,” “A Survey of
+Elementary Mappings,” “Elementary Riemann Surfaces”).
 
 Proposed A-page inventory (dependency order; 21 items):
 
@@ -2395,7 +2638,7 @@ the **natural boundary**.
 THMS: germs form a ring and the relation is an equivalence (#25); **the
 continuation along a path is independent of the admissible chain** (#26,
 landmark — the refinement/subdivision lemma, with the Lebesgue number of the
-covering of $[0,1]$ from order 106); continuation is unique when it exists
+covering of $[0,1]$ from `compactness-in-metric-spaces`); continuation is unique when it exists
 (identity theorem, CA-6); **the monodromy theorem** (landmark): if a germ
 continues along every path in a domain $\Omega$, then continuations along
 path-homotopic paths agree — proved by subdividing the homotopy square, exactly
@@ -2411,7 +2654,8 @@ covering only after the full path-lifting/evenly-covered hypothesis is proved;
 the general germ construction does not supply that globally. **The Riemann
 surface of $\log$ is
 $\mathbb{C}$ covering $\mathbb{C}^\times$ via $\exp$** (landmark — the item that,
-with orders 233/235, discharges the ‡ `rem-riemann-surface-of-log`); the
+with `covering-spaces-and-lifting` and `the-fundamental-group-of-the-circle`,
+discharges the ‡ `rem-riemann-surface-of-log`); the
 **Riemann surface of $z^{1/n}$** is the $n$-fold covering
 $w\mapsto w^n$ of $\mathbb{C}^\times$; **the Schwarz reflection principle as a
 continuation** (agreement remark with CA-13); continuation of a power series to
@@ -2441,7 +2685,8 @@ separate items in that order; conflating them is the error the owner named
 explicitly. (ii) #27's chart compatibility is the second instance of the
 obligation CA-11 introduced; reuse that page's pattern and cite the published
 `thm-basis-criterion` for the basis condition. (iii) The covering-space language
-is orders 233/235; cite, and do not re-prove unique lifting. (iv) The natural
+is `covering-spaces-and-lifting` and
+`the-fundamental-group-of-the-circle`; cite, and do not re-prove unique lifting. (iv) The natural
 boundary example must be one whose proof closes here; the Hadamard gap theorem
 is a real theorem and is not free.
 
@@ -2451,6 +2696,10 @@ Forward references: NONE load-bearing.
 
 `requires`: CA-18, CA-9, `improper-integrals`, CA-5, and MT-11
 `product-measures-and-the-fubini-tonelli-theorems`
+
+Pair sources (exact harvested locators): Romik Ch. 14 “The gamma function,”
+Theorem 31; Stein--Shakarchi Ch. 6 (“The gamma function,” “Analytic
+continuation,” “Further properties”); Weber Ch. 3 §3.7 (“Gamma Function”).
 
 Proposed A-page inventory (dependency order; 21 items; the supplier contract
 below fixes the exported IDs):
@@ -2485,7 +2734,8 @@ the **Euler–Mascheroni constant** $\gamma$ is cited from
 **Weierstrass product** for $1/\Gamma$;
 the **beta function**; **logarithmic convexity**.
 
-THMS: the integral converges locally uniformly on $\mathrm{Re}\,z>0$ (143) and
+THMS: the integral converges locally uniformly on $\mathrm{Re}\,z>0$ by
+`improper-integrals` and
 is **holomorphic** there (#28, via CA-5's parameter-integral lemma);
 $\Gamma(z+1)=z\Gamma(z)$ and $\Gamma(n+1)=n!$; the **meromorphic continuation**
 to $\mathbb{C}\setminus\{0,-1,-2,\dots\}$ with simple poles and residues
@@ -2499,15 +2749,16 @@ $\sin$ product — the cleanest route and the one that avoids a contour argument
 $\Gamma(1/2)=\sqrt\pi$; the **Gauss multiplication formula**, with duplication
 as a corollary; the **Bohr–Mollerup
 theorem** (landmark): $\Gamma$ is the unique log-convex function on $(0,\infty)$
-with $f(1)=1$ and $f(x+1)=xf(x)$ — a real-variable theorem, citing convexity at
-order 135, and the item that makes "the" gamma function a phrase for a reader
+with $f(1)=1$ and $f(x+1)=xf(x)$ — a real-variable theorem, citing
+`convexity`, and the item that makes "the" gamma function a phrase for a reader
 coming from the real side; the **beta integral** $B(p,q) =
 \Gamma(p)\Gamma(q)/\Gamma(p+q)$ (Fubini for improper Riemann integrals — check
-what 143/177 deliver, and **if the double-integral manipulation does not close,
+what `improper-integrals` and `fubini-and-change-of-variables` deliver, and **if
+the double-integral manipulation does not close,
 prove the beta identity from Euler's limit formula instead and record the
 route**); **Stirling's asymptotic formula** for $\Gamma$ in a sector (landmark;
-agreement remark with order 161's real Stirling-via-Wallis, which is scaffolded
-there); the **Hankel loop representation**
+agreement remark with the real Stirling-via-Wallis treatment on
+`pi-the-equivalent-characterizations`); the **Hankel loop representation**
 \[
   \frac1{\Gamma(z)}=\frac1{2\pi i}\int_H e^t t^{-z}\,dt,
 \]
@@ -2531,7 +2782,8 @@ strip containing a pole, so "the" continuation is not obtained by any naive
 limit.
 
 Traps. (i) #28's parameter-integral lemma is CA-5's; do not re-derive, and
-check that its hypotheses cover an IMPROPER integral (order 143) — if CA-5's
+check that its hypotheses cover an IMPROPER integral as defined on
+`improper-integrals` — if CA-5's
 version is for a compact parameter interval only, the extension to $[0,\infty)$
 via locally uniform convergence of $\int_0^N$ is its own item **on this page**.
 That is the most likely gap in the whole track. (ii) The Euler–Mascheroni
@@ -2551,6 +2803,10 @@ Forward references: NONE load-bearing.
 `primes-and-the-fundamental-theorem-of-arithmetic`,
 FA-23 `schwartz-space-and-the-plancherel-theorem`, and FA-25
 `tempered-distributions-and-the-fourier-transform`
+
+Pair sources (exact harvested locators): Romik Ch. 15 “The Riemann zeta
+function,” Theorems 32, 34 and 35; Stein--Shakarchi Ch. 6 (“The zeta
+function,” “Continuation and functional equation”).
 
 Proposed A-page inventory (dependency order; 22 items; exported IDs agree with
 the number-theory supplier contract):
@@ -2589,8 +2845,9 @@ zeros.
 
 THMS: the Dirichlet series converges absolutely and locally uniformly on
 $\mathrm{Re}\,s>1$, so $\zeta$ is holomorphic there; the **Euler product**
-$\zeta(s) = \prod_p (1-p^{-s})^{-1}$ (landmark; cites the fundamental theorem of
-arithmetic at order 24 and the infinite-product theory of CA-18), and the
+$\zeta(s) = \prod_p (1-p^{-s})^{-1}$ (landmark; cites
+`primes-and-the-fundamental-theorem-of-arithmetic` and the infinite-product
+theory of CA-18), and the
 corollary that $\zeta(s)\ne0$ on $\mathrm{Re}\,s>1$; **infinitude of primes**
 follows again from the pole at $s=1$, but appears only as an agreement remark
 citing the arithmetic theorem, not as a new complex-analysis corollary; the
@@ -2673,7 +2930,7 @@ performs its normal reuse check.
 | CA-21 | `cor-gamma-function-has-no-zeros` | $\Gamma$ has no zeros on $\mathbb C$; equivalently the zeros of $1/\Gamma$ are exactly $0,-1,-2,\ldots$, all simple. |
 | CA-21 | `thm-euler-reflection-formula` | $\Gamma(s)\Gamma(1-s)=\pi/\sin(\pi s)$ wherever both sides are finite, hence meromorphically everywhere. |
 | CA-21 | `thm-legendre-duplication-formula` | $\Gamma(s)\Gamma(s+\tfrac12)=2^{1-2s}\sqrt\pi\,\Gamma(2s)$ meromorphically. |
-| CA-21 | `thm-stirling-formula-gamma` | Uniformly in each closed sector $|\arg s|\le\pi-\delta$, $\Gamma(s)=\sqrt{2\pi}s^{s-1/2}e^{-s}(1+O_\delta(|s|^{-1}))$, using the principal logarithm in $s^{s-1/2}$. |
+| CA-21 | `thm-stirling-formula-gamma` | Uniformly in each closed sector $\lvert\arg s\rvert\le\pi-\delta$, $\Gamma(s)=\sqrt{2\pi}s^{s-1/2}e^{-s}(1+O_\delta(\lvert s\rvert^{-1}))$, using the principal logarithm in $s^{s-1/2}$. |
 | CA-22 | `def-riemann-zeta-function` | $\zeta(s)=\sum_{n\ge1}n^{-s}$ is holomorphic for $\Re s>1$; the defining Dirichlet series is not asserted elsewhere. |
 | CA-22 | `thm-euler-product-for-riemann-zeta` | For $\Re s>1$, $\zeta(s)=\prod_p(1-p^{-s})^{-1}$ absolutely and locally uniformly, so $\zeta$ has no zeros in that half-plane. |
 | CA-22 | `thm-riemann-zeta-meromorphic-continuation` | $\zeta$ has a unique meromorphic continuation to $\mathbb C$, holomorphic except for one simple pole at $s=1$ of residue $1$. |
@@ -2710,9 +2967,9 @@ Proposed A-page inventory (dependency order; 16 items):
 | `def-bloch-radius-and-bloch-constant` | def | Define the largest schlicht-disc radius $\beta(f)$ and the extremal $\mathcal B=\inf_{f'(0)=1}\beta(f)$. |
 | `def-landau-radius-and-landau-constant` | def | Define the largest round-disc radius in $f(\mathbb D)$ and its normalized infimum $\mathcal L$. |
 | `def-two-value-omitting-holomorphic-family` | def | Define a family whose members omit the same two finite values, normalized to $0$ and $1$. |
-| `lem-bloch-rescaling-at-an-almost-maximal-derivative` | lem | An almost-maximizer of $(1-|z|^2)|f'(z)|$ yields a normalized disc map with controlled derivative oscillation. |
+| `lem-bloch-rescaling-at-an-almost-maximal-derivative` | lem | An almost-maximizer of $(1-\lvert z\rvert^2)\lvert f'(z)\rvert$ yields a normalized disc map with controlled derivative oscillation. |
 | `lem-quantitative-univalence-from-controlled-derivative` | lem | The stated derivative control gives injectivity on a fixed subdisc and a fixed round disc in its image. |
-| `thm-bloch-theorem` | thm | There is an absolute $b>0$ with $\beta(f)\ge b$ whenever $|f'(0)|=1$, hence $\mathcal B>0$. |
+| `thm-bloch-theorem` | thm | There is an absolute $b>0$ with $\beta(f)\ge b$ whenever $\lvert f'(0)\rvert=1$, hence $\mathcal B>0$. |
 | `thm-landau-theorem` | thm | Under the same normalization, the full image contains a round disc of universal positive radius and $\mathcal L\ge\mathcal B>0$. |
 | `lem-holomorphic-logarithms-for-two-omitted-values` | lem | If a disc function omits $0$ and $1$, both $f$ and $1-f$ have holomorphic logarithms. |
 | `thm-schottky-theorem` | thm | Omitting $0$ and $1$ plus a centre bound controls the function on every smaller disc. |
@@ -2817,6 +3074,12 @@ licensed by the lower tracks.
 `mixed-partials-taylor-and-extrema`, and
 `absolute-convergence-and-rearrangement`
 
+Pair sources (exact harvested locators): Lebl Ch. 1 §§1.1--1.5 (“Onto
+mappings,” “Power series,” “Derivatives,” “Ball versus polydisc,” “Cartan
+uniqueness”); CIMAT §§3.3--3.6 (“Domains of convergence and holomorphy,”
+geometric pseudoconvexity, and subharmonic/plurisubharmonic functions), using
+the foundational power-series and Cauchy-formula portion here.
+
 Proposed A-page inventory (dependency order; 22 items):
 
 | id | kind | one-line statement |
@@ -2846,26 +3109,30 @@ Proposed A-page inventory (dependency order; 22 items):
 
 DEFS: $\mathbb{C}^m$ as a normed $\mathbb{C}$-vector space and its
 identification with $\mathbb{R}^{2m}$ (dictionary item, the SC analogue of #1,
-citing 145 and order 68); the **polydisc** $\Delta(a;r)$ and the **ball**;
+citing `rn-as-a-normed-space`, `vector-spaces-and-subspaces`, and the complex
+field dictionary); the **polydisc** $\Delta(a;r)$ and the **ball**;
 **separately holomorphic**; **holomorphic** as complex Fréchet differentiable
 (with equivalence here only to local power-series expansion and the $C^1$
 Cauchy--Riemann system; unrestricted separate holomorphy is SC-2's theorem);
-multi-index notation $\alpha$, $z^\alpha$, $\partial^\alpha$ (cite order 171,
-which owns multi-indices, do not re-mint); the **Wirtinger operators**
+multi-index notation $\alpha$, $z^\alpha$, $\partial^\alpha$ (cite
+`mixed-partials-taylor-and-extrema`, which owns multi-indices, do not re-mint);
+the **Wirtinger operators**
 $\partial/\partial z_j, \partial/\partial\bar z_j$; a **holomorphic map**
 $\mathbb{C}^m\to\mathbb{C}^n$ (#31); the **holomorphic Jacobian**
 $\big(\partial f_i/\partial z_j\big)$.
 
 THMS: **#31, the componentwise reduction** (landmark): $f$ is holomorphic as a
 map iff each $f_j$ is; equivalently iff $f$ is real-differentiable with
-$\mathbb{C}$-linear total derivative (169); **the Cauchy integral formula on a
+$\mathbb{C}$-linear total derivative (`the-total-derivative`); **the Cauchy
+integral formula on a
 polydisc** (landmark): the iterated one-variable formula, with the interchange
-of the iterated integrals justified by Fubini for the Riemann integral (177);
+of the iterated integrals justified by `fubini-and-change-of-variables`;
 **the power series expansion** (landmark): a holomorphic $f$ on a polydisc is
 the sum of a power series $\sum_\alpha c_\alpha (z-a)^\alpha$ converging
 absolutely and locally uniformly there, with $c_\alpha =
 \partial^\alpha f(a)/\alpha!$ and unique coefficients (#32, citing the unordered
-summation of order 115); consequently $f\in C^\infty$ and all
+summation on `absolute-convergence-and-rearrangement`); consequently
+$f\in C^\infty$ and all
 $\partial^\alpha f$ are holomorphic; **the Cauchy estimates** on a polydisc;
 the **Cauchy–Riemann system** $\partial f/\partial\bar z_j = 0$ for all $j$,
 with the $C^1$ converse; **the identity theorem, in its correct several-variable
@@ -2892,8 +3159,8 @@ not folded into the foundational definition, and SC-1 does not cite that later
 theorem in any proof.
 
 FS: the REAL analogue that a separately real-analytic function
-must be continuous (refuted by $xy/(x^2+y^2)$, already scaffolded at order 169
-and cited rather than re-minted); a holomorphic
+must be continuous (refuted by $xy/(x^2+y^2)$, already scaffolded on
+`the-total-derivative-examples` and cited rather than re-minted); a holomorphic
 function on $\mathbb{C}^2$ vanishing on a set with a limit point vanishes
 identically (witness: $z_1$, vanishing on the whole hyperplane $z_1=0$ and not
 identically zero — the sharp separation from CA-6).
@@ -2902,7 +3169,7 @@ B: $z_1 z_2$, $e^{z_1+z_2}$, $z_1/(1-z_2)$ expanded on polydiscs; the Cauchy
 formula on a bidisc computed; the componentwise reduction checked on an explicit
 $\mathbb{C}^2\to\mathbb{C}^3$ map; the Jacobian of $(z_1z_2, z_1+z_2)$.
 CEX: $z_1$ on $\mathbb{C}^2$ has a nonisolated, unbounded zero set; the
-real-variable $xy/(x^2+y^2)$ (cited from 169).
+real-variable $xy/(x^2+y^2)$ (cited from `the-total-derivative-examples`).
 
 Traps. (i) Do not put continuity into the definition to make Hartogs's theorem
 tautological. Complex Fréchet holomorphy, local power-series representability,
@@ -2910,10 +3177,11 @@ and the $C^1$ CR system are proved equivalent here; unrestricted separate
 holomorphicity is proved equivalent on SC-2.
 (ii) The identity theorem's several-variable form is genuinely weaker than
 CA-6's; a proof or Statement that carries CA-6's phrasing over is the fatal
-"asserts more than the proof gives" class. (iii) Fubini at order 177 is for the
+"asserts more than the proof gives" class. (iii) The cited Riemann Fubini theorem is for the
 Riemann integral on a rectangle and is stated with upper and lower integrals for
 a reason; check what it actually delivers for a continuous integrand on a
-product of circles before relying on it. (iv) Multi-indices are order 171's;
+product of circles before relying on it. (iv) Multi-indices are owned by
+`mixed-partials-taylor-and-extrema`;
 cite. (v) The theorem that a scalar holomorphic zero set has no isolated
 points in dimension at least two belongs after Weierstrass preparation on
 SC-3; Poincaré's ball--polydisc non-equivalence belongs on SC-7, where the
@@ -2926,6 +3194,12 @@ the eventual dictionary but is not load-bearing on SC-1.
 
 `requires`: SC-1, CA-8, CA-14, `cantor-set-baire-and-measure-zero`, and the
 MT-8 integration/Fatou interfaces
+
+Pair sources (exact harvested locators): Lebl Ch. 1 §1.6 (“Riemann extension,
+zeros and injectivity”) and Ch. 2 §2.1 (“Domains and extensions”); CIMAT
+§§3.3--3.4 (“Domains of convergence and holomorphy,” “Geometric
+pseudoconvexity”); Garrett, *Hartogs' theorem: separate analyticity implies
+joint*, stages 1--4 read in full as enumerated in the source notes below.
 
 Proposed A-page inventory (dependency order; 15 items):
 
@@ -3014,12 +3288,17 @@ and is not load-bearing on SC-2.
 `requires`: SC-1, `inverse-and-implicit-function-theorems`,
 CA-10, `euclidean-domains-pids-and-unique-factorisation`
 
+Pair sources (exact harvested locators): Lebl Ch. 6 §§6.1--6.4 (regular
+coordinates, Weierstrass preparation/division, Noetherian local rings and
+factorisation/UFD); Freitag Ch. I §§1--4 (“Elementary analytic functions,”
+“Weierstrass preparation,” “First applications,” “Hypersurfaces”).
+
 Proposed A-page inventory (dependency order; 27 items):
 
 | id | kind | one-line statement |
 |---|---|---|
 | `def-biholomorphic-map-several-complex-variables` | def | Define a biholomorphism as a holomorphic bijection with holomorphic inverse, extending the one-variable notion. |
-| `lem-real-jacobian-determinant-of-a-complex-linear-map` | lem | For $L:\mathbb C^m\to\mathbb C^m$, $\det_\mathbb RL=|\det_\mathbb CL|^2$. |
+| `lem-real-jacobian-determinant-of-a-complex-linear-map` | lem | For $L:\mathbb C^m\to\mathbb C^m$, $\det_\mathbb RL=\lvert\det_\mathbb CL\rvert^2$. |
 | `thm-holomorphic-inverse-function-theorem-several-variables` | thm | An invertible complex Jacobian gives mutually inverse biholomorphisms on neighbourhoods. |
 | `thm-holomorphic-implicit-function-theorem` | thm | An invertible dependent-variable Jacobian makes the local zero set the graph of a unique holomorphic function. |
 | `thm-holomorphic-constant-rank-theorem` | thm | A holomorphic map of locally constant rank has holomorphic source and target coordinates in which it is the standard projection-inclusion. |
@@ -3053,7 +3332,8 @@ a **Weierstrass polynomial** (#33); the **unit group** of $\mathcal{O}_m$.
 
 THMS: **the holomorphic inverse function theorem** (landmark): $f$ holomorphic
 near $a$ with invertible holomorphic Jacobian is a biholomorphism of
-neighbourhoods — from the REAL inverse function theorem (order 173, applied to
+neighbourhoods — from the REAL inverse function theorem on
+`inverse-and-implicit-function-theorems`, applied to
 $\mathbb{R}^{2m}$, with the real Jacobian determinant equal to
 $\lvert\det Df\rvert^2$) plus the observation that the inverse satisfies CR;
 **the holomorphic implicit function theorem** (landmark); the **holomorphic
@@ -3061,7 +3341,8 @@ constant-rank theorem**, proved from the real constant-rank theorem and the
 holomorphic inverse/implicit theorem without an unproved smooth-to-holomorphic
 coordinate change; $\mathcal{O}_m$ is a local ring with maximal ideal
 $\{f : f(0)=0\}$, and $f$ is a unit iff $f(0)\ne0$ (cite the local-ring
-vocabulary at order 44); **after a linear change of coordinates every nonzero
+vocabulary on `the-field-of-fractions-and-localisation`); **after a linear
+change of coordinates every nonzero
 germ is regular of some order in $z_m$** (a genuine lemma, and the step that
 makes the preparation theorem non-vacuous); **the Weierstrass preparation
 theorem** (landmark, #33): $f = u\cdot W$ with $u$ a unit and $W$ a Weierstrass
@@ -3100,13 +3381,17 @@ CEX: $z_1 z_2$ is not regular of any order in $z_2$ at the origin, so the
 coordinate-change lemma is not decoration; $(e^{z_1}, z_2)$ has invertible
 Jacobian everywhere and is not injective — the several-variable version of
 CA-6's contrast, and the reason the IFT is irreducibly local (agreement remark
-with order 173's complex-squaring-map example, which makes the same point in
-$\mathbb{R}^2$).
+with the complex-squaring-map example on
+`inverse-and-implicit-function-theorems-examples`, which makes the same point
+in $\mathbb{R}^2$).
 
-Traps. (i) The real IFT at 173 is stated for $C^1$ maps of $\mathbb{R}^n$; the
+Traps. (i) The real IFT on `inverse-and-implicit-function-theorems` is stated
+for $C^1$ maps of $\mathbb{R}^n$; the
 translation to $\mathbb{C}^m$ needs the real Jacobian determinant identity
 $\det_{\mathbb{R}} = \lvert\det_{\mathbb{C}}\rvert^2$, which is a linear-algebra
-item (order 78/88) and must be cited or proved, not assumed. (ii) The holomorphy
+calculation from `determinants-of-matrices-over-a-commutative-ring` and
+`the-determinant-of-a-linear-operator`, and is proved explicitly here rather
+than assumed. (ii) The holomorphy
 of the symmetric functions of the roots is the heart of preparation and the
 place expositions compress; the residue formula plus Newton's identities is the
 route, and the finite identities are proved as their own local lemma.
@@ -3120,6 +3405,13 @@ Forward references: NONE load-bearing.
 ## SC-4. Domains of Holomorphy, Plurisubharmonicity and Pseudoconvexity
 
 `requires`: SC-2, SC-1, CA-14, CA-18, CA-19, `convexity`
+
+Pair sources (exact harvested locators): Lebl Ch. 2 §§2.1--2.6 (“Domains and
+extensions” through “Holomorphic convexity”), especially §2.5 Theorem 2.5.2;
+Boas §§3.2.4--3.3.3 (“Pseudoconvexity,” “Levi problem,” “Levi form,”
+“Applications of the $\bar\partial$ problem,” “Solution on smooth
+pseudoconvex domains”); CIMAT §§3.3--3.6 (domains of holomorphy, geometric
+pseudoconvexity and psh functions).
 
 Proposed A-page inventory (dependency order; 28 items):
 
@@ -3144,7 +3436,7 @@ Proposed A-page inventory (dependency order; 28 items):
 | `thm-decreasing-limits-of-plurisubharmonic-functions` | thm | A decreasing limit is plurisubharmonic or identically $-\infty$ on a component. |
 | `thm-upper-envelope-theorem-for-plurisubharmonic-functions` | thm | The USC regularization of a locally uniformly upper-bounded supremum is plurisubharmonic unless identically $-\infty$. |
 | `thm-maximum-principle-for-plurisubharmonic-functions` | thm | A finite local maximum on a domain forces constancy. |
-| `cor-log-modulus-of-a-holomorphic-function-is-plurisubharmonic` | cor | $\log|f|$, with $-\infty$ on $Z(f)$, is plurisubharmonic under the component convention. |
+| `cor-log-modulus-of-a-holomorphic-function-is-plurisubharmonic` | cor | $\log\lvert f\rvert$, with $-\infty$ on $Z(f)$, is plurisubharmonic under the component convention. |
 | `def-plurisubharmonic-exhaustion-and-hartogs-pseudoconvexity` | def | Define a continuous psh exhaustion and Hartogs pseudoconvexity using $-\log\delta_\Omega$. |
 | `thm-equivalent-psh-exhaustion-and-boundary-distance-pseudoconvexity` | thm | A domain admits a continuous psh exhaustion exactly when the fixed boundary-radius formulation is psh. |
 | `def-levi-pseudoconvex-domain` | def | For $C^2$ boundary, require a defining function's Levi form to be semipositive on complex tangent vectors. |
@@ -3250,10 +3542,10 @@ CA-13, CA-14, CA-16, MT-8 and MT-20 (Radon/Riesz--Markov).
 
 | id | kind | one-line statement |
 |---|---|---|
-| `def-green-function-plane-domain` | def | $g_\Omega(z,a)$ is positive and harmonic in $z\ne a$, has $g_\Omega(z,a)+\log|z-a|$ harmonic near $a$, and tends to $0$ at every regular boundary point (equivalently has zero Perron boundary data). |
+| `def-green-function-plane-domain` | def | $g_\Omega(z,a)$ is positive and harmonic in $z\ne a$, has $g_\Omega(z,a)+\log\lvert z-a\rvert$ harmonic near $a$, and tends to $0$ at every regular boundary point (equivalently has zero Perron boundary data). |
 | `thm-green-function-exists-on-bounded-plane-domains` | thm | Every bounded plane domain has a Green function, constructed by exhaustion/Perron; irregular or polar boundary points are not silently assigned pointwise limits. |
 | `thm-green-function-uniqueness-symmetry-and-monotonicity` | thm | When it exists, $g_\Omega$ is unique, symmetric in $z,a$, and increases under enlargement of the domain with the direction stated explicitly. |
-| `thm-green-function-simply-connected-plane-domain` | thm | If $\Omega\subsetneq\mathbb C$ is simply connected and $\phi:\Omega\to\mathbb D$ sends $a$ to $0$, then $g_\Omega(z,a)=-\log|\phi(z)|$, independently of the normalised Riemann map. |
+| `thm-green-function-simply-connected-plane-domain` | thm | If $\Omega\subsetneq\mathbb C$ is simply connected and $\phi:\Omega\to\mathbb D$ sends $a$ to $0$, then $g_\Omega(z,a)=-\log\lvert\phi(z)\rvert$, independently of the normalised Riemann map. |
 | `def-harmonic-measure-plane-domain` | def | For a bounded regular plane domain, $\omega_\Omega^z$ is the unique boundary probability measure representing the Perron solution: $H_\varphi(z)=\int_{\partial\Omega}\varphi\,d\omega_\Omega^z$. |
 | `thm-harmonic-measure-is-well-defined` | thm | Riesz--Markov gives a unique Radon probability measure because evaluation of the positive Dirichlet solution operator is a positive norm-one functional. |
 | `thm-harmonic-measure-disc-poisson-density` | thm | On a disc, harmonic measure is absolutely continuous with Poisson-kernel density relative to arclength. |
@@ -3291,7 +3583,7 @@ distributions.
 
 | id | kind | one-line statement |
 |---|---|---|
-| `def-logarithmic-potential-and-energy` | def | For a finite positive measure define $U^\mu(z)=\int\log(1/|z-w|)\,d\mu(w)$ and $I(\mu)=\iint\log(1/|z-w|)\,d\mu(z)d\mu(w)$ as extended integrals. |
+| `def-logarithmic-potential-and-energy` | def | For a finite positive measure define $U^\mu(z)=\int\log(1/\lvert z-w\rvert)\,d\mu(w)$ and $I(\mu)=\iint\log(1/\lvert z-w\rvert)\,d\mu(z)d\mu(w)$ as extended integrals. |
 | `def-logarithmic-capacity-compact-set` | def | For compact $K$, $V_K=\inf_{\mu\in\mathcal P(K)}I(\mu)$ and $\operatorname{cap}K=e^{-V_K}$, with the conventions at infinite energy stated. |
 | `thm-logarithmic-energy-well-defined-and-lower-semicontinuous` | thm | Truncated kernels make energy representative-independent and lower semicontinuous under weak-* convergence. |
 | `thm-equilibrium-measure-existence-and-uniqueness` | thm | Every nonpolar compact set has a unique probability measure of minimal logarithmic energy. |
@@ -3299,7 +3591,7 @@ distributions.
 | `def-polar-set-and-quasi-everywhere` | def | A polar set is contained in the $-\infty$ locus of a nonconstant subharmonic function, equivalently has logarithmic capacity zero in the compact/local formulation proved here. |
 | `thm-principle-of-descent-and-domination` | thm | Weak limits satisfy the lower-envelope inequality for logarithmic potentials, and the domination principle extends quasi-everywhere inequalities. |
 | `def-riesz-measure-subharmonic-function` | def | The Riesz measure $\mu_u=(2\pi)^{-1}\Delta u$ is defined distributionally and shown independent of test-function representatives. |
-| `thm-riesz-decomposition-subharmonic-plane` | thm | Locally, $u(z)=h(z)+\int\log|z-w|\,d\mu_u(w)$ for a harmonic $h$, with uniqueness after the kernel normalisation. |
+| `thm-riesz-decomposition-subharmonic-plane` | thm | Locally, $u(z)=h(z)+\int\log\lvert z-w\rvert\,d\mu_u(w)$ for a harmonic $h$, with uniqueness after the kernel normalisation. |
 | `thm-green-function-from-equilibrium-potential` | thm | For the unbounded component of $\widehat{\mathbb C}\setminus K$, $g(z,\infty)=V_K-U^{\mu_K}(z)$ after the standard normalisation, quasi-everywhere on the boundary. |
 | `def-fekete-points-and-transfinite-diameter` | def | Define the $n$-point Vandermonde extremum and its limiting transfinite diameter with normalization independent of an ordering of the points. |
 | `thm-logarithmic-capacity-equals-transfinite-diameter` | thm | The energy capacity and transfinite diameter agree, via Fekete measures and the principle of descent. |
@@ -3334,8 +3626,8 @@ inequality and approximate identities (MT-14, MT-15, MT-17 and MT-20).
 
 | id | kind | one-line statement |
 |---|---|---|
-| `def-harmonic-hardy-class-disc` | def | $h^p(\mathbb D)$ consists of harmonic $u$ with $\sup_{r<1}\|u_r\|_{L^p(\mathbb T)}<\infty$ (with the separate $p=\infty$ convention). |
-| `thm-poisson-extension-lp-contraction-and-norm-limit` | thm | For $1\le p\le\infty$, $P[f]$ is harmonic, $\|P_r*f\|_p\le\|f\|_p$, and for $p<\infty$ it converges to $f$ in $L^p$. |
+| `def-harmonic-hardy-class-disc` | def | $h^p(\mathbb D)$ consists of harmonic $u$ with $\sup_{r<1}\lVert u_r\rVert_{L^p(\mathbb T)}<\infty$ (with the separate $p=\infty$ convention). |
+| `thm-poisson-extension-lp-contraction-and-norm-limit` | thm | For $1\le p\le\infty$, $P[f]$ is harmonic, $\lVert P_r*f\rVert_p\le\lVert f\rVert_p$, and for $p<\infty$ it converges to $f$ in $L^p$. |
 | `thm-harmonic-hardy-representation-p-greater-one` | thm | If $1<p\le\infty$, every $u\in h^p$ is the Poisson extension of a unique $f\in L^p$, with equality of norms. |
 | `thm-harmonic-hardy-one-measure-representation` | thm | Every $u\in h^1$ is the Poisson integral of a unique finite signed/complex boundary measure, and conversely. |
 | `thm-poisson-nontangential-maximal-bound` | thm | The nontangential maximal function of a Poisson extension is pointwise controlled by the Hardy--Littlewood maximal function. |
@@ -3371,13 +3663,13 @@ Concretely these are MT-13/MT-14 and FA-14.
 |---|---|---|
 | `def-analytic-hardy-space-disc` | def | For $0<p\le\infty$, $H^p(\mathbb D)$ is the holomorphic class with uniformly bounded radial $L^p$ means, using the quasi-norm convention for $p<1$. |
 | `thm-fatou-boundary-theorem-analytic-hardy-spaces` | thm | Every nonzero $f\in H^p$, $0<p\le\infty$, has finite nontangential limits $f^*$ a.e.; $f_r\to f^*$ in $L^p$ for finite $p$, and the Hardy norm is the boundary norm. |
-| `thm-hardy-zero-set-blaschke-condition` | thm | The nonzero zeros of a nontrivial $H^p$ function satisfy $\sum_n(1-|a_n|)<\infty$. |
+| `thm-hardy-zero-set-blaschke-condition` | thm | The nonzero zeros of a nontrivial $H^p$ function satisfy $\sum_n(1-\lvert a_n\rvert)<\infty$. |
 | `def-blaschke-product` | def | A zero sequence satisfying the Blaschke condition defines a normally convergent product, with unimodular a.e. boundary values and precisely the prescribed zeros. |
 | `def-inner-singular-inner-and-outer-functions` | def | Define inner, singular inner and outer factors from boundary modulus/measure data, proving independence of arguments and normalisations. |
 | `thm-inner-outer-factorisation-hardy-space` | thm | Every nonzero $H^p$ function factors uniquely up to a unimodular constant as Blaschke $\times$ singular inner $\times$ outer. |
 | `thm-f-and-m-riesz-theorem` | thm | A finite complex measure on $\mathbb T$ whose negative Fourier coefficients vanish is absolutely continuous with respect to arclength. |
 | `cor-hardy-one-cauchy-representation` | cor | The analytic measure representing an $H^1$ function has an $L^1$ density and its Cauchy/Poisson representation agrees with the boundary function. |
-| `def-nevanlinna-class-on-the-disc` | def | $N(\mathbb D)$ is the class of holomorphic functions with uniformly bounded radial means of $\log^+|f|$, explicitly distinguished from entire-plane Nevanlinna value distribution. |
+| `def-nevanlinna-class-on-the-disc` | def | $N(\mathbb D)$ is the class of holomorphic functions with uniformly bounded radial means of $\log^+\lvert f\rvert$, explicitly distinguished from entire-plane Nevanlinna value distribution. |
 | `thm-nevanlinna-class-is-bounded-quotient-class` | thm | $N(\mathbb D)$ consists exactly of quotients $g/h$ with $g,h\in H^\infty$ and $h$ zero-free, with the representation's nonuniqueness stated. |
 | `def-smirnov-class-on-the-disc` | def | $N^+(\mathbb D)$ is the bounded-quotient class with outer denominator, equivalently the class satisfying the stated boundary-log condition. |
 | `thm-smirnov-maximum-principle` | thm | For every $p>0$, $N^+\cap L^p(\mathbb T)=H^p$, with the boundary-value interpretation and quasi-norm range explicit. |
@@ -3412,7 +3704,7 @@ CA-13, the measure integration interface.
 
 | id | kind | one-line statement |
 |---|---|---|
-| `thm-poisson-jensen-formula-meromorphic-function` | thm | Express $\log|f(z)|$ in a disc by its boundary values and the zeros and poles through the Green kernel, with multiplicities. |
+| `thm-poisson-jensen-formula-meromorphic-function` | thm | Express $\log\lvert f(z)\rvert$ in a disc by its boundary values and the zeros and poles through the Green kernel, with multiplicities. |
 | `def-nevanlinna-counting-proximity-and-characteristic` | def | Define $n(r,a)$, regularised $N(r,a)$, chordal proximity $m(r,a)$ and $T(r,f)$ for a meromorphic $f:\mathbb C\to\widehat{\mathbb C}$. |
 | `thm-nevanlinna-quantities-well-defined` | thm | Circle radii meeting zeros/poles are handled by limits, the $a=\infty$ convention agrees with poles, and changing the base radius alters the characteristic only by the stated bounded term. |
 | `thm-nevanlinna-first-main-theorem` | thm | For fixed $a\in\widehat{\mathbb C}$, $m(r,a;f)+N(r,a;f)=T(r,f)+O_{f,a}(1)$. |
@@ -3523,7 +3815,7 @@ CA-18, CA-22, CA-RS-1.
 | id | kind | one-line statement |
 |---|---|---|
 | `def-modular-group-action-on-the-upper-half-plane` | def | $PSL_2(\mathbb Z)$ acts on $\mathfrak H$ by fractional linear maps, with the $SL_2/\{\pm I\}$ representative issue discharged. |
-| `thm-standard-fundamental-domain-for-the-modular-group` | thm | The standard region $|\tau|\ge1$, $|\Re\tau|\le1/2$ meets every orbit, with precisely stated boundary identifications and elliptic stabilisers. |
+| `thm-standard-fundamental-domain-for-the-modular-group` | thm | The standard region $\lvert\tau\rvert\ge1$, $\lvert\Re\tau\rvert\le1/2$ meets every orbit, with precisely stated boundary identifications and elliptic stabilisers. |
 | `def-compactified-level-one-modular-curve` | def | Add the cusp $\infty$ and use invariant local parameters at $i$, $e^{2\pi i/3}$ and the cusp to make $X(1)$ a compact Riemann surface. |
 | `def-level-one-modular-form-and-cusp-form` | def | A weight-$k$ form satisfies $f(\gamma\tau)=(c\tau+d)^k f(\tau)$ and is holomorphic at the cusp; a cusp form has zero constant $q$-coefficient. |
 | `thm-q-expansion-principle-at-the-cusp` | thm | Translation invariance gives a unique holomorphic $q=e^{2\pi i\tau}$ expansion, and cusp holomorphy/vanishing is exactly regularity/vanishing at $q=0$. |
@@ -3667,7 +3959,7 @@ tests; the Abel image in its Jacobian.
 
 Sources and proof strategy: Looijenga Ch. 7 §§1--2 (“The Jacobian,” “The
 Abel--Jacobi map”); McMullen Ch. 15 “Curves and their Jacobians,” especially
-Theorems 15.7--15.8; Schlag Ch. 8 §§1--5 (“Homology, periods and bilinear
+Theorems 15.4--15.5; Schlag Ch. 8 §§1--5 (“Homology, periods and bilinear
 relations,” “Divisors,” “Riemann--Roch,” “Applications,” “Abel and Jacobi”).
 First compute the surface homology and its intersection form from CA-RS-1's
 polygonal schema using HA-1. The bilinear relations, not a slogan about
@@ -3716,8 +4008,8 @@ representatives/approximation, and PDE-3 for Weyl's lemma.
 | `thm-modulus-rectangle-and-annulus` | thm | Compute the extremal quantities for a rectangle and a round annulus. |
 | `thm-round-annulus-conformal-parameter-is-complete-invariant` | thm | For $A(r,R)$ set $M(A)=(2\pi)^{-1}\log(R/r)$; two round annuli are conformally equivalent exactly when $M$ agrees, while the punctured disc has $M=\infty$. |
 | `def-geometric-quasiconformal-homeomorphism` | def | An orientation-preserving homeomorphism is geometrically $K$-quasiconformal when it distorts every curve-family modulus by at most $K$. |
-| `def-acl-sobolev-quasiconformal-homeomorphism` | def | The analytic definition uses ACL, $W^{1,2}_{\rm loc}$ and $|f_{\bar z}|\le k|f_z|$ a.e., with $K=(1+k)/(1-k)$. |
-| `def-beltrami-coefficient-and-maximal-dilatation` | def | $\mu_f=f_{\bar z}/f_z$ is an a.e. equivalence class with its value on $\{f_z=0\}$ fixed harmlessly, and $K_f=(1+\|\mu\|_\infty)/(1-\|\mu\|_\infty)$. |
+| `def-acl-sobolev-quasiconformal-homeomorphism` | def | The analytic definition uses ACL, $W^{1,2}_{\rm loc}$ and $\lvert f_{\bar z}\rvert\le k\lvert f_z\rvert$ a.e., with $K=(1+k)/(1-k)$. |
+| `def-beltrami-coefficient-and-maximal-dilatation` | def | $\mu_f=f_{\bar z}/f_z$ is an a.e. equivalence class with its value on $\{f_z=0\}$ fixed harmlessly, and $K_f=(1+\lVert\mu\rVert_\infty)/(1-\lVert\mu\rVert_\infty)$. |
 | `thm-geometric-and-analytic-quasiconformality-equivalent` | thm | The modulus and ACL/Beltrami definitions are equivalent with the same sharp dilatation constant. |
 | `thm-composition-and-inverse-quasiconformal` | thm | Composition and inverse are quasiconformal with the stated Beltrami transformation and multiplicative $K$ bound. |
 | `thm-one-quasiconformal-is-conformal` | thm | A $1$-quasiconformal map has $\mu=0$ a.e. and is conformal by Weyl's lemma. |
@@ -3745,7 +4037,7 @@ CA-QC-1, FA-8--FA-10 for weak compactness, and the PDE-11 Sobolev interface.
 
 | id | kind | one-line statement |
 |---|---|---|
-| `def-measurable-beltrami-coefficient` | def | A Beltrami coefficient is an $L^\infty$ a.e. class $\mu$ with $\|\mu\|_\infty<1$, transforming as a $(-1,1)$ tensor under coordinates. |
+| `def-measurable-beltrami-coefficient` | def | A Beltrami coefficient is an $L^\infty$ a.e. class $\mu$ with $\lVert\mu\rVert_\infty<1$, transforming as a $(-1,1)$ tensor under coordinates. |
 | `def-weak-solution-beltrami-equation` | def | A $W^{1,2}_{\rm loc}$ map solves $f_{\bar z}=\mu f_z$ in distributions; the definition is representative- and chart-independent. |
 | `thm-measurable-riemann-mapping-sphere` | thm | Every such $\mu$ on $\widehat{\mathbb C}$ has an orientation-preserving quasiconformal solution, unique after fixing $0,1,\infty$. |
 | `cor-local-integrability-beltrami-structures` | cor | Every measurable conformal structure on a plane domain has local quasiconformal coordinates. |
@@ -4132,11 +4424,15 @@ are the two openly licensed complete textbooks retained for future builders.
   <https://www.jmilne.org/math/CourseNotes/MFletter.pdf>.
 - Curtis McMullen, Math 213a and 213b notes:
   <https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213a/course/course.pdf>
-  and <https://people.math.harvard.edu/~ctm/math213b/home/course/course.pdf>.
+  and <https://abel.math.harvard.edu/~ctm/math213b/home/course/course.pdf>.
 - Eduard Looijenga, *Riemann Surfaces*:
   <https://webspace.science.uu.nl/~looij101/riemannsurfaces.pdf>.
 - Christopher Bishop, *Quasiconformal Mappings*:
   <https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf>.
+- Lars Ahlfors and Arne Beurling, “Conformal invariants and
+  function-theoretic null-sets,” *Acta Mathematica* 83 (1950), complete
+  primary paper:
+  <https://projecteuclid.org/journals/acta-mathematica/volume-83/issue-none/Conformal-invariants-and-function-theoretic-null-sets/10.1007/BF02392634.pdf>.
 - Mikhail Lyubich, *Conformal Geometry and Dynamics of Quadratic Polynomials*,
   vol. I: <https://www.math.stonybrook.edu/~mlyubich/book.pdf>.
 - Jiří Lebl, *Tasty Bits of Several Complex Variables*, v4.4:
@@ -4152,6 +4448,8 @@ are the two openly licensed complete textbooks retained for future builders.
   <https://www.iitg.ac.in/rksri/Advanced%20hardy%20spaces%20Notes_V2.pdf>.
 - Harold Boas, *Lecture Notes on Multidimensional Complex Analysis*:
   <https://haroldpboas.gitlab.io/courses/650-2019c/notes.pdf>.
+- Paul Garrett, *Hartogs' theorem: separate analyticity implies joint*, read
+  in full: <https://www-users.cse.umn.edu/~garrett/m/complex/hartogs.pdf>.
 - *Notes for Analysis and Geometry of Several Complex Variables* (CIMAT):
   <https://www.cimat.mx/~mohammad.jabbari/course-SCV.pdf>.
 - Zbigniew Błocki, *The Bergman Kernel and Metric*:
@@ -4387,6 +4685,54 @@ Petersson theory, Hecke operators, modular equations, canonical models,
 Dirichlet series and CM, lying after the selected range, were TOC-inspected but
 are `D(number theory/arithmetic geometry; not analytic prerequisites)`.
 
+**McMullen, Math 213a and 213b, exactly inspected ranges.** In *Advanced
+Complex Analysis* (Math 213a, 2 December 2025), the load-bearing text read is
+Ch. 5 §5.1, pp. 139--141, through Theorems 5.1--5.3; the Ch. 5 title and all
+§§5.1--5.8 headings, pp. 137--177, were inspected directly from the text and
+contents. Ch. 5 “Elliptic functions and elliptic curves” →
+`I(CA-EF-1/CA-MF-1)`; §5.1 “Doubly-periodic functions,” including Theorems
+5.1 ($\wp$ is doubly periodic), 5.2 ($(\wp,\wp')$ uniformises a smooth cubic)
+and 5.3 (every elliptic function is rational in $\wp,\wp'$) → `I(CA-EF-1)`;
+§5.2 “Cubic curves and the addition law” → `I(CA-EF-1)`; §5.3 “The
+rectangular case” → `B(CA-EF-1)`; §5.4 “Aside: Conics and singly-periodic
+functions” → `B(CA-EF-1)` as the rank-one comparison; §5.5 “Moduli spaces of
+elliptic curves” → `I(CA-EF-1/CA-MF-1)`; §5.6 “Interlude” → its $\lambda$
+part `B(CA-MF-1)`, while “Lattices in $\mathbb R^n$” is `O(geometry of
+numbers and higher-rank locally symmetric spaces; not load-bearing for
+level-one forms)`; §5.7 “Modular forms” → `I(CA-MF-1)`, with its final
+additive/multiplicative-number-theory paragraph `D(number theory; partition,
+divisor-sum and Mellin-arithmetic consequences)`; §5.8 “Exercises” →
+`B(CA-EF-1/CA-MF-1)`, except explicitly arithmetic exercises, which have the
+same number-theory deferral. Later numbered theorems generally lack named
+headings; no claim is made here that every later proof was read.
+
+In *Riemann Surfaces* (Math 213b, 28 April 2026), Chs. 2--17, pp. 2--158,
+were directly contents-inspected, and the named-result passages below were
+opened in the text; this is not a claim that every proof in those sixteen
+chapters was read. Chs. 2 “Examples of Riemann surfaces,” 3 “Holomorphic
+maps,” 4 “Sheaves and analytic continuation,” 5 “Algebraic functions,” and 6
+“Holomorphic and harmonic forms” → `I(CA-RS-1)`, with sheaf/continuation
+formalism absorbed as its inline machinery. Chs. 7 “Cohomology of sheaves,” 8
+“Cohomology on a Riemann surface,” 9 “Riemann--Roch,” 10 “The
+Mittag--Leffler problems,” 11 “Serre duality,” 12 “Maps to projective space,”
+13 “The canonical map,” and 14 “Line bundles” → `I(CA-RS-2)` at precisely
+the line-bundle/compact-curve depth declared there; unrestricted coherent-
+sheaf theory is `O(general coherent analytic sheaves lie outside the selected
+range)`. Ch. 15 “Curves and their Jacobians” → `I(CA-RS-3)`; Ch. 16
+“Hyperbolic geometry” → `I(CA-RS-4)` for the Poincaré metric, deck groups and
+surface geometry, while its collars/pants, moduli, Mumford compactness and
+spectral/heat-kernel developments are `O(Teichmüller, moduli and spectral
+geometry; not needed for uniformisation)`. Ch. 17 “Uniformization” →
+`I(CA-RS-4)`. The targeted named results are Theorem 3.4 “The
+Riemann--Hurwitz formula” → `I(CA-RS-1)`; Theorem 9.12 “Hodge theorem” →
+`IN(CA-RS-2 Dolbeault/cohomology comparison, with DG/PDE prerequisites cited)`;
+Theorem 11.1 “Serre duality” and Theorem 11.2 “Riemann--Roch, final version” →
+`I(CA-RS-2)`; the Jacobi-inversion component of Theorem 15.4 and Theorem 15.5
+“Abel's theorem” → `I(CA-RS-3)`; and Theorem 17.1, the uniformisation theorem
+$X\cong\widehat{\mathbb C},\mathbb C,$ or $\mathfrak H$ → `I(CA-RS-4)`.
+These notes are not used as backing for CA-QC or CA-PT; their independent
+sources remain Bishop/Lyubich/Ahlfors--Beurling and Khoruzhenko/Saff/Bishop.
+
 **Looijenga, Chs. 1--7.** Ch. 1 “Manifolds,” “Complex manifolds and Riemann
 surfaces” → manifold portion `AP(differential geometry)` and `I(CA-RS-1)`;
 Ch. 2 “Covering spaces,” “Fundamental groupoid,” “Galois covers,” “Computation
@@ -4422,6 +4768,38 @@ on parameters,” and “Holomorphic maps between Banach spaces” →
 §§15--16 and named Ahlfors--Beurling extension → `I(CA-QC-3)`; §§17--18
 “Holomorphic motions,” “Moduli and Teichmüller spaces” → `D(complex
 dynamics/Teichmüller track)`.
+
+**Ahlfors--Beurling (1950), complete §§1--7.** §1 “Introduction” and §§2--3
+“The Invariants” introduce the function classes and null classes: the
+extremal-length/potential motivation is `IN(CA-QC-1/CA-PT-1)`, while the full
+historical invariant taxonomy and named Theorems 1--8 are
+`O(classical function-theoretic null-class classification; not needed by the
+removability result)`. §4 “The Invariants …” develops extremal length and its
+five elementary lemmas → `I(CA-QC-1)`. §5 “Further Characterization of the
+Null-sets” and Theorems 9--10 → `IN(thm-zero-length-sets-and-quasicircles-are-conformally-removable)`;
+the unchanged-extremal-distance characterization also supplies an independent
+check on `def-conformal-removable-compact-set`. §6 “Linear Sets,” especially
+Theorems 11/11′ (zero linear length) and the extension/linearity criterion of
+Theorem 6 used there → `IN(thm-zero-length-sets-and-quasicircles-are-conformally-removable)`;
+Theorems 12--14 and the capacity computations → `I(CA-PT-1)` or
+`D(fine potential-theory refinements not used here)`. §7 “Special Sets” and
+its Cantor-set separations of the null classes → `B(CA-QC-3)` for the
+non-removable warning; the exact class-separation catalogue is
+`O(historical null-class taxonomy)`. Bishop remains the independent source for
+the quasicircle half of the combined removability item.
+
+**Garrett, complete Hartogs note.** *Hartogs' theorem: separate analyticity
+implies joint* was read in full. The note has no numbered chapter/section or
+named-result headings to harvest. Its four displayed proof stages have these
+dispositions: continuous separate analyticity via iterated Cauchy →
+`IN(thm-osgood-lemma-in-several-complex-variables)`; bounded separate
+analyticity via Schwarz telescoping →
+`IN(thm-locally-bounded-separate-holomorphy)`; the Baire local-boundedness
+stage → `I(lem-local-boundedness-of-separately-holomorphic-functions)`; and
+Hartogs-lemma/Fatou propagation → `IN(thm-hartogs-separate-holomorphy)`, with
+MT-8 and CA-14 cited for integration and subharmonicity. The category space is
+finite-dimensional separable Euclidean space, whose required Baire instance
+is ZF; the Baire stage has not been silently deleted.
 
 **Lebl, complete Chs. 1--6.** Ch. 1 §§1.1--1.6 “Onto mappings,” “Power
 series,” “Derivatives,” “Ball versus polydisc,” “Cartan uniqueness,” “Riemann
@@ -4509,7 +4887,7 @@ same mathematical range and do not need a separate source.
 | CA-11--CA-12 | Ahlfors Ch. 3; Stein--Shakarchi Ch. 8; Weber Chs. 1,5. |
 | CA-13--CA-14 | Axler--Bourdon--Ramey Chs. 1--3,11; Schlag Chs. 3,9; Khoruzhenko §§1--4. |
 | CA-15--CA-17 | Weber Chs. 5,7; Stein--Shakarchi Ch. 8; Schlag Chs. 9,11. |
-| CA-18--CA-20 | Weber Chs. 3--4; Stein--Shakarchi Chs. 3,5; Schlag Chs. 2,5. |
+| CA-18--CA-20 | Weber Chs. 3--4; Stein--Shakarchi Chs. 2--3,5; McMullen 213b Ch. 4 and Ahlfors Ch. 3 §§4.1--4.3 for CA-20. |
 | CA-21--CA-22 | Romik Chs. 14--15; Stein--Shakarchi Ch. 6; Weber Ch. 3. |
 | CA-23 | Weber Ch. 7 §§7.3--7.4; Eremenko §§4--6; Goldberg--Ostrovskii Ch. 3 §§1--2 and Ch. 4 §§1,3 as the independent quantitative route. |
 | CA-HM-1 / CA-PT-1 | Khoruzhenko §§1--5; Schlag Ch. 9; Saff §§1--3/Bishop Ch. 1. |
@@ -4517,7 +4895,7 @@ same mathematical range and do not need a separate source.
 | CA-NV-1 / CA-NV-2 | Eremenko §§1--6; Goldberg--Ostrovskii selected Chs. 1,3,4. |
 | CA-EF-1 / CA-MF-1 | Ahlfors Ch. 7; Milne Chs. 2--4; McMullen 213a Ch. 5 / Stein--Shakarchi Chs. 9--10. |
 | CA-RS-1--CA-RS-4 | Looijenga Chs. 1--7; McMullen 213b Chs. 2--17; Schlag Chs. 4,8,10--11 and Lyubich Ch. 1 §5. |
-| CA-QC-1--CA-QC-3 | Bishop Chs. 1--3; Lyubich Ch. 1 §6 and Ch. 2 §§11--16. |
+| CA-QC-1--CA-QC-3 | Bishop Chs. 1--3; Lyubich Ch. 1 §6 and Ch. 2 §§11--16; Ahlfors--Beurling (1950) §§4--7 for the primary removability/extremal-length check. |
 | SC-1--SC-4 | Lebl Chs. 1--2,6; Boas §§3.2.4--3.3.3; CIMAT §§3.3--3.6. |
 | SC-5--SC-8 | Lebl Chs. 4--6; Demailly Ch. VIII; CIMAT §§3.2,4.1--4.3; Błocki §1/Freitag Ch. I. |
 
