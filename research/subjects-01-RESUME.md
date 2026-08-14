@@ -38,18 +38,38 @@ and §2 (functional analysis) both discharged. **Galois theory**, absent from al
 448 planned pages, is scaffolded into the free 98–101 slot — now four pairs, not
 two, after reconciliation.
 
-## 2. IN FLIGHT as of 15:35 — density enrichment
+## 2. IN FLIGHT as of 15:52 — density enrichment
 
-Four lanes running, one queued. Cause: measured **decomposition ratio** (items ÷
-*included* source headings) split the thin tracks into two failure modes.
+Cause: measured **decomposition ratio** (items ÷ *included* source headings) split
+the thin tracks into two failure modes.
 
-| track | mode | why |
+| track | mode | state |
 |---|---|---|
-| `commutative-algebra` | DECOMPOSE | 718 headings harvested (most of any track), 443 items = **1.05×**. Transcribed a ToC. Also only **7 source hosts for 18 pairs** — narrowest sourcing in the commission |
-| `pde` | DECOMPOSE | 288 included, 583 items = 2.0× |
-| `probability-theory` | WIDEN | ratio fine (4.2×), harvest narrow (171 headings) |
-| `functional-analysis` | WIDEN | ratio fine (4.3×), harvest narrow (210) |
-| `number-theory` | QUEUED | measurement suspect — 41 included / 14.3× is probably a grep artifact; told to verify first |
+| `pde` | DECOMPOSE | **LANDED 15:43, AUDITED, PASSES** — see below |
+| `commutative-algebra` | DECOMPOSE | running. 718 headings harvested (most of any track), 443 items = **1.05×**. Transcribed a ToC. Also only **7 source hosts for 18 pairs** — narrowest sourcing in the commission |
+| `probability-theory` | WIDEN | running. ratio fine (4.2×), harvest narrow (171 headings) |
+| `functional-analysis` | WIDEN | running. ratio fine (4.3×), harvest narrow (210) |
+| `number-theory` | dispatched 15:52 into pde's freed slot | measurement suspect — 41 included / 14.3× is probably a grep artifact; told to verify first |
+
+**PDE audit result (orchestrator, from disk, not from the lane's self-report).**
+585 → 855 distinct ids = **+270, exactly as claimed**. Ratio 2.04× → **2.76×**
+expanded-corpus (2.98× on the fixed denominator). It corrected its own baseline
+(288 → 286 `included`, and explained the whole-file grep discrepancy unprompted),
+added three full treatments — Oh, Simon, Jakobsen — and wrote a **26-row per-pair
+source matrix, every row naming 3–4 treatments with exact ranges**, plus a
+convention audit resolving [SO]'s $d$-vs-$n$ and Laplacian-sign conflicts.
+**270/270 rows are `literature-derived` with a source locator; zero
+`ai-generated` statements.** Zero duplicate ids in-file, zero collisions against
+`items/` or `plan-spec.json`. Largest A page 28 items. It explicitly **declined to
+chase the 5.7× benchmark**, naming what it refused to mint (no plane Poisson/
+Perron, no abstract spectral theorem, no conservation-law systems) — the
+anti-padding posture the brief asked for.
+
+**MEASURE AGAINST THE PRE-DISPATCH COMMIT, NEVER `HEAD`.** Commit `32689b0b`
+swept 460 lines of pde's in-flight work into an unrelated docs commit, and
+measuring from `HEAD` afterwards showed +52 where the truth was +270. The pde
+baseline is `a2b781f8`. **Do not `git commit -a` while lanes are running** —
+commit named paths only.
 
 Benchmark: differential geometry **5.7×** with 532 headings and 27 source hosts.
 Brief: `briefs/subjects-01-enrich.md`. Both modes now require **wider source
