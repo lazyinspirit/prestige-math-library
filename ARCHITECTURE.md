@@ -1371,6 +1371,28 @@ introduces no new accent — it reuses `.library-card` and its two existing
 variables. Dates come from item verification stamps, so this surface can never
 contradict the sitemap or the feed. Everything frozen above is untouched.
 
+*Owner instruction 2026-08-14, exercised:* the plan reached **28 groups** and
+only seven had a `categoryStyle`, so 21 rendered in the neutral fallback; the 18
+with no `library/<slug>/` directory yet had no NAME either, and four surfaces
+each invented a different fallback for it. `library-categories.ts` now carries a
+style for all **27 renderable groups** (`published` is a `kind: P` marker whose
+four rows are published on disk under their real groups, so it never reaches the
+renderer) and exports **`categoryTitle`**, the one naming fallback `/plan`, the
+item breadcrumb, `/changes` and the index teaser now share. `_category.md` still
+wins wherever it exists, and the fallback reproduces it verbatim for all ten
+groups that have one, so no name changes when a directory is created — and none
+were added, because `loadCategories()` walks directories and the index renders
+every one it finds, so eighteen empty groups would have appeared immediately.
+A hue names a **family** of related subjects and a **tier** steps it within that
+family in reading order — `text-H-800/200`, then `-900/100`, then `-700/300` —
+because there are not 28 legible hues and related subjects should look related;
+the tier is a small step by design, since the house rule already puts the group's
+name beside the colour. Every tier-1 string is byte-identical to the 2026-07-27
+liquid-glass form and no existing group's hue moved: the diff is pure insertion.
+Sky, fuchsia and neutral stay out. Only `title` renders today — the 2026-07-27
+restyle made `GroupCard` one monochrome surface, so `wash`/`border`/`meta` are
+held against a future restoration and read by nothing.
+
 | file | owns |
 |---|---|
 | `web/lib/library-kinds.ts` | per-kind palette; colour always paired with the kind label |
@@ -1380,7 +1402,7 @@ contradict the sitemap or the feed. Everything frozen above is untouched.
 | `web/components/library/Mermaid.tsx` | flowchart v2, birds-eye, `landmark: true` nodes only |
 | `web/lib/library-forward.ts` | the sky / dashed / ↗ forward-reference accent |
 | `web/lib/library-external.ts` | the fuchsia / dotted / ‡ accent + `unprovedDependence` closure |
-| `web/lib/library-categories.ts` | index grouping (itself frozen since 2026-07-26) |
+| `web/lib/library-categories.ts` | group hue families and tiers, `categoryTitle`, index grouping (itself frozen since 2026-07-26) |
 | `web/lib/math-library.ts` | `plainTitle`, the one de-TeX for every plain-text context |
 | `web/lib/library-changes.ts` · `web/components/library/changes.tsx` | recent changes: what counts as published/revised in a window, and the shared row the index box and `/changes` both render |
 

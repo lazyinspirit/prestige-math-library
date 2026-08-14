@@ -546,8 +546,9 @@ explicit, in-session owner instruction to restyle. Adding content is always fine
 restyling is not. New content is authored to SCHEMA.md's layout rules so it
 renders identically to what exists. The implementation lives in the **app repo**
 and those files are the source of truth — read them, and `ARCHITECTURE.md` §7
-which tables them, before any rendering change. The two owner-instructed restyles
-of the `/library` INDEX (2026-07-26, 2026-07-27) are themselves now frozen too.
+which tables them, before any rendering change. The owner-instructed restyles of
+the `/library` INDEX (2026-07-26, 2026-07-27) and the 2026-08-14 category
+hue-family table are themselves now frozen too.
 
 **Three ranked citation tiers** (`ARCHITECTURE.md` §7 tables colour, underline
 and glyph), none relying on colour alone: ordinary citation < **forward
