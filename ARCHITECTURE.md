@@ -1393,6 +1393,38 @@ Sky, fuchsia and neutral stay out. Only `title` renders today — the 2026-07-27
 restyle made `GroupCard` one monochrome surface, so `wash`/`border`/`meta` are
 held against a future restoration and read by nothing.
 
+*Owner instruction 2026-08-14, exercised:* **the mirror's share card.**
+`alphabetamath.cc` unfurled under the parent product's wordmark with a footer
+naming `app.prestige-intelligence.cc`, because the library subtree inherited
+`ogImage()`. It now renders `ogTaxonomy()` — the αβ mark, the published groups
+as chips in their own hue families, and the live page and result counts — chosen
+by the owner from twelve rendered candidates. Three properties are load-bearing:
+
+- **The counts are live.** `taxonomyCard()` builds them from the corpus per
+  request and the route is `force-dynamic`, because a file-convention
+  `opengraph-image` is otherwise generated once at BUILD time and would freeze
+  the numbers at the last container build. "Results" uses `pageBadge`'s own
+  filter, deduped across pages, so the card's total is the sum of what the page
+  badges already claim and the two cannot contradict each other.
+- **The URL carries a content version.** Rendering per request makes the card
+  right on every *fetch*, not in every *feed* — scrapers cache a card for weeks.
+  `generateImageMetadata` returns `libraryVersion()` (a hash of the content
+  fingerprint) as the image id, so a publish mints a URL no cache has seen.
+  Verified end to end: touching a content file changes the id with no rebuild.
+- **`/library/opengraph-image` is in `LIBRARY_MACHINE_PATHS`.** Without it the
+  mirror 301s its own `og:image` outward, and the redirect is built through
+  `URLSearchParams`, which rewrites Next's bare `?abc123` cache key to
+  `?abc123=`. It resolved, but only for a crawler that follows redirects on an
+  image URL. This predates the new card and applied to the old one too.
+
+The chip packer picks the first of `[28px/3 rows, 26/4, 23/4, 20/4]` that holds
+every group, so today's nine render exactly as approved and the card absorbs the
+plan's twenty-eight instead of hiding two thirds behind "+ more"; the last row
+always reserves the marker's width, since whether it is needed depends on how
+many chips fit. `og:image` and `twitter:image` resolve to one URL — an `images`
+entry in the layout would lose to the file convention for Open Graph yet win for
+Twitter, pointing the two at different routes for the same card.
+
 | file | owns |
 |---|---|
 | `web/lib/library-kinds.ts` | per-kind palette; colour always paired with the kind label |
@@ -1402,7 +1434,8 @@ held against a future restoration and read by nothing.
 | `web/components/library/Mermaid.tsx` | flowchart v2, birds-eye, `landmark: true` nodes only |
 | `web/lib/library-forward.ts` | the sky / dashed / ↗ forward-reference accent |
 | `web/lib/library-external.ts` | the fuchsia / dotted / ‡ accent + `unprovedDependence` closure |
-| `web/lib/library-categories.ts` | group hue families and tiers, `categoryTitle`, index grouping (itself frozen since 2026-07-26) |
+| `web/lib/library-categories.ts` | group hue families and tiers (Tailwind + hex), `categoryTitle`, `publishedGroups`, index grouping (itself frozen since 2026-07-26) |
+| `web/lib/og.tsx` · `web/lib/library-og-data.ts` | share cards: `ogImage` / `ogFlowchart` for the product, `ogTaxonomy` for the mirror; the live counts and the content version behind it |
 | `web/lib/math-library.ts` | `plainTitle`, the one de-TeX for every plain-text context |
 | `web/lib/library-changes.ts` · `web/components/library/changes.tsx` | recent changes: what counts as published/revised in a window, and the shared row the index box and `/changes` both render |
 
