@@ -4,7 +4,7 @@ echo "--- $(date '+%H:%M') ---"
 echo "LANES"
 live=$(ps -eo pid,etime,command | grep "[d]ispatch.mjs --role scaffolder" | grep "node tools/dispatch")
 if [ -n "$live" ]; then
-  echo "$live" | sed 's/--brief.*--label sub02-/ /;s/ --run.*//' | awk '{printf "  %-30s %s\n",$3,$2}'
+  echo "$live" | sed 's/--brief.*--label sub02-/ /;s/ --run.*//' | awk '{printf "  %-30s %s\n",$NF,$2}'
 else
   echo "  (none live)"
 fi
