@@ -62,6 +62,24 @@ Worth stating explicitly, because they look measure-theoretic and are not:
 Track to build: Lebesgue outer measure, Caratheodory measurability, the Lebesgue
 integral, the convergence theorems, L^p.
 
+> **Reconciled against the scaffold, 2026-08-14.** `research/plan-measure-theory-track.md`
+> (23 A/B pairs) now plans a **locally proved item for every result listed below
+> except Banach–Tarski**, which stays deferred to §3 for choice strength and has
+> no `thm-` anywhere in the scaffolds. Verified from disk by matching each row to
+> a scaffolded item id, not by keyword presence: the convergence theorems
+> (`thm-fatou-lemma`, `thm-dominated-convergence`), `thm-egorov`, `thm-lusin`,
+> `thm-banach-zarecki`, `thm-lebesgue-differentiation-theorem`,
+> `thm-vitali-covering-theorem`, `thm-riesz-fischer`, `thm-riesz-markov-kakutani`,
+> `thm-a-vitali-set-is-not-lebesgue-measurable`,
+> `cex-tonelli-fails-without-sigma-finiteness`, `rem-sierpinski-iterated-integrals`,
+> and all three Gelbaum–Olmsted items including
+> `cex-semicontinuous-function-almost-everywhere-equal-to-no-riemann-integrable-function`
+> and `cex-the-sine-integral-is-improperly-riemann-integrable-and-not-lebesgue-integrable`.
+> **The rows below stay until the level is BUILT** — a scaffold is a plan, and §7
+> discharges a `rem-` only against a real proof with its consumers repointed.
+> Note `thm-monotone-convergence` is the real-analysis *sequence* theorem, already
+> published and unrelated to Beppo Levi's `rem-monotone-convergence-theorem`.
+
 **Deferred results**
 - The **Lebesgue integral** and its convergence theorems: monotone convergence,
   Fatou, dominated convergence.
@@ -110,6 +128,27 @@ integral, the convergence theorems, L^p.
 Track to build: Banach spaces, bounded operators, dual spaces, the three
 Baire-consequence theorems, weak topologies, Hilbert space and Banach algebras.
 Normed spaces and their elementary finite-dimensional theory are already built.
+
+> **Reconciled against the scaffold, 2026-08-14.** `research/plan-functional-analysis-track.md`
+> (25 A/B pairs) now plans a locally proved item for every result listed below
+> **except three, which the scaffold explicitly ruled STAY deferred** because they
+> are not functional analysis: `rem-nagata-cp-theorem-remains-topological`,
+> `rem-gerlits-nagy-remains-selection-principle-theory`, and
+> `rem-linear-dugundji-extension-remains-topological`. Banach–Steinhaus is
+> scaffolded under `uniform-boundedness`, and Riesz–Markov–Kakutani sits in the
+> measure track, where the regular-Borel-measure statement belongs — neither is a
+> gap. Everything else is genuinely planned, including the rows that look hardest:
+> `thm-commutative-gelfand-naimark`, `thm-james-reflexivity-theorem` with the full
+> James-space development (`thm-james-space-is-isometrically-isomorphic-to-its-bidual`,
+> `thm-canonical-image-of-james-space-has-codimension-one`),
+> `cor-c0-is-not-isometrically-a-dual-space` off
+> `cex-the-c0-unit-ball-has-no-extreme-points`,
+> `thm-banach-space-no-countably-infinite-hamel-basis`,
+> `thm-kuratowski-wojdyslawski-embedding`, `def-schur-property`,
+> `def-radon-nikodym-property` with `thm-c0-fails-the-radon-nikodym-property`, and
+> the Eberlein–Šmulian lemmas. The 2026-08-14 WIDEN pass added the
+> deficiency-index, Weyl-criterion and Kato–Rellich material around them.
+> **The rows below stay until the level is BUILT**, per §7.
 
 **Deferred results**
 - **Hahn-Banach** (and the fact that it follows from BPI, strictly weaker than
@@ -411,20 +450,30 @@ side: the ‡ machinery "is what makes that fallback honest to readers".
 **The retirement path.** A `rem-` item earns its removal by being replaced with a
 real proof, one at a time, as the track that owns its subject is BUILT:
 
-| catalogue page | items | retires when |
-|---|---|---|
-| `deferred-measure-and-integration` | 29 | the measure-theory level is built |
-| `deferred-functional-analysis` | 33 | the functional-analysis level is built |
-| `deferred-algebraic-topology` | 17 | an algebraic-topology track is scaffolded and built |
-| `deferred-set-theory-beyond-choice` | 22 | needs forcing / large cardinals; no track yet |
-| `open-problems-and-research-frontier` | 13 | never — these are open problems |
+| catalogue page | items | discharged when that level is built | retires when |
+|---|---|---|---|
+| `deferred-measure-and-integration` | 29 | **28** | the measure-theory level is built, **and** `rem-banach-tarski` is reached via §3 |
+| `deferred-functional-analysis` | 33 | **30** | the functional-analysis level is built, **and** a topology/selection-principle track takes the remaining 3 |
+| `deferred-algebraic-topology` | 17 | — | an algebraic-topology track is scaffolded and built |
+| `deferred-set-theory-beyond-choice` | 22 | — | needs forcing / large cardinals; no track yet |
+| `open-problems-and-research-frontier` | 13 | — | never — these are open problems |
 
 Both measure theory and functional analysis now have **complete prose scaffolds**
 (`research/plan-measure-theory-track.md`, 23 A/B pairs;
 `research/plan-functional-analysis-track.md`, 25 A/B pairs), and each explicitly
-disposed of its backlog rows in §1 and §2 above. So **62 of the 116 are ready to
+disposed of its backlog rows in §1 and §2 above. So **58 of the 116 are ready to
 be discharged as soon as those two levels are built** — that is the next
-opportunity, and it retires two of the five pages outright.
+opportunity.
+
+**Neither page retires outright, and the row-by-row reconciliation on 2026-08-14
+is what established that.** Four catalogue items are *not* discharged by those two
+levels, because the scaffolds ruled the results belong elsewhere:
+`rem-banach-tarski` (choice strength, §3), `rem-nagata-theorem-cp` and
+`rem-gerlits-nagy` (C_p / selection-principle theory), and
+`rem-dugundji-extension-linear` (the linear extender is topology; the metric
+Tietze case is already in scope). Each is genuinely on its catalogue page, so both
+pages survive with 1 and 3 items respectively. Reading the summary count alone
+would have predicted two pages disappearing.
 
 **The procedure for each item, when its track lands.** Replace the `rem-` item's
 source-cited statement with a locally proved item; move every consumer's `deps`
