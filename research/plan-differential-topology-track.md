@@ -335,9 +335,9 @@ Audin--Damian Ch. 1 §§1.1 and 1.3, pp. 7--11 and 14--17.
 10. `lem-one-variable-completion-of-the-square-with-a-smooth-parameter` (lemma) — a nonzero second derivative permits a smooth coordinate splitting off one signed square. **For:** isolates the analytic induction step of the Morse lemma. **Prov:** [S: literature-derived; P: literature-derived].
 11. `lem-morse-splitting-induction-preserves-the-residual-hessian` (lemma) — after splitting one direction, the remaining critical Hessian is the restricted nondegenerate form. **For:** prevents an unproved repetition in the normal-form proof. **Prov:** [S: literature-derived; P: literature-derived].
 12. `thm-morse-lemma` (theorem) — near an index-$\lambda$ critical point there are coordinates with $f=f(p)-\sum_{i=1}^{\lambda}x_i^2+\sum_{i=\lambda+1}^n x_i^2$. **For:** supplies every later local model. **Prov:** [S: literature-derived; P: literature-derived].
-13. `cor-local-extrema-and-saddles-from-the-morse-index` (corollary) — indices $0$ and $n$ are respectively strict minima and maxima; intermediate indices are saddles. **For:** prepares boundary handle cases. **Prov:** [S: literature-derived; P: literature-derived].
+13. `cor-local-extrema-and-saddles-from-the-morse-index` (corollary) — indices $0$ and $n$ are respectively strict minima and maxima; intermediate indices are saddles. **For:** prepares boundary handle cases. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.1, pp. 1--12; Audin--Damian Ch. 1 §§1.1, 1.3, pp. 7--11, 14--17.
 14. `cor-index-and-coindex-swap-under-negation` (corollary) — $\lambda_{-f}(p)=n-\lambda_f(p)$. **For:** powers dual-handle arguments. **Prov:** [S: literature-derived; P: literature-derived].
-15. `cor-local-level-set-cone-at-a-morse-critical-point` (corollary) — the critical level has the quadratic cone model, with the index-zero and index-$n$ degeneracies stated separately. **For:** explains why topology changes only at critical levels. **Prov:** [S: literature-derived; P: literature-derived].
+15. `cor-local-level-set-cone-at-a-morse-critical-point` (corollary) — the critical level has the quadratic cone model, with the index-zero and index-$n$ degeneracies stated separately. **For:** explains why topology changes only at critical levels. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.1, pp. 1--12; Audin--Damian Ch. 1 §§1.1, 1.3, pp. 7--11, 14--17.
 16. `rem-zero-dimensional-morse-convention` (remark) — on a zero-manifold every point is a nondegenerate index-zero critical point; the empty zero-manifold has none. **For:** closes the vacuous quadratic-form edge case. **Prov:** [S: literature-derived; P: not-applicable].
 
 **Hard-proof closure.**  The builder must not define the Hessian away from a
@@ -348,12 +348,12 @@ afterthoughts.
 
 **B page:** `morse-critical-points-hessians-and-indices-examples`
 
-1. `ex-height-on-the-sphere-is-a-perfect-morse-function` — compute the two critical points and their indices. **For:** tests extrema and dimension. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-standard-quadratic-form-of-each-morse-index` — realize every $0\le\lambda\le n$. **For:** checks the normal form including endpoints. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-height-on-a-torus-with-four-critical-points` — identify minimum, two saddles and maximum. **For:** anticipates handle and Euler counts. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-a-degenerate-isolated-critical-point` — $x\mapsto x^4$ is isolated but has zero Hessian. **For:** blocks the converse to item 8. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-a-degenerate-nonisolated-critical-set` — $f(x,y)=x^2$ has a critical line. **For:** shows why nondegeneracy matters. **Prov:** [S: literature-derived; P: literature-derived].
-6. `ex-the-empty-and-zero-dimensional-morse-cases` — verify the definitions on $\varnothing$ and a finite discrete manifold. **For:** checks the convention boundary. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-height-on-the-sphere-is-a-perfect-morse-function` — compute the two critical points and their indices. **For:** tests extrema and dimension. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.1, pp. 1--12; Audin--Damian Ch. 1 §§1.1, 1.3, pp. 7--11, 14--17.
+2. `ex-standard-quadratic-form-of-each-morse-index` — realize every $0\le\lambda\le n$. **For:** checks the normal form including endpoints. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.1, pp. 1--12; Audin--Damian Ch. 1 §§1.1, 1.3, pp. 7--11, 14--17.
+3. `ex-height-on-a-torus-with-four-critical-points` — identify minimum, two saddles and maximum. **For:** anticipates handle and Euler counts. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.1, pp. 1--12; Audin--Damian Ch. 1 §§1.1, 1.3, pp. 7--11, 14--17.
+4. `cex-a-degenerate-isolated-critical-point` — $x\mapsto x^4$ is isolated but has zero Hessian. **For:** blocks the converse to item 8. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.1, pp. 1--12; Audin--Damian Ch. 1 §§1.1, 1.3, pp. 7--11, 14--17.
+5. `cex-a-degenerate-nonisolated-critical-set` — $f(x,y)=x^2$ has a critical line. **For:** shows why nondegeneracy matters. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.1, pp. 1--12; Audin--Damian Ch. 1 §§1.1, 1.3, pp. 7--11, 14--17.
+6. `ex-the-empty-and-zero-dimensional-morse-cases` — verify the definitions on $\varnothing$ and a finite discrete manifold. **For:** checks the convention boundary. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.1, pp. 1--12; Audin--Damian Ch. 1 §§1.1, 1.3, pp. 7--11, 14--17.
 
 ### DT-2 — Morse functions, critical values, and genericity
 
@@ -368,8 +368,8 @@ Audin--Damian Ch. 1 §1.2, pp. 11--14; W §§4.3--4.5, pp. 98--110.
 1. `lem-morse-functions-are-transverse-differentials` (lemma) — $f$ is Morse iff the section $df:M\to T^*M$ is transverse to the zero section. **For:** converts genericity to DG transversality. **Prov:** [S: literature-derived; P: literature-derived].
 2. `thm-morse-functions-form-a-residual-subset` (theorem) — in the strong $C^\infty$ topology on $C^\infty(M,\mathbb R)$, Morse functions are residual. **For:** states exactly what generic means without noncompact overclaim. **Prov:** [S: literature-derived; P: literature-derived].
 3. `thm-morse-functions-are-dense-by-relative-jet-transversality` (theorem) — every smooth function admits arbitrarily fine strong-topology perturbations whose differential is transverse to zero, with support away from a closed set where transversality already holds. **For:** supplies the usable relative approximation. **Prov:** [S: literature-derived; P: literature-derived].
-4. `lem-compact-morse-critical-points-have-uniform-hessian-gaps` (lemma) — finitely many nondegenerate critical points persist under sufficiently small $C^2$ perturbation. **For:** splits the compact openness proof. **Prov:** [S: literature-derived; P: literature-derived].
-5. `lem-no-new-critical-points-under-a-compact-c1-small-perturbation` (lemma) — away from fixed critical neighbourhoods, compactness gives a positive lower bound for $|df|$. **For:** supplies the other half of openness. **Prov:** [S: literature-derived; P: literature-derived].
+4. `lem-compact-morse-critical-points-have-uniform-hessian-gaps` (lemma) — finitely many nondegenerate critical points persist under sufficiently small $C^2$ perturbation. **For:** splits the compact openness proof. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.2, pp. 13--19; Audin--Damian Ch. 1 §1.2, pp. 11--14; Wall §§4.3--4.5, pp. 98--110.
+5. `lem-no-new-critical-points-under-a-compact-c1-small-perturbation` (lemma) — away from fixed critical neighbourhoods, compactness gives a positive lower bound for $|df|$. **For:** supplies the other half of openness. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.2, pp. 13--19; Audin--Damian Ch. 1 §1.2, pp. 11--14; Wall §§4.3--4.5, pp. 98--110.
 6. `thm-morse-functions-are-open-dense-on-a-compact-manifold` (theorem) — in the $C^2$ and hence $C^\infty$ topology, the Morse functions form an open dense set when $M$ is compact. **For:** records the compact strengthening separately from residuality. **Prov:** [S: literature-derived; P: literature-derived].
 7. `lem-finitely-many-critical-values-can-be-separated-locally` (lemma) — disjoint bump perturbations shift critical values without changing their Hessians. **For:** isolates the excellent-function argument. **Prov:** [S: literature-derived; P: literature-derived].
 8. `thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold` (theorem) — distinct critical values are an open dense refinement of compact Morse functions. **For:** licenses one-critical-level handle ordering. **Prov:** [S: literature-derived; P: literature-derived].
@@ -377,7 +377,7 @@ Audin--Damian Ch. 1 §1.2, pp. 11--14; W §§4.3--4.5, pp. 98--110.
 10. `thm-generic-squared-distance-functions-are-morse` (theorem) — for a compact embedded manifold, squared distance from a generic centre is Morse. **For:** gives the normal/medial-axis model used in examples. **Prov:** [S: literature-derived; P: literature-derived].
 11. `cor-every-compact-smooth-manifold-admits-an-excellent-morse-function` (corollary) — combine existence, density and value separation. **For:** starts every compact handle decomposition. **Prov:** [S: literature-derived; P: literature-derived].
 12. `prop-proper-morse-exhaustions-exist-on-smooth-manifolds` (proposition) — refine a DG proper smooth exhaustion by locally finite relative perturbations to a proper Morse function. **For:** makes the noncompact extension dependency-closed. **Prov:** [S: literature-derived; P: literature-derived].
-13. `lem-properness-survives-a-controlled-locally-finite-perturbation` (lemma) — perturb on exhaustion shells with bounds too small to destroy escape to infinity. **For:** splits the load-bearing step in item 12. **Prov:** [S: literature-derived; P: literature-derived].
+13. `lem-properness-survives-a-controlled-locally-finite-perturbation` (lemma) — perturb on exhaustion shells with bounds too small to destroy escape to infinity. **For:** splits the load-bearing step in item 12. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.2, pp. 13--19; Audin--Damian Ch. 1 §1.2, pp. 11--14; Wall §§4.3--4.5, pp. 98--110.
 14. `rem-noncompact-morse-genericity-is-not-an-open-dense-claim` (remark) — residuality remains the general statement; compactness is what gives the simple global openness proof. **For:** enforces the commission's genericity subtlety. **Prov:** [S: literature-derived; P: not-applicable].
 15. `rem-morse-does-not-mean-distinct-critical-values` (remark) — excellence is a separate perturbable condition. **For:** prevents simultaneous critical levels being silently excluded. **Prov:** [S: literature-derived; P: not-applicable].
 
@@ -388,11 +388,11 @@ compact hypotheses of items 6 or 8 have been invoked.
 
 **B page:** `morse-functions-critical-values-and-genericity-examples`
 
-1. `ex-generic-and-exceptional-height-directions-on-a-torus` — exhibit a generic four-critical-point height and an exceptional degenerate direction. **For:** visualizes the exceptional parameter set. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-squared-distance-to-a-circle-and-its-medial-axis` — compare generic centres with the centre. **For:** shows where degeneracy enters. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-separating-equal-critical-values-by-bump-functions` — shift two same-level critical points independently. **For:** checks item 7. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-morse-functions-need-not-have-distinct-critical-values` — use a product/symmetric height with equal-index points at one level. **For:** blocks conflating Morse and excellent. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-noncompact-smallness-without-the-strong-topology-can-create-critical-points-at-infinity` — give a locally small but uncontrolled perturbation sequence. **For:** tests the topology/compactness clause. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-generic-and-exceptional-height-directions-on-a-torus` — exhibit a generic four-critical-point height and an exceptional degenerate direction. **For:** visualizes the exceptional parameter set. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.2, pp. 13--19; Audin--Damian Ch. 1 §1.2, pp. 11--14; Wall §§4.3--4.5, pp. 98--110.
+2. `ex-squared-distance-to-a-circle-and-its-medial-axis` — compare generic centres with the centre. **For:** shows where degeneracy enters. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.2, pp. 13--19; Audin--Damian Ch. 1 §1.2, pp. 11--14; Wall §§4.3--4.5, pp. 98--110.
+3. `ex-separating-equal-critical-values-by-bump-functions` — shift two same-level critical points independently. **For:** checks item 7. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.2, pp. 13--19; Audin--Damian Ch. 1 §1.2, pp. 11--14; Wall §§4.3--4.5, pp. 98--110.
+4. `cex-morse-functions-need-not-have-distinct-critical-values` — use a product/symmetric height with equal-index points at one level. **For:** blocks conflating Morse and excellent. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.2, pp. 13--19; Audin--Damian Ch. 1 §1.2, pp. 11--14; Wall §§4.3--4.5, pp. 98--110.
+5. `cex-noncompact-smallness-without-the-strong-topology-can-create-critical-points-at-infinity` — give a locally small but uncontrolled perturbation sequence. **For:** tests the topology/compactness clause. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu Ch. 1 §1.2, pp. 13--19; Audin--Damian Ch. 1 §1.2, pp. 11--14; Wall §§4.3--4.5, pp. 98--110.
 
 ### DT-3 — Gradient-like vector fields and Morse trajectories
 
@@ -410,15 +410,15 @@ Audin--Damian §§2.1--2.2, pp. 23--47; Ritter Lectures 7--8, PDF pp. 30--39.
 5. `prop-every-morse-function-admits-a-complete-gradient-like-field-on-a-closed-manifold` (proposition) — patch local standard fields and use compactness for completeness. **For:** prepares handle and homology constructions. **Prov:** [S: literature-derived; P: literature-derived].
 6. `lem-a-limit-point-of-a-gradient-trajectory-is-critical` (lemma) — energy decay and local flow estimates force $df=0$ at every alpha/omega limit point. **For:** splits endpoint convergence. **Prov:** [S: literature-derived; P: literature-derived].
 7. `lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits` (lemma) — isolated critical points plus connected limit sets give unique endpoints. **For:** justifies notation for connecting orbits. **Prov:** [S: literature-derived; P: literature-derived].
-8. `def-morse-trajectory-from-p-to-q` (definition) — a nonconstant complete negative-gradient line has limits $p$ at $-\infty$ and $q$ at $+\infty$. **For:** names the objects later counted. **Prov:** [S: literature-derived; P: not-applicable].
+8. `def-morse-trajectory-from-p-to-q` (definition) — a nonconstant complete negative-gradient line has limits $p$ at $-\infty$ and $q$ at $+\infty$. **For:** names the objects later counted. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
 9. `lem-morse-trajectories-have-positive-energy-drop` (lemma) — $f(p)-f(q)=\int_{-\infty}^{\infty}\|\dot\gamma\|^2dt>0$. **For:** gives compact energy control and rules out same-level connections. **Prov:** [S: literature-derived; P: literature-derived].
 10. `def-stable-and-unstable-sets-of-a-critical-point` (definition) — $W^s(p)$ and $W^u(p)$ are the forward/backward convergence sets under the fixed downward flow. **For:** fixes the temporal convention before the stable-manifold theorem. **Prov:** [S: literature-derived; P: not-applicable].
 11. `thm-local-stable-unstable-manifold-theorem-for-a-morse-critical-point` (theorem) — the local sets are embedded disks tangent to the positive/negative Hessian eigenspaces. **For:** converts the Morse lemma into dynamical geometry. **Prov:** [S: literature-derived; P: literature-derived].
 12. `thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces` (theorem) — $W^u(p)\cong\mathbb R^{\lambda(p)}$ and $W^s(p)\cong\mathbb R^{n-\lambda(p)}$. **For:** provides the dimensions used in transversality. **Prov:** [S: literature-derived; P: literature-derived].
-13. `lem-stable-and-unstable-manifolds-are-flow-invariant` (lemma) — the flow translates each set and preserves its endpoint. **For:** produces the later free $\mathbb R$ action. **Prov:** [S: literature-derived; P: literature-derived].
-14. `cor-a-gradient-flow-has-no-nonconstant-periodic-or-recurrent-orbits` (corollary) — strict descent contradicts return. **For:** records a qualitative consequence used in compactification. **Prov:** [S: literature-derived; P: literature-derived].
+13. `lem-stable-and-unstable-manifolds-are-flow-invariant` (lemma) — the flow translates each set and preserves its endpoint. **For:** produces the later free $\mathbb R$ action. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
+14. `cor-a-gradient-flow-has-no-nonconstant-periodic-or-recurrent-orbits` (corollary) — strict descent contradicts return. **For:** records a qualitative consequence used in compactification. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
 15. `prop-proper-morse-slabs-give-complete-connecting-trajectories` (proposition) — on a complete chosen metric, trajectories trapped in a compact proper sublevel slab exist for all relevant time. **For:** states the safe noncompact extension. **Prov:** [S: literature-derived; P: literature-derived].
-16. `rem-noncompact-flow-completeness-is-an-extra-hypothesis` (remark) — a smooth gradient field on a noncompact manifold can escape in finite time. **For:** blocks importing compact conclusions into DT-10. **Prov:** [S: literature-derived; P: not-applicable].
+16. `rem-noncompact-flow-completeness-is-an-extra-hypothesis` (remark) — a smooth gradient field on a noncompact manifold can escape in finite time. **For:** blocks importing compact conclusions into DT-10. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
 
 **Hard-proof closure.**  Compactness enters separately in flow completeness,
 existence of limit points, and finiteness of critical endpoints.  The stable
@@ -428,11 +428,11 @@ descending field near a critical point.
 
 **B page:** `gradient-like-vector-fields-and-morse-trajectories-examples`
 
-1. `ex-negative-gradient-lines-for-a-quadratic-morse-function` — solve the linear flow and read stable/unstable dimensions. **For:** checks every sign convention. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-meridian-trajectories-for-height-on-the-sphere` — describe the family from maximum to minimum. **For:** shows nontransverse families before Morse--Smale quotienting. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-gradient-flow-on-the-torus-morse-function` — locate separatrices between the four critical points. **For:** prepares broken trajectories. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-positive-gradient-reverses-stable-and-unstable-dimensions` — compute the same quadratic model with the opposite sign. **For:** guards the convention audit. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-an-incomplete-gradient-flow-on-a-noncompact-manifold` — solve an escaping one-dimensional gradient ODE. **For:** shows compactness/completeness is essential. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-negative-gradient-lines-for-a-quadratic-morse-function` — solve the linear flow and read stable/unstable dimensions. **For:** checks every sign convention. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
+2. `ex-meridian-trajectories-for-height-on-the-sphere` — describe the family from maximum to minimum. **For:** shows nontransverse families before Morse--Smale quotienting. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
+3. `ex-gradient-flow-on-the-torus-morse-function` — locate separatrices between the four critical points. **For:** prepares broken trajectories. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
+4. `cex-positive-gradient-reverses-stable-and-unstable-dimensions` — compute the same quadratic model with the opposite sign. **For:** guards the convention audit. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
+5. `cex-an-incomplete-gradient-flow-on-a-noncompact-manifold` — solve an escaping one-dimensional gradient ODE. **For:** shows compactness/completeness is essential. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.1--13.2, pp. 483--499; Audin--Damian §§2.1--2.2, pp. 23--47.
 
 ### DT-4 — Stable/unstable manifolds and Morse--Smale transversality
 
@@ -446,7 +446,7 @@ Audin--Damian §2.2, pp. 35--47; Ritter Lectures 8--9, PDF pp. 35--44.
 1. `def-morse-smale-pair` (definition) — $(f,g)$ is Morse--Smale when every $W^u(p)$ is transverse to every $W^s(q)$. **For:** makes moduli spaces smooth. **Prov:** [S: literature-derived; P: not-applicable].
 2. `def-parametrized-morse-trajectory-space` (definition) — $\widetilde{\mathcal M}(p,q)=W^u(p)\cap W^s(q)$ for $p\ne q$. **For:** identifies trajectories with a transverse intersection. **Prov:** [S: literature-derived; P: not-applicable].
 3. `prop-parametrized-morse-trajectory-space-is-a-manifold` (proposition) — under Morse--Smale, it has dimension $\lambda(p)-\lambda(q)$. **For:** supplies the expected dimension before quotienting. **Prov:** [S: literature-derived; P: literature-derived].
-4. `lem-time-translation-acts-freely-on-nonconstant-trajectories` (lemma) — $s\cdot\gamma(t)=\gamma(t+s)$ has no stabilizer. **For:** makes the quotient dimension legitimate. **Prov:** [S: literature-derived; P: literature-derived].
+4. `lem-time-translation-acts-freely-on-nonconstant-trajectories` (lemma) — $s\cdot\gamma(t)=\gamma(t+s)$ has no stabilizer. **For:** makes the quotient dimension legitimate. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
 5. `def-unparametrized-morse-trajectory-moduli-space` (definition) — $\mathcal M(p,q)=\widetilde{\mathcal M}(p,q)/\mathbb R$. **For:** names the finite sets later counted. **Prov:** [S: literature-derived; P: not-applicable].
 6. `thm-unparametrized-trajectory-space-is-a-smooth-manifold` (theorem) — it has dimension $\lambda(p)-\lambda(q)-1$, using a regular level as a slice. **For:** avoids an unproved quotient-manifold assertion. **Prov:** [S: literature-derived; P: literature-derived].
 7. `cor-no-morse-smale-trajectories-for-nonpositive-index-drop` (corollary) — $\mathcal M(p,q)=\varnothing$ when $p\ne q$ and $\lambda(p)\le\lambda(q)$. **For:** bounds the differential and breaking patterns. **Prov:** [S: literature-derived; P: literature-derived].
@@ -456,9 +456,9 @@ Audin--Damian §2.2, pp. 35--47; Ritter Lectures 8--9, PDF pp. 35--44.
 11. `lem-morse-smale-transversality-is-equivalent-to-surjectivity-of-the-linearized-flow-operator` (lemma) — the analytic linearisation has zero cokernel exactly at transverse connecting orbits. **For:** opens the compactness/gluing proof route used by DT-9. **Prov:** [S: literature-derived; P: literature-derived].
 12. `prop-index-one-trajectory-spaces-are-zero-dimensional` (proposition) — an index drop of one gives a discrete moduli space. **For:** identifies differential coefficients, postponing finiteness to compactification. **Prov:** [S: literature-derived; P: literature-derived].
 13. `prop-index-two-trajectory-spaces-are-one-dimensional` (proposition) — an index drop of two gives curves whose missing ends can only be one-break configurations. **For:** previews $\partial^2=0$. **Prov:** [S: literature-derived; P: literature-derived].
-14. `lem-broken-morse-trajectories-have-strictly-decreasing-critical-values-and-indices` (lemma) — every nonconstant component decreases $f$ and, under Morse--Smale, drops index. **For:** bounds breaking length on compact manifolds. **Prov:** [S: literature-derived; P: literature-derived].
-15. `rem-morse-smale-residuality-does-not-assert-simultaneous-genericity-for-all-data` (remark) — the function, metric and any parametric continuation family have separate transversality problems. **For:** prevents a blanket genericity citation. **Prov:** [S: literature-derived; P: not-applicable].
-16. `rem-ambient-orientability-is-not-required-for-morse-smale-transversality` (remark) — integral signs later use orientation lines, not an orientation of $M$. **For:** records the exact orientation boundary. **Prov:** [S: literature-derived; P: not-applicable].
+14. `lem-broken-morse-trajectories-have-strictly-decreasing-critical-values-and-indices` (lemma) — every nonconstant component decreases $f$ and, under Morse--Smale, drops index. **For:** bounds breaking length on compact manifolds. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
+15. `rem-morse-smale-residuality-does-not-assert-simultaneous-genericity-for-all-data` (remark) — the function, metric and any parametric continuation family have separate transversality problems. **For:** prevents a blanket genericity citation. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
+16. `rem-ambient-orientability-is-not-required-for-morse-smale-transversality` (remark) — integral signs later use orientation lines, not an orientation of $M$. **For:** records the exact orientation boundary. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
 
 **Hard-proof closure.**  The quotient theorem must use a regular-level slice or
 a proper free-action argument; freeness alone is insufficient.  State the
@@ -468,11 +468,11 @@ early.
 
 **B page:** `stable-unstable-manifolds-and-morse-smale-transversality-examples`
 
-1. `ex-morse-smale-flow-on-the-circle` — compute the two zero-dimensional moduli sets. **For:** checks translation quotienting in dimension one. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-a-morse-smale-height-function-on-a-tilted-torus` — display transverse separatrices. **For:** tests index drops. **Prov:** [S: literature-derived; P: literature-derived].
-3. `cex-symmetric-sphere-height-flow-is-not-morse-smale` — maximum and minimum stable/unstable sets meet in excess dimension. **For:** shows Morse does not imply Morse--Smale. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-an-index-one-moduli-space-can-be-infinite-without-compactness` — give a noncompact escaping family. **For:** blocks using discreteness as finiteness. **Prov:** [S: literature-derived; P: literature-derived].
-5. `ex-regular-level-slices-for-unparametrized-trajectories` — identify a moduli space with intersection points on a level. **For:** verifies item 8 concretely. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-morse-smale-flow-on-the-circle` — compute the two zero-dimensional moduli sets. **For:** checks translation quotienting in dimension one. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
+2. `ex-a-morse-smale-height-function-on-a-tilted-torus` — display transverse separatrices. **For:** tests index drops. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
+3. `cex-symmetric-sphere-height-flow-is-not-morse-smale` — maximum and minimum stable/unstable sets meet in excess dimension. **For:** shows Morse does not imply Morse--Smale. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
+4. `cex-an-index-one-moduli-space-can-be-infinite-without-compactness` — give a noncompact escaping family. **For:** blocks using discreteness as finiteness. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
+5. `ex-regular-level-slices-for-unparametrized-trajectories` — identify a moduli space with intersection points on a level. **For:** verifies item 8 concretely. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§13.2--13.4, pp. 491--512; Ritter Lectures 7--9, PDF pp. 30--44.
 
 ### DT-5 — Sublevel deformation and the handle-attachment theorem
 
@@ -484,14 +484,14 @@ for the relative-homology corollary only.
 **Sources:** N §§2.1--2.2, pp. 23--45; C §§12.3--12.4, pp. 466--475;
 H Ch. 6 §§2--3, pp. 149--165; Audin--Damian §2.1, pp. 23--35.
 
-1. `def-closed-sublevel-and-level-set-of-a-smooth-function` (definition) — write $M^a=f^{-1}(( -\infty,a])$ and $M_a=f^{-1}(a)$. **For:** fixes endpoint inclusion throughout handle arguments. **Prov:** [S: literature-derived; P: not-applicable].
+1. `def-closed-sublevel-and-level-set-of-a-smooth-function` (definition) — write $M^a=f^{-1}(( -\infty,a])$ and $M_a=f^{-1}(a)$. **For:** fixes endpoint inclusion throughout handle arguments. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Nicolaescu §§2.1--2.2, pp. 23--45; Hirsch Ch. 6 §§2--3, pp. 149--165.
 2. `lem-normalized-gradient-crosses-a-compact-regular-band-in-controlled-time` (lemma) — on $f^{-1}[a,b]$ with no critical points, $\operatorname{grad}f/\|\operatorname{grad}f\|^2$ has $df=1$ and a complete finite-time flow. **For:** isolates the compactness step. **Prov:** [S: literature-derived; P: literature-derived].
 3. `thm-regular-interval-diffeomorphism` (theorem) — a compact critical-point-free band is diffeomorphic to $M_a\times[a,b]$, compatibly with levels. **For:** proves topology is constant between critical values. **Prov:** [S: literature-derived; P: literature-derived].
 4. `cor-regular-sublevels-are-diffeomorphic` (corollary) — $M^a\cong M^b$ after adjoining the product band. **For:** supports finite critical-level induction. **Prov:** [S: literature-derived; P: literature-derived].
 5. `prop-deformation-lemma-for-a-critical-point-free-slab` (proposition) — $M^b$ strongly deformation retracts to $M^a$ under the same compact-band hypothesis. **For:** supplies homotopy conclusions even when only a collar is needed. **Prov:** [S: literature-derived; P: literature-derived].
 6. `def-k-handle-core-cocore-attaching-region-and-belt-sphere` (definition) — define all parts of $D^k\times D^{n-k}$, including $k=0,n$. **For:** makes cancellation/intersection language precise. **Prov:** [S: literature-derived; P: not-applicable].
 7. `def-attaching-a-smooth-handle-with-corner-rounding` (definition) — glue the attaching region by an embedding with framed normal data and smooth the resulting corner. **For:** records data usually hidden by pictures. **Prov:** [S: literature-derived; P: not-applicable].
-8. `lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism` (lemma) — compatible smoothings are isotopic. **For:** makes the construction well defined. **Prov:** [S: literature-derived; P: literature-derived].
+8. `lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism` (lemma) — compatible smoothings are isotopic. **For:** makes the construction well defined. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §§2.1--2.2, pp. 23--45; Hirsch Ch. 6 §§2--3, pp. 149--165.
 9. `lem-local-morse-sublevel-pair-is-a-handle-pair` (lemma) — the quadratic normal form cuts out the standard index-$\lambda$ handle change. **For:** supplies the local geometric core of the attachment theorem. **Prov:** [S: literature-derived; P: literature-derived].
 10. `lem-gradient-flow-identifies-the-local-and-global-attaching-regions` (lemma) — flow transports the local attaching sphere down to the lower regular level without collisions. **For:** glues the local model into the global sublevel. **Prov:** [S: literature-derived; P: literature-derived].
 11. `thm-one-critical-point-handle-attachment` (theorem) — if a compact slab contains exactly one nondegenerate index-$\lambda$ critical point, $M^b$ is diffeomorphic to $M^a$ with one $\lambda$-handle attached. **For:** is the central topological-change theorem. **Prov:** [S: literature-derived; P: literature-derived].
@@ -511,12 +511,12 @@ ordered.
 
 **B page:** `sublevel-deformation-and-the-handle-attachment-theorem-examples`
 
-1. `ex-sublevels-of-height-on-the-sphere` — follow a $0$-handle and an $n$-handle. **For:** tests endpoint indices. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-torus-from-one-handle-of-each-index` — build a surface from one $0$-, two $1$-, and one $2$-handle. **For:** prepares Euler/Morse counts. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-a-one-handle-joins-components-or-adds-a-tunnel` — distinguish the two attaching patterns. **For:** shows index alone does not determine global effect. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-simultaneous-handles-at-a-repeated-critical-value` — attach two disjoint handles in one slab. **For:** checks item 15. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-a-critical-point-free-noncompact-band-need-not-be-a-global-product` — give a normalized flow escaping in finite time. **For:** shows compactness is essential. **Prov:** [S: literature-derived; P: literature-derived].
-6. `ex-relative-homology-of-a-handle-by-excision` — reduce the pair to $(D^\lambda,S^{\lambda-1})$. **For:** finite verification of item 14. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-sublevels-of-height-on-the-sphere` — follow a $0$-handle and an $n$-handle. **For:** tests endpoint indices. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §§2.1--2.2, pp. 23--45; Hirsch Ch. 6 §§2--3, pp. 149--165.
+2. `ex-torus-from-one-handle-of-each-index` — build a surface from one $0$-, two $1$-, and one $2$-handle. **For:** prepares Euler/Morse counts. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §§2.1--2.2, pp. 23--45; Hirsch Ch. 6 §§2--3, pp. 149--165.
+3. `ex-a-one-handle-joins-components-or-adds-a-tunnel` — distinguish the two attaching patterns. **For:** shows index alone does not determine global effect. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §§2.1--2.2, pp. 23--45; Hirsch Ch. 6 §§2--3, pp. 149--165.
+4. `ex-simultaneous-handles-at-a-repeated-critical-value` — attach two disjoint handles in one slab. **For:** checks item 15. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §§2.1--2.2, pp. 23--45; Hirsch Ch. 6 §§2--3, pp. 149--165.
+5. `cex-a-critical-point-free-noncompact-band-need-not-be-a-global-product` — give a normalized flow escaping in finite time. **For:** shows compactness is essential. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §§2.1--2.2, pp. 23--45; Hirsch Ch. 6 §§2--3, pp. 149--165.
+6. `ex-relative-homology-of-a-handle-by-excision` — reduce the pair to $(D^\lambda,S^{\lambda-1})$. **For:** finite verification of item 14. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §§2.1--2.2, pp. 23--45; Hirsch Ch. 6 §§2--3, pp. 149--165.
 
 ### DT-6 — Handle decompositions, duality, and rearrangement
 
@@ -542,8 +542,8 @@ P Ch. 5, pp. 163--194; MH §§2--4, pp. 10--48.
 12. `lem-handles-of-equal-index-can-be-attached-on-one-level` (lemma) — disjoint same-index handles can be grouped without changing the cobordism. **For:** makes handle chain groups visible. **Prov:** [S: literature-derived; P: literature-derived].
 13. `prop-connected-cobordisms-admit-presentations-without-superfluous-zero-handles` (proposition) — relative to a nonempty connected incoming boundary, cancel/connect $0$-handles so none remain. **For:** prepares h-cobordism normalisation. **Prov:** [S: literature-derived; P: literature-derived].
 14. `prop-dual-elimination-of-top-index-handles` (proposition) — the corresponding statement for $n$-handles follows from duality and nonempty outgoing boundary. **For:** supplies the upper endpoint. **Prov:** [S: literature-derived; P: literature-derived].
-15. `lem-product-cobordisms-have-critical-point-free-presentations` (lemma) — projection on $M\times[0,1]$ is adapted and has no handles. **For:** supplies the target form for h-cobordism. **Prov:** [S: literature-derived; P: literature-derived].
-16. `rem-handle-decompositions-are-not-canonical` (remark) — choices of Morse data, attaching maps and rearrangements change the presentation, not the diffeomorphism type. **For:** motivates elementary moves and invariants. **Prov:** [S: literature-derived; P: not-applicable].
+15. `lem-product-cobordisms-have-critical-point-free-presentations` (lemma) — projection on $M\times[0,1]$ is adapted and has no handles. **For:** supplies the target form for h-cobordism. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §§5.1--5.4, pp. 129--148; Pajitnov Ch. 5, pp. 163--194; Milnor, *h-Cobordism* §§2--4, pp. 10--48.
+16. `rem-handle-decompositions-are-not-canonical` (remark) — choices of Morse data, attaching maps and rearrangements change the presentation, not the diffeomorphism type. **For:** motivates elementary moves and invariants. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Wall §§5.1--5.4, pp. 129--148; Pajitnov Ch. 5, pp. 163--194; Milnor, *h-Cobordism* §§2--4, pp. 10--48.
 
 **Hard-proof closure.**  The converse in item 5 needs a compatible smooth
 function on each handle and corner smoothing.  Rearrangement requires absence
@@ -552,11 +552,11 @@ endpoint handles assumes the named boundary is nonempty and connected.
 
 **B page:** `handle-decompositions-duality-and-rearrangement-examples`
 
-1. `ex-relative-handle-decomposition-of-a-cylinder` — display the empty presentation. **For:** checks item 15. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-dual-handle-presentations-of-a-genus-g-surface` — reverse a $0$/$1$/$2$ presentation. **For:** tests dual indices and endpoints. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-reordering-independent-one-handles` — interchange disjoint same/lower-index attachments. **For:** verifies the rearrangement condition. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-critical-levels-cannot-always-be-interchanged-across-a-connecting-trajectory` — show the obstruction in a simple surface flow. **For:** tests item 9's hypothesis. **Prov:** [S: literature-derived; P: literature-derived].
-5. `ex-empty-incoming-boundary-requires-zero-handles` — build a closed connected manifold from disks and higher handles. **For:** blocks misusing item 13. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-relative-handle-decomposition-of-a-cylinder` — display the empty presentation. **For:** checks item 15. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §§5.1--5.4, pp. 129--148; Pajitnov Ch. 5, pp. 163--194; Milnor, *h-Cobordism* §§2--4, pp. 10--48.
+2. `ex-dual-handle-presentations-of-a-genus-g-surface` — reverse a $0$/$1$/$2$ presentation. **For:** tests dual indices and endpoints. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §§5.1--5.4, pp. 129--148; Pajitnov Ch. 5, pp. 163--194; Milnor, *h-Cobordism* §§2--4, pp. 10--48.
+3. `ex-reordering-independent-one-handles` — interchange disjoint same/lower-index attachments. **For:** verifies the rearrangement condition. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §§5.1--5.4, pp. 129--148; Pajitnov Ch. 5, pp. 163--194; Milnor, *h-Cobordism* §§2--4, pp. 10--48.
+4. `cex-critical-levels-cannot-always-be-interchanged-across-a-connecting-trajectory` — show the obstruction in a simple surface flow. **For:** tests item 9's hypothesis. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §§5.1--5.4, pp. 129--148; Pajitnov Ch. 5, pp. 163--194; Milnor, *h-Cobordism* §§2--4, pp. 10--48.
+5. `ex-empty-incoming-boundary-requires-zero-handles` — build a closed connected manifold from disks and higher handles. **For:** blocks misusing item 13. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §§5.1--5.4, pp. 129--148; Pajitnov Ch. 5, pp. 163--194; Milnor, *h-Cobordism* §§2--4, pp. 10--48.
 
 ### DT-7 — Handle cancellation, slides, and elementary moves
 
@@ -581,7 +581,7 @@ MH §§4--6, pp. 37--78; Lück Ch. 1 §§1.2--1.4, pp. 6--22.
 11. `lem-algebraic-cancellation-does-not-yet-give-geometric-cancellation` (lemma) — extra intersection pairs must be removed before item 3 applies. **For:** exposes the Whitney-trick dependency. **Prov:** [S: literature-derived; P: literature-derived].
 12. `prop-morse-cancellation-criterion-via-a-unique-connecting-orbit` (proposition) — adjacent-index critical points joined by one transverse orbit and no competing broken data may be cancelled by changing Morse data. **For:** gives the dynamical form of item 3. **Prov:** [S: literature-derived; P: literature-derived].
 13. `lem-cancellation-modification-can-be-supported-in-a-trajectory-neighbourhood` (lemma) — outside a compact local neighbourhood the Morse function/field remain fixed. **For:** supports relative constructions. **Prov:** [S: literature-derived; P: literature-derived].
-14. `rem-handle-slides-are-not-handle-cancellations` (remark) — a slide changes attaching data but does not change handle count. **For:** prevents conflating the two Cerf moves. **Prov:** [S: literature-derived; P: not-applicable].
+14. `rem-handle-slides-are-not-handle-cancellations` (remark) — a slide changes attaching data but does not change handle count. **For:** prevents conflating the two Cerf moves. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Wall §5.4, pp. 143--148; Milnor, *h-Cobordism* §§4--6, pp. 37--78.
 15. `rem-elementary-moves-do-not-constitute-full-cerf-theory-here` (remark) — the scaffold records births/deaths, slides and rearrangements only; no classification of arbitrary one-parameter families is asserted. **For:** fixes the proof boundary. **Prov:** [S: literature-derived; P: not-applicable].
 
 **Hard-proof closure.**  Separate local cancellation (items 1--3), algebraic
@@ -592,11 +592,11 @@ applications.
 
 **B page:** `handle-cancellation-slides-and-elementary-moves-examples`
 
-1. `ex-cancelling-zero-one-handle-pair` — draw the local birth and cancellation. **For:** tests the endpoint case. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-cancelling-one-two-handle-pair-on-a-surface` — verify one attaching/belt intersection. **For:** visualizes item 1. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-a-handle-slide-realizes-an-elementary-row-operation` — compute a two-handle matrix before and after a slide. **For:** checks item 7. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-algebraic-intersection-one-with-three-geometric-points` — signs sum to one but cancellation is not yet geometric. **For:** motivates the Whitney trick. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-adjacent-index-handles-with-zero-intersection-do-not-cancel` — disjoint attaching and belt spheres violate the criterion. **For:** blocks count-only cancellation. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-cancelling-zero-one-handle-pair` — draw the local birth and cancellation. **For:** tests the endpoint case. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §5.4, pp. 143--148; Milnor, *h-Cobordism* §§4--6, pp. 37--78.
+2. `ex-cancelling-one-two-handle-pair-on-a-surface` — verify one attaching/belt intersection. **For:** visualizes item 1. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §5.4, pp. 143--148; Milnor, *h-Cobordism* §§4--6, pp. 37--78.
+3. `ex-a-handle-slide-realizes-an-elementary-row-operation` — compute a two-handle matrix before and after a slide. **For:** checks item 7. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §5.4, pp. 143--148; Milnor, *h-Cobordism* §§4--6, pp. 37--78.
+4. `cex-algebraic-intersection-one-with-three-geometric-points` — signs sum to one but cancellation is not yet geometric. **For:** motivates the Whitney trick. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §5.4, pp. 143--148; Milnor, *h-Cobordism* §§4--6, pp. 37--78.
+5. `cex-adjacent-index-handles-with-zero-intersection-do-not-cancel` — disjoint attaching and belt spheres violate the criterion. **For:** blocks count-only cancellation. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Wall §5.4, pp. 143--148; Milnor, *h-Cobordism* §§4--6, pp. 37--78.
 
 ### DT-8 — Morse inequalities and the handle chain complex
 
@@ -620,9 +620,9 @@ Audin--Damian §4.4, pp. 105--111; Ritter Lecture 21, PDF pp. 96--101.
 10. `def-perfect-morse-function-over-a-field` (definition) — $f$ is perfect over $\Bbbk$ when $m_k=b_k$ for all $k$. **For:** names equality in all weak inequalities. **Prov:** [S: literature-derived; P: not-applicable].
 11. `lem-perfectness-is-equivalent-to-vanishing-morse-correction-polynomial` (lemma) — $Q=0$ iff all Morse differentials/connecting losses vanish over the chosen field. **For:** interprets the equality case. **Prov:** [S: literature-derived; P: literature-derived].
 12. `prop-relative-morse-inequalities-for-a-cobordism` (proposition) — an adapted Morse function bounds $H_*(W,M_0;\Bbbk)$ by its relative handle counts. **For:** is the version used in h-cobordism. **Prov:** [S: literature-derived; P: literature-derived].
-13. `lem-handle-boundary-coefficients-are-attaching-belt-intersection-numbers` (lemma) — after index ordering, the cellular boundary matrix is computed by oriented/mod-2 intersections. **For:** connects DT-7 to Morse homology. **Prov:** [S: literature-derived; P: literature-derived].
+13. `lem-handle-boundary-coefficients-are-attaching-belt-intersection-numbers` (lemma) — after index ordering, the cellular boundary matrix is computed by oriented/mod-2 intersections. **For:** connects DT-7 to Morse homology. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §2.3, pp. 46--53; Audin--Damian §4.4, pp. 105--111; Ritter Lecture 21, PDF pp. 96--101.
 14. `prop-morse-handle-chain-complex-computes-singular-homology` (proposition) — the finite handle filtration's cellular complex computes $H_*(M;\Bbbk)$ through the AT comparison theorem. **For:** gives a concrete proof route for item 5. **Prov:** [S: literature-derived; P: literature-derived].
-15. `rem-morse-inequalities-depend-on-the-coefficient-field` (remark) — torsion can change Betti numbers and perfectness, though the Euler equality is coefficient independent. **For:** states the algebraic boundary. **Prov:** [S: literature-derived; P: not-applicable].
+15. `rem-morse-inequalities-depend-on-the-coefficient-field` (remark) — torsion can change Betti numbers and perfectness, though the Euler equality is coefficient independent. **For:** states the algebraic boundary. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Nicolaescu §2.3, pp. 46--53; Audin--Damian §4.4, pp. 105--111; Ritter Lecture 21, PDF pp. 96--101.
 
 **Hard-proof closure.**  The polynomial identity requires more than the weak
 inequalities; construct $Q$ from ranks of boundary maps or exact-sequence
@@ -631,11 +631,11 @@ is always annotated by coefficients.
 
 **B page:** `morse-inequalities-and-the-handle-chain-complex-examples`
 
-1. `ex-perfect-height-function-on-a-sphere` — obtain $1+t^n$. **For:** checks equality at endpoint indices. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-perfect-morse-function-on-a-torus` — obtain $1+2t+t^2$. **For:** verifies the Euler identity. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-real-projective-space-shows-coefficient-dependent-perfectness` — compare $\mathbb F_2$ and rational Betti numbers. **For:** tests item 15. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-cancellation-pair-contributes-a-one-plus-t-term` — see how a birth adds $t^k+t^{k+1}$. **For:** visualizes $Q$. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-euler-equality-alone-does-not-imply-perfectness` — exhibit extra adjacent-index critical pairs with canceling signs. **For:** blocks a false converse. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-perfect-height-function-on-a-sphere` — obtain $1+t^n$. **For:** checks equality at endpoint indices. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §2.3, pp. 46--53; Audin--Damian §4.4, pp. 105--111; Ritter Lecture 21, PDF pp. 96--101.
+2. `ex-perfect-morse-function-on-a-torus` — obtain $1+2t+t^2$. **For:** verifies the Euler identity. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §2.3, pp. 46--53; Audin--Damian §4.4, pp. 105--111; Ritter Lecture 21, PDF pp. 96--101.
+3. `ex-real-projective-space-shows-coefficient-dependent-perfectness` — compare $\mathbb F_2$ and rational Betti numbers. **For:** tests item 15. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §2.3, pp. 46--53; Audin--Damian §4.4, pp. 105--111; Ritter Lecture 21, PDF pp. 96--101.
+4. `ex-cancellation-pair-contributes-a-one-plus-t-term` — see how a birth adds $t^k+t^{k+1}$. **For:** visualizes $Q$. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §2.3, pp. 46--53; Audin--Damian §4.4, pp. 105--111; Ritter Lecture 21, PDF pp. 96--101.
+5. `cex-euler-equality-alone-does-not-imply-perfectness` — exhibit extra adjacent-index critical pairs with canceling signs. **For:** blocks a false converse. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Nicolaescu §2.3, pp. 46--53; Audin--Damian §4.4, pp. 105--111; Ritter Lecture 21, PDF pp. 96--101.
 
 ### DT-9 — Morse trajectory moduli spaces and the Morse differential
 
@@ -672,11 +672,11 @@ outward boundary orientation in item 14 must match DG exactly.
 
 **B page:** `morse-trajectory-moduli-spaces-and-the-morse-differential-examples`
 
-1. `ex-morse-complex-of-the-circle` — count its two downward arcs modulo two and with signs. **For:** tests cancellation. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-morse-complex-of-the-two-sphere` — the differential vanishes for degree reasons. **For:** checks endpoint grading. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-broken-trajectories-in-an-index-two-torus-moduli-space` — display the two-stage ends. **For:** visualizes item 8. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-changing-an-unstable-orientation-changes-two-basis-signs` — verify the homology is unchanged. **For:** checks orientation-line well-definedness. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-a-naive-signed-count-without-the-quotient-orientation-can-fail-d-squared-zero` — exhibit the sign ambiguity. **For:** shows item 12 is essential. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-morse-complex-of-the-circle` — count its two downward arcs modulo two and with signs. **For:** tests cancellation. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.1--3.4, pp. 55--75; Ritter Lectures 17--19, PDF pp. 76--91; Cohen §13.4/App. A--B, pp. 507--532.
+2. `ex-morse-complex-of-the-two-sphere` — the differential vanishes for degree reasons. **For:** checks endpoint grading. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.1--3.4, pp. 55--75; Ritter Lectures 17--19, PDF pp. 76--91; Cohen §13.4/App. A--B, pp. 507--532.
+3. `ex-broken-trajectories-in-an-index-two-torus-moduli-space` — display the two-stage ends. **For:** visualizes item 8. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.1--3.4, pp. 55--75; Ritter Lectures 17--19, PDF pp. 76--91; Cohen §13.4/App. A--B, pp. 507--532.
+4. `ex-changing-an-unstable-orientation-changes-two-basis-signs` — verify the homology is unchanged. **For:** checks orientation-line well-definedness. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.1--3.4, pp. 55--75; Ritter Lectures 17--19, PDF pp. 76--91; Cohen §13.4/App. A--B, pp. 507--532.
+5. `cex-a-naive-signed-count-without-the-quotient-orientation-can-fail-d-squared-zero` — exhibit the sign ambiguity. **For:** shows item 12 is essential. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.1--3.4, pp. 55--75; Ritter Lectures 17--19, PDF pp. 76--91; Cohen §13.4/App. A--B, pp. 507--532.
 
 ### DT-10 — Morse homology, continuation, and comparison
 
@@ -704,7 +704,7 @@ DG time-dependent flows/transversality.
 13. `thm-morse-complex-is-chain-homotopy-equivalent-to-the-handle-cellular-complex` (theorem) — for compatible Morse data, signed trajectory counts agree with attaching-map boundary coefficients. **For:** bridges analytic and handle constructions. **Prov:** [S: literature-derived; P: literature-derived].
 14. `thm-morse-homology-is-naturally-isomorphic-to-singular-homology` (theorem) — compose item 13 with the AT cellular--singular comparison, over $\mathbb Z$ or a stated coefficient ring. **For:** identifies the invariant without rebuilding singular theory. **Prov:** [S: literature-derived; P: literature-derived].
 15. `cor-morse-homology-recovers-the-morse-inequalities` (corollary) — ranks of a finite chain complex dominate homology ranks and give the correction polynomial. **For:** closes the two classical routes. **Prov:** [S: literature-derived; P: literature-derived].
-16. `rem-noncompact-morse-homology-needs-properness-completeness-and-compactness-control` (remark) — the closed theory does not automatically extend to an arbitrary Morse exhaustion. **For:** blocks a false generalisation. **Prov:** [S: literature-derived; P: not-applicable].
+16. `rem-noncompact-morse-homology-needs-properness-completeness-and-compactness-control` (remark) — the closed theory does not automatically extend to an arbitrary Morse exhaustion. **For:** blocks a false generalisation. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Audin--Damian §§3.3--3.5, 4.1, 4.6, 4.9, pp. 68--80, 83--90, 112--126; Ritter Lectures 19--21, PDF pp. 87--101.
 
 **Hard-proof closure.**  The continuation chain-map, independence and
 composition statements arise from three different compactified moduli
@@ -713,11 +713,11 @@ comparison cites AT's construction and must wait for its exact relative label.
 
 **B page:** `morse-homology-continuation-and-comparison-examples`
 
-1. `ex-continuation-across-a-birth-death-adds-an-acyclic-pair` — compute the local two-generator complex. **For:** visualizes invariance. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-two-morse-functions-on-the-circle-have-isomorphic-morse-homology` — compare a minimal and stabilised function. **For:** checks continuation. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-relative-morse-homology-of-a-single-handle-cobordism` — recover one relative generator. **For:** tests item 12. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-morse-and-cellular-boundaries-for-a-surface-handle-presentation` — match trajectory and attaching coefficients. **For:** checks item 13. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-a-nonproper-noncompact-morse-function-can-lose-continuation-trajectories-at-infinity` — display the escape mechanism. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-continuation-across-a-birth-death-adds-an-acyclic-pair` — compute the local two-generator complex. **For:** visualizes invariance. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.3--3.5, 4.1, 4.6, 4.9, pp. 68--80, 83--90, 112--126; Ritter Lectures 19--21, PDF pp. 87--101.
+2. `ex-two-morse-functions-on-the-circle-have-isomorphic-morse-homology` — compare a minimal and stabilised function. **For:** checks continuation. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.3--3.5, 4.1, 4.6, 4.9, pp. 68--80, 83--90, 112--126; Ritter Lectures 19--21, PDF pp. 87--101.
+3. `ex-relative-morse-homology-of-a-single-handle-cobordism` — recover one relative generator. **For:** tests item 12. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.3--3.5, 4.1, 4.6, 4.9, pp. 68--80, 83--90, 112--126; Ritter Lectures 19--21, PDF pp. 87--101.
+4. `ex-morse-and-cellular-boundaries-for-a-surface-handle-presentation` — match trajectory and attaching coefficients. **For:** checks item 13. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.3--3.5, 4.1, 4.6, 4.9, pp. 68--80, 83--90, 112--126; Ritter Lectures 19--21, PDF pp. 87--101.
+5. `cex-a-nonproper-noncompact-morse-function-can-lose-continuation-trajectories-at-infinity` — display the escape mechanism. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Audin--Damian §§3.3--3.5, 4.1, 4.6, 4.9, pp. 68--80, 83--90, 112--126; Ritter Lectures 19--21, PDF pp. 87--101.
 
 ### DT-11 — Oriented and mod-two intersection numbers
 
@@ -756,11 +756,11 @@ transversality.
 
 **B page:** `oriented-and-mod-two-intersection-numbers-examples`
 
-1. `ex-latitude-and-meridian-intersections-on-the-torus` — compute signed and mod-two counts after perturbation. **For:** tests orientations and parity. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-two-projective-lines-have-one-mod-two-intersection` — work in $\mathbb RP^2$ without orientability. **For:** shows why mod two suffices. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-degree-as-intersection-with-a-regular-value` — recover the DG degree sign formula. **For:** checks compatibility rather than re-minting degree. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-geometric-cardinality-is-not-homotopy-invariant` — create a cancelling pair of transverse intersections. **For:** motivates signs/parity. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-noncompact-intersections-can-escape-during-a-homotopy` — show a count changing at infinity. **For:** tests compact trace. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-latitude-and-meridian-intersections-on-the-torus` — compute signed and mod-two counts after perturbation. **For:** tests orientations and parity. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 2 §4 and Ch. 3 §3, pp. 77--84, 107--118; Stanford Math 215B Lectures 14--15, pp. 43--49; Milnor, *Topology from the Differentiable Viewpoint* Chs. 4--5, pp. 20--31.
+2. `ex-two-projective-lines-have-one-mod-two-intersection` — work in $\mathbb RP^2$ without orientability. **For:** shows why mod two suffices. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 2 §4 and Ch. 3 §3, pp. 77--84, 107--118; Stanford Math 215B Lectures 14--15, pp. 43--49; Milnor, *Topology from the Differentiable Viewpoint* Chs. 4--5, pp. 20--31.
+3. `ex-degree-as-intersection-with-a-regular-value` — recover the DG degree sign formula. **For:** checks compatibility rather than re-minting degree. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 2 §4 and Ch. 3 §3, pp. 77--84, 107--118; Stanford Math 215B Lectures 14--15, pp. 43--49; Milnor, *Topology from the Differentiable Viewpoint* Chs. 4--5, pp. 20--31.
+4. `cex-geometric-cardinality-is-not-homotopy-invariant` — create a cancelling pair of transverse intersections. **For:** motivates signs/parity. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 2 §4 and Ch. 3 §3, pp. 77--84, 107--118; Stanford Math 215B Lectures 14--15, pp. 43--49; Milnor, *Topology from the Differentiable Viewpoint* Chs. 4--5, pp. 20--31.
+5. `cex-noncompact-intersections-can-escape-during-a-homotopy` — show a count changing at infinity. **For:** tests compact trace. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 2 §4 and Ch. 3 §3, pp. 77--84, 107--118; Stanford Math 215B Lectures 14--15, pp. 43--49; Milnor, *Topology from the Differentiable Viewpoint* Chs. 4--5, pp. 20--31.
 
 ### DT-12 — Intersection pairings, self-intersection, and Euler classes
 
@@ -783,10 +783,10 @@ Stanford Math 215B Lectures 14--16, pp. 43--52; MS Chs. 11--12, pp. 123--146.
 8. `lem-normal-bundle-of-the-diagonal-is-canonically-tm` (lemma) — $T(M\times M)|_\Delta/T\Delta\cong TM$ via the difference map. **For:** identifies diagonal self-intersection. **Prov:** [S: literature-derived; P: literature-derived].
 9. `cor-diagonal-self-intersection-is-the-euler-number-of-tm` (corollary) — $\Delta\cdot\Delta=\langle e(TM),[M]\rangle$. **For:** bridges to Euler characteristic and Lefschetz. **Prov:** [S: literature-derived; P: literature-derived].
 10. `prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual` (proposition) — the zero submanifold has normal bundle identified with the bundle and represents $PD(e(E))$. **For:** geometric characteristic-class application. **Prov:** [S: literature-derived; P: literature-derived].
-11. `cor-nowhere-zero-section-forces-the-euler-class-to-vanish` (corollary) — a section disjoint from zero has empty zero cycle. **For:** gives a bundle obstruction used in DT-13/28. **Prov:** [S: literature-derived; P: literature-derived].
+11. `cor-nowhere-zero-section-forces-the-euler-class-to-vanish` (corollary) — a section disjoint from zero has empty zero cycle. **For:** gives a bundle obstruction used in DT-13/28. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§8.3--9.3, pp. 244--260; Stanford Math 215B Lectures 14--16, pp. 43--52.
 12. `prop-mod-two-self-intersection-needs-no-orientation` (proposition) — the parity is evaluation of the top normal Stiefel--Whitney class. **For:** preserves the nonorientable theory. **Prov:** [S: literature-derived; P: literature-derived].
-13. `rem-euler-class-construction-remains-owned-by-at` (remark) — DT proves zero-set and self-intersection applications only. **For:** enforces the seam. **Prov:** [S: literature-derived; P: not-applicable].
-14. `rem-not-every-homology-class-is-represented-by-an-embedded-submanifold-integrally` (remark) — geometric representatives require hypotheses; the algebraic pairing remains the general AT object. **For:** blocks overclaiming the geometric model. **Prov:** [S: literature-derived; P: not-applicable].
+13. `rem-euler-class-construction-remains-owned-by-at` (remark) — DT proves zero-set and self-intersection applications only. **For:** enforces the seam. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen §§8.3--9.3, pp. 244--260; Stanford Math 215B Lectures 14--16, pp. 43--52.
+14. `rem-not-every-homology-class-is-represented-by-an-embedded-submanifold-integrally` (remark) — geometric representatives require hypotheses; the algebraic pairing remains the general AT object. **For:** blocks overclaiming the geometric model. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen §§8.3--9.3, pp. 244--260; Stanford Math 215B Lectures 14--16, pp. 43--52.
 
 **Hard-proof closure.**  Item 3 waits for AT's exact cup/cap convention.  The
 self-intersection proof must use a transverse section, identify its zero signs,
@@ -795,11 +795,11 @@ oriented normal bundle; mod two is the fallback, not an integral substitute.
 
 **B page:** `intersection-pairings-self-intersection-and-euler-classes-examples`
 
-1. `ex-self-intersection-of-the-zero-section-in-an-oriented-plane-bundle` — compute it as the Euler number. **For:** verifies item 7. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-diagonal-in-the-two-sphere-has-self-intersection-two` — evaluate $e(TS^2)$. **For:** previews $\chi(S^2)$. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-coordinate-circles-give-the-hyperbolic-intersection-form-on-a-torus` — compute the skew/symmetric dimension sign. **For:** tests factor order. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-the-core-circle-of-a-mobius-band-has-no-integral-oriented-self-intersection` — its normal line is nonorientable, but mod-two data survives. **For:** tests orientability. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-vanishing-euler-class-is-not-in-general-a-complete-nowhere-zero-section-criterion` — record a higher obstruction example from the source. **For:** blocks a converse outside the rank/dimension range. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-self-intersection-of-the-zero-section-in-an-oriented-plane-bundle` — compute it as the Euler number. **For:** verifies item 7. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§8.3--9.3, pp. 244--260; Stanford Math 215B Lectures 14--16, pp. 43--52.
+2. `ex-diagonal-in-the-two-sphere-has-self-intersection-two` — evaluate $e(TS^2)$. **For:** previews $\chi(S^2)$. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§8.3--9.3, pp. 244--260; Stanford Math 215B Lectures 14--16, pp. 43--52.
+3. `ex-coordinate-circles-give-the-hyperbolic-intersection-form-on-a-torus` — compute the skew/symmetric dimension sign. **For:** tests factor order. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§8.3--9.3, pp. 244--260; Stanford Math 215B Lectures 14--16, pp. 43--52.
+4. `cex-the-core-circle-of-a-mobius-band-has-no-integral-oriented-self-intersection` — its normal line is nonorientable, but mod-two data survives. **For:** tests orientability. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§8.3--9.3, pp. 244--260; Stanford Math 215B Lectures 14--16, pp. 43--52.
+5. `cex-vanishing-euler-class-is-not-in-general-a-complete-nowhere-zero-section-criterion` — record a higher obstruction example from the source. **For:** blocks a converse outside the rank/dimension range. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen §§8.3--9.3, pp. 244--260; Stanford Math 215B Lectures 14--16, pp. 43--52.
 
 ### DT-13 — Vector-field index, Euler characteristic, and Poincare--Hopf
 
@@ -822,8 +822,8 @@ Stanford Math 215B Lectures 16--17, pp. 49--55; H Ch. 5 §2, pp. 131--140.
 9. `thm-poincare-hopf-for-closed-manifolds` (theorem) — for a vector field with isolated zeros on a closed manifold, the sum of indices equals $\chi(M)$. **For:** is the main Euler/index theorem. **Prov:** [S: literature-derived; P: literature-derived].
 10. `thm-poincare-hopf-with-outward-pointing-boundary` (theorem) — on a compact manifold with boundary, a field nonzero and strictly outward along $\partial M$ has the same index sum $\chi(M)$. **For:** states the sharp basic boundary extension. **Prov:** [S: literature-derived; P: literature-derived].
 11. `cor-nowhere-zero-vector-field-forces-zero-euler-characteristic` (corollary) — an empty zero set has total index zero. **For:** gives the hairy-ball obstruction. **Prov:** [S: literature-derived; P: literature-derived].
-12. `cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda` (corollary) — for $-\operatorname{grad}f$, the local index is $(-1)^{n-\lambda}$; for $+\operatorname{grad}f$, it is $(-1)^\lambda$. **For:** reconciles gradient sign with the Morse Euler formula. **Prov:** [S: literature-derived; P: literature-derived].
-13. `cor-morse-critical-point-sum-is-the-euler-characteristic` (corollary) — applying Poincare--Hopf to $+\operatorname{grad}f$ recovers $\sum(-1)^\lambda=\chi(M)$. **For:** cross-checks DT-8 without sign drift. **Prov:** [S: literature-derived; P: literature-derived].
+12. `cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda` (corollary) — for $-\operatorname{grad}f$, the local index is $(-1)^{n-\lambda}$; for $+\operatorname{grad}f$, it is $(-1)^\lambda$. **For:** reconciles gradient sign with the Morse Euler formula. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *Topology from the Differentiable Viewpoint* Ch. 6, pp. 32--41; Guillemin--Pollack Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55.
+13. `cor-morse-critical-point-sum-is-the-euler-characteristic` (corollary) — applying Poincare--Hopf to $+\operatorname{grad}f$ recovers $\sum(-1)^\lambda=\chi(M)$. **For:** cross-checks DT-8 without sign drift. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *Topology from the Differentiable Viewpoint* Ch. 6, pp. 32--41; Guillemin--Pollack Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55.
 14. `cor-closed-odd-dimensional-manifolds-have-zero-euler-characteristic` (corollary) — use Poincare duality (orientable integral or mod-two/rational local-system route) or a generic field argument. **For:** records the closedness-dependent consequence. **Prov:** [S: literature-derived; P: literature-derived].
 15. `thm-converse-poincare-hopf-for-nowhere-zero-fields` (theorem) — a closed connected manifold admits a nowhere-zero vector field iff $\chi(M)=0$. **For:** makes the Euler obstruction complete for one tangent section. **Prov:** [S: literature-derived; P: literature-derived].
 16. `rem-the-outward-boundary-hypothesis-cannot-be-replaced-by-nonzero-on-the-boundary` (remark) — inward/tangential behaviour contributes boundary corrections. **For:** guards item 10. **Prov:** [S: literature-derived; P: not-applicable].
@@ -836,12 +836,12 @@ by handle cancellation; resolve that interface at build.
 
 **B page:** `vector-field-index-euler-characteristic-and-poincare-hopf-examples`
 
-1. `ex-hairy-ball-theorem-for-even-spheres` — use $\chi(S^{2m})=2$. **For:** applies item 11. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-a-nowhere-zero-vector-field-on-an-odd-sphere` — give an explicit complex-coordinate field. **For:** checks the converse direction. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-source-sink-and-saddle-indices-on-a-surface` — compute $+1,+1,-1$. **For:** tests the determinant formula. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-outward-radial-field-on-a-disk` — its one index equals $\chi(D^n)$. **For:** checks the boundary theorem. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-an-inward-radial-field-violates-the-outward-boundary-formula` — show the naive statement fails. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived].
-6. `cex-an-interval-has-nonzero-euler-characteristic-despite-being-odd-dimensional` — boundary invalidates the closed odd-dimensional corollary. **For:** fixes the closedness clause. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-hairy-ball-theorem-for-even-spheres` — use $\chi(S^{2m})=2$. **For:** applies item 11. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *Topology from the Differentiable Viewpoint* Ch. 6, pp. 32--41; Guillemin--Pollack Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55.
+2. `ex-a-nowhere-zero-vector-field-on-an-odd-sphere` — give an explicit complex-coordinate field. **For:** checks the converse direction. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *Topology from the Differentiable Viewpoint* Ch. 6, pp. 32--41; Guillemin--Pollack Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55.
+3. `ex-source-sink-and-saddle-indices-on-a-surface` — compute $+1,+1,-1$. **For:** tests the determinant formula. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *Topology from the Differentiable Viewpoint* Ch. 6, pp. 32--41; Guillemin--Pollack Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55.
+4. `ex-outward-radial-field-on-a-disk` — its one index equals $\chi(D^n)$. **For:** checks the boundary theorem. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *Topology from the Differentiable Viewpoint* Ch. 6, pp. 32--41; Guillemin--Pollack Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55.
+5. `cex-an-inward-radial-field-violates-the-outward-boundary-formula` — show the naive statement fails. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *Topology from the Differentiable Viewpoint* Ch. 6, pp. 32--41; Guillemin--Pollack Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55.
+6. `cex-an-interval-has-nonzero-euler-characteristic-despite-being-odd-dimensional` — boundary invalidates the closed odd-dimensional corollary. **For:** fixes the closedness clause. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *Topology from the Differentiable Viewpoint* Ch. 6, pp. 32--41; Guillemin--Pollack Ch. 3 §§5, 7, pp. 132--150; Stanford Lectures 16--17, pp. 49--55.
 
 ### DT-14 — Fixed-point index and the Lefschetz theorem
 
@@ -865,7 +865,7 @@ pp. 52--55; full [Lectures on Fixed Point Theory](https://www.dm.ufscar.br/profs
 9. `def-algebraic-lefschetz-number` (definition) — $L(f)=\sum_i(-1)^i\operatorname{tr}(f_*:H_i(M;\mathbb Q)\to H_i(M;\mathbb Q))$. **For:** states the AT-owned homological target. **Prov:** [S: literature-derived; P: not-applicable].
 10. `thm-lefschetz-hopf-index-formula` (theorem) — for a smooth self-map of a closed manifold with isolated fixed points, $I(f)=L(f)$. **For:** identifies local geometry and global homology. **Prov:** [S: literature-derived; P: literature-derived].
 11. `lem-diagonal-class-expansion-gives-the-alternating-trace` (lemma) — the Poincare-dual diagonal and Kunneth pairing contract the graph class to the trace sum, with AT signs substituted. **For:** splits the proof of item 10. **Prov:** [S: literature-derived; P: literature-derived].
-12. `cor-lefschetz-number-is-homotopy-invariant` (corollary) — induced homology maps agree under homotopy. **For:** extends the geometric count past transverse maps. **Prov:** [S: literature-derived; P: literature-derived].
+12. `cor-lefschetz-number-is-homotopy-invariant` (corollary) — induced homology maps agree under homotopy. **For:** extends the geometric count past transverse maps. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 3 §4, pp. 119--131; Stanford Lecture 17, pp. 52--55; *Lectures on Fixed Point Theory* Lecture II, pp. 12--23.
 13. `thm-lefschetz-fixed-point-theorem` (theorem) — if $L(f)\ne0$, then $f$ has a fixed point. **For:** is the existence consequence. **Prov:** [S: literature-derived; P: literature-derived].
 14. `cor-lefschetz-number-of-the-identity-is-the-euler-characteristic` (corollary) — $L(\operatorname{id})=\chi(M)$. **For:** links Lefschetz and Poincare--Hopf. **Prov:** [S: literature-derived; P: literature-derived].
 15. `prop-small-time-flow-fixed-point-indices-agree-with-vector-field-zero-indices` (proposition) — under a consistent short-time sign, the fixed index of the flow near an isolated zero equals its vector-field index. **For:** derives Poincare--Hopf from Lefschetz. **Prov:** [S: literature-derived; P: literature-derived].
@@ -879,11 +879,11 @@ then returns to degenerate isolated points.
 
 **B page:** `fixed-point-index-and-the-lefschetz-theorem-examples`
 
-1. `ex-rotations-of-the-two-sphere-and-their-lefschetz-number` — compute two fixed-point indices. **For:** tests the determinant sign. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-degree-d-map-on-a-sphere-has-lefschetz-number-one-plus-minus-d` — compute the trace formula. **For:** links degree and fixed points. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-a-torus-translation-has-zero-lefschetz-number-and-no-fixed-points` — verify sharpness of the nonzero condition. **For:** tests item 13. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-a-degenerate-isolated-fixed-point-with-nonzero-local-index` — compute by degree although $I-Df$ is singular. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-vanishing-lefschetz-number-allows-fixed-points` — give a map with canceling local indices. **For:** blocks the converse. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-rotations-of-the-two-sphere-and-their-lefschetz-number` — compute two fixed-point indices. **For:** tests the determinant sign. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 3 §4, pp. 119--131; Stanford Lecture 17, pp. 52--55; *Lectures on Fixed Point Theory* Lecture II, pp. 12--23.
+2. `ex-degree-d-map-on-a-sphere-has-lefschetz-number-one-plus-minus-d` — compute the trace formula. **For:** links degree and fixed points. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 3 §4, pp. 119--131; Stanford Lecture 17, pp. 52--55; *Lectures on Fixed Point Theory* Lecture II, pp. 12--23.
+3. `ex-a-torus-translation-has-zero-lefschetz-number-and-no-fixed-points` — verify sharpness of the nonzero condition. **For:** tests item 13. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 3 §4, pp. 119--131; Stanford Lecture 17, pp. 52--55; *Lectures on Fixed Point Theory* Lecture II, pp. 12--23.
+4. `ex-a-degenerate-isolated-fixed-point-with-nonzero-local-index` — compute by degree although $I-Df$ is singular. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 3 §4, pp. 119--131; Stanford Lecture 17, pp. 52--55; *Lectures on Fixed Point Theory* Lecture II, pp. 12--23.
+5. `cex-vanishing-lefschetz-number-allows-fixed-points` — give a map with canceling local indices. **For:** blocks the converse. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 3 §4, pp. 119--131; Stanford Lecture 17, pp. 52--55; *Lectures on Fixed Point Theory* Lecture II, pp. 12--23.
 
 ### DT-15 — Smooth cobordism relations, groups, and rings
 
@@ -920,11 +920,11 @@ constructions but prove the geometric boundary application here.
 
 **B page:** `smooth-cobordism-relations-groups-and-rings-examples`
 
-1. `ex-a-circle-is-the-boundary-of-a-disk` — null-cobordism with the induced orientation. **For:** tests boundary signs. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-two-unoriented-points-bound-an-interval` — compute $\Omega_0^O$. **For:** checks self-inverse classes. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-signed-points-give-the-oriented-zero-bordism-invariant` — count positive minus negative points. **For:** checks $\Omega_0^{SO}$. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-the-pair-of-pants-is-a-cobordism-realizing-addition-of-circles` — visualize disjoint-union addition. **For:** tests gluing. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-real-projective-two-space-is-not-unoriented-null-cobordant` — use its nonzero Stiefel--Whitney number from AT. **For:** demonstrates item 13. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-a-circle-is-the-boundary-of-a-disk` — null-cobordism with the induced orientation. **For:** tests boundary signs. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 1--2, pp. 5--24; Milnor--Stasheff Ch. 17, pp. 199--204.
+2. `ex-two-unoriented-points-bound-an-interval` — compute $\Omega_0^O$. **For:** checks self-inverse classes. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 1--2, pp. 5--24; Milnor--Stasheff Ch. 17, pp. 199--204.
+3. `ex-signed-points-give-the-oriented-zero-bordism-invariant` — count positive minus negative points. **For:** checks $\Omega_0^{SO}$. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 1--2, pp. 5--24; Milnor--Stasheff Ch. 17, pp. 199--204.
+4. `ex-the-pair-of-pants-is-a-cobordism-realizing-addition-of-circles` — visualize disjoint-union addition. **For:** tests gluing. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 1--2, pp. 5--24; Milnor--Stasheff Ch. 17, pp. 199--204.
+5. `cex-real-projective-two-space-is-not-unoriented-null-cobordant` — use its nonzero Stiefel--Whitney number from AT. **For:** demonstrates item 13. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 1--2, pp. 5--24; Milnor--Stasheff Ch. 17, pp. 199--204.
 
 ### DT-16 — Thom spaces, normal data, and collapse maps
 
@@ -962,11 +962,11 @@ applications are proved here.
 
 **B page:** `thom-spaces-normal-data-and-collapse-maps-examples`
 
-1. `ex-thom-space-of-a-trivial-line-bundle` — identify it with $\Sigma B_+$. **For:** tests item 3. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-thom-space-of-the-mobius-line-bundle` — obtain the projective-plane quotient model. **For:** shows twisting is retained. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-collapse-map-of-an-equatorial-sphere` — write the normal-framed collapse explicitly. **For:** prepares framed PT. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-zero-section-pulls-back-the-thom-class-to-the-euler-class` — verify the AT interface. **For:** connects DT-12. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-different-unstabilized-normal-bundles-can-have-nonisomorphic-thom-data` — illustrate why the stable class, rather than one embedding's actual normal bundle, is intrinsic. **For:** tests item 6. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-thom-space-of-a-trivial-line-bundle` — identify it with $\Sigma B_+$. **For:** tests item 3. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 18, pp. 205--218; Freed Lectures 2--3 and 10, pp. 15--28, 86--91.
+2. `ex-thom-space-of-the-mobius-line-bundle` — obtain the projective-plane quotient model. **For:** shows twisting is retained. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 18, pp. 205--218; Freed Lectures 2--3 and 10, pp. 15--28, 86--91.
+3. `ex-collapse-map-of-an-equatorial-sphere` — write the normal-framed collapse explicitly. **For:** prepares framed PT. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 18, pp. 205--218; Freed Lectures 2--3 and 10, pp. 15--28, 86--91.
+4. `ex-zero-section-pulls-back-the-thom-class-to-the-euler-class` — verify the AT interface. **For:** connects DT-12. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 18, pp. 205--218; Freed Lectures 2--3 and 10, pp. 15--28, 86--91.
+5. `cex-different-unstabilized-normal-bundles-can-have-nonisomorphic-thom-data` — illustrate why the stable class, rather than one embedding's actual normal bundle, is intrinsic. **For:** tests item 6. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 18, pp. 205--218; Freed Lectures 2--3 and 10, pp. 15--28, 86--91.
 
 ### DT-17 — Pontryagin--Thom and framed cobordism
 
@@ -1002,11 +1002,11 @@ AT interface, not a license to reconstruct stable homotopy groups.
 
 **B page:** `pontryagin-thom-and-framed-cobordism-examples`
 
-1. `ex-framed-zero-manifolds-and-signed-points` — identify positive/negative framings in codimension $n$. **For:** prepares Hopf degree. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-pontryagin-thom-map-of-the-standard-framed-equator` — obtain the suspension generator. **For:** tests item 13. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-framed-links-represent-elements-of-pi-three-of-s-two` — compute the basic framed unknot representative without developing Hopf invariant theory. **For:** shows positive-dimensional preimages. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-changing-a-framing-can-change-the-pontryagin-thom-class` — twist the normal framing of a circle. **For:** shows the framing is load-bearing. **Prov:** [S: literature-derived; P: literature-derived].
-5. `ex-stabilizing-a-framed-submanifold-suspends-its-collapse-map` — verify compatibility with item 14. **For:** finite stable check. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-framed-zero-manifolds-and-signed-points` — identify positive/negative framings in codimension $n$. **For:** prepares Hopf degree. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 2--3, pp. 15--28; Milnor, *Topology from the Differentiable Viewpoint* Ch. 7, pp. 42--49; Ranicki §§6.1--6.2, pp. 109--116.
+2. `ex-pontryagin-thom-map-of-the-standard-framed-equator` — obtain the suspension generator. **For:** tests item 13. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 2--3, pp. 15--28; Milnor, *Topology from the Differentiable Viewpoint* Ch. 7, pp. 42--49; Ranicki §§6.1--6.2, pp. 109--116.
+3. `ex-framed-links-represent-elements-of-pi-three-of-s-two` — compute the basic framed unknot representative without developing Hopf invariant theory. **For:** shows positive-dimensional preimages. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 2--3, pp. 15--28; Milnor, *Topology from the Differentiable Viewpoint* Ch. 7, pp. 42--49; Ranicki §§6.1--6.2, pp. 109--116.
+4. `cex-changing-a-framing-can-change-the-pontryagin-thom-class` — twist the normal framing of a circle. **For:** shows the framing is load-bearing. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 2--3, pp. 15--28; Milnor, *Topology from the Differentiable Viewpoint* Ch. 7, pp. 42--49; Ranicki §§6.1--6.2, pp. 109--116.
+5. `ex-stabilizing-a-framed-submanifold-suspends-its-collapse-map` — verify compatibility with item 14. **For:** finite stable check. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lectures 2--3, pp. 15--28; Milnor, *Topology from the Differentiable Viewpoint* Ch. 7, pp. 42--49; Ranicki §§6.1--6.2, pp. 109--116.
 
 ### DT-18 — The Hopf degree theorem
 
@@ -1020,18 +1020,18 @@ only for standard homotopy notation.
 
 1. `def-framing-sign-of-a-zero-dimensional-regular-preimage` (definition) — compare the inverse-image normal framing with the orientation of the domain point. **For:** turns PT preimages into signed degree data. **Prov:** [S: literature-derived; P: not-applicable].
 2. `lem-oppositely-framed-points-are-framed-null-cobordant-in-pairs` (lemma) — an interval with an interpolating normal framing cancels one positive and one negative point. **For:** proves reduction to signed count. **Prov:** [S: literature-derived; P: literature-derived].
-3. `lem-equal-framing-sign-points-do-not-cancel-in-oriented-zero-bordism` (lemma) — signed point count is invariant under compact oriented one-cobordisms. **For:** proves completeness of the integer. **Prov:** [S: literature-derived; P: literature-derived].
+3. `lem-equal-framing-sign-points-do-not-cancel-in-oriented-zero-bordism` (lemma) — signed point count is invariant under compact oriented one-cobordisms. **For:** proves completeness of the integer. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
 4. `thm-oriented-zero-dimensional-framed-bordism-is-the-integers` (theorem) — signed cardinality gives the isomorphism. **For:** is the geometric core of degree classification. **Prov:** [S: literature-derived; P: literature-derived].
-5. `thm-unoriented-zero-dimensional-bordism-is-mod-two` (theorem) — parity classifies when no orientation sign exists. **For:** supplies the nonorientable variant. **Prov:** [S: literature-derived; P: literature-derived].
+5. `thm-unoriented-zero-dimensional-bordism-is-mod-two` (theorem) — parity classifies when no orientation sign exists. **For:** supplies the nonorientable variant. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
 6. `lem-pontryagin-thom-signed-preimage-count-equals-the-dg-degree` (lemma) — for a regular value the PT framing signs reproduce the existing local-degree formula. **For:** reconciles, rather than redefines, degree. **Prov:** [S: literature-derived; P: literature-derived].
 7. `thm-hopf-degree-classification-for-oriented-domains` (theorem) — if $M^n$ is closed, connected and oriented, maps $M\to S^n$ are smoothly homotopic iff they have equal integer degree. **For:** is the commissioned Hopf theorem. **Prov:** [S: literature-derived; P: literature-derived].
 8. `thm-hopf-mod-two-degree-classification-for-nonorientable-domains` (theorem) — for closed connected nonorientable $M^n$, homotopy classes $[M,S^n]$ are classified by mod-two degree. **For:** states where mod two suffices. **Prov:** [S: literature-derived; P: literature-derived].
 9. `lem-every-integer-degree-is-realized-by-a-map-to-the-sphere` (lemma) — collapse disjoint oriented coordinate disks with prescribed local signs. **For:** proves surjectivity in item 7. **Prov:** [S: literature-derived; P: literature-derived].
 10. `lem-bordism-of-regular-preimages-produces-a-homotopy-of-sphere-maps` (lemma) — use the inverse PT construction. **For:** proves injectivity in items 7--8. **Prov:** [S: literature-derived; P: literature-derived].
 11. `cor-maps-between-oriented-spheres-are-homotopic-iff-their-degrees-agree` (corollary) — specialize $M=S^n$. **For:** gives the familiar formulation. **Prov:** [S: literature-derived; P: literature-derived].
-12. `cor-an-oriented-sphere-self-map-is-a-homotopy-equivalence-iff-its-degree-is-plus-or-minus-one` (corollary) — combine Hopf classification with degree multiplication. **For:** supplies a basic recognition result. **Prov:** [S: literature-derived; P: literature-derived].
-13. `rem-connectedness-is-needed-for-a-single-degree-invariant` (remark) — disconnected domains have one signed/mod-two contribution per top-dimensional component, subject to orientations. **For:** guards the theorem hypothesis. **Prov:** [S: literature-derived; P: not-applicable].
-14. `rem-closedness-is-needed-for-hopf-degree-classification` (remark) — boundary/noncompact cases require relative or compact-support data. **For:** blocks a false extension. **Prov:** [S: literature-derived; P: not-applicable].
+12. `cor-an-oriented-sphere-self-map-is-a-homotopy-equivalence-iff-its-degree-is-plus-or-minus-one` (corollary) — combine Hopf classification with degree multiplication. **For:** supplies a basic recognition result. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
+13. `rem-connectedness-is-needed-for-a-single-degree-invariant` (remark) — disconnected domains have one signed/mod-two contribution per top-dimensional component, subject to orientations. **For:** guards the theorem hypothesis. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
+14. `rem-closedness-is-needed-for-hopf-degree-classification` (remark) — boundary/noncompact cases require relative or compact-support data. **For:** blocks a false extension. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
 
 **Hard-proof closure.**  Do not substitute the already-owned homotopy
 invariance of degree for the missing converse.  The converse is precisely the
@@ -1040,11 +1040,11 @@ connectedness and closedness are all load-bearing.
 
 **B page:** `the-hopf-degree-theorem-examples`
 
-1. `ex-power-maps-on-the-circle-have-their-exponent-as-degree` — classify their homotopy classes. **For:** checks item 11. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-reflection-of-a-sphere-has-degree-minus-one` — compute the orientation sign. **For:** tests the equivalence corollary. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-collapse-of-k-oriented-disks-realizes-degree-k` — implement item 9. **For:** gives explicit representatives. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-maps-from-real-projective-n-space-to-s-n-use-mod-two-degree-when-n-is-even` — demonstrate the nonorientable classification. **For:** tests item 8. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-equal-total-degree-does-not-classify-maps-from-a-disconnected-domain-componentwise` — swap degree among components. **For:** tests item 13. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-power-maps-on-the-circle-have-their-exponent-as-degree` — classify their homotopy classes. **For:** checks item 11. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
+2. `ex-reflection-of-a-sphere-has-degree-minus-one` — compute the orientation sign. **For:** tests the equivalence corollary. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
+3. `ex-collapse-of-k-oriented-disks-realizes-degree-k` — implement item 9. **For:** gives explicit representatives. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
+4. `ex-maps-from-real-projective-n-space-to-s-n-use-mod-two-degree-when-n-is-even` — demonstrate the nonorientable classification. **For:** tests item 8. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
+5. `cex-equal-total-degree-does-not-classify-maps-from-a-disconnected-domain-componentwise` — swap degree among components. **For:** tests item 13. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Freed Lecture 2, pp. 20--24; Milnor, *Topology from the Differentiable Viewpoint* Ch. 8, pp. 50--51; Guillemin--Pollack Ch. 3 §6, pp. 141--147.
 
 ### DT-19 — Characteristic numbers and cobordism obstructions
 
@@ -1071,7 +1071,7 @@ pp. 12--13 and Lectures 7--10, pp. 55--91; TW §§9--18, pp. 15--34.
 12. `rem-pontryagin-numbers-do-not-detect-integral-oriented-bordism-torsion` (remark) — integral oriented bordism also has torsion information, detected in part by Stiefel--Whitney numbers. **For:** prevents a false integral theorem. **Prov:** [S: literature-derived; P: not-applicable].
 13. `prop-products-of-complex-projective-spaces-span-rational-oriented-bordism` (proposition) — one product for each partition gives a triangular nonzero Pontryagin-number matrix. **For:** provides the source-backed test family for DT-20. **Prov:** [S: literature-derived; P: literature-derived].
 14. `lem-partition-triangularity-of-projective-space-characteristic-numbers` (lemma) — order partitions by refinement and compute the leading nonzero characteristic number. **For:** splits item 13 rather than citing a rank count. **Prov:** [S: literature-derived; P: literature-derived].
-15. `rem-characteristic-class-constructions-and-normalizations-are-at-owned` (remark) — authoring must substitute AT's exact $w_i,p_i,e,c_i$ ids and Pontryagin sign. **For:** enforces the load-bearing seam. **Prov:** [S: literature-derived; P: not-applicable].
+15. `rem-characteristic-class-constructions-and-normalizations-are-at-owned` (remark) — authoring must substitute AT's exact $w_i,p_i,e,c_i$ ids and Pontryagin sign. **For:** enforces the load-bearing seam. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Milnor--Stasheff Chs. 16--18, pp. 183--218; Freed Lectures 7--10, pp. 55--91; Weston §§9--18, pp. 15--34.
 
 **Hard-proof closure.**  Boundary invariance uses stable tangent restriction,
 naturality, and the fundamental-class boundary relation.  The complete Thom
@@ -1080,10 +1080,10 @@ dependency-resolved rather than reproved ad hoc.  Item 11 is rational only.
 
 **B page:** `characteristic-numbers-and-cobordism-obstructions-examples`
 
-1. `ex-stiefel-whitney-number-of-real-projective-space` — compute a nonzero top monomial from the AT formula. **For:** obstructs null-cobordism. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-pontryagin-numbers-of-complex-projective-two-space` — evaluate $p_1$ on $[\mathbb CP^2]$. **For:** supplies the four-dimensional generator check. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-characteristic-numbers-of-a-product` — compute a projective-space product using item 8. **For:** checks multiplicativity. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-orientation-reversal-negates-pontryagin-numbers` — verify on $\mathbb CP^2$. **For:** checks item 4. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-stiefel-whitney-number-of-real-projective-space` — compute a nonzero top monomial from the AT formula. **For:** obstructs null-cobordism. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Chs. 16--18, pp. 183--218; Freed Lectures 7--10, pp. 55--91; Weston §§9--18, pp. 15--34.
+2. `ex-pontryagin-numbers-of-complex-projective-two-space` — evaluate $p_1$ on $[\mathbb CP^2]$. **For:** supplies the four-dimensional generator check. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Chs. 16--18, pp. 183--218; Freed Lectures 7--10, pp. 55--91; Weston §§9--18, pp. 15--34.
+3. `ex-characteristic-numbers-of-a-product` — compute a projective-space product using item 8. **For:** checks multiplicativity. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Chs. 16--18, pp. 183--218; Freed Lectures 7--10, pp. 55--91; Weston §§9--18, pp. 15--34.
+4. `ex-orientation-reversal-negates-pontryagin-numbers` — verify on $\mathbb CP^2$. **For:** checks item 4. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Chs. 16--18, pp. 183--218; Freed Lectures 7--10, pp. 55--91; Weston §§9--18, pp. 15--34.
 
 ### DT-20 — The Hirzebruch signature theorem
 
@@ -1111,7 +1111,7 @@ pp. 92--105; TW §19, pp. 34--36; JL, complete lecture, PDF pp. 1--3.
 14. `cor-four-dimensional-signature-formula` (corollary) — $\sigma(M)=\frac13\langle p_1(TM),[M]\rangle$. **For:** is the formula used in Milnor-sphere obstructions. **Prov:** [S: literature-derived; P: literature-derived].
 15. `cor-eight-dimensional-signature-formula` (corollary) — $\sigma(M)=\frac1{45}\langle7p_2-p_1^2,[M]\rangle$. **For:** records the first nontrivial multiplicative polynomial. **Prov:** [S: literature-derived; P: literature-derived].
 16. `cor-signature-theorem-imposes-pontryagin-number-congruences` (corollary) — integrality of signature constrains characteristic numbers. **For:** supplies exotic-sphere and obstruction arithmetic. **Prov:** [S: literature-derived; P: literature-derived].
-17. `rem-signature-is-not-defined-geometrically-by-zero-in-other-dimensions` (remark) — extending a genus by zero is bookkeeping, not the definition in item 3. **For:** fixes a common convention ambiguity. **Prov:** [S: literature-derived; P: not-applicable].
+17. `rem-signature-is-not-defined-geometrically-by-zero-in-other-dimensions` (remark) — extending a genus by zero is bookkeeping, not the definition in item 3. **For:** fixes a common convention ambiguity. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Milnor--Stasheff Ch. 19, pp. 219--230; Freed Lectures 11--12, pp. 92--105.
 
 **Hard-proof closure.**  Prove bordism invariance before using rational bordism.
 The signature theorem then compares two rational bordism ring homomorphisms on
@@ -1120,11 +1120,11 @@ the exact AT Pontryagin normalization is substituted.
 
 **B page:** `the-hirzebruch-signature-theorem-examples`
 
-1. `ex-signature-and-p-one-of-complex-projective-two-space` — verify $1=\langle p_1,[M]\rangle/3$. **For:** checks item 14. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-orientation-reversed-complex-projective-plane-has-signature-minus-one` — test item 6. **For:** fixes orientation signs. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-signature-of-s-two-times-s-two-is-zero` — compute the hyperbolic form. **For:** tests nontrivial middle cohomology with zero signature. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-signature-is-multiplicative-on-products-of-projective-spaces` — finite generator check. **For:** verifies item 7. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-euler-characteristic-does-not-determine-signature` — compare closed oriented four-manifolds with the same Euler characteristic and different forms. **For:** distinguishes invariants. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-signature-and-p-one-of-complex-projective-two-space` — verify $1=\langle p_1,[M]\rangle/3$. **For:** checks item 14. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 19, pp. 219--230; Freed Lectures 11--12, pp. 92--105.
+2. `ex-orientation-reversed-complex-projective-plane-has-signature-minus-one` — test item 6. **For:** fixes orientation signs. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 19, pp. 219--230; Freed Lectures 11--12, pp. 92--105.
+3. `ex-signature-of-s-two-times-s-two-is-zero` — compute the hyperbolic form. **For:** tests nontrivial middle cohomology with zero signature. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 19, pp. 219--230; Freed Lectures 11--12, pp. 92--105.
+4. `ex-signature-is-multiplicative-on-products-of-projective-spaces` — finite generator check. **For:** verifies item 7. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 19, pp. 219--230; Freed Lectures 11--12, pp. 92--105.
+5. `cex-euler-characteristic-does-not-determine-signature` — compare closed oriented four-manifolds with the same Euler characteristic and different forms. **For:** distinguishes invariants. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor--Stasheff Ch. 19, pp. 219--230; Freed Lectures 11--12, pp. 92--105.
 
 ### DT-21 — Smooth surgery, traces, and handle trading
 
@@ -1149,9 +1149,9 @@ pp. 195--201; MH §3, pp. 20--36.
 10. `lem-framing-obstruction-lives-in-the-normal-bundle-of-the-surgery-sphere` (lemma) — a homotopy class can be killed smoothly only when represented by an embedded sphere with trivialised normal bundle. **For:** exposes the normal-data obstruction. **Prov:** [S: literature-derived; P: literature-derived].
 11. `def-degree-one-normal-map-for-the-surgery-program` (definition) — record a degree-one map plus a stable bundle isomorphism between normal data, citing AT constructions. **For:** states the input to surgery classification at commissioned level. **Prov:** [S: literature-derived; P: not-applicable].
 12. `prop-surgery-on-a-normal-map-preserves-its-normal-bordism-class` (proposition) — extend the map and stable normal data across the trace handle when the framed kernel element is chosen. **For:** explains why surgery improves a map without changing its normal problem. **Prov:** [S: literature-derived; P: literature-derived].
-13. `rem-middle-dimensional-surgery-has-an-intersection-form-obstruction` (remark) — below-middle connectivity improvement eventually reaches a quadratic/bilinear kernel whose surgery obstruction is not automatic. **For:** marks the exact stopping point. **Prov:** [S: literature-derived; P: not-applicable].
-14. `rem-surgery-exact-sequence-and-l-groups-are-a-dedicated-sequel` (remark) — source the existence of the obstruction sequence, but supply no proof or dependency here. **For:** honours the statement/construction boundary. **Prov:** [S: literature-derived; P: not-supplied].
-15. `rem-smooth-four-dimensional-surgery-is-not-covered-by-the-high-dimensional-program` (remark) — the required Whitney moves and disk embeddings fail in the smooth category. **For:** states the crucial dimension boundary. **Prov:** [S: literature-derived; P: not-applicable].
+13. `rem-middle-dimensional-surgery-has-an-intersection-form-obstruction` (remark) — below-middle connectivity improvement eventually reaches a quadratic/bilinear kernel whose surgery obstruction is not automatic. **For:** marks the exact stopping point. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Lück Ch. 3 §3.4 and Ch. 4 §4.1, pp. 69--84; Ranicki Ch. 10 §§10.1--10.4, pp. 194--211.
+14. `rem-surgery-exact-sequence-and-l-groups-are-a-dedicated-sequel` (remark) — source the existence of the obstruction sequence, but supply no proof or dependency here. **For:** honours the statement/construction boundary. **Prov:** [S: literature-derived; P: not-supplied]. **Locator:** Lück Ch. 3 §3.4 and Ch. 4 §4.1, pp. 69--84; Ranicki Ch. 10 §§10.1--10.4, pp. 194--211.
+15. `rem-smooth-four-dimensional-surgery-is-not-covered-by-the-high-dimensional-program` (remark) — the required Whitney moves and disk embeddings fail in the smooth category. **For:** states the crucial dimension boundary. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Lück Ch. 3 §3.4 and Ch. 4 §4.1, pp. 69--84; Ranicki Ch. 10 §§10.1--10.4, pp. 194--211.
 
 **Hard-proof closure.**  Surgery is defined from actual framed embeddings, not
 from abstract homotopy classes.  The trace is an index-$(p+1)$ handle.  Items
@@ -1161,11 +1161,11 @@ non-load-bearing boundaries.
 
 **B page:** `smooth-surgery-traces-and-handle-trading-examples`
 
-1. `ex-zero-surgery-on-the-circle` — replace two points times intervals and identify the result. **For:** checks $p=0$. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-surgery-on-s-p-times-s-q-produces-a-sphere-in-the-standard-framing` — compute the two pieces. **For:** tests duality. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-one-surgery-on-a-three-manifold-as-framed-knot-surgery` — identify the slope dependence without entering knot classification. **For:** shows framing matters. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-an-embedded-sphere-with-nontrivial-normal-bundle-is-not-valid-framed-surgery-data` — exhibit the obstruction. **For:** tests item 10. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-middle-dimensional-surgery-can-change-an-intersection-form` — compute a simple handle-pair case. **For:** motivates item 13. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-zero-surgery-on-the-circle` — replace two points times intervals and identify the result. **For:** checks $p=0$. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 3 §3.4 and Ch. 4 §4.1, pp. 69--84; Ranicki Ch. 10 §§10.1--10.4, pp. 194--211.
+2. `ex-surgery-on-s-p-times-s-q-produces-a-sphere-in-the-standard-framing` — compute the two pieces. **For:** tests duality. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 3 §3.4 and Ch. 4 §4.1, pp. 69--84; Ranicki Ch. 10 §§10.1--10.4, pp. 194--211.
+3. `ex-one-surgery-on-a-three-manifold-as-framed-knot-surgery` — identify the slope dependence without entering knot classification. **For:** shows framing matters. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 3 §3.4 and Ch. 4 §4.1, pp. 69--84; Ranicki Ch. 10 §§10.1--10.4, pp. 194--211.
+4. `cex-an-embedded-sphere-with-nontrivial-normal-bundle-is-not-valid-framed-surgery-data` — exhibit the obstruction. **For:** tests item 10. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 3 §3.4 and Ch. 4 §4.1, pp. 69--84; Ranicki Ch. 10 §§10.1--10.4, pp. 194--211.
+5. `cex-middle-dimensional-surgery-can-change-an-intersection-form` — compute a simple handle-pair case. **For:** motivates item 13. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 3 §3.4 and Ch. 4 §4.1, pp. 69--84; Ranicki Ch. 10 §§10.1--10.4, pp. 194--211.
 
 ### DT-22 — The Whitney trick and surgery below the middle dimension
 
@@ -1192,8 +1192,8 @@ pp. 67--99; Lück Ch. 1 §1.3, pp. 12--17.
 12. `prop-surgery-below-the-middle-dimension-improves-connectivity` (proposition) — for $2p+1<m$, represent kernel classes by disjoint embedded framed $p$-spheres and perform surgery to kill them. **For:** states the inductive surgery engine. **Prov:** [S: literature-derived; P: literature-derived].
 13. `lem-relative-hurewicz-and-general-position-produce-surgery-spheres` (lemma) — after lower connectivity is established, choose embedded representatives with disjoint images in the allowed range. **For:** splits item 12. **Prov:** [S: literature-derived; P: literature-derived].
 14. `lem-stable-normal-data-supplies-framings-below-the-middle-dimension` (lemma) — the normal-map bundle isomorphism trivialises normal bundles of chosen kernel spheres. **For:** closes the other half of item 12. **Prov:** [S: literature-derived; P: literature-derived].
-15. `rem-the-smooth-whitney-trick-fails-in-dimension-four` (remark) — immersed Whitney disks cannot generally be replaced by clean smooth embedded disks. **For:** forbids the most dangerous overstatement. **Prov:** [S: literature-derived; P: not-applicable].
-16. `rem-nonsimply-connected-whitney-tricks-carry-group-ring-and-whitney-disk-obstructions` (remark) — group labels must cancel and framings must extend. **For:** records the exact extra structure. **Prov:** [S: literature-derived; P: not-applicable].
+15. `rem-the-smooth-whitney-trick-fails-in-dimension-four` (remark) — immersed Whitney disks cannot generally be replaced by clean smooth embedded disks. **For:** forbids the most dangerous overstatement. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Ranicki Ch. 7 §§7.2--7.3, pp. 131--141; Milnor, *h-Cobordism* §§6--7, pp. 67--99; Juhasz Ch. 2 §2.2, pp. 38--42.
+16. `rem-nonsimply-connected-whitney-tricks-carry-group-ring-and-whitney-disk-obstructions` (remark) — group labels must cancel and framings must extend. **For:** records the exact extra structure. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Ranicki Ch. 7 §§7.2--7.3, pp. 131--141; Milnor, *h-Cobordism* §§6--7, pp. 67--99; Juhasz Ch. 2 §2.2, pp. 38--42.
 
 **Hard-proof closure.**  Opposite signs, nullhomotopic Whitney circle, clean
 embedded disk, extended framing and adequate dimension are five distinct
@@ -1202,11 +1202,11 @@ existence and framing existence.  No statement covers smooth dimension four.
 
 **B page:** `the-whitney-trick-and-surgery-below-the-middle-dimension-examples`
 
-1. `ex-a-local-whitney-move-in-euclidean-space` — trace the two sheets before and after the move. **For:** verifies item 8. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-oppositely-signed-intersections-of-two-surfaces-in-a-simply-connected-six-manifold` — construct a clean disk by general position. **For:** tests the dimension range. **Prov:** [S: literature-derived; P: literature-derived].
-3. `cex-same-sign-intersection-points-cannot-be-whitney-cancelled-orientedly` — algebraic intersection stays nonzero. **For:** tests signs. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-a-nontrivial-whitney-circle-in-the-fundamental-group-blocks-cancellation` — compute its label. **For:** tests item 4. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-an-immersed-whitney-disk-in-a-four-manifold-does-not-give-the-smooth-trick` — show self/interior intersections cannot simply be ignored. **For:** tests item 15. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-a-local-whitney-move-in-euclidean-space` — trace the two sheets before and after the move. **For:** verifies item 8. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §§7.2--7.3, pp. 131--141; Milnor, *h-Cobordism* §§6--7, pp. 67--99; Juhasz Ch. 2 §2.2, pp. 38--42.
+2. `ex-oppositely-signed-intersections-of-two-surfaces-in-a-simply-connected-six-manifold` — construct a clean disk by general position. **For:** tests the dimension range. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §§7.2--7.3, pp. 131--141; Milnor, *h-Cobordism* §§6--7, pp. 67--99; Juhasz Ch. 2 §2.2, pp. 38--42.
+3. `cex-same-sign-intersection-points-cannot-be-whitney-cancelled-orientedly` — algebraic intersection stays nonzero. **For:** tests signs. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §§7.2--7.3, pp. 131--141; Milnor, *h-Cobordism* §§6--7, pp. 67--99; Juhasz Ch. 2 §2.2, pp. 38--42.
+4. `cex-a-nontrivial-whitney-circle-in-the-fundamental-group-blocks-cancellation` — compute its label. **For:** tests item 4. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §§7.2--7.3, pp. 131--141; Milnor, *h-Cobordism* §§6--7, pp. 67--99; Juhasz Ch. 2 §2.2, pp. 38--42.
+5. `cex-an-immersed-whitney-disk-in-a-four-manifold-does-not-give-the-smooth-trick` — show self/interior intersections cannot simply be ignored. **For:** tests item 15. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §§7.2--7.3, pp. 131--141; Milnor, *h-Cobordism* §§6--7, pp. 67--99; Juhasz Ch. 2 §2.2, pp. 38--42.
 
 ### DT-23 — The smooth h-cobordism theorem
 
@@ -1232,8 +1232,8 @@ W §§5.5--5.6, pp. 149--158; Ranicki Ch. 8 §8.2, electronic pp. 154--162.
 12. `thm-critical-point-free-cobordism-is-a-product-relative-to-the-incoming-boundary` (theorem) — integrate an adapted nonzero gradient field to identify $W\cong M_0\times[0,1]$. **For:** converts handle elimination to diffeomorphism. **Prov:** [S: literature-derived; P: literature-derived].
 13. `thm-smooth-simply-connected-h-cobordism-theorem` (theorem) — if $W^{n+1}$ is an h-cobordism between closed simply connected $n$-manifolds and $n\ge5$, then $W$ is diffeomorphic rel $M_0$ to $M_0\times[0,1]$. **For:** is the commissioned theorem with sharp category/dimension. **Prov:** [S: literature-derived; P: literature-derived].
 14. `cor-high-dimensional-simply-connected-h-cobordant-manifolds-are-diffeomorphic` (corollary) — restrict the product diffeomorphism to $M_1$. **For:** supplies the classification consequence. **Prov:** [S: literature-derived; P: literature-derived].
-15. `cor-high-dimensional-smooth-poincare-for-homotopy-spheres-bounding-a-contractible-manifold` (corollary) — removing a disk gives an h-cobordism to $S^n$ under the stated dimensions and simple connectivity. **For:** prepares exotic-sphere distinctions. **Prov:** [S: literature-derived; P: literature-derived].
-16. `rem-the-h-cobordism-theorem-does-not-cover-boundary-dimension-four` (remark) — $n=4$ is excluded; no smooth four-dimensional Poincare conclusion follows. **For:** states the category boundary. **Prov:** [S: literature-derived; P: not-applicable].
+15. `cor-high-dimensional-smooth-poincare-for-homotopy-spheres-bounding-a-contractible-manifold` (corollary) — removing a disk gives an h-cobordism to $S^n$ under the stated dimensions and simple connectivity. **For:** prepares exotic-sphere distinctions. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *h-Cobordism* §§1--9, pp. 1--113; Lück Ch. 1, pp. 1--22.
+16. `rem-the-h-cobordism-theorem-does-not-cover-boundary-dimension-four` (remark) — $n=4$ is excluded; no smooth four-dimensional Poincare conclusion follows. **For:** states the category boundary. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Milnor, *h-Cobordism* §§1--9, pp. 1--113; Lück Ch. 1, pp. 1--22.
 
 **Hard-proof closure.**  The proof is explicitly the chain items 3--12:
 normalise handles, concentrate indices, diagonalise algebraically, use Whitney
@@ -1242,11 +1242,11 @@ needed at item 10, and simple connectivity at items 4, 8--10.
 
 **B page:** `the-smooth-h-cobordism-theorem-examples`
 
-1. `ex-a-product-cobordism-is-an-h-cobordism` — verify both inclusions and the empty handle complex. **For:** checks the theorem target. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-an-elementary-cancelling-handle-pair-gives-a-product-cobordism` — cancel explicitly. **For:** local theorem model. **Prov:** [S: literature-derived; P: literature-derived].
-3. `cex-a-homology-cobordism-need-not-be-an-h-cobordism` — give nontrivial fundamental-group data. **For:** distinguishes hypotheses. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-a-four-dimensional-boundary-case-is-outside-the-smooth-h-cobordism-theorem` — locate the Whitney-disk failure. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived].
-5. `ex-the-handle-matrix-of-a-simple-acyclic-presentation` — reduce a unimodular $2\times2$ matrix by slides. **For:** finite verification of items 8--9. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-a-product-cobordism-is-an-h-cobordism` — verify both inclusions and the empty handle complex. **For:** checks the theorem target. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *h-Cobordism* §§1--9, pp. 1--113; Lück Ch. 1, pp. 1--22.
+2. `ex-an-elementary-cancelling-handle-pair-gives-a-product-cobordism` — cancel explicitly. **For:** local theorem model. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *h-Cobordism* §§1--9, pp. 1--113; Lück Ch. 1, pp. 1--22.
+3. `cex-a-homology-cobordism-need-not-be-an-h-cobordism` — give nontrivial fundamental-group data. **For:** distinguishes hypotheses. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *h-Cobordism* §§1--9, pp. 1--113; Lück Ch. 1, pp. 1--22.
+4. `cex-a-four-dimensional-boundary-case-is-outside-the-smooth-h-cobordism-theorem` — locate the Whitney-disk failure. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *h-Cobordism* §§1--9, pp. 1--113; Lück Ch. 1, pp. 1--22.
+5. `ex-the-handle-matrix-of-a-simple-acyclic-presentation` — reduce a unimodular $2\times2$ matrix by slides. **For:** finite verification of items 8--9. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, *h-Cobordism* §§1--9, pp. 1--113; Lück Ch. 1, pp. 1--22.
 
 ### DT-24 — Whitehead torsion and the s-cobordism theorem
 
@@ -1265,7 +1265,7 @@ pp. 149--153 (geometric simply-connected specialization).
 4. `def-whitehead-torsion-of-an-h-cobordism` (definition) — $\tau(W,M_0)$ is the torsion of item 1's acyclic relative complex. **For:** attaches AT algebra to geometry. **Prov:** [S: literature-derived; P: not-applicable].
 5. `lem-handle-slides-and-cancelling-pair-creations-preserve-whitehead-torsion` (lemma) — they perform elementary basis changes and elementary expansions. **For:** proves presentation independence. **Prov:** [S: literature-derived; P: literature-derived].
 6. `thm-whitehead-torsion-of-an-h-cobordism-is-well-defined` (theorem) — changes of lifts, paths, orientations and handles alter the matrix only by the quotient units/elementary moves. **For:** makes item 4 intrinsic. **Prov:** [S: literature-derived; P: literature-derived].
-7. `lem-product-h-cobordisms-have-zero-whitehead-torsion` (lemma) — their relative handle complex is empty/simple. **For:** proves necessity in s-cobordism. **Prov:** [S: literature-derived; P: literature-derived].
+7. `lem-product-h-cobordisms-have-zero-whitehead-torsion` (lemma) — their relative handle complex is empty/simple. **For:** proves necessity in s-cobordism. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
 8. `def-simple-homotopy-equivalence` (definition) — cite AT: a homotopy equivalence is simple iff its Whitehead torsion vanishes. **For:** explains the letter “s”. **Prov:** [S: literature-derived; P: not-applicable].
 9. `lem-vanishing-torsion-allows-algebraic-diagonalization-by-simple-handle-moves` (lemma) — after concentrating handles in adjacent indices, zero torsion reduces the group-ring matrix to identity via elementary operations. **For:** supplies the algebraic sufficiency step. **Prov:** [S: literature-derived; P: literature-derived].
 10. `lem-group-labelled-whitney-tricks-realize-the-diagonalized-handle-complex` (lemma) — matching group labels and high-dimensional Whitney disks remove surplus geometric intersections. **For:** supplies the geometric sufficiency step. **Prov:** [S: literature-derived; P: literature-derived].
@@ -1282,11 +1282,11 @@ AT simple-homotopy page.
 
 **B page:** `whitehead-torsion-and-the-s-cobordism-theorem-examples`
 
-1. `ex-simply-connected-h-cobordisms-have-zero-whitehead-obstruction` — $\operatorname{Wh}(1)=0$. **For:** recovers DT-23. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-a-group-ring-handle-matrix-and-its-torsion-class` — compute a finite toy acyclic complex. **For:** checks the definition interface. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-handle-slides-change-the-matrix-but-not-whitehead-torsion` — perform an elementary group-ring operation. **For:** verifies item 5. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-an-h-cobordism-with-nonzero-torsion-is-not-a-product` — use the realization theorem. **For:** shows h does not imply s. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-ordinary-acyclicity-over-z-does-not-detect-group-ring-torsion` — compare augmented and based complexes. **For:** motivates local coefficients. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-simply-connected-h-cobordisms-have-zero-whitehead-obstruction` — $\operatorname{Wh}(1)=0$. **For:** recovers DT-23. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
+2. `ex-a-group-ring-handle-matrix-and-its-torsion-class` — compute a finite toy acyclic complex. **For:** checks the definition interface. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
+3. `ex-handle-slides-change-the-matrix-but-not-whitehead-torsion` — perform an elementary group-ring operation. **For:** verifies item 5. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
+4. `cex-an-h-cobordism-with-nonzero-torsion-is-not-a-product` — use the realization theorem. **For:** shows h does not imply s. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
+5. `cex-ordinary-acyclicity-over-z-does-not-detect-group-ring-torsion` — compare augmented and based complexes. **For:** motivates local coefficients. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
 
 ### DT-25 — Formal immersions and the Smale--Hirsch theorem
 
@@ -1304,7 +1304,7 @@ PDF pp. 1--4; MW §§1--3 in full; C §7.2, pp. 226--232.
 1. `def-formal-immersion-between-smooth-manifolds` (definition) — a formal immersion is $(f,F)$ with $f:M\to N$ smooth and $F:TM\to TN$ a fibrewise injective bundle map covering $f$. **For:** states the correct homotopy-theoretic datum. **Prov:** [S: literature-derived; P: not-applicable].
 2. `def-space-of-immersions-and-space-of-formal-immersions` (definition) — use the weak/strong $C^\infty$ topology on maps as appropriate and compact-open topology on bundle data. **For:** makes “weak homotopy equivalence” meaningful. **Prov:** [S: literature-derived; P: not-applicable].
 3. `def-derivative-map-from-immersions-to-formal-immersions` (definition) — $D(f)=(f,df)$. **For:** names the comparison map. **Prov:** [S: literature-derived; P: not-applicable].
-4. `def-regular-homotopy-of-immersions` (definition) — a regular homotopy is a smooth path all of whose slices are immersions. **For:** reserves “isotopy” for embeddings. **Prov:** [S: literature-derived; P: not-applicable].
+4. `def-regular-homotopy-of-immersions` (definition) — a regular homotopy is a smooth path all of whose slices are immersions. **For:** reserves “isotopy” for embeddings. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Ranicki Ch. 7 §7.4, pp. 142--146; Francis Lectures 3, 5--6, PDF pp. 1--4 each.
 5. `lem-parametric-immersion-extension-on-a-disk` (lemma) — a family of formal immersions already holonomic near part of a disk can be deformed rel that part to genuine derivatives in the required direction. **For:** is the local Smale--Hirsch engine. **Prov:** [S: literature-derived; P: literature-derived].
 6. `lem-restriction-of-formal-immersion-data-has-the-parametric-lifting-property` (lemma) — compatible families lift across collar/handle restrictions. **For:** allows handle induction. **Prov:** [S: literature-derived; P: literature-derived].
 7. `lem-open-manifolds-admit-handle-filtrations-without-top-index-handles` (lemma) — a proper Morse function on an open $m$-manifold can be arranged without index $m$. **For:** supplies room for compression. **Prov:** [S: literature-derived; P: literature-derived].
@@ -1316,7 +1316,7 @@ PDF pp. 1--4; MW §§1--3 in full; C §7.2, pp. 226--232.
 13. `def-normal-bundle-of-a-formal-immersion` (definition) — take the quotient $f^*TN/F(TM)$, or an orthogonal complement after choosing a metric. **For:** connects formal data to stable-normal obstructions. **Prov:** [S: literature-derived; P: not-applicable].
 14. `lem-formal-immersion-gives-the-tangent-normal-bundle-identity` (lemma) — $TM\oplus\nu_F\cong f^*TN$. **For:** feeds DT-28. **Prov:** [S: literature-derived; P: literature-derived].
 15. `rem-smale-hirsch-is-a-weak-homotopy-equivalence-not-asserted-as-an-actual-homotopy-equivalence` (remark) — the topology of the mapping spaces matters. **For:** prevents a standard strengthening error. **Prov:** [S: literature-derived; P: not-applicable].
-16. `rem-a-closed-n-manifold-cannot-immerse-in-r-n` (remark) — an equidimensional immersion is a local diffeomorphism with open image, contradicting compact nonempty image. **For:** explains the positive-codimension clause. **Prov:** [S: literature-derived; P: not-applicable].
+16. `rem-a-closed-n-manifold-cannot-immerse-in-r-n` (remark) — an equidimensional immersion is a local diffeomorphism with open image, contradicting compact nonempty image. **For:** explains the positive-codimension clause. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Ranicki Ch. 7 §7.4, pp. 142--146; Francis Lectures 3, 5--6, PDF pp. 1--4 each.
 
 **Hard-proof closure.**  The theorem is not a bare h-principle citation: disk
 extension, restriction lifting, handle induction and closed-source thickening
@@ -1326,11 +1326,11 @@ used later.
 
 **B page:** `formal-immersions-and-the-smale-hirsch-theorem-examples`
 
-1. `ex-immersing-the-circle-in-the-plane-from-a-formal-line-monomorphism` — identify the tangent-direction map. **For:** prepares rotation number. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-the-standard-sphere-immersion-and-its-normal-line` — verify the bundle identity. **For:** tests item 14. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-an-open-parallelizable-manifold-immerses-in-euclidean-space-of-equal-dimension` — apply the open theorem. **For:** tests item 9. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-a-closed-manifold-with-formally-plausible-rank-data-needs-positive-codimension` — use compactness in equal dimension. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-a-bundle-map-with-rank-drop-is-not-a-formal-immersion` — display why fibrewise injectivity is pointwise. **For:** checks the definition. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-immersing-the-circle-in-the-plane-from-a-formal-line-monomorphism` — identify the tangent-direction map. **For:** prepares rotation number. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §7.4, pp. 142--146; Francis Lectures 3, 5--6, PDF pp. 1--4 each.
+2. `ex-the-standard-sphere-immersion-and-its-normal-line` — verify the bundle identity. **For:** tests item 14. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §7.4, pp. 142--146; Francis Lectures 3, 5--6, PDF pp. 1--4 each.
+3. `ex-an-open-parallelizable-manifold-immerses-in-euclidean-space-of-equal-dimension` — apply the open theorem. **For:** tests item 9. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §7.4, pp. 142--146; Francis Lectures 3, 5--6, PDF pp. 1--4 each.
+4. `cex-a-closed-manifold-with-formally-plausible-rank-data-needs-positive-codimension` — use compactness in equal dimension. **For:** tests item 16. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §7.4, pp. 142--146; Francis Lectures 3, 5--6, PDF pp. 1--4 each.
+5. `cex-a-bundle-map-with-rank-drop-is-not-a-formal-immersion` — display why fibrewise injectivity is pointwise. **For:** checks the definition. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Ranicki Ch. 7 §7.4, pp. 142--146; Francis Lectures 3, 5--6, PDF pp. 1--4 each.
 
 ### DT-26 — Regular homotopy and sphere eversion
 
@@ -1348,13 +1348,13 @@ PDF pp. 1--2; Ranicki §7.4, pp. 142--146.
 2. `prop-euclidean-formal-immersions-are-sections-of-a-stiefel-bundle` (proposition) — identify fibrewise monomorphisms $TM\to\varepsilon^n$ with the associated frame-bundle section space. **For:** translates DT-25 to homotopy theory. **Prov:** [S: literature-derived; P: literature-derived].
 3. `def-rotation-number-of-an-immersed-oriented-circle-in-the-plane` (definition) — degree of the unit tangent map $S^1\to S^1$. **For:** records the first regular-homotopy invariant. **Prov:** [S: literature-derived; P: not-applicable].
 4. `thm-whitney-graustein-classification-of-plane-circle-immersions` (theorem) — two oriented immersions $S^1\looparrowright\mathbb R^2$ are regularly homotopic iff their rotation numbers agree. **For:** is the low-dimensional prototype. **Prov:** [S: literature-derived; P: literature-derived].
-5. `lem-regular-homotopy-preserves-the-formal-gauss-class` (lemma) — differentiate a regular homotopy. **For:** gives necessity in all classifications. **Prov:** [S: literature-derived; P: literature-derived].
+5. `lem-regular-homotopy-preserves-the-formal-gauss-class` (lemma) — differentiate a regular homotopy. **For:** gives necessity in all classifications. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--2.2, PDF pp. 4--10; Francis Lectures 9--10, PDF pp. 1--3 and 1--2.
 6. `thm-smale-classification-of-sphere-immersions-in-euclidean-space` (theorem) — regular-homotopy classes are the corresponding homotopy classes of formal frame data/Stiefel maps, with the tangent clutching condition explicit. **For:** applies DT-25 to spheres. **Prov:** [S: literature-derived; P: literature-derived].
 7. `lem-standard-and-reflected-two-sphere-immersions-have-homotopic-formal-data-in-r-three` (lemma) — reduce the difference to the vanishing of the relevant $\pi_2(SO(3))$ class. **For:** is the algebraic eversion step. **Prov:** [S: literature-derived; P: literature-derived].
 8. `thm-sphere-eversion` (theorem) — the standard embedding $S^2\hookrightarrow\mathbb R^3$ is regularly homotopic to its inside-out reflection through immersions. **For:** is the flagship application. **Prov:** [S: literature-derived; P: literature-derived].
 9. `rem-sphere-eversion-cannot-be-an-isotopy-through-embeddings` (remark) — ambient isotopy preserves the induced normal/coorientation side; self-intersections are unavoidable. **For:** distinguishes regular homotopy from isotopy. **Prov:** [S: literature-derived; P: not-applicable].
-10. `rem-regular-homotopy-allows-self-intersections-but-never-rank-drop` (remark) — every time slice remains an immersion. **For:** fixes the visual misconception. **Prov:** [S: literature-derived; P: not-applicable].
-11. `rem-sphere-immersion-groups-are-at-computations-not-dt-constructions` (remark) — DT consumes the relevant Stiefel homotopy groups. **For:** enforces the AT seam. **Prov:** [S: literature-derived; P: not-applicable].
+10. `rem-regular-homotopy-allows-self-intersections-but-never-rank-drop` (remark) — every time slice remains an immersion. **For:** fixes the visual misconception. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen immersion notes §§1--2.2, PDF pp. 4--10; Francis Lectures 9--10, PDF pp. 1--3 and 1--2.
+11. `rem-sphere-immersion-groups-are-at-computations-not-dt-constructions` (remark) — DT consumes the relevant Stiefel homotopy groups. **For:** enforces the AT seam. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen immersion notes §§1--2.2, PDF pp. 4--10; Francis Lectures 9--10, PDF pp. 1--3 and 1--2.
 
 **Hard-proof closure.**  Whitney--Graustein and sphere eversion are consequences
 of the parametric theorem only after the formal section spaces and relevant AT
@@ -1363,11 +1363,11 @@ embedding isotopy.
 
 **B page:** `regular-homotopy-and-sphere-eversion-examples`
 
-1. `ex-plane-circle-immersions-of-rotation-number-k` — draw/parametrise representatives. **For:** tests item 4. **Prov:** [S: literature-derived; P: literature-derived].
-2. `cex-the-figure-eight-and-round-circle-are-not-regularly-homotopic-as-oriented-immersions` — compare rotation numbers. **For:** shows self-intersection count is not the invariant. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-formal-frame-homotopy-behind-sphere-eversion` — trace the relevant $SO(3)$ map. **For:** finite check of item 7. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-a-homotopy-through-maps-with-a-rank-drop-is-not-a-regular-homotopy` — pinch a circle. **For:** tests item 10. **Prov:** [S: literature-derived; P: literature-derived].
-5. `ex-a-boy-surface-immersion-of-real-projective-two-space` — Boy's surface immerses $\mathbb RP^2$ in $\mathbb R^3$, and its normal line is nontrivial because a global normal would orient the tangent planes in oriented $\mathbb R^3$. **For:** demonstrates nonorientable hypersurface behaviour. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-plane-circle-immersions-of-rotation-number-k` — draw/parametrise representatives. **For:** tests item 4. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--2.2, PDF pp. 4--10; Francis Lectures 9--10, PDF pp. 1--3 and 1--2.
+2. `cex-the-figure-eight-and-round-circle-are-not-regularly-homotopic-as-oriented-immersions` — compare rotation numbers. **For:** shows self-intersection count is not the invariant. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--2.2, PDF pp. 4--10; Francis Lectures 9--10, PDF pp. 1--3 and 1--2.
+3. `ex-formal-frame-homotopy-behind-sphere-eversion` — trace the relevant $SO(3)$ map. **For:** finite check of item 7. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--2.2, PDF pp. 4--10; Francis Lectures 9--10, PDF pp. 1--3 and 1--2.
+4. `cex-a-homotopy-through-maps-with-a-rank-drop-is-not-a-regular-homotopy` — pinch a circle. **For:** tests item 10. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--2.2, PDF pp. 4--10; Francis Lectures 9--10, PDF pp. 1--3 and 1--2.
+5. `ex-a-boy-surface-immersion-of-real-projective-two-space` — Boy's surface immerses $\mathbb RP^2$ in $\mathbb R^3$, and its normal line is nontrivial because a global normal would orient the tangent planes in oriented $\mathbb R^3$. **For:** demonstrates nonorientable hypersurface behaviour. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--2.2, PDF pp. 4--10; Francis Lectures 9--10, PDF pp. 1--3 and 1--2.
 
 ### DT-27 — Isotopy extension and embedding theory beyond Whitney
 
@@ -1386,16 +1386,16 @@ W §§6.2--6.4, pp. 169--192; Skopenkov, [“Embedding and Knotting of Manifolds
 4. `lem-compactness-allows-a-cutoff-to-produce-a-compactly-supported-time-dependent-field` (lemma) — choose a uniform tube along a compact isotopy track. **For:** supplies global support/completeness. **Prov:** [S: literature-derived; P: literature-derived].
 5. `lem-the-extended-time-dependent-field-has-a-global-time-one-flow` (lemma) — compact support yields completeness on the finite time interval. **For:** completes the analytic construction. **Prov:** [S: literature-derived; P: literature-derived].
 6. `thm-isotopy-extension` (theorem) — an isotopy of a compact embedded submanifold extends to a compactly supported ambient diffeotopy, with relative/boundary-stratum versions. **For:** turns intrinsic into ambient isotopy. **Prov:** [S: literature-derived; P: literature-derived].
-7. `cor-isotopic-embeddings-have-diffeomorphic-complements` (corollary) — restrict the ambient time-one diffeomorphism. **For:** supplies an embedding invariant. **Prov:** [S: literature-derived; P: literature-derived].
-8. `cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy` (corollary) — combine DG tubular existence/uniqueness with item 6. **For:** strengthens the cited DG result. **Prov:** [S: literature-derived; P: literature-derived].
+7. `cor-isotopic-embeddings-have-diffeomorphic-complements` (corollary) — restrict the ambient time-one diffeomorphism. **For:** supplies an embedding invariant. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Hirsch Ch. 8 §1, pp. 177--183; Juhasz Ch. 1 §1.3, pp. 13--16; Wall §§6.2--6.4, pp. 169--192.
+8. `cor-tubular-neighbourhoods-are-unique-up-to-ambient-isotopy` (corollary) — combine DG tubular existence/uniqueness with item 6. **For:** strengthens the cited DG result. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Hirsch Ch. 8 §1, pp. 177--183; Juhasz Ch. 1 §1.3, pp. 13--16; Wall §§6.2--6.4, pp. 169--192.
 9. `def-self-transverse-immersion-and-double-point-locus` (definition) — require the product map off the diagonal to be transverse to the diagonal. **For:** names the obstruction to upgrading an immersion. **Prov:** [S: literature-derived; P: not-applicable].
 10. `lem-double-point-locus-has-expected-dimension-two-m-minus-n` (lemma) — apply transversality on $M\times M\setminus\Delta$. **For:** gives the general-position range. **Prov:** [S: literature-derived; P: literature-derived].
 11. `cor-a-generic-proper-immersion-is-an-embedding-when-n-is-greater-than-two-m` (corollary) — the double locus is empty and proper injective immersions are embeddings. **For:** records the easy high-codimension upgrade beyond existence. **Prov:** [S: literature-derived; P: literature-derived].
 12. `prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range` (proposition) — under DT-22's sign, group, framing and dimension hypotheses, regularly homotope an immersion toward an embedding. **For:** links embedding theory to the Whitney trick. **Prov:** [S: literature-derived; P: literature-derived].
 13. `def-primary-double-point-obstruction-to-removing-self-intersections` (definition) — record the oriented/mod-two self-intersection class of a self-transverse immersion. **For:** names a genuine embedding obstruction. **Prov:** [S: literature-derived; P: not-applicable].
-14. `rem-vanishing-primary-double-point-and-characteristic-obstructions-do-not-classify-embeddings` (remark) — knotting/deleted-product data can remain. **For:** prevents Smale--Hirsch being misapplied to embeddings. **Prov:** [S: literature-derived; P: not-applicable].
+14. `rem-vanishing-primary-double-point-and-characteristic-obstructions-do-not-classify-embeddings` (remark) — knotting/deleted-product data can remain. **For:** prevents Smale--Hirsch being misapplied to embeddings. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Hirsch Ch. 8 §1, pp. 177--183; Juhasz Ch. 1 §1.3, pp. 13--16; Wall §§6.2--6.4, pp. 169--192.
 15. `rem-metastable-embedding-classification-requires-additional-deleted-product-machinery` (remark) — source the Haefliger--Weber boundary but do not make it load-bearing here. **For:** marks the advanced continuation. **Prov:** [S: literature-derived; P: not-supplied].
-16. `rem-isotopy-extension-needs-compact-source-or-proper-support-control` (remark) — arbitrary noncompact isotopies may have no complete ambient extension. **For:** guards item 6. **Prov:** [S: literature-derived; P: not-applicable].
+16. `rem-isotopy-extension-needs-compact-source-or-proper-support-control` (remark) — arbitrary noncompact isotopies may have no complete ambient extension. **For:** guards item 6. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Hirsch Ch. 8 §1, pp. 177--183; Juhasz Ch. 1 §1.3, pp. 13--16; Wall §§6.2--6.4, pp. 169--192.
 
 **Hard-proof closure.**  Velocity extension, cutoff and flow completeness are
 three separate steps.  For boundaries, say whether the isotopy preserves the
@@ -1405,10 +1405,10 @@ obstructions.
 
 **B page:** `isotopy-extension-and-embedding-theory-beyond-whitney-examples`
 
-1. `ex-ambient-isotopy-of-an-unknotted-circle-in-r-three` — extend a visible embedding isotopy. **For:** tests item 6. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-isotopic-submanifolds-have-isomorphic-normal-bundles-and-complements` — apply the ambient derivative. **For:** checks consequences. **Prov:** [S: literature-derived; P: literature-derived].
-3. `cex-regularly-homotopic-knots-need-not-be-isotopic-as-embeddings` — all circle immersions with fixed rotation data ignore knot type in space. **For:** distinguishes theories. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-double-point-dimension-count-for-surfaces-in-four-and-five-space` — compare isolated versus empty generic loci. **For:** shows why dimension four is critical. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-ambient-isotopy-of-an-unknotted-circle-in-r-three` — extend a visible embedding isotopy. **For:** tests item 6. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Hirsch Ch. 8 §1, pp. 177--183; Juhasz Ch. 1 §1.3, pp. 13--16; Wall §§6.2--6.4, pp. 169--192.
+2. `ex-isotopic-submanifolds-have-isomorphic-normal-bundles-and-complements` — apply the ambient derivative. **For:** checks consequences. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Hirsch Ch. 8 §1, pp. 177--183; Juhasz Ch. 1 §1.3, pp. 13--16; Wall §§6.2--6.4, pp. 169--192.
+3. `cex-regularly-homotopic-knots-need-not-be-isotopic-as-embeddings` — all circle immersions with fixed rotation data ignore knot type in space. **For:** distinguishes theories. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Hirsch Ch. 8 §1, pp. 177--183; Juhasz Ch. 1 §1.3, pp. 13--16; Wall §§6.2--6.4, pp. 169--192.
+4. `ex-double-point-dimension-count-for-surfaces-in-four-and-five-space` — compare isolated versus empty generic loci. **For:** shows why dimension four is critical. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Hirsch Ch. 8 §1, pp. 177--183; Juhasz Ch. 1 §1.3, pp. 13--16; Wall §§6.2--6.4, pp. 169--192.
 
 ### DT-28 — Characteristic-class obstructions to immersions and embeddings
 
@@ -1423,7 +1423,7 @@ MS Chs. 11, 14--15, pp. 123--136 and 167--182 for application formulas.
 
 1. `def-stable-normal-inverse-of-the-tangent-bundle` (definition) — $\nu_M$ is the stable bundle with $TM\oplus\nu_M\cong\varepsilon^N$. **For:** names the intrinsic obstruction bundle. **Prov:** [S: literature-derived; P: not-applicable].
 2. `lem-an-immersion-into-r-n-gives-a-rank-n-minus-m-representative-of-the-stable-normal-bundle` (lemma) — its normal quotient is an actual codimension bundle. **For:** turns immersion existence into rank reduction. **Prov:** [S: literature-derived; P: literature-derived].
-3. `lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity` (lemma) — DG tubes provide the actual embedded normal bundle. **For:** supplies necessary embedding conditions. **Prov:** [S: literature-derived; P: literature-derived].
+3. `lem-an-embedding-into-r-n-gives-the-same-normal-bundle-identity` (lemma) — DG tubes provide the actual embedded normal bundle. **For:** supplies necessary embedding conditions. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--3.1, PDF pp. 4--13; Skopenkov §§1--2, article pp. 1--13.
 4. `prop-smale-hirsch-makes-rank-reduction-sufficient-for-euclidean-immersion-in-positive-codimension` (proposition) — a rank-$(n-m)$ inverse tangent bundle gives a formal monomorphism and hence an immersion. **For:** shows the normal problem is complete for immersion, not embedding. **Prov:** [S: literature-derived; P: literature-derived].
 5. `lem-normal-stiefel-whitney-class-is-the-multiplicative-inverse-of-the-tangent-class` (lemma) — $w(\nu_M)w(TM)=1$ via AT Whitney sum. **For:** makes the obstruction calculable. **Prov:** [S: literature-derived; P: literature-derived].
 6. `cor-high-normal-stiefel-whitney-classes-obstruct-low-codimension-immersions` (corollary) — if $\nu$ has rank $k$, $w_i(\nu)=0$ for $i>k$. **For:** is the standard nonimmersion test. **Prov:** [S: literature-derived; P: literature-derived].
@@ -1431,10 +1431,10 @@ MS Chs. 11, 14--15, pp. 123--136 and 167--182 for application formulas.
 8. `cor-high-normal-pontryagin-classes-obstruct-oriented-immersions` (corollary) — a rank bound forces vanishing above its allowed degrees. **For:** supplements mod-two tests. **Prov:** [S: literature-derived; P: literature-derived].
 9. `prop-euler-class-of-an-oriented-even-rank-normal-bundle-controls-self-intersection` (proposition) — use DT-12 to identify zero-locus/self-intersection. **For:** links characteristic and double-point obstructions. **Prov:** [S: literature-derived; P: literature-derived].
 10. `thm-real-projective-space-stiefel-whitney-nonimmersion-obstruction` (theorem) — compute $\bar w(T\mathbb RP^m)=(1+a)^{-(m+1)}$ and use its highest nonzero term to rule out specified codimensions. **For:** is the canonical explicit application. **Prov:** [S: literature-derived; P: literature-derived].
-11. `prop-parallelizable-manifolds-have-no-stable-characteristic-class-obstruction-to-euclidean-immersion` (proposition) — trivial $TM$ gives trivial stable inverse, though dimension/rank and embedding issues remain. **For:** states what the test can and cannot see. **Prov:** [S: literature-derived; P: literature-derived].
+11. `prop-parallelizable-manifolds-have-no-stable-characteristic-class-obstruction-to-euclidean-immersion` (proposition) — trivial $TM$ gives trivial stable inverse, though dimension/rank and embedding issues remain. **For:** states what the test can and cannot see. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--3.1, PDF pp. 4--13; Skopenkov §§1--2, article pp. 1--13.
 12. `cor-embedding-obstructions-include-all-immersion-normal-class-obstructions` (corollary) — every embedding is an immersion with actual normal bundle. **For:** transfers the tests. **Prov:** [S: literature-derived; P: literature-derived].
 13. `rem-characteristic-class-vanishing-is-only-necessary-for-embedding` (remark) — knotting, complement and deleted-product obstructions remain. **For:** fixes the embedding boundary. **Prov:** [S: literature-derived; P: not-applicable].
-14. `rem-characteristic-class-construction-is-cited-not-rebuilt` (remark) — exact AT $w,p,e$ normalizations must be substituted before authoring calculations. **For:** enforces the seam. **Prov:** [S: literature-derived; P: not-applicable].
+14. `rem-characteristic-class-construction-is-cited-not-rebuilt` (remark) — exact AT $w,p,e$ normalizations must be substituted before authoring calculations. **For:** enforces the seam. **Prov:** [S: literature-derived; P: not-applicable]. **Locator:** Cohen immersion notes §§1--3.1, PDF pp. 4--13; Skopenkov §§1--2, article pp. 1--13.
 
 **Hard-proof closure.**  First prove the actual normal bundle identity, then
 apply AT Whitney-sum formulas and rank vanishing.  Smale--Hirsch makes formal
@@ -1443,10 +1443,10 @@ characteristic calculation is advertised as an embedding classification.
 
 **B page:** `characteristic-class-obstructions-to-immersions-and-embeddings-examples`
 
-1. `ex-normal-class-calculation-for-real-projective-space` — expand the inverse binomial class. **For:** verifies item 10. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-parallelizable-tori-have-trivial-stable-normal-class` — produce a Euclidean formal immersion. **For:** tests item 11. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-the-normal-line-of-an-oriented-hypersurface-is-trivial` — use the coorientation. **For:** checks rank-one vanishing. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-vanishing-stable-characteristic-classes-does-not-make-two-embeddings-isotopic` — use nontrivial knots with trivial normal bundle. **For:** tests item 13. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-normal-class-calculation-for-real-projective-space` — expand the inverse binomial class. **For:** verifies item 10. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--3.1, PDF pp. 4--13; Skopenkov §§1--2, article pp. 1--13.
+2. `ex-parallelizable-tori-have-trivial-stable-normal-class` — produce a Euclidean formal immersion. **For:** tests item 11. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--3.1, PDF pp. 4--13; Skopenkov §§1--2, article pp. 1--13.
+3. `ex-the-normal-line-of-an-oriented-hypersurface-is-trivial` — use the coorientation. **For:** checks rank-one vanishing. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--3.1, PDF pp. 4--13; Skopenkov §§1--2, article pp. 1--13.
+4. `cex-vanishing-stable-characteristic-classes-does-not-make-two-embeddings-isotopic` — use nontrivial knots with trivial normal bundle. **For:** tests item 13. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Cohen immersion notes §§1--3.1, PDF pp. 4--13; Skopenkov §§1--2, article pp. 1--13.
 
 ### DT-29 — Foliation holonomy and the holonomy groupoid
 
@@ -1483,12 +1483,12 @@ require transversality; quotient foliations require free/proper regularity.
 
 **B page:** `foliation-holonomy-and-the-holonomy-groupoid-examples`
 
-1. `ex-kronecker-foliation-of-the-torus-has-trivial-leaf-holonomy` — compute dense leaves and identity germs. **For:** separates density from holonomy. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-mobius-band-central-leaf-has-reflection-holonomy` — traverse the core once. **For:** tests nontrivial finite holonomy. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-suspension-of-a-circle-diffeomorphism` — identify leaves and return germs. **For:** checks items 13--14. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-flat-bundle-foliation-from-a-linear-representation` — construct the horizontal foliation. **For:** gives a higher-dimensional suspension. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-nontransverse-pullback-of-a-foliation-can-change-rank` — pull back along a tangent map. **For:** shows item 11's hypothesis is essential. **Prov:** [S: literature-derived; P: literature-derived].
-6. `cex-two-nonhomotopic-leaf-loops-can-have-the-same-holonomy-germ` — use a leaf with nontrivial holonomy kernel. **For:** distinguishes monodromy and holonomy. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-kronecker-foliation-of-the-torus-has-trivial-leaf-holonomy` — compute dense leaves and identity germs. **For:** separates density from holonomy. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§1.3, 2.1, pp. 14--24; Calegari §§4.2--4.3, pp. 140--154.
+2. `ex-mobius-band-central-leaf-has-reflection-holonomy` — traverse the core once. **For:** tests nontrivial finite holonomy. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§1.3, 2.1, pp. 14--24; Calegari §§4.2--4.3, pp. 140--154.
+3. `ex-suspension-of-a-circle-diffeomorphism` — identify leaves and return germs. **For:** checks items 13--14. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§1.3, 2.1, pp. 14--24; Calegari §§4.2--4.3, pp. 140--154.
+4. `ex-flat-bundle-foliation-from-a-linear-representation` — construct the horizontal foliation. **For:** gives a higher-dimensional suspension. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§1.3, 2.1, pp. 14--24; Calegari §§4.2--4.3, pp. 140--154.
+5. `cex-nontransverse-pullback-of-a-foliation-can-change-rank` — pull back along a tangent map. **For:** shows item 11's hypothesis is essential. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§1.3, 2.1, pp. 14--24; Calegari §§4.2--4.3, pp. 140--154.
+6. `cex-two-nonhomotopic-leaf-loops-can-have-the-same-holonomy-germ` — use a leaf with nontrivial holonomy kernel. **For:** distinguishes monodromy and holonomy. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§1.3, 2.1, pp. 14--24; Calegari §§4.2--4.3, pp. 140--154.
 
 ### DT-30 — Reeb stability and global foliation constructions
 
@@ -1511,7 +1511,7 @@ PDF pp. 54--56 (independent codimension-one/sphere-leaf specialisations only).
 7. `thm-global-reeb-stability-for-transversely-oriented-codimension-one-foliations` (theorem) — on a compact connected manifold, one compact leaf with finite fundamental group forces all leaves compact and yields the standard global fibration/mapping-torus description under the source hypotheses. **For:** gives the global codimension-one form. **Prov:** [S: literature-derived; P: literature-derived].
 8. `lem-compact-stable-leaves-form-an-open-saturated-set` (lemma) — local Reeb stability gives openness. **For:** splits the global proof. **Prov:** [S: literature-derived; P: literature-derived].
 9. `lem-compact-leaf-control-and-compact-ambientness-give-the-required-closedness` (lemma) — use transverse orientation and limit plaques to close the stable set. **For:** completes the open-and-closed argument. **Prov:** [S: literature-derived; P: literature-derived].
-10. `prop-mapping-torus-foliations-realize-global-reeb-stable-examples` (proposition) — fibres of a bundle over $S^1$ form the compact-leaf foliation, with monodromy transverse to the fibres. **For:** gives the global model. **Prov:** [S: literature-derived; P: literature-derived].
+10. `prop-mapping-torus-foliations-realize-global-reeb-stable-examples` (proposition) — fibres of a bundle over $S^1$ form the compact-leaf foliation, with monodromy transverse to the fibres. **For:** gives the global model. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§2.3, 2.5--2.6, pp. 30--33, 44--55; Calegari §4.2, pp. 140--143; MIT 18.965 §§22--23, PDF pp. 54--56.
 11. `prop-reeb-foliation-of-the-solid-torus-has-the-boundary-as-a-leaf` (proposition) — construct interior planes/cylinders spiralling toward the boundary torus. **For:** supplies the canonical unstable countermodel. **Prov:** [S: literature-derived; P: literature-derived].
 12. `prop-gluing-two-reeb-components-gives-a-foliation-of-s-three` (proposition) — match their boundary torus foliations. **For:** shows compact manifolds can have noncompact leaves. **Prov:** [S: literature-derived; P: literature-derived].
 13. `thm-reeb-thurston-stability-for-codimension-one-leaves` (theorem) — in a $C^1$ transversely oriented codimension-one foliation, a compact leaf $L$ with $H^1(L;\mathbb R)=0$ has a saturated neighbourhood whose leaves are diffeomorphic to $L$. **For:** records the cohomological refinement and the regularity/coorientation hypotheses. **Prov:** [S: literature-derived; P: literature-derived].
@@ -1526,11 +1526,11 @@ treatment; the narrower specialisations are corroborated but not promoted.
 
 **B page:** `reeb-stability-and-global-foliation-constructions-examples`
 
-1. `ex-product-foliation-near-a-compact-trivial-holonomy-leaf` — identify the saturated product. **For:** tests item 5. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-finite-holonomy-mobius-normal-model` — compute the twofold cover quotient. **For:** tests item 3. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-a-fibration-over-the-circle-as-a-global-stable-foliation` — compute its compact leaves. **For:** checks item 10. **Prov:** [S: literature-derived; P: literature-derived].
-4. `cex-a-reeb-component-has-a-compact-boundary-leaf-with-infinite-holonomy-behaviour` — show spiralling and failure of product stability. **For:** tests item 4. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-a-compact-leaf-with-infinite-fundamental-group-can-still-have-trivial-holonomy` — use a product foliation. **For:** tests item 15. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-product-foliation-near-a-compact-trivial-holonomy-leaf` — identify the saturated product. **For:** tests item 5. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§2.3, 2.5--2.6, pp. 30--33, 44--55; Calegari §4.2, pp. 140--143; MIT 18.965 §§22--23, PDF pp. 54--56.
+2. `ex-finite-holonomy-mobius-normal-model` — compute the twofold cover quotient. **For:** tests item 3. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§2.3, 2.5--2.6, pp. 30--33, 44--55; Calegari §4.2, pp. 140--143; MIT 18.965 §§22--23, PDF pp. 54--56.
+3. `ex-a-fibration-over-the-circle-as-a-global-stable-foliation` — compute its compact leaves. **For:** checks item 10. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§2.3, 2.5--2.6, pp. 30--33, 44--55; Calegari §4.2, pp. 140--143; MIT 18.965 §§22--23, PDF pp. 54--56.
+4. `cex-a-reeb-component-has-a-compact-boundary-leaf-with-infinite-holonomy-behaviour` — show spiralling and failure of product stability. **For:** tests item 4. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§2.3, 2.5--2.6, pp. 30--33, 44--55; Calegari §4.2, pp. 140--143; MIT 18.965 §§22--23, PDF pp. 54--56.
+5. `cex-a-compact-leaf-with-infinite-fundamental-group-can-still-have-trivial-holonomy` — use a product foliation. **For:** tests item 15. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §§2.3, 2.5--2.6, pp. 30--33, 44--55; Calegari §4.2, pp. 140--143; MIT 18.965 §§22--23, PDF pp. 54--56.
 
 ### DT-31 — Codimension-one foliations and secondary classes
 
@@ -1573,11 +1573,11 @@ stated in arbitrary codimension.
 
 **B page:** `codimension-one-foliations-and-secondary-classes-examples`
 
-1. `ex-a-fibration-over-the-circle-has-zero-godbillon-vey-class` — use a closed defining form. **For:** checks item 7. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-godbillon-vey-rescaling-calculation` — replace $\omega$ by $e^f\omega$ and compute the exact difference. **For:** verifies item 5. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-reeb-foliation-of-s-three-is-not-taut` — locate its Reeb components. **For:** checks item 12. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-fibre-foliation-of-a-mapping-torus-is-taut` — use a closed transversal. **For:** provides a positive model. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-a-noncompact-codimension-one-foliation-need-not-satisfy-novikov-compactness-conclusions` — exhibit escape at infinity. **For:** tests item 21. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-a-fibration-over-the-circle-has-zero-godbillon-vey-class` — use a closed defining form. **For:** checks item 7. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+2. `ex-godbillon-vey-rescaling-calculation` — replace $\omega$ by $e^f\omega$ and compute the exact difference. **For:** verifies item 5. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+3. `ex-reeb-foliation-of-s-three-is-not-taut` — locate its Reeb components. **For:** checks item 12. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+4. `ex-fibre-foliation-of-a-mapping-torus-is-taut` — use a closed transversal. **For:** provides a positive model. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
+5. `cex-a-noncompact-codimension-one-foliation-need-not-satisfy-novikov-compactness-conclusions` — exhibit escape at infinity. **For:** tests item 21. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Moerdijk--Mrcun §1.2 and §3.2, pp. 9--13, 65--80; Hurder--Langevin §§2--3.1, PDF pp. 3--10; CC §§4.4--4.6, pp. 155--166.
 
 ### DT-32 — Exotic smooth structures and Milnor spheres
 
@@ -1627,11 +1627,11 @@ sourced, non-load-bearing statement, never an invented or abbreviated proof.
 
 **B page:** `exotic-smooth-structures-and-milnor-spheres-examples`
 
-1. `ex-the-standard-seven-sphere-as-a-quaternionic-hopf-sphere-bundle` — identify the reference $(h,j)$ choice. **For:** normalizes the family. **Prov:** [S: literature-derived; P: literature-derived].
-2. `ex-gysin-sequence-for-a-milnor-sphere-bundle` — compute homology when $h+j=1$. **For:** verifies item 11. **Prov:** [S: literature-derived; P: literature-derived].
-3. `ex-intersection-form-of-the-bounding-disk-bundle` — compute its one-by-one matrix. **For:** verifies item 17. **Prov:** [S: literature-derived; P: literature-derived].
-4. `ex-two-milnor-spheres-with-distinct-congruence-invariants` — perform the source arithmetic after AT sign substitution. **For:** demonstrates nondiffeomorphism. **Prov:** [S: literature-derived; P: literature-derived].
-5. `cex-homeomorphism-type-does-not-determine-smooth-structure-in-dimension-seven` — compare the standard sphere and item 20. **For:** states the final boundary phenomenon. **Prov:** [S: literature-derived; P: literature-derived].
+1. `ex-the-standard-seven-sphere-as-a-quaternionic-hopf-sphere-bundle` — identify the reference $(h,j)$ choice. **For:** normalizes the family. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, “On Manifolds Homeomorphic to the 7-Sphere” full paper, pp. 399--405; Kervaire--Milnor §§1--4, pp. 504--515; Northwestern Math 465 exotic-sphere lecture in full; Lück Ch. 6 §§6.1--6.7, pp. 123--142.
+2. `ex-gysin-sequence-for-a-milnor-sphere-bundle` — compute homology when $h+j=1$. **For:** verifies item 11. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, “On Manifolds Homeomorphic to the 7-Sphere” full paper, pp. 399--405; Kervaire--Milnor §§1--4, pp. 504--515; Northwestern Math 465 exotic-sphere lecture in full; Lück Ch. 6 §§6.1--6.7, pp. 123--142.
+3. `ex-intersection-form-of-the-bounding-disk-bundle` — compute its one-by-one matrix. **For:** verifies item 17. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, “On Manifolds Homeomorphic to the 7-Sphere” full paper, pp. 399--405; Kervaire--Milnor §§1--4, pp. 504--515; Northwestern Math 465 exotic-sphere lecture in full; Lück Ch. 6 §§6.1--6.7, pp. 123--142.
+4. `ex-two-milnor-spheres-with-distinct-congruence-invariants` — perform the source arithmetic after AT sign substitution. **For:** demonstrates nondiffeomorphism. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, “On Manifolds Homeomorphic to the 7-Sphere” full paper, pp. 399--405; Kervaire--Milnor §§1--4, pp. 504--515; Northwestern Math 465 exotic-sphere lecture in full; Lück Ch. 6 §§6.1--6.7, pp. 123--142.
+5. `cex-homeomorphism-type-does-not-determine-smooth-structure-in-dimension-seven` — compare the standard sphere and item 20. **For:** states the final boundary phenomenon. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Milnor, “On Manifolds Homeomorphic to the 7-Sphere” full paper, pp. 399--405; Kervaire--Milnor §§1--4, pp. 504--515; Northwestern Math 465 exotic-sphere lecture in full; Lück Ch. 6 §§6.1--6.7, pp. 123--142.
 
 ---
 
@@ -1973,6 +1973,8 @@ the dash in §8 is deliberate.
   `not-supplied` only.  The three `not-supplied` rows are non-load-bearing.
 - 32 distinct `DT-n` pair labels, numbered consecutively from 1.
 - 160 atomic inclusion-bearing harvest rows, each with an item-id crosswalk.
+- Traceability completion: 452 item ids are named by the §9 heading crosswalk; the remaining 216 rows carry inline treatment-and-range locators, so all 668 proposed items are traceable.
+- Unattributed items: none.  Provenance corrections: none; every formerly untraced row could be placed in a treatment range already recorded as read.
 - No A page above 23 items; no B item is a dependency target.
 - Permitted-scope repository collision search found no proposed item or page id
   outside this owned file.  The prohibited concurrent AT scaffold remains an
