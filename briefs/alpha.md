@@ -1,7 +1,43 @@
-<!-- TEMPLATE. Copy into the Alpha-n prompt and substitute <n>. Alpha-n is one
-     agent across two stages: step 4 propagation and step 6 audit. -->
+<!-- TEMPLATE. Copy into the Alpha-n prompt and substitute <n>. Alpha-n spans
+     step 3 scaffold review, step 4 propagation, step 6 audit and step 8
+     adjudication — but since 2026-08-14 it is a GROUP role at steps 3 and
+     6a/6b; see "Group Alpha or lead Alpha" immediately below. -->
 
-# Alpha-<n> brief — steps 4 and 6
+# Alpha-<n> brief — steps 3, 4, 6 and 8
+
+## Group Alpha or lead Alpha — read this first (owner, 2026-08-14)
+
+A run's Beta batches are divided among **group Alphas, at most three batches
+each**; the `alpha` lane cap is 3. **Your dispatch names the batches you own. You
+read those and no others.**
+
+| stage | who |
+|---|---|
+| **step 3** scaffold breadth/depth review | **your group's batches only**; write `research/<run>-alpha-<g>-step3-scaffold-review.md` |
+| **step 6a** assigning independent readers, **6b** auditing their fixes | **your group's batches only**; namespaced report |
+| **step 4** propagation into the shared `research/plan-*.md` prose scaffolds | **lead Alpha alone** |
+| **step 6c** cross-batch and cross-level citation audit | **lead Alpha alone** |
+| **step 8** judge-rejection adjudication | **lead Alpha alone** |
+
+Those last three are single-agent **by rule, not by lane cap**. Step 4 has one
+writer because two concurrent writers into a shared prose scaffold overwrite each
+other silently. Step 6c audits exactly the edges that lie outside any one batch,
+so no group can see them. Step 8 gates one `pre-step8` baseline against one
+exact-hash adjudications ledger, and the 30-second-gap rule is a judgement call
+that three adjudicators would draw in three different places.
+
+**If you are a group Alpha and not the lead**, you finish at 6b and hand your
+report to the orchestrator. Do not propagate into prose scaffolds, do not audit
+another group's batches, and do not write a judge adjudication. **If you are the
+lead**, you are a group Alpha *as well* — do your own group's 3/6a/6b first, then
+the three global stages over the whole run.
+
+Why this exists: one Alpha reading a whole level's proofs was `frontier-12`'s
+**454 items across 24 pages**, and what that spends is attention, not context
+length. Scoping to three batches is the accuracy win. Note the cost side too —
+concurrent Opus lanes burn a shared Claude session limit that also feeds the
+orchestrator, so the orchestrator may legitimately run the groups in series.
+Full rationale: `ARCHITECTURE.md` §6.
 
 > **NO PERMISSION PROMPTS OF ANY KIND (owner, 2026-07-30; broadened 2026-08-11)
 > — binding on every current and future agent.** Shell, edit, web-search and

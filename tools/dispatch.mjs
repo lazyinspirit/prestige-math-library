@@ -106,7 +106,30 @@ const ROLES = Object.freeze({
   // the 1M window (the `[1m]` id above).
   // `effort` must be explicit: buildClaude defaults the claude runner to 'high',
   // so omitting it here would silently downgrade the adjudicator.
-  alpha:        { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'SINGLE writer of the prose scaffolds' },
+  //
+  // CAP RAISED 1 -> 3 (owner, 2026-08-14): GROUP ALPHAS. One Alpha per at most
+  // THREE Beta batches at step 3 and steps 6a/6b, so no single agent reads a
+  // whole level's proofs (frontier-12 was 454 items for one Alpha). The old
+  // cap of 1 enforced a step-4 invariant at every stage; its `why` said so.
+  //
+  // The mutual-exclusion guarantee is NOT deleted, it is relocated to an
+  // ownership contract, exactly as `scaffolder` does below. A group Alpha at
+  // step 3 edits no batch file at all and writes one namespaced report; at
+  // step 6 it owns its own group's batches and no sibling's. The LEAD Alpha
+  // alone performs step 4 propagation into the shared `research/plan-*.md`
+  // prose scaffolds, step 6c cross-batch/cross-level citation audit, and step 8
+  // judge adjudication — one prose writer, one global citation reader, one
+  // exact-hash adjudication ledger. Those three stages stay single-agent by
+  // rule, and the rule is in LEVELS.md, not in this number.
+  //
+  // QUOTA IS THE REAL BOUND, not memory (see ARCHITECTURE.md §6): four
+  // concurrent Opus lanes at xhigh exhausted the Claude session limit in 25-34
+  // minutes and took the orchestrator's own session down with them. 3 is chosen
+  // below that measured cliff. Concurrency here is a ceiling the orchestrator
+  // may use, never a quota it must spend: the accuracy win comes from SCOPING a
+  // group Alpha to 3 batches, which is free, and running the groups in series
+  // costs nothing but wall clock.
+  alpha:        { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 3, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
   refuter:      { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
   orchestrator: { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
 

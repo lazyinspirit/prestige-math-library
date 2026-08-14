@@ -164,11 +164,14 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   `.coverage.json` together and returns a `sufficient` / `insufficient` verdict
   per pair in `research/<run>-alpha-step3-scaffold-review.md`, naming for each
   `insufficient` the exact results to add and the source that carries them.
-  Alpha authors nothing at this stage and edits no batch file; the orchestrator
-  routes findings to the owning Beta and Alpha re-checks before step 4 splices.
-  Step 3 is the last point where fixing thinness costs a scaffold edit rather
-  than a rewrite. The review criteria are in `LEVELS.md` §"Step 3" and
-  `briefs/alpha.md` §"Stage 0".
+  Alpha authors nothing here and edits no batch file; the orchestrator routes
+  findings to the owning Beta and Alpha re-checks before step 4 splices. Step 3
+  is the last point where thinness costs a scaffold edit, not a rewrite.
+  **Group Alphas (owner, 2026-08-14):** one Alpha per **≤3 batches** at step 3
+  and 6a/6b (`dispatch.mjs` alpha cap 3), outputs namespaced. The **lead Alpha**
+  alone owns steps 4, 6c and 8 — one prose writer, one global citation reader,
+  one exact-hash ledger. Concurrency is a ceiling, not a quota: it draws on the
+  orchestrator's own session. `ARCHITECTURE.md` §6.
 
 - **Alpha adjudicates judges, and the 30-second threshold (owner, 2026-07-31).**
   Alpha is the sole adjudicator of a paired-judge rejection: it reads the frozen

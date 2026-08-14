@@ -897,7 +897,36 @@ plain, because `touchlog.mjs` must still read it on resume.
 `research/BUILD-AUDIT-INDEX.md` is the concise standing record of what each
 build and wave did and where its evidence lives.
 
-Alpha's lane cap is 1 because Alpha is the single writer of the prose scaffolds.
+**Alpha's lane cap is 3 (owner, 2026-08-14): GROUP ALPHAS.** It was 1, with the
+stated reason "single writer of the prose scaffolds" — which is a **step-4**
+invariant that the cap was enforcing at every stage. One Alpha per at most
+**three** Beta batches now runs step 3 and steps 6a/6b, so no single agent reads a
+whole level's proofs: `frontier-12` put **454 items across 24 pages** in front of
+one Alpha, and attention, not context length, is what that spends.
+
+**The mutual-exclusion guarantee is relocated, not deleted** — the same move
+`scaffolder` makes below. A group Alpha at step 3 edits no batch file at all and
+writes one namespaced report; at step 6 it owns its own group's batches and no
+sibling's. Three stages stay single-agent **by rule rather than by lane cap**,
+and the rule lives in `LEVELS.md` §"Step 3"/§"Step 6", not in this number:
+
+| stage | why the LEAD Alpha alone |
+|---|---|
+| step 4 propagation | the shared `research/plan-*.md` prose scaffolds have one writer; two overwrite each other silently |
+| step 6c cross-batch/cross-level citation audit | the edges that are not inside any one batch are global by definition, so no group can see them |
+| step 8 judge adjudication | `step8-guard.mjs` gates one `pre-step8` baseline against one exact-hash adjudications ledger, and the 30-second rule is a judgement call that three adjudicators would draw in three places |
+
+**Quota is what bounds the number, not memory.** Four concurrent Opus lanes at
+`xhigh` exhausted the Claude session limit in 25–34 minutes and died at once
+(measured 2026-08-13, recorded under `scaffolder` below), **and concurrency
+draws down the orchestrator's own session too** — so an over-wide Alpha fan-out
+kills the run, not just the stage. Three sits below that measured cliff.
+
+**The cap is a ceiling the orchestrator may use, never a quota it must spend.**
+The accuracy win comes from *scoping* a group Alpha to three batches, which is
+free; running the groups in series costs only wall clock and burns no more quota
+than the single Alpha it replaces. Run them concurrently only when the stage is
+light (step 3) or the quota headroom is known.
 
 **`mechanic` (owner, 2026-08-14): "use Terra instead of Sol for tasks requiring
 less reasoning".** GPT 5.6 Terra at `medium` effort, `workspace-write`, cap 4,
@@ -934,14 +963,21 @@ for every other authoring lane here, so the move also retires what had become a
 second Opus exception alongside `alpha`. The lane carries `web: true`, which is
 load-bearing rather than decorative: half of a scaffolder's brief is source
 research, and a Codex lane without web access does not fail — it asserts from
-memory. Alpha's cap of 1 is not a
+memory. Alpha's cap was never a
 resource limit but a **mutual-exclusion guarantee**: within a level Alpha is the
 single writer of a shared artifact set, and two concurrent Alphas overwrite each
-other silently. Raising that cap to run a scaffolding job would delete the
-guarantee for every future build. A scaffolder instead **owns exactly one track
-file that no sibling may open for writing**, so mutual exclusion comes from the
-ownership contract in the run's SEAMS record, and the cap is free to express the
-constraint that actually binds.
+other silently. Raising that cap *to run a scaffolding job* would have deleted
+the guarantee for every future build. A scaffolder instead **owns exactly one
+track file that no sibling may open for writing**, so mutual exclusion comes from
+the ownership contract in the run's SEAMS record, and the cap is free to express
+the constraint that actually binds.
+
+That is precisely the move the 2026-08-14 group-Alpha change makes for `alpha`
+itself (see above): the cap rose to 3 only once each group Alpha had a disjoint
+owned artifact set and the three genuinely shared stages — step 4, step 6c,
+step 8 — were pinned to the lead Alpha **by rule**. The guarantee is intact; what
+changed is where it is written down. Raising a cap without first relocating the
+guarantee remains the error this paragraph warns about.
 
 **That constraint is the Claude subscription session limit, not memory** —
 corrected 2026-08-13, having first been written the other way round from
@@ -966,7 +1002,9 @@ fan-out by the batches' disjoint write sets — but the cap never bound, and wav
 was on course to spend ~2 hours reading four batches strictly one after another.
 Concurrency is still bounded by the ROLE rather than by the driver, because
 `dispatch.mjs` acquires a cross-process slot before spawning its model; a
-single-agent step (Alpha, cap 1) is unchanged. Failure semantics changed with it:
+genuinely single-agent stage (the lead Alpha at steps 4, 6c and 8) is unchanged,
+and since 2026-08-14 the `alpha` cap of 3 lets a step's GROUP Alphas run at once
+the way `beta` and `reader` already do. Failure semantics changed with it:
 every agent now completes and the halt names ALL failures, because a broken brief
 or credential is usually broken for every lane at once. Dry-run and simulation
 stay serial on purpose — a simulation consumes its `outcomes` fixture by index,

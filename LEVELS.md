@@ -23,7 +23,8 @@ Everything below is verified against the code as of 2026-07-31.
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
 | **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, ledgers, and reporting |
-| **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`, 1M-token context** (owner, 2026-08-10; was GPT 5.6 Sol) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk |
+| **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`, 1M-token context** (owner, 2026-08-10; was GPT 5.6 Sol) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk. **Since 2026-08-14 this is a GROUP role at steps 3 and 6a/6b** — see the row below |
+| **group Alpha / lead Alpha** (owner, 2026-08-14) | same model and settings | A run's batches are divided among **group Alphas, at most three batches each** (`dispatch.mjs` alpha cap 3). Each group Alpha runs **step 3** for its own batches and **steps 6a/6b** for them, writing only namespaced artifacts nobody else opens. The **lead Alpha** is one of them and additionally owns the three stages that are global by nature: **step 4** propagation into the shared prose scaffolds, **step 6c** cross-batch/cross-level citation audit, and **step 8** judge adjudication. Rationale and the quota bound: `ARCHITECTURE.md` §6 |
 | **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding and **step 5 authors all content in its batch** after Step 4. It never audits content it authored. |
 | **independent Step-6 reader** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | Alpha-assigned read-only or repair-capable audit role for content it did not author; does not judge or adjudicate. |
 | **judges** | **DeepSeek V4 Pro direct (`max`) and freshly spawned Claude Sonnet 5 (`high` effort)** | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the only cross-family lane; Sonnet 5 is the second comparison lane, same family as the audit Alpha that adjudicates its rejections. |
@@ -357,7 +358,22 @@ are logged.
 
 **Then Alpha-n reviews every scaffold for breadth and depth (owner,
 2026-08-11).** Alpha is spawned here, not at step 4, and this runs *after* the
-orchestrator has settled the recommendations. For every pair it reads the
+orchestrator has settled the recommendations.
+
+**Group Alphas (owner, 2026-08-14).** Divide the run's batches among Alphas at
+**at most three batches each** and dispatch them together — the `alpha` lane cap
+is 3. A group Alpha reads only its own batches. Nothing is shared: at this stage
+Alpha edits no batch file at all, and each writes its own
+`research/<run>-alpha-<g>-step3-scaffold-review.md`. The orchestrator merges the
+verdicts. This exists because one Alpha reading a whole level's scaffolds is the
+same agent that later reads the whole level's proofs — `frontier-12` was 454
+items — and step 3 is where a thin page is still cheap to fix. Concurrency here
+is a ceiling, not a quota to spend: three concurrent Opus lanes burn a shared
+Claude session limit that also feeds the orchestrator, so run the groups in
+series whenever the headroom is unknown. The scoping is what buys the accuracy;
+the parallelism is optional.
+
+For every pair the owning group Alpha reads the
 `.pages.json`, `.notes.md` and `.coverage.json` together and asks whether the
 standard development of the subject is actually present: are the results a
 competent textbook chapter proves either scaffolded or disposed; is the harvest
@@ -554,6 +570,13 @@ positive, and alone may repair and gate in-flight content. The only public-item
 exception is the owner-delegated obvious-published-dependency protocol above.
 
 ### 6a. Independent batch audits, in parallel
+
+**Who runs 6a and 6b (owner, 2026-08-14).** The **group Alpha** that owns a batch
+runs 6a and 6b for it — at most three batches per Alpha, the same division used
+at step 3, so the Alpha adjudicating a batch is the one that reviewed its
+scaffold. 6c below stays with the **lead Alpha** alone, because the edges it
+audits are exactly the ones no group can see. Step 8 likewise: one adjudicator,
+one exact-hash ledger.
 
 Alpha assigns independent readers for each batch. A Beta that scaffolded or
 authored a batch is excluded from auditing it. Independent readers work in
