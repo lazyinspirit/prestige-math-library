@@ -47,9 +47,13 @@ the thin tracks into two failure modes.
 |---|---|---|
 | `pde` | DECOMPOSE | **LANDED 15:43, AUDITED, PASSES.** +270 (585→855), 2.04× → **2.76×** |
 | `functional-analysis` | WIDEN | **LANDED 15:50, AUDITED, PASSES.** +47 (689→736), 4.33× → **4.09×** |
+| `probability-theory` | WIDEN | **LANDED 15:55, AUDITED, PASSES.** +34 (618→652 by my count, 579→613 by its own item census), 4.49× → **3.58×**, source pool 8 → 13 |
 | `commutative-algebra` | DECOMPOSE | running. 718 headings harvested (most of any track), 443 items = **1.05×**. Transcribed a ToC. Also only **7 source hosts for 18 pairs** — narrowest sourcing in the commission |
-| `probability-theory` | WIDEN | running. ratio fine (4.2×), harvest narrow (171 headings) |
-| `number-theory` | dispatched 15:52 into pde's freed slot | measurement suspect — 41 included / 14.3× is probably a grep artifact; told to verify first |
+| `number-theory` | running, dispatched 15:52 into pde's freed slot | measurement suspect — 41 included / 14.3× is probably a grep artifact; told to verify first |
+
+**Three of three landed lanes corrected the figures I briefed them with** (583→585,
+687→689, 137→129 headings). Treat every number in a dispatch brief as approximate
+and make the lane re-derive it.
 
 **A successful WIDEN LOWERS the ratio — that is not a failure.** Widening puts
 new headings in the denominator and only the genuinely-new ones become items. FA

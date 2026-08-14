@@ -976,8 +976,8 @@ Items:
 17. `thm-doob-decomposition-of-an-integrable-adapted-process` (theorem) — existence and uniqueness with increments $E[X_n-X_{n-1}\mid\mathcal F_{n-1}]$.
 18. `cor-submartingale-doob-decomposition-has-increasing-compensator` (corollary) — and conversely.
 19. `def-predictable-quadratic-variation-in-discrete-time` (definition) — for a square-integrable martingale $M$, set $\langle M\rangle_0=0$ and $\langle M\rangle_n=\sum_{k=1}^nE[(M_k-M_{k-1})^2\mid\mathcal F_{k-1}]$; this predictable increasing process is distinguished from the optional sum $[M]_n=\sum_{k=1}^n(M_k-M_{k-1})^2$.
-20. `thm-square-minus-predictable-quadratic-variation-is-a-martingale` (theorem) — $M_n^2-\langle M\rangle_n$ is a martingale when $M_0=0$; for general $M_0$, use $(M_n-M_0)^2$ and state the needed measurability of $M_0$.
-21. `cor-second-moment-is-the-expected-predictable-quadratic-variation` (corollary) — if $M_0=0$, then $E[M_n^2]=E\langle M\rangle_n$, with both sides finite.
+20. `thm-square-minus-predictable-quadratic-variation-is-a-martingale` (theorem) — $M_n^2-\langle M\rangle_n$ is a martingale; equivalently, after subtracting the $\mathcal F_0$-measurable $M_0$, $(M_n-M_0)^2-\langle M\rangle_n$ is a martingale starting from zero.
+21. `cor-second-moment-is-the-expected-predictable-quadratic-variation` (corollary) — $E[M_n^2]=E[M_0^2]+E\langle M\rangle_n$; in particular, if $M_0=0$, then $E[M_n^2]=E\langle M\rangle_n$, with all terms finite.
 
 **Hard proof and well-definedness plan.**  Every conditional identity is an
 identity of a.e.-classes; finitely many times allow a common null set whenever
@@ -1033,7 +1033,7 @@ Items:
 15. `thm-azuma-hoeffding-inequality` (theorem) — under item 14, $P(M_n-M_0\ge x)\le\exp(-2x^2/\sum_{k\le n}c_k^2)$, and the lower-tail estimate follows by applying the result to $-M$.
 16. `cor-symmetric-bounded-increment-azuma-bound` (corollary) — if $|\Delta M_k|\le d_k$ a.s. for deterministic $d_k$, then $P(|M_n-M_0|\ge x)\le2\exp(-x^2/(2\sum_{k\le n}d_k^2))$.
 17. `def-square-integrable-martingale-difference-array-and-variance-clock` (definition) — for each row, define differences $Z_{n,k}$ and the predictable conditional-variance clock $\Gamma_{n,m}=\sum_{k\le m}E[Z_{n,k}^2\mid\mathcal F_{n,k-1}]$.
-18. `thm-martingale-central-limit-theorem` (theorem) — if each row and its variance clock converge a.s. at the row endpoint, $\Gamma_{n,\infty}\to1$ in probability, and $\sum_kE[Z_{n,k}^2;|Z_{n,k}|>\varepsilon]\to0$ for every $\varepsilon>0$, then $\sum_kZ_{n,k}\Rightarrow N(0,1)$.
+18. `thm-martingale-central-limit-theorem` (theorem) — if, within each row, the partial-sum martingale and its variance clock converge a.s. as the column index tends to infinity, $\Gamma_{n,\infty}\to1$ in probability, and $\sum_kE[Z_{n,k}^2;|Z_{n,k}|>\varepsilon]\to0$ for every $\varepsilon>0$, then $\sum_kZ_{n,k}\Rightarrow N(0,1)$.
 
 **Hard proof and well-definedness plan.**  The upcrossing number is defined by
 a supremum over finite integer tuples, hence is a measurable integer-valued
@@ -1045,7 +1045,10 @@ maximum, then monotone convergence passes to infinite time.  A.s. convergence
 alone does not give $L^1$ convergence: item 8 inserts uniform integrability
 exactly at that gap.  Reverse convergence identifies the limit with the
 intersection sigma-algebra by testing events and applying a monotone-class
-argument.
+argument.  Conditional Hoeffding is iterated through the filtration before
+Chernoff optimization; the martingale CLT treats its variance clock and
+Lindeberg remainder separately, so neither conditional variance stabilization
+nor large-jump control is hidden in a generic triangular-array citation.
 
 **B page:** `martingale-inequalities-and-convergence-examples`
 
@@ -1204,10 +1207,10 @@ Items:
 18. `cor-recurrence-of-the-one-dimensional-simple-symmetric-random-walk` (corollary) — derive from the return-probability series and the central-binomial asymptotic.
 19. `cor-recurrence-of-the-two-dimensional-simple-symmetric-random-walk` (corollary) — factor the return probability into one-dimensional binomial coefficients and prove its harmonic-order lower bound.
 20. `cor-transience-of-simple-symmetric-random-walk-in-dimension-at-least-three` (corollary) — derive from the Stirling coefficient upper bound proved in the item, without citing an unbuilt local CLT.
-21. `thm-first-step-equations-for-nonnegative-exit-costs` (theorem) — for a domain $D$, nonnegative boundary payoff $f$ and running cost $c$, the expected payoff at $T_{D^c}$ plus accumulated pre-exit cost satisfies $u=Pu+c$ on $D$ and $u=f$ on $D^c$, allowing $u=+\infty$ before a finiteness hypothesis is imposed.
-22. `thm-superharmonic-majorants-bound-exit-costs` (theorem) — if nonnegative $\psi$ satisfies $L\psi\le-c$ on $D$ and $\psi\ge f$ on $D^c$, then $\psi\ge u$; prove this with the stopped nonnegative supermartingale and Fatou, not an unlicensed optional-stopping limit.
+21. `thm-first-step-equations-for-nonnegative-exit-costs` (theorem) — for a domain $D$ and bounded nonnegative boundary payoff $f$ and running cost $c$, define the exit term piecewise as $f(X_{T_{D^c}})$ on $\{T_{D^c}<\infty\}$ and zero on $\{T_{D^c}=\infty\}$, then add the accumulated pre-exit cost.  Its expectation satisfies $u=Pu+c$ on $D$ and $u=f$ on $D^c$, allowing $u=+\infty$ before a finiteness hypothesis is imposed.
+22. `thm-superharmonic-majorants-bound-exit-costs` (theorem) — if a finite-valued nonnegative $\psi$ has $P\psi<\infty$ and satisfies $L\psi:=P\psi-\psi\le-c$ on $D$, with $\psi\ge f$ on $D^c$, then $\psi\ge u$; prove this with the stopped nonnegative supermartingale and Fatou, not an unlicensed optional-stopping limit.
 23. `cor-expected-exit-time-solves-the-poisson-equation` (corollary) — when $E_xT_{D^c}<\infty$, $u(x)=E_xT_{D^c}$ solves $Lu=-1$ on $D$ and $u=0$ on $D^c$; for a finite irreducible chain and proper $D$, the required expectations are finite by a geometric tail bound.
-24. `thm-lyapunov-drift-bound-for-markov-chain-hitting-times` (theorem) — if $\psi\ge0$ and $L\psi\le-1$ on $A^c$, then $E_xT_A\le\psi(x)$ for every starting state.
+24. `thm-lyapunov-drift-bound-for-markov-chain-hitting-times` (theorem) — if a finite-valued $\psi\ge0$ has $P\psi<\infty$ and satisfies $L\psi:=P\psi-\psi\le-1$ on $A^c$, then $E_xT_A\le\psi(x)$ for every starting state.
 
 **Hard proof and well-definedness plan.**  Return times take values in
 $\mathbb N\cup\{\infty\}$ and the successive-return recursion is defined only
@@ -1219,6 +1222,10 @@ series term by term.  Minimality in item 13 follows by stopping the candidate
 supermartingale at $T_A\wedge n$ and taking Fatou; uniqueness is deliberately
 restricted in item 14.  The lattice-walk results include the Stirling/local
 coefficient estimate they need instead of citing an unbuilt local CLT.
+Item 21 assigns the nonexit boundary term before any random-time evaluation;
+items 22--24 require finite one-step expectations and use nonnegative stopped
+processes plus Fatou, so no undefined $X_\infty$ or optional-stopping limit is
+hidden in the potential-theory formulas.
 
 **B page:** `recurrence-transience-and-hitting-times-for-markov-chains-examples`
 
@@ -1563,9 +1570,9 @@ Items:
 14. `thm-dynkin-formula-for-bounded-brownian-stopping` (theorem) — for $f\in C_c^2(\mathbb R^d)$ and a bounded stopping time $\tau$, $E_xf(B_\tau)=f(x)+E_x\int_0^\tau Lf(B_s)ds$.
 15. `rem-ito-versus-stratonovich-boundary` (remark, L/NA) — Stratonovich integration is not developed; record only the sourced conversion for sufficiently regular Brownian Ito integrands as a non-load-bearing convention note.
 16. `rem-general-semimartingale-calculus-is-outside-this-block` (remark, L/NA) — jumps, general local-martingale integrators, Girsanov, SDEs, Tanaka/local time, and stochastic differential geometry remain in the scope denials.
-17. `thm-brownian-filtration-martingale-representation` (theorem) — for the completed natural filtration of a Brownian motion, every cadlag local martingale $M$ has, up to indistinguishability, a representation $M_t=M_0+\int_0^tH_s\,dB_s$ with predictable $H$ and $\int_0^tH_s^2ds<\infty$ a.s. for every $t$.
+17. `thm-brownian-filtration-martingale-representation` (theorem) — for the usual (completed and right-continuous) augmentation of the natural filtration of a Brownian motion, every cadlag local martingale $M$ has, up to indistinguishability, a representation $M_t=M_0+\int_0^tH_s\,dB_s$ with predictable $H$ and $\int_0^tH_s^2ds<\infty$ a.s. for every $t$.
 18. `cor-square-integrable-brownian-terminal-variables-have-ito-representations` (corollary) — for $\xi\in L^2(\mathcal F_T)$, there is a predictable $H$ with $E\int_0^TH_s^2ds<\infty$ and $\xi=E\xi+\int_0^TH_s\,dB_s$; $H$ is unique $dt\otimes dP$-a.e.
-19. `cor-brownian-filtration-local-martingales-have-continuous-versions` (corollary) — the representation and continuity of Brownian stochastic integrals give a continuous modification, so cadlag discontinuities cannot arise from the completed Brownian filtration alone.
+19. `cor-brownian-filtration-local-martingales-have-continuous-versions` (corollary) — the representation and continuity of Brownian stochastic integrals give a continuous version indistinguishable from the given cadlag process, so cadlag discontinuities cannot arise from the usual Brownian filtration alone.
 
 **Hard proof and well-definedness plan.**  The quadratic-covariation theorem
 is proved before the product and Ito formulas.  For Ito's formula, first use a
@@ -1581,6 +1588,10 @@ Gaussian characteristic function of increments, and then invokes PT-8
 uniqueness.  Dynkin's formula stops the compactly supported Ito martingale at
 a bounded time, so its expectation is justified without importing PDE
 regularity or a general optional-stopping theorem for local martingales.
+Martingale representation is first proved for square-integrable terminal
+variables by a closed-subspace argument and then extended by truncation and
+localization in the usual Brownian filtration; the integral representation
+provides indistinguishability, not merely equality at each fixed time.
 
 **B page:** `itos-formula-and-brownian-martingales-examples`
 
@@ -1680,6 +1691,12 @@ audit surface explicit; each row must become either its own lemma or a
 | 42 | PT-21 | localized integral | use canonical energy hitting times and prove stopped integrals agree on overlaps up to indistinguishability |
 | 43 | PT-22 | quadratic covariation | prove existence in the Brownian-Ito class before product and Ito formulas use the symbol |
 | 44 | PT-22 | Ito/Levy formulas | localize before passing from bounded coefficients/test functions, and prove a local martingale is true before taking expectations |
+| 45 | PT-1 | singular affine regression | distinguish uniqueness of the projected random variable from nonuniqueness of coefficient vectors |
+| 46 | PT-7 | empirical-law convergence | choose one countable convergence-determining class before intersecting SLLN full-measure events |
+| 47 | PT-12 | discrete quadratic variation | keep the realized sum $[M]$ distinct from its predictable compensator $\langle M\rangle$ before taking expectations |
+| 48 | PT-13 | martingale concentration and CLT | condition predictable interval bounds on the past; define row endpoints and the conditional-variance clock before taking the row limit |
+| 49 | PT-16 | exit costs and Lyapunov functions | assign the nonexit boundary term explicitly and require $P\psi<\infty$ wherever the extended generator $P\psi-\psi$ is used |
+| 50 | PT-22 | Brownian martingale representation | use the usual augmented natural filtration and obtain an indistinguishable continuous version, not merely fixed-time modifications |
 
 ---
 
@@ -1706,7 +1723,7 @@ source proves that equivalence.
 | PT-10 conditional expectation | **$\mathsf{AC}_\omega$ inherited from MT-13** | RN's sigma-finite exhaustion has that cost in the measure scaffold; algebraic conditional properties add none |
 | PT-11 standard-Borel regular conditional distributions and disintegration | **$\mathsf{AC}_\omega$** | choose RN versions on one countable generating algebra, then intersect countably many full-measure sets |
 | PT-12 finite-time martingale algebra and Doob decomposition | **ZF** after conditional expectation exists | each time increment is given recursively; no infinite simultaneous version is selected |
-| PT-13 martingale convergence and UI characterizations | **ZF** after conditional expectation exists | rational upcrossing intervals are an explicit countable family; limits are unique |
+| PT-13 martingale inequalities, CLT, convergence, and UI characterizations | **ZF** after conditional expectation exists | rational upcrossing intervals, variance clocks, and Lindeberg truncations are explicit countable families; limits are unique |
 | PT-14 stopping and optional sampling | **ZF** after the martingale is given | truncation $\tau\wedge n$ is canonical; limiting theorems add no selection |
 | PT-15 Ionescu--Tulcea/path law | **$\mathsf{AC}_\omega$ inherited from the countable extension theorem** | finite iterated kernels are ZF; path-measure extension has PT-3's countable cost |
 | PT-16 countable-chain recurrence/hitting theory | **ZF** | countable sums are nonnegative/explicit and stopping times are canonical |
@@ -1715,7 +1732,7 @@ source proves that equivalence.
 | PT-18 Brownian finite-dimensional construction | **BPI** through PT-3's arbitrary-index extension | an alternative countable-dyadic construction may lower the cost but is not the supplied proof |
 | PT-18 continuous modification and PT-19--PT-20 path theorems | **$\mathsf{AC}_\omega$** for the supplied construction | countable compact intervals, rational exponents, dyadic levels, and null-set intersections are used |
 | PT-21 Brownian Ito integral | **ZF after $L^2$ completeness**, with MT-14's inherited proof cost | completion uses limits uniquely determined in $L^2$; selecting a rapidly convergent approximation can be made by least indices from a supplied dense sequence |
-| PT-21 localization and PT-22 Ito calculus | **ZF** after the integral/process is given | energy stopping times and localization levels are canonical; no maximal family or arbitrary representative is selected |
+| PT-21 localization and PT-22 Ito calculus/representation | **ZF** after the integral/process and $L^2$ completeness are given | energy stopping times, closed-range approximation, truncation, and localization levels are canonical; no maximal family or arbitrary representative is selected |
 
 ---
 
@@ -1867,6 +1884,10 @@ full treatment.
 | Raw, completed, and right-continuous filtrations are interchanged casually. | PT-19 defines all three and states strong Markov for the usual augmentation actually used. |
 | Predictable Brownian step processes use $(s,t]$, $[s,t)$, or an endpoint convention. | Use $(t_k,t_{k+1}]$ with the coefficient measurable at $t_k$; endpoints have $dt$ measure zero, and representation independence is proved. |
 | General semimartingale texts state Ito's formula with jumps. | PT-21/PT-22 restrict to continuous Brownian-driven Ito processes; no jump term is omitted from a theorem that purports to cover jumps. |
+| Some sources write $[M]$ for a predictable discrete bracket, while others reserve square brackets for realized quadratic variation and angle brackets for the predictable compensator. | Use $[M]_n=\sum_{k\le n}(\Delta M_k)^2$ and $\langle M\rangle_n=\sum_{k\le n}E[(\Delta M_k)^2\mid\mathcal F_{k-1}]$.  This matches the continuous-time square/angle-bracket distinction and prevents PT-12 from identifying two different processes. |
+| The three classical Brownian arcsine laws are numbered differently across treatments; Yoshida calls the last-zero and occupation laws the first and second laws. | Use descriptive theorem names (`last-zero` and `positive-occupation-proportion`) and state the common density, never an ordinal alone. |
+| Martingale-representation statements range from an informal terminal-claim formula (Lawler §5.7) to the full local-martingale theorem (van der Vaart Theorem 6.6). | PT-22 adopts van der Vaart's usual augmented Brownian filtration and predictable local-$L^2$ hypotheses; Lawler is corroboration, not the source for silently omitted integrability or filtration clauses. |
+| Azuma is stated either for $\lvert\Delta M_k\rvert\le d_k$ or for a predictable interval of length $c_k$. | State the sharper predictable-interval theorem first, then derive the symmetric $\lvert\Delta M_k\rvert$ form with $c_k=2d_k$, so the constants cannot be conflated. |
 
 ### 11.2 Durrett harvest
 
@@ -2076,12 +2097,88 @@ mis-cited as the proof of PT-7's Polish-space theorem.  The latter uses the
 full Aldous--Chewi route, with Durrett/Varadhan corroboration, stated in the
 PT-7 proof plan.
 
-### 11.7 Original-result cross-checks
+### 11.7 Enrichment-source harvests
+
+Every heading in the added exact ranges from §11.0 is named below.  A row may
+group adjacent headings only when their dispositions are the same or are
+spelled out heading by heading in that row; no unlisted chapter is being
+claimed as read.
+
+#### Jean-François Le Gall
+
+| Le Gall heading in the read range | disposition |
+|---|---|
+| 8.1 *Définitions générales*; 8.1.1 *Espaces de probabilité*; 8.1.2 *Variables aléatoires*; 8.1.3 *Espérance mathématique* | included PT-1; underlying measurable-space and integral constructions remain MT-1/MT-8 |
+| 8.1.4 *Exemple : le paradoxe de Bertrand*; 8.1.5 *Lois classiques*; 8.1.6 *Fonction de répartition d'une variable aléatoire réelle*; 8.1.7 *Tribu engendrée par une variable aléatoire* | Bertrand example and Doob--Dynkin factorization added PT-1; laws/CDF already included PT-1 |
+| 8.2 *Moments de variables aléatoires*; 8.2.1 *Moments d'ordre p et variance*; 8.2.2 *La régression linéaire*; 8.2.3 *Fonctions caractéristiques*; 8.2.4 *Fonction génératrice* | moments and affine prediction included PT-1; characteristic functions included PT-8; probability-generating functions deliberately not minted because the present spine has no branching/renewal theorem needing them |
+| 9.1 *Événements indépendants*; 9.2 *Variables aléatoires et tribus indépendantes*; 9.3 *Le lemme de Borel--Cantelli*; 9.4 *Sommes de variables aléatoires indépendantes* | included PT-2/PT-5/PT-8; analytic convolution remains MT-15/FA-22 |
+| 10.1 *Les différentes notions de convergence*; 10.2 *La loi forte des grands nombres*; 10.3 *La convergence en loi* | included PT-4--PT-8 |
+| 10.4 *Deux applications*; 10.4.1 *La convergence des mesures empiriques*; 10.4.2 *Le théorème central limite*; 10.4.3 *Extension au cas vectoriel* | empirical-law theorem added PT-7; CLT and vector extension already included PT-9 |
+| 11.1 *Conditionnement discret*; 11.2 *La définition de l'espérance conditionnelle*; 11.2.1 integrable, 11.2.2 positive, and 11.2.3 square-integrable cases; 11.3 *Propriétés spécifiques* | included PT-10, including the projection and conditional-inequality proof checks |
+| 11.4 *Calculs d'espérance conditionnelle*; 11.4.1 discrete, 11.4.2 density, and 11.4.3 Gaussian conditioning; 11.5 *Probabilités de transition et lois conditionnelles* | included PT-10/PT-11 and their B examples |
+| 12.1 *Définitions et exemples*; 12.2 *Temps d'arrêt*; 12.3 *Convergence presque sûre des martingales* | included PT-12--PT-14 |
+| 12.4 *La convergence dans $L^p$ pour $p>1$*; 12.5 *Uniforme intégrabilité et martingales*; 12.6 *Martingales rétrogrades* | included PT-13 |
+| 13.1 *Définition et premières propriétés*; 13.2 *Quelques exemples*; 13.2.1 iid variables; 13.2.2 walks on $\mathbb Z^d$; 13.2.3 graph walks; 13.2.4 branching processes; 13.3 *La chaîne de Markov canonique* | Markov definitions/path law and walk examples included PT-15/PT-16; graph theory is cited at the combinatorics seam; branching-process theory is deferred as a coherent specialist topic |
+| 13.4 *La classification des états*; 13.5 *Mesures invariantes*; 13.6 *Comportement asymptotique*; 13.7 *Martingales et chaînes de Markov* | included PT-16/PT-17; martingale/potential results decomposed further in PT-15/PT-16 |
+| 14.1 *Le mouvement brownien comme limite de marches aléatoires* | Donsker invariance principle remains out-of-scope by §3; no Brownian-bridge/empirical-process theorem is annexed |
+| 14.2 *La construction du mouvement brownien*; 14.3 *La mesure de Wiener*; 14.4 *Premières propriétés*; 14.5 *La propriété de Markov forte* | included PT-18/PT-19 |
+| 14.6 *Fonctions harmoniques et problème de Dirichlet*; 14.7 *Fonctions harmoniques et mouvement brownien* | Brownian generator/Dynkin fragments included PT-22; general harmonic and Dirichlet theory remains with complex analysis/PDE under the seam ruling |
+
+#### Sébastien Roch
+
+| Roch note and heading | disposition |
+|---|---|
+| Note 3 §1.3 *Returning to convergence modes*; §1.4 *Statement of laws of large numbers* | continuous mapping in probability added PT-4; sharp truncated-centering WLLN criterion added PT-5; SLLN already included PT-6 |
+| Note 5 §1.1 *Three-series theorem*; §1.2 *Sufficiency*; §1.3 *Necessity*; §1.4 *Applications*; §1.4.1 *A second proof of the SLLN*; §1.4.2 *Rates of convergence* | included PT-5/PT-6: three-series proof corroborated and finite-variance logarithmic rate added |
+| Note 5 §2.2 *Proof of LIL in Gaussian case* | included PT-5 for the symmetric-sum maximal lemma; the note states the general iid LIL but proves only the Gaussian case in this range, so the general LIL is deliberately not made load-bearing |
+| Note 8 §1.1 *Definition*; §1.2 *Equivalent characterizations*; §1.3 *Further properties of weak convergence*; §1.4 *Selection theorem and tightness* | included PT-4/PT-7 |
+| Note 8 §2.1 *Characteristic functions*; §2.2 *Levy's inversion formula*; §2.3 *Continuity theorem* | included PT-8/PT-9; Fourier normalization follows §11.1 |
+| Note 19 §1 *Martingale CLT* | included PT-13: martingale-difference array, variance clock, and CLT added; the random-speed walk example remains an illustration rather than a second theorem |
+| Note 20 §1.1 *Azuma--Hoeffding inequality* | included PT-13: conditional Hoeffding lemma and Azuma theorem added |
+| Note 20 §1.2 *Bounded differences*; §1.3 *Examples* | McDiarmid and the hypercube/random-graph applications remain with finite probability/combinatorics; they are not smuggled into this measure-theoretic probability block |
+| Note 24 §1 *Martingale problem* | included PT-15: discrete generator, martingale-problem characterization, and harmonic-martingale corollary added |
+| Note 24 §2 *Potential theory*; §3 *Lyapounov functions* | included PT-16: exit-cost first-step equations, superharmonic comparison, Poisson equation, and Lyapunov hitting bound added |
+
+#### Gregory Lawler
+
+| Lawler heading in the read range | disposition |
+|---|---|
+| 1.1 *Conditional expectation*; 1.2 *Martingales*; 1.3 *Optional sampling theorem*; 1.4 *Martingale convergence theorem*; 1.5 *Square integrable martingales*; 1.6 *Integrals with respect to random walk*; 1.7 *A maximal inequality* | included PT-10/PT-12--PT-14; random-walk integral agrees with the discrete predictable-transform convention |
+| 2.4 *Brownian motion*; 2.5 *Construction of Brownian motion*; 2.6 and 2.6.1--2.6.4 continuous-martingale, Markov, Gaussian, and self-similar viewpoints | included PT-18/PT-19 |
+| 2.7 *Computations for Brownian motion*; 2.8 *Quadratic variation*; 2.9 *Multidimensional Brownian motion* | included PT-19/PT-20 and examples; no drift/change-of-measure result is imported |
+| 2.10 *Heat equation and generator*; 2.10.1 one dimension; 2.10.2 expected value at a future time | semigroup/generator and bounded Dynkin consequences included PT-19/PT-22; heat-equation theory remains PDE-owned |
+| 3.1 *What is stochastic calculus?*; 3.2 *Stochastic integral*; 3.2.1 Riemann review; 3.2.2 simple processes; 3.2.3 continuous processes; 3.3 *Ito's formula*; 3.4 *More versions of Ito's formula* | Brownian stochastic integration and Ito formulas included PT-21/PT-22; Riemann review already published analysis |
+| 3.5 *Diffusions*; 3.6 *Covariation and the product rule*; 3.7 *Several Brownian motions* | covariation/product/vector formulas included PT-22; diffusion/SDE existence remains out-of-scope |
+| 4.1 *Martingales and local martingales*; 4.5 *Continuous martingales* | only localization and continuous Brownian-martingale facts needed by PT-21/PT-22 are included; no general semimartingale page is minted |
+| 5.7 *Martingale representation theorem* | included PT-22, with the complete filtration/integrability formulation taken from van der Vaart §6.2 rather than Lawler's informal claim discussion |
+
+#### Perla Sousi
+
+| Sousi heading in the read range | disposition |
+|---|---|
+| 1.1 *Discrete case*; 1.2 *Existence and uniqueness*; 1.3 *Product measure and Fubini's theorem*; 1.4 and 1.4.1--1.4.2 Gaussian/density examples | conditional expectation and examples included PT-10/PT-11; product/Fubini base remains MT-11 |
+| 2.1 *Stopping times*; 2.2 *Optional stopping*; 2.3 *Gambler's ruin*; 2.4 *Martingale convergence theorem*; 2.5 *Doob's inequalities*; 2.6 $L^p$ convergence; 2.7 UI martingales; 2.8 backwards martingales; 2.9 applications; 2.9.1 martingale proof of Radon--Nikodym | included PT-12--PT-14; Radon--Nikodym itself remains MT-13 |
+| 3.4 *Kolmogorov's continuity criterion* | included PT-18 |
+| 4.1 *Definitions*; 4.2 *Tightness*; 4.3 *Characteristic functions* | included PT-7/PT-8 |
+| 6.1 *History and definition*; 6.2 *Wiener's theorem*; 6.3 *Invariance properties*; 6.4 *Strong Markov property*; 6.5 *Reflection principle*; 6.6 *Martingales for Brownian motion*; 6.7 *Recurrence and transience* | included PT-18--PT-20/PT-22 |
+| 6.8 *Brownian motion and the Dirichlet problem*; 6.9 *Donsker's invariance principle*; 6.10 *Zeros of Brownian motion* | zero-set results included PT-20; Dirichlet theory and Donsker remain respectively PDE-owned and explicitly deferred |
+
+#### Nobuo Yoshida
+
+| Yoshida heading in the read range | disposition |
+|---|---|
+| 2.6 *The Central Limit Theorem*; 2.7 *Proof of the Central Limit Theorem* | included PT-9 |
+| 4.1 *Conditional Expectation*; 4.2 *Filtrations and Stopping Times I*; 4.3 *Martingales, Definition and Examples*; 4.4 *Discrete Stochastic Integral*; 4.5 *Hitting Times for One-dimensional Random Walks*; 4.6 *Quadratic variation and discrete stochastic integrals* | included PT-10/PT-12/PT-14/PT-16; discrete predictable quadratic variation added PT-12 |
+| 5.1 *Almost sure convergence*; 5.2 $L^1$ convergence; 5.3 *Optional Stopping Theorem*; 5.4 $L^p$ convergence; 5.5 *Backwards Martingales*; 5.6 *Structure of $L^1$-bounded martingales II* | included PT-13/PT-14; the structure section corroborates the UI/closed-martingale boundary rather than creating a parallel page |
+| 6.1 *Definition, and Some Basic Properties*; 6.2 *The Existence of Brownian Motion*; 6.3 Holder continuity below $1/2$; 6.4 nowhere Holder above $1/2$; 6.5 right-continuous enlargement; 6.6 strong Markov; 6.7 alternative Markov formulations; 6.8 *The Second Arcsin Law*; 6.9 filtrations and stopping II | included PT-18--PT-20; last-zero and positive-occupation arcsine statements added PT-20 with descriptive names |
+| 7.1 *Martingales Related to Brownian Motion*; 7.2 drifted one-dimensional hitting times; 7.3 *Stochastic Integrals*; 7.4 *Ito's Formula I*; 7.5 *Semimartingales Generated by a Brownian Motion*; 7.6 *Ito's Formula II* | included PT-19/PT-21/PT-22; the drift calculation is an inline exponential-martingale check, while Girsanov and general SDE theory remain outside the range and scope |
+
+### 11.8 Original-result cross-checks
 
 Textbooks and full lecture notes remain the proof backbones, but the historical
 statements below were also checked against primary publications.  This is a
 claim-fidelity check, not a substitute for the two independent modern
-treatments in §11.8.
+treatments in §11.9.
 
 | primary source and exact material inspected | source headings/results and disposition |
 |---|---|
@@ -2090,36 +2187,37 @@ treatments in §11.8.
 | J. W. Lindeberg, *Eine neue Herleitung des Exponentialgesetzes in der Wahrscheinlichkeitsrechnung* (1922), [digitized article record and scan](https://gdz.sub.uni-goettingen.de/id/PPN266833020_0015), pp. 211--225 | The article's sole named result, the triangular-array central-limit criterion now called the Lindeberg theorem, is included PT-9; the modern sufficiency/converse split and Feller negligibility are taken from D/AC, not attributed verbatim to the 1922 formulation. |
 | N. Etemadi, *An elementary proof of the strong law of large numbers* (1981), [bibliographic record and abstract](https://doi.org/10.1007/BF01013465), pp. 119--122 | The article title/result--the iid integrable strong law under pairwise independence--is included PT-6.  Only the record and abstract were accessible in this run, so PT-6's proof details are backed by Durrett/Norris rather than falsely claimed as read from the full original article. |
 
-### 11.8 Two-source backing matrix for every pair
+### 11.9 Per-pair source matrix after enrichment
 
-The pair sections give exact locators; this table makes the independent-source
-requirement auditable at a glance.  Every row has at least one complete
-textbook/full note set with a harvestable contents page.
+Codes name the full works and access points in §11.0.  Each row gives at
+least two independent full treatments and the exact range inspected; the
+last column shows how the added pool widened the check.  A dash records an
+honest non-match rather than promoting a passing mention into a treatment.
 
-| pair | textbook/full-note backbone | independent treatment |
+| pair | established treatments and exact ranges | added full treatment(s) and exact ranges |
 |---|---|---|
-| PT-1 | D §§1.1--1.7 | V §§1.4--1.6; N §§1.9, 2.1--3.5 and Ch. 4 |
-| PT-2 | D §§2.1, 2.3 | N §§1.12--1.13, 2.5; V §3.1 |
-| PT-3 | D §2.1.4, App. A.3 | V §§1.5, 4.4; AC §9.3 |
-| PT-4 | D §§2.2, 3.2 | V §2.3; N §§2.6, 6--7 |
-| PT-5 | D §§2.2, 2.5 | V §§3.2--3.4; AC §6.2 |
-| PT-6 | D §§2.3--2.5 | V §§3.3, 3.5; N §§9.2--10.2 |
-| PT-7 | AC §§1--2, 7.3 | D §3.2; V §2.3; M Ch. 4 |
-| PT-8 | D §3.3 | V §§2.1--2.3; N §7; AC §§3--5 |
-| PT-9 | D §§3.1, 3.4 | V §3.6; N §§8, 10.3; AC §§5.2--6.1, 8.2 |
-| PT-10 | D §§4.1--4.1.2 | V §§4.1--4.2; AV §§1.1--1.3 |
-| PT-11 | D §4.1.3 | V §§4.1, 4.3; AV §1.1 for version mechanics |
-| PT-12 | D §§4.2--4.3 | V §§5.1, 5.3, 5.6; AV §§2.1, 2.3, 2.7 |
-| PT-13 | D §§4.2, 4.4--4.7 | V §§5.2, 5.5; AV §§2.4--2.6, 2.9 |
-| PT-14 | D §4.8 | V §5.4; AV §§2.2, 2.8; LPW §17.2 |
-| PT-15 | D §§5.1--5.2 | V §4.4; LPW §§1.1--1.2, App. A.3; AC §9.3 |
-| PT-16 | D §§5.3--5.4 | LPW §§1.3, 1.7, 21.1--21.2; V §4.6 |
-| PT-17 | D §§5.5--5.8, 6.1--6.3 | LPW §§1.5--1.6, 4.1--4.3, 21.3, C.1; V §§6.1, 6.3 |
-| PT-18 | D §7.1 | P Lectures 13--15; AV §§4.1, 4.5 |
-| PT-19 | D §§7.2--7.3 | P Lectures 16--17; AV §§4.2, 4.4--4.5 |
-| PT-20 | D §§7.4--7.5, 8.5 | P Lectures 17--19; AV §§4.5, 5.8 |
-| PT-21 | AV §§4.1--4.7, 5.1--5.5 | D §7.6; P Lectures 23--24 |
-| PT-22 | AV §§5.6--5.10, 6.1--6.3 | D §7.6; P Lectures 23--25 |
+| PT-1 | D §§1.1--1.7; V §§1.4--1.6; N §§1.9, 2.1--3.5, Ch. 4 | LG §§8.1--8.2 |
+| PT-2 | D §§2.1, 2.3; N §§1.12--1.13, 2.5; V §3.1 | LG §§9.1--9.3 |
+| PT-3 | D §2.1.4, App. A.3; V §§1.5, 4.4; AC §9.3 | — added works do not give a second full Kolmogorov-extension treatment beyond the three already recorded |
+| PT-4 | D §§2.2, 3.2; V §2.3; N §§2.6, Chs. 6--7 | R Note 3 §§1.3--1.4; LG §§10.1, 10.3 |
+| PT-5 | D §§2.2, 2.5; V §§3.2--3.4; AC §6.2 | R Note 3 §1.4 and Note 5 §§1.1--1.4.2, 2.2 |
+| PT-6 | D §§2.3--2.5; V §§3.3, 3.5; N §§9.2--10.2 | LG §10.2; R Note 5 §§1.4.1--1.4.2 |
+| PT-7 | AC §§1--2, 7.3; D §3.2; V §2.3; M Ch. 4 | LG §§10.3--10.4.1; R Note 8 §§1.1--1.4; S §§4.1--4.2 |
+| PT-8 | D §3.3; V §§2.1--2.3; N §7; AC §§3--5 | LG §8.2.3; R Note 8 §§2.1--2.3; S §4.3 |
+| PT-9 | D §§3.1, 3.4; V §3.6; N §§8, 10.3; AC §§5.2--6.1, 8.2 | LG §§10.4.2--10.4.3; Y §§2.6--2.7 |
+| PT-10 | D §§4.1--4.1.2; V §§4.1--4.2; AV §§1.1--1.3 | LG §§11.1--11.4; S Ch. 1; Y §4.1 |
+| PT-11 | D §4.1.3; V §§4.1, 4.3; AV §1.1 for version mechanics | LG §11.5 and S §1.4.2 corroborate calculations only; neither is miscounted as a second standard-Borel existence proof |
+| PT-12 | D §§4.2--4.3; V §§5.1, 5.3, 5.6; AV §§2.1, 2.3, 2.7 | LG §12.1; S §2.1; Y §§4.2--4.6 |
+| PT-13 | D §§4.2, 4.4--4.7; V §§5.2, 5.5; AV §§2.4--2.6, 2.9 | LG §§12.3--12.6; R Note 19 §1 and Note 20 §1.1; S §§2.4--2.9; Y §§5.1--5.6 |
+| PT-14 | D §4.8; V §5.4; AV §§2.2, 2.8; LPW §17.2 | LG §12.2; S §§2.1--2.3; L §1.3; Y §§4.2, 4.5, 5.3 |
+| PT-15 | D §§5.1--5.2; V §4.4; LPW §§1.1--1.2, App. A.3; AC §9.3 | LG §§13.1--13.3; R Note 24 §1 |
+| PT-16 | D §§5.3--5.4; LPW §§1.3, 1.7, 21.1--21.2; V §4.6 | LG §§13.4, 13.7; R Note 24 §§2--3; Y §4.5 |
+| PT-17 | D §§5.5--5.8, 6.1--6.3; LPW §§1.5--1.6, 4.1--4.3, 21.3, C.1; V §§6.1, 6.3 | LG §§13.5--13.6 |
+| PT-18 | D §7.1; P Lectures 13--15; AV §§4.1, 4.5 | LG §§14.2--14.4; L §§2.4--2.6; S §§3.4, 6.1--6.3; Y §§6.1--6.5 |
+| PT-19 | D §§7.2--7.3; P Lectures 16--17; AV §§4.2, 4.4--4.5 | LG §14.5; L §§2.6--2.7; S §§6.4--6.7; Y §§6.6--6.9, 7.1--7.2 |
+| PT-20 | D §§7.4--7.5, 8.5; P Lectures 17--19; AV §§4.5, 5.8 | L §§2.7--2.8; S §§6.3, 6.10; Y §§6.3--6.4, 6.8 |
+| PT-21 | AV §§4.1--4.7, 5.1--5.5; D §7.6; P Lectures 23--24 | L §§3.1--3.2; Y §§7.3--7.4 |
+| PT-22 | AV §§5.6--5.10, 6.1--6.3; D §7.6; P Lectures 23--25 | L §§3.3--3.7, 4.1, 4.5, 5.7; Y §§7.4--7.6 |
 
 ---
 
@@ -2133,3 +2231,109 @@ must preserve the theorem hypotheses and convention decisions above; a shorter
 statement that drops standard-Borel, Polish, UI, Feller-negligibility,
 integrability, filtration, or partition-mode clauses is not an editorial
 simplification but a different and generally false theorem.
+
+---
+
+## 13. Density enrichment report (WIDEN, 2026-08-14)
+
+### 13.1 Verified measurement and outcome
+
+The dispatch's numerator is exact: the pre-enrichment scaffold contains **579
+distinct proposed item ids**.  Its denominator is not reproducible as 137
+from the live file.  Sections 11.2--11.6 contain **148 actual harvest
+disposition rows**, of which **129** have an `included` disposition; several
+of those rows bundle multiple source headings, so neither 137 nor 129 is a
+literal atomic-heading count.  The only repeatable before/after measurement
+available without retroactively rewriting the old harvest is therefore the
+inclusion-bearing disposition-row count.  On that basis the verified initial
+ratio is $579/129=\mathbf{4.49\times}$, not the dispatch's approximate
+$4.2\times$.
+
+After enrichment there are **613 distinct proposed item ids** and **192
+harvest disposition rows**, **171** inclusion-bearing.  Thus **34 items** and
+**44 dispositions** (42 inclusion-bearing) were added, and the comparable
+ratio is $613/171=\mathbf{3.58\times}$.  The ratio falls because this was a
+WIDEN pass: the denominator gained more independently read source coverage
+than the numerator gained nonduplicative library claims.  Raising it again
+would require duplicating results already present or promoting specialist
+material across seams, so no such padding was done.
+
+The modern full-treatment pool grew from **8 to 13 works**, across four new
+host domains: Le Gall (Paris-Saclay), Roch (Wisconsin), Lawler (Chicago),
+Sousi (Cambridge), and Yoshida (Nagoya).  Section 11.0 records the full-text
+access and exact ranges; §11.7 disposes every heading in those ranges; §11.9
+gives one exact-range row for every A/B pair.  Billingsley, Kallenberg,
+Klenke, Williams, Shiryaev, Chung, Dudley, and Mörters--Peres were checked but
+not counted because an authoritative openly reachable complete text was not
+obtained in this pass.
+
+### 13.2 What was added
+
+The 34 additions are concentrated where the new treatments exposed genuine
+gaps: PT-1 gains Doob--Dynkin, affine $L^2$ prediction, and Bertrand's model
+boundary; PT-4--PT-7 gain stable continuous transformations, a sharp iid WLLN
+criterion, a symmetric maximal inequality, an a.s. rate, and empirical-law
+convergence; PT-10 gains conditional Cauchy--Schwarz; PT-12 gains the missing
+predictable bracket; PT-13 gains Azuma--Hoeffding and the martingale CLT;
+PT-15--PT-16 gain the discrete generator, martingale problem, exit-cost
+potential theory, and Lyapunov hitting bounds; PT-20 gains the last-zero and
+occupation-time arcsine laws; and PT-22 gains Brownian-filtration martingale
+representation and its $L^2$ terminal-value form.
+
+No A page exceeds the 60-item ceiling.  The largest is PT-1 with **32 A
+items**; the largest B page has **11 items**.  **No page was split.**  All
+pre-existing ids remain unchanged and every new id is appended within its
+own pair.
+
+### 13.3 Added-item provenance ledger
+
+The table is normative build guidance.  `provenance.statement` identifies a
+published statement or a named proof-support decomposition; the
+`provenance.proof` entry identifies the proof actually to be followed and why
+that source is load-bearing.  No generated claim is load-bearing.
+
+| added item id(s) | `provenance.statement` | `provenance.proof` and rationale |
+|---|---|---|
+| `thm-doob-dynkin-factorization-for-real-random-variables` | LG §8.1.7, Proposition 8.1.3 | LG's simple-function then monotone-approximation proof; it covers an arbitrary measurable target and prevents an unstated standard-Borel hypothesis. |
+| `thm-normal-equations-for-best-affine-l2-prediction`; `cor-best-affine-predictor-from-one-random-variable` | LG §8.2.2, Proposition 8.2.2 and its one-variable specialization | Follow LG's finite-dimensional $L^2$ projection proof; retain the singular covariance case, because coefficient uniqueness is not the same as a.s. predictor uniqueness. |
+| `ex-bertrand-chord-paradox-is-a-model-specification-problem` | LG §8.1.4 | Reproduce the three explicitly specified sampling models and direct probabilities; the example is checkable and carries no theorem dependency. |
+| `lem-pairing-preserves-convergence-in-probability`; `thm-continuous-maps-preserve-convergence-in-probability` | R Note 3, Theorem 3.14; the pairing lemma is the proof-support decomposition needed for multivariable applications | Use the two-coordinate union bound, then Roch's subsequence characterization proof.  This keeps PT-4 independent of the later Polish-space continuous-mapping theorem. |
+| `thm-truncated-centering-criterion-for-an-iid-weak-law` | R Note 3, Theorem 3.16 | Follow Roch's truncation necessity/sufficiency argument with the displayed centers; the tail condition and centering are copied exactly rather than replaced by finite-mean assumptions. |
+| `lem-one-sided-maximal-inequality-for-symmetric-independent-sums` | R Note 5, Lemma 5.13 | Use Roch's first-crossing partition and symmetry of the unused tail; this is a genuine lemma used in the source's LIL proof. |
+| `thm-finite-variance-logarithmic-rate-for-iid-sums` | R Note 5 §1.4.2, Theorem 5.9 | Follow the random-series/geometric-block proof in the note; the non-sharp but explicit rate is stated only under finite variance and for every positive epsilon. |
+| `thm-empirical-measures-of-iid-euclidean-samples-converge-weakly`; `ex-empirical-laws-of-a-finite-valued-iid-sample` | LG §10.4.1, Theorem 10.4.1; finite-state specialization | Follow LG's countable dense $C_c(\mathbb R^d)$ class plus SLLN proof.  The B example specializes the same theorem to finitely many directly checkable frequencies. |
+| `cor-conditional-cauchy-schwarz-inequality` | proof-support corollary of LG §11.2--11.3 conditional positivity/Jensen and PT-10 item 12 | Apply conditional positivity to $(X+tY)^2$ for rational $t$ and use the discriminant; rational parameters give one common null set, which later martingale estimates need. |
+| `def-predictable-quadratic-variation-in-discrete-time`; `thm-square-minus-predictable-quadratic-variation-is-a-martingale`; `cor-second-moment-is-the-expected-predictable-quadratic-variation` | Y §4.6, *Quadratic variation and discrete stochastic integrals* | Follow Yoshida's conditional-square increment computation; separate $[M]$ from $\langle M\rangle$ before taking expectations, eliminating a real gap exposed by the old B-page example. |
+| `lem-conditional-hoeffding-bound-for-bounded-martingale-differences`; `thm-azuma-hoeffding-inequality`; `cor-symmetric-bounded-increment-azuma-bound` | R Note 20, Lemma 20.6 and Theorem 20.8 | Condition Hoeffding's lemma on the past and iterate the mgf bound exactly as Roch does; derive the symmetric constant with interval length $2d_k$ rather than changing conventions silently. |
+| `def-square-integrable-martingale-difference-array-and-variance-clock`; `thm-martingale-central-limit-theorem` | R Note 19 §1, Theorem 19.15 | Follow Roch's martingale Lindeberg proof; retain convergence of the conditional-variance clock in probability and the source's unconditional Lindeberg sum. |
+| `ex-azuma-bound-for-simple-random-walk` | R Note 20 §1.1 and the PT-12 centered-walk martingale | Substitute the predictable interval $[-1,1]$ directly into Theorem 20.8 and compare algebraically with the binomial scale. |
+| `def-discrete-generator-of-a-countable-state-transition-matrix`; `thm-countable-state-martingale-problem-characterization`; `cor-bounded-harmonic-functions-yield-markov-chain-martingales` | R Note 24 §1, equations (1)--(3) and Theorem 24.2 | Follow the source's conditional-increment proof and test the converse on indicators; the harmonic corollary is the exact $Lf=0$ specialization used by PT-16. |
+| `thm-first-step-equations-for-nonnegative-exit-costs`; `thm-superharmonic-majorants-bound-exit-costs`; `cor-expected-exit-time-solves-the-poisson-equation`; `thm-lyapunov-drift-bound-for-markov-chain-hitting-times`; `ex-negative-drift-reflected-walk-has-a-finite-mean-small-set-hitting-time` | R Note 24 §2--3, equation (4), Example 24.3, Theorem 24.4, Lemmas 24.5--24.6, Theorems 24.7--24.8, Example 24.9 | Use first-step conditioning, then the stopped nonnegative supermartingale and Fatou.  The example follows Roch's dominated-convergence drift estimate; this avoids asserting optional stopping without a limit hypothesis. |
+| `thm-brownian-last-zero-before-a-fixed-time-has-the-arcsine-law`; `thm-brownian-positive-occupation-proportion-has-the-arcsine-law` | Y Exercise 6.6.4(iii) and Proposition 6.8.4 | For last zero, follow Yoshida's hitting-time identity and Cauchy transform hint; for occupation time, follow the resolvent calculation in §6.8.  Descriptive ids implement the convention ruling in §11.1. |
+| `thm-brownian-filtration-martingale-representation`; `cor-square-integrable-brownian-terminal-variables-have-ito-representations`; `cor-brownian-filtration-local-martingales-have-continuous-versions` | AV §6.2, Theorem 6.6 and its opening $L^2$ case; independently corroborated by L §5.7 | Follow van der Vaart's closed-range/characteristic-function proof, truncation, and localization.  AV supplies the precise usual augmented filtration and local-$L^2$ class that Lawler's informal statement omits. |
+
+### 13.4 Deliberate non-decompositions and seam checks
+
+- LG §8.2.4 probability-generating functions and §13.2.4 branching
+  processes were not expanded: neither supports a current load-bearing proof,
+  and branching/renewal theory is a coherent later topic.
+- Roch Note 5 §2.2 was not promoted to a general iid LIL item.  The inspected
+  range proves only the Gaussian case; importing a general proof would either
+  overclaim the source or create a backward Brownian dependency.
+- Roch Note 20 bounded differences, hypercube concentration, and random-graph
+  examples remain finite-probability/combinatorics material under the seam
+  ruling.  Azuma itself belongs here; the combinatorial applications do not.
+- LG §14.1 and Sousi §6.9 Donsker invariance principles remain deferred with
+  empirical-process/Brownian-bridge topology.  No functional weak-convergence
+  theorem was annexed merely because the full texts contain it.
+- LG §14.6--14.7, Lawler §2.10, and Sousi §6.8 were used only for the
+  already-owned Brownian generator/Dynkin interface; general harmonic and
+  Dirichlet theory remains PDE/complex-analysis material.
+- Lawler §3.5 and the change-of-measure chapters, plus Yoshida beyond §7.6,
+  remain outside the commissioned Brownian-Ito spine: no diffusion-existence,
+  Girsanov, SDE, DDS, jump, or Levy-process result was minted.
+
+No enrichment item crosses the §§4/§7 seam rulings.  Measure construction,
+integration, Radon--Nikodym, scalar $L^p$, ergodic theorems, Fourier analysis,
+finite probabilistic method, PDE boundary theory, and future stochastic-
+process topics remain citations or explicit deferrals.
