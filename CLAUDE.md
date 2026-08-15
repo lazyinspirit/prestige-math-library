@@ -193,14 +193,14 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   `confirmed_fatal` adjudication licenses an edit to an item. A
   `confirmed_nonfatal` or `false_positive` closes the rejection on its exact-hash
   ledger row with **no content, page, frontmatter, contract, impact, or judge
-  mutation** — the rule `AUDIT-WORKFLOW.md` §9 already states for audit A8, now
-  binding on the build and mechanically enforced in both. Cosmetic polish and
+  mutation** — the rule `AUDIT-WORKFLOW.md` §9 states for A8, now binding on the
+  build and mechanically enforced in both. Cosmetic polish and
   30-second-gap tidying belong at **step 6**, before the text is frozen, where no
   verdict exists to void: any edit is a material rewrite under SCHEMA §3, so a
   step-8 polish voids `verification.judge`, forces a rejudge, and resamples a
   refuter — an unbounded loop converging on nothing. **Fatal repairs are
   deliberately uncapped:** a proof that keeps yielding real fatal defects is
-  either converging toward correctness or is actually false, and both must run to
+  either converging toward correctness or is false, and both must run to
   conclusion. The twice-touched escalation stays advisory.
   *Mechanism:* every adjudication row records `item_sha256` (sha256 of the
   normalized item text, verification block excluded, at adjudication time). Take a
@@ -279,7 +279,7 @@ append-only evidence and never satisfy current Terra coverage.
   well-known result it needs, then proves that result from available library
   dependencies. **If that fails, Beta builds the missing prerequisite definitions
   and theorems.** Dropping an important result for want of a definition or lemma
-  that could have been written is no longer a permitted disposition;
+  that could have been written is not a permitted disposition;
   `deferred` / `out-of-scope` is reserved for material genuinely belonging to
   another page's topic, or resting on a whole subject area the library has not
   reached (a computability level, a measure-theory level).
@@ -335,10 +335,10 @@ append-only evidence and never satisfy current Terra coverage.
 - **Generated-claim minimization (owner, 2026-08-01).** Source-backed statements
   are the default. Beta must not invent a theorem, proposition, definition, false
   statement, or mathematical remark merely to enrich a page or bridge an
-  inconvenient proof. It may introduce only an easily and directly verifiable
+  inconvenient proof. It may introduce only a directly verifiable
   `ai-generated` corollary, or a checkable example/counterexample, and neither
-  may be load-bearing (the dependency-target prohibition is stated in the
-  provenance order above). Keep a would-be proof-decomposition lemma inline, or
+  may be load-bearing (see the provenance order above). Keep a would-be
+  proof-decomposition lemma inline, or
   replace it with a literature-derived or AI-altered statement. A theorem in the
   dependency backbone needs literature support or a locally proved,
   source-grounded route.
@@ -371,9 +371,9 @@ append-only evidence and never satisfy current Terra coverage.
   `included` (naming the scaffolded item id), `inline` (naming the item whose
   proof absorbs it), `already-published` (naming the published item), `deferred`,
   or `out-of-scope` — and the last two need a written reason about **that
-  specific result**. Source-anchored rather than a minimum result count: a count
-  would invite the padding scaffold richness forbids, while a disposition per
-  source heading cannot be satisfied by inventing anything. The artifact is
+  specific result**. Source-anchored, never a minimum result count: a count
+  invites the padding scaffold richness forbids, while a per-heading disposition
+  cannot be satisfied by inventing anything. The artifact is
   `research/<run>-batch-<i>.coverage.json`,
   gated by `tools/coverage-checklist.mjs` at **step 2** (where acting on a gap
   still costs a scaffold entry, not a rewrite) and again at **step 6**, where
@@ -381,6 +381,16 @@ append-only evidence and never satisfy current Terra coverage.
   only checks it is structurally complete and still true of disk. `LEVELS.md`
   §"Step 2"; error codes `ARCHITECTURE.md` §3.11b. Legacy pages are not
   retro-harvested.
+
+- **Citation liveness; RECOVER BEFORE REPLACE (owner, 2026-08-15).**
+  `coverage-checklist` checks a source URL is *present*; `tools/url-sweep.mjs`
+  checks a reader can *open* it — a gate at **steps 2 and 6**,
+  `--recover --fail-on-dead`. On a dead source, **recover before re-sourcing**:
+  it queries the Wayback index under every host variant — a document moved behind
+  a new subdomain is archived only under its old host, so querying the citation's
+  host reads as "never archived". Re-source only once recovery fails:
+  replacing a recoverable source costs a re-harvest and rewrites every backed
+  item's provenance. `ARCHITECTURE.md` §3.11c.
 
 - **Beta proof-design discipline (owner, 2026-07-31).** Before authoring a proof,
   Beta prepares a proof-obligation map assigning every substantive subclaim to an
@@ -549,9 +559,9 @@ themselves now frozen too.
 and glyph), none relying on colour alone: ordinary citation < **forward
 reference** < **not proved here** — the bottom tier OUTRANKS the middle one.
 **Sky and fuchsia are reserved** for the top two tiers and used nowhere else;
-later additions (search, issue reporting, navigation) were deliberately built
-from the existing vocabulary and introduce no new accent. Marker text always
-accompanies colour.
+later additions (search, issue reporting, navigation) were built from the
+existing vocabulary and introduce no new accent. Marker text always accompanies
+colour.
 
 Content-side hooks for the tiers, and the rules that are correctness rather than
 taste:

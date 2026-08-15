@@ -146,6 +146,17 @@ const STEPS = {
     // item list is not yet authored, so adding a harvested result costs a
     // scaffold entry rather than a rewrite.
     g('coverage-checklist.mjs', [CHECKLISTS], { needs: [CHECKLISTS], why: 'every result the sources contain is scaffolded or declined in writing' }),
+    // CITATION LIVENESS (owner, 2026-08-15). The omission gate above checks a
+    // source URL is PRESENT; this checks a reader can OPEN it. On frontier-13 a
+    // batch cited lecture notes returning 404 — 47 of 114 harvested rows and 15
+    // items rested on them — and every gate was green. The tool already existed;
+    // only `run-wave.mjs` called it, so the build never ran it and an Alpha
+    // caught it three steps late. `--recover` looks the dead URL up in the
+    // Wayback index under each host variant, because RECOVER BEFORE REPLACE:
+    // those notes were archived the whole time under a hostname the citation had
+    // since moved off, and re-sourcing the page cost a 42-minute re-harvest.
+    g('url-sweep.mjs', ['--coverage', CHECKLISTS, '--out', '{dir}/{run}-url-liveness.json', '--recover', '--fail-on-dead'],
+      { needs: [CHECKLISTS], why: 'every cited source resolves; a dead one is reported with its archived snapshot' }),
   ],
   3: [],   // Orchestrator adjudication of Beta recommendations. Judgment, not a gate.
   4: [
@@ -179,6 +190,13 @@ const STEPS = {
     // a record of what was built. Alpha's step-6 read is what checks the harvest
     // is FAITHFUL to the sources; this only checks it is still TRUE of disk.
     g('coverage-checklist.mjs', [CHECKLISTS], { needs: [CHECKLISTS], why: 'the checklist still matches what was authored' }),
+    // Re-run after authoring for the same reason the checklist does: step 5 adds
+    // `sources.references` URLs to the item files that did not exist at step 2,
+    // and a link can rot between a scaffold and a publish. The manifests bring
+    // the authored items into scope here; the checklists keep the scaffold-time
+    // sources in it.
+    g('url-sweep.mjs', ['--manifests', MANIFESTS, '--coverage', CHECKLISTS, '--out', '{dir}/{run}-url-liveness.json', '--recover', '--fail-on-dead'],
+      { needs: [MANIFESTS, CHECKLISTS], why: 'every cited source still resolves, now including authored item references' }),
   ],
   // Step 7 is the judge sweep itself, which SPENDS. The driver runs
   // judge-sweep.mjs as an action; this gate only checks what it produced.

@@ -341,6 +341,23 @@ home: a dropped result is a `deferred` or `out-of-scope` row in the batch's
 `coverage-checklist.mjs` runs here as a required gate, and it is what stops a
 drop from being silent rather than recorded.
 
+**Citation liveness (owner, 2026-08-15).** `url-sweep.mjs --coverage … --recover
+--fail-on-dead` also runs here as a required gate. The checklist above proves a
+source URL is *present*; this proves a reader can *open* it. On `frontier-13` a
+batch cited lecture notes returning 404 — 47 of 114 rows and 15 items rested on
+them — and every gate was green; only an Alpha trying the link caught it.
+
+**When it fails, RECOVER BEFORE YOU RE-SOURCE.** The gate prints the archived
+snapshot when one exists, and it looks under every host variant rather than the
+hostname in the citation — a document moved behind a new subdomain is archived
+only under its old host, so the citation's own hostname reads as "never
+archived". Swap the citation to the snapshot. **Re-sourcing the page onto a
+different text is the last resort, not the first move:** on `frontier-13` it cost
+a 42-minute re-harvest and an instruction naming a chapter that did not contain
+the material, while the notes were recoverable the whole time. Re-source only
+when the gate reports no snapshot under any variant. Full rationale:
+`ARCHITECTURE.md` §3.11c.
+
 **Reuse discipline.** Ids are IMMUTABLE on `main`. Grep `items/` and
 `plan-spec.json` before minting; reuse or alias an existing id for an existing
 statement.

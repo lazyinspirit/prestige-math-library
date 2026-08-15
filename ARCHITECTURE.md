@@ -643,6 +643,62 @@ checklist is still true of what was actually authored. A missing checklist is a
 honest — a Beta that under-enumerates a chapter passes. That reading is Alpha's
 at step 6, and the checklist's real value there is that it gives Alpha something
 specific and falsifiable to check rather than an open-ended "is this page thin?".
+It also never checks that a cited URL *resolves* — §3.11c.
+
+### 3.11c The citation-liveness gate — `url-sweep.mjs` (owner, 2026-08-15)
+
+**Which failure it prevents.** §3.11b checks a source URL is *present*. Nothing
+checked a reader could *open* it. On run `frontier-13` a batch cited Minhyong
+Kim's UCL lecture notes at a URL returning 404: **47 of 114 harvested rows and 15
+items rested on a document nobody could read**, both pages fell below the
+two-independent-treatments floor, and every gate was green. It surfaced only
+because a step-3 Alpha tried the link.
+
+**The tool already existed and was already correct.** `url-sweep.mjs` was written
+for the published-page audit and does exactly this job. Its only caller was
+`run-wave.mjs`. The build never ran it — so the check that would have caught this
+at step 2 ran, for the first time, three steps late. That is the whole lesson:
+the gap was not a missing capability but a capability wired into one driver.
+
+**Three changes made it a build gate.**
+
+| change | why |
+|---|---|
+| `--coverage` | It read URLs from `items/<id>.md`, which do not exist until step 5. Scaffold-time sources live in `coverage.json`; without this the gate cannot run at step 2, the only step where acting costs a scaffold edit and not a rewrite. |
+| `--recover` | **Recover before you replace** — see below. |
+| `--fail-on-dead` | Default stays report-only, exit 0. `run-wave.mjs` halts the whole wave on a nonzero exit here, and a dead URL in published content is a finding for Alpha, not a reason to abort an audit. The build passes the flag; the audit does not. |
+
+**RECOVER BEFORE YOU REPLACE.** The frontier-13 response to the dead source was
+to re-source both pages onto different textbooks. That cost a 42-minute
+re-harvest, an orchestrator instruction naming a chapter that turned out not to
+contain the material, and nearly the loss of the original attribution — and the
+notes were archived the entire time. What hid them is the part worth stating:
+the citation read `homepages.ucl.ac.uk/~ucahmki/…` while the Wayback copy sits
+under `www.ucl.ac.uk/~ucahmki/…`. UCL moved `~user` pages behind a new subdomain
+and only the pre-move URL was ever crawled, so querying the archive on the
+hostname *in the citation* returns nothing and reads as "never archived". The
+recovery therefore walks host variants — each leading label stripped, `www.`
+normalised, registry suffixes like `ac.uk` skipped — not the host as written.
+
+A dead URL *with* a recovered snapshot is still a gate failure: the citation on
+disk is what a reader clicks. The snapshot is printed so the fix is a URL swap.
+
+**Two bugs found by running it, both of which had already bitten the run.**
+
+- *Liveness is a header question.* The first version downloaded the body and
+  reported Knapp's *Basic Algebra* — a legitimately cited 9.4 MB PDF — as FAILED
+  after timing out at 1.2 MB. That is almost certainly the same false positive
+  that made a step-3 reviewer report that exact URL as a 404 and block a page on
+  it. It now uses HEAD, falling back to a one-byte ranged GET for servers that
+  refuse HEAD, so a large file costs the same as a small one. The real sweep went
+  from 47 s to 4.9 s.
+- *Multi-value flags.* `gates.mjs` expands `{checklists}` into one argv entry per
+  file, and a comma-only reader silently saw batch 1 and pronounced the other six
+  clean. The flag parser now accepts both forms.
+
+**Where it runs.** Step 2 (scaffold sources) and step 6 (again, now including the
+`sources.references` URLs step 5 adds to item files — a link can rot between a
+scaffold and a publish). Receipt: `research/<run>-url-liveness.json`.
 
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 
