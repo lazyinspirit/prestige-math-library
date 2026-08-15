@@ -2,7 +2,7 @@
 id: lem-roots-of-x-q-minus-x-form-a-field
 kind: lemma
 title: "In characteristic $p$, the roots of $x^{p^n}-x$ form a subfield and are all simple"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-cube-root-of-two-is-not-algebraically-constructible
 kind: counterexample
 title: "The real cube root of two is algebraic but not algebraically constructible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

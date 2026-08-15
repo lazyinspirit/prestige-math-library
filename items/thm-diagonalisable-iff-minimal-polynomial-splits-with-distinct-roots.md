@@ -2,7 +2,7 @@
 id: thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots
 kind: theorem
 title: "An endomorphism is diagonalisable if and only if its minimal polynomial is a product of distinct linear factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

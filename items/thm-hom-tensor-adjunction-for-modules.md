@@ -2,7 +2,7 @@
 id: thm-hom-tensor-adjunction-for-modules
 kind: theorem
 title: "Hom-tensor adjunction: $\\operatorname{Hom}_R(M\\otimes_RN,P)\\cong\\operatorname{Hom}_R(M,\\operatorname{Hom}_R(N,P))$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Hom-tensor adjunction"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

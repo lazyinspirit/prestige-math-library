@@ -2,7 +2,7 @@
 id: thm-classification-of-groups-of-order-pq
 kind: theorem
 title: "Classification of groups of order $pq$ for primes $p<q$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

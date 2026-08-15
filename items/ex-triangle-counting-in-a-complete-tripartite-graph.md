@@ -2,7 +2,7 @@
 id: ex-triangle-counting-in-a-complete-tripartite-graph
 kind: example
 title: "The triangle counting lemma is exact for three complete cross-pairs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

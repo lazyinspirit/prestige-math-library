@@ -1,7 +1,7 @@
 ---
 page: diagonalisation-and-the-minimal-polynomial
 title: 'Diagonalisation and the Minimal Polynomial'
-status: draft
+status: published
 items: [def-diagonalisable-endomorphism,
         def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism,
         thm-minimal-polynomial-is-well-defined-and-controls-annihilators,

@@ -2,7 +2,7 @@
 id: thm-discriminant-root-formula-and-repeated-root-criterion
 kind: theorem
 title: "The discriminant is $\\prod_{i<j}(\\alpha_i-\\alpha_j)^2$ and vanishes exactly when a monic polynomial has a repeated root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms
 kind: theorem
 title: "A family of diagonalisable endomorphisms of a finite-dimensional space is simultaneously diagonalisable if and only if its members commute pairwise"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

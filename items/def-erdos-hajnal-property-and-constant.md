@@ -2,7 +2,7 @@
 id: def-erdos-hajnal-property-and-constant
 kind: definition
 title: "The Erdős–Hajnal property and an Erdős–Hajnal constant for a hereditary graph class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

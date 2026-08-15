@@ -2,7 +2,7 @@
 id: thm-direct-image-and-preimage-form-an-adjoint-triple-on-power-sets
 kind: theorem
 title: 'Direct image, preimage, and universal image form an adjoint triple on power sets'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

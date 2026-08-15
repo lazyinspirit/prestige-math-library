@@ -2,7 +2,7 @@
 id: prop-finite-fields-are-splitting-fields-of-x-q-minus-x
 kind: proposition
 title: "A field with $q$ elements is the splitting field of $x^q-x$ over its prime subfield"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

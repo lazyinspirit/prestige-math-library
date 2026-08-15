@@ -2,7 +2,7 @@
 id: cor-algebraically-constructible-numbers-have-power-of-two-degree
 kind: corollary
 title: "An algebraically constructible real algebraic number has degree over $\\mathbb Q$ equal to a power of two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

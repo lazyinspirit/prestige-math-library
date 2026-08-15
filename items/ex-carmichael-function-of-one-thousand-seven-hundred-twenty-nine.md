@@ -2,7 +2,7 @@
 id: ex-carmichael-function-of-one-thousand-seven-hundred-twenty-nine
 kind: example
 title: "$\\lambda(1729)=36$ although $\\varphi(1729)=1296$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-induced-path-counting-from-three-pure-pairs
 kind: example
 title: "Two complete pairs and one anticomplete pair produce exactly $|X_1||X_2||X_3|$ induced copies of $P_3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

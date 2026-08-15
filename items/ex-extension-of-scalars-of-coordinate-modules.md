@@ -2,7 +2,7 @@
 id: ex-extension-of-scalars-of-coordinate-modules
 kind: example
 title: "For a field extension $K/F$, one has $K\\otimes_FF^n\\cong K^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Coordinate modules commute with scalar extension"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

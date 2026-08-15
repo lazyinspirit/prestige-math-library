@@ -2,7 +2,7 @@
 id: ex-tensor-product-of-two-quotient-modules
 kind: example
 title: "$(R/I)\\otimes_R(R/J)\\cong R/(I+J)$ for ideals of a commutative ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Tensor product of two quotient modules"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: symmetric-polynomials
 title: "Symmetric Polynomials and the Fundamental Theorem of Symmetric Functions"
-status: draft
+status: published
 items: [def-symmetric-polynomial,
         prop-symmetric-polynomials-form-a-subring,
         def-elementary-symmetric-polynomials,

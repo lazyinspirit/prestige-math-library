@@ -2,7 +2,7 @@
 id: lem-actions-related-by-automorphisms-give-isomorphic-semidirect-products
 kind: lemma
 title: "Actions changed by automorphisms of the kernel and complement give isomorphic semidirect products"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

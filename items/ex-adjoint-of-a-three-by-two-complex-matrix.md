@@ -2,7 +2,7 @@
 id: ex-adjoint-of-a-three-by-two-complex-matrix
 kind: example
 title: "The adjoint of an explicit map $\\mathbb C^2\\to\\mathbb C^3$ is its conjugate-transpose matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,11 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

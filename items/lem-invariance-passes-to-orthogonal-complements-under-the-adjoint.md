@@ -2,7 +2,7 @@
 id: lem-invariance-passes-to-orthogonal-complements-under-the-adjoint
 kind: lemma
 title: "If $W$ is $T$-invariant, then $W^\\perp$ is $T^*$-invariant"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

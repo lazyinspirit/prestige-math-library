@@ -2,7 +2,7 @@
 id: ex-closed-walks-in-the-complete-graph
 kind: example
 title: "Closed walks of length $n$ in $K_p$ are counted by $(p-1)^n+(p-1)(-1)^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: basis
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

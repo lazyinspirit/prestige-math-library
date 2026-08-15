@@ -1,7 +1,7 @@
 ---
 page: linear-recurrences-and-rational-generating-functions-examples
 title: "Examples: Linear Recurrences and Rational Generating Functions"
-status: draft
+status: published
 items: []
 examples: [ex-fibonacci-generating-function-and-binet-formula,
            ex-lucas-generating-function-and-closed-form,

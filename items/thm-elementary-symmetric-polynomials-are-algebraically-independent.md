@@ -2,7 +2,7 @@
 id: thm-elementary-symmetric-polynomials-are-algebraically-independent
 kind: theorem
 title: "The elementary symmetric polynomials are algebraically independent over the coefficient ring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

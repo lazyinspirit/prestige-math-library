@@ -2,7 +2,7 @@
 id: cex-a-rational-recurrence-may-need-a-proper-splitting-field
 kind: counterexample
 title: 'A recurrence over $\mathbb Q$ can require a proper splitting field for its exponential closed form'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

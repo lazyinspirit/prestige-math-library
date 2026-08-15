@@ -2,7 +2,7 @@
 id: thm-adjoint-kernel-and-range-orthogonality
 kind: theorem
 title: "$\\ker T^*=(\\operatorname{im}T)^\\perp$ and $\\operatorname{im}T^*=(\\ker T)^\\perp$ in finite dimension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

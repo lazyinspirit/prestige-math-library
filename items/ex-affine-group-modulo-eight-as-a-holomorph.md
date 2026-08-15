@@ -2,7 +2,7 @@
 id: ex-affine-group-modulo-eight-as-a-holomorph
 kind: example
 title: ' $\operatorname{Hol}(C_8)$ is the group of affine maps $x\mapsto ax+b$ with $a\in\{1,3,5,7\}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

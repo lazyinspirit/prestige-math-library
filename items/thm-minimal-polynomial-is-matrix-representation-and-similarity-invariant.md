@@ -2,7 +2,7 @@
 id: thm-minimal-polynomial-is-matrix-representation-and-similarity-invariant
 kind: theorem
 title: "The minimal polynomial is unchanged by choosing a matrix representation or replacing a matrix by a similar one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

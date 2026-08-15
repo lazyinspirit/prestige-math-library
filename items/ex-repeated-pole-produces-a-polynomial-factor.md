@@ -2,7 +2,7 @@
 id: ex-repeated-pole-produces-a-polynomial-factor
 kind: example
 title: "The repeated pole $(1-2x)^{-2}$ produces the sequence $(n+1)2^n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

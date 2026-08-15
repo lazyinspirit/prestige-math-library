@@ -2,7 +2,7 @@
 id: thm-unit-group-modulo-two-power-structure
 kind: theorem
 title: "For $k\\ge3$, $(\\mathbb Z/2^k\\mathbb Z)^\\times\\cong C_2\\times C_{2^{k-2}}$, generated uniquely as $(-1)^\\varepsilon5^j$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

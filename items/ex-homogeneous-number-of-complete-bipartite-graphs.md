@@ -2,7 +2,7 @@
 id: ex-homogeneous-number-of-complete-bipartite-graphs
 kind: example
 title: "For positive $a,b$, $\\operatorname{hom}(K_{a,b})=\\max\\{2,a,b\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

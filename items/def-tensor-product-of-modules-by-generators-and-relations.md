@@ -2,7 +2,7 @@
 id: def-tensor-product-of-modules-by-generators-and-relations
 kind: definition
 title: "The tensor product $M\\otimes_R N$ from the additive group underlying the free $\\mathbb Z$-module on $M\\times N$, elementary tensors, and finite tensor sums"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

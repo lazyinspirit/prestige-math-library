@@ -2,7 +2,7 @@
 id: cex-factorial-generating-series-is-not-rational
 kind: counterexample
 title: '$\sum_{n\ge0}n!x^n$ is a formal power series that is not rational over $\mathbb Q$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,11 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

@@ -2,7 +2,7 @@
 id: cor-change-of-rings-for-extension-of-scalars
 kind: corollary
 title: "Change of rings: $N\\otimes_RM\\cong N\\otimes_S(S\\otimes_RM)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

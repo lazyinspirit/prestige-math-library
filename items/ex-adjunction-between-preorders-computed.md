@@ -2,7 +2,7 @@
 id: ex-adjunction-between-preorders-computed
 kind: example
 title: 'A floor-division and multiplication adjunction between natural-number preorders'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

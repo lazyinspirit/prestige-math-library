@@ -1,7 +1,7 @@
 ---
 page: linear-recurrences-and-rational-generating-functions
 title: "Linear Recurrences and Rational Generating Functions"
-status: draft
+status: published
 items: [def-linear-recurrence-and-recurrence-characteristic-polynomial,
         def-rational-formal-power-series-and-reduced-denominator,
         lem-four-spaces-for-a-fixed-linear-recurrence,

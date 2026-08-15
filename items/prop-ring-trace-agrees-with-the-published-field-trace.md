@@ -2,7 +2,7 @@
 id: prop-ring-trace-agrees-with-the-published-field-trace
 kind: proposition
 title: "For matrices over a field, the commutative-ring trace agrees with the published matrix trace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

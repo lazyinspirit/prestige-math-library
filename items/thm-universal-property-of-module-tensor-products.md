@@ -2,7 +2,7 @@
 id: thm-universal-property-of-module-tensor-products
 kind: theorem
 title: "Universal property of the tensor product for balanced maps into abelian groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ short: "Universal property of $M\\otimes_RN$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

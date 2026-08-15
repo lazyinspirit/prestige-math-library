@@ -2,7 +2,7 @@
 id: lem-derivative-of-det-i-minus-xa
 kind: lemma
 title: '$\frac{d}{dx}\det(I-xA)=-\operatorname{tr}(\operatorname{adj}(I-xA)A)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

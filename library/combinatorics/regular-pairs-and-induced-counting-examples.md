@@ -1,7 +1,7 @@
 ---
 page: regular-pairs-and-induced-counting-examples
 title: "Regular Pairs and Induced Counting — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-complete-and-empty-pairs-are-zero-regular,
            cex-half-graph-pairs-have-macroscopic-irregularity,

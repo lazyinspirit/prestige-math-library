@@ -2,7 +2,7 @@
 id: thm-matrix-of-the-adjoint-is-the-conjugate-transpose
 kind: theorem
 title: "In orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

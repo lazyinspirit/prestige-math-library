@@ -1,7 +1,7 @@
 ---
 page: diagonalisation-and-the-minimal-polynomial-examples
 title: 'Diagonalisation and the Minimal Polynomial: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-minimal-polynomials-of-scalar-diagonal-and-zero-dimensional-endomorphisms,
            ex-same-characteristic-polynomial-different-minimal-polynomials,

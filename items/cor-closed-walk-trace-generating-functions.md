@@ -2,7 +2,7 @@
 id: cor-closed-walk-trace-generating-functions
 kind: corollary
 title: "Closed walks have trace and logarithmic-derivative generating functions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

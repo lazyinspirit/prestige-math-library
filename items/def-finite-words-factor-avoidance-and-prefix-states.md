@@ -2,7 +2,7 @@
 id: def-finite-words-factor-avoidance-and-prefix-states
 kind: definition
 title: "Finite words, contiguous factors, avoidance and proper-prefix states"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

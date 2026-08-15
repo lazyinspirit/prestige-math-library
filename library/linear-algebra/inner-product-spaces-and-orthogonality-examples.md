@@ -1,7 +1,7 @@
 ---
 page: inner-product-spaces-and-orthogonality-examples
 title: 'Inner Product Spaces and Orthogonality: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-weighted-inner-product-on-finite-coordinate-space,
            ex-frobenius-inner-product-on-matrix-space,

@@ -2,7 +2,7 @@
 id: thm-gram-schmidt-orthonormalisation
 kind: theorem
 title: "Gram–Schmidt turns every finite independent list into an orthonormal list with the same successive spans"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

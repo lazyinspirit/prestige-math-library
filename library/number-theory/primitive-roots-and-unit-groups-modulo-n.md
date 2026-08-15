@@ -1,7 +1,7 @@
 ---
 page: primitive-roots-and-unit-groups-modulo-n
 title: "Primitive Roots and Unit Groups Modulo N"
-status: draft
+status: published
 items: [def-primitive-root-modulo-n, prop-primitive-root-iff-unit-group-generator,
         def-index-of-a-unit-relative-to-a-primitive-root, prop-index-calculus-modulo-n,
         lem-order-of-a-power-in-a-finite-cyclic-group, cor-generators-of-a-finite-cyclic-group,

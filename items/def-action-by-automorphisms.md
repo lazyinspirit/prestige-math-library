@@ -2,7 +2,7 @@
 id: def-action-by-automorphisms
 kind: definition
 title: "An action of a group $H$ on a group $N$ by automorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

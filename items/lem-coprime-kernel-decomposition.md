@@ -2,7 +2,7 @@
 id: lem-coprime-kernel-decomposition
 kind: lemma
 title: "If $\\gcd(f,g)=1$ and $(fg)(T)=0$, then $V=\\ker f(T)\\oplus\\ker g(T)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

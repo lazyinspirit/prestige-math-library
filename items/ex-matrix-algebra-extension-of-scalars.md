@@ -2,7 +2,7 @@
 id: ex-matrix-algebra-extension-of-scalars
 kind: example
 title: "For a field extension $K/F$, one has $K\\otimes_FM_n(F)\\cong M_n(K)$ as $K$-algebras"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Matrix algebras commute with scalar extension"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

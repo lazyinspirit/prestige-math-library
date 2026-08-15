@@ -2,7 +2,7 @@
 id: thm-existence-of-finite-fields
 kind: theorem
 title: "For every prime $p$ and $n\\ge1$, a field with $p^n$ elements exists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

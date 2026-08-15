@@ -2,7 +2,7 @@
 id: lem-four-spaces-for-a-fixed-linear-recurrence
 kind: lemma
 title: "The initial-value, recurrence-sequence, numerator and fixed-denominator rational-series spaces all have dimension $d$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

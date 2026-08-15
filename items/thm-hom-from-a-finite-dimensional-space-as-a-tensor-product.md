@@ -2,7 +2,7 @@
 id: thm-hom-from-a-finite-dimensional-space-as-a-tensor-product
 kind: theorem
 title: "For finite-dimensional $V$, the canonical map $V^*\\otimes_FW\\to\\operatorname{Hom}_F(V,W)$ is an isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "$V^*\\otimes W\\cong\\operatorname{Hom}(V,W)$"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

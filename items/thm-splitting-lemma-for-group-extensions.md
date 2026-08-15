@@ -2,7 +2,7 @@
 id: thm-splitting-lemma-for-group-extensions
 kind: theorem
 title: "Splitting lemma for groups: a section, a complement, and a semidirect-product decomposition are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: iff
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

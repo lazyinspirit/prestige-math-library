@@ -2,7 +2,7 @@
 id: lem-words-satisfy-the-free-monoid-universal-property
 kind: lemma
 title: 'Finite words satisfy the free-monoid universal property'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

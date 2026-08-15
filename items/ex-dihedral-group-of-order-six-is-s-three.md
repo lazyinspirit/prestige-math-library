@@ -2,7 +2,7 @@
 id: ex-dihedral-group-of-order-six-is-s-three
 kind: example
 title: ' $S_3\cong C_3\rtimes C_2$ via inversion'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

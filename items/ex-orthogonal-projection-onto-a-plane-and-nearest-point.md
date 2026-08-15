@@ -2,7 +2,7 @@
 id: ex-orthogonal-projection-onto-a-plane-and-nearest-point
 kind: example
 title: "Projection onto a plane in $\\mathbb R^3$ and the nearest-point calculation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

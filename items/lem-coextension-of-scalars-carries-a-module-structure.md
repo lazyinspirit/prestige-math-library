@@ -2,7 +2,7 @@
 id: lem-coextension-of-scalars-carries-a-module-structure
 kind: lemma
 title: 'Coextension of scalars $\operatorname{Hom}_R(S,M)$ carries its canonical left $S$-module structure'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-currying-is-an-adjunction-in-set
 kind: theorem
 title: 'Currying gives the adjunction $-\times A\dashv(-)^A$ in $\mathbf{Set}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

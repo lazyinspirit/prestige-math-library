@@ -2,7 +2,7 @@
 id: prop-the-underlying-set-functor-on-fields-has-no-left-adjoint
 kind: proposition
 title: 'The underlying-set functor on fields has no left adjoint'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

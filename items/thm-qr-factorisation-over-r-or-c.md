@@ -2,7 +2,7 @@
 id: thm-qr-factorisation-over-r-or-c
 kind: theorem
 title: "Every invertible real or complex square matrix has a unique factorisation $A=QR$ with $Q$ orthogonal or unitary and $R$ upper triangular with positive real diagonal"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

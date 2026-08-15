@@ -2,7 +2,7 @@
 id: thm-induced-counting-lemma-for-regular-pairs
 kind: theorem
 title: "Induced counting lemma: regular edge and nonedge pairs force many induced copies"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: tensor-products-of-modules-examples
 title: "Tensor Products of Modules — Examples"
-status: draft
+status: published
 items: []
 examples: [fs-tensor-products-of-nonzero-cyclic-groups-are-always-nonzero,
            ex-rationals-tensor-a-finite-cyclic-group-is-zero,

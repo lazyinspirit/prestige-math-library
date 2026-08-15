@@ -2,7 +2,7 @@
 id: thm-linear-recurrence-iff-rational-generating-function
 kind: theorem
 title: "A coefficient sequence is eventually linearly recurrent if and only if its formal generating function is rational"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

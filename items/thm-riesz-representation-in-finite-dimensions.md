@@ -2,7 +2,7 @@
 id: thm-riesz-representation-in-finite-dimensions
 kind: theorem
 title: "Finite-dimensional Riesz representation: every functional is uniquely $v\\mapsto\\langle v,w\\rangle$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

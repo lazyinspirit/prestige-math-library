@@ -2,7 +2,7 @@
 id: ex-polynomial-injection-killed-by-tensoring
 kind: example
 title: "Tensoring the injection $k[x]\\xrightarrow{\\cdot x}k[x]$ with $k[x]/(x)$ gives the zero map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "A polynomial injection killed by tensoring"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

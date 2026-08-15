@@ -2,7 +2,7 @@
 id: cex-positive-pair-densities-alone-do-not-force-a-triangle
 kind: counterexample
 title: "Three pair densities equal to $1/2$ need not produce a single transversal triangle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

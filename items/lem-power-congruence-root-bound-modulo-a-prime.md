@@ -2,7 +2,7 @@
 id: lem-power-congruence-root-bound-modulo-a-prime
 kind: lemma
 title: ' For prime $q$ and $d\ge1$, the congruence $x^d\equiv1\pmod q$ has at most $d$ residue-class solutions'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-factorization-of-x-qn-minus-x
 kind: theorem
 title: "Over $\\mathbb F_q$, $x^{q^n}-x$ is the product of all monic irreducibles whose degrees divide $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

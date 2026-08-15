@@ -2,7 +2,7 @@
 id: cor-polynomials-in-commuting-diagonalisable-endomorphisms-are-diagonalisable
 kind: corollary
 title: "If two commuting endomorphisms are diagonalisable, then every finite linear combination of products of their powers is diagonalisable; in particular, their sum and product are diagonalisable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

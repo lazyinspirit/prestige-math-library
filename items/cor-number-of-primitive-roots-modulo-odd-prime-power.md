@@ -2,7 +2,7 @@
 id: cor-number-of-primitive-roots-modulo-odd-prime-power
 kind: corollary
 title: "An odd prime power $p^k$ has exactly $\\varphi(\\varphi(p^k))$ primitive roots"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

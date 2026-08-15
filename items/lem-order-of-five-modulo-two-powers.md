@@ -2,7 +2,7 @@
 id: lem-order-of-five-modulo-two-powers
 kind: lemma
 title: "For $k\\ge3$, the class of $5$ has order $2^{k-2}$ modulo $2^k$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

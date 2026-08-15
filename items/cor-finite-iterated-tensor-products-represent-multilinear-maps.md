@@ -2,7 +2,7 @@
 id: cor-finite-iterated-tensor-products-represent-multilinear-maps
 kind: corollary
 title: "Finite iterated tensor products represent multilinear maps independently of parenthesization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-monic-resultant-as-a-double-root-product
 kind: theorem
 title: "For monic $f,g$ of degrees $n,m$ splitting in a common extension, $\\operatorname{Res}(f,g)=\\prod_{i=1}^n\\prod_{j=1}^m(\\alpha_i-\\beta_j)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-a-complement-in-a-semidirect-product-need-not-be-normal
 kind: counterexample
 title: ' The reflection complement in $C_3\rtimes C_2\cong S_3$ is not normal'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

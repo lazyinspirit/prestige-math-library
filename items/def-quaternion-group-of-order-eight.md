@@ -2,7 +2,7 @@
 id: def-quaternion-group-of-order-eight
 kind: definition
 title: 'The quaternion group $Q_8=\{\pm1,\pm i,\pm j,\pm k\}$ inside the nonzero quaternions'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 short: "$Q_8$"
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-ceiling-and-floor-are-adjoint-to-the-inclusion-of-the-integers
 kind: example
 title: 'Ceiling $\dashv$ inclusion $\dashv$ floor: an adjoint triple between $(\mathbb{R},\le)$ and $(\mathbb{Z},\le)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,11 @@ short: "$\\lceil-\\rceil\\dashv J\\dashv\\lfloor-\\rfloor$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

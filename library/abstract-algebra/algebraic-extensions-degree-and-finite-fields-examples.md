@@ -1,7 +1,7 @@
 ---
 page: algebraic-extensions-degree-and-finite-fields-examples
 title: "Algebraic Extensions, Extension Degree, and Finite Fields — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-degree-of-q-sqrt-two,
            ex-degree-of-q-cube-root-two,

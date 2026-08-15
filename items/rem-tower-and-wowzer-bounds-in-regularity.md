@@ -2,7 +2,7 @@
 id: rem-tower-and-wowzer-bounds-in-regularity
 kind: remark
 title: "Ordinary regularity gives tower upper bounds; strong regularity gives wowzer upper bounds only when the regularity sequence depends on the coarse part count"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

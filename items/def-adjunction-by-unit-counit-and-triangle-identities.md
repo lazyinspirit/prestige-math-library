@@ -2,7 +2,7 @@
 id: def-adjunction-by-unit-counit-and-triangle-identities
 kind: definition
 title: 'Adjunction by unit, counit, and the triangle identities'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

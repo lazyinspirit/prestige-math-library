@@ -2,7 +2,7 @@
 id: thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors
 kind: theorem
 title: "The minimal and characteristic polynomials have exactly the same monic irreducible factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

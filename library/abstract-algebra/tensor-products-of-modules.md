@@ -1,7 +1,7 @@
 ---
 page: tensor-products-of-modules
 title: "Tensor Products of Modules"
-status: draft
+status: published
 items: [def-balanced-and-bilinear-maps,
         def-tensor-product-of-modules-by-generators-and-relations,
         thm-universal-property-of-module-tensor-products,

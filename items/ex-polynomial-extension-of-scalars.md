@@ -2,7 +2,7 @@
 id: ex-polynomial-extension-of-scalars
 kind: example
 title: "$S\\otimes_RR[x]\\cong S[x]$ as $S$-algebras"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ short: "Polynomial rings commute with scalar extension"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

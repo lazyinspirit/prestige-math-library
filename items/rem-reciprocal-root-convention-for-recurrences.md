@@ -2,7 +2,7 @@
 id: rem-reciprocal-root-convention-for-recurrences
 kind: remark
 title: 'Reciprocal-root convention: $\chi(t)=\prod_i(t-\lambda_i)^{m_i}$ corresponds to $Q(x)=\prod_i(1-\lambda_i x)^{m_i}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-mates-under-a-pair-of-adjunctions
 kind: theorem
 title: 'Natural transformations have mates under a pair of adjunctions'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

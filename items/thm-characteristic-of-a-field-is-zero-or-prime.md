@@ -2,7 +2,7 @@
 id: thm-characteristic-of-a-field-is-zero-or-prime
 kind: theorem
 title: "The characteristic of a field is zero or a prime number"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

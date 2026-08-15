@@ -2,7 +2,7 @@
 id: lem-direct-product-of-finite-cyclic-groups-is-cyclic-iff-orders-are-coprime
 kind: lemma
 title: "A direct product of two finite cyclic groups is cyclic if and only if their orders are coprime"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

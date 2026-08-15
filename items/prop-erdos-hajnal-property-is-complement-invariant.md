@@ -2,7 +2,7 @@
 id: prop-erdos-hajnal-property-is-complement-invariant
 kind: proposition
 title: "A hereditary class has the Erdős–Hajnal property exactly when its complementary class does, with the same constants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

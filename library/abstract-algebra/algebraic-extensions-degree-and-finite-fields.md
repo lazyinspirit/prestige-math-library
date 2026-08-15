@@ -1,7 +1,7 @@
 ---
 page: algebraic-extensions-degree-and-finite-fields
 title: "Algebraic Extensions, Extension Degree, and Finite Fields"
-status: draft
+status: published
 items: [def-extension-degree-and-finite-extension,
         prop-extension-degree-one-iff-equal-fields,
         lem-product-basis-for-a-tower-of-finite-extensions,

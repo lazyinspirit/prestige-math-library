@@ -2,7 +2,7 @@
 id: cor-flat-modules-preserve-intersections-of-ideals
 kind: corollary
 title: "For flat $M$, one has $IM\\cap JM=(I\\cap J)M$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

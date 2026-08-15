@@ -2,7 +2,7 @@
 id: thm-commutative-ring-module-structure-on-a-tensor-product
 kind: theorem
 title: "Over a commutative ring, $M\\otimes_RN$ is an $R$-module with $r(m\\otimes n)=(rm)\\otimes n=m\\otimes(rn)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ short: "$R$-module structure on $M\\otimes_RN$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

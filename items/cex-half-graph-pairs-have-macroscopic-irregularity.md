@@ -2,7 +2,7 @@
 id: cex-half-graph-pairs-have-macroscopic-irregularity
 kind: counterexample
 title: "The half graph has no regularity across its natural bipartition at a fixed small parameter"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

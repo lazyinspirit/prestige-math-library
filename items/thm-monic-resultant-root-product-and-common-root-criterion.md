@@ -2,7 +2,7 @@
 id: thm-monic-resultant-root-product-and-common-root-criterion
 kind: theorem
 title: "For monic $f$, $\\operatorname{Res}(f,g)=\\prod_i g(\\alpha_i)$ and it vanishes exactly when $f$ and $g$ have a common root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-monic-resultant
 kind: definition
 title: "The monic resultant $\\operatorname{Res}(f,g)$ from the symmetric coefficient expression of $\\prod_i g(x_i)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

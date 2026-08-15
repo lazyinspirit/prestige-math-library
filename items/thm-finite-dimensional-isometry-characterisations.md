@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-isometry-characterisations
 kind: theorem
 title: "For an endomorphism in finite dimension, preserving lengths, preserving inner products, carrying orthonormal bases to orthonormal bases, and $T^*T=I$ are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: equivalence
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

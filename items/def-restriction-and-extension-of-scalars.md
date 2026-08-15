@@ -2,7 +2,7 @@
 id: def-restriction-and-extension-of-scalars
 kind: definition
 title: "Restriction of scalars and extension of scalars $S\\otimes_RM$ along a ring homomorphism $R\\to S$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

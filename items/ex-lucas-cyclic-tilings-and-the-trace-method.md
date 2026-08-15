@@ -2,7 +2,7 @@
 id: ex-lucas-cyclic-tilings-and-the-trace-method
 kind: example
 title: "Cyclic monomer–domino tilings are counted by Lucas numbers through a matrix trace"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: bijection
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

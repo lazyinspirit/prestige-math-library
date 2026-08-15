@@ -2,7 +2,7 @@
 id: cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree
 kind: corollary
 title: "For every finite field $\\mathbb F_q$ and every $n\\ge1$, a monic irreducible polynomial of degree $n$ exists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

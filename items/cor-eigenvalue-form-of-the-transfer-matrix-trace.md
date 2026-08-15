@@ -2,7 +2,7 @@
 id: cor-eigenvalue-form-of-the-transfer-matrix-trace
 kind: corollary
 title: 'Let $K$ be a field, $p\ge1$, and $A\in M_p(K)$. If $\chi_A(t)=\prod_{i<p}(t-\lambda_i)$ in $K[t]$, then the transfer-matrix trace series is $\sum_{i<p}(1-\lambda_i x)^{-1}$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

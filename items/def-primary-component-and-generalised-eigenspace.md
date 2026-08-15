@@ -2,7 +2,7 @@
 id: def-primary-component-and-generalised-eigenspace
 kind: definition
 title: "Primary components $\\ker q(T)^e$ and generalised eigenspaces $G_\\lambda^{(e)}(T)=\\ker(T-\\lambda I)^e$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

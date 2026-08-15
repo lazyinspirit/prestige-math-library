@@ -2,7 +2,7 @@
 id: cor-element-algebraic-iff-simple-extension-finite
 kind: corollary
 title: "An element is algebraic over $F$ if and only if its simple extension $F(a)/F$ is finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

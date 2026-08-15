@@ -2,7 +2,7 @@
 id: lem-order-p-actions-on-a-cyclic-q-group
 kind: lemma
 title: ' For primes $p<q$, nontrivial actions of $C_p$ on $C_q$ exist exactly when $p\mid(q-1)$ and are unique up to automorphisms'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: iff
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-eulers-criterion-for-binomial-congruences
 kind: theorem
 title: "Euler's criterion: if $n$ has a primitive root, $\\gcd(a,n)=1$, and $m\\ge1$, then $x^m\\equiv a\\pmod n$ is solvable if and only if $a^{\\varphi(n)/\\gcd(\\varphi(n),m)}\\equiv1\\pmod n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

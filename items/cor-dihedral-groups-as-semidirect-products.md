@@ -2,7 +2,7 @@
 id: cor-dihedral-groups-as-semidirect-products
 kind: corollary
 title: ' $\operatorname{Dih}(C_n)=C_n\rtimes C_2$ with inversion action has order $2n$ and the dihedral relations'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

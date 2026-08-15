@@ -1,7 +1,7 @@
 ---
 page: regular-pairs-and-induced-counting
 title: "Regular Pairs and Induced Counting"
-status: draft
+status: published
 items: [def-edge-density-between-vertex-sets,
         def-epsilon-regular-pair,
         lem-complementation-preserves-disjoint-regular-pairs,

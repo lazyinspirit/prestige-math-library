@@ -2,7 +2,7 @@
 id: rem-conjugates-preserve-isomorphisms-but-arbitrary-mates-need-not
 kind: remark
 title: 'Conjugation preserves invertibility but the general mates correspondence need not'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

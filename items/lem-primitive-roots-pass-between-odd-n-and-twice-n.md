@@ -2,7 +2,7 @@
 id: lem-primitive-roots-pass-between-odd-n-and-twice-n
 kind: lemma
 title: "For odd $n$, primitive-root existence is equivalent for $n$ and $2n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

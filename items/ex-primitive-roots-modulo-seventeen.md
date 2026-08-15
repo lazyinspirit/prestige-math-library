@@ -2,7 +2,7 @@
 id: ex-primitive-roots-modulo-seventeen
 kind: example
 title: "The primitive roots modulo $17$ are $3,5,6,7,10,11,12,14$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

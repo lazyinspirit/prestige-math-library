@@ -2,7 +2,7 @@
 id: prop-companion-matrix-iterates-a-linear-recurrence
 kind: proposition
 title: "The companion matrix advances the recurrence state vector by one step"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

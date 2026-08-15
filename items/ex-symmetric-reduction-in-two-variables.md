@@ -2,7 +2,7 @@
 id: ex-symmetric-reduction-in-two-variables
 kind: example
 title: "Reducing a symmetric polynomial in two variables to a polynomial in $e_1$ and $e_2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

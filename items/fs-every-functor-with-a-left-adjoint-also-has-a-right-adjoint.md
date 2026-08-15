@@ -2,7 +2,7 @@
 id: fs-every-functor-with-a-left-adjoint-also-has-a-right-adjoint
 kind: false-statement
 title: 'Every functor with a left adjoint also has a right adjoint'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

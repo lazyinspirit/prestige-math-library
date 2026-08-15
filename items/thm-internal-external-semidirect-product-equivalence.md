@@ -2,7 +2,7 @@
 id: thm-internal-external-semidirect-product-equivalence
 kind: theorem
 title: ' Recognition theorem: $G=NH$ with $N\trianglelefteq G$, $N\cap H=1$ exactly realises an external semidirect product'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: iff
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-monic-resultant-is-unchanged-modulo-f
 kind: corollary
 title: "For monic $f$, if $g-g_1=qf$, then $\\operatorname{Res}(f,g)=\\operatorname{Res}(f,g_1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

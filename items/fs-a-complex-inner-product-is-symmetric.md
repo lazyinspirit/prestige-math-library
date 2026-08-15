@@ -2,7 +2,7 @@
 id: fs-a-complex-inner-product-is-symmetric
 kind: false-statement
 title: "FALSE: Every complex inner product satisfies $\\langle u,v\\rangle=\\langle v,u\\rangle$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

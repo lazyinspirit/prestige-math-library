@@ -2,7 +2,7 @@
 id: thm-szemeredi-regularity-lemma-with-tower-bound
 kind: theorem
 title: "Szemerédi regularity lemma with an equitable partition and an explicit tower-type upper bound for graphs of order at least $m_0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

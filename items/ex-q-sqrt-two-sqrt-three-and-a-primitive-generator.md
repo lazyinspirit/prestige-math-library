@@ -2,7 +2,7 @@
 id: ex-q-sqrt-two-sqrt-three-and-a-primitive-generator
 kind: example
 title: "$\\mathbb Q(\\sqrt2,\\sqrt3)$ has degree four and equals $\\mathbb Q(\\sqrt2+\\sqrt3)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

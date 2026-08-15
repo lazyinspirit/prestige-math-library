@@ -2,7 +2,7 @@
 id: thm-triangle-counting-lemma-for-regular-triples
 kind: theorem
 title: "Triangle counting lemma for three pairwise regular vertex sets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -1,7 +1,7 @@
 ---
 page: adjunctions-units-and-counits-examples
 title: "Adjunctions Units and Counits: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-unit-and-counit-of-the-free-group-adjunction,
            ex-unit-and-counit-of-the-free-vector-space-adjunction,

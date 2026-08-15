@@ -2,7 +2,7 @@
 id: cex-lex-leading-term-not-found-by-unbalanced-substitution
 kind: counterexample
 title: "A fixed unbalanced one-variable substitution need not preserve lexicographic leading terms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

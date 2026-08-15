@@ -1,7 +1,7 @@
 ---
 page: adjunctions-units-and-counits
 title: "Adjunctions Units and Counits"
-status: draft
+status: published
 items: [def-adjunction-by-unit-counit-and-triangle-identities,
         rem-why-this-library-takes-unit-counit-as-the-definition,
         prop-an-adjoint-equivalence-is-an-adjunction-with-invertible-unit-and-counit,

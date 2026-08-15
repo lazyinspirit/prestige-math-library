@@ -2,7 +2,7 @@
 id: thm-weighted-walks-are-entries-of-transfer-matrix-powers
 kind: theorem
 title: "The $(u,v)$ entry of $A^n$ is the total weight of length-$n$ walks from $u$ to $v$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

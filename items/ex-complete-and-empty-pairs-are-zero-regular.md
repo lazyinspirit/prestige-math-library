@@ -2,7 +2,7 @@
 id: ex-complete-and-empty-pairs-are-zero-regular
 kind: example
 title: "Complete and anticomplete disjoint pairs are $0$-regular"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

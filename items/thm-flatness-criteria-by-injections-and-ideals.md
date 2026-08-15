@@ -2,7 +2,7 @@
 id: thm-flatness-criteria-by-injections-and-ideals
 kind: theorem
 title: "Flatness is equivalent to preserving injections and to the ideal and finitely generated ideal tests"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ short: "Flatness criteria"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-a-forbidden-pattern-and-its-complement-share-eh-status
 kind: example
 title: "Forbidding $P_3$ and forbidding $\\overline{P_3}$ have the same Erdős–Hajnal constants"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

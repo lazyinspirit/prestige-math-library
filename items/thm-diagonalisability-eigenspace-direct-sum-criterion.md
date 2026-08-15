@@ -2,7 +2,7 @@
 id: thm-diagonalisability-eigenspace-direct-sum-criterion
 kind: theorem
 title: "An endomorphism is diagonalisable exactly when $V=\\bigoplus_{i<r}E_{\\lambda_i}(T)$ for some finite list of distinct scalars $\\lambda_i$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

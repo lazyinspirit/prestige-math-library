@@ -2,7 +2,7 @@
 id: cor-discriminant-as-a-resultant-with-the-derivative
 kind: corollary
 title: "For monic $f$ of degree $n$, $\\operatorname{Res}(f,f')=(-1)^{n(n-1)/2}\\operatorname{Disc}(f)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

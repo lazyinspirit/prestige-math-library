@@ -2,7 +2,7 @@
 id: cor-primary-projections-are-polynomials-in-the-endomorphism
 kind: corollary
 title: "Each projection in the primary decomposition is a polynomial in the endomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-prefix-automaton-for-a-finite-forbidden-factor-set
 kind: definition
 title: "The longest-suffix prefix automaton for a finite set of forbidden factors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-the-free-group-functor-is-left-adjoint-to-the-underlying-set-functor
 kind: theorem
 title: 'The free-group functor is left adjoint to the underlying-set functor'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-binomial-series-for-a-repeated-pole
 kind: lemma
 title: 'Repeated poles expand formally as $(1-\lambda x)^{-j}=\sum_{n\ge0}\binom{n+j-1}{j-1}\lambda^n x^n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

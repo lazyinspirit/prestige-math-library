@@ -2,7 +2,7 @@
 id: ex-relative-algebraic-closure-of-r-in-c
 kind: example
 title: "The relative algebraic closure of $\\mathbb R$ in $\\mathbb C$ is all of $\\mathbb C$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

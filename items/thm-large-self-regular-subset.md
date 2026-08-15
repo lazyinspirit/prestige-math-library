@@ -2,7 +2,7 @@
 id: thm-large-self-regular-subset
 kind: theorem
 title: "Every finite graph has a linearly large $\\epsilon$-self-regular vertex subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

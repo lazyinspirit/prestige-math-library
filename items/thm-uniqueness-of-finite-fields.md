@@ -2,7 +2,7 @@
 id: thm-uniqueness-of-finite-fields
 kind: theorem
 title: "Finite fields of the same order are isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

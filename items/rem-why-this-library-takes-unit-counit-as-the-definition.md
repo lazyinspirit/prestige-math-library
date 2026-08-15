@@ -2,7 +2,7 @@
 id: rem-why-this-library-takes-unit-counit-as-the-definition
 kind: remark
 title: 'The unit-counit definition imposes no local-smallness hypothesis'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: prop-semidirect-product-is-direct-iff-action-is-trivial
 kind: proposition
 title: "The canonical semidirect decomposition is an internal direct product if and only if the defining action is trivial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: iff
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

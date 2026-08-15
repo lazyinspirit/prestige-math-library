@@ -2,7 +2,7 @@
 id: prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two
 kind: proposition
 title: '$Q_8$ is a subgroup of $\mathbb{H}^{\times}$ with eight elements, and $-1$ is its only element of order $2$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -20,6 +20,11 @@ sources:
       url: 'https://www.jmilne.org/math/CourseNotes/GT.pdf'
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 pipeline_run: null
 ---
 

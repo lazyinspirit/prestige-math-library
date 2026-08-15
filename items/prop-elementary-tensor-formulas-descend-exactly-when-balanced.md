@@ -2,7 +2,7 @@
 id: prop-elementary-tensor-formulas-descend-exactly-when-balanced
 kind: proposition
 title: "A formula on elementary tensors defines a homomorphism exactly when its underlying pairing is balanced"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ short: "Descent criterion for tensor formulas"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

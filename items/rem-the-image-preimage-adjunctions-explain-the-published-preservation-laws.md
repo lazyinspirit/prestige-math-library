@@ -2,7 +2,7 @@
 id: rem-the-image-preimage-adjunctions-explain-the-published-preservation-laws
 kind: remark
 title: 'The image-preimage adjunctions explain the set-operation preservation laws'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

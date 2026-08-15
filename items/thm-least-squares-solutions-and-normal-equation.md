@@ -2,7 +2,7 @@
 id: thm-least-squares-solutions-and-normal-equation
 kind: theorem
 title: "For a linear map $T:V\\to W$ between finite-dimensional inner-product spaces, $x$ minimises $\\lVert Tx-b\\rVert$ if and only if $T^*(Tx-b)=0$, equivalently $T^*Tx=T^*b$; minimisers exist and any two differ by an element of $\\ker T$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

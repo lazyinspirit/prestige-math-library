@@ -2,7 +2,7 @@
 id: cex-the-logarithmic-ramsey-bound-is-not-an-erdos-hajnal-bound
 kind: counterexample
 title: "The universal logarithmic Ramsey guarantee cannot be replaced by any universal positive power"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

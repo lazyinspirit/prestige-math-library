@@ -2,7 +2,7 @@
 id: thm-flat-quotients-preserve-short-exact-tensor-sequences
 kind: theorem
 title: "A short exact sequence with flat quotient remains short exact after tensoring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

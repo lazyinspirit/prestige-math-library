@@ -1,7 +1,7 @@
 ---
 page: erdos-hajnal-property-and-homogeneous-sets
 title: "The Erdős–Hajnal Property and Homogeneous Sets"
-status: draft
+status: published
 items: [def-homogeneous-set-and-homogeneous-number,
         def-erdos-hajnal-property-and-constant,
         lem-erdos-hajnal-constants-are-downward-closed,

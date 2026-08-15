@@ -2,7 +2,7 @@
 id: thm-unit-isomorphisms-for-module-tensor-products
 kind: theorem
 title: "The regular module is a tensor unit: $R\\otimes_RN\\cong N$ and $M\\otimes_RR\\cong M$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Tensor-unit isomorphisms"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

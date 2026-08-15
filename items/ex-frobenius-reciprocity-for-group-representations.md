@@ -2,7 +2,7 @@
 id: ex-frobenius-reciprocity-for-group-representations
 kind: example
 title: 'Frobenius reciprocity for group representations without tensor products'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

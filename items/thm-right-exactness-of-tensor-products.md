@@ -2,7 +2,7 @@
 id: thm-right-exactness-of-tensor-products
 kind: theorem
 title: "Tensoring is right exact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Tensoring is right exact"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

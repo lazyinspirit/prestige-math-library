@@ -2,7 +2,7 @@
 id: def-orthogonal-vectors-sets-and-orthonormal-bases
 kind: definition
 title: "Orthogonal vectors and subspaces, orthogonal and orthonormal sets, and orthonormal bases"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

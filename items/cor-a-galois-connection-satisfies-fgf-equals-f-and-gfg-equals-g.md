@@ -2,7 +2,7 @@
 id: cor-a-galois-connection-satisfies-fgf-equals-f-and-gfg-equals-g
 kind: corollary
 title: 'A Galois connection between posets satisfies $FGF=F$ and $GFG=G$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

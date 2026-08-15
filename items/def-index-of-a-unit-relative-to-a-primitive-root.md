@@ -2,7 +2,7 @@
 id: def-index-of-a-unit-relative-to-a-primitive-root
 kind: definition
 title: "The index $\\operatorname{ind}_g(a)$ of a unit relative to a primitive root"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-the-class-of-all-graphs-is-not-erdos-hajnal
 kind: corollary
 title: "The hereditary class of all finite graphs does not have the Erdős–Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

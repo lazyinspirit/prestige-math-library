@@ -2,7 +2,7 @@
 id: lem-primitive-root-lift-to-prime-square
 kind: lemma
 title: "For an odd prime $p$ and a primitive root $g$ modulo $p$, at least one of $g$ and $g+p$ is primitive modulo $p^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

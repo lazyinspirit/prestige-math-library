@@ -2,7 +2,7 @@
 id: thm-character-duals-of-flat-modules-are-injective
 kind: theorem
 title: "The character dual of a flat module is injective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Flat character duals are injective"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

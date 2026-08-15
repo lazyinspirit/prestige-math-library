@@ -2,7 +2,7 @@
 id: ex-rationals-tensor-a-finite-cyclic-group-is-zero
 kind: example
 title: "$\\mathbb Q\\otimes_{\\mathbb Z}\\mathbb Z/n=0$ for every positive $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Rationals tensor finite cyclic groups to zero"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

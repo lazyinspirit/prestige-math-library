@@ -2,7 +2,7 @@
 id: thm-finite-dimensional-orthogonal-decomposition
 kind: theorem
 title: "For a subspace $W$ of a finite-dimensional inner product space, $V=W\\oplus W^\\perp$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

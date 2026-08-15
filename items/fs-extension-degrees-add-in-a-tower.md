@@ -2,7 +2,7 @@
 id: fs-extension-degrees-add-in-a-tower
 kind: false-statement
 title: "FALSE: degrees add in a tower of finite field extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

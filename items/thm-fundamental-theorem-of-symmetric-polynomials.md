@@ -2,7 +2,7 @@
 id: thm-fundamental-theorem-of-symmetric-polynomials
 kind: theorem
 title: "Fundamental theorem of symmetric polynomials: unique expression as a polynomial in $e_1,\\ldots,e_n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

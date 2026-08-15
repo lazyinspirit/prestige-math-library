@@ -2,7 +2,7 @@
 id: prop-coordinate-cauchy-schwarz-agrees-with-the-finite-sum-theorem
 kind: proposition
 title: "On $\\mathbb R^n$, abstract Cauchy–Schwarz is exactly the published finite-sum Cauchy–Schwarz inequality"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

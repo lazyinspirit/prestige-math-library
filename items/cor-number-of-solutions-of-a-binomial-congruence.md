@@ -2,7 +2,7 @@
 id: cor-number-of-solutions-of-a-binomial-congruence
 kind: corollary
 title: "If $n$ has a primitive root, $\\gcd(a,n)=1$, $m\\ge1$, and $x^m\\equiv a\\pmod n$ is solvable, then it has exactly $\\gcd(\\varphi(n),m)$ solution classes modulo $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

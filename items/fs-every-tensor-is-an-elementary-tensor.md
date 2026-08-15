@@ -2,7 +2,7 @@
 id: fs-every-tensor-is-an-elementary-tensor
 kind: false-statement
 title: "False: every element of $M\\otimes_RN$ is an elementary tensor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ short: "Not every tensor is elementary"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

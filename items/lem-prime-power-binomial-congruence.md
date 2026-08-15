@@ -2,7 +2,7 @@
 id: lem-prime-power-binomial-congruence
 kind: lemma
 title: "For odd prime $p$ and $s\\ge1$, $(1+p^su)^p\\equiv1+p^{s+1}u\\pmod {p^{s+2}}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

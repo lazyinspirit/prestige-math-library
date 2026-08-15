@@ -2,7 +2,7 @@
 id: ex-the-five-cycle-has-homogeneous-number-two
 kind: example
 title: "The self-complementary five-cycle satisfies $\\operatorname{hom}(C_5)=2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

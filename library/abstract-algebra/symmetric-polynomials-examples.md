@@ -1,7 +1,7 @@
 ---
 page: symmetric-polynomials-examples
 title: "Symmetric Polynomials and the Fundamental Theorem of Symmetric Functions — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-symmetric-reduction-in-two-variables,
            ex-gauss-reduction-of-a-three-variable-symmetric-polynomial,

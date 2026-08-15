@@ -2,7 +2,7 @@
 id: thm-induced-graph-removal-lemma
 kind: theorem
 title: "Induced graph removal lemma for a fixed graph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: contraposition
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

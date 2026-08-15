@@ -2,7 +2,7 @@
 id: thm-stone-cech-is-left-adjoint-to-the-inclusion-of-compact-hausdorff-spaces
 kind: theorem
 title: 'Under the ultrafilter lemma and dependent choice, Stone-Cech compactification is left adjoint to the compact-Hausdorff inclusion'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

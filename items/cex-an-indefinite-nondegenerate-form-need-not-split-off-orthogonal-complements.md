@@ -2,7 +2,7 @@
 id: cex-an-indefinite-nondegenerate-form-need-not-split-off-orthogonal-complements
 kind: counterexample
 title: "A nondegenerate indefinite symmetric form can have $W\\cap W^\\perp\\ne0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,11 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

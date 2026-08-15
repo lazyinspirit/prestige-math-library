@@ -2,7 +2,7 @@
 id: ex-symmetric-group-splits-over-the-alternating-group
 kind: example
 title: ' For $n\ge2$, $S_n\cong A_n\rtimes C_2$ using any transposition complement'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

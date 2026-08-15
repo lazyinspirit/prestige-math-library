@@ -2,7 +2,7 @@
 id: cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases
 kind: corollary
 title: "Every finite-dimensional real or complex inner product space has an orthonormal basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

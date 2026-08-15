@@ -2,7 +2,7 @@
 id: thm-tensor-products-commute-with-arbitrary-direct-sums
 kind: theorem
 title: "Tensor products commute with arbitrary direct sums"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Tensor products preserve direct sums"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

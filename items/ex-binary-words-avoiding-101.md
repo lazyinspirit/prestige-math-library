@@ -2,7 +2,7 @@
 id: ex-binary-words-avoiding-101
 kind: example
 title: "Binary words avoiding $101$ have generating function $(1+x^2)/(1-2x+x^2-x^3)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: transfer-matrix
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

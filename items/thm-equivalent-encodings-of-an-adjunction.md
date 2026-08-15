@@ -2,7 +2,7 @@
 id: thm-equivalent-encodings-of-an-adjunction
 kind: theorem
 title: 'The unit-counit, hom-set, unit-universal, and counit-universal encodings of an adjunction are equivalent'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

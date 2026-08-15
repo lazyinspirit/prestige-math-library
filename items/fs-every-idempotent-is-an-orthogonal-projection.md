@@ -2,7 +2,7 @@
 id: fs-every-idempotent-is-an-orthogonal-projection
 kind: false-statement
 title: "FALSE: Every idempotent endomorphism of an inner product space is an orthogonal projection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

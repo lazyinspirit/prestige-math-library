@@ -2,7 +2,7 @@
 id: def-gram-matrix-and-gram-determinant
 kind: definition
 title: "The Gram matrix $G(v_0,\\ldots,v_{r-1})=(\\langle v_i,v_j\\rangle)_{i,j<r}$ and Gram determinant, with empty value $1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

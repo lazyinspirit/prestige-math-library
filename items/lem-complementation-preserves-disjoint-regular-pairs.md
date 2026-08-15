@@ -2,7 +2,7 @@
 id: lem-complementation-preserves-disjoint-regular-pairs
 kind: lemma
 title: "Complementation sends a disjoint $\\epsilon$-regular pair of density $d$ to one of density $1-d$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

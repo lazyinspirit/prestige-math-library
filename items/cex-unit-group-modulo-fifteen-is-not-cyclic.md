@@ -2,7 +2,7 @@
 id: cex-unit-group-modulo-fifteen-is-not-cyclic
 kind: counterexample
 title: "$(\\mathbb Z/15\\mathbb Z)^\\times$ has order $8$ but is not cyclic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

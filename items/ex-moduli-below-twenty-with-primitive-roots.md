@@ -2,7 +2,7 @@
 id: ex-moduli-below-twenty-with-primitive-roots
 kind: example
 title: "The positive moduli below $20$ admitting primitive roots are $1,2,3,4,5,6,7,9,10,11,13,14,17,18,19$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

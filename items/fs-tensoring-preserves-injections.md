@@ -2,7 +2,7 @@
 id: fs-tensoring-preserves-injections
 kind: false-statement
 title: "False: tensoring preserves injections"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Tensoring need not preserve injections"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

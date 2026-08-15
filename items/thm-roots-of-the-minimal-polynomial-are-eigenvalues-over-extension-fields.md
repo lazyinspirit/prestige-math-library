@@ -2,7 +2,7 @@
 id: thm-roots-of-the-minimal-polynomial-are-eigenvalues-over-extension-fields
 kind: theorem
 title: "Over every extension field, a scalar is an eigenvalue of the extended matrix exactly when it is a root of the minimal polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

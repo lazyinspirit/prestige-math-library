@@ -2,7 +2,7 @@
 id: cor-module-tensor-products-are-unique-up-to-unique-isomorphism
 kind: corollary
 title: "Tensor products are unique up to a unique isomorphism carrying elementary tensors to elementary tensors"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

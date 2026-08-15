@@ -2,7 +2,7 @@
 id: cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property
 kind: corollary
 title: "Every graph on at most three vertices has the Erdős–Hajnal property"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

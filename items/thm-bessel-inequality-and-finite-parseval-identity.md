@@ -2,7 +2,7 @@
 id: thm-bessel-inequality-and-finite-parseval-identity
 kind: theorem
 title: "Bessel's inequality for a finite orthonormal list and Parseval's identity for an orthonormal basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

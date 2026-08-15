@@ -2,7 +2,7 @@
 id: cor-double-orthogonal-complement-and-dimension
 kind: corollary
 title: "In finite dimension, $W^{\\perp\\perp}=W$ and $\\dim W+\\dim W^\\perp=\\dim V$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

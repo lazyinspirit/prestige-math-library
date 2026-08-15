@@ -1,7 +1,7 @@
 ---
 page: inner-product-spaces-and-orthogonality
 title: 'Inner Product Spaces, Gram-Schmidt, Projections and Adjoints'
-status: draft
+status: published
 items: [def-inner-product-space,
         def-inner-product-norm,
         prop-standard-coordinate-inner-products,

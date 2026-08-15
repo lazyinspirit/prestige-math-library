@@ -2,7 +2,7 @@
 id: ex-gram-schmidt-in-r-three
 kind: example
 title: "Gram–Schmidt on an explicit basis of $\\mathbb R^3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

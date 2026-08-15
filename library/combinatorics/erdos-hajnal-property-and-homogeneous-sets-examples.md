@@ -1,7 +1,7 @@
 ---
 page: erdos-hajnal-property-and-homogeneous-sets-examples
 title: "The Erdős–Hajnal Property and Homogeneous Sets — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-homogeneous-number-of-complete-and-empty-graphs,
            ex-homogeneous-number-of-complete-bipartite-graphs,

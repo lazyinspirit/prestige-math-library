@@ -2,7 +2,7 @@
 id: cor-generalised-eigenspace-decomposition-for-a-split-minimal-polynomial
 kind: corollary
 title: "If the minimal polynomial splits, $V$ is the direct sum of the stabilised generalised eigenspaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

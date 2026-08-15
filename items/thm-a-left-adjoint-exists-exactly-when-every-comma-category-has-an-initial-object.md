@@ -2,7 +2,7 @@
 id: thm-a-left-adjoint-exists-exactly-when-every-comma-category-has-an-initial-object
 kind: theorem
 title: 'A left adjoint exists exactly when chosen initial objects are supplied in every comma category'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

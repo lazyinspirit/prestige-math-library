@@ -2,7 +2,7 @@
 id: lem-typical-degrees-in-a-regular-pair
 kind: lemma
 title: "In a regular pair, fewer than $\\epsilon|X|$ vertices have too small a degree into a large subset, and fewer than $\\epsilon|X|$ have too large a degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

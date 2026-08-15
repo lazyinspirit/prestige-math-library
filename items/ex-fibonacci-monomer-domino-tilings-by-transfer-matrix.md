@@ -2,7 +2,7 @@
 id: ex-fibonacci-monomer-domino-tilings-by-transfer-matrix
 kind: example
 title: "Monomer–domino tilings of a board give the Fibonacci recurrence and transfer matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: bijection
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

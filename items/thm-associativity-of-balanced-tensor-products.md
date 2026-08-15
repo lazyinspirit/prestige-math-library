@@ -2,7 +2,7 @@
 id: thm-associativity-of-balanced-tensor-products
 kind: theorem
 title: "Associativity of tensor products for compatible bimodules"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Associativity of tensor products"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

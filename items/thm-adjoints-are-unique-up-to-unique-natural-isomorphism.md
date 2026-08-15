@@ -2,7 +2,7 @@
 id: thm-adjoints-are-unique-up-to-unique-natural-isomorphism
 kind: theorem
 title: 'Adjoints are unique up to a unique natural isomorphism compatible with the adjunction data'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

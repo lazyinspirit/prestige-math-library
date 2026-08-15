@@ -2,7 +2,7 @@
 id: ex-unit-group-modulo-two-hundred-forty
 kind: example
 title: "The unit group modulo $240$ decomposes as $C_2^2\\times C_4^2$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

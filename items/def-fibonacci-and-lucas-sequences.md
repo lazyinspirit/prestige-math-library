@@ -2,7 +2,7 @@
 id: def-fibonacci-and-lucas-sequences
 kind: definition
 title: "The Fibonacci sequence $F_0=0,F_1=1$ and Lucas sequence $L_0=2,L_1=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

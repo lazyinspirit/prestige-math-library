@@ -2,7 +2,7 @@
 id: ex-primitive-root-modulo-thirteen-by-prime-divisor-tests
 kind: example
 title: "$2$ is a primitive root modulo $13$ by testing the prime divisors of $12$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

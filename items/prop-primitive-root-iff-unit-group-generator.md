@@ -2,7 +2,7 @@
 id: prop-primitive-root-iff-unit-group-generator
 kind: proposition
 title: "A unit is a primitive root modulo $n$ if and only if it generates $(\\mathbb Z/n\\mathbb Z)^\\times$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

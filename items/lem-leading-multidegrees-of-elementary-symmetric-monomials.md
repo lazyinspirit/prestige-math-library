@@ -2,7 +2,7 @@
 id: lem-leading-multidegrees-of-elementary-symmetric-monomials
 kind: lemma
 title: "The leading multidegree of $e_1^{b_1}\\cdots e_n^{b_n}$ is $(b_1+\\cdots+b_n,b_2+\\cdots+b_n,\\ldots,b_n)$ with coefficient one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

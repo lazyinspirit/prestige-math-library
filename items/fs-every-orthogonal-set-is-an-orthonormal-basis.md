@@ -2,7 +2,7 @@
 id: fs-every-orthogonal-set-is-an-orthonormal-basis
 kind: false-statement
 title: "FALSE: Every orthogonal set is an orthonormal basis"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

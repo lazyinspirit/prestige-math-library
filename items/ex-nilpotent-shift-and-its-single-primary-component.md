@@ -2,7 +2,7 @@
 id: ex-nilpotent-shift-and-its-single-primary-component
 kind: example
 title: "A nilpotent shift has minimal polynomial $x^n$ and, for $n>0$, a single primary component"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

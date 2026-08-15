@@ -2,7 +2,7 @@
 id: ex-f-eight-as-a-polynomial-quotient
 kind: example
 title: "$\\mathbb F_8=\\mathbb F_2[t]/(t^3+t+1)$ and its power table"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

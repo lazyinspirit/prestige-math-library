@@ -2,7 +2,7 @@
 id: thm-extension-of-scalars-is-left-adjoint-to-restriction
 kind: theorem
 title: "Extension of scalars is left adjoint to restriction of scalars"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Extension-restriction adjunction"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

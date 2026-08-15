@@ -2,7 +2,7 @@
 id: thm-automorphisms-of-a-finite-rank-free-abelian-group
 kind: theorem
 title: ' $\operatorname{Aut}(\mathbb Z^n)\cong GL_n(\mathbb Z)$ for every finite rank $n$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

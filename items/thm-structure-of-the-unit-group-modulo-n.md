@@ -2,7 +2,7 @@
 id: thm-structure-of-the-unit-group-modulo-n
 kind: theorem
 title: "The unit group modulo $n$ is the product of its odd-prime cyclic factors and its explicit $2$-power factor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

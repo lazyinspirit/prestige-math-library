@@ -2,7 +2,7 @@
 id: lem-order-of-one-plus-pu-modulo-prime-powers
 kind: lemma
 title: "For odd prime $p$, $p\\nmid u$, and $k\\ge1$, the class of $1+pu$ has order $p^{k-1}$ modulo $p^k$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

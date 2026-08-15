@@ -2,7 +2,7 @@
 id: ex-carmichael-function-of-five-hundred-sixty-one
 kind: example
 title: "$\\lambda(561)=80$ and every integer coprime to $561$ has eightieth power congruent to one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

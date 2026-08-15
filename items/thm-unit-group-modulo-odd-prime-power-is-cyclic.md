@@ -2,7 +2,7 @@
 id: thm-unit-group-modulo-odd-prime-power-is-cyclic
 kind: theorem
 title: "For every odd prime $p$ and $k\\ge1$, $(\\mathbb Z/p^k\\mathbb Z)^\\times$ is cyclic of order $p^{k-1}(p-1)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

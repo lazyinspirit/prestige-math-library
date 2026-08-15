@@ -2,7 +2,7 @@
 id: lem-formal-matrix-geometric-series
 kind: lemma
 title: 'Formally, $(I-xA)^{-1}=\sum_{n\ge0}A^n x^n$ over every commutative coefficient ring'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

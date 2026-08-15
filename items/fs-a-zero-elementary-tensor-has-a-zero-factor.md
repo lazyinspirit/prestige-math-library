@@ -2,7 +2,7 @@
 id: fs-a-zero-elementary-tensor-has-a-zero-factor
 kind: false-statement
 title: "False: $m\\otimes n=0$ implies $m=0$ or $n=0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ short: "A zero elementary tensor can have nonzero factors"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-quadratic-tower-characterization-of-algebraic-constructibility
 kind: theorem
 title: "A real number is algebraically constructible exactly when it lies in a finite tower of real quadratic adjunctions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

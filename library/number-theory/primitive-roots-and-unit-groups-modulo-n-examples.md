@@ -1,7 +1,7 @@
 ---
 page: primitive-roots-and-unit-groups-modulo-n-examples
 title: "Primitive Roots and Unit Groups Modulo N — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-primitive-roots-modulo-seventeen, ex-index-table-modulo-seventeen,
            ex-primitive-root-modulo-thirteen-by-prime-divisor-tests,

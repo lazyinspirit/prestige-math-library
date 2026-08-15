@@ -2,7 +2,7 @@
 id: ex-complex-tensor-square-over-the-reals
 kind: example
 title: "$\\mathbb C\\otimes_{\\mathbb R}\\mathbb C\\cong\\mathbb C\\times\\mathbb C$ as $\\mathbb R$-algebras"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ short: "The real tensor square of the complex numbers"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

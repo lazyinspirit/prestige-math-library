@@ -2,7 +2,7 @@
 id: cor-tensor-product-with-a-quotient-ring
 kind: corollary
 title: "$M\\otimes_RR/I\\cong M/IM$ naturally"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "$M\\otimes_RR/I\\cong M/IM$"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

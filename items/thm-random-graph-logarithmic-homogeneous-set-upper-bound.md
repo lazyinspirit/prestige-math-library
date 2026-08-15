@@ -2,7 +2,7 @@
 id: thm-random-graph-logarithmic-homogeneous-set-upper-bound
 kind: theorem
 title: "For every $n\\ge16$ there is an $n$-vertex graph with $\\operatorname{hom}(G)<3\\log_2 n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

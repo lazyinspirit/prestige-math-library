@@ -2,7 +2,7 @@
 id: ex-homogeneous-number-of-complete-and-empty-graphs
 kind: example
 title: "$K_n$ and $\\overline K_n$ both have homogeneous number $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,11 @@ aliases: []
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

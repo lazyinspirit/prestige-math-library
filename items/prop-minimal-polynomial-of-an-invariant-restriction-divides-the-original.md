@@ -2,7 +2,7 @@
 id: prop-minimal-polynomial-of-an-invariant-restriction-divides-the-original
 kind: proposition
 title: "The minimal polynomial of a restriction to an invariant subspace divides the original minimal polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

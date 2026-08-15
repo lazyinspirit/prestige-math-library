@@ -1,7 +1,7 @@
 ---
 page: semidirect-products-and-automorphism-groups
 title: "Semidirect Products, Automorphism Groups and Split Extensions"
-status: draft
+status: published
 items: [def-action-by-automorphisms, def-external-semidirect-product,
         thm-external-semidirect-product-is-a-group,
         prop-canonical-subgroups-of-an-external-semidirect-product,

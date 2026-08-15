@@ -2,7 +2,7 @@
 id: def-algebraically-constructible-real-number
 kind: definition
 title: "Algebraically constructible real numbers as the smallest real subfield closed under positive square roots"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

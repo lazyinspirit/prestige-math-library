@@ -2,7 +2,7 @@
 id: def-orthogonal-complement
 kind: definition
 title: "The orthogonal complement $W^\\perp=\\{v:\\langle v,w\\rangle=0\\text{ for all }w\\in W\\}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

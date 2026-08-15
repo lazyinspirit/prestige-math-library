@@ -1,7 +1,7 @@
 ---
 page: semidirect-products-and-automorphism-groups-examples
 title: "Semidirect Products, Automorphism Groups and Split Extensions — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-dihedral-group-of-order-six-is-s-three,
            ex-affine-group-of-the-real-line,

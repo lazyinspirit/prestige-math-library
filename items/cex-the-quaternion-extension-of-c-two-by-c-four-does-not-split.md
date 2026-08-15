@@ -2,7 +2,7 @@
 id: cex-the-quaternion-extension-of-c-two-by-c-four-does-not-split
 kind: counterexample
 title: '$1\to\langle i\rangle\to Q_8\to Q_8/\langle i\rangle\to1$ does not split, with nonabelian middle group'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -19,6 +19,11 @@ sources:
       url: 'https://www.jmilne.org/math/CourseNotes/GT.pdf'
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 pipeline_run: null
 ---
 

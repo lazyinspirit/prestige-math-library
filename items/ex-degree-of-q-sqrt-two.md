@@ -2,7 +2,7 @@
 id: ex-degree-of-q-sqrt-two
 kind: example
 title: "$\\mathbb Q(\\sqrt2)/\\mathbb Q$ has degree two"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

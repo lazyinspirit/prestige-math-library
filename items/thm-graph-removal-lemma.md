@@ -2,7 +2,7 @@
 id: thm-graph-removal-lemma
 kind: theorem
 title: "Graph removal lemma for a fixed ordinary subgraph"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: contraposition
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

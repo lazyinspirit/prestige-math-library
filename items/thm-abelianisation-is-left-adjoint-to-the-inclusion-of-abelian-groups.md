@@ -2,7 +2,7 @@
 id: thm-abelianisation-is-left-adjoint-to-the-inclusion-of-abelian-groups
 kind: theorem
 title: 'Abelianisation is left adjoint to the inclusion of abelian groups'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:
