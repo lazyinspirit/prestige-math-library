@@ -1,5 +1,21 @@
 # frontier-14 step 4 — BLOCKER: `stone-weierstrass-general` (287) is not spliced
 
+> ## RESOLVED — 2026-08-16. Nothing here is outstanding.
+>
+> The orchestrator took **Option A** and recorded it as **D5** (commit
+> `137c5f33`). The pair was rebuilt as **batch 7** against the library's
+> published ℂ, group Alpha **c** re-checked it
+> (`research/frontier-14-alpha-c-recheck.md`, verdict **ready for splice** on
+> both pages), and the lead Alpha spliced it: 18 A + 6 B = 24 items,
+> `validate-plan` exit 0, receipt `research/frontier-14-splice-7.json`.
+> `HOLD` in `research/frontier-14-splice.mjs` is now empty.
+>
+> All 18 frontier-14 pages are spliced (338 items) and all seven receipts are
+> emitted. The rest of this file is the historical record of the hold — read it
+> as history, not as work to do. In particular the three
+> local-complex-scalar items it names below were **dropped** by D1 and never
+> existed on disk.
+
 Recorded by the **lead Alpha** at step 4, 2026-08-16. Sixteen of the run's
 eighteen pages are spliced (314 items) and all six receipts are emitted; this one
 pair — 25 items — is held.

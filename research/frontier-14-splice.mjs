@@ -10,12 +10,19 @@
 // HOLD list: pairs a group Alpha left unresolved at its step-3 re-check. LEVELS.md
 // §Step 4: "Do not splice a pair Alpha marked `insufficient` at step 3 until its
 // findings are resolved and it has re-checked."
+//
+// HOLD is now EMPTY. `stone-weierstrass-general` / `-examples` were held here for
+// Alpha a's finding D1; the orchestrator approved it (step3-decisions D5, commit
+// 137c5f33), the pair was rebuilt as batch 7 against the library's published ℂ,
+// and group Alpha c's re-check (research/frontier-14-alpha-c-recheck.md) returns
+// **ready for splice** for both pages. See research/frontier-14-splice-BLOCKER.md
+// for the record of what was held and why.
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 
 const SPEC = 'research/plan-spec.json';
-const HOLD = new Set(['stone-weierstrass-general', 'stone-weierstrass-general-examples']);
+const HOLD = new Set();
 const only = process.argv.slice(2).filter((a) => !a.startsWith('--'));
-const batches = only.length ? only.map(Number) : [1, 2, 3, 4, 5, 6];
+const batches = only.length ? only.map(Number) : [1, 2, 3, 4, 5, 6, 7];
 const write = process.argv.includes('--write');
 
 const spec = JSON.parse(readFileSync(SPEC, 'utf8'));
