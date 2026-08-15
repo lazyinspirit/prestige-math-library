@@ -1,0 +1,98 @@
+# frontier-14 — running under autopilot
+
+Written 2026-08-15 ~17:33Z, when the owner went to bed. Live state is in
+`.autopilot/status.md`, which the engine rewrites every 20 minutes.
+
+## Check it in one command
+
+```
+node ~/Projects/autopilot/bin/autopilot.mjs status
+```
+
+## What is driving
+
+| | |
+|---|---|
+| engine | `~/Projects/autopilot/bin/autopilot.mjs start --run frontier-14` |
+| watchdog | `~/Projects/autopilot/bin/watchdog.sh`, 60s, restarts a dead engine |
+| events | `.autopilot/events.jsonl` — append-only |
+| status | `.autopilot/status.md` — overwritten each report |
+| config | `autopilot.config.json` |
+
+The old `run-drive.mjs` + supervisor-agent mechanism is **stopped**. No LLM
+decides a stage transition any more.
+
+## Intervening
+
+```
+node ~/Projects/autopilot/bin/autopilot.mjs pause      # in-flight agents finish, nothing new starts
+node ~/Projects/autopilot/bin/autopilot.mjs resume
+node ~/Projects/autopilot/bin/autopilot.mjs stop       # also stops the watchdog
+node ~/Projects/autopilot/bin/autopilot.mjs retry      # re-arm lanes that exhausted their attempts
+node ~/Projects/autopilot/bin/autopilot.mjs report     # force a status report now
+```
+
+Commands are read at the next tick, never awaited. Doing nothing is a valid
+choice and changes nothing.
+
+## The stage sequence
+
+```
+1-scaffold  ✓ cleared, 14 gates green
+3-review    ✓ cleared, 6/6 covered by 2 Alphas
+3-fix       → running, batches 1-3 in flight
+3-recheck     Alpha re-verifies its own findings from disk
+4-splice      lead Alpha, one receipt per batch, released per batch
+5-author      one Beta per batch, the Beta that scaffolded it
+6a-read       one independent reader per batch
+6b-adjudicate group Alphas, refuters, risk reviews
+6c-cross      lead Alpha, cross-batch and cross-level citations
+7-judge       paired sweep, DeepSeek + Terra, 9 A pages
+8-adjudicate  fatal-only, step8-guard enforced
+9-scope       every decline re-checked against disk
+10-report     the owner report
+```
+
+Every stage has its brief and task file on disk — checked by a preflight
+simulation, so nothing blocks hours from now on a missing file.
+
+## What was fixed to get here
+
+Taking over a live build found seven defects no fake-pipeline test could have:
+
+1. `step8-guard --run` — invented flag; takes `--touches`/`--baseline`/`--adjudications`
+2. `judge-sweep --run` — invented flag; takes `--ledger`/`--cost`/`--pages`
+3. `merge-proof-contracts --run` — takes `--level <run> <out> <ins...>`
+4. Anchored result patterns missed `alpha-alpha-step3-a.result.json`, because a
+   role-prefixed label makes `dispatch.mjs` write `<role>-<role>-<label>`
+5. SIGTERM killed running agents while its own message claimed otherwise —
+   a restart destroyed three fix passes and re-dispatched them at attempt 2 of 2
+6. A gate failure ended the run, so a transient network error would have stopped
+   the build
+7. **`url-sweep` reported a live citation dead** — Shapiro's Arzelà notes answer
+   200 to plain curl but fail HEAD with an HTTP/2 framing error, and a transport
+   failure carrying a status short-circuited the fallback chain. The gate's own
+   remedy is recover-before-replace, so this would have swapped a working
+   citation for a 2016 archive snapshot and rewritten the provenance of every
+   item it backs. Fixed in `tools/url-sweep.mjs` (`984c37c4`).
+
+Number 7 is the one worth knowing about: it is a false positive in a gate whose
+prescribed remedy is destructive, and it only appeared when the gate was first
+run across all six batches at once.
+
+## Verified live, not just in tests
+
+- engine SIGKILLed → 3 agents survived → watchdog restarted it in 30s → the new
+  engine **adopted** the running agents instead of re-dispatching them
+- step 3 recognised as complete at **6/6 covered by 2 dispatches** — one Alpha
+  covering three batches each, which a count of agents cannot express
+- 14 stage-1 gates run, including a transient failure that cleared on retry and
+  retired its own blocker
+
+## If something is wrong in the morning
+
+`status.md` names it. A stage sitting at `[>]` with `nothing running` and a
+blocker listed is the shape to look for; the blocker says which unit or gate.
+`autopilot retry` re-arms, `autopilot skip --stage <id>` bypasses.
+
+Nothing in this run is `status: published`. Publishing remains yours.
