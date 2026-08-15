@@ -362,6 +362,29 @@ when the gate reports no snapshot under any variant. Full rationale:
 `plan-spec.json` before minting; reuse or alias an existing id for an existing
 statement.
 
+## The supervisor — no stage waits on a human (owner, 2026-08-15)
+
+**Every stage boundary is a mechanical trigger.** `tools/run-supervisor.mjs`
+holds a table of stage → completion predicate → next dispatch, reads the
+predicate from disk, runs the stage's gates, and fires the next dispatch. The
+`supervisor` agent (Sonnet 5, `briefs/supervisor.md`, cap 2) makes only the calls
+the table cannot: is a report complete, is a blocker real, does a dead lane
+deserve one retry.
+
+```
+node tools/run-supervisor.mjs --run <run> --state      # where the build is
+node tools/run-supervisor.mjs --run <run> --advance    # gate + next command
+node tools/run-supervisor.mjs --run <run> --scope-baseline
+node tools/run-supervisor.mjs --run <run> --verify-scope
+```
+
+**The orchestrator is not on the critical path.** Steps 3 and 9 dispatch to the
+`orchestrator` role, steps 4, 6c and 8 to the lead Alpha, and step 10 is drafted
+by an agent for the orchestrator to deliver. A cleared stage is a dispatch
+trigger, never a reporting checkpoint — measured cost of getting this wrong on
+`frontier-13` was ~5h of idle pipeline across three occurrences.
+`ARCHITECTURE.md` §3.11d.
+
 ## Step 3 — Adjudicate recommendations (orchestrator)
 
 I verify every load-bearing claim from disk first (amendment 6: no stage advances

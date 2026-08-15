@@ -700,6 +700,52 @@ disk is what a reader clicks. The snapshot is printed so the fix is a URL swap.
 `sources.references` URLs step 5 adds to item files — a link can rot between a
 scaffold and a publish). Receipt: `research/<run>-url-liveness.json`.
 
+### 3.11d The supervisor — `run-supervisor.mjs` + the `supervisor` role (owner, 2026-08-15)
+
+**Which failure it prevents.** A stage completing produces artifacts; something
+must notice and fire the next dispatch. On every hand-orchestrated run that
+something has been the orchestrator, and it is the slowest component in the
+system. Measured on `frontier-13`: **~14h wall-clock, of which roughly 5h was the
+orchestrator writing a status report at a cleared stage instead of dispatching
+the next one.** Three times, against an explicit standing instruction not to
+pause, with the identical failure already recorded in session memory from two
+earlier runs. Exhortation does not fix this. A stage boundary must be mechanical.
+
+**The evidence that it can be.** The one stretch of `frontier-13` with no idle
+gap was step 4 → step 5, where a splice receipt landing auto-released that
+batch's author through a shell watcher. No model was involved in the decision.
+
+**Division of labour.**
+
+| owns | what |
+|---|---|
+| `tools/run-supervisor.mjs` | what is decidable from disk: does the stage's artifact set exist, do its gates pass, what is the next command |
+| the `supervisor` agent (Sonnet 5, `briefs/supervisor.md`) | what is not: is a report complete or did the agent stop early, is a blocker real, does a dead lane deserve a retry |
+| neither | any mathematical judgment whatsoever |
+
+**Sonnet 5, not Opus.** The role adjudicates nothing and edits nothing, so the
+adjudicating model would be paying Alpha's rate for a scheduler. Cap 2.
+
+**A stage is complete when artifacts exist and gates pass — never when a report
+says so.** `frontier-13` had seven refuter dispatches produce prompt files and no
+results while a group's report tabled all eleven as dispatched, leaving 74
+`risk_review` dispositions silently unwritten until a later stage counted them.
+So `okResults()` counts only `ok: true` result files, and every predicate reads
+disk.
+
+**The scope boundary is checked, not asked for.** The supervisor may never touch
+`items/`, `library/` or `research/plan-spec.json`. `--verify-scope` cannot use raw
+`git status` — during a build the run's own agents legitimately dirty hundreds of
+paths, and the first version of this check reported 490 violations and meant
+nothing. It takes a `--scope-baseline` when the watch starts and reports only
+paths that changed *during* the watch.
+
+**Stages that the orchestrator used to gate are dispatched, not waited on**
+(owner, 2026-08-15): step 3 and step 9 judgment go to the `orchestrator` role,
+steps 4/6c/8 to the lead Alpha, and the step-10 report is *drafted* by an agent
+for the orchestrator to deliver. The orchestrator is on the critical path
+nowhere.
+
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 
 `AUDIT-WORKFLOW.md` is the normative workflow; these are its mechanisms.

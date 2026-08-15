@@ -59,6 +59,11 @@ const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro';
 // Alpha reads a whole level plus its published dependencies, so the owner's
 // standing 1M rule has to be expressed here or it is not expressed at all.
 const OPUS_MODEL = process.env.OPUS_MODEL ?? 'claude-opus-5[1m]';
+// The SUPERVISOR lane (owner, 2026-08-15). Sonnet 5 rather than Opus: this role
+// makes no mathematical judgment at all, so the expensive adjudicating model
+// would be pure cost. It reads run state, decides whether a stage is genuinely
+// finished, and fires the next dispatch. See `supervisor` in ROLES.
+const SONNET_MODEL = process.env.SONNET_MODEL ?? 'claude-sonnet-5';
 
 // READ-ONLY ON THE `claude` RUNNER, and why it is BOTH lists.
 //
@@ -132,6 +137,34 @@ const ROLES = Object.freeze({
   alpha:        { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 3, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
   refuter:      { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
   orchestrator: { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
+
+  // SUPERVISOR (owner, 2026-08-15). THE ORCHESTRATOR IS THE BOTTLENECK, so this
+  // role exists to take the "is the stage done, and what fires next" decision
+  // away from it.
+  //
+  // Measured on run frontier-13: ~14h wall-clock, of which roughly 5h was the
+  // orchestrator writing a status report at a cleared stage instead of
+  // dispatching the next one — three separate times, against an explicit owner
+  // instruction not to pause, and with the same failure already recorded in the
+  // session memory from two earlier runs. Exhortation demonstrably does not fix
+  // it. A stage boundary has to be a mechanical trigger.
+  //
+  // The one part of frontier-13 with NO idle gap was step 4 -> step 5, where a
+  // splice receipt landing auto-released that batch's author through a shell
+  // watcher. This role generalises that: `tools/run-supervisor.mjs` owns the
+  // stage table and the polling; the supervisor agent owns the judgment calls
+  // the table cannot make — is a report actually complete, is a blocker real,
+  // does a partial result justify advancing.
+  //
+  // SONNET 5, not Opus: it makes NO mathematical judgment. It never adjudicates
+  // a finding, never edits an item, never decides whether a proof is correct. It
+  // reads run state and fires dispatches. Opus here would be paying the
+  // adjudicator's rate for a scheduler.
+  //
+  // `workspace-write` because it must write the run log and launch dispatches;
+  // it is forbidden from touching `items/`, `library/` and `plan-spec.json` by
+  // brief, and that boundary is checked by `run-supervisor.mjs --verify-scope`.
+  supervisor:   { runner: 'claude', model: SONNET_MODEL, sandbox: 'workspace-write', effort: 'medium', cap: 2, why: 'advances the build across stage boundaries without orchestrator or owner interference' },
 
   // `scaffolder` (owner, 2026-08-13): concurrent SUBJECT-track prose scaffolding,
   // outside any level build. Same runner, model, effort and window as `alpha` —

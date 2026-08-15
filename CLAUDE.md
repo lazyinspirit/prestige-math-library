@@ -38,12 +38,12 @@ unattended driver ever publishes: step 10 / A10 is the sole owner pause.
    stratified form, so a step citing phase-k steps sits in phase k+1. Record
    `verification.precheck: pass`.
 3. **Step-6 Alpha-n audit of the WHOLE level, when publishing a level.**
-   Independent readers verify every proof step and in-batch dependency citation
-   in content they did not author; Alpha audits their fixes from disk, then
-   audits cross-batch and cross-level citations. Fatal includes a title or
-   Statement asserting more than the proof gives — the judge reads Statements and
-   cannot see a false title. Mathematical content requires this audit before
-   publish **even when judged**. `LEVELS.md` §"Step 6".
+   Independent readers verify every proof step and in-batch citation in content
+   they did not author; Alpha audits their fixes from disk, then audits
+   cross-batch and cross-level citations. Fatal includes a title or Statement
+   asserting more than the proof gives — the judge reads Statements and cannot
+   see a false title. Required before publish **even when judged**.
+   `LEVELS.md` §"Step 6".
 4. **Step-7 paired skeptical judge** — runs once, after the step-6 audit, on
    final text, for **every item in the completed level**; authors never judge.
    See §"Paired skeptical judges".
@@ -54,10 +54,10 @@ unattended driver ever publishes: step 10 / A10 is the sole owner pause.
 
 ## Preview
 
-The `/library` renderer is built in the app repo (`web/app/library/`, env
-`MATH_LIBRARY_DIR`). Local preview: app dev server on `:3001`, SSH-tunnel per
-`WORKFLOW.md` step 6. The signed-in owner sees drafts with a DRAFT banner; the
-public sees only `published`.
+The `/library` renderer lives in the app repo (`web/app/library/`, env
+`MATH_LIBRARY_DIR`); its `.env` is at the app ROOT, not `web/`, and without it
+`auth()` has no session so every draft 404s. `WORKFLOW.md` step 6. The signed-in
+owner sees drafts with a DRAFT banner; the public sees only `published`.
 
 ## Model lineup — the single source of truth
 
@@ -73,12 +73,11 @@ and a subscription account is **never** wired into the worker service.
 | `audit-refuter` | DeepSeek V4 Pro | direct API, `max` (its spelling of `xhigh`), tool-less |
 | paired judges, build and audit | DeepSeek V4 Pro + GPT 5.6 Terra | `JUDGE_LINEUP=deepseek+terra` |
 
-**These settings are binding for this and every future session** (owner,
-2026-07-31 for the Sol default; 2026-08-10 for build Alpha; 2026-08-08 for the
-audit lineup). Where a launcher exposes a context-window field, set it
-explicitly to `1000000`; never silently substitute another model or a smaller
-window. `tools/dispatch.mjs` is the mechanical expression of this table and
-passes every setting explicitly rather than inheriting it: Codex lanes get
+**Binding for this and every future session** (owner, 2026-07-31 Sol default;
+2026-08-10 build Alpha; 2026-08-08 audit lineup). Where a launcher exposes a
+context-window field, set it explicitly to `1000000`; never silently substitute
+another model or a smaller window. `tools/dispatch.mjs` is the mechanical
+expression of this table and passes every setting explicitly: Codex lanes get
 `model_reasoning_effort="xhigh"` and `model_context_window=1000000` (the
 temporary `CODEX_HOME` holds only `auth.json`, no `config.toml`); the claude lane
 gets `--effort xhigh` (`buildClaude` defaults to `high`) and carries its window
@@ -105,14 +104,21 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   as a whole: **no segment of an `&&` chain may raise a prompt either.** Run
   routine repository reads, writes, web searches, gates, commits and agent
   dispatches inside the workspace sandbox, choosing non-escalated command forms.
-  On runtimes exposing `dangerouslyDisableSandbox`, pass it on **every** Bash call
-  as the unattended-build backstop; on runtimes without it, stay within their
-  already-granted workspace permissions. An orchestrator owns the prompts its
-  agents raise as well as its own: every brief it writes carries this rule. If an
-  indispensable operation truly cannot be expressed without new authority, **stop
-  and record a blocker** in the run record — that is the escape hatch, not a
-  prompt. Committing to a feature branch is routine; pushing, publishing and
+  On runtimes exposing `dangerouslyDisableSandbox`, pass it on **every** Bash call;
+  otherwise stay within already-granted workspace permissions. An orchestrator
+  owns the prompts its agents raise as well as its own: every brief it writes
+  carries this rule. If an operation truly cannot proceed without new authority,
+  **stop and record a blocker** — that is the escape hatch, not a prompt. Committing to a feature branch is routine; pushing, publishing and
   anything else outward-facing remains a separate owner decision.
+
+- **The supervisor drives stage transitions (owner, 2026-08-15).** A cleared stage is a
+  **dispatch trigger**, never a reporting checkpoint. `run-supervisor.mjs` holds the
+  stage table and fires the next dispatch; the `supervisor` agent (Sonnet 5,
+  cap 2, `briefs/supervisor.md`) judges only whether a stage is finished, a
+  blocker real, or a dead lane worth one retry — never mathematics, and never
+  touches `items/`, `library/` or `plan-spec.json`. **Stages the orchestrator
+  gated are dispatched, not waited on.** `ARCHITECTURE.md`
+  §3.11d.
 
 - **Context continuity and compaction (owner, 2026-08-03).** At **60%** active
   context, save durable history at the next safe boundary — after the current
@@ -176,10 +182,10 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   `confirmed_nonfatal` / `false_positive`, applies any permitted draft repair, and
   names the exact changed items for rejudge. The orchestrator runs gates and
   maintains ledgers but never substitutes its own adjudication for Alpha's.
-  In any Alpha audit or adjudication, a logical gap between proof steps that a
-  competent human reader closes in **30 seconds is nonfatal**: record or polish
-  it, but never call it a fatal proof defect or start a fatal repair cycle on that
-  basis. **At step 8 the polish is withdrawn** — see below.
+  In any Alpha audit or adjudication, a gap between proof steps a competent
+  reader closes in **30 seconds is nonfatal**: record or polish it, never call it
+  fatal. The rule covers gaps *between steps* — a defect in the Statement itself
+  is never 30-second. **At step 8 the polish is withdrawn.**
 
 - **Alpha proof-refuter delegation (owner, 2026-07-31).** For every Alpha-n audit,
   Alpha dispatches read-only proof-refuter subagents held to the paired judges'
@@ -211,15 +217,13 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   published rather than re-gated. Commands: `LEVELS.md` §"Step 8".
 
 - **Step-10 fatal-error report and sole pause (owner, 2026-07-31).** Step 9 is a
-  sweep only and does not pause the build. At the end of step 10, before the
-  publication/owner-audit pause, the orchestrator gives the owner a concise but
-  complete account of every fatal mathematical error encountered and fixed,
-  grouped by defect type (invalid inference, incorrect dependency citation, false
-  or overstrong definition/theorem, missing hypothesis or choice scope, invalid
-  witness) and by location (title/Statement, proof/refutation, Facts/dependencies,
-  Remark, page prose/summary), each naming the affected id/file and its
-  disposition. The Beta/Alpha/judge ledgers are the evidence source; concision
-  must not omit a fatal defect.
+  sweep and does not pause the build. At the end of step 10, before the owner
+  pause, the orchestrator gives a complete account of every fatal error found and
+  fixed, grouped by defect type (invalid inference, incorrect dependency citation,
+  false or overstrong statement, missing hypothesis or choice scope, invalid
+  witness) and by location (title/Statement, proof, Facts, Remark, page prose),
+  each naming the id and its disposition. Evidence is the Beta/Alpha/judge
+  ledgers; concision must not omit a fatal defect.
 
 ### Paired skeptical judges (owner, 2026-07-31; second lane changed 2026-08-04)
 
@@ -233,8 +237,8 @@ frozen prompt is its only context. `--parallel` runs both lanes on a
 byte-identical frozen prompt and preserves the injection-test record. Both read
 proofs and dependency citations as adversarial refuters.
 
-**The judge's context unit is the A/B PAIR:** the item's own page and its
-`-examples` companion in full, plus exactly the pages that page both declares in
+**The judge's context unit is the A/B PAIR:** the item's page and its
+`-examples` companion in full, plus exactly the pages that page declares in
 `requires` and actually cites.
 
 DeepSeek supplies the cross-family screen; Terra is an independent
@@ -284,22 +288,19 @@ append-only evidence and never satisfy current Terra coverage.
   another page's topic, or resting on a whole subject area the library has not
   reached (a computability level, a measure-theory level).
   **An A page over 60 items is SPLIT** into two or more A pages, each with its own
-  B companion, summary, and place in reading order. That ceiling is the pressure
-  valve making the machinery affordable, and splitting is never dropping.
-  `validate-plan.mjs` enforces it as error code `size` at steps 0, 2 and 4; split
-  before authoring, after it is a rewrite. A split mints new page ids and shifts
-  plan order, so recompute order
-  from `plan-spec.json` and never quote a remembered one (`LEVELS.md` §"`order`
-  is not stable").
-  **The narrow last resort** is a well-established, source-checked result whose
-  local proof genuinely cannot be built in scope: a source-cited `rem-` item with
-  `proved_here: false`, listed in `deps`, with the exact source, failed
-  in-library route and necessity recorded in the batch notes and proof contract.
-  "It would have taken three more lemmas" is not a licence to use it.
-  `external_refs` is for non-load-bearing mentions only and cannot conceal a
-  logical dependency; the fuchsia ‡ marker is the reader-facing tag. Foundational
-  axioms already adopted — AC, countable choice, dependent choice — and
-  independence facts about them remain separately permitted. A dropped item is
+  B companion, summary and place in reading order; splitting is never dropping.
+  `validate-plan.mjs` enforces it as `size` at steps 0, 2 and 4 — split before
+  authoring, after it is a rewrite. A split mints new page ids and shifts order,
+  so recompute from `plan-spec.json` and never quote a remembered one
+  (`LEVELS.md` §"`order` is not stable").
+  **The narrow last resort** is a source-checked result whose local proof
+  genuinely cannot be built in scope: a source-cited `rem-` item with
+  `proved_here: false`, in `deps`, with the exact source, failed in-library route
+  and necessity in the batch notes and proof contract. "It would have taken three
+  more lemmas" is not a licence. `external_refs` is for non-load-bearing mentions
+  only and cannot conceal a logical dependency; the fuchsia ‡ marker is the
+  reader-facing tag. Already-adopted axioms (AC, countable/dependent choice) and
+  independence facts remain permitted. A dropped item is
   deferred, not deleted: its `coverage.json` row is what makes it recoverable.
   Published items are not retrofitted. Full rule: `LEVELS.md` §"Step 2",
   `WORKFLOW.md` §"Self-contained scope".
@@ -403,13 +404,13 @@ append-only evidence and never satisfy current Terra coverage.
   overstated dependency.
 
 - **Natural mathematical voice and citation fidelity (owner, 2026-07-30; Beta
-  dependency discipline 2026-07-31).** Do not write AI-sounding labels or
-  interpretive filler such as "Null definition:" or "the key bridge says". In
-  every `[F#]`, `[A#]` or `[L#]` fact, state the cited definition/theorem itself:
-  quote it exactly when practical, otherwise give the smallest faithful
-  shortening — no changed domain, quantifier, hypothesis, direction or
-  conclusion, and no invented converse. Never replace the proposition with a
-  synthetic summary of what it is "for". If a dependency appears insufficient, do
+  dependency discipline 2026-07-31).** No AI-sounding labels or interpretive
+  filler ("Null definition:", "the key bridge says"). In every `[F#]`, `[A#]` or
+  `[L#]` fact state the cited proposition itself: quote it exactly when
+  practical, else the smallest faithful shortening — no changed domain,
+  quantifier, hypothesis, direction or conclusion, no invented converse. **A
+  clause's opening words are not a citation**; never substitute a summary of what
+  it is "for". If a dependency appears insufficient, do
   not inflate its restatement or add an unused edge: add the needed inline proof
   steps, reconsider the strategy, or reconsider whether the claim is true as
   stated. Binds the orchestrator and every scaffold, author, Beta, Alpha and
@@ -440,10 +441,12 @@ append-only evidence and never satisfy current Terra coverage.
 - **Durable proof-contract and high-risk gates (owner, 2026-08-01).** Each Beta
   writes and maintains a namespaced
   `research/level<n>-batch-<i>.proof-contracts.json` for every proof-bearing item
-  it owns, recording (a) the exact cited source clause and every step using each
-  `[F#]`/`[A#]`/`[L#]` fact, (b) a stated input map covering every numbered step
-  exactly once, and (c) an anchored disposition of empty, zero, one, degenerate,
-  endpoint, nonempty-choice and both iff-direction cases. The orchestrator merges
+  it owns: (a) the exact cited source clause and every step using each
+  `[F#]`/`[A#]`/`[L#]` fact, (b) an input map covering every numbered step exactly
+  once, (c) an anchored disposition of empty, zero, one, degenerate, endpoint,
+  nonempty-choice and both iff-direction cases. **A templated `not_applicable`
+  boundary row is not a disposition** — `--strict` checks only that the eight are
+  present, and on `frontier-13` two false template rows each hid a fatal defect. The orchestrator merges
   the batch files with `tools/merge-proof-contracts.mjs`, then runs
   `proof-contract.mjs --strict`, `finite-smoke.mjs` and `risk-report.mjs` after
   Step 5 and again after Step-6 repairs, before freezing Step-7 context. Finite
@@ -458,11 +461,12 @@ append-only evidence and never satisfy current Terra coverage.
   complete contract.
 
 - **Scope and blast-radius closure (owner, 2026-08-01).** Every level runs
-  `content-policy.mjs` on the batch manifests, generates the complete
-  `audit-manifest.mjs` relationship checklist, and records the Alpha audit
-  receipt. After any public-interface change, `impact-audit.mjs` computes every
-  downstream logical and direct-citation consumer from touch snapshots and
-  requires an Alpha disposition before the item can continue. After Step 7,
+  `content-policy.mjs` on the manifests, generates the `audit-manifest.mjs`
+  checklist, and records the Alpha receipt. After any public-interface change,
+  `impact-audit.mjs` computes every downstream logical and direct-citation
+  consumer from touch snapshots and requires an Alpha disposition. **Take the
+  snapshot at step 4, before authoring** — a baseline taken afterwards makes the
+  diff empty by construction and the gate confirms instead of checking. After Step 7,
   `level-coverage.mjs --verify-current-context` is the hard receipt gate: every
   scoped item needs provenance, every proof-bearing item needs a merged contract,
   and both judge lanes need current verdicts — cast either against the current
@@ -481,13 +485,11 @@ append-only evidence and never satisfy current Terra coverage.
   The structured `external_dependency` record is required for any
   `proved_here: false` fallback. Never fabricate provenance for legacy items.
 
-- **Obvious published-dependency repair (owner, 2026-08-01).** This delegation
-  narrowly overrides the ordinary read-only boundary: Beta and Alpha may repair a
-  **published item the current level uses as a dependency** when its present
-  Definition, Statement, Fact, citation, or equally load-bearing mathematical
-  prose is an unambiguous falsehood. It is not a licence to choose between
-  conventions, improve exposition, close a nonfatal 30-second gap, or extend
-  speculatively. The replacement must be either (a) the exact statement,
+- **Obvious published-dependency repair (owner, 2026-08-01).** Narrowly
+  overrides the read-only boundary: Beta and Alpha may repair a **published item
+  the current level depends on** when its Definition, Statement, Fact, citation or
+  equally load-bearing prose is an unambiguous falsehood. Not a licence to choose
+  between conventions, improve exposition, close a 30-second gap, or extend. The replacement must be either (a) the exact statement,
   conventions and hypotheses included, checked against a reputable source and
   recorded with its working URL, or (b) a directly checkable elementary
   correction — a short arithmetic, set-theoretic, logical or definition-unfolding
@@ -512,12 +514,11 @@ append-only evidence and never satisfy current Terra coverage.
   normative for the retro-audit of published pages. Inside audit scope only, it
   supersedes three standing rules by owner decision — stated in full at its §2,
   summarised here so no future session mistakes them for drift:
-  1. **Legacy provenance IS retro-tagged**, by audited evidence-based
-     determination with a durable per-item ledger row — never by guessing.
-     Uncertainty never falls toward a *sourced* label, and never toward
-     `ai-generated` either: that requires a positive determination of genuine
-     novelty, a recoverable restatement of established mathematics is
-     `ai-altered`, and an undecidable case escalates to Alpha.
+  1. **Legacy provenance IS retro-tagged**, by audited determination with a
+     durable per-item ledger row, never by guessing. Uncertainty never falls
+     toward a *sourced* label nor toward `ai-generated`: that needs a positive
+     finding of novelty, a recoverable restatement is `ai-altered`, and an
+     undecidable case escalates to Alpha.
   2. **The audit lineup** is in the model table above (owner, 2026-08-08). The
      refuter's routing to DeepSeek is load-bearing — it is the only cross-family
      reader on the audit side — and the certifier stays agentic because certifying
@@ -526,16 +527,15 @@ append-only evidence and never satisfy current Terra coverage.
      and `dispatch.mjs` refuses a refuter dispatched without one. Alpha must
      recover the durable prior-session audit record before acting.
   3. **The repair delegation extends** to citation-precision repairs, provenance
-     retags, and debatable restatements, with Alpha as final adjudicator.
-     Deletions, id changes, and reading-order changes remain owner-only.
+     retags and debatable restatements, Alpha adjudicating. Deletions, id changes
+     and reading-order changes remain owner-only.
 
   **A7 is an exception to the build's whole-level Step-7 sweep** (owner,
-  2026-08-08): A2/A6 already read the entire wave, so A7 — and any new A8
-  repair — rejudges only the exact repair ids in `wave<k>-rejudge-targets.json`;
-  provenance-only retags are not judge targets. A public-interface repair repeats
-  impact closure and refreshes a targeted rejudge receipt **for the changed item
-  only**, validated by `apply-judge-stamps` before the audit judge stamp is
-  written (§9) — never a whole-wave sweep. The repair stamp is
+  2026-08-08): A2/A6 already read the wave, so A7 and any new A8 repair rejudge
+  only the ids in `wave<k>-rejudge-targets.json`; provenance-only retags are not
+  judge targets. A public-interface repair repeats impact closure and refreshes a
+  targeted rejudge receipt **for the changed item only**, validated by
+  `apply-judge-stamps` before the stamp is written (§9). The repair stamp is
   `verification.verified` with `scope: published-audit` and
   `delegated_by: owner`. Every build safeguard carries over, step 8's fatal-only
   rule included. **Already-tagged content is never audit scope** (owner,
