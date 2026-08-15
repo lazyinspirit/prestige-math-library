@@ -12,7 +12,306 @@
       "absolute-convergence-and-rearrangement",
       "uniform-convergence-of-functions"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-complex-analytic-function",
+        "kind": "definition",
+        "title": "Complex analytic functions as locally representable by convergent power series",
+        "deps": [
+          "def-complex-series-power-series-and-absolute-convergence",
+          "def-complex-differentiability-holomorphic-and-entire"
+        ]
+      },
+      {
+        "id": "def-uniform-convergence-of-complex-valued-functions",
+        "kind": "definition",
+        "title": "Uniform convergence and the uniformly Cauchy condition for complex-valued functions, with the componentwise dictionary",
+        "deps": [
+          "def-pointwise-uniform-and-uniformly-cauchy-convergence",
+          "def-complex-metric-convergence-and-continuity",
+          "thm-complex-plane-is-complete"
+        ]
+      },
+      {
+        "id": "thm-uniform-cauchy-criterion-complex-functions",
+        "kind": "theorem",
+        "title": "A sequence of complex-valued functions converges uniformly if and only if it is uniformly Cauchy",
+        "strategy": "Uniform convergence implies the uniformly Cauchy condition by the complex triangle inequality. Conversely, pointwise Cauchy sequences converge by completeness of the complex plane; hold one index fixed beyond the uniform Cauchy threshold and pass the other index to its pointwise limit to obtain one uniform error bound. Treat an empty domain vacuously.",
+        "deps": [
+          "def-uniform-convergence-of-complex-valued-functions",
+          "thm-complex-plane-is-complete",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-uniform-limit-continuous-complex-functions",
+        "kind": "theorem",
+        "title": "A uniform limit of continuous complex-valued functions is continuous",
+        "strategy": "Use the componentwise dictionary: uniform convergence in complex modulus implies uniform convergence of real and imaginary parts, and complex continuity is componentwise. Apply the published real uniform-limit theorem to both coordinates and recombine. Include an empty domain and arbitrary codomain-open-set points.",
+        "deps": [
+          "def-uniform-convergence-of-complex-valued-functions",
+          "thm-uniform-limit-continuous-real-functions",
+          "thm-componentwise-limits-and-continuity"
+        ]
+      },
+      {
+        "id": "thm-weierstrass-m-test-for-complex-function-series",
+        "kind": "theorem",
+        "title": "Weierstrass M-test for complex-valued function series",
+        "strategy": "For each tail use the complex triangle inequality and the same convergent real majorant tail. This makes the partial sums uniformly Cauchy; pointwise completeness of the complex plane supplies the sum, and the componentwise dictionary makes the convergence uniform. Check an empty domain and zero majorants explicitly.",
+        "deps": [
+          "def-uniform-convergence-of-complex-valued-functions",
+          "thm-uniform-cauchy-criterion-complex-functions",
+          "thm-complex-plane-is-complete",
+          "thm-weierstrass-m-test-for-function-series",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-complex-power-series-converge-locally-uniformly",
+        "kind": "theorem",
+        "title": "A complex power series converges absolutely and uniformly on every closed subdisc strictly inside its disc of convergence",
+        "strategy": "Fix a closed subdisc of radius r<R. Cauchy–Hadamard gives convergence of the real majorant sum |c_n|r^n. Apply the complex M-test to c_n(z-a)^n, retaining the centre, R=0, and R=+infinity conventions and making no boundary-circle assertion.",
+        "deps": [
+          "thm-cauchy-hadamard-for-complex-power-series",
+          "thm-weierstrass-m-test-for-complex-function-series",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "lem-derived-complex-power-series-has-the-same-radius",
+        "kind": "lemma",
+        "title": "A complex power series, its formal derivative, and its zero-constant-term formal antiderivative have the same radius",
+        "strategy": "The complex radius is the radius of the real modulus-coefficient series. Apply the published real radius lemma to |c_n|; the modulus of the derived coefficient is n|c_n| and the modulus of the integrated coefficient is |c_n|/(n+1). Translate back without writing an applied canonical embedding.",
+        "deps": [
+          "def-complex-series-power-series-and-absolute-convergence",
+          "lem-derived-and-integrated-power-series-have-the-same-radius"
+        ]
+      },
+      {
+        "id": "thm-termwise-differentiation-of-complex-power-series",
+        "kind": "theorem",
+        "title": "Inside its disc of convergence a complex power series is holomorphic and may be differentiated term by term",
+        "strategy": "Fix z in the disc and a slightly larger closed subdisc. Prove the finite complex power-difference identity inline by telescoping, then factor each monomial difference quotient. Uniformly dominate the resulting tails on the larger subdisc, pass the finite derivative formula to the limit, and identify the derivative series whose radius is unchanged. Treat the constant term and radius-zero case explicitly.",
+        "deps": [
+          "thm-complex-power-series-converge-locally-uniformly",
+          "lem-derived-complex-power-series-has-the-same-radius",
+          "def-complex-differentiability-holomorphic-and-entire"
+        ]
+      },
+      {
+        "id": "cor-complex-power-series-sums-have-derivatives-of-all-orders",
+        "kind": "corollary",
+        "title": "A complex power-series sum has complex derivatives of every order, obtained by repeated termwise differentiation",
+        "strategy": "Iterate the termwise theorem because every derived series has the same radius. State the falling-factorial coefficient at order k and check k=0, k>n, and the zero series.",
+        "deps": [
+          "thm-termwise-differentiation-of-complex-power-series",
+          "lem-derived-complex-power-series-has-the-same-radius",
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "cor-complex-power-series-coefficient-formula",
+        "kind": "corollary",
+        "title": "The coefficients of a complex power series are its derivatives at the centre divided by the corresponding factorials",
+        "strategy": "Evaluate the nth termwise derivative at the centre. Every positive power vanishes, the nth term contributes n!c_n, and terms of lower degree have already disappeared. Include n=0 and use ordinary embedded-number notation only.",
+        "deps": [
+          "cor-complex-power-series-sums-have-derivatives-of-all-orders",
+          "def-complex-integer-powers",
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "cor-uniqueness-of-complex-power-series-coefficients",
+        "kind": "corollary",
+        "title": "A complex power-series representation about a fixed centre has unique coefficients",
+        "strategy": "If two series agree on a neighbourhood of their common centre, their derivatives of every order agree there. Apply the coefficient formula at the centre to each order, including the constant coefficient.",
+        "deps": [
+          "cor-complex-power-series-coefficient-formula"
+        ]
+      },
+      {
+        "id": "thm-complex-analytic-functions-are-holomorphic",
+        "kind": "theorem",
+        "title": "Every complex analytic function is holomorphic",
+        "strategy": "At an arbitrary point use the local convergent power-series representation from the analytic definition. The termwise-differentiation theorem gives complex differentiability throughout that representation disc, hence at the chosen point. The empty-open-set case is vacuous.",
+        "deps": [
+          "def-complex-analytic-function",
+          "thm-termwise-differentiation-of-complex-power-series"
+        ]
+      },
+      {
+        "id": "lem-complex-power-series-reexpansion-double-series",
+        "kind": "lemma",
+        "title": "The binomial double series for re-expanding a complex power series is absolutely convergent and may be regrouped",
+        "strategy": "For |b-a|+|h|<R, apply the real re-expansion majorant lemma to the nonnegative coefficients |c_n|. The complex binomial theorem expands each term, and absolute convergence licenses regrouping by powers of h. Check h=0 and b=a.",
+        "deps": [
+          "lem-power-series-reexpansion-double-series",
+          "lem-binomial-theorem-over-complex-numbers",
+          "thm-absolute-convergence-of-complex-series"
+        ]
+      },
+      {
+        "id": "thm-complex-power-series-reexpansion-at-an-interior-point",
+        "kind": "theorem",
+        "title": "A complex power-series sum re-expands about every interior point, at least to the distance from that point to the original boundary",
+        "strategy": "Put z=b+h in the absolutely convergent binomial double series and regroup by h. Identify the new kth coefficient with f^(k)(b)/k! using termwise differentiation, and obtain convergence for |h|<R-|b-a|. Do not claim this lower bound is the exact new radius.",
+        "deps": [
+          "lem-complex-power-series-reexpansion-double-series",
+          "cor-complex-power-series-coefficient-formula",
+          "cor-complex-power-series-sums-have-derivatives-of-all-orders"
+        ]
+      },
+      {
+        "id": "cor-complex-power-series-sums-are-analytic",
+        "kind": "corollary",
+        "title": "The sum of a complex power series is analytic throughout its open disc of convergence",
+        "strategy": "At each interior point the re-expansion theorem supplies a positive-radius local series representing the same function. This is exactly the analytic definition, including the entire-radius case.",
+        "deps": [
+          "thm-complex-power-series-reexpansion-at-an-interior-point",
+          "def-complex-analytic-function"
+        ]
+      },
+      {
+        "id": "prop-sums-and-scalar-multiples-of-complex-power-series",
+        "kind": "proposition",
+        "title": "Sums and scalar multiples of convergent complex power series are represented coefficientwise on the common disc",
+        "strategy": "On any point inside both radii, take finite partial sums and pass their exact linearity identity to the limit. The result converges locally uniformly on every smaller closed subdisc; include zero scalars and unequal radii.",
+        "deps": [
+          "thm-complex-power-series-converge-locally-uniformly",
+          "thm-complex-plane-is-complete"
+        ]
+      },
+      {
+        "id": "prop-cauchy-products-of-complex-power-series",
+        "kind": "proposition",
+        "title": "Products of convergent complex power series are represented by their Cauchy-product coefficients on the common disc",
+        "strategy": "At a point inside both radii, both numerical series converge absolutely. Apply the published complex Cauchy-product theorem and identify the finite convolution coefficient. Local uniform convergence on smaller closed subdiscs follows from the absolute coefficient majorant.",
+        "deps": [
+          "lem-cauchy-product-of-absolutely-convergent-complex-series",
+          "thm-complex-power-series-converge-locally-uniformly"
+        ]
+      },
+      {
+        "id": "lem-local-composition-of-complex-power-series",
+        "kind": "lemma",
+        "title": "A composition of convergent complex power series has a convergent local power-series expansion when the inner sum maps the centre to the outer centre",
+        "strategy": "Write the inner displacement as a zero-constant-term series H. Choose a small disc on which the absolute coefficient sum of H is below the outer radius. Expand each outer power by repeated Cauchy products; the scalar majorant is an absolutely convergent composition, so double-series regrouping gives a locally convergent series. Include a constant inner function.",
+        "deps": [
+          "prop-cauchy-products-of-complex-power-series",
+          "thm-complex-power-series-converge-locally-uniformly",
+          "thm-absolute-convergence-of-complex-series"
+        ]
+      },
+      {
+        "id": "lem-local-reciprocal-of-complex-power-series",
+        "kind": "lemma",
+        "title": "A convergent complex power series with nonzero constant term has a convergent reciprocal power series locally",
+        "strategy": "For f(a) nonzero write 1/f(z)=f(a)^(-1)/(1-H(z)), where H(a)=0. Continuity of the power-series sum makes |H|<1 on a smaller disc. Prove the finite complex geometric identity inline, compose H with the geometric series, and record the recursive reciprocal coefficients. The nonzero constant term is essential.",
+        "deps": [
+          "lem-local-composition-of-complex-power-series",
+          "cor-complex-power-series-sums-are-analytic"
+        ]
+      },
+      {
+        "id": "thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition",
+        "kind": "theorem",
+        "title": "Complex analytic functions are closed under finite linear combinations, products, quotients with nonzero denominator, and composition",
+        "strategy": "Choose compatible local expansions at an arbitrary point. Apply the coefficientwise sum/product results, the local reciprocal lemma when the denominator value is nonzero, and the local composition lemma after recentering the outer expansion at the inner value. State each natural domain exactly.",
+        "deps": [
+          "def-complex-analytic-function",
+          "prop-sums-and-scalar-multiples-of-complex-power-series",
+          "prop-cauchy-products-of-complex-power-series",
+          "lem-local-composition-of-complex-power-series",
+          "lem-local-reciprocal-of-complex-power-series"
+        ]
+      },
+      {
+        "id": "cor-complex-analytic-functions-have-local-primitives",
+        "kind": "corollary",
+        "title": "Every complex analytic function has a primitive on a neighbourhood of each point",
+        "strategy": "Integrate a local representing power series coefficientwise, using the unchanged radius of the antiderivative series. Termwise differentiation recovers the original function. This is local only and makes no global simply-connectedness claim.",
+        "deps": [
+          "def-complex-analytic-function",
+          "lem-derived-complex-power-series-has-the-same-radius",
+          "thm-termwise-differentiation-of-complex-power-series"
+        ]
+      },
+      {
+        "id": "thm-complex-trigonometric-and-hyperbolic-power-series",
+        "kind": "theorem",
+        "title": "The exponential definitions of complex sine, cosine, hyperbolic sine, and hyperbolic cosine equal their entire power series",
+        "strategy": "Substitute the entire exponential series at z, -z, iz, and -iz into the published definitions. Separate even and odd indices using absolute convergence and simplify the powers of i. Record all four series and their infinite radii without re-defining the functions.",
+        "deps": [
+          "def-complex-exponential",
+          "def-complex-trigonometric-and-hyperbolic-functions",
+          "thm-absolute-convergence-of-complex-series",
+          "thm-cauchy-hadamard-for-complex-power-series"
+        ]
+      },
+      {
+        "id": "cor-complex-trigonometric-and-hyperbolic-derivatives",
+        "kind": "corollary",
+        "title": "Complex sine, cosine, hyperbolic sine, and hyperbolic cosine are entire with their standard derivatives",
+        "strategy": "Differentiate the four entire series term by term and shift indices. Obtain sin'=cos, cos'=-sin, sinh'=cosh, and cosh'=sinh, including the constant terms.",
+        "deps": [
+          "thm-complex-trigonometric-and-hyperbolic-power-series",
+          "thm-termwise-differentiation-of-complex-power-series"
+        ]
+      },
+      {
+        "id": "cor-complex-trigonometric-and-hyperbolic-addition-formulas",
+        "kind": "corollary",
+        "title": "The addition formulas for complex trigonometric and hyperbolic functions",
+        "strategy": "Insert z+w into the published exponential definitions and use exp(z+w)=exp(z)exp(w). Collect the symmetric and antisymmetric combinations to obtain the sine, cosine, sinh, and cosh formulas for all complex z,w.",
+        "deps": [
+          "def-complex-trigonometric-and-hyperbolic-functions",
+          "thm-complex-exponential-addition-and-real-extension"
+        ]
+      },
+      {
+        "id": "thm-complex-sine-and-cosine-zero-sets",
+        "kind": "theorem",
+        "title": "The zeros of complex sine are the integer multiples of pi, and the zeros of complex cosine are the odd half-integer multiples of pi",
+        "strategy": "Rewrite sin z=0 as exp(2iz)=1 and apply the exact kernel formula. Rewrite cos z=0 as exp(2iz)=exp(i pi), then apply the fibre formula. Prove both converses by substitution and retain the integer quantifier.",
+        "deps": [
+          "def-complex-trigonometric-and-hyperbolic-functions",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-kernel-and-fibres-of-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ]
+      },
+      {
+        "id": "def-stolz-approach-region-at-one",
+        "kind": "definition",
+        "title": "Stolz approach regions at the boundary point 1 of the unit disc",
+        "deps": [
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ]
+      },
+      {
+        "id": "lem-abel-summation-for-complex-series",
+        "kind": "lemma",
+        "title": "Abel summation by parts for complex coefficients and their partial sums",
+        "strategy": "For s_n=sum_{k=0}^n a_k, substitute a_n=s_n-s_{n-1} into a finite weighted sum and telescope. State both the finite identity and its tail form, checking the initial index and an empty finite range.",
+        "deps": [
+          "def-complex-series-power-series-and-absolute-convergence",
+          "def-monoid-finite-product"
+        ]
+      },
+      {
+        "id": "thm-abel-limit-theorem-for-complex-series-in-stolz-regions",
+        "kind": "theorem",
+        "title": "Abel's limit theorem: a convergent complex series is recovered by its power series along every Stolz approach to 1",
+        "strategy": "Subtract the boundary sum so the partial sums tend to zero. Apply complex Abel summation to express the power series through those partial sums. Split at a fixed index; the finite head vanishes as z approaches 1, while the tail is bounded by the small partial-sum supremum times |1-z|/(1-|z|), which is bounded in a Stolz region. Handle the exact boundary point only as a limit and include radial approach as a corollary.",
+        "deps": [
+          "def-stolz-approach-region-at-one",
+          "lem-abel-summation-for-complex-series",
+          "thm-cauchy-hadamard-for-complex-power-series",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      }
+    ]
   },
   {
     "order": 306,
@@ -24,7 +323,101 @@
     "requires": [
       "complex-power-series-and-analytic-functions"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-geometric-series-reexpanded-about-an-arbitrary-complex-point",
+        "kind": "example",
+        "title": "The geometric series re-expanded about an arbitrary point of the unit disc",
+        "strategy": "For |b|<1 rewrite 1/(1-z) as (1-b)^(-1) times the geometric series in (z-b)/(1-b). Verify the finite geometric identity directly, obtain coefficients (1-b)^(-k-1), and show the new radius is |1-b|.",
+        "deps": [
+          "thm-complex-power-series-reexpansion-at-an-interior-point",
+          "thm-cauchy-hadamard-for-complex-power-series"
+        ]
+      },
+      {
+        "id": "ex-alternating-harmonic-power-series-at-the-boundary",
+        "kind": "example",
+        "title": "The alternating harmonic power series tends to log 2 at the boundary point 1",
+        "strategy": "Use the published real evaluation of the alternating harmonic series, regard its coefficients as complex, and apply the angular Abel theorem. State the series from its positive first index and make no logarithm-branch claim inside the disc.",
+        "deps": [
+          "thm-abel-limit-theorem-for-complex-series-in-stolz-regions",
+          "thm-log-one-plus-x-power-series"
+        ]
+      },
+      {
+        "id": "ex-square-summable-coefficient-power-series-on-the-closed-disc",
+        "kind": "example",
+        "title": "A power series with reciprocal-square coefficients converges uniformly on the closed unit disc",
+        "strategy": "For n starting at one, bound |z^n/n^2| by 1/n^2 on |z|<=1 and apply the complex M-test with the convergent real p-series. Contrast the boundary conclusion with what radius alone says, without evaluating the boundary sum.",
+        "deps": [
+          "thm-weierstrass-m-test-for-complex-function-series",
+          "thm-p-series-real-exponents"
+        ]
+      },
+      {
+        "id": "cex-complex-power-series-not-uniform-on-its-open-disc",
+        "kind": "counterexample",
+        "title": "The complex geometric series is not uniformly convergent on its open unit disc",
+        "strategy": "Its nth term fails to tend uniformly to zero because the supremum of |z|^n over |z|<1 is one for every n. Nevertheless it converges pointwise by the finite geometric identity. Use no maximum-attainment claim on the open disc.",
+        "deps": [
+          "def-uniform-convergence-of-complex-valued-functions",
+          "thm-cauchy-hadamard-for-complex-power-series"
+        ]
+      },
+      {
+        "id": "cex-radius-does-not-determine-boundary-convergence-of-a-complex-power-series",
+        "kind": "counterexample",
+        "title": "Equal radii do not determine convergence on the boundary circle",
+        "strategy": "Compare the geometric series and the reciprocal-square coefficient series. Cauchy–Hadamard gives radius one to both; at z=1 the first has terms that do not tend to zero, whereas the second converges absolutely by the real p-series.",
+        "deps": [
+          "thm-cauchy-hadamard-for-complex-power-series",
+          "thm-p-series-real-exponents",
+          "lem-nth-term-test"
+        ]
+      },
+      {
+        "id": "ex-lacunary-factorial-exponent-power-series",
+        "kind": "example",
+        "title": "The lacunary power series with factorial exponents has radius one and diverges at 1",
+        "strategy": "Set the coefficient of z^m to one when m=n! for some positive n and zero otherwise. Its coefficient-root limsup is one because ones occur arbitrarily far out, while all roots are at most one. At z=1 the nonzero terms do not tend to zero. Resolve the repeated exponent 1 by starting the factorial index at two or combining that finite duplication.",
+        "deps": [
+          "thm-cauchy-hadamard-for-complex-power-series",
+          "lem-nth-term-test",
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "ex-real-rational-function-with-finite-taylor-radius",
+        "kind": "example",
+        "title": "The real function 1/(1+x^2) is smooth on the real line but its Maclaurin series has radius one",
+        "strategy": "Apply the finite geometric identity to 1/(1+x^2) to obtain sum (-1)^n x^(2n) for |x|<1. Cauchy–Hadamard gives radius one, while the quotient rule shows the real rational function is smooth for every real x. This illustrates complex singularities without invoking analytic continuation or the identity theorem.",
+        "deps": [
+          "thm-cauchy-hadamard-for-complex-power-series",
+          "thm-algebra-of-derivatives",
+          "def-higher-derivatives-and-smoothness"
+        ]
+      },
+      {
+        "id": "ex-abel-limit-along-a-nonradial-stolz-approach",
+        "kind": "example",
+        "title": "Abel convergence of the alternating harmonic power series along a nonradial Stolz approach",
+        "strategy": "Take z_k=1-1/k+i/(2k) for sufficiently large k. Check |z_k|<1 and a uniform bound on |1-z_k|/(1-|z_k|), then apply the angular Abel theorem to the alternating harmonic coefficients and their published sum log 2.",
+        "deps": [
+          "thm-abel-limit-theorem-for-complex-series-in-stolz-regions",
+          "thm-log-one-plus-x-power-series"
+        ]
+      },
+      {
+        "id": "fs-convergence-at-one-noncentral-point-forces-entire-convergence",
+        "kind": "false-statement",
+        "title": "FALSE: convergence of a complex power series at one point other than its centre forces convergence everywhere",
+        "strategy": "The geometric power series centered at zero converges at z=1/2 but diverges at z=2. Verify both claims from the finite geometric identity and the nth-term test, then state the correct radius dichotomy.",
+        "deps": [
+          "thm-cauchy-hadamard-for-complex-power-series",
+          "lem-nth-term-test"
+        ]
+      }
+    ]
   },
   {
     "order": 307,
@@ -37,9 +430,252 @@
       "complex-differentiability-and-cauchy-riemann",
       "properties-of-the-integral-and-the-working-ftc",
       "arc-length-and-rectifiable-curves",
-      "bounded-variation-and-riemann-stieltjes"
+      "bounded-variation-and-riemann-stieltjes",
+      "line-integrals-and-the-gradient-theorem"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "rem-complex-contours-as-planar-rectifiable-paths",
+        "kind": "remark",
+        "title": "Complex contours as planar rectifiable paths: the Euclidean, coordinate-BV, and piecewise-C1 dictionaries",
+        "deps": [
+          "rem-complex-plane-euclidean-dictionary",
+          "def-path-polygonal-length-and-rectifiability-in-rn",
+          "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length"
+        ]
+      },
+      {
+        "id": "def-complex-contours-reversal-concatenation-and-closedness",
+        "kind": "definition",
+        "title": "Rectifiable complex contours, reversal, concatenation, closedness, and orientation",
+        "deps": [
+          "rem-complex-contours-as-planar-rectifiable-paths",
+          "def-piecewise-c1-path-operations-and-oriented-reparametrizations",
+          "thm-arc-length-is-invariant-under-monotone-reparametrization"
+        ]
+      },
+      {
+        "id": "def-complex-line-integral-over-a-rectifiable-path",
+        "kind": "definition",
+        "title": "The complex line integral over a rectifiable path as a componentwise Riemann–Stieltjes integral",
+        "deps": [
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "def-riemann-stieltjes-sum-and-integral",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ]
+      },
+      {
+        "id": "def-absolute-line-integral-over-a-rectifiable-path",
+        "kind": "definition",
+        "title": "The absolute line integral over a rectifiable path using its arc-length function",
+        "deps": [
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "def-arc-length-function",
+          "def-riemann-stieltjes-sum-and-integral"
+        ]
+      },
+      {
+        "id": "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+        "kind": "theorem",
+        "title": "Continuous integrands have complex and absolute line integrals along every rectifiable path",
+        "strategy": "Write f=u+iv and gamma=x+iy. Rectifiability makes x and y continuous BV functions, and continuity of f along the compact parameter interval makes u and v continuous. Apply the real continuous-integrand/BV-integrator theorem to all four component integrals. For the absolute integral use the continuous nondecreasing arc-length function. Include singleton and constant paths.",
+        "deps": [
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "def-absolute-line-integral-over-a-rectifiable-path",
+          "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
+          "lem-arc-length-function-is-continuous-and-nondecreasing",
+          "thm-riemann-stieltjes-existence-continuous-bv"
+        ]
+      },
+      {
+        "id": "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+        "kind": "theorem",
+        "title": "For piecewise-C1 contours the Riemann–Stieltjes integral agrees with the parametric complex integral and the published real line integrals",
+        "strategy": "On each smooth piece apply the real Stieltjes C1-integrator reduction to the four component integrals. Recombine them into integral f(gamma(t))gamma'(t) dt. Identify its real and imaginary parts with the published vector line integrals of (u,-v) and (v,u), and identify the absolute integral with the published scalar line integral. Sum over pieces and allow corners and zero-speed pieces.",
+        "deps": [
+          "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "thm-riemann-stieltjes-c1-integrator-reduction",
+          "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
+          "def-vector-valued-derivative-and-integral",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length"
+        ]
+      },
+      {
+        "id": "prop-linearity-of-complex-line-integrals",
+        "kind": "proposition",
+        "title": "Complex line integrals are linear in the integrand",
+        "strategy": "Expand the real and imaginary parts of alpha f+beta g and apply real Stieltjes linearity in each component. Recombine the four identities into complex scalar linearity, including zero scalars and singleton paths.",
+        "deps": [
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "thm-riemann-stieltjes-linearity-and-additivity"
+        ]
+      },
+      {
+        "id": "prop-reversal-and-concatenation-of-complex-line-integrals",
+        "kind": "proposition",
+        "title": "Complex line integrals change sign under reversal and add under concatenation",
+        "strategy": "For reversal apply the oriented Stieltjes convention after the decreasing affine parameter change, obtaining a minus sign for d gamma while the absolute integral is unchanged. For concatenation split each component Stieltjes integral at the join and use additivity. Check constant pieces and matching endpoints.",
+        "deps": [
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "def-absolute-line-integral-over-a-rectifiable-path",
+          "thm-riemann-stieltjes-linearity-and-additivity",
+          "thm-line-integrals-under-reversal-and-concatenation"
+        ]
+      },
+      {
+        "id": "thm-invariance-of-complex-line-integrals-under-increasing-reparametrization",
+        "kind": "theorem",
+        "title": "Complex and absolute line integrals are invariant under increasing continuous reparametrization",
+        "strategy": "Let phi be a strictly increasing continuous bijection between nondegenerate compact intervals. Apply the exact real Riemann–Stieltjes change-of-variable theorem to each component and to the arc-length integrator, then recombine. Treat singleton intervals separately and state that decreasing reparametrization changes the complex integral's sign.",
+        "deps": [
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "def-absolute-line-integral-over-a-rectifiable-path",
+          "thm-riemann-stieltjes-change-of-variable",
+          "thm-arc-length-is-invariant-under-monotone-reparametrization",
+          "thm-line-integrals-under-oriented-reparametrization"
+        ]
+      },
+      {
+        "id": "thm-fundamental-inequality-for-complex-line-integrals",
+        "kind": "theorem",
+        "title": "The fundamental inequality |integral f dz| <= integral |f| |dz| for rectifiable contours",
+        "strategy": "Use tagged complex Stieltjes sums for the four component integrals. The complex triangle inequality bounds each sum by the corresponding tagged arc-length sum plus a uniform-continuity error controlled by polygonal length. Pass both limits and then remove the error. This preserves the sharp constant one, unlike separately bounding four real components.",
+        "deps": [
+          "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "def-absolute-line-integral-over-a-rectifiable-path",
+          "cor-riemann-stieltjes-integral-bound",
+          "lem-complex-conjugation-and-modulus-laws",
+          "cor-chord-length-is-at-most-arc-length"
+        ]
+      },
+      {
+        "id": "cor-ml-estimate-for-complex-line-integrals",
+        "kind": "corollary",
+        "title": "ML estimate: a contour integral is bounded by a supremum bound times path length",
+        "strategy": "If |f|<=M on the trace, monotonicity of the real Stieltjes integral against the nondecreasing arc-length function bounds the absolute line integral by M times s_gamma(b)-s_gamma(a)=M L(gamma). Combine with the fundamental inequality and include M=0 and L=0.",
+        "deps": [
+          "thm-fundamental-inequality-for-complex-line-integrals",
+          "def-arc-length-function",
+          "cor-riemann-stieltjes-integral-bound",
+          "thm-scalar-and-vector-line-integral-estimates"
+        ]
+      },
+      {
+        "id": "cor-absolute-integral-of-one-is-path-length",
+        "kind": "corollary",
+        "title": "The absolute line integral of the constant function 1 is the length of the path",
+        "strategy": "By definition the integral is the Stieltjes integral of one against s_gamma, which is the endpoint increment s_gamma(b)-s_gamma(a). Apply the defining endpoint values, including singleton and constant paths.",
+        "deps": [
+          "def-absolute-line-integral-over-a-rectifiable-path",
+          "def-arc-length-function"
+        ]
+      },
+      {
+        "id": "def-complex-primitive",
+        "kind": "definition",
+        "title": "A primitive of a complex function on an open set",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire"
+        ]
+      },
+      {
+        "id": "thm-fundamental-theorem-for-complex-line-integrals",
+        "kind": "theorem",
+        "title": "The line integral of a function with a continuous primitive is the primitive's endpoint increment along every rectifiable path",
+        "strategy": "For a primitive F with continuous derivative f, uniform differentiability on the compact trace gives F(w)-F(z)=f(z)(w-z)+r with |r|<=epsilon|w-z| for sufficiently close trace points. Sum this identity over a fine partition of the rectifiable path. The main sums converge to the line integral, the endpoint increments telescope, and the total remainder is at most epsilon L(gamma). Let epsilon tend to zero. Include constant paths and avoid assuming the path is differentiable.",
+        "deps": [
+          "def-complex-primitive",
+          "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "cor-chord-length-is-at-most-arc-length",
+          "cor-continuous-complex-derivative-gives-c1-components",
+          "thm-gradient-theorem-for-line-integrals"
+        ]
+      },
+      {
+        "id": "cor-closed-contour-integral-of-a-derivative-is-zero",
+        "kind": "corollary",
+        "title": "The integral of a continuous complex derivative over every closed rectifiable contour is zero",
+        "strategy": "Apply the contour fundamental theorem to f=F'. Closedness identifies the two endpoint values, so their difference is zero. State continuity of F' explicitly and include constant loops.",
+        "deps": [
+          "thm-fundamental-theorem-for-complex-line-integrals",
+          "def-complex-contours-reversal-concatenation-and-closedness"
+        ]
+      },
+      {
+        "id": "cor-contour-integral-of-a-constant-is-an-endpoint-increment",
+        "kind": "corollary",
+        "title": "The contour integral of a constant c is c times the endpoint displacement",
+        "strategy": "The entire affine function F(z)=cz is a primitive of the constant c by the published complex derivative algebra. Apply the contour fundamental theorem and simplify. Include c=0 and a constant path.",
+        "deps": [
+          "thm-fundamental-theorem-for-complex-line-integrals",
+          "thm-algebra-of-complex-derivatives"
+        ]
+      },
+      {
+        "id": "thm-path-independence-and-complex-primitive-criterion",
+        "kind": "theorem",
+        "title": "For a continuous function on a complex domain, endpoint independence, zero closed-contour integrals, and existence of a primitive are equivalent",
+        "strategy": "A primitive gives endpoint independence by the fundamental theorem, and endpoint independence gives zero on closed contours. Conversely fix a basepoint and define F(z) by integrating along a polygonal path, available because open connected plane sets are polygonally connected. Zero closed integrals makes F well-defined. For a small h use the final straight segment from z to z+h; its difference quotient is an average of f(z+th), which tends to f(z) by continuity. This proves F'=f. Check basepoint choice and both directions separately.",
+        "deps": [
+          "def-complex-domain",
+          "thm-open-connected-subsets-of-rn-are-polygonally-connected",
+          "def-polygonal-path-and-polygonal-connectedness",
+          "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "thm-fundamental-theorem-for-complex-line-integrals",
+          "thm-conservative-path-independent-and-zero-loop-equivalence"
+        ]
+      },
+      {
+        "id": "thm-uniform-limit-interchanges-complex-line-integrals",
+        "kind": "theorem",
+        "title": "A uniformly convergent sequence of continuous integrands on a fixed contour permits passage of the limit through the complex line integral",
+        "strategy": "Assume the limit integrand is continuous and state uniform convergence on the trace by its epsilon quantifiers. Apply the ML estimate to f_n-f. Its uniform error times L(gamma) tends to zero, so the integrals converge. Treat zero-length paths without dividing by length and do not cite the separate power-series page's uniform-convergence dictionary.",
+        "deps": [
+          "cor-ml-estimate-for-complex-line-integrals",
+          "thm-existence-of-complex-line-integrals-on-rectifiable-paths"
+        ]
+      },
+      {
+        "id": "thm-circle-integrals-of-integer-monomials",
+        "kind": "theorem",
+        "title": "On a positively oriented circle about a, the integral of (z-a)^m is zero for every integer m except -1, and is 2 pi i for m=-1",
+        "strategy": "Parametrize the circle by gamma(t)=a+r exp(it), 0<=t<=2 pi, with r>0. The piecewise-C1 agreement formula turns the integrand into i r^(m+1) exp(i(m+1)t). If m=-1 it is the constant i; otherwise integrate its explicit exponential primitive and use exp(2 pi i(m+1))=1. Check negative powers are defined because r>0.",
+        "deps": [
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "def-complex-integer-powers",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-ftc-second-part"
+        ]
+      },
+      {
+        "id": "cor-normalized-circle-integral-about-its-centre-is-one",
+        "kind": "corollary",
+        "title": "The normalized integral (2 pi i)^(-1) integral dz/(z-a) around a positively oriented circle centred at a is 1",
+        "strategy": "Specialize the circle monomial theorem to m=-1 and divide the nonzero complex number 2 pi i. The value is independent of the positive radius; no global winding-number theory or Cauchy theorem is invoked.",
+        "deps": [
+          "thm-circle-integrals-of-integer-monomials",
+          "thm-complex-numbers-form-a-field"
+        ]
+      },
+      {
+        "id": "fs-every-continuous-complex-function-on-a-domain-has-a-primitive",
+        "kind": "false-statement",
+        "title": "FALSE: every continuous complex-valued function on a domain has a primitive",
+        "strategy": "On the punctured plane take f(z)=1/z, which is continuous. The punctured plane is a domain. If f had a primitive, its integral around every circle centred at zero would vanish, but the directly computed circle integral is 2 pi i. State the corrected zero-closed-contour criterion.",
+        "deps": [
+          "def-complex-domain",
+          "lem-punctured-rn-is-polygonally-connected",
+          "thm-circle-integrals-of-integer-monomials",
+          "cor-closed-contour-integral-of-a-derivative-is-zero",
+          "thm-path-independence-and-complex-primitive-criterion"
+        ]
+      }
+    ]
   },
   {
     "order": 308,
@@ -51,6 +687,124 @@
     "requires": [
       "contour-integration"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-exponential-contour-integral-by-riemann-sum-and-parametrization",
+        "kind": "example",
+        "title": "An exponential contour integral approximated by Riemann sums and evaluated by parametrization and a primitive",
+        "strategy": "On the segment from 0 to 2+i pi/4, display a finite midpoint Riemann sum, then pass to the affine-parametric complex integral. Evaluate it both componentwise and from the primitive exp(z), obtaining exp(2+i pi/4)-1. This compares the Riemann-sum, parametric, and primitive methods without using the power-series page.",
+        "deps": [
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "thm-fundamental-theorem-for-complex-line-integrals",
+          "thm-complex-exponential-is-entire-with-derivative-itself"
+        ]
+      },
+      {
+        "id": "ex-polynomial-contour-integral-along-a-line-segment",
+        "kind": "example",
+        "title": "Integrating a complex polynomial along a segment and a parabola by a primitive and by parametrization",
+        "strategy": "Begin with Howell–Mathews's componentwise warm-up integral of (t-i)^3 on a real interval. Then integrate f(z)=z from the same initial to terminal point along both their straight segment and their parabolic path. Compute parametrically and from the primitive z^2/2, verify that the endpoint values agree, and keep both orientations visible.",
+        "deps": [
+          "thm-fundamental-theorem-for-complex-line-integrals",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree"
+        ]
+      },
+      {
+        "id": "ex-contour-integral-of-conjugation-depends-on-the-path",
+        "kind": "example",
+        "title": "The integral of complex conjugation from -1 to 1 differs along a semicircle and a polygonal path",
+        "strategy": "Parametrize Howell–Mathews's upper semicircle and their polygonal path from -1 to 1, compute the integral of conjugate(z) dz on each, and obtain the unequal values -pi i and -4i. This exhibits a continuous integrand without a primitive and checks concatenation signs directly.",
+        "deps": [
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "prop-reversal-and-concatenation-of-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "ex-ml-estimate-on-a-semicircle",
+        "kind": "example",
+        "title": "ML bounds for rational integrands on a semicircular arc and a line segment",
+        "strategy": "First choose a semicircle staying a positive distance from a pole, bound the denominator by the reverse triangle inequality, use length pi r, and apply ML. Then reproduce Howell–Mathews's segment from 2 to 2+i for 1/(z^2+1): the distances to i and -i give the stated product bound and the segment has length one.",
+        "deps": [
+          "cor-ml-estimate-for-complex-line-integrals",
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "ex-circle-integral-of-one-over-z-minus-a",
+        "kind": "example",
+        "title": "Direct computation of the integral of 1/(z-a) around a semicircle and a full circle centred at a",
+        "strategy": "Use gamma(t)=a+r exp(it) and cancel gamma'(t) against gamma(t)-a to obtain the constant i. First integrate from zero to pi to recover the upper-semicircle value i pi, then from zero to 2 pi for the full-circle value 2 pi i, and reverse the orientation to check the sign.",
+        "deps": [
+          "thm-circle-integrals-of-integer-monomials",
+          "prop-reversal-and-concatenation-of-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "ex-keyhole-contour-assembly-without-cauchys-theorem",
+        "kind": "example",
+        "title": "Assembling a keyhole contour from two radial segments and two circular arcs",
+        "strategy": "Specify the four oriented pieces with matching endpoints, compute their lengths, and write the total integral as the signed sum supplied by concatenation. Do not evaluate it by Cauchy's theorem or introduce a logarithm branch; the point is rigorous contour bookkeeping.",
+        "deps": [
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "cor-absolute-integral-of-one-is-path-length"
+        ]
+      },
+      {
+        "id": "ex-riemann-stieltjes-integral-on-a-polygonal-contour",
+        "kind": "example",
+        "title": "The rectifiable Riemann–Stieltjes definition on an explicit polygonal contour with corners",
+        "strategy": "Use Howell–Mathews's three-segment polygonal path, with its corner parametrization, and an affine integrand. Evaluate the four real Stieltjes components edge by edge, then verify agreement with the piecewise-C1 parametric formula. The corner derivatives need not agree.",
+        "deps": [
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "prop-reversal-and-concatenation-of-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "cex-reversing-orientation-preserves-a-contour-integral",
+        "kind": "counterexample",
+        "title": "Reversing orientation does not preserve a complex contour integral",
+        "strategy": "Integrate the constant 1 along the segment from 0 to 1 and along its reversal. The values are 1 and -1 by the endpoint formula, while the absolute integrals agree. This separates oriented and unoriented integrals.",
+        "deps": [
+          "cor-contour-integral-of-a-constant-is-an-endpoint-increment",
+          "prop-reversal-and-concatenation-of-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "fs-absolute-value-passes-through-a-contour-integral",
+        "kind": "false-statement",
+        "title": "FALSE: the modulus of a contour integral always equals the absolute line integral",
+        "strategy": "For f=1 on a positively oriented circle, the complex integral is zero by the endpoint formula, whereas the absolute line integral is the positive circumference. State the correct fundamental inequality and its equality need not hold.",
+        "deps": [
+          "cor-contour-integral-of-a-constant-is-an-endpoint-increment",
+          "cor-absolute-integral-of-one-is-path-length",
+          "thm-fundamental-inequality-for-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "fs-contour-length-is-the-length-of-its-trace",
+        "kind": "false-statement",
+        "title": "FALSE: contour length depends only on the trace and ignores multiplicity",
+        "strategy": "Compare one traversal of a circle with two traversals. They have the same trace but the second path has twice the speed integral and twice the length. Use an explicit parametrization and retain the positive radius hypothesis.",
+        "deps": [
+          "cor-piecewise-c1-paths-have-additive-speed-integral-length",
+          "thm-arc-length-is-invariant-under-monotone-reparametrization"
+        ]
+      },
+      {
+        "id": "fs-parametrization-independence-includes-orientation-reversal",
+        "kind": "false-statement",
+        "title": "FALSE: parametrization independence makes orientation reversal leave every contour integral unchanged",
+        "strategy": "Use the segment integral of the constant 1. The orientation-preserving theorem applies only to increasing reparametrizations; reversal is decreasing and changes the sign from 1 to -1. Quote the hypotheses without widening them.",
+        "deps": [
+          "thm-invariance-of-complex-line-integrals-under-increasing-reparametrization",
+          "cor-contour-integral-of-a-constant-is-an-endpoint-increment"
+        ]
+      }
+    ]
   }
 ]

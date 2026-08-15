@@ -1,0 +1,2758 @@
+{
+  "version": 1,
+  "level": "frontier-14",
+  "phase": "scaffold-steps-1-2",
+  "scope": [
+    "prop-quadratic-residue-is-representative-independent",
+    "cor-unique-kth-root-modulo-prime-for-coprime-exponent",
+    "thm-quadratic-residues-subgroup-modulo-prime",
+    "thm-count-of-quadratic-residues-modulo-prime",
+    "prop-legendre-symbol-well-defined",
+    "prop-legendre-symbol-on-units-is-homomorphism",
+    "thm-eulers-criterion-for-legendre-symbol",
+    "thm-legendre-symbol-multiplicativity",
+    "cor-number-of-solutions-to-quadratic-congruence-modulo-prime",
+    "cor-quadratic-congruence-discriminant-criterion",
+    "lem-gauss-half-system-permutation",
+    "thm-gauss-quadratic-residue-lemma",
+    "thm-first-supplement-to-quadratic-reciprocity",
+    "thm-second-supplement-to-quadratic-reciprocity",
+    "ex-quadratic-residues-and-nonresidues-modulo-eleven",
+    "ex-power-residues-modulo-seventeen",
+    "cex-product-of-two-quadratic-nonresidues-modulo-a-composite",
+    "ex-unique-cube-root-of-two-modulo-twenty-nine",
+    "ex-euler-criterion-with-a-large-prime",
+    "ex-gauss-lemma-for-three-modulo-eleven",
+    "ex-quadratic-congruence-from-its-discriminant",
+    "cex-squaring-on-units-is-not-a-homomorphism-nonabelian-warning",
+    "cex-quadratic-residue-definition-excludes-nonunits"
+  ],
+  "contracts": {
+    "prop-quadratic-residue-is-representative-independent": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-quadratic-residue-modulo-n",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$ and let $a\\in\\mathbb Z$ satisfy $\\gcd(a,n)=1$. The integer $a$ is a **quadratic residue modulo $n$** if there is an integer $x$ with $x^2\\equiv a\\pmod n$, and otherwise it is a **quadratic nonresidue modulo $n$**.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-integers-modulo-n",
+          "source_section": "Definition",
+          "quote": "By\n[[lem-equivalence-classes-partition]], two classes are equal exactly when their\nrepresentatives are congruent:\n\n$$[a]_n=[b]_n\\quad\\Longleftrightarrow\\quad a\\equiv b\\pmod n.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-unit-criterion-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$\n\nthat is, if and only if $a$ and $n$ are coprime ([[def-coprime]]). Consequently\nthe condition $\\gcd(a,n)=1$ depends only on the class $[a]_n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-unit-group-modulo-n-and-euler-totient",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ be an integer. Multiplication makes $\\mathbb Z/n$ a commutative\nmonoid with identity $[1]_n$ by [[thm-integers-modulo-n-basic-algebra]]. A class\n$u\\in\\mathbb Z/n$ is a **unit** when it is invertible in that monoid\n([[def-invertible-element]]). The set of all units is\n\n$$(\\mathbb Z/n)^\\times:=\\{\\,u\\in\\mathbb Z/n:\\text{some }v\\in\\mathbb Z/n\\text{ satisfies }uv=[1]_n\\,\\}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Congruent representatives determine the same quotient class, so a square witness for one representative is a witness for the other.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The unit criterion makes coprimality representative-independent; moreover, if $[x]^2=[a]$ is a unit then an inverse of $[x]^2$ makes $[x]$ a unit, so every residue witness belongs to the unit group.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Conversely, every class in the image of squaring has an integer representative satisfying the defining square congruence.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No family is indexed in this argument; the witness is one square root."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 spends the unit criterion, so for $n\\ge2$ the zero class is excluded rather than silently treated as a unit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the identity class, whose square witness is the identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement permits $n=2$; steps 1.1–3.1 still apply to its one-element unit group."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No ordered interval or truncated sum occurs in representative transport."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 transports a supplied existential witness and makes no simultaneous root choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The planned statement records this case. Steps 1.1–2.1 prove every quadratic-residue class lies in the squaring image."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves every class in the squaring image satisfies the congruence definition."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-unique-kth-root-modulo-prime-for-coprime-exponent": {
+      "citations": [
+        {
+          "fact": "L7",
+          "source": "lem-prime-not-dividing-is-coprime",
+          "source_section": "Statement",
+          "quote": "In particular, if $p \\nmid a$ then $p$ and $a$ are coprime\n([[def-coprime]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-eulers-criterion-for-binomial-congruences",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ admit a primitive root, let $\\gcd(a,n)=1$, and let $m\\ge1$. Put $d=\\gcd(m,\\varphi(n))$. Then\n\n$$x^m\\equiv a\\pmod n$$\n\nis solvable if and only if\n\n$$a^{\\varphi(n)/d}\\equiv1\\pmod n.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-primitive-roots-modulo-prime",
+          "source_section": "Statement",
+          "quote": "Every prime $p$ admits a primitive root modulo $p$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-totient-at-one-and-at-a-prime",
+          "source_section": "Statement",
+          "quote": "Euler's totient satisfies $\\varphi(1)=1$. If $p$ is prime\n([[def-prime]]), then\n\n$$\\varphi(p)=p-1.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-number-of-solutions-of-a-binomial-congruence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ admit a primitive root, let $\\gcd(a,n)=1$, and let $m\\ge1$. If $x^m\\equiv a\\pmod n$ is solvable, then it has exactly\n\n$$\\gcd(\\varphi(n),m)$$\n\nsolution classes modulo $n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-linear-congruence-solvability-and-solution-count",
+          "source_section": "Statement",
+          "quote": "Let $a,b\\in\\mathbb Z$ and $n\\ge1$, and put $d:=\\gcd(a,n)$. The congruence\n\n$$ax\\equiv b\\pmod n$$\n\nhas an integer solution if and only if $d\\mid b$. When it is solvable, it has\nexactly $d$ solution classes in $\\mathbb Z/n$. More explicitly, if\n$a=da'$, $n=dn'$, $b=db'$ and $x_0$ solves\n$a'x_0\\equiv b'\\pmod{n'}$, the solutions modulo $n$ are\n\n$$[x_0+jn']_n\\qquad(0\\le j<d).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-fermats-little-theorem",
+          "source_section": "Statement",
+          "quote": "Let $p$ be a prime integer and $a\\in\\mathbb Z$. If $p\\nmid a$, then\n\n$$a^{p-1}\\equiv1\\pmod p.$$\n\nFor every integer $a$, without the nondivisibility hypothesis,\n\n$$a^p\\equiv a\\pmod p.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Primitive-root existence and $\\varphi(p)=p-1$ specialise the binomial criterion; coprimality of $k$ and $p-1$ makes every nonzero target soluble.",
+          "step": "1.1",
+          "inputs": [
+            "L7",
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The published binomial solution count gives exactly one root class.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Solve $k\\ell\\equiv1\\pmod{p-1}$ and use Fermat's theorem to verify $a^\\ell$ and its independence from the inverse representative.",
+          "step": "3.1",
+          "inputs": [
+            "L7",
+            "L5",
+            "L6",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The corollary concerns one nonzero target, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement excludes zero and step 1.1 applies a theorem with $\\gcd(a,p)=1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The planned statement records this case. At $k=1$, steps 1.1–3.1 give the unique root $a$ with inverse exponent one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement includes $p=2$; then $p-1=1$ and the sole unit class still has the asserted root."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "An inverse exponent is a residue class modulo $p-1$, not an interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 solves for $\\ell$ and proves representative-independence, so no family of choices is formed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is existence, uniqueness, and a formula rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterisation of coprime exponents is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-quadratic-residues-subgroup-modulo-prime": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-unit-group-modulo-prime-is-cyclic",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the group $(\\mathbb Z/p)^\\times$ is cyclic of order $p-1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cyclic-subgroup-is-the-set-of-powers",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group and $g \\in G$, with integer powers as in [[def-group-power]].\nThen\n\n$$\\langle g \\rangle \\;=\\; \\{\\, g^{n} \\;:\\; n \\in \\mathbb{Z} \\,\\} ,$$\n\nthe cyclic subgroup generated by $g$ ([[def-generated-subgroup]]) being exactly\nthe set of integer powers of $g$. Consequently every cyclic group is abelian, and\nso is every cyclic subgroup of any group.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-generated-subgroup",
+          "source_section": "Definition",
+          "quote": "For a single element $g \\in G$ we write $\\langle g \\rangle := \\langle \\{g\\}\\rangle$\nand call it the **cyclic subgroup generated by $g$**. A group $G$ is **cyclic**\nwhen $G = \\langle g \\rangle$ for some $g \\in G$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-quadratic-residue-is-representative-independent",
+          "source_section": "Statement",
+          "quote": "Whether a unit integer is a quadratic residue modulo $n$ depends only on its class in $(\\mathbb Z/n)^\\times$, and the quadratic-residue classes are exactly the image of the squaring map on that group.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-group-power-laws",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$, let $g, h \\in G$, and let\npowers be as in [[def-group-power]]. For all $m, n \\in \\mathbb{Z}$:\n\n1. $g^{m+n} = g^{m} g^{n}$;\n2. $g^{-m} = (g^{m})^{-1}$;\n3. $(g^{m})^{n} = g^{mn}$;\n4. $g^{m} g^{n} = g^{n} g^{m}$: any two powers of one element commute;\n5. **if $gh = hg$** then $(gh)^{n} = g^{n} h^{n}$.\n\nClaim 5 is **false in general without its hypothesis**: in a group in which $g$\nand $h$ do not commute the equation can fail already at $n = 2$, and a witness is\nrecorded on the companion page.\n\nClaims 1 and 3 hold in any monoid ([[def-semigroup-and-monoid]]) for exponents in\n$\\mathbb{N}$, and so does claim 5 for exponents in $\\mathbb{N}$ under the same\ncommuting hypothesis; only the extension to negative exponents needs inverses.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-division-algorithm-in-z",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$ ([[def-integers]]) with $b > 0$. Then there exist\nintegers $q$ and $r$ with\n\n$$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$$\n\nand the pair $(q,r)$ with these two properties is unique.\n\nWe say $b$ **divides** $a$, written $b \\mid a$, when $a = qb$ for some\n$q \\in \\mathbb{Z}$; by the above, for $b > 0$ this holds exactly when the\nremainder $r$ is $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-index",
+          "source_section": "Definition",
+          "quote": "The **index** of $H$ in $G$ is\n\n$$[G:H]:=|G/H|$$\n\nwhen $G/H$ is finite, with finite cardinality as in\n[[def-finite-cardinality]]. If $G/H$ is not finite, write $[G:H]=\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For the fixed prime, select one primitive root and write every unit as an integer power of it.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Power laws and division by two show that the image of squaring is exactly the subgroup generated by the primitive root's square.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "L6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Even and odd exponents give two cosets, so the intrinsic square subgroup has index two independently of the selected generator.",
+          "step": "3.1",
+          "inputs": [
+            "L7",
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 begins with a unit group containing the identity, so its square image is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 works only in $(\\mathbb Z/p)^\\times$ and therefore excludes zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the identity as the square with even exponent zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The odd-prime hypothesis excludes $p=2$; for $p=3$, step 3.1 gives an index-two subgroup of size one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 exhausts the even and odd remainder cases, including remainder zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects one primitive root for one fixed prime, while step 3.1 proves the image is intrinsic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The subgroup and index assertion is not stated as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from an arbitrary index-two subgroup to the square image is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-count-of-quadratic-residues-modulo-prime": {
+      "citations": [
+        {
+          "fact": "L7",
+          "source": "lem-prime-not-dividing-is-coprime",
+          "source_section": "Statement",
+          "quote": "In particular, if $p \\nmid a$ then $p$ and $a$ are coprime\n([[def-coprime]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-unit-group-modulo-prime-is-cyclic",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the group $(\\mathbb Z/p)^\\times$ is cyclic of order $p-1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-quadratic-residues-subgroup-modulo-prime",
+          "source_section": "Statement",
+          "quote": "For an odd prime $p$, the nonzero square classes form the subgroup $((\\mathbb Z/p)^\\times)^2=\\langle g^2\\rangle$ of index two for every primitive root $g$ modulo $p$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-lagrange",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and $H\\le G$. Then\n\n$$|G|=[G:H]\\,|H|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-number-of-solutions-of-a-binomial-congruence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ admit a primitive root, let $\\gcd(a,n)=1$, and let $m\\ge1$. If $x^m\\equiv a\\pmod n$ is solvable, then it has exactly\n\n$$\\gcd(\\varphi(n),m)$$\n\nsolution classes modulo $n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-primitive-roots-modulo-prime",
+          "source_section": "Statement",
+          "quote": "Every prime $p$ admits a primitive root modulo $p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-totient-at-one-and-at-a-prime",
+          "source_section": "Statement",
+          "quote": "Euler's totient satisfies $\\varphi(1)=1$. If $p$ is prime\n([[def-prime]]), then\n\n$$\\varphi(p)=p-1.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Lagrange's formula applied to the index-two square subgroup gives $(p-1)/2$ squares and the same number of nonsquares.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Primitive-root existence, $\\varphi(p)=p-1$, and the binomial solution count give two roots for each soluble nonzero square congruence.",
+          "step": "2.1",
+          "inputs": [
+            "L7",
+            "L3",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A nonresidue has no root, completing the count.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to the nonempty square subgroup and gives it positive cardinality."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 count nonzero classes only; zero is in neither half."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $p=3$, step 2.1 gives the two roots of the sole nonzero square."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The hypothesis excludes $p=2$, where the equal-halves formulation is unavailable."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proof counts finite cosets rather than a truncated interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof applies Lagrange and a root-count theorem without selecting elements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The cardinality assertion has no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication from a numerical count is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-legendre-symbol-well-defined": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-legendre-symbol",
+          "source_section": "Definition",
+          "quote": "For an odd prime $p$ and integer $a$, the **Legendre symbol** $(a/p)$ is $0$ if $p\\mid a$, $1$ if $a$ is a quadratic residue modulo $p$, and $-1$ if $a$ is a quadratic nonresidue modulo $p$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-quadratic-residue-is-representative-independent",
+          "source_section": "Statement",
+          "quote": "Whether a unit integer is a quadratic residue modulo $n$ depends only on its class in $(\\mathbb Z/n)^\\times$, and the quadratic-residue classes are exactly the image of the squaring map on that group.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Congruent numerators are simultaneously divisible or nondivisible by $p$, so the zero branch is representative-independent.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "On units, representative-independence of quadratic residuosity gives the same sign for congruent numerators.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The three defining branches are exhaustive and disjoint, giving the stated range and zero criterion.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The three-value case split is exhaustive and contains no empty indexed object."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned statement records this case. Steps 1.1 and 3.1 isolate $p\\mid a$ and assign zero before the unit cases."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement includes numerator one, which lies in the residue branch because $1^2=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The odd-prime hypothesis excludes $p=2$, while negative and zero numerators remain covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Representative-independence uses congruence classes and no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 2.1 cites an established existential property and chooses no root."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves divisibility implies symbol value zero."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves zero value can arise only from the divisible branch."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-legendre-symbol-on-units-is-homomorphism": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-legendre-symbol-well-defined",
+          "source_section": "Statement",
+          "quote": "The Legendre symbol belongs to $\\{-1,0,1\\}$, depends only on the numerator modulo $p$, and is zero if and only if $p$ divides the numerator.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-quadratic-residues-subgroup-modulo-prime",
+          "source_section": "Statement",
+          "quote": "For an odd prime $p$, the nonzero square classes form the subgroup $((\\mathbb Z/p)^\\times)^2=\\langle g^2\\rangle$ of index two for every primitive root $g$ modulo $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-kernel-and-image-of-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "The kernel and image of a group homomorphism.\n\nFor a group homomorphism $f:G\\to H$, define\n\n$$\\ker f:=\\{g\\in G:f(g)=e_H\\},\\qquad\\operatorname{im}f:=\\{f(g):g\\in G\\}.$$\n\nThus $f$ is surjective exactly when $\\operatorname{im}f=H$\n([[def-injection-surjection-bijection]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "Let $G$ and $G'$ be groups ([[def-group]]). A **group homomorphism** from $G$ to\n$G'$ is a function $f : G \\to G'$ satisfying (H1) alone:\n\n$$f(xy) \\;=\\; f(x)\\, f(y) \\qquad \\text{for all } x, y \\in G .$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-unit-group-modulo-prime-is-cyclic",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the group $(\\mathbb Z/p)^\\times$ is cyclic of order $p-1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-group-homomorphism-basic-properties",
+          "source_section": "Statement",
+          "quote": "Let $G$ and $G'$ be groups with identities $e$ and $e'$, and let $f : G \\to G'$\nbe a group homomorphism ([[def-group-homomorphism]]), so $f(xy) = f(x)f(y)$ for\nall $x, y \\in G$. Then:\n\n1. $f(e) = e'$;\n2. $f(g^{-1}) = f(g)^{-1}$ for every $g \\in G$;\n3. $f(g^{n}) = f(g)^{n}$ for every $g \\in G$ and every $n \\in \\mathbb{Z}$, powers\n   being those of [[def-group-power]].\n\nFor **monoid** homomorphisms the analogue of claim 1 is false, so preservation of\nthe identity has to be part of the definition: the map $u : \\mathbb{Z} \\to \\mathbb{Z}$\nwith $u(x) = 0$ for every $x$ satisfies $u(xy) = u(x)u(y)$ for the multiplicative\nmonoid $(\\mathbb{Z},\\cdot,1)$, yet $u(1) = 0 \\ne 1$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On unit classes, the value-one kernel is the square subgroup and the other coset has value minus one.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The two-coset rule respects multiplication and is surjective, hence is a homomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A locally selected primitive root generates the unit group; any nontrivial homomorphism sends it to minus one and preservation of powers forces uniqueness.",
+          "step": "3.1",
+          "inputs": [
+            "L5",
+            "L6",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 starts with a unit group containing the identity and a nonempty kernel."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The unit-domain restriction explicitly removes the zero class before defining the sign map."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 places the identity in the square kernel and sends it to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned statement records this case. For $p=3$, the two-coset construction is still the unique nontrivial character."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Parity of exponents rather than interval endpoints controls the two cosets."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 selects a primitive root for the fixed group only; it makes no choice over all primes."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Uniqueness of a homomorphism is an equality assertion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition does not characterise arbitrary index-two kernels."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-eulers-criterion-for-legendre-symbol": {
+      "citations": [
+        {
+          "fact": "L9",
+          "source": "lem-prime-not-dividing-is-coprime",
+          "source_section": "Statement",
+          "quote": "In particular, if $p \\nmid a$ then $p$ and $a$ are coprime\n([[def-coprime]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-legendre-symbol",
+          "source_section": "Definition",
+          "quote": "For an odd prime $p$ and integer $a$, the **Legendre symbol** $(a/p)$ is $0$ if $p\\mid a$, $1$ if $a$ is a quadratic residue modulo $p$, and $-1$ if $a$ is a quadratic nonresidue modulo $p$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-eulers-criterion-for-binomial-congruences",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ admit a primitive root, let $\\gcd(a,n)=1$, and let $m\\ge1$. Put $d=\\gcd(m,\\varphi(n))$. Then\n\n$$x^m\\equiv a\\pmod n$$\n\nis solvable if and only if\n\n$$a^{\\varphi(n)/d}\\equiv1\\pmod n.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-primitive-roots-modulo-prime",
+          "source_section": "Statement",
+          "quote": "Every prime $p$ admits a primitive root modulo $p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-totient-at-one-and-at-a-prime",
+          "source_section": "Statement",
+          "quote": "Euler's totient satisfies $\\varphi(1)=1$. If $p$ is prime\n([[def-prime]]), then\n\n$$\\varphi(p)=p-1.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-fermats-little-theorem",
+          "source_section": "Statement",
+          "quote": "Let $p$ be a prime integer and $a\\in\\mathbb Z$. If $p\\nmid a$, then\n\n$$a^{p-1}\\equiv1\\pmod p.$$\n\nFor every integer $a$, without the nondivisibility hypothesis,\n\n$$a^p\\equiv a\\pmod p.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-field-is-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), with addition $+$, multiplication $\\cdot$,\nand distinguished elements $0 \\ne 1$. Then\n\n1. $(F, +, \\cdot, 0, 1)$ is a ring ([[def-ring]]), and it is commutative\n   ([[def-commutative-ring]]), with $1 \\ne 0$;\n2. $F$ is an integral domain ([[def-zero-divisor-and-integral-domain]]);\n3. $F$ is a division ring ([[def-division-ring]]), and hence a commutative\n   division ring.\n\nThe field structure is not changed by this: the ring operations are the field\noperations, and the ring's zero and identity are the field's $0$ and $1$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-root-bound-for-polynomials-over-a-domain",
+          "source_section": "Statement",
+          "quote": "Let $D$ be an integral domain. A nonzero polynomial $f\\in D[x]$ of degree $n$ has at most $n$ distinct roots in $D$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $p$ divides $a$, both the symbol and half-power are congruent to zero.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For a unit, the binomial criterion at exponent two says the half-power is one exactly for squares.",
+          "step": "2.1",
+          "inputs": [
+            "L9",
+            "L2",
+            "L3",
+            "L4",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fermat's theorem makes the half-power a root of $X^2-1$ in the integral domain $\\mathbb Z/p$, whose root bound leaves only one and minus one.",
+          "step": "3.1",
+          "inputs": [
+            "L5",
+            "L6",
+            "L7",
+            "L8"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The nonsquare case cannot give one, so it gives minus one; combine with the divisible case.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Euler's criterion concerns one numerator and no indexed family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats $p\\mid a$, including $a=0$, before any unit argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $a=1$, step 2.1 gives both sides equal to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At the smallest allowed prime $p=3$, step 3.1 still has the two distinct roots $1$ and $-1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The planned statement records this case. Steps 3.1–4.1 account for both roots of $X^2-1$ and assign the square and nonsquare cases."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof invokes primitive-root existence only to discharge a published theorem's hypothesis and selects no root."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The displayed congruence is an equality claim rather than an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse beyond the exact power-residue criterion used in step 2.1 is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-legendre-symbol-multiplicativity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-legendre-symbol",
+          "source_section": "Definition",
+          "quote": "For an odd prime $p$ and integer $a$, the **Legendre symbol** $(a/p)$ is $0$ if $p\\mid a$, $1$ if $a$ is a quadratic residue modulo $p$, and $-1$ if $a$ is a quadratic nonresidue modulo $p$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-unit-criterion-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$\n\nthat is, if and only if $a$ and $n$ are coprime ([[def-coprime]]). Consequently\nthe condition $\\gcd(a,n)=1$ depends only on the class $[a]_n$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-legendre-symbol-on-units-is-homomorphism",
+          "source_section": "Statement",
+          "quote": "Restricted to $(\\mathbb Z/p)^\\times$, the Legendre symbol is the unique nontrivial homomorphism onto $\\{\\pm1\\}$, and its kernel is the subgroup of nonzero squares.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "If $p$ divides either factor, then it divides the product and both sides are zero.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If neither factor is divisible by $p$, both classes are units and the unit Legendre homomorphism is multiplicative.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "A square factor coprime to $p$ has value one and can be removed.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "There are exactly two named factors, so no empty-product convention is used."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats every case where either factor is divisible by $p$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 records that a coprime square, including one, has symbol one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the case where both factors are divisible by $p$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Multiplication of two symbol values has no interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects neither roots nor primitive generators."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Multiplicativity is a direct identity, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse factorisation statement is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-number-of-solutions-to-quadratic-congruence-modulo-prime": {
+      "citations": [
+        {
+          "fact": "L7",
+          "source": "lem-prime-not-dividing-is-coprime",
+          "source_section": "Statement",
+          "quote": "In particular, if $p \\nmid a$ then $p$ and $a$ are coprime\n([[def-coprime]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-legendre-symbol",
+          "source_section": "Definition",
+          "quote": "For an odd prime $p$ and integer $a$, the **Legendre symbol** $(a/p)$ is $0$ if $p\\mid a$, $1$ if $a$ is a quadratic residue modulo $p$, and $-1$ if $a$ is a quadratic nonresidue modulo $p$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-field-is-a-commutative-ring",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), with addition $+$, multiplication $\\cdot$,\nand distinguished elements $0 \\ne 1$. Then\n\n1. $(F, +, \\cdot, 0, 1)$ is a ring ([[def-ring]]), and it is commutative\n   ([[def-commutative-ring]]), with $1 \\ne 0$;\n2. $F$ is an integral domain ([[def-zero-divisor-and-integral-domain]]);\n3. $F$ is a division ring ([[def-division-ring]]), and hence a commutative\n   division ring.\n\nThe field structure is not changed by this: the ring operations are the field\noperations, and the ring's zero and identity are the field's $0$ and $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-number-of-solutions-of-a-binomial-congruence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ admit a primitive root, let $\\gcd(a,n)=1$, and let $m\\ge1$. If $x^m\\equiv a\\pmod n$ is solvable, then it has exactly\n\n$$\\gcd(\\varphi(n),m)$$\n\nsolution classes modulo $n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-primitive-roots-modulo-prime",
+          "source_section": "Statement",
+          "quote": "Every prime $p$ admits a primitive root modulo $p$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-totient-at-one-and-at-a-prime",
+          "source_section": "Statement",
+          "quote": "Euler's totient satisfies $\\varphi(1)=1$. If $p$ is prime\n([[def-prime]]), then\n\n$$\\varphi(p)=p-1.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "When $p$ divides $a$, the field equation $x^2=0$ forces the unique zero class.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A nonzero square has two roots by the specialised binomial count, while a nonresidue has none.",
+          "step": "2.1",
+          "inputs": [
+            "L7",
+            "L4",
+            "L5",
+            "L6",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The three symbol values give solution counts one, two, and zero, equal to $1+(a/p)$.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes a nonresidue's empty solution set and counts it as zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves a divisible target has the unique zero solution class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes target one as a nonzero square with two roots."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At $p=3$, step 3.1 still gives counts one, two, and zero for the three values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Solutions are quotient classes rather than points of a truncated interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof counts classes via published theorems and chooses no representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The numerical formula is not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a solution count to a separate hypothesis is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-quadratic-congruence-discriminant-criterion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-unit-criterion-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$\n\nthat is, if and only if $a$ and $n$ are coprime ([[def-coprime]]). Consequently\nthe condition $\\gcd(a,n)=1$ depends only on the class $[a]_n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-linear-congruence-solvability-and-solution-count",
+          "source_section": "Statement",
+          "quote": "Let $a,b\\in\\mathbb Z$ and $n\\ge1$, and put $d:=\\gcd(a,n)$. The congruence\n\n$$ax\\equiv b\\pmod n$$\n\nhas an integer solution if and only if $d\\mid b$. When it is solvable, it has\nexactly $d$ solution classes in $\\mathbb Z/n$. More explicitly, if\n$a=da'$, $n=dn'$, $b=db'$ and $x_0$ solves\n$a'x_0\\equiv b'\\pmod{n'}$, the solutions modulo $n$ are\n\n$$[x_0+jn']_n\\qquad(0\\le j<d).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-number-of-solutions-to-quadratic-congruence-modulo-prime",
+          "source_section": "Statement",
+          "quote": "For every integer $a$ and odd prime $p$, the congruence $x^2\\equiv a\\pmod p$ has exactly $1+(a/p)$ solution classes modulo $p$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Modulo $p$, multiplication by $4A$ and completing the square yields $(2Ax+B)^2=B^2-4AC$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $p$ is odd and does not divide $A$, the coefficient $2A$ is a unit and the affine change is bijective.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The bijection preserves the number of roots, so apply the quadratic solution-count formula to the discriminant.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 includes a nonsquare discriminant's empty root set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero discriminant, while $B$ and $C$ may also be zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes square discriminant one and its two roots."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The assumptions exclude $A\\equiv0$ and $p=2$, precisely when $2A$ need not be invertible."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The affine map acts on complete residue classes and has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 2.1 uses uniqueness from the linear-congruence theorem, not arbitrary representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is a root-count formula rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse classification of quadratics is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-gauss-half-system-permutation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-standard-representatives-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n$ be a positive integer. Every class in $\\mathbb Z/n$\n([[def-integers-modulo-n]]) contains exactly one integer $r$ with\n$0\\le r<n$. Consequently the map\n\n$$r\\longmapsto[r]_n\\qquad(0\\le r<n)$$\n\nis a bijection from the von Neumann natural $n$ to $\\mathbb Z/n$, and\n$|\\mathbb Z/n|=n$. This includes $n=1$, where the only representative is $0$.\nFor $n=0$, the map $a\\mapsto[a]_0$ is a bijection $\\mathbb Z\\to\\mathbb Z/0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-z-mod-p-is-a-field",
+          "source_section": "Statement",
+          "quote": "For every prime $p$, the operations of addition and multiplication on\n$\\mathbb Z/p$ make it a field ([[def-field]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Each product $aj$ has a unique standard representative and hence a unique sign and absolute representative in the half-system.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Equal absolute representatives give equal or opposite congruences; field cancellation and endpoint bounds force equality in the first case and exclude the second.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The resulting injection of the finite half-system into itself is bijective.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Odd $p\\ge3$ makes the half-system nonempty, and step 1.1 begins with its first index."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The hypothesis $p\\nmid a$ excludes the zero multiplier that would collapse the list."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes $j=1$ in the signed representative construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At $p=3$, the half-system is a singleton and step 3.1 still applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses $1\\le j,k\\le(p-1)/2$ to exclude overflow and opposite-sign coincidence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses unique standard representatives and a determined sign."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The permutation assertion is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about all multipliers inducing such a permutation is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-gauss-quadratic-residue-lemma": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-gauss-half-system-permutation",
+          "source_section": "Statement",
+          "quote": "If $p$ is an odd prime and $p\\nmid a$, then reducing $a,2a,\\ldots,((p-1)/2)a$ to signed representatives in $\\{\\pm1,\\ldots,\\pm(p-1)/2\\}$ uses every absolute representative exactly once.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-monoid-finite-product",
+          "source_section": "Definition",
+          "quote": "Let $(M,\\cdot,e)$ be a monoid ([[def-semigroup-and-monoid]]) and let\n$g : \\mathbb{N} \\to M$ be a family of elements of $M$, written $g_i := g(i)$.\nThere is exactly one function $P_g : \\mathbb{N} \\to M$ satisfying\n\n$$P_g(0) = e, \\qquad P_g(\\sigma(n)) = P_g(n) \\cdot g_n \\quad (n \\in \\mathbb{N}),$$\n\nand we write\n\n$$\\prod_{i<n} g_i \\;:=\\; P_g(n), \\qquad \\text{also written } g_0 g_1 \\cdots g_{n-1}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-unit-criterion-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$\n\nthat is, if and only if $a$ and $n$ are coprime ([[def-coprime]]). Consequently\nthe condition $\\gcd(a,n)=1$ depends only on the class $[a]_n$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-eulers-criterion-for-legendre-symbol",
+          "source_section": "Statement",
+          "quote": "For every integer $a$ and odd prime $p$, $(a/p)\\equiv a^{(p-1)/2}\\pmod p$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-integers-modulo-n-basic-algebra",
+          "source_section": "Statement",
+          "quote": "For every $n\\in\\mathbb N$, with addition and multiplication as in\n[[def-addition-and-multiplication-modulo-n]]:\n\n1. $(\\mathbb Z/n,+,[0]_n)$ is an abelian group ([[def-group]]), with\n   $-[a]_n=[-a]_n$;\n2. $(\\mathbb Z/n,\\cdot,[1]_n)$ is a commutative monoid\n   ([[def-semigroup-and-monoid]]);\n3. multiplication distributes over addition on both sides.\n\nThe assertions include $n=0$ and $n=1$. At $n=1$, the two distinguished\nidentities coincide because $[0]_1=[1]_1$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The half-system lemma gives signed congruences whose absolute representatives are a permutation and whose negative signs are counted by $N(a,p)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Multiplying the finite list gives $a^{(p-1)/2}m!\\equiv(-1)^{N(a,p)}m!$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every factor of $m!$ is a unit modulo $p$, so the product can be cancelled.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Euler's criterion replaces the remaining half-power by the Legendre symbol.",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned statement records this case. At $p=3$ the half-product has one factor, so an empty product never occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis $p\\nmid a$ is carried into step 1.1 before cancellation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $a=1$, step 1.1 has no negative signs and step 4.1 gives symbol one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For $p=3$, step 3.1 cancels the single unit factor."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement uses residues strictly above $p/2$; oddness prevents equality at that boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 receives uniquely determined signs and representatives from the preceding lemma."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Gauss's formula is an equality rather than an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem does not reconstruct the signed list from its final parity."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-first-supplement-to-quadratic-reciprocity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-eulers-criterion-for-legendre-symbol",
+          "source_section": "Statement",
+          "quote": "For every integer $a$ and odd prime $p$, $(a/p)\\equiv a^{(p-1)/2}\\pmod p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-division-algorithm-in-z",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$ ([[def-integers]]) with $b > 0$. Then there exist\nintegers $q$ and $r$ with\n\n$$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$$\n\nand the pair $(q,r)$ with these two properties is unique.\n\nWe say $b$ **divides** $a$, written $b \\mid a$, when $a = qb$ for some\n$q \\in \\mathbb{Z}$; by the above, for $b > 0$ this holds exactly when the\nremainder $r$ is $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Substituting numerator minus one into Euler's criterion gives the sign formula.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Division by four leaves remainder one or three for an odd prime, with the half-exponent respectively even or odd.",
+          "step": "2.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The sign is one exactly when $p\\equiv1\\pmod4$, equivalently when minus one is a square.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns one odd prime and no indexed collection."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The prime parameter cannot be zero, and the fixed numerator is minus one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes $p\\equiv1\\pmod4$ and its even exponent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At $p=3$, step 1.1 gives exponent one and symbol minus one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 exhausts the only odd remainders one and three modulo four."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof is a substitution and parity calculation with no selected element."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The planned statement records this case. Steps 1.1–3.1 show residue one modulo four gives a square."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The remainder-three branch in steps 2.1–3.1 proves the converse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-second-supplement-to-quadratic-reciprocity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-gauss-quadratic-residue-lemma",
+          "source_section": "Statement",
+          "quote": "Let $N(a,p)$ be the number of least positive residues of $aj$ modulo $p$, for $1\\le j\\le(p-1)/2$, that exceed $p/2$. Then $(a/p)=(-1)^{N(a,p)}$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-division-algorithm-in-z",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{Z}$ ([[def-integers]]) with $b > 0$. Then there exist\nintegers $q$ and $r$ with\n\n$$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$$\n\nand the pair $(q,r)$ with these two properties is unique.\n\nWe say $b$ **divides** $a$, written $b \\mid a$, when $a = qb$ for some\n$q \\in \\mathbb{Z}$; by the above, for $b > 0$ this holds exactly when the\nremainder $r$ is $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-congruence-modulo-an-integer",
+          "source_section": "Definition",
+          "quote": "Let $a,b,n\\in\\mathbb Z$. We say that **$a$ is congruent to $b$ modulo $n$**,\nand write\n\n$$a\\equiv b\\pmod n,$$\n\nwhen $n\\mid(a-b)$ in the sense of [[def-divides-in-z]]. Thus there is an integer\n$q$ with $a-b=nq$. The modulus is any integer; it is not required to be positive.\n\nAt modulus $0$, the condition is $0\\mid(a-b)$, which holds exactly when\n$a-b=0$. Hence\n\n$$a\\equiv b\\pmod 0\\quad\\Longleftrightarrow\\quad a=b.$$\n\nAt modulus $1$, every two integers are congruent because $1$ divides every\ninteger. Changing the sign of the modulus changes nothing: $n\\mid(a-b)$ exactly\nwhen $-n\\mid(a-b)$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $a=2$, Gauss's negative signs are exactly the integers $j$ with $p/4<j<p/2$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write $p=8q+r$ with $r$ equal to one, three, five, or seven; in each case the strict crossing interval is an explicit consecutive integer range whose cardinality is respectively $2q$, $2q+1$, $2q+1$, or $2q+2$.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the same four residue cases, direct substitution shows $(p^2-1)/8$ has respectively even, odd, odd, and even parity, matching the crossing count.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Gauss's lemma gives the displayed sign and its equivalent residue classes.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The planned statement records this case. At every odd prime the half-system is nonempty; for $p=3$ it is a singleton."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Neither the prime nor the fixed numerator two is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes residue class one modulo eight and its even exponent."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The planned statement records this case. At $p=3$, steps 1.1–2.1 give one crossing and hence a negative symbol."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses strict inequalities $p/4<j<p/2$; oddness prevents equality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The crossing ranges are determined case by case from the unique division-algorithm quotient and remainder; no element is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The planned statement records this case. Steps 3.1–4.1 prove residue classes one and seven modulo eight give symbol one."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The exhaustive four-case calculation gives symbol minus one in classes three and five."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-quadratic-residues-and-nonresidues-modulo-eleven": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-count-of-quadratic-residues-modulo-prime",
+          "source_section": "Statement",
+          "quote": "For an odd prime $p$, exactly $(p-1)/2$ nonzero classes are quadratic residues and exactly $(p-1)/2$ are nonresidues; each nonzero quadratic residue has exactly two square roots.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-legendre-symbol",
+          "source_section": "Definition",
+          "quote": "For an odd prime $p$ and integer $a$, the **Legendre symbol** $(a/p)$ is $0$ if $p\\mid a$, $1$ if $a$ is a quadratic residue modulo $p$, and $-1$ if $a$ is a quadratic nonresidue modulo $p$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Squaring representatives one through five yields all five nonzero square classes and their paired roots.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The remaining unit classes are nonresidues and zero is separate.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The values one, minus one, and zero give the complete table.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the complementary five nonresidues, so no class is silently omitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned statement records this case. Steps 2.1–3.1 give the zero class its separate symbol value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes $1^2$ and its two roots one and ten."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed modulus eleven is a nondegenerate odd prime."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 squares one through five, exactly one representative from each signed pair."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every representative is listed explicitly in the example."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "A computed table is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse theorem is asserted by this finite table."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-power-residues-modulo-seventeen": {
+      "citations": [
+        {
+          "fact": "L5",
+          "source": "lem-prime-not-dividing-is-coprime",
+          "source_section": "Statement",
+          "quote": "In particular, if $p \\nmid a$ then $p$ and $a$ are coprime\n([[def-coprime]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-eulers-criterion-for-binomial-congruences",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ admit a primitive root, let $\\gcd(a,n)=1$, and let $m\\ge1$. Put $d=\\gcd(m,\\varphi(n))$. Then\n\n$$x^m\\equiv a\\pmod n$$\n\nis solvable if and only if\n\n$$a^{\\varphi(n)/d}\\equiv1\\pmod n.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-primitive-roots-modulo-prime",
+          "source_section": "Statement",
+          "quote": "Every prime $p$ admits a primitive root modulo $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-totient-at-one-and-at-a-prime",
+          "source_section": "Statement",
+          "quote": "Euler's totient satisfies $\\varphi(1)=1$. If $p$ is prime\n([[def-prime]]), then\n\n$$\\varphi(p)=p-1.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-number-of-solutions-of-a-binomial-congruence",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ admit a primitive root, let $\\gcd(a,n)=1$, and let $m\\ge1$. If $x^m\\equiv a\\pmod n$ is solvable, then it has exactly\n\n$$\\gcd(\\varphi(n),m)$$\n\nsolution classes modulo $n$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Primitive-root existence and $\\varphi(17)=16$ specialise the criterion at exponents four and eight.",
+          "step": "1.1",
+          "inputs": [
+            "L5",
+            "L1",
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The target tests identify the fourth-power and eighth-power subgroups.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The published count gives four or eight roots for each soluble target.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "L3",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 finds nonempty power subgroups containing the identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement keeps zero outside the unit-target classification used in steps 1.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes target one and its full set of roots."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed prime seventeen and positive exponents four and eight exclude degenerate parameters."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Targets are complete unit classes, not an interval with omitted endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Primitive-root existence is used as a theorem hypothesis; the displayed lists are deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example applies the forward test when enumerating candidates."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Step 2.1 also spends the reverse direction to certify that every passing target is soluble."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-product-of-two-quadratic-nonresidues-modulo-a-composite": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-quadratic-residue-modulo-n",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$ and let $a\\in\\mathbb Z$ satisfy $\\gcd(a,n)=1$. The integer $a$ is a **quadratic residue modulo $n$** if there is an integer $x$ with $x^2\\equiv a\\pmod n$, and otherwise it is a **quadratic nonresidue modulo $n$**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-quadratic-residue-is-representative-independent",
+          "source_section": "Statement",
+          "quote": "Whether a unit integer is a quadratic residue modulo $n$ depends only on its class in $(\\mathbb Z/n)^\\times$, and the quadratic-residue classes are exactly the image of the squaring map on that group.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-unit-criterion-modulo-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$\n\nthat is, if and only if $a$ and $n$ are coprime ([[def-coprime]]). Consequently\nthe condition $\\gcd(a,n)=1$ depends only on the class $[a]_n$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The unit criterion lists the eight unit classes modulo fifteen, and direct squaring shows their image is exactly the two classes one and four.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given",
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The classes two, seven, and fourteen are units outside the square image, hence all three are quadratic nonresidues.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The product of two and seven is congruent to fourteen modulo fifteen, so two nonresidues have a nonresidue product.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "arithmetic"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The counterexample statement and step 1.1 list a nonempty eight-element unit set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes the zero class through the unit criterion rather than accidentally treating it as a nonresidue witness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the identity class and computes it as a square."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample fixes composite modulus fifteen; neither prime-modulus multiplicativity nor the trivial modulus is being tested."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The witness enumerates complete residue classes modulo fifteen and has no interval endpoint convention."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example names the witnesses two and seven and computes their product explicitly in step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample exhibits failure of a proposed closure rule and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse relationship among composite-modulus residue products is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-unique-cube-root-of-two-modulo-twenty-nine": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-unique-kth-root-modulo-prime-for-coprime-exponent",
+          "source_section": "Statement",
+          "quote": "If $p$ is prime, $k\\ge1$, and $\\gcd(k,p-1)=1$, then every nonzero class $a$ modulo $p$ has a unique $k$-th root. If $k\\ell\\equiv1\\pmod{p-1}$, that root is $a^\\ell$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Coprimality of three and twenty-eight lets the unique-root corollary supply the only cube-root class.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The inverse exponent is nineteen; reducing $2^{19}$ gives $-3$ modulo $29$, and direct cubing verifies $(-3)^3\\equiv2\\pmod{29}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "arithmetic"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example computes one root of one target and has no empty family."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The target two is nonzero modulo twenty-nine."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The exponent is three rather than the boundary exponent one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The modulus is an odd prime and three is coprime to twenty-eight."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The inverse exponent is reduced modulo twenty-eight, not selected by an interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses an inverse class whose representative-independence is part of the cited corollary."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The numerical verification is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No necessity claim about cube-root solvability is made."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-euler-criterion-with-a-large-prime": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-eulers-criterion-for-legendre-symbol",
+          "source_section": "Statement",
+          "quote": "For every integer $a$ and odd prime $p$, $(a/p)\\equiv a^{(p-1)/2}\\pmod p$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A displayed repeated-squaring table computes the required half-power.",
+          "step": "1.1",
+          "inputs": [
+            "arithmetic",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Compare the final residue with one and minus one modulo the prime.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Euler's criterion translates it into the Legendre symbol.",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The repeated-squaring computation has a fixed positive exponent."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The numerator three is not divisible by the stated prime."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly tests whether the result is one before interpreting its sign."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The modulus is a stated large odd prime, not two or a composite."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the initial power and final binary digit in the displayed table."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Repeated squaring is deterministic and chooses no root."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Step 3.1 applies Euler's criterion to a computed half-power."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example claims no converse beyond the cited criterion."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-gauss-lemma-for-three-modulo-eleven": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-gauss-half-system-permutation",
+          "source_section": "Statement",
+          "quote": "If $p$ is an odd prime and $p\\nmid a$, then reducing $a,2a,\\ldots,((p-1)/2)a$ to signed representatives in $\\{\\pm1,\\ldots,\\pm(p-1)/2\\}$ uses every absolute representative exactly once.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-gauss-quadratic-residue-lemma",
+          "source_section": "Statement",
+          "quote": "Let $N(a,p)$ be the number of least positive residues of $aj$ modulo $p$, for $1\\le j\\le(p-1)/2$, that exceed $p/2$. Then $(a/p)=(-1)^{N(a,p)}$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Reduction gives the signed list $3,-5,-2,1,4$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Its absolute values permute one through five and exactly two signs are negative.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Gauss's lemma gives $(3/11)=1$.",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The signed list has the fixed five entries of the half-system."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The multiplier three is a unit modulo eleven."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the signed representative one."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The fixed prime eleven gives a nontrivial half-system."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes both $j=1$ and $j=5$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every least and signed representative is displayed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example evaluates one symbol and states no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No recovery of the multiplier from the sign pattern is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-quadratic-congruence-from-its-discriminant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-quadratic-congruence-discriminant-criterion",
+          "source_section": "Statement",
+          "quote": "If $p$ is an odd prime and $p\\nmid A$, then $Ax^2+Bx+C\\equiv0\\pmod p$ has exactly $1+((B^2-4AC)/p)$ solution classes modulo $p$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The discriminant of $3x^2+4x+1$ modulo eleven is four and has Legendre value one.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The discriminant criterion predicts two solution classes.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Completing the square produces the two roots and substitution checks them.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "arithmetic"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 predicts a nonempty two-root set and step 3.1 exhibits it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 computes and checks that the chosen discriminant is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The polynomial has constant term one, retained in the completed square and final checks."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The leading coefficient three is a unit modulo eleven."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Solutions are residue classes rather than interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both square roots and both linear solutions are enumerated explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the discriminant formula to predict the count."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Direct substitution in step 3.1 verifies both recovered classes."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-squaring-on-units-is-not-a-homomorphism-nonabelian-warning": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-symmetric-group",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **permutation** of $X$ is a bijection $f : X \\to X$\n([[def-injection-surjection-bijection]]). The **symmetric group of $X$** is the\nset of all permutations of $X$,\n\n$$\\operatorname{Sym}(X) \\;:=\\; \\{\\, f : X \\to X \\;:\\; f \\text{ is a bijection} \\,\\},$$\n\nequipped with **composition** as its operation,\n\n$$(f \\circ g)(x) \\;=\\; f(g(x)) \\qquad (x \\in X),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-symmetric-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "For every set $X$, the triple\n$(\\operatorname{Sym}(X), \\circ, \\mathrm{id}_X)$ of [[def-symmetric-group]] is a\ngroup ([[def-group]]); the inverse of a permutation $f$ is its inverse function\n$f^{-1}$.\n\nIf $X$ contains three distinct elements $a$, $b$, $c$, then\n$\\operatorname{Sym}(X)$ is not abelian: the transpositions $\\tau = (a\\,b)$ and\n$\\rho = (b\\,c)$ satisfy $\\tau \\circ \\rho \\ne \\rho \\circ \\tau$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-group-power",
+          "source_section": "Definition",
+          "quote": "**Natural exponents, in a monoid.** Let $(M,\\cdot,e)$ be a monoid\n([[def-semigroup-and-monoid]]) and $g \\in M$. By the recursion theorem\n([[thm-recursion]]), applied with the set $M$, the element $e$ and the function\n$x \\mapsto x \\cdot g$ from $M$ to $M$, there is exactly one function\n$\\mathbb{N} \\to M$, written $n \\mapsto g^{n}$, with\n\n$$g^{0} = e, \\qquad g^{\\sigma(n)} = g^{n} \\cdot g \\quad (n \\in \\mathbb{N}).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-group-power-laws",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group ([[def-group]]) with identity $e$, let $g, h \\in G$, and let\npowers be as in [[def-group-power]]. For all $m, n \\in \\mathbb{Z}$:\n\n1. $g^{m+n} = g^{m} g^{n}$;\n2. $g^{-m} = (g^{m})^{-1}$;\n3. $(g^{m})^{n} = g^{mn}$;\n4. $g^{m} g^{n} = g^{n} g^{m}$: any two powers of one element commute;\n5. **if $gh = hg$** then $(gh)^{n} = g^{n} h^{n}$.\n\nClaim 5 is **false in general without its hypothesis**: in a group in which $g$\nand $h$ do not commute the equation can fail already at $n = 2$, and a witness is\nrecorded on the companion page.\n\nClaims 1 and 3 hold in any monoid ([[def-semigroup-and-monoid]]) for exponents in\n$\\mathbb{N}$, and so does claim 5 for exponents in $\\mathbb{N}$ under the same\ncommuting hypothesis; only the extension to negative exponents needs inverses.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "Let $G$ and $G'$ be groups ([[def-group]]). A **group homomorphism** from $G$ to\n$G'$ is a function $f : G \\to G'$ satisfying (H1) alone:\n\n$$f(xy) \\;=\\; f(x)\\, f(y) \\qquad \\text{for all } x, y \\in G .$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "In the symmetric group on three points, two transpositions have a noncommuting three-cycle product.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The transpositions square to the identity while their product's square is a nonidentity three-cycle.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Thus squaring violates the homomorphism law.",
+          "step": "3.1",
+          "inputs": [
+            "L5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness uses a three-element underlying set."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The group computation has no scalar zero or zero divisor."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the identity squares of both transpositions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 selects two distinct noncommuting transpositions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A finite permutation witness has no ordered interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The two witness permutations are explicitly named in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 directly exhibits failure of the homomorphism equation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff characterisation of squaring homomorphisms is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-quadratic-residue-definition-excludes-nonunits": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-number-of-solutions-to-quadratic-congruence-modulo-prime",
+          "source_section": "Statement",
+          "quote": "For every integer $a$ and odd prime $p$, the congruence $x^2\\equiv a\\pmod p$ has exactly $1+(a/p)$ solution classes modulo $p$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-quadratic-residue-modulo-n",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge2$ and let $a\\in\\mathbb Z$ satisfy $\\gcd(a,n)=1$. The integer $a$ is a **quadratic residue modulo $n$** if there is an integer $x$ with $x^2\\equiv a\\pmod n$, and otherwise it is a **quadratic nonresidue modulo $n$**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-legendre-symbol",
+          "source_section": "Definition",
+          "quote": "For an odd prime $p$ and integer $a$, the **Legendre symbol** $(a/p)$ is $0$ if $p\\mid a$, $1$ if $a$ is a quadratic residue modulo $p$, and $-1$ if $a$ is a quadratic nonresidue modulo $p$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The congruence $x^2\\equiv0\\pmod p$ has the unique zero solution.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Zero is nevertheless outside the coprime residue/nonresidue dichotomy and has Legendre value zero.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a singleton solution set rather than an empty one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The planned statement records this case. Zero is the witness: steps 1.1–2.1 separate solvability from the unit labels."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The witness is deliberately zero, so the unit value one is irrelevant."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement restricts to odd primes, where the unique-zero-root argument applies."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The zero quotient class is not an interval endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The planned statement records this case. The witness is explicitly the zero class."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The example refutes the attempted implication from solvability to quadratic-residue status."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not dispute that every quadratic residue gives a soluble congruence."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

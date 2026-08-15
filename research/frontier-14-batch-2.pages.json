@@ -11,7 +11,132 @@
       "approximation-and-compactness-in-ck",
       "compactness"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-compact-open-topology-for-topological-domains",
+        "kind": "definition",
+        "title": "The compact-open topology on $C(X,Y)$ for arbitrary topological spaces",
+        "deps": ["def-compact-space", "def-continuous-map-top", "def-topology-basis-subbasis"]
+      },
+      {
+        "id": "prop-general-compact-open-topology-agrees-with-the-metric-definition",
+        "kind": "proposition",
+        "title": "The general compact-open topology agrees with the published metric-domain definition",
+        "strategy": "For a metric space with its metric topology, invoke the exact equivalence between topological and metric compact subsets. The two subbasic families $S(K,V)$ are then literally equal, including $K=\\varnothing$ and $V=Y$.",
+        "deps": ["def-compact-open-topology-for-topological-domains", "def-compact-open-topology", "thm-compactness-agrees-with-metric-compactness"]
+      },
+      {
+        "id": "def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness",
+        "kind": "definition",
+        "title": "Equicontinuity on a topological domain and pointwise relative compactness",
+        "deps": ["def-neighbourhood-top", "def-metric-space", "def-compact-space", "def-continuous-map-top", "def-interior-closure-boundary-top"]
+      },
+      {
+        "id": "prop-topological-domain-equicontinuity-agrees-with-metric-equicontinuity",
+        "kind": "proposition",
+        "title": "Topological-domain equicontinuity agrees with metric equicontinuity on a metric domain",
+        "strategy": "Translate a neighbourhood of the point into a contained metric ball for one direction and take the metric ball supplied by the epsilon-delta definition for the other. Preserve the order of quantifiers: the same neighbourhood or radius serves every member of the family.",
+        "deps": ["def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness", "def-equicontinuity", "lem-metric-ball-neighbourhood-base"]
+      },
+      {
+        "id": "thm-evaluation-is-continuous-for-a-locally-compact-hausdorff-domain",
+        "kind": "theorem",
+        "title": "Evaluation is continuous for the compact-open topology on a locally compact Hausdorff domain",
+        "strategy": "At $(f,x)$ and an open target neighbourhood $W$ of $f(x)$, shrink the open set $f^{-1}[W]$ to an open $U$ whose compact closure $K$ stays inside it. Then $S(K,W)\\times U$ is a product neighbourhood mapped into $W$. Handle the empty domain vacuously; no separation or metric is required on the target.",
+        "deps": ["def-compact-open-topology-for-topological-domains", "thm-locally-compact-hausdorff-basics", "def-product-topology", "def-continuous-map-top"]
+      },
+      {
+        "id": "thm-pointwise-compactness-criterion-for-function-families",
+        "kind": "theorem",
+        "title": "Under Choice, pointwise closure is compact exactly when every coordinate set has compact closure",
+        "strategy": "For necessity apply each continuous coordinate projection to the compact pointwise closure. For sufficiency put the family inside the product of the compact coordinate closures, use Tychonoff under the stated Axiom of Choice, and take its closure there. Because the metric target is Hausdorff, the compact coordinate closures are closed in the full target, so this relative closure is exactly the closure in the full product.",
+        "deps": ["def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness", "def-topology-of-pointwise-convergence", "thm-tychonoff", "thm-closed-subspace-of-a-compact-space-is-compact", "thm-compact-subset-of-a-hausdorff-space-is-closed", "thm-compactness-under-continuous-maps"]
+      },
+      {
+        "id": "lem-pointwise-closure-preserves-equicontinuity",
+        "kind": "lemma",
+        "title": "The pointwise closure of an equicontinuous family is equicontinuous and consists of continuous maps",
+        "strategy": "Fix $x$ and an epsilon and take the neighbourhood that works for the original family at epsilon divided into three parts. For a pointwise-limit candidate and $y$ in that neighbourhood, a basic pointwise neighbourhood controlling the two coordinates $x,y$ meets the original family; the triangle inequality transfers the common estimate. The resulting estimate is uniform over the closure and also proves each candidate continuous.",
+        "deps": ["def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness", "def-topology-of-pointwise-convergence", "def-product-topology"]
+      },
+      {
+        "id": "lem-compact-open-and-pointwise-topologies-agree-on-an-equicontinuous-family",
+        "kind": "lemma",
+        "title": "The compact-open and pointwise topologies agree on an equicontinuous family",
+        "strategy": "Pointwise subbasic conditions are compact-open conditions on singletons. Conversely, around $f$ in a compact-open subbasic set $S(K,V)$, use compactness of $f[K]$ and the metric target to obtain finitely many value tolerances inside $V$; equicontinuity and continuity give a finite cover of $K$. Conditions at the finitely many chosen coordinates then force every member of the family to map $K$ into $V$. Treat $K=\\varnothing$ and $V=Y$ before invoking positive tolerances.",
+        "deps": ["def-compact-open-topology-for-topological-domains", "def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness", "def-topology-of-pointwise-convergence", "lem-compactness-of-a-subspace-is-ambient", "thm-compactness-under-continuous-maps"]
+      },
+      {
+        "id": "thm-ascoli-arzela-sufficiency",
+        "kind": "theorem",
+        "title": "Under Choice, equicontinuity and pointwise relative compactness give compact compact-open closure",
+        "strategy": "Take the pointwise closure $H$. The pointwise compactness criterion makes $H$ compact, and pointwise closure preserves equicontinuity and continuity. On $H$ the pointwise and compact-open subspace topologies agree, so $H$ is compact in the compact-open topology and the original family is dense there; hence $H$ is its compact-open closure. State the Axiom of Choice exactly where Tychonoff is invoked.",
+        "deps": ["thm-pointwise-compactness-criterion-for-function-families", "lem-pointwise-closure-preserves-equicontinuity", "lem-compact-open-and-pointwise-topologies-agree-on-an-equicontinuous-family"]
+      },
+      {
+        "id": "thm-compact-function-families-are-equicontinuous-on-a-locally-compact-hausdorff-domain",
+        "kind": "theorem",
+        "title": "A compact compact-open family is equicontinuous on a locally compact Hausdorff domain",
+        "strategy": "Use joint continuity of evaluation on the compact family times the domain. At a fixed domain point and target tolerance, each function has a product neighbourhood on which two evaluations stay close to its value at that point. Compactness of the family produces finitely many function-neighbourhoods; intersect the corresponding domain-neighbourhoods to obtain one neighbourhood serving the whole family.",
+        "deps": ["thm-evaluation-is-continuous-for-a-locally-compact-hausdorff-domain", "lem-compactness-of-a-subspace-is-ambient", "def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness"]
+      },
+      {
+        "id": "prop-compact-function-families-are-pointwise-relatively-compact",
+        "kind": "proposition",
+        "title": "Every compact compact-open family is pointwise relatively compact",
+        "strategy": "Evaluation at a fixed point is continuous because its inverse images are the compact-open subbasic sets on the compact singleton. Its image of the compact family is compact. In the Hausdorff metric target that image is closed, so it already equals the closure of the coordinate-value set.",
+        "deps": ["def-compact-open-topology-for-topological-domains", "def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness", "thm-compactness-under-continuous-maps", "thm-compact-subset-of-a-hausdorff-space-is-closed"]
+      },
+      {
+        "id": "thm-ascoli-arzela-general",
+        "kind": "theorem",
+        "title": "General Ascoli theorem for locally compact Hausdorff domains and metric targets",
+        "strategy": "Assume Choice. If the compact-open closure is compact, apply compact-family equicontinuity to that closure and restrict to the original family; apply continuous evaluation to obtain pointwise relative compactness. Conversely apply the general sufficiency theorem, which does not need local compactness. State the result as an iff for compactness of the closure, not merely sequential compactness.",
+        "deps": ["thm-ascoli-arzela-sufficiency", "thm-compact-function-families-are-equicontinuous-on-a-locally-compact-hausdorff-domain", "prop-compact-function-families-are-pointwise-relatively-compact"]
+      },
+      {
+        "id": "cor-ascoli-arzela-for-compact-hausdorff-domains",
+        "kind": "corollary",
+        "title": "Ascoli–Arzelà for a compact Hausdorff domain",
+        "strategy": "A compact Hausdorff space is locally compact because the whole space is a compact neighbourhood of every point. Substitute this into the general theorem, retaining the metric target, pointwise relative compactness, the compact-open topology, and the explicit Choice hypothesis.",
+        "deps": ["thm-ascoli-arzela-general", "def-compact-space"]
+      },
+      {
+        "id": "prop-compact-open-is-uniform-on-a-compact-metric-domain",
+        "kind": "proposition",
+        "title": "On a nonempty compact metric domain, the compact-open topology is the uniform topology",
+        "strategy": "Use the published equality of compact-open and compact convergence. Every compact-convergence basic condition is implied by a uniform ball, while taking the compact set to be the whole domain makes each sufficiently small uniform ball a compact-convergence basic set. Keep the nonempty-domain hypothesis required by the published uniform metric.",
+        "deps": ["thm-compact-open-equals-compact-convergence", "def-topology-of-compact-convergence", "def-topology-of-uniform-convergence"]
+      },
+      {
+        "id": "cor-ascoli-arzela-for-compact-metric-domains",
+        "kind": "corollary",
+        "title": "Ascoli–Arzelà in the uniform topology for compact metric domains",
+        "strategy": "Use the metric/topological agreement for equicontinuity and the equality of compact-open and uniform topologies on a compact metric domain. The general theorem then says exactly that the uniform closure is compact iff the family is metric-equicontinuous and pointwise relatively compact.",
+        "deps": ["cor-ascoli-arzela-for-compact-hausdorff-domains", "prop-compact-open-is-uniform-on-a-compact-metric-domain", "prop-topological-domain-equicontinuity-agrees-with-metric-equicontinuity", "thm-compactness-agrees-with-metric-compactness"]
+      },
+      {
+        "id": "cor-compact-subsets-of-cx-for-a-proper-metric-target",
+        "kind": "corollary",
+        "title": "For a proper metric target, compact subsets of $C(X,Y)$ are exactly the closed, pointwise bounded, equicontinuous families",
+        "strategy": "Let $X$ be a nonempty compact metric space and let every closed bounded subset of $Y$ be compact. Compactness implies closedness in the uniform metric, equicontinuity, and pointwise boundedness. Conversely, each bounded coordinate set has compact closure inside a closed ball; Ascoli makes the family closure compact, and assumed closedness identifies the family with that closure. Record the Choice hypothesis inherited from Ascoli. The real and complex scalar cases are applications once their properness is available in a declared closure.",
+        "deps": ["cor-ascoli-arzela-for-compact-metric-domains", "thm-closed-subspace-of-a-compact-space-is-compact", "thm-compact-subset-of-a-hausdorff-space-is-closed"]
+      },
+      {
+        "id": "cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets",
+        "kind": "corollary",
+        "title": "A pointwise bounded equicontinuous sequence into a proper metric target has a uniformly convergent subsequence",
+        "strategy": "Follow Shapiro's proof in its natural proper-target generality. Use finite $1/n$-nets to build a countable dense subset of the compact metric domain, successively extract coordinate-convergent subsequences inside compact closed balls, and take the diagonal. Equicontinuity and a finite net make the diagonal subsequence uniformly Cauchy. A proper metric space is complete because a Cauchy sequence is eventually trapped in a compact closed ball; the uniform-limit theorem then gives a continuous uniform limit. Charge Countable Choice and Dependent Choice explicitly; the page's full Choice hypothesis is a valid upper bound.",
+        "deps": ["cor-compact-subsets-of-cx-for-a-proper-metric-target", "thm-metric-compactness-equivalences", "thm-function-space-is-complete-for-a-complete-target", "thm-uniform-limit-theorem"]
+      },
+      {
+        "id": "cor-equicontinuous-families-into-a-compact-metric-target",
+        "kind": "corollary",
+        "title": "Under Choice, an equicontinuous family into a compact metric target has compact compact-open closure",
+        "strategy": "Every coordinate-value set lies in the compact target, so its closure is compact as a closed subset. Apply Ascoli sufficiency. This corollary intentionally needs no local compactness of the domain because only the sufficient direction is used.",
+        "deps": ["thm-ascoli-arzela-sufficiency", "thm-closed-subspace-of-a-compact-space-is-compact"]
+      }
+    ]
   },
   {
     "order": 286,
@@ -19,10 +144,45 @@
     "kind": "B",
     "category": "topology",
     "title": "The Ascoli–Arzelà Theorem: Examples and Counterexamples",
-    "requires": [
-      "ascoli-arzela"
-    ],
-    "items": []
+    "companion": "ascoli-arzela",
+    "requires": ["ascoli-arzela"],
+    "items": [
+      {
+        "id": "ex-ascoli-on-a-finite-discrete-domain",
+        "kind": "example",
+        "title": "For finite discrete $X$ and compact metric $Y$, the whole space $C(X,Y)$ is compact",
+        "strategy": "Every map from finite discrete $X$ is continuous and the whole family is equicontinuous because the singleton neighbourhood of a point works for every member. Each coordinate set is $Y$, hence compact; apply Ascoli. Include $X=\\varnothing$, where the function space is a singleton.",
+        "deps": ["cor-ascoli-arzela-for-compact-hausdorff-domains", "def-standard-topologies"]
+      },
+      {
+        "id": "ex-compact-families-of-constant-maps",
+        "kind": "example",
+        "title": "A compact set of target values gives a compact family of constant maps",
+        "strategy": "For nonempty locally compact Hausdorff $X$ and compact $K$ in a metric target, the family $c_y(x)=y$ for $y\\in K$ is equicontinuous and has coordinate set $K$ at every point, hence is compact by Ascoli. Evaluation at any fixed point is the inverse of $y\\mapsto c_y$, so the parameterisation is a homeomorphism onto the family.",
+        "deps": ["thm-ascoli-arzela-general", "def-compact-open-topology-for-topological-domains"]
+      },
+      {
+        "id": "cex-boundedness-does-not-replace-pointwise-relative-compactness",
+        "kind": "counterexample",
+        "title": "Boundedness does not replace pointwise relative compactness for an arbitrary metric target",
+        "strategy": "Take a one-point domain and an infinite set with the discrete metric of diameter one as target. All constant maps form an equicontinuous and pointwise bounded family, but evaluation identifies its closure with the infinite discrete target, whose singleton open cover has no finite subcover. Thus the family is not compact.",
+        "deps": ["thm-ascoli-arzela-general", "def-standard-topologies", "def-metric-space"]
+      },
+      {
+        "id": "ex-translated-tent-functions-converge-in-the-compact-open-topology",
+        "kind": "example",
+        "title": "Translated tent functions on $\\mathbb R$ converge to zero in the compact-open topology",
+        "strategy": "Let $b(x)=\\max\\{1-|x|,0\\}$ and $f_n(x)=b(x-n)$. The family has common Lipschitz constant one and coordinate values in $[0,1]$. Every compact subset of $\\mathbb R$ is bounded, so it misses the supports for all sufficiently large $n$; hence $f_n$ converges uniformly on each compact set, though not uniformly on all of $\\mathbb R$ because $f_n(n)=1$.",
+        "deps": ["def-compact-open-topology-for-topological-domains", "prop-general-compact-open-topology-agrees-with-the-metric-definition", "thm-compact-open-equals-compact-convergence", "thm-heine-borel-rn"]
+      },
+      {
+        "id": "ex-compact-affine-interpolation-family",
+        "kind": "example",
+        "title": "Affine interpolants with endpoints in a compact rectangle form a compact family",
+        "strategy": "For $(a,b)$ in a fixed compact rectangle of $\\mathbb R^2$, put $f_{a,b}(t)=(1-t)a+tb$ on $[0,1]$. A common endpoint bound gives a common Lipschitz constant, hence equicontinuity, and each coordinate image is a compact interval as the continuous image of the parameter rectangle. Apply Ascoli and identify the endpoint evaluations as continuous coordinates of the family.",
+        "deps": ["cor-ascoli-arzela-for-compact-metric-domains", "thm-compactness-under-continuous-maps", "thm-heine-borel-rn"]
+      }
+    ]
   },
   {
     "order": 287,
@@ -36,7 +196,136 @@
       "approximation-and-compactness-in-ck",
       "compactness"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-separating-real-function-lattice",
+        "kind": "definition",
+        "title": "Unital point-separating real vector sublattices of $C(X,\\mathbb R)$",
+        "deps": ["def-function-space", "def-continuous-map-top", "def-compact-space"]
+      },
+      {
+        "id": "def-unital-separating-real-function-algebra-general",
+        "kind": "definition",
+        "title": "Unital, point-separating, and nowhere-vanishing real function algebras on a compact Hausdorff space",
+        "deps": ["def-function-space", "def-continuous-map-top", "def-compact-space"]
+      },
+      {
+        "id": "def-complex-scalar-pairs-for-stone-weierstrass",
+        "kind": "definition",
+        "title": "Complex scalars as real coordinate pairs, with conjugation and modulus",
+        "deps": ["def-function-space", "thm-reals-ordered-field", "thm-of-square-roots", "lem-metrics-on-rn"]
+      },
+      {
+        "id": "thm-complex-scalar-pair-field-and-conjugation-laws",
+        "kind": "theorem",
+        "title": "The real coordinate pairs form a field and conjugation is an isometric involutive real automorphism",
+        "strategy": "With $(a,b)(c,d)=(ac-bd,ad+bc)$, verify the field laws by coordinate algebra, take $i=(0,1)$, and give the inverse of nonzero $(a,b)$ as $(a,-b)/(a^2+b^2)$. Prove the real and imaginary decompositions, the conjugation laws, $z\\overline z=|z|^2$, and the triangle inequality from the two-dimensional Cauchy–Schwarz identity. This locally re-mints only the scalar facts required here because the published complex-number page is outside order 287's declared closure.",
+        "deps": ["def-complex-scalar-pairs-for-stone-weierstrass", "lem-of-square-positive", "lem-of-square-monotone"]
+      },
+      {
+        "id": "def-self-adjoint-complex-function-algebra",
+        "kind": "definition",
+        "title": "Self-adjoint unital complex function algebras and point separation",
+        "deps": ["def-function-space", "def-continuous-map-top", "thm-complex-scalar-pair-field-and-conjugation-laws", "def-compact-space"]
+      },
+      {
+        "id": "prop-general-real-function-algebra-agrees-with-the-metric-definition",
+        "kind": "proposition",
+        "title": "The general real function-algebra definition agrees with the published compact-metric definition",
+        "strategy": "On a nonempty compact metric space compare the clauses one by one: both require every constant function and closure under pointwise real linear combinations and multiplication, and both use the same quantified point-separation condition. No topological theorem beyond the identity of the ambient $C(K,\\mathbb R)$ is needed.",
+        "deps": ["def-unital-separating-real-function-algebra-general", "def-unital-separating-real-function-algebra"]
+      },
+      {
+        "id": "lem-two-point-interpolation-for-a-separating-real-function-lattice",
+        "kind": "lemma",
+        "title": "A unital separating real function lattice interpolates arbitrary values at two distinct points",
+        "strategy": "For distinct $x,y$, choose a separator $g$ and apply an affine rescaling so that its values at $x,y$ are the prescribed pair; vector-space and constant closure keep the rescaling in the lattice. When the two-point sweep later encounters $x=y$, use the corresponding constant function rather than invoking this distinct-point lemma.",
+        "deps": ["def-separating-real-function-lattice"]
+      },
+      {
+        "id": "lem-two-compact-cover-sweeps-for-function-lattices",
+        "kind": "lemma",
+        "title": "Two compact-cover sweeps turn two-point interpolation into uniform approximation",
+        "strategy": "Fix $f$ and a positive error. For each $x$, use two-point interpolation against every $y$ and continuity to obtain functions that are below $f+\\varepsilon$ near $y$ while fixed at $x$; compactness of $X$ leaves finitely many, and their pointwise maximum gives $g_x$ with $g_x>f-\\varepsilon$ near $x$ and $g_x<f+\\varepsilon$ everywhere. A second finite cover in $x$ and the pointwise minimum of the resulting $g_x$ gives one lattice member within $\\varepsilon$ everywhere. Define the covering families by properties and make only finite choices.",
+        "deps": ["lem-two-point-interpolation-for-a-separating-real-function-lattice", "lem-compactness-of-a-subspace-is-ambient"]
+      },
+      {
+        "id": "thm-lattice-stone-weierstrass",
+        "kind": "theorem",
+        "title": "Lattice Stone–Weierstrass theorem on a compact Hausdorff space",
+        "strategy": "Apply the two-sweep lemma to every target $f\\in C(X,\\mathbb R)$ and every positive error. This is exactly uniform density of the unital separating vector sublattice. The empty compact space is handled separately by the uniqueness of its real-valued function.",
+        "deps": ["lem-two-compact-cover-sweeps-for-function-lattices", "def-topology-of-uniform-convergence"]
+      },
+      {
+        "id": "lem-uniform-closure-of-a-general-real-function-algebra-is-a-lattice",
+        "kind": "lemma",
+        "title": "The uniform closure of a real function algebra is a vector lattice",
+        "strategy": "First verify that uniform limits preserve the algebra operations. For $f$ in the closure, bound its compact image in $[-M,M]$ and use polynomial approximation of $|t|$ there, choosing polynomials with the required constant term adjustment, to place $|f|$ in the closure. Then use $f\\vee g=(f+g+|f-g|)/2$ and $f\\wedge g=(f+g-|f-g|)/2$. Treat $M=0$ separately.",
+        "deps": ["def-unital-separating-real-function-algebra-general", "cor-weierstrass-approximation-on-a-closed-interval", "thm-uniform-limit-theorem", "thm-compactness-under-continuous-maps"]
+      },
+      {
+        "id": "thm-real-stone-weierstrass-general",
+        "kind": "theorem",
+        "title": "Real Stone–Weierstrass theorem for compact Hausdorff spaces",
+        "strategy": "The uniform closure of the unital separating algebra remains unital and separating and is a real vector lattice by the closure lemma. Apply lattice Stone–Weierstrass to that closure; being both dense and closed, it is all of $C(X,\\mathbb R)$. Include the empty-space boundary directly.",
+        "deps": ["lem-uniform-closure-of-a-general-real-function-algebra-is-a-lattice", "thm-lattice-stone-weierstrass"]
+      },
+      {
+        "id": "lem-nowhere-vanishing-algebras-approximate-the-constant-one",
+        "kind": "lemma",
+        "title": "A nowhere-vanishing real function algebra on a compact space approximates the constant one",
+        "strategy": "For every point some algebra member is nonzero there. Compactness reduces the corresponding nonzero neighbourhoods to finitely many, and the sum of their squares is an algebra member $h$ with a positive minimum $m$ and finite maximum $M$. Approximate $1/t$ on $[m,M]$ by a polynomial $p$; then $hp(h)$ belongs to the nonunital algebra and uniformly approximates one. Handle the empty domain and the one-point range $m=M$ explicitly.",
+        "deps": ["def-unital-separating-real-function-algebra-general", "lem-compactness-of-a-subspace-is-ambient", "thm-compactness-under-continuous-maps", "cor-weierstrass-approximation-on-a-closed-interval"]
+      },
+      {
+        "id": "cor-real-stone-weierstrass-nowhere-vanishing-form",
+        "kind": "corollary",
+        "title": "A point-separating nowhere-vanishing real function algebra is uniformly dense",
+        "strategy": "Its uniform closure is an algebra, still separates points, and contains the constant one by the preceding lemma. Apply the unital real Stone–Weierstrass theorem to that closure and conclude that the original algebra is dense.",
+        "deps": ["lem-nowhere-vanishing-algebras-approximate-the-constant-one", "thm-real-stone-weierstrass-general"]
+      },
+      {
+        "id": "lem-real-part-of-a-self-adjoint-complex-function-algebra",
+        "kind": "lemma",
+        "title": "The real-valued part of a self-adjoint complex function algebra is a separating real function algebra",
+        "strategy": "Self-adjointness puts $(f+\\overline f)/2$ and $(f-\\overline f)/(2i)$ in the algebra, so the real and imaginary parts of every member lie in its real-valued part. If $f$ separates two points, at least one of those two parts separates them. Check real scalar and product closure pointwise.",
+        "deps": ["def-self-adjoint-complex-function-algebra", "def-unital-separating-real-function-algebra-general", "thm-complex-scalar-pair-field-and-conjugation-laws"]
+      },
+      {
+        "id": "thm-complex-stone-weierstrass-self-adjoint",
+        "kind": "theorem",
+        "title": "Complex Stone–Weierstrass theorem for self-adjoint algebras",
+        "strategy": "Apply the real theorem to the real-valued part of the algebra. Approximate the real and imaginary parts of an arbitrary continuous complex function separately by real-valued algebra members, then combine them as $u+iv$. Self-adjointness is stated as a hypothesis and is not inferred from point separation.",
+        "deps": ["lem-real-part-of-a-self-adjoint-complex-function-algebra", "thm-real-stone-weierstrass-general"]
+      },
+      {
+        "id": "cor-self-adjoint-algebra-generated-by-a-separating-family-is-dense",
+        "kind": "corollary",
+        "title": "The unital algebra generated by a separating complex family and its conjugates is dense",
+        "strategy": "The generated algebra contains constants, retains the original separating family, and is closed under conjugation because the generators occur in conjugate pairs and conjugation reverses neither pointwise sums nor products in the commutative scalar field. Apply complex Stone–Weierstrass.",
+        "deps": ["thm-complex-stone-weierstrass-self-adjoint", "def-self-adjoint-complex-function-algebra"]
+      },
+      {
+        "id": "lem-dyadic-root-of-unity-filter",
+        "kind": "lemma",
+        "title": "A finite dyadic root-of-unity filter annihilates all positive powers through any prescribed degree",
+        "strategy": "Given a natural degree bound $m$, choose a power of two $N>m+1$. Starting from $-1$, recursively take the explicit unit-circle square root with nonnegative real coordinate (taking $i$ at the first zero-imaginary step) to construct a primitive $N$th root $\\zeta$. For each $1\\le j\\le m+1$, field cancellation in the finite geometric-sum identity gives $\\sum_{k=0}^{N-1}\\zeta^{jk}=0$, since primitivity gives $\\zeta^j\\ne1$. All powers are natural powers; no canonical embedding notation is applied to an index.",
+        "deps": ["thm-complex-scalar-pair-field-and-conjugation-laws", "thm-of-archimedean", "thm-of-square-roots", "thm-recursion"]
+      },
+      {
+        "id": "def-function-algebra-indistinguishability-quotient",
+        "kind": "definition",
+        "title": "The quotient that identifies points indistinguishable by a real function algebra",
+        "deps": ["def-unital-separating-real-function-algebra-general", "def-quotient-topology"]
+      },
+      {
+        "id": "thm-closed-real-function-algebras-are-function-spaces-on-their-quotients",
+        "kind": "theorem",
+        "title": "A closed unital real function algebra is $C(Y,\\mathbb R)$ on its indistinguishability quotient",
+        "strategy": "Let $q:X\\to Y$ be the quotient by equality of all algebra values. Each algebra member descends uniquely and continuously; the descended algebra separates points. The quotient is compact as a continuous image and Hausdorff because a descended real function separates any two distinct classes. Real Stone–Weierstrass makes the descended algebra dense in $C(Y,\\mathbb R)$; pulling a uniform approximation back along the surjective $q$ and using closedness of the original algebra upgrades density to equality and yields an isometric algebra isomorphism.",
+        "deps": ["def-function-algebra-indistinguishability-quotient", "thm-compactness-under-continuous-maps", "thm-real-stone-weierstrass-general", "def-quotient-topology"]
+      }
+    ]
   },
   {
     "order": 288,
@@ -44,9 +333,51 @@
     "kind": "B",
     "category": "topology",
     "title": "Stone–Weierstrass in General: Examples and Counterexamples",
-    "requires": [
-      "stone-weierstrass-general"
-    ],
-    "items": []
+    "companion": "stone-weierstrass-general",
+    "requires": ["stone-weierstrass-general"],
+    "items": [
+      {
+        "id": "cex-disc-algebra-is-not-dense-without-self-adjointness",
+        "kind": "counterexample",
+        "title": "The disc algebra is unital and separating but not self-adjoint or dense",
+        "strategy": "On the closed unit disc let $A$ be the uniform closure of polynomials in $z$. It is a closed unital separating algebra. If $\\overline z$ were in $A$, choose a polynomial $p$ uniformly closer than one to it and choose a root-of-unity order larger than $\\deg p+1$. Averaging $\\zeta p(\\zeta)$ over all roots gives zero term by term, while averaging $\\zeta\\overline\\zeta$ gives one, contradicting the uniform error. Hence $A$ is not self-adjoint and, being closed and proper, is not dense.",
+        "deps": ["def-self-adjoint-complex-function-algebra", "lem-dyadic-root-of-unity-filter", "thm-complex-scalar-pair-field-and-conjugation-laws"]
+      },
+      {
+        "id": "ex-trigonometric-polynomials-are-dense-on-the-circle",
+        "kind": "example",
+        "title": "Trigonometric polynomials are uniformly dense on the circle",
+        "strategy": "Identify trigonometric polynomials with finite linear combinations of products of the coordinate $z$ and its conjugate on the unit circle. They contain constants, are self-adjoint, and the coordinate function separates points. Apply complex Stone–Weierstrass; no Fourier convergence theorem is used.",
+        "deps": ["thm-complex-stone-weierstrass-self-adjoint", "def-self-adjoint-complex-function-algebra"]
+      },
+      {
+        "id": "ex-distance-function-lattice-is-dense-on-a-compact-metric-space",
+        "kind": "example",
+        "title": "The lattice generated by distance functions is dense on every compact metric space",
+        "strategy": "Let $L$ be the smallest real vector sublattice containing constants and all functions $d(a,-)$. Every distance function is continuous, and for $x\\ne y$ the function $d(x,-)$ takes the distinct values $0$ and $d(x,y)$. Thus $L$ separates points and lattice Stone–Weierstrass applies.",
+        "deps": ["thm-lattice-stone-weierstrass", "def-separating-real-function-lattice", "def-metric-space"]
+      },
+      {
+        "id": "ex-finite-space-function-algebras-interpolate-exactly",
+        "kind": "example",
+        "title": "On a finite space a unital separating algebra interpolates every function exactly",
+        "strategy": "For each point $x$ and every other point $y$, normalize a separator to equal one at $x$ and zero at $y$. Their finite product is the indicator of $x$. Linear combinations of these indicators reproduce every real- or complex-valued function exactly. Treat the empty and one-point spaces separately.",
+        "deps": ["def-unital-separating-real-function-algebra-general", "def-self-adjoint-complex-function-algebra"]
+      },
+      {
+        "id": "ex-two-point-duplication-algebra-and-its-quotient",
+        "kind": "example",
+        "title": "Endpoint-duplicating functions on $[0,1]$ become all continuous functions on the endpoint quotient",
+        "strategy": "Take the real algebra of continuous functions on $[0,1]$ satisfying $f(0)=f(1)$. It is closed and unital. Explicit piecewise-linear tent functions with equal endpoint values separate every pair not equal to the endpoint pair, so its indistinguishability quotient identifies exactly $0$ and $1$. The quotient representation theorem identifies the algebra isometrically with all continuous real functions on that quotient.",
+        "deps": ["thm-closed-real-function-algebras-are-function-spaces-on-their-quotients", "def-function-algebra-indistinguishability-quotient"]
+      },
+      {
+        "id": "ex-polynomial-algebra-is-dense-but-not-closed-on-an-interval",
+        "kind": "example",
+        "title": "The polynomial algebra is dense but not closed on a nondegenerate compact interval",
+        "strategy": "Polynomials restricted to $[a,b]$ form a unital separating algebra, so Stone–Weierstrass gives density. Exhibit a continuous nonpolynomial function such as $|x-c|$ with $c$ interior; it cannot agree with a polynomial because its one-sided slopes at $c$ differ. Hence the algebra is proper, and a proper dense subspace is not closed.",
+        "deps": ["thm-real-stone-weierstrass-general", "cor-weierstrass-approximation-on-a-closed-interval"]
+      }
+    ]
   }
 ]

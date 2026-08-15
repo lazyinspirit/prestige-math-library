@@ -9,7 +9,210 @@
     "requires": [
       "primitive-roots-and-unit-groups-modulo-n-examples"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-quadratic-residue-modulo-n",
+        "kind": "definition",
+        "title": "Quadratic residues and nonresidues modulo an integer",
+        "deps": [
+          "def-congruence-modulo-an-integer",
+          "def-common-divisor-and-gcd",
+          "thm-unit-criterion-modulo-n"
+        ]
+      },
+      {
+        "id": "prop-quadratic-residue-is-representative-independent",
+        "kind": "proposition",
+        "title": "Quadratic residuosity is representative-independent and the residues are the image of squaring",
+        "strategy": "Translate congruence through equality in the quotient ring. If $[x]^2=[a]$ and $[a]$ is a unit, then $[x]$ is a unit because an inverse of $[x]^2$ gives one for $[x]$; thus every residue witness lies in the unit group. Congruent representatives share the same witnesses, and conversely every value of unit-group squaring satisfies the defining congruence.",
+        "deps": [
+          "def-quadratic-residue-modulo-n",
+          "def-integers-modulo-n",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "thm-unit-criterion-modulo-n",
+          "thm-integers-modulo-n-basic-algebra"
+        ]
+      },
+      {
+        "id": "cor-unique-kth-root-modulo-prime-for-coprime-exponent",
+        "kind": "corollary",
+        "title": "A coprime exponent gives a unique nonzero $k$-th root modulo a prime",
+        "strategy": "Specialise the published binomial-congruence criterion and solution count using $\\varphi(p)=p-1$ and the existence of primitive roots. If $k\\ell\\equiv1\\pmod{p-1}$, Fermat's theorem verifies that $a^\\ell$ is a root; another inverse exponent differs by a multiple of $p-1$, so the displayed root is representative-independent.",
+        "deps": [
+          "thm-eulers-criterion-for-binomial-congruences",
+          "cor-number-of-solutions-of-a-binomial-congruence",
+          "cor-primitive-roots-modulo-prime",
+          "cor-totient-at-one-and-at-a-prime",
+          "thm-linear-congruence-solvability-and-solution-count",
+          "thm-fermats-little-theorem",
+          "lem-prime-not-dividing-is-coprime"
+        ]
+      },
+      {
+        "id": "thm-quadratic-residues-subgroup-modulo-prime",
+        "kind": "theorem",
+        "title": "The nonzero squares modulo an odd prime form an index-two subgroup",
+        "strategy": "Select one primitive root for the fixed prime and write every unit as a power of it. Division by two in the exponent shows that the intrinsic image of squaring is exactly $\\langle g^2\\rangle$ and has the two cosets of even and odd powers. The subgroup itself is independent of the selected generator.",
+        "deps": [
+          "prop-quadratic-residue-is-representative-independent",
+          "cor-unit-group-modulo-prime-is-cyclic",
+          "def-generated-subgroup",
+          "lem-cyclic-subgroup-is-the-set-of-powers",
+          "lem-group-power-laws",
+          "thm-division-algorithm-in-z",
+          "def-index"
+        ]
+      },
+      {
+        "id": "thm-count-of-quadratic-residues-modulo-prime",
+        "kind": "theorem",
+        "title": "An odd prime has $(p-1)/2$ nonzero quadratic residues and as many nonresidues",
+        "strategy": "Apply Lagrange's theorem to the index-two square subgroup. For a square target, specialise the published binomial-congruence solution count at exponent two to obtain exactly two square roots; for a nonsquare target there are none.",
+        "deps": [
+          "thm-quadratic-residues-subgroup-modulo-prime",
+          "thm-lagrange",
+          "cor-unit-group-modulo-prime-is-cyclic",
+          "cor-number-of-solutions-of-a-binomial-congruence",
+          "cor-primitive-roots-modulo-prime",
+          "cor-totient-at-one-and-at-a-prime",
+          "lem-prime-not-dividing-is-coprime"
+        ]
+      },
+      {
+        "id": "def-legendre-symbol",
+        "kind": "definition",
+        "title": "The Legendre symbol, including its zero value",
+        "deps": [
+          "def-quadratic-residue-modulo-n"
+        ]
+      },
+      {
+        "id": "prop-legendre-symbol-well-defined",
+        "kind": "proposition",
+        "title": "The Legendre symbol is well defined on residue classes",
+        "strategy": "Split exhaustively according as the prime divides the numerator. Divisibility and, in the unit case, quadratic residuosity are unchanged on replacing the numerator by a congruent integer, so exactly one of the values zero, one, and minus one applies.",
+        "deps": [
+          "def-legendre-symbol",
+          "prop-quadratic-residue-is-representative-independent",
+          "def-congruence-modulo-an-integer"
+        ]
+      },
+      {
+        "id": "prop-legendre-symbol-on-units-is-homomorphism",
+        "kind": "proposition",
+        "title": "On the units, the Legendre symbol is the unique nontrivial homomorphism to $\\{\\pm1\\}$",
+        "strategy": "Use the quotient of the cyclic unit group by its square subgroup: even powers map to one and odd powers to minus one, making the kernel exactly the squares and the map surjective. Any nontrivial homomorphism must send a selected primitive root to minus one and is therefore identical. The selection is local to the fixed prime.",
+        "deps": [
+          "prop-legendre-symbol-well-defined",
+          "thm-quadratic-residues-subgroup-modulo-prime",
+          "cor-unit-group-modulo-prime-is-cyclic",
+          "def-group-homomorphism",
+          "def-kernel-and-image-of-group-homomorphism",
+          "lem-group-homomorphism-basic-properties"
+        ]
+      },
+      {
+        "id": "thm-eulers-criterion-for-legendre-symbol",
+        "kind": "theorem",
+        "title": "Euler's criterion: $(a/p)\\equiv a^{(p-1)/2}\\pmod p$",
+        "strategy": "Handle $p\\mid a$ first. For a unit, the published power-residue criterion identifies squares with the value one. Fermat's theorem makes the half-power a root of $X^2-1$; the root bound over the field $\\mathbb Z/p\\mathbb Z$ leaves only one and minus one, and the nonsquare case must be minus one.",
+        "deps": [
+          "def-legendre-symbol",
+          "thm-eulers-criterion-for-binomial-congruences",
+          "cor-primitive-roots-modulo-prime",
+          "cor-totient-at-one-and-at-a-prime",
+          "thm-fermats-little-theorem",
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "thm-z-mod-p-is-a-field",
+          "lem-field-is-a-commutative-ring",
+          "lem-prime-not-dividing-is-coprime"
+        ]
+      },
+      {
+        "id": "thm-legendre-symbol-multiplicativity",
+        "kind": "theorem",
+        "title": "The Legendre symbol is multiplicative for all integer numerators",
+        "strategy": "If the prime divides either factor, both sides are zero. Otherwise pass to the two unit classes and apply the established homomorphism. As a corollary, a square factor coprime to the prime can be removed from the numerator.",
+        "deps": [
+          "def-legendre-symbol",
+          "prop-legendre-symbol-on-units-is-homomorphism",
+          "thm-unit-criterion-modulo-n"
+        ]
+      },
+      {
+        "id": "cor-number-of-solutions-to-quadratic-congruence-modulo-prime",
+        "kind": "corollary",
+        "title": "$x^2\\equiv a\\pmod p$ has exactly $1+(a/p)$ solution classes",
+        "strategy": "Use three exhaustive Legendre-symbol cases. A nonzero square has two roots by the published binomial-congruence count, a nonresidue has none by definition, and when $p\\mid a$ the field equation $x^2=0$ forces the unique zero class.",
+        "deps": [
+          "def-legendre-symbol",
+          "cor-number-of-solutions-of-a-binomial-congruence",
+          "cor-primitive-roots-modulo-prime",
+          "cor-totient-at-one-and-at-a-prime",
+          "thm-z-mod-p-is-a-field",
+          "lem-field-is-a-commutative-ring",
+          "lem-prime-not-dividing-is-coprime"
+        ]
+      },
+      {
+        "id": "cor-quadratic-congruence-discriminant-criterion",
+        "kind": "corollary",
+        "title": "The discriminant counts roots of a quadratic congruence modulo an odd prime",
+        "strategy": "Multiply the congruence by $4A$ and complete the square to obtain $(2Ax+B)^2\\equiv B^2-4AC$. Since $p\\nmid2A$, the affine change $x\\mapsto2Ax+B$ is a bijection on residue classes; apply the quadratic solution-count formula to the discriminant.",
+        "deps": [
+          "cor-number-of-solutions-to-quadratic-congruence-modulo-prime",
+          "thm-linear-congruence-solvability-and-solution-count",
+          "thm-unit-criterion-modulo-n",
+          "thm-integers-modulo-n-basic-algebra"
+        ]
+      },
+      {
+        "id": "lem-gauss-half-system-permutation",
+        "kind": "lemma",
+        "title": "Multiplication permutes an odd prime's signed half-system up to sign",
+        "strategy": "For each $1\\le j\\le(p-1)/2$, take the unique standard representative of $aj$ and replace it by its signed representative in the half-system. Equal absolute representatives would give $j\\equiv k$ or $j\\equiv-k\\pmod p$; the endpoint inequalities force $j=k$ in the first case and exclude the second. Finite self-injectivity then gives every absolute representative exactly once.",
+        "deps": [
+          "thm-standard-representatives-modulo-n",
+          "thm-z-mod-p-is-a-field",
+          "thm-subset-of-a-finite-set"
+        ]
+      },
+      {
+        "id": "thm-gauss-quadratic-residue-lemma",
+        "kind": "theorem",
+        "title": "Gauss's quadratic-residue lemma",
+        "strategy": "Write the signed congruence $aj\\equiv\\varepsilon_j r_j$ for the complete half-system, where exactly $N(a,p)$ signs are negative. Multiply all congruences, use the permutation of the absolute representatives, and cancel their nonzero product modulo $p$. Euler's criterion identifies the remaining half-power with the Legendre symbol.",
+        "deps": [
+          "lem-gauss-half-system-permutation",
+          "thm-eulers-criterion-for-legendre-symbol",
+          "def-monoid-finite-product",
+          "thm-integers-modulo-n-basic-algebra",
+          "thm-unit-criterion-modulo-n"
+        ]
+      },
+      {
+        "id": "thm-first-supplement-to-quadratic-reciprocity",
+        "kind": "theorem",
+        "title": "First supplement: $(-1/p)=(-1)^{(p-1)/2}$",
+        "strategy": "Substitute $a=-1$ into Euler's criterion. Divide the odd prime by four to show the exponent is even exactly for remainder one and odd exactly for remainder three, yielding the equivalent residue-class formulation.",
+        "deps": [
+          "thm-eulers-criterion-for-legendre-symbol",
+          "def-congruence-modulo-an-integer",
+          "thm-division-algorithm-in-z"
+        ]
+      },
+      {
+        "id": "thm-second-supplement-to-quadratic-reciprocity",
+        "kind": "theorem",
+        "title": "Second supplement: $(2/p)=(-1)^{(p^2-1)/8}$",
+        "strategy": "In Gauss's half-system for $a=2$, a sign is negative exactly when $p/4<j<p/2$. Write $p=8q+r$ with remainder one, three, five, or seven; in each case list the integer range explicitly and count it, obtaining the parity of $(p^2-1)/8$ without a floor-function dependency.",
+        "deps": [
+          "thm-gauss-quadratic-residue-lemma",
+          "def-congruence-modulo-an-integer",
+          "thm-division-algorithm-in-z"
+        ]
+      }
+    ]
   },
   {
     "order": 57.004,
@@ -21,6 +224,102 @@
     "requires": [
       "quadratic-residues-and-the-legendre-symbol"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-quadratic-residues-and-nonresidues-modulo-eleven",
+        "kind": "example",
+        "title": "Quadratic residues, roots, and the Legendre table modulo $11$",
+        "strategy": "Square the five signed pairs of nonzero classes, list the residue subgroup and the two roots of each square, then tabulate the Legendre symbol on all eleven classes, including zero.",
+        "deps": [
+          "thm-count-of-quadratic-residues-modulo-prime",
+          "def-legendre-symbol"
+        ]
+      },
+      {
+        "id": "ex-power-residues-modulo-seventeen",
+        "kind": "example",
+        "title": "Fourth and eighth powers modulo $17$",
+        "strategy": "Use the published power-residue criterion and solution count with exponents four and eight. Compute the target tests and list the resulting power subgroups and the exact number of roots of every soluble target.",
+        "deps": [
+          "thm-eulers-criterion-for-binomial-congruences",
+          "cor-number-of-solutions-of-a-binomial-congruence",
+          "cor-primitive-roots-modulo-prime",
+          "cor-totient-at-one-and-at-a-prime",
+          "lem-prime-not-dividing-is-coprime"
+        ]
+      },
+      {
+        "id": "cex-product-of-two-quadratic-nonresidues-modulo-a-composite",
+        "kind": "counterexample",
+        "title": "Two quadratic nonresidues modulo $15$ can have a nonresidue product",
+        "strategy": "List the eight unit classes modulo $15$ and square them; their square image consists only of the classes $1$ and $4$. Thus $2$, $7$, and $14$ are all quadratic nonresidues, while the product of $2$ and $7$ is congruent to $14$ modulo $15$. This isolates the failure of the prime-modulus sign rule.",
+        "deps": [
+          "def-quadratic-residue-modulo-n",
+          "prop-quadratic-residue-is-representative-independent",
+          "thm-unit-criterion-modulo-n"
+        ]
+      },
+      {
+        "id": "ex-unique-cube-root-of-two-modulo-twenty-nine",
+        "kind": "example",
+        "title": "The unique cube root of $2$ modulo $29$ is $-3$",
+        "strategy": "Since $3$ is coprime to $28$, use the inverse exponent $19$ modulo $28$ in the unique-root formula. Reduce $2^{19}$ to $-3$ modulo $29$ and verify directly that $(-3)^3\\equiv2\\pmod{29}$.",
+        "deps": [
+          "cor-unique-kth-root-modulo-prime-for-coprime-exponent"
+        ]
+      },
+      {
+        "id": "ex-euler-criterion-with-a-large-prime",
+        "kind": "example",
+        "title": "Euler's criterion computes $(3/726377359)$ by repeated squaring",
+        "strategy": "Compute $3^{(p-1)/2}$ modulo the prime $p=726377359$ by a displayed repeated-squaring table. Interpret the final value through Euler's criterion without factoring the numerator.",
+        "deps": [
+          "thm-eulers-criterion-for-legendre-symbol"
+        ]
+      },
+      {
+        "id": "ex-gauss-lemma-for-three-modulo-eleven",
+        "kind": "example",
+        "title": "The signed half-system for $3$ modulo $11$ gives $(3/11)=1$",
+        "strategy": "Reduce $3,6,9,12,15$ to the signed representatives $3,-5,-2,1,4$, verify their absolute values permute $1,\\ldots,5$, and count two negative signs.",
+        "deps": [
+          "lem-gauss-half-system-permutation",
+          "thm-gauss-quadratic-residue-lemma"
+        ]
+      },
+      {
+        "id": "ex-quadratic-congruence-from-its-discriminant",
+        "kind": "example",
+        "title": "A nonmonic quadratic congruence solved through its discriminant",
+        "strategy": "For $3x^2+4x+1\\equiv0\\pmod{11}$ compute the discriminant, use its Legendre value to predict two roots, complete the square, and recover and check both classes.",
+        "deps": [
+          "cor-quadratic-congruence-discriminant-criterion"
+        ]
+      },
+      {
+        "id": "cex-squaring-on-units-is-not-a-homomorphism-nonabelian-warning",
+        "kind": "counterexample",
+        "title": "Squaring is not a homomorphism on a nonabelian group",
+        "strategy": "In the symmetric group on three letters choose two transpositions whose product is a three-cycle. Their squares are the identity but the square of their product is not, so $g\\mapsto g^2$ fails the homomorphism law outside the abelian setting.",
+        "deps": [
+          "def-symmetric-group",
+          "lem-symmetric-group-is-a-group",
+          "def-group-homomorphism",
+          "def-group-power",
+          "lem-group-power-laws"
+        ]
+      },
+      {
+        "id": "cex-quadratic-residue-definition-excludes-nonunits",
+        "kind": "counterexample",
+        "title": "A soluble square congruence need not define a quadratic residue",
+        "strategy": "For every odd prime, $x^2\\equiv0\\pmod p$ has the unique zero solution, but zero is outside the unit residue/nonresidue dichotomy and its Legendre symbol is zero. Contrast solvability with the definition's coprimality hypothesis.",
+        "deps": [
+          "def-quadratic-residue-modulo-n",
+          "def-legendre-symbol",
+          "cor-number-of-solutions-to-quadratic-congruence-modulo-prime"
+        ]
+      }
+    ]
   }
 ]

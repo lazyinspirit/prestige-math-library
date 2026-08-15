@@ -67,6 +67,17 @@ const batches = () => {
     .filter((n) => Number.isInteger(n)).sort((a, b) => a - b);
 };
 
+/** How many group Alphas this run has, derived rather than assumed.
+ *
+ *  One Alpha per <=3 batches (owner, 2026-08-14; `dispatch.mjs` alpha cap 3).
+ *  This was hardcoded to 3 — the frontier-13 shape, where seven batches gave
+ *  three groups. frontier-14 has six batches and therefore two, so `3-review`
+ *  and `6b-adjudicate` could never report done: the driver would have polled a
+ *  stage that was already finished, forever, with no error anywhere. A stall
+ *  with a green log is the worst failure this file can have, so the count comes
+ *  from the batch list. */
+const groupCount = () => Math.max(1, Math.ceil(batches().length / 3));
+
 /** Judge coverage: every A page's items carry a current verdict from BOTH lanes. */
 const judgeComplete = () => {
   const led = R(`research/${run}-judge.jsonl`);
@@ -100,7 +111,7 @@ const STAGES = [
   },
   {
     id: '3-review', label: 'Alpha scaffold review',
-    done: () => ({ done: okResults('^alpha-.*step3|^alpha-recheck').length >= 3, why: `${okResults('^alpha-.*step3|^alpha-recheck').length}/3 group reviews` }),
+    done: () => { const g = groupCount(); const n = okResults('^alpha-.*step3|^alpha-recheck').length; return { done: n >= g, why: `${n}/${g} group reviews` }; },
     gates: ['validate-plan'],
     next: () => `dispatch role=alpha label=step4-lead — pipelined splice, one receipt per batch`,
   },
@@ -120,11 +131,11 @@ const STAGES = [
     id: '6a-read', label: 'independent readers',
     done: () => { const b = batches(); const n = b.filter((i) => has(`research/${run}-reader-${i}.md`)).length; return { done: b.length > 0 && n >= b.length, why: `${n}/${b.length} reader reports` }; },
     gates: [],
-    next: () => `dispatch 3 role=alpha group adjudicators — step 6b`,
+    next: () => `dispatch ${groupCount()} role=alpha group adjudicator(s) — step 6b`,
   },
   {
     id: '6b-adjudicate', label: 'group Alpha adjudication',
-    done: () => ({ done: okResults('^alpha-6b-').length >= 3, why: `${okResults('^alpha-6b-').length}/3 groups` }),
+    done: () => { const g = groupCount(); const n = okResults('^alpha-6b-').length; return { done: n >= g, why: `${n}/${g} groups` }; },
     gates: ['repo-wide'],
     next: () => `dispatch role=alpha label=6c-lead — cross-batch and cross-level citations`,
   },

@@ -26,7 +26,7 @@
 // transition that was already handed to a supervisor.
 
 import { spawnSync, spawn } from 'node:child_process';
-import { readFileSync, writeFileSync, mkdirSync, appendFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, appendFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const argv = process.argv.slice(2);
@@ -76,9 +76,53 @@ const advanceText = () => {
  *  handed off. frontier-13's duplicate-agent scare came from a liveness check
  *  that matched its own shell; here the guard is a durable id, not a process
  *  scan. */
+/** What is already running or already finished, so the supervisor does not
+ *  dispatch a second copy of something in flight.
+ *
+ *  This hole is easy to open by hand: an orchestrator that dispatches one agent
+ *  itself and then lets the driver take over has created exactly the state where
+ *  the supervisor sees an unstarted stage and starts it again. Listing prompts,
+ *  results and live processes makes the overlap visible rather than assumed. */
+const inFlight = () => {
+  const lines = [];
+  try {
+    const files = readdirSync(dispatchDir);
+    const prompts = files.filter((f) => f.endsWith('.prompt.md')).map((f) => f.replace('.prompt.md', ''));
+    const done = files.filter((f) => f.endsWith('.result.json')).map((f) => f.replace('.result.json', ''));
+    for (const p of prompts) {
+      const finished = done.includes(p);
+      let ok = null;
+      if (finished) {
+        try { ok = JSON.parse(readFileSync(join(dispatchDir, `${p}.result.json`), 'utf8')).ok; } catch { ok = 'unparseable'; }
+      }
+      lines.push(`  ${p.padEnd(34)} ${finished ? `finished ok=${ok}` : 'RUNNING (prompt written, no result yet)'}`);
+    }
+  } catch { /* directory may not exist yet */ }
+  const ps = spawnSync('sh', ['-c', "ps -eo comm,args | awk '$1==\"node\" && /dispatch\\.mjs --role/ {print}'"], { encoding: 'utf8' });
+  const live = (ps.stdout || '').trim().split('\n').filter(Boolean);
+
+  // Task files written but never dispatched. The orchestrator often prepares
+  // the next stage's briefs while the current one finishes; those are exactly
+  // the dispatches the supervisor should fire, and naming them removes the
+  // guesswork about what "the remainder" means.
+  const ready = [];
+  try {
+    const prompts = new Set(readdirSync(dispatchDir).filter((f) => f.endsWith('.prompt.md')));
+    for (const f of readdirSync('research')) {
+      if (!f.startsWith(`${run}-`) || !f.endsWith('.task.md')) continue;
+      const stem = f.replace(`${run}-`, '').replace('.task.md', '');
+      const dispatched = [...prompts].some((p) => p.includes(stem) || stem.includes(p.replace('.prompt.md', '')));
+      if (!dispatched) ready.push(`research/${f}`);
+    }
+  } catch { /* best effort */ }
+
+  return { lines, liveCount: live.length, ready };
+};
+
 const dispatchSupervisor = (fromStage, toStage, advice) => {
   const label = `advance-${toStage}`;
   const taskPath = `research/${run}-supervisor-${toStage}.task.md`;
+  const flight = inFlight();
   writeFileSync(taskPath, [
     `## Stage transition on run \`${run}\``,
     '',
@@ -93,6 +137,32 @@ const dispatchSupervisor = (fromStage, toStage, advice) => {
     '',
     '```',
     advice.trim(),
+    '```',
+    '',
+    '### ALREADY DISPATCHED — do not start a second copy of any of these',
+    '',
+    'Some of this stage may already be in flight, dispatched by hand before the',
+    'driver took over. Check this list against what `--advance` tells you to do,',
+    'and dispatch only the remainder.',
+    '',
+    '```',
+    flight.lines.length ? flight.lines.join('\n') : '  (no dispatch prompts written yet)',
+    '',
+    `  live dispatch processes right now: ${flight.liveCount}`,
+    '```',
+    '',
+    'A `RUNNING` row means the agent is working and its result has not landed.',
+    'Zero live processes with a `RUNNING` row means that lane died without',
+    'writing a result — that is the one case worth a single retry.',
+    '',
+    '### Task files written but not yet dispatched',
+    '',
+    'These were prepared for a stage and never fired. If `--advance` calls for a',
+    'dispatch and a matching task file is sitting here, use it — do not write a',
+    'new one and do not re-derive the work it already specifies.',
+    '',
+    '```',
+    flight.ready.length ? flight.ready.map((f) => `  ${f}`).join('\n') : '  (none)',
     '```',
     '',
     '### Your contract',

@@ -8,9 +8,341 @@
     "companion": "complete-metrizability-and-baire-examples",
     "requires": [
       "metrization-theorems",
-      "compactness-in-metric-spaces"
+      "tychonoff-embedding-and-stone-cech",
+      "approximation-and-compactness-in-ck"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-nowhere-dense-meagre-and-residual-subsets",
+        "kind": "definition",
+        "title": "Nowhere dense, meagre, residual, and comeagre subsets of a topological space",
+        "deps": ["def-interior-closure-boundary-top", "def-countable"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "landmark": true
+      },
+      {
+        "id": "prop-meagre-subsets-form-a-sigma-ideal",
+        "kind": "proposition",
+        "title": "The meagre subsets of a topological space form a sigma-ideal",
+        "strategy": "Subsets of nowhere dense sets are nowhere dense, and a subset of a countable union of nowhere dense sets is covered by the same family. Flatten a countable family of countable covers using the published countability of the natural-number square; include the empty union and empty subset explicitly.",
+        "deps": ["def-nowhere-dense-meagre-and-residual-subsets", "thm-n-cross-n-countable"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-baire-space-equivalent-characterisations",
+        "kind": "theorem",
+        "title": "Equivalent forms of the Baire property",
+        "strategy": "Apply complements and De Morgan's laws to pass between dense intersections of open sets and unions of closed nowhere dense sets. Then localise to a nonempty open set to prove equivalence with no nonempty open subset being meagre; keep the empty-space convention visible.",
+        "deps": ["def-nowhere-dense-meagre-and-residual-subsets", "def-baire-space", "thm-de-morgan-laws"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "prop-open-and-residual-subspaces-of-baire-spaces",
+        "kind": "proposition",
+        "title": "Open subspaces and residual subspaces of Baire spaces are Baire",
+        "strategy": "For an open subspace, translate dense-open tests into the ambient open set. For a residual subspace, first note it is dense unless the ambient space is empty, show a relatively nowhere dense set is ambiently nowhere dense, and use the sigma-ideal and nonmeagre-open characterisation.",
+        "deps": ["thm-baire-space-equivalent-characterisations", "prop-meagre-subsets-form-a-sigma-ideal", "def-subspace-topology-top"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "lem-open-subspace-complete-remetrisation",
+        "kind": "lemma",
+        "title": "Every open subspace of a completely metrizable space is completely metrizable",
+        "strategy": "Choose a compatible complete metric. If the open set is the whole space, restrict that metric. Otherwise add to the restricted metric the absolute difference of reciprocals of the distance to the closed complement. A Cauchy sequence for the new metric cannot approach the complement and therefore converges inside the open set.",
+        "deps": ["lem-complete-remetrisation", "lem-distance-to-set-is-lipschitz", "thm-complete-subspace-iff-closed"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "lem-countable-intersection-of-completely-metrizable-subspaces",
+        "kind": "lemma",
+        "title": "A countable intersection of completely metrizable subspaces is completely metrizable",
+        "strategy": "Assume countable choice to select one bounded compatible complete metric on each subspace. On the intersection, add the ambient bounded metric to a geometrically weighted sum of the selected metrics. A Cauchy sequence is Cauchy in every coordinate metric; the coordinate limits agree in the Hausdorff ambient metric and lie in every subspace.",
+        "deps": ["lem-complete-remetrisation", "lem-bounded-remetrisation", "def-countable-choice", "thm-metric-hausdorff-separation"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable",
+        "kind": "theorem",
+        "title": "Every $G_\\delta$ subspace of a complete metric space is completely metrizable",
+        "strategy": "Write the subspace as a countable intersection of open subspaces. Each open subspace is completely metrizable by the reciprocal-distance lemma, and the countable-intersection metric then gives a compatible complete metric on the intersection. State the countable-choice hypothesis used to select the intermediate metrics.",
+        "deps": ["def-g-delta-and-f-sigma-in-a-topological-space", "lem-open-subspace-complete-remetrisation", "lem-countable-intersection-of-completely-metrizable-subspaces"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta",
+        "kind": "theorem",
+        "title": "Every completely metrizable subspace of a metric space is $G_\\delta$",
+        "strategy": "For each scale cover the subspace by ambient open sets having small diameter in a chosen compatible complete metric, and let $G_n$ be their ambient union. A point in every $G_n$ yields, using dependent choice, a sequence in the subspace that is Cauchy in the complete metric and converges to the point in the ambient metric. Hausdorff uniqueness puts the point back in the subspace.",
+        "deps": ["lem-complete-remetrisation", "def-g-delta-and-f-sigma-in-a-topological-space", "def-dependent-choice", "thm-metric-hausdorff-separation"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-alexandrov-complete-metrizability-characterisation",
+        "kind": "theorem",
+        "title": "Alexandrov's theorem: a subspace of a complete metric space is completely metrizable exactly when it is $G_\\delta$",
+        "strategy": "Apply the two preceding implications to the subspace with its induced topology. In the reverse direction use the given complete ambient metric; in the forward direction use only the existence of a compatible complete metric on the subspace, not completeness of the inherited metric.",
+        "deps": ["thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable", "thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "cor-open-closed-and-g-delta-subspaces-of-completely-metrizable-spaces",
+        "kind": "corollary",
+        "title": "Open, closed, and $G_\\delta$ subspaces of completely metrizable spaces are completely metrizable",
+        "strategy": "Use the open-subspace lemma directly. Choose a compatible complete metric for the ambient space; closed subsets are complete for its restriction, while arbitrary $G_\\delta$ subsets fall under Alexandrov's theorem. Include the empty subspace.",
+        "deps": ["lem-open-subspace-complete-remetrisation", "thm-alexandrov-complete-metrizability-characterisation", "thm-complete-subspace-iff-closed", "lem-complete-remetrisation"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "cor-completely-metrizable-spaces-are-baire",
+        "kind": "corollary",
+        "title": "Under Dependent Choice, every completely metrizable space is Baire",
+        "strategy": "Choose a compatible complete metric using the definition already established by complete remetrisation. Apply the published complete-metric Baire category theorem to every nonempty open subspace, and translate its dense-open conclusion back to the topology; the empty space is Baire vacuously.",
+        "deps": ["lem-complete-remetrisation", "thm-baire-category-for-complete-metric-spaces", "def-baire-space"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "lem-standard-complete-metric-on-a-countable-product",
+        "kind": "lemma",
+        "title": "The standard weighted metric on a countable product of bounded complete metric spaces is complete",
+        "strategy": "Use the sum of $2^{-n}$ times the bounded coordinate metrics. Its balls and finite-coordinate basic neighbourhoods generate the same product topology. A Cauchy sequence is coordinatewise Cauchy; assemble the coordinate limits and use a finite-head plus geometric-tail estimate. Treat the empty product as a singleton.",
+        "deps": ["def-product-topology", "def-complete-metric-space", "def-series", "thm-geometric-series"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-countable-products-of-completely-metrizable-spaces",
+        "kind": "theorem",
+        "title": "Under countable choice, a countable product of completely metrizable spaces is completely metrizable",
+        "strategy": "Use countable choice to select a compatible complete metric in every factor, bound each metric without changing its topology, and invoke the standard weighted product metric. Record the singleton empty product and one-factor product separately from the infinite case.",
+        "deps": ["lem-standard-complete-metric-on-a-countable-product", "lem-bounded-remetrisation", "def-countable-choice", "lem-complete-remetrisation"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-polish-space",
+        "kind": "definition",
+        "title": "Polish spaces are separable completely metrizable spaces",
+        "deps": ["def-separable-space", "lem-complete-remetrisation"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "landmark": true
+      },
+      {
+        "id": "prop-polish-space-countability-conventions-agree",
+        "kind": "proposition",
+        "title": "For completely metrizable spaces, the separable and second-countable definitions of Polish space agree under countable choice",
+        "strategy": "A completely metrizable space is metrizable. Apply the published metrizable-space equivalence between separability and second countability under countable choice, without strengthening the choice claim to ZF.",
+        "deps": ["def-polish-space", "thm-metric-countability-equivalences"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-hilbert-cube-universal-for-separable-metrizable-spaces",
+        "kind": "theorem",
+        "title": "Every separable metrizable space embeds in the Hilbert cube $[0,1]^{\\mathbb N}$",
+        "strategy": "Choose a countable dense sequence and a bounded compatible metric. Map a point to its bounded distances from the dense sequence. The coordinates are continuous and separate points; if coordinate values converge, a coordinate centred close to the proposed point forces metric convergence. Rescale the coordinate range to the unit interval and identify the induced topology with the product topology.",
+        "deps": ["def-separable-space", "def-metrizable-space", "def-product-topology", "lem-bounded-remetrisation"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "thm-polish-subspaces-are-exactly-g-delta-subspaces",
+        "kind": "theorem",
+        "title": "Under countable choice, a subspace of a Polish space is Polish exactly when it is $G_\\delta$",
+        "strategy": "Alexandrov gives the complete-metrizability equivalence. A subspace of a second-countable space is second countable, hence separable under the stated choice hypothesis, while every subspace already inherits metrizability. Combine these facts in both directions.",
+        "deps": ["def-polish-space", "thm-alexandrov-complete-metrizability-characterisation", "prop-second-countability-is-hereditary", "thm-second-countable-implies-separable", "prop-polish-space-countability-conventions-agree"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-polish-spaces-as-g-delta-subspaces-of-the-hilbert-cube",
+        "kind": "theorem",
+        "title": "A space is Polish exactly when it is homeomorphic to a $G_\\delta$ subspace of the Hilbert cube",
+        "strategy": "Embed a Polish space in the Hilbert cube by universality. Since the Hilbert cube is complete for its standard product metric, Alexandrov makes the image $G_\\delta$. Conversely, a $G_\\delta$ subspace of the compact metrizable Hilbert cube is completely metrizable and second countable, hence Polish.",
+        "deps": ["thm-hilbert-cube-universal-for-separable-metrizable-spaces", "thm-polish-subspaces-are-exactly-g-delta-subspaces", "lem-standard-complete-metric-on-a-countable-product", "thm-tychonoff"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish",
+        "kind": "corollary",
+        "title": "Countable products and $G_\\delta$ subspaces of Polish spaces are Polish",
+        "strategy": "Use the product theorem for complete metrizability and the published theorem that countable products of second-countable spaces are second countable. For a $G_\\delta$ subspace apply the Polish-subspace characterisation. State countable choice once for both countability passages.",
+        "deps": ["thm-countable-products-of-completely-metrizable-spaces", "thm-countable-products-of-second-countable-spaces", "thm-polish-subspaces-are-exactly-g-delta-subspaces", "prop-polish-space-countability-conventions-agree"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-baire-sequence-space",
+        "kind": "definition",
+        "title": "Baire sequence space $\\mathbb N^{\\mathbb N}$ and its cylinder topology",
+        "deps": ["def-product-topology", "def-standard-topologies", "def-the-set-of-functions-from-one-set-to-another"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "thm-baire-sequence-space-is-polish",
+        "kind": "theorem",
+        "title": "Baire sequence space is Polish and its standard ultrametric is complete",
+        "strategy": "Give two unequal sequences distance $2^{-k}$ where $k$ is their first differing index. Verify the ultrametric and cylinder topology. A Cauchy sequence eventually stabilises in every coordinate, producing a limit; eventually constant sequences form a countable dense set. Check the zero-index convention at the first coordinate.",
+        "deps": ["def-baire-sequence-space", "def-polish-space", "def-complete-metric-space", "thm-countable-union-of-countable"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-every-nonempty-polish-space-is-a-continuous-image-of-baire-space",
+        "kind": "theorem",
+        "title": "Every nonempty Polish space is a continuous image of Baire sequence space",
+        "strategy": "Choose a compatible complete metric and recursively refine each nonempty open set into a countable cover by open sets whose closures remain inside the parent and whose diameters tend to zero. An infinite branch determines one point by completeness, giving a continuous map from Baire space. For a prescribed target point, dependent choice selects a nested branch containing it, proving surjectivity. Nonemptiness is necessary because the domain is nonempty.",
+        "deps": ["def-baire-sequence-space", "def-polish-space", "def-dependent-choice", "thm-cantor-intersection-metric", "def-metric-ball"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "def-simple-continued-fraction-coding",
+        "kind": "definition",
+        "title": "Simple continued fractions, convergents, and the integer-coordinate coding of $\\mathbb N^{\\mathbb N}$",
+        "deps": ["def-baire-sequence-space", "lem-integer-part", "def-rationals", "def-rat-operations", "thm-division-algorithm-in-z"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "lem-simple-continued-fraction-convergents-and-cylinders",
+        "kind": "lemma",
+        "title": "Continued-fraction convergents, determinant identities, and nested irrational cylinders",
+        "strategy": "Use recursion on pairs to establish the standard numerator-denominator recurrence from the finite continued fraction, prove the alternating determinant identity by induction in the rational ordered field, and derive the endpoint and diameter formulas for a fixed finite prefix. After the arbitrary integer term, all partial quotients are positive; hence denominators strictly increase and the nested closed-cylinder diameters tend to zero.",
+        "deps": ["def-simple-continued-fraction-coding", "thm-recursion", "thm-rat-ordered-field", "thm-nested-interval-property", "lem-rat-embeds-dense"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-simple-continued-fractions-parametrise-the-irrationals",
+        "kind": "theorem",
+        "title": "Infinite simple continued fractions parametrise the irrational real numbers",
+        "strategy": "Decode the first natural coordinate by the fixed zigzag bijection with the integers and shift each later coordinate by one. Nested cylinder intervals with vanishing diameter give a unique real value and exclude rational endpoints. Conversely, repeatedly take the integer part and reciprocal of the positive fractional remainder of an irrational; the process never stops, and the cylinder estimates recover the original number. Prefix agreement is exactly the neighbourhood comparison needed for continuity of both maps.",
+        "deps": ["lem-simple-continued-fraction-convergents-and-cylinders", "lem-integer-part", "def-rat-operations", "lem-rat-embeds-dense"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "cor-baire-sequence-space-is-homeomorphic-to-the-irrationals",
+        "kind": "corollary",
+        "title": "Baire sequence space is homeomorphic to the irrational real numbers",
+        "strategy": "Decode the zero-th coordinate by the fixed zigzag bijection with the integers and shift every later natural coordinate by one to obtain positive partial quotients. The coordinatewise coding preserves cylinders, and the continued-fraction parametrisation and its inverse therefore give the required homeomorphism.",
+        "deps": ["def-baire-sequence-space", "thm-simple-continued-fractions-parametrise-the-irrationals"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "lem-finite-refining-small-diameter-covers-of-compact-metric-spaces",
+        "kind": "lemma",
+        "title": "Compact metric spaces admit finite refining covers of arbitrarily small diameter",
+        "strategy": "At stage zero use the whole nonempty compact space. Cover each compact piece by finitely many sufficiently small closed subsets obtained from a finite ball cover, retaining only nonempty pieces, and index the children by finite binary words after duplicating terminal choices when necessary. Arrange refinement and diameters tending to zero.",
+        "deps": ["def-metric-compactness", "lem-closed-subset-of-a-compact-space-is-compact", "def-metric-bounded-diameter"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space",
+        "kind": "theorem",
+        "title": "Every nonempty compact metric space is a continuous image of Cantor space",
+        "strategy": "Use the refining finite small-diameter covers to assign a nested compact set to each finite binary word. Each infinite binary sequence determines one point by the complete compact intersection theorem. The resulting map is continuous by the diameter bound and surjective by recursively choosing a child containing a prescribed point. Keep nonemptiness explicit; no map from nonempty Cantor space can surject onto the empty space.",
+        "deps": ["lem-finite-refining-small-diameter-covers-of-compact-metric-spaces", "thm-compact-implies-complete-and-totally-bounded", "thm-cantor-intersection-metric", "def-product-topology", "def-standard-topologies", "def-dependent-choice"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "def-cech-complete-space",
+        "kind": "definition",
+        "title": "Čech-complete spaces as $G_\\delta$ subspaces of Hausdorff compactifications",
+        "deps": ["def-compactification-of-a-tychonoff-space", "def-g-delta-and-f-sigma-in-a-topological-space"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "landmark": true
+      },
+      {
+        "id": "lem-maps-of-compactifications-preserve-remainders",
+        "kind": "lemma",
+        "title": "A map of Hausdorff compactifications carries the larger remainder onto the smaller remainder",
+        "strategy": "Let a continuous map between compactifications restrict to the identity on the dense copy of the space. Compactness makes its image closed and density makes it surjective. If a remainder point mapped into the dense copy, Hausdorff separation and density would contradict identity on the copy; conversely compactness of a fibre over a remainder point supplies a preimage outside the copy.",
+        "deps": ["def-compactification-of-a-tychonoff-space", "thm-compactness-under-continuous-maps", "thm-compact-subset-of-a-hausdorff-space-is-closed"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-cech-completeness-is-independent-of-compactification",
+        "kind": "theorem",
+        "title": "A Tychonoff space is $G_\\delta$ in some Hausdorff compactification exactly when it is $G_\\delta$ in every one",
+        "strategy": "Use the Stone–Čech compactification as a common dominating compactification. The remainder-map lemma transfers the compact $F_\\sigma$ remainder condition along the canonical maps, and complements convert it back to the $G_\\delta$ condition. State the ultrafilter-lemma and dependent-choice assumptions actually used by the compactification machinery.",
+        "deps": ["def-cech-complete-space", "lem-maps-of-compactifications-preserve-remainders", "def-stone-cech-compactification", "cor-stone-cech-compactification-is-unique-over-x"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "thm-frolik-internal-characterisation-of-cech-completeness",
+        "kind": "theorem",
+        "title": "Frolík's internal open-cover characterisation of Čech-completeness",
+        "strategy": "From a $G_\\delta$ presentation in a compactification, use compact Hausdorff regularity to choose open covers whose ambient closures lie in the successive layers. A centred family subordinate to every cover has centred ambient closures, hence a compactness cluster point; the layer condition puts that point back in the original space and closedness puts it in every family member. Conversely, apply the centred-family condition to neighbourhood traces of each remainder point to construct countably many ambient open sets whose intersection excludes the whole remainder.",
+        "deps": ["def-cech-complete-space", "thm-cech-completeness-is-independent-of-compactification", "thm-compact-iff-fip", "thm-the-separation-implication-chain", "def-filter-base"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "thm-completely-metrizable-spaces-are-cech-complete",
+        "kind": "theorem",
+        "title": "Every completely metrizable space is Čech-complete",
+        "strategy": "Choose a compatible complete metric and locally finite refinements of the covers by balls of radius tending to zero. In a Hausdorff compactification, extend the refined members to ambient open sets and use local finiteness to form open neighbourhoods whose intersection is exactly the original space: a point in every neighbourhood produces a Cauchy filter and hence a limit in the complete space. Invoke compactification independence only after this construction is established.",
+        "deps": ["def-cech-complete-space", "lem-complete-remetrisation", "thm-stone-metric-spaces-are-paracompact", "thm-metric-spaces-are-tychonoff-and-perfectly-normal", "cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma", "thm-cech-completeness-is-independent-of-compactification"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-metrizable-cech-complete-spaces-are-completely-metrizable",
+        "kind": "theorem",
+        "title": "Every metrizable Čech-complete space is completely metrizable",
+        "strategy": "Embed the space densely in its metric completion, compactify that completion, and observe that the resulting compact space is also a compactification of the original dense subspace. Compactification independence makes the original space $G_\\delta$ there and hence in the completion. Apply the $G_\\delta$-subspace theorem to the complete metric completion.",
+        "deps": ["def-cech-complete-space", "thm-cech-completeness-is-independent-of-compactification", "thm-metric-completion-exists", "cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma", "thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "cor-metrizable-cech-complete-iff-completely-metrizable",
+        "kind": "corollary",
+        "title": "A metrizable space is Čech-complete exactly when it is completely metrizable",
+        "strategy": "Combine the two preceding implications, retaining metrizability only for the direction from Čech-completeness to complete metrizability.",
+        "deps": ["thm-completely-metrizable-spaces-are-cech-complete", "thm-metrizable-cech-complete-spaces-are-completely-metrizable"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "cor-locally-compact-hausdorff-spaces-are-cech-complete",
+        "kind": "corollary",
+        "title": "Every locally compact Hausdorff space is Čech-complete",
+        "strategy": "The one-point compactification is compact Hausdorff and contains the original space as an open subspace. An open subset is a $G_\\delta$ by repeating it in a constant countable intersection, so it witnesses Čech-completeness; handle an already compact space without adding a new point if desired.",
+        "deps": ["def-cech-complete-space", "thm-one-point-compactification-properties", "def-g-delta-and-f-sigma-in-a-topological-space"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-cech-complete-spaces-are-baire",
+        "kind": "theorem",
+        "title": "Under Dependent Choice, every Čech-complete space is Baire",
+        "strategy": "Realise the space as the intersection of open sets in a compact Hausdorff space. Starting in a prescribed nonempty relatively open set, use regularity and density to choose nested nonempty ambient open sets with compact closures, each lying in the next $G_\\delta$ layer and the next dense open set. Dependent choice produces the chain; compactness gives a point in all closures, hence in the desired intersection.",
+        "deps": ["def-cech-complete-space", "def-dependent-choice", "thm-compact-iff-fip", "thm-the-separation-implication-chain", "def-baire-space"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "prop-closed-subspaces-of-cech-complete-spaces",
+        "kind": "proposition",
+        "title": "Closed subspaces of Čech-complete spaces are Čech-complete",
+        "strategy": "If the space is $G_\\delta$ in a compactification and the subspace is closed in the space, take its closure in the compactification. Inside that compact closure, the subspace is the intersection of the inherited $G_\\delta$ with an additional closed set, hence is $G_\\delta$.",
+        "deps": ["def-cech-complete-space", "thm-closed-subspace-of-a-compact-space-is-compact", "thm-compact-subset-of-a-hausdorff-space-is-closed"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "prop-topological-sums-of-cech-complete-spaces",
+        "kind": "proposition",
+        "title": "Topological sums of Čech-complete spaces are Čech-complete",
+        "strategy": "Choose compactification witnesses for the summands and take the one-point compactification of their topological sum after adjoining the compact pieces. Express the original sum by one countable family of open layers, using the same layer number in every clopen summand. Verify the empty sum separately.",
+        "deps": ["def-cech-complete-space", "def-disjoint-union-topology", "thm-one-point-compactification-properties", "def-axiom-of-choice"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-countable-products-of-cech-complete-spaces",
+        "kind": "theorem",
+        "title": "Under countable choice, countable products of Čech-complete spaces are Čech-complete",
+        "strategy": "Choose compactification witnesses and $G_\\delta$ presentations for the factors. Their compact product is compact by Tychonoff, and the product of the original spaces is the countable intersection over pairs of a coordinate and a layer of open cylinder sets. Pair the two natural indices and include the empty product.",
+        "deps": ["def-cech-complete-space", "thm-tychonoff", "def-countable-choice", "thm-n-cross-n-countable", "def-product-topology"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      }
+    ]
   },
   {
     "order": 278,
@@ -18,10 +350,58 @@
     "kind": "B",
     "category": "topology",
     "title": "Complete Metrizability, Čech-Completeness, and Baire Category: Examples and Counterexamples",
-    "requires": [
-      "complete-metrizability-and-baire"
-    ],
-    "items": []
+    "companion": "complete-metrizability-and-baire",
+    "requires": ["complete-metrizability-and-baire"],
+    "items": [
+      {
+        "id": "fs-every-baire-space-is-completely-metrizable",
+        "kind": "false-statement",
+        "title": "Every Baire space is completely metrizable",
+        "strategy": "Refute the claim with the Cantor cube $\\{0,1\\}^{\\mathbb R}$. It is compact Hausdorff and therefore Baire under Dependent Choice, but a countable local base at a point mentions only countably many finite coordinate sets; changing an unmentioned coordinate contradicts that it is a base. Hence it is not first countable, not metrizable, and not completely metrizable.",
+        "deps": ["thm-baire-category-locally-compact-hausdorff", "thm-tychonoff", "def-first-countable-top", "thm-countable-union-of-countable", "lem-complete-remetrisation"],
+        "provenance": {"statement": "ai-altered", "proof": "ai-altered"}
+      },
+      {
+        "id": "fs-the-rational-numbers-form-a-baire-space",
+        "kind": "false-statement",
+        "title": "The rational numbers form a Baire space",
+        "strategy": "In the subspace topology each rational singleton is closed with empty interior, while the rational numbers are countable. Thus the whole nonempty space is meagre in itself, contradicting the nonmeagre-open form of the Baire property. Cross-check with the published statement that the rationals are meagre and not $G_\\delta$ in the real line.",
+        "deps": ["thm-baire-space-equivalent-characterisations", "def-nowhere-dense-meagre-and-residual-subsets", "cor-q-is-meager-and-not-g-delta", "thm-rationals-countable", "thm-the-separation-implication-chain", "thm-t1-iff-singletons-are-closed"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "ex-baire-sequence-space-and-the-irrationals",
+        "kind": "example",
+        "title": "Cylinder sets and continued fractions exhibit the homeomorphism $\\mathbb N^{\\mathbb N}\\cong\\mathbb R\\setminus\\mathbb Q$",
+        "strategy": "Work out the first continued-fraction cylinders and show how extending a finite sequence nests the corresponding irrational interval. Use the established parametrisation to identify cylinder convergence with ordinary convergence of irrational values, including the zero-th coordinate convention.",
+        "deps": ["cor-baire-sequence-space-is-homeomorphic-to-the-irrationals", "lem-simple-continued-fraction-convergents-and-cylinders"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "ex-hilbert-cube-as-a-compact-polish-universal-space",
+        "kind": "example",
+        "title": "The Hilbert cube is compact, Polish, and universal for separable metrizable spaces",
+        "strategy": "Give $[0,1]^{\\mathbb N}$ the standard weighted complete product metric. Compactness follows from Tychonoff and second countability from the countable finite-coordinate basis; a countable rational grid is dense. Apply the embedding theorem for universality without citing an examples-page item.",
+        "deps": ["lem-standard-complete-metric-on-a-countable-product", "thm-hilbert-cube-universal-for-separable-metrizable-spaces", "thm-tychonoff", "def-polish-space"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "cor-nowhere-differentiable-functions-are-residual-in-c01",
+        "kind": "corollary",
+        "title": "Under Dependent Choice, nowhere differentiable functions form a residual subset of $C([0,1],\\mathbb R)$",
+        "strategy": "Use the published closed pointwise-Lipschitz sets and the dense steep-polygonal perturbations to show every such closed set has empty interior. Their countable union contains every function with a finite derivative at some point, so its complement is residual and consists of nowhere differentiable functions, with one-sided endpoint derivatives included.",
+        "deps": ["def-nowhere-dense-meagre-and-residual-subsets", "lem-pointwise-lipschitz-sets-in-c01-are-closed", "lem-steep-polygonal-functions-are-dense-in-c01", "thm-nowhere-differentiable-functions-are-dense-in-c01"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "fs-every-metrizable-space-is-cech-complete",
+        "kind": "false-statement",
+        "title": "Every metrizable space is Čech-complete",
+        "strategy": "The rational line is metrizable but not Baire. Since every Čech-complete space is Baire under the same stated Dependent Choice assumption, the rationals cannot be Čech-complete. Equivalently, Alexandrov and the published non-$G_\\delta$ result exclude complete metrizability.",
+        "deps": ["fs-the-rational-numbers-form-a-baire-space", "thm-cech-complete-spaces-are-baire", "cor-metrizable-cech-complete-iff-completely-metrizable", "cor-q-is-meager-and-not-g-delta"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      }
+    ]
   },
   {
     "order": 293,
@@ -32,9 +412,262 @@
     "companion": "covering-spaces-and-lifting-examples",
     "requires": [
       "the-fundamental-group",
-      "compactness"
+      "compactness",
+      "group-actions-and-cayleys-theorem"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-covering-map-and-evenly-covered-neighbourhoods",
+        "kind": "definition",
+        "title": "Covering maps, evenly covered neighbourhoods, fibres, sheets, and trivial coverings",
+        "deps": ["def-continuous-map-top", "def-homeomorphism-and-open-maps", "def-subspace-topology-top", "def-disjoint-union-topology"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "landmark": true
+      },
+      {
+        "id": "def-map-and-isomorphism-of-covering-spaces",
+        "kind": "definition",
+        "title": "Maps and isomorphisms of covering spaces over a fixed base",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-homeomorphism-and-open-maps"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "def-lift-of-a-map-path-and-homotopy",
+        "kind": "definition",
+        "title": "Lifts of maps, paths, and homotopies through a covering map",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-homotopy-relative-and-path-homotopy", "def-path-connected"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "prop-covering-maps-are-local-homeomorphisms-with-discrete-fibres",
+        "kind": "proposition",
+        "title": "Covering maps are surjective local homeomorphisms with discrete fibres",
+        "strategy": "An evenly covered neighbourhood restricts the projection to a homeomorphism on each sheet, which gives the local-homeomorphism property. Intersect a sheet with a fibre to isolate its unique point. Keep surjectivity as part of the covering-map definition rather than infer it from local data.",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-homeomorphism-and-open-maps", "def-standard-topologies"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "prop-number-of-sheets-is-locally-constant",
+        "kind": "proposition",
+        "title": "The cardinality of a covering fibre is locally constant and is constant on a connected base",
+        "strategy": "Over an evenly covered neighbourhood every fibre meets each sheet in exactly one point, so all fibres there are in bijection with the sheet index set. The subsets on which a fixed fibre cardinal occurs are open; connectedness permits only one nonempty such subset. Do not assert global constancy for a disconnected base.",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-connected-space", "def-equinumerous"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-path-lifting-for-covering-maps",
+        "kind": "theorem",
+        "title": "Existence and uniqueness of path lifts through a covering map",
+        "strategy": "Pull back evenly covered neighbourhoods along the path to obtain an open cover of the compact interval, choose a Lebesgue subdivision, and lift successively sheet by sheet from the prescribed initial point. Agreement at subdivision endpoints gives a continuous pasted path; sheet uniqueness proves uniqueness, including constant paths.",
+        "deps": ["def-lift-of-a-map-path-and-homotopy", "thm-lebesgue-number-lemma", "lem-continuity-is-local-and-pastes", "def-compact-space"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "thm-homotopy-lifting-for-covering-maps",
+        "kind": "theorem",
+        "title": "Existence and uniqueness of homotopy lifts through a covering map",
+        "strategy": "For a homotopy $H:Y\\times I\\to X$ and a lift at time zero, use evenly covered neighbourhoods and compactness of the interval to extend the lift over successive time strips locally in $Y$. Pasting gives a global lift, and the set of points where two lifts agree is open and closed on each vertical interval, yielding uniqueness. Record the endpoint-fixed consequence when the original homotopy is relative to endpoints.",
+        "deps": ["def-lift-of-a-map-path-and-homotopy", "thm-path-lifting-for-covering-maps", "def-product-topology", "lem-continuity-is-local-and-pastes", "def-compact-space"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "cor-lifted-path-endpoints-depend-only-on-path-homotopy",
+        "kind": "corollary",
+        "title": "The endpoint of a lifted path depends only on its endpoint-fixed homotopy class",
+        "strategy": "Lift an endpoint-fixed homotopy starting from the chosen lift of one path. Along each endpoint edge the lifted map takes values in a discrete fibre; connectedness of the interval makes it constant, so the terminal endpoints agree.",
+        "deps": ["thm-homotopy-lifting-for-covering-maps", "prop-covering-maps-are-local-homeomorphisms-with-discrete-fibres", "def-connected-space"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-covering-maps-inject-fundamental-groups",
+        "kind": "theorem",
+        "title": "A covering map induces an injective homomorphism on fundamental groups",
+        "strategy": "If a loop upstairs maps to a nullhomotopic loop downstairs, lift a nullhomotopy with the given loop as its initial edge. Uniqueness forces the opposite edge to be constant, yielding a nullhomotopy upstairs. Preserve the chosen basepoints and the exact published definition of the induced map.",
+        "deps": ["thm-homotopy-lifting-for-covering-maps", "def-induced-homomorphism-on-fundamental-groups", "def-simply-connected"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-uniqueness-of-lifts-from-a-connected-space",
+        "kind": "theorem",
+        "title": "Two lifts from a connected space that agree at one point agree everywhere",
+        "strategy": "The equaliser of two lifts is open because a common image point has an evenly covered neighbourhood and both lifts must lie in the same sheet near an agreement point. Its complement is open by choosing disjoint sheets near a disagreement point. Connectedness and the named agreement point force the equaliser to be the whole domain.",
+        "deps": ["def-lift-of-a-map-path-and-homotopy", "def-connected-space", "def-covering-map-and-evenly-covered-neighbourhoods"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-covering-space-lifting-criterion",
+        "kind": "theorem",
+        "title": "Lifting criterion for maps from path-connected locally path-connected spaces",
+        "strategy": "For a based map $f:(Y,y_0)\\to(X,x_0)$ with $Y$ path-connected and locally path-connected, necessity follows by functoriality. For sufficiency, define the candidate lift at $y$ by lifting $f$ along any path from $y_0$; the subgroup inclusion makes the endpoint independent of the chosen path. Local path-connectedness and an evenly covered neighbourhood make the candidate continuous. Uniqueness follows from connectedness.",
+        "deps": ["thm-path-lifting-for-covering-maps", "cor-lifted-path-endpoints-depend-only-on-path-homotopy", "thm-uniqueness-of-lifts-from-a-connected-space", "def-induced-homomorphism-on-fundamental-groups", "def-locally-connected"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "def-pullback-covering-space",
+        "kind": "definition",
+        "title": "The pullback of a covering space along a continuous map",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-product-topology", "def-subspace-topology-top"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "prop-covering-spaces-are-stable-under-restriction-finite-products-and-pullback",
+        "kind": "proposition",
+        "title": "Covering spaces are stable under restriction, finite products, and pullback",
+        "strategy": "Restrict an evenly covered neighbourhood for restriction, take products of evenly covered neighbourhoods for finite products, and identify each pullback sheet with the corresponding open subset of the new base. State surjectivity in every construction and the empty-product convention separately. Do not claim unrestricted closure under composition: an infinite family of intermediate sheets need not admit one common refinement.",
+        "deps": ["def-pullback-covering-space", "def-covering-map-and-evenly-covered-neighbourhoods", "def-product-topology", "def-subspace-topology-top"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-monodromy-action-on-a-covering-fibre",
+        "kind": "definition",
+        "title": "The monodromy right action on a covering fibre and its equivalent left-action convention",
+        "deps": ["thm-path-lifting-for-covering-maps", "cor-lifted-path-endpoints-depend-only-on-path-homotopy", "def-based-loops-and-fundamental-group", "def-group-action"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "landmark": true
+      },
+      {
+        "id": "prop-monodromy-acts-by-bijections-and-detects-components",
+        "kind": "proposition",
+        "title": "Monodromy acts by fibre bijections, and its orbits are the intersections of path components with the fibre",
+        "strategy": "Path reversal gives the inverse endpoint permutation and concatenation gives the right-action law under the library's convention that $[\\alpha][\\beta]$ traverses $\\alpha$ first. A lifted loop is a path upstairs joining its starting and endpoint fibre points. Conversely, project any path upstairs between fibre points to a loop downstairs. Thus transitivity is equivalent to path-connectedness of the relevant covering component.",
+        "deps": ["def-monodromy-action-on-a-covering-fibre", "thm-fundamental-group-laws", "def-path-connected"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-deck-transformation-and-deck-group",
+        "kind": "definition",
+        "title": "Deck transformations and the deck-transformation group of a covering",
+        "deps": ["def-map-and-isomorphism-of-covering-spaces", "def-group", "def-group-action"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "landmark": true
+      },
+      {
+        "id": "prop-deck-transformations-are-determined-by-one-point-and-act-freely",
+        "kind": "proposition",
+        "title": "On a connected covering space, a deck transformation is determined by one point and the deck action is free",
+        "strategy": "Two deck transformations are lifts of the same projection. If they agree at one point, uniqueness of lifts from the connected total space makes them equal. Applying this to a deck transformation and the identity shows that a fixed point forces the transformation to be the identity.",
+        "deps": ["def-deck-transformation-and-deck-group", "thm-uniqueness-of-lifts-from-a-connected-space", "def-free-group-action"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-covering-space-action",
+        "kind": "definition",
+        "title": "Covering-space actions by disjoint translates of neighbourhoods",
+        "deps": ["def-group-action", "def-homeomorphism-and-open-maps", "def-free-group-action"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "thm-orbit-map-of-a-covering-space-action-is-a-covering",
+        "kind": "theorem",
+        "title": "The orbit map of a covering-space action is a covering, with the acting group equal to the deck group when the total space is path-connected",
+        "strategy": "For a neighbourhood whose nonidentity translates are disjoint, its orbit image is open in the quotient and its full preimage is the disjoint union of all translates. Each translate maps homeomorphically onto that quotient neighbourhood. The action is free automatically and embeds the acting group in the deck group. If the total space is path-connected, compare any deck transformation at one point with the unique group translate taking that point to its image; one-point determination then proves equality with that translate.",
+        "deps": ["def-covering-space-action", "def-covering-map-and-evenly-covered-neighbourhoods", "def-quotient-topology", "def-deck-transformation-and-deck-group", "prop-deck-transformations-are-determined-by-one-point-and-act-freely", "lem-open-or-closed-surjection-is-quotient"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "prop-local-path-connectedness-lifts-and-descends-along-coverings",
+        "kind": "proposition",
+        "title": "Local path-connectedness lifts and descends along covering maps",
+        "strategy": "Every point has a sheet homeomorphic to an open neighbourhood of its image. Local path-connectedness passes to open subspaces and across homeomorphisms, which proves both directions using surjectivity to choose a point over each basepoint.",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-locally-connected", "def-homeomorphism-and-open-maps"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-semilocally-simply-connected-space",
+        "kind": "definition",
+        "title": "Semilocally simply connected spaces with explicit basepoint convention",
+        "deps": ["def-induced-homomorphism-on-fundamental-groups", "def-neighbourhood-top", "def-based-loops-and-fundamental-group"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "landmark": true
+      },
+      {
+        "id": "def-universal-covering-space",
+        "kind": "definition",
+        "title": "Universal covering spaces",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-simply-connected"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"},
+        "landmark": true
+      },
+      {
+        "id": "thm-universal-covering-spaces-force-semilocal-simple-connectedness",
+        "kind": "theorem",
+        "title": "A space admitting a universal covering is semilocally simply connected",
+        "strategy": "At a basepoint choose an evenly covered neighbourhood and a lift of that point. Any loop in the neighbourhood lifts to a loop in its sheet. The induced fundamental-group map of the universal cover is injective and its domain group is trivial, so the inclusion-induced class downstairs is trivial. No local path-connectedness is needed for this necessity direction.",
+        "deps": ["def-universal-covering-space", "def-semilocally-simply-connected-space", "thm-covering-maps-inject-fundamental-groups", "def-simply-connected"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "def-path-class-model-for-a-universal-cover",
+        "kind": "definition",
+        "title": "The based path-class model and basic sets for a universal cover",
+        "deps": ["def-semilocally-simply-connected-space", "def-homotopy-relative-and-path-homotopy", "def-locally-connected", "def-path-connected"],
+        "provenance": {"statement": "literature-derived", "proof": "not-applicable"}
+      },
+      {
+        "id": "lem-path-class-projection-is-a-covering-map",
+        "kind": "lemma",
+        "title": "For a path-connected locally path-connected semilocally simply connected space, the path-class projection is a covering map",
+        "strategy": "Refine each semilocally simply connected neighbourhood to an open path-connected one. For a path class ending at its centre, append paths in that neighbourhood to obtain a basic sheet. Triviality of the inclusion-induced fundamental group makes the endpoint description independent of the appended path, and distinct initial classes give disjoint sheets. Verify that these basic sets form a topology and map homeomorphically onto the chosen neighbourhood.",
+        "deps": ["def-path-class-model-for-a-universal-cover", "def-covering-map-and-evenly-covered-neighbourhoods", "def-semilocally-simply-connected-space", "def-locally-connected"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-universal-cover-existence",
+        "kind": "theorem",
+        "title": "Every path-connected locally path-connected semilocally simply connected space has a universal cover",
+        "strategy": "Use the path-class projection, already proved to be a covering. The path-class space is nonempty and path-connected by truncating representatives. A loop upstairs projects to a loop whose path-class endpoint is the starting class, hence to the trivial element downstairs; injectivity of the fundamental-group map then makes every upstairs loop nullhomotopic. Thus the total space is simply connected.",
+        "deps": ["lem-path-class-projection-is-a-covering-map", "def-universal-covering-space", "def-simply-connected", "thm-covering-maps-inject-fundamental-groups"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "thm-universal-cover-uniqueness-and-dominating-property",
+        "kind": "theorem",
+        "title": "Universal covers are uniquely isomorphic over the base and lift to every connected covering",
+        "strategy": "Let the base be path-connected and locally path-connected and fix points over a common basepoint. The lifting criterion applies to a universal cover because its fundamental group is trivial, giving a unique covering map to any connected covering. Applying this in both directions between two universal covers and using uniqueness of lifts makes the composites identities.",
+        "deps": ["def-universal-covering-space", "thm-covering-space-lifting-criterion", "thm-uniqueness-of-lifts-from-a-connected-space", "prop-local-path-connectedness-lifts-and-descends-along-coverings"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "cor-connected-cover-of-a-simply-connected-space-is-trivial",
+        "kind": "corollary",
+        "title": "A connected covering of a locally path-connected simply connected space is one-sheeted and trivial",
+        "strategy": "Local path-connectedness lifts to the connected total space, making it path-connected. If two points lie in one fibre, join them upstairs; the projected loop is null-homotopic because the base is simply connected, while endpoint homotopy invariance forces its lift to have the same initial and final point. Thus every fibre is a singleton, and a one-sheeted covering is a homeomorphism by its local sheet descriptions.",
+        "deps": ["prop-local-path-connectedness-lifts-and-descends-along-coverings", "cor-lifted-path-endpoints-depend-only-on-path-homotopy", "def-simply-connected", "def-covering-map-and-evenly-covered-neighbourhoods"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-sheets-equal-fundamental-group-index",
+        "kind": "theorem",
+        "title": "For a path-connected covering, the number of sheets is the index of the induced fundamental-group subgroup",
+        "strategy": "Fix a point in the fibre. Send a loop class to the endpoint of its lifted path. Endpoint homotopy invariance makes this well defined; two classes have the same endpoint exactly when their quotient lies in the image of the upstairs fundamental group. Path-connectedness of the total space gives surjectivity onto the fibre. State left-versus-right cosets consistently with the published path-product order.",
+        "deps": ["def-monodromy-action-on-a-covering-fibre", "thm-covering-maps-inject-fundamental-groups", "prop-monodromy-acts-by-bijections-and-detects-components", "def-coset", "def-index"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      },
+      {
+        "id": "thm-compactness-is-invariant-under-finite-sheeted-coverings",
+        "kind": "theorem",
+        "title": "For a finite-sheeted covering, the total space is compact exactly when the base is compact",
+        "strategy": "The forward direction is the continuous image theorem and uses surjectivity. For the reverse direction, over each basepoint choose an evenly covered neighbourhood; because its fibre is finite, shrink once so that every sheet above the smaller neighbourhood lies in a selected member of a given open cover upstairs. Compactness supplies finitely many such base neighbourhoods and hence finitely many cover members upstairs.",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-compact-space", "thm-compactness-under-continuous-maps"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
+        "kind": "theorem",
+        "title": "The deck group of a universal cover is isomorphic to the fundamental group with the inverse-path convention",
+        "strategy": "For a path-connected locally path-connected semilocally simply connected base and a chosen point upstairs, each loop class determines the endpoint of its lift. The universal-cover lifting criterion gives the unique deck transformation taking the chosen point to that endpoint. Because the library multiplies loops in traversal order, insert path reversal in the assignment so composition is a homomorphism rather than an antihomomorphism. Freeness gives injectivity and path-connectedness gives surjectivity.",
+        "deps": ["def-deck-transformation-and-deck-group", "def-monodromy-action-on-a-covering-fibre", "thm-universal-cover-uniqueness-and-dominating-property", "prop-deck-transformations-are-determined-by-one-point-and-act-freely", "thm-fundamental-group-laws"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "landmark": true
+      }
+    ]
   },
   {
     "order": 294,
@@ -43,9 +676,72 @@
     "category": "topology",
     "title": "Covering Spaces and Lifting — Examples",
     "companion": "covering-spaces-and-lifting",
-    "requires": [
-      "covering-spaces-and-lifting"
-    ],
-    "items": []
+    "requires": ["covering-spaces-and-lifting"],
+    "items": [
+      {
+        "id": "ex-trivial-coverings-and-discrete-fibre-products",
+        "kind": "example",
+        "title": "Trivial coverings are products with a discrete fibre",
+        "strategy": "For any space $X$ and discrete set $F$, verify that the projection $X\\times F\\to X$ is a covering, with every open subset of the base evenly covered. Identify its sheets and fibre, including $F=\\varnothing$: the projection then fails surjectivity unless $X=\\varnothing$, so state the nonempty-fibre convention explicitly.",
+        "deps": ["def-covering-map-and-evenly-covered-neighbourhoods", "def-product-topology", "def-standard-topologies"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "cex-a-surjective-local-homeomorphism-need-not-be-a-covering-map",
+        "kind": "counterexample",
+        "title": "A surjective local homeomorphism need not be a covering map",
+        "strategy": "Let the domain be the disjoint union of $(0,2)$ and $(1,2)$ and map both components by inclusion onto the base $(0,2)$. The first component makes the map surjective and each inclusion is a local homeomorphism. The fibre has one point at $1$ and two immediately to its right, so local constancy of sheet number rules out a covering; equivalently, the second component supplies only a one-sided partial sheet above every neighbourhood of $1$.",
+        "deps": ["prop-covering-maps-are-local-homeomorphisms-with-discrete-fibres", "prop-number-of-sheets-is-locally-constant", "def-disjoint-union-topology", "def-interval"],
+        "provenance": {"statement": "ai-altered", "proof": "ai-altered"}
+      },
+      {
+        "id": "cex-a-disconnected-base-allows-variable-sheet-number",
+        "kind": "counterexample",
+        "title": "A covering over a disconnected base can have different sheet numbers on different components",
+        "strategy": "Map a three-point discrete space onto a two-point discrete space with one point over the first basepoint and two over the second. Each singleton base neighbourhood is evenly covered, while the fibre cardinal is not globally constant. This isolates exactly why connectedness appears in the sheet-number theorem.",
+        "deps": ["prop-number-of-sheets-is-locally-constant", "def-standard-topologies"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "ex-real-line-mod-integer-translations-is-a-covering",
+        "kind": "example",
+        "title": "The quotient $\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering with integer translations as deck transformations",
+        "strategy": "Use the equivalence relation $x\\sim y$ iff $x-y$ is an integer and the quotient topology. Intervals of length less than one have pairwise disjoint integer translates whose quotient images are evenly covered. Verify directly that translations are deck transformations and that every deck transformation is the unique integer translation determined by the image of zero, without computing the fundamental group of the quotient.",
+        "deps": ["thm-orbit-map-of-a-covering-space-action-is-a-covering", "def-deck-transformation-and-deck-group", "def-quotient-topology", "def-integers"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "ex-the-unit-loop-in-real-line-mod-integers-is-essential",
+        "kind": "example",
+        "title": "The projected unit interval is not nullhomotopic in $\\mathbb R/\\mathbb Z$",
+        "strategy": "The loop $t\\mapsto[t]$ lifts from zero to the path $t\\mapsto t$, whose endpoint is one. If it had an endpoint-fixed nullhomotopy, homotopy lifting would keep the terminal lift in the discrete fibre while deforming the initial lift to the constant path at zero, forcing endpoints one and zero to agree. This proves essentiality without asserting $\\pi_1(\\mathbb R/\\mathbb Z)\\cong\\mathbb Z$.",
+        "deps": ["ex-real-line-mod-integer-translations-is-a-covering", "thm-homotopy-lifting-for-covering-maps", "cor-lifted-path-endpoints-depend-only-on-path-homotopy"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "ex-power-maps-on-real-line-mod-integers-are-finite-sheeted-coverings",
+        "kind": "example",
+        "title": "The maps $[x]\\mapsto[mx]$ on $\\mathbb R/\\mathbb Z$ are $m$-sheeted coverings for $m\\ge1$",
+        "strategy": "Check well-definedness modulo integer translation. Around a class choose an interval short enough that its $m$ inverse branches are disjoint; these branches give the evenly covered neighbourhood and exactly $m$ fibre points. At $m=1$ the map is the identity, so no zero-sheet or division-by-zero case is hidden.",
+        "deps": ["ex-real-line-mod-integer-translations-is-a-covering", "def-covering-map-and-evenly-covered-neighbourhoods", "prop-number-of-sheets-is-locally-constant", "def-integers"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "ex-pullback-over-an-evenly-covered-open-set-is-trivial",
+        "kind": "example",
+        "title": "Pulling a covering back to an evenly covered open set gives a trivial covering",
+        "strategy": "For the inclusion $U\\hookrightarrow X$ of an evenly covered open set, identify the pullback with the disjoint union of the sheets over $U$. Write the explicit mutually inverse maps over $U$ and verify their continuity from the pullback subspace topology.",
+        "deps": ["def-pullback-covering-space", "def-covering-map-and-evenly-covered-neighbourhoods", "ex-trivial-coverings-and-discrete-fibre-products"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      },
+      {
+        "id": "ex-the-hawaiian-earring-has-no-universal-cover",
+        "kind": "example",
+        "title": "The Hawaiian earring is locally path-connected but has no universal cover",
+        "strategy": "Model the earring as countably many copies of $\\mathbb R/\\mathbb Z$ with diameters tending to zero and all zero classes identified, using the standard shrinking-wedge metric. Every neighbourhood of the wedge point contains an entire sufficiently small circle. Retraction to that circle and the essential unit loop show its inclusion carries a nontrivial loop, so semilocal simple connectedness fails at the wedge point. The necessity theorem then rules out a universal cover.",
+        "deps": ["ex-the-unit-loop-in-real-line-mod-integers-is-essential", "thm-universal-covering-spaces-force-semilocal-simple-connectedness", "def-semilocally-simply-connected-space", "def-quotient-topology"],
+        "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
+      }
+    ]
   }
 ]
