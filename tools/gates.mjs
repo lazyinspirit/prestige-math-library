@@ -122,6 +122,26 @@ const CONTRACT_TRIO = ({ reviewed = true } = {}) => [
   g('finite-smoke.mjs', [CONTRACTS], { needs: [CONTRACTS], why: 'bounded countermodel search' }),
   g('risk-report.mjs', reviewed ? [CONTRACTS, '--require-reviewed'] : [CONTRACTS],
     { needs: [CONTRACTS], why: reviewed ? 'high/critical routing needs an Alpha risk_review' : 'tier computation only; the Alpha risk_review is due at A6' }),
+
+  // The trio above reports "0 error(s)" whether it examined 400 items or none.
+  // On frontier-13 finite-smoke printed "0 error(s), 0 check(s)" for most of
+  // the run, because a contract may REFERENCE a smoke check the registry does
+  // not DEFINE and every such reference silently resolves to nothing. Green,
+  // and empty. This asserts the scope the trio just claimed to check.
+  g('gate-liveness.mjs', ['--run', '{run}', '--contracts', CONTRACTS, '--checklists', CHECKLISTS],
+    { needs: [CONTRACTS], why: 'a gate that checked nothing is not a gate that passed' }),
+
+  // proof-contract --strict checks the eight boundary axes are PRESENT. It has
+  // never checked one is TRUE. On frontier-13, 2,169 of 3,144 rows were
+  // not_applicable with one rationale recurring 124 times, and two of those
+  // false rows each concealed a confirmed-fatal defect.
+  g('boundary-audit.mjs', [CONTRACTS], { required: false, needs: [CONTRACTS], why: 'advisory: templated and self-contradicting boundary dispositions' }),
+
+  // The largest confirmed-fatal class: an [F#] restatement claiming more than
+  // the item it cites. --fail-on-missing-quote is hard because a recorded
+  // verbatim quote that is absent from the source is not a judgement call.
+  g('citation-fidelity.mjs', [CONTRACTS, '--fail-on-missing-quote'],
+    { needs: [CONTRACTS], why: 'every recorded citation quote must exist in the item it cites' }),
 ];
 
 const COVERAGE = () => g('level-coverage.mjs', [

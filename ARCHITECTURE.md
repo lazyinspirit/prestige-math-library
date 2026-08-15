@@ -746,6 +746,77 @@ steps 4/6c/8 to the lead Alpha, and the step-10 report is *drafted* by an agent
 for the orchestrator to deliver. The orchestrator is on the critical path
 nowhere.
 
+### 3.11e The stage driver — `run-drive.mjs` (2026-08-16)
+
+`run-supervisor.mjs` knows which stage a run is on and prints the command that
+advances it. Until now the thing that *read* that print-out and fired the next
+dispatch was the orchestrator, which is the single point the whole mechanism
+exists to remove: on `frontier-13` it wrote a status report instead of
+dispatching three separate times, at steps 5, 8 and 9, after being told not to.
+
+`run-drive.mjs --run <name>` closes the loop. It polls the stage table; when the
+current stage clears, it writes a transition task file and dispatches a
+`supervisor` agent to judge the transition and fire the next dispatch. State
+lives in `research/<run>-drive.json` so a restart cannot re-dispatch a
+transition already handed off, and the guard is a durable transition id rather
+than a process scan — `phantom-process-liveness-checks` is why.
+
+It never decides that a stage is done. `run-supervisor.mjs` owns the `done`
+predicates and reads them from disk; this only notices a transition and pays for
+an agent to handle it.
+
+### 3.11f Gate liveness — `gate-liveness.mjs` (2026-08-16)
+
+Every gate reports `0 error(s)`. None distinguishes "checked 400 things, found
+nothing wrong" from "checked nothing". On `frontier-13` that difference was
+load-bearing four times: `finite-smoke` printed `0 error(s), 0 check(s)` for
+most of the run because a contract may *reference* a smoke check the registry
+does not *define*; `proof-contract --strict` passed single-step input maps;
+`impact-audit` took its baseline after authoring so the diff was empty by
+construction; and `url-sweep` read a comma-joined flag as one path and saw one
+batch of seven.
+
+The shared shape is a collapsed **scope**, not a failed check. `gate-liveness`
+runs each vacuity-prone gate, extracts the count of things actually examined
+from its own summary line, and exits nonzero when that count is zero. A gate
+whose inputs are absent is `skipped`, never `passed`; a summary line it cannot
+parse is `unparsed`, never `passed`. It runs inside `CONTRACT_TRIO`, so every
+step that computes contracts asserts its own scope.
+
+### 3.11g Boundary and citation detectors (2026-08-16)
+
+Two defect classes had each reached disk twice, which is the threshold at which
+`alpha-finding-lists-become-fix-scope` says a hand-read sample must become a
+detector.
+
+**`boundary-audit.mjs`** — `proof-contract --strict` checks the eight boundary
+axes are *present*; it cannot check a disposition is *true*. On `frontier-13`,
+2,169 of 3,144 rows were `not_applicable` and the most-repeated rationale
+recurred 124 times with only the item id substituted — **two of those false rows
+each concealed a confirmed-fatal defect** (an `h = 0` division by zero, an
+`n = 0` counterexample), and `regen-contract-entries.mjs` re-emits them verbatim
+after a repair. Two signals: *template reuse*, clustering `not_applicable`
+rationales by normalised text; and *contradicted disposition*, a row marked
+`not_applicable` on an axis the item's own text exhibits. Each detector is
+scoped to the section it is entitled to read — the biconditional detector reads
+the **Statement**, not the whole body, because a `[L#]` line in Facts quotes
+*someone else's* biconditional. Unscoped it produced 256 hits and the first
+inspected was a false positive; scoped, 25. Advisory, not blocking.
+
+**`citation-fidelity.mjs`** — the largest confirmed-fatal class, ten of
+twenty-five step-8 rows. Two checks: *quote-not-found*, where the contract's
+recorded verbatim `quote` does not appear in the cited item (hard failure under
+`--fail-on-missing-quote`: the author asserted a verbatim quote), and *widening*,
+where the fact line generalises it. Only two widening detectors ship. A third,
+existential-read-as-universal, was written and **removed rather than shipped
+noisy** — it fired 16 times on `frontier-13` and every case inspected was a
+faithful reading of a ∀∃ statement. `tools/fixtures/citation-fidelity/` plants
+one of each surviving defect shape so the tool cannot silently stop firing;
+0 false positives over 1,416 real citations.
+
+Both print locations, never a headline count that could be mistaken for a
+finding count (`grep-counts-mislead`).
+
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 
 `AUDIT-WORKFLOW.md` is the normative workflow; these are its mechanisms.
