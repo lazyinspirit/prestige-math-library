@@ -4,10 +4,12 @@
 
 ## the batch named in your dispatch of run `frontier-14` — step-3 fix pass
 
-Group Alpha **a** reviewed batches 1–3. Your findings are the ones numbered
-`B<i>-*` in its report:
+The group Alpha that reviewed your batch returned numbered findings. **Find
+which Alpha reviewed you** — check each
+`research/frontier-14-alpha-<group>-step3-scaffold-review.md` for your batch —
+and work from that report.
 
-`research/frontier-14-alpha-a-step3-scaffold-review.md`
+`research/frontier-14-alpha-<group>-step3-scaffold-review.md`
 
 Read them **in that file**. Do not work from a summary and **do not renumber**.
 Finding ids are stable by construction. On an earlier run, fix briefs were
@@ -15,7 +17,7 @@ written from an agent's closing message instead of its report, eleven findings
 were silently dropped, and renumbering made the losses look like completions —
 two were real mathematics.
 
-If the report contains no `B<i>-*` findings, say so in your notes and exit; a
+If the report contains no your batch's findings (the report states the id prefix it used) findings, say so in your notes and exit; a
 clean batch is a valid outcome and costs nothing.
 
 ### What to do
