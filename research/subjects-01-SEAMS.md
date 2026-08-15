@@ -289,6 +289,23 @@ flat descent, and cites MOD-3 for the definition.** This is where the definition
 already sits, so it costs no rewrite, and it keeps flatness with the tensor
 product that defines it.
 
+**Correction, 2026-08-15 (`frontier-13` step-4 splice; the ruling stands, the id
+and the boundary move).** MOD-3 was scaffolded and its ids are now immutable. The
+definition is **`def-flat-and-faithfully-flat-modules-and-ring-maps`**, not
+`def-flat-module`, and it is wider than this ruling anticipated: one item defines
+flat module, faithfully flat module, flat ring map and faithfully flat ring map
+together. MOD-3 also proves `thm-flatness-criteria-by-injections-and-ideals`,
+`thm-projective-modules-are-flat`, `cor-free-modules-are-projective-and-flat`,
+`prop-extension-of-scalars-preserves-flat-modules` and
+`prop-transitivity-of-flatness-under-change-of-rings`. So
+`commutative-algebra` no longer mints faithful flatness either: it owns the
+flatness **local criteria**, the equational criterion and flat **descent**, and
+cites everything above. `plan-commutative-algebra-track.md` and
+`plan-homological-algebra-track.md` were updated in the same pass; CA-12's
+`def-flat-ring-homomorphism`, `def-faithfully-flat-module-and-ring-map`,
+`lem-ring-map-flatness-is-target-flatness`, `cor-free-modules-are-flat` and
+`cor-projective-modules-are-flat` are dropped as duplicates.
+
 ### R-2. Harmonic theory — "does not redo" means no plane-SPECIFIC proof
 
 The contract said `pde` "cites and does not redo the 2-D theory". PDE read that

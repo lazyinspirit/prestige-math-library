@@ -1,0 +1,329 @@
+# Frontier 13 batch 5 — Beta scaffold notes
+
+## Continuity checkpoint (steps 1–2)
+
+- Owned artifacts: this notes ledger plus the pending `frontier-13-batch-5.pages.json`, `.coverage.json`, and `.proof-contracts.json`; none of the three JSON artifacts exists yet.
+- Current substage: canonical-source harvest and published-dependency verification. The normative files, MOD-3 design block, live plan entry, prerequisite page, and representative published items have been read on disk.
+- Checks completed: the live page orders are 106/107; the existing `requires` closure was inspected; the construction must remain general for a right/left module while the resulting module structure is separately restricted to commutative rings; the prerequisite already publishes `thm-module-categories-have-enough-injectives`, so MOD-3's duplicate request will be recorded as already published rather than scaffolded again.
+- Open mathematical question: whether to retain the planned example `\(\mathbb C\otimes_{\mathbb R}\mathbb C\cong\mathbb C\times\mathbb C\)` by proposing a direct published prerequisite edge to `field-extensions-and-the-complex-numbers`, and which minimal algebra-structure machinery must be placed on the A page to state that example honestly.
+- Exact next action: open the complex-number, projective/flat, Hom/exactness, and enough-injectives published items; settle that edge and machinery; then write the machine scaffold, coverage harvest, provenance ledger, and proof contracts before running the two required gates.
+
+## Step-2 result
+
+The scaffold contains 38 A-page items and 11 B-page items. The A page remains a single page: 38 is well below the hard limit of 60, and the exactness/flatness half depends organically on the construction, universal property, right exactness, and direct-sum calculus in the first half. No split is proposed.
+
+The construction and module structure are separate items. `def-tensor-product-of-modules-by-generators-and-relations` works for a right $R$-module and a left $R$-module over an arbitrary unital ring and produces an abelian group. `thm-commutative-ring-module-structure-on-a-tensor-product` separately constructs the $R$-module structure only for commutative $R$. The guard `prop-elementary-tensor-formulas-descend-exactly-when-balanced` is also separate and includes the explicit failed prescription $q(m\otimes n)=m$ on $\mathbb Z\otimes_{\mathbb Z}\mathbb Z$, since $2\otimes1=1\otimes2$ would force $2=1$.
+
+### Exact plan amendment proposed for Step 3/4
+
+Target: `research/plan-algebra-track-expansion.md`, §II.4, block `MOD-3`.
+
+- Replace exact old text `- **order 102**` with `- **order 106**`.
+- Replace exact old text ``- **`requires`** `free-modules-and-exact-sequences` (100)`` with ``- **`requires`** `free-modules-and-exact-sequences` (104), `dual-spaces-bilinear-forms-and-inertia` (92), `field-extensions-and-the-complex-numbers` (54)``.
+- Replace exact old text `- **estimate** A 21, B 12` with `- **scaffold** A 38, B 11 (frontier-13 batch 5; no split proposed)`.
+- Replace the THMS clause beginning `**every module embeds in an injective module**` and ending `because it consumes the adjunction` with: `**Enough injectives is already published upstream:** free-modules-and-exact-sequences now contains thm-module-categories-have-enough-injectives, including the character-module embedding into Hom_Z(R,D). MOD-3 cites that established result and does not mint a duplicate stable id. The local character-dual theorem built here is the distinct flat-implies-injective duality result.`
+- Replace the B-page sentence beginning `$\mathbb{C}\otimes_{\mathbb{R}}\mathbb{C}$` and ending `drop with a note` with: `$\mathbb C\otimes_{\mathbb R}\mathbb C\cong\mathbb C\times\mathbb C$ is retained as an $\mathbb R$-algebra calculation. The direct published prerequisite field-extensions-and-the-complex-numbers supplies the specified real embedding and the basis $1,i$; MOD-3 builds the tensor-product algebra structure itself.`
+
+The machine scaffold therefore proposes that the live A-page `requires` array change from `["free-modules-and-exact-sequences"]` to `["free-modules-and-exact-sequences", "dual-spaces-bilinear-forms-and-inertia", "field-extensions-and-the-complex-numbers"]`. Both added pages are published and strictly earlier than order 106. The dual-space edge supports the canonical finite-dimensional Hom-tensor and trace-contraction items harvested from Dennis's notes; the complex-number edge supports the planned complex tensor-square example. If the orchestrator declines the dual-space enrichment, the exact removable block is `thm-hom-from-a-finite-dimensional-space-as-a-tensor-product` plus `cor-trace-is-tensor-contraction`; declining the complex edge requires removing only `ex-complex-tensor-square-over-the-reals`.
+
+### Proposed two-paragraph A-page summary
+
+For a right module $M$ and a left module $N$ over an arbitrary ring $R$, the tensor product $M\otimes_RN$ is the abelian group generated by elementary tensors subject to additivity and balance, and it represents balanced maps out of $M\times N$. This page constructs that quotient, proves the universal property and uniqueness up to unique isomorphism, and then uses the universal property—not unchecked symbolic formulas—to build functoriality, bimodule actions, associativity, tensor units, arbitrary direct-sum compatibility, product bases, tensor-product algebras, and the Hom–tensor adjunction. Only when $R$ is commutative does it separately give $M\otimes_RN$ its canonical $R$-module structure and symmetry.
+
+Tensoring is right exact but need not preserve injections. The page identifies $M\otimes_RR/I$ with $M/IM$, develops flat and faithfully flat modules, proves the injection and ideal tests, the choice-aware chain free $\Rightarrow$ projective $\Rightarrow$ flat, and the character-dual link from flat modules to injectives. Restriction and extension of scalars are constructed along a ring map, extension is proved left adjoint to restriction, and change-of-rings and flatness results make the construction usable downstream. The prerequisite page already supplies the separate enough-injectives theorem by a coinduced character-module embedding.
+
+## Step-1 decision: the complex example
+
+The item is retained. On disk, `def-complex-numbers-and-arithmetic` specifies the unital map $\mathbb R\to\mathbb C$, `thm-complex-numbers-form-a-field` proves unique coordinates $a+bi$, and `cor-complex-numbers-are-a-quadratic-real-extension` proves that $1,i$ is a real basis. Those claims are exactly what the example needs. They are not in the current closure of `free-modules-and-exact-sequences`, so the scaffold does not pretend otherwise: it proposes a direct edge to `field-extensions-and-the-complex-numbers`. The A page builds the general central $R$-algebra convention and tensor-product multiplication before the B page uses the map
+$$z\otimes w\longmapsto(zw,\overline z\,w).$$
+The basis images give an elementary bijectivity proof, so no Galois-theory result is imported.
+
+## Stale enough-injectives request
+
+MOD-3 was written before the current contents of `free-modules-and-exact-sequences`. The published prerequisite now contains, in order, `lem-every-abelian-group-embeds-in-a-divisible-group`, `lem-coinduced-modules-are-injective`, and `thm-module-categories-have-enough-injectives`. The last theorem states the general embedding $m\mapsto[r\mapsto j(rm)]$ into $\operatorname{Hom}_{\mathbb Z}(R,D)$ and also records the functorial character-module target in the commutative case. This is the exact construction demanded by the design. Duplicating it would violate stable-id uniqueness and would make the page worse, so the coverage artifact disposes of the result as `already-published`. The distinct local theorem `thm-character-duals-of-flat-modules-are-injective` is retained because Barr's Proposition 5.17 connects the new flatness theory to the already published injective-module interface.
+
+## Source ledger
+
+- [Stacks Project, §10.12 Tensor products](https://stacks.math.columbia.edu/tag/00CV), Definition 10.12.1 through Remark 10.12.13: construction, representing property, uniqueness, tensor calculus, bimodules, Hom–tensor, colimit/direct-sum behavior, right exactness, the $\mathbb Z/2$ failure, and flatness.
+- [Christopher Dennis, Week 1 recap](https://math.uchicago.edu/~may/PEOPLE/DENNIS/week1a.pdf), entire two-page note: arbitrary-ring right/left construction, bases, evaluation, finite-dimensional Hom tensors, trace, and the balanced-map universal property.
+- [Christopher Dennis, Week 4](https://math.uchicago.edu/~may/PEOPLE/DENNIS/week4b.pdf), §§1–3.4: right exactness, two injection failures, flatness, free modules, flat quotients, change of rings, extension preserving flatness, and transitivity.
+- [Haynes Miller, Lectures on Algebraic Topology I](https://math.mit.edu/~hrm/papers/905-notes-aug19.pdf), Definition 20.3–Property 20.10 and the opening of §21 through Lemma 21.3: an independent full-note treatment of construction, universal property, functoriality, tensor calculus, direct sums, quotient tensors, and exactness.
+- [Stacks Project, §10.39 Flat modules](https://stacks.math.columbia.edu/tag/00H9), opening through Lemma 10.39.5: flat/faithfully flat conventions, ideal intersections, directed-colimit closure, transitivity, and the injection/ideal criteria.
+- [Michael Barr, Acyclic Models](https://math.mit.edu/~hrm/palestine/barr-acyclic-models.pdf), Chapter 2 §§5.10–5.20: the general construction, Hom–tensor, right exactness, character modules, enough injectives, flatness, and projective implies flat.
+- [MIT 18.721 algebraic geometry notes](https://math.mit.edu/classes/18.721/ag-jun17-2021.pdf), (2.1.32)–Lemma 2.1.35: restriction/extension of scalars and their adjunction.
+- [Wenqi Li, Commutative Algebra](https://www.math.columbia.edu/~wenqili/commalg_notes.pdf), Lecture 9 and the specified opening of Lecture 10: algebra tensor products, polynomial and matrix base change, coproduct mapping property, quotient/cyclic calculations, the complex/Galois family, and a direct right-exactness proof.
+
+No source prose will be copied. Stacks Project material is cited under its GNU FDL terms; the university-hosted notes are used as references for statements and proof routes only. No external fallback item is planned.
+
+## Coverage yield and declines
+
+The checklist has 110 source-heading rows plus 11 canonical rows. Across the source rows, 86 are scaffolded as numbered items, 13 are absorbed inline, 7 are already published, and 4 are declined. Including the canonical cross-check gives 96 included, 13 inline, 8 already-published, 2 deferred, and 2 out-of-scope dispositions.
+
+The four declines are deliberately narrow:
+
+1. Stacks Lemma 10.39.3, directed colimits of flat modules, is deferred because its proof and faithful statement require exact directed colimits and a directed-system interface; this is the decline most likely to be challenged.
+2. Barr §5.19's Tor formulation is deferred to the projective-resolution/derived-functor layer; flatness itself is fully built here.
+3. Li's quaternion tensor-square problem is out of scope because the library has no quaternion-algebra construction. The nearby matrix-algebra calculation is retained rather than dropped.
+4. Li's coordinate-ring interpretation of products of affine algebraic sets is out of scope because affine varieties, vanishing ideals, and spectra belong to the later algebraic-geometry track. The algebra tensor-product and coproduct theorems it uses are built here.
+
+## Convention disagreements and resolutions
+
+- Dennis calls the arbitrary-ring condition “$A$-bilinear”; Stacks §22.12 also notes this terminology. The page uses **balanced** for a right-module/left-module map to an abelian group and reserves **$R$-bilinear** for two $R$-modules over commutative $R$. This makes the handedness visible.
+- Stacks §10.12 begins in the commutative convention, whereas Dennis and Barr state the construction for arbitrary rings. The construction follows the latter generality; the $R$-module structure is a later commutative theorem.
+- An $R$-algebra here is a ring with a unital structure map from commutative $R$ whose image acts centrally. The factors need not themselves be commutative; the coproduct mapping property is separately restricted to commutative algebras.
+- Flatness is introduced through exactness and then proved equivalent to preservation of injections and the ideal tests. Right exactness is never folded into the definition or silently upgraded to exactness.
+- Arbitrary free modules are projective under the published AC boundary, while their flatness follows directly from tensor units and arbitrary direct sums without AC. The scaffold keeps those routes separate.
+- The library permits the zero ring and zero modules. Tensor units, empty direct sums, empty bases, $m=0$ or $n=0$, and $M_0(F)$ are explicit proof-contract boundaries.
+
+## Published-dependency audit
+
+Every dependency below was opened on disk and has `status: published`. None is legacy-unclassified and none has an `ai-generated` statement. “Source-checked” means its exact domain and clause were compared with the reference already recorded in the item and, where needed, with the web source ledger above; “established” means the displayed claim is an elementary standard interface verified directly from its on-disk statement.
+
+| Published dependency | Statement provenance | Confidence route and exact use |
+|---|---|---|
+| `def-left-and-right-modules` | literature-derived | Source-checked; supplies unital handed module axioms. |
+| `def-group` | ai-altered | Established; supplies abelian groups as additive targets. |
+| `def-commutative-ring` | literature-derived | Source-checked; supplies the exact multiplication-commutativity hypothesis. |
+| `def-free-abelian-group` | literature-derived | Source-checked against McKernan; supplies its universal property. |
+| `thm-abelianisation-of-a-free-group-is-free-abelian` | ai-altered | Source-checked against Elman/McKernan; confirms existence on every set. |
+| `def-generated-subgroup` | ai-altered | Established; supplies the smallest subgroup containing the relations. |
+| `def-quotient-group` | literature-derived | Source-checked; supplies quotient cosets. |
+| `thm-quotient-group-universal-property` | literature-derived | Source-checked; supplies the exact factorization direction. |
+| `def-module-homomorphism-kernel-image-and-cokernel` | literature-derived | Source-checked; supplies linear maps, kernels, images, and isomorphisms. |
+| `thm-int-comm-ring` | literature-derived | Source-checked against Tao; supplies the regular integer-module witness. |
+| `def-direct-sum-of-a-family-of-modules` | literature-derived | Source-checked; finite-support direct sums, including empty family. |
+| `thm-universal-property-of-module-direct-sums` | literature-derived | Source-checked; exact arbitrary-family mapping property. |
+| `def-free-module-on-a-set-and-standard-basis` | literature-derived | Source-checked; supplies $R^{(X)}$ and the canonical basis. |
+| `thm-universal-property-of-free-modules` | literature-derived | Source-checked; exact extension/uniqueness clause from a basis set. |
+| `lem-standard-basis-of-f-n` | ai-altered | Source-checked against Axler and checked at $n=0$; supplies coordinate bases and dimension. |
+| `def-dimension` | ai-altered | Source-checked against Axler; supplies finite dimension only and includes the zero space. |
+| `def-hom-groups-and-induced-hom-maps` | literature-derived | Source-checked; Hom is an abelian group with pre/postcomposition. |
+| `def-algebraic-dual-and-linear-functional` | literature-derived | Source-checked against Pinkham/Conrad; full algebraic dual, no topology. |
+| `thm-dual-family-is-a-basis-in-finite-dimension` | literature-derived | Source-checked against Pinkham; exact finite-dimensional direction and zero case. |
+| `def-trace-of-an-endomorphism` | literature-derived | Source-checked against Axler; finite-dimensional, basis-independent trace including zero dimension. |
+| `def-ring-homomorphism` | ai-altered | Source-checked against Judson; unital maps are required. |
+| `def-exact-and-short-exact-sequences-of-modules` | literature-derived | Source-checked; exactness is equality of image and kernel. |
+| `def-quotient-module` | literature-derived | Source-checked; quotient by a submodule with induced scalar action. |
+| `thm-quotient-module-universal-property` | literature-derived | Source-checked; exact vanishing/factorization direction. |
+| `def-left-right-and-two-sided-ideal` | literature-derived | Source-checked; commutative ideals agree with two-sided ideals. |
+| `thm-projective-module-characterizations` | literature-derived | Source-checked; projective implies direct summand of the canonical free cover without choice. |
+| `thm-free-modules-are-projective-with-choice-boundary` | literature-derived | Source-checked; AC, finite-choice, and empty-basis cases are stated separately. |
+| `cor-every-module-is-a-quotient-of-a-free-module` | literature-derived | Source-checked; provides the canonical free cover used in the flat-quotient proof. |
+| `def-injective-module` | literature-derived | Source-checked; exact extension-along-monomorphism property. |
+| `def-sum-and-product-of-ideals` | literature-derived | Source-checked; supplies $I+J$ and its empty-sum boundary. |
+| `thm-first-isomorphism-theorem-modules` | literature-derived | Source-checked; supplies $M/\ker f\cong\operatorname{im}f$. |
+| `thm-gcd-generates-the-subgroup` | ai-altered | Source-checked against its Bézout dependencies; supplies $m\mathbb Z+n\mathbb Z=\gcd(m,n)\mathbb Z$. |
+| `thm-integers-modulo-n-basic-algebra` | ai-altered | Source-checked against Conrad and checked at $n=1$; supplies the cyclic quotient ring operations. |
+| `thm-rat-field` | literature-derived | Source-checked against Tao; nonzero integers are invertible on $\mathbb Q$. |
+| `def-polynomial-ring-over-a-commutative-ring` | literature-derived | Source-checked; finite-support coefficient construction. |
+| `cor-polynomial-ring-over-a-domain-is-a-domain` | literature-derived | Source-checked against Judson; exact domain hypothesis. |
+| `def-field-extension-generated-subfields-and-simple-extension` | literature-derived | Source-checked against Judson; a field extension includes the specified map. |
+| `def-complex-numbers-and-arithmetic` | literature-derived | Source-checked; supplies the real structure map and $i$. |
+| `thm-complex-numbers-form-a-field` | literature-derived | Source-checked; unique $a+bi$ coordinates and arithmetic. |
+| `cor-complex-numbers-are-a-quadratic-real-extension` | ai-altered | Source-checked against Judson and its on-disk proof; exact real basis $1,i$. |
+| `def-product-ring` | ai-altered | Established directly from componentwise operations; exact product used by the complex example. |
+| `def-matrix-space` | ai-altered | Established from the function-space definition and checked at empty shapes. |
+| `cor-square-matrices-form-a-ring` | ai-altered | Source-checked against Axler and established at $n=0$; used only for matrices over a field. |
+
+No opened published dependency contains an unambiguous falsehood. The older applied-$\iota$ notation appears inside legacy arithmetic items but is not reproduced or edited; all four owned artifacts are free of applied-$\iota$ notation.
+
+## Planned component provenance
+
+URL keys in this table are the eight entries in the source ledger: S1 Stacks tensor products, S2 Dennis Week 1, S3 Dennis Week 4, S4 Miller, S5 Stacks flatness, S6 Barr, S7 MIT 18.721, and S8 Li. Every `literature-derived` or `ai-altered` statement will receive the named URL in `sources.references` at Step 5. No planned statement is `ai-generated`, so no generated statement can become a load-bearing dependency.
+
+| Item | `provenance.statement` | `provenance.proof` | Component rationale / source |
+|---|---|---|---|
+| `def-balanced-and-bilinear-maps` | literature-derived | not-applicable | S1/S2/S6; terminology adjusted only as recorded above. |
+| `def-tensor-product-of-modules-by-generators-and-relations` | literature-derived | not-applicable | S2/S4/S6; standard quotient construction. |
+| `thm-universal-property-of-module-tensor-products` | literature-derived | literature-derived | S1/S2/S4/S6; free-object factorization proof. |
+| `cor-module-tensor-products-are-unique-up-to-unique-isomorphism` | literature-derived | ai-altered | S1/S4; standard two-universal-properties proof adapted to house style. |
+| `prop-functoriality-of-module-tensor-products` | literature-derived | ai-altered | S4/S8; universal-property construction with explicit composition checks. |
+| `prop-elementary-tensor-formulas-descend-exactly-when-balanced` | ai-altered | ai-generated | S1/S2 supports the exact descent criterion; the $q(m\otimes n)=m$ witness is a direct check. Statement was source-checked because it is load-bearing. |
+| `def-bimodule` | literature-derived | not-applicable | S1/S2; commuting-action convention. |
+| `thm-bimodule-actions-induced-on-tensor-products` | literature-derived | ai-altered | S2; the proof is expanded through the guard. |
+| `thm-associativity-of-balanced-tensor-products` | literature-derived | ai-altered | S1/S2; universal-property proof with explicit outer actions. |
+| `thm-commutative-ring-module-structure-on-a-tensor-product` | literature-derived | ai-altered | S2/S8; kept separate from construction. |
+| `thm-symmetry-and-associativity-over-a-commutative-ring` | literature-derived | ai-altered | S1/S2/S4/S8; maps checked on elementary tensors. |
+| `thm-unit-isomorphisms-for-module-tensor-products` | literature-derived | ai-altered | S1/S2/S4/S8; explicit mutually inverse maps. |
+| `cor-finite-iterated-tensor-products-represent-multilinear-maps` | literature-derived | ai-altered | S1/S8; induction adds explicit empty and singleton boundaries. |
+| `thm-tensor-products-commute-with-arbitrary-direct-sums` | literature-derived | ai-altered | S1/S3/S4; arbitrary-family proof via both universal properties. |
+| `thm-tensor-product-basis-from-bases` | literature-derived | ai-altered | S2; generalized from fields to free modules through direct sums. |
+| `cor-tensor-products-of-finite-free-modules-and-dimension` | literature-derived | ai-altered | S2/S8; finite specialization with zero ranks. |
+| `def-internal-hom-module-over-a-commutative-ring` | literature-derived | not-applicable | S2/S1; pointwise scalar action. |
+| `thm-hom-from-a-finite-dimensional-space-as-a-tensor-product` | literature-derived | ai-altered | S2 Exercise 10; dual-basis inverse written explicitly. |
+| `cor-trace-is-tensor-contraction` | literature-derived | ai-altered | S2 Exercise 11; rank-one matrix computation. |
+| `def-algebra-over-a-commutative-ring` | literature-derived | not-applicable | S8; central structure-map convention made explicit. |
+| `thm-tensor-product-of-algebras-over-a-commutative-ring` | literature-derived | ai-altered | S8; multilinear descent precedes ring-law checks. |
+| `thm-coproduct-property-of-tensor-products-of-commutative-algebras` | literature-derived | ai-altered | S8; elementary mapping property, no category-theory dependency. |
+| `thm-hom-tensor-adjunction-for-modules` | literature-derived | literature-derived | S1/S2/S6; curry/uncurry proof and naturality. |
+| `thm-right-exactness-of-tensor-products` | literature-derived | ai-altered | S1/S3/S4/S8; direct quotient-and-lift proof. |
+| `def-product-of-an-ideal-and-a-module` | literature-derived | not-applicable | S1/S8; finite-sum definition of $IM$. |
+| `cor-tensor-product-with-a-quotient-ring` | literature-derived | ai-altered | S4/S8; right exactness plus image identification. |
+| `def-flat-and-faithfully-flat-modules-and-ring-maps` | literature-derived | not-applicable | S3/S5; exactness convention and ring-map specialization. |
+| `thm-flatness-criteria-by-injections-and-ideals` | literature-derived | ai-altered | S5; finite-data reduction and induction must be expanded fully. |
+| `thm-projective-modules-are-flat` | literature-derived | ai-altered | S6/S8; direct-summand-of-free argument. |
+| `cor-free-modules-are-projective-and-flat` | ai-altered | ai-altered | S3/S8 plus the published choice boundary; combines two sourced clauses without weakening hypotheses. |
+| `cor-flat-modules-preserve-intersections-of-ideals` | literature-derived | ai-altered | S5; exact sequence and quotient-tensor identifications. |
+| `thm-flat-quotients-preserve-short-exact-tensor-sequences` | literature-derived | ai-altered | S3; explicit diagram chase replaces an unbuilt snake lemma. |
+| `def-restriction-and-extension-of-scalars` | literature-derived | not-applicable | S7/S8; both constructions and the induced action. |
+| `thm-extension-of-scalars-is-left-adjoint-to-restriction` | literature-derived | literature-derived | S7; explicit natural Hom bijection. |
+| `cor-change-of-rings-for-extension-of-scalars` | literature-derived | ai-altered | S3; associativity specialization with element formula. |
+| `prop-extension-of-scalars-preserves-flat-modules` | literature-derived | ai-altered | S3/S5; injection criterion and change of rings. |
+| `prop-transitivity-of-flatness-under-change-of-rings` | literature-derived | ai-altered | S3/S5; two-stage exactness proof. |
+| `thm-character-duals-of-flat-modules-are-injective` | literature-derived | literature-derived | S6 Proposition 5.17; transpose-extension proof. |
+| `fs-tensor-products-of-nonzero-cyclic-groups-are-always-nonzero` | ai-altered | ai-altered | S2/S8; false wording plus exact sourced correction $\mathbb Z/\gcd(m,n)$. |
+| `ex-rationals-tensor-a-finite-cyclic-group-is-zero` | literature-derived | ai-altered | S8; quotient-tensor calculation. |
+| `ex-tensor-product-of-two-quotient-modules` | literature-derived | ai-altered | Standard consequence of the sourced quotient theorem; first-isomorphism proof. |
+| `ex-polynomial-extension-of-scalars` | literature-derived | ai-altered | S8; coefficientwise inverse and finite support. |
+| `ex-matrix-algebra-extension-of-scalars` | literature-derived | ai-altered | S8 specialized to a field extension so the published matrix interface suffices. |
+| `ex-extension-of-scalars-of-coordinate-modules` | literature-derived | ai-altered | S7/S8; standard-basis map including $n=0$. |
+| `ex-complex-tensor-square-over-the-reals` | ai-altered | ai-generated | S8's Galois-family statement specialized to $\mathbb C/\mathbb R$; elementary basis witness independently checks the result. |
+| `ex-polynomial-injection-killed-by-tensoring` | literature-derived | ai-altered | S3 Exercise 1; explicit multiplication-by-$x$ witness. |
+| `fs-a-zero-elementary-tensor-has-a-zero-factor` | ai-altered | ai-generated | Dispatch/S2 relations; concrete $2\otimes\bar1$ witness checked directly. |
+| `fs-every-tensor-is-an-elementary-tensor` | ai-altered | ai-generated | S4 decomposable-tensor warning; coefficient-matrix contradiction is checkable. |
+| `fs-tensoring-preserves-injections` | literature-derived | ai-altered | S1/S3/S4/S8; standard multiplication-by-2 counterexample. |
+
+## Proof-obligation pass
+
+`research/frontier-13-batch-5.proof-contracts.json` covers all 41 proof-bearing items and excludes the eight pure definitions. At scaffold time each contract records every planned dependency as a citation obligation, carries the full strategy as the first durable derivation block, and marks all eight boundary categories for explicit Step-5 discharge. No registered finite-smoke test models module tensor products, so every `finite_smoke` array is empty; the elementary examples instead have explicit algebraic witnesses in their strategies.
+
+The highest-risk obligations for Step 5 are: representative independence in the quotient construction; the iff reverse direction in the finitely generated ideal criterion for flatness; the diagram chase for a flat quotient; centrality in tensor-product algebra multiplication; the naturality and variance of both adjunctions; and the four-real-dimensional bijectivity check for $\mathbb C\otimes_{\mathbb R}\mathbb C$. The guard item must be authored before any later map-out proof and cited wherever a formula is descended.
+
+## Blockers
+
+None. All web locators were reachable, all proposed published dependencies were readable on disk, and no permission or escalation was requested. The required live-plan validation and coverage checklist are green. The manifest-only content policy reports 49 scoped items with zero errors/warnings, and prosecheck reports zero errors/warnings. A read-only in-memory splice of this batch into the live plan also validates with no item-level cycle, forward-reference, undeclared-prerequisite, unresolved-id, B-leaf, or size error.
+
+## 2026-08-15 — Step-3 Alpha scaffold repair
+
+Applied only the adjudicated Batch 5 fixes.
+
+- **F5.1.** In `def-tensor-product-of-modules-by-generators-and-relations`, replaced the two out-of-closure free-group dependencies with `def-free-module-on-a-set-and-standard-basis` and `thm-universal-property-of-free-modules`. Both are published on `free-modules-and-exact-sequences`, inside this pair's declared `requires` closure. The construction now says explicitly that $F=\mathbb Z^{(M\times N)}$ is the free $\mathbb Z$-module on $M\times N$ and that its underlying additive group is the free abelian group on that set. The universal-property theorem now declares and contracts both free-module facts directly, views the target abelian group as a $\mathbb Z$-module, and extends the input map $\mathbb Z$-linearly before passing to the quotient. No `requires` edge to `free-groups-and-presentations` was added.
+- **F5.2.** Verified the destination ids and orders against `research/plan-spec.json`. The directed-colimit closure row now names `subobject-lattices-generators-and-the-grothendieck-axioms` (365.017), where AB5 is developed. The Tor row now names `tor-flatness-and-global-dimension` (365.055). Their `deferred` dispositions are unchanged.
+- **F5.3.** Replaced the scaffold-time citation placeholders in all 41 proof contracts with 147 concrete citation entries. The citation audit checked 51 published-source occurrences against the exact on-disk `Definition` or `Statement` clause and anchored 96 same-pair planned citations to the exact scaffolded source clause, with every fact's `uses` array matching its stated derivation input. Empty citation arrays remaining: 0. The obsolete placeholder-only `authoring_status`, `citation_plan`, and `citation_obligations` fields were removed, matching the populated contract shape used by Batches 1 and 2.
+
+No item was added, removed, or renamed. Item counts remain 38 on `tensor-products-of-modules` and 11 on `tensor-products-of-modules-examples`, below the 60-item A-page ceiling. No coverage heading changed to `included` because this repair added no result. The component-provenance determinations remain sound: the repaired construction is still the standard literature-derived generators-and-relations construction with `proof: not-applicable`, and the universal property remains literature-derived in both statement and proof; the repair changes only the licensed in-library route, not either mathematical claim. The existing per-item provenance rationales above therefore remain unchanged.
+
+### Required gate output
+
+`node tools/validate-plan.mjs research/plan-spec.json` exited 0. Its exact terminal conclusion was:
+
+```text
+OK — declared page order is acyclic and consistent; no item-level cycles, forward
+references, B-page dependencies, or unresolved ids among the 244 page(s) with item lists.
+NOTE: 927 planned page(s) carry no item list yet (marked * above). Their reading
+order is guaranteed; their item dependencies are not yet asserted, so re-run this
+after writing each page's items.
+```
+
+The verbose plan listing also contained 299 existing `[redundant-prereq]` warnings and no other bracketed diagnostic class.
+
+```text
+$ node tools/coverage-checklist.mjs research/frontier-13-batch-5.coverage.json
+coverage-checklist: 1 page(s), 121 harvested result(s), 0 error(s), 0 warning(s)
+
+$ node tools/content-policy.mjs research/frontier-13-batch-5.pages.json --manifest-only
+content-policy: 49 scoped item(s), 0 error(s), 0 warning(s)
+```
+
+### Citation and dependency-closure audits
+
+```text
+proof-contract citation audit: 41 contract(s), 147 citation(s), 51 published-source occurrence(s), 96 planned-local occurrence(s), 0 error(s)
+
+dependency-closure audit: 49 item(s), 168 dependency edge(s), 100 same-pair edge(s), 68 published edge(s)
+unresolved ids: 0
+out-of-closure published deps: 0
+cross-pair edges: 0
+B-leaf deps: 0
+duplicate ids: 0
+same-pair non-earlier deps: 0
+```
+
+### Blocker
+
+None.
+
+## 2026-08-15 — Step-5 authoring report
+
+### Items authored
+
+Authored all 49 spliced ids with `status: draft` and `origin: session`; no item has `verification.audited`.
+
+- A page, 38 items: `def-balanced-and-bilinear-maps`, `def-tensor-product-of-modules-by-generators-and-relations`, `thm-universal-property-of-module-tensor-products`, `cor-module-tensor-products-are-unique-up-to-unique-isomorphism`, `prop-functoriality-of-module-tensor-products`, `prop-elementary-tensor-formulas-descend-exactly-when-balanced`, `def-bimodule`, `thm-bimodule-actions-induced-on-tensor-products`, `thm-associativity-of-balanced-tensor-products`, `thm-commutative-ring-module-structure-on-a-tensor-product`, `thm-symmetry-and-associativity-over-a-commutative-ring`, `thm-unit-isomorphisms-for-module-tensor-products`, `cor-finite-iterated-tensor-products-represent-multilinear-maps`, `thm-tensor-products-commute-with-arbitrary-direct-sums`, `thm-tensor-product-basis-from-bases`, `cor-tensor-products-of-finite-free-modules-and-dimension`, `def-internal-hom-module-over-a-commutative-ring`, `thm-hom-from-a-finite-dimensional-space-as-a-tensor-product`, `cor-trace-is-tensor-contraction`, `def-algebra-over-a-commutative-ring`, `thm-tensor-product-of-algebras-over-a-commutative-ring`, `thm-coproduct-property-of-tensor-products-of-commutative-algebras`, `thm-hom-tensor-adjunction-for-modules`, `thm-right-exactness-of-tensor-products`, `def-product-of-an-ideal-and-a-module`, `cor-tensor-product-with-a-quotient-ring`, `def-flat-and-faithfully-flat-modules-and-ring-maps`, `thm-flatness-criteria-by-injections-and-ideals`, `thm-projective-modules-are-flat`, `cor-free-modules-are-projective-and-flat`, `cor-flat-modules-preserve-intersections-of-ideals`, `thm-flat-quotients-preserve-short-exact-tensor-sequences`, `def-restriction-and-extension-of-scalars`, `thm-extension-of-scalars-is-left-adjoint-to-restriction`, `cor-change-of-rings-for-extension-of-scalars`, `prop-extension-of-scalars-preserves-flat-modules`, `prop-transitivity-of-flatness-under-change-of-rings`, and `thm-character-duals-of-flat-modules-are-injective`.
+- B page, 11 items: `fs-tensor-products-of-nonzero-cyclic-groups-are-always-nonzero`, `ex-rationals-tensor-a-finite-cyclic-group-is-zero`, `ex-tensor-product-of-two-quotient-modules`, `ex-polynomial-extension-of-scalars`, `ex-matrix-algebra-extension-of-scalars`, `ex-extension-of-scalars-of-coordinate-modules`, `ex-complex-tensor-square-over-the-reals`, `ex-polynomial-injection-killed-by-tensoring`, `fs-a-zero-elementary-tensor-has-a-zero-factor`, `fs-every-tensor-is-an-elementary-tensor`, and `fs-tensoring-preserves-injections`.
+
+The A page carries the splice receipt's replacement summary verbatim. The B page ends with its closing frontmatter delimiter and has no authored body. The universal-property proof explicitly closes the dispatch's hinge: the free-$\mathbb Z$-module property first produces a unique $\mathbb Z$-module homomorphism, while the theorem asks for a group homomorphism; these are the same maps because a map of abelian groups is additive exactly when it is $\mathbb Z$-linear. The two deferred coverage rows still name their licensing destinations, `subobject-lattices-generators-and-the-grothendieck-axioms` (order 365.017) and `tor-flatness-and-global-dimension` (order 365.055).
+
+### Provenance rationale and obligation reconciliation
+
+The item-by-item component provenance table above remains the rationale of record. No Statement or Construction has `ai-generated` provenance. Definitions use `proof: not-applicable`; proof-bearing claims use the recorded literature-derived, ai-altered, or ai-generated proof route separately. All cited Facts were re-anchored to actual authored Definitions or Statements rather than scaffold titles. The final strict contract has 41 proof-bearing items, 160 full proposition citations, and 214 separately numbered derivations; no one-step proof contract remains.
+
+Authoring exposed the following genuinely used edges, which were added to both item frontmatter and the page manifest rather than hidden or added merely for a checker: the free-module construction in the finite-free tensor corollary; the tensor construction and commutative tensor-module structure in right exactness; arbitrary direct sums in the intersection theorem; the tensor construction, tensor unit, and free-module universal property in the flatness criterion's finite-data argument; the tensor universal property in trace contraction; integer cancellation in the injection counterexample; and the standard-representative theorem in the three cyclic examples that need $\overline1\ne\overline0$ or nonzero $\mathbb Z/2,\mathbb Z/3$. A final manifest reconciliation reports all 49 dependency arrays byte-for-byte equal to their item frontmatter arrays.
+
+### Gate output
+
+All required commands exited 0. Verbatim terminal summaries follow; the long repository-wide diagnostic listings emitted by `depcheck`, `fwdcheck`, and `extcheck` contain only their established warning/information classes and end in the quoted `OK` conclusions.
+
+```text
+$ node tools/tsx-run.mjs tools/precheck.mts
+3559 checked, 0 failing — all clean
+
+$ node tools/depcheck.mjs
+depcheck: 4535 items (4128 published), 270 pages
+OK — no cycles, all references resolve, no draft items on published pages.
+
+$ node tools/fwdcheck.mjs
+fwdcheck: 4535 items, 0 open forward reference(s), 399 closed, 34 load bearing
+OK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.
+
+$ node tools/extcheck.mjs
+extcheck: 4535 items, 116 recorded-not-proved, 119 resting on them
+119 warning(s):
+OK — every recorded-not-proved statement is a cited remark with no proof, and every consequence is marked.
+
+$ node tools/rendercheck.mjs
+OK — 4805 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+
+$ node tools/prosecheck.mjs
+4805 file(s) checked. 0 error(s), 568 warning(s).
+  library-scope-denial: 206
+  count-in-prose: 189
+  count-of-this-page: 173
+
+(re-run with --warnings to list them; warnings are heuristic and have legitimate cases)
+
+OK — no positional claim contradicts the spec.
+
+$ node tools/content-policy.mjs research/frontier-13-batch-5.pages.json
+content-policy: 49 scoped item(s), 0 error(s), 0 warning(s)
+
+$ node tools/coverage-checklist.mjs research/frontier-13-batch-5.coverage.json
+coverage-checklist: 1 page(s), 121 harvested result(s), 0 error(s), 0 warning(s)
+```
+
+Additional authoring checks:
+
+```text
+$ node tools/proof-contract.mjs research/frontier-13-batch-5.proof-contracts.json --strict
+proof-contract: 0 error(s), 0 warning(s), 41/41 item(s) checked
+
+$ node tools/citecheck.mjs <49 batch item paths>
+citecheck: 49 item(s) scanned
+
+OK — every recognised elementary move cites a home that states it.
+
+$ node tools/rendercheck.mjs <49 batch item paths> <2 batch page paths>
+OK — 51 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+
+manifest-reconcile: 49 items, 0 error(s)
+```
+
+### Blocker
+
+None.

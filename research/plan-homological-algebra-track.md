@@ -2002,8 +2002,11 @@ The abstract-algebra track owns tensor products and flat modules. This page
 derives tensor, proves that resolving the right module or the left module gives
 the same Tor bifunctor, and then makes precise the slogan that Tor detects
 torsion and flatness. Noncommutative handedness is printed in every definition.
-Under R-1 it cites MOD-3 `def-flat-module` and MOD-3's basic projective-implies-
-flat theorem; it does not mint or re-prove either module-level fact.
+Under R-1 it cites MOD-3's `def-flat-and-faithfully-flat-modules-and-ring-maps`
+(scaffolded 2026-08-15 in place of the promised `def-flat-module`; it defines
+flat and faithfully flat modules and ring maps in one item) and MOD-3's
+`thm-projective-modules-are-flat`; it does not mint or re-prove either
+module-level fact.
 
 ### A-page items, in dependency order
 
@@ -2034,8 +2037,9 @@ flat theorem; it does not mint or re-prove either module-level fact.
 8. `def-tensor-double-complex-of-two-projective-resolutions` — **definition**
    `[LN]`. $K_{p,q}=Q_p(N)\otimes_RP_q(M)$ in the first quadrant.
 9. `rem-projective-modules-are-flat-is-supplied-by-mod-three` — **remark**
-   `[LN]`, citing MOD-3 `def-flat-module` and its stable projective-implies-flat
-   theorem; this page uses the fact and does not re-prove it.
+   `[LN]`, citing MOD-3 `def-flat-and-faithfully-flat-modules-and-ring-maps`
+   and its `thm-projective-modules-are-flat`; this page uses the fact and does
+   not re-prove it.
 10. `lem-the-rows-of-the-augmented-tensor-double-complex-are-exact` —
     **lemma** `[LA]`, because every $Q_p(N)$ is flat as a right module.
 11. `lem-the-columns-of-the-augmented-tensor-double-complex-are-exact` —
@@ -3791,7 +3795,7 @@ Every heading is Weibel's own table-of-contents wording.
   `thm-baer-criterion-for-injective-modules`, and
   `thm-module-categories-have-enough-injectives`.
 - **3.3 “Flat Modules”** — `out-of-scope` to the abstract-algebra tensor page,
-  whose planned `def-flat-module` is consumed by `HA-10`; Tor characterisations
+  whose scaffolded `def-flat-and-faithfully-flat-modules-and-ring-maps` is consumed by `HA-10`; Tor characterisations
   are `included` there as
   `thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes`.
 - **3.3.1 “Purity”** — `deferred`: pure exact sequences, pure projectives and
@@ -4347,7 +4351,8 @@ This section is the only legal effect this file has on another track.
 3. **R-1 APPLIED 2026-08-14 — abstract algebra tensor page.** It publishes stable ids for balanced
    maps, `def-bimodule`, tensor of a right and left module, functoriality,
    associativity/unit/symmetry in the commutative case, right exactness,
-   `def-flat-module`, projective implies flat, and Hom–tensor adjunction. The
+   `def-flat-and-faithfully-flat-modules-and-ring-maps`, `thm-projective-modules-are-flat`, and the Hom–tensor
+   adjunction `thm-hom-tensor-adjunction-for-modules`. The
    homological builder then substitutes those exact ids into `HA-10` and
    `HA-11`; it does not re-mint any. Noncommutative Tor is blocked if the
    right/left typing or bimodule seam is omitted.
@@ -4424,7 +4429,7 @@ This section is the only legal effect this file has on another track.
 |---|---|---|---|
 | stable group-ring/action item ids | page ownership is settled at abstract algebra RT-1, `the-group-algebra-and-representations`, but its `items` array is still empty | extend RT-1 as agreed with group theory, preserve its authored stable ids, and substitute those ids into `HA-12`; group theory does not mint a second group ring | all of `HA-12`; the page-id seam itself is closed |
 | group-extension item id for LHS | group theory fixes the supplying page as `GT-9`, `group-extensions-complements-and-schur-zassenhaus`, but that scaffold is not yet authored | preserve or mechanically substitute GT-9's stable definition id into the LHS theorem on `HA-17` | only the LHS application; the abstract Grothendieck spectral sequence survives |
-| exact tensor/flat item ids | abstract-algebra tensor page is planned with empty `items`; enrichment §MOD-3 promises the content | preserve its promised ids (especially `def-bimodule` and `def-flat-module`) and substitute authored stable ids before building `HA-10`/`HA-11` | Tor, tensor-derived, and Künneth pages; Ext survives |
+| exact tensor/flat item ids | **CLOSED 2026-08-15**: `frontier-13` batch 5 scaffolded the abstract-algebra tensor page at A 38 / B 11, so the ids are fixed and immutable | cite `def-bimodule` and `def-flat-and-faithfully-flat-modules-and-ring-maps` (which replaces the promised `def-flat-module` and also carries faithful flatness and ring-map flatness), plus `thm-projective-modules-are-flat` and `thm-hom-tensor-adjunction-for-modules` | Tor, tensor-derived, and Künneth pages; Ext survives |
 | semisimplicity equivalence item ids | `chain-conditions-and-semisimple-modules` is planned with empty `items`, but MOD-4 now fixes `thm-equivalent-characterizations-of-semisimple-modules`, `thm-finite-length-semisimple-module-characterizations`, and `thm-equivalent-characterizations-of-semisimple-rings` | author those exact supplier ids first and cite them from `HA-9`/`HA-10` | only the semisimple dimension-zero and vanishing consequences; the remaining Ext/Tor theory survives |
 | differential-geometry final anchor | owner-authorised scaffold repoint is applied: the old internal `spectral-sequences-examples` anchor is retired for this purpose | the later global splice must use HA-17's final companion `grothendieck-spectral-sequences-and-computations-examples`; `plan-spec.json` is outside this commission | no mathematics; the prose seam is closed |
 | projective/injective object ids from `MA-9` | category scaffold is complete prose but unauthored, so final stable ids may differ at build | preserve the proposed ids or substitute them mechanically; never mint duplicates | abstract-category form of `HA-5`–`HA-7`; module instances remain available |

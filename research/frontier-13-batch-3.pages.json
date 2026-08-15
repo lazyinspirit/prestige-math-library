@@ -1,0 +1,1050 @@
+[
+  {
+    "order": 88,
+    "id": "diagonalisation-and-the-minimal-polynomial",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Diagonalisation and the Minimal Polynomial",
+    "companion": "diagonalisation-and-the-minimal-polynomial-examples",
+    "requires": [
+      "eigenvalues-eigenvectors-and-the-characteristic-polynomial",
+      "euclidean-domains-pids-and-unique-factorisation",
+      "field-extensions-and-the-complex-numbers",
+      "splitting-fields"
+    ],
+    "items": [
+      {
+        "id": "def-diagonalisable-endomorphism",
+        "kind": "definition",
+        "title": "A diagonalisable endomorphism is one admitting a basis of eigenvectors, equivalently a diagonal matrix representation",
+        "deps": [
+          "def-linear-basis",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+        ]
+      },
+      {
+        "id": "def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism",
+        "kind": "definition",
+        "title": "The annihilator set $\\operatorname{Ann}(T)=\\{p\\in F[x]:p(T)=0\\}$; once existence is proved, its unique monic generator $\\mu_T$ is the minimal polynomial",
+        "deps": [
+          "def-polynomial-evaluation-at-an-endomorphism",
+          "def-generated-and-principal-ideals",
+          "def-polynomial-degree-leading-coefficient-and-monic"
+        ]
+      },
+      {
+        "id": "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+        "kind": "theorem",
+        "title": "The annihilator ideal is nonzero and has a unique monic generator; $p(T)=0$ if and only if $\\mu_T\\mid p$",
+        "strategy": "Verify the annihilators form an ideal; Cayley–Hamilton makes it nonzero; the PID theorem gives a generator, whose leading coefficient can be normalised uniquely. Unpack ideal membership and treat the zero space separately, where $\\mu_T=1$.",
+        "deps": [
+          "def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism",
+          "cor-polynomial-ring-over-a-field-is-a-pid",
+          "thm-cayley-hamilton",
+          "def-polynomial-degree-leading-coefficient-and-monic"
+        ]
+      },
+      {
+        "id": "thm-minimal-polynomial-is-matrix-representation-and-similarity-invariant",
+        "kind": "theorem",
+        "title": "The minimal polynomial is unchanged by choosing a matrix representation or replacing a matrix by a similar one",
+        "strategy": "Prove the matrix of $p(T)$ is $p([T]_{\\mathcal B})$, so operator and matrix annihilator ideals agree. If $B=P^{-1}AP$, show $p(B)=P^{-1}p(A)P$ and compare monic generators.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "thm-matrix-of-a-composite-is-the-product",
+          "thm-similarity-is-an-equivalence-relation-and-models-basis-change"
+        ]
+      },
+      {
+        "id": "lem-minimal-polynomial-is-invariant-under-field-extension",
+        "kind": "lemma",
+        "title": "For a matrix over a field, extending the scalar field does not change its minimal polynomial",
+        "strategy": "Let $A\\in M_n(F)$ and let $K/F$ be a field extension. The polynomial $\\mu_{A,F}$ still annihilates $A$ over $K$. Conversely, suppose a nonzero $q=\\sum_{i=0}^r c_i x^i\\in K[x]$ annihilates $A$. Choose a maximal $F$-linearly independent subfamily $d_1,\\ldots,d_s$ of the finite coefficient family; it spans every $c_i$, so write $c_i=\\sum_j a_{ij}d_j$ with $a_{ij}\\in F$. Comparing each matrix entry in $0=q(A)=\\sum_j d_j(\\sum_i a_{ij}A^i)$ shows that every $\\sum_i a_{ij}A^i$ vanishes. At least one corresponding $F$-polynomial is nonzero and has degree at most $r$. Thus $\\deg\\mu_{A,F}\\leq\\deg\\mu_{A,K}$, while $\\mu_{A,K}$ divides $\\mu_{A,F}$ in $K[x]$; equal degrees and monicity give $\\mu_{A,K}=\\mu_{A,F}$. Include the $0\\times0$ matrix, whose minimal polynomial is $1$.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "thm-minimal-polynomial-is-matrix-representation-and-similarity-invariant",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "def-linear-independence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-minimal-polynomial-divides-characteristic-polynomial",
+        "kind": "corollary",
+        "title": "The minimal polynomial divides the characteristic polynomial, $\\mu_T\\mid\\chi_T$",
+        "strategy": "Apply the annihilator criterion to the published Cayley–Hamilton identity. At dimension zero both polynomials are $1$.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "thm-cayley-hamilton",
+          "def-characteristic-polynomial-of-an-operator"
+        ]
+      },
+      {
+        "id": "thm-roots-of-the-minimal-polynomial-are-eigenvalues-over-extension-fields",
+        "kind": "theorem",
+        "title": "Over every extension field, a scalar is an eigenvalue of the extended matrix exactly when it is a root of the minimal polynomial",
+        "strategy": "Let $A$ be a matrix over $F$ and let $K/F$ be a field extension. Scalar-extension invariance identifies the minimal polynomial over $K$ with $\\mu_A\\in F[x]$. If $Av=\\lambda v$ for nonzero $v$, then $p(A)v=p(\\lambda)v$, so $\\mu_A(\\lambda)=0$. Conversely $\\mu_A\\mid\\chi_A$, and the determinant formula leaves $\\chi_A$ unchanged over $K$, so the root–spectrum theorem supplies an eigenvector. Include the zero space.",
+        "deps": [
+          "cor-minimal-polynomial-divides-characteristic-polynomial",
+          "lem-minimal-polynomial-is-invariant-under-field-extension",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "def-polynomial-evaluation-at-an-endomorphism"
+        ]
+      },
+      {
+        "id": "thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors",
+        "kind": "theorem",
+        "title": "The minimal and characteristic polynomials have exactly the same monic irreducible factors",
+        "strategy": "One direction follows from $\\mu_T\\mid\\chi_T$. For a monic irreducible $q\\mid\\chi_T$, form $K=F[x]/(q)$ and let $a\\in K$ be the distinguished root. The determinant formula leaves $\\chi_T$ unchanged after scalar extension, so $a$ is an eigenvalue over $K$. Scalar-extension invariance identifies the extended minimal polynomial with $\\mu_T$, and evaluation on an eigenvector gives $\\mu_T(a)=0$. The evaluation-kernel theorem then forces $q\\mid\\mu_T$.",
+        "deps": [
+          "cor-minimal-polynomial-divides-characteristic-polynomial",
+          "lem-minimal-polynomial-is-invariant-under-field-extension",
+          "thm-spectrum-is-the-root-set-of-the-characteristic-polynomial",
+          "def-polynomial-evaluation-at-an-endomorphism",
+          "thm-irreducible-quotient-adjoins-a-root",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ]
+      },
+      {
+        "id": "lem-polynomial-kernels-and-images-are-invariant",
+        "kind": "lemma",
+        "title": "For every polynomial $p$, both $\\ker p(T)$ and $\\operatorname{im}p(T)$ are $T$-invariant",
+        "strategy": "Polynomial evaluation commutes with $T$; apply this identity to kernel and image vectors.",
+        "deps": [
+          "def-polynomial-evaluation-at-an-endomorphism"
+        ]
+      },
+      {
+        "id": "prop-minimal-polynomial-of-an-invariant-restriction-divides-the-original",
+        "kind": "proposition",
+        "title": "The minimal polynomial of a restriction to an invariant subspace divides the original minimal polynomial",
+        "strategy": "Every polynomial identity for $T$ restricts to $T|_W$, so $\\mu_T(T|_W)=0$ and the restriction's annihilator criterion applies. Include $W=0$.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "lem-polynomial-kernels-and-images-are-invariant"
+        ]
+      },
+      {
+        "id": "lem-coprime-kernel-decomposition",
+        "kind": "lemma",
+        "title": "If $\\gcd(f,g)=1$ and $(fg)(T)=0$, then $V=\\ker f(T)\\oplus\\ker g(T)$",
+        "strategy": "Use $af+bg=1$ to decompose each vector into the opposite kernels; apply the same identity to their intersection. Unit factors and the zero space remain valid.",
+        "deps": [
+          "thm-bezout-identity-for-polynomials",
+          "def-monic-greatest-common-divisor-of-polynomials",
+          "def-polynomial-evaluation-at-an-endomorphism",
+          "def-internal-direct-sum"
+        ]
+      },
+      {
+        "id": "def-primary-component-and-generalised-eigenspace",
+        "kind": "definition",
+        "title": "Primary components $\\ker q(T)^e$ and generalised eigenspaces $G_\\lambda^{(e)}(T)=\\ker(T-\\lambda I)^e$",
+        "deps": [
+          "def-polynomial-evaluation-at-an-endomorphism",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "lem-polynomial-kernels-and-images-are-invariant"
+        ]
+      },
+      {
+        "id": "thm-primary-decomposition-for-an-endomorphism",
+        "kind": "theorem",
+        "title": "Primary decomposition: the irreducible-power factors of $\\mu_T$ split $V$ into their invariant kernels",
+        "strategy": "Factor $\\mu_T=\\prod q_i^{e_i}$ and iterate the coprime-kernel lemma. Prove invariance and prove each restriction has exactly the corresponding irreducible power as minimal polynomial; otherwise a smaller componentwise annihilator contradicts minimality. The empty factorisation is the zero space.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "lem-coprime-kernel-decomposition",
+          "def-primary-component-and-generalised-eigenspace",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "def-internal-direct-sum"
+        ]
+      },
+      {
+        "id": "cor-primary-projections-are-polynomials-in-the-endomorphism",
+        "kind": "corollary",
+        "title": "Each projection in the primary decomposition is a polynomial in the endomorphism",
+        "strategy": "For $f_i=q_i^{e_i}$ and $g_i=\\mu_T/f_i$, use Bézout to show $b_i(T)g_i(T)$ is identity on the $i$-th primary component and zero on the others.",
+        "deps": [
+          "thm-primary-decomposition-for-an-endomorphism",
+          "thm-bezout-identity-for-polynomials",
+          "def-polynomial-evaluation-at-an-endomorphism"
+        ]
+      },
+      {
+        "id": "cor-generalised-eigenspace-decomposition-for-a-split-minimal-polynomial",
+        "kind": "corollary",
+        "title": "If the minimal polynomial splits, $V$ is the direct sum of the stabilised generalised eigenspaces",
+        "strategy": "Specialise primary decomposition to $q_i=x-\\lambda_i$ and identify each primary kernel and its least stabilising exponent.",
+        "deps": [
+          "thm-primary-decomposition-for-an-endomorphism",
+          "def-primary-component-and-generalised-eigenspace",
+          "def-polynomials-that-split-and-splitting-fields"
+        ]
+      },
+      {
+        "id": "thm-diagonalisability-eigenspace-direct-sum-criterion",
+        "kind": "theorem",
+        "title": "An endomorphism is diagonalisable exactly when $V=\\bigoplus_{i<r}E_{\\lambda_i}(T)$ for some finite list of distinct scalars $\\lambda_i$",
+        "strategy": "Partition an eigenbasis by its finitely many eigenvalues. Conversely concatenate bases of the finitely many eigenspaces in the displayed direct sum. The empty list and empty basis cover the zero space.",
+        "deps": [
+          "def-diagonalisable-endomorphism",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-internal-direct-sum",
+          "thm-dimension-of-a-linear-subspace"
+        ]
+      },
+      {
+        "id": "thm-diagonalisable-iff-characteristic-polynomial-splits-and-multiplicities-agree",
+        "kind": "theorem",
+        "title": "An endomorphism is diagonalisable if and only if its characteristic polynomial splits and every eigenvalue's geometric multiplicity equals its algebraic multiplicity",
+        "strategy": "A diagonal matrix has a split characteristic polynomial, and for each eigenvalue the repeated diagonal entries count both its algebraic multiplicity and the dimension of its eigenspace. Conversely, when the characteristic polynomial splits, the algebraic multiplicities sum to $\\dim V$. If they equal the geometric multiplicities, bases of the distinct eigenspaces together form a linearly independent list of $\\dim V$ eigenvectors, hence a basis; apply the eigenspace direct-sum criterion. The empty factorisation handles $V=0$.",
+        "deps": [
+          "thm-diagonalisability-eigenspace-direct-sum-criterion",
+          "def-algebraic-and-geometric-multiplicity-of-an-eigenvalue",
+          "thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity",
+          "thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent",
+          "def-characteristic-polynomial-of-an-operator",
+          "def-polynomials-that-split-and-splitting-fields"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots",
+        "kind": "theorem",
+        "title": "An endomorphism is diagonalisable if and only if its minimal polynomial is a product of distinct linear factors",
+        "strategy": "An eigenbasis shows the product over distinct eigenvalues annihilates $T$, and every eigenvalue must be a root of $\\mu_T$. Conversely primary decomposition with all exponents one is the eigenspace direct sum. The empty product handles the zero space.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "thm-roots-of-the-minimal-polynomial-are-eigenvalues-over-extension-fields",
+          "thm-primary-decomposition-for-an-endomorphism",
+          "thm-diagonalisability-eigenspace-direct-sum-criterion"
+        ]
+      },
+      {
+        "id": "cor-distinct-characteristic-roots-imply-diagonalisability",
+        "kind": "corollary",
+        "title": "A characteristic polynomial that splits into distinct linear factors forces diagonalisability",
+        "strategy": "A divisor of a split squarefree polynomial is split and squarefree; combine $\\mu_T\\mid\\chi_T$ with the criterion.",
+        "deps": [
+          "cor-minimal-polynomial-divides-characteristic-polynomial",
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots",
+          "def-polynomials-that-split-and-splitting-fields"
+        ]
+      },
+      {
+        "id": "cor-idempotent-endomorphisms-are-diagonalisable-projections",
+        "kind": "corollary",
+        "title": "Every idempotent endomorphism is diagonalisable and is projection onto its image along its kernel",
+        "strategy": "Since $T^2=T$, $\\mu_T\\mid x(x-1)$ and the criterion applies. Directly decompose $v=Tv+(v-Tv)$ and show image and kernel intersect trivially, including $0$ and $I$.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots",
+          "def-internal-direct-sum"
+        ]
+      },
+      {
+        "id": "thm-invariant-restrictions-of-diagonalisable-endomorphisms-are-diagonalisable",
+        "kind": "theorem",
+        "title": "The restriction of a diagonalisable endomorphism to an invariant subspace is diagonalisable",
+        "strategy": "The restriction minimal polynomial divides the ambient split squarefree polynomial, so it too is split and squarefree.",
+        "deps": [
+          "prop-minimal-polynomial-of-an-invariant-restriction-divides-the-original",
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots",
+          "def-polynomials-that-split-and-splitting-fields"
+        ]
+      },
+      {
+        "id": "def-simultaneous-diagonalisability-of-a-family",
+        "kind": "definition",
+        "title": "Simultaneous diagonalisability: one basis that diagonalises every endomorphism in a family",
+        "deps": [
+          "def-diagonalisable-endomorphism"
+        ]
+      },
+      {
+        "id": "lem-commuting-endomorphisms-preserve-eigenspaces",
+        "kind": "lemma",
+        "title": "Commuting endomorphisms preserve each other's eigenspaces",
+        "strategy": "If $ST=TS$ and $Tv=\\lambda v$, compute $T(Sv)=S(Tv)=\\lambda Sv$, allowing $Sv=0$.",
+        "deps": [
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum"
+        ]
+      },
+      {
+        "id": "thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms",
+        "kind": "theorem",
+        "title": "A family of diagonalisable endomorphisms of a finite-dimensional space is simultaneously diagonalisable if and only if its members commute pairwise",
+        "strategy": "For pairwise commuting families, induct in the finite case on eigenspaces of the last operator, using invariant diagonalisable restrictions. For an arbitrary family, its span is a subspace of the finite-dimensional space $\\mathcal L(V,V)$; expand a finite basis of that span in the original family and take the union of the finite supports to obtain finitely many original members spanning it. Their common eigenbasis diagonalises every linear combination. Conversely, endomorphisms diagonal in one common basis commute because diagonal matrices commute. Include empty families and the zero space.",
+        "deps": [
+          "def-simultaneous-diagonalisability-of-a-family",
+          "lem-commuting-endomorphisms-preserve-eigenspaces",
+          "thm-invariant-restrictions-of-diagonalisable-endomorphisms-are-diagonalisable",
+          "thm-diagonalisability-eigenspace-direct-sum-criterion",
+          "cor-dimensions-of-matrix-and-linear-map-spaces",
+          "def-linear-combination-and-span",
+          "thm-dimension-of-a-linear-subspace"
+        ]
+      },
+      {
+        "id": "cor-polynomials-in-commuting-diagonalisable-endomorphisms-are-diagonalisable",
+        "kind": "corollary",
+        "title": "If two commuting endomorphisms are diagonalisable, then every finite linear combination of products of their powers is diagonalisable; in particular, their sum and product are diagonalisable",
+        "strategy": "Choose the common eigenbasis supplied by simultaneous diagonalisation. Every power of either endomorphism is diagonal in that basis, so every product of powers and every finite linear combination of such products is diagonal in the same basis. The zero polynomial and empty space cause no exception.",
+        "deps": [
+          "thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-endomorphism-algebra-is-a-minimal-polynomial-quotient",
+        "kind": "corollary",
+        "title": "The algebra $F[T]$ generated by an endomorphism is isomorphic to $F[x]/(\\mu_T)$",
+        "strategy": "Polynomial evaluation has image $F[T]$ and kernel $(\\mu_T)$; apply the first isomorphism theorem, including the zero-space quotient by $(1)$.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "def-polynomial-evaluation-at-an-endomorphism",
+          "thm-first-isomorphism-theorem-rings"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 89,
+    "id": "diagonalisation-and-the-minimal-polynomial-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Diagonalisation and the Minimal Polynomial: Examples and Counterexamples",
+    "requires": [
+      "diagonalisation-and-the-minimal-polynomial"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-minimal-polynomials-of-scalar-diagonal-and-zero-dimensional-endomorphisms",
+        "kind": "example",
+        "title": "Minimal polynomials of scalar and diagonal endomorphisms, including the zero-dimensional case",
+        "strategy": "Compute $1$ on the zero space, $x-\\lambda$ for $\\lambda I$ on a nonzero space, and the product of the distinct displayed diagonal factors for a diagonal matrix.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots"
+        ]
+      },
+      {
+        "id": "ex-same-characteristic-polynomial-different-minimal-polynomials",
+        "kind": "example",
+        "title": "The identity and a nontrivial Jordan block have the same characteristic polynomial but different minimal polynomials",
+        "strategy": "Compare $I_2$ with $J=\\begin{psmallmatrix}1&1\\\\0&1\\end{psmallmatrix}$: both have $(x-1)^2$, while their minimal polynomials are $x-1$ and $(x-1)^2$.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "lem-characteristic-polynomial-of-block-triangular-matrix"
+        ]
+      },
+      {
+        "id": "ex-computing-a-minimal-polynomial-from-annihilating-polynomials",
+        "kind": "example",
+        "title": "Computing the minimal polynomial of an explicit $3\\times3$ idempotent from its annihilating polynomials",
+        "strategy": "For Conrad's matrix $\\begin{psmallmatrix}0&-1&1\\\\1&2&-1\\\\1&1&0\\end{psmallmatrix}$ compute $A^2=A$, $A\\ne0,I$, $\\mu_A=x(x-1)$, $\\chi_A=x(x-1)^2$, and its image/kernel projection.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "cor-idempotent-endomorphisms-are-diagonalisable-projections",
+          "def-characteristic-polynomial-of-a-matrix"
+        ]
+      },
+      {
+        "id": "ex-nilpotent-shift-and-its-single-primary-component",
+        "kind": "example",
+        "title": "A nilpotent shift has minimal polynomial $x^n$ and one primary component",
+        "strategy": "On $F^n$, send $e_i$ to $e_{i-1}$ for $i>0$ and $e_0$ to zero. Compute $T^n=0$ and $T^{n-1}e_{n-1}=e_0$ for $n>0$; at $n=0$, $\\mu_T=1$.",
+        "deps": [
+          "lem-standard-basis-of-f-n",
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "thm-primary-decomposition-for-an-endomorphism"
+        ]
+      },
+      {
+        "id": "ex-real-rotation-changes-diagonalisability-after-complex-scalar-extension",
+        "kind": "example",
+        "title": "Quarter-turn rotation is not diagonalisable over $\\mathbb R$ but is diagonalisable over $\\mathbb C$",
+        "strategy": "For $R=\\begin{psmallmatrix}0&-1\\\\1&0\\end{psmallmatrix}$ compute $\\mu_R=\\chi_R=x^2+1$; it is irreducible over $\\mathbb R$ and has the distinct roots $\\pm i$ over $\\mathbb C$, where explicit eigenvectors form a basis.",
+        "deps": [
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots",
+          "def-complex-numbers-and-arithmetic",
+          "lem-x-squared-plus-one-is-irreducible-over-the-reals"
+        ]
+      },
+      {
+        "id": "ex-primary-decomposition-over-q-with-an-irreducible-quadratic",
+        "kind": "example",
+        "title": "Primary decomposition over $\\mathbb Q$ with one linear and one irreducible quadratic factor",
+        "strategy": "Take the direct sum of multiplication by $2$ and the companion matrix of $x^2+1$; compute $(x-2)(x^2+1)$ and its two Bézout projections without adjoining roots.",
+        "deps": [
+          "thm-primary-decomposition-for-an-endomorphism",
+          "cor-primary-projections-are-polynomials-in-the-endomorphism",
+          "lem-x-squared-plus-one-is-irreducible-over-the-reals"
+        ]
+      },
+      {
+        "id": "ex-polynomial-projections-for-three-eigenvalues",
+        "kind": "example",
+        "title": "Lagrange polynomials give the three eigenspace projections of a diagonalisable endomorphism",
+        "strategy": "For distinct $\\lambda_i$, verify $e_i(x)=\\prod_{j\\ne i}(x-\\lambda_j)/(\\lambda_i-\\lambda_j)$ has $e_i(\\lambda_j)=\\delta_{ij}$ and that $e_i(T)$ are orthogonal idempotent projections summing to $I$.",
+        "deps": [
+          "cor-primary-projections-are-polynomials-in-the-endomorphism",
+          "thm-diagonalisability-eigenspace-direct-sum-criterion"
+        ]
+      },
+      {
+        "id": "ex-simultaneous-diagonalisation-of-two-commuting-matrices",
+        "kind": "example",
+        "title": "Two commuting non-scalar matrices simultaneously diagonalised in one explicit basis",
+        "strategy": "Conjugate two non-scalar diagonal matrices by the same simple invertible matrix, verify the resulting matrices commute, and recover the common eigenbasis.",
+        "deps": [
+          "thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms",
+          "thm-matrix-of-a-composite-is-the-product"
+        ]
+      },
+      {
+        "id": "cex-commuting-endomorphisms-need-not-be-diagonalisable",
+        "kind": "counterexample",
+        "title": "Commuting alone does not imply simultaneous diagonalisability",
+        "strategy": "The family $\\{I_2,\\begin{psmallmatrix}1&1\\\\0&1\\end{psmallmatrix}\\}$ commutes, but the second matrix has minimal polynomial $(x-1)^2$.",
+        "deps": [
+          "thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms",
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots"
+        ]
+      },
+      {
+        "id": "fs-a-split-minimal-polynomial-always-gives-diagonalisability",
+        "kind": "false-statement",
+        "title": "FALSE: If the minimal polynomial splits, then the endomorphism is diagonalisable",
+        "strategy": "The nontrivial $2\\times2$ Jordan block has split minimal polynomial $(x-1)^2$; the missing condition is distinct roots.",
+        "deps": [
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots",
+          "def-polynomials-that-split-and-splitting-fields"
+        ]
+      },
+      {
+        "id": "fs-the-characteristic-polynomial-determines-diagonalisability",
+        "kind": "false-statement",
+        "title": "FALSE: The characteristic polynomial determines whether an endomorphism is diagonalisable",
+        "strategy": "Compute directly that the identity and the nontrivial $2\\times2$ Jordan block share $(x-1)^2$, while their minimal polynomials are $x-1$ and $(x-1)^2$; apply the squarefree minimal-polynomial criterion.",
+        "deps": [
+          "thm-minimal-polynomial-is-well-defined-and-controls-annihilators",
+          "lem-characteristic-polynomial-of-block-triangular-matrix",
+          "thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots"
+        ]
+      },
+      {
+        "id": "fs-diagonalisability-requires-distinct-characteristic-roots",
+        "kind": "false-statement",
+        "title": "FALSE: A diagonalisable endomorphism must have a characteristic polynomial with distinct roots",
+        "strategy": "The identity on a nonzero two-dimensional space is diagonalisable but has characteristic polynomial $(x-1)^2$.",
+        "deps": [
+          "def-diagonalisable-endomorphism",
+          "lem-standard-basis-of-f-n",
+          "def-characteristic-polynomial-of-an-operator"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 94,
+    "id": "inner-product-spaces-and-orthogonality",
+    "kind": "A",
+    "category": "linear-algebra",
+    "title": "Inner Product Spaces, Gram-Schmidt, Projections and Adjoints",
+    "companion": "inner-product-spaces-and-orthogonality-examples",
+    "requires": [
+      "dual-spaces-bilinear-forms-and-inertia",
+      "roots-and-rational-powers",
+      "field-extensions-and-the-complex-numbers"
+    ],
+    "items": [
+      {
+        "id": "def-inner-product-space",
+        "kind": "definition",
+        "title": "Real and complex inner product spaces, with the inner product linear in the first argument",
+        "deps": [
+          "def-sesquilinear-and-hermitian-forms-over-a-field-with-involution",
+          "def-complex-conjugate-real-imaginary-part-and-modulus"
+        ]
+      },
+      {
+        "id": "def-inner-product-norm",
+        "kind": "definition",
+        "title": "The norm $\\lVert v\\rVert=\\sqrt{\\langle v,v\\rangle}$ induced by a real or complex inner product",
+        "deps": [
+          "def-inner-product-space",
+          "thm-nth-roots-exist"
+        ]
+      },
+      {
+        "id": "prop-standard-coordinate-inner-products",
+        "kind": "proposition",
+        "title": "The standard formulas $\\langle x,y\\rangle=\\sum_{k<n}x_k y_k$ on $\\mathbb R^n$ and $\\sum_{k<n}x_k\\overline{y_k}$ on $\\mathbb C^n$ are inner products",
+        "strategy": "Use finite additive-monoid sums and conjugation laws. The diagonal is a sum of squared moduli and vanishes only coordinatewise; at $n=0$ positive definiteness is vacuous.",
+        "deps": [
+          "def-inner-product-space",
+          "def-monoid-finite-product",
+          "lem-standard-basis-of-f-n",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+        "kind": "lemma",
+        "title": "Inner products separate vectors, and the induced norm is homogeneous: $\\lVert\\lambda v\\rVert=|\\lambda|\\lVert v\\rVert$",
+        "strategy": "Pair a vector with itself for nondegeneracy. For norm homogeneity compute squared norms and use uniqueness of the nonnegative square root.",
+        "deps": [
+          "def-inner-product-space",
+          "def-inner-product-norm",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-nth-roots-exist"
+        ]
+      },
+      {
+        "id": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+        "kind": "theorem",
+        "title": "Cauchy–Schwarz: $|\\langle u,v\\rangle|\\leq\\lVert u\\rVert\\lVert v\\rVert$, with equality exactly for linearly dependent vectors",
+        "strategy": "Separate $v=0$; otherwise expand the length of $u-\\langle u,v\\rangle\\langle v,v\\rangle^{-1}v$. Derive the squared inequality, take nonnegative roots, and prove both equality directions with symmetric dependence.",
+        "deps": [
+          "def-inner-product-space",
+          "def-inner-product-norm",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-nth-roots-exist",
+          "def-linear-independence"
+        ]
+      },
+      {
+        "id": "cor-triangle-inequality-for-inner-product-norm",
+        "kind": "corollary",
+        "title": "The inner-product norm is definite, homogeneous, and satisfies the triangle inequality",
+        "strategy": "Use positive definiteness and homogeneity; expand the squared norm of $u+v$, bound the cross term by Cauchy–Schwarz, and compare nonnegative square roots. Do not cite the later generic norm definition.",
+        "deps": [
+          "def-inner-product-norm",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-nth-roots-exist"
+        ]
+      },
+      {
+        "id": "prop-pythagorean-parallelogram-and-polarisation-identities",
+        "kind": "proposition",
+        "title": "Pythagoras, the parallelogram identity, and the real and complex polarisation identities",
+        "strategy": "Expand squared lengths. Orthogonality removes cross terms; add or combine the expansions to obtain the parallelogram and the separate real and complex polarisation formulas compatible with linearity in the first variable.",
+        "deps": [
+          "def-inner-product-space",
+          "def-inner-product-norm"
+        ]
+      },
+      {
+        "id": "prop-coordinate-cauchy-schwarz-agrees-with-the-finite-sum-theorem",
+        "kind": "proposition",
+        "title": "On $\\mathbb R^n$, abstract Cauchy–Schwarz is exactly the published finite-sum Cauchy–Schwarz inequality",
+        "strategy": "Substitute the standard coordinate formulas and match the inequality and symmetric equality condition term for term, including the empty list.",
+        "deps": [
+          "prop-standard-coordinate-inner-products",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-cauchy-schwarz-finite"
+        ]
+      },
+      {
+        "id": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+        "kind": "definition",
+        "title": "Orthogonal vectors and subspaces, orthogonal and orthonormal sets, and orthonormal bases",
+        "deps": [
+          "def-inner-product-space",
+          "def-inner-product-norm",
+          "def-linear-basis"
+        ]
+      },
+      {
+        "id": "def-orthogonal-complement",
+        "kind": "definition",
+        "title": "The orthogonal complement $W^\\perp=\\{v:\\langle v,w\\rangle=0\\text{ for all }w\\in W\\}$",
+        "deps": [
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "def-linear-subspace"
+        ]
+      },
+      {
+        "id": "thm-orthogonal-nonzero-vectors-are-linearly-independent",
+        "kind": "theorem",
+        "title": "Every finite orthogonal list of nonzero vectors is linearly independent",
+        "strategy": "Pair a vanishing linear combination with each listed vector; orthogonality removes every other term. Include the empty and singleton lists.",
+        "deps": [
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "def-linear-independence",
+          "def-inner-product-space"
+        ]
+      },
+      {
+        "id": "thm-gram-schmidt-orthonormalisation",
+        "kind": "theorem",
+        "title": "Gram–Schmidt turns every finite independent list into an orthonormal list with the same successive spans",
+        "strategy": "Induct, subtract projections onto earlier orthonormal vectors, prove the residual orthogonal and nonzero, then normalise. Prove both inclusions of every successive-span equality, starting with the empty list.",
+        "deps": [
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "thm-orthogonal-nonzero-vectors-are-linearly-independent",
+          "def-inner-product-norm",
+          "def-linear-independence"
+        ]
+      },
+      {
+        "id": "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+        "kind": "corollary",
+        "title": "Every finite-dimensional real or complex inner product space has an orthonormal basis",
+        "strategy": "Choose a finite basis and apply Gram–Schmidt; dimension zero uses the empty basis.",
+        "deps": [
+          "thm-gram-schmidt-orthonormalisation",
+          "def-linear-basis"
+        ]
+      },
+      {
+        "id": "thm-bessel-inequality-and-finite-parseval-identity",
+        "kind": "theorem",
+        "title": "Bessel's inequality for a finite orthonormal list and Parseval's identity for an orthonormal basis",
+        "strategy": "Set $p=\\sum_i\\langle v,e_i\\rangle e_i$, show $v-p$ is orthogonal to the list, and apply Pythagoras. Equality means $v$ lies in the span; for a basis obtain coordinate, inner-product, and squared-length Parseval formulas. Include the empty list.",
+        "deps": [
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "def-monoid-finite-product",
+          "def-linear-combination-and-span"
+        ]
+      },
+      {
+        "id": "thm-finite-dimensional-orthogonal-decomposition",
+        "kind": "theorem",
+        "title": "For a subspace $W$ of a finite-dimensional inner product space, $V=W\\oplus W^\\perp$",
+        "strategy": "Choose a basis of $W$, extend it to $V$, and apply Gram–Schmidt with the flag clause. The remaining orthonormal vectors span a subspace of $W^\\perp$; positive definiteness makes the intersection zero. Include $W=0,V$.",
+        "deps": [
+          "def-orthogonal-complement",
+          "thm-gram-schmidt-orthonormalisation",
+          "thm-dimension-of-a-linear-subspace",
+          "def-internal-direct-sum"
+        ]
+      },
+      {
+        "id": "cor-double-orthogonal-complement-and-dimension",
+        "kind": "corollary",
+        "title": "In finite dimension, $W^{\\perp\\perp}=W$ and $\\dim W+\\dim W^\\perp=\\dim V$",
+        "strategy": "Use conjugate symmetry for inclusion, orthogonal decomposition for dimensions, and equal finite dimensions for equality. Include $W=0,V$.",
+        "deps": [
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "cor-dimension-of-a-direct-sum",
+          "thm-dimension-of-a-linear-subspace"
+        ]
+      },
+      {
+        "id": "def-orthogonal-projection",
+        "kind": "definition",
+        "title": "The orthogonal projection $P_Wv$ is the $W$-component in $V=W\\oplus W^\\perp$",
+        "deps": [
+          "thm-finite-dimensional-orthogonal-decomposition",
+          "def-internal-direct-sum"
+        ]
+      },
+      {
+        "id": "prop-orthogonal-projection-formula-and-linearity",
+        "kind": "proposition",
+        "title": "Orthogonal projection is linear, and an orthonormal basis $(e_i)$ of $W$ gives $P_Wv=\\sum_i\\langle v,e_i\\rangle e_i$",
+        "strategy": "The displayed vector lies in $W$ and leaves an orthogonal error, so direct-sum uniqueness identifies it. Prove linearity and record range, kernel, idempotence, and $I-P_W=P_{W^\\perp}$.",
+        "deps": [
+          "def-orthogonal-projection",
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "def-inner-product-space"
+        ]
+      },
+      {
+        "id": "thm-orthogonal-projection-is-the-unique-nearest-point",
+        "kind": "theorem",
+        "title": "The orthogonal projection is the unique nearest point in the subspace",
+        "strategy": "For $w\\in W$, decompose $v-w=(v-P_Wv)+(P_Wv-w)$ orthogonally and apply Pythagoras; equality forces $w=P_Wv$.",
+        "deps": [
+          "def-orthogonal-projection",
+          "prop-pythagorean-parallelogram-and-polarisation-identities"
+        ]
+      },
+      {
+        "id": "def-gram-matrix-and-gram-determinant",
+        "kind": "definition",
+        "title": "The Gram matrix $G(v_0,\\ldots,v_{r-1})=(\\langle v_i,v_j\\rangle)_{i,j<r}$ and Gram determinant, with empty value $1$",
+        "deps": [
+          "def-inner-product-space",
+          "def-matrix-space",
+          "def-determinant-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "thm-gram-determinant-detects-linear-independence",
+        "kind": "theorem",
+        "title": "A Gram determinant is nonnegative and is positive exactly when the vector list is linearly independent",
+        "strategy": "Dependence gives a kernel vector. For an independent list, Gram–Schmidt and the linear-first convention give $G=R^{\\mathsf T}\\overline R$ with nonzero triangular diagonal, so $\\det G=|\\det R|^2>0$. The empty Gram determinant is $1$.",
+        "deps": [
+          "def-gram-matrix-and-gram-determinant",
+          "thm-gram-schmidt-orthonormalisation",
+          "def-linear-independence",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-transpose",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-qr-factorisation-over-r-or-c",
+        "kind": "theorem",
+        "title": "Every invertible real or complex square matrix has a unique factorisation $A=QR$ with $Q$ orthogonal or unitary and $R$ upper triangular with positive real diagonal",
+        "strategy": "Apply flag-preserving Gram–Schmidt to the columns. For uniqueness, $Q_1^*Q_2=R_1R_2^{-1}$ is unitary and upper triangular with positive diagonal, hence identity by induction. Include $0\\times0$.",
+        "deps": [
+          "thm-gram-schmidt-orthonormalisation",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "thm-invertible-matrices-correspond-to-linear-isomorphisms",
+          "thm-operator-invertible-iff-determinant-nonzero",
+          "def-transpose-of-a-matrix",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-riesz-representation-in-finite-dimensions",
+        "kind": "theorem",
+        "title": "Finite-dimensional Riesz representation: every functional is uniquely $v\\mapsto\\langle v,w\\rangle$",
+        "strategy": "In an orthonormal basis set $w=\\sum_i\\overline{f(e_i)}e_i$ and verify the formula. Nondegeneracy gives uniqueness; $w\\mapsto\\langle\\,\\cdot\\,,w\\rangle$ is a conjugate-linear bijection, including dimension zero.",
+        "deps": [
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous",
+          "def-algebraic-dual-and-linear-functional"
+        ]
+      },
+      {
+        "id": "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+        "kind": "definition",
+        "title": "The adjoint $T^*:W\\to V$ is characterised by $\\langle Tv,w\\rangle_W=\\langle v,T^*w\\rangle_V$",
+        "deps": [
+          "def-inner-product-space",
+          "def-linear-map"
+        ]
+      },
+      {
+        "id": "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+        "kind": "theorem",
+        "title": "Every linear map between finite-dimensional inner product spaces has a unique adjoint",
+        "strategy": "For fixed $w$, apply finite Riesz to $v\\mapsto\\langle Tv,w\\rangle$. Uniqueness of representatives proves linearity in $w$ and uniqueness of the map.",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-riesz-representation-in-finite-dimensions",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous"
+        ]
+      },
+      {
+        "id": "prop-adjoint-algebra",
+        "kind": "proposition",
+        "title": "Adjoints satisfy $(S+T)^*=S^*+T^*$, $(\\lambda T)^*=\\overline\\lambda T^*$, $(ST)^*=T^*S^*$, and $T^{**}=T$",
+        "strategy": "Pair candidate sides with arbitrary vectors, use the defining identity and linear-first convention, and invoke uniqueness. Track conjugation in the scalar clause.",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous"
+        ]
+      },
+      {
+        "id": "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+        "kind": "theorem",
+        "title": "In orthonormal bases, the matrix of the adjoint is the conjugate transpose of the matrix",
+        "strategy": "If $a_{ij}=\\langle Te_j,f_i\\rangle$, the adjoint identity gives the reverse entry $\\overline{a_{ij}}$. Include zero-sized bases.",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "def-coordinate-column-and-matrix-of-a-linear-map",
+          "def-transpose-of-a-matrix",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-adjoint-kernel-and-range-orthogonality",
+        "kind": "theorem",
+        "title": "$\\ker T^*=(\\operatorname{im}T)^\\perp$ and $\\operatorname{im}T^*=(\\ker T)^\\perp$ in finite dimension",
+        "strategy": "Unpack the adjoint identity for the first equality. Apply it to $T^*$, use $T^{**}=T$, and take finite-dimensional double orthogonal complements for the second.",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "prop-adjoint-algebra",
+          "cor-double-orthogonal-complement-and-dimension",
+          "def-orthogonal-complement"
+        ]
+      },
+      {
+        "id": "thm-least-squares-solutions-and-normal-equation",
+        "kind": "theorem",
+        "title": "For a linear map $T:V\\to W$ between finite-dimensional inner-product spaces, $x$ minimises $\\lVert Tx-b\\rVert$ if and only if $T^*(Tx-b)=0$, equivalently $T^*Tx=T^*b$; minimisers exist and any two differ by an element of $\\ker T$",
+        "strategy": "The unique nearest point to $b$ in $\\operatorname{im}T$ is $P_{\\operatorname{im}T}b$, and it has a preimage, so minimisers exist. A vector $x$ is a minimiser exactly when $b-Tx\\perp\\operatorname{im}T$. The adjoint kernel–range identity converts this condition into $T^*(b-Tx)=0$, which is the normal equation. Finally two minimisers have the same image under $T$, so their difference lies in $\\ker T$, and adding a kernel vector preserves the residual.",
+        "deps": [
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-kernel-and-range-orthogonality"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-invariance-passes-to-orthogonal-complements-under-the-adjoint",
+        "kind": "lemma",
+        "title": "If $W$ is $T$-invariant, then $W^\\perp$ is $T^*$-invariant",
+        "strategy": "For $v\\in W^\\perp,w\\in W$, use conjugate symmetry and the adjoint identity to rewrite $\\langle T^*v,w\\rangle$ in terms of $Tw\\in W$.",
+        "deps": [
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "def-orthogonal-complement"
+        ]
+      },
+      {
+        "id": "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+        "kind": "theorem",
+        "title": "An endomorphism is an orthogonal projection exactly when it is idempotent and self-adjoint",
+        "strategy": "Projection formulas give both properties. Conversely decompose $v=Pv+(I-P)v$; idempotence places the terms in image and kernel, and self-adjointness makes those subspaces orthogonal. Include $0,I$.",
+        "deps": [
+          "prop-orthogonal-projection-formula-and-linearity",
+          "def-adjoint-of-a-linear-map-between-inner-product-spaces",
+          "thm-adjoint-exists-and-is-unique-in-finite-dimension",
+          "def-orthogonal-projection"
+        ]
+      },
+      {
+        "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+        "kind": "definition",
+        "title": "Linear isometries, and orthogonal or unitary operators on finite-dimensional inner product spaces",
+        "deps": [
+          "def-inner-product-space",
+          "def-inner-product-norm",
+          "def-linear-map"
+        ]
+      },
+      {
+        "id": "thm-finite-dimensional-isometry-characterisations",
+        "kind": "theorem",
+        "title": "For an endomorphism in finite dimension, preserving lengths, preserving inner products, carrying orthonormal bases to orthonormal bases, and $T^*T=I$ are equivalent",
+        "strategy": "Use polarisation, test orthonormal bases, and expand in one. From $T^*T=I$, multiplicativity gives $\\det(T^*)\\det(T)=1$, so $T$ is invertible, $T^{-1}=T^*$, and $TT^*=I$. Include dimension zero.",
+        "deps": [
+          "def-linear-isometry-and-orthogonal-or-unitary-operator",
+          "prop-pythagorean-parallelogram-and-polarisation-identities",
+          "prop-adjoint-algebra",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-operator-determinant-is-multiplicative",
+          "thm-operator-invertible-iff-determinant-nonzero"
+        ]
+      },
+      {
+        "id": "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus",
+        "kind": "corollary",
+        "title": "Orthogonal and unitary operators form groups, and their determinants have modulus one",
+        "strategy": "Adjoint identities give the group laws. Take determinants in $T^*T=I$ and use the conjugate-transpose matrix formula to get $\\overline{\\det T}\\det T=1$; over $\\mathbb R$, $\\det T=\\pm1$. Include dimension zero.",
+        "deps": [
+          "thm-finite-dimensional-isometry-characterisations",
+          "prop-adjoint-algebra",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "thm-operator-determinant-is-basis-independent",
+          "thm-operator-determinant-is-multiplicative",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-of-transpose",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 95,
+    "id": "inner-product-spaces-and-orthogonality-examples",
+    "kind": "B",
+    "category": "linear-algebra",
+    "title": "Inner Product Spaces and Orthogonality: Examples and Counterexamples",
+    "requires": [
+      "inner-product-spaces-and-orthogonality"
+    ],
+    "forwardRefs": [],
+    "items": [
+      {
+        "id": "ex-weighted-inner-product-on-finite-coordinate-space",
+        "kind": "example",
+        "title": "Positive coordinate weights define an inner product and change lengths and projections",
+        "strategy": "For positive weights, verify the weighted coordinate form, including the empty space; in $\\mathbb R^2$ use unequal weights to compare a length and projection with the standard form.",
+        "deps": [
+          "def-inner-product-space",
+          "def-inner-product-norm",
+          "def-monoid-finite-product",
+          "prop-orthogonal-projection-formula-and-linearity"
+        ]
+      },
+      {
+        "id": "ex-frobenius-inner-product-on-matrix-space",
+        "kind": "example",
+        "title": "The Frobenius inner product on a real or complex matrix space",
+        "strategy": "Define the pairing as the finite sum of entrywise products, conjugating the second matrix over the complex field. Verify the inner-product axioms and identify the associated squared length with the sum of squared entry moduli, including zero-sized shapes.",
+        "deps": [
+          "def-inner-product-space",
+          "def-matrix-space",
+          "def-monoid-finite-product",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "ex-sampled-polynomial-inner-product-on-degree-at-most-three",
+        "kind": "example",
+        "title": "Evaluation at four distinct real points gives an inner product on polynomials of degree at most three",
+        "strategy": "A zero diagonal sum forces four roots; the root bound makes the degree-at-most-three polynomial zero. This is a finite algebraic substitute for an integral example.",
+        "deps": [
+          "def-inner-product-space",
+          "def-monoid-finite-product",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ]
+      },
+      {
+        "id": "ex-gram-schmidt-in-r-three",
+        "kind": "example",
+        "title": "Gram–Schmidt on an explicit basis of $\\mathbb R^3$",
+        "strategy": "Apply the algorithm to $(1,1,1),(0,1,2),(1,0,2)$; display residuals, normalisations, and each successive-span equality.",
+        "deps": [
+          "prop-standard-coordinate-inner-products",
+          "thm-gram-schmidt-orthonormalisation"
+        ]
+      },
+      {
+        "id": "ex-gram-schmidt-in-c-two",
+        "kind": "example",
+        "title": "Gram–Schmidt on an explicit basis of $\\mathbb C^2$ with conjugation visible",
+        "strategy": "Use vectors with a nonreal cross inner product; compute the linear-first projection coefficient, residual, normalisation, and both off-diagonal pairings.",
+        "deps": [
+          "prop-standard-coordinate-inner-products",
+          "thm-gram-schmidt-orthonormalisation",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "ex-qr-factorisation-of-an-invertible-real-matrix",
+        "kind": "example",
+        "title": "A worked QR factorisation of an invertible real matrix",
+        "strategy": "Apply Gram–Schmidt directly to the chosen matrix columns, assemble $Q,R$, and check $A=QR$ with positive diagonal.",
+        "deps": [
+          "thm-qr-factorisation-over-r-or-c",
+          "prop-standard-coordinate-inner-products",
+          "thm-gram-schmidt-orthonormalisation"
+        ]
+      },
+      {
+        "id": "ex-bessel-is-strict-for-a-proper-orthonormal-set",
+        "kind": "example",
+        "title": "Bessel's inequality is strict for a vector outside the span of a proper orthonormal set",
+        "strategy": "In $\\mathbb R^3$ use $(e_0,e_1)$ and a vector with nonzero $e_2$ component; compute the positive gap as the squared orthogonal remainder.",
+        "deps": [
+          "thm-bessel-inequality-and-finite-parseval-identity",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-orthogonal-projection-onto-a-plane-and-nearest-point",
+        "kind": "example",
+        "title": "Projection onto a plane in $\\mathbb R^3$ and the nearest-point calculation",
+        "strategy": "Compute $P_Wv$ from an orthonormal plane basis, verify the residual is orthogonal, and write the Pythagorean comparison with every other point.",
+        "deps": [
+          "prop-orthogonal-projection-formula-and-linearity",
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-riesz-representative-of-a-functional-on-c-three",
+        "kind": "example",
+        "title": "The Riesz representative of an explicit functional on $\\mathbb C^3$",
+        "strategy": "For $f(z)=\\sum a_kz_k$, compute the representative $(\\overline{a_0},\\overline{a_1},\\overline{a_2})$ and check the conjugate-linear dependence.",
+        "deps": [
+          "thm-riesz-representation-in-finite-dimensions",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-adjoint-of-a-three-by-two-complex-matrix",
+        "kind": "example",
+        "title": "The adjoint of an explicit map $\\mathbb C^2\\to\\mathbb C^3$ is its conjugate-transpose matrix",
+        "strategy": "Choose nonreal entries, form the $2\\times3$ conjugate transpose, and verify the adjoint identity on generic coordinates.",
+        "deps": [
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "ex-gram-determinant-of-two-vectors",
+        "kind": "example",
+        "title": "The Gram determinant of two vectors detects dependence and measures the squared planar area",
+        "strategy": "Compute $\\lVert u\\rVert^2\\lVert v\\rVert^2-|\\langle u,v\\rangle|^2$, give independent and dependent examples, and identify vanishing with equality in Cauchy–Schwarz.",
+        "deps": [
+          "thm-gram-determinant-detects-linear-independence",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ]
+      },
+      {
+        "id": "cex-an-indefinite-nondegenerate-form-need-not-split-off-orthogonal-complements",
+        "kind": "counterexample",
+        "title": "A nondegenerate indefinite symmetric form can have $W\\cap W^\\perp\\ne0$",
+        "strategy": "For $B(x,y)=x_0y_0-x_1y_1$ and $v=(1,1)$, the matrix is invertible but $B(v,v)=0$, so the nonzero line $W=\\mathbb Rv$ lies in $W^\\perp$.",
+        "deps": [
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+          "thm-finite-dimensional-orthogonal-decomposition"
+        ]
+      },
+      {
+        "id": "fs-a-complex-inner-product-is-symmetric",
+        "kind": "false-statement",
+        "title": "FALSE: Every complex inner product satisfies $\\langle u,v\\rangle=\\langle v,u\\rangle$",
+        "strategy": "In standard $\\mathbb C$, $\\langle i,1\\rangle=i$ while $\\langle1,i\\rangle=-i$; conjugate symmetry is the correct law.",
+        "deps": [
+          "def-inner-product-space",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "fs-every-orthogonal-set-is-an-orthonormal-basis",
+        "kind": "false-statement",
+        "title": "FALSE: Every orthogonal set is an orthonormal basis",
+        "strategy": "The singleton $(2,0)$ in $\\mathbb R^2$ is orthogonal but neither normalised nor spanning; the empty set also exposes the spanning boundary.",
+        "deps": [
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "prop-standard-coordinate-inner-products"
+        ]
+      },
+      {
+        "id": "fs-every-idempotent-is-an-orthogonal-projection",
+        "kind": "false-statement",
+        "title": "FALSE: Every idempotent endomorphism of an inner product space is an orthogonal projection",
+        "strategy": "For $P=\\begin{psmallmatrix}1&1\\\\0&0\\end{psmallmatrix}$, $P^2=P$ but $P^{\\mathsf T}\\ne P$ and its kernel is not orthogonal to its image.",
+        "deps": [
+          "thm-self-adjoint-idempotents-are-exactly-orthogonal-projections",
+          "thm-matrix-of-the-adjoint-is-the-conjugate-transpose"
+        ]
+      },
+      {
+        "id": "fs-the-adjoint-depends-linearly-on-complex-scalars",
+        "kind": "false-statement",
+        "title": "FALSE: On a complex inner product space, $(\\lambda T)^*=\\lambda T^*$ for every scalar",
+        "strategy": "Take $T=I$ and $\\lambda=i$: $(iI)^*=-iI$, exposing the conjugate scalar forced by the convention.",
+        "deps": [
+          "prop-adjoint-algebra",
+          "prop-standard-coordinate-inner-products"
+        ]
+      }
+    ]
+  }
+]

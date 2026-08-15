@@ -1,0 +1,34 @@
+## This dispatch — cluster `minpoly` (batch 3)
+
+You are the additional read-only proof-refuter that `tools/risk-report.mjs`
+routes to every **high- and critical-tier** item. Alpha (group b) needs your
+evidence before it can record a `risk_review` disposition for each of these.
+
+**Page:** `diagonalisation-and-the-minimal-polynomial`
+**Theme:** the annihilator ideal, the minimal polynomial and its invariance
+
+**Your items (7) — read every one in full:**
+
+- `items/thm-minimal-polynomial-is-well-defined-and-controls-annihilators.md`
+- `items/thm-minimal-polynomial-is-matrix-representation-and-similarity-invariant.md`
+- `items/lem-minimal-polynomial-is-invariant-under-field-extension.md`
+- `items/cor-minimal-polynomial-divides-characteristic-polynomial.md`
+- `items/thm-roots-of-the-minimal-polynomial-are-eigenvalues-over-extension-fields.md`
+- `items/thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors.md`
+- `items/cor-endomorphism-algebra-is-a-minimal-polynomial-quotient.md`
+
+Read each item's Statement, every `[F#]`/`[A#]`/`[L#]` fact, and every numbered
+step. **Open every dependency the facts cite** at `items/<id>.md` before you
+allege a restatement is too weak — an enlarged domain, a dropped hypothesis or a
+strengthened conclusion in a fact is the single most common real defect on this
+run, and Alpha has already confirmed and repaired several. Check the boundary
+cases the proof claims to dispose of (empty, zero, one, degenerate, endpoints,
+both directions of an iff) against what the steps actually say.
+
+Alpha has just repaired some of these items at step 6b. Read the text **as it is
+on disk now**, not as any earlier report described it.
+
+The batch's proof contracts are
+`research/frontier-13-batch-3.proof-contracts.json`; its notes are
+`research/frontier-13-batch-3.notes.md`. Use them to see what the author
+claimed, but the item text on disk is what you are refuting.

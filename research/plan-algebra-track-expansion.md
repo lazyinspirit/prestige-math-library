@@ -23,9 +23,9 @@ and are reconciled rather than scaffolded, and seven are unauthored:
 
 | label | page id | § | size |
 |---|---|---|---|
-| AG-3 | `semidirect-products-and-automorphism-groups` | II.2 | A 21 / B 14 |
+| AG-3 | `semidirect-products-and-automorphism-groups` | II.2 | A 23 / B 15 — **scaffolded, `frontier-13` batch 2** |
 | AG-4 | `sylow-theorems-and-nilpotent-groups` | II.3 | A 22 / B 14 |
-| MOD-3 | `tensor-products-of-modules` | II.4 | A ~24 / B 12 |
+| MOD-3 | `tensor-products-of-modules` | II.4 | A 38 / B 11 — **scaffolded, `frontier-13` batch 5** |
 | MOD-4 | `chain-conditions-and-semisimple-modules` | II.5 | A ~30 / B 13 — **size this at step 0; it is the page at risk of the 60-item ceiling** |
 | MOD-5 | `modules-over-a-pid-and-canonical-forms` | II.6 | A 24 / B 13 |
 | RT-1…RT-4 | `the-group-algebra-and-representations` … `induced-representations-and-frobenius-reciprocity` | II.7 | Part I's sizes, plus Mackey and Burnside on RT-4 |
@@ -880,13 +880,15 @@ nilpotency is permitted once AG-4's items are planned, `forward_refs`-declared.
 
 ## AG-3. Semidirect Products, Automorphism Groups and Split Extensions
 
-- **order 64**
+- **order 68**
 - **id** `semidirect-products-and-automorphism-groups`
 - **category** `abstract-algebra`
-- **`requires`** `composition-series-and-solvable-groups` (62),
-  `congruences-and-the-chinese-remainder-theorem` (26),
-  `free-groups-and-presentations` (56)
-- **estimate** A 17, B 12
+- **`requires`** `composition-series-and-solvable-groups`,
+  `congruences-and-the-chinese-remainder-theorem`,
+  `free-groups-and-presentations`, `polynomial-rings-and-roots`
+  (the last added as `frontier-13` R2.1, for the root bound over a domain that
+  the order-$pq$ classification needs)
+- **scaffold** A 23, B 15 (`frontier-13` batch 2; no split proposed)
 
 **DEFS.** $\operatorname{Aut}(G)$ (cite order 32), $\operatorname{Inn}(G)$,
 $\operatorname{Out}(G)$ (**#7**); action of $H$ on $N$ by automorphisms;
@@ -909,11 +911,22 @@ group $D_n := \mathbb{Z}/n \rtimes \mathbb{Z}/2$** with the inversion action,
 its order $2n$, its presentation $\langle r,s \mid r^n, s^2, srs^{-1}r\rangle$
 (citing FG-1's von Dyck theorem — this is why order 56 is in `requires`), and
 its centre; **the quaternion group $Q_8$**, constructed inside the published
-quaternions $\mathbb{H}$ (order 42, **A-page spine**, so the citation is legal)
-as $\{\pm1,\pm i,\pm j,\pm k\}$, with its presentation, and **the theorem that
-$Q_8$ is NOT a semidirect product of proper subgroups** (every subgroup
-contains $-1$) — the item that makes semidirect products a real hypothesis and
-that RT-3's $D_4$/$Q_8$ comparison needs.
+quaternions $\mathbb{H}$ as $\{\pm1,\pm i,\pm j,\pm k\}$, with its presentation,
+and **the theorem that $Q_8$ is NOT a semidirect product of proper subgroups**
+(every subgroup contains $-1$) — the item that makes semidirect products a real
+hypothesis and that RT-3's $D_4$/$Q_8$ comparison needs.
+
+**Corrected 2026-08-15 (`frontier-13` step 4).** Part I located the quaternions
+on "order 42, an A-page spine". They are not there: order 42 is
+`group-actions-and-cayleys-theorem`, and `def-quaternions` and
+`thm-quaternions-form-a-division-ring` are published on
+**`rings-subrings-and-integral-domains`**, which IS inside this page's declared
+closure — page 68 already cites `lem-field-is-a-commutative-ring` from it. So the
+citation is legal, but for a different reason than Part I gave, and "the
+quaternion page is outside the closure" is not available as a decline. Batch 2
+nevertheless declined Milne's Example 3.9(c) and proved nonsplitting through
+`cex-cyclic-prime-square-extension-does-not-split` instead; that leaves the
+result covered but the second witness unbuilt. Carried to step 6.
 
 **FS.** every short exact sequence of groups splits ($Q_8$, or
 $\mathbb{Z}/4 \to \mathbb{Z}/2$); an extension of $N$ by $H$ is determined by
@@ -937,8 +950,9 @@ does not give a group. (ii) Do not use "$D_n$ is the symmetry group of a
 regular $n$-gon" — plane isometries are order 102 (new 112) and this is 64.
 $D_n$ is the semidirect product, full stop, and the geometric reading is
 "not available at this point in the reading order", never "the library does not
-develop it". (iii) $Q_8$ must come from the published quaternions and not from
-a fresh eight-element multiplication table, or the library has two $Q_8$s.
+develop it". (iii) $Q_8$ must come from the published quaternions on
+`rings-subrings-and-integral-domains` and not from a fresh eight-element
+multiplication table, or the library has two $Q_8$s.
 
 **Forward references: NONE load-bearing.**
 
@@ -1162,11 +1176,13 @@ Zorn enters; name AC in Facts.
 
 ## MOD-3. Tensor Products of Modules
 
-- **order 102**
+- **order 106**
 - **id** `tensor-products-of-modules`
 - **category** `abstract-algebra`
-- **`requires`** `free-modules-and-exact-sequences` (100)
-- **estimate** A 21, B 12
+- **`requires`** `free-modules-and-exact-sequences` (104),
+  `dual-spaces-bilinear-forms-and-inertia` (92),
+  `field-extensions-and-the-complex-numbers` (54)
+- **scaffold** A 38, B 11 (frontier-13 batch 5; no split proposed)
 
 **DEFS.** $R$-balanced map (right module $\times$ left module $\to$ abelian
 group) and, for commutative $R$, $R$-bilinear map; **$M\otimes_R N$** by the
@@ -1186,12 +1202,16 @@ uses for tensor products of representations); $M\otimes_R R/I \cong M/IM$;
 **right exactness** (landmark); **$-\otimes N$ is not left exact**, with the
 $\mathbb{Z}/2$ counterexample as a numbered item; free ⟹ projective ⟹ flat;
 **the Hom–tensor adjunction** $\operatorname{Hom}(M\otimes_R N, P) \cong
-\operatorname{Hom}(M,\operatorname{Hom}(N,P))$ (landmark); **every module
-embeds in an injective module** ("enough injectives"), by the character-module
-argument $M \hookrightarrow \operatorname{Hom}_{\mathbb{Z}}(R, D)$ with $D$
-divisible — *the hardest item in the MOD block, and it is here rather than at
-MOD-2 because it consumes the adjunction*; extension of scalars is left adjoint
-to restriction.
+\operatorname{Hom}(M,\operatorname{Hom}(N,P))$ (landmark); extension of scalars
+is left adjoint to restriction.
+
+**Enough injectives is already published upstream:**
+`free-modules-and-exact-sequences` now contains
+`thm-module-categories-have-enough-injectives`, including the character-module
+embedding into $\operatorname{Hom}_{\mathbb{Z}}(R,D)$. MOD-3 cites that
+established result and does not mint a duplicate stable id. The local
+character-dual theorem built here is the distinct flat-implies-injective duality
+result.
 
 **FS.** $m\otimes n = 0$ implies $m=0$ or $n=0$ (refuted by $2\otimes\bar1 = 0$
 in $\mathbb{Z}\otimes_{\mathbb{Z}}\mathbb{Z}/2$); every element of $M\otimes N$
@@ -1203,19 +1223,23 @@ injections.
 **B.** $\mathbb{Z}/m\otimes\mathbb{Z}/n$ computed; $\mathbb{Q}\otimes_
 {\mathbb{Z}}\mathbb{Z}/n = 0$; a rank-2 tensor exhibited and proved not
 elementary; the failure of left exactness traced through the standard sequence;
-$\mathbb{C}\otimes_{\mathbb{R}}\mathbb{C}$ as an $\mathbb{R}$-algebra — **check
-at step 1 whether $\mathbb{C}$'s $\mathbb{R}$-algebra structure is available**
-(order 50 gives $\mathbb{C}$; the $\mathbb{R}$-vector-space structure was
-deferred by LA-1, so this item may need to build it, or drop with a note);
-extension of scalars $F^n \to K^n$.
+$\mathbb{C}\otimes_{\mathbb{R}}\mathbb{C}\cong\mathbb{C}\times\mathbb{C}$ as an
+$\mathbb{R}$-algebra; extension of scalars $F^n \to K^n$.
+
+$\mathbb{C}\otimes_{\mathbb{R}}\mathbb{C}\cong\mathbb{C}\times\mathbb{C}$ is
+retained as an $\mathbb{R}$-algebra calculation. The direct published
+prerequisite `field-extensions-and-the-complex-numbers` supplies the specified
+real embedding and the basis $1,i$; MOD-3 builds the tensor-product algebra
+structure itself.
 
 **Traps.** (i) #19 is the defect this page exists to prevent; every later
 construction (RT-3's tensor product of representations, RT-4's induction if the
 tensor model is ever used) must cite it. (ii) The general construction is over
 an arbitrary $R$ with a right and a left module; the **module structure** needs
 commutativity (denial 11). Keep the two statements apart. (iii) "Enough
-injectives" is not optional if the homological scaffold is to have anything to
-stand on — see §9.
+injectives" is **published on MOD-2** as
+`thm-module-categories-have-enough-injectives` (§II.1.c.8, §II.4.a.1); MOD-3
+cites it and does not re-mint it.
 
 **Forward references: NONE load-bearing.**
 
@@ -1929,7 +1953,9 @@ record. **Part II records the move: it is MOD-4's, and RT-4 cites it there.**
 
 ## II.2 AG-3 enrichment — `semidirect-products-and-automorphism-groups`
 
-Part I §11 scaffolded this page at **A 17, B 12** and it is still unauthored.
+Part I §11 estimated this page at **A 17, B 12**; `frontier-13` batch 2
+scaffolded it at **A 23, B 15** at orders 68/69, with no split proposed, and it
+is still unauthored.
 Disk has moved under it twice: the automorphism-group block it planned to mint is
 now published, and the dihedral group it planned to introduce turns out to be
 *used* in five published examples and *defined* nowhere. Both change the item
@@ -2287,7 +2313,9 @@ rather than proved again.
 
 ## II.4 MOD-3 enrichment — `tensor-products-of-modules`
 
-Part I scaffolded A 21, B 12; the page is unauthored. Two things changed under
+Part I estimated A 21, B 12; `frontier-13` batch 5 scaffolded the page at
+**A 38, B 11** at orders 106/107, with no split proposed, and the page is
+unauthored. Two things changed under
 it: MOD-2 shipped "enough injectives" (§II.1.c.8), which Part I had homed here,
 and the source harvest (`aa-harvest-modules.md`) is sharper than Part I's
 Wikipedia backing about what the construction actually produces.
@@ -2348,10 +2376,19 @@ is minted here); **$R$-algebra**, both faces (a ring $A$ with $R\to Z(A)$; an
 $R$-module with a compatible bilinear product), one stated and the other proved
 equivalent, since RT-1 uses both; the tensor product of $R$-algebras.
 
-The stable flatness id is **`def-flat-module`**. Under R-1 MOD-3 owns that
-definition and the basic module-theoretic facts (tensor preserves injections;
-free/projective implies flat). Commutative algebra cites this id and owns only
-faithful flatness, local criteria and flat descent.
+**The stable flatness id is `def-flat-and-faithfully-flat-modules-and-ring-maps`
+— NOT `def-flat-module`** (corrected 2026-08-15 at the `frontier-13` step-4
+splice; ids are immutable once spliced). Under R-1 MOD-3 owns the definition and
+the basic module-theoretic facts (`thm-flatness-criteria-by-injections-and-ideals`
+— flatness is equivalent to preserving injections and to the ideal tests;
+`thm-projective-modules-are-flat`; `cor-free-modules-are-projective-and-flat`).
+The scaffolded definition is **wider than R-1 anticipated**: one item defines
+flat module, faithfully flat module, flat ring map and faithfully flat ring map
+together, and the page also proves `prop-extension-of-scalars-preserves-flat-modules`
+and `prop-transitivity-of-flatness-under-change-of-rings`. Commutative algebra
+therefore cites all of these and owns only the flatness **local criteria**, the
+equational criterion and flat **descent**; it must not re-mint
+`def-flat-ring-homomorphism` or `def-faithfully-flat-module-and-ring-map`.
 
 For the differential-geometry consumer add the algebra-construction block:
 `def-tensor-algebra-of-a-module`,
@@ -2789,7 +2826,8 @@ and Schur–Zassenhaus left to that track). What follows is internal to the alge
 track and is addressed to the orchestrator.
 
 **Subjects-01 application receipt (2026-08-14).** R-1 fixes
-`def-flat-module` and basic flatness at MOD-3. R-3 fixes the finite-abelian
+`def-flat-module` and basic flatness at MOD-3 — the id is now
+`def-flat-and-faithfully-flat-modules-and-ring-maps`, see §II.4.c. R-3 fixes the finite-abelian
 character definition and orthogonality at RT-3. MOD-3 also receives the
 tensor-algebra/functoriality/quotient-relations block requested by differential
 geometry; MOD-4 exposes the three stable semisimplicity ids requested by HA;

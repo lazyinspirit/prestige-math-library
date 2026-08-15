@@ -1,0 +1,641 @@
+[
+  {
+    "order": 58,
+    "id": "symmetric-polynomials",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "Symmetric Polynomials and the Fundamental Theorem of Symmetric Functions",
+    "companion": "symmetric-polynomials-examples",
+    "requires": ["splitting-fields"],
+    "items": [
+      {
+        "id": "def-symmetric-polynomial",
+        "kind": "definition",
+        "title": "Symmetric polynomials as the invariants of variable permutations",
+        "deps": ["def-commutative-ring", "def-multivariate-polynomial-ring-by-iteration", "def-symmetric-group"]
+      },
+      {
+        "id": "prop-symmetric-polynomials-form-a-subring",
+        "kind": "proposition",
+        "title": "The symmetric polynomials form a subring",
+        "strategy": "Every variable permutation fixes zero and one and commutes with addition, additive inverses, and multiplication. Thus the common fixed set is a subring. Include the zero-variable ring as the base ring itself.",
+        "deps": ["def-symmetric-polynomial", "def-subring"]
+      },
+      {
+        "id": "def-elementary-symmetric-polynomials",
+        "kind": "definition",
+        "title": "The elementary symmetric polynomials $e_0,e_1,\\ldots,e_n$",
+        "deps": ["def-symmetric-polynomial", "def-multivariate-polynomial-ring-by-iteration"]
+      },
+      {
+        "id": "thm-vieta-expansion-in-elementary-symmetric-polynomials",
+        "kind": "theorem",
+        "title": "Vieta expansion: $\\prod_{i=1}^n(t-x_i)=\\sum_{k=0}^n(-1)^k e_k t^{n-k}$",
+        "strategy": "Expand the product and group terms by the subset of variables from which the negative term was selected. A subset of size $k$ contributes sign $(-1)^k$, its variable product, and $t^{n-k}$. Check $n=0$ as the empty-product identity.",
+        "deps": ["def-elementary-symmetric-polynomials", "def-group-power"]
+      },
+      {
+        "id": "cor-vietas-formulas-for-a-split-monic-polynomial",
+        "kind": "corollary",
+        "title": "Vieta's formulas identify the coefficients of a split monic polynomial with elementary symmetric functions of its roots",
+        "strategy": "Substitute the roots into the universal expansion and compare coefficients to obtain $a_k=(-1)^k e_k(\\alpha_1,\\ldots,\\alpha_n)$. Retain roots with multiplicity and handle the monic constant polynomial.",
+        "deps": ["thm-vieta-expansion-in-elementary-symmetric-polynomials", "def-polynomials-that-split-and-splitting-fields"]
+      },
+      {
+        "id": "def-monomial-symmetric-polynomials",
+        "kind": "definition",
+        "title": "Monomial symmetric polynomials indexed by partitions",
+        "deps": ["def-symmetric-polynomial"]
+      },
+      {
+        "id": "thm-monomial-symmetric-polynomials-form-a-basis",
+        "kind": "theorem",
+        "title": "Monomial symmetric polynomials form an $R$-basis of the symmetric-polynomial ring",
+        "strategy": "Partition monomials into permutation orbits. Symmetry makes coefficients constant on an orbit, yielding a finite combination of orbit sums. Distinct orbit sums have disjoint monomial supports, giving uniqueness without dividing by orbit sizes.",
+        "deps": ["def-monomial-symmetric-polynomials", "def-symmetric-polynomial"]
+      },
+      {
+        "id": "def-lexicographic-order-and-polynomial-multidegree",
+        "kind": "definition",
+        "title": "Lexicographic order on exponent tuples and the multidegree of a nonzero polynomial",
+        "deps": ["def-multivariate-polynomial-ring-by-iteration"]
+      },
+      {
+        "id": "lem-leading-multidegree-of-a-symmetric-polynomial-is-a-partition",
+        "kind": "lemma",
+        "title": "The leading multidegree of a symmetric polynomial is weakly decreasing",
+        "strategy": "If the greatest exponent tuple has $a_i<a_j$ for some $i<j$, swapping variables $i$ and $j$ produces a monomial with the same nonzero coefficient and a lexicographically larger tuple, a contradiction.",
+        "deps": ["def-symmetric-polynomial", "def-lexicographic-order-and-polynomial-multidegree"]
+      },
+      {
+        "id": "lem-leading-multidegrees-of-elementary-symmetric-monomials",
+        "kind": "lemma",
+        "title": "The leading multidegree of $e_1^{b_1}\\cdots e_n^{b_n}$ is $(b_1+\\cdots+b_n,b_2+\\cdots+b_n,\\ldots,b_n)$ with coefficient one",
+        "strategy": "The leading monomial of $e_k$ is $x_1\\cdots x_k$. Multiply these monic leading terms and record that the cumulative-sum map from $b$ is injective.",
+        "deps": ["def-elementary-symmetric-polynomials", "def-lexicographic-order-and-polynomial-multidegree"]
+      },
+      {
+        "id": "thm-fundamental-theorem-of-symmetric-polynomials-existence",
+        "kind": "theorem",
+        "title": "Every symmetric polynomial over a commutative ring is a polynomial in the elementary symmetric polynomials",
+        "strategy": "For leading tuple $a_1\\ge\\cdots\\ge a_n$, subtract the leading coefficient times $e_1^{a_1-a_2}\\cdots e_n^{a_n}$. The leading term cancels and the multidegree decreases. Well-founded lexicographic induction terminates; treat zero and $n=0$ separately.",
+        "deps": ["lem-leading-multidegree-of-a-symmetric-polynomial-is-a-partition", "lem-leading-multidegrees-of-elementary-symmetric-monomials", "prop-symmetric-polynomials-form-a-subring"]
+      },
+      {
+        "id": "thm-elementary-symmetric-polynomials-are-algebraically-independent",
+        "kind": "theorem",
+        "title": "The elementary symmetric polynomials are algebraically independent over the coefficient ring",
+        "strategy": "In a nonzero formal relation choose the term with maximal cumulative-sum multidegree after $T_k\\mapsto e_k$. Those leading multidegrees are distinct and monic, so the selected nonzero coefficient cannot cancel, even over a ring with zero divisors.",
+        "deps": ["lem-leading-multidegrees-of-elementary-symmetric-monomials", "def-multivariate-polynomial-ring-by-iteration"]
+      },
+      {
+        "id": "thm-fundamental-theorem-of-symmetric-polynomials",
+        "kind": "theorem",
+        "title": "Fundamental theorem of symmetric polynomials: unique expression as a polynomial in $e_1,\\ldots,e_n$",
+        "strategy": "Combine lexicographic existence with algebraic independence for uniqueness, and state the resulting $R$-algebra isomorphism.",
+        "deps": ["thm-fundamental-theorem-of-symmetric-polynomials-existence", "thm-elementary-symmetric-polynomials-are-algebraically-independent"]
+      },
+      {
+        "id": "cor-symmetric-polynomial-values-on-roots-lie-in-the-base-field",
+        "kind": "corollary",
+        "title": "A symmetric polynomial in the roots of a monic polynomial is a unique polynomial in its coefficients and lies in the base ring",
+        "strategy": "Write it uniquely as $Q(e_1,\\ldots,e_n)$ and replace each elementary value by the signed coefficient from Vieta. This is independent of root ordering.",
+        "deps": ["thm-fundamental-theorem-of-symmetric-polynomials", "cor-vietas-formulas-for-a-split-monic-polynomial"]
+      },
+      {
+        "id": "def-power-sum-and-complete-homogeneous-symmetric-polynomials",
+        "kind": "definition",
+        "title": "Power sums $p_k$ and complete homogeneous symmetric polynomials $h_k$",
+        "deps": ["def-symmetric-polynomial", "def-group-power"]
+      },
+      {
+        "id": "prop-elementary-and-complete-generating-series-identity",
+        "kind": "proposition",
+        "title": "The generating-series identity $E(-t)H(t)=1$",
+        "strategy": "Compare each coefficient in $\\prod_i(1-x_it)\\sum_{k\\ge0}h_kt^k$. The calculation is finite in each degree and may equivalently be organized by cancellation among monomials.",
+        "deps": ["def-elementary-symmetric-polynomials", "def-power-sum-and-complete-homogeneous-symmetric-polynomials"]
+      },
+      {
+        "id": "cor-complete-homogeneous-symmetric-polynomials-freely-generate",
+        "kind": "corollary",
+        "title": "The complete homogeneous symmetric polynomials $h_1,\\ldots,h_n$ freely generate the symmetric-polynomial ring",
+        "strategy": "Coefficient comparison expresses each $h_k$ as $(-1)^{k-1}e_k$ plus earlier terms and conversely expresses $e_k$ triangularly in the $h_i$. The inverse triangular substitutions transfer generation and algebraic independence.",
+        "deps": ["prop-elementary-and-complete-generating-series-identity", "thm-fundamental-theorem-of-symmetric-polynomials"]
+      },
+      {
+        "id": "thm-newtons-identities",
+        "kind": "theorem",
+        "title": "Newton's identities: $k e_k=\\sum_{i=1}^k(-1)^{i-1}e_{k-i}p_i$",
+        "strategy": "Differentiate the finite product $E(-t)=\\prod_j(1-x_jt)$ formally, multiply coefficientwise by $H(t)$, and compare the coefficient of $t^{k-1}$. No logarithms or division are used. Take $e_0=1$ and $e_k=0$ for $k>n$.",
+        "deps": ["def-power-sum-and-complete-homogeneous-symmetric-polynomials", "prop-elementary-and-complete-generating-series-identity", "def-formal-derivative-of-a-polynomial"]
+      },
+      {
+        "id": "cor-power-sums-generate-when-factorial-is-invertible",
+        "kind": "corollary",
+        "title": "If $n!$ is invertible, then $p_1,\\ldots,p_n$ freely generate the symmetric-polynomial ring",
+        "strategy": "Invertibility of $n!$ makes $1,\\ldots,n$ units. Newton's identities recursively solve for each $e_k$ in the power sums. The triangular unit-diagonal change of variables also gives algebraic independence. State the field corollary for characteristic zero or greater than $n$.",
+        "deps": ["thm-newtons-identities", "thm-fundamental-theorem-of-symmetric-polynomials", "def-factorial-and-falling-factorial"]
+      },
+      {
+        "id": "def-vandermonde-polynomial",
+        "kind": "definition",
+        "title": "The Vandermonde polynomial $\\Delta_n=\\prod_{i<j}(x_i-x_j)$",
+        "deps": ["def-multivariate-polynomial-ring-by-iteration"]
+      },
+      {
+        "id": "prop-vandermonde-square-is-symmetric",
+        "kind": "proposition",
+        "title": "The square of the Vandermonde polynomial is symmetric",
+        "strategy": "A permutation reindexes the unordered pairs of variables. In $\\Delta_n^2=\\prod_{i<j}(x_i-x_j)^2$, reversing the orientation of a pair has no effect, so every permutation fixes the product. This direct square argument includes characteristic two.",
+        "deps": ["def-vandermonde-polynomial", "def-symmetric-polynomial", "def-symmetric-group"]
+      },
+      {
+        "id": "def-discriminant-of-a-monic-polynomial",
+        "kind": "definition",
+        "title": "The discriminant of a monic polynomial as the coefficient expression of $\\Delta_n^2$",
+        "deps": ["prop-vandermonde-square-is-symmetric", "thm-fundamental-theorem-of-symmetric-polynomials", "cor-symmetric-polynomial-values-on-roots-lie-in-the-base-field", "def-polynomial-degree-leading-coefficient-and-monic"]
+      },
+      {
+        "id": "thm-discriminant-root-formula-and-repeated-root-criterion",
+        "kind": "theorem",
+        "title": "The discriminant is $\\prod_{i<j}(\\alpha_i-\\alpha_j)^2$ and vanishes exactly when a monic polynomial has a repeated root",
+        "strategy": "Evaluate the defining coefficient polynomial in a splitting field. In a field the product vanishes exactly when two roots coincide, in every characteristic. Translate this into the published repeated-root criterion.",
+        "deps": ["def-discriminant-of-a-monic-polynomial", "def-polynomials-that-split-and-splitting-fields", "thm-repeated-root-derivative-criterion"]
+      },
+      {
+        "id": "def-monic-resultant",
+        "kind": "definition",
+        "title": "The monic resultant $\\operatorname{Res}(f,g)$ from the symmetric coefficient expression of $\\prod_i g(x_i)$",
+        "deps": ["thm-fundamental-theorem-of-symmetric-polynomials", "def-polynomial-degree-leading-coefficient-and-monic"]
+      },
+      {
+        "id": "thm-monic-resultant-root-product-and-common-root-criterion",
+        "kind": "theorem",
+        "title": "For monic $f$, $\\operatorname{Res}(f,g)=\\prod_i g(\\alpha_i)$ and it vanishes exactly when $f$ and $g$ have a common root",
+        "strategy": "The product in formal roots is symmetric, so its elementary expression defines the resultant from coefficients. Vieta evaluation yields the root product. For positive-degree $f$ over a field, it vanishes exactly when some root of $f$ is a root of $g$, including $g=0$.",
+        "deps": ["def-monic-resultant", "cor-vietas-formulas-for-a-split-monic-polynomial", "def-polynomial-evaluation-and-root", "thm-splitting-fields-exist-for-nonzero-polynomials"]
+      },
+      {
+        "id": "thm-monic-resultant-as-a-double-root-product",
+        "kind": "theorem",
+        "title": "For monic $f,g$ of degrees $n,m$ splitting in a common extension, $\\operatorname{Res}(f,g)=\\prod_{i=1}^n\\prod_{j=1}^m(\\alpha_i-\\beta_j)$",
+        "strategy": "Write $g(x)=\\prod_{j=1}^m(x-\\beta_j)$ in the common splitting extension and substitute this factorization into $\\operatorname{Res}(f,g)=\\prod_{i=1}^n g(\\alpha_i)$. If either degree is zero, both sides are the same empty product.",
+        "deps": ["thm-monic-resultant-root-product-and-common-root-criterion", "def-polynomials-that-split-and-splitting-fields"]
+      },
+      {
+        "id": "cor-monic-resultant-symmetry",
+        "kind": "corollary",
+        "title": "For monic $f,g$ of degrees $n,m$, $\\operatorname{Res}(f,g)=(-1)^{mn}\\operatorname{Res}(g,f)$",
+        "strategy": "Take a splitting field of $fg$ and apply the double-root product in both orders. Replacing every factor $\\alpha_i-\\beta_j$ by $-(\\beta_j-\\alpha_i)$ contributes one minus sign for each of the $mn$ pairs.",
+        "deps": ["thm-monic-resultant-as-a-double-root-product", "thm-splitting-fields-exist-for-nonzero-polynomials"]
+      },
+      {
+        "id": "cor-monic-resultant-is-unchanged-modulo-f",
+        "kind": "corollary",
+        "title": "For monic $f$, if $g-g_1=qf$, then $\\operatorname{Res}(f,g)=\\operatorname{Res}(f,g_1)$",
+        "strategy": "At every root $\\alpha_i$ of $f$, evaluation of $g-g_1=qf$ gives $g(\\alpha_i)=g_1(\\alpha_i)$. The two root-product formulas are therefore equal, including the zero-degree and zero-polynomial boundary cases.",
+        "deps": ["thm-monic-resultant-root-product-and-common-root-criterion", "def-polynomial-evaluation-and-root"]
+      },
+      {
+        "id": "cor-discriminant-as-a-resultant-with-the-derivative",
+        "kind": "corollary",
+        "title": "For monic $f$ of degree $n$, $\\operatorname{Res}(f,f')=(-1)^{n(n-1)/2}\\operatorname{Disc}(f)$",
+        "strategy": "At each root, differentiate the split product to obtain $f'(\\alpha_i)=\\prod_{j\\ne i}(\\alpha_i-\\alpha_j)$. Multiplication pairs every difference with its negative, one sign per unordered pair, and comparison with the root formulas gives the identity.",
+        "deps": ["thm-monic-resultant-root-product-and-common-root-criterion", "thm-discriminant-root-formula-and-repeated-root-criterion", "def-formal-derivative-of-a-polynomial"]
+      }
+    ]
+  },
+  {
+    "order": 59,
+    "id": "symmetric-polynomials-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "Symmetric Polynomials and the Fundamental Theorem of Symmetric Functions — Examples",
+    "companion": "symmetric-polynomials",
+    "requires": ["symmetric-polynomials"],
+    "items": [
+      {
+        "id": "ex-symmetric-reduction-in-two-variables",
+        "kind": "example",
+        "title": "Reducing a symmetric polynomial in two variables to a polynomial in $e_1$ and $e_2$",
+        "strategy": "Run the leading-term subtraction algorithm on $x^3+y^3+x^2y+xy^2$, recording each lexicographic decrease and verifying the final expression.",
+        "deps": ["thm-fundamental-theorem-of-symmetric-polynomials-existence", "def-elementary-symmetric-polynomials"]
+      },
+      {
+        "id": "ex-gauss-reduction-of-a-three-variable-symmetric-polynomial",
+        "kind": "example",
+        "title": "The lexicographic reduction algorithm in three variables",
+        "strategy": "Use a symmetric polynomial with several orbit types, subtract the prescribed elementary monomial at each leading partition, and verify the resulting expression by expansion.",
+        "deps": ["thm-fundamental-theorem-of-symmetric-polynomials-existence", "def-lexicographic-order-and-polynomial-multidegree"]
+      },
+      {
+        "id": "cex-lex-leading-term-not-found-by-unbalanced-substitution",
+        "kind": "counterexample",
+        "title": "A fixed unbalanced one-variable substitution need not preserve lexicographic leading terms",
+        "strategy": "Give two exponent tuples for which the lexicographically larger one receives the smaller weighted exponent under a poorly chosen fixed weight list. Explain why degree-dependent separated weights can work but do not replace the lexicographic proof.",
+        "deps": ["def-lexicographic-order-and-polynomial-multidegree"]
+      },
+      {
+        "id": "ex-newtons-identities-for-three-variables",
+        "kind": "example",
+        "title": "Newton's identities through $p_4$ in three variables",
+        "strategy": "Write the identities for $k=1,2,3,4$, with $e_4=0$, solve for the first four power sums, and over characteristic zero invert $1,2,3$ to recover the elementary generators.",
+        "deps": ["thm-newtons-identities", "cor-power-sums-generate-when-factorial-is-invertible"]
+      },
+      {
+        "id": "cex-power-sums-do-not-generate-in-characteristic-two",
+        "kind": "counterexample",
+        "title": "Power sums need not generate the symmetric ring in characteristic two",
+        "strategy": "In two variables over $\\mathbb F_2$, $p_1=e_1$ and $p_2=e_1^2$. Thus polynomials in $p_1,p_2$ lie in $\\mathbb F_2[e_1]$ and cannot equal the independent generator $e_2$.",
+        "deps": ["thm-newtons-identities", "thm-elementary-symmetric-polynomials-are-algebraically-independent", "thm-z-mod-p-is-a-field"]
+      },
+      {
+        "id": "ex-complete-homogeneous-symmetric-polynomials-in-two-variables",
+        "kind": "example",
+        "title": "Complete homogeneous symmetric polynomials and their recurrence in two variables",
+        "strategy": "Compute $h_0,h_1,h_2,h_3$, verify $h_k=e_1h_{k-1}-e_2h_{k-2}$, and express $e_1,e_2$ back in terms of $h_1,h_2$.",
+        "deps": ["prop-elementary-and-complete-generating-series-identity", "cor-complete-homogeneous-symmetric-polynomials-freely-generate"]
+      },
+      {
+        "id": "ex-quadratic-discriminant-and-double-root",
+        "kind": "example",
+        "title": "The discriminant of $x^2+bx+c$ and its double-root criterion",
+        "strategy": "Use roots and Vieta to compute $(\\alpha-\\beta)^2=b^2-4c$. Check vanishing versus a repeated root in every characteristic, while separating the characteristic-two completed-square issue.",
+        "deps": ["thm-discriminant-root-formula-and-repeated-root-criterion", "cor-vietas-formulas-for-a-split-monic-polynomial"]
+      },
+      {
+        "id": "ex-depressed-cubic-discriminant",
+        "kind": "example",
+        "title": "The discriminant of $x^3+px+q$ is $-4p^3-27q^2$",
+        "strategy": "Apply the resultant-with-derivative identity or reduce the Vandermonde square by Vieta. Establish the integer polynomial identity before specializing to any field.",
+        "deps": ["cor-discriminant-as-a-resultant-with-the-derivative", "cor-vietas-formulas-for-a-split-monic-polynomial"]
+      },
+      {
+        "id": "ex-monic-resultant-of-two-quadratics",
+        "kind": "example",
+        "title": "Computing the monic resultant of two quadratics from roots and coefficients",
+        "strategy": "For $f=x^2+ax+b$ and $g=x^2+cx+d$, reduce $g(\\alpha)g(\\beta)$ using Vieta, display the coefficient formula, and test cases with and without a common root.",
+        "deps": ["thm-monic-resultant-root-product-and-common-root-criterion", "cor-vietas-formulas-for-a-split-monic-polynomial"]
+      }
+    ]
+  },
+  {
+    "order": 96,
+    "id": "algebraic-extensions-degree-and-finite-fields",
+    "kind": "A",
+    "category": "abstract-algebra",
+    "title": "Algebraic Extensions, the Degree of an Extension, and Finite Fields",
+    "companion": "algebraic-extensions-degree-and-finite-fields-examples",
+    "requires": ["splitting-fields", "linear-independence-bases-and-dimension"],
+    "items": [
+      {
+        "id": "def-extension-degree-and-finite-extension",
+        "kind": "definition",
+        "title": "The degree $[K:F]=\\dim_F K$ of a finite field extension",
+        "deps": ["def-field-extension-generated-subfields-and-simple-extension", "def-dimension"]
+      },
+      {
+        "id": "prop-extension-degree-one-iff-equal-fields",
+        "kind": "proposition",
+        "title": "A finite extension has degree one if and only if the two fields are equal",
+        "strategy": "If the degree is one, the nonzero vector $1$ is a basis, so every element of $K$ is a scalar multiple of $1$ and lies in $F$. Conversely $F/F$ has basis $\\{1\\}$.",
+        "deps": ["def-extension-degree-and-finite-extension", "thm-unique-coordinates-with-respect-to-an-ordered-basis"]
+      },
+      {
+        "id": "lem-product-basis-for-a-tower-of-finite-extensions",
+        "kind": "lemma",
+        "title": "Products of bases form a basis in a tower of finite extensions",
+        "strategy": "For bases $u_1,\\ldots,u_m$ of $K/F$ and $v_1,\\ldots,v_n$ of $L/K$, expand first in the $v_j$ and then each coefficient in the $u_i$ to prove spanning by $u_iv_j$. Reverse coefficient comparison to prove independence.",
+        "deps": ["def-linear-basis", "thm-unique-coordinates-with-respect-to-an-ordered-basis"]
+      },
+      {
+        "id": "thm-tower-law-for-finite-field-extensions",
+        "kind": "theorem",
+        "title": "Tower law for finite extensions: $[L:F]=[L:K][K:F]$",
+        "strategy": "Choose finite bases for $K/F$ and $L/K$. Their products form a basis of $L/F$ indexed by the Cartesian product, so its size is the product of the two sizes. All displayed degrees are finite-dimensional degrees.",
+        "deps": ["lem-product-basis-for-a-tower-of-finite-extensions", "def-extension-degree-and-finite-extension"]
+      },
+      {
+        "id": "cor-intermediate-field-degrees-divide",
+        "kind": "corollary",
+        "title": "The degree of an intermediate field divides the degree of a finite extension",
+        "strategy": "For $F\\subseteq K\\subseteq L$ with $L/F$ finite, obtain finite bases for the subextensions from finite spanning sets and apply $[L:F]=[L:K][K:F]$.",
+        "deps": ["thm-tower-law-for-finite-field-extensions", "cor-every-spanning-set-contains-a-basis", "cor-independent-set-is-no-larger-than-a-finite-spanning-set"]
+      },
+      {
+        "id": "thm-finite-field-extensions-are-algebraic",
+        "kind": "theorem",
+        "title": "Every finite field extension is algebraic",
+        "strategy": "If $[K:F]=n$, then $1,a,\\ldots,a^n$ are $n+1$ vectors in a space spanned by an $n$-element basis and are dependent. The resulting nontrivial relation is a nonzero polynomial over $F$ vanishing at $a$.",
+        "deps": ["def-extension-degree-and-finite-extension", "def-algebraic-and-transcendental-elements", "cor-independent-set-is-no-larger-than-a-finite-spanning-set"]
+      },
+      {
+        "id": "cor-element-algebraic-iff-simple-extension-finite",
+        "kind": "corollary",
+        "title": "An element is algebraic over $F$ if and only if its simple extension $F(a)/F$ is finite",
+        "strategy": "The forward implication is the published quotient-and-power-basis theorem. The reverse implication applies finite-implies-algebraic to $F(a)/F$ and selects $a$.",
+        "deps": ["thm-finite-field-extensions-are-algebraic", "thm-simple-algebraic-extension-quotient-power-basis-and-degree"]
+      },
+      {
+        "id": "def-finitely-generated-field-extension",
+        "kind": "definition",
+        "title": "Finitely generated field extensions $F(a_1,\\ldots,a_r)$",
+        "deps": ["def-field-extension-generated-subfields-and-simple-extension", "def-finite-cardinality"]
+      },
+      {
+        "id": "thm-finitely-generated-algebraic-extensions-are-finite",
+        "kind": "theorem",
+        "title": "An extension generated by finitely many algebraic elements is finite",
+        "strategy": "Build the tower obtained by adjoining one generator at a time. Each step is finite because its generator stays algebraic over the larger base. Repeatedly apply the tower law; the empty generating list has degree one.",
+        "deps": ["def-finitely-generated-field-extension", "cor-element-algebraic-iff-simple-extension-finite", "thm-tower-law-for-finite-field-extensions", "def-algebraic-and-transcendental-elements"]
+      },
+      {
+        "id": "thm-algebraic-elements-form-a-subfield",
+        "kind": "theorem",
+        "title": "The elements of an extension algebraic over the base field form a subfield",
+        "strategy": "For algebraic $a,b$, the field $F(a,b)$ is finite over $F$. Its elements, including $a-b$, $ab$, and $a^{-1}$ when $a\\ne0$, are algebraic. Verify zero and one and apply the subfield criterion.",
+        "deps": ["thm-finitely-generated-algebraic-extensions-are-finite", "thm-finite-field-extensions-are-algebraic", "def-subfield", "def-algebraic-and-transcendental-elements"]
+      },
+      {
+        "id": "def-relative-algebraic-closure",
+        "kind": "definition",
+        "title": "The relative algebraic closure of $F$ in an extension $K$",
+        "deps": ["thm-algebraic-elements-form-a-subfield"]
+      },
+      {
+        "id": "thm-transitivity-of-algebraicity",
+        "kind": "theorem",
+        "title": "Algebraicity is transitive in towers of field extensions",
+        "strategy": "For $a$ algebraic over $K$, take one polynomial over $K$ that it satisfies. Its finitely many coefficients generate a finite extension $M/F$; adjoining $a$ is finite over $M$. The tower law makes $M(a)/F$ finite, hence $a$ algebraic over $F$.",
+        "deps": ["thm-finitely-generated-algebraic-extensions-are-finite", "cor-element-algebraic-iff-simple-extension-finite", "thm-tower-law-for-finite-field-extensions", "thm-finite-field-extensions-are-algebraic", "def-algebraic-and-transcendental-elements"]
+      },
+      {
+        "id": "prop-relative-algebraic-closure-is-relatively-algebraically-closed",
+        "kind": "proposition",
+        "title": "The relative algebraic closure of $F$ in $K$ has no further algebraic elements inside $K$",
+        "strategy": "If $A$ is the subfield of elements algebraic over $F$ and $b\\in K$ is algebraic over $A$, then $A(b)/A$ and $A/F$ are algebraic. Transitivity makes $b$ algebraic over $F$, so $b\\in A$.",
+        "deps": ["def-relative-algebraic-closure", "cor-element-algebraic-iff-simple-extension-finite", "thm-finite-field-extensions-are-algebraic", "thm-transitivity-of-algebraicity"]
+      },
+      {
+        "id": "prop-degree-bound-for-composita",
+        "kind": "proposition",
+        "title": "For finite subextensions in a common field, $[EE':F]\\le [E:F][E':F]$",
+        "strategy": "Products of bases of $E/F$ and $E'/F$ span the generated ring. Algebraicity reduces inverses by minimal polynomials, so this ring is the compositum. Extract a basis from the product spanning set to obtain the bound.",
+        "deps": ["cor-composite-of-two-subfields", "def-extension-degree-and-finite-extension", "cor-every-spanning-set-contains-a-basis", "thm-finite-field-extensions-are-algebraic", "thm-finitely-generated-algebraic-extensions-are-finite"]
+      },
+      {
+        "id": "def-prime-subfield",
+        "kind": "definition",
+        "title": "The prime subfield as the intersection of all subfields",
+        "deps": ["def-subfield", "def-field"]
+      },
+      {
+        "id": "thm-characteristic-of-a-field-is-zero-or-prime",
+        "kind": "theorem",
+        "title": "The characteristic of a field is zero or a prime number",
+        "strategy": "The characteristic is not one. If a positive characteristic $n$ were composite, write $n=ab$ with $1<a,b<n$. Minimality makes $a1_F$ and $b1_F$ nonzero, while their product is $n1_F=0$, contradicting the domain property.",
+        "deps": ["def-ring-characteristic", "def-prime", "lem-field-is-a-commutative-ring"]
+      },
+      {
+        "id": "thm-prime-subfield-classification",
+        "kind": "theorem",
+        "title": "A field's prime subfield is isomorphic to $\\mathbb Q$ in characteristic zero and to $\\mathbb F_p$ in characteristic $p$",
+        "strategy": "In characteristic $p$, map $[n]$ in $\\mathbb Z/p$ to $n1_F$. In characteristic zero, extend the injective integer map by $a/b\\mapsto(a1_F)(b1_F)^{-1}$. Each image is a subfield contained in every subfield.",
+        "deps": ["def-prime-subfield", "thm-characteristic-of-a-field-is-zero-or-prime", "thm-z-mod-p-is-a-field", "thm-rat-field", "def-field-homomorphism"]
+      },
+      {
+        "id": "thm-binomial-theorem-over-a-commutative-ring",
+        "kind": "theorem",
+        "title": "The binomial theorem over an arbitrary commutative ring",
+        "strategy": "Induct on $n$. Multiply the previous expansion by $x+y$, reindex the two finite sums, and use Pascal's identity. Coefficients are repeated additions, never quotients, so positive characteristic is included.",
+        "deps": ["def-commutative-ring", "def-binomial-coefficient", "def-group-power", "thm-pascals-rule"]
+      },
+      {
+        "id": "lem-prime-divides-intermediate-binomial-coefficients",
+        "kind": "lemma",
+        "title": "A prime $p$ divides $\\binom pk$ for $0<k<p$",
+        "strategy": "Use $k\\binom pk=p\\binom{p-1}{k-1}$. Since $p$ does not divide $k$, Euclid's lemma forces $p$ to divide the binomial coefficient. Keep the endpoint coefficients outside the claim.",
+        "deps": ["def-binomial-coefficient", "thm-binomial-closed-formula", "def-prime", "thm-euclids-lemma"]
+      },
+      {
+        "id": "thm-frobenius-endomorphism-and-finite-field-automorphism",
+        "kind": "theorem",
+        "title": "Frobenius $x\\mapsto x^p$ is an injective endomorphism in characteristic $p$, and an automorphism for finite fields",
+        "strategy": "The ring binomial theorem gives $(x+y)^p=x^p+y^p$ because the intermediate coefficients vanish. Powers give multiplicativity. The kernel is zero in a field; on a finite field injectivity gives bijectivity. The $n$-fold iterate is $x\\mapsto x^{p^n}$.",
+        "deps": ["thm-binomial-theorem-over-a-commutative-ring", "lem-prime-divides-intermediate-binomial-coefficients", "thm-characteristic-of-a-field-is-zero-or-prime", "def-field-homomorphism", "thm-subset-of-a-finite-set"]
+      },
+      {
+        "id": "def-finite-field-and-its-order",
+        "kind": "definition",
+        "title": "Finite fields and their order",
+        "deps": ["def-field", "def-finite-cardinality"]
+      },
+      {
+        "id": "thm-finite-fields-have-prime-power-order",
+        "kind": "theorem",
+        "title": "Every finite field has order $p^n$ for a unique prime characteristic $p$ and positive integer $n$",
+        "strategy": "The prime subfield has $p$ elements. The finite underlying set spans the field over it and contains a basis of size $n\\ge1$. Coordinates identify the field with the functions from an $n$-set to a $p$-set, hence it has $p^n$ elements. Record uniqueness.",
+        "deps": ["def-finite-field-and-its-order", "thm-prime-subfield-classification", "def-extension-degree-and-finite-extension", "cor-every-spanning-set-contains-a-basis", "thm-unique-coordinates-with-respect-to-an-ordered-basis", "thm-cardinality-of-a-set-of-functions", "def-nat-power"]
+      },
+      {
+        "id": "thm-multiplicative-group-of-a-finite-field-is-cyclic",
+        "kind": "theorem",
+        "title": "The multiplicative group $\\mathbb F_q^\\times$ of a finite field is cyclic",
+        "strategy": "A field is an integral domain and its nonzero elements are its units. Apply the published theorem that every finite subgroup of a domain's unit group is cyclic to the whole finite unit group. Its proof already supplies the root-bound and finite-abelian-structure argument.",
+        "deps": ["def-finite-field-and-its-order", "lem-field-is-a-commutative-ring", "cor-finite-subgroups-of-units-in-a-domain-are-cyclic"]
+      },
+      {
+        "id": "lem-roots-of-x-q-minus-x-form-a-field",
+        "kind": "lemma",
+        "title": "In characteristic $p$, the roots of $x^{p^n}-x$ form a subfield and are all simple",
+        "strategy": "Iterated Frobenius proves closure under subtraction and multiplication; zero and one are roots, and inverses follow from $a^q=a$. The derivative is $qx^{q-1}-1=-1$, so the roots are simple. Require $n\\ge1$.",
+        "deps": ["thm-frobenius-endomorphism-and-finite-field-automorphism", "def-subfield", "def-formal-derivative-of-a-polynomial", "thm-repeated-root-derivative-criterion"]
+      },
+      {
+        "id": "thm-existence-of-finite-fields",
+        "kind": "theorem",
+        "title": "For every prime $p$ and $n\\ge1$, a field with $p^n$ elements exists",
+        "strategy": "Take a splitting field of $x^{p^n}-x$ over $\\mathbb F_p$. Its roots form a subfield and generate the splitting field, hence are the whole field. Simplicity and the degree show that there are exactly $p^n$ roots.",
+        "deps": ["lem-roots-of-x-q-minus-x-form-a-field", "thm-splitting-fields-exist-for-nonzero-polynomials", "thm-z-mod-p-is-a-field", "def-polynomials-that-split-and-splitting-fields", "def-finite-field-and-its-order"]
+      },
+      {
+        "id": "prop-finite-fields-are-splitting-fields-of-x-q-minus-x",
+        "kind": "proposition",
+        "title": "A field with $q$ elements is the splitting field of $x^q-x$ over its prime subfield",
+        "strategy": "Cyclicity gives $a^{q-1}=1$ for every nonzero $a$, and zero also satisfies $a^q=a$. Thus all $q$ elements are roots of the degree-$q$ polynomial, and they generate the field.",
+        "deps": ["thm-multiplicative-group-of-a-finite-field-is-cyclic", "def-polynomials-that-split-and-splitting-fields", "thm-root-bound-for-polynomials-over-a-domain"]
+      },
+      {
+        "id": "thm-uniqueness-of-finite-fields",
+        "kind": "theorem",
+        "title": "Finite fields of the same order are isomorphic",
+        "strategy": "Two fields of order $q=p^n$ have isomorphic prime subfields and are splitting fields of $x^q-x$ over them. Transport the base copy and apply splitting-field uniqueness. Do not claim the isomorphism is unique.",
+        "deps": ["thm-finite-fields-have-prime-power-order", "prop-finite-fields-are-splitting-fields-of-x-q-minus-x", "cor-splitting-fields-are-unique-up-to-base-isomorphism", "thm-prime-subfield-classification", "thm-canonical-prime-factorisation"]
+      },
+      {
+        "id": "thm-subfield-lattice-of-a-finite-field",
+        "kind": "theorem",
+        "title": "The subfields of $\\mathbb F_{p^n}$ are the unique fields $\\mathbb F_{p^d}$ for positive divisors $d$ of $n$",
+        "strategy": "A subfield has order $p^d$ and the tower law forces $d\\mid n$. Conversely the roots of $x^{p^d}-x$ inside $\\mathbb F_{p^n}$ form a subfield with $p^d$ elements when $d\\mid n$. Any subfield of that order has the same root set.",
+        "deps": ["thm-tower-law-for-finite-field-extensions", "thm-finite-fields-have-prime-power-order", "lem-roots-of-x-q-minus-x-form-a-field", "prop-finite-fields-are-splitting-fields-of-x-q-minus-x"]
+      },
+      {
+        "id": "thm-factorization-of-x-qn-minus-x",
+        "kind": "theorem",
+        "title": "Over $\\mathbb F_q$, $x^{q^n}-x$ is the product of all monic irreducibles whose degrees divide $n$",
+        "strategy": "In the splitting field, an irreducible of degree $d$ contributes roots exactly when their simple extension is the subfield with $q^d$ elements, equivalent to $d\\mid n$. The derivative is $-1$, so factors occur once. Normalize them to be monic.",
+        "deps": ["thm-finite-fields-have-prime-power-order", "thm-existence-of-finite-fields", "prop-finite-fields-are-splitting-fields-of-x-q-minus-x", "thm-subfield-lattice-of-a-finite-field", "thm-simple-algebraic-extension-quotient-power-basis-and-degree", "lem-polynomial-factorisation-into-irreducibles", "thm-repeated-root-derivative-criterion"]
+      },
+      {
+        "id": "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+        "kind": "corollary",
+        "title": "For every finite field $\\mathbb F_q$ and every $n\\ge1$, a monic irreducible polynomial of degree $n$ exists",
+        "strategy": "Choose a generator of $\\mathbb F_{q^n}^{\\times}$. If its minimal polynomial had degree $d<n$, the element would lie in a subfield with at most $q^d-1$ nonzero elements, contradicting its order $q^n-1$.",
+        "deps": ["thm-finite-fields-have-prime-power-order", "thm-existence-of-finite-fields", "thm-multiplicative-group-of-a-finite-field-is-cyclic", "thm-subfield-lattice-of-a-finite-field", "thm-uniqueness-of-finite-fields", "thm-simple-algebraic-extension-quotient-power-basis-and-degree"]
+      },
+      {
+        "id": "cor-finite-extensions-of-finite-fields-are-simple",
+        "kind": "corollary",
+        "title": "Every finite extension of a finite field is simple",
+        "strategy": "Coordinates make the extension finite as a set. A generator of its cyclic multiplicative group, together with zero, lies in and exhausts the subfield it generates.",
+        "deps": ["thm-multiplicative-group-of-a-finite-field-is-cyclic", "def-extension-degree-and-finite-extension", "thm-cardinality-of-a-set-of-functions", "def-field-extension-generated-subfields-and-simple-extension"]
+      },
+      {
+        "id": "def-algebraically-constructible-real-number",
+        "kind": "definition",
+        "title": "Algebraically constructible real numbers as the smallest real subfield closed under positive square roots",
+        "deps": ["thm-rat-field", "thm-reals-ordered-field", "thm-of-square-roots", "def-subfield"]
+      },
+      {
+        "id": "thm-quadratic-tower-characterization-of-algebraic-constructibility",
+        "kind": "theorem",
+        "title": "A real number is algebraically constructible exactly when it lies in a finite tower of real quadratic adjunctions",
+        "strategy": "The union of all finite towers from $\\mathbb Q$ obtained by adjoining positive square roots is a subfield: combine two towers by appending their generators. It is square-root closed, and minimality gives equality with the constructible field.",
+        "deps": ["def-algebraically-constructible-real-number", "cor-element-algebraic-iff-simple-extension-finite", "thm-of-square-roots"]
+      },
+      {
+        "id": "cor-algebraically-constructible-numbers-have-power-of-two-degree",
+        "kind": "corollary",
+        "title": "An algebraically constructible real algebraic number has degree over $\\mathbb Q$ equal to a power of two",
+        "strategy": "Place the number in a finite quadratic tower. The top degree is a power of two by the tower law, and the simple subextension degree divides it. Unique prime factorization makes that divisor a power of two.",
+        "deps": ["thm-quadratic-tower-characterization-of-algebraic-constructibility", "thm-tower-law-for-finite-field-extensions", "cor-intermediate-field-degrees-divide", "thm-canonical-prime-factorisation"]
+      },
+      {
+        "id": "cex-cube-root-of-two-is-not-algebraically-constructible",
+        "kind": "counterexample",
+        "title": "The real cube root of two is algebraic but not algebraically constructible",
+        "strategy": "Eisenstein at $2$ makes $x^3-2$ irreducible, so the simple extension has degree three. Since three is not a power of two, the constructible-degree obstruction applies.",
+        "deps": ["cor-algebraically-constructible-numbers-have-power-of-two-degree", "thm-eisenstein-irreducibility-criterion", "thm-simple-algebraic-extension-quotient-power-basis-and-degree", "thm-nth-roots-exist"]
+      }
+    ]
+  },
+  {
+    "order": 97,
+    "id": "algebraic-extensions-degree-and-finite-fields-examples",
+    "kind": "B",
+    "category": "abstract-algebra",
+    "title": "Algebraic Extensions, the Degree of an Extension, and Finite Fields — Examples",
+    "companion": "algebraic-extensions-degree-and-finite-fields",
+    "requires": ["algebraic-extensions-degree-and-finite-fields"],
+    "items": [
+      {
+        "id": "ex-degree-of-q-sqrt-two",
+        "kind": "example",
+        "title": "$\\mathbb Q(\\sqrt2)/\\mathbb Q$ has degree two",
+        "strategy": "Prove $x^2-2$ irreducible and apply the simple-extension theorem for basis $1,\\sqrt2$ and degree two. Display two-coordinate arithmetic.",
+        "deps": ["thm-simple-algebraic-extension-quotient-power-basis-and-degree", "thm-eisenstein-irreducibility-criterion", "thm-of-square-roots"]
+      },
+      {
+        "id": "ex-degree-of-q-cube-root-two",
+        "kind": "example",
+        "title": "$\\mathbb Q(\\sqrt[3]{2})/\\mathbb Q$ has degree three",
+        "strategy": "Eisenstein at $2$ proves irreducibility of $x^3-2$. The quotient-and-power-basis theorem gives basis $1,a,a^2$.",
+        "deps": ["thm-simple-algebraic-extension-quotient-power-basis-and-degree", "thm-eisenstein-irreducibility-criterion", "thm-nth-roots-exist"]
+      },
+      {
+        "id": "ex-q-sqrt-two-sqrt-three-and-a-primitive-generator",
+        "kind": "example",
+        "title": "$\\mathbb Q(\\sqrt2,\\sqrt3)$ has degree four and equals $\\mathbb Q(\\sqrt2+\\sqrt3)$",
+        "strategy": "Use the tower law and compare coordinates to get degree four. For $a=\\sqrt2+\\sqrt3$, compute $a^{-1}=\\sqrt3-\\sqrt2$ and recover both roots. Verify the four-element product basis.",
+        "deps": ["thm-tower-law-for-finite-field-extensions", "lem-product-basis-for-a-tower-of-finite-extensions", "def-field-extension-generated-subfields-and-simple-extension", "thm-of-square-roots"]
+      },
+      {
+        "id": "ex-relative-algebraic-closure-of-r-in-c",
+        "kind": "example",
+        "title": "The relative algebraic closure of $\\mathbb R$ in $\\mathbb C$ is all of $\\mathbb C$",
+        "strategy": "Every $a+bi$ satisfies the nonzero real polynomial $(x-a)^2+b^2$, so every complex number is algebraic over the reals.",
+        "deps": ["def-relative-algebraic-closure", "thm-complex-numbers-form-a-field"]
+      },
+      {
+        "id": "ex-f-four-as-a-polynomial-quotient",
+        "kind": "example",
+        "title": "$\\mathbb F_4=\\mathbb F_2[t]/(t^2+t+1)$ with complete addition and multiplication tables",
+        "strategy": "Check the quadratic has no root in $\\mathbb F_2$, list $0,1,a,a+1$, reduce by $a^2=a+1$, compute both tables, and verify the three nonzero elements form a cyclic group.",
+        "deps": ["thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-z-mod-p-is-a-field", "thm-multiplicative-group-of-a-finite-field-is-cyclic"]
+      },
+      {
+        "id": "ex-f-eight-as-a-polynomial-quotient",
+        "kind": "example",
+        "title": "$\\mathbb F_8=\\mathbb F_2[t]/(t^3+t+1)$ and its power table",
+        "strategy": "Test zero and one to prove the cubic irreducible, list the eight power-basis elements, reduce by $a^3=a+1$, and compute powers through $a^7=1$.",
+        "deps": ["thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-simple-algebraic-extension-quotient-power-basis-and-degree", "thm-z-mod-p-is-a-field"]
+      },
+      {
+        "id": "ex-f-nine-as-a-polynomial-quotient",
+        "kind": "example",
+        "title": "$\\mathbb F_9=\\mathbb F_3[t]/(t^2+1)$ and a generator of its multiplicative group",
+        "strategy": "Check that $-1$ is not a square in $\\mathbb F_3$, list the nine elements, and find an element of order eight. Contrast it with the residue class of $t$, which has order four.",
+        "deps": ["thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-z-mod-p-is-a-field", "thm-multiplicative-group-of-a-finite-field-is-cyclic"]
+      },
+      {
+        "id": "ex-frobenius-on-f-four",
+        "kind": "example",
+        "title": "Frobenius on $\\mathbb F_4$ swaps the two non-prime-field elements",
+        "strategy": "Rebuild $\\mathbb F_4$ as $\\mathbb F_2[t]/(t^2+t+1)$ and write $a$ for the residue class of $t$. Using $a^2=a+1$, compute the squares of all four elements. Frobenius fixes $\\mathbb F_2$, exchanges $a$ and $a+1$, and its square is the identity.",
+        "deps": ["thm-frobenius-endomorphism-and-finite-field-automorphism", "thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-z-mod-p-is-a-field"]
+      },
+      {
+        "id": "ex-subfields-of-f-sixty-four",
+        "kind": "example",
+        "title": "The subfields of $\\mathbb F_{64}$ have orders $2,4,8,64$",
+        "strategy": "Since $64=2^6$, apply the lattice theorem to divisors $1,2,3,6$ and identify each unique subfield as a Frobenius root set.",
+        "deps": ["thm-subfield-lattice-of-a-finite-field"]
+      },
+      {
+        "id": "ex-a-generator-of-f-eight-multiplicative-group",
+        "kind": "example",
+        "title": "The residue class of $t$ generates $\\mathbb F_8^\\times$",
+        "strategy": "Rebuild $\\mathbb F_8$ as $\\mathbb F_2[t]/(t^3+t+1)$ and write $a$ for the residue class of $t$. Reduce powers by $a^3=a+1$ to show $1,a,\\ldots,a^6$ are the seven distinct nonzero elements and $a^7=1$. No primitive-root definition from the other run batch is used.",
+        "deps": ["thm-polynomial-quotient-is-a-field-iff-irreducible", "thm-simple-algebraic-extension-quotient-power-basis-and-degree", "thm-z-mod-p-is-a-field", "thm-multiplicative-group-of-a-finite-field-is-cyclic"]
+      },
+      {
+        "id": "cex-an-algebraic-extension-need-not-be-finite",
+        "kind": "counterexample",
+        "title": "An algebraic extension need not be finite",
+        "strategy": "Inside $\\mathbb R$, take the union of $\\mathbb Q(2^{1/2^m})$. Every element lies in a finite algebraic stage, but the stage degrees $2^m$ are unbounded; a finite total degree would be divisible by all of them.",
+        "deps": ["thm-finite-field-extensions-are-algebraic", "cor-intermediate-field-degrees-divide", "thm-nth-roots-exist", "thm-eisenstein-irreducibility-criterion", "thm-simple-algebraic-extension-quotient-power-basis-and-degree"]
+      },
+      {
+        "id": "cex-there-is-no-field-with-six-elements",
+        "kind": "counterexample",
+        "title": "There is no field with six elements",
+        "strategy": "A finite-field order is a prime power, and six is no positive power of any prime. A six-element ring may exist, but not a field.",
+        "deps": ["thm-finite-fields-have-prime-power-order", "def-prime", "thm-euclids-lemma"]
+      },
+      {
+        "id": "fs-f-p-n-is-z-mod-p-n",
+        "kind": "false-statement",
+        "title": "FALSE: $\\mathbb F_{p^n}$ is the ring $\\mathbb Z/p^n\\mathbb Z$",
+        "strategy": "For $p=2,n=2$, the finite-field existence theorem supplies a field with four elements, while $\\mathbb Z/4\\mathbb Z$ has the nonzero nilpotent class $[2]$ and is not a field. Equal cardinality does not determine ring structure.",
+        "deps": ["thm-existence-of-finite-fields", "prop-integers-modulo-n-as-a-quotient-ring", "def-field"]
+      },
+      {
+        "id": "fs-extension-degrees-add-in-a-tower",
+        "kind": "false-statement",
+        "title": "FALSE: degrees add in a tower of finite field extensions",
+        "strategy": "Use $\\mathbb F_2\\subset\\mathbb F_4\\subset\\mathbb F_{64}$. The step degrees are two and three, while the total degree is six, not five; the tower law gives the product.",
+        "deps": ["thm-tower-law-for-finite-field-extensions", "thm-subfield-lattice-of-a-finite-field", "thm-existence-of-finite-fields"]
+      }
+    ]
+  }
+]

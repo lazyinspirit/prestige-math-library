@@ -1,0 +1,684 @@
+[
+  {
+    "order": 365.001,
+    "id": "adjunctions-units-and-counits",
+    "kind": "A",
+    "category": "category-theory",
+    "title": "Adjunctions Units and Counits",
+    "companion": "adjunctions-units-and-counits-examples",
+    "requires": [
+      "limits-and-colimits-examples",
+      "free-modules-and-exact-sequences",
+      "tychonoff-embedding-and-stone-cech"
+    ],
+    "items": [
+      {
+        "id": "def-adjunction-by-unit-counit-and-triangle-identities",
+        "kind": "definition",
+        "title": "Adjunction by unit, counit, and the triangle identities",
+        "deps": [
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "def-horizontal-composition-and-whiskering-of-natural-transformations"
+        ]
+      },
+      {
+        "id": "rem-why-this-library-takes-unit-counit-as-the-definition",
+        "kind": "remark",
+        "title": "The unit-counit definition imposes no local-smallness hypothesis",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "prop-an-adjoint-equivalence-is-an-adjunction-with-invertible-unit-and-counit",
+        "kind": "proposition",
+        "title": "An adjoint equivalence is an adjunction whose unit and counit are natural isomorphisms",
+        "strategy": "Compare the two definitions component by component. An adjoint equivalence already supplies functors, an invertible unit, an invertible counit, and the same two triangle identities, so forgetting invertibility gives an adjunction. Conversely, an adjunction with invertible unit and counit satisfies the published definition of adjoint equivalence. Relate this characterization to the theorem equipping every equivalence as an adjoint equivalence.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-equivalence-and-adjoint-equivalence-of-categories",
+          "thm-every-equivalence-can-be-made-an-adjoint-equivalence"
+        ]
+      },
+      {
+        "id": "def-adjunct-and-transposition-under-an-adjunction",
+        "kind": "definition",
+        "title": "Adjuncts and transposition under an adjunction",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities"
+        ]
+      },
+      {
+        "id": "lem-adjunct-formulas-are-mutually-inverse",
+        "kind": "lemma",
+        "title": "The unit and counit transpose formulas are mutually inverse",
+        "strategy": "For a morphism $u:Fc\\to d$, expand $(u^\\flat)^\\sharp$ as $\\varepsilon_d\\circ FG(u)\\circ F\\eta_c$, use naturality of $\\varepsilon$, and finish with the triangle identity at $c$. Dually expand $(v^\\sharp)^\\flat$ for $v:c\\to Gd$, use naturality of $\\eta$, and finish with the other triangle identity. Keep the types of every whiskered component visible.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-adjunct-and-transposition-under-an-adjunction"
+        ]
+      },
+      {
+        "id": "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+        "kind": "theorem",
+        "title": "Under local smallness, transposition gives the natural hom-set bijection, and conversely",
+        "strategy": "Use the preceding inverse-formula lemma to obtain a bijection $\\mathcal D(Fc,d)\\cong\\mathcal C(c,Gd)$. Verify naturality separately in $c$ and $d$ by functoriality and naturality of the unit and counit. Conversely, transpose the identity morphisms under a given natural family to define $\\eta_c$ and $\\varepsilon_d$; derive their naturality from the two-variable naturality squares and derive both triangle identities from the two inverse laws. Finally prove uniqueness because any unit and counit inducing the family must be those transposes of identities.",
+        "deps": [
+          "def-adjunct-and-transposition-under-an-adjunction",
+          "lem-adjunct-formulas-are-mutually-inverse",
+          "def-small-locally-small-and-large-category",
+          "def-hom-functors-and-hom-bifunctor"
+        ]
+      },
+      {
+        "id": "thm-naturality-of-the-adjunction-bijection-is-transposition-of-squares",
+        "kind": "theorem",
+        "title": "A square commutes if and only if its transposed square commutes",
+        "strategy": "Write the naturality equation for the hom-set bijection in both variables. Applying transposition to one route around a square produces the corresponding route around the transposed square; injectivity of the bijection gives the forward implication. Apply inverse transposition for the reverse implication. State both orientations so later mate calculations can cite the typed form directly.",
+        "deps": [
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness"
+        ]
+      },
+      {
+        "id": "thm-unit-components-are-initial-in-their-comma-categories",
+        "kind": "theorem",
+        "title": "Unit components are initial in comma categories, and counit components are terminal",
+        "strategy": "Regard $\\eta_c:c\\to GFc$ as a universal arrow from $c$ to $G$: a morphism $c\\to Gd$ has the unique transpose $Fc\\to d$. Invoke the published equivalence between universal arrows and initial comma objects. Apply the dual argument to the counit $FGd\\to d$.",
+        "deps": [
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "def-universal-arrow-to-and-from-a-functor",
+          "thm-universal-arrows-are-initial-or-terminal-in-comma-categories"
+        ]
+      },
+      {
+        "id": "thm-equivalent-encodings-of-an-adjunction",
+        "kind": "theorem",
+        "title": "The unit-counit, hom-set, unit-universal, and counit-universal encodings of an adjunction are equivalent",
+        "strategy": "Organize the implications without conflating their size assumptions. Unit-counit data give the hom-set correspondence when the hom-classes are sets; the correspondence recovers the unit and counit by transposing identities. The unit components are universal by transposition, and a natural family of universal unit components reconstructs the counit and triangle identities; prove the counit version dually. State the local-smallness qualification only on the hom-set encoding.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "thm-unit-components-are-initial-in-their-comma-categories"
+        ]
+      },
+      {
+        "id": "thm-a-left-adjoint-exists-exactly-when-every-comma-category-has-an-initial-object",
+        "kind": "theorem",
+        "title": "A left adjoint exists exactly when chosen initial objects are supplied in every comma category",
+        "strategy": "If $F\\dashv G$, use each unit component as the initial object of $c\\downarrow G$. Conversely, take as data one initial object $(Fc,\\eta_c)$ in each comma category; the explicit choice is part of the hypothesis. Use its unique arrows to define $F$ on morphisms, then verify identities, composition, and naturality by uniqueness and obtain the adjunction from the universal-unit encoding. State the dual criterion for a right adjoint using terminal objects in $G\\downarrow d$, obtained by passing to opposite categories.",
+        "deps": [
+          "thm-unit-components-are-initial-in-their-comma-categories",
+          "def-comma-slice-and-coslice-categories"
+        ]
+      },
+      {
+        "id": "thm-objectwise-universal-arrows-assemble-into-a-left-adjoint",
+        "kind": "theorem",
+        "title": "Chosen objectwise universal arrows assemble uniquely into a left adjoint",
+        "strategy": "For a supplied family $(Fc,\\eta_c)$ universal from $c$ to $G$, define $Ff$ as the unique morphism satisfying $G(Ff)\\eta_c=\\eta_{c'}f$. The uniqueness clause proves $F(1)=1$ and $F(gf)=F(g)F(f)$ and also proves naturality of $\\eta$. Transposition along the universal arrows gives a natural hom-class correspondence and hence the unit-counit adjunction. Prove uniqueness of the functor structure from the same defining square.",
+        "deps": [
+          "thm-a-left-adjoint-exists-exactly-when-every-comma-category-has-an-initial-object",
+          "def-universal-arrow-to-and-from-a-functor"
+        ]
+      },
+      {
+        "id": "thm-a-pointwise-right-adjoint-extends-uniquely-to-a-functor",
+        "kind": "theorem",
+        "title": "A supplied pointwise right adjoint extends uniquely to a functor",
+        "strategy": "Assume an object assignment $d\\mapsto Gd$ and representations $\\mathcal D(F-,d)\\cong\\mathcal C(-,Gd)$ natural in the source variable. For $h:d\\to d'$, use Yoneda uniqueness to define the unique $Gh:Gd\\to Gd'$ representing postcomposition by $h$. Identity and composition follow because their induced natural transformations agree, and the construction makes the representing isomorphisms natural in $d$. The object assignment is data, so the proof performs no proper-class selection.",
+        "deps": [
+          "def-presheaf-representable-functor-and-representation",
+          "thm-yoneda-lemma-is-natural-in-both-variables",
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness"
+        ]
+      },
+      {
+        "id": "rem-the-choice-behind-assembling-an-adjoint",
+        "kind": "remark",
+        "title": "Objectwise existence does not itself supply a class-sized choice of adjoint values",
+        "deps": [
+          "thm-a-left-adjoint-exists-exactly-when-every-comma-category-has-an-initial-object",
+          "thm-a-pointwise-right-adjoint-extends-uniquely-to-a-functor",
+          "rem-choice-behind-limit-and-colimit-functors"
+        ]
+      },
+      {
+        "id": "thm-adjoints-are-unique-up-to-unique-natural-isomorphism",
+        "kind": "theorem",
+        "title": "Adjoints are unique up to a unique natural isomorphism compatible with the adjunction data",
+        "strategy": "Given $F\\dashv G$ and $F'\\dashv G$, transpose each unit component for one adjunction through the other to obtain comparison maps $F\\to F'$ and $F'\\to F$. Naturality follows from transposition of squares. Their composites commute with the relevant units, so universal uniqueness makes them identities. The same argument proves that the comparison is the unique natural isomorphism compatible with the units, and the counit compatibility follows by taking mates.",
+        "deps": [
+          "thm-naturality-of-the-adjunction-bijection-is-transposition-of-squares",
+          "thm-unit-components-are-initial-in-their-comma-categories"
+        ]
+      },
+      {
+        "id": "thm-adjunctions-compose",
+        "kind": "theorem",
+        "title": "Adjunctions compose with the composite unit and counit formulas",
+        "strategy": "For $F\\dashv G$ and $F'\\dashv G'$, define $\\bar\\eta=G\\eta'F\\circ\\eta$ and $\\bar\\varepsilon=\\varepsilon'\\circ F'\\varepsilon G'$. Verify that these are natural with the indicated types. Expand each composite triangle, use naturality to interchange the middle pieces, and apply the two original triangle identities in sequence. This direct recheck avoids treating composition as a slogan.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "thm-interchange-law-for-natural-transformations"
+        ]
+      },
+      {
+        "id": "prop-an-adjunction-induces-adjunctions-on-functor-categories",
+        "kind": "proposition",
+        "title": "An adjunction induces postcomposition and precomposition adjunctions on legitimate functor categories",
+        "strategy": "Whisker the unit and counit pointwise to define the postcomposition adjunction $F_*\\dashv G_*$ on $[\\mathcal J,\\mathcal C]$ and $[\\mathcal J,\\mathcal D]$, and verify the triangle identities componentwise. For precomposition, use the contravariant arrangement of the same hom-set transposition on natural transformations. State the smallness conditions that ensure the displayed functor categories are locally small, while noting that the unit-counit construction itself is formal whenever those categories are legitimate.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-functor-category",
+          "prop-size-of-functor-categories"
+        ]
+      },
+      {
+        "id": "thm-mates-under-a-pair-of-adjunctions",
+        "kind": "theorem",
+        "title": "Natural transformations have mates under a pair of adjunctions",
+        "strategy": "For two adjunctions and functors across their source and target categories, define the right mate of a natural transformation by inserting the first unit, whiskering the transformation, and applying the second counit. Define the inverse construction symmetrically. Expand both composites and use naturality plus the triangle identities to prove the constructions inverse. Then calculate that identities and compatible horizontal and vertical pastings correspond, with order dictated by the typed pasting diagrams.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "thm-naturality-of-the-adjunction-bijection-is-transposition-of-squares",
+          "thm-interchange-law-for-natural-transformations"
+        ]
+      },
+      {
+        "id": "rem-conjugates-preserve-isomorphisms-but-arbitrary-mates-need-not",
+        "kind": "remark",
+        "title": "Conjugation preserves invertibility but the general mates correspondence need not",
+        "deps": [
+          "thm-mates-under-a-pair-of-adjunctions"
+        ]
+      },
+      {
+        "id": "prop-an-adjunction-restricts-to-an-equivalence-on-its-fixed-subcategories",
+        "kind": "proposition",
+        "title": "An adjunction restricts to an equivalence on the subcategories fixed by its unit and counit",
+        "strategy": "Take the full subcategory of objects $c$ for which $\\eta_c$ is invertible and the full subcategory of objects $d$ for which $\\varepsilon_d$ is invertible. The triangle identities show that $F$ and $G$ carry these objects into the opposite fixed subcategory. Restrict the functors and the unit and counit; their components are natural isomorphisms, so the restrictions form an equivalence.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-subcategory-and-full-subcategory",
+          "def-equivalence-and-adjoint-equivalence-of-categories"
+        ]
+      },
+      {
+        "id": "thm-fullness-and-faithfulness-of-a-right-adjoint-read-off-the-counit",
+        "kind": "theorem",
+        "title": "Fullness and faithfulness of a right adjoint are detected by its counit",
+        "strategy": "Under the adjunction bijection, the map on hom-classes induced by $G$ corresponds by Yoneda to precomposition with the counit. Use cancellation to show injectivity of every hom map exactly when each counit component is epic, and use a preimage of the identity to show surjectivity exactly when each counit component has a left inverse. Combine the clauses for full faithfulness, and prove the unit statement by duality.",
+        "deps": [
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "def-full-faithful-and-essentially-surjective-functor",
+          "def-monomorphism-and-epimorphism",
+          "def-split-monomorphism-and-split-epimorphism"
+        ]
+      },
+      {
+        "id": "def-adjoint-triple",
+        "kind": "definition",
+        "title": "Adjoint triple $L\\dashv M\\dashv R$",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities"
+        ]
+      },
+      {
+        "id": "prop-an-adjoint-triple-induces-adjunctions-between-its-endofunctors",
+        "kind": "proposition",
+        "title": "An adjoint triple induces adjunctions between its associated endofunctors",
+        "strategy": "Let $L\\dashv U\\dashv R$ with $L,R:\\mathcal D\\to\\mathcal C$ and $U:\\mathcal C\\to\\mathcal D$. Apply composition first to $U\\dashv R$ and then $L\\dashv U$ to obtain $LU\\dashv RU$ on $\\mathcal C$. Apply it in the other order to obtain $UL\\dashv UR$ on $\\mathcal D$. Write the two composite units and counits from the formulas in the composition theorem and check their types; this unit-counit proof carries no local-smallness hypothesis.",
+        "deps": [
+          "def-adjoint-triple",
+          "thm-adjunctions-compose"
+        ]
+      },
+      {
+        "id": "def-mutually-left-and-mutually-right-adjoint-contravariant-functors",
+        "kind": "definition",
+        "title": "Mutually left and mutually right adjoint contravariant functors",
+        "deps": [
+          "def-functor-and-contravariant-functor",
+          "def-small-locally-small-and-large-category"
+        ]
+      },
+      {
+        "id": "def-galois-connection",
+        "kind": "definition",
+        "title": "Galois connection between preorders",
+        "deps": [
+          "def-preorder",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors"
+        ]
+      },
+      {
+        "id": "cor-a-galois-connection-satisfies-fgf-equals-f-and-gfg-equals-g",
+        "kind": "corollary",
+        "title": "A Galois connection between posets satisfies $FGF=F$ and $GFG=G$",
+        "strategy": "Let $A$ and $B$ be posets and let $F:A\\to B$ and $G:B\\to A$ form a Galois connection. From $F\\dashv G$ obtain $a\\le GFa$ and $FGb\\le b$. Apply monotonicity to derive $FGFa\\le Fa\\le FGFa$ and $GFGb\\le Gb\\le GFGb$; antisymmetry gives $FGF=F$ and $GFG=G$. For preorders the same inequalities instead give the natural isomorphisms $FGF\\cong F$ and $GFG\\cong G$.",
+        "deps": [
+          "def-galois-connection",
+          "def-partial-order"
+        ]
+      },
+      {
+        "id": "prop-in-a-poset-adjunction-the-triangle-identities-are-automatic",
+        "kind": "proposition",
+        "title": "In a poset adjunction the triangle identities are automatic",
+        "strategy": "A natural transformation between monotone maps of posets is a pointwise inequality, and between any fixed source and target there is at most one morphism. Once the unit inequalities $c\\le GFc$ and counit inequalities $FGd\\le d$ exist, both sides of either triangle identity are parallel morphisms and therefore equal. Relate the inequalities back to the defining Galois equivalence.",
+        "deps": [
+          "def-galois-connection",
+          "prop-preorders-as-categories-and-monotone-maps-as-functors"
+        ]
+      },
+      {
+        "id": "thm-right-adjoints-preserve-limits",
+        "kind": "theorem",
+        "title": "Right adjoints preserve every limit that exists",
+        "strategy": "Let $F\\dashv G$ and let $(L,\\lambda)$ limit a diagram $D$ in the domain of $G$. Given a cone $\\mu:c\\Rightarrow GD$, transpose each leg by the explicit counit formula $\\varepsilon_{D_j}\\circ F(\\mu_j)$; naturality of the counit verifies the cone equations. Factor this cone uniquely through $L$, transpose the mediating morphism back using the unit, and use both triangle identities to prove existence and uniqueness. The proof uses no smallness or local-smallness hypothesis and applies to an arbitrary diagram for which the displayed limit exists.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity"
+        ]
+      },
+      {
+        "id": "cor-left-adjoints-preserve-colimits",
+        "kind": "corollary",
+        "title": "Left adjoints preserve every colimit that exists",
+        "strategy": "Pass to opposite categories, where $F\\dashv G$ becomes $G^{op}\\dashv F^{op}$ and a colimit becomes a limit. Apply preservation of limits by the right adjoint $F^{op}$ and translate the result back by the category-theoretic duality principle.",
+        "deps": [
+          "thm-right-adjoints-preserve-limits",
+          "thm-category-theoretic-duality-principle",
+          "prop-limit-colimit-duality"
+        ]
+      },
+      {
+        "id": "rem-rapl-carries-no-size-hypothesis",
+        "kind": "remark",
+        "title": "The direct preservation theorem carries no size hypothesis",
+        "deps": [
+          "thm-right-adjoints-preserve-limits"
+        ]
+      },
+      {
+        "id": "thm-representable-second-proof-of-rapl-under-local-smallness",
+        "kind": "theorem",
+        "title": "Under local smallness, representable functors give a second proof that right adjoints preserve small limits",
+        "strategy": "For a small diagram $D$ and object $c$, use the adjunction isomorphism to identify $\\mathcal C(c,G\\lim D)$ with $\\mathcal D(Fc,\\lim D)$. Representability carries the latter to the limit of $\\mathcal D(Fc,D-)$, and adjunction identifies this with the limit of $\\mathcal C(c,GD-)$. Naturality and Yoneda identify the canonical comparison $G\\lim D\\to\\lim GD$ as an isomorphism. Keep local smallness and smallness explicit because this route is set-valued.",
+        "deps": [
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "thm-representable-functors-preserve-small-limits",
+          "lem-canonical-comparison-characterises-limit-preservation"
+        ]
+      },
+      {
+        "id": "def-left-exact-and-right-exact-functor",
+        "kind": "definition",
+        "title": "Left exact and right exact functors",
+        "deps": [
+          "def-small-finite-and-large-limits-completeness-and-cocompleteness",
+          "def-preservation-reflection-creation-continuity-and-cocontinuity"
+        ]
+      },
+      {
+        "id": "cor-a-right-adjoint-is-left-exact-and-a-left-adjoint-is-right-exact",
+        "kind": "corollary",
+        "title": "A right adjoint is left exact and a left adjoint is right exact",
+        "strategy": "Specialize preservation of all existing limits and colimits to finite indexing categories, then unfold the definitions of left exactness and right exactness. No existence claim is added: the conclusion concerns finite limits or colimits that exist in the relevant source category.",
+        "deps": [
+          "thm-right-adjoints-preserve-limits",
+          "cor-left-adjoints-preserve-colimits",
+          "def-left-exact-and-right-exact-functor"
+        ]
+      },
+      {
+        "id": "cor-right-adjoints-preserve-monomorphisms-and-left-adjoints-preserve-epimorphisms",
+        "kind": "corollary",
+        "title": "Right adjoints preserve monomorphisms and left adjoints preserve epimorphisms",
+        "strategy": "Characterize a monomorphism $f:x\\to y$ by the square with both top and left arrows $1_x$ and both bottom and right arrows $f$: it is a pullback exactly when $f$ is monic. Apply a right adjoint and its preservation of this existing pullback to conclude that the image of $f$ is monic. Pass to opposite categories for the dual assertion that every left adjoint preserves epimorphisms.",
+        "deps": [
+          "thm-right-adjoints-preserve-limits",
+          "cor-left-adjoints-preserve-colimits",
+          "def-monomorphism-and-epimorphism"
+        ]
+      },
+      {
+        "id": "thm-limits-and-colimits-are-adjoint-to-the-diagonal-functor",
+        "kind": "theorem",
+        "title": "Chosen limits and colimits are adjoint to the diagonal functor",
+        "strategy": "Fix a small shape $\\mathcal J$. For supplied choices of all $\\mathcal J$-limits, use the published assembly theorem to obtain $\\lim_{\\mathcal J}$. Identify morphisms $c\\to\\lim D$ with cones $\\Delta c\\Rightarrow D$, hence with morphisms $\\Delta c\\to D$ in the functor category, naturally in both variables; this gives $\\Delta\\dashv\\lim_{\\mathcal J}$. Apply the dual construction to supplied colimits. Do not infer the required choices from objectwise existence.",
+        "deps": [
+          "thm-chosen-limits-and-colimits-assemble-into-functors",
+          "def-limit-and-colimit-of-a-diagram",
+          "def-functor-category"
+        ]
+      },
+      {
+        "id": "thm-direct-image-and-preimage-form-an-adjoint-triple-on-power-sets",
+        "kind": "theorem",
+        "title": "Direct image, preimage, and universal image form an adjoint triple on power sets",
+        "strategy": "For $f:A\\to B$, define $f_!(S)=f[S]$, retain $f^{-1}(T)$ for preimage, and define $f_*(S)=\\{b\\in B:f^{-1}[\\{b\\}]\\subseteq S\\}$. Prove $f[S]\\subseteq T$ iff $S\\subseteq f^{-1}[T]$, and $f^{-1}[T]\\subseteq S$ iff $T\\subseteq f_*(S)$, including empty fibres. Thus $f_!\\dashv f^{-1}\\dashv f_*$. State explicitly that this page reserves $f_!$ for direct image and $f_*$ for universal image, opposite to Riehl's star/subscript convention.",
+        "deps": [
+          "def-galois-connection",
+          "def-image-and-preimage-under-a-relation"
+        ]
+      },
+      {
+        "id": "rem-the-image-preimage-adjunctions-explain-the-published-preservation-laws",
+        "kind": "remark",
+        "title": "The image-preimage adjunctions explain the set-operation preservation laws",
+        "deps": [
+          "thm-direct-image-and-preimage-form-an-adjoint-triple-on-power-sets",
+          "thm-preimages-commute-with-unions-intersections-and-differences",
+          "prop-images-of-unions-and-intersections-under-a-function"
+        ]
+      },
+      {
+        "id": "thm-the-free-group-functor-is-left-adjoint-to-the-underlying-set-functor",
+        "kind": "theorem",
+        "title": "The free-group functor is left adjoint to the underlying-set functor",
+        "strategy": "Use the published free-group universal property to assign to every function $X\\to U(G)$ its unique extending homomorphism $F(X)\\to G$. Define $F$ on functions by extending the composite of the generator map with the function; uniqueness proves functoriality and naturality of the unit. The universal-arrow assembly theorem then gives $F\\dashv U$, and uniqueness of free groups shows independence from the chosen reduced-word model.",
+        "deps": [
+          "def-free-group",
+          "thm-free-groups-unique-up-to-unique-isomorphism",
+          "thm-objectwise-universal-arrows-assemble-into-a-left-adjoint",
+          "prop-groups-and-homomorphisms-form-category-grp"
+        ]
+      },
+      {
+        "id": "thm-the-free-module-functor-is-left-adjoint-to-the-underlying-set-functor",
+        "kind": "theorem",
+        "title": "The free-module functor is left adjoint to the underlying-set functor",
+        "strategy": "For a fixed unital ring $R$, use the universal property of $R^{(X)}$ to identify $R$-linear maps $R^{(X)}\\to M$ with functions $X\\to U(M)$. Define the action on set maps by extending the induced map on standard basis elements; uniqueness proves functoriality and naturality. Apply objectwise universal-arrow assembly and check the empty basis case is the zero module with its unique map.",
+        "deps": [
+          "thm-universal-property-of-free-modules",
+          "thm-objectwise-universal-arrows-assemble-into-a-left-adjoint",
+          "prop-modules-and-homomorphisms-form-category-rmod"
+        ]
+      },
+      {
+        "id": "lem-words-satisfy-the-free-monoid-universal-property",
+        "kind": "lemma",
+        "title": "Finite words satisfy the free-monoid universal property",
+        "strategy": "Construct the word set as the indexed union $X^*=\\bigcup_{n\\in\\mathbb N}X^n$, with the unique function on $0$ as the empty word, and define concatenation by the two finite function pieces. Verify sethood, associativity, and the empty-word identity. Given $u:X\\to M$ into a monoid, define $\\widehat u$ by multiplying the images of the letters in order; induction on word length proves preservation of concatenation. Any homomorphism extending $u$ has this value on every word, proving uniqueness, including the empty word.",
+        "deps": [
+          "def-semigroup-and-monoid",
+          "def-monoid-finite-product",
+          "def-natural-numbers",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-indexed-union-and-intersection",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "thm-the-free-monoid-functor-is-left-adjoint-to-the-underlying-set-functor",
+        "kind": "theorem",
+        "title": "The free-monoid functor is left adjoint to the underlying-set functor",
+        "strategy": "Use the finite-word universal property to define $X\\mapsto X^*$ and define the image of a function letterwise. Universal uniqueness proves identity and composition laws and gives the natural hom-set bijection between monoid homomorphisms $X^*\\to M$ and functions $X\\to U(M)$. Conclude the adjunction by universal-arrow assembly without citing the published B-leaf representation example.",
+        "deps": [
+          "lem-words-satisfy-the-free-monoid-universal-property",
+          "thm-objectwise-universal-arrows-assemble-into-a-left-adjoint"
+        ]
+      },
+      {
+        "id": "thm-abelianisation-is-left-adjoint-to-the-inclusion-of-abelian-groups",
+        "kind": "theorem",
+        "title": "Abelianisation is left adjoint to the inclusion of abelian groups",
+        "strategy": "For a homomorphism $f:G\\to A$ with $A$ abelian, calculate that every commutator maps to the identity, so $[G,G]\\subseteq\\ker f$. Apply the quotient-group universal property to factor $f$ uniquely through $q_G:G\\to G^{ab}$. Use the same uniqueness to define abelianisation on morphisms and prove functoriality and naturality. This local proof avoids citing the published universality theorem, whose home is outside the declared page closure.",
+        "deps": [
+          "def-abelianisation-of-a-group",
+          "def-commutator-and-commutator-subgroup",
+          "thm-quotient-group-universal-property",
+          "thm-objectwise-universal-arrows-assemble-into-a-left-adjoint"
+        ]
+      },
+      {
+        "id": "thm-the-discrete-and-indiscrete-topologies-form-an-adjoint-triple-over-set",
+        "kind": "theorem",
+        "title": "Discrete topology, underlying set, and indiscrete topology form an adjoint triple",
+        "strategy": "Define $D$ and $I$ on maps by the underlying functions. Every function from a discrete space is continuous, giving $D\\dashv U$, and every function into an indiscrete space is continuous, giving $U\\dashv I$. Verify naturality of both identity-on-functions bijections and identify the units and counits. The empty set and singleton require no exception.",
+        "deps": [
+          "def-adjoint-triple",
+          "def-standard-topologies",
+          "def-continuous-map-top",
+          "prop-sets-and-functions-form-category-set",
+          "prop-topological-spaces-and-continuous-maps-form-category-top"
+        ]
+      },
+      {
+        "id": "thm-stone-cech-is-left-adjoint-to-the-inclusion-of-compact-hausdorff-spaces",
+        "kind": "theorem",
+        "title": "Under the ultrafilter lemma and dependent choice, Stone-Cech compactification is left adjoint to the compact-Hausdorff inclusion",
+        "strategy": "Use the published Stone-Cech universal property: every map from a Tychonoff space $X$ to a compact Hausdorff space extends uniquely across $\\eta_X:X\\to\\beta X$. The extension uniqueness defines $\\beta$ on morphisms and proves functoriality and naturality of the unit. Apply universal-arrow assembly to obtain the adjunction. Preserve exactly the ultrafilter-lemma and dependent-choice assumptions inherited by the published construction and target-embedding lemma.",
+        "deps": [
+          "def-stone-cech-compactification",
+          "thm-stone-cech-evaluation-closure-universal-property",
+          "lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice",
+          "def-subcategory-and-full-subcategory",
+          "thm-objectwise-universal-arrows-assemble-into-a-left-adjoint"
+        ]
+      },
+      {
+        "id": "prop-the-underlying-set-functor-on-fields-has-no-left-adjoint",
+        "kind": "proposition",
+        "title": "The underlying-set functor on fields has no left adjoint",
+        "strategy": "If $F\\dashv U:\\mathbf{Field}\\to\\mathbf{Set}$, then the adjunction sends the unique map from the empty set into every underlying field to a unique field homomorphism from $F(\\varnothing)$ into every field, making $F(\\varnothing)$ initial. But a unital field homomorphism preserves characteristic, while $\\mathbb F_2$ and $\\mathbb F_3$ are fields of different characteristics; no field can map to both. Therefore no such initial field, and hence no left adjoint, exists.",
+        "deps": [
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "def-field",
+          "def-field-homomorphism",
+          "def-ring-characteristic",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "lem-coextension-of-scalars-carries-a-module-structure",
+        "kind": "lemma",
+        "title": "Coextension of scalars $\\operatorname{Hom}_R(S,M)$ carries its canonical left $S$-module structure",
+        "strategy": "For a unital homomorphism $\\varphi:R\\to S$ and a left $R$-module $M$, view $S$ as a left $R$-module and set $(s\\cdot f)(t)=f(ts)$. Verify that $s\\cdot f$ is $R$-linear and check associativity, the unit law, and distributivity pointwise. For an $R$-linear map $M\\to M'$, postcomposition is $S$-linear, so the construction is functorial.",
+        "deps": [
+          "def-ring-homomorphism",
+          "def-left-and-right-modules",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-the-set-of-functions-from-one-set-to-another"
+        ]
+      },
+      {
+        "id": "thm-coextension-of-scalars-is-right-adjoint-to-restriction-of-scalars",
+        "kind": "theorem",
+        "title": "Coextension of scalars is right adjoint to restriction of scalars",
+        "strategy": "For $\\varphi:R\\to S$, an $S$-linear map $\\alpha:N\\to\\operatorname{Hom}_R(S,M)$ is sent to the $R$-linear map $n\\mapsto\\alpha(n)(1)$. Conversely, from $u:\\operatorname{Res}N\\to M$ define $\\widehat u(n)(s)=u(sn)$. Check $R$-linearity in $s$, $S$-linearity in $n$, and that evaluation and currying are inverse and natural in $N$ and $M$. Thus $\\operatorname{Res}\\dashv\\operatorname{Hom}_R(S,-)$; no tensor-product or extension-of-scalars claim is made.",
+        "deps": [
+          "lem-coextension-of-scalars-carries-a-module-structure",
+          "prop-modules-and-homomorphisms-form-category-rmod",
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness"
+        ]
+      },
+      {
+        "id": "thm-currying-is-an-adjunction-in-set",
+        "kind": "theorem",
+        "title": "Currying gives the adjunction $-\\times A\\dashv(-)^A$ in $\\mathbf{Set}$",
+        "strategy": "For sets $A,X,Y$, send $h:X\\times A\\to Y$ to $\\widehat h:X\\to Y^A$ with $\\widehat h(x)(a)=h(x,a)$, and send $k:X\\to Y^A$ to $(x,a)\\mapsto k(x)(a)$. Extensionality proves the constructions inverse, and substitution proves naturality in $X$ and $Y$. The published A-page function-set construction ensures $Y^A$ is an ordinary set; no B-leaf exponential example is cited.",
+        "deps": [
+          "def-the-set-of-functions-from-one-set-to-another",
+          "lem-the-set-of-functions-between-two-sets-is-a-set",
+          "def-cartesian-product",
+          "prop-sets-and-functions-form-category-set",
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness"
+        ]
+      },
+      {
+        "id": "fs-a-unit-and-counit-determine-an-adjunction-without-the-triangle-identities",
+        "kind": "false-statement",
+        "title": "A unit and counit determine an adjunction without the triangle identities",
+        "strategy": "Refute the claim in the one-object category whose endomorphism monoid is the two-element group. Take both functors to be the identity, the unit to be the identity transformation, and the counit to be the nonidentity central element. Both families are natural, but each triangle composite is the nonidentity element rather than the identity, so the data are not an adjunction.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "prop-monoids-and-groups-as-one-object-categories"
+        ]
+      },
+      {
+        "id": "fs-left-adjoints-preserve-limits",
+        "kind": "false-statement",
+        "title": "Left adjoints preserve limits",
+        "strategy": "Use the free-group left adjoint. The terminal set is a singleton, but in the reduced-word model its empty word and its one-letter generator are distinct, so its free group is not the terminal group. Hence this left adjoint fails to preserve even the terminal-object limit, while the valid theorem says left adjoints preserve colimits.",
+        "deps": [
+          "thm-the-free-group-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "thm-reduced-words-form-the-free-group",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "fs-every-functor-with-a-left-adjoint-also-has-a-right-adjoint",
+        "kind": "false-statement",
+        "title": "Every functor with a left adjoint also has a right adjoint",
+        "strategy": "The underlying-set functor $U:\\mathbf{Grp}\\to\\mathbf{Set}$ has the free-group functor as a left adjoint. If $U$ also had a right adjoint, then $U$ would be a left adjoint and would preserve initial objects. The initial group is trivial and its underlying set is a singleton, which is not the initial empty set, so no right adjoint to $U$ exists.",
+        "deps": [
+          "thm-the-free-group-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "cor-left-adjoints-preserve-colimits",
+          "def-initial-terminal-and-zero-object"
+        ]
+      },
+      {
+        "id": "fs-the-hom-set-form-of-an-adjunction-needs-no-size-hypothesis",
+        "kind": "false-statement",
+        "title": "The hom-set form of an adjunction needs no size hypothesis",
+        "strategy": "The expression $\\mathcal D(Fc,d)\\cong\\mathcal C(c,Gd)$ as an isomorphism of sets presupposes that both hom-classes are sets. Exhibit a one-object large category whose endomorphism class is the proper class of all ordinals, with composition given by ordinal addition and identity $0$; associativity and the identity clauses make it a category, while Burali-Forti makes its single hom-class non-set-sized. Thus the hom-set expression is not Set-valued there, whereas the unit-counit definition still makes sense for legitimate functors and natural transformations between such categories.",
+        "deps": [
+          "rem-why-this-library-takes-unit-counit-as-the-definition",
+          "def-small-locally-small-and-large-category",
+          "def-ordinal-addition",
+          "thm-ordinal-addition-associative",
+          "thm-burali-forti"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 365.002,
+    "id": "adjunctions-units-and-counits-examples",
+    "kind": "B",
+    "category": "category-theory",
+    "title": "Adjunctions Units and Counits: Examples",
+    "requires": [
+      "adjunctions-units-and-counits"
+    ],
+    "items": [
+      {
+        "id": "ex-unit-and-counit-of-the-free-group-adjunction",
+        "kind": "example",
+        "title": "The unit inserts generators as one-letter words and the counit evaluates words in the free-group adjunction",
+        "strategy": "For a set $X$, identify the unit $X\\to U F(X)$ with the one-letter-word inclusion. For a group $G$, identify the counit $F U(G)\\to G$ with evaluation of a reduced word in elements of $G$. Check both triangle identities on generators, after which equality of homomorphisms follows from the free universal property; include $X=\\varnothing$ and the trivial group.",
+        "deps": [
+          "thm-the-free-group-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "thm-reduced-words-form-the-free-group",
+          "def-adjunction-by-unit-counit-and-triangle-identities"
+        ]
+      },
+      {
+        "id": "ex-unit-and-counit-of-the-free-vector-space-adjunction",
+        "kind": "example",
+        "title": "The unit inserts basis vectors and the counit evaluates formal linear combinations in the free-vector-space adjunction",
+        "strategy": "Specialize the free-module adjunction to a field $k$. The unit sends $x$ to the standard basis vector $e_x$; the counit sends a formal finite sum of vectors to its actual linear combination. Check the triangle identities first on basis vectors and then by linearity, including the empty basis and the zero vector space.",
+        "deps": [
+          "thm-the-free-module-functor-is-left-adjoint-to-the-underlying-set-functor",
+          "def-free-module-on-a-set-and-standard-basis",
+          "def-adjunction-by-unit-counit-and-triangle-identities"
+        ]
+      },
+      {
+        "id": "ex-the-galois-connection-between-ideals-and-varieties",
+        "kind": "example",
+        "title": "Vanishing sets and vanishing ideals form a contravariant Galois connection",
+        "strategy": "For a field $k$, subsets $S\\subseteq k[x_1,\\ldots,x_n]$, and subsets $X\\subseteq k^n$, define $V(S)$ as their common zero set and $I(X)$ as the polynomials vanishing on $X$. Prove $X\\subseteq V(S)$ iff $S\\subseteq I(X)$ directly from evaluation. Verify that $I(X)$ is an ideal and that both assignments reverse inclusion. Deduce the closure identities $VIV=V$ and $IVI=I$ without invoking the Nullstellensatz.",
+        "deps": [
+          "def-mutually-left-and-mutually-right-adjoint-contravariant-functors",
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-polynomial-evaluation-and-root",
+          "def-left-right-and-two-sided-ideal",
+          "lem-ideal-criterion-and-intersections"
+        ]
+      },
+      {
+        "id": "ex-the-free-category-on-a-quiver",
+        "kind": "example",
+        "title": "Finite directed paths form the free category on a quiver",
+        "strategy": "For a small quiver, take vertices as objects and finite composable edge paths as morphisms, with empty paths as identities and concatenation as composition. Verify the category laws. Any quiver morphism into the underlying quiver of a category extends by composing edge images along paths; induction on path length proves uniqueness and naturality, yielding the free-category adjunction. Define the quiver interface within the example so no published examples-page item is cited.",
+        "deps": [
+          "def-category",
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "ex-groupoid-inclusion-is-left-adjoint-to-the-maximal-subgroupoid",
+        "kind": "example",
+        "title": "The inclusion of groupoids into categories is left adjoint to the maximal-subgroupoid functor",
+        "strategy": "For a small groupoid $G$ and a small category $C$, every functor $G\\to C$ sends each morphism of $G$ to an isomorphism, so it factors uniquely through the maximal subgroupoid $\\operatorname{Core}(C)$. Show that a functor $C\\to D$ restricts to $\\operatorname{Core}(C)\\to\\operatorname{Core}(D)$ and that the factorisation bijection $\\operatorname{Cat}(G,C)\\cong\\operatorname{Gpd}(G,\\operatorname{Core}(C))$ is natural. Hence the inclusion $\\mathbf{Gpd}\\hookrightarrow\\mathbf{Cat}$ is left adjoint to $\\operatorname{Core}$.",
+        "deps": [
+          "def-isomorphism-groupoid-and-connected-category",
+          "prop-isomorphisms-form-the-maximal-subgroupoid",
+          "thm-the-adjunction-hom-set-bijection-under-local-smallness"
+        ]
+      },
+      {
+        "id": "ex-frobenius-reciprocity-for-group-representations",
+        "kind": "example",
+        "title": "Frobenius reciprocity for group representations without tensor products",
+        "strategy": "For a subgroup $H\\le G$ and a field $k$, define a representation directly as a vector space with a linear group action. Model $\\operatorname{Ind}_H^G(V)$ as the vector space of functions $f:G\\to V$ satisfying $f(gh)=h^{-1}f(g)$ whose support meets only finitely many right cosets, with $(a\\cdot f)(g)=f(a^{-1}g)$. Define $j_V(v)$ to be supported on $H$ with $j_V(v)(h)=h^{-1}v$. For an $H$-equivariant linear map $u:V\\to\\operatorname{Res}_H^G W$, set $\\widehat u(f)=\\sum_{gH\\in G/H}g\\cdot u(f(g))$ over the finitely many support cosets; prove independence of representatives and $G$-equivariance. The inverse sends a $G$-map $T$ to $T\\circ j_V$. Decompose $f$ as $\\sum_{gH}g\\cdot j_V(f(g))$ to prove the inverse laws and then verify naturality. This constructs $\\operatorname{Ind}_H^G\\dashv\\operatorname{Res}_H^G$ directly, using neither group algebras nor tensor products.",
+        "deps": [
+          "def-group-action",
+          "def-subgroup",
+          "def-coset",
+          "def-vector-space",
+          "def-linear-map",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-finite-cardinality",
+          "def-finite-sum-in-a-commutative-monoid",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "cex-a-componentwise-family-that-is-not-a-unit",
+        "kind": "counterexample",
+        "title": "A componentwise family of morphisms need not be a natural transformation and hence need not be a unit",
+        "strategy": "On $\\mathbf{Set}$ take $F=G=1$. Let the component at the specific two-element set be its transposition and let every other component be the identity. For the inclusion of a singleton into that two-element set, the naturality square fails. Thus even correctly typed components $X\\to GFX$ do not constitute a unit without naturality.",
+        "deps": [
+          "def-natural-transformation",
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "prop-sets-and-functions-form-category-set"
+        ]
+      },
+      {
+        "id": "cex-an-adjunction-whose-triangle-identities-fail-for-a-wrong-counit",
+        "kind": "counterexample",
+        "title": "A wrong counit can be natural while both triangle identities fail",
+        "strategy": "Use the one-object category of the two-element group and take $F=G=1$. Choose the identity unit and the nonidentity central element as counit. Naturality holds because the group is abelian, but both triangle composites equal the nonidentity element. Replacing the counit by the identity recovers the identity adjunction, isolating the triangle failure.",
+        "deps": [
+          "def-adjunction-by-unit-counit-and-triangle-identities",
+          "prop-monoids-and-groups-as-one-object-categories"
+        ]
+      },
+      {
+        "id": "ex-adjunction-between-preorders-computed",
+        "kind": "example",
+        "title": "A floor-division and multiplication adjunction between natural-number preorders",
+        "strategy": "Fix a positive natural number $m$. On the natural numbers with their usual order, define $F(n)=mn$ and $G(r)=\\lfloor r/m\\rfloor$ using Euclidean division. Prove $mn\\le r$ iff $n\\le\\lfloor r/m\\rfloor$, then read off the unit and counit inequalities and verify $FGF=F$ and $GFG=G$. The case $m=1$ is the identity adjunction; positivity excludes division by zero.",
+        "deps": [
+          "def-galois-connection",
+          "def-natural-numbers",
+          "def-nat-order",
+          "def-nat-multiplication",
+          "thm-division-algorithm-in-z"
+        ]
+      },
+      {
+        "id": "ex-ceiling-and-floor-are-adjoint-to-the-inclusion-of-the-integers",
+        "kind": "example",
+        "title": "Ceiling $\\dashv$ inclusion $\\dashv$ floor: an adjoint triple between $(\\mathbb{R},\\le)$ and $(\\mathbb{Z},\\le)$"
+      }
+    ]
+  }
+]

@@ -1,0 +1,536 @@
+[
+  {
+    "order": 195,
+    "id": "linear-recurrences-and-rational-generating-functions",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Linear Recurrences and Rational Generating Functions",
+    "companion": "linear-recurrences-and-rational-generating-functions-examples",
+    "requires": [
+      "formal-power-series",
+      "eigenvalues-eigenvectors-and-the-characteristic-polynomial",
+      "splitting-fields",
+      "the-field-of-fractions-and-localisation"
+    ],
+    "items": [
+      {
+        "id": "def-linear-recurrence-and-recurrence-characteristic-polynomial",
+        "kind": "definition",
+        "title": "Constant-coefficient linear recurrences, their starting index and their characteristic polynomial",
+        "deps": [
+          "def-formal-power-series-and-coefficient-extraction",
+          "def-polynomial-degree-leading-coefficient-and-monic"
+        ]
+      },
+      {
+        "id": "def-rational-formal-power-series-and-reduced-denominator",
+        "kind": "definition",
+        "title": "Rational formal power series, proper presentations and reduced denominators",
+        "deps": [
+          "def-formal-power-series-and-coefficient-extraction",
+          "thm-formal-power-series-unit-criterion",
+          "def-polynomial-degree-leading-coefficient-and-monic"
+        ]
+      },
+      {
+        "id": "lem-four-spaces-for-a-fixed-linear-recurrence",
+        "kind": "lemma",
+        "title": "The initial-value, recurrence-sequence, numerator and fixed-denominator rational-series spaces all have dimension $d$",
+        "strategy": "For $Q(x)=1+c_1x+\\cdots+c_dx^d$ with $c_d\\ne0$, use coefficient extraction to identify a recurrence sequence with its first $d$ values and with the degree-$<d$ polynomial $QF$. Division by the unit $Q$ identifies that numerator space with the proper series $P/Q$. The four maps are linear inverse pairs, and the standard basis of $K^d$ supplies the dimension count.",
+        "deps": [
+          "def-linear-recurrence-and-recurrence-characteristic-polynomial",
+          "def-rational-formal-power-series-and-reduced-denominator",
+          "prop-coefficient-extraction-linearity-and-extensionality",
+          "lem-standard-basis-of-f-n"
+        ]
+      },
+      {
+        "id": "thm-linear-recurrence-iff-rational-generating-function",
+        "kind": "theorem",
+        "title": "A coefficient sequence is eventually linearly recurrent if and only if its formal generating function is rational",
+        "strategy": "Use the four-space lemma for a recurrence valid from index zero. For a later starting index, subtract the finite exceptional prefix; conversely polynomial division separates any rational series into a polynomial prefix and a proper fixed-denominator part. State the sharper fixed-$Q$ clause: the recurrence starts at zero exactly when $QF$ has degree below $\\deg Q$.",
+        "deps": [
+          "lem-four-spaces-for-a-fixed-linear-recurrence",
+          "thm-polynomial-division-algorithm-over-a-field"
+        ]
+      },
+      {
+        "id": "cor-initial-values-determine-a-linear-recurrence-sequence",
+        "kind": "corollary",
+        "title": "$d$ initial values determine a sequence satisfying a fixed order-$d$ recurrence",
+        "strategy": "Apply the initial-value isomorphism in the four-space lemma. Include $d=1$ explicitly and note that order zero is reserved for the eventually zero case rather than folded into this statement.",
+        "deps": [
+          "lem-four-spaces-for-a-fixed-linear-recurrence"
+        ]
+      },
+      {
+        "id": "cor-minimal-recurrence-and-reduced-denominator",
+        "kind": "corollary",
+        "title": "The least eventual recurrence order is the degree of the reduced denominator",
+        "strategy": "Normalize the reduced rational presentation by $Q(0)=1$. The equivalence theorem turns every order-$e$ recurrence into a denominator of degree $e$; coprimeness forces the reduced denominator to divide it. The displayed reduced denominator itself supplies a recurrence of its own degree, with the polynomial-series case giving order zero.",
+        "deps": [
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "thm-polynomial-ring-over-a-field-is-a-ufd"
+        ]
+      },
+      {
+        "id": "prop-finite-modification-preserves-rationality-and-eventual-recurrence",
+        "kind": "proposition",
+        "title": "Changing finitely many coefficients preserves rationality and eventual linear recurrence",
+        "strategy": "The difference of the two generating functions is a polynomial. Rational series are closed under adding a polynomial, and the equivalence theorem converts this statement back to eventual recurrences. Record that a finite change can destroy a recurrence beginning at index zero.",
+        "deps": [
+          "thm-linear-recurrence-iff-rational-generating-function"
+        ]
+      },
+      {
+        "id": "prop-reciprocity-for-biinfinite-linear-recurrences",
+        "kind": "proposition",
+        "title": "For a bi-infinite linear recurrence over $K$, the two half-series satisfy $F_+(x)=-F_-(x^{-1})$ in $K(x)$",
+        "strategy": "Let $K$ be a field and use the nonzero trailing recurrence coefficient to propagate the sequence in both directions. The recurrence-rational equivalence puts both half-series in the rational function field $K(x)$. Multiply the positive and reversed-negative series by reciprocal denominators and compare their finite boundary numerators there, obtaining $F_+(x)=-F_-(x^{-1})$ as an equality of rational functions, not formal power series. Absorb the resulting degree-gap and endpoint-coefficient symmetry into the final clause.",
+        "deps": [
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "cor-rational-function-field-as-a-fraction-field"
+        ]
+      },
+      {
+        "id": "prop-rational-series-are-closed-under-sums-and-products",
+        "kind": "proposition",
+        "title": "Rational formal power series are closed under sums and Cauchy products",
+        "strategy": "Put two presentations over the common denominator $Q_1Q_2$. Its constant coefficient is a unit, so both the sum numerator $P_1Q_2+P_2Q_1$ and the product numerator $P_1P_2$ define rational formal series. Include zero and polynomial denominators.",
+        "deps": [
+          "def-rational-formal-power-series-and-reduced-denominator",
+          "thm-formal-power-series-unit-criterion"
+        ]
+      },
+      {
+        "id": "thm-hadamard-product-of-rational-series-is-rational",
+        "kind": "theorem",
+        "title": "The Hadamard product of two rational formal power series over a field is rational",
+        "strategy": "Translate rationality to eventual recurrences and discard finite prefixes. The shifts of each recurrent sequence lie in a finite span; products of one shift from each sequence span every simultaneous shift of the coefficientwise product. A linear dependence among sufficiently many shifts gives an eventual recurrence, and the equivalence theorem returns rationality.",
+        "deps": [
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set"
+        ]
+      },
+      {
+        "id": "rem-reciprocal-root-convention-for-recurrences",
+        "kind": "remark",
+        "title": "Reciprocal-root convention: $\\chi(t)=\\prod_i(t-\\lambda_i)^{m_i}$ corresponds to $Q(x)=\\prod_i(1-\\lambda_i x)^{m_i}$",
+        "deps": [
+          "def-linear-recurrence-and-recurrence-characteristic-polynomial",
+          "def-rational-formal-power-series-and-reduced-denominator"
+        ]
+      },
+      {
+        "id": "lem-partial-fractions-for-a-split-recurrence-denominator",
+        "kind": "lemma",
+        "title": "A proper rational function with split denominator has a unique repeated-pole partial-fraction expansion",
+        "strategy": "For pairwise distinct nonzero $\\lambda_i$, the powers $(1-\\lambda_i x)^{m_i}$ are pairwise coprime. Repeated Bezout decomposition gives existence of $\\sum_{i,j}b_{ij}(1-\\lambda_i x)^{-j}$; clearing denominators and reducing modulo each prime-power factor gives uniqueness.",
+        "deps": [
+          "rem-reciprocal-root-convention-for-recurrences",
+          "thm-bezout-identity-for-polynomials",
+          "def-polynomials-that-split-and-splitting-fields"
+        ]
+      },
+      {
+        "id": "lem-binomial-series-for-a-repeated-pole",
+        "kind": "lemma",
+        "title": "Repeated poles expand formally as $(1-\\lambda x)^{-j}=\\sum_{n\\ge0}\\binom{n+j-1}{j-1}\\lambda^n x^n$",
+        "strategy": "Induct on $j$. The base case is the formal geometric series; multiplying by $(1-\\lambda x)^{-1}$ and applying the hockey-stick identity, obtained by a short induction from Pascal's rule, to the Cauchy convolution gives the next exponent. No analytic convergence is invoked.",
+        "deps": [
+          "thm-formal-power-series-unit-criterion",
+          "prop-coefficient-extraction-linearity-and-extensionality",
+          "def-binomial-coefficient",
+          "thm-pascals-rule"
+        ]
+      },
+      {
+        "id": "thm-closed-form-for-a-linear-recurrence-over-a-splitting-field",
+        "kind": "theorem",
+        "title": "Over a named splitting field in characteristic zero, repeated characteristic roots give polynomial-times-exponential closed forms",
+        "strategy": "Let $E/K$ be a splitting field of the recurrence characteristic polynomial and write $\\chi(t)=\\prod_i(t-\\lambda_i)^{m_i}$. Use the reciprocal-root convention, the split partial fractions lemma and the repeated-pole binomial expansion. In characteristic zero the factorial scalar is nonzero and invertible, so the published falling-factorial formula makes each binomial coefficient a polynomial in $n$; hence $a_n=\\sum_i p_i(n)\\lambda_i^n$ with $\\deg p_i<m_i$. Prove uniqueness from uniqueness of partial fractions, and state equality in $E$ rather than silently assuming $\\mathbb R$ or $\\mathbb C$.",
+        "deps": [
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "rem-reciprocal-root-convention-for-recurrences",
+          "lem-partial-fractions-for-a-split-recurrence-denominator",
+          "lem-binomial-series-for-a-repeated-pole",
+          "def-polynomials-that-split-and-splitting-fields",
+          "def-ring-characteristic",
+          "thm-binomial-closed-formula"
+        ]
+      },
+      {
+        "id": "def-companion-matrix-of-a-linear-recurrence",
+        "kind": "definition",
+        "title": "The row-shift companion matrix of a linear recurrence",
+        "deps": [
+          "def-linear-recurrence-and-recurrence-characteristic-polynomial",
+          "def-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "prop-companion-matrix-iterates-a-linear-recurrence",
+        "kind": "proposition",
+        "title": "The companion matrix advances the recurrence state vector by one step",
+        "strategy": "Multiply the companion matrix by $(a_n,\\ldots,a_{n+d-1})^{\\mathsf T}$. The shift rows copy the last $d-1$ coordinates and the final row is exactly the recurrence; induction then gives the state vector at time $n$ as the $n$th matrix power applied to the initial state.",
+        "deps": [
+          "def-companion-matrix-of-a-linear-recurrence",
+          "def-ring-matrix-product-identity-and-transpose",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "thm-characteristic-polynomial-of-a-recurrence-companion-matrix",
+        "kind": "theorem",
+        "title": "A recurrence companion matrix has the recurrence characteristic polynomial",
+        "strategy": "Compute $\\det(tI-C)$ by Laplace expansion along the first column, or equivalently induct on the size of its Hessenberg form. The signs leave $t^d+c_1t^{d-1}+\\cdots+c_d$, including the $d=1$ case.",
+        "deps": [
+          "def-companion-matrix-of-a-linear-recurrence",
+          "def-characteristic-polynomial-of-a-matrix",
+          "thm-laplace-cofactor-expansion"
+        ]
+      },
+      {
+        "id": "cor-cayley-hamilton-recurrences-for-matrix-powers",
+        "kind": "corollary",
+        "title": "For an invertible matrix over a field, Cayley–Hamilton makes every matrix-power entry and trace sequence linearly recurrent",
+        "strategy": "Let $K$ be a field, let $n\\ge1$, and take an invertible matrix $A\\in M_n(K)$. Apply Cayley–Hamilton to the coordinate endomorphism represented by $A$, multiply the resulting matrix identity by successive powers of $A$, and extract an entry or take trace. The constant term of $\\chi_A$ is $(-1)^n\\det(A)$, which is nonzero because an invertible matrix has unit determinant; hence the resulting order-$n$ relation has the nonzero trailing coefficient required by the page's recurrence definition.",
+        "deps": [
+          "thm-cayley-hamilton",
+          "def-coordinate-endomorphism-over-a-commutative-ring",
+          "def-characteristic-polynomial-of-an-operator",
+          "def-characteristic-polynomial-of-a-matrix",
+          "def-trace-of-a-square-matrix",
+          "cor-invertible-matrix-has-unit-determinant"
+        ]
+      },
+      {
+        "id": "def-fibonacci-and-lucas-sequences",
+        "kind": "definition",
+        "title": "The Fibonacci sequence $F_0=0,F_1=1$ and Lucas sequence $L_0=2,L_1=1$",
+        "deps": [
+          "def-linear-recurrence-and-recurrence-characteristic-polynomial"
+        ]
+      },
+      {
+        "id": "def-trace-of-a-square-matrix-over-a-commutative-ring",
+        "kind": "definition",
+        "title": "The trace of a square matrix over a commutative ring",
+        "deps": [
+          "def-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "prop-ring-trace-agrees-with-the-published-field-trace",
+        "kind": "proposition",
+        "title": "For matrices over a field, the commutative-ring trace agrees with the published matrix trace",
+        "strategy": "Both definitions are the same finite sum of the diagonal entries with the same zero-size empty-sum convention. Unfold the two definitions and compare term by term.",
+        "deps": [
+          "def-trace-of-a-square-matrix-over-a-commutative-ring",
+          "def-trace-of-a-square-matrix"
+        ]
+      },
+      {
+        "id": "def-finite-weighted-digraph-walk-and-transfer-matrix",
+        "kind": "definition",
+        "title": "Finite weighted directed multigraphs, weighted walks and their transfer matrices",
+        "deps": [
+          "def-commutative-ring",
+          "def-matrices-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "thm-weighted-walks-are-entries-of-transfer-matrix-powers",
+        "kind": "theorem",
+        "title": "The $(u,v)$ entry of $A^n$ is the total weight of length-$n$ walks from $u$ to $v$",
+        "strategy": "Induct on $n$. At $n=0$, the identity matrix records the unique empty walk when $u=v$ and none otherwise. For the induction step, partition walks by their penultimate vertex and last edge; matrix multiplication performs exactly the resulting finite sum of products.",
+        "deps": [
+          "def-finite-weighted-digraph-walk-and-transfer-matrix",
+          "def-ring-matrix-product-identity-and-transpose",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "lem-formal-matrix-geometric-series",
+        "kind": "lemma",
+        "title": "Formally, $(I-xA)^{-1}=\\sum_{n\\ge0}A^n x^n$ over every commutative coefficient ring",
+        "strategy": "Define the matrix series coefficientwise in $M_p(R\\llbracket x\\rrbracket)$. Multiplication by $I-xA$ telescopes coefficient by coefficient on both sides, with constant coefficient $I$ and every positive coefficient zero. This is a formal identity and uses no norm, spectral radius or convergence hypothesis.",
+        "deps": [
+          "def-formal-power-series-and-coefficient-extraction",
+          "thm-formal-power-series-ring-and-polynomial-embedding",
+          "def-ring-matrix-product-identity-and-transpose",
+          "thm-ring-matrix-arithmetic-laws"
+        ]
+      },
+      {
+        "id": "thm-transfer-matrix-cofactor-formula",
+        "kind": "theorem",
+        "title": "Transfer-matrix theorem: weighted-walk generating functions are cofactors of $I-xA$ divided by $\\det(I-xA)$",
+        "strategy": "For a nonempty $p$-vertex weighted digraph, the formal matrix geometric lemma makes $M=I-xA$ invertible. Its determinant has constant coefficient $1$, hence is a unit. Apply the published adjugate inverse formula over $R\\llbracket x\\rrbracket$ and read the $(u,v)$ entry as $(-1)^{u+v}\\det(M^{(v,u)})/\\det(M)$. The weighted-walk theorem identifies that entry with the desired generating series.",
+        "deps": [
+          "thm-weighted-walks-are-entries-of-transfer-matrix-powers",
+          "lem-formal-matrix-geometric-series",
+          "thm-formal-power-series-ring-and-polynomial-embedding",
+          "def-matrix-minors-cofactors-and-adjugate",
+          "thm-adjugate-identity-over-a-commutative-ring",
+          "cor-inverse-matrix-by-adjugate",
+          "def-determinant-of-a-square-matrix",
+          "thm-formal-power-series-unit-criterion"
+        ]
+      },
+      {
+        "id": "lem-derivative-of-det-i-minus-xa",
+        "kind": "lemma",
+        "title": "$\\frac{d}{dx}\\det(I-xA)=-\\operatorname{tr}(\\operatorname{adj}(I-xA)A)$",
+        "strategy": "Differentiate the permutation expansion of the determinant using the formal product rule. Group terms by the differentiated matrix entry; the coefficient is its cofactor. Since $(I-xA)'=-A$, the sum is the negative trace of $\\operatorname{adj}(I-xA)A$. The proof is valid over an arbitrary commutative ring.",
+        "deps": [
+          "def-trace-of-a-square-matrix-over-a-commutative-ring",
+          "def-matrix-minors-cofactors-and-adjugate",
+          "def-determinant-of-a-square-matrix",
+          "def-formal-power-series-derivative",
+          "prop-formal-derivative-algebra"
+        ]
+      },
+      {
+        "id": "cor-closed-walk-trace-generating-functions",
+        "kind": "corollary",
+        "title": "Closed walks have trace and logarithmic-derivative generating functions",
+        "strategy": "Sum the diagonal entries in the transfer-matrix identity to get $\\sum_{n\\ge0}\\operatorname{tr}(A^n)x^n=\\operatorname{tr}(\\operatorname{adj}(I-xA))/Q(x)$. For positive lengths, multiply the derivative lemma by $-x/Q(x)$ and use the formal inverse series to obtain $\\sum_{n\\ge1}\\operatorname{tr}(A^n)x^n=-xQ'(x)/Q(x)$, where $Q=\\det(I-xA)$.",
+        "deps": [
+          "thm-transfer-matrix-cofactor-formula",
+          "lem-derivative-of-det-i-minus-xa",
+          "def-trace-of-a-square-matrix-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "cor-eigenvalue-form-of-the-transfer-matrix-trace",
+        "kind": "corollary",
+        "title": "Let $K$ be a field, $p\\ge1$, and $A\\in M_p(K)$. If $\\chi_A(t)=\\prod_{i<p}(t-\\lambda_i)$ in $K[t]$, then the transfer-matrix trace series is $\\sum_{i<p}(1-\\lambda_i x)^{-1}$",
+        "strategy": "Assume the displayed factorisation of $\\chi_A$. It is exactly the hypothesis required by spectral mapping and the trace theorem. Applying spectral mapping to $t^n$ and then the trace theorem gives $\\operatorname{tr}(A^n)=\\sum_{i<p}\\lambda_i^n$. Sum the formal geometric series to obtain $\\sum_{n\\ge0}\\operatorname{tr}(A^n)x^n=\\sum_{i<p}(1-\\lambda_i x)^{-1}$.",
+        "deps": [
+          "cor-closed-walk-trace-generating-functions",
+          "def-coordinate-endomorphism-over-a-commutative-ring",
+          "def-characteristic-polynomial-of-an-operator",
+          "def-trace-of-an-endomorphism",
+          "thm-spectral-mapping-for-polynomials",
+          "thm-trace-is-sum-of-eigenvalues",
+          "lem-binomial-series-for-a-repeated-pole",
+          "prop-ring-trace-agrees-with-the-published-field-trace"
+        ]
+      },
+      {
+        "id": "def-finite-words-factor-avoidance-and-prefix-states",
+        "kind": "definition",
+        "title": "Finite words, contiguous factors, avoidance and proper-prefix states",
+        "deps": [
+          "def-natural-numbers"
+        ]
+      },
+      {
+        "id": "def-prefix-automaton-for-a-finite-forbidden-factor-set",
+        "kind": "definition",
+        "title": "The longest-suffix prefix automaton for a finite set of forbidden factors",
+        "deps": [
+          "def-finite-words-factor-avoidance-and-prefix-states"
+        ]
+      },
+      {
+        "id": "thm-words-avoiding-finitely-many-factors-have-rational-generating-functions",
+        "kind": "theorem",
+        "title": "Words over a finite alphabet avoiding finitely many nonempty factors have a rational length generating function",
+        "strategy": "Prove that after an allowed letter is appended, the longest suffix that is a proper prefix of a forbidden factor is a sufficient state, while a completed forbidden factor is rejected. Thus accepted words of length $n$ are walks of length $n$ in the finite prefix automaton from the empty state to any allowed state. Sum the relevant transfer-matrix entries and invoke the cofactor formula.",
+        "deps": [
+          "def-rational-formal-power-series-and-reduced-denominator",
+          "def-prefix-automaton-for-a-finite-forbidden-factor-set",
+          "thm-weighted-walks-are-entries-of-transfer-matrix-powers",
+          "thm-transfer-matrix-cofactor-formula",
+          "prop-rational-series-are-closed-under-sums-and-products"
+        ]
+      },
+      {
+        "id": "cor-binary-words-avoiding-a-fixed-factor-have-a-rational-generating-function",
+        "kind": "corollary",
+        "title": "Binary words avoiding any fixed nonempty factor have a rational length generating function",
+        "strategy": "Specialize the finite-forbidden-set theorem to alphabet $\\{0,1\\}$ and the singleton forbidden set $\\{w\\}$. The nonempty hypothesis prevents the empty word from being forbidden and leaves a nonempty start state.",
+        "deps": [
+          "thm-words-avoiding-finitely-many-factors-have-rational-generating-functions"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 196,
+    "id": "linear-recurrences-and-rational-generating-functions-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Examples: Linear Recurrences and Rational Generating Functions",
+    "companion": "linear-recurrences-and-rational-generating-functions",
+    "requires": [
+      "linear-recurrences-and-rational-generating-functions"
+    ],
+    "items": [
+      {
+        "id": "ex-fibonacci-generating-function-and-binet-formula",
+        "kind": "example",
+        "title": "The Fibonacci generating function and Binet formula over $\\mathbb Q(\\sqrt5)$",
+        "strategy": "Multiply $F(x)=\\sum F_nx^n$ by $1-x-x^2$ to get $x$. Name $\\mathbb Q(\\sqrt5)$ as a splitting field of $t^2-t-1$, use the reciprocal-root convention and solve the two initial-value equations for the coefficients. No growth or limiting claim is made.",
+        "deps": [
+          "def-fibonacci-and-lucas-sequences",
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "thm-closed-form-for-a-linear-recurrence-over-a-splitting-field",
+          "rem-reciprocal-root-convention-for-recurrences"
+        ]
+      },
+      {
+        "id": "ex-lucas-generating-function-and-closed-form",
+        "kind": "example",
+        "title": "The Lucas generating function and its two-root closed form",
+        "strategy": "Use $L_0=2,L_1=1$ with the same recurrence to obtain $(2-x)/(1-x-x^2)$. In $\\mathbb Q(\\sqrt5)$ the initial conditions give $L_n=\\phi^n+\\widehat\\phi^n$, displaying the same characteristic roots with different coefficients from Fibonacci.",
+        "deps": [
+          "def-fibonacci-and-lucas-sequences",
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "thm-closed-form-for-a-linear-recurrence-over-a-splitting-field"
+        ]
+      },
+      {
+        "id": "ex-repeated-pole-produces-a-polynomial-factor",
+        "kind": "example",
+        "title": "The repeated pole $(1-2x)^{-2}$ produces the sequence $(n+1)2^n$",
+        "strategy": "Apply the repeated-pole binomial series at $j=2$ and $\\lambda=2$. Verify directly that the characteristic polynomial is $(t-2)^2$ and that the polynomial factor has degree one, exactly one below the root multiplicity.",
+        "deps": [
+          "lem-binomial-series-for-a-repeated-pole",
+          "rem-reciprocal-root-convention-for-recurrences",
+          "def-linear-recurrence-and-recurrence-characteristic-polynomial"
+        ]
+      },
+      {
+        "id": "ex-fibonacci-companion-matrix",
+        "kind": "example",
+        "title": "The Fibonacci companion matrix advances $(F_n,F_{n+1})$",
+        "strategy": "For $t^2-t-1$, write $C=\\begin{pmatrix}0&1\\1&1\\end{pmatrix}$ and verify $(F_{n+1},F_{n+2})^{\\mathsf T}=C(F_n,F_{n+1})^{\\mathsf T}$. Induction gives the standard matrix-power identity and the companion characteristic-polynomial theorem gives $t^2-t-1$.",
+        "deps": [
+          "def-fibonacci-and-lucas-sequences",
+          "prop-companion-matrix-iterates-a-linear-recurrence",
+          "thm-characteristic-polynomial-of-a-recurrence-companion-matrix"
+        ]
+      },
+      {
+        "id": "ex-fibonacci-monomer-domino-tilings-by-transfer-matrix",
+        "kind": "example",
+        "title": "Monomer–domino tilings of a board give the Fibonacci recurrence and transfer matrix",
+        "strategy": "Partition tilings of length $n$ by their last tile to obtain $T_n=T_{n-1}+T_{n-2}$ with $T_0=T_1=1$, hence $T_n=F_{n+1}$. Encode the two boundary states by the Fibonacci transfer matrix and use the walk theorem to recover $1/(1-x-x^2)$ formally.",
+        "deps": [
+          "def-fibonacci-and-lucas-sequences",
+          "thm-weighted-walks-are-entries-of-transfer-matrix-powers",
+          "thm-transfer-matrix-cofactor-formula"
+        ]
+      },
+      {
+        "id": "ex-lucas-cyclic-tilings-and-the-trace-method",
+        "kind": "example",
+        "title": "Cyclic monomer–domino tilings are counted by Lucas numbers through a matrix trace",
+        "strategy": "Use closed walks in the two-state Fibonacci transfer graph to encode tilings with the initial and terminal boundary matched. Compute $\\operatorname{tr}(C^n)=L_n$ from the shared recurrence and the values at $n=1,2$, and obtain the generating function from the trace form. State the small circular-board convention explicitly.",
+        "deps": [
+          "def-fibonacci-and-lucas-sequences",
+          "cor-closed-walk-trace-generating-functions",
+          "cor-cayley-hamilton-recurrences-for-matrix-powers"
+        ]
+      },
+      {
+        "id": "ex-closed-walks-in-the-complete-graph",
+        "kind": "example",
+        "title": "Closed walks of length $n$ in $K_p$ are counted by $(p-1)^n+(p-1)(-1)^n$",
+        "strategy": "Let $p,n\\ge1$ and work over $\\mathbb Q$. For the adjacency matrix $A=J-I$ of $K_p$, the all-ones vector and the vectors $e_i-e_0$ for $1\\le i<p$ give a basis in which $A$ is diagonal with entries $p-1,-1,\\ldots,-1$. Hence $\\chi_A(t)=(t-(p-1))(t+1)^{p-1}$ is a product of linear factors over $\\mathbb Q$. Apply the transfer-matrix trace formula to obtain $\\operatorname{tr}(A^n)=(p-1)^n+(p-1)(-1)^n$, which is the number of closed walks of length $n$. For $p=1$, the list $e_i-e_0$ is empty and the same calculation gives zero.",
+        "deps": [
+          "def-finite-weighted-digraph-walk-and-transfer-matrix",
+          "thm-weighted-walks-are-entries-of-transfer-matrix-powers",
+          "cor-eigenvalue-form-of-the-transfer-matrix-trace"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-binary-words-avoiding-consecutive-ones",
+        "kind": "example",
+        "title": "Binary words avoiding $11$ are counted by $F_{n+2}$",
+        "strategy": "Use prefix states $\\varepsilon$ and $1$. Their transfer matrix is the Fibonacci matrix up to state order; summing walks from the empty state gives counts $1,2,3,5,\\ldots$ and generating function $(1+x)/(1-x-x^2)$.",
+        "deps": [
+          "def-fibonacci-and-lucas-sequences",
+          "def-prefix-automaton-for-a-finite-forbidden-factor-set",
+          "thm-transfer-matrix-cofactor-formula"
+        ]
+      },
+      {
+        "id": "ex-binary-words-avoiding-101",
+        "kind": "example",
+        "title": "Binary words avoiding $101$ have generating function $(1+x^2)/(1-2x+x^2-x^3)$",
+        "strategy": "Use the proper-prefix states $\\varepsilon,1,10$, write the $3\\times3$ transition matrix, and sum its walks from $\\varepsilon$ to all allowed states. The first counts $1,2,4,7,12,21,37$ verify the numerator and denominator through length six.",
+        "deps": [
+          "def-prefix-automaton-for-a-finite-forbidden-factor-set",
+          "thm-transfer-matrix-cofactor-formula"
+        ]
+      },
+      {
+        "id": "ex-north-east-west-walks-without-immediate-horizontal-reversal",
+        "kind": "example",
+        "title": "North–east–west walks without immediate horizontal reversal satisfy $a_n=2a_{n-1}+a_{n-2}$",
+        "strategy": "Classify a walk by its last step and forbid $EW$ and $WE$. Eliminate the three state counts to obtain the stated recurrence, then derive the rational generating function both from that recurrence and from the $3\\times3$ transfer matrix as a consistency check.",
+        "deps": [
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "thm-transfer-matrix-cofactor-formula"
+        ]
+      },
+      {
+        "id": "cex-a-rational-recurrence-may-need-a-proper-splitting-field",
+        "kind": "counterexample",
+        "title": "A recurrence over $\\mathbb Q$ can require a proper splitting field for its exponential closed form",
+        "strategy": "Take $a_{n+2}+a_n=0$ with $a_0=0,a_1=1$. Its generating function $x/(1+x^2)$ is rational over $\\mathbb Q$, but its characteristic polynomial $t^2+1$ has no root there and splits over $\\mathbb Q(i)$. Give the resulting closed form in that named field.",
+        "deps": [
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "thm-closed-form-for-a-linear-recurrence-over-a-splitting-field"
+        ]
+      },
+      {
+        "id": "fs-recurrence-coefficients-alone-determine-the-sequence",
+        "kind": "false-statement",
+        "title": "The recurrence coefficients alone determine the sequence",
+        "strategy": "Refute the claim using two different initial pairs for $a_{n+2}=a_{n+1}+a_n$, for example $(0,0)$ and $(0,1)$. The initial-value corollary explains precisely what extra data are missing.",
+        "deps": [
+          "cor-initial-values-determine-a-linear-recurrence-sequence"
+        ]
+      },
+      {
+        "id": "fs-split-characteristic-polynomials-give-only-pure-exponentials",
+        "kind": "false-statement",
+        "title": "A split characteristic polynomial always gives a linear combination of pure exponentials",
+        "strategy": "Refute the claim by $a_n=n$, whose characteristic polynomial $(t-1)^2$ is split but whose closed form needs the degree-one factor $n$. Relate the obstruction to the repeated-pole example and the multiplicity bound in the closed-form theorem.",
+        "deps": [
+          "thm-closed-form-for-a-linear-recurrence-over-a-splitting-field",
+          "lem-binomial-series-for-a-repeated-pole"
+        ]
+      },
+      {
+        "id": "cex-factorial-generating-series-is-not-rational",
+        "kind": "counterexample",
+        "title": "$\\sum_{n\\ge0}n!x^n$ is a formal power series that is not rational over $\\mathbb Q$",
+        "strategy": "If $n!$ obeyed an eventual constant-coefficient recurrence, divide the relation at index $n$ by $n!$. The result is a monic polynomial identity in $n$ with infinitely many roots, contradicting the root bound obtained from polynomial division. Invoke the recurrence–rational equivalence; use no convergence or growth argument.",
+        "deps": [
+          "thm-linear-recurrence-iff-rational-generating-function",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ]
+      },
+      {
+        "id": "fs-transfer-matrix-inversion-needs-a-spectral-radius-hypothesis",
+        "kind": "false-statement",
+        "title": "The transfer-matrix identity requires a spectral-radius or convergence hypothesis",
+        "strategy": "Refute the assertion by the coefficientwise telescoping proof of $(I-xA)^{-1}=\\sum A^nx^n$ in $M_p(R\\llbracket x\\rrbracket)$. Point out that the constant coefficient $I$ supplies formal invertibility over every commutative ring, independently of any topology.",
+        "deps": [
+          "lem-formal-matrix-geometric-series",
+          "thm-transfer-matrix-cofactor-formula"
+        ]
+      }
+    ]
+  }
+]

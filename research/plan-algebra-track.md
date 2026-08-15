@@ -25,15 +25,15 @@ the orchestrator should quote:
 
 | label | page id | § | size |
 |---|---|---|---|
-| AA-14 | `symmetric-polynomials` | II.3 | A 26 / B 15 |
-| AA-15 | `algebraic-extensions-degree-and-finite-fields` | II.4 | A 30 / B 16 |
+| AA-14 | `symmetric-polynomials` | II.3 | A 29 / B 9 — **scaffolded, `frontier-13` batch 1** |
+| AA-15 | `algebraic-extensions-degree-and-finite-fields` | II.4 | A 35 / B 14 — **scaffolded, `frontier-13` batch 1** |
 | **GA-1** | `algebraic-closure-embeddings-and-separability` *(new)* | II.2 | A 42 / B 16 |
 | **GA-2** | `the-galois-correspondence` *(new)* | II.2 | A 36 / B 16 |
 | **GA-3** | `finite-fields-and-cyclotomic-extensions` *(new)* | II.2 | A 44 / B 17 |
 | **GA-4** | `solvability-by-radicals-and-kummer-theory` *(new)* | II.2 | A 33 / B 16 |
-| LA-9 | `diagonalisation-and-the-minimal-polynomial` | II.5 | A 25 / B 15 |
+| LA-9 | `diagonalisation-and-the-minimal-polynomial` | II.5 | A 26 / B 12 — **scaffolded, `frontier-13` batch 3** |
 | LA-10 | `triangularisation-and-jordan-canonical-form` | II.6 | A 28 / B 16 |
-| LA-12 | `inner-product-spaces-and-orthogonality` | II.7 | A 30 / B 17 |
+| LA-12 | `inner-product-spaces-and-orthogonality` | II.7 | A 34 / B 16 — **scaffolded, `frontier-13` batch 3** |
 | X-1 | `the-fundamental-theorem-of-algebra` | II.8 | A 16 / B 12 |
 | X-2 | `the-spectral-theorem-and-singular-value-decomposition` | II.9 | A 34 / B 18 |
 
@@ -1443,7 +1443,7 @@ routes.
 Traps. Uniqueness is the harder half and is what AA-14 and the fundamental theorem
 of algebra actually consume. Do not state it without proof.
 
-## AA-14. Symmetric Polynomials  (order 54)
+## AA-14. Symmetric Polynomials  (order 58)
 
 `requires`: `splitting-fields`
 
@@ -1970,7 +1970,7 @@ lives in functional analysis, so state the hypothesis and do not chase the witne
 
 ---
 
-## AA-15. Algebraic Extensions, Degree, and Finite Fields  (order 92)
+## AA-15. Algebraic Extensions, Degree, and Finite Fields  (order 96)
 
 `requires`: `splitting-fields`, `linear-independence-bases-and-dimension`
 
@@ -1983,8 +1983,11 @@ transcendental elements; the **minimal polynomial of an algebraic element**,
 irreducible and unique; $[F(\alpha):F] = \deg m_\alpha$; a finite extension is
 algebraic; the algebraic elements form a subfield; **finite fields**: the order of
 a finite field is $p^n$ where $p$ is its characteristic; the multiplicative group
-of a finite field is cyclic; existence and uniqueness of $\mathbb{F}_{p^n}$ as the
-splitting field of $x^{p^n} - x$.
+of a finite field is cyclic; existence and uniqueness of $\mathbb{F}_{p^n}$ as
+the splitting field of $x^{p^n} - x$; the **relative algebraic closure** and
+**transitivity of algebraicity**; the **Frobenius endomorphism**; the
+**subfield lattice** of a finite field; and cyclicity of $\mathbb{F}_q^\times$
+in general, not only for $q=p$.
 
 B page: $[\mathbb{C}:\mathbb{R}] = 2$; $[\mathbb{Q}(\sqrt2,\sqrt3):\mathbb{Q}] = 4$;
 $\mathbb{F}_4$ written out, and $\mathbb{F}_4 \ne \mathbb{Z}/4$, which is the
@@ -3082,8 +3085,10 @@ and says so in a Remark on the definition item.
 **symmetric polynomial**; the **elementary symmetric polynomials** $e_1,\dots,e_n$;
 the **power sums** $p_k$; the **complete homogeneous** $h_k$; the **monomial
 symmetric** $m_\lambda$; the **lexicographic order** and the **multidegree**;
-the **discriminant** of a monic polynomial; the **resultant** and the **Sylvester
-matrix**.
+the **discriminant** of a monic polynomial; the **monic resultant**, defined
+through the coefficient expression of the symmetric root product. The general
+leading-coefficient normalization and the Sylvester matrix are deferred until
+the determinant page is in the prerequisite closure.
 
 **THMS.**
 *The main theorem.* the symmetric polynomials form a subring; $\prod_i(x-x_i)
@@ -3104,27 +3109,25 @@ field, then $g(\alpha_1,\dots,\alpha_n) \in R$".
 different cases they are — $k\le n$: $p_k-e_1p_{k-1}+\cdots+(-1)^{k-1}e_{k-1}p_1
 +(-1)^kke_k=0$; and $k>n$, where the $ke_k$ term is absent — because a single
 formula covering both is where the error gets made (Grinberg Thm. 7.1.12);
-**the $e_i$ are expressible in the $p_i$ if $n!$ is invertible in $R$**, and the
-sharp hypothesis is $\operatorname{char}R=0$ or $\operatorname{char}R>n$.
+**The $e_i$ are expressible in the $p_i$ if $n!\,1_R$ is invertible in $R$.**
+This is the exact ring hypothesis. If $R$ is a field, it is equivalent to
+$\operatorname{char}R=0$ or $\operatorname{char}R>n$.
 *The harvest records that **no** source states the sharp characteristic
 hypothesis — all of them assume a $\mathbb{Q}$-algebra — so this must be proved
 inline rather than cited, and the item's Facts must say so.* The failure witness
 is on the B page.
 
-*Discriminant and resultant.* the **discriminant**
-$\Delta=\prod_{i<j}(\alpha_i-\alpha_j)^2$ is symmetric, hence a polynomial in the
-coefficients (landmark, and the first real payoff of the main theorem);
-$\Delta=0$ iff $f$ has a repeated root; the discriminant of the general cubic
-$x^3+px+q$ is $-4p^3-27q^2$; the **resultant** as $\det$ of the Sylvester matrix;
-$\operatorname{Res}(f,g)=0$ iff $f$ and $g$ have a common root in a splitting
-field, for $f,g$ monic (landmark);
-$\operatorname{Res}(f,g)=\prod_{i,j}(\alpha_i-\beta_j)$ — **the harvest found
-that no source it read proves the Sylvester-determinant-equals-root-product
-identity**, so AA-14 proves it (both sides are symmetric of the same multidegree
-in each root family, and agree on the generic case) or states only the vanishing
-criterion; the disposition is recorded rather than assumed;
-$\Delta(f)=(-1)^{n(n-1)/2}\operatorname{Res}(f,f')$ for monic $f$, with the sign
-convention stated and the published formal derivative cited.
+*Discriminant and monic resultant.* The **discriminant**
+$\Delta=\prod_{i<j}(\alpha_i-\alpha_j)^2$ is symmetric, hence a polynomial in
+the coefficients; $\Delta=0$ if and only if the monic polynomial has a
+repeated root, in every characteristic. For monic $f$, define
+$\operatorname{Res}(f,g)$ through the symmetric coefficient expression of
+$\prod_i g(\alpha_i)$. Prove $\operatorname{Res}(f,g)=\prod_i g(\alpha_i)$,
+the common-root criterion, and
+$\operatorname{Res}(f,f')=(-1)^{n(n-1)/2}\operatorname{Disc}(f)$. The general
+resultant, its symmetry under exchanging $f$ and $g$, and its
+Sylvester-determinant presentation are deferred until determinant machinery is
+available.
 
 **FS.** every polynomial fixed by $A_n$ is symmetric (the Vandermonde
 $\prod_{i<j}(x_i-x_j)$ is the witness, and it is the same object that makes GA-2's
@@ -3133,10 +3136,10 @@ legible); the expression of a symmetric polynomial in the $e_i$ is unique
 *without* algebraic independence being proved (the point of §II.3.a); the power
 sums generate in every characteristic — refuted over $\mathbb{F}_2$ with $n=2$,
 where $e_2=x_1x_2$ is not a polynomial in $p_1=x_1+x_2$ and $p_2=x_1^2+x_2^2=p_1^2$;
-the discriminant detects repeated roots in every characteristic (in characteristic
-$2$, $\Delta$ is a square and the criterion degenerates — the honest scoping is a
-hypothesis, and the published separability apparatus is the right neighbour to
-cite).
+the discriminant detects repeated roots in every characteristic. In
+characteristic $2$, the later square-class test for the parity of a
+permutation needs separate care, but $\Delta(f)=0$ if and only if $f$ has a
+repeated root remains valid without a characteristic hypothesis.
 
 **B page.** $x_1^2+x_2^2$ and $x_1^3+x_2^3$ written in $e_1,e_2$; Gauss's
 algorithm run in full on a symmetric polynomial in three variables;
@@ -3176,8 +3179,11 @@ it is this one.
 
 ### II.4.a The gap is larger than the page title suggests
 
-Verified from disk 2026-08-13: **there is no degree of a field extension, no
-tower law, and no definition of an algebraic extension anywhere in the library.**
+Verified from disk for `frontier-13`: **there is no general degree of a field
+extension and no tower law in the library.** The published
+`def-algebraic-and-transcendental-elements` already defines an algebraic
+extension as an extension in which every element is algebraic, so this page
+cites that definition rather than minting a duplicate.
 What exists below is entirely element-level or simple-extension-level —
 `def-algebraic-and-transcendental-elements` and
 `thm-simple-algebraic-extension-quotient-power-basis-and-degree` on
@@ -3204,10 +3210,13 @@ available and is not this page's to mint.
 
 ### II.4.b The item list
 
-**DEFS.** the **degree** $[K:F] := \dim_F K$ (`def-degree-of-a-field-extension`,
-free); **finite extension**; **algebraic extension** (`def-algebraic-extension`,
-free — with #F1's Remark); **finitely generated extension**; the **prime
-subfield**; a **finite field** and its order; **primitive root modulo $p$**.
+**DEFS.** the **degree** $[K:F]:=\dim_FK$ of a finite-dimensional extension
+and **finite extension** (`def-extension-degree-and-finite-extension`);
+**finitely generated extension**; **relative algebraic closure**; the **prime
+subfield**; a **finite field** and its order; and the **algebraically
+constructible real numbers**. Cite the published definition of algebraic
+extension. Do not define primitive roots here; prove instead that every finite
+field's multiplicative group is cyclic.
 
 **THMS.**
 *Degree.* $[K:F]$ is well defined as a dimension, citing the published
@@ -3216,10 +3225,10 @@ subfield**; a **finite field** and its order; **primitive root modulo $p$**.
 `linear-independence-bases-and-dimension` is in `requires`; $[K:F]=1$ iff $K=F$;
 $[F(\alpha):F] = \deg m_\alpha$ (**cited** from snapshot 54, not reproved);
 **the tower law $[L:F] = [L:K]\,[K:F]$** (landmark) — proved by exhibiting the
-product family $\{x_iy_j\}$ as a basis, with **both** the spanning and the
-independence halves as separate steps, and with the infinite case stated
-honestly: if either factor is infinite so is $[L:F]$, which is the form GA-1 uses
-when it takes an algebraic closure; **$[E:F]$ divides $[K:F]$ for an intermediate
+product family $\{x_iy_j\}$ as a basis, with **both** the spanning and
+independence halves as separate steps. All displayed degrees are
+finite-dimensional. The cardinal-valued infinite-basis version is deferred
+because the published `def-dimension` does not define cardinal dimension; **$[E:F]$ divides $[K:F]$ for an intermediate
 $E$** (immediate from the tower law, and the engine of every impossibility
 result on this page and on X-1's companion).
 
@@ -3264,8 +3273,9 @@ the published derivative criterion since $(x^q-x)' = -1$;
 **$\mathbb{F}_{p^m} \subseteq \mathbb{F}_{p^n}$ iff $m \mid n$**, and
 $\mathbb{F}_{p^n}$ has **exactly one** subfield of order $p^m$ for each $m \mid
 n$ (landmark, proved elementarily from $x^{p^m}-x \mid x^{p^n}-x \iff m\mid n$);
-**$(\mathbb{Z}/p)^\times$ is cyclic, i.e. primitive roots modulo $p$ exist**, as
-the case $q=p$ — *the item NT-3 deferred, now discharged* (§II.1.b.5).
+The case $q=p$ proves that $(\mathbb Z/p)^\times$ is cyclic. This page calls a
+chosen element only a cyclic generator; primitive-root terminology and its
+number-theoretic development remain with the page that owns that definition.
 
 *Constructibility, stated algebraically.* the **field of constructible numbers**
 $\mathcal{C} \subseteq \mathbb{R}$, defined algebraically as the smallest
@@ -3377,11 +3387,20 @@ with `forward_refs` declared and no `deps` edge.
 - **id** `diagonalisation-and-the-minimal-polynomial`, companion
   `diagonalisation-and-the-minimal-polynomial-examples`
 - **category** `linear-algebra`
-- **snapshot order** 88 / 89, planned and **unauthored**
-- **`requires`** (spec, unchanged and correct)
+- **order** 88 / 89, scaffolded by `frontier-13` batch 3 (2026-08-15) and
+  **unauthored**
+- **`requires`** (live in `plan-spec.json`; the two-entry list this file carried
+  is superseded)
   `eigenvalues-eigenvectors-and-the-characteristic-polynomial`,
-  `euclidean-domains-pids-and-unique-factorisation`
-- **estimate** A 25, B 15
+  `euclidean-domains-pids-and-unique-factorisation`,
+  `field-extensions-and-the-complex-numbers`, `splitting-fields`.
+  `field-extensions-and-the-complex-numbers` was added as `frontier-13` D3.1:
+  `thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors`
+  forms $F[x]/(q)$ and uses `thm-irreducible-quotient-adjoins-a-root` and
+  `thm-evaluation-kernel-and-minimal-polynomial`, and
+  `lem-minimal-polynomial-is-invariant-under-field-extension` needs the same
+  machinery
+- **scaffold** A 26, B 12 (no split proposed)
 
 The second `requires` is the one a reader might think decorative and it is not:
 the minimal polynomial is *defined* as the monic generator of the annihilating
@@ -3704,11 +3723,12 @@ later, and nothing would catch that until GA-3 fails to close.
 - **id** `inner-product-spaces-and-orthogonality`, companion
   `inner-product-spaces-and-orthogonality-examples`
 - **category** `linear-algebra`
-- **snapshot order** 94 / 95, planned and **unauthored**
-- **`requires`** (spec, unchanged and exactly right)
+- **order** 94 / 95, scaffolded by `frontier-13` batch 3 (2026-08-15) and
+  **unauthored**
+- **`requires`** (live in `plan-spec.json`, unchanged and exactly right)
   `dual-spaces-bilinear-forms-and-inertia`, `roots-and-rational-powers`,
   `field-extensions-and-the-complex-numbers`
-- **estimate** A 30, B 17
+- **scaffold** A 34, B 16 (no split proposed)
 
 ### II.7.a The published convention is binding, and it is linear in the FIRST variable
 

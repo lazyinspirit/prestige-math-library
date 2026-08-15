@@ -1,0 +1,666 @@
+[
+  {
+    "order": 395,
+    "id": "erdos-hajnal-property-and-homogeneous-sets",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "The Erdős–Hajnal Property and Homogeneous Sets",
+    "companion": "erdos-hajnal-property-and-homogeneous-sets-examples",
+    "requires": [
+      "induced-subgraphs-and-hereditary-graph-classes",
+      "finite-probability-and-the-probabilistic-method"
+    ],
+    "items": [
+      {
+        "id": "def-homogeneous-set-and-homogeneous-number",
+        "kind": "definition",
+        "title": "Homogeneous vertex sets and the homogeneous number $\u005coperatorname{hom}(G)=\u005cmax\u007b\u005comega(G),\u005calpha(G)\u007d$",
+        "deps": [
+          "def-clique-stable-set-and-numbers"
+        ]
+      },
+      {
+        "id": "def-erdos-hajnal-property-and-constant",
+        "kind": "definition",
+        "title": "The Erdős–Hajnal property and an Erdős–Hajnal constant for a hereditary graph class",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-hereditary-graph-class",
+          "def-real-power"
+        ]
+      },
+      {
+        "id": "lem-erdos-hajnal-constants-are-downward-closed",
+        "kind": "lemma",
+        "title": "Every smaller positive exponent is again an Erdős–Hajnal constant",
+        "strategy": "Let $0<\u005cdelta\u005cle\u005cepsilon$ and let $G$ be a nonempty graph in the class, with $n=|V(G)|\u005cge1$. From $\u005clog n\u005cge0$ and monotonicity of the exponential, deduce $n^\u005cdelta\u005cle n^\u005cepsilon$, then apply the defining bound. Treat $n=1$ explicitly so no zero-base real power is invoked.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing"
+        ]
+      },
+      {
+        "id": "thm-ramsey-logarithmic-homogeneous-set-bound",
+        "kind": "theorem",
+        "title": "Every nonempty $n$-vertex graph satisfies $\u005coperatorname{hom}(G)\u005cge \u005ctfrac12\u005clog_2 n$",
+        "strategy": "Put $k=\u005clfloor\u005ctfrac12\u005clog_2 n\u005crfloor+1$. The published Ramsey bound gives a clique or stable set of size $k$ once $n\u005cge\u005cbinom{2k-2}{k-1}$. Bound the middle binomial coefficient by the total number $2^{2k-2}$ of subsets of a $(2k-2)$-set, and use $2k-2\u005cle\u005clog_2 n$. Conclude $\u005coperatorname{hom}(G)\u005cge k>\u005ctfrac12\u005clog_2 n$, including $n=1$.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "thm-finite-graph-ramsey-binomial-bound",
+          "def-binomial-coefficient",
+          "def-logarithm-to-a-base"
+        ]
+      },
+      {
+        "id": "thm-complete-graph-free-classes-are-erdos-hajnal",
+        "kind": "theorem",
+        "title": "For every $t\\ge1$, the class of $K_t$-free graphs has the Erdős–Hajnal property",
+        "strategy": "For $t=1$ the class has no nonempty member, and for $t=2$ every member is empty. Let $t\\ge3$. For all sufficiently large $n$, choose $s=\\lfloor\\tfrac12 n^{1/(t-1)}\\rfloor$ with $s\\ge t-2$. Apply the published Ramsey theorem with parameters $t,s$: since $\\binom{t+s-2}{t-1}\\le(t+s-2)^{t-1}\\le(2s)^{t-1}\\le n$, every $K_t$-free $n$-vertex graph has a stable set of size at least $s$. For large $n$, $s\\ge n^{1/t}$. Reduce the positive exponent if necessary so that the finite initial range is covered by the elementary bound $\\operatorname{hom}(G)\\ge2$ for $n\\ge2$, and treat $n=1$ separately.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-erdos-hajnal-property-and-constant",
+          "def-h-free-and-family-free-graph",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "thm-finite-graph-ramsey-binomial-bound",
+          "def-binomial-coefficient",
+          "def-real-power",
+          "thm-natural-logarithm-laws",
+          "thm-exponential-is-strictly-increasing"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-p3-free-graphs-have-square-root-homogeneous-sets",
+        "kind": "theorem",
+        "title": "Every $P_3$-free graph $G$ satisfies $\\operatorname{hom}(G)\\ge\\sqrt{|V(G)|}$",
+        "strategy": "If two nonadjacent vertices lie in one connected component, take a shortest path between them. Its first three vertices induce $P_3$: consecutive vertices are adjacent, while an edge joining the first and third would shorten the path. Hence every component is a clique. If the component orders are $c_1,\\ldots,c_r$, then $\\omega(G)\\ge\\max_i c_i$, while one vertex from each component is a stable set and gives $\\alpha(G)\\ge r$. Therefore $|V(G)|=\\sum_i c_i\\le r\\max_i c_i\\le\\alpha(G)\\omega(G)\\le\\operatorname{hom}(G)^2$. Take nonnegative square roots and identify $\\sqrt n=n^{1/2}$; thus the $P_3$-free class has Erdős–Hajnal constant $1/2$.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-erdos-hajnal-property-and-constant",
+          "def-h-free-and-family-free-graph",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-connected-graph-and-connected-component",
+          "cor-connected-components-partition-the-vertex-set",
+          "def-graph-walk-trail-path-and-cycle",
+          "def-graph-distance-and-girth",
+          "thm-of-square-roots",
+          "thm-real-power-agrees-with-rational-exponent"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-random-graph-logarithmic-homogeneous-set-upper-bound",
+        "kind": "theorem",
+        "title": "For every $n\u005cge16$ there is an $n$-vertex graph with $\u005coperatorname{hom}(G)<3\u005clog_2 n$",
+        "strategy": "Take $G\u005csim G(n,1/2)$ and $k=\u005clceil3\u005clog_2 n\u005crceil$. Let $X$ count $k$-subsets inducing either a clique or a stable set. For each subset the probability is $2\u005ccdot2^{-\u005cbinom{k}{2}}$, so linearity gives $\u005cmathbb E X=2\u005cbinom nk2^{-\u005cbinom{k}{2}}\u005cle2n^k2^{-k(k-1)/2}<1$; verify the last exponent inequality from $\u005clog_2 n\u005cge4$. The first-moment method gives $X=0$, and every larger homogeneous set would contain a homogeneous $k$-subset, so $\u005coperatorname{hom}(G)\u005cle k-1<3\u005clog_2n$.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-erdos-renyi-random-graph",
+          "lem-random-graph-fixed-pattern-probability",
+          "thm-linearity-of-expectation",
+          "thm-first-moment-method",
+          "def-binomial-coefficient",
+          "def-logarithm-to-a-base"
+        ]
+      },
+      {
+        "id": "cor-the-class-of-all-graphs-is-not-erdos-hajnal",
+        "kind": "corollary",
+        "title": "The hereditary class of all finite graphs does not have the Erdős–Hajnal property",
+        "strategy": "Assume an exponent $\u005cepsilon>0$ works for every graph. The logarithm-versus-power limit makes $3\u005clog_2n<n^\u005cepsilon$ for all sufficiently large $n$; choose such an $n\u005cge16$ and contradict the random-graph upper-bound theorem. Spell out the harmless change from natural to base-two logarithm.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "thm-random-graph-logarithmic-homogeneous-set-upper-bound",
+          "thm-logarithm-slower-than-every-positive-power",
+          "thm-logarithm-change-of-base"
+        ]
+      },
+      {
+        "id": "prop-erdos-hajnal-property-is-complement-invariant",
+        "kind": "proposition",
+        "title": "A hereditary class has the Erdős–Hajnal property exactly when its complementary class does, with the same constants",
+        "strategy": "Complementation bijects the two classes and swaps cliques with stable sets, hence preserves $\u005coperatorname{hom}$. Apply the defining inequality in each direction, using that complementation is an involution. Record the fixed-pattern consequence: $H$ and $\u005coverline H$ have the same Erdős–Hajnal constants.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-complement-of-a-graph-class",
+          "thm-complementation-preserves-hereditary-classes-and-bases",
+          "lem-complement-swaps-cliques-and-stable-sets",
+          "cor-h-free-complement-dictionary"
+        ]
+      },
+      {
+        "id": "cor-every-graph-on-at-most-three-vertices-has-the-erdos-hajnal-property",
+        "kind": "corollary",
+        "title": "Every graph on at most three vertices has the Erdős–Hajnal property",
+        "strategy": "Up to isomorphism and complementation, a graph on at most three vertices is one of $K_1,K_2,K_3$, or $P_3$. The complete cases have the property by the $K_t$-free theorem, the path case has exponent $1/2$, and complement invariance supplies their complements. Check the null pattern separately if graphs of order zero are admitted by the final Statement.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-h-free-and-family-free-graph",
+          "thm-complete-graph-free-classes-are-erdos-hajnal",
+          "thm-p3-free-graphs-have-square-root-homogeneous-sets",
+          "prop-erdos-hajnal-property-is-complement-invariant",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-graph-isomorphism-and-complement"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "prop-erdos-hajnal-property-passes-to-hereditary-subclasses",
+        "kind": "proposition",
+        "title": "The Erdős–Hajnal property and each of its constants pass to hereditary subclasses",
+        "strategy": "If $\u005cmathcal D\u005csubseteq\u005cmathcal C$, every nonempty graph tested for $\u005cmathcal D$ is already tested for $\u005cmathcal C$. Restrict the same inequality and keep the exponent unchanged.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant"
+        ]
+      },
+      {
+        "id": "prop-erdos-hajnal-property-is-monotone-under-induced-pattern-containment",
+        "kind": "proposition",
+        "title": "If $H$ is an induced subgraph of $H'$ and $H'$ has the Erdős–Hajnal property, then $H$ has it with every constant of $H'$",
+        "strategy": "Composition of induced embeddings shows that every $H$-free graph is $H'$-free when $H$ embeds inducedly in $H'$. Thus the $H$-free class is a hereditary subclass of the $H'$-free class; apply subclass monotonicity. State the direction carefully, since reversing this inclusion is a common error.",
+        "deps": [
+          "prop-erdos-hajnal-property-passes-to-hereditary-subclasses",
+          "def-h-free-and-family-free-graph",
+          "lem-induced-embeddings-compose",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary"
+        ]
+      },
+      {
+        "id": "thm-single-pattern-and-finite-family-erdos-hajnal-formulations",
+        "kind": "theorem",
+        "title": "The single-forbidden-graph and finite-nonempty-family formulations of the Erdős–Hajnal conjecture are equivalent",
+        "strategy": "For the forward direction, given a finite nonempty family $\u005cmathcal F$, choose $H\u005cin\u005cmathcal F$; every $\u005cmathcal F$-free graph is $H$-free, so the single-pattern assertion and subclass monotonicity supply an exponent. For the reverse direction apply the family assertion to the singleton family $\u007bH\u007d$. Make clear that this is an equivalence between two universally quantified conjectures, not an equivalence for one fixed family and each of its members.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-h-free-and-family-free-graph",
+          "prop-erdos-hajnal-property-passes-to-hereditary-subclasses",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary"
+        ]
+      },
+      {
+        "id": "rem-the-erdos-hajnal-conjecture",
+        "kind": "remark",
+        "title": "The Erdős–Hajnal conjecture: every fixed forbidden induced graph admits a positive exponent",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-h-free-and-family-free-graph"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 396,
+    "id": "erdos-hajnal-property-and-homogeneous-sets-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "The Erdős–Hajnal Property and Homogeneous Sets — Examples",
+    "companion": "erdos-hajnal-property-and-homogeneous-sets",
+    "requires": [
+      "erdos-hajnal-property-and-homogeneous-sets"
+    ],
+    "items": [
+      {
+        "id": "ex-homogeneous-number-of-complete-and-empty-graphs",
+        "kind": "example",
+        "title": "$K_n$ and $\u005coverline K_n$ both have homogeneous number $n$",
+        "strategy": "Compute $\u005comega$ and $\u005calpha$ directly in the two graphs, including $n=0$, and take their maximum.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-homogeneous-number-of-complete-bipartite-graphs",
+        "kind": "example",
+        "title": "For positive $a,b$, $\u005coperatorname{hom}(K_{a,b})=\u005cmax\u007b2,a,b\u007d$",
+        "strategy": "A clique contains at most one vertex from each side and an edge supplies a 2-clique, while a stable set lies in one side and either whole side works. Take the larger of the clique and stability numbers; keep both sides nonempty as stated.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-the-five-cycle-has-homogeneous-number-two",
+        "kind": "example",
+        "title": "The self-complementary five-cycle satisfies $\u005coperatorname{hom}(C_5)=2$",
+        "strategy": "Exhibit an edge and a nonedge, then show every three vertices in a five-cycle contain both an edge and a nonedge. Give an explicit isomorphism from $C_5$ to its complement to illustrate complement invariance.",
+        "deps": [
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "ex-complete-and-empty-hereditary-classes-have-constant-one",
+        "kind": "example",
+        "title": "The classes of complete graphs and of empty graphs have Erdős–Hajnal constant $1$",
+        "strategy": "Each nonempty graph in either class has homogeneous number equal to its order, so the defining inequality holds with exponent $1$. Check heredity under induced subgraphs and use complementation to relate the two examples.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-homogeneous-set-and-homogeneous-number",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "prop-erdos-hajnal-property-is-complement-invariant"
+        ]
+      },
+      {
+        "id": "ex-bounded-order-graph-classes-are-erdos-hajnal",
+        "kind": "example",
+        "title": "Every hereditary graph class of bounded order has the Erdős–Hajnal property",
+        "strategy": "Let $\u005cmathcal C$ be hereditary, and suppose every graph in $\u005cmathcal C$ has at most $N$ vertices. Choose a positive exponent $\u005cepsilon$ with $N^\u005cepsilon\u005cle2$ when $N\u005cge2$. Every nonempty graph has a homogeneous set of size at least one, and every graph with at least two vertices has one of size at least two. Handle $N\u005cle1$ separately.",
+        "deps": [
+          "def-erdos-hajnal-property-and-constant",
+          "def-homogeneous-set-and-homogeneous-number",
+          "thm-natural-logarithm-laws"
+        ]
+      },
+      {
+        "id": "ex-a-forbidden-pattern-and-its-complement-share-eh-status",
+        "kind": "example",
+        "title": "Forbidding $P_3$ and forbidding $\u005coverline{P_3}$ have the same Erdős–Hajnal constants",
+        "strategy": "Identify $\u005coverline{P_3}$ as an edge plus an isolated vertex, apply the forbidden-pattern complement dictionary, and then apply complement invariance of homogeneous number and EH constants.",
+        "deps": [
+          "prop-erdos-hajnal-property-is-complement-invariant",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "cor-h-free-complement-dictionary",
+          "lem-forbidden-induced-subgraph-classes-are-hereditary"
+        ]
+      },
+      {
+        "id": "cex-the-logarithmic-ramsey-bound-is-not-an-erdos-hajnal-bound",
+        "kind": "counterexample",
+        "title": "The universal logarithmic Ramsey guarantee cannot be replaced by any universal positive power",
+        "strategy": "Fix $\u005cepsilon>0$, choose $n$ large enough that $3\u005clog_2n<n^\u005cepsilon$, and invoke the constructed $n$-vertex graph with homogeneous number below $3\u005clog_2n$. This supplies a counterexample for every proposed universal exponent.",
+        "deps": [
+          "thm-random-graph-logarithmic-homogeneous-set-upper-bound",
+          "thm-logarithm-slower-than-every-positive-power",
+          "thm-logarithm-change-of-base"
+        ]
+      },
+      {
+        "id": "fs-every-hereditary-class-is-erdos-hajnal",
+        "kind": "false-statement",
+        "title": "Every hereditary graph class has the Erdős–Hajnal property",
+        "strategy": "Refute the statement with the hereditary class of all finite graphs and the published corollary showing that this class has no positive EH exponent.",
+        "deps": [
+          "cor-the-class-of-all-graphs-is-not-erdos-hajnal",
+          "def-hereditary-graph-class"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 399,
+    "id": "regular-pairs-and-induced-counting",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Regular Pairs and Induced Counting",
+    "companion": "regular-pairs-and-induced-counting-examples",
+    "requires": [
+      "induced-subgraphs-and-hereditary-graph-classes",
+      "finite-probability-and-the-probabilistic-method"
+    ],
+    "items": [
+      {
+        "id": "def-edge-density-between-vertex-sets",
+        "kind": "definition",
+        "title": "Edge counts and densities between nonempty vertex sets",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "def-epsilon-regular-pair",
+        "kind": "definition",
+        "title": "$\u005cepsilon$-regular pairs and self-regular vertex sets",
+        "deps": [
+          "def-edge-density-between-vertex-sets"
+        ]
+      },
+      {
+        "id": "lem-complementation-preserves-disjoint-regular-pairs",
+        "kind": "lemma",
+        "title": "Complementation sends a disjoint $\u005cepsilon$-regular pair of density $d$ to one of density $1-d$",
+        "strategy": "For disjoint $X,Y$, every ordered cross-pair is an edge in exactly one of $G$ and $\u005coverline G$, so all relevant densities add to $1$ and their differences change sign. Explicitly note the diagonal correction when $X$ and $Y$ overlap; the exact $1-d$ formula is claimed only in the disjoint case.",
+        "deps": [
+          "def-epsilon-regular-pair",
+          "def-graph-isomorphism-and-complement"
+        ]
+      },
+      {
+        "id": "lem-typical-degrees-in-a-regular-pair",
+        "kind": "lemma",
+        "title": "All but fewer than $\u005cepsilon|X|$ vertices have typical degree into every large subset of a regular pair",
+        "strategy": "If at least $\u005cepsilon|X|$ vertices have degree into $Y'\u005csubseteq Y$ below $(d-\u005cepsilon)|Y'|$, take them as $X'$ and contradict regularity of $(X,Y)$; repeat for degrees above $(d+\u005cepsilon)|Y'|$. State the strict bad-set bound and the hypothesis $|Y'|\u005cge\u005cepsilon|Y|$.",
+        "deps": [
+          "def-epsilon-regular-pair"
+        ]
+      },
+      {
+        "id": "lem-slicing-lemma-for-regular-pairs",
+        "kind": "lemma",
+        "title": "Slicing lemma: large subpairs remain regular and their density shifts by at most $\u005cepsilon$",
+        "strategy": "For an $\u005cepsilon$-regular pair $(X,Y)$ and subsets $X',Y'$ of relative sizes at least $\u005calpha,\u005cbeta\u005cge\u005cepsilon$, first apply regularity to get $|d(X',Y')-d(X,Y)|\u005cle\u005cepsilon$. If $A\u005csubseteq X'$ and $B\u005csubseteq Y'$ have relative sizes at least $\u005cepsilon'=\u005cmax\u007b\u005cepsilon/\u005calpha,\u005cepsilon/\u005cbeta,2\u005cepsilon\u007d$, then they meet the original thresholds; compare both $d(A,B)$ and $d(X',Y')$ with $d(X,Y)$.",
+        "deps": [
+          "def-epsilon-regular-pair"
+        ]
+      },
+      {
+        "id": "lem-regularity-is-robust-under-small-edits",
+        "kind": "lemma",
+        "title": "Regularity survives sufficiently small changes of vertices and cross-edges",
+        "strategy": "Given $\u005cepsilon'>\u005cepsilon$, choose an explicit $\u005cdelta$ small compared with $\u005cepsilon'-\u005cepsilon$ and $\u005cepsilon$. Compare the old and new densities after adding or deleting at most a $\u005cdelta$-fraction of each vertex set and changing at most $\u005cdelta|X||Y|$ cross-edges; transfer any hypothetical $\u005cepsilon'$-irregular witness back to large old subsets and contradict $\u005cepsilon$-regularity.",
+        "deps": [
+          "def-epsilon-regular-pair"
+        ]
+      },
+      {
+        "id": "def-regular-and-equitable-vertex-partition",
+        "kind": "definition",
+        "title": "$\u005cepsilon$-regular vertex partitions, equitable partitions, and refinement",
+        "deps": [
+          "def-epsilon-regular-pair"
+        ]
+      },
+      {
+        "id": "def-energy-of-a-vertex-partition",
+        "kind": "definition",
+        "title": "The mean-square density, or energy, of a vertex partition",
+        "deps": [
+          "def-edge-density-between-vertex-sets",
+          "def-regular-and-equitable-vertex-partition"
+        ]
+      },
+      {
+        "id": "lem-energy-is-monotone-under-refinement",
+        "kind": "lemma",
+        "title": "Energy lies in $[0,1]$ and cannot decrease under refinement",
+        "strategy": "For each old ordered pair of parts, regard the densities between its refined subparts as a finite random variable weighted by relative product sizes. Its expectation is the old density, so Cauchy–Schwarz gives mean square at least square of the mean. Sum with the global weights. The bounds $0\u005cle q\u005cle1$ follow from $0\u005cle d\u005cle1$ and the weights summing to one.",
+        "deps": [
+          "def-energy-of-a-vertex-partition",
+          "lem-cauchy-schwarz-for-finite-random-variables"
+        ]
+      },
+      {
+        "id": "lem-energy-boost-for-an-irregular-pair",
+        "kind": "lemma",
+        "title": "An irregularity witness raises the pair energy by more than $\u005cepsilon^4|X||Y|/n^2$",
+        "strategy": "Split $X$ and $Y$ by witness sets $A,B$. Express the refined-minus-coarse pair energy as the variance of the subpair-density random variable. The event $A\u005ctimes B$ has weight at least $\u005cepsilon^2$, and its density differs from the old one by more than $\u005cepsilon$, giving the stated strict boost.",
+        "deps": [
+          "def-energy-of-a-vertex-partition",
+          "def-epsilon-regular-pair"
+        ]
+      },
+      {
+        "id": "lem-energy-increment-for-an-irregular-partition",
+        "kind": "lemma",
+        "title": "Every nonregular $k$-part partition has a refinement with energy gain greater than $\u005cepsilon^5$ and at most $k2^{k+1}$ parts",
+        "strategy": "Choose witnesses for every irregular ordered pair. Inside each part take the common refinement generated by all witness subsets incident with it; this makes at most $2^{k+1}$ cells per old part. Sum the irregular-pair boosts, using the weighted definition of a nonregular partition to obtain a total gain above $\u005cepsilon^5$, while monotonicity makes every unselected contribution nonnegative.",
+        "deps": [
+          "lem-energy-boost-for-an-irregular-pair",
+          "lem-energy-is-monotone-under-refinement",
+          "def-regular-and-equitable-vertex-partition"
+        ]
+      },
+      {
+        "id": "thm-szemeredi-regularity-lemma-with-tower-bound",
+        "kind": "theorem",
+        "title": "Szemerédi regularity lemma with an equitable partition and an explicit tower-type upper bound for graphs of order at least $m_0$",
+        "strategy": "For a graph with $n\u005cge m_0$, start with an equitable partition into exactly $m_0$ nonempty parts. When it is not $\u005cepsilon$-regular, apply the energy increment and then re-equitabilise with energy loss at most half the gain by cutting parts and distributing leftovers. Energy stays at most $1$, so fewer than $2\u005cepsilon^{-5}$ iterations occur. Track part counts by $m_{r+1}=\u005clceil\u005cepsilon^{-5}m_r2^{m_r+2}\u005crceil$; thus $M=m_{\u005clceil2\u005cepsilon^{-5}\u005crceil}$ is a proved tower-type bound, not a polynomial or single exponential. Handle $n<m_0$ only in corollaries that allow singleton partitions; do not claim the impossible lower bound $k\u005cge m_0$ there.",
+        "deps": [
+          "lem-energy-increment-for-an-irregular-partition",
+          "lem-energy-is-monotone-under-refinement",
+          "def-regular-and-equitable-vertex-partition"
+        ]
+      },
+      {
+        "id": "cor-regularity-refining-a-given-partition",
+        "kind": "corollary",
+        "title": "A prescribed finite vertex partition has a bounded $\u005cepsilon$-regular refinement, equitable when the initial partition is equitable",
+        "strategy": "Run the same witness-refinement iteration starting from the prescribed partition. Without an equitability requirement, the recurrence $k_{r+1}\u005cle k_r2^{k_r+1}$ applies directly. When the initial partition is equitable, split every old cell into the same controlled number of nearly equal subcells and distribute each cell's own leftovers internally; this never crosses an old cell, yields a globally equitable refinement, and costs at most half the $\u005cepsilon^5$ gain after enlarging the recurrence by the same $\u005cepsilon^{-5}$ factor used in the equitable theorem. In both forms the number of rounds is bounded by energy.",
+        "deps": [
+          "lem-energy-increment-for-an-irregular-partition",
+          "lem-energy-is-monotone-under-refinement"
+        ]
+      },
+      {
+        "id": "thm-large-self-regular-subset",
+        "kind": "theorem",
+        "title": "Every finite graph has a linearly large $\u005cepsilon$-self-regular vertex subset",
+        "strategy": "Apply the regularity lemma at a sufficiently smaller parameter to a large enough equitable partition. Use the weighted irregular-pair bound to find a sizeable union of parts whose internal density is stable, and verify self-regularity by decomposing two large test subsets across the partition. Record a constant $\u005cdelta(\u005cepsilon)>0$ independent of the graph order and handle graphs below the partition threshold by shrinking $\u005cdelta$.",
+        "deps": [
+          "thm-szemeredi-regularity-lemma-with-tower-bound",
+          "def-epsilon-regular-pair"
+        ]
+      },
+      {
+        "id": "cor-partition-into-self-regular-sets",
+        "kind": "corollary",
+        "title": "Every finite graph has a bounded partition into self-regular vertex sets",
+        "strategy": "Repeatedly extract a linearly large set that is regular at a parameter smaller than the target until only a small remainder remains. There are boundedly many extracted sets. Distribute the remainder among them and apply robustness under small vertex edits; handle bounded small graphs with singleton parts.",
+        "deps": [
+          "thm-large-self-regular-subset",
+          "lem-regularity-is-robust-under-small-edits"
+        ]
+      },
+      {
+        "id": "thm-triangle-counting-lemma-for-regular-triples",
+        "kind": "theorem",
+        "title": "Triangle counting lemma for three pairwise regular vertex sets",
+        "strategy": "Discard the fewer than $2\u005cepsilon|X|$ vertices of $X$ that are atypical into $Y$ or $Z$. For every remaining $x$, its two neighbourhoods are large enough to invoke regularity of $(Y,Z)$; multiply the resulting lower bounds to obtain the stated product estimate, keeping the exact density-minus-$\u005cepsilon$ factors and their positivity hypotheses.",
+        "deps": [
+          "lem-typical-degrees-in-a-regular-pair",
+          "def-epsilon-regular-pair"
+        ]
+      },
+      {
+        "id": "thm-counting-lemma-for-a-fixed-graph",
+        "kind": "theorem",
+        "title": "Counting lemma: regular dense pairs contain many part-respecting copies of every fixed graph",
+        "strategy": "Order the vertices of the fixed graph $H$ and embed them greedily. Maintain for each unembedded vertex a candidate set of the expected product size. The typical-degree lemma shows that all but a controlled fraction of choices preserve every future candidate set; multiply the choice bounds. State both a quantitative homomorphism count and the injective-copy consequence when all host sets are sufficiently large, subtracting collision choices explicitly.",
+        "deps": [
+          "lem-typical-degrees-in-a-regular-pair",
+          "lem-slicing-lemma-for-regular-pairs",
+          "def-finite-simple-graph"
+        ]
+      },
+      {
+        "id": "thm-induced-counting-lemma-for-regular-pairs",
+        "kind": "theorem",
+        "title": "Induced counting lemma: regular edge and nonedge pairs force many induced copies",
+        "strategy": "For a labelled $h$-vertex graph $H$, assume every required edge pair has density at least $\u005ceta$, every required nonedge pair has density at most $1-\u005ceta$, and every relevant pair is $\u005cgamma$-regular with $\u005cgamma\u005cle\u005ceta^h/(4h)$. Complement the disjoint nonedge pairs and apply the greedy counting proof, while treating repeated host sets through self-regularity and excluding collisions. Derive an explicit positive lower bound such as $(\u005ceta/4)^{\u005cbinom h2}\u005cprod_i|W_i|$ under the stated minimum-size condition.",
+        "deps": [
+          "thm-counting-lemma-for-a-fixed-graph",
+          "lem-complementation-preserves-disjoint-regular-pairs",
+          "def-induced-embedding-and-induced-copy",
+          "def-induced-copy-number"
+        ]
+      },
+      {
+        "id": "def-graph-edit-distance-and-epsilon-far",
+        "kind": "definition",
+        "title": "Graph edit distance and being $\u005cepsilon$-far from an induced-hereditary property",
+        "deps": [
+          "def-finite-simple-graph",
+          "def-hereditary-graph-class"
+        ]
+      },
+      {
+        "id": "thm-graph-removal-lemma",
+        "kind": "theorem",
+        "title": "Graph removal lemma for a fixed ordinary subgraph",
+        "strategy": "Apply equitable regularity at a parameter chosen for the counting lemma. Delete all edges inside parts, across irregular pairs, and across regular pairs below a small density threshold; bound these three edit contributions by $\u005cepsilon n^2$. If the cleaned graph still contains $H$, its part assignment consists of regular dense pairs, so the counting lemma produces at least $\u005cdelta n^{|V(H)|}$ labelled copies in the original graph. Contraposition gives removal.",
+        "deps": [
+          "thm-szemeredi-regularity-lemma-with-tower-bound",
+          "thm-counting-lemma-for-a-fixed-graph",
+          "def-finite-simple-graph"
+        ]
+      },
+      {
+        "id": "thm-strong-regularity-lemma-by-energy-stabilisation",
+        "kind": "theorem",
+        "title": "Equitable strong regularity lemma: a very regular refinement that changes energy only slightly",
+        "strategy": "First obtain an equitable $\u005cepsilon_0$-regular partition $P_0$. Recursively use the equitable prescribed-refinement clause to choose an equitable $\u005cepsilon_{|P_i|}$-regular refinement $P_{i+1}$. Energy is nondecreasing and at most $1$, so among at most $\u005clceil\u005cepsilon_0^{-1}\u005crceil+1$ successive pairs one satisfies $q(P_{i+1})\u005cle q(P_i)+\u005cepsilon_0$. Set $P=P_i$, $Q=P_{i+1}$ and track the iterated tower recurrence; with the sequence used for induced removal this is a wowzer-type bound. For graphs below the first lower-part threshold, use the common equitable singleton partition for both $P$ and $Q$.",
+        "deps": [
+          "cor-regularity-refining-a-given-partition",
+          "thm-szemeredi-regularity-lemma-with-tower-bound",
+          "lem-energy-is-monotone-under-refinement"
+        ]
+      },
+      {
+        "id": "lem-energy-controls-density-approximation",
+        "kind": "lemma",
+        "title": "A small energy increment makes fine-pair densities close to their coarse densities almost everywhere",
+        "strategy": "For uniformly random ordered vertices $x,y$, let $Z_P$ and $Z_Q$ be the densities of their coarse and fine part pairs. Refinement gives the conditional-expectation identity $\u005cmathbb E(Z_Q-Z_P)^2=q(Q)-q(P)$. If this is at most $\u005cepsilon^3$, Markov's inequality shows $|Z_Q-Z_P|>\u005cepsilon$ on at most an $\u005cepsilon$-fraction of ordered pairs.",
+        "deps": [
+          "def-energy-of-a-vertex-partition",
+          "lem-energy-is-monotone-under-refinement",
+          "thm-markov-inequality"
+        ]
+      },
+      {
+        "id": "thm-self-regular-representative-subsets",
+        "kind": "theorem",
+        "title": "Strong regularity with linearly large representative subsets and no irregular representative pair",
+        "strategy": "Use strong regularity with much smaller parameters and equitable coarse and fine partitions. Inside every fine atom choose a linearly large self-regular subset; slicing preserves regularity and controls density shifts on good cross-pairs. Independently choose one refined atom inside each coarse part. The expected number of irregular selected pairs and of coarse-to-selected density failures is below one after the parameter choices, so the first-moment principle gives a simultaneous choice. The resulting $W_i\u005csubseteq V_i$ have size at least $\u005cdelta n$, every pair including $i=j$ is $f(k)$-regular, and all but $\u005cepsilon_0k^2$ coarse densities are $\u005cepsilon_0$-approximated.",
+        "deps": [
+          "thm-strong-regularity-lemma-by-energy-stabilisation",
+          "lem-energy-controls-density-approximation",
+          "thm-large-self-regular-subset",
+          "lem-slicing-lemma-for-regular-pairs",
+          "thm-first-moment-method"
+        ]
+      },
+      {
+        "id": "rem-tower-and-wowzer-bounds-in-regularity",
+        "kind": "remark",
+        "title": "Ordinary regularity gives tower upper bounds; the strong-regularity proof used here gives wowzer upper bounds",
+        "deps": [
+          "thm-szemeredi-regularity-lemma-with-tower-bound",
+          "thm-strong-regularity-lemma-by-energy-stabilisation"
+        ]
+      },
+      {
+        "id": "thm-induced-graph-removal-lemma",
+        "kind": "theorem",
+        "title": "Induced graph removal lemma for a fixed graph",
+        "strategy": "Fix $H$ and $\u005cepsilon>0$, choose a density threshold $\u005ceta\u005cll\u005cepsilon$, and apply the representative-subset theorem with regularity small enough for induced counting. For every coarse pair, delete all edges when its representative density is below $\u005ceta$ and add all edges when it is above $1-\u005ceta$; density approximation, the exceptional-pair count, and within-part edits keep the total below $\u005cepsilon n^2$. If the cleaned graph contains an induced $H$, its possibly repeated part map makes every required representative density bounded away from the forbidden extreme. Self-regularity handles repeated parts, and induced counting yields $\u005cdelta n^{|V(H)|}$ induced embeddings in the original graph, contradicting the few-copy hypothesis.",
+        "deps": [
+          "thm-self-regular-representative-subsets",
+          "thm-induced-counting-lemma-for-regular-pairs",
+          "def-graph-edit-distance-and-epsilon-far",
+          "def-induced-copy-number"
+        ]
+      }
+    ]
+  },
+  {
+    "order": 400,
+    "id": "regular-pairs-and-induced-counting-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Regular Pairs and Induced Counting — Examples",
+    "companion": "regular-pairs-and-induced-counting",
+    "requires": [
+      "regular-pairs-and-induced-counting"
+    ],
+    "items": [
+      {
+        "id": "ex-complete-and-empty-pairs-are-zero-regular",
+        "kind": "example",
+        "title": "Complete and anticomplete disjoint pairs are $0$-regular",
+        "strategy": "Every nonempty subpair of a complete pair has density $1$, and every nonempty subpair of an anticomplete pair has density $0$. Thus every density difference vanishes; explain the conventional reading of $0$-regularity despite the definition being stated for positive parameters.",
+        "deps": [
+          "def-epsilon-regular-pair",
+          "def-edges-between-sets-and-pure-mixed-pairs"
+        ]
+      },
+      {
+        "id": "cex-half-graph-pairs-have-macroscopic-irregularity",
+        "kind": "counterexample",
+        "title": "The half graph has no regularity across its natural bipartition at a fixed small parameter",
+        "strategy": "For the bipartite half graph with $a_ib_j$ present exactly when $i\u005cle j$, compute the full cross-density and compare it with the densities on the first and last quarter blocks. For all sufficiently large orders these blocks witness failure of $\u005cepsilon$-regularity for one explicit absolute $\u005cepsilon$; keep rounding errors visible.",
+        "deps": [
+          "def-epsilon-regular-pair",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "ex-slicing-a-regular-pair-with-explicit-parameters",
+        "kind": "example",
+        "title": "A $0.01$-regular pair restricted to two half-sized subsets is $0.02$-regular",
+        "strategy": "Substitute $\u005cepsilon=0.01$ and $\u005calpha=\u005cbeta=1/2$ into the slicing constant $\u005cmax\u007b\u005cepsilon/\u005calpha,\u005cepsilon/\u005cbeta,2\u005cepsilon\u007d$, and retain the density-shift bound $0.01$.",
+        "deps": [
+          "lem-slicing-lemma-for-regular-pairs"
+        ]
+      },
+      {
+        "id": "ex-energy-of-trivial-and-discrete-partitions",
+        "kind": "example",
+        "title": "The trivial partition has energy $d(G)^2$, while the singleton partition records every adjacency",
+        "strategy": "Evaluate the energy definition for one part and for singleton parts. Under the ordered-pair density convention, the singleton partition has energy $2|E(G)|/n^2$; compare it with $d(V,V)^2$ and verify monotonicity directly, including the null-graph convention separately.",
+        "deps": [
+          "def-energy-of-a-vertex-partition",
+          "lem-energy-is-monotone-under-refinement"
+        ]
+      },
+      {
+        "id": "ex-triangle-counting-in-a-complete-tripartite-graph",
+        "kind": "example",
+        "title": "The triangle counting lemma is exact for three complete cross-pairs",
+        "strategy": "Take three disjoint nonempty vertex sets with every cross-edge present. All three pairs are $0$-regular of density $1$, and every ordered triple, one vertex from each set, is a triangle, giving exactly $|X||Y||Z|$.",
+        "deps": [
+          "thm-triangle-counting-lemma-for-regular-triples",
+          "def-edge-density-between-vertex-sets",
+          "def-epsilon-regular-pair"
+        ]
+      },
+      {
+        "id": "ex-induced-path-counting-from-three-pure-pairs",
+        "kind": "example",
+        "title": "Two complete pairs and one anticomplete pair produce exactly $|X_1||X_2||X_3|$ induced copies of $P_3$",
+        "strategy": "Make $(X_1,X_2)$ and $(X_2,X_3)$ complete and $(X_1,X_3)$ anticomplete. Every transversal triple induces the labelled path $1-2-3$, and every pair is $0$-regular, so this is the zero-error model of the induced counting lemma.",
+        "deps": [
+          "thm-induced-counting-lemma-for-regular-pairs",
+          "def-edge-density-between-vertex-sets",
+          "def-epsilon-regular-pair",
+          "def-standard-complete-bipartite-path-and-cycle-graphs"
+        ]
+      },
+      {
+        "id": "cex-positive-pair-densities-alone-do-not-force-a-triangle",
+        "kind": "counterexample",
+        "title": "Three pair densities equal to $1/2$ need not produce a single transversal triangle",
+        "strategy": "Split each of $X,Y,Z$ into equal halves labelled by bits. Join $X$ to $Y$ and $Y$ to $Z$ when the bits agree, and join $X$ to $Z$ when the bits differ. Each cross-density is $1/2$, but a triangle would require simultaneously $x=y$, $y=z$, and $x\u005cne z$. This isolates the regularity hypothesis in counting.",
+        "deps": [
+          "def-edge-density-between-vertex-sets",
+          "thm-triangle-counting-lemma-for-regular-triples"
+        ]
+      },
+      {
+        "id": "cex-edge-deletion-alone-cannot-prove-induced-removal",
+        "kind": "counterexample",
+        "title": "Induced removal must permit adding edges as well as deleting them",
+        "strategy": "Let $G$ be $K_n$ with exactly the three edges on one chosen triple deleted, and let $H$ be the empty three-vertex graph. That triple is the unique induced copy of $H$. Deleting further edges can never destroy its three nonedges, whereas adding any one missing edge does; hence a deletion-only induced-removal statement is false.",
+        "deps": [
+          "thm-induced-graph-removal-lemma",
+          "def-standard-complete-bipartite-path-and-cycle-graphs",
+          "def-induced-copy-number"
+        ]
+      }
+    ]
+  }
+]

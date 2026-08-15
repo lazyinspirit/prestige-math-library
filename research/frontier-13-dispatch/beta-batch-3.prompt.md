@@ -1,0 +1,254 @@
+# Beta brief for run `frontier-13` (steps 1 and 2)
+
+> **NO PERMISSION PROMPTS OF ANY KIND (owner, 2026-07-30; broadened 2026-08-11)
+> — binding on you.** The owner's wording: *"Do not ask and do not let any agents
+> ask for shell command permissions, edit permissions, web search permissions,
+> git permissions, or any permissions whatsoever."* This binds a **compound
+> command as a whole — no segment of an `&&` chain may raise a prompt either.**
+> Use command forms already allowed inside the workspace sandbox, choose
+> non-escalated forms, and pass `dangerouslyDisableSandbox: true` on every Bash
+> call where your runtime exposes it. Web search is part of your job here and you
+> never ask before searching. If an indispensable operation has no escalation-free
+> form, **record a blocker in your notes** — that is the escape hatch, not a
+> prompt. This rule binds every subagent you dispatch; carry it into their briefs.
+
+You are a **Beta on run `frontier-13`**, scaffolding one batch for the public
+math library. The checkout is the directory you were started in. Your batch is
+named in the "This dispatch" section appended below. After step 4 you return as
+the **step-5 author** of everything you scaffold here, so prepare a scaffold you
+can author faithfully without rediscovering its reasoning.
+
+Six other Betas are working other batches of this run **in parallel**. Your batch
+has **no dependency edge to any other batch**, and that is not a promise — it is
+mechanical. `validate-plan.mjs` raises the hard error `undeclared-prereq` for any
+item depending on a page outside its own page's declared `requires` closure, and
+no in-run pair is inside any other in-run pair's closure. So you can neither wait
+on another batch nor cite one. Write only your own files.
+
+## 0. Read first, in this order
+
+1. `CLAUDE.md` — workflow and hard rules. Normative.
+2. `SCHEMA.md` — the item/page contract. Normative; it wins over this brief.
+3. `README.md` — provenance, judge lineup, citation rules.
+4. `briefs/beta-scaffold.md` — **your base contract**, in full.
+5. `items/lem-cauchy-bounded.md` — the approved house-style exemplar.
+6. `research/frontier-12-batch-1.pages.json` and
+   `research/frontier-12-batch-1.notes.md` — the output shape you are producing,
+   from the most recent completed run.
+7. `research/frontier-13-step0-batching.md` — this run's frontier, batching and
+   seam analysis.
+8. The prose scaffold sections named in your dispatch.
+
+Then open, **on disk**, every published item you intend to cite. The item, not
+the scaffold's description of it, and not your memory of the subject.
+
+## 1. What this run is for
+
+Eleven A/B pairs across seven batches, in abstract algebra, linear algebra,
+combinatorics, category theory and number theory. Three batches are deliberately
+single-pair because their subject deserves a whole Beta's attention. Yours may be
+one of them; if it is, that is not a light load, it is a mandate to read more of
+each source.
+
+The failure this process exists to prevent is a **thin page that passes every
+gate**. A previous run shipped `group-actions-and-cayleys-theorem` with orbits,
+stabilisers and the orbit partition but **no orbit–stabiliser theorem**, no class
+equation, no Cauchy's theorem, and an empty B page — while citing Sharifi,
+Brosnan, Judson, Axler and Diestel. The sources were fine. The Beta cited a
+source *without harvesting it*: Brosnan's note is literally titled *Orbits and
+stabilizers*, and orbit–stabiliser never reached the scaffold.
+
+Do not produce a four-item page.
+
+## 2. The rules that govern this scaffold
+
+**(a) The canonical-coverage harvest — a required, gated artifact.** You write
+`research/frontier-13-batch-<i>.coverage.json`. Per A page: at least two
+independent treatments, at least one a textbook, monograph or full lecture-note
+set (an encyclopedia entry is a convention tiebreaker and can never be a pair's
+primary backing — Wikipedia alone fails this gate); per source the exact
+chapter/section range you actually read and an enumeration of **that source's
+own** section and named-result headings across it; per heading a disposition —
+`included` (+ the scaffolded item id), `inline` (+ the item whose proof absorbs
+it), `already-published` (+ the published id), `deferred` or `out-of-scope` (+ a
+reason of 40+ characters about **that specific result**; one reason pasted across
+three declines is rejected). Full shape and rules: `briefs/beta-scaffold.md`
+§"The canonical-coverage harvest". Run it before you report done:
+
+```
+node tools/coverage-checklist.mjs research/frontier-13-batch-<i>.coverage.json
+```
+
+There is no minimum result count — padding is forbidden. The bar is set by the
+source, not by a target. **The locator must be real.** If you cite a range, that
+range must exist in that edition and contain what you say it contains; Alpha
+re-opens sources at step 6 and checks the harvest is faithful, not merely
+well-formed.
+
+**(b) Build the machinery; do not drop (owner, 2026-08-11).** If a theorem needs
+a definition or theorem the library has not established, **build it**. Dropping
+an important result because a prerequisite is missing is not a permitted
+disposition. `deferred`/`out-of-scope` is for material belonging to another
+page's topic, or resting on a whole subject area the library has not reached —
+**never** for a lemma you could simply have written. Be ready to defend every
+decline to Alpha, result by result.
+
+**(c) Split an A page over 60 items (owner, 2026-08-11).** `validate-plan.mjs`
+fails with error `size`. The remedy is always two or more A pages, each with its
+own B companion, its own two-paragraph summary and its own slot in reading order
+— never a shorter page with results dropped to fit. **Propose the split in your
+notes at step 2** with proposed page ids and the exact cut; the orchestrator
+adjudicates at step 3 and splices ids into `plan-spec.json` at step 4. Splitting
+before authoring costs a spec edit; after authoring it is a rewrite. Several
+pairs in this run are broad enough that a split is a live possibility — say so
+early rather than trimming to fit.
+
+**(d) Notation.** Never write the canonical embedding applied to a natural
+number: no `\iota(n)`, `\iota(0)`, `\iota(k!)`. Write the number.
+`content-policy.mjs` fails the batch with `notation-iota-applied`. Bare `\iota`
+naming a basis inclusion in a universal property — a free group `(F,\iota)` with
+`\phi\circ\iota=\iota'` — is standard and unaffected. Legacy items you cite still
+use the old applied form; **leave them alone**, they are not your scope.
+
+**(e) Provenance, and the dependency-provenance order.** Assign
+`provenance.statement` and `provenance.proof` to every mathematical-content item
+and record a rationale for each in your notes. Never make an `ai-generated`
+Statement or Construction a load-bearing scaffold or proof dependency. A
+published item with no component provenance is `legacy-unclassified` — that is
+not evidence it is AI-generated; before making one load-bearing, either confirm
+from your own knowledge that the exact statement is established, or find
+reputable sources for that exact statement and its conventions, and record which
+route you used.
+
+**(f) B pages are leaves.** Nothing anywhere may depend on an item homed on an
+`-examples` page — `validate-plan` error `b-leaf`, `depcheck` error
+`b-leaf-content`. If a result on your B page turns out to be load-bearing, it
+belongs on the A page. **This holds even when your A page declares a B page in
+its `requires`**: two pages in this run do, and the edge makes the companion *A*
+page citable, never the examples items themselves. Your dispatch says whether
+this is you.
+
+## 3. Your writable outputs — and nothing else
+
+- `research/frontier-13-batch-<i>.pages.json` — the machine scaffold
+- `research/frontier-13-batch-<i>.notes.md` — source ledger, provenance
+  rationales, convention disagreements, split proposals, licensing notes
+- `research/frontier-13-batch-<i>.coverage.json` — the harvest
+- `research/frontier-13-batch-<i>.proof-contracts.json` — begun at scaffold time
+
+You may not edit `plan-spec.json`, another batch's files, `items/`, `library/`,
+or any normative doc. A published dependency you believe is unambiguously false
+is recorded in your notes at steps 1–2, never edited.
+
+## 4. Gates you must leave green
+
+```
+node tools/validate-plan.mjs research/plan-spec.json
+node tools/coverage-checklist.mjs research/frontier-13-batch-<i>.coverage.json
+```
+
+**Do not run `tools/gates.mjs`** — it fails `EPERM` in this sandbox (its
+`spawnSync` of `node` is refused before any child runs). The individual scripts
+are the same checks. The orchestrator runs the wrapper and is the gate of record.
+
+## 5. Context checkpoint
+
+At **60% of your own context** (owner, 2026-08-03), append a concise checkpoint
+section to your own `research/frontier-13-batch-<i>.notes.md`: owned artifacts,
+current substage, checks completed, the open mathematical question, and the exact
+next action. Then continue. On resumption read it back and verify disk state
+before acting. A checkpoint is not a pause and you do not wait for the
+orchestrator.
+
+## 6. Report
+
+Finish with a concise report: pages and item counts, the harvest yield
+(scaffolded vs declined, with the declines you expect to be challenged), any
+split proposal, every published dependency you opened and the confidence route
+used for each, convention disagreements found, and any blocker. State plainly
+anything you could not do.
+
+
+---
+
+# This dispatch
+
+## Batch 3 of run `frontier-13` — linear algebra: minimal polynomials and inner products
+
+Two A/B pairs. You own all four pages, and you author them at step 5.
+
+> **Orders in the prose scaffolds are STALE.** `research/plan-algebra-track.md`
+> and `research/plan-algebra-track-expansion.md` quote pre-splice orders (84, 90,
+> …). `research/plan-spec.json` is the only live source of `order`. Identify
+> everything by **page id**.
+
+### Pair A — diagonalisation and the minimal polynomial
+
+| | |
+|---|---|
+| A page | `diagonalisation-and-the-minimal-polynomial` · "Diagonalisation and the Minimal Polynomial" · category `linear-algebra` · order **88** |
+| B page | `diagonalisation-and-the-minimal-polynomial-examples` · order **89** |
+| requires | `eigenvalues-eigenvectors-and-the-characteristic-polynomial`, `euclidean-domains-pids-and-unique-factorisation` (both published) |
+| prose scaffold | `research/plan-algebra-track.md` §II.5, block `LA-9`; `research/plan-algebra-track-expansion.md` line ~206 |
+
+Diagonalisability, the **minimal polynomial** as the monic generator of the
+annihilator ideal of the operator (this is why `euclidean-domains-pids-and-unique-factorisation`
+is a prerequisite — say so in the proof rather than asserting the generator
+exists), `μ ∣ χ` and the shared irreducible factors, **Cayley–Hamilton**,
+eigenspaces and the direct-sum criterion, **diagonalisable iff `μ` splits into
+distinct linear factors**, simultaneous diagonalisation of commuting operators,
+the primary decomposition theorem, and generalised eigenspaces to the extent you
+can close them here without pre-empting Jordan form (which is a separate planned
+page, `triangularisation-and-jordan-canonical-form` — do not build it).
+
+Cayley–Hamilton is the classic place for a bogus proof ("substitute `A` into
+`det(xI − A)`"). Write a correct one — adjugate identity over `F[x]`, or the
+density/algebraic-closure argument stated with its hypotheses intact — and record
+in your notes which route you took and the source for it.
+
+### Pair B — inner product spaces and orthogonality
+
+| | |
+|---|---|
+| A page | `inner-product-spaces-and-orthogonality` · "Inner Product Spaces, Gram-Schmidt, Projections and Adjoints" · category `linear-algebra` · order **94** |
+| B page | `inner-product-spaces-and-orthogonality-examples` · order **95** |
+| requires | `dual-spaces-bilinear-forms-and-inertia`, `roots-and-rational-powers`, `field-extensions-and-the-complex-numbers` (all published) |
+| prose scaffold | `research/plan-algebra-track-expansion.md` line ~209 |
+
+**Real and complex inner products** with the conjugate-symmetry convention stated
+explicitly (and the linear-in-which-argument convention recorded as a convention
+choice in your notes — sources disagree and the disagreement must be recorded,
+not silently resolved), the induced norm, **Cauchy–Schwarz** and the triangle
+inequality, orthogonality and orthonormal sets, **Gram–Schmidt**, existence of
+orthonormal bases in finite dimension, `V = W ⊕ W^⊥`, **orthogonal projection**
+and its characterisation as the nearest point, Bessel's inequality and Parseval
+in finite dimension, the Riesz representation theorem in finite dimension, and
+**the adjoint** `T*` with its basic algebra (`(ST)* = T*S*`, `T** = T`,
+`ker T* = (im T)^⊥`).
+
+`research/plan-algebra-track-expansion.md` line ~445 records that a later
+representation-theory page pins **the inner product on class functions** to
+*this* page's definition. So the definition you write here is load-bearing for a
+track that does not exist yet: make it the standard one, conjugate-symmetric and
+positive definite, and do not invent a variant.
+
+Do **not** reach into analysis: completeness, Hilbert spaces and infinite
+orthonormal bases belong to the functional-analysis track and are out of scope.
+`plan-algebra-track-expansion.md` line ~310 records that this page names no
+analysis page above it.
+
+### The hard constraint between your two pairs
+
+`inner-product-spaces-and-orthogonality` does **not** declare
+`diagonalisation-and-the-minimal-polynomial` in its `requires`, and neither is in
+the other's closure. So **no item on either page may depend on an item on the
+other** — `validate-plan` fails it as `undeclared-prereq`.
+
+This bites in one specific place: the **spectral theorem** wants both. It is a
+separate planned page (`the-spectral-theorem-and-singular-value-decomposition`)
+and is **not yours to build** — it is downstream of both of your pairs plus two
+others. Do not anticipate it on either page.
+
+If you conclude one pair genuinely needs the other, **record it in your notes as
+a recommendation** naming the exact result; the orchestrator decides at step 3.
+Do not work around it, and do not edit `plan-spec.json`.

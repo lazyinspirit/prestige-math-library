@@ -126,7 +126,7 @@ published library pages, not inferred from titles:
 | `polynomial-rings-and-roots` | one- and multivariable polynomial rings, evaluation, division, degree, adjugate identity |
 | `the-field-of-fractions-and-localisation` | multiplicative sets, localisation of rings, universal property, prime localisation, local rings, ideal correspondence, localisation/quotient compatibility |
 | `modules-and-module-homomorphisms`; `free-modules-and-exact-sequences` | submodules, quotients, annihilators, finite generation, free modules, Hom, exact sequences, projective/injective modules |
-| `tensor-products-of-modules` (planned, abstract algebra) | tensor product, its universal property and right exactness, extension of scalars, `def-flat-module` |
+| `tensor-products-of-modules` (planned, abstract algebra) | tensor product, its universal property and right exactness, restriction and extension of scalars, `def-flat-and-faithfully-flat-modules-and-ring-maps` (flat and faithfully flat modules AND ring maps, in one definition), the injection/ideal flatness criteria, projective-implies-flat, and flatness under base change and transitivity |
 | `chain-conditions-and-semisimple-modules` (planned, abstract algebra) | the three reserved definitions, module chain-condition results, length, integral elements, determinant trick |
 | `modules-over-a-pid-and-canonical-forms` (planned) | structure of finitely generated modules over a PID where an example needs it |
 | `algebraic-closure-embeddings-and-separability` (planned) | algebraic closures used in the closed-point form of the Nullstellensatz |
@@ -1042,24 +1042,34 @@ invariants themselves involve no choice.
 
 - **A page id:** `flatness-and-faithful-flatness`
 - **B page id:** `flatness-and-faithful-flatness-examples`
-- **Requires:** CA-1--CA-3 and CA-11; planned `def-flat-module` and the tensor
-  exactness results on `tensor-products-of-modules`; published exact sequences,
-  projectives and localisation.  No Tor item is used.
+- **Requires:** CA-1--CA-3 and CA-11; planned `def-flat-and-faithfully-flat-modules-and-ring-maps`
+  and the tensor exactness results on `tensor-products-of-modules`; published
+  exact sequences, projectives and localisation.  No Tor item is used.
 - **Primary backing:** Altman--Kleiman §9, pp. 50--60, (9.1)--(9.28); Milne
   §11, pp. 43--50, Props. 11.1--11.22.  Independent check: Stacks §§10.39,
   10.78, 10.99; Mustaţă Ch. 10, 10.1--10.19.
 
-**R-1 ownership receipt.** Abstract algebra MOD-3 mints `def-flat-module` and
-the basic module flatness facts. CA-12 cites that id and does not re-mint it;
-this page owns faithful flatness, flatness local criteria and flat descent.
-The Noetherian/Artinian/integrality interfaces remain exactly as scaffolded.
+**R-1 ownership receipt, corrected 2026-08-15 at the `frontier-13` step-4
+splice.** Abstract algebra MOD-3 mints `def-flat-and-faithfully-flat-modules-and-ring-maps` and the basic module flatness
+facts, and the scaffolded definition is **wider than R-1 anticipated**: the one
+item defines flat module, faithfully flat module, flat ring map and faithfully
+flat ring map together. MOD-3 also proves
+`thm-flatness-criteria-by-injections-and-ideals`, `thm-projective-modules-are-flat`,
+`cor-free-modules-are-projective-and-flat`,
+`prop-extension-of-scalars-preserves-flat-modules` and
+`prop-transitivity-of-flatness-under-change-of-rings`. **CA-12 therefore drops
+`def-flat-ring-homomorphism` and `def-faithfully-flat-module-and-ring-map` and
+cites the upstream definition instead**; it owns the flatness local criteria, the
+equational criterion, faithfully-flat descent and the exactness-detection
+theorems. The Noetherian/Artinian/integrality interfaces remain exactly as
+scaffolded.
 
 #### A-page items, in dependency order
 
 | id | kind | statement | provenance and locator |
 |---|---|---|---|
-| `def-flat-ring-homomorphism` | `def` | A ring map R→S is flat when S is flat as an R-module. | L/NA; Altman--Kleiman (9.5); Milne Def. 11.2. |
-| `def-faithfully-flat-module-and-ring-map` | `def` | A flat module is faithfully flat when tensoring with it reflects exactness; a ring map is faithfully flat when its target is so as a module. | L/NA; Altman--Kleiman (9.5); Milne Def. 11.2. |
+| ~~`def-flat-ring-homomorphism`~~ | — | **DROPPED 2026-08-15**: flat ring maps are defined upstream in `def-flat-and-faithfully-flat-modules-and-ring-maps`. Cite it. | — |
+| ~~`def-faithfully-flat-module-and-ring-map`~~ | — | **DROPPED 2026-08-15**: faithful flatness for both modules and ring maps is defined upstream in the same item. Cite it. | — |
 | `thm-sums-summands-base-change-and-composition-of-flat-modules` | `thm` | Direct sums and summands, scalar extension, and composites preserve flatness in the precisely typed forms. | L/A; Altman--Kleiman (9.6), (9.10)--(9.13); Milne Props. 11.3, 11.13. |
 | `thm-localisations-are-flat` | `thm` | Every ring localisation is flat, and localising a flat module preserves flatness. | L/A; Milne Props. 11.14--11.15; CA-2 exact localisation. |
 | `thm-flatness-is-local` | `thm` | A module is flat iff all prime localisations are flat, equivalently all maximal localisations are flat. | L/A; Milne Prop. 11.16; Stacks §10.39. |
@@ -1520,8 +1530,9 @@ foundational optimality claim.
    this scaffold uses its own ideal/local proofs instead.
 2. **Abstract algebra — reserved seams (R-1 applied 2026-08-14).** Preserve the exact ids
    `def-noetherian-module`, `def-artinian-module`, `def-noetherian-ring`, the
-   Artinian-ring definition, `def-flat-module`, integral element and determinant
-   trick promised by `plan-algebra-track-expansion.md`.  The splice must replace
+   Artinian-ring definition, `def-flat-and-faithfully-flat-modules-and-ring-maps`
+   (scaffolded 2026-08-15 in place of the promised `def-flat-module`), integral
+   element and determinant trick promised by `plan-algebra-track-expansion.md`.  The splice must replace
    this scaffold's descriptive references by those stable ids, never mint
    duplicates.
 3. **Topology — APPLIED 2026-08-14.** Place CA-15 after both the general topology foundation and the
@@ -1593,9 +1604,9 @@ numbered range was actually read; no claim of complete §23 coverage is made.
 
 - (9.1)--(9.4), exact/faithfully exact functor tests — **inline** in
   `thm-faithfully-flat-modules-detect-exactness`.
-- (9.5), flat and faithfully flat — `def-flat-module` **planned-published
-  dependency**; faithful part **included** in
-  `def-faithfully-flat-module-and-ring-map`.
+- (9.5), flat and faithfully flat — `def-flat-and-faithfully-flat-modules-and-ring-maps`
+  **planned-published dependency**, which covers the faithful part and the
+  ring-map form as well, so nothing of (9.5) is minted here.
 - (9.6)--(9.13), sums, free/projective examples, polynomial extension,
   tensor/base change, transitivity and tower descent — **included/inline** in
   `thm-sums-summands-base-change-and-composition-of-flat-modules` and the CA-12
@@ -3062,7 +3073,7 @@ as one of the two proof treatments.
 | regular sequence | RG5's working formulation does not always repeat the terminal proper-ideal condition; Vakil and Stacks make the nonunit boundary explicit. | Keep §3's ordered sequence generating a proper ideal.  Unit and zero-module edge cases are stated separately below. |
 | depth | RG6 defines depth via regular sequences and immediately compares Ext; some homological treatments start with the first nonzero Ext. | Define via maximal regular-sequence length; prove the Ext and Koszul characterisations only after their homological prerequisites exist. |
 | zero ring dimension | sources vary between leaving it undefined and assigning \(-\infty\). | Keep §3's explicit codomain-sensitive convention; every dimension theorem below either excludes the zero ring or handles it separately. |
-| flatness ownership | H20 and V25 define flat modules inside commutative algebra, while the commission assigns the basic definition to abstract algebra. | Continue citing `def-flat-module`; this track owns ring-map flatness, faithful flatness, local criteria and descent only. |
+| flatness ownership | H20 and V25 define flat modules inside commutative algebra, while the commission assigns the basic definition to abstract algebra. | Cite `def-flat-and-faithfully-flat-modules-and-ring-maps`; **as scaffolded it also carries ring-map flatness and faithful flatness**, so this track owns the local criteria, the equational criterion and descent only. |
 | \(p\)-adic completion | JM constructs the completed DVR algebraically; the seam ruling assigns the underlying \(p\)-adic group construction to group theory. | Cite the group-theory construction and prove only its agreement with the \((p)\)-adic ring completion here. |
 
 ### 10.4 Added decompositions
@@ -3518,10 +3529,10 @@ citations; it does not mean the statement was generated.
 
 | target | id | kind | focused statement | explicit provenance |
 |---|---|---|---|---|
-| A | `lem-ring-map-flatness-is-target-flatness` | `lem` | A ring map \(A\to B\) is flat exactly when the underlying \(A\)-module \(B\) is flat; this is a track-owned ring-map definition citing `def-flat-module`. | provenance.statement: literature-derived; provenance.proof: not-applicable; rationale: H20 Ch. 7 §1 and V25 §25.1; seam ruling R-1 forbids re-minting basic module flatness. |
+| A | ~~`lem-ring-map-flatness-is-target-flatness`~~ | — | **DROPPED 2026-08-15**: this is the definition of a flat ring map, and `def-flat-and-faithfully-flat-modules-and-ring-maps` already gives it upstream. | — |
 | A | `lem-flat-module-tensor-preserves-monomorphisms` | `lem` | A module is flat iff tensoring with it preserves injectivity of every module monomorphism. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 7 §1 and V25 §25.1; right exactness is inherited, so injectivity is the only additional condition. |
-| A | `cor-free-modules-are-flat` | `cor` | Every free module is flat. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 7 §1; tensor with a direct sum of copies of the ring is a direct sum of the original sequence. |
-| A | `cor-projective-modules-are-flat` | `cor` | Every projective module is flat. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 7 §1; a projective is a direct summand of a free module and flatness passes to summands. |
+| A | ~~`cor-free-modules-are-flat`~~ | — | **DROPPED 2026-08-15**: published upstream as `cor-free-modules-are-projective-and-flat`, with its choice boundary stated. Cite it. | — |
+| A | ~~`cor-projective-modules-are-flat`~~ | — | **DROPPED 2026-08-15**: published upstream as `thm-projective-modules-are-flat`. Cite it. | — |
 | A | `lem-arbitrary-direct-sums-of-flat-modules-are-flat` | `lem` | An arbitrary direct sum of flat modules is flat. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 7 §1 and V25 §25.2; tensor commutes with direct sums and injectivity is coordinatewise. |
 | A | `lem-localisation-flatness-via-ideal-injectivity` | `lem` | For every ideal \(I\), the map \(I\otimes_RS^{-1}R\to S^{-1}R\) identifies with the inclusion \(S^{-1}I\hookrightarrow S^{-1}R\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 7 §1; module-localization exactness and the tensor comparison give the flatness proof. |
 | A | `cor-module-localisation-is-flat-base-change` | `cor` | \(S^{-1}M\cong M\otimes_RS^{-1}R\) is an exact base-change functor. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Chs. 2 and 7; combine the CA-2 comparison with localization flatness. |

@@ -187,23 +187,34 @@ prerequisites and downstream use.
 
 ### NT-1. Primitive roots and the structure of the unit groups modulo \(n\)
 
+*Scaffolded by `frontier-13` batch 2 (2026-08-15) at orders 57.001/57.002, A 28 /
+B 11, no split proposed. The machine scaffold in
+`research/frontier-13-batch-2.pages.json` is the authority for ids, statements and
+dependencies; `research/frontier-13-batch-2.coverage.json` carries the
+heading-by-heading source dispositions and
+`research/frontier-13-batch-2.proof-contracts.json` the per-step citations. The
+tables below are the live item lists; the prose that follows them is the design
+rationale, kept because the proofs still have to discharge it.*
+
 - **A page id:** `primitive-roots-and-unit-groups-modulo-n`
 - **B page id:** `primitive-roots-and-unit-groups-modulo-n-examples`
-- **Requires:** `congruences-and-the-chinese-remainder-theorem`,
-  `cyclic-groups-and-direct-products`,
-  `the-structure-of-finite-abelian-groups`, and
-  `polynomial-rings-and-roots`.  In particular, cite
-  `def-unit-group-modulo-n-and-euler-totient`,
+- **Requires (live, `plan-spec.json`):** `splitting-fields-examples` — one
+  declared edge, whose transitive closure supplies everything the page cites.
+  Part I listed `congruences-and-the-chinese-remainder-theorem`,
+  `cyclic-groups-and-direct-products`, `the-structure-of-finite-abelian-groups`
+  and `polynomial-rings-and-roots` as direct requirements; all four are reached
+  transitively, so the design list was about content rather than about the
+  declared reduction. The items actually cited include
+  `def-unit-group-modulo-n-and-euler-totient`, `thm-unit-criterion-modulo-n`,
   `thm-chinese-remainder-theorem`, `thm-totient-of-a-prime-power`,
-  `cor-euler-totient-is-multiplicative`, `def-order-in-a-group`,
-  `def-exponent-of-a-finite-group`,
-  `cor-order-and-exponent-from-invariant-factors`,
-  `thm-order-of-element-in-direct-product`, and
+  `thm-linear-congruence-solvability-and-solution-count`, `def-order-in-a-group`,
+  `lem-order-characterisation`, `cor-order-of-element-divides-group-order`,
+  `def-exponent-of-a-finite-group`, `thm-z-mod-p-is-a-field` and
   `cor-finite-subgroups-of-units-in-a-domain-are-cyclic`.
 - **Primary backing:** Peter Hackman, *Elementary Number Theory* (2009),
-  Ch. C, §§C.I--C.V, pp. 69--91: “False Cases Excluded,” “Primitive Roots
-  Modulo a Prime,” “Binomial Congruences,” “Prime Powers,” and “The Carmichael
-  Exponent,” especially C.I.1--C.I.6, C.II.1--C.II.2,
+  Ch. C, §§C.I--C.V, pp. 69--91: "False Cases Excluded," "Primitive Roots
+  Modulo a Prime," "Binomial Congruences," "Prime Powers," and "The Carmichael
+  Exponent," especially C.I.1--C.I.6, C.II.1--C.II.2,
   C.III.1--C.III.5, C.IV.1--C.IV.10, and C.V.1--C.V.6.
   William Stein, *Elementary Number Theory: Primes, Congruences, and Secrets*
   (2017), §2.5, pp. 39--49, Def. 2.5.1 through Thm. 2.5.8, independently
@@ -212,29 +223,61 @@ prerequisites and downstream use.
   Gorodnik, *Number Theory*, Lecture 8, §§1--2, pp. 1--6, Defs. 1.1, 1.5;
   Lemmas 1.2--1.4; Thms. 2.1, 2.2, 2.4; Cor. 2.3.
 
+**Three ids in the Part I table are dead and must not be revived:**
+`lem-order-of-power-of-a-primitive-root` became
+`lem-order-of-a-power-in-a-finite-cyclic-group` (it is a statement about any
+finite cyclic group, not about a primitive root), `thm-unit-group-crt-decomposition`
+became `thm-unit-group-chinese-remainder-decomposition`, and
+`thm-unit-group-modulo-n-structure` became
+`thm-structure-of-the-unit-group-modulo-n`.
+
 #### A-page items, in dependency order
 
-| id | kind | statement | provenance and locator |
-|---|---|---|---|
-| `def-primitive-root-modulo-n` | `def` | For \(n\ge1\), a primitive root modulo \(n\) is a class \(g\in(\mathbb Z/n\mathbb Z)^\times\) whose order is \(\varphi(n)\). | L/NA; Hackman C.I.1; Stein Def. 2.5.1; Gorodnik Def. 1.5. |
-| `prop-primitive-root-iff-unit-group-generator` | `prop` | A unit class is a primitive root modulo \(n\) iff it generates \((\mathbb Z/n\mathbb Z)^\times\); hence a primitive root exists iff that unit group is cyclic. | L/A; Hackman C.I.1--C.I.2; Gorodnik Def. 1.5 and the paragraph following it; use the published equality \(|(\mathbb Z/n\mathbb Z)^\times|=\varphi(n)\). |
-| `lem-order-of-power-of-a-primitive-root` | `lem` | If \(g\) is primitive modulo \(n\), then \(g^a\) has order \(\varphi(n)/\gcd(a,\varphi(n))\); in particular it is primitive exactly when \(\gcd(a,\varphi(n))=1\). | L/A; Hackman A.V.17 and C.IV Ex. 2; Gorodnik Lemma 1.3.  Prove the divisibility equivalence directly from the published definition of order. |
-| `cor-unit-group-modulo-prime-is-cyclic` | `cor` | For every prime \(p\), \((\mathbb Z/p\mathbb Z)^\times\) is cyclic of order \(p-1\). | L/A; Stein Thm. 2.5.5; Hackman C.II.1; cite `thm-z-mod-p-is-a-field` and the already-authored `cor-finite-subgroups-of-units-in-a-domain-are-cyclic`. |
-| `cor-primitive-roots-modulo-prime` | `cor` | A primitive root modulo every prime exists, and there are exactly \(\varphi(p-1)\) primitive-root classes. | L/A; Stein Cor. 2.5.6 and Prop. 2.5.7; Gorodnik Thm. 2.1; apply the preceding order-of-a-power lemma to one generator. |
-| `lem-primitive-root-lift-to-prime-square` | `lem` | If \(p\) is odd and \(g\) is primitive modulo \(p\), then at least one of the \(p\) classes \(g+tp\pmod {p^2}\), \(0\le t<p\), is primitive modulo \(p^2\); indeed at most one lift satisfies \((g+tp)^{p-1}\equiv1\pmod {p^2}\). | L/A; Hackman C.IV.6--C.IV.7; Gorodnik Thm. 2.2.  The strengthened “at most one bad lift” is exactly the affine congruence computed in both proofs. |
-| `lem-order-of-one-plus-pu-modulo-prime-powers` | `lem` | If \(p\) is odd, \(p\nmid u\), and \(r\ge1\), then the class of \(1+pu\) modulo \(p^{r+1}\) has order \(p^r\). | L/A; Hackman C.IV.5 and the induction inside C.IV.8; Gorodnik proof of Thm. 2.2.  State the binomial congruence \( (1+p^s u)^p\equiv1+p^{s+1}u\pmod {p^{s+2}}\) as the proof's induction step, not as an unsourced appeal to LTE. |
-| `thm-unit-group-modulo-odd-prime-power-is-cyclic` | `thm` | For odd prime \(p\) and \(k\ge1\), \((\mathbb Z/p^k\mathbb Z)^\times\cong C_{p^{k-1}(p-1)}\); a good lift from the prime-square lemma is primitive for every \(p^k\). | L/A; Hackman C.IV.7--C.IV.10; Gorodnik Thm. 2.2 and summary after Thm. 2.4.  Combine the reduction-mod-\(p\) order \(p-1\) with the preceding \(p\)-power order lemma. |
-| `cor-number-of-primitive-roots-modulo-odd-prime-power` | `cor` | For odd prime \(p\) and \(k\ge1\), there are \(\varphi(\varphi(p^k))=p^{k-2}(p-1)\varphi(p-1)\) primitive roots when \(k\ge2\), and \(\varphi(p-1)\) when \(k=1\). | L/A; Gorodnik Cor. 2.3; Hackman C.IV Exs. 1--2.  Keep the \(k=1\) case separate so no negative exponent appears. |
-| `lem-order-of-five-modulo-two-powers` | `lem` | For \(k\ge3\), \(5\) has order \(2^{k-2}\) modulo \(2^k\). | L/A; Hackman C.III.4 and C.IV.3; Gorodnik Thm. 2.4(ii).  Prove \(v_2(5^{2^r}-1)=r+2\) by the displayed difference-of-squares induction rather than citing an unbuilt lifting-the-exponent lemma. |
-| `thm-unit-group-modulo-two-power-structure` | `thm` | The unit groups modulo \(2\) and \(4\) are \(C_1\) and \(C_2\), and for \(k\ge3\), \((\mathbb Z/2^k\mathbb Z)^\times=\langle-1\rangle\times\langle5\rangle\cong C_2\times C_{2^{k-2}}\). | L/A; Hackman C.I.4, C.III.4, C.IV.3--C.IV.4; Gorodnik Thm. 2.4(ii).  The proof partitions odd classes by their residue modulo \(4\) and proves uniqueness of \((-1)^\epsilon5^j\). |
-| `thm-unit-group-crt-decomposition` | `thm` | If \(m_1,\ldots,m_r\) are pairwise coprime positive integers, the CRT ring isomorphism restricts canonically to a group isomorphism \((\mathbb Z/(m_1\cdots m_r)\mathbb Z)^\times\cong\prod_i(\mathbb Z/m_i\mathbb Z)^\times\). | L/A; Hackman B.I.5 and C.V.4--C.V.5; Gorodnik summary after Thm. 2.4.  Prove that an element of a finite product ring is a unit iff each coordinate is a unit. |
-| `thm-unit-group-modulo-n-structure` | `thm` | For \(n=2^e\prod_{i=1}^r p_i^{a_i}\), with distinct odd \(p_i\), the unit group is the canonical CRT product of \(G_e\) and the cyclic groups \(C_{p_i^{a_i-1}(p_i-1)}\), where \(G_0=G_1=C_1\), \(G_2=C_2\), and \(G_e=C_2\times C_{2^{e-2}}\) for \(e\ge3\). | L/A; Gorodnik, Lecture 8, summary on pp. 5--6; Hackman C.IV.10 and C.V.6.  “Canonical” applies to the CRT factor map; the displayed cyclic-coordinate identifications depend on chosen generators and are stated only up to isomorphism. |
-| `def-carmichael-function` | `def` | Define \(\lambda(n)\) for \(n\ge1\) to be the exponent of the finite group \((\mathbb Z/n\mathbb Z)^\times\); thus \(\lambda(1)=1\). | L/NA; Hackman C.V.3 defines the same integer as maximal element order; Gorodnik, Lecture 8, p. 6.  The library uses the group-exponent formulation and immediately proves equivalence using the published finite-abelian invariant-factor theorem. |
-| `prop-carmichael-function-as-maximal-order` | `prop` | The exponent \(\lambda(n)\) is attained as the order of a unit modulo \(n\), so it equals the maximal multiplicative order and is the least positive \(L\) for which \(a^L\equiv1\pmod n\) for every \(a\) coprime to \(n\). | L/A; Hackman C.II.2 and C.V.2--C.V.3; cite `cor-order-and-exponent-from-invariant-factors`.  This avoids treating “maximum” as self-evident for an arbitrary finite group. |
-| `thm-carmichael-function-formula` | `thm` | For odd \(p\), \(\lambda(p^k)=p^{k-1}(p-1)\); \(\lambda(2)=1\), \(\lambda(4)=2\), and \(\lambda(2^k)=2^{k-2}\) for \(k\ge3\); on a coprime product, \(\lambda(mn)=\operatorname{lcm}(\lambda(m),\lambda(n))\).  Hence the prime-factor formula is the lcm of these local values. | L/A; Hackman C.V.4--C.V.6; Gorodnik, Lecture 8, p. 6.  Read the lcm rule from orders in the CRT direct product. |
-| `cor-carmichael-exponent-theorem` | `cor` | If \(\gcd(a,n)=1\), then \(a^{\lambda(n)}\equiv1\pmod n\), and no smaller positive exponent works simultaneously for every unit class. | L/A; Hackman C.V.3--C.V.6; Gorodnik final paragraph before the aside on p. 6.  This is the exponent definition translated through the published unit criterion. |
-| `thm-classification-of-moduli-with-primitive-roots` | `thm` | A positive integer \(n\) has a primitive root iff \(n\in\{1,2,4\}\), \(n=p^k\), or \(n=2p^k\) for an odd prime \(p\) and \(k\ge1\). | L/A; Hackman C.I.3--C.I.6 and C.IV.10; Gorodnik Thm. 2.4(i).  Necessity uses the \(2\)-power structure and the fact that a product containing two nontrivial even-order factors has no element of full product order. |
-| `cor-number-of-primitive-roots-modulo-n` | `cor` | If \(n\) is one of the classified moduli, it has exactly \(\varphi(\varphi(n))\) primitive-root classes; otherwise it has none. | L/A; Stein Prop. 2.5.7; Hackman C.IV Ex. 2; Gorodnik Cor. 2.3, combined with the classification. |
+| id | kind | statement |
+|---|---|---|
+| `def-primitive-root-modulo-n` | `def` | Primitive roots modulo $n$ |
+| `prop-primitive-root-iff-unit-group-generator` | `prop` | A unit is a primitive root modulo $n$ if and only if it generates $(\mathbb Z/n\mathbb Z)^\times$ |
+| `def-index-of-a-unit-relative-to-a-primitive-root` | `def` | The index $\operatorname{ind}_g(a)$ of a unit relative to a primitive root |
+| `prop-index-calculus-modulo-n` | `prop` | Index calculus: products become sums and powers become scalar multiples modulo $\varphi(n)$ |
+| `lem-order-of-a-power-in-a-finite-cyclic-group` | `lem` | In a cyclic group of order $m$, $g^a$ has order $m/\gcd(a,m)$ |
+| `cor-generators-of-a-finite-cyclic-group` | `cor` | The generators of a cyclic group of order $m$ are the $g^a$ with $\gcd(a,m)=1$, so there are $\varphi(m)$ of them |
+| `lem-direct-product-of-finite-cyclic-groups-is-cyclic-iff-orders-are-coprime` | `lem` | A direct product of two finite cyclic groups is cyclic if and only if their orders are coprime |
+| `cor-unit-group-modulo-prime-is-cyclic` | `cor` | For every prime $p$, the multiplicative group $(\mathbb Z/p\mathbb Z)^\times$ is cyclic |
+| `cor-primitive-roots-modulo-prime` | `cor` | Every prime modulus admits a primitive root |
+| `cor-power-congruence-solution-count-modulo-a-prime` | `cor` | For prime $p$ and $d\ge1$, the congruence $x^d\equiv1\pmod p$ has $\gcd(d,p-1)$ nonzero solutions |
+| `thm-eulers-criterion-for-binomial-congruences` | `thm` | Euler's criterion: if $n$ has a primitive root, $\gcd(a,n)=1$, and $m\ge1$, then $x^m\equiv a\pmod n$ is solvable if and only if $a^{\varphi(n)/\gcd(\varphi(n),m)}\equiv1\pmod n$ |
+| `cor-number-of-solutions-of-a-binomial-congruence` | `cor` | If $n$ has a primitive root, $\gcd(a,n)=1$, $m\ge1$, and $x^m\equiv a\pmod n$ is solvable, then it has exactly $\gcd(\varphi(n),m)$ solution classes modulo $n$ |
+| `lem-primitive-root-lift-to-prime-square` | `lem` | For an odd prime $p$ and a primitive root $g$ modulo $p$, at least one of $g$ and $g+p$ is primitive modulo $p^2$ |
+| `lem-prime-power-binomial-congruence` | `lem` | For odd prime $p$ and $s\ge1$, $(1+p^su)^p\equiv1+p^{s+1}u\pmod {p^{s+2}}$ |
+| `lem-order-of-one-plus-pu-modulo-prime-powers` | `lem` | For odd prime $p$, $p\nmid u$, and $k\ge1$, the class of $1+pu$ has order $p^{k-1}$ modulo $p^k$ |
+| `thm-unit-group-modulo-odd-prime-power-is-cyclic` | `thm` | For every odd prime $p$ and $k\ge1$, $(\mathbb Z/p^k\mathbb Z)^\times$ is cyclic of order $p^{k-1}(p-1)$ |
+| `cor-number-of-primitive-roots-modulo-odd-prime-power` | `cor` | An odd prime power $p^k$ has exactly $\varphi(\varphi(p^k))$ primitive roots |
+| `lem-order-of-five-modulo-two-powers` | `lem` | For $k\ge3$, the class of $5$ has order $2^{k-2}$ modulo $2^k$ |
+| `thm-unit-group-modulo-two-power-structure` | `thm` | For $k\ge3$, $(\mathbb Z/2^k\mathbb Z)^\times\cong C_2\times C_{2^{k-2}}$, generated uniquely as $(-1)^\varepsilon5^j$ |
+| `thm-unit-group-chinese-remainder-decomposition` | `thm` | For pairwise coprime positive moduli, the Chinese remainder bijection restricts to an isomorphism of unit groups |
+| `thm-structure-of-the-unit-group-modulo-n` | `thm` | The unit group modulo $n$ is the product of its odd-prime cyclic factors and its explicit $2$-power factor |
+| `def-carmichael-function` | `def` | Carmichael's function $\lambda(n)$ as the exponent of $(\mathbb Z/n\mathbb Z)^\times$ |
+| `prop-carmichael-function-as-maximal-order` | `prop` | Carmichael's $\lambda(n)$ is the maximum order of a unit modulo $n$ |
+| `thm-carmichael-function-formula` | `thm` | Carmichael's function on prime powers and its least-common-multiple formula |
+| `cor-carmichael-exponent-theorem` | `cor` | If $\gcd(a,n)=1$, then $a^{\lambda(n)}\equiv1\pmod n$ |
+| `lem-primitive-roots-pass-between-odd-n-and-twice-n` | `lem` | For odd $n$, primitive-root existence is equivalent for $n$ and $2n$ |
+| `thm-classification-of-moduli-with-primitive-roots` | `thm` | A positive integer admits a primitive root exactly when it is $1$, $2$, $4$, $p^k$, or $2p^k$ for an odd prime $p$ |
+| `cor-number-of-primitive-roots-modulo-n` | `cor` | A modulus with primitive roots has exactly $\varphi(\varphi(n))$ primitive roots |
+
+The scaffold adds, beyond Part I's list, the **index calculus** thread
+(`def-index-of-a-unit-relative-to-a-primitive-root`,
+`prop-index-calculus-modulo-n`), which is what turns the cyclic structure into a
+computational tool; the two general cyclic-group lemmas
+(`lem-order-of-a-power-in-a-finite-cyclic-group`,
+`cor-generators-of-a-finite-cyclic-group`) and the coprime-order criterion
+`lem-direct-product-of-finite-cyclic-groups-is-cyclic-iff-orders-are-coprime`,
+which is what the classification's necessity half needs; the **binomial
+congruence** thread (`cor-power-congruence-solution-count-modulo-a-prime`,
+`thm-eulers-criterion-for-binomial-congruences`,
+`cor-number-of-solutions-of-a-binomial-congruence`), harvested from Hackman
+C.III; the isolated induction step `lem-prime-power-binomial-congruence`; and
+`lem-primitive-roots-pass-between-odd-n-and-twice-n`, without which the
+classification's \(2p^k\) case is asserted rather than proved.
 
 #### Proof strategy, well-definedness, and boundary obligations
 
@@ -245,8 +288,8 @@ corollary is retained because it is the arithmetic interface used repeatedly
 below.  Enumeration then follows from the explicit order formula for powers of
 one generator.
 
-The prime-power proof exposes the step often suppressed as “a primitive root
-lifts.”  Expanding \((g+tp)^{p-1}\) modulo \(p^2\) gives a nonconstant affine
+The prime-power proof exposes the step often suppressed as "a primitive root
+lifts."  Expanding \((g+tp)^{p-1}\) modulo \(p^2\) gives a nonconstant affine
 function of \(t\pmod p\), so at most one lift is bad.  Once a lift has nontrivial
 \((p-1)\)-st power modulo \(p^2\), the binomial induction on
 \(1+p^su\) supplies exactly one new factor \(p\) in the order at each stage.
@@ -269,6 +312,13 @@ choosing a maximum-order element; attainment is a theorem.  NT-1 is ZF.  Its
 finite selections can be replaced by least standard representatives and use
 neither countable choice nor dependent choice.
 
+`cor-power-congruence-solution-count-modulo-a-prime` sits *before*
+`thm-eulers-criterion-for-binomial-congruences` and is proved independently from
+cyclicity of \((\mathbb Z/p)^\times\).  That is deliberate: it is a stepping stone
+to the general theorem, not a corollary of it, and it is the \(a=1\), \(n=p\)
+instance of `cor-number-of-solutions-of-a-binomial-congruence`, consistent
+because \(\gcd(\varphi(p),d)=\gcd(p-1,d)\).
+
 The aside in Gorodnik on the least primitive root and Artin's primitive-root
 conjecture is not promoted to an item.  The former is an analytic estimate
 conditional on GRH in the cited formulation, and the latter is open in
@@ -277,23 +327,26 @@ non-load-bearing boundary remarks at most.
 
 #### B page
 
-The companion computes primitive roots and invariant factors rather than
-supplying any theory used by A:
+The companion computes primitive roots, indices and invariant factors rather
+than supplying any theory used by A:
 
-| id | kind | task |
+| id | kind | statement |
 |---|---|---|
-| `ex-primitive-roots-modulo-seventeen` | `ex` | Find one primitive root modulo \(17\), list all \(\varphi(16)\) primitive-root classes, and check their orders by the prime divisors of \(16\). |
-| `ex-lifting-a-primitive-root-through-powers-of-five` | `ex` | Start with a primitive root modulo \(5\), identify the unique bad lift modulo \(25\), and follow a good lift through \(5^4\). |
-| `ex-unit-group-modulo-two-hundred-forty` | `ex` | Use \(240=16\cdot3\cdot5\) and CRT to give the complete cyclic-factor decomposition and exponent. |
-| `ex-carmichael-function-of-five-hundred-sixty-one` | `ex` | Compute \(\lambda(561)=80\) and verify the universal Fermat congruence for units without claiming that the unit group is cyclic. |
-| `cex-unit-group-modulo-fifteen-is-not-cyclic` | `cex` | Exhibit the CRT decomposition \(C_2\times C_4\), showing that group order \(8\) does not force an element of order \(8\). |
-| `cex-euler-totient-need-not-be-the-unit-group-exponent` | `cex` | Compare \(\varphi(8)=4\) with \(\lambda(8)=2\), and explain exactly why Euler's exponent is nonminimal. |
-| `ex-moduli-below-twenty-with-primitive-roots` | `ex` | Enumerate the classified moduli below \(20\), then check the predicted count \(\varphi(\varphi(n))\) in each case. |
+| `ex-primitive-roots-modulo-seventeen` | `ex` | The primitive roots modulo $17$ are $3,5,6,7,10,11,12,14$ |
+| `ex-index-table-modulo-seventeen` | `ex` | An index table modulo $17$ turns multiplication into addition modulo $16$ |
+| `ex-primitive-root-modulo-thirteen-by-prime-divisor-tests` | `ex` | $2$ is a primitive root modulo $13$ by testing the prime divisors of $12$ |
+| `ex-lifting-a-primitive-root-through-powers-of-five` | `ex` | $2$ is primitive modulo every power of $5$ |
+| `ex-unit-group-modulo-two-hundred-forty` | `ex` | The unit group modulo $240$ decomposes as $C_2^2\times C_4^2$ |
+| `ex-carmichael-function-of-five-hundred-sixty-one` | `ex` | $\lambda(561)=80$ and every integer coprime to $561$ has eightieth power congruent to one |
+| `ex-carmichael-function-of-one-thousand-seven-hundred-twenty-nine` | `ex` | $\lambda(1729)=36$ although $\varphi(1729)=1296$ |
+| `cex-unit-group-modulo-fifteen-is-not-cyclic` | `cex` | $(\mathbb Z/15\mathbb Z)^\times$ has order $8$ but is not cyclic |
+| `cex-euler-totient-need-not-be-the-unit-group-exponent` | `cex` | $\varphi(8)=4$ but every unit modulo $8$ has square one |
+| `ex-square-roots-of-one-modulo-one-hundred-twenty-eight` | `ex` | The four square roots of one modulo $128$ are $1,63,65,127$ |
+| `ex-moduli-below-twenty-with-primitive-roots` | `ex` | The positive moduli below $20$ admitting primitive roots are $1,2,3,4,5,6,7,9,10,11,13,14,17,18,19$ |
 
 Do not duplicate the already-published
 `ex-unit-group-modulo-one-hundred-decomposition` or
-`ex-units-modulo-eight-are-not-cyclic`; link them from the B-page summary as
-prior examples.
+`ex-units-modulo-eight-are-not-cyclic`.
 
 ### NT-2. Quadratic residues, the Legendre symbol, and Gauss's lemma
 

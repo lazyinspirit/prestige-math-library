@@ -3566,7 +3566,7 @@ commitment; `validate-plan.mjs` warns above 30. Every A page has an
 | 22/23 | `inclusion-exclusion-and-the-pigeonhole-principle` | Inclusion–Exclusion, the Pigeonhole Principle and Double Counting | combinatorics | 20 / 14 |
 | 173/174 | `chains-antichains-sperner-and-dilworth` | Chains, Antichains, Sperner and Dilworth | combinatorics | 22 / 13 |
 | 175/176 | `formal-power-series` | Formal Power Series | combinatorics | 24 / 12 |
-| 177/178 | `linear-recurrences-and-rational-generating-functions` | Linear Recurrences and Rational Generating Functions | combinatorics | 18 / 12 |
+| 195/196 | `linear-recurrences-and-rational-generating-functions` | Linear Recurrences and Rational Generating Functions | combinatorics | 32 / 15 — **scaffolded, `frontier-13` batch 7** |
 | 179/180 | `lattice-paths-and-catalan-numbers` | Lattice Paths and Catalan Numbers | combinatorics | 19 / 12 |
 | 181/182 | `set-partitions-stirling-numbers-and-exponential-generating-functions` | Set Partitions, Stirling Numbers and Exponential Generating Functions | combinatorics | 21 / 13 |
 | 183/184 | `integer-partitions-and-the-twelvefold-way` | Integer Partitions and the Twelvefold Way | combinatorics | 22 / 15 |
@@ -3894,9 +3894,9 @@ no choice principle beyond ZF.
 | order | A page | B page | rigorous future scope |
 |---|---|---|---|
 | 393/394 | induced-subgraphs-and-hereditary-graph-classes | induced-subgraphs-and-hereditary-graph-classes-examples | Injective induced embeddings and the injection count ind_H(G); H-free and family-free graphs; isomorphism-closed hereditary graph classes and their unique possibly infinite minimal forbidden induced-subgraph bases; complementation; clique and stable-set numbers; connected/anticonnected components; and complete, anticomplete, pure and mixed disjoint vertex-set pairs. |
-| 395/396 | erdos-hajnal-property-and-homogeneous-sets | erdos-hajnal-property-and-homogeneous-sets-examples | EH constants, the conjecture, complement invariance, monotonicity and family/single-graph formulations. |
+| 395/396 | erdos-hajnal-property-and-homogeneous-sets | erdos-hajnal-property-and-homogeneous-sets-examples | Homogeneous sets and $\operatorname{hom}(G)$; EH exponents and their downward closure; the Erdős–Hajnal conjecture; complement, subclass and forbidden-pattern monotonicity; equivalence of the universally quantified single-pattern and finite-family formulations; the explicit $\tfrac12\log_2 n$ Ramsey baseline; and a first-moment $G(n,1/2)$ construction proving that the class of all graphs admits no positive-power bound. |
 | 397/398 | modules-substitution-and-prime-graphs | modules-substitution-and-prime-graphs-examples | Modules, prime graphs, substitution and the Alon–Pach–Solymosi theorem (1.4). |
-| 399/400 | regular-pairs-and-induced-counting | regular-pairs-and-induced-counting-examples | Density, regularity, energy increment, slicing, induced counting and induced removal. |
+| 399/400 | regular-pairs-and-induced-counting | regular-pairs-and-induced-counting-examples | Edge density; regular pairs, slicing, robustness and typical degrees; regular partitions and the energy-increment proof of Szemerédi regularity with an explicit tower recurrence; self-regular subsets; triangle, graph and induced counting; ordinary removal; strong regularity and energy approximation with wowzer growth; representative subsets regular also with themselves; and a full proof of fixed-pattern induced removal. |
 | 401/402 | sparse-restricted-subgraphs-and-rodl-nikiforov | sparse-restricted-subgraphs-and-rodl-nikiforov-examples | c-sparse/restricted sets and full Rödl/Nikiforov theorems (1.1–1.2). |
 | 403/404 | classical-and-loglog-erdos-hajnal-bounds | classical-and-loglog-erdos-hajnal-bounds-examples | The classical and log-log general EH lower bounds quoted in the introduction. |
 | 405/406 | polynomial-rodl-and-viral-equivalence | polynomial-rodl-and-viral-equivalence-examples | Polynomial Rödl, viral properties and Bucić–Fox–Pham equivalence (1.3). |
@@ -4614,12 +4614,17 @@ Forward references: NONE.
 
 ## CB-5 (ENRICHED). Linear Recurrences, Rational Generating Functions and the Transfer-Matrix Method
 
-**Anchor:** `linear-recurrences-and-rational-generating-functions` (planned,
-unauthored). Retitled to name the transfer-matrix method, which the 2026-07-28
-inventory did not carry.
-`requires`: `formal-power-series`, CB-15,
+**Anchor:** `linear-recurrences-and-rational-generating-functions`, scaffolded by
+`frontier-13` batch 7 (2026-08-15) at orders 195/196, A 32 / B 15, no split
+proposed, and unauthored. Retitled to name the transfer-matrix method, which the
+2026-07-28 inventory did not carry.
+`requires` (live in `plan-spec.json`): `formal-power-series`,
 `eigenvalues-eigenvectors-and-the-characteristic-polynomial`, `splitting-fields`,
-`determinants-of-matrices-over-a-commutative-ring`.
+`the-field-of-fractions-and-localisation` — the last added as `frontier-13` R7.1,
+for `cor-rational-function-field-as-a-fraction-field`, which is what lets a
+rational series be *defined* rather than gestured at. CB-15 and
+`determinants-of-matrices-over-a-commutative-ring` are reached transitively and
+are not declared directly.
 
 Kept from §11: the recurrence $\iff$ rational GF equivalence, partial fractions
 over a splitting field, the closed form with polynomial factors at repeated
@@ -4635,10 +4640,14 @@ invertible in $M_p(R[[x]])$ because $xA$ has positive order, so no spectral
 radius and no convergence hypothesis appears (harvest §E2(7)). **This is the
 theorem that makes "count the walks / count the words avoiding a pattern /
 count the tilings" a theorem rather than a technique**, and it is the single
-largest addition to this page. It needs the cofactor/adjugate machinery, which
-the determinant page does not have (§19.2 F2) — the page mints it, or cites
-GT-7a's if the orchestrator orders them the other way; **decide once, and record
-the decision in the batch notes.** Also added: the transfer-matrix count of
+largest addition to this page. It needs the cofactor/adjugate machinery, and
+**that question is settled: the machinery is already published and this page
+cites it** (`frontier-13` D7.1, 2026-08-15). `thm-laplace-cofactor-expansion`,
+`def-matrix-minors-cofactors-and-adjugate`,
+`thm-adjugate-identity-over-a-commutative-ring` and `cor-inverse-matrix-by-adjugate`
+are homed on `the-determinant-of-a-linear-operator`, which is inside the live
+closure; §19.2 F2's claim that the determinant page does not have them is stale,
+and nothing is minted here. Also added: the transfer-matrix count of
 binary words avoiding a fixed factor, the Fibonacci tiling model as its smallest
 instance, and the **Hadamard product** of rational series is rational.
 

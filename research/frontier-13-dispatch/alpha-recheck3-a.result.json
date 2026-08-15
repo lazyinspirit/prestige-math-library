@@ -1,0 +1,17 @@
+{
+  "role": "alpha",
+  "label": "recheck3-a",
+  "run": "frontier-13",
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-15T00:34:52.138Z",
+  "ended_at": "2026-08-15T00:40:41.275Z",
+  "ms": 349137,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/frontier-13-dispatch/alpha-recheck3-a.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/frontier-13-dispatch/alpha-recheck3-a.prompt.md",
+  "tail": "# Group A round 3 — 57.001 is `ready-for-splice`\n\nReport at `research/frontier-13-alpha-a-recheck3.md`. I wrote `-recheck3.md` rather than the header's `-recheck2.md`, which would have overwritten the round-2 baseline this round is measured against.\n\nAll five dispatch points clear, verified from disk:\n\n1. **Present and positioned** — position 12, immediately after `thm-eulers-criterion-for-binomial-congruences`; page at **28** items.\n2. **Statement is right, and true** — the $\\gcd(\\varphi(n),m)$ count under the criterion's three hypotheses plus solvability (correct antecedent; without it the count is 0). I brute-forced it: **18,895 solvable instances across every modulus below 120 with a primitive root, $m=1..14$, every unit $a$ — zero counterexamples**, including the $n=1$, $n=2$, $m=1$ boundaries the contract claims to discharge.\n3. **Deps: exactly the four**, all three in-pair ones strictly earlier (positions 11, 4, 3). No new published dependency — the linear-congruence theorem was already declared by the theorem above it. `requires` is byte-identical in the batch file and `plan-spec.json`. My own closure audit of the whole batch: 77 items, 257 edges, **0 unresolved, 0 cross-pair, 0 order violations, 0 duplicate ids**.\n4. **The obligations moved with it** — this is the shape that failed three times, and it held. Contract with all three numbered steps covered exactly once (0 input-map problems across all 67 contracts); all four citations quote propositions, and L4 keeps the *count* clause, which is the half a clause-opening quote would have dropped. Notably **step 2.1 proves every solution is a unit** before parametrising — the one obligation this proof could have silently lost. Provenance on both axes with a notes rationale. The C.III.1 coverage row now names both results.\n5. **Inversion resolved** — the prime-modulus count is now the $a=1$, $n=p$ instance of the general one; verified consistent.\n\n**Nothing else regressed.** Every delta is exactly the arithmetic of one item with four citations: contracts 66→67, citations 229→233, published-target quotes 136/136→**137/137** all matching disk, coverage headings unchanged at 100 (row extended, not added), gates 0/0. Had the pass touched a second item those totals would have moved off `229+4` and `136+1`.\n\nTwo things the splice should know, neither blocking:\n\n- **`items` is a non-schema key.** `coverage-checklist.mjs:122` reads only `result.item` — the second id is carried but never gate-validated. Worth settling at step 6 whether `items` becomes schema or the convention becomes one row per result.\n- **`notes.md:296` is superseded, not wrong.** The earlier dated entry still says C.III.1 yields the theorem alone; the later entry corrects it. Append-only dated log, so it's history — but a step-6 reader grepping C.III.1 hits the stale line first.\n\nGroup A has no open items: **57.001, 58, 96, 68, 106 all `ready-for-splice`.** No blocker."
+}

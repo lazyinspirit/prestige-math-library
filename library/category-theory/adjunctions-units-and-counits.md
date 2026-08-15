@@ -1,0 +1,61 @@
+---
+page: adjunctions-units-and-counits
+title: "Adjunctions Units and Counits"
+status: draft
+items: [def-adjunction-by-unit-counit-and-triangle-identities,
+        rem-why-this-library-takes-unit-counit-as-the-definition,
+        prop-an-adjoint-equivalence-is-an-adjunction-with-invertible-unit-and-counit,
+        def-adjunct-and-transposition-under-an-adjunction,
+        lem-adjunct-formulas-are-mutually-inverse,
+        thm-the-adjunction-hom-set-bijection-under-local-smallness,
+        thm-naturality-of-the-adjunction-bijection-is-transposition-of-squares,
+        thm-unit-components-are-initial-in-their-comma-categories,
+        thm-equivalent-encodings-of-an-adjunction,
+        thm-a-left-adjoint-exists-exactly-when-every-comma-category-has-an-initial-object,
+        thm-objectwise-universal-arrows-assemble-into-a-left-adjoint,
+        thm-a-pointwise-right-adjoint-extends-uniquely-to-a-functor,
+        rem-the-choice-behind-assembling-an-adjoint,
+        thm-adjoints-are-unique-up-to-unique-natural-isomorphism,
+        thm-adjunctions-compose,
+        prop-an-adjunction-induces-adjunctions-on-functor-categories,
+        thm-mates-under-a-pair-of-adjunctions,
+        rem-conjugates-preserve-isomorphisms-but-arbitrary-mates-need-not,
+        prop-an-adjunction-restricts-to-an-equivalence-on-its-fixed-subcategories,
+        thm-fullness-and-faithfulness-of-a-right-adjoint-read-off-the-counit,
+        def-adjoint-triple,
+        prop-an-adjoint-triple-induces-adjunctions-between-its-endofunctors,
+        def-mutually-left-and-mutually-right-adjoint-contravariant-functors,
+        def-galois-connection,
+        cor-a-galois-connection-satisfies-fgf-equals-f-and-gfg-equals-g,
+        prop-in-a-poset-adjunction-the-triangle-identities-are-automatic,
+        thm-right-adjoints-preserve-limits,
+        cor-left-adjoints-preserve-colimits,
+        rem-rapl-carries-no-size-hypothesis,
+        thm-representable-second-proof-of-rapl-under-local-smallness,
+        def-left-exact-and-right-exact-functor,
+        cor-a-right-adjoint-is-left-exact-and-a-left-adjoint-is-right-exact,
+        cor-right-adjoints-preserve-monomorphisms-and-left-adjoints-preserve-epimorphisms,
+        thm-limits-and-colimits-are-adjoint-to-the-diagonal-functor,
+        thm-direct-image-and-preimage-form-an-adjoint-triple-on-power-sets,
+        rem-the-image-preimage-adjunctions-explain-the-published-preservation-laws,
+        thm-the-free-group-functor-is-left-adjoint-to-the-underlying-set-functor,
+        thm-the-free-module-functor-is-left-adjoint-to-the-underlying-set-functor,
+        lem-words-satisfy-the-free-monoid-universal-property,
+        thm-the-free-monoid-functor-is-left-adjoint-to-the-underlying-set-functor,
+        thm-abelianisation-is-left-adjoint-to-the-inclusion-of-abelian-groups,
+        thm-the-discrete-and-indiscrete-topologies-form-an-adjoint-triple-over-set,
+        thm-stone-cech-is-left-adjoint-to-the-inclusion-of-compact-hausdorff-spaces,
+        prop-the-underlying-set-functor-on-fields-has-no-left-adjoint,
+        lem-coextension-of-scalars-carries-a-module-structure,
+        thm-coextension-of-scalars-is-right-adjoint-to-restriction-of-scalars,
+        thm-currying-is-an-adjunction-in-set,
+        fs-a-unit-and-counit-determine-an-adjunction-without-the-triangle-identities,
+        fs-left-adjoints-preserve-limits,
+        fs-every-functor-with-a-left-adjoint-also-has-a-right-adjoint,
+        fs-the-hom-set-form-of-an-adjunction-needs-no-size-hypothesis]
+examples: []
+---
+
+Categories, functors and natural transformations are published, together with whiskering and horizontal composition, the interchange law, functor categories, comma categories, the small / locally small / large distinction, full, faithful and essentially surjective functors, equivalences and adjoint equivalences, and the duality principle. Universal arrows are known to be initial or terminal in the appropriate comma category; hom functors and the hom bifunctor are defined; representable functors and representations are available; and the Yoneda lemma is natural in both variables. Limits and colimits of diagrams, preservation and creation, limit–colimit duality, and the theorem that representable functors preserve small limits complete the categorical background, while free groups, abelianisation, the universal property of free modules and the Stone–Čech compactification supply concrete material.
+
+An adjunction is defined here by functors, a unit, a counit and the two triangle identities, a formulation that stays meaningful without local smallness; transposition recovers the natural hom-set bijection when the hom-classes are sets, and universal arrows and initial comma objects give equivalent encodings, with the choice used to assemble objectwise universal objects into a functor made explicit. Uniqueness, composition, induced adjunctions on functor categories, mates, fixed subcategories, full-faithfulness read off the counit, adjoint triples and Galois connections follow. The unit–counit proof that right adjoints preserve limits carries no size hypothesis, and a representable proof is kept separate and locally small. Exactness consequences and the diagonal-functor adjunctions come next, and the page ends with image and preimage, free groups, free modules, free monoids, abelianisation, the discrete and indiscrete topologies, Stone–Čech, coextension of scalars and currying.

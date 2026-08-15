@@ -1,0 +1,413 @@
+# Proof-refuter brief for run `frontier-13` (step 6)
+
+> **NO PERMISSION PROMPTS OF ANY KIND (owner, 2026-07-30; broadened 2026-08-11)
+> — binding on you.** The owner's wording: *"Do not ask and do not let any agents
+> ask for shell command permissions, edit permissions, web search permissions,
+> git permissions, or any permissions whatsoever."* It binds a **compound command
+> as a whole — no segment of an `&&` chain may raise a prompt either.** Use
+> command forms already allowed inside your sandbox and choose non-escalated
+> forms. Web search is part of your job and you never ask before searching. If an
+> indispensable operation has no escalation-free form, **record a blocker in your
+> report** — that is the escape hatch, never a prompt.
+
+You are a **read-only proof-refuter on run `frontier-13`**, GPT 5.6 Sol. Your
+process is `--sandbox read-only`: you *cannot* write, and that is deliberate.
+**You never write content and never apply a fix.** Alpha adjudicates every
+finding from disk. Your job is evidence, not a verdict.
+
+Your assignment is in the "This dispatch" section appended below.
+
+## Your standard is the step-7 judges' standard
+
+You are held to the same skeptical, adversarial standard as the paired DeepSeek
+V4 Pro and GPT 5.6 Terra judges who read this text at step 7. Report **only**:
+
+- a concrete **false claim** — the Statement, a witness, or a computed value is
+  actually wrong, and you can say why;
+- an **unlicensed inference** — a proof step that does not follow from the
+  facts, hypotheses and earlier steps it cites;
+- a **missing hypothesis** — characteristic, ordering, nonnegativity,
+  nonemptiness, smallness, connectedness, finiteness, or a choice principle the
+  proof silently uses;
+- an **inaccurate citation** — a `[F#]`/`[A#]`/`[L#]` fact that does not state
+  what the cited item states, with a changed domain, quantifier, hypothesis,
+  direction or conclusion, or an invented converse.
+
+**Open the cited item on disk before alleging a dependency is too weak.** Every
+dependency is a real file at `items/<id>.md`. A restatement that inflates a
+dependency to carry more weight than it has is a defect; a terse but licensed
+routine move is not.
+
+## What is NOT a finding
+
+A logical gap a competent human reader closes in **30 seconds** is nonfatal
+(owner, 2026-07-31). Say so and move on; do not open a fatal repair cycle on it.
+Style preferences, alternative proofs you prefer, "could be deeper", and missing
+generality that the page deliberately scoped away are not findings.
+
+One scope note for this run: the pages under review sit in linear algebra
+(minimal polynomial, diagonalisation, inner product spaces) and in combinatorics
+(linear recurrences, generating functions, transfer matrices). Where a proof is
+deliberately stated over a commutative ring rather than a field, or over a formal
+power series ring rather than an analytic one, that is the page's scope and not a
+gap.
+
+## Titles and Statements
+
+A **title or Statement asserting more than the proof delivers is fatal.** The
+step-7 judges read Statements and cannot see a false title. Check the title
+against what was actually proved, every time.
+
+## Provenance is part of your check
+
+Every mathematical-content item carries `provenance.statement` and
+`provenance.proof`. An **`ai-generated` Statement or Construction may never be a
+dependency target** — if you find one in another item's `deps`, that is a
+finding. For an `ai-generated` statement, witness or refutation anywhere in your
+assignment, **actively search for a counterexample** when you have concrete
+doubt; a plausible repaired proof is not evidence the Statement is true.
+
+## Your output
+
+You are read-only and cannot write a file. **Put your complete report in your
+final message**, structured per finding:
+
+- the item id and the exact location (Statement, a numbered proof step, a `[F#]`
+  fact, the Remark, or page prose);
+- what is wrong;
+- the evidence — quote the dependency text from disk, or give the counterexample;
+- your severity call: **fatal** or **nonfatal**.
+
+Put fatal findings first. Finish with a plain statement of coverage: which items
+you read fully, which you sampled, and anything you could not check.
+
+If you find nothing fatal, say so plainly. "No defect found in these N items,
+here is what I checked" is a valuable and expected result — do not manufacture a
+finding to justify the dispatch.
+
+
+---
+
+# This dispatch
+
+## This dispatch — cross-level citation refutation, cluster `xl-h`
+
+You are checking **cross-level citations**: facts in this run's draft items
+that cite items already **published** in the library. Step 6b found this run's
+dominant defect class *within* batches — an `[F#]`/`[L#]` restatement claiming
+more than the cited item's Statement says (an enlarged domain, a dropped
+`n\ge1`, a citation pointing at an item that does not state the claimed fact at
+all). The cross-level surface below has had no equivalent pass.
+
+Your cluster is **37 published target items** carrying
+**81 load-bearing citation edges**.
+
+### Method — the target is read once, the restatements are checked against it
+
+For each published target below:
+
+1. Open `items/<target>.md` and read its **Statement** (or Definition /
+   Construction) verbatim. This is ground truth. Note its exact domain,
+   hypotheses, quantifiers, direction and conclusion.
+2. For each citing item listed under it, open `items/<citing-item>.md`, find the
+   named `[F#]`/`[A#]`/`[L#]` fact, and compare its prose against the Statement
+   you just read.
+3. Then read the **numbered steps that use that fact** (listed for you) and ask
+   the load-bearing question: *does the FAITHFUL version of this dependency
+   license this step?* A restatement can be inaccurate but harmless, or
+   accurate but applied outside its domain. Report which.
+
+Report a finding only when you can name the exact clause of the cited Statement
+and the exact clause of the restatement that differ, and say whether a step
+depends on the difference. **A restatement that is a faithful shortening is not
+a finding** — the house rule asks for the smallest faithful shortening, not the
+whole Statement. Do not report a missing clause the citing step never uses,
+unless the restatement positively asserts something false.
+
+### Your cluster
+
+#### target: `def-polynomials-that-split-and-splitting-fields`  (definition, 12 citations)
+
+- `cor-vietas-formulas-for-a-split-monic-polynomial` **L2** — used at step(s) 1.1
+  - restatement on disk: A polynomial splits over an extension when it is a product of linear factors there, with roots listed with multiplicity ([[def-polynomials-that-split-and-splitting-fields]]).
+- `thm-discriminant-root-formula-and-repeated-root-criterion` **L2** — used at step(s) 1.1, 3.1
+  - restatement on disk: A splitting field presents $f$ as a product of linear factors with roots counted according to multiplicity ([[def-polynomials-that-split-and-splitting-fields]]).
+- `thm-monic-resultant-as-a-double-root-product` **L2** — used at step(s) 1.1, 3.1
+  - restatement on disk: A split monic polynomial $g$ has the factorization $g(t)=\prod_j(t-\beta_j)$ with roots counted with multiplicity ([[def-polynomials-that-split-and-splitting-fields]]).
+- `thm-existence-of-finite-fields` **L4** — used at step(s) 2.1
+  - restatement on disk: A splitting field is generated over the base by all roots of the polynomial ([[def-polynomials-that-split-and-splitting-fields]]).
+- `prop-finite-fields-are-splitting-fields-of-x-q-minus-x` **L3** — used at step(s) 3.1
+  - restatement on disk: A splitting field is generated over the base by all roots of the polynomial ([[def-polynomials-that-split-and-splitting-fields]]).
+- `thm-diagonalisable-iff-characteristic-polynomial-splits-and-multiplicities-agree` **L4** — used at step(s) 1.1, 1.2, 3.1
+  - restatement on disk: A split polynomial is a product of linear factors, with repetitions allowed ([[def-polynomials-that-split-and-splitting-fields]]).
+- `cor-distinct-characteristic-roots-imply-diagonalisability` **L3** — used at step(s) 1.1
+  - restatement on disk: Splitting means factorisation into linear factors over the stated field, with repetitions allowed ([[def-polynomials-that-split-and-splitting-fields]]).
+- `thm-invariant-restrictions-of-diagonalisable-endomorphisms-are-diagonalisable` **L3** — used at step(s) 1.1
+  - restatement on disk: A polynomial splits over $F$ when it factors into linear factors over $F$ ([[def-polynomials-that-split-and-splitting-fields]]).
+- `fs-a-split-minimal-polynomial-always-gives-diagonalisability` **L2** — used at step(s) 1.1
+  - restatement on disk: Splitting permits repeated linear factors ([[def-polynomials-that-split-and-splitting-fields]]).
+- `lem-partial-fractions-for-a-split-recurrence-denominator` **L3** — used at step(s) 1.1
+  - restatement on disk: Splitting permits a factorisation into linear factors with repetitions recording multiplicity ([[def-polynomials-that-split-and-splitting-fields]]).
+- `thm-closed-form-for-a-linear-recurrence-over-a-splitting-field` **L5** — used at step(s) 1.1
+  - restatement on disk: A splitting field is generated by the roots over the base field, and repeated factors record their multiplicities ([[def-polynomials-that-split-and-splitting-fields]]).
+- `cor-generalised-eigenspace-decomposition-for-a-split-minimal-polynomial` **L1** — used at step(s) 1.1
+  - restatement on disk: A nonzero polynomial splits over $F$ when it is a product of linear factors in $F[x]$, with repetitions allowed ([[def-polynomials-that-split-and-splitting-fields]]).
+
+#### target: `thm-induction-principle`  (theorem, 6 citations)
+
+- `lem-primitive-root-lift-to-prime-square` **L6** — used at step(s) 1.2
+  - restatement on disk: Mathematical induction holds on $\mathbb N$ ([[thm-induction-principle]]).
+- `lem-prime-power-binomial-congruence` **L5** — used at step(s) 1.1
+  - restatement on disk: Mathematical induction holds on $\mathbb N$ ([[thm-induction-principle]]).
+- `lem-order-of-one-plus-pu-modulo-prime-powers` **L5** — used at step(s) 2.1
+  - restatement on disk: Mathematical induction holds on $\mathbb N$ ([[thm-induction-principle]]).
+- `lem-order-of-five-modulo-two-powers` **L4** — used at step(s) 2.1
+  - restatement on disk: Mathematical induction holds on $\mathbb N$ ([[thm-induction-principle]]).
+- `lem-words-satisfy-the-free-monoid-universal-property` **F8** — used at step(s) 2.2, 3.1
+  - restatement on disk: If a property holds at $0$ and passes from $n$ to $n+1$, it holds for every natural number ([[thm-induction-principle]]).
+- `ex-the-free-category-on-a-quiver` **F2** — used at step(s) 3.1
+  - restatement on disk: If a property holds at $0$ and passes from $n$ to $n+1$, then it holds for every natural number ([[thm-induction-principle]]).
+
+#### target: `thm-totient-of-a-prime-power`  (theorem, 5 citations)
+
+- `lem-primitive-root-lift-to-prime-square` **L2** — used at step(s) 1.1
+  - restatement on disk: The order of an element of a finite group divides the group order ([[cor-order-of-element-divides-group-order]]), and $\varphi(p^2)=p(p-1)$ ([[thm-totient-of-a-prime-power]]).
+- `thm-unit-group-modulo-odd-prime-power-is-cyclic` **L3** — used at step(s) 3.1, 4.1
+  - restatement on disk: $\varphi(p^k)=p^{k-1}(p-1)$ ([[thm-totient-of-a-prime-power]]).
+- `thm-unit-group-modulo-two-power-structure` **L2** — used at step(s) 3.1
+  - restatement on disk: $\varphi(2^k)=2^{k-1}$ ([[thm-totient-of-a-prime-power]]).
+- `thm-structure-of-the-unit-group-modulo-n` **L5** — used at step(s) 2.2
+  - restatement on disk: $\varphi(2)=1$ and $\varphi(4)=2$ by the prime-power formula ([[thm-totient-of-a-prime-power]]).
+- `ex-lifting-a-primitive-root-through-powers-of-five` **L4** — used at step(s) 1.1, 2.1
+  - restatement on disk: $\varphi(5^k)=4\cdot5^{k-1}$ ([[thm-totient-of-a-prime-power]]).
+
+#### target: `thm-of-square-roots`  (theorem, 4 citations)
+
+- `ex-degree-of-q-sqrt-two` **L3** — used at step(s) 1.1
+  - restatement on disk: Every nonnegative real has a unique nonnegative square root ([[thm-of-square-roots]]).
+- `ex-q-sqrt-two-sqrt-three-and-a-primitive-generator` **L4** — used at step(s) 1.1
+  - restatement on disk: Positive square roots exist uniquely in $\mathbb R$ ([[thm-of-square-roots]]).
+- `thm-p3-free-graphs-have-square-root-homogeneous-sets` **L8** — used at step(s) 1.1, 4.1
+  - restatement on disk: Every nonnegative real $a$ has a unique nonnegative square root $\sqrt a$ ([[thm-of-square-roots]]), and $a^{1/2}$ agrees with the rational-power square root, including at $a=0$ ([[thm-real-power-agrees-with-rational-exponent]]).
+- `thm-quadratic-tower-characterization-of-algebraic-constructibility` **L3** — used at step(s) 1.1, 3.1
+  - restatement on disk: Every positive real element has a unique positive square root ([[thm-of-square-roots]]).
+
+#### target: `thm-bezout-identity-for-polynomials`  (theorem, 4 citations)
+
+- `cor-primary-projections-are-polynomials-in-the-endomorphism` **L2** — used at step(s) 1.1
+  - restatement on disk: Coprime polynomials satisfy a Bézout identity ([[thm-bezout-identity-for-polynomials]]).
+- `cor-generalised-eigenspace-decomposition-for-a-split-minimal-polynomial` **L3** — used at step(s) 2.1
+  - restatement on disk: Coprime polynomials satisfy a Bézout identity ([[thm-bezout-identity-for-polynomials]]).
+- `lem-partial-fractions-for-a-split-recurrence-denominator` **L2** — used at step(s) 1.1, 2.1, 4.1
+  - restatement on disk: Coprime polynomials $f,g$ over a field admit $A,B$ with $Af+Bg=1$ ([[thm-bezout-identity-for-polynomials]]).
+- `lem-coprime-kernel-decomposition` **L1** — used at step(s) 1.1
+  - restatement on disk: If $\gcd(f,g)=1$, Bézout's identity supplies $a,b\in F[x]$ with $af+bg=1$ ([[thm-bezout-identity-for-polynomials]], [[def-monic-greatest-common-divisor-of-polynomials]]).
+
+#### target: `def-group-action`  (definition, 3 citations)
+
+- `ex-frobenius-reciprocity-for-group-representations` **F1** — used at step(s) 2.1, 2.2, 3.1, 3.2
+  - restatement on disk: A left group action satisfies $e\cdot x=x$ and $(gh)\cdot x=g\cdot(h\cdot x)$ ([[def-group-action]]).
+- `prop-holomorph-as-a-permutation-group` **L2** — used at step(s) 1.2, 2.1
+  - restatement on disk: A group action is a rule satisfying the identity and compatibility laws, and it is faithful when only the identity acts trivially ([[def-group-action]]).
+- `prop-holomorph-recognises-regular-normal-subgroups` **L1** — used at step(s) 1.1, 1.2
+  - restatement on disk: A transitive action carries any chosen point to any other point ([[def-group-action]]), and in a free action only the identity fixes a point ([[def-free-group-action]]). Hence a free transitive action carries any point to any other by a unique group element.
+
+#### target: `thm-classification-of-cyclic-groups`  (theorem, 3 citations)
+
+- `thm-automorphisms-of-a-finite-cyclic-group` **L1** — used at step(s) 1.1
+  - restatement on disk: A cyclic group whose generator has finite order $n$ is isomorphic to $(\mathbb Z/n,+)$ ([[thm-classification-of-cyclic-groups]]).
+- `thm-classification-of-groups-of-order-pq` **L8** — used at step(s) 4.1
+  - restatement on disk: Finite cyclic groups are determined up to isomorphism by their order ([[thm-classification-of-cyclic-groups]]).
+- `fs-kernel-and-quotient-determine-a-group-extension` **L3** — used at step(s) 1.1
+  - restatement on disk: Finite cyclic groups are classified by their order ([[thm-classification-of-cyclic-groups]]).
+
+#### target: `thm-spectrum-is-the-root-set-of-the-characteristic-polynomial`  (theorem, 3 citations)
+
+- `thm-roots-of-the-minimal-polynomial-are-eigenvalues-over-extension-fields` **L3** — used at step(s) 1.2
+  - restatement on disk: Over any field, a scalar is an eigenvalue exactly when it is a root of the characteristic polynomial ([[thm-spectrum-is-the-root-set-of-the-characteristic-polynomial]]).
+- `thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors` **L4** — used at step(s) 1.2
+  - restatement on disk: A scalar is an eigenvalue exactly when it is a root of the characteristic polynomial ([[thm-spectrum-is-the-root-set-of-the-characteristic-polynomial]]).
+- `thm-diagonalisable-iff-characteristic-polynomial-splits-and-multiplicities-agree` **L8** — used at step(s) 1.2
+  - restatement on disk: For an endomorphism of a finite-dimensional space, $\sigma_F(T)=\{\lambda\in F:\chi_T(\lambda)=0\}$ ([[thm-spectrum-is-the-root-set-of-the-characteristic-polynomial]]).
+
+#### target: `thm-repeated-root-derivative-criterion`  (theorem, 3 citations)
+
+- `thm-discriminant-root-formula-and-repeated-root-criterion` **L3** — used at step(s) 3.1
+  - restatement on disk: A root $a$ of a nonzero polynomial is repeated if and only if $f'(a)=0$ ([[thm-repeated-root-derivative-criterion]]).
+- `lem-roots-of-x-q-minus-x-form-a-field` **L4** — used at step(s) 3.1
+  - restatement on disk: A root is repeated if and only if the derivative also vanishes there ([[thm-repeated-root-derivative-criterion]]).
+- `thm-factorization-of-x-qn-minus-x` **L7** — used at step(s) 2.1
+  - restatement on disk: A root is repeated exactly when the formal derivative also vanishes there ([[thm-repeated-root-derivative-criterion]]).
+
+#### target: `lem-p-adic-valuation-basic`  (lemma, 2 citations)
+
+- `lem-order-of-one-plus-pu-modulo-prime-powers` **L4** — used at step(s) 1.1, 1.2, 3.1
+  - restatement on disk: $v_p(a)=j$ means $p^j\mid a$ but $p^{j+1}\nmid a$ ([[lem-p-adic-valuation-basic]]), and valuations add on nonzero products ([[lem-p-adic-valuation-additive]]).
+- `lem-order-of-five-modulo-two-powers` **L3** — used at step(s) 1.1, 1.2, 3.1
+  - restatement on disk: $v_2(a)=j$ means $2^j\mid a$ and $2^{j+1}\nmid a$ ([[lem-p-adic-valuation-basic]]), and valuations add on nonzero products ([[lem-p-adic-valuation-additive]]).
+
+#### target: `def-determinant-of-a-square-matrix`  (definition, 2 citations)
+
+- `thm-transfer-matrix-cofactor-formula` **L6** — used at step(s) 1.2, 4.1
+  - restatement on disk: The determinant is the finite Leibniz sum over permutations ([[def-determinant-of-a-square-matrix]]).
+- `lem-derivative-of-det-i-minus-xa` **L3** — used at step(s) 1.1
+  - restatement on disk: The determinant is the Leibniz sum $\det(M)=\sum_\sigma\operatorname{sgn}(\sigma)\prod_iM_{\sigma(i),i}$ ([[def-determinant-of-a-square-matrix]]).
+
+#### target: `def-subgroup`  (definition, 2 citations)
+
+- `prop-canonical-subgroups-of-an-external-semidirect-product` **L2** — used at step(s) 1.1, 2.1
+  - restatement on disk: A subgroup is a subset closed under the group operations and normality means invariance under conjugation ([[def-subgroup]], [[def-normal-subgroup]]).
+- `ex-frobenius-reciprocity-for-group-representations` **F4** — used at step(s) 2.1, 3.1, 5.1
+  - restatement on disk: A subgroup contains the identity and is closed under products and inverses ([[def-subgroup]]).
+
+#### target: `def-eigenvalue-eigenvector-eigenspace-and-spectrum`  (definition, 2 citations)
+
+- `thm-diagonalisability-eigenspace-direct-sum-criterion` **L2** — used at step(s) 1.1, 1.2
+  - restatement on disk: An eigenspace is $E_\lambda(T)=\{v:T(v)=\lambda v\}$ ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]).
+- `lem-commuting-endomorphisms-preserve-eigenspaces` **L1** — used at step(s) 2.1
+  - restatement on disk: The eigenspace is $E_\lambda(T)=\{v:T(v)=\lambda v\}$, including the zero vector ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]).
+
+#### target: `thm-determinant-of-transpose`  (theorem, 2 citations)
+
+- `thm-gram-determinant-detects-linear-independence` **L4** — used at step(s) 2.1
+  - restatement on disk: For $n\ge1$ and same-sized $n\times n$ matrices over a commutative ring, $\det(AB)=\det(A)\det(B)$ and $\det(A^{\mathsf T})=\det(A)$ ([[thm-determinant-multiplicative]], [[thm-determinant-of-transpose]]).
+- `cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus` **L5** — used at step(s) 1.2
+  - restatement on disk: For $n\ge1$ and $A\in M_n(R)$ over a commutative ring, $\det(A^{\mathsf T})=\det(A)$; complex conjugation is a field automorphism, and $z\overline z=|z|^2$ ([[thm-determinant-of-transpose]], [[lem-complex-conjugation-and-modulus-laws]]).
+
+#### target: `def-matrix-space`  (definition, 2 citations)
+
+- `ex-frobenius-inner-product-on-matrix-space` **L1** — used at step(s) 1.1, 1.2, 2.1
+  - restatement on disk: Matrices of a fixed shape form a vector space under entrywise operations ([[def-matrix-space]]).
+- `ex-matrix-algebra-extension-of-scalars` **L2** — used at step(s) 1.1, 2.1, 3.1
+  - restatement on disk: $M_n(F)$ and $M_n(K)$ are the corresponding finite function spaces with entrywise vector-space operations; for $n=0$ each is the zero space ([[def-matrix-space]]).
+
+#### target: `cor-order-of-element-divides-group-order`  (corollary, 2 citations)
+
+- `lem-primitive-root-lift-to-prime-square` **L2** — used at step(s) 1.1
+  - restatement on disk: The order of an element of a finite group divides the group order ([[cor-order-of-element-divides-group-order]]), and $\varphi(p^2)=p(p-1)$ ([[thm-totient-of-a-prime-power]]).
+- `thm-unit-group-modulo-odd-prime-power-is-cyclic` **L5** — used at step(s) 3.1
+  - restatement on disk: The order of an element of a finite group divides the group order ([[cor-order-of-element-divides-group-order]]).
+
+#### target: `thm-group-homomorphism-injective-iff-trivial-kernel`  (theorem, 2 citations)
+
+- `thm-splitting-lemma-for-group-extensions` **L4** — used at step(s) 1.1, 1.2
+  - restatement on disk: A homomorphism is injective exactly when its kernel is trivial ([[thm-group-homomorphism-injective-iff-trivial-kernel]]).
+- `lem-order-p-actions-on-a-cyclic-q-group` **L5** — used at step(s) 1.1
+  - restatement on disk: A homomorphism is injective exactly when its kernel is trivial ([[thm-group-homomorphism-injective-iff-trivial-kernel]]).
+
+#### target: `prop-modules-and-homomorphisms-form-category-rmod`  (proposition, 2 citations)
+
+- `thm-the-free-module-functor-is-left-adjoint-to-the-underlying-set-functor` **F2** — used at step(s) 1.2
+  - restatement on disk: Left $R$-modules and module homomorphisms form the locally small category $R\text{-}\mathbf{Mod}$ ([[prop-modules-and-homomorphisms-form-category-rmod]]).
+- `thm-coextension-of-scalars-is-right-adjoint-to-restriction-of-scalars` **F1** — used at step(s) 3.1
+  - restatement on disk: Left modules and module homomorphisms form locally small categories ([[prop-modules-and-homomorphisms-form-category-rmod]]).
+
+#### target: `thm-reduced-words-form-the-free-group`  (theorem, 2 citations)
+
+- `fs-left-adjoints-preserve-limits` **F2** — used at step(s) 1.1
+  - restatement on disk: The reduced words on $X\sqcup X^{-1}$ form the free group on $X$, with each $x\in X$ represented by a one-letter word ([[thm-reduced-words-form-the-free-group]]).
+- `ex-unit-and-counit-of-the-free-group-adjunction` **F1** — used at step(s) 1.1
+  - restatement on disk: Reduced words on $X\sqcup X^{-1}$ form $F(X)$, and the generator map sends $x$ to its one-letter word ([[thm-reduced-words-form-the-free-group]]).
+
+#### target: `def-polynomial-degree-leading-coefficient-and-monic`  (definition, 1 citation)
+
+- `thm-minimal-polynomial-is-well-defined-and-controls-annihilators` **L4** — used at step(s) 1.3, 2.1
+  - restatement on disk: Every nonzero polynomial has a leading coefficient and is monic exactly when that coefficient is $1$ ([[def-polynomial-degree-leading-coefficient-and-monic]]).
+
+#### target: `def-monic-greatest-common-divisor-of-polynomials`  (definition, 1 citation)
+
+- `lem-coprime-kernel-decomposition` **L1** — used at step(s) 1.1
+  - restatement on disk: If $\gcd(f,g)=1$, Bézout's identity supplies $a,b\in F[x]$ with $af+bg=1$ ([[thm-bezout-identity-for-polynomials]], [[def-monic-greatest-common-divisor-of-polynomials]]).
+
+#### target: `thm-adjugate-identity-over-a-commutative-ring`  (theorem, 1 citation)
+
+- `thm-transfer-matrix-cofactor-formula` **L4** — used at step(s) 2.1
+  - restatement on disk: For a positive-sized square matrix, $M\operatorname{adj}(M)=\operatorname{adj}(M)M=\det(M)I$ ([[thm-adjugate-identity-over-a-commutative-ring]]).
+
+#### target: `def-formal-power-series-derivative`  (definition, 1 citation)
+
+- `lem-derivative-of-det-i-minus-xa` **L4** — used at step(s) 2.1
+  - restatement on disk: The formal derivative is coefficientwise and sends $x$ to $1$ and constants to $0$ ([[def-formal-power-series-derivative]]).
+
+#### target: `def-induced-embedding-and-induced-copy`  (definition, 1 citation)
+
+- `thm-induced-counting-lemma-for-regular-pairs` **L3** — used at step(s) 1.1, 6.1
+  - restatement on disk: An induced embedding is injective and preserves both adjacency and nonadjacency; its labelled count is $\operatorname{ind}_H(G)$ ([[def-induced-embedding-and-induced-copy]], [[def-induced-copy-number]]).
+
+#### target: `def-edges-between-sets-and-pure-mixed-pairs`  (definition, 1 citation)
+
+- `ex-complete-and-empty-pairs-are-zero-regular` **L2** — used at step(s) 1.1, 1.2
+  - restatement on disk: In a complete pair all possible cross-edges are present, while in an anticomplete pair none are present ([[def-edges-between-sets-and-pure-mixed-pairs]]).
+
+#### target: `cor-a-compact-hausdorff-space-is-tychonoff`  (corollary, 1 citation)
+
+- `thm-stone-cech-is-left-adjoint-to-the-inclusion-of-compact-hausdorff-spaces` **F5** — used at step(s) 1.1
+  - restatement on disk: Every compact Hausdorff space is Tychonoff ([[cor-a-compact-hausdorff-space-is-tychonoff]]).
+
+#### target: `def-cartesian-product`  (definition, 1 citation)
+
+- `thm-currying-is-an-adjunction-in-set` **F3** — used at step(s) 1.1, 1.2
+  - restatement on disk: The cartesian product $X\times A$ consists of ordered pairs $(x,a)$ with $x\in X$, $a\in A$ ([[def-cartesian-product]]).
+
+#### target: `def-integers-modulo-n`  (definition, 1 citation)
+
+- `lem-power-congruence-root-bound-modulo-a-prime` **L4** — used at step(s) 2.1
+  - restatement on disk: Congruence modulo $q$ is equality of classes in $\mathbb Z/q$, and a root is an element at which polynomial evaluation is zero ([[def-integers-modulo-n]], [[def-polynomial-evaluation-and-root]]).
+
+#### target: `lem-core-is-largest-normal-subgroup-contained`  (lemma, 1 citation)
+
+- `lem-groups-of-order-pq-have-a-normal-q-subgroup` **L8** — used at step(s) 1.1
+  - restatement on disk: The core $\operatorname{Core}_G(Q)$ is a normal subgroup of $G$ satisfying $\operatorname{Core}_G(Q)\le Q$ ([[lem-core-is-largest-normal-subgroup-contained]]).
+
+#### target: `def-graph-walk-trail-path-and-cycle`  (definition, 1 citation)
+
+- `thm-p3-free-graphs-have-square-root-homogeneous-sets` **L7** — used at step(s) 1.2
+  - restatement on disk: A path has distinct vertices and consecutive vertices adjacent ([[def-graph-walk-trail-path-and-cycle]]); the distance of connected vertices is the minimum length of a path joining them ([[def-graph-distance-and-girth]]).
+
+#### target: `thm-real-power-agrees-with-rational-exponent`  (theorem, 1 citation)
+
+- `thm-p3-free-graphs-have-square-root-homogeneous-sets` **L8** — used at step(s) 1.1, 4.1
+  - restatement on disk: Every nonnegative real $a$ has a unique nonnegative square root $\sqrt a$ ([[thm-of-square-roots]]), and $a^{1/2}$ agrees with the rational-power square root, including at $a=0$ ([[thm-real-power-agrees-with-rational-exponent]]).
+
+#### target: `def-injective-module`  (definition, 1 citation)
+
+- `thm-character-duals-of-flat-modules-are-injective` **L3** — used at step(s) 4.1, 6.1
+  - restatement on disk: An injective module has the extension property along every injective module homomorphism ([[def-injective-module]]).
+
+#### target: `def-sum-and-product-of-ideals`  (definition, 1 citation)
+
+- `ex-tensor-product-of-two-quotient-modules` **L2** — used at step(s) 1.2, 3.1
+  - restatement on disk: $I+J=\{i+j:i\in I,\ j\in J\}$ is an ideal ([[def-sum-and-product-of-ideals]]).
+
+#### target: `thm-chosen-limits-and-colimits-assemble-into-functors`  (theorem, 1 citation)
+
+- `thm-limits-and-colimits-are-adjoint-to-the-diagonal-functor` **F1** — used at step(s) 1.1, 1.3
+  - restatement on disk: Chosen limiting or colimiting cones for every diagram assemble into limit or colimit functors ([[thm-chosen-limits-and-colimits-assemble-into-functors]]).
+
+#### target: `def-free-group`  (definition, 1 citation)
+
+- `thm-the-free-group-functor-is-left-adjoint-to-the-underlying-set-functor` **F1** — used at step(s) 1.1, 1.2, 2.1, 4.1
+  - restatement on disk: A free group on $X$ has the property that every function $u:X\to G$ extends uniquely to a homomorphism $\widehat u:F(X)\to G$ with $\widehat u\,i_X=u$ ([[def-free-group]]).
+
+#### target: `lem-ideal-criterion-and-intersections`  (lemma, 1 citation)
+
+- `ex-the-galois-connection-between-ideals-and-varieties` **F5** — used at step(s) 2.1
+  - restatement on disk: A nonempty subset is an ideal exactly when it is closed under differences and multiplication by ring elements ([[lem-ideal-criterion-and-intersections]]).
+
+#### target: `prop-isomorphisms-form-the-maximal-subgroupoid`  (proposition, 1 citation)
+
+- `ex-groupoid-inclusion-is-left-adjoint-to-the-maximal-subgroupoid` **F2** — used at step(s) 1.1, 1.2
+  - restatement on disk: The subcategory of all objects and all isomorphisms of $\mathcal C$ is a groupoid containing every subgroupoid of $\mathcal C$ ([[prop-isomorphisms-form-the-maximal-subgroupoid]]).
+
+### Report format
+
+Write your findings to stdout as your final message. Per finding:
+
+- citing item id, fact label, cited target id
+- **what the restatement claims** vs **what the Statement says** (quote both)
+- which numbered step depends on the difference, or "no step depends on it"
+- your severity: `fatal` (a step is unlicensed / a false claim is asserted) or
+  `nonfatal` (a competent reader closes it in 30 seconds)
+
+Close with: targets opened, edges checked, findings by severity. If you checked
+an edge and it is clean, it is clean — do not pad the report.

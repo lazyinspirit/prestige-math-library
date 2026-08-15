@@ -36,7 +36,7 @@ splitting is never dropping.
 
 | label | proposed page id | supersedes | est. A items |
 |---|---|---|---|
-| `MA-1` | `adjunctions-units-and-counits` | `adjunctions-and-the-adjoint-functor-theorems` | 45 |
+| `MA-1` | `adjunctions-units-and-counits` | `adjunctions-and-the-adjoint-functor-theorems` | 51 — **scaffolded, `frontier-13` batch 6** |
 | `MA-2` | `reflective-subcategories-and-the-adjoint-functor-theorems` | ″ | 40 |
 | `MA-3` | `monads-comonads-and-their-algebras` | `monads-and-their-algebras` | 38 |
 | `MA-4` | `monadicity-and-becks-theorem` | ″ | 29 |
@@ -689,7 +689,7 @@ supersedes. **The orchestrator owns the splice**; this file writes no spec.
 
 | label | proposed page id | supersedes planned page | est. A items |
 |---|---|---|---|
-| `MA-1` | `adjunctions-units-and-counits` | `adjunctions-and-the-adjoint-functor-theorems` | 45 |
+| `MA-1` | `adjunctions-units-and-counits` | `adjunctions-and-the-adjoint-functor-theorems` | 51 — **scaffolded, `frontier-13` batch 6** |
 | `MA-2` | `reflective-subcategories-and-the-adjoint-functor-theorems` | ″ | 40 |
 | `MA-3` | `monads-comonads-and-their-algebras` | `monads-and-their-algebras` | 38 |
 | `MA-4` | `monadicity-and-becks-theorem` | ″ | 29 |
@@ -1054,13 +1054,16 @@ verbatim and records that fact.
 ## MA-1. Adjunctions, Units and Counits
 
 **page id** `adjunctions-units-and-counits`
-**`requires`** `limits-and-colimits`, `universal-properties-and-the-yoneda-lemma`,
-`free-groups-and-presentations`, `free-modules-and-exact-sequences`,
-`tychonoff-embedding-and-stone-cech`, `subspaces-products-and-quotients`,
-`conjugacy-and-simplicity-in-the-symmetric-groups` *(for the abelianisation
-example's commutator machinery — the authoring Beta verifies which page homes
-`def-abelianisation-of-a-group` and `thm-derived-subgroup-is-characteristic-and-abelianization-is-universal`
-and lists that page instead if it differs)*
+**`requires`** (live in `plan-spec.json` after `frontier-13` D1 / D1-amend, and
+scaffolded 2026-08-15 at order 365.001, A 51 / B 9, no split):
+`limits-and-colimits-examples`, `free-modules-and-exact-sequences`,
+`tychonoff-embedding-and-stone-cech` — three declared edges, whose closure also
+supplies `universal-properties-and-the-yoneda-lemma`,
+`free-groups-and-presentations` and the topology this page cites.
+`conjugacy-and-simplicity-in-the-symmetric-groups` was **removed** (D1-amend):
+the Beta's verification came back with `def-abelianisation-of-a-group` homed on
+`free-groups-and-presentations`, so the commutator edge carried zero citations.
+`subspaces-products-and-quotients` is likewise uncited.
 
 The page that turns the published objectwise theory into a theory of functors.
 `def-universal-arrow-to-and-from-a-functor` and
@@ -1122,7 +1125,7 @@ are cited by `MA-2`, `MA-3` and `MA-4`.
 37. `thm-the-discrete-and-indiscrete-topologies-form-an-adjoint-triple-over-set` — thm. $D\dashv U\dashv I$ (Riehl Ex 4.1.6). LANDMARK — the standard witness that a functor can have adjoints on both sides.
 38. `thm-stone-cech-is-left-adjoint-to-the-inclusion-of-compact-hausdorff-spaces` — thm. **Statement names the ultrafilter lemma and dependent choice**, inherited verbatim from the published `thm-stone-cech-evaluation-closure-universal-property` and `lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice`. LANDMARK.
 39. `prop-the-underlying-set-functor-on-fields-has-no-left-adjoint` — prop. A left adjoint would send the empty set to an initial field, but no field is initial: fields of different characteristics rule out a universal morphism. Riehl Ex. 4.1.12; Leinster Ex. 6.3.5. RAPL is not used — a right adjoint preserves limits that exist; it does not force a missing limit to exist.
-40. `thm-restriction-of-scalars-has-a-left-and-a-right-adjoint` — thm. Extension and coextension of scalars along a ring homomorphism (Riehl Ex 4.1.10(xii)). **CONTINGENT** on `tensor-products-of-modules` (§11 amendment 1); if that page does not land below this one, the item drops to the $\operatorname{Hom}$-side adjoint alone and the drop is recorded.
+40. `thm-coextension-of-scalars-is-right-adjoint-to-restriction-of-scalars` — thm. **The contingency resolved as the fallback, 2026-08-15.** `tensor-products-of-modules` is batch 5 of the same `frontier-13` run and therefore outside this page's closure, so the item is the $\operatorname{Hom}$-side adjoint alone, supported by `lem-coextension-of-scalars-carries-a-module-structure`; the tensor-side extension-of-scalars half is deferred with a coverage row naming that page. The Part I id `thm-restriction-of-scalars-has-a-left-and-a-right-adjoint` is dead and must not be revived.
 41. `thm-currying-is-an-adjunction-in-set` — thm. $-\times A\dashv(-)^A$ on $\mathbf{Set}$, stated with the function set as an ordinary set. **The authoring Beta verifies an A-page home exists for the function set**; the published `ex-function-sets-as-exponential-representing-objects` is a B-leaf and is not citable.
 
 ### `fs-` items (A page)
