@@ -133,3 +133,56 @@ remaining silent-failure risk.
 Authoring is the long stage — six Betas, up to six hours each. Expect little to
 happen for a while; the engine reports every 20 minutes regardless, so quiet and
 dead look different.
+
+---
+
+## A pair was lost, and has been restored — read this first
+
+**`stone-weierstrass-general` and its companion vanished mid-run.** They were
+batched at step 0, scaffolded in full (19 items, three verified sources,
+complete proof contracts), reviewed by group Alpha a — and then removed from the
+manifest, the coverage harvest and the contracts between step 3 and step 4.
+
+**Every gate stayed green.** They validate what is *in* the artifacts; none can
+see a page that is no longer there. The run reported 6/6 batches complete and
+would have delivered eight A/B pairs where nine were planned. I found it by
+counting authored pages against the plan, not because anything failed.
+
+### Why it happened, and it is my fault
+
+Alpha a marked the pair `insufficient` on finding **D1**: the scaffold re-minted
+complex scalars locally because `field-extensions-and-the-complex-numbers` was
+not in page 287's closure — which puts a *second, different* ℂ into the library.
+Alpha verified two legal backward edges reach the published one and asked for an
+orchestrator decision. Its re-check then recorded `not ready — D1 has no
+recorded decision`.
+
+Adding a `requires` edge was an orchestrator-owned decision. **When the
+orchestrator role was removed from the workflow, nothing inherited that
+authority** — the Alpha states plainly that it cannot edit `plan-spec.json`. The
+splice met a page marked `not ready` with no route to ready, and resolved the
+deadlock by dropping it.
+
+### What I did
+
+**Approved D1.** Both edges added — orders 54 and 189, both backward, no cycle,
+no `order` changed. Same reasoning as `ascoli-arzela → compactness` at step 0:
+citing the library's complex numbers beats minting a second copy. The re-minted
+`lem-dyadic-root-of-unity-filter` is exactly `cor-sum-of-roots-of-unity`, which
+is published.
+
+**Restored the pair as batch 7**, with a task file carrying the decision so the
+Beta cites the published complex numbers rather than rebuilding them.
+
+**Gated the class.** `tools/manifest-integrity.mjs` compares every manifest
+against a step-0 scope ledger; `autopilot plan` writes that ledger, and the gate
+runs at every stage. Verified against the real loss — it names both pages
+exactly.
+
+Coverage-based completion made the restore cheap: adding a seventh unit
+re-opened every stage at `6/7 covered; missing 7`. A count would have read
+`6/6 done` throughout and never noticed.
+
+**Consequence for the schedule:** batch 7 must traverse every stage from
+scaffold to authoring, so the run will finish later than the other six. It is
+running in parallel with the step-6a readers, not behind them.
