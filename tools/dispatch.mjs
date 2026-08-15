@@ -611,6 +611,25 @@ if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true 
 const ended = new Date();
 const record = {
   role, label, run,
+  // WHAT UNIT OF WORK THIS DISPATCH COVERS, and why it is on the record.
+  //
+  // Stage completion used to be a COUNT: "3 group Alphas returned". A count has
+  // to be known in advance, so it encodes the shape of one particular run —
+  // frontier-13's seven batches gave three groups, and that 3 was hardcoded.
+  // frontier-14 has six batches and two groups, so the predicate could never
+  // fire and the driver would have polled a finished stage forever.
+  //
+  // ceil(batches/3) fixes that instance and leaves the class intact: it still
+  // assumes the grouping rule, and it still cannot tell three agents that each
+  // covered two batches from three agents that all covered the same one.
+  //
+  // `covers` removes the inference. A dispatch declares the batches or pages it
+  // is responsible for, and a stage is done when the union of covered units
+  // over `ok:true` results contains every unit the stage owes. One Alpha over
+  // six batches and six Alphas over one batch each are then both complete, and
+  // neither needs the table to be edited.
+  covers: option('--covers') ? option('--covers').split(',').map((s) => s.trim()).filter(Boolean) : [],
+  stage: option('--stage') ?? null,
   runner: spec.runner, model: spec.model, sandbox: spec.sandbox,
   started_at: started.toISOString(), ended_at: ended.toISOString(), ms: ended - started,
   exit_code: result.code, timed_out: result.timedOut,

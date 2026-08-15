@@ -67,16 +67,87 @@ const batches = () => {
     .filter((n) => Number.isInteger(n)).sort((a, b) => a - b);
 };
 
-/** How many group Alphas this run has, derived rather than assumed.
+// COMPLETION BY COVERAGE, NOT BY COUNT.
+//
+// Every "N agents returned" predicate encodes the shape of one run. `3-review`
+// hardcoded three group Alphas because frontier-13 had seven batches; frontier-14
+// has six and two groups, so the predicate could never fire and the driver
+// polled a finished stage forever, with nothing wrong in any log.
+//
+// Deriving the count — ceil(batches/3) — fixes that instance and leaves the
+// class intact. It still hardcodes the grouping RULE, so it breaks again when
+// the alpha cap changes, when a run deliberately uses one Alpha for everything,
+// or when a lane is retried and returns a fourth result. Worse, a count cannot
+// distinguish three Alphas covering two batches each from three Alphas that all
+// covered the same batch and left two unreviewed: 3/3, green, and a hole.
+//
+// So a stage declares the UNITS OF WORK it owes, each dispatch declares the
+// units it covers, and the stage is done when the covered union contains the
+// owed set. The number of agents becomes irrelevant — which is the point,
+// because it is the thing that changes every cycle.
+
+/** A run-level `label -> units` map, for dispatches that could not declare
+ *  `covers` themselves.
  *
- *  One Alpha per <=3 batches (owner, 2026-08-14; `dispatch.mjs` alpha cap 3).
- *  This was hardcoded to 3 — the frontier-13 shape, where seven batches gave
- *  three groups. frontier-14 has six batches and therefore two, so `3-review`
- *  and `6b-adjudicate` could never report done: the driver would have polled a
- *  stage that was already finished, forever, with no error anywhere. A stall
- *  with a green log is the worst failure this file can have, so the count comes
- *  from the batch list. */
-const groupCount = () => Math.max(1, Math.ceil(batches().length / 3));
+ *  Needed because a run can be MIXED. frontier-14 hand-dispatched group Alpha b
+ *  before `--covers` existed; had Alpha a then declared covers, the run would
+ *  have flipped to the coverage path with b's three batches permanently
+ *  uncovered and the stage unable to complete — a stall created by the fix for
+ *  stalls. An out-of-band map lets an already-running dispatch be annotated
+ *  without touching its result file, which nothing should rewrite.
+ *
+ *  research/<run>-covers.json:  { "alpha-step3-b": ["4","5","6"] } */
+const coversMap = () => {
+  try { return JSON.parse(readFileSync(R(`research/${run}-covers.json`), 'utf8')); }
+  catch { return {}; }
+};
+
+/** Units covered by successful dispatches whose label matches `glob`. */
+const coveredBy = (glob) => {
+  const covered = new Set();
+  const map = coversMap();
+  for (const f of okResults(glob)) {
+    const stem = f.replace('.result.json', '');
+    let declared = [];
+    try { declared = JSON.parse(readFileSync(join(R(D), f), 'utf8')).covers ?? []; }
+    catch { /* an unreadable record declares nothing */ }
+    const units = declared.length ? declared : (map[stem] ?? []);
+    for (const u of units) covered.add(String(u));
+  }
+  return covered;
+};
+
+/** Does every owed unit have a successful dispatch claiming it?
+ *
+ *  `fallbackCount` is used only when NO result carries `covers` — runs authored
+ *  before the field existed, which must keep reporting correctly. A run with
+ *  even one `covers` row is read by coverage, so a partially-migrated run
+ *  reports a real gap rather than a spurious pass. */
+const coverageDone = (glob, owed, fallbackCount) => {
+  const rows = okResults(glob);
+  const covered = coveredBy(glob);
+  if (covered.size === 0) {
+    const map = coversMap();
+    const anyDeclared = rows.some((f) => {
+      if (map[f.replace('.result.json', '')]) return true;
+      try {
+        const c = JSON.parse(readFileSync(join(R(D), f), 'utf8')).covers;
+        return Array.isArray(c) && c.length > 0;
+      } catch { return false; }
+    });
+    if (!anyDeclared) {
+      const need = fallbackCount ?? 1;
+      return { done: rows.length >= need, why: `${rows.length}/${need} result(s) — no \`covers\` declared, counting` };
+    }
+  }
+  const missing = owed.filter((u) => !covered.has(String(u)));
+  return {
+    done: owed.length > 0 && missing.length === 0,
+    why: missing.length
+      ? `${owed.length - missing.length}/${owed.length} unit(s) covered; missing ${missing.slice(0, 6).join(', ')}${missing.length > 6 ? ` +${missing.length - 6}` : ''}`
+      : `${owed.length}/${owed.length} unit(s) covered by ${rows.length} dispatch(es)`,
+  };
+};
 
 /** Judge coverage: every A page's items carry a current verdict from BOTH lanes. */
 const judgeComplete = () => {
@@ -105,13 +176,13 @@ const judgeComplete = () => {
 const STAGES = [
   {
     id: '1-2-scaffold', label: 'Betas scaffolding',
-    done: () => { const b = batches(); return { done: b.length > 0 && okResults('^beta-batch-').length >= b.length, why: `${okResults('^beta-batch-').length}/${b.length || '?'} beta results` }; },
+    done: () => coverageDone('^beta-batch-', batches(), batches().length),
     gates: ['coverage', 'policy'],
     next: () => `orchestrator adjudicates step 3 — dispatch role=orchestrator with the step-3 decisions task`,
   },
   {
     id: '3-review', label: 'Alpha scaffold review',
-    done: () => { const g = groupCount(); const n = okResults('^alpha-.*step3|^alpha-recheck').length; return { done: n >= g, why: `${n}/${g} group reviews` }; },
+    done: () => coverageDone('^alpha-.*step3|^alpha-recheck', batches(), Math.max(1, Math.ceil(batches().length / 3))),
     gates: ['validate-plan'],
     next: () => `dispatch role=alpha label=step4-lead — pipelined splice, one receipt per batch`,
   },
@@ -123,7 +194,7 @@ const STAGES = [
   },
   {
     id: '5-author', label: 'authoring',
-    done: () => { const b = batches(); return { done: b.length > 0 && okResults('^beta-author-batch-').length >= b.length, why: `${okResults('^beta-author-batch-').length}/${b.length} authored` }; },
+    done: () => coverageDone('^beta-author-batch-', batches(), batches().length),
     gates: ['repo-wide'],
     next: () => `dispatch one role=reader per batch — step 6a independent audit`,
   },
@@ -131,11 +202,11 @@ const STAGES = [
     id: '6a-read', label: 'independent readers',
     done: () => { const b = batches(); const n = b.filter((i) => has(`research/${run}-reader-${i}.md`)).length; return { done: b.length > 0 && n >= b.length, why: `${n}/${b.length} reader reports` }; },
     gates: [],
-    next: () => `dispatch ${groupCount()} role=alpha group adjudicator(s) — step 6b`,
+    next: () => `dispatch role=alpha group adjudicators covering every batch — step 6b (any number of agents; each declares --covers)`,
   },
   {
     id: '6b-adjudicate', label: 'group Alpha adjudication',
-    done: () => { const g = groupCount(); const n = okResults('^alpha-6b-').length; return { done: n >= g, why: `${n}/${g} groups` }; },
+    done: () => coverageDone('^alpha-6b-', batches(), Math.max(1, Math.ceil(batches().length / 3))),
     gates: ['repo-wide'],
     next: () => `dispatch role=alpha label=6c-lead — cross-batch and cross-level citations`,
   },

@@ -80,3 +80,30 @@ Count children with `pgrep -P <pid>` to tell *running* from *queued*.
 You do not write status reports. The orchestrator does that. You write one log
 line per decision — stage, predicate result, action, dispatched label, timestamp
 — so the run is auditable afterwards.
+
+## Declaring what a dispatch covers (2026-08-16)
+
+**Every dispatch you fire passes `--covers`**, a comma-separated list of the
+units of work it is responsible for — batch numbers for per-batch roles, page
+ids where a stage is owed per page.
+
+```
+node tools/dispatch.mjs --role alpha --brief ... --task ... \
+  --label step3-a --run <run> --covers 1,2,3
+```
+
+This is what makes stage completion independent of how many agents you use. A
+stage is done when the union of covered units over `ok:true` results contains
+every unit the stage owes — so one Alpha over six batches and six Alphas over
+one batch each are both complete, and neither needs the stage table edited.
+
+It is not bookkeeping. A count cannot distinguish three Alphas covering two
+batches each from three Alphas that all covered the same batch and left two
+unreviewed; the first is done and the second has a hole, and both read as
+`3/3`. Coverage reports `1/6 covered; missing 2, 3, 4, 5, 6`.
+
+If you must fire a dispatch that cannot declare its own units, add the mapping
+to `research/<run>-covers.json` (`{"alpha-step3-b": ["4","5","6"]}`) in the same
+action. A run where some dispatches declare coverage and others do not is read
+by coverage, so an unmapped lane's units stay missing and the stage will not
+advance — which is correct, and is why you never leave one unmapped.

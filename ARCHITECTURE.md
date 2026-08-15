@@ -765,6 +765,45 @@ It never decides that a stage is done. `run-supervisor.mjs` owns the `done`
 predicates and reads them from disk; this only notices a transition and pays for
 an agent to handle it.
 
+### 3.11e-2 Stage completion by coverage, not by agent count (2026-08-16)
+
+Every `done` predicate in the stage table used to be a count: "three group
+Alphas returned". A count has to be known before the run, so it encodes one
+run's shape. `3-review` hardcoded **3** because `frontier-13` had seven batches
+and therefore three groups; `frontier-14` has six batches and two, so the
+predicate could never fire and `run-drive` would have polled a finished stage
+forever with nothing wrong in any log.
+
+Deriving the count — `ceil(batches/3)` — fixes that instance and leaves the
+class intact. It still hardcodes the grouping *rule*, so it breaks again when
+the alpha cap changes, when a run deliberately uses one Alpha for everything, or
+when a retried lane returns an extra result. And a count cannot distinguish
+three Alphas covering two batches each from three Alphas that all covered the
+same batch and left two unreviewed — the first is complete, the second has a
+hole, and both read `3/3`.
+
+So a stage declares the **units of work** it owes, each dispatch declares the
+units it **covers** via `dispatch.mjs --covers 1,2,3`, and the stage is done
+when the covered union over `ok:true` results contains the owed set. The number
+of agents becomes irrelevant, which is the point — it is the thing that changes
+every cycle.
+
+| scenario | count says | coverage says |
+|---|---|---|
+| 1 Alpha over 6 batches | `1/3` — never advances | `6/6 covered` — done |
+| 6 Alphas, 1 batch each | `3/3` after three — advances early | `3/6, missing 4, 5, 6` |
+| 3 Alphas all on batch 1 | `3/3` — done, with a hole | `1/6, missing 2, 3, 4, 5, 6` |
+| dead lane claiming 3 batches | counted if `ok:false` slips through | units not covered |
+
+Two compatibility paths, both required. A run where **no** result declares
+`covers` falls back to counting, so `frontier-13` and earlier still report
+correctly. A run that is **partly** migrated — `frontier-14` hand-dispatched a
+group Alpha before the flag existed — is read by coverage, and the out-of-band
+map `research/<run>-covers.json` (`{"alpha-step3-b": ["4","5","6"]}`) annotates a
+dispatch that could not declare its own units without rewriting its result file.
+Leaving a lane unmapped in a mixed run correctly stalls the stage rather than
+silently passing it.
+
 ### 3.11f Gate liveness — `gate-liveness.mjs` (2026-08-16)
 
 Every gate reports `0 error(s)`. None distinguishes "checked 400 things, found
