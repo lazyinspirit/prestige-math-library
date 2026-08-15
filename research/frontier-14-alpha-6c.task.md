@@ -22,7 +22,8 @@ inside a single batch.
 3. **The contract merge.** Run:
 
 ```
-node tools/merge-proof-contracts.mjs --run frontier-14
+node tools/merge-proof-contracts.mjs --level frontier-14 \
+  research/frontier-14-proof-contracts.json research/frontier-14-batch-*.proof-contracts.json
 node tools/proof-contract.mjs research/frontier-14-proof-contracts.json --strict
 node tools/finite-smoke.mjs research/frontier-14-proof-contracts.json
 node tools/risk-report.mjs research/frontier-14-proof-contracts.json --require-reviewed
@@ -34,8 +35,9 @@ node tools/gate-liveness.mjs --run frontier-14 --contracts research/frontier-14-
 `--require-reviewed` belongs here, not at step 5: a `risk_review` is a
 disposition only Alpha may write, and 6b is where it is written.
 
-4. **The spine receipt.** `spine-audit.mjs` over the proof-bearing items among
-   the largest transitive dependency cones. It lapses on any content change, so
+4. **The spine receipt.** `spine-audit.mjs --template research/frontier-14-spine-audit.json`
+   to generate, then fill and re-run with `--receipt`, over the proof-bearing
+   items among the largest transitive dependency cones. It lapses on any content change, so
    it must be current when step 7 freezes.
 
 ### Output
