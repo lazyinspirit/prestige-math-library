@@ -20,7 +20,7 @@ run to conclusion.
 ### Before you adjudicate
 
 ```
-node tools/touchlog.mjs --snapshot --label pre-step8 --out research/frontier-14-touches.json
+node tools/touchlog.mjs snap research/frontier-14-touches.json pre-step8
 ```
 
 Every adjudication row records `item_sha256` — the sha256 of the normalized item

@@ -11,7 +11,7 @@ confirms instead of checking — that happened on `frontier-13` and the receipt
 was worthless.
 
 ```
-node tools/touchlog.mjs --snapshot --label pre-step5 --out research/frontier-14-touches.json
+node tools/touchlog.mjs snap research/frontier-14-touches.json pre-step5
 ```
 
 ### What to do
