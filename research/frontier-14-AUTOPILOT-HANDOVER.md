@@ -46,7 +46,6 @@ choice and changes nothing.
 3-review    ✓ cleared, 6/6 covered by 2 Alphas
 3-fix       ✓ cleared, 6/6, gates green — transitioned with nobody in the loop
 3-recheck   → running, both Alphas dispatched automatically
-3-recheck     Alpha re-verifies its own findings from disk
 4-splice      lead Alpha, one receipt per batch, released per batch
 5-author      one Beta per batch, the Beta that scaffolded it
 6a-read       one independent reader per batch
