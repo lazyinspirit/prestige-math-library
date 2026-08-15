@@ -25,7 +25,7 @@ the Statement itself is never 30-second.
 
 ### Output
 
-`research/frontier-14-reader-1.md`, findings numbered `R7-1`, `R7-2`, …
+`research/frontier-14-reader-7.md`, findings numbered `R7-1`, `R7-2`, …
 **stably**. Per finding: the item id, the exact defect, the evidence, and your
 severity. Numbering is permanent — a later pass refers to these ids.
 
