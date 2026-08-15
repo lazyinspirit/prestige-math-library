@@ -9,6 +9,10 @@ Written 2026-08-15 ~17:33Z, when the owner went to bed. Live state is in
 node ~/Projects/autopilot/bin/autopilot.mjs status
 ```
 
+It **recomputes from disk** every time — it is never a stale cached report — and
+it lists agents that are genuinely running, including ones the current engine
+did not start (marked `running (observed)`).
+
 ## What is driving
 
 | | |
@@ -40,7 +44,8 @@ choice and changes nothing.
 ```
 1-scaffold  ✓ cleared, 14 gates green
 3-review    ✓ cleared, 6/6 covered by 2 Alphas
-3-fix       → running, batches 1-3 in flight
+3-fix       ✓ cleared, 6/6, gates green — transitioned with nobody in the loop
+3-recheck   → running, both Alphas dispatched automatically
 3-recheck     Alpha re-verifies its own findings from disk
 4-splice      lead Alpha, one receipt per batch, released per batch
 5-author      one Beta per batch, the Beta that scaffolded it
@@ -62,7 +67,12 @@ Taking over a live build found seven defects no fake-pipeline test could have:
 
 1. `step8-guard --run` — invented flag; takes `--touches`/`--baseline`/`--adjudications`
 2. `judge-sweep --run` — invented flag; takes `--ledger`/`--cost`/`--pages`
-3. `merge-proof-contracts --run` — takes `--level <run> <out> <ins...>`
+3. `merge-proof-contracts --run` — takes `--level <run> <out> <ins...>`;
+   and `touchlog` is positional, `snap <ledger> <label>`, not flagged.
+   Four of the six invocations I first wrote from memory were wrong, so
+   `test/signatures.test.mjs` now checks every flag against the tool that
+   receives it — all 38 commands in the task files and the whole stage table
+   validate clean.
 4. Anchored result patterns missed `alpha-alpha-step3-a.result.json`, because a
    role-prefixed label makes `dispatch.mjs` write `<role>-<role>-<label>`
 5. SIGTERM killed running agents while its own message claimed otherwise —
