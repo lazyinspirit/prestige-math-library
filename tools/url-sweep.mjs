@@ -133,9 +133,21 @@ let cursor = 0;
  *  So: HEAD first, and fall back to a one-byte ranged GET for the servers that
  *  answer HEAD with 403/405/501 while serving GET perfectly well. Either way the
  *  body never arrives and a big file is as cheap to check as a small one. */
+// HEAD first, then a one-byte ranged GET for servers that refuse HEAD, then
+// the same GET forced onto HTTP/1.1.
+//
+// The third attempt exists because of a REAL false positive. Shapiro's
+// Arzela-Ascoli notes (users.math.msu.edu) return 200 to a plain curl every
+// time, and fail here every time with "curl: (16) Error in the HTTP2 framing
+// layer" — the server mis-frames under the HTTP/2 negotiation these flags
+// trigger. Reported as a dead source, it would have sent a live, correct
+// citation to an archive snapshot from 2016 and rewritten the provenance of
+// every item it backs. A transport-level framing failure is a fact about the
+// connection, not about whether a reader can open the page.
 const ATTEMPTS = [
   ['-sSLI', '-o', '/dev/null'],
   ['-sSL', '-o', '/dev/null', '--range', '0-0'],
+  ['-sSL', '--http1.1', '-o', '/dev/null', '--range', '0-0'],
 ];
 
 const fetchOnce = async (url, mode) => {
@@ -176,6 +188,15 @@ const fetchOne = async (url) => {
     if (last.ok) return last;
     // A definite 404/410 is settled; no fallback will change it. Only retry when
     // the method itself may be the problem.
+    //
+    // A TRANSPORT FAILURE MUST NOT SHORT-CIRCUIT, even when curl still reports
+    // a status. Shapiro's Arzela-Ascoli notes answer the HEAD attempt with BOTH
+    // `200` on stdout and `curl: (16) Error in the HTTP2 framing layer` on
+    // stderr; the status made this line return immediately, so the ranged-GET
+    // and HTTP/1.1 attempts never ran and a live, correct citation was reported
+    // dead. `last.error` is the signal that the attempt itself failed, and when
+    // it did, another protocol deserves its turn.
+    if (last.error) continue;
     if (last.status && ![403, 405, 501, 400].includes(last.status)) return last;
   }
   return last;
