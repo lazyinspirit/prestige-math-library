@@ -1,0 +1,51 @@
+---
+id: ex-trivial-coverings-and-discrete-fibre-products
+kind: example
+title: "Trivial coverings are products with a discrete fibre"
+status: draft
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-covering-map-and-evenly-covered-neighbourhoods, def-product-topology, def-standard-topologies]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "Allen Hatcher, Algebraic Topology, §1.3"
+      url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "Marco Gualtieri, MAT1300 Week 4 Term 2, §1.6"
+      url: "https://www.math.toronto.edu/mgualt/MAT1300/Week%204%20Term%202.pdf"
+    - title: "Omar Antolín Camarena, Proper local homeomorphisms and covering maps"
+      url: "https://www.matem.unam.mx/~omar/notes/propetale.html"
+pipeline_run: null
+---
+
+## Example
+
+If $X$ is any space and $F$ is a nonempty discrete space, the projection $X\times F\to X$ is a trivial covering with fibre $F$. If $X=\varnothing$, the same holds for $F=\varnothing$; for nonempty $X$, an empty fibre would violate surjectivity.
+
+## Facts & Assumptions
+
+**Given:** The objects, hypotheses, and choice principles stated above.
+
+[F1] A **covering map** is a continuous surjection $p:E\to B$ such that every $b\in B$ has an open neighbourhood $U$ for which $p^{-1}(U)$ is a disjoint union of open sets $V_j$, called **sheets**, and each restriction $p|_{V_j}:V_j\to U$ is a homeomorphism (def-continuous-map-top, def-homeomorphism-and-open-maps, def-disjoint-union-topology). Such a $U$ is **evenly covered**, and $p^{-1}(b)$ is the **fibre** over $b$. A covering is **trivial** when it is isomorphic over $B$ to a product projection $B\times F\to B$ with $F$ discrete. ([[def-covering-map-and-evenly-covered-neighbourhoods]]).
+
+[F2] **The product set.** Let $I$ be a set and let $X_i$ be a set for each $i \in I$. The **product** is $$\prod_{i \in I} X_i \;:=\; \Big\{\, x : x \text{ is a function with domain } I \text{ and } x(i) \in X_i \text{ for every } i \in I \,\Big\},$$ and we write $x_i := x(i)$, the $i$-th **coordinate** of $x$. Two elements of the product are equal exactly when they agree at every index, functions being equal when they have the same domain and the same values. For $j \in I$ the $j$-th **projection** is $$\pi_j : \prod_{i \in I} X_i \to X_j, \qquad \pi_j(x) := x_j .$$ ([[def-product-topology]]).
+
+[F3] Throughout, a topology is as in def-topological-space, and *finite*, *at most countable* and *uncountable* are as in def-countable, so that "countable" always means "at most countable" and every finite set is countable. Let $X$ be a set. The six families below are topologies on $X$; that each really satisfies (T1), (T2) and (T3) is discharged in full after the list. ([[def-standard-topologies]]).
+
+## Verification
+
+**Proof technique:** direct.
+
+1.1 For any space $X$ and discrete set $F$, verify that the projection $X\times F\to X$ is a covering, with every open subset of the base evenly covered. [given, F1, F2, F3]
+
+2.1 Identify its sheets and fibre, including $F=\varnothing$: the projection then fails surjectivity unless $X=\varnothing$, so state the nonempty-fibre convention explicitly. [step 1.1, F1, F2]
+
+3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎

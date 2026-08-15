@@ -68,7 +68,7 @@ The short keys below are used in the component-provenance ledger. Every URL was 
 |---|---|---|
 | C1 | David Marker, *Descriptive Set Theory*, §1 Def. 1.1–Thm. 1.17, Lem. 1.30–Cor. 1.34; §2 Def. 2.46–Thm. 2.52 — https://www.math.uic.edu/~marker/math512/dst.pdf | Polish/Baire sequence spaces, Hilbert cube, continuous images, $G_\delta$ characterisations, category vocabulary and BCT |
 | C2 | Michael Kunzinger, *General Topology*, §§11.3–11.4, printed pp. 98–104 — https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf | Polish preservation, category equivalences, rational counterexample, open/residual subspaces, nowhere differentiability |
-| C3 | MFF General Topology summary, §4.3, printed pp. 17–18, Prop. 67–Thm. 75 — https://www.karlin.mff.cuni.cz/~cuth/doc/MFF/OT/ot_ENG.pdf | complete metrizability, Čech-completeness, Frolík, preservation, Baire consequence |
+| C3 | MFF General Topology summary, §4.3, printed pp. 17–18, Proposition 67 through **Věta 75** (the source uses the Czech labels `Věta` and `Důkaz`) — https://www.karlin.mff.cuni.cz/~cuth/doc/MFF/OT/ot_ENG.pdf | complete metrizability, Čech-completeness, Frolík, preservation, Baire consequence |
 | C4 | Jesse Peterson, *Real Analysis*, §3.6 Prop. 3.6.1–Cor. 3.6.6 and §3.7 Lem. 3.7.5–Thm. 3.7.6 — https://math.vanderbilt.edu/peters10/teaching/fall2016/RealAnalysis.pdf | Alexandrov/Kuratowski direction, Čech comparison, Cantor-space surjection |
 | V1 | Allen Hatcher, *Algebraic Topology*, §1.3 Prop. 1.30–1.40 and Exercises 1–3 — https://pi.math.cornell.edu/~hatcher/AT/AT.pdf | lifts, subgroup index, lifting criterion, universal covers, deck transformations/actions, restriction/product/finite-cover compactness |
 | V2 | J. Peter May, *A Concise Course in Algebraic Topology*, Ch. 3 §§1–2, 8 — https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf | definitions, path/homotopy lifting, fundamental-group injection, semilocal hypotheses, universal cover |
@@ -82,7 +82,7 @@ The checklist contains 116 source headings: 82 `included`, 15 `inline`, 5 `alrea
 
 The declines most likely to be challenged are:
 
-- C3 Theorem 75, arbitrary products of Čech-complete spaces are Baire. The source explicitly omits its proof; no planned page licenses the productively-Baire theorem, and closing it would require a separate product-game or ultrafilter development. This is the only mathematically true harvested theorem declined without a named destination.
+- C3 Věta 75, arbitrary products of Čech-complete spaces are Baire. Its `Důkaz` explicitly says the proof was omitted and is not part of the examination; no planned page licenses the productively-Baire theorem, and closing it would require a separate product-game or ultrafilter development. This is the only mathematically true harvested theorem declined without a named destination.
 - C2 Proposition 11.3.5, “every sigma-compact metrizable space is Polish.” This source statement is false: $\mathbb Q$ is countable, hence sigma-compact and metrizable, but is not completely metrizable. No planned page can license a false result.
 - V2's projective-space fundamental-group example. No planned page currently licenses that computation, and no named downstream obligation requires it.
 - The remaining covering declines are the based/unbased subgroup classification, arbitrary-subgroup realisation, regular-cover terminology with its normal-subgroup characterisation, normalizer quotient, graph-cover catalogue, and $\pi_1(S^1)$ computation. They are licensed by `classification-of-covering-spaces`, `the-fundamental-group-of-the-circle`, or both, exactly as recorded per row in the coverage artifact.
@@ -162,7 +162,7 @@ The spliced temporary validation resolved every one of these dependencies inside
 | `thm-countable-products-of-completely-metrizable-spaces` | LD/AA | C3 Prop. 67 and C1 Ex. 1.3; proof separates metric selection/bounding from the preceding product lemma. |
 | `def-polish-space` | LD/NA | C1 Def. 1.1, using the topology-owned separable-completely-metrizable convention required by the dispatch. |
 | `prop-polish-space-countability-conventions-agree` | LD/AA | C2 Def. 11.3.2 compared with C1 Def. 1.1; proof cites the exact published countable-choice equivalence. |
-| `thm-hilbert-cube-universal-for-separable-metrizable-spaces` | LD/AA | C1 Thm. 1.4; distance-coordinate proof is adapted to the library's bounded-remetrisation and product topology. |
+| `thm-hilbert-cube-universal-for-separable-metrizable-spaces` | AA/AA | C1 Thm. 1.4 states the embedding only for Polish spaces, while its distance-coordinate proof uses only separability and metrizability. The scaffold deliberately generalises the sourced statement to the classical separable-metrizable form and is therefore `ai-altered`; none of C2–C4 carries that broader statement in the declared ranges. |
 | `thm-polish-subspaces-are-exactly-g-delta-subspaces` | LD/AA | C1 Thm. 1.33 and C2 Thm. 11.3.8; proof includes the stated countable-choice countability conversion. |
 | `thm-polish-spaces-as-g-delta-subspaces-of-the-hilbert-cube` | LD/AA | C1 Cor. 1.34, C2 Thm. 11.3.9 and C4 Cor. 3.6.5; local proof composes universality and Alexandrov. |
 | `cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish` | LD/AA | C1 Ex. 1.3/Cor. 1.32 and C2 Prop. 11.3.4; proof exposes both completeness and second-countability suppliers. |
@@ -173,7 +173,7 @@ The spliced temporary validation resolved every one of these dependencies inside
 | `lem-simple-continued-fraction-convergents-and-cylinders` | LD/AA | Arithmetic machinery implicit in C1 Ex. 1.13; determinant, endpoint and diameter identities will be proved from exact rational-field and recursion suppliers. |
 | `thm-simple-continued-fractions-parametrise-the-irrationals` | LD/AA | C1 Ex. 1.13; proof supplies both algorithms, excludes rational endpoints and checks continuity in both directions. |
 | `cor-baire-sequence-space-is-homeomorphic-to-the-irrationals` | LD/AA | Exact outcome of C1 Ex. 1.13 and C2 Cor. 11.3.7; proof is the explicit coordinate recoding plus the prior theorem. |
-| `lem-finite-refining-small-diameter-covers-of-compact-metric-spaces` | LD/AA | Source-backed proof decomposition for C4 Thm. 3.7.6; finite covers are encoded in binary blocks without dropping refinement. |
+| `lem-finite-refining-small-diameter-covers-of-compact-metric-spaces` | LD/AA | Source-backed proof decomposition for C4 Thm. 3.7.6; the repaired proof uses the arbitrary finite rooted refinement tree the compactness argument supplies, without falsely asserting binary branching. |
 | `thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space` | LD/AA | C4 Lem. 3.7.5/Thm. 3.7.6; proof uses the preceding finite refinement lemma and the exact compact-implies-complete clause. |
 | `def-cech-complete-space` | LD/NA | C3 definition after Thm. 68 and C4 definition after Cor. 3.6.5; compactification convention is fixed explicitly. |
 | `lem-maps-of-compactifications-preserve-remainders` | LD/AA | C3 Lem. 69; both remainder inclusions and surjectivity are separated in the proof contract. |
@@ -228,8 +228,8 @@ The spliced temporary validation resolved every one of these dependencies inside
 | `def-universal-covering-space` | LD/NA | V1/V2 universal-cover definition; the total space is simply connected in the exact published sense. |
 | `thm-universal-covering-spaces-force-semilocal-simple-connectedness` | LD/AA | Standard necessity implicit in V1/V2; proof uses one evenly covered neighbourhood and does not assume local path-connectedness. |
 | `def-path-class-model-for-a-universal-cover` | LD/NA | V1 construction, V2 §8 and V3 closing construction; endpoint-fixed path classes and basic sets are separated from the covering proof. |
-| `lem-path-class-projection-is-a-covering-map` | LD/AA | V1/V2/V3 path-class construction; proof spends all three printed base hypotheses exactly where needed. |
-| `thm-universal-cover-existence` | LD/AA | V1 construction and V2 §8 theorem; proof uses the path-class endpoint criterion plus the already-proved injectivity of the projection on $\pi_1$. |
+| `lem-path-class-projection-is-a-covering-map` | LD/AA | V1/V2/V3 path-class construction; the nonempty hypothesis and all three printed local/base hypotheses are spent exactly where needed. |
+| `thm-universal-cover-existence` | LD/AA | V1 construction and V2 §8 theorem; the nonempty hypothesis reconciles the library's empty-space path-connectedness convention with its nonempty simply-connectedness convention, and the proof uses the path-class endpoint criterion plus injectivity of the projection on $\pi_1$. |
 | `thm-universal-cover-uniqueness-and-dominating-property` | LD/AA | V1's universal-cover discussion; proof uses the lifting criterion and lift uniqueness in both comparison directions. |
 | `cor-connected-cover-of-a-simply-connected-space-is-trivial` | LD/AA | Standard corollary of V1 lifting theory; direct endpoint-homotopy proof avoids a forward dependency on the subsequent coset theorem. |
 | `thm-sheets-equal-fundamental-group-index` | LD/AA | V1 Prop. 1.32; statement is sharpened to the actual fibre–coset bijection before applying the library's finite/$\infty$ index convention. |
@@ -332,13 +332,13 @@ This is the intended step-5 reading order. Each row records the stable id, kind 
 23. `def-universal-covering-space` — definition — Universal covering spaces
 24. `thm-universal-covering-spaces-force-semilocal-simple-connectedness` — theorem — A space admitting a universal covering is semilocally simply connected
 25. `def-path-class-model-for-a-universal-cover` — definition — The based path-class model and basic sets for a universal cover
-26. `lem-path-class-projection-is-a-covering-map` — lemma — For a path-connected locally path-connected semilocally simply connected space, the path-class projection is a covering map
-27. `thm-universal-cover-existence` — theorem — Every path-connected locally path-connected semilocally simply connected space has a universal cover
-28. `thm-universal-cover-uniqueness-and-dominating-property` — theorem — Universal covers are uniquely isomorphic over the base and lift to every connected covering
+26. `lem-path-class-projection-is-a-covering-map` — lemma — For a nonempty path-connected locally path-connected semilocally simply connected space, the path-class projection is a covering map
+27. `thm-universal-cover-existence` — theorem — Every nonempty path-connected locally path-connected semilocally simply connected space has a universal cover
+28. `thm-universal-cover-uniqueness-and-dominating-property` — theorem — For a path-connected locally path-connected base, universal covers are uniquely isomorphic over the base and lift to every connected covering
 29. `cor-connected-cover-of-a-simply-connected-space-is-trivial` — corollary — A connected covering of a locally path-connected simply connected space is one-sheeted and trivial
-30. `thm-sheets-equal-fundamental-group-index` — theorem — For a nonempty path-connected total space, a covering fibre is in bijection with the cosets of the induced fundamental-group subgroup
+30. `thm-sheets-equal-fundamental-group-index` — theorem — For a nonempty path-connected total space, a covering fibre is in bijection with the left cosets of the induced fundamental-group subgroup
 31. `thm-compactness-is-invariant-under-finite-sheeted-coverings` — theorem — For a finite-sheeted covering, the total space is compact exactly when the base is compact
-32. `thm-deck-group-of-a-universal-cover-is-the-fundamental-group` — theorem — The deck group of a universal cover is isomorphic to the fundamental group with the inverse-path convention
+32. `thm-deck-group-of-a-universal-cover-is-the-fundamental-group` — theorem — For a path-connected locally path-connected semilocally simply connected base, the deck group of a universal cover is isomorphic to the fundamental group with the inverse-path convention
 
 ### `covering-spaces-and-lifting-examples` (8 items)
 
@@ -354,10 +354,328 @@ This is the intended step-5 reading order. Each row records the stable id, kind 
 ## Final Beta report
 
 - **Pages and counts:** four pages, 86 items total. The A/B counts are 40/6 for complete metrizability and Baire, and 32/8 for covering spaces and lifting. Fifteen items are definitions and 71 are proof-bearing; all 71 proof-bearing items have initial proof contracts with all eight boundary axes.
-- **Harvest:** 116 headings from nine sources. Of these, 82 are included, 15 are absorbed inline, 5 are already published, and 14 are declined (12 deferred, 2 out of scope). The challenged declines are C3 Theorem 75 on arbitrary products of Čech-complete spaces being Baire, C2 Proposition 11.3.5 because it is false, and V2's projective-space computation because no planned page licenses it. The remaining declines name `classification-of-covering-spaces`, `the-fundamental-group-of-the-circle`, or both.
+- **Harvest:** 116 headings from nine sources. Of these, 82 are included, 15 are absorbed inline, 5 are already published, and 14 are declined (12 deferred, 2 out of scope). The challenged declines are C3 Věta 75 on arbitrary products of Čech-complete spaces being Baire, C2 Proposition 11.3.5 because it is false, and V2's projective-space computation because no planned page licenses it. The remaining declines name `classification-of-covering-spaces`, `the-fundamental-group-of-the-circle`, or both.
 - **Split:** none proposed. Both A pages are below the 60-item threshold after harvesting, and neither pair cites the other.
 - **Published dependencies:** all 91 distinct external item dependencies listed in the dependency-audit section were opened on disk. Each is published and component-classified; none has an AI-generated Statement. The exact-clause confidence route is recorded for each as either source-checked or independently confirmed established mathematics. No published dependency was found false.
 - **Conventions:** the material disagreements and choices are recorded above: meagre/meager spelling; complete metrizability is reused rather than re-minted; separable versus second-countable Polish conventions; zero-based sequences and the continued-fraction integer coordinate; some/every compactification formulations of Čech-completeness; surjective covering maps; maps versus isomorphisms over a base; right monodromy versus the house path-product convention; finite/$\infty$ subgroup index; and the exact local path-connectedness/semilocal simple-connectedness hypotheses. Unrestricted composition of coverings was rejected in favour of the sourced finite-outer-sheet theorem.
 - **Step-4 changes required:** splice the three proposed prerequisites onto `complete-metrizability-and-baire`, the three proposed prerequisites onto `covering-spaces-and-lifting`, add the single recorded forward reference to the published complete-metrizability remark, and apply the T8/DG prose corrections. These are recorded findings, not edits made by this Beta.
 - **Checks:** `coverage-checklist` reports 2 pages, 116 headings, 0 errors and 0 warnings. Manifest-only `content-policy` reports 86 items, 0 errors and 0 warnings. `boundary-audit` reports 568 rows, no template-reuse cluster and no contradicted disposition; its 71 unauthored-item detector skips are expected at scaffold time. `prosecheck --warnings` reports 0 errors and 27 non-positional count-language warnings. The authoritative plan validates green for its 266 populated pages, and an in-memory splice validates green for 270 populated pages with no cycles, forward references, B-page dependencies or unresolved ids. JSON/contract reconciliation finds 86 unique candidate ids, no published-id collision, and an exact 71/71 contract match.
 - **Blockers and omissions:** none. Čech-completeness was closed rather than half-stated. Classification of covering spaces and $\pi_1(S^1)\cong\mathbb Z$ were intentionally not scaffolded because the named later pages own them. `tools/gates.mjs` was not run, exactly as the dispatch instructs; no permission prompt or escalation was requested. No file outside this batch's four writable artifacts was edited.
+
+## Step-3 fix pass
+
+Alpha's addendum identifies a routing defect in the dispatch: the report has no
+literal `B3-*` finding ids. Its stable routing table assigns batch 3 the
+original ids `F1`, `E1`, `E2`, `F2`, `E3`, and `F3`. Those ids are preserved
+below; `G1`–`G3` remain orchestrator-owned and were not treated as Beta edits.
+
+- **F1 — applied.** The titles of
+  `thm-universal-cover-uniqueness-and-dominating-property` and
+  `thm-deck-group-of-a-universal-cover-is-the-fundamental-group` now state the
+  path-connectedness, local path-connectedness, and (for the deck-group
+  theorem) semilocal simple-connectedness hypotheses used by their strategies.
+  The ordered inventory and the title-bearing boundary rows in the proof
+  contracts were synchronized.
+- **E1 — applied.** The coverage artifact now has a structured
+  `planned_overlaps` record for
+  `regular-continued-fractions-and-diophantine-approximation` (order 57.013).
+  It names all six colliding planned ids:
+  `def-regular-continued-fraction`,
+  `def-convergents-of-regular-continued-fraction`,
+  `lem-continued-fraction-convergent-recurrence`,
+  `lem-continued-fraction-determinant-identity`,
+  `thm-continued-fraction-algorithm-for-real-numbers`, and
+  `thm-rational-continued-fraction-termination`, together with the three local
+  topology items that temporarily supply the minimum machinery needed for
+  $\mathbb N^{\mathbb N}\cong\mathbb R\setminus\mathbb Q$. The number-theory
+  page is earlier but unbuilt and therefore cannot be cited; its eventual
+  duplication remains an explicit owner decision rather than a hidden
+  collision.
+- **E2 — applied.** The two complete-metrizability declines now carry
+  `license_page: null`. The false Kunzinger proposition records the exact
+  missing local-compactness hypothesis used by its proof; the MFF row and
+  locator now use the source's Czech labels `Věta 75` and `Důkaz` and record
+  that no planned page licenses the omitted productively-Baire proof.
+- **F2 — applied.** All eleven deferred covering-space rows now carry a
+  structured `license_page`, normally
+  `classification-of-covering-spaces`; the mixed circle row additionally names
+  `the-fundamental-group-of-the-circle`. The projective-space out-of-scope row
+  also carries `license_page: null`, so every one of the batch's fourteen
+  declines has the field rather than relying on prose alone.
+- **E3 — applied.** The Statement provenance of
+  `thm-hilbert-cube-universal-for-separable-metrizable-spaces` is now
+  `ai-altered`, not `literature-derived`. Marker's Theorem 1.4 states only the
+  Polish-space form; its proof supports the broader classical
+  separable-metrizable form, but that is a material generalisation, and none of
+  C2–C4 states it in the declared ranges. The per-item provenance rationale was
+  updated; no dependency or theorem statement changed.
+- **F3 — applied.** The Hawaiian-earring strategy now proves local
+  path-connectedness: short arcs handle non-wedge points, while sufficiently
+  small wedge-centred balls are unions of arcs through the wedge point and all
+  sufficiently small whole circles. The proof contract now has a separate
+  derivation for this title-bearing claim and synchronized boundary evidence.
+
+### Step-3 gate record and closing report
+
+- `node tools/coverage-checklist.mjs research/frontier-14-batch-3.coverage.json`
+  — **pass:** 2 pages, 116 harvested results, 0 errors, 0 warnings.
+- `node tools/content-policy.mjs --manifest-only research/frontier-14-batch-3.pages.json`
+  — **pass:** 86 scoped items, 0 errors, 0 warnings.
+- `node tools/validate-plan.mjs research/plan-spec.json` — **pass:** the final
+  line reports an acyclic, consistent declared order with no item-level cycles,
+  forward references, B-page dependencies, or unresolved ids among the 266
+  populated pages. The batch's proposed `requires` edges are still an
+  orchestrator splice decision, as Alpha's `G1` records.
+- `node tools/boundary-audit.mjs research/frontier-14-batch-3.proof-contracts.json --json`
+  — **pass:** 568 boundary rows, 0 template clusters, 0 contradicted candidates;
+  the 71 item-text skips are the expected scaffold-time unauthored items.
+- All three JSON artifacts parse. The batch still contains four pages and 86
+  items: 40/6 on complete metrizability and Baire and 32/8 on covering spaces
+  and lifting. The proof-contract scope remains exactly 71 proof-bearing items.
+- Harvest yield is unchanged: 82 included, 15 inline, 5 already published, and
+  14 declined. The declines expected to draw scrutiny remain MFF Věta 75, the
+  false Kunzinger Proposition 11.3.5, and May's projective-space computation;
+  all now have explicit null licensing destinations where no planned page
+  exists.
+- No split is proposed. No new dependency edge or published dependency was
+  introduced by this pass, so the original 91-item on-disk dependency audit and
+  its source-checked/established-mathematics confidence routes remain unchanged.
+  No new published item needed to be opened for these fixes.
+- The newly recorded convention decisions are that source labels must remain
+  faithful (`Věta`/`Důkaz`), a proof-supported generalisation is
+  `ai-altered` rather than `literature-derived`, and theorem titles print the
+  hypotheses their proofs spend. There is no batch-artifact blocker. The only
+  remaining pre-splice action affecting this batch is the orchestrator-owned
+  approval of the `G1` prerequisite package; this Beta did not edit
+  `plan-spec.json` or any normative/prose-plan file.
+
+## Step-5 authoring
+
+### Authored scope
+
+- All 86 immutable ids in the ordered inventory above are authored: 40 items
+  on `complete-metrizability-and-baire`, 6 on its examples page, 32 on
+  `covering-spaces-and-lifting`, and 8 on its examples page. Fifteen are
+  definitions and 71 are proof-bearing.
+- Both A pages have their authored summary bodies. Both B pages have
+  frontmatter only, with zero authored body bytes after the closing delimiter.
+- Every item has `status: draft` and `origin: session`. No item has
+  `verification.audited`.
+- The splice receipt `research/frontier-14-splice-3.json` has no
+  `summary_corrections` field. No replacement prose was therefore available to
+  apply. The two proposed A-page summaries from this batch's notes were used
+  unchanged; no summary was restored to either B page.
+
+### Provenance rationale
+
+- 15 definitions are `literature-derived / not-applicable`. Their bodies fix
+  the source-backed definitions and library conventions; they do not carry
+  independent proofs.
+- 68 proof-bearing items are `literature-derived / ai-altered`. Their
+  Statements follow the harvested literature, while the proofs were rebuilt to
+  use only available library items, explicit inline derivations, and the
+  library's choice and multiplication conventions. The component-level source
+  and reason for every one remains in the provenance table above.
+- Three items are `ai-altered / ai-altered`:
+  `thm-hilbert-cube-universal-for-separable-metrizable-spaces` because the
+  source's proof, but not its printed theorem, supports the broader
+  separable-metrizable form;
+  `fs-every-baire-space-is-completely-metrizable` because the pedagogical false
+  universal claim and its explicit witness are adapted; and
+  `cex-a-surjective-local-homeomorphism-need-not-be-a-covering-map` because the
+  source construction was specialised to an explicit two-interval witness.
+  None is used as a load-bearing dependency.
+
+### Claim and obligation changes
+
+- `lem-path-class-projection-is-a-covering-map` and
+  `thm-universal-cover-existence` were narrowed to nonempty path-connected
+  bases. The library defines the empty space as path-connected but defines a
+  simply connected space to be nonempty, so the scaffold's empty case could
+  not establish the printed conclusion. The item Statements and titles,
+  manifest strategies, proof-contract maps and boundary rows, provenance
+  rationales, ordered inventory, and coverage rows are synchronized.
+- `lem-finite-refining-small-diameter-covers-of-compact-metric-spaces` now uses
+  the arbitrary finite rooted refinement tree actually supplied by compactness,
+  rather than asserting false binary branching. The Cantor-surjection theorem
+  block-codes each finite child set by a finite binary word. The manifest,
+  proofs, contracts, and provenance rationale move together.
+- `thm-sheets-equal-fundamental-group-index` now identifies left cosets under
+  the library's traversal-order path multiplication convention. Its title,
+  Statement, proof, manifest, contract, inventory, provenance row, and coverage
+  row are synchronized.
+- `thm-simple-continued-fractions-parametrise-the-irrationals` now declares the
+  genuinely used `def-simple-continued-fraction-coding` dependency in the item,
+  manifest, and proof contract. No unused dependency was added.
+- Empty-space branches were made explicit in the complete-metrizability and
+  Čech-completeness arguments. Every planned-title placeholder citation was
+  replaced by the authored Definition or Statement, and the two overbroad
+  countability/Tychonoff restatements were narrowed to the propositions used.
+- No harvested claim was dropped during Step 5.
+
+### Gate record
+
+The following are the verbatim terminal summaries from the final runs.
+
+`node tools/tsx-run.mjs tools/precheck.mts items/<all batch-3 ids>`
+
+```text
+71 checked, 0 failing — all clean
+```
+
+The 15 definition files are in the supplied scope but do not enter the
+proof-bearing precheck count. The one annotation repaired on the final pass
+then reported:
+
+```text
+PASS items/thm-baire-sequence-space-is-polish.md (direct)
+
+1 checked, 0 failing — all clean
+```
+
+`node tools/validate-plan.mjs research/plan-spec.json`
+
+```text
+OK — declared page order is acyclic and consistent; no item-level cycles, forward
+references, B-page dependencies, or unresolved ids among the 282 page(s) with item lists.
+NOTE: 889 planned page(s) carry no item list yet (marked * above). Their reading
+order is guaranteed; their item dependencies are not yet asserted, so re-run this
+after writing each page's items.
+```
+
+`node tools/content-policy.mjs research/frontier-14-batch-3.pages.json`
+
+```text
+content-policy: 86 scoped item(s), 0 error(s), 0 warning(s)
+```
+
+`node tools/proof-contract.mjs research/frontier-14-batch-3.proof-contracts.json --strict`
+
+```text
+proof-contract: 0 error(s), 0 warning(s), 71/71 item(s) checked
+```
+
+`node tools/citation-fidelity.mjs research/frontier-14-batch-3.proof-contracts.json`
+
+```text
+citation-fidelity: 268 citation(s) over 71 authored item(s)
+
+QUOTE NOT FOUND — none; every recorded quote appears in its cited item.
+
+WIDENING CANDIDATES — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+`node tools/boundary-audit.mjs research/frontier-14-batch-3.proof-contracts.json`
+
+```text
+boundary-audit: 568 rows over 1 contract file(s); 340 marked not_applicable
+
+TEMPLATE REUSE — none at or above 3 members.
+
+CONTRADICTED DISPOSITIONS — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+`node tools/coverage-checklist.mjs research/frontier-14-batch-3.coverage.json`
+
+```text
+coverage-checklist: 2 page(s), 116 harvested result(s), 0 error(s), 0 warning(s)
+```
+
+Scoped `prosecheck --warnings` over all 86 item files and four page files:
+
+```text
+90 file(s) checked. 0 error(s), 0 warning(s).
+
+OK — no positional claim contradicts the spec.
+```
+
+`node tools/prosecheck.mjs`
+
+```text
+5215 file(s) checked. 0 error(s), 569 warning(s).
+  library-scope-denial: 206
+  count-in-prose: 189
+  count-of-this-page: 174
+
+(re-run with --warnings to list them; warnings are heuristic and have legitimate cases)
+
+OK — no positional claim contradicts the spec.
+```
+
+`node tools/depcheck.mjs`
+
+```text
+8 ERROR(s):
+  [dep-unresolved] items/rem-choice-ledger-for-the-adjoint-functor-theorems.md: deps entry "thm-a-complete-locally-small-category-with-a-jointly-weakly-initial-set-has-an-initial-object" resolves to nothing
+  [dep-unresolved] items/rem-choice-ledger-for-the-adjoint-functor-theorems.md: deps entry "thm-general-adjoint-functor-theorem-objectwise-form" resolves to nothing
+  [dep-unresolved] items/rem-choice-ledger-for-the-adjoint-functor-theorems.md: deps entry "thm-general-adjoint-functor-theorem-functor-form" resolves to nothing
+  [dep-unresolved] items/rem-choice-ledger-for-the-adjoint-functor-theorems.md: deps entry "thm-special-adjoint-functor-theorem-objectwise-form" resolves to nothing
+  [dep-unresolved] items/rem-choice-ledger-for-the-adjoint-functor-theorems.md: deps entry "thm-special-adjoint-functor-theorem-functor-form" resolves to nothing
+  [link-unresolved] items/rem-choice-ledger-for-the-adjoint-functor-theorems.md: wikilink [[thm-a-complete-locally-small-category-with-a-jointly-weakly-initial-set-has-an-initial-object]] resolves to nothing
+  [link-unresolved] items/rem-choice-ledger-for-the-adjoint-functor-theorems.md: wikilink [[thm-general-adjoint-functor-theorem-objectwise-form]] resolves to nothing
+  [link-unresolved] items/rem-choice-ledger-for-the-adjoint-functor-theorems.md: wikilink [[thm-special-adjoint-functor-theorem-objectwise-form]] resolves to nothing
+
+FAIL
+```
+
+This latest repository-wide run exited 1 after a concurrent batch introduced
+these 8 errors. A read-only id-scope comparison reports `batch-3 diagnostics
+0`; the displayed adjoint-functor item is outside this batch, so it cannot be
+repaired within the dispatch's write scope. An earlier run before that
+concurrent change was green.
+
+`node tools/fwdcheck.mjs`
+
+```text
+OK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.
+```
+
+`node tools/extcheck.mjs`
+
+```text
+OK — every recorded-not-proved statement is a cited remark with no proof, and every consequence is marked.
+```
+
+`node tools/rendercheck.mjs`
+
+```text
+OK — 5215 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+```
+
+`citecheck` exited 0 with 29 heuristic warnings across 4,907 items. Its only
+batch-3 warning is the word "transitivity" in
+`prop-monodromy-acts-by-bijections-and-detects-components`; this is transitivity
+of a group action, not an order axiom, so no dependency change is licensed.
+
+### Blocker and omitted operation
+
+The prevention-layer liveness gate is not green:
+
+```text
+gate-liveness [frontier-14-batch-3-step5] — a gate that checked nothing is not a gate that passed
+
+  VACUOUS   finite-smoke         0 checks (exit 0)
+            a contract may reference a check the registry does not define; those resolve to nothing
+  live      proof-contract       71 items checked
+  live      coverage-checklist   116 harvested results
+  live      precheck             3876 items checked
+
+1 gate(s) reported a result over an empty scope. Fix the scope, not the gate.
+```
+
+`tools/finite-smoke.mjs` has graph, poset, cyclic-group, arithmetic,
+polynomial, recurrence, and matrix checks, but no applicable topology or
+covering-space check. A proof contract may select a registered check but cannot
+define one. Attaching an unrelated check would manufacture coverage, and
+extending the shared registry is outside this batch's write scope. The second
+blocker is the repository-wide `depcheck` failure from the concurrent
+adjoint-functor batch recorded above; batch 3 contributes no diagnostic. These
+are the only blockers. `tools/gates.mjs` was not run because the orchestrator
+owns the gates of record. No permission prompt or escalation was requested.

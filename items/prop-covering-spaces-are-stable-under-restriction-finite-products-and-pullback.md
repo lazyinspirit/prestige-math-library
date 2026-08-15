@@ -1,0 +1,51 @@
+---
+id: prop-covering-spaces-are-stable-under-restriction-finite-products-and-pullback
+kind: proposition
+title: "Covering spaces are stable under restriction, finite products, and pullback"
+status: draft
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-pullback-covering-space, def-covering-map-and-evenly-covered-neighbourhoods, def-product-topology, def-subspace-topology-top]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "Allen Hatcher, Algebraic Topology, §1.3"
+      url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "J. Peter May, A Concise Course in Algebraic Topology, Ch. 3"
+      url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+    - title: "Marco Gualtieri, MAT1300 Week 4 Term 2, §1.6"
+      url: "https://www.math.toronto.edu/mgualt/MAT1300/Week%204%20Term%202.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+Restrictions of coverings to open subspaces, finite products of coverings, and pullbacks of coverings are covering maps. The empty product is the identity covering of a one-point space.
+
+## Facts & Assumptions
+
+**Given:** The objects, hypotheses, and choice principles stated above.
+
+[F1] For a covering $p:E\to B$ and a continuous map $f:X\to B$, define $f^*E:=\{(x,e)\in X\times E:f(x)=p(e)\}$ with the subspace topology, and let $f^*p:f^*E\to X$ be $(x,e)\mapsto x$ (def-product-topology, def-subspace-topology-top). This is the **pullback covering space**; its covering property is proved in prop-covering-spaces-are-stable-under-restriction-finite-products-and-pullback. ([[def-pullback-covering-space]]).
+
+[F2] A **covering map** is a continuous surjection $p:E\to B$ such that every $b\in B$ has an open neighbourhood $U$ for which $p^{-1}(U)$ is a disjoint union of open sets $V_j$, called **sheets**, and each restriction $p|_{V_j}:V_j\to U$ is a homeomorphism (def-continuous-map-top, def-homeomorphism-and-open-maps, def-disjoint-union-topology). Such a $U$ is **evenly covered**, and $p^{-1}(b)$ is the **fibre** over $b$. A covering is **trivial** when it is isomorphic over $B$ to a product projection $B\times F\to B$ with $F$ discrete. ([[def-covering-map-and-evenly-covered-neighbourhoods]]).
+
+[F3] **The product set.** Let $I$ be a set and let $X_i$ be a set for each $i \in I$. The **product** is $$\prod_{i \in I} X_i \;:=\; \Big\{\, x : x \text{ is a function with domain } I \text{ and } x(i) \in X_i \text{ for every } i \in I \,\Big\},$$ and we write $x_i := x(i)$, the $i$-th **coordinate** of $x$. Two elements of the product are equal exactly when they agree at every index, functions being equal when they have the same domain and the same values. For $j \in I$ the $j$-th **projection** is $$\pi_j : \prod_{i \in I} X_i \to X_j, \qquad \pi_j(x) := x_j .$$ ([[def-product-topology]]).
+
+[F4] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $S \subseteq X$. The **subspace topology** (also *relative topology*) on $S$ is $$\mathcal{T}_S := \{\, U \cap S : U \in \mathcal{T} \,\},$$ the family of **traces** on $S$ of the open sets of $X$. The pair $(S, \mathcal{T}_S)$ is a **subspace** of $X$. A subset of $S$ that lies in $\mathcal{T}_S$ is said to be **open in $S$**, and *relatively open* where the ambient space needs emphasis. ([[def-subspace-topology-top]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Restrict an evenly covered neighbourhood for restriction, take products of evenly covered neighbourhoods for finite products, and identify each pullback sheet with the corresponding open subset of the new base. [given, F2, F1, F4, F3]
+
+2.1 The preceding construction and implications establish the assertion. [step 1.1] ∎

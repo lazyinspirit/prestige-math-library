@@ -1,0 +1,55 @@
+---
+id: thm-homotopy-lifting-for-covering-maps
+kind: theorem
+title: "Existence and uniqueness of homotopy lifts through a covering map"
+status: draft
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-lift-of-a-map-path-and-homotopy, thm-path-lifting-for-covering-maps, def-product-topology, lem-continuity-is-local-and-pastes, def-compact-space]
+justified_by: []
+aliases: []
+landmark: true
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "Allen Hatcher, Algebraic Topology, §1.3"
+      url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
+    - title: "J. Peter May, A Concise Course in Algebraic Topology, Ch. 3"
+      url: "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf"
+    - title: "Marco Gualtieri, MAT1300 Week 4 Term 2, §1.6"
+      url: "https://www.math.toronto.edu/mgualt/MAT1300/Week%204%20Term%202.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+Let $p:E\to B$ be a covering, $H:Y\times I\to B$ a homotopy, and $\widetilde H_0:Y\to E$ a lift of $H(-,0)$. There is a unique lift $\widetilde H:Y\times I\to E$ of $H$ extending $\widetilde H_0$.
+
+## Facts & Assumptions
+
+**Given:** The objects, hypotheses, and choice principles stated above.
+
+[F1] Let $p:E\to B$ be a covering and $f:Y\to B$ continuous. A **lift** of $f$ through $p$ is a continuous map $\widetilde f:Y\to E$ with $p\circ\widetilde f=f$. This includes lifts of paths $I\to B$ and of homotopies $Y\times I\to B$; an initial lift prescribes the restriction at time $0$ (def-homotopy-relative-and-path-homotopy, def-path-connected). ([[def-lift-of-a-map-path-and-homotopy]]).
+
+[F2] Let $p:E\to B$ be a covering, let $\alpha:I\to B$ be a path, and let $e_0\in E$ satisfy $p(e_0)=\alpha(0)$. There is a unique path $\widetilde\alpha:I\to E$ with $\widetilde\alpha(0)=e_0$ and $p\circ\widetilde\alpha=\alpha$. ([[thm-path-lifting-for-covering-maps]]).
+
+[F3] **The product set.** Let $I$ be a set and let $X_i$ be a set for each $i \in I$. The **product** is $$\prod_{i \in I} X_i \;:=\; \Big\{\, x : x \text{ is a function with domain } I \text{ and } x(i) \in X_i \text{ for every } i \in I \,\Big\},$$ and we write $x_i := x(i)$, the $i$-th **coordinate** of $x$. Two elements of the product are equal exactly when they agree at every index, functions being equal when they have the same domain and the same values. For $j \in I$ the $j$-th **projection** is $$\pi_j : \prod_{i \in I} X_i \to X_j, \qquad \pi_j(x) := x_j .$$ ([[def-product-topology]]).
+
+[F4] Let $X$, $Y$ and $Z$ be topological spaces, with subspaces carrying the subspace topology (def-subspace-topology-top). Then: 1. **Composites.** If $f : X \to Y$ and $g : Y \to Z$ are continuous (def-continuous-map-top) then $g \circ f : X \to Z$ is continuous. 2. **Open cover.** Let $f : X \to Y$ be a function and let $\{\, U_i : i \in I \,\}$ be a family of open subsets of $X$ with $\bigcup_{i \in I} U_i = X$. If $f|_{U_i} : U_i \to Y$ is continuous for every $i \in I$, then $f$ is continuous. 3. **Finite closed cover.** Let $f : X \to Y$ be a function, let $n \ge 1$ and let $F_1, \dots, F_n$ be closed subsets of $X$ with $F_1 \cup \dots \cup F_n = X$. If $f|_{F_k} : F_k \to Y$ is continuous for every $k$, then $f$ is continuous. The converses of claims 2 and 3 hold with no hypothesis on the cover at all: every restriction of a continuous map to a subspace is continuous (def-subspace-topology-top). The finiteness in claim 3 is not removable; see the remarks. ([[lem-continuity-is-local-and-pastes]]).
+
+[F5] Let $(X, \mathcal{T})$ be a topological space (def-topological-space). ([[def-compact-space]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 For a homotopy $H:Y\times I\to X$ and a lift at time zero, use evenly covered neighbourhoods and compactness of the interval to extend the lift over successive time strips locally in $Y$. [given, F1, F2, F5]
+
+2.1 Pasting gives a global lift, and the set of points where two lifts agree is open and closed on each vertical interval, yielding uniqueness. [step 1.1, F1, F4, F3]
+
+3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎

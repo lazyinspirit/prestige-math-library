@@ -1,0 +1,23 @@
+{
+  "role": "alpha",
+  "label": "recheck-b",
+  "run": "frontier-14",
+  "covers": [
+    "4",
+    "5",
+    "6"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-15T17:50:58.569Z",
+  "ended_at": "2026-08-15T18:00:06.012Z",
+  "ms": 547443,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/frontier-14-dispatch/alpha-recheck-b.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/frontier-14-dispatch/alpha-recheck-b.prompt.md",
+  "tail": "Re-check complete. `research/frontier-14-alpha-b-recheck.md` is written.\n\n## All eleven findings confirmed on disk\n\nEvery finding came back `applied` with no pushback from any Beta — the exact pattern this stage is meant to distrust — so I verified each against the file rather than the claim. All eleven are genuinely on disk.\n\nThe strongest check was available and clean: the fix pass is committed at `3c4e52f8`, so I diffed the six scaffold/coverage artifacts against its parent. **37 insertions, 15 deletions, every line traceable to a numbered finding.** No unrequested edits, renames, or removals. I also re-ran all four gates myself rather than relaying: `coverage-checklist`, `content-policy --manifest-only`, `validate-plan`, and my own closure checker (0 out-of-closure/unresolved/A-depends-on-B deps across all three batches), plus a fresh intra-page forward-reference scan. The arithmetic all reconciles — batch 5's harvest 67→70, batch 6's manifest 52→53, batch 6's external deps 49→55.\n\nTwo fixes I checked harder than the notes claimed:\n\n- **B6-1** (the sole `insufficient` blocker) — `thm-commutative-rings-are-reflective-in-rings` is on the A page at index 38, 44 items total. I verified the degenerate case I had not raised: the commutator ideal can be the whole ring (`M₂(k)` is simple and noncommutative), so the reflector lands on the zero ring. `def-ring.md` says in as many words that `1 ≠ 0` is not required, so the reflector is total. I ordered this item added, so a defect in it would have been mine.\n- **B4-4** — the Beta also propagated the two title renames into all eight `proof-contracts.json` occurrences, which I had not asked for and which matters: a stale quote there is an inflated restatement pointing at a title that no longer exists.\n\n## Two new findings, neither blocking\n\n**B4-5 and B6-5: I under-scoped B5-1.** I found that defect class (scaffold items no harvest or `canonical` row ever names, invisible to `coverage-checklist` because it only walks sources→items) in batch 5 and never checked whether batches 4 and 6 had it. They do — ten and eleven items. Three of batch 6's are real harvest misses with backing sitting in the declared read range: `def-the-solution-set-condition`, and the two compact-Hausdorff items that Mac Lane's unit-interval example backs but whose row points only at the Stone–Čech theorem.\n\nNeither blocks the splice: step 4 freezes the item list into `plan-spec.json`, not the coverage artifact, so the repair costs identical coverage rows before or after, and the gate re-runs at step 6. Routed there with exact ids.\n\nThe class has now appeared twice, so I wrote the detector rather than hand-reading again — `scratchpad/alpha-b/reverse-coverage.py`, exit 1 on any unbacked item. It reproduces B5-1 on the pre-fix batch 5 and finds both new findings.\n\n## Verdict\n\nAll three pairs **ready for splice**. Batch 6's `insufficient` is lifted. `plan-spec.json` still shows 0 items for all three pages, so this landed ahead of the freeze.\n\nCarried to step 6, not step 4: B4-5, B6-5, batch 5's three unbacked B-page items, and one authoring note (step 5 should make the `R/C = 0` boundary explicit — the contract's `degenerate` row cites \"step 1.1\" without naming it). The report also restates what remains the orchestrator's: five design-doc amendments due at step 4, the `PREVENTIONS` §A4 wording that calls a non-mechanical check mechanical, and the FTA page-ordering duplication."
+}

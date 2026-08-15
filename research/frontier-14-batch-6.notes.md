@@ -478,3 +478,231 @@ simplicial-set/Segal construction, rather than fabricating the unrelated
   `node tools/citation-fidelity.mjs research/frontier-14-batch-6.proof-contracts.json --fail-on-missing-quote`
   — **PASS**: every one of the 91 recorded dependency quotes occurs in its
   cited item, with no missing quote or widening candidate.
+## Step-5 authoring
+
+### Items and pages authored
+
+All 53 spliced ids in `research/frontier-14-batch-6.pages.json` were authored:
+44 A-page items and 9 B-page examples/counterexamples. The two page files are
+`library/category-theory/reflective-subcategories-and-the-adjoint-functor-theorems.md`
+and
+`library/category-theory/reflective-subcategories-and-the-adjoint-functor-theorems-examples.md`.
+The A-page item list is exactly the receipt's 44-id list, in receipt order; the
+B-page `examples` list is exactly the receipt's 9-id list, in receipt order.
+Every item is `status: draft`, `origin: session`, and no item has
+`verification.audited`.
+
+The splice receipt has no `summary_corrections` key despite the dispatch saying
+that it would. I therefore used the two-paragraph proposed A summary above
+verbatim, without editorial changes. The B-page body has zero bytes after its
+frontmatter.
+
+### Actual component provenance and rationale
+
+The planned provenance table above was adopted without changes. Its actual
+counts are:
+
+- 7 `literature-derived / not-applicable` definitions: the harvested Riehl,
+  Leinster, and Mac Lane definitions, with house-explicit domains, directions,
+  and set-indexing.
+- 3 `ai-altered / not-applicable` items: the formal-dual coreflective
+  definition and the two synthesis remarks; none supplies a new load-bearing
+  theorem.
+- 23 `literature-derived / ai-altered` results/examples: the Statement is the
+  harvested result, while the proof was rebuilt against the library's exact
+  published clauses and explicit choice/size conventions.
+- 14 `ai-altered / ai-altered` results/false statements/examples: these are
+  house formulations or direct consequences of the harvested results; each
+  local derivation is separately attributed.
+- 1 `ai-altered / ai-generated` false statement,
+  `fs-a-continuous-functor-on-a-complete-category-has-a-left-adjoint`: the
+  invalid implication is literature-motivated, while the explicit
+  `Ord^op -> 1` refutation was constructed and checked here.
+- 5 `ai-generated / ai-generated` non-load-bearing leaves: the singleton-Set
+  colimit counterexample, the two mono representatives, the ordinal-preorder
+  non-well-powered category, the explicit torsion-free reflection, and the
+  set-supported-family no-coseparator category. Each has its required
+  `generation` record and explicit witness verification. No other item depends
+  on any of them.
+
+Every source-backed component retains a supporting URL. The proof contract now
+contains 153 exact citations across the 43 proof-bearing items. Planned-title
+placeholders were replaced by the actual authored Statement/Definition/Example
+text, and all 43 derivation maps contain every numbered step rather than a
+single vacuous step.
+
+### Author-time dependency and obligation corrections
+
+No claim was narrowed, renamed, merged, or dropped, and the coverage harvest
+therefore needed no disposition change. Three proofs required genuine
+dependency additions beyond the spliced baseline:
+
+- `prop-compact-hausdorff-spaces-satisfy-the-special-adjoint-functor-hypotheses`
+  adds `thm-compactness-under-continuous-maps` for the compact-image step in the
+  well-powering argument.
+- `fs-a-continuous-functor-on-a-complete-category-has-a-left-adjoint` adds
+  `def-category` for the exact definable-class category clause used by the
+  `Ord^op` construction. The Alpha-required class-convention dependency is
+  retained.
+- `cex-a-category-that-is-not-well-powered` adds `def-category` and
+  `def-small-locally-small-and-large-category` for the exact definable-class
+  and hom-set clauses. The Alpha-required class-convention dependency is
+  retained.
+
+The commutative-ring reflection explicitly handles the zero-ring quotient
+case. Boundary dispositions were re-read against the authored proofs: the
+contract has 344 rows, of which 250 are specifically `not_applicable`; the
+boundary audit reports neither a three-member template cluster nor a
+text-contradicted disposition. The two iff directions and the empty, zero,
+one, degenerate, endpoint, and nonempty-selection cases that occur in the text
+are anchored to their actual proof steps.
+
+### Gate output (verbatim terminal output)
+
+`node tools/tsx-run.mjs tools/precheck.mts items/<all 53 batch ids>`:
+
+```text
+PASS items/thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow.md (direct)
+PASS items/thm-the-counit-of-a-reflection-is-an-isomorphism.md (direct)
+PASS items/thm-an-object-lies-in-a-reflective-subcategory-exactly-when-its-reflection-unit-is-invertible.md (direct)
+PASS items/thm-a-reflective-inclusion-creates-all-limits.md (direct)
+PASS items/thm-a-reflective-subcategory-has-every-colimit-the-ambient-category-has.md (direct)
+PASS items/cor-a-reflective-subcategory-of-a-complete-category-is-complete.md (direct)
+PASS items/thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence.md (direct)
+PASS items/thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections.md (direct)
+PASS items/lem-wide-pullbacks-compute-intersections-independently-of-representatives.md (direct)
+PASS items/thm-a-separating-set-is-equivalently-a-jointly-faithful-family-of-representables.md (direct)
+PASS items/thm-a-complete-locally-small-category-with-a-jointly-weakly-initial-set-has-an-initial-object.md (constructive)
+PASS items/thm-the-solution-set-condition-says-the-comma-category-has-a-jointly-weakly-initial-set.md (direct)
+PASS items/lem-the-comma-category-projection-strictly-creates-limits-preserved-by-the-functor.md (direct)
+PASS items/thm-general-adjoint-functor-theorem-objectwise-form.md (constructive)
+PASS items/thm-general-adjoint-functor-theorem-functor-form.md (direct)
+PASS items/thm-a-complete-locally-small-category-with-a-small-coseparating-set-and-all-subobject-intersections-has-an-initial-object.md (constructive)
+PASS items/thm-special-adjoint-functor-theorem-objectwise-form.md (cases)
+PASS items/thm-special-adjoint-functor-theorem-functor-form.md (direct)
+PASS items/cor-a-complete-locally-small-category-with-a-small-coseparating-set-and-saft-intersections-is-cocomplete.md (direct)
+PASS items/cor-a-continuous-functor-to-set-from-a-chosen-well-powered-saft-category-is-representable.md (direct)
+PASS items/thm-freyd-representability-theorem.md (constructive)
+PASS items/thm-the-unit-interval-is-a-coseparating-object-in-compact-hausdorff-spaces.md (direct)
+PASS items/prop-compact-hausdorff-spaces-satisfy-the-special-adjoint-functor-hypotheses.md (direct)
+PASS items/thm-saft-yields-the-stone-cech-adjunction.md (constructive)
+PASS items/thm-the-solution-set-for-the-underlying-set-functor-on-groups.md (constructive)
+PASS items/cor-gaft-recovers-the-free-group-and-abelianisation-adjoints.md (direct)
+PASS items/thm-compact-hausdorff-spaces-are-reflective-in-topological-spaces.md (direct)
+PASS items/thm-abelian-groups-are-reflective-in-groups.md (direct)
+PASS items/thm-commutative-rings-are-reflective-in-rings.md (constructive)
+PASS items/thm-torsion-free-abelian-groups-are-reflective-in-abelian-groups.md (constructive)
+PASS items/fs-a-continuous-functor-on-a-complete-category-has-a-left-adjoint.md (contradiction)
+PASS items/fs-every-reflective-subcategory-is-closed-under-colimits.md (counterexample)
+PASS items/fs-a-reflective-inclusion-creates-colimits.md (counterexample)
+PASS items/fs-a-subobject-is-a-monomorphism.md (counterexample)
+PASS items/cex-a-reflective-inclusion-need-not-preserve-colimits.md (counterexample)
+PASS items/ex-the-subobject-poset-of-the-integers-in-abelian-groups.md (direct)
+PASS items/ex-subobjects-in-set-are-subsets.md (direct)
+PASS items/ex-the-adjoint-functor-theorem-for-ordered-sets.md (constructive)
+PASS items/ex-the-solution-set-for-groups-computed-on-a-two-element-set.md (direct)
+PASS items/cex-two-monomorphisms-representing-the-same-subobject.md (direct)
+PASS items/cex-a-category-that-is-not-well-powered.md (constructive)
+PASS items/ex-torsion-free-reflection-computed.md (direct)
+PASS items/cex-a-complete-category-whose-coseparating-sets-are-never-small.md (constructive)
+
+43 checked, 0 failing — all clean
+```
+
+`node tools/validate-plan.mjs research/plan-spec.json`:
+
+```text
+OK — declared page order is acyclic and consistent; no item-level cycles, forward
+references, B-page dependencies, or unresolved ids among the 282 page(s) with item lists.
+NOTE: 889 planned page(s) carry no item list yet (marked * above). Their reading
+order is guaranteed; their item dependencies are not yet asserted, so re-run this
+after writing each page's items.
+```
+
+`node tools/content-policy.mjs research/frontier-14-batch-6.pages.json`:
+
+```text
+content-policy: 53 scoped item(s), 0 error(s), 0 warning(s)
+```
+
+`node tools/coverage-checklist.mjs research/frontier-14-batch-6.coverage.json`:
+
+```text
+coverage-checklist: 1 page(s), 64 harvested result(s), 0 error(s), 0 warning(s)
+```
+
+`node tools/proof-contract.mjs research/frontier-14-batch-6.proof-contracts.json --strict`:
+
+```text
+proof-contract: 0 error(s), 0 warning(s), 43/43 item(s) checked
+```
+
+`node tools/citation-fidelity.mjs research/frontier-14-batch-6.proof-contracts.json --fail-on-missing-quote`:
+
+```text
+citation-fidelity: 153 citation(s) over 43 authored item(s)
+
+QUOTE NOT FOUND — none; every recorded quote appears in its cited item.
+
+WIDENING CANDIDATES — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+`node tools/boundary-audit.mjs research/frontier-14-batch-6.proof-contracts.json`:
+
+```text
+boundary-audit: 344 rows over 1 contract file(s); 250 marked not_applicable
+
+TEMPLATE REUSE — none at or above 3 members.
+
+CONTRADICTED DISPOSITIONS — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+`node tools/depcheck.mjs`:
+
+```text
+OK — no cycles, all references resolve, no draft items on published pages.
+```
+
+`node tools/fwdcheck.mjs`:
+
+```text
+OK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.
+```
+
+`node tools/extcheck.mjs`:
+
+```text
+OK — every recorded-not-proved statement is a cited remark with no proof, and every consequence is marked.
+```
+
+`node tools/rendercheck.mjs`:
+
+```text
+OK — 5250 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+```
+
+`node tools/prosecheck.mjs`:
+
+```text
+5250 file(s) checked. 0 error(s), 569 warning(s).
+  library-scope-denial: 206
+  count-in-prose: 189
+  count-of-this-page: 174
+
+(re-run with --warnings to list them; warnings are heuristic and have legitimate cases)
+
+OK — no positional claim contradicts the spec.
+```
+
+### Blockers
+
+None. No indispensable operation required new authority, no permission prompt
+was issued, and no file outside the batch write scope was edited.
+

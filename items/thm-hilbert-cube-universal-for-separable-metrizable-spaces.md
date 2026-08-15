@@ -1,0 +1,62 @@
+---
+id: thm-hilbert-cube-universal-for-separable-metrizable-spaces
+kind: theorem
+title: "Every separable metrizable space embeds in the Hilbert cube $[0,1]^{\\mathbb N}$"
+status: draft
+origin: session
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [def-separable-space, def-metrizable-space, def-product-topology, lem-bounded-remetrisation]
+justified_by: []
+aliases: []
+landmark: true
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "David Marker, Descriptive Set Theory, §§1–2"
+      url: "https://www.math.uic.edu/~marker/math512/dst.pdf"
+    - title: "Michael Kunzinger, General Topology, §§11.3–11.4"
+      url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"
+    - title: "MFF General Topology course summary, §4.3"
+      url: "https://www.karlin.mff.cuni.cz/~cuth/doc/MFF/OT/ot_ENG.pdf"
+    - title: "Jesse Peterson, Real Analysis, §§3.6–3.7"
+      url: "https://math.vanderbilt.edu/peters10/teaching/fall2016/RealAnalysis.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+Every separable metrizable space is homeomorphic to a subspace of the Hilbert cube $[0,1]^{\mathbb N}$.
+
+## Facts & Assumptions
+
+**Given:** The objects, hypotheses, and choice principles stated above.
+
+[F1] A topological space $X$ is **separable** if some at most countable subset $D\subseteq X$ is dense in $X$ (def-dense-top, def-countable). Equivalently, every nonempty open subset of $X$ meets $D$. ([[def-separable-space]]).
+
+[F2] A topological space $(X, \mathcal{T})$ (def-topological-space) is **metrizable** if there is a metric $d$ on $X$ (def-metric-space) whose metric topology is $\mathcal{T}$, that is $\mathcal{T} = \mathcal{T}_d$ (def-metric-topology). Such a $d$ is said to **induce** or **metrise** $\mathcal{T}$. ([[def-metrizable-space]]).
+
+[F3] **The product set.** Let $I$ be a set and let $X_i$ be a set for each $i \in I$. The **product** is $$\prod_{i \in I} X_i \;:=\; \Big\{\, x : x \text{ is a function with domain } I \text{ and } x(i) \in X_i \text{ for every } i \in I \,\Big\},$$ and we write $x_i := x(i)$, the $i$-th **coordinate** of $x$. Two elements of the product are equal exactly when they agree at every index, functions being equal when they have the same domain and the same values. For $j \in I$ the $j$-th **projection** is $$\pi_j : \prod_{i \in I} X_i \to X_j, \qquad \pi_j(x) := x_j .$$ ([[def-product-topology]]).
+
+[F4] Let $(X,d)$ be a metric space (def-metric-space) and define, for $x, y \in X$, $$d'(x,y) := \min\{\, d(x,y),\ 1 \,\}, \qquad d''(x,y) := \frac{d(x,y)}{1 + d(x,y)} .$$ Both are well defined: $d(x,y) \ge 0$ (lem-metric-nonnegativity), so $1 + d(x,y) 0$ and is invertible, and the minimum of a two-element set of reals exists (lem-finite-set-has-max, def-max-min). Then: 1. $d'$ and $d''$ are metrics on $X$. 2. $d'(x,y) \le 1$ and $d''(x,y) < 1$ for all $x,y$; hence $(X,d')$ and $(X,d'')$ are bounded metric spaces (def-metric-bounded-diameter), and if $X \ne \emptyset$ then $\operatorname{diam}(X) \le 1$ for both. 3. $d'$ and $d''$ are each uniformly equivalent to $d$, hence topologically equivalent to it (def-equivalent-metrics, thm-metric-equivalence-hierarchy). **Consequently every metric space carries a bounded metric with exactly the same topology**, so boundedness cannot be read off the topology alone. ([[lem-bounded-remetrisation]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 The empty space embeds by its unique map into the Hilbert cube. [given, F2, F4, F1]
+
+2.1 For a nonempty space choose a countable dense sequence and a bounded compatible metric. [step 1.1, F4, F2, F1]
+
+3.1 Map a point to its bounded distances from the dense sequence. [step 2.1, F4, F1]
+
+4.1 The coordinates are continuous and separate points; if coordinate values converge, a coordinate centred close to the proposed point forces metric convergence. [step 3.1, F4, F2, F3]
+
+5.1 Rescale the coordinate range to the unit interval and identify the induced topology with the product topology. [step 4.1, F3, F4, F2]
+
+6.1 The preceding construction and implications establish the assertion. [step 5.1] ∎
+

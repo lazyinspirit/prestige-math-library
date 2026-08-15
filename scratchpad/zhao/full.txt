@@ -1,0 +1,1691 @@
+2
+Graph Regularity Method
+Chapter Highlights
+• Szemerédi’sgraphregularitylemma:partitioninganarbitrarygraphintoaboundednum-
+ber of parts with random-like edges between parts
+• Graph regularity method: recipe and applications
+• Graph removal lemma
+• Roth’s theorem: a graph theoretic proof using the triangle removal lemma
+• Strong regularity and induced graph removal lemma
+• Graph property testing
+• Hypergraph removal lemma and Szemerédi’s theorem
+In this chapter, we discuss a powerful technique in extremal graph theory developed in
+the 1970’s, known as Szemerédi’s graph regularity lemma. The graph regularity method
+has wide ranging applications, and is now considered a central technique in the field. The
+regularitylemmaproducesa“roughstructural”decompositionofanarbitrarygraph(though
+it is mainly useful for graphs with quadratically many edges). It then allows us to model an
+arbitrary graph by a random graph.
+The regularity method introduces us to a central theme of the book:the dichotomy
+of structure and pseudorandomness. This dichotomy is analogous to the more familiar
+concept of “signal and noise,” namely that a complex system can be decomposed into a
+structural piece with plenty of information content (the signal) as well as a random-like
+residue (the noise). This idea will show up again later in Chapter 6 when we discuss Fourier
+analysis in additive combinatorics.
+In general, we face two related challenges:
+• How to decompose an object into a structured piece and a random-like piece?
+• How to analyze the resulting components and their interactions?
+We begin the chapter with the statement and the proof of the graph regularity lemma.
+We then prove Roth’s theorem using the regularity method. This proof, due to Ruzsa and
+Szemerédi (1978), is not the original proof by Roth (1953), whose original Fourier analytic
+proof we will see in Chapter 6. Nevertheless, it is important for being historically one of
+the first major applications of the graph regularity method. Similar to the proof of Schur’s
+theorem in Chapter 0, this graph theoretic proof of Roth’s theorem demonstrates a fruitful
+connection between graph theory and additive combinatorics.
+Bythe regularity method, we mean both the graph regularity lemma as well as methods
+forapplyingit.Ratherthansomespecificsetoftheorems,graphregularityshouldbeviewed
+asageneraltechniquemalleabletoadaptations.Donotgetboggeddownbyspecificchoices
+53
+Graph Theory and Additive Combinatorics — Yufei Zhao
+54 Graph Regularity Method
+of parameters in the statements and proofs below, and rather, focus on the main ideas and
+techniques.
+Many students experience a steep learning curve when studying the regularity method.
+The technical details can obscure the underlying intuition. Also, the style of arguments may
+be quite different from the type of combinatorial proofs they encountered earlier in their
+studies (e.g., the type of proofs from earlier in this book). Section 2.7 contains important
+exercisesonapplyingthegraphregularitymethod,whichareessentialforunderstandingthe
+material.
+2.1 Szemerédi’s Graph Regularity Lemma
+In this section, we state and prove the graph regularity lemma. Let us first give an informal
+statement.
+Graph Regularity Lemma (Informal).The vertex set of every graph can be partitioned
+into a bounded number of parts so that the graph looks random-like between most pairs of
+parts.
+Followingisanillustrationofwhattheoutcomeofthepartitionlookslike.Herethevertex
+setofagraphispartitionedintofiveparts.Betweenapairofparts(includingbetweenapart
+and itself) is a random-like graph with a certain edge-density (e.g.,0.4between the first and
+second parts,0.7 between the first and third parts, ...).
+Definition 2.1.1(Edge density)
+Let 𝑋 and𝑌 be sets of vertices in a graph𝐺. Let𝑒𝐺(𝑋,𝑌) be the number of edges
+between𝑋 and𝑌; that is,
+𝒆𝑮(𝑿, 𝒀) B|{(𝑥,𝑦)∈ 𝑋×𝑌 :𝑥𝑦∈𝐸(𝐺)}|.
+Define theedge densitybetween𝑋 and𝑌 in𝐺 by
+𝒅𝑮(𝑿, 𝒀) B 𝑒𝐺(𝑋,𝑌)
+|𝑋||𝑌| .
+We drop the subscript𝐺 if the context is clear.
+We allow𝑋 and𝑌 to overlap in the preceding definition. For intuition, it is mostly fine to
+picture the bipartite setting, where𝑋 and𝑌 are automatically disjoint.
+What should it mean for a graph to be “random-like”? We will explore the concept of
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.1 Szemerédi’s Graph Regularity Lemma 55
+pseudorandom graphsin depth in Chapter 3. Given vertex sets𝑋 and𝑌, we would like
+the edge density between them to not change much even if we restrict𝑋 and𝑌 to smaller
+subsets. Intuitively, this says that the edges are somewhat evenly distributed.
+𝐴 𝐵𝑈 𝑊
+Definition 2.1.2(𝜀-regular pair)
+Let𝐺 be a graph and𝑈,𝑊 ⊆ 𝑉(𝐺). We call(𝑈,𝑊) an 𝜺-regular pairin𝐺 if for all
+𝐴⊆𝑈 and𝐵⊆𝑊 with|𝐴|≥𝜀|𝑈| and|𝐵|≥𝜀|𝑊|, one has
+|𝑑(𝐴,𝐵)− 𝑑(𝑈,𝑊)|≤𝜀.
+If(𝑈,𝑊) isnot 𝜀-regular,thenwesaythattheirirregularityis witnessedbysome 𝐴⊆𝑈
+and𝐵⊆𝑊 satisfying|𝐴|≥𝜀|𝑈|,|𝐵|≥𝜀|𝑊|, and|𝑑(𝐴,𝐵)− 𝑑(𝑈,𝑊)| >𝜀 .
+We need the hypotheses|𝐴|≥ 𝜀|𝑈| and|𝐵|≥ 𝜀|𝑊| since the definition would be too
+restrictive otherwise. For example, by taking𝐴 ={𝑥} and 𝐵 ={𝑦},𝑑(𝐴,𝐵) could end up
+being both0(if𝑥𝑦 ∉𝐸) and1(if𝑥𝑦∈𝐸).
+Remark 2.1.3 (Different roles of𝜀). The𝜀 in|𝐴|≥𝜀|𝑈| and|𝐵|≥𝜀|𝑊| plays a different
+rolefromthe 𝜀in|𝑑(𝐴,𝐵)− 𝑑(𝑈,𝑊)|≤𝜀.However,itisusuallynotimportanttodistinguish
+these𝜀s. So we use only one𝜀 for convenience of notation.
+The“random-like”intuitionisjustifiedasrandomgraphsindeedsatisfytheaboveproperty.
+(This can be proved by the Chernoff bound; more on this in the next chapter.)
+The following exercises can help you check your understanding of𝜀-regularity.
+Exercise 2.1.4(Basic inheritance of regularity).Let𝐺 be a graph and𝑋,𝑌 ⊆𝑉(𝐺). If
+(𝑋,𝑌) is an𝜀𝜂-regular pair, then(𝑋′,𝑌′) is 2𝜀-regular for all𝑋′⊆ 𝑋 with|𝑋′|≥ 𝜂|𝑋|
+and𝑌′⊆𝑌 with|𝑌′|≥𝜂|𝑌|.
+Exercise 2.1.5(An alternate definition of regular pairs).Let𝐺 be a graph and𝑋,𝑌 ⊆
+𝑉(𝐺). Say that(𝑋,𝑌) is 𝜺-homogeneousif for all𝐴⊆ 𝑋 and𝐵⊆𝑌, one has
+|𝑒(𝐴,𝐵)− |𝐴||𝐵|𝑑(𝑋,𝑌)|≤𝜀|𝑋||𝑌|.
+Show that if(𝑋,𝑌) is 𝜀-regular, then it is𝜀-homogeneous. Also, show that if(𝑋,𝑌) is
+𝜀3-homogeneous, then it is𝜀-regular.
+Exercise 2.1.6(Robustness of regularity).Prove that for every𝜀′ > 𝜀 >0, there exists
+𝛿 > 0 so that given an𝜀-regular pair(𝑋,𝑌) in some graph, if we modify the graph by
+adding/deleting≤𝛿|𝑋|verticesto/from 𝑋,adding/deleting≤𝛿|𝑌|verticesto/from 𝑌,and
+adding/deleting≤𝛿|𝑋||𝑌| edges, then the resulting new(𝑋,𝑌) is still𝜀′-regular.
+Next, let us define what it means for a vertex partition to be𝜀-regular.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+56 Graph Regularity Method
+Definition 2.1.7(𝜀-regular partition)
+Given a graph𝐺, a partitionP={𝑉1,...,𝑉 𝑘} of its vertex set is an𝜺-regular partition
+if ∑︁
+(𝑖,𝑗)∈[𝑘]2
+(𝑉𝑖,𝑉𝑗) not𝜀-regular
+|𝑉𝑖||𝑉𝑗|≤ 𝜀|𝑉(𝐺)| 2.
+Inotherwords,allbutatmostan 𝜀-fractionofpairsofverticesof 𝐺 liebetween 𝜀-regular
+parts.
+Remark 2.1.8. When|𝑉1|=··· =|𝑉𝑘|,theinequalitysaysthatatmost 𝜀𝑘 2 ofpairs (𝑉𝑖,𝑉𝑗)
+are not𝜀-regular.
+Also,notethatthesummationincludes 𝑖= 𝑗.Ifnoneofthe 𝑉𝑖saretoolarge,say |𝑉𝑖|≤𝜀𝑛
+for each𝑖, then the terms with𝑖 = 𝑗 contribute≤ ˝
+𝑖|𝑉𝑖|2≤ 𝜀𝑛 ˝
+𝑖|𝑉𝑖| = 𝜀𝑛2, which is
+neglible.
+We are now ready to state Szemerédi’s graph regularity lemma.
+Theorem 2.1.9(Szemerédi’s graph regularity lemma)
+Forevery𝜀 >0,thereexistsaconstant 𝑀 suchthateverygraphhasan 𝜀-regularpartition
+into at most𝑀 parts.
+Proof of the Graph Regularity Lemma
+Proof idea. We will generate the desired vertex partition according to the following algo-
+rithm:
+(1) Startwiththetrivialpartitionof 𝑉(𝐺).(Thetrivialpartitionhasasinglepartconsisting
+of the whole set.)
+(2) While the current partitionP is not𝜀-regular:
+(a) For each(𝑉𝑖,𝑉𝑗) that is not𝜀-regular, find a witnessing pair in𝑉𝑖 and𝑉𝑗
+(b) RefineP usingallthewitnessingpairs.(Heregiventwopartitions P andQ of
+the same set, we say thatQ refinesP if each part ofQ is contained in a part
+ofP. In other words, we divide each part ofP further to obtainQ.)
+We repeat step (2) until the partition is𝜀-regular, at which point the algorithm terminates.
+The resulting partition is always𝜀-regular by design. It remains to show that the number
+of iterations is bounded as a function of𝜀. To see this, we keep track of a quantity that
+necessarily increases at each iteration of the procedure. This is called anenergy increment
+argument.(Thereasonthatwecallitan“energy”isbecauseitisthe 𝐿2 normofavectorof
+edge-densities, and the kinetic energy in physics is also an𝐿2 norm.) ■
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.1 Szemerédi’s Graph Regularity Lemma 57
+Definition 2.1.10(Energy)
+Let𝐺 be an𝑛-vertex graph (whose dependence we drop from the notation). Let𝑈,𝑊 ⊆
+𝑉(𝐺). Define
+𝒒(𝑼, 𝑾) B|𝑈||𝑊|
+𝑛2 𝑑(𝑈,𝑊)2.
+For partitionsP𝑈 ={𝑈1,...,𝑈 𝑘} of𝑈 andP𝑊 ={𝑊1,...,𝑊 𝑙} of𝑊, define
+𝒒(P𝑼 ,P𝑾) B
+𝑘∑︁
+𝑖=1
+𝑙∑︁
+𝑗=1
+𝑞(𝑈𝑖,𝑊 𝑗).
+Finally, for a partitionP={𝑉1,...,𝑉 𝑘} of𝑉(𝐺), define itsenergyto be
+𝒒(P) B𝑞(P,P) =
+𝑘∑︁
+𝑖=1
+𝑘∑︁
+𝑗=1
+𝑞(𝑉𝑖,𝑉𝑗)=
+𝑘∑︁
+𝑖=1
+𝑘∑︁
+𝑗=1
+|𝑉𝑖|
+𝑉𝑗
+
+
+𝑛2 𝑑(𝑉𝑖,𝑉𝑗)2.
+Since the edge density is always between0 and 1, we have 0 ≤ 𝑞(P) ≤ 1 for all
+partitionsP. The following lemmas show that the energy cannot decrease upon refinement,
+and furthermore, it must increase substantially at each step of the preceding algorithm.
+Lemma 2.1.11(Energy never decreases under refinement)
+Let𝐺 be a graph,𝑈,𝑊 ⊆ 𝑉(𝐺),P𝑈 a partition of𝑈, andP𝑊 a partition of𝑊. Then
+𝑞(P𝑈,P𝑊)≥ 𝑞(𝑈,𝑊).
+P𝑈
+𝑈
+P𝑊
+𝑊
+Proof. Let𝑛=𝑣(𝐺). LetP𝑈 ={𝑈1,...,𝑈 𝑘} andP𝑊 ={𝑊1,...,𝑊 𝑙}. Choose𝑥∈𝑈 and
+𝑦∈𝑊 uniformly and independently at random. Let𝑈𝑖 be the part ofP𝑈 that contains𝑥 and
+𝑊𝑗 be the part ofP𝑊 that contains𝑦. Define the random variable𝑍 B𝑑(𝑈𝑖,𝑊 𝑗). We have
+E[𝑍]=
+𝑘∑︁
+𝑖=1
+𝑙∑︁
+𝑗=1
+|𝑈𝑖|
+|𝑈|
+|𝑊𝑗|
+|𝑊| 𝑑(𝑈𝑖,𝑊 𝑗)=𝑑(𝑈,𝑊)=
+√︄
+𝑛2
+|𝑈||𝑊|𝑞(𝑈,𝑊).
+We have
+E[𝑍 2]=
+𝑘∑︁
+𝑖=1
+𝑙∑︁
+𝑗=1
+|𝑈𝑖|
+|𝑈|
+|𝑊𝑗|
+|𝑊| 𝑑(𝑈𝑖,𝑊 𝑗)2= 𝑛2
+|𝑈||𝑊|𝑞(P𝑈,P𝑊).
+By convexity,E[𝑍 2]≥ E[𝑍]2, which implies𝑞(P𝑈,P𝑊)≥ 𝑞(𝑈,𝑊). □
+Graph Theory and Additive Combinatorics — Yufei Zhao
+58 Graph Regularity Method
+Lemma 2.1.12(Energy never decreases under refinement)
+Giventwovertexpartitions P andP′ofsomegraph,if P′refinesP,then 𝑞(P)≤ 𝑞(P′).
+Proof. The conclusion follows by applying Lemma 2.1.11 to each pair of parts ofP. In
+more detail, lettingP ={𝑉1,...,𝑉 𝑚}, and supposingP′ refines each𝑉𝑖 into a partition
+P′
+𝑉𝑖
+={𝑉′
+𝑖1,...,𝑉 ′
+𝑖𝑘𝑖
+} of𝑉𝑖, so thatP′=P′
+𝑉1
+∪···∪P ′
+𝑉𝑚
+, we have
+𝑞(P) =
+∑︁
+𝑖,𝑗
+𝑞(𝑉𝑖,𝑉𝑗)≤
+∑︁
+𝑖,𝑗
+𝑞(P′
+𝑉𝑖,P′
+𝑉𝑗)=𝑞(P′). □
+Lemma 2.1.13(Energy boost for an irregular pair)
+Let 𝐺 be an𝑛-vertex graph. If(𝑈,𝑊) is not𝜀-regular, as witnessed by𝐴⊆ 𝑈 and
+𝐵⊆𝑊, then
+𝑞({𝐴,𝑈\𝐴},{𝐵,𝑊\𝐵}) >𝑞(𝑈,𝑊)+ 𝜀4|𝑈||𝑊|
+𝑛2 .
+This is the “red bull lemma,” giving an energy boost when feeling irregular.
+Proof. Define𝑍 asintheproofofLemma2.1.11for P𝑈 ={𝐴,𝑈\𝐴}andP𝑊 ={𝐵,𝑊\𝐵}.
+Then
+Var(𝑍)= E[𝑍 2]− E[𝑍]2= 𝑛2
+|𝑈||𝑊|(𝑞(P𝑈,P𝑊)− 𝑞(𝑈,𝑊)).
+We have𝑍 = 𝑑(𝐴,𝐵) with probability≥ |𝐴||𝐵|/(|𝑈||𝑊|) (corresponding to the event
+𝑥∈ 𝐴 and𝑦∈ 𝐵). So
+Var(𝑍)= E[(𝑍− E[𝑍]) 2]
+≥|𝐴|
+|𝑈|
+|𝐵|
+|𝑊|(𝑑(𝐴,𝐵)− 𝑑(𝑈,𝑊)) 2
+>𝜀 ·𝜀·𝜀2.
+Putting the two inequalities together gives the claim. □
+The next lemma, corresponding to step (2)(b) of the preceding algorithm, shows that we
+can put all the witnessing pairs together to obtain an energy increment.
+Lemma 2.1.14(Energy boost for an irregular partition)
+If a partitionP ={𝑉1,...,𝑉 𝑘} of𝑉(𝐺) is not𝜀-regular, then there exists a refinement
+Q ofP where every𝑉𝑖 is partitioned into at most2𝑘+1 parts, and such that
+𝑞(Q) >𝑞(P)+ 𝜀5.
+Proof. Let
+𝑅={(𝑖,𝑗)∈[ 𝑘]2 :(𝑉𝑖,𝑉𝑗) is𝜀-regular} and 𝑅=[𝑘]2\𝑅.
+For each pair(𝑉𝑖,𝑉𝑗) that is not𝜀-regular, find a pair𝐴𝑖,𝑗 ⊆𝑉𝑖 and𝐵𝑖,𝑗 ⊆𝑉𝑗 that witnesses
+the irregularity. Do this simultaneously for all(𝑖,𝑗)∈ 𝑅. Note that for𝑖 ≠ 𝑗, we can take
+𝐴𝑖,𝑗 =𝐵𝑗,𝑖 due to symmetry. When𝑖= 𝑗, we should allow for the possibility of𝐴𝑖,𝑖 and𝐵𝑖,𝑖
+to be distinct.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.1 Szemerédi’s Graph Regularity Lemma 59
+𝐴12
+𝐵12
+𝐴13
+𝐵13
+𝐴23 𝐵23
+𝐴11
+𝐵11
+𝐴22 𝐵22
+𝐴33
+𝐵33
+𝑉2 𝑉3
+𝑉1
+𝑉2 𝑉3
+𝑉1
+𝑉2 𝑉3
+𝑉1
+𝑉2 𝑉3
+𝑉1
+𝑉2 𝑉3
+𝑉1
+Figure 2.1In the proof of Lemma 2.1.14, we refine the partition by taking a
+common refinement using witnesses of irregular pairs.
+LetQ be a common refinement ofP by all the𝐴𝑖,𝑗 and 𝐵𝑖,𝑗 (i.e., the parts ofQ are
+maximal subsets that are not “cut up” into small pieces by any element ofP or by the𝐴𝑖,𝑗
+and𝐵𝑖,𝑗 ; intuitively, imagine regions of a Venn diagram). See Figure 2.1 for an illustration.
+There are≤ 𝑘+ 1 such distinct nonempty sets inside each𝑉𝑖. SoQ refines each𝑉𝑖 into at
+most 2𝑘+1 parts. LetQ𝑖 be the partition of𝑉𝑖 given byQ. Then, using the monotonicity of
+energy under refinements (Lemma 2.1.11),
+𝑞(Q) =
+∑︁
+(𝑖,𝑗)∈[𝑘]2
+𝑞(Q𝑖,Q𝑗)
+=
+∑︁
+(𝑖,𝑗)∈𝑅
+𝑞(Q𝑖,Q𝑗)+
+∑︁
+(𝑖,𝑗)∈𝑅
+𝑞(Q𝑖,Q𝑗)
+≥
+∑︁
+(𝑖,𝑗)∈𝑅
+𝑞(𝑉𝑖,𝑉𝑗)+
+∑︁
+(𝑖,𝑗)∈𝑅
+𝑞({𝐴𝑖,𝑗,𝑉𝑖\𝐴𝑖,𝑗},{𝐵𝑖,𝑗,𝑉𝑗\𝐵𝑖,𝑗}).
+By Lemma 2.1.13, the energy boost lemma, the preceding sum is
+>
+∑︁
+(𝑖,𝑗)∈[𝑘]2
+𝑞(𝑉𝑖,𝑉𝑗)+
+∑︁
+(𝑖,𝑗)∈𝑅
+𝜀4|𝑉𝑖|
+𝑉𝑗
+
+
+𝑛2 .
+The first sum equals𝑞(P), and the second sum is> 𝜀5 by Lemma 2.1.13 sinceP is not
+𝜀-regular. This gives the desired inequality. □
+Remark 2.1.15 (Refinements should be done simultaneously).Here is a subtle point in
+the preceding proof. The refinementQ must be obtained in a single step by refiningP
+using all the witnessing sets𝐴𝑖,𝑗 simultaneously. If instead we pick out a pair𝐴𝑖,𝑗 ⊆𝑉𝑖 and
+Graph Theory and Additive Combinatorics — Yufei Zhao
+60 Graph Regularity Method
+𝐴𝑗,𝑖 ⊆ 𝑉𝑗, refine the partition using just this pair, and then iterate using another irregular
+pair(𝑉𝑖′,𝑉𝑗′), the energy boost step would not work. This is because𝜀-regularity (or lack
+thereof) is not well-preserved under taking refinements.
+Proof of the graph regularity lemma (Theorem 2.1.9).Start with a trivial partition of the
+vertex set of the graph. Repeatedly apply Lemma 2.1.14 whenever the current partition is
+not 𝜀-regular. By Lemma 2.1.14, the energy of the partition increases by more than𝜀5 at
+each iteration. Since the energy of the partition is≤ 1, we must stop after< 𝜀−5 iterations,
+terminating in an𝜀-regular partition.
+If a partition has𝑘 parts, then Lemma 2.1.14 produces a refinement with≤ 𝑘2𝑘+1 parts.
+Westartwithatrivialpartitionwithonepart,andthenrefine <𝜀 −5 times.Observethecrude
+bound𝑘2𝑘+1≤ 22𝑘
+. So the total number of parts at the end is≤ tower(⌈2𝜀−5⌉), where
+tower(𝒌) B 22···2
+
+height𝑘. □
+Remark 2.1.16 (The proof does not guarantee that the partition becomes “more regular”
+after each step.).Letusstresswhattheproofis notsaying.Itis notsayingthatthepartition
+gets more and more regular under each refinement. Also, it isnot saying that partition gets
+more regular as the energy gets higher. Rather, the energy simply bounds the number of
+iterations.
+The bound on the number of parts guaranteed by the proof is a constant for each fixed
+𝜀 >0, but it grows extremely quickly as𝜀 gets smaller. Is the poor quantitative dependence
+somehowduetoasuboptimalproofstrategy?Surprisingly,thetower-typeboundisnecessary,
+as shown by Gowers (1997).
+Theorem 2.1.17(Lower bound on the number of parts in a regularity partition)
+There exists a constant𝑐 > 0 such that for all sufficiently small𝜀 > 0, there exists a
+graph with no𝜀-regular partition into fewer thantower(⌈𝜀−𝑐⌉) parts.
+We do not include the proof here. See Moshkovitz and Shapira (2016) for a short proof.
+The general idea is to construct a graph that roughly reverse engineers the proof of the
+regularitylemma.Sothereisessentiallyaunique 𝜀-regularpartition,whichmusthavemany
+parts.
+Remark 2.1.18 (Irregular pairs are necessary in the regularity lemma).Recall that in
+Definition 2.1.7 of an𝜀-regular partition, we are allowed to have some irregular pairs. Are
+irregularpairsnecessary?Itturnsthatwemustpermitthem.Exercise2.1.24givesanexample
+of a canonical example (a “half graph”) where every regularity partition has irregular pairs.
+Theregularitylemmaisquiteflexible.Forexample,wecanstartwithanarbitrarypartition
+of𝑉(𝐺) instead of the trivial partition in the proof, in order to obtain a partition that is a
+refinement of a given partition. The exact same proof with this modification yields the
+following.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.1 Szemerédi’s Graph Regularity Lemma 61
+Theorem 2.1.19(Regularity starting with an arbitrary initial partition)
+For every𝜀 > 0 and 𝑘, there exists a constant𝑀 such that for every graph𝐺 and a
+partitionP0 of𝑉(𝐺) with at most𝑘 parts, there exists an𝜀-regular partitionP of𝑉(𝐺)
+that is a refinement ofP0, and such that each part ofP0 is refined into at most𝑀 parts.
+Here is another strengthening of the regularity lemma. We impose the additional require-
+ment that vertex parts should be as equal in size as possible. We say that a partition is
+equitable if all part sizes are within one of each other; that is,
+|𝑉𝑖|−
+
+𝑉𝑗
+
+
+≤ 1. In other
+words, a partition of a set of size𝑛 into𝑘 parts is equitable if every part has size⌊𝑛/𝑘⌋ or
+⌈𝑛/𝑘⌉.
+Theorem 2.1.20(Equitable regularity lemma)
+For all𝜀 >0 and𝑚0, there exists a constant𝑀 such that every graph has an𝜀-regular
+equitable partition of its vertex set into𝑘 parts with𝑚0≤ 𝑘≤ 𝑀.
+Remark 2.1.21. The lower bound𝑚0 requirement on the number of parts is somewhat
+superficial. The reason for including it here is that it is often convenient to discard all the
+edges that lie within individual parts of the partition, and since there are most𝑛2/𝑘 such
+edges, they contribute negligibly if the number of parts𝑘 is not too small, which is true if
+we require𝑚0≥ 1/𝜀 in the equitable regularity lemma statement.
+There are several ways to guarantee equitability. One method is sketched in what follows.
+We equitize the partition at every step of the refinement iteration, so that at each step in the
+proof, we both obtain an energy increment and also end up with an equitable partition.
+Proof sketch of the equitable regularity lemma (Theorem 2.1.20).Here is a modified al-
+gorithm:
+(1) Start with an arbitrary equitable partition of the graph into𝑚0 parts.
+(2) While the current equitable partitionP is not𝜀-regular:
+(a) (Refinement/energy boost) Refine the partition using pairs that witness irreg-
+ularity (as in the earlier proof). The new partitionP′ divides each part ofP
+into≤ 2|P| parts.
+(b) (Equitization) ModifyP′ into an equitable partition by arbitrarily chopping
+each part ofP′ into parts of size|𝑉(𝐺)|/𝑚 (for some appropriately chosen
+𝑚=𝑚(|P′|,𝜀))plussomeleftoverpieces,whicharethencombinedtogether
+and then divided into parts of size|𝑉(𝐺)|/𝑚.
+Therefinementstep(2)(a)increasesenergyby ≥𝜀5 asbefore.Theenergymightgodown
+intheequitizationstep(2)(b),butitshouldnotdecreasebymuch,providedthatthe 𝑚chosen
+in that step is large enough (say,𝑚 =
+
+100|P′|𝜀−5
+). So overall, we still have an energy
+increment of≥ 𝜀5/2 at each step, and hence the process still terminates after𝑂(𝜀−5) steps.
+The total number of parts at the end is bounded. □
+Exercise 2.1.22. Complete the details in the preceding proof sketch.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+62 Graph Regularity Method
+Exercise 2.1.23(Making each part𝜀-regular to nearly all other parts).Prove that for
+all 𝜀 > 0 and 𝑚0, there exists a constant𝑀 so that every graph has an equitable vertex
+partition into𝑘 parts, with𝑚0≤ 𝑘≤ 𝑀, such that each part is𝜀-regular with all but at
+most𝜀𝑘 other parts.
+The important example in the next exercise shows why we must allow irregular pairs in
+the graph regularity lemma.
+Exercise2.1.24 (Unavoidabilityofirregularpairs). Letthe half-graph𝐻𝑛bethebipartite
+graph on2𝑛 vertices{𝑎1,...,𝑎 𝑛,𝑏 1,...,𝑏 𝑛} with edges{𝑎𝑖𝑏𝑗 :𝑖≤ 𝑗}.
+(a) Forevery 𝜀 >0,explicitlyconstructan 𝜀-regularpartitionof 𝐻𝑛 into𝑂(1/𝜀)parts.
+(b) Show that there is some𝜀 >0 such that for every integer𝑘 and sufficiently large
+multiple 𝑛 of 𝑘, every partition of the vertices of𝐻𝑛 into 𝑘 equal-sized parts
+contains at least𝜀𝑘 pairs of parts none of which are𝜀-regular.
+Thenextexerciseshouldremindyouoftheiterationtechniquefromtheproofofthegraph
+regularity lemma.
+Exercise2.1.25 (Existenceofaregularpairofsubsets). Showthatthereissomeabsolute
+constant𝐶 > 0 such that for every0 < 𝜀 <1/2, every graph on𝑛 vertices contains an
+𝜀-regular pair of vertex subsets each with size at least𝛿𝑛, where𝛿= 2−𝜀−𝐶
+.
+Hint: Density
+increment (don’t use energy).
+This e
+xercise asks for two different proofs of the following theorem.
+Given a graph𝐺, we say that𝑋⊆𝑉(𝐺) is 𝜺-regularif the pair(𝑋,𝑋) is𝜀-regular; that
+is, for all𝐴,𝐵 ⊆ 𝑋 with|𝐴|,|𝐵|≥𝜀|𝑋|, one has|𝑑(𝐴,𝐵)− 𝑑(𝑋,𝑋)|≤𝜀.
+Theorem 2.1.26(𝜀-regular subset)
+For every𝜀 >0, there exists𝛿 >0such that every graph contains an𝜀-regular subset of
+vertices that is an≥𝛿 fraction of the vertex set.
+Exercise 2.1.27(𝜀-regular subset).
+(a) Prove Theorem 2.1.26 using Szemerédi’s regularity lemma, showing that one can
+obtain the𝜀-regular subset by combining a suitable subcollection of parts from
+some regularity partition.
+(b*) Give an alternative proof of the theorem with𝛿 = exp(− exp(𝜀−𝐶)) for some
+constant𝐶.
+Exercise 2.1.28∗(Regularity partition into regular sets).Showthatforevery 𝜀 >0there
+exists𝑀 so that every graph has an𝜀-regular partition into at most𝑀 parts, with every
+part being𝜀-regular with itself.
+2.2 Triangle Counting Lemma
+Szemerédi’s regularity lemma gave us a vertex partition of a graph. How can we use this
+partition?
+Inthissection,webeginbyestablishingthe trianglecountinglemma.Giventhreevertex
+sets𝑋,𝑌,𝑍 , pairwise𝜀-regular in𝐺, we can approximate it by a random tripartite graph on
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.2 Triangle Counting Lemma 63
+𝑋,𝑌,𝑍 with the same edge densities between parts. By comparing𝐺 to its random model
+approximation, we expect the number of triples(𝑥,𝑦,𝑧 )∈ 𝑋×𝑌×𝑍 forming a triangle in
+𝐺 to be roughly
+𝑑(𝑋,𝑌)𝑑(𝑋,𝑍)𝑑(𝑌,𝑍)|𝑋||𝑌||𝑍|.
+The triangle counting lemma makes this intuition precise.
+𝑋
+𝑌 𝑍
+𝑥
+𝑦 𝑧
+Theorem 2.2.1(Triangle counting lemma)
+Let𝐺 be a graph and𝑋,𝑌,𝑍 be subsets of the vertices of𝐺 such that(𝑋,𝑌),(𝑌,𝑍),
+(𝑍,𝑋) are all𝜀-regular pairs for some𝜀 >0. If𝑑(𝑋,𝑌),𝑑(𝑋,𝑍),𝑑(𝑌,𝑍)≥ 2𝜀, then
+|{(𝑥,𝑦,𝑧 )∈ 𝑋×𝑌×𝑍 :𝑥𝑦𝑧 is a triangle in𝐺}|
+≥( 1− 2𝜀)(𝑑(𝑋,𝑌)− 𝜀)(𝑑(𝑋,𝑍)− 𝜀)(𝑑(𝑌,𝑍)− 𝜀)|𝑋||𝑌||𝑍|.
+Remark 2.2.2. The vertex sets𝑋,𝑌,𝑍 do not have to be disjoint, but one does not lose
+any generality by assuming that they are disjoint in this statement. Indeed, starting with
+𝑋,𝑌,𝑍 ⊆ 𝑉(𝐺), one can always create an auxiliary tripartite graph𝐺′ with vertex parts
+being disjoint replicas of𝑋,𝑌,𝑍 and the edge relations in𝑋×𝑌 being the same for𝐺 and
+𝐺′,andlikewisefor 𝑋×𝑍 and𝑌×𝑍.Underthisauxiliaryconstruction,atriplein 𝑋×𝑌×𝑍
+forms a triangle in𝐺 if and only it forms a triangle in𝐺′.
+𝑋
+𝑌 𝑍
+𝐺
+−→
+𝑋
+𝑌 𝑍
+𝐺′
+Now we show that in an𝜀-regular pair(𝑋,𝑌), almost all vertices of𝑋 have roughly the
+same number of neighbors in𝑌. (The next lemma only states a lower bound on degree, but
+the same argument also gives an analogous upper bound.)
+Graph Theory and Additive Combinatorics — Yufei Zhao
+64 Graph Regularity Method
+Lemma 2.2.3(Most vertices have roughly the same degree)
+Let(𝑋,𝑌) be an𝜀-regular pair. Then fewer than𝜀|𝑋| vertices in𝑋 have fewer than
+(𝑑(𝑋,𝑌)− 𝜀)|𝑌| neighborsin 𝑌.Likewise,fewerthan 𝜀|𝑌| verticesin 𝑌 havefewerthan
+(𝑑(𝑋,𝑌)− 𝜀)|𝑋| neighbors in𝑋.
+Proof. Let 𝐴 be the subset of vertices in𝑋 with<(𝑑(𝑋,𝑌)− 𝜀)|𝑌| neighbors in𝑌. Then
+𝑑(𝐴,𝑌) < 𝑑(𝑋,𝑌)− 𝜀, and thus|𝐴| < 𝜀|𝑋| by Definition 2.1.2 as(𝑋,𝑌) is an𝜀-regular
+pair. The other claim is similar. □
+Proof of Theorem 2.2.1.By Lemma 2.2.3, we can find𝑋′⊆ 𝑋 with|𝑋′|≥( 1− 2𝜀)|𝑋|
+suchthateveryvertex 𝑥∈ 𝑋′ has≥( 𝑑(𝑋,𝑌)− 𝜀)|𝑌| neighborsin 𝑌 and≥( 𝑑(𝑋,𝑍)− 𝜀)|𝑍|
+neighbors in𝑍. Write𝑁𝑌(𝑥)=𝑁(𝑥)∩ 𝑌 and𝑁𝑍(𝑥)=𝑁(𝑥)∩ 𝑍.
+𝜖-regular
+𝑋
+𝑥
+𝑌 𝑍
+𝑁𝑌 (𝑥) 𝑁𝑍 (𝑥)
+For each such𝑥∈ 𝑋′, we have|𝑁𝑌(𝑥)|≥( 𝑑(𝑋,𝑌)− 𝜀)|𝑌|≥ 𝜀|𝑌|. Likewise,|𝑁𝑍(𝑥)|≥
+𝜀|𝑍|.Since(𝑌,𝑍) is𝜀-regular,theedgedensitybetween 𝑁𝑌(𝑥) and𝑁𝑍(𝑥) is≥𝑑(𝑌,𝑍)− 𝜀.
+So for each𝑥∈ 𝑋′, the number of edges between𝑁𝑌(𝑥) and𝑁𝑍(𝑥) is
+≥( 𝑑(𝑌,𝑍)− 𝜀)|𝑁𝑌(𝑥)||𝑁𝑍(𝑥)|≥( 𝑑(𝑋,𝑌)− 𝜀)(𝑑(𝑋,𝑍)− 𝜀)(𝑑(𝑌,𝑍)− 𝜀)|𝑌||𝑍|.
+Multiplying by|𝑋′|≥( 1− 2𝜀)|𝑋|, we obtain the desired lower bound on the number of
+triangles. □
+Remark 2.2.4. We only need the lower bound on the triangle count for our applications in
+thischapter,butthesameproofcanalsobemodifiedtogiveanupperbound,whichweleave
+as an exercise.
+2.3 Triangle Removal Lemma
+Thetriangleremovallemma(RuzsaandSzemerédi1978)isoneofthefirstmajorapplications
+of the regularity method. Informally, the triangle removal lemma says that a graph with few
+triangles can be made triangle-free by removing a few edges. Here, “few triangles” means a
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.3 Triangle Removal Lemma 65
+subcubic number of triangles (i.e., asymptotically less than the maximum possible number)
+and “few edges” means a subquadratic number of edges.
+Theorem 2.3.1(Triangle removal lemma)
+For all𝜀 >0, there exists𝛿 >0 such that any graph on𝑛 vertices with fewer than𝛿𝑛3
+triangles can be made triangle-free by removing fewer than𝜀𝑛2 edges.
+The triangle removal lemma can be equivalently stated as:
+An𝑛-vertex graph with𝑜(𝑛3) triangles can be made triangle-free by removing𝑜(𝑛2) edges.
+Our proof of Theorem 2.3.1 demonstrates how to apply the graph regularity lemma. Here
+is a representative “recipe” for the regularity method.
+Remark 2.3.2 (Regularity method recipe).Typical applications of the regularity method
+proceed in the following steps:
+(1) Partitionthe vertex set of a graph using the regularity lemma.
+(2) Clean the graph by removing edges that behave poorly in the regularity partition.
+Most commonly, we remove edges that lie between pairs of parts with
+(a) irregularity, or
+(b) low-density, or
+(c) one of the parts too small.
+This ends up removing a negligible number of edges.
+(3) Counta certain pattern in the cleaned graph using a counting lemma.
+Toprovethetriangleremovallemma,aftercleaningthegraph(whichremovesfewedges),
+we claim that the resulting cleaned graph must be triangle-free, or else the triangle counting
+lemma would find many triangles, contradicting the hypothesis.
+Proof of the triangle removal lemma (Theorem 2.3.1).Suppose we are given a graph on𝑛
+vertices with< 𝛿𝑛3 triangles, for some parameter𝛿 we will choose later. Apply the graph
+regularity lemma, Theorem 2.1.9, to obtain an𝜀/4-regular partition of the graph with parts
+𝑉1,𝑉 2,··· ,𝑉𝑚. Next, for each(𝑖,𝑗)∈[ 𝑚]2, remove all edges between𝑉𝑖 and𝑉𝑗 if
+(a) (𝑉𝑖,𝑉𝑗) is not𝜀/4-regular, or
+(b) 𝑑(𝑉𝑖,𝑉𝑗) <𝜀/2, or
+(c) min{|𝑉𝑖|,|𝑉𝑗|} <𝜀𝑛/(4𝑚).
+Since the partition is𝜀/4-regular (recall Definition 2.1.7), the number of edges removed
+in (a) from irregular pairs is
+≤
+∑︁
+𝑖,𝑗
+(𝑉𝑖,𝑉𝑗) not(𝜀/4)-regular
+|𝑉𝑖||𝑉𝑗|≤ 𝜀
+4𝑛2.
+The number of edges removed in (b) from low-density pairs is
+≤
+∑︁
+𝑖,𝑗
+𝑑(𝑉𝑖,𝑉𝑗)<𝜀/2
+𝑑(𝑉𝑖,𝑉𝑗)|𝑉𝑖||𝑉𝑗|≤ 𝜀
+2
+∑︁
+𝑖,𝑗
+|𝑉𝑖||𝑉𝑗|= 𝜀
+2𝑛2.
+The number of edges removed in (c) with an endpoint in a small part is
+<𝑚 · 𝜀𝑛
+4𝑚·𝑛= 𝜀
+4𝑛2.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+66 Graph Regularity Method
+In total, we removed<𝜀𝑛 2 edges from the graph.
+We claim that the remaining graph is triangle-free, provided that𝛿 was chosen appropri-
+ately small. Indeed, suppose there remains a triangle whose three vertices lie in𝑉𝑖,𝑉𝑗,𝑉𝑘
+(not necessarily distinct parts).
+𝑉𝑖
+𝑉 𝑗 𝑉𝑘
+one triangle
+triangle counting lemma
+cubically many triangles
+Becauseedgesbetweenthepairsdescribedin(a)and(b)wereremoved, 𝑉𝑖,𝑉𝑗,𝑉𝑘 satisfythe
+hypotheses of the triangle counting lemma (Theorem 2.2.1),
+#{triangles in𝑉𝑖×𝑉𝑗×𝑉𝑘}≥
+
+1− 𝜀
+2
+ 𝜀
+4
+ 3
+|𝑉𝑖|
+𝑉𝑗
+
+|𝑉𝑘|
+≥
+
+1− 𝜀
+2
+ 𝜀
+4
+ 3 𝜀𝑛
+4𝑚
+ 3
+,
+where the final step uses (c) above. Then as long as
+𝛿 <1
+6
+
+1− 𝜀
+2
+ 𝜀
+4
+ 3  𝜀
+4𝑚
+ 3
+,
+we would contradict the hypothesis that the original graph has< 𝛿𝑛3 triangles. (The extra
+factorof 6aboveistheretoaccountforthepossibilitythat 𝑉𝑖 =𝑉𝑗 =𝑉𝑘.)Since 𝑚isbounded
+for each fixed𝜀, we see that𝛿 can be chosen to depend only on𝜀. □
+The next corollary of the triangle removal lemma will soon be used to prove Roth’s
+theorem. Here “diamond” refers to the following graph, consisting of two triangles sharing
+an edge.
+Corollary 2.3.3(Diamond-free lemma)
+Let𝐺 bean 𝑛-vertexgraphwhereeveryedgeliesinauniquetriangle.Then 𝐺 has𝑜(𝑛2)
+edges.
+Proof. Let𝐺 have𝑚 edges. Because each edge lies in exactly one triangle, the number of
+triangles in𝐺 is𝑚/3=𝑂(𝑛2) = 𝑜(𝑛3). By the triangle removal lemma (see the statement
+afterTheorem2.3.1),wecanremove 𝑜(𝑛2) edgestomake 𝐺 triangle-free.However,deleting
+an edge removes at most one triangle from the graph by assumption, so𝑚/3 edges need to
+be removed to make𝐺 triangle-free. Thus𝑚=𝑜(𝑛2). □
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.4 Graph Theoretic Proof of Roth’s Theorem 67
+Remark 2.3.4(Quantitativedependenciesinthetriangleremovallemma). Sincetheabove
+proof of the triangle removal lemma applies the graph regularity lemma, the resulting
+bounds from the proof are quite poor: it shows that one can pick𝛿 = 1/tower(𝜀−𝑂(1)).
+Using a different but related method, Fox (2011) proved the triangle removal lemma with
+a slightly better dependence𝛿 = 1/tower(𝑂(log(1/𝜀))). In the other direction, we know
+that the triangle removal lemma does not hold with𝛿 = 𝜀𝑐 log(1/𝜀) for a sufficiently small
+constant𝑐 > 0. The construction comes from the Behrend construction of large 3-AP-free
+sets that we will soon see in Section 2.5. Our knowledge of the quantitative dependence in
+Corollary 2.3.3 comes from the same source; specifically, we know that the𝑜(𝑛2) can be
+sharpened to𝑛2/𝑒Ω(log∗(1/𝜀)) (where log∗, the iterated logarithm function, is the number of
+iterations of log that one needs to take to bring a number to at most1) but the statement
+is false if the𝑜(𝑛2) is replaced by𝑛2𝑒−𝐶
+√
+log𝑛 for some sufficiently large constant𝐶. It is a
+majoropenproblemtoclosethegapbetweentheupperandlowerboundsintheseproblems.
+The triangle removal lemma was historically first considered in the following equivalent
+formulation.
+Theorem 2.3.5((6, 3)-theorem)
+Let𝐻 be an𝑛-vertex 3-uniform hypergraph without a subgraph having six vertices and
+three edges. Then𝐻 has𝑜(𝑛2) edges.
+Exercise 2.3.6. Deduce the(6, 3)-theorem from Corollary 2.3.3, and vice versa.
+The following conjectural extension of the(6, 3)-theorem is a major open problem in
+extremal combinatorics. The conjecture is attributed to Brown, Erdős, and Sós (1973).
+Conjecture 2.3.7((7, 4)-conjecture)
+Let 𝐻 be an𝑛-vertex 3-uniform hypergraph without a subgraph having seven vertices
+and four edges. Then𝐻 has𝑜(𝑛2) edges.
+2.4 Graph Theoretic Proof of Roth’s Theorem
+We will now prove Roth’s theorem, which we saw in Chapter 0 and is restated below.
+The proof below, due to Ruzsa and Szemerédi (1978) connects graph theory and additive
+combinatorics, akin to the proof of Schur’s theorem in Chapter 0.
+We write3-AP for “3-term arithmetic progression.” We say that𝐴 is 3-AP-freeif there
+are no𝑥,𝑥+𝑦,𝑥+ 2𝑦∈ 𝐴 with𝑦≠ 0.
+Theorem 2.4.1(Roth’s theorem)
+Let𝐴⊆[ 𝑁] be 3-AP-free. Then|𝐴|=𝑜(𝑁).
+Proof. Embed 𝐴⊆ Z/𝑀Z with𝑀 = 2𝑁+ 1 (to avoid wraparounds). Since𝐴 is 3-AP-free
+in Z, it is 3-AP-free inZ/𝑀Z as well.
+Now, we construct a tripartite graph𝐺 whose parts𝑋,𝑌,𝑍 are all copies ofZ/𝑀Z. The
+edges of the graph are (since𝑀 is odd, we are allowed to divide by2 in Z/𝑀Z):
+• (𝑥,𝑦)∈ 𝑋×𝑌 whenever𝑦−𝑥∈ 𝐴;
+Graph Theory and Additive Combinatorics — Yufei Zhao
+68 Graph Regularity Method
+• (𝑦,𝑧)∈ 𝑌×𝑍 whenever𝑧−𝑦∈ 𝐴;
+• (𝑥,𝑧)∈ 𝑋×𝑍 whenever(𝑧−𝑥)/2∈ 𝐴.
+Z/𝑀Z
+Z/𝑀Z Z/𝑀Z
+𝑥
+𝑦 𝑧
+𝑥∼𝑦 iff
+𝑦−𝑥∈ 𝐴
+𝑥∼𝑧 iff
+(𝑧−𝑥)/2∈ 𝐴
+𝑦∼𝑧 iff
+𝑧−𝑦∈ 𝐴
+In this graph,(𝑥,𝑦,𝑧 )∈ 𝑋×𝑌×𝑍 is a triangle if and only if
+𝑦−𝑥, 𝑧−𝑥
+2 ,𝑧−𝑦∈ 𝐴.
+The graph was designed so that the above three numbers form an arithmetic progression in
+the listed order. Since𝐴 is 3-AP-free, these three numbers must all be equal. So, every edge
+of𝐺 lies in a unique triangle, formed by setting the three numbers above to equal.
+Thegraph 𝐺 hasexactly 3𝑀 = 6𝑁+ 3verticesand 3𝑀|𝐴| edges.Corollary2.3.3implies
+that𝐺 has𝑜(𝑁 2) edges. So|𝐴|=𝑜(𝑁). □
+Now we prove a higher-dimensional generalization of Roth’s theorem.
+Acornerin Z2 isathree-elementsetoftheform {(𝑥,𝑦),(𝑥+𝑑,𝑦),(𝑥,𝑦+𝑑)} with𝑑 >0.
+(Note that one could relax the assumption𝑑 >0 to𝑑 ≠ 0, allowing “negative” corners. As
+shown in the first step in the proof below, the assumption𝑑 >0is inconsequential.)
+Theorem 2.4.2(Corner-free)
+Every corner-free subset of[𝑁]2 has size𝑜(𝑁 2).
+Remark 2.4.3 (History). ThetheoremisduetoAjtaiandSzemerédi(1974),whooriginally
+proveditbyinvokingthefullpowerofSzemerédi’stheorem.Herewepresentamuchsimpler
+proof using the triangle removal lemma due to Solymosi (2003).
+Proof. First we show how to relax the assumption in the definition of a corner from𝑑 >0
+to𝑑≠ 0.
+Let𝐴⊆[ 𝑁]2 beacorner-freeset.Foreach 𝑧∈ Z2,let 𝐴𝑧 = 𝐴∩(𝑧−𝐴).Then |𝐴𝑧| isthe
+numberofwaysthatonecanwrite 𝑧=𝑎+𝑏forsome(𝑎,𝑏)∈ 𝐴×𝐴.So ˝
+𝑧∈[ 2𝑁]2|𝐴𝑧|=|𝐴|2,
+so there is some𝑧∈[ 2𝑁] with|𝐴𝑧|≥|𝐴|2/(2𝑁)2. To show that|𝐴| = 𝑜(𝑁 2), it suffices
+to show that|𝐴𝑧|=𝑜(𝑁 2). Moreover, since𝐴𝑧 =𝑧−𝐴𝑧, it being corner-free implies that it
+does not contain three points{(𝑥,𝑦),(𝑥+𝑑,𝑦),(𝑥,𝑦 +𝑑)} with𝑑≠ 0.
+Write 𝐴 = 𝐴𝑧 from now on. Build a tripartite graph𝐺 with parts𝑋 ={𝑥1,...,𝑥 𝑁},
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.4 Graph Theoretic Proof of Roth’s Theorem 69
+𝑌 ={𝑦1,...,𝑦 𝑁} and𝑍 ={𝑧1,...,𝑧 2𝑁}, whereeach vertex𝑥𝑖 corresponds toa verticalline
+{𝑥 = 𝑖}⊆ Z2, each vertex𝑦𝑗 corresponds to a horizontal line{𝑦 = 𝑗}, and each vertex𝑧𝑘
+corresponds to a slanted line{𝑦 =−𝑥+𝑘} with slope−1. Join two distinct vertices of𝐺
+with an edge if and only if the corresponding lines intersect at a point belonging to𝐴. Then,
+each triangle in the graph𝐺 corresponds to a set of three lines of slopes0,∞,−1 pairwise
+intersecting at a point of𝐴.
+𝑥 = 𝑖
+𝑦 = 𝑗
+𝑥 + 𝑦 = 𝑘
+𝑋
+𝑌 𝑍
+𝑥𝑖
+𝑦 𝑗
+𝑧𝑘
+Since𝐴iscorner-freeinthesensestatedattheendofthepreviousparagraph, 𝑥𝑖,𝑦𝑗,𝑧𝑘 form
+a triangle in𝐺 if and only if the three corresponding lines pass through the same point of𝐴
+(i.e., forming a trivial corner with𝑑 = 0). Since there is exactly one line of each direction
+passing through every point of𝐴, it follows that each edge of𝐺 belongs to exactly one
+triangle. Thus, by Corollary 2.3.3,3|𝐴|=𝑒(𝐺)=𝑜(𝑁 2). □
+Theupperboundoncorner-freesetsactuallyimpliesRoth’stheorem,asshownbelow.So
+we now have a second proof of Roth’s theorem. (Though, this second proof is secretly the
+same as the first proof.)
+Proposition 2.4.4(Corner-free sets vs. 3-AP-free sets)
+Let𝑟3(𝑁) be the size of the largest subset of[𝑁] which contains no3-term arithmetic
+progression,and 𝑟⌞(𝑁) bethesizeofthelargestsubsetof [𝑁]2whichcontainsnocorner.
+Then,𝑟3(𝑁)𝑁≤𝑟⌞(2𝑁).
+0 𝑁 2𝑁
+𝑁
+2𝑁
+𝐴
+𝐵
+Proof. Given a 3-AP-free set𝐴⊆[ 𝑁] of size𝑟3(𝑁), define a set
+𝐵 B
+
+(𝑥,𝑦)∈[ 2𝑁]2 :𝑥−𝑦∈ 𝐴
+	
+.
+Each element𝑎∈ 𝐴 gives rise to≥ 𝑁 different elements(𝑥,𝑦) of 𝐵 with 𝑥−𝑦 = 𝑎. So
+|𝐵|≥ 𝑁|𝐴|. Furthermore,𝐵 is corner-free, since each corner(𝑥+𝑑,𝑦),(𝑥,𝑦),(𝑥,𝑦 +𝑑) in
+𝐵givesrisetoa3-AP 𝑥−𝑦−𝑑,𝑥−𝑦,𝑥−𝑦+𝑑 withcommondifference 𝑑.So|𝐵|≤𝑟⌞(2𝑁).
+Thus𝑟3(𝑁)𝑁≤|𝐴|𝑁≤|𝐵|≤𝑟⌞(2𝑁). □
+Graph Theory and Additive Combinatorics — Yufei Zhao
+70 Graph Regularity Method
+Remark 2.4.5(Quantitativebounds). Bothproofsaboverelyonthegraphregularitylemma,
+and hence give poor quantitative bounds. They tell us that a 3-AP-free𝐴⊆[ 𝑁] has|𝐴|≤
+𝑁/(log∗𝑁)𝑐, where log∗𝑁 is the iterated logarithm (the number of times the logarithm
+functionmustbeappliedtobring 𝑁 tolessthanorequalto 1).LaterinChapter6wediscuss
+Roth’s original Fourier analytic proof, which uses different methods (though sharing the
+structure and randomness dichotomy theme) and gives much better quantitative bounds.
+The current best upper bound on the size of a 3-AP-free subset of[𝑁] is 𝑁/(log𝑁)1+𝑐
+for some constant𝑐 >0(Bloom and Sisask 2020). The current best upper bound on the size
+of corner-free subsets of[𝑁]2 is𝑁 2/(log log𝑁)𝑐 for some constant𝑐 >0(Shkredov 2006).
+Both use Fourier analysis.
+For the next exercise, apply the triangle removal lemma to an appropriate graph.
+Exercise 2.4.6∗(Arithmetic triangle removal lemma).Show that for every𝜀 > 0, there
+exists𝛿 > 0 such that if𝐴⊆ [𝑛] has fewer than𝛿𝑛2 many triples(𝑥,𝑦,𝑧 ) ∈𝐴3 with
+𝑥+𝑦 = 𝑧, then there is some𝐵⊆ 𝐴 with|𝐴\𝐵|≤ 𝜀𝑛 such that𝐵 is sum-free (i.e., no
+𝑥,𝑦,𝑧 ∈ 𝐵 with𝑥+𝑦=𝑧).
+2.5 Large 3-AP-Free Sets: Behrend’s Construction
+How can we construct a large 3-AP-free subset of[𝑁]?
+Wecandoitgreedily.Startingwith 0(whichproducesanicerpattern),wesuccessivelyput
+in each positive integer if adding it does not create a 3-AP with the already chosen integers.
+This would produce the following sequence:
+0 1 3 4 9 10 12 13 27 28 30 31 ....
+The above sequence is known as aStanley sequence. It consists of all nonnegative integers
+whoseternaryrepresentationshaveonlythedigits 0and 1.(Why?)Upto 𝑁 = 3𝑘,thesubset
+𝐴⊆[ 𝑁] so constructed has size|𝐴|= 2𝑘 =𝑁 log3 2.
+For quite some time, people thought the above example was close to the optimal. Salem
+and Spencer (1942) then found a much larger 3-AP-free subset of[𝑁], with size𝑁 1−𝑜(1).
+TheirresultwasfurtherimprovedbyBehrend(1946),whoseconstructionwepresentbelow.
+This construction has not yet been substantially improved (see Elkin (2011) and Green and
+Wolf (2010) for some lower order improvements).
+Behrend’s construction has surprising applications, such as in the design of fast matrix
+multiplication algorithms (Coppersmith and Winograd 1990).
+Theorem 2.5.1(Behrend’s construction)
+There exists a constant𝐶 > 0 such that for every positive integer𝑁, there exists a
+3-AP-free𝐴⊆[ 𝑁] with|𝐴|≥ 𝑁𝑒−𝐶
+√
+log𝑁.
+The rough idea is to first find a high-dimensional sphere with many lattice points via the
+pigeonhole principle. The sphere contains no 3-AP due to convexity. We then project these
+lattice points ontoZ in a way that creates no additional 3-APs. This is done by treating the
+coordinates as the base-𝑞 expansion of an integer with some large𝑞.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.5 Large 3-AP-Free Sets: Behrend’s Construction 71
+Proof. Let𝑚 and𝑑 be two positive integers depending on𝑁 to be specified later. Consider
+the lattice points of𝑋 =[𝑚]𝑑 that lie on a sphere of radius
+√
+𝐿:
+𝑋𝐿 B
+
+(𝑥1,...,𝑥 𝑑)∈ 𝑋 :𝑥2
+1+···+ 𝑥2
+𝑑 =𝐿
+	
+.
+Then, 𝑋 = —𝑑𝑚2
+𝑖=1 𝑋𝑖. So by the pigeonhole principle, there exists an𝐿∈[ 𝑑𝑚2] such that
+|𝑋𝐿|≥ 𝑚𝑑/(𝑑𝑚2). Define the base2𝑚 digital expansion
+𝜙(𝑥1,...,𝑥 𝑑) B
+𝑑∑︁
+𝑖=1
+𝑥𝑖(2𝑚)𝑖−1.
+Then 𝜙 is injective on𝑋. Furthermore,𝑥,𝑦,𝑧 ∈ [𝑚]𝑑 satisfy 𝑥+𝑧 = 2𝑦 if and only if
+𝜙(𝑥)+ 𝜙(𝑧) = 2𝜙(𝑦) (there are no wraparounds in base2𝑚 with all coordinates in[𝑚]).
+Since 𝑋𝐿 is a subset of a sphere, it is 3-AP-free. Thus𝜙(𝑋) ⊆ [(2𝑚)𝑑] is a 3-AP-free
+set of size≥ 𝑚𝑑/(𝑑𝑚2). We can optimize the parameters and take𝑚 =⌊𝑒
+√
+log𝑁/2⌋ and
+𝑑 =⌊
+√︁
+log𝑁⌋, thereby producing a 3-AP-free subset of[𝑁] with of size≥ 𝑁𝑒−𝐶
+√
+log𝑁,
+where𝐶 is some absolute constant. □
+The Behrend construction also implies lower bound constructions for the other problems
+we saw earlier. For example, since we used the diamond-free lemma (Corollary 2.3.3) to
+deduce an upper bound on the size of 3-AP-free set, turning this implication around, we
+see that having a large 3-AP-free set implies the following quantitative limitation on the
+diamond-free lemma.
+Corollary 2.5.2(Lower bound for the diamond-free lemma)
+Forevery 𝑛≥ 3,thereissome 𝑛-vertexgraphwithatleast 𝑛2𝑒−𝐶
+√
+log𝑛 edgeswhereevery
+edge lies on a unique triangle. Here𝐶 is some absolute constant.
+Proof. IntheproofofTheorem2.4.1,startingfroma3-AP-freeset 𝐴⊆[ 𝑁],weconstructeda
+graphwith 6𝑁+3verticesand(6𝑁+3)|𝐴|edgessuchthateveryedgeliesinauniquetriangle.
+Choosing𝑁 =⌊(𝑛− 3)/6⌋ andletting 𝐴betheBehrendconstructionofTheorem2.5.1with
+|𝐴|≥ 𝑁𝑒−𝐶
+√
+log𝑁, we obtain the desired graph. □
+Remark 2.5.3 (More lower bounds from Behrend’s construction).The same graph con-
+structionalsoshows,afterexaminingtheproofofCorollary2.3.3,thatinthetriangleremoval
+lemma, Theorem 2.3.1, one cannot take𝛿=𝑒−𝑐(log(1/𝜀)) 2
+if the constant𝑐 >0 is too small.
+In Proposition 2.4.4 we deduced an upper bound𝑟3(𝑁)𝑁≤ 𝑟⌞(2𝑁) on corner-free sets
+using 3-AP-free sets. The Behrend construction then also gives a corner-free subset of[𝑁]2
+of size≥ 𝑁 2𝑒−𝐶
+√
+log𝑁.
+Exercise 2.5.4(Modifying Behrend’s construction).Prove that there is some constant
+𝐶 >0 so that for all𝑁, there exists𝐴⊆[ 𝑁] with|𝐴|≥ 𝑁 exp(−𝐶
+√︁
+log𝑁) so that there
+do not exist𝑤,𝑦,𝑥,𝑧 ∈ 𝐴 not all equal and satisfying𝑥+𝑦+𝑧= 3𝑤.
+Exercise 2.5.5∗ (Avoiding 5-term quadratic configurations).Prove that there is some
+constant𝐶 > 0 so that for all𝑁, there exists𝐴⊆[ 𝑁] with|𝐴|≥ 𝑁 exp(−𝐶
+√︁
+log𝑁) so
+that there does not exist a nonconstant quadratic polynomial𝑃 so that𝑃(0),𝑃(1),𝑃(2),
+𝑃(3),𝑃(4)∈ 𝐴.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+72 Graph Regularity Method
+2.6 Graph Counting and Removal Lemmas
+Inthissection,wegeneralizethetrianglecountinglemmafromtrianglestoothergraphsand
+discuss applications.
+Graph Counting Lemma
+Letusfirstillustratethetechniquefor 𝐾4.Similartothetrianglecountinglemma,weembed
+the vertices of𝐾4 one at a time. At each stage we ensure that many eligible vertices remain
+for the yet to be embedded vertices.
+Proposition 2.6.1(𝐾4 counting lemma)
+Let 0 < 𝜀 <1. Let𝑋1,...,𝑋 4 be vertex subsets of a graph𝐺 such that(𝑋𝑖,𝑋 𝑗) is𝜀-
+regular with edge-density𝑑𝑖𝑗 B 𝑑(𝑋𝑖,𝑋 𝑗)≥ 3√𝜀 for each pair𝑖 < 𝑗. Then the number
+of quadruples(𝑥1,𝑥 2,𝑥 3,𝑥 4)∈ 𝑋1×𝑋2×𝑋3×𝑋4 such that𝑥1𝑥2𝑥3𝑥4 is a clique in𝐺 is
+≥( 1− 3𝜀)(𝑑12− 3𝜀)(𝑑13−𝜀)(𝑑14−𝜀)(𝑑23−𝜀)(𝑑24−𝜀)(𝑑34−𝜀)|𝑋1|| 𝑋2|| 𝑋3|| 𝑋4|.
+Proof. We repeatedly apply the following statement, which is a simple consequence of the
+definition of𝜀-regularity (and a small extension of Lemma 2.2.3):
+Given an𝜀-regular pair(𝑋,𝑌), and𝐵⊆𝑌 with|𝐵|≥ 𝜀|𝑌|, the number of vertices in𝑋
+with<(𝑑(𝑋,𝑌)− 𝜀)|𝐵| neighbors in𝐵 is<𝜀 |𝑋|.
+The number of vertices𝑋1 with≥( 𝑑1𝑖−𝜀)|𝑋𝑖| neighbors in𝑋𝑖 for each𝑖 = 2, 3, 4 is
+≥( 1− 3𝜀)|𝑋1|. Fix a choice of such an𝑥1∈ 𝑋1. For each𝑖= 2, 3, 4, let𝑌𝑖 be the neighbors
+of𝑥1 in𝑋𝑖, so that|𝑌𝑖|≥( 𝑑1𝑖−𝜀)|𝑋𝑖|.
+𝑋1
+𝑥1
+𝑋2
+𝑌2
+𝑋3
+𝑌3
+𝑋4
+𝑌4
+𝑌2
+𝑥2
+𝑌3
+𝑍3
+𝑌4
+𝑍4
+Thenumberofverticesin 𝑌2 with≥( 𝑑2𝑖−𝜀)|𝑌𝑖|commonneighborsin 𝑌𝑖 foreach 𝑖= 3, 4
+is≥|𝑌2|− 2𝜀|𝑋2|≥( 𝑑12− 3𝜀)|𝑋2|.Fixachoiceofsuchan 𝑥2∈𝑌2.Foreach 𝑖= 3, 4,let 𝑍𝑖
+be the neighbors of𝑥2 in𝑌𝑖.
+For each𝑖= 3, 4,|𝑍𝑖|≥( 𝑑1𝑖−𝜀)(𝑑2𝑖−𝜀)|𝑋𝑖|≥𝜀|𝑋𝑖|, and so
+𝑒(𝑍3,𝑍 4)≥( 𝑑34−𝜀)|𝑍3||𝑍4|
+≥( 𝑑34−𝜀)·( 𝑑13−𝜀)(𝑑23−𝜀)|𝑋3|·( 𝑑14−𝜀)(𝑑24−𝜀)|𝑋4|.
+Any edge between𝑍3 and 𝑍4 forms a𝐾4 together with𝑥1 and 𝑥2. Multiplying the above
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.6 Graph Counting and Removal Lemmas 73
+quantity with the earlier lower bounds on the number of choices of𝑥1 and 𝑥2 gives the
+result. □
+The same strategy works more generally for counting any graph. To find copies of𝐻, we
+embed vertices of𝐻 one at a time.
+Theorem 2.6.2(Graph counting lemma)
+For every graph𝐻 and real𝛿 >0, there exists an𝜀 >0 such that the following is true.
+Let𝐺 be a graph, and𝑋𝑖⊆ 𝑉(𝐺) for each𝑖∈𝑉(𝐻) such that for each𝑖𝑗 ∈ 𝐸(𝐻),
+(𝑋𝑖,𝑋 𝑗) isan 𝜀-regularpairwithedgedensity 𝑑𝑖𝑗 B𝑑(𝑋𝑖,𝑋 𝑗)≥ 𝛿.Thenthenumberof
+graph homomorphisms𝐻→𝐺 where each𝑖∈𝑉(𝐻) is mapped to𝑋𝑖 is
+≥( 1−𝛿)
+Ö
+𝑖𝑗∈𝐸(𝐻)
+(𝑑𝑖𝑗−𝛿)
+Ö
+𝑖∈𝑉(𝐻)
+|𝑋𝑖|.
+Remark 2.6.3. (a) For a fixed𝐻, as|𝑋𝑖|→∞ for each𝑖, all but a negligible fraction of
+such homomorphisms from𝐻 are injective (i.e., yielding a copy of𝐻 as a subgraph).
+(b) It is useful (and in fact equivalent) to think about the setting where𝐺 is a multipartite
+graph with parts𝑋𝑖, as illustrated below.
+𝑋1
+𝑋2 𝑋3
+𝑋4
+𝐺
+−→
+1
+2 3
+4
+𝐻
+Inthemultipartitesetting,weseethatthegraphcountinglemmacanbeadaptedtovariants
+such as counting induced copies of𝐻. Indeed, an induced copy of𝐻 is the same as a𝑣(𝐻)-
+clique in an auxiliary graph𝐺′ obtained by replacing the bipartite graph in𝐺 between 𝑋𝑖
+and𝑋𝑗 by its complementary bipartite graph between𝑋𝑖 and𝑋𝑗 for each𝑖𝑗 ∉𝐸(𝐻).
+𝐺12
+𝐺23
+𝐺13
+𝑋1
+𝑋2 𝑋3
+𝐺
+in
+induced𝐻
+⇐ ⇒ 𝐺12 𝐺13
+𝐺23
+𝑋1
+𝑋2 𝑋3
+modified𝐺
+in
+𝐾𝑣 (𝐻 )
+(c) We will see a different proof in Section 4.5 using the language of graphons. There,
+instead of embedding𝐻 one vertex at a time, we compare the density of𝐻 and𝐻\{𝑒}.
+Weestablishthefollowingstrongerstatement,whichhastheadditionaladvantagethatone
+can choose the regularity parameter𝜀 to depend on the maximum degree of𝐻 rather than
+𝐻 itself.Youmaywishtoskipreadingtheproof,asitisnotationallyratherheavy.Themain
+ideas were already illustrated in the𝐾4 counting lemma.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+74 Graph Regularity Method
+Theorem 2.6.4(Graph counting lemma)
+Let 𝐻 be a graph with maximum degreeΔ ≥ 1 and 𝑐(𝐻) connected components.
+Let𝜀 >0. Let𝐺 be a graph. Let𝑋𝑖⊆𝑉(𝐺) for each𝑖∈𝑉(𝐻). Suppose that for each
+𝑖𝑗 ∈𝐸(𝐻),(𝑋𝑖,𝑋 𝑗)isan 𝜀-regularpairwithedgedensity 𝑑𝑖𝑗 B𝑑(𝑋𝑖,𝑋 𝑗)≥( Δ+1)𝜀1/Δ.
+Then the number of graph homomorphisms𝐻→𝐺 where each𝑖∈𝑉(𝐻) is mapped to
+𝑋𝑖 is
+≥( 1−Δ𝜀)𝑐(𝐻)
+Ö
+𝑖𝑗∈𝐸(𝐻)
+(𝑑𝑖𝑗−Δ𝜀1/Δ)·
+Ö
+𝑖∈𝑉(𝐻)
+|𝑋𝑖|.
+Furthermore,if|𝑋𝑖|≥𝑣(𝐻)/𝜀foreach𝑖,thenthereexistssuchahomomorphism 𝐻→𝐺
+that is injective (i.e., an embedding of𝐻 as a subgraph).
+Proof. Let us order and label the vertices of𝐻 by 1,...,𝑣 (𝐻) arbitrarily. We will select
+vertices 𝑥1 ∈ 𝑋1,𝑥 2 ∈ 𝑋2,... in order. The idea is to always make sure that they have
+enough neighbors in𝐺 so that there are many ways to continue the embedding of𝐻. We
+say that a partial embedding𝑥1,...,𝑥 𝑠−1 (here partial embeddingmeans that𝑥𝑖𝑥𝑗∈ 𝐸(𝐺)
+whenever𝑖𝑗 ∈ 𝐸(𝐻) for all the𝑥𝑖s chosen so far) isabundant if for each𝑗≥ 𝑠, the number
+of valid extensions𝑥𝑗∈ 𝑋𝑗 (meaning that𝑥𝑖𝑥𝑗∈ 𝐸(𝐺) whenever𝑖 < 𝑠and𝑖𝑗 ∈ 𝐸(𝐻)) is
+≥| 𝑋𝑗| ˛
+𝑖<𝑠 :𝑖𝑗∈𝐸(𝐻)(𝑑𝑖𝑗−𝜀).
+For each𝑠 = 1, 2,...,𝑣 (𝐻) in order, suppose we have already fixed an abundant partial
+embedding𝑥1,...,𝑥 𝑠−1. For each𝑗≥ 𝑠, let
+𝑌𝑗 ={𝑥𝑗∈ 𝑋𝑗 :𝑥𝑖𝑥𝑗∈𝐸(𝐺) whenever𝑖 < 𝑠and𝑖𝑗 ∈𝐸(𝐻)}
+be the set of valid extensions of the𝑗th vertex in𝑋𝑗 given the partial embeddings of
+𝑥1,...,𝑥 𝑠−1, so that the abundance hypothesis gives
+|𝑌𝑗|≥| 𝑋𝑗|
+Ö
+𝑖<𝑠
+𝑖𝑗∈𝐸(𝐻)
+(𝑑𝑖𝑗−𝜀)≥( 𝜀1/Δ)|{𝑖<𝑠 :𝑖𝑗∈𝐸(𝐻)}||𝑋𝑗|≥ 𝜀|𝑋𝑗|.
+Thus, as in the proof of Proposition 2.6.1 for𝐾4, the number of choices𝑥𝑠∈ 𝑋𝑠 that would
+extend𝑥1,...,𝑥 𝑠−1 to an abundant partial embedding is
+≥|𝑌𝑠|−|{𝑖 > 𝑠:𝑠𝑖∈𝐸(𝐻)}|𝜀|𝑋𝑠|
+≥|𝑋𝑠|
+Ö
+𝑖<𝑠
+𝑖𝑠∈𝐸(𝐻)
+(𝑑𝑖𝑗−𝜀)− |{𝑖 > 𝑠:𝑠𝑖∈𝐸(𝐻)}|𝜀|𝑋𝑠|. (†)
+If none of1,...,𝑠 − 1 is a neighbor of𝑠 in𝐻, then the first term in(†) is|𝑋𝑠|, and so
+(†)≥( 1−Δ𝜀)|𝑋𝑠|.
+Otherwise we can absorb the second term into the product and obtain
+(†)≥ |𝑋𝑠|
+Ö
+𝑖<𝑠
+𝑖𝑠∈𝐸(𝐻)
+(𝑑𝑖𝑗−𝜀)−( Δ− 1)𝜀|𝑋𝑠|≥|𝑋𝑠|
+Ö
+𝑖<𝑠
+𝑖𝑠∈𝐸(𝐻)
+(𝑑𝑖𝑗−Δ𝜀1/Δ).
+Fix such a choice of𝑥𝑠. And now we move onto embedding the next vertex𝑥𝑠+1.
+Multiplying together these lower bounds for the number of choices of each𝑥𝑠 over all
+𝑠= 1,...,𝑣 (𝐻), we obtain the lower bound on the number of homomorphisms𝐻→𝐺.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.6 Graph Counting and Removal Lemmas 75
+Finally,notethatinbothcases (†)≥ 𝜀|𝑋𝑠|,andsoif |𝑋𝑠|≥𝑣(𝐻)/𝜀,then(†)≥ 𝑣(𝐻)and
+so we can choose each𝑥𝑠 to be distinct from the previously embedded vertices𝑥1,...,𝑥 𝑠−1,
+thereby yielding an injective homomorphism. □
+Graph Removal Lemma
+As an application, we have the following graph removal lemma, generalizing the triangle
+removal lemma, Theorem 2.3.1. The proof is basically the same as Theorem 2.3.1 except
+with the above graph counting lemma taking the role of the triangle counting lemma, so we
+will not repeat the proof here.
+Theorem 2.6.5(Graph removal lemma)
+For every graph𝐻 and constant𝜀 > 0, there exists a constant𝛿 = 𝛿(𝐻,𝜀) > 0 such
+that every𝑛-vertex graph𝐺 with fewer than𝛿𝑛𝑣(𝐻) copies of𝐻 can be made𝐻-free by
+removing fewer than𝜀𝑛2 edges.
+Thenextexerciseasksyoutoshowthat,if 𝐻isbipartite,thenonecanprovethe 𝐻-removal
+lemma without using regularity, and thereby getting a much better bound.
+Exercise 2.6.6(Removal lemma for bipartite graphs with polynomial bounds).Prove
+that for every bipartite graph𝐻, there is a constant𝐶 such that for every𝜀 > 0, every
+𝑛-vertex graph with fewer than𝜀𝐶𝑛𝑣(𝐻) copies of𝐻 can be made𝐻-free by removing at
+most𝜀𝑛2 edges.
+Erdős–Stone–Simonovits Theorem
+Asanotherapplication,letusgiveadifferentproofoftheErdős–Stone–Simonovitstheorem
+from Section 1.5, restated below, which gives the asymptotics (up to a+𝑜(𝑛2) error term)
+for ex(𝑛,𝐻), the maximum number of edges in an𝑛-vertex𝐻-free graph. We saw a proof in
+Section1.5usingsupersaturationandthehypergraphKSTtheorem.Theproofbelowfollows
+the partition-clean-count strategy in Remark 2.3.2 combined with an application of Turán’s
+theorem. A common feature of many regularity applications is that they “boost” an exact
+extremalgraphtheoreticresult(e.g.,Turán’stheorem)toanasymptoticresultinvolvingmore
+complexderivedstructures(e.g.,fromtheexistenceofacopyof 𝐾𝑟 toembeddingacomplete
+𝑟-partite graph).
+Theorem 2.6.7(Erdős–Stone–Simonovits theorem)
+Fix graph𝐻 with at least one edge. Then
+ex(𝑛,𝐻)=
+
+1− 1
+𝜒(𝐻)− 1+𝑜(1)
+ 𝑛2
+2.
+Proof. Fix𝜀 >0. Let𝐺 be any𝑛-vertex graph with at least
+
+1− 1
+𝜒(𝐻)− 1+𝜀
+
+𝑛2
+2 edges. The
+theorem is equivalent to the claim that for𝑛=𝑛(𝜀,𝐻) sufficiently large,𝐺 contains𝐻 as a
+subgraph.
+Apply the graph regularity lemma to obtain an𝜂-regular partition𝑉(𝐺) =𝑉1∪···∪ 𝑉𝑚
+Graph Theory and Additive Combinatorics — Yufei Zhao
+76 Graph Regularity Method
+for some sufficiently small𝜂 >0 only depending on𝜀 and𝐻, to be decided later. Then the
+number𝑚 of parts is also bounded for fixed𝐻 and𝜀.
+Remove an edge(𝑥,𝑦)∈ 𝑉𝑖×𝑉𝑗 if
+(a) (𝑉𝑖,𝑉𝑗) is not𝜂-regular, or
+(b) 𝑑(𝑉𝑖,𝑉𝑗) <𝜀/8, or
+(c) min{|𝑉𝑖|,
+𝑉𝑗
+
+}<𝜀𝑛/(8𝑚).
+Then, as in Theorem 2.3.1, the number of edges in (a) is≤ 𝜂𝑛2≤ 𝜀𝑛2/8, the number of
+edges in (b) is<𝜀𝑛 2/8, and the number of edges in (c) is<𝑚𝜀𝑛 2/(8𝑚)≤ 𝜀𝑛2/8. Thus, the
+total number of edges removed is≤( 3/8)𝜀𝑛2. After removing all these edges, the resulting
+graph𝐺′ has still has>
+
+1− 1
+𝜒(𝐻)− 1+ 𝜀
+4
+
+𝑛2
+2 edges.
+𝑉𝑖2 𝑉𝑖3
+𝑉𝑖1
+𝐺′𝐻
+ByTurán’stheorem(Corollary1.2.6), 𝐺′containsacopyof 𝐾𝜒(𝐻).Supposethatthe 𝜒(𝐻)
+vertices of this𝐾𝜒(𝐻) land in𝑉𝑖1,...,𝑉 𝑖𝜒(𝐻) (allowing repeated indices). Since each pair of
+these sets is𝜂-regular, has edge density≥ 𝜀/8, and each has size≥ 𝜀𝑛/(8𝑚), by applying
+the graph counting lemma, Theorem 2.6.2, we see that as long as𝜂 is sufficiently small in
+terms of𝜀 and𝐻, and𝑛 is sufficiently large, there exists an injective embedding of𝐻 into
+𝐺′ where the vertices of𝐻 in the𝑟th color class are mapped into𝑉𝑖𝑟. So𝐺 contains𝐻 as a
+subgraph. □
+2.7 Exercises on Applying Graph Regularity
+The regularity method can be difficult at first to grasp conceptually. The following exercises
+are useful for gaining familiarity in applying the regularity lemma. For these exercises, you
+are welcome to use the equitable form of the graph regularity lemma (Theorem 2.1.20),
+which is more convenient to apply.
+Exercise 2.7.1(Ramsey–Turán).
+(a) Showthatforevery 𝜀 >0,thereexists 𝛿 >0suchthatevery 𝑛-vertex𝐾4-freegraph
+with at least( 1
+8+𝜀)𝑛2 edges contains an independent set of size at least𝛿𝑛.
+(b) Showthatforevery 𝜀 >0,thereexists 𝛿 >0suchthatevery 𝑛-vertex𝐾4-freegraph
+with at least( 1
+8−𝛿)𝑛2 edges and independence number at most𝛿𝑛 can be made
+bipartite by removing at most𝜀𝑛2 edges.
+Exercise 2.7.2(Nearly homogeneous subset).Show that for every𝐻 and𝜀 > 0 there
+exists𝛿 >0such that every graph on𝑛 vertices without an induced copy of𝐻 contains an
+induced subgraph on at least𝛿𝑛 vertices whose edge density is at most𝜀 or at least1−𝜀.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.8 Induced Graph Removal and Strong Regularity 77
+Exercise 2.7.3(Ramsey numbers of bounded degree graphs).Show that for everyΔ
+thereexistsaconstant 𝐶Δsothatif 𝐻isagraphwithmaximumdegreeatmost Δ,thenevery
+2-edge-coloringofacompletegraphonatleast 𝐶Δ𝑣(𝐻)verticescontainsamonochromatic
+copy of𝐻.
+Exercise 2.7.4(Counting𝐻-free graphs).
+(a) Show that the number of𝑛-vertex triangle-free graphs is2(1/4+𝑜(1))𝑛2
+.
+(b) More generally, show that for any fixed graph𝐻, the number of𝑛-vertex𝐻-free
+graphs is2ex(𝑛,𝐻)+𝑜(𝑛2).
+Exercise 2.7.5∗(Induced Ramsey). Show that for every graph𝐻 there is some graph𝐺
+such that if the edges of𝐺 are colored with two colors, then some induced subgraph of𝐺
+is a monochromatic copy of𝐻.
+Exercise 2.7.6∗(Finding a degree-regular subgraph).Show that for every𝛼 >0, there
+exists𝛽 >0suchthateverygraphon 𝑛verticeswithatleast 𝛼𝑛2edgescontainsa 𝑑-regular
+subgraph for some𝑑≥ 𝛽𝑛. (Here𝑑-regularrefers to every vertex having degree𝑑.)
+2.8 Induced Graph Removal and Strong Regularity
+Recall that𝐻 is aninduced subgraphof𝐺 if one can obtain𝐻 from𝐺 by deleting vertices
+from𝐺 (but you are not allowed to simply remove edges from𝐺). We say that𝐺 isinduced
+𝑯-freeif𝐺 containsnoinducedsubgraphisomorphicto 𝐻.(SeeNotationandConventions.)
+ThefollowingremovallemmaforinducedsubgraphsisduetoAlon,Fischer,Krivelevich,
+and Szegedy (2000).
+Theorem 2.8.1(Induced graph removal lemma)
+For any graph𝐻 and𝜀 >0, there exists𝛿 >0 such that if an𝑛-vertex graph has fewer
+than𝛿𝑛𝑣(𝐻) induced copies of𝐻, then it can be made induced𝐻-free by adding and/or
+deleting fewer than𝜀𝑛2 edges.
+Remark 2.8.2. Given two graphs on the same vertex set, the minimum number of edges
+that one needs to add/delete to obtain the second graph from the first graph is called theedit
+distance between the two graphs. The induced graph removal lemma can be rephrased as
+saying that every graph with few induced copies of𝐻 is close in edit distance to an induced
+𝐻-free graph.
+Unlike the previous graph removal lemma, for the induced version, it is important that
+we allow both adding and deleting edges. The statement would be false if we only allow
+edgedeletionbutnotaddition.Forexample,suppose 𝐺=𝐾𝑛\𝐾3 (i.e.,acompletegraphon
+𝑛 vertices with three edges of a single triangle removed). If𝐻 is an empty graph on three
+vertices, then𝐺 has exactly one induced copy of𝐻, but𝐺 cannot be made induced𝐻-free
+by only deleting edges.
+To see why the earlier proof of the graph removal lemma (Theorem 2.6.5) does not apply
+in a straightforward way to prove the induced graph removal lemma, let us attempt to follow
+the earlier strategy and see where things go wrong.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+78 Graph Regularity Method
+First we apply the graph regularity lemma. Then we need toclean up the graph. In the
+induced graph removal lemma, edges and nonedges play symmetric roles. We can handle
+low-densitypairs(edgedensitylessthan 𝜀)byremovingedgesbetweensuchpairs.Naturally,
+for the induced graph removal lemma, we also need to handle high-density pairs (density
+more than1−𝜀), and we can add all the edges between such pairs. However, it is not clear
+whattodowithirregularpairs.Earlier,wejustremovedalledgesbetweenirregularpairs.The
+problem is that this may create many induced copies of𝐻 that were not present previously
+(see illustration below). Likewise, we cannot simply add all edges between irregular pairs.
+irregular
+Perhapswecanalwaysfindaregularitypartitionwithoutirregularpairs?Unfortunately,this
+is false, as shown in Exercise 2.1.24. One must allow for the possibility of irregular pairs.
+Strong Regularity Lemma
+We will iterate the regularity partitioning lemma to obtain a stronger form of the regularity
+lemma. Recall the energy𝑞(P) of a partition (Definition 2.1.10) as the mean-squared edge
+density between parts.
+Theorem 2.8.3(Strong regularity lemma)
+For any sequence of constants𝜀0≥𝜀1≥𝜀2≥... > 0, there exists an integer𝑀 so that
+every graph has two vertex partitionsP andQ so that
+(a) Q refinesP,
+(b) P is𝜀0-regular andQ is𝜀|P|-regular,
+(c) 𝑞(Q)≤ 𝑞(P)+ 𝜀0, and
+(d) |Q|≤ 𝑀.
+Remark 2.8.4. One should think of the sequence𝜀1,𝜀 2,... as rapidly decreasing. This
+strong regularity lemma outputs a refining pair of partitionsP andQ such thatP is regular,
+Q isextremelyregular,andP andQ areclosetoeachother(ascapturedby 𝑞(P)≤ 𝑞(Q)≤
+𝑞(P)+ 𝜀0; see Lemma 2.8.7 below). A key point here is that we demandQ to be extremely
+regularrelativetothenumberofpartsof P.Themoreparts P has,themoreregular Q should
+be.
+Proof. We repeatedly apply the following version of Szemerédi’s regularity lemma:
+Theorem 2.1.19 (restated): For all𝜀 >0 and 𝑘, there exists an integer𝑀0 = 𝑀0(𝑘,𝜀) so
+that for all partitionsP of𝑉(𝐺) with at most𝑘 parts, there exists a refinementP′ ofP with
+each part inP refined into≤ 𝑀0 parts so thatP′ is𝜀-regular.
+By iteratively applying the above regularity partition, we obtain a sequence of partitions
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.8 Induced Graph Removal and Strong Regularity 79
+P0,P1,... of 𝑉(𝐺) starting withP0 ={𝑉(𝐺)} being the trivial partition. EachP𝑖+1 is
+𝜀|P𝑖|-regular and refinesP𝑖. The regularity lemma guarantees that we can have|P𝑖+1| ≤
+𝑀0(|P𝑖|,𝜀|P𝑖|).
+Since 0≤𝑞(·)≤ 1,thereexists 𝑖≤𝜀−1
+0 sothat 𝑞(P𝑖+1)≤ 𝑞(P𝑖)+𝜀0.Thensetting P=P𝑖
+andQ=P𝑖+1 satisfiesthedesiredrequirements.Indeed,thenumberofpartsof Q isbounded
+by a function of the sequence(𝜀0,𝜀 1,... ) since there are a bounded number of iterations
+and each iteration produced a refining partition with a bounded number of parts. □
+Remark 2.8.5 (Bounds in the strong regularity lemma).Theboundon 𝑀 producedbythe
+proofdependsonthesequence (𝜀0,𝜀 1,... ).Intheapplicationbelow,weuse 𝜀𝑖 =𝜀0/poly(𝑖).
+Then the size of𝑀 is comparable to applying𝑀0 to𝜀0 in succession1/𝜀0 times. Note that
+𝑀0 is a tower function, and this makes𝑀 a tower function iterated𝑖 times. This iterated
+tower function is called thewowzerfunction:
+wowzer(𝒌) B tower(tower(···( tower(2))···))
+(with𝑘 applications of tower). The wowzer function is one step up from the tower function
+in the Ackermann hierarchy. It grows extremely quickly.
+Remark 2.8.6 (Equitability). We can further ensure that the parts have nearly equal size.
+This can be done by adapting the ideas sketched in the proof sketch of Theorem 2.1.20.
+The following lemma explains the significance of the inequality𝑞(Q)≤ 𝑞(P)+ 𝜀 from
+earlier.
+Lemma 2.8.7(Energy and approximation)
+LetPandQbothbevertexpartitionsofagraph 𝐺,withQrefiningP.Foreach 𝑥∈𝑉(𝐺),
+write𝑉𝑥 for the part ofP that𝑥 lies in and𝑊𝑥 for the part ofQ that𝑥 lies in. If
+𝑞(Q)≤ 𝑞(P)+ 𝜀3,
+then 𝑑(𝑉𝑥,𝑉𝑦)− 𝑑(𝑊𝑥,𝑊𝑦)
+
+≤𝜀
+for all but𝜀𝑛2 pairs(𝑥,𝑦)∈ 𝑉(𝐺)2.
+Proof. Let𝑥,𝑦 ∈𝑉(𝐺) be chosen uniformly at random. As in the proof of Lemma 2.1.11,
+we have𝑞(P) = E[𝑍 2
+P], where𝑍P = 𝑑(𝑉𝑥,𝑉𝑦). Likewise,𝑞(Q) = E[𝑍 2
+Q], where𝑍Q =
+𝑑(𝑊𝑥,𝑊𝑦).
+We have
+𝑞(Q)− 𝑞(P) = E[𝑍 2
+Q]− E[𝑍 2
+P]= E[(𝑍Q−𝑍P)2],
+where the final step above is a “Pythagorean identity.”
+𝑍Q− 𝑍P
+𝑍P
+𝑍Q
+Graph Theory and Additive Combinatorics — Yufei Zhao
+80 Graph Regularity Method
+Indeed,theidentity E[𝑍 2
+Q]− E[𝑍 2
+P]= E[(𝑍Q−𝑍P)2] isequivalentto E[𝑍P(𝑍Q−𝑍P)] = 0,
+which is true since as𝑥 and𝑦 each vary over their own parts ofP, the expression𝑍Q−𝑍P
+averages to zero.
+So 𝑞(Q) ≤𝑞(P)+ 𝜀3 is equivalent to E[(𝑍Q− 𝑍P)2] ≤𝜀3, which in turn implies,
+by Markov’s inequality, thatP(|𝑍Q−𝑍P| > 𝜀) ≤𝜀, which is the same as the desired
+conclusion. □
+Exercise 2.8.8. Let 0 < 𝜀 < 1. Using the notation of Lemma 2.8.7, show that if
+|𝑑(𝑉𝑥,𝑉𝑦)− 𝑑(𝑊𝑥,𝑊𝑦)|≤ 𝜀 forallbut 𝜀𝑛2 pairs(𝑥,𝑦)∈ 𝑉(𝐺)2,then 𝑞(Q)≤ 𝑞(P)+ 2𝜀.
+We now deduce the following form of the strong regularity lemma, which considers only
+select subsets of vertex parts but does not require irregular pairs.
+Theorem 2.8.9(Strong regularity lemma)
+For any sequences of constants𝜀0≥ 𝜀1≥ 𝜀2≥··· > 0, there exists a constant𝛿 > 0
+so that every𝑛-vertex graph has an equitable vertex partition𝑉1∪···∪ 𝑉𝑘 and a subset
+𝑊𝑖⊆𝑉𝑖 for each𝑖 satisfying
+(a) |𝑊𝑖|≥𝛿𝑛,
+(b) (𝑊𝑖,𝑊 𝑗) is𝜀𝑘-regular for all1≤𝑖≤ 𝑗≤ 𝑘, and
+(c)
+𝑑(𝑉𝑖,𝑉𝑗)− 𝑑(𝑊𝑖,𝑊 𝑗)
+
+≤𝜀0 for all but<𝜀 0𝑘 2 pairs(𝑖,𝑗)∈[ 𝑘]2.
+𝑉1
+𝑉2 𝑉3
+𝑊1
+𝑊2 𝑊3
+Remark 2.8.10. It is significant thatall (rather than nearly all) pairs(𝑊𝑖,𝑊 𝑗) are regular.
+We will need this fact in our applications below.
+Proof sketch..Here we show how to prove a slightly weaker result where𝑖≤ 𝑗 in (b) is
+replaced by𝑖 < 𝑗. In other words, this proof does not promise that each𝑊𝑖 is𝜀𝑘-regular. To
+obtain the stronger conclusion as stated (requiring each𝑊𝑖 to be regular with itself), we can
+adapt the ideas in Exercise 2.1.27. We omit the details.
+By decreasing the𝜀𝑖s if needed (we can do this since a smaller sequence of𝜀𝑖s yields a
+stronger conclusion), we may assume that𝜀𝑖≤ 1/(10𝑖2) and𝜀𝑖≤𝜀0/4for every𝑖≥ 1.
+Let us apply the strong regularity lemma, Theorem 2.8.3, with equitable partitions (see
+aboveRemark2.8.6).Thatis,wehave(wemakethesimplifyingassumptionthatallpartitions
+are exactly equitable, to avoid unimportant technicalities):
+• an equitable𝜀0-regular partitionP={𝑉1,...,𝑉 𝑘} of𝑉(𝐺) and
+• an equitable𝜀𝑘-regular partitionQ refiningP
+satisfying
+• 𝑞(Q)≤ 𝑞(P)+ 𝜀3
+0/8, and
+• |Q|≤ 𝑀 =𝑀(𝜀0,𝜀 1,... ).
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.8 Induced Graph Removal and Strong Regularity 81
+Inside each part𝑉𝑖, let us choose a part𝑊𝑖 ofQ uniformly at random. Since|Q|≤ 𝑀,
+the equitability assumption implies that each part ofQ has size≥ 𝛿𝑛 for some constant
+𝛿=𝛿(𝜀0,𝜀 1,... ). So (a) is satisfied.
+SinceQ is𝜀𝑘-regular, all but at most an𝜀𝑘-fraction of pairs of parts ofQ are𝜀𝑘-regular.
+Summing over all𝑖 < 𝑗, using linearity of expectations, the expected the number of pairs
+(𝑊𝑖,𝑊 𝑗) that are not𝜀𝑘-regular is≤ 𝜀𝑘𝑘 2≤ 1/10. It follows that with probability≥ 9/10,
+(𝑊𝑖,𝑊 𝑗) is 𝜀𝑘-regular for all𝑖 < 𝑗, so (b) is satisfied (this argument ignores𝑖 = 𝑗 as
+mentioned at the beginning of the proof).
+Let 𝑋 denote the number of pairs(𝑖,𝑗)∈[ 𝑘]2 with
+𝑑(𝑉𝑖,𝑉𝑗)− 𝑑(𝑊𝑖,𝑊 𝑗)
+
+ > 𝜀0. Since
+𝑞(Q)≤ 𝑞(P)+( 𝜀0/2)3, by Lemma 2.8.7 and linearity of expectations,E𝑋≤( 𝜀0/2)𝑘 2. So
+by Markov’s inequality,𝑋≤𝜀0𝑘 2 with probability≥ 1/2, so that (c) is satisfied.
+It follows that (a) and (b) are both satisfied with probability≥ 1− 1/10− 1/2. Therefore,
+there exist valid choices of𝑊𝑖s. □
+Induced Graph Removal Lemma
+As with earlier regularity applications, we follow the partition-clean-count recipe from
+Remark 2.3.2.
+Proof of the induced graph removal lemma (Theorem 2.8.1).Apply Theorem 2.8.9 to ob-
+tain apartition𝑉1∪···∪ 𝑉𝑘 of the vertex set of the graph, along with𝑊𝑘⊆𝑉𝑘, so that:
+(a) (𝑊𝑖,𝑊 𝑗) is𝜀′-regular for every𝑖≤ 𝑗, with some sufficiently small constant𝜀′ > 0
+depending on𝜀 and𝐻,
+(b)
+𝑑(𝑉𝑖,𝑉𝑗)− 𝑑(𝑊𝑖,𝑊 𝑗)
+
+≤𝜀/8 for all but<𝜀𝑘 2/8pairs(𝑖,𝑗)∈[ 𝑘]2, and
+(c) |𝑊𝑖|≥𝛿0𝑛, for some constant𝛿0 depending only on𝜀 and𝐻.
+Now weclean the graph. For each pair𝑖≤ 𝑗 (including𝑖= 𝑗),
+• if𝑑(𝑊𝑖,𝑊 𝑗)≤ 𝜀/8, then remove all edges between(𝑉𝑖,𝑉𝑗), and
+• if𝑑(𝑊𝑖,𝑊 𝑗)≥ 1−𝜀/8, then add all edges between(𝑉𝑖,𝑉𝑗).
+Note that we are not simply add/removing edges within each pair(𝑊𝑖,𝑊 𝑗), but rather all of
+(𝑉𝑖,𝑉𝑗).Toboundthenumberofedgesadd/deleted,recall(b)fromthepreviousparagraph.If
+𝑑(𝑊𝑖,𝑊 𝑗)≤ 𝜀/8 and
+
+𝑑(𝑉𝑖,𝑉𝑗)− 𝑑(𝑊𝑖,𝑊 𝑗)
+
+≤ 𝜀/8, then𝑑(𝑉𝑖,𝑉𝑗)≤ 𝜀/4, and the number
+of edges in all such(𝑉𝑖,𝑉𝑗) is at most𝜀𝑛2/4. Likewise for𝑑(𝑊𝑖,𝑊 𝑗)≥ 1−𝜀/8. For the
+remaining<𝜀𝑘 2/8pairs(𝑖,𝑗)notsatisfying
+𝑑(𝑉𝑖,𝑉𝑗)− 𝑑(𝑊𝑖,𝑊 𝑗)
+
+≤𝜀/8,thetotalnumber
+of edges among all such pairs is at most𝜀𝑛2/8. All together, we added/deleted< 𝜀𝑛2 edges
+from𝐺. Call the resulting graph𝐺′. There are no irregular pairs(𝑊𝑖,𝑊 𝑗) for us to worry
+about.
+It remains to show that𝐺′ is induced𝐻-free. Suppose otherwise. Let uscount induced
+copies of𝐻 in 𝐺 as in the proof of the graph removal lemma, Theorem 2.6.5. We have
+some induced copy of𝐻 in 𝐺′, with each vertex𝑣∈ 𝑉(𝐻) embedded in𝑉𝜙(𝑣) for some
+𝜙 :𝑉(𝐻)→[ 𝑘].
+Consider a pair of distinct vertices𝑢,𝑣 of𝐻. If𝑢𝑣∈ 𝐸(𝐻), there must be an edge in𝐺′
+between𝑉𝜙(𝑢) and𝑉𝜙(𝑣) (here𝜙(𝑢) and𝜙(𝑣) are not necessarily different). So we must not
+havedeletedalltheedgesin 𝐺 between𝑉𝜙(𝑢) and𝑉𝜙(𝑣) inthecleaningstep.Bythecleaning
+algorithm above, this means that𝑑𝐺(𝑊𝑖,𝑊 𝑗) >𝜀/8. Likewise, if𝑢𝑣 ∉𝐸(𝐻) for any pair of
+distinct𝑢,𝑣 ∈𝑉(𝐻), we have𝑑𝐺(𝑊𝑖,𝑊 𝑗) < 1−𝜀/8.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+82 Graph Regularity Method
+Since(𝑊𝑖,𝑊 𝑗) is 𝜀′-regular in𝐺 for every𝑖≤ 𝑗, provided that𝜀′ is small enough (in
+terms of𝜀 and𝐻), the graph counting lemma, (Theorem 2.6.2 with the induced variation as
+in Remark 2.6.3(b)) applied to𝐺 gives
+# induced copies of𝐻 in𝐺 ≥( 1−𝜀)
+ 𝜀
+10
+(𝑣(𝐻)
+2)
+(𝛿0𝑛)𝑣(𝐻) C𝛿𝑛𝑣(𝐻)
+(recall|𝑊𝑖|≥ 𝛿0𝑛). Setting𝛿 as above, this contradicts the hypothesis that𝐺 has< 𝛿𝑛𝑣(𝐻)
+copies of𝐻. Thus𝐺′ must be induced𝐻-free. □
+Infinite Graph Removal Lemma
+Finally, let us prove a graph removal lemma with an infinite number of forbidden induced
+subgraphs (Alon and Shapira 2008). Given a (possibly infinite) setH of graphs, we say that
+𝐺 isinducedH-freeif𝐺 is induced𝐻-free for every𝐻∈H .
+Theorem 2.8.11(Infinite graph removal lemma)
+For each (possibly infinite) set of graphsH and𝜀 >0, there existℎ0 and𝛿 >0 so that
+if𝐺 is an𝑛-vertex graph with fewer than𝛿𝑛𝑣(𝐻) induced copies of𝐻 for every𝐻∈H
+withatmost ℎ0 vertices,then 𝐺 canbemadeinduced H-freebyadding/removingfewer
+than𝜀𝑛2 edges.
+Remark 2.8.12. The presence ofℎ0 may seem a bit strange at first. In the next section, we
+will see a reformulation of this theorem in the language of property testing, whereℎ0 comes
+up naturally.
+Proof. The proof is mostly the same as the proof of the induced graph removal lemma that
+wejustsaw.Themaintrickyissuehereishowtochoosetheregularityparameter 𝜀′ forevery
+pair(𝑊𝑖,𝑊 𝑗) incondition(a)oftheearlierproof.Previously,wedidnotusethefullstrength
+of Theorem 2.8.9, which allowed𝜀′ to depend on𝑘, but now we are going to use it. Recall
+that we had to make sure that this𝜀′ was chosen to be small enough for the𝐻-counting
+lemma to work. Now that there are possibly infinitely many graphs inH, we cannot naively
+choose𝜀′ to be sufficiently small. The main point of the proof is to reduce the problem to a
+finite subset ofH for each𝑘.
+Define atemplate𝑇 to be an edge-coloring of the looped𝑘-clique (i.e., a complete graph
+on 𝑘 vertices along with a loop at a every vertex) where each edge is colored by one of
+{white, black, gray}. We say that a graph𝐻 iscompatiblewith a template𝑇 if there exists a
+map𝜙 :𝑉(𝐻)→ 𝑉(𝑇) such that for every distinct pair𝑢,𝑣 of vertices of𝐻:
+• if𝑢𝑣∈𝐸(𝐻), then𝜙(𝑢)𝜙(𝑣) is colored black or gray in𝑇; and
+• if𝑢𝑣 ∉𝐸(𝐻), then𝜙(𝑢)𝜙(𝑣) is colored white or gray in𝑇.
+Thatis,ablackedgeinatemplatemeansanedgeof 𝐻,awhiteedgemeansanonedgeof 𝐻,
+and a gray edge is a wildcard. An example is shown below.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.8 Induced Graph Removal and Strong Regularity 83
+𝐻
+𝑏
+𝑏
+𝑐𝑎
+𝑐
+−→
+𝜙
+𝑇
+𝑎
+𝑏 𝑐
+black
+gray
+(none) white
+As another example, every graph is compatible with every completely gray template.
+For every template𝑇, pick somerepresentative𝐻𝑇∈H compatible with𝑇, as long as
+such a representative exists (and ignore𝑇 otherwise). A graph inH is allowed to be the
+representative of more than one template. LetH𝑘 be a set of all𝐻∈H that arise as the
+representativeofsome 𝑘-vertextemplate.Notethat H𝑘 isfinitesincetherearefinitelymany
+𝑘-vertex templates. We can pick each𝜀𝑘 > 0 to be small enough so that the conclusion of
+the counting step later can be guaranteed for all elements ofH𝑘.
+Now we proceed nearly identically as in the proof of the induced removal lemma, Theo-
+rem 2.8.1, that we just saw. In applying Theorem 2.8.9 to obtain the partition𝑉1∪···∪ 𝑉𝑘
+and finding𝑊𝑖⊆𝑉𝑖, we ensure the following condition instead of the earlier (a):
+(a) (𝑊𝑖,𝑊 𝑗) is𝜀𝑘-regular for every𝑖≤ 𝑗.
+We setℎ0 to be the maximum number of vertices of a graph inH𝑘.
+Now we do the cleaning step. Along the way, we create a𝑘-vertex template𝑇 with vertex
+set[𝑘] corresponding to the parts{𝑉1,...,𝑉 𝑘} of the partition. For each1≤𝑖≤ 𝑗≤𝑛,
+• if𝑑(𝑊𝑖,𝑊 𝑗)≤ 𝜀/4,thenremovealledgesbetween (𝑉𝑖,𝑉𝑗) from𝐺,andcolortheedge
+𝑖𝑗 in template𝑇 white;
+• if𝑑(𝑊𝑖,𝑊 𝑗)≥ 1−𝜀/4, then add all edges between(𝑉𝑖,𝑉𝑗), and color the edge𝑖𝑗 in
+template𝑇 black;
+• otherwise, color the edge in𝑖𝑗 in template𝑇 gray.
+Finally, suppose some induced𝐻∈H remains in𝐺′. Due to our cleaning procedure,𝐻
+mustbecompatiblewiththetemplate 𝑇.Thentherepresentative 𝐻𝑇∈H 𝑘 of𝑇 isagraphon
+at mostℎ0 vertices, and furthermore, the counting lemma guarantees that, provided𝜀𝑘 > 0
+is small enough (subject to a finite number of pre-chosen constraints, one for each element
+ofH𝑘), the number of copies of𝐻𝑇 in𝐺 is≥ 𝛿𝑛𝑣(𝐻𝑇) for some constant𝛿 > 0 that only
+depends on𝜀 andH. This contradicts the hypothesis, and thus𝐺′ is inducedH-free. □
+All the techniques above work nearly verbatim for a generalization to colored graphs.
+Theorem 2.8.13(Infinite edge-colored graph removal lemma)
+For every𝜀 > 0, positive integer𝑟, and a (possibly infinite) setH of𝑟-edge-colored
+graphs, there exists someℎ0 and 𝛿 > 0 such that if𝐺 is an𝑟-edge-coloring of the
+complete graph on𝑛 vertices with< 𝛿𝑛𝑣(𝐻) copies of𝐻 for everyH with at mostℎ0
+vertices, then𝐺 can be madeH-free by recoloring< 𝜀𝑛2 edges (using the same palette
+of𝑟 colors throughout).
+The induced graph removal lemma corresponds to the special case𝑟 = 2, with the two
+colors representing edges and nonedges respectively.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+84 Graph Regularity Method
+2.9 Graph Property Testing
+Wearegivenrandomqueryaccesstoaverylargegraph.Thegraphmaybetoolargeforusto
+see every vertex or edge. What can we learn about the graph by sampling a constant number
+of vertices and the edges between them?
+For example, we cannot distinguish two graphs if they only differ on a small number of
+vertices or edges. We also need some error tolerance.
+AgraphpropertyPissimplyasetofisomorphismclassesofgraphs.Thegraphproperties
+thatweusuallyencounterhavesomenicenameand/orcompactdescription,suchas triangle-
+free,planar, and3-colorable.
+We say that an𝑛-vertex graph𝐺 is 𝜺-farfrom propertyP if one cannot change𝐺 into a
+graph inP by adding/deleting𝜀𝑛2 edges.
+The following theorem gives a straightforward algorithm, with a probabilistic guarantee,
+on testing triangle-freeness. It allows us to distinguish two types of graphs from each other:
+triangle-free vs. far from triangle-free.
+Theorem 2.9.1(Triangle-freeness is testable)
+For every𝜀 > 0, there exists𝐾 = 𝐾(𝜀) so that the following algorithm satisfies the
+probabilistic guarantees below.
+Input:A graph𝐺.
+Algorithm: Sample𝐾 vertices from𝐺 uniformly at random without replacement (if𝐺
+has fewer than𝐾 vertices, then return the entire graph). If𝐺 has no triangles among
+these 𝐾 vertices, then output that𝐺 is triangle-free; else output that𝐺 is 𝜀-far from
+triangle-free.
+Probabilistic guarantees:
+(a) If the input graph𝐺 is triangle-free, then the algorithm always correctly outputs
+that𝐺 is triangle-free;
+(b) If the input graph𝐺 is𝜀-far from triangle-free, then with probability≥ 0.99 the
+algorithm outputs that𝐺 is𝜀-far from triangle-free;
+(c) We do not make any guarantees when the input graph is neither triangle-free nor
+𝜀-far from triangle-free.
+Remark 2.9.2. This is an example of aone-sided tester, meaning that it always outputs a
+correct answer when𝐺 satisfies propertyP and only has a probabilistic guarantee when
+𝐺 does not satisfy property𝐺. (In contrast, a two-sided tester would have probabilistic
+guarantees for both situations.)
+For a one-sided tester, there is nothing special about the number0.99 above in (b). It can
+be any positive constant𝛿 > 0. If we run the algorithm𝑚 times, then the probability of
+successimprovesfrom ≥𝛿 to≥ 1−( 1−𝛿)𝑚,whichcanbemadearbitrarilycloseto 1ifwe
+choose𝑚 large enough.
+Theprobabilisticguaranteeturnsouttobeessentiallyarephrasingofthetriangleremoval
+lemma.
+Proof. If the graph𝐺 is triangle-free, the algorithm clearly always outputs correctly. On
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.9 Graph Property Testing 85
+the other hand, if𝐺 is𝜀-far from triangle-free, then by the triangle removal lemma (The-
+orem 2.3.1),𝐺 has≥ 𝛿 𝑛
+3
+ triangles with some constant𝛿 = 𝛿(𝜀) > 0. If we sample three
+verticesfrom𝐺uniformlyatrandom,thenthentheyformatrianglewithprobability ≥𝛿.And
+if run𝐾/3independent trials, then the probability that we see a triangle is≥ 1−( 1−𝛿)𝐾/3,
+which is≥ 0.99 as long as𝐾 is a sufficiently large constant (depending on𝛿, which in turn
+depends on𝜀).
+In the algorithm as stated in the theorem,𝐾 vertices are sampled without replacement.
+Abovewehad 𝐾independenttrialsofpickingatripleofverticesatrandom.Butthisdifference
+hardlymatters.Wecancouplethetwoprocessesbyaddingadditionalrandomverticestothe
+latter process until we see𝐾 distinct vertices. □
+Just as the guarantee of the above algorithm is essentially a rephrasing of the triangle
+removal lemma, other graph removal lemmas can be rephrased as graph property testing
+theorems. For the infinite induced graph removal lemma, Theorem 2.8.11, we can rephrase
+the result in terms of graph property testing for hereditary properties.
+A graph propertyP is hereditary if it is closed under vertex-deletion: if𝐺∈P , then
+everyinducedsubgraphof 𝐺 isinP.Herearesomeexamplesofhereditarygraphproperties:
+𝐻-free, induced 𝐻-free, planar, 3-colorable, perfect. Every hereditary propertyP can be
+characterized as the set of inducedH-free graphs for some (possibly infinite) family of
+graphsH; we can takeH ={𝐻 :𝐻∉P}.
+Theorem 2.9.3(Every hereditary graph property is testable)
+For every hereditary graph propertyP, and constant𝜀 > 0, there exists a constant
+𝐾 =𝐾(P,𝜀) so that the following algorithm satisfies the probabilistic guarantees listed
+below.
+Input:A graph𝐺.
+Algorithm: Sample 𝐾 vertices from𝐺 uniformly at random without replacement and
+let𝐻 betheinducedsubgraphonthese 𝐾 vertices.If 𝐻∈P ,thenoutputthat 𝐺 satisfies
+P; else output that𝐺 is𝜀-far fromP.
+Probabilistic guarantees:
+(a) If the input graph𝐺 satisfiesP, then the algorithm always correctly outputs that
+𝐺 satisfiesP;
+(b) If the input graph𝐺 is𝜀-far fromP, then with probability≥ 0.99 the algorithm
+outputs that𝐺 is𝜀-far fromP;
+(c) We do not make any guarantees when the input graph is neither inP nor𝜀-far
+fromP.
+Proof. If𝐺∈P , then sinceP is hereditary,𝐻∈P , and so the algorithm always correctly
+outputs that𝐺 ∈P . So suppose𝐺 is 𝜀-far fromP. LetH be such thatP is the set of
+inducedH-free graphs. By the infinite induced graph removal lemma, there is someℎ0
+and 𝛿 > 0 so that𝐺 has≥ 𝛿  𝑛
+𝑣(𝐻)
+ copies of some𝐻∈H with at mostℎ0 vertices. So
+with probability≥ 𝛿, a sample ofℎ0 vertices sees an induced subgraph not satisfyingP.
+Running 𝐾/ℎ0 independent trials, we see some induced subgraph not satisfyingP with
+probability≥ 1−( 1−𝛿)𝐾/ℎ0, which can be made arbitrarily close to1 by choosing𝐾 to
+Graph Theory and Additive Combinatorics — Yufei Zhao
+86 Graph Regularity Method
+be sufficiently large. As with earlier, this implies the result about choosing𝐾 random points
+without replacement. □
+2.10 Hypergraph Removal and Szemerédi’s Theorem
+WeshowedearlierhowtodeduceRoth’stheoremfromthetriangleremovallemma.However,
+the graph removal lemma, or the graph regularity method more generally, is insufficient for
+understanding longer arithmetic progressions.
+Szemerédi’s theorem follows as a corollary of a hypergraph generalization of the triangle
+removallemma.(Notethathistorically,Szemerédi’stheoremwasinitiallyshownusingother
+methods; see the discussion in Section 0.2). The hypergraph removal lemma turns out to be
+substantially more difficult. The following theorem was proved by Rödl et al. (2005) and
+Gowers (2007). The special case of the tetrahedron removal lemma in 3-graphs was proved
+earlier by Frankl and Rödl (2002).
+Theorem 2.10.1(Hypergraph removal lemma)
+For every𝑟-graph 𝐻 and𝜀 > 0, there exists𝛿 >0 so that every𝑛-vertex𝑟-graph with
+<𝛿𝑛 𝑣(𝐻) copies of𝐻 can be made𝐻-free by removing<𝜀𝑛 𝑟 edges.
+Recall that Szemerédi’s theorem says that for every fixed𝑘≥ 3, every𝑘-AP-free subset
+of[𝑁] has size𝑜(𝑁). We will prove it as a corollary of the hypergraph removal lemma for
+𝐻=𝐾(𝑘−1)
+𝑘 ,thecomplete (𝑘− 1)-graphon 𝑘 vertices(alsoknownasa simplex;when 𝑘 = 3
+it is called atetrahedron). For concreteness, we will show how the deduction works in the
+case𝑘 = 4 (it is straightforward to generalize).
+Here is a corollary of the tetrahedron removal lemma. It is analogous to Corollary 2.3.3.
+Corollary 2.10.2
+If𝐺 is a3-graph such that every edge is contained in a unique tetrahedron (i.e., a clique
+on four vertices), then𝐺 has𝑜(𝑛3) edges.
+Proof of Szemerédi’s theorem for 4-APs.Let 𝐴⊆ [𝑁] be 4-AP-free. Let𝑀 = 6𝑁+ 1.
+Then 𝐴 is also a 4-AP-free subset ofZ/𝑀Z (there are no wraparounds). Build a4-partite
+3-graph𝐺 with parts𝑊, 𝑋,𝑌, 𝑍, all of which are𝑀-vertex sets indexed by the elements
+of Z/𝑀Z. We define edges as follows, where𝑤,𝑥,𝑦,𝑧 range over elements of𝑊,𝑋,𝑌,𝑍,
+respectively:
+𝑤𝑥𝑦∈𝐸(𝐺) ⇐⇒ 3𝑤+ 2𝑥+ 𝑦 ∈ 𝐴,
+𝑤𝑥𝑧∈𝐸(𝐺) ⇐⇒ 2𝑤+ 𝑥 −𝑧∈ 𝐴,
+𝑤𝑦𝑧∈𝐸(𝐺) ⇐⇒ 𝑤 − 𝑦− 2𝑧∈ 𝐴,
+𝑥𝑦𝑧∈𝐸(𝐺) ⇐⇒ −𝑥 − 2𝑦− 3𝑧∈ 𝐴.
+What is important here is that the𝑖th expression does not contain the𝑖th variable.
+The vertices𝑥𝑦𝑧𝑤 form a tetrahedron if and only if
+3𝑤+ 2𝑥+𝑦, 2𝑤+𝑥−𝑧,𝑤−𝑦− 2𝑧,−𝑥− 2𝑦− 3𝑧∈ 𝐴.
+However, these values form a 4-AP with common difference−𝑥−𝑦−𝑧−𝑤. Since 𝐴 is
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.11 Hypergraph Regularity 87
+4-AP-free, the only tetrahedra in𝐴 are trivial 4-APs (those with common difference zero).
+Foreachtriple (𝑤,𝑥,𝑦 )∈ 𝑊×𝑋×𝑌,thereisexactlyone 𝑧∈ Z/𝑀Zsuchthat 𝑥+𝑦+𝑧+𝑤= 0.
+Thus, every edge of the hypergraph lies in exactly one tetrahedron.
+By Corollary 2.10.2, the number of edges in the hypergraph is𝑜(𝑀 3). On the other hand,
+the number of edges is exactly4𝑀 2|𝐴| (for example, for every𝑎∈ 𝐴, there are exactly𝑀 2
+triples(𝑤,𝑥,𝑦 )∈( Z/𝑀Z)3 with 3𝑤+ 2𝑥+𝑦=𝑎). Therefore|𝐴|=𝑜(𝑀)=𝑜(𝑁). □
+The hypergraph removal lemma is proved using a substantial and difficult generalization
+of the graph regularity method to hypergraphs. We will not be able to prove it in this book.
+In the next section, we sketch some key ideas in hypergraph regularity.
+Itisinstructivetoworkouttheproofinthespecialcasesbelow.Forthenexttwoexercises,
+you should assume Corollary 2.10.2.
+Exercise 2.10.3(3-dimensional corners). Suppose𝐴⊆[ 𝑁]3 contains no four points of
+the form
+(𝑥,𝑦,𝑧 ),(𝑥+𝑑,𝑦,𝑧 ),(𝑥,𝑦 +𝑑,𝑧),(𝑥,𝑦,𝑧 +𝑑), with𝑑 >0.
+Show that|𝐴|=𝑜(𝑁 3).
+Exercise 2.10.4(Multidimensional Szemerédi for axis-aligned squares).Suppose 𝐴⊆
+[𝑁]2 contains no four points of the form
+(𝑥,𝑦),(𝑥+𝑑,𝑦),(𝑥,𝑦 +𝑑),(𝑥+𝑑,𝑦 +𝑑), with𝑑≠ 0.
+Show that|𝐴|=𝑜(𝑁 2).
+Exercise 2.10.5(Multidimensional Szemerédi theorem from the hypergraph removal
+lemma). Generalizingthepreviousexercise,provethemultidimensionalSzemeréditheo-
+rem (Theorem 0.2.6) using the hypergraph removal lemma.
+2.11 Hypergraph Regularity
+Hypergraph regularity is substantially more difficult to prove than graph regularity. We
+only sketch some key ideas here. For concreteness, we focus our discussion on 3-graphs.
+Throughout this section,𝐺 will be a 3-graph with vertex set𝑉.
+What should correspond to an “𝜀-regular pair” from the graph regularity lemma? Here is
+an initial attempt.
+Definition 2.11.1(Initial attempt at3-graph regularity)
+Givenvertexsubsets 𝑉1,𝑉 2,𝑉 3⊆𝑉,wesaythat (𝑉1,𝑉 2,𝑉 3)is 𝜺-regularif,forall 𝐴𝑖⊆𝑉𝑖
+such that|𝐴𝑖|≥𝜀|𝑉𝑖|, we have
+|𝑑(𝑉1,𝑉 2,𝑉 3)− 𝑑(𝐴1,𝐴 2,𝐴 3)|≤𝜀.
+Here,theedgedensity 𝑑(𝑋,𝑌,𝑍 ) isthefractionofelementsof 𝑋×𝑌×𝑍 thatareedges
+of𝐺.
+By following the proof of the graph regularity lemma nearly verbatim, we can show the
+following.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+88 Graph Regularity Method
+Proposition 2.11.2(Initial attempt at 3-graph regularity partition)
+Forall 𝜀 >0,thereexists 𝑀 =𝑀(𝜀) suchthatevery3-graphhasapartitionintoatmost
+𝑀 parts so that all but at most an𝜀-fraction of triples of vertices lie in𝜀-regular triples
+of vertex parts.
+Can this result be used to prove the hypergraph removal lemma? Unfortunately, no.
+Recallthatourgraphregularityrecipe(Remark2.3.2)involvesthreesteps:partition,clean,
+and count. It turns out that no counting lemma is possible for the above notion of 3-graph
+regularity.
+The notion of𝜀-regularity is supposed to model pseudorandomness. So why don’t we
+try truly random hypergraphs and see what happens? Let us consider two different random
+3-graph constructions:
+(a) Firstpickconstants 𝑝,𝑞 ∈[0, 1].Buildarandomgraph 𝐺(2) = G(𝑛,𝑝),anordinary
+Erdős–Rényi graph. Then construct𝐺(3) by including each triangle of𝐺(2) as an
+edge of𝐺(3) with probability𝑞. Call this3-graph𝑋.
+(b) Foreachpossibleedge(i.e.tripleofvertices),includetheedgewithprobability 𝑝3𝑞,
+independent of all other edges. Call this3-graph𝑌.
+The edge density in both𝑋 and𝑌 are close to𝑝3𝑞, even when restricted to linearly sized
+triples of vertex subsets. So both graphs satisfy our above notion of𝜀-regularity with high
+probability. However, we can compute the tetrahedron densities in both of these graphs and
+see that they do not match.
+The tetrahedron density in𝑋 is around𝑞4 times the𝐾4 density in the underlying random
+graph𝐺(2). The𝐾4 density in𝐺(2) is around𝑝6. So the tetrahedron density in𝑋 is around
+𝑝6𝑞4.
+On the other hand, the tetrahedron density in𝑌 is around(𝑝3𝑞)4, different from𝑝6𝑞4
+earlier. So we should not expect a counting lemma with this notion of𝜀-regularity. (Unless
+the 3-graph we are counting is linear, as in the exercise below.)
+Exercise 2.11.3. Under the notion of 3-graph regularity in Definition 2.11.1, formulate
+and prove an𝐻-counting lemma for every linear 3-graph𝐻. Here a hypergraph is said to
+belinearif every pair of its edges intersects in at most one vertex.
+As hinted by the first random hypergraph above, a more useful notion of hypergraph
+regularity should involve both vertex subsets as well as subsets of vertex-pairs (i.e., an
+underlying 2-graph).
+Given a 3-graph𝐺, a regularity decomposition will consist of
+(1) a partition of 𝑉
+2
+ into 2-graphs𝐺(2)
+1 ∪···∪ 𝐺(2)
+𝑙 so that𝐺 sits in a random-like way
+on top of most triples of these 2-graphs (we won’t try to make it precise), and
+(2) apartitionof 𝑉 thatgivesanextremelyregularpartitionforall2-graphs 𝐺(2)
+1 ,...,𝐺 (2)
+𝑙
+(this should be somewhat reminiscent of the strong graph regularity lemma from
+Section 2.8).
+Forsuchadecompositiontobeapplicable,itshouldcomewithacorresponding counting
+lemma.
+There are several ways to make the above notions precise. Certain formulations make the
+regularity partition easier to prove while the counting lemma harder, and some vice versa.
+The interested readers should consult Rödl et al. (2005), Gowers (2007) (see Gowers (2006)
+Graph Theory and Additive Combinatorics — Yufei Zhao
+2.11 Hypergraph Regularity 89
+for an exposition of the case of 3-uniform hypergraphs), and Tao (2006) for three different
+approaches to the hypergraph regularity lemma.
+Remark 2.11.4 (Quantitative bounds). Whereas the proof of the graph regularity lemma
+gives tower-type bounds tower(𝜀−𝑂(1)), the proof of the 3-graph regularity lemma has
+wowzer-type bounds. The 4-graph regularity lemma moves us one more step up in the Ack-
+ermannhierarchy(i.e.,iteratingwowzer),andsoon.Justaswiththetower-typelowerbound
+(Theorem2.1.17)forthegraphregularitylemma,Ackermann-typeboundsarenecessaryfor
+hypergraph regularity as well (Moshkovitz and Shapira 2019).
+Further Reading
+For surveys on the graph regularity method and applications, see Komlós and Simonovits
+(1996) and Komlós, Shokoufandeh, Simonovits, and Szemerédi (2002).
+The surveyGraph Removal Lemmasby Conlon and Fox (2013) discusses many variants,
+extensions, and proof techniques of graph removal lemmas.
+For a well-motivated introduction to the hypergraph regularity lemma, see the article
+Quasirandomness, Counting and Regularity for 3-Uniform Hypergraphsby Gowers (2006).
+Chapter Summary
+• Szemerédi’s graph regularity lemma.For every𝜀 >0, there exists a constant𝑀 such
+that every graph has an𝜀-regular partition into at most𝑀 parts.
+– Proof method:energy increment.
+• Regularity method recipe:partition, clean, count.
+• Graph counting lemma.The number of copies of𝐻 among𝜀-regular parts is similar to
+random.
+• Graph removal lemma.Fix𝐻. Every𝑛-vertex graph with𝑜(𝑛𝑣(𝐻)) copies of𝐻 can be
+made𝐻-free by removing𝑜(𝑛2) edges.
+• Roth’s theoremcan be proved by applying the triangle removal lemma to a graph whose
+triangles correspond to 3-APs.
+• Szemerédi’s theoremfollows from thehypergraph removal lemma, whose proof uses
+the hypergraph regularity method(not covered in this book).
+• Induced removal lemma.Fix𝐻. Every𝑛-vertex graph with𝑜(𝑛𝑣(𝐻)) induced copies of
+𝐻 can be made induced𝐻-free by adding/removing𝑜(𝑛2) edges
+– Proof uses a strong regularity lemma, which involves iterating the earlier graph
+regularity lemma.
+• Every hereditary graph property istestable.
+– Onecandistinguishgraphsthathaveproperty P fromthosethatare 𝜀-farfromproperty
+P(farinthesenseofeditdistance ≥𝜀𝑛2)bysamplingasubgraphinducedbyaconstant
+number of random vertices.
+– The probabilistic guarantee is essentially equivalent to removal lemmas.
+Graph Theory and Additive Combinatorics — Yufei Zhao
+Graph Theory and Additive Combinatorics — Yufei Zhao

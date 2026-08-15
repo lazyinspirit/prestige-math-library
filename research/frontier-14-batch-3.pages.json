@@ -49,7 +49,7 @@
         "id": "lem-open-subspace-complete-remetrisation",
         "kind": "lemma",
         "title": "Every open subspace of a completely metrizable space is completely metrizable",
-        "strategy": "Choose a compatible complete metric. If the open set is the whole space, restrict that metric. Otherwise add to the restricted metric the absolute difference of reciprocals of the distance to the closed complement. A Cauchy sequence for the new metric cannot approach the complement and therefore converges inside the open set.",
+        "strategy": "If the open subspace is empty, its unique metric is compatible and complete. Otherwise choose a compatible complete metric. If the open set is the whole space, restrict that metric. In the remaining case add to the restricted metric the absolute difference of reciprocals of the distance to the nonempty closed complement. A Cauchy sequence for the new metric cannot approach the complement and therefore converges inside the open set.",
         "deps": ["lem-complete-remetrisation", "lem-distance-to-set-is-lipschitz", "thm-complete-subspace-iff-closed"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
@@ -65,7 +65,7 @@
         "id": "thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable",
         "kind": "theorem",
         "title": "Every $G_\\delta$ subspace of a complete metric space is completely metrizable",
-        "strategy": "Write the subspace as a countable intersection of open subspaces. Each open subspace is completely metrizable by the reciprocal-distance lemma, and the countable-intersection metric then gives a compatible complete metric on the intersection. State the countable-choice hypothesis used to select the intermediate metrics.",
+        "strategy": "The empty subspace has its unique compatible complete metric. Otherwise write the subspace as a countable intersection of open subspaces. Each open subspace is completely metrizable by the reciprocal-distance lemma, and the countable-intersection metric then gives a compatible complete metric on the intersection. State the countable-choice hypothesis used to select the intermediate metrics.",
         "deps": ["def-g-delta-and-f-sigma-in-a-topological-space", "lem-open-subspace-complete-remetrisation", "lem-countable-intersection-of-completely-metrizable-subspaces"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
@@ -73,7 +73,7 @@
         "id": "thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta",
         "kind": "theorem",
         "title": "Every completely metrizable subspace of a metric space is $G_\\delta$",
-        "strategy": "For each scale cover the subspace by ambient open sets having small diameter in a chosen compatible complete metric, and let $G_n$ be their ambient union. A point in every $G_n$ yields, using dependent choice, a sequence in the subspace that is Cauchy in the complete metric and converges to the point in the ambient metric. Hausdorff uniqueness puts the point back in the subspace.",
+        "strategy": "The empty subspace is the constant countable intersection of the ambient open set $\\varnothing$. For a nonempty subspace, at each scale cover it by ambient open sets having small diameter in a chosen compatible complete metric, and let $G_n$ be their ambient union. A point in every $G_n$ yields, using dependent choice, a sequence in the subspace that is Cauchy in the complete metric and converges to the point in the ambient metric. Hausdorff uniqueness puts the point back in the subspace.",
         "deps": ["lem-complete-remetrisation", "def-g-delta-and-f-sigma-in-a-topological-space", "def-dependent-choice", "thm-metric-hausdorff-separation"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
@@ -81,7 +81,7 @@
         "id": "thm-alexandrov-complete-metrizability-characterisation",
         "kind": "theorem",
         "title": "Alexandrov's theorem: a subspace of a complete metric space is completely metrizable exactly when it is $G_\\delta$",
-        "strategy": "Apply the two preceding implications to the subspace with its induced topology. In the reverse direction use the given complete ambient metric; in the forward direction use only the existence of a compatible complete metric on the subspace, not completeness of the inherited metric.",
+        "strategy": "The empty subspace satisfies both conditions. For a nonempty subspace apply the two preceding implications with the induced topology. In the reverse direction use the given complete ambient metric; in the forward direction use only the existence of a compatible complete metric on the subspace, not completeness of the inherited metric.",
         "deps": ["thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable", "thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
         "landmark": true
@@ -139,9 +139,9 @@
         "id": "thm-hilbert-cube-universal-for-separable-metrizable-spaces",
         "kind": "theorem",
         "title": "Every separable metrizable space embeds in the Hilbert cube $[0,1]^{\\mathbb N}$",
-        "strategy": "Choose a countable dense sequence and a bounded compatible metric. Map a point to its bounded distances from the dense sequence. The coordinates are continuous and separate points; if coordinate values converge, a coordinate centred close to the proposed point forces metric convergence. Rescale the coordinate range to the unit interval and identify the induced topology with the product topology.",
+        "strategy": "The empty space embeds by its unique map into the Hilbert cube. For a nonempty space choose a countable dense sequence and a bounded compatible metric. Map a point to its bounded distances from the dense sequence. The coordinates are continuous and separate points; if coordinate values converge, a coordinate centred close to the proposed point forces metric convergence. Rescale the coordinate range to the unit interval and identify the induced topology with the product topology.",
         "deps": ["def-separable-space", "def-metrizable-space", "def-product-topology", "lem-bounded-remetrisation"],
-        "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+        "provenance": {"statement": "ai-altered", "proof": "ai-altered"},
         "landmark": true
       },
       {
@@ -213,7 +213,7 @@
         "kind": "theorem",
         "title": "Infinite simple continued fractions parametrise the irrational real numbers",
         "strategy": "Decode the first natural coordinate by the fixed zigzag bijection with the integers and shift each later coordinate by one. Nested cylinder intervals with vanishing diameter give a unique real value and exclude rational endpoints. Conversely, repeatedly take the integer part and reciprocal of the positive fractional remainder of an irrational; the process never stops, and the cylinder estimates recover the original number. Prefix agreement is exactly the neighbourhood comparison needed for continuity of both maps.",
-        "deps": ["lem-simple-continued-fraction-convergents-and-cylinders", "lem-integer-part", "def-rat-operations", "lem-rat-embeds-dense"],
+        "deps": ["def-simple-continued-fraction-coding", "lem-simple-continued-fraction-convergents-and-cylinders", "lem-integer-part", "def-rat-operations", "lem-rat-embeds-dense"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
       {
@@ -229,7 +229,7 @@
         "id": "lem-finite-refining-small-diameter-covers-of-compact-metric-spaces",
         "kind": "lemma",
         "title": "Compact metric spaces admit finite refining covers of arbitrarily small diameter",
-        "strategy": "At stage zero use the whole nonempty compact space. Cover each compact piece by finitely many sufficiently small closed subsets obtained from a finite ball cover, retaining only nonempty pieces, and index the children by finite binary words after duplicating terminal choices when necessary. Arrange refinement and diameters tending to zero.",
+        "strategy": "At stage zero use the whole nonempty compact space. Cover each compact piece by finitely many sufficiently small nonempty closed subsets obtained from a finite ball cover. Index these sets by a finite rooted levelled tree, with every parent equal to the union of its finitely many children, and arrange diameters tending to zero with the level.",
         "deps": ["def-metric-compactness", "lem-closed-subset-of-a-compact-space-is-compact", "def-metric-bounded-diameter"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
@@ -237,7 +237,7 @@
         "id": "thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space",
         "kind": "theorem",
         "title": "Every nonempty compact metric space is a continuous image of Cantor space",
-        "strategy": "Use the refining finite small-diameter covers to assign a nested compact set to each finite binary word. Each infinite binary sequence determines one point by the complete compact intersection theorem. The resulting map is continuous by the diameter bound and surjective by recursively choosing a child containing a prescribed point. Keep nonemptiness explicit; no map from nonempty Cantor space can surject onto the empty space.",
+        "strategy": "Use the finite rooted refining tree and choose a finite block of binary digits at each level that surjects onto every child set of every node at that level. Successive blocks select a nested branch, and the complete compact intersection theorem gives its unique point. The resulting map from Cantor space is continuous by the diameter bound and surjective by recursively selecting a child containing a prescribed point. Keep nonemptiness explicit; no map from nonempty Cantor space can surject onto the empty space.",
         "deps": ["lem-finite-refining-small-diameter-covers-of-compact-metric-spaces", "thm-compact-implies-complete-and-totally-bounded", "thm-cantor-intersection-metric", "def-product-topology", "def-standard-topologies", "def-dependent-choice"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
         "landmark": true
@@ -262,7 +262,7 @@
         "id": "thm-cech-completeness-is-independent-of-compactification",
         "kind": "theorem",
         "title": "A Tychonoff space is $G_\\delta$ in some Hausdorff compactification exactly when it is $G_\\delta$ in every one",
-        "strategy": "Use the Stone–Čech compactification as a common dominating compactification. The remainder-map lemma transfers the compact $F_\\sigma$ remainder condition along the canonical maps, and complements convert it back to the $G_\\delta$ condition. State the ultrafilter-lemma and dependent-choice assumptions actually used by the compactification machinery.",
+        "strategy": "For the empty space the empty compactification witnesses both quantifiers. Otherwise use the Stone–Čech compactification as a common dominating compactification. The remainder-map lemma transfers the compact $F_\\sigma$ remainder condition along the canonical maps, and complements convert it back to the $G_\\delta$ condition. State the ultrafilter-lemma and dependent-choice assumptions actually used by the compactification machinery.",
         "deps": ["def-cech-complete-space", "lem-maps-of-compactifications-preserve-remainders", "def-stone-cech-compactification", "cor-stone-cech-compactification-is-unique-over-x"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
         "landmark": true
@@ -280,7 +280,7 @@
         "id": "thm-completely-metrizable-spaces-are-cech-complete",
         "kind": "theorem",
         "title": "Every completely metrizable space is Čech-complete",
-        "strategy": "Choose a compatible complete metric and locally finite refinements of the covers by balls of radius tending to zero. In a Hausdorff compactification, extend the refined members to ambient open sets and use local finiteness to form open neighbourhoods whose intersection is exactly the original space: a point in every neighbourhood produces a Cauchy filter and hence a limit in the complete space. Invoke compactification independence only after this construction is established.",
+        "strategy": "The empty space is $G_\\delta$ in its empty compactification. Otherwise choose a compatible complete metric and locally finite refinements of the covers by balls of radius tending to zero. In a Hausdorff compactification, extend the refined members to ambient open sets and use local finiteness to form open neighbourhoods whose intersection is exactly the original space: a point in every neighbourhood produces a Cauchy filter and hence a limit in the complete space. Invoke compactification independence only after this construction is established.",
         "deps": ["def-cech-complete-space", "lem-complete-remetrisation", "thm-stone-metric-spaces-are-paracompact", "thm-metric-spaces-are-tychonoff-and-perfectly-normal", "cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma", "thm-cech-completeness-is-independent-of-compactification"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
@@ -288,7 +288,7 @@
         "id": "thm-metrizable-cech-complete-spaces-are-completely-metrizable",
         "kind": "theorem",
         "title": "Every metrizable Čech-complete space is completely metrizable",
-        "strategy": "Embed the space densely in its metric completion, compactify that completion, and observe that the resulting compact space is also a compactification of the original dense subspace. Compactification independence makes the original space $G_\\delta$ there and hence in the completion. Apply the $G_\\delta$-subspace theorem to the complete metric completion.",
+        "strategy": "The empty space has its unique compatible complete metric. Otherwise embed the space densely in its metric completion, compactify that completion, and observe that the resulting compact space is also a compactification of the original dense subspace. Compactification independence makes the original space $G_\\delta$ there and hence in the completion. Apply the $G_\\delta$-subspace theorem to the complete metric completion.",
         "deps": ["def-cech-complete-space", "thm-cech-completeness-is-independent-of-compactification", "thm-metric-completion-exists", "cor-tychonoff-spaces-have-compactifications-under-the-ultrafilter-lemma", "thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
@@ -296,7 +296,7 @@
         "id": "cor-metrizable-cech-complete-iff-completely-metrizable",
         "kind": "corollary",
         "title": "A metrizable space is Čech-complete exactly when it is completely metrizable",
-        "strategy": "Combine the two preceding implications, retaining metrizability only for the direction from Čech-completeness to complete metrizability.",
+        "strategy": "The empty space lies in both classes. For a nonempty metrizable space combine the two preceding implications, retaining metrizability only for the direction from Čech-completeness to complete metrizability.",
         "deps": ["thm-completely-metrizable-spaces-are-cech-complete", "thm-metrizable-cech-complete-spaces-are-completely-metrizable"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
         "landmark": true
@@ -305,7 +305,7 @@
         "id": "cor-locally-compact-hausdorff-spaces-are-cech-complete",
         "kind": "corollary",
         "title": "Every locally compact Hausdorff space is Čech-complete",
-        "strategy": "The one-point compactification is compact Hausdorff and contains the original space as an open subspace. An open subset is a $G_\\delta$ by repeating it in a constant countable intersection, so it witnesses Čech-completeness; handle an already compact space without adding a new point if desired.",
+        "strategy": "The empty space is compact and is $G_\\delta$ in itself. For a nonempty noncompact space the one-point compactification is compact Hausdorff and contains the original space as an open subspace. An open subset is a $G_\\delta$ by repeating it in a constant countable intersection, so it witnesses Čech-completeness; an already compact space is its own witness.",
         "deps": ["def-cech-complete-space", "thm-one-point-compactification-properties", "def-g-delta-and-f-sigma-in-a-topological-space"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
@@ -322,7 +322,7 @@
         "id": "prop-closed-subspaces-of-cech-complete-spaces",
         "kind": "proposition",
         "title": "Closed subspaces of Čech-complete spaces are Čech-complete",
-        "strategy": "If the space is $G_\\delta$ in a compactification and the subspace is closed in the space, take its closure in the compactification. Inside that compact closure, the subspace is the intersection of the inherited $G_\\delta$ with an additional closed set, hence is $G_\\delta$.",
+        "strategy": "The empty closed subspace is $G_\\delta$ in its empty compactification. Otherwise, if the space is $G_\\delta$ in a compactification and the subspace is closed in the space, take its closure in the compactification. Inside that compact closure, the subspace is the intersection of the inherited $G_\\delta$ with an additional closed set, hence is $G_\\delta$.",
         "deps": ["def-cech-complete-space", "thm-closed-subspace-of-a-compact-space-is-compact", "thm-compact-subset-of-a-hausdorff-space-is-closed"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       },
@@ -618,7 +618,7 @@
       {
         "id": "lem-path-class-projection-is-a-covering-map",
         "kind": "lemma",
-        "title": "For a path-connected locally path-connected semilocally simply connected space, the path-class projection is a covering map",
+        "title": "For a nonempty path-connected locally path-connected semilocally simply connected space, the path-class projection is a covering map",
         "strategy": "Refine each semilocally simply connected neighbourhood to an open path-connected one. For a path class ending at its centre, append paths in that neighbourhood to obtain a basic sheet. Triviality of the inclusion-induced fundamental group makes the endpoint description independent of the appended path, and distinct initial classes give disjoint sheets. Verify that these basic sets form a topology and map homeomorphically onto the chosen neighbourhood.",
         "deps": ["def-path-class-model-for-a-universal-cover", "def-covering-map-and-evenly-covered-neighbourhoods", "def-semilocally-simply-connected-space", "def-locally-connected"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
@@ -626,7 +626,7 @@
       {
         "id": "thm-universal-cover-existence",
         "kind": "theorem",
-        "title": "Every path-connected locally path-connected semilocally simply connected space has a universal cover",
+        "title": "Every nonempty path-connected locally path-connected semilocally simply connected space has a universal cover",
         "strategy": "Use the path-class projection, already proved to be a covering. The path-class space is nonempty and path-connected by truncating representatives. A loop upstairs projects to a loop whose path-class endpoint is the starting class, hence to the trivial element downstairs; injectivity of the fundamental-group map then makes every upstairs loop nullhomotopic. Thus the total space is simply connected.",
         "deps": ["lem-path-class-projection-is-a-covering-map", "def-universal-covering-space", "def-simply-connected", "thm-covering-maps-inject-fundamental-groups"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
@@ -635,7 +635,7 @@
       {
         "id": "thm-universal-cover-uniqueness-and-dominating-property",
         "kind": "theorem",
-        "title": "Universal covers are uniquely isomorphic over the base and lift to every connected covering",
+        "title": "For a path-connected locally path-connected base, universal covers are uniquely isomorphic over the base and lift to every connected covering",
         "strategy": "Let the base be path-connected and locally path-connected and fix points over a common basepoint. The lifting criterion applies to a universal cover because its fundamental group is trivial, giving a unique covering map to any connected covering. Applying this in both directions between two universal covers and using uniqueness of lifts makes the composites identities.",
         "deps": ["def-universal-covering-space", "thm-covering-space-lifting-criterion", "thm-uniqueness-of-lifts-from-a-connected-space", "prop-local-path-connectedness-lifts-and-descends-along-coverings"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
@@ -652,8 +652,8 @@
       {
         "id": "thm-sheets-equal-fundamental-group-index",
         "kind": "theorem",
-        "title": "For a nonempty path-connected total space, a covering fibre is in bijection with the cosets of the induced fundamental-group subgroup",
-        "strategy": "Fix a point in the fibre. Send a loop class to the endpoint of its lifted path. Endpoint homotopy invariance makes this well defined; two classes have the same endpoint exactly when their quotient lies in the image of the upstairs fundamental group. Path-connectedness of the total space gives surjectivity onto the fibre. State left-versus-right cosets consistently with the published path-product order, then translate the bijection into the published index convention: the finite cardinalities agree, and one side is infinite exactly when the other is recorded as $\\infty$.",
+        "title": "For a nonempty path-connected total space, a covering fibre is in bijection with the left cosets of the induced fundamental-group subgroup",
+        "strategy": "Fix a point in the fibre. Send a loop class to the endpoint of its lifted path. Endpoint homotopy invariance makes this well defined; with traversal-order multiplication, two classes have the same endpoint exactly when their quotient $[\\alpha][\\beta]^{-1}$ lies in the image $H$ of the upstairs fundamental group, which is equality of the left cosets $H[\\alpha]$ and $H[\\beta]$. Path-connectedness of the total space gives surjectivity onto the fibre. Translate the bijection into the published index convention: the finite cardinalities agree, and one side is infinite exactly when the other is recorded as $\\infty$.",
         "deps": ["def-monodromy-action-on-a-covering-fibre", "thm-covering-maps-inject-fundamental-groups", "prop-monodromy-acts-by-bijections-and-detects-components", "def-coset", "def-index"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
         "landmark": true
@@ -669,7 +669,7 @@
       {
         "id": "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
         "kind": "theorem",
-        "title": "The deck group of a universal cover is isomorphic to the fundamental group with the inverse-path convention",
+        "title": "For a path-connected locally path-connected semilocally simply connected base, the deck group of a universal cover is isomorphic to the fundamental group with the inverse-path convention",
         "strategy": "For a path-connected locally path-connected semilocally simply connected base and a chosen point upstairs, each loop class determines the endpoint of its lift. The universal-cover lifting criterion gives the unique deck transformation taking the chosen point to that endpoint. Because the library multiplies loops in traversal order, insert path reversal in the assignment so composition is a homomorphism rather than an antihomomorphism. Freeness gives injectivity and path-connectedness gives surjectivity.",
         "deps": ["def-deck-transformation-and-deck-group", "def-monodromy-action-on-a-covering-fibre", "thm-universal-cover-uniqueness-and-dominating-property", "prop-deck-transformations-are-determined-by-one-point-and-act-freely", "thm-fundamental-group-laws"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
@@ -746,7 +746,7 @@
         "id": "ex-the-hawaiian-earring-has-no-universal-cover",
         "kind": "example",
         "title": "The Hawaiian earring is locally path-connected but has no universal cover",
-        "strategy": "Model the earring as countably many copies of $\\mathbb R/\\mathbb Z$ with diameters tending to zero and all zero classes identified, using the standard shrinking-wedge metric. Every neighbourhood of the wedge point contains an entire sufficiently small circle. Retraction to that circle and the essential unit loop show its inclusion carries a nontrivial loop, so semilocal simple connectedness fails at the wedge point. The necessity theorem then rules out a universal cover.",
+        "strategy": "Model the earring as countably many copies of $\\mathbb R/\\mathbb Z$ with diameters tending to zero and all zero classes identified, using the standard shrinking-wedge metric. Away from the wedge point, sufficiently short open arcs are path-connected neighbourhoods. At the wedge point, every open neighbourhood contains a smaller metric ball whose intersection with each circle is an arc through the wedge point and which contains every sufficiently small circle, so that ball is path-connected. Retraction to one such small circle and the essential unit loop show its inclusion carries a nontrivial loop, so semilocal simple connectedness fails at the wedge point. The necessity theorem then rules out a universal cover.",
         "deps": ["ex-the-unit-loop-in-real-line-mod-integers-is-essential", "thm-universal-covering-spaces-force-semilocal-simple-connectedness", "def-semilocally-simply-connected-space", "def-quotient-topology"],
         "provenance": {"statement": "literature-derived", "proof": "ai-altered"}
       }

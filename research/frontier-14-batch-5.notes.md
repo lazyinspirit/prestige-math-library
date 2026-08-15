@@ -144,7 +144,7 @@ A-page provenance:
 |---|---|---|---|
 | def-quadratic-residue-modulo-n | literature-derived | not-applicable | Hackman D.I.1, Stein Definition 4.1.1, Gorodnik Definition 1.1; general-modulus unit convention retained |
 | prop-quadratic-residue-is-representative-independent | ai-altered | ai-altered | Canonical bridge derived from the residue definition, quotient-class equality, the unit criterion, and quotient-ring multiplication; Gorodnik's class-invariance theorem concerns the later Legendre symbol and is not used as provenance for this proposition |
-| cor-unique-kth-root-modulo-prime-for-coprime-exponent | literature-derived | ai-altered | Mascot pp. 8–10, with uniqueness supplied by the stronger published root-count corollary |
+| cor-unique-kth-root-modulo-prime-for-coprime-exponent | literature-derived | ai-altered | Mascot pp. 8–10, with uniqueness supplied by the stronger published root-count corollary; the inverse-exponent formula is restricted to nonnegative representatives so ordinary integer exponentiation remains defined |
 | thm-quadratic-residues-subgroup-modulo-prime | literature-derived | ai-altered | Stein Lemma 4.1.4 and Remark 4.1.5; intrinsic squaring image separated from a chosen generator |
 | thm-count-of-quadratic-residues-modulo-prime | literature-derived | ai-altered | Mascot p. 8 gives the named kth-power count and fiber-size corollary; the local proof specialises to k=2 and uses Lagrange plus the published root count |
 | def-legendre-symbol | literature-derived | not-applicable | Hackman, Stein, and Gorodnik; explicit zero branch |
@@ -244,3 +244,153 @@ The required gates were rerun from the repository root after all three fixes:
 - `validate-plan research/plan-spec.json`: exit 0; the declared page order remains acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages carrying item lists.
 
 A direct reverse coverage check additionally found all 16 A-page ids named by at least one source or canonical disposition. JSON parsing and `git diff --check` both passed. The proof-contract artifact was inspected but not edited: B5-3's `p\\nmid A` assumption was already present in the derivation map and the degenerate-case boundary disposition.
+
+## Step-5 authoring
+
+### Items and pages authored
+
+All 25 spliced ids were authored: the 16 items on quadratic-residues-and-the-legendre-symbol and the 9 items on quadratic-residues-and-the-legendre-symbol-examples. The exact ids are the 25 rows in the two component-provenance tables above and the 25 entries in the batch manifest. Every item has status “draft” and origin “session”; no item carries verification.audited.
+
+Both page files were authored. The splice receipt has no summary_corrections member, despite the dispatch saying that it would. With no replacement prose available, the A body uses the two paragraphs under “Exact A-page summary for step 5” above byte-for-byte. The B page has zero body bytes after frontmatter.
+
+### Final component provenance and rationale
+
+The two per-item tables under “Planned component provenance and rationale” are the final frontmatter values and final rationales for all 25 items. They were checked against every authored file. The unique-root row was made more precise during authoring: its literature-derived Statement follows Mascot pp. 8–10, its ai-altered proof uses the stronger published solution-count corollary, and its inverse-exponent formula is restricted to nonnegative representatives so ordinary integer exponentiation is defined.
+
+No AI-generated Statement or Construction is load-bearing. The only ai-generated proofs are the three finite B-leaf computations already identified in the B-page table. The 23 proof-bearing items have 23 strict contracts, 95 manifest dependency edges matched one-for-one by 95 exact citation obligations, and 184 item-specific boundary dispositions.
+
+### Claims narrowed or dropped
+
+No item, id, title, dependency, or mathematical heading was dropped. The spliced discriminant title and its hypothesis \(p\nmid A\) were retained exactly.
+
+One formula was narrowed: cor-unique-kth-root-modulo-prime-for-coprime-exponent now states \(a^\ell\) only for nonnegative inverse representatives \(\ell\). Allowing arbitrary integer representatives would invoke undefined negative ordinary integer powers. The proof handles \(p=2\) separately, proves \(\ell>0\) for odd \(p\), and proves representative-independence among all nonnegative choices. Its dependency set did not change because the existing linear-congruence and Fermat theorems supply every used fact. Its page strategy, coverage row, provenance rationale, dependent citation, proof-contract derivation, and endpoint disposition were all updated with the claim.
+
+The homomorphism proof was expanded without changing its Statement: the product of two nonsquare cosets is now derived from the two-coset decomposition, cyclicity, and the fact that \(h^2\) is a square.
+
+### Blockers
+
+There is no batch-5 mathematical, citation, dependency, source, permission, or write-scope blocker. tools/gates.mjs was not run, as instructed. Any repository-wide gate blocker still owned by another concurrent batch at the final sweep is recorded with the gate output below rather than edited outside this batch's scope.
+
+### Gate output
+
+The following terminal census lines are copied verbatim. Long repository-wide per-file PASS and legacy-warning inventories are represented by their exact terminal census and conclusion lines.
+
+Batch-scoped precheck:
+
+    23 checked, 0 failing — all clean
+
+Batch-scoped rendercheck:
+
+    OK — 27 file(s): no wikilink inside math, no nested or unbalanced
+    delimiters, no multiline display block, every math span parses under the real
+    KaTeX, and every frontmatter block parses under the renderer's
+    YAML parser.
+
+Batch-scoped prosecheck:
+
+    27 file(s) checked. 0 error(s), 0 warning(s).
+
+    OK — no positional claim contradicts the spec.
+
+Batch-scoped citecheck:
+
+    citecheck: 25 item(s) scanned
+
+    OK — every recognised elementary move cites a home that states it.
+
+Content policy and coverage:
+
+    content-policy: 25 scoped item(s), 0 error(s), 0 warning(s)
+    coverage-checklist: 1 page(s), 70 harvested result(s), 0 error(s), 0 warning(s)
+
+Strict proof contract:
+
+    proof-contract: 0 error(s), 0 warning(s), 23/23 item(s) checked
+
+Citation fidelity:
+
+    citation-fidelity: 95 citation(s) over 23 authored item(s)
+
+    QUOTE NOT FOUND — none; every recorded quote appears in its cited item.
+
+    WIDENING CANDIDATES — none found by the three detectors.
+
+    Every line above is a candidate for a human read, not a verdict.
+
+Boundary audit:
+
+    boundary-audit: 184 rows over 1 contract file(s); 84 marked not_applicable
+
+    TEMPLATE REUSE — none at or above 3 members.
+
+    CONTRADICTED DISPOSITIONS — none found by the three detectors.
+
+    Every line above is a candidate for a human read, not a verdict.
+
+Finite smoke and risk routing:
+
+    PASS [thm-count-of-quadratic-residues-modulo-prime] binomial-congruence-solution-count: no counterexample in 1010 solvable instances, moduli through 60 with a primitive root, exponents through 2
+    finite-smoke: 0 error(s), 1 check(s)
+    risk-report: 0 error(s), 23 item(s) routed
+
+Gate liveness:
+
+    gate-liveness [frontier-14-batch-5-step5] — a gate that checked nothing is not a gate that passed
+
+      live      finite-smoke         1 checks
+      live      proof-contract       23 items checked
+      live      coverage-checklist   70 harvested results
+      live      precheck             3876 items checked
+
+Manifest/frontmatter reconciliation:
+
+    manifest-item-consistency: 25/25 checked, 0 error(s); A summary exact true; B body 0 byte(s)
+    contract-dependency-reconciliation: 23 contract(s), 95 dependency edge(s), 0 error(s)
+
+The required plan validator exited zero:
+
+    OK — declared page order is acyclic and consistent; no item-level cycles, forward
+    references, B-page dependencies, or unresolved ids among the 282 page(s) with item lists.
+    NOTE: 889 planned page(s) carry no item list yet (marked * above). Their reading
+    order is guaranteed; their item dependencies are not yet asserted, so re-run this
+    after writing each page's items.
+
+The bare repository-wide precheck was rerun after the transient concurrent failure cleared:
+
+    3876 checked, 0 failing — all clean
+
+Repository-wide forward and external-reference gates exited zero:
+
+    OK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.
+    124 warning(s):
+    OK — every recorded-not-proved statement is a cited remark with no proof, and every consequence is marked.
+
+Repository-wide prosecheck exited zero:
+
+    5195 file(s) checked. 0 error(s), 570 warning(s).
+      library-scope-denial: 206
+      count-in-prose: 189
+      count-of-this-page: 175
+
+    (re-run with --warnings to list them; warnings are heuristic and have legitimate cases)
+
+    OK — no positional claim contradicts the spec.
+
+Two required repository-wide gates remain red solely on other batches' in-progress files:
+
+    depcheck: 4907 items (4595 published), 288 pages
+    159 warning(s):
+    14 ERROR(s):
+    FAIL
+
+Those 14 errors are YAML-escape occurrences on eight items outside batch 5. The exact affected files are:
+
+- yaml-escape: ex-a-split-triangularisable-but-nondiagonalisable-operator, ex-first-isomorphism-theorem-for-a-coordinate-map, ex-jordan-form-with-two-eigenvalues-from-power-ranks, ex-quarter-turn-jordan-form-after-scalar-extension, ex-translated-tent-functions-converge-in-the-compact-open-topology, prop-characteristic-polynomial-factors-over-an-invariant-subspace, prop-induced-quotient-operator-is-well-defined, and thm-first-isomorphism-theorem-for-vector-spaces.
+
+Repository-wide rendercheck reports the six YAML-invalid files whose bad escape is not itself a legal YAML escape:
+
+    6 ERROR(s) across 5195 file(s)
+
+    FAIL
+
+They are ex-first-isomorphism-theorem-for-a-coordinate-map, ex-quarter-turn-jordan-form-after-scalar-extension, ex-translated-tent-functions-converge-in-the-compact-open-topology, prop-characteristic-polynomial-factors-over-an-invariant-subspace, prop-induced-quotient-operator-is-well-defined, and thm-first-isomorphism-theorem-for-vector-spaces. None belongs to batch 5, and the batch-scoped rendercheck above is clean.

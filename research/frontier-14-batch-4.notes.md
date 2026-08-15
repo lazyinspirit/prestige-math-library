@@ -510,3 +510,231 @@ quote in the proof contracts is synchronized to the revised titles.
   also found 46/46 contracts, 126 citation records, and zero
   dependency/citation-set mismatches.
 - **Blocker:** none. No permission or escalation was requested.
+
+## Step-5 authoring
+
+### Items and pages authored
+
+Authored all **53 spliced ids**: 36 A-page items and 17 B-page examples,
+counterexamples, or false statements. The A-page ids are exactly the 36 entries
+in `frontier-14-batch-4.pages.json`, from
+`def-quotient-vector-space-and-canonical-projection` through
+`cor-the-commutant-of-a-cyclic-endomorphism-is-polynomial`. The B-page ids are
+exactly its 17 entries, from
+`ex-quotient-of-f-three-by-a-line-and-canonical-projection` through
+`cex-the-identity-on-f-two-has-no-cyclic-vector`. No id was changed, added, or
+removed.
+
+Authored both page files at the spliced order and with `status: draft`. The A
+page carries the proposed two-paragraph summary above unchanged. The B page has
+no body after its frontmatter. Every item has `status: draft` and
+`origin: session`; no item has `verification.audited`.
+
+The splice receipt has no `summary_corrections` field, despite the authoring
+brief saying it would. It contains no replacement prose elsewhere. I therefore
+treated the A summary as the unchanged/`ok` case and copied the proposed prose
+verbatim; this was a nonblocking input discrepancy. I did not reintroduce the
+deleted B summary.
+
+### Provenance per component and rationale
+
+The preceding `## Per-item provenance decisions` section is the durable
+item-by-item Statement/Proof record and remains authoritative; authoring
+implemented every one of those 53 decisions without a provenance-category
+change. In component totals:
+
+- The seven A definitions have `proof: not-applicable`. Five definitions have
+  `statement: ai-altered` because they consolidate or normalise the sourced
+  quotient, invariant-subspace, Jordan-orientation, Jordan-form, and cyclic-
+  subspace conventions. The triangularisable and nilpotent definitions have
+  `statement: literature-derived` because they follow the named textbook
+  definitions directly.
+- The 29 proof-bearing A items have no AI-generated Statement: 23 Statements
+  are `literature-derived` and six are `ai-altered`. The six altered Statements
+  combine already sourced results into the exact page-level claims for
+  restriction/quotient polynomial calculus, the three-way splitting criterion,
+  nilpotent characterisations, rank-difference block recovery, generalised-
+  eigenspace multiplicities, and Jordan existence iff splitting. All 29 proofs
+  are `ai-altered`: their source strategies were retained, but the arguments
+  were decomposed into house Facts and auditable numbered steps, with explicit
+  zero-space, endpoint, choice, and iff-direction handling.
+- Nine B constructions—items 1-7, 14, and 16 in the B manifest—have
+  `statement: ai-generated`, `proof: ai-generated`, and
+  `generation.role: example`. Each is a concrete finite construction with an
+  explicit calculation, is a B-page leaf, and is not a dependency target.
+- Three further B items have `literature-derived / ai-altered` components: the
+  scalar-extension quarter-turn, the equal-polynomials/nonsimilar block
+  witness, and the identity without a cyclic vector. Four have
+  `ai-altered / ai-altered`: the two nonsplitting-base-field false statements,
+  literal Jordan-matrix uniqueness, and the commuting diagonal-plus-nilpotent
+  false statement. The geometric-multiplicity false statement is
+  `ai-altered / ai-generated`: Treil supplies the rank invariant and the local
+  `{3,1}` versus `{2,2}` finite witness is computed in full.
+
+Every source-backed component cites the Axler, Hoffman-Kunze, Treil, or Cornell
+URL recorded in the source ledger. The nine generated constructions have empty
+reference lists rather than invented sources. No `ai-generated` Statement is a
+load-bearing dependency.
+
+### Claim and obligation disposition
+
+No approved claim was narrowed or dropped. The authored Statements preserve the
+scaffold's domains, split-field hypotheses, quantifiers, iff directions,
+zero-space conventions, and uniqueness only up to block order. The required
+quotient-purpose, first-isomorphism/rank-nullity agreement, and downstream
+Frobenius-orientation Remarks are present.
+
+Authoring did change dependencies where the written proof actually created or
+removed an obligation, and synchronized the item frontmatter, page manifest,
+Facts, proof contracts, provenance rationale, and coverage record:
+
+- `thm-triangularisation-splitting-criterion` now uses the quotient-basis lift;
+  simultaneous triangularisation also uses induced quotient operators and the
+  quotient-basis lift.
+- The nilpotency-index definition uses the well-ordering principle.
+- The nilpotent Jordan-basis proof does **not** use the arbitrary-space,
+  choice-dependent extension theorem. It uses the published finite-dimensional
+  extension clause in `thm-dimension-of-a-linear-subspace` instead.
+- The power-rank formulas now cite rank-nullity for
+  `d_k + rho_k = dim V`; the cyclic-vector converse cites the finite-dimensional
+  equal-dimension subspace clause.
+- The nonsplitting diagonal-plus-nilpotent refutation cites the nilpotent
+  characteristic-polynomial theorem and triangularisation criterion that its
+  contradiction actually uses.
+- `lem-kernel-and-rank-sequences-of-powers` adopts the canonical induction
+  stratification printed by precheck. All other precheck repairs were likewise
+  adopted exactly at authoring time.
+
+The ten items identified by B4-5 as lacking a source or canonical coverage row
+now have item-specific canonical `included` rows. Coverage therefore rises from
+124 scaffold dispositions to 134 authored dispositions without changing any of
+the eight source declines.
+
+The proof contracts were regenerated from the final Facts and proof steps. They
+contain 46/46 proof-bearing items, 125 exact citation records, real multi-step
+input maps, and 368 item-specific boundary rows. The commutant theorem's stale
+`not_applicable` iff rows were corrected to `checked`: steps 1.1-2.1 prove the
+forward direction and step 3.1 proves the reverse.
+
+### Gate output
+
+Terminal gate summaries are reproduced verbatim below. The full targeted
+precheck printed one `PASS` line for each of the 46 proof-bearing items and then:
+
+```text
+46 checked, 0 failing — all clean
+```
+
+`node tools/validate-plan.mjs research/plan-spec.json`:
+
+```text
+OK — declared page order is acyclic and consistent; no item-level cycles, forward
+references, B-page dependencies, or unresolved ids among the 282 page(s) with item lists.
+NOTE: 889 planned page(s) carry no item list yet (marked * above). Their reading
+order is guaranteed; their item dependencies are not yet asserted, so re-run this
+after writing each page's items.
+```
+
+`node tools/content-policy.mjs research/frontier-14-batch-4.pages.json`:
+
+```text
+content-policy: 53 scoped item(s), 0 error(s), 0 warning(s)
+```
+
+`node tools/coverage-checklist.mjs research/frontier-14-batch-4.coverage.json`:
+
+```text
+coverage-checklist: 1 page(s), 134 harvested result(s), 0 error(s), 0 warning(s)
+```
+
+`node tools/depcheck.mjs`:
+
+```text
+OK — no cycles, all references resolve, no draft items on published pages.
+```
+
+`node tools/fwdcheck.mjs`:
+
+```text
+OK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.
+```
+
+`node tools/extcheck.mjs`:
+
+```text
+OK — every recorded-not-proved statement is a cited remark with no proof, and every consequence is marked.
+```
+
+`node tools/rendercheck.mjs --quiet`:
+
+```text
+OK — 5195 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+```
+
+`node tools/prosecheck.mjs`:
+
+```text
+5195 file(s) checked. 0 error(s), 568 warning(s).
+  library-scope-denial: 206
+  count-in-prose: 189
+  count-of-this-page: 173
+
+(re-run with --warnings to list them; warnings are heuristic and have legitimate cases)
+
+OK — no positional claim contradicts the spec.
+```
+
+`node tools/proof-contract.mjs research/frontier-14-batch-4.proof-contracts.json --strict`:
+
+```text
+proof-contract: 0 error(s), 0 warning(s), 46/46 item(s) checked
+```
+
+`node tools/citation-fidelity.mjs research/frontier-14-batch-4.proof-contracts.json --items-dir items --fail-on-missing-quote`:
+
+```text
+citation-fidelity: 125 citation(s) over 46 authored item(s)
+
+QUOTE NOT FOUND — none; every recorded quote appears in its cited item.
+
+WIDENING CANDIDATES — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+`node tools/boundary-audit.mjs research/frontier-14-batch-4.proof-contracts.json --items-dir items --fail-on-contradicted`:
+
+```text
+boundary-audit: 368 rows over 1 contract file(s); 140 marked not_applicable
+
+TEMPLATE REUSE — none at or above 3 members.
+
+CONTRADICTED DISPOSITIONS — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+`node tools/citecheck.mjs <the 53 batch item paths>`:
+
+```text
+citecheck: 53 item(s) scanned
+
+OK — every recognised elementary move cites a home that states it.
+```
+
+The batch-integrity check additionally reports, verbatim:
+
+```text
+batch-integrity: 53 items, 0 error(s)
+```
+
+`research/plan-spec.json` was read and validated but was not edited in this
+authoring pass. `tools/gates.mjs` was not run.
+
+### Blocker
+
+None. Everything required for Step 5 was completed without a permission prompt
+or external fallback. Judging remains Step 7 and was not performed here.

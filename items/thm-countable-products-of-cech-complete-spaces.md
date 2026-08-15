@@ -1,0 +1,59 @@
+---
+id: thm-countable-products-of-cech-complete-spaces
+kind: theorem
+title: "Under countable choice, countable products of Čech-complete spaces are Čech-complete"
+status: draft
+origin: session
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-cech-complete-space, thm-tychonoff, def-countable-choice, thm-n-cross-n-countable, def-product-topology]
+justified_by: []
+aliases: []
+landmark: false
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: "David Marker, Descriptive Set Theory, §§1–2"
+      url: "https://www.math.uic.edu/~marker/math512/dst.pdf"
+    - title: "Michael Kunzinger, General Topology, §§11.3–11.4"
+      url: "https://www.mat.univie.ac.at/~mike/teaching/ss16/general_topology.pdf"
+    - title: "MFF General Topology course summary, §4.3"
+      url: "https://www.karlin.mff.cuni.cz/~cuth/doc/MFF/OT/ot_ENG.pdf"
+    - title: "Jesse Peterson, Real Analysis, §§3.6–3.7"
+      url: "https://math.vanderbilt.edu/peters10/teaching/fall2016/RealAnalysis.pdf"
+pipeline_run: null
+---
+
+## Statement
+
+Assume the Axiom of Countable Choice and the compactness principle used in Tychonoff's theorem. A countable product of Čech-complete spaces is Čech-complete, including the empty product.
+
+## Facts & Assumptions
+
+**Given:** The objects, hypotheses, and choice principles stated above.
+
+[F1] A Tychonoff space $X$ is **Čech-complete** when there is a Hausdorff compactification $(K,i)$ of $X$ (def-compactification-of-a-tychonoff-space) for which $i[X]$ is a $G_\delta$ subset of $K$ (def-g-delta-and-f-sigma-in-a-topological-space). The definition asks for one compactification; thm-cech-completeness-is-independent-of-compactification proves the equivalent every-compactification form. ([[def-cech-complete-space]]).
+
+[F2] **Assume the Axiom of Choice** (def-axiom-of-choice). Let $I$ be a set and let $(X_i, \mathcal{T}_i)_{i \in I}$ be a family of compact topological spaces (def-compact-space, def-topological-space). Then the product $$P \;:=\; \prod_{i \in I} X_i$$ with the product topology (def-product-topology) is compact. **The Axiom of Choice is spent twice, and both uses are flagged below.** Once inside thm-alexander-subbase-lemma, through Zorn's lemma (thm-zorn), and once directly at step 2.1, to produce a point of a product of nonempty sets. ([[thm-tychonoff]]).
+
+[F3] The **Axiom of Countable Choice**, written $\mathrm{AC}_\omega$, is the following statement. ([[def-countable-choice]]).
+
+[F4] $\mathbb{N} \times \mathbb{N} \approx \mathbb{N}$ (def-equinumerous): the plane of pairs of naturals is countably infinite (def-countable). The bijection is exhibited, not merely asserted to exist. Define $2^m$ by recursion on $m$ (thm-recursion) by $2^0 = 1$ and $2^{\sigma(m)} = 2^m + 2^m$, and set $$J(m,n) = 2^m \cdot \sigma(n + n), \qquad \text{that is} \qquad J(m,n) = 2^m(2n+1).$$ Then $J$ is a bijection from $\mathbb{N} \times \mathbb{N}$ onto $\mathbb{N} \setminus \{0\}$, and $\sigma$ is a bijection from $\mathbb{N}$ onto $\mathbb{N} \setminus \{0\}$, so $\sigma^{-1} \circ J$ is a bijection $\mathbb{N} \times \mathbb{N} \to \mathbb{N}$. What makes $J$ bijective is the decomposition of a nonzero natural into a power of two times an odd number, existence and uniqueness both. ([[thm-n-cross-n-countable]]).
+
+[F5] **The product set.** Let $I$ be a set and let $X_i$ be a set for each $i \in I$. The **product** is $$\prod_{i \in I} X_i \;:=\; \Big\{\, x : x \text{ is a function with domain } I \text{ and } x(i) \in X_i \text{ for every } i \in I \,\Big\},$$ and we write $x_i := x(i)$, the $i$-th **coordinate** of $x$. Two elements of the product are equal exactly when they agree at every index, functions being equal when they have the same domain and the same values. For $j \in I$ the $j$-th **projection** is $$\pi_j : \prod_{i \in I} X_i \to X_j, \qquad \pi_j(x) := x_j .$$ ([[def-product-topology]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Choose compactification witnesses and $G_\delta$ presentations for the factors. [given, F1]
+
+2.1 Their compact product is compact by Tychonoff, and the product of the original spaces is the countable intersection over pairs of a coordinate and a layer of open cylinder sets. [step 1.1, F2, F5, F4, F3]
+
+3.1 Pair the two natural indices and include the empty product. [step 2.1, F2, F5, F4]
+
+4.1 The preceding construction and implications establish the assertion. [step 3.1] ∎

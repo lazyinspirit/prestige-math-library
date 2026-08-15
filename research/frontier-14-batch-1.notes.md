@@ -148,7 +148,7 @@ The `statement` label covers the definition, claim, or witness. The `proof` labe
 | `cor-complex-power-series-sums-are-analytic` | `ai-altered` | `ai-altered` | Statement is harvested from Ahlfors Chapter 2 or Stein–Shakarchi Chapter 1; the planned proof adapts their standard argument to the library's zero-based and componentwise conventions. References are the two URLs in the coverage ledger. |
 | `prop-sums-and-scalar-multiples-of-complex-power-series` | `ai-altered` | `ai-altered` | Complex-field adaptation of the published real power-series theorem, supported by Ahlfors/Stein for the convergence machinery and by https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf or https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf for the corresponding construction. |
 | `prop-cauchy-products-of-complex-power-series` | `ai-altered` | `ai-altered` | Complex-field adaptation of the published real power-series theorem, supported by Ahlfors/Stein for the convergence machinery and by https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf or https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf for the corresponding construction. |
-| `lem-local-composition-of-complex-power-series` | `ai-altered` | `ai-altered` | Complex-field adaptation of the published real power-series theorem, supported by Ahlfors/Stein for the convergence machinery and by https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf or https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf for the corresponding construction. |
+| `lem-local-composition-of-complex-power-series` | `ai-altered` | `ai-altered` | Complex-field adaptation of the published real power-series theorem, with the outer radius made explicitly positive and the proof using the absolute coefficient majorant below that radius; supported by Ahlfors/Stein for the convergence machinery and by https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf or https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf for the corresponding construction. |
 | `lem-local-reciprocal-of-complex-power-series` | `ai-altered` | `ai-altered` | Complex-field adaptation of the published real power-series theorem, supported by Ahlfors/Stein for the convergence machinery and by https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf or https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf for the corresponding construction. |
 | `thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition` | `ai-altered` | `ai-altered` | Complex-field adaptation of the published real power-series theorem, supported by Ahlfors/Stein for the convergence machinery and by https://personal.colby.edu/~erandles/papers/Past_Courses/Supplementary_Notes.pdf or https://ocw.mit.edu/courses/18-100c-real-analysis-fall-2012/1058808e5cb57c986118333f8b6fa0d7_MIT18_100CF12_l11sum.pdf for the corresponding construction. |
 | `cor-complex-analytic-functions-have-local-primitives` | `literature-derived` | `ai-altered` | Statement is harvested from Ahlfors Chapter 2 or Stein–Shakarchi Chapter 1; the planned proof adapts their standard argument to the library's zero-based and componentwise conventions. References are the two URLs in the coverage ledger. |
@@ -172,7 +172,7 @@ The `statement` label covers the definition, claim, or witness. The `proof` labe
 | `ex-lacunary-factorial-exponent-power-series` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
 | `ex-real-rational-function-with-finite-taylor-radius` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
 | `ex-abel-limit-along-a-nonradial-stolz-approach` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
-| `fs-convergence-at-one-noncentral-point-forces-entire-convergence` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
+| `fs-convergence-at-one-noncentral-point-forces-entire-convergence` | `ai-altered` | `ai-generated` | The false claim is the source-backed Cauchy–Hadamard radius clause with one interior convergence point incorrectly widened to convergence everywhere; the explicit geometric-series refutation is new and the item is not a dependency target. |
 
 ### contour-integration
 
@@ -212,9 +212,9 @@ The `statement` label covers the definition, claim, or witness. The `proof` labe
 | `ex-keyhole-contour-assembly-without-cauchys-theorem` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
 | `ex-riemann-stieltjes-integral-on-a-polygonal-contour` | `ai-altered` | `ai-altered` | Howell–Mathews Example 6.2.4 supplies the exact three-segment corner parametrization; the affine-integrand Stieltjes computation is this scaffold's explicit adaptation and remains a B-page leaf. |
 | `cex-reversing-orientation-preserves-a-contour-integral` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
-| `fs-absolute-value-passes-through-a-contour-integral` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
-| `fs-contour-length-is-the-length-of-its-trace` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
-| `fs-parametrization-independence-includes-orientation-reversal` | `ai-generated` | `ai-generated` | Checkable direct corollary or explicit witness designed for this scaffold; it is not a dependency target. Step 5 must add `generation` metadata and verify the displayed calculation independently. |
+| `fs-absolute-value-passes-through-a-contour-integral` | `ai-altered` | `ai-generated` | The false claim changes the source-backed fundamental inequality into equality; the constant-on-a-circle refutation is new and the item is not a dependency target. |
+| `fs-contour-length-is-the-length-of-its-trace` | `ai-altered` | `ai-generated` | The false claim drops the bijective monotone-reparametrization restriction from the source-backed length invariance theorem and thereby ignores multiplicity; the double-traversal refutation is new and the item is not a dependency target. |
+| `fs-parametrization-independence-includes-orientation-reversal` | `ai-altered` | `ai-generated` | The false claim drops the increasing/orientation-preserving hypothesis from the source-backed reparametrization theorem; the reversed-segment refutation is new and the item is not a dependency target. |
 
 ## New-id collision search
 
@@ -357,7 +357,7 @@ The fidelity sweep found one important non-citation: `lem-power-difference-facto
 | false-statement | `fs-contour-length-is-the-length-of-its-trace` | FALSE: contour length depends only on the trace and ignores multiplicity |
 | false-statement | `fs-parametrization-independence-includes-orientation-reversal` | FALSE: parametrization independence makes orientation reversal leave every contour integral unchanged |
 
-## Step-3 fix pass
+## Step-3 fix pass — superseded routing attempt
 
 No finding id matching the dispatch's stable `B1-*` pattern appears in
 `research/frontier-14-alpha-a-step3-scaffold-review.md`; an exact fixed-string
@@ -366,3 +366,421 @@ search returned zero matches. The report instead uses the unprefixed ids
 the required `B1-*` namespace. Following the dispatch's explicit no-renumbering
 and no-match exit instructions, no finding was translated or silently assigned,
 and no pages, coverage rows, or proof contracts were changed in this pass.
+
+## Step-3 fix pass
+
+### Routed re-dispatch
+
+The addendum to
+`research/frontier-14-alpha-a-step3-scaffold-review.md` now supplies the literal
+batch-1 routing map and therefore supersedes the no-match exit recorded above.
+The stable ids remain exactly `A1`–`A4` and `B1`–`B3`; none has been renumbered.
+
+### Stable finding dispositions
+
+- **A1 — applied.** Added
+  `thm-complex-sine-and-cosine-are-unbounded` immediately after the complex
+  trigonometric/hyperbolic addition formulas, and added the corresponding
+  Stein–Shakarchi Chapter 1 §2.3 harvest row. The proof route quotes the
+  published trigonometric–hyperbolic dictionary, explicitly bridges the complex
+  and real exponentials through
+  `thm-complex-exponential-addition-and-real-extension`, and then uses the
+  published real exponential limits. A matching proof contract with all eight
+  boundary axes was added.
+- **B1 — applied.** Added
+  `ex-exponential-over-z-unit-circle-integral-by-series` to the contour B page,
+  with independent Ahlfors Chapter 4 §1.3 and Howell–Mathews §6.2 harvest rows.
+  Its dependency list exercises
+  `thm-uniform-limit-interchanges-complex-line-integrals` directly and uses no
+  dependency on page 305. A matching proof contract was added.
+- **A2 — applied.** Added the B-page false statement
+  `fs-complex-sine-and-cosine-are-bounded` and the boundary-comparison example
+  `ex-harmonic-complex-power-series-on-the-unit-circle`, with canonical-coverage
+  rows and proof contracts for both. The exact worked computation
+  $\sin(iy)=i\sinh y$ already exists as published item
+  `ex-complex-sine-is-unbounded-on-the-imaginary-axis`; it was opened on disk and
+  recorded `already-published`. Because it is a B-page leaf, the new scaffold
+  neither cites it nor duplicates it.
+- **B2 — applied.** Opened
+  `cex-graph-of-x-sin-one-over-x-is-not-rectifiable` and recorded it
+  `already-published`, with an explicit note that its examples-page home makes
+  it an uncitable B leaf. No duplicate construction was minted.
+- **A3 — applied.** Opened
+  `cex-smooth-function-not-equal-to-its-maclaurin-series` and added the missing
+  `already-published` coverage disposition. Its note records both its B-leaf
+  status and its home outside page 305's closure.
+- **A4 — applied.** Annotated the existing `already-published` rows for
+  `ex-complex-geometric-power-series` and
+  `fs-real-differentiability-implies-complex-differentiability`: both are
+  coverage records only and neither licenses a dependency on a B-page item.
+- **B3 — already correct at scaffold time; step-5 watch recorded.** The report
+  expressly requests no scaffold edit. At authoring, each of the four direct
+  dependencies from `line-integrals-and-the-gradient-theorem` must occur in a
+  numbered proof step or be removed from `deps`; a comparison-only mention will
+  not count as use.
+
+### Provenance for the four new items
+
+| Item | statement | proof | Rationale and Step-5 obligation |
+|---|---|---|---|
+| `thm-complex-sine-and-cosine-are-unbounded` | `literature-derived` | `ai-altered` | Stein–Shakarchi Chapter 1 §2.3 carries the complex trigonometric formulas and imaginary-axis growth; the statement is the standard sourced result. The local proof is adapted to the library's published dictionary, real-extension theorem, and exponential-limit theorem. |
+| `ex-harmonic-complex-power-series-on-the-unit-circle` | `ai-generated` | `ai-generated` | This exact unit-circle construction was formulated locally from the design's requested three-series comparison. It is an examples-page leaf with a checkable witness and may never be a dependency target. Step 5 must add `generation.role: example`, verify the $z=1$ and $z\ne1$ cases independently, and retain the explicit exclusion of division by zero. |
+| `fs-complex-sine-and-cosine-are-bounded` | `ai-altered` | `ai-altered` | The misconception is materially reformulated from the sourced contrast between bounded real restrictions and Stein–Shakarchi's imaginary-axis growth; its refutation is adapted to the new A-page theorem. It is a B-page leaf and is not a dependency target. |
+| `ex-exponential-over-z-unit-circle-integral-by-series` | `literature-derived` | `ai-altered` | The exact computation is carried independently by Ahlfors Chapter 4 §1.3 and Howell–Mathews §6.2. The local derivation is adapted to the scaffold's finite-linearity, uniform-limit-interchange, and integer-monomial circle theorems. |
+
+### Step-3 report
+
+- Page sizes are now **29 / 11 / 21 / 12**, in orders 305–308 respectively,
+  for **73 total items**. The A pages remain well below the 60-item split trigger;
+  **no split is proposed**.
+- The harvest now contains **97 rows**: 61 `included`, 11 `inline`, and 25
+  `already-published`. Thus 72 rows route into scaffolded items or their inline
+  proofs, 25 are discharged by exact published items, and **0 are deferred or
+  out of scope**. There are no declines to challenge. The three new
+  `already-published` records most likely to receive scrutiny are the worked
+  complex-sine example, the smooth nonanalytic real function, and the
+  non-rectifiable graph; all three were checked on disk and are deliberately
+  uncited B leaves.
+- Proof-contract scope is **65 items**, with 65 matching contracts and exactly
+  eight anchored boundary dispositions per contract.
+
+Every new direct published dependency was opened at its actual item file and
+its exact Statement or Definition checked. **S** below means the clause also
+matches the harvested/source-backed complex-analysis treatment; **K** means its
+exact hypotheses and conclusion were independently confirmed as the standard
+result. The routes are:
+
+- **S:** `thm-complex-trigonometric-hyperbolic-dictionary`;
+  `def-complex-trigonometric-and-hyperbolic-functions`;
+  `thm-complex-exponential-addition-and-real-extension`;
+  `def-complex-exponential`;
+  `lem-complex-exponential-series-converges-everywhere`.
+- **K:** `thm-exponential-limits-and-range`;
+  `thm-p-series-real-exponents`; `cor-archimedean-reciprocal`;
+  `lem-complex-conjugation-and-modulus-laws`.
+
+The five coverage-only published items opened in this pass were
+`ex-complex-sine-is-unbounded-on-the-imaginary-axis`,
+`cex-smooth-function-not-equal-to-its-maclaurin-series`,
+`ex-complex-geometric-power-series`,
+`fs-real-differentiability-implies-complex-differentiability`, and
+`cex-graph-of-x-sin-one-over-x-is-not-rectifiable`. Their exact constructions
+were confirmed from disk; their B-page homes are the reason none appears in a
+new dependency list.
+
+The only new convention issue found was the possible ambiguity between the
+real and complex exponentials in A1. It is resolved explicitly by the added
+real-extension dependency rather than by treating the shared notation as an
+unstated identification. Ahlfors and Howell–Mathews use piecewise-smooth circle
+parametrisations for B1; that creates no conflict because this explicit unit
+circle is also a rectifiable contour under the scaffold's broader convention.
+
+No published dependency was found false, and no operation inside the authorised
+batch scope was blocked. The pre-existing splice prerequisite remains outside
+this Beta's write authority: `research/plan-spec.json` still lacks the proposed
+backward edge
+`contour-integration -> line-integrals-and-the-gradient-theorem`, although the
+batch manifest already records it. The authoritative plan gate is currently
+green because frontier-14 item lists have not yet been spliced; the orchestrator
+must settle that edge before step 4.
+
+Required gates after these edits:
+
+- `coverage-checklist.mjs`: **2 pages, 97 harvested results, 0 errors, 0 warnings**.
+- `content-policy.mjs --manifest-only`: **73 scoped items, 0 errors, 0 warnings**.
+- `validate-plan.mjs research/plan-spec.json`: **OK** — declared order acyclic
+  and consistent, with no item-level cycles, forward references, B-page
+  dependencies, or unresolved ids among pages whose items are present.
+- `boundary-audit.mjs`: **520 rows**, no template-reuse cluster and no
+  contradicted disposition; contradiction detectors correctly skipped the 65
+  items that are not authored yet.
+- The four new ids have no collision in published items, `plan-spec.json`, or
+  batches 2–6; the batch has no internal duplicate id and no dependency edge to
+  one of its B-page items. `git diff --check` is clean.
+
+Only the four authorised batch-1 artifacts were changed. `tools/gates.mjs` was
+not run, as instructed.
+
+## Continuity checkpoint — Step 5 authoring in progress
+
+All four batch page files and all 73 spliced item files have been drafted with
+`status: draft`, `origin: session`, the scaffolded immutable ids, and separate
+statement/proof provenance. The two A-page summaries use the exact prose
+recorded in this batch's `Exact page-summary replacements` section; the two
+B-page bodies are empty after frontmatter. No `verification.audited` field has
+been introduced.
+
+The remaining work is mechanical and corrective verification: reflow the proof
+items, run targeted precheck and adopt any printed canonical stratification,
+regenerate the 65 proof-contract entries from the final proofs, run strict
+contract/citation/boundary checks, run every requested batch gate, fix all
+in-scope failures, and replace this in-progress record with the required
+`## Step-5 authoring` report and verbatim gate output. No claim has yet been
+narrowed or dropped, and no blocker has been found.
+
+## Step-5 authoring
+
+This section supersedes the in-progress continuity checkpoint above. All **73**
+spliced items were authored under their immutable ids, with `status: draft`,
+`origin: session`, and no `verification.audited` field. The four page files were
+also authored: the two A pages carry the exact approved two-paragraph summaries,
+and each B page has zero body bytes after frontmatter.
+
+### Items authored
+
+#### `complex-power-series-and-analytic-functions` (29)
+
+`def-complex-analytic-function`,
+`def-uniform-convergence-of-complex-valued-functions`,
+`thm-uniform-cauchy-criterion-complex-functions`,
+`thm-uniform-limit-continuous-complex-functions`,
+`thm-weierstrass-m-test-for-complex-function-series`,
+`thm-complex-power-series-converge-locally-uniformly`,
+`lem-derived-complex-power-series-has-the-same-radius`,
+`thm-termwise-differentiation-of-complex-power-series`,
+`cor-complex-power-series-sums-have-derivatives-of-all-orders`,
+`cor-complex-power-series-coefficient-formula`,
+`cor-uniqueness-of-complex-power-series-coefficients`,
+`thm-complex-analytic-functions-are-holomorphic`,
+`lem-complex-power-series-reexpansion-double-series`,
+`thm-complex-power-series-reexpansion-at-an-interior-point`,
+`cor-complex-power-series-sums-are-analytic`,
+`prop-sums-and-scalar-multiples-of-complex-power-series`,
+`prop-cauchy-products-of-complex-power-series`,
+`lem-local-composition-of-complex-power-series`,
+`lem-local-reciprocal-of-complex-power-series`,
+`thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition`,
+`cor-complex-analytic-functions-have-local-primitives`,
+`thm-complex-trigonometric-and-hyperbolic-power-series`,
+`cor-complex-trigonometric-and-hyperbolic-derivatives`,
+`cor-complex-trigonometric-and-hyperbolic-addition-formulas`,
+`thm-complex-sine-and-cosine-are-unbounded`,
+`thm-complex-sine-and-cosine-zero-sets`,
+`def-stolz-approach-region-at-one`,
+`lem-abel-summation-for-complex-series`, and
+`thm-abel-limit-theorem-for-complex-series-in-stolz-regions`.
+
+#### `complex-power-series-and-analytic-functions-examples` (11)
+
+`ex-geometric-series-reexpanded-about-an-arbitrary-complex-point`,
+`ex-alternating-harmonic-power-series-at-the-boundary`,
+`ex-harmonic-complex-power-series-on-the-unit-circle`,
+`ex-square-summable-coefficient-power-series-on-the-closed-disc`,
+`cex-complex-power-series-not-uniform-on-its-open-disc`,
+`cex-radius-does-not-determine-boundary-convergence-of-a-complex-power-series`,
+`ex-lacunary-factorial-exponent-power-series`,
+`ex-real-rational-function-with-finite-taylor-radius`,
+`ex-abel-limit-along-a-nonradial-stolz-approach`,
+`fs-convergence-at-one-noncentral-point-forces-entire-convergence`, and
+`fs-complex-sine-and-cosine-are-bounded`.
+
+#### `contour-integration` (21)
+
+`rem-complex-contours-as-planar-rectifiable-paths`,
+`def-complex-contours-reversal-concatenation-and-closedness`,
+`def-complex-line-integral-over-a-rectifiable-path`,
+`def-absolute-line-integral-over-a-rectifiable-path`,
+`thm-existence-of-complex-line-integrals-on-rectifiable-paths`,
+`thm-riemann-stieltjes-and-parametric-contour-integrals-agree`,
+`prop-linearity-of-complex-line-integrals`,
+`prop-reversal-and-concatenation-of-complex-line-integrals`,
+`thm-invariance-of-complex-line-integrals-under-increasing-reparametrization`,
+`thm-fundamental-inequality-for-complex-line-integrals`,
+`cor-ml-estimate-for-complex-line-integrals`,
+`cor-absolute-integral-of-one-is-path-length`, `def-complex-primitive`,
+`thm-fundamental-theorem-for-complex-line-integrals`,
+`cor-closed-contour-integral-of-a-derivative-is-zero`,
+`cor-contour-integral-of-a-constant-is-an-endpoint-increment`,
+`thm-path-independence-and-complex-primitive-criterion`,
+`thm-uniform-limit-interchanges-complex-line-integrals`,
+`thm-circle-integrals-of-integer-monomials`,
+`cor-normalized-circle-integral-about-its-centre-is-one`, and
+`fs-every-continuous-complex-function-on-a-domain-has-a-primitive`.
+
+#### `contour-integration-examples` (12)
+
+`ex-exponential-contour-integral-by-riemann-sum-and-parametrization`,
+`ex-polynomial-contour-integral-along-a-line-segment`,
+`ex-contour-integral-of-conjugation-depends-on-the-path`,
+`ex-ml-estimate-on-a-semicircle`,
+`ex-circle-integral-of-one-over-z-minus-a`,
+`ex-exponential-over-z-unit-circle-integral-by-series`,
+`ex-keyhole-contour-assembly-without-cauchys-theorem`,
+`ex-riemann-stieltjes-integral-on-a-polygonal-contour`,
+`cex-reversing-orientation-preserves-a-contour-integral`,
+`fs-absolute-value-passes-through-a-contour-integral`,
+`fs-contour-length-is-the-length-of-its-trace`, and
+`fs-parametrization-independence-includes-orientation-reversal`.
+
+### Provenance and obligation rationale
+
+The per-item table under **Per-item expected component provenance** above is the
+component-by-component ledger; the authored frontmatter totals are:
+
+- statements: 40 `literature-derived`, 25 `ai-altered`, and 8
+  `ai-generated`;
+- proofs/constructions: 53 `ai-altered`, 12 `ai-generated`, and 8
+  `not-applicable` definitions/remarks.
+
+`literature-derived` is used where the mathematical proposition is directly
+harvested from the cited complex-analysis or published-library source.
+`ai-altered` records adaptation to this library's notation, zero-based series,
+rectifiable-path Riemann–Stieltjes generality, or a deliberately false claim
+whose exact correction is source-backed. `ai-generated` is confined to eight
+explicit, independently checked B-page examples/counterexamples. None of those
+eight is a dependency target in this batch, so no generated Statement or
+Construction is load-bearing.
+
+Four initially generated false-statement tags were corrected after their real
+source propositions were opened:
+`fs-convergence-at-one-noncentral-point-forces-entire-convergence`,
+`fs-absolute-value-passes-through-a-contour-integral`,
+`fs-contour-length-is-the-length-of-its-trace`, and
+`fs-parametrization-independence-includes-orientation-reversal` now have
+`provenance.statement: ai-altered`, harvested references, and synchronized
+proof-contract citations. Their dependency and coverage routes remain the
+source routes that actually refute them.
+
+All 65 proof-bearing items have multi-step input maps. The final contract has
+202 load-bearing citation records and 520 separately considered boundary rows.
+Every checked boundary row quotes its current exact proof step; the empty,
+zero, one, degenerate, endpoint, nonempty-choice, and both iff axes were each
+disposed of on the actual item rather than by a shared template. Every item
+dependency is both present in the spliced manifest and linked in its authored
+body. A separate title-versus-Statement-versus-proof pass found no overclaiming
+title.
+
+### Claim changes
+
+No claim was dropped. One claim was narrowed/clarified:
+`lem-local-composition-of-complex-power-series` now requires the outer series
+to converge on `|w|<R` for an explicit `R>0`; its proof chooses an absolute
+coefficient majorant before composition instead of inferring the needed bound
+from continuity alone. Its item dependencies, manifest dependencies,
+proof-contract input map, and provenance rationale were changed with the
+Statement. The harvested coverage entry is page/source-level rather than
+item-specific, so its already assigned supplementary-notes route remains the
+correct row and required no textual change.
+
+The false-statement wordings listed above were corrected, not weakened. Other
+substantive authoring repairs closed proof obligations without changing the
+claim: reciprocal-series coefficient uniqueness, Cauchy-product local uniform
+convergence, the rectifiable-contour primitive theorem, zero/constant contour
+cases, circle normalization, and unit-interval keyhole parametrizations.
+
+The splice receipt omitted the promised `summary_corrections` map. This did not
+block authoring because the exact binding replacements were already preserved
+verbatim in **Exact page-summary replacements** above and were the same prose
+reviewed by Alpha. Those exact paragraphs were used; no B summary was restored.
+
+### Gate output
+
+Batch-targeted precheck after adopting every printed canonical repair:
+
+```text
+65 checked, 0 failing — all clean
+```
+
+Plan validation:
+
+```text
+OK — declared page order is acyclic and consistent; no item-level cycles, forward
+references, B-page dependencies, or unresolved ids among the 282 page(s) with item lists.
+NOTE: 889 planned page(s) carry no item list yet (marked * above). Their reading
+order is guaranteed; their item dependencies are not yet asserted, so re-run this
+after writing each page's items.
+```
+
+Batch content and coverage:
+
+```text
+content-policy: 73 scoped item(s), 0 error(s), 0 warning(s)
+coverage-checklist: 2 page(s), 97 harvested result(s), 0 error(s), 0 warning(s)
+```
+
+Batch render and prose checks over all 73 items plus four pages:
+
+```text
+OK — 77 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+
+77 file(s) checked. 0 error(s), 0 warning(s).
+
+OK — no positional claim contradicts the spec.
+```
+
+Proof contract, boundary audit, and citation fidelity:
+
+```text
+proof-contract: 0 error(s), 0 warning(s), 65/65 item(s) checked
+
+boundary-audit: 520 rows over 1 contract file(s); 263 marked not_applicable
+
+TEMPLATE REUSE — none at or above 3 members.
+
+CONTRADICTED DISPOSITIONS — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+
+citation-fidelity: 202 citation(s) over 65 authored item(s)
+
+QUOTE NOT FOUND — none; every recorded quote appears in its cited item.
+
+WIDENING CANDIDATES — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+The targeted citation heuristic emitted two warnings because it tokenized the
+words `symmetric` and `antisymmetric` in the definitions of complex
+trigonometric functions as order axioms. Both are case (c): no order-theoretic
+move is made, so no dependency was added merely to silence them. Its exact
+summary was:
+
+```text
+citecheck: 73 item(s) scanned
+
+2 warning(s). HEURISTIC: triage each one, do not just count them.
+```
+
+Repository-wide dependency, forward-reference, extension, rendering, and prose
+checks all exited zero. Their exact final output was:
+
+```text
+OK — no cycles, all references resolve, no draft items on published pages.
+
+OK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.
+
+OK — every recorded-not-proved statement is a cited remark with no proof, and every consequence is marked.
+
+OK — 5250 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+
+5250 file(s) checked. 0 error(s), 569 warning(s).
+  library-scope-denial: 206
+  count-in-prose: 189
+  count-of-this-page: 174
+
+(re-run with --warnings to list them; warnings are heuristic and have legitimate cases)
+
+OK — no positional claim contradicts the spec.
+```
+
+`git diff --check` exited zero with no output. `tools/gates.mjs` was not run.
+
+The required bare repository-wide precheck was rerun after the other active
+batches finished their repairs. Its exact final summary is:
+
+```text
+3919 checked, 0 failing — all clean
+```
+
+### Blocker
+
+None. No batch-1 mathematical, provenance, coverage, rendering, schema, or
+repository-wide gate blocker remains. Nothing was audited, judged, published,
+or committed.

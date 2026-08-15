@@ -62,7 +62,6 @@
         "deps": [
           "def-uniform-convergence-of-complex-valued-functions",
           "thm-uniform-cauchy-criterion-complex-functions",
-          "thm-complex-plane-is-complete",
           "thm-weierstrass-m-test-for-function-series",
           "lem-complex-conjugation-and-modulus-laws"
         ]
@@ -179,7 +178,7 @@
         "strategy": "On any point inside both radii, take finite partial sums and pass their exact linearity identity to the limit. The result converges locally uniformly on every smaller closed subdisc; include zero scalars and unequal radii.",
         "deps": [
           "thm-complex-power-series-converge-locally-uniformly",
-          "thm-complex-plane-is-complete"
+          "lem-complex-conjugation-and-modulus-laws"
         ]
       },
       {
@@ -189,7 +188,8 @@
         "strategy": "At a point inside both radii, both numerical series converge absolutely. Apply the published complex Cauchy-product theorem and identify the finite convolution coefficient. Local uniform convergence on smaller closed subdiscs follows from the absolute coefficient majorant.",
         "deps": [
           "lem-cauchy-product-of-absolutely-convergent-complex-series",
-          "thm-complex-power-series-converge-locally-uniformly"
+          "thm-complex-power-series-converge-locally-uniformly",
+          "thm-weierstrass-m-test-for-complex-function-series"
         ]
       },
       {
@@ -210,7 +210,10 @@
         "strategy": "For f(a) nonzero write 1/f(z)=f(a)^(-1)/(1-H(z)), where H(a)=0. Continuity of the power-series sum makes |H|<1 on a smaller disc. Prove the finite complex geometric identity inline, compose H with the geometric series, and record the recursive reciprocal coefficients. The nonzero constant term is essential.",
         "deps": [
           "lem-local-composition-of-complex-power-series",
-          "cor-complex-power-series-sums-are-analytic"
+          "thm-termwise-differentiation-of-complex-power-series",
+          "cor-complex-differentiability-implies-continuity",
+          "prop-cauchy-products-of-complex-power-series",
+          "cor-uniqueness-of-complex-power-series-coefficients"
         ]
       },
       {
@@ -267,6 +270,18 @@
         "deps": [
           "def-complex-trigonometric-and-hyperbolic-functions",
           "thm-complex-exponential-addition-and-real-extension"
+        ]
+      },
+      {
+        "id": "thm-complex-sine-and-cosine-are-unbounded",
+        "kind": "theorem",
+        "title": "Complex sine and cosine are unbounded on the complex plane",
+        "strategy": "For real y, the published trigonometric-hyperbolic dictionary gives sin(iy)=i sinh(y) and cos(iy)=cosh(y). Expand sinh and cosh by their exponential definitions. Since exp(y) tends to positive infinity while exp(-y) tends to zero, both moduli are unbounded along the imaginary axis. Keep y real and positive and make no boundedness claim on the real axis.",
+        "deps": [
+          "thm-complex-trigonometric-hyperbolic-dictionary",
+          "def-complex-trigonometric-and-hyperbolic-functions",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-exponential-limits-and-range"
         ]
       },
       {
@@ -345,6 +360,18 @@
         ]
       },
       {
+        "id": "ex-harmonic-complex-power-series-on-the-unit-circle",
+        "kind": "example",
+        "title": "The harmonic complex power series diverges at 1 and converges conditionally at every other point of the unit circle",
+        "strategy": "For |z|=1 with z not equal to 1, the finite geometric identity bounds the partial sums of sum z^n by 2/|1-z|. Apply the complex Abel-summation tail identity with the positive decreasing weights 1/n, using the Archimedean reciprocal estimate to make the boundary term small. At z=1 the series is the divergent p-series with p=1, while at every boundary point the modulus series is the same divergent harmonic series, so all other convergence is conditional. Start at n=1 and never form 1/0.",
+        "deps": [
+          "lem-abel-summation-for-complex-series",
+          "thm-p-series-real-exponents",
+          "cor-archimedean-reciprocal",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
         "id": "ex-square-summable-coefficient-power-series-on-the-closed-disc",
         "kind": "example",
         "title": "A power series with reciprocal-square coefficients converges uniformly on the closed unit disc",
@@ -394,6 +421,7 @@
         "deps": [
           "thm-cauchy-hadamard-for-complex-power-series",
           "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
           "def-higher-derivatives-and-smoothness"
         ]
       },
@@ -415,6 +443,15 @@
         "deps": [
           "thm-cauchy-hadamard-for-complex-power-series",
           "lem-nth-term-test"
+        ]
+      },
+      {
+        "id": "fs-complex-sine-and-cosine-are-bounded",
+        "kind": "false-statement",
+        "title": "FALSE: complex sine and cosine are bounded on the complex plane",
+        "strategy": "The unboundedness theorem gives explicit imaginary-axis witnesses: sin(iy)=i sinh(y) and cos(iy)=cosh(y), whose moduli grow without bound as y tends to positive infinity. Thus neither function admits a global complex-plane bound; distinguish this from their bounded real-axis restrictions.",
+        "deps": [
+          "thm-complex-sine-and-cosine-are-unbounded"
         ]
       }
     ]
@@ -494,7 +531,6 @@
         "title": "For piecewise-C1 contours the Riemann–Stieltjes integral agrees with the parametric complex integral and the published real line integrals",
         "strategy": "On each smooth piece apply the real Stieltjes C1-integrator reduction to the four component integrals. Recombine them into integral f(gamma(t))gamma'(t) dt. Identify its real and imaginary parts with the published vector line integrals of (u,-v) and (v,u), and identify the absolute integral with the published scalar line integral. Sum over pieces and allow corners and zero-speed pieces.",
         "deps": [
-          "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
           "thm-riemann-stieltjes-c1-integrator-reduction",
           "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths",
           "def-vector-valued-derivative-and-integral",
@@ -544,8 +580,6 @@
         "strategy": "Use tagged complex Stieltjes sums for the four component integrals. The complex triangle inequality bounds each sum by the corresponding tagged arc-length sum plus a uniform-continuity error controlled by polygonal length. Pass both limits and then remove the error. This preserves the sharp constant one, unlike separately bounding four real components.",
         "deps": [
           "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
-          "def-absolute-line-integral-over-a-rectifiable-path",
-          "cor-riemann-stieltjes-integral-bound",
           "lem-complex-conjugation-and-modulus-laws",
           "cor-chord-length-is-at-most-arc-length"
         ]
@@ -590,7 +624,13 @@
           "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
           "cor-chord-length-is-at-most-arc-length",
           "cor-continuous-complex-derivative-gives-c1-components",
-          "thm-gradient-theorem-for-line-integrals"
+          "thm-gradient-theorem-for-line-integrals",
+          "thm-heine-borel-rn",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-lebesgue-number-lemma",
+          "thm-heine-cantor-metric",
+          "cor-ml-estimate-for-complex-line-integrals",
+          "thm-arc-length-is-additive-over-subintervals"
         ]
       },
       {
@@ -649,7 +689,8 @@
           "thm-complex-exponential-is-entire-with-derivative-itself",
           "thm-complex-exponential-addition-and-real-extension",
           "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
-          "thm-ftc-second-part"
+          "thm-ftc-second-part",
+          "def-vector-valued-derivative-and-integral"
         ]
       },
       {
@@ -659,7 +700,8 @@
         "strategy": "Specialize the circle monomial theorem to m=-1 and divide the nonzero complex number 2 pi i. The value is independent of the positive radius; no global winding-number theory or Cauchy theorem is invoked.",
         "deps": [
           "thm-circle-integrals-of-integer-monomials",
-          "thm-complex-numbers-form-a-field"
+          "thm-complex-numbers-form-a-field",
+          "def-pi-via-first-positive-cosine-zero"
         ]
       },
       {
@@ -670,6 +712,8 @@
         "deps": [
           "def-complex-domain",
           "lem-punctured-rn-is-polygonally-connected",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "cor-complex-differentiability-implies-continuity",
           "thm-circle-integrals-of-integer-monomials",
           "cor-closed-contour-integral-of-a-derivative-is-zero",
           "thm-path-independence-and-complex-primitive-criterion"
@@ -740,6 +784,19 @@
         "deps": [
           "thm-circle-integrals-of-integer-monomials",
           "prop-reversal-and-concatenation-of-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "ex-exponential-over-z-unit-circle-integral-by-series",
+        "kind": "example",
+        "title": "The unit-circle integral of exp(z)/z is 2 pi i by uniform termwise integration",
+        "strategy": "On |z|=1 the exponential partial sums converge uniformly because the tail is bounded by the convergent numerical series sum 1/n!. Divide the finite sums by z, use finite linearity, and apply the integer-monomial circle formula: the n=0 term contributes 2 pi i and every n>=1 term contributes zero. The uniform-limit interchange theorem passes to exp(z)/z. The unit circle excludes z=0, so division is defined.",
+        "deps": [
+          "def-complex-exponential",
+          "lem-complex-exponential-series-converges-everywhere",
+          "prop-linearity-of-complex-line-integrals",
+          "thm-uniform-limit-interchanges-complex-line-integrals",
+          "thm-circle-integrals-of-integer-monomials"
         ]
       },
       {
