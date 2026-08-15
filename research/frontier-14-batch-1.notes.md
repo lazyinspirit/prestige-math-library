@@ -356,3 +356,13 @@ The fidelity sweep found one important non-citation: `lem-power-difference-facto
 | false-statement | `fs-absolute-value-passes-through-a-contour-integral` | FALSE: the modulus of a contour integral always equals the absolute line integral |
 | false-statement | `fs-contour-length-is-the-length-of-its-trace` | FALSE: contour length depends only on the trace and ignores multiplicity |
 | false-statement | `fs-parametrization-independence-includes-orientation-reversal` | FALSE: parametrization independence makes orientation reversal leave every contour integral unchanged |
+
+## Step-3 fix pass
+
+No finding id matching the dispatch's stable `B1-*` pattern appears in
+`research/frontier-14-alpha-a-step3-scaffold-review.md`; an exact fixed-string
+search returned zero matches. The report instead uses the unprefixed ids
+`A1`–`A4` and `B1`–`B3` for this batch's two pairs and supplies no mapping to
+the required `B1-*` namespace. Following the dispatch's explicit no-renumbering
+and no-match exit instructions, no finding was translated or silently assigned,
+and no pages, coverage rows, or proof contracts were changed in this pass.

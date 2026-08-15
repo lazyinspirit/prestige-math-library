@@ -108,9 +108,14 @@ The gate counts **124 harvested dispositions**: 75 `included`, 31 `inline`, 10
 included headings map to 42 distinct scaffolded items because independent
 sources overlap. The eight declines are:
 
-- Axler 5.47, the unconditional complex triangularisation theorem, is licensed
-  to planned page `the-fundamental-theorem-of-algebra`; this page keeps the
-  conditional algebraically-closed-field corollary.
+- Axler 5.47, the unconditional complex triangularisation theorem, needs
+  algebraic closedness of the complex field. The published
+  `thm-fundamental-theorem-of-algebra-minimum-modulus-proof` supplies the root
+  theorem but is homed on `the-complex-exponential-and-eulers-formula` at order
+  189, above and outside this page's declared closure, so it is not citable
+  here. The planned page `the-fundamental-theorem-of-algebra` licenses the
+  deferred unconditional form; this page keeps the conditional
+  algebraically-closed-field corollary.
 - Hoffman–Kunze's T-admissible definition, Cyclic Decomposition Theorem, its
   four named proof steps, and its invariant-complement corollary are licensed
   individually to planned page `modules-over-a-pid-and-canonical-forms`. They
@@ -124,9 +129,12 @@ they build the complete divisibility-ordered cyclic decomposition and its
 uniqueness, precisely MOD-5's subject. Importing them would duplicate the later
 invariant-factor theorem. Before recording the declines I searched `items/` for
 the named theorem, T-admissibility, and invariant complements; none is already
-published. I also verified both licensing page ids in the live plan. The same
-disk check found no published theorem making every complex polynomial split;
-`the-fundamental-theorem-of-algebra` is genuinely planned later.
+published. I also verified both licensing page ids in the live plan. Separately,
+the disk check found the published complex root theorem
+`thm-fundamental-theorem-of-algebra-minimum-modulus-proof`, but its home page is
+order 189 and outside this page's declared closure; the planned
+`the-fundamental-theorem-of-algebra` page at order 139 remains the licensing
+destination for the unconditional complex triangularisation form.
 
 ## Mathematical design and durable proof seams
 
@@ -292,7 +300,7 @@ Exact clauses that the step-5 Facts must not widen include: the zero-space
 conventions `chi_T=1` and `mu_T=1`; the published primary-decomposition
 restrictions and exponents; the iff in the minimal-polynomial annihilator
 criterion; and similarity as representation of one endomorphism in two bases.
-The 122 proof-contract citation records now quote all published clauses exactly
+The 126 proof-contract citation records now quote all published clauses exactly
 from disk. Within-batch records use the fixed scaffold claim and must be replaced
 with the exact authored Statement/Definition text before strict validation.
 
@@ -417,3 +425,88 @@ quote before running the strict gate.
   permission prompt. The full proof-contract strict gate cannot be meaningful
   until step 5 creates the item files and exact Facts/numbered steps; the durable
   contracts record that remaining authoring obligation.
+
+## Step-3 fix pass
+
+### B4-1 — applied
+
+The Axler 5.47 coverage disposition and the source-ledger discussion now record
+the disk truth: `thm-fundamental-theorem-of-algebra-minimum-modulus-proof` is
+published, but its home page `the-complex-exponential-and-eulers-formula` is at
+order 189 and outside the order-90 page's declared prerequisite closure. The
+planned `the-fundamental-theorem-of-algebra` page remains the licensing
+destination, and the present page retains only the conditional
+algebraically-closed-field corollary.
+
+### B4-2 — applied
+
+The three dependency lists and their durable proof contracts are synchronized:
+
+- `prop-characteristic-polynomial-factors-over-an-invariant-subspace` now cites
+  `prop-induced-quotient-operator-is-well-defined`, which licenses the induced
+  linear operator represented by the quotient block.
+- `cor-the-commutant-of-a-cyclic-endomorphism-is-polynomial` now cites
+  `thm-cyclic-subspace-power-basis-and-companion-matrix`, which supplies the
+  cyclic power basis used to expand the commuting operator's value at a cyclic
+  vector.
+- `thm-jordan-form-uniqueness-from-ranks-of-powers` now cites the published
+  `def-rank-and-nullity` and `def-internal-direct-sum`; their exact on-disk
+  clauses are included in the proof contract for the rank calculation over the
+  generalised-eigenspace direct sum.
+
+### B4-3 — applied
+
+Step 5 must preserve these three item-level Remarks:
+
+1. `def-quotient-vector-space-and-canonical-projection` explains that quotient
+   spaces enter this development because the reverse triangularisation
+   implication descends to the induced operator on
+   $V/\langle v\rangle$; it does not make a survey claim about what the library
+   contains elsewhere.
+2. `thm-first-isomorphism-theorem-for-vector-spaces` records that its dimension
+   count recovers the published `thm-rank-nullity`, linked as an agreement
+   record and not used as a premise for a second proof.
+3. `ex-a-cyclic-companion-operator` names the Frobenius of
+   $\mathbb F_8/\mathbb F_2$ as the downstream motivating use of the cyclic-vector
+   theorem. This is orientation only: it creates no forward `deps` edge and no
+   dependence on another in-run batch.
+
+### B4-4 — applied
+
+The two scaffold titles now expose their load-bearing hypothesis:
+`prop-generalised-eigenspaces-and-algebraic-multiplicity` and
+`cor-jordan-block-data-controls-eigenspaces-and-polynomials` both begin “For an
+endomorphism with split characteristic polynomial”. Every provisional local
+quote in the proof contracts is synchronized to the revised titles.
+
+### Step-3 gate and handoff report
+
+- **Pages and items:** the sufficient pair remains 36 A items and 17 B items;
+  no item was added or removed.
+- **Harvest:** unchanged at 124 dispositions — 75 `included`, 31 `inline`, 10
+  `already-published`, and 8 `deferred`. Alpha upheld the seven
+  Hoffman–Kunze declines to `modules-over-a-pid-and-canonical-forms`; the Axler
+  5.47 decline remains deferred, but B4-1 corrected its false disk rationale.
+- **Split:** none proposed. The A page remains 24 items below the dispatched
+  60-item threshold, and Alpha endorsed the existing contingency cut only if a
+  later expansion makes it necessary.
+- **Published clauses opened in this pass:**
+  `thm-fundamental-theorem-of-algebra-minimum-modulus-proof` was exact-inspected
+  for B4-1 and its order-189 home was verified from the live spec;
+  `def-rank-and-nullity` and `def-internal-direct-sum` were exact-inspected under
+  the established-from-knowledge route before their clauses were added to the
+  uniqueness contract; and `thm-rank-nullity` was exact-inspected for the
+  Step-5 agreement Remark. All are published, have eligible non-generated
+  Statement provenance, and state the needed domains and boundary clauses.
+- **Conventions:** no new disagreement was found. The existing decisions remain
+  in force: split characteristic polynomial in load-bearing titles, Jordan
+  uniqueness only up to block order, separate length-one blocks, explicit zero-
+  space conventions, and the corrected sign of Treil's rank difference.
+- **Required gates:** `coverage-checklist.mjs` passed with 1 page, 124 harvested
+  results, 0 errors and 0 warnings; `content-policy.mjs --manifest-only` passed
+  with 53 scoped items, 0 errors and 0 warnings; and `validate-plan.mjs` exited
+  0 with no item-level cycle, forward reference, B-page dependency, or
+  unresolved id among item-listed pages. The internal synchronization check
+  also found 46/46 contracts, 126 citation records, and zero
+  dependency/citation-set mismatches.
+- **Blocker:** none. No permission or escalation was requested.

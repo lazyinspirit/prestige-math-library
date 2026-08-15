@@ -21,7 +21,7 @@ The proposed thm-power-residue-criterion-modulo-prime was not minted. The publis
 
 The proposed cor-number-of-nth-roots-modulo-prime was not minted. The published cor-number-of-solutions-of-a-binomial-congruence is stronger and gives exactly gcd(phi(n),m) solution classes under the same primitive-root and solubility hypotheses. Every specialisation also cites cor-primitive-roots-modulo-prime and cor-totient-at-one-and-at-a-prime; neither hypothesis is hidden.
 
-The source harvest added ex-unique-cube-root-of-two-modulo-twenty-nine. Mascot's selected range contains this named computation, and it gives a useful direct test of the retained unique-root corollary.
+The source harvest added ex-unique-cube-root-of-two-modulo-twenty-nine. Mascot's selected range through PDF p. 10 contains this named computation, and it gives a useful direct test of the retained unique-root corollary.
 
 The Gauss half-system permutation remains a separate lemma because equal-sign injectivity, opposite-sign exclusion, and finite self-injectivity are independently auditable moves used by Gauss's lemma. No smaller microlemma is needed.
 
@@ -61,17 +61,17 @@ Harvest use: independent verification of the general power criterion, the fourth
 Source: Nicolas Mascot, Legendre Symbols and Quadratic Reciprocity,
 https://www.maths.tcd.ie/~mascotn/teaching/2020/MAU23101/3%20Legendre.pdf
 
-Read range: Chapter 3, “k-th roots mod p,” PDF pp. 8–9. Browser PDF text extraction exposed the unique kth-root theorem for gcd(k,p-1)=1 and its cube-root-of-two modulo 29 example.
+Read range: Chapter 3, “k-th roots mod p,” PDF pp. 8–10. The extracted range exposes the named theorem counting the kth-power image, its gcd(k,p-1)-to-one corollary, the unique kth-root theorem for gcd(k,p-1)=1, and the cube-root-of-two modulo 29 example on p. 10.
 
-Harvest use: statement and constructive inverse-exponent formula for cor-unique-kth-root-modulo-prime-for-coprime-exponent, plus the worked cube-root example.
+Harvest use: the count and two-root clause of thm-count-of-quadratic-residues-modulo-prime, the statement and constructive inverse-exponent formula for cor-unique-kth-root-modulo-prime-for-coprime-exponent, and the worked cube-root example.
 
 The prescribed creation of a fresh pypdf virtual environment was attempted. Package installation could not resolve the package host in the shell sandbox. No permission prompt or escalation was requested. This was not a source blocker because text-bearing cached copies of Hackman and Stein were available for exact extraction, and the browser PDF reader extracted Gorodnik and Mascot. All four cited URLs were live when opened.
 
 ## Canonical coverage yield
 
-The coverage artifact records 67 source or canonical headings:
+The coverage artifact records 70 source or canonical headings:
 
-- included: 34
+- included: 37
 - inline: 12
 - already-published: 6
 - deferred: 8
@@ -143,10 +143,10 @@ A-page provenance:
 | Item | Statement | Proof | Rationale |
 |---|---|---|---|
 | def-quadratic-residue-modulo-n | literature-derived | not-applicable | Hackman D.I.1, Stein Definition 4.1.1, Gorodnik Definition 1.1; general-modulus unit convention retained |
-| prop-quadratic-residue-is-representative-independent | literature-derived | ai-altered | Gorodnik class invariance, translated through the published quotient equality criterion |
-| cor-unique-kth-root-modulo-prime-for-coprime-exponent | literature-derived | ai-altered | Mascot pp. 8–9, with uniqueness supplied by the stronger published root-count corollary |
+| prop-quadratic-residue-is-representative-independent | ai-altered | ai-altered | Canonical bridge derived from the residue definition, quotient-class equality, the unit criterion, and quotient-ring multiplication; Gorodnik's class-invariance theorem concerns the later Legendre symbol and is not used as provenance for this proposition |
+| cor-unique-kth-root-modulo-prime-for-coprime-exponent | literature-derived | ai-altered | Mascot pp. 8–10, with uniqueness supplied by the stronger published root-count corollary |
 | thm-quadratic-residues-subgroup-modulo-prime | literature-derived | ai-altered | Stein Lemma 4.1.4 and Remark 4.1.5; intrinsic squaring image separated from a chosen generator |
-| thm-count-of-quadratic-residues-modulo-prime | literature-derived | ai-altered | Hackman, Stein, and Gorodnik; Lagrange plus the published root count |
+| thm-count-of-quadratic-residues-modulo-prime | literature-derived | ai-altered | Mascot p. 8 gives the named kth-power count and fiber-size corollary; the local proof specialises to k=2 and uses Lagrange plus the published root count |
 | def-legendre-symbol | literature-derived | not-applicable | Hackman, Stein, and Gorodnik; explicit zero branch |
 | prop-legendre-symbol-well-defined | literature-derived | ai-altered | Hackman/Gorodnik class invariance with an explicit divisible branch |
 | prop-legendre-symbol-on-units-is-homomorphism | literature-derived | ai-altered | Stein Lemma 4.1.4; uniqueness derived from local cyclic generation |
@@ -166,7 +166,7 @@ B-page provenance:
 | ex-quadratic-residues-and-nonresidues-modulo-eleven | literature-derived | ai-altered | Stein Example 4.2.4, expanded to include roots, zero, and the full symbol table |
 | ex-power-residues-modulo-seventeen | literature-derived | ai-altered | Gorodnik Example 1.3, expanded through the published fourth/eighth-power tests and counts |
 | cex-product-of-two-quadratic-nonresidues-modulo-a-composite | literature-derived | ai-altered | Hackman D.I.7; explicit modulo-15 failure of the prime product rule |
-| ex-unique-cube-root-of-two-modulo-twenty-nine | literature-derived | ai-altered | Mascot's worked example |
+| ex-unique-cube-root-of-two-modulo-twenty-nine | literature-derived | ai-altered | Mascot's worked example on PDF p. 10 |
 | ex-euler-criterion-with-a-large-prime | literature-derived | ai-altered | Stein Example 4.2.5, with repeated squaring displayed |
 | ex-gauss-lemma-for-three-modulo-eleven | literature-derived | ai-altered | Hackman D.IV.3/D.IV.5 |
 | ex-quadratic-congruence-from-its-discriminant | ai-altered | ai-generated | Checkable specialisation of Gorodnik's discriminant formula to a locally chosen polynomial |
@@ -202,7 +202,7 @@ Current substage: final consistency and gate pass. Open mathematical question: n
 
 ## Final report
 
-The final scaffold has one A/B pair: 16 A items and 9 B items. The source harvest records 67 headings: 34 included, 12 inline, 6 already published, 8 deferred, and 7 out of scope. The declines most likely to be challenged are the duplicate modulo-13/SAGE computations and the grouped exercise headings; their result-specific reasons and licensing page ids are recorded above. The reciprocity, Jacobi, prime-power, and composite-modulus declines follow the dispatch's exact NT-2/NT-3 cut. Hackman's composite-modulus counterexample is retained rather than absorbed into the prime character theorem.
+The final scaffold has one A/B pair: 16 A items and 9 B items. The source harvest records 70 headings: 37 included, 12 inline, 6 already published, 8 deferred, and 7 out of scope. The declines most likely to be challenged are the duplicate modulo-13/SAGE computations and the grouped exercise headings; their result-specific reasons and licensing page ids are recorded above. The reciprocity, Jacobi, prime-power, and composite-modulus declines follow the dispatch's exact NT-2/NT-3 cut. Hackman's composite-modulus counterexample is retained rather than absorbed into the prime character theorem.
 
 No split is proposed. All 32 published external dependencies were opened and are listed above with their component provenance and confidence route. The ordinary plan gate cannot yet inspect this pair's item edges because plan-spec still carries zero-item placeholders; the in-memory overlay of this manifest against the plan closure checked all 25 new items and 45 distinct dependencies and found no undeclared prerequisite, local forward edge, or B-item dependency. That overlay found and caused removal of the out-of-closure floor lemma before this final pass.
 
@@ -211,10 +211,36 @@ The two important scaffold corrections are durable: the general power criterion 
 Final checks:
 
 - validate-plan exited zero: declared page order is acyclic and consistent, with no item-level cycle, forward reference, B-page dependency, or unresolved id among pages whose item lists are already spliced.
-- coverage-checklist reported: 1 page, 67 harvested results, 0 errors, 0 warnings.
+- coverage-checklist reported: 1 page, 70 harvested results, 0 errors, 0 warnings.
 - The custom scaffold consistency check reported 25 new ids, no duplicate ids, no collision with items/, and no dependency on a B-page item.
 - The proof-contract structural check reported 23 proof-bearing items, 23 scoped contracts, exact published source quotes, every manifest dependency represented by a citation obligation, and all eight boundary dispositions per contract.
 - prosecheck reported 0 errors and 5 heuristic count warnings in this notes report; they arise from the requested page/item/harvest counts and the modulus-29 example, so none is page prose or a defect.
 - The owned artifacts contain no canonical embedding applied to a natural number.
 
 No mathematical, dependency, citation, split, or permission blocker remains. The fresh pypdf installation could not be completed because the shell could not resolve the package host; exact extraction succeeded through existing text-bearing PDFs and the browser PDF reader, so nothing requested was left undone.
+
+## Step-3 fix pass
+
+### B5-1 — applied
+
+Added the two omitted named Mascot rows from PDF p. 8 and mapped both to `thm-count-of-quadratic-residues-modulo-prime`. Added a canonical `included` row for `prop-quadratic-residue-is-representative-independent`, so every A-page item now has an explicit harvest or canonical disposition. Corrected that proposition's statement provenance from `literature-derived` to `ai-altered`: it is a canonical bridge derived from the residue definition and the published quotient-class equality, unit criterion, and quotient-ring multiplication, whereas Gorodnik Theorem 1.6(ii) establishes class invariance of the Legendre symbol rather than this earlier residuosity proposition. The proof provenance remains `ai-altered`.
+
+### B5-2 — applied
+
+Extended the Mascot locator from PDF pp. 8–9 to pp. 8–10. The cube-root-of-two example is on p. 10, while the kth-power count theorem and fiber-size corollary are on p. 8. The source ledger and per-item rationales now use the same corrected range.
+
+### B5-3 — applied
+
+Changed the manifest title to `The discriminant counts roots of $Ax^2+Bx+C\\equiv0\\pmod p$ for odd prime $p\\nmid A$`. This puts the load-bearing nonzero-leading-coefficient hypothesis in the title. The strategy and proof contract already assume and use `p\\nmid A`, so no dependency or proof-contract change was required.
+
+### Step-3 verification and report
+
+The pair remains one 16-item A page and one 9-item B page; no split is proposed. The repaired harvest has 70 rows: 37 `included`, 12 `inline`, 6 `already-published`, 8 `deferred`, and 7 `out-of-scope`. The likely challenged declines remain the duplicate modulo-13 and SAGE computations and the grouped exercise headings; each retains its result-specific reason and licensing page id. The list and confidence routes for all 32 opened published dependencies remain in the earlier report, with only the B5-1 canonical bridge's statement provenance corrected to `ai-altered`. The unit-only residue convention, total Legendre symbol, odd-prime hypotheses, strict Gauss-half-system endpoints, and local ZF choices are unchanged. There is no split, mathematical, dependency, citation, source, or permission blocker.
+
+The required gates were rerun from the repository root after all three fixes:
+
+- `coverage-checklist`: 1 page, 70 harvested results, 0 errors, 0 warnings.
+- `content-policy --manifest-only`: 25 scoped items, 0 errors, 0 warnings.
+- `validate-plan research/plan-spec.json`: exit 0; the declared page order remains acyclic and consistent, with no item-level cycles, forward references, B-page dependencies, or unresolved ids among pages carrying item lists.
+
+A direct reverse coverage check additionally found all 16 A-page ids named by at least one source or canonical disposition. JSON parsing and `git diff --check` both passed. The proof-contract artifact was inspected but not edited: B5-3's `p\\nmid A` assumption was already present in the derivation map and the degenerate-case boundary disposition.
