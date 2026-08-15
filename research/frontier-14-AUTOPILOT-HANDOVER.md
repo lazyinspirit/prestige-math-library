@@ -105,3 +105,31 @@ blocker listed is the shape to look for; the blocker says which unit or gate.
 `autopilot retry` re-arms, `autopilot skip --stage <id>` bypasses.
 
 Nothing in this run is `status: published`. Publishing remains yours.
+
+---
+
+## Progress log (appended as it happened)
+
+| time (UTC) | event |
+|---|---|
+| 17:11 | autopilot took over from the LLM-driven driver |
+| 17:21 | `1-scaffold` cleared — 14 gates green, after fixing a false dead-source report |
+| 17:49 | `3-fix` cleared — 6/6, first fully autonomous transition |
+| 18:03 | `3-recheck` cleared — Alpha b confirmed all 11 of its findings applied on disk |
+| 18:10 | `4-splice` cleared — item lists in `plan-spec.json`, `validate-plan` green |
+| 18:11 | `5-author` entered — 5 Betas dispatched, batch 6 queued at the cap |
+
+**The splice is verified good.** All six A pages carry their item lists
+(16/36/19/29/21/44 items), `validate-plan` is clean, and the lead Alpha took the
+`pre-step5` touch baseline over 4,646 items **before any authoring** — which is
+the `frontier-13` defect fixed, where the baseline was taken afterwards and the
+impact gate confirmed instead of checking.
+
+**Both judge lanes were verified able to authenticate** from a bare environment
+before step 7 needs them: DeepSeek resolves its key through `paths.mjs` to the
+app `.env`, and the Codex CLI is authenticated and on PATH. That was the largest
+remaining silent-failure risk.
+
+Authoring is the long stage — six Betas, up to six hours each. Expect little to
+happen for a while; the engine reports every 20 minutes regardless, so quiet and
+dead look different.
