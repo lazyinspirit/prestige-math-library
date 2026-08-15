@@ -135,9 +135,30 @@ was worthless.
 node tools/touchlog.mjs snap research/frontier-14-touches.json pre-step5
 ```
 
+### IDEMPOTENCE — read this before you touch `plan-spec.json`
+
+**Batches already spliced must not be spliced again.** This run stepped back to
+step 4 to pick up a batch that was added later, so most batches are already
+done. Re-splicing them would duplicate item ids in `plan-spec.json`.
+
+Before touching a page, check whether its `items` array is already populated:
+
+```
+node -e "const s=require('./research/plan-spec.json');
+for (const p of s.pages) if ((p.items||[]).length) console.log(p.id, p.items.length)" | sort
+```
+
+A page that already has its items, and whose count matches its batch manifest,
+is **done** — verify and move on. Only splice a page whose `items` array is
+empty. If a populated page disagrees with its manifest, that is a finding:
+record it, do not silently overwrite.
+
+A batch that is already spliced still needs its receipt if one is missing —
+write the receipt without re-editing the plan.
+
 ### What to do
 
-For each batch `i` in 1..N:
+For each batch `i` in 1..N **whose pages are not already spliced**:
 
 1. Read `research/frontier-14-batch-<i>.pages.json`, the batch notes, and group
    Alpha's step-3 review **and** its re-check for that batch.

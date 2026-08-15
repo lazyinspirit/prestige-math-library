@@ -186,3 +186,26 @@ re-opened every stage at `6/7 covered; missing 7`. A count would have read
 **Consequence for the schedule:** batch 7 must traverse every stage from
 scaffold to authoring, so the run will finish later than the other six. It is
 running in parallel with the step-6a readers, not behind them.
+
+## Stepping back a stage: two hazards found and closed
+
+Restoring batch 7 made the engine step back through every stage, which exposed
+two things that only happen on a step-back.
+
+**A re-run stage can redo completed work.** The step-4 task said "for each batch
+1..N, splice", and batches 1–6 were already in `plan-spec.json` — a literal
+reading duplicates every item id in the run. The dispatch was killed before it
+could and the task now forbids re-splicing, with the command to check. Belt and
+braces: `validate-plan` independently exits 1 on a duplicated id, so the gate
+would have caught it even if the agent had not.
+
+**A copied task file carries the wrong pointer.** Batch 7's fix task was made by
+`sed`-copying batch 1's; the batch number changed but the report path still
+pointed at Alpha a and the finding prefix at `B7-`. Batch 7 was reviewed by Alpha
+c, findings `C1–C11`. The agent would have found nothing, followed the
+instruction to exit, and reported success — leaving eleven findings unaddressed
+on the pair that had already been lost once. Killed before it wrote a result.
+
+Both are the same lesson the run keeps teaching: **copying is transcription, and
+transcription drops things.** Generate a task from the artifact it refers to, or
+point at that artifact and let the agent read it.
