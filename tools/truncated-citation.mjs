@@ -16,6 +16,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { parseFactLine } from './facts-block.mjs';
 
 const args = process.argv.slice(2);
 const asJson = args.includes('--json');
@@ -45,8 +46,12 @@ function sectionOf(id) {
   return start < 0 ? null : norm(lines.slice(start, end).join(' '));
 }
 
-// A fact line: "[F3] <text> ([[id]], [[id2]])."
-const FACT_RE = /^\[([FLA]\d+)\]\s+(.*)$/;
+// A fact line is parsed by tools/facts-block.mjs, the one parser for this
+// grammar. The loop below stays line-by-line because the report gives a line
+// NUMBER: `parseFactLine` is the shared atom, not a shared loop. Scoping the
+// scan to `## Facts & Assumptions` would change nothing on today's corpus —
+// checked, 0 differences over 4,986 items — but a stray `[F1]` in a Remark is
+// still a fact line worth looking at, so the scan stays over the whole file.
 
 const out = [];
 for (const file of files) {
@@ -54,9 +59,9 @@ for (const file of files) {
   const lines = raw.split('\n');
   const itemId = (raw.match(/^id:\s*(\S+)/m) || [])[1] || path.basename(file, '.md');
   lines.forEach((line, i) => {
-    const m = FACT_RE.exec(line.trim());
-    if (!m) return;
-    const [, tag, rest] = m;
+    const entry = parseFactLine(line.trim());
+    if (!entry) return;
+    const tag = entry.fact, rest = entry.text;
     const cited = [...rest.matchAll(/\[\[([a-z0-9-]+)\]\]/g)].map(x => x[1]);
     if (!cited.length) return;
     // strip the trailing citation parenthetical to get the asserted text

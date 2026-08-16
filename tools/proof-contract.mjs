@@ -14,13 +14,15 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  SOURCE_SECTIONS, factParagraphs, sectionText, sourceSectionText, splitFrontmatter,
+} from './facts-block.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const STANDARD_BOUNDARIES = [
   'empty', 'zero', 'one', 'degenerate', 'endpoints', 'nonempty-choice',
   'iff-forward', 'iff-reverse',
 ];
-const SOURCE_SECTIONS = new Set(['Statement', 'Statement refuted', 'Definition', 'Example']);
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
 const strict = argv.includes('--strict');
@@ -125,7 +127,7 @@ function validateItem(id, item, entry) {
       error('citation-section', `${fact} -> ${source} needs a valid source_section`, id);
     } else if (typeof quote !== 'string' || !quote.trim()) {
       error('citation-quote-missing', `${fact} -> ${source} needs an exact non-empty quote`, id);
-    } else if (!normalise(sectionText(sourceItem.body, section)).includes(normalise(quote))) {
+    } else if (!normalise(sourceSectionText(sourceItem.body, section) ?? '').includes(normalise(quote))) {
       error('citation-quote-mismatch', `${fact} quote does not occur in ${source}'s ${section}`, id);
     }
     if (!Array.isArray(uses) || !uses.length) {
@@ -262,10 +264,9 @@ function loadItem(id) {
   };
 }
 
-function split(source) {
-  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
-  return match ? { fm: match[1], body: match[2] } : { fm: '', body: source };
-}
+// Declarations, not `const` aliases: the main loop above runs at module load,
+// before these lines, and a `const` would still be in its temporal dead zone.
+function split(source) { return splitFrontmatter(source); }
 function nested(fm, parent, child) {
   const start = fm.search(new RegExp('^' + parent + ':[ \\t]*(?:#.*)?$', 'm'));
   if (start < 0) return undefined;
@@ -286,18 +287,9 @@ function list(fm, key) {
   }
   return [];
 }
-function factsByLabel(body) {
-  const facts = new Map();
-  const text = sectionText(body, 'Facts & Assumptions');
-  const paragraphs = text.split(/\n\s*\n/);
-  for (const paragraph of paragraphs) {
-    const match = paragraph.trim().match(/^\[([FAL]\d+)\]\s*([\s\S]*)$/);
-    if (!match) continue;
-    const links = [...paragraph.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map((link) => link[1]);
-    facts.set(match[1], { label: match[1], text: paragraph, links });
-  }
-  return facts;
-}
+// The Facts block, the section reader and the citation's source sections all
+// come from tools/facts-block.mjs, the one parser for this grammar.
+function factsByLabel(body) { return factParagraphs(body); }
 function numberedSteps(body) {
   const steps = new Map();
   const sections = ['Proof', 'Refutation', 'Counterexample', 'Verification'];
@@ -311,11 +303,6 @@ function explicitTokens(text) {
   const out = new Set();
   for (const match of text.matchAll(/\b(?:step\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) out.add(match[1] ?? match[2]);
   return out;
-}
-function sectionText(body, heading) {
-  const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const match = body.match(new RegExp(`^##\\s+${escaped}\\s*$\\r?\\n([\\s\\S]*?)(?=^##\\s+|(?![\\s\\S]))`, 'm'));
-  return match?.[1] ?? '';
 }
 function normalise(value) {
   return value.replace(/\r?\n/g, ' ').replace(/\s+/g, ' ').trim();

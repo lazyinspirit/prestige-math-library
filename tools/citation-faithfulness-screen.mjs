@@ -10,14 +10,10 @@
 // bound variables, so every hit needs a human read. Reports per item so a caller
 // can record which items screened clean.
 import { readFileSync, existsSync } from 'fs';
+import { factLines, sectionText } from './facts-block.mjs';
 
 const STATEMENT_HEADINGS = ['Statement', 'Statement refuted', 'Definition', 'Example', 'Counterexample', 'Remark'];
 
-function sectionText(md, heading) {
-  const esc = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const m = md.match(new RegExp(`^##\\s+${esc}\\s*$\\r?\\n([\\s\\S]*?)(?=^##\\s+|(?![\\s\\S]))`, 'm'));
-  return m?.[1] ?? '';
-}
 function statementOf(id) {
   const p = `items/${id}.md`;
   if (!existsSync(p)) return null;
@@ -47,15 +43,13 @@ function tokens(tex) {
   }
   return out;
 }
+// The Facts block comes from tools/facts-block.mjs, the one parser for this
+// grammar. The regex this replaced ended its lazy body at `(?=\n\n\[[LFA]\d+\]|\n*$)`
+// and, under `m`, the second branch matches at the first line end — so it read
+// one line per fact, which is exactly what `factLines` returns. Verified entry
+// for entry over all 4,986 published items: identical on every one.
 function parseFacts(md) {
-  const fa = md.split(/\n## Facts & Assumptions\n/)[1];
-  if (!fa) return [];
-  const body = fa.split(/\n## /)[0];
-  const out = [];
-  for (const m of body.matchAll(/^\[([LFA]\d+)\]\s([\s\S]*?)(?=\n\n\[[LFA]\d+\]|\n*$)/gm)) {
-    out.push({ fact: m[1], text: m[2].trim(), targets: [...m[2].matchAll(/\[\[([^\]]+)\]\]/g)].map(x => x[1]) });
-  }
-  return out;
+  return factLines(md).map((f) => ({ fact: f.fact, text: f.text, targets: f.links }));
 }
 
 let ids = process.argv.slice(2);
