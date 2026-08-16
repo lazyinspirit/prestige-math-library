@@ -67,6 +67,38 @@ where practical, else the smallest faithful shortening preserving domain,
 quantifiers, hypotheses, direction and conclusion. **Never substitute a
 description of what a result is for.**
 
+## Your repair authority (owner, 2026-08-16)
+
+**A wrong proof is yours to fix, at steps 3, 6 and 8.** Reporting it and moving on
+is not a disposition. Four repairs are explicitly authorised, and you choose
+whichever the defect actually needs:
+
+1. **Rewrite part of the proof** — the failing step, the wrong construction, the
+   unlicensed inference.
+2. **Write the whole proof** — where the argument is wrong in structure rather
+   than in wording, replace it. A proof whose construction cannot produce its own
+   first object is not repairable by editing sentences.
+3. **Fix the Statement or Definition itself** — if what is written is false, or
+   claims more than the argument gives, or omits a hypothesis or choice scope,
+   correct the claim. A title asserting more than the proof delivers is the same
+   defect and is fatal.
+4. **Add intermediate lemmas** — when a proof runs longer than expected, split it.
+   A step with several distinct conceptual moves is a lemma waiting to be named.
+   The decomposition is a repair in its own right, not an aesthetic preference.
+
+If none of these closes the defect honestly, **narrow the claim or withdraw it**.
+Never patch a proof by inflating what a dependency says.
+
+What is bounded is not your authority but the *stage*: step 8 requires a
+`confirmed_fatal` row before you may touch an item at all, and inside that licence
+all four repairs are open and uncapped. `frontier-14` ended with two true theorems
+whose proofs did not establish them, declared as blockers and left in the level,
+because "a proof rewrite is authoring" was read as a prohibition. It is not — it
+is a description of which of the four you are doing.
+
+Whatever you repair, you own its gates: `precheck` on the item, `depcheck`,
+`citecheck`, and a regenerated contract entry if you changed a cited clause.
+
 ## Standing boundaries
 
 You may add or delete in-flight items as needed. **If you add a result needing a
@@ -175,10 +207,24 @@ For each pair, read `research/<run>-batch-<i>.pages.json`, `.notes.md` and
 ```
 
 An `insufficient` with an empty `missing` is rejected by the gate: name the
-result and the source that carries it. **You author nothing here and edit no
-batch file** — the `3-fix` stage routes your findings to the owning Beta, and
-the re-check will not clear until every pair is `sufficient`, so an unfixed
-finding holds the build rather than passing quietly into step 4.
+result and the source that carries it. The `3-fix` stage routes your findings to
+the owning Beta, and the re-check will not clear until every pair is
+`sufficient`, so an unfixed finding holds the build rather than passing quietly
+into step 4.
+
+**You may repair the scaffold yourself here** (owner, 2026-08-16). The older rule
+said you edit no batch file, and its reason was that two writers on one file
+overwrite each other silently. That reason is gone: stages are strictly
+sequential and nothing dispatches while another stage has work in flight, so no
+Beta is running while you are. Where a *planned* Statement or Definition is
+wrong, correct it; where a planned proof strategy will not close, say so and add
+the intermediate lemmas it needs. Prefer routing genuine breadth work to the
+owning Beta — it holds the sources — and repair directly when the defect is a
+false claim rather than a gap.
+
+The four repairs above apply here to the *plan*: a wrong statement is wrong
+before it is authored, and this is the last point where fixing it costs a
+scaffold entry instead of a rewrite.
 
 Be specific. "Could be deeper" is not a finding; "the orbit–stabiliser theorem is
 absent and Brosnan §0035, already in the ledger, proves it" is.
@@ -202,6 +248,13 @@ must not have scaffolded or authored that batch.
 items, page files, dependency lists, provenance tags, added/deleted results,
 stale judge blocks, gate output. Confirm, refute, amend, revert or extend as the
 evidence warrants. If you add a result, author its proof.
+
+**This is where repairs are cheapest, so make them here.** The text is unfrozen
+and no verdict exists to void, so all four repairs are open at no cost: rewrite
+the failing step, replace a proof whose structure is wrong, correct a false or
+overstrong Statement, or split a long proof into named intermediate lemmas. A
+defect you leave for step 8 costs a frozen-verdict adjudication, a rejudge and a
+resampled refuter; the same defect fixed here costs an edit.
 
 Verify every A-page summary is **exactly two nonempty prose paragraphs, each
 under 150 words** — background and used dependencies first; main definitions,
@@ -270,11 +323,18 @@ takes.
 noticed, because the guard checks only that edits were *licensed*, never that
 rejections were *answered*. The engine now gates on both.
 
-**A fatal defect you cannot fix minimally is still work, not a note.** Where a
-proof's construction is wrong rather than its wording, write the proof properly.
+**A fatal defect you cannot fix minimally is still work, not a note.** Once a
+`confirmed_fatal` row licenses the item, all four repairs are open: rewrite the
+failing step, write the proof afresh where its construction is wrong, correct the
+Statement or Definition, or add the intermediate lemmas a longer-than-expected
+proof needs. Prefer the smallest of those that closes the defect honestly — but
+"smallest" ranges over all four, not over wording alone.
+
 Declining to improvise under a frozen verdict is right; leaving a false or
 unproved statement in the level and reporting it as a blocker is not. If a
-Statement is untrue as written, narrow it or withdraw it.
+Statement is untrue as written, narrow it or withdraw it. `frontier-14` shipped
+two such blockers, both true theorems whose proofs did not establish them, and
+both were repaired in minutes once someone was told to repair them.
 
 The engine takes the `pre-step8` baseline as its own stage before dispatching
 you, and runs the guard as your gate:

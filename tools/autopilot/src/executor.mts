@@ -535,7 +535,7 @@ export class Executor {
     // ONE CAP, and it is the real one.
     //
     // `stage.concurrency` mirrors the dispatcher's own lane cap for that role —
-    // beta 5, reader 5, alpha 3, verified against tools/dispatch.mjs. Those are
+    // beta 9, reader 9, alpha 3, verified against tools/dispatch.mjs. Those are
     // genuine constraints and the engine should respect them.
     //
     // A second, GLOBAL cap used to sit on top (stageCap * 2). That was my

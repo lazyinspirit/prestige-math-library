@@ -105,8 +105,13 @@ const ROLES = Object.freeze({
   // search tool was off for exactly the lanes whose brief is half source
   // research, and the comment below already records what an unsearching lane
   // does instead: it asserts from memory.
-  beta:         { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, web: true, why: 'one per batch, scaffolds and authors' },
-  reader:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 5, web: true, why: 'independent step-6 audit of a foreign batch' },
+  // CAP 9, NOT 5 (owner, 2026-08-16). The alpha cap is 3 and each group Alpha
+  // owns at most 3 batches, so a run can legitimately carry nine. Five throttled
+  // the widest legal run into two waves for no stated reason: the 3-and-3 bound
+  // exists for Alpha's attention span, not for Beta's. The reader lane matches
+  // because 6a dispatches one independent reader per batch.
+  beta:         { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 9, web: true, why: 'one per batch, scaffolds and authors; 3 group Alphas x 3 batches' },
+  reader:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 9, web: true, why: 'independent step-6 audit of a foreign batch, one per batch' },
   // Alpha moved from Sol to Claude Opus 5 (owner, 2026-08-10), keeping xhigh and
   // the 1M window (the `[1m]` id above).
   // `effort` must be explicit: buildClaude defaults the claude runner to 'high',

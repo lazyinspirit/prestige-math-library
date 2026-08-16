@@ -5,25 +5,25 @@ this file remains the canonical agent instruction file.
 
 This repo is the **public math library** served at
 `app.prestige-intelligence.cc/library` by the Prestige Intelligence app
-(bind-mount; see README §How serving works). House style for proofs:
+(bind-mount; README §How serving works). House style for proofs:
 `items/lem-cauchy-bounded.md` is the approved exemplar.
 
 ## Normative docs — read the one governing what you are about to do
 
 | doc | canonical for |
 |---|---|
-| `SCHEMA.md` | the item/page contract: frontmatter, layout, what counts as a material rewrite |
-| `LEVELS.md` | the per-level build, step 0 → 10: actors, artifacts, the ten gates, self-contained scope, the twice-touched escalation |
-| `AUDIT-WORKFLOW.md` | the published-page retro-audit, step A0 → A10: retro-tagging, citation precision, blast radius, waves and batches, decisions D1–D5 / R1–R3 |
-| `ARCHITECTURE.md` | every gate, ledger, brief and visual tier — how each works and which failure it prevents. Read before adding or changing a mechanism |
-| `QUALITY-CONTROLS.md` | the proof-contract, finite-smoke and risk-routing contract in full |
-| `UNATTENDED.md` · `UNATTENDED-AUDIT.md` | the unattended drivers: halt codes, preflight, gate tables, dispatch roles, systemd units. The build driver is the autopilot engine; `run-wave.mjs` still drives the audit |
-| `WORKFLOW.md` | end-to-end runbook, prompt to publish; serving over SSH; the gotchas |
+| `SCHEMA.md` | the item/page contract: frontmatter, layout, material rewrite |
+| `LEVELS.md` | the build, step 0 → 10: actors, artifacts, gates, self-contained scope, the twice-touched escalation |
+| `AUDIT-WORKFLOW.md` | the published-page retro-audit, A0 → A10: retro-tagging, citation precision, blast radius, waves, decisions D1–D5 / R1–R3 |
+| `ARCHITECTURE.md` | every gate, ledger, brief and visual tier — how each works and which failure it prevents. Read before changing a mechanism |
+| `QUALITY-CONTROLS.md` | the proof-contract, finite-smoke and risk-routing contract |
+| `UNATTENDED.md` · `UNATTENDED-AUDIT.md` | the unattended drivers: preflight, gate tables, dispatch roles, blockers. The build driver is `tools/autopilot/`; `run-wave.mjs` drives the audit |
+| `WORKFLOW.md` | end-to-end runbook, prompt to publish; serving over SSH |
 | `README.md` | provenance, judge lineup, citation rules |
-| `briefs/` | the actual subagent prompt text (`LEVELS.md` describes them) |
+| `briefs/` | the actual subagent prompt text |
 
-The subject-specific doc wins over `WORKFLOW.md` where they differ. Neither
-unattended driver ever publishes: step 10 / A10 is the sole owner pause.
+The subject-specific doc wins over `WORKFLOW.md` where they differ. No driver
+ever publishes: step 10 / A10 is the sole owner pause.
 
 ## The publish path
 
@@ -37,13 +37,12 @@ unattended driver ever publishes: step 10 / A10 is the sole owner pause.
    into the file and re-run until clean — the repo stores the strictly
    stratified form, so a step citing phase-k steps sits in phase k+1. Record
    `verification.precheck: pass`.
-3. **Step-6 Alpha-n audit of the WHOLE level, when publishing a level.**
-   Independent readers verify every proof step and in-batch citation in content
-   they did not author; Alpha audits their fixes from disk, then audits
-   cross-batch and cross-level citations. Fatal includes a title or Statement
-   asserting more than the proof gives — the judge reads Statements and cannot
-   see a false title. Required before publish **even when judged**.
-   `LEVELS.md` §"Step 6".
+3. **Step-6 Alpha audit of the WHOLE level.** Independent readers verify every
+   proof step and in-batch citation in content they did not author; Alpha audits
+   their fixes from disk, then the cross-batch and cross-level citations. Fatal
+   includes a title or Statement asserting more than the proof gives — the judge
+   reads Statements and cannot see a false title. Required before publish **even
+   when judged**. `LEVELS.md` §"Step 6".
 4. **Step-7 paired skeptical judge** — runs once, after the step-6 audit, on
    final text, for **every item in the completed level**; authors never judge.
    See §"Paired skeptical judges".
@@ -56,13 +55,13 @@ unattended driver ever publishes: step 10 / A10 is the sole owner pause.
 
 The `/library` renderer lives in the app repo (`web/app/library/`, env
 `MATH_LIBRARY_DIR`); its `.env` is at the app ROOT, not `web/`, and without it
-`auth()` has no session so every draft 404s. `WORKFLOW.md` step 6. The signed-in
+`auth()` has no session so every draft 404s (`WORKFLOW.md` step 6). The signed-in
 owner sees drafts with a DRAFT banner; the public sees only `published`.
 
 ## Model lineup — the single source of truth
 
-Generation for this library **NEVER** goes through the public billed pipelines,
-and a subscription account is **never** wired into the worker service.
+Generation **NEVER** goes through the public billed pipelines, and a subscription
+account is **never** wired into the worker service.
 
 | lane | model | runner and settings |
 |---|---|---|
@@ -75,19 +74,18 @@ and a subscription account is **never** wired into the worker service.
 
 **Binding for this and every future session** (owner, 2026-07-31 Sol default;
 2026-08-10 build Alpha; 2026-08-08 audit lineup). Where a launcher exposes a
-context-window field, set it explicitly to `1000000`; never silently substitute
-another model or a smaller window. `tools/dispatch.mjs` is the mechanical
-expression of this table and passes every setting explicitly: Codex lanes get
-`model_reasoning_effort="xhigh"` and `model_context_window=1000000` (the
-temporary `CODEX_HOME` holds only `auth.json`, no `config.toml`); the claude lane
-gets `--effort xhigh` (`buildClaude` defaults to `high`) and carries its window
-in the `[1m]` model id (that CLI has no window flag).
+context-window field, set it to `1000000`; never silently substitute another
+model or a smaller window. `tools/dispatch.mjs` is the mechanical expression of
+this table: Codex lanes get `model_reasoning_effort="xhigh"` and
+`model_context_window=1000000` (its temporary `CODEX_HOME` holds `auth.json`
+and no `config.toml`); the claude lane gets `--effort xhigh` (`buildClaude` defaults to
+`high`) and carries its window in the `[1m]` model id.
 
-**Scope of the Alpha exception:** the BUILD `alpha` role only, and it buys
-cross-family independence — Alpha adjudicates the DeepSeek and Terra judges.
-Alpha's `refuter` subagents, the Step-6 `reader`, and the published-audit
-`audit-alpha` adjudicator are NOT covered and stay on Sol. The authoring role
-uses Sol, never Terra. Read-only is enforced per runner, never by asking:
+**Scope of the Alpha exception:** the BUILD `alpha` role only; it buys
+cross-family independence, since Alpha adjudicates the DeepSeek and Terra judges.
+Alpha's `refuter` subagents, the Step-6 `reader` and the published-audit
+`audit-alpha` are NOT covered and stay on Sol. The authoring role uses Sol, never
+Terra. Read-only is enforced per runner, never by asking:
 `--sandbox read-only` on Codex, tool-lessness by transport on DeepSeek, an
 `--allowed-tools` allow list on the claude runner.
 `dispatch.mjs --check-read-only` prints it.
@@ -98,17 +96,18 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
 
 - **No permission prompts of ANY kind (owner, 2026-07-30; broadened
   2026-08-11).** Binds every current and future agent.
-  The 2026-08-11 wording is the owner's: *"Do not ask and do not let any agents
-  ask for shell command permissions, edit permissions, web search permissions,
-  git permissions, or any permissions whatsoever."* It binds a compound command
-  as a whole: **no segment of an `&&` chain may raise a prompt either.** Run
-  routine repository reads, writes, web searches, gates, commits and agent
-  dispatches inside the workspace sandbox, choosing non-escalated command forms.
-  On runtimes exposing `dangerouslyDisableSandbox`, pass it on **every** Bash call;
-  otherwise stay within already-granted workspace permissions. Whoever dispatches
-  a subagent owns the prompts it raises: every brief carries this rule. If an operation truly cannot proceed without new authority,
-  **stop and record a blocker** — that is the escape hatch, not a prompt. Committing to a feature branch is routine; pushing, publishing and
-  anything else outward-facing remains a separate owner decision.
+  The owner's wording: *"Do not ask and do not let any agents ask for shell
+  command permissions, edit permissions, web search permissions, git permissions,
+  or any permissions whatsoever."* It binds a compound command as a whole: **no
+  segment of an `&&` chain may raise a prompt either.** Run
+  routine reads, writes, web searches, gates, commits and dispatches inside the
+  workspace sandbox, choosing non-escalated forms. On runtimes exposing
+  `dangerouslyDisableSandbox`, pass it on **every** Bash call; otherwise stay
+  within granted workspace permissions. Whoever dispatches a subagent owns the
+  prompts it raises: every brief carries this rule. If an operation cannot proceed
+  without new authority, **stop and record a blocker** — that is the escape hatch,
+  not a prompt. Committing to a feature branch is routine; pushing, publishing and
+  anything outward-facing remains a separate owner decision.
 
 - **NO LLM DRIVES A STAGE TRANSITION (owner, 2026-08-16; supersedes the
   2026-08-15 supervisor rule).** The engine at `tools/autopilot/` owns coverage,
@@ -147,11 +146,11 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
 
 ### Roles, decisions and gates in a build
 
-- **Beta batch capacity (owner, 2026-08-01).** Each Beta scaffolds and authors at
-  most **two A/B pairs**. Step 0 keeps every batch manifest at that cap, and
-  `content-policy.mjs --manifest-only` rejects an in-flight manifest with more
-  than two A pages. The bound creates no dependency between otherwise independent
-  pairs and does not change their legal build order.
+- **Beta batch capacity (owner, 2026-08-01; lane cap raised 2026-08-16).** Each
+  Beta scaffolds and authors at most **two A/B pairs**, enforced by
+  `content-policy.mjs --manifest-only`. The **beta and reader lane caps are 9**:
+  the alpha cap is 3 and each group Alpha owns ≤3 batches, so a run may carry
+  nine, and a cap of 5 throttled the widest legal run for no stated reason.
 
 - **Step-5/6 ownership (owner, 2026-07-31).** The Betas that scaffolded the
   batches personally author all Step-5 content after Step 4, and at Step 6 are
@@ -172,16 +171,33 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   `sufficient` / `insufficient` verdict per pair in
   `research/<run>-alpha-<g>-step3-scaffold-review.md`, naming for each
   `insufficient` the exact results to add and the source that carries them.
-  Alpha authors nothing here and edits no batch file; the `3-fix` stage routes
-  findings to the owning Beta mechanically, and Alpha re-checks before step 4
-  splices. Step 3 is the last point where thinness costs a scaffold edit, not a
-  rewrite. **Group Alphas (owner, 2026-08-14):** one Alpha per **≤3 batches** at
+  The `3-fix` stage routes findings to the owning Beta mechanically, and the
+  `3-recheck` gate will not clear while any pair is `insufficient`, so step 4
+  cannot splice past an unfixed finding. **Alpha may also repair the scaffold
+  itself** (owner, 2026-08-16): the older no-edit rule existed because two
+  writers on one batch file overwrite each other, and the stage barrier removed
+  that — no Beta runs while step 3 does. Step 3 is the last point where thinness
+  costs a scaffold edit rather than a rewrite. **Group Alphas (owner, 2026-08-14):** one Alpha per **≤3 batches** at
   step 3 and 6a/6b (`dispatch.mjs` alpha cap 3), outputs namespaced. The **lead
   Alpha** alone owns steps 4, 6c, 8, 9, the receipts and step 10 — one prose
   writer, one global citation reader, one exact-hash ledger. `ARCHITECTURE.md`
   §6. **Step 4's splice is not Alpha's**: `tools/splice-plan.mjs` transcribes ids
   mechanically and refuses on a `requires` disagreement, a differing item list,
   an oversize page or a duplicate id — the refusal is what Alpha adjudicates.
+
+- **Alpha repairs wrong mathematics (owner, 2026-08-16).** At steps 3, 6 and 8 a
+  wrong proof is Alpha's to fix, not to report. Four repairs are authorised and
+  Alpha picks whichever the defect needs: **rewrite part of the proof**, **write
+  the whole proof** where its construction rather than its wording is wrong,
+  **correct the Statement, Definition or title** where what is written is false
+  or claims more than the argument gives, or **add intermediate lemmas** where a
+  proof runs longer than expected. If none closes the defect honestly, narrow or
+  withdraw the claim; never inflate a dependency. The *stage* is what is
+  bounded — step 8 needs a `confirmed_fatal` row first — and inside that licence
+  all four are open and uncapped. `frontier-14` shipped two true theorems whose
+  proofs did not establish them, declared as blockers because "a proof rewrite is
+  authoring" was read as a prohibition rather than as a description of which
+  repair was needed.
 
 - **Alpha adjudicates judges, and the 30-second threshold (owner, 2026-07-31).**
   Alpha is the sole adjudicator of a paired-judge rejection: it reads the frozen
@@ -192,10 +208,10 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   ids in `needs_rejudge`. **Every rejection is adjudicated, not the interesting
   ones** — `step8-guard` checks only that edits were licensed, and the closure
   gate checks the other direction, that rejections were answered.
-  In any Alpha audit or adjudication, a gap between proof steps a competent
-  reader closes in **30 seconds is nonfatal**: record or polish it, never call it
-  fatal. The rule covers gaps *between steps* — a defect in the Statement itself
-  is never 30-second. **At step 8 the polish is withdrawn.**
+  A gap between proof steps a competent reader closes in **30 seconds is
+  nonfatal**: record or polish it, never call it fatal. It covers gaps *between
+  steps* — a defect in the Statement itself is never 30-second. **At step 8 the
+  polish is withdrawn.**
 
 - **Alpha proof-refuter delegation (owner, 2026-07-31).** For every Alpha-n audit,
   Alpha dispatches read-only proof-refuter subagents held to the paired judges'
@@ -226,14 +242,13 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   `judge-adjudication-unhashed`). Pre-R1 ledgers lack `item_sha256` and are
   published rather than re-gated. Commands: `LEVELS.md` §"Step 8".
 
-- **Step-10 fatal-error report and sole pause (owner, 2026-07-31).** Step 9 is a
-  sweep and does not pause the build. At the end of step 10, before the owner
-  pause, the lead Alpha gives a complete account of every fatal error found and
-  fixed, grouped by defect type (invalid inference, incorrect dependency citation,
-  false or overstrong statement, missing hypothesis or choice scope, invalid
-  witness) and by location (title/Statement, proof, Facts, Remark, page prose),
-  each naming the id and its disposition. Evidence is the Beta/Alpha/judge
-  ledgers; concision must not omit a fatal defect.
+- **Step-10 fatal-error report and sole pause (owner, 2026-07-31).** Step 9 does
+  not pause the build. At the end of step 10 the lead Alpha accounts for every
+  fatal error found and fixed, grouped by defect type (invalid inference,
+  incorrect dependency citation, false or overstrong statement, missing hypothesis
+  or choice scope, invalid witness) and by location (title/Statement, proof,
+  Facts, Remark, page prose), each naming the id and its disposition. Evidence is
+  the ledgers; concision must not omit a fatal defect.
 
 ### Paired skeptical judges (owner, 2026-07-31; second lane changed 2026-08-04)
 
@@ -286,13 +301,12 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
 - **Self-contained scope; build the machinery; split the page (owner,
   2026-08-01, extended 2026-08-11).** No item rests on a result the library has
   not established. Beta searches reputable sources for the exact statement of any
-  well-known result it needs, then proves that result from available library
-  dependencies. **If that fails, Beta builds the missing prerequisite definitions
-  and theorems.** Dropping an important result for want of a definition or lemma
-  that could have been written is not a permitted disposition;
-  `deferred` / `out-of-scope` is reserved for material genuinely belonging to
-  another page's topic, or resting on a whole subject area the library has not
-  reached (a computability level, a measure-theory level).
+  well-known result it needs, then proves it from available library dependencies.
+  **If that fails, Beta builds the missing prerequisite definitions and
+  theorems.** Dropping a result for want of a definition or lemma that could have
+  been written is not a permitted disposition; `deferred` / `out-of-scope` is for
+  material belonging to another page's topic, or resting on a subject area the
+  library has not reached.
   **An A page over 60 items is SPLIT** into two or more A pages, each with its own
   B companion, summary and place in reading order; splitting is never dropping.
   `validate-plan.mjs` enforces it as `size` at steps 0, 2 and 4 — split before
@@ -314,47 +328,42 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   pad; never drop valuable results for ergonomics.
 
 - **Source-grounded, dependency-closed scaffolding (owner, 2026-07-30; dependency
-  provenance order 2026-08-01).** Before constructing an A/B scaffold, Beta
-  searches reputable mathematical sources on the web for the relevant
-  definitions, theorem and corollary statements, counterexamples and proof
-  strategies, and records the sources and any convention disagreements in its
-  notes. It has read access to the full published library and must open every
-  published item it intends to cite. Every load-bearing dependency is established
-  by published content or by an earlier item inside the pair; the only exception
-  is the documented external fallback above.
+  provenance order 2026-08-01).** Before scaffolding, Beta searches reputable
+  sources for the relevant definitions, statements, counterexamples and proof
+  strategies, and records them and any convention disagreements in its notes. It
+  must open every published item it intends to cite. Every load-bearing
+  dependency is established by published content or by an earlier item inside the
+  pair; the only exception is the documented external fallback above.
   **Provenance order, and the proof's provenance never changes it:** Beta must
   never make an `ai-generated` Statement/Construction a load-bearing scaffold or
-  proof dependency. `literature-derived` and `ai-altered` statements may be used
-  freely, but an AI-adapted target is never auto-trusted — when its exact claim
-  or conventions are in doubt, Beta or Alpha verifies it against reputable
-  literature. A published item without component `provenance` (or the older
-  `authorship` fallback) is `legacy-unclassified`: that is not evidence it is
-  AI-generated, and not a reason to invent a label. Before using one, open it and
-  either confirm from your own knowledge that the exact statement is established,
-  or find reputable sources for that statement and its conventions; record which
-  route in the batch notes. If neither establishes confidence, do not make it
-  load-bearing: prove it locally, rescope, or use the documented fallback.
+  proof dependency. `literature-derived` and `ai-altered` may be used freely, but
+  an AI-adapted target is never auto-trusted — when its claim or conventions are
+  in doubt, verify against reputable literature. A published item with no
+  component `provenance` (or the older `authorship`) is `legacy-unclassified`:
+  not evidence it is AI-generated, and not a reason to invent a label. Before
+  using one, open it and either confirm from your own knowledge that the exact
+  statement is established, or source it; record which route in the batch notes.
+  If neither gives confidence, do not make it load-bearing: prove it locally,
+  rescope, or use the documented fallback.
 
 - **Generated-claim minimization (owner, 2026-08-01).** Source-backed statements
   are the default. Beta must not invent a theorem, proposition, definition, false
-  statement, or mathematical remark merely to enrich a page or bridge an
-  inconvenient proof. It may introduce only a directly verifiable
-  `ai-generated` corollary, or a checkable example/counterexample, and neither
-  may be load-bearing (see the provenance order above). Keep a would-be
-  proof-decomposition lemma inline, or
-  replace it with a literature-derived or AI-altered statement. A theorem in the
-  dependency backbone needs literature support or a locally proved,
-  source-grounded route.
+  statement or mathematical remark merely to enrich a page or bridge an
+  inconvenient proof. It may introduce only a directly verifiable `ai-generated`
+  corollary, or a checkable example/counterexample, and neither may be
+  load-bearing. Keep a would-be decomposition lemma inline, or replace it with a
+  literature-derived or AI-altered statement. A theorem in the dependency
+  backbone needs literature support or a locally proved, source-grounded route.
 
 - **Component provenance and AI-generated truth risk (owner, 2026-08-01).** Beta
   assigns `provenance.statement` and `provenance.proof` to **every**
-  mathematical-content item it authors, with a rationale for each in its batch
-  notes. Statement means the Definition/Statement or the exact construction;
-  proof means the local Proof, Verification, or Refutation. Each component is
-  `literature-derived`, `ai-altered`, or `ai-generated`; proof may instead be
-  `not-supplied`, and definitions/remarks use `not-applicable` (SCHEMA §3). A
-  generated proof does not make a source-derived statement AI-generated;
-  `proved_here` separately says whether the library supplies a complete proof.
+  mathematical-content item it authors, with a rationale in its batch notes.
+  Statement means the Definition/Statement or exact construction; proof means the
+  local Proof, Verification or Refutation. Each is `literature-derived`,
+  `ai-altered` or `ai-generated`; proof may be `not-supplied`, and
+  definitions/remarks `not-applicable` (SCHEMA §3). A generated proof does not
+  make a source-derived statement AI-generated; `proved_here` separately says
+  whether the library supplies a complete proof.
   The truth-risk flag is an AI-generated **statement or construction**, not an
   AI-generated proof: Beta searches for a counterexample before authoring or
   repairing one whenever there is concrete doubt. Alpha checks both labels at
@@ -365,34 +374,30 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
 
 - **Source depth and the canonical-coverage harvest (owner, 2026-08-11).** In
   every scaffold: (a) each A/B pair is backed by **at least two independent
-  treatments**, at least one a textbook, monograph, or full lecture-note set with
+  treatments**, at least one a textbook, monograph or full lecture-note set with
   a harvestable table of contents — Wikipedia and encyclopedia entries are
-  convention tiebreakers only and can never be a pair's primary backing; (b) for
-  every source, Beta records the exact chapter/section range it read and
-  enumerates **that source's own section and named-result headings** over that
-  range; (c) every harvested heading receives an explicit disposition —
-  `included` (naming the scaffolded item id), `inline` (naming the item whose
-  proof absorbs it), `already-published` (naming the published item), `deferred`,
-  or `out-of-scope` — and the last two need a written reason about **that
-  specific result**. Source-anchored, never a minimum count: a count invites the
-  padding scaffold richness forbids. The artifact is
-  `research/<run>-batch-<i>.coverage.json`,
-  gated by `tools/coverage-checklist.mjs` at **step 2** (where acting on a gap
-  still costs a scaffold entry, not a rewrite) and again at **step 6**, where
-  Alpha additionally checks the harvest is *faithful* to the sources — the gate
-  only checks it is structurally complete and still true of disk. `LEVELS.md`
-  §"Step 2"; error codes `ARCHITECTURE.md` §3.11b. Legacy pages are not
-  retro-harvested.
+  convention tiebreakers only and never a pair's primary backing; (b) Beta
+  records the exact chapter/section range it read per source and enumerates
+  **that source's own section and named-result headings** over it; (c) every
+  harvested heading gets a disposition — `included` (naming the item id),
+  `inline` (the item whose proof absorbs it), `already-published` (the published
+  item), `deferred` or `out-of-scope` — the last two with a written reason about
+  **that specific result**. Source-anchored, never a minimum count: a count
+  invites the padding scaffold richness forbids. The artifact is
+  `research/<run>-batch-<i>.coverage.json`, gated by `coverage-checklist.mjs` at
+  **step 2** and again at **step 6**, where Alpha additionally checks the harvest
+  is *faithful* — the gate only checks it is structurally complete and true of
+  disk. `LEVELS.md` §"Step 2"; error codes `ARCHITECTURE.md` §3.11b. Legacy pages
+  are not retro-harvested.
 
 - **Citation liveness; RECOVER BEFORE REPLACE (owner, 2026-08-15).**
   `coverage-checklist` checks a source URL is *present*; `tools/url-sweep.mjs`
   checks a reader can *open* it — a gate at **steps 2 and 6**,
   `--recover --fail-on-dead`. On a dead source, **recover before re-sourcing**:
-  it queries the Wayback index under every host variant — a document moved behind
-  a new subdomain is archived only under its old host, so querying the citation's
-  host reads as "never archived". Re-source only once recovery fails:
-  replacing a recoverable source costs a re-harvest and rewrites every backed
-  item's provenance. `ARCHITECTURE.md` §3.11c.
+  it queries the Wayback index under every host variant, because a document moved
+  behind a new subdomain is archived only under its old host. Re-source only once
+  recovery fails: replacing a recoverable source costs a re-harvest and rewrites
+  every backed item's provenance. `ARCHITECTURE.md` §3.11c.
 
 - **Beta proof-design discipline (owner, 2026-07-31).** Before authoring a proof,
   Beta prepares a proof-obligation map assigning every substantive subclaim to an
@@ -417,12 +422,11 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   judge agent.
 
 - **No applied `\iota(n)` for natural numbers (owner, 2026-08-11, standing).** Do
-  not write the canonical embedding explicitly around a natural number —
-  `\iota(n)`, `\iota(0)`, `\iota(k!)`. Write the number: to a reader who has not
-  just read the embedding lemma it looks like an undefined function. **Bare
-  `\iota` is untouched and still correct** as the name of a basis inclusion in a
-  universal property, as in a free group `(F,\iota)` with `\phi\circ\iota=\iota'`;
-  only the *applied* form is banned. Enforced batch-scoped by `content-policy.mjs`
+  not write the canonical embedding around a natural number — `\iota(n)`,
+  `\iota(0)`, `\iota(k!)`. Write the number: to a reader who has not just read the
+  embedding lemma it looks like an undefined function. **Bare `\iota` is untouched
+  and still correct** as a basis inclusion in a universal property, as in
+  `(F,\iota)` with `\phi\circ\iota=\iota'`; only the *applied* form is banned. Enforced batch-scoped by `content-policy.mjs`
   error `notation-iota-applied`, so new content is gated and the legacy corpus is
   not retro-flagged — cleaning the ~350 published items carrying it is a separate
   owner decision, and a real edit per item, never a `sed` pass.
@@ -446,10 +450,10 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   once, (c) an anchored disposition of empty, zero, one, degenerate, endpoint,
   nonempty-choice and both iff-direction cases. **A templated `not_applicable`
   boundary row is not a disposition** — `--strict` checks only that the eight are
-  present; on `frontier-13` two false template rows each hid a fatal defect, and
-  on `frontier-14` three did. `boundary-audit.mjs --fail-on-contradicted` clusters
-  reused rationales; `citation-fidelity.mjs --fail-on-missing-quote` catches a
-  fact that widens what it cites.
+  present; on `frontier-13` two false template rows each hid a fatal defect, and on
+  `frontier-14` three did. `boundary-audit.mjs --fail-on-contradicted` clusters
+  reused rationales; `citation-fidelity.mjs --fail-on-missing-quote` catches a fact
+  that widens what it cites.
   The engine gates all of this: `merge-proof-contracts.mjs` first (a merge that
   fails means nothing below it claims to have passed over a stale file), then
   `proof-contract --strict`, `finite-smoke`, `risk-report`, the two audits above
@@ -490,34 +494,33 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   overrides the read-only boundary: Beta and Alpha may repair a **published item
   the current level depends on** when its Definition, Statement, Fact, citation or
   equally load-bearing prose is an unambiguous falsehood. Not a licence to choose
-  between conventions, improve exposition, close a 30-second gap, or extend. The replacement must be either (a) the exact statement,
-  conventions and hypotheses included, checked against a reputable source and
-  recorded with its working URL, or (b) a directly checkable elementary
-  correction — a short arithmetic, set-theoretic, logical or definition-unfolding
-  derivation written into the repair record, never an unsupported nontrivial
-  theorem. Take a dedicated touch snapshot before the first edit, record the
-  error, replacement, validation route and provenance change in Alpha's
-  `research/<run>-published-dependency-repairs.md`, make the smallest correction,
-  never rename or remove an id, then run `impact-audit.mjs` from that baseline
-  and resolve every logical and direct-citation consumer. **No author
+  between conventions, improve exposition, close a 30-second gap, or extend. The
+  replacement is either (a) the exact statement with its conventions and
+  hypotheses, checked against a reputable source and recorded with its working
+  URL, or (b) a directly checkable elementary correction written into the repair
+  record — never an unsupported nontrivial theorem. Take a dedicated touch
+  snapshot before the first edit, record the error, replacement, validation route
+  and provenance change in `research/<run>-published-dependency-repairs.md`, make
+  the smallest correction, never rename or remove an id, then run
+  `impact-audit.mjs` from that baseline and resolve every consumer. **No author
   certifies its own repair** — a Beta's is certified by Alpha, Alpha's by a
-  Step-6 reader. Delete stale `verification.judge` and the obsolete
-  `verification.audited`; both judge lanes rejudge the final text, and the
-  delegated public gate is `verification.verified` with
-  `scope: published-dependency-repair` and `delegated_by: owner`, which `depcheck`
-  already recognizes. A `proved_here: false` item instead gets a fresh
+  Step-6 reader. Delete stale `verification.judge` and `verification.audited`;
+  both lanes rejudge the final text, and the delegated public gate is
+  `verification.verified` with `scope: published-dependency-repair` and
+  `delegated_by: owner`, which `depcheck` recognizes. A `proved_here: false` item
+  instead gets a fresh
   `sources_checked` record. If the correction or any consumer needs a debatable
   restatement, a new theorem, a deletion, a changed reading order, or leaves an
-  impact queue open, it is not "obvious": report it for the owner rather than
-  applying a partial public repair. Full protocol: `WORKFLOW.md`, `LEVELS.md` §6.
+  impact queue open, it is not "obvious": report it for the owner. Full protocol:
+  `WORKFLOW.md`, `LEVELS.md` §6.
 
 - **Published-page audit workflow (owner, 2026-08-02).** `AUDIT-WORKFLOW.md` is
   normative for the retro-audit of published pages. Inside audit scope only, it
   supersedes three standing rules by owner decision — stated in full at its §2,
   summarised here so no future session mistakes them for drift:
   1. **Legacy provenance IS retro-tagged**, by audited determination with a
-     durable per-item ledger row, never by guessing. Uncertainty never falls
-     toward a *sourced* label nor toward `ai-generated`: that needs a positive
+     durable per-item ledger row, never by guessing. Uncertainty falls toward
+     neither a *sourced* label nor `ai-generated`: the latter needs a positive
      finding of novelty, a recoverable restatement is `ai-altered`, and an
      undecidable case escalates to Alpha.
   2. **The audit lineup** is in the model table above (owner, 2026-08-08). The
@@ -532,11 +535,11 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
      and reading-order changes remain owner-only.
 
   **A7 is an exception to the build's whole-level Step-7 sweep** (owner,
-  2026-08-08): A2/A6 already read the wave, so A7 and any new A8 repair rejudge
-  only the ids in `wave<k>-rejudge-targets.json`; provenance-only retags are not
-  judge targets. A public-interface repair repeats impact closure and refreshes a
+  2026-08-08): A2/A6 already read the wave, so A7 and any A8 repair rejudge only
+  the ids in `wave<k>-rejudge-targets.json`; provenance-only retags are not judge
+  targets. A public-interface repair repeats impact closure and refreshes a
   targeted rejudge receipt **for the changed item only**, validated by
-  `apply-judge-stamps` before the stamp is written (§9). The repair stamp is
+  `apply-judge-stamps` before the stamp is written (§9). The stamp is
   `verification.verified`, `scope: published-audit`, `delegated_by: owner`. Every
   build safeguard carries over, step 8's fatal-only rule included. **Already-tagged content is never audit scope** (owner,
   2026-08-02, standing): an item carrying both component-provenance tags is not
@@ -568,8 +571,8 @@ taste:
 
 - **Forward references** (owner-authorised 2026-07-25): `forward_refs` in item
   frontmatter (SCHEMA §3) plus `tools/fwdcheck.mjs` (`ARCHITECTURE.md` §3.3). A
-  forward reference's CONSEQUENCES are marked the same way, because a consequence
-  may use it in its own proof.
+  forward reference's CONSEQUENCES are marked the same way — a consequence may
+  use it in its own proof.
 - **The ‡ tier** (owner instruction 2026-07-25): `proved_here: false` in
   frontmatter, the `not-proved-here` category, `tools/extcheck.mjs`
   (`ARCHITECTURE.md` §3.4). The accent propagates along `deps` so consequences
@@ -577,14 +580,14 @@ taste:
   developed here. It serves the `deferred-*` catalogue pages, the choice and
   independence citations, and the documented external fallback above — **do not
   delete this machinery**; it is what makes that fallback honest to readers.
-- **Flowcharts are BIRDS-EYE:** only `landmark: true` items are nodes, edges are
-  the transitive reduction of nearest-landmark-ancestor. Curate landmarks (main
-  theorems, key definitions, key lemmas); never revert to one-node-per-item.
+- **Flowcharts are BIRDS-EYE:** only `landmark: true` items are nodes; edges are
+  the transitive reduction of nearest-landmark-ancestor. Curate landmarks; never
+  revert to one-node-per-item.
 - **The verification caption stays.** An always-visible note under the provenance
   pill reads "✓ N results · all verified · K also independently AI-judged", then
-  explains that every result is machine-checked and owner-audited and the judge
-  is an ADDITIONAL review — so items not AI-judged were owner-verified, NOT
-  failures. A bare "judge 31/34" headline is banned: it reads as failures.
+  explains that every result is machine-checked and owner-audited and the judge is
+  an ADDITIONAL review — items not AI-judged were owner-verified, NOT failures. A
+  bare "judge 31/34" headline is banned: it reads as failures.
 - **Draft safety in the app repo — both are correctness.** The search index is
   published-only for the public: it is a file in the browser, so shipping drafts
   would publish unpublished mathematics to anyone with devtools. The owner's
@@ -594,5 +597,4 @@ taste:
   the routes await `auth()` and show drafts to the owner only, so caching
   rendered pages would leak drafts or hide them.
 
-If a future session is tempted to "improve" the look: STOP. Only the owner
-reopens it.
+If tempted to "improve" the look: STOP. Only the owner reopens it.

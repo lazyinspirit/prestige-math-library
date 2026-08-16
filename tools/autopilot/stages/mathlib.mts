@@ -268,7 +268,7 @@ export const stages = [
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
     pattern: resultPattern('beta', 'batch-\\d+'),
     labelFor: (u) => `batch-${u}`,
-    concurrency: 5,
+    concurrency: 9,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
       label: `batch-${u}`,
@@ -331,7 +331,7 @@ export const stages = [
     units: batches,
     pattern: resultPattern('beta', 'fix-batch-\\d+'),
     labelFor: (u) => `fix-batch-${u}`,
-    concurrency: 5,
+    concurrency: 9,
     // A batch with no findings still needs a covering result, so the fix task
     // is written for every batch and a Beta with nothing to do says so and
     // exits. Making "no findings" a fast no-op is cheaper than making the
@@ -460,7 +460,7 @@ export const stages = [
     units: batches,
     pattern: resultPattern('beta', 'author-batch-\\d+'),
     labelFor: (u) => `author-batch-${u}`,
-    concurrency: 5,
+    concurrency: 9,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'beta',
       label: `author-batch-${u}`,
@@ -484,7 +484,7 @@ export const stages = [
     // zero having written its report over reader-1's.
     artifacts: (ctx, u) => `research/${ctx.run}-reader-${u}.md`,
     labelFor: (u) => `reader-${u}`,
-    concurrency: 5,
+    concurrency: 9,
     plan: (ctx, pending) => pending.map((u: any) => ({
       role: 'reader',
       label: `reader-${u}`,

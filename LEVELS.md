@@ -441,10 +441,16 @@ real examples development; is the proof decomposition honest; does the pair need
 splitting at 60 items. Output is
 `research/<run>-alpha-step3-scaffold-review.md`, a `sufficient` /
 `insufficient` verdict per pair with the exact results to add and the source
-that carries them. Alpha authors nothing here and edits no batch file: the
-`3-fix` stage routes findings to the owning Beta mechanically, and the `3-recheck`
-gate will not clear while any pair is still `insufficient`, so step 4 cannot
-splice past an unfixed finding. This is the last point where fixing thinness costs a scaffold edit
+that carries them. The `3-fix` stage routes findings to the owning Beta
+mechanically, and the `3-recheck` gate will not clear while any pair is still
+`insufficient`, so step 4 cannot splice past an unfixed finding.
+
+**Alpha may repair the scaffold directly** (owner, 2026-08-16). The older rule
+forbade it because two writers on one batch file overwrite each other silently;
+the stage barrier removed that reason, since no Beta runs while step 3 does.
+A wrong planned Statement is wrong before it is authored — correct it here,
+where it costs a scaffold entry instead of a rewrite. Prefer routing genuine
+breadth work to the owning Beta, which holds the sources. This is the last point where fixing thinness costs a scaffold edit
 rather than a rewrite — it exists because `group-actions-and-cayleys-theorem`
 published without the orbit–stabiliser theorem and nothing caught it until a
 reader did. `briefs/alpha.md` §"Stage 0".
