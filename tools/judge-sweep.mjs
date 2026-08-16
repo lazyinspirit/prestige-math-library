@@ -10,6 +10,7 @@
 import { closeSync, existsSync, mkdirSync, openSync, readFileSync, readdirSync, rmSync, statSync, utimesSync, writeFileSync } from "node:fs";
 import { spawn } from "node:child_process";
 import { tsxLoader } from "./paths.mjs";
+import { verdictIsCurrent } from "./judge-currency.mjs";
 
 const argv = process.argv.slice(2);
 const value = (flag) => {
@@ -151,7 +152,10 @@ const currentContextHash = async (id) => {
   if (row.id !== id || typeof row.context_sha256 !== "string") {
     throw new Error(`${id}: malformed current context hash`);
   }
-  return row.context_sha256;
+  // `item_sha256` is what the byte-identical clause below reads. It has been on
+  // every verdict row since it was added; an older ledger without it simply
+  // fails that clause and falls back to the context hash, which is stricter.
+  return { context: row.context_sha256, item: typeof row.item_sha256 === "string" ? row.item_sha256 : null };
 };
 // Both model queues attest against the identical current prompt. Build its hash
 // once per item rather than parsing the same A/B-pair context twice before any
@@ -274,13 +278,20 @@ const acquireModelSlot = async (model) => {
     await pause(SLOT_RETRY_MS);
   }
 };
+/** Which items this model still owes a verdict on.
+ *
+ *  The currency rule is `tools/judge-currency.mjs`, shared with
+ *  `level-coverage.mjs`. This used to implement only clause (a) — the frozen
+ *  pair context — while the gate that checks its work honoured clause (b) too,
+ *  so the sweep spent calls re-judging items the gate already considered
+ *  covered. Two readings of one rule is the defect; the spend is the symptom. */
 const pendingFor = (model) => ids
   .filter((id) => {
     const current = currentHashes.get(id);
     if (!current) throw new Error(`${id}: missing current judge context hash`);
     const modelRows = history.get(id)?.get(model) ?? [];
     return ![...modelRows].reverse().some((row) =>
-      typeof row.keep === "boolean" && row.context_sha256 === current,
+      typeof row.keep === "boolean" && verdictIsCurrent(row, current),
     );
   })
   .slice(0, limit);

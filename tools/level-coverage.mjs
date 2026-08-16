@@ -19,6 +19,7 @@ import { spawnSync } from 'node:child_process';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tsxLoader } from './paths.mjs';
+import { verdictIsCurrent } from './judge-currency.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -448,12 +449,22 @@ for (const id of judgePath ? judgeScope : []) {
   const now = verifyCurrent ? currentContextHash(id) : null;
   const current = now?.context ?? null;
   const currentItem = now?.item ?? null;
+  // The per-lane currency rule is tools/judge-currency.mjs, shared with
+  // tools/judge-sweep.mjs — the tool that decides which items to SPEND a judge
+  // call on. The two implemented it separately and disagreed: the sweep read
+  // clause (a) only and re-judged every page-mate of every repair, work this
+  // gate already considered covered. One reading, one file.
+  //
+  // Rows are grouped by context hash, so a group's `hash` IS every member row's
+  // `context_sha256`; passing it per row is the same test, spelled once.
   const coversCurrent = ([hash, byModel]) => {
     if (!verifyCurrent) return true;
-    if (hash === current) return true;
-    // (b): every lane's verdict was cast against this exact item text.
-    return Boolean(currentItem)
-      && JUDGES.every((model) => byModel.get(model)?.item_sha256 === currentItem);
+    // Every lane's verdict must be current — clause (a) via the group's shared
+    // context hash, or clause (b) via that lane's own item hash.
+    return JUDGES.every((model) => verdictIsCurrent(
+      { context_sha256: hash, item_sha256: byModel.get(model)?.item_sha256 },
+      { context: current, item: currentItem },
+    ));
   };
   const eligible = [...contexts.entries()].filter((entry) =>
     coversCurrent(entry) && JUDGES.every((model) => entry[1].has(model)));
