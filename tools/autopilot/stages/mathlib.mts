@@ -259,11 +259,15 @@ const scaffoldGate = (ctx, { requireSufficient = false } = {}) =>
     liveness: { pattern: /(\d+)\/(?:\d+) A page\(s\) reviewed/.source, min: 1, unit: 'reviewed pairs' },
   });
 
-/** Blast radius, from the step-4 baseline. A snapshot taken after authoring
- *  makes the diff empty by construction and the gate confirms instead of
- *  checking — hence the separate `4-baseline` stage before step 5. */
+/** Blast radius, `pre-author -> post-6b`. Both endpoints are load-bearing:
+ *  a baseline taken after authoring makes the diff empty by construction
+ *  (hence `4-baseline` before step 5), and without an explicit `--to` the
+ *  tool diffs against the ledger's LAST snapshot — which at 6c time was
+ *  `pre-author` itself, so the gate diffed the baseline against itself and
+ *  confirmed "0 changed" over the whole level (hence `6b-baseline` before
+ *  6c). The 6c Alpha's own later edits fall inside the step-8 window. */
 const impactGate = (ctx) => gate('impact-audit', ['node', 'tools/impact-audit.mjs',
-  '--touches', touchesPath(ctx), '--from', 'pre-author',
+  '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', 'post-6b',
   '--receipt', `research/${ctx.run}-impact.json`,
 ]);
 
@@ -577,6 +581,25 @@ export const stages = [
     // `--require-reviewed` belongs here, not at step 5: a `risk_review` is a
     // disposition only Alpha may write, and Alpha writes it at step 6.
     gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true })],
+  },
+
+  {
+    id: '6b-baseline',
+    label: 'post-6b touch snapshot (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-post-6b'),
+    artifacts: (ctx) => touchesPath(ctx),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'snap-post-6b',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-6b'],
+    }],
+    gatesWaived: 'A snapshot has nothing to check beyond its own existence, which `artifacts` '
+      + 'already requires; it is the right endpoint of the 6c impact window, capturing '
+      + 'authoring plus every 6a/6b repair.',
   },
 
   {

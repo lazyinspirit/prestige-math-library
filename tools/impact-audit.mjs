@@ -14,7 +14,7 @@
 // require a documented review of every current logical consumer and every
 // direct citation consumer.
 
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -67,8 +67,12 @@ let ledger;
 try { ledger = JSON.parse(readFileSync(resolvePath(touchesPath), 'utf8')); }
 catch (cause) { die(`cannot read touch ledger ${touchesPath}: ${cause.message}`); }
 const snapshots = Array.isArray(ledger?.snapshots) ? ledger.snapshots : [];
-const before = snapshots.find((snapshot) => snapshot?.label === fromLabel);
-const after = toLabel ? snapshots.find((snapshot) => snapshot?.label === toLabel) : snapshots.at(-1);
+// A label resolves to its MOST RECENT snapshot (the same rule step8-guard
+// uses): a re-entered stage re-takes its snapshot under the same label, and
+// first-match resolution would hide every edit made after the first attempt.
+const byLabel = (label) => [...snapshots].reverse().find((snapshot) => snapshot?.label === label);
+const before = byLabel(fromLabel);
+const after = toLabel ? byLabel(toLabel) : snapshots.at(-1);
 if (!before) die(`touch ledger has no snapshot labelled "${fromLabel}"`);
 if (!after) die(toLabel ? `touch ledger has no snapshot labelled "${toLabel}"` : 'touch ledger has no snapshots');
 if (!before.surfaces || !after.surfaces) {
@@ -164,6 +168,16 @@ if (templatePath) {
 
 if (receiptPath) {
   let receipt;
+  if (!existsSync(resolvePath(receiptPath))) {
+    // A gate pointed at a receipt nobody generated used to die on a bare read
+    // error, leaving the reviewer to discover the --template flow unaided.
+    // Bootstrap: write the template where the receipt belongs and fail with
+    // the remedy. The reviewer fills `reviewer` and every disposition; rerun
+    // validates.
+    writeFileSync(resolvePath(receiptPath), `${JSON.stringify(template, null, 2)}\n`);
+    error('receipt-missing', `${receiptPath}: no receipt existed — wrote the template there with `
+      + `${required.length} pending disposition(s); fill reviewer and every disposition, then re-run`);
+  } else {
   try { receipt = JSON.parse(readFileSync(resolvePath(receiptPath), 'utf8')); }
   catch (cause) { error('receipt-read', `${receiptPath}: ${cause.message}`); }
   if (receipt) {
@@ -190,6 +204,7 @@ if (receiptPath) {
       for (const id of required) if (!dispositions.has(id)) error('receipt-missing-impact', `${receiptPath}: no disposition for affected item ${id}`);
       for (const id of dispositions.keys()) if (!required.includes(id)) warn('receipt-extra-disposition', `${receiptPath}: ${id} is not in the computed impact set`);
     }
+  }
   }
 }
 

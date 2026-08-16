@@ -470,9 +470,10 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   `content-policy.mjs` on the manifests, generates the `audit-manifest.mjs`
   checklist, and records the Alpha receipt. After any public-interface change,
   `impact-audit.mjs` computes every downstream logical and direct-citation
-  consumer from touch snapshots and requires an Alpha disposition. **Take the
-  snapshot at step 4, before authoring** — a baseline taken afterwards makes the
-  diff empty by construction, so the gate confirms instead of checking.
+  consumer from touch snapshots and requires an Alpha disposition. **Diff
+  `pre-author → post-6b`, both engine snapshots** — a baseline after authoring,
+  or a defaulted `--to`, makes the diff empty by construction: the gate
+  confirms instead of checking.
   `level-coverage.mjs --verify-current-context` is the hard receipt gate and the
   terminal stage runs it: every scoped item needs provenance, every proof-bearing
   item a merged contract, and both judge lanes a current verdict — cast against

@@ -331,6 +331,23 @@ statement, hypotheses, direction, and no hidden stronger claim. **A declared edg
 list of zero is a finding, not a clean bill** — ask whether two same-level pages
 should connect but are duplicating or using prose instead of a citation.
 
+**6c — the impact receipt.** The engine snapshots `post-6b` before your
+dispatch; its gate diffs `pre-author → post-6b` and validates
+`research/<run>-impact.json` against exactly that computed scope. Generate the
+template first —
+
+```
+node tools/impact-audit.mjs --touches research/<run>-touches.json \
+  --from pre-author --to post-6b --template research/<run>-impact.json
+```
+
+— then set `reviewer` and give EVERY listed consumer a real disposition
+(`still-licensed` | `repaired` | `not-load-bearing`, each with a concrete
+note; a pending row is a red gate, and a templated note is the boundary-row
+defect in a new file). If the gate runs before you generate it, it writes the
+same template there and fails with the remedy. Your own 6c edits land after
+the `post-6b` snapshot by construction; the step-8 window measures them.
+
 ## Step 8 — adjudicate judge rejections
 
 A rejection lands on text that already cleared your step-6 audit. **Adjudicate,

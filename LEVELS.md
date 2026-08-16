@@ -41,7 +41,7 @@ Everything below is verified against the code as of 2026-07-31.
 | `research/<run>-judge-attempts.jsonl` | **judge transport/latency ledger** (`JUDGE_ATTEMPTLOG`), written by the sweep |
 | `research/<run>-touches.json` | **repair ledger** (`touchlog.mjs`) |
 | `research/<run>-audit-manifest.json` | generated full relationship checklist for the independent-reader and Alpha audit |
-| `research/<run>-impact-audit.json` | Alpha dispositions for every consumer exposed by a changed public interface |
+| `research/<run>-impact.json` | Alpha dispositions for every consumer exposed by a changed public interface |
 | `research/<run>-published-dependency-repairs.md` | Alpha's evidence ledger for any owner-delegated repair to a published dependency |
 | `research/<run>-audit-coverage.json` | Alpha's manifest-bound whole-level audit receipt |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
@@ -603,12 +603,15 @@ Alpha `risk_review` field records what that reading established or why a routing
 signal was inapplicable. This does not replace full reader coverage for any
 ordinary item.
 
-After every item-modifying audit stage, take the required `touchlog.mjs` snap.
-If the public-interface fingerprint changed since the Step-5 baseline,
-`impact-audit.mjs` computes the transitive reverse-`deps` cone and direct
-citation consumers. Alpha records a concrete disposition for every listed item
-before Step 7. A proof-only repair remains subject to its own audit and rejudge,
-but does not create a false downstream work queue.
+The engine owns both endpoints of the impact window: `pre-author` is taken at
+its own stage before Step 5, `post-6b` at its own stage after the 6b repairs,
+and the 6c gate diffs exactly `pre-author → post-6b` — an explicit right
+endpoint, because a defaulted one resolved to the baseline itself and the diff
+was empty by construction. `impact-audit.mjs` computes the transitive
+reverse-`deps` cone and direct citation consumers of every interface change in
+that window; Alpha records a concrete disposition for every listed item in
+`research/<run>-impact.json` before Step 7. A proof-only repair remains subject
+to its own audit and rejudge, but does not create a false downstream work queue.
 
 For an owner-delegated published-dependency repair, take the baseline immediately
 before the repair, not merely at the start of authoring. Alpha appends the exact
