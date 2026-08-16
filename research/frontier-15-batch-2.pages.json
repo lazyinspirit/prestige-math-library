@@ -11,7 +11,499 @@
       "group-actions-and-cayleys-theorem",
       "primes-and-the-fundamental-theorem-of-arithmetic"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-sylow-p-subgroup",
+        "kind": "definition",
+        "title": "Sylow $p$-subgroups of a finite group",
+        "deps": [
+          "def-finite-p-group",
+          "def-p-adic-valuation"
+        ]
+      },
+      {
+        "id": "def-number-of-sylow-p-subgroups",
+        "kind": "definition",
+        "title": "The number $n_p(G)$ of Sylow $p$-subgroups",
+        "deps": [
+          "def-sylow-p-subgroup"
+        ]
+      },
+      {
+        "id": "def-maximal-subgroup-of-a-group",
+        "kind": "definition",
+        "title": "Maximal proper subgroups",
+        "deps": [
+          "def-subgroup"
+        ]
+      },
+      {
+        "id": "def-p-complement",
+        "kind": "definition",
+        "title": "$p$-complements in finite groups",
+        "deps": [
+          "def-sylow-p-subgroup",
+          "def-index"
+        ]
+      },
+      {
+        "id": "def-p-core-of-a-finite-group",
+        "kind": "definition",
+        "title": "The $p$-core $O_p(G)$ as the largest normal $p$-subgroup",
+        "deps": [
+          "def-finite-p-group",
+          "def-normal-subgroup"
+        ]
+      },
+      {
+        "id": "def-fitting-subgroup-of-a-finite-group",
+        "kind": "definition",
+        "title": "The Fitting subgroup $F(G)=\\prod_p O_p(G)$ of a finite group",
+        "deps": [
+          "def-p-core-of-a-finite-group",
+          "def-internal-direct-product-of-subgroups"
+        ]
+      },
+      {
+        "id": "def-frattini-subgroup-of-a-finite-group",
+        "kind": "definition",
+        "title": "The Frattini subgroup $\\Phi(G)$ as the intersection of the maximal subgroups of a finite group",
+        "deps": [
+          "def-maximal-subgroup-of-a-group"
+        ]
+      },
+      {
+        "id": "lem-wielandt-sylow-binomial-valuation",
+        "kind": "lemma",
+        "title": "If $|G|=p^a m$ with $p\\nmid m$, then $v_p\\binom{p^a m}{p^a}=0$",
+        "strategy": "Apply the valuation to the identity \\(\\binom{p^am}{p^a}(p^a)!= (p^am)^{\\underline{p^a}}\\). For each \\(0<j<p^a\\), prove \\(v_p(p^am-j)=v_p(j)\\); the remaining factor contributes \\(a+v_p(m)=a\\), so cancellation leaves valuation zero. Check \\(a=0\\) separately and never apply the valuation to zero.",
+        "deps": [
+          "def-p-adic-valuation",
+          "lem-p-adic-valuation-additive",
+          "def-binomial-coefficient",
+          "thm-binomial-closed-formula",
+          "def-factorial-and-falling-factorial"
+        ]
+      },
+      {
+        "id": "thm-sylow-first-theorem",
+        "kind": "theorem",
+        "title": "Sylow I: every finite group has a Sylow $p$-subgroup",
+        "strategy": "Use strong induction on \\(|G|\\) and Wielandt's left action on the \\(p^a\\)-element subsets of \\(G\\). The valuation lemma makes the total number of subsets prime to \\(p\\), so one orbit has index prime to \\(p\\); its stabilizer has the full \\(p\\)-part of \\(|G|\\) and is proper unless \\(G\\) itself is a \\(p\\)-group. Apply induction to that stabilizer. Include \\(a=0\\), the trivial group, and the case \\(m=1\\).",
+        "deps": [
+          "def-sylow-p-subgroup",
+          "lem-wielandt-sylow-binomial-valuation",
+          "thm-orbit-stabilizer",
+          "cor-orbit-stabilizer-cardinality",
+          "thm-lagrange",
+          "thm-strong-induction"
+        ]
+      },
+      {
+        "id": "thm-sylow-second-theorem",
+        "kind": "theorem",
+        "title": "Sylow II: every $p$-subgroup lies in a conjugate of any Sylow $p$-subgroup, and the Sylow $p$-subgroups form a single conjugacy class",
+        "strategy": "The Statement has two clauses and BOTH are asserted, because the second is what every later item on this page actually cites. Clause (a), containment: let a finite \\(p\\)-subgroup \\(H\\) act by left multiplication on \\(G/P\\) for a Sylow \\(p\\)-subgroup \\(P\\). The set \\(G/P\\) has cardinality prime to \\(p\\), so the fixed-point congruence gives a fixed coset \\(gP\\), and the fixed-coset condition is exactly \\(H\\le gPg^{-1}\\). Clause (b), conjugacy: apply clause (a) with \\(H=Q\\) a Sylow \\(p\\)-subgroup; then \\(Q\\le gPg^{-1}\\) and \\(|Q|=|gPg^{-1}|=p^a\\) is finite, so \\(Q=gPg^{-1}\\). Hence conjugation acts transitively on the set of Sylow \\(p\\)-subgroups. Treat the trivial \\(p\\)-subgroup and primes not dividing \\(|G|\\).",
+        "deps": [
+          "thm-sylow-first-theorem",
+          "thm-p-group-fixed-point-congruence",
+          "def-number-of-sylow-p-subgroups",
+          "def-normalizer-of-a-subgroup",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "thm-sylow-number-as-normalizer-index",
+        "kind": "theorem",
+        "title": "Sylow III*: $n_p(G)=[G:N_G(P)]$",
+        "strategy": "Conjugation is transitive on the Sylow \\(p\\)-subgroups by Sylow II, and the stabilizer of \\(P\\) is exactly \\(N_G(P)\\). Apply orbit–stabiliser, including the unique/trivial Sylow case.",
+        "deps": [
+          "thm-sylow-second-theorem",
+          "def-number-of-sylow-p-subgroups",
+          "thm-conjugate-subgroups-are-counted-by-the-normalizer"
+        ]
+      },
+      {
+        "id": "thm-sylow-third-theorem",
+        "kind": "theorem",
+        "title": "Sylow III: $n_p\\equiv1\\pmod p$ and $n_p\\mid m$ when $|G|=p^a m$ with $p\\nmid m$",
+        "strategy": "Let a Sylow subgroup \\(P\\) act by conjugation on the Sylow set. If \\(P\\) fixes \\(Q\\), then \\(P,Q\\le N_G(Q)\\), and Sylow II inside that normalizer forces \\(P=Q\\); hence there is exactly one fixed point and the congruence follows. The normalizer-index formula and \\(P\\le N_G(P)\\) give \\(n_p\\mid m\\).",
+        "deps": [
+          "thm-sylow-second-theorem",
+          "thm-sylow-number-as-normalizer-index",
+          "thm-p-group-fixed-point-congruence",
+          "def-number-of-sylow-p-subgroups",
+          "lem-product-with-normal-subgroup"
+        ]
+      },
+      {
+        "id": "cor-sylow-subgroup-normal-iff-unique",
+        "kind": "corollary",
+        "title": "A Sylow $p$-subgroup is normal if and only if it is unique",
+        "strategy": "A normal Sylow subgroup is fixed by every conjugation, and Sylow II says every Sylow subgroup is one of its conjugates. Conversely, uniqueness makes the subgroup conjugation-invariant.",
+        "deps": [
+          "thm-sylow-second-theorem",
+          "def-number-of-sylow-p-subgroups",
+          "def-normal-subgroup"
+        ]
+      },
+      {
+        "id": "thm-normalizer-of-a-sylow-normalizer",
+        "kind": "theorem",
+        "title": "A subgroup containing the normalizer of a Sylow subgroup is self-normalizing",
+        "strategy": "For \\(N_G(P)\\le H\\le G\\) and \\(x\\in N_G(H)\\), the groups \\(P\\) and \\(xPx^{-1}\\) are Sylow in \\(H\\). Conjugate them inside \\(H\\); the resulting element puts \\(x\\) in \\(H\\). Specialize to \\(H=N_G(P)\\) to obtain \\(N_G(N_G(P))=N_G(P)\\).",
+        "deps": [
+          "thm-sylow-second-theorem",
+          "def-normalizer-of-a-subgroup"
+        ]
+      },
+      {
+        "id": "thm-frattini-argument",
+        "kind": "theorem",
+        "title": "Frattini argument: if $N\\trianglelefteq G$ and $P$ is Sylow in $N$, then $G=N N_G(P)$",
+        "strategy": "For each \\(g\\in G\\), normality makes \\(gPg^{-1}\\) Sylow in \\(N\\). Sylow II inside \\(N\\) supplies \\(n\\in N\\) conjugating it back to \\(P\\), so \\(ng\\in N_G(P)\\) and \\(g\\in N N_G(P)\\). The reverse containment is immediate.",
+        "deps": [
+          "thm-sylow-second-theorem",
+          "def-normalizer-of-a-subgroup",
+          "lem-product-with-normal-subgroup"
+        ]
+      },
+      {
+        "id": "cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal",
+        "kind": "corollary",
+        "title": "A normal Sylow subgroup of a normal subgroup is normal in the whole group",
+        "strategy": "A unique Sylow subgroup is preserved by every automorphism of its ambient normal subgroup, so it is characteristic there; characteristic-in-normal gives normality in the whole group.",
+        "deps": [
+          "cor-sylow-subgroup-normal-iff-unique",
+          "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal"
+        ]
+      },
+      {
+        "id": "thm-normalizer-condition-for-finite-nilpotent-groups",
+        "kind": "theorem",
+        "title": "Every proper subgroup of a finite nilpotent group is properly contained in its normalizer",
+        "strategy": "Use a central series and take the first term not contained in the proper subgroup \\(H\\). The preceding term lies in \\(H\\), so an element newly appearing at that stage normalizes \\(H\\) modulo the preceding term but is not in \\(H\\). Include \\(H=1\\) and class zero.",
+        "deps": [
+          "thm-upper-and-lower-central-characterizations-of-nilpotence",
+          "def-normalizer-of-a-subgroup"
+        ]
+      },
+      {
+        "id": "thm-maximal-subgroups-of-finite-nilpotent-groups",
+        "kind": "theorem",
+        "title": "Maximal subgroups of finite nilpotent groups are normal of prime index",
+        "strategy": "The normalizer condition and maximality force \\(N_G(M)=G\\), hence \\(M\\trianglelefteq G\\). The quotient has no nontrivial proper subgroup; Cauchy's theorem then forces its nontrivial order to be prime. Check that a maximal subgroup is proper and that the quotient is nontrivial.",
+        "deps": [
+          "def-maximal-subgroup-of-a-group",
+          "thm-normalizer-condition-for-finite-nilpotent-groups",
+          "thm-cauchys-theorem-for-finite-groups",
+          "thm-subgroups-quotients-and-finite-products-of-nilpotent-groups"
+        ]
+      },
+      {
+        "id": "thm-index-p-subgroup-existence-in-finite-p-groups",
+        "kind": "theorem",
+        "title": "Every nontrivial finite $p$-group has a normal subgroup of index $p$",
+        "strategy": "In the finite nonempty collection of proper subgroups choose one maximal by inclusion. The nilpotent maximal-subgroup theorem makes its index prime, while Lagrange makes that index divide a power of \\(p\\), so it is \\(p\\). This produces the subgroup before invoking the already-published theorem that any index-\\(p\\) subgroup of a finite \\(p\\)-group is normal.",
+        "deps": [
+          "thm-finite-p-groups-are-nilpotent",
+          "thm-maximal-subgroups-of-finite-nilpotent-groups",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "lem-distinct-normal-sylow-subgroups-commute",
+        "kind": "lemma",
+        "title": "Distinct normal Sylow subgroups centralize one another",
+        "strategy": "For normal Sylow \\(p\\)- and \\(q\\)-subgroups with \\(p\\ne q\\), every commutator lies in their intersection. Lagrange makes that intersection trivial because its order divides coprime prime powers.",
+        "deps": [
+          "def-sylow-p-subgroup",
+          "def-subgroup-commutator-and-lower-central-series",
+          "def-normal-subgroup",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "lem-finite-nilpotence-via-normal-sylow-subgroups",
+        "kind": "lemma",
+        "title": "A finite group is nilpotent if and only if all Sylow subgroups are normal, if and only if it is their internal direct product",
+        "strategy": "If \\(G\\) is nilpotent and \\(P\\) is Sylow, self-normalization of \\(N_G(P)\\) contradicts the normalizer condition unless \\(N_G(P)=G\\). Normal Sylow subgroups for distinct primes commute and have trivial intersections; their product has order \\(|G|\\), so it is the internal direct product. Conversely each factor is a finite \\(p\\)-group and hence nilpotent, and a finite direct product of nilpotent groups is nilpotent. Include the trivial group and the one-prime case.",
+        "deps": [
+          "thm-normalizer-condition-for-finite-nilpotent-groups",
+          "thm-normalizer-of-a-sylow-normalizer",
+          "thm-sylow-first-theorem",
+          "lem-distinct-normal-sylow-subgroups-commute",
+          "thm-internal-direct-product-recognition",
+          "thm-subgroups-quotients-and-finite-products-of-nilpotent-groups",
+          "thm-finite-p-groups-are-nilpotent"
+        ]
+      },
+      {
+        "id": "lem-products-of-normal-p-subgroups",
+        "kind": "lemma",
+        "title": "A finite product of normal $p$-subgroups is a normal $p$-subgroup",
+        "strategy": "Induct on the finite family. For two normal \\(p\\)-subgroups \\(A,B\\), the product is a normal subgroup and \\(|AB|=|A||B|/|A\\cap B|\\) is a power of \\(p\\). Include the empty product and repeated factors.",
+        "deps": [
+          "def-finite-p-group",
+          "lem-product-with-normal-subgroup",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "thm-fitting-subgroup-is-largest-normal-nilpotent-subgroup",
+        "kind": "theorem",
+        "title": "The Fitting subgroup is nilpotent and is the largest normal nilpotent subgroup of a finite group",
+        "strategy": "The product of the \\(p\\)-cores is an internal direct product, hence nilpotent. If \\(N\\trianglelefteq G\\) is nilpotent, each of its unique Sylow subgroups is characteristic in \\(N\\), hence normal in \\(G\\), so it lies in the corresponding \\(p\\)-core. Their product contains \\(N\\). Handle \\(G=1\\) with the empty product.",
+        "deps": [
+          "def-fitting-subgroup-of-a-finite-group",
+          "lem-products-of-normal-p-subgroups",
+          "lem-finite-nilpotence-via-normal-sylow-subgroups",
+          "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal"
+        ]
+      },
+      {
+        "id": "lem-frattini-subgroup-nongenerator-characterization",
+        "kind": "lemma",
+        "title": "The Frattini subgroup consists exactly of the nongenerators of a finite group",
+        "strategy": "If \\(x\\notin\\Phi(G)\\), a maximal subgroup omitting \\(x\\) shows that adjoining \\(x\\) can enlarge a generating set. Conversely, if \\(\\langle S,x\\rangle=G\\) while \\(\\langle S\\rangle\\ne G\\), extend the latter finite subgroup to a maximal subgroup; it contains \\(S\\) but cannot contain \\(x\\). Treat the trivial group, whose empty intersection convention gives \\(\\Phi(1)=1\\).",
+        "deps": [
+          "def-frattini-subgroup-of-a-finite-group",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "thm-nilpotence-is-detected-modulo-the-frattini-subgroup",
+        "kind": "theorem",
+        "title": "Nilpotence lifts over the Frattini subgroup of a finite group",
+        "strategy": "Assume \\(\\Phi(G)\\le N\\trianglelefteq G\\) and \\(N/\\Phi(G)\\) is nilpotent. For a Sylow subgroup \\(P\\) of \\(N\\), its image is the unique Sylow subgroup of the quotient, so \\(P\\Phi(G)\\trianglelefteq G\\). Apply the Frattini argument to \\(P\\le P\\Phi(G)\\) to get \\(G=N_G(P)\\Phi(G)\\); the nongenerator property forces \\(N_G(P)=G\\). Thus every Sylow subgroup of \\(N\\) is normal and \\(N\\) is nilpotent. Record the special equivalence for \\(N=G\\).",
+        "deps": [
+          "def-frattini-subgroup-of-a-finite-group",
+          "thm-frattini-argument",
+          "lem-frattini-subgroup-nongenerator-characterization",
+          "lem-finite-nilpotence-via-normal-sylow-subgroups",
+          "thm-correspondence-theorem-groups"
+        ]
+      },
+      {
+        "id": "thm-frattini-subgroup-is-nilpotent",
+        "kind": "theorem",
+        "title": "The Frattini subgroup of a finite group is nilpotent",
+        "strategy": "Apply the lifting theorem with \\(N=\\Phi(G)\\); its quotient by \\(\\Phi(G)\\) is the trivial nilpotent group. Include \\(G=1\\).",
+        "deps": [
+          "thm-nilpotence-is-detected-modulo-the-frattini-subgroup"
+        ]
+      },
+      {
+        "id": "cor-frattini-subgroup-is-contained-in-the-fitting-subgroup",
+        "kind": "corollary",
+        "title": "The Frattini subgroup is contained in the Fitting subgroup",
+        "strategy": "The Frattini subgroup is characteristic, hence normal, and is nilpotent; maximality of the Fitting subgroup gives the inclusion.",
+        "deps": [
+          "thm-frattini-subgroup-is-nilpotent",
+          "thm-fitting-subgroup-is-largest-normal-nilpotent-subgroup"
+        ]
+      },
+      {
+        "id": "thm-fitting-subgroup-of-the-frattini-quotient",
+        "kind": "theorem",
+        "title": "$F(G/\\Phi(G))=F(G)/\\Phi(G)$ for every finite group",
+        "strategy": "The image \\(F(G)/\\Phi(G)\\) is normal and nilpotent, giving one inclusion. For the reverse inclusion, pull \\(F(G/\\Phi(G))\\) back to a normal subgroup \\(N\\) of \\(G\\); the lifting theorem makes \\(N\\) nilpotent, so \\(N\\le F(G)\\). Check the trivial quotient.",
+        "deps": [
+          "thm-fitting-subgroup-is-largest-normal-nilpotent-subgroup",
+          "cor-frattini-subgroup-is-contained-in-the-fitting-subgroup",
+          "thm-nilpotence-is-detected-modulo-the-frattini-subgroup",
+          "thm-correspondence-theorem-groups"
+        ]
+      },
+      {
+        "id": "thm-sylow-characterizations-of-finite-nilpotence",
+        "kind": "theorem",
+        "title": "Sylow and maximal-subgroup characterizations of finite nilpotence",
+        "strategy": "Combine the three Sylow/direct-product equivalences with the maximal-subgroup clause. If every maximal subgroup is normal, the diagonal map \\(G/\\Phi(G)\\to\\prod_M G/M\\) is injective; each quotient has prime order, so the product and its subgroup are nilpotent. Lift nilpotence through \\(\\Phi(G)\\). The reverse direction is the maximal-subgroup theorem. Include a finite group with no maximal subgroups, necessarily the trivial group.",
+        "deps": [
+          "lem-finite-nilpotence-via-normal-sylow-subgroups",
+          "thm-maximal-subgroups-of-finite-nilpotent-groups",
+          "thm-nilpotence-is-detected-modulo-the-frattini-subgroup",
+          "def-frattini-subgroup-of-a-finite-group",
+          "thm-internal-direct-product-recognition"
+        ]
+      },
+      {
+        "id": "thm-order-of-automorphism-group-of-elementary-abelian-rank-two",
+        "kind": "theorem",
+        "title": "For prime $p$, $|\\operatorname{Aut}((\\mathbb Z/p)\\times(\\mathbb Z/p))|=(p^2-1)(p^2-p)$",
+        "strategy": "Put \\(E_p=(\\mathbb Z/p,+)\\times(\\mathbb Z/p,+)\\) and let \\(e_1=(1,0)\\), \\(e_2=(0,1)\\). A homomorphism \\(E_p\\to E_p\\) is determined by the ordered pair \\(u=f(e_1),v=f(e_2)\\), since multiplication by a residue class is repeated addition. Prove that it is an automorphism exactly when \\(u\\ne0\\) and \\(v\\notin\\langle u\\rangle\\): field division gives injectivity, and an injective self-map of the finite set \\(E_p\\) is bijective. There are \\(p^2-1\\) choices for \\(u\\), the subgroup \\(\\langle u\\rangle\\) has \\(p\\) elements, and then there are \\(p^2-p\\) choices for \\(v\\). Check \\(p=2\\) directly. A Remark may record that this group is conventionally written \\(GL_2(\\mathbb F_p)\\); that is a name only, since matrices are defined on a later page, so assert no isomorphism to a matrix group and cite no matrix item.",
+        "deps": [
+          "def-group-isomorphism-and-automorphism",
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "thm-z-mod-p-is-a-field",
+          "thm-standard-representatives-modulo-n",
+          "thm-product-rule",
+          "thm-subset-of-a-finite-set",
+          "def-generated-subgroup"
+        ]
+      },
+      {
+        "id": "thm-groups-of-order-p-squared-q-have-a-normal-sylow-subgroup",
+        "kind": "theorem",
+        "title": "Every group of order $p^2q$ for distinct primes has a normal Sylow subgroup",
+        "strategy": "If \\(p>q\\), the restrictions \\(n_p\\mid q\\) and \\(n_p\\equiv1\\pmod p\\) force \\(n_p=1\\). If \\(q>p\\), then \\(n_q\\in\\{1,p^2\\}\\); the second value forces \\(q\\mid(p-1)(p+1)\\), hence the sole exceptional pair \\((p,q)=(2,3)\\). For order \\(12\\), if the four Sylow \\(3\\)-subgroups are nonnormal, their eight nonidentity elements leave exactly four elements, so every Sylow \\(2\\)-subgroup is that same four-element complement and is normal. Keep the two prime orderings and the order-twelve boundary case explicit.",
+        "deps": [
+          "thm-sylow-third-theorem",
+          "cor-sylow-subgroup-normal-iff-unique"
+        ]
+      },
+      {
+        "id": "cor-groups-of-order-p-squared-q-are-not-simple",
+        "kind": "corollary",
+        "title": "No group of order $p^2q$ for distinct primes is simple",
+        "strategy": "The normal Sylow subgroup supplied by the theorem has prime-power order strictly between one and \\(p^2q\\), so it is a nontrivial proper normal subgroup.",
+        "deps": [
+          "thm-groups-of-order-p-squared-q-have-a-normal-sylow-subgroup",
+          "def-simple-group"
+        ]
+      },
+      {
+        "id": "thm-groups-of-order-thirty-have-a-normal-sylow-subgroup",
+        "kind": "theorem",
+        "title": "Every group of order $30$ has normal Sylow $3$- and $5$-subgroups and is not simple",
+        "strategy": "Choose an involution by Cauchy's theorem and use the left regular permutation representation. Left multiplication by the involution is a product of fifteen transpositions, so composing with sign gives a surjection to \\({\\pm1}\\) whose normal kernel has order \\(15\\). The published order-\\(pq\\) classification makes that kernel cyclic. Its Sylow \\(3\\)- and \\(5\\)-subgroups are normal in the kernel and hence normal in \\(G\\). Either is a nontrivial proper normal subgroup.",
+        "deps": [
+          "thm-cauchys-theorem-for-finite-groups",
+          "thm-left-coset-action-and-its-kernel",
+          "thm-sign-is-a-homomorphism",
+          "cor-sign-from-disjoint-cycle-structure",
+          "thm-image-subgroup-and-kernel-normal",
+          "thm-first-isomorphism-theorem-groups",
+          "cor-order-of-a-quotient-group",
+          "thm-classification-of-groups-of-order-pq",
+          "cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal",
+          "def-simple-group"
+        ]
+      },
+      {
+        "id": "thm-groups-of-order-one-hundred-five-have-a-normal-sylow-subgroup",
+        "kind": "theorem",
+        "title": "Every group of order $105$ has normal Sylow $5$- and $7$-subgroups and is not simple",
+        "strategy": "The nonunique counts \\(n_5=21\\) and \\(n_7=15\\) would already contribute \\(84+90\\) distinct nonidentity elements, so at least one of the two Sylow subgroups is normal. Multiply it by a Sylow subgroup for the other prime to obtain a subgroup \\(H\\) of order \\(35\\). The action on the three left cosets has kernel \\(K\\subseteq H\\); the first isomorphism theorem gives \\([G:K]\\mid6\\), while \\([G:K]\\mid105\\) and \\(3=[G:H]\\mid[G:K]\\), so \\(K=H\\) and \\(H\\trianglelefteq G\\). The order-\\(pq\\) classification makes \\(H\\) cyclic, and its normal Sylow \\(5\\)- and \\(7\\)-subgroups are therefore normal in \\(G\\).",
+        "deps": [
+          "thm-sylow-third-theorem",
+          "cor-sylow-subgroup-normal-iff-unique",
+          "lem-product-with-normal-subgroup",
+          "thm-left-coset-action-and-its-kernel",
+          "thm-image-subgroup-and-kernel-normal",
+          "thm-first-isomorphism-theorem-groups",
+          "cor-order-of-a-quotient-group",
+          "thm-classification-of-groups-of-order-pq",
+          "cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal",
+          "def-simple-group"
+        ]
+      },
+      {
+        "id": "cor-classification-of-groups-of-order-one-hundred-five",
+        "kind": "corollary",
+        "title": "There are exactly two isomorphism classes of groups of order $105$",
+        "strategy": "Let \\(N_5\\) and \\(N_7\\) be the normal Sylow subgroups and choose a Sylow \\(3\\)-subgroup \\(P\\). Then \\(H=N_7P\\) has order \\(21\\) and \\(G=N_5H\\). Conjugation gives \\(H\\to\\operatorname{Aut}(N_5)\\); its image has order dividing both \\(21\\) and \\(4=|\\operatorname{Aut}(C_5)|\\), so it is trivial. Hence \\(G\\cong C_5\\times H\\). The published order-\\(pq\\) classification gives exactly two choices for \\(H\\), one cyclic and one nonabelian; their products with \\(C_5\\) remain distinguished by commutativity. In the cyclic case, pair a generator of \\(N_5\\) with a generator of \\(H\\): the order of that pair is \\(\\operatorname{lcm}(5,21)=105\\), so the abelian type is cyclic of order \\(105\\), hence \\(C_{105}\\). Check the chosen subgroups have trivial intersections and that no third isomorphism type is introduced.",
+        "deps": [
+          "thm-groups-of-order-one-hundred-five-have-a-normal-sylow-subgroup",
+          "thm-sylow-first-theorem",
+          "lem-product-with-normal-subgroup",
+          "cor-prime-order-group-is-cyclic",
+          "thm-conjugation-is-an-automorphism",
+          "thm-automorphisms-form-a-group",
+          "thm-image-subgroup-and-kernel-normal",
+          "thm-automorphisms-of-a-finite-cyclic-group",
+          "cor-totient-at-one-and-at-a-prime",
+          "thm-lagrange",
+          "thm-internal-external-semidirect-product-equivalence",
+          "prop-semidirect-product-is-direct-iff-action-is-trivial",
+          "thm-classification-of-groups-of-order-pq",
+          "thm-order-of-element-in-direct-product",
+          "thm-classification-of-cyclic-groups"
+        ]
+      },
+      {
+        "id": "thm-groups-of-order-forty-five-are-abelian",
+        "kind": "theorem",
+        "title": "Every group of order $45$ is abelian",
+        "strategy": "Sylow III forces both the order-nine and order-five Sylow subgroups to be unique. They commute, their product is the whole group, and both factors are abelian, so the internal direct product is abelian.",
+        "deps": [
+          "thm-sylow-third-theorem",
+          "cor-sylow-subgroup-normal-iff-unique",
+          "lem-distinct-normal-sylow-subgroups-commute",
+          "cor-groups-of-order-p-squared-are-abelian",
+          "thm-internal-direct-product-recognition"
+        ]
+      },
+      {
+        "id": "cor-groups-of-order-pq-are-not-simple",
+        "kind": "corollary",
+        "title": "No group of order $pq$ for distinct primes is simple",
+        "strategy": "Order the primes as \\(p<q\\). The published order-\\(pq\\) lemma supplies a normal subgroup of order \\(q\\), which is nontrivial and proper.",
+        "deps": [
+          "lem-groups-of-order-pq-have-a-normal-q-subgroup",
+          "def-simple-group"
+        ]
+      },
+      {
+        "id": "fs-converse-of-lagrange-for-finite-groups",
+        "kind": "false-statement",
+        "title": "False statement: every divisor of the order of a finite group occurs as a subgroup order",
+        "strategy": "State the abelian converse and Sylow's prime-power partial converse, then construct \\(A_4\\) natively and show a hypothetical subgroup of order six would have index two and hence be normal, contradicting the conjugacy structure of its three-cycles. Record agreement with the published B-page witness without citing it.",
+        "deps": [
+          "thm-sylow-first-theorem",
+          "cor-converse-of-lagrange-for-finite-abelian-groups",
+          "def-alternating-group",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "fs-subgroups-of-equal-p-power-order-are-conjugate",
+        "kind": "false-statement",
+        "title": "False statement: all subgroups of the same $p$-power order are conjugate",
+        "strategy": "In \\(S_4\\), the order-two subgroups generated by \\((12)\\) and \\((12)(34)\\) cannot be conjugate because their nonidentity generators have different cycle types. Contrast this with Sylow II, which concerns only subgroups of maximal \\(p\\)-power order.",
+        "deps": [
+          "thm-sylow-second-theorem",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "thm-symmetric-permutations-are-conjugate-iff-same-cycle-type"
+        ]
+      },
+      {
+        "id": "fs-unique-sylow-subgroup-forces-a-direct-product",
+        "kind": "false-statement",
+        "title": "False statement: one unique Sylow subgroup forces the whole group to be a direct product",
+        "strategy": "Use the nonabelian group \\(C_q\\rtimes C_p\\) when \\(p\\mid q-1\\). Its Sylow \\(q\\)-subgroup is unique and normal, but the defining action is nontrivial, so the semidirect product is not direct.",
+        "deps": [
+          "cor-sylow-subgroup-normal-iff-unique",
+          "thm-classification-of-groups-of-order-pq",
+          "prop-semidirect-product-is-direct-iff-action-is-trivial"
+        ]
+      },
+      {
+        "id": "fs-groups-of-order-forty-two-have-a-normal-sylow-two-subgroup",
+        "kind": "false-statement",
+        "title": "False statement: every group of order $42$ has a normal Sylow $2$-subgroup",
+        "strategy": "Construct the affine group \\(\\mathbb F_7\\rtimes\\mathbb F_7^\\times\\) of order \\(42\\). Its seven involutions \\(x\\mapsto -x+b\\) generate seven Sylow \\(2\\)-subgroups, so none is normal. Check directly that the translation subgroup is the normal Sylow \\(7\\)-subgroup.",
+        "deps": [
+          "thm-sylow-third-theorem",
+          "def-external-semidirect-product",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "fs-finite-nilpotent-and-solvable-groups-coincide",
+        "kind": "false-statement",
+        "title": "False statement: finite nilpotent groups and finite solvable groups are the same",
+        "strategy": "The forward implication is published. For the converse, compute \\(S_3' = A_3\\) and \\(A_3'=1\\), while its three Sylow \\(2\\)-subgroups are not normal; the Sylow characterization therefore makes \\(S_3\\) solvable but not nilpotent.",
+        "deps": [
+          "cor-nilpotent-groups-and-finite-p-groups-are-solvable",
+          "def-derived-series-solvable-group-and-derived-length",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "thm-sylow-characterizations-of-finite-nilpotence"
+        ]
+      }
+    ]
   },
   {
     "order": 71,
@@ -23,7 +515,152 @@
     "requires": [
       "sylow-theorems-and-nilpotent-groups"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-sylow-subgroups-of-s-four",
+        "kind": "example",
+        "title": "The Sylow subgroups of $S_4$",
+        "strategy": "List the three dihedral order-eight subgroups and the four cyclic order-three subgroups. Verify closure and order directly, then check \\(n_2=3\\) and \\(n_3=4\\) against both Sylow III restrictions.",
+        "deps": [
+          "def-number-of-sylow-p-subgroups",
+          "thm-sylow-third-theorem",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "thm-symmetric-permutations-are-conjugate-iff-same-cycle-type"
+        ]
+      },
+      {
+        "id": "ex-sylow-subgroups-of-a-five",
+        "kind": "example",
+        "title": "The Sylow subgroups of $A_5$",
+        "strategy": "Count elements by cycle type: twenty 3-cycles give ten Sylow \\(3\\)-subgroups, twenty-four 5-cycles give six Sylow \\(5\\)-subgroups, and the fifteen double transpositions partition among five Klein four Sylow \\(2\\)-subgroups. Check every count against Sylow III.",
+        "deps": [
+          "def-number-of-sylow-p-subgroups",
+          "thm-sylow-third-theorem",
+          "def-alternating-group",
+          "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types"
+        ]
+      },
+      {
+        "id": "ex-sylow-subgroups-of-affine-group-modulo-five",
+        "kind": "example",
+        "title": "Sylow subgroups of $\\operatorname{Aff}(\\mathbb Z/5)$: $n_2=5$ and $n_5=1$",
+        "strategy": "Construct affine maps \\(x\\mapsto ax+b\\) as \\(\\mathbb F_5\\rtimes\\mathbb F_5^\\times\\). Translations form the unique normal Sylow \\(5\\)-subgroup; the five point stabilizers are the Sylow \\(2\\)-subgroups. Verify their orders and distinctness directly.",
+        "deps": [
+          "thm-sylow-third-theorem",
+          "cor-sylow-subgroup-normal-iff-unique",
+          "def-external-semidirect-product",
+          "thm-z-mod-p-is-a-field"
+        ]
+      },
+      {
+        "id": "ex-unique-sylow-subgroup-of-affine-group-modulo-p-squared",
+        "kind": "example",
+        "title": "The unique Sylow $p$-subgroup of $\\operatorname{Aff}(\\mathbb Z/p^2)$",
+        "strategy": "Write the affine group as translations by \\(\\mathbb Z/p^2\\) semidirect its unit group. The transformations with multiplier congruent to one modulo \\(p\\) form a normal subgroup of order \\(p^3\\), the full \\(p\\)-part of the affine-group order, hence the unique Sylow \\(p\\)-subgroup. Include \\(p=2\\).",
+        "deps": [
+          "thm-sylow-third-theorem",
+          "cor-sylow-subgroup-normal-iff-unique",
+          "def-external-semidirect-product",
+          "thm-totient-of-a-prime-power",
+          "thm-unit-criterion-modulo-n"
+        ]
+      },
+      {
+        "id": "ex-heisenberg-sylow-subgroup-of-the-upper-triangular-group",
+        "kind": "example",
+        "title": "The finite Heisenberg group is the unique Sylow $p$-subgroup of its coordinate upper-triangular group",
+        "strategy": "Construct \\(H_p=\\mathbb F_p^3\\) with \\((a,b,c)(a',b',c')=(a+a',b+b',c+c'+ab')\\), checking associativity, identity, and the inverse \\((-a,-b,-c+ab)\\) directly. Let \\(D=(\\mathbb F_p^\\times)^3\\) act by \\((d_1,d_2,d_3)\\cdot(a,b,c)=(d_1d_2^{-1}a,d_2d_3^{-1}b,d_1d_3^{-1}c)\\), verify that this is an action by automorphisms, and define the ambient group natively as \\(B_p=H_p\\rtimes D\\). This is the six-coordinate model of the invertible upper-triangular group. The canonical \\(H_p\\) is normal, \\(|H_p|=p^3\\), and \\(|B_p|=p^3(p-1)^3\\), so it is the unique Sylow \\(p\\)-subgroup. Include \\(p=2\\), when \\(D\\) is trivial; do not invoke \\(GL_3\\) or any order-78 matrix item.",
+        "deps": [
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "def-action-by-automorphisms",
+          "def-external-semidirect-product",
+          "thm-external-semidirect-product-is-a-group",
+          "prop-canonical-subgroups-of-an-external-semidirect-product",
+          "cor-sylow-subgroup-normal-iff-unique",
+          "thm-z-mod-p-is-a-field",
+          "thm-standard-representatives-modulo-n",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "cor-totient-at-one-and-at-a-prime",
+          "thm-product-rule"
+        ]
+      },
+      {
+        "id": "ex-sylow-subgroups-of-gl-two-over-a-finite-prime-field",
+        "kind": "example",
+        "title": "Sylow $p$-subgroups of $\\operatorname{Aut}((\\mathbb Z/p)^2)$: $n_p=p+1$",
+        "strategy": "Use the A-page coordinate theorem for \\(E_p=(\\mathbb Z/p)^2\\), not the unavailable matrix page. The automorphisms \\(u_t(x,y)=(x+ty,y)\\) form a subgroup \\(P\\) of order \\(p\\), which is Sylow because \\(|\\operatorname{Aut}(E_p)|=p(p-1)^2(p+1)\\). Its common fixed subgroup is \\(L=\\{(x,0)\\}\\). An automorphism normalizes \\(P\\) exactly when it preserves \\(L\\), hence exactly when it has the coordinate form \\((x,y)\\mapsto(ax+by,dy)\\) with \\(a,d\\ne0\\). Count the normalizer as \\(p(p-1)^2\\) and apply the normalizer-index formula to obtain \\(n_p=p+1\\). Distinct Sylow subgroups meet trivially, so they contain \\(p^2-1\\) elements of order \\(p\\) in total. Check every assertion at \\(p=2\\). The conventional name \\(GL_2(\\mathbb F_p)\\) may be recorded as a name in prose; do not assert an isomorphism to a matrix group, which this page cannot define.",
+        "deps": [
+          "thm-order-of-automorphism-group-of-elementary-abelian-rank-two",
+          "def-sylow-p-subgroup",
+          "def-number-of-sylow-p-subgroups",
+          "thm-sylow-number-as-normalizer-index",
+          "thm-z-mod-p-is-a-field",
+          "thm-lagrange"
+        ]
+      },
+      {
+        "id": "ex-sylow-data-for-groups-of-order-at-most-fifteen",
+        "kind": "example",
+        "title": "Sylow data for finite groups of order at most $15$",
+        "strategy": "For each positive order through \\(15\\), tabulate only the Sylow subgroup orders, allowed counts, and forced normal Sylow subgroups. Use the published order-\\(pq\\) classification where it applies, but make no claim to classify the isomorphism types at orders \\(8\\) or \\(12\\). Include order one.",
+        "deps": [
+          "thm-sylow-first-theorem",
+          "thm-sylow-third-theorem",
+          "cor-sylow-subgroup-normal-iff-unique",
+          "thm-classification-of-groups-of-order-pq",
+          "thm-finite-p-groups-are-nilpotent"
+        ]
+      },
+      {
+        "id": "ex-groups-of-order-thirty",
+        "kind": "example",
+        "title": "The four isomorphism types of groups of order $30$",
+        "strategy": "Use the normal Sylow \\(3\\)- or \\(5\\)-subgroup theorem and the published order-\\(pq\\) classification to reduce to semidirect products. Determine the possible actions and use compatibility of actions to identify isomorphic products, yielding the cyclic, dihedral, and two remaining semidirect-product types. Verify pairwise nonisomorphism by centers and element orders.",
+        "deps": [
+          "thm-groups-of-order-thirty-have-a-normal-sylow-subgroup",
+          "thm-classification-of-groups-of-order-pq",
+          "lem-actions-related-by-automorphisms-give-isomorphic-semidirect-products",
+          "def-external-semidirect-product"
+        ]
+      },
+      {
+        "id": "ex-a-four-is-not-nilpotent",
+        "kind": "example",
+        "title": "$A_4$ is not nilpotent",
+        "strategy": "List the four Sylow \\(3\\)-subgroups generated by the 3-cycles. Since none is normal, the Sylow characterization shows \\(A_4\\) is not nilpotent; contrast its normal Klein four Sylow \\(2\\)-subgroup.",
+        "deps": [
+          "thm-sylow-characterizations-of-finite-nilpotence",
+          "def-alternating-group",
+          "cor-sylow-subgroup-normal-iff-unique"
+        ]
+      },
+      {
+        "id": "ex-fitting-and-frattini-subgroups-of-s-three",
+        "kind": "example",
+        "title": "The Fitting and Frattini subgroups of $S_3$",
+        "strategy": "Compute \\(O_3(S_3)=A_3\\), \\(O_2(S_3)=1\\), hence \\(F(S_3)=A_3\\). Intersect the maximal subgroups to obtain \\(\\Phi(S_3)=1\\), and check the quotient identity for the Fitting subgroup.",
+        "deps": [
+          "def-fitting-subgroup-of-a-finite-group",
+          "def-frattini-subgroup-of-a-finite-group",
+          "thm-fitting-subgroup-is-largest-normal-nilpotent-subgroup",
+          "def-finite-symmetric-group-and-permutation-notation"
+        ]
+      },
+      {
+        "id": "ex-p-cores-fitting-and-frattini-subgroups-of-s-four",
+        "kind": "example",
+        "title": "The $p$-cores, Fitting subgroup, and Frattini subgroup of $S_4$",
+        "strategy": "Show \\(O_2(S_4)=V_4\\), every other \\(p\\)-core is trivial, and therefore \\(F(S_4)=V_4\\). Exhibit maximal subgroups whose intersection is trivial to get \\(\\Phi(S_4)=1\\), then verify the quotient formula.",
+        "deps": [
+          "def-p-core-of-a-finite-group",
+          "def-fitting-subgroup-of-a-finite-group",
+          "def-frattini-subgroup-of-a-finite-group",
+          "thm-fitting-subgroup-of-the-frattini-quotient",
+          "def-finite-symmetric-group-and-permutation-notation"
+        ]
+      }
+    ]
   },
   {
     "order": 108,
@@ -36,7 +673,466 @@
       "tensor-products-of-modules",
       "composition-series-and-solvable-groups"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-noetherian-module",
+        "kind": "definition",
+        "title": "Noetherian modules: every submodule is finitely generated",
+        "deps": [
+          "def-submodule",
+          "def-generated-cyclic-finitely-generated-and-free-modules"
+        ]
+      },
+      {
+        "id": "def-artinian-module",
+        "kind": "definition",
+        "title": "Artinian modules by the descending chain condition",
+        "deps": [
+          "def-submodule"
+        ]
+      },
+      {
+        "id": "def-noetherian-ring",
+        "kind": "definition",
+        "title": "Left and right Noetherian rings",
+        "deps": [
+          "def-noetherian-module",
+          "def-left-and-right-modules"
+        ]
+      },
+      {
+        "id": "def-artinian-ring",
+        "kind": "definition",
+        "title": "Left and right Artinian rings",
+        "deps": [
+          "def-artinian-module",
+          "def-left-and-right-modules"
+        ]
+      },
+      {
+        "id": "def-composition-series-and-length-of-a-module",
+        "kind": "definition",
+        "title": "Composition series and length of a module",
+        "deps": [
+          "def-submodule",
+          "def-quotient-module",
+          "def-simple-module"
+        ]
+      },
+      {
+        "id": "def-opposite-ring",
+        "kind": "definition",
+        "title": "The opposite ring $R^{\\mathrm{op}}$",
+        "deps": [
+          "def-ring"
+        ]
+      },
+      {
+        "id": "def-endomorphism-ring-of-a-module",
+        "kind": "definition",
+        "title": "The endomorphism ring $\\operatorname{End}_R(M)$ under addition and composition",
+        "deps": [
+          "def-hom-groups-and-induced-hom-maps",
+          "def-ring"
+        ]
+      },
+      {
+        "id": "def-semisimple-module",
+        "kind": "definition",
+        "title": "Semisimple modules as direct sums of simple modules",
+        "deps": [
+          "def-simple-module",
+          "def-direct-sum-of-a-family-of-modules"
+        ]
+      },
+      {
+        "id": "def-semisimple-ring",
+        "kind": "definition",
+        "title": "A semisimple ring as a ring whose left regular module is semisimple",
+        "deps": [
+          "def-semisimple-module",
+          "def-left-and-right-modules"
+        ]
+      },
+      {
+        "id": "def-socle-of-a-module",
+        "kind": "definition",
+        "title": "The socle as the sum of all simple submodules",
+        "deps": [
+          "def-simple-module",
+          "def-submodule"
+        ]
+      },
+      {
+        "id": "def-integral-element-and-algebraic-integer",
+        "kind": "definition",
+        "title": "Integral elements over a commutative ring and algebraic integers",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "def-polynomial-degree-leading-coefficient-and-monic",
+          "def-polynomial-evaluation-and-root"
+        ]
+      },
+      {
+        "id": "thm-second-isomorphism-theorem-modules",
+        "kind": "theorem",
+        "title": "Second isomorphism theorem for modules",
+        "strategy": "For submodules \\(L,N\\le M\\), map \\(L\\to(L+N)/N\\). Its kernel is \\(L\\cap N\\), and it is surjective by the definition of \\(L+N\\); the first isomorphism theorem gives \\(L/(L\\cap N)\\cong(L+N)/N\\). Include zero and equal submodules.",
+        "deps": [
+          "thm-first-isomorphism-theorem-modules",
+          "lem-submodule-criterion-sums-and-intersections",
+          "def-quotient-module"
+        ]
+      },
+      {
+        "id": "thm-third-isomorphism-theorem-modules",
+        "kind": "theorem",
+        "title": "Third isomorphism theorem for modules",
+        "strategy": "For \\(N\\le L\\le M\\), send \\(m+N\\) to \\(m+L\\). Check representative independence, identify kernel \\(L/N\\), prove surjectivity, and apply the first isomorphism theorem. Include \\(N=L\\) and \\(L=M\\).",
+        "deps": [
+          "thm-first-isomorphism-theorem-modules",
+          "def-quotient-module",
+          "thm-quotient-module-universal-property"
+        ]
+      },
+      {
+        "id": "thm-correspondence-theorem-modules",
+        "kind": "theorem",
+        "title": "Correspondence theorem for submodules of a quotient module",
+        "strategy": "Inverse image and quotient give mutually inverse inclusion-preserving bijections between submodules of \\(M/N\\) and submodules of \\(M\\) containing \\(N\\). Verify both composites and preserve sums, intersections, and simplicity of successive quotients.",
+        "deps": [
+          "def-quotient-module",
+          "thm-quotient-module-universal-property"
+        ]
+      },
+      {
+        "id": "thm-equivalent-characterizations-of-noetherian-modules",
+        "kind": "theorem",
+        "title": "Finite generation, ACC, and maximal-condition characterizations of Noetherian modules",
+        "strategy": "Prove that finite generation of every submodule implies ACC by taking the union of a chain and locating a finite generating set in one stage. Prove that the maximal condition implies finite generation by taking a maximal finitely generated submodule and adjoining one element if it is proper. For ACC implies the maximal condition, use dependent choice to turn the absence of a maximal member into a strict ascending chain. At authoring time state dependent choice in Facts as an adopted foundational axiom; add no dependency, forward reference, or topology prerequisite.",
+        "deps": [
+          "def-noetherian-module"
+        ]
+      },
+      {
+        "id": "thm-equivalent-characterizations-of-artinian-modules",
+        "kind": "theorem",
+        "title": "DCC and minimal-condition characterizations of Artinian modules",
+        "strategy": "DCC gives a minimal member of every nonempty family by contradiction: under dependent choice, absence of a minimal member yields a strict descending chain. Conversely, a nonstabilizing descending chain has no minimal member. Treat repeated terms and the zero module.",
+        "deps": [
+          "def-artinian-module"
+        ]
+      },
+      {
+        "id": "thm-chain-conditions-in-short-exact-sequences",
+        "kind": "theorem",
+        "title": "Noetherian and Artinian conditions are each exact in short exact sequences",
+        "strategy": "For \\(0\\to N\\to M\\to Q\\to0\\), submodules and quotients inherit each chain condition. Conversely, intersect a chain in \\(M\\) with \\(N\\) and project it to \\(Q\\); once both chains stabilize, the second isomorphism theorem shows the original chain stabilizes. Prove both Noetherian and Artinian directions and all four converses.",
+        "deps": [
+          "def-noetherian-module",
+          "def-artinian-module",
+          "thm-second-isomorphism-theorem-modules",
+          "thm-correspondence-theorem-modules",
+          "def-exact-and-short-exact-sequences-of-modules"
+        ]
+      },
+      {
+        "id": "cor-finite-direct-sums-preserve-chain-conditions",
+        "kind": "corollary",
+        "title": "Finite direct sums preserve and reflect Noetherian and Artinian conditions",
+        "strategy": "Induct on the number of summands using the split short exact sequence for a binary direct sum. Reflection follows because every summand is a submodule and a quotient. Include the empty sum and one summand.",
+        "deps": [
+          "thm-chain-conditions-in-short-exact-sequences",
+          "def-direct-sum-of-a-family-of-modules"
+        ]
+      },
+      {
+        "id": "thm-finitely-generated-modules-over-noetherian-rings-are-noetherian",
+        "kind": "theorem",
+        "title": "Finitely generated modules over a left Noetherian ring are Noetherian",
+        "strategy": "A module generated by \\(n\\) elements is a quotient of \\(R^n\\). The left regular module is Noetherian, finite direct sums preserve the condition, and quotients inherit it. Include the zero-generated zero module.",
+        "deps": [
+          "def-noetherian-ring",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "cor-finite-direct-sums-preserve-chain-conditions",
+          "cor-every-module-is-a-quotient-of-a-free-module"
+        ]
+      },
+      {
+        "id": "cor-noetherian-modules-are-hopfian",
+        "kind": "corollary",
+        "title": "Every surjective endomorphism of a Noetherian module is injective",
+        "strategy": "For a surjective endomorphism \\(f\\), the ascending chain \\(\\ker f\\subseteq\\ker f^2\\subseteq\\cdots\\) stabilizes. Lift an element of \\(\\ker f\\) through a sufficiently high power of \\(f\\) and use stabilization to force it to zero. Include the zero module.",
+        "deps": [
+          "thm-equivalent-characterizations-of-noetherian-modules",
+          "def-endomorphism-ring-of-a-module"
+        ]
+      },
+      {
+        "id": "thm-composition-series-iff-noetherian-and-artinian",
+        "kind": "theorem",
+        "title": "A module has a composition series if and only if it is Noetherian and Artinian",
+        "strategy": "A finite composition series gives both chain conditions by induction through its simple factors. Conversely, under DC choose a maximal proper submodule of each nonzero quotient; Noetherianity prevents an infinite strict ascent while Artinianity guarantees termination in the dual construction. Present a finite construction and include the zero module with length zero.",
+        "deps": [
+          "def-composition-series-and-length-of-a-module",
+          "thm-equivalent-characterizations-of-noetherian-modules",
+          "thm-equivalent-characterizations-of-artinian-modules",
+          "thm-chain-conditions-in-short-exact-sequences"
+        ]
+      },
+      {
+        "id": "thm-jordan-holder-theorem-for-modules",
+        "kind": "theorem",
+        "title": "Jordan–Hölder theorem for modules",
+        "strategy": "Induct on one series length. Compare its penultimate maximal submodule with the penultimate term of a second series; if unequal, use their intersection and the second isomorphism theorem to identify the two exchanged simple factors, then apply induction below the intersection. Prove equality of lengths and equality of factor multisets up to permutation, including length zero and one.",
+        "deps": [
+          "def-composition-series-and-length-of-a-module",
+          "thm-second-isomorphism-theorem-modules",
+          "thm-third-isomorphism-theorem-modules",
+          "thm-correspondence-theorem-modules"
+        ]
+      },
+      {
+        "id": "cor-length-is-additive-in-short-exact-sequences",
+        "kind": "corollary",
+        "title": "Module length is additive in short exact sequences",
+        "strategy": "Lift a composition series of the quotient and splice it above a composition series of the submodule. Correspondence identifies the lifted factors, and Jordan–Hölder makes the resulting length independent of the chosen series. Cover zero endpoints and both directions of finite-length equivalence.",
+        "deps": [
+          "thm-jordan-holder-theorem-for-modules",
+          "def-composition-series-and-length-of-a-module",
+          "thm-correspondence-theorem-modules"
+        ]
+      },
+      {
+        "id": "prop-endomorphisms-form-a-ring",
+        "kind": "proposition",
+        "title": "Module endomorphisms form a ring under pointwise addition and composition",
+        "strategy": "Verify associativity of composition, distributivity over pointwise addition, additive inverses, and the identity endomorphism. For the zero module, identify the one-element zero ring and state the repository's unital convention.",
+        "deps": [
+          "def-endomorphism-ring-of-a-module",
+          "def-hom-groups-and-induced-hom-maps"
+        ]
+      },
+      {
+        "id": "thm-endomorphism-ring-of-the-left-regular-module-is-opposite",
+        "kind": "theorem",
+        "title": "$\\operatorname{End}_R({}_R R)\\cong R^{\\mathrm{op}}$",
+        "strategy": "Evaluate an endomorphism at \\(1\\). Left linearity gives \\(f(r)=rf(1)\\), so endomorphisms are right multiplications; composition reverses the order of their defining elements. Check the inverse map and the zero ring.",
+        "deps": [
+          "def-opposite-ring",
+          "prop-endomorphisms-form-a-ring",
+          "def-left-and-right-modules"
+        ]
+      },
+      {
+        "id": "thm-endomorphism-ring-of-a-finite-direct-sum-as-hom-matrices",
+        "kind": "theorem",
+        "title": "Endomorphisms of a finite direct sum are matrices of Hom-groups",
+        "strategy": "Use inclusions and projections to send \\(f\\) to entries \\(f_{ij}=\\pi_i f\\iota_j\\), and reconstruct \\(f\\) by finite sums. Verify that composition becomes matrix multiplication with composition in the entries and that the zero- and one-summand cases match.",
+        "deps": [
+          "def-endomorphism-ring-of-a-module",
+          "def-hom-groups-and-induced-hom-maps",
+          "thm-universal-property-of-module-direct-sums"
+        ]
+      },
+      {
+        "id": "thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules",
+        "kind": "theorem",
+        "title": "Every finitely generated nonzero module has a maximal proper submodule",
+        "strategy": "Order the proper submodules by inclusion. The union of a chain is a submodule; if it were all of \\(M\\), finitely many generators would lie in one chain member, contradicting properness. Zorn supplies a maximal proper submodule. Show why nonzero and finite generation are essential.",
+        "deps": [
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-submodule",
+          "thm-zorn"
+        ]
+      },
+      {
+        "id": "thm-equivalent-characterizations-of-semisimple-modules",
+        "kind": "theorem",
+        "title": "Equivalent characterizations of semisimple modules",
+        "strategy": "Prove equivalence of being a direct sum of simples, being a sum of simple submodules, and every submodule having a complement. For a given submodule, apply Zorn to independent subfamilies of simple summands; for the converse, split off the socle and derive a contradiction by finding a simple quotient of a finitely generated cyclic submodule. Record the full Choice/Zorn cost and include the zero module.",
+        "deps": [
+          "def-semisimple-module",
+          "thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules",
+          "thm-zorn",
+          "thm-universal-property-of-module-direct-sums"
+        ]
+      },
+      {
+        "id": "thm-finite-length-semisimple-module-characterizations",
+        "kind": "theorem",
+        "title": "Choice-free semisimple characterizations for finite-length modules",
+        "strategy": "For a finite-length module, replace Zorn by induction on length: split a simple submodule or a maximal term and recurse on the strictly shorter complement or quotient. Prove the same three characterizations without Choice and include lengths zero and one.",
+        "deps": [
+          "thm-equivalent-characterizations-of-semisimple-modules",
+          "def-composition-series-and-length-of-a-module",
+          "thm-jordan-holder-theorem-for-modules"
+        ]
+      },
+      {
+        "id": "thm-submodules-and-quotients-of-semisimple-modules",
+        "kind": "theorem",
+        "title": "Submodules and quotients of semisimple modules are semisimple",
+        "strategy": "A submodule inherits the complement property by intersecting a complement in the ambient module. For a quotient, complement the kernel and identify the quotient with that semisimple complement. Cover zero and whole submodules.",
+        "deps": [
+          "thm-equivalent-characterizations-of-semisimple-modules",
+          "thm-second-isomorphism-theorem-modules"
+        ]
+      },
+      {
+        "id": "thm-socle-is-the-largest-semisimple-submodule",
+        "kind": "theorem",
+        "title": "The socle is the largest semisimple submodule",
+        "strategy": "The sum of all simple submodules is semisimple by the sum characterization. Every semisimple submodule is itself a sum of simple submodules of the ambient module, hence lies in the socle. Include a module with no simple submodule.",
+        "deps": [
+          "def-socle-of-a-module",
+          "thm-equivalent-characterizations-of-semisimple-modules",
+          "thm-submodules-and-quotients-of-semisimple-modules"
+        ]
+      },
+      {
+        "id": "thm-finitely-generated-semisimple-modules-are-finite-direct-sums-of-simple-modules",
+        "kind": "theorem",
+        "title": "A finitely generated semisimple module is a finite direct sum of simple modules",
+        "strategy": "In a direct-sum decomposition, each generator has finite support; the union of those finite supports contains every generator and hence the whole module. Remove zero or repeated summands and include the zero-generated case.",
+        "deps": [
+          "def-semisimple-module",
+          "def-generated-cyclic-finitely-generated-and-free-modules"
+        ]
+      },
+      {
+        "id": "thm-schurs-lemma-for-modules",
+        "kind": "theorem",
+        "title": "Schur's lemma for simple modules",
+        "strategy": "The kernel and image of a homomorphism between simple modules are each zero or whole. A nonzero homomorphism is therefore injective and surjective. Applied to a nonzero endomorphism, its inverse is linear, so the endomorphism ring is a division ring. Keep the zero homomorphism and nonisomorphic simples explicit.",
+        "deps": [
+          "def-simple-module",
+          "def-endomorphism-ring-of-a-module",
+          "prop-endomorphisms-form-a-ring"
+        ]
+      },
+      {
+        "id": "thm-equivalent-characterizations-of-semisimple-rings",
+        "kind": "theorem",
+        "title": "Equivalent module-theoretic characterizations of semisimple rings",
+        "strategy": "Under Choice, prove equivalence of the left regular module being semisimple, every left module being semisimple, every short exact sequence splitting, and every left module being projective. Free modules are sums of the regular module and every module is their quotient; the complement and splitting characterizations supply the other implications. State the left-module convention in every clause.",
+        "deps": [
+          "def-semisimple-ring",
+          "thm-submodules-and-quotients-of-semisimple-modules",
+          "cor-every-module-is-a-quotient-of-a-free-module",
+          "def-split-short-exact-sequence",
+          "thm-splitting-lemma-for-modules",
+          "def-projective-module",
+          "thm-projective-module-characterizations"
+        ]
+      },
+      {
+        "id": "thm-matrix-rings-over-division-rings-are-semisimple",
+        "kind": "theorem",
+        "title": "Matrix rings over division rings are semisimple",
+        "strategy": "Decompose the left regular module of \\(M_n(D)\\) into the column left ideals \\(M_n(D)e_{jj}\\). Each is isomorphic to the simple column module \\(D^n\\), since matrix units carry any nonzero vector to each standard vector. Include \\(n=1\\); require \\(n\\ge1\\).",
+        "deps": [
+          "def-semisimple-ring",
+          "def-ring-matrix-product-identity-and-transpose",
+          "def-simple-module",
+          "thm-equivalent-characterizations-of-semisimple-modules"
+        ]
+      },
+      {
+        "id": "thm-wedderburn-artin-theorem",
+        "kind": "theorem",
+        "title": "Wedderburn–Artin theorem for semisimple rings",
+        "strategy": "For a semisimple ring, decompose the cyclic left regular module into finitely many isotypic blocks \\(S_i^{n_i}\\). Schur kills off-diagonal Hom-groups and makes \\(\\operatorname{End}_R(S_i)\\) a division ring. Compute \\(\\operatorname{End}_R({}_R R)\\), then take opposites exactly once to obtain \\(R\\cong\\prod_i M_{n_i}(D_i)\\). The converse is the column-ideal theorem. Include the zero ring as the empty product if the repository permits it, otherwise state the nonzero-ring convention explicitly.",
+        "deps": [
+          "thm-endomorphism-ring-of-the-left-regular-module-is-opposite",
+          "thm-endomorphism-ring-of-a-finite-direct-sum-as-hom-matrices",
+          "thm-finitely-generated-semisimple-modules-are-finite-direct-sums-of-simple-modules",
+          "thm-schurs-lemma-for-modules",
+          "thm-matrix-rings-over-division-rings-are-semisimple",
+          "def-semisimple-ring"
+        ]
+      },
+      {
+        "id": "thm-simple-modules-over-semisimple-rings",
+        "kind": "theorem",
+        "title": "Simple modules over a product of matrix rings over division rings",
+        "strategy": "For \\(R=\\prod_iM_{n_i}(D_i)\\), central coordinate idempotents show a simple left module is supported on exactly one factor. Matrix units then identify it with that factor's column module \\(D_i^{n_i}\\), and different factors give nonisomorphic modules. Check a one-factor product.",
+        "deps": [
+          "thm-wedderburn-artin-theorem",
+          "thm-schurs-lemma-for-modules",
+          "thm-matrix-rings-over-division-rings-are-semisimple"
+        ]
+      },
+      {
+        "id": "thm-uniqueness-of-wedderburn-artin-data",
+        "kind": "theorem",
+        "title": "Uniqueness of the Wedderburn–Artin factors",
+        "strategy": "Recover the factors from the isomorphism classes of simple left modules and their multiplicities in the left regular module. Their endomorphism division rings recover the \\(D_i\\) with the orientation fixed by the opposite-ring step. Jordan–Hölder makes the multiplicities invariant; conclude uniqueness up to permutation and division-ring isomorphism.",
+        "deps": [
+          "thm-wedderburn-artin-theorem",
+          "thm-simple-modules-over-semisimple-rings",
+          "thm-schurs-lemma-for-modules",
+          "thm-jordan-holder-theorem-for-modules"
+        ]
+      },
+      {
+        "id": "cor-left-and-right-semisimplicity-agree",
+        "kind": "corollary",
+        "title": "Left and right semisimplicity of a ring agree",
+        "strategy": "Apply Wedderburn–Artin to the left regular module. Opposites of finite products of matrix rings are matrix rings over opposite division rings, hence are semisimple; translating modules over \\(R^{\\mathrm{op}}\\) gives right semisimplicity. Repeat for the converse.",
+        "deps": [
+          "thm-wedderburn-artin-theorem",
+          "def-opposite-ring",
+          "thm-matrix-rings-over-division-rings-are-semisimple",
+          "def-ring-matrix-product-identity-and-transpose"
+        ]
+      },
+      {
+        "id": "cor-semisimple-rings-are-noetherian-and-artinian",
+        "kind": "corollary",
+        "title": "Semisimple rings are left and right Noetherian and Artinian",
+        "strategy": "The left regular module is cyclic and semisimple, hence a finite direct sum of simples and therefore has finite length. The chain-condition theorem gives left Noetherian and Artinian. Apply the left/right agreement to the opposite ring for the right-handed statements.",
+        "deps": [
+          "def-semisimple-ring",
+          "thm-finitely-generated-semisimple-modules-are-finite-direct-sums-of-simple-modules",
+          "thm-composition-series-iff-noetherian-and-artinian",
+          "cor-left-and-right-semisimplicity-agree"
+        ]
+      },
+      {
+        "id": "thm-integrality-and-finite-module-equivalences",
+        "kind": "theorem",
+        "title": "Integrality and finite-module characterizations for one element",
+        "strategy": "For a commutative ring extension \\(A\\subseteq B\\) and \\(b\\in B\\), prove equivalence of: \\(b\\) integral; \\(A[b]\\) finite as an \\(A\\)-module; and a faithful \\(A[b]\\)-module finite over \\(A\\) exists. A monic relation reduces all high powers. Conversely, write multiplication by \\(b\\) on finite generators as a matrix and use the adjugate identity; faithfulness turns the annihilating monic determinant into a relation for \\(b\\). Treat degree zero, the zero ring, and the zero module explicitly.",
+        "deps": [
+          "def-integral-element-and-algebraic-integer",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "thm-adjugate-identity-over-a-commutative-ring"
+        ]
+      },
+      {
+        "id": "cor-integral-elements-form-a-subring",
+        "kind": "corollary",
+        "title": "Integral elements form a subring",
+        "strategy": "If \\(x,y\\) are integral, \\(A[x,y]\\) is finite over \\(A\\) by adjoining them successively and multiplying finite generating sets. Its elements \\(x\\pm y\\) and \\(xy\\) therefore generate finite \\(A\\)-subalgebras and are integral. Include zero, one, negatives, and coincident elements.",
+        "deps": [
+          "thm-integrality-and-finite-module-equivalences",
+          "def-integral-element-and-algebraic-integer"
+        ]
+      },
+      {
+        "id": "cor-rational-algebraic-integers-are-integers",
+        "kind": "corollary",
+        "title": "The rational algebraic integers are exactly the integers",
+        "strategy": "Write a rational algebraic integer in lowest terms \\(r/s\\) with \\(s>0\\). It is a root of a monic integer polynomial, so the rational-root theorem makes \\(s\\mid1\\), hence \\(s=1\\). Conversely every integer satisfies the monic polynomial \\(X-n\\). Include zero and negative integers.",
+        "deps": [
+          "def-integral-element-and-algebraic-integer",
+          "thm-rational-root-theorem",
+          "thm-rat-field",
+          "lem-int-embeds-rat"
+        ]
+      }
+    ]
   },
   {
     "order": 109,
@@ -46,8 +1142,140 @@
     "title": "Chain Conditions, Semisimple Modules and the Wedderburn–Artin Theorem — Examples",
     "companion": "chain-conditions-and-semisimple-modules",
     "requires": [
-      "chain-conditions-and-semisimple-modules"
+      "chain-conditions-and-semisimple-modules",
+      "the-field-of-fractions-and-localisation"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-integers-as-a-noetherian-non-artinian-module",
+        "kind": "example",
+        "title": "$\\mathbb Z$ is Noetherian but not Artinian as a module over itself",
+        "strategy": "Every subgroup of \\(\\mathbb Z\\) is principal, so every submodule is finitely generated. The descending chain \\(2^n\\mathbb Z\\) is strict from \\(n=0\\) onward, showing failure of DCC. Check the initial term \\(\\mathbb Z\\).",
+        "deps": [
+          "def-noetherian-module",
+          "def-artinian-module",
+          "lem-subgroups-of-z-are-cyclic"
+        ]
+      },
+      {
+        "id": "ex-prufer-p-group-is-artinian-not-noetherian",
+        "kind": "example",
+        "title": "The Prüfer $p$-group is Artinian but not Noetherian",
+        "strategy": "Construct \\(\\mathbb Z(p^\\infty)\\) as the subgroup of \\(\\mathbb Q/\\mathbb Z\\) represented by rationals with \\(p\\)-power denominator. Its finite subgroups form a strict ascending chain, so it is not Noetherian. Classify its proper subgroups as the unique cyclic groups of order \\(p^n\\); any descending chain therefore stabilizes. Check the zero subgroup and \\(p=2\\).",
+        "deps": [
+          "def-noetherian-module",
+          "def-artinian-module",
+          "thm-rat-field",
+          "lem-int-embeds-rat",
+          "def-quotient-module"
+        ]
+      },
+      {
+        "id": "ex-infinite-binary-product-ring-is-not-noetherian",
+        "kind": "example",
+        "title": "The ring $(\\mathbb Z/2)^{\\mathbb N}$ is not Noetherian",
+        "strategy": "Let \\(e_i\\) be the coordinate idempotents. The ideals generated by \\(e_0,\\ldots,e_n\\) form a strict ascending chain, witnessed by \\(e_{n+1}\\). Distinguish the full product ring from its finite-support ideal.",
+        "deps": [
+          "def-noetherian-ring",
+          "def-direct-sum-of-a-family-of-modules",
+          "thm-integers-modulo-n-basic-algebra"
+        ]
+      },
+      {
+        "id": "ex-matrix-ring-decomposition-into-minimal-left-ideals",
+        "kind": "example",
+        "title": "$M_n(F)$ as a direct sum of minimal left ideals",
+        "strategy": "Use the column ideals \\(M_n(F)e_{jj}\\), exhibit the isomorphism with \\(F^n\\), and prove minimality with matrix units. Their internal direct sum is the left regular module. Include \\(n=1\\) and avoid asserting there are only \\(n\\) minimal left ideals.",
+        "deps": [
+          "thm-matrix-rings-over-division-rings-are-semisimple",
+          "thm-simple-modules-over-semisimple-rings",
+          "def-matrix-units"
+        ]
+      },
+      {
+        "id": "ex-product-of-two-fields-is-semisimple",
+        "kind": "example",
+        "title": "A product of two fields is semisimple with two simple-module types",
+        "strategy": "For \\(F\\times K\\), the central idempotents \\((1,0)\\) and \\((0,1)\\) split the regular module. Identify the two simple left modules and show any module splits into its two coordinate parts. Allow \\(F\\cong K\\) while keeping the factor actions distinct.",
+        "deps": [
+          "thm-wedderburn-artin-theorem",
+          "thm-simple-modules-over-semisimple-rings"
+        ]
+      },
+      {
+        "id": "ex-length-of-z-modulo-p-to-the-k",
+        "kind": "example",
+        "title": "The $\\mathbb Z$-module $\\mathbb Z/p^k$ has length $k$",
+        "strategy": "Use the chain \\(0<p^{k-1}\\mathbb Z/p^k\\mathbb Z<\\cdots<p\\mathbb Z/p^k\\mathbb Z<\\mathbb Z/p^k\\mathbb Z\\), whose factors are \\(\\mathbb Z/p\\). Check \\(k=0\\) gives the zero module and \\(k=1\\) is simple. Note that the ambient ring \\(\\mathbb Z\\) is not Artinian.",
+        "deps": [
+          "def-composition-series-and-length-of-a-module",
+          "thm-jordan-holder-theorem-for-modules",
+          "cor-length-is-additive-in-short-exact-sequences",
+          "cor-prime-order-group-is-cyclic"
+        ]
+      },
+      {
+        "id": "ex-quadratic-algebraic-integers-and-one-half",
+        "kind": "example",
+        "title": "$\\sqrt2$ and $(1+\\sqrt5)/2$ are algebraic integers, while $1/2$ is not",
+        "strategy": "Give the monic equations \\(X^2-2\\) and \\(X^2-X-1\\). The rational corollary excludes \\(1/2\\); also show directly that a monic integer equation at \\(1/2\\) has incompatible parity after clearing the exact power of two.",
+        "deps": [
+          "def-integral-element-and-algebraic-integer",
+          "cor-rational-algebraic-integers-are-integers",
+          "thm-of-square-roots"
+        ]
+      },
+      {
+        "id": "fs-artinian-modules-are-noetherian",
+        "kind": "false-statement",
+        "title": "False statement: every Artinian module is Noetherian",
+        "strategy": "Use the preceding Prüfer \\(p\\)-group, quoting its complete subgroup classification to establish DCC and its strict ascending chain of finite cyclic subgroups to refute Noetherianity.",
+        "deps": [
+          "ex-prufer-p-group-is-artinian-not-noetherian"
+        ]
+      },
+      {
+        "id": "fs-every-module-has-a-composition-series",
+        "kind": "false-statement",
+        "title": "False statement: every module has a composition series",
+        "strategy": "The module \\(\\mathbb Z\\) over itself is Noetherian but not Artinian, so the equivalence theorem rules out a composition series. Also point to the explicit descending chain rather than a scope claim.",
+        "deps": [
+          "thm-composition-series-iff-noetherian-and-artinian",
+          "ex-integers-as-a-noetherian-non-artinian-module"
+        ]
+      },
+      {
+        "id": "fs-semisimple-rings-are-commutative",
+        "kind": "false-statement",
+        "title": "False statement: every semisimple ring is commutative",
+        "strategy": "For any field \\(F\\), the preceding decomposition makes \\(M_2(F)\\) semisimple, while two matrix units multiply in opposite orders to different results. Check fields of characteristic two.",
+        "deps": [
+          "ex-matrix-ring-decomposition-into-minimal-left-ideals",
+          "cor-matrix-rings-are-noncommutative-in-dimension-at-least-two"
+        ]
+      },
+      {
+        "id": "fs-noetherian-rings-have-noetherian-subrings",
+        "kind": "false-statement",
+        "title": "False statement: every subring of a Noetherian ring is Noetherian",
+        "strategy": "Construct the countably generated polynomial domain \\(R=F[x_0,x_1,\\ldots]\\) and its fraction field \\(K\\). The field \\(K\\) is Noetherian, while the ideals \\((x_0)\\subsetneq(x_0,x_1)\\subsetneq\\cdots\\) show that its subring \\(R\\) is not. Build the polynomial ring natively as finite polynomials so no unavailable multivariable-polynomial definition is cited.",
+        "deps": [
+          "def-noetherian-ring",
+          "def-field-of-fractions",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds"
+        ]
+      },
+      {
+        "id": "fs-right-noetherian-rings-are-left-noetherian",
+        "kind": "false-statement",
+        "title": "False statement: every right Noetherian ring is left Noetherian",
+        "strategy": "For \\(T=\\left\\{\\begin{psmallmatrix}a&q\\\\0&r\\end{psmallmatrix}:a\\in\\mathbb Z,\\ q,r\\in\\mathbb Q\\right\\}\\), use the triangular-ring criterion proved inline: right Noetherianity reduces to \\(\\mathbb Z_{\\mathbb Z}\\), \\(\\mathbb Q_{\\mathbb Q}\\), and the one-generated right \\(\\mathbb Q\\)-module \\(\\mathbb Q\\); left Noetherianity would force \\(\\mathbb Q\\) finitely generated over \\(\\mathbb Z\\), which it is not. Exhibit the corresponding strict ascending chain of left ideals and check the identity and multiplication.",
+        "deps": [
+          "def-noetherian-ring",
+          "def-ring-matrix-product-identity-and-transpose",
+          "thm-rat-field"
+        ]
+      }
+    ]
   }
 ]
