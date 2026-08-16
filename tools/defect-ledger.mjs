@@ -49,6 +49,10 @@ import { join } from 'node:path';
 const argv = process.argv.slice(2);
 const cmd = argv[0];
 const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
+/** Was the flag given at all, whatever `opt` made of its value? `opt` silently
+ *  returns the default for a bare flag and for one whose value is the next
+ *  flag, which is how `stats --by` printed nothing and exited 0. */
+const given = (n) => argv.includes(`--${n}`);
 const asJson = argv.includes('--json');
 const ledgerPath = opt('ledger', 'research/defect-ledger.jsonl');
 
@@ -93,6 +97,12 @@ const OPTIONAL_ENUMS = {
 };
 const MANDATORY = ['defect_id', 'run', 'at', 'class', 'subclass', 'severity', 'location',
   'subject', 'caught_at_stage', 'caught_by_role', 'disposition'];
+// The scalar fields `stats --by` can group on. Grouping on a field no row has
+// produces one bucket named "(none)" holding every row — a table that looks
+// like an answer and is not one, which is exactly what a typo used to yield.
+const GROUPABLE = [...MANDATORY, ...Object.keys(OPTIONAL_ENUMS),
+  'introduced_by_role', 'subclass_note', 'source', 'batch', 'orig_id',
+  'item_sha256', 'recurrence_of'].sort();
 
 function loadLedger(path = ledgerPath) {
   if (!existsSync(path)) return [];
@@ -245,8 +255,23 @@ if (cmd === 'stats') {
   const rows = filtered(loadLedger()).filter((r) => !r.__parse_error);
   const out = {};
   const by = opt('by');
+  // A bare `--by`, or a `--by` whose value is the next flag, printed nothing and
+  // exited 0 — the query silently became "no query", and a caller reading the
+  // exit code learned that everything was fine. An unknown field was worse: it
+  // grouped every row into one bucket named "(none)" and printed it as a result.
+  if (given('by') && !by) {
+    console.error('stats --by needs a comma-separated field list, e.g. --by subclass,caught_at_stage');
+    console.error(`valid fields: ${GROUPABLE.join(', ')}`);
+    process.exit(2);
+  }
   if (by) {
-    const fields = by.split(',');
+    const fields = by.split(',').map((f) => f.trim());
+    const unknown = fields.filter((f) => !GROUPABLE.includes(f));
+    if (unknown.length) {
+      console.error(`stats --by: unknown field(s) ${unknown.join(', ')}`);
+      console.error(`valid fields: ${GROUPABLE.join(', ')}`);
+      process.exit(2);
+    }
     const table = {};
     for (const r of rows) {
       const key = fields.map((f) => r[f] ?? '(none)').join(' × ');
