@@ -118,6 +118,32 @@ for (const id of itemIds) {
 for (const ledger of ledgers) collect(readFileSync(absolute(ledger), 'utf8'));
 for (const coverage of coverages) collect(readFileSync(absolute(coverage), 'utf8'));
 
+// A URL recorded as `original_url` on a coverage source is a DECLARED
+// SUPERSEDED citation: the recover-apply repair (§3.11c) swapped the
+// reader-facing `url` to an archive snapshot and kept the original as
+// provenance. Probing it again re-fails the gate on a link no reader is
+// shown. The first live firing of the stage-1 repair loop deadlocked
+// exactly so: the swap landed, this collector — which harvests every URL
+// in the raw text on purpose, for prose citations — re-harvested the
+// preserved original out of the same file, and the stage exhausted its
+// repair round on a URL that had stopped being a citation. The exclusion
+// is coverage-schema-scoped: items and ledgers keep the full harvest, and
+// a source whose original_url equals its url (never swapped) is untouched.
+const superseded = new Set();
+for (const coverage of coverages) {
+  try {
+    const parsed = JSON.parse(readFileSync(absolute(coverage), 'utf8'));
+    for (const page of parsed.pages ?? []) {
+      for (const source of page.sources ?? []) {
+        if (source?.original_url && source?.url && source.original_url !== source.url) {
+          try { superseded.add(new URL(source.original_url).href); } catch { /* not a URL */ }
+        }
+      }
+    }
+  } catch { /* a non-JSON coverage input keeps the full harvest */ }
+}
+for (const url of superseded) urls.delete(url);
+
 const queue = [...urls].sort();
 const rows = new Array(queue.length);
 let cursor = 0;
@@ -328,7 +354,9 @@ const result = {
     failed: rows.filter((row) => !row.ok).length,
     recovered: rows.filter((row) => !row.ok && row.recovered).length,
     suspect: rows.filter((row) => row.suspect).length,
+    superseded: superseded.size,
   },
+  superseded: [...superseded].sort(),
   rows,
 };
 writeFileSync(absolute(out), JSON.stringify(result, null, 2) + '\n');

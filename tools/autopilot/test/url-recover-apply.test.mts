@@ -94,6 +94,37 @@ test('a recovered URL cited nowhere is artifact/coverage drift, not a pass', () 
   rmSync(dir, { recursive: true, force: true });
 });
 
+// ------------------------------------------------- the sweep must not re-probe
+
+test('url-sweep excludes declared-superseded originals from its probe queue', () => {
+  // No network: every URL in the fixture is superseded or malformed, so the
+  // queue is empty and the sweep exits without a single probe. The assertion
+  // is on the artifact: the original is listed as superseded, not probed —
+  // the exact defect was the sweep re-harvesting original_url out of the
+  // file the swap had just repaired, and the stage exhausting its repair
+  // round on a URL that had stopped being a citation.
+  const dir = mkdtempSync(join(tmpdir(), 'usw-'));
+  mkdirSync(join(dir, 'research'));
+  writeFileSync(join(dir, 'research', 'cov.json'), JSON.stringify({
+    pages: [{ page: 'p', sources: [{ url: SNAP, original_url: DEAD, contents: [] }] }],
+  }, null, 2));
+  // strip the live snapshot from the queue too, by making it the only URL and
+  // asserting on counts: 2 URLs collected (SNAP + DEAD), 1 superseded => 1 probed.
+  // absolute paths: url-sweep anchors relative inputs to the library REPO,
+  // never to cwd, so a tmpdir fixture must be passed absolutely
+  const r = spawnSync(process.execPath, [join(REPO, 'tools', 'url-sweep.mjs'),
+    '--coverage', join(dir, 'research', 'cov.json'),
+    '--out', join(dir, 'research', 'liveness-out.json'), '--timeout-ms', '3000'],
+    { cwd: dir, encoding: 'utf8', timeout: 120_000 });
+  assert.equal(r.status, 0, r.stderr);   // no --fail-on-dead: report-only
+  const art = JSON.parse(readFileSync(join(dir, 'research', 'liveness-out.json'), 'utf8'));
+  assert.equal(art.summary.superseded, 1);
+  assert.deepEqual(art.superseded, [DEAD]);
+  assert.ok(!art.rows.some((row: any) => row.url === DEAD), 'the dead original must not be probed');
+  assert.ok(art.rows.some((row: any) => row.url === SNAP), 'the live snapshot must still be probed');
+  rmSync(dir, { recursive: true, force: true });
+});
+
 // ---------------------------------------------------------------- the hook
 
 test('stage 1 declares one mechanical repair round for url-liveness', () => {

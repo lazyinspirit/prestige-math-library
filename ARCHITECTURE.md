@@ -724,6 +724,14 @@ Alpha, never a default. The reader-clickable-citation principle is unchanged;
 only the mechanism moved from "blocked until someone swaps" to "swapped by the
 stage's own repair loop, then re-verified".
 
+The sweep, in turn, treats a coverage source's `original_url` as a **declared
+superseded citation** and excludes it from the probe queue (`superseded` in
+the artifact). Found by the repair loop's first live firing: the swap landed,
+and the sweep — whose collector deliberately harvests every URL in the raw
+text — re-harvested the preserved original out of the repaired file and
+exhausted the repair round on a URL that had stopped being a citation. Prose
+URLs in items and ledgers keep the full harvest.
+
 **Two bugs found by running it, both of which had already bitten the run.**
 
 - *Liveness is a header question.* The first version downloaded the body and
