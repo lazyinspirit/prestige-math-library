@@ -96,6 +96,11 @@ const repoWide = (ctx) => [
   // always-green gate is noise, not checking — readers run it by hand.)
   gate('prosecheck', ['node', 'tools/prosecheck.mjs']),
   gate('depsource', ['node', 'tools/depsource.mjs']),
+  // Scope loss is invisible to every gate that reads current state, and the
+  // add/delete authority briefs/alpha.md grants runs through step 9 — so the
+  // step-0 scope ledger is re-checked at every repo-wide gate point, not only
+  // through step 5 (where it stopped when a scaffolded pair vanished anyway).
+  scopeGate(ctx),
 ];
 
 const coverageGates = (ctx) => batches(ctx).map((b: any) =>
@@ -556,7 +561,7 @@ export const stages = [
     })),
     // Step 5 computes the risk tiers; step 6 requires their dispositions. Same
     // split the audit carries at A4 versus A6.
-    gates: (ctx) => [scopeGate(ctx), ...repoWide(ctx), planGate(), policyItemGate(ctx),
+    gates: (ctx) => [...repoWide(ctx), planGate(), policyItemGate(ctx),
       ...contractGates(ctx, { reviewed: false })],
   },
 
