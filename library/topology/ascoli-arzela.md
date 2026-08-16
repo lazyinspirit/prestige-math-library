@@ -1,7 +1,7 @@
 ---
 page: ascoli-arzela
 title: "The Ascoli–Arzelà Theorem"
-status: draft
+status: published
 items: [def-compact-open-topology-for-topological-domains, prop-general-compact-open-topology-agrees-with-the-metric-definition, def-equicontinuity-on-a-topological-domain-and-pointwise-relative-compactness, prop-topological-domain-equicontinuity-agrees-with-metric-equicontinuity, thm-evaluation-is-continuous-for-a-locally-compact-hausdorff-domain, thm-pointwise-compactness-criterion-for-function-families, lem-pointwise-closure-preserves-equicontinuity, lem-compact-open-and-pointwise-topologies-agree-on-an-equicontinuous-family, thm-ascoli-arzela-sufficiency, thm-compact-function-families-are-equicontinuous-on-a-locally-compact-hausdorff-domain, prop-compact-function-families-are-pointwise-relatively-compact, thm-ascoli-arzela-general, cor-ascoli-arzela-for-compact-hausdorff-domains, prop-compact-open-is-uniform-on-a-compact-metric-domain, cor-ascoli-arzela-for-compact-metric-domains, cor-compact-subsets-of-cx-for-a-proper-metric-target, cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets, cor-real-and-euclidean-vector-valued-ascoli-arzela, cor-equicontinuous-families-into-a-compact-metric-target]
 examples: [ex-ascoli-on-a-finite-discrete-domain, ex-compact-families-of-constant-maps, cex-boundedness-does-not-replace-pointwise-relative-compactness, ex-translated-tent-functions-converge-in-the-compact-open-topology, ex-compact-affine-interpolation-family]
 ---

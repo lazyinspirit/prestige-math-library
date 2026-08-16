@@ -2,7 +2,7 @@
 id: thm-riemann-stieltjes-and-parametric-contour-integrals-agree
 kind: theorem
 title: "For piecewise-C1 contours the Riemann–Stieltjes integral agrees with the parametric complex integral and the published real line integrals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

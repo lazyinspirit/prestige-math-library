@@ -2,7 +2,7 @@
 id: lem-standard-complete-metric-on-a-countable-product
 kind: lemma
 title: "The standard weighted metric on a countable product of bounded complete metric spaces is complete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

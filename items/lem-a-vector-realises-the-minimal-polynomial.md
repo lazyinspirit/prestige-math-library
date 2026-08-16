@@ -2,7 +2,7 @@
 id: lem-a-vector-realises-the-minimal-polynomial
 kind: lemma
 title: "Some vector has vector annihilator equal to the minimal polynomial"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

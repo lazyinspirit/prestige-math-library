@@ -2,7 +2,7 @@
 id: thm-complex-sine-and-cosine-zero-sets
 kind: theorem
 title: "The zeros of complex sine are the integer multiples of pi, and the zeros of complex cosine are the odd half-integer multiples of pi"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

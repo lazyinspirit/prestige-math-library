@@ -2,7 +2,7 @@
 id: fs-absolute-value-passes-through-a-contour-integral
 kind: false-statement
 title: "FALSE: the modulus of a contour integral always equals the absolute line integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

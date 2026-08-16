@@ -2,7 +2,7 @@
 id: cor-vanishing-moments-force-a-continuous-function-to-vanish
 kind: corollary
 title: "A continuous real function on $[0,1]$ whose every moment $\\int_0^1 x^nf$ vanishes is identically zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

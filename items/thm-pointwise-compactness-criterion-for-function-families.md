@@ -2,7 +2,7 @@
 id: thm-pointwise-compactness-criterion-for-function-families
 kind: theorem
 title: "Under Choice, pointwise closure is compact exactly when every coordinate set has compact closure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

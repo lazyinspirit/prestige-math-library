@@ -2,7 +2,7 @@
 id: thm-universal-cover-uniqueness-and-dominating-property
 kind: theorem
 title: "For a path-connected locally path-connected base, a universal cover maps uniquely over the base to every connected covering, and any two universal covers are uniquely isomorphic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-complex-line-integral-over-a-rectifiable-path
 kind: definition
 title: "The complex line integral over a rectifiable path as a componentwise Riemann–Stieltjes integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

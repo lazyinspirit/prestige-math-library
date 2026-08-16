@@ -1,7 +1,7 @@
 ---
 page: stone-weierstrass-general-examples
 title: "Stone–Weierstrass in General: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-disc-algebra-is-not-dense-without-self-adjointness,
            ex-trigonometric-polynomials-are-dense-on-the-circle,

@@ -1,7 +1,7 @@
 ---
 page: complete-metrizability-and-baire
 title: "Complete Metrizability, Čech-Completeness, and Baire Category"
-status: draft
+status: published
 items: [def-nowhere-dense-meagre-and-residual-subsets, prop-meagre-subsets-form-a-sigma-ideal, thm-baire-space-equivalent-characterisations, prop-open-and-residual-subspaces-of-baire-spaces,
         lem-open-subspace-complete-remetrisation, lem-countable-intersection-of-completely-metrizable-subspaces, thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable, thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta,
         thm-alexandrov-complete-metrizability-characterisation, cor-open-closed-and-g-delta-subspaces-of-completely-metrizable-spaces, cor-completely-metrizable-spaces-are-baire, lem-standard-complete-metric-on-a-countable-product,

@@ -2,7 +2,7 @@
 id: thm-uniform-limit-interchanges-complex-line-integrals
 kind: theorem
 title: "A uniformly convergent sequence of continuous integrands on a fixed contour permits passage of the limit through the complex line integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

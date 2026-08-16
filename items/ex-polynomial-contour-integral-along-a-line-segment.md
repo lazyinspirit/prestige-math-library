@@ -2,7 +2,7 @@
 id: ex-polynomial-contour-integral-along-a-line-segment
 kind: example
 title: "Integrating a complex polynomial along a segment and a parabola by a primitive and by parametrization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-product-of-two-quadratic-nonresidues-modulo-a-composite
 kind: counterexample
 title: "Two quadratic nonresidues modulo $15$ can have a nonresidue product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

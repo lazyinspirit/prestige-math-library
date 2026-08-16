@@ -2,7 +2,7 @@
 id: ex-unique-cube-root-of-two-modulo-twenty-nine
 kind: example
 title: "The unique cube root of $2$ modulo $29$ is $-3$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

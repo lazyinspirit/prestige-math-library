@@ -2,7 +2,7 @@
 id: lem-uniform-closure-of-a-general-real-function-algebra-is-a-lattice
 kind: lemma
 title: "The uniform closure of a real function algebra is a vector lattice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

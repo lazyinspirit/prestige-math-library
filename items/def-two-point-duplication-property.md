@@ -2,7 +2,7 @@
 id: def-two-point-duplication-property
 kind: definition
 title: "The two-point duplication property of a function family relative to a target function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

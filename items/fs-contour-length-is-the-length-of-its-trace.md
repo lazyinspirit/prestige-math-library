@@ -2,7 +2,7 @@
 id: fs-contour-length-is-the-length-of-its-trace
 kind: false-statement
 title: "FALSE: contour length depends only on the trace and ignores multiplicity"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

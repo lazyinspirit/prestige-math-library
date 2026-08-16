@@ -2,7 +2,7 @@
 id: lem-derived-complex-power-series-has-the-same-radius
 kind: lemma
 title: "A complex power series, its formal derivative, and its zero-constant-term formal antiderivative have the same radius"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-separating-real-function-lattice
 kind: definition
 title: 'Unital point-separating real vector sublattices of $C(X,\mathbb R)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

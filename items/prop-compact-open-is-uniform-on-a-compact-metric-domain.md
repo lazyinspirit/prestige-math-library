@@ -2,7 +2,7 @@
 id: prop-compact-open-is-uniform-on-a-compact-metric-domain
 kind: proposition
 title: "On a nonempty compact metric domain, the compact-open topology is the uniform topology"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

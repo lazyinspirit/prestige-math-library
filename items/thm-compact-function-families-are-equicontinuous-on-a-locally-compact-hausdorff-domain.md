@@ -2,7 +2,7 @@
 id: thm-compact-function-families-are-equicontinuous-on-a-locally-compact-hausdorff-domain
 kind: theorem
 title: "A compact compact-open family is equicontinuous on a locally compact Hausdorff domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

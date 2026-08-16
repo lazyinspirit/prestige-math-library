@@ -2,7 +2,7 @@
 id: prop-induced-quotient-operator-is-well-defined
 kind: proposition
 title: 'Invariance makes the induced quotient operator well defined and linear, with $\pi T=\bar T\pi$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

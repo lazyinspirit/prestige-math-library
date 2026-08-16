@@ -2,7 +2,7 @@
 id: lem-compact-open-and-pointwise-topologies-agree-on-an-equicontinuous-family
 kind: lemma
 title: "The compact-open and pointwise topologies agree on an equicontinuous family"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

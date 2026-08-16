@@ -2,7 +2,7 @@
 id: def-absolute-line-integral-over-a-rectifiable-path
 kind: definition
 title: "The absolute line integral over a rectifiable path using its arc-length function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

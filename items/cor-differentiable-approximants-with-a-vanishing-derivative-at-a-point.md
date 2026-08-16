@@ -2,7 +2,7 @@
 id: cor-differentiable-approximants-with-a-vanishing-derivative-at-a-point
 kind: corollary
 title: "Every continuous function on $[0,1]$ is uniformly approximated by everywhere-differentiable functions whose derivative vanishes at a prescribed point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

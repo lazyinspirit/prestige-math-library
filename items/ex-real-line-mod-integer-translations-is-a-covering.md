@@ -2,7 +2,7 @@
 id: ex-real-line-mod-integer-translations-is-a-covering
 kind: example
 title: "The quotient $\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering with integer translations as deck transformations"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

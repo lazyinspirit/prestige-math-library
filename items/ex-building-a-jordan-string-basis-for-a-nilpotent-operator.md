@@ -2,7 +2,7 @@
 id: ex-building-a-jordan-string-basis-for-a-nilpotent-operator
 kind: example
 title: "Building a Jordan-string basis for a nilpotent operator on $F^6$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,11 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

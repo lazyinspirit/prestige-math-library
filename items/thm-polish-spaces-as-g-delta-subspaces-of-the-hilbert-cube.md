@@ -2,7 +2,7 @@
 id: thm-polish-spaces-as-g-delta-subspaces-of-the-hilbert-cube
 kind: theorem
 title: "Under the Axiom of Choice, a space is Polish exactly when it is homeomorphic to a $G_\\delta$ subspace of the Hilbert cube"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

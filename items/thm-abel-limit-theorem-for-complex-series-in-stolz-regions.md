@@ -2,7 +2,7 @@
 id: thm-abel-limit-theorem-for-complex-series-in-stolz-regions
 kind: theorem
 title: "Abel's limit theorem: a convergent complex series is recovered by its power series along every Stolz approach to 1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

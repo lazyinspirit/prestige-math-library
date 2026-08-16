@@ -2,7 +2,7 @@
 id: def-intersection-of-a-family-of-subobjects
 kind: definition
 title: "Intersection of a supplied family of subobjects as its greatest lower bound"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

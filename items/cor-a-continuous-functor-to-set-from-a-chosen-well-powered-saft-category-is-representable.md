@@ -2,7 +2,7 @@
 id: cor-a-continuous-functor-to-set-from-a-chosen-well-powered-saft-category-is-representable
 kind: corollary
 title: "With the objectwise SAFT universal arrows supplied, a continuous Set-valued functor from a chosen-well-powered SAFT category is representable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

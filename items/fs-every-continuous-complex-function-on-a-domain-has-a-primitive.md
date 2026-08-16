@@ -2,7 +2,7 @@
 id: fs-every-continuous-complex-function-on-a-domain-has-a-primitive
 kind: false-statement
 title: "FALSE: every continuous complex-valued function on a domain has a primitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-quotient-of-f-three-by-a-line-and-canonical-projection
 kind: example
 title: "The quotient of $F^3$ by a coordinate line and its canonical projection"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

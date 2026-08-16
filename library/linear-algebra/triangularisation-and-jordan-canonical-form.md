@@ -1,7 +1,7 @@
 ---
 page: triangularisation-and-jordan-canonical-form
 title: 'Triangularisation, Generalised Eigenspaces and Jordan Canonical Form'
-status: draft
+status: published
 items: [def-quotient-vector-space-and-canonical-projection,
         prop-quotient-vector-space-operations-and-projection,
         lem-quotient-basis-lifts-to-an-adapted-basis,

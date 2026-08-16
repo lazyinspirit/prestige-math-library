@@ -2,7 +2,7 @@
 id: cex-disc-algebra-is-not-dense-without-self-adjointness
 kind: counterexample
 title: "The disc algebra is unital and separating but not self-adjoint or dense"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

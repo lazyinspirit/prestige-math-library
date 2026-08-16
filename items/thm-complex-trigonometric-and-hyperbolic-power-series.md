@@ -2,7 +2,7 @@
 id: thm-complex-trigonometric-and-hyperbolic-power-series
 kind: theorem
 title: "The exponential definitions of complex sine, cosine, hyperbolic sine, and hyperbolic cosine equal their entire power series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

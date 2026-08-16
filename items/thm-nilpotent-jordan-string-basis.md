@@ -2,7 +2,7 @@
 id: thm-nilpotent-jordan-string-basis
 kind: theorem
 title: "Every finite-dimensional nilpotent endomorphism has a basis of Jordan strings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

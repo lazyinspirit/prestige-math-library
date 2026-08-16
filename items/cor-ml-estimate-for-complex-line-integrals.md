@@ -2,7 +2,7 @@
 id: cor-ml-estimate-for-complex-line-integrals
 kind: corollary
 title: "ML estimate: a contour integral is bounded by a supremum bound times path length"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

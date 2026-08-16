@@ -2,7 +2,7 @@
 id: thm-cech-completeness-is-independent-of-compactification
 kind: theorem
 title: "Under the ultrafilter lemma and Dependent Choice, a Tychonoff space is $G_\\delta$ in some Hausdorff compactification exactly when it is $G_\\delta$ in every one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-nowhere-differentiable-functions-are-residual-in-c01
 kind: corollary
 title: "Under Dependent Choice, nowhere differentiable functions form a residual subset of $C([0,1],\\mathbb R)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

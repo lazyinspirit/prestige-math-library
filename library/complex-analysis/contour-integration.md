@@ -1,7 +1,7 @@
 ---
 page: contour-integration
 title: "Contour Integration"
-status: draft
+status: published
 items: [rem-complex-contours-as-planar-rectifiable-paths, def-complex-contours-reversal-concatenation-and-closedness, def-complex-line-integral-over-a-rectifiable-path, def-absolute-line-integral-over-a-rectifiable-path, thm-existence-of-complex-line-integrals-on-rectifiable-paths, thm-riemann-stieltjes-and-parametric-contour-integrals-agree, prop-linearity-of-complex-line-integrals, prop-reversal-and-concatenation-of-complex-line-integrals, thm-invariance-of-complex-line-integrals-under-increasing-reparametrization, thm-fundamental-inequality-for-complex-line-integrals, cor-ml-estimate-for-complex-line-integrals, cor-absolute-integral-of-one-is-path-length, def-complex-primitive, thm-fundamental-theorem-for-complex-line-integrals, cor-closed-contour-integral-of-a-derivative-is-zero, cor-contour-integral-of-a-constant-is-an-endpoint-increment, thm-path-independence-and-complex-primitive-criterion, thm-uniform-limit-interchanges-complex-line-integrals, thm-circle-integrals-of-integer-monomials, cor-normalized-circle-integral-about-its-centre-is-one, fs-every-continuous-complex-function-on-a-domain-has-a-primitive]
 examples: []
 ---

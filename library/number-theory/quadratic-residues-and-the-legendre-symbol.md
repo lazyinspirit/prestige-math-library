@@ -1,7 +1,7 @@
 ---
 page: quadratic-residues-and-the-legendre-symbol
 title: "Quadratic Residues and the Legendre Symbol"
-status: draft
+status: published
 items: [def-quadratic-residue-modulo-n,
         prop-quadratic-residue-is-representative-independent,
         cor-unique-kth-root-modulo-prime-for-coprime-exponent,

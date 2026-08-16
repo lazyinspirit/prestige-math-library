@@ -2,7 +2,7 @@
 id: thm-freyd-representability-theorem
 kind: theorem
 title: "Freyd's representability theorem for continuous Set-valued functors satisfying a solution set condition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

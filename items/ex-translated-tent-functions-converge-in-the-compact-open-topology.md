@@ -2,7 +2,7 @@
 id: ex-translated-tent-functions-converge-in-the-compact-open-topology
 kind: example
 title: 'Translated tent functions on $\mathbb R$ converge to zero in the compact-open topology'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

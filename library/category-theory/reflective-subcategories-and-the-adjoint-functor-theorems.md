@@ -1,7 +1,7 @@
 ---
 page: reflective-subcategories-and-the-adjoint-functor-theorems
 title: "Reflective Subcategories and the Adjoint Functor Theorems"
-status: draft
+status: published
 items: [def-reflective-subcategory-and-reflector,
         def-coreflective-subcategory-and-coreflector,
         thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow,

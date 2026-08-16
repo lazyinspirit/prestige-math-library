@@ -2,7 +2,7 @@
 id: cex-a-category-that-is-not-well-powered
 kind: counterexample
 title: "A locally small category that is not well-powered: one object admits no set of representative monomorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

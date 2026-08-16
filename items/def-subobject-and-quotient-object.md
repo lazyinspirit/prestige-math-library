@@ -2,7 +2,7 @@
 id: def-subobject-and-quotient-object
 kind: definition
 title: "Subobject and quotient object as mutual-factorisation classes of monomorphisms and epimorphisms"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

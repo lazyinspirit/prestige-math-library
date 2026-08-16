@@ -2,7 +2,7 @@
 id: thm-second-supplement-to-quadratic-reciprocity
 kind: theorem
 title: "Second supplement: $(2/p)=(-1)^{(p^2-1)/8}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

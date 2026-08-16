@@ -2,7 +2,7 @@
 id: thm-commutative-rings-are-reflective-in-rings
 kind: theorem
 title: "Commutative rings form a reflective full subcategory of rings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

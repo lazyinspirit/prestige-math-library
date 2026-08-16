@@ -2,7 +2,7 @@
 id: ex-real-rational-function-with-finite-taylor-radius
 kind: example
 title: "The real function 1/(1+x^2) is smooth on the real line but its Maclaurin series has radius one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

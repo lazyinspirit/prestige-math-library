@@ -2,7 +2,7 @@
 id: cor-complex-trigonometric-and-hyperbolic-derivatives
 kind: corollary
 title: "Complex sine, cosine, hyperbolic sine, and hyperbolic cosine are entire with their standard derivatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

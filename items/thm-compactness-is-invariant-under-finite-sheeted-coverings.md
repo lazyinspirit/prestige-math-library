@@ -2,7 +2,7 @@
 id: thm-compactness-is-invariant-under-finite-sheeted-coverings
 kind: theorem
 title: "For a finite-sheeted covering, the total space is compact exactly when the base is compact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

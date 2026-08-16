@@ -2,7 +2,7 @@
 id: lem-complex-power-series-reexpansion-double-series
 kind: lemma
 title: "The binomial double series for re-expanding a complex power series is absolutely convergent and may be regrouped"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

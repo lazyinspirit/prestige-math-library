@@ -2,7 +2,7 @@
 id: thm-weierstrass-m-test-for-complex-function-series
 kind: theorem
 title: "Weierstrass M-test for complex-valued function series"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

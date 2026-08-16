@@ -2,7 +2,7 @@
 id: ex-first-isomorphism-theorem-for-a-coordinate-map
 kind: example
 title: 'The first isomorphism theorem for $(x,y,z)\mapsto(x+y,y+z)$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,11 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

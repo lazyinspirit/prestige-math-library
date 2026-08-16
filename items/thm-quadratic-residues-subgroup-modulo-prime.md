@@ -2,7 +2,7 @@
 id: thm-quadratic-residues-subgroup-modulo-prime
 kind: theorem
 title: "The nonzero squares modulo an odd prime form an index-two subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-saft-yields-the-stone-cech-adjunction
 kind: theorem
 title: "With the SAFT initial comma objects supplied for all spaces, they assemble into the compact-Hausdorff reflection and agree on Tychonoff spaces with the constructed Stone-Cech adjunction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + gpt-5.6-terra"
+    verdict: pass
+    date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

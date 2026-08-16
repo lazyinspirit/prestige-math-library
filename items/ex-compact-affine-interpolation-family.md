@@ -2,7 +2,7 @@
 id: ex-compact-affine-interpolation-family
 kind: example
 title: "Affine interpolants with endpoints in a compact rectangle form a compact family"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

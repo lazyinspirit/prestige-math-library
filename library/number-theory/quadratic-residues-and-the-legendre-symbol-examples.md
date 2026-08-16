@@ -1,7 +1,7 @@
 ---
 page: quadratic-residues-and-the-legendre-symbol-examples
 title: "Quadratic Residues and the Legendre Symbol — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-quadratic-residues-and-nonresidues-modulo-eleven,
            ex-power-residues-modulo-seventeen,

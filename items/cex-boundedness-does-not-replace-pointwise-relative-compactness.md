@@ -2,7 +2,7 @@
 id: cex-boundedness-does-not-replace-pointwise-relative-compactness
 kind: counterexample
 title: "Boundedness does not replace pointwise relative compactness for an arbitrary metric target"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

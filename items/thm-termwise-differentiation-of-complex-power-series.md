@@ -2,7 +2,7 @@
 id: thm-termwise-differentiation-of-complex-power-series
 kind: theorem
 title: "Inside its disc of convergence a complex power series is holomorphic and may be differentiated term by term"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

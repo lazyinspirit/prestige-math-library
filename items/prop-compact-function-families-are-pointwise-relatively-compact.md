@@ -2,7 +2,7 @@
 id: prop-compact-function-families-are-pointwise-relatively-compact
 kind: proposition
 title: "Every compact compact-open family is pointwise relatively compact"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

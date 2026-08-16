@@ -2,7 +2,7 @@
 id: ex-circle-integral-of-one-over-z-minus-a
 kind: example
 title: "Direct computation of the integral of 1/(z-a) around a semicircle and a full circle centred at a"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

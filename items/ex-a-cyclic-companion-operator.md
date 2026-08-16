@@ -2,7 +2,7 @@
 id: ex-a-cyclic-companion-operator
 kind: example
 title: "A companion operator with a visible cyclic vector and equal canonical polynomials"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: computation
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

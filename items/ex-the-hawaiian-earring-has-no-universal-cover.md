@@ -2,7 +2,7 @@
 id: ex-the-hawaiian-earring-has-no-universal-cover
 kind: example
 title: "The Hawaiian earring is locally path-connected but has no universal cover"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:
