@@ -316,8 +316,7 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   only; the fuchsia ‡ marker is the reader-facing tag. Already-adopted axioms (AC, countable/dependent choice) and
   independence facts remain permitted. A dropped item is
   deferred, not deleted: its `coverage.json` row is what makes it recoverable.
-  Published items are not retrofitted. Full rule: `LEVELS.md` §"Step 2",
-  `WORKFLOW.md` §"Self-contained scope".
+  Published items are not retrofitted. Full rule: `LEVELS.md` §"Step 2".
 
 - **Scaffold richness (owner, 2026-07-30).** Beta decomposes long proofs into
   focused lemmas and makes a pass for cheaply proved corollaries. Never pad; never

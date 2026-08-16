@@ -289,70 +289,22 @@ Measure repairs from disk; do not count them from what an agent reported.
 
 ### Self-contained scope and last-resort external fallback (hard rule, owner instruction 2026-08-01)
 
-**No item normally rests on a result this library has not established.** If a
-theorem, example, or counterexample needs a well-known result absent from the
-library, Beta must first avoid `ai-generated` dependencies, search reputable
-sources for the exact statement and conventions, and try to prove that result
-from available library dependencies. **If that does not close, Beta builds the
-missing prerequisite definitions and theorems (owner, 2026-08-11)** — dropping an
-important result for want of a lemma that could have been written is the lazy
-approach and is not a permitted disposition. Where the machinery makes the A page
-exceed **60 items, the page is split** into two or more A pages, each with its own
-B companion; `validate-plan.mjs` enforces that as error `size`. Only where the
-missing material is a whole subject area the library has not reached does Beta
-decompose, rescope, or **drop the item from the scaffold** with a note saying why
-and what would license it.
+**`LEVELS.md` §"Step 2" owns this rule** (owner ruling, 2026-08-16) and states it
+in full: no item resting on a result the library has not established; the source
+search and local-proof attempt, `ai-generated` dependencies avoided; building the
+missing prerequisites rather than dropping the result; decomposing or rescoping
+before dropping; splitting an A page over 60 items; the source-cited `rem-` /
+`proved_here: false` last resort with its machine-required `external_dependency`
+record; `external_refs` for non-logical mentions only; the adopted-axiom
+exception and its limit; the ‡ tier as catalogue; and a dropped item deferred,
+not deleted, as a `coverage.json` row. Read it there. This runbook keeps no
+second copy on purpose — two copies of a rule this load-bearing drift, and the
+scaffolding agent reads `LEVELS.md`.
 
-**The narrow last resort:** where the needed result is well-established and
-literature-backed, the exact source statement has been checked, and a local
-proof cannot be built in scope, Beta may create a source-cited `rem-` item with
-`proved_here: false`. The dependent item lists that `rem-` in `deps`; the batch
-notes and proof contract record the exact source, the attempted local route and
-why it failed, and why the external result is necessary. This is the only new
-load-bearing use of the ‡ tier. `external_refs` is for non-logical mentions
-only, and may never be used to disguise a dependency. The same four records are machine-required in the item's
-`external_dependency` block, and its `source_url` must be one of
-`sources.references`; `content-policy.mjs` enforces that future-batch contract.
+### The recurring definition obligations (hard rule)
 
-**The one exception is a foundational axiom the library has already adopted**:
-the Axiom of Choice and its relatives (`def-axiom-of-choice`,
-`def-countable-choice`, `def-dependent-choice`). An axiom is assumed rather than
-derived, so depending on one is not an unproved dependency. The
-metamathematical independence facts *about* those axioms (Cohen forcing, the
-Feferman-Levy model, the constructible universe) are exempt on the same
-grounds: they are cited as external facts about an axiom, never used as a step
-inside a mathematical proof.
-
-**What this changes.** The fuchsia / dotted / ‡ "not proved here" tier remains
-visible, and the `deferred-*` pages remain its main catalogue. It is not a
-general licence to build on unproved material: its only new load-bearing use is
-the source-checked, documented last resort above. The marker makes that
-exception honest to readers rather than hiding it.
-
-**Consequences for scaffolding.** When a prose scaffold lists a result whose
-standard proof needs out-of-scope machinery:
-
-- search for and record the exact reputable source statement;
-- attempt to derive it from existing library dependencies, adding a local proof
-  item if that succeeds;
-- use the source-cited ‡ fallback only if that proof cannot be built in scope;
-  otherwise drop the item and record **why** and **what would license it**.
-
-Richness is added back later, at or below the current dependency level, as the
-advanced topics are developed. **A dropped item is deferred, not deleted** — the
-scaffold note is what makes it recoverable.
-
-**This is forward-looking** (owner: "from now on"). Published items are not
-retrofitted. Existing external dependencies retain their recorded provenance;
-new ones must satisfy the source-checked fallback above.
-
-**Where it bites first.** A scaffold that says "this is true but the standard
-proof uses Lebesgue measurability", or that reaches for a Vitali set, a
-non-measurable function, a positive-measure hypothesis, or a Banach-space
-theorem, triggers the exact-source search and local-proof attempt above; absent
-the documented fallback, it is dropped and noted.
-
-The obligations that recur, and what each requires:
+These are the concrete shapes the §"Definition justification" obligation above
+takes. Each recurs, and each requires:
 
 - **Quotient constructions.** Defining a quotient (a quotient group $G/N$, a
   quotient ring, or a set of equivalence classes such as $\mathbb Z$, $\mathbb Q$,

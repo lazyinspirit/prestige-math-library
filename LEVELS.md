@@ -332,14 +332,46 @@ create a source-cited `rem-` item with `proved_here: false`, list it in `deps`,
 and record the exact source, failed in-library route, and necessity in the batch
 notes and proof contract. `external_refs` is only for a non-load-bearing
 mention; it cannot conceal a logical dependency. The fuchsia ‡ marker is the
-external-dependency tag. Foundational axioms already adopted (AC, countable
-choice, dependent choice) and the independence facts about them remain
-separately permitted. **A dropped item is deferred, not deleted — the note is
+external-dependency tag. Foundational axioms the library has already adopted —
+`def-axiom-of-choice`, `def-countable-choice`, `def-dependent-choice` — are
+assumed rather than derived, so depending on one is not an unproved dependency;
+the metamathematical independence facts *about* them (Cohen forcing, the
+Feferman-Levy model, the constructible universe) are exempt on the same grounds
+and under the same limit, that they are cited as external facts **about** an
+axiom and never used as a step inside a mathematical proof. **A dropped item is
+deferred, not deleted — the note is
 what makes it recoverable.** Since 2026-08-11 that note has a machine-checked
 home: a dropped result is a `deferred` or `out-of-scope` row in the batch's
 `coverage.json`, with a reason naming that specific result.
 `coverage-checklist.mjs` runs here as a required gate, and it is what stops a
 drop from being silent rather than recorded.
+
+**Decompose or rescope before you drop.** Dropping is the last of the three
+dispositions and not the first: a result that will not fit whole may still fit
+decomposed into parts the library can establish, or restated at the strength the
+current scope supports. What is genuinely dropped is added back later, at or
+below the current dependency level, as the advanced topics are developed.
+
+**Where it bites first.** A scaffold that says "this is true but the standard
+proof uses Lebesgue measurability", or that reaches for a Vitali set, a
+non-measurable function, a positive-measure hypothesis, or a Banach-space
+theorem, triggers the exact-source search and local-proof attempt above; absent
+the documented fallback, it is dropped and noted.
+
+**The fallback is the ‡ tier's only new load-bearing use.** The fuchsia / dotted
+/ ‡ tier otherwise stays a catalogue — the `deferred-*` pages are its main body —
+and is never a general licence to build on unproved material; the marker is what
+makes the one exception honest to a reader instead of hiding it. The same four
+records the batch notes carry are machine-required in the item's
+`external_dependency` frontmatter block — `source_url`, `exact_statement`,
+`local_proof_attempt`, `necessity` — and `source_url` must exactly match one of
+that item's `sources.references` URLs. `content-policy.mjs` enforces both, and
+also rejects an `external_dependency` block on an item that is not a
+`proved_here: false` fallback record.
+
+**This is forward-looking** (owner: "from now on"). Published items are not
+retrofitted: existing external dependencies keep their recorded provenance, and
+only new ones must satisfy the source-checked fallback above.
 
 **Citation liveness (owner, 2026-08-15).** `url-sweep.mjs --coverage … --recover
 --fail-on-dead` also runs here as a required gate. The checklist above proves a
