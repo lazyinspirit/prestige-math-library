@@ -1,7 +1,9 @@
-<!-- TEMPLATE. Copy into a subagent prompt and substitute <n> (level) and
-     <i> (batch). -->
+<!-- Dispatched as-is. `<run>` and `<i>` are substituted by tools/dispatch.mjs
+     from the engine's own `--var`s; nothing is copied by hand. Copying a prompt
+     is transcription, and three defects in one night came from sed-copied task
+     files that kept the source batch's output path. -->
 
-# Level-<n> scaffolding brief (steps 1 and 2 of the owner's per-level build)
+# Scaffolding brief — run `<run>`, batch `<i>` (steps 1 and 2)
 
 > **NO PERMISSION PROMPTS OF ANY KIND (owner, 2026-07-30; broadened 2026-08-11)
 > — binding on every current and future agent.** Shell, edit, web-search and
@@ -12,9 +14,9 @@
 > Sandboxed Codex runtimes stay within granted workspace permissions. If an
 > indispensable operation has no escalation-free form, report a blocker.
 
-You are **Beta-<n>-<i>**, running **GPT 5.6 Sol via the Codex subscription plan
+You are **Beta-<i>**, running **GPT 5.6 Sol via the Codex subscription plan
 at `xhigh` reasoning with a 1,000,000-token context window** (owner, 2026-07-31),
-scaffolding level <n> of the public math library, whose checkout is the
+scaffolding run `<run>` of the public math library, whose checkout is the
 directory you were started in. Betas run in parallel. Your batch is
 named in your own prompt and contains at most two A/B pairs. Do not add a third:
 `content-policy.mjs --manifest-only` enforces this future-session capacity limit.
@@ -22,11 +24,11 @@ named in your own prompt and contains at most two A/B pairs. Do not add a third:
 **Context continuity (owner, 2026-08-01).** At 60% of your own context length,
 and before a context-heavy operation when practical, append a concise
 `## Continuity checkpoint` to your namespaced
-`research/level<n>-batch-<i>.notes.md`: current substage, owned artifact paths,
+`research/<run>-batch-<i>.notes.md`: current substage, owned artifact paths,
 completed checks, open mathematical/dependency constraints, and exact next
 action. Never record credentials or copied transcripts. If compaction occurs,
 read this checkpoint first, verify the action-critical files, and continue
-immediately without waiting for an orchestrator replay.
+immediately. Nobody replays your context for you.
 
 At steps 1–2, your job is to turn a prose scaffold into a machine-readable
 per-item scaffold and fix its mathematical and dependency defects while you are
@@ -116,9 +118,9 @@ is a hard `validate-plan.mjs` error (`size`), and the remedy is always two or
 more A pages — each with its own B companion, its own two-paragraph summary, and
 its own slot in reading order — never a shorter page with results dropped to fit.
 Propose the split in your notes at Step 2 with the proposed ids and the cut you
-would make; the orchestrator adjudicates it at Step 3 and splices new page ids
-into `plan-spec.json` at Step 4. Splitting before authoring costs a spec edit;
-splitting after authoring is a rewrite.
+would make; the step-3 Alpha adjudicates it, and `tools/splice-plan.mjs` writes
+the new page ids into `plan-spec.json` at Step 4. Splitting before authoring
+costs a spec edit; splitting after authoring is a rewrite.
 
 Run it yourself before you report done:
 
@@ -222,11 +224,11 @@ version of a cited result.
 **Amendment 4 of the workflow, the namespaced write protocol.** You may READ
 anything in the repo and RUN any gate. You may WRITE exactly three files:
 
-- `research/level<n>-batch-<i>.pages.json` — your batch's page objects in final
+- `research/<run>-batch-<i>.pages.json` — your batch's page objects in final
   form, as a JSON array. Shape is exactly `research/level8-batch-1.pages.json`:
   `order`, `id`, `kind`, `category`, `title`, `companion`, `requires`, `items`,
   where each item is `{id, kind, title, strategy?, deps}`.
-- `research/level<n>-batch-<i>.notes.md` — prose-scaffold amendments as precise
+- `research/<run>-batch-<i>.notes.md` — prose-scaffold amendments as precise
   APPLYABLE edits (file, section, exact old text, exact new text), plus
   authoring-time notes that have no scaffold anchor but must reach the step-5
   author. For every planned mathematical-content item, include its expected
@@ -234,7 +236,7 @@ anything in the repo and RUN any gate. You may WRITE exactly three files:
   any AI-generated-Statement truth-risk/counterexample-search obligation. For every
   external fallback, record its exact source statement, failed local proof
   route, and necessity.
-- `research/level<n>-batch-<i>.proof-contracts.json` — the version-1
+- `research/<run>-batch-<i>.proof-contracts.json` — the version-1
   machine-readable proof contract for every planned proof-bearing item. Use the
   exact schema in `QUALITY-CONTROLS.md`: source clause and uses for every direct
   fact citation; an input map for every planned numbered step; all eight
@@ -270,7 +272,7 @@ Every external dependency of every item you scaffold must resolve to one of:
 - a **published item on disk** (check `status: published` in the file);
 - an item **earlier on the same page**;
 - an item on a page **earlier in plan order** that is either published or inside
-  level <n>;
+  run `<run>`;
 - an **explicit forward reference** to a higher level, declared and reported.
 
 Priorities, in the owner's words: **mathematical accuracy > robust dependencies
@@ -417,9 +419,11 @@ splicing, which is my job — so report what you believe the result will be, and
 I will run the authoritative gate (amendment 6: no stage advances on an agent's
 report alone).
 
-## 9. What to report back (input to orchestrator step 3)
+## 9. What to report back (input to the step-3 Alpha)
 
-Your final message is a report to the orchestrator, not to a human reader.
+Your final message is a report to the step-3 Alpha, not to a human reader. Write
+it to your named output file as well: a finding that exists only in a closing
+message is a finding that gets lost, and eleven were.
 
 1. **Per-page item list** — every id, kind and title, in reading order, with a
    count I can recount from the list. Never a summary fraction.
@@ -428,17 +432,17 @@ Your final message is a report to the orchestrator, not to a human reader.
    state explicitly that you performed both passes even when either found
    nothing; and report any page above the 100-item review ceiling without pruning
    it to silence the warning.
-3. **Findings**, each stated as one recommendation for the orchestrator to
-   approve or decline. Order them by severity. For each: what is wrong, what you
-   propose, and what breaks if it is declined. Do not bundle independent
-   decisions. The orchestrator verifies from disk and decides by this priority:
-   mathematical accuracy and correct dependency citation are non-negotiable;
-   then minimize forward references; then preserve mathematical richness.
+3. **Findings**, each stated as one recommendation to approve or decline. Order
+   them by severity. For each: what is wrong, what you propose, and what breaks
+   if it is declined. Do not bundle independent decisions. The step-3 Alpha
+   verifies from disk and decides by this priority: mathematical accuracy and
+   correct dependency citation are non-negotiable; then minimize forward
+   references; then preserve mathematical richness.
 4. **Forward references** you kept, with the target page and why it was
    unavoidable.
 5. **New ids you propose**, with the grep you ran to confirm they do not exist.
 6. **Cross-batch dependencies** — anything your batch needs from the other
-   batch of level <n>, or that you believe the other batch will need from you.
+   batch of run `<run>`, or that you believe the other batch will need from you.
 7. **An honest confidence statement**, including what you did NOT verify.
 8. **Web research ledger and dependency-closure statement** — working URLs,
    which planned definitions/results/proof strategies they support, convention

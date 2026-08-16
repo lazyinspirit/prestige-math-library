@@ -247,27 +247,27 @@ const OWNER_PAUSE = 'the sole owner pause: audit, then publish by flipping statu
 const STEP_PLAN = {
   0: { name: 'Batch', judgment: true,
        note: 'compute the frontier FROM DISK (not from rounds.mjs, which ignores publication state), divide A-pages into batches of at most 2, report the cross-batch seam count' },
-  1: { name: 'Scaffold', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/beta-scaffold.md', label: l, vars: { n: state.level, i: i + 1 } })) },
-  2: { name: 'Resolve dependencies', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/beta-scaffold.md', label: `${l}-deps`, vars: { n: state.level, i: i + 1 } })) },
+  1: { name: 'Scaffold', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/beta-scaffold.md', label: l, vars: { run: state.run, n: state.level, i: i + 1 } })) },
+  2: { name: 'Resolve dependencies', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/beta-scaffold.md', label: `${l}-deps`, vars: { run: state.run, n: state.level, i: i + 1 } })) },
   // Judgment FIRST (the orchestrator adjudicates), then the agent: the executor
   // runs `judgment` before `agents`, so Alpha reviews scaffolds that have already
   // had their recommendations settled. Owner, 2026-08-11 — Alpha now first
   // appears at step 3, not step 4, and its job here is breadth and depth.
   3: { name: 'Adjudicate recommendations, then Alpha reviews scaffold breadth', judgment: true, requiresBatches: true,
        note: 'verify each Beta recommendation from disk, then approve or decline. Priority: mathematical accuracy > minimize forward references > preserve richness',
-       agents: () => [{ role: 'alpha', brief: 'briefs/alpha.md', label: 'step3-scaffold-review', vars: { n: state.level } }] },
+       agents: () => [{ role: 'alpha', brief: 'briefs/alpha.md', label: 'step3-scaffold-review', vars: { run: state.run, n: state.level } }] },
   4: { name: 'Apply and propagate', judgment: true,
        note: 'splice Beta outputs into plan-spec.json taking the UNION of requires, hard-fail on id clash, then Alpha (already spawned at step 3) propagates notes into the prose scaffolds' },
-  5: { name: 'Author', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/authoring.md', label: `${l}-author`, vars: { n: state.level, i: i + 1 } })) },
+  5: { name: 'Author', requiresBatches: true, agents: () => batchLabels().map((l, i) => ({ role: 'beta', brief: 'briefs/authoring.md', label: `${l}-author`, vars: { run: state.run, n: state.level, i: i + 1 } })) },
   6: { name: 'Audit', requiresBatches: true, agents: () => [
-         ...batchLabels().map((l, i) => ({ role: 'reader', brief: 'briefs/beta-step8-audit.md', label: `${l}-reader`, vars: { n: state.level, i: i + 1 } })),
-         { role: 'alpha', brief: 'briefs/alpha.md', label: 'step6', vars: { n: state.level } },
+         ...batchLabels().map((l, i) => ({ role: 'reader', brief: 'briefs/reader.md', label: `${l}-reader`, vars: { run: state.run, n: state.level, i: i + 1 } })),
+         { role: 'alpha', brief: 'briefs/alpha.md', label: 'step6', vars: { run: state.run, n: state.level } },
        ] },
   7: { name: 'Judge', spends: true, tool: () => ['tools/judge-sweep.mjs',
          '--ledger', `research/${run}-judge.jsonl`, '--cost', `research/${run}-judge-cost.jsonl`,
          '--pages', 'ALL_A_PAGES'] },
   8: { name: 'Adjudicate judge rejections', snapshot: 'pre-step8',
-       agents: () => [{ role: 'alpha', brief: 'briefs/alpha.md', label: 'step8', vars: { n: state.level } }] },
+       agents: () => [{ role: 'alpha', brief: 'briefs/alpha.md', label: 'step8', vars: { run: state.run, n: state.level } }] },
   9: { name: 'Scope-denial sweep', judgment: true,
        note: 'grep is the ENTRY POINT, never the sweep: negation is carried by neither/no item/lacks/absent from/silent on/nowhere. Check order-relative claims by position' },
   10: { name: 'Final rundown', terminal: true,

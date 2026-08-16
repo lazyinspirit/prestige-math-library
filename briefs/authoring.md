@@ -1,7 +1,7 @@
-<!-- TEMPLATE. Copy into a subagent prompt and substitute <n> (level) and
-     <i> (batch). -->
+<!-- Dispatched as-is. `<run>` and `<i>` are substituted by tools/dispatch.mjs
+     from the engine own --vars; nothing is copied by hand. -->
 
-# level <n> authoring brief (step 5 of the owner's per-level build)
+# Authoring brief — run `<run>`, batch `<i>` (step 5)
 
 > **NO PERMISSION PROMPTS OF ANY KIND (owner, 2026-07-30; broadened 2026-08-11)
 > — binding on every current and future agent.** Shell, edit, web-search and
@@ -23,11 +23,11 @@ pairs.
 **Context continuity (owner, 2026-08-01).** At 60% of your own context length,
 and before a context-heavy operation when practical, append a concise
 `## Continuity checkpoint` to your namespaced
-`research/level<n>-batch-<i>.notes.md`: current substage, owned artifact paths,
+`research/<run>-batch-<i>.notes.md`: current substage, owned artifact paths,
 completed gates, frozen-text state if relevant, open mathematical constraints,
 and exact next action. Never record credentials or copied transcripts. If
 compaction occurs, read it first, verify the action-critical files, and continue
-immediately without waiting for an orchestrator replay.
+immediately. Nobody replays your context for you.
 
 ## 0. Read first, in this order
 
@@ -52,7 +52,7 @@ For your A page and your B page:
 - one `library/<category>/<page-id>.md` per page, matching the shape of an
   existing published page (read `library/real-analysis/limsup-and-subsequential-limits.md`
   for the house page format).
-- update only your own `research/level<n>-batch-<i>.proof-contracts.json` so it
+- update only your own `research/<run>-batch-<i>.proof-contracts.json` so it
   exactly matches final prose: every direct fact citation has its exact source
   excerpt and all uses; every numbered step has exactly one input-map entry; and
   every standard boundary case is checked or specifically not applicable.
@@ -190,7 +190,7 @@ contract. Do not leave it as private reasoning. An exact source excerpt must be
 copied from the cited item's Statement/Definition/Example; a finite-smoke entry
 must quote the actual claim it probes and is only a bounded countermodel search,
 not a proof. Run `node tools/proof-contract.mjs
-research/level<n>-batch-<i>.proof-contracts.json --strict` before reporting.
+research/<run>-batch-<i>.proof-contracts.json --strict` before reporting.
 
 **Definition-justification rule (WORKFLOW, hard):** a definition that presumes
 well-definedness, uniqueness, or existence must discharge it — either inline in
@@ -337,7 +337,9 @@ A published page listing a draft item is a hard error, so keep `items:` and
 
 ## 9. What to report back
 
-Your final message is a report to the orchestrator, not to a human reader:
+Your final message is a report to the step-6 audit, not to a human reader.
+Write it to your named output file as well — a finding that exists only in a
+closing message is a finding that gets lost, and eleven were:
 
 1. **Per-item list** — every id, with its precheck result. Never invent or run a
    judge verdict; the paired DeepSeek V4 Pro / GPT 5.6 Terra judge is step 7.
