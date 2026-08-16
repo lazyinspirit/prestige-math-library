@@ -213,7 +213,7 @@ for (const file of files) {
   }
   for (const [id, entry] of Object.entries(contracts)) {
     for (const b of entry?.boundaries ?? []) {
-      rows.push({ file, id, case: b.case, status: b.status, text: b.reason ?? b.evidence ?? '' });
+      rows.push({ file, id, case: b.case, status: b.status, text: b.reason ?? b.evidence ?? '', reviewed: b.reviewed });
     }
   }
 }
@@ -249,6 +249,7 @@ const templates = [...clusters.entries()]
 
 // Signal 2 — contradicted dispositions.
 const contradicted = [];
+const upheld = [];
 for (const r of rows) {
   const text = itemText(r.id);
   if (text === null) continue;            // not authored yet — step 5 has not run
@@ -270,6 +271,22 @@ for (const r of rows) {
     continue;
   }
   if (r.status !== 'not_applicable') continue;
+  // AN ALPHA MAY UPHOLD A FLAGGED ROW — the reviewed escape, mirroring
+  // `risk_review`. The detectors are regexes over surface text; the first
+  // live firing flagged an fs- item whose Statement says two categories "are
+  // equivalent" as an unhandled biconditional, when "equivalent" names the
+  // categorical predicate under refutation and there is no iff to
+  // direction-check. A candidate is "a human read, not a verdict" — this is
+  // where the human read, once made BY AN ALPHA WITH A CONCRETE REASON,
+  // becomes machine-readable: `reviewed: {upheld: true, by, reason}` on the
+  // row, reason ≥ 40 characters about THIS row. An upheld row is reported,
+  // never counted toward --fail-on-contradicted. A templated uphold is the
+  // same defect as a templated disposition, so the reason is clustered by
+  // the template detector like any other row text.
+  if (r.reviewed?.upheld === true && typeof r.reviewed.reason === 'string' && r.reviewed.reason.trim().length >= 40) {
+    upheld.push({ id: r.id, case: r.case, by: r.reviewed.by ?? 'unattributed', reason: r.reviewed.reason });
+    continue;
+  }
   const d = DETECTORS[r.case];
   if (!d) continue;
   const scoped = d.scope(text);
@@ -285,11 +302,12 @@ const summary = {
   template_clusters: templates.length,
   rows_in_template_clusters: templates.reduce((n, t) => n + t.members, 0),
   contradicted_candidates: contradicted.length,
+  upheld_by_review: upheld.length,
   items_not_yet_authored: [...new Set(rows.map((r) => r.id))].filter((id) => itemText(id) === null).length,
 };
 
 if (asJson) {
-  console.log(JSON.stringify({ summary, templates, contradicted }, null, 2));
+  console.log(JSON.stringify({ summary, templates, contradicted, upheld }, null, 2));
 } else {
   console.log(`boundary-audit: ${summary.boundary_rows} rows over ${summary.contracts_scanned} contract file(s); ` +
     `${summary.not_applicable_rows} marked not_applicable`);
@@ -320,6 +338,10 @@ if (asJson) {
     }
   } else {
     console.log('\nCONTRADICTED DISPOSITIONS — none found by the three detectors.');
+  }
+  if (upheld.length) {
+    console.log(`\nUPHELD BY REVIEW — ${upheld.length} row(s) an Alpha read and kept, with reasons on the record:`);
+    for (const u of upheld) console.log(`  ${u.id}  [${u.case}]  by ${u.by}: ${String(u.reason).slice(0, 120)}`);
   }
   console.log('\nEvery line above is a candidate for a human read, not a verdict.');
 }

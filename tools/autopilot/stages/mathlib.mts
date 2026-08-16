@@ -864,6 +864,30 @@ export const stages = [
     // split the audit carries at A4 versus A6.
     gates: (ctx) => [...repoWide(ctx), planGate(), policyItemGate(ctx),
       ...contractGates(ctx, { reviewed: false })],
+    // The candidate detectors' residue is a HUMAN READ by contract — their
+    // own summary line says so — and the read is an Alpha's, at step 6,
+    // before the text freezes. The first live join flagged two boundary rows
+    // on one fs- item ("equivalent" naming a categorical predicate, not a
+    // biconditional) and the failure dead-ended: candidate-typed judgment
+    // with no routed lane, the same family as the source scouts and the
+    // splice adjudication. One round dispatches the contract-audit Alpha; it
+    // fixes a row that is genuinely wrong, or upholds it on the record
+    // (`reviewed: {upheld, by, reason}`), which the detector then respects.
+    // Structural gate failures (merge, strict, smoke, liveness) stay
+    // blockers — those are tool or authoring defects, not candidate reads.
+    maxFixRounds: 2,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      if (!['boundary-audit', 'citation-fidelity'].includes(failure.id)) return;
+      executor.start(stage, {
+        role: 'alpha',
+        label: `contract-audit-${round}`,
+        job: 'adjudication',
+        covers: [],
+        brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-contract-audit.task.md`],
+        timeout: 3600,
+      });
+    },
   },
 
   {

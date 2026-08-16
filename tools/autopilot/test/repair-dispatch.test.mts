@@ -13,6 +13,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
@@ -146,6 +147,48 @@ test('an unfetchable source routes a scouting Beta per owning batch', async () =
   assert.equal(started[0].job, 'scouting');
   assert.deepEqual(started[0].covers, ['2']);
   rmSync(repo, { recursive: true, force: true });
+});
+
+test('a candidate-detector failure at the read join dispatches the contract-audit Alpha', async () => {
+  const s5: any = stages.find((s: any) => s.id === '5-author');
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  await s5.onGateFailure({ ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s5, round: 1, failure: { id: 'boundary-audit', why: '' } });
+  await s5.onGateFailure({ ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s5, round: 2, failure: { id: 'citation-fidelity', why: '' } });
+  assert.equal(started.length, 2);
+  assert.ok(started.every((p) => p.job === 'adjudication'));
+  // structural failures stay blockers
+  await s5.onGateFailure({ ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s5, round: 2, failure: { id: 'proof-contract', why: '' } });
+  assert.equal(started.length, 2);
+});
+
+test('boundary-audit respects an Alpha-upheld row and reports it', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ba-'));
+  mkdirSync(join(dir, 'items'));
+  writeFileSync(join(dir, 'items', 'fs-two-things-are-equivalent.md'),
+    '---\nid: fs-two-things-are-equivalent\nkind: false-statement\n---\n\n## Statement\n\nThe two categories are equivalent for every monad.\n\n## Refutation\n\nStep 1.1: the free-monoid monad refutes it.\n');
+  // the tool's real shape: {contracts: {<id>: {boundaries: [{case, status, reason}]}}}
+  const boundary: any = { case: 'iff-forward', status: 'not_applicable', reason: 'equivalent names the categorical predicate under refutation' };
+  const contract: any = { contracts: { 'fs-two-things-are-equivalent': { boundaries: [boundary] } } };
+  const cPath = join(dir, 'c.proof-contracts.json');
+  const runBA = () => spawnSync(process.execPath,
+    [join(REPO, 'tools', 'boundary-audit.mjs'), cPath, '--items-dir', join(dir, 'items'), '--fail-on-contradicted'],
+    { encoding: 'utf8' });
+  // unreviewed: the detector flags it and --fail-on-contradicted fails
+  writeFileSync(cPath, JSON.stringify(contract));
+  const r1 = runBA();
+  assert.equal(r1.status, 1, r1.stdout);
+  // upheld with a concrete reason: reported, not failed
+  boundary.reviewed = { upheld: true, by: 'contract-audit-1', reason: 'fs- item refutes a categorical equivalence; there is no logical biconditional whose directions need separate checks.' };
+  writeFileSync(cPath, JSON.stringify(contract));
+  const r2 = runBA();
+  assert.equal(r2.status, 0, r2.stdout);
+  assert.match(r2.stdout, /UPHELD BY REVIEW — 1 row/);
+  // a thin uphold reason does not count
+  boundary.reviewed.reason = 'fine';
+  writeFileSync(cPath, JSON.stringify(contract));
+  assert.equal(runBA().status, 1, 'a templated/thin uphold must not clear the gate');
+  rmSync(dir, { recursive: true, force: true });
 });
 
 test('the mechanical branch still short-circuits the Beta fan-out', async () => {
