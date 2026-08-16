@@ -344,7 +344,15 @@ const judgeOutcomes = new Map();
 const judgeOutcomeKey = (id, model, context) => `${id}\u0000${model}\u0000${context}`;
 if (judgeAdjudicationsPath) {
   if (!existsSync(resolvePath(judgeAdjudicationsPath))) {
-    error('judge-adjudications-read', `${judgeAdjudicationsPath}: file does not exist`);
+    // An ABSENT ledger is an empty set of decisions, not a defect: at the
+    // step-7 exit no adjudication exists yet by construction — step 8 writes
+    // the first row — and hard-erroring here blocked frontier-15's sweep
+    // with 784 verdicts on disk and nothing wrong. Every rejection still
+    // reports as unadjudicated below, which is the real predicate, and
+    // --allow-unadjudicated is what distinguishes the step-7 gate from the
+    // closure gates that come after step 8. A file that EXISTS but cannot be
+    // parsed stays a hard error — that is a broken ledger, not an empty one.
+    warn('judge-adjudications-absent', `${judgeAdjudicationsPath} not yet written — zero adjudications assumed`);
   } else {
     for (const [index, line] of readFileSync(resolvePath(judgeAdjudicationsPath), 'utf8').split(/\r?\n/).filter(Boolean).entries()) {
       let record;

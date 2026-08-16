@@ -267,6 +267,17 @@ const acquireModelSlot = async (model) => {
         const heartbeat = setInterval(() => {
           try { utimesSync(slot, new Date(), new Date()); } catch { /* released or replaced */ }
         }, SLOT_HEARTBEAT_MS);
+        // STAGGER THE CODEX BOOT BURST. Terra is an ephemeral Codex process
+        // per call, and sixteen of them booting in the same second all hit
+        // the models-refresh endpoint together: on frontier-15's step-7
+        // sweep every Terra call died NO_CONTENT on `429 Too Many Requests
+        // ... failed to refresh available models` while DeepSeek's direct
+        // API sailed — 392 null verdicts, an entire lane lost. A first-boot
+        // spread of 1.5s per slot index (0–22.5s across the pool) costs
+        // nothing against a multi-hour sweep and keeps concurrent boots to
+        // ones; steady-state recycling never bursts, so the delay applies
+        // once per slot acquisition.
+        if (model === "gpt-5.6-terra" && index > 0) await pause(index * 1500);
         return () => {
           clearInterval(heartbeat);
           try { rmSync(slot, { recursive: true, force: true }); } catch { /* already reclaimed */ }

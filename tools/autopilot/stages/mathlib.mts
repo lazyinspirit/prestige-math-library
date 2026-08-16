@@ -196,6 +196,18 @@ const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[]> = {
   // withheld splice batches -> re-transcribe; exit 1 = edges still await the
   // adjudicating Alpha (the residual the stage-4 hook routes)
   'splice-refusals': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
+  // a judge lane that returned nulls (capacity refusal, a 429 boot stampede)
+  // -> re-run the sweep. The currency rule spends ONLY on items lacking a
+  // current boolean verdict, so a lane that answered is never re-billed:
+  // frontier-15's retry pended terra 392, deepseek 0.
+  'judge-closure': (ctx) => {
+    const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
+    const aPages = ledger.pages.filter((p: any) => p.kind === 'A').map((p: any) => p.id);
+    return ['tools/judge-sweep.mjs',
+      '--ledger', R(ctx, 'research', `${ctx.run}-judge.jsonl`),
+      '--cost', R(ctx, 'research', `${ctx.run}-judge-cost.jsonl`),
+      '--pages', aPages.join(',')];
+  },
   // the stalemate synthetic (covered, undispatched, artifact-incomplete) on
   // stage 4 IS the withheld-splice shape — same repair
   'stage-stalemate': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
@@ -1075,6 +1087,16 @@ export const stages = [
     // Rejections are expected here — nothing has adjudicated anything yet — so
     // they are warnings at this one stage and hard errors everywhere after.
     gates: (ctx) => [closureGate(ctx, { allowUnadjudicated: true })],
+    // A judge lane can die wholesale without a single verdict being wrong —
+    // frontier-15 lost all 392 Terra calls to a 429 boot stampede while
+    // DeepSeek answered everything. The re-sweep is mechanical, and the
+    // currency rule makes it surgical: only null-verdict items spend. Two
+    // rounds; a lane that nulls twice is a platform problem for a person.
+    maxFixRounds: 2,
+    onGateFailure: async (args: any) => {
+      if (args.failure.id !== 'judge-closure') return;
+      await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' } });
+    },
   },
 
   // The step-8 baseline, for the same reason as `4-baseline`: `step8-guard`
