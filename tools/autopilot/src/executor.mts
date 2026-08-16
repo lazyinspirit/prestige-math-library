@@ -302,11 +302,40 @@ export class Executor {
     };
   }
 
+  /** First existing candidate path, or the last candidate when none exists —
+   *  so the caller's missing-file check names one concrete file. A stage may
+   *  offer several candidates for a brief or task (specific first, generic
+   *  fallback last); resolution lives HERE, on the one path every dispatch
+   *  crosses, because it used to live only in the plan-dispatch loop and the
+   *  repair hooks call start() directly: 3-recheck's scaffold-fix lanes
+   *  reached dispatch.mjs with a comma-joined candidate ARRAY as --task and
+   *  died on its usage check — twelve dispatches across three repair rounds,
+   *  then repair-exhausted, on frontier-15's first live repair firing. */
+  resolveInput(v: string | string[] | undefined, ctx: Ctx = this.ctx()): string | undefined {
+    if (!v) return v as undefined;
+    const cands = Array.isArray(v) ? v : [v];
+    return cands.find((c: any) => existsSync(join(ctx.repo, c))) ?? cands[cands.length - 1];
+  }
+
   /** Start one dispatch. Never awaited inline — the engine keeps ticking while
    *  agents run, which is what allows a slow lane and a fast lane to overlap. */
   start(stage: Stage, plan: Plan): void {
     const key = `${stage.id}:${plan.label}`;
     if (this.inflight.has(key)) return;
+    // Candidate resolution + the preflight, for EVERY caller. A hook-started
+    // dispatch with a missing input becomes a blocker here, not two spent
+    // agent attempts discovering what existsSync answers instantly.
+    plan.brief = this.resolveInput(plan.brief);
+    plan.task = this.resolveInput(plan.task);
+    const absent = [plan.brief, plan.task].filter((f: any) => f && !existsSync(join(this.config.repo, f)));
+    if (absent.length) {
+      const msg = `stage ${stage.id}: missing input file(s) — ${plan.label} needs ${absent.join(', ')}`;
+      if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+        this.state.addBlocker(stage.id, msg);
+        this.reporter.notify('blocked', msg, { stage: stage.id, label: plan.label, missing: absent });
+      }
+      return;
+    }
     // Owner rule, 2026-08-16: a model is dispatched for cognitive work only.
     // Enforced at the point of dispatch rather than in review, because handing
     // a model a mechanical task does not error — it returns a plausible answer
@@ -805,18 +834,12 @@ export class Executor {
       // PREFLIGHT. A dispatch whose brief or task file does not exist will
       // fail, be retried, fail again, and only then block — two agent
       // invocations and their wall-clock spent discovering a missing file that
-      // `existsSync` answers instantly. Check before spending.
-      // A stage may offer several candidate paths for a brief or task; the
-      // first that exists wins. This exists because a run whose batch count
-      // crosses a grouping boundary needs a task file nobody wrote — seven
-      // batches make three Alpha groups where six made two — and blocking a
-      // fourteen-hour build at 2am for a file that a generic fallback would
-      // have covered is a poor trade. A specific file still wins when present.
-      const pick = (v) => {
-        if (!v) return v;
-        const cands = Array.isArray(v) ? v : [v];
-        return cands.find((c: any) => existsSync(join(ctx.repo, c))) ?? cands[cands.length - 1];
-      };
+      // `existsSync` answers instantly. Check before spending. Candidate
+      // resolution itself lives in `resolveInput`, on the path every dispatch
+      // crosses — including hook-started repairs, which bypass this loop; it
+      // is called here too so the whole-stage missing-file blocker below can
+      // name every absent file at once rather than one per dispatch.
+      const pick = (v) => this.resolveInput(v, ctx);
       for (const p of plans) { p.brief = pick(p.brief); p.task = pick(p.task); }
 
       const missing: any[] = [];

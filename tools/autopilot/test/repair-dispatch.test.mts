@@ -1,0 +1,126 @@
+// A repair dispatch is a dispatch: same input resolution, same identity rules.
+//
+// WHY. The 3-recheck repair loop's first live firing burned all three rounds
+// without launching a single agent: hook-started dispatches bypass the plan
+// loop where brief/task candidate arrays were resolved, so dispatch.mjs
+// received a comma-joined ARRAY as --task and died on its usage check —
+// twelve failed dispatches, then repair-exhausted, on a gate failure whose
+// receipt was correct and specific. And the hook dispatched one anonymous
+// lane per insufficient PAGE — same prompt, covers [], no identity — so two
+// pages in one batch meant two writers on one batch's files. These tests pin
+// the fixes: resolution lives on start()'s path, and the hook dispatches one
+// lane per owning BATCH with the batch as its cover.
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+
+import { stages } from '../stages/mathlib.mts';
+import { Executor } from '../src/executor.mts';
+import { State, statePath } from '../src/state.mts';
+import { Reporter } from '../src/reporter.mts';
+import { makeExecAdapter } from '../src/adapters/exec.mts';
+
+const REPO: string = process.env.AUTOPILOT_TEST_REPO
+  ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
+
+function fixtureRepo() {
+  const dir = mkdtempSync(join(tmpdir(), 'repair-'));
+  mkdirSync(join(dir, 'research'));
+  mkdirSync(join(dir, '.autopilot'));
+  writeFileSync(join(dir, 'research', 'demo-generic.task.md'), 'generic\n');
+  // mechanicalRepair and the gates share one convention: tool paths resolve
+  // against ctx.repo. The fixture honours it rather than restating the tools.
+  symlinkSync(join(REPO, 'tools'), join(dir, 'tools'));
+  return dir;
+}
+
+function executorAt(repo: string) {
+  const config: any = { repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'], dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {}, adoptCommand: false };
+  const state = new State(statePath(config.stateDir)).init('demo');
+  const reporter = new Reporter({ dir: config.stateDir, intervalMs: 60_000 });
+  const adapter = makeExecAdapter({ argv: ['true'], cwd: repo });
+  return new Executor({ config, stages, adapter, state, reporter });
+}
+
+test('resolveInput picks the first existing candidate, else names the last', () => {
+  const repo = fixtureRepo();
+  const ex = executorAt(repo);
+  const ctx: any = { repo };
+  assert.equal(
+    ex.resolveInput(['research/demo-missing.task.md', 'research/demo-generic.task.md'], ctx),
+    'research/demo-generic.task.md');
+  assert.equal(
+    ex.resolveInput(['research/demo-a.task.md', 'research/demo-b.task.md'], ctx),
+    'research/demo-b.task.md');
+  assert.equal(ex.resolveInput('research/demo-generic.task.md', ctx), 'research/demo-generic.task.md');
+  assert.equal(ex.resolveInput(undefined, ctx), undefined);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('a hook-started dispatch with no existing input becomes a blocker, not a spawn', () => {
+  const repo = fixtureRepo();
+  const ex = executorAt(repo);
+  const s3: any = stages.find((s: any) => s.id === '3-recheck');
+  ex.start(s3, {
+    role: 'beta', label: 'scaffold-fix-1-b9', job: 'scaffolding', covers: ['9'],
+    brief: 'research/demo-absent-brief.md',
+    task: ['research/demo-absent.task.md'],
+    timeout: 60,
+  } as any);
+  assert.equal(ex.inflight.size, 0, 'nothing may spawn on a missing input');
+  assert.ok(ex.state.data.blockers.some((b: any) => /missing input file/.test(b.message)),
+    'the miss must surface as a blocker');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('the scaffold-fix hook dispatches one lane per owning batch, batch as cover', async () => {
+  const repo = fixtureRepo();
+  // receipt: three insufficient pages across TWO batches
+  writeFileSync(join(repo, 'research', 'demo-scaffold-closure.json'), JSON.stringify({
+    insufficient: ['page-x', 'page-y', 'page-z'],
+    work: [],
+  }));
+  writeFileSync(join(repo, 'research', 'demo-scope-ledger.json'), JSON.stringify({
+    pages: [
+      { id: 'page-x', kind: 'A', batch: '4' },
+      { id: 'page-y', kind: 'A', batch: '4' },
+      { id: 'page-z', kind: 'A', batch: '6' },
+    ],
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s3: any = stages.find((s: any) => s.id === '3-recheck');
+  await s3.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s3, round: 1,
+    failure: { id: 'scaffold-verdicts', why: '' },
+  });
+  assert.equal(started.length, 2, 'two batches own the three pages');
+  assert.deepEqual(started.map((p) => p.covers).sort(), [['4'], ['6']]);
+  assert.deepEqual(started.map((p) => p.label).sort(), ['scaffold-fix-1-b4', 'scaffold-fix-1-b6']);
+  for (const p of started) {
+    assert.ok(Array.isArray(p.task), 'candidates stay an array; start() resolves them');
+    assert.equal(p.job, 'scaffolding');
+  }
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('the mechanical branch still short-circuits the Beta fan-out', async () => {
+  const repo = fixtureRepo();
+  // a url-liveness failure with an artifact whose dead rows all carry
+  // snapshots already applied -> repair tool exits 0 -> no Beta lanes
+  writeFileSync(join(repo, 'research', 'demo-url-liveness.json'), JSON.stringify({ rows: [] }));
+  // the repair passes --coverage from the run's batch manifests
+  writeFileSync(join(repo, 'research', 'demo-batch-4.pages.json'), '[]');
+  writeFileSync(join(repo, 'research', 'demo-batch-4.coverage.json'), JSON.stringify({ pages: [] }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s3: any = stages.find((s: any) => s.id === '3-recheck');
+  await s3.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s3, round: 1,
+    failure: { id: 'url-liveness', why: '' },
+  });
+  assert.equal(started.length, 0, 'a mechanical repair must not fan out Betas');
+  rmSync(repo, { recursive: true, force: true });
+});

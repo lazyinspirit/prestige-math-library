@@ -662,14 +662,24 @@ export const stages = [
       const scaffold = readScaffold(ctx);
       const pages = scaffold?.insufficient ?? [];
       if (!pages.length) return;                 // failed on a missing verdict instead
-      // The task reads the receipt; the receipt names the missing results and the
-      // source that carries each. Nothing is transcribed into a prompt.
-      for (const [n, page] of pages.entries()) {
+      // ONE LANE PER OWNING BATCH, the batch carried as the cover. The first
+      // live firing dispatched one anonymous lane per PAGE — same prompt, no
+      // page identity, covers [] — so four Betas would each have had to guess
+      // which finding was theirs, and two pages in one batch meant two
+      // writers on one batch's files. The scope ledger maps page -> batch;
+      // the single cover flows into `--var i=<batch>` mechanically, and the
+      // task file keys the receipt's findings on it. The result files match
+      // no stage's pattern, so these lanes claim no coverage — the recheck
+      // Alphas re-assert sufficiency, which is the loop's whole point.
+      const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
+      const batchOf = new Map(ledger.pages.map((p: any) => [p.id, String(p.batch)]));
+      const owed = [...new Set(pages.map((p: any) => batchOf.get(p)).filter(Boolean))];
+      for (const b of owed) {
         executor.start(stage, {
           role: 'beta',
-          label: `scaffold-fix-${round}-${n + 1}`,
+          label: `scaffold-fix-${round}-b${b}`,
           job: 'scaffolding',
-          covers: [],
+          covers: [b],
           brief: 'briefs/beta-scaffold.md',
           task: [`research/${ctx.run}-beta-scaffold-fix.task.md`, `research/${ctx.run}-beta-fix.task.md`],
           timeout: 7200,
