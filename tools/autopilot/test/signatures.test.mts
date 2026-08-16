@@ -78,19 +78,36 @@ test('every brief and task file a stage will ask for exists', async (t) => {
   assert.deepEqual(missing, [], `a stage would block on a missing file:\n  ${missing.join('\n  ')}`);
 });
 
-test('doctor catches an invented flag', async (t) => {
+test('doctor catches an invented flag — actually planted, not merely absent', async (t) => {
+  // The previous version of this test built a synthetic bad stage, never used
+  // it, and asserted the LIVE table is clean — so it passed even with the flag
+  // check deleted, which is the exact test shape this suite exists to prevent.
   if (!existsSync(join(REPO, 'tools'))) return t.skip('target repo not present');
   const { doctor } = await import('../src/doctor.mts');
-  const stages = [{
-    id: 'bad', label: 'bad', units: () => ['1'], pattern: /x/,
-    gates: () => [{ id: 'g', argv: ['node', 'tools/depcheck.mjs', '--no-such-flag-anywhere'] }],
-    plan: () => [],
-  }];
-  // hand the doctor a synthetic stage module
-  const url = 'data:text/javascript,' + encodeURIComponent(
-    `export const stages = ${JSON.stringify(stages).replace(/"(units|pattern|gates|plan)":\s*\{\}/g, '')};`);
-  // simpler: assert the flag check itself via a real invented flag in the live table
-  const res = await doctor({ repo: REPO, run: 'frontier-14', stagesPath: new URL('../stages/mathlib.mjs', import.meta.url).pathname, config: {} });
-  assert.equal(res.problems.length, 0, `live table should be clean, got: ${res.problems.join('; ')}`);
-  assert.ok(res.ok.some((o) => /command flag/.test(o)));
+  const url = 'data:text/javascript,' + encodeURIComponent(`
+    export const stages = [{
+      id: 'bad', label: 'bad', units: () => ['1'], pattern: /x/,
+      gates: () => [{ id: 'g', argv: ['node', 'tools/depcheck.mjs', '--no-such-flag-anywhere'] }],
+      plan: () => [],
+    }];`);
+  const res = await doctor({ repo: REPO, run: 'frontier-14', stagesPath: url, config: {} });
+  assert.ok(res.problems.some((p: string) => /--no-such-flag-anywhere/.test(p)),
+    `the planted flag was not caught; problems: ${res.problems.join('; ') || '(none)'}`);
+});
+
+test('doctor checks a shimmed command against its real target, not the shim', async (t) => {
+  // ['node','tools/tsx-run.mjs','tools/precheck.mts','--json'] used to be
+  // validated against the 35-line shim; and --fail used to pass by substring
+  // on a tool defining only --fail-on-dead.
+  if (!existsSync(join(REPO, 'tools'))) return t.skip('target repo not present');
+  const { doctor } = await import('../src/doctor.mts');
+  const url = 'data:text/javascript,' + encodeURIComponent(`
+    export const stages = [{
+      id: 'bad2', label: 'bad2', units: () => ['1'], pattern: /x/,
+      gates: () => [{ id: 'g', argv: ['node', 'tools/url-sweep.mjs', '--fail'] }],
+      plan: () => [],
+    }];`);
+  const res = await doctor({ repo: REPO, run: 'frontier-14', stagesPath: url, config: {} });
+  assert.ok(res.problems.some((p: string) => /defines no --fail\b/.test(p)),
+    `--fail passed by substring against --fail-on-dead; problems: ${res.problems.join('; ') || '(none)'}`);
 });

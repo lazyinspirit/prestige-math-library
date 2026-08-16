@@ -41,31 +41,47 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   for (const p of specProblems) problems.push(`stage spec — ${p.stage}: ${p.message}`);
   if (!specProblems.length) ok.push(`stage spec: ${mod.stages.length} stage(s), every one able to fail`);
 
-  // 1. every flag a stage passes must exist in the tool receiving it
+  // 1. every flag a stage passes must exist in a tool receiving it.
+  //
+  // Detection is uniform for gates and plans, and a command may name SEVERAL
+  // tools/ paths (a runner shim plus its real target — `tsx-run.mjs
+  // precheck.mts`): a flag passes if ANY of them defines it. The old rule read
+  // only argv[1] for gates, so a shimmed gate's flags were checked against the
+  // 35-line shim; and `src.includes(f)` was a substring test, so `--fail`
+  // passed on a tool that defines only `--fail-on-dead`.
   let checkedFlags = 0;
+  let toolCommands = 0;
   for (const st of mod.stages) {
     const cmds: any[] = [];
+    const collect = (where: string, argv: any[]) => {
+      const tools = (argv ?? []).filter((a: any) => typeof a === 'string' && a.startsWith('tools/'));
+      if (tools.length) cmds.push([where, tools, (argv ?? []).join(' ')]);
+    };
     for (const g of (st.gates?.(ctx) ?? [])) {
-      const argv = typeof g.argv === 'function' ? g.argv() : g.argv;
-      if (argv?.[1]?.startsWith('tools/')) cmds.push([`${st.id}/${g.id}`, argv[1], argv.join(' ')]);
+      collect(`${st.id}/${g.id}`, typeof g.argv === 'function' ? g.argv() : g.argv);
     }
     let plans = [];
     try { plans = st.plan?.(ctx, units) ?? []; } catch (err: any) { problems.push(`${st.id}: plan() threw — ${err?.message ?? err}`); }
-    for (const p of plans) {
-      if (!p.argv) continue;
-      const tool2 = (p.argv ?? []).find((a: any) => typeof a === 'string' && a.startsWith('tools/'));
-      if (tool2) cmds.push([`${st.id}/${p.label}`, tool2, (p.argv ?? []).join(' ')]);
-    }
-    for (const [where, tool, line] of cmds) {
-      if (!existsSync(join(repo, tool))) { problems.push(`${where}: no such tool ${tool}`); continue; }
-      const src = readFileSync(join(repo, tool), 'utf8');
+    for (const p of plans) if (p.argv) collect(`${st.id}/${p.label}`, p.argv);
+    for (const [where, tools, line] of cmds) {
+      toolCommands += 1;
+      const sources: string[] = [];
+      for (const tool of tools) {
+        if (!existsSync(join(repo, tool))) { problems.push(`${where}: no such tool ${tool}`); continue; }
+        sources.push(readFileSync(join(repo, tool), 'utf8'));
+      }
+      if (!sources.length) continue;
       for (const f of flagsOf(line)) {
         checkedFlags += 1;
-        if (!src.includes(f)) problems.push(`${where}: ${tool} defines no ${f}`);
+        const defined = sources.some((src) => new RegExp(`${f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![A-Za-z0-9-])`).test(src));
+        if (!defined) problems.push(`${where}: ${tools.join('/')} defines no ${f}`);
       }
     }
   }
-  ok.push(`${checkedFlags} command flag(s) checked against their tools`);
+  // An ok-line that says 0 reads as green. Zero flags over a table that HAS
+  // tool commands means the detection broke, not that the table is clean.
+  if (toolCommands && !checkedFlags) problems.push('flag check examined 0 flags over a table with tool commands — the detection is broken');
+  else ok.push(`${checkedFlags} command flag(s) checked against their tools`);
 
   // 2. every brief and task a stage will ask for, for every plausible unit count
   let missing = 0;
