@@ -806,7 +806,7 @@ message every time, so it fired once and deadlocked.
 **Layout.** `src/executor.mts` is the loop; `src/coverage.mts` the predicate;
 `src/gates.mts` runs gates and refuses a vacuous one; `src/spec.mts` validates
 the table; `src/roles.mts` enforces the job rule; `stages/mathlib.mts` is the
-only domain-specific file, 17 stages from scaffolding to the owner report;
+only domain-specific file, 18 stages from scaffolding to the owner report;
 `bin/autopilot.mts` is the CLI (`frontier | plan | start | status | pause |
 resume | stop | retry | skip | report | doctor`). Porting to another project
 means writing another `stages/` file; porting to another agent platform means

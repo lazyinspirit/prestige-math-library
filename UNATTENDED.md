@@ -36,7 +36,7 @@ job is one of them.
 | `tools/autopilot/bin/autopilot.mts` | the CLI — everything below runs through it |
 | `tools/autopilot/src/executor.mts` | the loop: coverage, dispatch, gates, retries, blockers |
 | `tools/autopilot/src/spec.mts` | validates the stage table before a run may start |
-| `tools/autopilot/stages/mathlib.mts` | the only domain-specific file: 17 stages, their units, gates and repair loops |
+| `tools/autopilot/stages/mathlib.mts` | the only domain-specific file: 18 stages, their units, gates and repair loops |
 | `tools/autopilot/bin/watchdog.sh` | restarts the engine if the process dies |
 | `tools/dispatch.mjs` | spawns one briefed agent role as a plain process |
 | `tools/preflight.mjs` | can this machine run a build at all. **Run it before every long build** |

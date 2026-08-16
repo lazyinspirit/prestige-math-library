@@ -271,11 +271,11 @@ audit Alpha, so weight same-family agreement accordingly. Rows from retired
 lanes stay append-only evidence and never satisfy current Terra coverage.
 
 - Record a paired pass in `verification.judge` only when **both** models actually
-  pass the text; commit the full verdict ledger at `research/level<n>-judge.jsonl`
+  pass the text; commit the full verdict ledger at `research/<run>-judge.jsonl`
   and compare the two models' findings at step 10 / A10. A proof refuted or
   repaired more than once escalates per `WORKFLOW.md` §"Twice-touched proofs".
 - Adjudicate a rejection from either model in
-  `research/level<n>-judge-adjudications.jsonl` as
+  `research/<run>-judge-adjudications.jsonl` as
   `{id, model, context_sha256, outcome, defect_type?}` — `outcome` is
   `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`; fatal types are
   `logic`, `dependency_citation`, or `other`. At step 10 compare agreement,
