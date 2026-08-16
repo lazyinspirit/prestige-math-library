@@ -138,6 +138,14 @@ for (const coverage of coverages) {
         if (source?.original_url && source?.url && source.original_url !== source.url) {
           try { superseded.add(new URL(source.original_url).href); } catch { /* not a URL */ }
         }
+        // The mirror case: a source reverted to its recovered ORIGIN keeps the
+        // archive snapshot as fallback provenance. Neither is the reader-facing
+        // citation twice over — probing the parked snapshot re-fails the gate
+        // on archive.org weather (a 503 held stage 6c for half an hour while
+        // the citation itself was live).
+        if (source?.archived_fallback?.snapshot && source.archived_fallback.snapshot !== source.url) {
+          try { superseded.add(new URL(source.archived_fallback.snapshot).href); } catch { /* not a URL */ }
+        }
       }
     }
   } catch { /* a non-JSON coverage input keeps the full harvest */ }
