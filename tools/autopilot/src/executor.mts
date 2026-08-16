@@ -719,7 +719,51 @@ export class Executor {
       if (outcome !== 'ok') return outcome;
     }
 
-    this.reporter.report(this.snapshot());
+    // NO SILENT STALEMATES.
+    //
+    // frontier-15's splice lane succeeded declaring covers 1-7 while
+    // withholding two batches' receipt artifacts: dispatch saw full coverage
+    // (nothing to start), the join saw missing artifacts (gates may not run),
+    // nothing was in flight — and the engine sat between the two predicates
+    // in silence, ticking and emitting nothing, for as long as nobody looked.
+    // A stage that is covered, undispatched and drained but still not
+    // artifact-complete can make no progress on its own; that is a
+    // first-class failure, not a wait state. It routes through the same
+    // bounded repair loop as a gate failure (synthetic id `stage-stalemate`),
+    // and a stage with no handler for it gets a VISIBLE blocker.
+    if (!unitsAllDone && !this.inflight.size) {
+      for (const { s, st } of statuses) {
+        if (st.unitsDone) continue;
+        const owed = (s.units ? s.units(ctx) : []).map(String);
+        const cov = covered(ctx.dispatchDir, s.pattern, ctx.coversMap);
+        if (pending(owed, cov).length) continue;   // dispatchable — not a stalemate
+        const missing = owed.filter((u: string) => !this.unitsComplete(s, ctx).has(u));
+        const failure = { id: 'stage-stalemate', ok: false, why: `unit(s) ${missing.join(', ')} covered but artifact-incomplete, nothing dispatchable` };
+        const record = this.state.stage(s.id);
+        const maxRounds = s.maxFixRounds ?? 0;
+        if (s.onGateFailure && record.fixRounds < maxRounds) {
+          record.fixRounds += 1;
+          this.state.save();
+          this.reporter.notify('repair', `${s.id}: stalemate — ${failure.why}; starting repair round ${record.fixRounds}/${maxRounds}`);
+          try {
+            await s.onGateFailure({ ctx, failure, executor: this, stage: s, round: record.fixRounds });
+          } catch (err: any) {
+            this.reporter.notify('repair-failed', `${s.id}: stalemate repair threw — ${err?.message ?? err}`);
+          }
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'working';
+        }
+        const msg = `stage ${s.id}: stalemate — ${failure.why}`;
+        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+          this.state.addBlocker(s.id, msg);
+          this.reporter.notify('blocked', msg, { stage: s.id });
+        }
+        this.reporter.report(this.snapshot(), { force: true });
+        return 'blocked';
+      }
+    }
+
+    this.reporter.report(this.snapshot(), { force: false });
     return 'working';
   }
 

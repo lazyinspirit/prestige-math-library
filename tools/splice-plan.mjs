@@ -44,6 +44,11 @@ const verify = argv.includes('--verify');
 const update = argv.includes('--update');
 const allMode = argv.includes('--all');
 const refusalsGateMode = argv.includes('--refusals-gate');
+// --fail-on-refusal: the REPAIR-path variant of --all. The splice itself is
+// identical; the exit code says whether edges still await adjudication, so
+// the stage's mechanical-repair hook can distinguish "re-splice done, all
+// clear" (0) from "the residue needs the adjudicating Alpha" (1).
+const failOnRefusal = argv.includes('--fail-on-refusal');
 
 // --refusals-gate: the stage gate over the refusals artifact. Exits 1 while
 // any requires edge awaits adjudication, 2 when the artifact is absent (the
@@ -240,4 +245,9 @@ for (const { batch: b, spliced, unchanged } of perBatch) {
   };
   if (!dryRun) writeFileSync(`research/${run}-splice-${b}.json`, JSON.stringify(receipt, null, 2) + '\n');
   console.log(`splice-plan: batch ${b} — ${spliced.length} page(s) spliced, ${unchanged.length} already correct, ${receipt.item_count} item(s)`);
+}
+
+if (failOnRefusal && refusals.length) {
+  console.error(`splice-plan: ${refusals.length} requires edge(s) still await adjudication`);
+  process.exit(1);
 }

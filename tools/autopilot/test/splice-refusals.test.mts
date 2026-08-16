@@ -10,7 +10,7 @@
 // stage 4 routes the failure to an adjudication Alpha.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync, symlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -25,6 +25,8 @@ const TOOL = join(REPO, 'tools', 'splice-plan.mjs');
 function fixture() {
   const dir = mkdtempSync(join(tmpdir(), 'splice-'));
   mkdirSync(join(dir, 'research'));
+  // the stage-4 repair spawns tools/splice-plan.mjs relative to ctx.repo
+  symlinkSync(join(REPO, 'tools'), join(dir, 'tools'));
   writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({
     pages: [
       { order: 1, id: 'clean-page', kind: 'A', requires: [], items: [] },
@@ -92,17 +94,31 @@ test('real errors still exit 1 and write nothing', () => {
   rmSync(dir, { recursive: true, force: true });
 });
 
-test('stage 4 routes the refusals gate to an adjudication Alpha', async () => {
+test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; adjudicated edges need no Alpha', async () => {
   const s4: any = stages.find((s: any) => s.id === '4-splice');
-  const ctx = { run: 'demo', repo: '/nonexistent' };
+  const dir = fixture();
+  const ctx = { run: 'demo', repo: dir };
   assert.ok(s4.gates(ctx).some((g: any) => g.id === 'splice-refusals'));
-  assert.equal(s4.maxFixRounds, 2);
+  assert.equal(s4.maxFixRounds, 3);
   const started: any[] = [];
-  await s4.onGateFailure({ ctx, executor: { start: (_s: any, p: any) => started.push(p) }, stage: s4, round: 1, failure: { id: 'splice-refusals', why: '' } });
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  // round 1: the edge is unadjudicated -> re-splice leaves residue -> Alpha
+  await s4.onGateFailure({ ctx, executor, stage: s4, round: 1, failure: { id: 'splice-refusals', why: '' } });
   assert.equal(started.length, 1);
   assert.equal(started[0].job, 'adjudication');
-  assert.equal(started[0].label, 'step4-adjudicate');
-  // and every other failure id is left to the default blocker path
-  await s4.onGateFailure({ ctx, executor: { start: (_s: any, p: any) => started.push(p) }, stage: s4, round: 1, failure: { id: 'validate-plan', why: '' } });
-  assert.equal(started.length, 1);
+  assert.equal(started[0].label, 'step4-adjudicate-1');
+  // the stalemate synthetic takes the same path
+  await s4.onGateFailure({ ctx, executor, stage: s4, round: 2, failure: { id: 'stage-stalemate', why: '' } });
+  assert.equal(started.length, 2);
+  // adjudication lands: the spec gains the edge -> re-splice is clean, no Alpha
+  const spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
+  spec.pages.find((p: any) => p.id === 'refusing-page').requires = ['target-page'];
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify(spec, null, 2));
+  await s4.onGateFailure({ ctx, executor, stage: s4, round: 3, failure: { id: 'splice-refusals', why: '' } });
+  assert.equal(started.length, 2, 'a clean re-splice must not spend an Alpha');
+  assert.ok(existsSync(join(dir, 'research', 'demo-splice-2.json')), 'the re-splice landed the withheld receipt');
+  // every other failure id is left to the default blocker path
+  await s4.onGateFailure({ ctx, executor, stage: s4, round: 3, failure: { id: 'validate-plan', why: '' } });
+  assert.equal(started.length, 2);
+  rmSync(dir, { recursive: true, force: true });
 });

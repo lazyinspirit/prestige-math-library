@@ -193,6 +193,12 @@ const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[]> = {
   // sources missing their full-text stamp -> fetch the bodies and stamp them
   'source-fetch-check': (ctx) => ['tools/source-fetch-check.mjs',
     '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(','), '--stamp'],
+  // withheld splice batches -> re-transcribe; exit 1 = edges still await the
+  // adjudicating Alpha (the residual the stage-4 hook routes)
+  'splice-refusals': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
+  // the stalemate synthetic (covered, undispatched, artifact-incomplete) on
+  // stage 4 IS the withheld-splice shape — same repair
+  'stage-stalemate': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
 };
 
 /** Run the table's repair for this failure, if it has one.
@@ -781,12 +787,21 @@ export const stages = [
       // (the splice never ran) is exit 2, its own hard failure.
       gate('splice-refusals', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--refusals-gate']),
       scopeGate(ctx), planGate()],
-    maxFixRounds: 2,
-    onGateFailure: async ({ ctx, executor, stage, failure }: any) => {
-      if (failure.id !== 'splice-refusals') return;
+    maxFixRounds: 3,
+    // Round shape: a refusal failure (or the stalemate synthetic, which on
+    // this stage IS the withheld-splice shape) first re-runs the splice
+    // mechanically — after an adjudication that is all it takes, receipts
+    // land, and the battery greens. A residual exit means edges still await
+    // the decision, so the round dispatches the adjudicating Alpha; the next
+    // round's re-splice then transcribes what it decided. Three rounds:
+    // re-splice, adjudicate, re-splice.
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      if (!['splice-refusals', 'stage-stalemate'].includes(failure.id)) return;
+      const repair = await mechanicalRepair({ ctx, failure: { id: 'splice-refusals' } });
+      if (repair.outcome === 'clean') return;
       executor.start(stage, {
         role: 'alpha',
-        label: 'step4-adjudicate',
+        label: `step4-adjudicate-${round}`,
         job: 'adjudication',
         covers: [],
         brief: 'briefs/alpha.md',
