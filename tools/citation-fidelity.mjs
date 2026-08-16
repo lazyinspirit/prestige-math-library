@@ -23,7 +23,8 @@
 // TWO INDEPENDENT CHECKS.
 //
 //   quote-not-found   The proof contract records, per fact, the exact `quote`
-//                     it is citing. If that text does not appear in the cited
+//                     it is citing and the `source_section` it comes from. If
+//                     that text does not appear in THAT SECTION of the cited
 //                     item, the citation is to something that is not there.
 //                     This is close to a hard error rather than a heuristic:
 //                     the author asserted a verbatim quote.
@@ -42,6 +43,7 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { factLines, splitFrontmatter, sourceSectionText, SOURCE_SECTIONS } from './facts-block.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (name, fallback = null) => {
@@ -78,24 +80,10 @@ const flat = (s) => String(s ?? '')
   .replace(/\s+/g, ' ')
   .trim();
 
-/** The item's own fact lines: `[L2] restatement… ([[cited-id]])`.
- *
- *  End-of-block: the next `##` heading or the true end of the string.
- *  `$(?![\s\S])` is the end-of-string anchor under the m flag; `\Z` — the
- *  anchor in Python and Perl — is a LITERAL Z in JavaScript, and with a lazy
- *  body it truncated the block at the first Z in the text. `$\mathbb{Z}$`
- *  saturates this corpus: 35 of frontier-14's 291 contract items lost 108
- *  fact lines to it, unseen by the widening detectors. */
-const factLines = (text) => {
-  const out = [];
-  const m = /^##\s+Facts[^\n]*\n([\s\S]*?)(?=^##\s+|$(?![\s\S]))/m.exec(text);
-  if (!m) return out;
-  for (const line of m[1].split('\n')) {
-    const f = /^\s*\[([FLA]\d+)\]\s*(.+)$/.exec(line);
-    if (f) out.push({ fact: f[1], text: f[2].trim() });
-  }
-  return out;
-};
+// The item's own fact lines, and the text a quote must be found in, both come
+// from tools/facts-block.mjs — the one parser for this grammar. Its header
+// records why (an end-of-string anchor written `\Z` truncated this block at the
+// first `$\mathbb{Z}$` and silenced every detector below on 35 items).
 
 // ---------------------------------------------------------------------------
 // Widening detectors. Each takes (quote, restatement) and returns a reason or
@@ -187,15 +175,35 @@ for (const file of files) {
       const sourceText = read(source);
       if (sourceText === null) {
         unauthored.add(source);
-      } else if (!flat(sourceText).includes(quote)) {
-        // Try the first sentence: authors legitimately quote a clause and then
-        // elide. A PRESENT opening passes as elision; an absent opening is
-        // reported whatever its length — the old `> 25` guard silently dropped
-        // every short absent quote, and a contract quote is an asserted
-        // verbatim citation either way.
-        const head = quote.split(/(?<=[.;])\s/)[0];
-        if (!flat(sourceText).includes(head)) {
-          missingQuotes.push({ id, fact: c.fact, source, quote: quote.slice(0, 180), file });
+      } else {
+        // SEARCH THE SECTION THE CITATION NAMES, not the whole file. A contract
+        // citation records `source_section`, and proof-contract.mjs has always
+        // checked its quote inside that section; this checked the entire file,
+        // frontmatter included, so a phrase living in the cited item's Remark or
+        // Proof vouched for a quote attributed to its Statement. Same grammar,
+        // two answers, and the weaker one ran on every level.
+        //
+        // A citation naming no section, or one no citation may name, keeps the
+        // whole-file search: proof-contract already hard-errors that shape as
+        // `citation-section`, and inventing a second, differently-worded report
+        // of it here would put false positives in front of a reader instead.
+        const scoped = SOURCE_SECTIONS.has(c.source_section)
+          ? sourceSectionText(splitFrontmatter(sourceText).body, c.source_section)
+          : sourceText;
+        const haystack = flat(scoped);
+        if (!haystack.includes(quote)) {
+          // Try the first sentence: authors legitimately quote a clause and then
+          // elide. A PRESENT opening passes as elision; an absent opening is
+          // reported whatever its length — the old `> 25` guard silently dropped
+          // every short absent quote, and a contract quote is an asserted
+          // verbatim citation either way.
+          const head = quote.split(/(?<=[.;])\s/)[0];
+          if (!haystack.includes(head)) {
+            missingQuotes.push({
+              id, fact: c.fact, source, quote: quote.slice(0, 180), file,
+              searched: SOURCE_SECTIONS.has(c.source_section) ? c.source_section : 'whole item',
+            });
+          }
         }
       }
 
@@ -238,7 +246,7 @@ if (asJson) {
     console.log(`\nQUOTE NOT FOUND IN THE CITED ITEM — ${missingQuotes.length}.`);
     console.log('The contract asserts a verbatim quote. These do not appear in the source.');
     for (const q of missingQuotes) {
-      console.log(`\n  ${q.id}  [${q.fact}] -> ${q.source}`);
+      console.log(`\n  ${q.id}  [${q.fact}] -> ${q.source} (searched: ${q.searched})`);
       console.log(`    quote: "${q.quote}${q.quote.length >= 180 ? '…' : ''}"`);
     }
   } else {

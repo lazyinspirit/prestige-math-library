@@ -12,11 +12,28 @@
 // every one of those questions into a query, and the generated view cannot
 // disagree with its rows.
 //
-//   node tools/defect-ledger.mjs append   --file rows.json [--ledger <path>]
+//   node tools/defect-ledger.mjs append   --file rows.json [--ledger <path>] [--no-render]
 //   node tools/defect-ledger.mjs validate [--run R] [--ledger <path>]
 //   node tools/defect-ledger.mjs stats    [--by f1,f2] [--leakage] [--recurrence] [--coverage] [--run R] [--json]
 //   node tools/defect-ledger.mjs render   [--out research/DEFECT-LEDGER.md]
 //   node tools/defect-ledger.mjs check    --run R --adjudications <adj.jsonl> [--closure <closure.json>]
+//                                         [--view research/DEFECT-LEDGER.md]
+//
+// THE VIEW IS GENERATED, AND ITS HEADER SAYS SO. `research/DEFECT-LEDGER.md`
+// carries "GENERATED from … @ <hash> — do not edit", and until 2026-08-16
+// nothing kept that claim true: `render` was wired into no stage, so the first
+// append without a manual render made the header a false statement about the
+// file it names. That is BUILD-AUDIT-INDEX's 70-versus-412 drift, one level
+// down and self-inflicted.
+//
+// Two mechanisms, at the two ends:
+//   `append` re-renders the view in the same invocation, so the view can never
+//   lag an append at all (`--no-render` for bulk seeding);
+//   `check` recomputes the fingerprint and compares it with the header, so a
+//   hand-edited view, a hand-edited ledger and a `--no-render` append are all
+//   caught as `render-stale`.
+// The machine reads the jsonl; nothing ever reads the view's content beyond
+// that one header hash, and that asymmetry is deliberate.
 //
 // THE ROW. One row per DEFECT — two lanes finding one defect is ONE row with
 // two adjudication_ref entries. Mandatory fields are exactly what the
@@ -32,6 +49,10 @@ import { join } from 'node:path';
 const argv = process.argv.slice(2);
 const cmd = argv[0];
 const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
+/** Was the flag given at all, whatever `opt` made of its value? `opt` silently
+ *  returns the default for a bare flag and for one whose value is the next
+ *  flag, which is how `stats --by` printed nothing and exited 0. */
+const given = (n) => argv.includes(`--${n}`);
 const asJson = argv.includes('--json');
 const ledgerPath = opt('ledger', 'research/defect-ledger.jsonl');
 
@@ -76,6 +97,12 @@ const OPTIONAL_ENUMS = {
 };
 const MANDATORY = ['defect_id', 'run', 'at', 'class', 'subclass', 'severity', 'location',
   'subject', 'caught_at_stage', 'caught_by_role', 'disposition'];
+// The scalar fields `stats --by` can group on. Grouping on a field no row has
+// produces one bucket named "(none)" holding every row — a table that looks
+// like an answer and is not one, which is exactly what a typo used to yield.
+const GROUPABLE = [...MANDATORY, ...Object.keys(OPTIONAL_ENUMS),
+  'introduced_by_role', 'subclass_note', 'source', 'batch', 'orig_id',
+  'item_sha256', 'recurrence_of'].sort();
 
 function loadLedger(path = ledgerPath) {
   if (!existsSync(path)) return [];
@@ -114,6 +141,79 @@ function validate(rows, runFilter) {
 const filtered = (rows) => { const r = opt('run'); return r ? rows.filter((x) => x.run === r) : rows; };
 
 // ---------------------------------------------------------------------------
+// The generated view, and the ONE definition of its fingerprint.
+//
+// `render` stamps it into the header and `check` recomputes it. Two copies of a
+// hash rule drift — that is this repo's `item_sha256` defect — so there is one.
+const VIEW_DEFAULT = 'research/DEFECT-LEDGER.md';
+const VIEW_HEADER_RE = /^> GENERATED from `[^`]+` @ ([0-9a-f]{12}) by/m;
+
+/** sha256 of the ledger's bytes, first 12 hex. An absent ledger fingerprints as
+ *  the empty string, so a view rendered from nothing still has a checkable
+ *  header rather than an exemption. */
+function ledgerFingerprint(path = ledgerPath) {
+  return createHash('sha256')
+    .update(existsSync(path) ? readFileSync(path) : '')
+    .digest('hex').slice(0, 12);
+}
+
+/** The fingerprint the view CLAIMS it was generated from, or null when the view
+ *  is absent or its header has been removed. */
+function viewFingerprint(viewPath) {
+  if (!existsSync(viewPath)) return null;
+  return VIEW_HEADER_RE.exec(readFileSync(viewPath, 'utf8'))?.[1] ?? null;
+}
+
+function renderView(outPath) {
+  const rows = loadLedger().filter((r) => !r.__parse_error);
+  const sha = ledgerFingerprint();
+  const runs = [...new Set(rows.map((r) => r.run))].sort();
+  const count = (pred) => rows.filter(pred).length;
+  const lines = [];
+  lines.push(`# Defect ledger — generated view`);
+  lines.push('');
+  lines.push(`> GENERATED from \`${ledgerPath}\` @ ${sha} by \`tools/defect-ledger.mjs render\` — do not edit.`);
+  lines.push('');
+  // The lead is outcomes, never a bare total: a raw defect count reads as a
+  // quality signal and is not one (judge-rejection-rates-mislead).
+  lines.push('## What the numbers mean, first');
+  lines.push('');
+  lines.push('| | |');
+  lines.push('|---|---|');
+  lines.push(`| defects caught before publication | ${count((r) => r.caught_at_stage !== 'escaped-to-publication' && r.caught_at_stage !== 'post-publication')} |`);
+  lines.push(`| now mechanically prevented | ${count((r) => r.prevention?.kind === 'mechanical')} |`);
+  lines.push(`| escaped to publication | ${count((r) => r.caught_at_stage === 'escaped-to-publication' || r.caught_at_stage === 'post-publication')} |`);
+  lines.push(`| still open | ${count((r) => r.disposition === 'open')} |`);
+  lines.push('');
+  for (const run of runs) {
+    const rr = rows.filter((r) => r.run === run);
+    lines.push(`## ${run} — ${rr.length} row(s)`);
+    lines.push('');
+    const table = {};
+    for (const r of rr) {
+      (table[r.subclass] ??= {})[r.caught_at_stage] = ((table[r.subclass] ?? {})[r.caught_at_stage] ?? 0) + 1;
+    }
+    const stages = [...new Set(rr.map((r) => r.caught_at_stage))].sort((a, b) => STAGES.indexOf(a) - STAGES.indexOf(b));
+    lines.push(`| subclass | ${stages.join(' | ')} |`);
+    lines.push(`|---|${stages.map(() => '---').join('|')}|`);
+    for (const [sub, cells] of Object.entries(table).sort((a, b) =>
+      Object.values(b[1]).reduce((x, y) => x + y, 0) - Object.values(a[1]).reduce((x, y) => x + y, 0))) {
+      lines.push(`| ${sub} | ${stages.map((s) => cells[s] ?? '').join(' | ')} |`);
+    }
+    lines.push('');
+  }
+  const open = rows.filter((r) => r.disposition === 'open');
+  if (open.length) {
+    lines.push('## Open');
+    lines.push('');
+    for (const r of open) lines.push(`- \`${r.defect_id}\` ${r.run} · ${r.subclass} · ${r.subject}`);
+    lines.push('');
+  }
+  writeFileSync(outPath, lines.join('\n'));
+  return rows.length;
+}
+
+// ---------------------------------------------------------------------------
 if (cmd === 'append') {
   const file = opt('file');
   if (!file) { console.error('append needs --file <rows.json> — never quote JSON through a shell'); process.exit(2); }
@@ -130,6 +230,15 @@ if (cmd === 'append') {
   }
   appendFileSync(ledgerPath, rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
   console.log(`defect-ledger: appended ${rows.length} row(s) to ${ledgerPath} (${existing.length + rows.length} total)`);
+  // Refresh the generated view in the same invocation. Its header asserts the
+  // fingerprint of the file it was built from, and an append that does not
+  // re-render makes that assertion false the moment it returns. `append` is an
+  // action and may write; the `check` GATE only ever reads.
+  if (!argv.includes('--no-render')) {
+    const viewPath = opt('out', VIEW_DEFAULT);
+    const n = renderView(viewPath);
+    console.log(`defect-ledger: re-rendered ${n} row(s) -> ${viewPath} @ ${ledgerFingerprint()}`);
+  }
   process.exit(0);
 }
 
@@ -146,8 +255,23 @@ if (cmd === 'stats') {
   const rows = filtered(loadLedger()).filter((r) => !r.__parse_error);
   const out = {};
   const by = opt('by');
+  // A bare `--by`, or a `--by` whose value is the next flag, printed nothing and
+  // exited 0 — the query silently became "no query", and a caller reading the
+  // exit code learned that everything was fine. An unknown field was worse: it
+  // grouped every row into one bucket named "(none)" and printed it as a result.
+  if (given('by') && !by) {
+    console.error('stats --by needs a comma-separated field list, e.g. --by subclass,caught_at_stage');
+    console.error(`valid fields: ${GROUPABLE.join(', ')}`);
+    process.exit(2);
+  }
   if (by) {
-    const fields = by.split(',');
+    const fields = by.split(',').map((f) => f.trim());
+    const unknown = fields.filter((f) => !GROUPABLE.includes(f));
+    if (unknown.length) {
+      console.error(`stats --by: unknown field(s) ${unknown.join(', ')}`);
+      console.error(`valid fields: ${GROUPABLE.join(', ')}`);
+      process.exit(2);
+    }
     const table = {};
     for (const r of rows) {
       const key = fields.map((f) => r[f] ?? '(none)').join(' × ');
@@ -203,53 +327,9 @@ if (cmd === 'stats') {
 }
 
 if (cmd === 'render') {
-  const outPath = opt('out', 'research/DEFECT-LEDGER.md');
-  const rows = loadLedger().filter((r) => !r.__parse_error);
-  const sha = createHash('sha256').update(existsSync(ledgerPath) ? readFileSync(ledgerPath) : '').digest('hex').slice(0, 12);
-  const runs = [...new Set(rows.map((r) => r.run))].sort();
-  const count = (pred) => rows.filter(pred).length;
-  const lines = [];
-  lines.push(`# Defect ledger — generated view`);
-  lines.push('');
-  lines.push(`> GENERATED from \`research/defect-ledger.jsonl\` @ ${sha} by \`tools/defect-ledger.mjs render\` — do not edit.`);
-  lines.push('');
-  // The lead is outcomes, never a bare total: a raw defect count reads as a
-  // quality signal and is not one (judge-rejection-rates-mislead).
-  lines.push('## What the numbers mean, first');
-  lines.push('');
-  lines.push('| | |');
-  lines.push('|---|---|');
-  lines.push(`| defects caught before publication | ${count((r) => r.caught_at_stage !== 'escaped-to-publication' && r.caught_at_stage !== 'post-publication')} |`);
-  lines.push(`| now mechanically prevented | ${count((r) => r.prevention?.kind === 'mechanical')} |`);
-  lines.push(`| escaped to publication | ${count((r) => r.caught_at_stage === 'escaped-to-publication' || r.caught_at_stage === 'post-publication')} |`);
-  lines.push(`| still open | ${count((r) => r.disposition === 'open')} |`);
-  lines.push('');
-  for (const run of runs) {
-    const rr = rows.filter((r) => r.run === run);
-    lines.push(`## ${run} — ${rr.length} row(s)`);
-    lines.push('');
-    const table = {};
-    for (const r of rr) {
-      (table[r.subclass] ??= {})[r.caught_at_stage] = ((table[r.subclass] ?? {})[r.caught_at_stage] ?? 0) + 1;
-    }
-    const stages = [...new Set(rr.map((r) => r.caught_at_stage))].sort((a, b) => STAGES.indexOf(a) - STAGES.indexOf(b));
-    lines.push(`| subclass | ${stages.join(' | ')} |`);
-    lines.push(`|---|${stages.map(() => '---').join('|')}|`);
-    for (const [sub, cells] of Object.entries(table).sort((a, b) =>
-      Object.values(b[1]).reduce((x, y) => x + y, 0) - Object.values(a[1]).reduce((x, y) => x + y, 0))) {
-      lines.push(`| ${sub} | ${stages.map((s) => cells[s] ?? '').join(' | ')} |`);
-    }
-    lines.push('');
-  }
-  const open = rows.filter((r) => r.disposition === 'open');
-  if (open.length) {
-    lines.push('## Open');
-    lines.push('');
-    for (const r of open) lines.push(`- \`${r.defect_id}\` ${r.run} · ${r.subclass} · ${r.subject}`);
-    lines.push('');
-  }
-  writeFileSync(outPath, lines.join('\n'));
-  console.log(`defect-ledger: rendered ${rows.length} row(s) -> ${outPath}`);
+  const outPath = opt('out', VIEW_DEFAULT);
+  const n = renderView(outPath);
+  console.log(`defect-ledger: rendered ${n} row(s) -> ${outPath}`);
   process.exit(0);
 }
 
@@ -275,6 +355,20 @@ if (cmd === 'check') {
       if (owners.length === 0) errs.push(`confirmed_fatal on ${a.id} (${a.model ?? '?'}) has no ledger row — the defect the adjudicator confirmed was never recorded`);
       if (owners.length > 1) errs.push(`confirmed_fatal on ${a.id} appears in ${owners.length} rows (${owners.map((o) => o.defect_id).join(', ')}) — one defect, one row`);
     }
+  }
+
+  // (b) the generated view is current. Its header asserts which ledger bytes it
+  // was built from; recompute and compare. This is the only thing anything ever
+  // reads out of the view — the machine reads the jsonl — and it catches the
+  // window between an adjudication and its close, a `--no-render` append, and a
+  // hand-edit of a file whose own header forbids editing.
+  const viewPath = opt('view', VIEW_DEFAULT);
+  const stamped = viewFingerprint(viewPath);
+  const actual = ledgerFingerprint();
+  if (stamped === null) {
+    errs.push(`render-stale: ${viewPath} is missing or carries no GENERATED header — run \`node tools/defect-ledger.mjs render\``);
+  } else if (stamped !== actual) {
+    errs.push(`render-stale: ${viewPath} was generated from ${stamped} but ${ledgerPath} is now ${actual} — run \`node tools/defect-ledger.mjs render\``);
   }
 
   // (c) step-6 liveness: the 6b reports are the rows with no other mechanical

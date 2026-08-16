@@ -19,6 +19,7 @@ import { spawnSync } from 'node:child_process';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tsxLoader } from './paths.mjs';
+import { verdictIsCurrent } from './judge-currency.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -369,8 +370,12 @@ if (judgeAdjudicationsPath) {
       // it, and their levels are published rather than re-gated.
       if (typeof record.item_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.item_sha256)) {
         error('judge-adjudication-unhashed',
-          `${judgeAdjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) needs item_sha256, ` +
-          'the full sha256 of the normalized item text (verification block excluded) at adjudication time', record.id);
+          `${judgeAdjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) needs item_sha256 in the ` +
+          'GUARD form — the full sha256 of the item text with the WHOLE `verification:` block excluded ' +
+          '(tools/item-hash.mjs `itemHashGuard`), as at adjudication time. That is the form ' +
+          'tools/step8-guard.mjs matches against a touchlog baseline. It is NOT the judge-ledger form: an ' +
+          'item_sha256 on a verdict row excludes only the two-space-indented `judge:` sub-block ' +
+          '(`itemHashJudge`), and the two never agree on the same file', record.id);
         continue;
       }
       judgeOutcomes.set(judgeOutcomeKey(record.id, record.model, record.context_sha256), record);
@@ -444,12 +449,22 @@ for (const id of judgePath ? judgeScope : []) {
   const now = verifyCurrent ? currentContextHash(id) : null;
   const current = now?.context ?? null;
   const currentItem = now?.item ?? null;
+  // The per-lane currency rule is tools/judge-currency.mjs, shared with
+  // tools/judge-sweep.mjs — the tool that decides which items to SPEND a judge
+  // call on. The two implemented it separately and disagreed: the sweep read
+  // clause (a) only and re-judged every page-mate of every repair, work this
+  // gate already considered covered. One reading, one file.
+  //
+  // Rows are grouped by context hash, so a group's `hash` IS every member row's
+  // `context_sha256`; passing it per row is the same test, spelled once.
   const coversCurrent = ([hash, byModel]) => {
     if (!verifyCurrent) return true;
-    if (hash === current) return true;
-    // (b): every lane's verdict was cast against this exact item text.
-    return Boolean(currentItem)
-      && JUDGES.every((model) => byModel.get(model)?.item_sha256 === currentItem);
+    // Every lane's verdict must be current — clause (a) via the group's shared
+    // context hash, or clause (b) via that lane's own item hash.
+    return JUDGES.every((model) => verdictIsCurrent(
+      { context_sha256: hash, item_sha256: byModel.get(model)?.item_sha256 },
+      { context: current, item: currentItem },
+    ));
   };
   const eligible = [...contexts.entries()].filter((entry) =>
     coversCurrent(entry) && JUDGES.every((model) => entry[1].has(model)));

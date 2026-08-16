@@ -15,6 +15,7 @@ import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { stripVerification } from './item-hash.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -53,11 +54,9 @@ function list(fm, key) {
 }
 function option(flag) { const index = argv.indexOf(flag); return index >= 0 ? argv[index + 1] : undefined; }
 function resolvePath(path) { return path.startsWith('/') ? path : join(process.cwd(), path); }
-function stripVerification(source) {
-  const match = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(source);
-  if (!match) return source;
-  return match[1].replace(/^verification:(?:\n(?:[ \t]+.*\n?)*|[^\n]*\n?)/m, '') + '\n---\n' + match[2];
-}
+// `stripVerification` is imported, not copied: this receipt's `content_sha256`
+// has to mean the same thing as a touchlog baseline, and a second copy of the
+// normalisation is how the two drift apart without a gate noticing.
 function isProofBearing(body) { return /^## (?:Proof|Refutation|Counterexample|Verification)\s*$/m.test(body); }
 
 const items = new Map();

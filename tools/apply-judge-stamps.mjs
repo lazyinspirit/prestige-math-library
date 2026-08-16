@@ -44,8 +44,8 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { tsxLoader } from './paths.mjs';
+import { itemHashJudge } from './item-hash.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -67,9 +67,9 @@ const today = new Date().toISOString().slice(0, 10);
 // A stamp is evidence about the item, not a mathematical change to it.  Exclude
 // only the block this tool writes so applying/reapplying a stamp cannot make its
 // own target receipt fail.  Any other frontmatter or body change remains bound.
-const attestedItemHash = (text) => createHash('sha256').update(
-  text.replace(/^ {2}judge:\n(?: {4}.*\n)*/m, ''),
-).digest('hex');
+// One definition, in tools/item-hash.mjs, shared with judge.mts: a second copy
+// here and in the tool that WRITES the hash is how the two silently disagree.
+const attestedItemHash = itemHashJudge;
 let targeted = new Map();
 const ids = manifestsArg
   ? [...new Set(manifestsArg.split(',').map((s) => s.trim()).filter(Boolean)

@@ -170,13 +170,20 @@ export interface DispatchRecord {
   role: string;
   label: string;
   covers: Unit[];
+  /** The retry-policy counter. `State.recordDispatchStart` is the only thing
+   *  that increments it, and the owner's `retry` command is the only thing that
+   *  resets it. */
   attempts: number;
-  /** `null` when the dispatch never recorded an end. That case is why a retry
-   *  cap must key on attempts, not on exit status. */
+  /** `null` when the dispatch never recorded an end — the engine process died
+   *  while it was in flight. That case is why a retry cap must key on attempts,
+   *  not on exit status, and why `null` must never be read as "failed". */
   lastExitOk: boolean | null;
   startedAt: string | null;
   endedAt: string | null;
-  attempt?: number;
+  /** The same number as `attempts`, stamped at start for the status line.
+   *  Written only by `recordDispatchStart`, from the value it computes, so the
+   *  two cannot disagree at the moment a dispatch begins. */
+  attempt: number;
 }
 
 export interface StageState {

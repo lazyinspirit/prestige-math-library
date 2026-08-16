@@ -778,7 +778,12 @@ export const stages = [
       impactGate(ctx),
       gate('audit-manifest', ['node', 'tools/audit-manifest.mjs',
         ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`),
-        '--output', `research/${ctx.run}-audit-manifest.json`]),
+        '--output', `research/${ctx.run}-audit-manifest.json`], {
+        // A manifest set that resolved to nothing — wrong run name, empty
+        // pages.json — enumerates zero relationships and exits 0. That is not
+        // a clean scope checklist, it is no checklist.
+        liveness: { pattern: /over (\d+) item\(s\) in/.source, min: 1, unit: 'manifest items' },
+      }),
     ],
   },
 

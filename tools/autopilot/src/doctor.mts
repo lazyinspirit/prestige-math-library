@@ -110,13 +110,72 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
     problems.push(`no scope ledger at ${ledger} — a page could leave the run unnoticed. Run \`autopilot plan\`, or write one with tools/manifest-integrity.mjs --write-ledger`);
   }
 
-  // 4. the dispatch command itself
-  const dispatchArgv = config.argv ?? [];
-  const tool = dispatchArgv.find((a: any) => typeof a === 'string' && a.endsWith('.mjs'));
-  if (tool && !existsSync(join(repo, tool))) problems.push(`the dispatch argv names ${tool}, which does not exist`);
-  else if (tool) ok.push(`dispatch argv resolves (${tool})`);
+  // 4. the dispatch command itself.
+  //
+  // Every branch here has to say something. The old shape was
+  // `if (tool && missing) problem; else if (tool) ok;` — so an absent or empty
+  // `config.argv`, and an argv naming no tool at all, both fell through
+  // emitting NEITHER, and the check vanished from the report without a trace.
+  // A doctor that goes quiet is indistinguishable from a doctor that passed,
+  // and this particular silence hides the one setting that starts every agent:
+  // with no dispatch argv the engine cannot launch a single Beta, and the run
+  // discovers it at the first dispatch rather than at preflight.
+  const dispatchArgv: any[] = Array.isArray(config?.argv) ? config.argv : [];
+  if (!Array.isArray(config?.argv)) {
+    problems.push('no dispatch argv: config.argv is '
+      + (config?.argv === undefined ? 'absent' : `${typeof config.argv}, not an array`)
+      + ' — nothing can start an agent. Set "argv" in autopilot.config.json to the '
+      + 'dispatch command as an ARRAY (see bin/autopilot.mts loadConfig for the default)');
+  } else if (!dispatchArgv.length) {
+    problems.push('no dispatch argv: config.argv is an empty array — nothing can start an agent');
+  } else {
+    const tool = dispatchArgv.find((a: any) => typeof a === 'string' && /\.(mjs|mts|js)$/.test(a));
+    if (!tool) {
+      problems.push(`the dispatch argv names no dispatcher script: ${dispatchArgv.join(' ')}`);
+    } else if (!existsSync(join(repo, tool))) {
+      problems.push(`the dispatch argv names ${tool}, which does not exist`);
+    } else {
+      ok.push(`dispatch argv resolves (${tool})`);
+    }
+  }
 
-  // 5. judge lanes — checked only if a stage mentions them
+  // 5. the defect ledger against THIS run's own confirmed_fatal adjudications.
+  //
+  // A disposition and its ledger row are one act, and a run that confirmed fatal
+  // defects while writing no rows has a ledger that is quietly not being kept —
+  // discovered, if at all, at step 10 when the rows can no longer be written
+  // from memory. `defect-ledger stats --coverage` computes the holes; the filter
+  // to `run` is what makes it usable as a check.
+  //
+  // SCOPED TO THE CURRENT RUN, DELIBERATELY. Around twenty historical runs have
+  // confirmed_fatal adjudications and no rows: the ledger began at frontier-13,
+  // and everything before it is BACK-FILL DEBT, not staleness. Flagging those
+  // here would put a permanent red line in every preflight of every future run,
+  // and a check that is always red is a check nobody reads.
+  const ledgerTool = join(repo, 'tools', 'defect-ledger.mjs');
+  if (existsSync(ledgerTool)) {
+    const r = spawnSync('node', [ledgerTool, 'stats', '--coverage', '--json'],
+      { cwd: repo, encoding: 'utf8', timeout: 120_000 });
+    let holes: any[] | null = null;
+    try { holes = JSON.parse(r.stdout ?? '').coverage?.runs_with_fatal_and_no_rows ?? null; }
+    catch { holes = null; }
+    if (r.status !== 0 || !Array.isArray(holes)) {
+      // A diagnostic that cannot run is not a diagnostic that passed.
+      problems.push('defect-ledger stats --coverage did not return a readable coverage report '
+        + `(exit ${r.status}) — the ledger-coverage check cannot answer, so treat it as unknown, not clean`);
+    } else {
+      const mine = holes.find((h: any) => h?.run === run);
+      if (mine) {
+        problems.push(`${run} has ${mine.confirmed_fatal} confirmed_fatal adjudication(s) and no defect-ledger `
+          + 'row — a disposition and its row are one act. Write the rows with '
+          + '`node tools/defect-ledger.mjs append --file rows.json`, then re-run doctor');
+      } else {
+        ok.push(`defect ledger covers ${run}'s confirmed_fatal adjudications`);
+      }
+    }
+  }
+
+  // 6. judge lanes — checked only if a stage mentions them
   const usesJudge = mod.stages.some((s: any) => {
     try { return (s.plan?.(ctx, units) ?? []).some((p: any) => (p.argv ?? []).join(' ').includes('judge')); }
     catch { return false; }

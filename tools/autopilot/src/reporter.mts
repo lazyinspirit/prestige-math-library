@@ -36,17 +36,34 @@ export class Reporter {
     this.statusPath = join(dir, 'status.md');
   }
 
+  /** `events.jsonl` is APPEND-ONLY by construction: `appendFileSync` is the only
+   *  call that ever touches `eventsPath`, and `writeFileSync` is reachable only
+   *  for `statusPath`, a different file. Nothing else in the engine opens it.
+   *
+   *  A row that cannot be serialised must not kill the run either: a payload
+   *  carrying a circular reference (an Error with a cause chain, a config object)
+   *  throws inside `JSON.stringify`, which is OUTSIDE the try that guards the
+   *  write. Serialise inside it. */
   event(type: string, payload: Record<string, unknown> = {}): Record<string, unknown> {
     const row = { at: new Date(this.now()).toISOString(), type, ...payload };
-    try { appendFileSync(this.eventsPath, JSON.stringify(row) + '\n'); } catch { /* logging must not kill a run */ }
+    try { appendFileSync(this.eventsPath, JSON.stringify(row) + '\n'); }
+    catch { /* logging must not kill a run */ }
     return row;
   }
 
   /** Emit an event AND surface it, for things a watching human should see now:
-   *  a stage clearing, a lane dying, a gate failing, a blocker. */
+   *  a stage clearing, a lane dying, a gate failing, a blocker.
+   *
+   *  THE CONSOLE SINK IS GUARDED TOO. The two file writes were wrapped and this
+   *  one was not, which left the engine's own reporting as the one thing that
+   *  could take down the run loop. It is not hypothetical: a detached engine
+   *  writes to a pipe, `console.log` throws EPIPE when that pipe closes, and
+   *  `notify` is called from the loop itself — on pause, on stop, on an adopted
+   *  lane, on every gate result. Losing a status line is a cosmetic failure;
+   *  losing the run because a status line could not be printed is not. */
   notify(type: string, message: string, payload: Record<string, unknown> = {}): void {
     this.event(type, { message, ...payload });
-    this.sink(`[${type}] ${message}`);
+    try { this.sink(`[${type}] ${message}`); } catch { /* a closed pipe is not a run failure */ }
   }
 
   due(): boolean { return this.now() - this.lastReport >= this.intervalMs; }
@@ -57,10 +74,15 @@ export class Reporter {
   report(snapshot: Snapshot, { force = false }: { force?: boolean } = {}): boolean {
     if (!force && !this.due()) return false;
     this.lastReport = this.now();
-    const text = renderStatus(snapshot, new Date(this.lastReport).toISOString());
+    let text = '';
+    // Rendering reads a snapshot the caller assembled; a malformed one must not
+    // end the run either, and the report is the thing that would have told an
+    // operator about it.
+    try { text = renderStatus(snapshot, new Date(this.lastReport).toISOString()); }
+    catch (err: any) { text = `# report failed to render — ${err?.message ?? err}\n`; }
     try { writeFileSync(this.statusPath, text); } catch { /* best effort */ }
     this.event('report', { stage: snapshot.stage?.id ?? null, running: snapshot.running?.length ?? 0 });
-    this.sink(text);
+    try { this.sink(text); } catch { /* a closed pipe is not a run failure */ }
     return true;
   }
 }

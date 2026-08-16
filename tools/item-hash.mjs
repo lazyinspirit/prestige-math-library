@@ -1,31 +1,48 @@
 #!/usr/bin/env node
-// item-hash.mjs — the ONE normalized content hash for an item file.
+// item-hash.mjs — the normalized content hashes for an item file.
 //
-// WHY THIS IS SHARED. Two mechanisms have to answer the same question — "did the
-// mathematics of this item change?" — and they must never disagree:
+// THERE ARE TWO, THEY ARE BOTH CALLED `item_sha256` ON DISK, AND THEY ARE NOT
+// INTERCHANGEABLE. Both live here, under names that cannot be confused, because
+// the way this goes wrong is silent: a hash computed one way and compared to a
+// hash computed the other never matches, and every consumer of that comparison
+// reads the mismatch as "the item changed".
 //
-//   tools/touchlog.mjs     counts repairs per item across a level's stages, which
-//                          drives the twice-touched escalation.
-//   tools/step8-guard.mjs  enforces R1: a rejection Alpha classified nonfatal or a
-//                          false positive closes WITHOUT a content edit.
+//   itemHashGuard   the whole `verification:` block excluded.
+//                   tools/touchlog.mjs      counts repairs per item across a
+//                                           level, driving twice-touched.
+//                   tools/step8-guard.mjs   enforces R1: a nonfatal or
+//                                           false-positive rejection closes
+//                                           WITHOUT a content edit.
+//                   tools/spine-audit.mjs   content_sha256 on the receipt.
+//                   THIS is the form an adjudication row's `item_sha256` must
+//                   carry: step8-guard matches it against a touchlog baseline.
 //
-// A second, cruder copy of this normalization is exactly the bug this file exists
-// to prevent: the two gates would then disagree about what a repair is, and the
-// one that under-counts would silently license the loop the other one blocks.
+//   itemHashJudge   only the two-space-indented `judge:` sub-block excluded;
+//                   the rest of `verification:` is IN.
+//                   tools/judge.mts              --context-hash output, and the
+//                                                item_sha256 on every verdict row.
+//                   tools/apply-judge-stamps.mjs the attestation it validates a
+//                                                stamp against.
+//                   tools/level-coverage.mjs     compares a verdict's
+//                                                item_sha256 to the current text.
 //
-// The `verification:` block is excluded. Recording a judge verdict, a precheck
-// result or the owner's audit date rewrites the file without touching a single
-// character of mathematics; hashing raw bytes once charged 53 items with a
-// phantom repair in a single pass and would have fired the twice-touched
-// escalation on items nobody had edited.
+// WHY TWO. The guard form answers "did the mathematics change?", so it must
+// ignore every evidence field — recording a verdict, a precheck result or an
+// audit date rewrites the file without touching a character of mathematics, and
+// hashing raw bytes once charged 53 items with a phantom repair in one pass.
+// The judge form answers a narrower question — "is this verdict still about
+// this text?" — and must exclude ONLY the block the stamping tool writes, or
+// applying a pass would invalidate the pass it records. It deliberately keeps
+// `verification.precheck` and `verification.audited` in scope, because a verdict
+// cast before an owner audit is not evidence about the audited text.
 //
-// Everything else stays in: the body obviously, but also `title`, `deps`,
+// Everything else stays in both: the body obviously, but also `title`, `deps`,
 // `forward_refs`, `external_refs` and `proved_here`, because changing any of
 // those IS a mathematical edit even though it lives in frontmatter.
 
 import { createHash } from "node:crypto";
 
-/** Strip only the `verification:` frontmatter block; leave all mathematics. */
+/** Strip the whole `verification:` frontmatter block; leave all mathematics. */
 export const stripVerification = (text) => {
   const m = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(text);
   if (!m) return text;                              // no frontmatter: hash as-is
@@ -33,9 +50,22 @@ export const stripVerification = (text) => {
   return fm + "\n---\n" + m[2];
 };
 
-/** Full sha256 of the normalized item text. */
-export const itemContentHash = (text) =>
+/** Strip only the two-space-indented `judge:` sub-block of `verification:`. */
+export const stripJudgeStamp = (text) =>
+  String(text).replace(/^ {2}judge:\n(?: {4}.*\n)*/m, "");
+
+/** Full sha256 with the whole `verification:` block excluded — the form a
+ *  touchlog baseline and an adjudication row's `item_sha256` are in. */
+export const itemHashGuard = (text) =>
   createHash("sha256").update(stripVerification(text)).digest("hex");
+
+/** Full sha256 with only the `judge:` stamp excluded — the form a judge verdict
+ *  row's `item_sha256` and `judge.mts --context-hash` are in. */
+export const itemHashJudge = (text) =>
+  createHash("sha256").update(stripJudgeStamp(text)).digest("hex");
+
+/** @deprecated Ambiguous once there are two hashes; use `itemHashGuard`. */
+export const itemContentHash = itemHashGuard;
 
 // touchlog snapshots store a 16-hex prefix per item; an adjudication row records
 // the full digest, matching the "item SHA-256" language used for the audit

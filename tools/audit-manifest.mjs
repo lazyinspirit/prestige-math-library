@@ -10,6 +10,23 @@
 // external mentions. It does NOT certify semantic correctness; it makes an
 // omitted reader check visible by classifying each relationship as same-batch,
 // cross-batch, published/backward, forward, or unresolved.
+//
+// TWO OF THOSE CLASSIFICATIONS ARE DEFECTS, AND THIS EXITS 1 ON THEM.
+//
+//   missing-source  a manifest lists an item id that is on no page of disk.
+//                   The batch claims content that does not exist, and every
+//                   downstream count of that batch is short by it.
+//   unresolved      a declared `deps` / `justified_by` / `external_refs` target
+//                   names no item and no alias, or names a DRAFT item that is
+//                   in no batch of this run — the level resting on content
+//                   nobody in this run is auditing.
+//
+// Until 2026-08-16 this file contained no `process.exit(1)` at all: it printed
+// `missing-source: 3` and exited 0, so the 6c gate that runs it could only ever
+// pass. A gate that cannot fail is decorative, and the engine reads exit codes,
+// not prose. The summary line at the end is what the gate's liveness probe
+// reads, so a run over an empty or mis-selected manifest set cannot pass as a
+// clean audit either.
 
 import { readFileSync, readdirSync, statSync, existsSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
@@ -171,3 +188,20 @@ else if (!asJson) {
     console.log(`- [${e.edge_type}; ${e.kind}] ${e.source} (${e.sourcePage ?? '?'}, ${e.batch}) -> ${e.target ?? '?'} (${e.targetPage ?? '?'})`);
   }
 }
+
+// The defects, one named line each, then a summary line the gate can read.
+// Stdout is a pure JSON document when `--json` is given without `--output`, so
+// in that one case the human-readable tail goes to stderr; the engine reads
+// both streams.
+const DEFECT_KINDS = ['missing-source', 'unresolved'];
+const say = (asJson && !outputPath) ? console.error : console.log;
+const defects = edges.filter((e) => DEFECT_KINDS.includes(e.kind));
+for (const e of defects) {
+  say(e.kind === 'missing-source'
+    ? `ERROR missing-source: ${e.batch} lists ${e.source}, which is on no page of items/`
+    : `ERROR unresolved: ${e.source} (${e.batch}) declares ${e.edge_type} `
+      + `"${e.declared_target}", which resolves to no published or in-run item`);
+}
+say(`audit-manifest: ${edges.length} relationship(s) over ${itemBatch.size} item(s) `
+  + `in ${batches.size} batch(es); ${defects.length} defect(s)`);
+process.exit(defects.length ? 1 : 0);

@@ -40,6 +40,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { sectionText } from './facts-block.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const asJson = process.argv.includes('--json');
@@ -335,7 +336,13 @@ for (const p of pages) {
 // Facts & Assumptions, structurally could not see.
 for (const it of items.values()) {
   const src = it.body ?? '';
-  const section = (name) => (src.match(new RegExp(`## ${name}([\\s\\S]*?)(?=\\n## |$)`)) ?? [, ''])[1];
+  // The section reader is tools/facts-block.mjs, the one parser for this
+  // grammar. It differs from the regex it replaced in one way: the heading is
+  // anchored to its own line, so `Statement` no longer also selects
+  // `Statement refuted`. That cost nothing here, because the loop below unions
+  // the wikilinks of both — verified over all 4,986 published items, identical
+  // cited set on every one, and byte-identical `depcheck` output.
+  const section = (name) => sectionText(src, name);
   const cited = new Set();
   // Proof bodies are scanned too. A certification pass on 2026-07-25 found steps
   // appealing to an item ("by transitivity", citing def-partial-order) that was
