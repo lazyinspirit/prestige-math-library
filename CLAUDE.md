@@ -37,15 +37,14 @@ ever publishes: step 10 / A10 is the sole owner pause.
    into the file and re-run until clean — the repo stores the strictly
    stratified form, so a step citing phase-k steps sits in phase k+1. Record
    `verification.precheck: pass`.
-3. **Step-6 Alpha audit of the WHOLE level.** Independent readers verify every
-   proof step and in-batch citation in content they did not author; Alpha audits
-   their fixes from disk, then the cross-batch and cross-level citations. Fatal
-   includes a title or Statement asserting more than the proof gives — the judge
-   reads Statements and cannot see a false title. Required before publish **even
-   when judged**. `LEVELS.md` §"Step 6".
-4. **Step-7 paired skeptical judge** — runs once, after the step-6 audit, on
-   final text, for **every item in the completed level**; authors never judge.
-   See §"Paired skeptical judges".
+3. **Step-6 Alpha audit of the WHOLE level** — independent readers on content
+   they did not author, then Alpha (§Roles; `LEVELS.md` §"Step 6"). Fatal
+   includes a title or Statement asserting more than the proof gives — the
+   judge reads Statements and cannot see a false title. Required before
+   publish **even when judged**.
+4. **Step-7 paired skeptical judge** — once, after step 6, on final text, for
+   **every item in the level**; authors never judge (§"Paired skeptical
+   judges").
 5. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
 6. **Commit + push** (`main`, conventional-commit style). NO Co-Authored-By
@@ -72,14 +71,13 @@ account is **never** wired into the worker service.
 | `audit-refuter` | DeepSeek V4 Pro | direct API, `max` (its spelling of `xhigh`), tool-less |
 | paired judges, build and audit | DeepSeek V4 Pro + GPT 5.6 Terra | `JUDGE_LINEUP=deepseek+terra` |
 
-**Binding for every future session** (owner, 2026-07-31 Sol default;
-2026-08-10 build Alpha; 2026-08-08 audit lineup). Where a launcher exposes a
-context-window field, set it to `1000000`; never silently substitute another
-model or a smaller window. `tools/dispatch.mjs` is the mechanical expression of
-this table: Codex lanes get `model_reasoning_effort="xhigh"` and
-`model_context_window=1000000` (its temporary `CODEX_HOME` holds `auth.json`
-and no `config.toml`); the claude lane gets `--effort xhigh` (`buildClaude` defaults to
-`high`) and carries its window in the `[1m]` model id.
+**Binding for every future session** (owner, 2026-07-31/08-08/08-10). Never
+silently substitute another model or a smaller window; a context-window field is
+`1000000`. `tools/dispatch.mjs` is this table, mechanically — Codex:
+`model_reasoning_effort="xhigh"`, `model_context_window=1000000`, temporary
+`CODEX_HOME` with `auth.json`, no `config.toml`; claude: explicit
+`--effort xhigh` (`buildClaude` defaults `high`), window in the `[1m]` id —
+and `--dry-run --json` attests it.
 
 **Scope of the Alpha exception:** the BUILD `alpha` role only; it buys
 cross-family independence, since Alpha adjudicates the DeepSeek and Terra judges.
@@ -234,13 +232,11 @@ Terra. Read-only is enforced per runner, never by asking:
   deliberately uncapped:** a proof that keeps yielding real fatal defects is
   either converging on correctness or is false, and both must run to conclusion.
   The twice-touched escalation stays advisory.
-  *Mechanism:* every adjudication row records `item_sha256` (sha256 of the
-  normalized item text, verification block excluded, at adjudication time). Take a
-  dedicated `touchlog.mjs` baseline immediately before adjudicating, then run
-  `tools/step8-guard.mjs`: every item changed since must be licensed by a
-  `confirmed_fatal` row against the pre-edit state (`nonfatal-edit`,
-  `judge-adjudication-unhashed`). Pre-R1 ledgers lack `item_sha256` and are
-  published rather than re-gated. Commands: `LEVELS.md` §"Step 8".
+  *Mechanism:* adjudication rows carry `item_sha256` (normalized text,
+  verification block excluded); the engine snapshots `pre-step8` (`touchlog.mjs`,
+  its own stage), and `tools/step8-guard.mjs` licenses every later edit against a
+  `confirmed_fatal` row (`nonfatal-edit`, `judge-adjudication-unhashed`). Pre-R1
+  ledgers lack the hash and are published, not re-gated. `LEVELS.md` §"Step 8".
 
 - **Step-10 fatal-error report and sole pause (owner, 2026-07-31).** Step 9 does
   not pause the build. At the end of step 10 the lead Alpha accounts for every
@@ -249,6 +245,13 @@ Terra. Read-only is enforced per runner, never by asking:
   or choice scope, invalid witness) and by location (title/Statement, proof,
   Facts, Remark, page prose), each naming the id and its disposition. Evidence is
   the ledgers; concision must not omit a fatal defect.
+
+- **The defect ledger (owner, 2026-08-16).** A disposition and its row in
+  `research/defect-ledger.jsonl` are one act — 6b/6c, step 8 (one row per
+  `confirmed_fatal`), step 9; step 10 authors none and runs
+  `defect-ledger.mjs` `stats` + `render`. The `check` gate (steps 8–10)
+  enforces it; `research/DEFECT-LEDGER.md` is generated, never edited.
+  `ARCHITECTURE.md` §3.11h.
 
 ### Paired skeptical judges (owner, 2026-07-31; second lane changed 2026-08-04)
 
@@ -488,7 +491,6 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   largest dependency cones — it lapses on any mathematical-content change, and is
   what stops a level resting on an unreviewed high-fan-out proof. An
   `external_dependency` record is required for any `proved_here: false` fallback.
-  Never fabricate provenance for legacy items.
 
 - **Obvious published-dependency repair (owner, 2026-08-01).** Narrowly
   overrides the read-only boundary: Beta and Alpha may repair a **published item

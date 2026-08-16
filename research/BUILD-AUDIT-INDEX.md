@@ -94,7 +94,12 @@ Waves 6 and 7 carry `complete` run-state. Waves 11 through 14 were concluded in
 commit `9db25e1f`.
 
 **Totals across all waves: 2168 items retro-tagged, 4461 judge verdicts, 845
-adjudications, 70 confirmed-fatal findings.**
+adjudications, 100 confirmed-fatal findings** (an earlier hand-typed total here
+said 70 while the wave ledgers alone hold 100 — e.g. wave 2's row said 0 against
+30 `confirmed_fatal` rows in its own ledger; counted 2026-08-16). Per-defect
+statistics now live in `research/defect-ledger.jsonl`, and
+`research/DEFECT-LEDGER.md` is generated from it — prefer both over any
+hand-maintained number in this file.
 
 ## Maintaining this file
 

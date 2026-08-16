@@ -62,36 +62,20 @@ anything, read:
 
 Follow those files, not this runbook, wherever they differ.
 
-**Current per-level model/routing rule (owner, 2026-07-31):** Beta-n-i authors
-its own post-Step-4 batch content; independent Step-6 readers and Alpha-n run
-**GPT 5.6 Sol via the Codex subscription plan** at
-`xhigh` reasoning with a **1,000,000-token context window**; the independent
-paired judges run **DeepSeek V4 Pro directly via the DeepSeek API at `xhigh`
-thinking (official API value: `max`)** and freshly
-spawned **Claude Sonnet 5 through the local `claude` CLI** on the identical
-hash-attested skeptical prompt. GPT-family models are not routed through ofox.
-DeepSeek is the cross-family lane; Sonnet is the same-context comparison lane.
+**The model lineup lives in `CLAUDE.md` §Model lineup — the single source of
+truth** — and this file never restates it: a second copy of a lineup drifts,
+and this one had already retired a judge lane in one paragraph while naming it
+in the next.
 The current per-level step order and numbering are in
 `LEVELS.md`.
 
-### Context-continuity checkpoint (hard rule, owner 2026-08-01)
+### Context-continuity checkpoint (hard rule)
 
-At 50% active-context use, and before a context-heavy operation when practical,
-the agent writes or refreshes the active run's
-`research/<run>-RESUME.md`. It records only durable operational facts: current
-step and frozen-text state; owner policy deltas; batches and agent ownership;
-material artifacts, gates and ledgers; open risks; working-tree baseline; and
-the exact next action. It excludes credentials and long copied transcripts. If
-the platform offers or performs compaction, the checkpoint comes first; the
-resumed agent reads it, verifies action-critical state from disk, and immediately
-continues the workflow. This is a continuity mechanism, not a new review gate,
-owner pause, or authority to publish.
-
-Beta and Alpha agents apply the same rule at **60% of their own context length**.
-Beta checkpoints live in the agent's namespaced batch notes; Alpha checkpoints
-live in its namespaced Alpha report/handoff. Each records only its owned state,
-constraints, finished checks, and exact next action, reads it after compaction,
-verifies relevant disk state, and resumes. Nobody replays its context.
+The checkpoint rule is `CLAUDE.md` §Operating — **60%** of active context for
+every actor, orchestrator and agents alike, durable state at a safe boundary,
+never mid-operation. (An earlier copy here said 50% and then contradicted
+itself eleven lines later; deleting the copy removes the disagreement by
+construction.)
 
 **Future Beta capacity (owner, 2026-08-01):** a Beta may scaffold and author at
 most two A/B pairs. Step 0 records that bound in each batch manifest and
@@ -258,7 +242,7 @@ e.g.:
 export JUDGE_VERDICTLOG=research/<run>-judge.jsonl
 ```
 
-The paired DeepSeek V4 Pro/Sonnet judges each record
+The paired judges (lineup: `CLAUDE.md` §Model lineup) each record
 `{id, model, keep, reason, context_sha256, at}` for every call, including `keep: null` tool
 failures. Commit the shared ledger with the level. Count refutations from either
 model per id; never rotate it mid-level, because the count is the entire point
@@ -410,119 +394,12 @@ cited proof-bearing item discharges it.*
 
 ## 0. Roles and models (every LLM in the loop)
 
-The library separates who *writes* math from who *checks* it, retaining a
-cross-family DeepSeek screen and an independent Sonnet comparison lane. Every
-LLM that touched this session's work is named below, with its exact identifier
-and the runtime it ran on.
-
-**Current per-level lineup (owner, 2026-07-31):**
-
-| Role | Model | Runtime and cost |
-|------|-------|------------------|
-| Engine + this session | `tools/autopilot/` | subscription/tooling of the active session |
-| Beta-n-i scaffold and Step-5 author | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox; does not audit its own authored content |
-| Independent Step-6 reader | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; audits a batch it did not scaffold or author |
-| Alpha-n lead adjudicator, propagation, and cross-level audit | Claude Opus 5 (`xhigh`, 1M-token context) | `claude` runner, model id `claude-opus-5[1m]` (owner, 2026-08-10; was GPT 5.6 Sol via Codex) |
-| Alpha proof-refuter subagents | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; read-only access; never ofox |
-| Step-5 author | the same Beta-n-i, GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox |
-| Paired judges | DeepSeek V4 Pro (`max`) + GPT 5.6 Terra (`xhigh`, 1M-token context) | direct DeepSeek API + fresh ephemeral read-only `codex exec` process (owner, 2026-08-04, `JUDGE_LINEUP=deepseek+terra`); identical frozen context, concurrent calls |
-| Final audit and publish gate | human owner | n/a |
-
-The historical Opus/Fable and older judge lineups in research notes are not the
-current workflow. `deepseek/deepseek-v4-flash` remains barred as judge because it
-passed an injected false claim.
-
-For the **initial Step-7 sweep**, run `tools/judge-sweep.mjs` with the stable paired
-ledger, cost ledger, and **every A-page slug in the completed level**. This is
-mandatory even for content untouched by Alpha at Step 6. Each supplied A page automatically adds
-its B/examples companion's item list, so the sweep covers the entire A/B pair.
-It invokes `tools/judge.mts` once per
-model call and treats a pair as complete only when both latest verdicts are
-non-null, carry the same frozen-context SHA-256, and that hash matches freshly
-assembled current context. A later null retry does not erase an earlier complete
-verdict on that identical prompt; a later substantive verdict does. Both models
-share one freshly assembled current hash per selected item before scheduling.
-DeepSeek and Sonnet use file-backed, cross-process pools with separate caps of
-16 calls each: either model advances as soon as one of its own pool slots is
-free, never after the other model's call. At most 32 judge calls run together.
-For recovery of only one incomplete judge, pass its exact model id through `--models`;
-the sweep then leaves the other model's already-current verdict untouched.
-The sweep also writes a sibling `-attempts.jsonl` ledger: each attempt records
-latency, HTTP/rate-limit metadata, terminal finish reason, and structured
-transport cause. Empty responses without a finish reason are retried with
-jitter by the sweep scheduler, which releases that model's slot during backoff.
-DeepSeek otherwise starts at 40k tokens and receives a single 80k-token
-retry only for an empty `length` stop, preserving its maximum-reasoning prompt and keeping
-a second length stop separately diagnosable.
-
-The owner, not any model, is the final publish gate.
-
-### Who overrides whom (owner decision, 2026-07-25)
-
-Each tier below has strictly more context than the one above it, so **each
-overrides the one above**. This is a role model, not a politeness ranking: it
-says whose verdict survives a disagreement.
-
-| tier | who | scope it can see | what it decides | overruled by |
-|---|---|---|---|---|
-| Generator | GPT 5.6 Sol author via Codex | one A/B pair | draft content | every tier below |
-| **Independent Step-6 reader** | GPT 5.6 Sol via Codex | a batch it did not scaffold or author, plus cited dependencies | fixes in-batch proof-step and citation defects | Alpha, owner |
-| **Alpha proof-refuter reader** | GPT 5.6 Sol via Codex | read-only level and published dependencies | skeptically reports concrete proof/citation defects only | Alpha, owner |
-| **Alpha lead adjudicator** | Claude Opus 5 (`xhigh`, 1M-token context) | the level plus published dependencies | confirms or refutes reader findings and paired-judge rejections; audits, repairs, and gates in-flight content, plus only the documented obvious published-dependency repair | owner |
-| **Paired judges** | DeepSeek V4 Pro direct + fresh GPT 5.6 Terra | identical hash-attested A/B pair plus required-and-cited pages | independently name candidate defects | Alpha, owner |
-| Owner | the human | everything | `verification.audited`, publish | nobody |
-
-**The order, and the bound** (owner, 2026-07-25). For an item rejected at least
-once the loop is
-
-```
-escalation (page ctx) -> judge (page ctx) -> escalation (page ctx) -> judge (page ctx) -> auditor (full ctx)
-```
-
-**"page ctx" means something specific for the judge, and it has changed twice.**
-It is now the **A/B pair**: the judge receives its item's own page and its
-companion `-examples` page IN FULL, proofs included, plus every cited item
-(Statement + Remarks, truncated at 3000 chars, or the full item when the citation
-is same-pair), plus — with `--batch` — the level's other pages as Statement +
-Remarks. Two earlier limits are gone: the sibling-proof blindness (fixed
-2026-07-26) and the companion-page blindness (fixed 2026-07-28). Verify against
-`tools/judge.mts`, which is the truth here; `ARCHITECTURE.md` §5 has the
-inventory.
-
-**What has NOT changed is what judge silence is worth.** Context closes
-structural blind spots; it does not raise a 21–24%-precision screen into an
-auditor, and the measured 0/3 on real historical defects was never a context
-problem. **Never read a clean judge run as page-level assurance** — every level
-so far has had its real defects found by a reading tier after a clean sweep.
-
-Escalation runs FIRST and the judge screens the repaired text; running the judge
-first records verdicts on text that escalation then changes. The loop is bounded
-at EXACTLY ONE repair cycle: a second rejection goes to the auditor, not to
-another repair. And **the auditor waits until every item has been through the
-loop** before auditing anything, rather than adjudicating items while others are
-still in flight.
-
-That bound is what makes re-judging safe. Objections rotate between runs, so
-chasing a clean sheet is a treadmill that ends in damaging correct proofs; one
-repair cycle converts the judge's high recall into fixes and hands the residue to
-a tier that can actually adjudicate it. Re-judging CHANGED text is a real check;
-re-judging UNCHANGED text is the treadmill.
-
-Three things this makes explicit, each learned the expensive way:
-
-1. **A judge rejection is evidence, not a work item.** Measured precision is
-   ~20-25% and that is permanent (see `research/verification-benchmark.md`).
-   Never iterate judge -> fix -> judge toward a clean sheet: objections *rotate*
-   between runs rather than being confirmed, so the treadmill ends with a
-   correct proof damaged to satisfy an objection that was wrong.
-2. **The page verifier is a genuinely different role from "Escalation (revises
-   rejects)" below.** Escalation applies a correction the driver already
-   adjudicated. The page verifier adjudicates, with the cited text in hand.
-3. **Higher tier does not mean honest.** A page verifier fabricated a quotation
-   during this session (`research/verification-benchmark.md`, "What this
-   benchmark is NOT"). Every tier's output is evidence to be checked. Before
-   acting on a reported defect that quotes an item, `grep` the item for the
-   quoted string; if it is not there, report that and change nothing.
+`CLAUDE.md` §Model lineup is the single source of truth for every lane, model,
+runner, effort and window, and `tools/dispatch.mjs` is its mechanical
+expression (`--dry-run --json` attests it). This section held a full copy; the
+copy drifted twice — it still named a retired Sonnet judge lane while its own
+table two paragraphs later said DeepSeek + Terra — which is the argument for
+the pointer.
 
 ### The production defaults these replaced
 
@@ -550,11 +427,11 @@ Two hard rules govern the models:
    through the Codex subscription plan at `xhigh` reasoning with a
    1,000,000-token context window.
 2. GPT-family models (author, Beta, Alpha) run via the Codex
-   subscription plan, never through ofox. DeepSeek V4 Pro is the cross-family
-   judge; Sonnet is an independent same-context comparison lane. Never adopt an
-   additional judge model on latency, price, or fluent reasons; inject a defect
-   you know is there and see whether it says so. DeepSeek v4-flash remains
-   barred as judge because it passed a blatant injected falsehood.
+   subscription plan, never through ofox; the judge lanes are `CLAUDE.md`
+   §Model lineup's. Never adopt an additional judge model on latency, price,
+   or fluent reasons; inject a defect you know is there and see whether it
+   says so. DeepSeek v4-flash remains barred as judge because it passed a
+   blatant injected falsehood.
 
 ---
 
@@ -816,18 +693,16 @@ hallucination or trivial pedantry is overruled with the reason recorded.
 
 Run the judge, then report and fix.
 
-**Paired judges.** Current session judging runs DeepSeek V4 Pro directly at
-owner-requested `xhigh` thinking (the documented API value is `max`) and freshly
-spawned Claude Sonnet 5 through the local `claude` CLI
-subscription at `xhigh`, concurrently with
+**Paired judges.** The lineup is `CLAUDE.md` §Model lineup, selected by
+`JUDGE_LINEUP` and run concurrently with
 `tools/judge.mts --parallel`. That program loads
 `briefs/judge-conventions.txt` by default into the frozen prompt and its hash;
 `briefs/codex-judge.md` is historical human documentation, not a second runtime
 prompt. Each receives the same frozen context and reads proofs and dependencies
 skeptically. Each accepts unless it can name a specific defect. Record both verdicts in `research/<run>-judge.jsonl` as
 `{id, model, keep, reason, context_sha256, at}`. DeepSeek is the cross-family
-screen; Sonnet provides the independent second-lane comparison and does not
-make the pair cross-family by itself.
+screen; the second lane is same-family with audit Alpha, so weight agreement
+accordingly (`CLAUDE.md` §Paired skeptical judges).
 
 The initial Step-7 paired sweep covers **every item in every completed A/B pair**,
 not merely Alpha-touched items. Only after that full sweep may Alpha select the

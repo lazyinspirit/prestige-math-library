@@ -168,7 +168,7 @@ another project means writing another one.
   probe — a regex that pulls the number of things examined out of its own
   summary line, and a floor. Zero examined is a failure; an unparseable summary
   is *unknown*, never a pass.
-- **Retry forever.** A lane gets `maxAttempts` (default 2), then becomes a
+- **Retry forever.** A lane gets `maxAttempts` (config-set; `autopilot.config.json` says 3), then becomes a
   blocker. Unbounded retry of a deterministically failing lane burns a budget
   silently.
 - **Count a dead lane as coverage.** `ok:false` is a retry decision, not a unit
@@ -192,7 +192,8 @@ another project means writing another one.
 npm test
 ```
 
-40 tests. The unit tests prove the coverage predicate; the end-to-end tests run
+A growing suite (`npx tsx --test "test/*.test.mts"` — the tally, not this
+README, is the count). The unit tests prove the coverage predicate; the end-to-end tests run
 the engine against a fake pipeline whose agents are scripts, and prove the
 *loop*: that a cleared stage triggers the next dispatch, that a failed lane is
 retried exactly once and then blocks, that a vacuous gate stops the run, that
