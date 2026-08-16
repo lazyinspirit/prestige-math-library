@@ -77,7 +77,7 @@ run "git subtree add --prefix=$PREFIX \"$SOURCE\" $SRC_BRANCH"
 # repository two levels up, which is both correct and portable.
 run "python3 - <<'PY'
 import re
-p = 'tools/autopilot/test/signatures.test.mjs'
+p = 'tools/autopilot/test/signatures.test.mts'
 t = open(p).read()
 old = \"const REPO = process.env.AUTOPILOT_TEST_REPO ?? '/Users/ianx/Projects/prestige-math-library';\"
 new = (\"// In-tree: the repository is two levels up from this file. Was an absolute\\n\"
@@ -92,9 +92,9 @@ PY"
 # ---- verify -----------------------------------------------------------------
 if [ "$DRY" = "0" ]; then
   say "running the suite from its new home"
-  ( cd "$PREFIX" && node --test "test/*.test.mjs" 2>&1 | grep -E '^ℹ (tests|pass|fail)' | sed 's/^/    /' )
+  ( cd "$PREFIX" && npm install --silent --no-audit --no-fund >/dev/null 2>&1; npx tsx --test "test/*.test.mts" 2>&1 | grep -E '^ℹ (tests|pass|fail)' | sed 's/^/    /' )
   say "checking the CLI resolves from the new path"
-  node "$PREFIX/bin/autopilot.mjs" frontier --categories topology 2>&1 | head -2 | sed 's/^/    /'
+  npx tsx "$PREFIX/bin/autopilot.mts" frontier --categories topology 2>&1 | head -2 | sed 's/^/    /'
 fi
 
 cat <<EOF
