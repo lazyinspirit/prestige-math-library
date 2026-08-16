@@ -27,9 +27,9 @@ test('gate-liveness fails when its probe inputs are absent', () => {
     'every scoped probe was skipped for missing inputs and the meta-gate exited 0');
 });
 
-test('finite-smoke reports its coverage, not only a bare check count', function () {
+test('finite-smoke reports its coverage, not only a bare check count', (t) => {
   const contracts = join(REPO, 'research', 'frontier-14-proof-contracts.json');
-  if (!existsSync(contracts)) return this.skip('no real contracts present');
+  if (!existsSync(contracts)) return t.skip('no real contracts present');
   const r = spawnSync(process.execPath, [join(REPO, 'tools', 'finite-smoke.mjs'), contracts],
     { cwd: REPO, encoding: 'utf8', timeout: 300_000 });
   assert.match(r.stdout, /check\(s\) over \d+\/\d+ item/,

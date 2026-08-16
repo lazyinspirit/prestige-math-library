@@ -214,7 +214,11 @@ export interface InvokeResult {
 export interface Adapter {
   name: string;
   describe: (vars: Record<string, unknown>) => string;
-  invoke: (vars: Record<string, unknown>, opts?: { signal?: AbortSignal }) => Promise<InvokeResult>;
+  /** `timeoutMs` is enforced by the adapter (SIGTERM the process group, then
+   *  SIGKILL after `killGraceMs`); it resolves ok:false rather than hanging.
+   *  An adapter that ignores it recreates the hung-lane-forever failure. */
+  invoke: (vars: Record<string, unknown>,
+    opts?: { signal?: AbortSignal; timeoutMs?: number; killGraceMs?: number }) => Promise<InvokeResult>;
 }
 
 export type ControlCommand = 'pause' | 'resume' | 'skip' | 'retry' | 'stop' | 'report';
