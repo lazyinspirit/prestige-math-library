@@ -30,16 +30,28 @@ file as one that did.
    disagreement resolved with evidence is a legitimate outcome; an
    unexamined one is not.
 
-## What to return
+## What to return — BOTH halves, and the machine half is what gates
 
-`research/frontier-15-alpha-<your-group>-recheck.md`, one line per finding id:
+1. **The prose report** — `research/frontier-15-alpha-<your-group>-recheck.md`,
+   one line per finding id:
+   - `confirmed` — the fix is on disk and correct
+   - `not applied` — the notes claim a fix the file does not carry (name the file)
+   - `pushback accepted` — with your reasoning
+   - `pushback rejected` — with the evidence, and what must still change
 
-- `confirmed` — the fix is on disk and correct
-- `not applied` — the notes claim a fix the file does not carry (name the file)
-- `pushback accepted` — with your reasoning
-- `pushback rejected` — with the evidence, and what must still change
+   Close with a per-pair verdict: `ready for splice` or `not ready`, naming
+   what blocks it.
 
-Close with a per-pair verdict: `ready for splice` or `not ready`, naming
-what blocks it.
+2. **UPDATE YOUR GROUP'S VERDICT FILE** —
+   `research/frontier-15-alpha-<your-group>-step3-verdicts.json`. This is the
+   ONLY artifact the closure gate reads (`tools/scaffold-verdicts.mjs
+   --require-sufficient`); a prose "ready for splice" over a stale
+   `insufficient` row holds the stage shut forever — which happened on this
+   run: two groups confirmed every fix in prose, left their JSON at the
+   review-time verdicts, and the gate re-raised findings that had been fixed
+   for an hour. Per pair: flip the verdict to `sufficient` when you confirm
+   it; keep it `insufficient` with the still-open `missing[]` rows when you
+   do not. The file is your attestation — update it only to what you have
+   verified from disk in THIS dispatch.
 
 **No permission prompts of any kind**, including inside an `&&` chain.
