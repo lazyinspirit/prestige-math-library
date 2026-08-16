@@ -13,7 +13,7 @@
 // session may be on a different tty or a different day. A file in the repo is
 // reachable by all of them and survives every one of them dying.
 //
-// COMMANDS LAND AT A STEP BOUNDARY, NEVER MID-STEP. run-level polls this between
+// COMMANDS LAND AT A STEP BOUNDARY, NEVER MID-STEP. run-wave polls this between
 // transitions only. A half-applied step — agents dispatched but gates unrun,
 // snapshots taken but adjudications unwritten — is the state that is expensive
 // to reason about afterwards, so a command waiting seconds is the cheaper side

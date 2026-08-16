@@ -6,10 +6,11 @@
 //   node tools/run-wave.mjs --wave 4 --dry-run
 //   node tools/run-wave.mjs --wave 4 --from-step A6
 //
-// This is `run-level.mjs` for `AUDIT-WORKFLOW.md`. Same shape deliberately: same
-// halt-and-report discipline, same durable state, same control file, same
-// "commands land at step boundaries" rule. Where it differs, it differs because
-// the audit differs, and each difference is commented where it happens.
+// The unattended driver for `AUDIT-WORKFLOW.md`: halt-and-report discipline,
+// durable state, a control file, and the "commands land at step boundaries"
+// rule. (Its build-side twin was retired; the build runs under
+// `tools/autopilot/`.) Where the audit differs, each difference is commented
+// where it happens.
 //
 // WHAT IT IS NOT. It does not publish. `verification.audited`, flipping
 // `status: published`, deletions, id changes and reading-order changes are
