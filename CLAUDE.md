@@ -585,18 +585,10 @@ taste:
 - **Flowcharts are BIRDS-EYE:** only `landmark: true` items are nodes; edges are
   the transitive reduction of nearest-landmark-ancestor. Curate landmarks; never
   revert to one-node-per-item.
-- **The verification caption stays.** An always-visible note under the provenance
-  pill reads "✓ N results · all verified · K also independently AI-judged", then
-  explains that every result is machine-checked and owner-audited and the judge is
-  an ADDITIONAL review — items not AI-judged were owner-verified, NOT failures. A
-  bare "judge 31/34" headline is banned: it reads as failures.
-- **Draft safety in the app repo — both are correctness.** The search index is
-  published-only for the public: it is a file in the browser, so shipping drafts
-  would publish unpublished mathematics to anyone with devtools. The owner's
-  draft-bearing index is served `private, no-store` with `Vary: cookie`, built
-  through `plainTitle()` — the single de-TeX for every plain-text context, never
-  a second copy. **Corpus loading is memoised, rendering is not**, deliberately:
-  the routes await `auth()` and show drafts to the owner only, so caching
-  rendered pages would leak drafts or hide them.
+- **The verification caption stays**, saying items not AI-judged were
+  owner-verified, NOT failures; a bare "judge 31/34" headline is banned.
+- **Draft safety, both correctness:** drafts never reach the public search index;
+  corpus loading is memoised, rendering is not. Both mechanisms, and the
+  caption's exact wording: `ARCHITECTURE.md` §7.1.
 
 If tempted to "improve" the look: STOP. Only the owner reopens it.

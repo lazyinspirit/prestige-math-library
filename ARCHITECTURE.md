@@ -1788,6 +1788,9 @@ Twitter, pointing the two at different routes for the same card.
 | `web/lib/og.tsx` · `web/lib/library-og-data.ts` | share cards: `ogImage` / `ogFlowchart` for the product, `ogTaxonomy` for the mirror; the live counts and the content version behind it |
 | `web/lib/math-library.ts` | `plainTitle`, the one de-TeX for every plain-text context |
 | `web/lib/library-changes.ts` · `web/components/library/changes.tsx` | recent changes: what counts as published/revised in a window, and the shared row the index box and `/changes` both render |
+| `web/lib/library-search.ts` · `web/app/library/search-index/route.ts` | the client-side search payload and the audience split that keeps drafts out of it |
+| `web/lib/library-cache.ts` | the corpus memo: cached DATA, per-request RENDER |
+| `web/app/library/[...path]/page.tsx` · `web/components/library/badges.tsx` | the provenance pill and the verification caption under it |
 
 **Three ranked citation tiers, none relying on colour alone:**
 
@@ -1800,6 +1803,70 @@ Twitter, pointing the two at different routes for the same card.
 The bottom tier **outranks** the middle: "never proved here" is a far stronger
 caveat than "developed later". Since 2026-07-27 the ‡ tier is a **catalogue
 only** — new content may not depend on it (`LEVELS.md`, self-contained scope).
+
+### 7.1 Draft safety and the verification caption
+
+Both are correctness rather than taste, which is why `CLAUDE.md` states the rules
+and this section carries the mechanism.
+
+**The search index is published-only for the public.** It is a CLIENT-SIDE index
+— a file fetched once and searched in the browser, so every keystroke is instant
+with no round trip — and therefore a draft in the public payload publishes
+unpublished mathematics to anyone who opens devtools. `buildSearchIndex` takes
+the audience explicitly and there is no default that leaks. Two further
+properties of that file are correctness, not preference:
+
+- **Titles are LaTeX**, so the index goes through `plainTitle`, the library's
+  single de-TeX for every plain-text context (flowchart labels, OG cards,
+  metadata). A reader typing "sqrt" or "epsilon" therefore matches `\sqrt` and
+  `\varepsilon`. Do NOT add a second, cruder de-TeX here: a search box that
+  silently fails on half its corpus is worse than no search box.
+- **The index is a cached artefact**, so it must not read ambient request state.
+  The library sits at `/library` on the app host and at the ROOT on the mirror,
+  so the href prefix is a PARAMETER; reading the host inside the builder would
+  bake one host's prefix into a payload the other host then serves.
+
+On the app host the route is session-dependent and the caching headers are the
+security boundary: the signed-in owner's index contains drafts, so it is served
+`private, no-store` (never cached anywhere) while everyone else's is
+`public, max-age=300`, and `Vary: cookie` stops any shared cache in front of it
+mixing the two audiences whatever the `cache-control` says. On the mirror the
+owner branch is UNREACHABLE — `auth()` is never called and drafts cannot be
+requested — so the response has no cookie-dependent variation and drops
+`Vary: cookie` to become genuinely edge-cacheable, which the app-host response
+can never be. That drop is deliberate: Cloudflare honours only
+`Vary: Accept-Encoding` outside Enterprise and treats other `Vary` values
+conservatively, so keeping the header would silently defeat caching; its cache
+rule additionally bypasses cache whenever a cookie is present.
+
+**Corpus loading is memoised, rendering is not** (`library-cache.ts`, measured
+2026-07-28). Every `/library` route is `force-dynamic` and every one calls
+`loadItems()` / `loadPages()`, which had no memoisation, so a single page view
+re-read and re-parsed the WHOLE corpus off disk — 1,204 items, 6.5 MB, ~50 ms of
+pure CPU before rendering started — for content that changes only when a level is
+published. Static generation is not the fix, and this is the draft rule again:
+the routes await `auth()` and show draft pages to the owner and only published
+pages to everyone else, so caching the *rendered* page would either leak
+unpublished mathematics to the public or hide drafts from the owner. The DATA is
+cached and the RENDER stays per-request. Invalidation is a (file count, newest
+mtime) fingerprint — the content is a read-only bind mount whose only writer is a
+publish — itself rate-limited, since recomputing it costs ~9 ms against the
+~50 ms it saves and paying that on every request is a poor trade.
+
+**The verification caption stays.** Under the provenance pill an always-visible
+note reads "✓ N results · all verified · K also independently AI-judged", then
+explains that every result on the page is machine-checked by a proof checker and
+read in full — "and owner-audited", or "by a delegated reviewing agent on the
+owner's instruction" where the reads were delegated, because the caption must not
+say "owner-audited" of work the owner delegated — and that the judge is an
+ADDITIONAL, independent cross-model AI review of the proofs. The items not
+AI-judged were verified by owner audit, typically over a confirmed judge false
+positive, and are **NOT failures**; a bare "judge 31/34" fraction as the headline
+is banned, because it reads as failures. A page on which every item is
+`proved_here: false` carries no proof at all, so the standard caption would be
+false in one direction and read as a shortfall in the other: such a page gets its
+own `ExternalPageNote` instead (owner instruction 2026-07-26; SCHEMA §3
+`sources_checked`).
 
 ## 8. What no mechanism covers
 
