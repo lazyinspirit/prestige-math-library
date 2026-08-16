@@ -268,6 +268,7 @@ const label = option('--label');
 const run = option('--run');
 const taskPath = option('--task');
 const timeoutSec = Number(option('--timeout') ?? 7200);
+const covers = option('--covers') ? option('--covers').split(',').map((s) => s.trim()).filter(Boolean) : [];
 
 const usage = (message) => {
   if (message) console.error(`dispatch: ${message}`);
@@ -300,7 +301,15 @@ const vars = new Map(options('--var').map((pair) => {
   return [pair.slice(0, at), pair.slice(at + 1)];
 }));
 vars.set('run', run);
-for (const [key, value] of vars) prompt = prompt.replaceAll(`<${key}>`, value);
+if (covers.length) vars.set('covers', covers.join(','));
+// An EMPTY value means "not pinned", never "erase the placeholder": the engine
+// passes --var i={unit} with unit='' on every multi-batch dispatch, and
+// replacing a deliberately generic <i> ("each batch") with '' turned
+// research/<run>-batch-<i>.pages.json into a path that does not exist.
+for (const [key, value] of vars) {
+  if (value === '') continue;
+  prompt = prompt.replaceAll(`<${key}>`, value);
+}
 
 // A tool-less runner cannot open a file, so a brief that says "read the item on
 // disk" produces a confident reading of nothing. The task file IS the context
@@ -309,9 +318,19 @@ for (const [key, value] of vars) prompt = prompt.replaceAll(`<${key}>`, value);
 if (spec.requiresTask && !taskPath) {
   usage(`role ${role} runs on ${spec.runner}, which has no filesystem access — pass --task with the assembled context`);
 }
+// Every prompt carries its own identity, so a generic brief or fallback task
+// file still tells the agent which run, role, label and units it owns — the
+// group-Alpha briefs read their batches from the `covers:` line here.
+const identity = [
+  `run: ${run}`, `role: ${role}`, `label: ${label}`,
+  ...(covers.length ? [`covers: ${covers.join(', ')}`] : []),
+  ...(vars.get('output') ? [`output: ${vars.get('output')}`] : []),
+].join('\n');
 if (taskPath) {
   if (!existsSync(resolveFile(taskPath))) usage(`task file not found: ${taskPath}`);
-  prompt += `\n\n---\n\n# This dispatch\n\n${readFileSync(resolveFile(taskPath), 'utf8')}`;
+  prompt += `\n\n---\n\n# This dispatch\n\n${identity}\n\n${readFileSync(resolveFile(taskPath), 'utf8')}`;
+} else {
+  prompt += `\n\n---\n\n# This dispatch\n\n${identity}\n`;
 }
 
 // A leftover `<n>` is a real defect: the level identity must be concrete, and
@@ -486,6 +505,9 @@ if (dryRun) {
     command: [bin, ...args].join(' '),
     prompt_bytes: Buffer.byteLength(prompt), prompt_lines: prompt.split('\n').length,
     would_write: { log: logPath, result: resultPath, prompt: promptPath },
+    // The rendered prompt itself, so "render it through --dry-run and read the
+    // actual output" is possible without a live dispatch.
+    ...(asJson ? { prompt } : {}),
   };
   console.log(asJson ? JSON.stringify(report, null, 2) : Object.entries(report)
     .map(([k, v]) => `${k.padEnd(14)} ${typeof v === 'object' ? JSON.stringify(v) : v}`).join('\n'));
@@ -618,7 +640,7 @@ const record = {
   // over `ok:true` results contains every unit the stage owes. One Alpha over
   // six batches and six Alphas over one batch each are then both complete, and
   // neither needs the table to be edited.
-  covers: option('--covers') ? option('--covers').split(',').map((s) => s.trim()).filter(Boolean) : [],
+  covers,
   stage: option('--stage') ?? null,
   runner: spec.runner, model: spec.model, sandbox: spec.sandbox,
   started_at: started.toISOString(), ended_at: ended.toISOString(), ms: ended - started,

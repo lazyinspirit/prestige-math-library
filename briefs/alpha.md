@@ -29,8 +29,8 @@ files you own, before acting.
 ## Group Alpha or lead Alpha
 
 Batches are divided among group Alphas, **at most three each** (the `alpha` lane
-cap is 3). **Your dispatch names the batches you own. You read those and no
-others.**
+cap is 3). **The `covers:` line in the `# This dispatch` block at the end of
+this prompt names the batches you own. You read those and no others.**
 
 The division is decided at stage `2-assign` and recorded in
 `research/<run>-alpha-groups.json`, with a rationale per group: batches are
@@ -185,8 +185,9 @@ thin before this stage existed: `group-actions-and-cayleys-theorem` published
 with orbits and stabilisers but **no orbit–stabiliser theorem**, no class
 equation, no Cauchy's theorem and an empty B page.
 
-For each pair, read `research/<run>-batch-<i>.pages.json`, `.notes.md` and
-`.coverage.json` **together**:
+For each batch `<i>` on your `covers:` line, read
+`research/<run>-batch-<i>.pages.json`, `.notes.md` and `.coverage.json`
+**together**:
 
 1. **Is the standard development present?** Name, from your own knowledge, what a
    competent textbook chapter proves. Each must appear in the scaffold or in the
@@ -207,8 +208,8 @@ For each pair, read `research/<run>-batch-<i>.pages.json`, `.notes.md` and
    error. Adjudicate a proposed split now with the exact cut and new page ids;
    say so if one should have been proposed and was not.
 
-**Two outputs**, taking your group letter from your dispatch label
-(`step3-a` → `a`):
+**Two outputs**, taking your group letter from the `label:` line of the
+`# This dispatch` block (`label: step3-a` → `a`):
 
 1. `research/<run>-alpha-<g>-step3-scaffold-review.md` — your reasoning per pair.
 2. `research/<run>-alpha-<g>-step3-verdicts.json` — the same verdicts, machine
