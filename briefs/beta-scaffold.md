@@ -42,8 +42,11 @@ without rediscovering its reasoning.
 2. `SCHEMA.md` — the item/page contract. Normative; it wins over me.
 3. `README.md` — provenance, judge lineup, citation-honesty rules.
 4. `items/lem-cauchy-bounded.md` — the approved house-style exemplar.
-5. `research/level8-batch-1.pages.json` and `research/level8-batch-1.notes.md`
-   — the exact output shape you are producing, from the previous level.
+5. The most recently completed run's `*-batch-1.pages.json` and
+   `*-batch-1.notes.md` — the exact output shape you are producing. Find it with
+   `ls -t research/*-batch-1.pages.json | head -1`; never copy a run name from a
+   brief, including this one, because the newest run changes and the brief does
+   not.
 6. The prose scaffold sections named in your own prompt.
 
 Then read, on disk, every published item you intend to cite. Not the scaffold's
@@ -225,7 +228,7 @@ version of a cited result.
 anything in the repo and RUN any gate. You may WRITE exactly three files:
 
 - `research/<run>-batch-<i>.pages.json` — your batch's page objects in final
-  form, as a JSON array. Shape is exactly `research/level8-batch-1.pages.json`:
+  form, as a JSON array. Shape is exactly that of the most recent completed run:
   `order`, `id`, `kind`, `category`, `title`, `companion`, `requires`, `items`,
   where each item is `{id, kind, title, strategy?, deps}`.
 - `research/<run>-batch-<i>.notes.md` — prose-scaffold amendments as precise
@@ -244,9 +247,10 @@ anything in the repo and RUN any gate. You may WRITE exactly three files:
   is meaningful. This file is your Step-5 self's durable obligation map.
 
 Do not touch `research/plan-spec.json`, any `items/*.md`, any `library/*/*.md`,
-or the other batch's files. I splice, gate and commit; Alpha-n applies your
-notes at step 4. Two agents writing the same prose file overwrite each other
-silently, because prose scaffolds are not gated.
+or the other batch's files. `tools/splice-plan.mjs` splices your item ids into
+the spec mechanically at step 4, the engine runs the gates, and the lead Alpha
+applies your notes to the prose scaffolds. Two agents writing the same prose
+file overwrite each other silently, because prose scaffolds are not gated.
 
 ## 2. The hard constraint: plan order
 
@@ -414,10 +418,10 @@ node tools/validate-plan.mjs research/plan-spec.json
 node tools/depsource.mjs
 ```
 
-You cannot validate your own file directly against `plan-spec.json` without
-splicing, which is my job — so report what you believe the result will be, and
-I will run the authoritative gate (amendment 6: no stage advances on an agent's
-report alone).
+You cannot validate your own file against `plan-spec.json` before it is spliced,
+and splicing is step 4. Report what you expect the result to be; the engine runs
+the authoritative gate. **No stage advances on an agent's report alone** — a
+claim that a gate would pass is not a gate passing.
 
 ## 9. What to report back (input to the step-3 Alpha)
 
@@ -426,7 +430,7 @@ it to your named output file as well: a finding that exists only in a closing
 message is a finding that gets lost, and eleven were.
 
 1. **Per-page item list** — every id, kind and title, in reading order, with a
-   count I can recount from the list. Never a summary fraction.
+   count that can be recounted from the list. Never a summary fraction.
 2. **Per-pair richness report** — for each A/B pair, name every long proof you
    decomposed and its intermediate lemmas; list the useful corollaries added;
    state explicitly that you performed both passes even when either found

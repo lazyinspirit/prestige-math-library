@@ -57,6 +57,8 @@ notice something.
 | `autopilot stop` | exit the loop, leave state on disk |
 | `autopilot retry [--unit N]` | re-arm a lane that exhausted its attempts |
 | `autopilot skip --stage ID` | bypass a stage |
+| `autopilot report` | force a status report now, without waiting for the interval |
+| `autopilot doctor --run N` | pre-flight: invented flags, missing briefs, judge auth, the stage-spec rules |
 
 Intervention is **read, never awaited**. The engine polls a small JSON file each
 tick; an owner who never touches it changes nothing, and one who writes to it

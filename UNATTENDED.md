@@ -1,7 +1,7 @@
-# Running a level unattended — canonical
+# Running a build unattended — canonical
 
-`LEVELS.md` is what a level build *is*. This is how to run one without a session
-attached, and how to attach to one that is already running.
+`LEVELS.md` is what a build *is*. This is how to run one with nobody attached,
+and how to take over one already running.
 
 Normative for the driver mechanism. `CLAUDE.md`, `SCHEMA.md` and `LEVELS.md` win
 where they differ; nothing here relaxes an owner rule or a gate.
@@ -10,185 +10,157 @@ where they differ; nothing here relaxes an owner rule or a gate.
 
 ## What this does and does not do
 
-It drives steps 0 to 10 and **stops at the step-10 owner pause**, which is where
+It drives steps 0 to 10 and **stops at the step-10 owner pause**, where
 `LEVELS.md` already stops. The end state is a fully built, audited, judged,
-all-gates-green level sitting at `status: draft` with its rundown written.
+all-gates-green run sitting at `status: draft` with its report written.
 
 It never publishes. `verification.audited`, flipping `status: published`,
-deleting a published or out-of-level result, id changes, reading-order changes,
+deleting a published or out-of-scope result, id changes, reading-order changes,
 and any published-dependency repair that is not "obvious" are owner-reserved, and
 no flag exposes them.
 
-**Unattended is not deterministic.** Steps 1, 2, 5, 6 and 8 are model work and
-stay stochastic. What is deterministic is the control flow around them:
-sequencing, gating, retry, budget, and where it stops.
+**Unattended is not the same as deterministic.** Scaffolding, authoring, audit,
+adjudication and judging are model work and stay stochastic. What is
+deterministic is everything around them: which stage is current, which units are
+uncovered, which dispatch fires next, whether a gate passed, whether a lane gets
+another attempt, and where the run stops. **No model makes any of those
+decisions** — `tools/autopilot/src/roles.mts` refuses a dispatch whose declared
+job is one of them.
 
 ---
 
 ## The pieces
 
-| tool | does |
+| path | does |
 |---|---|
-| `tools/paths.mjs` | resolves the app repo (`$PRESTIGE_APP_DIR`, else the sibling checkout, else the VPS path). Nothing hardcodes `/root` any more |
-| `tools/tsx-run.mjs` | `node tools/tsx-run.mjs tools/<x>.mts` — the invocation for every `.mts` tool |
-| `tools/preflight.mjs` | can this machine run a build at all. **Run it before every long build** |
-| `tools/gates.mjs` | the gates of record for one step. Never writes, never spends |
+| `tools/autopilot/bin/autopilot.mts` | the CLI — everything below runs through it |
+| `tools/autopilot/src/executor.mts` | the loop: coverage, dispatch, gates, retries, blockers |
+| `tools/autopilot/src/spec.mts` | validates the stage table before a run may start |
+| `tools/autopilot/stages/mathlib.mts` | the only domain-specific file: 17 stages, their units, gates and repair loops |
+| `tools/autopilot/bin/watchdog.sh` | restarts the engine if the process dies |
 | `tools/dispatch.mjs` | spawns one briefed agent role as a plain process |
-| `tools/slots.mjs` | cross-process concurrency pools (`tools/slots.test.mjs` checks the properties) |
-| `tools/run-level.mjs` | the state machine: steps, halts, durable state, journal |
-| `tools/run-control.mjs` | talk to a run that is already going |
-| `ops/run-level@.service` | systemd user unit so the run survives logout |
+| `tools/preflight.mjs` | can this machine run a build at all. **Run it before every long build** |
+| `tools/slots.mjs` | cross-process concurrency pools for the judge lanes |
+| `tools/paths.mjs` | resolves the app repo for the DeepSeek key |
 
-State lives in `research/<run>-run-state.json`; commands in
-`research/<run>-run-control.json`; every agent's prompt, log and result under
-`research/<run>-dispatch/`.
+Configuration is `autopilot.config.json` at the repo root — the run name, the
+concurrency and report cadence, and **one platform-specific setting**: the argv
+array that starts an agent. It is an array, never a command string; a string has
+to be parsed, and every attempt to parse one here produced a quoting defect.
 
----
-
-## Starting a run
-
-```
-node tools/preflight.mjs --judges          # once, before a long build
-node tools/run-level.mjs --run frontier-10 --level 10
-```
-
-Unattended on the VPS, per the header of `ops/run-level@.service`. The step that
-is easy to skip and fatal to skip:
-
-```
-loginctl enable-linger "$USER"
-```
-
-Without it systemd tears down the user manager at logout and the build dies with
-the session it was supposed to outlive.
+Run state lives in `.autopilot/state.json`, owner commands in
+`.autopilot/control.json`, the human-readable snapshot in `.autopilot/status.md`,
+and append-only history in `.autopilot/events.jsonl`. Every agent's prompt, log
+and result record lands under `research/<run>-dispatch/`.
 
 ---
+
+## Before you start
+
+```
+node tools/preflight.mjs
+npx tsx tools/autopilot/bin/autopilot.mts doctor --run <run>
+```
+
+`doctor` checks the things that otherwise fail hours in with nobody watching: a
+command flag no tool defines (four of the first six written from memory were
+wrong), a brief or task file that does not exist, a judge lane that cannot
+authenticate, a missing scope ledger, and the stage-spec rules. It is seconds;
+each thing it catches costs hours.
+
+## Starting
+
+```
+npx tsx tools/autopilot/bin/autopilot.mts frontier --categories topology,analysis
+npx tsx tools/autopilot/bin/autopilot.mts plan  --run <run> --pairs <a>,<b>
+npx tsx tools/autopilot/bin/autopilot.mts start --run <run> --detach
+nohup sh tools/autopilot/bin/watchdog.sh "$PWD" > .autopilot/watchdog.log 2>&1 &
+```
+
+`frontier` lists what is buildable now, in dependency waves, computed from
+publication state on disk. `plan` takes the pairs you chose and packs them into
+batches by prerequisite affinity, writes the manifests, and diffs the design docs
+against the spec — mechanical throughout.
+
+`start --detach` refuses to detach if the stage table cannot fail (see below), so
+a spec defect is a message on your terminal rather than a blocker in a log nobody
+is reading yet.
 
 ## Supervising
 
-Three levels, and you choose per session which one you are using.
-
-**Watch** — costs nothing, changes nothing:
-
 ```
-node tools/run-level.mjs --run frontier-10 --status
-journalctl --user -u run-level@frontier-10 -f
-```
-
-**Control** — commands land at the next **step boundary**, never mid-step,
-because a half-applied step is the state that is expensive to reason about
-afterwards:
-
-```
-node tools/run-control.mjs --run frontier-10 show
-node tools/run-control.mjs --run frontier-10 pause
-node tools/run-control.mjs --run frontier-10 park thm-some-id
-node tools/run-control.mjs --run frontier-10 budget 400
-node tools/run-control.mjs --run frontier-10 clear
+npx tsx tools/autopilot/bin/autopilot.mts status     # current stage, running lanes, blockers
+npx tsx tools/autopilot/bin/autopilot.mts report     # force a status report now
+npx tsx tools/autopilot/bin/autopilot.mts pause      # in-flight lanes finish; nothing new starts
+npx tsx tools/autopilot/bin/autopilot.mts resume
+npx tsx tools/autopilot/bin/autopilot.mts retry [--unit <n>]   # re-arm a lane that hit its cap
+npx tsx tools/autopilot/bin/autopilot.mts skip --stage <id>    # owner override; recorded
+npx tsx tools/autopilot/bin/autopilot.mts stop       # in-flight lanes are left to finish
 ```
 
-`halt` is not a kill. To stop a run *now*, stop the process; `halt` stops it
-cleanly and leaves a resumable record.
+`status` is a **different process** from the engine, so its in-flight map is
+empty. It asks the operating system instead, and lists live dispatches for this
+run whether or not it started them — otherwise it would report "nothing running"
+with three agents working, which reads at 3am as a dead build.
 
-**Takeover** — halt, then drive by hand exactly as `LEVELS.md` describes. The
-state file and the dispatch logs mean nothing is lost. This is the intended
-route whenever the mathematics needs you.
+`stop` and a SIGTERM both leave running agents alone deliberately. An agent that
+has been thinking for forty minutes is expensive and nearly done; the engine
+restarting is not a reason to throw its work away. State is on disk, the result
+record lands whenever the agent finishes, and the next engine adopts it.
 
----
+## When it stops, and what it wants
 
-## Every halt, and what it wants
+There are no halt codes. The engine either advances, holds, or is blocked, and
+`status` says which with the reason.
 
-A halt is not a crash. Each one records a code, a reason, and the exact resume
-command in `research/<run>-run-state.json`.
-
-| code | means | you do |
+| you see | it means | do |
 |---|---|---|
-| `judgment-required` | a step needs an orchestrator decision (0, 3, 4, 9) | make it, resume at the next step |
-| `gate-failed` | a gate of record failed; the failing tool is quoted | fix the content, resume at that step |
-| `agent-failed` | a dispatched role exited nonzero | read `research/<run>-dispatch/<role>-<label>.log` — the current run's is plain, concluded runs' are gzipped, so `zless`/`zgrep` reads either |
-| `no-batches` | a per-batch step found no batch manifest | produce them at step 0 |
-| `snapshot-failed` | the `pre-step8` baseline could not be taken | fix, resume; R1's guard needs that baseline |
-| `manual-step` | step 7 spends | run the judge sweep yourself, then resume at 7 |
-| `budget-exhausted` | the judge-call budget is spent | raise `--judge-budget` and resume |
-| `operator-halt` | you asked, via `run-control` | resume with `--from-step` |
-| `owner-pause` | **step 10 reached — success** | audit and publish by hand. Exits **0** |
+| `stage spec is invalid` | a stage cannot fail — usually a gate list that came back empty | fix the stage table; the engine refuses to dispatch until you do |
+| `missing input file(s)` | a brief or task the next dispatch needs is absent | write the file; the blocker retires itself on the next tick |
+| `gate <id> failed` | a real defect, or a repair loop that has not converged | read the gate output in `events.jsonl` |
+| `failed 2x` | a lane died twice | read its log under `research/<run>-dispatch/`; `retry` re-arms it |
+| `N repair round(s) did not clear gate` | the bounded self-correcting loop gave up | this one needs a person |
+| `barrier` | a previous stage still has work in flight | nothing; it lifts by itself |
 
-A halted run refuses to restart without `--from-step`. That is deliberate: a
-driver that resumed a halted run automatically would spin through whatever
-caused the halt.
+A blocker is **not** the end of the run. The engine keeps ticking: a transient
+clears itself, `retry` re-arms a lane, and a genuinely stuck run is reported
+every interval instead of dying silently. The first live takeover ended a
+fourteen-hour build over an HTTP/2 framing error against a host that had answered
+200 twice that hour, and that is why.
 
----
+## The two self-correcting loops
 
-## Judgement policy
+A gate says what is wrong; the stage dispatches whoever can fix it; the gate
+re-runs when those dispatches drain. Bounded, because a repair that will not
+converge must become a blocker a person reads rather than an unbounded spend.
 
-Steps 0, 3, 4 and 9 need a decision no gate encodes: computing the frontier from
-disk, adjudicating Beta recommendations, splicing the spec, and reading the
-scope-denial sweep where "grep is the entry point, never the sweep".
+| loop | clears when | receipt it dispatches from |
+|---|---|---|
+| step 3 review → Beta fix → re-check | every pair is `sufficient` | `research/<run>-scaffold-closure.json` |
+| step 7 judge → adjudicate → repair → rejudge | every item paired, every rejection adjudicated, no open fatal | `research/<run>-judge-closure.json` |
 
-* `--judgment halt` (**default**) — stop and name the decision.
-* `--judgment autonomous` — dispatch a headless orchestrator and journal what it
-  decided.
-
-The default is `halt` because delegating judgement should be something you
-switched on, not something you discovered. With `autonomous`, you have replaced
-you-in-the-loop with a model-in-the-loop; the standing rule that no stage
-advances on an agent's report alone still applies, and the journal is what makes
-that auditable after the fact.
-
----
+Both receipts name **ids**, not prose. A build once named its 23 rejudge targets
+in a markdown table and the rejudge never ran, because nothing downstream can
+read a table.
 
 ## Budget, and why fatal repairs are not capped
 
-`--judge-budget N` bounds judge calls; only the DeepSeek lane is metered, Codex
-being subscription.
+Judge calls are the spend: two lanes over every item in the run, capped at 16
+concurrent each and 32 combined. A capacity refusal is a null verdict, not a
+verdict, and the sweep retries it.
 
-`--park-after N` (default 3) bounds how many step-8 fatal rounds the driver takes
-on **one item without a human**, then parks that item and continues the rest of
-the level. It is **not** a limit on how many attempts a defect may have. A proof
-that keeps yielding real fatal defects is either converging toward correctness or
-is actually false, and both must run to conclusion; a parked item resumes with
-one command.
-
-Nonfatal rounds cannot happen at all: **R1** makes step 8 fatal-only
-(`CLAUDE.md`, `LEVELS.md` §8, enforced by `tools/step8-guard.mjs`), so every
-round this counts is a confirmed fatal defect.
-
----
+**Fatal repairs are deliberately uncapped** (owner, 2026-08-03). A proof that
+keeps yielding real fatal defects is either converging toward correctness or is
+false, and both must run to conclusion. What *is* capped is the number of
+automatic repair *rounds* per gate — the loop, not the repairs.
 
 ## Limits — what is not yet true
 
-Stated plainly so nobody discovers these at 3am.
-
-* **No level has been driven end-to-end by this.** The state machine's stop
-  conditions are covered by `tools/run-level.test.mjs` (19 properties) and the
-  pool by `tools/slots.test.mjs` (11), but a full real level has not run.
-* **Step 7 halts rather than spending.** `manual-step` is deliberate for the
-  first builds: the sweep is the expensive irreversible action, and it should
-  earn autonomy after a run or two of watching it.
-* **A dispatched agent cannot run `gates.mjs` itself** (measured, `frontier-10`
-  step 2, 2026-08-11). Inside the Codex `workspace-write` sandbox the wrapper's
-  `spawnSync` of `node` returns `EPERM` before any child script runs, so it
-  reports three wrapper failures while every one of those scripts runs fine from
-  the same shell. Brief agents to run the individual gate scripts; the
-  orchestrator runs the wrapper and remains the gate of record. Two Betas hit
-  this independently and both correctly recorded a blocker rather than requesting
-  escalation, which is the no-permission-prompt rule working as intended.
-* **A run whose name is not a numeric level cannot use the driver's briefs.** The
-  step table dispatches `briefs/beta-scaffold.md` / `authoring.md` / `alpha.md`
-  with `--var n=<level>`, producing `research/level<n>-batch-<i>.*` paths. A run
-  named `frontier-10` keeps its artifacts at `research/frontier-10-batch-<i>.*`,
-  which those briefs never name, so `frontier-10` was orchestrated by hand.
-  Wanted: run-scoped brief templating, or an `--artifact-prefix`.
-* **A run-specific brief may not contain a literal `<n>` or `<k>`**, even inside a
-  table documenting the base contract's own path pattern. `dispatch.mjs` refuses
-  it — correctly, since an agent that guesses its level audits the wrong one —
-  and the launch exits 2 having written nothing but a one-line `.out`. **The
-  proof a dispatch really started is its `<role>-<label>.prompt.md` file**, not
-  the process being alive a few seconds later; that only catches it mid-exit.
-* **`judge-sweep.mjs` keeps its own copy of the slot pool.** The swap to
-  `slots.mjs` is small but wants a live sweep to validate it.
-* **`precheck.mts`'s dynamic import is unverified**, because tsx is not installed
-  on every checkout. It needs one real run.
-* **Agent prompts are the briefs as written.** They were built for a session that
-  answers questions; a role that finds its brief ambiguous will produce a report
-  rather than block, and the gates are what catch that.
+- The engine has never driven a complete run start to finish with no
+  intervention. Every stage mechanism is tested and `frontier-14` exercised most
+  of them, but "steps 0 through 10, untouched" has not happened yet.
+- `strictNullChecks` is off in `tools/autopilot/tsconfig.json`, with the
+  outstanding diagnostic count recorded there. Two defects the tests could not
+  see were found by turning type checking on; the rest are not yet fixed.
+- The watchdog restarts a dead engine five times, then gives up. It cannot tell a
+  crash loop from bad luck.

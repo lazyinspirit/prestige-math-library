@@ -136,35 +136,20 @@ const ROLES = Object.freeze({
   // costs nothing but wall clock.
   alpha:        { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 3, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
   refuter:      { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
-  orchestrator: { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment at steps 3, 4, 9' },
+  // AUDIT ONLY. The build has no orchestrator: every judgment it used to make
+  // belongs to an Alpha, and every transition to the engine. The published-page
+  // audit still runs under run-wave.mjs and still has one.
+  orchestrator: { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 1, why: 'delegated judgment in the published-page audit (AUDIT-WORKFLOW.md)' },
 
-  // SUPERVISOR (owner, 2026-08-15). THE ORCHESTRATOR IS THE BOTTLENECK, so this
-  // role exists to take the "is the stage done, and what fires next" decision
-  // away from it.
+  // The `supervisor` role was removed 2026-08-16. It existed to take "is the
+  // stage done, and what fires next" away from the orchestrator, which was the
+  // bottleneck — measured on frontier-13 as ~5h of a ~14h run spent writing
+  // status reports at cleared stages instead of dispatching.
   //
-  // Measured on run frontier-13: ~14h wall-clock, of which roughly 5h was the
-  // orchestrator writing a status report at a cleared stage instead of
-  // dispatching the next one — three separate times, against an explicit owner
-  // instruction not to pause, and with the same failure already recorded in the
-  // session memory from two earlier runs. Exhortation demonstrably does not fix
-  // it. A stage boundary has to be a mechanical trigger.
-  //
-  // The one part of frontier-13 with NO idle gap was step 4 -> step 5, where a
-  // splice receipt landing auto-released that batch's author through a shell
-  // watcher. This role generalises that: `tools/run-supervisor.mjs` owns the
-  // stage table and the polling; the supervisor agent owns the judgment calls
-  // the table cannot make — is a report actually complete, is a blocker real,
-  // does a partial result justify advancing.
-  //
-  // SONNET 5, not Opus: it makes NO mathematical judgment. It never adjudicates
-  // a finding, never edits an item, never decides whether a proof is correct. It
-  // reads run state and fires dispatches. Opus here would be paying the
-  // adjudicator's rate for a scheduler.
-  //
-  // `workspace-write` because it must write the run log and launch dispatches;
-  // it is forbidden from touching `items/`, `library/` and `plan-spec.json` by
-  // brief, and that boundary is checked by `run-supervisor.mjs --verify-scope`.
-  supervisor:   { runner: 'claude', model: SONNET_MODEL, sandbox: 'workspace-write', effort: 'medium', cap: 2, why: 'advances the build across stage boundaries without orchestrator or owner interference' },
+  // That was the right diagnosis and the wrong cure: it moved the transition
+  // from one model to another. The transition is a predicate over files on
+  // disk, so it belongs to code, and `tools/autopilot/` owns it now. Both the
+  // role's brief and `run-supervisor.mjs` are deleted.
 
   // `scaffolder` (owner, 2026-08-13): concurrent SUBJECT-track prose scaffolding,
   // outside any level build. Same runner, model, effort and window as `alpha` —
