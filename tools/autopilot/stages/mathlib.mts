@@ -146,6 +146,15 @@ const policyItemGate = (ctx) => gate('content-policy-items', ['node', 'tools/con
 
 const planGate = () => gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json']);
 
+/** The step-0 drift review's teeth. The review is the `drift` unit of stage 1;
+ *  this is what makes its report load-bearing rather than decorative. Fails on
+ *  a missing report, an owed A page with no verdict, or any drift-blocked
+ *  verdict — a blocked edge is a reading-order question, owner-only, and the
+ *  run must stop at it rather than meet it at step 4 as `undeclared-prereq`. */
+const driftGate = (ctx) => gate('drift-review', ['node', 'tools/drift-review-check.mjs', '--run', ctx.run], {
+  liveness: { pattern: /(\d+)\s+page\(s\) reviewed/.source, min: 1, unit: 'pages reviewed' },
+});
+
 /** Scope loss is invisible to every gate that reads the current state.
  *
  *  On frontier-14 a fully scaffolded A/B pair — 19 items, three verified
@@ -403,26 +412,50 @@ const resultPattern = (role: string, labelSource: string): RegExp =>
 export const stages = [
   {
     id: '1-scaffold',
-    label: 'Beta scaffolding',
+    label: 'Beta scaffolding + step-0 drift review',
     // Not pipelined: the stage after it is the assignment barrier. See the note
     // above — a cohort computed before `2-assign` is computed from a fallback
     // that the assignment exists to overrule.
-    units: batches,
+    //
+    // THE `drift` UNIT. `autopilot plan` writes the prerequisite-drift review
+    // task and its evidence file, and until 2026-08-16 nothing dispatched it:
+    // the plan output said "dispatched as the first audit node" and no stage
+    // owned the dispatch, no gate required the report — a never-invoked node,
+    // found only because frontier-15's step 0 surfaced real drift the review
+    // existed to catch. It rides in this stage because it is read-only on the
+    // designs and the spec, so it costs no wall-clock next to the 4-hour
+    // scaffold window, and `drift-review-check` makes it unable to be skipped:
+    // a missing report, an unreviewed page, or a blocked (owner-only) edge
+    // fails the stage. Coverage attributes results by their declared `covers`,
+    // so the mixed unit set is safe — the Alpha declares `drift`, each Beta
+    // declares its batch number.
+    units: (ctx: any) => ['drift', ...batches(ctx)],
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
-    // `beta-fix-batch-3.result.json`, which belongs to a different stage.
-    pattern: resultPattern('beta', 'batch-\\d+'),
-    labelFor: (u) => `batch-${u}`,
+    // `beta-fix-batch-3.result.json`, which belongs to a different stage. The
+    // alternation admits exactly the two result shapes this stage owns.
+    pattern: /^(?:beta-(?:beta-)?batch-\d+|alpha-(?:alpha-)?drift-review)\.result\.json$/,
+    labelFor: (u) => (u === 'drift' ? 'drift-review' : `batch-${u}`),
     concurrency: 9,
-    plan: (ctx, pending) => pending.map((u: any) => ({
-      role: 'beta',
-      label: `batch-${u}`,
-      job: 'scaffolding',
-      covers: [u],
-      brief: "briefs/beta-scaffold.md",
-      task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
-      timeout: 14400,
-    })),
-    gates: (ctx) => [scopeGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate(), urlGate(ctx)],
+    plan: (ctx, pending) => pending.map((u: any) => (u === 'drift'
+      ? {
+        role: 'alpha',
+        label: 'drift-review',
+        job: 'verification',
+        covers: ['drift'],
+        brief: 'briefs/alpha-drift.md',
+        task: [`research/${ctx.run}-alpha-step0-drift.task.md`],
+        timeout: 7200,
+      }
+      : {
+        role: 'beta',
+        label: `batch-${u}`,
+        job: 'scaffolding',
+        covers: [u],
+        brief: 'briefs/beta-scaffold.md',
+        task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
+        timeout: 14400,
+      })),
+    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate(), urlGate(ctx)],
   },
 
   // THE ORCHESTRATOR ROLE IS GONE (owner, 2026-08-16). Every judgment it used

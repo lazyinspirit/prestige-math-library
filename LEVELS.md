@@ -184,6 +184,13 @@ disk state before continuing. Nobody replays its context or repeats its brief.
    two A pages. Merging batches can only remove cross-batch edges.
 4. Report the **cross-batch seam count before spawning**. If the pages have no
    item lists yet the count cannot be computed — say so rather than reporting 0.
+4b. `autopilot plan` also assembles the **design-vs-spec drift evidence**
+   (`<run>-drift-evidence.json`) and writes the review task. The review itself
+   is step 1's `drift` unit — an Alpha reads each pair's design section against
+   the spec closure, applies backward `requires` edges, and records a
+   higher-order edge as blocked; `drift-review-check.mjs` gates step 1 on the
+   report (`ARCHITECTURE.md` §3.11e-3). Caught here, drift is a one-line spec
+   edit; caught at step 4 it is `undeclared-prereq` after the citations exist.
 5. Honour any **owner-directed scope obligation** standing against the next
    build. Such an obligation names a specific frontier pair that the batch
    selection MUST include; it is not a preference to weigh against affinity

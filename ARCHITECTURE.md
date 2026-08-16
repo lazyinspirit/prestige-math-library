@@ -869,6 +869,37 @@ dispatch that could not declare its own units without rewriting its result file.
 Leaving a lane unmapped in a mixed run correctly stalls the stage rather than
 silently passing it.
 
+### 3.11e-3 The step-0 drift review — `drift-review-check.mjs` (2026-08-16)
+
+**Which failure it prevents.** A track design states what a page needs in
+prose; `plan-spec.json` declares it as `requires`. When they disagree, the
+scaffold is built against the design and step 4 rejects it as
+`undeclared-prereq` — after the citations are written. The review is an Alpha
+reading task because three mechanical differs each failed differently: the
+real cases live in prose that never writes a `requires` line (frontier-14's
+`ascoli-arzela`/`compactness`), or in a design that re-routed a whole proof
+through pages the spec never declared (frontier-15's
+`the-fundamental-theorem-of-algebra`, §II.8 of the algebra track — caught at
+step 0, the pair left the run).
+
+**Mechanism.** `autopilot plan` assembles per-page evidence
+(`<run>-drift-evidence.json`: declared `requires`, transitive closure, every
+design line naming the page, nearby out-of-closure page ids) and writes the
+task. Stage 1 owes a `drift` unit alongside its batches — an Alpha
+`verification` dispatch riding the 4-hour scaffold window at zero wall-clock
+cost. The Alpha applies **backward** edges itself (validate-plan gates the
+edit); a higher-order or out-of-spec edge is recorded as
+`VERDICT: drift-blocked`. `drift-review-check.mjs` fails the stage on a
+missing report, an owed A page without exactly one well-formed verdict, or any
+blocked verdict — a blocked edge is a reading-order change, owner-only, and
+the run stops at it. The verdict grammar lives in the task template
+(`bin/autopilot.mts`) and the checker together; change them together.
+
+**History.** Between the engine rewrite and 2026-08-16 the review was a
+never-invoked node: `plan` wrote the task and printed "dispatched as the first
+audit node", no stage dispatched it, no gate read its report. Found because
+frontier-15's step 0 contained exactly the drift class it exists to catch.
+
 ### 3.11f Gate liveness — `gate-liveness.mjs` (2026-08-16)
 
 Every gate reports `0 error(s)`. None distinguishes "checked 400 things, found

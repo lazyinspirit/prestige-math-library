@@ -85,8 +85,15 @@ nohup sh tools/autopilot/bin/watchdog.sh "$PWD" > .autopilot/watchdog.log 2>&1 &
 
 `frontier` lists what is buildable now, in dependency waves, computed from
 publication state on disk. `plan` takes the pairs you chose and packs them into
-batches by prerequisite affinity, writes the manifests, and diffs the design docs
-against the spec — mechanical throughout.
+batches by prerequisite affinity, writes the manifests, and assembles the
+design-vs-spec drift **evidence** — mechanical throughout. Reading that evidence
+is not mechanical: stage 1 dispatches it as its `drift` unit, an Alpha
+verification pass that runs alongside the scaffolds, applies backward
+`requires` edges itself and records a higher-order edge as blocked.
+`tools/drift-review-check.mjs` gates the stage on the report — a missing
+review, an unreviewed page, or a blocked (owner-only) edge fails stage 1. The
+review existed as a task file with no dispatcher and no gate until 2026-08-16;
+frontier-15's step 0 held exactly the drift it would have missed.
 
 `start --detach` refuses to detach if the stage table cannot fail (see below), so
 a spec defect is a message on your terminal rather than a blocker in a log nobody

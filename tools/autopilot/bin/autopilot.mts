@@ -171,6 +171,9 @@ switch (cmd) {
     const evidence = driftEvidence(repo, pages);
     const evPath = join(repo, 'research', `${run}-drift-evidence.json`);
     writeFileSync(evPath, JSON.stringify(evidence, null, 2) + '\n');
+    // The engine dispatches this as the `drift` unit of stage 1, and the
+    // `drift-review` gate parses the report — template and gate share the
+    // VERDICT contract, so change them together (tools/drift-review-check.mjs).
     const taskPath = join(repo, 'research', `${run}-alpha-step0-drift.task.md`);
     writeFileSync(taskPath, [
       `## Step-0 prerequisite drift review — run \`${run}\``,
@@ -181,36 +184,47 @@ switch (cmd) {
       'one-line spec edit.',
       '',
       'This is a reading task and it is given to you rather than to a regex because',
-      'three mechanical versions each failed differently. The real drift found on the',
-      'last run was `ascoli-arzela` missing `compactness`: the topology design says so',
-      'in **prose** — it calls a metric-only restriction "forced, not stylistic"',
-      '*because the compactness page was unbuilt*, and that page has since published —',
-      'and never writes a `requires` line at all. No parser reaches that.',
+      'three mechanical versions each failed differently. Real drift is usually in',
+      'prose that never writes a `requires` line: on frontier-14 the topology design',
+      'called a metric-only restriction "forced, not stylistic" *because the',
+      'compactness page was unbuilt* — and it had since published. On frontier-15,',
+      'step 0 found a design (§II.8 of the algebra track) that had re-routed a whole',
+      'proof through pages the spec never declared. No parser reaches either.',
       '',
       `**Evidence assembled for you:** \`research/${run}-drift-evidence.json\``,
       '',
       'Per page it gives the declared `requires`, the full transitive spec closure,',
       'every design-document line mentioning the page, and every plan page id',
       'appearing near those lines that is NOT already in the closure. The last list is',
-      'raw and noisy on purpose — it is a reading list, not a finding list.',
+      'raw and noisy on purpose — it is a reading list, not a finding list. Read the',
+      'design section it points into, not just the evidence.',
       '',
-      '### What to return',
+      '### What to do with a finding',
       '',
-      `Write \`research/${run}-alpha-step0-drift.md\`. Per page, one of:`,
+      '- **Backward edge** (the missing prerequisite has a LOWER `order`): apply it',
+      '  yourself — edit that page\'s `requires` in `research/plan-spec.json`, run',
+      '  `node tools/validate-plan.mjs research/plan-spec.json`, record the exact edit.',
+      '- **Higher-order or out-of-spec target:** a reading-order change, owner-only.',
+      '  Record it as blocked; edit nothing.',
       '',
-      '- **no drift** — the design asks for nothing the closure lacks. Say what you read.',
-      '- **drift** — name the exact prerequisite, quote the design line that requires it,',
-      '  and say whether the edge points backward (lower `order`) so it is legal to add.',
+      '### Report contract — the gate parses this',
       '',
-      'An edge to a page with a HIGHER order is not addable — say so and stop; that is a',
-      'reading-order change and it is the owner\'s alone.',
+      `Write \`research/${run}-alpha-step0-drift.md\`, one section per A page:`,
       '',
-      'Read the design section, not just the evidence file. The evidence is a pointer.',
+      '    ### <a-page-id>',
+      '    ...what you read: doc, section, the design\'s stated prerequisites...',
+      '    VERDICT: no-drift',
+      '    VERDICT: drift-applied — added <page-id> (order <n>)[, ...]',
+      '    VERDICT: drift-blocked — <the exact edge and why it is not addable>',
+      '',
+      'Exactly one VERDICT line per section. `tools/drift-review-check.mjs` fails the',
+      'stage on a missing section, a malformed verdict, or any drift-blocked — a',
+      'blocked edge stops the run for the owner, which is the point.',
       '',
       '**No permission prompts of any kind**, including inside an `&&` chain.',
     ].join('\n') + '\n');
     console.log(`\nwrote ${evPath.replace(repo + '/', '')}`);
-    console.log(`wrote ${taskPath.replace(repo + '/', '')}  <- drift review, dispatched as the first audit node`);
+    console.log(`wrote ${taskPath.replace(repo + '/', '')}  <- the drift review; stage 1 dispatches it as the \`drift\` unit`);
 
     const covers = {};
     written.forEach((wr: any) => { covers[`beta-batch-${wr.batch}`] = [String(wr.batch)]; });
@@ -219,11 +233,24 @@ switch (cmd) {
     // The scope ledger: what this run owes. Without it, a page removed from a
     // manifest mid-run is invisible to every gate, because they all validate
     // what is present rather than what was promised.
-    try {
+    //
+    // `--force` is FORWARDED, and a failure here fails `plan`. The old shape
+    // forwarded nothing, printed stdout only, and swallowed the writer's
+    // stderr refusal — so a `plan --force` re-scope rewrote every manifest,
+    // left the ledger owing pages the run no longer builds, and reported
+    // success. The scope gate would then have blocked stage 1 hours later,
+    // over a step-0 defect this line was in a position to name immediately.
+    {
       const { spawnSync } = await import('node:child_process');
-      const r = spawnSync('node', ['tools/manifest-integrity.mjs', '--run', run, '--write-ledger'], { cwd: repo, encoding: 'utf8' });
+      const ledgerArgs = ['tools/manifest-integrity.mjs', '--run', run, '--write-ledger'];
+      if (has('force')) ledgerArgs.push('--force');
+      const r = spawnSync('node', ledgerArgs, { cwd: repo, encoding: 'utf8' });
       process.stdout.write((r.stdout ?? '').replace(/^/gm, '  '));
-    } catch (err: any) { console.error(`  could not write the scope ledger: ${err?.message ?? err}`); }
+      process.stderr.write((r.stderr ?? '').replace(/^/gm, '  '));
+      if (r.status !== 0) {
+        die(`plan: the scope-ledger step failed (exit ${r.status}). The ledger is what makes scope loss visible; not printing "Next:" over a stale one.`);
+      }
+    }
     console.log(`\nNext: write the per-batch task files, then \`autopilot start --run ${run} --detach\``);
     break;
   }
