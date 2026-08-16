@@ -19,7 +19,7 @@ faithful, is this scaffold thin, is this blocker real — none decidable, all
 model.
 
 This is enforced, not documented: every dispatch declares a `job`, and
-`src/roles.mjs` refuses to start one whose job is mechanical. The reason it is a
+`src/roles.mts` refuses to start one whose job is mechanical. The reason it is a
 hard check is that the failure is quiet — handing a model a mechanical task
 does not error, it returns a plausible answer and is wrong at a rate nobody
 measures.
@@ -159,7 +159,7 @@ Point it at Claude Code, Codex, pi, opencode, or a pipeline's own dispatcher.
 A project that already owns a dispatcher — model lineup, sandbox policy, auth
 rotation, result-record format — keeps it; the engine drives it unchanged.
 
-The domain-specific surface is **one file**: `stages/mathlib.mjs`. Porting to
+The domain-specific surface is **one file**: `stages/mathlib.mts`. Porting to
 another project means writing another one.
 
 ## What it refuses to do
@@ -207,7 +207,7 @@ running. Seven defects surfaced that no fake-pipeline test could have.
 **Four invented command-line flags.** `step8-guard --run`, `judge-sweep --run`,
 `merge-proof-contracts --run` and `touchlog --snapshot --label --out` were all
 written from memory and none exists. Each would have failed hours into an
-unattended run, in a stage nobody was watching. `test/signatures.test.mjs` now
+unattended run, in a stage nobody was watching. `test/signatures.test.mts` now
 checks every flag the stage table passes against the tool receiving it.
 
 **Anchored result patterns.** A caller whose label already contains the role
@@ -248,15 +248,15 @@ watchdog honours — without it, stopping is impossible, because the two fight.
 ## Layout
 
 ```
-bin/autopilot.mjs      CLI
-src/executor.mjs       the loop — the only thing that decides transitions
-src/coverage.mjs       units owed, units covered
-src/gates.mjs          gate runner, and the vacuity check
-src/roles.mjs          which jobs a model may be given
-src/state.mjs          durable state, crash-resume
-src/control.mjs        owner intervention channel
-src/reporter.mjs       events.jsonl + status.md + the 20-minute heartbeat
-src/frontier.mjs       wave computation, batch packing, design-vs-spec drift
-src/adapters/exec.mjs  the one platform-specific function
-stages/mathlib.mjs     the domain: steps 0 → 10 for prestige-math-library
+bin/autopilot.mts      CLI
+src/executor.mts       the loop — the only thing that decides transitions
+src/coverage.mts       units owed, units covered
+src/gates.mts          gate runner, and the vacuity check
+src/roles.mts          which jobs a model may be given
+src/state.mts          durable state, crash-resume
+src/control.mts        owner intervention channel
+src/reporter.mts       events.jsonl + status.md + the 20-minute heartbeat
+src/frontier.mts       wave computation, batch packing, design-vs-spec drift
+src/adapters/exec.mts  the one platform-specific function
+stages/mathlib.mts     the domain: steps 0 → 10 for prestige-math-library
 ```

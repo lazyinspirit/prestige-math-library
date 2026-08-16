@@ -18,7 +18,7 @@
 #   nohup sh bin/watchdog.sh <repo> > <repo>/.autopilot/watchdog.log 2>&1 &
 
 REPO="${1:-$PWD}"
-AUTOPILOT="$(cd "$(dirname "$0")" && pwd)/autopilot.mjs"
+AUTOPILOT="$(cd "$(dirname "$0")" && pwd)/autopilot.mts"
 STATE="$REPO/.autopilot"
 INTERVAL="${WATCHDOG_INTERVAL:-60}"
 MAX_FAILS="${WATCHDOG_MAX_FAILS:-5}"
@@ -44,13 +44,13 @@ while true; do
 
   # `comm` is the reliable field. Matching on args alone also matches this
   # script's own shell, which reads as "already running" forever.
-  alive=$(ps -eo comm,args | awk '/autopilot\.mjs start/ && $1 !~ /awk|sh$/' | wc -l | tr -d ' ')
+  alive=$(ps -eo comm,args | awk '/autopilot\.mts start/ && $1 !~ /awk|sh$/' | wc -l | tr -d ' ')
 
   if [ "$alive" = "0" ]; then
     log "engine not running — starting it"
     ( cd "$REPO" && nohup node "$AUTOPILOT" start --repo "$REPO" >> "$STATE/autopilot.log" 2>&1 & )
     sleep 10
-    again=$(ps -eo comm,args | awk '/autopilot\.mjs start/ && $1 !~ /awk|sh$/' | wc -l | tr -d ' ')
+    again=$(ps -eo comm,args | awk '/autopilot\.mts start/ && $1 !~ /awk|sh$/' | wc -l | tr -d ' ')
     if [ "$again" = "0" ]; then
       FAILS=$((FAILS + 1))
       log "RESTART FAILED ($FAILS/$MAX_FAILS) — engine did not come up; see $STATE/autopilot.log"

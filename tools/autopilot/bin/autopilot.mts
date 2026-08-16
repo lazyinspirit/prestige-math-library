@@ -14,7 +14,7 @@
 //   autopilot start --run frontier-15 --detach  # steps 1..10, autonomous
 //   autopilot status                            # any time, from anywhere
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, rmSync, openSync, closeSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -45,7 +45,7 @@ function loadConfig(): Config {
     repo,
     stateDir,
     dispatchDir: null,
-    stages: join(HERE, '..', 'stages', 'mathlib.mjs'),
+    stages: join(HERE, '..', 'stages', 'mathlib.mts'),
     // The one platform-specific setting. Point it at whatever starts an agent.
     // An ARRAY, not a string: a string has to be parsed, and every attempt to
     // parse one here produced a quoting defect.
@@ -244,11 +244,18 @@ switch (cmd) {
       }
     }
     if (has('detach')) {
-      const args = [join(HERE, 'autopilot.mjs'), 'start', '--repo', repo, ...(run ? ['--run', run] : [])];
+      // Spawn THIS script, by its own resolved path — a hardcoded sibling name
+      // once pointed at a file that did not exist, and with stdio ignored the
+      // child died instantly while this parent printed a pid and "running".
+      // The child's stdio goes to the log so a failed start leaves evidence.
+      const self = fileURLToPath(import.meta.url);
+      const args = [self, 'start', '--repo', repo, ...(run ? ['--run', run] : [])];
       mkdirSync(stateDir, { recursive: true });
       const out = join(stateDir, 'autopilot.log');
-      const child = spawn(process.execPath, args, { detached: true, stdio: ['ignore', 'openSync' in globalThis ? 'ignore' : 'ignore', 'ignore'] });
+      const fd = openSync(out, 'a');
+      const child = spawn(process.execPath, args, { detached: true, stdio: ['ignore', fd, fd] });
       child.unref();
+      closeSync(fd);
       appendFileSync(out, `[${new Date().toISOString()}] detached pid ${child.pid}\n`);
       console.log(`autopilot running detached, pid ${child.pid}`);
       console.log(`  status:  autopilot status --repo ${repo}`);
