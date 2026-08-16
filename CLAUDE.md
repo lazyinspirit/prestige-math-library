@@ -29,8 +29,8 @@ ever publishes: step 10 / A10 is the sole owner pause.
 
 1. **Author as `status: draft`** per SCHEMA.md. Session-authored content is
    `origin: session`; never fabricate scraped sources (use `references`). Every
-   mathematical-content item declares separate reader-facing
-   statement/construction and proof/verification provenance.
+   mathematical-content item declares separate statement/construction and
+   proof/verification provenance.
 2. **Precheck (mechanical, free)**, from the repo root:
    `node tools/tsx-run.mjs tools/precheck.mts`. Bare = all items, or pass
    specific files. On REPAIR output, adopt the printed canonical stratification
@@ -72,7 +72,7 @@ account is **never** wired into the worker service.
 | `audit-refuter` | DeepSeek V4 Pro | direct API, `max` (its spelling of `xhigh`), tool-less |
 | paired judges, build and audit | DeepSeek V4 Pro + GPT 5.6 Terra | `JUDGE_LINEUP=deepseek+terra` |
 
-**Binding for this and every future session** (owner, 2026-07-31 Sol default;
+**Binding for every future session** (owner, 2026-07-31 Sol default;
 2026-08-10 build Alpha; 2026-08-08 audit lineup). Where a launcher exposes a
 context-window field, set it to `1000000`; never silently substitute another
 model or a smaller window. `tools/dispatch.mjs` is the mechanical expression of
@@ -150,7 +150,7 @@ Terra. Read-only is enforced per runner, never by asking:
   Beta scaffolds and authors at most **two A/B pairs**, enforced by
   `content-policy.mjs --manifest-only`. The **beta and reader lane caps are 9**:
   the alpha cap is 3 and each group Alpha owns ≤3 batches, so a run may carry
-  nine, and a cap of 5 throttled the widest legal run for no stated reason.
+  nine; 5 throttled the widest legal run.
 
 - **Step-5/6 ownership (owner, 2026-07-31).** The Betas that scaffolded the
   batches personally author all Step-5 content after Step 4, and at Step 6 are
@@ -168,24 +168,22 @@ Terra. Read-only is enforced per runner, never by asking:
 - **Alpha reviews scaffold breadth and depth at step 3 (owner, 2026-08-11).**
   Alpha is spawned at **step 3**, not step 4. It reads every pair's
   `.pages.json`, `.notes.md` and `.coverage.json` together and returns a
-  `sufficient` / `insufficient` verdict per pair in
+  `sufficient`/`insufficient` verdict per pair in
   `research/<run>-alpha-<g>-step3-scaffold-review.md`, naming for each
-  `insufficient` the exact results to add and the source that carries them.
-  The `3-fix` stage routes findings to the owning Beta mechanically, and the
-  `3-recheck` gate will not clear while any pair is `insufficient`, so step 4
-  cannot splice past an unfixed finding. **Alpha may also repair the scaffold
-  itself** (owner, 2026-08-16): the older no-edit rule existed because two
-  writers on one batch file overwrite each other, and the stage barrier removed
-  that — no Beta runs while step 3 does. Step 3 is the last point where thinness
-  costs a scaffold edit rather than a rewrite. **Group Alphas (owner, 2026-08-14):** one Alpha per **≤3 batches** at
+  `insufficient` the exact results to add and the source carrying them. The
+  `3-fix` stage routes findings to the owning Beta, and the `3-recheck` gate will
+  not clear while any pair is `insufficient`, so step 4 cannot splice past an
+  unfixed finding. **Alpha may also repair the scaffold
+  itself** (owner, 2026-08-16): the older no-edit rule existed because two writers
+  on one batch file overwrite each other, and the stage barrier removed that. Step
+  3 is the last point where thinness costs a scaffold edit, not a rewrite. **Group Alphas (owner, 2026-08-14):** one Alpha per **≤3 batches** at
   step 3 and 6a/6b (`dispatch.mjs` alpha cap 3), outputs namespaced. The **lead
   Alpha** alone owns steps 4, 6c, 8, 9, the receipts and step 10 — one prose
-  writer, one global citation reader, one exact-hash ledger. `ARCHITECTURE.md`
-  §6. **Step 4's splice is not Alpha's**: `tools/splice-plan.mjs` transcribes ids
+  writer, one citation reader, one exact-hash ledger. `ARCHITECTURE.md` §6. **Step 4's splice is not Alpha's**: `tools/splice-plan.mjs` transcribes ids
   mechanically and refuses on a `requires` disagreement, a differing item list,
   an oversize page or a duplicate id — the refusal is what Alpha adjudicates.
 
-- **Alpha repairs wrong mathematics (owner, 2026-08-16).** At steps 3, 6 and 8 a
+- **Alpha repairs wrong mathematics (owner, 2026-08-16).** At steps 6 and 8 a
   wrong proof is Alpha's to fix, not to report. Four repairs are authorised and
   Alpha picks whichever the defect needs: **rewrite part of the proof**, **write
   the whole proof** where its construction rather than its wording is wrong,
@@ -194,10 +192,12 @@ Terra. Read-only is enforced per runner, never by asking:
   proof runs longer than expected. If none closes the defect honestly, narrow or
   withdraw the claim; never inflate a dependency. The *stage* is what is
   bounded — step 8 needs a `confirmed_fatal` row first — and inside that licence
-  all four are open and uncapped. `frontier-14` shipped two true theorems whose
+  all four are open and uncapped. **At step 3 only the last two apply**: no proof
+  exists, so Alpha infers the route from `title`, `strategy` and `deps` and
+  decides whether it can close. `frontier-14` shipped two true theorems whose
   proofs did not establish them, declared as blockers because "a proof rewrite is
-  authoring" was read as a prohibition rather than as a description of which
-  repair was needed.
+  authoring" was read as a prohibition rather than as a description of which repair
+  was needed.
 
 - **Alpha adjudicates judges, and the 30-second threshold (owner, 2026-07-31).**
   Alpha is the sole adjudicator of a paired-judge rejection: it reads the frozen
@@ -324,8 +324,8 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   `WORKFLOW.md` §"Self-contained scope".
 
 - **Scaffold richness (owner, 2026-07-30).** Beta decomposes long proofs into
-  focused lemmas and makes a pass for useful, cheaply proved corollaries. Never
-  pad; never drop valuable results for ergonomics.
+  focused lemmas and makes a pass for cheaply proved corollaries. Never pad; never
+  drop valuable results for ergonomics.
 
 - **Source-grounded, dependency-closed scaffolding (owner, 2026-07-30; dependency
   provenance order 2026-08-01).** Before scaffolding, Beta searches reputable
@@ -414,7 +414,7 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   filler ("Null definition:", "the key bridge says"). In every `[F#]`, `[A#]` or
   `[L#]` state the cited proposition itself: quote it exactly when practical,
   else the smallest faithful shortening — no changed domain, quantifier,
-  hypothesis, direction or conclusion, no invented converse. **A clause's
+  hypothesis, direction or conclusion; no invented converse. **A clause's
   opening words are not a citation**; never substitute a summary of what it is
   "for". If a dependency appears insufficient, do not inflate its restatement or
   add an unused edge: add inline proof steps, reconsider the strategy, or

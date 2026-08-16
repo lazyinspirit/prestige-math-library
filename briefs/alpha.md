@@ -69,8 +69,8 @@ description of what a result is for.**
 
 ## Your repair authority (owner, 2026-08-16)
 
-**A wrong proof is yours to fix, at steps 3, 6 and 8.** Reporting it and moving on
-is not a disposition. Four repairs are explicitly authorised, and you choose
+**A wrong proof is yours to fix, at steps 6 and 8.** Reporting it and moving on is
+not a disposition. Four repairs are explicitly authorised, and you choose
 whichever the defect actually needs:
 
 1. **Rewrite part of the proof** — the failing step, the wrong construction, the
@@ -95,6 +95,11 @@ all four repairs are open and uncapped. `frontier-14` ended with two true theore
 whose proofs did not establish them, declared as blockers and left in the level,
 because "a proof rewrite is authoring" was read as a prohibition. It is not — it
 is a description of which of the four you are doing.
+
+**At step 3 only (3) and (4) apply, because no proof exists yet.** What you have
+is a `title`, a `kind`, a `deps` list, and — on some items — a prose `strategy`.
+Your job there is to **infer the proof from what is available** and decide whether
+that route can close. Details in the step-3 section below.
 
 Whatever you repair, you own its gates: `precheck` on the item, `depcheck`,
 `citecheck`, and a regenerated contract entry if you changed a cited clause.
@@ -212,19 +217,46 @@ the owning Beta, and the re-check will not clear until every pair is
 `sufficient`, so an unfixed finding holds the build rather than passing quietly
 into step 4.
 
-**You may repair the scaffold yourself here** (owner, 2026-08-16). The older rule
-said you edit no batch file, and its reason was that two writers on one file
-overwrite each other silently. That reason is gone: stages are strictly
-sequential and nothing dispatches while another stage has work in flight, so no
-Beta is running while you are. Where a *planned* Statement or Definition is
-wrong, correct it; where a planned proof strategy will not close, say so and add
-the intermediate lemmas it needs. Prefer routing genuine breadth work to the
-owning Beta — it holds the sources — and repair directly when the defect is a
-false claim rather than a gap.
+### Infer the proof — there is no proof to read yet
 
-The four repairs above apply here to the *plan*: a wrong statement is wrong
-before it is authored, and this is the last point where fixing it costs a
-scaffold entry instead of a rewrite.
+**No proof exists at step 3**, so the two proof-rewriting repairs do not apply
+here. What each item gives you is a `title`, a `kind`, a `deps` list, and — on
+some items — a prose `strategy`. That is enough to reconstruct the intended
+argument, and reconstructing it is the job.
+
+For every non-trivial item, read `title`, `strategy` and `deps` **together** and
+ask whether that route actually closes:
+
+1. **Do the `deps` carry the route?** Open each one. A strategy that needs
+   completeness, a choice principle, a finiteness hypothesis or a
+   size/class distinction that no listed dependency supplies is a route that
+   cannot close. Name the missing dependency — that is the finding.
+2. **Does the strategy skip a move?** Where it jumps from one substantive step to
+   another, the gap is where the intermediate lemma belongs. **Insert it** — that
+   is repair (4), and it is why long proofs get decomposed before anyone writes
+   them rather than after.
+3. **Does the title claim more than the strategy delivers?** This is repair (3)
+   and it is the cheapest it will ever be. A title or Statement asserting more
+   than its proof gives is fatal later and invisible to the judges, who read
+   Statements and cannot see a false title.
+4. **Is there no `strategy` at all on a substantive theorem?** That is itself a
+   finding: nobody has yet checked that the result is reachable from what the
+   page has.
+5. **Would the proof be long?** Say so and name the decomposition. A single
+   theorem where the source proves four lemmas is depth loss even when nothing is
+   missing.
+
+You are not writing the proof. You are deciding whether the Beta who returns as
+its author can, from exactly what the scaffold gives them.
+
+**You may repair the scaffold yourself** (owner, 2026-08-16). The older rule said
+you edit no batch file, and its reason was that two writers on one file overwrite
+each other silently. That reason is gone: stages are strictly sequential and
+nothing dispatches while another stage has work in flight, so no Beta runs while
+you do. Correct a wrong planned Statement, and insert the intermediate lemmas a
+route needs. Prefer routing genuine *breadth* work to the owning Beta — it holds
+the sources — and repair directly when the defect is a false claim or a broken
+route rather than a missing topic.
 
 Be specific. "Could be deeper" is not a finding; "the orbit–stabiliser theorem is
 absent and Brosnan §0035, already in the ledger, proves it" is.
