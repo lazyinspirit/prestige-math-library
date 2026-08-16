@@ -473,7 +473,15 @@ function finish() {
   else {
     for (const outcome of outcomes) console.log(`${outcome.ok ? 'PASS' : 'FAIL'} [${outcome.id}] ${outcome.check}: ${outcome.summary}`);
     for (const error of errors) console.error(`ERROR ${error.code}${error.id ? ` [${error.id}]` : ''}: ${error.message}`);
-    console.log(`finite-smoke: ${errors.length} error(s), ${outcomes.length} check(s)`);
+    // The coverage ratio is the honest half of the count: "1 check" over 291
+    // items read exactly like "291 checks" to a bare floor, and 1/291 is what
+    // the real frontier-14 contracts carried. The ratio does not gate here —
+    // whether a proof ADMITS a bounded countermodel search is a judgment, and
+    // a quota invites padding — but it is now visible to every reader.
+    const scoped = Array.isArray(document?.scope) ? ids.length : 0;
+    const withChecks = Array.isArray(document?.scope)
+      ? ids.filter((id) => (document.contracts?.[id]?.finite_smoke ?? []).length).length : 0;
+    console.log(`finite-smoke: ${errors.length} error(s), ${outcomes.length} check(s) over ${withChecks}/${scoped} item(s) carrying obligations`);
   }
   process.exit(errors.length ? 1 : 0);
 }

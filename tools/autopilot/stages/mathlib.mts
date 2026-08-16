@@ -147,7 +147,11 @@ const urlGate = (ctx) => gate('url-liveness', [
   'node', 'tools/url-sweep.mjs', '--coverage',
   ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`),
   '--out', `research/${ctx.run}-url-liveness.json`, '--recover', '--fail-on-dead',
-]);
+], {
+  // Zero collected URLs prints "0/0 live" and exits 0 — a coverage selection
+  // gone wrong (wrong run name, empty files) must not pass as a sweep.
+  liveness: { pattern: /\/(\d+) live/.source, min: 1, unit: 'URLs collected' },
+});
 
 // ---------------------------------------------------------------------------
 // THE QUALITY-CONTROL GATES, AND WHY THEY ARE HERE NOW

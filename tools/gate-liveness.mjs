@@ -27,8 +27,10 @@
 //
 //   node tools/gate-liveness.mjs --run frontier-14 --contracts <merged.json>
 //        --checklists <a.coverage.json,b.coverage.json> [--min-checks 1] [--json]
+//        [--allow-missing]
 //
-// Any gate whose inputs do not exist is reported as `skipped`, never as passed.
+// Any gate whose inputs do not exist is reported as `skipped` — and skipped is
+// a FAILURE unless --allow-missing says the artifacts do not exist yet.
 
 import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
@@ -54,6 +56,11 @@ const contracts = flag('contracts');
 const checklists = list('checklists');
 const minChecks = Number(flag('min-checks', '1'));
 const asJson = argv.includes('--json');
+// A skipped probe used to be excluded from the exit code — so a wrong --run
+// value produced three skips, one whole-repo precheck count, and exit 0: the
+// meta-gate passing vacuously. Missing inputs are a failure unless the caller
+// says the artifacts genuinely do not exist yet.
+const allowMissing = argv.includes('--allow-missing');
 
 if (!run) {
   console.error('usage: node tools/gate-liveness.mjs --run <name> [--contracts <merged.json>]');
@@ -140,9 +147,12 @@ if (asJson) {
   }
   if (vacuous.length) console.log(`\n${vacuous.length} gate(s) reported a result over an empty scope. Fix the scope, not the gate.`);
   if (unparsed.length) console.log(`\n${unparsed.length} gate(s) could not be read. Treat as unknown, never as passed.`);
-  if (skipped.length && !vacuous.length && !unparsed.length) {
-    console.log(`\n${skipped.length} gate(s) skipped for missing inputs — expected before the artifacts they read exist.`);
+  if (skipped.length) {
+    console.log(allowMissing
+      ? `\n${skipped.length} gate(s) skipped for missing inputs — allowed by --allow-missing.`
+      : `\n${skipped.length} gate(s) skipped for missing inputs — an ERROR: a probe that cannot run `
+        + 'is not a probe that passed. Pass --allow-missing only when the artifacts genuinely do not exist yet.');
   }
 }
 
-process.exit(vacuous.length || unparsed.length ? 1 : 0);
+process.exit(vacuous.length || unparsed.length || (skipped.length && !allowMissing) ? 1 : 0);
