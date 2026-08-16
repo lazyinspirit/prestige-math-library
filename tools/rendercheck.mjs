@@ -352,6 +352,14 @@ for (const path of targets) {
     );
 }
 
+// A rendercheck without the renderer's own KaTeX and YAML runs the easy half
+// and skips the two defect classes it exists for — a formula that dies in the
+// real renderer, and a frontmatter error that 404s a published page. This used
+// to be a "(SKIPPED: …)" note inside the OK message with exit 0: a green gate
+// with its real checks disabled, invisible to an engine that reads exit codes.
+if (!katex) errors.push({ code: "katex-unavailable", file: "(setup)", msg: `KaTeX could not be loaded: ${katexWhy}` });
+if (!YAML) errors.push({ code: "yaml-unavailable", file: "(setup)", msg: `the renderer's YAML parser could not be loaded: ${yamlWhy}` });
+
 // ------------------------------------------------------------------ report
 if (asJson) {
   console.log(JSON.stringify({ errors, warnings, checked: targets.length }, null, 2));
@@ -369,8 +377,7 @@ if (asJson) {
     console.log(
       `\nOK — ${targets.length} file(s): no wikilink inside math, no nested or unbalanced` +
         `\ndelimiters, no multiline display block, every math span parses under the real` +
-        `\nKaTeX${katex ? "" : " (SKIPPED: " + katexWhy.slice(0, 60) + ")"}, and every frontmatter block parses under the renderer's` +
-        `\nYAML parser${YAML ? "" : " (SKIPPED: " + yamlWhy.slice(0, 60) + ")"}.`,
+        `\nKaTeX, and every frontmatter block parses under the renderer's YAML parser.`,
     );
   }
 }
