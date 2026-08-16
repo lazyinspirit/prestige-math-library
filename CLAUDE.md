@@ -172,14 +172,14 @@ Terra. Read-only is enforced per runner, never by asking:
   itself** (owner, 2026-08-16): the older no-edit rule existed because two writers
   on one batch file overwrite each other, and the stage barrier removed that. Step
   3 is the last point where thinness costs a scaffold edit, not a rewrite.
-  **Group Alphas (owner, 2026-08-14; assignment judged 2026-08-16):** one Alpha per
-  **≤3 batches** at step 3 and 6a/6b, outputs namespaced. **Which batches** is
-  decided at stage `2-assign` by an Alpha and validated by
-  `alpha-groups.mjs`: minimise what crosses a group boundary, and **never split a
-  category that fits inside one Alpha** — a hard gate error. The **lead Alpha**
-  alone owns steps 4, 6c, 8, 9, the receipts and step 10. `ARCHITECTURE.md` §6. **Step 4's splice is not Alpha's**: `tools/splice-plan.mjs` transcribes ids
-  mechanically and refuses on a `requires` disagreement, a differing item list, an
-  oversize page or a duplicate id — the refusal is what Alpha adjudicates.
+  **Group Alphas (owner, 2026-08-14; assignment judged 2026-08-16):** one Alpha
+  per **≤3 batches** at step 3 and 6a/6b, outputs namespaced. **Which batches**
+  is decided at stage `2-assign` by an Alpha and validated by
+  `alpha-groups.mjs`, which **never lets a category that fits inside one Alpha be
+  split** — a hard gate error. The **lead Alpha** alone owns steps 4, 6c, 8, 9,
+  the receipts and step 10. **Step 4's splice is not Alpha's**:
+  `tools/splice-plan.mjs` transcribes ids mechanically and its refusal is what
+  Alpha adjudicates. `LEVELS.md` §Actors, §"Step 4"; `ARCHITECTURE.md` §6.
 
 - **Alpha repairs wrong mathematics (owner, 2026-08-16).** At steps 6 and 8 a
   wrong proof is Alpha's to fix, not to report. Four repairs are authorised and
@@ -201,9 +201,8 @@ Terra. Read-only is enforced per runner, never by asking:
   Alpha is the sole adjudicator of a paired-judge rejection: it reads the frozen
   verdict and the current disk text, records `confirmed_fatal` /
   `confirmed_nonfatal` / `false_positive`, and applies any permitted repair. The
-  engine runs the gates and owns the rejudge: `level-coverage --judge-only` writes
-  `research/<run>-judge-closure.json` and `8-rejudge` sweeps the ids in
-  `needs_rejudge`. **Every rejection is adjudicated, not the interesting ones** —
+  engine runs the gates and owns the rejudge (`level-coverage --judge-only`;
+  `ARCHITECTURE.md` §5). **Every rejection is adjudicated, not the interesting ones** —
   `step8-guard` checks only that edits were licensed; the closure gate checks the
   other direction, that rejections were answered.
   A gap between proof steps a competent reader closes in **30 seconds is
@@ -232,11 +231,8 @@ Terra. Read-only is enforced per runner, never by asking:
   deliberately uncapped:** a proof that keeps yielding real fatal defects is
   either converging on correctness or is false, and both must run to conclusion.
   The twice-touched escalation stays advisory.
-  *Mechanism:* adjudication rows carry `item_sha256` (normalized text,
-  verification block excluded); the engine snapshots `pre-step8` (`touchlog.mjs`,
-  its own stage), and `tools/step8-guard.mjs` licenses every later edit against a
-  `confirmed_fatal` row (`nonfatal-edit`, `judge-adjudication-unhashed`). Pre-R1
-  ledgers lack the hash and are published, not re-gated. `LEVELS.md` §"Step 8".
+  Exact-hash rows, the engine's `pre-step8` baseline and the guard that licenses
+  every later edit against them: `LEVELS.md` §"Step 8".
 
 - **Step-10 fatal-error report and sole pause (owner, 2026-07-31).** Step 9 does
   not pause the build. At the end of step 10 the lead Alpha accounts for every
@@ -257,13 +253,11 @@ Terra. Read-only is enforced per runner, never by asking:
 
 At step 7, run `deepseek-v4-pro` with `gpt-5.6-terra` through `tools/judge.mts`,
 selected by `JUDGE_LINEUP=deepseek+terra` — the default in `judge.mts`,
-`judge-sweep.mjs`, `level-coverage.mjs` and the audit driver. DeepSeek reads
-`DEEPSEEK_API_KEY` from the environment or the app repo's `.env`, located by
-`tools/paths.mjs`; Terra is a fresh ephemeral Codex process in an empty temporary
-working directory, read-only, `xhigh`, explicit 1,000,000-token window, so the
-frozen prompt is its only context. `--parallel` runs both lanes on a
-byte-identical frozen prompt and preserves the injection-test record. Both read
-proofs and dependency citations as adversarial refuters.
+`judge-sweep.mjs`, `level-coverage.mjs` and the audit driver. Terra is a fresh
+ephemeral Codex process in an empty temporary working directory, read-only,
+`xhigh`, explicit 1,000,000-token window, so the frozen prompt is its only
+context. Both lanes read one byte-identical frozen prompt, as adversarial
+refuters of proofs and dependency citations (`ARCHITECTURE.md` §5).
 
 **The judge's context unit is the A/B PAIR:** the item's page and its
 `-examples` companion in full, plus exactly the pages that page declares in
@@ -453,12 +447,11 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   nonempty-choice and both iff-direction cases. **A templated `not_applicable`
   boundary row is not a disposition** — `--strict` checks only that the eight are
   present; on `frontier-13` two false template rows each hid a fatal defect, and on
-  `frontier-14` three did. `boundary-audit.mjs --fail-on-contradicted` clusters
-  reused rationales; `citation-fidelity.mjs --fail-on-missing-quote` catches a fact
-  that widens what it cites.
+  `frontier-14` three did. `boundary-audit.mjs` and `citation-fidelity.mjs` close
+  that class (`ARCHITECTURE.md` §3.11g).
   The engine gates all of this: `merge-proof-contracts.mjs` first (a merge that
   fails means nothing below it claims to have passed over a stale file), then
-  `proof-contract --strict`, `finite-smoke`, `risk-report`, the two audits above
+  `proof-contract --strict`, `finite-smoke`, `risk-report`, those two detectors
   and `gate-liveness`, after Step 5 and again after Step-6 repairs. Finite smoke
   tests are bounded countermodel searches, never general proofs. A high/critical
   risk result routes the item to an additional Alpha proof-refuter and requires an

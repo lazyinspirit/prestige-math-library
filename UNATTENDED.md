@@ -41,7 +41,7 @@ job is one of them.
 | `tools/dispatch.mjs` | spawns one briefed agent role as a plain process |
 | `tools/preflight.mjs` | can this machine run a build at all. **Run it before every long build** |
 | `tools/slots.mjs` | cross-process concurrency pools for the judge lanes |
-| `tools/paths.mjs` | resolves the app repo for the DeepSeek key |
+| `tools/paths.mjs` | resolves the app repo, and with it the `.env` that a `DEEPSEEK_API_KEY` not already in the environment is read from (`DEEPSEEK_ENV_FILE` overrides) |
 
 Configuration is `autopilot.config.json` at the repo root — the run name, the
 concurrency and report cadence, and **one platform-specific setting**: the argv

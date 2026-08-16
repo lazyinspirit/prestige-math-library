@@ -419,8 +419,9 @@ recommendations itself before reviewing breadth and depth.
 
 **Group Alphas (owner, 2026-08-14).** Divide the run's batches among Alphas at
 **at most three batches each** and dispatch them together — the `alpha` lane cap
-is 3. A group Alpha reads only its own batches. Nothing is shared: at this stage
-Alpha edits no batch file at all, and each writes its own
+is 3. A group Alpha reads only its own batches, and touches a batch file only
+within them (see the direct-repair licence below). Nothing else is shared: each
+writes its own
 `research/<run>-alpha-<g>-step3-scaffold-review.md` plus a machine-readable
 `-step3-verdicts.json`, which `tools/scaffold-verdicts.mjs` merges into the run's
 scaffold-closure receipt. This exists because one Alpha reading a whole level's scaffolds is the
@@ -439,7 +440,7 @@ faithful to the sources at their stated locators; are the declines real now that
 a missing prerequisite must be **built** rather than declined; is the B page a
 real examples development; is the proof decomposition honest; does the pair need
 splitting at 60 items. Output is
-`research/<run>-alpha-step3-scaffold-review.md`, a `sufficient` /
+`research/<run>-alpha-<g>-step3-scaffold-review.md`, a `sufficient` /
 `insufficient` verdict per pair with the exact results to add and the source
 that carries them. The `3-fix` stage routes findings to the owning Beta
 mechanically, and the `3-recheck` gate will not clear while any pair is still
@@ -457,9 +458,17 @@ reader did. `briefs/alpha.md` §"Stage 0".
 
 ## Step 4 — Splice and propagate (mechanical + lead Alpha)
 
-Splice the Beta outputs into `plan-spec.json`. The splice keeps `plan-spec`'s
-page metadata but takes the **union of `requires`** (Beta computes the closure
-`validate-plan` demands), logs every disagreement, and hard-fails on an id clash.
+**The splice is not Alpha's.** `tools/splice-plan.mjs` transcribes the Beta
+manifests' item lists into `plan-spec.json` mechanically, keeping `plan-spec`'s
+page metadata, and refuses rather than guessing — on a problem it writes nothing
+and names every one. It refuses when the manifest declares a `requires` edge the
+plan does not, because adding a prerequisite is an adjudication and not a
+transcription; when a page already carries a *different* spliced item list, which
+needs the explicit `--update` that logs the delta id by id; when an A page exceeds
+the 60-item ceiling, which must be split before authoring; and on a duplicate item
+id anywhere in the plan, which would be a silent corruption. **The refusal is what
+Alpha adjudicates.**
+
 **Alpha-n was spawned at step 3** (owner, 2026-08-11; it used to be spawned
 here) and resumes now to apply the `.notes.md` amendments into higher-level
 prose scaffolds — one writer, so no silent overwrite. Do not splice a pair Alpha
@@ -854,7 +863,9 @@ real fatal defects is either converging toward correctness or is actually false.
 
 Every adjudication row carries `item_sha256`, the full sha256 of the normalized
 item text (verification block excluded) at adjudication time. Snapshot the
-baseline immediately before adjudicating, then gate the stage:
+baseline immediately before adjudicating — the engine takes it as its own
+`8-baseline` stage, for the reason `4-baseline` exists: taken afterwards it
+licenses whatever happened. Then gate the stage:
 
 ```
 node tools/touchlog.mjs snap research/<run>-touches.json "pre-step8"
@@ -878,7 +889,9 @@ while step 8 is still in progress.
 `judge-adjudication-unhashed` names a row that cannot license anything because
 it records no text state. The guard is scoped to that explicit baseline window,
 so a later legitimate stage — a step-9 scope-denial repair, an owner-directed
-change — is never mistaken for a nonfatal polish.
+change — is never mistaken for a nonfatal polish. Ledgers predating R1 carry no
+`item_sha256` at all and so can license nothing; those levels are published as
+they stand rather than re-gated.
 
 Any Step-8 public-interface repair also re-runs `impact-audit.mjs`; regenerate
 the audit receipt and repeat the final `level-coverage.mjs

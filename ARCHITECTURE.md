@@ -893,7 +893,8 @@ rationales by normalised text; and *contradicted disposition*, a row marked
 scoped to the section it is entitled to read — the biconditional detector reads
 the **Statement**, not the whole body, because a `[L#]` line in Facts quotes
 *someone else's* biconditional. Unscoped it produced 256 hits and the first
-inspected was a false positive; scoped, 25. Advisory, not blocking.
+inspected was a false positive; scoped, 25. Advisory by default;
+`--fail-on-contradicted` and `--fail-on-template` make each signal blocking.
 
 **`citation-fidelity.mjs`** — the largest confirmed-fatal class, ten of
 twenty-five step-8 rows. Two checks: *quote-not-found*, where the contract's
