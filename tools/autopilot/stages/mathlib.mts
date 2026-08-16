@@ -98,6 +98,19 @@ const coverageGates = (ctx) => batches(ctx).map((b: any) =>
 const policyGates = (ctx) => batches(ctx).map((b: any) =>
   gate(`policy-${b}`, ['node', 'tools/content-policy.mjs', '--manifest-only', `research/${ctx.run}-batch-${b}.pages.json`]));
 
+/** Item mode — the other half of content-policy, and the only enforcement of
+ *  applied-iota notation, provenance ENUM validity (level-coverage checks
+ *  presence only), reader-visible source URLs, generated-claim containment and
+ *  the external_dependency record. `--manifest-only` guards all of that behind
+ *  `if (!manifestOnly)`, so a pipeline that only ever passes the flag performs
+ *  none of it — which is what this engine did until 2026-08-16. Scope comes
+ *  from the manifests, so the legacy corpus is not retro-flagged; runs only
+ *  after step 5, when the item files exist. */
+const policyItemGate = (ctx) => gate('content-policy-items', ['node', 'tools/content-policy.mjs',
+  ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
+  liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
+});
+
 const planGate = () => gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json']);
 
 /** Scope loss is invisible to every gate that reads the current state.
@@ -534,7 +547,8 @@ export const stages = [
     })),
     // Step 5 computes the risk tiers; step 6 requires their dispositions. Same
     // split the audit carries at A4 versus A6.
-    gates: (ctx) => [scopeGate(ctx), ...repoWide(ctx), planGate(), ...contractGates(ctx, { reviewed: false })],
+    gates: (ctx) => [scopeGate(ctx), ...repoWide(ctx), planGate(), policyItemGate(ctx),
+      ...contractGates(ctx, { reviewed: false })],
   },
 
   {
@@ -618,7 +632,7 @@ export const stages = [
       timeout: 14400,
     }],
     gates: (ctx) => [
-      ...repoWide(ctx), ...coverageGates(ctx), urlGate(ctx),
+      ...repoWide(ctx), ...coverageGates(ctx), urlGate(ctx), policyItemGate(ctx),
       ...contractGates(ctx, { reviewed: true }),
       // Blast radius against the pre-authoring baseline, and the scope checklist
       // Alpha's receipt is bound to.
