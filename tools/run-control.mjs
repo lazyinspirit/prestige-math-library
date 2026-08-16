@@ -100,17 +100,20 @@ if (command === 'clear' || command === 'resume') {
     if (state.status !== 'running') {
       // The restart command differs by workflow, and printing the wrong one is
       // not a cosmetic slip: for a wave this used to emit
-      // `run-level.mjs --run wave5 --level undefined`, which names the BUILD
-      // driver and an undefined level. An operator pasting it gets a usage
-      // error at best. `workflow` is written by run-wave.mjs; a build state
-      // predates the field and is identified by carrying a level.
+      // `run-level.mjs --run wave5 --level undefined`, which named the BUILD
+      // driver and an undefined level. An operator pasting it gets a usage error
+      // at best. `workflow` is written by run-wave.mjs; a build state predates
+      // the field and is identified by carrying a level.
+      //
+      // The build driver is now the engine at tools/autopilot/, which has its own
+      // durable state and its own control file — this control file only ever
+      // governed the retired run-level.mjs, so a build state here is historical.
       const isAudit = state.workflow === 'audit' || state.wave !== undefined;
       console.log(`\nthe run is ${state.status}; clearing the file does not restart it. Start it again with:`);
       console.log(isAudit
         ? `  node tools/run-wave.mjs --wave ${state.wave}` +
           (state.status === 'halted' ? ` --from-step ${state.step}` : '')
-        : `  node tools/run-level.mjs --run ${run} --level ${state.level}` +
-          (state.status === 'halted' ? ` --from-step ${state.step}` : ''));
+        : `  npx tsx tools/autopilot/bin/autopilot.mts start --run ${run} --detach`);
     }
   }
   process.exit(0);
