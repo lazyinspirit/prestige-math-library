@@ -79,7 +79,7 @@ the exact source, failed local route, and necessity.
 
 ## 3. The base gates and future-scope closures
 
-Run from the repo root. The orchestrator runs the authoritative pass **after**
+Run from the repo root. The engine runs the authoritative pass **after**
 every agent in a stage finishes; no stage advances on an agent's report.
 
 ### 3.1 `precheck.mts` — phase-proof format
@@ -1068,7 +1068,7 @@ proof-refuters on the DeepSeek key, so a Codex outage no longer halts an audit
 wave. Exit 1 means at least one required check failed.
 
 **`tools/gates.mjs`** is the gates of record for one step, as a table instead of
-as prose an orchestrator reassembles by hand each time: `node tools/gates.mjs
+as prose someone reassembles by hand each time: `node tools/gates.mjs
 --step 6 --run frontier-10`, `--list` to print the table without executing, and
 `--json` for a driver. Two invariants make it safe to re-run. **A gate never
 modifies content** — `reflow.mts`, `adopt-repair.mjs` and
@@ -1184,10 +1184,10 @@ and the rule lives in `LEVELS.md` §"Step 3"/§"Step 6", not in this number:
 **Quota is what bounds the number, not memory.** Four concurrent Opus lanes at
 `xhigh` exhausted the Claude session limit in 25–34 minutes and died at once
 (measured 2026-08-13, recorded under `scaffolder` below), **and concurrency
-draws down the orchestrator's own session too** — so an over-wide Alpha fan-out
+draws down the lead Alpha's own session too** — so an over-wide Alpha fan-out
 kills the run, not just the stage. Three sits below that measured cliff.
 
-**The cap is a ceiling the orchestrator may use, never a quota it must spend.**
+**The cap is a ceiling, never a quota that must be spent.**
 The accuracy win comes from *scoping* a group Alpha to three batches, which is
 free; running the groups in series costs only wall clock and burns no more quota
 than the single Alpha it replaces. Run them concurrently only when the stage is
@@ -1254,7 +1254,7 @@ concurrent Opus 5 lanes at `xhigh`, each fanning out to its own research
 subagents, **exhausted the session limit in 25–34 minutes** and all four died
 mid-scaffold at once. Concurrency multiplies burn against a shared quota, so
 raising the cap buys a shorter run before simultaneous failure rather than more
-throughput, and it draws down the orchestrator's own session as well. The Codex
+throughput, and it draws down the session's own limit as well. The Codex
 and DeepSeek lanes bill to different accounts and survive a Claude exhaustion —
 which is why work that can legitimately run on them should.
 
@@ -1279,7 +1279,7 @@ it ends up guessing), while genuinely generic placeholders only warn.
 `tools/slots.mjs` is the cross-process directory-semaphore pool it shares with
 the judge lanes' design, checked by `tools/slots.test.mjs`.
 
-**`tools/run-level.mjs`** is the driver, and `UNATTENDED.md` is its normative
+**`tools/autopilot/`** is the driver, and `UNATTENDED.md` is its normative
 description. It owns `research/<run>-run-state.json` — step, policy, parked
 items, and a journal — so a session becomes a client of a run rather than its
 life support. Every stop is a halt with a code, a reason and a resume command;
@@ -1295,10 +1295,10 @@ half-applied step is the expensive state to reason about later.
 
 | ledger | written by | answers |
 |---|---|---|
-| `research/level<n>-judge.jsonl` | `judge.mts` via `JUDGE_VERDICTLOG` | how many times was this proof refuted? |
-| `research/level<n>-judge-attempts.jsonl` | `judge.mts` via `JUDGE_ATTEMPTLOG` | why did a judge call slow, retry, or fail? |
-| `research/level<n>-touches.json` | `touchlog.mjs` | how many times was this proof repaired? |
-| `research/level<n>-RESUME.md` | orchestrator | what durable run state must survive context compaction? |
+| `research/<run>-judge.jsonl` | `judge.mts` via `JUDGE_VERDICTLOG` | how many times was this proof refuted? |
+| `research/<run>-judge-attempts.jsonl` | `judge.mts` via `JUDGE_ATTEMPTLOG` | why did a judge call slow, retry, or fail? |
+| `research/<run>-touches.json` | `touchlog.mjs` | how many times was this proof repaired? |
+| `.autopilot/state.json` + each agent's namespaced notes | the engine, each agent | what durable run state must survive a restart or a compaction? |
 
 Both exist for the **twice-touched escalation rule**, and both were built because
 the data was being destroyed:
@@ -1345,12 +1345,12 @@ batch/agent ownership, material artifact and ledger paths, gates, open risks,
 working-tree baseline, and exact next action — never secrets or copied
 transcripts. After that durable session history is saved, context is compacted at
 a convenient safe boundary whenever the platform offers or performs compaction;
-on resume, the orchestrator reads it and verifies action-critical disk state
+on resume, the agent reads it and verifies action-critical disk state
 before continuing immediately. This closes the otherwise fragile gap between a
 live agent's working context and the durable evidence ledgers without adding a
 pause or a publication authority.
 
-**Role-level continuity.** The orchestrator, Beta, and Alpha threshold is 60%
+**Role-level continuity.** The Beta and Alpha threshold is 60%
 of the role's active context. Beta and Alpha keep the same compact-and-resume
 procedure in their write-authorized namespace:
 Beta appends a concise checkpoint to its batch notes and Alpha to its Alpha
@@ -1433,7 +1433,7 @@ context rule was measured on `frontier-1`: passing every sibling page produced a
 mean 93,810-token prompt and omitted three of five siblings on every call.
 
 **Ledger:** every paired judge run writes two full lines to
-`research/level<n>-judge.jsonl`, one per model, with at least
+`research/<run>-judge.jsonl`, one per model, with at least
 `{id, model, keep, reason, context_sha256, at}`. The matching
 `context_sha256` attests that the pair saw the same frozen prompt.
 `verification.judge` records a pass only when both models passed the current
@@ -1462,7 +1462,7 @@ complete verdict from its peer.
 
 **Effectiveness ledger:** step 8 appends one owner decision per rejected
 `{id, model, context_sha256}` to
-`research/level<n>-judge-adjudications.jsonl`: `outcome` is
+`research/<run>-judge-adjudications.jsonl`: `outcome` is
 `confirmed_fatal`, `confirmed_nonfatal`, or `false_positive`; a fatal outcome
 also classifies `defect_type` as `logic`, `dependency_citation`, or `other`.
 `tools/judge-compare.mjs <ledger> --adjudications <file>` reports the two
@@ -1608,8 +1608,9 @@ AI-generated Statement/Construction is excluded from dependency infrastructure;
 a would-be decomposition lemma stays inline or is replaced by a source-backed
 statement. Alpha and the independent Beta reader reject any prohibited edge.
 
-**Step-3 adjudication is an orchestrator mechanism (owner, 2026-07-30).** Beta
-reports discrete recommendations with evidence; the orchestrator verifies them
+**Step-3 adjudication is an Alpha mechanism (owner, 2026-07-30; reassigned from
+the orchestrator 2026-08-16).** Beta reports discrete recommendations with
+evidence; the step-3 Alpha verifies them
 from disk and approves or declines them without a routine owner pause. Its
 ordered decision rule is: mathematical accuracy and correct dependency citation
 are non-negotiable; then minimize forward references; then preserve
@@ -1620,7 +1621,7 @@ mechanisms (owner, 2026-07-31).** Step 9 completes the scope-denial sweep and
 continues without a pause. Beta audit reports and Alpha's audit ledger classify every
 publish-blocking defect by mathematical type, location in the artifact, affected
 id, and fix disposition. Judge and touch ledgers add refutation/repair history;
-the orchestrator adjudication log adds approved reversals and drops. Step 10
+the Alpha adjudication ledger adds approved reversals and drops. Step 10
 aggregates those records into a concise but complete owner report grouped by
 type and location, then makes the only owner pause. Grouping may
 compress repeated defects, but every fatal item must remain named and every
@@ -1628,7 +1629,7 @@ resolution must be stated.
 
 ### 6.1 No shell-permission prompts, and the mechanical backstops
 
-**Owner rule, 2026-07-30:** neither the orchestrator nor any current or future
+**Owner rule, 2026-07-30:** no current or future
 subagent may ask the owner for shell-command permission. Routine repository
 reads, writes, and gates must use command forms already allowed inside the
 workspace sandbox. A runtime without an escalation-free form records a blocker;

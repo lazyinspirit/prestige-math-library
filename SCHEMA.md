@@ -500,10 +500,10 @@ For a future authored level, run the additional scoped controls after authoring
 and again after Step-6/8 interface repairs:
 
 ```
-node tools/content-policy.mjs research/level<n>-batch-*.pages.json
-node tools/audit-manifest.mjs research/level<n>-batch-*.pages.json --json
-node tools/impact-audit.mjs --touches research/level<n>-touches.json --from <baseline> --receipt research/level<n>-impact-audit.json
-node tools/level-coverage.mjs --contracts research/level<n>-proof-contracts.json --judge-ledger research/level<n>-judge.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/level<n>-audit-coverage.json --verify-current-context research/level<n>-batch-*.pages.json
+node tools/content-policy.mjs research/<run>-batch-*.pages.json
+node tools/audit-manifest.mjs research/<run>-batch-*.pages.json --json
+node tools/impact-audit.mjs --touches research/<run>-touches.json --from <baseline> --receipt research/<run>-impact-audit.json
+node tools/level-coverage.mjs --contracts research/<run>-proof-contracts.json --judge-ledger research/<run>-judge.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/<run>-audit-coverage.json --verify-current-context research/<run>-batch-*.pages.json
 ```
 
 The first enforces future-only provenance, generated-claim containment, and the

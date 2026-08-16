@@ -8,12 +8,13 @@ theorem.
 ## Per-level proof contracts
 
 At Step 1, each Beta creates its namespaced
-`research/level<n>-batch-<i>.proof-contracts.json`. Its `scope` is every
+`research/<run>-batch-<i>.proof-contracts.json`. Its `scope` is every
 proof-bearing item in that batch (including proof-bearing examples,
 counterexamples, and false statements). Step 5 keeps it current as the Beta
 personally authors the final text. Before every whole-level gate, the
-orchestrator merges the batch files into `research/level<n>-proof-contracts.json`
-with `tools/merge-proof-contracts.mjs`. The merged file has this version-1
+engine merges the batch files into `research/<run>-proof-contracts.json` with
+`tools/merge-proof-contracts.mjs`, as gate zero of the contract group — a merge
+that fails means nothing below it claims to have passed over a stale file. The merged file has this version-1
 shape:
 
 ```json
@@ -195,16 +196,16 @@ Run after Step 5 and again after all Step-6 repairs, before the frozen Step-7
 judge context. First merge the current namespaced batch contracts:
 
 ```sh
-node tools/merge-proof-contracts.mjs --level frontier-<n> research/level<n>-proof-contracts.json research/level<n>-batch-*.proof-contracts.json
-node tools/proof-contract.mjs research/level<n>-proof-contracts.json --strict
-node tools/finite-smoke.mjs research/level<n>-proof-contracts.json
-node tools/risk-report.mjs research/level<n>-proof-contracts.json   # add --require-reviewed at STEP 6 only
-node tools/coverage-checklist.mjs research/level<n>-batch-*.coverage.json
-node tools/content-policy.mjs research/level<n>-batch-*.pages.json
-node tools/audit-manifest.mjs research/level<n>-batch-*.pages.json --json > research/level<n>-audit-manifest.json
-node tools/impact-audit.mjs --touches research/level<n>-touches.json --from <baseline> --template research/level<n>-impact-audit.json
+node tools/merge-proof-contracts.mjs --level frontier-<n> research/<run>-proof-contracts.json research/<run>-batch-*.proof-contracts.json
+node tools/proof-contract.mjs research/<run>-proof-contracts.json --strict
+node tools/finite-smoke.mjs research/<run>-proof-contracts.json
+node tools/risk-report.mjs research/<run>-proof-contracts.json   # add --require-reviewed at STEP 6 only
+node tools/coverage-checklist.mjs research/<run>-batch-*.coverage.json
+node tools/content-policy.mjs research/<run>-batch-*.pages.json
+node tools/audit-manifest.mjs research/<run>-batch-*.pages.json --json > research/<run>-audit-manifest.json
+node tools/impact-audit.mjs --touches research/<run>-touches.json --from <baseline> --template research/<run>-impact-audit.json
 # Alpha fills the reviewer-facing dispositions; do not alter generated scope arrays.
-node tools/impact-audit.mjs --touches research/level<n>-touches.json --from <baseline> --receipt research/level<n>-impact-audit.json
+node tools/impact-audit.mjs --touches research/<run>-touches.json --from <baseline> --receipt research/<run>-impact-audit.json
 ```
 
 The first command is hard for the declared scope. Finite smoke is hard only for
@@ -217,7 +218,7 @@ After the Step-7 sweep has produced a complete paired ledger, generate and sign
 the Alpha receipt, then enforce it against the final disk text:
 
 ```sh
-node tools/level-coverage.mjs --template research/level<n>-audit-coverage.json research/level<n>-batch-*.pages.json
+node tools/level-coverage.mjs --template research/<run>-audit-coverage.json research/<run>-batch-*.pages.json
 # Alpha fills reviewer and attestation only; do not alter the generated scope/hash.
-node tools/level-coverage.mjs --contracts research/level<n>-proof-contracts.json --judge-ledger research/level<n>-judge.jsonl --judge-adjudications research/level<n>-judge-adjudications.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/level<n>-audit-coverage.json --verify-current-context research/level<n>-batch-*.pages.json
+node tools/level-coverage.mjs --contracts research/<run>-proof-contracts.json --judge-ledger research/<run>-judge.jsonl --judge-adjudications research/<run>-judge-adjudications.jsonl --spine-receipt research/dependency-spine-audit.json --audit-receipt research/<run>-audit-coverage.json --verify-current-context research/<run>-batch-*.pages.json
 ```

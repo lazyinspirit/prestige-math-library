@@ -20,8 +20,8 @@ Pro** at its `max` API reasoning setting. Alpha must recover
 the durable prior-session audit record before acting. Judge lanes are DeepSeek
 V4 Pro plus GPT 5.6 Terra (`JUDGE_LINEUP=deepseek+terra`) through the
 same independent 16-call-per-model scheduler used by the build.
-A non-Anthropic session may run the ORCHESTRATOR duties (gates, sweeps,
-ledgers, commits, reports) — the judge lanes are subprocesses and work from
-any session — but it must not silently substitute itself for an assigned audit
-role. Ask the owner to amend the rule first; record the amendment in
+A non-Anthropic session may run the SESSION duties (gates, sweeps, ledgers,
+commits, reports) — the judge lanes are subprocesses and work from any session —
+but it must not silently substitute itself for an assigned audit role. The build
+has no orchestrator at all: `tools/autopilot/` owns every transition. Ask the owner to amend the rule first; record the amendment in
 `AUDIT-WORKFLOW.md` in the same commit.

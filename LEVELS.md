@@ -22,12 +22,12 @@ Everything below is verified against the code as of 2026-07-31.
 | actor | model | does |
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
-| **orchestrator** | this session | batching, splicing, briefs, the **gate of record**, personal audits, ledgers, and reporting |
+| **the engine** | `tools/autopilot/`, no model | batching, splicing, the **gate of record**, retries, blockers, ledgers, and every stage transition. It makes no mathematical judgment and never publishes |
 | **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`, 1M-token context** (owner, 2026-08-10; was GPT 5.6 Sol) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk. **Since 2026-08-14 this is a GROUP role at steps 3 and 6a/6b** — see the row below |
 | **group Alpha / lead Alpha** (owner, 2026-08-14) | same model and settings | A run's batches are divided among **group Alphas, at most three batches each** (`dispatch.mjs` alpha cap 3). Each group Alpha runs **step 3** for its own batches and **steps 6a/6b** for them, writing only namespaced artifacts nobody else opens. The **lead Alpha** is one of them and additionally owns the three stages that are global by nature: **step 4** propagation into the shared prose scaffolds, **step 6c** cross-batch/cross-level citation audit, and **step 8** judge adjudication. Rationale and the quota bound: `ARCHITECTURE.md` §6 |
 | **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding and **step 5 authors all content in its batch** after Step 4. It never audits content it authored. |
 | **independent Step-6 reader** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | Alpha-assigned read-only or repair-capable audit role for content it did not author; does not judge or adjudicate. |
-| **judges** | **DeepSeek V4 Pro direct (`max`) and freshly spawned Claude Sonnet 5 (`high` effort)** | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the only cross-family lane; Sonnet 5 is the second comparison lane, same family as the audit Alpha that adjudicates its rejections. |
+| **judges** | **DeepSeek V4 Pro direct (`max`) and GPT 5.6 Terra** (owner, 2026-08-04; `JUDGE_LINEUP=deepseek+terra`) | independent adversarial screens; invoked concurrently through `tools/judge.mts --parallel` on the same hash-attested frozen context. DeepSeek is the only cross-family lane; Terra is subscription-backed and independent but shares the GPT family with the audit Alpha, so weight same-family agreement accordingly. |
 
 ## Artifacts
 
@@ -36,14 +36,14 @@ Everything below is verified against the code as of 2026-07-31.
 | `research/plan-*.md`, `research/design-*.md` | **prose scaffolds** — human-readable page designs (RA-nn blocks, F1/T1–T10 topology track, AA-nn/LA-nn algebra track) |
 | `research/sweep-*.md` | RAG sweeps: raw source material, *not* scaffolds |
 | `research/plan-spec.json` | **machine scaffold**. `pages[]` of `{order, id, kind, category, title, companion, requires[], items[]}`; each item `{id, kind, title, strategy?, deps[]}` |
-| `research/level<n>-batch-<i>.pages.json` / `.notes.md` | Beta-n-i's **only** writable outputs |
-| `research/level<n>-judge.jsonl` | **refutation ledger** (`JUDGE_VERDICTLOG`) |
-| `research/level<n>-judge-attempts.jsonl` | **judge transport/latency ledger** (`JUDGE_ATTEMPTLOG`), written by the sweep |
-| `research/level<n>-touches.json` | **repair ledger** (`touchlog.mjs`) |
-| `research/level<n>-audit-manifest.json` | generated full relationship checklist for the independent-reader and Alpha audit |
-| `research/level<n>-impact-audit.json` | Alpha dispositions for every consumer exposed by a changed public interface |
-| `research/level<n>-published-dependency-repairs.md` | Alpha's evidence ledger for any owner-delegated repair to a published dependency |
-| `research/level<n>-audit-coverage.json` | Alpha's manifest-bound whole-level audit receipt |
+| `research/<run>-batch-<i>.pages.json` / `.notes.md` | Beta-n-i's **only** writable outputs |
+| `research/<run>-judge.jsonl` | **refutation ledger** (`JUDGE_VERDICTLOG`) |
+| `research/<run>-judge-attempts.jsonl` | **judge transport/latency ledger** (`JUDGE_ATTEMPTLOG`), written by the sweep |
+| `research/<run>-touches.json` | **repair ledger** (`touchlog.mjs`) |
+| `research/<run>-audit-manifest.json` | generated full relationship checklist for the independent-reader and Alpha audit |
+| `research/<run>-impact-audit.json` | Alpha dispositions for every consumer exposed by a changed public interface |
+| `research/<run>-published-dependency-repairs.md` | Alpha's evidence ledger for any owner-delegated repair to a published dependency |
+| `research/<run>-audit-coverage.json` | Alpha's manifest-bound whole-level audit receipt |
 | `items/<id>.md`, `library/<category>/<page>.md` | the content itself |
 | `briefs/judge-conventions.txt` | the paired judges' canonical conventions block, loaded by `tools/judge.mts` into the frozen prompt and hash for both lanes |
 | `briefs/*.md` | **the prompt-side mechanisms**: the subagent brief templates (scaffold, step-6 batch audit, authoring, paired judges). These are half the workflow and were session-scratchpad-only until 2026-07-27. Every one opens with the **no shell-permission prompts rule** (`ARCHITECTURE.md` §6.1) |
@@ -88,7 +88,7 @@ it stands when the agent runs, not when the brief was written.
 Measured the day it happened. Three step-8 auditors were briefed on level 9 as
 "orders 129/130, 131/132, 137/138". Between writing the briefs and the agents
 finishing, 158 pages were spliced in and **every one of those orders moved** —
-129→151, 131→153, 137→159. The `research/level<n>-batch-<i>.pages.json` files
+129→151, 131→153, 137→159. The `research/<run>-batch-<i>.pages.json` files
 still carry the pre-splice numbers, so batch file and spec now disagree by 22.
 
 **Nothing was mis-audited, and only because each brief also named the page FILES
@@ -147,12 +147,12 @@ judged, and 30 earned passes were destroyed** and had to be bought again.
 Judging after the audit costs nothing in coverage — every item is still judged —
 and the verdicts describe the text that ships.
 
-### Context-continuity checkpoint (orchestrator, owner 2026-08-03)
+### Context-continuity checkpoint (every agent, owner 2026-08-03)
 
-Once active context reaches **60%**, the orchestrator automatically saves a
+Once active context reaches **60%**, the agent automatically saves a
 durable checkpoint at the next safe boundary (preferably after the current task
 or gate, never by abandoning work mid-operation), not a workflow pause. Update
-`research/level<n>-RESUME.md` (or the active named-run equivalent) with the
+`research/<run>-RESUME.md` (or the active named-run equivalent) with the
 owner instructions that differ from the standing rules, current numbered step
 and frozen-text state, batches, active agents/ownership, material artifact paths
 and gate results, ledger paths, open defects and constraints, working-tree
@@ -165,14 +165,13 @@ changes; they neither authorize publication nor create an owner pause.
 
 Beta-n-i and Alpha-n apply the same procedure at **60% of their own context
 length**. A Beta's checkpoint is an appended, concise section of its namespaced
-`level<n>-batch-<i>.notes.md`; Alpha's is in its namespaced Alpha report or
+`<run>-batch-<i>.notes.md`; Alpha's is in its namespaced Alpha report or
 handoff. Those role checkpoints identify the owned artifact set, current
 substage, completed checks, open mathematical question/constraint, and exact
 next action. On resumption the same agent reads it and verifies the relevant
-disk state before continuing; it does not wait for the orchestrator to repeat
-the brief.
+disk state before continuing. Nobody replays its context or repeats its brief.
 
-## Step 0 — Batch (orchestrator)
+## Step 0 — Batch (mechanical)
 
 1. Compute the **frontier from disk**, never from a remembered page count: an
    unpublished page all of whose `requires` are published. Do not trust
@@ -294,11 +293,12 @@ Fractional orders exist (`formal-laurent-series-field` is 31.5), so a page can b
 inserted without renumbering.
 
 **Namespaced write protocol.** Beta may read anything and run any gate, but
-writes **only** its three `research/level<n>-batch-<i>.*` files. Parallel batches
+writes **only** its three `research/<run>-batch-<i>.*` files. Parallel batches
 writing shared prose would overwrite each other silently — prose is not gated.
-The third is `research/level<n>-batch-<i>.proof-contracts.json`, the
+The third is `research/<run>-batch-<i>.proof-contracts.json`, the
 machine-readable proof-obligation, citation, and boundary worksheet required by
-`QUALITY-CONTROLS.md`; it is merged by the orchestrator, never jointly edited.
+`QUALITY-CONTROLS.md`; `merge-proof-contracts.mjs` merges the batch files as a
+gate, and they are never jointly edited.
 
 ## Step 2 — Resolve dependencies (Beta-n-i)
 
@@ -362,32 +362,49 @@ when the gate reports no snapshot under any variant. Full rationale:
 `plan-spec.json` before minting; reuse or alias an existing id for an existing
 statement.
 
-## The supervisor — no stage waits on a human (owner, 2026-08-15)
+## The engine — no stage waits on a human, and none waits on a model
 
-**Every stage boundary is a mechanical trigger.** `tools/run-supervisor.mjs`
-holds a table of stage → completion predicate → next dispatch, reads the
-predicate from disk, runs the stage's gates, and fires the next dispatch. The
-`supervisor` agent (Sonnet 5, `briefs/supervisor.md`, cap 2) makes only the calls
-the table cannot: is a report complete, is a blocker real, does a dead lane
-deserve one retry.
+**Every stage boundary is a mechanical trigger.** `tools/autopilot/` holds the
+stage table: what each stage owes, which result files cover it, which gates it
+must pass, and what to dispatch for whatever is still missing. It reads all of
+that from disk, so a stage cleared by a hand-run dispatch is picked up without
+restarting anything.
 
 ```
-node tools/run-supervisor.mjs --run <run> --state      # where the build is
-node tools/run-supervisor.mjs --run <run> --advance    # gate + next command
-node tools/run-supervisor.mjs --run <run> --scope-baseline
-node tools/run-supervisor.mjs --run <run> --verify-scope
+npx tsx tools/autopilot/bin/autopilot.mts doctor --run <run>   # before you start
+npx tsx tools/autopilot/bin/autopilot.mts start  --run <run> --detach
+npx tsx tools/autopilot/bin/autopilot.mts status               # where the build is
 ```
 
-**The orchestrator is not on the critical path.** Steps 3 and 9 dispatch to the
-`orchestrator` role, steps 4, 6c and 8 to the lead Alpha, and step 10 is drafted
-by an agent for the orchestrator to deliver. A cleared stage is a dispatch
-trigger, never a reporting checkpoint — measured cost of getting this wrong on
-`frontier-13` was ~5h of idle pipeline across three occurrences.
-`ARCHITECTURE.md` §3.11d.
+The 2026-08-15 design put a `supervisor` agent on this boundary to judge whether
+a stage was finished. That was the right diagnosis — the measured cost of a
+model on the critical path was ~5h of idle pipeline across three occurrences on
+`frontier-13` — and the wrong cure, because it moved the transition from one
+model to another. **A cleared stage is a dispatch trigger, never a reporting
+checkpoint**, and whether a stage is cleared is a predicate over files on disk.
+The role, its brief and `run-supervisor.mjs` are all deleted.
 
-## Step 3 — Adjudicate recommendations (orchestrator)
+**No model is on the critical path at all.** Steps 3, 6 and 8 dispatch to an
+Alpha for judgment; step 4's splice is `tools/splice-plan.mjs`; the gates,
+retries, blockers and transitions are the engine's. `ARCHITECTURE.md` §3.11d.
 
-I verify every load-bearing claim from disk first (amendment 6: no stage advances
+**Every stage must be able to fail.** A stage declares a gate or an explicit
+`gatesWaived` reason, and the terminal stage may not waive. `frontier-14`
+reached the end of step 10 with its receipt gate red, two confirmed-fatal proofs
+unrepaired and sixteen judge rejections unread, because the last stage declared
+an empty gate list and an empty list read as "passed".
+
+**Two self-correcting loops**, each bounded, each dispatching from a receipt of
+ids rather than from prose:
+
+| loop | clears when | receipt |
+|---|---|---|
+| step 3 review → Beta fix → re-check | every pair `sufficient` | `<run>-scaffold-closure.json` |
+| step 7 judge → adjudicate → repair → rejudge | every item paired, every rejection adjudicated, no open fatal | `<run>-judge-closure.json` |
+
+## Step 3 — Adjudicate recommendations (Alpha)
+
+Alpha verifies every load-bearing claim from disk first (no stage advances
 on an agent's report alone), then exercise best judgment and **approve or
 decline** each Beta recommendation. Mathematical accuracy and correct citation
 of dependencies are non-negotiable; among mathematically valid choices, minimize
@@ -397,19 +414,20 @@ adjudication does not pause for owner approval. Every decision and its rationale
 are logged.
 
 **Then Alpha-n reviews every scaffold for breadth and depth (owner,
-2026-08-11).** Alpha is spawned here, not at step 4, and this runs *after* the
-orchestrator has settled the recommendations.
+2026-08-11).** Alpha is spawned here, not at step 4, and it settles the Beta
+recommendations itself before reviewing breadth and depth.
 
 **Group Alphas (owner, 2026-08-14).** Divide the run's batches among Alphas at
 **at most three batches each** and dispatch them together — the `alpha` lane cap
 is 3. A group Alpha reads only its own batches. Nothing is shared: at this stage
 Alpha edits no batch file at all, and each writes its own
-`research/<run>-alpha-<g>-step3-scaffold-review.md`. The orchestrator merges the
-verdicts. This exists because one Alpha reading a whole level's scaffolds is the
+`research/<run>-alpha-<g>-step3-scaffold-review.md` plus a machine-readable
+`-step3-verdicts.json`, which `tools/scaffold-verdicts.mjs` merges into the run's
+scaffold-closure receipt. This exists because one Alpha reading a whole level's scaffolds is the
 same agent that later reads the whole level's proofs — `frontier-12` was 454
 items — and step 3 is where a thin page is still cheap to fix. Concurrency here
 is a ceiling, not a quota to spend: three concurrent Opus lanes burn a shared
-Claude session limit that also feeds the orchestrator, so run the groups in
+Claude session limit that also feeds the lead Alpha, so run the groups in
 series whenever the headroom is unknown. The scoping is what buys the accuracy;
 the parallelism is optional.
 
@@ -424,13 +442,14 @@ splitting at 60 items. Output is
 `research/<run>-alpha-step3-scaffold-review.md`, a `sufficient` /
 `insufficient` verdict per pair with the exact results to add and the source
 that carries them. Alpha authors nothing here and edits no batch file: the
-orchestrator routes findings to the owning Beta, and Alpha re-checks before step
-4 splices. This is the last point where fixing thinness costs a scaffold edit
+`3-fix` stage routes findings to the owning Beta mechanically, and the `3-recheck`
+gate will not clear while any pair is still `insufficient`, so step 4 cannot
+splice past an unfixed finding. This is the last point where fixing thinness costs a scaffold edit
 rather than a rewrite — it exists because `group-actions-and-cayleys-theorem`
 published without the orbit–stabiliser theorem and nothing caught it until a
 reader did. `briefs/alpha.md` §"Stage 0".
 
-## Step 4 — Apply and propagate (orchestrator + Alpha-n)
+## Step 4 — Splice and propagate (mechanical + lead Alpha)
 
 Splice the Beta outputs into `plan-spec.json`. The splice keeps `plan-spec`'s
 page metadata but takes the **union of `requires`** (Beta computes the closure
@@ -450,8 +469,8 @@ re-checked.
 **Model change (owner, 2026-07-31): authoring agents are GPT 5.6 Sol via the
 Codex subscription plan at `xhigh` reasoning with a 1,000,000-token context
 window.** GPT-family models are not called through ofox. Sol authors use the
-same `briefs/authoring.md` contract and must emit normal repo files; the
-orchestrator remains responsible for running the gates of record.
+same `briefs/authoring.md` contract and must emit normal repo files; the engine
+runs the gates of record.
 
 Each writes `items/<id>.md` and its `library/<category>/<page>.md`, `status:
 draft`, `origin: session`. Every mathematical-content item, including examples,
@@ -503,13 +522,13 @@ not rescued by an overstrong citation.
 **Durable contract gate (owner, 2026-08-01).** The author updates its own batch
 proof-contract for every proof-bearing item. It covers every direct fact citation
 with an exact source clause, every numbered proof step with stated inputs, and
-all standard boundary cases. The orchestrator merges batch contracts and runs
-the strict proof-contract, selected finite-smoke, and risk-routing gates on the
+all standard boundary cases. The engine merges batch contracts and runs the
+strict proof-contract, finite-smoke, and risk-routing gates on the
 whole level after Step 5. A finite smoke pass is only bounded falsification
 evidence, never a proof.
 
 **Future-scope containment gate (owner, 2026-08-01).** After authoring, the
-orchestrator runs `tools/content-policy.mjs` on every batch manifest. It requires
+engine runs `tools/content-policy.mjs` on every batch manifest. It requires
 both component-provenance tags on every in-flight item, restricts generated
 content to non-load-bearing corollary/example roles, forbids every
 AI-generated Statement/Construction as a dependency target, and requires a structured
@@ -548,8 +567,8 @@ level — so there is no ordering to discover inside a level and no risk that
 splitting mitigates. It only serialised work that could have run at once.
 
 `tools/rounds.mjs` now emits one round per level by default. `--max N` still
-exists for the rare case where the orchestrator wants to cap concurrency for a
-reason it can state; it is opt-in and no longer the default.
+exists for the rare case where the owner wants to cap concurrency for a reason
+they can state; it is opt-in and no longer the default.
 
 **What still forces sequencing is a real dependency edge, and only that.** Level
 9 (mixed) ran as three rounds because its five pairs sat at four levels: order 129
@@ -589,7 +608,7 @@ For an owner-delegated published-dependency repair, take the baseline immediatel
 before the repair, not merely at the start of authoring. Alpha appends the exact
 old and corrected text, source or elementary derivation, provenance transition,
 independent reviewer, impact-receipt path, and targeted paired-judge result to
-`research/level<n>-published-dependency-repairs.md`. A Beta repair is reviewed
+`research/<run>-published-dependency-repairs.md`. A Beta repair is reviewed
 by Alpha; an Alpha repair is reviewed by an independent Step-6 reader. Clear
 the stale `judge` block and obsolete `audited` stamp, then use the independent
 current `verified` block with `scope: published-dependency-repair` and
@@ -713,7 +732,7 @@ record or polish it if useful, but do not escalate it as a fatal proof defect.
 
 **Interaction with the twice-touched rule.** A repair here to an item already
 repaired earlier takes it to two touches and escalates to a personal audit by the
-orchestrator. Alpha-n reports such repairs in a separate list and still makes
+lead Alpha. Alpha-n reports such repairs in a separate list and still makes
 necessary fixes.
 
 ## Step 7 — Judge (after the audit, one sweep, on final text)
@@ -743,7 +762,7 @@ reader touched that item at Step 6. A selected subset is not a valid initial
 Step-7 sweep. `--items` is reserved for a later Alpha-selected rejudge after a
 material repair, and `--models` only recovers an incomplete verdict.
 
-Record a full verdict ledger at `research/level<n>-judge.jsonl` with at least
+Record a full verdict ledger at `research/<run>-judge.jsonl` with at least
 `{id, model, keep, reason, context_sha256, at}` for **both** model calls on
 every item. The two `context_sha256` values must match: this is the mechanical
 attestation that the judges saw the same frozen context. Use
@@ -771,7 +790,7 @@ Never record a pass a judge did not give; a null/failed call is not a verdict.
 At step 10, compare both-pass, both-reject, Sonnet-only rejection, DeepSeek-only
 rejection, and incomplete/null outcomes with their adjudications. Record one
 owner adjudication for every model rejection in
-`research/level<n>-judge-adjudications.jsonl`, keyed by `{id, model,
+`research/<run>-judge-adjudications.jsonl`, keyed by `{id, model,
 context_sha256}`, with `outcome` (`confirmed_fatal`, `confirmed_nonfatal`, or
 `false_positive`) and, when fatal, `defect_type` (`logic`,
 `dependency_citation`, or `other`). Run
@@ -784,7 +803,7 @@ that a low rejection rate is not a judge-quality metric; it does not substitute
 for the paired per-level comparison required here.
 
 **Whole-level coverage receipt (owner, 2026-08-01).** After the initial sweep,
-generate `research/level<n>-audit-coverage.json` with
+generate `research/<run>-audit-coverage.json` with
 `tools/level-coverage.mjs --template`. Alpha completes only its reviewer and
 attestation fields. Before Step 8, rerun `level-coverage.mjs` with the merged
 proof contract, paired ledger, dependency-spine receipt, Alpha receipt, and
@@ -793,7 +812,7 @@ recomputes the item/relationship manifest from disk, requires a contract for
 every proof-bearing item, and requires one usable DeepSeek and Sonnet verdict on
 the same *current* frozen prompt for every item. It is not satisfied by a broad
 agent report or by a stale pass after a repair. Give it
-`--judge-adjudications research/level<n>-judge-adjudications.jsonl`: a current
+`--judge-adjudications research/<run>-judge-adjudications.jsonl`: a current
 rejection passes only with Alpha's exact-hash `confirmed_nonfatal` or
 `false_positive` decision; a missing decision or `confirmed_fatal` remains a
 hard failure. The spine receipt independently
@@ -806,7 +825,7 @@ A rejection from **either** judge now lands on text that has cleared the step-6
 audit, so Alpha-n adjudicates it from disk. **Adjudicate, do not
 comply.** Each rejection gets either a fix, with the defect named, or a
 refutation, with a verbatim quote from the cited item. Append a per-model,
-per-context owner decision to `research/level<n>-judge-adjudications.jsonl` so
+per-context owner decision to `research/<run>-judge-adjudications.jsonl` so
 step 10 can separate confirmed fatal logic/dependency-citation detections from
 nonfatal findings and false positives. Then delete
 `verification.judge` on anything materially rewritten and re-run both judges
@@ -829,12 +848,12 @@ item text (verification block excluded) at adjudication time. Snapshot the
 baseline immediately before adjudicating, then gate the stage:
 
 ```
-node tools/touchlog.mjs snap research/level<n>-touches.json "pre-step8"
+node tools/touchlog.mjs snap research/<run>-touches.json "pre-step8"
 # ... Alpha adjudicates and applies only confirmed-fatal repairs ...
-node tools/step8-guard.mjs --touches research/level<n>-touches.json \
-  --baseline "pre-step8" --adjudications research/level<n>-judge-adjudications.jsonl
+node tools/step8-guard.mjs --touches research/<run>-touches.json \
+  --baseline "pre-step8" --adjudications research/<run>-judge-adjudications.jsonl
 # then CLOSE the window, so step 9 can edit without breaking this gate:
-node tools/touchlog.mjs snap research/level<n>-touches.json "after-step8-alpha"
+node tools/touchlog.mjs snap research/<run>-touches.json "after-step8-alpha"
 node tools/gates.mjs --step 8 --run <name> --against after-step8-alpha
 ```
 
@@ -914,7 +933,7 @@ states the fix disposition: dropped/deferred, restated/weakened, proof
 repaired/replaced, prose repaired, dependencies added/removed/rebound, choice
 hypothesis restored, or new lemma/result added. Counts and grouping keep it
 concise; no fatal defect may be omitted. Beta audit ledgers, the Alpha ledger,
-judge verdict log, touch ledger, and orchestrator adjudication log are the
+judge verdict log, touch ledger, and the Alpha adjudication ledger are the
 evidence sources.
 
 This is the **only owner pause** in the per-level build. Stop for the
@@ -931,7 +950,7 @@ independent triggers; count **refutations + repairs combined, per item**:
    step-6 brief; Alpha reviews **the proof and all neighbouring dependencies**,
    since a proof that keeps failing is often correct and resting on a bad
    neighbour.
-2. **Refuted or fixed > 1 by any subagent, Alpha-n included** → the orchestrator
+2. **Refuted or fixed > 1 by any subagent, Alpha-n included** → the lead Alpha
    audits it **personally**, and this does not wait for step 6.
 
 The personal audit must state the **nature** of the fault (mathematical
@@ -945,8 +964,8 @@ approval; defer that owner-bound decision to the step-10 report. At 21–24%
 precision a repeated rejection can be a repeated false positive.
 
 ```
-node tools/touchlog.mjs snap  research/level<n>-touches.json "<stage>"   # after EVERY item-modifying stage
-node tools/touchlog.mjs audit research/level<n>-touches.json research/level<n>-judge.jsonl
+node tools/touchlog.mjs snap  research/<run>-touches.json "<stage>"   # after EVERY item-modifying stage
+node tools/touchlog.mjs audit research/<run>-touches.json research/<run>-judge.jsonl
 ```
 
 Repairs are **measured from disk**, never counted from an agent's report.
@@ -982,7 +1001,7 @@ self-contained, accurate* library, not a perfect one. Prefer one reusable lemma
 over a repeated inline argument (`cor-archimedean-reciprocal` retired a gap in 24
 items). **Do not trim landmarks.**
 
-## The base gates and future-scope closures — the orchestrator runs the authoritative pass
+## The base gates and future-scope closures — the engine runs the authoritative pass
 
 | gate | catches |
 |---|---|
@@ -1009,8 +1028,8 @@ Helpers: `rounds.mjs` (static levels), `consumers.mjs --changed` (who cites what
 I touched), `gen-spec.mjs` (regenerate the spec).
 
 **To run a level without a session attached, `UNATTENDED.md` is normative:**
-`tools/run-level.mjs` drives steps 0–10 and halts at the step-10 owner pause,
-with `tools/run-control.mjs` to steer it and `ops/run-level@.service` to survive
+`tools/autopilot/` drives steps 0–10 and holds at the step-10 owner pause, with
+`autopilot pause|resume|retry|skip|stop` to steer it and `bin/watchdog.sh` to survive
 logout. It changes no rule in this file — it sequences them.
 
 **Read a gate's counts off the tool, never off this summary.** `gates.mjs` prints

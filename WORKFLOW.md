@@ -1,6 +1,6 @@
 # From a prompt to a publish-ready page: the end-to-end authoring workflow
 
-> **No shell-permission prompts (owner, 2026-07-30).** The orchestrator and
+> **No shell-permission prompts (owner, 2026-07-30).** Every agent and
 > every current and future agent use commands already permitted inside the
 > workspace sandbox and choose non-escalated equivalents for routine repository
 > work. Do not ask the owner to approve shell commands. Claude agents pass
@@ -77,7 +77,7 @@ The current per-level step order and numbering are in
 ### Context-continuity checkpoint (hard rule, owner 2026-08-01)
 
 At 50% active-context use, and before a context-heavy operation when practical,
-the orchestrator writes or refreshes the active run's
+the agent writes or refreshes the active run's
 `research/<run>-RESUME.md`. It records only durable operational facts: current
 step and frozen-text state; owner policy deltas; batches and agent ownership;
 material artifacts, gates and ledgers; open risks; working-tree baseline; and
@@ -91,7 +91,7 @@ Beta and Alpha agents apply the same rule at **60% of their own context length**
 Beta checkpoints live in the agent's namespaced batch notes; Alpha checkpoints
 live in its namespaced Alpha report/handoff. Each records only its owned state,
 constraints, finished checks, and exact next action, reads it after compaction,
-verifies relevant disk state, and resumes without an orchestrator replay.
+verifies relevant disk state, and resumes. Nobody replays its context.
 
 **Future Beta capacity (owner, 2026-08-01):** a Beta may scaffold and author at
 most two A/B pairs. Step 0 records that bound in each batch manifest and
@@ -146,7 +146,7 @@ state the source proposition itself. Use the exact Definition or Statement when
 practical. A concise version is allowed only when it retains the source's domain,
 quantifiers, hypotheses, conclusion, and direction with maximum fidelity. This
 rule binds scaffolding, authoring, Beta/Alpha audit, judge review, and the
-orchestrator's own edits.
+every repair anyone applies.
 
 ### Component provenance and dependency eligibility (hard rule)
 
@@ -216,7 +216,7 @@ rather than the wording.
 
 - **Refuted more than once by the judge before step 6 completes** — the escalation below.
 - **Refuted or fixed more than once by ANY subagent, Alpha-n included** — the
-  orchestrator audits it personally, assesses, reports to the owner and
+  lead Alpha audits it personally, assesses, reports to the owner and
   iterates. This trigger does not wait for step 6 and does not require a judge
   rejection at all: an item three different agents kept rewriting is suspect
   even if every individual repair looked reasonable and every judge call passed.
@@ -231,7 +231,7 @@ whole level.
    its neighbouring dependencies** — every item it cites and every item that
    cites it. A proof that keeps failing is often correct in itself and resting on
    a neighbour that is not.
-2. **Refuted again after step 6 — a RED FLAG.** The orchestrator audits the proof
+2. **Refuted again after step 6 — a RED FLAG.** The lead Alpha audits the proof
    personally. Not a subagent, and not another repair cycle.
 
 (Step 6 is the final whole-level Beta/Alpha audit under the renumbered workflow.)
@@ -255,7 +255,7 @@ level must set `JUDGE_VERDICTLOG` to that level's ledger**, at a stable path,
 e.g.:
 
 ```
-export JUDGE_VERDICTLOG=research/level<n>-judge.jsonl
+export JUDGE_VERDICTLOG=research/<run>-judge.jsonl
 ```
 
 The paired DeepSeek V4 Pro/Sonnet judges each record
@@ -264,8 +264,8 @@ failures. Commit the shared ledger with the level. Count refutations from either
 model per id; never rotate it mid-level, because the count is the entire point
 of keeping it.
 
-For every `keep: false`, the orchestrator also appends a decision to
-`research/level<n>-judge-adjudications.jsonl`, keyed by `{id, model,
+For every `keep: false`, Alpha also appends a decision to
+`research/<run>-judge-adjudications.jsonl`, keyed by `{id, model,
 context_sha256}`. `outcome` is `confirmed_fatal`, `confirmed_nonfatal`, or
 `false_positive`; confirmed fatal findings classify `defect_type` as `logic`,
 `dependency_citation`, or `other`. Step 10 runs
@@ -279,8 +279,8 @@ trust. Item files are untracked while a level is in draft, so `git log` cannot
 supply it either. `tools/touchlog.mjs` closes this by hashing every item file:
 
 ```
-node tools/touchlog.mjs snap  research/level<n>-touches.json "<stage label>"
-node tools/touchlog.mjs audit research/level<n>-touches.json research/level<n>-judge.jsonl
+node tools/touchlog.mjs snap  research/<run>-touches.json "<stage label>"
+node tools/touchlog.mjs audit research/<run>-touches.json research/<run>-judge.jsonl
 ```
 
 **Take a snapshot after EVERY stage that can modify items** — authoring, step-6
@@ -419,7 +419,7 @@ and the runtime it ran on.
 
 | Role | Model | Runtime and cost |
 |------|-------|------------------|
-| Orchestrator | current coding session | subscription/tooling of the active orchestrator |
+| Engine + this session | `tools/autopilot/` | subscription/tooling of the active session |
 | Beta-n-i scaffold and Step-5 author | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; never ofox; does not audit its own authored content |
 | Independent Step-6 reader | GPT 5.6 Sol (`xhigh`, 1M-token context) | Codex subscription plan; audits a batch it did not scaffold or author |
 | Alpha-n lead adjudicator, propagation, and cross-level audit | Claude Opus 5 (`xhigh`, 1M-token context) | `claude` runner, model id `claude-opus-5[1m]` (owner, 2026-08-10; was GPT 5.6 Sol via Codex) |
@@ -469,7 +469,7 @@ says whose verdict survives a disagreement.
 | **Independent Step-6 reader** | GPT 5.6 Sol via Codex | a batch it did not scaffold or author, plus cited dependencies | fixes in-batch proof-step and citation defects | Alpha, owner |
 | **Alpha proof-refuter reader** | GPT 5.6 Sol via Codex | read-only level and published dependencies | skeptically reports concrete proof/citation defects only | Alpha, owner |
 | **Alpha lead adjudicator** | Claude Opus 5 (`xhigh`, 1M-token context) | the level plus published dependencies | confirms or refutes reader findings and paired-judge rejections; audits, repairs, and gates in-flight content, plus only the documented obvious published-dependency repair | owner |
-| **Paired judges** | DeepSeek V4 Pro direct + fresh GPT 5.6 Terra | identical hash-attested A/B pair plus required-and-cited pages | independently name candidate defects | orchestrator, owner |
+| **Paired judges** | DeepSeek V4 Pro direct + fresh GPT 5.6 Terra | identical hash-attested A/B pair plus required-and-cited pages | independently name candidate defects | Alpha, owner |
 | Owner | the human | everything | `verification.audited`, publish | nobody |
 
 **The order, and the bound** (owner, 2026-07-25). For an item rejected at least
@@ -707,7 +707,7 @@ This session runs **modified** versions of both. The pipeline shape is unchanged
 same, but two things are swapped: the model roles are substituted per section 0
 (Opus 4.8 subagents for generation and escalation on the Claude subscription,
 GPT-5.4 as the judge through `ofox`) instead of the stock billed lineup, and the
-work is driven by the orchestrator through subagents rather than by the worker
+work is driven by the engine through subagents rather than by the worker
 service. Generation therefore never touches the public billed pipeline, which is
 the first hard rule.
 
@@ -824,7 +824,7 @@ subscription at `xhigh`, concurrently with
 `briefs/judge-conventions.txt` by default into the frozen prompt and its hash;
 `briefs/codex-judge.md` is historical human documentation, not a second runtime
 prompt. Each receives the same frozen context and reads proofs and dependencies
-skeptically. Each accepts unless it can name a specific defect. Record both verdicts in `research/level<n>-judge.jsonl` as
+skeptically. Each accepts unless it can name a specific defect. Record both verdicts in `research/<run>-judge.jsonl` as
 `{id, model, keep, reason, context_sha256, at}`. DeepSeek is the cross-family
 screen; Sonnet provides the independent second-lane comparison and does not
 make the pair cross-family by itself.
@@ -839,11 +839,11 @@ dependencies, of its own page, and of its A/B companion page, so "faithfully
 restated?" and "actually licensed?" are checkable rather than assumed. `--batch`
 adds the rest of the level. See `ARCHITECTURE.md` §5.
 
-**Adjudication.** Alpha, not the orchestrator, adjudicates every paired-judge
+**Adjudication.** Alpha alone adjudicates every paired-judge
 rejection in this and all future sessions. It reads the frozen verdict against
 the text on disk, records `confirmed_fatal`, `confirmed_nonfatal`, or
 `false_positive`, applies any permitted draft repair, and limits rejudging to
-the changed items. The orchestrator maintains the ledgers and runs the gates.
+the changed items. The engine maintains the ledgers and runs the gates.
 Alpha treats a logical gap a competent human can close within 30 seconds as
 nonfatal; it may polish the prose but does not start a fatal repair cycle for it.
 
@@ -870,10 +870,10 @@ dependency.
 
 **Durable proof contracts and high-risk routing (owner, 2026-08-01).** The
 private proof-obligation map and boundary pass are now persisted per batch in
-`research/level<n>-batch-<i>.proof-contracts.json`; see
+`research/<run>-batch-<i>.proof-contracts.json`; see
 `QUALITY-CONTROLS.md` for the schema. A contract records exact source excerpts
 for every fact citation, the input map for every numbered proof step, and the
-disposition of every standard boundary case. The orchestrator merges the
+disposition of every standard boundary case. The engine merges the
 namespaced files before the whole-level `proof-contract.mjs --strict` gate,
 runs any selected independently computed finite countermodel checks, and routes
 high-risk items to an extra Alpha refuter via `risk-report.mjs`. Finite checks
@@ -899,7 +899,7 @@ current mathematical statement, cited fact, or load-bearing citation is plainly
 false and the exact replacement is either source-checked from reputable
 literature or directly elementary. Record the erroneous and corrected text,
 the source URL and conventions or the complete elementary derivation, in
-`research/level<n>-published-dependency-repairs.md`. “Common sense” is limited
+`research/<run>-published-dependency-repairs.md`. “Common sense” is limited
 to a short direct calculation or unfolding of the stated definitions; it does
 not establish a nontrivial theorem. Take a touch snapshot immediately before the
 repair, run `impact-audit.mjs` from it, and resolve every logical and
@@ -966,7 +966,7 @@ the same long proof, so treat repeated re-judging as sampling, not as a verdict.
 The owner audit, not judge unanimity, is the convergence criterion.
 
 Step 9 completes its scope-denial sweep without pausing. Before the owner
-audit/publish pause at the end of `LEVELS.md` step 10, the orchestrator produces
+audit/publish pause at the end of `LEVELS.md` step 10, the lead Alpha produces
 a concise but complete fatal-error report. It first compares both judges'
 agreement, model-only rejections, nulls, and final adjudications, including the
 owner-confirmed fatal logic and dependency-citation detections from
@@ -1104,7 +1104,7 @@ can:
 - spawn parallel subagents with a chosen model, for generation and escalation;
 - call an external model gateway for the independent judge;
 - run shell commands (precheck, git, a dev server) and read and write files;
-- keep a durable orchestrator that stays in the loop, audits results, and makes
+- keep a durable engine that stays in the loop, gates results, and escalates
   the publish decision.
 
 Claude Code, Codex, and pi all satisfy this. The specific model choices
