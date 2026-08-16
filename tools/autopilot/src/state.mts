@@ -97,11 +97,23 @@ export class State {
 
   dispatch(key: string): DispatchRecord | null { return this.data.dispatches[key] ?? null; }
 
+  /** `attempts` is the RETRY-POLICY counter and `attempt` is what a human reads
+   *  in the status line. They are one number, and it is computed HERE.
+   *
+   *  The caller used to compute `attempt = (prior?.attempts ?? 0) + 1` for its
+   *  own meta and this method computed `attempts` again from the same prior —
+   *  two spellings of one quantity, one letter apart. They agreed until the
+   *  owner's `retry` command reset `attempts` to 0 to re-arm a lane, at which
+   *  point the record read `attempt: 2, attempts: 0` and the next dispatch
+   *  announced itself as "attempt 1" of what was really a third try. Stamping
+   *  both from the value this method computes makes them unable to disagree. */
   recordDispatchStart(key: string, meta: Partial<DispatchRecord>): DispatchRecord {
     const prior = this.data.dispatches[key];
+    const attempts = (prior?.attempts ?? 0) + 1;
     this.data.dispatches[key] = {
       ...(meta as DispatchRecord),
-      attempts: (prior?.attempts ?? 0) + 1,
+      attempt: attempts,
+      attempts,
       startedAt: new Date().toISOString(),
       endedAt: null,
       lastExitOk: null,
@@ -110,6 +122,16 @@ export class State {
     return this.data.dispatches[key];
   }
 
+  /** ALWAYS stamps both fields, on both the success and the failure path — the
+   *  executor calls this from `.then` AND `.catch`, before it notifies.
+   *
+   *  A record left at `endedAt: null, lastExitOk: null` therefore means one
+   *  thing only: the engine process died while that dispatch was in flight, so
+   *  nothing was alive to write the ending. That state is not repairable from
+   *  inside a process that no longer exists, and it is harmless — nothing reads
+   *  `endedAt`, and `lastExitOk: null` is the honest value for "unknown". On
+   *  restart the agent is adopted and completion is recomputed from the repo's
+   *  own artifacts, which is the authority this file explicitly is not. */
   recordDispatchEnd(key: string, ok: boolean): void {
     if (!this.data.dispatches[key]) return;
     this.data.dispatches[key].endedAt = new Date().toISOString();

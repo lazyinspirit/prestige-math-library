@@ -312,10 +312,15 @@ export class Executor {
     // a model a mechanical task does not error — it returns a plausible answer
     // and is wrong at a rate nobody measures.
     assertCognitive(plan.job, { stage: stage.id, label: plan.label });
-    const prior = this.state.dispatch(key);
-    const attempt = (prior?.attempts ?? 0) + 1;
-    const meta = { stage: stage.id, role: plan.role, label: plan.label, covers: plan.covers ?? [], attempt };
-    this.state.recordDispatchStart(key, meta);
+    // The attempt number is computed in ONE place, by recordDispatchStart, and
+    // read back from the record it wrote. Computing it here as well produced a
+    // second copy of the same quantity that the owner's `retry` command could
+    // desynchronise (`attempt: 2, attempts: 0`).
+    const meta: any = { stage: stage.id, role: plan.role, label: plan.label, covers: plan.covers ?? [] };
+    // Read the number back out of the record and carry it on `meta`, which is
+    // what the in-flight status line renders. One computation, three readers.
+    const attempt = this.state.recordDispatchStart(key, meta).attempt;
+    meta.attempt = attempt;
     this.reporter.notify('dispatch', `${plan.role}/${plan.label}${plan.covers?.length ? ` covers ${plan.covers.join(',')}` : ''}${attempt > 1 ? ` (attempt ${attempt})` : ''}`, meta);
 
     // The engine DERIVES the unit and the output path and injects them; the
@@ -487,19 +492,33 @@ export class Executor {
       case 'retry': {
         const unit = cmd.unit ? String(cmd.unit) : null;
         let armed = 0;
+        let unfinished = 0;
         for (const d of Object.values<any>(this.state.data.dispatches)) {
           if (unit && !d.covers?.map(String).includes(unit)) continue;
-          // Only FAILED lanes: the notice always said "failed lanes" while the
-          // loop reset every lane's attempt history, so later status output
-          // misreported attempt counts on lanes that had succeeded.
+          // Only lanes that did NOT succeed: the notice always said "failed
+          // lanes" while the loop reset every lane's attempt history, so later
+          // status output misreported attempt counts on lanes that had
+          // succeeded.
+          //
+          // `lastExitOk === null` is UNKNOWN, not failed — the engine died
+          // while that dispatch was in flight, so nothing wrote its ending. It
+          // is re-armed, because "we do not know it succeeded" is the right
+          // reason to allow another try, but it is counted separately: calling
+          // an unfinished lane a failed one is the same misreport in a new
+          // place. Re-arming a lane whose work is in fact done is harmless —
+          // coverage is recomputed from the repo's artifacts, so its unit is
+          // already covered and nothing re-dispatches.
           if (d.lastExitOk === true) continue;
+          if (d.lastExitOk === null) unfinished += 1;
           d.attempts = 0;                       // let the retry policy fire again
+          d.attempt = 0;                        // and the status line agrees
           armed += 1;
         }
         this.state.save();
+        const how = unfinished ? ` (${armed - unfinished} failed, ${unfinished} unfinished)` : '';
         this.reporter.notify('retry-armed', unit
-          ? `owner armed a retry for unit ${unit} (${armed} lane(s))`
-          : `owner armed a retry for ${armed} failed lane(s)`);
+          ? `owner armed a retry for unit ${unit} (${armed} lane(s))${how}`
+          : `owner armed a retry for ${armed} lane(s)${how}`);
         break;
       }
       default: break;
