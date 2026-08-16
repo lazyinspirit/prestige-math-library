@@ -8,7 +8,7 @@ spaces` are blocked on.
 |---|---|
 | A page | `the-fundamental-group-of-the-circle` · order **295** · `topology` |
 | B page | `the-fundamental-group-of-the-circle-examples` · order **296** |
-| requires | `covering-spaces-and-lifting` (published, frontier-14), `sine-cosine-and-the-definition-of-pi` (published) |
+| requires | `covering-spaces-and-lifting` (published, frontier-14), `fundamental-trigonometric-identities` (published; the step-0 drift review verified trap (i) on disk and re-pinned the trig edge here — the parametrization theorem is on this page, not on `sine-cosine-and-the-definition-of-pi`) |
 | design | `research/plan-topology-set-theory-track.md` §HT-4, line ~931. Its quoted orders (235, 157, …) are the OLD numbering — stale by the file's own admission at L74–80; use the spec |
 
 ## The design's core discipline

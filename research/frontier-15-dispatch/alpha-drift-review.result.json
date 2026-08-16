@@ -1,0 +1,21 @@
+{
+  "role": "alpha",
+  "label": "drift-review",
+  "run": "frontier-15",
+  "covers": [
+    "drift"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-16T13:17:04.008Z",
+  "ended_at": "2026-08-16T13:33:04.730Z",
+  "ms": 960722,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/frontier-15-dispatch/alpha-drift-review.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/frontier-15-dispatch/alpha-drift-review.prompt.md",
+  "tail": "Step-0 drift review complete. Report at `research/frontier-15-alpha-step0-drift.md`; gate passes (`drift-review-check: 8 page(s) reviewed, 2 spec edit(s) applied, no blocked edges`).\n\n## Three edges applied, all backward\n\n**`algebraic-closure-embeddings-and-separability`** (GA-1, `plan-algebra-track.md` §II.2)\n- `eigenvalues-eigenvectors-and-the-characteristic-polynomial` (86) — §II.2.1 lists `def-algebraically-closed-field` as what the block stands on; GA-1's two landmark theorems conclude in that notion and D6 forbids re-minting it. Closure stopped at order 74.\n- `the-field-of-fractions-and-localisation` (53.2) — the pair's inseparability and primitive-element witnesses are $\\mathbb{F}_p(t)$ and $\\mathbb{F}_p(s,t)$; the library homes $F(t)$ on exactly one item, on that page, and no closure page supplies a fraction field.\n\n**`the-fundamental-group-of-the-circle`** (HT-4) — trap (i) asks for one thing to be verified on disk, and it fails. The dictionary item needs surjectivity onto the unit circle; `sine-cosine-and-the-definition-of-pi` (179) carries periodicity and Pythagoras but not that. `thm-sine-and-cosine-parametrize-the-unit-circle` is on `fundamental-trigonometric-identities` (185). Since 185 requires 179 directly, this **replaces** the declared edge rather than sitting beside it — closure 58 → 59, nothing lost, no new WARN.\n\n## What the evidence file could not have found\n\nCA-4's design section states its prerequisites under the label \"CA-4\" and never writes the page id — so the section appears in no mechanical location list. MOD-4's and HT-4's findings are prose naming a notion, not an id.\n\n## Three no-drift verdicts with something recorded\n\n- **CA-4**: the design says \"cite `convexity` and `rn-as-a-normed-space`; do not re-mint\" for convex/star-shaped sets. I opened both — `convexity` is convex *functions*; `rn-as-a-normed-space` has no such item at all. The real homes (`the-total-derivative`, `line-integrals-and-the-gradient-theorem`) are already in the closure. Wrong pointer, not missing prerequisite; adding `convexity` would encode a dependency Goursat does not have.\n- **MOD-4**: one `fs-` witness (k[x₁,x₂,…] inside its fraction field) is unsupported on *two* counts — no published item carries a polynomial ring on an infinite family, and the only source is GA-1's new mint at 98, in this run's batch 3 while MOD-4 is batch 2. Declaring that would invent a cross-batch design decision; it's a step-3 scaffold question.\n- **AG-4**: one B-page example touches `GL_3(\\mathbb{F}_p)`, homed forward at 78. Discretionary example with a native route (the published Heisenberg group uses `def-group` alone), so not treated as a reading-order change.\n\n`validate-plan.mjs` exits 0, no errors. Redundant-prereq WARNs 311 → 312: the new one is on `the-group-algebra-and-representations`, which now reaches `matrices-and-the-matrix-of-a-linear-map` transitively through `the-fundamental-theorem-of-algebra` — out of scope, untouched. Other files in `git status` are concurrent Beta work, not mine; my diff is 4 insertions and 2 deletions in `plan-spec.json`."
+}
