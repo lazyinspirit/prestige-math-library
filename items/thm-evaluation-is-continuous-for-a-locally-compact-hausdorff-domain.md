@@ -2,7 +2,7 @@
 id: thm-evaluation-is-continuous-for-a-locally-compact-hausdorff-domain
 kind: theorem
 title: "Evaluation is continuous for the compact-open topology on a locally compact Hausdorff domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

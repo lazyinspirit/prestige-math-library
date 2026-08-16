@@ -2,7 +2,7 @@
 id: prop-sums-and-scalar-multiples-of-complex-power-series
 kind: proposition
 title: "Sums and scalar multiples of convergent complex power series are represented coefficientwise on the common disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

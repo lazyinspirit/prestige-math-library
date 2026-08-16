@@ -2,7 +2,7 @@
 id: thm-complex-power-series-reexpansion-at-an-interior-point
 kind: theorem
 title: "A complex power-series sum re-expands about every interior point, at least to the distance from that point to the original boundary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

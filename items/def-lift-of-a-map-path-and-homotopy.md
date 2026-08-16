@@ -2,7 +2,7 @@
 id: def-lift-of-a-map-path-and-homotopy
 kind: definition
 title: "Lifts of maps, paths, and homotopies through a covering map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

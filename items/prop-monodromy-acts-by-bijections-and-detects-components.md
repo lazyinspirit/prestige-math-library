@@ -2,7 +2,7 @@
 id: prop-monodromy-acts-by-bijections-and-detects-components
 kind: proposition
 title: "Monodromy acts by fibre bijections, and its orbits are the intersections of path components with the fibre"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

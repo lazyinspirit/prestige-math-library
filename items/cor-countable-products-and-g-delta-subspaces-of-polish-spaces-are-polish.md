@@ -2,7 +2,7 @@
 id: cor-countable-products-and-g-delta-subspaces-of-polish-spaces-are-polish
 kind: corollary
 title: "Under the Axiom of Countable Choice, countable products and $G_\\delta$ subspaces of Polish spaces are Polish"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

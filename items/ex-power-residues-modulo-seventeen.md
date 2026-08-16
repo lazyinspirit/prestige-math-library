@@ -2,7 +2,7 @@
 id: ex-power-residues-modulo-seventeen
 kind: example
 title: "Fourth and eighth powers modulo $17$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-jordan-canonical-form
 kind: definition
 title: "Jordan bases and Jordan canonical forms over the base field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

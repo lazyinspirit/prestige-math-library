@@ -2,7 +2,7 @@
 id: ex-jordan-form-with-two-eigenvalues-from-power-ranks
 kind: example
 title: 'Recovering a $5\times5$ Jordan form from shifted power ranks at two eigenvalues'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

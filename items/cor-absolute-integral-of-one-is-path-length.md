@@ -2,7 +2,7 @@
 id: cor-absolute-integral-of-one-is-path-length
 kind: corollary
 title: "The absolute line integral of the constant function 1 is the length of the path"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

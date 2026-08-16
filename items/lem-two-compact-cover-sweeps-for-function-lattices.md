@@ -2,7 +2,7 @@
 id: lem-two-compact-cover-sweeps-for-function-lattices
 kind: lemma
 title: "A function lattice with the two-point duplication property uniformly approximates its target"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

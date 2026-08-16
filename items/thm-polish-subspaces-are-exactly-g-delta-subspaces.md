@@ -2,7 +2,7 @@
 id: thm-polish-subspaces-are-exactly-g-delta-subspaces
 kind: theorem
 title: "Under Dependent Choice, a subspace of a Polish space is Polish exactly when it is $G_\\delta$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

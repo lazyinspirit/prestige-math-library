@@ -2,7 +2,7 @@
 id: lem-real-part-of-a-self-adjoint-complex-function-algebra
 kind: lemma
 title: "The real-valued part of a point-separating self-adjoint complex function algebra is separating and has the same common zeros"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

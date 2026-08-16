@@ -2,7 +2,7 @@
 id: prop-general-compact-open-topology-agrees-with-the-metric-definition
 kind: proposition
 title: "The general compact-open topology agrees with the published metric-domain definition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

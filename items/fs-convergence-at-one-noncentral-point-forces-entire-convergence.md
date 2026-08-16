@@ -2,7 +2,7 @@
 id: fs-convergence-at-one-noncentral-point-forces-entire-convergence
 kind: false-statement
 title: "FALSE: convergence of a complex power series at one point other than its centre forces convergence everywhere"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-real-stone-weierstrass-dichotomy-for-separating-algebras
 kind: theorem
 title: "A separating real function algebra is dense or its closure consists exactly of the functions vanishing at one point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

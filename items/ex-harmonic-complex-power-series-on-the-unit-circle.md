@@ -2,7 +2,7 @@
 id: ex-harmonic-complex-power-series-on-the-unit-circle
 kind: example
 title: "The harmonic complex power series diverges at 1 and converges conditionally at every other point of the unit circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

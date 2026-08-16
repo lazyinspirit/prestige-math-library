@@ -2,7 +2,7 @@
 id: thm-hilbert-cube-universal-for-separable-metrizable-spaces
 kind: theorem
 title: "Every separable metrizable space embeds in the Hilbert cube $[0,1]^{\\mathbb N}$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

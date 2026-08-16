@@ -2,7 +2,7 @@
 id: prop-deck-transformations-are-determined-by-one-point-and-act-freely
 kind: proposition
 title: "On a connected covering space, a deck transformation is determined by one point and the deck action is free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

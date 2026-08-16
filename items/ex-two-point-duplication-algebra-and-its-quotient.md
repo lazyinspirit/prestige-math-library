@@ -2,7 +2,7 @@
 id: ex-two-point-duplication-algebra-and-its-quotient
 kind: example
 title: "Endpoint-duplicating functions on $[0,1]$ become all continuous functions on the endpoint quotient"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

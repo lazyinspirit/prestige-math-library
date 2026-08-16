@@ -2,7 +2,7 @@
 id: cor-normalized-circle-integral-about-its-centre-is-one
 kind: corollary
 title: "The normalized integral around a positively oriented circle centred at a is 1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-reversing-orientation-preserves-a-contour-integral
 kind: counterexample
 title: "Reversing orientation does not preserve a complex contour integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

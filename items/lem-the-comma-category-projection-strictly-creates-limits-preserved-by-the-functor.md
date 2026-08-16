@@ -2,7 +2,7 @@
 id: lem-the-comma-category-projection-strictly-creates-limits-preserved-by-the-functor
 kind: lemma
 title: "A comma-category projection strictly creates the limits preserved by the functor"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

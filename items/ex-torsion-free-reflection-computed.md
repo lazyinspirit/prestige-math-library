@@ -2,7 +2,7 @@
 id: ex-torsion-free-reflection-computed
 kind: example
 title: "The torsion-free reflection of the integers direct sum a finite cyclic group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -21,6 +21,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

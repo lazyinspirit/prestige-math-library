@@ -2,7 +2,7 @@
 id: prop-quadratic-residue-is-representative-independent
 kind: proposition
 title: "Quadratic residuosity is representative-independent and the residues are the image of squaring"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

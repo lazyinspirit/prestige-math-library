@@ -2,7 +2,7 @@
 id: ex-quarter-turn-jordan-form-after-scalar-extension
 kind: example
 title: 'The real quarter-turn acquires diagonal Jordan form over $\mathbb C$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

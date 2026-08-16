@@ -2,7 +2,7 @@
 id: thm-the-unit-interval-is-a-coseparating-object-in-compact-hausdorff-spaces
 kind: theorem
 title: "Under dependent choice, the unit interval is a coseparating object in compact Hausdorff spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

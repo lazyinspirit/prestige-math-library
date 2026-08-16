@@ -2,7 +2,7 @@
 id: lem-local-reciprocal-of-complex-power-series
 kind: lemma
 title: "A convergent complex power series with nonzero constant term has a convergent reciprocal power series locally"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

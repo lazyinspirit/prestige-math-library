@@ -2,7 +2,7 @@
 id: cor-equicontinuous-families-into-a-compact-metric-target
 kind: corollary
 title: "Under Choice, an equicontinuous family into a compact metric target has compact compact-open closure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

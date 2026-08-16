@@ -2,7 +2,7 @@
 id: cor-a-complete-locally-small-category-with-a-small-coseparating-set-and-saft-intersections-is-cocomplete
 kind: corollary
 title: "A category satisfying the explicit SAFT intersection hypotheses is cocomplete"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

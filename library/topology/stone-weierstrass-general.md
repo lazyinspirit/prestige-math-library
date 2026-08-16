@@ -1,7 +1,7 @@
 ---
 page: stone-weierstrass-general
 title: "Stone–Weierstrass in General"
-status: draft
+status: published
 items: [def-two-point-duplication-property,
         def-separating-real-function-lattice,
         def-unital-separating-real-function-algebra-general,

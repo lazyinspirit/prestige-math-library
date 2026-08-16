@@ -2,7 +2,7 @@
 id: cor-complex-power-series-coefficient-formula
 kind: corollary
 title: "The coefficients of a complex power series are its derivatives at the centre divided by the corresponding factorials"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

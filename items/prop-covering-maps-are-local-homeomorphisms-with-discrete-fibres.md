@@ -2,7 +2,7 @@
 id: prop-covering-maps-are-local-homeomorphisms-with-discrete-fibres
 kind: proposition
 title: "Covering maps are surjective local homeomorphisms with discrete fibres"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

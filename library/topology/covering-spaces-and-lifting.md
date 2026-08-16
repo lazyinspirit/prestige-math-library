@@ -1,7 +1,7 @@
 ---
 page: covering-spaces-and-lifting
 title: "Covering Spaces and Lifting"
-status: draft
+status: published
 items: [def-covering-map-and-evenly-covered-neighbourhoods, def-map-and-isomorphism-of-covering-spaces, def-lift-of-a-map-path-and-homotopy, prop-covering-maps-are-local-homeomorphisms-with-discrete-fibres,
         prop-number-of-sheets-is-locally-constant, thm-path-lifting-for-covering-maps, thm-homotopy-lifting-for-covering-maps, cor-lifted-path-endpoints-depend-only-on-path-homotopy,
         thm-covering-maps-inject-fundamental-groups, thm-uniqueness-of-lifts-from-a-connected-space, thm-covering-space-lifting-criterion, def-pullback-covering-space,

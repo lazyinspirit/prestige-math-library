@@ -1,7 +1,7 @@
 ---
 page: triangularisation-and-jordan-canonical-form-examples
 title: 'Triangularisation and Jordan Form: Examples and Counterexamples'
-status: draft
+status: published
 items: []
 examples: [ex-quotient-of-f-three-by-a-line-and-canonical-projection,
            ex-first-isomorphism-theorem-for-a-coordinate-map,

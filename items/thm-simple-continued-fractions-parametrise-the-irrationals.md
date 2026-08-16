@@ -2,7 +2,7 @@
 id: thm-simple-continued-fractions-parametrise-the-irrationals
 kind: theorem
 title: "Infinite simple continued fractions parametrise the irrational real numbers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cex-radius-does-not-determine-boundary-convergence-of-a-complex-power-series
 kind: counterexample
 title: "Equal radii do not determine convergence on the boundary circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

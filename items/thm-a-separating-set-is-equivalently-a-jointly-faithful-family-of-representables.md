@@ -2,7 +2,7 @@
 id: thm-a-separating-set-is-equivalently-a-jointly-faithful-family-of-representables
 kind: theorem
 title: "In a locally small category, separating and coseparating sets are equivalently jointly faithful families of representables"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

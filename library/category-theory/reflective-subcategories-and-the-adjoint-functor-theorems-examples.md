@@ -1,7 +1,7 @@
 ---
 page: reflective-subcategories-and-the-adjoint-functor-theorems-examples
 title: "Reflective Subcategories and the Adjoint Functor Theorems — Examples"
-status: draft
+status: published
 items: []
 examples: [cex-a-reflective-inclusion-need-not-preserve-colimits,
            ex-the-subobject-poset-of-the-integers-in-abelian-groups,

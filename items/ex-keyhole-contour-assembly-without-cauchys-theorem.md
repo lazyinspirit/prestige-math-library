@@ -2,7 +2,7 @@
 id: ex-keyhole-contour-assembly-without-cauchys-theorem
 kind: example
 title: "Assembling a keyhole contour from two radial segments and two circular arcs"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -15,6 +15,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

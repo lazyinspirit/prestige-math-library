@@ -2,7 +2,7 @@
 id: fs-every-endomorphism-has-a-commuting-diagonal-plus-nilpotent-decomposition
 kind: false-statement
 title: "FALSE: Every endomorphism has a commuting diagonal-plus-nilpotent decomposition over its base field"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

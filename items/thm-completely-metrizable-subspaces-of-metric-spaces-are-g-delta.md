@@ -2,7 +2,7 @@
 id: thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta
 kind: theorem
 title: "Under Dependent Choice, every completely metrizable subspace of a metric space is $G_\\delta$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

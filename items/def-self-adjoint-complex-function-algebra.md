@@ -2,7 +2,7 @@
 id: def-self-adjoint-complex-function-algebra
 kind: definition
 title: "Self-adjoint complex function algebras, unitality, and point separation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

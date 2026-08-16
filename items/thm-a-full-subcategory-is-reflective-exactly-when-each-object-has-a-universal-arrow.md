@@ -2,7 +2,7 @@
 id: thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow
 kind: theorem
 title: "A full subcategory is reflectively structured exactly when universal arrows are supplied at every ambient object"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

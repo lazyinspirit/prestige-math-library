@@ -2,7 +2,7 @@
 id: thm-an-object-lies-in-a-reflective-subcategory-exactly-when-its-reflection-unit-is-invertible
 kind: theorem
 title: "An ambient object lies in the essential image of a reflective inclusion exactly when its reflection unit is invertible"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

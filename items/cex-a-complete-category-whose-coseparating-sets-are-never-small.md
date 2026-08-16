@@ -2,7 +2,7 @@
 id: cex-a-complete-category-whose-coseparating-sets-are-never-small
 kind: counterexample
 title: "A complete locally small category with no small coseparating set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,7 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

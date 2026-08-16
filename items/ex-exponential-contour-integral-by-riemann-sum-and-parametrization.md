@@ -2,7 +2,7 @@
 id: ex-exponential-contour-integral-by-riemann-sum-and-parametrization
 kind: example
 title: "An exponential contour integral approximated by Riemann sums and evaluated by parametrization and a primitive"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

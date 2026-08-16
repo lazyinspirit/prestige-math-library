@@ -2,7 +2,7 @@
 id: def-covering-map-and-evenly-covered-neighbourhoods
 kind: definition
 title: "Covering maps, evenly covered neighbourhoods, fibres, sheets, and trivial coverings"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-complex-power-series-converge-locally-uniformly
 kind: theorem
 title: "A complex power series converges absolutely and uniformly on every closed subdisc strictly inside its disc of convergence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

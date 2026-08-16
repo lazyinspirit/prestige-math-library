@@ -2,7 +2,7 @@
 id: thm-path-independence-and-complex-primitive-criterion
 kind: theorem
 title: "For a continuous function on a complex domain, endpoint independence, zero closed-contour integrals, and existence of a primitive are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

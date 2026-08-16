@@ -2,7 +2,7 @@
 id: rem-why-completeness-alone-is-not-enough-for-an-adjoint
 kind: remark
 title: "Why completeness alone cannot replace a solution set or the SAFT smallness hypotheses"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -12,6 +12,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

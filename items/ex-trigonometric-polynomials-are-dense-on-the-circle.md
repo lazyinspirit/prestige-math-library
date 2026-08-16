@@ -2,7 +2,7 @@
 id: ex-trigonometric-polynomials-are-dense-on-the-circle
 kind: example
 title: "Trigonometric polynomials are uniformly dense on the unit circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

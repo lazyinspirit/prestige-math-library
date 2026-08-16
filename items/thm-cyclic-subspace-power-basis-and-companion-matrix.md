@@ -2,7 +2,7 @@
 id: thm-cyclic-subspace-power-basis-and-companion-matrix
 kind: theorem
 title: "A vector annihilator gives a power basis and its companion matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

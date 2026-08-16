@@ -2,7 +2,7 @@
 id: lem-wide-pullbacks-compute-intersections-independently-of-representatives
 kind: lemma
 title: "Wide pullbacks compute intersections of supplied set-indexed subobject representatives independently of the representatives"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

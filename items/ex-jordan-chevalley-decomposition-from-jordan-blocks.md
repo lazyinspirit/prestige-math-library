@@ -2,7 +2,7 @@
 id: ex-jordan-chevalley-decomposition-from-jordan-blocks
 kind: example
 title: "Computing commuting diagonal and nilpotent parts of a split Jordan matrix"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

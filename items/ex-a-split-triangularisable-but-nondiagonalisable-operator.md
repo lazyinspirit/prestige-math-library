@@ -2,7 +2,7 @@
 id: ex-a-split-triangularisable-but-nondiagonalisable-operator
 kind: example
 title: 'A split $3\times3$ operator that is triangularisable but not diagonalisable'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

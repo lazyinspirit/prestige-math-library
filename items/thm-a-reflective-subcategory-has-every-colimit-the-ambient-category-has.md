@@ -2,7 +2,7 @@
 id: thm-a-reflective-subcategory-has-every-colimit-the-ambient-category-has
 kind: theorem
 title: "A reflective subcategory has every ambient colimit, obtained by reflecting an ambient colimit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

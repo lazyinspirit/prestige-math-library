@@ -2,7 +2,7 @@
 id: thm-frolik-internal-characterisation-of-cech-completeness
 kind: theorem
 title: "Under the ultrafilter lemma, Frolík's internal open-cover characterisation of Čech-completeness"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

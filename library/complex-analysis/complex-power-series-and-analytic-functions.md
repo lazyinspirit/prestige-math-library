@@ -1,7 +1,7 @@
 ---
 page: complex-power-series-and-analytic-functions
 title: "Complex Power Series and Analytic Functions"
-status: draft
+status: published
 items: [def-complex-analytic-function, def-uniform-convergence-of-complex-valued-functions, thm-uniform-cauchy-criterion-complex-functions, thm-uniform-limit-continuous-complex-functions, thm-weierstrass-m-test-for-complex-function-series, thm-complex-power-series-converge-locally-uniformly, lem-derived-complex-power-series-has-the-same-radius, thm-termwise-differentiation-of-complex-power-series, cor-complex-power-series-sums-have-derivatives-of-all-orders, cor-complex-power-series-coefficient-formula, cor-uniqueness-of-complex-power-series-coefficients, thm-complex-analytic-functions-are-holomorphic, lem-complex-power-series-reexpansion-double-series, thm-complex-power-series-reexpansion-at-an-interior-point, cor-complex-power-series-sums-are-analytic, prop-sums-and-scalar-multiples-of-complex-power-series, prop-cauchy-products-of-complex-power-series, lem-local-composition-of-complex-power-series, lem-local-reciprocal-of-complex-power-series, thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition, cor-complex-analytic-functions-have-local-primitives, thm-complex-trigonometric-and-hyperbolic-power-series, cor-complex-trigonometric-and-hyperbolic-derivatives, cor-complex-trigonometric-and-hyperbolic-addition-formulas, thm-complex-sine-and-cosine-are-unbounded, thm-complex-sine-and-cosine-zero-sets, def-stolz-approach-region-at-one, lem-abel-summation-for-complex-series, thm-abel-limit-theorem-for-complex-series-in-stolz-regions]
 examples: []
 ---

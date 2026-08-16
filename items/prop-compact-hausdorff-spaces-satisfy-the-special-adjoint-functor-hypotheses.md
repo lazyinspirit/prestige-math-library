@@ -2,7 +2,7 @@
 id: prop-compact-hausdorff-spaces-satisfy-the-special-adjoint-functor-hypotheses
 kind: proposition
 title: "Under the ultrafilter lemma and dependent choice, compact Hausdorff spaces satisfy the explicit SAFT hypotheses for their inclusion into topological spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

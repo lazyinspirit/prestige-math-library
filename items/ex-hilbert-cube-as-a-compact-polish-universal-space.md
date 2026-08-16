@@ -2,7 +2,7 @@
 id: ex-hilbert-cube-as-a-compact-polish-universal-space
 kind: example
 title: "Under the Axiom of Choice, the Hilbert cube is compact, Polish, and universal for separable metrizable spaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

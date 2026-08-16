@@ -2,7 +2,7 @@
 id: cor-gaft-recovers-the-free-group-and-abelianisation-adjoints
 kind: corollary
 title: "GAFT recovers the published free-group adjunction, and the comma-initial criterion the abelianisation adjunction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-trivial-coverings-and-discrete-fibre-products
 kind: example
 title: "Trivial coverings are products with a discrete fibre"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

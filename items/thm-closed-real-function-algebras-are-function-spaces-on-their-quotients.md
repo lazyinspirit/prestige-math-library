@@ -2,7 +2,7 @@
 id: thm-closed-real-function-algebras-are-function-spaces-on-their-quotients
 kind: theorem
 title: 'A closed unital real function algebra is $C(Y,\mathbb R)$ on its indistinguishability quotient'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

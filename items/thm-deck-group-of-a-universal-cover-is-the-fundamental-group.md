@@ -2,7 +2,7 @@
 id: thm-deck-group-of-a-universal-cover-is-the-fundamental-group
 kind: theorem
 title: "For a path-connected locally path-connected semilocally simply connected base, the deck group of a universal cover is isomorphic to the fundamental group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

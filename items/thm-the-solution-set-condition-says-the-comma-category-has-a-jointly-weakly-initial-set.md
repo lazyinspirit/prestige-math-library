@@ -2,7 +2,7 @@
 id: thm-the-solution-set-condition-says-the-comma-category-has-a-jointly-weakly-initial-set
 kind: theorem
 title: "The solution-set condition at an object is exactly a jointly weakly initial set in its comma category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

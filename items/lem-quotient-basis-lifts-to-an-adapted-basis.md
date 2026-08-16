@@ -2,7 +2,7 @@
 id: lem-quotient-basis-lifts-to-an-adapted-basis
 kind: lemma
 title: "A quotient basis lifts to a basis adapted to $W$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: rem-choice-ledger-for-the-adjoint-functor-theorems
 kind: remark
 title: "Choice and smallness ledger for the initial-object lemma, GAFT, and SAFT"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

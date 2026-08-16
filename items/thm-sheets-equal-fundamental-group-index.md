@@ -2,7 +2,7 @@
 id: thm-sheets-equal-fundamental-group-index
 kind: theorem
 title: "For a nonempty path-connected total space, a covering fibre is in bijection with the right cosets of the induced fundamental-group subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

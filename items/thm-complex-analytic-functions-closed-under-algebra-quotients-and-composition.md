@@ -2,7 +2,7 @@
 id: thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition
 kind: theorem
 title: "Complex analytic functions are closed under finite linear combinations, products, quotients with nonzero denominator, and composition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

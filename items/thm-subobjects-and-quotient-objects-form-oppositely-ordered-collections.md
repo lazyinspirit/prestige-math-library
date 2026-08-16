@@ -2,7 +2,7 @@
 id: thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections
 kind: theorem
 title: "Subobjects and quotient objects form oppositely oriented partially ordered collections"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

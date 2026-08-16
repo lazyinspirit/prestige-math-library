@@ -2,7 +2,7 @@
 id: ex-square-summable-coefficient-power-series-on-the-closed-disc
 kind: example
 title: "A power series with reciprocal-square coefficients converges uniformly on the closed unit disc"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

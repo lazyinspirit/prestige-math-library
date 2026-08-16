@@ -2,7 +2,7 @@
 id: thm-fundamental-inequality-for-complex-line-integrals
 kind: theorem
 title: "The fundamental inequality: the modulus of the integral is at most the absolute line integral for rectifiable contours"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

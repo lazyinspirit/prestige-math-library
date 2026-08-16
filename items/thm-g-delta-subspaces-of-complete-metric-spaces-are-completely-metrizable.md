@@ -2,7 +2,7 @@
 id: thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable
 kind: theorem
 title: "Under the Axiom of Countable Choice, every $G_\\delta$ subspace of a complete metric space is completely metrizable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

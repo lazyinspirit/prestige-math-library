@@ -2,7 +2,7 @@
 id: def-cech-complete-space
 kind: definition
 title: "Čech-complete spaces as $G_\\delta$ subspaces of Hausdorff compactifications"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

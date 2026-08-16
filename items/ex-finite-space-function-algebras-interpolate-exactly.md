@@ -2,7 +2,7 @@
 id: ex-finite-space-function-algebras-interpolate-exactly
 kind: example
 title: "On a finite compact Hausdorff space a unital separating algebra contains every scalar-valued function"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

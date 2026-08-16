@@ -2,7 +2,7 @@
 id: ex-the-solution-set-for-groups-computed-on-a-two-element-set
 kind: example
 title: "The canonical group solution set on a two-element set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

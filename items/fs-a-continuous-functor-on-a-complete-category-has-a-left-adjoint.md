@@ -2,7 +2,7 @@
 id: fs-a-continuous-functor-on-a-complete-category-has-a-left-adjoint
 kind: false-statement
 title: "FALSE: A continuous functor on a complete category necessarily has a left adjoint"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-monodromy-action-on-a-covering-fibre
 kind: definition
 title: "The monodromy right action on a covering fibre and its equivalent left-action convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

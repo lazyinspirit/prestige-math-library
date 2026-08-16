@@ -2,7 +2,7 @@
 id: def-complex-primitive
 kind: definition
 title: "A primitive of a complex function on an open set"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -16,6 +16,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

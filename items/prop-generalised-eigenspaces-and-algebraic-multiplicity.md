@@ -2,7 +2,7 @@
 id: prop-generalised-eigenspaces-and-algebraic-multiplicity
 kind: proposition
 title: "Split characteristic polynomials decompose into generalised eigenspaces of the algebraic multiplicities"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

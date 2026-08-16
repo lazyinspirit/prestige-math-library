@@ -2,7 +2,7 @@
 id: def-uniform-convergence-of-complex-valued-functions
 kind: definition
 title: "Uniform convergence and the uniformly Cauchy condition for complex-valued functions, with the componentwise dictionary"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -16,6 +16,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

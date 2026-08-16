@@ -2,7 +2,7 @@
 id: cex-a-reflective-inclusion-need-not-preserve-colimits
 kind: counterexample
 title: "A reflective inclusion need not preserve even the empty colimit"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

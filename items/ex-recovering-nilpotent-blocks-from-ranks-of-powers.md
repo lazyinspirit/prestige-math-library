@@ -2,7 +2,7 @@
 id: ex-recovering-nilpotent-blocks-from-ranks-of-powers
 kind: example
 title: "Recovering $J_3(0),J_2(0),J_1(0)$ from ranks of powers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

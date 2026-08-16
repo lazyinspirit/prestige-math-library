@@ -2,7 +2,7 @@
 id: thm-circle-integrals-of-integer-monomials
 kind: theorem
 title: "On a positively oriented circle about a, the integral of (z-a)^m is zero for every integer m except -1, and is 2 pi i for m=-1"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

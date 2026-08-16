@@ -2,7 +2,7 @@
 id: lem-finite-refining-small-diameter-covers-of-compact-metric-spaces
 kind: lemma
 title: "Under Dependent Choice, a compact metric space carries a finitely branching refining tree of covers of arbitrarily small diameter"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

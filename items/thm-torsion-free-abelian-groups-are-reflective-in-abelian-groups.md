@@ -2,7 +2,7 @@
 id: thm-torsion-free-abelian-groups-are-reflective-in-abelian-groups
 kind: theorem
 title: "Torsion-free abelian groups form a reflective full subcategory of abelian groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

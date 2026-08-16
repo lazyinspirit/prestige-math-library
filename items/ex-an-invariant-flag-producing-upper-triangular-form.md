@@ -2,7 +2,7 @@
 id: ex-an-invariant-flag-producing-upper-triangular-form
 kind: example
 title: "Building an upper-triangular matrix from a complete invariant flag"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []

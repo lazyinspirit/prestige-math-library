@@ -2,7 +2,7 @@
 id: thm-every-nonempty-polish-space-is-a-continuous-image-of-baire-space
 kind: theorem
 title: "Under Dependent Choice, every nonempty Polish space is a continuous image of Baire sequence space"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

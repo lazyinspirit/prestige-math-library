@@ -2,7 +2,7 @@
 id: ex-contour-integral-of-conjugation-depends-on-the-path
 kind: example
 title: "The integral of complex conjugation from -1 to 1 differs along a semicircle and a polygonal path"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

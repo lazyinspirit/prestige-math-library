@@ -2,7 +2,7 @@
 id: thm-invariance-of-complex-line-integrals-under-increasing-reparametrization
 kind: theorem
 title: "Complex and absolute line integrals are invariant under increasing continuous reparametrization"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

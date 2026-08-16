@@ -2,7 +2,7 @@
 id: def-cyclic-subspace-vector-and-vector-annihilator
 kind: definition
 title: "Cyclic subspaces, cyclic vectors, and vector annihilators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

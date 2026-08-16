@@ -2,7 +2,7 @@
 id: prop-complete-invariant-flags-and-upper-triangular-matrices
 kind: proposition
 title: "Complete invariant flags are equivalent to upper-triangular matrices"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -17,6 +17,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

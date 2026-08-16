@@ -2,7 +2,7 @@
 id: cor-metrizable-cech-complete-iff-completely-metrizable
 kind: corollary
 title: "Under the ultrafilter lemma and the Axiom of Choice, a metrizable space is Čech-complete exactly when it is completely metrizable"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-15
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

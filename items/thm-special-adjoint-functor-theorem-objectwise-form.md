@@ -2,7 +2,7 @@
 id: thm-special-adjoint-functor-theorem-objectwise-form
 kind: theorem
 title: "Special adjoint functor theorem, objectwise form with explicit intersection smallness or preservation data"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: cases
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

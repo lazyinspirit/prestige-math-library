@@ -2,7 +2,7 @@
 id: thm-path-lifting-for-covering-maps
 kind: theorem
 title: "Existence and uniqueness of path lifts through a covering map"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-16
 sources:
   scraped: []
   references:

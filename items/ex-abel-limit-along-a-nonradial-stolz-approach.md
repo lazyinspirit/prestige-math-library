@@ -2,7 +2,7 @@
 id: ex-abel-limit-along-a-nonradial-stolz-approach
 kind: example
 title: "Abel convergence of the alternating harmonic power series along a nonradial Stolz approach"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -19,6 +19,7 @@ verification:
     model: "deepseek-v4-pro + gpt-5.6-terra"
     verdict: pass
     date: 2026-08-16
+  audited: 2026-08-16
 sources:
   scraped: []
   references: []
