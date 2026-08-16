@@ -31,11 +31,41 @@ const judgeTargetsPath = option('--judge-targets');
 const receiptPath = option('--audit-receipt');
 const spineReceiptPath = option('--spine-receipt');
 const templatePath = option('--template');
+// --judge-only: the JUDGE CLOSURE half of this gate, on its own.
+//
+// The full gate needs a merged contract, a spine receipt and a completed audit
+// receipt, none of which exist at step 7 or step 8 — so the only place it could
+// run was the very end of a build, which is exactly where frontier-14 found it
+// red with nothing left to do about it. Judge closure is answerable much
+// earlier: it needs the manifests, the ledger and the items on disk.
+//
+// Splitting it out here rather than writing a second tool is deliberate. The
+// predicate is subtle (context hash vs item hash, clause (a) vs clause (b),
+// exact-hash adjudication matching) and a second implementation of it would
+// drift from this one and then disagree with it at 3am.
+const judgeOnly = argv.includes('--judge-only');
+// Step 7 runs before any adjudication exists, so an unadjudicated rejection is
+// the expected state there, not a defect. It is a hard error everywhere else.
+const allowUnadjudicated = argv.includes('--allow-unadjudicated');
+// Step 8 repairs items, and a repaired item's text no longer matches the verdict
+// that condemned it — so it correctly has no current pair. That is the rejudge
+// stage's input, not step 8's failure. Allowed only there; by the rejudge gate
+// and every gate after it, an item with no current pair is a hole.
+const allowPendingRejudge = argv.includes('--allow-pending-rejudge');
+const outPath = option('--out');
 const batchFiles = argv.filter((arg, index) => {
   if (arg.startsWith('--')) return false;
-  return !['--contracts', '--judge-ledger', '--judge-adjudications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template'].includes(argv[index - 1]);
+  return !['--contracts', '--judge-ledger', '--judge-adjudications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
 });
-if (!batchFiles.length || (!receiptPath && !templatePath) || (receiptPath && templatePath)) usage();
+if (!batchFiles.length) usage();
+if (judgeOnly) {
+  if (receiptPath || templatePath) { console.error('--judge-only does not take an audit receipt; it checks judge closure alone'); process.exit(2); }
+  if (!judgePath) { console.error('--judge-only requires --judge-ledger'); process.exit(2); }
+  // Without this the check compares verdicts against whatever context they were
+  // cast against, which is trivially satisfied and answers nothing. A closure
+  // gate that cannot fail is worse than no gate: it reports green.
+  if (!verifyCurrent) { console.error('--judge-only requires --verify-current-context; otherwise it checks nothing'); process.exit(2); }
+} else if ((!receiptPath && !templatePath) || (receiptPath && templatePath)) usage();
 
 const errors = [];
 const warnings = [];
@@ -141,7 +171,7 @@ for (const file of batchFiles) {
     if (seen.has(id)) { error('batch-duplicate-item', `${id} appears more than once in the supplied batch manifests`, id); continue; }
     seen.add(id);
     scope.push(id);
-    if (!Array.isArray(entry?.deps)) error('batch-deps-missing', `${file}: ${id} needs its planned deps array for post-authoring reconciliation`, id);
+    if (!Array.isArray(entry?.deps)) { if (!judgeOnly) error('batch-deps-missing', `${file}: ${id} needs its planned deps array for post-authoring reconciliation`, id); }
     else plannedDeps.set(id, entry.deps.map((dep) => resolve(dep) ?? dep).sort());
   }
 }
@@ -171,7 +201,7 @@ if (judgeTargetsPath) {
 for (const id of scope) {
   const item = items.get(resolve(id) ?? id);
   if (!item) error('scope-item-missing', `${id} is declared by a batch but has no item file`, id);
-  else {
+  else if (!judgeOnly) {
     if (!item.provenance.statement || !item.provenance.proof)
       error('provenance-missing', `${item.file}: in-flight level coverage requires provenance.statement and provenance.proof`, item.id);
     // A final independent backstop for the future-scope policy: a dependency
@@ -401,6 +431,13 @@ function currentContextHash(id) {
 // exact repair set rather than the whole manifest. A2/A6 provide whole-wave
 // reading coverage; A7 supplies paired REJUDGE evidence only for actual repairs.
 // Legacy rows predating item_sha256 fall back to (a) alone, which is strict.
+// The three closure sets, named so a later stage can act on them mechanically.
+// frontier-14's step 8 named its 23 rejudge targets in a markdown table, and the
+// rejudge never ran: nothing downstream could read a table. A machine-readable
+// receipt is what turns "these need rejudging" into a dispatch.
+const needsRejudge = [];      // no current verdict pair — repaired, or never judged
+const unadjudicated = [];     // current rejection, no exact-hash Alpha outcome
+const openFatal = [];         // Alpha confirmed fatal against the text on disk
 const judgeCoverage = [];
 for (const id of judgePath ? judgeScope : []) {
   const contexts = verdicts.get(id) ?? new Map();
@@ -417,7 +454,8 @@ for (const id of judgePath ? judgeScope : []) {
   const eligible = [...contexts.entries()].filter((entry) =>
     coversCurrent(entry) && JUDGES.every((model) => entry[1].has(model)));
   if (!eligible.length) {
-    error('judge-coverage-missing', `${id}: no complete ${JUDGES.join('/')} verdict pair${verifyCurrent ? ' for the current frozen context, and none cast against the item\'s current text' : ''}`, id);
+    needsRejudge.push(id);
+    (allowPendingRejudge ? warn : error)('judge-coverage-missing', `${id}: no complete ${JUDGES.join('/')} verdict pair${verifyCurrent ? ' for the current frozen context, and none cast against the item\'s current text' : ''}`, id);
     continue;
   }
   eligible.sort((a, b) => Math.max(...JUDGES.map((m) => String(a[1].get(m).at ?? ''))) < Math.max(...JUDGES.map((m) => String(b[1].get(m).at ?? ''))) ? 1 : -1);
@@ -436,8 +474,13 @@ for (const id of judgePath ? judgeScope : []) {
       }
       const outcome = judgeOutcomes.get(judgeOutcomeKey(id, model, hash));
       if (!outcome) {
-        error('judge-adjudication-missing', `${id}: current ${model} rejection has no exact Alpha outcome for context ${hash}`, id);
+        if (!unadjudicated.includes(id)) unadjudicated.push(id);
+        // Step 7 has not adjudicated anything yet; everywhere else this is a
+        // rejection nobody has read, which is not the same as a rejection
+        // somebody decided was harmless.
+        (allowUnadjudicated ? warn : error)('judge-adjudication-missing', `${id}: current ${model} rejection has no exact Alpha outcome for context ${hash}`, id);
       } else if (outcome.outcome === 'confirmed_fatal') {
+        if (!openFatal.includes(id)) openFatal.push(id);
         error('judge-verdict-confirmed-fatal', `${id}: Alpha confirmed a current ${model} rejection as fatal (${outcome.defect_type}); repair and rejudge`, id);
       } else {
         warn('judge-verdict-adjudicated-nonfatal', `${id}: Alpha classified current ${model} rejection as ${outcome.outcome}`, id);
@@ -449,10 +492,35 @@ for (const id of judgePath ? judgeScope : []) {
 
 const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length, judge_pairs: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
 const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage, judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
+
+// The closure receipt. Written whether or not the gate passes — a failing gate
+// is exactly when the ids it names need to become someone's work.
+if (outPath) {
+  writeFileSync(resolvePath(outPath), `${JSON.stringify({
+    version: 1,
+    mode: judgeOnly ? 'judge-closure' : 'level-coverage',
+    judge_lineup: lineupName,
+    verified_against_current_context: verifyCurrent,
+    scope: judgeScope.length,
+    pairs_complete: judgeCoverage.length,
+    needs_rejudge: needsRejudge.sort(),
+    unadjudicated: unadjudicated.sort(),
+    open_fatal: openFatal.sort(),
+    // `closed` is the unconditional predicate, ignoring the --allow-* relaxations:
+    // a stage may be allowed to proceed with work outstanding, but nothing should
+    // be able to read this receipt and conclude the level is finished when it is not.
+    closed: needsRejudge.length === 0 && openFatal.length === 0 && unadjudicated.length === 0,
+    allowances: { unadjudicated: allowUnadjudicated, pending_rejudge: allowPendingRejudge },
+  }, null, 2)}\n`);
+}
+
 if (asJson) console.log(JSON.stringify(result, null, 2));
 else {
   if (templatePath) console.log(`level-coverage: wrote audit receipt template ${templatePath}`);
-  console.log(`level-coverage: ${summary.scope} item(s), ${summary.proof_scope} proof-bearing, ${summary.relationships} declared relationship(s), ${summary.judge_pairs}/${summary.judge_scope} required judge pair(s)`);
+  if (judgeOnly) {
+    console.log(`level-coverage --judge-only: ${summary.judge_pairs}/${summary.judge_scope} current pair(s); `
+      + `${needsRejudge.length} need rejudge, ${unadjudicated.length} unadjudicated, ${openFatal.length} open fatal`);
+  } else console.log(`level-coverage: ${summary.scope} item(s), ${summary.proof_scope} proof-bearing, ${summary.relationships} declared relationship(s), ${summary.judge_pairs}/${summary.judge_scope} required judge pair(s)`);
   for (const entry of warnings) console.warn(`WARN ${entry.code}${entry.id ? ` [${entry.id}]` : ''}: ${entry.message}`);
   for (const entry of errors) console.error(`ERROR ${entry.code}${entry.id ? ` [${entry.id}]` : ''}: ${entry.message}`);
 }
@@ -460,5 +528,7 @@ process.exit(errors.length ? 1 : 0);
 
 function usage() {
   console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] [--audit --judge-targets <repair-targets.json>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
+  console.error('       judge closure alone (steps 7, 8, rejudge):');
+  console.error('       node tools/level-coverage.mjs --judge-only --verify-current-context --judge-ledger <judge.jsonl> [--judge-adjudications <adj.jsonl>] [--allow-unadjudicated] [--allow-pending-rejudge] [--out <closure.json>] research/<run>-batch-*.pages.json');
   process.exit(2);
 }

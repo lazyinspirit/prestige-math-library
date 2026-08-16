@@ -497,6 +497,31 @@ decision was made against. With
 an old pass cannot be reused after its item, cited statement, or conventions
 changed.
 
+**`--judge-only`: the judge-closure half, runnable early** (2026-08-16). The
+full gate needs a merged contract, a spine receipt and a completed audit
+receipt, so the earliest point it can run is the very end of a build — which is
+exactly where `frontier-14` found it red, with nothing left to do about it. Judge
+closure needs only the manifests, the ledger and the items on disk, and answers
+three questions: does every scoped item have a current verdict pair, is every
+current rejection adjudicated at its exact hash, and is any adjudication
+`confirmed_fatal`. `--judge-only` requires `--verify-current-context` — without
+it the check compares verdicts against whatever context they were cast against,
+which is trivially satisfied and answers nothing.
+
+Two narrow, per-stage relaxations, because the same predicate is asked at three
+different moments: `--allow-unadjudicated` demotes a rejection with no Alpha
+outcome to a warning (true only at step 7, before anything has been adjudicated),
+and `--allow-pending-rejudge` demotes a missing verdict pair (true only at step
+8, where a repair correctly voids its own pair and the rejudge stage owns the
+consequence). `--out <receipt.json>` writes `needs_rejudge`, `unadjudicated` and
+`open_fatal` as id lists plus an unconditional `closed` flag that ignores both
+relaxations — so a stage may proceed with work outstanding, but nothing reading
+the receipt can conclude the level is finished when it is not. The receipt is
+written whether or not the gate passes: a failing gate is precisely when the ids
+it names need to become someone's dispatch. `frontier-14`'s step 8 named its 23
+rejudge targets in a markdown table, the rejudge never ran, and 22 of them are
+unjudged to this day — nothing downstream can read a table.
+
 **COVERAGE FOLLOWS THE ITEM, NOT THE PAGE** (owner, 2026-08-06). The judge's
 context unit is the A/B pair — an item is judged with its whole page and
 companion in full, which is what lets a judge catch a claim its own siblings
