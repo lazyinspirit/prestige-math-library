@@ -330,6 +330,15 @@ falsification evidence and never replaces your reading.
 `frontier-13` two false template rows each hid a fatal defect; on `frontier-14`,
 three did — three times out of three that anyone looked.
 
+**Every adjudicated finding becomes a defect-ledger row, written in the same
+act as the disposition**: assemble rows as JSON and run
+`node tools/defect-ledger.mjs append --file <rows.json>` (never inline JSON
+through a shell). One row per DEFECT — two readers or two lanes on one defect
+is one row. Schema and closed enums are in the tool's header; `unknown` is the
+honest value for the introduced-at fields. The step-6 rows are the ones no
+other artifact holds, and the `check` gate at steps 8–10 refuses a ledger
+without them.
+
 **6c — cross-batch and cross-level edges.** Audit every relationship not wholly
 inside one batch: cross-batch edges, backward edges to published content,
 well-definedness discharges, external mentions, every declared forward
@@ -370,6 +379,13 @@ verbatim quote from the cited item. Append per model and per context to
 outcome classifies `defect_type` as `logic`, `dependency_citation` or `other`.
 `item_sha256` is the sha256 of the normalized item text — the file with its
 `verification:` block removed — as it stood when you adjudicated.
+
+With each adjudication, its defect-ledger row (same act, same rule as 6b): a
+`confirmed_fatal` yields a row whose `adjudication_ref` carries your
+`item_sha256`, and the gate demands exactly one row per fatal. An open fatal
+you decline to repair is `disposition: open` — the gate cross-checks it
+against `judge-closure.json`, so a blocker can no longer live only in
+markdown.
 
 **Step 8 is fatal-only (R1, owner 2026-08-03).** Only `confirmed_fatal` licenses
 an edit. `confirmed_nonfatal` and `false_positive` close the row and change
@@ -460,6 +476,12 @@ A complete account of every fatal error found and fixed, grouped by defect type
 missing hypothesis or choice scope, invalid witness) and by location
 (title/Statement, proof, Facts, Remark, page prose), each naming the id and its
 disposition. Evidence is the ledgers. **Concision must not omit a fatal defect.**
+
+**You author no defect-ledger rows at step 10** — every earlier stage would
+defer if you could. Run `node tools/defect-ledger.mjs stats --run <run>
+--leakage --recurrence --json` and `… render`, and carry the leakage pairs and
+any recurrence flags into the report; the run's statistics are queries now,
+not archaeology.
 
 Report outcomes, never rejection rates: `frontier-14`'s 33% rejection rate
 resolved to 7% confirmed fatal, and the rate was not the finding either time.

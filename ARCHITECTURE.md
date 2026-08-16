@@ -909,6 +909,39 @@ one of each surviving defect shape so the tool cannot silently stop firing;
 Both print locations, never a headline count that could be mistaken for a
 finding count (`grep-counts-mislead`).
 
+### 3.11h The defect ledger — `tools/defect-ledger.mjs` (owner, 2026-08-16)
+
+**Failure it prevents:** defect history that cannot answer a question. ~78% of
+frontier-14's fatals existed only in report prose; 7 of 3,920 adjudication rows
+carried a stage; the one hand-maintained aggregate (`BUILD-AUDIT-INDEX.md`) was
+wrong ~6x on its own total; `citation-fidelity` was built against a *memory* of
+the inflated-citation class and found 0 of 15 real instances in three batches,
+because the class's rows were never queryable at design time.
+
+`research/defect-ledger.jsonl` — append-only, one row per DEFECT (two lanes on
+one defect share one row via the `adjudication_ref` array), all runs in one
+file because recurrence is the point. Eleven mandatory fields, all known at
+disposition time; closed enums (`other` demands a note); the citation class
+splits four ways (inflated/truncated/missing/corrupted — four detectors, four
+fixes); `should_have_caught` is the leakage field and
+`prevention: {mechanical|brief|process|none, ref}` is what makes it a control.
+`unknown` is honest and first-class for the introduced-at fields.
+
+**Whoever writes a disposition writes the row, in the same act** — 6b/6c
+Alphas for the step-6 body, step 8 per `confirmed_fatal`, step 9 for
+false-declines; step 10 authors no mathematical rows (it runs `stats` and
+`render`). The `check` gate at 8-adjudicate/8-rejudge/9-scope/10-report holds
+ledger and adjudications to each other: exactly one row per `confirmed_fatal`
+(anti-double-count), step-6-caught rows whenever a 6b report exists (a ledger
+that mirrors the adjudication file fails), open rows agreeing with the closure
+receipt (two blockers once lived only in markdown), plus a liveness floor so
+zero rows never passes. `research/DEFECT-LEDGER.md` is the GENERATED view; it
+leads with caught/prevented/escaped, never a bare total
+(`judge-rejection-rates-mislead`). Back-filled rows are `source:
+"reconstructed"` and the historical `check` against frontier-14 is
+deliberately red where the record disagrees with itself — recorded, never
+force-fitted.
+
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 
 `AUDIT-WORKFLOW.md` is the normative workflow; these are its mechanisms.
