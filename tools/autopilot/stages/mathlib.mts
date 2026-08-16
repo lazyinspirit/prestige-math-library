@@ -101,6 +101,12 @@ const repoWide = (ctx) => [
   // step-0 scope ledger is re-checked at every repo-wide gate point, not only
   // through step 5 (where it stopped when a scaffolded pair vanished anyway).
   scopeGate(ctx),
+  // The judge sweep and level-coverage both expand pages into items — the
+  // sweep via plan-spec.json (spliced at step 4), closure via the batch
+  // manifests. An item an Alpha adds to a manifest after step 4 diverges the
+  // two scopes: it escapes the sweep or hard-stops closure. Verify fails on
+  // any divergence; the licensed remedy is splice-plan --batch <i> --update.
+  gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
 ];
 
 const coverageGates = (ctx) => batches(ctx).map((b: any) =>

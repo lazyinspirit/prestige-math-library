@@ -17,12 +17,22 @@
 // exits nonzero so the engine raises a blocker and an Alpha adjudicates.
 //
 //   node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run]
+//   node tools/splice-plan.mjs --run <run> --verify
+//   node tools/splice-plan.mjs --run <run> --batch <i> --update
 //
 // Idempotent: a page whose items are already spliced and identical is left
 // alone. A page whose items are already spliced and DIFFERENT is a hard error,
-// never a silent overwrite.
+// never a silent overwrite — unless `--update` says the difference is a
+// licensed in-flight change (a 6b/6c Alpha added or deleted an item in the
+// batch manifest) and the plan should follow it, loudly.
+//
+// `--verify` exists because the judge sweep expands its `--pages` into item
+// lists via plan-spec.json, which is spliced once at step 4: an item an Alpha
+// legitimately added to a manifest afterwards would either escape judging or
+// hard-stop closure. Verify diffs every batch manifest against the plan and
+// fails on any divergence, so the drift is loud before the sweep spends.
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 
 
 const argv = process.argv.slice(2);
@@ -30,18 +40,56 @@ const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 &
 const run = opt('run');
 const batch = opt('batch');
 const dryRun = argv.includes('--dry-run');
+const verify = argv.includes('--verify');
+const update = argv.includes('--update');
 const SIZE_CEILING = 60;
 
-if (!run || !batch) {
-  console.error('usage: node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run]');
+if (!run || (!batch && !verify)) {
+  console.error('usage: node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run] [--update]');
+  console.error('       node tools/splice-plan.mjs --run <run> --verify');
   process.exit(2);
 }
 
-const manifestPath = `research/${run}-batch-${batch}.pages.json`;
 const specPath = 'research/plan-spec.json';
-for (const p of [manifestPath, specPath]) {
-  if (!existsSync(p)) { console.error(`splice-plan: missing ${p}`); process.exit(2); }
+if (!existsSync(specPath)) { console.error(`splice-plan: missing ${specPath}`); process.exit(2); }
+
+if (verify) {
+  const spec = JSON.parse(readFileSync(specPath, 'utf8'));
+  const byId = new Map(spec.pages.map((p) => [p.id, p]));
+  const idOf = (i) => (typeof i === 'string' ? i : i.id);
+  const manifests = readdirSync('research')
+    .filter((f) => f.startsWith(`${run}-batch-`) && f.endsWith('.pages.json')).sort();
+  if (!manifests.length) { console.error(`splice-plan: no batch manifests for ${run}`); process.exit(2); }
+  const drift = [];
+  let checked = 0;
+  for (const f of manifests) {
+    for (const page of JSON.parse(readFileSync(`research/${f}`, 'utf8'))) {
+      checked += 1;
+      const target = byId.get(page.id);
+      if (!target) { drift.push(`${page.id} (${f}): not in plan-spec.json`); continue; }
+      const want = (page.items ?? []).map(idOf);
+      const have = (target.items ?? []).map(idOf);
+      if (want.length === have.length && want.every((w, k) => w === have[k])) continue;
+      const onlyM = want.filter((w) => !have.includes(w));
+      const onlyP = have.filter((h) => !want.includes(h));
+      drift.push(`${page.id} (${f}): manifest ${want.length} vs plan ${have.length} item(s)`
+        + (onlyM.length ? `; only in manifest: ${onlyM.join(', ')}` : '')
+        + (onlyP.length ? `; only in plan: ${onlyP.join(', ')}` : '')
+        + (!onlyM.length && !onlyP.length ? '; same ids, different order' : ''));
+    }
+  }
+  if (drift.length) {
+    console.error(`splice-plan: ${drift.length} page(s) where the plan and the batch manifest disagree`);
+    for (const d of drift) console.error(`  ${d}`);
+    console.error('A licensed in-flight change is applied with: splice-plan --run <run> --batch <i> --update');
+    process.exit(1);
+  }
+  console.log(`splice-plan: verified ${checked} page(s) across ${manifests.length} manifest(s) — plan and manifests agree`);
+  process.exit(0);
 }
+
+const manifestPath = `research/${run}-batch-${batch}.pages.json`;
+if (!existsSync(manifestPath)) { console.error(`splice-plan: missing ${manifestPath}`); process.exit(2); }
 
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
@@ -62,10 +110,20 @@ for (const page of manifest) {
   if (have.length) {
     const same = have.length === want.length && have.every((h, k) => idOf(h) === idOf(want[k]));
     if (same) { unchanged.push(page.id); continue; }
-    problems.push(
-      `${page.id}: already has ${have.length} item(s) that differ from the manifest's ${want.length}. `
-      + 'Refusing to overwrite — this is a finding, not a splice.');
-    continue;
+    if (update) {
+      // A licensed in-flight change: the manifest is the batch-level truth and
+      // the plan follows it — loudly, with the delta on the record.
+      const wantIds = want.map(idOf);
+      const haveIds = have.map(idOf);
+      console.log(`splice-plan: UPDATING ${page.id} — plan ${haveIds.length} -> manifest ${wantIds.length} item(s)`);
+      for (const w of wantIds.filter((x) => !haveIds.includes(x))) console.log(`  + ${w}`);
+      for (const h of haveIds.filter((x) => !wantIds.includes(x))) console.log(`  - ${h}`);
+    } else {
+      problems.push(
+        `${page.id}: already has ${have.length} item(s) that differ from the manifest's ${want.length}. `
+        + 'Refusing to overwrite — a licensed in-flight change is applied with --update; anything else is a finding.');
+      continue;
+    }
   }
 
   // `requires` disagreement is a DECISION, not a splice. Report and stop.
