@@ -47,6 +47,23 @@ and decide:
    — the reason at least 40 characters, about THAT row specifically, never a
    template. The detector reports upheld rows and stops failing on them.
 
+## If risk-report reports risk-review-missing
+
+Run it yourself:
+
+```
+node tools/risk-report.mjs research/frontier-15-proof-contracts.json --require-reviewed
+```
+
+Every named item is a high/critical-tier proof that risk-report routed to
+Alpha review and no Alpha reviewed. Do the review NOW, per QUALITY-CONTROLS:
+read the proof against its contract, probe the risk that earned the tier
+(an AI-generated claim gets a counterexample search), and write the
+`risk_review` disposition — `{status: "complete", reviewer, notes}` with
+notes saying what you actually checked — into the owning batch's
+`research/frontier-15-batch-<i>.proof-contracts.json` entry. Then re-merge
+(the command below) and re-run risk-report until it exits 0.
+
 Never batch-uphold; never weaken a rationale to pass a regex. Contract rows
 live in the batch's `research/frontier-15-batch-<i>.proof-contracts.json` —
 after edits, re-run the merge the join uses:

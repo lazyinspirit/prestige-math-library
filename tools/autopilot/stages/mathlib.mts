@@ -962,6 +962,25 @@ export const stages = [
     // `--require-reviewed` belongs here, not at step 5: a `risk_review` is a
     // disposition only Alpha may write, and Alpha writes it at step 6.
     gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true })],
+    // A missing risk_review is adjudication residue: risk-report routed an
+    // item to Alpha review and no Alpha wrote the disposition — on the first
+    // live join, one high-tier lemma the group Alpha missed. Only an Alpha
+    // may write a risk_review (owner, 2026-08-01), so the round dispatches
+    // one rather than dead-ending; the same contract-audit task carries the
+    // duty. Structural contract failures stay blockers.
+    maxFixRounds: 2,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      if (!['risk-report', 'boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) return;
+      executor.start(stage, {
+        role: 'alpha',
+        label: `risk-review-${round}`,
+        job: 'adjudication',
+        covers: [],
+        brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-contract-audit.task.md`],
+        timeout: 3600,
+      });
+    },
   },
 
   {
