@@ -160,7 +160,7 @@ switch (cmd) {
 
     const cap = Number(opt('cap', '2'));
     const groups = packBatches(repo, pages, { cap });
-    const written = writeManifests(repo, run, groups);
+    const written = writeManifests(repo, run, groups, { force: has('force') });
     console.log(`step 0 for ${run}: ${pages.length} A/B pair(s) -> ${groups.length} batch(es), cap ${cap}\n`);
     for (const wr of written) console.log(`  batch ${wr.batch}: ${wr.pages.join(', ')}`);
 

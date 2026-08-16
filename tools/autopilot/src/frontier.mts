@@ -154,11 +154,34 @@ export function packBatches(repo: string, pageIds: string[], { cap = 2 }: { cap?
   return out;
 }
 
-/** Write the step-0 batch manifests, with empty item lists for the Betas. */
-export function writeManifests(repo: string, run: string, batchGroups: string[][]): any[] {
+/** Write the step-0 batch manifests, with empty item lists for the Betas.
+ *
+ *  REFUSES to overwrite a manifest that already carries items. `plan` is a
+ *  step-0 command; re-running it mid-run against a scaffolded run would reset
+ *  every Beta's item list to [] — and the scope ledger regenerated in the same
+ *  command would then CONFIRM the emptied manifests, so the anti-scope-loss
+ *  gate could not see the loss it was built for. Scaffolded state is torn down
+ *  by hand, on the record, never by a planner default. */
+export function writeManifests(repo: string, run: string, batchGroups: string[][], { force = false } = {}): any[] {
   const spec = loadPlan(repo);
   const byId = new Map<string, any>(spec.pages.map((p: any) => [p.id, p]));
   const KEYS = ['order', 'id', 'kind', 'category', 'title', 'companion', 'requires', 'items'];
+  if (!force) {
+    const populated: string[] = [];
+    for (let i = 1; ; i += 1) {
+      const path = join(repo, 'research', `${run}-batch-${i}.pages.json`);
+      if (!existsSync(path)) break;
+      try {
+        const pages = JSON.parse(readFileSync(path, 'utf8'));
+        if ((Array.isArray(pages) ? pages : []).some((p: any) => (p.items ?? []).length)) populated.push(path);
+      } catch { populated.push(path); }
+    }
+    if (populated.length) {
+      throw new Error(`refusing to overwrite scaffolded manifest(s): ${populated.join(', ')} — `
+        + 'they carry item lists a Beta authored. Re-planning a live run destroys them; '
+        + 'pass --force only for a deliberate, on-the-record teardown.');
+    }
+  }
   const written: any[] = [];
   batchGroups.forEach((group: any, i: any) => {
     const entries: any[] = [];

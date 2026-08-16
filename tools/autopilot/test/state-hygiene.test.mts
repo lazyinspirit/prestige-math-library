@@ -54,3 +54,26 @@ test('the scope ledger is written once; --force is the explicit re-baseline', ()
   assert.notEqual(second.status, 0, 'a silent re-baseline makes the gate confirm instead of check');
   assert.equal(run(['--run', 'r9', '--write-ledger', '--force']).status, 0);
 });
+
+test('plan refuses to reset a scaffolded run\'s manifests', async () => {
+  // Probe-verified on the old code: a manifest carrying a Beta's item list
+  // came back as items: [] after a re-plan, and the regenerated scope ledger
+  // then CONFIRMED the emptied manifests.
+  const { writeManifests } = await import('../src/frontier.mts');
+  const repo = mkdtempSync(join(tmpdir(), 'plan-'));
+  mkdirSync(join(repo, 'research'));
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({
+    pages: [
+      { id: 'page-a', kind: 'A', order: 1, companion: 'page-b' },
+      { id: 'page-b', kind: 'B', order: 1.001 },
+    ],
+  }));
+  writeManifests(repo, 'r9', [['page-a']]);
+  const manifest = join(repo, 'research', 'r9-batch-1.pages.json');
+  const pages = JSON.parse(readFileSync(manifest, 'utf8'));
+  pages[0].items = [{ id: 'lem-authored-by-a-beta' }];
+  writeFileSync(manifest, JSON.stringify(pages));
+  assert.throws(() => writeManifests(repo, 'r9', [['page-a']]), /refusing to overwrite/,
+    'a re-plan silently reset a scaffolded item list to []');
+  assert.doesNotThrow(() => writeManifests(repo, 'r9', [['page-a']], { force: true }));
+});
