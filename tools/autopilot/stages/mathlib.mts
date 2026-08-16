@@ -768,7 +768,32 @@ export const stages = [
       covers: batches(ctx),
       argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--all'],
     }],
-    gates: (ctx) => [scopeGate(ctx), planGate()],
+    // A `requires` refusal is the splice's correct OUTPUT, not its failure:
+    // the lane exits 0, clean batches splice, the refusing batch is withheld
+    // (no receipt, so its units stay open), and THIS gate holds the stage
+    // while the adjudicating Alpha decides each edge — the disposition
+    // CLAUDE.md assigns it ("the splice's refusal is what Alpha adjudicates").
+    // Before this, the lane exited 1 on a deterministic refusal, burned its
+    // three attempts on identical output, and the adjudication had no
+    // dispatch route.
+    gates: (ctx) => [
+      // No liveness floor: vacuity is impossible here — an absent artifact
+      // (the splice never ran) is exit 2, its own hard failure.
+      gate('splice-refusals', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--refusals-gate']),
+      scopeGate(ctx), planGate()],
+    maxFixRounds: 2,
+    onGateFailure: async ({ ctx, executor, stage, failure }: any) => {
+      if (failure.id !== 'splice-refusals') return;
+      executor.start(stage, {
+        role: 'alpha',
+        label: 'step4-adjudicate',
+        job: 'adjudication',
+        covers: [],
+        brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-step4.task.md`],
+        timeout: 3600,
+      });
+    },
   },
 
   // THE IMPACT BASELINE, TAKEN BEFORE AUTHORING.

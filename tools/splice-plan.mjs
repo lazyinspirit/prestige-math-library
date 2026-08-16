@@ -43,6 +43,21 @@ const dryRun = argv.includes('--dry-run');
 const verify = argv.includes('--verify');
 const update = argv.includes('--update');
 const allMode = argv.includes('--all');
+const refusalsGateMode = argv.includes('--refusals-gate');
+
+// --refusals-gate: the stage gate over the refusals artifact. Exits 1 while
+// any requires edge awaits adjudication, 2 when the artifact is absent (the
+// splice never ran — never a pass), 0 when the artifact says none.
+if (refusalsGateMode) {
+  const path = `research/${run}-splice-refusals.json`;
+  if (!existsSync(path)) { console.error(`splice-refusals: ${path} absent — the splice has not run`); process.exit(2); }
+  const { refusals: rows } = JSON.parse(readFileSync(path, 'utf8'));
+  for (const r of rows ?? []) {
+    console.error(`ERROR splice-refusal: batch ${r.batch} ${r.page} declares requires the plan does not — ${r.requires.join(', ')}`);
+  }
+  console.log(`splice-refusals: ${rows?.length ?? 0} edge(s) awaiting adjudication`);
+  process.exit(rows?.length ? 1 : 0);
+}
 const SIZE_CEILING = 60;
 
 if (!run || (!batch && !verify && !allMode) || (update && !batch)) {
@@ -105,6 +120,7 @@ const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const byId = new Map(spec.pages.map((p) => [p.id, p]));
 const idOf = (i) => (typeof i === 'string' ? i : i.id);
 const problems = [];
+const refusals = [];
 const perBatch = [];
 
 for (const b of batchList) {
@@ -140,14 +156,20 @@ for (const b of batchList) {
       }
     }
 
-    // `requires` disagreement is a DECISION, not a splice. Report and stop.
+    // `requires` disagreement is a DECISION, not a splice — but it is the
+    // tool's correct OUTPUT, not its failure. The first live run exited 1
+    // here, the lane burned its three attempts on the same deterministic
+    // refusal, and the adjudication the message asks for had no dispatch
+    // route. A refusal now lands in the refusals artifact (exit 0); the
+    // `splice-refusals` gate holds the stage and the repair loop dispatches
+    // the adjudicating Alpha. The refusing page's whole batch is withheld —
+    // no receipt, no spec edit — so its units stay uncovered and the lane
+    // re-splices mechanically once the Alpha has decided.
     const manifestReq = new Set(page.requires ?? []);
     const planReq = new Set(target.requires ?? []);
     const onlyManifest = [...manifestReq].filter((r) => !planReq.has(r));
     if (onlyManifest.length) {
-      problems.push(
-        `${page.id}: the manifest declares requires the plan does not — ${onlyManifest.join(', ')}. `
-        + 'Adding a prerequisite edge is an adjudication, not a transcription; an Alpha decides.');
+      refusals.push({ batch: String(b), page: page.id, requires: onlyManifest });
       continue;
     }
 
@@ -172,17 +194,40 @@ for (const p of spec.pages) {
   }
 }
 
+// ERRORS (unknown page, unlicensed overwrite, size ceiling, duplicate ids)
+// are defects and still fail the lane: nothing is written, exit 1.
 if (problems.length) {
   console.error(`splice-plan: ${problems.length} problem(s); nothing written`);
   for (const p of problems) console.error(`  ${p}`);
   process.exit(1);
 }
 
-if (!dryRun && perBatch.some((x) => x.spliced.length)) {
+// A batch containing any refusal is withheld WHOLE: its spec edits are
+// rolled back, no receipt is written, so coverage keeps its units open.
+const refusingBatches = new Set(refusals.map((r) => r.batch));
+if (refusingBatches.size) {
+  for (const { batch: b, spliced } of perBatch) {
+    if (!refusingBatches.has(String(b))) continue;
+    for (const s of spliced) { const t = byId.get(s.page); if (t) t.items = []; }
+  }
+}
+
+if (!dryRun && perBatch.some((x) => !refusingBatches.has(String(x.batch)) && x.spliced.length)) {
   writeFileSync(specPath, JSON.stringify(spec, null, 2) + '\n');
+}
+// The refusals artifact is written EVERY run, empty or not, so the gate can
+// tell "no refusals" from "the splice never ran".
+if (!dryRun) {
+  writeFileSync(`research/${run}-splice-refusals.json`, JSON.stringify({ run, refusals }, null, 2) + '\n');
 }
 
 for (const { batch: b, spliced, unchanged } of perBatch) {
+  if (refusingBatches.has(String(b))) {
+    const held = refusals.filter((r) => r.batch === String(b));
+    console.log(`splice-plan: batch ${b} WITHHELD — ${held.length} requires edge(s) await adjudication`);
+    for (const r of held) console.log(`  ${r.page}: ${r.requires.join(', ')}`);
+    continue;
+  }
   const receipt = {
     run, step: 4, batch: Number(b),
     spliced_by: 'tools/splice-plan.mjs (mechanical)',
