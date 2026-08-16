@@ -41,11 +41,12 @@
 // is found one stage later than it used to be; the level join still finds it,
 // and it still blocks before the next barrier.
 
-import { existsSync, writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync, readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 
 import { covered, pending, stageComplete } from './coverage.mts';
+import { identityPlaceholders } from './doctor.mts';
 import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, RunningEntry, Gate } from './types.mts';
 import { runGates } from './gates.mts';
 import { takeCommand } from './control.mts';
@@ -335,6 +336,24 @@ export class Executor {
         this.reporter.notify('blocked', msg, { stage: stage.id, label: plan.label, missing: absent });
       }
       return;
+    }
+    // Identity placeholders fail here, as a blocker naming the file — not at
+    // dispatch.mjs, three burned attempts later. The doctor scans only the
+    // files plan() names, so a hook-referenced task file is invisible to it:
+    // the class bit twice in one day, first in a brief's grammar example,
+    // then in a repair task written hours after the doctor check landed.
+    // This is the one chokepoint every dispatch path crosses.
+    for (const f of [plan.brief, plan.task]) {
+      if (!f) continue;
+      const bad = identityPlaceholders(readFileSync(join(this.config.repo, f), 'utf8'));
+      if (bad.length) {
+        const msg = `stage ${stage.id}: ${f} contains ${bad.join(', ')} — dispatch.mjs refuses the prompt and the engine never passes --var n/k; fix the file`;
+        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
+          this.state.addBlocker(stage.id, msg);
+          this.reporter.notify('blocked', msg, { stage: stage.id, label: plan.label, file: f });
+        }
+        return;
+      }
     }
     // Owner rule, 2026-08-16: a model is dispatched for cognitive work only.
     // Enforced at the point of dispatch rather than in review, because handing

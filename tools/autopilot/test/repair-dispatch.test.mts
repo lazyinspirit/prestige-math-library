@@ -106,6 +106,23 @@ test('the scaffold-fix hook dispatches one lane per owning batch, batch as cover
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('a prompt file carrying an identity placeholder blocks before any spawn', () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-poisoned.task.md'), 'the grammar example says (order <n>)\n');
+  const ex = executorAt(repo);
+  const s3: any = stages.find((s: any) => s.id === '3-recheck');
+  ex.start(s3, {
+    role: 'beta', label: 'scaffold-fix-1-b4', job: 'scaffolding', covers: ['4'],
+    brief: 'research/demo-generic.task.md',
+    task: ['research/demo-poisoned.task.md'],
+    timeout: 60,
+  } as any);
+  assert.equal(ex.inflight.size, 0, 'a poisoned prompt must not spawn');
+  assert.ok(ex.state.data.blockers.some((b: any) => b.message.includes('<n>') && b.message.includes('demo-poisoned')),
+    'the blocker names the token and the file');
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('the mechanical branch still short-circuits the Beta fan-out', async () => {
   const repo = fixtureRepo();
   // a url-liveness failure with an artifact whose dead rows all carry

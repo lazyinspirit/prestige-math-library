@@ -8,8 +8,9 @@ pairs. The findings live in the CLOSURE RECEIPT, not in prose:
 
 **`research/frontier-15-scaffold-closure.json`** — read `work[]`. Each entry
 names a `page` and its `missing` findings; each finding carries a stable id
-(`B<batch>-<n>`), the exact source locator that carries the missing result,
-and usually the preferred remedy. **Your scope is every `work[]` entry whose
+(`B4-1`, `B6-2`, and so on — batch number, then finding number), the exact
+source locator that carries the missing result, and usually the preferred
+remedy. **Your scope is every `work[]` entry whose
 page belongs to batch `<i>`** — check the page-to-batch map in
 `research/frontier-15-scope-ledger.json`, and touch nothing outside your
 batch.
