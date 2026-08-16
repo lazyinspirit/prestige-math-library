@@ -496,7 +496,10 @@ if (dryRun) {
     : buildClaude();
   const report = {
     role, label, run, runner: spec.runner, model: spec.model, sandbox: spec.sandbox,
-    effort: spec.runner === 'claude' ? (spec.effort ?? 'high') : 'xhigh',
+    // The same fallback buildCodex/buildClaude actually use — this report is
+    // the lineup-attestation surface, and it hardcoded 'xhigh' for every codex
+    // role even when the role's spec said otherwise.
+    effort: spec.effort ?? (spec.runner === 'claude' ? 'high' : 'xhigh'),
     read_only_enforcement: spec.sandbox !== 'read-only' ? null
       : spec.runner === 'codex' ? 'process: --sandbox read-only'
       : spec.runner === 'deepseek' ? 'transport: tool-less API lane, no filesystem at all'

@@ -225,8 +225,15 @@ const ledger = {
     disposition: prior.get(seed.id) ?? { status: 'pending', by: '', notes: '' },
   })),
 };
-writeFileSync(resolvePath(outPath), `${JSON.stringify(ledger, null, 2)}\n`);
-report(`genrisk: wrote ${outPath} — ${seeds.length} seed(s), ${seeds.filter((seed) => seed.cone_size).length} load-bearing, largest cone ${seeds[0]?.cone_size ?? 0} (${seeds[0]?.id ?? 'none'})`);
+// A bare run used to WRITE the tracked audit ledger — a read-only-looking
+// invocation that mutated the repo (a 1,672-line diff, once). Writing takes
+// an explicit --write, or an explicit --out path.
+if (argv.includes('--write') || option('--out')) {
+  writeFileSync(resolvePath(outPath), `${JSON.stringify(ledger, null, 2)}\n`);
+  report(`genrisk: wrote ${outPath} — ${seeds.length} seed(s), ${seeds.filter((seed) => seed.cone_size).length} load-bearing, largest cone ${seeds[0]?.cone_size ?? 0} (${seeds[0]?.id ?? 'none'})`);
+} else {
+  report(`genrisk: ${seeds.length} seed(s), ${seeds.filter((seed) => seed.cone_size).length} load-bearing, largest cone ${seeds[0]?.cone_size ?? 0} (${seeds[0]?.id ?? 'none'}) — read-only; pass --write (or --out <path>) to update ${outPath}`);
+}
 process.exit(errors.length ? 1 : 0);
 
 function report(headline) {
