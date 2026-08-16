@@ -78,10 +78,17 @@ const flat = (s) => String(s ?? '')
   .replace(/\s+/g, ' ')
   .trim();
 
-/** The item's own fact lines: `[L2] restatement… ([[cited-id]])`. */
+/** The item's own fact lines: `[L2] restatement… ([[cited-id]])`.
+ *
+ *  End-of-block: the next `##` heading or the true end of the string.
+ *  `$(?![\s\S])` is the end-of-string anchor under the m flag; `\Z` — the
+ *  anchor in Python and Perl — is a LITERAL Z in JavaScript, and with a lazy
+ *  body it truncated the block at the first Z in the text. `$\mathbb{Z}$`
+ *  saturates this corpus: 35 of frontier-14's 291 contract items lost 108
+ *  fact lines to it, unseen by the widening detectors. */
 const factLines = (text) => {
   const out = [];
-  const m = /^##\s+Facts[^\n]*\n([\s\S]*?)(?=^##\s+|\Z)/m.exec(text);
+  const m = /^##\s+Facts[^\n]*\n([\s\S]*?)(?=^##\s+|$(?![\s\S]))/m.exec(text);
   if (!m) return out;
   for (const line of m[1].split('\n')) {
     const f = /^\s*\[([FLA]\d+)\]\s*(.+)$/.exec(line);
@@ -182,9 +189,12 @@ for (const file of files) {
         unauthored.add(source);
       } else if (!flat(sourceText).includes(quote)) {
         // Try the first sentence: authors legitimately quote a clause and then
-        // elide. Only a wholly absent opening is reported.
+        // elide. A PRESENT opening passes as elision; an absent opening is
+        // reported whatever its length — the old `> 25` guard silently dropped
+        // every short absent quote, and a contract quote is an asserted
+        // verbatim citation either way.
         const head = quote.split(/(?<=[.;])\s/)[0];
-        if (head.length > 25 && !flat(sourceText).includes(head)) {
+        if (!flat(sourceText).includes(head)) {
           missingQuotes.push({ id, fact: c.fact, source, quote: quote.slice(0, 180), file });
         }
       }
