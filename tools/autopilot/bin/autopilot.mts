@@ -249,7 +249,14 @@ switch (cmd) {
       // child died instantly while this parent printed a pid and "running".
       // The child's stdio goes to the log so a failed start leaves evidence.
       const self = fileURLToPath(import.meta.url);
-      const args = [self, 'start', '--repo', repo, ...(run ? ['--run', run] : [])];
+      // Forward EVERY relevant option. Dropping --state-dir split the brain:
+      // the parent's stop marker and control.json landed under one dir while
+      // the child ran against <repo>/.autopilot, and every later pause/stop
+      // "succeeded" where the engine was not looking.
+      const args = [self, 'start', '--repo', repo,
+        ...(run ? ['--run', run] : []),
+        ...(opt('state-dir') ? ['--state-dir', opt('state-dir')] : []),
+        ...(opt('poll') ? ['--poll', opt('poll')] : [])];
       mkdirSync(stateDir, { recursive: true });
       const out = join(stateDir, 'autopilot.log');
       const fd = openSync(out, 'a');

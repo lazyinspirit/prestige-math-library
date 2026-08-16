@@ -392,12 +392,20 @@ export class Executor {
       }
       case 'retry': {
         const unit = cmd.unit ? String(cmd.unit) : null;
+        let armed = 0;
         for (const d of Object.values<any>(this.state.data.dispatches)) {
           if (unit && !d.covers?.map(String).includes(unit)) continue;
+          // Only FAILED lanes: the notice always said "failed lanes" while the
+          // loop reset every lane's attempt history, so later status output
+          // misreported attempt counts on lanes that had succeeded.
+          if (d.lastExitOk === true) continue;
           d.attempts = 0;                       // let the retry policy fire again
+          armed += 1;
         }
         this.state.save();
-        this.reporter.notify('retry-armed', unit ? `owner armed a retry for unit ${unit}` : 'owner armed a retry for all failed lanes');
+        this.reporter.notify('retry-armed', unit
+          ? `owner armed a retry for unit ${unit} (${armed} lane(s))`
+          : `owner armed a retry for ${armed} failed lane(s)`);
         break;
       }
       default: break;

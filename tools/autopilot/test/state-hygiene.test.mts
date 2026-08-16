@@ -77,3 +77,12 @@ test('plan refuses to reset a scaffolded run\'s manifests', async () => {
     'a re-plan silently reset a scaffolded item list to []');
   assert.doesNotThrow(() => writeManifests(repo, 'r9', [['page-a']], { force: true }));
 });
+
+test('a null control file is an error row, not an engine crash', async () => {
+  const { takeCommand } = await import('../src/control.mts');
+  const dir = mkdtempSync(join(tmpdir(), 'ctl-'));
+  writeFileSync(join(dir, 'control.json'), 'null\n');
+  const cmd = takeCommand(dir);
+  assert.equal(cmd.command, null, 'null must be rejected, not dereferenced');
+  assert.match(String(cmd.error), /unknown command/);
+});

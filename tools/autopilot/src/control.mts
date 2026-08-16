@@ -58,8 +58,11 @@ export function takeCommand(dir: string): Control | null {
     return { command: null, error: `unparseable control file: ${raw.slice(0, 120)}` };
   }
   consume();
-  if (!COMMANDS.has(parsed.command)) {
-    return { command: null, error: `unknown command ${JSON.stringify(parsed.command)}; known: ${[...COMMANDS].join(', ')}` };
+  // `parsed` may be any JSON value here — `null` in particular parses fine and
+  // then throws on property access, and an unhandled throw in the control path
+  // takes down the whole engine from inside its own steering wheel.
+  if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed) || !COMMANDS.has(parsed.command)) {
+    return { command: null, error: `unknown command ${JSON.stringify(parsed?.command ?? parsed)}; known: ${[...COMMANDS].join(', ')}` };
   }
   return parsed;
 }
