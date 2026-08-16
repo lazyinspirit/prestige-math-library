@@ -725,70 +725,98 @@ disk is what a reader clicks. The snapshot is printed so the fix is a URL swap.
 `sources.references` URLs step 5 adds to item files — a link can rot between a
 scaffold and a publish). Receipt: `research/<run>-url-liveness.json`.
 
-### 3.11d The supervisor — `run-supervisor.mjs` + the `supervisor` role (owner, 2026-08-15)
+### 3.11d The engine — `tools/autopilot/` (owner, 2026-08-16)
 
 **Which failure it prevents.** A stage completing produces artifacts; something
-must notice and fire the next dispatch. On every hand-orchestrated run that
-something has been the orchestrator, and it is the slowest component in the
-system. Measured on `frontier-13`: **~14h wall-clock, of which roughly 5h was the
+must notice and fire the next dispatch. For most of this library's history that
+something was a model, and it is the slowest and least reliable component in the
+system. Measured on `frontier-13`: **~14h wall-clock, of which roughly 5h was an
 orchestrator writing a status report at a cleared stage instead of dispatching
-the next one.** Three times, against an explicit standing instruction not to
-pause, with the identical failure already recorded in session memory from two
-earlier runs. Exhortation does not fix this. A stage boundary must be mechanical.
+the next one** — three times, against an explicit standing instruction not to
+pause, with the identical failure already in session memory from two earlier
+runs. Exhortation does not fix this. A stage boundary must be mechanical.
 
-**The evidence that it can be.** The one stretch of `frontier-13` with no idle
-gap was step 4 → step 5, where a splice receipt landing auto-released that
-batch's author through a shell watcher. No model was involved in the decision.
+This section replaces the 2026-08-15 `run-supervisor.mjs` design and the
+`run-drive.mjs` transition driver. Both put a model on the transition — one to
+judge that a stage was finished, one to read a printed command and fire it — and
+the owner's rule is that **no LLM drives a transition at all**.
 
-**Division of labour.**
+**What the engine owns.** A stage owes a set of **units**; each dispatch declares
+the units it **covers**; the stage is finished when the covered union contains
+the owed set *and* its gates pass. Coverage is a set difference and "is this
+stage finished" is a predicate over files on disk, so none of it needs a model.
+Retries, blockers, the concurrency caps, the report cadence and every transition
+are the engine's.
 
-| owns | what |
-|---|---|
-| `tools/run-supervisor.mjs` | what is decidable from disk: does the stage's artifact set exist, do its gates pass, what is the next command |
-| the `supervisor` agent (Sonnet 5, `briefs/supervisor.md`) | what is not: is a report complete or did the agent stop early, is a blocker real, does a dead lane deserve a retry |
-| neither | any mathematical judgment whatsoever |
+**What a model is still dispatched for**, and nothing else: scouting,
+scaffolding, authoring, refutation, verification, adjudication, judgement, audit,
+reporting, supervision. `src/roles.mts` enforces it *at the point of dispatch*,
+because handing a model mechanical work does not error — it returns a plausible
+answer and is wrong at a rate nobody measures. `transition`,
+`dispatch-planning`, `gate-running`, `retry-decision`, `bookkeeping`,
+`batching` and `status-reporting` are named as mechanical and refused. The test:
+**if the answer is a function of files on disk, it is code.**
 
-**Sonnet 5, not Opus.** The role adjudicates nothing and edits nothing, so the
-adjudicating model would be paying Alpha's rate for a scheduler. Cap 2.
+**Every stage must be able to fail.** `src/spec.mts` validates the stage table
+before a run starts and `autopilot start` refuses rather than detaching:
 
-**A stage is complete when artifacts exist and gates pass — never when a report
-says so.** `frontier-13` had seven refuter dispatches produce prompt files and no
-results while a group's report tabled all eleven as dispatched, leaving 74
-`risk_review` dispositions silently unwritten until a later stage counted them.
-So `okResults()` counts only `ok: true` result files, and every predicate reads
-disk.
+- a stage declares at least one gate, or `gatesWaived: "<why>"` — a sentence, so
+  a missing gate cannot pass for a deliberate one;
+- the **terminal stage may not waive**;
+- an empty gate list at runtime is *vacuous* and blocks;
+- a gate whose declared `needs` are absent **fails**. It used to return
+  `ok: true`, which is how a gate aimed at a receipt nobody generated reports
+  that the receipt is fine.
 
-**The scope boundary is checked, not asked for.** The supervisor may never touch
-`items/`, `library/` or `research/plan-spec.json`. `--verify-scope` cannot use raw
-`git status` — during a build the run's own agents legitimately dirty hundreds of
-paths, and the first version of this check reported 490 violations and meant
-nothing. It takes a `--scope-baseline` when the watch starts and reports only
-paths that changed *during* the watch.
+This exists because `frontier-14` reached the end of step 10 with its receipt
+gate red, two confirmed-fatal proofs unrepaired and sixteen judge rejections
+nobody had read. No gate failed: `10-report` declared `gates: () => []`, an
+empty list was read as "gates passed", and the last stage of the pipeline could
+not say no. A model wrote an honest report saying the level was not publishable;
+the engine marked the run done; both were right about their own half.
 
-**Stages that the orchestrator used to gate are dispatched, not waited on**
-(owner, 2026-08-15): step 3 and step 9 judgment go to the `orchestrator` role,
-steps 4/6c/8 to the lead Alpha, and the step-10 report is *drafted* by an agent
-for the orchestrator to deliver. The orchestrator is on the critical path
-nowhere.
+**Stages hold for each other.** Only the gate block waited for in-flight work to
+drain; dispatch did not, so the engine would enter the next stage while the
+previous one's processes were still running. On `frontier-14` that put step 8's
+adjudicating Alpha on top of step 7's live judge sweep: every repair moved a
+pair's context hash and re-armed the sweep on untouched page-mates, the ledger
+grew by 97 rows *during* adjudication, and 8 items flipped pass to reject on
+byte-identical text from the lane that had just passed them. Two stages writing
+one ledger is a race, not concurrency. Holding costs seconds against stages that
+run for hours.
 
-### 3.11e The stage driver — `run-drive.mjs` (2026-08-16)
+**The self-correcting loops.** A gate says what is wrong; `onGateFailure`
+dispatches whoever can fix it; the gate re-runs when those dispatches drain, and
+either passes or names what is still wrong. Bounded by `maxFixRounds`, because a
+repair that will not converge must become a blocker a person reads, not an
+infinite spend. Two loops exist:
 
-`run-supervisor.mjs` knows which stage a run is on and prints the command that
-advances it. Until now the thing that *read* that print-out and fired the next
-dispatch was the orchestrator, which is the single point the whole mechanism
-exists to remove: on `frontier-13` it wrote a status report instead of
-dispatching three separate times, at steps 5, 8 and 9, after being told not to.
+| loop | closure predicate | receipt |
+|---|---|---|
+| scaffold review → Beta fix → re-check | every pair `sufficient` | `scaffold-verdicts.mjs` → `<run>-scaffold-closure.json` |
+| judge → adjudicate → repair → rejudge | every item paired, every rejection adjudicated, no open fatal | `level-coverage --judge-only` → `<run>-judge-closure.json` |
 
-`run-drive.mjs --run <name>` closes the loop. It polls the stage table; when the
-current stage clears, it writes a transition task file and dispatches a
-`supervisor` agent to judge the transition and fire the next dispatch. State
-lives in `research/<run>-drive.json` so a restart cannot re-dispatch a
-transition already handed off, and the guard is a durable transition id rather
-than a process scan — `phantom-process-liveness-checks` is why.
+Both write **id lists**, not prose. `frontier-14`'s step 8 named its 23 rejudge
+targets in a markdown table and the rejudge never ran, because nothing
+downstream can read a table; 22 of those repairs were still unjudged days later.
+The hook itself also could not have worked as first written — it fired only when
+the blocker *message* was new, and a gate failing the same way produces the same
+message every time, so it fired once and deadlocked.
 
-It never decides that a stage is done. `run-supervisor.mjs` owns the `done`
-predicates and reads them from disk; this only notices a transition and pays for
-an agent to handle it.
+**Layout.** `src/executor.mts` is the loop; `src/coverage.mts` the predicate;
+`src/gates.mts` runs gates and refuses a vacuous one; `src/spec.mts` validates
+the table; `src/roles.mts` enforces the job rule; `stages/mathlib.mts` is the
+only domain-specific file, 17 stages from scaffolding to the owner report;
+`bin/autopilot.mts` is the CLI (`frontier | plan | start | status | pause |
+resume | stop | retry | skip | report | doctor`). Porting to another project
+means writing another `stages/` file; porting to another agent platform means
+changing one argv array in `autopilot.config.json`.
+
+**`autopilot doctor`** checks, before a run, the things that otherwise fail
+hours in with nobody watching: an invented command flag (four of the first six
+invocations written from memory were wrong), a brief or task file that does not
+exist, a judge lane that cannot authenticate, a missing scope ledger, and the
+stage-spec rules above.
 
 ### 3.11e-2 Stage completion by coverage, not by agent count (2026-08-16)
 
