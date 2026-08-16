@@ -51,6 +51,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawn } from 'node:child_process';
 import { REPO } from './paths.mjs';
+import { markSuspect } from './bot-wall.mjs';
 
 const argv = process.argv.slice(2);
 const option = (name) => {
@@ -292,6 +293,18 @@ const worker = async () => {
 };
 await Promise.all(Array.from({ length: Math.min(concurrency, queue.length || 1) }, worker));
 
+// A BOT WALL ANSWERS 200. Springer's cookie interstitial, a Cloudflare
+// challenge, Google's `/sorry/index` and a paywall's sign-in page are all HTTP
+// 200 with no mathematics on them, and a status-only check reports every one as
+// live. This reads the FINAL URL after redirects — see tools/bot-wall.mjs for
+// what that can and cannot see, and why nothing here downloads a body.
+//
+// A suspect is a HUMAN READ, never a dead link. `--fail-on-dead` drives
+// recover-before-replace, and firing that on a false positive costs a
+// re-harvest and rewrites the provenance of every item the source backed. So
+// the exit code below is deliberately untouched by this.
+for (const row of rows) markSuspect(row);
+
 // RECOVER BEFORE YOU REPLACE. Only dead URLs are looked up, so a clean sweep
 // costs nothing and never touches the network beyond the liveness checks.
 if (recover) {
@@ -314,12 +327,24 @@ const result = {
     live: rows.filter((row) => row.ok).length,
     failed: rows.filter((row) => !row.ok).length,
     recovered: rows.filter((row) => !row.ok && row.recovered).length,
+    suspect: rows.filter((row) => row.suspect).length,
   },
   rows,
 };
 writeFileSync(absolute(out), JSON.stringify(result, null, 2) + '\n');
 console.log(`url-sweep: ${result.summary.live}/${result.summary.urls} live; ${result.summary.failed} failed`
-  + (recover ? `; ${result.summary.recovered} recoverable from the archive` : '') + ` -> ${out}`);
+  + (recover ? `; ${result.summary.recovered} recoverable from the archive` : '')
+  + `; ${result.summary.suspect} suspect` + ` -> ${out}`);
+if (result.summary.suspect) {
+  console.log(`\nSUSPECT — ${result.summary.suspect} URL(s) answered 200 from what looks like a wall,`);
+  console.log('not the document. These are NOT dead and do not fail the gate; read them.');
+  for (const row of rows.filter((entry) => entry.suspect)) {
+    console.log(`SUSPECT ${row.status} ${row.url}`);
+    console.log(`  ${row.suspect_reason}`);
+    if (row.final_url && row.final_url !== row.url) console.log(`  final: ${row.final_url}`);
+  }
+  console.log('');
+}
 if (result.summary.failed) {
   for (const row of rows.filter((entry) => !entry.ok)) {
     console.log(`FAIL ${row.status ?? 'ERR'} ${row.url} — ${row.error ?? `HTTP ${row.status}`}`);
