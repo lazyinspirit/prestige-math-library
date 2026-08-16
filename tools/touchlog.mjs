@@ -36,7 +36,7 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
-import { stripVerification, itemContentHash, shortHash } from "./item-hash.mjs";
+import { stripVerification, itemHashGuard, shortHash } from "./item-hash.mjs";
 
 const [, , cmd, ledgerPath, ...rest] = process.argv;
 const ITEMS = "items";
@@ -55,7 +55,7 @@ const load = () =>
 const hashes = () => {
   const out = {};
   for (const f of readdirSync(ITEMS).filter((f) => f.endsWith(".md")).sort())
-    out[f.slice(0, -3)] = shortHash(itemContentHash(readFileSync(join(ITEMS, f), "utf8")));
+    out[f.slice(0, -3)] = shortHash(itemHashGuard(readFileSync(join(ITEMS, f), "utf8")));
   return out;
 };
 

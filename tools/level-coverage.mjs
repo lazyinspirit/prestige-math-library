@@ -369,8 +369,12 @@ if (judgeAdjudicationsPath) {
       // it, and their levels are published rather than re-gated.
       if (typeof record.item_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.item_sha256)) {
         error('judge-adjudication-unhashed',
-          `${judgeAdjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) needs item_sha256, ` +
-          'the full sha256 of the normalized item text (verification block excluded) at adjudication time', record.id);
+          `${judgeAdjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) needs item_sha256 in the ` +
+          'GUARD form — the full sha256 of the item text with the WHOLE `verification:` block excluded ' +
+          '(tools/item-hash.mjs `itemHashGuard`), as at adjudication time. That is the form ' +
+          'tools/step8-guard.mjs matches against a touchlog baseline. It is NOT the judge-ledger form: an ' +
+          'item_sha256 on a verdict row excludes only the two-space-indented `judge:` sub-block ' +
+          '(`itemHashJudge`), and the two never agree on the same file', record.id);
         continue;
       }
       judgeOutcomes.set(judgeOutcomeKey(record.id, record.model, record.context_sha256), record);

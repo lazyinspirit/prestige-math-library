@@ -140,6 +140,7 @@ import { basename, join } from "node:path";
 import { spawn } from "node:child_process";
 import { homedir } from "node:os";
 import { deepseekEnvFile } from "./paths.mjs";
+import { itemHashJudge } from "./item-hash.mjs";
 
 const argv = process.argv.slice(2);
 const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch"]);
@@ -825,12 +826,12 @@ const contextSha256 = createHash("sha256").update(frozenPrompt).digest("hex");
 // stamp itself and a later unrelated companion-page edit cannot stale it". The
 // field was simply never written, so the gate had nothing to honour it with.
 //
-// Normalisation matches apply-judge-stamps' attestedItemHash exactly: the whole
-// file with only the `judge:` block removed. Excluding it is what stops the act
-// of stamping a pass from invalidating the pass it records.
-const itemSha256 = createHash("sha256")
-  .update(readFileSync(file, "utf8").replace(/^ {2}judge:\n(?: {4}.*\n)*/m, ""))
-  .digest("hex");
+// `itemHashJudge` — tools/item-hash.mjs — is the ONE definition of this
+// normalisation: the whole file with only the `judge:` block removed. Excluding
+// it is what stops the act of stamping a pass from invalidating the pass it
+// records. It is NOT the guard form an adjudication row carries; that one
+// excludes the whole `verification:` block, and item-hash.mjs names both.
+const itemSha256 = itemHashJudge(readFileSync(file, "utf8"));
 // --dump-prompt prints the exact frozen payload and exits without a network call.
 if (bools.has("dump-prompt")) {
   console.log(frozenPrompt);

@@ -39,7 +39,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { itemContentHash, shortHash } from './item-hash.mjs';
+import { itemHashGuard, shortHash } from './item-hash.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const ITEMS = join(REPO, 'items');
@@ -99,7 +99,7 @@ const currentHashes = () => {
   }
   const out = {};
   for (const f of readdirSync(ITEMS).filter((name) => name.endsWith('.md')).sort())
-    out[f.slice(0, -3)] = shortHash(itemContentHash(readFileSync(join(ITEMS, f), 'utf8')));
+    out[f.slice(0, -3)] = shortHash(itemHashGuard(readFileSync(join(ITEMS, f), 'utf8')));
   return out;
 };
 const now = currentHashes();
@@ -134,7 +134,10 @@ for (const [index, line] of readFileSync(resolvePath(adjudicationsPath), 'utf8')
   if (typeof record.item_sha256 !== 'string' || !/^[0-9a-f]{64}$/.test(record.item_sha256)) {
     error('judge-adjudication-unhashed',
       `${adjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) has no valid item_sha256; ` +
-      'record the full sha256 of the normalized item text at adjudication time', record.id);
+      'record the GUARD form — the full sha256 of the item text with the whole `verification:` block ' +
+      'excluded (tools/item-hash.mjs `itemHashGuard`), which is what a touchlog baseline holds. ' +
+      'This is NOT the judge-ledger form: a verdict row\'s item_sha256 excludes only the `judge:` ' +
+      'sub-block, and a row carrying that form can never match a baseline here', record.id);
     continue;
   }
   if (record.outcome === 'confirmed_fatal') {
@@ -161,7 +164,10 @@ for (const id of changed) {
   error('nonfatal-edit',
     `${id}: changed since "${baselineLabel}" (${baseline.hashes[id]} -> ${now[id]}) with no confirmed_fatal ` +
     `adjudication against that text state — Alpha recorded ${said}. Step 8 is fatal-only: revert the edit and ` +
-    'close the rejection on its ledger row, or record the confirmed_fatal adjudication that licenses the repair.', id);
+    'close the rejection on its ledger row, or record the confirmed_fatal adjudication that licenses the repair. ' +
+    'The two hashes above are the GUARD form (whole `verification:` block excluded, tools/item-hash.mjs ' +
+    '`itemHashGuard`), and the row\'s item_sha256 must be in that same form — a judge-ledger hash, which ' +
+    'excludes only the `judge:` sub-block, will never match and reads here as an unlicensed edit.', id);
 }
 
 // Creation and deletion are step-6 powers, not step-8 ones. Neither is R1's
