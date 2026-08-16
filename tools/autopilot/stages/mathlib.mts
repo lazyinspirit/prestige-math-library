@@ -88,6 +88,14 @@ const repoWide = (ctx) => [
   gate('fwdcheck', ['node', 'tools/fwdcheck.mjs']),
   gate('extcheck', ['node', 'tools/extcheck.mjs']),
   gate('rendercheck', ['node', 'tools/rendercheck.mjs']),
+  // gates.mjs listed these two as gates of record at steps 5/6/9/10 and
+  // 2/5/6/10; this table — the only one that runs — carried neither.
+  // prosecheck is the positional-claim class LEVELS.md calls "where 100% of
+  // this library's found defects live"; depsource is dep-to-page resolution.
+  // (citecheck stays advisory by design: it cannot exit nonzero, and an
+  // always-green gate is noise, not checking — readers run it by hand.)
+  gate('prosecheck', ['node', 'tools/prosecheck.mjs']),
+  gate('depsource', ['node', 'tools/depsource.mjs']),
 ];
 
 const coverageGates = (ctx) => batches(ctx).map((b: any) =>
