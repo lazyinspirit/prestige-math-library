@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [lem-gauss-half-system-permutation, thm-eulers-criterion-for-legendre-symbol, def-monoid-finite-product, thm-integers-modulo-n-basic-algebra, thm-unit-criterion-modulo-n]
+deps: [lem-gauss-half-system-permutation, thm-eulers-criterion-for-legendre-symbol, def-monoid-finite-product, thm-integers-modulo-n-basic-algebra, thm-unit-criterion-modulo-n, lem-prime-not-dividing-is-coprime, def-legendre-symbol]
 justified_by: []
 aliases: []
 landmark: true
@@ -48,6 +48,10 @@ $$\left(\frac ap\right)=(-1)^{N(a,p)}.$$
 
 [L5] Multiplication on $\mathbb Z/p$ is associative and commutative with identity ([[thm-integers-modulo-n-basic-algebra]]).
 
+[L6] If $p$ is prime and $p\nmid a$, then $\gcd(a,p)=1$ ([[lem-prime-not-dividing-is-coprime]]).
+
+[L7] For an odd prime $p$, $\left(\frac ap\right)=1$ when $p\nmid a$ and $a$ is a quadratic residue modulo $p$, and $\left(\frac ap\right)=-1$ when $p\nmid a$ and $a$ is a quadratic nonresidue modulo $p$ ([[def-legendre-symbol]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -56,6 +60,6 @@ $$\left(\frac ap\right)=(-1)^{N(a,p)}.$$
 
 2.1 Multiply the $m$ congruences using [L2] and [L5]. Since the $r_j$ permute $1,\ldots,m$, this gives $a^m m!\equiv(-1)^{N(a,p)}m!\pmod p$. [L2, L5, step 1.1, algebra]
 
-3.1 Every factor $1\le j\le m<p$ is coprime to $p$, so [L3] makes each $[j]_p$ a unit; their product $[m!]_p$ is therefore a unit and can be cancelled from step 2.1. Hence $a^m\equiv(-1)^{N(a,p)}\pmod p$. [L3, L5, step 2.1]
+3.1 Every factor $j$ satisfies $1\le j\le m<p$, so $p\nmid j$ and [L6] gives $\gcd(j,p)=1$; then [L3] makes each $[j]_p$ a unit, so their product $[m!]_p$ is a unit and can be cancelled from step 2.1. Hence $a^m\equiv(-1)^{N(a,p)}\pmod p$. [L3, L5, L6, step 2.1]
 
-4.1 By [L4], $(a/p)\equiv a^m\equiv(-1)^{N(a,p)}\pmod p$. Both outer integers are $1$ or $-1$, and $p$ is odd, so this congruence is equality in $\mathbb Z$. [L4, step 3.1, algebra] ∎
+4.1 By [L4], $(a/p)\equiv a^m\equiv(-1)^{N(a,p)}\pmod p$. Since $p\nmid a$, [L7] gives $(a/p)\in\{1,-1\}$, and $(-1)^{N(a,p)}$ is likewise $1$ or $-1$; two such integers differing by a multiple of the odd prime $p$ differ by at most $2<p$, so the congruence is equality in $\mathbb Z$. [L4, L7, step 3.1, given, algebra] ∎

@@ -1,7 +1,7 @@
 ---
 id: cor-metrizable-cech-complete-iff-completely-metrizable
 kind: corollary
-title: "A metrizable space is Čech-complete exactly when it is completely metrizable"
+title: "Under the ultrafilter lemma and the Axiom of Choice, a metrizable space is Čech-complete exactly when it is completely metrizable"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-A metrizable space is Čech-complete if and only if it is completely metrizable.
+Assume the ultrafilter lemma and the Axiom of Choice. A metrizable space is Čech-complete if and only if it is completely metrizable.
 
 ## Facts & Assumptions
 

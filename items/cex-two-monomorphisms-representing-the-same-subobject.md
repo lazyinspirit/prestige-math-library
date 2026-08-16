@@ -41,7 +41,7 @@ subobject.
 
 **Proof technique:** direct.
 
-1.1 Both $m$ and $n$ are injective and hence monic. They are not the same map, since their domains $\{0\}$ and $\{*\}$ are distinct. [given]
+1.1 Both $m$ and $n$ are injective, and an injection $f$ in $\mathbf{Set}$ is monic: $f\circ g=f\circ h$ gives $f(g(x))=f(h(x))$ for every $x$, hence $g(x)=h(x)$ and $g=h$. They are not the same map, since their domains $\{0\}$ and $\{*\}$ are distinct. [given]
 
 2.1 Let $u:\{0\}\to\{*\}$ and $v:\{*\}\to\{0\}$ be the unique maps. Then $m=n\circ u$ and $n=m\circ v$, so the monomorphisms mutually factor; [L2] also identifies $u$ and $v$ as inverse isomorphisms. [step 1.1, L2]
 

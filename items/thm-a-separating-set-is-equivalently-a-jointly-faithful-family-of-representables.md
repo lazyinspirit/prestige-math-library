@@ -27,6 +27,8 @@ Let $\mathcal C$ be locally small and let $\mathcal G$ be a set of objects. Then
 $$\mathcal C(G,-):\mathcal C\to\mathbf{Set}\qquad(G\in\mathcal G)$$
 is jointly faithful. Dually, a set $\mathcal H$ is coseparating if and only if the family $\mathcal C(-,H):\mathcal C^{\mathrm{op}}\to\mathbf{Set}$ is jointly faithful.
 
+Here a family of functors $(F_i)_{i\in I}$ with common domain is **jointly faithful** when, for every parallel pair $f,g:X\to Y$ in that domain, $F_i(f)=F_i(g)$ for all $i\in I$ implies $f=g$. For a one-member family this is faithfulness in the sense of [[def-full-faithful-and-essentially-surjective-functor]].
+
 ## Facts & Assumptions
 
 **Given:** A locally small category $\mathcal C$ and supplied sets of objects $\mathcal G$ and $\mathcal H$.
@@ -35,7 +37,7 @@ is jointly faithful. Dually, a set $\mathcal H$ is coseparating if and only if t
 
 [L2] In a locally small category the hom-assignments $\mathcal C(G,-)$ and $\mathcal C(-,H)$ are functors to $\mathbf{Set}$ ([[thm-hom-assignments-are-functors]]).
 
-[L3] A functor is faithful when its maps on hom-sets are injective; a family is jointly faithful when equality after every member forces equality before them ([[def-full-faithful-and-essentially-surjective-functor]]).
+[L3] A functor $F$ is **faithful** when every induced $F_{A,B}:\mathcal C(A,B)\to\mathcal D(FA,FB)$ is injective ([[def-full-faithful-and-essentially-surjective-functor]]). Joint faithfulness of a family is the condition stated in this item's own Statement, and is not taken from the cited definition.
 
 [L4] A separating set detects distinct maps by precomposition, while a coseparating set detects them by postcomposition ([[def-separating-set-and-coseparating-set]]).
 

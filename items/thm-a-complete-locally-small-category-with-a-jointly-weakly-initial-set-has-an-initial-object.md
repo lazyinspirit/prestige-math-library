@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-weakly-initial-object-and-jointly-weakly-initial-set, def-small-finite-and-large-limits-completeness-and-cocompleteness, def-small-locally-small-and-large-category, def-subcategory-and-full-subcategory, def-limit-and-colimit-of-a-diagram, def-equalizers-and-coequalizers, def-monomorphism-and-epimorphism, def-isomorphism-groupoid-and-connected-category]
+deps: [def-weakly-initial-object-and-jointly-weakly-initial-set, def-small-finite-and-large-limits-completeness-and-cocompleteness, def-small-locally-small-and-large-category, def-subcategory-and-full-subcategory, def-limit-and-colimit-of-a-diagram, def-equalizers-and-coequalizers, def-monomorphism-and-epimorphism, def-isomorphism-groupoid-and-connected-category, cor-equalizers-are-monic-and-coequalizers-are-epic]
 aliases: []
 landmark: true
 proof_strategy: constructive
@@ -39,9 +39,11 @@ Let $\mathcal C$ be complete and locally small. If $\mathcal C$ has a supplied j
 
 [L4] A limiting cone $(L,p_S)$ has a unique mediating map from every cone over the same diagram ([[def-limit-and-colimit-of-a-diagram]]).
 
-[L5] The equalizer $e:E\to L$ of $f,g:L\rightrightarrows C$ is monic and satisfies $fe=ge$ ([[def-equalizers-and-coequalizers]], [[def-monomorphism-and-epimorphism]]).
+[L5] An **equalizer** of $f,g:A\rightrightarrows B$ is a morphism $e:E\to A$ with $fe=ge$ such that every $h:X\to A$ with $fh=gh$ factors as $h=eu$ for a unique $u:X\to E$ ([[def-equalizers-and-coequalizers]]).
 
-[L6] A monic split epimorphism is an isomorphism, and an isomorphism has a two-sided inverse ([[def-isomorphism-groupoid-and-connected-category]], [[def-monomorphism-and-epimorphism]]).
+[L6] Every equalizer morphism is monic ([[cor-equalizers-are-monic-and-coequalizers-are-epic]]).
+
+[L7] A morphism $f:A\to B$ is an isomorphism if there is $g:B\to A$ with $g\circ f=1_A$ and $f\circ g=1_B$ ([[def-isomorphism-groupoid-and-connected-category]]); a morphism is monic when it is left-cancellable ([[def-monomorphism-and-epimorphism]]).
 
 ## Proof
 
@@ -51,6 +53,8 @@ Let $\mathcal C$ be complete and locally small. If $\mathcal C$ has a supplied j
 
 2.1 Fix one target $C$. Joint weak initiality supplies some $S_0\in\mathcal S$ and one map $h:S_0\to C$, so $h\circ p_{S_0}:L\to C$ exists. The witness is chosen only for this fixed target, not simultaneously for a proper class of targets; hence $L$ is weakly initial. [step 1.1, choose]
 
-3.1 Let $f,g:L\rightrightarrows C$ and let $e:E\to L$ be their equalizer. Weak initiality of $L$ gives $t:L\to E$. Put $r=e\circ t$. For each $S\in\mathcal S$, the composite $p_S\circ e\circ t:L\to S$ is a cone leg comparison: because $p_Se t$ and $p_S$ form cones over the full inclusion, uniqueness in [L4] gives $p_S r=p_S$ for every $S$. Joint monicity of the limit cone, which follows from [L4], gives $r=1_L$. [step 2.1, L4, L5, choose]
+2.2 By [L2] the collection $\mathcal C(L,L)$ is a set, so the one-object category whose arrows are the endomorphisms of $L$ is small, and sending its object to $L$ and each arrow to itself is a diagram. By [L1] that diagram has a limit; write its single leg as $j:I\to L$. The cone condition says exactly that $\alpha\circ j=j$ for every $\alpha\in\mathcal C(L,L)$, and $j$ is monic, since $j\circ x=j\circ y$ makes $x$ and $y$ both mediate the same cone, so the uniqueness clause of [L4] gives $x=y$. [step 1.1, L1, L2, L4, construct]
 
-4.1 Thus $e$ is split epic as well as monic, so [L6] makes it invertible. From $fe=ge$ we obtain $f=g$. There is therefore exactly one morphism $L\to C$ for every target $C$, so $L$ is initial. [step 3.1, L5, L6, discharge-construct] ∎
+3.1 $I$ is weakly initial: for a target $C$, step 2.1 supplies a map $L\to C$ and composing it with $j$ gives $I\to C$. Again one witness is used for one fixed target. [step 2.1, step 2.2, choose]
+
+4.1 Let $f,g:I\rightrightarrows C$ and let $m:K\to I$ be their equalizer, which exists by [L1] and is monic by [L6]; it satisfies $fm=gm$ by [L5]. Step 2.1 gives $u:L\to K$, so $j\circ m\circ u:L\to L$ is an endomorphism of $L$ and step 2.2 gives $(j\circ m\circ u)\circ j=j$. Rewriting the left side as $j\circ(m\circ u\circ j)$ and cancelling the monomorphism $j$ by [L7] yields $m\circ u\circ j=1_I$. Hence $m$ is a split epimorphism as well as monic, so $m\circ(u\circ j\circ m)=(m\circ u\circ j)\circ m=m=m\circ 1_K$ and left-cancelling $m$ gives $u\circ j\circ m=1_K$; thus $m$ is an isomorphism by [L7]. From $fm=gm$ and the invertibility of $m$ we get $f=g$. There is therefore exactly one morphism $I\to C$ for every target $C$, so $I$ is an initial object of $\mathcal C$. [step 2.1, step 2.2, step 3.1, L1, L5, L6, L7, discharge-construct] ∎

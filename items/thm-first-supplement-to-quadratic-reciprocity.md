@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-eulers-criterion-for-legendre-symbol, def-congruence-modulo-an-integer, thm-division-algorithm-in-z]
+deps: [thm-eulers-criterion-for-legendre-symbol, def-congruence-modulo-an-integer, thm-division-algorithm-in-z, def-legendre-symbol]
 justified_by: []
 aliases: []
 landmark: true
@@ -44,11 +44,13 @@ Equivalently, $(-1/p)=1$ if and only if $p\equiv1\pmod4$, while $(-1/p)=-1$ if a
 
 [L3] The congruence $a\equiv b\pmod n$ means that $n$ divides $a-b$ ([[def-congruence-modulo-an-integer]]).
 
+[L4] For an odd prime $p$, $\left(\frac ap\right)=1$ when $p\nmid a$ and $a$ is a quadratic residue modulo $p$, and $\left(\frac ap\right)=-1$ when $p\nmid a$ and $a$ is a quadratic nonresidue modulo $p$ ([[def-legendre-symbol]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Substitute $a=-1$ in [L1]. The two sides are each $1$ or $-1$, so their congruence modulo the odd prime $p$ is equality: $(-1/p)=(-1)^{(p-1)/2}$. [L1, given, algebra]
+1.1 Substitute $a=-1$ in [L1]. An odd prime never divides $-1$, so [L4] gives $(-1/p)\in\{1,-1\}$, and $(-1)^{(p-1)/2}$ is likewise $1$ or $-1$; two such integers differ by at most $2<p$, so their congruence modulo the odd prime $p$ is equality: $(-1/p)=(-1)^{(p-1)/2}$. [L1, L4, given, algebra]
 
 1.2 By [L2], write $p=4q+r$ with $0\le r<4$. Since $p$ is odd, $r$ is $1$ or $3$. If $r=1$, then $(p-1)/2=2q$ is even; if $r=3$, then $(p-1)/2=2q+1$ is odd. [L2, algebra]
 

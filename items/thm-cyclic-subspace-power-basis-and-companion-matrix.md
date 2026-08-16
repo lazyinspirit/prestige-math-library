@@ -31,7 +31,7 @@ is an ordered basis of $Z(v;T)$. In this basis the restriction $T|_{Z(v;T)}$ has
 
 **Given:** An endomorphism $T$, a vector $v$, and its monic vector annihilator $m=m_{T,v}$ of degree $d$.
 
-[L1] A polynomial annihilates $v$ exactly when it is divisible by $m$ ([[prop-vector-annihilator-is-well-defined]]).
+[L1] For an endomorphism of a **finite-dimensional** vector space, $\operatorname{Ann}_T(v)$ has a unique monic generator $m_{T,v}$ and $p(T)v=0$ exactly when $m_{T,v}\mid p$ ([[prop-vector-annihilator-is-well-defined]]).
 
 [L2] Division by monic $m$ writes each $p\in F[x]$ uniquely as $p=qm+r$ with $\deg r<d$ or $r=0$ ([[thm-polynomial-division-algorithm-over-a-field]]).
 

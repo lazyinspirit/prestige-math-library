@@ -40,7 +40,7 @@ Let $p:E\to B$ be a covering, let $\alpha:I\to B$ be a path, and let $e_0\in E$ 
 
 [F3] Let $X$, $Y$ and $Z$ be topological spaces, with subspaces carrying the subspace topology (def-subspace-topology-top). Then: 1. **Composites.** If $f : X \to Y$ and $g : Y \to Z$ are continuous (def-continuous-map-top) then $g \circ f : X \to Z$ is continuous. 2. **Open cover.** Let $f : X \to Y$ be a function and let $\{\, U_i : i \in I \,\}$ be a family of open subsets of $X$ with $\bigcup_{i \in I} U_i = X$. If $f|_{U_i} : U_i \to Y$ is continuous for every $i \in I$, then $f$ is continuous. 3. **Finite closed cover.** Let $f : X \to Y$ be a function, let $n \ge 1$ and let $F_1, \dots, F_n$ be closed subsets of $X$ with $F_1 \cup \dots \cup F_n = X$. If $f|_{F_k} : F_k \to Y$ is continuous for every $k$, then $f$ is continuous. The converses of claims 2 and 3 hold with no hypothesis on the cover at all: every restriction of a continuous map to a subspace is continuous (def-subspace-topology-top). The finiteness in claim 3 is not removable; see the remarks. ([[lem-continuity-is-local-and-pastes]]).
 
-[F4] Let $(X, \mathcal{T})$ be a topological space (def-topological-space). ([[def-compact-space]]).
+[F4] Let $(X, \mathcal{T})$ be a topological space (def-topological-space). An **open cover** of $(X,\mathcal T)$ is a family $\mathcal U\subseteq\mathcal T$ of open sets with $X=\bigcup\mathcal U$; a **subcover** of $\mathcal U$ is a subfamily that is itself an open cover; and $(X,\mathcal T)$ is **compact** when every open cover of it has a finite subcover. ([[def-compact-space]]).
 
 ## Proof
 

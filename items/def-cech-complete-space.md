@@ -29,5 +29,5 @@ pipeline_run: null
 
 ## Definition
 
-A Tychonoff space $X$ is **Čech-complete** when there is a Hausdorff compactification $(K,i)$ of $X$ ([[def-compactification-of-a-tychonoff-space]]) for which $i[X]$ is a $G_\delta$ subset of $K$ ([[def-g-delta-and-f-sigma-in-a-topological-space]]). The definition asks for one compactification; [[thm-cech-completeness-is-independent-of-compactification]] proves the equivalent every-compactification form.
+A Tychonoff space $X$ is **Čech-complete** when there is a Hausdorff compactification $(K,i)$ of $X$ ([[def-compactification-of-a-tychonoff-space]]) for which $i[X]$ is a $G_\delta$ subset of $K$ ([[def-g-delta-and-f-sigma-in-a-topological-space]]). The definition asks for one compactification; under the ultrafilter lemma and Dependent Choice, [[thm-cech-completeness-is-independent-of-compactification]] proves the equivalent every-compactification form.
 

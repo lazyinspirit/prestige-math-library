@@ -5,9 +5,10 @@ title: "Well-powered and co-well-powered categories, and supplied well-powerings
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-subobject-and-quotient-object, def-small-locally-small-and-large-category]
+deps: [def-subobject-and-quotient-object, def-small-locally-small-and-large-category,
+       def-monomorphism-and-epimorphism, rem-category-theory-class-and-size-conventions]
 aliases: []
 landmark: true
 verification:
@@ -24,6 +25,8 @@ pipeline_run: null
 
 ## Definition
 
-A category $\mathcal C$ is **well-powered** when, for every object $C$, the collection of subobjects of $C$ ([[def-subobject-and-quotient-object]]) is a set. It is **co-well-powered** when, for every $C$, the collection of quotient objects of $C$ is a set.
+A subobject of an object $C$ is a mutual-factorisation class of monomorphisms into $C$ ([[def-subobject-and-quotient-object]]), and under the class convention of this development such a class is a formula rather than a set ([[rem-category-theory-class-and-size-conventions]]). So "the subobjects of $C$ form a set" cannot be stated by gathering the subobjects into a collection and measuring it. The size condition is stated on representatives instead, which is the form the sources use and the form every result below actually spends.
 
-A **supplied well-powering** gives, for each object $C$, a set-indexed family of monomorphisms into $C$ containing one representative of every subobject class. A **supplied co-well-powering** is the dual datum for quotient objects. The supplied versions include chosen representatives; ordinary well-poweredness is only the size assertion.
+A category $\mathcal C$ is **well-powered** when, for every object $C$, there is a **set** $M_C$ of monomorphisms into $C$ ([[def-monomorphism-and-epimorphism]]) containing a representative of every subobject class of $C$: every monomorphism into $C$ mutually factors with some member of $M_C$. It is **co-well-powered** when, for every $C$, there is a set of epimorphisms out of $C$ containing a representative of every quotient-object class.
+
+A **supplied well-powering** gives such a set $M_C$ **as data for every object at once** — that is, the whole assignment $C\mapsto M_C$. A **supplied co-well-powering** is the dual datum. The difference from plain well-poweredness is not size but scope of selection: well-poweredness asserts of each object separately that a representative set exists, whereas a proof that needs one representative set per object across a proper class of objects would have to select them, and a supplied well-powering hands that assignment over rather than choosing it.

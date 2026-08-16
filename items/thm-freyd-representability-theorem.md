@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-general-adjoint-functor-theorem-objectwise-form, def-category-of-elements, thm-universal-elements-are-initial-or-terminal-in-the-category-of-elements, def-presheaf-representable-functor-and-representation]
+deps: [thm-general-adjoint-functor-theorem-objectwise-form, def-category-of-elements, thm-universal-elements-are-initial-or-terminal-in-the-category-of-elements, def-presheaf-representable-functor-and-representation, thm-universal-elements-and-universal-factorisations]
 aliases: []
 landmark: true
 proof_strategy: constructive
@@ -35,7 +35,9 @@ Then $F$ is covariantly representable.
 
 [L2] For a covariant Set-valued functor, a universal element is exactly an initial object of $\int F$ ([[thm-universal-elements-are-initial-or-terminal-in-the-category-of-elements]]).
 
-[L3] A universal element $(R,u)$ determines a natural isomorphism $\mathcal C(R,-)\cong F$, hence a representation ([[def-presheaf-representable-functor-and-representation]]).
+[L3] A covariant $\mathbf{Set}$-valued functor is representable when it is naturally isomorphic to $\mathcal C(R,-)$ for some object $R$ ([[def-presheaf-representable-functor-and-representation]]).
+
+[L5] For locally small $\mathcal C$, a pair $(R,u)$ with $u\in F(R)$ is universal for $F:\mathcal C\to\mathbf{Set}$ if and only if, for every object $c$ and every $x\in F(c)$, there is a unique morphism $f:R\to c$ with $F(f)(u)=x$ ([[thm-universal-elements-and-universal-factorisations]]).
 
 [L4] The objectwise GAFT constructs an initial comma object from completeness, local smallness, continuity, and a supplied solution set ([[thm-general-adjoint-functor-theorem-objectwise-form]]).
 
@@ -47,4 +49,4 @@ Then $F$ is covariantly representable.
 
 2.1 The category $\int F$ is the comma category $(1\downarrow F)$ for a singleton $1$. Since $F$ is continuous, [L4] applies to the supplied set from step 1.1 and gives an initial object $(R,u)$, without selecting over a proper class. [step 1.1, L4, choose]
 
-3.1 By [L2], $(R,u)$ is a universal element of $F$, and [L3] translates it into a natural isomorphism $\mathcal C(R,-)\cong F$. Therefore $F$ is covariantly representable. [step 2.1, L2, L3, discharge-construct] ∎
+3.1 By [L2], $(R,u)$ is a universal element of $F$. By [L5] the map $\Phi_c:\mathcal C(R,c)\to F(c)$, $f\mapsto F(f)(u)$, is then a bijection for every object $c$; it is natural in $c$ because for $g:c\to c'$ functoriality gives $F(g)(\Phi_c(f))=F(g)(F(f)(u))=F(g\circ f)(u)=\Phi_{c'}(g\circ f)$. Hence $\mathcal C(R,-)\cong F$ as functors, which is representability in the sense of [L3]. [step 2.1, L2, L3, L5, discharge-construct] ∎

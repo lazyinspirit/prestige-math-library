@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-invariant-subspace-and-induced-quotient-operator, prop-quotient-vector-space-operations-and-projection]
+deps: [def-invariant-subspace-and-induced-quotient-operator, def-quotient-vector-space-and-canonical-projection, prop-quotient-vector-space-operations-and-projection]
 aliases: []
 landmark: false
 proof_strategy: direct
@@ -34,7 +34,9 @@ $$\pi\circ T=\bar T\circ\pi.$$
 
 [L1] $T$-invariance means $T(W)\subseteq W$, and the proposed induced map is $\bar T(v+W)=T(v)+W$ ([[def-invariant-subspace-and-induced-quotient-operator]]).
 
-[L2] Cosets are equal exactly when their representatives differ by an element of $W$, and the quotient operations and projection are linear ([[prop-quotient-vector-space-operations-and-projection]]).
+[L2] $v+W=v'+W$ exactly when $v-v'\in W$; the operations on $V/W$ are independent of the chosen representatives and make $V/W$ a vector space over $F$; and $\pi:V\to V/W$ is a surjective linear map with $\ker\pi=W$ ([[prop-quotient-vector-space-operations-and-projection]]).
+
+[L3] The quotient operations are $(v+W)+(u+W):=(v+u)+W$ and $a(v+W):=(av)+W$, and the canonical projection is $\pi(v):=v+W$ ([[def-quotient-vector-space-and-canonical-projection]]).
 
 ## Proof
 
@@ -42,4 +44,4 @@ $$\pi\circ T=\bar T\circ\pi.$$
 
 1.1 If $v+W=v'+W$, then $v-v'\in W$, so $T(v)-T(v')=T(v-v')\in T(W)\subseteq W$ and therefore $T(v)+W=T(v')+W$; thus $\bar T$ is well defined. [L1, L2]
 
-2.1 For scalars $a,b$, $\bar T(a(v+W)+b(u+W))=T(av+bu)+W=a(Tv+W)+b(Tu+W)$, so $\bar T$ is linear, and $\bar T(\pi(v))=T(v)+W=\pi(T(v))$ proves $\bar T\pi=\pi T$; the same calculation covers $W=0$, $W=V$, and $V=0$. [step 1.1, L2] ∎
+2.1 For scalars $a,b$, the operations of [L3] give $a(v+W)+b(u+W)=(av+bu)+W$, so by [L1] and the linearity of $T$, $\bar T(a(v+W)+b(u+W))=T(av+bu)+W=(aT(v)+bT(u))+W=a(T(v)+W)+b(T(u)+W)$, and $\bar T$ is linear; also $\bar T(\pi(v))=\bar T(v+W)=T(v)+W=\pi(T(v))$ proves $\bar T\pi=\pi T$; the same calculation covers $W=0$, $W=V$, and $V=0$. [step 1.1, L1, L2, L3] ∎

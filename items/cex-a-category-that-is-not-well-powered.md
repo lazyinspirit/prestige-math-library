@@ -1,7 +1,7 @@
 ---
 id: cex-a-category-that-is-not-well-powered
 kind: counterexample
-title: "A locally small category with a proper class of subobjects of one object"
+title: "A locally small category that is not well-powered: one object admits no set of representative monomorphisms"
 status: draft
 origin: session
 provenance:
@@ -25,8 +25,9 @@ pipeline_run: null
 
 ## Counterexample
 
-There is a locally small category with a proper class of subobjects of one
-object. Take the thin category whose objects are all ordinals together with a
+There is a locally small category that is not well-powered: one of its objects
+admits no set of monomorphisms into it meeting every subobject class. Take the
+thin category whose objects are all ordinals together with a
 new top object $\infty$, ordered by the ordinal order and by
 $\alpha<\infty$ for every ordinal $\alpha$.
 
@@ -40,7 +41,7 @@ $\alpha<\infty$ for every ordinal $\alpha$.
 
 [L3] The ordinals do not form a set ([[fs-ordinals-form-a-set]]).
 
-[L4] A category is well-powered when each object has only a set of subobject classes ([[def-well-powered-and-co-well-powered-category]]).
+[L4] A category is well-powered when, for every object $C$, there is a set of monomorphisms into $C$ containing a representative of every subobject class of $C$ ([[def-well-powered-and-co-well-powered-category]]).
 
 [L5] A category is locally small when every hom-collection is a set ([[def-small-locally-small-and-large-category]]).
 
@@ -54,4 +55,4 @@ $\alpha<\infty$ for every ordinal $\alpha$.
 
 2.2 The arrows $m_\alpha$ and $m_\beta$ mutually factor exactly when both $\alpha\le\beta$ and $\beta\le\alpha$, hence exactly when $\alpha=\beta$. Thus distinct ordinals give distinct subobject classes. [step 1.1, L2]
 
-3.1 By [L3] those classes form a proper class, so $\infty$ has no set of subobjects. The category is not well-powered by [L4], despite being locally small. [step 1.1, step 2.2, L3, L4, discharge-construct] ∎
+3.1 Suppose some set $M$ of monomorphisms into $\infty$ contained a representative of every subobject class. By step 2.2 the only monomorphism into $\infty$ that mutually factors with $m_\alpha$ is $m_\alpha$ itself, so $M$ would have to contain $m_\alpha$ for every ordinal $\alpha$, and $\alpha\mapsto m_\alpha$ is injective. Sending each such member of $M$ back to its domain would then exhibit the ordinals as the image of a set, making them a set and contradicting [L3]. No such $M$ exists, so the category is not well-powered by [L4], despite being locally small. [step 1.1, step 2.2, L3, L4, discharge-construct] ∎

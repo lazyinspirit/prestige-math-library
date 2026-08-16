@@ -1,7 +1,7 @@
 ---
 id: thm-every-nonempty-polish-space-is-a-continuous-image-of-baire-space
 kind: theorem
-title: "Every nonempty Polish space is a continuous image of Baire sequence space"
+title: "Under Dependent Choice, every nonempty Polish space is a continuous image of Baire sequence space"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-Every nonempty Polish space is the image of a continuous surjection from Baire sequence space $\mathbb N^{\mathbb N}$.
+Assume Dependent Choice. Every nonempty Polish space is the image of a continuous surjection from Baire sequence space $\mathbb N^{\mathbb N}$.
 
 ## Facts & Assumptions
 
@@ -40,7 +40,7 @@ Every nonempty Polish space is the image of a continuous surjection from Baire s
 
 [F2] A topological space is **Polish** when it is separable (def-separable-space) and completely metrizable: its topology is induced by some complete metric (lem-complete-remetrisation). No particular compatible complete metric or countable dense subset is part of the structure. ([[def-polish-space]]).
 
-[F3] Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $$\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. ([[def-dependent-choice]]).
+[F3] Let $X$ be a set and let $R \subseteq X \times X$ be a binary relation on $X$. Call $R$ **entire on $X$** when $$\text{for every } x \in X \text{ there is } y \in X \text{ with } x \mathbin{R} y .$$ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following statement. The statement is: for every nonempty set $X$, every relation $R$ entire on $X$, and every $a\in X$, there is a sequence $x:\mathbb N\to X$ with $x_0=a$ and $x_n\mathbin{R}x_{n+1}$ for every $n\in\mathbb N$. ([[def-dependent-choice]]).
 
 [F4] Let $(X,d)$ be a metric space (def-metric-space). Call a sequence $(F_k)_{k \in \mathbb{N}}$ of subsets of $X$ a **Cantor chain** if every $F_k$ is nonempty, closed (def-metric-topology) and bounded, $F_{k+1} \subseteq F_k$ for every $k$, and $\operatorname{diam}(F_k) \to 0$ in $\mathbb{R}$ (def-metric-bounded-diameter, def-real-limit). Then: 1. If $(X,d)$ is complete (def-complete-metric-space), every Cantor chain in $X$ has an intersection $\bigcap_{k \in \mathbb{N}} F_k$ with **exactly one** element. 2. Conversely, if every Cantor chain in $X$ has nonempty intersection, then $(X,d)$ is complete. Boundedness of each $F_k$ is part of the definition of a Cantor chain because $\operatorname{diam}$ is defined for nonempty bounded sets only in this library (def-metric-bounded-diameter); it is not an extra hypothesis but the precondition for writing the diameter condition down. ([[thm-cantor-intersection-metric]]).
 

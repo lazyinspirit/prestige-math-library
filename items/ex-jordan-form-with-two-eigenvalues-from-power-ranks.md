@@ -24,7 +24,7 @@ pipeline_run: null
 ## Example
 
 Let $T=J_3(0)\oplus J_2(1)$. Its shifted-power ranks are
-$$\rho_k(0):\ 5,4,3,2,2,\ldots,qquad \rho_k(1):\ 5,4,3,3,3,\ldots.$$
+$$\rho_k(0):\ 5,4,3,2,2,\ldots,\qquad \rho_k(1):\ 5,4,3,3,3,\ldots.$$
 Their second differences recover one size-three block at $0$ and one size-two block at $1$. Accordingly
 $$\chi_T=\mu_T=x^3(x-1)^2.$$
 

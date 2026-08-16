@@ -23,8 +23,8 @@ pipeline_run: null
 
 ## Statement
 
-Let $\phi:[c,d]\to[a,b]$ be a strictly increasing continuous bijection and let $\gamma:[a,b]\to\mathbb C$ be rectifiable. Then
-$$\int_{\gamma\circ\phi}f\,dz=\int_\gamma f\,dz,qquad \int_{\gamma\circ\phi}|f|\,|dz|=\int_\gamma|f|\,|dz|.$$
+Let $\phi:[c,d]\to[a,b]$ be a strictly increasing continuous bijection, let $\gamma:[a,b]\to\mathbb C$ be rectifiable, and let $f$ be continuous on the trace of $\gamma$. Then
+$$\int_{\gamma\circ\phi}f\,dz=\int_\gamma f\,dz,\qquad \int_{\gamma\circ\phi}|f|\,|dz|=\int_\gamma|f|\,|dz|.$$
 For singleton source and target intervals the same identities hold by the zero-integral convention.
 
 ## Facts & Assumptions

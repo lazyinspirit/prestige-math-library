@@ -36,7 +36,7 @@ The squaring map $s(g)=g^2$ need not be a group homomorphism. It fails on the no
 
 [L3] Natural powers in a group satisfy $g^0=e$ and $g^{n+1}=g^ng$ ([[def-group-power]]).
 
-[L4] Group powers satisfy $(g^m)^n=g^{mn}$, while $(gh)^n=g^nh^n$ requires $g$ and $h$ to commute ([[lem-group-power-laws]]).
+[L4] Group powers satisfy $(g^m)^n=g^{mn}$, and if $gh=hg$ then $(gh)^n=g^nh^n$; that last claim is false in general without its hypothesis, and the equation can fail already at $n=2$ ([[lem-group-power-laws]]).
 
 [L5] A group homomorphism $f$ satisfies $f(xy)=f(x)f(y)$ for all $x,y$ ([[def-group-homomorphism]]).
 
@@ -46,6 +46,6 @@ The squaring map $s(g)=g^2$ need not be a group homomorphism. It fails on the no
 
 1.1 By [L1] and [L2], $\tau,\rho\in S_3$, and their product is $\tau\rho=(1\,2\,3)$ under the stated composition convention. [L1, L2, given]
 
-2.1 The two transpositions satisfy $\tau^2=\rho^2=e$, while [L3] gives $(\tau\rho)^2=(1\,3\,2)\ne e$. This is precisely the failure permitted by the commuting hypothesis in [L4]. [L3, L4, step 1.1]
+2.1 The two transpositions satisfy $\tau^2=\rho^2=e$, while [L3] gives $(\tau\rho)^2=(1\,3\,2)\ne e$. Here $\rho\tau=(1\,3\,2)\ne(1\,2\,3)=\tau\rho$, so $\tau$ and $\rho$ do not commute and the hypothesis of the power law in [L4] is not met; [L4] records that the equation can fail at $n=2$ in exactly that case. [L3, L4, step 1.1]
 
 3.1 Therefore $s(\tau\rho)=(\tau\rho)^2\ne e=\tau^2\rho^2=s(\tau)s(\rho)$, so $s$ violates the homomorphism identity [L5]. [L5, step 2.1] ∎

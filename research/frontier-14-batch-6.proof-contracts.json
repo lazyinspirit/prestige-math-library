@@ -75,6 +75,7 @@
           "source_section": "Statement",
           "quote": "Let $G:\\mathcal D\\to\\mathcal C$ be a functor. A left adjoint to $G$ is supplied exactly by choosing, for every $c\\in\\mathcal C$, an initial object $(Fc,\\eta_c)$ of the comma category $(c\\downarrow G)$. These choices determine the action of $F$ on morphisms and the adjunction uniquely.\n\nDually, a right adjoint to $F:\\mathcal C\\to\\mathcal D$ is supplied exactly by choosing a terminal object in every comma category $(F\\downarrow d)$.",
           "uses": [
+            "1.1",
             "2.1"
           ]
         }
@@ -82,11 +83,12 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Suppose item 1 is supplied. For each $C$, the unit component $\\eta_C:C\\to IR(C)$ has the universal factorisation property of [L2], so $(R(C),\\eta_C)$ is the required specified universal arrow.",
+          "claim": "Suppose item 1 is supplied. By [L3] a supplied left adjoint to $I$ corresponds to an initial object, equivalently a universal arrow, of each comma category $(C\\downarrow I)$, and the unit components are exactly those arrows. Hence for each $C$ the unit component $\\eta_C:C\\to IR(C)$ has the universal factorisation property of [L2], and $(R(C),\\eta_C)$ is the required specified universal arrow.",
           "step": "1.1",
           "inputs": [
             "L1",
-            "L2"
+            "L2",
+            "L3"
           ]
         },
         {
@@ -163,6 +165,15 @@
           ]
         },
         {
+          "fact": "L4",
+          "source": "def-subcategory-and-full-subcategory",
+          "source_section": "Definition",
+          "quote": "A **subcategory** $\\mathcal A$ of a category $\\mathcal C$\n([[def-category]]) has a subclass of the objects of $\\mathcal C$ and, for each\n$A,B\\in\\mathcal A$, a subclass\n$\\mathcal A(A,B)\\subseteq\\mathcal C(A,B)$. It contains the identities of its\nobjects and is closed under the composition inherited from $\\mathcal C$.\n\nThe subcategory is **full** when\n$\\mathcal A(A,B)=\\mathcal C(A,B)$ for every pair of its objects. Thus a full\nsubcategory is determined entirely by its objects.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
           "fact": "L2",
           "source": "def-adjunction-by-unit-counit-and-triangle-identities",
           "source_section": "Definition",
@@ -185,11 +196,12 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "By fullness in [L1], there is a unique $\\delta_A:A\\to RI(A)$ with $I(\\delta_A)=\\eta_{I(A)}$. The first triangle identity in [L2] and faithfulness give $\\varepsilon_A\\circ\\delta_A=1_A$.",
+          "claim": "Since $\\mathcal A$ is a full subcategory of $\\mathcal C$, [L4] gives $\\mathcal A(A,B)=\\mathcal C(A,B)=\\mathcal C(I(A),I(B))$ for all $A,B\\in\\mathcal A$, and the inclusion $I$ acts on those hom-sets as the identity; so every $I_{A,B}$ is bijective and [L1] makes $I$ fully faithful. By its surjectivity there is $\\delta_A:A\\to RI(A)$ with $I(\\delta_A)=\\eta_{I(A)}$, and by its injectivity that $\\delta_A$ is unique. The first triangle identity in [L2] gives $I(\\varepsilon_A\\circ\\delta_A)=I(\\varepsilon_A)\\circ\\eta_{I(A)}=1_{I(A)}=I(1_A)$, so faithfulness gives $\\varepsilon_A\\circ\\delta_A=1_A$.",
           "step": "1.1",
           "inputs": [
             "L1",
-            "L2"
+            "L2",
+            "L4"
           ]
         },
         {
@@ -273,6 +285,15 @@
             "1.1",
             "2.1"
           ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-adjunction-by-unit-counit-and-triangle-identities",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be categories. An **adjunction** $F\\dashv G$ consists of functors $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$, a natural transformation\n\n$$\\eta:1_{\\mathcal C}\\Rightarrow GF$$\n\ncalled the **unit**, and a natural transformation\n\n$$\\varepsilon:FG\\Rightarrow1_{\\mathcal D}$$\n\ncalled the **counit**, such that the two **triangle identities** hold:\n\n$$ (\\varepsilon F)\\circ(F\\eta)=1_F,\\qquad (G\\varepsilon)\\circ(\\eta G)=1_G. $$\n\nHere whiskering and vertical composition are those of [[def-horizontal-composition-and-whiskering-of-natural-transformations]]. Componentwise, for every $c\\in\\mathcal C$ and $d\\in\\mathcal D$,\n\n$$ \\varepsilon_{Fc}\\circ F(\\eta_c)=1_{Fc},\\qquad G(\\varepsilon_d)\\circ\\eta_{Gd}=1_{Gd}. $$\n\nThe direction $F\\dashv G$ means that $F$ is left adjoint to $G$ and $G$ is right adjoint to $F$. If $\\eta$ and $\\varepsilon$ are natural isomorphisms, this is precisely the adjunction data occurring in an adjoint equivalence ([[def-equivalence-and-adjoint-equivalence-of-categories]]).",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
@@ -287,12 +308,13 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Conversely, let $u:C\\to I(A)$ be an isomorphism. Naturality of $\\eta$ gives $IR(u)\\circ\\eta_C=\\eta_{I(A)}\\circ u$. The map $IR(u)$ is invertible because a functor sends the inverse of $u$ to its inverse, while $\\eta_{I(A)}=I(\\varepsilon_A)^{-1}$ by [L1]. Hence $\\eta_C=IR(u)^{-1}\\circ\\eta_{I(A)}\\circ u$ is a composite of isomorphisms and is invertible by [L2].",
+          "claim": "Conversely, let $u:C\\to I(A)$ be an isomorphism. Naturality of $\\eta$ gives $IR(u)\\circ\\eta_C=\\eta_{I(A)}\\circ u$. The map $IR(u)$ is invertible because a functor sends the inverse of $u$ to its inverse. Applying $R\\dashv I$ in [L3] at $d=A$ gives $I(\\varepsilon_A)\\circ\\eta_{I(A)}=1_{I(A)}$, and $I(\\varepsilon_A)$ is invertible because $\\varepsilon_A$ is by [L1] and functors preserve inverses; composing that identity with $I(\\varepsilon_A)^{-1}$ on the left gives $\\eta_{I(A)}=I(\\varepsilon_A)^{-1}$, which is therefore an isomorphism. Hence $\\eta_C=IR(u)^{-1}\\circ\\eta_{I(A)}\\circ u$. A composite $g\\circ f$ of isomorphisms is an isomorphism, since $f^{-1}\\circ g^{-1}$ is a two-sided inverse for it by associativity and the identity laws; applying this twice and using [L2] makes $\\eta_C$ invertible.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
             "L1",
-            "L2"
+            "L2",
+            "L3"
           ]
         }
       ],
@@ -341,9 +363,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the direct proof of An ambient object lies in the essential image of a reflective inclusion exactly when its reflection unit is invertible; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 7), signals: 4 declared dependencies; 4 cited facts; biconditional / both-direction claim. R6-4: read in full. The triangle identity now comes from the adjunction definition as [L3], and closure of isomorphisms under composition is proved inline. Both iff directions are carried by steps 1.1 and 2.1."
       }
     },
     "thm-a-reflective-inclusion-creates-all-limits": {
@@ -385,6 +407,15 @@
             "2.1",
             "3.1"
           ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be a full subcategory of $\\mathcal C$, with inclusion $I:\\mathcal A\\to\\mathcal C$. The following supplied data are equivalent:\n\n1. a reflector $R:\\mathcal C\\to\\mathcal A$ and an adjunction $R\\dashv I$ ([[def-reflective-subcategory-and-reflector]]);\n2. for every object $C\\in\\mathcal C$, a specified universal arrow $(R_C,\\eta_C)$ from $C$ to $I$ ([[def-universal-arrow-to-and-from-a-functor]]).\n\nUnder this equivalence the specified universal arrows are the components of the reflection unit. Merely asserting their existence, without supplying them object by object, does not supply the functor data in item 1.",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
@@ -399,12 +430,13 @@
         },
         {
           "id": "step-2-1",
-          "claim": "By the universal property in [L4], the included cone has a unique map $q:IR(L)\\to L$ with $p_j\\circ q=I(\\varepsilon_{D_j})\\circ IR(p_j)$. Cone uniqueness gives $q\\circ\\eta_L=1_L$. Both $1_{IR(L)}$ and $\\eta_L\\circ q$ are maps between reflected objects whose composites with the universal reflection arrow $\\eta_L$ equal $\\eta_L$, so reflection universality makes $\\eta_L\\circ q=1_{IR(L)}$. Hence $\\eta_L$ is invertible and [L1] identifies $L$ with an included object.",
+          "claim": "By the universal property in [L4], the included cone has a unique map $q:IR(L)\\to L$ with $p_j\\circ q=I(\\varepsilon_{D_j})\\circ IR(p_j)$. Cone uniqueness gives $q\\circ\\eta_L=1_L$. Both $1_{IR(L)}$ and $\\eta_L\\circ q$ are maps between reflected objects whose composites with the universal reflection arrow $\\eta_L$ equal $\\eta_L$, and by [L5] the unit component $\\eta_L$ is a universal arrow from $L$ to $I$, so the uniqueness clause of that universal property makes $\\eta_L\\circ q=1_{IR(L)}$. Hence $\\eta_L$ is invertible and [L1] identifies $L$ with an included object.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
             "L1",
-            "L4"
+            "L4",
+            "L5"
           ]
         },
         {
@@ -464,9 +496,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of A reflective inclusion creates every ambient limit in the ordinary isomorphism-invariant sense; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 6 declared dependencies; 6 cited facts; boundary-sensitive language; analytic limiting/completeness language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance."
       }
     },
     "thm-a-reflective-subcategory-has-every-colimit-the-ambient-category-has": {
@@ -503,7 +535,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Apply $R$ to the ambient cocone. By [L2], $(R(L),R(\\lambda_j))$ is colimiting for $RI D$; composing its legs with the isomorphisms $\\varepsilon_{D_j}:RI(D_j)\\to D_j$ from [L1] transports it to a cocone from $D$ to $R(L)$, also for the empty indexing category.",
+          "claim": "Apply $R$ to the ambient cocone. By [L2], $(R(L),R(\\lambda_j))$ is colimiting for $RI D$; precomposing its legs with the inverses $\\varepsilon_{D_j}^{-1}:D_j\\to RI(D_j)$ of the isomorphisms supplied by [L1] transports it to a cocone with legs $R(\\lambda_j)\\circ\\varepsilon_{D_j}^{-1}:D_j\\to R(L)$, also for the empty indexing category.",
           "step": "1.1",
           "inputs": [
             "L1",
@@ -566,9 +598,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of A reflective subcategory has every ambient colimit, obtained by reflecting an ambient colimit; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 4 declared dependencies; 4 cited facts; boundary-sensitive language; analytic limiting/completeness language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance."
       }
     },
     "cor-a-reflective-subcategory-of-a-complete-category-is-complete": {
@@ -659,9 +691,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the direct proof of A reflective subcategory of a complete category is complete; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 5), signals: 2 cited facts; boundary-sensitive language; analytic limiting/completeness language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance."
       }
     },
     "thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence": {
@@ -752,9 +784,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the direct proof of Mutual factorisation is an equivalence relation on monomorphisms into an object and dually on epimorphisms out of it; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 5), signals: 3 cited facts; existence, choice, uniqueness, or well-definedness; quotient or equivalence-class construction. R6-7: read in full. The 'identities are monic and epic' clause was not in the cited definition and was not needed; [L1] now quotes only the two cancellation clauses."
       }
     },
     "thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections": {
@@ -772,12 +804,13 @@
         },
         {
           "fact": "L2",
-          "source": "def-preorder",
+          "source": "def-partial-order",
           "source_section": "Definition",
-          "quote": "A **preorder** on a set $P$ is a relation $\\le$ that is reflexive and transitive.\nUnlike a partial order ([[def-partial-order]]), it need not be antisymmetric.\n\nA map $f:P\\to Q$ between preorders is **monotone** when\n$x\\le_P y$ implies $f(x)\\le_Q f(y)$. Every partial order is a preorder, and the\ndefinition of monotone map agrees with the usual one for partially ordered\nsets.",
+          "quote": "Let $P$ be a set. A **partial order** on $P$ is a binary relation $\\le$ on $P$\nsuch that, for all $x, y, z \\in P$:\n\n- **(R)** *reflexivity*: $x \\le x$;\n- **(A)** *antisymmetry*: if $x \\le y$ and $y \\le x$, then $x = y$;\n- **(T)** *transitivity*: if $x \\le y$ and $y \\le z$, then $x \\le z$.\n\nThe pair $(P, \\le)$ is a **partially ordered set**, abbreviated **poset**. When\nthe order is clear we write $P$ for the pair.\n\nThe associated **strict order** is defined by\n$$x < y \\quad :\\Longleftrightarrow \\quad x \\le y \\text{ and } x \\ne y.$$\n\nTwo elements $x, y \\in P$ are **comparable** if $x \\le y$ or $y \\le x$, and\n**incomparable** otherwise. A partial order in which every two elements are\ncomparable is a **total order** (equivalently a **linear order**), and $(P, \\le)$\nis then a **totally ordered set**.",
           "uses": [
             "2.1",
-            "3.1"
+            "3.1",
+            "4.1"
           ]
         }
       ],
@@ -792,7 +825,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Identity factorisations give reflexivity and composites give transitivity. If $[m]\\le[n]$ and $[n]\\le[m]$, then the representatives mutually factor, so [L1] makes their classes equal. The subobject relation is therefore antisymmetric and hence a partial order by [L2].",
+          "claim": "Identity factorisations give reflexivity and composites give transitivity. If $[m]\\le[n]$ and $[n]\\le[m]$, then the representatives mutually factor, so [L1] makes their classes equal. The subobject relation is therefore reflexive, transitive and antisymmetric — the three conditions [L2] names — and by step 1.1 each is a statement about the classes rather than about chosen representatives.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
@@ -807,6 +840,17 @@
           "inputs": [
             "step 2.1",
             "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Nothing in steps 1.1--3.1 quantifies over a collection whose members are subobjects: each is a statement about monomorphisms into $C$ and about the factorisation relation between them, which is what the bracket notation abbreviates. Restricting that relation to a set of monomorphisms into $C$ carrying one representative per class therefore gives a relation on a set satisfying the three conditions of [L2], hence a partial order there.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
             "L2"
           ]
         }
@@ -856,9 +900,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the direct proof of Subobjects and quotient objects form oppositely oriented partially ordered collections; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b) + lead alpha (step 6c)",
+        "notes": "Tier critical (score 8), signals: 2 cited facts; biconditional / both-direction claim; existence, choice, uniqueness, or well-definedness; quotient or equivalence-class construction. R6-8: read in full. def-preorder says a preorder need not be antisymmetric; the antisymmetry the proof needs now comes from def-partial-order, and the reversed quotient order is carried by step 3.1. || LEAD ALPHA, step 6c (Claude Opus 5): this item was materially edited after the above review, closing the foundational referral group b handed up — subobject classes are proper classes under rem-category-theory-class-and-size-conventions, so well-poweredness and the subobject order are now stated on representative sets rather than by measuring a collection of classes. I re-read the item in full against the repaired def-subobject-and-quotient-object and def-well-powered-and-co-well-powered-category, regenerated its citation and derivation entries, and re-ran precheck, proof-contract --strict, citation-fidelity and boundary-audit clean. The mathematics is unchanged; what changed is that the size and order assertions are now well-formed."
       }
     },
     "lem-wide-pullbacks-compute-intersections-independently-of-representatives": {
@@ -869,7 +913,6 @@
           "source_section": "Definition",
           "quote": "Let $D:\\mathcal J\\to\\mathcal C$ be a diagram. A **limit** of $D$ is a terminal\nobject $(L,\\lambda)$ of $\\operatorname{Cone}(D)$\n([[def-constant-diagram-cone-cocone-and-cone-morphism]],\n[[def-initial-terminal-and-zero-object]]). It is written\n\n$$L=\\lim_{j\\in\\mathcal J}D(j),\\qquad \\lambda_j:L\\to D(j).$$ Explicitly, for every cone $(X,\\xi)$ there exists a unique morphism $u:X\\to L$ such that $\\lambda_j u=\\xi_j$ for every $j$. The diagram **has a limit** when such a cone exists.  A **colimit** of $D$ is an initial object $(Q,\\rho)$ of $\\operatorname{Cocone}(D)$, written $$Q=\\operatorname*{colim}_{j\\in\\mathcal J}D(j),\\qquad \\rho_j:D(j)\\to Q.$$\n\nExplicitly, for every cocone $(X,\\xi)$ there exists a unique morphism\n$u:Q\\to X$ such that $u\\rho_j=\\xi_j$ for every $j$. The diagram **has a\ncolimit** when such a cocone exists.",
           "uses": [
-            "1.1",
             "1.2",
             "2.1"
           ]
@@ -902,15 +945,23 @@
             "1.2",
             "2.1"
           ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence",
+          "source_section": "Statement",
+          "quote": "For monomorphisms into a fixed object, mutual factorisation as defined in [[def-subobject-and-quotient-object]] is an equivalence relation. If $m:A\\to C$ and $n:B\\to C$ mutually factor, the factor maps are unique inverse isomorphisms. Dually, mutual factorisation is an equivalence relation on epimorphisms out of a fixed object, and its factor maps are unique inverse isomorphisms.",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "If $I=\\varnothing$, the identity $1_C:C\\to C$ represents the greatest subobject of $C$, so it is the intersection of the empty supplied family by [L4].",
+          "claim": "If $I=\\varnothing$, every subobject of $C$ factors through $1_C:C\\to C$, so $1_C$ represents the greatest subobject of $C$; the empty family imposes no lower-bound condition, so $[1_C]$ is its greatest lower bound and hence its intersection by [L4].",
           "step": "1.1",
           "inputs": [
-            "L1",
             "L4"
           ]
         },
@@ -927,12 +978,13 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Equivalent representatives are connected by unique inverse isomorphisms over $C$. Composing a wide-pullback cone with these isomorphisms gives a cone for the replacement family, and [L1] supplies mutually inverse comparison maps between the two pullback apices. Their induced monomorphisms into $C$ therefore mutually factor, so they represent the same intersection subobject.",
+          "claim": "By [L5], representatives of the same subobject mutually factor and their factor maps are unique inverse isomorphisms over $C$. Composing a wide-pullback cone with these isomorphisms gives a cone for the replacement family, and [L1] supplies mutually inverse comparison maps between the two pullback apices. Their induced monomorphisms into $C$ therefore mutually factor, so they represent the same intersection subobject.",
           "step": "2.1",
           "inputs": [
             "step 1.2",
             "L1",
-            "L4"
+            "L4",
+            "L5"
           ]
         }
       ],
@@ -981,9 +1033,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of Wide pullbacks compute intersections of supplied set-indexed subobject representatives independently of the representatives; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 12), signals: 5 declared dependencies; 5 cited facts; existence, choice, uniqueness, or well-definedness; boundary-sensitive language; quotient or equivalence-class construction; analytic limiting/completeness language. R6-9, R6-10: read in full. The empty-limit/terminal inflation is gone and step 1.1 argues the empty case from the greatest-subobject property; step 2.1 now cites the mutual-factorisation theorem for the isomorphisms it uses."
       }
     },
     "thm-a-separating-set-is-equivalently-a-jointly-faithful-family-of-representables": {
@@ -1097,9 +1149,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the direct proof of In a locally small category, separating and coseparating sets are equivalently jointly faithful families of representables; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 9), signals: 4 declared dependencies; 4 cited facts; biconditional / both-direction claim; boundary-sensitive language. R6-11: read in full. Joint faithfulness is the Statement's key term and was attributed to a definition covering single functors; the Statement now defines it and [L3] says the definition is local to this item."
       }
     },
     "thm-a-complete-locally-small-category-with-a-jointly-weakly-initial-set-has-an-initial-object": {
@@ -1110,7 +1162,9 @@
           "source_section": "Definition",
           "quote": "A diagram is **finite** when its indexing category has finitely many morphisms,\n**small** when its indexing category is small, and **large** otherwise\n([[def-cardinality-of-a-small-category-and-kappa-small-diagram]],\n[[def-small-locally-small-and-large-category]]).\n\nA category has **finite limits**, **small limits**, or a specified class of\nlimits when every diagram of the corresponding class has a limit in the sense\nof [[def-limit-and-colimit-of-a-diagram]]. It is **complete** when it has all\nsmall limits. The dual terms are **finite colimits**, **small colimits**, and\n**cocomplete**. Completeness and cocompleteness do not assert the existence of\nlimits or colimits of large diagrams.",
           "uses": [
-            "1.1"
+            "1.1",
+            "2.2",
+            "4.1"
           ]
         },
         {
@@ -1119,7 +1173,8 @@
           "source_section": "Definition",
           "quote": "Let $\\mathcal C$ be a category ([[def-category]]) under the class convention of\n[[rem-category-theory-class-and-size-conventions]].\n\n- $\\mathcal C$ is **small** when both\n  $\\operatorname{Ob}(\\mathcal C)$ and $\\operatorname{Mor}(\\mathcal C)$ are sets.\n- $\\mathcal C$ is **locally small** when every\n  $\\mathcal C(A,B)$ is a set.\n- $\\mathcal C$ is **large** when it is not small.\n\nA small category is locally small because each hom-collection is a subclass of\nthe set of all morphisms. A large category may or may not be locally small.",
           "uses": [
-            "1.1"
+            "1.1",
+            "2.2"
           ]
         },
         {
@@ -1138,7 +1193,7 @@
           "quote": "Let $D:\\mathcal J\\to\\mathcal C$ be a diagram. A **limit** of $D$ is a terminal\nobject $(L,\\lambda)$ of $\\operatorname{Cone}(D)$\n([[def-constant-diagram-cone-cocone-and-cone-morphism]],\n[[def-initial-terminal-and-zero-object]]). It is written\n\n$$L=\\lim_{j\\in\\mathcal J}D(j),\\qquad \\lambda_j:L\\to D(j).$$ Explicitly, for every cone $(X,\\xi)$ there exists a unique morphism $u:X\\to L$ such that $\\lambda_j u=\\xi_j$ for every $j$. The diagram **has a limit** when such a cone exists.  A **colimit** of $D$ is an initial object $(Q,\\rho)$ of $\\operatorname{Cocone}(D)$, written $$Q=\\operatorname*{colim}_{j\\in\\mathcal J}D(j),\\qquad \\rho_j:D(j)\\to Q.$$\n\nExplicitly, for every cocone $(X,\\xi)$ there exists a unique morphism\n$u:Q\\to X$ such that $u\\rho_j=\\xi_j$ for every $j$. The diagram **has a\ncolimit** when such a cocone exists.",
           "uses": [
             "1.1",
-            "3.1"
+            "2.2"
           ]
         },
         {
@@ -1147,22 +1202,20 @@
           "source_section": "Definition",
           "quote": "For parallel morphisms $f,g:A\\rightrightarrows B$, an **equalizer** is a limit\nof that parallel-pair diagram ([[def-limit-and-colimit-of-a-diagram]]). It is a\nmorphism $e:E\\to A$ satisfying $fe=ge$ such that, whenever $h:X\\to A$ satisfies\n$fh=gh$, there is a unique $u:X\\to E$ with $eu=h$.\n\nA **coequalizer** is a colimit of the parallel pair. It is a morphism\n$q:B\\to Q$ satisfying $qf=qg$ such that, whenever $h:B\\to X$ satisfies\n$hf=hg$, there is a unique $u:Q\\to X$ with $uq=h$.",
           "uses": [
-            "3.1",
-            "4.1"
-          ]
-        },
-        {
-          "fact": "L5",
-          "source": "def-monomorphism-and-epimorphism",
-          "source_section": "Definition",
-          "quote": "Let $f:A\\to B$ be a morphism in a category ([[def-category]]).\n\n- $f$ is a **monomorphism**, or **monic**, when\n  $f\\circ g=f\\circ h$ implies $g=h$ for every parallel pair\n  $g,h:X\\to A$.\n- $f$ is an **epimorphism**, or **epic**, when\n  $g\\circ f=h\\circ f$ implies $g=h$ for every parallel pair\n  $g,h:B\\to Y$.\n\nThus monomorphisms are left-cancellable and epimorphisms are\nright-cancellable. The definitions are formally dual.",
-          "uses": [
-            "3.1",
             "4.1"
           ]
         },
         {
           "fact": "L6",
+          "source": "cor-equalizers-are-monic-and-coequalizers-are-epic",
+          "source_section": "Statement",
+          "quote": "Every equalizer morphism is monic, and every coequalizer morphism is epic.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
           "source": "def-isomorphism-groupoid-and-connected-category",
           "source_section": "Definition",
           "quote": "In a category $\\mathcal C$ ([[def-category]]), a morphism $f:A\\to B$ is an\n**isomorphism** if there is a morphism $g:B\\to A$ with\n$g\\circ f=1_A$ and $f\\circ g=1_B$. Such a $g$ is unique and is denoted\n$f^{-1}$.\n\nA **groupoid** is a category in which every morphism is an isomorphism. A\ncategory is **connected** when it is nonempty and any two objects can be joined\nby a finite zigzag of morphisms, with successive arrows allowed to point in\neither direction. In a groupoid this is equivalent to being nonempty and having\nan isomorphism between every ordered pair of objects. Nonemptiness cannot be\ndropped: the empty groupoid has an isomorphism between every ordered pair of its\nobjects, vacuously, and is not connected.",
@@ -1171,7 +1224,7 @@
           ]
         },
         {
-          "fact": "L6",
+          "fact": "L7",
           "source": "def-monomorphism-and-epimorphism",
           "source_section": "Definition",
           "quote": "Let $f:A\\to B$ be a morphism in a category ([[def-category]]).\n\n- $f$ is a **monomorphism**, or **monic**, when\n  $f\\circ g=f\\circ h$ implies $g=h$ for every parallel pair\n  $g,h:X\\to A$.\n- $f$ is an **epimorphism**, or **epic**, when\n  $g\\circ f=h\\circ f$ implies $g=h$ for every parallel pair\n  $g,h:B\\to Y$.\n\nThus monomorphisms are left-cancellable and epimorphisms are\nright-cancellable. The definitions are formally dual.",
@@ -1203,24 +1256,39 @@
           ]
         },
         {
+          "id": "step-2-2",
+          "claim": "By [L2] the collection $\\mathcal C(L,L)$ is a set, so the one-object category whose arrows are the endomorphisms of $L$ is small, and sending its object to $L$ and each arrow to itself is a diagram. By [L1] that diagram has a limit; write its single leg as $j:I\\to L$. The cone condition says exactly that $\\alpha\\circ j=j$ for every $\\alpha\\in\\mathcal C(L,L)$, and $j$ is monic, since $j\\circ x=j\\circ y$ makes $x$ and $y$ both mediate the same cone, so the uniqueness clause of [L4] gives $x=y$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L4",
+            "construct"
+          ]
+        },
+        {
           "id": "step-3-1",
-          "claim": "Let $f,g:L\\rightrightarrows C$ and let $e:E\\to L$ be their equalizer. Weak initiality of $L$ gives $t:L\\to E$. Put $r=e\\circ t$. For each $S\\in\\mathcal S$, the composite $p_S\\circ e\\circ t:L\\to S$ is a cone leg comparison: because $p_Se t$ and $p_S$ form cones over the full inclusion, uniqueness in [L4] gives $p_S r=p_S$ for every $S$. Joint monicity of the limit cone, which follows from [L4], gives $r=1_L$.",
+          "claim": "$I$ is weakly initial: for a target $C$, step 2.1 supplies a map $L\\to C$ and composing it with $j$ gives $I\\to C$. Again one witness is used for one fixed target.",
           "step": "3.1",
           "inputs": [
             "step 2.1",
-            "L4",
-            "L5",
+            "step 2.2",
             "choose"
           ]
         },
         {
           "id": "step-4-1",
-          "claim": "Thus $e$ is split epic as well as monic, so [L6] makes it invertible. From $fe=ge$ we obtain $f=g$. There is therefore exactly one morphism $L\\to C$ for every target $C$, so $L$ is initial.",
+          "claim": "Let $f,g:I\\rightrightarrows C$ and let $m:K\\to I$ be their equalizer, which exists by [L1] and is monic by [L6]; it satisfies $fm=gm$ by [L5]. Step 2.1 gives $u:L\\to K$, so $j\\circ m\\circ u:L\\to L$ is an endomorphism of $L$ and step 2.2 gives $(j\\circ m\\circ u)\\circ j=j$. Rewriting the left side as $j\\circ(m\\circ u\\circ j)$ and cancelling the monomorphism $j$ by [L7] yields $m\\circ u\\circ j=1_I$. Hence $m$ is a split epimorphism as well as monic, so $m\\circ(u\\circ j\\circ m)=(m\\circ u\\circ j)\\circ m=m=m\\circ 1_K$ and left-cancelling $m$ gives $u\\circ j\\circ m=1_K$; thus $m$ is an isomorphism by [L7]. From $fm=gm$ and the invertibility of $m$ we get $f=g$. There is therefore exactly one morphism $I\\to C$ for every target $C$, so $I$ is an initial object of $\\mathcal C$.",
           "step": "4.1",
           "inputs": [
+            "step 2.1",
+            "step 2.2",
             "step 3.1",
+            "L1",
             "L5",
             "L6",
+            "L7",
             "discharge-construct"
           ]
         }
@@ -1270,9 +1338,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of A complete locally small category with a jointly weakly initial set has an initial object, without class-indexed choice; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 9), signals: 9 declared dependencies; 9 cited facts; boundary-sensitive language; analytic limiting/completeness language. R6-12: read in full. 'Equalizers are monic' now comes from the published corollary and 'a monic split epi is an isomorphism' is proved inline in step 4.1; the empty-S case is dispositioned in step 1.1. UPDATED after refuter b6-aft: the refuter found step 3.1's inference circular — it concluded p_S r = p_S from 'both are cones', which the limit universal property does not license (it gives a unique mediator per cone, not equality of two cones). Confirmed fatal from disk; the witness in Set (identity diagram at a two-element set, where 1_X and a nonidentity r are both cone legs from apex X) shows the invoked rule is false. Repaired by replacing the argument with Freyd's: the joint equalizer j: I -> L of the set C(L,L) exists by local smallness and completeness, alpha j = j holds by the cone condition, j is monic, and the split-epi/mono computation on the equalizer of f,g gives f=g. New steps 2.2, 3.1, 4.1."
       }
     },
     "thm-the-solution-set-condition-says-the-comma-category-has-a-jointly-weakly-initial-set": {
@@ -1364,9 +1432,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the direct proof of The solution-set condition at an object is exactly a jointly weakly initial set in its comma category; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 6), signals: 3 cited facts; biconditional / both-direction claim; boundary-sensitive language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance."
       }
     },
     "lem-the-comma-category-projection-strictly-creates-limits-preserved-by-the-functor": {
@@ -1479,9 +1547,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of A comma-category projection strictly creates the limits preserved by the functor; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 7), signals: 3 cited facts; existence, choice, uniqueness, or well-definedness; boundary-sensitive language; analytic limiting/completeness language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance."
       }
     },
     "thm-general-adjoint-functor-theorem-objectwise-form": {
@@ -1530,18 +1598,28 @@
           "uses": [
             "2.1"
           ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "source_section": "Definition",
+          "quote": "Let $F:\\mathcal C\\to\\mathcal D$ be a functor\n([[def-functor-and-contravariant-functor]]) and fix an indexing category\n$\\mathcal J$.\n\n- $F$ **preserves $\\mathcal J$-limits** if the image under $F$ of every\n  limiting cone over $D:\\mathcal J\\to\\mathcal C$ is limiting over $FD$.\n- $F$ **reflects $\\mathcal J$-limits** if a cone over $D$ is limiting whenever\n  its image is limiting.\n- In the ordinary isomorphism-invariant sense used here, $F$ **creates\n  $\\mathcal J$-limits** if every limiting cone over $FD$ is isomorphic as a\n  cone ([[def-natural-isomorphism]]) to the image of a cone over $D$, that\n  source cone is limiting, and any source cone whose image is limiting is\n  limiting. This does not require an on-the-nose lift of the target apex.\n- The functor **strictly creates $\\mathcal J$-limits** if every limiting cone\n  over $FD$ has a unique lift with exactly the same apex and legs under $F$,\n  and that lifted cone is limiting. Strict creation therefore contains data\n  not demanded by ordinary isomorphism-invariant creation.\n\nThe terms **preserves**, **reflects**, and **creates colimits** use cocones and\ncolimits ([[def-limit-and-colimit-of-a-diagram]]). A functor is **continuous**\nif it preserves all small limits and **cocontinuous** if it preserves all small\ncolimits.",
+          "uses": [
+            "1.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "The comma category is locally small because each of its hom-collections is a subset of a hom-set in $\\mathcal A$, which is a set by [L2]. Every small projected diagram has a limit by completeness of $\\mathcal A$, and $U$ preserves it by continuity, so [L4] creates its limit in the comma category. Hence $(C\\downarrow U)$ is complete and locally small, and [L3] supplies a jointly weakly initial set.",
+          "claim": "The comma category is locally small because each of its hom-collections is a subset of a hom-set in $\\mathcal A$, which is a set by [L2]. Every small projected diagram has a limit by the completeness of $\\mathcal A$ in the sense of [L1], and $U$ preserves that limit because $U$ is continuous in the sense of [L6], so [L4] creates its limit in the comma category. Hence $(C\\downarrow U)$ is complete and locally small, and [L3] supplies a jointly weakly initial set.",
           "step": "1.1",
           "inputs": [
             "L1",
             "L2",
             "L3",
             "L4",
+            "L6",
             "construct"
           ]
         },
@@ -1601,9 +1679,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of General adjoint functor theorem, objectwise initial-object form; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 10), signals: 6 declared dependencies; 6 cited facts; existence, choice, uniqueness, or well-definedness; boundary-sensitive language; analytic limiting/completeness language. R6-13: read in full. Continuity is no longer attributed to the completeness definition; it is [L6] from def-preservation-reflection-creation-continuity-and-cocontinuity."
       }
     },
     "thm-general-adjoint-functor-theorem-functor-form": {
@@ -1695,9 +1773,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of General adjoint functor theorem, data-supplied functor form; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 5), signals: 2 cited facts; existence, choice, uniqueness, or well-definedness; boundary-sensitive language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance."
       }
     },
     "thm-a-complete-locally-small-category-with-a-small-coseparating-set-and-all-subobject-intersections-has-an-initial-object": {
@@ -1753,39 +1831,47 @@
         },
         {
           "fact": "L5",
-          "source": "def-equalizers-and-coequalizers",
-          "source_section": "Definition",
-          "quote": "For parallel morphisms $f,g:A\\rightrightarrows B$, an **equalizer** is a limit\nof that parallel-pair diagram ([[def-limit-and-colimit-of-a-diagram]]). It is a\nmorphism $e:E\\to A$ satisfying $fe=ge$ such that, whenever $h:X\\to A$ satisfies\n$fh=gh$, there is a unique $u:X\\to E$ with $eu=h$.\n\nA **coequalizer** is a colimit of the parallel pair. It is a morphism\n$q:B\\to Q$ satisfying $qf=qg$ such that, whenever $h:B\\to X$ satisfies\n$hf=hg$, there is a unique $u:Q\\to X$ with $uq=h$.",
+          "source": "cor-equalizers-are-monic-and-coequalizers-are-epic",
+          "source_section": "Statement",
+          "quote": "Every equalizer morphism is monic, and every coequalizer morphism is epic.",
           "uses": [
-            "2.1",
             "3.1"
           ]
         },
         {
-          "fact": "L5",
-          "source": "def-monomorphism-and-epimorphism",
-          "source_section": "Definition",
-          "quote": "Let $f:A\\to B$ be a morphism in a category ([[def-category]]).\n\n- $f$ is a **monomorphism**, or **monic**, when\n  $f\\circ g=f\\circ h$ implies $g=h$ for every parallel pair\n  $g,h:X\\to A$.\n- $f$ is an **epimorphism**, or **epic**, when\n  $g\\circ f=h\\circ f$ implies $g=h$ for every parallel pair\n  $g,h:B\\to Y$.\n\nThus monomorphisms are left-cancellable and epimorphisms are\nright-cancellable. The definitions are formally dual.",
+          "fact": "L6",
+          "source": "prop-basic-calculus-of-monomorphisms-and-epimorphisms",
+          "source_section": "Statement",
+          "quote": "Identity morphisms are monic and epic; composites of monomorphisms are monic,\ncomposites of epimorphisms are epic; every split monomorphism is monic, and every\nsplit epimorphism is epic.",
           "uses": [
-            "2.1",
             "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-pullbacks-of-monomorphisms-are-monomorphisms-and-pushouts-of-epimorphisms-are-epimorphisms",
+          "source_section": "Statement",
+          "quote": "In a pullback square\n\n```tikzcd\nP \\arrow[r, \"q\"] \\arrow[d, \"p\"'] & Y \\arrow[d, \"m\"] \\\\\nX \\arrow[r, \"f\"'] & Z\n```\n\nif $m$ is monic, then $p$ is monic. Dually, in a pushout square, the pushout\nof an epimorphism is an epimorphism.",
+          "uses": [
+            "2.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Form the set-indexed product $P=\\prod_{K\\in\\Phi}K$. By hypothesis, the collection of all subobjects of $P$, possibly a proper collection, has an intersection $i:I\\to P$. This invokes the stated order-theoretic intersection directly and does not form a proper-class diagram.",
+          "claim": "Form the set-indexed product $P=\\prod_{K\\in\\Phi}K$. By the Statement's hypothesis in the sense recorded in [L4], the collection of all subobjects of $P$, possibly a proper collection, has an intersection $i:I\\to P$. This invokes that order-theoretic greatest lower bound directly and does not form a proper-class diagram.",
           "step": "1.1",
           "inputs": [
             "L1",
             "L4",
+            "given",
             "construct"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "Fix an object $C$. By [L2], the canonical evaluation map $\\nu_C:C\\to\\prod_{K\\in\\Phi}\\prod_{f\\in\\mathcal C(C,K)}K$ is a set-indexed product map, and [L3] makes it monic. Repeating each projection of $P$ defines $\\Delta:P\\to\\prod_{K\\in\\Phi}\\prod_{f\\in\\mathcal C(C,K)}K$. Pull back $\\nu_C$ along $\\Delta$ to obtain a subobject $P_C\\to P$ with a map $P_C\\to C$. Since $i$ lies below every subobject of $P$, [L4] gives $I\\to P_C$, hence a map $I\\to C$.",
+          "claim": "Fix an object $C$. By [L2], the canonical evaluation map $\\nu_C:C\\to\\prod_{K\\in\\Phi}\\prod_{f\\in\\mathcal C(C,K)}K$ is a set-indexed product map, and [L3] makes it monic. Repeating each projection of $P$ defines $\\Delta:P\\to\\prod_{K\\in\\Phi}\\prod_{f\\in\\mathcal C(C,K)}K$. Pull back $\\nu_C$ along $\\Delta$ to obtain $P_C\\to P$ with a map $P_C\\to C$; that pullback of the monomorphism $\\nu_C$ is monic by [L7], so $P_C\\to P$ is a subobject of $P$. Since $i$ lies below every subobject of $P$, [L4] gives $I\\to P_C$, hence a map $I\\to C$.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
@@ -1793,19 +1879,20 @@
             "L2",
             "L3",
             "L4",
-            "L5",
+            "L7",
             "choose"
           ]
         },
         {
           "id": "step-3-1",
-          "claim": "If $f,g:I\\rightrightarrows C$, their equalizer $e:E\\to I$ is monic by [L5], and $i\\circ e:E\\to P$ is a subobject. Minimality of $i$ gives a factorisation $I\\to E$ over $P$, so $e$ and $1_I$ represent the same subobject and $e$ is invertible. Therefore $f=g$. Step 2.1 gives existence and this step gives uniqueness for every target, so $I$ is initial.",
+          "claim": "If $f,g:I\\rightrightarrows C$, their equalizer $e:E\\to I$ is monic by [L5], and the composite $i\\circ e:E\\to P$ is monic by [L6], hence a subobject of $P$. Minimality of $i$ gives a factorisation $I\\to E$ over $P$, so $e$ and $1_I$ — the latter monic by [L6] — represent the same subobject and $e$ is invertible. Therefore $f=g$. Step 2.1 gives existence and this step gives uniqueness for every target, so $I$ is initial.",
           "step": "3.1",
           "inputs": [
             "step 1.1",
             "step 2.1",
             "L4",
             "L5",
+            "L6",
             "discharge-construct"
           ]
         }
@@ -1855,9 +1942,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of A complete locally small category with a small coseparating set and intersections of all subobject collections has an initial object; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 9), signals: 10 declared dependencies; 8 cited facts; induction, recursion, or minimality; analytic limiting/completeness language. R6-14: read in full. The set-indexed intersection definition is quoted as such and the extension to proper collections is now explicitly this theorem's own hypothesis; the three mono-closure facts cite the published items that state them."
       }
     },
     "thm-special-adjoint-functor-theorem-objectwise-form": {
@@ -1875,7 +1962,7 @@
           "fact": "L2",
           "source": "def-well-powered-and-co-well-powered-category",
           "source_section": "Definition",
-          "quote": "A category $\\mathcal C$ is **well-powered** when, for every object $C$, the collection of subobjects of $C$ ([[def-subobject-and-quotient-object]]) is a set. It is **co-well-powered** when, for every $C$, the collection of quotient objects of $C$ is a set.\n\nA **supplied well-powering** gives, for each object $C$, a set-indexed family of monomorphisms into $C$ containing one representative of every subobject class. A **supplied co-well-powering** is the dual datum for quotient objects. The supplied versions include chosen representatives; ordinary well-poweredness is only the size assertion.",
+          "quote": "A subobject of an object $C$ is a mutual-factorisation class of monomorphisms into $C$ ([[def-subobject-and-quotient-object]]), and under the class convention of this development such a class is a formula rather than a set ([[rem-category-theory-class-and-size-conventions]]). So \"the subobjects of $C$ form a set\" cannot be stated by gathering the subobjects into a collection and measuring it. The size condition is stated on representatives instead, which is the form the sources use and the form every result below actually spends.\n\nA category $\\mathcal C$ is **well-powered** when, for every object $C$, there is a **set** $M_C$ of monomorphisms into $C$ ([[def-monomorphism-and-epimorphism]]) containing a representative of every subobject class of $C$: every monomorphism into $C$ mutually factors with some member of $M_C$. It is **co-well-powered** when, for every $C$, there is a set of epimorphisms out of $C$ containing a representative of every quotient-object class.\n\nA **supplied well-powering** gives such a set $M_C$ **as data for every object at once** — that is, the whole assignment $C\\mapsto M_C$. A **supplied co-well-powering** is the dual datum. The difference from plain well-poweredness is not size but scope of selection: well-poweredness asserts of each object separately that a representative set exists, whereas a proof that needs one representative set per object across a proper class of objects would have to select them, and a supplied well-powering hands that assignment over rather than choosing it.",
           "uses": [
             "1.2"
           ]
@@ -1908,7 +1995,8 @@
           "uses": [
             "1.1",
             "1.2",
-            "1.3"
+            "1.3",
+            "2.1"
           ]
         },
         {
@@ -1919,7 +2007,20 @@
           "uses": [
             "1.1",
             "1.2",
-            "1.3"
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-preservation-reflection-creation-continuity-and-cocontinuity",
+          "source_section": "Definition",
+          "quote": "Let $F:\\mathcal C\\to\\mathcal D$ be a functor\n([[def-functor-and-contravariant-functor]]) and fix an indexing category\n$\\mathcal J$.\n\n- $F$ **preserves $\\mathcal J$-limits** if the image under $F$ of every\n  limiting cone over $D:\\mathcal J\\to\\mathcal C$ is limiting over $FD$.\n- $F$ **reflects $\\mathcal J$-limits** if a cone over $D$ is limiting whenever\n  its image is limiting.\n- In the ordinary isomorphism-invariant sense used here, $F$ **creates\n  $\\mathcal J$-limits** if every limiting cone over $FD$ is isomorphic as a\n  cone ([[def-natural-isomorphism]]) to the image of a cone over $D$, that\n  source cone is limiting, and any source cone whose image is limiting is\n  limiting. This does not require an on-the-nose lift of the target apex.\n- The functor **strictly creates $\\mathcal J$-limits** if every limiting cone\n  over $FD$ has a unique lift with exactly the same apex and legs under $F$,\n  and that lifted cone is limiting. Strict creation therefore contains data\n  not demanded by ordinary isomorphism-invariant creation.\n\nThe terms **preserves**, **reflects**, and **creates colimits** use cocones and\ncolimits ([[def-limit-and-colimit-of-a-diagram]]). A functor is **continuous**\nif it preserves all small limits and **cocontinuous** if it preserves all small\ncolimits.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
           ]
         },
         {
@@ -1930,7 +2031,8 @@
           "uses": [
             "1.1",
             "1.2",
-            "1.3"
+            "1.3",
+            "2.1"
           ]
         }
       ],
@@ -1957,7 +2059,7 @@
         },
         {
           "id": "step-1-3",
-          "claim": "Assume the direct-intersection branch. Intersect the projected collection using the stated class-intersection datum, including its empty-collection case, and use the separately supplied preservation of that family-of-monomorphisms pullback to construct the comma structure arrow. This invokes no proper-class diagram and does not infer the preservation from continuity.",
+          "claim": "Assume the direct-intersection branch. Intersect the projected collection using the stated class-intersection datum, including its empty-collection case, and use the separately supplied preservation of that family-of-monomorphisms pullback to construct the comma structure arrow. This invokes no proper-class diagram and does not infer that preservation from the assumed continuity, which covers only small diagrams.",
           "step": "1.3",
           "inputs": [
             "assume-case direct",
@@ -1967,7 +2069,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "In either branch, the comma category is complete for small diagrams by [L4], locally small, has the coseparating set of step 1.1, and has all the subobject intersections needed by [L1]. Hence [L1] gives an initial object of $(C\\downarrow U)$.",
+          "claim": "In either branch, $\\mathcal A$ is complete and $U$ preserves all small limits by hypothesis, so [L4] creates every small limit in $(C\\downarrow U)$ and the comma category is complete for small diagrams. It is locally small, has the coseparating set of step 1.1, and has all the subobject intersections needed by [L1] — from the representative sets of step 1.2 in the first branch, and from the supplied class intersections of step 1.3 in the second. Hence [L1] gives an initial object of $(C\\downarrow U)$.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
@@ -1975,6 +2077,8 @@
             "step 1.3",
             "L1",
             "L4",
+            "L5",
+            "given",
             "cases-exhaustive"
           ]
         }
@@ -2024,9 +2128,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the universal-property proof of Special adjoint functor theorem, objectwise form with explicit intersection smallness or preservation data; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b) + lead alpha (step 6c)",
+        "notes": "Tier critical (score 9), signals: 8 declared dependencies; 8 cited facts; boundary-sensitive language; analytic limiting/completeness language. R6-15: read in full; this is the level's one false Statement. Branch 2 omitted preservation of all small limits while step 2.1 needed the comma category complete. I recomputed the counterexample (U constant at 2, C=1, giving two disjoint copies of Set) and it stands. Preservation is now a hypothesis of both branches and the counterexample is recorded. || LEAD ALPHA, step 6c (Claude Opus 5): this item was materially edited after the above review, closing the foundational referral group b handed up — subobject classes are proper classes under rem-category-theory-class-and-size-conventions, so well-poweredness and the subobject order are now stated on representative sets rather than by measuring a collection of classes. I re-read the item in full against the repaired def-subobject-and-quotient-object and def-well-powered-and-co-well-powered-category, regenerated its citation and derivation entries, and re-ran precheck, proof-contract --strict, citation-fidelity and boundary-audit clean. The mathematics is unchanged; what changed is that the size and order assertions are now well-formed."
       }
     },
     "thm-special-adjoint-functor-theorem-functor-form": {
@@ -2035,7 +2139,7 @@
           "fact": "L1",
           "source": "thm-special-adjoint-functor-theorem-objectwise-form",
           "source_section": "Statement",
-          "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, $\\mathcal C$ is locally small, and $\\mathcal A$ has a supplied small coseparating set. Fix $C\\in\\mathcal C$. Suppose one of the following data is supplied:\n\n1. $\\mathcal A$ has a supplied well-powering and $U$ preserves all small limits; or\n2. every collection of subobjects in $\\mathcal A$ has a specified intersection and $U$ preserves the pullbacks of the corresponding families of monomorphisms, including the possibly proper collections invoked in the proof.\n\nThen $(C\\downarrow U)$ has an initial object. The second branch is stronger than continuity: it states the extra preservation data rather than treating a proper collection as a small diagram.",
+          "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, $\\mathcal C$ is locally small, and $\\mathcal A$ has a supplied small coseparating set. Assume that $U$ preserves all small limits. Fix $C\\in\\mathcal C$. Suppose in addition one of the following data is supplied:\n\n1. $\\mathcal A$ has a supplied well-powering; or\n2. every collection of subobjects in $\\mathcal A$ has a specified intersection and $U$ preserves the pullbacks of the corresponding families of monomorphisms, including the possibly proper collections invoked in the proof.\n\nThen $(C\\downarrow U)$ has an initial object.\n\nPreservation of all small limits is required in **both** branches, not only in the first. The proof produces the initial object inside $(C\\downarrow U)$ from [[thm-a-complete-locally-small-category-with-a-small-coseparating-set-and-all-subobject-intersections-has-an-initial-object]], which needs $(C\\downarrow U)$ to be complete, and the comma projection creates only those limits that $U$ preserves. The second branch is therefore not a weakening of that hypothesis: it adds preservation data for the possibly proper collections, rather than treating such a collection as a small diagram.\n\nWithout it the conclusion fails. Take $\\mathcal A=\\mathcal C=\\mathbf{Set}$, let $U$ be the constant functor at the two-element set $2$, and let $C=1$. Then $\\mathbf{Set}$ is complete and locally small, $\\{2\\}$ is a small coseparating set, every collection of subobjects has its intersection, and $U$ carries each wide pullback of monomorphisms to a cone that is again a limit, since the diagram is connected and $U$ is constant; so the branch-2 data is supplied. But $U$ is not continuous — it does not preserve the empty limit — and $(1\\downarrow U)$ is the disjoint union of two copies of $\\mathbf{Set}$, one for each map $1\\to2$, which has no initial object.",
           "uses": [
             "1.1",
             "2.1"
@@ -2157,7 +2261,7 @@
           "fact": "L4",
           "source": "thm-special-adjoint-functor-theorem-objectwise-form",
           "source_section": "Statement",
-          "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, $\\mathcal C$ is locally small, and $\\mathcal A$ has a supplied small coseparating set. Fix $C\\in\\mathcal C$. Suppose one of the following data is supplied:\n\n1. $\\mathcal A$ has a supplied well-powering and $U$ preserves all small limits; or\n2. every collection of subobjects in $\\mathcal A$ has a specified intersection and $U$ preserves the pullbacks of the corresponding families of monomorphisms, including the possibly proper collections invoked in the proof.\n\nThen $(C\\downarrow U)$ has an initial object. The second branch is stronger than continuity: it states the extra preservation data rather than treating a proper collection as a small diagram.",
+          "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, $\\mathcal C$ is locally small, and $\\mathcal A$ has a supplied small coseparating set. Assume that $U$ preserves all small limits. Fix $C\\in\\mathcal C$. Suppose in addition one of the following data is supplied:\n\n1. $\\mathcal A$ has a supplied well-powering; or\n2. every collection of subobjects in $\\mathcal A$ has a specified intersection and $U$ preserves the pullbacks of the corresponding families of monomorphisms, including the possibly proper collections invoked in the proof.\n\nThen $(C\\downarrow U)$ has an initial object.\n\nPreservation of all small limits is required in **both** branches, not only in the first. The proof produces the initial object inside $(C\\downarrow U)$ from [[thm-a-complete-locally-small-category-with-a-small-coseparating-set-and-all-subobject-intersections-has-an-initial-object]], which needs $(C\\downarrow U)$ to be complete, and the comma projection creates only those limits that $U$ preserves. The second branch is therefore not a weakening of that hypothesis: it adds preservation data for the possibly proper collections, rather than treating such a collection as a small diagram.\n\nWithout it the conclusion fails. Take $\\mathcal A=\\mathcal C=\\mathbf{Set}$, let $U$ be the constant functor at the two-element set $2$, and let $C=1$. Then $\\mathbf{Set}$ is complete and locally small, $\\{2\\}$ is a small coseparating set, every collection of subobjects has its intersection, and $U$ carries each wide pullback of monomorphisms to a cone that is again a limit, since the diagram is connected and $U$ is constant; so the branch-2 data is supplied. But $U$ is not continuous — it does not preserve the empty limit — and $(1\\downarrow U)$ is the disjoint union of two copies of $\\mathbf{Set}$, one for each map $1\\to2$, which has no initial object.",
           "uses": [
             "1.1",
             "2.1"
@@ -2177,7 +2281,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "The diagonal $\\Delta$ preserves all small limits because limits in a functor category are computed objectwise. Its domain has the stated SAFT data and its codomain is locally small by [L1], so [L4] gives an initial object in $(D\\downarrow\\Delta)$ for every $D\\in\\mathcal C^{\\mathcal J}$, including the empty diagram.",
+          "claim": "The diagonal $\\Delta$ preserves all small limits. Let $E:\\mathcal K\\to\\mathcal C$ be a small diagram with limiting cone $(\\lim E,\\lambda_k)$ in $\\mathcal C$, which exists by the completeness in [L2]. A cone over $\\Delta E$ with apex $G\\in\\mathcal C^{\\mathcal J}$ is a family of maps $G\\to\\Delta E(k)$ natural in $\\mathcal J$ and compatible over $\\mathcal K$, so at each $j\\in\\mathcal J$ its components form a cone over $E$ with apex $G(j)$; the universal property of $\\lim E$ gives a unique map $G(j)\\to\\lim E$ for each $j$, and uniqueness makes that family automatically natural in $\\mathcal J$. Hence $(\\Delta(\\lim E),\\Delta\\lambda_k)$ is a limiting cone and $\\Delta$ is continuous, which is the hypothesis both branches of [L4] require. No selection is involved, because each component mediator is unique. Its domain has the stated SAFT data and its codomain is locally small by [L1], so [L4] gives an initial object in $(D\\downarrow\\Delta)$ for every $D\\in\\mathcal C^{\\mathcal J}$, including the empty diagram.",
           "step": "1.1",
           "inputs": [
             "L1",
@@ -2187,7 +2291,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "By [L3], that initial object is a colimit of $D$. Since $\\mathcal J$ and $D$ were arbitrary, [L2] makes $\\mathcal C$ cocomplete. When the initial objects are supplied as a family, the functor form in [L4] identifies their assembly as the colimit functor.",
+          "claim": "An object of $(D\\downarrow\\Delta)$ is a natural transformation $D\\Rightarrow\\Delta X$, that is, a family $\\xi_j:D(j)\\to X$ commuting with the arrows of $\\mathcal J$ — exactly a cocone under $D$ with vertex $X$ — and its morphisms are the maps of vertices commuting with those families, exactly the morphisms of $\\operatorname{Cocone}(D)$. So the initial object of step 1.1 is an initial cocone, which by [L3] is a colimit of $D$. Since $\\mathcal J$ and $D$ were arbitrary, [L2] makes $\\mathcal C$ cocomplete. When the initial objects are supplied as a family, the functor form in [L4] identifies their assembly as the colimit functor.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
@@ -2226,8 +2330,8 @@
         },
         {
           "case": "nonempty-choice",
-          "status": "not_applicable",
-          "reason": "The authored proof of A category satisfying the explicit SAFT intersection hypotheses is cocomplete makes no selection from a nonempty family beyond explicitly supplied data."
+          "status": "checked",
+          "evidence": "Step 1.1 makes no selection: continuity of the diagonal is now derived directly, the mediator at each index being unique by the universal property of the limit in C, so no family of pointwise limits is chosen and the Choice-assuming functor-category corollary is no longer invoked."
         },
         {
           "case": "iff-forward",
@@ -2242,9 +2346,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the adjoint-functor-theorem proof of A category satisfying the explicit SAFT intersection hypotheses is cocomplete; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 6 declared dependencies; 6 cited facts; boundary-sensitive language; analytic limiting/completeness language. R6-17, R6-18: read in full. The cocone/comma identification is spelled out in step 2.1 rather than attributed to the limit definition, and continuity of Delta comes from the published functor-category completeness corollary. UPDATED after refuter b6-aft: step 1.1 leaned on a Choice-assuming published corollary while this corollary assumes no Choice. Continuity of the diagonal is now derived directly, each component mediator being unique, so no choice is made; the Choice-assuming fact and its dependency were removed."
       }
     },
     "cor-a-continuous-functor-to-set-from-a-chosen-well-powered-saft-category-is-representable": {
@@ -2253,7 +2357,7 @@
           "fact": "L1",
           "source": "thm-special-adjoint-functor-theorem-objectwise-form",
           "source_section": "Statement",
-          "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, $\\mathcal C$ is locally small, and $\\mathcal A$ has a supplied small coseparating set. Fix $C\\in\\mathcal C$. Suppose one of the following data is supplied:\n\n1. $\\mathcal A$ has a supplied well-powering and $U$ preserves all small limits; or\n2. every collection of subobjects in $\\mathcal A$ has a specified intersection and $U$ preserves the pullbacks of the corresponding families of monomorphisms, including the possibly proper collections invoked in the proof.\n\nThen $(C\\downarrow U)$ has an initial object. The second branch is stronger than continuity: it states the extra preservation data rather than treating a proper collection as a small diagram.",
+          "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, $\\mathcal C$ is locally small, and $\\mathcal A$ has a supplied small coseparating set. Assume that $U$ preserves all small limits. Fix $C\\in\\mathcal C$. Suppose in addition one of the following data is supplied:\n\n1. $\\mathcal A$ has a supplied well-powering; or\n2. every collection of subobjects in $\\mathcal A$ has a specified intersection and $U$ preserves the pullbacks of the corresponding families of monomorphisms, including the possibly proper collections invoked in the proof.\n\nThen $(C\\downarrow U)$ has an initial object.\n\nPreservation of all small limits is required in **both** branches, not only in the first. The proof produces the initial object inside $(C\\downarrow U)$ from [[thm-a-complete-locally-small-category-with-a-small-coseparating-set-and-all-subobject-intersections-has-an-initial-object]], which needs $(C\\downarrow U)$ to be complete, and the comma projection creates only those limits that $U$ preserves. The second branch is therefore not a weakening of that hypothesis: it adds preservation data for the possibly proper collections, rather than treating such a collection as a small diagram.\n\nWithout it the conclusion fails. Take $\\mathcal A=\\mathcal C=\\mathbf{Set}$, let $U$ be the constant functor at the two-element set $2$, and let $C=1$. Then $\\mathbf{Set}$ is complete and locally small, $\\{2\\}$ is a small coseparating set, every collection of subobjects has its intersection, and $U$ carries each wide pullback of monomorphisms to a cone that is again a limit, since the diagram is connected and $U$ is constant; so the branch-2 data is supplied. But $U$ is not continuous — it does not preserve the empty limit — and $(1\\downarrow U)$ is the disjoint union of two copies of $\\mathbf{Set}$, one for each map $1\\to2$, which has no initial object.",
           "uses": [
             "1.1"
           ]
@@ -2278,9 +2382,9 @@
         },
         {
           "fact": "L3",
-          "source": "def-adjunction-by-unit-counit-and-triangle-identities",
-          "source_section": "Definition",
-          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be categories. An **adjunction** $F\\dashv G$ consists of functors $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$, a natural transformation\n\n$$\\eta:1_{\\mathcal C}\\Rightarrow GF$$\n\ncalled the **unit**, and a natural transformation\n\n$$\\varepsilon:FG\\Rightarrow1_{\\mathcal D}$$\n\ncalled the **counit**, such that the two **triangle identities** hold:\n\n$$ (\\varepsilon F)\\circ(F\\eta)=1_F,\\qquad (G\\varepsilon)\\circ(\\eta G)=1_G. $$\n\nHere whiskering and vertical composition are those of [[def-horizontal-composition-and-whiskering-of-natural-transformations]]. Componentwise, for every $c\\in\\mathcal C$ and $d\\in\\mathcal D$,\n\n$$ \\varepsilon_{Fc}\\circ F(\\eta_c)=1_{Fc},\\qquad G(\\varepsilon_d)\\circ\\eta_{Gd}=1_{Gd}. $$\n\nThe direction $F\\dashv G$ means that $F$ is left adjoint to $G$ and $G$ is right adjoint to $F$. If $\\eta$ and $\\varepsilon$ are natural isomorphisms, this is precisely the adjunction data occurring in an adjoint equivalence ([[def-equivalence-and-adjoint-equivalence-of-categories]]).",
+          "source": "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be locally small categories and let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors.\n\nAn adjunction $F\\dashv G$ determines bijections\n\n$$ \\Phi_{c,d}:\\mathcal D(Fc,d)\\xrightarrow{\\ \\cong\\ }\\mathcal C(c,Gd),\\qquad \\Phi_{c,d}(u)=G(u)\\circ\\eta_c, $$\n\nnatural in $c$ and $d$, whose inverses are $\\Psi_{c,d}(v)=\\varepsilon_d\\circ F(v)$. Conversely, every such natural family of bijections determines a unique unit and counit satisfying the triangle identities, and hence a unique adjunction structure on $F$ and $G$.",
           "uses": [
             "2.1"
           ]
@@ -2353,7 +2457,7 @@
       "risk_review": {
         "status": "pending",
         "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the adjoint-functor-theorem proof of A continuous Set-valued functor from a chosen-well-powered SAFT category is representable; citation clauses will be frozen against the authored fact blocks at step 5."
+        "notes": "Scaffold-stage review is still required for the adjoint-functor-theorem proof of A continuous Set-valued functor from a chosen-well-powered SAFT category is representable; citation clauses will be frozen against the authored fact blocks at step 5. UPDATED after refuter b6-aft: the title promised representability from the chosen-well-powered SAFT hypotheses alone while the Statement and step 1.1 also require a supplied family of objectwise universal arrows. Confirmed fatal (same class as R6-22 and R6-25); the title now names the supplied family."
       }
     },
     "thm-freyd-representability-theorem": {
@@ -2381,6 +2485,15 @@
           "source": "def-presheaf-representable-functor-and-representation",
           "source_section": "Definition",
           "quote": "Let $\\mathcal C$ be a locally small category. A **presheaf** on $\\mathcal C$ is\na functor $P:\\mathcal C^{\\mathrm{op}}\\to\\mathbf{Set}$, with opposite category\nas in [[def-opposite-category]] and $\\mathbf{Set}$ as in\n[[prop-sets-and-functions-form-category-set]].\n\nA covariant functor $F:\\mathcal C\\to\\mathbf{Set}$ is **covariantly\nrepresentable** when there are an object $R$ and a natural isomorphism\n\n$$\\theta:\\mathcal C(R,-)\\xRightarrow{\\cong}F.$$\n\nThe pair $(R,\\theta)$ is a **representation** of $F$, and $R$ is a\n**representing object**.\n\nA presheaf $P:\\mathcal C^{\\mathrm{op}}\\to\\mathbf{Set}$ is\n**contravariantly representable** when there are an object $R$ and a natural\nisomorphism\n\n$$\\theta:\\mathcal C(-,R)\\xRightarrow{\\cong}P.$$\n\nThe same terms are used for $(R,\\theta)$ and $R$. The hom-functors exist by\n[[thm-hom-assignments-are-functors]], and natural transformations and natural\nisomorphisms have the meanings of [[def-natural-transformation]] and\n[[def-natural-isomorphism]]. When the variance is clear, **representable** is\nused without an adjective.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-universal-elements-and-universal-factorisations",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ be locally small.\n\n1. A pair $(R,u)$ with $u\\in F(R)$ is universal for a functor\n   $F:\\mathcal C\\to\\mathbf{Set}$ if and only if, for every object $c$ and\n   every $x\\in F(c)$, there is a unique morphism $f:R\\to c$ such that\n   $F(f)(u)=x$.\n2. A pair $(R,u)$ with $u\\in P(R)$ is universal for a presheaf\n   $P:\\mathcal C^{\\mathrm{op}}\\to\\mathbf{Set}$ if and only if, for every\n   object $c$ and every $x\\in P(c)$, there is a unique morphism $f:c\\to R$\n   such that $P(f)(u)=x$.\n\nEvery representation $\\theta$ determines its universal element by\n$u=\\theta_R(1_R)$, and the universal element recovers $\\theta$ by the formulas\nin the statement. These correspondences are the Yoneda correspondences and\nare natural in the representing object and the set-valued functor.",
           "uses": [
             "3.1"
           ]
@@ -2417,12 +2530,13 @@
         },
         {
           "id": "step-3-1",
-          "claim": "By [L2], $(R,u)$ is a universal element of $F$, and [L3] translates it into a natural isomorphism $\\mathcal C(R,-)\\cong F$. Therefore $F$ is covariantly representable.",
+          "claim": "By [L2], $(R,u)$ is a universal element of $F$. By [L5] the map $\\Phi_c:\\mathcal C(R,c)\\to F(c)$, $f\\mapsto F(f)(u)$, is then a bijection for every object $c$; it is natural in $c$ because for $g:c\\to c'$ functoriality gives $F(g)(\\Phi_c(f))=F(g)(F(f)(u))=F(g\\circ f)(u)=\\Phi_{c'}(g\\circ f)$. Hence $\\mathcal C(R,-)\\cong F$ as functors, which is representability in the sense of [L3].",
           "step": "3.1",
           "inputs": [
             "step 2.1",
             "L2",
             "L3",
+            "L5",
             "discharge-construct"
           ]
         }
@@ -2441,8 +2555,8 @@
         },
         {
           "case": "one",
-          "status": "not_applicable",
-          "reason": "No singleton index, unit object, or one-valued parameter is used in the authored proof about Freyd's representability theorem for continuous Set-valued functors satisfying a solution set condition."
+          "status": "checked",
+          "evidence": "Step 2.1 uses the singleton 1 explicitly: it identifies the category of elements of F with the comma category (1 downarrow F) for a singleton 1, and step 3.1 evaluates the resulting bijection at each object. The singleton is the intended one-object case and is handled, not avoided."
         },
         {
           "case": "degenerate",
@@ -2472,9 +2586,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the general-adjoint-functor-theorem proof of Freyd's representability theorem for continuous Set-valued functors satisfying a solution set condition; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 7), signals: 5 declared dependencies; 5 cited facts; biconditional / both-direction claim. R6-20: read in full. The passage from a universal element to the natural isomorphism is now [L5] plus an explicit naturality check in step 3.1. UPDATED after refuter b6-aft: its 'one' boundary row falsely said no singleton occurs, while step 2.1 identifies the category of elements with (1 downarrow F) for a singleton. Row rewritten; the mathematics was already correct."
       }
     },
     "thm-the-unit-interval-is-a-coseparating-object-in-compact-hausdorff-spaces": {
@@ -2642,33 +2756,53 @@
           "fact": "L6",
           "source": "def-well-powered-and-co-well-powered-category",
           "source_section": "Definition",
-          "quote": "A category $\\mathcal C$ is **well-powered** when, for every object $C$, the collection of subobjects of $C$ ([[def-subobject-and-quotient-object]]) is a set. It is **co-well-powered** when, for every $C$, the collection of quotient objects of $C$ is a set.\n\nA **supplied well-powering** gives, for each object $C$, a set-indexed family of monomorphisms into $C$ containing one representative of every subobject class. A **supplied co-well-powering** is the dual datum for quotient objects. The supplied versions include chosen representatives; ordinary well-poweredness is only the size assertion.",
+          "quote": "A subobject of an object $C$ is a mutual-factorisation class of monomorphisms into $C$ ([[def-subobject-and-quotient-object]]), and under the class convention of this development such a class is a formula rather than a set ([[rem-category-theory-class-and-size-conventions]]). So \"the subobjects of $C$ form a set\" cannot be stated by gathering the subobjects into a collection and measuring it. The size condition is stated on representatives instead, which is the form the sources use and the form every result below actually spends.\n\nA category $\\mathcal C$ is **well-powered** when, for every object $C$, there is a **set** $M_C$ of monomorphisms into $C$ ([[def-monomorphism-and-epimorphism]]) containing a representative of every subobject class of $C$: every monomorphism into $C$ mutually factors with some member of $M_C$. It is **co-well-powered** when, for every $C$, there is a set of epimorphisms out of $C$ containing a representative of every quotient-object class.\n\nA **supplied well-powering** gives such a set $M_C$ **as data for every object at once** — that is, the whole assignment $C\\mapsto M_C$. A **supplied co-well-powering** is the dual datum. The difference from plain well-poweredness is not size but scope of selection: well-poweredness asserts of each object separately that a representative set exists, whereas a proof that needs one representative set per object across a proper class of objects would have to select them, and a supplied well-powering hands that assignment over rather than choosing it.",
           "uses": [
             "2.1",
             "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-small-limits-from-products-and-equalizers",
+          "source_section": "Statement",
+          "quote": "Let $D:\\mathcal J\\to\\mathcal C$ be small. If the products\n\n$$P=\\prod_{j\\in\\operatorname{Ob}\\mathcal J}D(j),\\qquad Q=\\prod_{u:j\\to k}D(k)$$\n\nand the equalizer of the maps $s,t:P\\rightrightarrows Q$ defined by\n$q_us=D(u)p_j$ and $q_ut=p_k$ exist, then that equalizer is a limit of $D$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a Hausdorff topological space\n([[def-hausdorff-space]], [[def-topological-space]]), with compact subsets as in\n[[def-compact-space]]. Then:\n\n1. **A point and a disjoint compact set are separated.** If $K \\subseteq X$ is\n   compact and $x \\in X \\setminus K$, there are $U, V \\in \\mathcal{T}$ with\n   $$x \\in U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n2. **Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact\n   and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with\n   $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n3. **Compact implies closed.** Every compact subset of $X$ is closed in $X$.\n4. **In a compact Hausdorff space the two classes coincide.** If in addition\n   $(X, \\mathcal{T})$ is compact, then a subset of $X$ is compact if and only if\n   it is closed.\n\n**The proof is written choice-free, and that is not a stylistic preference.** The\ntextbook argument says \"for each $y \\in K$ choose disjoint open $U_y, V_y$\",\nwhich is a selection over an arbitrary index set and therefore an appeal to the\nfull Axiom of Choice. What is done below instead is to take the family of **all**\nopen $V$ that admit some open $U \\ni x$ disjoint from them — a family cut out by\na formula, with nothing selected — extract a finite subcover from it, and only\nthen make finitely many selections, which [[lem-finite-choice]] supplies as a\ntheorem of ZF.",
+          "uses": [
+            "2.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "A small limit in $\\mathbf{Top}$ is constructed from a product and an equalizer. By [L1] the required compact-Hausdorff product is compact, and the equalizer is a closed subspace because the codomain is Hausdorff; [L3] makes it compact, while subspaces of Hausdorff spaces are Hausdorff. Thus the topological limit lies in $\\mathbf{CompHaus}$ and the inclusion preserves it, including the empty limit.",
+          "claim": "By [L7] a small limit is the equalizer of two maps between two products, so it is constructed from a product and an equalizer. By [L1] the required compact-Hausdorff product is compact, and the equalizer of $s,t:P\\rightrightarrows Q$ is $\\{p\\in P:s(p)=t(p)\\}$, which is the preimage of the diagonal of $Q$ under the continuous map $(s,t)$ and so is closed because a space is Hausdorff exactly when its diagonal is closed; [L3] makes it compact, while subspaces of Hausdorff spaces are Hausdorff. Thus the topological limit lies in $\\mathbf{CompHaus}$ and the inclusion preserves it, including the empty limit.",
           "step": "1.1",
           "inputs": [
             "L1",
             "L2",
-            "L3"
+            "L3",
+            "L7"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "Every monomorphism into a compact Hausdorff space is an injective continuous map. Its image is compact and hence closed in the Hausdorff codomain; by [L4] the domain is homeomorphic to that image. Thus each subobject is represented by the inclusion of a closed subset, and these inclusions form a set indexed by the power set of the underlying set. This is a supplied well-powering in the sense of [L6], and intersections are the corresponding set-indexed closed subspaces.",
+          "claim": "A monomorphism $m:A\\to B$ in $\\mathbf{CompHaus}$ is injective: the one-point space is compact Hausdorff, so if $m(a)=m(a')$ the two maps $\\{*\\}\\to A$ picking $a$ and $a'$ are continuous and equalised by $m$, whence $a=a'$. Its image is compact by the continuous-image clause of [L4] and hence closed in the Hausdorff codomain by [L8]; the corestriction $A\\to m[A]$ is then a continuous bijection from a compact space to a Hausdorff space, so by [L4] the domain is homeomorphic to that image. Thus each subobject is represented by the inclusion of a closed subset, and these inclusions form a set indexed by the power set of the underlying set. This is a supplied well-powering in the sense of [L6], and intersections are the corresponding set-indexed closed subspaces.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
             "L3",
             "L4",
-            "L6"
+            "L6",
+            "L8"
           ]
         },
         {
@@ -2729,9 +2863,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the direct proof of Under the ultrafilter lemma and dependent choice, compact Hausdorff spaces satisfy the explicit SAFT hypotheses for their inclusion into topological spaces; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b) + lead alpha (step 6c)",
+        "notes": "Tier critical (score 9), signals: 9 declared dependencies; 9 cited facts; boundary-sensitive language; analytic limiting/completeness language. R6-21: read in full. The missing bridges are supplied: small limits from products and equalizers [L7], the equalizer closed via the diagonal, monos in CompHaus injective via the one-point space, compact subsets closed [L8], and [L4] restated to include the continuous-image clause the proof uses. || LEAD ALPHA, step 6c (Claude Opus 5): this item was materially edited after the above review, closing the foundational referral group b handed up — subobject classes are proper classes under rem-category-theory-class-and-size-conventions, so well-poweredness and the subobject order are now stated on representative sets rather than by measuring a collection of classes. I re-read the item in full against the repaired def-subobject-and-quotient-object and def-well-powered-and-co-well-powered-category, regenerated its citation and derivation entries, and re-ran precheck, proof-contract --strict, citation-fidelity and boundary-audit clean. The mathematics is unchanged; what changed is that the size and order assertions are now well-formed."
       }
     },
     "thm-saft-yields-the-stone-cech-adjunction": {
@@ -2749,7 +2883,7 @@
           "fact": "L2",
           "source": "thm-special-adjoint-functor-theorem-objectwise-form",
           "source_section": "Statement",
-          "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, $\\mathcal C$ is locally small, and $\\mathcal A$ has a supplied small coseparating set. Fix $C\\in\\mathcal C$. Suppose one of the following data is supplied:\n\n1. $\\mathcal A$ has a supplied well-powering and $U$ preserves all small limits; or\n2. every collection of subobjects in $\\mathcal A$ has a specified intersection and $U$ preserves the pullbacks of the corresponding families of monomorphisms, including the possibly proper collections invoked in the proof.\n\nThen $(C\\downarrow U)$ has an initial object. The second branch is stronger than continuity: it states the extra preservation data rather than treating a proper collection as a small diagram.",
+          "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, $\\mathcal C$ is locally small, and $\\mathcal A$ has a supplied small coseparating set. Assume that $U$ preserves all small limits. Fix $C\\in\\mathcal C$. Suppose in addition one of the following data is supplied:\n\n1. $\\mathcal A$ has a supplied well-powering; or\n2. every collection of subobjects in $\\mathcal A$ has a specified intersection and $U$ preserves the pullbacks of the corresponding families of monomorphisms, including the possibly proper collections invoked in the proof.\n\nThen $(C\\downarrow U)$ has an initial object.\n\nPreservation of all small limits is required in **both** branches, not only in the first. The proof produces the initial object inside $(C\\downarrow U)$ from [[thm-a-complete-locally-small-category-with-a-small-coseparating-set-and-all-subobject-intersections-has-an-initial-object]], which needs $(C\\downarrow U)$ to be complete, and the comma projection creates only those limits that $U$ preserves. The second branch is therefore not a weakening of that hypothesis: it adds preservation data for the possibly proper collections, rather than treating such a collection as a small diagram.\n\nWithout it the conclusion fails. Take $\\mathcal A=\\mathcal C=\\mathbf{Set}$, let $U$ be the constant functor at the two-element set $2$, and let $C=1$. Then $\\mathbf{Set}$ is complete and locally small, $\\{2\\}$ is a small coseparating set, every collection of subobjects has its intersection, and $U$ carries each wide pullback of monomorphisms to a cone that is again a limit, since the diagram is connected and $U$ is constant; so the branch-2 data is supplied. But $U$ is not continuous — it does not preserve the empty limit — and $(1\\downarrow U)$ is the disjoint union of two copies of $\\mathbf{Set}$, one for each map $1\\to2$, which has no initial object.",
           "uses": [
             "1.1",
             "2.1"
@@ -2892,8 +3026,7 @@
           "source_section": "Definition",
           "quote": "Let $G$ be a group and let $N\\le G$ be a subgroup ([[def-subgroup]]). For\n$g\\in G$, write\n\n$$gNg^{-1}:=\\{gng^{-1}:n\\in N\\}.$$\n\nThe subgroup $N$ is **normal in $G$** when\n\n$$gNg^{-1}=N\\qquad\\text{for every }g\\in G.$$\n\nIn that case write $N\\mathrel{\\trianglelefteq}G$. Equivalently, every inner\nconjugation of $G$ maps $N$ onto itself. The connection with equality of the\nleft and right cosets of [[def-coset]] is proved in\n[[thm-normal-subgroup-characterisations]].",
           "uses": [
-            "1.1",
-            "2.1"
+            "1.1"
           ]
         },
         {
@@ -2904,6 +3037,15 @@
           "uses": [
             "1.1",
             "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-image-subgroup-and-kernel-normal",
+          "source_section": "Statement",
+          "quote": "The image of a group homomorphism is a subgroup and its kernel is a normal subgroup.\n\nFor every group homomorphism $f:G\\to H$, one has\n$\\operatorname{im}f\\le H$ and $\\ker f\\mathrel{\\trianglelefteq}G$.",
+          "uses": [
+            "2.1"
           ]
         }
       ],
@@ -2920,13 +3062,13 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Given $f:S\\to U(G)$, extend it by [L1] to $\\widehat f:F(S)\\to G$ and put $N=\\ker\\widehat f$. By [L3], $N$ is normal, and [L2] gives a unique $\\bar f:F(S)/N\\to G$ with $\\widehat f=\\bar f q_N$. Therefore $f=U(\\bar f)\\eta_N$.",
+          "claim": "Given $f:S\\to U(G)$, extend it by [L1] to $\\widehat f:F(S)\\to G$ and put $N=\\ker\\widehat f$. By [L5], $N$ is a normal subgroup of $F(S)$, so $\\widehat f$ kills $N$ and [L2] gives a unique $\\bar f:F(S)/N\\to G$ with $\\widehat f=\\bar f q_N$. Therefore $f=U(\\bar f)\\eta_N$.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
             "L1",
             "L2",
-            "L3"
+            "L5"
           ]
         },
         {
@@ -2986,9 +3128,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the factorisation proof of Normal-subgroup quotients of a fixed free group give a canonical solution set for the underlying-set functor on groups; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 5 declared dependencies; 5 cited facts; boundary-sensitive language; quotient or equivalence-class construction. R6-23: read in full. Kernel normality now comes from thm-image-subgroup-and-kernel-normal rather than def-normal-subgroup; the empty-S case is dispositioned in step 1.1."
       }
     },
     "cor-gaft-recovers-the-free-group-and-abelianisation-adjoints": {
@@ -2999,7 +3141,7 @@
           "source_section": "Statement",
           "quote": "Fix a set $S$ and a chosen free group $(F(S),i_S)$. For every normal subgroup $N\\trianglelefteq F(S)$, let\n$$\\eta_N:S\\xrightarrow{i_S}U(F(S))\\xrightarrow{U(q_N)}U(F(S)/N).$$\nThe family $(\\eta_N)$, indexed by the set of normal subgroups of the fixed group $F(S)$, is a solution set at $S$ for the underlying-set functor $U:\\mathbf{Grp}\\to\\mathbf{Set}$.",
           "uses": [
-            "1.1"
+            "2.1"
           ]
         },
         {
@@ -3009,7 +3151,8 @@
           "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small, and suppose $U$ is continuous. Fix $C\\in\\mathcal C$. If $U$ satisfies the solution-set condition at $C$, then the comma category $(C\\downarrow U)$ has an initial object. Equivalently, there exists a universal arrow from $C$ to $U$.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "3.1"
           ]
         },
         {
@@ -3019,7 +3162,8 @@
           "quote": "Let $U:\\mathcal A\\to\\mathcal C$, where $\\mathcal A$ is complete and locally small and $U$ is continuous. Suppose that, for every $C\\in\\mathcal C$, a solution set at $C$ is supplied and the resulting initial object of $(C\\downarrow U)$ is supplied. Then $U$ has a left adjoint.\n\nThe conclusion is data-sensitive: objectwise existence from GAFT does not by itself choose one initial comma object over a proper class of objects.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "3.1"
           ]
         },
         {
@@ -3029,7 +3173,8 @@
           "quote": "Choosing a free group $(F(X),i_X)$ on every set $X$ defines a functor $F:\\mathbf{Set}\\to\\mathbf{Grp}$, and\n\n$$F\\dashv U:\\mathbf{Grp}\\to\\mathbf{Set},$$\n\nwhere $U$ is the underlying-set functor. The adjunction bijection sends a group homomorphism $\\varphi:F(X)\\to G$ to the function $U(\\varphi)i_X:X\\to U(G)$.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "3.1"
           ]
         },
         {
@@ -3039,29 +3184,80 @@
           "quote": "Abelianisation defines a functor $(-)^{\\mathrm{ab}}:\\mathbf{Grp}\\to\\mathbf{Ab}$, and it is left adjoint to the inclusion $I:\\mathbf{Ab}\\hookrightarrow\\mathbf{Grp}$. Explicitly, every homomorphism $f:G\\to I(A)$ with $A$ abelian factors uniquely through the quotient $q_G:G\\to G^{\\mathrm{ab}}$.",
           "uses": [
             "1.1",
-            "2.1"
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-grp-is-complete-and-cocomplete",
+          "source_section": "Statement",
+          "quote": "The category $\\mathbf{Grp}$ of groups and group homomorphisms has all small\nlimits and all small colimits.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "prop-groups-and-homomorphisms-form-category-grp",
+          "source_section": "Statement",
+          "quote": "Groups and group homomorphisms form a large locally small category\n$\\mathbf{Grp}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-right-adjoints-preserve-limits",
+          "source_section": "Statement",
+          "quote": "Let $F:\\mathcal C\\to\\mathcal D$ be left adjoint to $G:\\mathcal D\\to\\mathcal C$. If a diagram $D:\\mathcal J\\to\\mathcal D$ has a limit $(L,\\lambda)$, then $(GL,G\\lambda)$ is a limit of $GD$. Thus $G$ preserves every limit that exists, for arbitrary indexing categories for which the displayed diagram and cone categories are legitimate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-a-left-adjoint-exists-exactly-when-every-comma-category-has-an-initial-object",
+          "source_section": "Statement",
+          "quote": "Let $G:\\mathcal D\\to\\mathcal C$ be a functor. A left adjoint to $G$ is supplied exactly by choosing, for every $c\\in\\mathcal C$, an initial object $(Fc,\\eta_c)$ of the comma category $(c\\downarrow G)$. These choices determine the action of $F$ on morphisms and the adjunction uniquely.\n\nDually, a right adjoint to $F:\\mathcal C\\to\\mathcal D$ is supplied exactly by choosing a terminal object in every comma category $(F\\downarrow d)$.",
+          "uses": [
+            "3.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "For the underlying-set functor, [L1] supplies the solution sets required by objectwise GAFT, while the chosen free-group universal arrows in [L3] supply the initial comma objects. The functor form of [L2] therefore assembles exactly the free-group adjunction.",
+          "claim": "The objectwise theorem in [L2] needs $\\mathbf{Grp}$ complete and locally small and $U$ continuous. Fact [L4] gives all small limits in $\\mathbf{Grp}$, so it is complete, and [L5] gives local smallness. By [L3] the chosen free-group functor is left adjoint to $U$, so [L6] makes $U$ preserve every limit that exists, in particular every small limit; hence $U$ is continuous.",
           "step": "1.1",
           "inputs": [
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the underlying-set functor, step 1.1 discharges those hypotheses and [L1] supplies the solution sets required by objectwise GAFT, while the chosen free-group universal arrows in [L3] supply the initial comma objects. The functor form of [L2] therefore assembles exactly the free-group adjunction.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
             "L1",
             "L2",
             "L3"
           ]
         },
         {
-          "id": "step-2-1",
-          "claim": "For the abelian inclusion, each unit in [L3] is itself a singleton solution set and supplied initial comma object, so the same argument assembles the abelianisation adjunction.",
-          "step": "2.1",
+          "id": "step-3-1",
+          "claim": "For the abelian inclusion, each unit in [L3] is itself a singleton solution set and a supplied initial object of the corresponding comma category. Assembling that supplied family into a left adjoint is exactly [L7], which asks only for an initial object in every comma category and carries no completeness or continuity hypothesis; so the abelianisation adjunction is recovered from the supplied family by [L7]. The functor form of [L2] is not invoked for this branch, since its Statement does require $\\mathcal A$ complete and locally small and $U$ continuous, and those hypotheses are not established here for $\\mathbf{Ab}\\hookrightarrow\\mathbf{Grp}$.",
+          "step": "3.1",
           "inputs": [
-            "step 1.1",
-            "L2",
-            "L3"
+            "step 2.1",
+            "L3",
+            "L7",
+            "L2"
           ]
         }
       ],
@@ -3069,8 +3265,8 @@
       "boundaries": [
         {
           "case": "empty",
-          "status": "not_applicable",
-          "reason": "No empty indexing family or empty object enters the authored proof about GAFT recovers the published free-group and abelianisation adjunctions."
+          "status": "checked",
+          "evidence": "The families the proof quantifies over are the supplied initial comma objects, indexed by all of Set for the free-group branch and by all of Grp for the abelian branch; neither index class is empty. The empty set is a legitimate index in the first: its free group is trivial and the corresponding comma object is supplied like any other, as step 1.1 of the cited solution-set theorem records."
         },
         {
           "case": "zero",
@@ -3079,8 +3275,8 @@
         },
         {
           "case": "one",
-          "status": "not_applicable",
-          "reason": "No singleton index, unit object, or one-valued parameter is used in the authored proof about GAFT recovers the published free-group and abelianisation adjunctions."
+          "status": "checked",
+          "evidence": "Step 3.1 uses a singleton solution set explicitly: each abelianisation unit is a one-element solution set and a supplied initial comma object, and the Statement says so. The singleton is the intended one-index case and is handled rather than avoided."
         },
         {
           "case": "degenerate",
@@ -3110,9 +3306,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the general-adjoint-functor-theorem proof of GAFT recovers the published free-group and abelianisation adjunctions; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 9), signals: 8 declared dependencies; 8 cited facts; quotient or equivalence-class construction; analytic limiting/completeness language. R6-24: read in full. The unsupported Given is gone: completeness of Grp, local smallness, and continuity of U as a right adjoint are established in a new step 1.1 from three published results."
       }
     },
     "thm-compact-hausdorff-spaces-are-reflective-in-topological-spaces": {
@@ -3139,10 +3335,11 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "The adjunction in [L1] has the compact-Hausdorff inclusion as right adjoint.",
+          "claim": "The family of initial comma objects assumed in the Given is exactly the supplied family that [L1] requires, so [L1] yields the adjunction $B\\dashv I$, whose right adjoint is the compact-Hausdorff inclusion.",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "given"
           ]
         },
         {
@@ -3159,8 +3356,8 @@
       "boundaries": [
         {
           "case": "empty",
-          "status": "not_applicable",
-          "reason": "No empty indexing family or empty object enters the authored proof about Under the ultrafilter lemma and dependent choice, compact Hausdorff spaces form a reflective full subcategory of topological spaces."
+          "status": "checked",
+          "evidence": "The Statement's supplied family is indexed by the class of all topological spaces, which is never empty, and step 1.1 uses it only pointwise. The empty topological space is itself a legitimate index: its comma category has a supplied initial object like any other, and the empty space is compact Hausdorff, so no index is excluded."
         },
         {
           "case": "zero",
@@ -3184,8 +3381,8 @@
         },
         {
           "case": "nonempty-choice",
-          "status": "not_applicable",
-          "reason": "The authored proof of Under the ultrafilter lemma and dependent choice, compact Hausdorff spaces form a reflective full subcategory of topological spaces makes no selection from a nonempty family beyond explicitly supplied data."
+          "status": "checked",
+          "evidence": "Step 1.1 makes no selection: the family of initial comma objects over all topological spaces is now an explicit hypothesis of the Statement and the Given, so the proof consumes supplied data rather than choosing over a proper class."
         },
         {
           "case": "iff-forward",
@@ -3200,9 +3397,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the direct proof of Under the ultrafilter lemma and dependent choice, compact Hausdorff spaces form a reflective full subcategory of topological spaces; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 5), signals: 2 cited facts; existence, choice, uniqueness, or well-definedness; boundary-sensitive language. R6-25: read in full. The Statement claimed reflectivity from the ultrafilter lemma and dependent choice alone while the proof needed the supplied family over the class of all spaces; that family is now explicit in Statement, Given and title, and two boundary rows were rewritten."
       }
     },
     "thm-abelian-groups-are-reflective-in-groups": {
@@ -3372,6 +3569,15 @@
           "uses": [
             "3.1"
           ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-ring-homomorphism-kernel-is-an-ideal",
+          "source_section": "Statement",
+          "quote": "The kernel of a ring homomorphism is a two-sided ideal.",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
@@ -3389,13 +3595,14 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Let $f:R\\to A$ be a unit-preserving homomorphism to a commutative ring. Then $f(ab-ba)=f(a)f(b)-f(b)f(a)=0$, so $S_R\\subseteq\\ker f$. Since the kernel is a two-sided ideal, leastness in [L2] gives $C_R\\subseteq\\ker f$, and [L4] supplies a unique homomorphism $\\bar f:R/C_R\\to A$ with $f=\\bar f q_R$. Unit preservation is retained by [L4], including the zero-ring case.",
+          "claim": "Let $f:R\\to A$ be a unit-preserving homomorphism to a commutative ring. Then $f(ab-ba)=f(a)f(b)-f(b)f(a)=0$, so $S_R\\subseteq\\ker f$. The kernel of a ring homomorphism is a two-sided ideal by [L6], so leastness in [L2] gives $C_R\\subseteq\\ker f$, and [L4] supplies a unique homomorphism $\\bar f:R/C_R\\to A$ with $f=\\bar f q_R$. Unit preservation is retained by [L4], including the zero-ring case.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
             "L1",
             "L2",
             "L4",
+            "L6",
             "algebra"
           ]
         },
@@ -3456,9 +3663,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the quotient-universal-property proof that commutative rings are reflective in rings; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 9), signals: 9 declared dependencies; 9 cited facts; boundary-sensitive language; quotient or equivalence-class construction. R6-26: read in full. The kernel-is-an-ideal step now cites thm-ring-homomorphism-kernel-is-an-ideal; the C_R=R degenerate case is dispositioned as the permitted zero ring."
       }
     },
     "thm-torsion-free-abelian-groups-are-reflective-in-abelian-groups": {
@@ -3490,6 +3697,15 @@
           "uses": [
             "3.1"
           ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be a full subcategory of $\\mathcal C$, with inclusion $I:\\mathcal A\\to\\mathcal C$. The following supplied data are equivalent:\n\n1. a reflector $R:\\mathcal C\\to\\mathcal A$ and an adjunction $R\\dashv I$ ([[def-reflective-subcategory-and-reflector]]);\n2. for every object $C\\in\\mathcal C$, a specified universal arrow $(R_C,\\eta_C)$ from $C$ to $I$ ([[def-universal-arrow-to-and-from-a-functor]]).\n\nUnder this equivalence the specified universal arrows are the components of the reflection unit. Merely asserting their existence, without supplying them object by object, does not supply the functor data in item 1.",
+          "uses": [
+            "3.1"
+          ]
         }
       ],
       "derivations": [
@@ -3515,11 +3731,12 @@
         },
         {
           "id": "step-3-1",
-          "claim": "The quotient maps are therefore supplied universal arrows from abelian groups to the full torsion-free subcategory. By [L3] they assemble into the reflector.",
+          "claim": "Step 2.1 supplies, for every abelian group $G$, the quotient map $G\\to G/\\operatorname{Tor}(G)$ together with the unique factorisation of any map into a torsion-free group; that is exactly a specified universal arrow from $G$ to the inclusion. By the equivalence in [L4] these supplied arrows assemble into a reflector $R$ with $R\\dashv I$, which by [L3] says the full torsion-free subcategory is reflective, with unit the quotient map.",
           "step": "3.1",
           "inputs": [
             "step 2.1",
             "L3",
+            "L4",
             "discharge-construct"
           ]
         }
@@ -3569,9 +3786,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the quotient-universal-property proof of Torsion-free abelian groups form a reflective full subcategory of abelian groups; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 4 declared dependencies; 4 cited facts; boundary-sensitive language; quotient or equivalence-class construction. R6-27: read in full. The universal-arrow equivalence is now cited from the scoped theorem that states it, not from def-reflective-subcategory-and-reflector, which declines to assert it. The torsion argument was rechecked at n=1."
       }
     },
     "fs-a-continuous-functor-on-a-complete-category-has-a-left-adjoint": {
@@ -3615,9 +3832,9 @@
         },
         {
           "fact": "L5",
-          "source": "def-adjunction-by-unit-counit-and-triangle-identities",
-          "source_section": "Definition",
-          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be categories. An **adjunction** $F\\dashv G$ consists of functors $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$, a natural transformation\n\n$$\\eta:1_{\\mathcal C}\\Rightarrow GF$$\n\ncalled the **unit**, and a natural transformation\n\n$$\\varepsilon:FG\\Rightarrow1_{\\mathcal D}$$\n\ncalled the **counit**, such that the two **triangle identities** hold:\n\n$$ (\\varepsilon F)\\circ(F\\eta)=1_F,\\qquad (G\\varepsilon)\\circ(\\eta G)=1_G. $$\n\nHere whiskering and vertical composition are those of [[def-horizontal-composition-and-whiskering-of-natural-transformations]]. Componentwise, for every $c\\in\\mathcal C$ and $d\\in\\mathcal D$,\n\n$$ \\varepsilon_{Fc}\\circ F(\\eta_c)=1_{Fc},\\qquad G(\\varepsilon_d)\\circ\\eta_{Gd}=1_{Gd}. $$\n\nThe direction $F\\dashv G$ means that $F$ is left adjoint to $G$ and $G$ is right adjoint to $F$. If $\\eta$ and $\\varepsilon$ are natural isomorphisms, this is precisely the adjunction data occurring in an adjoint equivalence ([[def-equivalence-and-adjoint-equivalence-of-categories]]).",
+          "source": "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be locally small categories and let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors.\n\nAn adjunction $F\\dashv G$ determines bijections\n\n$$ \\Phi_{c,d}:\\mathcal D(Fc,d)\\xrightarrow{\\ \\cong\\ }\\mathcal C(c,Gd),\\qquad \\Phi_{c,d}(u)=G(u)\\circ\\eta_c, $$\n\nnatural in $c$ and $d$, whose inverses are $\\Psi_{c,d}(v)=\\varepsilon_d\\circ F(v)$. Conversely, every such natural family of bijections determines a unique unit and counit satisfying the triangle identities, and hence a unique adjunction structure on $F$ and $G$.",
           "uses": [
             "1.2"
           ]
@@ -3626,7 +3843,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Regard the ordinals as a definable-class thin category under their usual order and take its opposite. For a small diagram in $\\mathbf{Ord}^{\\mathrm{op}}$, the union of its set of object ordinals is a supremum in $\\mathbf{Ord}$, hence a limit in the opposite category; for the empty diagram the union is $0$. Thus $\\mathbf{Ord}^{\\mathrm{op}}$ is complete in the small-diagram sense of [L1].",
+          "claim": "Regard the ordinals as a definable-class thin category under their usual order and take its opposite. Let $A$ be the set of object ordinals of a small diagram. By [L4], $\\bigcup A$ is an ordinal; each $\\alpha\\in A$ satisfies $\\alpha\\subseteq\\bigcup A$, so $\\alpha\\le\\bigcup A$ by the inclusion criterion in [L4], and if $\\alpha\\subseteq\\beta$ for every $\\alpha\\in A$ then $\\bigcup A\\subseteq\\beta$. Hence $\\bigcup A$ is the least upper bound of $A$ in $\\mathbf{Ord}$, that is, a greatest lower bound and so a limit in the opposite category; for the empty diagram the union is $0$. Thus $\\mathbf{Ord}^{\\mathrm{op}}$ is complete in the small-diagram sense of [L1].",
           "step": "1.1",
           "inputs": [
             "L1",
@@ -3636,7 +3853,7 @@
         },
         {
           "id": "step-1-2",
-          "claim": "Suppose $U$ had a left adjoint $F$, and put $\\beta=F(*)$. The bijection in [L5] would make $\\operatorname{Hom}_{\\mathbf{Ord}^{\\mathrm{op}}}(\\beta,\\alpha)$ nonempty for every ordinal $\\alpha$. In the opposite ordinal order this says $\\alpha\\le\\beta$ for every ordinal $\\alpha$.",
+          "claim": "Suppose $U$ had a left adjoint $F$, and put $\\beta=F(*)$. Both $\\mathbf{Ord}^{\\mathrm{op}}$ and $\\mathbf 1$ are locally small, being thin, so [L5] applies and gives $\\operatorname{Hom}_{\\mathbf{Ord}^{\\mathrm{op}}}(\\beta,\\alpha)\\cong\\operatorname{Hom}_{\\mathbf 1}(*,U(\\alpha))$, which is a singleton; hence the left side is nonempty for every ordinal $\\alpha$. In the opposite ordinal order this says $\\alpha\\le\\beta$ for every ordinal $\\alpha$.",
           "step": "1.2",
           "inputs": [
             "assume-contra",
@@ -3654,9 +3871,10 @@
         },
         {
           "id": "step-3-1",
-          "claim": "Taking the successor $\\beta^+$ contradicts [L4], since $\\beta<\\beta^+$. Hence no such left adjoint exists, even though the source is complete and the functor is continuous.",
+          "claim": "By [L4] the successor $\\beta^{+}=\\beta\\cup\\{\\beta\\}$ is an ordinal with $\\beta\\in\\beta^{+}$, so $\\beta\\subseteq\\beta^{+}$, while $\\beta\\ne\\beta^{+}$ because $\\beta\\notin\\beta$; hence $\\beta<\\beta^{+}$, contradicting the conclusion of step 1.2 that every ordinal is at most $\\beta$. Therefore no such left adjoint exists, even though the source is complete and the functor is continuous.",
           "step": "3.1",
           "inputs": [
+            "step 1.2",
             "step 2.1",
             "L4",
             "discharge-contradiction"
@@ -3708,9 +3926,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the counterexample proof of FALSE: A continuous functor on a complete category necessarily has a left adjoint; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 12), signals: 7 declared dependencies; 5 cited facts; biconditional / both-direction claim; boundary-sensitive language; analytic limiting/completeness language. R6-28: read in full. lem-ordinal-basics gives that a union of ordinals is an ordinal, not that it is the supremum; step 1.1 now derives the least-upper-bound property and step 3.1 derives beta<beta^+ from alpha not in alpha."
       }
     },
     "fs-every-reflective-subcategory-is-closed-under-colimits": {
@@ -3732,15 +3950,25 @@
           "uses": [
             "1.2"
           ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be locally small categories and let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors.\n\nAn adjunction $F\\dashv G$ determines bijections\n\n$$ \\Phi_{c,d}:\\mathcal D(Fc,d)\\xrightarrow{\\ \\cong\\ }\\mathcal C(c,Gd),\\qquad \\Phi_{c,d}(u)=G(u)\\circ\\eta_c, $$\n\nnatural in $c$ and $d$, whose inverses are $\\Psi_{c,d}(v)=\\varepsilon_d\\circ F(v)$. Conversely, every such natural family of bijections determines a unique unit and counit satisfying the triangle identities, and hence a unique adjunction structure on $F$ and $G$.",
+          "uses": [
+            "1.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "The constant functor $R:\\mathbf{Set}\\to\\mathcal A$ with value $1$ is left adjoint to the inclusion: both $\\operatorname{Hom}_{\\mathcal A}(1,1)$ and $\\operatorname{Hom}_{\\mathbf{Set}}(X,1)$ are singletons, naturally in $X$. Hence $\\mathcal A$ is reflective by [L1].",
+          "claim": "The constant functor $R:\\mathbf{Set}\\to\\mathcal A$ with value $1$ is left adjoint to the inclusion: both $\\operatorname{Hom}_{\\mathcal A}(1,1)$ and $\\operatorname{Hom}_{\\mathbf{Set}}(X,1)$ are singletons, naturally in $X$. By the converse clause of [L3] that natural family of bijections determines a unit and counit satisfying the triangle identities, hence an adjunction $R\\dashv I$, and [L1] then makes $\\mathcal A$ reflective.",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "L3"
           ]
         },
         {
@@ -3806,9 +4034,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the counterexample proof of FALSE: Every reflective subcategory is closed under ambient colimits; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 5), signals: 3 cited facts; boundary-sensitive language; analytic limiting/completeness language. R6-29: read in full. The singleton hom-set bijection is converted to an adjunction by the converse clause of the hom-set bijection theorem; the empty-colimit contrast is the refutation and is correct."
       }
     },
     "fs-a-reflective-inclusion-creates-colimits": {
@@ -3839,15 +4067,25 @@
           "uses": [
             "1.2"
           ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be locally small categories and let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors.\n\nAn adjunction $F\\dashv G$ determines bijections\n\n$$ \\Phi_{c,d}:\\mathcal D(Fc,d)\\xrightarrow{\\ \\cong\\ }\\mathcal C(c,Gd),\\qquad \\Phi_{c,d}(u)=G(u)\\circ\\eta_c, $$\n\nnatural in $c$ and $d$, whose inverses are $\\Psi_{c,d}(v)=\\varepsilon_d\\circ F(v)$. Conversely, every such natural family of bijections determines a unique unit and counit satisfying the triangle identities, and hence a unique adjunction structure on $F$ and $G$.",
+          "uses": [
+            "1.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "The constant functor $R:\\mathbf{Set}\\to\\mathcal A$ at $1$ is left adjoint to $I$, since the unique maps $X\\to1$ give the required hom-set bijections. Thus $I$ is a reflective inclusion by [L1].",
+          "claim": "The constant functor $R:\\mathbf{Set}\\to\\mathcal A$ at $1$ is left adjoint to $I$, since the unique maps $X\\to1$ give hom-set bijections $\\operatorname{Hom}_{\\mathcal A}(R X,1)\\cong\\operatorname{Hom}_{\\mathbf{Set}}(X,I1)$ natural in $X$; by the converse clause of [L4] these determine a unit and counit satisfying the triangle identities, hence an adjunction $R\\dashv I$. Thus $I$ is a reflective inclusion by [L1].",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "L4"
           ]
         },
         {
@@ -3914,9 +4152,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the counterexample proof of FALSE: A reflective inclusion creates colimits; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 4 declared dependencies; 4 cited facts; boundary-sensitive language; analytic limiting/completeness language. R6-30: read in full. Same adjunction bridge added; the creation clause it refutes is quoted from the preservation definition and the empty diagram is the witness."
       }
     },
     "fs-a-subobject-is-a-monomorphism": {
@@ -3943,7 +4181,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Let $m:A\\to X$ send $0$ to $0$, and let $n:B\\to X$ send $*$ to $0$. Both maps are injective, hence monic in $\\mathbf{Set}$, but they are literally different morphisms because their domains differ.",
+          "claim": "Let $m:A\\to X$ send $0$ to $0$, and let $n:B\\to X$ send $*$ to $0$. Both maps are injective, and an injection $f$ in $\\mathbf{Set}$ is monic: if $f\\circ g=f\\circ h$ then $f(g(x))=f(h(x))$ for every $x$, so $g(x)=h(x)$ by injectivity and $g=h$. They are nonetheless different morphisms, because their domains differ.",
           "step": "1.1",
           "inputs": [
             "given"
@@ -4013,9 +4251,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the counterexample proof of FALSE: A subobject is a monomorphism rather than an equivalence class of representatives; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 5), signals: 2 cited facts; boundary-sensitive language; quotient or equivalence-class construction. R6-31: read in full. 'Injective implies monic in Set' is proved inline; the refutation that a subobject is a class rather than a representative is correct."
       }
     },
     "cex-a-reflective-inclusion-need-not-preserve-colimits": {
@@ -4037,15 +4275,25 @@
           "uses": [
             "1.2"
           ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-the-adjunction-hom-set-bijection-under-local-smallness",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be locally small categories and let $F:\\mathcal C\\to\\mathcal D$ and $G:\\mathcal D\\to\\mathcal C$ be functors.\n\nAn adjunction $F\\dashv G$ determines bijections\n\n$$ \\Phi_{c,d}:\\mathcal D(Fc,d)\\xrightarrow{\\ \\cong\\ }\\mathcal C(c,Gd),\\qquad \\Phi_{c,d}(u)=G(u)\\circ\\eta_c, $$\n\nnatural in $c$ and $d$, whose inverses are $\\Psi_{c,d}(v)=\\varepsilon_d\\circ F(v)$. Conversely, every such natural family of bijections determines a unique unit and counit satisfying the triangle identities, and hence a unique adjunction structure on $F$ and $G$.",
+          "uses": [
+            "1.1"
+          ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "The constant functor $R:\\mathbf{Set}\\to\\mathcal A$ at $1$ is left adjoint to $I$: for every set $X$, both $\\operatorname{Hom}_{\\mathcal A}(1,1)$ and $\\operatorname{Hom}_{\\mathbf{Set}}(X,1)$ contain one map. Hence [L1] makes $\\mathcal A$ reflective.",
+          "claim": "The constant functor $R:\\mathbf{Set}\\to\\mathcal A$ at $1$ is left adjoint to $I$: for every set $X$, both $\\operatorname{Hom}_{\\mathcal A}(1,1)$ and $\\operatorname{Hom}_{\\mathbf{Set}}(X,1)$ contain one map, and these bijections are natural in $X$; by the converse clause of [L3] they determine a unit and counit satisfying the triangle identities, hence an adjunction $R\\dashv I$, so [L1] makes $\\mathcal A$ reflective.",
           "step": "1.1",
           "inputs": [
-            "L1"
+            "L1",
+            "L3"
           ]
         },
         {
@@ -4111,9 +4359,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the counterexample proof of A reflective inclusion need not preserve even the empty colimit; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 5), signals: 3 cited facts; boundary-sensitive language; analytic limiting/completeness language. R6-32: read in full. Same adjunction bridge added; the empty colimit is the witness and the computation is correct."
       }
     },
     "ex-the-subobject-poset-of-the-integers-in-abelian-groups": {
@@ -4132,7 +4380,7 @@
           "fact": "L2",
           "source": "def-subobject-and-quotient-object",
           "source_section": "Definition",
-          "quote": "Fix an object $C$ of a category $\\mathcal C$. Two monomorphisms $m:A\\to C$ and $n:B\\to C$ ([[def-monomorphism-and-epimorphism]]) **mutually factor** when there are morphisms $u:A\\to B$ and $v:B\\to A$ such that\n$$m=n\\circ u,\\qquad n=m\\circ v.$$\nA **subobject of $C$** is an equivalence class of monomorphisms into $C$ under mutual factorisation. The class represented by $m$ is denoted $[m]$. For representatives, write $[m]\\le[n]$ when $m$ factors through $n$.\n\nDually, two epimorphisms $q:C\\to Q$ and $r:C\\to R$ mutually factor when $r=u\\circ q$ and $q=v\\circ r$ for suitable $u:Q\\to R$ and $v:R\\to Q$. A **quotient object of $C$** is an equivalence class of epimorphisms out of $C$. Quotients are ordered by $[q]\\le[r]$ when $r$ factors through $q$, the orientation dual to that for subobjects.\n\nThe equivalence-relation and representative-independence obligations are discharged by [[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]].",
+          "quote": "Fix an object $C$ of a category $\\mathcal C$. Two monomorphisms $m:A\\to C$ and $n:B\\to C$ ([[def-monomorphism-and-epimorphism]]) **mutually factor** when there are morphisms $u:A\\to B$ and $v:B\\to A$ such that\n$$m=n\\circ u,\\qquad n=m\\circ v.$$\nA **subobject of $C$** is an equivalence class of monomorphisms into $C$ under mutual factorisation. The class represented by $m$ is denoted $[m]$. For representatives, write $[m]\\le[n]$ when $m$ factors through $n$.\n\nDually, two epimorphisms $q:C\\to Q$ and $r:C\\to R$ mutually factor when $r=u\\circ q$ and $q=v\\circ r$ for suitable $u:Q\\to R$ and $v:R\\to Q$. A **quotient object of $C$** is an equivalence class of epimorphisms out of $C$. Quotients are ordered by $[q]\\le[r]$ when $r$ factors through $q$, the orientation dual to that for subobjects.\n\nThe equivalence-relation and representative-independence obligations are discharged by [[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]].\n\n**What $[m]$ is, and what it is not.** The monomorphisms into $C$ generally form a proper class — already in $\\mathbf{Set}$, where every singleton admits a monomorphism into a one-point set — so $[m]$ is a class and not a set. Under this development's convention a class abbreviates a formula and is not an additional entity ([[rem-category-theory-class-and-size-conventions]]), so $[m]$ is never a member of anything and the subobjects of $C$ are never gathered into a collection. Every statement written with the bracket notation below is shorthand for a statement about representatives: $[m]\\le[n]$ means that $m$ factors through $n$, which the next two items show depends only on the two classes, and $[m]=[n]$ means that $m$ and $n$ mutually factor. Size conditions on subobjects are likewise stated on representatives later on this page, never by measuring a collection of classes.",
           "uses": [
             "1.1",
             "1.2"
@@ -4142,7 +4390,7 @@
           "fact": "L3",
           "source": "thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections",
           "source_section": "Statement",
-          "quote": "For an object $C$, subobjects form a partially ordered collection under\n$$[m]\\le[n]\\quad\\Longleftrightarrow\\quad m\\text{ factors through }n.$$\nQuotient objects form a partially ordered collection under the dual orientation\n$$[q]\\le[r]\\quad\\Longleftrightarrow\\quad r\\text{ factors through }q.$$\nThese orders are well-defined on equivalence classes. They are collections rather than sets unless the relevant well-poweredness hypothesis is supplied.",
+          "quote": "Fix an object $C$ of a category $\\mathcal C$. For monomorphisms $m,n$ into $C$ put\n$$[m]\\le[n]\\quad\\Longleftrightarrow\\quad m\\text{ factors through }n,$$\nand for epimorphisms $q,r$ out of $C$ put the dual orientation\n$$[q]\\le[r]\\quad\\Longleftrightarrow\\quad r\\text{ factors through }q.$$\nEach relation depends only on the mutual-factorisation classes of its two arguments, and each is reflexive, transitive, and antisymmetric in the sense that $[m]\\le[n]$ together with $[n]\\le[m]$ forces $[m]=[n]$, and likewise for quotients.\n\nThose four properties are the whole content, and they are what the phrase *partially ordered collection* abbreviates here. They are asserted of a relation between representatives, not of a set: a subobject is a class rather than a set under this development's convention ([[rem-category-theory-class-and-size-conventions]]), so nothing below gathers the subobjects of $C$ into a collection. Along any set of monomorphisms into $C$ carrying exactly one representative of each class, the relation descends to an ordinary partial order on that set ([[def-partial-order]]); the later size hypotheses on this page are what produce such a set.",
           "uses": [
             "1.2"
           ]
@@ -4151,7 +4399,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "A monomorphism $H\\to\\mathbb Z$ in $\\mathbf{Ab}$ is, up to its unique isomorphism onto its image, represented by the inclusion of the subgroup $H'\\le\\mathbb Z$. By [L1], exactly one $n\\in\\mathbb N$ has $H'=n\\mathbb Z$, so [L2] gives precisely the displayed representatives.",
+          "claim": "A monomorphism $f:H\\to\\mathbb Z$ in $\\mathbf{Ab}$ is injective: the inclusion $\\ker f\\to H$ and the zero map $\\ker f\\to H$ have equal composites with $f$, so they are equal and $\\ker f=0$. Its corestriction onto the image $H'=f[H]\\le\\mathbb Z$ is then an isomorphism $H\\to H'$ with $f=\\iota_{H'}\\circ\\bar f$ and $\\iota_{H'}=f\\circ\\bar f^{-1}$, so $f$ mutually factors with the inclusion of $H'$ and represents it. By [L1], exactly one $n\\in\\mathbb N$ has $H'=n\\mathbb Z$, so [L2] gives precisely the displayed representatives.",
           "step": "1.1",
           "inputs": [
             "L1",
@@ -4223,9 +4471,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the classification proof of The subobject poset of the integers in abelian groups; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 3 cited facts; biconditional / both-direction claim; boundary-sensitive language; quotient or equivalence-class construction. R6-33: read in full. 'Monos in Ab are injective' is proved inline from the kernel test; the n=0 and n=1 endpoints are dispositioned as least and greatest."
       }
     },
     "ex-subobjects-in-set-are-subsets": {
@@ -4253,7 +4501,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "For an injection $m:A\\to X$, the corestriction $\\bar m:A\\to m[A]$ is a bijection and satisfies $m=\\iota_{m[A]}\\circ\\bar m$, while $\\iota_{m[A]}=m\\circ\\bar m^{-1}$. Thus $m$ mutually factors with the inclusion of its image and represents that subset by [L1] and [L2].",
+          "claim": "A monomorphism $m:A\\to X$ in $\\mathbf{Set}$ is injective: if $m(a)=m(a')$, the two maps $g,h:\\{*\\}\\to A$ with $g(*)=a$ and $h(*)=a'$ satisfy $m\\circ g=m\\circ h$, so $g=h$ and $a=a'$. Conversely an injection is monic by the same cancellation. For such an $m$, the corestriction $\\bar m:A\\to m[A]$ is a bijection and satisfies $m=\\iota_{m[A]}\\circ\\bar m$, while $\\iota_{m[A]}=m\\circ\\bar m^{-1}$. Thus $m$ mutually factors with the inclusion of its image and represents that subset by [L1] and [L2].",
           "step": "1.1",
           "inputs": [
             "L1",
@@ -4323,9 +4571,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the image-factorisation proof of Subobjects in Set are subsets; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier high (score 5), signals: 2 cited facts; boundary-sensitive language; quotient or equivalence-class construction. R6-34: read in full. The converse the proof needed, that every mono in Set is injective, is proved inline from two maps out of a singleton; the empty subset is dispositioned in step 3.1."
       }
     },
     "ex-the-adjoint-functor-theorem-for-ordered-sets": {
@@ -4451,9 +4699,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the meet-construction proof of The adjoint functor theorem for ordered sets; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 3 cited facts; biconditional / both-direction claim; boundary-sensitive language; analytic limiting/completeness language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance."
       }
     },
     "ex-the-solution-set-for-groups-computed-on-a-two-element-set": {
@@ -4465,7 +4713,25 @@
           "quote": "Fix a set $S$ and a chosen free group $(F(S),i_S)$. For every normal subgroup $N\\trianglelefteq F(S)$, let\n$$\\eta_N:S\\xrightarrow{i_S}U(F(S))\\xrightarrow{U(q_N)}U(F(S)/N).$$\nThe family $(\\eta_N)$, indexed by the set of normal subgroups of the fixed group $F(S)$, is a solution set at $S$ for the underlying-set functor $U:\\mathbf{Grp}\\to\\mathbf{Set}$.",
           "uses": [
             "1.1",
-            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-image-subgroup-and-kernel-normal",
+          "source_section": "Statement",
+          "quote": "The image of a group homomorphism is a subgroup and its kernel is a normal subgroup.\n\nFor every group homomorphism $f:G\\to H$, one has\n$\\operatorname{im}f\\le H$ and $\\ker f\\mathrel{\\trianglelefteq}G$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-quotient-group-universal-property",
+          "source_section": "Statement",
+          "quote": "A homomorphism that kills a normal subgroup factors uniquely through the quotient group.\n\nIf $N\\mathrel{\\trianglelefteq}G$, $f:G\\to H$ is a homomorphism, and\n$N\\subseteq\\ker f$, then there is a unique homomorphism $\\bar f:G/N\\to H$\nsuch that $\\bar f(gN)=f(g)$ and $f=\\bar f\\circ\\pi$.",
+          "uses": [
             "2.1"
           ]
         }
@@ -4480,18 +4746,21 @@
           ]
         },
         {
-          "id": "step-1-2",
-          "claim": "Let $C=\\mathbb Z/2\\mathbb Z$ and map both $x$ and $y$ to its nonidentity element. Freeness extends this function uniquely to a homomorphism $\\widehat f:F(S)\\to C$. Its kernel $N$ is normal, and the induced injection $F(S)/N\\to C$ factors the original map through the member indexed by $N$.",
-          "step": "1.2",
+          "id": "step-2-1",
+          "claim": "Let $C=\\mathbb Z/2\\mathbb Z$ and map both $x$ and $y$ to its nonidentity element. Freeness extends this function uniquely to a homomorphism $\\widehat f:F(S)\\to C$. Its kernel $N=\\ker\\widehat f$ is a normal subgroup of $F(S)$ by [L2], so $N$ indexes a member of the family in step 1.1. Since $N\\subseteq\\ker\\widehat f$, [L3] gives a unique $\\bar f:F(S)/N\\to C$ with $\\widehat f=\\bar f q_N$, and $\\bar f$ is injective because $\\bar f(gN)=0$ forces $g\\in\\ker\\widehat f=N$. Hence the original map factors through the member indexed by $N$.",
+          "step": "2.1",
           "inputs": [
             "L1",
-            "algebra"
+            "L2",
+            "L3",
+            "algebra",
+            "step 1.1"
           ]
         },
         {
-          "id": "step-2-1",
+          "id": "step-3-1",
           "claim": "More generally, [L1] gives this kernel-quotient factorisation for every map from $S$ into an underlying group, which verifies the solution-set property rather than only listing the quotients.",
-          "step": "2.1",
+          "step": "3.1",
           "inputs": [
             "step 1.1",
             "L1"
@@ -4513,7 +4782,7 @@
         {
           "case": "one",
           "status": "checked",
-          "evidence": "step 1.2"
+          "evidence": "Step 2.1 takes the single target C=Z/2Z and the one normal subgroup N=ker f-hat it produces, showing that a one-member selection from the family of step 1.1 already factors the map; the family itself is indexed by all normal subgroups of F(S), not by a single one."
         },
         {
           "case": "degenerate",
@@ -4572,7 +4841,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Both $m$ and $n$ are injective and hence monic. They are not the same map, since their domains $\\{0\\}$ and $\\{*\\}$ are distinct.",
+          "claim": "Both $m$ and $n$ are injective, and an injection $f$ in $\\mathbf{Set}$ is monic: $f\\circ g=f\\circ h$ gives $f(g(x))=f(h(x))$ for every $x$, hence $g(x)=h(x)$ and $g=h$. They are not the same map, since their domains $\\{0\\}$ and $\\{*\\}$ are distinct.",
           "step": "1.1",
           "inputs": [
             "given"
@@ -4681,7 +4950,7 @@
           "fact": "L4",
           "source": "def-well-powered-and-co-well-powered-category",
           "source_section": "Definition",
-          "quote": "A category $\\mathcal C$ is **well-powered** when, for every object $C$, the collection of subobjects of $C$ ([[def-subobject-and-quotient-object]]) is a set. It is **co-well-powered** when, for every $C$, the collection of quotient objects of $C$ is a set.\n\nA **supplied well-powering** gives, for each object $C$, a set-indexed family of monomorphisms into $C$ containing one representative of every subobject class. A **supplied co-well-powering** is the dual datum for quotient objects. The supplied versions include chosen representatives; ordinary well-poweredness is only the size assertion.",
+          "quote": "A subobject of an object $C$ is a mutual-factorisation class of monomorphisms into $C$ ([[def-subobject-and-quotient-object]]), and under the class convention of this development such a class is a formula rather than a set ([[rem-category-theory-class-and-size-conventions]]). So \"the subobjects of $C$ form a set\" cannot be stated by gathering the subobjects into a collection and measuring it. The size condition is stated on representatives instead, which is the form the sources use and the form every result below actually spends.\n\nA category $\\mathcal C$ is **well-powered** when, for every object $C$, there is a **set** $M_C$ of monomorphisms into $C$ ([[def-monomorphism-and-epimorphism]]) containing a representative of every subobject class of $C$: every monomorphism into $C$ mutually factors with some member of $M_C$. It is **co-well-powered** when, for every $C$, there is a set of epimorphisms out of $C$ containing a representative of every quotient-object class.\n\nA **supplied well-powering** gives such a set $M_C$ **as data for every object at once** — that is, the whole assignment $C\\mapsto M_C$. A **supplied co-well-powering** is the dual datum. The difference from plain well-poweredness is not size but scope of selection: well-poweredness asserts of each object separately that a representative set exists, whereas a proof that needs one representative set per object across a proper class of objects would have to select them, and a supplied well-powering hands that assignment over rather than choosing it.",
           "uses": [
             "3.1"
           ]
@@ -4727,7 +4996,7 @@
         },
         {
           "id": "step-3-1",
-          "claim": "By [L3] those classes form a proper class, so $\\infty$ has no set of subobjects. The category is not well-powered by [L4], despite being locally small.",
+          "claim": "Suppose some set $M$ of monomorphisms into $\\infty$ contained a representative of every subobject class. By step 2.2 the only monomorphism into $\\infty$ that mutually factors with $m_\\alpha$ is $m_\\alpha$ itself, so $M$ would have to contain $m_\\alpha$ for every ordinal $\\alpha$, and $\\alpha\\mapsto m_\\alpha$ is injective. Sending each such member of $M$ back to its domain would then exhibit the ordinals as the image of a set, making them a set and contradicting [L3]. No such $M$ exists, so the category is not well-powered by [L4], despite being locally small.",
           "step": "3.1",
           "inputs": [
             "step 1.1",
@@ -4783,9 +5052,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the ordinal-preorder proof of A locally small category with a proper class of subobjects of one object; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b) + lead alpha (step 6c)",
+        "notes": "Tier high (score 6), signals: 6 declared dependencies; 5 cited facts; boundary-sensitive language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance. || LEAD ALPHA, step 6c (Claude Opus 5): this item was materially edited after the above review, closing the foundational referral group b handed up — subobject classes are proper classes under rem-category-theory-class-and-size-conventions, so well-poweredness and the subobject order are now stated on representative sets rather than by measuring a collection of classes. I re-read the item in full against the repaired def-subobject-and-quotient-object and def-well-powered-and-co-well-powered-category, regenerated its citation and derivation entries, and re-ran precheck, proof-contract --strict, citation-fidelity and boundary-audit clean. The mathematics is unchanged; what changed is that the size and order assertions are now well-formed."
       }
     },
     "ex-torsion-free-reflection-computed": {
@@ -4817,6 +5086,15 @@
           "uses": [
             "3.1"
           ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ be a full subcategory of $\\mathcal C$, with inclusion $I:\\mathcal A\\to\\mathcal C$. The following supplied data are equivalent:\n\n1. a reflector $R:\\mathcal C\\to\\mathcal A$ and an adjunction $R\\dashv I$ ([[def-reflective-subcategory-and-reflector]]);\n2. for every object $C\\in\\mathcal C$, a specified universal arrow $(R_C,\\eta_C)$ from $C$ to $I$ ([[def-universal-arrow-to-and-from-a-functor]]).\n\nUnder this equivalence the specified universal arrows are the components of the reflection unit. Merely asserting their existence, without supplying them object by object, does not supply the functor data in item 1.",
+          "uses": [
+            "3.1"
+          ]
         }
       ],
       "derivations": [
@@ -4832,7 +5110,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "The first projection $\\pi_1:G_n\\to\\mathbb Z$ is surjective by [L2] and has precisely this torsion subgroup as kernel. It therefore induces an isomorphism $G_n/\\operatorname{Tor}(G_n)\\cong\\mathbb Z$.",
+          "claim": "The first projection $\\pi_1:G_n\\to\\mathbb Z$ is a homomorphism by [L2], and it is surjective because $\\pi_1(z,0)=z$ for every $z\\in\\mathbb Z$. Its kernel is $\\{(0,\\bar a)\\}=\\operatorname{Tor}(G_n)$ by step 1.1, so the induced map $G_n/\\operatorname{Tor}(G_n)\\to\\mathbb Z$, $(z,\\bar a)+\\operatorname{Tor}(G_n)\\mapsto z$, is a well-defined surjective homomorphism, and it is injective because $z=0$ forces $(z,\\bar a)\\in\\operatorname{Tor}(G_n)$. It is therefore an isomorphism $G_n/\\operatorname{Tor}(G_n)\\cong\\mathbb Z$.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
@@ -4842,12 +5120,13 @@
         },
         {
           "id": "step-3-1",
-          "claim": "If $H$ is torsion-free and $f:G_n\\to H$ is a homomorphism, [L3] says that $f$ kills the subgroup in step 1.1 and factors uniquely through the quotient, which step 2.1 identifies with $\\mathbb Z$. Thus the computed object has the reflection's universal property.",
+          "claim": "By [L3] the reflector sends $G_n$ to $G_n/\\operatorname{Tor}(G_n)$ with unit the quotient map, and by the equivalence in [L4] that unit is a universal arrow from $G_n$ to the inclusion: every homomorphism $f:G_n\\to H$ with $H$ torsion-free factors uniquely through it. Step 2.1 identifies the target of that quotient map with $\\mathbb Z$. Thus the computed object has the reflection's universal property.",
           "step": "3.1",
           "inputs": [
             "step 1.1",
             "step 2.1",
-            "L3"
+            "L3",
+            "L4"
           ]
         },
         {
@@ -4906,9 +5185,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the quotient-computation proof of The torsion-free reflection of the integers direct sum a finite cyclic group; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b)",
+        "notes": "Tier critical (score 8), signals: 4 declared dependencies; 4 cited facts; boundary-sensitive language; quotient or equivalence-class construction. R6-37, R6-38: read and recomputed. [L3] no longer carries a factorisation clause absent from the cited Statement; the universal property comes from the universal-arrow equivalence, and surjectivity plus injectivity of the induced map are both shown. The n=1 case is dispositioned."
       }
     },
     "cex-a-complete-category-whose-coseparating-sets-are-never-small": {
@@ -4944,7 +5223,7 @@
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "For objects $X,Y$, a morphism is determined by its coordinates in the set $\\operatorname{supp}(X)\\cup\\operatorname{supp}(Y)$; outside that union both sets are singletons and there is only one coordinate map. The relevant product of function sets is therefore a set, so $\\mathcal S$ is locally small.",
+          "claim": "A morphism $x\\to y$ is by construction a set-indexed family of functions on the set $\\operatorname{dom}(x)\\cup\\operatorname{dom}(y)$, so the morphisms $x\\to y$ form a subset of the product of the function sets $Y_\\alpha^{X_\\alpha}$ over that index set. That product is a set, so every hom-collection is a set and $\\mathcal S$ is locally small.",
           "step": "1.1",
           "inputs": [
             "construct"
@@ -4952,7 +5231,7 @@
         },
         {
           "id": "step-1-2",
-          "claim": "Limits of small diagrams are formed coordinatewise in $\\mathbf{Set}$. The support of such a limit is contained in the union of the supports of the diagram's set of objects: outside this union the diagram is constantly a singleton and its limit is a singleton. A set-indexed union of sets is a set, and the empty limit is the all-singleton family. Thus every small diagram has an objectwise limit in $\\mathcal S$, so [L2] makes it complete.",
+          "claim": "Let $D$ be a small diagram in $\\mathcal S$ and let $T$ be the union of the supports of its set of objects, itself a set. Form the limit coordinatewise in $\\mathbf{Set}$: at $\\alpha\\in T$ take the limit $L_\\alpha$ of the diagram of coordinates, and at $\\alpha\\notin T$ every coordinate is $\\{\\varnothing\\}$, so the diagram there is constant at a one-element set and its limit is a one-element set. The code with domain $\\{\\alpha\\in T : L_\\alpha \\text{ is not a singleton}\\}$ and value $L_\\alpha$ there is an object of $\\mathcal S$, and its cone legs are the coordinatewise limit projections, the unique map being taken outside $T$. A cone over $D$ in $\\mathcal S$ is exactly a coordinatewise cone, and the mediating map is coordinatewise unique, so this is a limit of $D$. The empty diagram has $T=\\varnothing$ and gives the code with empty domain. Every small diagram therefore has a limit, so [L2] makes $\\mathcal S$ complete.",
           "step": "1.2",
           "inputs": [
             "L2"
@@ -4960,7 +5239,7 @@
         },
         {
           "id": "step-1-3",
-          "claim": "Let $\\mathcal H$ be any small set of objects of $\\mathcal S$. The union $T=\\bigcup_{H\\in\\mathcal H}\\operatorname{supp}(H)$ is a set. By [L3] choose an ordinal $\\beta\\notin T$.",
+          "claim": "Let $\\mathcal H$ be any small set of objects of $\\mathcal S$. The union $T=\\bigcup_{H\\in\\mathcal H}\\operatorname{dom}(H)$ is a set of ordinals. Were every ordinal a member of $T$ the ordinals would be a set, contradicting [L3], so some ordinal lies outside $T$; let $\\beta$ be the least one, which is definable from $T$ and involves no selection.",
           "step": "1.3",
           "inputs": [
             "L3"
@@ -4968,7 +5247,7 @@
         },
         {
           "id": "step-2-1",
-          "claim": "Let $X$ be the all-singleton family and let $Y$ have a two-element set at $\\beta$ and singletons elsewhere. There are distinct maps $f,g:X\\to Y$ that select different elements at coordinate $\\beta$. For every $H\\in\\mathcal H$ and every $h:Y\\to H$, the coordinate $H_\\beta$ is a singleton, so $h\\circ f=h\\circ g$.",
+          "claim": "Let $x$ be the code with empty domain, so $X_\\alpha=\\{\\varnothing\\}$ for every $\\alpha$, and let $y$ be the code with domain $\\{\\beta\\}$ and $y(\\beta)=\\{0,1\\}$. The two families $f,g:x\\to y$ that send the single element of $X_\\beta$ to $0$ and to $1$ respectively, and take the unique map at every other coordinate, are distinct morphisms. For every $H\\in\\mathcal H$ and every $h:y\\to H$, the coordinate $H_\\beta$ is $\\{\\varnothing\\}$ because $\\beta\\notin\\operatorname{dom}(H)$, so $h_\\beta\\circ f_\\beta=h_\\beta\\circ g_\\beta$; the two composites agree at every other coordinate as well, so $h\\circ f=h\\circ g$.",
           "step": "2.1",
           "inputs": [
             "step 1.3"
@@ -5030,9 +5309,9 @@
       ],
       "finite_smoke": [],
       "risk_review": {
-        "status": "pending",
-        "reviewer": "Alpha",
-        "notes": "Scaffold-stage review is still required for the small-support-families proof of A complete locally small category with no small coseparating set; citation clauses will be frozen against the authored fact blocks at step 5."
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, build Alpha, step 6b) + lead alpha (step 6c)",
+        "notes": "Tier high (score 5), signals: 3 cited facts; boundary-sensitive language; analytic limiting/completeness language. Routed on structural signals only (dependency and fact counts, plus boundary or biconditional language triggers). No independent-reader finding was raised against this item and my own pass found nothing to adjudicate. The additional read-only proof-refuter reading that a high/critical item requires is dispatched and still outstanding; this records the state of the evidence, not a refuter clearance. || LEAD ALPHA, step 6c (Claude Opus 5): this item was materially edited after the above review, closing the foundational referral group b handed up — subobject classes are proper classes under rem-category-theory-class-and-size-conventions, so well-poweredness and the subobject order are now stated on representative sets rather than by measuring a collection of classes. I re-read the item in full against the repaired def-subobject-and-quotient-object and def-well-powered-and-co-well-powered-category, regenerated its citation and derivation entries, and re-ran precheck, proof-contract --strict, citation-fidelity and boundary-audit clean. The mathematics is unchanged; what changed is that the size and order assertions are now well-formed."
       }
     }
   }

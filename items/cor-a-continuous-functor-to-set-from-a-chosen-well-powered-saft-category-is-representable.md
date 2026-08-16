@@ -1,13 +1,13 @@
 ---
 id: cor-a-continuous-functor-to-set-from-a-chosen-well-powered-saft-category-is-representable
 kind: corollary
-title: "A continuous Set-valued functor from a chosen-well-powered SAFT category is representable"
+title: "With the objectwise SAFT universal arrows supplied, a continuous Set-valued functor from a chosen-well-powered SAFT category is representable"
 status: draft
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-special-adjoint-functor-theorem-objectwise-form, thm-special-adjoint-functor-theorem-functor-form, def-presheaf-representable-functor-and-representation, def-adjunction-by-unit-counit-and-triangle-identities]
+deps: [thm-special-adjoint-functor-theorem-objectwise-form, thm-special-adjoint-functor-theorem-functor-form, def-presheaf-representable-functor-and-representation, def-adjunction-by-unit-counit-and-triangle-identities, thm-the-adjunction-hom-set-bijection-under-local-smallness]
 aliases: []
 landmark: false
 proof_strategy: direct
@@ -33,7 +33,7 @@ Let $\mathcal C$ be complete and locally small, with a supplied small coseparati
 
 [L2] A covariant Set-valued functor is representable when it is naturally isomorphic to $\mathcal C(R,-)$ for some $R$ ([[def-presheaf-representable-functor-and-representation]]).
 
-[L3] An adjunction $L\dashv F$ gives natural bijections $\mathcal C(L(S),C)\cong\mathbf{Set}(S,F(C))$ ([[def-adjunction-by-unit-counit-and-triangle-identities]]).
+[L3] For locally small $\mathcal C$ and $\mathcal D$, an adjunction $F\dashv G$ determines bijections $\Phi_{c,d}:\mathcal D(Fc,d)\to\mathcal C(c,Gd)$, $\Phi_{c,d}(u)=G(u)\circ\eta_c$, natural in $c$ and $d$ ([[thm-the-adjunction-hom-set-bijection-under-local-smallness]]).
 
 ## Proof
 

@@ -41,7 +41,7 @@ Let $U$ be a complex domain and $f:U\to\mathbb C$ continuous. The following are 
 
 [L4] On piecewise-$C^1$ paths, the rectifiable integral agrees with the parametric integral ([[thm-riemann-stieltjes-and-parametric-contour-integrals-agree]]).
 
-[L5] A primitive gives the endpoint formula on every rectifiable contour ([[thm-fundamental-theorem-for-complex-line-integrals]]).
+[L5] Let $F$ be a primitive of a continuous function $f$ on an open set containing the trace of a rectifiable contour $\gamma:[a,b]\to\mathbb C$. If $F'=f$ is continuous, then $\int_\gamma f(z)\,dz=F(\gamma(b))-F(\gamma(a))$ ([[thm-fundamental-theorem-for-complex-line-integrals]]).
 
 [L6] For real vector fields, conservativity, path independence, and zero closed-loop integrals are equivalent under the published open and path-connected hypotheses ([[thm-conservative-path-independent-and-zero-loop-equivalence]]).
 
@@ -49,11 +49,11 @@ Let $U$ be a complex domain and $f:U\to\mathbb C$ continuous. The following are 
 
 **Proof technique:** constructive.
 
-1.1 If $f$ has a primitive, [L5] gives endpoint independence; endpoint independence makes every closed-contour integral zero because the constant contour with the same endpoint has integral $0$. [L5]
+1.1 If $f$ has a primitive $F$ on $U$, then $F'=f$ is continuous by the Given, so [L5] applies to every rectifiable contour in $U$ and gives endpoint independence; endpoint independence makes every closed-contour integral zero because the constant contour with the same endpoint has integral $0$. [given, L5]
 
-1.2 Assume every closed-contour integral is zero. By [L1] and [L2], fix a basepoint $z_0\in U$ and, for each $z\in U$, a polygonal path from $z_0$ to $z$; define $F(z)$ as its integral. [L1, L2, choose, construct]
+1.2 Assume every closed-contour integral is zero. By [L1] and [L2], fix a basepoint $z_0\in U$; for each $z\in U$ at least one polygonal path in $U$ runs from $z_0$ to $z$. Any two such paths carry the same integral: concatenating one with the reversal of the other is a closed contour, whose integral is by [L3] the difference of the two, and the closed-loop hypothesis makes that difference $0$. [L1, L2, L3]
 
-2.1 If two such paths end at $z$, concatenate one with the reversal of the other. By [L3] its integral is their difference, and the closed-loop hypothesis makes that difference $0$, so $F$ is well-defined. [step 1.2, L3]
+2.1 So for each $z\in U$ there is a unique complex number shared by the integrals of $f$ along all polygonal paths in $U$ from $z_0$ to $z$; define $F(z)$ to be that number. This specifies $F$ uniquely from the data of step 1.2, with no path selected and no choice principle used. [step 1.2, construct]
 
 3.1 For sufficiently small $h$, the segment from $z$ to $z+h$ lies in $U$. By [L3] and [L4], $F(z+h)-F(z)=\int_0^1 f(z+th)h\,dt$, so division by $h\ne0$ gives an average tending to $f(z)$ by continuity. Thus $F'(z)=f(z)$. [step 2.1, L3, L4]
 

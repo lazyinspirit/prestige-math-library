@@ -1,7 +1,7 @@
 ---
 id: fs-every-baire-space-is-completely-metrizable
 kind: false-statement
-title: "Every Baire space is completely metrizable"
+title: "FALSE: every Baire space is completely metrizable"
 status: draft
 origin: session
 provenance:
@@ -28,7 +28,7 @@ pipeline_run: null
 
 ## Statement
 
-The false claim is: every Baire space is completely metrizable.
+Assume the Axiom of Choice, which yields the Dependent Choice and Countable Choice instances used below. The false claim is: every Baire space is completely metrizable.
 
 ## Facts & Assumptions
 

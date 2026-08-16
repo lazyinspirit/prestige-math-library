@@ -1,0 +1,25 @@
+<!-- Recovered by Alpha-a from research/frontier-14-dispatch/refuter-refuter-c7-lattice.log (stdout summary; no numbered block emitted). -->
+
+## Fatal findings
+
+1. **`thm-lattice-stone-weierstrass` — title, Statement, proof step 1.1, and proof-contract `empty` boundary**
+
+   The [Statement](/Users/ianx/Projects/prestige-math-library/items/thm-lattice-stone-weierstrass.md:28) includes \(X=\varnothing\) while asserting density “for the topology of uniform convergence.” But the cited definition explicitly says: “the topology of uniform convergence is defined only” for nonempty \(X\) ([dependency text](/Users/ianx/Projects/prestige-math-library/items/def-topology-of-uniform-convergence.md:77)); its uniform metric requires \(\sup_{x\in X}\), and the library leaves \(\sup\varnothing\) undefined.
+
+   For the witness \(X=\varnothing\), \(C(X,\mathbb R)=L=\{\varnothing\}\). The empty function really is constant, and the displayed pointwise approximation condition is vacuously true. Nevertheless, [step 1.1](/Users/ianx/Projects/prestige-math-library/items/thm-lattice-stone-weierstrass.md:44) does not define the claimed topology, so the topological-density assertion remains undefined. The missing hypothesis is \(X\neq\varnothing\), unless the uniform topology is separately extended to the empty domain.
+
+   The [proof-contract boundary](/Users/ianx/Projects/prestige-math-library/research/frontier-14-batch-7.proof-contracts.json:451) incorrectly marks this checked and says step 2.1 handles the empty space, although step 2.1 occurs only after the proof assumes \(X\neq\varnothing\).
+
+   **Severity: fatal.**
+
+2. **`ex-distance-function-lattice-is-dense-on-a-compact-metric-space` — title, Example, `[L1]`/step 3.1, and proof-contract `empty` boundary**
+
+   The [Example](/Users/ianx/Projects/prestige-math-library/items/ex-distance-function-lattice-is-dense-on-a-compact-metric-space.md:24) also permits the empty compact metric space and asserts that \(L\) is “uniformly dense.” For \(X=\varnothing\), the generated lattice exists and equals the singleton \(C(X,\mathbb R)\), but the library’s uniform topology is still undefined on this domain. Thus [step 3.1](/Users/ianx/Projects/prestige-math-library/items/ex-distance-function-lattice-is-dense-on-a-compact-metric-space.md:54) inherits the first finding rather than proving the stated empty-space case.
+
+   Its [contract boundary](/Users/ianx/Projects/prestige-math-library/research/frontier-14-batch-7.proof-contracts.json:2502) likewise calls the density conclusion immediate without addressing that the topology itself is unavailable.
+
+   **Severity: fatal.**
+
+No other reportable defect was found. In particular, the two cover sweeps require no infinite choice; their finite maxima/minima follow routinely by iteration, `[L2]` applies with the whole space as its compact subset, and the singleton case correctly uses the equal-point duplication clause. The generated distance lattice exists by intersection, with \(C(X,\mathbb R)\) as an ambient sublattice. No assigned dependency target has an `ai-generated` Statement.
+
+Coverage: I read all eight assigned items, both page files, and all relevant proof-contract entries in full. I also read all thirteen distinct direct dependencies in full, plus `lem-uniform-metric-on-a-function-space` and `lem-uniform-convergence-in-the-uniform-metric` to resolve the empty-domain issue. Nothing in the assigned scope was merely sampled, and nothing was unavailable.

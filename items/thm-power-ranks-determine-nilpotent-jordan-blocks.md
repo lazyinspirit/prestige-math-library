@@ -35,7 +35,7 @@ Thus either the nullities or the ranks of all powers determine the multiset of n
 
 [L1] There is a basis in which $N$ is a direct sum of nilpotent Jordan blocks ([[thm-nilpotent-jordan-string-basis]]).
 
-[L2] Kernels of successive powers increase and ranks decrease, eventually stabilising ([[lem-kernel-and-rank-sequences-of-powers]]).
+[L2] For every $k\ge0$, $\ker T^k\subseteq\ker T^{k+1}$ and $\operatorname{im}T^{k+1}\subseteq\operatorname{im}T^k$; and if $\ker T^m=\ker T^{m+1}$ for some $m\ge0$ — equivalently $\operatorname{rank}T^m=\operatorname{rank}T^{m+1}$ — then $\ker T^{m+r}=\ker T^m$ and $\operatorname{im}T^{m+r}=\operatorname{im}T^m$ for every $r\ge0$ ([[lem-kernel-and-rank-sequences-of-powers]]).
 
 [L3] Nullity and rank are the dimensions of the kernel and image ([[def-rank-and-nullity]]).
 
@@ -49,6 +49,6 @@ Thus either the nullities or the ranks of all powers determine the multiset of n
 
 2.1 Subtracting the number of blocks of size at least $k+1$ from the number of blocks of size at least $k$ gives $2d_k-d_{k-1}-d_{k+1}$ blocks of exact size $k$. [step 1.1, algebra]
 
-3.1 Fact [L4] gives $d_k+\rho_k=\dim V$ for every $k$, so replacing each $d_k$ in steps 1.1-2.1 gives the two rank formulas; [L2] supplies the stabilised tail needed beyond the largest block. [step 1.1, step 2.1, L2, L3, L4, algebra]
+3.1 Fact [L4] gives $d_k+\rho_k=\dim V$ for every $k$, so replacing each $d_k$ in steps 1.1-2.1 gives the two rank formulas. For the tail, first dispose of $V=0$: there the block multiset is empty, every $d_k$ and $\rho_k$ is zero, and both formulas read $0=0$. So assume $V\ne0$, in which case the basis of [L1] has at least one block and a largest block size $m^*$ exists; step 1.1 gives $\dim\ker J_m(0)^k=\min(k,m)=m$ for every block and every $k\ge m^*$, so $d_k=\dim V$ and $\rho_k=0$ for all $k\ge m^*$. In particular $\ker N^{m^*}=\ker N^{m^*+1}$, which is the hypothesis of [L2], and [L2] then gives the stabilised tail beyond the largest block. [step 1.1, step 2.1, L1, L2, L3, L4, algebra]
 
 4.1 These formulas recover every block multiplicity, including size one and the endpoint after the largest block; when $V=0$ each quantity and each recovered multiplicity is zero. [step 1.1, step 2.1, step 3.1] ∎

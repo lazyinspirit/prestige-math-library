@@ -46,6 +46,6 @@ Under this equivalence the specified universal arrows are the components of the 
 
 **Proof technique:** direct.
 
-1.1 Suppose item 1 is supplied. For each $C$, the unit component $\eta_C:C\to IR(C)$ has the universal factorisation property of [L2], so $(R(C),\eta_C)$ is the required specified universal arrow. [L1, L2]
+1.1 Suppose item 1 is supplied. By [L3] a supplied left adjoint to $I$ corresponds to an initial object, equivalently a universal arrow, of each comma category $(C\downarrow I)$, and the unit components are exactly those arrows. Hence for each $C$ the unit component $\eta_C:C\to IR(C)$ has the universal factorisation property of [L2], and $(R(C),\eta_C)$ is the required specified universal arrow. [L1, L2, L3]
 
 2.1 Conversely, suppose item 2 is supplied. By [L3] the specified initial objects $(R_C,\eta_C)$ of $(C\downarrow I)$ determine a functor $R:\mathcal C\to\mathcal A$ and an adjunction $R\dashv I$ whose unit is $(\eta_C)$; hence $\mathcal A$ is reflective by [L1]. No selection beyond the supplied family is made. [L1, L2, L3, step 1.1] ∎

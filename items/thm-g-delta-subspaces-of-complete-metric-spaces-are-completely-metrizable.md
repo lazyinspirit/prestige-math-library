@@ -1,7 +1,7 @@
 ---
 id: thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable
 kind: theorem
-title: "Every $G_\\delta$ subspace of a complete metric space is completely metrizable"
+title: "Under the Axiom of Countable Choice, every $G_\\delta$ subspace of a complete metric space is completely metrizable"
 status: draft
 origin: session
 provenance:
@@ -30,13 +30,13 @@ pipeline_run: null
 
 ## Statement
 
-If $(X,d)$ is a complete metric space and $Y\subseteq X$ is $G_\delta$ in $X$, then the subspace $Y$ is completely metrizable.
+Assume the Axiom of Countable Choice. If $(X,d)$ is a complete metric space and $Y\subseteq X$ is $G_\delta$ in $X$, then the subspace $Y$ is completely metrizable.
 
 ## Facts & Assumptions
 
 **Given:** The objects, hypotheses, and choice principles stated above.
 
-[F1] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $A \subseteq X$. ([[def-g-delta-and-f-sigma-in-a-topological-space]]).
+[F1] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $A \subseteq X$. $A$ is a **$G_\delta$ set of $X$** when there is a sequence $(V_n)_{n\in\mathbb N}$ of open subsets of $X$ with $A=\bigcap_{n\in\mathbb N}V_n$, and an **$F_\sigma$ set of $X$** when there is a sequence $(F_n)_{n\in\mathbb N}$ of closed subsets of $X$ with $A=\bigcup_{n\in\mathbb N}F_n$. ([[def-g-delta-and-f-sigma-in-a-topological-space]]).
 
 [F2] If $X$ is completely metrizable and $U\subseteq X$ is open, then $U$ is completely metrizable in its subspace topology. ([[lem-open-subspace-complete-remetrisation]]).
 

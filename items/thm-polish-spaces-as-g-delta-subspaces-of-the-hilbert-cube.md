@@ -1,7 +1,7 @@
 ---
 id: thm-polish-spaces-as-g-delta-subspaces-of-the-hilbert-cube
 kind: theorem
-title: "A space is Polish exactly when it is homeomorphic to a $G_\\delta$ subspace of the Hilbert cube"
+title: "Under the Axiom of Choice, a space is Polish exactly when it is homeomorphic to a $G_\\delta$ subspace of the Hilbert cube"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-Assume the Axiom of Countable Choice. A space is Polish if and only if it is homeomorphic to a $G_\delta$ subspace of the Hilbert cube $[0,1]^{\mathbb N}$.
+Assume the Axiom of Choice, which supplies both the Dependent Choice carried by the Polish-subspace characterisation of [F2] and the Choice carried by the Tychonoff theorem of [F4]. A space is Polish if and only if it is homeomorphic to a $G_\delta$ subspace of the Hilbert cube $[0,1]^{\mathbb N}$.
 
 ## Facts & Assumptions
 

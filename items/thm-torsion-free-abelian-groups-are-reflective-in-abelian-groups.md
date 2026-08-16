@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-reflective-subcategory-and-reflector, def-annihilator-and-torsion-of-a-module, thm-quotient-group-universal-property]
+deps: [def-reflective-subcategory-and-reflector, def-annihilator-and-torsion-of-a-module, thm-quotient-group-universal-property, thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow]
 aliases: []
 landmark: false
 proof_strategy: constructive
@@ -35,7 +35,9 @@ with unit the quotient map.
 
 [L2] A homomorphism killing a normal subgroup factors uniquely through the corresponding quotient group ([[thm-quotient-group-universal-property]]).
 
-[L3] A full subcategory is reflective when every object has a supplied universal reflection arrow, equivalently when the inclusion has a left adjoint ([[def-reflective-subcategory-and-reflector]]).
+[L3] A full subcategory $\mathcal A$ of $\mathcal C$ is **reflective** when the inclusion $I$ has a left adjoint $R\dashv I$ ([[def-reflective-subcategory-and-reflector]]).
+
+[L4] For a full subcategory, supplying a reflector $R$ with an adjunction $R\dashv I$ is equivalent to supplying, for every object $C\in\mathcal C$, a specified universal arrow $(R_C,\eta_C)$ from $C$ to $I$; under that equivalence the specified universal arrows are the components of the reflection unit ([[thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow]]).
 
 ## Proof
 
@@ -45,4 +47,4 @@ with unit the quotient map.
 
 2.1 If $f:G\to H$ and $H$ is torsion-free, every torsion element $x$ has nonzero $n$ with $nf(x)=f(nx)=0$, so [L1] gives $f(x)=0$. Hence $\operatorname{Tor}(G)\subseteq\ker f$, and [L2] gives a unique $\bar f:G/\operatorname{Tor}(G)\to H$ through which $f$ factors. [step 1.1, L1, L2]
 
-3.1 The quotient maps are therefore supplied universal arrows from abelian groups to the full torsion-free subcategory. By [L3] they assemble into the reflector. [step 2.1, L3, discharge-construct] ∎
+3.1 Step 2.1 supplies, for every abelian group $G$, the quotient map $G\to G/\operatorname{Tor}(G)$ together with the unique factorisation of any map into a torsion-free group; that is exactly a specified universal arrow from $G$ to the inclusion. By the equivalence in [L4] these supplied arrows assemble into a reflector $R$ with $R\dashv I$, which by [L3] says the full torsion-free subcategory is reflective, with unit the quotient map. [step 2.1, L3, L4, discharge-construct] ∎

@@ -43,6 +43,6 @@ Consequently, the minimal polynomials of $T|_W$ and $\bar T$ both divide $\mu_T$
 
 **Proof technique:** direct.
 
-1.1 Induction on $k$ gives $(T|_W)^k=T^k|_W$ and $\bar T^{,k}(v+W)=T^kv+W$, beginning with the identity at $k=0$ and using [L1] at the successor step; summing with the coefficients of $p$ yields both displayed identities. [L1, L2, L4]
+1.1 Induction on $k$ gives $(T|_W)^k=T^k|_W$ and $\bar T^k(v+W)=T^kv+W$, beginning with the identity at $k=0$ and using [L1] at the successor step; summing with the coefficients of $p$ yields both displayed identities. [L1, L2, L4]
 
 2.1 Taking $p=\mu_T$ makes $p(T)=0$, so step 1.1 gives $p(T|_W)=0$ and $p(\bar T)=0$; [L3] then gives $\mu_{T|_W}\mid\mu_T$ and $\mu_{\bar T}\mid\mu_T$, including $W=0$, $W=V$, and $V=0$. [step 1.1, L2, L3, L4] ∎

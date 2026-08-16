@@ -37,8 +37,8 @@ Let $N:V\to V$ be an endomorphism and let $(v_{i,1},\ldots,v_{i,m_i})$ be finite
 
 **Proof technique:** induction.
 
-1.1 If the maximum string length is zero, the family is empty and the assertion is immediate. [base, L2]
+1.1 Induct on a natural number $r$ bounding all the string lengths, taking $r=0$ for the empty family, which has no strings and no maximum length. At $r=0$ the family is empty and the assertion is immediate, the empty union being independent by [L2]. [base, L2]
 
-1.2 Assume the result for families of maximum string length at most $r-1$, and let the present family have maximum length $r\ge1$. In a relation $\sum_{i,j}a_{i,j}v_{i,j}=0$, applying $N^{r-1}$ and using [L1] gives $\sum_{i:m_i=r}a_{i,r}v_{i,1}=0$. [L1, ih, algebra]
+1.2 Assume the result for families whose lengths are bounded by $r-1$, and let the present family have lengths bounded by $r\ge1$ with some string of length exactly $r$. In a relation $\sum_{i,j}a_{i,j}v_{i,j}=0$, applying $N^{r-1}$ and using [L1] gives $\sum_{i:m_i=r}a_{i,r}v_{i,1}=0$. [L1, ih, algebra]
 
 2.1 Independence of the initial vectors forces every coefficient $a_{i,r}$ to vanish. Removing the terminal vectors at position $r$ leaves a relation among truncated strings of maximum length at most $r-1$, so the induction hypothesis makes all remaining coefficients zero; [L2] gives independence of the whole union. [step 1.2, ih, L2, discharge-induction] ∎

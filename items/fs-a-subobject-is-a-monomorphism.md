@@ -40,7 +40,7 @@ $B=\{*\}$.
 
 **Proof technique:** counterexample.
 
-1.1 Let $m:A\to X$ send $0$ to $0$, and let $n:B\to X$ send $*$ to $0$. Both maps are injective, hence monic in $\mathbf{Set}$, but they are literally different morphisms because their domains differ. [given]
+1.1 Let $m:A\to X$ send $0$ to $0$, and let $n:B\to X$ send $*$ to $0$. Both maps are injective, and an injection $f$ in $\mathbf{Set}$ is monic: if $f\circ g=f\circ h$ then $f(g(x))=f(h(x))$ for every $x$, so $g(x)=h(x)$ by injectivity and $g=h$. They are nonetheless different morphisms, because their domains differ. [given]
 
 2.1 The unique bijections $u:A\to B$ and $v:B\to A$ satisfy $m=n\circ u$ and $n=m\circ v$. Thus $m$ and $n$ mutually factor and [L2] makes their factor maps inverse isomorphisms. [step 1.1, L2]
 

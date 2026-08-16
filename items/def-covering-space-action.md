@@ -27,5 +27,5 @@ pipeline_run: null
 
 ## Definition
 
-A left action of a group $G$ on a space $E$ is a **covering-space action** when every $e\in E$ has an open neighbourhood $U$ such that $gU\cap U=\varnothing$ for every nonidentity $g\in G$ ([[def-group-action]], [[def-homeomorphism-and-open-maps]]). This condition implies freeness ([[def-free-group-action]]) and makes the translates of $U$ pairwise disjoint.
+A left action of a group $G$ on a space $E$ **by homeomorphisms** is a **covering-space action** when every $e\in E$ has an open neighbourhood $U$ such that $gU\cap U=\varnothing$ for every nonidentity $g\in G$ ([[def-group-action]], [[def-homeomorphism-and-open-maps]]). Acting by homeomorphisms means that each map $e\mapsto g\cdot e$ is a homeomorphism of $E$; the underlying set action alone would not make the translates $gU$ open. This condition implies freeness ([[def-free-group-action]]) and makes the translates of $U$ pairwise disjoint.
 

@@ -38,7 +38,7 @@ Endpoint-fixed homotopic paths in the base have lifts with the same endpoint whe
 
 [F2] Every covering map is a surjective local homeomorphism, and each of its fibres is discrete in the subspace topology. ([[prop-covering-maps-are-local-homeomorphisms-with-discrete-fibres]]).
 
-[F3] Let $(X, \mathcal{T})$ be a topological space (def-topological-space). ([[def-connected-space]]).
+[F3] Let $(X, \mathcal{T})$ be a topological space (def-topological-space). A **separation** of $X$ is an ordered pair $(U,V)$ of open, nonempty, disjoint subsets of $X$ with $U\cup V=X$; $X$ is **disconnected** when a separation of $X$ exists and **connected** when none does. Since $U$ and $V$ are complementary each is clopen, so a separation is the same thing as a partition of $X$ into two nonempty clopen pieces. A subset $A\subseteq X$ is a **connected subset** when the subspace $(A,\mathcal T_A)$ is connected. ([[def-connected-space]]).
 
 ## Proof
 

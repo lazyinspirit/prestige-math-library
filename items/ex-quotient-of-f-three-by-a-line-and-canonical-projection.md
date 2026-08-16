@@ -33,7 +33,7 @@ Thus $\dim(F^3/W)=2$ and $\ker\pi=W$.
 
 **Given:** The coordinate line $W=F(1,0,0)$ in $F^3$.
 
-[L1] Quotient operations are well defined, and the canonical projection is linear with kernel the subspace being quotiented out ([[prop-quotient-vector-space-operations-and-projection]]).
+[L1] $v+W=v'+W$ exactly when $v-v'\in W$; the quotient operations are independent of representatives and make $V/W$ a vector space; and the canonical projection $\pi:V\to V/W$ is a surjective linear map with $\ker\pi=W$ ([[prop-quotient-vector-space-operations-and-projection]]).
 
 [L2] Representatives of a quotient basis, placed after a basis of $W$, form a basis of the original space ([[lem-quotient-basis-lifts-to-an-adapted-basis]]).
 

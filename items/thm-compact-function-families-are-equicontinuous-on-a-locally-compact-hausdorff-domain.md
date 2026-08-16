@@ -41,8 +41,8 @@ Let $X$ be a locally compact Hausdorff space, let $Y$ be a metric space, and let
 
 1.1 If $X=\varnothing$ or $\mathcal K=\varnothing$, the conclusion is vacuous. Otherwise fix $x\in X$ and $\varepsilon>0$. [L3]
 
-1.2 For each $f\in\mathcal K$, continuity of evaluation at $(f,x)$ gives open neighbourhoods $O_f$ of $f$ and $U_f$ of $x$ such that $d(g(y),f(x))<\varepsilon/3$ whenever $g\in O_f$ and $y\in U_f$. [L1]
+1.2 Call a pair $(O,U)$ of open sets **admissible at** $f\in\mathcal K$ when $f\in O$, $x\in U$, and $d(g(y),f(x))<\varepsilon/3$ for every $g\in O$ and every $y\in U$. Continuity of evaluation at $(f,x)$, which [L1] supplies, makes at least one pair admissible at each $f\in\mathcal K$. Let $\mathcal A$ be the set of all triples $(f,O,U)$ with $(O,U)$ admissible at $f$. This set is defined outright and no pair is selected, so no choice principle is used. [L1]
 
-2.1 The sets $O_f$ cover $\mathcal K$. By compactness choose $f_1,\ldots,f_m$ whose $O_{f_i}$ cover it, and put $U=U_{f_1}\cap\cdots\cap U_{f_m}$. [L2, step 1.2]
+2.1 The open sets $O$ occurring in triples of $\mathcal A$ cover $\mathcal K$, because each $f\in\mathcal K$ lies in the $O$ of some admissible triple. Applying [L2] to the cover indexed by $\mathcal A$ yields finitely many triples $(f_1,O_1,U_1),\ldots,(f_m,O_m,U_m)$ of $\mathcal A$ whose $O_i$ already cover $\mathcal K$; only this finite selection is made. Put $U=U_1\cap\cdots\cap U_m$, an open neighbourhood of $x$ as a finite intersection. [L2, step 1.2]
 
-3.1 For $g\in\mathcal K$ choose $i$ with $g\in O_{f_i}$. If $y\in U$, then both $y$ and $x$ lie in $U_{f_i}$, so $d(g(y),g(x))<2\varepsilon/3<\varepsilon$. The neighbourhood $U$ works for all $g$, proving equicontinuity. [L3, step 1.2, step 2.1] ∎
+3.1 Let $g\in\mathcal K$ and take $i\le m$ with $g\in O_i$. If $y\in U$ then $y\in U_i$ and $x\in U_i$, so admissibility at $f_i$ gives $d(g(y),f_i(x))<\varepsilon/3$ and $d(g(x),f_i(x))<\varepsilon/3$, whence $d(g(y),g(x))<2\varepsilon/3<\varepsilon$. The one neighbourhood $U$ works for every $g\in\mathcal K$, which is what [L3] requires for equicontinuity at $x$. [L3, step 1.2, step 2.1] ∎

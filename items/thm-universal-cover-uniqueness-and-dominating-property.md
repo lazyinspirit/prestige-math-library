@@ -1,11 +1,11 @@
 ---
 id: thm-universal-cover-uniqueness-and-dominating-property
 kind: theorem
-title: "For a path-connected locally path-connected base, universal covers are uniquely isomorphic over the base and lift to every connected covering"
+title: "For a path-connected locally path-connected base, a universal cover maps uniquely over the base to every connected covering, and any two universal covers are uniquely isomorphic"
 status: draft
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-altered
 deps: [def-universal-covering-space, thm-covering-space-lifting-criterion, thm-uniqueness-of-lifts-from-a-connected-space, prop-local-path-connectedness-lifts-and-descends-along-coverings]
 justified_by: []
@@ -28,7 +28,9 @@ pipeline_run: null
 
 ## Statement
 
-Let $B$ be path-connected and locally path-connected. After basepoints over the same point are fixed, a universal cover of $B$ has a unique covering map to every connected covering of $B$; in particular any two universal covers are uniquely isomorphic over $B$.
+Let $B$ be path-connected and locally path-connected. After basepoints over the same point are fixed, a universal cover of $B$ admits a unique based continuous map over $B$ to every connected covering of $B$; in particular any two universal covers of $B$ are uniquely isomorphic over $B$.
+
+The map to a connected covering is asserted here only as a continuous map over the base. The classical stronger form, that this map is itself a covering map, needs a surjectivity argument and evenly covered neighbourhoods for it, and is not established on this page.
 
 ## Facts & Assumptions
 
@@ -48,7 +50,7 @@ Let $B$ be path-connected and locally path-connected. After basepoints over the 
 
 1.1 Let the base be path-connected and locally path-connected and fix points over a common basepoint. [given, F4, F2, F1]
 
-2.1 The lifting criterion applies to a universal cover because its fundamental group is trivial, giving a unique covering map to any connected covering. [step 1.1, F1, F2, F3]
+2.1 By [F1] the total space of a universal cover is simply connected, so its fundamental group is trivial and the subgroup condition of [F2] holds for any target covering. [F2] therefore supplies a based lift to any connected covering, and asserts that lift to be unique. What [F2] delivers is a continuous map over the base; it carries no covering-map conclusion, and no later step supplies one. [step 1.1, F1, F2, F3]
 
 3.1 Applying this in both directions between two universal covers and using uniqueness of lifts makes the composites identities. [step 2.1, F3, F1, F4]
 

@@ -40,6 +40,6 @@ $$\int_\gamma\overline z\,dz=-\pi i,\qquad \int_\eta\overline z\,dz=-4i.$$
 
 1.1 Along $\gamma$, $\overline{\gamma(t)}\gamma'(t)=e^{-i(\pi-t)}(-i)e^{i(\pi-t)}=-i$, so [L1] integrated from $0$ to $\pi$ gives $-\pi i$. [L1, algebra]
 
-1.2 On a segment $z(t)=z_0+td$, direct integration gives $\int\overline z\,dz=\overline{z_0}d+|d|^2/2$. Applying this to $-1\to2i$ and $2i\to1$ gives $-2i$ on each segment. [L1, algebra]
+1.2 On a segment $z(t)=z_0+td$ with $0\le t\le1$, direct integration gives $\int\overline z\,dz=\overline{z_0}d+|d|^2/2$. For $-1\to2i$ we have $z_0=-1$ and $d=1+2i$, so $|d|^2=5$ and the value is $(-1)(1+2i)+5/2=3/2-2i$; for $2i\to1$ we have $z_0=2i$ and $d=1-2i$, so $|d|^2=5$ and the value is $(-2i)(1-2i)+5/2=-3/2-2i$. [L1, algebra]
 
-2.1 Add the two segment values by [L2] to obtain $-4i$. The unequal results prove path dependence. [step 1.1, step 1.2, L2] ∎
+2.1 Add the two segment values by [L2]: $(3/2-2i)+(-3/2-2i)=-4i$. Since $-\pi i\ne-4i$, the unequal results prove path dependence. [step 1.1, step 1.2, L2] ∎

@@ -39,7 +39,7 @@ $S\hookrightarrow X$; this includes $S=\varnothing$.
 
 **Proof technique:** direct.
 
-1.1 For an injection $m:A\to X$, the corestriction $\bar m:A\to m[A]$ is a bijection and satisfies $m=\iota_{m[A]}\circ\bar m$, while $\iota_{m[A]}=m\circ\bar m^{-1}$. Thus $m$ mutually factors with the inclusion of its image and represents that subset by [L1] and [L2]. [L1, L2]
+1.1 A monomorphism $m:A\to X$ in $\mathbf{Set}$ is injective: if $m(a)=m(a')$, the two maps $g,h:\{*\}\to A$ with $g(*)=a$ and $h(*)=a'$ satisfy $m\circ g=m\circ h$, so $g=h$ and $a=a'$. Conversely an injection is monic by the same cancellation. For such an $m$, the corestriction $\bar m:A\to m[A]$ is a bijection and satisfies $m=\iota_{m[A]}\circ\bar m$, while $\iota_{m[A]}=m\circ\bar m^{-1}$. Thus $m$ mutually factors with the inclusion of its image and represents that subset by [L1] and [L2]. [L1, L2]
 
 2.1 If the inclusions of subsets $S,T\subseteq X$ mutually factor, their image sets in $X$ coincide, hence $S=T$. Conversely equal subsets give the same inclusion. Therefore taking the image and taking the inclusion are inverse assignments between subobjects and subsets. [step 1.1, L1]
 

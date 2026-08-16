@@ -29,4 +29,6 @@ It is the smallest $T$-invariant subspace containing $v$. The vector $v$ is a **
 
 The **annihilator ideal of $v$** is
 $$\operatorname{Ann}_T(v):=\{p\in F[x]:p(T)v=0\}.$$
-Its unique monic generator, whose existence is proved in [[prop-vector-annihilator-is-well-defined]], is the **vector annihilator** $m_{T,v}$. For $v=0$, the ideal is all of $F[x]$ and $m_{T,0}=1$.
+When $V$ is finite-dimensional this ideal is nonzero and has a unique monic generator, whose existence is proved in [[prop-vector-annihilator-is-well-defined]]; that generator is the **vector annihilator** $m_{T,v}$. For $v=0$, the ideal is all of $F[x]$ and $m_{T,0}=1$.
+
+Finite dimensionality is not a convenience: it is what forces the ideal to be nonzero, and without it the ideal can vanish. On $V=\bigoplus_{n\ge0}Fe_n$ with $T(e_n)=e_{n+1}$ and $v=e_0$, every nonzero $p=\sum_{k\le m}a_kx^k$ gives $p(T)v=\sum_{k\le m}a_ke_k\ne0$, so $\operatorname{Ann}_T(v)=(0)$ and there is no monic generator. It is not necessary, however: for $T=0$ on any $V$ and any $v\ne0$, $p(T)v=p(0)v$, so $\operatorname{Ann}_T(v)=(x)$ and $m_{T,v}=x$.

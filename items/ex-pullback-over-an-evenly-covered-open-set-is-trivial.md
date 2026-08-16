@@ -44,7 +44,7 @@ If $U$ is evenly covered by $p:E\to B$, then the pullback of $p$ along the inclu
 
 **Proof technique:** direct.
 
-1.1 For the inclusion $U\hookrightarrow X$ of an evenly covered open set, identify the pullback with the disjoint union of the sheets over $U$. [given, F2, F1, F3]
+1.1 For the inclusion $U\hookrightarrow B$ of an evenly covered open set of the base, identify the pullback with the disjoint union of the sheets over $U$. [given, F2, F1, F3]
 
 2.1 Write the explicit mutually inverse maps over $U$ and verify their continuity from the pullback subspace topology. [step 1.1, F1, F2]
 

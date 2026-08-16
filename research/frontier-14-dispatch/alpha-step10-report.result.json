@@ -1,0 +1,21 @@
+{
+  "role": "alpha",
+  "label": "step10-report",
+  "run": "frontier-14",
+  "covers": [
+    "all"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-16T03:00:22.286Z",
+  "ended_at": "2026-08-16T03:22:25.310Z",
+  "ms": 1323024,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/frontier-14-dispatch/alpha-step10-report.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/frontier-14-dispatch/alpha-step10-report.prompt.md",
+  "tail": "The step-10 report is written to `research/frontier-14-step10-report.md`.\n\n## What it says\n\n**The run built 9 A/B pairs, 18 pages, 340 items**, all `draft`. Both judge lanes read every item — 896 calls, 0 nulls.\n\n**Roughly 130 confirmed fatal defects were found and repaired**, ~102 of them at step 6 where a repair is free. The report groups every one by defect type (inflated dependency citation — again the dominant class; false/overstrong statement, title or definition; missing hypothesis or choice scope; invalid inference; invalid witness) and by location (title/Statement, proof, Facts, Remark, page prose, contract boundary rows), naming item ids and dispositions.\n\n**This level is not publishable today.** Three things are open, and I verified each myself rather than relaying a report:\n\n1. **Two fatal defects deliberately unrepaired** — `thm-cech-complete-spaces-are-baire` and `thm-simple-continued-fractions-parametrise-the-irrationals`. Both true theorems with unproved proofs; both need an authoring pass, which step 8 forbids. I re-read both on disk; they stand.\n2. **The step-7 judge receipt was never closed.** Step 8 named 23 repaired items for rejudge and no stage ran it. I recomputed each item's hash under the judges' own normalization: **19 of 23 have no post-repair verdict from either lane**, 3 have one, 1 has both. `level-coverage --verify-current-context` fails with 103 errors. Only 2 of 340 items carry a `verification.judge` stamp on disk.\n3. **`proof-contract --strict` is red (26 errors).** Step 8 regenerated stale quotes into the *merged* contract; step 9's re-merge rebuilt it from the *batch* files, which were never regenerated, and every stale quote came back. Verified byte-for-byte.\n\nNotable machinery findings that outlive the run: step 7 and step 8 ran concurrently, so each step-8 repair re-armed the sweep on its pair-mates and 8 items flipped pass→reject on byte-identical text; a reader task file with a wrong output path destroyed a report whose four fatal findings survived only in a dispatch transcript; `citation-fidelity` found zero instances of the class it was built for while 15 were confirmed by hand; `boundary-audit`'s template detector is defeated by this run's template; `finite-smoke` runs 1 check across 291 proof-bearing items and should be reported inapplicable, not passed.\n\nAlso stated: zero published items were modified (verified independently of the impact receipt), the impact baseline was taken correctly this time, and the delegation to repair a published dependency was considered once and declined with a written recommendation."
+}

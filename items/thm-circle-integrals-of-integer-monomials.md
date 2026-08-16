@@ -34,9 +34,9 @@ $$\int_\gamma(z-a)^m\,dz=\begin{cases}2\pi i,&m=-1,\\0,&m\ne-1.\end{cases}$$
 
 [L2] Negative integer powers are defined exactly for nonzero complex bases ([[def-complex-integer-powers]]).
 
-[L3] The complex exponential is entire with derivative itself and is additive under sums ([[thm-complex-exponential-is-entire-with-derivative-itself]], [[thm-complex-exponential-addition-and-real-extension]]).
+[L3] The complex exponential is entire with derivative itself and satisfies $\exp(z+w)=\exp z\exp w$ ([[thm-complex-exponential-is-entire-with-derivative-itself]], [[thm-complex-exponential-addition-and-real-extension]]).
 
-[L4] Euler's identity gives $\exp(2\pi i k)=1$ for every integer $k$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]).
+[L4] For real $x,y$, $\exp(x+iy)=e^x(\cos y+i\sin y)$ and $|\exp(x+iy)|=e^x$; in particular $e^{i\pi}+1=0$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]).
 
 [L5] If a real function $G$ is differentiable on $[a,b]$ and $G'$ is integrable, then $\int_a^bG'=G(b)-G(a)$ ([[thm-ftc-second-part]]).
 
@@ -50,6 +50,6 @@ $$\int_\gamma(z-a)^m\,dz=\begin{cases}2\pi i,&m=-1,\\0,&m\ne-1.\end{cases}$$
 
 2.1 If $m=-1$, the expression in step 1.1 is the constant $i$, whose integral from $0$ to $2\pi$ is $2\pi i$. [assume-case exceptional, step 1.1, algebra]
 
-2.2 If $m\ne-1$, an antiderivative is $r^{m+1}\exp(i(m+1)t)/(m+1)$ by [L3]. Apply the real theorem [L5] to its two components using [L6]; the complex integral is the endpoint difference, which is $0$ by [L4]. [assume-case regular, step 1.1, L3, L4, L5, L6]
+2.2 If $m\ne-1$, an antiderivative is $r^{m+1}\exp(i(m+1)t)/(m+1)$ by [L3]. Apply the real theorem [L5] to its two components using [L6]; the complex integral is the endpoint difference $r^{m+1}\bigl(\exp(2\pi i(m+1))-1\bigr)/(m+1)$. Write $k:=m+1$, a nonzero integer. For $k>0$ the addition law in [L3] gives $\exp(2\pi ik)=\exp(i\pi)^{2k}$, and $\exp(i\pi)=-1$ by [L4], so $\exp(2\pi ik)=(-1)^{2k}=1$; for $k<0$ the addition law gives $\exp(2\pi ik)\exp(-2\pi ik)=\exp(0)=1$ with $\exp(-2\pi ik)=1$ by the previous case, so again $\exp(2\pi ik)=1$. The endpoint difference is therefore $0$. [assume-case regular, step 1.1, L3, L4, L5, L6, algebra]
 
 3.1 The integer cases $m=-1$ and $m\ne-1$ are exhaustive, proving the formula. [step 2.1, step 2.2, cases-exhaustive] ∎

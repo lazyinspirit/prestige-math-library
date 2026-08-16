@@ -1,0 +1,23 @@
+{
+  "role": "alpha",
+  "label": "6b-b",
+  "run": "frontier-14",
+  "covers": [
+    "4",
+    "5",
+    "6"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-15T22:02:56.918Z",
+  "ended_at": "2026-08-15T22:56:55.336Z",
+  "ms": 3238418,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/frontier-14-dispatch/alpha-6b-b.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/frontier-14-dispatch/alpha-6b-b.prompt.md",
+  "tail": "Step 6b is complete for batches 4, 5, 6. Report: `research/frontier-14-alpha-b-6b.md`.\n\n## Adjudication\n\n**All 63 reader findings adjudicated from disk** — 27 confirmed fatal, 36 confirmed nonfatal, **0 false positives**. In every case the reader's claim about what the cited Statement contains was accurate. I downgraded two of reader 6's fatals (R6-7, R6-9) on a load-bearing test: an inflated citation is fatal when a numbered step leans on the inflated part, nonfatal when the added clause is true but unused. Both were repaired anyway, since step 8 will not permit it.\n\n**The one false Statement.** `thm-special-adjoint-functor-theorem-objectwise-form` branch 2 omitted preservation of all small limits while its proof needed the comma category complete. I recomputed the counterexample — `U` constant at `2`, `C=1`, giving two disjoint copies of **Set** with no initial object — and it stands. Repaired by narrowing, with the counterexample recorded in the Statement.\n\n**All seven refuters returned** and found **five confirmed fatal defects the readers and I had missed** — including a circular inference in `thm-a-complete-locally-small-category-with-a-jointly-weakly-initial-set-has-an-initial-object` (\"both are cones, so they're equal\" — the limit property gives a unique mediator per cone, not equality), which GAFT and Freyd representability rest on. Repaired with Freyd's joint-equalizer argument.\n\n**Two of those five were defects in my own repairs**: an `m*` that doesn't exist on the zero space in my R4-5 fix, and a GAFT functor-form citation in my R6-24 fix that asserted hypotheses were unnecessary while citing a theorem requiring them. That is the strongest evidence in the report that adjudicated repairs need reading too.\n\n## Three things I'd flag\n\n1. **`citation-fidelity.mjs` detected zero instances of the class it was built for** — 0 candidates over 407 citations, against 15 confirmed inflated restatements in the same text. It checks quote integrity, not inflation.\n2. **`boundary-audit.mjs`'s cluster detector is defeated by this run's template**, which embeds the item *title* (the tool strips only id and case). It reported \"no reuse\" while **240 of batch 6's 248 `not_applicable` rows are that template**. I confirmed no *further* row is contradicted; rewriting them is batch-6 Beta work, flagged not silently accepted.\n3. **My first refuter launch died silently** — nohup'd inside a background Bash task, killed with its process group. Caught by checking liveness, not by trusting `exit 0`.\n\n**Three findings referred rather than repaired**: a published item's title omitting its Choice hypothesis, and the proper-class encoding of subobject collections (two items) — both need decisions outside my delegation.\n\nGates: `precheck` 112/112, `proof-contract --strict` 0 errors on all three, `risk-report --require-reviewed` 0 errors (86 reviews, 43 from my own full reading), `boundary-audit` no contradictions, `url-sweep` 11/11 live. I verified source locators by extracting PDF text and **corrected four batch-6 page ranges** that each excluded the result they named. Batches 4 and 6 have **no live finite-smoke coverage** (0 checks) — recorded as unchecked, not passing."
+}

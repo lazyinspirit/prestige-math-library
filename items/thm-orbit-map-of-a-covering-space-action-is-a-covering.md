@@ -34,7 +34,7 @@ For a covering-space action of $G$ on $E$, the orbit map $E\to E/G$ is a coverin
 
 **Given:** The objects, hypotheses, and choice principles stated above.
 
-[F1] A left action of a group $G$ on a space $E$ is a **covering-space action** when every $e\in E$ has an open neighbourhood $U$ such that $gU\cap U=\varnothing$ for every nonidentity $g\in G$ (def-group-action, def-homeomorphism-and-open-maps). This condition implies freeness (def-free-group-action) and makes the translates of $U$ pairwise disjoint. ([[def-covering-space-action]]).
+[F1] A left action of a group $G$ on a space $E$ **by homeomorphisms** is a **covering-space action** when every $e\in E$ has an open neighbourhood $U$ such that $gU\cap U=\varnothing$ for every nonidentity $g\in G$ (def-group-action, def-homeomorphism-and-open-maps). Acting by homeomorphisms means that each map $e\mapsto g\cdot e$ is a homeomorphism of $E$; the underlying set action alone would not make the translates $gU$ open. This condition implies freeness (def-free-group-action) and makes the translates of $U$ pairwise disjoint. ([[def-covering-space-action]]).
 
 [F2] A **covering map** is a continuous surjection $p:E\to B$ such that every $b\in B$ has an open neighbourhood $U$ for which $p^{-1}(U)$ is a disjoint union of open sets $V_j$, called **sheets**, and each restriction $p|_{V_j}:V_j\to U$ is a homeomorphism (def-continuous-map-top, def-homeomorphism-and-open-maps, def-disjoint-union-topology). Such a $U$ is **evenly covered**, and $p^{-1}(b)$ is the **fibre** over $b$. A covering is **trivial** when it is isomorphic over $B$ to a product projection $B\times F\to B$ with $F$ discrete. ([[def-covering-map-and-evenly-covered-neighbourhoods]]).
 
@@ -50,11 +50,11 @@ For a covering-space action of $G$ on $E$, the orbit map $E\to E/G$ is a coverin
 
 **Proof technique:** direct.
 
-1.1 For a neighbourhood whose nonidentity translates are disjoint, its orbit image is open in the quotient and its full preimage is the disjoint union of all translates. [given, F6, F2, F1]
+1.1 Let $U$ be a neighbourhood whose nonidentity translates are disjoint. Each $g$ acts by a homeomorphism of $E$ by [F1], so every translate $gU$ is open, and the full preimage of the orbit image of $U$ is $\bigcup_{g\in G}gU$, a disjoint union of open sets. That preimage being open makes the orbit image open in the quotient topology of [F3], and the orbit map is then an open continuous surjection, so [F6] applies to it. [given, F6, F3, F2, F1]
 
 2.1 Each translate maps homeomorphically onto that quotient neighbourhood. [step 1.1, F6, F2, F3]
 
-3.1 The action is free automatically and embeds the acting group in the deck group. [step 2.1, F4, F1, F5]
+3.1 The action is free automatically, and when $E$ is nonempty this embeds the acting group in the deck group: freeness makes $g\cdot e=e$ force $g=1$, so distinct group elements give distinct translates. The nonemptiness is needed — on $E=\varnothing$ every translate is the identity, so a nontrivial $G$ does not embed. [step 2.1, F4, F1, F5]
 
 4.1 If the total space is path-connected, compare any deck transformation at one point with the unique group translate taking that point to its image; one-point determination then proves equality with that translate. [step 3.1, F4, F5, F1]
 

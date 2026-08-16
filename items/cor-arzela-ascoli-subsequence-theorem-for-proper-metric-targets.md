@@ -1,7 +1,7 @@
 ---
 id: cor-arzela-ascoli-subsequence-theorem-for-proper-metric-targets
 kind: corollary
-title: "A pointwise bounded equicontinuous sequence into a proper metric target has a uniformly convergent subsequence"
+title: "Under the Axiom of Choice, a pointwise bounded equicontinuous sequence on a nonempty compact metric domain into a proper metric target has a uniformly convergent subsequence"
 status: draft
 origin: session
 provenance:

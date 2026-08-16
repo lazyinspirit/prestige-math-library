@@ -40,7 +40,7 @@ Let $E=(0,2)\sqcup(1,2)$ and map both summands by inclusion to $B=(0,2)$. This m
 
 [F3] **The underlying set.** Let $I$ be a set and let $X_i$ be a set for each $i \in I$. The **disjoint union** is $$\bigsqcup_{i \in I} X_i \;:=\; \bigcup_{i \in I} \big(X_i \times \{i\}\big) ,$$ whose elements are the pairs $(x, i)$ with $i \in I$ and $x \in X_i$. For $j \in I$ the $j$-th **canonical injection** is $$\kappa_j : X_j \to \bigsqcup_{i \in I} X_i, \qquad \kappa_j(x) := (x, j).$$ *The construction is what makes the word "disjoint" honest.* Each $\kappa_j$ is injective (def-injection-surjection-bijection), since $(x,j) = (x',j)$ forces $x = x'$; the images $\kappa_j[X_j] = X_j \times \{j\}$ are pairwise disjoint, since the second coordinate determines $j$; and their union is the whole set. So no assumption that the $X_i$ are disjoint as sets is needed, and none is made: the tag $i$ separates the copies even when $X_i = X_{i'}$ for $i \ne i'$. ([[def-disjoint-union-topology]]).
 
-[F4] Throughout, $\mathbb{R}$ is the complete ordered field (def-complete-ordered-field, def-ordered-field) with its order (def-real-order). ([[def-interval]]).
+[F4] Throughout, $\mathbb{R}$ is the complete ordered field (def-complete-ordered-field, def-ordered-field) with its order (def-real-order). A subset $I\subseteq\mathbb R$ is **order-convex** when $x,y\in I$ and $x\le z\le y$ imply $z\in I$, and the **intervals** of $\mathbb R$ are the nine listed forms, among them $[a,b]=\{x:a\le x\le b\}$ and $(a,b)=\{x:a<x<b\}$. ([[def-interval]]).
 
 ## Counterexample
 

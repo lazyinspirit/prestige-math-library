@@ -1,7 +1,7 @@
 ---
 id: thm-polish-subspaces-are-exactly-g-delta-subspaces
 kind: theorem
-title: "Under countable choice, a subspace of a Polish space is Polish exactly when it is $G_\\delta$"
+title: "Under Dependent Choice, a subspace of a Polish space is Polish exactly when it is $G_\\delta$"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-Assume the Axiom of Countable Choice. A subspace of a Polish space is Polish if and only if it is a $G_\delta$ subset.
+Assume Dependent Choice, which yields the instances of Countable Choice used below. A subspace of a Polish space is Polish if and only if it is a $G_\delta$ subset.
 
 ## Facts & Assumptions
 

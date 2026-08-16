@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [def-reflective-subcategory-and-reflector, prop-empty-limits-and-colimits-are-terminal-and-initial-objects]
+deps: [def-reflective-subcategory-and-reflector, prop-empty-limits-and-colimits-are-terminal-and-initial-objects, thm-the-adjunction-hom-set-bijection-under-local-smallness]
 aliases: []
 landmark: false
 proof_strategy: counterexample
@@ -36,11 +36,13 @@ object is a fixed singleton $1$.
 
 [L2] The colimit of the empty diagram is an initial object ([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]).
 
+[L3] For locally small categories, an adjunction determines hom-set bijections natural in both variables, and conversely every such natural family of bijections determines a unique unit and counit satisfying the triangle identities, hence a unique adjunction structure ([[thm-the-adjunction-hom-set-bijection-under-local-smallness]]).
+
 ## Refutation
 
 **Proof technique:** counterexample.
 
-1.1 The constant functor $R:\mathbf{Set}\to\mathcal A$ with value $1$ is left adjoint to the inclusion: both $\operatorname{Hom}_{\mathcal A}(1,1)$ and $\operatorname{Hom}_{\mathbf{Set}}(X,1)$ are singletons, naturally in $X$. Hence $\mathcal A$ is reflective by [L1]. [L1]
+1.1 The constant functor $R:\mathbf{Set}\to\mathcal A$ with value $1$ is left adjoint to the inclusion: both $\operatorname{Hom}_{\mathcal A}(1,1)$ and $\operatorname{Hom}_{\mathbf{Set}}(X,1)$ are singletons, naturally in $X$. By the converse clause of [L3] that natural family of bijections determines a unit and counit satisfying the triangle identities, hence an adjunction $R\dashv I$, and [L1] then makes $\mathcal A$ reflective. [L1, L3]
 
 1.2 In $\mathcal A$, the object $1$ is initial and is therefore the empty colimit. In $\mathbf{Set}$ the empty colimit is $\varnothing$ by [L2], and $\varnothing$ is not an object of $\mathcal A$. [L2]
 

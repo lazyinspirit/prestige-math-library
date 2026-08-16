@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-preservation-reflection-creation-continuity-and-cocontinuity, def-small-finite-and-large-limits-completeness-and-cocompleteness, rem-category-theory-class-and-size-conventions, def-category, lem-ordinal-basics, def-adjunction-by-unit-counit-and-triangle-identities]
+deps: [def-preservation-reflection-creation-continuity-and-cocontinuity, def-small-finite-and-large-limits-completeness-and-cocompleteness, rem-category-theory-class-and-size-conventions, def-category, lem-ordinal-basics, def-adjunction-by-unit-counit-and-triangle-identities, thm-the-adjunction-hom-set-bijection-under-local-smallness]
 aliases: []
 landmark: false
 proof_strategy: contradiction
@@ -38,18 +38,18 @@ unique functor $U:\mathbf{Ord}^{\mathrm{op}}\to\mathbf 1$.
 
 [L3] Under the library's definable-class convention, a category may have definable-class object and morphism collections ([[def-category]]).
 
-[L4] Every set of ordinals has an ordinal supremum, namely its union, and every ordinal has a strictly larger successor ([[lem-ordinal-basics]]).
+[L4] For ordinals: $\alpha\notin\alpha$; $\alpha^{+}=\alpha\cup\{\alpha\}$ is an ordinal; if $A$ is any set of ordinals then $\bigcup A$ is an ordinal; and $\alpha\subseteq\beta$ if and only if $\alpha\in\beta$ or $\alpha=\beta$ ([[lem-ordinal-basics]]).
 
-[L5] An adjunction $F\dashv U$ supplies natural bijections $\operatorname{Hom}(F(-),-)\cong\operatorname{Hom}(-,U(-))$ ([[def-adjunction-by-unit-counit-and-triangle-identities]]).
+[L5] For locally small $\mathcal C$ and $\mathcal D$, an adjunction $F\dashv G$ determines bijections $\mathcal D(Fc,d)\to\mathcal C(c,Gd)$ natural in $c$ and $d$ ([[thm-the-adjunction-hom-set-bijection-under-local-smallness]]).
 
 ## Refutation
 
 **Proof technique:** contradiction.
 
-1.1 Regard the ordinals as a definable-class thin category under their usual order and take its opposite. For a small diagram in $\mathbf{Ord}^{\mathrm{op}}$, the union of its set of object ordinals is a supremum in $\mathbf{Ord}$, hence a limit in the opposite category; for the empty diagram the union is $0$. Thus $\mathbf{Ord}^{\mathrm{op}}$ is complete in the small-diagram sense of [L1]. [L1, L3, L4]
+1.1 Regard the ordinals as a definable-class thin category under their usual order and take its opposite. Let $A$ be the set of object ordinals of a small diagram. By [L4], $\bigcup A$ is an ordinal; each $\alpha\in A$ satisfies $\alpha\subseteq\bigcup A$, so $\alpha\le\bigcup A$ by the inclusion criterion in [L4], and if $\alpha\subseteq\beta$ for every $\alpha\in A$ then $\bigcup A\subseteq\beta$. Hence $\bigcup A$ is the least upper bound of $A$ in $\mathbf{Ord}$, that is, a greatest lower bound and so a limit in the opposite category; for the empty diagram the union is $0$. Thus $\mathbf{Ord}^{\mathrm{op}}$ is complete in the small-diagram sense of [L1]. [L1, L3, L4]
 
-1.2 Suppose $U$ had a left adjoint $F$, and put $\beta=F(*)$. The bijection in [L5] would make $\operatorname{Hom}_{\mathbf{Ord}^{\mathrm{op}}}(\beta,\alpha)$ nonempty for every ordinal $\alpha$. In the opposite ordinal order this says $\alpha\le\beta$ for every ordinal $\alpha$. [assume-contra, L5]
+1.2 Suppose $U$ had a left adjoint $F$, and put $\beta=F(*)$. Both $\mathbf{Ord}^{\mathrm{op}}$ and $\mathbf 1$ are locally small, being thin, so [L5] applies and gives $\operatorname{Hom}_{\mathbf{Ord}^{\mathrm{op}}}(\beta,\alpha)\cong\operatorname{Hom}_{\mathbf 1}(*,U(\alpha))$, which is a singleton; hence the left side is nonempty for every ordinal $\alpha$. In the opposite ordinal order this says $\alpha\le\beta$ for every ordinal $\alpha$. [assume-contra, L5]
 
 2.1 The unique functor $U:\mathbf{Ord}^{\mathrm{op}}\to\mathbf 1$ preserves every small limit, because every cone in the terminal category is limiting. It is therefore continuous by [L2]. [step 1.1, L2]
 
-3.1 Taking the successor $\beta^+$ contradicts [L4], since $\beta<\beta^+$. Hence no such left adjoint exists, even though the source is complete and the functor is continuous. [step 2.1, L4, discharge-contradiction] ∎
+3.1 By [L4] the successor $\beta^{+}=\beta\cup\{\beta\}$ is an ordinal with $\beta\in\beta^{+}$, so $\beta\subseteq\beta^{+}$, while $\beta\ne\beta^{+}$ because $\beta\notin\beta$; hence $\beta<\beta^{+}$, contradicting the conclusion of step 1.2 that every ordinal is at most $\beta$. Therefore no such left adjoint exists, even though the source is complete and the functor is continuous. [step 1.2, step 2.1, L4, discharge-contradiction] ∎

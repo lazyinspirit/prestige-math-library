@@ -1,7 +1,7 @@
 ---
 id: cor-open-closed-and-g-delta-subspaces-of-completely-metrizable-spaces
 kind: corollary
-title: "Open, closed, and $G_\\delta$ subspaces of completely metrizable spaces are completely metrizable"
+title: "Open and closed subspaces of a completely metrizable space are completely metrizable, and under Dependent Choice so is every $G_\\delta$ subspace"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-Every open, closed, or $G_\delta$ subspace of a completely metrizable space is completely metrizable, including the empty subspace.
+Every open or closed subspace of a completely metrizable space is completely metrizable, including the empty subspace. Assuming Dependent Choice, the same holds for every $G_\delta$ subspace.
 
 ## Facts & Assumptions
 

@@ -40,7 +40,7 @@ If $X$ is nonempty, path-connected, locally path-connected, and semilocally simp
 
 [F3] A space $X$ is **semilocally simply connected at $x\in X$** when there is a neighbourhood $U$ of $x$ and a basepoint-preserving inclusion $(U,x)\hookrightarrow(X,x)$ whose induced map on fundamental groups is trivial (def-neighbourhood-top, def-induced-homomorphism-on-fundamental-groups, def-based-loops-and-fundamental-group). It is semilocally simply connected when this holds at every point. The neighbourhood need not itself be simply connected. ([[def-semilocally-simply-connected-space]]).
 
-[F4] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $x \in X$. Subsets carry the subspace topology (def-subspace-topology-top); connectedness is def-connected-space and path-connectedness is def-path-connected. ([[def-locally-connected]]).
+[F4] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $x \in X$. Subsets carry the subspace topology (def-subspace-topology-top); connectedness is def-connected-space and path-connectedness is def-path-connected. $X$ is **locally connected at $x$** when for every open $U$ with $x\in U$ there is an open **connected** $V$ with $x\in V\subseteq U$, and **locally connected** when this holds at every point; $X$ is **locally path-connected at $x$** when for every open $U$ with $x\in U$ there is an open **path-connected** $V$ with $x\in V\subseteq U$, and **locally path-connected** when this holds at every point. ([[def-locally-connected]]).
 
 ## Proof
 

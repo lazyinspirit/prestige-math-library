@@ -1,7 +1,7 @@
 ---
 id: thm-fundamental-theorem-for-complex-line-integrals
 kind: theorem
-title: "The line integral of a function with a continuous primitive is the primitive's endpoint increment along every rectifiable path"
+title: "The line integral of a continuous function admitting a primitive is that primitive's endpoint increment along every rectifiable path"
 status: draft
 origin: session
 provenance:
@@ -54,7 +54,7 @@ $$\int_\gamma f(z)\,dz=F(\gamma(b))-F(\gamma(a)).$$
 
 **Proof technique:** direct.
 
-1.1 Fix $\varepsilon>0$. By continuity of $f$, for each point $p$ of the trace choose a ball $B(p,\rho_p)$ contained in the open domain on which $|f(u)-f(p)|<\varepsilon/2$. The half-radius balls cover the compact trace by [L6], so [L7] supplies $\delta>0$ such that any two trace points within $\delta$ lie in one half-radius ball. Their joining segment stays in the corresponding full ball, and $|f(u)-f(z)|<\varepsilon$ all along it. [L1, L3, L6, L7, choose, algebra]
+1.1 Fix $\varepsilon>0$. For a point $p$ of the trace let $S_p$ be the set of $r\in(0,1]$ such that $B(p,r)$ lies in the open domain and $|f(u)-f(p)|<\varepsilon/2$ for every $u\in B(p,r)$. Continuity of $f$ at $p$ and openness of the domain make $S_p$ nonempty, and $S_p$ is downward closed in $(0,1]$, so $r_p:=\tfrac12\sup S_p$ is a positive real belonging to $S_p$; the assignment $p\mapsto r_p$ is defined outright, not selected, so no choice principle is used. The balls $B(p,r_p)$ cover the compact trace by [L6], so [L7] supplies $\delta>0$ such that any two trace points at distance below $\delta$ lie in a single $B(p,r_p)$. That ball is convex, so the segment joining them stays inside it, and $|f(u)-f(z)|<\varepsilon$ all along that segment. [L1, L3, L6, L7, algebra]
 
 2.1 For trace points $z,w$ as in step 1.1, apply [L4] componentwise to the straight segment and then [L8] to $f-f(z)$. This gives $F(w)-F(z)=f(z)(w-z)+r(z,w)$ with $|r(z,w)|\le\varepsilon|w-z|$. [step 1.1, L3, L4, L8]
 

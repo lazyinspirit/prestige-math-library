@@ -32,7 +32,7 @@ $$\int_\sigma z\,dz=\int_\rho z\,dz=\frac12.$$
 
 [L1] Complex polynomials are entire with the usual derivative formula ([[thm-complex-polynomials-and-rational-functions-are-holomorphic]]).
 
-[L2] A primitive evaluates every rectifiable contour integral by its endpoint increment ([[thm-fundamental-theorem-for-complex-line-integrals]]).
+[L2] Let $F$ be a primitive of a continuous function $f$ on an open set containing the trace of a rectifiable contour $\gamma:[a,b]\to\mathbb C$. If $F'=f$ is continuous, then $\int_\gamma f(z)\,dz=F(\gamma(b))-F(\gamma(a))$ ([[thm-fundamental-theorem-for-complex-line-integrals]]).
 
 [L3] Piecewise-$C^1$ contour integrals agree with their parametric formulas ([[thm-riemann-stieltjes-and-parametric-contour-integrals-agree]]).
 
@@ -40,8 +40,8 @@ $$\int_\sigma z\,dz=\int_\rho z\,dz=\frac12.$$
 
 **Proof technique:** direct.
 
-1.1 The primitive of $(z-i)^3$ is $(z-i)^4/4$ by [L1], so [L2] gives $((1-i)^4-(-i)^4)/4=(-4-1)/4=-5/4$. [L1, L2, algebra]
+1.1 By [L1] the polynomial $(z-i)^3$ is entire, hence continuous, and $(z-i)^4/4$ is a primitive of it whose derivative is that same continuous polynomial; so the hypotheses of [L2] hold and [L2] gives $((1-i)^4-(-i)^4)/4=(-4-1)/4=-5/4$. [L1, L2, algebra]
 
-1.2 The polynomial $z$ has primitive $z^2/2$ by [L1], and both $\sigma$ and $\rho$ have endpoints $0,1$, so [L2] gives $1/2$ on each. [L1, L2]
+1.2 By [L1] the polynomial $z$ is entire with continuous derivative and has primitive $z^2/2$, again meeting the hypotheses of [L2]; both $\sigma$ and $\rho$ have endpoints $0,1$, so [L2] gives $1/2$ on each. [L1, L2]
 
 2.1 Direct substitution into [L3] gives $\int_0^1\sigma(t)\sigma'(t)dt$ and $\int_0^1\rho(t)\rho'(t)dt$; each is the endpoint difference of $\gamma(t)^2/2$, confirming the same values with both orientations explicit. [step 1.2, L3, algebra] ∎

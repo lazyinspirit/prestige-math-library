@@ -29,7 +29,7 @@ For monomorphisms into a fixed object, mutual factorisation as defined in [[def-
 
 **Given:** Monomorphisms $m:A\to C$, $n:B\to C$, and $p:D\to C$, with the mutual-factorisation relation of [[def-subobject-and-quotient-object]].
 
-[L1] A monomorphism is left-cancellable, an epimorphism is right-cancellable, and identities are both monic and epic ([[def-monomorphism-and-epimorphism]]).
+[L1] A morphism $f$ is **monic** when $f\circ g=f\circ h$ implies $g=h$ for every parallel pair $g,h$, and **epic** when $g\circ f=h\circ f$ implies $g=h$; thus monomorphisms are left-cancellable and epimorphisms right-cancellable ([[def-monomorphism-and-epimorphism]]).
 
 [L2] A morphism with a two-sided inverse is an isomorphism, and that inverse is unique ([[def-isomorphism-groupoid-and-connected-category]]).
 

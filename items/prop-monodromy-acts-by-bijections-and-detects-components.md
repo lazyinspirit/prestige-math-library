@@ -38,7 +38,7 @@ Monodromy acts on each covering fibre by bijections. Its orbit through $e$ is ex
 
 [F2] For every pointed topological space $(X,x_0)$, the product $$[\alpha][\beta]=[\alpha*\beta]$$ is well defined and makes $\pi_1(X,x_0)$ a group. Its identity is the class of the constant loop $c_{x_0}$, and $[\alpha]^{-1}=[\bar\alpha]$. ([[thm-fundamental-group-laws]]).
 
-[F3] Throughout, $I := [0,1] = \{\, t \in \mathbb{R} : 0 \le t \le 1 \,\}$ (def-interval) carries the subspace topology inherited from $\mathbb{R}$ with its usual topology (def-subspace-topology-top, lem-real-line-is-a-metric-space, def-metric-topology, def-metrizable-space). It is called the **unit interval**. ([[def-path-connected]]).
+[F3] Throughout, $I := [0,1] = \{\, t \in \mathbb{R} : 0 \le t \le 1 \,\}$ (def-interval) carries the subspace topology inherited from $\mathbb{R}$ with its usual topology (def-subspace-topology-top, lem-real-line-is-a-metric-space, def-metric-topology, def-metrizable-space). It is called the **unit interval**. A **path in $X$ from $x$ to $y$** is a continuous map $\gamma:I\to X$ with $\gamma(0)=x$ and $\gamma(1)=y$, where $I:=[0,1]$ carries the subspace topology inherited from $\mathbb R$; $X$ is **path-connected** when any two of its points are joined by such a path. ([[def-path-connected]]).
 
 ## Proof
 

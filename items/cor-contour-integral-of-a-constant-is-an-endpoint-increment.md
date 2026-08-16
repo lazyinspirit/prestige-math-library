@@ -32,7 +32,7 @@ $$\int_\gamma c\,dz=c\bigl(\gamma(b)-\gamma(a)\bigr).$$
 
 [L1] Constant and identity functions obey the complex derivative algebra; in particular $(cz)'=c$ ([[thm-algebra-of-complex-derivatives]]).
 
-[L2] A continuous primitive evaluates a rectifiable contour integral by its endpoint increment ([[thm-fundamental-theorem-for-complex-line-integrals]]).
+[L2] Let $F$ be a primitive of a continuous function $f$ on an open set containing the trace of a rectifiable contour $\gamma:[a,b]\to\mathbb C$. If $F'=f$ is continuous, then $\int_\gamma f(z)\,dz=F(\gamma(b))-F(\gamma(a))$ ([[thm-fundamental-theorem-for-complex-line-integrals]]).
 
 ## Proof
 
@@ -40,4 +40,4 @@ $$\int_\gamma c\,dz=c\bigl(\gamma(b)-\gamma(a)\bigr).$$
 
 1.1 By [L1], $F(z)=cz$ is a primitive of the constant function $c$. [L1]
 
-2.1 Apply [L2] and simplify $F(\gamma(b))-F(\gamma(a))$. The cases $c=0$ and a constant path are included. [step 1.1, L2, algebra] ∎
+2.1 The constant function $c$ is continuous on all of $\mathbb C$, and $F'=c$ is that same constant, so the hypotheses of [L2] hold on any open set containing the trace. Apply [L2] and simplify $F(\gamma(b))-F(\gamma(a))=c\gamma(b)-c\gamma(a)$. The cases $c=0$ and a constant path are included. [step 1.1, L2, algebra] ∎

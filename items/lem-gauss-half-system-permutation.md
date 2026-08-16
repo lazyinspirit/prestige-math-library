@@ -1,7 +1,7 @@
 ---
 id: lem-gauss-half-system-permutation
 kind: lemma
-title: "Multiplication permutes an odd prime's signed half-system up to sign"
+title: "Multiplication by $a$ with $p\\nmid a$ permutes an odd prime's signed half-system up to sign"
 status: draft
 origin: session
 provenance:

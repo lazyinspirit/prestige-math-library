@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-For every topological space $X$, the meagre subsets of $X$ contain $\varnothing$, are closed under taking subsets, and are closed under countable unions.
+For every topological space $X$, the meagre subsets of $X$ contain $\varnothing$ and are closed under taking subsets; assuming the Axiom of Countable Choice, they are also closed under countable unions. Countable Choice is what selects one witnessing sequence of nowhere dense sets for each member of the countable family, before the flattening bijection is applied.
 
 ## Facts & Assumptions
 

@@ -1,7 +1,7 @@
 ---
 id: prop-vector-annihilator-is-well-defined
 kind: proposition
-title: "A vector annihilator is a unique monic divisor of the minimal polynomial"
+title: "The vector annihilator is the unique monic generator of $\\operatorname{Ann}_T(v)$ and divides the minimal polynomial"
 status: draft
 origin: session
 provenance:

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-nowhere-dense-meagre-and-residual-subsets, lem-pointwise-lipschitz-sets-in-c01-are-closed, lem-steep-polygonal-functions-are-dense-in-c01, thm-nowhere-differentiable-functions-are-dense-in-c01]
+deps: [def-nowhere-dense-meagre-and-residual-subsets, lem-pointwise-lipschitz-sets-in-c01-are-closed, lem-steep-polygonal-functions-are-dense-in-c01, thm-nowhere-differentiable-functions-are-dense-in-c01, prop-meagre-subsets-form-a-sigma-ideal]
 justified_by: []
 aliases: []
 landmark: false
@@ -42,12 +42,14 @@ Assume Dependent Choice. The nowhere differentiable functions form a residual su
 
 [F4] Assume the Axiom of Dependent Choice ($\mathrm{DC}$). Then the set of continuous functions $[0,1]\to\mathbb R$ having no finite two-sided derivative at an interior point and no finite one-sided derivative at either endpoint is dense in $C([0,1],\mathbb R)$ for the supremum metric. ([[thm-nowhere-differentiable-functions-are-dense-in-c01]]).
 
+[F5] For every topological space $X$, the meagre subsets of $X$ contain $\varnothing$, are closed under taking subsets, and are closed under countable unions ([[prop-meagre-subsets-form-a-sigma-ideal]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Use the published closed pointwise-Lipschitz sets and the dense steep-polygonal perturbations to show every such closed set has empty interior. [given, F3, F1, F2]
 
-2.1 Their countable union contains every function with a finite derivative at some point, so its complement is residual and consists of nowhere differentiable functions, with one-sided endpoint derivatives included. [step 1.1, F4, F1, F3]
+2.1 Their countable union $M$ is meagre by step 1.1 and contains every function with a finite derivative at some point, so the complement of $M$ is residual and consists of nowhere differentiable functions. The set $N$ of nowhere differentiable functions contains that residual complement, so its own complement is a subset of $M$; meagre sets are closed downward under subsets, being a sigma-ideal [F5], hence the complement of $N$ is meagre and $N$ is residual. One-sided endpoint derivatives are included. [step 1.1, F4, F1, F3, F5]
 
 3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎

@@ -48,6 +48,6 @@ Assume Dependent Choice. Every completely metrizable space is a Baire space.
 
 1.1 Choose a compatible complete metric using the definition already established by complete remetrisation. [given, F1, F2]
 
-2.1 Apply the published complete-metric Baire category theorem to every nonempty open subspace, and translate its dense-open conclusion back to the topology; the empty space is Baire vacuously. [step 1.1, F1, F2, F3]
+2.1 Apply the published complete-metric Baire category theorem [F2] to the whole space with the compatible complete metric of step 1.1, not to its open subspaces: restricting a complete metric to an open subspace need not leave it complete, as $(0,1)$ with the restricted Euclidean metric shows. [F2] already concludes that a countable intersection of dense open subsets of the whole space is dense, which is the Baire property; translate that conclusion back to the topology. The empty space is Baire vacuously. [step 1.1, F1, F2, F3]
 
 3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎

@@ -32,9 +32,11 @@ can neither wait on another batch nor cite one. Write only your own files.
 3. `README.md` — provenance, judge lineup, citation rules.
 4. `briefs/beta-scaffold.md` — **your base contract**, in full.
 5. `items/lem-cauchy-bounded.md` — the approved house-style exemplar.
-6. `research/frontier-13-batch-1.pages.json` and
-   `research/frontier-13-batch-1.notes.md` — the output shape you are producing,
-   from the most recent completed run.
+6. The most recently **completed** run's `-batch-1.pages.json` and
+   `-batch-1.notes.md` — the output shape you are producing. Find it rather than
+   assuming: `ls research/*-step10-report.md` names every finished run, and the
+   newest is the one to copy the shape from. A brief that hardcodes a run name
+   goes stale the moment the next one finishes.
 7. `research/frontier-14-step0-batching.md` — this run's frontier, batching,
    seam analysis and the one `requires` drift that was found and resolved.
 8. `research/frontier-14-PREVENTIONS.md` — **the specific defects earlier runs

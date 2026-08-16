@@ -1,7 +1,7 @@
 ---
 id: ex-hilbert-cube-as-a-compact-polish-universal-space
 kind: example
-title: "The Hilbert cube is compact, Polish, and universal for separable metrizable spaces"
+title: "Under the Axiom of Choice, the Hilbert cube is compact, Polish, and universal for separable metrizable spaces"
 status: draft
 origin: session
 provenance:
@@ -28,7 +28,7 @@ pipeline_run: null
 
 ## Example
 
-The Hilbert cube $[0,1]^{\mathbb N}$ is compact and Polish, and every separable metrizable space is homeomorphic to a subspace of it.
+Assume the Axiom of Choice. The Hilbert cube $[0,1]^{\mathbb N}$ is compact and Polish, and every separable metrizable space is homeomorphic to a subspace of it.
 
 ## Facts & Assumptions
 

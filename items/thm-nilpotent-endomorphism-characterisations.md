@@ -30,7 +30,9 @@ Let $N$ be an endomorphism of a nonzero $n$-dimensional vector space over $F$. T
 3. $\chi_N=x^n$;
 4. some ordered basis gives $N$ a strictly upper-triangular matrix.
 
-In that case $r$ is the nilpotency index. On the zero space all four readings hold in their empty forms: $N=0$, $\mu_N=\chi_N=1=x^0$, the empty matrix is strictly upper triangular, and the nilpotency index is $1$.
+In that case $r$ is the nilpotency index.
+
+The nonzero hypothesis is needed for condition 2. On the zero space the unique endomorphism $N=0$ is nilpotent with nilpotency index $1$, and $\mu_N=\chi_N=1=x^0$ while the empty matrix is strictly upper triangular; so conditions 1, 3 and 4 hold there, but condition 2 fails, since no integer $r$ satisfies $1\le r\le 0$. The exponent $0$ of $\mu_N$ is then not the nilpotency index $1$.
 
 ## Facts & Assumptions
 
@@ -56,4 +58,4 @@ In that case $r$ is the nilpotency index. On the zero space all four readings ho
 
 2.1 If $N$ is nilpotent, step 1.2 makes $\chi_N$ split, so [L3] gives an upper-triangular matrix; its diagonal entries are roots of $\chi_N=x^n$, hence are all zero, making it strictly upper triangular. Conversely, the $n$th power of a strictly upper-triangular $n\times n$ matrix is zero. [step 1.2, L3, algebra]
 
-3.1 For $V=0$, [L1] and [L4] give $\mu_N=\chi_N=1=x^0$, the unique empty matrix is strictly upper triangular, and the convention in [[def-nilpotent-endomorphism]] gives index $1$; together with steps 1.1-2.1 this proves every asserted case. [step 1.1, step 1.2, step 2.1, L1, L4] ∎
+3.1 For $V=0$, [L1] and [L4] give $\mu_N=\chi_N=1=x^0$, the unique empty matrix is strictly upper triangular, and the convention in [[def-nilpotent-endomorphism]] gives index $1$, so conditions 1, 3 and 4 hold; condition 2 asks for $r$ with $1\le r\le 0$ and no such integer exists, and the exponent $0$ of $\mu_N$ differs from the index $1$, which is why the equivalence is stated for $n>0$. Together with steps 1.1-2.1 this proves every asserted case. [step 1.1, step 1.2, step 2.1, L1, L4] ∎

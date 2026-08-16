@@ -26,7 +26,7 @@ pipeline_run: null
 For
 $$T:F^3\longrightarrow F^2,\qquad T(x,y,z)=(x+y,y+z),$$
 one has $\ker T=F(-1,1,-1)$ and $\operatorname{im}T=F^2$. The induced map
-$$\widetilde T:F^3/F(-1,1,-1)\longrightarrow F^2,qquad (x,y,z)+\ker T\longmapsto(x+y,y+z)$$
+$$\widetilde T:F^3/F(-1,1,-1)\longrightarrow F^2,\qquad (x,y,z)+\ker T\longmapsto(x+y,y+z)$$
 is an isomorphism, with inverse $(a,b)\mapsto(a,0,b)+\ker T$.
 
 ## Facts & Assumptions

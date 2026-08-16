@@ -24,7 +24,7 @@ pipeline_run: null
 ## Example
 
 Over any field, put $T=J_2(0)\oplus J_2(1)$. Then
-$$D=0I_2\oplus I_2=3T^2-2T^3,qquad N=T-D=J_2(0)\oplus J_2(0).$$
+$$D=0I_2\oplus I_2=3T^2-2T^3,\qquad N=T-D=J_2(0)\oplus J_2(0).$$
 Thus $T=D+N$, the operator $D$ is diagonal, $N^2=0$, and $DN=ND$.
 
 ## Facts & Assumptions

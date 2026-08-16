@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-path-lifting-for-covering-maps, cor-lifted-path-endpoints-depend-only-on-path-homotopy, thm-uniqueness-of-lifts-from-a-connected-space, def-induced-homomorphism-on-fundamental-groups, def-locally-connected]
+deps: [thm-path-lifting-for-covering-maps, cor-lifted-path-endpoints-depend-only-on-path-homotopy, thm-uniqueness-of-lifts-from-a-connected-space, def-induced-homomorphism-on-fundamental-groups, def-locally-connected, thm-induced-fundamental-group-map-functoriality]
 justified_by: []
 aliases: []
 landmark: true
@@ -42,13 +42,15 @@ Let $Y$ be path-connected and locally path-connected, let $f:(Y,y_0)\to(B,b_0)$ 
 
 [F4] Let $f:X\to Y$ be continuous and let $x_0\in X$. Composition sends a loop $\alpha$ at $x_0$ to the loop $f\circ\alpha$ at $f(x_0)$. Using the loop classes and fundamental group of def-based-loops-and-fundamental-group, the proposed **induced homomorphism** is $$f_*:\pi_1(X,x_0)\longrightarrow\pi_1(Y,f(x_0)),\qquad f_*([\alpha]):=[f\circ\alpha].$$ The next theorem proves that this value is independent of the representative, that it is a group homomorphism in the sense of def-group-homomorphism, and that induced maps respect identities, composition and homotopies that fix the basepoint. ([[def-induced-homomorphism-on-fundamental-groups]]).
 
-[F5] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $x \in X$. Subsets carry the subspace topology (def-subspace-topology-top); connectedness is def-connected-space and path-connectedness is def-path-connected. ([[def-locally-connected]]).
+[F5] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $x \in X$. Subsets carry the subspace topology (def-subspace-topology-top); connectedness is def-connected-space and path-connectedness is def-path-connected. $X$ is **locally connected at $x$** when for every open $U$ with $x\in U$ there is an open **connected** $V$ with $x\in V\subseteq U$, and **locally connected** when this holds at every point; $X$ is **locally path-connected at $x$** when for every open $U$ with $x\in U$ there is an open **path-connected** $V$ with $x\in V\subseteq U$, and **locally path-connected** when this holds at every point. ([[def-locally-connected]]).
+
+[F6] Let $f:(X,x_0)\to(Y,y_0)$ be continuous with $f(x_0)=y_0$. Then $f_*([\alpha])=[f\circ\alpha]$ is a well-defined group homomorphism, and for pointed continuous maps $\operatorname{id}_*=\operatorname{id}$ and $(g\circ f)_*=g_*\circ f_*$ ([[thm-induced-fundamental-group-map-functoriality]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For a based map $f:(Y,y_0)\to(X,x_0)$ with $Y$ path-connected and locally path-connected, necessity follows by functoriality. [given, F5, F1, F2, F4]
+1.1 For a based map $f:(Y,y_0)\to(X,x_0)$ with $Y$ path-connected and locally path-connected, necessity follows by functoriality: if a based lift $\widetilde f$ exists then $f=p\circ\widetilde f$, so $f_*=p_*\circ\widetilde f_*$ by the composition law of [F6], whence $f_*\pi_1(Y,y_0)\subseteq p_*\pi_1(E,e_0)$. [F4] is the definition of the induced map and expressly leaves functoriality to [F6]. [given, F5, F1, F2, F4, F6]
 
 2.1 For sufficiency, define the candidate lift at $y$ by lifting $f$ along any path from $y_0$; the subgroup inclusion makes the endpoint independent of the chosen path. [step 1.1, F1, F2, F5]
 

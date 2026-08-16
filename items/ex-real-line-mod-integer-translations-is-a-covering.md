@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-orbit-map-of-a-covering-space-action-is-a-covering, def-deck-transformation-and-deck-group, def-quotient-topology, def-integers]
+deps: [thm-orbit-map-of-a-covering-space-action-is-a-covering, def-deck-transformation-and-deck-group, def-quotient-topology, def-integers, lem-integer-part]
 justified_by: []
 aliases: []
 landmark: false
@@ -42,13 +42,15 @@ For the quotient by integer translation, $q:\mathbb R\to\mathbb R/\mathbb Z$ is 
 
 [F4] On the set $\mathbb{N} \times \mathbb{N}$ of pairs of natural numbers, define $$(a,b) \sim (c,d) \iff a + d = b + c.$$ This is an equivalence relation (lem-int-equivalence). The **integers** are the quotient $$\mathbb{Z} := (\mathbb{N} \times \mathbb{N}) / \sim,$$ and we write $[(a,b)]$ for the equivalence class of $(a,b)$. ([[def-integers]]).
 
+[F5] Identify $\mathbb Z$ with its canonical copy inside $\mathbb R$ along the embeddings $\mathbb N\to\mathbb Z\to\mathbb Q\to\mathbb R$; then for every real $x$ there is exactly one integer $m$ with $m\le x<m+1$, written $\lfloor x\rfloor$ ([[lem-integer-part]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 Use the equivalence relation $x\sim y$ iff $x-y$ is an integer and the quotient topology. [given, F3, F4]
+1.1 By [F5] the integers sit inside $\mathbb R$ as a subgroup under the ordered-field operations, so $x\sim y$ iff $x-y\in\mathbb Z$ is an equivalence relation on $\mathbb R$; [F4] supplies only the abstract construction of $\mathbb Z$ and not its copy in $\mathbb R$, so the embedding of [F5] is what makes the relation and the translations below meaningful. Take the quotient topology of [F3] on $\mathbb R/\mathbb Z$. [given, F3, F4, F5]
 
-2.1 Intervals of length less than one have pairwise disjoint integer translates whose quotient images are evenly covered. [step 1.1, F3, F4]
+2.1 For an **open** interval $I$ of length below $1$ the translates $I+k$, $k\in\mathbb Z$, are pairwise disjoint, since two points of $I$ differ by less than $1$ while distinct integer translates differ by at least $1$ in the order of [F5]; the preimage $q^{-1}(q[I])=\bigcup_{k\in\mathbb Z}(I+k)$ is then a union of open sets, so $q[I]$ is open and evenly covered. Openness of $I$ is required and not cosmetic: for $I=[0,\tfrac12]$ the preimage $\bigcup_{k\in\mathbb Z}[k,k+\tfrac12]$ is not open, so $q[I]$ is not even a neighbourhood. [step 1.1, F3, F4, F5]
 
 3.1 Verify directly that translations are deck transformations and that every deck transformation is the unique integer translation determined by the image of zero, without computing the fundamental group of the quotient. [step 2.1, F2, F3, F1]
 

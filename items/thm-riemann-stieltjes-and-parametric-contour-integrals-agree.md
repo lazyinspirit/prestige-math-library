@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-riemann-stieltjes-c1-integrator-reduction, def-scalar-and-vector-line-integrals-along-piecewise-c1-paths, def-vector-valued-derivative-and-integral, cor-piecewise-c1-paths-have-additive-speed-integral-length]
+deps: [thm-riemann-stieltjes-c1-integrator-reduction, def-scalar-and-vector-line-integrals-along-piecewise-c1-paths, def-vector-valued-derivative-and-integral, cor-piecewise-c1-paths-have-additive-speed-integral-length, thm-continuous-implies-integrable, cor-arc-length-accumulation-derivative-is-speed]
 aliases: []
 landmark: true
 proof_strategy: direct
@@ -33,7 +33,7 @@ The real and imaginary parts of the first display are the published vector line 
 
 **Given:** A piecewise-$C^1$ contour $\gamma=x+iy$, a continuous $f=u+iv$, and an admissible partition $(t_j)$.
 
-[L1] For a continuous integrator whose derivative extends continuously, the Riemann–Stieltjes integral equals the ordinary integral against that derivative ([[thm-riemann-stieltjes-c1-integrator-reduction]]).
+[L1] Let $f:[a,b]\to\mathbb R$ be Riemann integrable. Suppose $\alpha$ is continuous on $[a,b]$, differentiable on $(a,b)$, and $\alpha'$ extends continuously to $[a,b]$. Then $f$ is Riemann–Stieltjes integrable with respect to $\alpha$ and $\int_a^b f\,d\alpha=\int_a^b f(x)\alpha'(x)\,dx$ ([[thm-riemann-stieltjes-c1-integrator-reduction]]).
 
 [L2] The published scalar and vector line integrals are the sums of $\int f(\gamma)|\gamma'|$ and $\int\langle F(\gamma),\gamma'\rangle$ over the smooth pieces ([[def-scalar-and-vector-line-integrals-along-piecewise-c1-paths]]).
 
@@ -41,13 +41,17 @@ The real and imaginary parts of the first display are the published vector line 
 
 [L4] Vector-valued derivatives and integrals are defined componentwise ([[def-vector-valued-derivative-and-integral]]).
 
+[L5] Let $a<b$ be reals and let $f:[a,b]\to\mathbb R$ be continuous. Then $f$ is bounded and Riemann integrable on $[a,b]$ ([[thm-continuous-implies-integrable]]).
+
+[L6] Let $a<b$ and let $\gamma:[a,b]\to\mathbb R^n$ be $C^1$, and set $s_\gamma(t):=L_{[a,t]}(\gamma|_{[a,t]})$. Then $s_\gamma$ is differentiable on $[a,b]$ in the relative sense and $s_\gamma'(t)=\lVert\gamma'(t)\rVert_2$, the values at $a$ and $b$ being the relative one-sided derivatives ([[cor-arc-length-accumulation-derivative-is-speed]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 On each smooth piece, apply [L1] to the four component Stieltjes integrals; recombination gives $\int f(\gamma(t))(x'_j(t)+iy'_j(t))\,dt=\int f(\gamma(t))\gamma'_j(t)\,dt$. [L1, L4, algebra]
+1.1 On a nondegenerate smooth piece $[t_j,t_{j+1}]$ the integrands $u(\gamma(t))$ and $v(\gamma(t))$ are continuous, being composites of the continuous $f$ with the continuous $\gamma$, so [L5] makes each of the four component integrands Riemann integrable; the integrators $x_j,y_j$ are $C^1$ on the piece, hence continuous with continuously extending derivative. The hypotheses of [L1] therefore hold, and applying [L1] to the four component Stieltjes integrals and recombining gives $\int f(\gamma(t))(x'_j(t)+iy'_j(t))\,dt=\int f(\gamma(t))\gamma'_j(t)\,dt$. [L1, L4, L5, algebra]
 
-1.2 Applying [L1] to the arc-length integrator and using [L3] gives the absolute-integral formula, which is the scalar line integral in [L2]. [L1, L2, L3]
+1.2 On the same piece the arc-length integrator is $s_{\gamma_j}$, which by [L6] is differentiable with $s_{\gamma_j}'(t)=|\gamma'_j(t)|$, continuous because $\gamma_j$ is $C^1$; and $|f(\gamma(t))|$ is continuous, hence Riemann integrable by [L5]. So [L1] applies with $\alpha=s_{\gamma_j}$ and yields $\int|f(\gamma)|\,ds_{\gamma_j}=\int|f(\gamma(t))|\,|\gamma'_j(t)|\,dt$; summing over pieces and using [L3] to identify the total arc length gives the absolute-integral formula, which is the scalar line integral in [L2]. [L1, L2, L3, L5, L6]
 
 2.1 The real and imaginary parts in step 1.1 are exactly the vector line integrals of $(u,-v)$ and $(v,u)$ from [L2]. This uses the published real construction in a numbered step, with its piecewise-$C^1$ hypothesis unchanged. [step 1.1, L2]
 

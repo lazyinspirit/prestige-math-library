@@ -1,7 +1,7 @@
 ---
 id: thm-baire-sequence-space-is-polish
 kind: theorem
-title: "Baire sequence space is Polish and its standard ultrametric is complete"
+title: "Under the Axiom of Countable Choice, Baire sequence space is Polish, and its standard ultrametric is complete"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-On $\mathbb N^{\mathbb N}$ define $d(x,y)=0$ for $x=y$ and $d(x,y)=2^{-k}$ when $k$ is the least index with $x_k\ne y_k$. Then $d$ is a complete ultrametric inducing the cylinder topology, and Baire sequence space is separable and hence Polish.
+On $\mathbb N^{\mathbb N}$ define $d(x,y)=0$ for $x=y$ and $d(x,y)=2^{-k}$ when $k$ is the least index with $x_k\ne y_k$. Then $d$ is a complete ultrametric inducing the cylinder topology. Assuming the Axiom of Countable Choice, Baire sequence space is separable and hence Polish.
 
 ## Facts & Assumptions
 
@@ -40,7 +40,7 @@ On $\mathbb N^{\mathbb N}$ define $d(x,y)=0$ for $x=y$ and $d(x,y)=2^{-k}$ when 
 
 [F2] A topological space is **Polish** when it is separable (def-separable-space) and completely metrizable: its topology is induced by some complete metric (lem-complete-remetrisation). No particular compatible complete metric or countable dense subset is part of the structure. ([[def-polish-space]]).
 
-[F3] Let $(X,d)$ be a metric space (def-metric-space). ([[def-complete-metric-space]]).
+[F3] Let $(X,d)$ be a metric space (def-metric-space). $(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$ converges to a point of $X$; a subset $A\subseteq X$ is called complete when the metric subspace $(A,d_A)$ is complete. ([[def-complete-metric-space]]).
 
 [F4] **Assume the Axiom of Countable Choice**. Let $(A_n)_{n \in \mathbb{N}}$ be a family of at most countable sets indexed by $\mathbb{N}$. Then $$U = \bigcup_{n \in \mathbb{N}} A_n$$ is at most countable ([[thm-countable-union-of-countable]]).
 

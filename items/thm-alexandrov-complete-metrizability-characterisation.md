@@ -1,7 +1,7 @@
 ---
 id: thm-alexandrov-complete-metrizability-characterisation
 kind: theorem
-title: "Alexandrov's theorem: a subspace of a complete metric space is completely metrizable exactly when it is $G_\\delta$"
+title: "Alexandrov's theorem, under Dependent Choice: a subspace of a complete metric space is completely metrizable exactly when it is $G_\\delta$"
 status: draft
 origin: session
 provenance:

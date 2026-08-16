@@ -33,7 +33,7 @@ Each range below was read from extracted document text and checked for the named
 | Source and exact range read | Role in this scaffold |
 |---|---|
 | John M. Erdman, *A Companion to Real Analysis*, §21.2, items 21.2.1–21.2.7 and 21.2.13–21.2.15 in full; items 21.2.8–21.2.12 were not claimed, `https://web.pdx.edu/~erdman/CRA/COMPANION_ANALYSIS_pdf.pdf` | Primary textbook. Supplies the polynomial nonclosed example, duplication relation, lattice theorem, algebra-to-lattice lemma, two-point interpolation, real theorem, self-adjoint definition, complex theorem, and quotient representation. |
-| Berkeley Math 205B notes, Chapter 9, Theorem 9.3 through Theorem 9.6, including the complex remark after Theorem 9.3, `https://math.berkeley.edu/~moorxu/oldsite/notes/205b/205bmain.pdf` | Independent full lecture-note treatment of the real closed-algebra theorem and the Kakutani–Krein lattice route, plus the conjugation warning for the complex case. |
+| M. Xu, Math 205B notes from a course by R. Mazzeo (Stanford), Chapter 9, Theorem 9.3 through Theorem 9.6, including the complex remark after Theorem 9.3, `https://math.berkeley.edu/~moorxu/oldsite/notes/205b/205bmain.pdf` | Independent full lecture-note treatment of the real closed-algebra theorem and the Kakutani–Krein lattice route, plus the conjugation warning for the complex case. |
 | Eric Carlen, Rutgers topology notes, §1.6 in full from Theorem 1.26 through Theorem 1.30, including Lemmas 1.27–1.28, the self-adjoint definition, and the unnumbered disc-algebra counterexample, `https://sites.math.rutgers.edu/~carlen/502S13/Topology502.pdf` | Independent treatment of the nowhere-vanishing form, two compact sweeps, closed-algebra lattice lemma, complex theorem, disc counterexample, and trigonometric-polynomial application. |
 
 The coverage artifact records 27 headings or canonical obligations: 22 `included`, 4 `already-published`, and 1 `out-of-scope`. The single decline is Gelfand duality. It requires characters, spectra, Banach-algebra norms, and C-star structure rather than the uniform-approximation machinery of page 287, and is explicitly licensed to the planned page `gelfand-theory-and-commutative-c-star-algebras`. There are no `deferred` dispositions and no unnamed destinations.
@@ -44,7 +44,7 @@ The coverage artifact records 27 headings or canonical obligations: 22 `included
 2. Berkeley states the real theorem in closed-algebra form. The scaffold states density and reaches it by applying the lattice theorem to the uniform closure; it does not quote the closed form as if it already were the density statement.
 3. Erdman 21.2.15 supplies an abstract compact quotient/function-space representation. The scaffold chooses the canonical indistinguishability quotient and proves that realization. This is recorded as an AI-altered statement, not passed off as a verbatim source theorem.
 4. “Function algebra” is defined first without forcing a unit; unital, separating, and nowhere-vanishing are separate predicates. This is necessary because the nowhere-vanishing theorem is precisely the route that constructs the unit in the closure.
-5. The published coordinate-plane theorem states a bijection and coordinate arithmetic, not a topological homeomorphism. The disc and circle examples must derive $|z-w|=d_2(\Phi z,\Phi w)$ from the modulus definition before applying real-plane Heine–Borel.
+5. **Superseded by the step-3 fix pass.** The disc and circle examples use `def-complex-metric-convergence-and-continuity`, which states $|z-w|=d_2((x,y),(u,v))$ and supplies the complex metric directly; they do not infer topology from the coordinate-plane theorem.
 6. The published root-sum corollary says only: for $n\ge2$, the sum of all $n$th roots of unity is zero. The disc proof derives cancellation for each shifted exponent separately and never widens that citation.
 7. The legacy published roots item displays the old applied-embedding notation. This scaffold does not copy it; natural indices and exponents are written directly.
 
@@ -79,7 +79,7 @@ Every external item below was opened from `items/<id>.md`. No dependency is `leg
 | `def-complex-integer-powers` | Exact recursive natural- and integer-power convention; only natural powers occur in the finite averaging proof. |
 | `thm-complex-nth-roots-and-roots-of-unity` | Exact $n\ge1$ enumeration and distinctness claim, with the old notation left untouched in its published file; used to obtain a primitive root and the complete finite root set. |
 | `cor-sum-of-roots-of-unity` | Exact $n\ge2$ zero-sum Statement; AI-altered component checked against its short field-cancellation proof and used without the invented dyadic-filter strengthening. |
-| `lem-metrics-on-rn` | Exact Euclidean $d_2$ formula and metric conclusion; coordinate identity and triangle estimates were checked directly. |
+| `lem-metrics-on-rn` | **Superseded by the step-3 fix pass.** It is not a direct dependency of the repaired scaffold; `def-complex-metric-convergence-and-continuity` supplies the metric bridge. |
 | `thm-heine-borel-rn` | Exact closed-and-bounded iff compact clause for $\mathbb R^n$, with $n\ge1$ retained; the disc and circle use only $n=2$. |
 
 ## Planned component provenance
@@ -104,7 +104,7 @@ These are the step-5 frontmatter assignments. An AI-generated Statement occurs o
 | `lem-real-part-of-a-self-adjoint-complex-function-algebra` | literature-derived / ai-altered | The common reduction used in Erdman 21.2.14 and Carlen Theorem 1.29, rebuilt with the published field and conjugation laws. |
 | `thm-complex-stone-weierstrass-self-adjoint` | literature-derived / ai-altered | Erdman 21.2.14, Berkeley's complex remark, and Carlen Theorem 1.29; self-adjointness remains an explicit hypothesis. |
 | `cor-self-adjoint-algebra-generated-by-a-separating-family-is-dense` | ai-altered / ai-generated | Immediate source-backed specialization of the complex theorem; it is not a dependency of another planned item. |
-| `def-function-algebra-indistinguishability-quotient` | literature-derived / not-applicable | Erdman 21.2.2's duplication relation expressed as the canonical equivalence quotient. |
+| `def-function-algebra-indistinguishability-quotient` | **Superseded by the step-3 fix pass:** ai-altered / not-applicable | Erdman 21.2.15 supplies only an abstract representation space; the canonical equality-of-all-algebra-values quotient is a local strengthening. |
 | `thm-closed-real-function-algebras-are-function-spaces-on-their-quotients` | ai-altered / ai-altered | Erdman 21.2.15 supports the representation, while the canonical quotient realization and Hausdorff proof are made explicit locally. |
 
 ### `stone-weierstrass-general-examples`
@@ -115,7 +115,7 @@ These are the step-5 frontmatter assignments. An AI-generated Statement occurs o
 | `ex-trigonometric-polynomials-are-dense-on-the-circle` | literature-derived / ai-altered | Carlen Theorem 1.30, derived directly from complex Stone–Weierstrass without a Fourier convergence theorem. |
 | `ex-distance-function-lattice-is-dense-on-a-compact-metric-space` | ai-altered / ai-generated | Standard direct application of the lattice theorem; B leaf with continuity and separation checked from metric axioms. |
 | `ex-finite-space-function-algebras-interpolate-exactly` | ai-generated / ai-generated | Explicit finite indicator construction; B leaf. Step-5 truth-risk obligation: verify the empty product, finite Hausdorff discreteness, and both real and complex normalizations. |
-| `ex-two-point-duplication-algebra-and-its-quotient` | literature-derived / ai-altered | Erdman 21.2.2 and 21.2.15 specialized to the endpoint-identification algebra. |
+| `ex-two-point-duplication-algebra-and-its-quotient` | **Superseded by the step-3 fix pass:** literature-derived / ai-altered | Erdman 21.2.15 backs the representation pattern; the endpoint calculation and separators are local. Erdman 21.2.2 is not used here. |
 | `ex-polynomial-algebra-is-dense-but-not-closed-on-an-interval` | literature-derived / ai-altered | Erdman Example 21.2.1 plus 21.2.7, with $a<b$ and an explicit interior corner retained. |
 
 ## Proof-contract status
@@ -214,3 +214,328 @@ Required step-3 gates, rerun after the fixes:
 - `node tools/manifest-integrity.mjs --run frontier-14` — **PASS**: 18 pages owed, 18 present in manifests, no scope drift.
 
 An additional in-memory splice of the repaired Batch 7 manifest into the live plan also passes `validate-plan.mjs`: 24 Batch 7 items are checked among 4,684 planned items, 284 pages have item lists, and there are no cycles, forward references, B-leaf dependencies, undeclared prerequisites, or unresolved ids. This does not edit `plan-spec.json`.
+
+## Step-5 authoring
+
+### Items and pages authored
+
+All 24 spliced ids were authored: 18 A-page items and 6 B-page
+examples/counterexamples. Both page files were authored at `status: draft`.
+Every item has `status: draft` and `origin: session`; no item has
+`verification.audited`.
+
+The splice receipt has no `summary_corrections` member despite the dispatch
+saying that it would. It contains no replacement prose elsewhere. I therefore
+treated the A-page summary as the unchanged/`ok` case and copied the two
+paragraphs under `## Proposed A-page summary` above exactly. The B-page body has
+zero bytes after its frontmatter.
+
+The five definition items have no proof-bearing section, so precheck correctly
+does not print a result for them:
+
+- `def-two-point-duplication-property` — precheck not applicable (definition).
+- `def-separating-real-function-lattice` — precheck not applicable
+  (definition).
+- `def-unital-separating-real-function-algebra-general` — precheck not
+  applicable (definition).
+- `def-self-adjoint-complex-function-algebra` — precheck not applicable
+  (definition).
+- `def-function-algebra-indistinguishability-quotient` — precheck not
+  applicable (definition).
+
+The final targeted precheck printed the following result for every proof-bearing
+item:
+
+```text
+PASS items/prop-general-real-function-algebra-agrees-with-the-metric-definition.md (direct)
+PASS items/lem-two-point-interpolation-for-a-separating-real-function-lattice.md (direct)
+PASS items/lem-two-compact-cover-sweeps-for-function-lattices.md (direct)
+PASS items/thm-lattice-stone-weierstrass.md (direct)
+PASS items/lem-uniform-closure-of-a-general-real-function-algebra-is-a-lattice.md (direct)
+PASS items/thm-real-stone-weierstrass-general.md (direct)
+PASS items/lem-nowhere-vanishing-algebras-approximate-the-constant-one.md (direct)
+PASS items/thm-real-stone-weierstrass-dichotomy-for-separating-algebras.md (direct)
+PASS items/cor-real-stone-weierstrass-nowhere-vanishing-form.md (direct)
+PASS items/lem-real-part-of-a-self-adjoint-complex-function-algebra.md (direct)
+PASS items/thm-complex-stone-weierstrass-self-adjoint.md (direct)
+PASS items/cor-self-adjoint-algebra-generated-by-a-separating-family-is-dense.md (direct)
+PASS items/thm-closed-real-function-algebras-are-function-spaces-on-their-quotients.md (direct)
+PASS items/cex-disc-algebra-is-not-dense-without-self-adjointness.md (contradiction)
+PASS items/ex-trigonometric-polynomials-are-dense-on-the-circle.md (direct)
+PASS items/ex-distance-function-lattice-is-dense-on-a-compact-metric-space.md (direct)
+PASS items/ex-finite-space-function-algebras-interpolate-exactly.md (direct)
+PASS items/ex-two-point-duplication-algebra-and-its-quotient.md (direct)
+PASS items/ex-polynomial-algebra-is-dense-but-not-closed-on-an-interval.md (direct)
+
+19 checked, 0 failing — all clean
+```
+
+### Final component provenance and rationale
+
+The per-item tables under `## Planned component provenance` together with the
+five corrections under `### Step-3 provenance corrections` are the final
+per-component record. Authoring changed no provenance category. The final
+grouping, covering every authored id, is:
+
+- `literature-derived / not-applicable`: the separating real lattice, general
+  real algebra, and self-adjoint complex algebra definitions. Their Definitions
+  follow the cited Erdman, Berkeley, and Carlen formulations, with the
+  page-required predicates written separately and explicitly.
+- `ai-altered / not-applicable`: the two-point duplication and
+  indistinguishability-quotient definitions. Erdman supplies the source
+  concepts, while the authored forms respectively add the all-pairs singleton
+  convention and choose the canonical equality-of-all-algebra-values quotient.
+- `literature-derived / ai-altered`: the interpolation lemma, two compact
+  sweeps, lattice theorem, algebra-closure lattice lemma, real theorem,
+  approximate-unit lemma, real dichotomy, nowhere-vanishing corollary,
+  real-part lemma, complex dichotomy, disc counterexample, circle example,
+  endpoint-quotient example, and polynomial example. Each Statement is the
+  harvested result or faithful specialization; each proof was rebuilt into
+  numbered house steps against the exact published clauses recorded in the
+  contract.
+- `ai-altered / ai-altered`:
+  `thm-closed-real-function-algebras-are-function-spaces-on-their-quotients`.
+  Erdman supports the abstract representation, while the canonical quotient,
+  its Hausdorff proof, and the pullback isometry are local, fully written
+  constructions.
+- `ai-altered / ai-generated`: the metric/topological dictionary proposition,
+  the conjugate-generated-algebra corollary, and the distance-function lattice
+  example. Their Statements are direct house specializations of named
+  published definitions/theorems, and their local proofs are elementary
+  derivations. None is used as a load-bearing dependency by a later batch item.
+- `ai-generated / ai-generated`:
+  `ex-finite-space-function-algebras-interpolate-exactly`. It is a B-page leaf
+  with `generation.role: example`, and no item depends on it. The author-time
+  truth-risk pass checked the empty and singleton spaces separately, derived
+  discreteness from a finite listing plus Hausdorff separation, used only the
+  published natural-number-indexed finite-choice theorem, normalized both real
+  and complex separators, and verified the finite indicator expansion. No
+  counterexample was found. There is no registered finite-smoke family for this
+  analytic/topological claim, so the finite-smoke gate correctly ran zero
+  checks rather than inventing one.
+
+Every source-backed component retains at least one supporting URL. No
+`ai-generated` Statement or Construction is load-bearing. The final proof
+contract has 19 entries, 96 dependency/citation edges, one real input map for
+each numbered step, and 152 item-specific boundary dispositions.
+
+### Claim, dependency, coverage, and proof-strategy changes
+
+No id, title, item, or mathematical heading was changed or dropped.
+
+One claim was narrowed. The general compact-cover sweep now assumes that $X$ is
+nonempty. On an empty domain the two-point duplication property is vacuous and
+does not imply that $L$ contains a function, so the scaffold's planned empty
+branch was not licensed. The nonempty hypothesis makes the all-pairs property
+supply members of $L$ and closes both sweeps. The authored Statement, page
+strategy, proof steps, proof-contract input map, empty-boundary disposition, and
+this provenance rationale all move with that narrowing. Its source coverage row
+remains included because the actual two-sweep result is still authored.
+
+The polynomial example's Statement is unchanged, but its planned one-sided
+slope argument was replaced by an algebraic proof: if a polynomial equals
+$|x-c|$, subtracting $x-c$ gives a polynomial vanishing on $[c,b]$; the
+published finite-root bound forces it to be zero, contradicting the value at
+$a$. The page strategy, dependencies, Facts, proof contract, provenance
+rationale, and endpoint/degenerate dispositions use that final route.
+
+Five proof-bearing items needed genuine author-time dependency additions beyond
+the spliced baseline, synchronized between item frontmatter, the page manifest,
+Facts, proof contracts, and this report:
+
+- The quotient representation theorem adds
+  `lem-real-line-is-a-metric-space` and
+  `thm-metric-hausdorff-separation` for its actual real-valued Hausdorff
+  separation step.
+- The disc counterexample adds `thm-induction-principle` for the inline finite
+  geometric-sum identity.
+- The finite-space example adds `def-compact-space`,
+  `def-hausdorff-space`, and `lem-finite-choice` for the exact listing,
+  discreteness, and finite witness selections it uses.
+- The endpoint-quotient example adds `thm-heine-borel-r`,
+  `lem-real-line-is-a-metric-space`, and
+  `thm-metric-hausdorff-separation` to establish the compact Hausdorff domain
+  required by the representation theorem.
+- The polynomial example adds
+  `thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots`,
+  `thm-heine-borel-r`, `lem-real-line-is-a-metric-space`, and
+  `thm-metric-hausdorff-separation` for the algebraic nonclosedness proof and
+  the compact Hausdorff interval.
+
+No dependency was added merely to satisfy a checker. Across the 19 proof items,
+the 96 declared dependency edges are exactly the 96 contracted direct
+citations. Every definition dependency is linked and used in its Definition.
+
+Alpha's two coverage residuals were applied: the hollow extra
+“quotient relation and quotient-space construction” row was removed, and
+Erdman 21.2.2 was repointed to the authored duplication definition. The final
+coverage artifact has 28 harvested/canonical results: 23 `included`, 4
+`already-published`, 1 `out-of-scope`, and none `deferred`.
+
+### Blockers, omissions, and confidence
+
+There is no batch-7 mathematical, citation, dependency, source, permission, or
+write-scope blocker. `research/plan-spec.json` was not edited. No sibling-batch
+file, published dependency, or unrelated dirty file was edited.
+
+As instructed, `tools/gates.mjs` was not run and no judge was invoked. Step-6
+source-URL recovery/audit and Step-7 judging remain for their assigned roles.
+The report claims author-time proof, citation, boundary, render, dependency, and
+policy checks only; it does not claim an audit or judge verdict. The repository
+has no registered finite-smoke check for these claims. Repository-wide
+`git diff --check` also sees a pre-existing blank line at EOF in
+`.autopilot/autopilot.log`; the owned-scope `git diff --check` exits zero, and
+the unrelated `.autopilot` file was left untouched.
+
+### Gate output
+
+Terminal census and conclusion lines are copied verbatim below. For gates with
+long repository-wide inventories, the exact census, warning count, and
+conclusion lines are recorded rather than thousands of per-file rows.
+
+Final reflow:
+
+```text
+unchanged items/def-two-point-duplication-property.md
+unchanged items/def-separating-real-function-lattice.md
+unchanged items/def-unital-separating-real-function-algebra-general.md
+unchanged items/def-self-adjoint-complex-function-algebra.md
+unchanged items/prop-general-real-function-algebra-agrees-with-the-metric-definition.md
+unchanged items/lem-two-point-interpolation-for-a-separating-real-function-lattice.md
+unchanged items/lem-two-compact-cover-sweeps-for-function-lattices.md
+unchanged items/thm-lattice-stone-weierstrass.md
+unchanged items/lem-uniform-closure-of-a-general-real-function-algebra-is-a-lattice.md
+unchanged items/thm-real-stone-weierstrass-general.md
+unchanged items/lem-nowhere-vanishing-algebras-approximate-the-constant-one.md
+unchanged items/thm-real-stone-weierstrass-dichotomy-for-separating-algebras.md
+unchanged items/cor-real-stone-weierstrass-nowhere-vanishing-form.md
+unchanged items/lem-real-part-of-a-self-adjoint-complex-function-algebra.md
+unchanged items/thm-complex-stone-weierstrass-self-adjoint.md
+unchanged items/cor-self-adjoint-algebra-generated-by-a-separating-family-is-dense.md
+unchanged items/def-function-algebra-indistinguishability-quotient.md
+unchanged items/thm-closed-real-function-algebras-are-function-spaces-on-their-quotients.md
+unchanged items/cex-disc-algebra-is-not-dense-without-self-adjointness.md
+unchanged items/ex-trigonometric-polynomials-are-dense-on-the-circle.md
+unchanged items/ex-distance-function-lattice-is-dense-on-a-compact-metric-space.md
+unchanged items/ex-finite-space-function-algebras-interpolate-exactly.md
+unchanged items/ex-two-point-duplication-algebra-and-its-quotient.md
+unchanged items/ex-polynomial-algebra-is-dense-but-not-closed-on-an-interval.md
+```
+
+Repository-wide precheck:
+
+```text
+3938 checked, 0 failing — all clean
+```
+
+Plan validation:
+
+```text
+OK — declared page order is acyclic and consistent; no item-level cycles, forward
+references, B-page dependencies, or unresolved ids among the 284 page(s) with item lists.
+NOTE: 887 planned page(s) carry no item list yet (marked * above). Their reading
+order is guaranteed; their item dependencies are not yet asserted, so re-run this
+after writing each page's items.
+```
+
+Content policy and coverage:
+
+```text
+content-policy: 24 scoped item(s), 0 error(s), 0 warning(s)
+coverage-checklist: 1 page(s), 28 harvested result(s), 0 error(s), 0 warning(s)
+```
+
+Strict proof contract:
+
+```text
+proof-contract: 0 error(s), 0 warning(s), 19/19 item(s) checked
+```
+
+Citation fidelity:
+
+```text
+citation-fidelity: 96 citation(s) over 19 authored item(s)
+
+QUOTE NOT FOUND — none; every recorded quote appears in its cited item.
+
+WIDENING CANDIDATES — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+Boundary audit:
+
+```text
+boundary-audit: 152 rows over 1 contract file(s); 61 marked not_applicable
+
+TEMPLATE REUSE — none at or above 3 members.
+
+CONTRADICTED DISPOSITIONS — none found by the three detectors.
+
+Every line above is a candidate for a human read, not a verdict.
+```
+
+Batch-scoped render, prose, and citation checks:
+
+```text
+OK — 26 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+
+26 file(s) checked. 0 error(s), 0 warning(s).
+
+OK — no positional claim contradicts the spec.
+citecheck: 24 item(s) scanned
+
+OK — every recognised elementary move cites a home that states it.
+```
+
+Dependency, forward-reference, and external-reference gates:
+
+```text
+depcheck: 4984 items (4595 published), 292 pages
+159 warning(s):
+OK — no cycles, all references resolve, no draft items on published pages.
+
+fwdcheck: 4984 items, 0 open forward reference(s), 399 closed, 34 load bearing
+OK — every forward reference is declared, points strictly forward, is closed by a planned later page, stays off the spine unless orientation only, and introduces no cycle.
+
+124 warning(s):
+OK — every recorded-not-proved statement is a cited remark with no proof, and every consequence is marked.
+```
+
+Repository-wide render and prose gates:
+
+```text
+OK — 5276 file(s): no wikilink inside math, no nested or unbalanced
+delimiters, no multiline display block, every math span parses under the real
+KaTeX, and every frontmatter block parses under the renderer's
+YAML parser.
+
+5276 file(s) checked. 0 error(s), 569 warning(s).
+  library-scope-denial: 206
+  count-in-prose: 189
+  count-of-this-page: 174
+
+(re-run with --warnings to list them; warnings are heuristic and have legitimate cases)
+
+OK — no positional claim contradicts the spec.
+```
+
+Risk routing and registered finite smoke:
+
+```text
+risk-report: 0 error(s), 19 item(s) routed
+finite-smoke: 0 error(s), 0 check(s)
+```
+
+Manifest/frontmatter and run-scope reconciliation:
+
+```text
+manifest-item-consistency: 24/24 checked, 0 error(s); A summary exact true; B body 0 byte(s)
+manifest-integrity: 18 page(s) owed, 18 in the manifests
+  no scope drift
+```
+
+The owned-scope `git diff --check` exited zero with no terminal output.

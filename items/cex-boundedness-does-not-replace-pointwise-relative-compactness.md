@@ -33,7 +33,7 @@ The pointwise-relative-compactness hypothesis in Ascoli–Arzelà cannot be weak
 
 [L2] In a discrete topology every singleton is open ([[def-standard-topologies]]).
 
-[L3] The discrete distance is a metric ([[def-metric-space]]).
+[L3] A metric on a set $X$ is a function $d:X\times X\to\mathbb R$ such that for all $x,y,z\in X$: (M1) $d(x,y)=0$ if and only if $x=y$; (M2) $d(x,y)=d(y,x)$; (M3) $d(x,z)\le d(x,y)+d(y,z)$ ([[def-metric-space]]).
 
 [L4] Compact-open subbasic sets are $S(K,V)=\{f:f[K]\subseteq V\}$ ([[def-compact-open-topology-for-topological-domains]]).
 
@@ -41,7 +41,7 @@ The pointwise-relative-compactness hypothesis in Ascoli–Arzelà cannot be weak
 
 **Proof technique:** direct.
 
-1.1 The function $d$ satisfies the metric axioms: symmetry and separation are immediate, and the only nonzero distance is $1$, so the triangle inequality holds. Its metric topology is discrete because $B(n,1)=\{n\}$. [L2, L3]
+1.1 The function $d$ satisfies the three axioms of [L3]: (M1) holds because $d(m,n)=0$ was defined to mean $m=n$; (M2) holds because the defining cases are symmetric in $m,n$; and for (M3), if $d(m,p)=0$ the inequality is trivial, while if $d(m,p)=1$ then $m\ne p$, so $n$ differs from at least one of $m,p$ and the right side is at least $1$. So $d$ is a metric. Its metric topology is discrete because $B(n,1)=\{n\}$. [L2, L3]
 
 1.2 Every map $X\to Y$ is constant. The whole family $\mathcal F=C(X,Y)$ is equicontinuous, and $\mathcal F(*)=Y$ is bounded because it lies in the radius-$2$ ball about $0$. [given]
 

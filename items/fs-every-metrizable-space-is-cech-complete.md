@@ -1,7 +1,7 @@
 ---
 id: fs-every-metrizable-space-is-cech-complete
 kind: false-statement
-title: "Every metrizable space is Čech-complete"
+title: "FALSE: every metrizable space is Čech-complete"
 status: draft
 origin: session
 provenance:
@@ -28,17 +28,17 @@ pipeline_run: null
 
 ## Statement
 
-The false claim is: every metrizable space is Čech-complete.
+Assume the ultrafilter lemma and the Axiom of Choice, the hypotheses carried by the equivalence of [F3] that the refutation uses. The false claim is: every metrizable space is Čech-complete.
 
 ## Facts & Assumptions
 
 **Given:** The objects, hypotheses, and choice principles stated above.
 
-[F1] The false claim is: $\mathbb Q$, with its usual subspace topology from $\mathbb R$, is a Baire space. ([[fs-the-rational-numbers-form-a-baire-space]]).
+[F1] $\mathbb Q$, with its usual subspace topology from $\mathbb R$, is **not** a Baire space. The cited item is a false-statement item: the sentence displayed under its Statement heading is the claim it refutes, and what it establishes is that negation ([[fs-the-rational-numbers-form-a-baire-space]]).
 
 [F2] Assume Dependent Choice. Every Čech-complete space is a Baire space. ([[thm-cech-complete-spaces-are-baire]]).
 
-[F3] A metrizable space is Čech-complete if and only if it is completely metrizable. ([[cor-metrizable-cech-complete-iff-completely-metrizable]]).
+[F3] Assume the ultrafilter lemma and the Axiom of Choice. A metrizable space is Čech-complete if and only if it is completely metrizable. ([[cor-metrizable-cech-complete-iff-completely-metrizable]]).
 
 [F4] Write $\mathbb{Q}_{\mathbb{R}}$ for the image of $\mathbb{Q}$ in $\mathbb{R}$ under the canonical embedding $q \mapsto \hat q$ (lem-rat-embeds-dense), the set usually written $\mathbb{Q}$ once the identification is made, and put $X := \mathbb{R} \setminus \mathbb{Q}_{\mathbb{R}}$ for the irrationals. Then: 1. $\mathbb{Q}_{\mathbb{R}}$ is an $F_\sigma$ set (def-f-sigma-g-delta) and is meager (def-nowhere-dense-meager); 2. $X$ is a $G_\delta$ set and is residual; 3. $\mathbb{Q}_{\mathbb{R}}$ is **not** a $G_\delta$ set, and $X$ is **not** an $F_\sigma$ set. Claims 1 and 2 are bookkeeping. Claim 3 is the substance and is exactly where thm-baire-category-r is spent: no argument from the algebra of open and closed sets alone can reach it, since $\mathbb{Q}_{\mathbb{R}}$ and $X$ are interchanged by complementation while $F_\sigma$ and $G_\delta$ are, so any such argument would prove the same thing about both sets and about neither. ([[cor-q-is-meager-and-not-g-delta]]).
 

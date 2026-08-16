@@ -36,7 +36,7 @@ Let $Y$ be connected and let $f,g:Y\to E$ be lifts through the same covering of 
 
 [F1] Let $p:E\to B$ be a covering and $f:Y\to B$ continuous. A **lift** of $f$ through $p$ is a continuous map $\widetilde f:Y\to E$ with $p\circ\widetilde f=f$. This includes lifts of paths $I\to B$ and of homotopies $Y\times I\to B$; an initial lift prescribes the restriction at time $0$ (def-homotopy-relative-and-path-homotopy, def-path-connected). ([[def-lift-of-a-map-path-and-homotopy]]).
 
-[F2] Let $(X, \mathcal{T})$ be a topological space (def-topological-space). ([[def-connected-space]]).
+[F2] Let $(X, \mathcal{T})$ be a topological space (def-topological-space). A **separation** of $X$ is an ordered pair $(U,V)$ of open, nonempty, disjoint subsets of $X$ with $U\cup V=X$; $X$ is **disconnected** when a separation of $X$ exists and **connected** when none does. Since $U$ and $V$ are complementary each is clopen, so a separation is the same thing as a partition of $X$ into two nonempty clopen pieces. A subset $A\subseteq X$ is a **connected subset** when the subspace $(A,\mathcal T_A)$ is connected. ([[def-connected-space]]).
 
 [F3] A **covering map** is a continuous surjection $p:E\to B$ such that every $b\in B$ has an open neighbourhood $U$ for which $p^{-1}(U)$ is a disjoint union of open sets $V_j$, called **sheets**, and each restriction $p|_{V_j}:V_j\to U$ is a homeomorphism (def-continuous-map-top, def-homeomorphism-and-open-maps, def-disjoint-union-topology). Such a $U$ is **evenly covered**, and $p^{-1}(b)$ is the **fibre** over $b$. A covering is **trivial** when it is isomorphic over $B$ to a product projection $B\times F\to B$ with $F$ discrete. ([[def-covering-map-and-evenly-covered-neighbourhoods]]).
 

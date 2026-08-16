@@ -36,7 +36,7 @@ There is a covering of a two-point discrete space whose fibre over one point has
 
 [F1] For a covering $p:E\to B$, the cardinality of $p^{-1}(b)$ is locally constant as a function of $b\in B$. If $B$ is connected, all fibres are equinumerous. ([[prop-number-of-sheets-is-locally-constant]]).
 
-[F2] Throughout, a topology is as in def-topological-space, and *finite*, *at most countable* and *uncountable* are as in def-countable, so that "countable" always means "at most countable" and every finite set is countable. Let $X$ be a set. The six families below are topologies on $X$; that each really satisfies (T1), (T2) and (T3) is discharged in full after the list. ([[def-standard-topologies]]).
+[F2] Throughout, a topology is as in def-topological-space, and *finite*, *at most countable* and *uncountable* are as in def-countable, so that "countable" always means "at most countable" and every finite set is countable. Let $X$ be a set. The six families below are topologies on $X$; that each really satisfies (T1), (T2) and (T3) is discharged in full after the list. Among those six is the **discrete topology** $\mathcal T_{\mathrm{disc}}:=\mathcal P(X)$, in which every subset is open and hence every subset is also closed. ([[def-standard-topologies]]).
 
 ## Counterexample
 

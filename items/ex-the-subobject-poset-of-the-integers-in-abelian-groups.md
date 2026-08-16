@@ -44,7 +44,7 @@ $1\mathbb Z=\mathbb Z$.
 
 **Proof technique:** direct.
 
-1.1 A monomorphism $H\to\mathbb Z$ in $\mathbf{Ab}$ is, up to its unique isomorphism onto its image, represented by the inclusion of the subgroup $H'\le\mathbb Z$. By [L1], exactly one $n\in\mathbb N$ has $H'=n\mathbb Z$, so [L2] gives precisely the displayed representatives. [L1, L2]
+1.1 A monomorphism $f:H\to\mathbb Z$ in $\mathbf{Ab}$ is injective: the inclusion $\ker f\to H$ and the zero map $\ker f\to H$ have equal composites with $f$, so they are equal and $\ker f=0$. Its corestriction onto the image $H'=f[H]\le\mathbb Z$ is then an isomorphism $H\to H'$ with $f=\iota_{H'}\circ\bar f$ and $\iota_{H'}=f\circ\bar f^{-1}$, so $f$ mutually factors with the inclusion of $H'$ and represents it. By [L1], exactly one $n\in\mathbb N$ has $H'=n\mathbb Z$, so [L2] gives precisely the displayed representatives. [L1, L2]
 
 1.2 The inclusion $n\mathbb Z\hookrightarrow\mathbb Z$ factors through $m\mathbb Z\hookrightarrow\mathbb Z$ exactly when $n\mathbb Z\subseteq m\mathbb Z$, which holds exactly when $m$ divides $n$. By [L2] and [L3], this is the subobject order. [L2, L3, algebra]
 

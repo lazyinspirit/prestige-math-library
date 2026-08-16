@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [ex-real-line-mod-integer-translations-is-a-covering, def-covering-map-and-evenly-covered-neighbourhoods, prop-number-of-sheets-is-locally-constant, def-integers]
+deps: [ex-real-line-mod-integer-translations-is-a-covering, def-covering-map-and-evenly-covered-neighbourhoods, prop-number-of-sheets-is-locally-constant, def-integers, thm-division-algorithm-in-z]
 justified_by: []
 aliases: []
 landmark: false
@@ -42,13 +42,15 @@ For every integer $m\ge1$, the map $P_m:\mathbb R/\mathbb Z\to\mathbb R/\mathbb 
 
 [F4] On the set $\mathbb{N} \times \mathbb{N}$ of pairs of natural numbers, define $$(a,b) \sim (c,d) \iff a + d = b + c.$$ This is an equivalence relation (lem-int-equivalence). The **integers** are the quotient $$\mathbb{Z} := (\mathbb{N} \times \mathbb{N}) / \sim,$$ and we write $[(a,b)]$ for the equivalence class of $(a,b)$. ([[def-integers]]).
 
+[F5] Let $a,b\in\mathbb Z$ with $b>0$. Then there exist integers $q$ and $r$ with $a=qb+r$ and $0\le r<b$, and this pair is unique ([[thm-division-algorithm-in-z]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 Check well-definedness modulo integer translation. [given, F1]
 
-2.1 Around a class choose an interval short enough that its $m$ inverse branches are disjoint; these branches give the evenly covered neighbourhood and exactly $m$ fibre points. [step 1.1, F2, F4]
+2.1 Around a class take an interval short enough that its $m$ inverse branches are disjoint; these branches give the evenly covered neighbourhood of [F2]. The fibre has exactly $m$ points because the branches are indexed by the residues of the integers modulo $m$, and by the division algorithm [F5] every integer has exactly one residue $r$ with $0\le r<m$: existence gives $m$ distinct branch labels and uniqueness stops two labels from coinciding. [F4] constructs $\mathbb Z$ but supplies no division algorithm. [step 1.1, F2, F4, F5]
 
 3.1 At $m=1$ the map is the identity, so no zero-sheet or division-by-zero case is hidden. [step 2.1, F3]
 

@@ -1,7 +1,7 @@
 ---
 id: lem-countable-intersection-of-completely-metrizable-subspaces
 kind: lemma
-title: "A countable intersection of completely metrizable subspaces is completely metrizable"
+title: "Under the Axiom of Countable Choice, a countable intersection of completely metrizable subspaces is completely metrizable"
 status: draft
 origin: session
 provenance:
@@ -40,7 +40,7 @@ Assume the Axiom of Countable Choice. If $(X,d)$ is metrizable and $(Y_n)_{n\in\
 
 [F2] Let $(X,d)$ be a metric space (def-metric-space) and define, for $x, y \in X$, $$d'(x,y) := \min\{\, d(x,y),\ 1 \,\}, \qquad d''(x,y) := \frac{d(x,y)}{1 + d(x,y)} .$$ Both are well defined: $d(x,y) \ge 0$ (lem-metric-nonnegativity), so $1 + d(x,y) > 0$ and is invertible, and the minimum of a two-element set of reals exists (lem-finite-set-has-max, def-max-min). Then: 1. $d'$ and $d''$ are metrics on $X$. 2. $d'(x,y) \le 1$ and $d''(x,y) < 1$ for all $x,y$; hence $(X,d')$ and $(X,d'')$ are bounded metric spaces (def-metric-bounded-diameter), and if $X \ne \emptyset$ then $\operatorname{diam}(X) \le 1$ for both. 3. $d'$ and $d''$ are each uniformly equivalent to $d$, hence topologically equivalent to it (def-equivalent-metrics, thm-metric-equivalence-hierarchy). **Consequently every metric space carries a bounded metric with exactly the same topology**, so boundedness cannot be read off the topology alone. ([[lem-bounded-remetrisation]]).
 
-[F3] The **Axiom of Countable Choice**, written $\mathrm{AC}_\omega$, is the following statement. ([[def-countable-choice]]).
+[F3] The **Axiom of Countable Choice**, written $\mathrm{AC}_\omega$, is the following statement. The statement is: for every family $(X_n)_{n\in\mathbb N}$ of nonempty sets indexed by $\mathbb N$ there is a function $f$ with domain $\mathbb N$ such that $f(n)\in X_n$ for every $n\in\mathbb N$. Equivalently, every at most countable family of nonempty sets has a choice function. ([[def-countable-choice]]).
 
 [F4] Let $(X,d)$ be a metric space (def-metric-space) and let $p, q \in X$ with $p \ne q$. Put $r := d(p,q)/2$. Then $r > 0$ and $$B(p,r) \cap B(q,r) = \emptyset .$$ Both sets are open (thm-metric-open-set-algebra) and contain $p$ respectively $q$ (def-metric-ball), so every metric space is **Hausdorff**: distinct points are separated by disjoint open sets (def-metric-topology). ([[thm-metric-hausdorff-separation]]).
 

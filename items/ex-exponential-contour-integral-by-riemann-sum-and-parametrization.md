@@ -37,7 +37,7 @@ The integral is obtained both as the limit of midpoint sums and from parametriza
 
 [L3] The complex exponential is entire and has derivative itself ([[thm-complex-exponential-is-entire-with-derivative-itself]]).
 
-[L4] A continuous primitive evaluates a rectifiable contour integral by the endpoint increment ([[thm-fundamental-theorem-for-complex-line-integrals]]).
+[L4] Let $F$ be a primitive of a continuous function $f$ on an open set containing the trace of a rectifiable contour $\gamma:[a,b]\to\mathbb C$. If $F'=f$ is continuous, then $\int_\gamma f(z)\,dz=F(\gamma(b))-F(\gamma(a))$ ([[thm-fundamental-theorem-for-complex-line-integrals]]).
 
 ## Verification
 
@@ -47,4 +47,4 @@ The integral is obtained both as the limit of midpoint sums and from parametriza
 
 1.2 By [L2], the same limit is $\int_0^1\exp(tw)w\,dt$. Since $(\exp(tw))'=w\exp(tw)$ by [L3], this equals $\exp w-1$. [L2, L3, algebra]
 
-2.1 Alternatively, [L3] makes $\exp$ its own primitive and [L4] gives the same endpoint increment directly. [step 1.2, L3, L4] ∎
+2.1 Alternatively, [L3] makes $\exp$ its own primitive on all of $\mathbb C$, and since that derivative is $\exp$ itself it is continuous, so [L4] applies and gives the same endpoint increment $\exp w-\exp 0$ directly. [step 1.2, L3, L4] ∎

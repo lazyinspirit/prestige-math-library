@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-reflective-subcategory-and-reflector, thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow, prop-rings-and-homomorphisms-form-category-ring, def-generated-and-principal-ideals, def-quotient-ring, thm-quotient-ring-laws, def-ring-homomorphism, thm-quotient-ring-universal-property]
+deps: [def-reflective-subcategory-and-reflector, thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow, prop-rings-and-homomorphisms-form-category-ring, def-generated-and-principal-ideals, def-quotient-ring, thm-quotient-ring-laws, def-ring-homomorphism, thm-quotient-ring-universal-property, thm-ring-homomorphism-kernel-is-an-ideal]
 aliases: []
 landmark: false
 proof_strategy: constructive
@@ -41,12 +41,14 @@ and the reflection unit is the quotient map. If $C_R=R$, the quotient is the zer
 
 [L5] Supplied universal arrows to a full inclusion assemble into a reflector ([[thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow]], [[def-reflective-subcategory-and-reflector]]).
 
+[L6] The kernel of a ring homomorphism is a two-sided ideal ([[thm-ring-homomorphism-kernel-is-an-ideal]]).
+
 ## Proof
 
 **Proof technique:** constructive.
 
 1.1 Put $C_R=(S_R)$ using [L2]. In $R/C_R$, $(a+C_R)(b+C_R)-(b+C_R)(a+C_R)=ab-ba+C_R=0$, so [L3] makes $R/C_R$ a commutative ring. This computation remains valid when $C_R=R$: then $R/C_R$ is the permitted zero ring, so the construction is total. [L1, L2, L3, algebra, construct]
 
-2.1 Let $f:R\to A$ be a unit-preserving homomorphism to a commutative ring. Then $f(ab-ba)=f(a)f(b)-f(b)f(a)=0$, so $S_R\subseteq\ker f$. Since the kernel is a two-sided ideal, leastness in [L2] gives $C_R\subseteq\ker f$, and [L4] supplies a unique homomorphism $\bar f:R/C_R\to A$ with $f=\bar f q_R$. Unit preservation is retained by [L4], including the zero-ring case. [step 1.1, L1, L2, L4, algebra]
+2.1 Let $f:R\to A$ be a unit-preserving homomorphism to a commutative ring. Then $f(ab-ba)=f(a)f(b)-f(b)f(a)=0$, so $S_R\subseteq\ker f$. The kernel of a ring homomorphism is a two-sided ideal by [L6], so leastness in [L2] gives $C_R\subseteq\ker f$, and [L4] supplies a unique homomorphism $\bar f:R/C_R\to A$ with $f=\bar f q_R$. Unit preservation is retained by [L4], including the zero-ring case. [step 1.1, L1, L2, L4, L6, algebra]
 
 3.1 Step 2.1 is exactly the universal-arrow property of the quotient map $q_R:R\to R/C_R$ to the full inclusion $\mathbf{CRing}\hookrightarrow\mathbf{Ring}$. The family is supplied by the explicit formula $R\mapsto C_R$, so [L5] assembles it into the reflector. [step 2.1, L4, L5, discharge-construct] ∎

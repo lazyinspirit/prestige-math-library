@@ -32,7 +32,7 @@ For an odd prime $p$, exactly $(p-1)/2$ nonzero classes are quadratic residues m
 
 **Given:** An odd prime $p$.
 
-[L1] The nonzero quadratic-residue classes form an index-two subgroup of $(\mathbb Z/p)^\times$ ([[thm-quadratic-residues-subgroup-modulo-prime]]).
+[L1] The nonzero quadratic-residue classes form the subgroup $((\mathbb Z/p)^\times)^2=\{u^2:u\in(\mathbb Z/p)^\times\}$, and this subgroup has index two in $(\mathbb Z/p)^\times$ ([[thm-quadratic-residues-subgroup-modulo-prime]]).
 
 [L2] If $G$ is finite and $H\le G$, then $|G|=[G:H]|H|$ ([[thm-lagrange]]).
 
@@ -50,7 +50,7 @@ For an odd prime $p$, exactly $(p-1)/2$ nonzero classes are quadratic residues m
 
 **Proof technique:** direct.
 
-1.1 Let $Q$ be the subgroup of nonzero square classes. By [L1], $[G:Q]=2$ for $G=(\mathbb Z/p)^\times$, and [L6] gives $|G|=p-1$; hence [L2] gives $|Q|=(p-1)/2$. Its complement in $G$ has the same cardinality and consists of the nonresidues. [L1, L2, L6, given]
+1.1 Let $Q=\{u^2:u\in G\}$ be the subgroup of nonzero square classes, which by [L1] is exactly the set of quadratic-residue classes. By [L1], $[G:Q]=2$ for $G=(\mathbb Z/p)^\times$, and [L6] gives $|G|=p-1$; hence [L2] gives $|Q|=(p-1)/2$. Its complement in $G$ has the same cardinality, and since [L1] identifies $Q$ with the quadratic-residue classes, that complement consists exactly of the nonresidues. [L1, L2, L6, given]
 
 1.2 If $a$ represents a class in $Q$, then $p\nmid a$, so [L7] gives $\gcd(a,p)=1$. Facts [L4] and [L5] discharge the prime specialisation of [L3], which gives $\gcd(p-1,2)=2$ roots because $p$ is odd. [L3, L4, L5, L7, algebra]
 

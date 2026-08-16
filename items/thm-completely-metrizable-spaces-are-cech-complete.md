@@ -1,7 +1,7 @@
 ---
 id: thm-completely-metrizable-spaces-are-cech-complete
 kind: theorem
-title: "Every completely metrizable space is Čech-complete"
+title: "Under the ultrafilter lemma and the Axiom of Choice, every completely metrizable space is Čech-complete"
 status: draft
 origin: session
 provenance:

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-cech-complete-space, thm-one-point-compactification-properties, def-g-delta-and-f-sigma-in-a-topological-space]
+deps: [def-cech-complete-space, thm-one-point-compactification-properties, def-g-delta-and-f-sigma-in-a-topological-space, thm-a-locally-compact-hausdorff-space-is-completely-regular]
 justified_by: []
 aliases: []
 landmark: false
@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-Every locally compact Hausdorff space is Čech-complete.
+Assume the Axiom of Dependent Choice. Every locally compact Hausdorff space is Čech-complete.
 
 ## Facts & Assumptions
 
@@ -40,7 +40,9 @@ Every locally compact Hausdorff space is Čech-complete.
 
 [F2] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $(X^{*}, \mathcal{T}^{*})$ be its one-point compactification, with added point $\infty$ (def-one-point-compactification). Then: 1. **$X^{*}$ is compact** (def-compact-space). 2. **$X$ is an open subspace of $X^{*}$**: $X \in \mathcal{T}^{*}$, and the subspace topology that $X$ inherits from $X^{*}$ (def-subspace-topology-top) is $\mathcal{T}$ itself. 3. **$X$ is dense in $X^{*}$** (def-dense-top) **if and only if $X$ is not compact.** 4. **$X^{*}$ is Hausdorff** (def-hausdorff-space) **if and only if $X$ is locally compact** (def-locally-compact-space) **and Hausdorff.** In particular, a locally compact Hausdorff space is an open subspace of a compact Hausdorff space, which is the reason the construction is made. **No choice principle is used**: the only cover thinned below is thinned by the indexed form of lem-compactness-of-a-subspace-is-ambient, which returns its own indices. ([[thm-one-point-compactification-properties]]).
 
-[F3] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $A \subseteq X$. ([[def-g-delta-and-f-sigma-in-a-topological-space]]).
+[F3] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $A \subseteq X$. $A$ is a **$G_\delta$ set of $X$** when there is a sequence $(V_n)_{n\in\mathbb N}$ of open subsets of $X$ with $A=\bigcap_{n\in\mathbb N}V_n$, and an **$F_\sigma$ set of $X$** when there is a sequence $(F_n)_{n\in\mathbb N}$ of closed subsets of $X$ with $A=\bigcup_{n\in\mathbb N}F_n$. ([[def-g-delta-and-f-sigma-in-a-topological-space]]).
+
+[F4] **Assume the Axiom of Dependent Choice.** If $(X,\mathcal T)$ is locally compact and Hausdorff, then $X$ is completely regular, and hence, being Hausdorff, Tychonoff ([[thm-a-locally-compact-hausdorff-space-is-completely-regular]]).
 
 ## Proof
 
@@ -48,7 +50,7 @@ Every locally compact Hausdorff space is Čech-complete.
 
 1.1 The empty space is compact and is $G_\delta$ in itself. [given, F2, F1, F3]
 
-2.1 For a nonempty noncompact space the one-point compactification is compact Hausdorff and contains the original space as an open subspace. [step 1.1, F2, F1, F3]
+2.1 Čech-completeness is defined in [F1] for Tychonoff spaces only, so first record that the space qualifies: it is locally compact Hausdorff, so [F4] makes it completely regular and, being Hausdorff, Tychonoff. For a nonempty noncompact such space the one-point compactification is compact Hausdorff and contains the original space as an open subspace. [step 1.1, F2, F1, F3, F4]
 
 3.1 An open subset is a $G_\delta$ by repeating it in a constant countable intersection, so it witnesses Čech-completeness; an already compact space is its own witness. [step 2.1, F2, F1, F3]
 

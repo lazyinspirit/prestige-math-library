@@ -41,6 +41,6 @@ Every endomorphism of a finite-dimensional vector space over an algebraically cl
 
 1.1 If $\deg\chi_T=0$, then $\chi_T=1$ and [L3] gives the empty Jordan form. [base, L3]
 
-1.2 If the degree is positive, [L1] supplies a root $a\in F$ and [L2] writes $\chi_T=(x-a)q$ with $\deg q$ smaller; induction factors $q$ into linear factors, so $\chi_T$ splits. [L1, L2, ih]
+1.2 The induction is on the degree of an arbitrary nonzero polynomial over $F$, not only of a characteristic polynomial, since the factor produced below need not itself be one. If the degree is positive, [L1] supplies a root $a\in F$ and [L2] writes $\chi_T=(x-a)q$ with $\deg q$ smaller; the induction hypothesis applies to $q$ in that strengthened form and factors it into linear factors, so $\chi_T$ splits. [L1, L2, ih]
 
 2.1 Fact [L3] now gives a Jordan canonical form for $T$, completing the induction. [step 1.1, step 1.2, L3, discharge-induction] ∎

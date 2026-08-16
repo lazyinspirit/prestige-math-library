@@ -1,7 +1,7 @@
 ---
 id: thm-cech-completeness-is-independent-of-compactification
 kind: theorem
-title: "A Tychonoff space is $G_\\delta$ in some Hausdorff compactification exactly when it is $G_\\delta$ in every one"
+title: "Under the ultrafilter lemma and Dependent Choice, a Tychonoff space is $G_\\delta$ in some Hausdorff compactification exactly when it is $G_\\delta$ in every one"
 status: draft
 origin: session
 provenance:
@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-Assume the ultrafilter lemma. A Tychonoff space is a $G_\delta$ subset of some Hausdorff compactification if and only if it is a $G_\delta$ subset of every Hausdorff compactification.
+Assume the ultrafilter lemma and Dependent Choice, the hypotheses under which the library establishes the Stone-Čech compactification and its universal property. A Tychonoff space is a $G_\delta$ subset of some Hausdorff compactification if and only if it is a $G_\delta$ subset of every Hausdorff compactification.
 
 ## Facts & Assumptions
 

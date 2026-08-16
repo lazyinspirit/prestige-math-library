@@ -1,7 +1,7 @@
 ---
 id: cor-ascoli-arzela-for-compact-metric-domains
 kind: corollary
-title: "Ascoli–Arzelà in the uniform topology for compact metric domains"
+title: "Ascoli–Arzelà in the uniform topology for nonempty compact metric domains"
 status: draft
 origin: session
 provenance:

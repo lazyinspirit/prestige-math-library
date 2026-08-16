@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-the-solution-set-for-the-underlying-set-functor-on-groups]
+deps: [thm-the-solution-set-for-the-underlying-set-functor-on-groups, thm-image-subgroup-and-kernel-normal, thm-quotient-group-universal-property]
 aliases: []
 landmark: false
 proof_strategy: direct
@@ -36,12 +36,16 @@ $\mathbb Z/2\mathbb Z$ occurs through the quotient by its induced kernel.
 
 [L1] For every set $S$, the quotient maps $S\to U(F(S)/N)$ indexed by normal subgroups $N\trianglelefteq F(S)$ form a solution set for the underlying-set functor on groups ([[thm-the-solution-set-for-the-underlying-set-functor-on-groups]]).
 
+[L2] For a group homomorphism, the image is a subgroup of the codomain and the kernel is a normal subgroup of the domain ([[thm-image-subgroup-and-kernel-normal]]).
+
+[L3] If a homomorphism kills a normal subgroup $N$, it factors uniquely through the quotient by $N$ ([[thm-quotient-group-universal-property]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
 1.1 Apply [L1] to the two-element set $S$. The normal subgroups of the set-sized group $F(S)$ form a set, so the displayed family is the promised solution set. [L1]
 
-1.2 Let $C=\mathbb Z/2\mathbb Z$ and map both $x$ and $y$ to its nonidentity element. Freeness extends this function uniquely to a homomorphism $\widehat f:F(S)\to C$. Its kernel $N$ is normal, and the induced injection $F(S)/N\to C$ factors the original map through the member indexed by $N$. [L1, algebra]
+2.1 Let $C=\mathbb Z/2\mathbb Z$ and map both $x$ and $y$ to its nonidentity element. Freeness extends this function uniquely to a homomorphism $\widehat f:F(S)\to C$. Its kernel $N=\ker\widehat f$ is a normal subgroup of $F(S)$ by [L2], so $N$ indexes a member of the family in step 1.1. Since $N\subseteq\ker\widehat f$, [L3] gives a unique $\bar f:F(S)/N\to C$ with $\widehat f=\bar f q_N$, and $\bar f$ is injective because $\bar f(gN)=0$ forces $g\in\ker\widehat f=N$. Hence the original map factors through the member indexed by $N$. [L1, L2, L3, algebra]
 
-2.1 More generally, [L1] gives this kernel-quotient factorisation for every map from $S$ into an underlying group, which verifies the solution-set property rather than only listing the quotients. [step 1.1, L1] ∎
+3.1 More generally, [L1] gives this kernel-quotient factorisation for every map from $S$ into an underlying group, which verifies the solution-set property rather than only listing the quotients. [step 1.1, L1] ∎

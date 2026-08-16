@@ -30,7 +30,7 @@ pipeline_run: null
 
 ## Statement
 
-Let $X$ be dense in Hausdorff compactifications $K$ and $L$, and let $f:K\to L$ be continuous with $f|_X=\operatorname{id}_X$. Then $f$ is surjective and $f[K\setminus X]=L\setminus X$.
+Let $(K,i)$ and $(L,j)$ be Hausdorff compactifications of $X$, and let $f:K\to L$ be continuous with $f\circ i=j$. Then $f$ is surjective and $f[K\setminus i[X]]=L\setminus j[X]$. The embeddings are named because the identification of $X$ with its image is licensed only after naming them.
 
 ## Facts & Assumptions
 

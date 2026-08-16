@@ -1,13 +1,13 @@
 ---
 id: thm-sheets-equal-fundamental-group-index
 kind: theorem
-title: "For a nonempty path-connected total space, a covering fibre is in bijection with the left cosets of the induced fundamental-group subgroup"
+title: "For a nonempty path-connected total space, a covering fibre is in bijection with the right cosets of the induced fundamental-group subgroup"
 status: draft
 origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-monodromy-action-on-a-covering-fibre, thm-covering-maps-inject-fundamental-groups, prop-monodromy-acts-by-bijections-and-detects-components, def-coset, def-index]
+deps: [def-monodromy-action-on-a-covering-fibre, thm-covering-maps-inject-fundamental-groups, prop-monodromy-acts-by-bijections-and-detects-components, def-coset, def-index, lem-left-and-right-cosets-equinumerous]
 justified_by: []
 aliases: []
 landmark: true
@@ -28,7 +28,7 @@ pipeline_run: null
 
 ## Statement
 
-For a covering $p:(E,e_0)\to(B,b_0)$ with nonempty path-connected total space, put $H=p_*\pi_1(E,e_0)$. With traversal-order multiplication, the fibre $p^{-1}(b_0)$ is in bijection with the set of left cosets $H\backslash\pi_1(B,b_0)$. Thus its finite number of sheets equals the subgroup index, and one is infinite exactly when the other is recorded as $\infty$.
+For a covering $p:(E,e_0)\to(B,b_0)$ with nonempty path-connected total space, put $H=p_*\pi_1(E,e_0)$. With traversal-order multiplication, the fibre $p^{-1}(b_0)$ is in bijection with the set of right cosets $H\backslash\pi_1(B,b_0)=\{H[\alpha]:[\alpha]\in\pi_1(B,b_0)\}$. Thus its finite number of sheets equals the subgroup index, and one is infinite exactly when the other is recorded as $\infty$.
 
 ## Facts & Assumptions
 
@@ -42,7 +42,7 @@ For a covering $p:(E,e_0)\to(B,b_0)$ with nonempty path-connected total space, p
 
 [F4] Let $G$ be a group and let $H\le G$ be a subgroup (def-group, def-subgroup). For $g\in G$, the **left coset** and **right coset** of $H$ represented by $g$ are $$gH:=\{gh:h\in H\},\qquad Hg:=\{hg:h\in H\}.$$ The element $g$ is a **representative** of these cosets. The notation denotes subsets of $G$; it does not assert that either subset is a subgroup. ([[def-coset]]).
 
-[F5] Let $H\le G$. The **left coset set** is $$G/H:=\{gH:g\in G\}.$$ By lem-coset-partition, its elements are exactly the blocks of the coset partition of $G$. The **index** of $H$ in $G$ is $$[G:H]:=|G/H|$$ when $G/H$ is finite, with finite cardinality as in def-finite-cardinality. If $G/H$ is not finite, write $[G:H]=\infty$. Here $\infty$ is a symbol, not a natural number, and no arithmetic with it is defined. ([[def-index]]).
+[F5] Let $H\le G$. The **left coset set** is $$G/H:=\{gH:g\in G\}.$$ By lem-coset-partition, its elements are exactly the blocks of the coset partition of $G$. The **index** of $H$ in $G$ is $$[G:H]:=|G/H|$$ when $G/H$ is finite, with finite cardinality as in def-finite-cardinality. If $G/H$ is not finite, write $[G:H]=\infty$. Here $\infty$ is a symbol, not a natural number, and no arithmetic with it is defined. The right coset set has the same finite or infinite size, because lem-left-and-right-cosets-equinumerous gives an explicit bijection between the two coset sets; thus the index does not depend on choosing left rather than right cosets. ([[def-index]]).
 
 ## Proof
 
@@ -52,11 +52,11 @@ For a covering $p:(E,e_0)\to(B,b_0)$ with nonempty path-connected total space, p
 
 2.1 Send a loop class to the endpoint of its lifted path. [step 1.1, F1, F3]
 
-3.1 Endpoint homotopy invariance makes this well defined; with traversal-order multiplication, two classes have the same endpoint exactly when their quotient $[\alpha][\beta]^{-1}$ lies in the image $H$ of the upstairs fundamental group, which is equality of the left cosets $H[\alpha]$ and $H[\beta]$. [step 2.1, F1, F5, F4, F2]
+3.1 Endpoint homotopy invariance makes this well defined; with traversal-order multiplication, two classes have the same endpoint exactly when their quotient $[\alpha][\beta]^{-1}$ lies in the image $H$ of the upstairs fundamental group, and $[\alpha][\beta]^{-1}\in H$ holds exactly when $[\beta]\in H[\alpha]$. By the convention of [F4] the sets $H[\alpha]$ are **right** cosets, so the fibres of the endpoint map are precisely the members of $H\backslash\pi_1(B,b_0)$. [step 2.1, F1, F5, F4, F2]
 
 4.1 Path-connectedness of the total space gives surjectivity onto the fibre. [step 3.1, F1, F3]
 
-5.1 Translate the bijection into the published index convention: the finite cardinalities agree, and one side is infinite exactly when the other is recorded as $\infty$. [step 4.1, F5, F3]
+5.1 Translate the bijection into the published index convention. That convention defines $[G:H]$ from the **left** coset set $G/H$, so use the clause of [F5] giving an explicit bijection between the left and right coset sets: $H\backslash\pi_1(B,b_0)$ and $\pi_1(B,b_0)/H$ have the same finite or infinite size. Composing with step 4.1, the finite cardinalities agree with the number of sheets, and one side is infinite exactly when the other is recorded as $\infty$. [step 4.1, F5, F3]
 
 6.1 The preceding construction and implications establish the assertion. [step 5.1] ∎
 

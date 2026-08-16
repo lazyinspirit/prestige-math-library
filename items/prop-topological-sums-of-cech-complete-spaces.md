@@ -1,7 +1,7 @@
 ---
 id: prop-topological-sums-of-cech-complete-spaces
 kind: proposition
-title: "Topological sums of Čech-complete spaces are Čech-complete"
+title: "Under the Axiom of Choice, topological sums of Čech-complete spaces are Čech-complete"
 status: draft
 origin: session
 provenance:
@@ -42,13 +42,13 @@ Assume the Axiom of Choice. The topological sum of any family of Čech-complete 
 
 [F3] Let $(X, \mathcal{T})$ be a topological space (def-topological-space) and let $(X^{*}, \mathcal{T}^{*})$ be its one-point compactification, with added point $\infty$ (def-one-point-compactification). Then: 1. **$X^{*}$ is compact** (def-compact-space). 2. **$X$ is an open subspace of $X^{*}$**: $X \in \mathcal{T}^{*}$, and the subspace topology that $X$ inherits from $X^{*}$ (def-subspace-topology-top) is $\mathcal{T}$ itself. 3. **$X$ is dense in $X^{*}$** (def-dense-top) **if and only if $X$ is not compact.** 4. **$X^{*}$ is Hausdorff** (def-hausdorff-space) **if and only if $X$ is locally compact** (def-locally-compact-space) **and Hausdorff.** In particular, a locally compact Hausdorff space is an open subspace of a compact Hausdorff space, which is the reason the construction is made. **No choice principle is used**: the only cover thinned below is thinned by the indexed form of lem-compactness-of-a-subspace-is-ambient, which returns its own indices. ([[thm-one-point-compactification-properties]]).
 
-[F4] The **Axiom of Choice** (AC) is the following statement. ([[def-axiom-of-choice]]).
+[F4] The **Axiom of Choice** (AC) is the following statement. The statement is: every family of nonempty sets has a choice function; that is, for every set $\mathcal F$ all of whose members are nonempty there is a function $g$ with domain $\mathcal F$ satisfying $g(S)\in S$ for every $S\in\mathcal F$. ([[def-axiom-of-choice]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Choose compactification witnesses for the summands and take the one-point compactification of their topological sum after adjoining the compact pieces. [given, F3, F1, F2, F4]
+1.1 Choose compactification witnesses $K_i$ for the summands and form their topological sum $K:=\bigsqcup_iK_i$, which is Hausdorff and contains $\bigsqcup_iX_i$ densely. Two cases arise, because [F3] makes $K$ dense in $K^*$ exactly when $K$ is not compact. If $K$ is compact — in particular whenever the family is finite, as for a single one-point summand — then $K$ is itself a Hausdorff compactification of the sum and no point is adjoined. Otherwise $K$ is noncompact, and its one-point compactification $K^*$ is a Hausdorff compactification of the sum. [given, F3, F1, F2, F4]
 
 2.1 Express the original sum by one countable family of open layers, using the same layer number in every clopen summand. [step 1.1, F3, F1]
 

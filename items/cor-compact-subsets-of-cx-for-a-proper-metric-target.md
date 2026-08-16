@@ -1,7 +1,7 @@
 ---
 id: cor-compact-subsets-of-cx-for-a-proper-metric-target
 kind: corollary
-title: "For a proper metric target, compact subsets of $C(X,Y)$ are exactly the closed, pointwise bounded, equicontinuous families"
+title: "Under the Axiom of Choice, for a nonempty compact metric domain $X$ and a proper metric target $Y$, the subsets of $C(X,Y)$ compact in the uniform topology are exactly the families closed in that topology that are pointwise bounded and equicontinuous"
 status: draft
 origin: session
 provenance:

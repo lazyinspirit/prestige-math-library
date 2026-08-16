@@ -23,7 +23,7 @@ pipeline_run: null
 ## Definition
 
 Let $\mathcal A$ be a full subcategory of $\mathcal C$, with inclusion $I:\mathcal A\to\mathcal C$. The subcategory $\mathcal A$ is **coreflective** in $\mathcal C$ when $I$ has a right adjoint
-$$I\dashv Q,qquad Q:\mathcal C\to\mathcal A.$$
+$$I\dashv Q,\qquad Q:\mathcal C\to\mathcal A.$$
 The functor $Q$ is a **coreflector**. The counit $\varepsilon:IQ\Rightarrow1_{\mathcal C}$ is the **coreflection counit**, and $\varepsilon_C:IQ(C)\to C$ is the **coreflection arrow** of $C$.
 
 This is the categorical dual of [[def-reflective-subcategory-and-reflector]], in the sense of [[thm-category-theoretic-duality-principle]].
