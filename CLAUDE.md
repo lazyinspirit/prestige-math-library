@@ -111,9 +111,8 @@ uses Sol, never Terra. Read-only is enforced per runner, never by asking:
   anything else outward-facing remains a separate owner decision.
 
 - **NO LLM DRIVES A STAGE TRANSITION (owner, 2026-08-16; supersedes the
-  2026-08-15 supervisor rule).** The autopilot engine (`~/Projects/autopilot`,
-  folded in by `tools/migrate-autopilot.sh` at the owner's choosing) owns
-  coverage, gates, retries, blockers and every transition; a cleared stage is a
+  2026-08-15 supervisor rule).** The engine at `tools/autopilot/` owns coverage,
+  gates, retries, blockers and every transition; a cleared stage is a
   **dispatch trigger**, never a reporting checkpoint. Models are dispatched only
   for **scouting, scaffolding, authoring, refutation, verification,
   adjudication, judgement, audit, reporting and supervision**, enforced at the
