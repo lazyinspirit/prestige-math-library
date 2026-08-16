@@ -78,3 +78,12 @@ test('every repo-wide gate point verifies the two scopes agree', async () => {
     assert.ok(hit, `${id} never verifies plan-spec against the manifests`);
   }
 });
+
+test('4-splice is one dispatch covering every batch (P4)', async () => {
+  const mod = await import('../stages/mathlib.mts');
+  const st = mod.stages.find((s: any) => s.id === '4-splice');
+  const plans = st.plan({ run: 'frontier-14', repo: REPO }, ['1', '2', '3']);
+  assert.equal(plans.length, 1, 'a per-batch dispatch costs a poll tick per batch for seconds of work');
+  assert.ok(plans[0].argv.includes('--all'));
+  assert.equal(plans[0].covers.length, 7, 'the one dispatch must cover every batch the run owes');
+});

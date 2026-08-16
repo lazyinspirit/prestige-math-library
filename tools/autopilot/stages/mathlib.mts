@@ -511,17 +511,20 @@ export const stages = [
     id: '4-splice',
     label: 'splice ids into the plan (mechanical)',
     units: batches,
-    pattern: resultPattern('tool', 'splice-\\d+'),
-    labelFor: (u) => `splice-${u}`,
+    // One dispatch, all batches: splice-plan is the single writer on
+    // plan-spec.json either way, and one per-batch dispatch per 30s poll tick
+    // cost ~3.5 minutes of wall clock for ~2 seconds of work. All-or-nothing
+    // inside the tool; the per-batch receipts are still owed per unit.
+    pattern: resultPattern('tool', 'splice-all'),
     artifacts: (ctx, u) => `research/${ctx.run}-splice-${u}.json`,
     concurrency: 1,
-    plan: (ctx, pending) => pending.map((u: any) => ({
+    plan: (ctx) => [{
       role: 'tool',
-      label: `splice-${u}`,
+      label: 'splice-all',
       job: 'bookkeeping-mechanical',
-      covers: [u],
-      argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--batch', String(u)],
-    })),
+      covers: batches(ctx),
+      argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--all'],
+    }],
     gates: (ctx) => [scopeGate(ctx), planGate()],
   },
 

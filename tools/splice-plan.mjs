@@ -42,10 +42,12 @@ const batch = opt('batch');
 const dryRun = argv.includes('--dry-run');
 const verify = argv.includes('--verify');
 const update = argv.includes('--update');
+const allMode = argv.includes('--all');
 const SIZE_CEILING = 60;
 
-if (!run || (!batch && !verify)) {
+if (!run || (!batch && !verify && !allMode) || (update && !batch)) {
   console.error('usage: node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run] [--update]');
+  console.error('       node tools/splice-plan.mjs --run <run> --all [--dry-run]');
   console.error('       node tools/splice-plan.mjs --run <run> --verify');
   process.exit(2);
 }
@@ -88,62 +90,76 @@ if (verify) {
   process.exit(0);
 }
 
-const manifestPath = `research/${run}-batch-${batch}.pages.json`;
-if (!existsSync(manifestPath)) { console.error(`splice-plan: missing ${manifestPath}`); process.exit(2); }
+// One process, one writer: `--all` splices every batch in one pass, because a
+// per-batch dispatch at concurrency 1 costs a poll tick per batch for seconds
+// of work. All-or-nothing either way: any problem in any batch writes nothing.
+const batchList = allMode
+  ? readdirSync('research')
+      .filter((f) => f.startsWith(`${run}-batch-`) && f.endsWith('.pages.json'))
+      .map((f) => f.slice(`${run}-batch-`.length, -'.pages.json'.length))
+      .sort((a, b) => Number(a) - Number(b))
+  : [batch];
+if (!batchList.length) { console.error(`splice-plan: no batch manifests for ${run}`); process.exit(2); }
 
-const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
 const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const byId = new Map(spec.pages.map((p) => [p.id, p]));
-
 const idOf = (i) => (typeof i === 'string' ? i : i.id);
 const problems = [];
-const spliced = [];
-const unchanged = [];
+const perBatch = [];
 
-for (const page of manifest) {
-  const target = byId.get(page.id);
-  if (!target) { problems.push(`${page.id}: not in plan-spec.json`); continue; }
+for (const b of batchList) {
+  const manifestPath = `research/${run}-batch-${b}.pages.json`;
+  if (!existsSync(manifestPath)) { console.error(`splice-plan: missing ${manifestPath}`); process.exit(2); }
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  const spliced = [];
+  const unchanged = [];
 
-  const want = page.items ?? [];
-  const have = target.items ?? [];
+  for (const page of manifest) {
+    const target = byId.get(page.id);
+    if (!target) { problems.push(`${page.id}: not in plan-spec.json`); continue; }
 
-  if (have.length) {
-    const same = have.length === want.length && have.every((h, k) => idOf(h) === idOf(want[k]));
-    if (same) { unchanged.push(page.id); continue; }
-    if (update) {
-      // A licensed in-flight change: the manifest is the batch-level truth and
-      // the plan follows it — loudly, with the delta on the record.
-      const wantIds = want.map(idOf);
-      const haveIds = have.map(idOf);
-      console.log(`splice-plan: UPDATING ${page.id} — plan ${haveIds.length} -> manifest ${wantIds.length} item(s)`);
-      for (const w of wantIds.filter((x) => !haveIds.includes(x))) console.log(`  + ${w}`);
-      for (const h of haveIds.filter((x) => !wantIds.includes(x))) console.log(`  - ${h}`);
-    } else {
+    const want = page.items ?? [];
+    const have = target.items ?? [];
+
+    if (have.length) {
+      const same = have.length === want.length && have.every((h, k) => idOf(h) === idOf(want[k]));
+      if (same) { unchanged.push(page.id); continue; }
+      if (update) {
+        // A licensed in-flight change: the manifest is the batch-level truth and
+        // the plan follows it — loudly, with the delta on the record.
+        const wantIds = want.map(idOf);
+        const haveIds = have.map(idOf);
+        console.log(`splice-plan: UPDATING ${page.id} — plan ${haveIds.length} -> manifest ${wantIds.length} item(s)`);
+        for (const w of wantIds.filter((x) => !haveIds.includes(x))) console.log(`  + ${w}`);
+        for (const h of haveIds.filter((x) => !wantIds.includes(x))) console.log(`  - ${h}`);
+      } else {
+        problems.push(
+          `${page.id}: already has ${have.length} item(s) that differ from the manifest's ${want.length}. `
+          + 'Refusing to overwrite — a licensed in-flight change is applied with --update; anything else is a finding.');
+        continue;
+      }
+    }
+
+    // `requires` disagreement is a DECISION, not a splice. Report and stop.
+    const manifestReq = new Set(page.requires ?? []);
+    const planReq = new Set(target.requires ?? []);
+    const onlyManifest = [...manifestReq].filter((r) => !planReq.has(r));
+    if (onlyManifest.length) {
       problems.push(
-        `${page.id}: already has ${have.length} item(s) that differ from the manifest's ${want.length}. `
-        + 'Refusing to overwrite — a licensed in-flight change is applied with --update; anything else is a finding.');
+        `${page.id}: the manifest declares requires the plan does not — ${onlyManifest.join(', ')}. `
+        + 'Adding a prerequisite edge is an adjudication, not a transcription; an Alpha decides.');
       continue;
     }
-  }
 
-  // `requires` disagreement is a DECISION, not a splice. Report and stop.
-  const manifestReq = new Set(page.requires ?? []);
-  const planReq = new Set(target.requires ?? []);
-  const onlyManifest = [...manifestReq].filter((r) => !planReq.has(r));
-  if (onlyManifest.length) {
-    problems.push(
-      `${page.id}: the manifest declares requires the plan does not — ${onlyManifest.join(', ')}. `
-      + 'Adding a prerequisite edge is an adjudication, not a transcription; an Alpha decides.');
-    continue;
-  }
+    if (page.kind === 'A' && want.length > SIZE_CEILING) {
+      problems.push(`${page.id}: ${want.length} items exceeds the ${SIZE_CEILING} ceiling; split before authoring, not after`);
+      continue;
+    }
 
-  if (page.kind === 'A' && want.length > SIZE_CEILING) {
-    problems.push(`${page.id}: ${want.length} items exceeds the ${SIZE_CEILING} ceiling; split before authoring, not after`);
-    continue;
+    target.items = want;
+    spliced.push({ page: page.id, items: want.length });
   }
-
-  target.items = want;
-  spliced.push({ page: page.id, items: want.length });
+  perBatch.push({ batch: b, spliced, unchanged });
 }
 
 // Duplicate ids anywhere in the plan would be a silent corruption.
@@ -162,20 +178,21 @@ if (problems.length) {
   process.exit(1);
 }
 
-if (!dryRun && spliced.length) {
+if (!dryRun && perBatch.some((x) => x.spliced.length)) {
   writeFileSync(specPath, JSON.stringify(spec, null, 2) + '\n');
 }
 
-const receipt = {
-  run, step: 4, batch: Number(batch),
-  spliced_by: 'tools/splice-plan.mjs (mechanical)',
-  pages_spliced: spliced,
-  pages_already_correct: unchanged,
-  item_count: spliced.reduce((n, s) => n + s.items, 0),
-  size_ceiling: SIZE_CEILING,
-  duplicate_ids: 0,
-  status: 'complete',
-};
-if (!dryRun) writeFileSync(`research/${run}-splice-${batch}.json`, JSON.stringify(receipt, null, 2) + '\n');
-
-console.log(`splice-plan: batch ${batch} — ${spliced.length} page(s) spliced, ${unchanged.length} already correct, ${receipt.item_count} item(s)`);
+for (const { batch: b, spliced, unchanged } of perBatch) {
+  const receipt = {
+    run, step: 4, batch: Number(b),
+    spliced_by: 'tools/splice-plan.mjs (mechanical)',
+    pages_spliced: spliced,
+    pages_already_correct: unchanged,
+    item_count: spliced.reduce((n, s) => n + s.items, 0),
+    size_ceiling: SIZE_CEILING,
+    duplicate_ids: 0,
+    status: 'complete',
+  };
+  if (!dryRun) writeFileSync(`research/${run}-splice-${b}.json`, JSON.stringify(receipt, null, 2) + '\n');
+  console.log(`splice-plan: batch ${b} — ${spliced.length} page(s) spliced, ${unchanged.length} already correct, ${receipt.item_count} item(s)`);
+}
