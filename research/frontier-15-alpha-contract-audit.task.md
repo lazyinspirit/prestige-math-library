@@ -8,7 +8,28 @@ Reproduce the findings from the repo root:
 ```
 node tools/boundary-audit.mjs research/frontier-15-batch-*.proof-contracts.json --fail-on-contradicted --fail-on-template
 node tools/citation-fidelity.mjs research/frontier-15-proof-contracts.json --fail-on-missing-quote
+node tools/gate-liveness.mjs --run frontier-15 --contracts research/frontier-15-proof-contracts.json --checklists research/frontier-15-batch-1.coverage.json,research/frontier-15-batch-2.coverage.json,research/frontier-15-batch-3.coverage.json,research/frontier-15-batch-4.coverage.json,research/frontier-15-batch-5.coverage.json,research/frontier-15-batch-6.coverage.json,research/frontier-15-batch-7.coverage.json --min-checks 1
 ```
+
+## If gate-liveness reports finite-smoke VACUOUS (0 checks)
+
+Zero smoke checks over a level with finite/combinatorial claims is
+under-selection, not registry inapplicability, on THIS run: batch 2's Sylow
+material fits `cyclic-subgroup-lagrange`, batch 1's unit groups likewise,
+and batch 7's limit/product claims fit the poset-as-category checks
+(QUALITY-CONTROLS §finite-smoke lists the registry). **Select the checks
+that genuinely apply** — read the item, pick the registry check that probes
+its claim, and add to that item's contract entry:
+
+```json
+"finite_smoke": [{ "check": "<registry name>", "asserts": "<exact excerpt
+from the item connecting the test to its claim>", ... }]
+```
+
+per the schema in QUALITY-CONTROLS. Selective by design: an item with no
+applicable bounded check gets none — never force a toy check onto an
+analytic claim. A handful of well-chosen checks across the level is the
+target, not coverage.
 
 For EVERY candidate either tool prints, open the item and the contract row
 and decide:

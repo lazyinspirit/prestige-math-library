@@ -875,9 +875,16 @@ export const stages = [
     // (`reviewed: {upheld, by, reason}`), which the detector then respects.
     // Structural gate failures (merge, strict, smoke, liveness) stay
     // blockers — those are tool or authoring defects, not candidate reads.
-    maxFixRounds: 2,
+    // gate-liveness joins the routed set for exactly one of its probes: a
+    // finite-smoke vacuity (0 checks over a full level) is either registry
+    // inapplicability or author under-selection, and telling those apart —
+    // then SELECTING the applicable checks with their asserts excerpts — is
+    // a read of the mathematics. This level carries Sylow, unit groups and
+    // poset-category limit claims, all squarely inside the registry, so the
+    // floor held correctly on 0/324.
+    maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      if (!['boundary-audit', 'citation-fidelity'].includes(failure.id)) return;
+      if (!['boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) return;
       executor.start(stage, {
         role: 'alpha',
         label: `contract-audit-${round}`,
