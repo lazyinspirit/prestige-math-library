@@ -597,6 +597,14 @@ export const stages = [
 
   {
     id: '6b-adjudicate',
+    // The report is the deliverable, exactly as at 6a: a group Alpha that
+    // adjudicates nothing and exits 0 must not clear the stage. Maps each
+    // batch to its owning group's report; before 2-assign there is no group,
+    // and the filter drops the null.
+    artifacts: (ctx, u) => {
+      const g = readAlphaGroups(ctx)?.find((x) => x.covers.includes(String(u)));
+      return g ? `research/${ctx.run}-alpha-${g.label}-6b.md` : null;
+    },
     label: 'group Alpha adjudication',
     units: batches,
     pattern: resultPattern('alpha', '6b-[a-z]+'),
@@ -640,6 +648,7 @@ export const stages = [
     id: '6c-cross',
     label: 'cross-level citation audit',
     units: () => ['all'],
+    artifacts: (ctx) => `research/${ctx.run}-alpha-6c.md`,
     pattern: resultPattern('alpha', '6c-[a-z-]+'),
     concurrency: 1,
     plan: (ctx) => [{
@@ -895,6 +904,10 @@ export const stages = [
     id: '9-scope',
     label: 'scope-denial sweep',
     units: () => ['all'],
+    // The sweep's ONLY deliverable is prose about declined results — without
+    // this line an Alpha that exits 0 writing nothing clears the richness
+    // stage.
+    artifacts: (ctx) => `research/${ctx.run}-alpha-step9.md`,
     pattern: resultPattern('(?:alpha|orchestrator)', 'step9-[a-z-]+'),
     concurrency: 1,
     plan: (ctx) => [{
@@ -939,12 +952,31 @@ export const stages = [
       timeout: 14400,
     }],
     gates: (ctx) => [levelCoverageGate(ctx)],
+    // The spine receipt LAPSES on any mathematical-content change after it is
+    // written — that is its design — so any edit between the receipts dispatch
+    // and this gate turns the stage permanently red with no path back. The
+    // receipts task already carries the regeneration commands; re-dispatch it.
+    maxFixRounds: 2,
+    onGateFailure: async ({ ctx, executor, stage, round }) => {
+      executor.start(stage, {
+        role: 'alpha',
+        label: `receipts-fix-${round}`,
+        job: 'audit',
+        covers: [],
+        brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step9.task.md`],
+        timeout: 14400,
+      });
+    },
   },
 
   {
     id: '10-report',
     label: 'owner report',
     units: () => ['all'],
+    // The stage that owes CLAUDE.md's step-10 fatal-error report must require
+    // the report.
+    artifacts: (ctx) => `research/${ctx.run}-step10-report.md`,
     pattern: resultPattern('(?:report|alpha)', 'step10-[a-z-]+'),
     concurrency: 1,
     plan: (ctx) => [{

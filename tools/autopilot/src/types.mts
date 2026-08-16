@@ -86,7 +86,7 @@ export interface Stage {
   labelFor?: (u: Unit) => string;
   /** The file each unit owes. A result is not an artifact: a lane can exit zero
    *  having written its output to the wrong path. */
-  artifacts?: (ctx: Ctx, u: Unit) => string | string[];
+  artifacts?: (ctx: Ctx, u: Unit) => string | string[] | null;
   concurrency?: number;
   maxAttempts?: number;
   fallbackCount?: number;
