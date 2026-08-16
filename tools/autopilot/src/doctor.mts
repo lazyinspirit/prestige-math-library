@@ -110,11 +110,34 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
     problems.push(`no scope ledger at ${ledger} — a page could leave the run unnoticed. Run \`autopilot plan\`, or write one with tools/manifest-integrity.mjs --write-ledger`);
   }
 
-  // 4. the dispatch command itself
-  const dispatchArgv = config.argv ?? [];
-  const tool = dispatchArgv.find((a: any) => typeof a === 'string' && a.endsWith('.mjs'));
-  if (tool && !existsSync(join(repo, tool))) problems.push(`the dispatch argv names ${tool}, which does not exist`);
-  else if (tool) ok.push(`dispatch argv resolves (${tool})`);
+  // 4. the dispatch command itself.
+  //
+  // Every branch here has to say something. The old shape was
+  // `if (tool && missing) problem; else if (tool) ok;` — so an absent or empty
+  // `config.argv`, and an argv naming no tool at all, both fell through
+  // emitting NEITHER, and the check vanished from the report without a trace.
+  // A doctor that goes quiet is indistinguishable from a doctor that passed,
+  // and this particular silence hides the one setting that starts every agent:
+  // with no dispatch argv the engine cannot launch a single Beta, and the run
+  // discovers it at the first dispatch rather than at preflight.
+  const dispatchArgv: any[] = Array.isArray(config?.argv) ? config.argv : [];
+  if (!Array.isArray(config?.argv)) {
+    problems.push('no dispatch argv: config.argv is '
+      + (config?.argv === undefined ? 'absent' : `${typeof config.argv}, not an array`)
+      + ' — nothing can start an agent. Set "argv" in autopilot.config.json to the '
+      + 'dispatch command as an ARRAY (see bin/autopilot.mts loadConfig for the default)');
+  } else if (!dispatchArgv.length) {
+    problems.push('no dispatch argv: config.argv is an empty array — nothing can start an agent');
+  } else {
+    const tool = dispatchArgv.find((a: any) => typeof a === 'string' && /\.(mjs|mts|js)$/.test(a));
+    if (!tool) {
+      problems.push(`the dispatch argv names no dispatcher script: ${dispatchArgv.join(' ')}`);
+    } else if (!existsSync(join(repo, tool))) {
+      problems.push(`the dispatch argv names ${tool}, which does not exist`);
+    } else {
+      ok.push(`dispatch argv resolves (${tool})`);
+    }
+  }
 
   // 5. judge lanes — checked only if a stage mentions them
   const usesJudge = mod.stages.some((s: any) => {
