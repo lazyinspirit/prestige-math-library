@@ -863,7 +863,7 @@ node tools/step8-guard.mjs --touches research/<run>-touches.json \
   --baseline "pre-step8" --adjudications research/<run>-judge-adjudications.jsonl
 # then CLOSE the window, so step 9 can edit without breaking this gate:
 node tools/touchlog.mjs snap research/<run>-touches.json "after-step8-alpha"
-node tools/gates.mjs --step 8 --run <name> --against after-step8-alpha
+# the engine's 8-adjudicate/8-rejudge gate lists re-run the guard mechanically
 ```
 
 **Close the window, or the gate becomes unre-runnable.** `step8-guard` defaults
@@ -1050,12 +1050,13 @@ summary planned against the wrong number. The tail now always carries a census
 line (`[full output: N ERROR line(s), M WARN line(s), K earlier line(s) not
 shown]`), but the census is a warning to re-run the tool, not a substitute for it.
 
-**The gates for a step are a table, not a recollection:** `node tools/gates.mjs
---step <0..10> --run <name>` runs exactly the gates of record for that step
-(`--list` prints the whole table, `--json` feeds a driver). It only ever reads —
-`reflow`, `adopt-repair` and `merge-proof-contracts` write, so they are actions
-run before it — and it never spends, so `judge-sweep` is the step-7 action while
-`level-coverage` is the gate that checks its output. A required receipt that is
+**The gates for a step are a table, not a recollection:** the build's single
+gate table is `tools/autopilot/stages/mathlib.mts`, run by the engine per stage
+(`gates.mjs`'s build table is retired; its `--audit` table still serves the
+published-page audit). A gate only ever reads — `reflow`, `adopt-repair` and
+`merge-proof-contracts` write, so they are actions run before it — and it never
+spends, so `judge-sweep` is the step-7 action while `level-coverage` is the
+gate that checks its output. A required receipt that is
 missing fails the step rather than being skipped.
 
 **Before starting or resuming a level, run `node tools/preflight.mjs`** (add

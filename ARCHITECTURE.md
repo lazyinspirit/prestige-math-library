@@ -1067,10 +1067,11 @@ only: the audit's Beta and certifier depend on the Claude CLI instead, and its
 proof-refuters on the DeepSeek key, so a Codex outage no longer halts an audit
 wave. Exit 1 means at least one required check failed.
 
-**`tools/gates.mjs`** is the gates of record for one step, as a table instead of
-as prose someone reassembles by hand each time: `node tools/gates.mjs
---step 6 --run frontier-10`, `--list` to print the table without executing, and
-`--json` for a driver. Two invariants make it safe to re-run. **A gate never
+**`tools/gates.mjs`** is the gates of record for one AUDIT step, as a table
+instead of as prose someone reassembles by hand each time: `node tools/gates.mjs
+--audit --step A6 --run wave3`, `--audit --list` to print the table without
+executing, and `--json` for a driver. Its build table is retired: the build's
+gates of record are `tools/autopilot/stages/mathlib.mts`, run by the engine. Two invariants make it safe to re-run. **A gate never
 modifies content** — `reflow.mts`, `adopt-repair.mjs` and
 `merge-proof-contracts.mjs` all write, so they are repair or prepare actions the
 driver runs *before* this, never members of the table. **A gate never spends** —

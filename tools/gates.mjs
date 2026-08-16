@@ -1,13 +1,12 @@
 #!/usr/bin/env node
-// gates.mjs — run the gates of record for one build step, deterministically.
+// gates.mjs — run the gates of record for one AUDIT step, deterministically.
 //
-//   node tools/gates.mjs --step <0..10> --run <name> [--json] [--list]
 //   node tools/gates.mjs --audit --step <A0..A10> --run <wave> [--json] [--list]
+//   node tools/gates.mjs --audit --list              # the whole table, no execution
 //
-//   node tools/gates.mjs --step 6 --run frontier-10
-//   node tools/gates.mjs --audit --step A6 --run wave3
-//   node tools/gates.mjs --list                      # the whole table, no execution
-//   node tools/gates.mjs --audit --list
+// The BUILD table this file once carried is retired (2026-08-16): the build's
+// gates of record live in tools/autopilot/stages/mathlib.mts and run through
+// the engine. Build mode refuses with that pointer.
 //
 // `--audit` selects the published-page retro-audit's table (AUDIT-WORKFLOW.md,
 // steps A0 to A10) instead of the build's. It is a second TABLE in this file,
@@ -153,118 +152,13 @@ const COVERAGE = () => g('level-coverage.mjs', [
   '--verify-current-context', MANIFESTS,
 ], { needs: [CONTRACTS, JUDGE_LEDGER, COVERAGE_RECEIPT, SPINE_RECEIPT], why: 'the hard receipt gate' });
 
-const STEPS = {
-  0: [
-    g('validate-plan.mjs', ['research/plan-spec.json', REHOMED], { why: 'the spec is sane before batching' }),
-    g('content-policy.mjs', [MANIFESTS, '--manifest-only', REHOMED], { needs: [MANIFESTS], why: 'the two-A-page batch cap' }),
-  ],
-  1: [],   // Betas are scaffolding; nothing of theirs is on disk to gate yet.
-  2: [
-    g('validate-plan.mjs', ['research/plan-spec.json', REHOMED], { why: 'scaffold structure and ordering' }),
-    g('depsource.mjs', ['research/plan-spec.json'], { why: 'every dep resolves somewhere' }),
-    // The omission gate, at the only step where acting on it is still cheap: the
-    // item list is not yet authored, so adding a harvested result costs a
-    // scaffold entry rather than a rewrite.
-    g('coverage-checklist.mjs', [CHECKLISTS], { needs: [CHECKLISTS], why: 'every result the sources contain is scaffolded or declined in writing' }),
-    // CITATION LIVENESS (owner, 2026-08-15). The omission gate above checks a
-    // source URL is PRESENT; this checks a reader can OPEN it. On frontier-13 a
-    // batch cited lecture notes returning 404 — 47 of 114 harvested rows and 15
-    // items rested on them — and every gate was green. The tool already existed;
-    // only `run-wave.mjs` called it, so the build never ran it and an Alpha
-    // caught it three steps late. `--recover` looks the dead URL up in the
-    // Wayback index under each host variant, because RECOVER BEFORE REPLACE:
-    // those notes were archived the whole time under a hostname the citation had
-    // since moved off, and re-sourcing the page cost a 42-minute re-harvest.
-    g('url-sweep.mjs', ['--coverage', CHECKLISTS, '--out', '{dir}/{run}-url-liveness.json', '--recover', '--fail-on-dead'],
-      { needs: [CHECKLISTS], why: 'every cited source resolves; a dead one is reported with its archived snapshot' }),
-  ],
-  3: [],   // Orchestrator adjudication of Beta recommendations. Judgment, not a gate.
-  4: [
-    g('validate-plan.mjs', ['research/plan-spec.json', REHOMED], { why: 'the spliced spec still validates' }),
-    // Step 4 is the SPLICE. Authoring is step 5, so no item file exists yet and
-    // the post-authoring mode can only report `scope-item-missing` for every
-    // item in the batch. What is checkable here is the manifest, which the
-    // splice just changed.
-    g('content-policy.mjs', [MANIFESTS, '--manifest-only', REHOMED], { needs: [MANIFESTS], why: 'future-scope containment of the spliced manifest' }),
-  ],
-  5: [
-    ...BASE(),
-    // `reviewed: false` for the same reason A4 uses it, and it is the same bug:
-    // step 5 is the BETAS authoring, and a `risk_review` is a record only ALPHA
-    // may write, at step 6. Requiring one here asks the authors to produce
-    // someone else's disposition, and the step can never pass on a fresh level —
-    // measured on run `zfc`, which halted here on six critical items whose
-    // reviews were not yet due. Step 5 computes the tiers; step 6 requires the
-    // dispositions.
-    ...CONTRACT_TRIO({ reviewed: false }),
-    g('content-policy.mjs', [MANIFESTS, REHOMED], { needs: [MANIFESTS], why: 'provenance and generated-claim containment' }),
-  ],
-  6: [
-    ...BASE(),
-    ...CONTRACT_TRIO(),
-    g('content-policy.mjs', [MANIFESTS, REHOMED], { needs: [MANIFESTS] }),
-    g('audit-manifest.mjs', [MANIFESTS], { needs: [MANIFESTS], why: 'the full relationship checklist' }),
-    g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'after-authoring'], { needs: [TOUCHES], why: 'downstream consumers of a changed interface' }),
-    // Re-run after authoring: step 5 may legitimately drop or rename a planned
-    // item, and a checklist that still claims it as `included` has stopped being
-    // a record of what was built. Alpha's step-6 read is what checks the harvest
-    // is FAITHFUL to the sources; this only checks it is still TRUE of disk.
-    g('coverage-checklist.mjs', [CHECKLISTS], { needs: [CHECKLISTS], why: 'the checklist still matches what was authored' }),
-    // Re-run after authoring for the same reason the checklist does: step 5 adds
-    // `sources.references` URLs to the item files that did not exist at step 2,
-    // and a link can rot between a scaffold and a publish. The manifests bring
-    // the authored items into scope here; the checklists keep the scaffold-time
-    // sources in it.
-    g('url-sweep.mjs', ['--manifests', MANIFESTS, '--coverage', CHECKLISTS, '--out', '{dir}/{run}-url-liveness.json', '--recover', '--fail-on-dead'],
-      { needs: [MANIFESTS, CHECKLISTS], why: 'every cited source still resolves, now including authored item references' }),
-  ],
-  // Step 7 is the judge sweep itself, which SPENDS. The driver runs
-  // judge-sweep.mjs as an action; this gate only checks what it produced.
-  7: [COVERAGE()],
-  8: [
-    // `--against` CLOSES THE STEP-8 WINDOW, and without it this gate is
-    // unre-runnable. `LEVELS.md` promises the guard "is scoped to that explicit
-    // baseline window, so a later legitimate stage — a step-9 scope-denial
-    // repair, an owner-directed change — is never mistaken for a nonfatal
-    // polish". But `step8-guard` defaults its upper bound to the LIVE WORKING
-    // TREE, so once step 9 legitimately edits anything, every re-run of step 8
-    // reports that edit as `nonfatal-edit`. Measured on run `zfc`: a step-9
-    // count repair to `def-language-of-set-theory` — an item neither judge ever
-    // rejected, so no honest `confirmed_fatal` could ever license it — blocked
-    // the step-8 gate permanently. Pass `--against <snapshot label>` to gate the
-    // window that step 8 actually owns; omit it while step 8 is still running.
-    g('step8-guard.mjs', ['--touches', TOUCHES, '--baseline', 'pre-step8',
-      ...(option('--against') ? ['--against', option('--against')] : []),
-      '--adjudications', ADJUDICATIONS],
-      { needs: [TOUCHES, ADJUDICATIONS], why: 'R1 — step 8 is fatal-only' }),
-    // The contract trio, added 2026-08-11 after Alpha found it missing here.
-    // A step-8 fatal repair edits proof text, which is exactly what invalidates a
-    // proof contract — a merged-away step, a quoted Statement that has since
-    // changed, a dropped `risk_review`. Step 8 ran `step8-guard`, `impact-audit`
-    // and `level-coverage` and none of them reads the contract for validity, so
-    // that drift survived to be discovered by an agent rather than a gate.
-    // Measured on `frontier-10`: 9 `proof-contract --strict` errors and a missing
-    // `risk_review` were already present at step 8 as residue of round 1 and of
-    // the step-6 repairs, and were found only because Alpha stashed its own
-    // changes and re-ran at HEAD to check whether it had caused them.
-    ...CONTRACT_TRIO(),
-    g('impact-audit.mjs', ['--touches', TOUCHES, '--from', 'pre-step8'], { needs: [TOUCHES] }),
-    COVERAGE(),
-  ],
-  // Step 9's mechanical half is the DECIDABLE check only. `--strict` also fails
-  // on prosecheck's heuristic warnings, of which the published corpus carries
-  // 589 with legitimate cases — making it required would block every run forever
-  // on legacy content. The warning list is the sweep's candidate set, which an
-  // agent or human reads; it is advisory here by design.
-  9: [
-    g('prosecheck.mjs', [], { why: 'position-contradiction: decidable, no judgement' }),
-    g('prosecheck.mjs', ['--warnings'], { required: false, why: 'scope-denial candidates for the sweep to read' }),
-  ],
-  10: [
-    ...BASE(),
-    COVERAGE(),
-  ],
-};
+// ---- the build table: RETIRED (2026-08-16) ---------------------------------
+//
+// The build's gates of record live in tools/autopilot/stages/mathlib.mts and
+// run through the engine. This file carried a second, divergent build table
+// that nothing executed — the two disagreed by four tools, which is exactly
+// the failure the header above warns about. One table, one owner; the
+// retired copy is in git history.
 
 // ---- the audit table (AUDIT-WORKFLOW.md, A0 to A10) -------------------------
 //
@@ -355,7 +249,14 @@ const AUDIT_STEPS = {
   ],
 };
 
-const TABLE = isAudit ? AUDIT_STEPS : STEPS;
+if (!isAudit) {
+  console.error('gates.mjs: the BUILD gate table is retired — the build\'s gates of record live in');
+  console.error('tools/autopilot/stages/mathlib.mts and run through the engine (tools/autopilot).');
+  console.error('This tool still serves the published-page audit:');
+  console.error('  node tools/gates.mjs --audit --step A<n> --run <wave>   [--list] [--json]');
+  process.exit(2);
+}
+const TABLE = AUDIT_STEPS;
 
 const usage = (message) => {
   if (message) console.error(`gates: ${message}`);
