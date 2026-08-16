@@ -20,6 +20,7 @@ import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
 import { stages } from '../stages/mathlib.mts';
+import { identityPlaceholders } from '../src/doctor.mts';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
@@ -165,6 +166,17 @@ test('stage 1 pattern admits exactly its two result shapes', () => {
   // nor may the drift REVIEW be satisfied by some other alpha result
   assert.ok(!s1.pattern.test('alpha-a.result.json'));
   assert.ok(!s1.pattern.test('alpha-drift-review.log'));
+});
+
+// The template defect that blocked stage 1 on frontier-15: an identity
+// placeholder inside a dispatched prompt. The doctor scan and the dispatcher
+// share this token grammar; the test pins both the hit and the near-misses.
+test('identityPlaceholders flags <n>/<k> and nothing else', () => {
+  assert.deepEqual(identityPlaceholders('added <page-id> (order <n>)'), ['<n>']);
+  assert.deepEqual(identityPlaceholders('wave <k> of the audit'), ['<k>']);
+  // letters-only inside the brackets: hyphenated placeholders are legal prose
+  assert.deepEqual(identityPlaceholders('<a-page-id> and <output> and (order N)'), []);
+  assert.deepEqual(identityPlaceholders('plain n and k, no brackets'), []);
 });
 
 test('stage 1 declares the drift gate, and it names the run', () => {
