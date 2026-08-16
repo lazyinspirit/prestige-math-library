@@ -71,6 +71,14 @@ export class State {
   }
 
   init(run) {
+    // A state dir belongs to ONE run. Without this check, `start --run
+    // frontier-15` against a dir carrying frontier-14 inherited the finished
+    // run's stage records — gatesPassedAt included — and read as already done.
+    if (this.data.run && run && this.data.run !== run) {
+      throw new Error(`state dir ${this.path} belongs to run "${this.data.run}", not "${run}" — `
+        + 'archive .autopilot/ or pass a fresh --state-dir; resuming another run\'s state '
+        + 'reads its cleared stages as this run\'s progress');
+    }
     if (!this.data.run) {
       this.data.run = run;
       this.data.startedAt = new Date().toISOString();

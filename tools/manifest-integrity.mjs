@@ -39,7 +39,7 @@ const asJson = argv.includes('--json');
 const write = argv.includes('write-ledger') || argv.includes('--write-ledger');
 
 if (!run) {
-  console.error('usage: node tools/manifest-integrity.mjs --run <name> [--ledger <path>] [--json] [--write-ledger]');
+  console.error('usage: node tools/manifest-integrity.mjs --run <name> [--ledger <path>] [--json] [--write-ledger [--force]]');
   process.exit(2);
 }
 
@@ -61,6 +61,15 @@ const manifestPages = () => {
 const current = manifestPages();
 
 if (write) {
+  // The ledger is the step-0 baseline the gate compares against. Overwriting
+  // it re-baselines the anti-scope-loss check to whatever the manifests NOW
+  // say — a degraded manifest set would be confirmed, not caught. Once, and
+  // --force is the deliberate, on-the-record re-baseline.
+  if (existsSync(ledgerPath) && !argv.includes('--force')) {
+    console.error(`manifest-integrity: ${ledgerPath} already exists — refusing to re-baseline the scope ledger.`);
+    console.error('  Pass --force only for a deliberate re-baseline, on the record.');
+    process.exit(2);
+  }
   const ledger = {
     run,
     written: new Date().toISOString(),
