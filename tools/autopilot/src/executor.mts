@@ -22,13 +22,31 @@
 // a repair dispatch whose content depends on what failed. Both are `escalate`
 // hooks, both are optional, and the default for both is to stop and record —
 // never to guess.
+//
+// OVERLAP GROUPS, AND THE ONE THING THEY MAY NOT RELAX. Strict serial execution
+// makes the slowest unit of a stage the start time of every unit of the next
+// one: on a seven-batch level the slowest author (6h) gated all five readers
+// (4h), for hours of nothing happening. A maximal run of consecutive stages
+// sharing a `pipeline` name is therefore run with PER-UNIT progression — batch 3
+// may enter its reader while batch 5 is still authoring.
+//
+// What per-unit progression is allowed to depend on is deliberately tiny: that
+// unit's own coverage, and that unit's own declared artifact. NO GATE IS EVER
+// EVALUATED PER UNIT. Every member stage's gates run at the group exit,
+// together, once, with the group fully drained — the level join. This is not
+// timidity; a gate that quietly becomes per-batch when it needed level scope
+// reports success over a fraction of what it was asked to check, which is the
+// vacuous-gate class this engine already exists to prevent, wearing a green
+// tick. The cost is that a per-batch defect a level-wide gate would have found
+// is found one stage later than it used to be; the level join still finds it,
+// and it still blocks before the next barrier.
 
 import { existsSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 
 import { covered, pending, stageComplete } from './coverage.mts';
-import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, RunningEntry } from './types.mts';
+import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, RunningEntry, Gate } from './types.mts';
 import { runGates } from './gates.mts';
 import { takeCommand } from './control.mts';
 import { humanDuration } from './reporter.mts';
@@ -172,12 +190,88 @@ export class Executor {
     };
   }
 
+  /**
+   * The overlap group `stage` belongs to: the maximal run of CONSECUTIVE stages
+   * carrying the same `pipeline` name, or `[stage]` for a stage with none.
+   *
+   * Maximal-and-consecutive is the whole definition, and it is why a pipeline
+   * name reused non-contiguously silently means two groups rather than one —
+   * `validateStages` refuses that outright rather than letting a table say
+   * something it does not mean.
+   */
+  pipelineGroup(stage: Stage): Stage[] {
+    if (!stage.pipeline) return [stage];
+    const i = this.stages.indexOf(stage);
+    if (i < 0) return [stage];
+    let a = i; let b = i;
+    while (a > 0 && this.stages[a - 1].pipeline === stage.pipeline) a -= 1;
+    while (b < this.stages.length - 1 && this.stages[b + 1].pipeline === stage.pipeline) b += 1;
+    return this.stages.slice(a, b + 1);
+  }
+
+  /**
+   * The units of `stage` that are FINISHED — covered by a successful dispatch
+   * and, where the stage names one, with their artifact on disk.
+   *
+   * This is `stageStatus` asked one unit at a time, and it carries the same
+   * "a result is not an artifact" rule: reader-7 exited zero having written its
+   * report over reader-1's, so coverage alone would let the next stage start on
+   * a deliverable that does not exist.
+   */
+  unitsComplete(stage: Stage, ctx: Ctx = this.ctx()): Set<Unit> {
+    const owed = (stage.units ? stage.units(ctx) : []).map(String);
+    if (this.state.data.stages[stage.id]?.skipped) return new Set(owed);
+    const cov = covered(ctx.dispatchDir, stage.pattern, ctx.coversMap);
+    // A stage running in the legacy COUNT mode declares no coverage at all, so
+    // there is no per-unit answer to give. Fall back to the only thing that mode
+    // supports — the stage as a whole — rather than inventing a per-unit one.
+    if (!cov.size) {
+      const st = this.stageStatus(stage, ctx);
+      if (st.mode === 'count') return new Set(st.unitsDone ? owed : []);
+    }
+    const out = new Set<Unit>();
+    for (const u of owed) {
+      if (!cov.has(u)) continue;
+      if (stage.artifacts) {
+        const paths = [stage.artifacts(ctx, u)].flat().filter(Boolean);
+        if (!paths.every((f: any) => existsSync(join(ctx.repo, f)))) continue;
+      }
+      out.add(u);
+    }
+    return out;
+  }
+
+  /** Which of `candidates` may be dispatched at `stage`, given its predecessor
+   *  inside the same overlap group. A unit whose stage has no predecessor in the
+   *  group is ready by definition; the group's first stage is never held back.
+   *
+   *  `cohort` is what keeps a group Alpha honest: its one dispatch declares
+   *  coverage of three batches, so all three must be finished at the previous
+   *  stage or the coverage record would be a claim about work nobody did. */
+  readyUnits(stage: Stage, prev: Stage | null, ctx: Ctx, candidates: Unit[]): Unit[] {
+    if (!prev) return candidates;
+    const done = this.unitsComplete(prev, ctx);
+    const owedPrev = new Set((prev.units ? prev.units(ctx) : []).map(String));
+    return candidates.filter((u: Unit) => {
+      const cohort = (stage.cohort ? stage.cohort(ctx, u) : [u]).map(String);
+      // A unit the predecessor does not owe cannot be waited for; only the ones
+      // it owes are evidence either way.
+      return cohort.every((c: string) => !owedPrev.has(c) || done.has(c));
+    });
+  }
+
   snapshot(): Snapshot {
     const ctx = this.ctx();
     const { stage } = this.currentStage();
+    // Every unfinished member of the active overlap group is "current": with
+    // per-unit progression three of them can genuinely be running at once, and
+    // a status page naming only the first is the same lie as reporting nothing
+    // in flight. For a stage with no `pipeline` the group is itself, so this is
+    // the previous behaviour exactly.
+    const activeIds = new Set(stage ? this.pipelineGroup(stage).map((s: any) => s.id) : []);
     const stages = this.stages.map((s: any) => {
       const st = this.stageStatus(s, ctx);
-      return { id: s.id, label: s.label, done: st.done, why: st.why, current: stage && s.id === stage.id };
+      return { id: s.id, label: s.label, done: st.done, why: st.why, current: activeIds.has(s.id) && !st.done };
     });
     const running: RunningEntry[] = [...this.inflight.values()].map((d: any) => ({
       label: d.meta.label,
@@ -465,6 +559,12 @@ export class Executor {
       return 'working';
     }
 
+    // THE OVERLAP GROUP this stage belongs to. `[stage]` unless the table says
+    // otherwise, in which case everything below reads exactly as it did before.
+    const group = this.pipelineGroup(stage);
+    const groupIds = new Set(group.map((s: any) => s.id));
+    const groupKey = stage.pipeline ?? stage.id;
+
     // THE STAGE BARRIER. Nothing starts while an earlier stage is still working.
     //
     // A stage cleared its coverage the moment its last result file appeared —
@@ -483,11 +583,18 @@ export class Executor {
     //
     // Draining is cheap here — stages are hours long and the barrier costs
     // seconds — and the alternative is two stages writing the same ledger.
-    const earlier = [...this.inflight.values()].filter((d: any) => d.meta.stage !== stage.id);
+    //
+    // THE BARRIER IS NOW BETWEEN GROUPS, not between stages. Inside one group
+    // the overlap is the point, and the ledger race above cannot arise there:
+    // the stages that write a shared ledger — the judge sweep, the adjudicators,
+    // the cross-level audit, both snapshots — carry no `pipeline` and so are each
+    // their own group. Which stages may overlap is a claim the stage table makes
+    // and the engine obeys; the engine does not infer it.
+    const earlier = [...this.inflight.values()].filter((d: any) => !groupIds.has(d.meta.stage));
     if (earlier.length) {
       const labels = earlier.map((d: any) => `${d.meta.stage}/${d.meta.label}`);
-      if (this._barrierFor !== stage.id) {
-        this._barrierFor = stage.id;
+      if (this._barrierFor !== groupKey) {
+        this._barrierFor = groupKey;
         this.reporter.notify('barrier',
           `${stage.id} is ready but ${labels.length} dispatch(es) from an earlier stage are still running (${labels.join(', ')}); holding`);
       }
@@ -496,10 +603,76 @@ export class Executor {
     }
     this._barrierFor = undefined;
 
+    // ONE LANE CAP FOR THE WHOLE GROUP.
+    //
+    // `concurrency` mirrors the dispatcher's per-role lane cap. Serially that is
+    // enough, because only one stage is ever live. In a group two stages using
+    // the SAME role can be live together — `1-scaffold` and `3-fix` are both
+    // Betas, `3-review` and `3-recheck` are both Alphas — and two stages at the
+    // role's cap is twice the role's cap. The dispatcher's own slot pool would
+    // absorb the excess by making the extra processes wait, so this is not a
+    // correctness fix; it stops the engine from parking idle node processes on a
+    // lane that cannot run them.
+    const roleBudget = (role: string): number => {
+      const caps = group.filter((s: any) => s.role === role)
+        .map((s: any) => s.concurrency ?? this.config.concurrency ?? 5);
+      return caps.length ? Math.max(...caps) : Infinity;
+    };
+
+    // PER-UNIT PROGRESSION. Each member of the group is offered the units whose
+    // own work is finished at the member before it; a member with nothing ready
+    // simply starts nothing this tick. Stage order, so the earliest work keeps
+    // flowing rather than starving behind a later stage.
+    for (const [i, member] of group.entries()) {
+      if (this.state.data.stages[member.id]?.skipped) continue;
+      if (this.stageStatus(member, ctx).unitsDone) continue;
+      const firstEntry = !this.state.data.stages[member.id];
+      this.state.stage(member.id);
+      if (firstEntry && member.id !== stage.id) {
+        this.reporter.notify('stage', `entering ${member.id} — ${member.label} (overlapping ${stage.id})`);
+      }
+      const outcome = await this.dispatchStage(member, ctx, {
+        prev: i > 0 ? group[i - 1] : null, groupKey, roleBudget,
+      });
+      if (outcome === 'blocked') return 'blocked';
+    }
+
+    // THE GROUP EXIT — the level join.
+    //
+    // Every member's units are covered, every dispatch has drained, and only now
+    // does any gate run: each member's own list, in stage order, once. A gate
+    // that a member declared over the whole level therefore still sees the whole
+    // level, which is the property per-unit progression is not allowed to cost.
+    const active = group.filter((s: any) => !this.state.data.stages[s.id]?.skipped);
+    const statuses = active.map((s: any) => ({ s, st: this.stageStatus(s, ctx) }));
+    const unitsAllDone = statuses.every(({ st }: any) => st.unitsDone);
+    const gatesPending = statuses.some(({ st }: any) => !st.gatesPassed);
+    if (unitsAllDone && gatesPending && !this.inflight.size) {
+      const outcome = await this.runGroupGates(statuses, ctx, group);
+      if (outcome !== 'ok') return outcome;
+    }
+
+    this.reporter.report(this.snapshot());
+    return 'working';
+  }
+
+  /**
+   * Plan and start one stage's missing work. Extracted from `tick` unchanged in
+   * behaviour; `prev` and `roleBudget` are the only additions, and both are
+   * no-ops for a stage that is its own group.
+   */
+  async dispatchStage(stage: Stage, ctx: Ctx, { prev = null, groupKey = stage.id, roleBudget = () => Infinity }:
+    { prev?: Stage | null; groupKey?: string; roleBudget?: (role: string) => number } = {}): Promise<'ok' | 'blocked'> {
     // Which units still need a successful dispatch.
     const owed = (stage.units ? stage.units(ctx) : []).map(String);
     const cov = covered(ctx.dispatchDir, stage.pattern, ctx.coversMap);
     let need = pending(owed, cov);
+
+    // ...and, inside an overlap group, only those whose own work at the previous
+    // member is finished. `prev` is null for a stage that is its own group and
+    // for the first member of one, so this filter is the identity everywhere the
+    // table has not asked for overlap.
+    need = this.readyUnits(stage, prev, ctx, need);
 
     // Do not re-dispatch a unit whose lane is already running — including one
     // this engine did not start.
@@ -522,12 +695,13 @@ export class Executor {
     for (const u of adopted) runningUnits.add(u);
     if (adopted.size) {
       const news = [...adopted].filter((u: any) => need.includes(u));
-      // Reset per stage: the set exists only to avoid repeating one message
-      // within a stage, and keying it across the whole run made it grow without
-      // bound on a long build.
-      if (this._adoptStage !== stage.id) { this._adoptStage = stage.id; this._announcedAdoption = new Set(); }
-      if (news.length && !this._announcedAdoption.has(news.join(','))) {
-        this._announcedAdoption.add(news.join(','));
+      // Reset per GROUP, and key the message by stage: the set exists only to
+      // avoid repeating one message, and keying it across the whole run made it
+      // grow without bound on a long build. Resetting it per stage instead would
+      // now clear it several times a tick, and the message would repeat forever.
+      if (this._adoptStage !== groupKey) { this._adoptStage = groupKey; this._announcedAdoption = new Set(); }
+      if (news.length && !this._announcedAdoption.has(`${stage.id}:${news.join(',')}`)) {
+        this._announcedAdoption.add(`${stage.id}:${news.join(',')}`);
         this.reporter.notify('adopted', `unit(s) ${news.join(', ')} are already covered by a live external dispatch; not starting a second`);
       }
     }
@@ -561,10 +735,17 @@ export class Executor {
     // throttle work the dispatcher was willing to run. Removed: the engine
     // should not impose a limit nobody asked for. Set `globalConcurrency` in
     // config if a machine genuinely needs one.
+    //
+    // The group's ROLE budget sits alongside it, and only bites inside a
+    // pipeline: two stages of one group sharing a lane must not each fill it.
     const stageCap = stage.concurrency ?? this.config.concurrency ?? 5;
     const inStage = [...this.inflight.values()].filter((d: any) => d.meta.stage === stage.id).length;
     const globalCap = this.config.globalConcurrency ?? Infinity;
-    const slots = Math.max(0, Math.min(stageCap - inStage, globalCap - this.inflight.size));
+    const roleCap = stage.role ? roleBudget(stage.role) : Infinity;
+    const inRole = stage.role
+      ? [...this.inflight.values()].filter((d: any) => d.meta.role === stage.role).length
+      : 0;
+    const slots = Math.max(0, Math.min(stageCap - inStage, roleCap - inRole, globalCap - this.inflight.size));
     if (need.length && slots > 0) {
       let plans;
       try {
@@ -650,98 +831,144 @@ export class Executor {
 
       for (const p of plans) this.start(stage, p);
     }
+    return 'ok';
+  }
 
-    // Every unit covered: gate, then let currentStage() move on next tick.
-    const recheck = this.stageStatus(stage, ctx);
-    if (recheck.unitsDone && !recheck.gatesPassed && !this.inflight.size) {
-      const gates = stage.gates ? stage.gates(ctx) : [];
+  /**
+   * THE LEVEL JOIN. Run every gate the group's members declare, in stage order,
+   * once, with nothing in flight — then stamp all of them.
+   *
+   * For a stage that is its own group this is the old per-stage gate block
+   * verbatim, including the vacuous-empty-list refusal, the repair loop and the
+   * blocker retirement. For a real group it is the property that makes per-unit
+   * progression safe: a repo-wide gate declared by ANY member still runs over
+   * the whole level, after all of it exists, before anything downstream starts.
+   *
+   * Exact duplicates are run once. `manifest-integrity` and `validate-plan` are
+   * declared by all four scaffold stages and `precheck` by two read stages; the
+   * same argv over the same disk in the same second cannot give two answers, and
+   * a member that declares a STRONGER variant (`risk-report --require-reviewed`)
+   * has a different argv and still runs on its own.
+   */
+  async runGroupGates(statuses: Array<{ s: Stage; st: StageStatus }>, ctx: Ctx, group: Stage[]): Promise<'ok' | 'working' | 'blocked'> {
+    const list: Gate[] = [];
+    const owners: Stage[] = [];
+    const seen = new Set<string>();
+    let n = 0;
+    for (const { s } of statuses) {
+      if (s.gatesWaived || !s.gates) continue;
+      if (this.state.data.stages[s.id]?.gatesPassedAt) continue;   // already stamped on an earlier pass
+      const gates = s.gates(ctx) ?? [];
       // A STAGE THAT DECLARES GATES MUST HAVE GATES. An empty list here is a
       // spec that says "check this" and supplies nothing to check with — the
       // vacuous-gate shape. Blocking is the only honest response; passing it
       // would be indistinguishable from having checked.
       if (!gates.length) {
-        const msg = `stage ${stage.id}: declares gates but produced an empty gate list — nothing was checked. `
+        const msg = `stage ${s.id}: declares gates but produced an empty gate list — nothing was checked. `
           + 'Either the gate builders returned nothing for this run, or the stage should declare `gatesWaived`.';
         if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
-          this.state.addBlocker(stage.id, msg);
-          this.reporter.notify('blocked', msg, { stage: stage.id });
+          this.state.addBlocker(s.id, msg);
+          this.reporter.notify('blocked', msg, { stage: s.id });
         }
         this.reporter.report(this.snapshot(), { force: true });
         return 'blocked';
       }
-      {
-        this.reporter.notify('gates', `${stage.id}: running ${gates.length} gate(s)`);
-        const { ok, results } = await runGates(gates, { cwd: ctx.repo, signal: this.signal, logger: () => {} });
-        for (const r of results) this.reporter.event('gate', r);
-        if (!ok) {
-          const bad = results.find((r: any) => !r.ok);
-          const msg = `stage ${stage.id}: gate ${bad.id} failed — ${bad.why}`;
-          const isNew = !this.state.data.blockers.some((b: any) => b.message === msg);
-          if (isNew) {
-            this.state.addBlocker(stage.id, msg);
-            this.reporter.notify('blocked', msg, { stage: stage.id, gate: bad.id });
-          }
-
-          // THE REPAIR LOOP.
-          //
-          // `onGateFailure` was declared, called, and implemented by no stage;
-          // `fixRounds` was initialised and never read. So the only thing a
-          // failing gate could ever do was hold. On frontier-14 that meant two
-          // confirmed-fatal proofs became a paragraph in a markdown report
-          // instead of an authoring dispatch, and the run went to step 10 with
-          // them open.
-          //
-          // The hook also could not have worked as written: it fired only when
-          // the blocker MESSAGE was new, and a gate that keeps failing the same
-          // way produces the same message every time. One round, then deadlock.
-          //
-          // It now fires whenever nothing is in flight and rounds remain, which
-          // is the actual condition for "there is repair work to start". The cap
-          // is what keeps a non-converging repair from spending forever: past it
-          // the gate still blocks, and a person reads the blocker.
-          const st = this.state.stage(stage.id);
-          const maxRounds = stage.maxFixRounds ?? 0;
-          if (stage.onGateFailure && st.fixRounds < maxRounds) {
-            st.fixRounds += 1;
-            this.state.save();
-            this.reporter.notify('repair',
-              `${stage.id}: gate ${bad.id} failed; starting repair round ${st.fixRounds}/${maxRounds}`);
-            try {
-              await stage.onGateFailure({ ctx, failure: bad, executor: this, stage, round: st.fixRounds });
-            } catch (err: any) {
-              this.reporter.notify('repair-failed', `${stage.id}: repair round ${st.fixRounds} threw — ${err?.message ?? err}`);
-            }
-            // Dispatches started by the hook are in flight now; the gate re-runs
-            // once they drain, because `gatesPassedAt` is still unset.
-            this.reporter.report(this.snapshot(), { force: true });
-            return 'working';
-          }
-          // Said once, when the budget runs out — not on every tick thereafter.
-          if (stage.onGateFailure && maxRounds > 0 && !st.repairExhaustedAt) {
-            st.repairExhaustedAt = new Date().toISOString();
-            this.state.save();
-            this.reporter.notify('repair-exhausted',
-              `${stage.id}: ${maxRounds} repair round(s) did not clear gate ${bad.id}; this needs a person`);
-          }
-          this.reporter.report(this.snapshot(), { force: true });
-          return 'blocked';
-        }
-        this.state.stage(stage.id).gatesPassedAt = new Date().toISOString();
-        // A gate that now passes retires its own blocker, so a transient does
-        // not leave a permanent scar on the status report.
-        const before = this.state.data.blockers.length;
-        this.state.data.blockers = this.state.data.blockers.filter((b: any) => !(b.stage === stage.id && /gate /.test(b.message)));
-        if (this.state.data.blockers.length !== before) this.reporter.notify('unblocked', `${stage.id}: gate blocker cleared on a later pass`);
-        this.state.save();
-        this.reporter.notify('gates-ok', `${stage.id}: all gates green`);
+      for (const g of gates) {
+        n += 1;
+        const key = Array.isArray(g.argv) ? `${g.id} ${JSON.stringify(g.argv)}` : `${g.id} fn-${n}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        list.push(g);
+        owners.push(s);
       }
-      this.state.stage(stage.id).doneAt = new Date().toISOString();
-      this.state.save();
-      this.reporter.notify('stage-clear', `${stage.id} cleared — ${recheck.why}`);
     }
 
-    this.reporter.report(this.snapshot());
-    return 'working';
+    if (list.length) {
+      const where = group.length > 1 ? `${group[0].id}..${group[group.length - 1].id}` : group[0].id;
+      this.reporter.notify('gates', `${where}: running ${list.length} gate(s)`);
+      const { ok, results } = await runGates(list, { cwd: ctx.repo, signal: this.signal, logger: () => {} });
+      for (const r of results) this.reporter.event('gate', r);
+      if (!ok) {
+        // `runGates` appends one result per gate and stops at the first failure,
+        // so the failing gate is the last result and its owner is at the same
+        // index. Looking the owner up by gate id would pick the wrong stage the
+        // moment two members declare an id in common, which four of them do.
+        const bad = results[results.length - 1];
+        const stage = owners[results.length - 1] ?? group[0];
+        const msg = `stage ${stage.id}: gate ${bad.id} failed — ${bad.why}`;
+        const isNew = !this.state.data.blockers.some((b: any) => b.message === msg);
+        if (isNew) {
+          this.state.addBlocker(stage.id, msg);
+          this.reporter.notify('blocked', msg, { stage: stage.id, gate: bad.id });
+        }
+
+        // THE REPAIR LOOP.
+        //
+        // `onGateFailure` was declared, called, and implemented by no stage;
+        // `fixRounds` was initialised and never read. So the only thing a
+        // failing gate could ever do was hold. On frontier-14 that meant two
+        // confirmed-fatal proofs became a paragraph in a markdown report
+        // instead of an authoring dispatch, and the run went to step 10 with
+        // them open.
+        //
+        // The hook also could not have worked as written: it fired only when
+        // the blocker MESSAGE was new, and a gate that keeps failing the same
+        // way produces the same message every time. One round, then deadlock.
+        //
+        // It now fires whenever nothing is in flight and rounds remain, which
+        // is the actual condition for "there is repair work to start". The cap
+        // is what keeps a non-converging repair from spending forever: past it
+        // the gate still blocks, and a person reads the blocker.
+        //
+        // The hook belongs to the stage that DECLARED the failing gate, not to
+        // the group: a thin scaffold is `3-recheck`'s to re-open, whoever else
+        // was overlapping it.
+        const st = this.state.stage(stage.id);
+        const maxRounds = stage.maxFixRounds ?? 0;
+        if (stage.onGateFailure && st.fixRounds < maxRounds) {
+          st.fixRounds += 1;
+          this.state.save();
+          this.reporter.notify('repair',
+            `${stage.id}: gate ${bad.id} failed; starting repair round ${st.fixRounds}/${maxRounds}`);
+          try {
+            await stage.onGateFailure({ ctx, failure: bad, executor: this, stage, round: st.fixRounds });
+          } catch (err: any) {
+            this.reporter.notify('repair-failed', `${stage.id}: repair round ${st.fixRounds} threw — ${err?.message ?? err}`);
+          }
+          // Dispatches started by the hook are in flight now; the gate re-runs
+          // once they drain, because `gatesPassedAt` is still unset.
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'working';
+        }
+        // Said once, when the budget runs out — not on every tick thereafter.
+        if (stage.onGateFailure && maxRounds > 0 && !st.repairExhaustedAt) {
+          st.repairExhaustedAt = new Date().toISOString();
+          this.state.save();
+          this.reporter.notify('repair-exhausted',
+            `${stage.id}: ${maxRounds} repair round(s) did not clear gate ${bad.id}; this needs a person`);
+        }
+        this.reporter.report(this.snapshot(), { force: true });
+        return 'blocked';
+      }
+      // A gate that now passes retires its own blocker, so a transient does
+      // not leave a permanent scar on the status report.
+      const before = this.state.data.blockers.length;
+      const ownerIds = new Set(statuses.map(({ s }: any) => s.id));
+      this.state.data.blockers = this.state.data.blockers.filter((b: any) => !(ownerIds.has(b.stage) && /gate /.test(b.message)));
+      if (this.state.data.blockers.length !== before) this.reporter.notify('unblocked', `${where}: gate blocker cleared on a later pass`);
+      this.reporter.notify('gates-ok', `${where}: all gates green`);
+    }
+
+    // The group clears as one. A member that waived its gates is stamped here
+    // too — it has been unit-complete since the join began.
+    for (const { s, st } of statuses) {
+      const ss = this.state.stage(s.id);
+      ss.gatesPassedAt = ss.gatesPassedAt ?? new Date().toISOString();
+      ss.doneAt = new Date().toISOString();
+      this.reporter.notify('stage-clear', `${s.id} cleared — ${st.why}`);
+    }
+    this.state.save();
+    return 'ok';
   }
 
   /** The dispatch key a unit would use, so the retry policy can find its prior

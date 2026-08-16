@@ -49,6 +49,41 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
     if (typeof s.plan !== 'function') P(s.id, 'needs a `plan(ctx, pending)` function');
   }
 
+  // THE OVERLAP-GROUP RULE.
+  //
+  // A group is the maximal run of CONSECUTIVE stages sharing a `pipeline` name.
+  // Reusing a name non-contiguously therefore does not make one group, it makes
+  // two — silently, and with the stages in between still barriers. A table that
+  // says something it does not mean is the defect class this file exists for, so
+  // it is refused rather than interpreted.
+  const seenPipeline = new Map<string, number[]>();
+  stages.forEach((s, i) => {
+    if (s?.pipeline) seenPipeline.set(s.pipeline, [...(seenPipeline.get(s.pipeline) ?? []), i]);
+  });
+  for (const [name, idx] of seenPipeline) {
+    for (let k = 1; k < idx.length; k += 1) {
+      if (idx[k] !== idx[k - 1] + 1) {
+        P(stages[idx[k]].id, `pipeline "${name}" is not contiguous — ${stages[idx[k - 1]].id} and ${stages[idx[k]].id} `
+          + 'carry it with another stage between them, which silently makes two groups rather than one. '
+          + 'Rename one, or move the stages together.');
+      }
+    }
+  }
+  for (const s of stages) {
+    if (!s?.pipeline) continue;
+    // Inside a group two stages can be live at once, so `concurrency` alone no
+    // longer bounds a lane: two Alpha stages at 3 each is 6 against a dispatcher
+    // cap of 3. The role is what the group budget is computed from, and a stage
+    // that does not name it silently opts out of that budget.
+    if (typeof s.role !== 'string' || !s.role.trim()) {
+      P(s.id, 'a pipelined stage must declare `role` — the dispatcher lane its plans use. Without it the '
+        + 'group cannot bound that lane, and two overlapping stages will each fill it.');
+    }
+    if (s.cohort !== undefined && typeof s.cohort !== 'function') {
+      P(s.id, '`cohort` must be a function (ctx, unit) => units that must advance together');
+    }
+  }
+
   // THE GATE RULE.
   for (const [i, s] of stages.entries()) {
     if (!s?.id) continue;

@@ -76,6 +76,20 @@ function readAlphaGroups(ctx: any): Array<{ label: string; covers: string[] }> |
   } catch { return null; }
 }
 
+/** The batches that must advance together at a group-Alpha stage.
+ *
+ *  One Alpha dispatch declares coverage of its whole group, so the group may not
+ *  start until every batch it will claim is finished at the previous stage —
+ *  otherwise its result file records work on a batch nobody has done.
+ *
+ *  READ THE ASSIGNMENT, NEVER THE FALLBACK. `alphaGroups` chunks positionally
+ *  until `2-assign` writes the real partition, and the two disagree — that is the
+ *  whole point of the stage. A cohort taken from the fallback would hold a batch
+ *  for the wrong siblings, so every stage using this sits AFTER the `2-assign`
+ *  barrier, and none of them is in a group that starts before it. */
+const alphaCohort = (ctx: any, u: string): string[] =>
+  alphaGroups(ctx).find((g: any) => g.covers.map(String).includes(String(u)))?.covers.map(String) ?? [String(u)];
+
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
 
 /** Gates that apply to the whole repository, re-run at several stages because
@@ -341,10 +355,58 @@ const impactGate = (ctx) => gate('impact-audit', ['node', 'tools/impact-audit.mj
 const resultPattern = (role: string, labelSource: string): RegExp =>
   new RegExp(`^${role}-(?:${role}-)?(?:${labelSource})\\.result\\.json$`);
 
+// ---------------------------------------------------------------------------
+// THE TWO OVERLAP GROUPS, AND WHY THEY STOP WHERE THEY DO
+//
+// Serial stages make the slowest unit of one stage the start time of every unit
+// of the next. Authors run to six hours and readers to four, so on a seven-batch
+// level the last author held five readers idle for most of an afternoon.
+//
+//   'scaffold'  3-review -> 3-fix -> 3-recheck
+//   'read'      5-author -> 6a-read -> 6b-adjudicate
+//
+// Both are contiguous runs, and both end at a hard barrier: `4-splice` and
+// `6b-baseline`. Everything outside them — `1-scaffold`, `2-assign`, all three
+// touch snapshots, the splice, the cross-level audit, the judge sweep, step 8,
+// step 9 and the report — carries no `pipeline` and is therefore still strictly
+// serial and whole-level. Those are the stages that write a shared ledger or take
+// a snapshot whose ordering IS the guarantee, and overlapping two of them is what
+// produced 97 staled judge rows.
+//
+// WHY `1-scaffold` IS NOT IN THE SCAFFOLD GROUP, though it looks like the
+// obvious first member. Every group-Alpha stage waits on a COHORT, and the
+// cohort is the Alpha's assigned batches — which do not exist until `2-assign`
+// writes `<run>-alpha-groups.json` mid-run. Before that, `alphaGroups` returns a
+// positional chunking that is deliberately NOT the answer: the whole reason the
+// stage exists is that chunking split topology across two Alphas and gave one
+// Alpha three unrelated subjects. A group spanning `1-scaffold -> 3-review` would
+// therefore compute cohorts from the fallback and hold each batch for the wrong
+// siblings. `2-assign` also needs every batch's manifest before it can partition
+// anything, so it is a barrier on both counts and the pipeline starts after it.
+//
+// The `read` group joins at `6b-baseline`, not at `6c-cross`: the snapshot is the
+// `--to` endpoint of the 6c impact window, and it must capture text that has
+// already passed the group's gates. Stage order gives that for free — no member
+// of a group is `done` until the join's gates are green, and `6b-baseline` is a
+// later stage, so the gates run first and the snapshot is of gated text. A
+// snapshot taken before the join would drift the moment a gate failure sent an
+// Alpha back to repair something.
+//
+// WHAT THIS DOES NOT MOVE: gates. Every gate listed on every member stage runs
+// at the group exit, once, over the whole level, with the group drained. The
+// per-batch coverage and policy gates run there too — they are per-batch in
+// their ARGUMENTS, not in their timing, and making them per-batch in timing
+// would buy an earlier signal at the price of a gate whose scope depends on
+// which batch happened to finish first.
+// ---------------------------------------------------------------------------
+
 export const stages = [
   {
     id: '1-scaffold',
     label: 'Beta scaffolding',
+    // Not pipelined: the stage after it is the assignment barrier. See the note
+    // above — a cohort computed before `2-assign` is computed from a fallback
+    // that the assignment exists to overrule.
     units: batches,
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
@@ -408,9 +470,14 @@ export const stages = [
   {
     id: '3-review',
     label: 'Alpha scaffold review and adjudication',
+    pipeline: 'scaffold',
+    role: 'alpha',
     units: batches,
     pattern: resultPattern('alpha', 'step3-[a-z]+'),
     concurrency: 3,
+    // An Alpha group reviews as a unit, so it waits for its own three batches to
+    // scaffold — and for nobody else's.
+    cohort: alphaCohort,
     // One Alpha per group; each declares the batches it covers, so the stage
     // completes on coverage no matter how the grouping came out.
     plan: (ctx, pendingUnits) => {
@@ -440,6 +507,8 @@ export const stages = [
   {
     id: '3-fix',
     label: 'Beta fix pass on step-3 findings',
+    pipeline: 'scaffold',
+    role: 'beta',
     units: batches,
     pattern: resultPattern('beta', 'fix-batch-\\d+'),
     labelFor: (u) => `fix-batch-${u}`,
@@ -466,9 +535,12 @@ export const stages = [
   {
     id: '3-recheck',
     label: 'Alpha re-check before splice',
+    pipeline: 'scaffold',
+    role: 'alpha',
     units: batches,
     pattern: resultPattern('alpha', 'recheck-[a-z]+'),
     concurrency: 3,
+    cohort: alphaCohort,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
       .map((g: any) => ({
@@ -572,6 +644,11 @@ export const stages = [
   {
     id: '5-author',
     label: 'authoring',
+    // THE LARGEST WIN. A batch whose authoring is finished starts its reader
+    // while the other batches are still being written: authors run to six hours
+    // and readers to four, and serially the slowest author gated every reader.
+    pipeline: 'read',
+    role: 'beta',
     units: batches,
     pattern: resultPattern('beta', 'author-batch-\\d+'),
     labelFor: (u) => `author-batch-${u}`,
@@ -594,6 +671,8 @@ export const stages = [
   {
     id: '6a-read',
     label: 'independent readers',
+    pipeline: 'read',
+    role: 'reader',
     units: batches,
     pattern: resultPattern('reader', 'reader-\\d+'),
     // The report is the deliverable; a zero exit is not. reader-7 once exited
@@ -611,9 +690,11 @@ export const stages = [
       timeout: 14400,
     })),
     gatesWaived: 'Readers fix what they are licensed to fix (LEVELS.md 6a), so items DO change '
-      + 'here — and 6b runs the full repo-wide and contract gate set immediately after, on the '
-      + 'same text, with the adjudicating Alphas in the loop to route any failure. Each '
-      + 'reader\'s report is required as `artifacts` above.',
+      + 'here — and the full repo-wide and contract gate set runs on that text at the read '
+      + 'group\'s exit, over the whole level, with the adjudicating Alphas in the loop to route '
+      + 'any failure, before the 6b snapshot and before 6c. A gate run per reader instead would '
+      + 'be reading a level the other batches are still authoring. Each reader\'s report is '
+      + 'required as `artifacts` above.',
   },
 
   {
@@ -627,9 +708,17 @@ export const stages = [
       return g ? `research/${ctx.run}-alpha-${g.label}-6b.md` : null;
     },
     label: 'group Alpha adjudication',
+    // A group whose readers have ALL reported adjudicates while other groups are
+    // still reading. Its repairs are confined to its own batches; the level-wide
+    // checks that could be disturbed by them — the whole repo-wide set and the
+    // contract gates — run at the group exit, after every group's 6b is done and
+    // before 6c touches anything.
+    pipeline: 'read',
+    role: 'alpha',
     units: batches,
     pattern: resultPattern('alpha', '6b-[a-z]+'),
     concurrency: 3,
+    cohort: alphaCohort,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
       .map((g: any) => ({
