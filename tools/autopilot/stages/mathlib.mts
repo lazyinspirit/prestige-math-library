@@ -748,6 +748,12 @@ export const stages = [
       // that, hence the allowance. An unadjudicated rejection or an open fatal is
       // this stage's own unfinished work.
       closureGate(ctx, { pendingRejudge: true }),
+      // Repairs rewrite proofs, so the contract gates re-verify here — a fatal
+      // repair whose new proof breaks its own input map must not wait for
+      // 9-scope to surface. Repairs update the OWNING BATCH contract; the merge
+      // re-derives from batch files, so a merged-only edit is resurrected
+      // stale (frontier-14's step 9 did exactly that).
+      ...contractGates(ctx, { reviewed: true }),
     ],
     // THE FATAL-REPAIR LOOP.
     //
@@ -818,7 +824,17 @@ export const stages = [
     },
     // No allowances. Every item has a current pair, every current rejection has
     // an outcome, and no outcome is fatal — or this stage is not finished.
-    gates: (ctx) => [...repoWide(ctx), closureGate(ctx)],
+    // step8-guard runs here too: the repair loop below dispatches an
+    // adjudicate-and-repair Alpha up to three times INSIDE the pre-step8
+    // window, and without the guard those edits were never measured against
+    // the fatal-only rule. Contract gates for the same reason as 8-adjudicate.
+    gates: (ctx) => [
+      gate('step8-guard', ['node', 'tools/step8-guard.mjs',
+        '--touches', touchesPath(ctx),
+        '--baseline', 'pre-step8',
+        '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`]),
+      ...repoWide(ctx), ...contractGates(ctx, { reviewed: true }), closureGate(ctx),
+    ],
     // A rejudge can surface a NEW rejection on repaired text, which needs
     // adjudicating and possibly repairing again. That is a real convergence
     // loop and it is bounded: past the cap the gate still blocks and a person

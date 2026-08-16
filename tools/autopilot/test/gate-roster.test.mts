@@ -14,6 +14,27 @@ import assert from 'node:assert/strict';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 
+test('the step-8 window is guarded end to end', async () => {
+  // 8-rejudge's onGateFailure dispatches an adjudicate-AND-REPAIR Alpha up to
+  // three times, inside the pre-step8 window — and its gate list carried no
+  // step8-guard, so edits made in that loop were never measured against the
+  // fatal-only rule. And neither step-8 stage re-ran the contract gates,
+  // though both rewrite proofs: a fatal repair whose new proof broke its own
+  // contract's input map was invisible until 9-scope.
+  const mod = await import('../stages/mathlib.mts');
+  const ctx = { run: 'frontier-14', repo: REPO };
+  for (const id of ['8-adjudicate', '8-rejudge']) {
+    const st = mod.stages.find((s: any) => s.id === id);
+    const tools = st.gates(ctx)
+      .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
+      .map((argv: string[]) => argv.find((a) => a.startsWith('tools/')));
+    for (const tool of ['tools/step8-guard.mjs', 'tools/proof-contract.mjs',
+      'tools/boundary-audit.mjs', 'tools/citation-fidelity.mjs']) {
+      assert.ok(tools.includes(tool), `${id} does not run ${tool}`);
+    }
+  }
+});
+
 test('prosecheck and depsource run at every repo-wide gate point', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };

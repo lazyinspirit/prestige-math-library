@@ -409,6 +409,12 @@ revert it, or record the adjudication that justifies it.
 **You do not run the rejudge.** Delete `verification.judge` on anything
 materially rewritten; the engine's `8-rejudge` stage reads
 `research/<run>-judge-closure.json` and sweeps exactly the ids that need it.
+
+**A repair updates the owning BATCH contract**
+(`research/<run>-batch-<i>.proof-contracts.json`), never only the merged file:
+the gates re-merge from the batch files, so a merged-only edit comes back
+stale on the next merge — frontier-14's step 9 resurrected step 8's repaired
+quotes exactly this way.
 Repair granularity is still yours, and it costs: **batch your repairs per item,
 not per visit** — finishing an item in one pass costs one rejudge, returning to
 it later costs another. A repaired item always rejudges because its own hash
