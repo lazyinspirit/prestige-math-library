@@ -6,9 +6,24 @@ You did not author this content. Verify it.
 > of an `&&` chain may raise one. If blocked, **record a blocker** — never a
 > prompt.
 
-**Read-only on content.** You do not edit `items/*.md`, `library/**`,
-`research/plan-spec.json`, or any batch artifact. You write exactly one file:
-`research/<run>-reader-<i>.md`.
+**Write authority: your assigned batch, in-flight — and you FIX what you are
+licensed to fix, not merely report it** (owner, 2026-08-16; LEVELS.md §6a).
+That means: repair defective proof steps, citations and boundary rows in your
+batch's items; add or delete a lemma/corollary/example/counterexample when the
+fix requires one, personally authored in full, recorded in the batch manifest;
+update `research/<run>-batch-<i>.proof-contracts.json` whenever you change
+proof text, citations, step numbers or a boundary case; delete stale
+`verification.judge` after a material rewrite; run `tools/reflow.mts` then
+`node tools/tsx-run.mjs tools/precheck.mts` on changed items. You never touch
+`research/plan-spec.json` (the 6b Alpha applies a licensed manifest change
+with `splice-plan --update`), another batch's files, or published items — a
+published-dependency falsehood is a report, not an edit. **Never judge**;
+judging is step 7. Your report stays the deliverable:
+`research/<run>-reader-<i>.md`, every change and every finding in it.
+
+At **60% of your context**, checkpoint: append your findings and changes so
+far to your report file, then continue — a finding that exists only in
+working memory does not survive a compaction.
 
 Report a defect only when you can state it concretely: a false claim, an
 unlicensed inference, a missing hypothesis, or an inaccurate citation. **Open the

@@ -283,8 +283,11 @@ adjudicate. That adjudication is the cognitive half; the transcription is not.
 
 ## Step 6 — audit
 
-**6a.** Assign `briefs/reader.md` to an independent reader per batch. The reader
-must not have scaffolded or authored that batch.
+**6a.** The ENGINE dispatches one independent reader per batch
+(`briefs/reader.md`); you never spawn readers — a second reader writes over
+the first one's report, which is how eleven findings died once. Your 6a role
+is the exclusion check: flag any reader assignment that touches a batch its
+agent scaffolded or authored.
 
 **6b.** After every reader and refuter report, adjudicate from disk: changed
 items, page files, dependency lists, provenance tags, added/deleted results,
@@ -314,7 +317,10 @@ faithfulness failure is a **step-6 repair**: add the results now, while the text
 is unfrozen and no verdict exists to void.
 
 **6b.1 — contracts and risk.** Each reader updates its own batch proof-contract
-whenever it changes proof text, citations, step numbers or a boundary case. For
+whenever it changes proof text, citations, step numbers or a boundary case.
+When you accept a reader's added or deleted item, apply the licensed plan
+update yourself: `node tools/splice-plan.mjs --run <run> --batch <i> --update`
+— the splice-verify gate fails until the plan and the manifest agree again. For
 every `high`/`critical` item in `risk-report.mjs`, give at least one additional
 refuter the item, its contract and its sources, then record a complete
 `risk_review` with your adjudicated disposition. A finite-smoke pass is bounded

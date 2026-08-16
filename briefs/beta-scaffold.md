@@ -317,14 +317,15 @@ its item list.
    meaningful corollaries with short honest proofs and explicit dependencies.
    Corollaries enrich the development, but restatements, duplicates, and cosmetic
    variants do not.
-3. **Use the larger page ceiling correctly.** An A page may now carry up to **100
-   total items** before `validate-plan` emits its size warning, raised from 60.
-   One hundred is a review ceiling, **not a target or minimum**: never pad a page to
-   approach it. Conversely, never drop a valuable definition, proposition,
-   theorem, lemma, corollary, example, counterexample, false statement, or remark
-   merely for ergonomics or to keep the list short. If a mathematically coherent
-   page genuinely exceeds 60, retain the valuable results and report whether a
-   structural page split would improve the reading order; do not silently prune.
+3. **The page ceiling is 60 items, and it is a hard `validate-plan` ERROR, not
+   a warning** (owner, 2026-08-11; `size`). Sixty is a ceiling, **not a target
+   or minimum**: never pad a page toward it. Conversely, never drop a valuable
+   definition, proposition, theorem, lemma, corollary, example, counterexample,
+   false statement, or remark merely for ergonomics or to keep the list short.
+   When the machinery a page honestly needs pushes it over 60, **propose the
+   SPLIT** — two or more A pages, each with its own B companion, with the exact
+   cut and new page ids — never a pruning. Split before authoring; after it,
+   the same change is a rewrite.
 
 Record every decomposition lemma and every added corollary in the per-page item
 list and in your new-id report, including what larger result it supports or what
@@ -340,9 +341,11 @@ Every one was found in published or near-published text here.
    first index. Past casualties: a telescoping sum off by its first term, a
    geometric series summing to 2 instead of 1, a metric on ℝⁿ false at n = 0,
    a Cantor set that removed everything at stage 0.
-2. **A natural number here is a von Neumann natural, i.e. a set**, so it is not
-   an element of ℝ. `1/k` means `1/\iota(k)` — see `items/def-canonical-natural.md`.
-   Scaffold titles accordingly.
+2. **Never write the canonical embedding applied to a natural number** —
+   no `\iota(k)`, `\iota(0)`, `\iota(k!)`; write the number itself (owner,
+   2026-08-11, standing; `content-policy.mjs` fails the batch with
+   `notation-iota-applied`). Bare `\iota` as the name of a universal-property
+   inclusion is fine. Scaffold titles accordingly.
 3. **Citing or paraphrasing an item inaccurately.** Write direct, natural
    mathematical prose, without canned headings, meta-commentary, or rhetorical
    filler that sounds generated rather than written for a reader. Open the item
@@ -434,8 +437,8 @@ message is a finding that gets lost, and eleven were.
 2. **Per-pair richness report** — for each A/B pair, name every long proof you
    decomposed and its intermediate lemmas; list the useful corollaries added;
    state explicitly that you performed both passes even when either found
-   nothing; and report any page above the 100-item review ceiling without pruning
-   it to silence the warning.
+   nothing; and report any page approaching the 60-item ceiling with the split
+   you would propose — never a pruning to dodge the error.
 3. **Findings**, each stated as one recommendation to approve or decline. Order
    them by severity. For each: what is wrong, what you propose, and what breaks
    if it is declined. Do not bundle independent decisions. The step-3 Alpha

@@ -594,9 +594,10 @@ export const stages = [
       task: [`research/${ctx.run}-reader-${u}.task.md`, `research/${ctx.run}-reader.task.md`],
       timeout: 14400,
     })),
-    gatesWaived: 'Readers only write reports; they do not touch items/, so no repo-wide check can '
-      + 'have changed since step 5. Their reports are required as `artifacts` above, and their '
-      + 'findings are gated at 6b where the adjudicated repairs actually land.',
+    gatesWaived: 'Readers fix what they are licensed to fix (LEVELS.md 6a), so items DO change '
+      + 'here — and 6b runs the full repo-wide and contract gate set immediately after, on the '
+      + 'same text, with the adjudicating Alphas in the loop to route any failure. Each '
+      + 'reader\'s report is required as `artifacts` above.',
   },
 
   {
