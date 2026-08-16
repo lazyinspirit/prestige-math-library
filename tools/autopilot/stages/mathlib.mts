@@ -155,6 +155,54 @@ const driftGate = (ctx) => gate('drift-review', ['node', 'tools/drift-review-che
   liveness: { pattern: /(\d+)\s+page\(s\) reviewed/.source, min: 1, unit: 'pages reviewed' },
 });
 
+const batchCoverages = (ctx: any) => batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`);
+
+/** Full-text fetchability — the complement of url-liveness. The sweep probes
+ *  HEADERS ONLY (a body download once reported a live 9.4 MB PDF as dead), so
+ *  a bot wall answering 200 with an interstitial body is invisible to it.
+ *  Owner instruction (2026-08-17): dead academic URLs are a normal case, and
+ *  Betas prove full text is fetchable per URL at step 1. The Beta stamps each
+ *  source at harvest time (`source-fetch-check --stamp`, per its brief); this
+ *  gate is the no-network check that every source carries the stamp. */
+const fetchGate = (ctx) => gate('source-fetch-check', ['node', 'tools/source-fetch-check.mjs',
+  '--coverage', batchCoverages(ctx).join(',')], {
+  liveness: { pattern: /(\d+)\/\d+ source\(s\) fetch-verified/.source, min: 1, unit: 'sources fetch-verified' },
+});
+
+/** MECHANICAL REPAIRS, keyed by the failing gate.
+ *
+ *  A repair in this table is a function of files on disk (plus, for the
+ *  stamp, the network fetch that reading the cited document requires anyway)
+ *  — the roles rule assigns those to code, never to a dispatch. Both
+ *  scaffold-side joins share the table: stage 1 for a failure at the scaffold
+ *  join, 3-recheck for one at the group join, because a source can die
+ *  between the two. Strictness lives in the tools themselves: a dead URL
+ *  with no archive snapshot, or a source that will not yield full text, exits
+ *  nonzero, the round is spent, and the blocker survives for the judgment
+ *  call (scouting a replacement source) that no table can make.
+ */
+const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[]> = {
+  // dead citation with a recorded archive snapshot -> swap it in place
+  'url-liveness': (ctx) => ['tools/url-recover-apply.mjs',
+    '--liveness', `research/${ctx.run}-url-liveness.json`,
+    '--coverage', batchCoverages(ctx).join(',')],
+  // sources missing their full-text stamp -> fetch the bodies and stamp them
+  'source-fetch-check': (ctx) => ['tools/source-fetch-check.mjs',
+    '--coverage', batchCoverages(ctx).join(','), '--stamp'],
+};
+
+/** Run the table's repair for this failure, if it has one. True when a repair
+ *  ran clean; false when the failure is not mechanically repairable here. */
+const mechanicalRepair = async ({ ctx, failure }: any): Promise<boolean> => {
+  const repair = MECHANICAL_REPAIRS[failure.id];
+  if (!repair) return false;
+  const argvTail = repair(ctx);
+  const { spawnSync } = await import('node:child_process');
+  const r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
+  if (r.status !== 0) throw new Error(`${argvTail[0]} exit ${r.status}: ${(r.stderr || r.stdout || '').trim().slice(0, 400)}`);
+  return true;
+};
+
 /** Scope loss is invisible to every gate that reads the current state.
  *
  *  On frontier-14 a fully scaffolded A/B pair — 19 items, three verified
@@ -455,30 +503,16 @@ export const stages = [
         task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
         timeout: 14400,
       })),
-    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate(), urlGate(ctx)],
+    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate(), urlGate(ctx), fetchGate(ctx)],
 
-    // THE MECHANICAL HALF OF RECOVER-BEFORE-REPLACE. url-sweep's contract
-    // (§3.11c) ends at "the snapshot is printed so the fix is a URL swap" —
-    // and the swap had no owner: the Betas have exited, and the step-3 Alphas
-    // licensed to edit a scaffold sit BEHIND the 2-assign barrier this gate
-    // holds shut. frontier-15 deadlocked exactly there, re-running the full
-    // 18-gate battery back-to-back while blocked. The swap is a function of
-    // two files on disk (the sweep artifact and the coverage files), so by
-    // the roles rule it is code. One round: apply every recorded snapshot,
-    // strictly — a dead URL with NO snapshot fails the tool, the round ends,
-    // and the blocker survives for a person, because re-sourcing is a
-    // judgment. The battery re-runs after the round and verifies the swapped
-    // archive URLs are themselves alive.
-    maxFixRounds: 1,
-    onGateFailure: async ({ ctx, failure }: any) => {
-      if (failure.id !== 'url-liveness') return;
-      const { spawnSync } = await import('node:child_process');
-      const r = spawnSync('node', ['tools/url-recover-apply.mjs',
-        '--liveness', `research/${ctx.run}-url-liveness.json`,
-        '--coverage', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`).join(','),
-      ], { cwd: ctx.repo, encoding: 'utf8' });
-      if (r.status !== 0) throw new Error(`url-recover-apply exit ${r.status}: ${(r.stderr || r.stdout || '').trim().slice(0, 400)}`);
-    },
+    // Failures at this join with a MECHANICAL_REPAIRS entry — the archive
+    // swap, the full-text stamp — are repaired by code, one round each; see
+    // the table above for why, and for why its strictness is the point. The
+    // first live firing of the swap round is what un-deadlocked this stage on
+    // frontier-15 (§3.11c). Two rounds, because the two repairs can be owed
+    // independently and each consumes one.
+    maxFixRounds: 2,
+    onGateFailure: async (args: any) => { await mechanicalRepair(args); },
   },
 
   // THE ORCHESTRATOR ROLE IS GONE (owner, 2026-08-16). Every judgment it used
@@ -610,12 +644,21 @@ export const stages = [
       })),
     // THE SCAFFOLD LOOP CLOSES HERE. Not "a re-check happened" — every pair is
     // actually sufficient, or this stage does not clear and step 4 cannot splice.
-    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true })],
+    //
+    // The URL gates run at this join too (owner, 2026-08-17): a source can die
+    // between the stage-1 join and the splice, and step 3 is the last point
+    // where the repair is a scaffold edit. Same self-heal path as stage 1 —
+    // the MECHANICAL_REPAIRS table swaps recorded snapshots and stamps
+    // unstamped sources; only an unrecoverable or unfetchable source reaches
+    // the fix loop below, as scouting work for the owning Beta.
+    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true }), urlGate(ctx), fetchGate(ctx)],
     // Still thin after the re-check is another fix round, not an advance. Bounded
     // for the same reason the judge loop is: a scaffold that will not converge is
     // a decision for a person, and the blocker names the pairs.
     maxFixRounds: 3,
-    onGateFailure: async ({ ctx, executor, stage, round }) => {
+    onGateFailure: async ({ ctx, executor, stage, round, failure }) => {
+      // Mechanically repairable failures never spend a Beta dispatch.
+      if (await mechanicalRepair({ ctx, failure })) return;
       const scaffold = readScaffold(ctx);
       const pages = scaffold?.insufficient ?? [];
       if (!pages.length) return;                 // failed on a missing verdict instead

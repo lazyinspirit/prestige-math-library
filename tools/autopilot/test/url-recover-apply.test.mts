@@ -127,9 +127,11 @@ test('url-sweep excludes declared-superseded originals from its probe queue', ()
 
 // ---------------------------------------------------------------- the hook
 
-test('stage 1 declares one mechanical repair round for url-liveness', () => {
+test('stage 1 declares a mechanical repair round per repair class', () => {
   const s1: any = stages.find((s: any) => s.id === '1-scaffold');
-  assert.equal(s1.maxFixRounds, 1);
+  // two repairs can be owed independently — the archive swap and the
+  // full-text stamp — and each consumes one round
+  assert.equal(s1.maxFixRounds, 2);
   assert.equal(typeof s1.onGateFailure, 'function');
 });
 

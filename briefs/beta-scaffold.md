@@ -59,11 +59,12 @@ construct an A/B pair's item list, search reputable mathematical sources on the
 web for the relevant definitions, theorem and corollary statements,
 counterexamples, and proof strategies. Prefer authoritative or scholarly sources
 such as peer-reviewed or open textbooks, university-hosted notes, the Stacks
-Project, and the Encyclopedia of Mathematics. Verify every URL you record. In
-your notes, include a concise source ledger saying which planned material each
-source supports and flag every convention disagreement you found. Do not copy
-source prose, fabricate a source, or describe session-authored content as
-scraped.
+Project, and the Encyclopedia of Mathematics. Every URL you record is
+fetch-verified — §"URL discipline" below is the mechanism, and a gate checks
+it. In your notes, include a concise source ledger saying which planned
+material each source supports and flag every convention disagreement you
+found. Do not copy source prose, fabricate a source, or describe
+session-authored content as scraped.
 
 ### The canonical-coverage harvest — REQUIRED, and gated
 
@@ -106,6 +107,33 @@ Rules the gate enforces, so read them before you write the file:
 There is deliberately **no minimum number of results**: padding is forbidden by
 the scaffold-richness rule and a count would invite it. The bar is set by the
 source, not by a target.
+
+### URL discipline — fetch-verify every source, mechanically (owner, 2026-08-17)
+
+Dead and stale URLs from academic sources are an expected, common occurrence
+— university pages move, terms end, PDFs rot. A recorded URL is therefore a
+claim you PROVE, not a link you copied. After writing your coverage file,
+run, from the repo root:
+
+```
+node tools/source-fetch-check.mjs --coverage research/<run>-batch-<i>.coverage.json --stamp
+```
+
+It downloads each source's full body and stamps the source with
+`fetch_verified` (bytes, hash, kind) when the body is a real document: a PDF
+with the `%PDF` magic and substantive size, or a page with substantive
+extracted text — a 200 answered through a bot wall or a sign-in redirect is
+**not** full text and does not stamp. The stage gate re-checks the stamps, so
+an unstamped source fails your batch.
+
+When a fetch fails, **scout an alternate URL for the SAME source** before
+anything else: the author's current page, the publisher's open copy, arXiv, a
+university mirror — same edition, same text, so your locators and harvest
+stay true. A different edition is a different source; re-harvest against it
+or do not use it. If no live copy exists, fall back to the archive under the
+recover-before-replace rule (§3.11c): put the Wayback snapshot in `url`,
+keep the dead link as `original_url`. Never record a URL you have not
+fetched full text from in this dispatch.
 
 **But raising the bar for a decline (owner, 2026-08-11):** if a result is
 important and the only thing stopping you is that the library lacks a definition

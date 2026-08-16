@@ -732,6 +732,36 @@ text — re-harvested the preserved original out of the repaired file and
 exhausted the repair round on a URL that had stopped being a citation. Prose
 URLs in items and ledgers keep the full harvest.
 
+### 3.11c-2 Full-text fetchability — `source-fetch-check.mjs` (owner, 2026-08-17)
+
+**Which failure it prevents.** The sweep probes headers only — a body download
+at gate time once reported a live 9.4 MB PDF as dead — so a bot wall answering
+200 with an interstitial body, and a URL that serves an *abstract* rather than
+the document, both read as live citations. The owner's instruction: dead and
+stale academic URLs are a normal occurrence; Betas test each URL at step 1 and
+prove **full text** is fetchable — the document, never a landing page.
+
+**Mechanism, four mechanical layers.** (1) Known abstract-page URL shapes fail
+before any fetch, each message naming the fix — arXiv `/abs/` → `/pdf/` is the
+canonical case; signatures are path shapes in the bot-wall spirit, never
+substrings. (2) The final URL after redirects is checked against
+`bot-wall.mjs`. (3) A PDF needs the `%PDF` magic, substantive size, and — when
+its page objects are byte-countable — **more than three pages**; the count is
+stamped so the step-3 Alpha can weigh a claimed locator range against it
+(object-stream PDFs stamp `pages: null` and pass on size). (4) HTML needs
+substantive extracted text.
+
+**Who runs what.** The Beta stamps at harvest time (`--stamp` writes
+`fetch_verified {at, bytes, sha256_16, kind, pages?|text_chars?}` per source;
+idempotent; failures leave no stamp and name the scouting owed — an alternate
+URL for the *same* source, or the §3.11c archive fallback). The gate is check
+mode: every source stamped, no network, zero sources is a failure. It runs at
+**both scaffold-side joins** (stage 1 and 3-recheck, a source can die between
+them), and both joins share the `MECHANICAL_REPAIRS` table — a failure with a
+table entry (the archive swap, the stamp) is repaired by code for one round;
+only an unrecoverable or unfetchable source reaches a person or the fix loop,
+because scouting a replacement is a judgment.
+
 **Two bugs found by running it, both of which had already bitten the run.**
 
 - *Liveness is a header question.* The first version downloaded the body and
