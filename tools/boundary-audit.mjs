@@ -41,6 +41,7 @@
 //
 //   node tools/boundary-audit.mjs research/<run>-batch-*.proof-contracts.json
 //        [--items-dir items] [--min-cluster 3] [--json] [--fail-on-contradicted]
+//        [--fail-on-template]
 
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
@@ -55,6 +56,7 @@ const itemsDir = flag('items-dir', 'items');
 const minCluster = Number(flag('min-cluster', '3'));
 const asJson = argv.includes('--json');
 const failOnContradicted = argv.includes('--fail-on-contradicted');
+const failOnTemplate = argv.includes('--fail-on-template');
 
 if (!files.length) {
   console.error('usage: node tools/boundary-audit.mjs <contracts.json...> [--items-dir items]');
@@ -62,11 +64,22 @@ if (!files.length) {
   process.exit(2);
 }
 
-/** Strip the two things a template substitutes, plus punctuation and case, so
- *  that rows differing only by id and axis collapse to one cluster key. */
+/** Strip everything a template substitutes, plus punctuation and case, so that
+ *  rows differing only in the substituted content collapse to one cluster key.
+ *
+ *  Quoted spans, backticks and inline math are substituted content too. On
+ *  frontier-14's 2,328 real rows this tool found ZERO clusters, because the
+ *  templated wrapper embeds quoted proof-step or title text — 'The move "…"
+ *  neither divides nor indexes …' — so with only the id and case stripped,
+ *  every key was unique and no cluster could ever form. The id-only rule was
+ *  calibrated on frontier-13, where the template substituted nothing else. */
 const CASES = ['empty', 'zero', 'one', 'degenerate', 'endpoints', 'nonempty-choice', 'iff-forward', 'iff-reverse'];
 const normalise = (text, id) => {
-  let t = String(text ?? '');
+  let t = String(text ?? '')
+    .replace(/"[^"]*"/g, '<QUOTE>')
+    .replace(/“[^”]*”/g, '<QUOTE>')
+    .replace(/`[^`]*`/g, '<QUOTE>')
+    .replace(/\$[^$]*\$/g, '<MATH>');
   if (id) t = t.split(id).join('<ID>');
   for (const c of CASES) t = t.split(c).join('<CASE>');
   return t.toLowerCase().replace(/[^a-z<>]+/g, ' ').trim();
@@ -117,7 +130,12 @@ const claimOf = (text) => {
 };
 const proofOf = (text) => {
   const s = sections(text);
-  return s['proof'] ?? s['verification'] ?? s['refutation'] ?? '';
+  // Every proof-bearing section name the corpus uses: an `ex-`/`cex-` item
+  // carries its numbered steps under Example or Counterexample. Scoping to
+  // Proof/Verification/Refutation alone made every step reference in a
+  // counterexample's boundary row read as "step does not occur".
+  return s['proof'] ?? s['verification'] ?? s['refutation']
+    ?? s['counterexample'] ?? s['example'] ?? '';
 };
 
 // ---------------------------------------------------------------------------
@@ -205,21 +223,25 @@ if (!rows.length) {
   process.exit(2);
 }
 
-// Signal 1 — template reuse.
+// Signal 1 — template reuse. `checked` rows cluster too, keyed separately: a
+// "we verified this" sentence reused verbatim across items is as suspect as a
+// reused not_applicable — frontier-14's three fatal-concealing rows were all
+// marked `checked`, a status this signal used to skip entirely.
 const clusters = new Map();
 for (const r of rows) {
-  if (r.status !== 'not_applicable') continue;
-  const key = normalise(r.text, r.id);
-  if (!key) continue;
+  if (r.status !== 'not_applicable' && r.status !== 'checked') continue;
+  const key = `${r.status}|${normalise(r.text, r.id)}`;
+  if (key.endsWith('|')) continue;
   if (!clusters.has(key)) clusters.set(key, []);
   clusters.get(key).push(r);
 }
 const templates = [...clusters.entries()]
   .filter(([, members]) => members.length >= minCluster)
   .map(([key, members]) => ({
+    status: members[0].status,
     members: members.length,
     sample: members[0].text,
-    normalised: key,
+    normalised: key.slice(key.indexOf('|') + 1),
     items: [...new Set(members.map((m) => m.id))],
     cases: [...new Set(members.map((m) => m.case))].sort(),
   }))
@@ -228,11 +250,28 @@ const templates = [...clusters.entries()]
 // Signal 2 — contradicted dispositions.
 const contradicted = [];
 for (const r of rows) {
+  const text = itemText(r.id);
+  if (text === null) continue;            // not authored yet — step 5 has not run
+  if (r.status === 'checked') {
+    // A `checked` row is a claim that somebody verified the case, usually
+    // crediting a proof step. The mechanical half of that claim is checkable:
+    // a credited step number that does not occur in the proof at all. (Whether
+    // an EXISTING step really does the work stays a human read — frontier-14's
+    // three false `checked` rows credited real steps that ran only after the
+    // case was already assumed away.)
+    const proof = proofOf(text);
+    for (const m of String(r.text).matchAll(/\bsteps?\s+(\d+\.\d+)\b/gi) ?? []) {
+      if (!proof.includes(m[1])) {
+        contradicted.push({ id: r.id, case: r.case,
+          why: `the row credits step ${m[1]}, which does not occur in the proof`,
+          reason: r.text, file: r.file });
+      }
+    }
+    continue;
+  }
   if (r.status !== 'not_applicable') continue;
   const d = DETECTORS[r.case];
   if (!d) continue;
-  const text = itemText(r.id);
-  if (text === null) continue;            // not authored yet — step 5 has not run
   const scoped = d.scope(text);
   if (!scoped.trim()) continue;           // no such section: nothing to contradict
   const why = d.detect(scoped);
@@ -285,4 +324,4 @@ if (asJson) {
   console.log('\nEvery line above is a candidate for a human read, not a verdict.');
 }
 
-process.exit(failOnContradicted && contradicted.length ? 1 : 0);
+process.exit((failOnContradicted && contradicted.length) || (failOnTemplate && templates.length) ? 1 : 0);

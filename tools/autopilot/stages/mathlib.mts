@@ -196,7 +196,8 @@ const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) =
     // A templated `not_applicable` boundary row is not a disposition. On
     // frontier-13 two false template rows each hid a fatal defect, and on
     // frontier-14 three did — three times out of three that anyone looked.
-    gate('boundary-audit', ['node', 'tools/boundary-audit.mjs', merged, '--fail-on-contradicted']),
+    gate('boundary-audit', ['node', 'tools/boundary-audit.mjs', merged,
+      '--fail-on-contradicted', '--fail-on-template']),
     gate('citation-fidelity', ['node', 'tools/citation-fidelity.mjs', merged, '--fail-on-missing-quote']),
     // The gate that checks the gates. finite-smoke once reported "0 error(s), 0
     // check(s)" for most of a run: a green tick over an empty scope.
