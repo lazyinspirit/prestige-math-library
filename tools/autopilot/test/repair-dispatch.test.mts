@@ -123,6 +123,31 @@ test('a prompt file carrying an identity placeholder blocks before any spawn', (
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('an unfetchable source routes a scouting Beta per owning batch', async () => {
+  const repo = fixtureRepo();
+  // a coverage whose one source is unstamped and unfetchable -> the stamp
+  // repair leaves residue naming the page -> the hook routes a scout
+  writeFileSync(join(repo, 'research', 'demo-batch-2.pages.json'), '[]');
+  writeFileSync(join(repo, 'research', 'demo-batch-2.coverage.json'), JSON.stringify({
+    pages: [{ page: 'sylow-page', sources: [{ url: 'http://127.0.0.1:9/gone.pdf', title: 't', locator: 'l', contents: [] }] }],
+  }));
+  writeFileSync(join(repo, 'research', 'demo-scope-ledger.json'), JSON.stringify({
+    pages: [{ id: 'sylow-page', kind: 'A', batch: '2' }],
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s3: any = stages.find((s: any) => s.id === '3-recheck');
+  await s3.onGateFailure({
+    ctx: { run: 'demo', repo }, executor, stage: s3, round: 2,
+    failure: { id: 'source-fetch-check', why: '' },
+  });
+  assert.equal(started.length, 1);
+  assert.equal(started[0].label, 'source-scout-2-b2');
+  assert.equal(started[0].job, 'scouting');
+  assert.deepEqual(started[0].covers, ['2']);
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('the mechanical branch still short-circuits the Beta fan-out', async () => {
   const repo = fixtureRepo();
   // a url-liveness failure with an artifact whose dead rows all carry

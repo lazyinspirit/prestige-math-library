@@ -181,26 +181,62 @@ const fetchGate = (ctx) => gate('source-fetch-check', ['node', 'tools/source-fet
  *  nonzero, the round is spent, and the blocker survives for the judgment
  *  call (scouting a replacement source) that no table can make.
  */
+// Absolute paths on purpose: the tools anchor RELATIVE paths to the library
+// REPO constant, not to cwd, so a repair running against any other ctx.repo
+// (a test fixture; a future second checkout) would silently read the wrong
+// tree. ctx.repo is the truth the engine already holds.
 const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[]> = {
   // dead citation with a recorded archive snapshot -> swap it in place
   'url-liveness': (ctx) => ['tools/url-recover-apply.mjs',
-    '--liveness', `research/${ctx.run}-url-liveness.json`,
-    '--coverage', batchCoverages(ctx).join(',')],
+    '--liveness', R(ctx, 'research', `${ctx.run}-url-liveness.json`),
+    '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(',')],
   // sources missing their full-text stamp -> fetch the bodies and stamp them
   'source-fetch-check': (ctx) => ['tools/source-fetch-check.mjs',
-    '--coverage', batchCoverages(ctx).join(','), '--stamp'],
+    '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(','), '--stamp'],
 };
 
-/** Run the table's repair for this failure, if it has one. True when a repair
- *  ran clean; false when the failure is not mechanically repairable here. */
-const mechanicalRepair = async ({ ctx, failure }: any): Promise<boolean> => {
+/** Run the table's repair for this failure, if it has one.
+ *  'clean'      — a repair ran and exited 0; the battery re-verifies.
+ *  'residual'   — a repair ran and left named failures (stderr carries
+ *                 `fetch-check-...: <page>: <url>` lines); the caller may
+ *                 route the residue to a scouting dispatch.
+ *  'unhandled'  — no table entry for this gate. */
+const mechanicalRepair = async ({ ctx, failure }: any): Promise<{ outcome: string; stderr?: string }> => {
   const repair = MECHANICAL_REPAIRS[failure.id];
-  if (!repair) return false;
+  if (!repair) return { outcome: 'unhandled' };
   const argvTail = repair(ctx);
   const { spawnSync } = await import('node:child_process');
   const r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
-  if (r.status !== 0) throw new Error(`${argvTail[0]} exit ${r.status}: ${(r.stderr || r.stdout || '').trim().slice(0, 400)}`);
-  return true;
+  if (r.status !== 0) return { outcome: 'residual', stderr: (r.stderr || r.stdout || '').trim() };
+  return { outcome: 'clean' };
+};
+
+/** Owner instruction (2026-08-17): when a source cannot be fetched or
+ *  recovered mechanically, a BETA SCOUTS an alternate URL for the same
+ *  source — that judgment is the one step no table can make, and burning
+ *  repair rounds on it (the first live firing exhausted all three on a
+ *  2-page archive capture the full-text gate rightly refused) routes it to
+ *  a person when the design routes it to an agent. Parse the failing pages
+ *  out of the repair residue, map page -> owning batch via the scope
+ *  ledger, one scouting lane per batch. */
+const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: any) => {
+  const pages = [...new Set([...(stderr ?? '').matchAll(/fetch-check-[a-z-]+: ([a-z0-9-]+):/g)].map((m) => m[1]))];
+  if (!pages.length) return false;
+  const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
+  const batchOf = new Map(ledger.pages.map((p: any) => [p.id, String(p.batch)]));
+  const owed = [...new Set(pages.map((p) => batchOf.get(p)).filter(Boolean))];
+  for (const b of owed) {
+    executor.start(stage, {
+      role: 'beta',
+      label: `source-scout-${round}-b${b}`,
+      job: 'scouting',
+      covers: [b],
+      brief: 'briefs/beta-scaffold.md',
+      task: [`research/${ctx.run}-beta-source-scout.task.md`, `research/${ctx.run}-beta-fix.task.md`],
+      timeout: 3600,
+    });
+  }
+  return owed.length > 0;
 };
 
 /** Scope loss is invisible to every gate that reads the current state.
@@ -512,7 +548,12 @@ export const stages = [
     // frontier-15 (§3.11c). Two rounds, because the two repairs can be owed
     // independently and each consumes one.
     maxFixRounds: 2,
-    onGateFailure: async (args: any) => { await mechanicalRepair(args); },
+    onGateFailure: async (args: any) => {
+      const repair = await mechanicalRepair(args);
+      if (repair.outcome === 'residual' && !dispatchSourceScouts({ ...args, stderr: repair.stderr })) {
+        throw new Error(`mechanical repair left residue and no scout could be routed: ${(repair.stderr ?? '').slice(0, 300)}`);
+      }
+    },
   },
 
   // THE ORCHESTRATOR ROLE IS GONE (owner, 2026-08-16). Every judgment it used
@@ -657,8 +698,16 @@ export const stages = [
     // a decision for a person, and the blocker names the pairs.
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }) => {
-      // Mechanically repairable failures never spend a Beta dispatch.
-      if (await mechanicalRepair({ ctx, failure })) return;
+      // Mechanically repairable failures never spend a Beta dispatch; a
+      // repair that leaves residue (a source no swap or stamp can save)
+      // routes the residue to scouting Betas — the owner's designed remedy —
+      // rather than burning rounds into a needs-a-person blocker.
+      const repair = await mechanicalRepair({ ctx, failure });
+      if (repair.outcome === 'clean') return;
+      if (repair.outcome === 'residual') {
+        if (dispatchSourceScouts({ ctx, executor, stage, round, stderr: repair.stderr })) return;
+        throw new Error(`mechanical repair left residue and no scout could be routed: ${(repair.stderr ?? '').slice(0, 300)}`);
+      }
       const scaffold = readScaffold(ctx);
       const pages = scaffold?.insufficient ?? [];
       if (!pages.length) return;                 // failed on a missing verdict instead
