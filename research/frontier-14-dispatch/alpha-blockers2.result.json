@@ -1,0 +1,19 @@
+{
+  "role": "alpha",
+  "label": "blockers2",
+  "run": "frontier-14",
+  "covers": [],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-16T06:40:35.917Z",
+  "ended_at": "2026-08-16T07:08:44.214Z",
+  "ms": 1688297,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/root/Projects/prestige-math-library/research/frontier-14-dispatch/alpha-blockers2.log",
+  "prompt": "/root/Projects/prestige-math-library/research/frontier-14-dispatch/alpha-blockers2.prompt.md",
+  "tail": "Both blockers are repaired and closed. Summary:\n\n## What was wrong, and what I wrote\n\n**`thm-cech-complete-spaces-are-baire`** — I reproduced the countermodel first: $K=[0,1]$, $Y$ its irrational points, $Y$ a $G_\\delta$ (its complement is countable), every $U_n=Y$. Every nonempty open subset of $[0,1]$ contains a rational, so $Y$ has empty ambient interior and the old step 2.1's nested construction could not produce its first term. The rewrite runs the construction inside $K$ with the dependent-choice carrier set being pairs $(n,O)$ where $O$ is open in $K$ and **meets** $Y$ — never contains a relatively open set. Shrinking uses the closure form of regularity (`lem-regularity-via-closed-neighbourhoods`, clause (b)); FIP in the compact $K$ delivers the point; $\\overline{O_n}\\subseteq G_n$ forces it into $Y$ rather than the remainder.\n\nOne trap I closed on the way: replacing each relatively open $i[U_n]$ by an ambient $W_n$ *for all $n$ at once* would be a countable choice, which is not licensed on an item whose Statement assumes only DC. `def-subspace-topology-top` supplies a canonical tracing set, so $W_n$ is defined by a formula, not selected. DC is used exactly once.\n\n**`thm-simple-continued-fractions-parametrise-the-irrationals`** — everything now runs off the Möbius map $M_n(t)=(p_nt+p_{n-1})/(q_nt+q_{n-1})$, which the old proof never introduced. Its endpoint identities make $J(a_0,\\dots,a_n)$ the interval with endpoints $M_{n-1}(a_n), M_{n-1}(a_n+1)$; its determinant formula gives strict monotonicity and interiority. From those: the tail identity $x=M_n(x_{n+1})$ by induction (surjectivity), and prefix separation — two codes first differing at index $m$ share $M_{m-1}$, so their intervals meet in at most one point, which is a rational endpoint. That single fact yields injectivity *and* the continuity of the inverse. I chose it over the shift-conjugation route because that needs an extra induction and buys nothing.\n\n## Two things worth your attention\n\n- **The brief's model field was wrong for one item.** It named `deepseek-v4-pro` for both. The judge ledger shows `gpt-5.6-terra` rejecting the Čech item and deepseek **passing** it; my ledger row closes the terra rejection. This matters if anyone reconciles model-only rejections at step 10.\n- **I minted no new items.** The continued-fractions proof concentrates three would-be lemmas inline (steps 2.2, 3.1, 3.3) rather than splitting the page, because splitting would touch the manifest, coverage harvest and batch scope — outside this pass. It's a page-shape improvement, not a defect.\n\nGates: precheck PASS/PASS, depcheck, citecheck, rendercheck, prosecheck, citation-fidelity, `proof-contract --strict` 291/291, `risk-report --require-reviewed` 0 errors, finite-smoke, content-policy, and `step8-guard` 25/25 licensed. I dry-ran the contract merge and diffed it before installing — only these two entries changed. Boundary rows were rewritten honestly (the previous ones were the templated `not_applicable` kind the brief warns about).\n\nNeither item carries a `verification.judge` block and none should be written: no judge has read either new proof. Report is at `research/frontier-14-alpha-blockers.md`. Nothing is committed — that's your call."
+}

@@ -101,3 +101,44 @@ refuter, because both go straight to the paired judges afterwards.
 **No permission prompts of any kind**, from you or any subagent. If you truly
 cannot proceed without new authority, record a blocker in your report instead of
 asking.
+
+---
+
+## Owner instruction, 2026-08-16 — scope limit and how to close
+
+The owner has restricted this pass to **these two items only**:
+
+> "repair and close the remaining two items, do NOT rejudge and audit anything else"
+
+That has three consequences, and they bind you:
+
+1. **Repair only these two.** Do not adjudicate anything else, do not re-read
+   other items, do not open other batches' findings, and do not repair a defect
+   you happen to notice elsewhere. If you see something serious in a neighbouring
+   item, write it in your report and leave it alone.
+2. **No rejudge is being run.** Do not request one and do not wait for one. Note
+   in your report that neither repaired item will carry a `verification.judge`
+   stamp afterwards, because no judge will have read the new text — that is the
+   correct and honest outcome, not a gap for you to paper over.
+3. **Closing means recording, not re-verifying.** For each item append a row to
+   `research/frontier-14-judge-adjudications.jsonl`:
+   `{id, model, context_sha256, item_sha256, outcome: "confirmed_fatal",
+   defect_type, stage: "step8d-repair", note}` — where `item_sha256` is the
+   **pre-repair** hash from `node tools/item-hash.mjs <id>`, and `note` states
+   what was wrong, what you wrote, and that the repair is unjudged. The existing
+   open `confirmed_fatal` rows stay on the ledger as the record of the defect;
+   your new row is the record of the repair.
+
+The two open rows are, from `level-coverage --verify-current-context`:
+
+- `thm-cech-complete-spaces-are-baire` — deepseek-v4-pro, defect_type `logic`
+- `thm-simple-continued-fractions-parametrise-the-irrationals` — deepseek-v4-pro,
+  defect_type `logic`
+
+After your proofs settle, regenerate their contract entries yourself:
+
+    node tools/regen-contract-entries.mjs research/frontier-14-batch-3.proof-contracts.json \
+      thm-cech-complete-spaces-are-baire thm-simple-continued-fractions-parametrise-the-irrationals
+
+and confirm `node tools/tsx-run.mjs tools/precheck.mts items/<id>.md` is clean
+for both. The orchestrator re-merges and runs the remaining gates.

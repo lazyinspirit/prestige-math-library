@@ -13170,9 +13170,7 @@
           "source_section": "Definition",
           "quote": "Define a bijection $z:\\mathbb N\\to\\mathbb Z$ by $z(2k)=k$ and $z(2k+1)=-(k+1)$; the division algorithm makes these two cases exhaustive ([[thm-division-algorithm-in-z]]). For $x\\in\\mathbb N^{\\mathbb N}$ put $a_0=z(x_0)$ and $a_n=x_n+1$ for $n\\ge1$. Its finite simple continued fractions $[a_0;\\ldots,a_n]$ are defined by recursion on the length, evaluated in $\\mathbb Q$ ([[def-rationals]], [[def-rat-operations]]): $$[a_n]:=a_n,\\qquad [a_k;a_{k+1},\\ldots,a_n]:=a_k+\\frac1{[a_{k+1};\\ldots,a_n]}\\quad(k<n).$$ The recursion never divides by zero, because $a_j\\ge1$ for $j\\ge1$ makes every tail value $[a_{k+1};\\ldots,a_n]$ at least $1$. A finite prefix determines the cylinder of all codes extending it. Infinite continued-fraction values are established, rather than assumed, in [[thm-simple-continued-fractions-parametrise-the-irrationals]].",
           "uses": [
-            "1.1",
-            "3.1",
-            "4.1"
+            "1.1"
           ]
         },
         {
@@ -13181,10 +13179,15 @@
           "source_section": "Statement",
           "quote": "Let $a_0\\in\\mathbb Z$ and $a_n\\in\\mathbb Z$ with $a_n\\ge1$ for $n\\ge1$. Define the **convergent numerators and denominators** by the initial values\n$$p_{-2}=0,\\quad p_{-1}=1,\\quad q_{-2}=1,\\quad q_{-1}=0$$\ntogether with the recurrences $p_n=a_np_{n-1}+p_{n-2}$ and $q_n=a_nq_{n-1}+q_{n-2}$ for $n\\ge0$. The initial values are part of the definition: without them the two recurrences have no value at $n=0$ and $n=1$. Then $p_0=a_0$ and $q_0=1$; the $q_n$ are positive for $n\\ge0$ and strictly increasing for $n\\ge1$; and\n$$p_nq_{n-1}-p_{n-1}q_n=(-1)^{n-1}\\qquad(n\\ge0).$$\n\nFor a finite prefix $(a_0,\\dots,a_n)$ write $C(a_0,\\dots,a_n)\\subseteq\\mathbb N^{\\mathbb N}$ for the **code cylinder** of all codes extending that prefix, and write\n$$J(a_0,\\dots,a_n):=\\text{the closed interval with endpoints }\\frac{p_n}{q_n}\\text{ and }\\frac{p_n+p_{n-1}}{q_n+q_{n-1}}\\subseteq\\mathbb R.$$\nThe intervals $J$ are nested as the prefix is extended, and $\\operatorname{diam}J(a_0,\\dots,a_n)=\\dfrac{1}{q_n(q_n+q_{n-1})}$, which tends to $0$.\n\nA code cylinder and a real interval are different objects and the two are not identified here. Both endpoints of $J(a_0,\\dots,a_n)$ are rational, being ratios of integers. Whether an infinite code's value can equal such an endpoint is not settled on this page; it is settled in [[thm-simple-continued-fractions-parametrise-the-irrationals]], which proves every such value irrational.",
           "uses": [
-            "1.1",
+            "1.2",
+            "1.3",
             "2.1",
+            "2.2",
+            "2.4",
             "3.1",
-            "4.1"
+            "3.2",
+            "3.3",
+            "6.1"
           ]
         },
         {
@@ -13193,83 +13196,220 @@
           "source_section": "Statement",
           "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
           "uses": [
-            "1.1",
-            "2.1",
-            "3.1",
-            "4.1"
+            "2.3"
           ]
         },
         {
           "fact": "F4",
-          "source": "def-rat-operations",
+          "source": "lem-rat-embeds-dense",
+          "source_section": "Statement",
+          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nested-interval-property",
+          "source_section": "Statement",
+          "quote": "For each $k \\in \\mathbb{N}$ let $I_k = [a_k, b_k]$ be a closed bounded interval\nwith $a_k \\le b_k$ ([[def-interval]]), and suppose the family is **nested**:\n\n$$I_{k+1} \\subseteq I_k \\qquad (k \\in \\mathbb{N}).$$\n\nWrite $\\ell_k = b_k - a_k \\ge 0$ for the length of $I_k$. Then:\n\n1. $\\displaystyle\\bigcap_{k \\in \\mathbb{N}} I_k$ is **nonempty**. More precisely,\n   with $a = \\sup\\{a_k : k \\in \\mathbb{N}\\}$ and\n   $b = \\inf\\{b_k : k \\in \\mathbb{N}\\}$, both of which exist, one has $a \\le b$\n   and $$\\bigcap_{k \\in \\mathbb{N}} I_k = [a, b].$$\n2. $\\displaystyle\\bigcap_{k \\in \\mathbb{N}} I_k$ is a **single point** if and only\n   if $\\ell_k \\to 0$ ([[def-real-limit]]).\n\nEvery hypothesis is load bearing. Dropping closedness makes the intersection\nempty; dropping boundedness does the same; and dropping nonemptiness of the\nindividual intervals is vacuously fatal.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-baire-sequence-space",
           "source_section": "Definition",
-          "quote": "On $\\mathbb{Q}$ ([[def-rationals]]) define, on representatives,\n\n$$[(a,b)] + [(c,d)] := [(ad + cb,\\; bd)], \\qquad [(a,b)] \\cdot [(c,d)] := [(ac,\\; bd)],$$\n$$-[(a,b)] := [(-a, b)], \\qquad 0 := [(0,1)], \\qquad 1 := [(1,1)],$$\n\nand, for $[(a,b)] \\ne 0$ (equivalently $a \\ne 0$), the inverse\n$[(a,b)]^{-1} := [(b,a)]$.",
+          "quote": "The **Baire sequence space** is $\\mathcal N:=\\mathbb N^{\\mathbb N}$, the set of functions from $\\mathbb N$ to itself ([[def-the-set-of-functions-from-one-set-to-another]]), with the product topology obtained by giving each copy of $\\mathbb N$ the discrete topology ([[def-product-topology]], [[def-standard-topologies]]). For a finite sequence $s=(s_0,\\ldots,s_{k-1})$, its cylinder is $N_s:=\\{x\\in\\mathcal N:x_i=s_i\\text{ for }i<k\\}$. The empty sequence has cylinder $\\mathcal N$, and these cylinders form a basis.",
           "uses": [
             "1.1"
           ]
         },
         {
-          "fact": "F5",
-          "source": "lem-rat-embeds-dense",
-          "source_section": "Statement",
-          "quote": "The map $q \\mapsto \\hat q$ ([[def-real-numbers]]) is an embedding of ordered\nfields. Every real is approximated by rationals: for $x \\in \\mathbb{R}$ and\nrational $\\varepsilon > 0$ there is $q \\in \\mathbb{Q}$ with\n$|x - \\hat q| < \\hat\\varepsilon$. Consequently, strictly between any two\nreals lies a rational.",
+          "fact": "F7",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]) and let\n$S \\subseteq X$. The **subspace topology** (also *relative topology*) on $S$ is\n\n$$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$\n\nthe family of **traces** on $S$ of the open sets of $X$. The pair\n$(S, \\mathcal{T}_S)$ is a **subspace** of $X$. A subset of $S$ that lies in\n$\\mathcal{T}_S$ is said to be **open in $S$**, and *relatively open* where the\nambient space needs emphasis.\n\n**$\\mathcal{T}_S$ is a topology, and this is discharged here.** (T1):\n$\\varnothing = \\varnothing \\cap S$ and $S = X \\cap S$ are traces. (T2): if\n$\\mathcal{S}' \\subseteq \\mathcal{T}_S$, choose for each member a set of\n$\\mathcal{T}$ tracing to it — no choice principle is needed, since\n$U' := \\bigcup \\{\\, U \\in \\mathcal{T} : U \\cap S \\subseteq W \\,\\}$ is a canonical\nsuch set for $W \\in \\mathcal{T}_S$, being open by (T2) in $X$ and satisfying\n$U' \\cap S = W$ — and then\n$\\bigcup_i (U_i \\cap S) = (\\bigcup_i U_i) \\cap S \\in \\mathcal{T}_S$ by (T2) in\n$X$. (T3): $(U \\cap S) \\cap (V \\cap S) = (U \\cap V) \\cap S \\in \\mathcal{T}_S$ by\n(T3) in $X$.\n\n**Closed sets of a subspace are the traces of the closed sets.** A set\n$C \\subseteq S$ is closed in $S$ if and only if $C = F \\cap S$ for some closed\n$F \\subseteq X$. Indeed $S \\setminus (U \\cap S) = (X \\setminus U) \\cap S$ and\n$S \\setminus (F \\cap S) = (X \\setminus F) \\cap S$, so complementation inside $S$\nmatches complementation inside $X$ under tracing.\n\n**Bases and subbases trace as well.** If $\\mathcal{B}$ is a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]) then\n$\\mathcal{B}_S := \\{\\, B \\cap S : B \\in \\mathcal{B} \\,\\}$ is a basis for\n$\\mathcal{T}_S$: its members are open in $S$, and for $W = U \\cap S$ open in $S$\nand $x \\in W$ there is $B \\in \\mathcal{B}$ with $x \\in B \\subseteq U$, whence\n$x \\in B \\cap S \\subseteq W$. The same computation with a subbasis $\\mathcal{S}$\nshows that $\\{\\, S_0 \\cap S : S_0 \\in \\mathcal{S} \\,\\}$ is a subbasis for\n$\\mathcal{T}_S$, since tracing commutes with finite intersections and with\nunions.\n\n**The inclusion is continuous.** The inclusion map $\\iota : S \\to X$,\n$\\iota(s) = s$, satisfies $\\iota^{-1}[U] = U \\cap S$ for every $U \\subseteq X$,\nso preimages of open sets are open and $\\iota$ is continuous\n([[thm-continuity-characterisations-top]], clause (b)). Moreover\n$\\mathcal{T}_S$ is the **coarsest** topology on $S$ making $\\iota$ continuous: any\ntopology on $S$ for which $\\iota$ is continuous must contain every\n$\\iota^{-1}[U] = U \\cap S$, hence contain $\\mathcal{T}_S$.\n\n**Characteristic property of a map into a subspace.** Let $(Z, \\mathcal{T}_Z)$ be\na topological space and let $g : Z \\to S$ be a function. Then\n\n$$g \\text{ is continuous as a map } Z \\to (S,\\mathcal{T}_S) \\iff \\iota \\circ g \\text{ is continuous as a map } Z \\to (X,\\mathcal{T}) .$$\n\n*Proof.* For $U \\in \\mathcal{T}$ one has\n$(\\iota \\circ g)^{-1}[U] = g^{-1}[\\iota^{-1}[U]] = g^{-1}[U \\cap S]$. If $g$ is\ncontinuous then each $g^{-1}[U \\cap S]$ is open, so $\\iota \\circ g$ is continuous;\nconversely if $\\iota \\circ g$ is continuous then for any $W = U \\cap S$ open in\n$S$ the set $g^{-1}[W] = (\\iota \\circ g)^{-1}[U]$ is open, so $g$ is continuous.\nBoth directions use only clause (b) of [[thm-continuity-characterisations-top]].\n\n**Restriction of a continuous map.** If $f : X \\to Y$ is continuous and\n$S \\subseteq X$, then $f|_S : S \\to Y$ is continuous, since\n$(f|_S)^{-1}[V] = f^{-1}[V] \\cap S$ is open in $S$ for every open $V \\subseteq Y$\n([[def-continuous-map-top]], [[thm-continuity-characterisations-top]]).\n\n**When relative and ambient agree.** If $S$ is open in $X$ then a subset of $S$\nis open in $S$ if and only if it is open in $X$: a trace $U \\cap S$ is then an\nintersection of two open sets of $X$, and conversely an open subset of $X$\ncontained in $S$ is its own trace. The same statement with \"closed\" throughout\nholds when $S$ is closed in $X$. Both are used in the pasting lemma of the next\nitem, and both fail without the hypothesis: $S$ itself is always open and closed\nin $S$, and need be neither in $X$.",
           "uses": [
-            "2.1"
+            "1.1",
+            "2.4",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "Define $d_{\\mathbb{R}} : \\mathbb{R} \\times \\mathbb{R} \\to \\mathbb{R}$ by\n$d_{\\mathbb{R}}(x,y) := |x - y|$ ([[def-abs-value]]). Then:\n\n1. $d_{\\mathbb{R}}$ is a metric on $\\mathbb{R}$ ([[def-metric-space]]); it is\n   called the **usual metric** of $\\mathbb{R}$.\n2. For $x \\in \\mathbb{R}$ and $r > 0$ the open ball is the bounded open interval\n   ([[def-interval]], [[def-metric-ball]])\n   $$B(x,r) = (x-r,\\ x+r),$$\n   and the closed ball is $\\bar B(x,r) = [x-r,\\ x+r]$.\n3. Consequently $U \\subseteq \\mathbb{R}$ is open in the metric topology of\n   $d_{\\mathbb{R}}$ ([[def-metric-topology]]) exactly when for every $x \\in U$\n   there is $r > 0$ with $(x-r, x+r) \\subseteq U$. This topology is called the\n   **usual topology** of $\\mathbb{R}$.\n4. $(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space\n   ([[def-metric-bounded-diameter]]): no ball contains $\\mathbb{R}$, so\n   $\\operatorname{diam}(\\mathbb{R})$ is not defined.",
+          "uses": [
+            "2.4",
+            "6.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Decode the first natural coordinate by the fixed zigzag bijection with the integers and shift each later coordinate by one.",
+          "claim": "Write $\\mathcal A$ for the set of sequences $a=(a_0,a_1,\\ldots)$ with $a_0\\in\\mathbb Z$ and $a_n\\ge1$ for $n\\ge1$, and for a finite prefix put $C(a_0,\\ldots,a_n):=\\{\\,b\\in\\mathcal A:b_k=a_k\\text{ for }k\\le n\\,\\}$; by [F1] the assignment $x\\mapsto a$ with $a_0=z(x_0)$ and $a_n=x_n+1$ for $n\\ge1$ is a bijection of $\\mathcal N=\\mathbb N^{\\mathbb N}$ onto $\\mathcal A$, since $z$ is a bijection of $\\mathbb N$ onto $\\mathbb Z$ and $m\\mapsto m+1$ is a bijection of $\\mathbb N$ onto the integers that are at least $1$, and it acts coordinatewise, so it carries the cylinder $N_s$ of [F6] onto the cylinder $C(t_0,\\ldots,t_{k-1})$ of the decoded prefix $t_0=z(s_0)$ and $t_i=s_i+1$ for $1\\le i<k$, and every $C(a_0,\\ldots,a_n)$ arises from exactly one $N_s$ in this way; give $\\mathcal A$ the topology transported along the bijection, so that the bijection is a homeomorphism and, the $N_s$ being a basis of $\\mathcal N$ by [F6] and their images being exactly the sets $C(a_0,\\ldots,a_n)$, those sets are a basis of $\\mathcal A$, which is the cylinder topology of the Statement, while $\\mathbb R\\setminus\\mathbb Q$ carries the subspace topology of [F7] inherited from $\\mathbb R$.",
           "step": "1.1",
           "inputs": [
             "given",
-            "F3",
-            "F2",
             "F1",
-            "F4"
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $a\\in\\mathcal A$ let $p_n$ and $q_n$ be as in [F2] and, for $n\\ge-1$, put $M_n(t):=(p_nt+p_{n-1})/(q_nt+q_{n-1})$; the initial values of [F2] give $M_{-1}(t)=(1\\cdot t+0)/(0\\cdot t+1)=t$ for every real $t$, and for $n\\ge0$ and every real $t\\ge1$ the denominator satisfies $q_nt+q_{n-1}>0$, since $q_0t+q_{-1}=t>0$ and, for $n\\ge1$, $q_n>0$ and $q_{n-1}>0$ by [F2], so $M_n$ is defined at every real $t\\ge1$ when $n\\ge0$ and at every real $t$ when $n=-1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "For $a\\in\\mathcal A$ the intervals $J(a_0,\\ldots,a_n)$ are closed and bounded, are nested as $n$ increases, and satisfy $\\operatorname{diam}J(a_0,\\ldots,a_n)=1/(q_n(q_n+q_{n-1}))\\to0$, all by [F2], so by claims 1 and 2 of [F5] their intersection is a single real, written $V(a)$, and $V(a)\\in J(a_0,\\ldots,a_n)$ for every $n\\in\\mathbb N$; moreover $V(a)$ is irrational, for suppose $V(a)=u/v$ with $u,v$ integers and $v\\ge1$, and note first that the $q_n$ are positive for $n\\ge0$ and strictly increasing for $n\\ge1$ by [F2] and are integers, so $q_1\\ge1$ and $q_{n+1}\\ge q_n+1$ give $q_n\\ge n$ for $n\\ge1$; for $n\\ge1$ both $V(a)$ and the endpoint $p_n/q_n$ lie in $J(a_0,\\ldots,a_n)$, so $|V(a)-p_n/q_n|\\le1/(q_n(q_n+q_{n-1}))<1/q_n^2$ because $q_{n-1}>0$, and hence $|uq_n-vp_n|=vq_n\\,|V(a)-p_n/q_n|<v/q_n$; taking $n>v$ makes $|uq_n-vp_n|<1$, and it is a nonnegative integer, hence $0$, so $V(a)=p_n/q_n$ for every $n>v$, which is impossible because the determinant identity of [F2] gives $p_{n+1}/q_{n+1}-p_n/q_n=(p_{n+1}q_n-p_nq_{n+1})/(q_nq_{n+1})=(-1)^n/(q_nq_{n+1})\\ne0$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F5"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "By [F2] the intervals $J$ attached to the successive prefixes of a code are nested closed bounded intervals whose diameters tend to $0$, so their intersection is a single real $x$, which is the code's value. That $x$ is irrational, and in particular is not either rational endpoint: suppose $x=a/b$ with integers $a,b$ and $b\\ge1$. Since $x\\in J(a_0,\\dots,a_n)$, [F2] gives $|x-p_n/q_n|\\le1/(q_n(q_n+q_{n-1}))<1/q_n^2$ for $n\\ge1$, so $|aq_n-bp_n|=bq_n\\,|x-p_n/q_n|<b/q_n$. The denominators $q_n$ are strictly increasing by [F2], hence unbounded, so $|aq_n-bp_n|<1$ for all large $n$; being a natural number it is then $0$, giving $x=p_n/q_n$ for all large $n$. But consecutive convergents differ, since $p_{n+1}/q_{n+1}-p_n/q_n=(-1)^n/(q_nq_{n+1})\\ne0$ by the determinant identity of [F2]. This contradiction makes $x$ irrational.",
+          "claim": "For $n\\ge-1$ and reals $s,t$ at which $M_n$ is defined, clearing denominators gives $M_n(s)-M_n(t)=(s-t)(p_nq_{n-1}-p_{n-1}q_n)/\\big((q_ns+q_{n-1})(q_nt+q_{n-1})\\big)$, and by [F2] the determinant $p_nq_{n-1}-p_{n-1}q_n$ equals $(-1)^{n-1}$ for $n\\ge0$ while for $n=-1$ the initial values give $p_{-1}q_{-2}-p_{-2}q_{-1}=1\\cdot1-0\\cdot0=1$; in every case it is $1$ or $-1$, and the denominators are positive by step 1.2, so $M_n$ is strictly monotone on its domain, strictly increasing when that determinant is $1$ and strictly decreasing when it is $-1$.",
           "step": "2.1",
           "inputs": [
-            "step 1.1",
+            "step 1.2",
             "F2",
-            "F5",
-            "F3"
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $a\\in\\mathcal A$ and $n\\ge0$; the recurrences of [F2] give $M_{n-1}(a_n)=(p_{n-1}a_n+p_{n-2})/(q_{n-1}a_n+q_{n-2})=p_n/q_n$ and $M_{n-1}(a_n+1)=(p_{n-1}(a_n+1)+p_{n-2})/(q_{n-1}(a_n+1)+q_{n-2})=(p_n+p_{n-1})/(q_n+q_{n-1})$, both arguments lying in the domain found in step 1.2 because $a_n\\ge1$ when $n\\ge1$ while $M_{-1}$ is defined on all of $\\mathbb R$, so by [F2] the interval $J(a_0,\\ldots,a_n)$ is the closed interval with endpoints $M_{n-1}(a_n)$ and $M_{n-1}(a_n+1)$, both of which are rational by [F2]; the interval is nondegenerate because $\\operatorname{diam}J(a_0,\\ldots,a_n)=1/(q_n(q_n+q_{n-1}))>0$, and $M_{n-1}$ depends only on $a_0,\\ldots,a_{n-1}$, since $p_{n-1},p_{n-2},q_{n-1},q_{n-2}$ do.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Let $x\\in\\mathbb R\\setminus\\mathbb Q$ and define $x_0:=x$, $a_n:=\\lfloor x_n\\rfloor$ and $x_{n+1}:=1/(x_n-a_n)$; by induction on $n$ every $x_n$ is irrational and $x_n>1$ for $n\\ge1$, since given $x_n$ irrational [F3] supplies the unique integer $a_n$ with $a_n\\le x_n<a_n+1$, so that $0\\le x_n-a_n<1$ with $x_n-a_n\\ne0$ because $x_n$ is irrational while $a_n$ is an integer, whence $0<x_n-a_n<1$ and $x_{n+1}=1/(x_n-a_n)>1$, and $x_{n+1}$ is irrational because a rational nonzero $x_{n+1}$ would make $x_n=a_n+1/x_{n+1}$ rational; consequently $a_n=\\lfloor x_n\\rfloor\\ge1$ for $n\\ge1$, the recursion never divides by zero, and $\\Phi(x):=(a_0,a_1,\\ldots)$ is a member of the set $\\mathcal A$ of step 1.1.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "Let $S$ be open in $\\mathbb R\\setminus\\mathbb Q$, so $S=T\\cap(\\mathbb R\\setminus\\mathbb Q)$ for some $T$ open in $\\mathbb R$ by [F7], and let $a\\in\\mathcal A$ satisfy $V(a)\\in S$; claim 3 of [F8] gives a real $r>0$ with $(V(a)-r,V(a)+r)\\subseteq T$, and the diameters $\\operatorname{diam}J(a_0,\\ldots,a_n)$ tend to $0$ by [F2], so some $n$ has $\\operatorname{diam}J(a_0,\\ldots,a_n)<r$; for every $b\\in C(a_0,\\ldots,a_n)$ the interval $J(b_0,\\ldots,b_n)$ equals $J(a_0,\\ldots,a_n)$, because [F2] computes it from the prefix alone, and both $V(b)$ and $V(a)$ lie in it by step 1.3, so $|V(b)-V(a)|<r$ and $V(b)\\in T\\cap(\\mathbb R\\setminus\\mathbb Q)=S$; hence every point of the preimage lies in a cylinder contained in it, so that preimage is the union of the cylinders it contains and is open by step 1.1, and the coding map is continuous.",
+          "step": "2.4",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "F2",
+            "F7",
+            "F8"
           ]
         },
         {
           "id": "step-3-1",
-          "claim": "Conversely, repeatedly take the integer part and reciprocal of the positive fractional remainder of an irrational; the process never stops, and the cylinder estimates recover the original number.",
+          "claim": "Fix $a\\in\\mathcal A$ and $n\\ge0$; subtracting and using the determinant identity of [F2] gives $M_n(t)-p_n/q_n=\\big(q_n(p_nt+p_{n-1})-p_n(q_nt+q_{n-1})\\big)/\\big(q_n(q_nt+q_{n-1})\\big)=-(p_nq_{n-1}-p_{n-1}q_n)/\\big(q_n(q_nt+q_{n-1})\\big)=(-1)^n/\\big(q_n(q_nt+q_{n-1})\\big)$ for every real $t\\ge1$, and at $t=1$ the value $M_n(1)=(p_n+p_{n-1})/(q_n+q_{n-1})$ is the endpoint of $J(a_0,\\ldots,a_n)$ other than $p_n/q_n$ identified in step 2.2; for $t>1$ the two differences $M_n(t)-p_n/q_n$ and $M_n(1)-p_n/q_n$ therefore have the same sign $(-1)^n$ and satisfy $|M_n(t)-p_n/q_n|<|M_n(1)-p_n/q_n|$, because $q_nt+q_{n-1}>q_n+q_{n-1}>0$, so $M_n(t)$ lies strictly between the two endpoints of $J(a_0,\\ldots,a_n)$ and is neither of them.",
           "step": "3.1",
           "inputs": [
+            "step 1.2",
+            "step 2.2",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $x\\in\\mathbb R\\setminus\\mathbb Q$, let $(a_n)$ and $(x_n)$ be as in step 2.3, and let $p_n$ and $q_n$ be the convergent numerators and denominators of the code $\\Phi(x)$; then $x=M_n(x_{n+1})$ for every $n\\in\\mathbb N$, by induction on $n$: at $n=0$ the values $p_0=a_0$, $q_0=1$, $p_{-1}=1$ and $q_{-1}=0$ of [F2] give $M_0(x_1)=(a_0x_1+1)/x_1=a_0+1/x_1=a_0+(x_0-a_0)=x$ because $x_1=1/(x_0-a_0)$, and for the inductive step $x_{n+1}=a_{n+1}+1/x_{n+2}$ with $x_{n+2}>1$, so multiplying numerator and denominator by $x_{n+2}$ gives $M_n(x_{n+1})=\\big((a_{n+1}p_n+p_{n-1})x_{n+2}+p_n\\big)/\\big((a_{n+1}q_n+q_{n-1})x_{n+2}+q_n\\big)=(p_{n+1}x_{n+2}+p_n)/(q_{n+1}x_{n+2}+q_n)=M_{n+1}(x_{n+2})$ by the recurrences of [F2]; every denominator here is nonzero, since $x_{n+1}>1$ and $x_{n+2}>1$ lie in the domains found in step 1.2.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.2",
+            "step 2.3",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "Let $a,b\\in\\mathcal A$ with $a\\ne b$ and let $m$ be the least index with $a_m\\ne b_m$; the quantities $p_{m-1},p_{m-2},q_{m-1},q_{m-2}$ are computed from the common initial segment $a_0,\\ldots,a_{m-1}$ alone, which is empty when $m=0$, the four quantities then being the initial values of [F2], so by step 2.2 the codes $a$ and $b$ determine the same function $M:=M_{m-1}$, and $J(a_0,\\ldots,a_m)$ is the closed interval with endpoints $M(a_m)$ and $M(a_m+1)$ while $J(b_0,\\ldots,b_m)$ is the closed interval with endpoints $M(b_m)$ and $M(b_m+1)$; assume $a_m<b_m$, which costs nothing by symmetry, so that $a_m+1\\le b_m$ as these are integers, and all four arguments lie in the domain of $M$; if $M$ is strictly increasing there, which is one of the two cases of step 2.1, then $J(a_0,\\ldots,a_m)=[M(a_m),M(a_m+1)]$ and $J(b_0,\\ldots,b_m)=[M(b_m),M(b_m+1)]$ with $M(a_m+1)\\le M(b_m)$, so the two meet in $\\varnothing$ when $M(a_m+1)<M(b_m)$ and in $\\{M(b_m)\\}$ when $M(a_m+1)=M(b_m)$, while if $M$ is strictly decreasing the same computation with the endpoints exchanged gives $J(a_0,\\ldots,a_m)=[M(a_m+1),M(a_m)]$ and $J(b_0,\\ldots,b_m)=[M(b_m+1),M(b_m)]$ with $M(b_m)\\le M(a_m+1)$, so the two meet in at most the single point $M(a_m+1)$; in both cases $J(a_0,\\ldots,a_m)\\cap J(b_0,\\ldots,b_m)$ has at most one point, and any such point is an endpoint of both intervals and so is rational by step 2.2.",
+          "step": "3.3",
+          "inputs": [
             "step 2.1",
-            "F3",
-            "F1",
+            "step 2.2",
             "F2"
           ]
         },
         {
           "id": "step-4-1",
-          "claim": "Prefix agreement is exactly the neighbourhood comparison needed for continuity of both maps.",
+          "claim": "Let $x\\in\\mathbb R\\setminus\\mathbb Q$ and let $a:=\\Phi(x)$ be the code produced in step 2.3; for every $n\\in\\mathbb N$ the tail identity of step 3.2 gives $x=M_n(x_{n+1})$ with $x_{n+1}>1$, so step 3.1 places $x$ strictly between the two endpoints of $J(a_0,\\ldots,a_n)$ and in particular inside it, whence $x\\in\\bigcap_{n\\in\\mathbb N}J(a_0,\\ldots,a_n)$, which by step 1.3 is the single point $V(a)$; therefore $V(\\Phi(x))=x$, and $V$ maps $\\mathcal A$ onto $\\mathbb R\\setminus\\mathbb Q$.",
           "step": "4.1",
           "inputs": [
+            "step 1.3",
+            "step 2.3",
             "step 3.1",
-            "F3",
-            "F1",
-            "F2"
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Let $a,b\\in\\mathcal A$ with $a\\ne b$ and let $m$ be least with $a_m\\ne b_m$; by step 1.3 the values $V(a)$ and $V(b)$ are irrational with $V(a)\\in J(a_0,\\ldots,a_m)$ and $V(b)\\in J(b_0,\\ldots,b_m)$, so if $V(a)=V(b)$ then that common value would lie in $J(a_0,\\ldots,a_m)\\cap J(b_0,\\ldots,b_m)$ and hence be rational by step 3.3, a contradiction; therefore $V(a)\\ne V(b)$ and $V$ is injective.",
+          "step": "4.2",
+          "inputs": [
+            "step 1.3",
+            "step 3.3"
           ]
         },
         {
           "id": "step-5-1",
-          "claim": "The preceding construction and implications establish the assertion.",
+          "claim": "By step 1.3 the map $V$ sends every member of $\\mathcal A$ to an irrational real, it is surjective onto $\\mathbb R\\setminus\\mathbb Q$ by step 4.1 and injective by step 4.2, so $V:\\mathcal A\\to\\mathbb R\\setminus\\mathbb Q$ is a bijection, its inverse sends an irrational $x$ to the code $\\Phi(x)$ of step 2.3, and composing with the coordinatewise bijection of step 1.1 presents it as a bijection defined on $\\mathbb N^{\\mathbb N}$.",
           "step": "5.1",
           "inputs": [
-            "step 4.1"
+            "step 1.1",
+            "step 1.3",
+            "step 4.1",
+            "step 4.2",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Let $C(a_0,\\ldots,a_n)$ be a cylinder and let $x\\in V[C(a_0,\\ldots,a_n)]$, say $x=V(c)$ with $c\\in C(a_0,\\ldots,a_n)$, so that $J(c_0,\\ldots,c_n)=J(a_0,\\ldots,a_n)$ is a closed interval $[\\alpha,\\beta]$ with $\\alpha<\\beta$ rational by step 2.2 and $x\\in[\\alpha,\\beta]$ irrational by step 1.3, giving $\\alpha<x<\\beta$, and by [F4] there are rationals $u,v$ with $\\alpha<u<x<v<\\beta$; if $x'$ is irrational with $u<x'<v$ then $x'=V(b)$ for exactly one $b\\in\\mathcal A$ by step 5.1 and $x'\\in J(a_0,\\ldots,a_n)$, and were $b_k\\ne a_k$ for some $k\\le n$ then, taking $m$ to be the least such index, so that $m\\le n$, the nesting of [F2] would put $x'$ in $J(a_0,\\ldots,a_m)\\cap J(b_0,\\ldots,b_m)$, which by step 3.3 has at most one point and that point is rational, contradicting irrationality of $x'$, so $b\\in C(a_0,\\ldots,a_n)$ and $x'\\in V[C(a_0,\\ldots,a_n)]$; consequently the set $T:=\\bigcup\\{\\,(s,t):s<t\\text{ rational and }(s,t)\\cap(\\mathbb R\\setminus\\mathbb Q)\\subseteq V[C(a_0,\\ldots,a_n)]\\,\\}$ is a union of open intervals and so is open in $\\mathbb R$ by [F8], and $T\\cap(\\mathbb R\\setminus\\mathbb Q)=V[C(a_0,\\ldots,a_n)]$, the inclusion from left to right being the defining condition of the union and the reverse holding because the interval $(u,v)$ just produced for the arbitrary point $x$ of the image is one of the united intervals; hence that image is open in $\\mathbb R\\setminus\\mathbb Q$ by [F7], and since every open subset of $\\mathcal A$ is a union of cylinders by step 1.1 and the image of a union is the union of the images, $V$ maps open sets to open sets, which for the bijection of step 5.1 says exactly that its inverse is continuous.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "step 2.2",
+            "step 3.3",
+            "step 5.1",
+            "F2",
+            "F4",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "The coding map is a bijection onto $\\mathbb R\\setminus\\mathbb Q$ by step 5.1, it is continuous by step 2.4, and its inverse is continuous by step 6.1, which is the assertion.",
+          "step": "7.1",
+          "inputs": [
+            "step 2.4",
+            "step 5.1",
+            "step 6.1"
           ]
         }
       ],
@@ -13277,43 +13417,43 @@
       "boundaries": [
         {
           "case": "empty",
-          "status": "not_applicable",
-          "reason": "Both $\\mathbb N^{\\mathbb N}$ and the irrational line are fixed nonempty spaces; this parametrisation does not quantify over a possibly empty family."
+          "status": "checked",
+          "evidence": "The only empty object in range is the empty prefix, whose cylinder is the whole space by [F6]. The proof never uses it: step 1.1 takes as basis the cylinders of prefixes of length at least one, and those already cover the code space, so the basis claim does not depend on admitting the empty prefix. No empty index set, empty intersection or empty interval arises elsewhere."
         },
         {
           "case": "zero",
           "status": "checked",
-          "evidence": "Step 3.1 is the boundary pass for this case: “Conversely, repeatedly take the integer part and reciprocal of the positive fractional remainder of an irrational; the process never stops, and the cylinder estimates recover the original number”."
+          "evidence": "Index zero and the negative seed indices are handled explicitly rather than by the general formula. Step 1.2 computes the two exceptional Moebius maps from the seed values, obtaining the identity at index minus one and an explicit form at index zero; step 2.1 computes the determinant at index minus one by hand, because [F2] states the identity only from index zero upward; and step 3.2 proves the base case of the tail identity at index zero separately. The digit a_0 ranges over all integers, including zero and negatives, which is why step 2.2 needs the index-minus-one map defined on the whole line rather than on the ray from one."
         },
         {
           "case": "one",
           "status": "checked",
-          "evidence": "Step 1.1 is the boundary pass for this case: “Decode the first natural coordinate by the fixed zigzag bijection with the integers and shift each later coordinate by one”."
+          "evidence": "The argument turns on the strictness of a comparison with one. Step 3.1 places the Moebius value strictly inside the prefix interval only for arguments strictly greater than one, and step 2.3 establishes exactly that strictness for every remainder, from irrationality; a remainder equal to one would put the value at an endpoint. The smallest admissible digit for positive index is one and is allowed throughout, and the bound in step 1.3 starts from the denominators at indices zero and one being at least one."
         },
         {
           "case": "degenerate",
-          "status": "not_applicable",
-          "reason": "The domain and codomain are fixed nondegenerate spaces; negative and zero integer parts are ordinary values handled by the zero-th-coordinate zigzag coding."
+          "status": "checked",
+          "evidence": "No prefix interval degenerates to a point: step 2.2 records that its diameter is a positive reciprocal, which is what lets step 6.1 conclude a strict two-sided inequality from irrationality. The degenerate divisions are excluded as well, the difference of a remainder and its integer part being nonzero at step 2.3, and every Moebius denominator being positive on its domain at step 1.2."
         },
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "Step 2.1 is the boundary pass for this case: “Nested cylinder intervals with vanishing diameter give a unique real value and exclude rational endpoints”."
+          "evidence": "This is the case the theorem turns on and it is disposed of twice. Endpoints of every prefix interval are rational by step 2.2 while every code value is irrational by step 1.3, so no value is ever an endpoint; that is what gives interiority in step 6.1. It is also why the at-most-one common point of step 3.3 is harmless: that point is an endpoint of both intervals, hence rational, hence not a code value."
         },
         {
           "case": "nonempty-choice",
-          "status": "not_applicable",
-          "reason": "Both coding algorithms are deterministic recursions (floor, reciprocal, and the fixed coordinate bijections), so the proof makes no selection from a merely nonempty family."
+          "status": "checked",
+          "evidence": "Every selection is single and from a set proved nonempty or a unique object. The integer part at step 2.3 is unique by [F3]; the index with small enough diameter at step 2.4 exists because the diameters tend to zero; the two rationals bracketing a point at step 6.1 exist by [F4]; and the code with a prescribed value at step 6.1 is unique by step 5.1. Each is one existential instantiation inside a universally quantified proof, so no choice principle is used; the open set and the union of cylinders are defined by formulas rather than selected."
         },
         {
           "case": "iff-forward",
           "status": "checked",
-          "evidence": "The Statement advertises both directions; Step 4.1 supplies the forward implication through “Prefix agreement is exactly the neighbourhood comparison needed for continuity of both maps”."
+          "evidence": "Bijectivity is proved as two separate claims and neither is inferred from the other: surjectivity at step 4.1 from the tail identity, injectivity at step 4.2 from prefix separation. The biconditional fact [F5] is used only in the direction that lengths tending to zero force a single point, at step 1.3."
         },
         {
           "case": "iff-reverse",
           "status": "checked",
-          "evidence": "The Statement advertises both directions; Step 3.1 supplies the reverse implication through “Conversely, repeatedly take the integer part and reciprocal of the positive fractional remainder of an irrational; the process never stops, and the cylinder estimates recover the original number”."
+          "evidence": "The homeomorphism claim is likewise proved in both directions by different arguments, and a continuous bijection is never assumed to be a homeomorphism: continuity of the coding map at step 2.4 rests on diameters tending to zero, while continuity of the inverse at step 6.1 rests on interiority together with prefix separation. The characterisation of open subsets of the line in [F8] is the one fact used in both directions, at step 2.4 to extract a radius and at step 6.1 to see a union of intervals as open."
         }
       ],
       "finite_smoke": [],
@@ -13322,7 +13462,7 @@
         "reviewer": "Alpha-frontier-14-group-a (Claude Opus 5, xhigh, 1M context)",
         "tier": "critical",
         "score": 10,
-        "notes": "Tier critical (score 10); signals: 5 declared dependencies; 5 cited facts; boundary-sensitive language; induction, recursion, or minimality; analytic limiting/completeness language. Independent step-6a reader raised R3-16 against this item; each was adjudicated from disk at step 6b and its disposition and repair are recorded in research/frontier-14-alpha-a-6b.md. REFUTER COVERAGE INCOMPLETE: cluster b3-metrizability-core had not returned when this disposition was written. This item carries reader coverage and my own read only, and the gap is listed in the report's \"could not check\" section. The item was repaired at step 6b; its current text on disk is what this disposition covers, and the change is itemised in the report."
+        "notes": "Tier critical (score 10); signals: 5 declared dependencies; 5 cited facts; boundary-sensitive language; induction, recursion, or minimality; analytic limiting/completeness language. Independent step-6a reader raised R3-16 against this item; each was adjudicated from disk at step 6b and its disposition and repair are recorded in research/frontier-14-alpha-a-6b.md. REFUTER COVERAGE INCOMPLETE: cluster b3-metrizability-core had not returned when this disposition was written. This item carries reader coverage and my own read only, and the gap is listed in the report's \"could not check\" section. The item was repaired at step 6b; its current text on disk is what this disposition covers, and the change is itemised in the report. STEP-8d AUTHORING REPAIR (2026-08-16, authoring Alpha, Claude Opus 5, xhigh, 1M context): the proof was rewritten under the owner-scoped blocker pass that closes the two open confirmed_fatal rows. This risk_review disposition now covers the rewritten text on disk, whose citations, derivations and boundary rows were regenerated and rewritten with it. The rewrite has NOT been read by either judge lane and carries no verification.judge stamp."
       }
     },
     "cor-baire-sequence-space-is-homeomorphic-to-the-irrationals": {
@@ -14800,97 +14940,213 @@
         },
         {
           "fact": "F2",
-          "source": "def-dependent-choice",
+          "source": "def-compactification-of-a-tychonoff-space",
           "source_section": "Definition",
-          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a sequence $x : \\mathbb{N} \\to X$ ([[def-sequence]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nAs everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. That is precisely the situation $\\mathrm{AC}_\\omega$ does not\ncover, and it is why a construction \"pick $x_{n+1}$ depending on $x_n$, for every\n$n$ at once\" is not licensed by countable choice.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. The reverse derivation is standard and is not needed anywhere in\nthis library, so it is not carried out; every use below prescribes $x_0$.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "quote": "A **Hausdorff compactification** of a space $X$ is a pair $(K,i)$ in which $K$ is compact ([[def-compact-space]]) and Hausdorff ([[def-hausdorff-space]]), and $i:X\\to K$ is an embedding with dense image ([[def-homeomorphism-and-open-maps]], [[def-dense-top]]). We identify $X$ with $i[X]$ only after naming $i$; the density condition is a condition on that named image.",
           "uses": [
-            "3.1"
+            "1.1"
           ]
         },
         {
           "fact": "F3",
-          "source": "thm-compact-iff-fip",
-          "source_section": "Statement",
-          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). For a\nfamily $\\mathcal{A}$ of subsets of $X$ write\n\n$$\\bigcap \\mathcal{A} \\;:=\\; \\{\\, x \\in X : x \\in A \\text{ for every } A \\in \\mathcal{A} \\,\\},$$\n\nso that $\\bigcap \\varnothing = X$, matching the convention for the empty finite\nintersection in [[def-finite-intersection-property]]. Then:\n\n1. $(X, \\mathcal{T})$ is compact ([[def-compact-space]]) **if and only if** every\n   family $\\mathcal{A}$ of closed subsets of $X$ with the finite intersection\n   property ([[def-finite-intersection-property]]) satisfies\n   $\\bigcap \\mathcal{A} \\ne \\varnothing$.\n2. Equivalently: $(X, \\mathcal{T})$ is compact if and only if every family of\n   closed subsets of $X$ that is contained in some filter on $X$\n   ([[def-filter]]) has nonempty intersection, a family of subsets of $X$ lying\n   in a filter exactly when it has the finite intersection property\n   ([[lem-fip-generates-filter]]).\n\nNo choice principle is used in either direction: complementation is a canonical\nbijection, so no member of a family ever has to be selected.",
+          "source": "def-homeomorphism-and-open-maps",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces and let\n$f : X \\to Y$ be a function. Continuity is as in [[def-continuous-map-top]],\ninjections, surjections and bijections as in\n[[def-injection-surjection-bijection]].\n\n- $f$ is an **open map** if $f[U]$ is open in $Y$ for every open $U \\subseteq X$.\n- $f$ is a **closed map** if $f[F]$ is closed in $Y$ for every closed\n  $F \\subseteq X$.\n- $f$ is a **homeomorphism** if $f$ is a continuous bijection whose inverse\n  $f^{-1} : Y \\to X$ is also continuous. The spaces are **homeomorphic**, written\n  $X \\cong Y$, when a homeomorphism $X \\to Y$ exists.\n- $f$ is an **embedding** if $f$ is injective and the corestriction\n  $f_0 : X \\to f[X]$, $f_0(x) = f(x)$, is a homeomorphism onto $f[X]$ carrying\n  the subspace topology inherited from $Y$ ([[def-subspace-topology-top]]).\n\n**The inverse in the third clause exists because $f$ is a bijection**, and it is\nthe unique two-sided inverse ([[def-injection-surjection-bijection]]); no choice\nprinciple is involved. Continuity of $f^{-1}$ is a genuine additional demand: a\ncontinuous bijection need not be a homeomorphism, and this page records that\nfailure as a false statement with a two-point witness.\n\n**Open, closed and homeomorphism are three different conditions.** A\nhomeomorphism is continuous by definition, but an open map need not be continuous\nand a closed map need not be continuous; and continuity implies neither openness\nnor closedness. An open map need\nnot be closed and a closed map need not be open, and Sierpinski space\n$S = \\{a,b\\}$ with open point $b$ ([[def-standard-topologies]]) witnesses both\nfailures at once: the constant map $S \\to S$ with value $b$ is open, since the\nimage of every nonempty set is the open set $\\{b\\}$, and is not closed, since the\nimage of the closed set $\\{a\\}$ is $\\{b\\}$, whose complement $\\{a\\}$ is not open;\nthe constant map with value $a$ is closed and not open by the same computation\nread the other way. What is true\nis that for a **continuous bijection** the three notions collapse: it is a\nhomeomorphism exactly when it is open, exactly when it is closed. That is proved\nin the next item and is not assumed here.\n\n**Topological properties.** A **property of topological spaces** is a condition\n$P$ that is either true or false of each space. $P$ is a **topological property**\n(one is also said to be *preserved by homeomorphism*, or *invariant*) when\n$X \\cong Y$ implies that $P(X)$ and $P(Y)$ have the same truth value. Since\n$\\cong$ is an equivalence relation on spaces — the identity is a homeomorphism,\ninverses and composites of homeomorphisms are homeomorphisms, all three verified\nin the next item — a topological property is exactly one that is constant on each\n$\\cong$-class.\n\n**What a homeomorphism transports.** If $h : X \\to Y$ is a homeomorphism then\n$U \\mapsto h[U]$ is a bijection from $\\mathcal{T}_X$ onto $\\mathcal{T}_Y$, with\ninverse $V \\mapsto h^{-1}[V]$: both maps are well defined because $h$ and\n$h^{-1}$ are continuous, and they are mutually inverse because $h$ is a\nbijection. So a homeomorphism is an isomorphism of the structure \"a set together\nwith a distinguished family of subsets\", and every notion defined from the open\nsets alone — closed, closure, interior, boundary, dense, convergence of\nsequences, continuity of maps into and out of the space — is carried across by\nit. Anything defined from extra data, such as a metric or an order, is not, and\nthat distinction is exactly what the phrase *topological property* is for.",
           "uses": [
-            "1.1",
             "2.1",
-            "3.1"
+            "6.1"
           ]
         },
         {
           "fact": "F4",
-          "source": "thm-the-separation-implication-chain",
-          "source_section": "Statement",
-          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). The\nfollowing implications hold, and each is proved by an earlier item of this page.\n\n1. **Perfectly normal implies completely normal**, assuming the Axiom of\n   Countable Choice ([[def-countable-choice]]).\n2. **Completely normal implies normal**, and **perfectly normal implies normal**.\n3. **Normal together with $T_1$ implies $T_3$**, that is regular together with\n   $T_1$.\n4. **Completely regular implies regular**, and **Tychonoff implies $T_3$**.\n5. **Regular together with $T_1$ implies Urysohn**, which implies **Hausdorff**,\n   which implies **$T_1$**, which implies **$T_0$**.\n6. **Metrizable implies every property named above**: a metrizable space is\n   perfectly normal, completely normal, normal, Tychonoff, completely regular,\n   $T_3$, regular, Urysohn, Hausdorff, $T_1$ and $T_0$, with no choice principle\n   used.\n\nReading the numbered axioms in order, clauses 1 to 5 give\n\n$$T_6 \\Rightarrow T_5 \\Rightarrow T_4 \\Rightarrow T_3 \\Rightarrow T_{2\\frac12} \\Rightarrow T_2 \\Rightarrow T_1 \\Rightarrow T_0 ,$$\n\nthe first arrow under $\\mathrm{AC}_\\omega$, together with\n$T_{3\\frac12} \\Rightarrow T_3$.\n\n**This is the whole of the classical chain that this page proves, and it is one\narrow short of the classical chain.** The implication $T_4 \\Rightarrow\nT_{3\\frac12}$ — a normal $T_1$ space is completely regular — is Urysohn's lemma\nand is not available at this point in the reading order. Its absence is recorded,\nwith what would license it, in this page's conventions remark; it is\ndeliberately **not** asserted here,\nand no clause above may be read as giving it.",
+          "source": "def-g-delta-and-f-sigma-in-a-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]) and let\n$A \\subseteq X$.\n\n- $A$ is a **$G_\\delta$ set of $X$** when there is a sequence\n  $(V_n)_{n \\in \\mathbb{N}}$ of open subsets of $X$ with\n  $$A \\;=\\; \\bigcap_{n \\in \\mathbb{N}} V_n .$$\n- $A$ is an **$F_\\sigma$ set of $X$** when there is a sequence\n  $(F_n)_{n \\in \\mathbb{N}}$ of closed subsets of $X$ with\n  $$A \\;=\\; \\bigcup_{n \\in \\mathbb{N}} F_n .$$\n\nAs everywhere in this library $\\mathbb{N}$ contains $0$, so both indexings start\nat $0$. An at most countable *family* may always be presented as a sequence\n([[def-countable]]): a finite list $V_0, \\dots, V_m$ is extended by $V_n := V_m$\nfor $n > m$, which changes neither the intersection nor the union, so nothing is\nlost by indexing over $\\mathbb{N}$.\n\n**The two classes are exchanged by complementation.** $A$ is $F_\\sigma$ in $X$ if\nand only if $X \\setminus A$ is $G_\\delta$ in $X$. If $A = \\bigcup_n F_n$ with\neach $F_n$ closed then $X \\setminus A = \\bigcap_n (X \\setminus F_n)$ by De Morgan\nand each $X \\setminus F_n$ is open ([[def-topological-space]]); the converse is\nthe same computation read backwards.\n\n**Every open set is $G_\\delta$ and every closed set is $F_\\sigma$**, by the\nconstant sequence $V_n := A$, respectively $F_n := A$. **Neither converse\nholds**, and $\\mathbb{R}$ with its usual topology already refutes both. The\nsingleton $\\{0\\}$ is a $G_\\delta$ that is **not open**: it is\n$\\bigcap_{n \\in \\mathbb{N}} (-1/(n+1),\\ 1/(n+1))$, since $0$ lies in every one of\nthose intervals while a real $t \\ne 0$ is excluded at some index, the\nArchimedean property giving a natural $k \\ge 1$ with $1/k < |t|$ and $k$ being a\nsuccessor $n+1$ ([[cor-archimedean-reciprocal]], [[lem-nat-nonzero-is-successor]],\n[[def-canonical-natural]]); and $\\{0\\}$ is not open because every bounded open\ninterval $(a,b)$ with $a < 0 < b$ contains the point $b/2 \\ne 0$\n([[def-interval]], [[lem-real-line-is-a-metric-space]], claim 3). Complementing,\n$\\mathbb{R} \\setminus \\{0\\}$ is an $F_\\sigma$ that is **not closed**, its\ncomplement $\\{0\\}$ not being open.\n\n**The condition that is a real restriction is the other pairing**, namely that\nevery **closed** set be a $G_\\delta$, equivalently that every **open** set be an\n$F_\\sigma$. That is not automatic in an arbitrary space, and it is exactly the\nsecond conjunct of perfect normality later on this page. It must not be confused\nwith the two automatic inclusions above: they hold everywhere and say nothing\nabout a space.\n\n**Agreement with the real-line notion, stated because a second notion of the\nsame name would be a defect.** [[def-f-sigma-g-delta]] defines $F_\\sigma$ and\n$G_\\delta$ subsets of $\\mathbb{R}$ by the same two displayed conditions, with\n\"open\" and \"closed\" read in the sense of [[def-open-and-closed-in-r]]. Those two\nwords name the same two collections of subsets of $\\mathbb{R}$ as the usual\ntopology of $\\mathbb{R}$ does, and the verification is one line of unfolding.\n[[def-open-and-closed-in-r]] calls $U$ open when every $x \\in U$ admits\n$\\varepsilon > 0$ with $N_\\varepsilon(x) \\subseteq U$, where\n$N_\\varepsilon(x) = (x - \\varepsilon,\\ x + \\varepsilon)$\n([[def-neighbourhood-r]]); [[def-metric-topology]] calls $U$ open in\n$(\\mathbb{R}, d_{\\mathbb{R}})$ when every $x \\in U$ admits $r > 0$ with\n$B(x,r) \\subseteq U$, and $B(x,r) = (x-r,\\ x+r)$ by claim 2 of\n[[lem-real-line-is-a-metric-space]]. The two conditions are therefore the same\ncondition word for word, so the two collections of open subsets of $\\mathbb{R}$\nare one collection, and hence so are the two collections of closed subsets, each\nbeing the complements of the other collection. The usual topology of $\\mathbb{R}$\nis the metric topology of $d_{\\mathbb{R}}$ ([[def-metrizable-space]]). Since the\ntwo definitions quantify over one collection of open sets and one collection of\nclosed sets, a subset of $\\mathbb{R}$ is $G_\\delta$ in the sense above, for\n$\\mathbb{R}$ with its usual topology, if and only if it is $G_\\delta$ in the\nsense of [[def-f-sigma-g-delta]]; and likewise for $F_\\sigma$. **There is one\nnotion here, not two**, and every statement proved about $F_\\sigma$ or $G_\\delta$\nsubsets of $\\mathbb{R}$ elsewhere in this library may be quoted verbatim as a\nstatement about the topological space $\\mathbb{R}$.",
           "uses": [
-            "1.1",
-            "2.1",
-            "3.1"
+            "1.1"
           ]
         },
         {
           "fact": "F5",
-          "source": "def-baire-space",
+          "source": "def-subspace-topology-top",
           "source_section": "Definition",
-          "quote": "A topological space $(X, \\mathcal{T})$ ([[def-topological-space]]) is a **Baire\nspace** when\n\n> for every sequence $(U_n)_{n \\in \\mathbb{N}}$ of subsets of $X$ that are open\n> and dense in $X$ ([[def-dense-top]], [[def-sequence-convergence-top]],\n> [[def-natural-numbers]]), the intersection $\\bigcap_{n \\in \\mathbb{N}} U_n$ is\n> dense in $X$.\n\nAs everywhere in this library $\\mathbb{N}$ contains $0$, so the sequence starts\nat $U_0$ and an index range copied from a text that starts at $1$ must be shifted\nbefore it is used here.\n\n**The condition unwound.** Denseness of $A \\subseteq X$ says $\\overline{A} = X$\n([[def-interior-closure-boundary-top]]), equivalently that $A$ meets every\nnonempty open subset of $X$ ([[def-dense-top]]). So the Baire condition reads:\n\n> for every sequence $(U_n)$ of dense open sets and every nonempty open\n> $W \\subseteq X$ there is a point of $W$ lying in every $U_n$.\n\nThat is the form every proof below uses, and it is the form in which the\ncondition is checked: one produces a single point, in a given nonempty open set,\nbelonging to all of the $U_n$ at once.\n\n**The intersection itself need not be open.** Nothing in the definition asserts\nthat $\\bigcap_n U_n$ is open, and in general it is not; what is asserted is only\nthat it is dense. A finite intersection of dense open sets is dense and open, and\nthat much holds in every space; the content of the definition is entirely in the\npassage to a countable family.\n\n**Why the meager formulation is not given here.** The usual equivalent phrasing\nsays that a countable union of nowhere dense sets has empty interior, or that a\nnonempty open set is not meager. This page does not state it, because the\nnotions of nowhere dense and meager available to it are\n[[def-nowhere-dense-meager]], which is stated for subsets of $\\mathbb{R}$ and not\nfor subsets of an arbitrary topological space; restating them here in general\nwould create a second notion under the same name. The definition above is stated\nin terms of denseness alone, which [[def-dense-top]] does define for an arbitrary\nspace, and it is equivalent to the meager formulation wherever both are\navailable.",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]) and let\n$S \\subseteq X$. The **subspace topology** (also *relative topology*) on $S$ is\n\n$$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$\n\nthe family of **traces** on $S$ of the open sets of $X$. The pair\n$(S, \\mathcal{T}_S)$ is a **subspace** of $X$. A subset of $S$ that lies in\n$\\mathcal{T}_S$ is said to be **open in $S$**, and *relatively open* where the\nambient space needs emphasis.\n\n**$\\mathcal{T}_S$ is a topology, and this is discharged here.** (T1):\n$\\varnothing = \\varnothing \\cap S$ and $S = X \\cap S$ are traces. (T2): if\n$\\mathcal{S}' \\subseteq \\mathcal{T}_S$, choose for each member a set of\n$\\mathcal{T}$ tracing to it — no choice principle is needed, since\n$U' := \\bigcup \\{\\, U \\in \\mathcal{T} : U \\cap S \\subseteq W \\,\\}$ is a canonical\nsuch set for $W \\in \\mathcal{T}_S$, being open by (T2) in $X$ and satisfying\n$U' \\cap S = W$ — and then\n$\\bigcup_i (U_i \\cap S) = (\\bigcup_i U_i) \\cap S \\in \\mathcal{T}_S$ by (T2) in\n$X$. (T3): $(U \\cap S) \\cap (V \\cap S) = (U \\cap V) \\cap S \\in \\mathcal{T}_S$ by\n(T3) in $X$.\n\n**Closed sets of a subspace are the traces of the closed sets.** A set\n$C \\subseteq S$ is closed in $S$ if and only if $C = F \\cap S$ for some closed\n$F \\subseteq X$. Indeed $S \\setminus (U \\cap S) = (X \\setminus U) \\cap S$ and\n$S \\setminus (F \\cap S) = (X \\setminus F) \\cap S$, so complementation inside $S$\nmatches complementation inside $X$ under tracing.\n\n**Bases and subbases trace as well.** If $\\mathcal{B}$ is a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]) then\n$\\mathcal{B}_S := \\{\\, B \\cap S : B \\in \\mathcal{B} \\,\\}$ is a basis for\n$\\mathcal{T}_S$: its members are open in $S$, and for $W = U \\cap S$ open in $S$\nand $x \\in W$ there is $B \\in \\mathcal{B}$ with $x \\in B \\subseteq U$, whence\n$x \\in B \\cap S \\subseteq W$. The same computation with a subbasis $\\mathcal{S}$\nshows that $\\{\\, S_0 \\cap S : S_0 \\in \\mathcal{S} \\,\\}$ is a subbasis for\n$\\mathcal{T}_S$, since tracing commutes with finite intersections and with\nunions.\n\n**The inclusion is continuous.** The inclusion map $\\iota : S \\to X$,\n$\\iota(s) = s$, satisfies $\\iota^{-1}[U] = U \\cap S$ for every $U \\subseteq X$,\nso preimages of open sets are open and $\\iota$ is continuous\n([[thm-continuity-characterisations-top]], clause (b)). Moreover\n$\\mathcal{T}_S$ is the **coarsest** topology on $S$ making $\\iota$ continuous: any\ntopology on $S$ for which $\\iota$ is continuous must contain every\n$\\iota^{-1}[U] = U \\cap S$, hence contain $\\mathcal{T}_S$.\n\n**Characteristic property of a map into a subspace.** Let $(Z, \\mathcal{T}_Z)$ be\na topological space and let $g : Z \\to S$ be a function. Then\n\n$$g \\text{ is continuous as a map } Z \\to (S,\\mathcal{T}_S) \\iff \\iota \\circ g \\text{ is continuous as a map } Z \\to (X,\\mathcal{T}) .$$\n\n*Proof.* For $U \\in \\mathcal{T}$ one has\n$(\\iota \\circ g)^{-1}[U] = g^{-1}[\\iota^{-1}[U]] = g^{-1}[U \\cap S]$. If $g$ is\ncontinuous then each $g^{-1}[U \\cap S]$ is open, so $\\iota \\circ g$ is continuous;\nconversely if $\\iota \\circ g$ is continuous then for any $W = U \\cap S$ open in\n$S$ the set $g^{-1}[W] = (\\iota \\circ g)^{-1}[U]$ is open, so $g$ is continuous.\nBoth directions use only clause (b) of [[thm-continuity-characterisations-top]].\n\n**Restriction of a continuous map.** If $f : X \\to Y$ is continuous and\n$S \\subseteq X$, then $f|_S : S \\to Y$ is continuous, since\n$(f|_S)^{-1}[V] = f^{-1}[V] \\cap S$ is open in $S$ for every open $V \\subseteq Y$\n([[def-continuous-map-top]], [[thm-continuity-characterisations-top]]).\n\n**When relative and ambient agree.** If $S$ is open in $X$ then a subset of $S$\nis open in $S$ if and only if it is open in $X$: a trace $U \\cap S$ is then an\nintersection of two open sets of $X$, and conversely an open subset of $X$\ncontained in $S$ is its own trace. The same statement with \"closed\" throughout\nholds when $S$ is closed in $X$. Both are used in the pasting lemma of the next\nitem, and both fail without the hypothesis: $S$ itself is always open and closed\nin $S$, and need be neither in $X$.",
           "uses": [
-            "1.1",
             "2.1"
           ]
         },
         {
           "fact": "F6",
+          "source": "def-dense-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space, let $\\mathcal{B}$ be a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]) and let $A \\subseteq X$. Interior\nand closure are as in [[def-interior-closure-boundary-top]].\n\n- $A$ is **dense** in $X$ if $\\overline{A} = X$.\n- $A$ is **codense** in $X$ if $X \\setminus A$ is dense.\n- $A$ is **nowhere dense** in $X$ if $\\operatorname{int}(\\overline{A}) = \\varnothing$.\n\n**Three equivalent forms of density, and the one used in practice.** The\nfollowing are equivalent:\n\n1. $\\overline{A} = X$;\n2. $U \\cap A \\ne \\varnothing$ for every nonempty open $U \\subseteq X$;\n3. $B \\cap A \\ne \\varnothing$ for every nonempty $B \\in \\mathcal{B}$.\n\n*Proof.* (1) $\\Rightarrow$ (2): if $U$ is open and nonempty, pick $x \\in U$; then\n$x \\in \\overline{A}$, so $U \\cap A \\ne \\varnothing$ by clause (c) of\n[[thm-closure-characterisation-top]]. (2) $\\Rightarrow$ (3): a nonempty member of\n$\\mathcal{B}$ is a nonempty open set. (3) $\\Rightarrow$ (1): let $x \\in X$; every\n$B \\in \\mathcal{B}$ with $x \\in B$ is nonempty and so meets $A$, hence\n$x \\in \\overline{A}$ by clause (d) of [[thm-closure-characterisation-top]]. Form\n3 is what makes density checkable: for the Sorgenfrey line it is a statement\nabout half-open intervals, and for a metric space a statement about balls.\n\n**Codensity is emptiness of the interior.** $A$ is codense if and only if\n$\\operatorname{int}(A) = \\varnothing$, because\n$X \\setminus \\operatorname{int}(A) = \\overline{X \\setminus A}$\n([[def-interior-closure-boundary-top]]), so $\\overline{X \\setminus A} = X$ holds\nexactly when $\\operatorname{int}(A) = \\varnothing$.\n\n**Nowhere dense implies codense, and the converse fails.** If\n$\\operatorname{int}(\\overline{A}) = \\varnothing$ then\n$\\operatorname{int}(A) \\subseteq \\operatorname{int}(\\overline{A}) = \\varnothing$\nby monotonicity of the interior, so $A$ is codense. The two notions can differ\nonly on sets whose closure is larger than themselves, and there they sometimes\ndo: a dense set with empty interior, such as the rationals inside the real line,\nis codense and is not nowhere dense, its closure being everything. They may also\nagree on such a set: $(0,1)$ inside $\\mathbb{R}$ has closure $[0,1]$ and is\nneither codense nor nowhere dense. A *closed* set is nowhere dense\nprecisely when it is codense, since then $\\overline{A} = A$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-baire-space",
+          "source_section": "Definition",
+          "quote": "A topological space $(X, \\mathcal{T})$ ([[def-topological-space]]) is a **Baire\nspace** when\n\n> for every sequence $(U_n)_{n \\in \\mathbb{N}}$ of subsets of $X$ that are open\n> and dense in $X$ ([[def-dense-top]], [[def-sequence-convergence-top]],\n> [[def-natural-numbers]]), the intersection $\\bigcap_{n \\in \\mathbb{N}} U_n$ is\n> dense in $X$.\n\nAs everywhere in this library $\\mathbb{N}$ contains $0$, so the sequence starts\nat $U_0$ and an index range copied from a text that starts at $1$ must be shifted\nbefore it is used here.\n\n**The condition unwound.** Denseness of $A \\subseteq X$ says $\\overline{A} = X$\n([[def-interior-closure-boundary-top]]), equivalently that $A$ meets every\nnonempty open subset of $X$ ([[def-dense-top]]). So the Baire condition reads:\n\n> for every sequence $(U_n)$ of dense open sets and every nonempty open\n> $W \\subseteq X$ there is a point of $W$ lying in every $U_n$.\n\nThat is the form every proof below uses, and it is the form in which the\ncondition is checked: one produces a single point, in a given nonempty open set,\nbelonging to all of the $U_n$ at once.\n\n**The intersection itself need not be open.** Nothing in the definition asserts\nthat $\\bigcap_n U_n$ is open, and in general it is not; what is asserted is only\nthat it is dense. A finite intersection of dense open sets is dense and open, and\nthat much holds in every space; the content of the definition is entirely in the\npassage to a countable family.\n\n**Why the meager formulation is not given here.** The usual equivalent phrasing\nsays that a countable union of nowhere dense sets has empty interior, or that a\nnonempty open set is not meager. This page does not state it, because the\nnotions of nowhere dense and meager available to it are\n[[def-nowhere-dense-meager]], which is stated for subsets of $\\mathbb{R}$ and not\nfor subsets of an arbitrary topological space; restating them here in general\nwould create a second notion under the same name. The definition above is stated\nin terms of denseness alone, which [[def-dense-top]] does define for an arbitrary\nspace, and it is equivalent to the meager formulation wherever both are\navailable.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
           "source": "thm-a-compact-hausdorff-space-is-regular-and-normal",
           "source_section": "Statement",
           "quote": "Let $X$ be a compact ([[def-compact-space]]) Hausdorff\n([[def-hausdorff-space]]) topological space. Then:\n\n1. $X$ is **regular** ([[def-regular-and-t3-spaces]]);\n2. $X$ is **normal** ([[def-normal-and-t4-spaces]]);\n3. $X$ is $T_1$ ([[def-t0-and-t1-spaces]]), and hence $X$ is $T_3$ and $T_4$.\n\nFollowing [[def-regular-and-t3-spaces]] and [[def-normal-and-t4-spaces]],\n*regular* and *normal* name the separation conditions alone and the numerals\n$T_3$ and $T_4$ name their conjunctions with $T_1$; claim 3 is what supplies the\n$T_1$ half, and it is stated separately for that reason.\n\n**Nothing stronger is claimed.** In particular it is not asserted here that a\ncompact Hausdorff space is completely regular\n([[def-regular-and-t3-spaces]] distinguishes the two conditions), and no\ncontinuous real-valued function is produced anywhere below.",
           "uses": [
-            "2.1"
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-regularity-via-closed-neighbourhoods",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]), with\nclosures as in [[def-interior-closure-boundary-top]] and neighbourhoods as in\n[[def-neighbourhood-top]], so that a neighbourhood need not be open. The\nfollowing three conditions are equivalent.\n\n- **(a)** $X$ is regular ([[def-regular-and-t3-spaces]]).\n- **(b)** For every $x \\in X$ and every open $U$ with $x \\in U$ there is an open\n  $V$ with\n  $$x \\in V \\subseteq \\overline{V} \\subseteq U .$$\n- **(c)** Every point of $X$ has a neighbourhood base consisting of **closed**\n  neighbourhoods: for every $x \\in X$ and every neighbourhood $N$ of $x$ there is\n  a closed neighbourhood $K$ of $x$ with $K \\subseteq N$.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-closure-characterisation-top",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space, let $\\mathcal{B}$ be a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]), let $A \\subseteq X$ and let\n$x \\in X$. Closure, derived set and limit points are as in\n[[def-interior-closure-boundary-top]]. Then:\n\n1. The following four conditions are equivalent.\n   - (a) $x \\in \\overline{A}$;\n   - (b) $N \\cap A \\ne \\varnothing$ for every neighbourhood $N$ of $x$\n     ([[def-neighbourhood-top]]);\n   - (c) $U \\cap A \\ne \\varnothing$ for every open $U$ with $x \\in U$;\n   - (d) $B \\cap A \\ne \\varnothing$ for every $B \\in \\mathcal{B}$ with $x \\in B$.\n2. $\\overline{A}$ is closed, contains $A$, and is contained in every closed\n   $F \\subseteq X$ with $A \\subseteq F$; so it is the smallest closed superset of\n   $A$, and $A$ is closed if and only if $A = \\overline{A}$.\n3. $\\overline{A} = A \\cup A'$.\n\nClaim 2 is recorded here for reference and is discharged in\n[[def-interior-closure-boundary-top]], where it is what makes the definition of\n$\\overline{A}$ well posed; claims 1 and 3 are proved below. Claim 1 is the form in\nwhich the closure is used everywhere afterwards, and clause (d) is what makes a\nclosure computable from a basis rather than from all open sets.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a sequence $x : \\mathbb{N} \\to X$ ([[def-sequence]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nAs everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. That is precisely the situation $\\mathrm{AC}_\\omega$ does not\ncover, and it is why a construction \"pick $x_{n+1}$ depending on $x_n$, for every\n$n$ at once\" is not licensed by countable choice.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. The reverse derivation is standard and is not needed anywhere in\nthis library, so it is not carried out; every use below prescribes $x_0$.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-compact-iff-fip",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). For a\nfamily $\\mathcal{A}$ of subsets of $X$ write\n\n$$\\bigcap \\mathcal{A} \\;:=\\; \\{\\, x \\in X : x \\in A \\text{ for every } A \\in \\mathcal{A} \\,\\},$$\n\nso that $\\bigcap \\varnothing = X$, matching the convention for the empty finite\nintersection in [[def-finite-intersection-property]]. Then:\n\n1. $(X, \\mathcal{T})$ is compact ([[def-compact-space]]) **if and only if** every\n   family $\\mathcal{A}$ of closed subsets of $X$ with the finite intersection\n   property ([[def-finite-intersection-property]]) satisfies\n   $\\bigcap \\mathcal{A} \\ne \\varnothing$.\n2. Equivalently: $(X, \\mathcal{T})$ is compact if and only if every family of\n   closed subsets of $X$ that is contained in some filter on $X$\n   ([[def-filter]]) has nonempty intersection, a family of subsets of $X$ lying\n   in a filter exactly when it has the finite intersection property\n   ([[lem-fip-generates-filter]]).\n\nNo choice principle is used in either direction: complementation is a canonical\nbijection, so no member of a family ever has to be selected.",
+          "uses": [
+            "5.1"
           ]
         }
       ],
       "derivations": [
         {
           "id": "step-1-1",
-          "claim": "Realise the space as the intersection of open sets in a compact Hausdorff space.",
+          "claim": "Let $X$ be Čech-complete; by [F1] fix a Hausdorff compactification $(K,i)$ of $X$ such that $i[X]$ is a $G_\\delta$ subset of $K$, write $Y:=i[X]$ and let $\\mathcal T_K$ be the topology of $K$, so $K$ is compact Hausdorff and $i:X\\to K$ is an embedding by [F2], and by [F4] there is a sequence $(G_n)_{n\\in\\mathbb N}$ of members of $\\mathcal T_K$ with $Y=\\bigcap_{n\\in\\mathbb N}G_n$, whence $Y\\subseteq G_n$ for every $n\\in\\mathbb N$.",
           "step": "1.1",
           "inputs": [
             "given",
-            "F3",
-            "F4",
-            "F5",
-            "F1"
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "By [F7] the assertion to be proved is that for every sequence $(U_n)_{n\\in\\mathbb N}$ of open dense subsets of $X$ the set $\\bigcap_{n\\in\\mathbb N}U_n$ is dense in $X$, and by [F6] that says exactly that $\\bigcap_{n\\in\\mathbb N}U_n$ meets every nonempty open $V\\subseteq X$; fix such a sequence $(U_n)_{n\\in\\mathbb N}$ and such a set $V$, there being nothing to prove when $X$ has no nonempty open subset, in particular when $X=\\varnothing$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F6",
+            "F7"
           ]
         },
         {
           "id": "step-2-1",
-          "claim": "Starting in a prescribed nonempty relatively open set, use regularity and density to choose nested nonempty ambient open sets with compact closures, each lying in the next $G_\\delta$ layer and the next dense open set. The ambient space of step 1.1 is compact Hausdorff, so [F6] is what supplies its regularity; the separation chain [F4] does not state that implication.",
+          "claim": "By [F3] the corestriction $i_0:X\\to Y$ is a homeomorphism onto $Y$ with the subspace topology inherited from $K$, so $i[V]$ and every $i[U_n]$ are open in $Y$ and $i[V]\\ne\\varnothing$; each $i[U_n]$ is moreover dense in $Y$, since for nonempty $S$ open in $Y$ the set $i_0^{-1}[S]$ is nonempty and open in $X$, hence meets $U_n$ by [F6], and the image under $i$ of a point of $i_0^{-1}[S]\\cap U_n$ lies in $S\\cap i[U_n]$; putting $W:=\\bigcup\\{\\,O\\in\\mathcal T_K:O\\cap Y\\subseteq i[V]\\,\\}$ and $W_n:=\\bigcup\\{\\,O\\in\\mathcal T_K:O\\cap Y\\subseteq i[U_n]\\,\\}$ for $n\\in\\mathbb N$, the canonical tracing construction of [F5] makes these members of $\\mathcal T_K$ with $W\\cap Y=i[V]$ and $W_n\\cap Y=i[U_n]$, and since $W_n$ is defined by a formula in $n$ rather than selected, the sequence $(W_n)_{n\\in\\mathbb N}$ is obtained with no appeal to countable choice.",
           "step": "2.1",
           "inputs": [
             "step 1.1",
+            "step 1.2",
             "F3",
-            "F4",
             "F5",
             "F6"
           ]
         },
         {
+          "id": "step-2-2",
+          "claim": "The space $K$ is compact Hausdorff by step 1.1, hence regular by [F8], so clause (b) of [F9] holds in $K$: for every $y\\in K$ and every $P\\in\\mathcal T_K$ with $y\\in P$ there is $O\\in\\mathcal T_K$ with $y\\in O\\subseteq\\overline O\\subseteq P$, all closures being taken in $K$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F8",
+            "F9"
+          ]
+        },
+        {
           "id": "step-3-1",
-          "claim": "Dependent choice produces the chain; compactness gives a point in all closures, hence in the desired intersection.",
+          "claim": "Since $i[V]$ is nonempty and open in $Y$ and $i[U_0]$ is dense in $Y$, there is a point $y_0\\in i[V]\\cap i[U_0]=Y\\cap W\\cap W_0$, and $y_0\\in G_0$ because $Y\\subseteq G_0$; thus $y_0$ lies in the member $W\\cap W_0\\cap G_0$ of $\\mathcal T_K$, and the closure form of regularity yields $O_0\\in\\mathcal T_K$ with $y_0\\in O_0\\subseteq\\overline{O_0}\\subseteq W\\cap W_0\\cap G_0$, so that $O_0\\cap Y\\ne\\varnothing$.",
           "step": "3.1",
           "inputs": [
+            "step 1.1",
             "step 2.1",
-            "F3",
-            "F4",
-            "F2"
+            "step 2.2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $\\mathcal S:=\\{\\,(n,O):n\\in\\mathbb N,\\ O\\in\\mathcal T_K,\\ O\\cap Y\\ne\\varnothing\\,\\}$ and let $R$ hold of $\\big((n,O),(m,O')\\big)$ exactly when $m=n+1$ and $\\overline{O'}\\subseteq O\\cap W_m\\cap G_m$; then $R$ is entire on $\\mathcal S$, for given $(n,O)\\in\\mathcal S$ the set $O\\cap Y$ is nonempty and open in $Y$, so the dense set $i[U_{n+1}]=Y\\cap W_{n+1}$ meets it in a point $y$, which lies in $G_{n+1}$ because $Y\\subseteq G_{n+1}$ and hence lies in the member $O\\cap W_{n+1}\\cap G_{n+1}$ of $\\mathcal T_K$, and the closure form of regularity yields $O'\\in\\mathcal T_K$ with $y\\in O'\\subseteq\\overline{O'}\\subseteq O\\cap W_{n+1}\\cap G_{n+1}$, so that $(n+1,O')\\in\\mathcal S$ and $(n,O)\\mathbin R(n+1,O')$.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "F6"
           ]
         },
         {
           "id": "step-4-1",
-          "claim": "The preceding construction and implications establish the assertion.",
+          "claim": "The class $\\mathcal S$ is a set, being a subset of $\\mathbb N\\times\\mathcal T_K$, it is nonempty by step 3.1, and $R$ is entire on it by step 3.2, so [F11] applied to $\\mathcal S$, $R$ and the starting point $(0,O_0)$ gives a sequence $s:\\mathbb N\\to\\mathcal S$ with $s_0=(0,O_0)$ and $s_n\\mathbin Rs_{n+1}$ for every $n\\in\\mathbb N$; since $R$ raises the first coordinate by exactly one, induction on $n$ gives $s_n=(n,O_n)$ for members $O_n$ of $\\mathcal T_K$ with $O_n\\cap Y\\ne\\varnothing$, and the definition of $R$ gives $\\overline{O_{n+1}}\\subseteq O_n\\cap W_{n+1}\\cap G_{n+1}$ for every $n\\in\\mathbb N$, while $\\overline{O_0}\\subseteq W\\cap W_0\\cap G_0$ by step 3.1.",
           "step": "4.1",
           "inputs": [
-            "step 3.1"
+            "step 3.1",
+            "step 3.2",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Each $\\overline{O_n}$ is closed in $K$ and contains the nonempty set $O_n$ by [F10], hence is nonempty, and $\\overline{O_{n+1}}\\subseteq O_n\\subseteq\\overline{O_n}$ by step 4.1 and [F10], so the family $\\{\\,\\overline{O_n}:n\\in\\mathbb N\\,\\}$ is decreasing; a nonempty finite subfamily therefore has intersection $\\overline{O_N}\\ne\\varnothing$, where $N$ is the largest index occurring in it, and the empty subfamily has intersection $K\\supseteq\\overline{O_0}\\ne\\varnothing$, so the family consists of closed sets and has the finite intersection property, and compactness of $K$ with claim 1 of [F12] produces a point $y\\in\\bigcap_{n\\in\\mathbb N}\\overline{O_n}$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F10",
+            "F12"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For every $n\\ge1$ step 4.1 gives $y\\in\\overline{O_n}\\subseteq W_n\\cap G_n$, and $y\\in\\overline{O_0}\\subseteq W\\cap W_0\\cap G_0$, so $y\\in\\bigcap_{n\\in\\mathbb N}G_n=Y$ by step 1.1, and therefore $y\\in Y\\cap W_n=i[U_n]$ for every $n\\in\\mathbb N$ and $y\\in Y\\cap W=i[V]$ by step 2.2; as $i$ is injective by [F3], the point $x:=i_0^{-1}(y)$ of $X$ lies in $V$ and in $U_n$ for every $n\\in\\mathbb N$.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "step 4.1",
+            "step 5.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Thus $\\bigcap_{n\\in\\mathbb N}U_n$ meets the arbitrary nonempty open set $V$, so it is dense in $X$ by step 1.2, and $X$ is a Baire space.",
+          "step": "7.1",
+          "inputs": [
+            "step 1.2",
+            "step 6.1"
           ]
         }
       ],
@@ -14899,42 +15155,42 @@
         {
           "case": "empty",
           "status": "checked",
-          "evidence": "The Statement visibly quantifies over the relevant countable or empty family, and Step 1.1 resolves that disposition through “Realise the space as the intersection of open sets in a compact Hausdorff space”."
+          "evidence": "The empty space is a legitimate instance: it is Cech-complete and the Baire condition on it is vacuous, because density is \"meets every nonempty open subset\" and there is no such subset. Step 1.2 disposes of it in the text, stating that nothing is claimed when X has no nonempty open subset, in particular when X is empty. The second empty object is the empty subfamily at step 5.1, whose intersection is K by the convention of [F12]; it is nonempty because the closure of the initial set is nonempty."
         },
         {
           "case": "zero",
-          "status": "not_applicable",
-          "reason": "The argument for “Under Dependent Choice, every Čech-complete space is Baire” begins by realise the space as the intersection of open sets in a compact Hausdorff space; zero indices, zero sheets, or zero parameters do not arise in that construction or inference."
+          "status": "checked",
+          "evidence": "Index zero is a genuinely separate case and is built by hand. The relation of step 3.2 only ever produces successors, so the chain start is constructed independently at step 3.1 from V, U_0 and G_0, and every later use of the initial closure at steps 5.1 and 6.1 cites step 3.1 rather than the relation. Both indexed families begin at zero: the G_delta sequence from [F4] and the sequence of dense open sets from [F7]."
         },
         {
           "case": "one",
-          "status": "not_applicable",
-          "reason": "The argument for “Under Dependent Choice, every Čech-complete space is Baire” begins by realise the space as the intersection of open sets in a compact Hausdorff space; singleton, one-factor, one-sheet, or identity cases do not arise in that construction or inference."
+          "status": "checked",
+          "evidence": "Nothing requires the two sequences to be non-repeating or strictly shrinking. A one-term G_delta presentation, that is Y open in K, is admitted by taking the sequence constant, and a constant sequence of dense open sets is admitted likewise; step 3.2 asks only that each successor closure lie inside the previous set intersected with the next two, which a repeated set satisfies. A one-point X also runs: step 1.2 fixes the single nonempty open set V and step 6.1 returns its only point."
         },
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "Step 2.1 is the boundary pass for this case: “Starting in a prescribed nonempty relatively open set, use regularity and density to choose nested nonempty ambient open sets with compact closures, each lying in the next $G_\\delta$ layer and the next dense open set”."
+          "evidence": "Two degenerations were tested. If X is already compact then Y may be taken equal to K with every G_n equal to K, and the construction still runs, returning a point of Y. If some U_n equals X, the largest possible dense open set, then W_n contains Y but need not be all of K; this is exactly the configuration recorded in the first Remark, where Y has empty interior in K, and it is why steps 3.1 and 3.2 require only that the ambient open set MEET Y instead of lie inside a relatively open set."
         },
         {
           "case": "endpoints",
           "status": "not_applicable",
-          "reason": "The argument for “Under Dependent Choice, every Čech-complete space is Baire” begins by realise the space as the intersection of open sets in a compact Hausdorff space; interval endpoints, path endpoints, or boundary points do not arise in that construction or inference."
+          "reason": "No interval, path, ordered parameter or boundary point occurs anywhere in the argument. The only index set is the natural numbers, whose least element is disposed of by the zero row above and which has no greatest element; the objects handled are open sets, their closures, and one selected point of a compact space."
         },
         {
           "case": "nonempty-choice",
           "status": "checked",
-          "evidence": "Step 2.1 is the boundary pass for this case: “Starting in a prescribed nonempty relatively open set, use regularity and density to choose nested nonempty ambient open sets with compact closures, each lying in the next $G_\\delta$ layer and the next dense open set”."
+          "evidence": "Every selection is from a set proved nonempty first. Step 3.1 selects y_0 from the intersection of a nonempty relatively open set with a dense one; step 3.2 selects y from the intersection of a set that is nonempty precisely because membership of S carries the condition that the open set meets Y, so entireness never faces an empty candidate set; step 5.1 selects the limit point from an intersection made nonempty by compactness. The nonemptiness of S demanded by [F11] is supplied by step 3.1."
         },
         {
           "case": "iff-forward",
-          "status": "not_applicable",
-          "reason": "“Under Dependent Choice, every Čech-complete space is Baire” is not a biconditional at top level; the proof plan begins by realise the space as the intersection of open sets in a compact Hausdorff space, so no forward implication is being suppressed."
+          "status": "checked",
+          "evidence": "The Statement is a single implication, not a biconditional, so there is no forward half to suppress. The two biconditional facts are used in one direction each and neither converse is asserted: clause (a) implies clause (b) of [F9] at step 2.2, and compactness implies the finite-intersection conclusion of [F12] at step 5.1. The density equivalence of [F6] is used in the direction dense implies meets every nonempty open set, at step 2.1."
         },
         {
           "case": "iff-reverse",
-          "status": "not_applicable",
-          "reason": "“Under Dependent Choice, every Čech-complete space is Baire” is not a biconditional at top level; the proof plan begins by realise the space as the intersection of open sets in a compact Hausdorff space, so no reverse implication is being suppressed."
+          "status": "checked",
+          "evidence": "There is no reverse half of the Statement, and the converse of neither biconditional fact is needed: the argument never claims that a regular space is characterised by the closure form beyond the equivalence it cites, and never claims the converse of the finite-intersection criterion. The one place the reverse direction of an equivalence IS used is [F6] at step 7.1, where meeting every nonempty open set is converted back into density, and that use is explicit."
         }
       ],
       "finite_smoke": [],
@@ -14943,7 +15199,7 @@
         "reviewer": "Alpha-frontier-14-group-a (Claude Opus 5, xhigh, 1M context)",
         "tier": "critical",
         "score": 11,
-        "notes": "Tier critical (score 11); signals: 6 declared dependencies; 6 cited facts; biconditional / both-direction claim; boundary-sensitive language; analytic limiting/completeness language. Independent step-6a reader raised R3-25 against this item; each was adjudicated from disk at step 6b and its disposition and repair are recorded in research/frontier-14-alpha-a-6b.md. REFUTER COVERAGE INCOMPLETE: cluster b3-metrizability-core had not returned when this disposition was written. This item carries reader coverage and my own read only, and the gap is listed in the report's \"could not check\" section. The item was repaired at step 6b; its current text on disk is what this disposition covers, and the change is itemised in the report."
+        "notes": "Tier critical (score 11); signals: 6 declared dependencies; 6 cited facts; biconditional / both-direction claim; boundary-sensitive language; analytic limiting/completeness language. Independent step-6a reader raised R3-25 against this item; each was adjudicated from disk at step 6b and its disposition and repair are recorded in research/frontier-14-alpha-a-6b.md. REFUTER COVERAGE INCOMPLETE: cluster b3-metrizability-core had not returned when this disposition was written. This item carries reader coverage and my own read only, and the gap is listed in the report's \"could not check\" section. The item was repaired at step 6b; its current text on disk is what this disposition covers, and the change is itemised in the report. STEP-8d AUTHORING REPAIR (2026-08-16, authoring Alpha, Claude Opus 5, xhigh, 1M context): the proof was rewritten under the owner-scoped blocker pass that closes the two open confirmed_fatal rows. This risk_review disposition now covers the rewritten text on disk, whose citations, derivations and boundary rows were regenerated and rewritten with it. The rewrite has NOT been read by either judge lane and carries no verification.judge stamp."
       }
     },
     "prop-closed-subspaces-of-cech-complete-spaces": {
