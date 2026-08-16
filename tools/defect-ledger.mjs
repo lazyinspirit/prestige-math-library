@@ -1,0 +1,309 @@
+#!/usr/bin/env node
+// defect-ledger — every defect this pipeline has ever produced, as rows.
+//
+// WHY THIS EXISTS. The pipeline's defect history lived in 28 append-only
+// adjudication ledgers (structured, but stage-blind: 7 of 3,920 rows carry a
+// stage), a dozen step-10 reports (rich, prose-only), reader/Alpha reports
+// with per-run numbering schemes, PREVENTIONS.md, 17 tool headers, and an
+// out-of-repo memory dir. Nothing could answer "what recurs", "what leaked
+// past step 6", or "which detector has ever actually been the catcher" — and
+// the one hand-maintained aggregate (BUILD-AUDIT-INDEX.md) was wrong by ~6x
+// on its own headline total (70 claimed; 412 counted). A row per defect turns
+// every one of those questions into a query, and the generated view cannot
+// disagree with its rows.
+//
+//   node tools/defect-ledger.mjs append   --file rows.json [--ledger <path>]
+//   node tools/defect-ledger.mjs validate [--run R] [--ledger <path>]
+//   node tools/defect-ledger.mjs stats    [--by f1,f2] [--leakage] [--recurrence] [--coverage] [--run R] [--json]
+//   node tools/defect-ledger.mjs render   [--out research/DEFECT-LEDGER.md]
+//   node tools/defect-ledger.mjs check    --run R --adjudications <adj.jsonl> [--closure <closure.json>]
+//
+// THE ROW. One row per DEFECT — two lanes finding one defect is ONE row with
+// two adjudication_ref entries. Mandatory fields are exactly what the
+// adjudicator knows at disposition time; `unknown` is a first-class value for
+// the optional stage fields, and an unknown that blocks the write is a reason
+// the row never gets written. `prevention: {kind: mechanical|brief|process|
+// none, ref}` is the field that turns the log into a control.
+
+import { readFileSync, writeFileSync, appendFileSync, existsSync, readdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { join } from 'node:path';
+
+const argv = process.argv.slice(2);
+const cmd = argv[0];
+const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
+const asJson = argv.includes('--json');
+const ledgerPath = opt('ledger', 'research/defect-ledger.jsonl');
+
+const STAGES = ['1-scaffold', '2-assign', '3-review', '3-fix', '3-recheck', '4-splice', '4-baseline',
+  '5-author', '6a-read', '6b-adjudicate', '6b-baseline', '6c-cross', '7-judge', '8-baseline',
+  '8-adjudicate', '8-rejudge', '9-scope', '9-receipt', '10-report',
+  'A0', 'A1', 'A2', 'A3', 'A4', 'A6', 'A7', 'A8', 'A9', 'A10',
+  'owner', 'escaped-to-publication', 'post-publication', 'unknown'];
+const ENUMS = {
+  class: ['accuracy', 'richness', 'breaking-runtime', 'silent-runtime'],
+  subclass: [
+    // accuracy — the citation class splits four ways deliberately: inflated,
+    // truncated, missing and corrupted have four different detectors and four
+    // different fixes, and the collapsed `dependency_citation` hid truncation
+    // for a whole run.
+    'invalid-inference', 'citation-inflated', 'citation-truncated', 'citation-missing',
+    'citation-misattributed', 'citation-corrupted', 'false-or-overstrong-statement',
+    'false-or-overstrong-title', 'missing-hypothesis', 'missing-choice-scope',
+    'invalid-witness', 'false-boundary-disposition', 'arithmetic-error',
+    'undefined-notation', 'ill-typed-construction',
+    // richness
+    'scope-drop', 'scope-loss', 'false-decline', 'deferral-without-destination',
+    'thin-harvest', 'unsourced-locator',
+    // runtime
+    'gate-vacuous', 'gate-wrong-signature', 'dispatch-lost', 'artifact-overwritten',
+    'stage-unowned', 'scheduler-race', 'prompt-transcription', 'liveness-false-positive',
+    'read-only-role-asked-to-write',
+    'other'],
+  severity: ['fatal', 'nonfatal', 'polish'],
+  location: ['title', 'statement', 'definition', 'proof-step', 'facts-block', 'remark',
+    'page-prose', 'page-summary', 'contract-row', 'coverage-row', 'frontmatter',
+    'tool-code', 'engine-stage', 'brief', 'task-file'],
+  caught_at_stage: STAGES,
+  caught_by_role: ['beta', 'reader', 'refuter', 'judge-deepseek', 'judge-terra', 'group-alpha',
+    'lead-alpha', 'orchestrator', 'owner', 'gate', 'detector', 'unknown'],
+  disposition: ['fixed', 'narrowed', 'deferred', 'dropped', 'open', 'false-positive', 'nonfatal-recorded'],
+};
+const OPTIONAL_ENUMS = {
+  introduced_at_stage: STAGES,
+  should_have_caught: STAGES,
+  repair_cost: ['none', 'inline-fix', 'repair+rejudge', 'rewrite', 'rescope', 'blocker', 'tool-change', 'run-restart'],
+};
+const MANDATORY = ['defect_id', 'run', 'at', 'class', 'subclass', 'severity', 'location',
+  'subject', 'caught_at_stage', 'caught_by_role', 'disposition'];
+
+function loadLedger(path = ledgerPath) {
+  if (!existsSync(path)) return [];
+  return readFileSync(path, 'utf8').split('\n').filter(Boolean).map((l, i) => {
+    try { return JSON.parse(l); } catch { return { __parse_error: `line ${i + 1}` }; }
+  });
+}
+
+function validateRow(row, ids) {
+  const errs = [];
+  if (row.__parse_error) return [`unparseable jsonl at ${row.__parse_error}`];
+  for (const f of MANDATORY) if (row[f] === undefined || row[f] === null || row[f] === '') errs.push(`${row.defect_id ?? '(no id)'}: missing ${f}`);
+  for (const [f, dom] of Object.entries(ENUMS)) if (row[f] !== undefined && !dom.includes(row[f])) errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
+  for (const [f, dom] of Object.entries(OPTIONAL_ENUMS)) if (row[f] !== undefined && !dom.includes(row[f])) errs.push(`${row.defect_id}: ${f} "${row[f]}" outside the closed enum`);
+  if (row.subclass === 'other' && !row.subclass_note) errs.push(`${row.defect_id}: subclass "other" requires subclass_note`);
+  if (row.prevention && !['mechanical', 'brief', 'process', 'none'].includes(row.prevention.kind)) errs.push(`${row.defect_id}: prevention.kind invalid`);
+  if (row.adjudication_ref && !Array.isArray(row.adjudication_ref)) errs.push(`${row.defect_id}: adjudication_ref must be an array`);
+  if (row.evidence && row.evidence.some((e) => !e?.path)) errs.push(`${row.defect_id}: evidence entries need a path`);
+  if (row.defect_id) {
+    if (ids.has(row.defect_id)) errs.push(`duplicate defect_id ${row.defect_id}`);
+    ids.add(row.defect_id);
+  }
+  return errs;
+}
+
+function validate(rows, runFilter) {
+  const ids = new Set();
+  const errs = [];
+  for (const row of rows) {
+    if (runFilter && row.run !== runFilter) { if (row.defect_id) ids.add(row.defect_id); continue; }
+    errs.push(...validateRow(row, ids));
+  }
+  return errs;
+}
+
+const filtered = (rows) => { const r = opt('run'); return r ? rows.filter((x) => x.run === r) : rows; };
+
+// ---------------------------------------------------------------------------
+if (cmd === 'append') {
+  const file = opt('file');
+  if (!file) { console.error('append needs --file <rows.json> — never quote JSON through a shell'); process.exit(2); }
+  const incoming = JSON.parse(readFileSync(file, 'utf8'));
+  const rows = Array.isArray(incoming) ? incoming : [incoming];
+  const existing = loadLedger();
+  const ids = new Set(existing.map((r) => r.defect_id));
+  const errs = [];
+  for (const row of rows) errs.push(...validateRow(row, ids));
+  if (errs.length) {
+    console.error(`defect-ledger: ${errs.length} invalid row(s); nothing appended`);
+    for (const e of errs) console.error(`  ${e}`);
+    process.exit(1);
+  }
+  appendFileSync(ledgerPath, rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
+  console.log(`defect-ledger: appended ${rows.length} row(s) to ${ledgerPath} (${existing.length + rows.length} total)`);
+  process.exit(0);
+}
+
+if (cmd === 'validate') {
+  const rows = loadLedger();
+  const errs = validate(rows, opt('run'));
+  const n = filtered(rows).length;
+  if (errs.length) { for (const e of errs) console.error(`ERROR ${e}`); }
+  console.log(`defect-ledger: ${n} defect row(s) checked, ${errs.length} error(s)`);
+  process.exit(errs.length ? 1 : 0);
+}
+
+if (cmd === 'stats') {
+  const rows = filtered(loadLedger()).filter((r) => !r.__parse_error);
+  const out = {};
+  const by = opt('by');
+  if (by) {
+    const fields = by.split(',');
+    const table = {};
+    for (const r of rows) {
+      const key = fields.map((f) => r[f] ?? '(none)').join(' × ');
+      table[key] = (table[key] ?? 0) + 1;
+    }
+    out.by = Object.fromEntries(Object.entries(table).sort((a, b) => b[1] - a[1]));
+  }
+  if (argv.includes('--leakage')) {
+    // should_have_caught vs caught_at_stage — numerator AND denominator,
+    // always: a bare ratio cannot distinguish a healthier pipeline from a
+    // ledger that quietly stopped being written.
+    const leaked = rows.filter((r) => r.should_have_caught && r.should_have_caught !== 'unknown'
+      && r.caught_at_stage !== r.should_have_caught);
+    const denom = rows.filter((r) => r.should_have_caught && r.should_have_caught !== 'unknown');
+    out.leakage = {
+      leaked: leaked.length, of: denom.length,
+      pairs: leaked.reduce((acc, r) => {
+        const k = `${r.should_have_caught} -> ${r.caught_at_stage}`;
+        acc[k] = (acc[k] ?? 0) + 1; return acc;
+      }, {}),
+    };
+  }
+  if (argv.includes('--recurrence')) {
+    const byClass = {};
+    for (const r of rows) {
+      (byClass[r.subclass] ??= { runs: new Set(), mechanical: false }).runs.add(r.run);
+      if (r.prevention?.kind === 'mechanical') byClass[r.subclass].mechanical = true;
+    }
+    out.recurrence = Object.entries(byClass)
+      .filter(([, v]) => v.runs.size >= 2 && !v.mechanical)
+      .map(([subclass, v]) => ({ subclass, runs: [...v.runs].sort(),
+        note: 'present in 2+ runs with no mechanical prevention — a design input for the next run' }));
+  }
+  if (argv.includes('--coverage')) {
+    // A run with confirmed_fatal adjudications and zero ledger rows is the
+    // ledger going stale — surfaced at the START of the next run via doctor.
+    const runsWithRows = new Set(loadLedger().map((r) => r.run));
+    const holes = [];
+    for (const dir of ['research', 'research/audit']) {
+      if (!existsSync(dir)) continue;
+      for (const f of readdirSync(dir).filter((x) => x.endsWith('-judge-adjudications.jsonl'))) {
+        const run = f.replace('-judge-adjudications.jsonl', '');
+        const fatal = readFileSync(join(dir, f), 'utf8').split('\n')
+          .filter((l) => l.includes('"confirmed_fatal"')).length;
+        if (fatal && !runsWithRows.has(run)) holes.push({ run, confirmed_fatal: fatal });
+      }
+    }
+    out.coverage = { runs_with_fatal_and_no_rows: holes };
+  }
+  console.log(asJson ? JSON.stringify(out, null, 2) : Object.entries(out).map(([k, v]) =>
+    `## ${k}\n${JSON.stringify(v, null, 2)}`).join('\n\n'));
+  process.exit(0);
+}
+
+if (cmd === 'render') {
+  const outPath = opt('out', 'research/DEFECT-LEDGER.md');
+  const rows = loadLedger().filter((r) => !r.__parse_error);
+  const sha = createHash('sha256').update(existsSync(ledgerPath) ? readFileSync(ledgerPath) : '').digest('hex').slice(0, 12);
+  const runs = [...new Set(rows.map((r) => r.run))].sort();
+  const count = (pred) => rows.filter(pred).length;
+  const lines = [];
+  lines.push(`# Defect ledger — generated view`);
+  lines.push('');
+  lines.push(`> GENERATED from \`research/defect-ledger.jsonl\` @ ${sha} by \`tools/defect-ledger.mjs render\` — do not edit.`);
+  lines.push('');
+  // The lead is outcomes, never a bare total: a raw defect count reads as a
+  // quality signal and is not one (judge-rejection-rates-mislead).
+  lines.push('## What the numbers mean, first');
+  lines.push('');
+  lines.push('| | |');
+  lines.push('|---|---|');
+  lines.push(`| defects caught before publication | ${count((r) => r.caught_at_stage !== 'escaped-to-publication' && r.caught_at_stage !== 'post-publication')} |`);
+  lines.push(`| now mechanically prevented | ${count((r) => r.prevention?.kind === 'mechanical')} |`);
+  lines.push(`| escaped to publication | ${count((r) => r.caught_at_stage === 'escaped-to-publication' || r.caught_at_stage === 'post-publication')} |`);
+  lines.push(`| still open | ${count((r) => r.disposition === 'open')} |`);
+  lines.push('');
+  for (const run of runs) {
+    const rr = rows.filter((r) => r.run === run);
+    lines.push(`## ${run} — ${rr.length} row(s)`);
+    lines.push('');
+    const table = {};
+    for (const r of rr) {
+      (table[r.subclass] ??= {})[r.caught_at_stage] = ((table[r.subclass] ?? {})[r.caught_at_stage] ?? 0) + 1;
+    }
+    const stages = [...new Set(rr.map((r) => r.caught_at_stage))].sort((a, b) => STAGES.indexOf(a) - STAGES.indexOf(b));
+    lines.push(`| subclass | ${stages.join(' | ')} |`);
+    lines.push(`|---|${stages.map(() => '---').join('|')}|`);
+    for (const [sub, cells] of Object.entries(table).sort((a, b) =>
+      Object.values(b[1]).reduce((x, y) => x + y, 0) - Object.values(a[1]).reduce((x, y) => x + y, 0))) {
+      lines.push(`| ${sub} | ${stages.map((s) => cells[s] ?? '').join(' | ')} |`);
+    }
+    lines.push('');
+  }
+  const open = rows.filter((r) => r.disposition === 'open');
+  if (open.length) {
+    lines.push('## Open');
+    lines.push('');
+    for (const r of open) lines.push(`- \`${r.defect_id}\` ${r.run} · ${r.subclass} · ${r.subject}`);
+    lines.push('');
+  }
+  writeFileSync(outPath, lines.join('\n'));
+  console.log(`defect-ledger: rendered ${rows.length} row(s) -> ${outPath}`);
+  process.exit(0);
+}
+
+if (cmd === 'check') {
+  const run = opt('run');
+  const adjPath = opt('adjudications');
+  const closurePath = opt('closure');
+  if (!run || !adjPath) { console.error('check needs --run and --adjudications'); process.exit(2); }
+  const rows = loadLedger();
+  const mine = rows.filter((r) => r.run === run);
+  const errs = validate(rows, run);
+
+  // (a) exact-hash bijection: every confirmed_fatal adjudication row appears in
+  // EXACTLY ONE ledger row's adjudication_ref — the anti-double-count clause.
+  if (!existsSync(adjPath)) { errs.push(`no adjudication ledger at ${adjPath}`); }
+  else {
+    const fatals = readFileSync(adjPath, 'utf8').split('\n').filter(Boolean)
+      .map((l) => { try { return JSON.parse(l); } catch { return null; } })
+      .filter((a) => a?.outcome === 'confirmed_fatal');
+    for (const a of fatals) {
+      const owners = mine.filter((r) => (r.adjudication_ref ?? []).some((ref) =>
+        (a.item_sha256 && ref.item_sha256 === a.item_sha256) || (!a.item_sha256 && r.subject === a.id)));
+      if (owners.length === 0) errs.push(`confirmed_fatal on ${a.id} (${a.model ?? '?'}) has no ledger row — the defect the adjudicator confirmed was never recorded`);
+      if (owners.length > 1) errs.push(`confirmed_fatal on ${a.id} appears in ${owners.length} rows (${owners.map((o) => o.defect_id).join(', ')}) — one defect, one row`);
+    }
+  }
+
+  // (c) step-6 liveness: the 6b reports are the rows with no other mechanical
+  // source (78% of frontier-14's fatals lived only in prose). Without this
+  // clause the gate is satisfiable by mirroring the adjudication ledger.
+  const has6b = existsSync('research') && readdirSync('research').some((f) =>
+    f.startsWith(`${run}-alpha-`) && f.endsWith('-6b.md'));
+  if (has6b && !mine.some((r) => ['6a-read', '6b-adjudicate', '6c-cross'].includes(r.caught_at_stage))) {
+    errs.push('a 6b report exists but no ledger row is caught at 6a/6b/6c — the step-6 body is the part no other artifact holds');
+  }
+
+  // (d) open-defect agreement with the closure receipt.
+  if (closurePath && existsSync(closurePath)) {
+    const closure = JSON.parse(readFileSync(closurePath, 'utf8'));
+    const openFatal = new Set((closure.open_fatal ?? []).map(String));
+    for (const r of mine.filter((x) => x.disposition === 'open')) {
+      if (!openFatal.has(String(r.subject))) errs.push(`${r.defect_id} is open in the ledger but ${r.subject} is not open in the closure receipt — one of them is stale`);
+    }
+    for (const id of openFatal) {
+      if (!mine.some((r) => r.subject === id && r.disposition === 'open')) {
+        errs.push(`closure names ${id} open_fatal with no open ledger row — exactly how two blockers lived only in markdown`);
+      }
+    }
+  }
+
+  if (errs.length) for (const e of errs) console.error(`ERROR ${e}`);
+  console.log(`defect-ledger: ${mine.length} defect row(s) checked for ${run}, ${errs.length} error(s)`);
+  process.exit(errs.length ? 1 : 0);
+}
+
+console.error('usage: node tools/defect-ledger.mjs append|validate|stats|render|check …  (see header)');
+process.exit(2);

@@ -231,6 +231,19 @@ const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) =
   ];
 };
 
+/** The defect ledger: whoever writes a disposition writes the row, and this
+ *  gate holds the two accountable to each other — every confirmed_fatal
+ *  adjudication owned by exactly one row (anti-double-count), step-6-caught
+ *  rows whenever a 6b report exists (the clause that stops the ledger being a
+ *  mirror of the adjudication file), and open rows agreeing with the closure
+ *  receipt (two blockers once lived only in markdown). */
+const ledgerGate = (ctx) => gate('defect-ledger', ['node', 'tools/defect-ledger.mjs', 'check',
+  '--run', ctx.run,
+  '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  '--closure', `research/${ctx.run}-judge-closure.json`], {
+  liveness: { pattern: /(\d+) defect row\(s\) checked/.source, min: 1, unit: 'defect rows' },
+});
+
 /**
  * Judge closure — the predicate that says whether the mathematics is signed off.
  *
@@ -776,6 +789,7 @@ export const stages = [
       // that, hence the allowance. An unadjudicated rejection or an open fatal is
       // this stage's own unfinished work.
       closureGate(ctx, { pendingRejudge: true }),
+      ledgerGate(ctx),
       // Repairs rewrite proofs, so the contract gates re-verify here — a fatal
       // repair whose new proof breaks its own input map must not wait for
       // 9-scope to surface. Repairs update the OWNING BATCH contract; the merge
@@ -862,6 +876,7 @@ export const stages = [
         '--baseline', 'pre-step8',
         '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`]),
       ...repoWide(ctx), ...contractGates(ctx, { reviewed: true }), closureGate(ctx),
+      ledgerGate(ctx),
     ],
     // A rejudge can surface a NEW rejection on repaired text, which needs
     // adjudicating and possibly repairing again. That is a real convergence
@@ -929,7 +944,8 @@ export const stages = [
     }],
     // Step 9 can BUILD items (frontier-14 added two), so everything it could
     // have disturbed is re-checked, judge closure included.
-    gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true }), closureGate(ctx)],
+    gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true }), closureGate(ctx),
+      ledgerGate(ctx)],
   },
 
   // THE WHOLE-LEVEL RECEIPTS.
@@ -1008,7 +1024,7 @@ export const stages = [
     // The repo-wide invariants run once more for the same reason — step 10 is
     // gates.mjs's last gate point for prosecheck/depsource, and step-9 edits
     // land after 9-scope's own sweep.
-    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx)],
+    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx), ledgerGate(ctx)],
   },
 ];
 
