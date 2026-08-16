@@ -65,10 +65,22 @@ export function makeExecAdapter({ argv, cwd, env = {}, logger = () => {} }: { ar
   return {
     name: 'exec',
     describe: (vars) => render(argv, vars).join(' '),
-    /** Resolves when the process exits. Never throws for a nonzero exit — a
-     *  failed lane is data the retry policy consumes, not an exception that
-     *  unwinds the whole run. */
-    invoke(vars, { signal } = {}) {
+    /** Resolves when the process exits — or when the timeout fires. Never
+     *  throws for a nonzero exit: a failed lane is data the retry policy
+     *  consumes, not an exception that unwinds the whole run.
+     *
+     *  LIFECYCLE, and why every line of it is load-bearing:
+     *  - `detached: true` puts the child in its OWN process group. The child
+     *    is usually a dispatcher whose grandchild is the actual agent; killing
+     *    only the direct child orphaned the agent, and the retry then ran two
+     *    writers on one file — the recorded incident, reproduced by probe.
+     *    Group-kill (`-pid`) takes the whole tree.
+     *  - the timeout resolves `ok:false, error:'timeout…'`. There was NO
+     *    timer here at all: `plan.timeout` was only a template variable, so
+     *    every tool lane (judge sweep included) could hang forever while the
+     *    heartbeat faithfully reported "still running".
+     *  - SIGTERM first, SIGKILL after a grace period, both unref'd. */
+    invoke(vars, { signal, timeoutMs = 0, killGraceMs = 10_000 } = {}) {
       const parts = render(argv, vars);
       const [cmd, ...args] = parts;
       logger(`exec: ${parts.join(' ')}`);
@@ -79,24 +91,45 @@ export function makeExecAdapter({ argv, cwd, env = {}, logger = () => {} }: { ar
         try {
           // shell:false is the default and is load-bearing: with a shell, an
           // argument containing a metacharacter would be reinterpreted.
-          child = spawn(cmd, args, { cwd, env: { ...process.env, ...env }, stdio: ['ignore', 'pipe', 'pipe'] });
+          child = spawn(cmd, args, { cwd, env: { ...process.env, ...env }, stdio: ['ignore', 'pipe', 'pipe'], detached: true });
         } catch (err: any) {
           finish({ ok: false, code: null, error: String(err?.message ?? err), stdout: '', stderr: '' });
           return;
         }
         let stdout = '';
         let stderr = '';
+        child.stdout?.setEncoding('utf8');
+        child.stderr?.setEncoding('utf8');
         child.stdout?.on('data', (d: any) => { stdout += d; });
         child.stderr?.on('data', (d: any) => { stderr += d; });
-        const onAbort = () => { try { child.kill('SIGTERM'); } catch { /* already gone */ } };
+
+        const killGroup = (sig: string) => {
+          try { process.kill(-child.pid, sig); } catch { try { child.kill(sig); } catch { /* gone */ } }
+        };
+        let timedOut = false;
+        const terminate = () => {
+          killGroup('SIGTERM');
+          const hard = setTimeout(() => killGroup('SIGKILL'), killGraceMs);
+          hard.unref?.();
+        };
+        const timer = timeoutMs > 0 ? setTimeout(() => { timedOut = true; terminate(); }, timeoutMs) : null;
+        timer?.unref?.();
+
+        const onAbort = () => terminate();
         signal?.addEventListener('abort', onAbort, { once: true });
-        child.on('error', (err: any) => {
+        const cleanup = () => {
           signal?.removeEventListener('abort', onAbort);
+          if (timer) clearTimeout(timer);
+        };
+        child.on('error', (err: any) => {
+          cleanup();
           finish({ ok: false, code: null, error: String(err?.message ?? err), stdout, stderr });
         });
         child.on('close', (code: any) => {
-          signal?.removeEventListener('abort', onAbort);
-          finish({ ok: code === 0, code, stdout, stderr, error: null });
+          cleanup();
+          finish(timedOut
+            ? { ok: false, code, stdout, stderr, error: `timeout after ${Math.round(timeoutMs / 1000)}s — process group killed` }
+            : { ok: code === 0, code, stdout, stderr, error: null });
         });
       });
     },

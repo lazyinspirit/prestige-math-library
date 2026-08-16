@@ -246,12 +246,18 @@ export class Executor {
     // A stage may override the command entirely. Not every unit of work is an
     // agent: the judge sweep is a tool run, and forcing it through the agent
     // dispatcher would have produced a dispatch for a role that does not exist.
-    // The override still goes through the same adapter, so retry, timeout and
-    // result accounting are identical.
+    // The override goes through the same adapter WITH a logger, so the rendered
+    // command line lands in events.jsonl — a tool lane that failed used to
+    // leave no diagnostic artifact of any kind.
     const adapter = plan.argv
-      ? makeExecAdapter({ argv: plan.argv, cwd: this.config.repo })
+      ? makeExecAdapter({ argv: plan.argv, cwd: this.config.repo,
+        logger: (m: string) => this.reporter.event('exec', { label: plan.label, m }) })
       : this.adapter;
-    const promise = adapter.invoke(vars, { signal: this.signal })
+    // The adapter enforces the timeout; `plan.timeout` used to be only a
+    // template variable, silently inert for every tool lane. The margin lets a
+    // dispatcher that enforces the same budget on its agent finish its own
+    // cleanup before the engine kills the group.
+    const promise = adapter.invoke(vars, { signal: this.signal, timeoutMs: (Number(vars.timeout) + 120) * 1000 })
       .then((r) => {
         // THE ENGINE WRITES THE RECEIPT, not the command.
         //
@@ -282,8 +288,12 @@ export class Executor {
           }
         }
         this.state.recordDispatchEnd(key, r.ok);
+        // A failed tool lane's stderr was read into memory and discarded; the
+        // tail rides the event so nine hours of judge sweep leave more than
+        // `exit=1` behind.
+        const tail = !r.ok && r.stderr ? ` :: ${String(r.stderr).slice(-400).replace(/\s+/g, ' ').trim()}` : '';
         this.reporter.notify(r.ok ? 'dispatch-ok' : 'dispatch-failed',
-          `${plan.role}/${plan.label} exit=${r.code}${r.error ? ` (${r.error})` : ''}`, { key, ok: r.ok });
+          `${plan.role}/${plan.label} exit=${r.code}${r.error ? ` (${r.error})` : ''}${tail}`, { key, ok: r.ok });
         return r;
       })
       .catch((err: any) => {
