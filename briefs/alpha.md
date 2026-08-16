@@ -185,9 +185,9 @@ thin before this stage existed: `group-actions-and-cayleys-theorem` published
 with orbits and stabilisers but **no orbit–stabiliser theorem**, no class
 equation, no Cauchy's theorem and an empty B page.
 
-For each batch `<i>` on your `covers:` line, read
-`research/<run>-batch-<i>.pages.json`, `.notes.md` and `.coverage.json`
-**together**:
+Take each batch number `i` from the `covers:` line of your `# This dispatch`
+block, and for each one read `research/<run>-batch-i.pages.json`, `.notes.md`
+and `.coverage.json` **together** — substituting the number yourself:
 
 1. **Is the standard development present?** Name, from your own knowledge, what a
    competent textbook chapter proves. Each must appear in the scaffold or in the
@@ -319,7 +319,8 @@ is unfrozen and no verdict exists to void.
 **6b.1 — contracts and risk.** Each reader updates its own batch proof-contract
 whenever it changes proof text, citations, step numbers or a boundary case.
 When you accept a reader's added or deleted item, apply the licensed plan
-update yourself: `node tools/splice-plan.mjs --run <run> --batch <i> --update`
+update yourself, naming the batch: `node tools/splice-plan.mjs --run <run>
+--batch <the batch number> --update`
 — the splice-verify gate fails until the plan and the manifest agree again. For
 every `high`/`critical` item in `risk-report.mjs`, give at least one additional
 refuter the item, its contract and its sources, then record a complete
@@ -433,7 +434,8 @@ materially rewritten; the engine's `8-rejudge` stage reads
 `research/<run>-judge-closure.json` and sweeps exactly the ids that need it.
 
 **A repair updates the owning BATCH contract**
-(`research/<run>-batch-<i>.proof-contracts.json`), never only the merged file:
+(`research/<run>-batch-N.proof-contracts.json` for that batch), never only the
+merged file:
 the gates re-merge from the batch files, so a merged-only edit comes back
 stale on the next merge — frontier-14's step 9 resurrected step 8's repaired
 quotes exactly this way.
