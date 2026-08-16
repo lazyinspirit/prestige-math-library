@@ -25,6 +25,15 @@ import { validateStages } from './spec.mts';
 
 const flagsOf = (s: string): string[] => [...new Set(s.match(/--[a-z-]+/g) ?? [])];
 
+/** The identity placeholders dispatch.mjs hard-errors on, found in a prompt
+ *  file. Same token grammar as the dispatcher: single lowercase letters n and
+ *  k in angle brackets, letters-only inside the brackets — `<page-id>` does
+ *  not match, `<n>` does. Exported so the check is testable in isolation. */
+export function identityPlaceholders(text: string): string[] {
+  const found = [...new Set([...text.matchAll(/<([a-z]+)>/g)].map((m) => m[1]))];
+  return found.filter((name) => name === 'n' || name === 'k').map((name) => `<${name}>`);
+}
+
 export async function doctor({ repo, run, stagesPath, config = {} as any }: { repo: string; run: string; stagesPath: string; config?: any }) {
   const problems: any[] = [];
   const notes: any[] = [];
@@ -84,7 +93,15 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   else ok.push(`${checkedFlags} command flag(s) checked against their tools`);
 
   // 2. every brief and task a stage will ask for, for every plausible unit count
+  //    — and none may contain an identity placeholder. dispatch.mjs hard-errors
+  //    on a prompt still carrying <n> or <k>, and the engine's argv template
+  //    passes only run/i/output, so a stage-referenced file containing one is
+  //    undispatchable: on frontier-15 the drift unit burned all three attempts
+  //    and blocked stage 1 on a grammar example that said "(order <n>)". The
+  //    audit briefs legitimately carry <k> — their driver passes --var k= —
+  //    but they are not in this stage table, so anything found here is real.
   let missing = 0;
+  const placeheld = new Set<string>();
   for (const st of mod.stages) {
     let plans = [];
     try { plans = st.plan?.(ctx, units) ?? []; } catch { /* reported above */ }
@@ -96,10 +113,19 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
           problems.push(`${st.id}/${p.label}: no brief/task exists — tried ${cands.join(' | ')}`);
           missing += 1;
         }
+        for (const c of cands) {
+          const f = join(repo, c);
+          if (!existsSync(f) || placeheld.has(c)) continue;
+          const bad = identityPlaceholders(readFileSync(f, 'utf8'));
+          if (bad.length) {
+            placeheld.add(c);
+            problems.push(`${c}: contains ${bad.join(', ')} — dispatch.mjs refuses the prompt, and the engine never passes --var n/k. Fix the file (or its template in bin/autopilot.mts) before starting.`);
+          }
+        }
       }
     }
   }
-  if (!missing) ok.push('every stage resolves a brief and task file');
+  if (!missing && !placeheld.size) ok.push('every stage resolves a brief and task file, none carrying an identity placeholder');
 
   // 3. the scope ledger, without which scope loss is invisible
   const ledger = join(repo, 'research', `${run}-scope-ledger.json`);

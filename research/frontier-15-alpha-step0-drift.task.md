@@ -36,7 +36,7 @@ Write `research/frontier-15-alpha-step0-drift.md`, one section per A page:
     ### <a-page-id>
     ...what you read: doc, section, the design's stated prerequisites...
     VERDICT: no-drift
-    VERDICT: drift-applied — added <page-id> (order <n>)[, ...]
+    VERDICT: drift-applied — added <page-id> (order N)[, ...]
     VERDICT: drift-blocked — <the exact edge and why it is not addable>
 
 Exactly one VERDICT line per section. `tools/drift-review-check.mjs` fails the

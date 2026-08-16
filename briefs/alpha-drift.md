@@ -36,8 +36,12 @@ Write the report to the path your task file names. One section per A page:
     ### <a-page-id>
     ...what you read: doc, section, and the design's stated prerequisites...
     VERDICT: no-drift
-    VERDICT: drift-applied — added <page-id> (order <n>)[, ...]
+    VERDICT: drift-applied — added <page-id> (order N)[, ...]
     VERDICT: drift-blocked — <the exact edge and why it is not addable>
+
+(Write the actual numeric order for N; the dispatcher reserves the
+angle-bracketed single letters n and k as identity placeholders and refuses
+any prompt containing one.)
 
 Exactly one VERDICT line per section. `tools/drift-review-check.mjs` fails the
 stage on a missing section, a malformed verdict, or any `drift-blocked`.

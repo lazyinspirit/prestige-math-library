@@ -78,6 +78,85 @@ function loadConfig(): Config {
 
 const die = (msg: string, code = 2): never => { console.error(msg); process.exit(code); };
 
+/** The run's GENERATED prompt artifacts: the drift evidence and the drift
+ *  review task. ONE generator with two callers — `plan` at step 0 and
+ *  `refresh-tasks` after a template fix — so a generated file is never edited
+ *  by hand: on frontier-15 a template defect (an identity placeholder inside
+ *  the verdict-grammar example) was first repaired by hand-editing the
+ *  generated task file, which fixes the instance and leaves the template to
+ *  regenerate the defect on the next run. The template is the source; this is
+ *  its only writer.
+ *
+ *  Drift review is an AUDIT NODE, not a check. Determining what a design
+ *  document requires means reading it; the mechanical half is assembling the
+ *  evidence. Three heuristic versions of this each traded one error class for
+ *  another, and the last one reported four confident false candidates.
+ *
+ *  The engine dispatches the task as the `drift` unit of stage 1, and the
+ *  `drift-review` gate parses the report — this template and
+ *  tools/drift-review-check.mjs share the VERDICT contract; change them
+ *  together. The grammar example writes `(order N)`, never an angle-bracketed
+ *  n: dispatch.mjs hard-errors on a prompt carrying the identity placeholders,
+ *  and the example is inside the dispatched prompt — the drift unit burned all
+ *  three attempts and blocked stage 1 on exactly that.
+ */
+function writeDriftArtifacts(run: string, pages: string[]) {
+  const evidence = driftEvidence(repo, pages);
+  const evPath = join(repo, 'research', `${run}-drift-evidence.json`);
+  writeFileSync(evPath, JSON.stringify(evidence, null, 2) + '\n');
+  const taskPath = join(repo, 'research', `${run}-alpha-step0-drift.task.md`);
+  writeFileSync(taskPath, [
+    `## Step-0 prerequisite drift review — run \`${run}\``,
+    '',
+    'A track design states what a page needs; `plan-spec.json` declares it. When',
+    'they disagree the scaffold is built against the design and step 4 fails with',
+    '`undeclared-prereq` — after the citation has been written. Caught here it is a',
+    'one-line spec edit.',
+    '',
+    'This is a reading task and it is given to you rather than to a regex because',
+    'three mechanical versions each failed differently. Real drift is usually in',
+    'prose that never writes a `requires` line: on frontier-14 the topology design',
+    'called a metric-only restriction "forced, not stylistic" *because the',
+    'compactness page was unbuilt* — and it had since published. On frontier-15,',
+    'step 0 found a design (§II.8 of the algebra track) that had re-routed a whole',
+    'proof through pages the spec never declared. No parser reaches either.',
+    '',
+    `**Evidence assembled for you:** \`research/${run}-drift-evidence.json\``,
+    '',
+    'Per page it gives the declared `requires`, the full transitive spec closure,',
+    'every design-document line mentioning the page, and every plan page id',
+    'appearing near those lines that is NOT already in the closure. The last list is',
+    'raw and noisy on purpose — it is a reading list, not a finding list. Read the',
+    'design section it points into, not just the evidence.',
+    '',
+    '### What to do with a finding',
+    '',
+    '- **Backward edge** (the missing prerequisite has a LOWER `order`): apply it',
+    '  yourself — edit that page\'s `requires` in `research/plan-spec.json`, run',
+    '  `node tools/validate-plan.mjs research/plan-spec.json`, record the exact edit.',
+    '- **Higher-order or out-of-spec target:** a reading-order change, owner-only.',
+    '  Record it as blocked; edit nothing.',
+    '',
+    '### Report contract — the gate parses this',
+    '',
+    `Write \`research/${run}-alpha-step0-drift.md\`, one section per A page:`,
+    '',
+    '    ### <a-page-id>',
+    '    ...what you read: doc, section, the design\'s stated prerequisites...',
+    '    VERDICT: no-drift',
+    '    VERDICT: drift-applied — added <page-id> (order N)[, ...]',
+    '    VERDICT: drift-blocked — <the exact edge and why it is not addable>',
+    '',
+    'Exactly one VERDICT line per section. `tools/drift-review-check.mjs` fails the',
+    'stage on a missing section, a malformed verdict, or any drift-blocked — a',
+    'blocked edge stops the run for the owner, which is the point.',
+    '',
+    '**No permission prompts of any kind**, including inside an `&&` chain.',
+  ].join('\n') + '\n');
+  console.log(`\nwrote ${evPath.replace(repo + '/', '')}`);
+  console.log(`wrote ${taskPath.replace(repo + '/', '')}  <- the drift review; stage 1 dispatches it as the \`drift\` unit`);
+}
+
 async function buildExecutor(run?: string) {
   const config = loadConfig();
   config.run = run ?? config.run;
@@ -164,67 +243,7 @@ switch (cmd) {
     console.log(`step 0 for ${run}: ${pages.length} A/B pair(s) -> ${groups.length} batch(es), cap ${cap}\n`);
     for (const wr of written) console.log(`  batch ${wr.batch}: ${wr.pages.join(', ')}`);
 
-    // Drift review is an AUDIT NODE, not a check. Determining what a design
-    // document requires means reading it; the mechanical half is assembling the
-    // evidence. Three heuristic versions of this each traded one error class
-    // for another, and the last one reported four confident false candidates.
-    const evidence = driftEvidence(repo, pages);
-    const evPath = join(repo, 'research', `${run}-drift-evidence.json`);
-    writeFileSync(evPath, JSON.stringify(evidence, null, 2) + '\n');
-    // The engine dispatches this as the `drift` unit of stage 1, and the
-    // `drift-review` gate parses the report — template and gate share the
-    // VERDICT contract, so change them together (tools/drift-review-check.mjs).
-    const taskPath = join(repo, 'research', `${run}-alpha-step0-drift.task.md`);
-    writeFileSync(taskPath, [
-      `## Step-0 prerequisite drift review — run \`${run}\``,
-      '',
-      'A track design states what a page needs; `plan-spec.json` declares it. When',
-      'they disagree the scaffold is built against the design and step 4 fails with',
-      '`undeclared-prereq` — after the citation has been written. Caught here it is a',
-      'one-line spec edit.',
-      '',
-      'This is a reading task and it is given to you rather than to a regex because',
-      'three mechanical versions each failed differently. Real drift is usually in',
-      'prose that never writes a `requires` line: on frontier-14 the topology design',
-      'called a metric-only restriction "forced, not stylistic" *because the',
-      'compactness page was unbuilt* — and it had since published. On frontier-15,',
-      'step 0 found a design (§II.8 of the algebra track) that had re-routed a whole',
-      'proof through pages the spec never declared. No parser reaches either.',
-      '',
-      `**Evidence assembled for you:** \`research/${run}-drift-evidence.json\``,
-      '',
-      'Per page it gives the declared `requires`, the full transitive spec closure,',
-      'every design-document line mentioning the page, and every plan page id',
-      'appearing near those lines that is NOT already in the closure. The last list is',
-      'raw and noisy on purpose — it is a reading list, not a finding list. Read the',
-      'design section it points into, not just the evidence.',
-      '',
-      '### What to do with a finding',
-      '',
-      '- **Backward edge** (the missing prerequisite has a LOWER `order`): apply it',
-      '  yourself — edit that page\'s `requires` in `research/plan-spec.json`, run',
-      '  `node tools/validate-plan.mjs research/plan-spec.json`, record the exact edit.',
-      '- **Higher-order or out-of-spec target:** a reading-order change, owner-only.',
-      '  Record it as blocked; edit nothing.',
-      '',
-      '### Report contract — the gate parses this',
-      '',
-      `Write \`research/${run}-alpha-step0-drift.md\`, one section per A page:`,
-      '',
-      '    ### <a-page-id>',
-      '    ...what you read: doc, section, the design\'s stated prerequisites...',
-      '    VERDICT: no-drift',
-      '    VERDICT: drift-applied — added <page-id> (order <n>)[, ...]',
-      '    VERDICT: drift-blocked — <the exact edge and why it is not addable>',
-      '',
-      'Exactly one VERDICT line per section. `tools/drift-review-check.mjs` fails the',
-      'stage on a missing section, a malformed verdict, or any drift-blocked — a',
-      'blocked edge stops the run for the owner, which is the point.',
-      '',
-      '**No permission prompts of any kind**, including inside an `&&` chain.',
-    ].join('\n') + '\n');
-    console.log(`\nwrote ${evPath.replace(repo + '/', '')}`);
-    console.log(`wrote ${taskPath.replace(repo + '/', '')}  <- the drift review; stage 1 dispatches it as the \`drift\` unit`);
+    writeDriftArtifacts(run, pages);
 
     const covers = {};
     written.forEach((wr: any) => { covers[`beta-batch-${wr.batch}`] = [String(wr.batch)]; });
@@ -252,6 +271,23 @@ switch (cmd) {
       }
     }
     console.log(`\nNext: write the per-batch task files, then \`autopilot start --run ${run} --detach\``);
+    break;
+  }
+
+  case 'refresh-tasks': {
+    // Regenerate the run's GENERATED prompt artifacts from the current
+    // templates — nothing else: no manifests, no covers, no ledger, no
+    // re-baseline. This is the repair path for a template defect found
+    // mid-run; the alternative is hand-editing a generated file, which fixes
+    // one run and leaves the template broken for every later one. Scope comes
+    // from the ledger, which is what the run owes.
+    const run = opt('run') ?? die('--run is required');
+    const ledgerPath = join(repo, 'research', `${run}-scope-ledger.json`);
+    if (!existsSync(ledgerPath)) die(`refresh-tasks: no ${ledgerPath} — run \`plan\` first; there is nothing to refresh`);
+    const owedA = (JSON.parse(readFileSync(ledgerPath, 'utf8')).pages ?? [])
+      .filter((p: any) => p.kind === 'A').map((p: any) => p.id);
+    if (!owedA.length) die(`refresh-tasks: ${ledgerPath} owes no A pages`);
+    writeDriftArtifacts(run, owedA);
     break;
   }
 
