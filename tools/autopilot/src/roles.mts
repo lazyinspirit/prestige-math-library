@@ -32,6 +32,12 @@ export const COGNITIVE_JOBS = new Set([
   'audit',           // read for defects across a body of work
   'reporting',       // turn ledgers into an account a person can act on
   'supervision',     // decide whether a blocker is real and whether to retry
+  // Grouping already-owed work so that little crosses a boundary. Distinct from
+  // `dispatch-planning` below: that asks WHICH units are outstanding, a set
+  // difference; this asks which units belong together, which is a judgment about
+  // mathematical relatedness that category labels only partly answer. Every
+  // structural property of the answer is checked by a gate.
+  'partitioning',
 ]);
 
 /** Jobs a model must never be dispatched for, with the reason and the

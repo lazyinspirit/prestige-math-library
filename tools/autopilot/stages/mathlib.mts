@@ -35,17 +35,45 @@ export function batches(ctx: any): string[] {
     .sort((a: any, b: any) => Number(a) - Number(b));
 }
 
-/** Group Alphas: one per <=3 batches. Used only to PLAN the fan-out — never to
- *  decide completion, which is coverage. The distinction matters: if this
- *  grouping is wrong the run dispatches a different number of agents, and still
- *  completes correctly when every batch is covered. */
+/**
+ * Group Alphas: one per <=3 batches, read from the assignment an agent made at
+ * stage `2-assign` and `tools/alpha-groups.mjs` validated.
+ *
+ * WHY THIS IS NOT A CHUNK OF THE SORTED LIST ANY MORE. It used to be exactly
+ * that — `b.slice(i, i + 3)` — which is deterministic but not sound. On
+ * `frontier-14` it handed one Alpha linear-algebra + number-theory +
+ * category-theory, three unrelated subjects at once, while splitting topology's
+ * three batches across two different Alphas so neither could see the
+ * cross-references between its own pages. Minimising what crosses a group
+ * boundary is a judgment about mathematical relatedness; category is a strong
+ * proxy but does not settle the residual, because five categories over three
+ * Alphas forces somebody to pair two singletons.
+ *
+ * The fallback is the old positional chunking, used only before the assignment
+ * exists — `autopilot plan` and `doctor` both call this while `2-assign` is
+ * still ahead of them, and neither dispatches anything.
+ */
 export function alphaGroups(ctx: any, size = 3): Array<{ label: string; covers: string[] }> {
+  const assigned = readAlphaGroups(ctx);
+  if (assigned) return assigned;
   const b = batches(ctx);
   const out: any[] = [];
   for (let i = 0; i < b.length; i += size) {
     out.push({ label: String.fromCharCode(97 + out.length), covers: b.slice(i, i + size) });
   }
   return out;
+}
+
+/** The validated assignment, or null before `2-assign` has produced one. */
+function readAlphaGroups(ctx: any): Array<{ label: string; covers: string[] }> | null {
+  const p = join(ctx.repo, `research/${ctx.run}-alpha-groups.json`);
+  if (!existsSync(p)) return null;
+  try {
+    const raw = JSON.parse(readFileSync(p, 'utf8'));
+    const rows = Array.isArray(raw) ? raw : raw?.groups;
+    if (!Array.isArray(rows) || !rows.length) return null;
+    return rows.map((g: any) => ({ label: String(g.label), covers: (g.covers ?? []).map(String) }));
+  } catch { return null; }
 }
 
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
@@ -293,6 +321,36 @@ export const stages = [
   //   running gates, keeping ledgers     -> the engine
   //   deciding a stage is finished       -> the engine's coverage predicate
   //   the step-10 owner report           -> a supervisor agent, last stage
+  // ASSIGN BATCHES TO ALPHAS BEFORE ANY ALPHA IS DISPATCHED (owner, 2026-08-16).
+  //
+  // This is a judgment, not a chunking: minimise what crosses a group boundary,
+  // and keep each Alpha inside one category wherever a category fits in one.
+  // It is NOT `dispatch-planning` — the engine still decides which units are
+  // uncovered and what to dispatch. This decides only how already-owed work is
+  // grouped, and `alpha-groups.mjs` checks every structural property of the
+  // answer rather than trusting it: full coverage, no duplicate batch, the lane
+  // and per-group caps, a stated rationale, and no avoidable category split.
+  {
+    id: '2-assign',
+    label: 'assign batches to group Alphas',
+    units: () => ['all'],
+    pattern: resultPattern('alpha', 'assign'),
+    artifacts: (ctx) => `research/${ctx.run}-alpha-groups.json`,
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'alpha',
+      label: 'assign',
+      job: 'partitioning',
+      covers: ['all'],
+      brief: 'briefs/alpha.md',
+      task: [`research/${ctx.run}-alpha-assign.task.md`, 'briefs/alpha-assign.md'],
+      timeout: 3600,
+    }],
+    gates: (ctx) => [gate('alpha-groups', ['node', 'tools/alpha-groups.mjs', '--run', ctx.run], {
+      liveness: { pattern: /(\d+) group\(s\) over/.source, min: 1, unit: 'groups' },
+    })],
+  },
+
   {
     id: '3-review',
     label: 'Alpha scaffold review and adjudication',

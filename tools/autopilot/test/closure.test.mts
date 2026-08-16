@@ -194,3 +194,56 @@ test('the closure receipt names the work, so a later stage can dispatch from it'
     assert.ok(src.includes(key), `the closure receipt must name ${key}`);
   }
 });
+
+// --------------------------------------------------------------------------
+// The Alpha assignment: a judged partition, mechanically validated.
+// --------------------------------------------------------------------------
+
+test('the alpha-groups gate rejects an avoidable category split', async () => {
+  // The defect this stage exists for: chunking the sorted batch list gave one
+  // Alpha three unrelated subjects and split topology across two Alphas, so
+  // neither could see the cross-references among its own pages.
+  const { execFileSync } = await import('node:child_process');
+  const repo = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
+  if (!existsSync(join(repo, 'tools/alpha-groups.mjs'))) return;
+
+  const path = join(repo, 'research', 'frontier-14-alpha-groups.json');
+  if (!existsSync(path)) return;
+  const saved = readFileSync(path, 'utf8');
+  const run = () => {
+    try { execFileSync('node', ['tools/alpha-groups.mjs', '--run', 'frontier-14'], { cwd: repo, encoding: 'utf8' }); return { ok: true, out: '' }; }
+    catch (e: any) { return { ok: false, out: `${e.stdout ?? ''}${e.stderr ?? ''}` }; }
+  };
+
+  try {
+    // topology is batches 2, 3 and 7 — three batches, and the cap is three, so
+    // it fits in one Alpha. Splitting it must fail.
+    writeFileSync(path, JSON.stringify([
+      { label: 'a', covers: ['1', '2', '3'], rationale: 'positional chunking, which is what this replaces' },
+      { label: 'b', covers: ['4', '5', '6'], rationale: 'positional chunking, which is what this replaces' },
+      { label: 'c', covers: ['7'], rationale: 'positional chunking, which is what this replaces' },
+    ], null, 2));
+    const bad = run();
+    assert.equal(bad.ok, false, 'an avoidable category split must fail the gate');
+    assert.match(bad.out, /alpha-groups-category-split/);
+
+    // Every batch must be owned exactly once.
+    writeFileSync(path, JSON.stringify([
+      { label: 'a', covers: ['2', '3', '7'], rationale: 'topology kept whole, which is the point of the rule' },
+    ], null, 2));
+    assert.equal(run().ok, false, 'leaving batches unassigned must fail');
+
+    // A partition with no stated reason cannot be reviewed.
+    writeFileSync(path, JSON.stringify([
+      { label: 'a', covers: ['2', '3', '7'] },
+      { label: 'b', covers: ['1', '4'] },
+      { label: 'c', covers: ['5', '6'] },
+    ], null, 2));
+    assert.equal(run().ok, false, 'a group with no rationale must fail');
+
+    writeFileSync(path, saved);
+    assert.equal(run().ok, true, 'and the sound assignment passes');
+  } finally {
+    writeFileSync(path, saved);
+  }
+});

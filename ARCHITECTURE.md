@@ -1188,6 +1188,18 @@ draws down the lead Alpha's own session too** — so an over-wide Alpha fan-out
 kills the run, not just the stage. Three sits below that measured cliff.
 
 **The cap is a ceiling, never a quota that must be spent.**
+Which batches a group Alpha owns is decided at stage `2-assign` and validated by
+`tools/alpha-groups.mjs`, not chopped off the sorted list. The old chunking was
+deterministic but unsound: on `frontier-14` it gave one Alpha linear-algebra +
+number-theory + category-theory at once and split topology's three batches
+across two Alphas, so neither could see the cross-references among its own
+pages. The gate fails on a category split that was avoidable — a category whose
+batches fit inside one group must sit in one group — and reports how many
+dependency edges still cross a boundary, which is the number the assigning
+Alpha is minimising. What the data does not settle is the residual: five
+categories over three Alphas forces two singletons to share, and which two is a
+judgment about shared machinery, hence an agent and not a sort.
+
 The accuracy win comes from *scoping* a group Alpha to three batches, which is
 free; running the groups in series costs only wall clock and burns no more quota
 than the single Alpha it replaces. Run them concurrently only when the stage is

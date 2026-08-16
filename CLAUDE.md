@@ -149,21 +149,18 @@ Terra. Read-only is enforced per runner, never by asking:
 - **Beta batch capacity (owner, 2026-08-01; lane cap raised 2026-08-16).** Each
   Beta scaffolds and authors at most **two A/B pairs**, enforced by
   `content-policy.mjs --manifest-only`. The **beta and reader lane caps are 9**:
-  the alpha cap is 3 and each group Alpha owns ≤3 batches, so a run may carry
-  nine; 5 throttled the widest legal run.
+  the alpha cap is 3 and each Alpha owns ≤3 batches, so a run may carry nine.
 
 - **Step-5/6 ownership (owner, 2026-07-31).** The Betas that scaffolded the
-  batches personally author all Step-5 content after Step 4, and at Step 6 are
-  excluded from auditing anything they authored; Alpha assigns independent audit
-  readers and adjudicates their findings.
+  batches author all Step-5 content, and at Step 6 are excluded from auditing
+  anything they authored; Alpha assigns independent readers and adjudicates.
 
 - **Step-3 decisions belong to Alpha (owner, 2026-07-30; reassigned from the
   orchestrator 2026-08-16).** It verifies each Beta recommendation from disk and
   then **approves or declines it using best judgment**, never handing routine
   scaffold adjudication back to the owner. Priority: (1) mathematical accuracy
   and correct dependency citation are non-negotiable; then (2) minimize forward
-  references; then (3) preserve mathematical richness. Investigate uncertainty
-  before deciding, and log the decision plus rationale.
+  references; then (3) preserve mathematical richness. Log each decision and its rationale.
 
 - **Alpha reviews scaffold breadth and depth at step 3 (owner, 2026-08-11).**
   Alpha is spawned at **step 3**, not step 4. It reads every pair's
@@ -176,12 +173,15 @@ Terra. Read-only is enforced per runner, never by asking:
   unfixed finding. **Alpha may also repair the scaffold
   itself** (owner, 2026-08-16): the older no-edit rule existed because two writers
   on one batch file overwrite each other, and the stage barrier removed that. Step
-  3 is the last point where thinness costs a scaffold edit, not a rewrite. **Group Alphas (owner, 2026-08-14):** one Alpha per **≤3 batches** at
-  step 3 and 6a/6b (`dispatch.mjs` alpha cap 3), outputs namespaced. The **lead
-  Alpha** alone owns steps 4, 6c, 8, 9, the receipts and step 10 — one prose
-  writer, one citation reader, one exact-hash ledger. `ARCHITECTURE.md` §6. **Step 4's splice is not Alpha's**: `tools/splice-plan.mjs` transcribes ids
-  mechanically and refuses on a `requires` disagreement, a differing item list,
-  an oversize page or a duplicate id — the refusal is what Alpha adjudicates.
+  3 is the last point where thinness costs a scaffold edit, not a rewrite.
+  **Group Alphas (owner, 2026-08-14; assignment judged 2026-08-16):** one Alpha per
+  **≤3 batches** at step 3 and 6a/6b, outputs namespaced. **Which batches** is
+  decided at stage `2-assign` by an Alpha and validated by
+  `alpha-groups.mjs`: minimise what crosses a group boundary, and **never split a
+  category that fits inside one Alpha** — a hard gate error. The **lead Alpha**
+  alone owns steps 4, 6c, 8, 9, the receipts and step 10. `ARCHITECTURE.md` §6. **Step 4's splice is not Alpha's**: `tools/splice-plan.mjs` transcribes ids
+  mechanically and refuses on a `requires` disagreement, a differing item list, an
+  oversize page or a duplicate id — the refusal is what Alpha adjudicates.
 
 - **Alpha repairs wrong mathematics (owner, 2026-08-16).** At steps 6 and 8 a
   wrong proof is Alpha's to fix, not to report. Four repairs are authorised and
@@ -203,11 +203,11 @@ Terra. Read-only is enforced per runner, never by asking:
   Alpha is the sole adjudicator of a paired-judge rejection: it reads the frozen
   verdict and the current disk text, records `confirmed_fatal` /
   `confirmed_nonfatal` / `false_positive`, and applies any permitted repair. The
-  engine runs the gates and owns the rejudge: `level-coverage --judge-only`
-  writes `research/<run>-judge-closure.json` and the `8-rejudge` stage sweeps the
-  ids in `needs_rejudge`. **Every rejection is adjudicated, not the interesting
-  ones** — `step8-guard` checks only that edits were licensed, and the closure
-  gate checks the other direction, that rejections were answered.
+  engine runs the gates and owns the rejudge: `level-coverage --judge-only` writes
+  `research/<run>-judge-closure.json` and `8-rejudge` sweeps the ids in
+  `needs_rejudge`. **Every rejection is adjudicated, not the interesting ones** —
+  `step8-guard` checks only that edits were licensed; the closure gate checks the
+  other direction, that rejections were answered.
   A gap between proof steps a competent reader closes in **30 seconds is
   nonfatal**: record or polish it, never call it fatal. It covers gaps *between
   steps* — a defect in the Statement itself is never 30-second. **At step 8 the
@@ -305,8 +305,7 @@ lanes stay append-only evidence and never satisfy current Terra coverage.
   **If that fails, Beta builds the missing prerequisite definitions and
   theorems.** Dropping a result for want of a definition or lemma that could have
   been written is not a permitted disposition; `deferred` / `out-of-scope` is for
-  material belonging to another page's topic, or resting on a subject area the
-  library has not reached.
+  another page's topic, or a subject area the library has not reached.
   **An A page over 60 items is SPLIT** into two or more A pages, each with its own
   B companion, summary and place in reading order; splitting is never dropping.
   `validate-plan.mjs` enforces it as `size` at steps 0, 2 and 4 — split before

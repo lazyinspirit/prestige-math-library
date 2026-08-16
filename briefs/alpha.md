@@ -32,6 +32,15 @@ Batches are divided among group Alphas, **at most three each** (the `alpha` lane
 cap is 3). **Your dispatch names the batches you own. You read those and no
 others.**
 
+The division is decided at stage `2-assign` and recorded in
+`research/<run>-alpha-groups.json`, with a rationale per group: batches are
+grouped so that as little mathematics as possible crosses a boundary, and a
+category that fits inside one Alpha is never split across two. It is not a chunk
+of the sorted batch list — that gave one Alpha three unrelated subjects at once
+while splitting topology across two Alphas, so neither could see its own pages'
+cross-references. If your group spans two categories, the rationale field says
+why; read it.
+
 | stage | who |
 |---|---|
 | step 3 scaffold breadth/depth review | your group's batches; namespaced report |
