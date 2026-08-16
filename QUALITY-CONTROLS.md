@@ -14,8 +14,10 @@ counterexamples, and false statements). Step 5 keeps it current as the Beta
 personally authors the final text. Before every whole-level gate, the
 engine merges the batch files into `research/<run>-proof-contracts.json` with
 `tools/merge-proof-contracts.mjs`, as gate zero of the contract group — a merge
-that fails means nothing below it claims to have passed over a stale file. The merged file has this version-1
-shape:
+that fails means nothing below it claims to have passed over a stale file. The
+merge is the deterministic single-writer handoff, so it rejects duplicate
+ownership: one id appearing in two batch contracts is `duplicate-item`. The
+merged file has this version-1 shape:
 
 ```json
 {
@@ -55,10 +57,16 @@ shape:
 ```
 
 Each direct wikilink in a `[F#]`, `[A#]`, or `[L#]` fact gets one citation
-entry. `quote` must occur in the cited item's actual `Statement`, `Statement
-refuted`, `Definition`, or `Example`, and `uses` lists every proof step which
-cites that fact. This enforces faithful citation without pretending that a
-substring test establishes the implication from the fact to its use.
+entry. The `source` must be a dependency the item actually declares — a fact
+citing an item absent from `deps`/`justified_by` is
+`citation-undeclared-dependency`. `quote` must occur in the cited item's actual
+`Statement`, `Statement refuted`, `Definition`, or `Example`, and `uses` lists
+every proof step which cites that fact. This enforces faithful citation without
+pretending that a substring test establishes the implication from the fact to its
+use.
+
+`--strict` is the whole-level gate: a scoped item with no contract at all becomes
+an error (`scope-missing-contract`) instead of a warning.
 
 Every numbered step is covered exactly once by a `derivations` or
 `routine_steps` entry, and every such entry names one step only. Entries record

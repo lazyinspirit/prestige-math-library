@@ -321,24 +321,28 @@ level 9.
 
 ### 3.10 Proof contracts, finite smoke, and risk routing
 
-`tools/proof-contract.mjs` turns Beta's formerly private proof-obligation map
-into a versioned, per-level audit artifact. For each scoped proof-bearing item
-it checks that every direct fact citation names a declared dependency, quotes a
-clause from the actual cited Statement/Definition/Example, and lists every step
-using that fact. It also requires every numbered step to have exactly one input
-map entry and every standard boundary case to be checked or specifically ruled
-out. It verifies accountable *links*, not the truth of the inference; Alpha and
-the judges still read the mathematics. `--strict` turns absent scoped contracts
-into gate errors.
+**Which failure it prevents.** A proof reads as licensed because every step
+*looks* as though it follows, and nobody can hold a whole level's worth of "which
+dependency was that, exactly?" in their head. `tools/proof-contract.mjs` turns
+Beta's formerly private proof-obligation map into a versioned, per-level audit
+artifact, so each citation, each numbered step and each boundary case has an
+accountable link on the record and a gate that can miss one. It verifies those
+*links*, not the truth of the inference; Alpha and the judges still read the
+mathematics.
 
-Parallel Betas write only namespaced batch contract files. `merge-proof-contracts.mjs`
-is the deterministic single-writer handoff that combines them for each
-whole-level gate and rejects duplicate ownership. This avoids a shared JSON file
-becoming a new parallel-write failure mode.
+**`QUALITY-CONTROLS.md` owns the contract** and is where to look for what a
+contract must contain: the version-1 JSON shape, the citation and input-map
+rules, the eight boundary axes, and the gate command block. This section is why
+each piece exists and what it has actually caught.
+
+Parallel Betas write only namespaced batch contract files, and
+`merge-proof-contracts.mjs` is the deterministic single-writer handoff that
+combines them for each whole-level gate. That is what stops a shared JSON file
+from becoming a new parallel-write failure mode.
 
 `tools/finite-smoke.mjs` runs selected, independently computed finite-model
-checks for graph-tree, induced-complement, cyclic-subgroup, and finite-poset-meet
-invariants. Each test must name an exact item excerpt that it probes. It is a
+checks; the registry, and each check's obligation to name the exact item excerpt
+it probes, are `QUALITY-CONTROLS.md` §"Finite countermodel smoke tests". It is a
 **falsification screen**: a pass has no general-proof force, while a fail
 provides a concrete countermodel or convention discrepancy for Alpha to
 adjudicate.
@@ -352,20 +356,16 @@ because all four registered checks were then graph- or group-theoretic. Read the
 check count, never the exit code alone.
 
 Run `frontier-12` added `monotone-map-need-not-preserve-meets` and
-`full-subposet-meet-differs-from-ambient` for that reason. They exploit the fact
-that a poset **is** a category — one arrow per related pair — in which a product
-or pullback is exactly a meet, so a finite poset is a real bounded countermodel
-search for a limit claim. Both back *existence* counterexamples, so `ok` means
-the witness was verified to fail as claimed, and each distinguishes "no meet
-exists" and "the meet IS preserved" from the intended outcome so a mistyped
-witness cannot pass by accident. `--self-test` runs every check on its defaults.
-The registry lives in `QUALITY-CONTROLS.md` §"Finite countermodel smoke tests".
+`full-subposet-meet-differs-from-ambient` for that reason: a poset **is** a
+category, so a finite poset is a real bounded countermodel search for a limit
+claim rather than a toy, and it reaches subjects the graph and group checks never
+could. How the two are built so a mistyped witness cannot pass by accident is
+`QUALITY-CONTROLS.md`, with the rest of the registry.
 
-`tools/risk-report.mjs` exposes a transparent score for dependency fan-in,
-proof length, biconditionals, existence/well-definedness, boundary-sensitive
-language, induction, quotient constructions, and analytic limits. High and
-critical results route to an additional Alpha proof-refuter and require a
-recorded `risk_review` before Step 7. It is deliberately not a defect detector:
+`tools/risk-report.mjs` exposes a transparent score over structural signals —
+listed with its two thresholds in `QUALITY-CONTROLS.md` §"High-risk routing".
+High and critical results route to an additional Alpha proof-refuter and require
+a recorded `risk_review` before Step 7. It is deliberately not a defect detector:
 the score explains *where to spend reading attention*, not what is false.
 
 ### 3.11 Future-scope containment and coverage
