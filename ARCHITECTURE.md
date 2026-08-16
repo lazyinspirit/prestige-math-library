@@ -727,6 +727,11 @@ scaffold and a publish). Receipt: `research/<run>-url-liveness.json`.
 
 ### 3.11d The engine — `tools/autopilot/` (owner, 2026-08-16)
 
+This section is the **mechanism and the history**: what the engine owns, the
+design rules its spec validator enforces, and the run that produced each. The
+operational surface — the commands, the preflight, the blocker table, the
+watchdog, what to do when it stops — is `UNATTENDED.md`.
+
 **Which failure it prevents.** A stage completing produces artifacts; something
 must notice and fire the next dispatch. For most of this library's history that
 something was a model, and it is the slowest and least reliable component in the
@@ -806,17 +811,24 @@ message every time, so it fired once and deadlocked.
 **Layout.** `src/executor.mts` is the loop; `src/coverage.mts` the predicate;
 `src/gates.mts` runs gates and refuses a vacuous one; `src/spec.mts` validates
 the table; `src/roles.mts` enforces the job rule; `stages/mathlib.mts` is the
-only domain-specific file, 18 stages from scaffolding to the owner report;
-`bin/autopilot.mts` is the CLI (`frontier | plan | start | status | pause |
-resume | stop | retry | skip | report | doctor`). Porting to another project
+only domain-specific file, 19 stages from scaffolding to the owner report;
+`bin/autopilot.mts` is the CLI. Porting to another project
 means writing another `stages/` file; porting to another agent platform means
 changing one argv array in `autopilot.config.json`.
 
-**`autopilot doctor`** checks, before a run, the things that otherwise fail
-hours in with nobody watching: an invented command flag (four of the first six
-invocations written from memory were wrong), a brief or task file that does not
-exist, a judge lane that cannot authenticate, a missing scope ledger, and the
-stage-spec rules above.
+**`autopilot doctor`** exists because each thing it checks is answerable in
+seconds *before* a run and costs hours if discovered during one, at 02:00, with
+nobody watching. Every check corresponds to something that went wrong: four of
+the first six tool invocations written from memory named a flag no tool defines,
+and the judge sweep's would have failed twelve hours into an unattended run; a
+missing brief is discovered by the stage that dispatches for it; the DeepSeek key
+resolves through the app repo's `.env` rather than the environment, so an engine
+started from a bare shell may or may not find it; and a scope ledger that was
+never written leaves `manifest-integrity` nothing to compare against, with a
+whole pair free to vanish. Its own flag check is guarded against collapsing:
+zero flags examined over a table that *has* tool commands is reported as broken
+detection, not as clean. The checklist as an operator sees it is
+`UNATTENDED.md` §"Before you start".
 
 ### 3.11e-2 Stage completion by coverage, not by agent count (2026-08-16)
 

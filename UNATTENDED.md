@@ -3,8 +3,11 @@
 `LEVELS.md` is what a build *is*. This is how to run one with nobody attached,
 and how to take over one already running.
 
-Normative for the driver mechanism. `CLAUDE.md`, `SCHEMA.md` and `LEVELS.md` win
-where they differ; nothing here relaxes an owner rule or a gate.
+Normative for the **operational surface**: what to run, what it will tell you,
+and what to do when it stops. Why the engine is built this way — the mechanism,
+the design rules it enforces and the incidents behind each — is
+`ARCHITECTURE.md` §3.11d. `CLAUDE.md`, `SCHEMA.md` and `LEVELS.md` win where they
+differ; nothing here relaxes an owner rule or a gate.
 
 ---
 
@@ -36,17 +39,20 @@ job is one of them.
 | `tools/autopilot/bin/autopilot.mts` | the CLI — everything below runs through it |
 | `tools/autopilot/src/executor.mts` | the loop: coverage, dispatch, gates, retries, blockers |
 | `tools/autopilot/src/spec.mts` | validates the stage table before a run may start |
-| `tools/autopilot/stages/mathlib.mts` | the only domain-specific file: 18 stages, their units, gates and repair loops |
+| `tools/autopilot/stages/mathlib.mts` | the only domain-specific file: 19 stages, their units, gates and repair loops |
 | `tools/autopilot/bin/watchdog.sh` | restarts the engine if the process dies |
 | `tools/dispatch.mjs` | spawns one briefed agent role as a plain process |
 | `tools/preflight.mjs` | can this machine run a build at all. **Run it before every long build** |
 | `tools/slots.mjs` | cross-process concurrency pools for the judge lanes |
 | `tools/paths.mjs` | resolves the app repo, and with it the `.env` that a `DEEPSEEK_API_KEY` not already in the environment is read from (`DEEPSEEK_ENV_FILE` overrides) |
 
-Configuration is `autopilot.config.json` at the repo root — the run name, the
-concurrency and report cadence, and **one platform-specific setting**: the argv
-array that starts an agent. It is an array, never a command string; a string has
-to be parsed, and every attempt to parse one here produced a quoting defect.
+Configuration is `autopilot.config.json` at the repo root — the concurrency, the
+per-lane attempt cap, the poll and report cadence, and **one platform-specific
+setting**: the argv array that starts an agent. It is an array, never a command
+string; a string has to be parsed, and every attempt to parse one here produced a
+quoting defect. It **must not name a run**: a pinned run makes a bare
+`autopilot start` resume a completed one, and a test asserts the key is absent.
+The run is always `--run <run>` on the command line.
 
 Run state lives in `.autopilot/state.json`, owner commands in
 `.autopilot/control.json`, the human-readable snapshot in `.autopilot/status.md`,
@@ -63,10 +69,10 @@ npx tsx tools/autopilot/bin/autopilot.mts doctor --run <run>
 ```
 
 `doctor` checks the things that otherwise fail hours in with nobody watching: a
-command flag no tool defines (four of the first six written from memory were
-wrong), a brief or task file that does not exist, a judge lane that cannot
-authenticate, a missing scope ledger, and the stage-spec rules. It is seconds;
-each thing it catches costs hours.
+command flag no tool defines, a brief or task file that does not exist, a judge
+lane that cannot authenticate, a missing scope ledger, and the stage-spec rules.
+It is seconds; each thing it catches costs hours. What went wrong to put each
+check there: `ARCHITECTURE.md` §3.11d.
 
 ## Starting
 
@@ -85,6 +91,16 @@ against the spec — mechanical throughout.
 `start --detach` refuses to detach if the stage table cannot fail (see below), so
 a spec defect is a message on your terminal rather than a blocker in a log nobody
 is reading yet.
+
+The watchdog polls every `WATCHDOG_INTERVAL` seconds (default 60) and restarts
+the engine whenever no `autopilot.mts start` process is alive — indefinitely, as
+long as the restarts work; the failure counter resets on every engine that comes
+up. It gives up only after `WATCHDOG_MAX_FAILS` **consecutive** restarts that did
+not come up (default 5), backing off 60s, 120s, 240s between them, because an
+engine that cannot start will not start by being asked again. It exits on its own
+when `.autopilot/status.md` reports COMPLETE, and `.autopilot/stopped` is the
+marker that stops it restarting anything. Its log is
+`.autopilot/watchdog.log`; the engine's is `.autopilot/autopilot.log`.
 
 ## Supervising
 
@@ -118,7 +134,8 @@ There are no halt codes. The engine either advances, holds, or is blocked, and
 | `stage spec is invalid` | a stage cannot fail — usually a gate list that came back empty | fix the stage table; the engine refuses to dispatch until you do |
 | `missing input file(s)` | a brief or task the next dispatch needs is absent | write the file; the blocker retires itself on the next tick |
 | `gate <id> failed` | a real defect, or a repair loop that has not converged | read the gate output in `events.jsonl` |
-| `failed 2x` | a lane died twice | read its log under `research/<run>-dispatch/`; `retry` re-arms it |
+| `<label> failed 3x` | a lane hit the config's `maxAttempts` | read its log under `research/<run>-dispatch/`; `retry` re-arms it |
+| `plan() threw` | a stage's own planner raised | a spec defect, not a crash loop; fix the stage table |
 | `N repair round(s) did not clear gate` | the bounded self-correcting loop gave up | this one needs a person |
 | `barrier` | a previous stage still has work in flight | nothing; it lifts by itself |
 
@@ -139,9 +156,9 @@ converge must become a blocker a person reads rather than an unbounded spend.
 | step 3 review → Beta fix → re-check | every pair is `sufficient` | `research/<run>-scaffold-closure.json` |
 | step 7 judge → adjudicate → repair → rejudge | every item paired, every rejection adjudicated, no open fatal | `research/<run>-judge-closure.json` |
 
-Both receipts name **ids**, not prose. A build once named its 23 rejudge targets
-in a markdown table and the rejudge never ran, because nothing downstream can
-read a table.
+Both receipts name **ids**, not prose — nothing downstream can read a table. Why
+the loops are shaped this way, and the run that proved it: `ARCHITECTURE.md`
+§3.11d.
 
 ## Budget, and why fatal repairs are not capped
 
@@ -162,5 +179,6 @@ automatic repair *rounds* per gate — the loop, not the repairs.
 - `strictNullChecks` is off in `tools/autopilot/tsconfig.json`, with the
   outstanding diagnostic count recorded there. Two defects the tests could not
   see were found by turning type checking on; the rest are not yet fixed.
-- The watchdog restarts a dead engine five times, then gives up. It cannot tell a
-  crash loop from bad luck.
+- The watchdog cannot tell a crash loop from bad luck. It gives up after five
+  consecutive restarts that failed to bring the engine up, and that threshold is
+  a guess.
