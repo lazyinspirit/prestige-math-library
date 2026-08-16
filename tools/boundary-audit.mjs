@@ -74,15 +74,48 @@ if (!files.length) {
  *  every key was unique and no cluster could ever form. The id-only rule was
  *  calibrated on frontier-13, where the template substituted nothing else. */
 const CASES = ['empty', 'zero', 'one', 'degenerate', 'endpoints', 'nonempty-choice', 'iff-forward', 'iff-reverse'];
-const normalise = (text, id) => {
+const normalise = (text, id, title) => {
   let t = String(text ?? '')
     .replace(/"[^"]*"/g, '<QUOTE>')
     .replace(/“[^”]*”/g, '<QUOTE>')
     .replace(/`[^`]*`/g, '<QUOTE>')
     .replace(/\$[^$]*\$/g, '<MATH>');
   if (id) t = t.split(id).join('<ID>');
+  // NOT stripped: the item's own title, though it is substituted text exactly
+  // as the id is. Stripping it collapses frontier-15's interpolated rows into
+  // 31 clusters — but most of those are honest: "this item states no
+  // biconditional" is the true disposition for 45 items and there is only one
+  // way to write it. Precision is this tool's whole design, so the title stays
+  // in the key and the interpolated-template class is reported by the
+  // `checked`-row detector below, which is airtight rather than suggestive.
+  if (title) void title;
   for (const c of CASES) t = t.split(c).join('<CASE>');
   return t.toLowerCase().replace(/[^a-z<>]+/g, ' ').trim();
+};
+
+/** If step `number` of `proof` only NAMES its checks, return its text; else null.
+ *  Kept deliberately narrow: every sentence must open by announcing an activity
+ *  and none may state an outcome, so a terse but real discharge does not fire. */
+const ANNOUNCE = /^(?:We\s+(?:treat|include|check|cover|handle|address|verify|record|note|consider)|Cover|Treat|Include|Handle|Check|Address|Verify|Note|Consider|The\s+(?:preceding|foregoing|above)\s+(?:argument|steps?|reasoning))\b/i;
+const OUTCOME = /(?:,|:|;|\bso\b|\bhence\b|\bthen\b|\bwhich\b|\bgives?\b|\byields?\b|\bforces?\b|\bbecomes?\b|\bequals?\b|\bis\b|\bare\b|\bhas\b|\bmakes?\b)/i;
+const announcementStep = (proof, number) => {
+  const re = new RegExp(`^${number.replace('.', '\\.')}\\s+([\\s\\S]*?)(?=^\\d+\\.\\d+\\s|\\s*$)`, 'm');
+  const raw = re.exec(proof)?.[1];
+  if (!raw) return null;
+  const text = raw.replace(/\[[^\]]*\]\s*∎?\s*$/m, '').replace(/∎/g, '').trim();
+  const sentences = text.split(/(?<=[.!?])\s+/).map((s) => s.trim())
+    .filter((s) => s && !/^This proves the stated claim\.?$/i.test(s));
+  if (!sentences.length || !sentences.every((s) => ANNOUNCE.test(s))) return null;
+  const tail = (s) => s.replace(/^[^,:;]*?\b(?:treat|include|check|cover|handle|address|verify|record|note|consider|argument|steps?|reasoning)\b/i, '');
+  if (sentences.some((s) => OUTCOME.test(tail(s)))) return null;
+  return text.length > 120 ? `${text.slice(0, 120)}…` : text;
+};
+
+/** The item's frontmatter title, for `normalise`. */
+const titleOf = (text) => {
+  if (!text) return null;
+  const m = /^title:[ \t]*(.*)$/m.exec(text.split(/\n---\n/)[0] ?? '');
+  return m ? m[1].trim().replace(/^["']|["']$/g, '') : null;
 };
 
 const itemText = (() => {
@@ -230,7 +263,7 @@ if (!rows.length) {
 const clusters = new Map();
 for (const r of rows) {
   if (r.status !== 'not_applicable' && r.status !== 'checked') continue;
-  const key = `${r.status}|${normalise(r.text, r.id)}`;
+  const key = `${r.status}|${normalise(r.text, r.id, titleOf(itemText(r.id)))}`;
   if (key.endsWith('|')) continue;
   if (!clusters.has(key)) clusters.set(key, []);
   clusters.get(key).push(r);
@@ -265,6 +298,19 @@ for (const r of rows) {
       if (!proof.includes(m[1])) {
         contradicted.push({ id: r.id, case: r.case,
           why: `the row credits step ${m[1]}, which does not occur in the proof`,
+          reason: r.text, file: r.file });
+        continue;
+      }
+      // The other half of frontier-14's three false `checked` rows: the credited
+      // step EXISTS but discharges nothing, because it only names the case.
+      // "the zero case is resolved in step 4.1: 'We treat the trivial
+      // $p$-subgroup and primes not dividing $|G|$.'" is a row whose own
+      // evidence quote convicts it. Both halves are mechanical, so this stays
+      // inside the tool's precision-first standard.
+      const credited = announcementStep(proof, m[1]);
+      if (credited) {
+        contradicted.push({ id: r.id, case: r.case,
+          why: `the row credits step ${m[1]}, which names a check without performing it: "${credited}"`,
           reason: r.text, file: r.file });
       }
     }

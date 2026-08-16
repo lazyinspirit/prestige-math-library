@@ -9,9 +9,216 @@
     "requires": [
       "contour-integration",
       "complex-power-series-and-analytic-functions",
-      "rn-as-a-normed-space"
+      "rn-as-a-normed-space",
+      "pi-the-equivalent-characterizations"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-oriented-complex-triangle-and-boundary",
+        "kind": "definition",
+        "title": "Filled complex triangles, their oriented three-edge boundary contours, diameter, and perimeter",
+        "deps": [
+          "rem-complex-plane-euclidean-dictionary",
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "def-polygonal-path-and-polygonal-connectedness",
+          "def-metric-bounded-diameter"
+        ]
+      },
+      {
+        "id": "rem-plane-star-shaped-and-convex-dictionary",
+        "kind": "remark",
+        "title": "Complex star-shaped and convex domains are the published Euclidean notions under the identification $\\mathbb C=\\mathbb R^2$",
+        "deps": [
+          "rem-complex-plane-euclidean-dictionary",
+          "def-complex-domain",
+          "def-star-shaped-open-subset-of-rn",
+          "def-convex-subset-of-euclidean-space"
+        ]
+      },
+      {
+        "id": "lem-goursat-four-triangle-boundary-cancellation",
+        "kind": "lemma",
+        "title": "Midpoint subdivision of a triangle cancels every interior edge and preserves its outer boundary integral",
+        "strategy": "Name the three side midpoints and write the four oriented three-edge boundaries in full. Add their contour integrals using concatenation additivity; each interior segment occurs once in each direction and cancels by reversal, while each exterior half-edge concatenates to the corresponding outer edge. This is an algebraic contour computation, including repeated or collinear vertices, and does not appeal to the companion-page drawing.",
+        "deps": [
+          "def-oriented-complex-triangle-and-boundary",
+          "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "prop-linearity-of-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "lem-goursat-nested-triangle-selection",
+        "kind": "lemma",
+        "title": "Goursat bisection selects nested triangles retaining one quarter of the boundary-integral magnitude, with halving diameters and a one-point intersection",
+        "strategy": "At each midpoint subdivision, the cancellation lemma and the complex triangle inequality make one quarter-triangle carry at least one quarter of the parent integral's modulus; choose the least-indexed maximizer to avoid a choice principle. Iterate this selection and prove by induction that diameter and perimeter are multiplied by $2^{-n}$ and the retained lower bound by $4^{-n}$. Realize each filled triangle as the continuous image of the compact barycentric simplex, hence as a nonempty compact and therefore closed bounded subset of the complex plane. Apply the published Cantor intersection theorem in the complete complex plane. If the initial integral is zero the retained estimate is still valid; repeated or collinear vertices are also covered.",
+        "deps": [
+          "def-oriented-complex-triangle-and-boundary",
+          "lem-goursat-four-triangle-boundary-cancellation",
+          "thm-cantor-intersection-metric",
+          "thm-complex-plane-is-complete",
+          "thm-heine-borel-rn",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-recursion",
+          "thm-well-ordering-principle",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "thm-goursat-triangle-theorem",
+        "kind": "theorem",
+        "title": "Goursat's triangle theorem: a holomorphic function integrates to zero around every triangle contained in its domain",
+        "strategy": "Use the nested-selection lemma and let $z_*$ be the unique common point. Complex differentiability gives $f(z)=f(z_*)+f'(z_*)(z-z_*)+(z-z_*)\\varepsilon(z)$ with $\\varepsilon(z)\\to0$. The affine part has zero integral around each closed triangle by the published polynomial derivative and closed-derivative theorem. On a sufficiently small selected triangle, the ML estimate bounds the remaining integral by a small constant times diameter times perimeter. Multiplying by the retained factor $4^n$ cancels the two factors $2^{-n}$, leaving an arbitrarily small bound for the original integral. Treat a zero original integral and a zero-perimeter triangle before division or limiting estimates.",
+        "deps": [
+          "lem-goursat-nested-triangle-selection",
+          "cor-ml-estimate-for-complex-line-integrals",
+          "cor-closed-contour-integral-of-a-derivative-is-zero",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "cor-complex-differentiability-implies-continuity"
+        ]
+      },
+      {
+        "id": "cor-goursat-rectangle-theorem",
+        "kind": "corollary",
+        "title": "Goursat's theorem for rectangles: a holomorphic function integrates to zero around every rectangle contained in its domain",
+        "strategy": "State first what the objects are: the closed rectangle with vertices $a$, $a+w$, $a+w+ih$, $a+ih$ for real $w,h>0$, and its positively oriented boundary as the closed contour concatenating those four directed sides, in the sense of the published contour definition. Split it along the diagonal from its lower-left to its upper-right vertex. The two resulting filled triangles, in the sense of the page's triangle definition, lie in the rectangle, so Goursat makes both positively oriented boundary integrals zero. Add them: the diagonal occurs once in each orientation and cancels by the published reversal identity, while concatenation identifies the four remaining directed sides with the positively oriented rectangle boundary. No rectangle conclusion is hidden inside the triangle theorem.",
+        "deps": [
+          "thm-goursat-triangle-theorem",
+          "def-oriented-complex-triangle-and-boundary",
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "prop-reversal-and-concatenation-of-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "thm-goursat-theorem-one-exceptional-point",
+        "kind": "theorem",
+        "title": "Goursat's triangle theorem remains valid for a continuous function holomorphic away from one point",
+        "strategy": "If the exceptional point is outside the filled triangle, apply Goursat directly. If it is a vertex, cut off a triangle whose two incident sides have arbitrarily small length; Goursat annihilates the remaining triangles, boundary cancellation leaves only the small triangle, and continuity at the exceptional point plus the ML estimate sends its integral to zero. If the point lies on an edge or in the interior, split the triangle into subtriangles having that point as a vertex and cancel the new internal edges. Include coincident vertices and every boundary position.",
+        "deps": [
+          "def-oriented-complex-triangle-and-boundary",
+          "lem-goursat-four-triangle-boundary-cancellation",
+          "thm-goursat-triangle-theorem",
+          "cor-ml-estimate-for-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain",
+        "kind": "proposition",
+        "title": "Vanishing integrals around triangles construct a primitive for a continuous function on a star-shaped domain",
+        "strategy": "Fix a star centre $a$ and define $F(z)$ as the integral of $f$ along the segment from $a$ to $z$. For small nonzero $h$, the triangle with vertices $a,z,z+h$ lies in the domain: the short edge lies in a ball about $z$, and every segment from $a$ to that edge stays in the star-shaped set. Its zero boundary integral reduces $F(z+h)-F(z)$ to the short-edge integral. Parametrize that edge and use continuity of $f$ to show the difference quotient tends to $f(z)$. Treat $z=a$, constant segments, and $h=0$ only as the excluded difference-quotient value.",
+        "deps": [
+          "def-oriented-complex-triangle-and-boundary",
+          "rem-plane-star-shaped-and-convex-dictionary",
+          "def-complex-primitive",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "prop-reversal-and-concatenation-of-complex-line-integrals"
+        ]
+      },
+      {
+        "id": "thm-holomorphic-primitive-on-star-shaped-domain",
+        "kind": "theorem",
+        "title": "Every holomorphic function on a star-shaped domain has a primitive",
+        "strategy": "Holomorphy supplies continuity, and Goursat makes the integral around every contained triangle zero. Apply the triangle-integral primitive proposition at the specified star centre. The domain is nonempty by the published star-shaped definition, and no path choice is made.",
+        "deps": [
+          "thm-goursat-triangle-theorem",
+          "prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain",
+          "cor-complex-differentiability-implies-continuity"
+        ]
+      },
+      {
+        "id": "cor-cauchy-theorem-star-shaped-domain",
+        "kind": "corollary",
+        "title": "Cauchy's theorem on a star-shaped domain: every closed rectifiable contour integral of a holomorphic function is zero",
+        "strategy": "Use the star-shaped primitive theorem to obtain $F'=f$. Holomorphy makes $f$ continuous, so the published closed-contour corollary of the complex fundamental theorem applies to every closed rectifiable contour, including a constant contour.",
+        "deps": [
+          "thm-holomorphic-primitive-on-star-shaped-domain",
+          "cor-closed-contour-integral-of-a-derivative-is-zero",
+          "cor-complex-differentiability-implies-continuity"
+        ]
+      },
+      {
+        "id": "cor-cauchy-theorem-convex-domain",
+        "kind": "corollary",
+        "title": "Cauchy's theorem on a convex complex domain",
+        "strategy": "A nonempty convex open subset of the complex plane is star-shaped with respect to each of its points by the published Euclidean definition and the plane dictionary. Apply Cauchy's theorem on a star-shaped domain to every closed rectifiable contour.",
+        "deps": [
+          "rem-plane-star-shaped-and-convex-dictionary",
+          "cor-cauchy-theorem-star-shaped-domain"
+        ]
+      },
+      {
+        "id": "thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain",
+        "kind": "theorem",
+        "title": "A continuous function holomorphic away from one point on a star-shaped domain has a primitive and zero closed-contour integrals",
+        "strategy": "The exceptional-point Goursat theorem makes every contained triangle integral zero. Feed that exact conclusion into the triangle-integral primitive proposition, then use the published closed-contour theorem because the constructed primitive has the given continuous function as its derivative. The proof works whether the exceptional point is the star centre or lies elsewhere, and ordinary holomorphy is the special case in which no exception occurs.",
+        "deps": [
+          "thm-goursat-theorem-one-exceptional-point",
+          "prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain",
+          "cor-closed-contour-integral-of-a-derivative-is-zero"
+        ]
+      },
+      {
+        "id": "lem-cauchy-difference-quotient-exceptional-extension",
+        "kind": "lemma",
+        "title": "The filled difference quotient is continuous at its exceptional point and holomorphic away from it",
+        "strategy": "For holomorphic $f$ and fixed $z$, set $g(\\zeta)=(f(\\zeta)-f(z))/(\\zeta-z)$ off $z$ and $g(z)=f'(z)$. The derivative definition is exactly continuity of $g$ at $z$. Away from $z$, the derivative algebra makes the quotient holomorphic; at no point is holomorphy of the filled value asserted. Check constant $f$ and every nonzero denominator explicitly.",
+        "deps": [
+          "def-complex-differentiability-holomorphic-and-entire",
+          "thm-algebra-of-complex-derivatives",
+          "cor-complex-differentiability-implies-continuity"
+        ]
+      },
+      {
+        "id": "thm-cauchy-integral-formula-circle",
+        "kind": "theorem",
+        "title": "Cauchy's integral formula on a circle compactly contained in a disc of holomorphy",
+        "strategy": "Let $f$ be holomorphic on $D(a,R)$, take $0<r<R$, and fix $z$ with $|z-a|<r$. The filled quotient lemma gives a continuous function on the disc that is holomorphic away from $z$. The disc is convex and hence star-shaped, so the one-exception theorem makes its integral around the positively oriented radius-$r$ circle zero. Expand that identity by linearity. To compute the remaining off-centre kernel without winding numbers, use the finite geometric identity for $1/(\\zeta-z)$ in powers of $(z-a)/(\\zeta-a)$; its remainder is uniformly bounded by a constant times $(|z-a|/r)^{N+1}$ and tends to zero. Interchange this uniform limit with the fixed contour integral, then apply the published centred-circle monomial formula: only the exponent $-1$ term survives and gives $2\\pi i$. Do not invoke a keyhole contour.",
+        "deps": [
+          "rem-plane-star-shaped-and-convex-dictionary",
+          "thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain",
+          "lem-cauchy-difference-quotient-exceptional-extension",
+          "prop-linearity-of-complex-line-integrals",
+          "thm-circle-integrals-of-integer-monomials",
+          "thm-uniform-limit-interchanges-complex-line-integrals",
+          "lem-geometric-sequence-null"
+        ]
+      },
+      {
+        "id": "lem-differentiating-cauchy-integrals",
+        "kind": "lemma",
+        "title": "Cauchy-kernel contour integrals may be differentiated by a direct difference-quotient estimate",
+        "strategy": "For a fixed rectifiable contour $\\gamma$, continuous boundary data $\\varphi$, an open set $V$ disjoint from the trace, and $n\\ge1$, define $F_n(z)=(2\\pi i)^{-1}\\int_\\gamma \\varphi(\\zeta)/(\\zeta-z)^n\\,d\\zeta$. At $z_0\\in V$, choose a closed ball still in $V$, which supplies a uniform positive lower bound for every denominator. Subtract $nF_{n+1}(z_0)$ from the difference quotient, factor the finite power difference, and bound the remainder uniformly by a constant times $|h|$. The ML estimate sends the integral remainder to zero. This proves $F_n'=nF_{n+1}$ without a general differentiation-under-the-integral theorem; handle $n=1$, a constant contour, and $h=0$ explicitly.",
+        "deps": [
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "prop-linearity-of-complex-line-integrals",
+          "cor-ml-estimate-for-complex-line-integrals",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "thm-cauchy-integral-formula-higher-derivatives",
+        "kind": "theorem",
+        "title": "All higher complex derivatives exist and satisfy Cauchy's integral formula on an interior circle",
+        "strategy": "The case $n=0$ is the circle formula. The Cauchy-integral differentiation lemma makes each kernel integral holomorphic on the circle's interior and gives its derivative, so induction simultaneously proves that $f^{(n)}$ exists and that $f^{(n)}(z)=n!/(2\\pi i)\\int f(\\zeta)/(\\zeta-z)^{n+1}\\,d\\zeta$ for every natural $n$. In the induction step, differentiation multiplies by $n+1$ and raises the kernel power by one. Check $n=0$, $n=1$, the factorial recurrence, and constant functions.",
+        "deps": [
+          "thm-cauchy-integral-formula-circle",
+          "lem-differentiating-cauchy-integrals",
+          "def-factorial-and-falling-factorial",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "cor-cauchy-inequalities",
+        "kind": "corollary",
+        "title": "Cauchy's inequalities bound every derivative by a boundary bound on a compactly contained circle",
+        "strategy": "Assume $|f(\\zeta)|\\le M$ on the positively oriented circle $|\\zeta-a|=r$, where $r>0$ and $M\\ge0$. Apply the higher-derivative formula at the centre, take moduli, use the ML estimate, substitute the circle length $2\\pi r$, and simplify to $|f^{(n)}(a)|\\le n!M/r^n$. Include $n=0$, $M=0$, and constant functions; the positive-radius hypothesis is exactly what licenses the division.",
+        "deps": [
+          "thm-cauchy-integral-formula-higher-derivatives",
+          "cor-ml-estimate-for-complex-line-integrals",
+          "thm-circle-circumference-diameter-ratio-is-pi"
+        ]
+      }
+    ]
   },
   {
     "order": 310,
@@ -23,6 +230,99 @@
     "requires": [
       "goursat-and-cauchys-theorem-in-a-convex-domain"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-goursat-triangle-integral-of-z-squared",
+        "kind": "example",
+        "title": "The three edge integrals of $z^2$ around the triangle with vertices $0$, $1$, and $i$ sum to zero",
+        "strategy": "Use the primitive $z^3/3$ on each oriented edge. The three endpoint increments are $1/3$, $(-i-1)/3$, and $i/3$, which sum to zero and agree with Goursat's theorem. Check the edge orientations against the boundary definition rather than treating the triangle as an unoriented trace.",
+        "deps": [
+          "def-oriented-complex-triangle-and-boundary",
+          "thm-fundamental-theorem-for-complex-line-integrals",
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "thm-goursat-triangle-theorem"
+        ]
+      },
+      {
+        "id": "ex-goursat-four-triangle-boundary-cancellation",
+        "kind": "example",
+        "title": "The four midpoint subtriangles of the $0,1,i$ triangle display all three cancelling interior edges",
+        "strategy": "Label the side midpoints $1/2$, $i/2$, and $(1+i)/2$, draw the four positively oriented subtriangles, and list their twelve directed edges. Pair the six appearances of the three interior segments with opposite orientations, then concatenate the remaining half-edges into the outer boundary. The drawing illustrates the already-proved cancellation identity but the item retains the full computation.",
+        "deps": [
+          "def-oriented-complex-triangle-and-boundary",
+          "lem-goursat-four-triangle-boundary-cancellation"
+        ]
+      },
+      {
+        "id": "ex-cauchy-integral-formula-exponential-over-z-minus-one",
+        "kind": "example",
+        "title": "The circle integral of $e^z/(z-1)$ over $|z|=2$ is $2\\pi i e$",
+        "strategy": "The exponential is entire and $1$ lies inside the positively oriented radius-$2$ circle. Apply the circle formula with $f(z)=e^z$ at $z=1$ and multiply by $2\\pi i$; verify that the denominator is nonzero on the circle.",
+        "deps": [
+          "thm-cauchy-integral-formula-circle",
+          "thm-complex-exponential-is-entire-with-derivative-itself"
+        ]
+      },
+      {
+        "id": "ex-cauchy-integral-formula-cosine-third-order-pole",
+        "kind": "example",
+        "title": "The circle integral of $\\cos z/(z-1)^3$ over $|z|=2$ is $-\\pi i\\cos 1$",
+        "strategy": "Use the higher-derivative formula with $n=2$ and $f(z)=\\cos z$. Since $f''(1)=-\\cos 1$, the factor $2\\pi i/2!$ gives the stated value. Check the natural index $n=2$, the pole lies strictly inside the circle, and the denominator is nonzero on it.",
+        "deps": [
+          "thm-cauchy-integral-formula-higher-derivatives",
+          "cor-complex-trigonometric-and-hyperbolic-derivatives"
+        ]
+      },
+      {
+        "id": "cex-holomorphic-function-on-an-annulus-with-nonzero-closed-contour-integral",
+        "kind": "counterexample",
+        "title": "A holomorphic function on an annulus can have a nonzero closed-contour integral",
+        "strategy": "State explicitly that this refutes the claim that Cauchy's theorem holds for every closed rectifiable contour in every complex domain. Take $A=\\{z:1/2<|z|<2\\}$, $f(z)=1/z$, and the positively oriented unit circle. The complex triangle inequality gives $||z|-|w||\\le|z-w|$; at each $z\\in A$, use a radius smaller than both $|z|-1/2$ and $2-|z|$ to prove that $A$ is open. Verify directly that the rational function is holomorphic on $A$ and that the circle integral is $2\\pi i$. Use polar form to join each point radially to the unit circle and then along a circular arc, proving path-connectedness. Thus $A$ is a domain and the displayed nonzero integral is the single witness for the stated false claim.",
+        "deps": [
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-circle-integrals-of-integer-monomials",
+          "thm-polar-form-with-unique-principal-argument",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-path-connected-implies-connected",
+          "def-complex-domain"
+        ]
+      },
+      {
+        "id": "cex-connected-domain-need-not-be-star-shaped",
+        "kind": "counterexample",
+        "title": "A connected complex domain need not be star-shaped",
+        "strategy": "Take the punctured plane $\\mathbb C\\setminus\\{0\\}$. The rational-function theorem makes it open and the published punctured-plane lemma makes it polygonally connected, hence connected, so it is a complex domain. If a nonzero point $a$ were a star centre, the point $-a$ would also lie in the domain, but the segment from $a$ to $-a$ passes through $0$ at parameter $1/2$. This excludes every possible centre.",
+        "deps": [
+          "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "lem-punctured-rn-is-polygonally-connected",
+          "thm-path-connected-implies-connected",
+          "def-complex-domain",
+          "def-star-shaped-open-subset-of-rn",
+          "rem-complex-plane-euclidean-dictionary"
+        ]
+      },
+      {
+        "id": "fs-goursats-theorem-requires-continuity-of-the-derivative",
+        "kind": "false-statement",
+        "title": "FALSE: Goursat's triangle conclusion requires a separate continuity hypothesis on $f'$",
+        "strategy": "State the false implication as a claim about the hypotheses needed for the zero triangle integral. The published Goursat theorem derives that conclusion from holomorphy alone and never assumes continuity of $f'$, so the theorem directly refutes the extra-hypothesis claim. Distinguish this from the true sufficient Green-theorem proof under continuous partial derivatives.",
+        "deps": [
+          "thm-goursat-triangle-theorem"
+        ]
+      },
+      {
+        "id": "fs-every-continuous-function-on-a-convex-domain-has-a-primitive",
+        "kind": "false-statement",
+        "title": "FALSE: every continuous complex-valued function on a convex domain has a primitive",
+        "strategy": "On the convex domain $\\mathbb C$, take $f(z)=\\overline z$. Along the unit circle, $z\\overline z=1$ gives $\\overline z=1/z$, so the published circle computation yields integral $2\\pi i$. If a primitive existed, the published closed-contour theorem would force the same integral to be zero. Verify continuity of conjugation and convexity of the whole plane directly.",
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "lem-complex-conjugation-and-modulus-laws",
+          "thm-circle-integrals-of-integer-monomials",
+          "cor-closed-contour-integral-of-a-derivative-is-zero"
+        ]
+      }
+    ]
   }
 ]

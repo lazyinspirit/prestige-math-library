@@ -1,0 +1,178 @@
+[
+  {
+    "defect_id": "f15-a-6b-001",
+    "run": "frontier-15",
+    "at": "2026-08-17",
+    "class": "accuracy",
+    "subclass": "invalid-inference",
+    "severity": "fatal",
+    "location": "proof-step",
+    "subject": "thm-sylow-first-theorem",
+    "batch": "2",
+    "subclass_note": "Two of the four numbered steps announced a method instead of performing an inference: 1.1 was \"We use strong induction on |G| and Wielandt's left action on the p^a-element subsets of G\" and 3.1 was in full \"We apply induction to that stabilizer.\" The load-bearing content was absent in both directions: nothing showed why the stabilizer H of a p-prime-index orbit is proper unless G is a p-group (it needs H=G implies A=G implies m=1), and nothing showed the induction hypothesis applies to H (it needs |H| = p^a m' with p not dividing m', from Lagrange plus p^a | |H|). The strategy was sound; the proof did not establish the Statement. The contract's input map recorded all six facts as used at step 1.1, the announcement step, so its coverage check passed over a step that used none of them.",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "rewrite",
+    "prevention": {
+      "kind": "mechanical",
+      "ref": "Detector run at 6b: a numbered proof step containing no LaTeX math whose text opens with a method-announcement verb (We use/We apply/Apply/Cover/Include/Handle/Treat/Check). 50 candidates across batches 1-3, triaged to 21 real non-dispositions, of which this was the only fatal."
+    }
+  },
+  {
+    "defect_id": "f15-a-6b-002",
+    "run": "frontier-15",
+    "at": "2026-08-17",
+    "class": "accuracy",
+    "subclass": "missing-choice-scope",
+    "severity": "fatal",
+    "location": "statement",
+    "subject": "thm-composition-series-iff-noetherian-and-artinian",
+    "batch": "2",
+    "subclass_note": "The Statement and title asserted the biconditional unconditionally while proof step 2.1 read \"dependent choice gives a descending chain\", and both cited characterization theorems ([L2], [L3]) flag in their own restatements that the maximal- and minimal-member implications use dependent choice. Same defect class that reader 2 itself declared fatal twice in the same batch (R2-37, R2-38, on the Axiom of Choice) and that reader 3 declared fatal fifteen times in batch 3; missed here because the choice principle was dependent choice rather than AC and sat in the chain-conditions cluster rather than the semisimple one. Narrowed rather than widened: the forward direction is genuinely choice-free, so dependent choice is now scoped to the converse only, and neither consumer (cor-semisimple-rings-are-noetherian-and-artinian, fs-every-module-has-a-composition-series) inherits it because both use only the forward direction.",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "should_have_caught": "6a-read",
+    "disposition": "narrowed",
+    "repair_cost": "inline-fix",
+    "prevention": {
+      "kind": "mechanical",
+      "ref": "Detector run at 6b: an item whose Proof/Verification/Refutation body names a choice principle (axiom of choice, dependent choice, countable choice, Zorn, well-ordering, transfinite recursion) while neither its title nor its Statement declares one. Three hits across batches 1-3: two fatal, one false positive (thm-finite-length-semisimple-module-characterizations, whose Statement advertises choice-freeness and whose proof says so)."
+    }
+  },
+  {
+    "defect_id": "f15-a-6b-003",
+    "run": "frontier-15",
+    "at": "2026-08-17",
+    "class": "accuracy",
+    "subclass": "missing-choice-scope",
+    "severity": "fatal",
+    "location": "statement",
+    "subject": "thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules",
+    "batch": "2",
+    "subclass_note": "Statement and title unconditional; proof step 3.1 was \"Zorn supplies a maximal proper submodule\", and its own [L3] restates thm-zorn beginning \"Assume the Axiom of Choice\". The hypothesis was dropped between the cited Statement and the citing one. Found by the same detector as f15-a-6b-002. Repair also had to propagate one step: the consumer thm-equivalent-characterizations-of-semisimple-modules already declared AC in its own Statement, but its [L2] restatement of this theorem did not, so adding the hypothesis to the source turned that Fact into a citation that drops it.",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "prevention": {
+      "kind": "mechanical",
+      "ref": "Same undeclared-choice detector as f15-a-6b-002."
+    }
+  },
+  {
+    "defect_id": "f15-a-6b-004",
+    "run": "frontier-15",
+    "at": "2026-08-17",
+    "class": "accuracy",
+    "subclass": "false-boundary-disposition",
+    "severity": "nonfatal",
+    "location": "proof-step",
+    "subject": "batch-2: 12 items whose closing proof step named boundary cases without discharging them",
+    "batch": "2",
+    "subclass_note": "A closing step of the form \"We include the trivial group and the one-prime case. This proves the stated claim.\" names cases and checks none — the prose form of the templated not_applicable row the owner's rules single out. Items: thm-sylow-first-theorem, lem-finite-nilpotence-via-normal-sylow-subgroups, thm-maximal-subgroups-of-finite-nilpotent-groups, thm-normalizer-condition-for-finite-nilpotent-groups, thm-frattini-subgroup-is-nilpotent, thm-second-isomorphism-theorem-modules, thm-third-isomorphism-theorem-modules, thm-submodules-and-quotients-of-semisimple-modules, thm-socle-is-the-largest-semisimple-submodule, cor-finite-direct-sums-preserve-chain-conditions, cor-noetherian-modules-are-hopfian, cor-rational-algebraic-integers-are-integers, thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, thm-schurs-lemma-for-modules, fs-every-module-has-a-composition-series. I evaluated every named case from disk before repairing: all were true, so no fatal defect was hiding behind one this time. The mechanism that let them through is worth more than the instances: the contract's boundary evidence string was built by quoting the proof's final step, so where that step was an announcement the boundary row quoted the announcement and the non-disposition appeared twice, confirming itself. boundary-audit's template detector cannot form a cluster because each announcement is worded differently. 32 such rows re-anchored with per-case evidence.",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "should_have_caught": "5-author",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "prevention": {
+      "kind": "mechanical",
+      "ref": "boundary-audit.mjs should flag a boundary row whose evidence is a verbatim quotation of a proof step that itself contains no mathematical content — the self-confirming pair. The existing template-reuse detector fires on repetition across rows and is blind to a row that repeats its own step."
+    }
+  },
+  {
+    "defect_id": "f15-a-6b-005",
+    "run": "frontier-15",
+    "at": "2026-08-17",
+    "class": "accuracy",
+    "subclass": "citation-misattributed",
+    "severity": "nonfatal",
+    "location": "proof-step",
+    "subject": "thm-groups-of-order-thirty-have-a-normal-sylow-subgroup",
+    "batch": "2",
+    "subclass_note": "Step 1.1 cited all ten facts [L1]-[L10] in one bracket while using two of them; step 4.1 made the inference \"normal in the kernel and hence normal in G\", which is invalid in general and is licensed here only by [L9] (cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal), which step 4.1 does not cite. The fact is declared and true of this situation, so the mathematics holds and the gap is inside the 30-second rule; but because step 1.1's shotgun bracket claimed every fact, the contract's input map recorded [L9] as used at a step that does not use it, and the coverage check passed without any step accounting for the actual inference. Recorded, not repaired: the step numbering and citation redistribution would move the item hash for a defect that is presentational, and step 8 is the wrong place to discover it.",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "should_have_caught": "6a-read",
+    "disposition": "nonfatal-recorded",
+    "repair_cost": "inline-fix",
+    "prevention": {
+      "kind": "mechanical",
+      "ref": "proof-contract could flag a single step whose input bracket names more than half the item's declared facts: a shotgun bracket satisfies the exactly-once input map while attributing every fact to one step."
+    }
+  },
+  {
+    "defect_id": "f15-a-6b-006",
+    "run": "frontier-15",
+    "at": "2026-08-17",
+    "class": "accuracy",
+    "subclass": "invalid-inference",
+    "severity": "nonfatal",
+    "location": "proof-step",
+    "subject": "thm-jordan-holder-theorem-for-modules",
+    "batch": "2",
+    "subclass_note": "Reader 2 rewrote this proof under R2-7 and the rewrite is correct — I re-derived the whole induction, including that the A != B branch's series of C has length n-2 and that the two factor multisets agree via A/C ~ M/B and B/C ~ M/A. But its closing sentence, \"This also covers n=1, when C=0\", is wrong about its own branch: at n=1 the module M is simple, so its only maximal proper submodule is 0 and A=B necessarily, making the A != B branch vacuous rather than covered. Taking the sentence at face value would put step 4.1's length count at n-2 = -1. The case is genuinely handled, by step 2.1's A = B branch.",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "6a-read",
+    "should_have_caught": "6a-read",
+    "disposition": "nonfatal-recorded",
+    "repair_cost": "inline-fix",
+    "prevention": {
+      "kind": "process",
+      "ref": "A reader that rewrites a proof owns its boundary sentences too; the rewrite was checked for validity but its inherited closing clause was not re-derived against the new argument."
+    }
+  },
+  {
+    "defect_id": "f15-a-6b-007",
+    "run": "frontier-15",
+    "at": "2026-08-17",
+    "class": "silent-runtime",
+    "subclass": "gate-vacuous",
+    "severity": "nonfatal",
+    "location": "contract-row",
+    "subject": "finite-smoke registers zero obligations across all 175 proof-bearing items in batches 1-3",
+    "batch": "1,2,3",
+    "subclass_note": "finite-smoke.mjs reports \"0 error(s), 0 check(s) over 0/26, 0/90, 0/59 item(s) carrying obligations\" — it runs, exits zero and checks nothing, in three batches whose content is unusually rich in bounded finite claims: Sylow counts for groups of order at most fifteen, S_4, A_5 and Aff(Z/5); the length of Z/p^k; the reciprocity table for small odd primes; square-root counts modulo n; the order of Aut((Z/p)^2). These are exactly the claims a bounded countermodel search can falsify. The gate is green because nobody registered an obligation, which is indistinguishable in the output from a gate that searched and found nothing.",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "5-author",
+    "should_have_caught": "5-author",
+    "disposition": "open",
+    "repair_cost": "tool-change",
+    "prevention": {
+      "kind": "mechanical",
+      "ref": "finite-smoke should distinguish \"searched, found nothing\" from \"no obligation registered\", and a batch with zero obligations over ninety proof-bearing items should be a warning rather than a pass. Registering the obligations themselves is step-5 authoring work and is recorded here as open for the lead Alpha."
+    }
+  },
+  {
+    "defect_id": "f15-a-6b-008",
+    "run": "frontier-15",
+    "at": "2026-08-17",
+    "class": "accuracy",
+    "subclass": "citation-missing",
+    "severity": "nonfatal",
+    "location": "frontmatter",
+    "subject": "batches 1-2: 7 manifest rows disagreeing with the authored item frontmatter",
+    "batch": "1,2",
+    "subclass_note": "Four batch-1 items declare a dependency the manifest lacks (prop-jacobi-symbol-on-units-is-a-homomorphism/thm-unit-criterion-modulo-n, thm-jacobi-map-kernel-and-square-subgroup/def-jacobi-symbol, cex-jacobi-symbol-one-does-not-imply-a-square/prop-unit-square-has-jacobi-symbol-one, ex-primes-dividing-x-squared-plus-three/thm-legendre-symbol-multiplicativity), left behind when reader 1 added the edges. In batch 2 the pair thm-lagrange + thm-number-of-bijections-of-a-finite-set sits on the manifest row for thm-groups-of-order-thirty-have-a-normal-sylow-subgroup while the item that actually gained those inputs under R2-15 is thm-groups-of-order-one-hundred-five-have-a-normal-sylow-subgroup — a transcription slip that put the sync on the neighbouring theorem. Batch 3 had zero drift. All synced to the item frontmatter, which is the truth about what each proof cites.",
+    "caught_at_stage": "6b-adjudicate",
+    "caught_by_role": "group-alpha",
+    "introduced_at_stage": "6a-read",
+    "should_have_caught": "6a-read",
+    "disposition": "fixed",
+    "repair_cost": "inline-fix",
+    "prevention": {
+      "kind": "mechanical",
+      "ref": "A manifest-vs-frontmatter diff belongs in the 6b gate set. Note for whoever writes it: compare YAML-parsed titles against JSON-parsed titles — comparing the raw frontmatter line against the parsed manifest value reports every backslash-bearing title as drift, which is how my first pass produced 30 false positives."
+    }
+  }
+]

@@ -1,0 +1,2939 @@
+{
+ "version": 1,
+ "level": "frontier-15",
+ "scope": [
+  "lem-gauss-lower-half-lattice-count",
+  "lem-reciprocity-rectangle-lattice-count",
+  "thm-quadratic-reciprocity",
+  "prop-jacobi-symbol-well-defined",
+  "thm-jacobi-symbol-multiplicativity",
+  "prop-jacobi-symbol-on-units-is-a-homomorphism",
+  "thm-jacobi-symbol-supplements",
+  "thm-jacobi-symbol-reciprocity",
+  "thm-euclidean-algorithm-for-jacobi-symbol",
+  "prop-unit-square-has-jacobi-symbol-one",
+  "cor-jacobi-symbol-minus-one-obstructs-square",
+  "lem-nonsingular-square-root-lift-modulo-odd-prime-powers",
+  "thm-unit-square-criterion-modulo-odd-prime-powers",
+  "thm-unit-square-criterion-modulo-two-powers",
+  "thm-unit-square-criterion-modulo-n",
+  "cor-number-of-square-roots-of-a-unit-modulo-n",
+  "thm-jacobi-map-kernel-and-square-subgroup",
+  "ex-complete-reciprocity-table-for-small-odd-primes",
+  "ex-jacobi-symbol-by-the-euclidean-algorithm",
+  "cex-jacobi-symbol-one-does-not-imply-a-square",
+  "ex-square-roots-modulo-an-odd-prime-power",
+  "ex-four-square-roots-modulo-a-power-of-two",
+  "ex-square-roots-modulo-a-composite-by-crt",
+  "cex-square-modulo-each-prime-does-not-ignore-the-two-part",
+  "ex-primes-dividing-x-squared-plus-three",
+  "cor-infinitely-many-primes-congruent-to-one-modulo-three"
+ ],
+ "contracts": {
+  "lem-gauss-lower-half-lattice-count": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-gauss-quadratic-residue-lemma",
+     "source_section": "Statement",
+     "quote": "Then\n\n$$\\left(\\frac ap\\right)=(-1)^{N(a,p)}.$$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-division-algorithm-in-z",
+     "source_section": "Statement",
+     "quote": "$$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$$\n\nand the pair $(q,r)$ with these two properties is unique.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-gauss-half-system-permutation",
+     "source_section": "Statement",
+     "quote": "Let $p$ be an odd prime, let $p\\nmid a$, and put $m=(p-1)/2$. For each $1\\le j\\le m$, there are unique $\\varepsilon_j\\in\\{1,-1\\}$ and $r_j\\in\\{1,\\ldots,m\\}$ such that\n\n$$aj\\equiv\\varepsilon_jr_j\\pmod p.$$\n\nThe absolute representatives $r_1,\\ldots,r_m$ are a permutation of $1,\\ldots,m$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "For each $1\\le x\\le m$, [L2] gives $qx=pt_x+\\rho_x$ with $0\\le\\rho_x<p$; since $p\\nmid qx$, one has $0<\\rho_x<p$. The positive integers $y$ satisfying $py<qx=pt_x+\\rho_x$ are exactly $1,\\ldots,t_x$, so $S_{p,q}=\\sum_{x=1}^{m}t_x$.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "In the notation of [L3], $\\rho_x=u_x$ when $\\varepsilon_x=1$ and $\\rho_x=p-u_x$ when $\\varepsilon_x=-1$; the negative signs are exactly the residues counted by $N(q,p)$. Summing the equations of step 1.1 and reducing modulo $2$ gives $\\sum_x x\\equiv S_{p,q}+\\sum_x\\rho_x\\pmod2$, because $p$ and $q$ are odd. Also $\\sum_x\\rho_x\\equiv\\sum_xu_x+N(q,p)\\pmod2$, while the permutation in [L3] gives $\\sum_xu_x=\\sum_xx$. Hence $S_{p,q}\\equiv N(q,p)\\pmod2$, and [L1] yields $\\left(\\frac qp\\right)=(-1)^{S_{p,q}}$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L3",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 1.1 uses $p\\ge3$, so $1\\le x\\le(p-1)/2$ is nonempty even at $p=3$."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 proves $r_x\\ne0$ from the distinct-prime hypotheses before counting strict inequalities."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "At $p=3$ the half-range has the single index $x=1$; steps 1.1–2.1 still give the quotient count and parity identity without dividing by the range size."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The smallest pair of distinct odd primes is covered by the same division and parity argument in steps 1.1–2.1."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 uses $0<py<qx$ and includes $x=(p-1)/2$; neither equality is accidentally counted."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The quotient and remainder in step 1.1 are unique by [L2], so no arbitrary representative is selected."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the lower-half lattice count is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the lower-half lattice count is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha-a frontier-15 (Claude Opus 5, xhigh, 1M) — read by Alpha directly; no independent refuter, lane quota-locked",
+    "refuter": "none — GPT 5.6 Sol lane quota-locked until 2026-08-20; read by Alpha directly",
+    "notes": "I re-derived the whole parity computation. Step 1.1: for each x, qx = p t_x + rho_x with 0 < rho_x < p, and the positive y with py < qx are exactly 1..t_x because rho_x/p lies strictly in (0,1), so S = sum t_x. Step 2.1: rho_x = u_x when eps_x = +1 and p - u_x when eps_x = -1, and since every u_x <= (p-1)/2 < p/2, the residues exceeding p/2 are exactly the eps_x = -1 ones, so the sign count N(q,p) is the count of minus signs. Summing qx = p t_x + rho_x and reducing mod 2 with p, q odd gives sum x = S + sum rho_x; sum rho_x = sum u_x + N mod 2; and the permutation clause of [L3] gives sum u_x = sum x. Hence S = N mod 2. Correct, and the claim in the Statement that this avoids floor notation is true of the text. Disposition: no defect."
+   }
+  },
+  "lem-reciprocity-rectangle-lattice-count": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-gauss-lower-half-lattice-count",
+     "source_section": "Statement",
+     "quote": "Put $S_{p,q}:=|\\{(x,y)\\in\\mathbb Z^2:1\\le x\\le(p-1)/2,\\ 0<py<qx\\}|$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-euclids-lemma",
+     "source_section": "Statement",
+     "quote": "$$p \\mid a \\qquad \\text{or} \\qquad p \\mid b .$$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "No point $(x,y)\\in R$ lies on the diagonal $py=qx$: equality would give $p\\mid qx$, so [L2] would give $p\\mid q$ or $p\\mid x$; distinctness of the primes rules out the first alternative, while $1\\le x\\le(p-1)/2<p$ rules out the second. Thus every point of $R$ satisfies exactly one of $py<qx$ and $qx<py$.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The points of $R$ with $py<qx$ are exactly those counted by $S_{p,q}$: the inequality itself forces $y<q/2$, hence $y\\le(q-1)/2$; after interchanging the coordinates and the primes, the points with $qx<py$ are exactly those counted by $S_{q,p}$. By step 1.1 these two sets partition $R$, whose cardinality is $((p-1)/2)((q-1)/2)=(p-1)(q-1)/4$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Statement boundary: for odd primes the coordinate ranges contain at least one integer, including the boundary case $p=3$ or $q=3$."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "Both coordinates start at one and both prime side lengths are positive."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "A half-range may contain exactly one coordinate when its prime is three; step 2.1 still counts its Cartesian product correctly."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Distinctness of the primes is used in step 1.1; the excluded case $p=q$ is exactly where the diagonal contains lattice points."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 checks diagonal equality, and step 2.1 includes both upper integer endpoints of the open geometric rectangle."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof partitions an explicitly defined finite set and makes no existential choice."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the reciprocity rectangle partition is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the reciprocity rectangle partition is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha-a frontier-15 (Claude Opus 5, xhigh, 1M) — read by Alpha directly; no independent refuter, lane quota-locked",
+    "refuter": "none — GPT 5.6 Sol lane quota-locked until 2026-08-20; read by Alpha directly",
+    "disposition": "Checked both halves of the partition. No point of the rectangle lies on py = qx, by Euclid [L2] and 1 <= x < p. The points with py < qx are exactly those S_{p,q} counts, because py < qx <= q(p-1)/2 < qp/2 forces y <= (q-1)/2 automatically, so the extra rectangle constraint is not an extra constraint; and (x,y) -> (y,x) is a bijection from the qx < py part onto the set S_{q,p} counts. |R| = ((p-1)/2)((q-1)/2). Disposition: no defect."
+   }
+  },
+  "thm-quadratic-reciprocity": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-gauss-lower-half-lattice-count",
+     "source_section": "Statement",
+     "quote": "Then $\\left(\\frac qp\\right)=(-1)^{S_{p,q}}$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-reciprocity-rectangle-lattice-count",
+     "source_section": "Statement",
+     "quote": "Then $S_{p,q}+S_{q,p}=(p-1)(q-1)/4$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Applying [L1] in both orientations, multiplying, and then using [L2] gives $\\left(\\frac pq\\right)\\left(\\frac qp\\right)=(-1)^{S_{q,p}+S_{p,q}}=(-1)^{(p-1)(q-1)/4}$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The exponent is $((p-1)/2)((q-1)/2)$, which is odd exactly when both factors are odd, equivalently when $p\\equiv q\\equiv3\\pmod4$. Since the Legendre symbols are signs for distinct primes, their product is then $-1$, and in every other case it is $1$, proving the equivalent formulation.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The theorem concerns a fixed pair of primes rather than an indexed family."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "Odd primes make both Legendre symbols nonzero because the primes are distinct."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "If either prime is $3$, its lower-half count has a one-element index range; [L1] and [L2] already include this case and steps 1.1–2.1 require no larger range."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: distinctness is required by both cited lemmas; no claim is made for the diagonal case $p=q$."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "All lattice endpoint work is discharged in [L1] and [L2] before step 1.1."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "No prime, root, or representative is chosen in the two-step deduction."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of quadratic reciprocity is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of quadratic reciprocity is not a biconditional."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "prop-jacobi-symbol-well-defined": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-jacobi-symbol",
+     "source_section": "Definition",
+     "quote": "For odd $n\\ge1$ with canonical prime factorisation $n=\\prod_{i<r}p_i^{e_i}$, define $\\left(\\frac an\\right):=\\prod_{i<r}\\left(\\frac a{p_i}\\right)^{e_i}$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-canonical-prime-factorisation",
+     "source_section": "Statement",
+     "quote": "the exponents are determined by $n$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "prop-legendre-symbol-well-defined",
+     "source_section": "Statement",
+     "quote": "For every odd prime $p$, the Legendre symbol belongs to $\\{-1,0,1\\}$, depends only on the numerator modulo $p$, and satisfies\n\n$$\\left(\\frac ap\\right)=0\\quad\\Longleftrightarrow\\quad p\\mid a.$$",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "lem-every-integer-above-one-has-a-prime-divisor",
+     "source_section": "Statement",
+     "quote": "In particular every integer greater than $1$ has a\nprime divisor.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The uniqueness in [L2] fixes the set of prime factors and every exponent in [L1]; changing their order does not change a finite product of integers. Each factor belongs to $\\{-1,0,1\\}$ by [L3], so their product does too, and at $n=1$ the empty product is $1$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If $a\\equiv b\\pmod n$, then $a\\equiv b\\pmod p$ for every prime factor $p$ of $n$, so [L3] makes every corresponding factor in [L1] equal. The product is zero exactly when some prime factor $p$ of $n$ divides $a$, which gives $\\gcd(a,n)>1$; conversely, if $\\gcd(a,n)>1$, [L4] supplies a prime divisor of the gcd, hence a prime factor of $n$ dividing $a$, and [L3] makes that Legendre factor zero.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L3",
+      "L4",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 1.1 evaluates the empty prime factorisation at $n=1$ as the product one."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 identifies the zero value exactly with a common prime divisor instead of assuming coprimality."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The denominator-one convention is explicitly discharged in step 1.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Repeated prime factors are handled through their canonical exponents in step 1.1."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No ordered range other than the finite factor list enters the well-definedness proof."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 uses uniqueness of canonical prime exponents and therefore makes no choice of a factorisation."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 2.1 proves that a zero Jacobi product gives a prime common divisor and hence $\\gcd(a,n)>1$."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 2.1 proves that $\\gcd(a,n)>1$ supplies a common prime divisor and hence a zero Legendre factor."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "Statement is ai-altered, so I checked the claim itself and not only the proof. Four assertions, each discharged: order-independence and the exponent set come from the uniqueness clause of [L2]; membership in {-1,0,1} is closed because a finite product of elements of {-1,0,1} stays there; the zero criterion is a genuine biconditional and both directions are present, with [L4] supplying the prime divisor of the gcd in the direction that needs it. The product-is-zero step is licensed only because canonical exponents are positive, so no factor is an empty power — that is what makes 'zero iff some Legendre factor is zero' true in Z. Instantiated n=1 (empty product 1, gcd(a,1)=1, so the nonzero value is consistent with the zero criterion) and a=0 with n>1 (gcd = n > 1 and every factor (0/p_i) is 0). No defect."
+   }
+  },
+  "thm-jacobi-symbol-multiplicativity": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-jacobi-symbol",
+     "source_section": "Definition",
+     "quote": "For odd $n\\ge1$ with canonical prime factorisation $n=\\prod_{i<r}p_i^{e_i}$, define $\\left(\\frac an\\right):=\\prod_{i<r}\\left(\\frac a{p_i}\\right)^{e_i}$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-legendre-symbol-multiplicativity",
+     "source_section": "Statement",
+     "quote": "$$\\left(\\frac{ab}{p}\\right)=\\left(\\frac ap\\right)\\left(\\frac bp\\right).$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-canonical-prime-factorisation",
+     "source_section": "Statement",
+     "quote": "the exponents are determined by $n$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "lem-p-adic-valuation-additive",
+     "source_section": "Statement",
+     "quote": "$$v_p(ab) \\;=\\; v_p(a) + v_p(b),$$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-fundamental-theorem-of-arithmetic",
+     "source_section": "Statement",
+     "quote": "Every $n \\in \\mathbb{Z}$ with $n \\ge 1$ is $\\prod_{i<r} p_i$\n   for some $r \\in \\mathbb{N}$ and some list $p$ of primes of length $r$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Apply [L2] to every prime factor in [L1] and regroup the finite product: $\\left(\\frac{ab}{n}\\right)=\\prod_i\\left(\\frac a{p_i}\\right)^{e_i}\\prod_i\\left(\\frac b{p_i}\\right)^{e_i}=\\left(\\frac an\\right)\\left(\\frac bn\\right)$. This remains valid when a Legendre factor is zero.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "By [L5], choose finite prime factorisations of $m$ and $n$; concatenating their factor lists gives a prime factorisation of $mn$. Grouping equal primes and using [L3] and [L4], the exponent of each prime in $mn$ is the sum of its exponents in $m$ and $n$. Substituting those sums in [L1] and regrouping gives $\\left(\\frac a{mn}\\right)=\\left(\\frac am\\right)\\left(\\frac an\\right)$. If either denominator is $1$, its factor list is empty and its contribution is $1$.",
+     "step": "2.1",
+     "inputs": [
+      "L1",
+      "L3",
+      "L4",
+      "L5",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 2.1 treats a denominator equal to one through the empty prime product."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 retains zero Legendre factors, so numerator multiplicativity does not silently assume units."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 2.1 checks both denominator-one identities."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: shared prime divisors of $m$ and $n$ are handled by adding exponents; no coprimality hypothesis is imposed."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No ordered interval or index endpoint appears beyond finite-product conventions."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Canonical exponents and algebraic regrouping make no existential choice."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of Jacobi multiplicativity is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of Jacobi multiplicativity is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha-a frontier-15 (Claude Opus 5, xhigh, 1M) — read by Alpha directly; no independent refuter, lane quota-locked",
+    "refuter": "none — GPT 5.6 Sol lane quota-locked until 2026-08-20; read by Alpha directly",
+    "notes": "Reader 1 added [L5] (fundamental theorem of arithmetic) for factorisation existence, which R1-2 correctly identified as absent: thm-canonical-prime-factorisation begins from a supplied factor list and does not produce one. I confirmed the repaired step 2.1 uses [L5] for existence and [L3]/[L4] only for canonical exponents and valuation additivity, and that step 1.1 needs no existence input because [L1] is the definition of the symbol, which carries the factorisation with it. The n = 1 empty-product case is stated. Disposition: reader repair confirmed correct."
+   }
+  },
+  "prop-jacobi-symbol-on-units-is-a-homomorphism": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "prop-jacobi-symbol-well-defined",
+     "source_section": "Statement",
+     "quote": "For every integer $a$ and odd positive integer $n$, the product in [[def-jacobi-symbol]] is independent of the ordering used to list the canonical prime factors and belongs to $\\{-1,0,1\\}$. The Jacobi symbol depends only on $a\\pmod n$, and it is zero exactly when $\\gcd(a,n)>1$. At $n=1$ it has the value $1$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-jacobi-symbol-multiplicativity",
+     "source_section": "Statement",
+     "quote": "For integers $a,b$ and an odd positive integer $n$,\n\n$$\\left(\\frac{ab}{n}\\right)=\\left(\\frac an\\right)\\left(\\frac bn\\right).$$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-unit-group-modulo-n-and-euler-totient",
+     "source_section": "Definition",
+     "quote": "$$(\\mathbb Z/n)^\\times:=\\{\\,u\\in\\mathbb Z/n:\\text{some }v\\in\\mathbb Z/n\\text{ satisfies }uv=[1]_n\\,\\}.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-unit-criterion-modulo-n",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "def-group-homomorphism",
+     "source_section": "Definition",
+     "quote": "$$f(xy) \\;=\\; f(x)\\, f(y) \\qquad \\text{for all } x, y \\in G .$$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L1], the value $\\left(\\frac an\\right)$ depends only on the residue class. By [L3] and [L4], a unit class has $\\gcd(a,n)=1$, so [L1] rules out the value zero; hence $\\chi_n$ is a well-defined function from $(\\mathbb Z/n)^\\times$ to $\\{\\pm1\\}$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L3",
+      "L4"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "For unit classes $[a]_n$ and $[b]_n$, [L2] gives $\\chi_n([a]_n[b]_n)=\\chi_n([ab]_n)=\\chi_n([a]_n)\\chi_n([b]_n)$, which is the condition in [L5]. Thus $\\chi_n$ is a group homomorphism, including when $n=1$ and the unit group has one element.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L2",
+      "L5"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The map is defined on a fixed unit group, not by an indexed family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 excludes the zero Jacobi value precisely because every domain element is a unit."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 2.1 handles modulus one and the identity value explicitly."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "At $n=1$ both domain and codomain image reduce to the identity case checked in step 2.1."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval or bounded summation occurs in defining the homomorphism."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Representative independence makes the map canonical; no representative is selected."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the Jacobi homomorphism is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the Jacobi homomorphism is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "The risk here is the codomain, not the algebra: chi_n is asserted to land in {±1} rather than {-1,0,1}, and step 1.1 earns that by ruling out 0 through [L4]'s unit criterion plus [L1]'s zero criterion, in that order. Multiplicativity in [L2] is numerator multiplicativity, which is what the homomorphism property needs, and it is applied to the numerator. Instantiated n=1: the unit group is trivial, chi_1 sends it to (a/1)=1, and a homomorphism onto the one-element subgroup of {±1} is still a homomorphism into {±1} — the Statement's second paragraph says exactly this and is not overclaiming. No defect."
+   }
+  },
+  "thm-jacobi-symbol-supplements": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-jacobi-symbol",
+     "source_section": "Definition",
+     "quote": "For odd $n\\ge1$ with canonical prime factorisation $n=\\prod_{i<r}p_i^{e_i}$, define $\\left(\\frac an\\right):=\\prod_{i<r}\\left(\\frac a{p_i}\\right)^{e_i}$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-jacobi-symbol-multiplicativity",
+     "source_section": "Statement",
+     "quote": "For an integer $a$ and odd positive integers $m,n$,\n\n$$\\left(\\frac a{mn}\\right)=\\left(\\frac am\\right)\\left(\\frac an\\right).$$",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-first-supplement-to-quadratic-reciprocity",
+     "source_section": "Statement",
+     "quote": "$$\\left(\\frac{-1}{p}\\right)=(-1)^{(p-1)/2}.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-second-supplement-to-quadratic-reciprocity",
+     "source_section": "Statement",
+     "quote": "$$\\left(\\frac2p\\right)=(-1)^{(p^2-1)/8}.$$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Expand $\\left(\\frac{-1}{n}\\right)$ through [L1], applying [L3] to every prime factor with multiplicity and [L2] to multiply the contributions. For odd $u,v$, the difference $(uv-1)/2-(u-1)/2-(v-1)/2=(u-1)(v-1)/2$ is even, so iteration through the factor list gives $\\left(\\frac{-1}{n}\\right)=(-1)^{(n-1)/2}$; for the empty factor list $n=1$, both sides are $1$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Similarly, [L1] and [L4] give the product of the signs $(-1)^{(p^2-1)/8}$ with multiplicity. For odd $u,v$, the difference $((uv)^2-1)/8-(u^2-1)/8-(v^2-1)/8=(u^2-1)(v^2-1)/8$ is even, because each of $u^2-1$ and $v^2-1$ is divisible by $8$. Iterating this identity gives $\\left(\\frac2n\\right)=(-1)^{(n^2-1)/8}$, again with value $1$ at $n=1$.",
+     "step": "2.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L4",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Statement boundary: both steps evaluate the empty prime factorisation at $n=1$."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The statement hypothesis that $n$ is positive excludes the zero denominator before the divisions in steps 1.1 and 2.1."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Steps 1.1 and 2.1 explicitly verify both formulas at $n=1$."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: prime powers and repeated prime factors are included by the multiplicity induction in both steps."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no ordered interval; only parity identities for odd products are used."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Canonical prime factors are not selected noncanonically."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the Jacobi supplementary laws is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the Jacobi supplementary laws is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "Both supplements rest on an additivity-mod-2 identity, and that identity is the only thing that can be quietly false, so I verified both by expansion. For odd u,v: (uv-1)/2-(u-1)/2-(v-1)/2 = (uv-u-v+1)/2 = (u-1)(v-1)/2, and (u-1)(v-1) is divisible by 4, so the difference is even. Likewise ((uv)^2-1)/8-(u^2-1)/8-(v^2-1)/8 = (u^2-1)(v^2-1)/8, and since 8 divides each of u^2-1 and v^2-1 the quotient is even. Both exponent maps are therefore additive mod 2 over odd multiplication, which is what licenses iterating over the factor list with multiplicity. [L2] is the denominator-multiplicativity clause and is used as such. n=1 is the empty factor list and both sides are 1, stated in the Statement and in each step. No defect."
+   }
+  },
+  "thm-jacobi-symbol-reciprocity": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-quadratic-reciprocity",
+     "source_section": "Statement",
+     "quote": "For distinct odd primes $p,q$, $\\left(\\frac pq\\right)\\left(\\frac qp\\right)=(-1)^{(p-1)(q-1)/4}$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-jacobi-symbol",
+     "source_section": "Definition",
+     "quote": "For odd $n\\ge1$ with canonical prime factorisation $n=\\prod_{i<r}p_i^{e_i}$, define $\\left(\\frac an\\right):=\\prod_{i<r}\\left(\\frac a{p_i}\\right)^{e_i}$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-jacobi-symbol-multiplicativity",
+     "source_section": "Statement",
+     "quote": "For integers $a,b$ and an odd positive integer $n$,\n\n$$\\left(\\frac{ab}{n}\\right)=\\left(\\frac an\\right)\\left(\\frac bn\\right).$$\n\nFor an integer $a$ and odd positive integers $m,n$,\n\n$$\\left(\\frac a{mn}\\right)=\\left(\\frac am\\right)\\left(\\frac an\\right).$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-canonical-prime-factorisation",
+     "source_section": "Statement",
+     "quote": "the exponents are determined by $n$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-fundamental-theorem-of-arithmetic",
+     "source_section": "Statement",
+     "quote": "Every $n \\in \\mathbb{Z}$ with $n \\ge 1$ is $\\prod_{i<r} p_i$\n   for some $r \\in \\mathbb{N}$ and some list $p$ of primes of length $r$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L5], $m$ and $n$ have finite prime factorisations; grouping equal factors and using [L4], write their canonical forms as $m=\\prod_i p_i^{\\alpha_i}$ and $n=\\prod_j q_j^{\\beta_j}$. Expanding both Jacobi symbols by [L2] and [L3] expresses their product as $\\prod_{i,j}\\left[\\left(\\frac{p_i}{q_j}\\right)\\left(\\frac{q_j}{p_i}\\right)\\right]^{\\alpha_i\\beta_j}$. Coprimality makes every $p_i$ distinct from every $q_j$, so [L1] turns this into $(-1)^E$, where $E=\\sum_{i,j}\\alpha_i\\beta_j(p_i-1)(q_j-1)/4$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "For a product of odd integers, repeated use of $(uv-1)/2\\equiv(u-1)/2+(v-1)/2\\pmod2$ gives $(m-1)/2\\equiv\\sum_i\\alpha_i(p_i-1)/2$ and $(n-1)/2\\equiv\\sum_j\\beta_j(q_j-1)/2$ modulo $2$. Their product is congruent to $E$, so step 1.1 gives the stated sign. If either integer is $1$, the relevant prime list and cross-product are empty and both sides equal $1$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L2",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 2.1 treats an empty prime factorisation when $m=1$ or $n=1$."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Coprimality in step 1.1 ensures no cross Legendre factor is zero."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Both possible denominator-one cases are discharged in step 2.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Repeated prime powers are retained with multiplicity in step 1.1 rather than reduced to squarefree denominators."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No ordered interval occurs in the prime-factor expansion."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The canonical factorisations in [L4] remove any choice of prime presentation."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of Jacobi reciprocity is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of Jacobi reciprocity is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha-a frontier-15 (Claude Opus 5, xhigh, 1M) — read by Alpha directly; no independent refuter, lane quota-locked",
+    "refuter": "none — GPT 5.6 Sol lane quota-locked until 2026-08-20; read by Alpha directly",
+    "notes": "Same repair class as multiplicativity and same verdict. I additionally checked the sign bookkeeping in step 2.1: (uv-1)/2 = (u-1)/2 + (v-1)/2 mod 2 for odd u, v, iterated over the two factorisations, gives (m-1)/2 = sum alpha_i (p_i - 1)/2 and likewise for n, and their product is congruent to E = sum alpha_i beta_j (p_i - 1)(q_j - 1)/4 mod 2. Coprimality is what makes every p_i distinct from every q_j, so [L1] applies to each pair. Disposition: reader repair confirmed correct."
+   }
+  },
+  "thm-euclidean-algorithm-for-jacobi-symbol": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-jacobi-symbol",
+     "source_section": "Definition",
+     "quote": "The value is $0$ exactly when $\\gcd(a,n)>1$, and $\\left(\\frac a1\\right)=1$.",
+     "uses": [
+      "1.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "prop-jacobi-symbol-well-defined",
+     "source_section": "Statement",
+     "quote": "The Jacobi symbol depends only on $a\\pmod n$, and it is zero exactly when $\\gcd(a,n)>1$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-jacobi-symbol-multiplicativity",
+     "source_section": "Statement",
+     "quote": "For integers $a,b$ and an odd positive integer $n$,\n\n$$\\left(\\frac{ab}{n}\\right)=\\left(\\frac an\\right)\\left(\\frac bn\\right).$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-jacobi-symbol-supplements",
+     "source_section": "Statement",
+     "quote": "$$\\left(\\frac{-1}{n}\\right)=(-1)^{(n-1)/2},\\qquad \\left(\\frac2n\\right)=(-1)^{(n^2-1)/8}.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-jacobi-symbol-reciprocity",
+     "source_section": "Statement",
+     "quote": "$$\\left(\\frac mn\\right)\\left(\\frac nm\\right)=(-1)^{(m-1)(n-1)/4}.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-division-algorithm-in-z",
+     "source_section": "Statement",
+     "quote": "$$a \\;=\\; qb + r, \\qquad 0 \\le r < b,$$\n\nand the pair $(q,r)$ with these two properties is unique.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "lem-p-adic-valuation-basic",
+     "source_section": "Statement",
+     "quote": "$a = p^{v} a'$ for some $a' \\in \\mathbb{Z}$ with $a' \\ne 0$ and $p \\nmid a'$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Maintain the invariant $\\left(\\frac an\\right)=\\varepsilon\\left(\\frac AN\\right)$. By [L2] and [L6], replacing $A$ by $r$ preserves the current symbol. If $r=2^sb$, then [L3] and [L4] give $\\left(\\frac rN\\right)=(-1)^{s(N^2-1)/8}\\left(\\frac bN\\right)$. When $\\gcd(b,N)=1$, [L5] gives $\\left(\\frac bN\\right)=(-1)^{(b-1)(N-1)/4}\\left(\\frac Nb\\right)$; when the gcd exceeds $1$, [L1] makes both Jacobi symbols zero, so the same signed equality remains true. Thus every nonterminal update preserves the invariant.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5",
+      "L6",
+      "L7",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "At a nonterminal update, $0<r<N$ and the new denominator is the positive odd part $b\\le r$, so it is strictly smaller than $N$. A strictly decreasing chain of positive integers cannot have more terms than its initial value, so the procedure reaches a terminal state.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L6",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "If $N=1$, [L1] and the invariant give $\\left(\\frac an\\right)=\\varepsilon$. If $r=0$ while $N>1$, then $N$ divides $A$, so [L1] gives $\\left(\\frac AN\\right)=0$ and the invariant gives the returned value $0$. These are all terminal states, proving correctness and termination; only division, extraction of powers of $2$, and sign updates were used, not a factorisation of $n$.",
+     "step": "3.1",
+     "inputs": [
+      "step 1.1",
+      "step 2.1",
+      "L1",
+      "L6"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The deterministic loop has a terminal state but no empty indexed product beyond the definition cited in [L1]."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 3.1 handles a zero remainder and returns the Jacobi zero value."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 3.1 handles denominator one before taking a remainder."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "When the reduced numerator is one, step 1.1 immediately reaches the denominator-one terminal evaluation without an invalid swap."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 uses the strict remainder inequalities $0<r<n$ to prove descent."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Statement boundary: the quotient-remainder pair and the power-of-two exponent are unique, so every update is deterministic."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the Euclidean Jacobi algorithm is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the Euclidean Jacobi algorithm is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "Highest structural risk in the batch (7 dependencies, an algorithm, a termination claim). I checked the loop invariant (a/n) = eps*(A/N) by hand across one full update: (A/N) = (r/N) by [L2]; r = 2^s b gives (r/N) = (-1)^{s(N^2-1)/8}(b/N) by [L3] and [L4]; and reciprocity [L5] gives (b/N) = (-1)^{(b-1)(N-1)/4}(N/b) after multiplying through by (N/b), which is legitimate because (N/b)^2 = 1 when the two are coprime. The gcd>1 branch is the one that usually breaks, and the proof handles it correctly: both (b/N) and (N/b) are 0 by [L1], so the same signed equality holds with both sides zero rather than by an invalid cancellation. Oddness and positivity of the new denominator are maintained because b is the odd part of r>0. Termination: b <= r < N gives a strictly decreasing sequence of positive integers. Both terminal states are evaluated — N=1 returns eps and (A/1)=1, and r=0 with N>1 gives N | A hence gcd = N > 1 hence 0. Note the N=1 test precedes the r=0 test, which is what keeps the two terminal branches from colliding. Instantiated a=0,n=1 (returns 1, matching the empty product) and a=0,n>1 (returns 0), and negative a, which [L2] absorbs through the least nonnegative remainder. The title's 'without factoring the denominator' claim is discharged in 3.1 by naming the operations used. No defect."
+   }
+  },
+  "prop-unit-square-has-jacobi-symbol-one": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "prop-jacobi-symbol-on-units-is-a-homomorphism",
+     "source_section": "Statement",
+     "quote": "The assignment $\\chi_n([a]_n)=\\left(\\frac an\\right)$ is a group homomorphism $(\\mathbb Z/n)^\\times\\to\\{\\pm1\\}$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-unit-criterion-modulo-n",
+     "source_section": "Statement",
+     "quote": "Let $n\\ge1$ and $a\\in\\mathbb Z$. Then $[a]_n$ is a unit of $\\mathbb Z/n$\n([[def-unit-group-modulo-n-and-euler-totient]]) if and only if\n\n$$\\gcd(a,n)=1,$$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L2], $[a]_n$ is a unit. If $v$ is its inverse, then $[x]_n([x]_n v)=[x]_n^2v=[a]_nv=[1]_n$, so $[x]_n$ is also a unit and lies in the domain of [L1].",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Applying [L1] to $[a]_n=[x]_n^2$ gives $\\left(\\frac an\\right)=\\chi_n([a]_n)=\\chi_n([x]_n)^2=1$, since $\\chi_n([x]_n)\\in\\{\\pm1\\}$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "Only one supplied square-root witness is used."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The unit hypothesis used in step 1.1 excludes a zero Jacobi value, including nonunit square targets."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "At $n=1$ the unique class and empty-product Jacobi value make step 2.1 equal to one."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: the one-element unit group at modulus one satisfies the same homomorphism calculation."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval or finite range appears in this group calculation."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Statement boundary: the square root is part of the hypothesis, not selected from an unproved nonempty set."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of unit squares and the Jacobi symbol is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of unit squares and the Jacobi symbol is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "Short, and the only real obligation is that [x]_n lie in the domain of the homomorphism, since chi_n is only defined on units — step 1.1 establishes that from x^2 = a and a being a unit rather than assuming it. The rest is chi_n([x])^2 = 1 for a value in {±1}. n=1 is trivially consistent. No defect."
+   }
+  },
+  "cor-jacobi-symbol-minus-one-obstructs-square": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "prop-unit-square-has-jacobi-symbol-one",
+     "source_section": "Statement",
+     "quote": "If $a$ is a unit square modulo an odd positive integer $n$, then $\\left(\\frac an\\right)=1$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "If $a$ were a square modulo $n$, the gcd hypothesis would make it a unit square and [L1] would give $\\left(\\frac an\\right)=1$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "This contradicts the given value $\\left(\\frac an\\right)=-1$, so $a$ is not a square modulo $n$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "given"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The proof has no indexed family or selection."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The hypothesis fixes the Jacobi symbol at minus one, so the zero branch is excluded."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Statement boundary: at modulus one the Jacobi symbol is one, so the hypothesis is false and the implication is vacuous."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 use only the unit and minus-one hypotheses and remain valid for every allowed odd denominator."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval endpoint or truncated index range occurs."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof makes no choice from a set whose nonemptiness needs discharge."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement is an implication, not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement is an implication, not a biconditional."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "lem-nonsingular-square-root-lift-modulo-odd-prime-powers": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-linear-congruence-solvability-and-solution-count",
+     "source_section": "Statement",
+     "quote": "The congruence\n\n$$ax\\equiv b\\pmod n$$\n\nhas an integer solution if and only if $d\\mid b$. When it is solvable, it has\nexactly $d$ solution classes in $\\mathbb Z/n$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-euclids-lemma",
+     "source_section": "Statement",
+     "quote": "$$p \\mid a \\qquad \\text{or} \\qquad p \\mid b .$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "lem-prime-not-dividing-is-coprime",
+     "source_section": "Statement",
+     "quote": "if $p \\nmid a$ then $p$ and $a$ are coprime",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Reducing the given congruence modulo $p$ shows that $p\\mid x_k$ would force $p\\mid a$, contrary to the hypothesis. If $p\\mid2x_k$, [L2] would give $p\\mid2$ or $p\\mid x_k$; both are impossible because $p$ is odd. Hence $p\\nmid2x_k$, and [L3] gives $\\gcd(2x_k,p)=1$.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "L3",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Write $x_k^2-a=cp^k$. Every class modulo $p^{k+1}$ reducing to $x_k$ modulo $p^k$ has a unique form $x_k+tp^k$ with $t$ modulo $p$, and expansion gives $(x_k+tp^k)^2-a=p^k(c+2x_kt+t^2p^k)$. Since $k\\ge1$, the lift is a root modulo $p^{k+1}$ exactly when $2x_kt\\equiv-c\\pmod p$. By step 1.1 and [L1], this linear congruence has exactly one solution class $t$ modulo $p$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The lemma lifts one supplied root and has no indexed family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 uses $p\\nmid a$ to exclude the singular zero root modulo $p$."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The minimum exponent $k=1$ is admitted and the expansion in step 2.1 still has the required $p^2$ error term."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Oddness of $p$ is spent in step 1.1; the singular prime-two case is deliberately excluded."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The correction parameter is a residue class, not an interval endpoint."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Statement boundary: the error quotient exists by the supplied congruence, and [L1] proves existence and uniqueness of the correction class."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of one-step nonsingular square-root lifting is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of one-step nonsingular square-root lifting is not a biconditional."
+    }
+   ],
+   "finite_smoke": [
+    {
+     "check": "binomial-congruence-solution-count",
+     "asserts": "Equivalently, the root class of $x_k$ modulo $p^k$ has exactly one lift to a root class modulo $p^{k+1}$.",
+     "claim": "Unique lifting is exactly what holds the solution count fixed as the exponent climbs: if some root class lifted in two ways at one step, the count at p^(k+1) would exceed gcd(phi(p^(k+1)), 2) = 2 while the count at p^k stayed 2. The check runs both exponents for 3/9/27, 5/25 and 7/49, so a failure of uniqueness at any of those steps is caught as a wrong count.",
+     "checked_in": "step 2.1"
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "Statement and proof are both ai-altered, so I re-derived the lifting identity rather than recognising it. (x_k+t p^k)^2 - a = p^k(c + 2 x_k t + t^2 p^k) with x_k^2 - a = c p^k, and since k >= 1 the term t^2 p^k vanishes mod p, so the lift condition is exactly 2 x_k t = -c mod p. That 'since k >= 1' is load-bearing and is written down. Nonsingularity is earned, not assumed: p | x_k would force p | a against the hypothesis, and p odd rules out p | 2, so [L2] and [L3] give gcd(2x_k, p) = 1 and [L1] returns exactly one solution class. The uniqueness in the Statement is uniqueness of t mod p, which is what [L1] delivers. Instantiated k=1. No defect."
+   }
+  },
+  "thm-unit-square-criterion-modulo-odd-prime-powers": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nonsingular-square-root-lift-modulo-odd-prime-powers",
+     "source_section": "Statement",
+     "quote": "Let $p$ be an odd prime, let $k\\ge1$, and let $a,x_k\\in\\mathbb Z$ satisfy $p\\nmid a$ and $x_k^2\\equiv a\\pmod{p^k}$. Then there is a unique class $t\\pmod p$ such that $(x_k+tp^k)^2\\equiv a\\pmod{p^{k+1}}$.\n\nEquivalently, the root class of $x_k$ modulo $p^k$ has exactly one lift to a root class modulo $p^{k+1}$.",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "cor-number-of-solutions-to-quadratic-congruence-modulo-prime",
+     "source_section": "Statement",
+     "quote": "$$x^2\\equiv a\\pmod p$$\n\nhas exactly $1+(a/p)$ solution classes modulo $p$.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-legendre-symbol",
+     "source_section": "Definition",
+     "quote": "$$\\left(\\frac ap\\right):=\\begin{cases}0,&p\\mid a,\\\\1,&p\\nmid a\\text{ and }a\\text{ is a quadratic residue modulo }p,\\\\-1,&p\\nmid a\\text{ and }a\\text{ is a quadratic nonresidue modulo }p.\\end{cases}$$",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Any root modulo $p^k$ reduces to a root modulo $p$. Since $p\\nmid a$, [L3] makes $(a/p)$ a sign, and [L2] says that a root exists only when $1+(a/p)=2$, equivalently when $(a/p)=1$.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "L3",
+      "given"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Conversely, if $(a/p)=1$, [L2] gives exactly two root classes modulo $p$. For $k=1$ these are the required roots. For $k>1$, repeatedly apply [L1] from exponent $1$ through exponent $k-1$ to lift each class uniquely; the two lifted classes remain distinct because their reductions modulo $p$ are distinct.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "L2",
+      "L3"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Every root modulo $p^k$ reduces to one of the two roots modulo $p$, and at every successive exponent [L1] forces it to be the unique lift of that reduction. Thus step 1.2 constructs all roots, so there are exactly two. Together with step 1.1 this proves both directions of the criterion and the count.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "L1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The proof follows one prime-power chain rather than a possibly empty factor family."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The hypothesis $p\\nmid a$ is used in step 1.1 and excludes the singular zero target."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.2 treats exponent $k=1$ as the base case."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: the theorem requires an odd prime, exactly the nonsingular setting needed by [L1]."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.2 starts at exponent one and lifts only through exponent $k-1$."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "[L2] proves that the two base roots exist, and [L1] proves existence and uniqueness at every lift in steps 1.2–2.1."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 1.1 proves that solubility modulo $p^k$ forces Legendre symbol one."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Steps 1.2–2.1 prove that Legendre symbol one yields exactly two roots."
+    }
+   ],
+   "finite_smoke": [
+    {
+     "check": "binomial-congruence-solution-count",
+     "asserts": "When soluble it has exactly two solution classes modulo $p^k$.",
+     "claim": "Every odd prime power below the search bound has a primitive root, so at exponent m = 2 the check computes gcd(phi(p^k), 2) = 2 — phi(p^k) = p^(k-1)(p-1) is even — and compares it against the actual number of solutions of x^2 = a for every solvable unit a. A count other than two at any of 3, 9, 27, 5, 25, 7, 49, 11, 13, ... is a countermodel to this clause.",
+     "checked_in": "steps 1.2 and 2.1"
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "A biconditional plus an exact count, so I checked both directions and the count separately. Forward: a root mod p^k reduces to a root mod p, and [L2]'s count 1+(a/p) is nonzero only when (a/p)=1, given that p does not divide a so the symbol is a sign by [L3]. Reverse: two root classes mod p, lifted uniquely through exponents 1..k-1 by [L1], staying distinct because their reductions mod p differ. The count argument in 2.1 is the injectivity half — every root mod p^k is the unique lift of its reduction — and combined with 1.2's surjectivity it gives exactly two, not at least two. Instantiated k=1, where the two classes are distinct precisely because p is odd. No defect."
+   }
+  },
+  "thm-unit-square-criterion-modulo-two-powers": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-unit-group-modulo-two-power-structure",
+     "source_section": "Statement",
+     "quote": "More precisely, every unit has a unique representation $(-1)^\\varepsilon5^j$ with $\\varepsilon\\in\\{0,1\\}$ and $j$ modulo $2^{k-2}$.",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Modulo $2$, the unique odd class is $1$ and its square is $1$. Modulo $4$, the odd classes $1$ and $3$ both square to $1$, so an odd target is soluble exactly when it is $1$ modulo $4$, and then both odd classes are roots.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "Let $k\\ge3$ and write a unit uniquely as $(-1)^\\varepsilon5^j$ by [L1]. Squaring sends $(\\varepsilon,j)$ to $(0,2j)$, so a unit is a square exactly when $\\varepsilon=0$ and $j$ is even. Modulo $8$, the four coordinate-parity possibilities give residues $1,5,7,3$, respectively, so this condition is equivalent to $a\\equiv1\\pmod8$.",
+     "step": "1.2",
+     "inputs": [
+      "L1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The kernel of the squaring map in the coordinates of [L1] has the two choices for $\\varepsilon$ and the two solutions of $2j=0$ modulo $2^{k-2}$, hence has four elements. Every nonempty fibre of a group homomorphism is a translate of its kernel, so every soluble target for $k\\ge3$ has exactly four roots. Together with step 1.1, this proves all criteria and counts.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "L1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The proof concerns one power of two and no factor list."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The theorem explicitly assumes the target is odd, hence a unit."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.1 handles exponent one and its unique root."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 handles exponents one and two before [L1] is used at exponent at least three."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The transition from exponent two to exponent three is explicit in steps 1.1–1.2."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Unique coordinates in [L1] replace all representative choices."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Steps 1.1–1.2 derive the necessary congruence in each exponent range."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 prove solubility and the root count whenever the congruence criterion holds."
+    }
+   ],
+   "finite_smoke": [
+    {
+     "check": "binomial-congruence-solution-count",
+     "asserts": "- Modulo $2$, the congruence $x^2\\equiv a\\pmod2$ has exactly one solution class.\n- Modulo $4$, it is soluble if and only if $a\\equiv1\\pmod4$, and then it has exactly two solution classes.",
+     "claim": "PARTIAL BY CONSTRUCTION, and deliberately so: 2 and 4 are the only powers of two carrying a primitive root, so they are precisely the part of this statement the check can reach. It computes gcd(phi(2), 2) = 1 and gcd(phi(4), 2) = 2 against the actual counts, which is an off-by-one test on these two clauses. The k >= 3 clause (four roots) has no primitive root, is skipped by the check, and rests on step 2.1 and the human read alone.",
+     "checked_in": "step 1.1"
+    }
+   ],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "The three moduli behave differently and the proof splits accordingly, so I verified each regime. Mod 2 and mod 4 are checked by direct enumeration of the odd classes, and mod 4 needs the observation that a root of an odd target must itself be odd, which the enumeration supplies. For k>=3 the argument runs in the (-1)^eps 5^j coordinates of [L1]: squaring sends (eps,j) to (0,2j), so a unit is a square exactly when eps=0 and j is even. I checked the mod-8 table this rests on: 5^j mod 8 is 1 for even j and 5 for odd j, so (0,even),(0,odd),(1,even),(1,odd) give 1,5,7,3 — the four values are distinct, which is what makes 'a is a square' equivalent to 'a = 1 mod 8'. The count of four is the kernel size: eps contributes 2, and 2j = 0 mod 2^{k-2} has exactly 2 solutions once k >= 3, and every nonempty fibre is a kernel translate. Instantiated k=3, where all four units mod 8 square to 1 and a=1 has four roots. No defect."
+   }
+  },
+  "thm-unit-square-criterion-modulo-n": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-unit-square-criterion-modulo-odd-prime-powers",
+     "source_section": "Statement",
+     "quote": "For an odd prime $p$, $k\\ge1$, and $p\\nmid a$, the congruence $x^2\\equiv a\\pmod{p^k}$ is soluble if and only if $\\left(\\frac ap\\right)=1$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-unit-square-criterion-modulo-two-powers",
+     "source_section": "Statement",
+     "quote": "- Modulo $2$, the congruence $x^2\\equiv a\\pmod2$ has exactly one solution class.\n- Modulo $4$, it is soluble if and only if $a\\equiv1\\pmod4$, and then it has exactly two solution classes.\n- For $k\\ge3$, the congruence $x^2\\equiv a\\pmod{2^k}$ is soluble if and only if $a\\equiv1\\pmod8$; when soluble, the number of roots is one for modulus $2$, two for modulus $4$, and four for modulus $2^k$ with $k\\ge3$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-unit-group-chinese-remainder-decomposition",
+     "source_section": "Statement",
+     "quote": "Let $n_0,\\ldots,n_{r-1}$ be pairwise coprime positive integers and $N=\\prod_{i<r}n_i$. The Chinese remainder map restricts to a group isomorphism\n\n$$ (\\mathbb Z/N)^\\times\\cong\\prod_{i<r}(\\mathbb Z/n_i)^\\times.$$\n\nFor the empty list this identifies the two one-element groups.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-canonical-prime-factorisation",
+     "source_section": "Statement",
+     "quote": "the exponents are determined by $n$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-fundamental-theorem-of-arithmetic",
+     "source_section": "Statement",
+     "quote": "Every $n \\in \\mathbb{Z}$ with $n \\ge 1$ is $\\prod_{i<r} p_i$\n   for some $r \\in \\mathbb{N}$ and some list $p$ of primes of length $r$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L5], $n$ has a finite prime factorisation; grouping equal factors and using [L4] gives its uniquely determined nontrivial prime-power factors, which are pairwise coprime. Apply [L3] to identify the unit group modulo $n$ with the product of their unit groups; when $n=1$, this is the empty product of groups and has one element.",
+     "step": "1.1",
+     "inputs": [
+      "L3",
+      "L4",
+      "L5"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Under the isomorphism of step 1.1, a global square maps to a square in every component. Conversely, if every component is a square, choose one root in each of the finitely many nonempty local root sets and apply the inverse CRT isomorphism to obtain a global root. Substitution of [L1] and [L2] gives the explicit local conditions in the Statement, and the empty product handles $n=1$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L2",
+      "L3",
+      "choose"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 1.1 treats $n=1$ as the empty prime-power product and its one-element unit group."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The unit hypothesis excludes nonunit targets before the local criteria are applied in step 2.1."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The modulus-one case is explicitly included in step 1.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: absent two-parts and absent odd parts are both harmless empty subproducts under [L3]."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Statement boundary: the exceptional two-power exponents are delegated exactly to [L2]."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 2.1 makes only finitely many local root choices, each licensed by [L1] or [L2], and combines them by the inverse bijection [L3]."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 2.1 reduces a global square to a square in every local component."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 2.1 combines local square roots to a global root through [L3]."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha-a frontier-15 (Claude Opus 5, xhigh, 1M) — read by Alpha directly; no independent refuter, lane quota-locked",
+    "refuter": "none — GPT 5.6 Sol lane quota-locked until 2026-08-20; read by Alpha directly",
+    "notes": "Highest-scoring item in the batch (13). The CRT decomposition is now licensed for existence by [L5]. I checked the direction that usually fails: from componentwise squares to a global square, the proof chooses one root in each of finitely many nonempty local root sets and applies the inverse isomorphism, which is a finite choice and needs no choice principle. The n = 1 empty product is stated in both the Statement and step 1.1. The explicit two-part conditions (nothing at e <= 1, a = 1 mod 4 at e = 2, a = 1 mod 8 at e >= 3) match [L2]. Disposition: reader repair confirmed correct."
+   }
+  },
+  "cor-number-of-square-roots-of-a-unit-modulo-n": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-unit-square-criterion-modulo-odd-prime-powers",
+     "source_section": "Statement",
+     "quote": "When soluble it has exactly two solution classes modulo $p^k$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-unit-square-criterion-modulo-two-powers",
+     "source_section": "Statement",
+     "quote": "when soluble, the number of roots is one for modulus $2$, two for modulus $4$, and four for modulus $2^k$ with $k\\ge3$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "thm-unit-group-chinese-remainder-decomposition",
+     "source_section": "Statement",
+     "quote": "Let $n_0,\\ldots,n_{r-1}$ be pairwise coprime positive integers and $N=\\prod_{i<r}n_i$. The Chinese remainder map restricts to a group isomorphism\n\n$$ (\\mathbb Z/N)^\\times\\cong\\prod_{i<r}(\\mathbb Z/n_i)^\\times.$$\n\nFor the empty list this identifies the two one-element groups.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-fundamental-theorem-of-arithmetic",
+     "source_section": "Statement",
+     "quote": "Every $n \\in \\mathbb{Z}$ with $n \\ge 1$ is $\\prod_{i<r} p_i$\n   for some $r \\in \\mathbb{N}$ and some list $p$ of primes of length $r$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "By [L4], group the finite prime factorisation of $n$ into its pairwise coprime prime-power factors. Restrict the CRT isomorphism [L3] to the equation $u^2=[a]_n$. It gives a bijection from the global root set to the Cartesian product of the root sets in those components, because an element satisfies the global equation exactly when each component satisfies its local equation.",
+     "step": "1.1",
+     "inputs": [
+      "L3",
+      "L4",
+      "given"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The cardinality of that finite Cartesian product is the product of its local cardinalities. Each odd-prime-power factor contributes $2$ by [L1], while [L2] gives the factor $c_e$ for the two-part; if there are no prime-power factors, the empty product is $1$. This is the displayed formula.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L2",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 2.1 assigns the empty product of local root counts the value one at $n=1$."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Statement boundary: the unit and solubility hypotheses ensure every local root set being multiplied is nonempty."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The modulus-one root set is the singleton checked in step 2.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "If the odd part or the two-part is absent, step 2.1 simply omits that factor."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Statement boundary: the local count [L2] distinguishes exponents one, two, and at least three."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The argument counts root sets through a bijection and does not select a representative from them."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the global square-root count is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the global square-root count is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha-a frontier-15 (Claude Opus 5, xhigh, 1M) — read by Alpha directly; no independent refuter, lane quota-locked",
+    "refuter": "none — GPT 5.6 Sol lane quota-locked until 2026-08-20; read by Alpha directly",
+    "notes": "Checked the count against the local data: 2 per odd prime-power factor by [L1], c_e for the two-part by [L2], giving 2^r c_e, with c_0 = 1 supplied by the empty product rather than by [L2], which starts at e = 1. The CRT restriction to the root set is a bijection because an element solves the global equation exactly when every component solves its own. One gap inside the 30-second rule, recorded not repaired: the root set is taken inside the unit group, which is licensed because u^2 = [a] with [a] a unit forces u to be a unit, and the proof does not say so. Disposition: no fatal defect."
+   }
+  },
+  "thm-jacobi-map-kernel-and-square-subgroup": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "prop-jacobi-symbol-on-units-is-a-homomorphism",
+     "source_section": "Statement",
+     "quote": "The assignment $\\chi_n([a]_n)=\\left(\\frac an\\right)$ is a group homomorphism $(\\mathbb Z/n)^\\times\\to\\{\\pm1\\}$.",
+     "uses": [
+      "1.1",
+      "1.3",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "prop-unit-square-has-jacobi-symbol-one",
+     "source_section": "Statement",
+     "quote": "If $a$ is a unit square modulo an odd positive integer $n$, then $\\left(\\frac an\\right)=1$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "cor-number-of-square-roots-of-a-unit-modulo-n",
+     "source_section": "Statement",
+     "quote": "For odd $n=\\prod_{i<r}p_i^{e_i}$, the soluble unit congruence $x^2\\equiv a\\pmod n$ has exactly $2^r$ roots.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-unit-group-modulo-odd-prime-power-is-cyclic",
+     "source_section": "Statement",
+     "quote": "For every odd prime $p$ and integer $k\\ge1$, the group $(\\mathbb Z/p^k)^\\times$ is cyclic of order\n\n$$\\varphi(p^k)=p^{k-1}(p-1).$$",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "thm-unit-group-chinese-remainder-decomposition",
+     "source_section": "Statement",
+     "quote": "Let $n_0,\\ldots,n_{r-1}$ be pairwise coprime positive integers and $N=\\prod_{i<r}n_i$. The Chinese remainder map restricts to a group isomorphism\n\n$$ (\\mathbb Z/N)^\\times\\cong\\prod_{i<r}(\\mathbb Z/n_i)^\\times.$$\n\nFor the empty list this identifies the two one-element groups.",
+     "uses": [
+      "1.2",
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "thm-first-isomorphism-theorem-groups",
+     "source_section": "Statement",
+     "quote": "First isomorphism theorem for groups: $G/\\ker f\\cong\\operatorname{im}f$.",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "thm-lagrange",
+     "source_section": "Statement",
+     "quote": "$$|G|=[G:H]\\,|H|.$$",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "def-index",
+     "source_section": "Definition",
+     "quote": "$$[G:H]:=|G/H|$$",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L9",
+     "source": "cor-index-tower-finite",
+     "source_section": "Statement",
+     "quote": "$$[G:K]=[G:H][H:K].$$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L10",
+     "source": "thm-unit-square-criterion-modulo-odd-prime-powers",
+     "source_section": "Statement",
+     "quote": "For an odd prime $p$, $k\\ge1$, and $p\\nmid a$, the congruence $x^2\\equiv a\\pmod{p^k}$ is soluble if and only if $\\left(\\frac ap\\right)=1$.",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L11",
+     "source": "def-kernel-and-image-of-group-homomorphism",
+     "source_section": "Definition",
+     "quote": "$$\\ker f:=\\{g\\in G:f(g)=e_H\\},\\qquad\\operatorname{im}f:=\\{f(g):g\\in G\\}.$$",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L12",
+     "source": "thm-canonical-prime-factorisation",
+     "source_section": "Statement",
+     "quote": "the exponents are determined by $n$",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L13",
+     "source": "lem-p-adic-valuation-additive",
+     "source_section": "Statement",
+     "quote": "$$v_p(ab) \\;=\\; v_p(a) + v_p(b),$$",
+     "uses": [
+      "1.3"
+     ]
+    },
+    {
+     "fact": "L14",
+     "source": "def-jacobi-symbol",
+     "source_section": "Definition",
+     "quote": "For odd $n\\ge1$ with canonical prime factorisation $n=\\prod_{i<r}p_i^{e_i}$, define $\\left(\\frac an\\right):=\\prod_{i<r}\\left(\\frac a{p_i}\\right)^{e_i}$.",
+     "uses": [
+      "1.3"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Since $U_n$ is abelian, the squaring map $s:U_n\\to U_n$, $s(u)=u^2$, is a homomorphism with image $U_n^2$. By [L2] and the kernel definition [L11], every element of $U_n^2$ lies in $\\ker\\chi_n$, so $U_n^2\\le\\ker\\chi_n$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L11",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "The kernel of $s$ is the root set of $x^2=1$, which has $2^r$ elements by [L3]. Applying [L6] to $s$ and then [L7] and [L8] gives $[U_n:U_n^2]=|\\ker s|=2^r$. This also holds for $r=0$, when [L5] identifies $U_1$ with the one-element group.",
+     "step": "1.2",
+     "inputs": [
+      "L3",
+      "L5",
+      "L6",
+      "L7",
+      "L8",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-1-3",
+     "claim": "By [L12] and [L13], $n$ is a square exactly when every exponent $e_i$ is even. In that case [L14] makes every value of $\\chi_n$ equal to $1$. If some $e_j$ is odd, [L4] supplies a generator, hence a nonsquare, in $(\\mathbb Z/p_j^{e_j})^\\times$; [L10] gives it Legendre symbol $-1$. Combine it with identity elements in the other factors by [L5]. Formula [L14] gives the resulting global unit Jacobi value $-1$, so [L1] is surjective. Therefore $\\chi_n$ is trivial exactly when $n$ is a square.",
+     "step": "1.3",
+     "inputs": [
+      "L1",
+      "L4",
+      "L5",
+      "L10",
+      "L12",
+      "L13",
+      "L14",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If $n$ is a square, step 1.3 gives $\\ker\\chi_n=U_n$, so step 1.2 yields $[\\ker\\chi_n:U_n^2]=2^r$. Otherwise [L1], [L6], [L7], [L8], and [L11] give $[U_n:\\ker\\chi_n]=2$; applying [L9] to $U_n^2\\le\\ker\\chi_n\\le U_n$ and using step 1.2 gives $[\\ker\\chi_n:U_n^2]=2^{r-1}$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "step 1.2",
+      "step 1.3",
+      "L1",
+      "L6",
+      "L7",
+      "L8",
+      "L9",
+      "L11",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Steps 1.2 and 2.1 include $n=1$, where $r=0$, the unit group is trivial, and the relevant index is $2^0=1$."
+    },
+    {
+     "case": "zero",
+     "status": "not_applicable",
+     "reason": "The character is restricted to units, so the Jacobi zero value is outside its domain."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The modulus-one and index-one boundary is explicit in steps 1.2 and 2.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.3 separates square denominators, where the character is trivial, from nonsquare denominators, where it is surjective."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "There is no ordered interval; $r=0$ is handled as the empty-factor boundary."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.3 chooses a local nonsquare only after [L4] proves a generator exists, and [L5] supplies the global class."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 1.3 proves that all prime exponents even implies the Jacobi map is trivial."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 1.3 constructs a unit of Jacobi value minus one whenever some exponent is odd."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "Fourteen facts and three index computations; I traced each. [L3] is quoted verbatim from the odd-modulus clause of its target, so the 2^r count of square roots of 1 is not an inflated restatement — I opened cor-number-of-square-roots-of-a-unit-modulo-n and the sentence is there as written. [U_n:U_n^2] = |ker s| = 2^r follows from the first isomorphism theorem plus Lagrange, and holds at r=0 with the trivial group. The triviality criterion is the part that can be silently one-directional, and both directions are present: all exponents even makes every (a/p_i)^{e_i} equal 1, while an odd e_j lets [L4]'s cyclic generator serve as a nonsquare with Legendre symbol -1 by [L10], and CRT places it against identities elsewhere so the global value is (-1)^{e_j} = -1. I checked that this is exactly where oddness of e_j is used. The final index split then follows from the tower [L9], with 2^{r-1} well defined because a non-square n forces r >= 1. Instantiated n=1: r=0, n is a square, every index is 1, consistent with the first branch. No defect."
+   }
+  },
+  "ex-complete-reciprocity-table-for-small-odd-primes": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-quadratic-reciprocity",
+     "source_section": "Statement",
+     "quote": "For distinct odd primes $p,q$, $\\left(\\frac pq\\right)\\left(\\frac qp\\right)=(-1)^{(p-1)(q-1)/4}$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "def-legendre-symbol",
+     "source_section": "Definition",
+     "quote": "$$\\left(\\frac ap\\right):=\\begin{cases}0,&p\\mid a,\\\\1,&p\\nmid a\\text{ and }a\\text{ is a quadratic residue modulo }p,\\\\-1,&p\\nmid a\\text{ and }a\\text{ is a quadratic nonresidue modulo }p.\\end{cases}$$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Squaring every residue class modulo each prime gives the displayed nonzero square sets. Reading the residues of each numerator from those sets by [L2] gives all entries in the pair table.",
+     "step": "1.1",
+     "inputs": [
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "For the pairs $\\{3,7\\}$, $\\{3,11\\}$, and $\\{7,11\\}$ both primes are $3$ modulo $4$ and the direct signs are opposite; in every other row at least one prime is $1$ modulo $4$ and the signs agree. Each row therefore has the product required by [L1].",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The displayed prime set is explicitly nonempty and fixed."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Statement boundary: the table uses distinct primes, so no numerator is zero modulo its denominator."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "Every modulus in the table is at least three."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: only unordered pairs of distinct primes are tabulated; diagonal pairs are explicitly omitted."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 enumerates every residue class from zero through $p-1$ before extracting nonzero squares."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The square tables are exhaustively enumerated rather than sampled."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the small-prime reciprocity table is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the small-prime reciprocity table is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "Statement and verification are both ai-generated, so the tables are the claim and I recomputed all of it independently rather than reading the derivation. Square sets: {1} mod 3, {1,4} mod 5, {1,2,4} mod 7, {1,3,4,5,9} mod 11 — all correct. All twelve Legendre entries recomputed from those sets: (3/5)=-1,(5/3)=-1; (3/7)=-1,(7/3)=1; (3/11)=1,(11/3)=-1; (5/7)=-1,(7/5)=-1; (5/11)=1,(11/5)=1; (7/11)=-1,(11/7)=1. Every entry matches the table, and every agree/opposite label matches. The reciprocity claim also holds row by row: 3, 7 and 11 are 3 mod 4 while 5 is 1 mod 4, so the three opposite rows are exactly the three pairs drawn from {3,7,11}. No defect, and as an ex- item this is a checkable example rather than dependency infrastructure."
+   }
+  },
+  "ex-jacobi-symbol-by-the-euclidean-algorithm": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-euclidean-algorithm-for-jacobi-symbol",
+     "source_section": "Statement",
+     "quote": "The Euclidean Jacobi algorithm terminates and returns $\\left(\\frac an\\right)$ without factoring the odd denominator $n$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The divisions and sign updates are $8093=7\\cdot1111+316$, $316=2^2\\cdot79$, $1111=14\\cdot79+5$, $79=15\\cdot5+4$, and $4=2^2$. The first swap has no sign change, removing either square power of $2$ has no sign change, and the swap of $79$ and $1111$ changes the sign because both are $3$ modulo $4$; the next denominator is $1$. After each complete update, these calculations give exactly the displayed state sequence.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "The terminal sign is $-1$, and [L1] identifies it with $\\left(\\frac{1111}{8093}\\right)$. No factorisation of $8093$ occurs in step 1.1.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The computation has a nonempty deterministic update trace."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 checks that no intermediate zero remainder occurs before the denominator-one terminal state."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Step 1.1 terminates exactly at denominator one as prescribed by [L1]."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "The fixed positive numerator and denominator do not produce a singular initial state."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Every remainder in step 1.1 is verified to lie in the required half-open division range."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "All updates are uniquely determined by [L1]."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the Jacobi algorithm computation is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the Jacobi algorithm computation is not a biconditional."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "cex-jacobi-symbol-one-does-not-imply-a-square": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "def-jacobi-symbol",
+     "source_section": "Definition",
+     "quote": "For odd $n\\ge1$ with canonical prime factorisation $n=\\prod_{i<r}p_i^{e_i}$, define $\\left(\\frac an\\right):=\\prod_{i<r}\\left(\\frac a{p_i}\\right)^{e_i}$.",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The nonzero square classes modulo $3$ are $\\{1\\}$ and those modulo $5$ are $\\{1,4\\}$, so $(2/3)=-1$ and $(2/5)=-1$. Using $15=3\\cdot5$ in [L1] gives $(2/15)=(-1)(-1)=1$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If $x^2\\equiv2\\pmod{15}$, reduction modulo $3$ would give $x^2\\equiv2\\pmod3$, but the complete square set modulo $3$ is $\\{0,1\\}$. Thus $2$ is not a square modulo $15$, despite its Jacobi symbol being $1$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The denominator has the explicit nonempty factorisation $15=3\\cdot5$."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 includes zero in the complete square table modulo three."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The Jacobi value one is computed explicitly in step 1.1 rather than assumed."
+    },
+    {
+     "case": "degenerate",
+     "status": "not_applicable",
+     "reason": "Both prime factors are distinct and the numerator is a unit."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The modulo-three square table in step 2.1 checks all three classes."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The witness and obstruction are fixed finite computations."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the Jacobi-one counterexample is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the Jacobi-one counterexample is not a biconditional."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "ex-square-roots-modulo-an-odd-prime-power": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "lem-nonsingular-square-root-lift-modulo-odd-prime-powers",
+     "source_section": "Statement",
+     "quote": "Let $p$ be an odd prime, let $k\\ge1$, and let $a,x_k\\in\\mathbb Z$ satisfy $p\\nmid a$ and $x_k^2\\equiv a\\pmod{p^k}$. Then there is a unique class $t\\pmod p$ such that $(x_k+tp^k)^2\\equiv a\\pmod{p^{k+1}}$.\n\nEquivalently, the root class of $x_k$ modulo $p^k$ has exactly one lift to a root class modulo $p^{k+1}$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-unit-square-criterion-modulo-odd-prime-powers",
+     "source_section": "Statement",
+     "quote": "When soluble it has exactly two solution classes modulo $p^k$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Direct squaring gives the roots $3,4$ modulo $7$. Solving the correction congruence of [L1] on each branch gives corrections $(1,5)$ modulo $7$ for the lift to $49$, then $(2,4)$ for the lift to $343$, and finally $(6,0)$ for the lift to $2401$; these yield the two displayed chains $3\\mapsto10\\mapsto108\\mapsto2166$ and $4\\mapsto39\\mapsto235\\mapsto235$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "One has $235^2=23\\cdot2401+2$ and $2166^2=1954\\cdot2401+2$, so both final classes are roots. They are distinct, and [L2] says a soluble unit congruence has exactly two roots, so the list is complete.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L2",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "Two explicit base roots are supplied and both branches are followed."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Statement boundary: the target two is a unit modulo seven, so [L1] is nonsingular at every step."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Statement boundary: the lift begins at exponent one before reaching exponent four."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: both sign-related base roots are retained; neither branch is collapsed into the other."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 1.1 records every exponent from one through four without skipping an endpoint."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Statement boundary: the two base roots are verified directly and every lift correction is unique by [L1]."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the odd-prime-power lifting example is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the odd-prime-power lifting example is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "Entirely ai-generated and entirely computational, so I recomputed every lift and every correction rather than checking the method. Roots of 2 mod 7 are 3 and 4. Corrections to 49: t=1 and t=5, giving 10 and 39 — verified 10^2=100=2*49+2 and 39^2=1521=31*49+2. Corrections to 343: t=2 and t=4, giving 108 and 235 — verified 108^2=11664=34*343+2 and 235^2=55225=161*343+2. Corrections to 2401: t=6 and t=0, giving 2166 and 235 — verified 2166^2=4691556=1954*2401+2 and 235^2=55225=23*2401+2. The correction pairs (1,5), (2,4), (6,0) in step 1.1 and the two closing squarings in step 2.1 are all correct as printed, including the second branch stabilising at 235 because its correction is 0. Completeness is [L2]'s exact count of two. No defect."
+   }
+  },
+  "ex-four-square-roots-modulo-a-power-of-two": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-unit-square-criterion-modulo-two-powers",
+     "source_section": "Statement",
+     "quote": "For $k\\ge3$, the congruence $x^2\\equiv a\\pmod{2^k}$ is soluble if and only if $a\\equiv1\\pmod8$; when soluble, the number of roots is one for modulus $2$, two for modulus $4$, and four for modulus $2^k$ with $k\\ge3$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The representatives are distinct modulo $128$, and $3^2=9$, $61^2=29\\cdot128+9$, $67^2=35\\cdot128+9$, and $125^2=122\\cdot128+9$. Thus all four displayed classes are roots.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Since $9\\equiv1\\pmod8$, [L1] says that the congruence is soluble and has exactly four root classes. The four distinct roots in step 1.1 are therefore complete.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The example provides an explicit four-element list."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Statement boundary: all four representatives and the target are odd units; zero is not silently counted."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "The fixed exponent is seven, not the exceptional exponent-one case."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 1.1 verifies the four representatives are distinct modulo 128."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Statement boundary: every representative is reduced into the standard range from zero through 127."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The root list is explicitly displayed and directly verified."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the four roots of nine modulo 128 is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the four roots of nine modulo 128 is not a biconditional."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "ex-square-roots-modulo-a-composite-by-crt": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-unit-square-criterion-modulo-n",
+     "source_section": "Statement",
+     "quote": "A unit is a square modulo $n$ if and only if it is a square modulo every prime-power factor of $n$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "cor-number-of-square-roots-of-a-unit-modulo-n",
+     "source_section": "Statement",
+     "quote": "The number of square roots is the product of the local root counts.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The roots of $1$ are $1,3,5,7$ modulo $8$, are $1,8$ modulo $9$, and are $1,4$ modulo $5$. By [L1], every combination of these local roots gives a global root, and [L2] gives $4\\cdot2\\cdot2=16$ global roots.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Solving the finite CRT systems and reducing modulo $360$ gives exactly the displayed representatives. They are distinct, and reducing each one modulo $8$, $9$, and $5$ places it in the corresponding local root set from step 1.1, so [L1] verifies that each square is $1$ modulo $360$; the count in [L2] proves completeness.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L2",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The explicit prime-power factor list has three entries."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Statement boundary: the target one is a unit in every local modulus, and zero is excluded from each root list."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Statement boundary: the target is the identity unit and all of its local preimages are counted."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: the factors $8,9,5$ are pairwise coprime and include both the two-part and repeated odd-prime part."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 reduces and verifies every listed class in the range from zero through 359."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Statement boundary: every local tuple is exhaustively combined; no unlicensed representative selection affects completeness."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the CRT square-root example modulo 360 is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the CRT square-root example modulo 360 is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "ai-generated, so the sixteen-element list is the claim. I verified all sixteen by checking 360 | x^2-1 individually: 1, 19, 71, 89, 91, 109, 161, 179, 181, 199, 251, 269, 271, 289, 341, 359 all satisfy it, all are distinct, and all lie in [0,360). The local root sets are correct — {1,3,5,7} mod 8, {1,8} mod 9, {1,4} mod 5 — and 4*2*2 = 16 matches the list length, so the count in [L2] closes completeness. One nonfatal wording gap, recorded not repaired: step 1.1 cites [L1] for 'every combination of these local roots gives a global root', which is CRT surjectivity rather than the square criterion [L1] states; the fact is standard and step 2.1 independently verifies each representative by reducing it into the three local root sets, so this is inside the 30-second rule. No fatal defect."
+   }
+  },
+  "cex-square-modulo-each-prime-does-not-ignore-the-two-part": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-unit-square-criterion-modulo-two-powers",
+     "source_section": "Statement",
+     "quote": "For $k\\ge3$, the congruence $x^2\\equiv a\\pmod{2^k}$ is soluble if and only if $a\\equiv1\\pmod8$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-unit-square-criterion-modulo-n",
+     "source_section": "Statement",
+     "quote": "A unit is a square modulo $n$ if and only if it is a square modulo every prime-power factor of $n$.",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The only odd prime divisor of $24$ is $3$, and $13\\equiv1\\pmod3$, so it passes the odd-prime square test. But $13\\equiv5\\pmod8$, and [L1] shows that it is not a square modulo $8$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "If $13$ were a square modulo $24$, the forward implication in [L2] would make it a square modulo the prime-power factor $8$, contradicting step 1.1. Hence the odd-prime test misses the two-part obstruction.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The modulus has explicit nonempty prime-factor data."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Statement boundary: the witness 13 is coprime to 24, so it is a unit in every tested component."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Statement boundary: the odd-prime test succeeds because the witness reduces to the square one modulo three."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: the example separates the odd prime divisor from the nontrivial $2^3$ factor."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No ordered interval or truncated list is used."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The witness and both modular reductions are explicit."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of the missing two-part counterexample is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of the missing two-part counterexample is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "ai-generated refutation, so I tested the witness rather than the narrative. 13 is a unit mod 24, 13 = 1 mod 3 so it passes the odd-prime test, and 13 = 5 mod 8 so [L1] denies it is a square mod 8. I confirmed the refutation independently by squaring every unit mod 24: 1,5,7,11,13,17,19,23 all square to 1, so 1 is the only square unit mod 24 and 13 is certainly not one. The contradiction in 2.1 uses only the forward direction of [L2], which is the direction that item supplies. [L1] is applied at k=3, inside its stated range. No defect."
+   }
+  },
+  "ex-primes-dividing-x-squared-plus-three": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "thm-quadratic-reciprocity",
+     "source_section": "Statement",
+     "quote": "For distinct odd primes $p,q$, $\\left(\\frac pq\\right)\\left(\\frac qp\\right)=(-1)^{(p-1)(q-1)/4}$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "thm-first-supplement-to-quadratic-reciprocity",
+     "source_section": "Statement",
+     "quote": "$$\\left(\\frac{-1}{p}\\right)=(-1)^{(p-1)/2}.$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-legendre-symbol",
+     "source_section": "Definition",
+     "quote": "$$\\left(\\frac ap\\right):=\\begin{cases}0,&p\\mid a,\\\\1,&p\\nmid a\\text{ and }a\\text{ is a quadratic residue modulo }p,\\\\-1,&p\\nmid a\\text{ and }a\\text{ is a quadratic nonresidue modulo }p.\\end{cases}$$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-legendre-symbol-multiplicativity",
+     "source_section": "Statement",
+     "quote": "$$\\left(\\frac{ab}{p}\\right)=\\left(\\frac ap\\right)\\left(\\frac bp\\right).$$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Suppose $p\\ne3$. Applying [L1] to $3$ and $p$ gives $(3/p)(p/3)=(-1)^{(p-1)/2}=(-1/p)$ by [L2]. Since $(3/p)$ is a sign and [L4] gives $(-3/p)=(-1/p)(3/p)$, multiplication by $(3/p)$ yields $(-3/p)=(p/3)$.",
+     "step": "1.1",
+     "inputs": [
+      "L1",
+      "L2",
+      "L4",
+      "given",
+      "algebra"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "By [L3], $x^2\\equiv-3\\pmod p$ is soluble exactly when $(-3/p)=1$. For $p\\ne3$, step 1.1 makes this equivalent to $(p/3)=1$, and the nonzero square classes modulo $3$ consist only of $1$, so this is equivalent to $p\\equiv1\\pmod3$. For $p=3$, the class $x=0$ directly satisfies $x^2\\equiv-3\\pmod3$.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L3",
+      "algebra"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The argument concerns one fixed odd prime at a time."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 separates $p=3$, where the numerator minus three is zero modulo the denominator."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The square class one modulo three is the successful residue class used in step 2.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: the exceptional prime three is stated separately rather than inserted into reciprocity for distinct primes."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "Step 2.1 checks both nonzero residue classes modulo three."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "Solvability is characterised without selecting a square root."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 show a root forces $p\\equiv1\\pmod3$ for $p\\ne3$."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Steps 1.1–2.1 use the Legendre definition to show $p\\equiv1\\pmod3$ supplies a root."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha risk-review-1 frontier-15 (Claude Opus 5, xhigh, 1M)",
+    "notes": "The algebraic step is where a sign can silently flip, so I re-derived it: [L1] at 3 and p gives (3/p)(p/3) = (-1)^{(p-1)(3-1)/4} = (-1)^{(p-1)/2}, which is (-1/p) by [L2]; multiplying through by (3/p) and using (3/p)^2 = 1 for p != 3 gives (-3/p) = (p/3), with [L4] supplying the split (-3/p) = (-1/p)(3/p). Then (p/3) = 1 exactly when p = 1 mod 3, because {1} is the whole nonzero square set mod 3. The p=3 case is separated and discharged by the explicit root x=0. I spot-checked the conclusion against actual primes: p=7 gives x=2 with 7 | 7; p=13 gives 10 = 6^2 mod 13; p=5 and p=11 are 2 mod 3 and -3 is a nonsquare in both. No defect."
+   }
+  },
+  "cor-infinitely-many-primes-congruent-to-one-modulo-three": {
+   "citations": [
+    {
+     "fact": "L1",
+     "source": "ex-primes-dividing-x-squared-plus-three",
+     "source_section": "Example",
+     "quote": "An odd prime $p$ divides $x^2+3$ for some integer $x$ if and only if $p=3$ or $p\\equiv1\\pmod3$. Equivalently, for every odd prime $p\\ne3$, the congruence $x^2\\equiv-3\\pmod p$ is soluble if and only if $p\\equiv1\\pmod3$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L2",
+     "source": "lem-every-integer-above-one-has-a-prime-divisor",
+     "source_section": "Statement",
+     "quote": "In particular every integer greater than $1$ has a\nprime divisor.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L3",
+     "source": "def-monoid-finite-product",
+     "source_section": "Definition",
+     "quote": "$$P_g(0) = e, \\qquad P_g(\\sigma(n)) = P_g(n) \\cdot g_n \\quad (n \\in \\mathbb{N}),$$",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L4",
+     "source": "thm-generalised-associativity",
+     "source_section": "Statement",
+     "quote": "$$\\prod_{i<n} h_i \\;=\\; \\prod_{i<n} g_i .$$",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "L5",
+     "source": "def-countable",
+     "source_section": "Definition",
+     "quote": "$A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L6",
+     "source": "def-equinumerous",
+     "source_section": "Definition",
+     "quote": "$A$ and $B$ are **equinumerous**, written $A \\approx B$, if there exists a\n  bijection $f : A \\to B$.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L7",
+     "source": "def-injection-surjection-bijection",
+     "source_section": "Definition",
+     "quote": "$f$ is **bijective** if it is both injective and surjective.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "L8",
+     "source": "lem-divisibility-basic",
+     "source_section": "Statement",
+     "quote": "**linearity**: $d \\mid a$ and $d \\mid b$ imply $d \\mid ax + by$",
+     "uses": [
+      "2.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "Suppose, for contradiction, that $S$ is finite. By [L5] and [L6], choose a bijection from some natural number $r$ onto $S$ and write its prime values as $p_0,\\ldots,p_{r-1}$; surjectivity is [L7]. Let $P=\\prod_{i<r}p_i$, using the value $P=1$ if $r=0$ from [L3], and set $N=12P^2+1>1$. By [L2], choose a prime $q\\mid N$. Since $N$ is odd and $N\\equiv1\\pmod3$, one has $q\\ne2,3$.",
+     "step": "1.1",
+     "inputs": [
+      "assume-contra",
+      "L2",
+      "L3",
+      "L5",
+      "L6",
+      "L7",
+      "choose"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "From $q\\mid N$ and $(6P)^2+3=3N$, the class of $6P$ solves $x^2\\equiv-3\\pmod q$, so [L1] gives $q\\equiv1\\pmod3$. Thus $q\\in S$ and equals some $p_i$; by [L4] move that factor to the end of the finite product, and then [L3] gives $q\\mid P$, hence $q\\mid12P^2$. Together with $q\\mid12P^2+1$, [L8] gives $q\\mid1$, impossible for a prime. Therefore $S$ is not finite.",
+     "step": "2.1",
+     "inputs": [
+      "step 1.1",
+      "L1",
+      "L3",
+      "L4",
+      "L8",
+      "discharge-contradiction"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Step 1.1 defines the product of an empty alleged list as one, giving $N=13$, so the contradiction does not assume the list nonempty."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 1.1 has $P\\ge1$ and $N>1$; neither the constructed integer nor its prime divisor can be zero."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The empty-product value one is explicitly used in step 1.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Statement boundary: the cases $q=2$ and $q=3$ are excluded by $N$ being odd and congruent to one modulo three."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No interval endpoint or bounded summation enters the Euclid-style contradiction."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 1.1 invokes [L2] only after proving $N>1$, which establishes the nonempty set of prime divisors."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The statement of infinitely many primes congruent to one modulo three is not a biconditional."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The statement of infinitely many primes congruent to one modulo three is not a biconditional."
+    }
+   ],
+   "finite_smoke": [],
+   "risk_review": {
+    "status": "complete",
+    "reviewer": "Alpha-a frontier-15 (Claude Opus 5, xhigh, 1M) — read by Alpha directly; no independent refuter, lane quota-locked",
+    "refuter": "none — GPT 5.6 Sol lane quota-locked until 2026-08-20; read by Alpha directly",
+    "notes": "R1-6 was right that permutation invariance alone cannot yield q | P, and the repair is correct: [L4] is clause 3 of thm-generalised-associativity, the commutative permutation law, and moving q to the final position lets the recursion clause of [L3] give P = P' q. I verified the arithmetic independently: (6P)^2 + 3 = 3(12P^2 + 1) = 3N, so q | N makes 6P a solution of x^2 = -3 mod q; N is odd and N = 1 mod 3, so q is neither 2 nor 3; [L1] then forces q = 1 mod 3. At r = 0 the empty product gives P = 1, N = 13, q = 13, and 13 = 1 mod 3 contradicts S being empty. Disposition: reader repair confirmed correct."
+   }
+  }
+ }
+}

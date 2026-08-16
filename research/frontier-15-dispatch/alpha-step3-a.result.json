@@ -1,0 +1,23 @@
+{
+  "role": "alpha",
+  "label": "step3-a",
+  "run": "frontier-15",
+  "covers": [
+    "1",
+    "2",
+    "3"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-16T15:16:13.185Z",
+  "ended_at": "2026-08-16T15:38:31.228Z",
+  "ms": 1338043,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/frontier-15-dispatch/alpha-step3-a.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/frontier-15-dispatch/alpha-step3-a.prompt.md",
+  "tail": "Step-3 review complete for group `a` (batches 1, 2, 3 — 205 items, 4 A/B pairs).\n\n## Verdicts\n\n| pair | verdict |\n|---|---|\n| `quadratic-reciprocity-and-the-jacobi-symbol` | **sufficient** |\n| `sylow-theorems-and-nilpotent-groups` | **insufficient** |\n| `chain-conditions-and-semisimple-modules` | **sufficient** (after repair) |\n| `algebraic-closure-embeddings-and-separability` | **sufficient** (after repairs) |\n\nThe closure gate reads them: `8/8 A pages reviewed, 0 unreviewed`.\n\n## Four blocking findings\n\n**B3-1** — Batch 3's manifest declared 2 prerequisites for page 98 where `plan-spec.json` declares 3, dropping `eigenvalues-…-characteristic-polynomial` and `the-field-of-fractions-and-localisation`. `def-algebraically-closed-field` lives on the first and is cited by five A items **including `def-algebraic-closure` itself**; `cor-rational-function-field-as-a-fraction-field` lives on the second and is the only source of `F_p(t)` for four B items. Repaired.\n\n**B2-1** — `thm-sylow-second-theorem`'s Statement asserted only the containment form, but three later items cite it for *conjugacy*. Reading Conrad's `sylowpf.pdf` showed the scaffold had renamed the source's theorems: his Thm. 1.8 (Sylow II) **is** conjugacy, and the coverage file maps four source headings including it onto an item that never stated it — the `group-actions-and-cayleys-theorem` failure, caught a stage earlier. Repaired: the Statement now carries both clauses.\n\n**B2-2** — Two Sylow B-page examples build their ambient groups from invertible matrices over `F_p`. `def-invertible-matrix-and-general-linear-group` is published at **order 78**; the pair is at **70/71**, and its closure holds no matrix page. The same coverage file *declines* two Conrad examples for exactly this reason while marking these two `included`. Routed to Beta-2 with a checked prescription — this is what holds the pair.\n\n**B2-4** — `fs-noetherian-rings-have-noetherian-subrings` cites the field-of-fractions page (order 53.2), which was in neither closure. Repaired.\n\nAlso: **B3-2** — Beta-3's finding F2 was declined; both halves of its premise are false of disk (Zorn was already reachable transitively), and approving it as written would have masked B3-1. **B2-5** — dependent choice turned out to be a *forward* reference here (`def-dependent-choice` is at order 120, this page at 108), so I stopped mid-repair and adjudicated it as a Facts-level adopted axiom with no `deps` edge.\n\n## Verification\n\nFour repairs applied to the manifests, no item added or deleted. After them **all eight pages close**; `coverage-checklist` is 4 pages / 343 results / 0 errors. I opened four source PDFs at their stated locators (Hackman, both Conrad blurbs, Milne) rather than trusting the harvest files — that's what produced B2-1 and B3-3, and confirmed Beta's Heisenberg and locator corrections verbatim.\n\nTwo things I got wrong and corrected: my first closure checker mis-parsed flow-style YAML item lists and resolved B pages through the stale plan-spec copy of their A page's requires; and my first `coverage-checklist` invocation passed manifests it doesn't accept, which read as four errors. Both are recorded in the review. One suspicion I raised — dep padding on the infinitude corollary — I refuted from disk; it matches the published `thm-euclid-infinitude-of-primes` convention exactly.\n\nOutputs: `research/frontier-15-alpha-a-step3-scaffold-review.md` and `research/frontier-15-alpha-a-step3-verdicts.json`.\n\nOne thing for the lead Alpha at step 4: my batch-2 repair adds a `requires` edge the plan lacks, so `splice-plan.mjs` will refuse — that refusal is expected, and the adjudication is to add `the-field-of-fractions-and-localisation` (53.2 → 108) to `plan-spec.json`. Batch 3 now matches the plan exactly and needs none. Separately, batch 3's A page sits at exactly 60 items with zero headroom: one added item forces the split, whose cut I've adjudicated in advance."
+}

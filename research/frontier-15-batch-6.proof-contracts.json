@@ -1,0 +1,2972 @@
+{
+  "version": 1,
+  "level": "frontier-15",
+  "scope": [
+    "lem-goursat-four-triangle-boundary-cancellation",
+    "lem-goursat-nested-triangle-selection",
+    "thm-goursat-triangle-theorem",
+    "cor-goursat-rectangle-theorem",
+    "thm-goursat-theorem-one-exceptional-point",
+    "prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain",
+    "thm-holomorphic-primitive-on-star-shaped-domain",
+    "cor-cauchy-theorem-star-shaped-domain",
+    "cor-cauchy-theorem-convex-domain",
+    "thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain",
+    "lem-cauchy-difference-quotient-exceptional-extension",
+    "thm-cauchy-integral-formula-circle",
+    "lem-differentiating-cauchy-integrals",
+    "thm-cauchy-integral-formula-higher-derivatives",
+    "cor-cauchy-inequalities",
+    "ex-goursat-triangle-integral-of-z-squared",
+    "ex-goursat-four-triangle-boundary-cancellation",
+    "ex-cauchy-integral-formula-exponential-over-z-minus-one",
+    "ex-cauchy-integral-formula-cosine-third-order-pole",
+    "cex-holomorphic-function-on-an-annulus-with-nonzero-closed-contour-integral",
+    "cex-connected-domain-need-not-be-star-shaped",
+    "fs-goursats-theorem-requires-continuity-of-the-derivative",
+    "fs-every-continuous-function-on-a-convex-domain-has-a-primitive"
+  ],
+  "contracts": {
+    "lem-goursat-four-triangle-boundary-cancellation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For a rectifiable contour $\\gamma$,\n$$\\int_{\\gamma^-}f\\,dz=-\\int_\\gamma f\\,dz,\\qquad \\int_{\\gamma^-}|f|\\,|dz|=\\int_\\gamma|f|\\,|dz|.$$\nFor composable rectifiable contours $\\alpha,\\beta$,\n$$\\int_{\\alpha*\\beta}f\\,dz=\\int_\\alpha f\\,dz+\\int_\\beta f\\,dz,$$\nand the analogous additive identity holds for the absolute integral.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "In the order fixed by the triangle definition, the four boundary edge lists are $(a\\to p,p\\to r,r\\to a)$, $(p\\to b,b\\to q,q\\to p)$, $(r\\to q,q\\to c,c\\to r)$, and $(p\\to q,q\\to r,r\\to p)$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "In their sum, the interior pairs $p\\to r,r\\to p$, $q\\to p,p\\to q$, and $r\\to q,q\\to r$ cancel by reversal, while concatenation joins the surviving pairs $a\\to p\\to b$, $b\\to q\\to c$, and $c\\to r\\to a$ into the three outer edges.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Additivity under concatenation now gives exactly the displayed integral identity; reversal and concatenation also hold for constant and collinear segments, so no nondegeneracy was used.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A filled triangle has at least its listed vertices, so no empty geometric object is admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 remain identities when the integrand or every edge integral is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No index beginning at one or unit-valued parameter changes the edge cancellation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 retains repeated and collinear vertices; reversal and concatenation still cancel every repeated segment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks all three vertex joins when the half-edges are concatenated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The midpoints and four subtriangles are explicit functions of the given vertices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is an equality, not a biconditional with a forward implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed from an integral identity to a geometric subdivision."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-goursat-nested-triangle-selection": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-goursat-four-triangle-boundary-cancellation",
+          "source_section": "Statement",
+          "quote": "Let $f$ be continuous on the filled triangle $\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]], and put\n\n$$p=\\frac{a+b}{2},\\qquad q=\\frac{b+c}{2},\\qquad r=\\frac{c+a}{2}.$$\n\nThen\n\n$$I_f[a,b,c]=I_f[a,p,r]+I_f[p,b,q]+I_f[r,q,c]+I_f[p,q,r].$$\n\nThe identity remains valid when vertices coincide or are collinear.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cantor-intersection-metric",
+          "source_section": "Statement",
+          "quote": "If $(X,d)$ is complete ([[def-complete-metric-space]]), every Cantor chain in $X$ has an intersection $\\bigcap_{k \\in \\mathbb{N}} F_k$ with **exactly one** element.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complex-plane-is-complete",
+          "source_section": "Statement",
+          "quote": "The metric space $\\mathbb C$ is complete. A sequence $z_n=x_n+iy_n$ converges to $x+iy$ exactly when $x_n\\to x$ and $y_n\\to y$. The conventions and prerequisite facts used below are recorded in [[def-complex-metric-convergence-and-continuity]], [[thm-componentwise-convergence-and-completeness]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "**Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$ is a compact subset of $(\\mathbb{R}^n, d_2)$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-continuous-image-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be continuous ([[def-metric-continuity]]). Then:\n\n1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image\n   $f[X] \\subseteq Y$ is a compact subset of $Y$.\n2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is\n   a compact subset of $Y$.\n\nNo choice principle is used.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $K \\subseteq X$ be a\ncompact subset ([[def-metric-compactness]]). Then $K$ is closed in $X$\n([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]).\n\nNo choice principle is used: both covers below are given by a rule, and the\nindexed form of [[lem-compactness-is-intrinsic]] returns indices rather than\nsets.\n\n**The converse is false in general.** A closed and bounded subset of an arbitrary\nmetric space need not be compact\n([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]); it is exactly\nin $\\mathbb{R}^n$ that the converse holds ([[thm-heine-borel-rn]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For any parent triangle, [L1] and [L7] imply that at least one of its four indexed midpoint children has integral modulus at least one quarter of the parent's: otherwise the modulus of their sum would be strictly smaller than the parent modulus. Choose the least qualifying index, which also works when the parent integral is zero.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "L7"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "If $T_n=\\Delta[u,v,w]$, the continuous map $\\Phi(s,t)=u+s((1-t)(v-u)+t(w-u))$ takes the compact square $[0,1]^2$ onto $T_n$: its coefficients are nonnegative and sum to one, and conversely a barycentric point with coefficients $(\\alpha,\\beta,\\gamma)$ is obtained by $s=\\beta+\\gamma$ and, when $s>0$, $t=\\gamma/s$, while $s=0$ gives $u$. Thus [L4] makes $T_n$ compact, closed, and bounded; it is nonempty because it contains $u$.",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The least-index rule is a function of the ordered parent triangle, so recursion gives $(T_n)$; direct midpoint geometry shows every child is contained in its parent and is the image of it under a similarity of ratio $1/2$, hence its perimeter and diameter are half those of the parent.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Induction applied to step 2.1 and the retained one-quarter estimate gives, including at $n=0$, $|I_f(T_n)|\\ge4^{-n}|I_f(T_0)|$, $P(T_n)=2^{-n}P(T_0)$, and $\\operatorname{diam}(T_n)=2^{-n}\\operatorname{diam}(T_0)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "By [L6] and step 3.1, the diameters tend to zero, even when the initial diameter is zero. Steps 2.1 and 1.2 give a nested sequence of nonempty closed bounded subsets of the complete complex plane, so [L2] and [L3] give a unique common point $z_*$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 1.2",
+            "L2",
+            "L3",
+            "L6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 proves every selected filled triangle is nonempty before Cantor's theorem is applied in step 4.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 permits a zero parent integral; every child then satisfies the nonnegative quarter lower bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the base stage $n=0$, where both scale factors equal one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 include collinear or repeated vertices; compactness and the halving formula remain valid."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the closed square $[0,1]^2$, verifies the coefficient endpoints, and handles $s=0$ separately in the surjectivity argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 prove an eligible child exists and select its least qualifying index deterministically."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The selection lemma makes one-directional existence and scale assertions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a nested sequence to a midpoint subdivision is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "The quarter-retention selection is by least qualifying index, so no choice principle is used, and it is checked to work when the parent integral is zero. Verified the barycentric surjection from [0,1]^2 that supplies compactness, and that all four midpoint children (the medial triangle included) are similar to the parent with ratio 1/2, so perimeter and diameter genuinely halve. Cantor intersection is applied with its own hypotheses. Degenerate initial triangle checked. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "thm-goursat-triangle-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-goursat-nested-triangle-selection",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $f:U\\to\\mathbb C$ be continuous, and let $T_0=\\Delta[a,b,c]\\subseteq U$. There is a sequence $(T_n)_{n\\in\\mathbb N}$ of filled triangles such that $T_{n+1}$ is one of the four midpoint subtriangles of $T_n$ and, for every $n\\in\\mathbb N$,\n\n$$T_{n+1}\\subseteq T_n,\\qquad |I_f(T_n)|\\ge4^{-n}|I_f(T_0)|,$$\n\n$$P(T_n)=2^{-n}P(T_0),\\qquad \\operatorname{diam}(T_n)=2^{-n}\\operatorname{diam}(T_0).$$\n\nEvery $T_n$ is nonempty, compact, closed, and bounded, and there is a unique $z_*\\in\\mathbb C$ with\n\n$$\\bigcap_{n\\in\\mathbb N}T_n=\\{z_*\\}.$$\n\nHere $I_f(T)$ denotes the integral over the oriented boundary prescribed by [[def-oriented-complex-triangle-and-boundary]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-closed-contour-integral-of-a-derivative-is-zero",
+          "source_section": "Statement",
+          "quote": "If $F$ is holomorphic on an open set, $F'$ is continuous there, and $\\gamma$ is a closed rectifiable contour in that set, then $\\int_\\gamma F'(z)\\,dz=0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "source_section": "Statement",
+          "quote": "Let $P(z)=\\sum_{k=0}^n a_kz^k$ be a complex polynomial. Then $P$ is entire and\n\n$$ P'(z)=\\sum_{k=1}^n k a_kz^{k-1}. $$\n\nThis includes the zero polynomial and constant polynomials, whose derivative is zero. If $P,Q$ are complex polynomials, then the set $D=\\{z\\in\\mathbb C:Q(z)\\ne0\\}$ is open, $P/Q$ is holomorphic on $D$, and\n\n$$ (P/Q)'=\\frac{P'Q-PQ'}{Q^2}. $$\n\nWhen $Q$ is a nonzero constant, $D=\\mathbb C$; when $Q$ is the zero polynomial, $D=\\varnothing$ and no rational function is defined there.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-ml-estimate-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "If $|f(z)|\\le M$ on the trace of a rectifiable contour $\\gamma$, with $M\\ge0$, then\n$$\\left|\\int_\\gamma f(z)\\,dz\\right|\\le M L(\\gamma).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "prop-linearity-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For continuous $f,g$ on the trace of a rectifiable contour $\\gamma$ and $\\alpha,\\beta\\in\\mathbb C$,\n$$\\int_\\gamma(\\alpha f+\\beta g)\\,dz=\\alpha\\int_\\gamma f\\,dz+\\beta\\int_\\gamma g\\,dz.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-complex-differentiability-holomorphic-and-entire",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $a\\in U$, and let $f:U\\to\\mathbb C$. The function $f$ is **complex differentiable at $a$** if the limit\n\n$$ \\lim_{\\substack{h\\to0\\\\ h\\ne0,\\ a+h\\in U}}\\frac{f(a+h)-f(a)}{h} $$\n\nexists in the metric of [[def-complex-metric-convergence-and-continuity]]. Its value is the **complex derivative** of $f$ at $a$, denoted $f'(a)$. The increments are nonzero and remain in the domain; because $U$ is open, all sufficiently small increments are allowed.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [L5], $f$ is continuous, so [L1] gives selected triangles $T_n$ with common point $z_*$ and all the stated retention and scaling formulas.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "By [L7], differentiability at $z_*$ gives $f(w)=f(z_*)+f'(z_*)(w-z_*)+(w-z_*)\\eta(w)$, where $\\eta(w)\\to0$ as $w\\to z_*$; set $\\eta(z_*)=0$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L7"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Put $P(w)=f(z_*)w+\\tfrac12f'(z_*)(w-z_*)^2$. By [L3], $P$ is entire and $P'(w)=f(z_*)+f'(z_*)(w-z_*)$ is a polynomial, hence continuous. Every $\\partial T_n$ is a closed rectifiable contour, so all hypotheses of [L2] hold and $\\int_{\\partial T_n}P'(w)\\,dw=0$.",
+          "step": "1.3",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Given $\\varepsilon>0$, take $n$ so large that $|\\eta(w)|<\\varepsilon$ whenever $|w-z_*|\\le\\operatorname{diam}(T_n)$; this is possible by step 1.2 and the diameter limit in [L1]. Since $z_*\\in T_n$, [L4], [L6], and step 1.3 give $|I_f(T_n)|\\le\\varepsilon\\operatorname{diam}(T_n)P(T_n)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "L1",
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The retention and scaling formulas yield $|I_f(T_0)|\\le4^n|I_f(T_n)|\\le\\varepsilon\\operatorname{diam}(T_0)P(T_0)$. Because this holds for every $\\varepsilon>0$, $I_f(T_0)=0$; the argument never divides by the initial integral, diameter, or perimeter, so it also covers zero integrals and degenerate triangles.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns an explicitly given triangle and open domain, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses an arbitrary positive epsilon and never divides by the original integral."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The $n=0$ selected triangle is the original triangle in L1 and anchors every scale identity. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly retains zero diameter and zero perimeter, so the estimate covers repeated or collinear vertices."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Statement and Given require the filled triangle, including every boundary point, to lie in the open holomorphy domain; step 1.1 applies L1 to that contained triangle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "L1 supplies the unique common point only after its Cantor-chain hypotheses are verified. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Goursat's theorem is a one-directional implication from holomorphy to a zero integral."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse from triangle integrals to holomorphy is Morera's theorem and is not claimed here."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Recomputed the estimate: |I(T_n)| <= eps*diam(T_n)*P(T_n) and |I(T_0)| <= 4^n|I(T_n)| cancel exactly to eps*diam(T_0)*P(T_0). The affine part is killed by cor-closed-contour-integral-of-a-derivative-is-zero applied to an explicit polynomial primitive, which is cited, not assumed. No continuity of f' is used anywhere. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "cor-goursat-rectangle-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nNo continuity of $f'$ is assumed, and repeated or collinear vertices are allowed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For a rectifiable contour $\\gamma$,\n$$\\int_{\\gamma^-}f\\,dz=-\\int_\\gamma f\\,dz,\\qquad \\int_{\\gamma^-}|f|\\,|dz|=\\int_\\gamma|f|\\,|dz|.$$\nFor composable rectifiable contours $\\alpha,\\beta$,\n$$\\int_{\\alpha*\\beta}f\\,dz=\\int_\\alpha f\\,dz+\\int_\\beta f\\,dz,$$\nand the analogous additive identity holds for the absolute integral.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The diagonal from $a$ to $c$ splits $R$ into the filled triangles $\\Delta[a,b,c]$ and $\\Delta[a,c,d]$, both contained in $U$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [L1], the integrals over the positively oriented boundaries $a\\to b\\to c\\to a$ and $a\\to c\\to d\\to a$ are both zero.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Adding those identities, the diagonal $c\\to a$ in the first boundary cancels the diagonal $a\\to c$ in the second by [L2].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "The surviving directed sides are $a\\to b\\to c\\to d\\to a$, exactly the displayed positive boundary $\\partial R$, so its integral is zero.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem starts with a specified nonempty closed rectangle contained in the domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 adds two integrals already equal to zero and cancels the diagonal without division."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No index or unit parameter has a distinguished first case in the diagonal decomposition."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The sourced rectangle theorem is stated for rectangles with two positive side lengths; collapsed rectangles are not included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 use the closed rectangle, so all four sides and vertices lie in the open holomorphy domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the explicitly specified diagonal from $a$ to $c$; no choice among diagonals is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is a one-directional vanishing result under holomorphy."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from rectangle-boundary integrals to holomorphy is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Verified the diagonal splits the closed rectangle into two filled triangles inside U and that the diagonal edges cancel in the stated orientation, leaving exactly the declared boundary contour. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "thm-goursat-theorem-one-exceptional-point": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nNo continuity of $f'$ is assumed, and repeated or collinear vertices are allowed.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For a rectifiable contour $\\gamma$,\n$$\\int_{\\gamma^-}f\\,dz=-\\int_\\gamma f\\,dz,\\qquad \\int_{\\gamma^-}|f|\\,|dz|=\\int_\\gamma|f|\\,|dz|.$$\nFor composable rectifiable contours $\\alpha,\\beta$,\n$$\\int_{\\alpha*\\beta}f\\,dz=\\int_\\alpha f\\,dz+\\int_\\beta f\\,dz,$$\nand the analogous additive identity holds for the absolute integral.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-ml-estimate-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "If $|f(z)|\\le M$ on the trace of a rectifiable contour $\\gamma$, with $M\\ge0$, then\n$$\\left|\\int_\\gamma f(z)\\,dz\\right|\\le M L(\\gamma).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "If $p\\notin T$, then $T\\subseteq U\\setminus\\{p\\}$; this punctured set is open because every $z\\ne p$ has the ball $B(z,|z-p|/2)$ inside it, so [L1] applies. If $T$ is degenerate, order its distinct collinear vertices along their common line and split each directed edge at the intervening vertices; every resulting subsegment occurs equally often in both orientations, so [L2] gives zero.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "It remains to treat a nondegenerate triangle $\\Delta[p,u,v]$ having $p$ as a vertex. For $0<t<1$, put $u_t=p+t(u-p)$ and $v_t=p+t(v-p)$. The triangles $\\Delta[u_t,u,v]$ and $\\Delta[u_t,v,v_t]$ lie in $\\Delta[p,u,v]$ and avoid $p$, so [L1] makes their boundary integrals zero; adding their boundaries and cancelling opposite internal edges by [L2] gives $I_f[p,u,v]=I_f[p,u_t,v_t]$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Continuity at $p$ gives a neighborhood on which $|f|\\le |f(p)|+1$. For all sufficiently small $t>0$, the small triangle lies in that neighborhood, has perimeter $tP(\\Delta[p,u,v])$, and [L3] gives $|I_f[p,u_t,v_t]|\\le(|f(p)|+1)tP(\\Delta[p,u,v])$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Letting $t$ be arbitrarily small in steps 1.2 and 2.1 forces $I_f[p,u,v]=0$, so every triangle having $p$ as a vertex has zero boundary integral.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "If $p\\in T$, the three filled triangles $\\Delta[p,a,b]$, $\\Delta[p,b,c]$, and $\\Delta[p,c,a]$ cover $T$ with compatible orientations; their internal edges cancel by [L2], leaving $\\partial T$. Their integrals vanish by steps 1.1 and 3.1, so $I_f(T)=0$. Together with the case $p\\notin T$ from step 1.1, this proves the claim for every position of $p$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem has a specified function, point, and triangle rather than an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the local bound or the small integral to be zero and performs no division."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "There is no natural-number index whose first positive value changes the exceptional-point proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 directly treats repeated or collinear vertices by splitting the directed edges and cancelling opposite subsegments."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2, 3.1, and 4.1 explicitly cover the exceptional point at a vertex or on an edge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The cut points $u_t,v_t$ are explicit once $0<t<1$ is fixed in step 1.2; continuity supplies the positive neighbourhood used for the subsequent small-$t$ estimate in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-directional sufficient theorem for a zero boundary integral."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of continuity or punctured holomorphy is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "The case split (p outside T, T degenerate, p a vertex, p in T) is complete, and I checked the vertex case uses only continuity of f at p through the bound |f| <= |f(p)| + 1 - holomorphy at p is never used, so the argument is not circular. Verified the small-triangle perimeter scales as t and the three-triangle decomposition of T about p cancels to the boundary of T. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For a rectifiable contour $\\gamma$,\n$$\\int_{\\gamma^-}f\\,dz=-\\int_\\gamma f\\,dz,\\qquad \\int_{\\gamma^-}|f|\\,|dz|=\\int_\\gamma|f|\\,|dz|.$$\nFor composable rectifiable contours $\\alpha,\\beta$,\n$$\\int_{\\alpha*\\beta}f\\,dz=\\int_\\alpha f\\,dz+\\int_\\beta f\\,dz,$$\nand the analogous additive identity holds for the absolute integral.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be piecewise-$C^1$ and let $f$ be continuous on its trace. Then\n$$\\int_\\gamma f(z)\\,dz=\\sum_j\\int_{t_j}^{t_{j+1}}f(\\gamma(t))\\gamma'_j(t)\\,dt,$$\nand\n$$\\int_\\gamma |f(z)|\\,|dz|=\\sum_j\\int_{t_j}^{t_{j+1}}|f(\\gamma(t))|\\,|\\gamma'_j(t)|\\,dt.$$\nThe real and imaginary parts of the first display are the published vector line integrals of $(u,-v)$ and $(v,u)$, while the second is the published scalar line integral.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-linearity-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For continuous $f,g$ on the trace of a rectifiable contour $\\gamma$ and $\\alpha,\\beta\\in\\mathbb C$,\n$$\\int_\\gamma(\\alpha f+\\beta g)\\,dz=\\alpha\\int_\\gamma f\\,dz+\\beta\\int_\\gamma g\\,dz.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-ml-estimate-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "If $|f(z)|\\le M$ on the trace of a rectifiable contour $\\gamma$, with $M\\ge0$, then\n$$\\left|\\int_\\gamma f(z)\\,dz\\right|\\le M L(\\gamma).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-complex-primitive",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$. A **primitive** of $f$ on $U$ is a holomorphic function $F:U\\to\\mathbb C$ in the sense of [[def-complex-differentiability-holomorphic-and-entire]] such that $F'(z)=f(z)$ for every $z\\in U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be rectifiable and let $f$ be continuous on its trace. Then the complex line integral [[def-complex-line-integral-over-a-rectifiable-path]] and the absolute line integral [[def-absolute-line-integral-over-a-rectifiable-path]] both exist.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Fix $z\\in U$. The segment $\\ell_{az}$ is rectifiable and $f$ is continuous on it, so $F(z)$ exists by [L5]. Since $U$ is open, choose $\\rho>0$ with $B(z,\\rho)\\subseteq U$. If $0<|h|<\\rho$, the short segment from $z$ to $z+h$ lies in that ball, and every segment from $a$ to a point of the short segment lies in $U$ by star-shapedness; hence $\\Delta[a,z,z+h]\\subseteq U$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L5",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Parametrizing the short edge by $\\zeta=z+th$ and using [L2] gives $\\int_{\\ell_{z,z+h}}f(z)\\,d\\zeta=f(z)h$.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The zero boundary integral of that triangle reads $F(z)+\\int_{\\ell_{z,z+h}}f-F(z+h)=0$ by [L1], and therefore $F(z+h)-F(z)=\\int_{\\ell_{z,z+h}}f(\\zeta)\\,d\\zeta$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "By [L3], steps 2.1 and 1.2 imply $\\left|(F(z+h)-F(z))/h-f(z)\\right|\\le\\sup_{0\\le t\\le1}|f(z+th)-f(z)|$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Continuity of $f$ at $z$ makes the right side of step 3.1 tend to zero as $h\\to0$. Thus $F'(z)=f(z)$ for arbitrary $z\\in U$, including $z=a$; [L4] says exactly that $F$ is a primitive, and $h=0$ was only the excluded difference-quotient value.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The star-shaped definition supplies a star centre and therefore excludes an empty domain before step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 excludes $h=0$ only in the difference quotient; step 4.1 takes the limit to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The short-edge parameter interval includes both $t=0$ and $t=1$ in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At $z=a$ or for a constant segment, step 2.1 uses the same boundary identity and zero-length pieces contribute zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the closed parameter interval and continuity uniformly along the entire short edge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The centre is part of the hypothesis and openness supplies the positive ball used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The proposition gives a sufficient triangle-integral condition for a primitive."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Although primitives imply zero closed integrals elsewhere, that converse is not part of this statement."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "This is the step where star-shapedness is usually too weak. It is not here: the filled triangle Delta[a,z,z+h] is the union of the segments from a to points of [z,z+h], each of which lies in U by star-shapedness, so the containment is genuine and convexity is not needed. Verified the difference-quotient estimate through the ML bound with contour length |h|, and that z = a is covered. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "thm-holomorphic-primitive-on-star-shaped-domain": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nNo continuity of $f'$ is assumed, and repeated or collinear vertices are allowed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped with respect to $a\\in U$ in the sense of [[rem-plane-star-shaped-and-convex-dictionary]], and let $f:U\\to\\mathbb C$ be continuous. Suppose\n\n$$\\int_{\\partial\\Delta[u,v,w]}f(\\zeta)\\,d\\zeta=0$$\n\nfor every filled triangle $\\Delta[u,v,w]\\subseteq U$ in the sense of [[def-oriented-complex-triangle-and-boundary]]. Then\n\n$$F(z)=\\int_{\\ell_{az}}f(\\zeta)\\,d\\zeta$$\n\nis holomorphic on $U$ and satisfies $F'(z)=f(z)$ for every $z\\in U$. Thus $F$ is a primitive of $f$ as defined in [[def-complex-primitive]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [L1], $f$ is continuous, and by [L2] its integral around every filled triangle contained in $U$ is zero.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The hypotheses of [L3] now hold, so the displayed function is holomorphic on $U$ and has derivative $f$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The published star-shaped definition makes the domain nonempty and includes a centre."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero function is included in step 1.1 and the constructed primitive may be constant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No unit-valued numerical parameter changes the primitive construction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A one-point local segment and repeated triangle vertices are covered by L2. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is posed on an open domain rather than a closed interval with endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No centre is selected: the given star-shaped structure supplies one to L2. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-directional existence assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from existence of a primitive to star-shapedness is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Both hypotheses of the preceding proposition (continuity, vanishing triangle integrals) are supplied by cited results rather than assumed. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "cor-cauchy-theorem-star-shaped-domain": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-holomorphic-primitive-on-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped with respect to $a\\in U$. Every holomorphic function $f:U\\to\\mathbb C$ has the primitive\n\n$$F(z)=\\int_{\\ell_{az}}f(\\zeta)\\,d\\zeta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-complex-primitive",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$. A **primitive** of $f$ on $U$ is a holomorphic function $F:U\\to\\mathbb C$ in the sense of [[def-complex-differentiability-holomorphic-and-entire]] such that $F'(z)=f(z)$ for every $z\\in U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-closed-contour-integral-of-a-derivative-is-zero",
+          "source_section": "Statement",
+          "quote": "If $F$ is holomorphic on an open set, $F'$ is continuous there, and $\\gamma$ is a closed rectifiable contour in that set, then $\\int_\\gamma F'(z)\\,dz=0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [L1] and [L2], there is a holomorphic $F$ on $U$ with $F'=f$; by [L3], this derivative is continuous.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The given $\\gamma$ is closed and rectifiable, so every hypothesis of [L4] holds and $\\int_\\gamma f=\\int_\\gamma F'=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Star-shaped domains are nonempty; no empty-domain assertion is smuggled into step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The generic primitive construction in step 1.1 includes the zero function, and step 2.1 applies L4 to every closed rectifiable contour, including a constant contour of length zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No natural or radius parameter takes a distinguished value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant contour is closed and rectifiable, so step 2.1 applies the published closed-contour theorem L4 to it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closedness is equality of the two contour endpoints, and step 2.1 applies L4 to the given closed rectifiable contour."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "L1 is an existence theorem; applying it to the given function requires no simultaneous selection. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Cauchy's theorem gives a one-way vanishing conclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The primitive criterion's converse is published elsewhere and not restated here."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Verified the primitive route: F holomorphic with F' = f, and f continuous, so cor-closed-contour-integral-of-a-derivative-is-zero applies with all its hypotheses. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "cor-cauchy-theorem-convex-domain": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-complex-domain",
+          "source_section": "Definition",
+          "quote": "A **complex domain** is a nonempty, connected, open subset $U\\subseteq\\mathbb C$. Open means open in the modulus metric of [[def-metric-topology]], and connected has the meaning of [[def-connected-space]]. By [[rem-complex-plane-euclidean-dictionary]], these are exactly the usual Euclidean notions for the corresponding subset of $\\mathbb R^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-star-shaped-open-subset-of-rn",
+          "source_section": "Definition",
+          "quote": "A nonempty open set $U\\subseteq\\mathbb R^n$ is **star-shaped with respect to** $a\\in U$ when\n\n$$a+t(x-a)\\in U\\qquad\\text{for every }x\\in U\\text{ and }0\\le t\\le1.$$\n\nThe point $a$ is a **star centre**. Every convex open set of [[def-convex-subset-of-euclidean-space]] is star-shaped with respect to each of its points. The nonemptiness and the chosen centre are part of the definition.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-cauchy-theorem-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped, let $f:U\\to\\mathbb C$ be holomorphic, and let $\\gamma$ be a closed rectifiable contour in $U$. Then\n\n$$\\int_\\gamma f(z)\\,dz=0.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [L1], choose any $a\\in U$ and regard $U$ as star-shaped with respect to $a$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Now [L2] applied to the given $f$ and $\\gamma$ gives the displayed zero integral.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A complex domain is nonempty before L1 is applied. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero function and a constant contour are included by L2. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The corollary has no distinguished unit parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A singleton or constant contour contributes zero under L2. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "L2 retains the exact closed-endpoint condition for contours. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Any supplied point is a star centre by L1; the proof need not select one globally. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a sufficient vanishing theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Zero contour integrals do not characterize convexity, and no such converse is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Convex implies star-shaped about each point is an immediate specialisation of the two definitions and is also recorded in rem-plane-star-shaped-and-convex-dictionary, which is in deps. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-goursat-theorem-one-exceptional-point",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $p\\in U$, and let $f:U\\to\\mathbb C$ be continuous and holomorphic on $U\\setminus\\{p\\}$. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nThe exceptional point may lie outside, inside, or on the boundary of $T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped with respect to $a\\in U$ in the sense of [[rem-plane-star-shaped-and-convex-dictionary]], and let $f:U\\to\\mathbb C$ be continuous. Suppose\n\n$$\\int_{\\partial\\Delta[u,v,w]}f(\\zeta)\\,d\\zeta=0$$\n\nfor every filled triangle $\\Delta[u,v,w]\\subseteq U$ in the sense of [[def-oriented-complex-triangle-and-boundary]]. Then\n\n$$F(z)=\\int_{\\ell_{az}}f(\\zeta)\\,d\\zeta$$\n\nis holomorphic on $U$ and satisfies $F'(z)=f(z)$ for every $z\\in U$. Thus $F$ is a primitive of $f$ as defined in [[def-complex-primitive]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-complex-primitive",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$. A **primitive** of $f$ on $U$ is a holomorphic function $F:U\\to\\mathbb C$ in the sense of [[def-complex-differentiability-holomorphic-and-entire]] such that $F'(z)=f(z)$ for every $z\\in U$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-closed-contour-integral-of-a-derivative-is-zero",
+          "source_section": "Statement",
+          "quote": "If $F$ is holomorphic on an open set, $F'$ is continuous there, and $\\gamma$ is a closed rectifiable contour in that set, then $\\int_\\gamma F'(z)\\,dz=0$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [L1], every contained triangle integral vanishes.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Since $f$ is continuous and $U$ is star-shaped, [L2] gives a primitive $F$, and [L3] makes explicit that $F$ is holomorphic and $F'=f$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The derivative $F'=f$ is continuous by hypothesis; for any given closed rectifiable contour $\\gamma$ in $U$, all hypotheses of [L4] are therefore satisfied, and $\\int_\\gamma f=0$.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The star-shaped domain is nonempty and the exceptional point is explicitly required to belong to it. This disposition is retained in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero function satisfies every hypothesis and the constructed primitive may be constant. This disposition is retained in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Exactly one exceptional point is allowed; step 1.1 does not silently extend to a finite set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses L1, which includes degenerate triangle boundaries; step 3.1 uses L4, which also applies to constant closed contours."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The exceptional point may lie on any triangle boundary, as guaranteed by L1. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The exceptional point is given, and the star-shaped hypothesis supplies a centre for the primitive construction applied in step 2.1; neither witness comes from an unproved nonempty set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem provides primitive existence and vanishing from stated hypotheses."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse classification of one-point exceptional functions is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Checked the exceptional-point Goursat theorem, not the ordinary one, is what licenses the vanishing triangle integrals, and that the continuity hypothesis carries through to the closed-contour step. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "lem-cauchy-difference-quotient-exceptional-extension": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-complex-differentiability-holomorphic-and-entire",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $a\\in U$, and let $f:U\\to\\mathbb C$. The function $f$ is **complex differentiable at $a$** if the limit\n\n$$ \\lim_{\\substack{h\\to0\\\\ h\\ne0,\\ a+h\\in U}}\\frac{f(a+h)-f(a)}{h} $$\n\nexists in the metric of [[def-complex-metric-convergence-and-continuity]]. Its value is the **complex derivative** of $f$ at $a$, denoted $f'(a)$. The increments are nonzero and remain in the domain; because $U$ is open, all sufficiently small increments are allowed.\n\nThe function $f$ is **holomorphic on $U$** when it is complex differentiable at every point of $U$. A function holomorphic on all of $\\mathbb C$ is **entire**. The word analytic is reserved for the local power-series notion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f,g:U\\to\\mathbb C$ be complex differentiable at $a\\in U$, and let $\\alpha,\\beta\\in\\mathbb C$. Then\n\n$$ (\\alpha f+\\beta g)'(a)=\\alpha f'(a)+\\beta g'(a), $$\n\n$$ (fg)'(a)=f'(a)g(a)+f(a)g'(a). $$\n\nIf $g(a)\\ne0$, then $g$ is nonzero on some neighbourhood of $a$, the reciprocal $1/g$ is complex differentiable at $a$, and\n\n$$ (1/g)'(a)=-\\frac{g'(a)}{g(a)^2},\\qquad (f/g)'(a)=\\frac{f'(a)g(a)-f(a)g'(a)}{g(a)^2}. $$\n\nEvery constant function has derivative $0$, and the identity function has derivative $1$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [L1], the off-point quotient tends to $f'(z)=g(z)$ as $\\zeta\\to z$, which is exactly continuity of $g$ at $z$; this also covers constant $f$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "On $U\\setminus\\{z\\}$, the numerator and denominator are holomorphic and the denominator is nonzero, so [L2] makes $g$ holomorphic there.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [L3], step 1.2 also makes $g$ continuous away from $z$; together with step 1.1 this proves continuity on all of $U$, without claiming differentiability at the filled point.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A fixed point $z$ in the holomorphy domain is given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes zero increments in the derivative quotient and fills exactly the zero denominator point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Exactly one denominator zero is filled; no multiple-exception claim is made. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For constant $f$, the filled and off-point quotient are both zero. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The domain is open and the lemma has no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The filled value is uniquely determined by the derivative and no witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts properties of one construction, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Continuity of an arbitrary filled quotient is not claimed to characterize differentiability."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Verified the extension is claimed continuous but explicitly NOT holomorphic at the filled point, which is exactly the strength the Cauchy formula needs and no more. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "thm-cauchy-integral-formula-circle": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cauchy-difference-quotient-exceptional-extension",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $f:U\\to\\mathbb C$ be holomorphic, and fix $z\\in U$. Define\n\n$$g(\\zeta)=\\begin{cases}\\dfrac{f(\\zeta)-f(z)}{\\zeta-z},&\\zeta\\ne z,\\\\[6pt]f'(z),&\\zeta=z.\\end{cases}$$\n\nThen $g$ is continuous on $U$ and holomorphic on $U\\setminus\\{z\\}$. No holomorphy at the filled point $z$ is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped, let $p\\in U$, and let $f:U\\to\\mathbb C$ be continuous and holomorphic on $U\\setminus\\{p\\}$. Then $f$ has a primitive on $U$, and for every closed rectifiable contour $\\gamma$ in $U$,\n\n$$\\int_\\gamma f(z)\\,dz=0.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-linearity-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For continuous $f,g$ on the trace of a rectifiable contour $\\gamma$ and $\\alpha,\\beta\\in\\mathbb C$,\n$$\\int_\\gamma(\\alpha f+\\beta g)\\,dz=\\alpha\\int_\\gamma f\\,dz+\\beta\\int_\\gamma g\\,dz.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-circle-integrals-of-integer-monomials",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, $r>0$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. For every integer $m$,\n$$\\int_\\gamma(z-a)^m\\,dz=\\begin{cases}2\\pi i,&m=-1,\\\\0,&m\\ne-1.\\end{cases}$$",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-uniform-limit-interchanges-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma$ be a fixed rectifiable contour. If continuous functions $f_n$ on its trace converge uniformly to a continuous $f$, then\n$$\\int_\\gamma f_n(z)\\,dz\\longrightarrow\\int_\\gamma f(z)\\,dz.$$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Define $g(\\zeta)=(f(\\zeta)-f(z))/(\\zeta-z)$ for $\\zeta\\ne z$ and $g(z)=f'(z)$. By [L1], $g$ is continuous on $D(a,R)$ and holomorphic away from $z$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "If $z=a$, [L4] gives $\\int_\\gamma1/(\\zeta-z)\\,d\\zeta=2\\pi i$. If $z\\ne a$, the finite identity $1/(\\zeta-z)=\\sum_{k=0}^{N}(z-a)^k/(\\zeta-a)^{k+1}+(z-a)^{N+1}/((\\zeta-a)^{N+1}(\\zeta-z))$ holds on $\\gamma$, and its remainder has modulus at most $(|z-a|/r)^{N+1}/(r-|z-a|)$ there.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The disc is star-shaped with respect to $a$, since $|(1-t)a+t\\zeta-a|=t|\\zeta-a|<R$. The circle lies in the disc and is closed and rectifiable, so [L2] gives $\\int_\\gamma g(\\zeta)\\,d\\zeta=0$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-2",
+          "claim": "In the second case, [L6] makes the remainder tend uniformly to zero; [L5] and [L4] then give $\\int_\\gamma1/(\\zeta-z)\\,d\\zeta=2\\pi i$, because only the $k=0$ term has exponent $-1$. Thus the same kernel integral value holds also in the first case.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "L4",
+            "L5",
+            "L6"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Since $\\zeta\\ne z$ on $\\gamma$, [L3] expands step 2.1 as $\\int_\\gamma f(\\zeta)/(\\zeta-z)\\,d\\zeta=f(z)\\int_\\gamma1/(\\zeta-z)\\,d\\zeta$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Substitute step 2.2 into step 3.1 and divide by the nonzero number $2\\pi i$ to obtain the formula.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem specifies a nonempty disc, circle, and interior point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypotheses $R>r>0$ exclude zero-radius divisions; step 1.2 handles $z=a$ separately, and step 4.1 divides only by the nonzero number $2\\pi i$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The exponent $-1$ term is isolated in step 2.2, and $N=0$ is the first finite partial sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero and constant functions satisfy step 1.2, and the kernel computation remains independent of $f$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict inequalities $0<r<R$ and $|z-a|<r$ exclude the pole from the contour; steps 1.2 and 2.2 use the resulting ratio $|z-a|/r<1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All discs, circles, and the interior point are given explicitly; no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The integral representation is an equality under hypotheses, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of holomorphy from one circle formula is asserted."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "The kernel integral for z NOT the centre is the classic hole; it is closed here by the finite geometric identity, whose expansion I verified algebraically, together with the remainder bound (|z-a|/r)^{N+1}/(r-|z-a|) and uniform passage to the limit. Only the k = 0 term survives by thm-circle-integrals-of-integer-monomials. The z = a case is handled separately. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "lem-differentiating-cauchy-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-existence-of-complex-line-integrals-on-rectifiable-paths",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be rectifiable and let $f$ be continuous on its trace. Then the complex line integral [[def-complex-line-integral-over-a-rectifiable-path]] and the absolute line integral [[def-absolute-line-integral-over-a-rectifiable-path]] both exist.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-linearity-of-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "For continuous $f,g$ on the trace of a rectifiable contour $\\gamma$ and $\\alpha,\\beta\\in\\mathbb C$,\n$$\\int_\\gamma(\\alpha f+\\beta g)\\,dz=\\alpha\\int_\\gamma f\\,dz+\\beta\\int_\\gamma g\\,dz.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-ml-estimate-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "If $|f(z)|\\le M$ on the trace of a rectifiable contour $\\gamma$, with $M\\ge0$, then\n$$\\left|\\int_\\gamma f(z)\\,dz\\right|\\le M L(\\gamma).$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Let $a, b \\in \\mathbb{R}$ with $a \\le b$. Then the closed bounded interval $[a,b]$ ([[def-interval]]) is compact ([[def-open-cover-r]])",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-continuous-image-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be continuous ([[def-metric-continuity]]). Then:\n\n1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image\n   $f[X] \\subseteq Y$ is a compact subset of $Y$.\n2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is\n   a compact subset of $Y$.\n\nNo choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-compact-subset-is-closed-and-bounded",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $K \\subseteq X$ be a\ncompact subset ([[def-metric-compactness]]). Then $K$ is closed in $X$\n([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]).\n\nNo choice principle is used: both covers below are given by a rule, and the\nindexed form of [[lem-compactness-is-intrinsic]] returns indices rather than\nsets.\n\n**The converse is false in general.** A closed and bounded subset of an arbitrary\nmetric space need not be compact\n([[fs-closed-and-bounded-implies-compact-in-every-metric-space]]); it is exactly\nin $\\mathbb{R}^n$ that the converse holds ([[thm-heine-borel-rn]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For every $z\\in V$, the function $\\zeta\\mapsto\\varphi(\\zeta)/(\\zeta-z)^n$ is continuous on the trace, so $F_n(z)$ exists by [L1]. Moreover, [L3] applied to $\\varphi\\circ\\gamma$ gives a finite $M\\ge0$ with $|\\varphi(\\zeta)|\\le M$ on the trace.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Fix $z_0\\in V$. Choose $\\rho>0$ with $B(z_0,\\rho)\\subseteq V$; because the trace is disjoint from $V$, $w=\\zeta-z_0$ satisfies $|w|\\ge\\rho$, and if $0<|h|<\\rho/2$ then $|w-h|\\ge\\rho/2$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L4",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The finite power identity gives $\\big((w-h)^{-n}-w^{-n}\\big)/h=\\sum_{j=0}^{n-1}1/(w^{j+1}(w-h)^{n-j})$, and after subtracting $n/w^{n+1}$ the remainder is $h\\sum_{j=0}^{n-1}\\sum_{k=0}^{n-j-1}1/(w^{j+k+2}(w-h)^{n-j-k})$; by step 1.2 and [L4], its modulus is at most $|h|\\,n(n+1)(2/\\rho)^{n+2}/2$, uniformly on the trace.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "By [L2], the difference between $(F_n(z_0+h)-F_n(z_0))/h$ and $nF_{n+1}(z_0)$ has modulus at most a fixed finite constant times $M L(\\gamma)|h|$, which tends to zero. Hence $F_n'(z_0)=nF_{n+1}(z_0)$; since $z_0$ was arbitrary, $F_n$ is holomorphic on $V$. The estimate also covers $n=1$ and a constant contour, while $h=0$ is only the excluded difference-quotient value.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If $V=\\varnothing$, holomorphy and the derivative identity on $V$ are vacuous; otherwise step 1.2 fixes an arbitrary $z_0\\in V$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The proof excludes $h=0$ in step 1.2, takes $h\\to0$ in step 3.1, and allows zero contour length."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The lowest kernel index $n=1$ is included explicitly and produces $F_1'=F_2$. This disposition is retained in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For a constant contour the ML bound has length zero and both sides of the derivative formula vanish. This disposition is retained in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The $z$-variable ranges over an open set disjoint from the trace; there is no included boundary point."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "After fixing $z_0\\in V$, step 1.2 uses openness to choose the positive ball that supplies every denominator bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma directly proves holomorphy and a derivative formula."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse differentiation-under-integral criterion is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Verified both power identities symbolically, including the second-difference remainder, and the bound |h| n(n+1)(2/rho)^{n+2}/2 obtained from |w| >= rho and |w-h| >= rho/2. The disjointness of V from the trace is what supplies rho, and V empty is a real case (vacuous), now recorded in the contract. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "thm-cauchy-integral-formula-higher-derivatives": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-integral-formula-circle",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $R>0$, and let $f$ be holomorphic on the disc\n\n$$D(a,R)=\\{\\zeta\\in\\mathbb C:|\\zeta-a|<R\\}.$$\n\nIf $0<r<R$, $|z-a|<r$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$, then\n\n$$f(z)=\\frac{1}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{\\zeta-z}\\,d\\zeta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-differentiating-cauchy-integrals",
+          "source_section": "Statement",
+          "quote": "Then $F_n$ is holomorphic on $V$ and\n\n$$F_n'(z)=nF_{n+1}(z).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-factorial-and-falling-factorial",
+          "source_section": "Definition",
+          "quote": "$$F(0) = 1, \\qquad F(\\sigma(n)) = F(n)\\cdot\\sigma(n) \\quad (n \\in \\mathbb{N}).$$ We write $n! := F(n)$. Thus $0! = 1$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For $n=0$, [L1] and $0!=1$ from [L3] give the formula and the existence of $f^{(0)}=f$ on $D(a,r)$.",
+          "step": "1.1",
+          "inputs": [
+            "base",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Assume for a natural $n$ that $f^{(n)}$ exists on $D(a,r)$ and satisfies the displayed formula there.",
+          "step": "1.2",
+          "inputs": [
+            "ih"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [L5], the boundary data $\\varphi=f|_\\gamma$ are continuous; the open disc $D(a,r)$ is disjoint from the radius-$r$ trace, so [L2] applies with $m=n+1$. Differentiating the induction formula gives $f^{(n+1)}(z)=n!(n+1)(2\\pi i)^{-1}\\int_\\gamma f(\\zeta)/(\\zeta-z)^{n+2}\\,d\\zeta$, which is the required formula because $n!(n+1)=(n+1)!$ by [L3].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L2",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Thus the property holds at $0$ and passes from $n$ to $n+1$; [L4] proves existence and the formula for every $n\\in\\mathbb N$, including $n=1$ and constant functions.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L4",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A nonempty disc, circle, function, and evaluation point are supplied."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats derivative order zero and uses the defining value $0!=1$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 from the base produces the first derivative with coefficient $1!=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant and zero functions have vanishing positive-order derivatives and satisfy every integral formula. This disposition is retained in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The evaluation point stays strictly inside the radius-$r$ circle, the open set required by L2. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The same fixed circle is given and used at every induction stage."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is an equality and existence result, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from integral representations to initial holomorphy is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Base case n = 0 is the circle formula with 0! = 1; the successor step multiplies by (n+1) through F_m' = m F_{m+1} and n!(n+1) = (n+1)!. The exponent is n+1 in the integrand and the disc D(a,r) is disjoint from the radius-r trace, as [L2] requires. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "cor-cauchy-inequalities": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-integral-formula-higher-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$, let $0<r<R$, and let $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. Define $f^{(0)}=f$ and, whenever it exists, $f^{(n+1)}=(f^{(n)})'$. Then every $f^{(n)}$ exists on $D(a,r)$ and, for every $z\\in D(a,r)$ and $n\\in\\mathbb N$,\n\n$$f^{(n)}(z)=\\frac{n!}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{(\\zeta-z)^{n+1}}\\,d\\zeta.$$\n\nIn particular, every holomorphic function has complex derivatives of all orders locally.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-ml-estimate-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "If $|f(z)|\\le M$ on the trace of a rectifiable contour $\\gamma$, with $M\\ge0$, then\n$$\\left|\\int_\\gamma f(z)\\,dz\\right|\\le M L(\\gamma).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-circle-circumference-diameter-ratio-is-pi",
+          "source_section": "Statement",
+          "quote": "For every centre $c\\in\\mathbb R^2$ and radius $r>0$, the once-traversed circle has circumference\n\n$$C(r)=2\\pi r.$$\n\nSince its diameter is $d(r)=2r$, one has $C(r)/d(r)=\\pi$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "On the circle, $|f(\\zeta)/(\\zeta-a)^{n+1}|\\le M/r^{n+1}$, so [L1], [L2], and [L3] give $|f^{(n)}(a)|\\le n!(2\\pi)^{-1}(M/r^{n+1})(2\\pi r)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Since $r>0$, simplifying step 1.1 gives $|f^{(n)}(a)|\\le n!M/r^n$. For $n=0$ this is $|f(a)|\\le M$, and for $M=0$ or constant $f$ the same computation remains valid.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The circle of positive radius and its boundary bound are explicit hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 permits $M=0$, while $r=0$ is excluded before any division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Derivative order $n=1$ and radius $r=1$ both satisfy the same simplification in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero and constant functions are covered, including vanishing positive-order derivatives. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The boundary hypothesis is exactly on $|\\zeta-a|=r$; no value beyond the circle is used in the estimate. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "A bound $M$ is assumed rather than chosen as an unproved maximum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is a one-directional estimate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Derivative bounds are not claimed to characterize holomorphy."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Recomputed: n!(2\\pi)^{-1}(M/r^{n+1})(2\\pi r) = n! M / r^n. The exponent is r^n, not r^{n+1}, and M bounds |f| on the circle of radius r. n = 0 and M = 0 both checked. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "ex-goursat-triangle-integral-of-z-squared": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-oriented-complex-triangle-and-boundary",
+          "source_section": "Definition",
+          "quote": "Its **positively oriented boundary contour** is $$\\partial\\Delta[a,b,c]=\\ell_{ab}*\\ell_{bc}*\\ell_{ca},$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "source_section": "Statement",
+          "quote": "Let $P(z)=\\sum_{k=0}^n a_kz^k$ be a complex polynomial. Then $P$ is entire and\n\n$$ P'(z)=\\sum_{k=1}^n k a_kz^{k-1}. $$\n\nThis includes the zero polynomial and constant polynomials, whose derivative is zero. If $P,Q$ are complex polynomials, then the set $D=\\{z\\in\\mathbb C:Q(z)\\ne0\\}$ is open, $P/Q$ is holomorphic on $D$, and\n\n$$ (P/Q)'=\\frac{P'Q-PQ'}{Q^2}. $$\n\nWhen $Q$ is a nonzero constant, $D=\\mathbb C$; when $Q$ is the zero polynomial, $D=\\varnothing$ and no rational function is defined there.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-fundamental-theorem-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a primitive of a continuous function $f$ on an open set containing the trace of a rectifiable contour $\\gamma:[a,b]\\to\\mathbb C$. If $F'=f$ is continuous, then\n$$\\int_\\gamma f(z)\\,dz=F(\\gamma(b))-F(\\gamma(a)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nNo continuity of $f'$ is assumed, and repeated or collinear vertices are allowed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The polynomial $F(z)=z^3/3$ is entire with $F'(z)=z^2$; this derivative is holomorphic by [L2] and continuous by [L5], so every hypothesis of [L3] holds on each edge.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "In the orientation of [L1], the endpoint increments are $F(1)-F(0)=1/3$, $F(i)-F(1)=(-i-1)/3$, and $F(0)-F(i)=i/3$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Their sum is zero, proving the displayed integral directly; [L4] gives the same value because $z^2$ is entire.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example specifies all three vertices and all three edges."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 include the vertex zero and evaluate its cubic exactly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use the vertex one and its orientation-sensitive endpoint increments."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The chosen vertices $0,1,i$ are distinct and noncollinear."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each endpoint occurs once as a terminal and once as an initial value across steps 1.1–3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The primitive and triangle are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a worked equality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed from this one integral to holomorphy."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "ai-generated construction, recomputed from the primitive z^3/3: 1/3, (-i-1)/3, i/3, sum zero. The retitled claim is exactly what the verification establishes. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "ex-goursat-four-triangle-boundary-cancellation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-goursat-four-triangle-boundary-cancellation",
+          "source_section": "Statement",
+          "quote": "Let $f$ be continuous on the filled triangle $\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]], and put\n\n$$p=\\frac{a+b}{2},\\qquad q=\\frac{b+c}{2},\\qquad r=\\frac{c+a}{2}.$$\n\nThen\n\n$$I_f[a,b,c]=I_f[a,p,r]+I_f[p,b,q]+I_f[r,q,c]+I_f[p,q,r].$$\n\nThe identity remains valid when vertices coincide or are collinear.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The directed edge lists are $(0\\to p,p\\to r,r\\to0)$, $(p\\to1,1\\to q,q\\to p)$, $(r\\to q,q\\to i,i\\to r)$, and $(p\\to q,q\\to r,r\\to p)$.",
+          "step": "1.1",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The interior segment pairs are $p\\to r,r\\to p$, $q\\to p,p\\to q$, and $r\\to q,q\\to r$; each pair consists of one directed edge and its reversal, so the formal oriented edges cancel.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The surviving half-edges concatenate as $0\\to p\\to1$, $1\\to q\\to i$, and $i\\to r\\to0$, which is the positive outer boundary $0\\to1\\to i\\to0$; for every continuous integrand, this is exactly the integral identity in [L1].",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has an explicit nonempty triangle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The vertex zero and the zero-starting outer edges are displayed in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The vertex one and midpoint one-half are explicitly checked in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The concrete triangle is nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies every join and the return to the initial vertex."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every midpoint and subtriangle is explicitly determined."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies an identity rather than an implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No geometric converse from the integral sum is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-cauchy-integral-formula-exponential-over-z-minus-one": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-integral-formula-circle",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $R>0$, and let $f$ be holomorphic on the disc\n\n$$D(a,R)=\\{\\zeta\\in\\mathbb C:|\\zeta-a|<R\\}.$$\n\nIf $0<r<R$, $|z-a|<r$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$, then\n\n$$f(z)=\\frac{1}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{\\zeta-z}\\,d\\zeta.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The point $1$ lies strictly inside $|z|=2$, while $|z-1|\\ge1$ on the circle, so the denominator has no zero on the contour; by [L1], the numerator is holomorphic on every disc.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply [L2] with centre $0$, radius $2$, interior point $1$, and $f(z)=e^z$ to obtain the displayed value $2\\pi i e^1=2\\pi i e$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The circle and integrand are explicit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks that the radius is positive and $|\\zeta-1|\\ge1$ on the circle, so the denominator never vanishes there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The evaluation point is exactly one and its strict interior inequality is checked in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The circle has radius two and the exponential is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The given parametrization $\\gamma(t)=2\\exp(it)$ has matching values at $t=0$ and $t=2\\pi$ and is positively oriented; step 2.1 applies L2 to that exact contour."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness or maximum is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a direct evaluation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed from the integral value."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Recomputed 2\\pi i e^1 and checked the interior point 1 satisfies |z-a| < r for a = 0, r = 2, with the repaired [L2] carrying those hypotheses. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "ex-cauchy-integral-formula-cosine-third-order-pole": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-integral-formula-higher-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$, let $0<r<R$, and let $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. Define $f^{(0)}=f$ and, whenever it exists, $f^{(n+1)}=(f^{(n)})'$. Then every $f^{(n)}$ exists on $D(a,r)$ and, for every $z\\in D(a,r)$ and $n\\in\\mathbb N$,\n\n$$f^{(n)}(z)=\\frac{n!}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{(\\zeta-z)^{n+1}}\\,d\\zeta.$$\n\nIn particular, every holomorphic function has complex derivatives of all orders locally.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-complex-trigonometric-and-hyperbolic-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin,\\cos,\\sinh,\\cosh$ are entire and satisfy\n$$\\sin'=\\cos,\\qquad \\cos'=-\\sin,\\qquad \\sinh'=\\cosh,\\qquad \\cosh'=\\sinh.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The point $1$ lies strictly inside the radius-$2$ circle and the denominator is nonzero on it; by [L2], $f(z)=\\cos z$ is entire and $f''(1)=-\\cos1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply [L1] with $n=2$ and $z=1$: the integral is $(2\\pi i/2!)f''(1)=-\\pi i\\cos1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The function, circle, and pole are specified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 checks that the radius is positive and the denominator is nonzero on the circle."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks that the pole is at one and satisfies $|1|<2$."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The pole order and circle radius are nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Positive circle orientation is retained from L1. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a worked evaluation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No inverse conclusion follows from the numerical value."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-holomorphic-function-on-an-annulus-with-nonzero-closed-contour-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-polynomials-and-rational-functions-are-holomorphic",
+          "source_section": "Statement",
+          "quote": "Let $P(z)=\\sum_{k=0}^n a_kz^k$ be a complex polynomial. Then $P$ is entire and\n\n$$ P'(z)=\\sum_{k=1}^n k a_kz^{k-1}. $$\n\nThis includes the zero polynomial and constant polynomials, whose derivative is zero. If $P,Q$ are complex polynomials, then the set $D=\\{z\\in\\mathbb C:Q(z)\\ne0\\}$ is open, $P/Q$ is holomorphic on $D$, and\n\n$$ (P/Q)'=\\frac{P'Q-PQ'}{Q^2}. $$\n\nWhen $Q$ is a nonzero constant, $D=\\mathbb C$; when $Q$ is the zero polynomial, $D=\\varnothing$ and no rational function is defined there.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-polar-form-with-unique-principal-argument",
+          "source_section": "Statement",
+          "quote": "Every $z\\ne0$ has a unique representation $z=r(\\cos\\theta+i\\sin\\theta)$ with $r=|z|>0$ and $-\\pi<\\theta\\le\\pi$. The conventions and prerequisite facts used below are recorded in [[def-complex-conjugate-real-imaginary-part-and-modulus]], [[thm-sine-and-cosine-parametrize-the-unit-circle]], [[thm-sine-cosine-zero-sets-and-fundamental-period]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-path-connected",
+          "source_section": "Definition",
+          "quote": "$X$ is **path-connected** when for every pair $x, y \\in X$ there is a path in $X$ from $x$ to $y$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-path-connected-implies-connected",
+          "source_section": "Statement",
+          "quote": "**Path-connected implies connected.** If $X$ is path-connected ([[def-path-connected]]) then $X$ is connected ([[def-connected-space]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-complex-domain",
+          "source_section": "Definition",
+          "quote": "A **complex domain** is a nonempty, connected, open subset $U\\subseteq\\mathbb C$. Open means open in the modulus metric of [[def-metric-topology]], and connected has the meaning of [[def-connected-space]]. By [[rem-complex-plane-euclidean-dictionary]], these are exactly the usual Euclidean notions for the corresponding subset of $\\mathbb R^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-circle-integrals-of-integer-monomials",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, $r>0$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. For every integer $m$,\n$$\\int_\\gamma(z-a)^m\\,dz=\\begin{cases}2\\pi i,&m=-1,\\\\0,&m\\ne-1.\\end{cases}$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The point $1$ lies in $A$. For $z\\in A$, let $\\delta=\\tfrac12\\min\\{|z|-1/2,2-|z|\\}>0$; if $|w-z|<\\delta$, [L1] gives $1/2<|w|<2$, so $A$ is open.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "Given $z=r\\exp(i\\theta)$ and $w=s\\exp(i\\phi)$ in $A$ as in [L3], the radial paths $t\\mapsto((1-t)r+t)\\exp(i\\theta)$ and $t\\mapsto((1-t)s+t)\\exp(i\\phi)$ stay in $A$, and the unit-circle arc $t\\mapsto\\exp(i((1-t)\\theta+t\\phi))$ joins their unit endpoints. By [L7] these paths are continuous; the first, the arc, and the reversal of the second concatenate to join $z$ to $w$, so [L4] makes $A$ path-connected and connected.",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4",
+            "L7"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Steps 1.1 and 1.2 show that $A$ is nonempty, open, and connected, hence a complex domain by [L5]; since $0\\notin A$, [L2] makes $f(z)=1/z$ holomorphic on $A$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L2",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The unit circle is a closed rectifiable contour in $A$, while [L6] gives its integral as $2\\pi i\\ne0$. Thus the displayed domain, function, and contour refute the claim.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 begins by checking that the point $1$ lies in the annulus, proving nonemptiness before the domain conclusion in step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The strict inner inequality excludes zero from the annulus, and step 2.1 uses that fact to license the rational function $1/z$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit circle lies strictly between radii one-half and two and supplies the witness. This disposition is retained in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The annulus has two strict positive radii and the loop is nonconstant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses both strict radial bounds in the openness estimate; the excluded boundary circles are never used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Polar form supplies a determined radius and principal angle for each given endpoint, and step 1.2 writes the joining path explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample verifies a witness rather than an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a nonzero integral to annular topology is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Verified the annulus is open (explicit delta), path-connected (radial paths to the unit circle plus an arc), and that 0 is outside it so 1/z is holomorphic there. The Euler identity needed to pass from polar to exponential form is now a real dependency, which was reader 6's finding. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "cex-connected-domain-need-not-be-star-shaped": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-punctured-rn-is-polygonally-connected",
+          "source_section": "Statement",
+          "quote": "For $n\\ge2$, $\\mathbb R^n\\setminus\\{0\\}$ is polygonally connected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-polygonal-path-and-polygonal-connectedness",
+          "source_section": "Definition",
+          "quote": "The subset $A$ is **polygonally connected** when every pair of its points is joined by a polygonal path in $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-path-connected",
+          "source_section": "Definition",
+          "quote": "$X$ is **path-connected** when for every pair $x, y \\in X$ there is a path in $X$ from $x$ to $y$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-path-connected-implies-connected",
+          "source_section": "Statement",
+          "quote": "**Path-connected implies connected.** If $X$ is path-connected ([[def-path-connected]]) then $X$ is connected ([[def-connected-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-complex-domain",
+          "source_section": "Definition",
+          "quote": "A **complex domain** is a nonempty, connected, open subset $U\\subseteq\\mathbb C$. Open means open in the modulus metric of [[def-metric-topology]], and connected has the meaning of [[def-connected-space]]. By [[rem-complex-plane-euclidean-dictionary]], these are exactly the usual Euclidean notions for the corresponding subset of $\\mathbb R^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-star-shaped-open-subset-of-rn",
+          "source_section": "Definition",
+          "quote": "A nonempty open set $U\\subseteq\\mathbb R^n$ is **star-shaped with respect to** $a\\in U$ when\n\n$$a+t(x-a)\\in U\\qquad\\text{for every }x\\in U\\text{ and }0\\le t\\le1.$$\n\nThe point $a$ is a **star centre**. Every convex open set of [[def-convex-subset-of-euclidean-space]] is star-shaped with respect to each of its points. The nonemptiness and the chosen centre are part of the definition.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The set $U$ is nonempty. If $z\\in U$, the ball $B(z,|z|/2)$ avoids $0$ by [L5], so $U$ is open; under $\\mathbb C=\\mathbb R^2$, [L1] and [L2] make it connected. Hence [L3] makes $U$ a complex domain.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For any proposed centre $a\\in U$, the point $-a$ also lies in $U$, but the segment from $a$ to $-a$ contains $(1-1/2)a+(1/2)(-a)=0\\notin U$. By [L4], $a$ is not a star centre, so no star centre exists and the claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The punctured plane contains $1$ and is therefore nonempty; step 1.1 records nonemptiness before applying the domain definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero is exactly the removed point reached by the segment in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness point $1$ establishes nonemptiness and may also be tested as a proposed centre. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A proposed centre cannot be zero because it is outside the domain; every admitted $a$ has distinct point $-a$. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both segment endpoints $a$ and $-a$ lie in the domain, while the interior parameter $1/2$ fails. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 2.1 treats an arbitrary proposed centre and constructs $-a$ deterministically."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is an existence counterexample."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No characterization of star-shaped domains is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "The refutation quantifies over EVERY proposed centre a and exhibits -a with 0 on the segment; it does not fix one candidate centre, which is the usual failure of this argument. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    },
+    "fs-goursats-theorem-requires-continuity-of-the-derivative": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nNo continuity of $f'$ is assumed, and repeated or collinear vertices are allowed.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Under the holomorphy and containment hypotheses, [L1] already gives the claimed zero boundary integral.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Since continuity of $f'$ is absent from the hypotheses of [L1], it is not a separately required assumption for that conclusion, and the claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The claim concerns the hypotheses of a theorem for a supplied triangle and function."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The conclusion in L1 is exactly the zero integral at issue. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No numerical parameter has a special value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "L1 includes the triangle convention used by the page; the refutation does not depend on nondegeneracy. This disposition is retained in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The refutation is a direct comparison of hypotheses and conclusion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false claim is a necessity assertion, not a formal biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse theorem is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-continuous-function-on-a-convex-domain-has-a-primitive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-circle-integrals-of-integer-monomials",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, $r>0$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. For every integer $m$,\n$$\\int_\\gamma(z-a)^m\\,dz=\\begin{cases}2\\pi i,&m=-1,\\\\0,&m\\ne-1.\\end{cases}$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-complex-primitive",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$. A **primitive** of $f$ on $U$ is a holomorphic function $F:U\\to\\mathbb C$ in the sense of [[def-complex-differentiability-holomorphic-and-entire]] such that $F'(z)=f(z)$ for every $z\\in U$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-closed-contour-integral-of-a-derivative-is-zero",
+          "source_section": "Statement",
+          "quote": "If $F$ is holomorphic on an open set, $F'$ is continuous there, and $\\gamma$ is a closed rectifiable contour in that set, then $\\int_\\gamma F'(z)\\,dz=0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-rn-is-polygonally-connected-and-locally-path-connected",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $\\mathbb{R}^n$ is polygonally connected and connected, and it is locally path-connected and locally connected.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-complex-domain",
+          "source_section": "Definition",
+          "quote": "A **complex domain** is a nonempty, connected, open subset $U\\subseteq\\mathbb C$. Open means open in the modulus metric of [[def-metric-topology]], and connected has the meaning of [[def-connected-space]]. By [[rem-complex-plane-euclidean-dictionary]], these are exactly the usual Euclidean notions for the corresponding subset of $\\mathbb R^2$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "By [L1], $|\\overline z-\\overline w|=|z-w|$, so $f$ is continuous; by [L2], its domain $\\mathbb C$ is convex. The complex plane is nonempty and open, and it is connected under its Euclidean identification by [L6], so [L7] makes it a complex domain.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L6",
+            "L7"
+          ]
+        },
+        {
+          "id": "derive-1-2",
+          "claim": "On the unit circle, $z\\overline z=1$, so $\\overline z=z^{-1}$ and [L3] gives $\\int_\\gamma f(z)\\,dz=2\\pi i\\ne0$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1-3",
+          "claim": "Suppose, for contradiction, that $f$ has a primitive $F$ on $\\mathbb C$.",
+          "step": "1.3",
+          "inputs": [
+            "assume-contra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "By [L4], $F$ is holomorphic and $F'=f$; step 1.1 makes this derivative continuous, and the unit circle is closed and rectifiable, so [L5] gives $\\int_\\gamma f=0$, contradicting step 1.2. Hence no primitive exists and the claim is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "L4",
+            "L5",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness domain is the nonempty complex plane."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The origin lies in the convex domain but not on the positive-radius unit circle; conjugation is defined there. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unit-radius identity $|z|^2=1$ is exactly what yields $\\overline z=1/z$. This disposition is retained in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The witness contour has positive radius and is nonconstant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The given parametrization $\\gamma(t)=\\exp(it)$ has matching endpoint values at $0$ and $2\\pi$ and positive orientation; steps 1.2 and 2.1 use that unit circle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness function, domain, and contour are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false statement is refuted by one explicit witness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of continuous functions with primitives is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b (Claude Opus 5, group Alpha for batches 4-6)",
+        "notes": "Verified conjugation is continuous, C is convex and a complex domain, and that on the unit circle z-bar = 1/z so the integral is 2\\pi i; a primitive would force zero by the closed-contour theorem. Independent refuter evidence was unavailable (Codex quota exhausted); this disposition rests on Alpha's own reading."
+      }
+    }
+  }
+}

@@ -9,7 +9,225 @@
     "requires": [
       "quadratic-residues-and-the-legendre-symbol-examples"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "lem-gauss-lower-half-lattice-count",
+        "kind": "lemma",
+        "title": "Gauss's lemma as a lower-half lattice-point count",
+        "strategy": "For each $1\\le x\\le(p-1)/2$, use division with remainder to write $qx=pt_x+r_x$ with $0<r_x<p$; then $t_x$ is exactly the number of positive integers $y$ with $py<qx$. Compare the parity of $\\sum_x t_x$ with the parity of the negative signed representatives in Gauss's lemma: the absolute signed representatives permute the half-system, and replacing $r_x$ by $p-r_x$ changes parity exactly in the negative cases. This proves that the lattice-point count and Gauss's sign count have the same parity without using a floor function.",
+        "deps": [
+          "thm-gauss-quadratic-residue-lemma",
+          "lem-gauss-half-system-permutation",
+          "thm-division-algorithm-in-z"
+        ]
+      },
+      {
+        "id": "lem-reciprocity-rectangle-lattice-count",
+        "kind": "lemma",
+        "title": "The two reciprocity lattice counts partition an open rectangle",
+        "strategy": "Count the integer points with $1\\le x\\le(p-1)/2$ and $1\\le y\\le(q-1)/2$. Every point satisfies exactly one of $py<qx$ and $qx<py$: equality would force $p\\mid x$ and $q\\mid y$ by Euclid's lemma, contradicting the endpoint bounds. The two regions are the counts with $(p,q)$ and $(q,p)$ interchanged, so their cardinalities add to $(p-1)(q-1)/4$.",
+        "deps": [
+          "lem-gauss-lower-half-lattice-count",
+          "thm-euclids-lemma"
+        ]
+      },
+      {
+        "id": "thm-quadratic-reciprocity",
+        "kind": "theorem",
+        "title": "Quadratic reciprocity for distinct odd primes",
+        "strategy": "Apply the lower-half lattice-count lemma in both orientations. Multiplying the two resulting signs and substituting the rectangle partition count gives the exponent $(p-1)(q-1)/4$; its parity yields the equivalent congruence-class formulation.",
+        "deps": [
+          "lem-gauss-lower-half-lattice-count",
+          "lem-reciprocity-rectangle-lattice-count"
+        ]
+      },
+      {
+        "id": "def-jacobi-symbol",
+        "kind": "definition",
+        "title": "The Jacobi symbol, with its zero value and empty-product convention",
+        "deps": [
+          "def-legendre-symbol",
+          "thm-canonical-prime-factorisation",
+          "def-monoid-finite-product",
+          "def-common-divisor-and-gcd"
+        ]
+      },
+      {
+        "id": "prop-jacobi-symbol-well-defined",
+        "kind": "proposition",
+        "title": "The Jacobi symbol is well defined on numerator residue classes",
+        "strategy": "Use canonical prime factorisation to make the multiset of prime factors and their exponents unique, while commutativity makes their order irrelevant. Each Legendre factor lies in $\\{-1,0,1\\}$ and is representative-independent; if two numerators are congruent modulo $n$, they are congruent modulo every prime divisor of $n$. The product is zero exactly when a prime divisor of $n$ divides the numerator, equivalently when the numerator and denominator are not coprime; handle $n=1$ by the empty product.",
+        "deps": [
+          "def-jacobi-symbol",
+          "thm-canonical-prime-factorisation",
+          "prop-legendre-symbol-well-defined",
+          "lem-every-integer-above-one-has-a-prime-divisor"
+        ]
+      },
+      {
+        "id": "thm-jacobi-symbol-multiplicativity",
+        "kind": "theorem",
+        "title": "The Jacobi symbol is multiplicative in numerator and denominator",
+        "strategy": "Numerator multiplicativity follows factor by factor from Legendre-symbol multiplicativity, including zero factors. For odd positive denominators, canonical prime factorisation adds the exponent of each prime in a product, so regrouping the finite product proves denominator multiplicativity without assuming the two denominators coprime. Check the denominator-one cases using the empty product.",
+        "deps": [
+          "def-jacobi-symbol",
+          "thm-legendre-symbol-multiplicativity",
+          "thm-canonical-prime-factorisation",
+          "thm-fundamental-theorem-of-arithmetic",
+          "lem-p-adic-valuation-additive"
+        ]
+      },
+      {
+        "id": "prop-jacobi-symbol-on-units-is-a-homomorphism",
+        "kind": "proposition",
+        "title": "For fixed odd modulus, the Jacobi symbol is a homomorphism on the unit group",
+        "strategy": "Representative independence defines $\\chi_n([a]_n)=(a/n)$ on the unit group, where the zero value cannot occur. Numerator multiplicativity proves preservation of products, and the symbol of the identity is one, including at modulus one.",
+        "deps": [
+          "prop-jacobi-symbol-well-defined",
+          "thm-jacobi-symbol-multiplicativity",
+          "def-unit-group-modulo-n-and-euler-totient",
+          "thm-unit-criterion-modulo-n",
+          "def-group-homomorphism"
+        ]
+      },
+      {
+        "id": "thm-jacobi-symbol-supplements",
+        "kind": "theorem",
+        "title": "The two supplementary laws for the Jacobi symbol",
+        "strategy": "Apply the prime supplementary laws to every prime factor with multiplicity. Regroup the signs and verify that their parity exponents agree with $(n-1)/2$ and $(n^2-1)/8$, respectively, using the elementary product identities for odd integers. The empty factorisation gives both formulas at $n=1$.",
+        "deps": [
+          "def-jacobi-symbol",
+          "thm-jacobi-symbol-multiplicativity",
+          "thm-first-supplement-to-quadratic-reciprocity",
+          "thm-second-supplement-to-quadratic-reciprocity"
+        ]
+      },
+      {
+        "id": "thm-jacobi-symbol-reciprocity",
+        "kind": "theorem",
+        "title": "Quadratic reciprocity for coprime odd Jacobi denominators",
+        "strategy": "Expand both symbols over the canonical prime factorisations of the coprime odd positive integers. Apply prime quadratic reciprocity to every cross-pair; coprimality ensures the primes in a pair are distinct. Multiplying and collecting the parity exponents gives $(m-1)(n-1)/4$, with either denominator equal to one handled by empty products.",
+        "deps": [
+          "thm-quadratic-reciprocity",
+          "def-jacobi-symbol",
+          "thm-jacobi-symbol-multiplicativity",
+          "thm-canonical-prime-factorisation",
+          "thm-fundamental-theorem-of-arithmetic"
+        ]
+      },
+      {
+        "id": "thm-euclidean-algorithm-for-jacobi-symbol",
+        "kind": "theorem",
+        "title": "The Euclidean algorithm computes the Jacobi symbol without factoring the denominator",
+        "strategy": "For input $a\\in\\mathbb Z$ and odd $n\\ge1$, return one at $n=1$; otherwise reduce $a$ to its least nonnegative remainder $r<n$, returning zero if $r=0$. Write $r=2^s b$ with $b$ odd, apply numerator multiplicativity and the second supplement, and terminate if $b=1$. Before swapping, use Jacobi reciprocity when $b,n$ are coprime; when they are not, both swapped symbols are zero by the adopted convention, so the same signed swap identity remains valid. Replace the denominator by $b$. Each nonterminal denominator is strictly smaller, so the process terminates at one or zero. This is the Euclidean-style algorithm of Shoup §12.3, not the genuinely binary shift/subtract variant in Shoup Exercise 12.5.",
+        "deps": [
+          "def-jacobi-symbol",
+          "prop-jacobi-symbol-well-defined",
+          "thm-jacobi-symbol-multiplicativity",
+          "thm-jacobi-symbol-supplements",
+          "thm-jacobi-symbol-reciprocity",
+          "thm-division-algorithm-in-z",
+          "lem-p-adic-valuation-basic"
+        ]
+      },
+      {
+        "id": "prop-unit-square-has-jacobi-symbol-one",
+        "kind": "proposition",
+        "title": "A unit square modulo an odd integer has Jacobi symbol one",
+        "strategy": "If $x^2\\equiv a\\pmod n$ and $[a]_n$ is a unit, then $[x]_n$ is a unit because an inverse of $[x]_n^2$ yields an inverse of $[x]_n$. Apply the Jacobi homomorphism to $[x]_n^2=[a]_n$; its value is the square of a sign and hence one. Include $n=1$ explicitly.",
+        "deps": [
+          "prop-jacobi-symbol-on-units-is-a-homomorphism",
+          "thm-unit-criterion-modulo-n"
+        ]
+      },
+      {
+        "id": "cor-jacobi-symbol-minus-one-obstructs-square",
+        "kind": "corollary",
+        "title": "Jacobi symbol minus one obstructs quadratic residuosity",
+        "strategy": "Take the contrapositive of the unit-square proposition: a unit whose Jacobi symbol is minus one cannot be a square modulo the odd denominator.",
+        "deps": [
+          "prop-unit-square-has-jacobi-symbol-one"
+        ]
+      },
+      {
+        "id": "lem-nonsingular-square-root-lift-modulo-odd-prime-powers",
+        "kind": "lemma",
+        "title": "A nonsingular square root lifts uniquely by one odd-prime-power step",
+        "strategy": "Write $x_k^2-a=c p^k$. Expanding $(x_k+t p^k)^2-a$ modulo $p^{k+1}$ reduces the lifting condition to the linear congruence $2x_k t\\equiv-c\\pmod p$. The hypotheses imply $p\\nmid x_k$ and, because $p$ is odd, $p\\nmid2x_k$; hence the coefficient is coprime to $p$ and the published linear-congruence theorem supplies one class $t$ modulo $p$. This is a direct specialised congruence proof, not a general Hensel lemma.",
+        "deps": [
+          "thm-linear-congruence-solvability-and-solution-count",
+          "thm-euclids-lemma",
+          "lem-prime-not-dividing-is-coprime"
+        ]
+      },
+      {
+        "id": "thm-unit-square-criterion-modulo-odd-prime-powers",
+        "kind": "theorem",
+        "title": "Unit square criterion and root count modulo odd prime powers",
+        "strategy": "Reduction modulo $p$ proves necessity. If $(a/p)=1$, the prime-modulus solution count gives exactly two roots, and the lifting lemma carries each root uniquely through every exponent up to $k$. Conversely every root modulo $p^k$ reduces to one of the two roots modulo $p$ and at each stage is the unique lift of its reduction, so no additional roots occur. Treat $k=1$ as the base case.",
+        "deps": [
+          "lem-nonsingular-square-root-lift-modulo-odd-prime-powers",
+          "cor-number-of-solutions-to-quadratic-congruence-modulo-prime",
+          "def-legendre-symbol"
+        ]
+      },
+      {
+        "id": "thm-unit-square-criterion-modulo-two-powers",
+        "kind": "theorem",
+        "title": "Unit square criterion and root count modulo powers of two",
+        "strategy": "Handle moduli two and four directly. For $k\\ge3$, use the unique form $(-1)^\\varepsilon5^j$ in the published unit-group structure: a unit is a square exactly when $\\varepsilon=0$ and $j$ is even, which is equivalent after reduction modulo eight to being one modulo eight. Squaring in the two cyclic coordinates has a kernel of four elements, so every soluble unit has four roots; direct expansion supplies the necessary congruence modulo eight.",
+        "deps": [
+          "thm-unit-group-modulo-two-power-structure"
+        ]
+      },
+      {
+        "id": "thm-unit-square-criterion-modulo-n",
+        "kind": "theorem",
+        "title": "A unit is a square modulo $n$ exactly when it is a square at every prime-power factor",
+        "strategy": "Apply canonical prime factorisation and the unit-group Chinese remainder isomorphism to the squaring map. A global square gives a square in every component; conversely choose the finitely many local roots and use the inverse CRT isomorphism to obtain one global unit class. Substitute the odd-prime-power and two-power criteria, and treat $n=1$ as the empty product with its unique unit class.",
+        "deps": [
+          "thm-unit-square-criterion-modulo-odd-prime-powers",
+          "thm-unit-square-criterion-modulo-two-powers",
+          "thm-unit-group-chinese-remainder-decomposition",
+          "thm-canonical-prime-factorisation",
+          "thm-fundamental-theorem-of-arithmetic"
+        ]
+      },
+      {
+        "id": "cor-number-of-square-roots-of-a-unit-modulo-n",
+        "kind": "corollary",
+        "title": "The number of square roots of a unit modulo $n$ is the product of the local counts",
+        "strategy": "The unit-group Chinese remainder isomorphism restricts to a bijection between the global root set and the Cartesian product of the local root sets. Multiply the two-root counts for soluble odd prime powers and the appropriate one-, two-, or four-root count for the two-part; the empty product at $n=1$ is one.",
+        "deps": [
+          "thm-unit-square-criterion-modulo-odd-prime-powers",
+          "thm-unit-square-criterion-modulo-two-powers",
+          "thm-unit-group-chinese-remainder-decomposition",
+          "thm-fundamental-theorem-of-arithmetic"
+        ]
+      },
+      {
+        "id": "thm-jacobi-map-kernel-and-square-subgroup",
+        "kind": "theorem",
+        "title": "The kernel of the Jacobi map and the subgroup of unit squares",
+        "strategy": "For odd $n=\\prod_{i<r}p_i^{e_i}$, unit squares lie in $\\ker\\chi_n$. The root-count corollary at the identity and the first isomorphism theorem for the squaring map give index $2^r$ for the square subgroup. Canonical factorisation and valuation additivity show that $n$ is a square exactly when every $e_i$ is even. In that case the Jacobi map is trivial; if some exponent is odd, choose a nonsquare in that cyclic local unit group and the identity in the other CRT components to show surjectivity, so its kernel has index two. Apply the finite index-tower formula to obtain $[\\ker\\chi_n:U_n^2]=2^r$ when $n$ is a square and $2^{r-1}$ otherwise, including the one-element case $n=1$.",
+        "deps": [
+          "prop-jacobi-symbol-on-units-is-a-homomorphism",
+          "prop-unit-square-has-jacobi-symbol-one",
+          "thm-unit-square-criterion-modulo-odd-prime-powers",
+          "cor-number-of-square-roots-of-a-unit-modulo-n",
+          "thm-unit-group-modulo-odd-prime-power-is-cyclic",
+          "thm-unit-group-chinese-remainder-decomposition",
+          "def-kernel-and-image-of-group-homomorphism",
+          "def-jacobi-symbol",
+          "thm-canonical-prime-factorisation",
+          "lem-p-adic-valuation-additive",
+          "thm-first-isomorphism-theorem-groups",
+          "thm-lagrange",
+          "def-index",
+          "cor-index-tower-finite"
+        ]
+      }
+    ]
   },
   {
     "order": 57.006,
@@ -21,6 +239,103 @@
     "requires": [
       "quadratic-reciprocity-and-the-jacobi-symbol"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-complete-reciprocity-table-for-small-odd-primes",
+        "kind": "example",
+        "title": "A complete reciprocity table for $3,5,7,11$",
+        "strategy": "List the nonzero squares modulo each of the four primes, evaluate both Legendre symbols for every unordered pair, and check that the signs agree except when both primes are three modulo four. The finite witness table is checked independently of the theorem before comparing with reciprocity.",
+        "deps": [
+          "thm-quadratic-reciprocity",
+          "def-legendre-symbol"
+        ]
+      },
+      {
+        "id": "ex-jacobi-symbol-by-the-euclidean-algorithm",
+        "kind": "example",
+        "title": "Computing $(1111/8093)$ by the Euclidean Jacobi algorithm",
+        "strategy": "Follow the remainder, power-of-two, supplement, and reciprocity updates explicitly until the denominator is one, recording every sign change and obtaining minus one without factoring 8093.",
+        "deps": [
+          "thm-euclidean-algorithm-for-jacobi-symbol"
+        ]
+      },
+      {
+        "id": "cex-jacobi-symbol-one-does-not-imply-a-square",
+        "kind": "counterexample",
+        "title": "Jacobi symbol one does not imply a square: $(2/15)=1$",
+        "strategy": "Use the prime factorisation $15=3\\cdot5$ to compute $(2/15)=(2/3)(2/5)=1$. The squares modulo three are zero and one, so two is not a square modulo three and hence cannot be a square modulo fifteen.",
+        "deps": [
+          "def-jacobi-symbol",
+          "prop-unit-square-has-jacobi-symbol-one"
+        ]
+      },
+      {
+        "id": "ex-square-roots-modulo-an-odd-prime-power",
+        "kind": "example",
+        "title": "Lifting both square roots of $2$ from modulo $7$ to modulo $7^4$",
+        "strategy": "Start from the roots three and four modulo seven and solve the one-step linear congruence on each branch. Obtain roots $10,39$ modulo $49$, then $108,235$ modulo $343$, and finally $235,2166$ modulo $2401$; square the final representatives directly and invoke unique lifting to certify completeness.",
+        "deps": [
+          "lem-nonsingular-square-root-lift-modulo-odd-prime-powers",
+          "thm-unit-square-criterion-modulo-odd-prime-powers"
+        ]
+      },
+      {
+        "id": "ex-four-square-roots-modulo-a-power-of-two",
+        "kind": "example",
+        "title": "The four square roots of $9$ modulo $128$",
+        "strategy": "Verify directly that $3,61,67,125$ square to nine modulo 128. Since nine is one modulo eight, the two-power criterion says there are exactly four root classes, so the displayed list is complete. The target nine avoids duplicating the published example for roots of one modulo 128.",
+        "deps": [
+          "thm-unit-square-criterion-modulo-two-powers"
+        ]
+      },
+      {
+        "id": "ex-square-roots-modulo-a-composite-by-crt",
+        "kind": "example",
+        "title": "The square roots of $1$ modulo $360$ by the Chinese remainder theorem",
+        "strategy": "Use $360=8\\cdot9\\cdot5$. List the four roots modulo eight and the two roots at each odd prime power, combine them by CRT, and obtain the sixteen classes $1,19,71,89,91,109,161,179,181,199,251,269,271,289,341,359$. Verify the representatives and use the local product count for completeness.",
+        "deps": [
+          "thm-unit-square-criterion-modulo-n",
+          "cor-number-of-square-roots-of-a-unit-modulo-n"
+        ]
+      },
+      {
+        "id": "cex-square-modulo-each-prime-does-not-ignore-the-two-part",
+        "kind": "counterexample",
+        "title": "Odd-prime tests alone miss the obstruction to $13$ being a square modulo $24$",
+        "strategy": "The only odd prime divisor of 24 is three, and $13\\equiv1\\pmod3$ is a square. But $13\\equiv5\\pmod8$, so the two-power criterion rules out a square root modulo eight and hence modulo 24.",
+        "deps": [
+          "thm-unit-square-criterion-modulo-two-powers",
+          "thm-unit-square-criterion-modulo-n"
+        ]
+      },
+      {
+        "id": "ex-primes-dividing-x-squared-plus-three",
+        "kind": "example",
+        "title": "Odd primes represented by a divisor of $x^2+3$",
+        "strategy": "For an odd prime $p\\ne3$, solvability of $x^2\\equiv-3\\pmod p$ is equivalent to $(-3/p)=1$. Combine the first supplement with quadratic reciprocity to prove $(-3/p)=(p/3)$, hence solvability is equivalent to $p\\equiv1\\pmod3$. State the exceptional divisor $p=3$ separately.",
+        "deps": [
+          "thm-quadratic-reciprocity",
+          "thm-first-supplement-to-quadratic-reciprocity",
+          "thm-legendre-symbol-multiplicativity",
+          "def-legendre-symbol"
+        ]
+      },
+      {
+        "id": "cor-infinitely-many-primes-congruent-to-one-modulo-three",
+        "kind": "corollary",
+        "title": "There are infinitely many primes congruent to $1$ modulo $3$",
+        "strategy": "If the primes congruent to one modulo three formed a finite list, let $P$ be their product, with empty product one, and put $N=12P^2+1>1$. Choose a prime divisor $q$ of $N$. It is odd and not three; because $q$ divides $(6P)^2+3=3N$, the preceding reciprocity example forces $q\\equiv1\\pmod3$. Thus $q$ is on the list and divides $P$, whereas $q\\mid12P^2+1$ would then force $q\\mid1$, a contradiction. The construction is finite and uses no choice principle.",
+        "deps": [
+          "ex-primes-dividing-x-squared-plus-three",
+          "lem-every-integer-above-one-has-a-prime-divisor",
+          "def-monoid-finite-product",
+          "thm-generalised-associativity",
+          "def-countable",
+          "def-equinumerous",
+          "def-injection-surjection-bijection",
+          "lem-divisibility-basic"
+        ]
+      }
+    ]
   }
 ]

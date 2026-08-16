@@ -52,7 +52,9 @@
         "title": "The $p$-core $O_p(G)$ as the largest normal $p$-subgroup",
         "deps": [
           "def-finite-p-group",
-          "def-normal-subgroup"
+          "def-normal-subgroup",
+          "lem-product-with-normal-subgroup",
+          "thm-lagrange"
         ]
       },
       {
@@ -96,7 +98,8 @@
           "thm-orbit-stabilizer",
           "cor-orbit-stabilizer-cardinality",
           "thm-lagrange",
-          "thm-strong-induction"
+          "thm-strong-induction",
+          "thm-orbits-partition-the-set"
         ]
       },
       {
@@ -256,9 +259,12 @@
         "strategy": "The product of the \\(p\\)-cores is an internal direct product, hence nilpotent. If \\(N\\trianglelefteq G\\) is nilpotent, each of its unique Sylow subgroups is characteristic in \\(N\\), hence normal in \\(G\\), so it lies in the corresponding \\(p\\)-core. Their product contains \\(N\\). Handle \\(G=1\\) with the empty product.",
         "deps": [
           "def-fitting-subgroup-of-a-finite-group",
-          "lem-products-of-normal-p-subgroups",
+          "def-p-core-of-a-finite-group",
           "lem-finite-nilpotence-via-normal-sylow-subgroups",
-          "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal"
+          "thm-internal-direct-product-recognition",
+          "thm-sylow-second-theorem",
+          "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal",
+          "thm-lagrange"
         ]
       },
       {
@@ -279,9 +285,11 @@
         "deps": [
           "def-frattini-subgroup-of-a-finite-group",
           "thm-frattini-argument",
-          "lem-frattini-subgroup-nongenerator-characterization",
           "lem-finite-nilpotence-via-normal-sylow-subgroups",
-          "thm-correspondence-theorem-groups"
+          "thm-correspondence-theorem-groups",
+          "thm-subgroups-quotients-and-finite-products-of-nilpotent-groups",
+          "thm-sylow-second-theorem",
+          "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal"
         ]
       },
       {
@@ -325,7 +333,11 @@
           "thm-maximal-subgroups-of-finite-nilpotent-groups",
           "thm-nilpotence-is-detected-modulo-the-frattini-subgroup",
           "def-frattini-subgroup-of-a-finite-group",
-          "thm-internal-direct-product-recognition"
+          "thm-internal-direct-product-recognition",
+          "thm-correspondence-theorem-groups",
+          "thm-cauchys-theorem-for-finite-groups",
+          "thm-finite-p-groups-are-nilpotent",
+          "thm-subgroups-quotients-and-finite-products-of-nilpotent-groups"
         ]
       },
       {
@@ -395,6 +407,8 @@
           "thm-image-subgroup-and-kernel-normal",
           "thm-first-isomorphism-theorem-groups",
           "cor-order-of-a-quotient-group",
+          "thm-lagrange",
+          "thm-number-of-bijections-of-a-finite-set",
           "thm-classification-of-groups-of-order-pq",
           "cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal",
           "def-simple-group"
@@ -802,7 +816,8 @@
         "strategy": "Inverse image and quotient give mutually inverse inclusion-preserving bijections between submodules of \\(M/N\\) and submodules of \\(M\\) containing \\(N\\). Verify both composites and preserve sums, intersections, and simplicity of successive quotients.",
         "deps": [
           "def-quotient-module",
-          "thm-quotient-module-universal-property"
+          "thm-quotient-module-universal-property",
+          "thm-third-isomorphism-theorem-modules"
         ]
       },
       {
@@ -831,6 +846,8 @@
         "deps": [
           "def-noetherian-module",
           "def-artinian-module",
+          "thm-equivalent-characterizations-of-noetherian-modules",
+          "thm-equivalent-characterizations-of-artinian-modules",
           "thm-second-isomorphism-theorem-modules",
           "thm-correspondence-theorem-modules",
           "def-exact-and-short-exact-sequences-of-modules"
@@ -855,7 +872,8 @@
           "def-noetherian-ring",
           "def-generated-cyclic-finitely-generated-and-free-modules",
           "cor-finite-direct-sums-preserve-chain-conditions",
-          "cor-every-module-is-a-quotient-of-a-free-module"
+          "cor-every-module-is-a-quotient-of-a-free-module",
+          "thm-chain-conditions-in-short-exact-sequences"
         ]
       },
       {
@@ -871,7 +889,7 @@
       {
         "id": "thm-composition-series-iff-noetherian-and-artinian",
         "kind": "theorem",
-        "title": "A module has a composition series if and only if it is Noetherian and Artinian",
+        "title": "A module has a composition series if and only if it is Noetherian and Artinian, the converse using dependent choice",
         "strategy": "A finite composition series gives both chain conditions by induction through its simple factors. Conversely, under DC choose a maximal proper submodule of each nonzero quotient; Noetherianity prevents an infinite strict ascent while Artinianity guarantees termination in the dual construction. Present a finite construction and include the zero module with length zero.",
         "deps": [
           "def-composition-series-and-length-of-a-module",
@@ -938,7 +956,7 @@
       {
         "id": "thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules",
         "kind": "theorem",
-        "title": "Every finitely generated nonzero module has a maximal proper submodule",
+        "title": "Under Choice, every finitely generated nonzero module has a maximal proper submodule",
         "strategy": "Order the proper submodules by inclusion. The union of a chain is a submodule; if it were all of \\(M\\), finitely many generators would lie in one chain member, contradicting properness. Zorn supplies a maximal proper submodule. Show why nonzero and finite generation are essential.",
         "deps": [
           "def-generated-cyclic-finitely-generated-and-free-modules",
@@ -953,6 +971,7 @@
         "strategy": "Prove equivalence of being a direct sum of simples, being a sum of simple submodules, and every submodule having a complement. For a given submodule, apply Zorn to independent subfamilies of simple summands; for the converse, split off the socle and derive a contradiction by finding a simple quotient of a finitely generated cyclic submodule. Record the full Choice/Zorn cost and include the zero module.",
         "deps": [
           "def-semisimple-module",
+          "def-socle-of-a-module",
           "thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules",
           "thm-zorn",
           "thm-universal-property-of-module-direct-sums"
@@ -972,7 +991,7 @@
       {
         "id": "thm-submodules-and-quotients-of-semisimple-modules",
         "kind": "theorem",
-        "title": "Submodules and quotients of semisimple modules are semisimple",
+        "title": "Under Choice, submodules and quotients of semisimple modules are semisimple",
         "strategy": "A submodule inherits the complement property by intersecting a complement in the ambient module. For a quotient, complement the kernel and identify the quotient with that semisimple complement. Cover zero and whole submodules.",
         "deps": [
           "thm-equivalent-characterizations-of-semisimple-modules",
@@ -982,7 +1001,7 @@
       {
         "id": "thm-socle-is-the-largest-semisimple-submodule",
         "kind": "theorem",
-        "title": "The socle is the largest semisimple submodule",
+        "title": "Under Choice, the socle is the largest semisimple submodule",
         "strategy": "The sum of all simple submodules is semisimple by the sum characterization. Every semisimple submodule is itself a sum of simple submodules of the ambient module, hence lies in the socle. Include a module with no simple submodule.",
         "deps": [
           "def-socle-of-a-module",
@@ -1018,6 +1037,7 @@
         "strategy": "Under Choice, prove equivalence of the left regular module being semisimple, every left module being semisimple, every short exact sequence splitting, and every left module being projective. Free modules are sums of the regular module and every module is their quotient; the complement and splitting characterizations supply the other implications. State the left-module convention in every clause.",
         "deps": [
           "def-semisimple-ring",
+          "thm-equivalent-characterizations-of-semisimple-modules",
           "thm-submodules-and-quotients-of-semisimple-modules",
           "cor-every-module-is-a-quotient-of-a-free-module",
           "def-split-short-exact-sequence",
@@ -1033,9 +1053,10 @@
         "strategy": "Decompose the left regular module of \\(M_n(D)\\) into the column left ideals \\(M_n(D)e_{jj}\\). Each is isomorphic to the simple column module \\(D^n\\), since matrix units carry any nonzero vector to each standard vector. Include \\(n=1\\); require \\(n\\ge1\\).",
         "deps": [
           "def-semisimple-ring",
-          "def-ring-matrix-product-identity-and-transpose",
-          "def-simple-module",
-          "thm-equivalent-characterizations-of-semisimple-modules"
+          "def-division-ring",
+          "def-ring",
+          "def-finite-sum-in-a-commutative-monoid",
+          "def-simple-module"
         ]
       },
       {
@@ -1049,6 +1070,7 @@
           "thm-finitely-generated-semisimple-modules-are-finite-direct-sums-of-simple-modules",
           "thm-schurs-lemma-for-modules",
           "thm-matrix-rings-over-division-rings-are-semisimple",
+          "def-opposite-ring",
           "def-semisimple-ring"
         ]
       },
@@ -1071,6 +1093,7 @@
         "deps": [
           "thm-wedderburn-artin-theorem",
           "thm-simple-modules-over-semisimple-rings",
+          "thm-matrix-rings-over-division-rings-are-semisimple",
           "thm-schurs-lemma-for-modules",
           "thm-jordan-holder-theorem-for-modules"
         ]
@@ -1081,10 +1104,10 @@
         "title": "Left and right semisimplicity of a ring agree",
         "strategy": "Apply Wedderburn–Artin to the left regular module. Opposites of finite products of matrix rings are matrix rings over opposite division rings, hence are semisimple; translating modules over \\(R^{\\mathrm{op}}\\) gives right semisimplicity. Repeat for the converse.",
         "deps": [
+          "def-semisimple-ring",
           "thm-wedderburn-artin-theorem",
           "def-opposite-ring",
-          "thm-matrix-rings-over-division-rings-are-semisimple",
-          "def-ring-matrix-product-identity-and-transpose"
+          "thm-matrix-rings-over-division-rings-are-semisimple"
         ]
       },
       {
@@ -1103,7 +1126,7 @@
         "id": "thm-integrality-and-finite-module-equivalences",
         "kind": "theorem",
         "title": "Integrality and finite-module characterizations for one element",
-        "strategy": "For a commutative ring extension \\(A\\subseteq B\\) and \\(b\\in B\\), prove equivalence of: \\(b\\) integral; \\(A[b]\\) finite as an \\(A\\)-module; and a faithful \\(A[b]\\)-module finite over \\(A\\) exists. A monic relation reduces all high powers. Conversely, write multiplication by \\(b\\) on finite generators as a matrix and use the adjugate identity; faithfulness turns the annihilating monic determinant into a relation for \\(b\\). Treat degree zero, the zero ring, and the zero module explicitly.",
+        "strategy": "For a commutative ring extension \\(A\\subseteq B\\) with \\(A\\neq0\\) and \\(b\\in B\\), prove equivalence of: \\(b\\) integral; \\(A[b]\\) finite as an \\(A\\)-module; and a faithful \\(A[b]\\)-module finite over \\(A\\) exists. A monic relation reduces all high powers. Conversely, write multiplication by \\(b\\) on finite generators as a matrix and use the adjugate identity; faithfulness turns the annihilating monic determinant into a relation for \\(b\\). Define faithfulness explicitly, and explain why a zero-generated faithful module is impossible when \\(A\\neq0\\); the nonzero-base hypothesis is required by the repository's monic-polynomial convention.",
         "deps": [
           "def-integral-element-and-algebraic-integer",
           "def-generated-cyclic-finitely-generated-and-free-modules",
@@ -1113,7 +1136,7 @@
       {
         "id": "cor-integral-elements-form-a-subring",
         "kind": "corollary",
-        "title": "Integral elements form a subring",
+        "title": "Integral elements over a nonzero base ring form a subring",
         "strategy": "If \\(x,y\\) are integral, \\(A[x,y]\\) is finite over \\(A\\) by adjoining them successively and multiplying finite generating sets. Its elements \\(x\\pm y\\) and \\(xy\\) therefore generate finite \\(A\\)-subalgebras and are integral. Include zero, one, negatives, and coincident elements.",
         "deps": [
           "thm-integrality-and-finite-module-equivalences",

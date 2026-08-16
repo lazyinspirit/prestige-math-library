@@ -4,23 +4,860 @@
     "id": "algebraic-closure-embeddings-and-separability",
     "kind": "A",
     "category": "abstract-algebra",
-    "title": "Algebraic Closure Embeddings and Separability",
+    "title": "Algebraic Closure, Embeddings, and Separability",
     "companion": "algebraic-closure-embeddings-and-separability-examples",
     "requires": [
-      "algebraic-extensions-degree-and-finite-fields-examples"
+      "algebraic-extensions-degree-and-finite-fields-examples",
+      "eigenvalues-eigenvectors-and-the-characteristic-polynomial",
+      "the-field-of-fractions-and-localisation"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-monomials-on-an-index-set",
+        "kind": "definition",
+        "title": "Monomials on an index set as finitely supported exponent families",
+        "deps": [
+          "def-function",
+          "def-natural-numbers",
+          "def-nat-addition",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "def-polynomial-ring-on-a-family-of-indeterminates",
+        "kind": "definition",
+        "title": "The polynomial ring $R[x_i:i\\in I]$ as finitely supported coefficient families on monomials",
+        "deps": [
+          "def-monomials-on-an-index-set",
+          "def-commutative-ring",
+          "def-finite-sum-in-a-commutative-monoid"
+        ]
+      },
+      {
+        "id": "thm-polynomial-ring-on-a-family-is-a-commutative-ring",
+        "kind": "theorem",
+        "title": "Finite convolution makes $R[x_i:i\\in I]$ a commutative ring containing $R$",
+        "strategy": "Define multiplication by convolution over pairs of finitely supported exponent families whose pointwise sum is the target monomial. Finite support makes each coefficient sum and the product support finite; reindexing finite sums proves associativity and distributivity, while the zero exponent family gives the unit and constants embed $R$.",
+        "deps": [
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "def-monomials-on-an-index-set",
+          "lem-finite-sum-reindexing-and-fubini",
+          "def-ring-homomorphism"
+        ]
+      },
+      {
+        "id": "thm-universal-property-of-a-polynomial-ring-on-a-family",
+        "kind": "theorem",
+        "title": "Universal property of a polynomial ring on an arbitrary family of indeterminates",
+        "strategy": "Given a homomorphism $R\\to S$ and a family $(s_i)_{i\\in I}$ in a commutative ring, evaluate a finite polynomial by sending the exponent family $a$ to the finite product of the $s_i^{a_i}$. Finite-sum reindexing proves multiplicativity, and the monomials force uniqueness.",
+        "deps": [
+          "thm-polynomial-ring-on-a-family-is-a-commutative-ring",
+          "def-ring-homomorphism",
+          "lem-finite-sum-reindexing-and-fubini"
+        ]
+      },
+      {
+        "id": "cor-polynomial-ring-on-a-finite-family-agrees-with-the-iterated-construction",
+        "kind": "corollary",
+        "title": "A polynomial ring on a finite ordered family agrees canonically with the iterated polynomial-ring construction",
+        "strategy": "Induct on the family length. At the successor step apply the two universal properties to construct mutually inverse homomorphisms fixing $R$ and every indeterminate. Include the empty family, where both constructions are $R$.",
+        "deps": [
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-universal-property-of-a-polynomial-ring",
+          "def-multivariate-polynomial-ring-by-iteration"
+        ]
+      },
+      {
+        "id": "def-f-homomorphisms-and-embeddings-of-field-extensions",
+        "kind": "definition",
+        "title": "$F$-homomorphisms and $F$-embeddings of field extensions",
+        "deps": [
+          "def-field-homomorphism",
+          "def-field-extension-generated-subfields-and-simple-extension"
+        ]
+      },
+      {
+        "id": "def-conjugate-elements-over-a-field",
+        "kind": "definition",
+        "title": "Conjugate algebraic elements over a field",
+        "deps": [
+          "def-f-homomorphisms-and-embeddings-of-field-extensions",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ]
+      },
+      {
+        "id": "prop-base-field-embeddings-carry-elements-to-conjugates",
+        "kind": "proposition",
+        "title": "A base-field embedding carries an algebraic element to a conjugate",
+        "strategy": "An $F$-embedding fixes every coefficient of the minimal polynomial, so evaluation commutes with the embedding and the image is another root. In the splitting-field case this specializes to the published permutation-of-roots proposition.",
+        "deps": [
+          "def-conjugate-elements-over-a-field",
+          "lem-polynomials-and-roots-transport-along-field-isomorphisms",
+          "prop-endomorphisms-of-a-splitting-field-permute-its-roots"
+        ]
+      },
+      {
+        "id": "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+        "kind": "theorem",
+        "title": "$F$-embeddings of $F(\\alpha)$ into an algebraically closed field correspond to the distinct roots of $m_{\\alpha}$",
+        "strategy": "Send an embedding to the image of $\\alpha$. The preceding proposition makes that image a root, and the universal property of adjoining an irreducible root constructs exactly one embedding for each root. Verify the two assignments are inverse and count distinct roots rather than multiplicities.",
+        "deps": [
+          "prop-base-field-embeddings-carry-elements-to-conjugates",
+          "thm-universal-property-of-adjoining-an-irreducible-root",
+          "def-algebraically-closed-field"
+        ]
+      },
+      {
+        "id": "def-separable-elements-and-separable-extensions",
+        "kind": "definition",
+        "title": "Separable algebraic elements and separable extensions",
+        "deps": [
+          "def-repeated-root-and-separable-polynomial",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "def-algebraic-and-transcendental-elements"
+        ]
+      },
+      {
+        "id": "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core",
+        "kind": "theorem",
+        "title": "In characteristic $p$, every irreducible polynomial is uniquely $g(x^{p^e})$ with $g$ irreducible and separable",
+        "strategy": "While the derivative vanishes, every exponent is divisible by $p$, so write $f(x)=h(x^p)$ without changing the coefficients and repeat. Irreducibility of $f$ forces irreducibility of each core, and maximality of $e$ makes $g'\\ne0$, hence $g$ separable. Uniqueness follows from the least exponent occurring; include $e=0$.",
+        "deps": [
+          "thm-polynomial-is-separable-iff-coprime-to-its-derivative",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "lem-polynomial-factorisation-into-irreducibles"
+        ]
+      },
+      {
+        "id": "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+        "kind": "lemma",
+        "title": "If $a$ is not a $p$th power in a characteristic-$p$ field, then $x^{p^n}-a$ is irreducible for every $n\\ge1$",
+        "strategy": "In an algebraic closure the polynomial is $(x-b)^{p^n}$. Any monic irreducible factor is therefore $(x-b)^{p^r}=x^{p^r}-b^{p^r}$ for some $r$; if $r<n$, its constant coefficient puts $a$ in the image of Frobenius, a contradiction. The hypothesis automatically excludes $a=0$; treat $n=1$ explicitly.",
+        "deps": [
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "thm-polynomial-is-separable-iff-coprime-to-its-derivative",
+          "thm-splitting-fields-exist-for-nonzero-polynomials",
+          "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core"
+        ]
+      },
+      {
+        "id": "def-perfect-field",
+        "kind": "definition",
+        "title": "Perfect fields: every irreducible polynomial is separable",
+        "deps": [
+          "def-repeated-root-and-separable-polynomial",
+          "def-field"
+        ]
+      },
+      {
+        "id": "thm-perfect-field-characterizations",
+        "kind": "theorem",
+        "title": "A field is perfect exactly when it has characteristic zero or its Frobenius map is surjective",
+        "strategy": "In characteristic zero a nonzero derivative of an irreducible polynomial cannot share a factor with it. In characteristic $p$, the separable-core theorem shows that failure of separability is exactly the presence of coefficients outside the Frobenius image; conversely a non-$p$th-power element gives an inseparable irreducible polynomial $x^p-a$.",
+        "deps": [
+          "def-perfect-field",
+          "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core",
+          "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "thm-polynomial-is-separable-iff-coprime-to-its-derivative"
+        ]
+      },
+      {
+        "id": "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+        "kind": "corollary",
+        "title": "Fields of characteristic zero, finite fields, and algebraically closed fields are perfect",
+        "strategy": "The characteristic-zero case is one clause of the characterization. In a finite field Frobenius is an automorphism. In an algebraically closed field of characteristic $p$, every $a$ has a root of $x^p-a$. Thus Frobenius is surjective in both positive-characteristic cases.",
+        "deps": [
+          "def-algebraically-closed-field",
+          "thm-perfect-field-characterizations",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism"
+        ]
+      },
+      {
+        "id": "cor-algebraic-extensions-of-perfect-fields-are-separable",
+        "kind": "corollary",
+        "title": "Every algebraic extension of a perfect field is separable",
+        "strategy": "Each element of the algebraic extension has an irreducible minimal polynomial over the perfect base, and that polynomial is separable by definition.",
+        "deps": [
+          "def-perfect-field",
+          "def-separable-elements-and-separable-extensions",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ]
+      },
+      {
+        "id": "lem-simple-finite-extension-has-finitely-many-intermediate-fields",
+        "kind": "lemma",
+        "title": "A simple finite extension has only finitely many intermediate fields",
+        "strategy": "For $E=F(\\alpha)$ and an intermediate field $M$, let $g_M$ be the minimal polynomial of $\\alpha$ over $M$. Its coefficients generate $M$ over $F$, and $g_M$ is a monic divisor in $E[x]$ of the minimal polynomial over $F$. Unique factorization gives only finitely many such divisors and hence fields.",
+        "deps": [
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "thm-tower-law-for-finite-field-extensions"
+        ]
+      },
+      {
+        "id": "lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces",
+        "kind": "lemma",
+        "title": "A finite-dimensional vector space over an infinite field is not a finite union of proper subspaces",
+        "strategy": "Choose a line not contained in any one of the finitely many proper subspaces, after induction on their number and the dimension. Each proper subspace meets a suitable affine line in at most one point, whereas the line has as many points as the infinite base field. Include dimension zero and the empty family.",
+        "deps": [
+          "def-vector-space",
+          "def-linear-basis",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-finite-extension-with-finitely-many-intermediate-fields-is-simple",
+        "kind": "lemma",
+        "title": "A finite extension with only finitely many intermediate fields is simple",
+        "strategy": "If the base is finite, use the published cyclic-multiplicative-group proof that finite-field extensions are simple. If it is infinite, the finitely many proper intermediate fields are proper base-vector subspaces, so their union cannot cover the extension; an element outside that union generates the whole field.",
+        "deps": [
+          "lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces",
+          "cor-finite-extensions-of-finite-fields-are-simple",
+          "def-extension-degree-and-finite-extension",
+          "def-field-extension-generated-subfields-and-simple-extension"
+        ]
+      },
+      {
+        "id": "thm-steinitz-primitive-element-criterion",
+        "kind": "theorem",
+        "title": "A finite field extension is simple if and only if it has finitely many intermediate fields",
+        "strategy": "Combine the two preceding implications, retaining the finite-base-field branch in the converse and making both directions explicit.",
+        "deps": [
+          "lem-simple-finite-extension-has-finitely-many-intermediate-fields",
+          "lem-finite-extension-with-finitely-many-intermediate-fields-is-simple"
+        ]
+      },
+      {
+        "id": "thm-primitive-element-theorem-for-finite-separable-extensions",
+        "kind": "theorem",
+        "title": "A finite extension generated by elements all but possibly one of which are separable is simple",
+        "strategy": "Reduce the generating list to two elements, with the second separable. Over a finite base use the finite-field result. Over an infinite base choose $c$ avoiding the finitely many collisions among conjugate pairs; the gcd of the two translated minimal polynomials recovers one generator from $\\alpha+c\\beta$, and then the other. Iterate the reduction; a finite separable extension is the special case in which every generator is separable.",
+        "deps": [
+          "def-separable-elements-and-separable-extensions",
+          "lem-polynomial-gcd-is-stable-under-field-extension",
+          "cor-splitting-fields-exist-for-finite-families",
+          "cor-finite-extensions-of-finite-fields-are-simple",
+          "thm-finitely-generated-algebraic-extensions-are-finite"
+        ]
+      },
+      {
+        "id": "cor-finite-separable-extension-has-finitely-many-intermediate-fields",
+        "kind": "corollary",
+        "title": "A finite separable extension has only finitely many intermediate fields",
+        "strategy": "The primitive element theorem makes the extension simple, and the forward half of the Steinitz criterion supplies finiteness of its intermediate fields.",
+        "deps": [
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "lem-simple-finite-extension-has-finitely-many-intermediate-fields"
+        ]
+      },
+      {
+        "id": "cor-finite-extension-of-a-perfect-field-is-simple",
+        "kind": "corollary",
+        "title": "Every finite extension of a perfect field is simple",
+        "strategy": "The extension is algebraic and therefore separable over a perfect base; apply the primitive element theorem.",
+        "deps": [
+          "cor-algebraic-extensions-of-perfect-fields-are-separable",
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "thm-finite-field-extensions-are-algebraic"
+        ]
+      },
+      {
+        "id": "def-algebraic-closure",
+        "kind": "definition",
+        "title": "An algebraic closure of a field",
+        "deps": [
+          "def-algebraically-closed-field",
+          "def-algebraic-and-transcendental-elements"
+        ]
+      },
+      {
+        "id": "lem-artin-simultaneous-root-ideal-is-proper",
+        "kind": "lemma",
+        "title": "Artin's ideal generated by $f(x_f)$ for all monic nonconstant $f\\in F[x]$ is proper",
+        "strategy": "If $1$ were a finite sum of generators, retain the finitely many polynomials occurring. Put simultaneous roots of those polynomials in a splitting field of their product and use the family-polynomial universal property, sending unused variables to zero. Evaluation turns the alleged identity into $1=0$.",
+        "deps": [
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "cor-splitting-fields-exist-for-finite-families"
+        ]
+      },
+      {
+        "id": "thm-one-step-simultaneous-root-extension",
+        "kind": "theorem",
+        "title": "Assuming Choice, every field has an algebraic extension containing roots of all nonconstant base polynomials",
+        "strategy": "Place Artin's proper ideal inside a maximal ideal and quotient the family polynomial ring. The quotient is a field, each residue class $x_f$ is a root of $f$, and every element uses finitely many such algebraic residues, hence is algebraic over the base. State that the maximal-ideal step uses Zorn's lemma.",
+        "deps": [
+          "lem-artin-simultaneous-root-ideal-is-proper",
+          "thm-proper-ideal-contained-in-maximal-ideal",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "thm-zorn"
+        ]
+      },
+      {
+        "id": "lem-one-step-root-extension-over-a-perfect-field-is-algebraically-closed",
+        "kind": "lemma",
+        "title": "The one-step root condition makes an algebraic extension of a perfect field algebraically closed",
+        "strategy": "For an irreducible $f$ over the perfect base, its splitting field is finite and generated by roots that are separable over $F$; the generalized primitive-element theorem therefore makes it simple, say $F(\\alpha)$. A root in the one-step extension of the minimal polynomial of $\\alpha$ induces an isomorphic copy of the splitting field there, so $f$ splits. Finally, an element algebraic over the one-step extension $L$ is algebraic over $F$ — this step is transitivity of algebraicity applied to $L/F$ algebraic, and is cited, not asserted — and its minimal polynomial over $F$ already splits in $L$; hence $L$ is algebraically closed.",
+        "deps": [
+          "cor-algebraic-extensions-of-perfect-fields-are-separable",
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "thm-universal-property-of-adjoining-an-irreducible-root",
+          "thm-splitting-fields-exist-for-nonzero-polynomials",
+          "thm-transitivity-of-algebraicity",
+          "def-algebraically-closed-field",
+          "thm-finitely-generated-algebraic-extensions-are-finite"
+        ]
+      },
+      {
+        "id": "lem-perfect-subfield-of-a-one-step-root-extension-in-positive-characteristic",
+        "kind": "lemma",
+        "title": "The elements with a $p^n$th power in the base form a perfect subfield carrying the one-step root condition",
+        "strategy": "For an algebraic root extension $L/F$ of characteristic $p$, let $F'=\\{a\\in L:a^{p^n}\\in F$ for some $n\\ge0\\}$. Frobenius identities prove it is a subfield. Roots of suitable $p$-power twists show Frobenius is surjective on $F'$, and raising the finitely many coefficients of a polynomial over $F'$ to one common $p^n$th power reduces root existence to the hypothesis over $F$.",
+        "deps": [
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "thm-perfect-field-characterizations",
+          "def-subfield"
+        ]
+      },
+      {
+        "id": "thm-one-step-algebraic-root-extension-is-algebraically-closed",
+        "kind": "theorem",
+        "title": "An algebraic extension containing a root of every nonconstant base polynomial is algebraically closed",
+        "strategy": "In characteristic zero the base is perfect, so apply the perfect-case lemma. In positive characteristic pass to the perfect subfield supplied by the preceding lemma; it has the same one-step root property, and the perfect-case lemma then makes the ambient algebraic extension algebraically closed. No iterated tower of root extensions is used.",
+        "deps": [
+          "lem-one-step-root-extension-over-a-perfect-field-is-algebraically-closed",
+          "lem-perfect-subfield-of-a-one-step-root-extension-in-positive-characteristic",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect"
+        ]
+      },
+      {
+        "id": "thm-existence-of-algebraic-closures",
+        "kind": "theorem",
+        "title": "Assuming Choice, every field has an algebraic closure",
+        "strategy": "Apply the simultaneous root-extension theorem once. It is algebraic over the base and satisfies the one-step root condition, so the one-step theorem says it is already algebraically closed.",
+        "deps": [
+          "thm-one-step-simultaneous-root-extension",
+          "thm-one-step-algebraic-root-extension-is-algebraically-closed",
+          "def-algebraic-closure"
+        ]
+      },
+      {
+        "id": "thm-algebraic-embedding-extension",
+        "kind": "theorem",
+        "title": "Assuming Choice, a base-field embedding extends across every algebraic extension",
+        "strategy": "Order partial extensions of the given embedding by domain inclusion. Unions of chains are compatible field embeddings, so Zorn gives a maximal partial extension. If its domain is not the whole algebraic extension, adjoining one algebraic element and sending it to a root of the transported minimal polynomial contradicts maximality. State the use of Zorn explicitly.",
+        "deps": [
+          "thm-zorn",
+          "thm-universal-property-of-adjoining-an-irreducible-root",
+          "lem-polynomials-and-roots-transport-along-field-isomorphisms",
+          "def-f-homomorphisms-and-embeddings-of-field-extensions",
+          "def-algebraically-closed-field"
+        ]
+      },
+      {
+        "id": "cor-algebraic-closures-are-isomorphic-over-the-base",
+        "kind": "corollary",
+        "title": "Assuming Choice, any two algebraic closures are base-isomorphic, generally nonuniquely",
+        "strategy": "Extend the identity of the base from one closure into the other. Its image contains every root in the target of every base minimal polynomial because the source is algebraically closed, so the embedding is surjective. Assert existence, not uniqueness; the examples page supplies a nontrivial automorphism witness.",
+        "deps": [
+          "thm-algebraic-embedding-extension",
+          "def-algebraic-closure",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ]
+      },
+      {
+        "id": "cor-conjugate-elements-are-related-by-an-automorphism-of-an-algebraic-closure",
+        "kind": "corollary",
+        "title": "Assuming Choice, conjugates in an algebraic closure are related by a base automorphism",
+        "strategy": "One direction is preservation of minimal polynomials. Conversely, conjugate roots give an $F$-isomorphism between their simple adjunctions; extend it to the whole algebraic closure and use the closure-isomorphism argument to obtain an automorphism.",
+        "deps": [
+          "def-conjugate-elements-over-a-field",
+          "prop-base-field-embeddings-carry-elements-to-conjugates",
+          "thm-universal-property-of-adjoining-an-irreducible-root",
+          "thm-algebraic-embedding-extension",
+          "def-algebraic-closure",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ]
+      },
+      {
+        "id": "def-normal-closure-of-an-algebraic-extension",
+        "kind": "definition",
+        "title": "The normal closure of an algebraic extension inside a fixed algebraic closure",
+        "deps": [
+          "def-normal-algebraic-extension",
+          "def-algebraic-closure",
+          "prop-nonempty-intersections-of-normal-subextensions-are-normal"
+        ]
+      },
+      {
+        "id": "thm-finite-normal-closures-exist-and-are-finite",
+        "kind": "theorem",
+        "title": "The normal closure of a finite extension exists and is finite",
+        "strategy": "Choose finitely many algebraic generators and take in the fixed closure the splitting field of the product of their minimal polynomials. It is finite and normal, contains the original extension, and lies in every normal intermediate extension containing it, so it equals the defined intersection.",
+        "deps": [
+          "def-normal-closure-of-an-algebraic-extension",
+          "cor-splitting-fields-exist-for-finite-families",
+          "prop-algebraic-splitting-extensions-are-normal",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "def-extension-degree-and-finite-extension"
+        ]
+      },
+      {
+        "id": "def-separable-degree",
+        "kind": "definition",
+        "title": "The separable degree $[K:F]_s$ as a count of embeddings into an algebraic closure",
+        "deps": [
+          "def-f-homomorphisms-and-embeddings-of-field-extensions",
+          "def-algebraic-closure",
+          "def-extension-degree-and-finite-extension",
+          "thm-existence-of-algebraic-closures",
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "thm-separable-degree-is-independent-of-the-algebraic-closure",
+        "kind": "theorem",
+        "title": "The separable degree is independent of the chosen algebraic closure",
+        "strategy": "For a finite extension, put the minimal polynomials of a basis into one product. In each chosen algebraic closure, the field generated by its roots is a splitting field; uniqueness of splitting fields identifies these finite targets, and postcomposition bijects the two embedding sets without invoking Choice.",
+        "deps": [
+          "def-separable-degree",
+          "def-extension-degree-and-finite-extension",
+          "thm-evaluation-kernel-and-minimal-polynomial",
+          "def-polynomials-that-split-and-splitting-fields",
+          "cor-splitting-fields-are-unique-up-to-base-isomorphism"
+        ]
+      },
+      {
+        "id": "lem-restriction-fibres-for-embeddings-in-a-finite-tower",
+        "kind": "lemma",
+        "title": "Restriction partitions embeddings in a finite tower into extension fibres",
+        "strategy": "For $F\\subseteq K\\subseteq L$ and an algebraically closed target, restrict each $F$-embedding of $L$ to $K$. Because the tower is finite, extend a restricted embedding by adjoining a finite basis one algebraic generator at a time and choosing roots in the target. Transporting scalars along the restricted embedding identifies each fibre with the corresponding $K$-embedding set, whose size is $[L:K]_s$.",
+        "deps": [
+          "def-f-homomorphisms-and-embeddings-of-field-extensions",
+          "def-extension-degree-and-finite-extension",
+          "lem-polynomials-and-roots-transport-along-field-isomorphisms",
+          "thm-universal-property-of-adjoining-an-irreducible-root",
+          "def-algebraically-closed-field",
+          "thm-separable-degree-is-independent-of-the-algebraic-closure"
+        ]
+      },
+      {
+        "id": "thm-multiplicativity-of-separable-degree",
+        "kind": "theorem",
+        "title": "Separable degree is multiplicative in finite towers: $[L:F]_s=[L:K]_s[K:F]_s$",
+        "strategy": "Count $F$-embeddings of $L$ by the fibres of restriction to $K$. The base has $[K:F]_s$ embeddings and the fibre lemma identifies every fibre cardinality with $[L:K]_s$ after transporting the $K$-structure.",
+        "deps": [
+          "def-separable-degree",
+          "lem-restriction-fibres-for-embeddings-in-a-finite-tower"
+        ]
+      },
+      {
+        "id": "cor-separable-degree-is-at-most-extension-degree",
+        "kind": "corollary",
+        "title": "For a finite extension, $[K:F]_s\\le [K:F]$",
+        "strategy": "Induct along a simple generating tower. At each simple step, embeddings correspond to distinct roots of a minimal polynomial and are therefore no more numerous than its degree; multiply the bounds with the two tower laws.",
+        "deps": [
+          "thm-multiplicativity-of-separable-degree",
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "thm-tower-law-for-finite-field-extensions",
+          "def-extension-degree-and-finite-extension"
+        ]
+      },
+      {
+        "id": "cor-separable-degree-of-a-simple-extension-counts-distinct-roots",
+        "kind": "corollary",
+        "title": "The separable degree of $F(\\alpha)/F$ is the number of distinct roots of $m_{\\alpha}$",
+        "strategy": "Apply the simple-extension embedding bijection and the definition of separable degree; independence permits any algebraic closure containing all roots.",
+        "deps": [
+          "def-separable-degree",
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "thm-separable-degree-is-independent-of-the-algebraic-closure"
+        ]
+      },
+      {
+        "id": "thm-finite-extension-is-separable-iff-separable-degree-is-full",
+        "kind": "theorem",
+        "title": "A finite extension is separable if and only if $[K:F]_s=[K:F]$",
+        "strategy": "If the extension is separable, the primitive element theorem writes it as $F(\\alpha)$ and the simple-extension root count gives full degree. Conversely, for each $\\alpha\\in K$, multiplicativity in the tower $F\\subseteq F(\\alpha)\\subseteq K$, the ordinary tower law, and the upper bound on both separable-degree factors show that full degree for $K/F$ forces full degree for $F(\\alpha)/F$. The simple-extension root count then makes every minimal polynomial separable.",
+        "deps": [
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "thm-multiplicativity-of-separable-degree",
+          "cor-separable-degree-is-at-most-extension-degree",
+          "cor-separable-degree-of-a-simple-extension-counts-distinct-roots",
+          "thm-tower-law-for-finite-field-extensions",
+          "def-separable-elements-and-separable-extensions"
+        ]
+      },
+      {
+        "id": "thm-separability-is-transitive",
+        "kind": "theorem",
+        "title": "Separability is transitive in towers of algebraic extensions",
+        "strategy": "For $L/K/F$ and $a\\in L$, place the finitely many coefficients of the minimal polynomial of $a$ over $K$ in a field $E=F(c_1,\\ldots,c_r)\\subseteq K$. Each successive relative minimal polynomial of the separable $c_i$ divides its separable minimal polynomial over $F$, so a simple tower and multiplicativity give $[E:F]_s=[E:F]$. Stability of polynomial gcd under scalar extension shows that the polynomial of $a$ remains separable over $E$; the same argument gives full separable degree for $E(a)/E$. Multiplicativity now gives full degree for $E(a)/F$, hence $a$ is separable over $F$. Include the trivial steps and arbitrary algebraic towers.",
+        "deps": [
+          "thm-finite-extension-is-separable-iff-separable-degree-is-full",
+          "thm-multiplicativity-of-separable-degree",
+          "cor-separable-degree-of-a-simple-extension-counts-distinct-roots",
+          "lem-polynomial-gcd-is-stable-under-field-extension",
+          "thm-tower-law-for-finite-field-extensions",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "def-separable-elements-and-separable-extensions"
+        ]
+      },
+      {
+        "id": "thm-extension-generated-by-separable-elements-is-separable",
+        "kind": "theorem",
+        "title": "An algebraic extension generated by separable elements is separable",
+        "strategy": "Every element lies in a subextension generated by finitely many of the given generators. Iteratively adjoining separable elements and using transitivity makes that finite subextension separable, so the chosen element is separable over the base. Include the empty generating set.",
+        "deps": [
+          "thm-separability-is-transitive",
+          "def-separable-elements-and-separable-extensions",
+          "def-field-extension-generated-subfields-and-simple-extension"
+        ]
+      },
+      {
+        "id": "thm-separable-elements-form-an-intermediate-field",
+        "kind": "theorem",
+        "title": "The elements separable over the base form an intermediate field",
+        "strategy": "For separable $a,b$, the finite extension $F(a,b)$ is generated by separable elements and hence separable. Its elements include $a-b$, $ab$, and $a^{-1}$ when $a\\ne0$, so the subfield criterion applies; zero and one have linear minimal polynomials.",
+        "deps": [
+          "thm-extension-generated-by-separable-elements-is-separable",
+          "def-subfield"
+        ]
+      },
+      {
+        "id": "def-separable-closure-in-an-algebraic-extension",
+        "kind": "definition",
+        "title": "The separable closure of the base inside an algebraic extension",
+        "deps": [
+          "thm-separable-elements-form-an-intermediate-field"
+        ]
+      },
+      {
+        "id": "def-purely-inseparable-extension",
+        "kind": "definition",
+        "title": "Purely inseparable algebraic extensions",
+        "deps": [
+          "def-algebraic-and-transcendental-elements",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism"
+        ]
+      },
+      {
+        "id": "thm-purely-inseparable-extension-characterizations",
+        "kind": "theorem",
+        "title": "Pure inseparability and its conjugate, embedding, and separable-degree criteria",
+        "strategy": "For an algebraic extension inside a fixed algebraic closure, show elementwise that a unique conjugate is equivalent to a minimal polynomial of the form $x^{p^e}-a$, hence to some $p^e$th power lying in the base. These conditions force every base embedding into that closure to be the inclusion. In finite extensions the restriction-fibre lemma supplies the converse and equivalence with separable degree one; for arbitrary extensions, the converse from uniqueness of embeddings requires Choice. Include the trivial and characteristic-zero cases.",
+        "deps": [
+          "def-purely-inseparable-extension",
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "thm-algebraic-embedding-extension",
+          "lem-restriction-fibres-for-embeddings-in-a-finite-tower",
+          "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core",
+          "def-separable-degree",
+          "thm-perfect-field-characterizations",
+          "def-perfect-field"
+        ]
+      },
+      {
+        "id": "thm-pure-inseparability-is-transitive-and-stable-under-composita",
+        "kind": "theorem",
+        "title": "Pure inseparability is transitive in towers and stable under composita",
+        "strategy": "In a tower, raise an element first to a $p^m$th power in the middle field and then to a further $p^n$th power in the base. For two purely inseparable subextensions in a common algebraic extension, every element of their compositum lies in a finitely generated subcompositum; one common $p^e$th power sends all generators and hence that element into the base. Include trivial extensions.",
+        "deps": [
+          "thm-purely-inseparable-extension-characterizations",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "def-field-extension-generated-subfields-and-simple-extension"
+        ]
+      },
+      {
+        "id": "def-p-basis-of-an-exponent-one-purely-inseparable-extension",
+        "kind": "definition",
+        "title": "$p$-bases for finite exponent-one purely inseparable extensions",
+        "deps": [
+          "def-purely-inseparable-extension",
+          "def-linear-basis",
+          "def-extension-degree-and-finite-extension"
+        ]
+      },
+      {
+        "id": "thm-p-bases-and-degree-in-exponent-one-purely-inseparable-extensions",
+        "kind": "theorem",
+        "title": "A minimal generating family in a finite exponent-one purely inseparable extension is a $p$-basis and gives degree $p^r$",
+        "strategy": "Adjoin a minimal generating list one element at a time. Each new generator has $p$th power in the preceding field but is not already there, so its minimal polynomial is $x^p-a$ and the step has power basis of length $p$. Product bases give the displayed $p$-monomials and the tower law gives degree $p^r$; conversely a $p$-basis plainly generates.",
+        "deps": [
+          "def-p-basis-of-an-exponent-one-purely-inseparable-extension",
+          "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "lem-product-basis-for-a-tower-of-finite-extensions",
+          "thm-tower-law-for-finite-field-extensions"
+        ]
+      },
+      {
+        "id": "cor-finite-purely-inseparable-extensions-have-prime-power-degree",
+        "kind": "corollary",
+        "title": "A finite purely inseparable extension in characteristic $p$ has degree a power of $p$",
+        "strategy": "Choose finitely many generators and adjoin them one at a time. The minimal polynomial at each step divides a polynomial $x^{p^e}-a$ and therefore has $p$-power degree; the ordinary tower law makes the total degree a power of $p$. The trivial extension gives exponent zero.",
+        "deps": [
+          "thm-purely-inseparable-extension-characterizations",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "thm-tower-law-for-finite-field-extensions",
+          "def-extension-degree-and-finite-extension"
+        ]
+      },
+      {
+        "id": "cor-purely-inseparable-extensions-are-normal",
+        "kind": "corollary",
+        "title": "Every purely inseparable algebraic extension is normal",
+        "strategy": "The minimal polynomial of each element is $x^{p^e}-a=(x-\\alpha)^{p^e}$ in the extension, so it splits there. Apply the published definition of normal algebraic extension.",
+        "deps": [
+          "thm-purely-inseparable-extension-characterizations",
+          "def-normal-algebraic-extension"
+        ]
+      },
+      {
+        "id": "thm-algebraic-extension-is-purely-inseparable-over-its-separable-closure",
+        "kind": "theorem",
+        "title": "An algebraic extension is purely inseparable over its separable closure",
+        "strategy": "For $a\\in K$, the separable core of its minimal polynomial over $F$ evaluates at a suitable $p^e$th power of $a$, placing that power in $K_s$. Thus every element is purely inseparable over $K_s$; use $e=0$ in the separable case.",
+        "deps": [
+          "def-separable-closure-in-an-algebraic-extension",
+          "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core",
+          "def-purely-inseparable-extension",
+          "thm-perfect-field-characterizations",
+          "def-perfect-field"
+        ]
+      },
+      {
+        "id": "thm-separable-closures-exist-and-are-isomorphic-over-the-base",
+        "kind": "theorem",
+        "title": "Assuming Choice, separable closures exist and are base-isomorphic",
+        "strategy": "Inside an algebraic closure take the elements separable over the base. They form a separable algebraic field. For a nonconstant separable polynomial over it, first put its finitely many coefficients in a finite subextension; gcd stability preserves separability there, and transitivity shows its roots remain separable over the base, so the polynomial splits in the separable part. Extend base embeddings as for algebraic closures; their images stay in the separable parts, and embeddings between separable closures are surjective. Do not claim uniqueness of the isomorphism.",
+        "deps": [
+          "thm-existence-of-algebraic-closures",
+          "def-separable-closure-in-an-algebraic-extension",
+          "thm-separability-is-transitive",
+          "lem-polynomial-gcd-is-stable-under-field-extension",
+          "thm-finitely-generated-algebraic-extensions-are-finite",
+          "thm-algebraic-embedding-extension"
+        ]
+      },
+      {
+        "id": "thm-separable-degree-is-the-degree-of-the-separable-closure",
+        "kind": "theorem",
+        "title": "For a finite extension, $[K:F]_s=[K_s:F]$",
+        "strategy": "The finite extension $K_s/F$ is separable and therefore has full separable degree. The extension $K/K_s$ is purely inseparable, so its separable degree is one. Multiplicativity in the tower $F\\subseteq K_s\\subseteq K$ gives the equality, including $K_s=F$.",
+        "deps": [
+          "def-separable-closure-in-an-algebraic-extension",
+          "thm-algebraic-extension-is-purely-inseparable-over-its-separable-closure",
+          "thm-purely-inseparable-extension-characterizations",
+          "thm-finite-extension-is-separable-iff-separable-degree-is-full",
+          "thm-multiplicativity-of-separable-degree"
+        ]
+      },
+      {
+        "id": "thm-separable-degree-divides-extension-degree",
+        "kind": "theorem",
+        "title": "The separable degree divides the degree of every finite extension",
+        "strategy": "Use $[K:F]_s=[K_s:F]$ and apply the ordinary tower law to $F\\subseteq K_s\\subseteq K$. This proof avoids inferring divisibility merely from the inequality.",
+        "deps": [
+          "thm-separable-degree-is-the-degree-of-the-separable-closure",
+          "thm-tower-law-for-finite-field-extensions"
+        ]
+      },
+      {
+        "id": "def-inseparable-degree",
+        "kind": "definition",
+        "title": "The inseparable degree $[K:F]_i=[K:F]/[K:F]_s$ of a finite extension",
+        "deps": [
+          "thm-separable-degree-divides-extension-degree",
+          "def-extension-degree-and-finite-extension"
+        ]
+      },
+      {
+        "id": "cor-degree-factors-into-separable-and-inseparable-degrees",
+        "kind": "corollary",
+        "title": "$[K:F]=[K:F]_s[K:F]_i$, and in positive characteristic the inseparable degree is a power of $p$",
+        "strategy": "The factorization is the definition after divisibility. The two tower laws and $[K:F]_s=[K_s:F]$ identify $[K:F]_i$ with $[K:K_s]$. This is a $p$-power because $K/K_s$ is finite purely inseparable; in characteristic zero it is one.",
+        "deps": [
+          "def-inseparable-degree",
+          "thm-separable-degree-is-the-degree-of-the-separable-closure",
+          "thm-algebraic-extension-is-purely-inseparable-over-its-separable-closure",
+          "cor-finite-purely-inseparable-extensions-have-prime-power-degree",
+          "thm-tower-law-for-finite-field-extensions"
+        ]
+      },
+      {
+        "id": "cor-separable-and-purely-inseparable-extension-is-trivial",
+        "kind": "corollary",
+        "title": "An extension that is both separable and purely inseparable is trivial",
+        "strategy": "Every element has a separable minimal polynomial but, by pure inseparability, only one distinct root. An irreducible separable polynomial with one root has degree one, so every element lies in the base.",
+        "deps": [
+          "def-separable-elements-and-separable-extensions",
+          "thm-purely-inseparable-extension-characterizations",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ]
+      }
+    ]
   },
   {
     "order": 99,
     "id": "algebraic-closure-embeddings-and-separability-examples",
     "kind": "B",
     "category": "abstract-algebra",
-    "title": "Algebraic Closure Embeddings and Separability — Examples",
+    "title": "Algebraic Closure, Embeddings, and Separability — Examples",
     "companion": "algebraic-closure-embeddings-and-separability",
     "requires": [
       "algebraic-closure-embeddings-and-separability"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-algebraic-closure-of-the-rationals-and-real-algebraic-subfield",
+        "kind": "example",
+        "title": "Assuming Choice, real algebraic numbers embed properly in an algebraic closure of $\\mathbb Q$",
+        "strategy": "Choose an algebraic closure of $\\mathbb Q$. The real numbers algebraic over $\\mathbb Q$ form a field and embed into it over $\\mathbb Q$; they are not algebraically closed because $x^2+1$ has no root in an ordered field. This uses $\\mathbb R$ only as an ordered ambient field, not $\\mathbb C$.",
+        "deps": [
+          "thm-existence-of-algebraic-closures",
+          "thm-algebraic-elements-form-a-subfield",
+          "thm-algebraic-embedding-extension",
+          "thm-reals-ordered-field"
+        ]
+      },
+      {
+        "id": "ex-algebraic-closure-of-a-finite-field",
+        "kind": "example",
+        "title": "$\\overline{\\mathbb F_p}$ is the union of its finite subfields and is an infinite algebraic extension",
+        "strategy": "Inside an algebraic closure, each element generates a finite extension and hence lies in a finite field. Conversely the unique copies of $\\mathbb F_{p^n}$ lie in the closure, and the nested fields $\\mathbb F_{p^{n!}}$ exhaust it. Irreducible polynomials of every positive degree force unbounded finite subdegrees and therefore infinitude.",
+        "deps": [
+          "def-algebraic-closure",
+          "cor-element-algebraic-iff-simple-extension-finite",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "def-subfield",
+          "prop-finite-fields-are-splitting-fields-of-x-q-minus-x",
+          "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+          "thm-polynomial-is-separable-iff-coprime-to-its-derivative",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree"
+        ]
+      },
+      {
+        "id": "ex-cube-root-extension-has-three-embeddings-and-one-automorphism",
+        "kind": "example",
+        "title": "$\\mathbb Q(\\sqrt[3]{2})$ has three embeddings into $\\overline{\\mathbb Q}$ but only one $\\mathbb Q$-automorphism",
+        "strategy": "Eisenstein makes $x^3-2$ the minimal polynomial, and characteristic zero makes its three closure roots distinct, so the simple-extension theorem gives three embeddings. The chosen positive real root is the only root in the ordered real subfield $\\mathbb Q(\\sqrt[3]{2})$, so an automorphism must fix it and is the identity.",
+        "deps": [
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "thm-eisenstein-irreducibility-criterion",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "thm-nth-roots-exist",
+          "thm-reals-ordered-field"
+        ]
+      },
+      {
+        "id": "ex-biquadratic-extension-has-four-embeddings",
+        "kind": "example",
+        "title": "$\\mathbb Q(\\sqrt2,\\sqrt3)$ has four embeddings into $\\overline{\\mathbb Q}$",
+        "strategy": "Build the tower here rather than citing the published biquadratic example, which is homed on an examples page (B pages are leaves). Eisenstein at $2$, $3$ and $2$ makes $x^2-2$, $x^2-3$ and $x^2-6$ irreducible over $\\mathbb Q$, so none of $\\sqrt2,\\sqrt3,\\sqrt6$ is rational and $[\\mathbb Q(\\sqrt2):\\mathbb Q]=2$ with basis $(1,\\sqrt2)$. If $\\sqrt3=a+b\\sqrt2$ with $a,b\\in\\mathbb Q$ then squaring forces $ab=0$, and $b=0$ makes $\\sqrt3$ rational while $a=0$ makes $\\sqrt6=2b$ rational; so $x^2-3$ stays irreducible over $\\mathbb Q(\\sqrt2)$ and the tower law gives degree $4$. Each square root may then independently be sent to its negative; the simple-extension embedding bijection and the restriction-fibre lemma show that all four sign choices extend and exhaust the embeddings.",
+        "deps": [
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "lem-restriction-fibres-for-embeddings-in-a-finite-tower",
+          "thm-tower-law-for-finite-field-extensions",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "def-field-extension-generated-subfields-and-simple-extension",
+          "thm-eisenstein-irreducibility-criterion"
+        ]
+      },
+      {
+        "id": "ex-x-p-minus-t-is-irreducible-and-inseparable",
+        "kind": "example",
+        "title": "$x^p-t$ is irreducible and inseparable over $\\mathbb F_p(t)$",
+        "strategy": "In the UFD $\\mathbb F_p[t]$, comparison of exponents in a reduced fraction shows that $t$ is not a $p$th power in $\\mathbb F_p(t)$. Apply the pure-power irreducibility lemma. The derivative is zero, and in an extension containing $t^{1/p}$ the polynomial is $(x-t^{1/p})^p$.",
+        "deps": [
+          "cor-rational-function-field-as-a-fraction-field",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+          "thm-polynomial-is-separable-iff-coprime-to-its-derivative"
+        ]
+      },
+      {
+        "id": "ex-fp-t-over-fp-tp-is-purely-inseparable-of-degree-p",
+        "kind": "example",
+        "title": "$\\mathbb F_p(t)/\\mathbb F_p(t^p)$ is purely inseparable of degree $p$ and separable degree one",
+        "strategy": "The element $t$ satisfies $x^p-t^p$ over the base. The same reduced-fraction exponent argument shows $t^p$ is not a $p$th power in $\\mathbb F_p(t^p)$, so the polynomial is irreducible and the degree is $p$. Every rational function has a $p$th power in the base, giving pure inseparability and separable degree one.",
+        "deps": [
+          "cor-rational-function-field-as-a-fraction-field",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+          "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
+          "thm-purely-inseparable-extension-characterizations"
+        ]
+      },
+      {
+        "id": "cex-degree-p-squared-purely-inseparable-extension-is-not-simple",
+        "kind": "counterexample",
+        "title": "$\\mathbb F_p(s,t)/\\mathbb F_p(s^p,t^p)$ has degree $p^2$, infinitely many intermediate fields, and no primitive element",
+        "strategy": "Adjoin $s$ and then $t$ and apply the preceding one-variable calculation twice to obtain degree $p^2$. For every $c$ in the infinite base field, $s+ct$ generates a degree-$p$ intermediate field; compare coefficients in the basis $s^it^j$ to prove these fields are distinct. The Steinitz criterion then rules out a primitive element.",
+        "deps": [
+          "cor-rational-function-field-as-a-fraction-field",
+          "thm-polynomial-ring-over-a-field-is-a-ufd",
+          "thm-p-bases-and-degree-in-exponent-one-purely-inseparable-extensions",
+          "thm-steinitz-primitive-element-criterion"
+        ]
+      },
+      {
+        "id": "ex-perfect-closure-of-fp-t-is-an-infinite-perfect-field",
+        "kind": "example",
+        "title": "$\\bigcup_{n\\ge0}\\mathbb F_p(t^{1/p^n})$ is an infinite perfect field of characteristic $p$",
+        "strategy": "Place compatible $p^n$th roots of $t$ in an algebraic closure. The nested union is a field. Taking coefficientwise $p$th roots in the next stage shows Frobenius is surjective, so the union is perfect; it contains $\\mathbb F_p(t)$ and is therefore infinite.",
+        "deps": [
+          "thm-perfect-field-characterizations",
+          "thm-frobenius-endomorphism-and-finite-field-automorphism",
+          "cor-rational-function-field-as-a-fraction-field"
+        ]
+      },
+      {
+        "id": "fs-every-irreducible-polynomial-is-separable",
+        "kind": "false-statement",
+        "title": "FALSE: every irreducible polynomial over a field is separable",
+        "strategy": "Use the irreducible polynomial $x^p-t$ over $\\mathbb F_p(t)$ from the explicit example. Its derivative is zero and it has one root of multiplicity $p$ in a splitting field.",
+        "deps": [
+          "ex-x-p-minus-t-is-irreducible-and-inseparable"
+        ]
+      },
+      {
+        "id": "fs-separable-degree-always-equals-extension-degree",
+        "kind": "false-statement",
+        "title": "FALSE: every finite extension satisfies $[K:F]_s=[K:F]$",
+        "strategy": "The extension $\\mathbb F_p(t)/\\mathbb F_p(t^p)$ has ordinary degree $p$ and separable degree one, so it directly refutes the equality.",
+        "deps": [
+          "ex-fp-t-over-fp-tp-is-purely-inseparable-of-degree-p"
+        ]
+      },
+      {
+        "id": "fs-every-algebraic-extension-is-simple",
+        "kind": "false-statement",
+        "title": "FALSE: every algebraic extension is simple",
+        "strategy": "Use this page's own algebraic closure of $\\mathbb F_p$, which is algebraic over $\\mathbb F_p$ and infinite, in place of the published infinite algebraic extension of $\\mathbb Q$ (that one is homed on an examples page, and B pages are leaves). Were the closure $\\mathbb F_p(\\alpha)$, its generator would be algebraic and the extension finite; so it is algebraic and not simple.",
+        "deps": [
+          "ex-algebraic-closure-of-a-finite-field",
+          "cor-element-algebraic-iff-simple-extension-finite"
+        ]
+      },
+      {
+        "id": "fs-algebraic-closure-is-unique-up-to-unique-isomorphism",
+        "kind": "false-statement",
+        "title": "FALSE: an algebraic closure is unique up to a unique base-field isomorphism",
+        "strategy": "In an algebraic closure of $\\mathbb Q$, choose a root $a$ of $x^2+1$. The two distinct roots $a$ and $-a$ give a nontrivial $\\mathbb Q$-embedding of $\\mathbb Q(a)$, which extends by Zorn to an automorphism of the closure. Thus the identity and this automorphism are distinct base-field isomorphisms.",
+        "deps": [
+          "thm-existence-of-algebraic-closures",
+          "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+          "thm-algebraic-embedding-extension",
+          "cor-algebraic-closures-are-isomorphic-over-the-base",
+          "def-algebraic-closure",
+          "thm-evaluation-kernel-and-minimal-polynomial"
+        ]
+      }
+    ]
   }
 ]

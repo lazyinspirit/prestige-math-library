@@ -1,15 +1,15 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ c25bd6a61c83 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ f3dcbe13532b by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 515 |
-| now mechanically prevented | 157 |
+| defects caught before publication | 588 |
+| now mechanically prevented | 207 |
 | escaped to publication | 1 |
-| still open | 27 |
+| still open | 29 |
 
 ## frontier-11 — 4 row(s)
 
@@ -84,6 +84,26 @@
 | read-only-role-asked-to-write |  |  |  |  | 1 |  |  |  |  |  |
 | scope-loss |  |  | 1 |  |  |  |  |  |  |  |
 
+## frontier-15 — 73 row(s)
+
+| subclass | 6a-read | 6b-adjudicate |
+|---|---|---|
+| citation-missing | 10 | 6 |
+| false-boundary-disposition | 12 | 3 |
+| citation-misattributed | 4 | 4 |
+| citation-inflated | 7 | 1 |
+| false-or-overstrong-statement | 2 | 3 |
+| invalid-inference | 2 | 2 |
+| undefined-notation | 2 | 1 |
+| other | 1 | 1 |
+| missing-hypothesis | 1 | 1 |
+| unsourced-locator |  | 2 |
+| false-or-overstrong-title | 1 | 1 |
+| missing-choice-scope |  | 2 |
+| gate-vacuous |  | 2 |
+| ill-typed-construction | 1 |  |
+| citation-corrupted | 1 |  |
+
 ## pre-frontier-13 — 3 row(s)
 
 | subclass | A10 | owner | unknown |
@@ -131,3 +151,5 @@
 - `frontier-12-D008` frontier-12 · other · spine-audit receipt
 - `frontier-13-D053` frontier-13 · other · tools/precheck.mts
 - `pre-frontier-13-D003` pre-frontier-13 · other · tools/run-wave.test.mjs
+- `frontier-15-B41` frontier-15 · unsourced-locator · rem-plane-star-shaped-and-convex-dictionary, Lebl ca.pdf archive snapshot
+- `f15-a-rr-005` frontier-15 · false-boundary-disposition · 518 boundary rows across 88 batch-2 items are generated from the item's title and statement rather than written as dispositions

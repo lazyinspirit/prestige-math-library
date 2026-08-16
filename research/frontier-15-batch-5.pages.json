@@ -8,9 +8,272 @@
     "companion": "the-fundamental-group-of-the-circle-examples",
     "requires": [
       "covering-spaces-and-lifting",
-      "sine-cosine-and-the-definition-of-pi"
+      "fundamental-trigonometric-identities"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-circle-as-real-line-mod-integers",
+        "kind": "definition",
+        "title": "The circle as $S^1=\\mathbb R/\\mathbb Z$ with basepoint $[0]$",
+        "strategy": "Put $x\\sim y$ exactly when $x-y\\in\\mathbb Z$, use the canonical copy of the integers in the reals, and verify reflexivity, symmetry, and transitivity from the integer ring laws before forming the quotient. Give it the topology induced by $p(x)=[x]$. Author the exact clause: The circle is $S^1:=\\mathbb R/\\mathbb Z$ with the quotient topology induced by $p(x)=[x]$ and basepoint $[0]$; moreover $p^{-1}([0])=\\mathbb Z$ and $p(x+n)=p(x)$ for every real $x$ and integer $n$.",
+        "deps": [
+          "def-quotient-topology",
+          "def-integers",
+          "thm-int-comm-ring",
+          "lem-integer-part"
+        ]
+      },
+      {
+        "id": "rem-circle-quotient-model-agrees-with-published-examples",
+        "kind": "remark",
+        "title": "Agreement with the published quotient model of $\\mathbb R/\\mathbb Z$",
+        "strategy": "State that the space defined here is the same quotient $\\mathbb R/\\mathbb Z$ already illustrated by the published examples on `subspaces-products-and-quotients-examples` and on `covering-spaces-and-lifting-examples`: the equivalence relation, the quotient topology and the map $p$ agree, so no second notion of the circle is introduced. Name the pages in prose only, because their occurrences are B-page leaves; mint no `deps` edge to a B-leaf item.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers"
+        ]
+      },
+      {
+        "id": "lem-open-quotient-arcs-in-real-line-mod-integers",
+        "kind": "lemma",
+        "title": "The quotient map is open, and every interval shorter than one embeds in $\\mathbb R/\\mathbb Z$",
+        "strategy": "For open $U\\subseteq\\mathbb R$, compute $p^{-1}(p[U])=\\bigcup_{n\\in\\mathbb Z}(U+n)$, so $p[U]$ is open by the quotient topology. If an interval $J$ has length below one, integer translates cannot identify two of its points. For a relatively open subset of $J$, choose around each of its points a real interval whose radius is smaller than the remaining gap to length one; its quotient image intersects $p[J]$ only in the desired relative neighbourhood. This proves continuity of the inverse of $p|_J$ for open, closed, and half-open intervals alike.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "def-homeomorphism-and-open-maps",
+          "thm-algebra-of-continuous-functions",
+          "lem-integer-part"
+        ]
+      },
+      {
+        "id": "thm-real-line-covers-real-line-mod-integers",
+        "kind": "theorem",
+        "title": "$p:\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering map with translated interval sheets",
+        "strategy": "For $x\\in\\mathbb R$, take $J=(x-1/3,x+1/3)$ and $U=p[J]$. Prove the explicit statement $p^{-1}(U)=\\coprod_{n\\in\\mathbb Z}(J+n)$ and that every $p|_{J+n}:J+n\\to U$ is a homeomorphism; hence $p$ is a covering map. The openness lemma makes $U$ open, and the sheet calculation verifies every clause of the printed covering-map definition. In Remarks, record that this is the A-spine promotion of the covering clause already illustrated by the B-leaf `ex-real-line-mod-integer-translations-is-a-covering`; do not put that B id in `deps`.",
+        "deps": [
+          "lem-open-quotient-arcs-in-real-line-mod-integers",
+          "def-covering-map-and-evenly-covered-neighbourhoods"
+        ]
+      },
+      {
+        "id": "prop-real-line-mod-integers-is-compact-and-path-connected",
+        "kind": "proposition",
+        "title": "$\\mathbb R/\\mathbb Z$ is compact and path-connected",
+        "strategy": "The restriction $p|_{[0,1]}$ is continuous and surjective: subtract the integer part of any representative to reach $[0,1)$. Heine--Borel and the agreement of metric and topological compactness make $[0,1]$ compact, so its continuous image is compact. For classes $[x]$ and $[y]$, the path $t\\mapsto[(1-t)x+ty]$ proves path-connectedness, with continuity obtained from the real continuity algebra and composition with $p$.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "lem-integer-part",
+          "thm-heine-borel-rn",
+          "thm-compactness-agrees-with-metric-compactness",
+          "thm-compactness-under-continuous-maps",
+          "def-path-connected",
+          "thm-algebra-of-continuous-functions",
+          "lem-continuity-is-local-and-pastes"
+        ]
+      },
+      {
+        "id": "prop-real-line-mod-integers-is-hausdorff",
+        "kind": "proposition",
+        "title": "$\\mathbb R/\\mathbb Z$ is Hausdorff",
+        "strategy": "Choose the unique representatives $a,b\\in[0,1)$ of two distinct classes. The two positive circular gaps are $|a-b|$ and $1-|a-b|$; choose a radius smaller than one third of their minimum. The quotient images of the corresponding real intervals are open by the saturation lemma, and an integer-translation calculation shows that they are disjoint.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "lem-open-quotient-arcs-in-real-line-mod-integers",
+          "lem-integer-part",
+          "def-hausdorff-space"
+        ]
+      },
+      {
+        "id": "def-standard-integer-loops-in-the-circle",
+        "kind": "definition",
+        "title": "The standard circle loops $\\omega_n(t)=[nt]$ for $n\\in\\mathbb Z$",
+        "strategy": "For every integer $n$, define $\\widetilde\\omega_n(t)=nt$ and $\\omega_n=p\\circ\\widetilde\\omega_n$. Check continuity and the two endpoint values, including $n=0$ and negative $n$.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "def-based-loops-and-fundamental-group",
+          "thm-algebra-of-continuous-functions",
+          "lem-continuity-is-local-and-pastes"
+        ]
+      },
+      {
+        "id": "def-degree-of-a-circle-loop",
+        "kind": "definition",
+        "title": "The degree of a based circle loop",
+        "strategy": "For a based loop $\\alpha$ in $\\mathbb R/\\mathbb Z$, lift it uniquely from $0$. Its terminal point lies in $p^{-1}([0])=\\mathbb Z$; define $\\deg(\\alpha)=\\widetilde\\alpha(1)$. This is a definition on loops, not yet on homotopy classes.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "thm-real-line-covers-real-line-mod-integers",
+          "def-lift-of-a-map-path-and-homotopy",
+          "thm-path-lifting-for-covering-maps",
+          "lem-integer-part"
+        ]
+      },
+      {
+        "id": "thm-degree-is-invariant-under-path-homotopy",
+        "kind": "theorem",
+        "title": "Path-homotopic based circle loops have the same degree",
+        "strategy": "Lift an endpoint-fixed homotopy from the lift of the first loop. The lifted terminal edge is constant in the discrete fibre, so the two lifted loops starting at zero have the same endpoint. State explicitly that the covering and common starting lift are the only hypotheses used.",
+        "deps": [
+          "def-degree-of-a-circle-loop",
+          "cor-lifted-path-endpoints-depend-only-on-path-homotopy"
+        ]
+      },
+      {
+        "id": "cor-degree-descends-to-circle-loop-classes",
+        "kind": "corollary",
+        "title": "Degree defines a function $\\operatorname{Deg}:\\pi_1(S^1,[0])\\to\\mathbb Z$",
+        "strategy": "Use path-homotopy invariance to show that $\\operatorname{Deg}([\\alpha])=\\deg(\\alpha)$ is independent of the representative. This is the well-definedness result required before any homomorphism or isomorphism claim.",
+        "deps": [
+          "thm-degree-is-invariant-under-path-homotopy",
+          "def-based-loops-and-fundamental-group"
+        ]
+      },
+      {
+        "id": "prop-standard-circle-loops-have-their-integer-degrees",
+        "kind": "proposition",
+        "title": "$\\deg(\\omega_n)=n$ for every integer $n$",
+        "strategy": "The path $t\\mapsto nt$ starts at zero and projects to $\\omega_n$, so uniqueness identifies it with the defining lift and its endpoint is $n$. Treat $n=0$, positive $n$, and negative $n$ uniformly.",
+        "deps": [
+          "def-standard-integer-loops-in-the-circle",
+          "def-degree-of-a-circle-loop",
+          "thm-path-lifting-for-covering-maps"
+        ]
+      },
+      {
+        "id": "lem-lifts-of-circle-loop-concatenation-and-reversal",
+        "kind": "lemma",
+        "title": "Lifts of circle-loop concatenations and reversals",
+        "strategy": "If the lifts of $\\alpha$ and $\\beta$ from zero end at $m$ and $n$, paste the first lift with the integer translate $m+\\widetilde\\beta$ to lift $\\alpha*\\beta$ from zero; uniqueness gives endpoint $m+n$. The lift of the reversed loop from zero is $t\\mapsto\\widetilde\\alpha(1-t)-m$, with endpoint $-m$. Check the join and both endpoints before invoking the finite closed-cover pasting lemma.",
+        "deps": [
+          "def-degree-of-a-circle-loop",
+          "def-circle-as-real-line-mod-integers",
+          "def-based-loops-and-fundamental-group",
+          "thm-path-lifting-for-covering-maps",
+          "thm-algebra-of-continuous-functions",
+          "lem-continuity-is-local-and-pastes"
+        ]
+      },
+      {
+        "id": "prop-degree-laws-for-circle-loops",
+        "kind": "proposition",
+        "title": "Degree sends concatenation to addition, reversal to negation, and the constant loop to zero",
+        "strategy": "Read the concatenation and reversal formulas from their explicitly identified lifts. The constant loop has the constant lift at zero. Preserve the library convention that $\\alpha*\\beta$ traverses $\\alpha$ first and $\\beta$ second.",
+        "deps": [
+          "lem-lifts-of-circle-loop-concatenation-and-reversal",
+          "def-degree-of-a-circle-loop",
+          "thm-path-lifting-for-covering-maps"
+        ]
+      },
+      {
+        "id": "thm-degree-map-on-the-circle-is-a-homomorphism",
+        "kind": "theorem",
+        "title": "$\\operatorname{Deg}:\\pi_1(S^1,[0])\\to(\\mathbb Z,+)$ is a group homomorphism",
+        "strategy": "The descended map is already well defined. Apply the concatenation law to representatives to obtain $\\operatorname{Deg}([\\alpha][\\beta])=\\operatorname{Deg}([\\alpha])+\\operatorname{Deg}([\\beta])$, and cite the integer commutative-ring theorem for the target additive group.",
+        "deps": [
+          "cor-degree-descends-to-circle-loop-classes",
+          "prop-degree-laws-for-circle-loops",
+          "def-based-loops-and-fundamental-group",
+          "def-group-homomorphism",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "lem-circle-loops-of-equal-degree-are-path-homotopic",
+        "kind": "lemma",
+        "title": "Based circle loops of equal degree are path-homotopic",
+        "strategy": "Lift both loops from zero. Equal degree gives equal terminal endpoints, so the straight-line homotopy between the two real-valued lifts fixes both endpoints. Postcompose it with $p$ to obtain a path homotopy of the original loops.",
+        "deps": [
+          "def-degree-of-a-circle-loop",
+          "def-circle-as-real-line-mod-integers",
+          "lem-straight-line-homotopies-are-continuous",
+          "thm-composition-respects-homotopy"
+        ]
+      },
+      {
+        "id": "thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree",
+        "kind": "theorem",
+        "title": "Two based circle loops are path-homotopic if and only if they have equal degree",
+        "strategy": "The forward implication is degree invariance. The reverse implication is the preceding straight-line homotopy of lifts. Keep the two directions as separate numbered steps.",
+        "deps": [
+          "thm-degree-is-invariant-under-path-homotopy",
+          "lem-circle-loops-of-equal-degree-are-path-homotopic"
+        ]
+      },
+      {
+        "id": "cor-a-circle-loop-is-nullhomotopic-iff-its-degree-is-zero",
+        "kind": "corollary",
+        "title": "A based circle loop is nullhomotopic exactly when its degree is zero",
+        "strategy": "Apply the classification theorem to the loop and the constant standard loop $\\omega_0$, whose degree is zero. Interpret nullhomotopy here as endpoint-fixed homotopy through based loops.",
+        "deps": [
+          "thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree",
+          "def-standard-integer-loops-in-the-circle",
+          "prop-standard-circle-loops-have-their-integer-degrees"
+        ]
+      },
+      {
+        "id": "thm-fundamental-group-of-the-circle",
+        "kind": "theorem",
+        "title": "$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism",
+        "strategy": "The degree map is a homomorphism. It is injective because equal image degrees make the representing loops path-homotopic, and it is surjective because $\\operatorname{Deg}([\\omega_n])=n$ for every integer $n$. Its inverse is $n\\mapsto[\\omega_n]$. No trigonometric fact occurs in this proof.",
+        "deps": [
+          "thm-degree-map-on-the-circle-is-a-homomorphism",
+          "thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree",
+          "prop-standard-circle-loops-have-their-integer-degrees",
+          "def-based-loops-and-fundamental-group",
+          "def-group-isomorphism-and-automorphism",
+          "thm-int-comm-ring"
+        ]
+      },
+      {
+        "id": "cor-real-line-mod-integers-is-not-simply-connected",
+        "kind": "corollary",
+        "title": "$\\mathbb R/\\mathbb Z$ is not simply connected",
+        "strategy": "The space is nonempty and path-connected, but $\\omega_1$ has degree one and therefore is not nullhomotopic by the degree-zero criterion. This violates the trivial-fundamental-group clause of simple connectedness without relying on an unstated fact that $\\mathbb Z$ is nontrivial.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "prop-real-line-mod-integers-is-compact-and-path-connected",
+          "cor-a-circle-loop-is-nullhomotopic-iff-its-degree-is-zero",
+          "prop-standard-circle-loops-have-their-integer-degrees",
+          "def-simply-connected"
+        ]
+      },
+      {
+        "id": "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+        "kind": "theorem",
+        "title": "$[t]\\mapsto(\\cos 2\\pi t,\\sin 2\\pi t)$ is a homeomorphism from $\\mathbb R/\\mathbb Z$ to the unit circle",
+        "strategy": "The coordinate map on $\\mathbb R$ is continuous and is constant exactly on the integer-translation fibres, by common period $2\\pi$ and the published half-open parametrisation. The quotient universal property gives a continuous bijection from $\\mathbb R/\\mathbb Z$, and direct evaluation shows that it sends $[0]$ to $(1,0)$. Its source is compact; the unit circle is a subspace of the metrizable plane and hence Hausdorff. Apply the compact-to-Hausdorff continuous-bijection theorem. This is the only proof on the A page that invokes trigonometry.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "prop-real-line-mod-integers-is-compact-and-path-connected",
+          "thm-quotient-universal-property",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "thm-algebra-of-continuous-functions",
+          "thm-componentwise-limits-and-continuity",
+          "def-subspace-topology-top",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "def-pi-via-first-positive-cosine-zero",
+          "lem-integer-part",
+          "thm-compactness-under-continuous-maps",
+          "lem-metrics-on-rn",
+          "cor-metrizability-and-first-countability-are-hereditary",
+          "thm-metric-hausdorff-separation"
+        ]
+      },
+      {
+        "id": "cor-geometric-unit-circle-has-fundamental-group-z",
+        "kind": "corollary",
+        "title": "The trigonometric loops give $\\pi_1(\\{(x,y):x^2+y^2=1\\},(1,0))\\cong\\mathbb Z$",
+        "strategy": "The dictionary homeomorphism and its inverse induce mutually inverse fundamental-group homomorphisms by functoriality. Transport the degree isomorphism across them; under this transport $\\omega_n$ becomes $t\\mapsto(\\cos 2\\pi nt,\\sin 2\\pi nt)$. Mint no `aliases` on this item: `items/rem-pi1-circle-is-z.md` still exists as a draft record, so taking its id here would collide, and transferring an id is an owner decision that has not been made.",
+        "deps": [
+          "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "thm-fundamental-group-of-the-circle",
+          "thm-induced-fundamental-group-map-functoriality",
+          "def-group-isomorphism-and-automorphism",
+          "prop-standard-circle-loops-have-their-integer-degrees"
+        ]
+      }
+    ]
   },
   {
     "order": 296,
@@ -22,6 +285,100 @@
     "requires": [
       "the-fundamental-group-of-the-circle"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "cex-unit-length-interval-need-not-embed-in-real-line-mod-integers",
+        "kind": "counterexample",
+        "title": "An interval of length one need not embed under $p:\\mathbb R\\to\\mathbb R/\\mathbb Z$",
+        "strategy": "The restriction $p|_{[0,1)}$ is continuous and bijective onto $\\mathbb R/\\mathbb Z$: the integer-part lemma gives surjectivity, and two representatives in $[0,1)$ whose difference is an integer must coincide. The relatively open set $[0,1/2)\\subseteq[0,1)$ has image whose full inverse image is $\\bigcup_{n\\in\\mathbb Z}[n,n+1/2)$, which is not open at $0$; hence the restriction is not open and therefore is not a homeomorphism. Also $p|_{[0,1]}$ is not injective because $p(0)=p(1)$. Thus the claim for every open, closed, or half-open interval becomes false if length below one is replaced by length at most one.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "def-quotient-topology",
+          "def-subspace-topology-top",
+          "lem-integer-part",
+          "lem-homeomorphism-criteria"
+        ]
+      },
+      {
+        "id": "ex-a-paused-circle-loop-is-homotopic-to-the-standard-loop",
+        "kind": "example",
+        "title": "A loop that traverses the circle once and then pauses is homotopic to the standard loop",
+        "strategy": "Let $u(t)=2t$ on $[0,1/2]$ and $u(t)=1$ on $[1/2,1]$, and put $\\alpha=p\\circ u$. The pasting lemma makes $u$ continuous, it is the lift of $\\alpha$ from zero and ends at one, so $\\deg(\\alpha)=1=\\deg(\\omega_1)$. Give the explicit projected straight-line homotopy between $u$ and $t\\mapsto t$ rather than merely citing the classification theorem.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "def-standard-integer-loops-in-the-circle",
+          "def-degree-of-a-circle-loop",
+          "prop-standard-circle-loops-have-their-integer-degrees",
+          "lem-straight-line-homotopies-are-continuous",
+          "thm-algebra-of-continuous-functions",
+          "lem-continuity-is-local-and-pastes"
+        ]
+      },
+      {
+        "id": "ex-a-surjective-circle-loop-of-degree-zero",
+        "kind": "example",
+        "title": "A surjective circle loop can have degree zero and be nullhomotopic",
+        "strategy": "Let $u(t)=2t$ on $[0,1/2]$ and $u(t)=2-2t$ on $[1/2,1]$, and put $\\alpha=p\\circ u$. The two formulas agree at $1/2$, so the finite closed-cover pasting lemma makes $u$ continuous. It begins and ends at zero, is the lift of $\\alpha$ from zero, and therefore gives $\\deg(\\alpha)=0$. Its first half maps onto $\\mathbb R/\\mathbb Z$, so $\\alpha$ is surjective; it is nonconstant because $\\alpha(0)=[0]$ while $\\alpha(1/4)=[1/2]\\ne[0]$. Apply the degree-zero criterion to conclude that $\\alpha$ is nullhomotopic.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "def-degree-of-a-circle-loop",
+          "cor-a-circle-loop-is-nullhomotopic-iff-its-degree-is-zero",
+          "lem-integer-part",
+          "thm-algebra-of-continuous-functions",
+          "lem-continuity-is-local-and-pastes"
+        ]
+      },
+      {
+        "id": "ex-trigonometric-circle-loops-have-their-integer-degrees",
+        "kind": "example",
+        "title": "The geometric loops $t\\mapsto(\\cos 2\\pi nt,\\sin 2\\pi nt)$ have degree $n$",
+        "strategy": "Under the dictionary homeomorphism the standard quotient loop $\\omega_n(t)=[nt]$ becomes the displayed geometric loop. Its degree is $n$, including $n=0$ and negative $n$.",
+        "deps": [
+          "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "def-standard-integer-loops-in-the-circle",
+          "prop-standard-circle-loops-have-their-integer-degrees"
+        ]
+      },
+      {
+        "id": "cex-based-circle-loops-with-the-same-endpoints-need-not-be-path-homotopic",
+        "kind": "counterexample",
+        "title": "Based circle loops with the same endpoints need not be path-homotopic",
+        "strategy": "The constant loop and $\\omega_1$ both begin and end at $[0]$, but their degrees are zero and one. The degree classification therefore forbids an endpoint-fixed homotopy between them.",
+        "deps": [
+          "def-based-loops-and-fundamental-group",
+          "def-standard-integer-loops-in-the-circle",
+          "cor-a-circle-loop-is-nullhomotopic-iff-its-degree-is-zero",
+          "prop-standard-circle-loops-have-their-integer-degrees"
+        ]
+      },
+      {
+        "id": "ex-a-covering-quotient-of-a-simply-connected-space-need-not-be-simply-connected",
+        "kind": "example",
+        "title": "A covering quotient of a simply connected space need not be simply connected",
+        "strategy": "The real line is a nonempty convex subset of $\\mathbb R^1$, so the published convex-space theorem makes it simply connected. The map $p:\\mathbb R\\to\\mathbb R/\\mathbb Z$ is both the defining quotient map and the covering map proved on the companion A page, while $\\mathbb R/\\mathbb Z$ is not simply connected. Thus neither passage to a quotient nor passage along a covering map preserves simple connectedness from total space to base.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "thm-real-line-covers-real-line-mod-integers",
+          "cor-real-line-mod-integers-is-not-simply-connected",
+          "thm-convex-subsets-have-trivial-fundamental-group"
+        ]
+      },
+      {
+        "id": "fs-every-continuous-self-map-of-the-circle-is-nullhomotopic",
+        "kind": "false-statement",
+        "title": "FALSE: every continuous self-map of the circle is nullhomotopic",
+        "strategy": "Use the identity as witness. If a homotopy from the identity to a constant map existed, reverse it and lift it from a constant lift; homotopy lifting would produce a section $s:S^1\\to\\mathbb R$ of $p$. Then $s\\circ\\omega_1$ would be a closed lift of $\\omega_1$, while path-lift uniqueness identifies it with a translate of $t\\mapsto t$, whose endpoints differ by one. This contradiction avoids any unbased-homotopy invariance assumption.",
+        "deps": [
+          "def-nullhomotopic-map-and-contractible-space",
+          "def-circle-as-real-line-mod-integers",
+          "thm-real-line-covers-real-line-mod-integers",
+          "thm-homotopy-lifting-for-covering-maps",
+          "thm-path-lifting-for-covering-maps",
+          "def-standard-integer-loops-in-the-circle",
+          "thm-algebra-of-continuous-functions",
+          "prop-standard-circle-loops-have-their-integer-degrees"
+        ]
+      }
+    ]
   }
 ]

@@ -1,0 +1,23 @@
+{
+  "role": "alpha",
+  "label": "recheck-a",
+  "run": "frontier-15",
+  "covers": [
+    "1",
+    "2",
+    "3"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-16T15:58:39.605Z",
+  "ended_at": "2026-08-16T16:11:43.669Z",
+  "ms": 784064,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/frontier-15-dispatch/alpha-recheck-a.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/frontier-15-dispatch/alpha-recheck-a.prompt.md",
+  "tail": "Re-check complete. Report at `research/frontier-15-alpha-a-recheck.md`; verdicts updated in `research/frontier-15-alpha-a-step3-verdicts.json`.\n\n## Per-finding outcome (all 11 verified from disk, not from the notes)\n\n**Confirmed, fix genuinely on disk:** B1-1, B2-1, B2-3, B2-4, B2-5, B2-7, B3-1, B3-2, B3-3. No Beta pushed back on anything, so there was no pushback to adjudicate; B3-2 is the mirror case — my own decline of Beta-3's F2, which Beta-3 accepted and whose stale text it replaced with the disk fact.\n\n**B2-2 — applied, and correct in substance, but the fix introduced two defects I repaired:**\n\n1. **Out-of-closure dependency (blocking).** The corollary added by the B2-7 fix, `cor-classification-of-groups-of-order-one-hundred-five`, cited `lem-direct-product-of-finite-cyclic-groups-is-cyclic-iff-orders-are-coprime` — published on `primitive-roots-and-unit-groups-modulo-n` at **order 57.001**, in neither the manifest's nor the plan's `requires` closure for page 70. Same class as B3-1/B2-4, arriving inside the repair of a different one, and invisible to `content-policy` and `coverage-checklist` because the id resolves. Repaired to the in-closure route `thm-order-of-element-in-direct-product` + `thm-classification-of-cyclic-groups` (lcm(5,21)=105), in the manifest deps, the strategy and contract step 4.1.\n2. **A title asserting what the page cannot prove.** `ex-sylow-subgroups-of-gl-two-over-a-finite-prime-field` was titled `Sylow p-subgroups of Aut((Z/p)²) ≅ GL_2(F_p)` — but the entire point of the fix is that `GL_2(F_p)` is undefined until order 78. That is B2-1's defect (a Statement claiming more than the proof gives) reappearing in B2-2's repair, and it is invisible to the judges. Title corrected; the conventional name kept as an explicit name-only Remark instruction in both strategies, and the `coverage.json` note that claimed the item \"proves the coordinate dictionary\" corrected to what it actually does.\n\nI verified the rebuilt mathematics rather than accepting it: the Heisenberg coordinate law and diagonal action are exactly the unipotent/torus conjugation of the matrix group, `|B_p| = p³(p−1)³`; the new `|Aut((Z/p)²)| = (p²−1)(p²−p)` theorem and its `n_p = p+1` consequence close, including that normalising the shear subgroup is equivalent to preserving its fixed line.\n\n**B2-6 — confirmed with a recorded limitation.** I downloaded Judson and read it: printed p. 220 = PDF p. 227, Theorems 13.1–13.3 and the stopping point are exactly as the locator claims. The range is only three pages, so I read pp. 222–228 too, to check what that costs — **nothing standard is lost**; Sylow II/III come from Conrad, which I verified verbatim at step 3. Textbook backing is now present but supporting, not primary.\n\n## Gates after my repairs\n\nClosure checker over batches 1–3: **712 deps, 0 errors** (0 unresolved, forward, out-of-closure, or `ai-generated`-statement targets; 0 cross-batch edges). `coverage-checklist`, `content-policy --manifest-only`, `boundary-audit --fail-on-template`, `prosecheck` all clean on all three batches. The closure checker is what found the surviving defect — the four repo gates were green over it before and after.\n\n## Verdicts: all four pairs **ready for splice**\n\nTwo things the lead Alpha owns at step 4, both expected: `splice-plan --dry-run` refuses batch 2 on the `the-field-of-fractions-and-localisation` edge (my step-3 repair arriving where it should — adjudication is to add it to `plan-spec.json`, backward at 53.2 < 108 and not otherwise reachable); batches 1 and 3 splice clean. Separately, the new Judson source postdates the step-2 URL sweep and **no source in any batch carries a `fetch_verified` stamp** (Beta-2's sandbox had no DNS). DNS resolves from this host and I verified the Judson URL myself, but I did not run the stamp tool — that repair belongs to this stage's gate, and two writers on the coverage files is the failure it exists to prevent."
+}
