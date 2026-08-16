@@ -456,6 +456,29 @@ export const stages = [
         timeout: 14400,
       })),
     gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate(), urlGate(ctx)],
+
+    // THE MECHANICAL HALF OF RECOVER-BEFORE-REPLACE. url-sweep's contract
+    // (§3.11c) ends at "the snapshot is printed so the fix is a URL swap" —
+    // and the swap had no owner: the Betas have exited, and the step-3 Alphas
+    // licensed to edit a scaffold sit BEHIND the 2-assign barrier this gate
+    // holds shut. frontier-15 deadlocked exactly there, re-running the full
+    // 18-gate battery back-to-back while blocked. The swap is a function of
+    // two files on disk (the sweep artifact and the coverage files), so by
+    // the roles rule it is code. One round: apply every recorded snapshot,
+    // strictly — a dead URL with NO snapshot fails the tool, the round ends,
+    // and the blocker survives for a person, because re-sourcing is a
+    // judgment. The battery re-runs after the round and verifies the swapped
+    // archive URLs are themselves alive.
+    maxFixRounds: 1,
+    onGateFailure: async ({ ctx, failure }: any) => {
+      if (failure.id !== 'url-liveness') return;
+      const { spawnSync } = await import('node:child_process');
+      const r = spawnSync('node', ['tools/url-recover-apply.mjs',
+        '--liveness', `research/${ctx.run}-url-liveness.json`,
+        '--coverage', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`).join(','),
+      ], { cwd: ctx.repo, encoding: 'utf8' });
+      if (r.status !== 0) throw new Error(`url-recover-apply exit ${r.status}: ${(r.stderr || r.stdout || '').trim().slice(0, 400)}`);
+    },
   },
 
   // THE ORCHESTRATOR ROLE IS GONE (owner, 2026-08-16). Every judgment it used

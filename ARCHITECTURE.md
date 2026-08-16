@@ -708,6 +708,22 @@ normalised, registry suffixes like `ac.uk` skipped — not the host as written.
 A dead URL *with* a recovered snapshot is still a gate failure: the citation on
 disk is what a reader clicks. The snapshot is printed so the fix is a URL swap.
 
+**The swap is code (2026-08-17).** "The fix is a URL swap" originally named no
+owner, and on frontier-15 that deadlocked stage 1: the sweep recorded two
+recovered snapshots, the gate blocked, and the step-3 Alphas licensed to edit a
+scaffold sat behind the `2-assign` barrier the gate held shut — while the
+engine re-ran the full 18-gate battery back-to-back. The swap is a function of
+two files on disk, so the roles rule assigns it to code:
+`tools/url-recover-apply.mjs` applies every recorded snapshot into the
+coverage sources (`url` ← snapshot, `original_url` preserved, idempotent), and
+stage 1's `onGateFailure` hook runs it for exactly one repair round before the
+battery re-verifies the archive URLs live. **Strictness is the point**: a dead
+URL with no snapshot fails the tool, the round ends, and the blocker survives
+— re-sourcing an unrecoverable citation is a judgment for a person or an
+Alpha, never a default. The reader-clickable-citation principle is unchanged;
+only the mechanism moved from "blocked until someone swaps" to "swapped by the
+stage's own repair loop, then re-verified".
+
 **Two bugs found by running it, both of which had already bitten the run.**
 
 - *Liveness is a header question.* The first version downloaded the body and

@@ -141,6 +141,7 @@ There are no halt codes. The engine either advances, holds, or is blocked, and
 | `stage spec is invalid` | a stage cannot fail — usually a gate list that came back empty | fix the stage table; the engine refuses to dispatch until you do |
 | `missing input file(s)` | a brief or task the next dispatch needs is absent | write the file; the blocker retires itself on the next tick |
 | `gate <id> failed` | a real defect, or a repair loop that has not converged | read the gate output in `events.jsonl` |
+| `gate url-liveness failed` **persisting** | a citation is dead and the archive holds **no snapshot** — the recovered case never persists: stage 1's repair round swaps recorded snapshots itself (`url-recover-apply.mjs`) and re-verifies | re-sourcing is a judgment: pick the replacement per §3.11c and update the coverage source |
 | `<label> failed 3x` | a lane hit the config's `maxAttempts` | read its log under `research/<run>-dispatch/`; `retry` re-arms it |
 | `plan() threw` | a stage's own planner raised | a spec defect, not a crash loop; fix the stage table |
 | `N repair round(s) did not clear gate` | the bounded self-correcting loop gave up | this one needs a person |
