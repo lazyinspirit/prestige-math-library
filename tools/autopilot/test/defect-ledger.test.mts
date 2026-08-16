@@ -34,6 +34,11 @@ const fixture = (rows: object[], adj: object[], closure?: object) => {
   writeFileSync(join(dir, 'research', 'defect-ledger.jsonl'), rows.map((r) => JSON.stringify(r)).join('\n') + '\n');
   writeFileSync(join(dir, 'adj.jsonl'), adj.map((r) => JSON.stringify(r)).join('\n') + '\n');
   if (closure) writeFileSync(join(dir, 'closure.json'), JSON.stringify(closure));
+  // `check` now also verifies the generated view is current against these
+  // bytes, so a fixture with no view is stale by construction and every case
+  // below would fail for a reason that is not the clause it names. Staleness
+  // itself is covered in defect-ledger-render.test.mts.
+  spawnSync(process.execPath, [TOOL, 'render'], { cwd: dir, encoding: 'utf8', timeout: 60_000 });
   return dir;
 };
 
