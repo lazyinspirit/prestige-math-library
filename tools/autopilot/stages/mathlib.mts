@@ -938,7 +938,10 @@ export const stages = [
     // this cannot be removed by accident. Re-running the full receipt gate here
     // rather than trusting 9-receipt is deliberate: it is the last thing that
     // runs, on the final text, and it is what "the level is closed" means.
-    gates: (ctx) => [levelCoverageGate(ctx), closureGate(ctx)],
+    // The repo-wide invariants run once more for the same reason — step 10 is
+    // gates.mjs's last gate point for prosecheck/depsource, and step-9 edits
+    // land after 9-scope's own sweep.
+    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx)],
   },
 ];
 
