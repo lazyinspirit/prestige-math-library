@@ -161,12 +161,27 @@ For each pair, read `research/<run>-batch-<i>.pages.json`, `.notes.md` and
    error. Adjudicate a proposed split now with the exact cut and new page ids;
    say so if one should have been proposed and was not.
 
-**Output** `research/<run>-alpha-<your group letter>-step3-scaffold-review.md`,
-taking the group letter from your dispatch label (`step3-a` → `a`): per pair,
-`sufficient` or `insufficient`, and for each `insufficient` the exact results to
-add and the source carrying them. **You author nothing here and edit no batch
-file.** Be specific — "could be deeper" is not a finding; "the orbit–stabiliser
-theorem is absent and Brosnan §0035, already in the ledger, proves it" is.
+**Two outputs**, taking your group letter from your dispatch label
+(`step3-a` → `a`):
+
+1. `research/<run>-alpha-<g>-step3-scaffold-review.md` — your reasoning per pair.
+2. `research/<run>-alpha-<g>-step3-verdicts.json` — the same verdicts, machine
+   readable, because the engine loops on this file and cannot read prose:
+
+```json
+[ { "page": "<A page id>", "verdict": "sufficient" },
+  { "page": "<A page id>", "verdict": "insufficient",
+    "missing": ["orbit–stabiliser theorem (Brosnan §0035, already in the ledger)"] } ]
+```
+
+An `insufficient` with an empty `missing` is rejected by the gate: name the
+result and the source that carries it. **You author nothing here and edit no
+batch file** — the `3-fix` stage routes your findings to the owning Beta, and
+the re-check will not clear until every pair is `sufficient`, so an unfixed
+finding holds the build rather than passing quietly into step 4.
+
+Be specific. "Could be deeper" is not a finding; "the orbit–stabiliser theorem is
+absent and Brosnan §0035, already in the ledger, proves it" is.
 
 ## Step 4 — propagate approved changes
 

@@ -1,0 +1,841 @@
+// The stage specification for the prestige-math-library build, steps 0 -> 10.
+//
+// EVERYTHING DOMAIN-SPECIFIC LIVES HERE. The engine knows nothing about
+// mathematics, batches, Alphas or judges; it knows stages, units, coverage and
+// gates. Porting this pipeline to another project means writing another file
+// like this one, and porting it to another agent platform means changing one
+// command template in the config. That separation is the whole design.
+//
+// Each stage declares:
+//   units(ctx)          the units of work it owes           -> ['1','2',...]
+//   pattern             which result files belong to it     -> /^beta-batch-/
+//   labelFor(unit)      the dispatch label for a unit       (enables per-unit retry)
+//   plan(ctx, pending)  dispatch descriptors for what is missing
+//   gates(ctx)          commands that must pass before advancing
+//
+// A stage with no `plan` is a checkpoint: it advances when its artifacts appear,
+// whoever produced them. That is how a step done by hand, or by a tool rather
+// than an agent, still fits the machine.
+
+import { readdirSync, existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
+
+/** Batch numbers, read from disk rather than configured.
+ *  A run's batch count is a property of its step-0 output, and anything that
+ *  restates it in a second place will eventually disagree with it. */
+export function batches(ctx: any): string[] {
+  const dir = R(ctx, 'research');
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f: any) => f.startsWith(`${ctx.run}-batch-`) && f.endsWith('.pages.json'))
+    .map((f: any) => f.replace(`${ctx.run}-batch-`, '').replace('.pages.json', ''))
+    .filter((n: any) => /^\d+$/.test(n))
+    .sort((a: any, b: any) => Number(a) - Number(b));
+}
+
+/** Group Alphas: one per <=3 batches. Used only to PLAN the fan-out — never to
+ *  decide completion, which is coverage. The distinction matters: if this
+ *  grouping is wrong the run dispatches a different number of agents, and still
+ *  completes correctly when every batch is covered. */
+export function alphaGroups(ctx: any, size = 3): Array<{ label: string; covers: string[] }> {
+  const b = batches(ctx);
+  const out: any[] = [];
+  for (let i = 0; i < b.length; i += size) {
+    out.push({ label: String.fromCharCode(97 + out.length), covers: b.slice(i, i + size) });
+  }
+  return out;
+}
+
+const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
+
+/** Gates that apply to the whole repository, re-run at several stages because
+ *  authoring and repair both change items on disk. */
+const repoWide = (ctx) => [
+  gate('precheck', ['node', 'tools/tsx-run.mjs', 'tools/precheck.mts'], {
+    liveness: { pattern: /(\d+)\s+checked/.source, min: 1, unit: 'items checked' },
+  }),
+  gate('depcheck', ['node', 'tools/depcheck.mjs']),
+  gate('fwdcheck', ['node', 'tools/fwdcheck.mjs']),
+  gate('extcheck', ['node', 'tools/extcheck.mjs']),
+  gate('rendercheck', ['node', 'tools/rendercheck.mjs']),
+];
+
+const coverageGates = (ctx) => batches(ctx).map((b: any) =>
+  gate(`coverage-${b}`, ['node', 'tools/coverage-checklist.mjs', `research/${ctx.run}-batch-${b}.coverage.json`], {
+    liveness: { pattern: /(\d+)\s+harvested/.source, min: 1, unit: 'harvested results' },
+  }));
+
+const policyGates = (ctx) => batches(ctx).map((b: any) =>
+  gate(`policy-${b}`, ['node', 'tools/content-policy.mjs', '--manifest-only', `research/${ctx.run}-batch-${b}.pages.json`]));
+
+const planGate = () => gate('validate-plan', ['node', 'tools/validate-plan.mjs', 'research/plan-spec.json']);
+
+/** Scope loss is invisible to every gate that reads the current state.
+ *
+ *  On frontier-14 a fully scaffolded A/B pair — 19 items, three verified
+ *  sources, complete contracts, reviewed by a group Alpha — was removed from
+ *  the manifest, the harvest and the contracts between step 3 and step 4, and
+ *  every gate stayed green. They validate what is IN the artifacts; none can
+ *  see a page that is no longer there. This one compares against what step 0
+ *  said the run owed. */
+const scopeGate = (ctx) => gate('manifest-integrity',
+  ['node', 'tools/manifest-integrity.mjs', '--run', ctx.run]);
+
+const urlGate = (ctx) => gate('url-liveness', [
+  'node', 'tools/url-sweep.mjs', '--coverage',
+  ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`),
+  '--out', `research/${ctx.run}-url-liveness.json`, '--recover', '--fail-on-dead',
+]);
+
+// ---------------------------------------------------------------------------
+// THE QUALITY-CONTROL GATES, AND WHY THEY ARE HERE NOW
+//
+// This engine used to gate on fourteen tools. The library has sixty, and the
+// decisive ones — the proof contract, the finite smoke tests, the risk tiers,
+// the blast radius, the spine receipt, and above all `level-coverage` — were in
+// none of the thirteen stages. `level-coverage` did not appear anywhere in the
+// autopilot source at all.
+//
+// They were not skipped. They were run BY THE ALPHAS, by hand, and reported in
+// prose. frontier-14's step-8 report contains a "Gate state at hand-off" table
+// whose last row reads `level-coverage BLOCKED`. The engine never saw it, because
+// a markdown table is not an exit code. Step 9 ran, step 10 ran, and the build
+// reported done with two fatal defects open and its receipt gate red.
+//
+// A gate a model runs and describes is a description. A gate the engine runs is
+// a gate. Every signature below was read from the tool's own usage output, not
+// recalled — four of six invocations were invented last time this was written.
+// ---------------------------------------------------------------------------
+
+/** The merged contract path. One place, because two would disagree. */
+const contractsPath = (ctx) => `research/${ctx.run}-proof-contracts.json`;
+const touchesPath = (ctx) => `research/${ctx.run}-touches.json`;
+const closurePath = (ctx) => `research/${ctx.run}-judge-closure.json`;
+const scaffoldPath = (ctx) => `research/${ctx.run}-scaffold-closure.json`;
+
+/** The step-3 closure receipt, or null before the gate has ever run. */
+function readScaffold(ctx): { insufficient: string[]; missing_verdict: string[]; closed: boolean } | null {
+  const p = R(ctx, scaffoldPath(ctx));
+  if (!existsSync(p)) return null;
+  try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; }
+}
+
+/** The closure receipt the judge gate writes, or null before it has ever run.
+ *  Read fresh every time — it is rewritten by each gate run, and a cached copy
+ *  would name repairs that have since landed. */
+function readClosure(ctx): { needs_rejudge: string[]; unadjudicated: string[]; open_fatal: string[]; closed: boolean } | null {
+  const p = R(ctx, closurePath(ctx));
+  if (!existsSync(p)) return null;
+  try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; }
+}
+
+/**
+ * Proof-obligation gates: merge the per-batch contracts, then check them.
+ *
+ * The merge is gate zero on purpose. `runGates` is sequential and stops at the
+ * first failure, so a merge that fails means the checks below it never claim to
+ * have passed over a stale file. Step 9 of frontier-14 re-merged to fold in a
+ * late batch and left `proof-contract --strict` red for the rest of the run.
+ *
+ * `--require-reviewed` is a RISK-REPORT flag, not a proof-contract one — read
+ * from `tools/risk-report.mjs`'s usage line. It demands an Alpha `risk_review`
+ * disposition, which only exists after step 6, so it is off at step 5. Asking
+ * the authoring Betas for another role's record can never pass on a fresh level.
+ */
+const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) => {
+  const merged = contractsPath(ctx);
+  const perBatch = batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.proof-contracts.json`);
+  return [
+    gate('merge-contracts', ['node', 'tools/merge-proof-contracts.mjs', '--level', ctx.run, merged, ...perBatch]),
+    gate('proof-contract', ['node', 'tools/proof-contract.mjs', merged, '--strict']),
+    gate('finite-smoke', ['node', 'tools/finite-smoke.mjs', merged]),
+    gate('risk-report', ['node', 'tools/risk-report.mjs', merged, ...(reviewed ? ['--require-reviewed'] : [])]),
+    // A templated `not_applicable` boundary row is not a disposition. On
+    // frontier-13 two false template rows each hid a fatal defect, and on
+    // frontier-14 three did — three times out of three that anyone looked.
+    gate('boundary-audit', ['node', 'tools/boundary-audit.mjs', merged, '--fail-on-contradicted']),
+    gate('citation-fidelity', ['node', 'tools/citation-fidelity.mjs', merged, '--fail-on-missing-quote']),
+    // The gate that checks the gates. finite-smoke once reported "0 error(s), 0
+    // check(s)" for most of a run: a green tick over an empty scope.
+    gate('gate-liveness', ['node', 'tools/gate-liveness.mjs', '--run', ctx.run,
+      '--contracts', merged,
+      '--checklists', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`).join(','),
+      '--min-checks', '1']),
+  ];
+};
+
+/**
+ * Judge closure — the predicate that says whether the mathematics is signed off.
+ *
+ * Three questions, all answered against the text on disk right now: does every
+ * item have a current verdict pair, is every current rejection adjudicated, and
+ * is any adjudication `confirmed_fatal`. `--out` writes the ids in each class so
+ * the rejudge stage has something to dispatch from — frontier-14's step 8 named
+ * its 23 rejudge targets in a markdown table and the rejudge never ran, because
+ * nothing downstream could read a table.
+ *
+ * The allowances are per-stage and narrow:
+ *   step 7 — nothing is adjudicated yet, so rejections are expected;
+ *   step 8 — repairs legitimately void their own pairs, and the next stage fixes
+ *            that; an unadjudicated rejection and an open fatal are NOT allowed.
+ *   after  — no allowances at all.
+ */
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false } = {}) =>
+  gate('judge-closure', ['node', 'tools/level-coverage.mjs',
+    '--judge-only', '--verify-current-context',
+    '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
+    '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+    ...(allowUnadjudicated ? ['--allow-unadjudicated'] : []),
+    ...(pendingRejudge ? ['--allow-pending-rejudge'] : []),
+    '--out', closurePath(ctx),
+    ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`),
+  ], {
+    liveness: { pattern: /(\d+)\/(?:\d+) current pair/.source, min: 1, unit: 'judged pairs' },
+  });
+
+/** The whole-level receipt gate. The one frontier-14 never ran. */
+const levelCoverageGate = (ctx) => gate('level-coverage', ['node', 'tools/level-coverage.mjs',
+  '--contracts', contractsPath(ctx),
+  '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
+  '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  '--spine-receipt', `research/${ctx.run}-spine-audit.json`,
+  '--audit-receipt', `research/${ctx.run}-audit-coverage.json`,
+  '--verify-current-context',
+  ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`),
+], {
+  liveness: { pattern: /level-coverage: (\d+) item/.source, min: 1, unit: 'items' },
+});
+
+/**
+ * The step-3 closure predicate — the scaffold half of the self-correcting loop.
+ *
+ * Step 3 asks whether each pair is deep enough to author. Alpha answers
+ * `sufficient` or `insufficient` per pair; a Beta repairs; Alpha re-checks. That
+ * ran once each, in a line, and the re-check's conclusion changed nothing —
+ * whatever it said, step 4 spliced. A scaffold still insufficient advanced
+ * exactly like one that was not, which is how a pair published with no
+ * orbit–stabiliser theorem.
+ *
+ * `review` requires every A page to HAVE a verdict; `sufficient` requires every
+ * verdict to BE sufficient, and is what the re-check gates on so the loop
+ * cannot exit while a pair is still thin.
+ */
+const scaffoldGate = (ctx, { requireSufficient = false } = {}) =>
+  gate('scaffold-verdicts', ['node', 'tools/scaffold-verdicts.mjs',
+    '--run', ctx.run,
+    ...(requireSufficient ? ['--require-sufficient'] : []),
+    '--out', scaffoldPath(ctx),
+  ], {
+    liveness: { pattern: /(\d+)\/(?:\d+) A page\(s\) reviewed/.source, min: 1, unit: 'reviewed pairs' },
+  });
+
+/** Blast radius, from the step-4 baseline. A snapshot taken after authoring
+ *  makes the diff empty by construction and the gate confirms instead of
+ *  checking — hence the separate `4-baseline` stage before step 5. */
+const impactGate = (ctx) => gate('impact-audit', ['node', 'tools/impact-audit.mjs',
+  '--touches', touchesPath(ctx), '--from', 'pre-author',
+  '--receipt', `research/${ctx.run}-impact.json`,
+]);
+
+
+/**
+ * Build the result-file matcher from the dispatcher's own naming rule.
+ *
+ * `dispatch.mjs` writes `<role>-<label>.result.json` (its line 357). Thirteen
+ * stages hand-wrote a regex against that rule from memory, and they drifted:
+ * `/^alpha-step3-/` missed `alpha-alpha-step3-a.result.json`, produced when a
+ * caller's label already contains the role. The stage read 3/6 covered while a
+ * completed, ok:true result sat on disk.
+ *
+ * Deriving it removes the class. `role` and a label pattern are what a stage
+ * actually knows; the doubled `<role>-<role>-<label>` form and the
+ * `.result.json` suffix are the dispatcher's business, encoded once.
+ *
+ * The label pattern is anchored at both ends on purpose: without it,
+ * `batch-\d+` also matches `fix-batch-3`, and two stages count each other's work.
+ */
+const resultPattern = (role: string, labelSource: string): RegExp =>
+  new RegExp(`^${role}-(?:${role}-)?(?:${labelSource})\\.result\\.json$`);
+
+export const stages = [
+  {
+    id: '1-scaffold',
+    label: 'Beta scaffolding',
+    units: batches,
+    // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
+    // `beta-fix-batch-3.result.json`, which belongs to a different stage.
+    pattern: resultPattern('beta', 'batch-\\d+'),
+    labelFor: (u) => `batch-${u}`,
+    concurrency: 5,
+    plan: (ctx, pending) => pending.map((u: any) => ({
+      role: 'beta',
+      label: `batch-${u}`,
+      job: 'scaffolding',
+      covers: [u],
+      brief: "briefs/beta-scaffold.md",
+      task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
+      timeout: 14400,
+    })),
+    gates: (ctx) => [scopeGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate(), urlGate(ctx)],
+  },
+
+  // THE ORCHESTRATOR ROLE IS GONE (owner, 2026-08-16). Every judgment it used
+  // to make belongs to an Alpha; every transition between judgments belongs to
+  // the engine. The two are different things and conflating them is what put a
+  // model on the critical path in the first place.
+  //
+  // What the orchestrator used to do, and where it went:
+  //   batching, seam count, drift diff   -> `autopilot plan`, mechanical
+  //   adjudicating Beta recommendations  -> the step-3 Alpha, below
+  //   routing findings to owning Betas   -> the 3-fix stage, mechanical fan-out
+  //   running gates, keeping ledgers     -> the engine
+  //   deciding a stage is finished       -> the engine's coverage predicate
+  //   the step-10 owner report           -> a supervisor agent, last stage
+  {
+    id: '3-review',
+    label: 'Alpha scaffold review and adjudication',
+    units: batches,
+    pattern: resultPattern('alpha', 'step3-[a-z]+'),
+    concurrency: 3,
+    // One Alpha per group; each declares the batches it covers, so the stage
+    // completes on coverage no matter how the grouping came out.
+    plan: (ctx, pendingUnits) => {
+      const groups = alphaGroups(ctx).filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))));
+      return groups.map((g: any) => ({
+        role: 'alpha',
+        label: `step3-${g.label}`,
+      job: 'audit',
+        covers: g.covers,
+        brief: "briefs/alpha.md",
+        task: [`research/${ctx.run}-alpha-${g.label}.task.md`, `research/${ctx.run}-alpha-group.task.md`],
+        timeout: 10800,
+      }));
+    },
+    // Every pair must carry a verdict. An Alpha that reviewed four of six pairs
+    // and exited zero used to clear this stage.
+    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx)],
+  },
+
+  // Findings go back to the Beta that owns the batch. This used to be an
+  // orchestrator writing a fix brief per batch, which is also where eleven
+  // findings were once lost — they were transcribed from an agent's closing
+  // message instead of its report, and renumbering made the losses look like
+  // completions. The fan-out is now mechanical and the task file points at the
+  // report FILE and the finding ids, so there is no transcription step to lose
+  // anything in.
+  {
+    id: '3-fix',
+    label: 'Beta fix pass on step-3 findings',
+    units: batches,
+    pattern: resultPattern('beta', 'fix-batch-\\d+'),
+    labelFor: (u) => `fix-batch-${u}`,
+    concurrency: 5,
+    // A batch with no findings still needs a covering result, so the fix task
+    // is written for every batch and a Beta with nothing to do says so and
+    // exits. Making "no findings" a fast no-op is cheaper than making the
+    // engine reason about which batches were named.
+    plan: (ctx, pending) => pending.map((u: any) => ({
+      role: 'beta',
+      label: `fix-batch-${u}`,
+      job: 'authoring',
+      covers: [u],
+      brief: "briefs/beta-scaffold.md",
+      task: [`research/${ctx.run}-beta-${u}-fix.task.md`, `research/${ctx.run}-beta-fix.task.md`],
+      timeout: 7200,
+    })),
+    gates: (ctx) => [scopeGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate()],
+  },
+
+  // Alpha re-checks its own findings from disk before the splice. An `applied`
+  // claim that changed nothing is caught here, which is the only reason the
+  // fix stage can be trusted without a human reading it.
+  {
+    id: '3-recheck',
+    label: 'Alpha re-check before splice',
+    units: batches,
+    pattern: resultPattern('alpha', 'recheck-[a-z]+'),
+    concurrency: 3,
+    plan: (ctx, pendingUnits) => alphaGroups(ctx)
+      .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
+      .map((g: any) => ({
+        role: 'alpha',
+        label: `recheck-${g.label}`,
+      job: 'adjudication',
+        covers: g.covers,
+        brief: "briefs/alpha.md",
+        task: [`research/${ctx.run}-alpha-${g.label}-recheck.task.md`, `research/${ctx.run}-alpha-group-recheck.task.md`],
+        timeout: 7200,
+      })),
+    // THE SCAFFOLD LOOP CLOSES HERE. Not "a re-check happened" — every pair is
+    // actually sufficient, or this stage does not clear and step 4 cannot splice.
+    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true })],
+    // Still thin after the re-check is another fix round, not an advance. Bounded
+    // for the same reason the judge loop is: a scaffold that will not converge is
+    // a decision for a person, and the blocker names the pairs.
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round }) => {
+      const scaffold = readScaffold(ctx);
+      const pages = scaffold?.insufficient ?? [];
+      if (!pages.length) return;                 // failed on a missing verdict instead
+      // The task reads the receipt; the receipt names the missing results and the
+      // source that carries each. Nothing is transcribed into a prompt.
+      for (const [n, page] of pages.entries()) {
+        executor.start(stage, {
+          role: 'beta',
+          label: `scaffold-fix-${round}-${n + 1}`,
+          job: 'scaffolding',
+          covers: [],
+          brief: 'briefs/beta-scaffold.md',
+          task: [`research/${ctx.run}-beta-scaffold-fix.task.md`, `research/${ctx.run}-beta-fix.task.md`],
+          timeout: 7200,
+        });
+      }
+    },
+  },
+
+  // STEP 4 IS A CODE NODE (audit, 2026-08-16). It was dispatched to a lead
+  // Alpha, whose receipt recorded `item_ids_spliced`, `id_clash_check`,
+  // `size_check` and `validate_plan` — and whose output was byte-identical to
+  // the batch manifests. Transcription plus three mechanical gates, with no
+  // judgment in it.
+  //
+  // It also cost a whole A/B pair: a step-4 Alpha met a page marked `not ready`
+  // and resolved the deadlock by dropping it from the manifest.
+  //
+  // `splice-plan.mjs` refuses to guess. A `requires` disagreement, an existing
+  // item list that differs, an oversized page or a duplicate id all exit
+  // nonzero, and the engine raises a blocker for an Alpha to adjudicate — which
+  // is the cognitive half, kept separate from the mechanical one.
+  {
+    id: '4-splice',
+    label: 'splice ids into the plan (mechanical)',
+    units: batches,
+    pattern: resultPattern('tool', 'splice-\\d+'),
+    labelFor: (u) => `splice-${u}`,
+    artifacts: (ctx, u) => `research/${ctx.run}-splice-${u}.json`,
+    concurrency: 1,
+    plan: (ctx, pending) => pending.map((u: any) => ({
+      role: 'tool',
+      label: `splice-${u}`,
+      job: 'bookkeeping-mechanical',
+      covers: [u],
+      argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--batch', String(u)],
+    })),
+    gates: (ctx) => [scopeGate(ctx), planGate()],
+  },
+
+  // THE IMPACT BASELINE, TAKEN BEFORE AUTHORING.
+  //
+  // Its own stage because ordering is the whole point. `impact-audit` diffs the
+  // items against a labelled snapshot; take the snapshot after authoring and the
+  // diff is empty by construction, so the gate confirms rather than checks — a
+  // gate that passes vacuously, with no way to tell from the outside.
+  //
+  // Stages are strictly ordered, so a stage boundary is the only place this can
+  // be guaranteed. Two plan entries in one stage are not: they are dispatched
+  // together up to the concurrency cap.
+  {
+    id: '4-baseline',
+    label: 'pre-authoring touch snapshot (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-pre-author'),
+    artifacts: (ctx) => touchesPath(ctx),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'snap-pre-author',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'pre-author'],
+    }],
+    gatesWaived: 'A snapshot has nothing to check beyond its own existence, which `artifacts` '
+      + 'already requires; the snapshot is itself the input to the impact gate at step 6c.',
+  },
+
+  {
+    id: '5-author',
+    label: 'authoring',
+    units: batches,
+    pattern: resultPattern('beta', 'author-batch-\\d+'),
+    labelFor: (u) => `author-batch-${u}`,
+    concurrency: 5,
+    plan: (ctx, pending) => pending.map((u: any) => ({
+      role: 'beta',
+      label: `author-batch-${u}`,
+      job: 'authoring',
+      covers: [u],
+      brief: "briefs/authoring.md",
+      task: [`research/${ctx.run}-beta-${u}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
+      timeout: 21600,
+    })),
+    // Step 5 computes the risk tiers; step 6 requires their dispositions. Same
+    // split the audit carries at A4 versus A6.
+    gates: (ctx) => [scopeGate(ctx), ...repoWide(ctx), planGate(), ...contractGates(ctx, { reviewed: false })],
+  },
+
+  {
+    id: '6a-read',
+    label: 'independent readers',
+    units: batches,
+    pattern: resultPattern('reader', 'reader-\\d+'),
+    // The report is the deliverable; a zero exit is not. reader-7 once exited
+    // zero having written its report over reader-1's.
+    artifacts: (ctx, u) => `research/${ctx.run}-reader-${u}.md`,
+    labelFor: (u) => `reader-${u}`,
+    concurrency: 5,
+    plan: (ctx, pending) => pending.map((u: any) => ({
+      role: 'reader',
+      label: `reader-${u}`,
+      job: 'audit',
+      covers: [u],
+      brief: "briefs/reader.md",
+      task: [`research/${ctx.run}-reader-${u}.task.md`, `research/${ctx.run}-reader.task.md`],
+      timeout: 14400,
+    })),
+    gatesWaived: 'Readers only write reports; they do not touch items/, so no repo-wide check can '
+      + 'have changed since step 5. Their reports are required as `artifacts` above, and their '
+      + 'findings are gated at 6b where the adjudicated repairs actually land.',
+  },
+
+  {
+    id: '6b-adjudicate',
+    label: 'group Alpha adjudication',
+    units: batches,
+    pattern: resultPattern('alpha', '6b-[a-z]+'),
+    concurrency: 3,
+    plan: (ctx, pendingUnits) => alphaGroups(ctx)
+      .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
+      .map((g: any) => ({
+        role: 'alpha',
+        label: `6b-${g.label}`,
+      job: 'adjudication',
+        covers: g.covers,
+        brief: "briefs/alpha.md",
+        task: [`research/${ctx.run}-alpha-${g.label}-6b.task.md`, `research/${ctx.run}-alpha-group-6b.task.md`],
+        timeout: 14400,
+      })),
+    // `--require-reviewed` belongs here, not at step 5: a `risk_review` is a
+    // disposition only Alpha may write, and Alpha writes it at step 6.
+    gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true })],
+  },
+
+  {
+    id: '6c-cross',
+    label: 'cross-level citation audit',
+    units: () => ['all'],
+    pattern: resultPattern('alpha', '6c-[a-z-]+'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'alpha',
+      label: '6c-lead',
+      job: 'audit',
+      covers: ['all'],
+      brief: "briefs/alpha.md",
+      task: `research/${ctx.run}-alpha-6c.task.md`,
+      timeout: 14400,
+    }],
+    gates: (ctx) => [
+      ...repoWide(ctx), ...coverageGates(ctx), urlGate(ctx),
+      ...contractGates(ctx, { reviewed: true }),
+      // Blast radius against the pre-authoring baseline, and the scope checklist
+      // Alpha's receipt is bound to.
+      impactGate(ctx),
+      gate('audit-manifest', ['node', 'tools/audit-manifest.mjs',
+        ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`),
+        '--output', `research/${ctx.run}-audit-manifest.json`]),
+    ],
+  },
+
+  {
+    id: '7-judge',
+    label: 'paired judge sweep',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'judge-sweep'),
+    concurrency: 1,
+    // The judge sweep is a TOOL RUN, not an agent dispatch — judge-sweep.mjs
+    // owns its own lane pools, retry semantics and attestation. The A-page ids
+    // are computed here rather than in a shell sub-invocation: the first
+    // version nested three levels of quoting inside a `sh -c`, which is a
+    // defect waiting to happen in a stage that runs once, twelve hours into a
+    // build, unattended.
+    plan: (ctx) => {
+      const aPages = [];
+      for (const b of batches(ctx)) {
+        const pj = JSON.parse(readFileSync(R(ctx, 'research', `${ctx.run}-batch-${b}.pages.json`), 'utf8'));
+        for (const p of pj) if (p.kind === 'A') aPages.push(p.id);
+      }
+      return [{
+        role: 'tool',
+        label: 'judge-sweep',
+        job: 'judgement',
+        covers: ['all'],
+        timeout: 43200,
+        // argv, so there is nothing to quote and nothing to parse. The engine
+        // writes the result record when this exits zero.
+        argv: ['node', 'tools/judge-sweep.mjs',
+          '--ledger', `research/${ctx.run}-judge.jsonl`,
+          '--cost', `research/${ctx.run}-judge-cost.jsonl`,
+          '--pages', aPages.join(',')],
+      }];
+    },
+    // The sweep exiting zero says the tool ran. It does not say every item got a
+    // verdict from both lanes, and on frontier-14 it did not: the stage cleared
+    // on its own receipt and the level went forward with holes that only surfaced
+    // at the very end. Coverage of the LEDGER is the completion condition.
+    //
+    // Rejections are expected here — nothing has adjudicated anything yet — so
+    // they are warnings at this one stage and hard errors everywhere after.
+    gates: (ctx) => [closureGate(ctx, { allowUnadjudicated: true })],
+  },
+
+  // The step-8 baseline, for the same reason as `4-baseline`: `step8-guard`
+  // compares every changed item against a snapshot taken BEFORE adjudication
+  // began. Taken afterwards it licenses whatever happened.
+  {
+    id: '8-baseline',
+    label: 'pre-adjudication touch snapshot (mechanical)',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'snap-pre-step8'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'snap-pre-step8',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'pre-step8'],
+    }],
+    gatesWaived: 'A snapshot has nothing to check beyond its own existence; it is the baseline '
+      + 'the step-8 guard measures the next stage against.',
+  },
+
+  {
+    id: '8-adjudicate',
+    label: 'fatal-only adjudication',
+    units: () => ['all'],
+    pattern: resultPattern('alpha', 'step8-[a-z-]+'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'alpha',
+      label: 'step8-lead',
+      job: 'adjudication',
+      covers: ['all'],
+      brief: "briefs/alpha.md",
+      task: `research/${ctx.run}-alpha-step8.task.md`,
+      timeout: 21600,
+    }],
+    gates: (ctx) => [
+      // Verified against the real tool: it takes a touch ledger, a baseline
+      // label and the adjudication ledger — NOT --run. The first version of
+      // this file guessed --run from memory and would have failed the stage
+      // after burning two agent attempts.
+      gate('step8-guard', ['node', 'tools/step8-guard.mjs',
+        '--touches', touchesPath(ctx),
+        '--baseline', 'pre-step8',
+        '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`]),
+      ...repoWide(ctx),
+      // step8-guard checks one direction only: that every EDIT was licensed by a
+      // fatal row. Nothing checked the other direction — that every REJECTION got
+      // an outcome — so sixteen rejections on one batch were never read and the
+      // stage passed green. This is that direction.
+      //
+      // A repaired item correctly has no current verdict pair; `8-rejudge` owns
+      // that, hence the allowance. An unadjudicated rejection or an open fatal is
+      // this stage's own unfinished work.
+      closureGate(ctx, { pendingRejudge: true }),
+    ],
+    // THE FATAL-REPAIR LOOP.
+    //
+    // frontier-14 ended with two confirmed-fatal proofs unrepaired. Both needed a
+    // proof rewrite rather than a minimal correction, and step 8 is fatal-only —
+    // so the lead Alpha correctly declined to improvise under a frozen verdict and
+    // declared them blockers. It wrote that in markdown. Nothing read it, the
+    // engine had no notion of an open fatal defect, and the run went to step 10.
+    //
+    // A fatal defect that needs authoring is still work. It gets dispatched.
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round }) => {
+      const closure = readClosure(ctx);
+      const ids = closure?.open_fatal ?? [];
+      if (!ids.length) return;              // gate failed on something else
+      // The task points at the closure RECEIPT, never at a transcribed id list.
+      // Copying a list of findings into a prompt is how eleven of them went
+      // missing once already.
+      executor.start(stage, {
+        role: 'alpha',
+        // Deliberately not `step8-*`: the stage pattern matches `step8-` result
+        // files, and a repair must not be mistaken for the adjudication itself.
+        label: `repair-8-round-${round}`,
+        job: 'authoring',
+        covers: ['all'],
+        brief: "briefs/alpha.md",
+        task: [`research/${ctx.run}-alpha-repair.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
+        timeout: 21600,
+      });
+    },
+  },
+
+  // REJUDGE WHAT STEP 8 REPAIRED.
+  //
+  // This stage did not exist. Step 8 repaired 23 items and named them as the
+  // rejudge set; the rejudge never ran, and 22 of them sit unjudged today. A
+  // repaired item's own hash changed, so its verdict is void by construction —
+  // there is no reading of the rules under which those repairs were signed off.
+  {
+    id: '8-rejudge',
+    label: 'rejudge the repaired items',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'rejudge'),
+    concurrency: 1,
+    plan: (ctx) => {
+      const ids = readClosure(ctx)?.needs_rejudge ?? [];
+      return [{
+        role: 'tool',
+        label: 'rejudge',
+        job: 'judgement',
+        covers: ['all'],
+        timeout: 43200,
+        // `--items` is exactly what the owner rule reserves for "a later
+        // Alpha-selected rejudge of an item materially repaired after the
+        // complete sweep". Unedited page-mates keep their verdicts under
+        // level-coverage clause (b) and are not re-spent.
+        //
+        // Nothing to rejudge is a real outcome, not an error: step 8 may have
+        // confirmed every rejection nonfatal and touched nothing. The closure
+        // gate below is what decides whether that is true.
+        argv: ids.length
+          ? ['node', 'tools/judge-sweep.mjs',
+            '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--cost', `research/${ctx.run}-judge-cost.jsonl`,
+            '--items', ids.join(',')]
+          : ['node', '-e', 'console.log("rejudge: nothing repaired since the sweep")'],
+      }];
+    },
+    // No allowances. Every item has a current pair, every current rejection has
+    // an outcome, and no outcome is fatal — or this stage is not finished.
+    gates: (ctx) => [...repoWide(ctx), closureGate(ctx)],
+    // A rejudge can surface a NEW rejection on repaired text, which needs
+    // adjudicating and possibly repairing again. That is a real convergence
+    // loop and it is bounded: past the cap the gate still blocks and a person
+    // reads the blocker. Fatal repairs being uncapped is a rule about what may
+    // be edited, not a licence to spend without limit unattended.
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round }) => {
+      const closure = readClosure(ctx);
+      if (!closure || closure.closed) return;
+
+      // The gate fails for two different reasons and they need different work.
+      //
+      // Items with no current pair need JUDGING, which is mechanical — a repair
+      // round can edit further items, and dispatching an adjudicator at them
+      // would be asking a model to read verdicts that do not exist yet. Judge
+      // first; adjudicate what comes back on the next round.
+      if (closure.needs_rejudge?.length) {
+        executor.start(stage, {
+          role: 'tool',
+          label: `rejudge-round-${round}`,
+          job: 'judgement',
+          covers: [],                       // declares no coverage: this is extra work, not the stage's unit
+          timeout: 43200,
+          argv: ['node', 'tools/judge-sweep.mjs',
+            '--ledger', `research/${ctx.run}-judge.jsonl`,
+            '--cost', `research/${ctx.run}-judge-cost.jsonl`,
+            '--items', closure.needs_rejudge.join(',')],
+        });
+        return;
+      }
+
+      // Everything is judged; what is left is a decision about a rejection, or a
+      // fatal defect to repair. Both belong to Alpha.
+      executor.start(stage, {
+        role: 'alpha',
+        label: `adjudicate-rejudge-round-${round}`,
+        job: 'adjudication',
+        covers: ['all'],
+        brief: "briefs/alpha.md",
+        task: [`research/${ctx.run}-alpha-rejudge.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
+        timeout: 21600,
+      });
+    },
+  },
+
+  {
+    id: '9-scope',
+    label: 'scope-denial sweep',
+    units: () => ['all'],
+    pattern: resultPattern('(?:alpha|orchestrator)', 'step9-[a-z-]+'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'alpha',
+      label: 'step9-lead',
+      job: 'audit',
+      covers: ['all'],
+      brief: "briefs/alpha.md",
+      task: `research/${ctx.run}-alpha-step9.task.md`,
+      timeout: 14400,
+    }],
+    // Step 9 can BUILD items (frontier-14 added two), so everything it could
+    // have disturbed is re-checked, judge closure included.
+    gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true }), closureGate(ctx)],
+  },
+
+  // THE WHOLE-LEVEL RECEIPTS.
+  //
+  // `level-coverage` needs a spine receipt and a completed audit receipt. On
+  // frontier-14 neither existed: step 8 discovered at the very end that
+  // `<run>-audit-coverage.json` had never been generated by any stage, generated
+  // the empty template itself, and left 57 reconciliation reasons blank. Nothing
+  // owned the artifact, so nothing produced it.
+  //
+  // Filling it is cognitive — a reviewer attests to scope and reconciles every
+  // dependency drift with a concrete reason — so it is an Alpha dispatch, and the
+  // gate is the receipt actually validating.
+  {
+    id: '9-receipt',
+    label: 'whole-level audit and spine receipts',
+    units: () => ['all'],
+    pattern: resultPattern('alpha', 'receipts'),
+    artifacts: (ctx) => [`research/${ctx.run}-audit-coverage.json`, `research/${ctx.run}-spine-audit.json`],
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'alpha',
+      label: 'receipts',
+      job: 'audit',
+      covers: ['all'],
+      brief: "briefs/alpha.md",
+      task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step9.task.md`],
+      timeout: 14400,
+    }],
+    gates: (ctx) => [levelCoverageGate(ctx)],
+  },
+
+  {
+    id: '10-report',
+    label: 'owner report',
+    units: () => ['all'],
+    pattern: resultPattern('(?:report|alpha)', 'step10-[a-z-]+'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'alpha',
+      label: 'step10-report',
+      job: 'reporting',
+      covers: ['all'],
+      brief: "briefs/alpha.md",
+      task: `research/${ctx.run}-alpha-step10.task.md`,
+      timeout: 10800,
+    }],
+    // THE TERMINAL GATE. This stage declared `gates: () => []`, and an empty gate
+    // list was read as "gates passed" — so the last stage of the pipeline could
+    // not fail. frontier-14 finished with `level-coverage` red, two unrepaired
+    // fatal defects and sixteen unread rejections, and the engine called it done.
+    //
+    // `validateStages` now refuses a terminal stage that waives its gates, so
+    // this cannot be removed by accident. Re-running the full receipt gate here
+    // rather than trusting 9-receipt is deliberate: it is the last thing that
+    // runs, on the final text, and it is what "the level is closed" means.
+    gates: (ctx) => [levelCoverageGate(ctx), closureGate(ctx)],
+  },
+];
+
+export default { stages, batches, alphaGroups };
