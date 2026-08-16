@@ -77,6 +77,38 @@ export interface GateResult {
 export interface Stage {
   id: string;
   label: string;
+  /**
+   * OVERLAP GROUP. A maximal run of CONSECUTIVE stages carrying the same
+   * `pipeline` name is executed with per-unit progression: a unit may be
+   * dispatched for stage k+1 as soon as ITS OWN work is finished at stage k,
+   * while other units are still at stage k.
+   *
+   * What this does NOT relax: gates. Every member stage's gates run at the
+   * GROUP EXIT, together, once, with nothing in flight — the level join. A
+   * gate never becomes per-unit, because a gate that silently narrows its
+   * scope is indistinguishable from a gate that passed.
+   *
+   * The stage barrier still applies between different groups and around every
+   * stage that declares no `pipeline`.
+   */
+  pipeline?: string;
+  /**
+   * The dispatcher lane this stage's plans use. REQUIRED on a pipelined stage
+   * and unused elsewhere: two stages of one group can be live at the same
+   * moment, and `concurrency` alone would then admit twice the lane's real
+   * cap (two alpha stages at 3 each = 6 Alphas against a dispatcher cap of 3).
+   * The group budget for a role is the largest `concurrency` any member
+   * declares for it — they mirror one cap, so the max IS the cap.
+   */
+  role?: string;
+  /**
+   * Units that must advance TOGETHER, for a stage whose dispatch covers several
+   * at once. A group Alpha owns up to three batches and its single dispatch
+   * claims all of them, so it may not start until every batch it will cover is
+   * finished at the previous stage — otherwise it declares coverage of work
+   * that has not happened.
+   */
+  cohort?: (ctx: Ctx, u: Unit) => Unit[];
   /** The units this stage owes. */
   units?: (ctx: Ctx) => Unit[];
   /** Which result files belong to this stage. Build it with `resultPattern`

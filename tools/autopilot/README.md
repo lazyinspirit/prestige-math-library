@@ -115,8 +115,71 @@ Every repair moved a pair's context hash and re-armed the sweep on untouched
 page-mates: the ledger grew by 97 rows *during* adjudication and 8 items flipped
 pass to reject on byte-identical text from the lane that had just passed them.
 
-Nothing now dispatches while a dispatch from another stage is live. It is a hold,
+Nothing dispatches while a dispatch from another **group** is live. It is a hold,
 not a deadlock — seconds against stages that run for hours.
+
+### Overlap groups: units move on, gates do not
+
+Serial stages make the slowest unit of a stage the start time of every unit of
+the next. Authors run to six hours and readers to four, so on a seven-batch level
+the last author held five readers idle for most of an afternoon, for no reason
+anyone could name: batch 3's reader has nothing to learn from batch 5's author.
+
+A stage may declare `pipeline: '<name>'`. A **maximal run of consecutive stages**
+sharing that name is one group, and inside a group progression is **per unit**: a
+unit may be dispatched at stage k+1 once its own work is finished at stage k,
+while its siblings are still at stage k. The shipped table declares two:
+
+| group | stages | ends at |
+|---|---|---|
+| `scaffold` | `3-review` → `3-fix` → `3-recheck` | the `4-splice` barrier |
+| `read` | `5-author` → `6a-read` → `6b-adjudicate` | the `6b-baseline` barrier |
+
+Everything else — `1-scaffold`, `2-assign`, all three touch snapshots, the
+splice, the cross-level audit, the judge sweep, step 8, step 9 and the report —
+declares no pipeline and is still strictly serial and whole-level. Those are the
+stages whose ordering *is* the guarantee (a baseline taken after the fact
+confirms instead of checking) or that write a ledger a neighbour would stale.
+
+`1-scaffold` is deliberately outside the scaffold group even though it looks like
+its first member. A group-Alpha stage waits on a **cohort** — the batches that
+Alpha was assigned — and the assignment does not exist until `2-assign` writes
+it mid-run. Before that, `alphaGroups` returns a positional chunking that the
+assignment stage exists precisely to overrule, so a group spanning `1-scaffold →
+3-review` would hold each batch for the wrong siblings. `2-assign` also needs
+every batch's manifest to partition anything. The pipeline starts after it.
+
+The `read` group joins at `6b-baseline` rather than at `6c-cross` because that
+snapshot is the `--to` endpoint of the 6c impact window and must capture text
+that has already passed the group's gates. Stage order gives that for nothing: no
+member of a group is done until the join's gates are green, and the snapshot
+stage is later, so it always photographs gated text.
+
+Three things per-unit progression is **not** allowed to relax:
+
+- **Gates.** No gate is ever evaluated per unit. Every member stage's gates run
+  at the group exit, together, once, with the group drained — the level join.
+  That is the whole safety argument: a gate that quietly becomes per-batch when
+  it needed level scope reports success over a fraction of what it was asked to
+  check, and is indistinguishable from a gate that passed. The per-batch coverage
+  and policy gates run there too; they are per-batch in their *arguments*, never
+  in their timing. The price is stated where it is paid: step 5's repo-wide,
+  content-policy item-mode and contract gates no longer run before the readers,
+  because inside a group there is no drained moment between authoring and
+  reading. They run on the same text at the join, before `6b-baseline` and 6c.
+- **Lane caps.** `concurrency` bounds a stage, and serially that bounds the lane
+  too because only one stage is live. In a group it stops doing so: `3-review`
+  and `3-recheck` are both Alphas. A pipelined stage must therefore declare
+  `role`, and the group budgets that lane once.
+- **A dispatch that covers several units.** A group Alpha owns up to three
+  batches and its one result file declares coverage of all of them, so it may not
+  start until every batch it will claim is finished at the previous stage.
+  `cohort(ctx, unit)` says which units must advance together; the three
+  group-Alpha stages map it through `alphaGroups`.
+
+`src/spec.mts` refuses a pipelined stage with no `role`, a non-function `cohort`,
+and a pipeline name reused non-contiguously — which would silently mean two
+groups rather than one.
 
 ### A failing gate can dispatch its own repair
 
@@ -199,6 +262,14 @@ the engine against a fake pipeline whose agents are scripts, and prove the
 retried exactly once and then blocks, that a vacuous gate stops the run, that
 pause holds and resume releases, that a restart does not redo finished work, and
 that a stage asking a model for mechanical work is refused at dispatch.
+
+`test/pipeline.test.mts` covers overlap groups, and every test in it comes in the
+same pair: something starts earlier, and something is still checked over the
+whole level. A unit enters the next stage while a sibling is in flight at the
+previous one; no member gate runs until every member is unit-complete; each gate
+runs exactly once at the group exit; a gate that fails on the *first* member
+still blocks the exit even though the last member has already run; and a stage
+with no `pipeline` behaves exactly as it did before.
 
 ## What a live takeover found
 
