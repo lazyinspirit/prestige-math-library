@@ -41,6 +41,51 @@ test('--verify passes when the plan and the manifests agree', () => {
   assert.match(r.stdout, /plan and manifests agree/);
 });
 
+test('--verify sees a deps-only change the id list cannot — and the splice REFRESHES it', () => {
+  // frontier-15 finding 10: a deps/strategy-only edit to a manifest item read
+  // "already correct" under the id-only comparison and never propagated;
+  // step 4 mirrored two repaired objects into the plan by hand.
+  const dir = fixture(['lem-a', 'thm-b'], ['lem-a', 'thm-b']);
+  const manifest = JSON.parse(readFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), 'utf8'));
+  manifest[0].items[1].deps = ['lem-a'];
+  writeFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), JSON.stringify(manifest));
+  const v = run(dir, ['--run', 'r9', '--verify']);
+  assert.equal(v.status, 1, 'a changed item object is drift, not agreement');
+  assert.match(v.stderr, /thm-b/);
+  assert.match(v.stderr, /item object\(s\) changed/);
+  const s = run(dir, ['--run', 'r9', '--batch', '1']);
+  assert.equal(s.status, 0, s.stderr);
+  assert.match(s.stdout, /REFRESHING demo-page/);
+  const spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
+  assert.deepEqual(spec.pages[0].items[1].deps, ['lem-a'], 'the plan carries the repaired object');
+  const v2 = run(dir, ['--run', 'r9', '--verify']);
+  assert.equal(v2.status, 0, 'after the refresh the two agree');
+});
+
+test('--verify flags a dep on an UNBUILT page missing from requires, and only that kind', () => {
+  const dir = fixture(['lem-a'], ['lem-a']);
+  const spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
+  spec.pages.push({ id: 'future-page', kind: 'A', order: 9, items: ['thm-future'] });
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify(spec));
+  const manifest = JSON.parse(readFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), 'utf8'));
+  manifest[0].items[0].deps = ['thm-future', 'thm-published'];
+  writeFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), JSON.stringify(manifest));
+  // thm-published lives on a page ON DISK: order licenses it, requires does not.
+  mkdirSync(join(dir, 'library', 'algebra'), { recursive: true });
+  writeFileSync(join(dir, 'library', 'algebra', 'published-page.md'),
+    '---\npage: published-page\nitems: [thm-published]\n---\n');
+  const v = run(dir, ['--run', 'r9', '--verify']);
+  assert.equal(v.status, 1);
+  assert.match(v.stderr, /thm-future.*UNBUILT page future-page/);
+  assert.ok(!/thm-published/.test(v.stderr), 'a dep to an on-disk page is order-licensed, never flagged');
+  // Declaring the unbuilt page in requires clears it.
+  const m2 = JSON.parse(readFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), 'utf8'));
+  m2[0].requires = ['future-page'];
+  writeFileSync(join(dir, 'research', 'r9-batch-1.pages.json'), JSON.stringify(m2));
+  const v2 = run(dir, ['--run', 'r9', '--verify']);
+  assert.ok(!/UNBUILT/.test(v2.stderr), 'a declared prerequisite is not drift');
+});
+
 test('--verify fails naming the page and the divergent ids', () => {
   const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-6b'], ['lem-a', 'thm-b']);
   const r = run(dir, ['--run', 'r9', '--verify']);

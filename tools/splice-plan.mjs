@@ -75,6 +75,17 @@ if (!run || (!batch && !verify && !allMode) || (update && !batch)) {
 const specPath = 'research/plan-spec.json';
 if (!existsSync(specPath)) { console.error(`splice-plan: missing ${specPath}`); process.exit(2); }
 
+/** Key-sorted stringify, so two item objects compare by CONTENT. A bare id
+ *  string and `{id}` carrying nothing else are the same item in two spellings
+ *  and compare equal; an object with any further field (deps, strategy, kind)
+ *  is a change the plan must carry. */
+const stable = (v) => {
+  if (typeof v === 'string') return JSON.stringify(v);
+  const entries = Object.entries(v ?? {}).sort(([a], [b]) => (a < b ? -1 : 1));
+  if (entries.length === 1 && entries[0][0] === 'id') return JSON.stringify(v.id);
+  return JSON.stringify(Object.fromEntries(entries));
+};
+
 if (verify) {
   const spec = JSON.parse(readFileSync(specPath, 'utf8'));
   const byId = new Map(spec.pages.map((p) => [p.id, p]));
@@ -82,6 +93,40 @@ if (verify) {
   const manifests = readdirSync('research')
     .filter((f) => f.startsWith(`${run}-batch-`) && f.endsWith('.pages.json')).sort();
   if (!manifests.length) { console.error(`splice-plan: no batch manifests for ${run}`); process.exit(2); }
+
+  // Item -> owning page, across this run's manifests, the plan, and the
+  // published library. This is what lets `--verify` see an edge the PLAN is
+  // missing: frontier-15's `cor-cauchy-inequalities` depended on
+  // `pi-the-equivalent-characterizations`, whose page was in nobody's
+  // `requires`, and the old id-list comparison had no concept of it — the
+  // undeclared prerequisite reached step 4 unflagged.
+  const ownerOf = new Map();
+  const onDiskPages = new Set();
+  for (const f of manifests) {
+    for (const page of JSON.parse(readFileSync(`research/${f}`, 'utf8'))) {
+      for (const i of page.items ?? []) ownerOf.set(idOf(i), page.id);
+    }
+  }
+  for (const p of spec.pages) for (const i of p.items ?? []) {
+    if (!ownerOf.has(idOf(i))) ownerOf.set(idOf(i), p.id);
+  }
+  try {
+    for (const cat of readdirSync('library')) {
+      let files = [];
+      try { files = readdirSync(`library/${cat}`).filter((x) => x.endsWith('.md')); } catch { continue; }
+      for (const file of files) {
+        const text = readFileSync(`library/${cat}/${file}`, 'utf8');
+        const pageId = /^page:\s*(\S+)/m.exec(text)?.[1];
+        const items = /^items:\s*\[([\s\S]*?)\]/m.exec(text)?.[1] ?? '';
+        if (!pageId) continue;
+        onDiskPages.add(pageId);
+        for (const i of items.split(',').map((s) => s.trim()).filter(Boolean)) {
+          if (!ownerOf.has(i)) ownerOf.set(i, pageId);
+        }
+      }
+    }
+  } catch { /* no library dir: item->page falls back to plan+manifests */ }
+
   const drift = [];
   let checked = 0;
   for (const f of manifests) {
@@ -91,13 +136,47 @@ if (verify) {
       if (!target) { drift.push(`${page.id} (${f}): not in plan-spec.json`); continue; }
       const want = (page.items ?? []).map(idOf);
       const have = (target.items ?? []).map(idOf);
-      if (want.length === have.length && want.every((w, k) => w === have[k])) continue;
-      const onlyM = want.filter((w) => !have.includes(w));
-      const onlyP = have.filter((h) => !want.includes(h));
-      drift.push(`${page.id} (${f}): manifest ${want.length} vs plan ${have.length} item(s)`
-        + (onlyM.length ? `; only in manifest: ${onlyM.join(', ')}` : '')
-        + (onlyP.length ? `; only in plan: ${onlyP.join(', ')}` : '')
-        + (!onlyM.length && !onlyP.length ? '; same ids, different order' : ''));
+      if (want.length === have.length && want.every((w, k) => w === have[k])) {
+        // Same ids is no longer the same PLAN: a deps- or strategy-only edit
+        // to a manifest item used to read "already correct" here and never
+        // propagate — step 4 mirrored two repaired item objects into the plan
+        // by hand to work around exactly this.
+        const changed = (page.items ?? []).filter((i, k) => stable(i) !== stable((target.items ?? [])[k]));
+        if (changed.length) {
+          drift.push(`${page.id} (${f}): same ids, ${changed.length} item object(s) changed `
+            + `(${changed.slice(0, 3).map(idOf).join(', ')}${changed.length > 3 ? ', …' : ''}) — re-splice to propagate`);
+        }
+      } else {
+        const onlyM = want.filter((w) => !have.includes(w));
+        const onlyP = have.filter((h) => !want.includes(h));
+        drift.push(`${page.id} (${f}): manifest ${want.length} vs plan ${have.length} item(s)`
+          + (onlyM.length ? `; only in manifest: ${onlyM.join(', ')}` : '')
+          + (onlyP.length ? `; only in plan: ${onlyP.join(', ')}` : '')
+          + (!onlyM.length && !onlyP.length ? '; same ids, different order' : ''));
+      }
+
+      // A dep landing on a page that exists ONLY in the plan or this run's
+      // manifests — no file on disk — is a dep on an UNBUILT page, and those
+      // are exactly what `requires` licenses. A dep to a page on disk is
+      // licensed by reading order and needs no requires entry (the first
+      // version of this check flagged 640+ ordinary cross-level citations to
+      // published pages before that distinction was made). Unresolved ids are
+      // validate-plan's; the splice refusal owns reconciling manifest and
+      // plan requires.
+      const pairIds = new Set([page.id, `${page.id}-examples`, page.id.replace(/-examples$/, '')]);
+      const declared = new Set([...(page.requires ?? []), ...(target.requires ?? [])]);
+      for (const item of page.items ?? []) {
+        if (typeof item === 'string') continue;
+        for (const dep of item.deps ?? []) {
+          const owner = ownerOf.get(dep);
+          if (!owner || pairIds.has(owner) || onDiskPages.has(owner)) continue;
+          const ownerPair = owner.replace(/-examples$/, '');
+          if (!declared.has(owner) && !declared.has(ownerPair)) {
+            drift.push(`${page.id} (${f}): ${item.id} deps ${dep} on UNBUILT page ${owner}, `
+              + `which is in nobody's requires — an undeclared prerequisite`);
+          }
+        }
+      }
     }
   }
   if (drift.length) {
@@ -143,9 +222,17 @@ for (const b of batchList) {
     const have = target.items ?? [];
 
     if (have.length) {
-      const same = have.length === want.length && have.every((h, k) => idOf(h) === idOf(want[k]));
-      if (same) { unchanged.push(page.id); continue; }
-      if (update) {
+      const sameIds = have.length === want.length && have.every((h, k) => idOf(h) === idOf(want[k]));
+      if (sameIds && have.every((h, k) => stable(h) === stable(want[k]))) { unchanged.push(page.id); continue; }
+      if (sameIds) {
+        // Same ids, changed bodies: a deps/strategy edit on existing items.
+        // No scope moved, so this is a REFRESH, not an unlicensed overwrite —
+        // the manifest is the batch-level truth and the plan follows it. The
+        // old id-only test read this as "already correct" and step 4 mirrored
+        // repaired objects into the plan by hand.
+        const changed = want.filter((w, k) => stable(w) !== stable(have[k])).map(idOf);
+        console.log(`splice-plan: REFRESHING ${page.id} — same ids, ${changed.length} item object(s) changed: ${changed.join(', ')}`);
+      } else if (update) {
         // A licensed in-flight change: the manifest is the batch-level truth and
         // the plan follows it — loudly, with the delta on the record.
         const wantIds = want.map(idOf);
