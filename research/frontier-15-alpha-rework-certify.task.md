@@ -24,8 +24,12 @@ read it first). No author certifies its own repair: you are the certification.
 4. **On a pass: close `f15-a-rr-005` IN PLACE** — one defect, one row: set
    its `disposition` to `fixed`, add closing evidence naming your sample size
    and the gate receipts, then run `node tools/defect-ledger.mjs render` (a
-   hand edit stales the view fingerprint). On a fail: leave it open, with
-   your reason appended to the row's `subclass_note`.
+   hand edit stales the view fingerprint). In the same act, close the
+   matching obligation row:
+   `node tools/obligations.mjs close --run frontier-15 --id contract-rework-b2
+   --evidence "<sample size, gate receipts, certifying result file>"`.
+   On a fail: leave both open, with your reason appended to the ledger row's
+   `subclass_note`.
 
 Your report: the sample list, per-item verdicts, gate outputs, and the row's
 final state.
