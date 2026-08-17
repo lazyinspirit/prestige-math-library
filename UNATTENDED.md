@@ -151,6 +151,8 @@ There are no halt codes. The engine either advances, holds, or is blocked, and
 | silence while blocked | the battery is event-driven: it re-runs on a dispatch end, repair round, control command, new result file or backoff expiry — not on a clock (except a backstop every 20th skip) | if you hand-edited files to fix the failure, `autopilot retry` re-arms the battery |
 | `stage table reloaded` / `reload refused` | `stages/*.mts` was edited under a running engine; a table that fails validation is never loaded | on refusal, fix the table and save again — the running table stayed |
 | `N dispatch record(s) stamped from result files` | adopted/orphaned records reconciled against disk | nothing; bookkeeping |
+| `obligations … open at the terminal stage` | a `block`-tier external debt is neither closed nor owner-accepted | close it with evidence, or `obligations.mjs accept --by owner --reason "…"` |
+| `run-commit: HEAD is on '<branch>', not main` | a person moved HEAD; the engine refuses to guess | move it back; the engine never checks out branches |
 | `barrier` | a previous stage still has work in flight | nothing; it lifts by itself |
 
 A blocker is **not** the end of the run. The engine keeps ticking: a transient

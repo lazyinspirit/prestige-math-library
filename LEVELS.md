@@ -441,6 +441,23 @@ ids rather than from prose:
 | step 3 review → Beta fix → re-check | every pair `sufficient` | `<run>-scaffold-closure.json` |
 | step 7 judge → adjudicate → repair → rejudge | every item paired, every rejection adjudicated, no open fatal | `<run>-judge-closure.json` |
 
+**Full closure (owner, 2026-08-17).** The run ends fully closed, on `main`,
+with nothing left but the owner's audit. After 9-receipt, **`9-close`** runs
+the mechanical closers (the splice refresh; the impact-receipt refresh over
+the full snapshot window, routing missing dispositions to an `impact-close`
+Alpha). The step-10 report's `--no-open` gate drives the **contract-rework
+loop**: an open contract-quality ledger row with an owning batch dispatches
+that batch's Beta to rewrite its worksheets (contract files only — items are
+frozen), then a certifying Alpha closes the row in place; a lane blocked by a
+quota is an outage on the obligation row's clock, never a burnt round. After
+the report, **`10-commit`** — the terminal stage — re-runs the whole-level
+receipt and judge closure, checks `<run>-obligations.jsonl` (a `block`-tier
+row must be closed or owner-accepted on the record; `report`-tier rows are
+surfaced), and commits the working tree on `main` (`tools/run-commit.mjs`:
+refuses any other branch, no worktrees, no trailers). **Push and
+`status: published` remain owner acts** — the pause is the publish decision,
+not an engine stop.
+
 ## Step 3 — Adjudicate recommendations (Alpha)
 
 Alpha verifies every load-bearing claim from disk first (no stage advances

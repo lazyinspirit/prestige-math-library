@@ -47,7 +47,9 @@ ever publishes: step 10 / A10 is the sole owner pause.
    judges").
 5. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
-6. **Commit + push** (`main`, conventional-commit style). NO Co-Authored-By
+6. **Commit + push** (`main`, conventional-commit style; the engine's
+   `10-commit` stage commits the run's tree on `main` itself — push stays an
+   owner act). NO Co-Authored-By
    trailers, ever. GitHub is backup only, never on the serving path.
 
 ## Preview

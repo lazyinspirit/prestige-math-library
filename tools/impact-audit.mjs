@@ -166,6 +166,35 @@ if (templatePath) {
   process.exit(0);
 }
 
+// --refresh-receipt: bring a STALE receipt up to the current computation
+// without losing a single written disposition. frontier-15 ended with its
+// receipt one stage stale — 347 dispositions from 6c against 350 affected
+// today — because nothing owned regenerating it after step-9 edits. This
+// syncs the computed scopes and ADDS `pending` rows for newly-affected ids;
+// `pending` is not a valid status, so the receipt check stays red exactly
+// until an Alpha writes the real dispositions. Existing dispositions are
+// never modified and never deleted (an id that left the impact set keeps its
+// row as history; the check only warns on extras).
+const refreshPath = option('--refresh-receipt');
+if (refreshPath) {
+  let receipt = template;
+  if (existsSync(resolvePath(refreshPath))) {
+    try { receipt = JSON.parse(readFileSync(resolvePath(refreshPath), 'utf8')); }
+    catch (cause) { die(`${refreshPath}: unreadable — ${cause.message}`); }
+  }
+  receipt.version = 1;
+  receipt.changed_interfaces = changed;
+  receipt.required_review = required;
+  receipt.dispositions = Array.isArray(receipt.dispositions) ? receipt.dispositions : [];
+  const have = new Set(receipt.dispositions.map((d) => d?.id));
+  const added = required.filter((id) => !have.has(id));
+  for (const id of added) receipt.dispositions.push({ id, status: 'pending', notes: '' });
+  writeFileSync(resolvePath(refreshPath), `${JSON.stringify(receipt, null, 2)}\n`);
+  console.log(`impact-audit: refreshed ${refreshPath} — ${changed.length} changed interface(s), `
+    + `${required.length} affected, ${added.length} new pending disposition(s)${added.length ? `: ${added.join(', ')}` : ''}`);
+  process.exit(0);
+}
+
 if (receiptPath) {
   let receipt;
   if (!existsSync(resolvePath(receiptPath))) {

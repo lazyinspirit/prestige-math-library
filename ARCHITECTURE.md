@@ -1133,6 +1133,29 @@ leads with caught/prevented/escaped, never a bare total
 deliberately red where the record disagrees with itself — recorded, never
 force-fitted.
 
+### 3.11i Full closure — `9-close`, `10-commit`, obligations (owner, 2026-08-17)
+
+**Failure it prevents:** a run that ends as a to-do list. frontier-15 reached
+its pause with four disk-derivable chores (stale impact receipt,
+un-propagated plan drift, an uncommitted tree, external debts as caveat
+prose) and one dead end (a contract-quality row whose remedy — the owning
+Beta — had no dispatch route after authoring). `9-close` runs the splice
+refresh and the impact-receipt refresh (`impact-audit --refresh-receipt`
+adds `pending` rows that keep the gate red until the `impact-close` Alpha
+writes real dispositions). The 10-report `--no-open` hook runs the
+contract-rework loop: owning-Beta rewrite of its own worksheets (contract
+files only), then Alpha certification closing the ledger row in place; a
+quota-locked lane is an outage on the obligation row's clock, and a row's
+`dispatch` field carries an owner model substitution on the record.
+`tools/obligations.mjs` holds externally-blocked work as rows —
+`block`-tier fails the terminal gate until closed or owner-accepted (named
+acceptor, real reason); `report`-tier is surfaced, never blocking; due rows
+with a `dispatch` spec re-fire themselves. `10-commit`, the terminal stage,
+re-runs `level-coverage` and judge closure on the final tree, checks
+obligations, and commits on `main` via `tools/run-commit.mjs` (refuses any
+other branch, never touches a `status` field, no trailers). Push and publish
+remain owner acts.
+
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 
 `AUDIT-WORKFLOW.md` is the normative workflow; these are its mechanisms.

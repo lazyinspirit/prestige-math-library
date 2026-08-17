@@ -151,6 +151,41 @@ benefit is observed in this run's artifacts, not extrapolated.
 
 ---
 
+## 2b. Full-closure build (owner directive, 2026-08-17 evening)
+
+The owner directed: the workflow fully closes a run at step 10, everything on
+`main` (no worktrees, no branches), commit and push after; and — after the
+Codex weekly limit was hit (probed live: "try again at Aug 20th, 2026
+1:32 PM") — **Opus 5 substitutes for the GPT lanes needed to close
+frontier-15 today**, recorded on the obligation row itself.
+
+Built (suite 303/303):
+- `tools/obligations.mjs` — externally-blocked work as rows: `block` tier
+  fails the terminal gate until closed-with-evidence or owner-accepted
+  (named acceptor, ≥20-char reason); `report` tier surfaces without
+  blocking; a row's `dispatch` spec lets due work re-fire itself and
+  carries owner substitutions on the record.
+- `tools/run-commit.mjs` — the close-out commit on `main`: refuses any
+  other branch (never a checkout), never touches `status`, no trailers;
+  `--check` is the terminal tree-clean gate.
+- `impact-audit --refresh-receipt` — syncs computed scopes, adds `pending`
+  rows for new consumers (which keep the receipt gate red until an Alpha
+  writes real dispositions), never modifies or deletes a written one.
+- Stage `9-close` — splice refresh + impact-receipt gate with
+  mechanical-first repair and an `impact-close` Alpha for the residue;
+  carries `closureGate` because its Alpha's licence can touch items.
+- 10-report contract-rework loop — an open contract-quality ledger row with
+  an owning batch dispatches that batch's rework lane (obligation-row
+  `dispatch` override = the Opus substitution), then `certify-rework`
+  closes the row in place; quota locks are outages on the row's clock.
+- Stage `10-commit` (terminal) — obligations check, whole-level receipt +
+  judge closure re-run on the final tree, then the commit; repairs re-commit
+  via the `tree-clean` mechanical entry.
+- frontier-15 seeded: `contract-rework-b2` (block, Opus-substituted),
+  `refuter-coverage-b1-4-6` (report, clocked to 2026-08-20 13:32 AEST),
+  `render-check-measure-theory` (report, owner-verify); truthful
+  `post-step9` snapshot taken (items byte-unchanged since step 9).
+
 ## 3. Build log
 
 Entries appended as work lands. Format: what / commit / tests / docs.

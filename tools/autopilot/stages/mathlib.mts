@@ -220,6 +220,71 @@ const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[]> = {
   // the stalemate synthetic (covered, undispatched, artifact-incomplete) on
   // stage 4 IS the withheld-splice shape — same repair
   'stage-stalemate': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
+  // object drift between manifests and the plan is what the splice's REFRESH
+  // exists for — same remedy as a refusal re-splice
+  'splice-verify': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
+  // a stale impact receipt is a disk function: recompute the window from the
+  // newest snapshot and add `pending` rows for new consumers. The pendings
+  // keep the gate red, which correctly routes the RESIDUAL to the
+  // impact-close Alpha — refreshing is mechanical, dispositioning is not.
+  'impact-receipt': (ctx) => ['tools/impact-audit.mjs',
+    '--touches', join(ctx.repo, touchesPath(ctx)),
+    '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
+    '--refresh-receipt', R(ctx, 'research', `${ctx.run}-impact.json`)],
+  // a dirty tree at 10-commit means repairs landed after the close-out
+  // commit: commit again. Idempotent; refuses any branch but main.
+  'tree-clean': (ctx) => ['tools/run-commit.mjs', '--run', ctx.run],
+};
+
+/** Newest snapshot label on disk, preferring the latest stage boundary. The
+ *  impact window always starts at pre-author; where it ENDS depends on how
+ *  far the run got, and hardcoding a label made the receipt permanently one
+ *  stage stale the moment a later stage edited anything. */
+const latestSnapshotLabel = (ctx: any): string => {
+  try {
+    const t = JSON.parse(readFileSync(join(ctx.repo, touchesPath(ctx)), 'utf8'));
+    const labels = new Set((t.snapshots ?? []).map((s: any) => s.label));
+    for (const l of ['post-step9', 'post-step8', 'pre-step8', 'post-6b']) if (labels.has(l)) return l;
+  } catch { /* fall through */ }
+  return 'post-6b';
+};
+
+/** Open contract-quality ledger rows with an owning batch — the rr-005 shape:
+ *  worksheets only that batch's Beta can honestly rewrite. */
+const openContractRows = (ctx: any): any[] => {
+  try {
+    return readFileSync(join(ctx.repo, 'research', 'defect-ledger.jsonl'), 'utf8')
+      .split('\n').filter(Boolean).map((l) => JSON.parse(l))
+      .filter((r) => r.run === ctx.run && r.disposition === 'open'
+        && r.location === 'contract-row' && r.batch);
+  } catch { return []; }
+};
+
+/** An unexpired quota/outage obligation for the given kind, as an outage
+ *  report the executor turns into a backoff clock. */
+const blockedObligation = (ctx: any, kind: string): { reason: string; retryAfterMs: number } | null => {
+  try {
+    const rows = readFileSync(join(ctx.repo, 'research', `${ctx.run}-obligations.jsonl`), 'utf8')
+      .split('\n').filter(Boolean).map((l) => JSON.parse(l));
+    for (const r of rows) {
+      if (r.kind !== kind || r.status !== 'open' || !r.unblock_at) continue;
+      const ms = new Date(r.unblock_at).getTime() - Date.now();
+      if (ms > 0) return { reason: `${r.id}: ${r.blocked_by ?? r.note} (unblocks ${r.unblock_at})`, retryAfterMs: ms };
+    }
+  } catch { /* no obligations file: nothing blocks */ }
+  return null;
+};
+
+/** A lane override recorded on the matching obligation row — how an owner
+ *  substitution travels: the row's `dispatch` carries role/brief/task (e.g.
+ *  Opus 5 standing in for a quota-locked Codex lane, owner 2026-08-17), and
+ *  the decision sits in the run's own artifacts rather than in code. */
+const obligationDispatch = (ctx: any, kind: string): any | null => {
+  try {
+    const rows = readFileSync(join(ctx.repo, 'research', `${ctx.run}-obligations.jsonl`), 'utf8')
+      .split('\n').filter(Boolean).map((l) => JSON.parse(l));
+    return rows.find((r) => r.kind === kind && r.status === 'open' && r.dispatch)?.dispatch ?? null;
+  } catch { return null; }
 };
 
 /** An external platform outage answering for a whole lane: an account session
@@ -1458,6 +1523,61 @@ export const stages = [
     },
   },
 
+  // MECHANICAL CLOSERS, so the step-10 report stops being a to-do list.
+  // frontier-15's report ended with four disk-derivable chores for a person:
+  // a receipt one stage stale, un-propagated plan drift, an uncommitted tree,
+  // and prose-only external debts. Everything here is a function of files on
+  // disk or routes to the lane that owns the judgment (owner directive,
+  // 2026-08-17: the workflow fully closes a run at step 10).
+  {
+    id: '9-close',
+    label: 'mechanical run closers',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'close-splice'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'close-splice',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      timeout: 600,
+      argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
+    }],
+    // splice-verify catches object drift the refresh should have propagated;
+    // impact-receipt fails while any consumer lacks a real disposition. The
+    // repair loop refreshes mechanically first (impact-receipt is in the
+    // MECHANICAL_REPAIRS table) and routes the residue — the dispositions —
+    // to the impact-close Alpha.
+    // closureGate: the impact-close Alpha's licence includes repairing a
+    // genuinely broken consumer, and a repaired item must rejudge — the
+    // post-sweep invariant (rejections are hard errors everywhere after 7)
+    // holds here exactly because this stage can edit items.
+    gates: (ctx) => [
+      gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
+      gate('impact-receipt', ['node', 'tools/impact-audit.mjs',
+        '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
+        '--receipt', `research/${ctx.run}-impact.json`]),
+      closureGate(ctx),
+    ],
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      const repair = await mechanicalRepair({ ctx, failure });
+      if (repair.outcome === 'clean') return;
+      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+      if (failure.id === 'impact-receipt') {
+        executor.start(stage, {
+          role: 'alpha',
+          label: `impact-close-${round}`,
+          job: 'adjudication',
+          covers: [],
+          brief: 'briefs/alpha.md',
+          task: [`research/${ctx.run}-alpha-impact-close.task.md`],
+          timeout: 7200,
+        });
+      }
+    },
+  },
+
   {
     id: '10-report',
     label: 'owner report',
@@ -1497,6 +1617,134 @@ export const stages = [
     // gates.mjs's last gate point for prosecheck/depsource, and step-9 edits
     // land after 9-scope's own sweep.
     gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx), ledgerGate(ctx, { terminal: true })],
+    // THE CONTRACT-REWORK LOOP (owner directive, 2026-08-17). `--no-open`
+    // red on a contract-quality row with an owning batch — the rr-005 shape —
+    // used to be a dead end: its recorded remedy is "the owning Beta rewrites
+    // the worksheets with its sources to hand", and no stage after authoring
+    // could dispatch a Beta. Round shape: rework by the OWNING Beta (contract
+    // files only, never item text — contracts are not judged, so no verdict
+    // is voided), then an Alpha certification that samples the rewritten rows
+    // and closes the ledger row in place; the gate re-verifies. A rework
+    // blocked by a lane quota is an OUTAGE with the obligation row's clock,
+    // not a burnt round — the engine re-fires it when the lane recovers.
+    maxFixRounds: 4,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      if (failure.id !== 'defect-ledger') return;
+      const rows = openContractRows(ctx);
+      if (!rows.length) return;
+      const blocked = blockedObligation(ctx, 'contract-rework');
+      if (blocked) return { outage: { reason: blocked.reason, retryAfterMs: blocked.retryAfterMs } };
+      const batchesOwed = [...new Set(rows.map((r) => String(r.batch)))];
+      const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
+      const reworkDone = (b: string) => readdirSync(dispatchDir)
+        .some((f: string) => f.includes(`contract-rework`) && f.includes(`-b${b}`) && f.endsWith('.result.json'));
+      const pendingRework = batchesOwed.filter((b) => {
+        try { return !reworkDone(b); } catch { return true; }
+      });
+      if (pendingRework.length) {
+        // The chartered lane is the owning Beta; an obligation row's
+        // `dispatch` overrides it when the owner substituted a model (the
+        // substitution then lives in the run's artifacts, on the record).
+        const override = obligationDispatch(ctx, 'contract-rework');
+        for (const b of pendingRework) {
+          executor.start(stage, {
+            role: 'beta',
+            job: 'authoring',
+            covers: [],
+            brief: 'briefs/authoring.md',
+            task: [`research/${ctx.run}-beta-contract-rework.task.md`],
+            timeout: 14400,
+            ...(override ?? {}),
+            label: `contract-rework-${round}-b${b}`,
+          });
+        }
+        return;
+      }
+      // Every owed batch has a rework result: certify. The certifying Alpha
+      // samples the rewritten rows against the items and closes (or keeps
+      // open, with why) the ledger row IN PLACE — no author certifies its
+      // own repair.
+      executor.start(stage, {
+        role: 'alpha',
+        label: `certify-rework-${round}`,
+        job: 'adjudication',
+        covers: [],
+        brief: 'briefs/alpha.md',
+        task: [`research/${ctx.run}-alpha-rework-certify.task.md`],
+        timeout: 7200,
+      });
+    },
+  },
+
+  // THE CLOSE-OUT COMMIT — the new terminal stage (owner directive,
+  // 2026-08-17: everything on main, no worktrees, no branches; committing is
+  // the engine's job so a `git clean` cannot lose a run that exists only in
+  // the working tree — frontier-15 held 16 page files and 18 items
+  // uncommitted at its pause). PUSH and `status: published` remain owner
+  // acts; run-commit.mjs refuses any branch but main and never touches a
+  // status field. The obligations gate is the other half of full closure:
+  // externally-blocked work is rows with unblock clocks, and a `block`-tier
+  // row must be closed or owner-accepted before the run may end.
+  {
+    id: '10-commit',
+    label: 'close-out commit on main',
+    units: () => ['all'],
+    pattern: resultPattern('tool', 'close-commit'),
+    concurrency: 1,
+    plan: (ctx) => [{
+      role: 'tool',
+      label: 'close-commit',
+      job: 'bookkeeping-mechanical',
+      covers: ['all'],
+      timeout: 300,
+      argv: ['node', 'tools/run-commit.mjs', '--run', ctx.run],
+    }],
+    gates: (ctx) => [
+      // No liveness floor: zero obligation rows is a legitimately empty set
+      // (a run that owed nothing external), exactly like allowUnadjudicated
+      // at 7-judge. The tool's own summary line is the receipt that it ran.
+      gate('obligations', ['node', 'tools/obligations.mjs', 'check', '--run', ctx.run, '--terminal']),
+      // The whole-level receipt and judge closure run once more here because
+      // this is now the LAST stage: what "the level is closed" means is that
+      // these pass on the exact tree the close-out commit captures.
+      levelCoverageGate(ctx), closureGate(ctx),
+      // Last, so the commit the gate verifies includes anything a repair
+      // round wrote (an obligation closure, a late disposition).
+      gate('tree-clean', ['node', 'tools/run-commit.mjs', '--run', ctx.run, '--check']),
+    ],
+    maxFixRounds: 3,
+    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      if (failure.id === 'tree-clean') {
+        const r = await mechanicalRepair({ ctx, failure });
+        if (r.outcome === 'outage') return { outage: { reason: r.reason! } };
+        return;
+      }
+      if (failure.id !== 'obligations') return;
+      // Due rows with a recorded dispatch re-fire themselves; rows still on
+      // their clock are an outage wait; anything else is genuinely the
+      // owner's (accept on the record) and the blocker says so.
+      let rows: any[] = [];
+      try {
+        rows = readFileSync(join(ctx.repo, 'research', `${ctx.run}-obligations.jsonl`), 'utf8')
+          .split('\n').filter(Boolean).map((l) => JSON.parse(l))
+          .filter((r) => r.tier === 'block' && r.status === 'open');
+      } catch { return; }
+      const due = rows.filter((r) => r.dispatch && (!r.unblock_at || new Date(r.unblock_at).getTime() <= Date.now()));
+      if (due.length) {
+        for (const r of due) {
+          executor.start(stage, {
+            covers: [], timeout: 14400,
+            ...r.dispatch,
+            label: `obligation-${r.id}-${round}`,
+          });
+        }
+        return;
+      }
+      const clocks = rows.map((r) => (r.unblock_at ? new Date(r.unblock_at).getTime() - Date.now() : 0)).filter((ms) => ms > 0);
+      if (clocks.length) {
+        return { outage: { reason: `${rows.length} obligation(s) on an unblock clock`, retryAfterMs: Math.min(...clocks) } };
+      }
+    },
   },
 ];
 
