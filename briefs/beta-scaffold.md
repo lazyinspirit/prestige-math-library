@@ -85,7 +85,8 @@ For **each A/B pair** you own, write
                    { "name": "orbit–stabiliser theorem",
                      "disposition": "included", "item": "thm-orbit-stabilizer" },
                    { "name": "Sylow's theorems", "disposition": "deferred",
-                     "reason": "…why THIS result is not built here…" } ] } ] } ] }
+                     "reason": "…why THIS result is not built here…",
+                     "destination": "sylow-theorems-and-nilpotent-groups" } ] } ] } ] }
 ```
 
 Rules the gate enforces, so read them before you write the file:
@@ -103,6 +104,15 @@ Rules the gate enforces, so read them before you write the file:
   `item` id), `deferred` or `out-of-scope` (+ a `reason` of at least 40
   characters about **that specific result** — one reason pasted across three
   declines is rejected).
+- **A `deferred` row also needs a `destination`** that resolves: a page id in
+  `research/plan-spec.json`, an id on disk, or the literal `owner-decision`
+  for a result with a real statement and genuinely nowhere to go. OPEN the
+  destination before writing it — on frontier-15 the Snake Lemma was deferred
+  to "the later homological-algebra development" while sitting published at an
+  EARLIER order, and 86 of 168 declines named no destination at all, so the
+  one hole in a fully-harvested block was found at step 9 instead of step 2.
+  `out-of-scope` needs no destination: a subject the library has not reached
+  has none by definition.
 
 There is deliberately **no minimum number of results**: padding is forbidden by
 the scaffold-richness rule and a count would invite it. The bar is set by the

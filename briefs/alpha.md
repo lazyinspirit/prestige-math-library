@@ -513,8 +513,8 @@ Nothing you write flips `status`; that is the owner's alone.
 requiring an owner decision.
 
 **Repair rounds inherit their predecessors' work.** If your task answers a
-failing gate that earlier rounds already worked (labels like
-`*-round-<n>`, `adjudicate-*`, `*-risk-review-*`), list
+failing gate that earlier rounds already worked (labels ending in a round
+number, or starting `adjudicate-` / containing `risk-review`), list
 `research/<run>-dispatch/` and read the LATEST prior result and log for your
 lane before deriving anything yourself — on frontier-15 a second risk-review
 round re-derived, at full reasoning cost, a verification the first round had

@@ -172,6 +172,15 @@ only an explicit fact, an earlier step, a given hypothesis, or elementary
 algebra. Extract focused lemmas for distinct conceptual moves. If the map does
 not close, narrow or drop the claim instead of issuing an overstated proof.
 
+**In a two-direction proof, the branch label lives INSIDE each step, never in
+a heading or a single opening word.** Precheck's canonical stratification
+orders steps by citation depth, not narrative direction, so the two branches
+of an iff interleave on the page — a step whose entire scope marker is an
+opening "Conversely" then appears to scope everything printed after it, and a
+frontier-15 judge correctly read exactly that as a broken proof. Say in each
+step which implication it serves ("For the converse direction, …"), so any
+interleaving leaves every step self-scoping.
+
 Write direct, natural mathematical prose throughout; remove canned headings,
 meta-commentary, and rhetorical filler that sounds generated rather than written
 for a reader. Before you write an `[F#]`, `[A#]`, or `[L#]` fact that attributes

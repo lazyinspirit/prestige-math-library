@@ -123,8 +123,17 @@ const repoWide = (ctx) => [
   gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
 ];
 
-const coverageGates = (ctx) => batches(ctx).map((b: any) =>
-  gate(`coverage-${b}`, ['node', 'tools/coverage-checklist.mjs', `research/${ctx.run}-batch-${b}.coverage.json`], {
+// `requireDestination` binds only where harvest rows are BORN (stage 1 and
+// the 3-recheck loop): a deferral written under the new contract must name a
+// resolvable destination — 86 of frontier-15's 168 declines named none and
+// the Craven hole reached step 9 when step 2 could have caught it. Later
+// re-verifications keep the base form so a run whose files predate the
+// contract (frontier-15's terminal battery included) is not flipped red
+// after its receipts closed. A destination that is PRESENT but resolves to
+// nothing fails in either form.
+const coverageGates = (ctx, { requireDestination = false } = {}) => batches(ctx).map((b: any) =>
+  gate(`coverage-${b}`, ['node', 'tools/coverage-checklist.mjs', `research/${ctx.run}-batch-${b}.coverage.json`,
+    ...(requireDestination ? ['--require-destination'] : [])], {
     liveness: { pattern: /(\d+)\s+harvested/.source, min: 1, unit: 'harvested results' },
   }));
 
@@ -602,7 +611,7 @@ export const stages = [
         task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
         timeout: 14400,
       })),
-    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate(), urlGate(ctx), fetchGate(ctx)],
+    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate(), urlGate(ctx), fetchGate(ctx)],
 
     // Failures at this join with a MECHANICAL_REPAIRS entry — the archive
     // swap, the full-text stamp — are repaired by code, one round each; see
@@ -720,7 +729,7 @@ export const stages = [
       task: [`research/${ctx.run}-beta-${u}-fix.task.md`, `research/${ctx.run}-beta-fix.task.md`],
       timeout: 7200,
     })),
-    gates: (ctx) => [scopeGate(ctx), ...coverageGates(ctx), ...policyGates(ctx), planGate()],
+    gates: (ctx) => [scopeGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate()],
   },
 
   // Alpha re-checks its own findings from disk before the splice. An `applied`

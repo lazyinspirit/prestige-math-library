@@ -196,6 +196,33 @@ Entries appended as work lands. Format: what / commit / tests / docs.
   carry all five.
 - **E9** — `briefs/alpha.md`: repair rounds read the latest prior round's
   result/log before deriving anything (the 15-Opus-minute re-derivation).
+- **D10** — `proof-contract.mjs` warns `shotgun-bracket`: one step citing
+  ≥4 facts and ≥half the item's declared facts while ≥2 other steps cite
+  none. Positive-controlled on the live corpus: 19 candidates over 329
+  items (~6%), including 2 of the 3 items both judge lanes named for
+  exactly this. A warning, not an error — the class is nonfatal item by
+  item; the authoring brief carries the rule.
+- **D11** — `deferred` harvest rows need a resolvable `destination`
+  (plan-spec page, on-disk id, or `owner-decision`). Missing-field errors
+  only under `--require-destination`, passed by the stage-1 and 3-recheck
+  gates where rows are BORN — so frontier-15's closed receipts cannot flip
+  red on a terminal-battery re-run. A present-but-unresolvable destination
+  errors in either form (the Snake-Lemma false-destination shape).
+  Verified live: base form green on frontier-15 files, flag form 10 errors
+  on batch 2. `beta-scaffold.md` carries the duty with the evidence.
+- **D12** — `briefs/authoring.md`: in a two-direction proof the branch
+  label lives INSIDE each step (precheck's stratification interleaves
+  branches; a judge correctly read a heading-scoped "Conversely" as broken).
+- **D9 — decision revised to REJECT.** Title-stripping in boundary-audit's
+  cluster normalizer was already tried and MEASURED by a prior lane: it
+  collapses frontier-15's interpolated rows into 31 clusters, most of them
+  honest identical dispositions — a precision failure recorded in the
+  tool's own comment. The airtight `checked`-row detector covers the class;
+  the ~450-row rr-005 decision is the owner's, not a detector's.
+- **Guardrail note:** my first E9 brief edit wrote a literal `<n>` — the
+  identity-placeholder class that cost two incidents on frontier-15. The
+  doctor's placeholder scan caught it before any dispatch. The guardrails
+  bind the fixer first, which is the point.
 - **E4 — decision revised to HOLD.** The outage classification and residual
   routing are SYNCHRONOUS by design in the tested repair loop; an async
   repair moves classification a round later and destabilizes tested behavior

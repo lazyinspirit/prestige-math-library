@@ -41,6 +41,7 @@ import { REPO } from './paths.mjs';
 
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
+const requireDestination = argv.includes('--require-destination');
 const files = argv.filter((a) => !a.startsWith('--'));
 if (!files.length) usage();
 
@@ -73,6 +74,24 @@ function manifestFor(coveragePath) {
 
 // Published item ids, for `already-published` dispositions. Read once.
 let publishedIds = null;
+let plannedPageIds = null;
+/** Every page id plan-spec.json knows, planned or built. */
+function plannedPages() {
+  if (plannedPageIds) return plannedPageIds;
+  plannedPageIds = new Set();
+  try {
+    const plan = JSON.parse(readFileSync(join(REPO, 'research', 'plan-spec.json'), 'utf8'));
+    for (const page of plan.pages ?? []) if (page?.id) plannedPageIds.add(page.id);
+  } catch { /* an unreadable plan resolves nothing; the destination check then fails loudly, which is correct */ }
+  return plannedPageIds;
+}
+
+/** An id that exists on disk as an item or a library page file. */
+function onDisk(id) {
+  return existsSync(join(REPO, 'items', `${id}.md`))
+    || readdirSync(join(REPO, 'library')).some((dir) => existsSync(join(REPO, 'library', dir, `${id}.md`)));
+}
+
 function published() {
   if (publishedIds) return publishedIds;
   publishedIds = new Set();
@@ -208,6 +227,40 @@ for (const path of files) {
             entry.page);
         } else {
           declineReasons.push(reason.toLowerCase());
+        }
+      }
+      // A DEFERRAL MUST RESOLVE. `deferred` means "another page's topic", so
+      // the row names WHERE: a page planned in plan-spec.json, an id on disk,
+      // or the literal `owner-decision` for a result with a real statement and
+      // genuinely nowhere to put it. On frontier-15, 86 of 168 declines named
+      // no destination and nothing on disk recorded where they went; four
+      // declines rested on destination claims FALSE of disk (the Snake Lemma
+      // deferred to "the later homological-algebra development" while
+      // published at an EARLIER order), and the Craven hole reached step 9
+      // when this check would have caught it at step 2. `out-of-scope` stays
+      // reason-only — a subject the library has not reached has no
+      // destination by definition.
+      if (result.disposition === 'deferred') {
+        const destination = (result.destination ?? '').trim();
+        if (!destination) {
+          // An error only under --require-destination, which the SCAFFOLD
+          // gates pass: coverage files written before this contract existed
+          // (frontier-15's included) must not flip a closed run's receipts
+          // red on a re-run of its terminal battery.
+          if (requireDestination) {
+            error('coverage-deferred-no-destination',
+              `${where}: "${name}" is deferred with no \`destination\` — name the plan-spec page id, the on-disk id, or \`owner-decision\``,
+              entry.page);
+          }
+        } else if (destination !== 'owner-decision'
+          && !plannedPages().has(destination) && !onDisk(destination)) {
+          // A destination that RESOLVES TO NOTHING is always an error, old
+          // contract or new: a false claim about where a result went is how
+          // the Snake Lemma was deferred to a "later" development that was
+          // already published earlier.
+          error('coverage-deferred-unresolvable',
+            `${where}: "${name}" defers to "${destination}", which is neither a plan-spec page, an id on disk, nor \`owner-decision\``,
+            entry.page);
         }
       }
     }

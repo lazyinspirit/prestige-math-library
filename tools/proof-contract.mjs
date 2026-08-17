@@ -165,6 +165,33 @@ function validateItem(id, item, entry) {
     if (!classified.has(step.id)) error('step-unmapped', `${step.id} has no derivation or routine-step contract`, id);
   }
 
+  // SHOTGUN BRACKET (a warning, not an error). The single largest driver of
+  // frontier-15's 145 judge rejections — nearly all of the 141 nonfatal ones —
+  // was one shape: an early step's bracket names every declared fact and the
+  // later steps carry only `[step 1.1, given, algebra]`, even where they use a
+  // named fact printed three lines above. The same shape is how the Sylow I
+  // contract passed exactly-once coverage over an announcement step: all six
+  // facts were "used" at the announcement, and no gate looked further. It is
+  // nonfatal item by item, which is why this warns instead of failing; the
+  // authoring brief carries the rule and this is the detector that measures it.
+  {
+    const factLabels = new Set(facts.keys());
+    if (factLabels.size >= 4) {
+      for (const step of steps.values()) {
+        const cited = [...explicitTokens(step.text)].filter((t) => factLabels.has(t));
+        if (cited.length >= 4 && cited.length * 2 >= factLabels.size) {
+          const bare = [...steps.values()]
+            .filter((s) => s.id !== step.id && ![...explicitTokens(s.text)].some((t) => factLabels.has(t)));
+          if (bare.length >= 2) {
+            warn('shotgun-bracket',
+              `${step.id} cites ${cited.length} of ${factLabels.size} declared facts while ${bare.length} other step(s) cite none — cite each fact at the step that uses it`, id);
+            break;
+          }
+        }
+      }
+    }
+  }
+
   validateBoundaries(id, entry.boundaries, steps);
 }
 
