@@ -28,8 +28,8 @@ pipeline_run: null
 
 Assuming the Axiom of Choice, every field $F$ has a **separable closure**: a
 separable algebraic extension $F^{\mathrm{sep}}/F$ in which every nonconstant
-separable polynomial splits. Any two separable closures are $F$-isomorphic,
-generally nonuniquely.
+separable polynomial splits. Any two separable closures are $F$-isomorphic. No
+uniqueness of the isomorphism is asserted.
 
 ## Facts & Assumptions
 

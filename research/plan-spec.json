@@ -12546,6 +12546,7 @@
             "def-jacobi-symbol",
             "thm-legendre-symbol-multiplicativity",
             "thm-canonical-prime-factorisation",
+            "thm-fundamental-theorem-of-arithmetic",
             "lem-p-adic-valuation-additive"
           ]
         },
@@ -12558,6 +12559,7 @@
             "prop-jacobi-symbol-well-defined",
             "thm-jacobi-symbol-multiplicativity",
             "def-unit-group-modulo-n-and-euler-totient",
+            "thm-unit-criterion-modulo-n",
             "def-group-homomorphism"
           ]
         },
@@ -12582,7 +12584,8 @@
             "thm-quadratic-reciprocity",
             "def-jacobi-symbol",
             "thm-jacobi-symbol-multiplicativity",
-            "thm-canonical-prime-factorisation"
+            "thm-canonical-prime-factorisation",
+            "thm-fundamental-theorem-of-arithmetic"
           ]
         },
         {
@@ -12659,7 +12662,8 @@
             "thm-unit-square-criterion-modulo-odd-prime-powers",
             "thm-unit-square-criterion-modulo-two-powers",
             "thm-unit-group-chinese-remainder-decomposition",
-            "thm-canonical-prime-factorisation"
+            "thm-canonical-prime-factorisation",
+            "thm-fundamental-theorem-of-arithmetic"
           ]
         },
         {
@@ -12670,7 +12674,8 @@
           "deps": [
             "thm-unit-square-criterion-modulo-odd-prime-powers",
             "thm-unit-square-criterion-modulo-two-powers",
-            "thm-unit-group-chinese-remainder-decomposition"
+            "thm-unit-group-chinese-remainder-decomposition",
+            "thm-fundamental-theorem-of-arithmetic"
           ]
         },
         {
@@ -12686,6 +12691,7 @@
             "thm-unit-group-modulo-odd-prime-power-is-cyclic",
             "thm-unit-group-chinese-remainder-decomposition",
             "def-kernel-and-image-of-group-homomorphism",
+            "def-jacobi-symbol",
             "thm-canonical-prime-factorisation",
             "lem-p-adic-valuation-additive",
             "thm-first-isomorphism-theorem-groups",
@@ -12732,7 +12738,8 @@
           "title": "Jacobi symbol one does not imply a square: $(2/15)=1$",
           "strategy": "Use the prime factorisation $15=3\\cdot5$ to compute $(2/15)=(2/3)(2/5)=1$. The squares modulo three are zero and one, so two is not a square modulo three and hence cannot be a square modulo fifteen.",
           "deps": [
-            "def-jacobi-symbol"
+            "def-jacobi-symbol",
+            "prop-unit-square-has-jacobi-symbol-one"
           ]
         },
         {
@@ -12782,6 +12789,7 @@
           "deps": [
             "thm-quadratic-reciprocity",
             "thm-first-supplement-to-quadratic-reciprocity",
+            "thm-legendre-symbol-multiplicativity",
             "def-legendre-symbol"
           ]
         },
@@ -15120,7 +15128,9 @@
           "title": "The $p$-core $O_p(G)$ as the largest normal $p$-subgroup",
           "deps": [
             "def-finite-p-group",
-            "def-normal-subgroup"
+            "def-normal-subgroup",
+            "lem-product-with-normal-subgroup",
+            "thm-lagrange"
           ]
         },
         {
@@ -15138,6 +15148,42 @@
           "title": "The Frattini subgroup $\\Phi(G)$ as the intersection of the maximal subgroups of a finite group",
           "deps": [
             "def-maximal-subgroup-of-a-group"
+          ]
+        },
+        {
+          "id": "def-centralizer-of-a-subgroup",
+          "kind": "definition",
+          "title": "The centralizer $C_G(H)$ of a subgroup",
+          "deps": [
+            "def-group",
+            "def-conjugacy-class-and-centralizer",
+            "def-center-of-a-group"
+          ]
+        },
+        {
+          "id": "lem-centralizer-of-a-normal-subgroup-is-normal",
+          "kind": "lemma",
+          "title": "The centralizer of a normal subgroup is normal",
+          "strategy": "Conjugate a centralizing element and use normality of $N$ to move the conjugating pair past $n$; then apply the inclusion to $g^{-1}$ for the reverse containment.",
+          "deps": [
+            "def-centralizer-of-a-subgroup",
+            "def-normal-subgroup",
+            "def-group"
+          ]
+        },
+        {
+          "id": "lem-nontrivial-normal-subgroup-of-a-solvable-group-has-an-abelian-normal-subgroup",
+          "kind": "lemma",
+          "title": "A nontrivial normal subgroup of a solvable group contains a nontrivial abelian subgroup normal in the whole group",
+          "strategy": "Take the last nontrivial term of the derived series of $N$; it is abelian by construction and characteristic in $N$, hence normal in $Q$.",
+          "deps": [
+            "def-derived-series-solvable-group-and-derived-length",
+            "thm-subgroups-and-quotients-of-solvable-groups-are-solvable",
+            "thm-derived-subgroup-is-characteristic-and-abelianization-is-universal",
+            "lem-characteristic-subgroups-are-normal-and-characteristic-is-transitive",
+            "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal",
+            "thm-quotient-abelian-iff-contains-commutator-subgroup",
+            "def-normal-subgroup"
           ]
         },
         {
@@ -15164,7 +15210,8 @@
             "thm-orbit-stabilizer",
             "cor-orbit-stabilizer-cardinality",
             "thm-lagrange",
-            "thm-strong-induction"
+            "thm-strong-induction",
+            "thm-orbits-partition-the-set"
           ]
         },
         {
@@ -15324,9 +15371,34 @@
           "strategy": "The product of the \\(p\\)-cores is an internal direct product, hence nilpotent. If \\(N\\trianglelefteq G\\) is nilpotent, each of its unique Sylow subgroups is characteristic in \\(N\\), hence normal in \\(G\\), so it lies in the corresponding \\(p\\)-core. Their product contains \\(N\\). Handle \\(G=1\\) with the empty product.",
           "deps": [
             "def-fitting-subgroup-of-a-finite-group",
-            "lem-products-of-normal-p-subgroups",
+            "def-p-core-of-a-finite-group",
             "lem-finite-nilpotence-via-normal-sylow-subgroups",
-            "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal"
+            "thm-internal-direct-product-recognition",
+            "thm-sylow-second-theorem",
+            "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal",
+            "thm-lagrange"
+          ]
+        },
+        {
+          "id": "thm-fitting-subgroup-contains-its-centralizer-in-a-finite-solvable-group",
+          "kind": "theorem",
+          "title": "Philip Hall: in a finite solvable group the Fitting subgroup contains its own centralizer",
+          "strategy": "Suppose $C=C_G(F)\\not\\le F$. Then $CF/F$ is a nontrivial normal subgroup of the solvable group $G/F$, so it contains a nontrivial abelian $A/F$ normal in $G/F$. The Dedekind law gives $A=F(C\\cap A)$, and $C\\cap A$ has its derived subgroup inside $Z(C\\cap A)$, hence is normal nilpotent and lies in $F$ — forcing $A\\le F$, a contradiction.",
+          "deps": [
+            "def-fitting-subgroup-of-a-finite-group",
+            "thm-fitting-subgroup-is-largest-normal-nilpotent-subgroup",
+            "def-centralizer-of-a-subgroup",
+            "lem-centralizer-of-a-normal-subgroup-is-normal",
+            "lem-nontrivial-normal-subgroup-of-a-solvable-group-has-an-abelian-normal-subgroup",
+            "thm-subgroups-and-quotients-of-solvable-groups-are-solvable",
+            "thm-correspondence-theorem-groups",
+            "lem-dedekind-modular-law-for-subgroups",
+            "thm-quotient-abelian-iff-contains-commutator-subgroup",
+            "lem-intersection-of-normal-subgroups",
+            "def-nilpotent-group-and-nilpotency-class",
+            "def-upper-central-series",
+            "def-center-of-a-group",
+            "lem-center-is-normal"
           ]
         },
         {
@@ -15347,9 +15419,11 @@
           "deps": [
             "def-frattini-subgroup-of-a-finite-group",
             "thm-frattini-argument",
-            "lem-frattini-subgroup-nongenerator-characterization",
             "lem-finite-nilpotence-via-normal-sylow-subgroups",
-            "thm-correspondence-theorem-groups"
+            "thm-correspondence-theorem-groups",
+            "thm-subgroups-quotients-and-finite-products-of-nilpotent-groups",
+            "thm-sylow-second-theorem",
+            "lem-characteristic-subgroup-of-a-normal-subgroup-is-normal"
           ]
         },
         {
@@ -15393,7 +15467,11 @@
             "thm-maximal-subgroups-of-finite-nilpotent-groups",
             "thm-nilpotence-is-detected-modulo-the-frattini-subgroup",
             "def-frattini-subgroup-of-a-finite-group",
-            "thm-internal-direct-product-recognition"
+            "thm-internal-direct-product-recognition",
+            "thm-correspondence-theorem-groups",
+            "thm-cauchys-theorem-for-finite-groups",
+            "thm-finite-p-groups-are-nilpotent",
+            "thm-subgroups-quotients-and-finite-products-of-nilpotent-groups"
           ]
         },
         {
@@ -15463,6 +15541,8 @@
             "thm-image-subgroup-and-kernel-normal",
             "thm-first-isomorphism-theorem-groups",
             "cor-order-of-a-quotient-group",
+            "thm-lagrange",
+            "thm-number-of-bijections-of-a-finite-set",
             "thm-classification-of-groups-of-order-pq",
             "cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal",
             "def-simple-group"
@@ -21966,6 +22046,7 @@
           "strategy": "Define multiplication by convolution over pairs of finitely supported exponent families whose pointwise sum is the target monomial. Finite support makes each coefficient sum and the product support finite; reindexing finite sums proves associativity and distributivity, while the zero exponent family gives the unit and constants embed $R$.",
           "deps": [
             "def-polynomial-ring-on-a-family-of-indeterminates",
+            "def-monomials-on-an-index-set",
             "lem-finite-sum-reindexing-and-fubini",
             "def-ring-homomorphism"
           ]
@@ -22061,7 +22142,8 @@
           "deps": [
             "thm-frobenius-endomorphism-and-finite-field-automorphism",
             "thm-polynomial-is-separable-iff-coprime-to-its-derivative",
-            "thm-splitting-fields-exist-for-nonzero-polynomials"
+            "thm-splitting-fields-exist-for-nonzero-polynomials",
+            "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core"
           ]
         },
         {
@@ -22082,7 +22164,8 @@
             "def-perfect-field",
             "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core",
             "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
-            "thm-frobenius-endomorphism-and-finite-field-automorphism"
+            "thm-frobenius-endomorphism-and-finite-field-automorphism",
+            "thm-polynomial-is-separable-iff-coprime-to-its-derivative"
           ]
         },
         {
@@ -22209,7 +22292,7 @@
         {
           "id": "thm-one-step-simultaneous-root-extension",
           "kind": "theorem",
-          "title": "Every field has an algebraic extension in which every nonconstant polynomial over the base has a root",
+          "title": "Assuming Choice, every field has an algebraic extension containing roots of all nonconstant base polynomials",
           "strategy": "Place Artin's proper ideal inside a maximal ideal and quotient the family polynomial ring. The quotient is a field, each residue class $x_f$ is a root of $f$, and every element uses finitely many such algebraic residues, hence is algebraic over the base. State that the maximal-ideal step uses Zorn's lemma.",
           "deps": [
             "lem-artin-simultaneous-root-ideal-is-proper",
@@ -22230,7 +22313,8 @@
             "thm-universal-property-of-adjoining-an-irreducible-root",
             "thm-splitting-fields-exist-for-nonzero-polynomials",
             "thm-transitivity-of-algebraicity",
-            "def-algebraically-closed-field"
+            "def-algebraically-closed-field",
+            "thm-finitely-generated-algebraic-extensions-are-finite"
           ]
         },
         {
@@ -22258,7 +22342,7 @@
         {
           "id": "thm-existence-of-algebraic-closures",
           "kind": "theorem",
-          "title": "Every field has an algebraic closure",
+          "title": "Assuming Choice, every field has an algebraic closure",
           "strategy": "Apply the simultaneous root-extension theorem once. It is algebraic over the base and satisfies the one-step root condition, so the one-step theorem says it is already algebraically closed.",
           "deps": [
             "thm-one-step-simultaneous-root-extension",
@@ -22269,7 +22353,7 @@
         {
           "id": "thm-algebraic-embedding-extension",
           "kind": "theorem",
-          "title": "An embedding of a base field into an algebraically closed field extends across every algebraic extension",
+          "title": "Assuming Choice, a base-field embedding extends across every algebraic extension",
           "strategy": "Order partial extensions of the given embedding by domain inclusion. Unions of chains are compatible field embeddings, so Zorn gives a maximal partial extension. If its domain is not the whole algebraic extension, adjoining one algebraic element and sending it to a root of the transported minimal polynomial contradicts maximality. State the use of Zorn explicitly.",
           "deps": [
             "thm-zorn",
@@ -22282,7 +22366,7 @@
         {
           "id": "cor-algebraic-closures-are-isomorphic-over-the-base",
           "kind": "corollary",
-          "title": "Any two algebraic closures are isomorphic over the base, generally nonuniquely",
+          "title": "Assuming Choice, any two algebraic closures are base-isomorphic, generally nonuniquely",
           "strategy": "Extend the identity of the base from one closure into the other. Its image contains every root in the target of every base minimal polynomial because the source is algebraically closed, so the embedding is surjective. Assert existence, not uniqueness; the examples page supplies a nontrivial automorphism witness.",
           "deps": [
             "thm-algebraic-embedding-extension",
@@ -22293,14 +22377,15 @@
         {
           "id": "cor-conjugate-elements-are-related-by-an-automorphism-of-an-algebraic-closure",
           "kind": "corollary",
-          "title": "Two elements of an algebraic closure are conjugate over $F$ exactly when an $F$-automorphism carries one to the other",
+          "title": "Assuming Choice, conjugates in an algebraic closure are related by a base automorphism",
           "strategy": "One direction is preservation of minimal polynomials. Conversely, conjugate roots give an $F$-isomorphism between their simple adjunctions; extend it to the whole algebraic closure and use the closure-isomorphism argument to obtain an automorphism.",
           "deps": [
             "def-conjugate-elements-over-a-field",
             "prop-base-field-embeddings-carry-elements-to-conjugates",
             "thm-universal-property-of-adjoining-an-irreducible-root",
             "thm-algebraic-embedding-extension",
-            "cor-algebraic-closures-are-isomorphic-over-the-base"
+            "def-algebraic-closure",
+            "thm-evaluation-kernel-and-minimal-polynomial"
           ]
         },
         {
@@ -22322,8 +22407,8 @@
             "def-normal-closure-of-an-algebraic-extension",
             "cor-splitting-fields-exist-for-finite-families",
             "prop-algebraic-splitting-extensions-are-normal",
-            "prop-finitely-generated-normal-extensions-are-splitting-fields",
-            "thm-finitely-generated-algebraic-extensions-are-finite"
+            "thm-finitely-generated-algebraic-extensions-are-finite",
+            "def-extension-degree-and-finite-extension"
           ]
         },
         {
@@ -22333,27 +22418,36 @@
           "deps": [
             "def-f-homomorphisms-and-embeddings-of-field-extensions",
             "def-algebraic-closure",
-            "def-extension-degree-and-finite-extension"
+            "def-extension-degree-and-finite-extension",
+            "thm-existence-of-algebraic-closures",
+            "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
+            "def-finite-cardinality"
           ]
         },
         {
           "id": "thm-separable-degree-is-independent-of-the-algebraic-closure",
           "kind": "theorem",
           "title": "The separable degree is independent of the chosen algebraic closure",
-          "strategy": "An isomorphism between two algebraic closures over $F$ postcomposes embeddings $K\\to\\overline F$ bijectively, with inverse given by the inverse closure isomorphism. Nonuniqueness of the closure isomorphism does not affect the cardinality.",
+          "strategy": "For a finite extension, put the minimal polynomials of a basis into one product. In each chosen algebraic closure, the field generated by its roots is a splitting field; uniqueness of splitting fields identifies these finite targets, and postcomposition bijects the two embedding sets without invoking Choice.",
           "deps": [
             "def-separable-degree",
-            "cor-algebraic-closures-are-isomorphic-over-the-base"
+            "def-extension-degree-and-finite-extension",
+            "thm-evaluation-kernel-and-minimal-polynomial",
+            "def-polynomials-that-split-and-splitting-fields",
+            "cor-splitting-fields-are-unique-up-to-base-isomorphism"
           ]
         },
         {
           "id": "lem-restriction-fibres-for-embeddings-in-a-finite-tower",
           "kind": "lemma",
           "title": "Restriction partitions embeddings in a finite tower into extension fibres",
-          "strategy": "For $F\\subseteq K\\subseteq L$ and an algebraically closed target, restrict each $F$-embedding of $L$ to $K$. The embedding-extension theorem makes every fibre nonempty. Transporting along an isomorphism between two embedded copies of $K$ gives bijections between the corresponding sets of extensions, so every fibre has the same size.",
+          "strategy": "For $F\\subseteq K\\subseteq L$ and an algebraically closed target, restrict each $F$-embedding of $L$ to $K$. Because the tower is finite, extend a restricted embedding by adjoining a finite basis one algebraic generator at a time and choosing roots in the target. Transporting scalars along the restricted embedding identifies each fibre with the corresponding $K$-embedding set, whose size is $[L:K]_s$.",
           "deps": [
-            "thm-algebraic-embedding-extension",
             "def-f-homomorphisms-and-embeddings-of-field-extensions",
+            "def-extension-degree-and-finite-extension",
+            "lem-polynomials-and-roots-transport-along-field-isomorphisms",
+            "thm-universal-property-of-adjoining-an-irreducible-root",
+            "def-algebraically-closed-field",
             "thm-separable-degree-is-independent-of-the-algebraic-closure"
           ]
         },
@@ -22376,7 +22470,7 @@
             "thm-multiplicativity-of-separable-degree",
             "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
             "thm-tower-law-for-finite-field-extensions",
-            "thm-finitely-generated-algebraic-extensions-are-finite"
+            "def-extension-degree-and-finite-extension"
           ]
         },
         {
@@ -22415,7 +22509,8 @@
             "cor-separable-degree-of-a-simple-extension-counts-distinct-roots",
             "lem-polynomial-gcd-is-stable-under-field-extension",
             "thm-tower-law-for-finite-field-extensions",
-            "thm-finitely-generated-algebraic-extensions-are-finite"
+            "thm-finitely-generated-algebraic-extensions-are-finite",
+            "def-separable-elements-and-separable-extensions"
           ]
         },
         {
@@ -22436,7 +22531,6 @@
           "strategy": "For separable $a,b$, the finite extension $F(a,b)$ is generated by separable elements and hence separable. Its elements include $a-b$, $ab$, and $a^{-1}$ when $a\\ne0$, so the subfield criterion applies; zero and one have linear minimal polynomials.",
           "deps": [
             "thm-extension-generated-by-separable-elements-is-separable",
-            "thm-finitely-generated-algebraic-extensions-are-finite",
             "def-subfield"
           ]
         },
@@ -22460,14 +22554,17 @@
         {
           "id": "thm-purely-inseparable-extension-characterizations",
           "kind": "theorem",
-          "title": "Purely inseparable extensions are exactly those with one base embedding, or separable degree one",
-          "strategy": "For an algebraic extension in characteristic $p$, show elementwise that a unique conjugate is equivalent to a minimal polynomial of the form $x^{p^e}-a$, hence to some $p^e$th power lying in the base. These conditions make the inclusion the only embedding into an algebraic closure; for finite extensions this is equivalent to separable degree one. State the trivial extension and characteristic-zero cases.",
+          "title": "Pure inseparability and its conjugate, embedding, and separable-degree criteria",
+          "strategy": "For an algebraic extension inside a fixed algebraic closure, show elementwise that a unique conjugate is equivalent to a minimal polynomial of the form $x^{p^e}-a$, hence to some $p^e$th power lying in the base. These conditions force every base embedding into that closure to be the inclusion. In finite extensions the restriction-fibre lemma supplies the converse and equivalence with separable degree one; for arbitrary extensions, the converse from uniqueness of embeddings requires Choice. Include the trivial and characteristic-zero cases.",
           "deps": [
             "def-purely-inseparable-extension",
             "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
             "thm-algebraic-embedding-extension",
+            "lem-restriction-fibres-for-embeddings-in-a-finite-tower",
             "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core",
-            "def-separable-degree"
+            "def-separable-degree",
+            "thm-perfect-field-characterizations",
+            "def-perfect-field"
           ]
         },
         {
@@ -22534,19 +22631,22 @@
           "deps": [
             "def-separable-closure-in-an-algebraic-extension",
             "thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core",
-            "def-purely-inseparable-extension"
+            "def-purely-inseparable-extension",
+            "thm-perfect-field-characterizations",
+            "def-perfect-field"
           ]
         },
         {
           "id": "thm-separable-closures-exist-and-are-isomorphic-over-the-base",
           "kind": "theorem",
-          "title": "Every field has a separable closure, and any two are isomorphic over the base",
+          "title": "Assuming Choice, separable closures exist and are base-isomorphic",
           "strategy": "Inside an algebraic closure take the elements separable over the base. They form a separable algebraic field. For a nonconstant separable polynomial over it, first put its finitely many coefficients in a finite subextension; gcd stability preserves separability there, and transitivity shows its roots remain separable over the base, so the polynomial splits in the separable part. Extend base embeddings as for algebraic closures; their images stay in the separable parts, and embeddings between separable closures are surjective. Do not claim uniqueness of the isomorphism.",
           "deps": [
             "thm-existence-of-algebraic-closures",
             "def-separable-closure-in-an-algebraic-extension",
             "thm-separability-is-transitive",
             "lem-polynomial-gcd-is-stable-under-field-extension",
+            "thm-finitely-generated-algebraic-extensions-are-finite",
             "thm-algebraic-embedding-extension"
           ]
         },
@@ -22622,7 +22722,7 @@
         {
           "id": "ex-algebraic-closure-of-the-rationals-and-real-algebraic-subfield",
           "kind": "example",
-          "title": "An algebraic closure $\\overline{\\mathbb Q}$ and the proper subfield of real algebraic numbers",
+          "title": "Assuming Choice, real algebraic numbers embed properly in an algebraic closure of $\\mathbb Q$",
           "strategy": "Choose an algebraic closure of $\\mathbb Q$. The real numbers algebraic over $\\mathbb Q$ form a field and embed into it over $\\mathbb Q$; they are not algebraically closed because $x^2+1$ has no root in an ordered field. This uses $\\mathbb R$ only as an ordered ambient field, not $\\mathbb C$.",
           "deps": [
             "thm-existence-of-algebraic-closures",
@@ -22637,12 +22737,14 @@
           "title": "$\\overline{\\mathbb F_p}$ is the union of its finite subfields and is an infinite algebraic extension",
           "strategy": "Inside an algebraic closure, each element generates a finite extension and hence lies in a finite field. Conversely the unique copies of $\\mathbb F_{p^n}$ lie in the closure, and the nested fields $\\mathbb F_{p^{n!}}$ exhaust it. Irreducible polynomials of every positive degree force unbounded finite subdegrees and therefore infinitude.",
           "deps": [
-            "thm-existence-of-algebraic-closures",
+            "def-algebraic-closure",
             "cor-element-algebraic-iff-simple-extension-finite",
-            "thm-existence-of-finite-fields",
-            "thm-uniqueness-of-finite-fields",
-            "thm-subfield-lattice-of-a-finite-field",
-            "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree"
+            "thm-frobenius-endomorphism-and-finite-field-automorphism",
+            "def-subfield",
+            "prop-finite-fields-are-splitting-fields-of-x-q-minus-x",
+            "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+            "thm-polynomial-is-separable-iff-coprime-to-its-derivative",
+            "thm-simple-algebraic-extension-quotient-power-basis-and-degree"
           ]
         },
         {
@@ -22691,6 +22793,7 @@
           "strategy": "The element $t$ satisfies $x^p-t^p$ over the base. The same reduced-fraction exponent argument shows $t^p$ is not a $p$th power in $\\mathbb F_p(t^p)$, so the polynomial is irreducible and the degree is $p$. Every rational function has a $p$th power in the base, giving pure inseparability and separable degree one.",
           "deps": [
             "cor-rational-function-field-as-a-fraction-field",
+            "thm-polynomial-ring-over-a-field-is-a-ufd",
             "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
             "thm-simple-algebraic-extension-quotient-power-basis-and-degree",
             "thm-purely-inseparable-extension-characterizations"
@@ -22702,12 +22805,10 @@
           "title": "$\\mathbb F_p(s,t)/\\mathbb F_p(s^p,t^p)$ has degree $p^2$, infinitely many intermediate fields, and no primitive element",
           "strategy": "Adjoin $s$ and then $t$ and apply the preceding one-variable calculation twice to obtain degree $p^2$. For every $c$ in the infinite base field, $s+ct$ generates a degree-$p$ intermediate field; compare coefficients in the basis $s^it^j$ to prove these fields are distinct. The Steinitz criterion then rules out a primitive element.",
           "deps": [
-            "ex-fp-t-over-fp-tp-is-purely-inseparable-of-degree-p",
-            "thm-tower-law-for-finite-field-extensions",
-            "lem-product-basis-for-a-tower-of-finite-extensions",
+            "cor-rational-function-field-as-a-fraction-field",
+            "thm-polynomial-ring-over-a-field-is-a-ufd",
             "thm-p-bases-and-degree-in-exponent-one-purely-inseparable-extensions",
-            "thm-steinitz-primitive-element-criterion",
-            "cor-rational-function-field-as-a-fraction-field"
+            "thm-steinitz-primitive-element-criterion"
           ]
         },
         {
@@ -22716,7 +22817,6 @@
           "title": "$\\bigcup_{n\\ge0}\\mathbb F_p(t^{1/p^n})$ is an infinite perfect field of characteristic $p$",
           "strategy": "Place compatible $p^n$th roots of $t$ in an algebraic closure. The nested union is a field. Taking coefficientwise $p$th roots in the next stage shows Frobenius is surjective, so the union is perfect; it contains $\\mathbb F_p(t)$ and is therefore infinite.",
           "deps": [
-            "thm-existence-of-algebraic-closures",
             "thm-perfect-field-characterizations",
             "thm-frobenius-endomorphism-and-finite-field-automorphism",
             "cor-rational-function-field-as-a-fraction-field"
@@ -22759,7 +22859,9 @@
             "thm-existence-of-algebraic-closures",
             "thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots",
             "thm-algebraic-embedding-extension",
-            "cor-algebraic-closures-are-isomorphic-over-the-base"
+            "cor-algebraic-closures-are-isomorphic-over-the-base",
+            "def-algebraic-closure",
+            "thm-evaluation-kernel-and-minimal-polynomial"
           ]
         }
       ]
@@ -24203,7 +24305,8 @@
           "strategy": "Inverse image and quotient give mutually inverse inclusion-preserving bijections between submodules of \\(M/N\\) and submodules of \\(M\\) containing \\(N\\). Verify both composites and preserve sums, intersections, and simplicity of successive quotients.",
           "deps": [
             "def-quotient-module",
-            "thm-quotient-module-universal-property"
+            "thm-quotient-module-universal-property",
+            "thm-third-isomorphism-theorem-modules"
           ]
         },
         {
@@ -24232,6 +24335,8 @@
           "deps": [
             "def-noetherian-module",
             "def-artinian-module",
+            "thm-equivalent-characterizations-of-noetherian-modules",
+            "thm-equivalent-characterizations-of-artinian-modules",
             "thm-second-isomorphism-theorem-modules",
             "thm-correspondence-theorem-modules",
             "def-exact-and-short-exact-sequences-of-modules"
@@ -24256,7 +24361,8 @@
             "def-noetherian-ring",
             "def-generated-cyclic-finitely-generated-and-free-modules",
             "cor-finite-direct-sums-preserve-chain-conditions",
-            "cor-every-module-is-a-quotient-of-a-free-module"
+            "cor-every-module-is-a-quotient-of-a-free-module",
+            "thm-chain-conditions-in-short-exact-sequences"
           ]
         },
         {
@@ -24272,7 +24378,7 @@
         {
           "id": "thm-composition-series-iff-noetherian-and-artinian",
           "kind": "theorem",
-          "title": "A module has a composition series if and only if it is Noetherian and Artinian",
+          "title": "A module has a composition series if and only if it is Noetherian and Artinian, the converse using dependent choice",
           "strategy": "A finite composition series gives both chain conditions by induction through its simple factors. Conversely, under DC choose a maximal proper submodule of each nonzero quotient; Noetherianity prevents an infinite strict ascent while Artinianity guarantees termination in the dual construction. Present a finite construction and include the zero module with length zero.",
           "deps": [
             "def-composition-series-and-length-of-a-module",
@@ -24339,7 +24445,7 @@
         {
           "id": "thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules",
           "kind": "theorem",
-          "title": "Every finitely generated nonzero module has a maximal proper submodule",
+          "title": "Under Choice, every finitely generated nonzero module has a maximal proper submodule",
           "strategy": "Order the proper submodules by inclusion. The union of a chain is a submodule; if it were all of \\(M\\), finitely many generators would lie in one chain member, contradicting properness. Zorn supplies a maximal proper submodule. Show why nonzero and finite generation are essential.",
           "deps": [
             "def-generated-cyclic-finitely-generated-and-free-modules",
@@ -24354,6 +24460,7 @@
           "strategy": "Prove equivalence of being a direct sum of simples, being a sum of simple submodules, and every submodule having a complement. For a given submodule, apply Zorn to independent subfamilies of simple summands; for the converse, split off the socle and derive a contradiction by finding a simple quotient of a finitely generated cyclic submodule. Record the full Choice/Zorn cost and include the zero module.",
           "deps": [
             "def-semisimple-module",
+            "def-socle-of-a-module",
             "thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules",
             "thm-zorn",
             "thm-universal-property-of-module-direct-sums"
@@ -24373,7 +24480,7 @@
         {
           "id": "thm-submodules-and-quotients-of-semisimple-modules",
           "kind": "theorem",
-          "title": "Submodules and quotients of semisimple modules are semisimple",
+          "title": "Under Choice, submodules and quotients of semisimple modules are semisimple",
           "strategy": "A submodule inherits the complement property by intersecting a complement in the ambient module. For a quotient, complement the kernel and identify the quotient with that semisimple complement. Cover zero and whole submodules.",
           "deps": [
             "thm-equivalent-characterizations-of-semisimple-modules",
@@ -24383,7 +24490,7 @@
         {
           "id": "thm-socle-is-the-largest-semisimple-submodule",
           "kind": "theorem",
-          "title": "The socle is the largest semisimple submodule",
+          "title": "Under Choice, the socle is the largest semisimple submodule",
           "strategy": "The sum of all simple submodules is semisimple by the sum characterization. Every semisimple submodule is itself a sum of simple submodules of the ambient module, hence lies in the socle. Include a module with no simple submodule.",
           "deps": [
             "def-socle-of-a-module",
@@ -24419,6 +24526,7 @@
           "strategy": "Under Choice, prove equivalence of the left regular module being semisimple, every left module being semisimple, every short exact sequence splitting, and every left module being projective. Free modules are sums of the regular module and every module is their quotient; the complement and splitting characterizations supply the other implications. State the left-module convention in every clause.",
           "deps": [
             "def-semisimple-ring",
+            "thm-equivalent-characterizations-of-semisimple-modules",
             "thm-submodules-and-quotients-of-semisimple-modules",
             "cor-every-module-is-a-quotient-of-a-free-module",
             "def-split-short-exact-sequence",
@@ -24434,9 +24542,10 @@
           "strategy": "Decompose the left regular module of \\(M_n(D)\\) into the column left ideals \\(M_n(D)e_{jj}\\). Each is isomorphic to the simple column module \\(D^n\\), since matrix units carry any nonzero vector to each standard vector. Include \\(n=1\\); require \\(n\\ge1\\).",
           "deps": [
             "def-semisimple-ring",
-            "def-ring-matrix-product-identity-and-transpose",
-            "def-simple-module",
-            "thm-equivalent-characterizations-of-semisimple-modules"
+            "def-division-ring",
+            "def-ring",
+            "def-finite-sum-in-a-commutative-monoid",
+            "def-simple-module"
           ]
         },
         {
@@ -24450,6 +24559,7 @@
             "thm-finitely-generated-semisimple-modules-are-finite-direct-sums-of-simple-modules",
             "thm-schurs-lemma-for-modules",
             "thm-matrix-rings-over-division-rings-are-semisimple",
+            "def-opposite-ring",
             "def-semisimple-ring"
           ]
         },
@@ -24472,6 +24582,7 @@
           "deps": [
             "thm-wedderburn-artin-theorem",
             "thm-simple-modules-over-semisimple-rings",
+            "thm-matrix-rings-over-division-rings-are-semisimple",
             "thm-schurs-lemma-for-modules",
             "thm-jordan-holder-theorem-for-modules"
           ]
@@ -24482,10 +24593,10 @@
           "title": "Left and right semisimplicity of a ring agree",
           "strategy": "Apply Wedderburn–Artin to the left regular module. Opposites of finite products of matrix rings are matrix rings over opposite division rings, hence are semisimple; translating modules over \\(R^{\\mathrm{op}}\\) gives right semisimplicity. Repeat for the converse.",
           "deps": [
+            "def-semisimple-ring",
             "thm-wedderburn-artin-theorem",
             "def-opposite-ring",
-            "thm-matrix-rings-over-division-rings-are-semisimple",
-            "def-ring-matrix-product-identity-and-transpose"
+            "thm-matrix-rings-over-division-rings-are-semisimple"
           ]
         },
         {
@@ -24504,7 +24615,7 @@
           "id": "thm-integrality-and-finite-module-equivalences",
           "kind": "theorem",
           "title": "Integrality and finite-module characterizations for one element",
-          "strategy": "For a commutative ring extension \\(A\\subseteq B\\) and \\(b\\in B\\), prove equivalence of: \\(b\\) integral; \\(A[b]\\) finite as an \\(A\\)-module; and a faithful \\(A[b]\\)-module finite over \\(A\\) exists. A monic relation reduces all high powers. Conversely, write multiplication by \\(b\\) on finite generators as a matrix and use the adjugate identity; faithfulness turns the annihilating monic determinant into a relation for \\(b\\). Treat degree zero, the zero ring, and the zero module explicitly.",
+          "strategy": "For a commutative ring extension \\(A\\subseteq B\\) with \\(A\\neq0\\) and \\(b\\in B\\), prove equivalence of: \\(b\\) integral; \\(A[b]\\) finite as an \\(A\\)-module; and a faithful \\(A[b]\\)-module finite over \\(A\\) exists. A monic relation reduces all high powers. Conversely, write multiplication by \\(b\\) on finite generators as a matrix and use the adjugate identity; faithfulness turns the annihilating monic determinant into a relation for \\(b\\). Define faithfulness explicitly, and explain why a zero-generated faithful module is impossible when \\(A\\neq0\\); the nonzero-base hypothesis is required by the repository's monic-polynomial convention.",
           "deps": [
             "def-integral-element-and-algebraic-integer",
             "def-generated-cyclic-finitely-generated-and-free-modules",
@@ -24514,7 +24625,7 @@
         {
           "id": "cor-integral-elements-form-a-subring",
           "kind": "corollary",
-          "title": "Integral elements form a subring",
+          "title": "Integral elements over a nonzero base ring form a subring",
           "strategy": "If \\(x,y\\) are integral, \\(A[x,y]\\) is finite over \\(A\\) by adjoining them successively and multiplying finite generating sets. Its elements \\(x\\pm y\\) and \\(xy\\) therefore generate finite \\(A\\)-subalgebras and are integral. Include zero, one, negatives, and coincident elements.",
           "deps": [
             "thm-integrality-and-finite-module-equivalences",
@@ -61450,6 +61561,15 @@
           "deps": []
         },
         {
+          "id": "prop-complement-and-disjoint-union-axioms-for-a-lambda-system",
+          "kind": "proposition",
+          "title": "A family is a lambda-system exactly when it contains $X$ and is closed under complements and countable disjoint unions",
+          "strategy": "Forward: complements come from $A\\subseteq X$; finite disjoint unions are built by induction as complements of relative differences, and the partial unions increase. Reverse: $B\\setminus A$ is the complement of the disjoint union $A\\sqcup(X\\setminus B)$, and an increasing union is disjointified.",
+          "deps": [
+            "def-lambda-system"
+          ]
+        },
+        {
           "id": "def-generated-lambda-system",
           "kind": "definition",
           "title": "The lambda-system generated by a family of sets",
@@ -61968,7 +62088,12 @@
           "strategy": "contradiction",
           "deps": [
             "thm-cardinality-of-the-borel-sigma-algebra-on-rn",
-            "thm-cantor-powerset"
+            "thm-cantor-powerset",
+            "def-sigma-algebra",
+            "thm-cantor-set-ternary-description",
+            "def-cantor-set",
+            "thm-cardinal-power-set-and-cantor",
+            "def-cardinal-arithmetic"
           ]
         },
         {
@@ -68047,7 +68172,7 @@
         {
           "id": "ex-goursat-triangle-integral-of-z-squared",
           "kind": "example",
-          "title": "The integral of $z^2$ around the triangle with vertices $0$, $1$, and $i$ vanishes edge by edge",
+          "title": "The three edge integrals of $z^2$ around the triangle with vertices $0$, $1$, and $i$ sum to zero",
           "strategy": "Use the primitive $z^3/3$ on each oriented edge. The three endpoint increments are $1/3$, $(-i-1)/3$, and $i/3$, which sum to zero and agree with Goursat's theorem. Check the edge orientations against the boundary definition rather than treating the triangle as an unoriented trace.",
           "deps": [
             "def-oriented-complex-triangle-and-boundary",
@@ -68096,6 +68221,7 @@
             "lem-complex-conjugation-and-modulus-laws",
             "thm-circle-integrals-of-integer-monomials",
             "thm-polar-form-with-unique-principal-argument",
+            "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
             "thm-path-connected-implies-connected",
             "def-complex-domain"
           ]
@@ -73061,6 +73187,7 @@
           "deps": [
             "thm-the-eilenberg-moore-adjunction-induces-the-given-monad",
             "thm-the-kleisli-adjunction-induces-the-given-monad",
+            "def-functor-category",
             "prop-size-of-functor-categories"
           ]
         },
@@ -73286,10 +73413,15 @@
           "id": "thm-a-distributive-law-makes-the-composite-a-monad",
           "kind": "theorem",
           "title": "A distributive law makes the composite endofunctor a monad",
-          "strategy": "four-distributive-law-axioms",
+          "strategy": "lift-and-compose-eilenberg-moore-adjunctions",
           "deps": [
             "def-distributive-law-between-two-monads",
-            "def-monad"
+            "def-monad",
+            "def-t-algebra-and-algebra-homomorphism",
+            "def-eilenberg-moore-category",
+            "thm-the-eilenberg-moore-adjunction-induces-the-given-monad",
+            "thm-adjunctions-compose",
+            "thm-every-adjunction-induces-a-monad-on-the-domain-of-its-left-adjoint"
           ]
         },
         {
@@ -73389,6 +73521,7 @@
           "deps": [
             "thm-the-covariant-power-set-monad",
             "def-eilenberg-moore-category",
+            "def-t-algebra-and-algebra-homomorphism",
             "def-preorder",
             "prop-completeness-and-cocompleteness-in-poset-categories",
             "def-partial-order"
@@ -73522,6 +73655,8 @@
             "def-semigroup-and-monoid",
             "def-equivalence-and-adjoint-equivalence-of-categories",
             "def-full-faithful-and-essentially-surjective-functor",
+            "thm-fully-faithful-split-essentially-surjective-characterises-equivalence",
+            "cor-kleisli-and-eilenberg-moore-categories-are-equivalent-for-an-idempotent-monad",
             "thm-the-free-monoid-functor-is-left-adjoint-to-the-underlying-set-functor"
           ]
         },
@@ -73546,7 +73681,9 @@
           "deps": [
             "rem-a-monad-is-a-monoid-in-the-endofunctor-category-only-when-that-category-exists",
             "def-functor-category",
-            "prop-size-of-functor-categories"
+            "prop-size-of-functor-categories",
+            "prop-sets-and-functions-form-category-set",
+            "def-monad"
           ]
         },
         {
@@ -73610,6 +73747,21 @@
           "deps": [
             "def-monad",
             "def-semigroup-and-monoid"
+          ]
+        },
+        {
+          "id": "ex-the-group-action-monad-and-its-algebras",
+          "kind": "example",
+          "title": "For a group $G$ the monad $G\\times(-)$ on sets has the $G$-sets as its algebras",
+          "strategy": "Check the monad laws for $T(X)=G\\times X$ from associativity and the identity in $G$, then read the two $T$-algebra laws as the two action axioms and the homomorphism law as equivariance.",
+          "deps": [
+            "def-monad",
+            "def-t-algebra-and-algebra-homomorphism",
+            "def-eilenberg-moore-category",
+            "def-group",
+            "def-group-action",
+            "def-equivariant-map-of-group-actions",
+            "prop-sets-and-functions-form-category-set"
           ]
         },
         {

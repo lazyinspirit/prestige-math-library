@@ -29,7 +29,7 @@ Let $P$ be a preorder, regarded as a category. A monad on $P$ is equivalently a 
 
 **Given:** A preorder $P$, regarded as a category.
 
-[L1] Functors between preorders are exactly monotone maps, and a natural transformation $F\Rightarrow G$ exists exactly when $Fp\leq Gp$ for every $p$ ([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
+[L1] A preorder determines a category with at most one morphism between any two objects, and functors between such categories are exactly monotone maps ([[prop-preorders-as-categories-and-monotone-maps-as-functors]]).
 
 [L2] A monad has natural transformations $\eta:1\Rightarrow T$ and $\mu:T^2\Rightarrow T$ satisfying the monad equations ([[def-monad]]).
 
@@ -39,7 +39,7 @@ Let $P$ be a preorder, regarded as a category. A monad on $P$ is equivalently a 
 
 **Proof technique:** direct.
 
-1.1 By [L1]–[L2], the endofunctor is a monotone map, $\eta$ is exactly the family of inequalities $p\leq Tp$, and $\mu$ is exactly $T(Tp)\leq Tp$. Applying monotonicity to $p\leq Tp$ also gives $Tp\leq T(Tp)$. [L1, L2]
+1.1 By [L1] the endofunctor is a monotone map, and a morphism $Fp\to Gp$ in a preorder-category exists exactly when $Fp\leq Gp$ and is then the only one, so a natural transformation $F\Rightarrow G$ is precisely the family of inequalities $Fp\leq Gp$. Hence by [L2] $\eta$ is exactly the family $p\leq Tp$, and $\mu$ is exactly $T(Tp)\leq Tp$. Applying monotonicity to $p\leq Tp$ also gives $Tp\leq T(Tp)$. [L1, L2]
 
 1.2 Conversely, a monotone $T$ with $p\leq Tp$ and $T(Tp)\leq Tp$ supplies the unique transformations $\eta:1\Rightarrow T$ and $\mu:T^2\Rightarrow T$ by [L1]. Every monad diagram commutes because a preorder has at most one arrow between any fixed source and target. [L1, L2]
 

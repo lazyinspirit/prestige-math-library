@@ -1,0 +1,21 @@
+{
+  "role": "alpha",
+  "label": "step8-lead",
+  "run": "frontier-15",
+  "covers": [
+    "all"
+  ],
+  "stage": null,
+  "runner": "claude",
+  "model": "claude-opus-5[1m]",
+  "sandbox": "workspace-write",
+  "started_at": "2026-08-17T03:13:32.180Z",
+  "ended_at": "2026-08-17T03:49:40.816Z",
+  "ms": 2168636,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/frontier-15-dispatch/alpha-step8-lead.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/frontier-15-dispatch/alpha-step8-lead.prompt.md",
+  "tail": "Step 8 is complete. **145/145 rejections adjudicated; 5 fatal defects found and repaired.**\n\n## The five fatal defects\n\n| id | defect |\n|---|---|\n| `cor-algebraic-closures-are-isomorphic-over-the-base` | Title *and* Statement claimed the isomorphism is \"generally nonunique\"; step 3.1 says the proof \"makes no uniqueness assertion\". Narrowed. The claim isn't lost — a sibling `fs-` item actually proves it. |\n| `thm-separable-closures-exist-and-are-isomorphic-over-the-base` | Same shape, same page. Narrowed. |\n| `thm-extension-generated-by-separable-elements-is-separable` | Circular: showed each *generator* separable, then applied transitivity as if each *step* were separable — that implication is the theorem. Proof rewritten on the separable-degree route (verified acyclic first). Both lanes found this one. |\n| `cor-cokleisli-and-coeilenberg-moore-…` | The Statement dualised **both** universal properties backwards (co-EM initial, co-Kleisli terminal). Step 2.1's \"reverses the two comparison directions\" is false — `K ↦ K^op` preserves them. Statement and step corrected. |\n| `fs-subgroups-of-equal-p-power-order-are-conjugate` | Witness `(12)(34)` uses symbol 4, but the item's own `[L2]` quotes `S_4 = Sym({0,1,2,3})` — the element doesn't exist. Relabelled to `(0 1)`, `(0 1)(2 3)`. |\n\n6 fatal rows / 145 = 4.1%, inside the 2.7–7% band of previous runs. Two false positives refuted with computation, not assertion. The other 137 are citation bookkeeping — overwhelmingly steps tagged `[step 1.1, given, algebra]` while using a fact printed in their own Facts block.\n\n**Gates:** `step8-guard` 5/5 licensed · `precheck` 5/5 · `depcheck` clean · `proof-contract --strict` 324/324 · `citation-fidelity` 0 · `boundary-audit` 0.\n\n## Three things you should see\n\n**A blocker I did not clear.** `defect-ledger check` is red, and will block `8-adjudicate` through `10-report`. It predates me — I verified by re-running against the ledger with my rows removed. Clause (d) cross-checks *every* `disposition: open` row against `closure.open_fatal`, which is populated only from confirmed-fatal adjudications, so the two open **nonfatal** rows can never satisfy it. Two remedies (filter the predicate on `severity === 'fatal'`, or properly close those two 6b findings) and they're different decisions, so I left it to you rather than editing a gate that governs my own stage.\n\n**Three of the five fatals were already in the step-3 scaffold** — S8-01's title said \"generally nonuniquely\" verbatim, S8-03's strategy named the transitivity route that can't close, S8-05's strategy named `(12)(34)`. That's a direct hit on the stage I ran, on the three questions its brief asks by name.\n\n**I made an error and the guard caught it.** I recorded `item_sha256` as `sha256(itemHashGuard(text))` — a double hash. The guard rejected all five edits as unlicensed, correctly. I recovered the pre-edit text from HEAD and *verified* the reconstruction against the baseline rather than assuming it; the regenerated ledger now matches the baseline on all 145 rows.\n\nAlso recorded, not repaired: 26 items missing a real `deps` edge; a 1-based matrix-index convention drift across **three** items where only one was judged (fixing that one would have shipped the class); and `thm-trace-is-a-sigma-algebra` using AC_ω without declaring it.\n\nRejudge targets are exactly the five edited items. Full report: `research/frontier-15-alpha-step8.md`."
+}

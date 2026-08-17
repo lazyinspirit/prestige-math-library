@@ -36,7 +36,7 @@ is a complex domain, but it has no star centre.
 
 **Given:** The punctured complex plane $U=\mathbb C\setminus\{0\}$ under the Euclidean identification of [[rem-complex-plane-euclidean-dictionary]].
 
-[L1] The punctured Euclidean space $\mathbb R^n\setminus\{p\}$ is polygonally connected when $n\ge2$ ([[lem-punctured-rn-is-polygonally-connected]]).
+[L1] For $n\ge2$, the punctured Euclidean space $\mathbb R^n\setminus\{0\}$ is polygonally connected ([[lem-punctured-rn-is-polygonally-connected]]).
 
 [L2] Polygonal connectedness supplies paths, and every path-connected space is connected ([[def-polygonal-path-and-polygonal-connectedness]], [[def-path-connected]], [[thm-path-connected-implies-connected]]).
 

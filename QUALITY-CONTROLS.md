@@ -126,6 +126,20 @@ Alpha proof-refuter and requires an Alpha `risk_review` disposition before Step
 7. The score is a triage signal, not a proof defect and not a license to skip
 the normal independent-reader audit.
 
+The disposition is `{status: "complete", reviewer, notes}` and the gate reads
+**`notes`**. On `frontier-15`, 33 of 125 reported `risk-review-missing` items
+already carried complete, substantive reviews written under the key
+`disposition`, and the gate could not tell misfiled work from absent work. Read
+the artifacts before concluding a large missing-count means the reviews were
+never done; and never write, weaken or invent a rationale to clear this gate —
+a `risk_review` that exists to make the gate green is worth less than the red.
+
+Note that **repairing a proof can newly route it here**: the score rises with
+step and citation count, so a step-6 repair that writes out a real discharge may
+push an item from moderate to high. That happened once on `frontier-15`
+(`fs-semisimple-rings-are-commutative`, 4 → 5). Re-run `risk-report` after a
+repair pass rather than assuming the routed set is fixed.
+
 ## Scope, provenance, and impact closure
 
 Future batch manifests are the scope of record. Before the normal whole-level

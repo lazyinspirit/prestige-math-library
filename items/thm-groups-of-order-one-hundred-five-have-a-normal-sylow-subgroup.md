@@ -7,7 +7,8 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-sylow-third-theorem, cor-sylow-subgroup-normal-iff-unique, lem-product-with-normal-subgroup, thm-left-coset-action-and-its-kernel, thm-image-subgroup-and-kernel-normal, thm-first-isomorphism-theorem-groups, cor-order-of-a-quotient-group, thm-lagrange, thm-number-of-bijections-of-a-finite-set, thm-classification-of-groups-of-order-pq, cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal, def-simple-group]
+deps: [thm-sylow-third-theorem, cor-sylow-subgroup-normal-iff-unique, lem-product-with-normal-subgroup, thm-left-coset-action-and-its-kernel, thm-image-subgroup-and-kernel-normal, thm-first-isomorphism-theorem-groups, cor-order-of-a-quotient-group, thm-lagrange, thm-number-of-bijections-of-a-finite-set, thm-classification-of-groups-of-order-pq, cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal, def-simple-group,
+       lem-core-is-largest-normal-subgroup-contained]
 justified_by: []
 aliases: []
 landmark: false
@@ -36,7 +37,7 @@ Every group of order $105$ has normal Sylow $5$- and $7$-subgroups and is not si
 
 [L3] If $H\le G$ and $N\mathrel{\trianglelefteq}G$, then $HN$ is a subgroup and $H\cap N\mathrel{\trianglelefteq}H$. Here $HN:=\{hn:h\in H,\ n\in N\}$. ([[lem-product-with-normal-subgroup]]).
 
-[L4] Let $H\le G$. Left multiplication defines a transitive action on $G/H$, and the corresponding homomorphism $\rho:G\to\operatorname{Sym}(G/H)$ has $$\ker\rho=\operatorname{Core}_G(H)\le H.$$ ([[thm-left-coset-action-and-its-kernel]]).
+[L4] Let $H\le G$. Left multiplication defines a transitive action on $G/H$, and the corresponding homomorphism $\rho:G\to\operatorname{Sym}(G/H)$ has $$\ker\rho=\operatorname{Core}_G(H).$$ ([[thm-left-coset-action-and-its-kernel]]).
 
 [L5] The image of a group homomorphism is a subgroup and its kernel is a normal subgroup. For every group homomorphism $f:G\to H$, one has $\operatorname{im}f\le H$ and $\ker f\mathrel{\trianglelefteq}G$. ([[thm-image-subgroup-and-kernel-normal]]).
 
@@ -54,6 +55,8 @@ Every group of order $105$ has normal Sylow $5$- and $7$-subgroups and is not si
 
 [L12] A set of cardinality $n$ has exactly $n!$ bijections to itself; in particular the symmetric group on three points has order $3!=6$. ([[thm-number-of-bijections-of-a-finite-set]]).
 
+[L13] For $H\le G$, the core $K=\operatorname{Core}_G(H)$ is a normal subgroup of $G$, satisfies $K\le H$, and contains every normal subgroup of $G$ that is contained in $H$. ([[lem-core-is-largest-normal-subgroup-contained]]).
+
 ## Proof
 
 **Proof technique:** direct.
@@ -62,6 +65,6 @@ Every group of order $105$ has normal Sylow $5$- and $7$-subgroups and is not si
 
 2.1 Let $P$ be the normal Sylow subgroup supplied by step 1.1 and let $Q$ be a Sylow subgroup for the other prime. By [L3], $H=PQ$ is a subgroup. Its multiplication map $P\times Q\to PQ$ has fibres indexed by $P\cap Q=1$, so $|H|=|P||Q|=35$. [L3, step 1.1, given, algebra]
 
-3.1 The action on the three left cosets has kernel $K\subseteq H$. By [L6], $G/K$ is isomorphic to a subgroup of the symmetric group on three points, so [L11] and [L12] give $[G:K]\mid6$. Also [L7] and [L11] give $[G:K]\mid105$, while $K\le H$ gives $3=[G:H]\mid[G:K]$. Hence $[G:K]=3=[G:H]$, so $K=H$ and $H\trianglelefteq G$. [L4, L5, L6, L7, L11, L12, step 2.1, given, algebra]
+3.1 The action on the three left cosets has kernel $K=\operatorname{Core}_G(H)$, and $K\le H$ by [L13]. By [L6], $G/K$ is isomorphic to a subgroup of the symmetric group on three points, so [L11] and [L12] give $[G:K]\mid6$. Also [L7] and [L11] give $[G:K]\mid105$, while $K\le H$ gives $3=[G:H]\mid[G:K]$. Hence $[G:K]=3=[G:H]$, so $K=H$ and $H\trianglelefteq G$. [L4, L5, L6, L7, L11, L12, L13, step 2.1, given, algebra]
 
 4.1 The order-$pq$ classification [L8] makes $H$ cyclic, and its Sylow $5$- and $7$-subgroups are normal in $H$ and therefore normal in $G$ by [L9]. Either is a nontrivial proper normal subgroup of $G$, so [L10] also shows that $G$ is not simple. [L8, L9, L10, step 3.1, given] ∎

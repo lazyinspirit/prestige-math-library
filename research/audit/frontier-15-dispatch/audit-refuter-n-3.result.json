@@ -1,0 +1,19 @@
+{
+  "role": "audit-refuter",
+  "label": "n-3",
+  "run": "frontier-15",
+  "covers": [],
+  "stage": null,
+  "runner": "deepseek",
+  "model": "deepseek-v4-pro",
+  "sandbox": "read-only",
+  "started_at": "2026-08-16T20:51:56.779Z",
+  "ended_at": "2026-08-16T20:59:03.861Z",
+  "ms": 427082,
+  "exit_code": 0,
+  "timed_out": false,
+  "ok": true,
+  "log": "/Users/ianx/Projects/prestige-math-library/research/audit/frontier-15-dispatch/audit-refuter-n-3.log",
+  "prompt": "/Users/ianx/Projects/prestige-math-library/research/audit/frontier-15-dispatch/audit-refuter-n-3.prompt.md",
+  "tail": "\nNo defect found. I checked:\n- forward direction of the iff;\n- reverse direction via repeated lifting;\n- $k=1$ as the base case;\n- $p\\nmid a$ excludes the singular $a\\equiv0$ case;\n- distinctness of the two final lifts by their distinct reductions modulo $p$.\n\nAll citations `[L1]`, `[L2]`, `[L3]` match the reproduced dependency texts.\n\n### `lem-wielandt-sylow-binomial-valuation`\n\nNo fatal defect found. I checked:\n- $a=0$: handled in step 3.1, $\\binom m1=m$, and $p\\nmid m$;\n- $m=0$: excluded by $p\\nmid m$;\n- $a>0$: the valuation matching in step 2.1 is correct; for $0<j<p^a$, writing $j=p^r u$ with $p\\nmid u$ gives $v_p(p^a m-j)=r=v_p(j)$, and the factor $p^a m$ contributes exactly the valuation of the factor $p^a$ in $(p^a)!$.\n\nThe proof silently identifies $\\mathbb N$-valued factorials/binomial coefficients with their images in $\\mathbb Z$ when applying $v_p$. The library elsewhere makes this coercion explicit via $\\iota$, but this is a routine abbreviation and not a substantive gap.\n\n### `thm-sylow-second-theorem` — proof after the title issue\n\nWith $G$ finite, the proof is standard and correct:\n- the action of $H$ on $G/P$ is well-defined;\n- $[G:P]$ is prime to $p$ because $P$ is Sylow;\n- the fixed-point congruence gives a fixed coset since $p\\nmid [G:P]$;\n- the fixed-coset condition is exactly $H\\le gPg^{-1}$;\n- Lagrange turns containment into equality when $H$ is Sylow.\n\nThe boundary cases mentioned in step 4.1 — trivial $H$ and primes $p\\nmid |G|$ — are indeed covered by the general argument, though the proof states this rather than spells it out. That is nonfatal.\n\n---\n\n## Coverage\n\nRead fully:\n- `thm-unit-square-criterion-modulo-odd-prime-powers`\n- `lem-wielandt-sylow-binomial-valuation`\n- `thm-sylow-second-theorem`\n\nAlso checked all reproduced dependency texts against the item restatements. Transitive definitions referenced but not reproduced, such as `def-sylow-p-subgroup`, were not independently inspected; no argument in the three proofs turned on an unstated detail from them beyond their standard meaning."
+}

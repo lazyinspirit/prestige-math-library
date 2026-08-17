@@ -35,7 +35,7 @@ On the full subcategory of finite sets, the principal-unit map $\eta_X:X\to\beta
 
 [L2] The principal map $\eta_X$ is natural, and the flattening map is the multiplication of the ultrafilter monad ([[lem-the-principal-ultrafilter-and-ultrafilter-flattening-maps-are-natural]]; [[thm-the-ultrafilter-monad-is-a-monad]]).
 
-[L3] Every proper filter is contained in an ultrafilter; assuming this principle, a nonprincipal ultrafilter exists on $\mathbb N$ ([[thm-ultrafilter-lemma]]; [[fs-every-ultrafilter-principal]]).
+[L3] Assuming the Axiom of Choice, every filter on a set is contained in an ultrafilter on that set ([[thm-ultrafilter-lemma]]); a nonprincipal ultrafilter on $\mathbb N$ then exists ([[fs-every-ultrafilter-principal]]).
 
 [L4] A filter contains the whole carrier, excludes the empty set, is upward closed, and is closed under finite intersections ([[def-filter]]).
 

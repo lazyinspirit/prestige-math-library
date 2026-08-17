@@ -50,7 +50,7 @@ Up to isomorphism, the groups of order $105$ are the cyclic group $C_{105}$ and 
 
 [L10] Let $G$ be a finite group and $H\le G$. Then $$|G|=[G:H]\,|H|.$$ Consequently, under the canonical embedding $\iota:\mathbb N\to\mathbb Z$, $|H|$ divides $|G|$. ([[thm-lagrange]]).
 
-[L11] Let $N,H\le G$. The conditions $$N\trianglelefteq G,\qquad G=NH,\qquad N\cap H=\{1\}$$ hold if and only if both of the following hold: conjugation $\alpha_h(n)=hnh^{-1}$ restricts to an action $\alpha:H\to\operatorname{Aut}(N)$, and the resulting map. ([[thm-internal-external-semidirect-product-equivalence]]).
+[L11] Let $N,H\le G$. The conditions $$N\trianglelefteq G,\qquad G=NH,\qquad N\cap H=\{1\}$$ hold if and only if both of the following hold: conjugation $\alpha_h(n)=hnh^{-1}$ restricts to an action $\alpha:H\to\operatorname{Aut}(N)$, and the resulting map $$\Phi:N\rtimes_\alpha H\longrightarrow G,\qquad (n,h)\longmapsto nh$$ is an isomorphism carrying the canonical factors onto $N$ and $H$. ([[thm-internal-external-semidirect-product-equivalence]]).
 
 [L12] The canonical factors of $N\rtimes_\alpha H$ form an internal direct product if and only if $\alpha_h=\operatorname{id}_N$ for every $h\in H$. In that case $N\rtimes_\alpha H$ is the external direct product $N\times H$. ([[prop-semidirect-product-is-direct-iff-action-is-trivial]]).
 

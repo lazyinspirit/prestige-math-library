@@ -1,7 +1,7 @@
 ---
 id: cor-algebraic-closures-are-isomorphic-over-the-base
 kind: corollary
-title: "Assuming Choice, any two algebraic closures are base-isomorphic, generally nonuniquely"
+title: "Assuming Choice, any two algebraic closures are base-isomorphic"
 status: draft
 origin: session
 provenance:
@@ -27,7 +27,7 @@ pipeline_run: null
 ## Statement
 
 Assuming the Axiom of Choice, any two algebraic closures of a field $F$ are
-$F$-isomorphic. Such an isomorphism generally need not be unique.
+$F$-isomorphic. No uniqueness of the isomorphism is asserted.
 
 ## Facts & Assumptions
 

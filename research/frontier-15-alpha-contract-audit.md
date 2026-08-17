@@ -537,3 +537,187 @@ The two `strong` ones are the cost of broadening the verb list to `apply` and
 summands…"). The natural next change is a `reviewed.upheld` escape mirroring
 `boundary-audit`'s, so an upheld step stops being reprinted; it is not built
 here because the tool is wired into no gate yet.
+
+---
+
+# Lane `adjudicate-risk-review-2` — Alpha · Claude Opus 5, `xhigh`, 1,000,000-token window
+
+Dispatched to adjudicate a candidate detector that "failed the read-group join".
+The honest headline: **the three dispatched detectors printed zero candidates.**
+The join failed on the fourth command in the brief's contingency branch —
+`risk-report --require-reviewed` — with exactly one open item. That item is the
+whole of this lane's work.
+
+## Reproduction, as dispatched
+
+| command | exit | what it printed |
+|---|---|---|
+| `boundary-audit … --fail-on-contradicted --fail-on-template` | **0** | 2592 rows / 7 files; no template reuse ≥3, no contradicted dispositions; 2 rows upheld on the record by lane `contract-audit-1` |
+| `citation-fidelity … --fail-on-missing-quote` | **0** | 1184 citations over 324 items; no missing quote, no widening candidate |
+| `gate-liveness … --min-checks 1` | **0** | finite-smoke **4 checks**, proof-contract 324, coverage-checklist 740, precheck 4264 — all live |
+| `risk-report … --require-reviewed` | **1** | `risk-review-missing` × 1 |
+
+Two of the brief's contingency branches therefore **did not apply**, and I did
+not invent work to fill them:
+
+- **finite-smoke was not vacuous** (4 live checks, selected by lane
+  `contract-audit-3`). The branch instructing me to select registry checks for
+  batch 2's Sylow material, batch 1's unit groups and batch 7's limit claims is
+  premised on `0 checks`; it is not 0. I added no checks. Forcing more onto an
+  already-live gate is the toy-check failure the same paragraph forbids.
+- **No candidate rows to uphold or fix.** `boundary-audit` and
+  `citation-fidelity` each printed none, so there is no "per candidate" table
+  below — the per-candidate section of this report is empty by fact, not by
+  omission. The 2 `UPHELD BY REVIEW` lines are `contract-audit-1`'s prior work
+  being reported back, not new candidates.
+
+## The one finding — `thm-extension-generated-by-separable-elements-is-separable`
+
+`CRITICAL 14` · batch 3 · `3:8 declared dependencies; 2:8 cited facts;
+3:biconditional / both-direction claim; 2:boundary-sensitive language;
+2:induction, recursion, or minimality; 2:quotient or equivalence-class
+construction`
+
+### Why it was missing, which turned out to matter
+
+This is the case QUALITY-CONTROLS §High-risk routing documents: **a repair newly
+routed the item here.** Both judge lanes rejected the *previous* text at step 7
+on `item_sha256 5870da8b…`, independently and with the same defect —
+
+> DeepSeek: *"Step 1.2 applies [L1] to the tower, but it only shows each
+> generator s_j is separable over the preceding field. [L1] requires each
+> adjacent extension … to be separable."*
+> Sonnet: *"…it never shows the whole step … is elementwise separable, which L1
+> and L2's definition require."*
+
+That was adjudicated `confirmed_fatal`/`logic` by both lanes and repaired at step
+8 under owner repair (2) — the proof written afresh on the separable-degree
+route — with defect-ledger row `frontier-15-S8-03`. The rewrite added six
+dependencies and eight `[L#]` facts, and **that count is what pushed the score
+to critical**, leaving a critical-tier item with no `risk_review`. So the gate
+was red for a real reason, and the reason was a repair, not neglect.
+
+### What I actually checked
+
+**Every step against the dependency text on disk**, not against the contract's
+paraphrase of it:
+
+- **1.1** The family of $F(T)$ over finite $T\subseteq S$ is directed, so its
+  union is a subfield containing $F\cup S$; `[L2]`'s minimality forces equality
+  with $F(S)$. Directedness is left implicit — a 30-second closure.
+- **1.2** `[L1]` gives separable ⟹ algebraic; `[L7]` gives $E/F$ finite; each
+  layer is finite because it sits inside a finite extension. Also a 30-second
+  closure.
+- **2.1 — the load-bearing step, and it is exactly licensed.**
+  $m_{s_j,E_{j-1}}$ divides $m_{s_j,F}$ in $E_{j-1}[x]$, and
+  `def-repeated-root-and-separable-polynomial` defines a separable polynomial as
+  one with **no repeated root in *any* extension field of $F$**. Every extension
+  of $E_{j-1}$ is an extension of $F$, so a divisor inherits the property — the
+  divisor argument is not a convenience, it is the definition. `[L3]` and `[L4]`
+  are each stated for a general base field, so instantiating them at $E_{j-1}$
+  is legitimate, giving $[E_j:E_{j-1}]_s=[E_j:E_{j-1}]$.
+- **3.1** Iterates `[L5]`/`[L6]` over the tower — a routine induction on $r$
+  whose $r=0$ base is the empty product already recorded in the `zero` boundary
+  row. `[L8]` is used **only** in the ⟸ direction.
+- **4.1** Arbitrary $a$; `[L1]`'s definition closes it.
+
+**The risk that actually earned the tier — circularity.** The defect the judges
+caught *was* a circular appeal to transitivity, so this is the axis that
+deserved probing rather than the lexical ones. I computed the full transitive
+dependency cone of the repaired item: **413 items, acyclic, and it never reaches
+this theorem.** In particular `thm-primitive-element-theorem-for-finite-separable-extensions`,
+reached through `[L8]`, does not depend on it.
+
+**The repair closes the judged defect rather than relocating it.** The new proof
+never asserts that an intermediate layer $E_j/E_{j-1}$ is elementwise separable
+— it needs only the per-step *degree* equality. The judges' stated objection has
+no target in the current text.
+
+**The three lexical signals are not real risks here**, and I checked each rather
+than dismissing it:
+
+| signal | verdict |
+|---|---|
+| biconditional (3 pts) | fires on cited `[L8]`'s "if and only if". The item's own Statement is not a biconditional, and `[L8]` is used in one direction only — so the `iff-forward`/`iff-reverse` `not_applicable` rows conceal no reversed implication, which is precisely what QUALITY-CONTROLS says "not applicable" must not conceal. |
+| quotient (2 pts) | fires on `[L4]`'s quoted $F[x]/(m_a)$. **No quotient is constructed anywhere in this proof.** |
+| induction (2 pts) | real but routine: step 3.1's iteration over the tower, base case already in the `zero` row. |
+
+**Also verified:** all eight `[L#]` restatements against the cited items' actual
+`Statement`/`Definition` sections — each exact or a faithful shortening
+preserving domain, hypotheses, direction and conclusion. All eight dependency
+Statements are `literature-derived`, so none is ineligible under the
+`ai-generated` rule. `finite_smoke: []` is correct — the claim quantifies over
+arbitrary field extensions of arbitrary characteristic and no registry check
+bounds it. `precheck`, `depcheck`, `citecheck`, `fwdcheck`, `extcheck` all clean.
+
+### Independent refuter — genuine, not a substitution note
+
+DeepSeek V4 Pro, label `rr2-sep`, tool-less lane, item + contract entry + all
+eight dependency texts packed into `--task` via `pack-refuter-task.mjs` (31KB —
+comfortably inside the budget that defeated `contract-audit-1` at 3+ items per
+dispatch; a single item is why this one completed where 40 of its 92 did not).
+`research/audit/frontier-15-dispatch/audit-refuter-rr2-sep.log`, 362s, exit 0.
+
+**Zero fatal, zero nonfatal findings.** It confirmed every `[L#]` against the
+reproduced dependency text, worked the $S=\varnothing$, $r=0$, $r=1$ and
+$s_j\in E_{j-1}$ cases, judged the `not_applicable` boundary rows appropriate,
+and **independently flagged the same two compressed inferences in 1.1 and 1.2 as
+30-second closures** — the only two I had marked.
+
+### Disposition
+
+**No defect.** `risk_review` written to
+`research/frontier-15-batch-3.proof-contracts.json` (the owning batch, not the
+merged file), then re-merged.
+
+**I edited no item text.** The two 30-second closures in 1.1 and 1.2 are the
+only compressions in the proof, and **step 8 withdraws the polish licence**: an
+edit there is a material rewrite that voids the verdict, forces a rejudge and
+resamples a refuter, for a gap a competent reader closes in a sentence. They are
+recorded in the `risk_review` notes instead. This is the R1 rule working as
+intended, not a gap.
+
+**No new defect-ledger row.** I confirmed no new defect; the fatal this item
+carries is already row `frontier-15-S8-03`, written in the same act as its step-8
+adjudication. A row asserting I found something would be false.
+
+## Files changed
+
+| file | change |
+|---|---|
+| `research/frontier-15-batch-3.proof-contracts.json` | +7/−1 lines: one `risk_review` on one entry. Verified against a pre-edit copy: exactly one of 59 contract entries differs. |
+| `research/frontier-15-proof-contracts.json` | re-merged from the 7 batch files, 324 scoped items |
+| `research/audit/frontier-15-dispatch/audit-refuter-rr2-sep.{log,result.json,prompt.md}` | refuter dispatch record |
+| `research/frontier-15-alpha-contract-audit.md` | this section |
+
+## Final gate state
+
+| gate | exit |
+|---|---|
+| `boundary-audit --fail-on-contradicted --fail-on-template` | **0** |
+| `citation-fidelity --fail-on-missing-quote` | **0** |
+| `gate-liveness --min-checks 1` | **0** (4 live finite-smoke checks) |
+| `risk-report --require-reviewed` | **0** — was 1, now `0 error(s), 324 item(s) routed` |
+| `proof-contract --strict` | **0** |
+| `defect-ledger check` | **0** — 84 rows |
+
+Both commands the brief names as the exit condition pass, and so does the one
+that was actually red.
+
+## What I did not do, so nobody assumes it
+
+- **The repaired item still needs its rejudge.** Its `item_sha256` moved from
+  `5870da8b…` (judged, rejected by both lanes) to the current text, so the
+  current pair verdict is stale by construction. That is the engine's
+  `8-rejudge` stage reading `judge-closure.json`, not mine, and
+  `level-coverage --verify-current-context` will hold until it runs.
+- **I did not re-verify the two source locators** ("Clark, Field Theory, Chapters
+  4 and 5"; "Milne, FT, Chapters 3 and 5"). That is `coverage-checklist` and
+  citation-precision work, and reading those PDFs is a different axis from this
+  review. The Statement is standard and I verified it on its mathematics, not on
+  its chapter number.
+- **The 518 generated boundary rows remain open** as `contract-audit-1` recorded
+  them (`f15-a-rr-005`). This item's own `endpoints` row is one of that family —
+  its prose is template-spliced ("For An algebraic extension…") though its
+  content is true. `boundary-audit` did not print it as a candidate, so it was
+  outside this lane's dispatch; it is named here rather than silently passed.

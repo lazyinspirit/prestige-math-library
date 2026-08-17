@@ -17,7 +17,7 @@ sources:
   scraped: []
   references:
     - title: "Jiří Lebl, Guide to Cultivating Complex Analysis, Proposition 3.2.11"
-      url: "https://web.archive.org/web/20260108042400if_/https://math.okstate.edu/people/lebl/osu5283-s20/ca.pdf"
+      url: "https://math.okstate.edu/people/lebl/osu5283-s20/ca.pdf?r=1"
     - title: "Tang-Kai Lee, Complex Analysis Notes, Section 2.1.2"
       url: "https://www.math.columbia.edu/~leetk/TA/CA25-file/Note-CA.pdf"
 pipeline_run: null

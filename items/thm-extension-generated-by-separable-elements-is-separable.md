@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-separability-is-transitive, def-separable-elements-and-separable-extensions, def-field-extension-generated-subfields-and-simple-extension]
+deps: [def-separable-elements-and-separable-extensions, def-field-extension-generated-subfields-and-simple-extension, cor-separable-degree-of-a-simple-extension-counts-distinct-roots, thm-simple-algebraic-extension-quotient-power-basis-and-degree, thm-multiplicativity-of-separable-degree, thm-tower-law-for-finite-field-extensions, thm-finitely-generated-algebraic-extensions-are-finite, thm-finite-extension-is-separable-iff-separable-degree-is-full]
 justified_by: []
 aliases: []
 landmark: false
@@ -33,18 +33,32 @@ over $F$. Then $K/F$ is separable.
 
 **Given:** An algebraic extension $K=F(S)$ whose generators are separable over $F$.
 
-[L1] Separability is transitive in algebraic towers ([[thm-separability-is-transitive]]).
+[L1] An element is separable over $F$ when it is algebraic over $F$ and its minimal polynomial over $F$ is separable; the extension is separable when every element is ([[def-separable-elements-and-separable-extensions]]).
 
-[L2] An element is separable when its minimal polynomial is separable, and an extension is separable elementwise ([[def-separable-elements-and-separable-extensions]]).
+[L2] The generated field $F(S)$ is the smallest subfield containing $F\cup S$ ([[def-field-extension-generated-subfields-and-simple-extension]]).
 
-[L3] The generated field $F(S)$ is the smallest subfield containing $F\cup S$ ([[def-field-extension-generated-subfields-and-simple-extension]]).
+[L3] The separable degree of a simple algebraic extension is the number of distinct roots of its generator's minimal polynomial ([[cor-separable-degree-of-a-simple-extension-counts-distinct-roots]]).
+
+[L4] The degree of a simple algebraic extension is the degree of that minimal polynomial ([[thm-simple-algebraic-extension-quotient-power-basis-and-degree]]).
+
+[L5] Separable degree is multiplicative in finite towers ([[thm-multiplicativity-of-separable-degree]]).
+
+[L6] Ordinary degrees multiply in finite towers ([[thm-tower-law-for-finite-field-extensions]]).
+
+[L7] Finitely many algebraic generators produce a finite extension ([[thm-finitely-generated-algebraic-extensions-are-finite]]).
+
+[L8] A finite extension is separable exactly when its separable degree equals its ordinary degree ([[thm-finite-extension-is-separable-iff-separable-degree-is-full]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 The union of $F(T)$ over the finite subsets $T\subseteq S$ is a subfield containing $F\cup S$, so by [L3] it equals $F(S)$. Hence every $a\in K$ lies in $F(s_1,\ldots,s_r)$ for finitely many $s_i\in S$. [L3]
+1.1 The union of $F(T)$ over the finite subsets $T\subseteq S$ is a subfield containing $F\cup S$, so by [L2] it equals $F(S)$. Hence every $a\in K$ lies in $E=F(s_1,\ldots,s_r)$ for finitely many $s_i\in S$. [L2]
 
-1.2 Build the finite tower $F\subseteq F(s_1)\subseteq\cdots\subseteq F(s_1,\ldots,s_r)$. At each step the minimal polynomial of $s_j$ over the preceding field divides its separable minimal polynomial over $F$, and is therefore separable. Repeated use of [L1] makes the final finite subextension separable over $F$. [L1, L2]
+1.2 Put $E_j=F(s_1,\ldots,s_j)$, so that $E_0=F$, $E_r=E$, and $E_j=E_{j-1}(s_j)$. Each $s_j$ is algebraic over $F$ by [L1], so [L7] makes $E/F$ finite and every step of the tower finite. [L1, L7]
 
-2.1 The chosen $a$ is therefore separable over $F$. Since $a$ was arbitrary, [L2] makes $K/F$ separable. If $S=\varnothing$, [L3] gives $K=F$ and the same conclusion is immediate. [step 1.1, step 1.2, L2, L3] ∎
+2.1 The minimal polynomial of $s_j$ over $E_{j-1}$ divides its minimal polynomial over $F$, which is separable by [L1]; a divisor of a polynomial with no repeated root has none, so the relative minimal polynomial has as many distinct roots as its degree. Hence [L3] and [L4] give $[E_j:E_{j-1}]_s=[E_j:E_{j-1}]$ at every step. [step 1.2, L1, L3, L4]
+
+3.1 Multiplying these equalities over the tower, [L5] and [L6] give $[E:F]_s=[E:F]$, so [L8] makes $E/F$ separable and the chosen $a$ separable over $F$. [step 1.2, step 2.1, L5, L6, L8]
+
+4.1 Since $a\in K$ was arbitrary, [L1] makes $K/F$ separable. If $S=\varnothing$, [L2] gives $K=F$, whose separable and ordinary degrees are both one, so the conclusion holds there as well. [step 1.1, step 3.1, L1, L2] ∎
