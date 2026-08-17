@@ -137,10 +137,26 @@ export interface Stage {
    * and either passes or names what is still wrong. Bounded by `maxFixRounds`,
    * because a repair that never converges must become a blocker a person reads,
    * not an infinite spend.
+   *
+   * A hook that returns `{ outage }` is saying its round FAILED FOR AN EXTERNAL
+   * REASON — every failure it produced carried a platform-outage signature (an
+   * account session limit, a provider-wide 429) — so no number of rounds could
+   * have succeeded. The executor refunds the round and retries on a clock
+   * instead: the cap exists to stop a non-converging repair, and an outage says
+   * nothing about convergence. `prevRoundAt` is the previous round's start
+   * instant (null on round 1), so a hook whose repair runs as an ASYNC dispatch
+   * can classify that round's failures at the next firing.
    */
-  onGateFailure?: (args: { ctx: Ctx; failure: GateResult; executor: any; stage: Stage; round: number }) => Promise<void> | void;
+  onGateFailure?: (args: { ctx: Ctx; failure: GateResult; executor: any; stage: Stage; round: number; prevRoundAt?: string | null }) => Promise<void | RepairReport> | void | RepairReport;
   /** Repair rounds allowed before a failing gate becomes a hard blocker. */
   maxFixRounds?: number;
+}
+
+/** What a repair hook may report back about the round it just ran. */
+export interface RepairReport {
+  /** The round's failures were all an external platform outage. `retryAfterMs`
+   *  overrides the executor's default backoff clock. */
+  outage?: { reason: string; retryAfterMs?: number };
 }
 
 export interface Config {
@@ -194,6 +210,12 @@ export interface StageState {
   fixRounds: number;
   /** Set once the repair budget is spent, so the notice is given once. */
   repairExhaustedAt?: string | null;
+  /** Set when a repair round reported an external outage: the hook stays
+   *  un-fired and no round is consumed until this instant passes. */
+  backoffUntil?: string | null;
+  /** Start instant of the most recent repair round, stamped before the hook
+   *  fires; the hook receives the PREVIOUS stamp as `prevRoundAt`. */
+  lastRepairAt?: string | null;
   skipped?: boolean;
 }
 

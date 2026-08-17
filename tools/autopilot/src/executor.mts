@@ -47,7 +47,12 @@ import { join } from 'node:path';
 
 import { covered, pending, stageComplete } from './coverage.mts';
 import { identityPlaceholders } from './doctor.mts';
-import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, RunningEntry, Gate } from './types.mts';
+import type { Config, Ctx, Stage, Plan, StageStatus, Snapshot, Adapter, Unit, RunningEntry, Gate, GateResult } from './types.mts';
+
+/** Default clock for an outage-refunded repair round. Long enough that a
+ *  session-limit window is not hammered, short enough that a lane back at
+ *  half past recovers the run before anyone notices it paused. */
+const OUTAGE_BACKOFF_MS = 20 * 60_000;
 import { runGates } from './gates.mts';
 import { takeCommand } from './control.mts';
 import { humanDuration } from './reporter.mts';
@@ -739,19 +744,11 @@ export class Executor {
         if (pending(owed, cov).length) continue;   // dispatchable — not a stalemate
         const missing = owed.filter((u: string) => !this.unitsComplete(s, ctx).has(u));
         const failure = { id: 'stage-stalemate', ok: false, why: `unit(s) ${missing.join(', ')} covered but artifact-incomplete, nothing dispatchable` };
-        const record = this.state.stage(s.id);
-        const maxRounds = s.maxFixRounds ?? 0;
-        if (s.onGateFailure && record.fixRounds < maxRounds) {
-          record.fixRounds += 1;
-          this.state.save();
-          this.reporter.notify('repair', `${s.id}: stalemate — ${failure.why}; starting repair round ${record.fixRounds}/${maxRounds}`);
-          try {
-            await s.onGateFailure({ ctx, failure, executor: this, stage: s, round: record.fixRounds });
-          } catch (err: any) {
-            this.reporter.notify('repair-failed', `${s.id}: stalemate repair threw — ${err?.message ?? err}`);
-          }
+        const spent = await this.spendRepairRound(s, failure as any, ctx, `stalemate — ${failure.why}`);
+        if (spent === 'spent') return 'working';
+        if (spent === 'waiting') {
           this.reporter.report(this.snapshot(), { force: true });
-          return 'working';
+          return 'blocked';
         }
         const msg = `stage ${s.id}: stalemate — ${failure.why}`;
         if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
@@ -1030,20 +1027,17 @@ export class Executor {
         // was overlapping it.
         const st = this.state.stage(stage.id);
         const maxRounds = stage.maxFixRounds ?? 0;
-        if (stage.onGateFailure && st.fixRounds < maxRounds) {
-          st.fixRounds += 1;
-          this.state.save();
-          this.reporter.notify('repair',
-            `${stage.id}: gate ${bad.id} failed; starting repair round ${st.fixRounds}/${maxRounds}`);
-          try {
-            await stage.onGateFailure({ ctx, failure: bad, executor: this, stage, round: st.fixRounds });
-          } catch (err: any) {
-            this.reporter.notify('repair-failed', `${stage.id}: repair round ${st.fixRounds} threw — ${err?.message ?? err}`);
-          }
+        const spent = await this.spendRepairRound(stage, bad, ctx, `gate ${bad.id} failed`);
+        if (spent === 'spent') {
           // Dispatches started by the hook are in flight now; the gate re-runs
           // once they drain, because `gatesPassedAt` is still unset.
-          this.reporter.report(this.snapshot(), { force: true });
           return 'working';
+        }
+        if (spent === 'waiting') {
+          // An external outage is being waited out. The round budget is intact
+          // and the hook re-fires when the clock passes — not exhaustion.
+          this.reporter.report(this.snapshot(), { force: true });
+          return 'blocked';
         }
         // Said once, when the budget runs out — not on every tick thereafter.
         if (stage.onGateFailure && maxRounds > 0 && !st.repairExhaustedAt) {
@@ -1085,6 +1079,55 @@ export class Executor {
   keyForUnit(stage: Stage, unit: Unit): string | null {
     if (!stage.labelFor) return null;
     return `${stage.id}:${stage.labelFor(unit)}`;
+  }
+
+  /**
+   * Spend one repair round on `stage`'s hook, honouring outage backoff.
+   *
+   *  'spent'   — a round ran; repair work may be in flight; re-verify later.
+   *  'waiting' — an earlier round reported an external outage and its clock
+   *              has not elapsed; the hook was not fired, no round consumed.
+   *  'none'    — no hook, or the round budget is exhausted.
+   *
+   * A hook that returns `{ outage }` gets its round REFUNDED and a clock set
+   * instead. During the sonnet account limit on frontier-15, every judge
+   * re-sweep was a guaranteed null yet each consumed a round, and 7-judge
+   * exhausted on work that could never have succeeded — the budget bounds
+   * divergence, and an outage is not divergence. Both round-spending sites
+   * (the gate-failure branch and the stalemate branch) go through here, so
+   * neither can drift back to burning rounds an outage already explains.
+   */
+  private async spendRepairRound(stage: Stage, failure: GateResult, ctx: Ctx, describe: string): Promise<'spent' | 'waiting' | 'none'> {
+    const st = this.state.stage(stage.id);
+    const maxRounds = stage.maxFixRounds ?? 0;
+    if (!stage.onGateFailure || st.fixRounds >= maxRounds) return 'none';
+    if (st.backoffUntil) {
+      if (new Date(st.backoffUntil).getTime() > Date.now()) return 'waiting';
+      st.backoffUntil = null;
+      this.state.save();
+    }
+    const prevRoundAt = st.lastRepairAt ?? null;
+    st.fixRounds += 1;
+    st.lastRepairAt = new Date().toISOString();
+    this.state.save();
+    this.reporter.notify('repair', `${stage.id}: ${describe}; starting repair round ${st.fixRounds}/${maxRounds}`);
+    let report: any;
+    try {
+      report = await stage.onGateFailure({ ctx, failure, executor: this, stage, round: st.fixRounds, prevRoundAt });
+    } catch (err: any) {
+      this.reporter.notify('repair-failed', `${stage.id}: repair round ${st.fixRounds} threw — ${err?.message ?? err}`);
+    }
+    if (report?.outage) {
+      const waitMs = report.outage.retryAfterMs ?? OUTAGE_BACKOFF_MS;
+      st.fixRounds -= 1;
+      st.backoffUntil = new Date(Date.now() + waitMs).toISOString();
+      this.state.save();
+      this.reporter.notify('repair-outage',
+        `${stage.id}: repair hit an external outage — ${report.outage.reason}; ` +
+        `round refunded, retrying after ${Math.round(waitMs / 60_000)} min`);
+    }
+    this.reporter.report(this.snapshot(), { force: true });
+    return 'spent';
   }
 
   async run({ pollMs = 15000, maxTicks = Infinity }: { pollMs?: number; maxTicks?: number } = {}): Promise<string> {

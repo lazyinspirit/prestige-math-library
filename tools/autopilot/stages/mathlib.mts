@@ -213,18 +213,60 @@ const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[]> = {
   'stage-stalemate': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
 };
 
+/** An external platform outage answering for a whole lane: an account session
+ *  limit ("You've hit your session limit · resets 12pm"), a provider-wide 429
+ *  or quota refusal. During one, a judge re-sweep is a guaranteed null — the
+ *  sonnet limit on frontier-15 burned both of 7-judge's repair rounds on
+ *  re-sweeps that could not have succeeded, and the stage exhausted into a
+ *  manual rounds-reset. Deliberately NOT matched: UNPARSEABLE (a prose verdict
+ *  re-spends on a round, correctly) and NO_CONTENT alone (Terra's account
+ *  fault answered that way for hours — an outage classifier that matches a
+ *  bare empty answer would wait forever on a lane that is dead, not busy). */
+export const OUTAGE_SIGNATURE = /session limit|resets \d|rate.?limit|\b429\b|quota exceeded|overloaded/i;
+
+/** The judge-lane outage test: of the ledger rows written since `sinceIso`,
+ *  at least one is a null verdict and EVERY null carries the outage
+ *  signature. Returns the first such reason, or null. One non-outage null —
+ *  an unparseable verdict, a genuine tool fault — means a repair round is
+ *  the right spend after all. */
+export const judgeOutageSince = (ctx: any, sinceIso: string): string | null => {
+  let rows: any[];
+  try {
+    rows = readFileSync(R(ctx, 'research', `${ctx.run}-judge.jsonl`), 'utf8')
+      .trim().split('\n').filter(Boolean).map((l) => JSON.parse(l));
+  } catch { return null; }
+  const nulls = rows.filter((r) => r.keep === null && typeof r.at === 'string' && r.at >= sinceIso);
+  if (!nulls.length) return null;
+  const reasons = nulls.map((r) => String(r.reason ?? ''));
+  if (!reasons.every((why) => OUTAGE_SIGNATURE.test(why))) return null;
+  return reasons[0].replace(/\s+/g, ' ').slice(0, 160);
+};
+
+const OUTAGE_CLASSIFIERS: Record<string, (ctx: any, startedAt: string) => string | null> = {
+  'judge-closure': judgeOutageSince,
+};
+
 /** Run the table's repair for this failure, if it has one.
  *  'clean'      — a repair ran and exited 0; the battery re-verifies.
+ *  'outage'     — the repair's failures were all an external platform outage
+ *                 (`reason` carries the evidence); the hook returns it and the
+ *                 executor waits on a clock instead of spending a round.
+ *                 Classified BEFORE exit status is read: during an outage the
+ *                 tool itself runs fine while every call it made was refused.
  *  'residual'   — a repair ran and left named failures (stderr carries
  *                 `fetch-check-...: <page>: <url>` lines); the caller may
  *                 route the residue to a scouting dispatch.
  *  'unhandled'  — no table entry for this gate. */
-const mechanicalRepair = async ({ ctx, failure }: any): Promise<{ outcome: string; stderr?: string }> => {
+const mechanicalRepair = async ({ ctx, failure }: any): Promise<{ outcome: string; stderr?: string; reason?: string }> => {
   const repair = MECHANICAL_REPAIRS[failure.id];
   if (!repair) return { outcome: 'unhandled' };
   const argvTail = repair(ctx);
+  const startedAt = new Date().toISOString();
   const { spawnSync } = await import('node:child_process');
   const r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
+  const classify = OUTAGE_CLASSIFIERS[failure.id];
+  const reason = classify ? classify(ctx, startedAt) : null;
+  if (reason) return { outcome: 'outage', reason };
   if (r.status !== 0) return { outcome: 'residual', stderr: (r.stderr || r.stdout || '').trim() };
   return { outcome: 'clean' };
 };
@@ -722,6 +764,7 @@ export const stages = [
       // rather than burning rounds into a needs-a-person blocker.
       const repair = await mechanicalRepair({ ctx, failure });
       if (repair.outcome === 'clean') return;
+      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
       if (repair.outcome === 'residual') {
         if (dispatchSourceScouts({ ctx, executor, stage, round, stderr: repair.stderr })) return;
         throw new Error(`mechanical repair left residue and no scout could be routed: ${(repair.stderr ?? '').slice(0, 300)}`);
@@ -811,6 +854,7 @@ export const stages = [
       if (!['splice-refusals', 'stage-stalemate'].includes(failure.id)) return;
       const repair = await mechanicalRepair({ ctx, failure: { id: 'splice-refusals' } });
       if (repair.outcome === 'clean') return;
+      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
       executor.start(stage, {
         role: 'alpha',
         label: `step4-adjudicate-${round}`,
@@ -1095,7 +1139,10 @@ export const stages = [
     maxFixRounds: 2,
     onGateFailure: async (args: any) => {
       if (args.failure.id !== 'judge-closure') return;
-      await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' } });
+      const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' } });
+      // A lane down to an account limit is not a failed repair: report the
+      // outage and the executor refunds the round and waits on a clock.
+      if (r.outcome === 'outage') return { outage: { reason: r.reason! } };
     },
   },
 
@@ -1248,7 +1295,7 @@ export const stages = [
     // reads the blocker. Fatal repairs being uncapped is a rule about what may
     // be edited, not a licence to spend without limit unattended.
     maxFixRounds: 3,
-    onGateFailure: async ({ ctx, executor, stage, round }) => {
+    onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt = null }) => {
       const closure = readClosure(ctx);
       if (!closure || closure.closed) return;
 
@@ -1259,6 +1306,12 @@ export const stages = [
       // would be asking a model to read verdicts that do not exist yet. Judge
       // first; adjudicate what comes back on the next round.
       if (closure.needs_rejudge?.length) {
+        // The rejudge sweep runs as an ASYNC dispatch, so its outage shows up
+        // one round late: if everything the PREVIOUS round's sweep produced was
+        // outage-signature nulls, the lane is down — report it rather than
+        // re-dispatch into it, and the executor refunds this round and waits.
+        const reason = prevRoundAt ? judgeOutageSince(ctx, prevRoundAt) : null;
+        if (reason) return { outage: { reason } };
         executor.start(stage, {
           role: 'tool',
           label: `rejudge-round-${round}`,

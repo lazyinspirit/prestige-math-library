@@ -862,6 +862,22 @@ The hook itself also could not have worked as first written — it fired only wh
 the blocker *message* was new, and a gate failing the same way produces the same
 message every time, so it fired once and deadlocked.
 
+**An external outage is not divergence (owner, 2026-08-17).** The round budget
+exists to stop a repair that will not converge; a platform outage — an account
+session limit, a provider-wide 429 — says nothing about convergence, and during
+the sonnet session limit on `frontier-15` every judge re-sweep was a guaranteed
+null yet each consumed a round, exhausting `7-judge` on work that could never
+have succeeded. A hook now returns `{ outage }` when **every** failure its round
+produced carries the outage signature (`OUTAGE_SIGNATURE` in
+`stages/mathlib.mts`; deliberately excluding UNPARSEABLE, which re-spends on a
+round, and bare NO_CONTENT, which is a dead lane, not a busy one). The executor
+**refunds the round and sets `backoffUntil`** (default 20 min): while the clock
+runs the hook stays un-fired, no round spends, and exhaustion is never stamped.
+Both round-spending sites — the gate-failure branch and the stalemate branch —
+go through one `spendRepairRound`. A repair that runs as an *async dispatch*
+(the 8-rejudge sweep) classifies one round late, over the `prevRoundAt` window
+the executor hands every hook. The notify is `repair-outage`.
+
 **Layout.** `src/executor.mts` is the loop; `src/coverage.mts` the predicate;
 `src/gates.mts` runs gates and refuses a vacuous one; `src/spec.mts` validates
 the table; `src/roles.mts` enforces the job rule; `stages/mathlib.mts` is the

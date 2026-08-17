@@ -146,6 +146,7 @@ There are no halt codes. The engine either advances, holds, or is blocked, and
 | `<label> failed 3x` | a lane hit the config's `maxAttempts` | read its log under `research/<run>-dispatch/`; `retry` re-arms it |
 | `plan() threw` | a stage's own planner raised | a spec defect, not a crash loop; fix the stage table |
 | `N repair round(s) did not clear gate` | the bounded self-correcting loop gave up | this one needs a person |
+| `repair hit an external outage … round refunded` | every failure the repair produced was a platform outage (an account session limit, a 429) — not a repair failure, so no round was spent | nothing; the hook re-fires when the backoff clock passes (default 20 min) and the budget is intact |
 | `barrier` | a previous stage still has work in flight | nothing; it lifts by itself |
 
 A blocker is **not** the end of the run. The engine keeps ticking: a transient
