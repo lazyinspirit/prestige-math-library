@@ -993,6 +993,41 @@ the **Statement**, not the whole body, because a `[L#]` line in Facts quotes
 inspected was a false positive; scoped, 25. Advisory by default;
 `--fail-on-contradicted` and `--fail-on-template` make each signal blocking.
 
+A **fourth signal** was added on `frontier-15` (Alpha `risk-review-1`): a
+`checked` row crediting a step that **exists but discharges nothing**. The
+`checked` detector had only ever tested whether the credited step *number*
+occurs in the proof. `thm-sylow-second-theorem` marked `zero` and `degenerate`
+as `checked` with the evidence "is resolved in step 4.1", quoting step 4.1
+verbatim — and step 4.1 read *"We treat the trivial $p$-subgroup and primes not
+dividing $|G|$."*, naming two cases and evaluating neither. Both halves are
+mechanical, so this stays inside the tool's precision-first standard; it is
+verified against a fixture that fires on the announcement-credited row and stays
+silent on the row crediting real work.
+
+**Not done, deliberately.** The same run found 518 boundary rows across 88
+batch-2 items generated from a template that interpolates each item's own
+**title and statement**, so no two rows are textually identical and the cluster
+detector reports *nothing*. Stripping the title from the cluster key does
+collapse them — into 31 clusters — but most of those are honest: "this item
+states no biconditional" is the true disposition for 45 items and has one
+natural phrasing. A detector that fires on a third of the corpus is one nobody
+reads, so the title stays in the key and the class is reported instead
+(`defect-ledger` row `f15-a-rr-005`).
+
+**`announcement-steps.mjs`** (2026-08-17) is the item-side counterpart: a
+numbered step whose every sentence *opens by naming an activity* and none of
+which states an outcome. It splits hits into `strong` and `weak` so a terse but
+real discharge — "We treat the trivial group, whose empty intersection
+convention gives $\Phi(1)=1$" — is reported for a read rather than swept up.
+Seventeen steps were repaired on `frontier-15`, two of them items whose *entire*
+proof was announcements. Its verb list is **grown from live misses, never
+guessed**: the first version missed 2 of 3 known instances because inline math
+inside a *named case* counted as work, and a later one missed "Keep the two
+prime orderings and the order-twelve boundary case explicit." because `Keep`
+was absent. Cross-check a zero result against an orthogonal scan (steps with no
+math, no relation symbol, under 170 characters) before trusting it; that scan is
+too noisy to ship but it is what surfaced three further verbs.
+
 **`citation-fidelity.mjs`** — the largest confirmed-fatal class, ten of
 twenty-five step-8 rows. Two checks: *quote-not-found*, where the contract's
 recorded verbatim `quote` does not appear in the cited item (hard failure under
@@ -1522,13 +1557,20 @@ Pro directly at maximum reasoning and a fresh GPT 5.6 Terra Codex process at
 
 **Lineup parameter (owner, 2026-08-08).** The build and all future audit work
 use `deepseek+terra`; earlier rows remain evidence only because coverage is per
-frozen context and never per model name. The Terra lane is `runFreshTerra` in
-`judge.mts`: a fresh Codex process in an empty temporary working directory,
-with process-level read-only sandboxing, `xhigh` reasoning and an explicit
-one-million-token context window. The frozen prompt, hash
+frozen context and never per model name. **The current lineup is
+`deepseek+sonnet` (owner, 2026-08-17)**: the Terra lane's Codex account was
+throttled mid-frontier-15 (429 on the models endpoint, NO_CONTENT on every
+exec — 392 null rows kept as evidence) and the owner replaced it with Claude
+Sonnet 5. The sonnet lane is `runFreshSonnet` in `judge.mts`: a fresh
+`claude` CLI process per call in an empty temporary working directory,
+tool-less via an empty `--allowed-tools` list, explicit model id, `--effort
+xhigh`; its pool is capped at 6, an order below the 2026-08-05-recorded
+capacity-refusal failure of the previous Claude lane at 16. The retired
+Terra lane (`runFreshTerra`, ephemeral Codex, read-only sandbox, 1M window)
+remains implemented for the `deepseek+terra` lineup. The frozen prompt, hash
 attestation, verdict contract, attempt telemetry, and retry semantics are
-identical across lineups. `judge-sweep.mjs` gives DeepSeek and Terra their own
-16-slot cross-process pools. The corpus was authored largely by Claude/GPT
+identical across lineups; `judge-sweep.mjs` gives each lane its own
+cross-process slot pool. The corpus was authored largely by Claude/GPT
 sessions, so DeepSeek remains the ONLY cross-family screen; Terra is an
 independent second process in the GPT family and shares that family with the Sol
 author and audit Alpha. Both receive the exact same hash-attested frozen item,

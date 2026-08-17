@@ -187,26 +187,37 @@ const isPaymentError = (status: number, raw: string): boolean =>
 // production pipeline keeps its origin-conditioned lineup in worker/src/ofox.ts.
 const DEEPSEEK_MODEL = "deepseek-v4-pro";
 const TERRA_MODEL = "gpt-5.6-terra";
+const SONNET_MODEL = "claude-sonnet-5";
 // Owner setting: DeepSeek judges at xhigh thinking. Its official OpenAI-format
 // API exposes only `high` and `max`; DeepSeek documents xhigh as the compatible
 // spelling that maps to `max`, so preserve the requested level explicitly and
 // send the canonical wire value.
 const DEEPSEEK_THINKING_LEVEL = "xhigh";
 const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
-const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL];
+const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, SONNET_MODEL];
 // JUDGE_LINEUP selects the session's paired lineup without forking the tool.
-// The active default is deepseek+terra. Older rows remain historical evidence
-// only. The frozen prompt, hash attestation and verdict contract are identical
-// across the two active lanes.
+// The active default is deepseek+sonnet (owner, 2026-08-17): the Codex
+// subscription behind Terra was account-throttled mid-run — 429 on the models
+// endpoint, NO_CONTENT on every exec — and the owner replaced the lane with
+// Claude Sonnet 5 on the claude CLI. Terra's rows remain historical evidence
+// only, exactly as the earlier switch's rows do. The frozen prompt, hash
+// attestation and verdict contract are identical across every lane.
 //
-// WHAT THE LEDGERS MEASURED BEFORE THIS SWITCH (frontiers 6-9, waves 0-1; the
-// evidence is in research/audit/RESUME.md, not in anyone's memory):
+// FAMILY WEIGHTING under deepseek+sonnet: DeepSeek remains the cross-family
+// screen against the Sol authors; SONNET shares the Anthropic family with the
+// build Alpha that adjudicates rejections, so weight same-family agreement
+// between the sonnet lane and Alpha accordingly — the same caveat the
+// deepseek+terra lineup carried for Terra and the GPT-family audit Alpha.
+//
+// WHAT THE LEDGERS MEASURED BEFORE THE 2026-08-04 SWITCH (frontiers 6-9,
+// waves 0-1; the evidence is in research/audit/RESUME.md, not in memory):
 //   gpt-5.6-terra    142 fatal / 58 false pos / 1036 adjudicated — 94.4% precision
 //   deepseek-v4-pro  129 fatal / 55 false pos /  618 adjudicated — 91.1% precision
 const JUDGE_LINEUPS: Record<string, string[]> = {
   "deepseek+terra": [DEEPSEEK_MODEL, TERRA_MODEL],
+  "deepseek+sonnet": [DEEPSEEK_MODEL, SONNET_MODEL],
 };
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
 const lineup = JUDGE_LINEUPS[lineupName];
 if (!lineup) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}`);
@@ -317,6 +328,42 @@ const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => 
   child.stdin.end(prompt);
 });
 
+/** The Sonnet lane, to the Terra lane's exact isolation philosophy: a FRESH
+ *  claude CLI process per call, an EMPTY temporary working directory so the
+ *  frozen prompt is its only context, and a tool-less run — the empty
+ *  --allowed-tools list allows nothing, and headless -p mode auto-denies any
+ *  permission request besides. Effort is the owner's xhigh; the model id is
+ *  passed explicitly, never inherited from anyone's session default. The
+ *  claude CLI authenticates from the user's own session (keychain), so unlike
+ *  Terra there is no auth file to copy and nothing credential-shaped touches
+ *  disk here at all. */
+const runFreshSonnet = (prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
+  const temporaryWork = mkdtempSync("/tmp/prestige-math-library-sonnet-work-");
+  const child = spawn(process.env.CLAUDE_BIN ?? "claude", [
+    "-p", "--model", SONNET_MODEL, "--effort", "xhigh", "--allowed-tools", "",
+  ], { stdio: ["pipe", "pipe", "pipe"], cwd: temporaryWork, env: process.env });
+  let stdout = "";
+  let stderr = "";
+  let settled = false;
+  let timedOut = false;
+  const finish = (code: number | null) => {
+    if (settled) return;
+    settled = true;
+    clearTimeout(timeout);
+    try { rmSync(temporaryWork, { recursive: true, force: true }); } catch { /* best-effort workdir cleanup */ }
+    resolve({ stdout, stderr, code, timedOut });
+  };
+  const timeout = setTimeout(() => {
+    timedOut = true;
+    child.kill("SIGTERM");
+  }, timeoutMs);
+  child.stdout.on("data", (chunk) => { stdout += chunk; });
+  child.stderr.on("data", (chunk) => { stderr += chunk; });
+  child.on("error", (error) => { stderr += String(error); finish(null); });
+  child.on("close", finish);
+  child.stdin.end(prompt);
+});
+
 // --preflight: one minimal call per selected model, before a sweep spends
 // anything. A dead account then costs a single request per independent judge.
 if (bools.has("preflight")) {
@@ -324,6 +371,10 @@ if (bools.has("preflight")) {
     if (judgeModel === TERRA_MODEL) {
       const terra = await runFreshTerra('Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 120_000);
       return { judgeModel, status: terra.code === 0 && terra.stdout.trim() ? 200 : 0, raw: terra.stdout || terra.stderr || "Codex produced no output" };
+    }
+    if (judgeModel === SONNET_MODEL) {
+      const sonnet = await runFreshSonnet('Return exactly {"keep":true,"reason":"preflight"}. Do not read files or use tools.', 180_000);
+      return { judgeModel, status: sonnet.code === 0 && sonnet.stdout.trim() ? 200 : 0, raw: sonnet.stdout || sonnet.stderr || "claude produced no output" };
     }
     try {
       // A deliberately tiny direct completion tests the endpoint, model,
@@ -1073,9 +1124,41 @@ async function callTerra(): Promise<CallResult> {
   return { content: "", raw: "Terra retries exhausted" };
 }
 
+async function callSonnet(): Promise<CallResult> {
+  for (let attempt = 0; attempt < MAX_CALL_ATTEMPTS; attempt++) {
+    const retryPossible = attempt < MAX_CALL_ATTEMPTS - 1;
+    const started = performance.now();
+    const run = await runFreshSonnet(frozenPrompt, 12 * 60_000);
+    const latency_ms = Math.round(performance.now() - started);
+    const content = run.stdout.trim();
+    const event = {
+      outcome: content && run.code === 0 ? "response" : run.timedOut ? "timeout" : "claude_exit",
+      status: run.code,
+      latency_ms,
+      max_tokens: null,
+      finish_reason: run.code === 0 ? "claude_complete" : run.timedOut ? "timeout" : "claude_exit",
+      has_content: Boolean(content),
+      raw_bytes: (run.stdout.length + run.stderr.length),
+    };
+    if (run.code === 0 && content) {
+      emitAttempt(SONNET_MODEL, attempt, event);
+      return { content, raw: run.stderr };
+    }
+    emitAttempt(SONNET_MODEL, attempt, event);
+    if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
+    return {
+      content: "",
+      raw: (run.stderr || run.stdout || `claude exited ${String(run.code)}`).slice(0, 1000),
+      retry: MAX_CALL_ATTEMPTS === 1 && retryAllowed ? "transient" : undefined,
+    };
+  }
+  return { content: "", raw: "Sonnet retries exhausted" };
+}
+
 const call = (judgeModel: string): Promise<CallResult> =>
   judgeModel === DEEPSEEK_MODEL ? callDeepSeek()
-    : callTerra();
+    : judgeModel === SONNET_MODEL ? callSonnet()
+      : callTerra();
 
 // A REFUTATION LEDGER, not a cost log. The costlog above records spend only, so
 // until now a rejection existed solely on stdout and vanished the moment it was

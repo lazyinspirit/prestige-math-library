@@ -45,12 +45,16 @@ if (!(Number.isInteger(limit) && limit > 0) && limit !== Infinity) {
 
 const DEEPSEEK = "deepseek-v4-pro";
 const TERRA = "gpt-5.6-terra";
+const SONNET = "claude-sonnet-5";
 // JUDGE_LINEUP mirrors tools/judge.mts. Historical rows are append-only evidence
-// only; the child judge inherits the same env var as the sweep.
+// only; the child judge inherits the same env var as the sweep. Default flipped
+// to deepseek+sonnet (owner, 2026-08-17) after the Codex account behind Terra
+// was throttled mid-run; Terra's null rows stay as evidence.
 const LINEUPS = Object.freeze({
   "deepseek+terra": [DEEPSEEK, TERRA],
+  "deepseek+sonnet": [DEEPSEEK, SONNET],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
 const supportedModels = LINEUPS[lineupName];
 if (!supportedModels) {
   throw new Error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(", ")}`);
@@ -180,6 +184,15 @@ const MODEL_CONCURRENCY = Object.freeze({
   // — a capacity refusal is always a null verdict.
   [DEEPSEEK]: 16,
   [TERRA]: 16,
+  // DELIBERATELY LOW. The measured history two paragraphs down is about a
+  // CLAUDE lane: the 2026-08-04-retired second lane returned 207 capacity
+  // refusals against 140 responses at cap 16 — fast claude_exit refusals
+  // under concurrency pressure. Sonnet 5 on today's CLI is a different lane,
+  // but the burn shape it must avoid is the same; 6 keeps boot pressure an
+  // order of magnitude below the recorded failure, and a refused call is a
+  // null the currency rule re-spends surgically anyway. Raise only on
+  // measured clean sweeps, and in writing.
+  [SONNET]: 6,
 });
 
 // MEASURED, wave 5 A7 (2026-08-05): at cap 16 the retired second lane returned **207

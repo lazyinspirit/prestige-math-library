@@ -191,6 +191,24 @@ test('boundary-audit respects an Alpha-upheld row and reports it', () => {
   rmSync(dir, { recursive: true, force: true });
 });
 
+test('the three judge tools agree on the lineup table', () => {
+  // Two hash normalisations under one field name; two prompt systems for one
+  // role; two gate tables — divergent copies are this repo's oldest defect
+  // class. The lineup map lives in three files; an unknown JUDGE_LINEUP makes
+  // each print its valid keys, so the maps are compared by asking the tools.
+  const invocations: Array<[string, string[]]> = [
+    ['tools/judge-sweep.mjs', ['--ledger', '/tmp/x', '--cost', '/tmp/y', '--pages', 'p']],
+    ['tools/level-coverage.mjs', ['--judge-only', '--verify-current-context', '--judge-ledger', '/tmp/x', '/tmp/nope-batch-1.pages.json']],
+  ];
+  for (const [tool, args] of invocations) {
+    const r = spawnSync(process.execPath, [join(REPO, tool), ...args],
+      { cwd: REPO, encoding: 'utf8', env: { ...process.env, JUDGE_LINEUP: '__nope__' }, timeout: 60_000 });
+    const out = `${r.stdout}\n${r.stderr}`;
+    assert.match(out, /deepseek\+terra/, `${tool} lost the terra lineup`);
+    assert.match(out, /deepseek\+sonnet/, `${tool} lacks the sonnet lineup`);
+  }
+});
+
 test('the mechanical branch still short-circuits the Beta fan-out', async () => {
   const repo = fixtureRepo();
   // a url-liveness failure with an artifact whose dead rows all carry

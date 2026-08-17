@@ -69,7 +69,7 @@ account is **never** wired into the worker service.
 | `audit-beta`, `audit-alpha` | GPT 5.6 Sol | Codex subscription, `xhigh`, 1M context |
 | audit `certifier` / independent reader | GPT 5.6 Terra | Codex, `xhigh`, 1M context, read-only |
 | `audit-refuter` | DeepSeek V4 Pro | direct API, `max` (its spelling of `xhigh`), tool-less |
-| paired judges, build and audit | DeepSeek V4 Pro + GPT 5.6 Terra | `JUDGE_LINEUP=deepseek+terra` |
+| paired judges, build and audit | DeepSeek V4 Pro + Claude Sonnet 5 | `JUDGE_LINEUP=deepseek+sonnet` (owner, 2026-08-17; the Terra judge lane retired mid-frontier-15 when its Codex account throttled) |
 
 **Binding for every future session** (owner, 2026-07-31/08-08/08-10). Never
 silently substitute another model or a smaller window; a context-window field is
@@ -251,21 +251,30 @@ Terra. Read-only is enforced per runner, never by asking:
 
 ### Paired skeptical judges (owner, 2026-07-31; second lane changed 2026-08-04)
 
-At step 7, run `deepseek-v4-pro` with `gpt-5.6-terra` through `tools/judge.mts`,
-selected by `JUDGE_LINEUP=deepseek+terra` — the default in `judge.mts`,
-`judge-sweep.mjs`, `level-coverage.mjs` and the audit driver. Terra is a fresh
-ephemeral Codex process in an empty temporary working directory, read-only,
-`xhigh`, explicit 1,000,000-token window, so the frozen prompt is its only
-context. Both lanes read one byte-identical frozen prompt, as adversarial
-refuters of proofs and dependency citations (`ARCHITECTURE.md` §5).
+At step 7, run `deepseek-v4-pro` with `claude-sonnet-5` through
+`tools/judge.mts`, selected by `JUDGE_LINEUP=deepseek+sonnet` (owner,
+2026-08-17) — the default in `judge.mts`, `judge-sweep.mjs`,
+`level-coverage.mjs` and the audit driver. The sonnet lane is a fresh
+`claude` CLI process per call in an empty temporary working directory,
+tool-less (an empty `--allowed-tools` list; headless `-p` denies the rest),
+explicit model id and `--effort xhigh`, so the frozen prompt is its only
+context — the same isolation the retired Terra lane had as an ephemeral
+Codex process. Its lane cap is **6**, deliberately an order below the
+recorded 2026-08-05 failure of the previous Claude lane (207 capacity
+refusals at cap 16); raise only on measured clean sweeps, in writing. Both
+lanes read one byte-identical frozen prompt, as adversarial refuters of
+proofs and dependency citations (`ARCHITECTURE.md` §5).
 
 **The judge's context unit is the A/B PAIR:** the item's page and its
 `-examples` companion in full, plus exactly the pages that page declares in
 `requires` and actually cites.
 
-DeepSeek supplies the cross-family screen; Terra shares the GPT family with
-audit Alpha, so weight same-family agreement accordingly. Rows from retired
-lanes stay append-only evidence and never satisfy current Terra coverage.
+DeepSeek supplies the cross-family screen against the Sol authors; SONNET
+shares the Anthropic family with the build Alpha that adjudicates its
+rejections, so weight same-family agreement between them accordingly — the
+transfer of the caveat the Terra lineup carried for the GPT-family audit
+Alpha. Rows from retired lanes (Terra's included, its frontier-15 nulls
+among them) stay append-only evidence and never satisfy current coverage.
 
 - Record a paired pass in `verification.judge` only when **both** models actually
   pass the text; commit the full verdict ledger at `research/<run>-judge.jsonl`
