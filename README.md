@@ -115,6 +115,12 @@ otherwise → "Session-authored" with judge status shown.
   end of every page (this also carries CC BY-SA / GFDL attribution).
 - Honesty rule for session-authored items: material generated from mathematical
   knowledge rather than scraped texts must NOT list fabricated sources. The
-  end-of-page section is split into **Sources scraped** (may be empty) and
-  **Standard references** (curated textbook pointers, explicitly labeled as
-  recommended treatments, not extraction sources).
+  end-of-page section carries **Sources scraped** (empty on every item today)
+  and the curated textbook pointers of `sources.references`.
+  **Owner, 2026-08-17: the references list no longer carries a `Standard
+  references` sub-heading or the caption "Recommended treatments; not extraction
+  sources."** With `scraped` empty everywhere, that list IS the Sources section
+  and the sub-heading named the same thing twice. The renderer restores the
+  sub-heading on any page that carries BOTH lists, which is the only case where
+  they need telling apart — so the honesty rule above is unchanged and nothing
+  in an item's frontmatter moved.

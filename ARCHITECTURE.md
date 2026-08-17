@@ -1967,6 +1967,20 @@ wins wherever it exists, and the fallback reproduces it verbatim for all ten
 groups that have one, so no name changes when a directory is created — and none
 were added, because `loadCategories()` walks directories and the index renders
 every one it finds, so eighteen empty groups would have appeared immediately.
+
+*Owner instruction 2026-08-17, exercised:* `categoryTitle` is now
+`loadCategories()`'s OWN fallback too. `walkCategories()` seeded a group's title
+from the raw directory name, so `library/measure-theory/` — the single built
+group with no `_category.md` — carried the literal slug `measure-theory` onto
+the public index, the group card and the share card, none of which route through
+the four surfaces above. It now seeds from `categoryTitle(slug)`, so the loader
+and those surfaces agree by construction and **no future group can ship as a
+slug**, whether or not anyone remembers to add `_category.md`. `_category.md`
+still wins wherever it exists (and now also wins over the fallback only when it
+actually carries a `title`), so no published name moved. Fixing this in the
+loader rather than by adding `library/measure-theory/_category.md` is the point:
+one file would have fixed one group, and the rule the owner asked for is about
+every group after it.
 A hue names a **family** of related subjects and a **tier** steps it within that
 family in reading order — `text-H-800/200`, then `-900/100`, then `-700/300` —
 because there are not 28 legible hues and related subjects should look related;
