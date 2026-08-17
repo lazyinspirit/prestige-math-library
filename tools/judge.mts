@@ -141,6 +141,7 @@ import { spawn } from "node:child_process";
 import { homedir } from "node:os";
 import { deepseekEnvFile } from "./paths.mjs";
 import { itemHashJudge } from "./item-hash.mjs";
+import { unwrapSonnetEnvelope, extractEmbeddedVerdict } from "./judge-parse.mjs";
 
 const argv = process.argv.slice(2);
 const VALUE_FLAGS = new Set(["model", "topic", "conventions", "batch"]);
@@ -339,8 +340,14 @@ const runFreshTerra = (prompt: string, timeoutMs: number): Promise<CodexRun> => 
  *  disk here at all. */
 const runFreshSonnet = (prompt: string, timeoutMs: number): Promise<CodexRun> => new Promise((resolve) => {
   const temporaryWork = mkdtempSync("/tmp/prestige-math-library-sonnet-work-");
+  // --output-format json wraps the reply in a result envelope that carries
+  // `usage` — without it the lane's spend is invisible: frontier-15 recorded
+  // pt=0, ct=0 for all 626 sonnet attempts while DeepSeek's 12.6M prompt
+  // tokens were measured, so every lane decision was made half-blind.
+  // callSonnet unwraps the envelope and falls back to plain text if the CLI
+  // ever changes shape.
   const child = spawn(process.env.CLAUDE_BIN ?? "claude", [
-    "-p", "--model", SONNET_MODEL, "--effort", "xhigh", "--allowed-tools", "",
+    "-p", "--model", SONNET_MODEL, "--effort", "xhigh", "--allowed-tools", "", "--output-format", "json",
   ], { stdio: ["pipe", "pipe", "pipe"], cwd: temporaryWork, env: process.env });
   let stdout = "";
   let stderr = "";
@@ -846,7 +853,14 @@ Output STRICT minified JSON ONLY, no prose around it. Keep \`reason\` to at most
 {"keep":true|false,"reason":"<if keep=false, the specific defect and where; if keep=true, a one-line note on what you verified>"}`;
 
 const sys = refuterSys;
-const buildUserPrompt = () => "Audit this library item. Return only the JSON verdict. Do not read files or call tools: the supplied context is authoritative.\n\n---\n" + body + citedContext(body) + pageContext(body);
+// The closing format reminder is a RECENCY fix, not a new instruction: the
+// same rule already sits in the system prompt, but on frontier-15 it sat
+// ~30k tokens above the end of the context and 28 sonnet replies opened with
+// "Flagged:" / "Verdict: **keep=false**" prose — stated rejections lost to
+// parsing. Format-only; the refuter framing is untouched (its recall is
+// benchmarked and may not be softened — see the deleted certify arm above).
+const buildUserPrompt = () => "Audit this library item. Return only the JSON verdict. Do not read files or call tools: the supplied context is authoritative.\n\n---\n" + body + citedContext(body) + pageContext(body)
+  + '\n\n---\nEND OF CONTEXT. Reply now with the verdict as a single minified JSON object and nothing else — {"keep":true|false,"reason":"..."} — the first character of your reply must be `{`. Do not precede or follow it with any prose.';
 
 // Build the entire prompt ONCE before either request starts. Context assembly
 // de-duplicates page and cited-item blocks with `shownIds`, so assembling it
@@ -1130,7 +1144,7 @@ async function callSonnet(): Promise<CallResult> {
     const started = performance.now();
     const run = await runFreshSonnet(frozenPrompt, 12 * 60_000);
     const latency_ms = Math.round(performance.now() - started);
-    const content = run.stdout.trim();
+    const { content, usage } = unwrapSonnetEnvelope(run.stdout);
     const event = {
       outcome: content && run.code === 0 ? "response" : run.timedOut ? "timeout" : "claude_exit",
       status: run.code,
@@ -1142,7 +1156,7 @@ async function callSonnet(): Promise<CallResult> {
     };
     if (run.code === 0 && content) {
       emitAttempt(SONNET_MODEL, attempt, event);
-      return { content, raw: run.stderr };
+      return { content, usage, raw: run.stderr };
     }
     emitAttempt(SONNET_MODEL, attempt, event);
     if (retryPossible) { await sleep(backoffMs(attempt)); continue; }
@@ -1206,6 +1220,17 @@ const judgeOne = async (judgeModel: string): Promise<Verdict> => {
     const leading = cleaned.match(/^\{\s*"keep"\s*:\s*(true|false)\b/);
     if (leading?.[1] === "true") {
       return { judgeModel, keep: true, reason: "TRUNCATED_ACCEPT: " + content.slice(0, 300), usage };
+    }
+    // A reply that wraps or trails a WELL-FORMED verdict object in prose is a
+    // parse problem, not a verdict problem: frontier-15 lost 28 stated sonnet
+    // rejections as UNPARSEABLE nulls, each costing a full xhigh re-spend and
+    // each "one re-sweep away from losing it for good" (step-10 report,
+    // finding 16). Extraction is PARSING — JSON.parse must succeed and `keep`
+    // must be a boolean. Prose is never interpreted: "Flagged:" with no
+    // parseable object stays a null for a re-spend.
+    const embedded = extractEmbeddedVerdict(cleaned);
+    if (embedded) {
+      return { judgeModel, keep: embedded.keep, reason: "EMBEDDED_JSON: " + (embedded.reason ?? content.slice(0, 280)), usage };
     }
     return { judgeModel, keep: null, reason: `UNPARSEABLE (${content.length} chars): ` + content.slice(0, 300), usage };
   }

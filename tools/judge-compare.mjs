@@ -18,9 +18,14 @@ if (!ledger || (adjudicationsFlag >= 0 && !adjudicationsPath)) {
 // The lineup is resolved, never assumed; `lineup` is emitted so a saved report
 // says which two models it actually compared.
 const JUDGE_LINEUPS = Object.freeze({
+  // The frontier-15 step-10 report was computed BY HAND because this table
+  // missed the 2026-08-17 lane switch that judge.mts, judge-sweep.mjs,
+  // level-coverage.mjs and run-wave.mjs all carried — the reporting tool was
+  // the one tool that could not read the run it reports on.
+  "deepseek+sonnet": ["deepseek-v4-pro", "claude-sonnet-5"],
   "deepseek+terra": ["deepseek-v4-pro", "gpt-5.6-terra"],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
 const models = JUDGE_LINEUPS[lineupName];
 if (!models) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}; got ${lineupName}`);

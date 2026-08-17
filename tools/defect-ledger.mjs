@@ -86,7 +86,7 @@ const ENUMS = {
     'page-prose', 'page-summary', 'contract-row', 'coverage-row', 'frontmatter',
     'tool-code', 'engine-stage', 'brief', 'task-file'],
   caught_at_stage: STAGES,
-  caught_by_role: ['beta', 'reader', 'refuter', 'judge-deepseek', 'judge-terra', 'group-alpha',
+  caught_by_role: ['beta', 'reader', 'refuter', 'judge-deepseek', 'judge-terra', 'judge-sonnet', 'group-alpha',
     'lead-alpha', 'orchestrator', 'owner', 'gate', 'detector', 'unknown'],
   disposition: ['fixed', 'narrowed', 'deferred', 'dropped', 'open', 'false-positive', 'nonfatal-recorded'],
 };
