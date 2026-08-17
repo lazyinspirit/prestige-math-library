@@ -1561,10 +1561,19 @@ export const stages = [
     ],
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      const repair = await mechanicalRepair({ ctx, failure });
-      if (repair.outcome === 'clean') return;
-      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
       if (failure.id === 'impact-receipt') {
+        // The refresh EXITS 0 by design (it refreshed), so its exit code says
+        // nothing about whether the gate can now pass — the first live round
+        // returned on 'clean' and never dispatched the Alpha. What decides is
+        // ON DISK: dispositions still pending after the refresh need the
+        // Alpha, in the SAME round.
+        await mechanicalRepair({ ctx, failure });
+        let pending = 0;
+        try {
+          const receipt = JSON.parse(readFileSync(join(ctx.repo, 'research', `${ctx.run}-impact.json`), 'utf8'));
+          pending = (receipt.dispositions ?? []).filter((d: any) => !d?.status || d.status === 'pending').length;
+        } catch { pending = 1; }
+        if (!pending) return;   // scope-only staleness: the refresh closed it
         executor.start(stage, {
           role: 'alpha',
           label: `impact-close-${round}`,
@@ -1574,7 +1583,10 @@ export const stages = [
           task: [`research/${ctx.run}-alpha-impact-close.task.md`],
           timeout: 7200,
         });
+        return;
       }
+      const repair = await mechanicalRepair({ ctx, failure });
+      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
     },
   },
 

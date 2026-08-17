@@ -151,6 +151,23 @@ test('blockers dedupe on stage+key even when the message text varies', () => {
   assert.equal(ex.state.data.blockers.length, 2);
 });
 
+test('retry re-arms the repair loop, not just the lanes', () => {
+  const fx = fixture();
+  const { ex, notifications } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'g1')]));
+  const st = ex.state.stage('s1');
+  st.fixRounds = 3;
+  st.repairExhaustedAt = '2026-08-17T08:53:00.000Z';
+  st.backoffUntil = '2026-08-20T13:32:00.000Z';
+  ex.state.data.dispatches = {};
+  // Drive the control path the way the CLI does.
+  writeFileSync(join(fx.repo, '.autopilot', 'control.json'), JSON.stringify({ command: 'retry' }));
+  ex.handleControl();
+  assert.equal(st.fixRounds, 0, 'burned rounds are re-armed');
+  assert.equal(st.repairExhaustedAt, undefined);
+  assert.equal(st.backoffUntil, undefined, 'an operator retry overrides an outage clock');
+  assert.ok(notifications.some((n) => n.kind === 'retry-armed' && /repair rounds re-armed on 1 stage/.test(n.message)));
+});
+
 test('reconcileAdopted stamps endedAt from the result file on disk', () => {
   const fx = fixture();
   const { ex, notifications } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'g1')]));

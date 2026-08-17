@@ -667,11 +667,28 @@ export class Executor {
           d.attempt = 0;                        // and the status line agrees
           armed += 1;
         }
+        // `retry` also re-arms the REPAIR LOOP of every unfinished stage. The
+        // blocked-holding message has always pointed operators here ("autopilot
+        // retry to re-arm"), but until frontier-15's closure drive it reset
+        // only lane attempts — a stage whose rounds were burned by a since-
+        // fixed hook defect still needed a stop, hand surgery on state.json
+        // and a restart. Round budgets bound divergence; an operator's
+        // explicit retry after a fix is the opposite of divergence.
+        let repairArmed = 0;
+        for (const st of Object.values<any>(this.state.data.stages)) {
+          if (st.doneAt) continue;
+          if (st.fixRounds || st.repairExhaustedAt || st.backoffUntil) {
+            st.fixRounds = 0;
+            delete st.repairExhaustedAt;
+            delete st.backoffUntil;
+            repairArmed += 1;
+          }
+        }
         this.state.save();
         const how = unfinished ? ` (${armed - unfinished} failed, ${unfinished} unfinished)` : '';
         this.reporter.notify('retry-armed', unit
           ? `owner armed a retry for unit ${unit} (${armed} lane(s))${how}`
-          : `owner armed a retry for ${armed} lane(s)${how}`);
+          : `owner armed a retry for ${armed} lane(s)${how}${repairArmed ? `; repair rounds re-armed on ${repairArmed} stage(s)` : ''}`);
         break;
       }
       default: break;
