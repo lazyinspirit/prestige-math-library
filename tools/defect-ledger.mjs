@@ -17,7 +17,7 @@
 //   node tools/defect-ledger.mjs stats    [--by f1,f2] [--leakage] [--recurrence] [--coverage] [--run R] [--json]
 //   node tools/defect-ledger.mjs render   [--out research/DEFECT-LEDGER.md]
 //   node tools/defect-ledger.mjs check    --run R --adjudications <adj.jsonl> [--closure <closure.json>]
-//                                         [--view research/DEFECT-LEDGER.md]
+//                                         [--view research/DEFECT-LEDGER.md] [--no-open]
 //
 // THE VIEW IS GENERATED, AND ITS HEADER SAYS SO. `research/DEFECT-LEDGER.md`
 // carries "GENERATED from … @ <hash> — do not edit", and until 2026-08-16
@@ -380,17 +380,37 @@ if (cmd === 'check') {
     errs.push('a 6b report exists but no ledger row is caught at 6a/6b/6c — the step-6 body is the part no other artifact holds');
   }
 
-  // (d) open-defect agreement with the closure receipt.
+  // (d) open-defect agreement with the closure receipt. FATAL rows only in the
+  // ledger→closure direction: the closure receipt's namespace is unrepaired
+  // fatal PROOF defects, and a nonfatal row deliberately left open — B41 on
+  // frontier-15 was a 503-ing archive snapshot whose 6b Alpha correctly
+  // recorded "re-sweep before publish; re-source only if still dead when the
+  // archive is demonstrably healthy" — is legitimate ledger state with no
+  // business in that receipt. The first version compared every open row and
+  // spent a step-8 repair round on the false positive. The reverse direction
+  // is unconditional as before, and clause (e) is the terminal backstop that
+  // keeps a nonfatal open row from surviving to publication.
   if (closurePath && existsSync(closurePath)) {
     const closure = JSON.parse(readFileSync(closurePath, 'utf8'));
     const openFatal = new Set((closure.open_fatal ?? []).map(String));
-    for (const r of mine.filter((x) => x.disposition === 'open')) {
+    for (const r of mine.filter((x) => x.disposition === 'open' && x.severity === 'fatal')) {
       if (!openFatal.has(String(r.subject))) errs.push(`${r.defect_id} is open in the ledger but ${r.subject} is not open in the closure receipt — one of them is stale`);
     }
     for (const id of openFatal) {
       if (!mine.some((r) => r.subject === id && r.disposition === 'open')) {
         errs.push(`closure names ${id} open_fatal with no open ledger row — exactly how two blockers lived only in markdown`);
       }
+    }
+  }
+
+  // (e) the terminal stage may not end with ANY open row, whatever its
+  // severity. `--no-open` is passed by the 10-report gate alone: step 9 owns
+  // sweeping the run's open rows (closing each whose recorded condition is
+  // met, with evidence), so a row still open here is unfinished work the
+  // owner must see, not a waivable detail.
+  if (given('no-open')) {
+    for (const r of mine.filter((x) => x.disposition === 'open')) {
+      errs.push(`${r.defect_id} (${r.severity}) is still open at the terminal stage: ${r.subject} — close it with evidence or it ships open`);
     }
   }
 

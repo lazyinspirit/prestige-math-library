@@ -35,6 +35,16 @@ citation.
    change. If it cannot, record it as an owner decision. Ledger duty
    applies: an overturned decline that exposed a real defect writes its
    `research/defect-ledger.jsonl` row in the same act.
+5. Sweep the run's still-open ledger rows:
+   `grep '"disposition":"open"' research/defect-ledger.jsonl | grep '"run":"frontier-15"'`
+   lists them (two as of step 8: B41, f15-a-rr-005). For each open row, test its
+   own recorded closing condition against disk — B41, for example, demands
+   a fresh `url-sweep --recover --fail-on-dead` over its batch and closes
+   only if the Lebl citation answers alive (append the closing row citing
+   the sweep artifact; disposition `fixed`, or `deferred` with the exact
+   remaining condition). A row whose condition cannot be met yet stays open
+   with a note — the 10-report gate refuses ANY open row (`--no-open`), so
+   an open row you leave is one the owner must personally read.
 
 ## Output
 

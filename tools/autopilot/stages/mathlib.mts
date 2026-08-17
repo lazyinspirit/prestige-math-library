@@ -404,10 +404,13 @@ const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) =
  *  rows whenever a 6b report exists (the clause that stops the ledger being a
  *  mirror of the adjudication file), and open rows agreeing with the closure
  *  receipt (two blockers once lived only in markdown). */
-const ledgerGate = (ctx) => gate('defect-ledger', ['node', 'tools/defect-ledger.mjs', 'check',
+const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['node', 'tools/defect-ledger.mjs', 'check',
   '--run', ctx.run,
   '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
-  '--closure', `research/${ctx.run}-judge-closure.json`], {
+  '--closure', `research/${ctx.run}-judge-closure.json`,
+  // The terminal stage may not end with any open row; steps 8–9 tolerate a
+  // nonfatal one deliberately left open (step 9 owns the sweep that closes it).
+  ...(terminal ? ['--no-open'] : [])], {
   liveness: { pattern: /(\d+) defect row\(s\) checked/.source, min: 1, unit: 'defect rows' },
 });
 
@@ -1441,7 +1444,7 @@ export const stages = [
     // The repo-wide invariants run once more for the same reason — step 10 is
     // gates.mjs's last gate point for prosecheck/depsource, and step-9 edits
     // land after 9-scope's own sweep.
-    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx), ledgerGate(ctx)],
+    gates: (ctx) => [...repoWide(ctx), levelCoverageGate(ctx), closureGate(ctx), ledgerGate(ctx, { terminal: true })],
   },
 ];
 

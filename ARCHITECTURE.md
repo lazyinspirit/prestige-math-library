@@ -1082,9 +1082,15 @@ false-declines; step 10 authors no mathematical rows (it runs `stats` and
 `render`). The `check` gate at 8-adjudicate/8-rejudge/9-scope/10-report holds
 ledger and adjudications to each other: exactly one row per `confirmed_fatal`
 (anti-double-count), step-6-caught rows whenever a 6b report exists (a ledger
-that mirrors the adjudication file fails), open rows agreeing with the closure
-receipt (two blockers once lived only in markdown), plus a liveness floor so
-zero rows never passes. `research/DEFECT-LEDGER.md` is the GENERATED view; it
+that mirrors the adjudication file fails), **fatal** open rows agreeing with
+the closure receipt (two blockers once lived only in markdown; the receipt's
+namespace is unrepaired fatal proof defects, and comparing every open row
+against it false-positived on frontier-15's B41 — a nonfatal 503-ing archive
+snapshot a 6b Alpha correctly left open pending a pre-publish re-sweep — and
+burned a step-8 repair round), plus a liveness floor so zero rows never
+passes. The 10-report gate alone adds `--no-open`: step 9's sweep duty closes
+each open row whose recorded condition is met, and a row still open at the
+terminal stage is unfinished work the owner must read, whatever its severity. `research/DEFECT-LEDGER.md` is the GENERATED view; it
 leads with caught/prevented/escaped, never a bare total
 (`judge-rejection-rates-mislead`). Back-filled rows are `source:
 "reconstructed"` and the historical `check` against frontier-14 is
