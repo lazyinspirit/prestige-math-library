@@ -139,9 +139,18 @@ export class State {
     this.save();
   }
 
-  addBlocker(stageId: string, message: string): void {
-    this.data.blockers.push({ stage: stageId, message, at: new Date().toISOString() });
+  /** Add a blocker unless one with the same stage+key is already live.
+   *  Returns whether it was added, so the caller notifies exactly when the
+   *  trail grew. `key` defaults to the message; pass a stable key when the
+   *  message embeds variable text (counts, ids, timeouts) — a gate failing
+   *  the same way with a different number used to stack a fresh blocker
+   *  each pass. */
+  addBlocker(stageId: string, message: string, key?: string): boolean {
+    const k = key ?? message;
+    if (this.data.blockers.some((b: any) => b.stage === stageId && (b.key ?? b.message) === k)) return false;
+    this.data.blockers.push({ stage: stageId, message, key: k, at: new Date().toISOString() });
     this.save();
+    return true;
   }
 
   get paused() { return this.data.paused === true; }

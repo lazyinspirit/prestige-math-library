@@ -862,6 +862,28 @@ The hook itself also could not have worked as first written — it fired only wh
 the blocker *message* was new, and a gate failing the same way produces the same
 message every time, so it fired once and deadlocked.
 
+**The battery is event-driven, and a failing one reports everything it can
+reach (owner directive, 2026-08-17; evidence in
+`research/frontier-15-machinery.md`).** A blocked stage's battery re-runs only
+when something that could change its verdict happened — a dispatch ended, a
+repair round ran, a control command landed, adoption reconciled a record, a
+result file appeared from an external process (dispatch-dir fingerprint), or a
+backoff clock expired — with an unconditional re-run every 20th skip as the
+bounded backstop. frontier-15 ran the 7-judge battery 29 times against
+unchanged inputs during one account outage, re-probing archive.org each pass;
+unchanged inputs into deterministic tools cannot change a verdict. **A
+hand-edit while the engine is blocked is re-armed by `autopilot retry`.**
+On failure, the first failing gate keeps sole authority (blocker, repair
+routing, `fixRounds`), and the REMAINING gates then run once in an ADVISORY
+pass — named in `gate-advisory` events/notifies and on `failure.advisory` —
+so one battery surfaces every routable failure instead of one per repair
+round-trip (defect-ledger and risk-report failed the same 8-adjudicate join
+and were discovered serially, costing two round-trips and a restart).
+Blockers dedupe on stage+gate key, not message text. The stage table
+hot-reloads at tick boundaries — validated first; a table that cannot fail is
+refused and the running table stays — and `reconcileAdopted` stamps `endedAt`
+onto records whose result files landed outside this process.
+
 **An external outage is not divergence (owner, 2026-08-17).** The round budget
 exists to stop a repair that will not converge; a platform outage — an account
 session limit, a provider-wide 429 — says nothing about convergence, and during

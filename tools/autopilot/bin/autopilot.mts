@@ -175,7 +175,12 @@ async function buildExecutor(run?: string) {
       console.error('  re-dispatch them. Fix or delete the file.');
     }
   }
-  const mod = await import(resolve(config.stages));
+  const stagesPath = resolve(config.stages);
+  const mod = await import(stagesPath);
+  // The executor hot-reloads this file at tick boundaries (validated first,
+  // refused on problems) — an edited stage table no longer costs a stop, a
+  // full battery drain and a restart.
+  (config as any).stagesPath = stagesPath;
   const state = new State(statePath(config.stateDir)).init(config.run);
   const reporter = new Reporter({ dir: config.stateDir, intervalMs: config.reportIntervalMin * 60 * 1000 });
   const adapter = makeExecAdapter({ argv: config.argv, cwd: repo, logger: (m) => reporter.event('exec', { command: m }) });

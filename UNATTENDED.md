@@ -147,6 +147,10 @@ There are no halt codes. The engine either advances, holds, or is blocked, and
 | `plan() threw` | a stage's own planner raised | a spec defect, not a crash loop; fix the stage table |
 | `N repair round(s) did not clear gate` | the bounded self-correcting loop gave up | this one needs a person |
 | `repair hit an external outage … round refunded` | every failure the repair produced was a platform outage (an account session limit, a 429) — not a repair failure, so no round was spent | nothing; the hook re-fires when the backoff clock passes (default 20 min) and the budget is intact |
+| `gate <id> ALSO failing (advisory)` | the battery stops at its FIRST failure, then runs the rest read-only so one battery names every failure | fix them together with the primary; advisory failures never block or spend rounds on their own |
+| silence while blocked | the battery is event-driven: it re-runs on a dispatch end, repair round, control command, new result file or backoff expiry — not on a clock (except a backstop every 20th skip) | if you hand-edited files to fix the failure, `autopilot retry` re-arms the battery |
+| `stage table reloaded` / `reload refused` | `stages/*.mts` was edited under a running engine; a table that fails validation is never loaded | on refusal, fix the table and save again — the running table stayed |
+| `N dispatch record(s) stamped from result files` | adopted/orphaned records reconciled against disk | nothing; bookkeeping |
 | `barrier` | a previous stage still has work in flight | nothing; it lifts by itself |
 
 A blocker is **not** the end of the run. The engine keeps ticking: a transient

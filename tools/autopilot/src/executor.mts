@@ -41,9 +41,10 @@
 // is found one stage later than it used to be; the level join still finds it,
 // and it still blocks before the next barrier.
 
-import { existsSync, writeFileSync, readFileSync } from 'node:fs';
+import { existsSync, writeFileSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { covered, pending, stageComplete } from './coverage.mts';
 import { identityPlaceholders } from './doctor.mts';
@@ -78,6 +79,11 @@ export class Executor {
   stopped: boolean;
   blockedTicks?: number;
   specProblems: SpecProblem[];
+  stateVersion: number;
+  lastBattery: Map<string, { version: number; ok: boolean; dirFp: string }>;
+  skipStreak: number;
+  stagesPath: string | null;
+  stagesMtimeMs: number;
   _adoptStage?: string;
   _announcedAdoption?: Set<string>;
   _barrierFor?: string;
@@ -94,11 +100,99 @@ export class Executor {
     /** dispatchKey -> { promise, meta, startedAt } */
     this.inflight = new Map();
     this.stopped = false;
+    // EVENT-DRIVEN RE-VERIFICATION. A blocked stage's battery used to re-run
+    // every tick against unchanged inputs: frontier-15 ran the 7-judge battery
+    // 29 times during one account outage, re-probing archive.org each pass.
+    // `stateVersion` counts state-changing events (a dispatch ends, a repair
+    // round runs, a control command lands, adoption reconciles); a battery
+    // that failed re-runs only when the version moves, the dispatch dir
+    // changes, a backoff clock expires — or every 20th skip, the bounded
+    // belt-and-braces against a dirty-channel this list misses.
+    this.stateVersion = 0;
+    this.lastBattery = new Map();
+    this.skipStreak = 0;
+    // Hot-reload bookkeeping: the stage table's source path and its mtime at
+    // load. `maybeReloadStages` swaps in an edited table at the next tick —
+    // loading a fix used to cost a stop, a full battery drain and a restart,
+    // twice in one day on frontier-15.
+    this.stagesPath = (config as any).stagesPath ?? null;
+    try { this.stagesMtimeMs = this.stagesPath ? statSync(this.stagesPath).mtimeMs : 0; } catch { this.stagesMtimeMs = 0; }
     // Validate the spec here rather than throwing: a bad stage table found by a
     // running engine should be a visible blocker, not a crash the watchdog
     // restarts into a loop at sixty-second intervals. `bin/autopilot` checks the
     // same thing before starting, so this is the belt to that braces.
     this.specProblems = validateStages(this.stages, this.ctx());
+  }
+
+  /** Something that can change a gate's verdict happened. */
+  bumpState(): void { this.stateVersion += 1; }
+
+  /** Cheap fingerprint of the dispatch dir, so a result file written by an
+   *  ADOPTED external process (which ends no engine child and bumps nothing)
+   *  still dirties the battery skip. Count plus newest mtime; any error is a
+   *  changing fingerprint, which fails safe into re-running the battery. */
+  dispatchDirFingerprint(): string {
+    try {
+      const dir = this.config.dispatchDir;
+      const files = readdirSync(dir).filter((f: string) => f.endsWith('.result.json'));
+      let newest = 0;
+      for (const f of files) { const m = statSync(join(dir, f)).mtimeMs; if (m > newest) newest = m; }
+      return `${files.length}:${newest}`;
+    } catch { return `err:${Date.now()}`; }
+  }
+
+  /** Stamp `endedAt` on dispatch records whose work finished OUTSIDE this
+   *  process — adopted after a restart, or recorded by a prior engine that
+   *  died mid-flight. Their result files are on disk; the record staying open
+   *  forever made every in-flight count a lie until someone checked disk by
+   *  hand (frontier-15 carried three such records all night). */
+  reconcileAdopted(): void {
+    const dispatches = this.state.data.dispatches ?? {};
+    let stamped = 0;
+    for (const [key, rec] of Object.entries(dispatches) as Array<[string, any]>) {
+      if (rec.endedAt || this.inflight.has(key)) continue;
+      const file = join(this.config.dispatchDir, `${rec.role}-${rec.label}.result.json`);
+      if (!existsSync(file)) continue;
+      try {
+        const result = JSON.parse(readFileSync(file, 'utf8'));
+        rec.endedAt = typeof result.ended_at === 'string' ? result.ended_at : new Date(statSync(file).mtimeMs).toISOString();
+        rec.lastExitOk = result.ok === true || result.exit_code === 0;
+        stamped += 1;
+      } catch { /* an unreadable result file is not this record's to guess at */ }
+    }
+    if (stamped) {
+      this.state.save();
+      this.bumpState();
+      this.reporter.notify('adopted-reconciled', `${stamped} dispatch record(s) stamped from result files on disk`);
+    }
+  }
+
+  /** Swap in an edited stage table at a tick boundary. A table that cannot
+   *  fail validation is never loaded — the running table stays, the refusal is
+   *  notified, and the edit can be fixed and saved again. Tools under
+   *  `tools/*.mjs` always loaded fresh per invocation; the stage table was the
+   *  one hot file that demanded a restart. */
+  async maybeReloadStages(): Promise<void> {
+    if (!this.stagesPath) return;
+    let mtime = 0;
+    try { mtime = statSync(this.stagesPath).mtimeMs; } catch { return; }
+    if (mtime <= this.stagesMtimeMs) return;
+    this.stagesMtimeMs = mtime;
+    try {
+      const mod = await import(`${pathToFileURL(this.stagesPath).href}?v=${mtime}`);
+      const problems = validateStages(mod.stages, this.ctx());
+      if (problems.length) {
+        this.reporter.notify('stages-reload-refused',
+          `edited stage table failed validation and was NOT loaded:\n${formatProblems(problems)}`);
+        return;
+      }
+      this.stages = mod.stages;
+      this.specProblems = [];
+      this.bumpState();
+      this.reporter.notify('stages-reloaded', `stage table reloaded from ${this.stagesPath}`);
+    } catch (err: any) {
+      this.reporter.notify('stages-reload-refused', `edited stage table failed to import and was NOT loaded — ${err?.message ?? err}`);
+    }
   }
 
   ctx(): Ctx {
@@ -440,6 +534,7 @@ export class Executor {
           }
         }
         this.state.recordDispatchEnd(key, r.ok);
+        this.bumpState();
         // A failed tool lane's stderr was read into memory and discarded; the
         // tail rides the event so nine hours of judge sweep leave more than
         // `exit=1` behind.
@@ -450,6 +545,7 @@ export class Executor {
       })
       .catch((err: any) => {
         this.state.recordDispatchEnd(key, false);
+        this.bumpState();
         this.reporter.notify('dispatch-failed', `${plan.role}/${plan.label} threw: ${err?.message ?? err}`, { key });
         return { ok: false, code: null, error: String(err?.message ?? err) };
       })
@@ -515,6 +611,10 @@ export class Executor {
     const cmd = takeCommand(this.config.stateDir);
     if (!cmd) return;
     if (cmd.error) { this.reporter.notify('control-error', cmd.error); return; }
+    // Any control command is a state-changing event: `retry` after a hand-edit
+    // is the documented way to re-arm a battery the event-driven skip would
+    // otherwise hold (UNATTENDED §signals).
+    this.bumpState();
     switch (cmd.command) {
       case 'pause':
         this.state.paused = true;
@@ -582,6 +682,8 @@ export class Executor {
   async tick(): Promise<'done' | 'working' | 'blocked' | 'stopped'> {
     this.handleControl();
     if (this.stopped) return 'stopped';
+    await this.maybeReloadStages();
+    this.reconcileAdopted();
 
     // A spec that cannot be trusted must not drive a run. Reported every tick so
     // it cannot be missed, and nothing is dispatched until it is fixed.
@@ -751,8 +853,7 @@ export class Executor {
           return 'blocked';
         }
         const msg = `stage ${s.id}: stalemate — ${failure.why}`;
-        if (!this.state.data.blockers.some((b: any) => b.message === msg)) {
-          this.state.addBlocker(s.id, msg);
+        if (this.state.addBlocker(s.id, msg, 'stalemate')) {
           this.reporter.notify('blocked', msg, { stage: s.id });
         }
         this.reporter.report(this.snapshot(), { force: true });
@@ -987,9 +1088,33 @@ export class Executor {
 
     if (list.length) {
       const where = group.length > 1 ? `${group[0].id}..${group[group.length - 1].id}` : group[0].id;
+      // EVENT-DRIVEN RE-VERIFICATION. A battery that failed re-runs only when
+      // something that could change its verdict happened: a state event
+      // (dispatch end, repair round, control command, adoption), a new or
+      // changed result file from an EXTERNAL process, or an expired backoff
+      // clock. frontier-15 ran the 7-judge battery 29 times against unchanged
+      // inputs during one account outage, re-probing archive.org each pass.
+      // Every 20th skip runs the battery anyway — the bounded backstop against
+      // a dirty-channel this list misses. Unchanged inputs into deterministic
+      // tools cannot change a verdict; anything actually changed re-verifies.
+      const groupKey = statuses.map(({ s }: any) => s.id).join('+');
+      const last = this.lastBattery.get(groupKey);
+      const dirFp = this.dispatchDirFingerprint();
+      const backoffDue = statuses.some(({ s }: any) => {
+        const bu = this.state.data.stages[s.id]?.backoffUntil;
+        return bu && new Date(bu).getTime() <= Date.now();
+      });
+      if (last && !last.ok && last.version === this.stateVersion && last.dirFp === dirFp
+        && !backoffDue && this.skipStreak < 20) {
+        this.skipStreak += 1;
+        return 'blocked';
+      }
+      this.skipStreak = 0;
+      const versionAtStart = this.stateVersion;
       this.reporter.notify('gates', `${where}: running ${list.length} gate(s)`);
       const { ok, results } = await runGates(list, { cwd: ctx.repo, signal: this.signal, logger: () => {} });
       for (const r of results) this.reporter.event('gate', r);
+      this.lastBattery.set(groupKey, { version: versionAtStart, ok, dirFp });
       if (!ok) {
         // `runGates` appends one result per gate and stops at the first failure,
         // so the failing gate is the last result and its owner is at the same
@@ -998,11 +1123,41 @@ export class Executor {
         const bad = results[results.length - 1];
         const stage = owners[results.length - 1] ?? group[0];
         const msg = `stage ${stage.id}: gate ${bad.id} failed — ${bad.why}`;
-        const isNew = !this.state.data.blockers.some((b: any) => b.message === msg);
-        if (isNew) {
-          this.state.addBlocker(stage.id, msg);
+        // Dedupe by stage+gate, not by message: `bad.why` carries variable text
+        // (counts, ids, timeouts), and a gate failing the same way with a
+        // different number used to stack a fresh blocker each pass.
+        if (this.state.addBlocker(stage.id, msg, `gate:${bad.id}`)) {
           this.reporter.notify('blocked', msg, { stage: stage.id, gate: bad.id });
         }
+
+        // REPORT-ALL. The battery stops at the first failure and that failure
+        // alone keeps its authority — but the remaining gates now run in an
+        // ADVISORY pass so one battery names every failure it can reach. On
+        // frontier-15, defect-ledger and risk-report failed at the same
+        // 8-adjudicate join and were discovered SERIALLY: two repair
+        // round-trips and an engine restart where one battery could have named
+        // both. Advisory results feed the event log, a notify, and
+        // `failure.advisory` for hooks; they never pass a stage and never
+        // stamp anything.
+        const advisory: any[] = [];
+        {
+          let rest = list.slice(results.length);
+          let restOwners = owners.slice(results.length);
+          while (rest.length) {
+            const adv = await runGates(rest, { cwd: ctx.repo, signal: this.signal, logger: () => {} });
+            for (const r of adv.results) this.reporter.event('gate-advisory', r);
+            const failedAt = adv.results.findIndex((r: any) => !r.ok);
+            if (failedAt === -1) break;
+            const failure = adv.results[failedAt];
+            const owner = restOwners[failedAt] ?? stage;
+            advisory.push({ ...failure, stage: owner.id });
+            this.reporter.notify('gate-advisory',
+              `${owner.id}: gate ${failure.id} ALSO failing (advisory) — ${String(failure.why).slice(0, 200)}`);
+            rest = rest.slice(failedAt + 1);
+            restOwners = restOwners.slice(failedAt + 1);
+          }
+        }
+        (bad as any).advisory = advisory;
 
         // THE REPAIR LOOP.
         //
@@ -1126,6 +1281,9 @@ export class Executor {
         `${stage.id}: repair hit an external outage — ${report.outage.reason}; ` +
         `round refunded, retrying after ${Math.round(waitMs / 60_000)} min`);
     }
+    // A repair round is a state-changing event whatever it did — it ran tools,
+    // dispatched lanes, or set a clock — so the next battery must be live.
+    this.bumpState();
     this.reporter.report(this.snapshot(), { force: true });
     return 'spent';
   }

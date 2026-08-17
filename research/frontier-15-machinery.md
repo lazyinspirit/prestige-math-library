@@ -183,3 +183,21 @@ Entries appended as work lands. Format: what / commit / tests / docs.
   context blocks (recency fix — the rule already existed ~30k tokens earlier;
   refuter framing untouched). Verdict currency survives via the item-hash
   clause; next sweep's UNPARSEABLE rate is the measurement of J2. 8 tests.
+- **E2 + E3 + E5 + D6 + D7** — the executor batch, 7 tests (suite 288/288,
+  zero regressions in the 281 that predate it):
+  E2 event-driven battery (skip while `stateVersion`, dispatch-dir
+  fingerprint, and backoff clocks are all unchanged; unconditional backstop
+  battery every 20th skip; `autopilot retry` documented as the hand-edit
+  re-arm); E3 report-all (first failure keeps sole authority; remaining gates
+  run once advisory, named in `gate-advisory` and on `failure.advisory`);
+  E5 stage-table hot-reload (validated first, refused tables never load);
+  D6 `reconcileAdopted` stamps `endedAt` from result files; D7 blockers
+  dedupe on stage+key. ARCHITECTURE §3.11d and the UNATTENDED signal table
+  carry all five.
+- **E9** — `briefs/alpha.md`: repair rounds read the latest prior round's
+  result/log before deriving anything (the 15-Opus-minute re-derivation).
+- **E4 — decision revised to HOLD.** The outage classification and residual
+  routing are SYNCHRONOUS by design in the tested repair loop; an async
+  repair moves classification a round later and destabilizes tested behavior
+  for a benefit observed exactly once (pause latency during a 1h sweep).
+  Revisit if a future run shows group members starved behind a long repair.

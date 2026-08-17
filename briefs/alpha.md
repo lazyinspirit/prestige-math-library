@@ -511,3 +511,12 @@ Nothing you write flips `status`; that is the owner's alone.
 
 **Fatal defects are fixed, not listed**, unless outside your write boundary or
 requiring an owner decision.
+
+**Repair rounds inherit their predecessors' work.** If your task answers a
+failing gate that earlier rounds already worked (labels like
+`*-round-<n>`, `adjudicate-*`, `*-risk-review-*`), list
+`research/<run>-dispatch/` and read the LATEST prior result and log for your
+lane before deriving anything yourself — on frontier-15 a second risk-review
+round re-derived, at full reasoning cost, a verification the first round had
+already written to its log. Verify, extend, and complete; never re-derive
+what is already on disk unless you have concrete reason to distrust it.

@@ -219,7 +219,14 @@ export interface StageState {
   skipped?: boolean;
 }
 
-export interface Blocker { stage: string; message: string; at: string; }
+export interface Blocker {
+  stage: string;
+  message: string;
+  at: string;
+  /** Stable dedupe key; defaults to the message. Lets a message carry variable
+   *  text (counts, timeouts) without stacking near-duplicate blockers. */
+  key?: string;
+}
 
 export interface StateData {
   version: number;
