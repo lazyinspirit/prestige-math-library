@@ -327,3 +327,20 @@ the audit-targeted evidence block (the A8 route crashed on any eligible
 stamp; regression test added). Suite ends at **311/311**. Docs same-commit:
 ARCHITECTURE §3.11i, LEVELS §Full closure, UNATTENDED blocker table,
 AUDIT-WORKFLOW §tools, CLAUDE.md (39,728 chars, measured).
+
+## 5. Conclusion — the build cycle is CLOSED (owner, 2026-08-17)
+
+frontier-15 is concluded. The level is **live**: 398 items and 16 pages
+published by the owner in `7496b516` (owner audit recorded on every item;
+286 paired judge stamps; 112 lane-rejected items published owner-audited
+with no judge block). The post-publish workflow gap is fixed for future
+cycles in `5391f923` (the `judge-stamps` gate; §4). Final obligation state:
+`contract-rework-b2` owner-accepted; `render-check-measure-theory` closed
+with evidence (the app's frozen category table carries the measure-theory
+hue and name, and the category is live); `refuter-coverage-b1-4-6` remains
+an open **report-tier** row — the step-10 report called that coverage
+OPTIONAL, and per owner instruction (2026-08-17) **no further rejudging or
+auditing runs for this cycle**: the row stays on the record as the caveat
+it documents, available to a future cycle, not scheduled work. The batch-2
+worksheet rework task likewise stays available at
+`research/frontier-15-beta-contract-rework.task.md`. Nothing else is owed.
