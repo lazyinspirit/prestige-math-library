@@ -146,6 +146,47 @@ test('--no-open refuses ANY open row, whatever its severity', () => {
   assert.ok(!/one defect, one row/.test(r.stderr), 'the failure must be the open row alone');
 });
 
+test('the 6b findings files audit the ledger COUNT — 13 rows against 58 fatals now fails', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  // Two step-6 rows in the ledger, three confirmed_fatal findings asserted.
+  const dir = fixture(
+    [row({ caught_at_stage: '6b-adjudicate' }),
+      row({ defect_id: 'r9-D002', subject: 'thm-y', caught_at_stage: '6a-read', adjudication_ref: ['R1-1'] })],
+    adj, { open_fatal: [] });
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b.md'), '# findings');
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b-findings.json'), JSON.stringify([
+    { id: 'thm-x', verdict: 'confirmed_fatal', source: 'R1-1' },
+    { id: 'thm-y', verdict: 'confirmed_fatal', source: 'R1-2' },
+    { id: 'thm-z', verdict: 'confirmed_fatal', source: 'R1-3' },
+    { id: 'thm-w', verdict: 'confirmed_nonfatal', source: 'R1-4' },
+  ]));
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /assert 3 confirmed-fatal finding\(s\) but only 2/);
+});
+
+test('a 6b report without its findings sibling fails once any group has one', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture([row({ caught_at_stage: '6b-adjudicate' })], adj, { open_fatal: [] });
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b.md'), '# a');
+  writeFileSync(join(dir, 'research', 'r9-alpha-b-6b.md'), '# b');
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b-findings.json'), JSON.stringify([
+    { id: 'thm-x', verdict: 'confirmed_fatal', source: 'R1-1' },
+  ]));
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.notEqual(r.status, 0);
+  assert.match(r.stderr, /r9-alpha-b-6b\.md has no r9-alpha-b-6b-findings\.json/);
+});
+
+test('a pre-contract run with 6b reports and no findings files gets a note, never a failure', () => {
+  const adj = [{ id: 'thm-x', outcome: 'confirmed_fatal', item_sha256: 'abc' }];
+  const dir = fixture([row({ caught_at_stage: '6b-adjudicate' })], adj, { open_fatal: [] });
+  writeFileSync(join(dir, 'research', 'r9-alpha-a-6b.md'), '# findings');
+  const r = check(dir, ['--closure', join(dir, 'closure.json')]);
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /cannot be audited against the ledger/);
+});
+
 test('only the terminal stage passes --no-open; earlier stages tolerate a deliberate open row', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };

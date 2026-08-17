@@ -1384,7 +1384,20 @@ export const stages = [
     artifacts: (ctx) => `research/${ctx.run}-alpha-step9.md`,
     pattern: resultPattern('(?:alpha|orchestrator)', 'step9-[a-z-]+'),
     concurrency: 1,
-    plan: (ctx) => [{
+    // The post-step8 snapshot rides in front of the Alpha (concurrency 1 keeps
+    // the order): without it, everything from `pre-step8` onward collapsed
+    // into one blind window — step 8's five repairs and step 9's six builds
+    // were invisible to `touchlog report/audit`, and step 10 had to assemble
+    // the twice-touched account from prose. Guarded on `pending`: a resumed
+    // run whose step-9 work is already covered must not mint a "post-step8"
+    // snapshot of a later tree.
+    plan: (ctx, pending) => (pending.length ? [{
+      role: 'tool',
+      label: 'snap-post-step8',
+      job: 'bookkeeping-mechanical',
+      covers: [],
+      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step8'],
+    }, {
       role: 'alpha',
       label: 'step9-lead',
       job: 'audit',
@@ -1392,7 +1405,7 @@ export const stages = [
       brief: "briefs/alpha.md",
       task: `research/${ctx.run}-alpha-step9.task.md`,
       timeout: 14400,
-    }],
+    }] : []),
     // Step 9 can BUILD items (frontier-14 added two), so everything it could
     // have disturbed is re-checked, judge closure included.
     gates: (ctx) => [...repoWide(ctx), ...contractGates(ctx, { reviewed: true }), closureGate(ctx),
@@ -1454,7 +1467,15 @@ export const stages = [
     artifacts: (ctx) => `research/${ctx.run}-step10-report.md`,
     pattern: resultPattern('(?:report|alpha)', 'step10-[a-z-]+'),
     concurrency: 1,
-    plan: (ctx) => [{
+    // The post-step9 snapshot rides in front of the report Alpha for the same
+    // reason 9-scope carries post-step8, with the same `pending` guard.
+    plan: (ctx, pending) => (pending.length ? [{
+      role: 'tool',
+      label: 'snap-post-step9',
+      job: 'bookkeeping-mechanical',
+      covers: [],
+      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step9'],
+    }, {
       role: 'alpha',
       label: 'step10-report',
       job: 'reporting',
@@ -1462,7 +1483,7 @@ export const stages = [
       brief: "briefs/alpha.md",
       task: `research/${ctx.run}-alpha-step10.task.md`,
       timeout: 10800,
-    }],
+    }] : []),
     // THE TERMINAL GATE. This stage declared `gates: () => []`, and an empty gate
     // list was read as "gates passed" — so the last stage of the pipeline could
     // not fail. frontier-14 finished with `level-coverage` red, two unrepaired

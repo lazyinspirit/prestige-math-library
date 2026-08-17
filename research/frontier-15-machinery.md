@@ -219,6 +219,31 @@ Entries appended as work lands. Format: what / commit / tests / docs.
   honest identical dispositions — a precision failure recorded in the
   tool's own comment. The airtight `checked`-row detector covers the class;
   the ~450-row rr-005 decision is the owner's, not a detector's.
+- **D4** — `splice-plan`: object-content comparison (a deps/strategy-only
+  manifest edit is drift the verify names and the splice REFRESHES — run
+  live, it surfaced 8 frontier-15 pages of real un-propagated drift the
+  id-only check called agreement at step 10, now on the owner's pre-publish
+  list); `--verify` flags a dep on an UNBUILT page absent from requires
+  (scoped after a 646-hit over-fire taught it that deps to on-disk pages are
+  order-licensed). 3 tests.
+- **D5** — `9-scope`/`10-report` snapshot `post-step8`/`post-step9` ahead of
+  their Alphas, `pending`-guarded so a resumed run cannot mislabel a later
+  tree; `touchlog audit` counts refutations as distinct rejected VERSIONS.
+  Live control: the escalation set collapsed 30 → 4, exactly the two
+  twice-rejected-version items plus the two refuted-then-repaired ones the
+  step-10 report identified by hand. 3 tests + a contract-test exemption for
+  `covers: []` riders (they claim nothing, so they can stall nothing).
+- **D3** — the run's most important finding closed: each 6b group writes
+  `<run>-alpha-<g>-6b-findings.json` (schema in `briefs/alpha.md`);
+  `defect-ledger check` clause (f) audits the asserted confirmed-fatal count
+  against the 6a/6b/6c rows, adoption-triggered so frontier-15's closed
+  receipts stay green (its legacy shape gets a note). 3 tests. Suite ends at
+  **296/296**.
+- **frontier-15 pre-publish additions for the owner** (beyond the step-10
+  report's list): `splice-plan --run frontier-15 --verify` now shows 8 pages
+  of real object drift — one mechanical `splice-plan --run frontier-15 --all`
+  refresh propagates the repaired objects into plan-spec.json; run it before
+  (or with) item 3 of the report's publish list.
 - **Guardrail note:** my first E9 brief edit wrote a literal `<n>` — the
   identity-placeholder class that cost two incidents on frontier-15. The
   doctor's placeholder scan caught it before any dispatch. The guardrails

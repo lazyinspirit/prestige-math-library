@@ -414,6 +414,48 @@ if (cmd === 'check') {
     }
   }
 
+  // (f) the ledger's step-6 COUNT is auditable, not just nonzero. Clause (c)
+  // requires step-6-caught rows to EXIST when a 6b report does — and on
+  // frontier-15 one group Alpha accepted 58 fatal reader findings, wrote 13
+  // rows, and satisfied it: the run's headline understated its fatal count
+  // threefold, in the one artifact built so that account would be a query.
+  // Each 6b group now also writes `<run>-alpha-<g>-6b-findings.json` (one row
+  // per adjudicated finding; briefs/alpha.md), and this clause compares the
+  // asserted confirmed-fatal count against the rows. Adoption-triggered: once
+  // ANY group's findings file exists, every 6b report needs its sibling and
+  // the counts must reconcile; a run predating the contract (frontier-15's
+  // own reports included) gets a note, never a retroactive failure.
+  {
+    let inResearch = [];
+    try { inResearch = readdirSync('research'); } catch { /* no research dir: nothing to cross-check */ }
+    const findingsFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-6b-findings.json'));
+    const reportFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-6b.md'));
+    if (findingsFiles.length) {
+      for (const rf of reportFiles) {
+        const sibling = rf.replace(/-6b\.md$/, '-6b-findings.json');
+        if (!findingsFiles.includes(sibling)) {
+          errs.push(`${rf} has no ${sibling} — once any group writes its machine findings, every group must`);
+        }
+      }
+      let fatalFindings = 0;
+      for (const ff of findingsFiles) {
+        try {
+          const rows = JSON.parse(readFileSync(`research/${ff}`, 'utf8'));
+          if (!Array.isArray(rows)) { errs.push(`${ff}: must be a JSON array of findings`); continue; }
+          fatalFindings += rows.filter((r) => r?.verdict === 'confirmed_fatal').length;
+        } catch (e) { errs.push(`${ff}: unreadable — ${e.message}`); }
+      }
+      const stepSixRows = mine.filter((r) => ['6a-read', '6b-adjudicate', '6c-cross'].includes(r.caught_at_stage)).length;
+      if (stepSixRows < fatalFindings) {
+        errs.push(`the 6b findings files assert ${fatalFindings} confirmed-fatal finding(s) but only ${stepSixRows} `
+          + `ledger row(s) are caught at 6a/6b/6c — a confirmed fatal and its ledger row are one act`);
+      }
+    } else if (reportFiles.length) {
+      console.log(`note: ${reportFiles.length} 6b report(s) with no -6b-findings.json sibling (pre-contract run) — `
+        + 'the step-6 fatal count cannot be audited against the ledger');
+    }
+  }
+
   if (errs.length) for (const e of errs) console.error(`ERROR ${e}`);
   console.log(`defect-ledger: ${mine.length} defect row(s) checked for ${run}, ${errs.length} error(s)`);
   process.exit(errs.length ? 1 : 0);

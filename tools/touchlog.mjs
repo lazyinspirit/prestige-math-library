@@ -115,14 +115,27 @@ if (cmd === "snap") {
 } else if (cmd === "audit") {
   const judgePath = rest[0];
   const rep = repairs(load());
-  const ref = {};
+  // A refutation is a REJECTED VERSION of the text, not a rejection row: both
+  // lanes rejecting one frozen text is agreement (one event), and a lane
+  // re-spent on the same text is a retry, not a second refutation. Counting
+  // rows put 30 both-lane items in frontier-15's escalation set as
+  // "refuted 2x, repaired 0x" — and 131 on frontier-14 — none of which was a
+  // repair history. Distinct item_sha256 per id is the version count; older
+  // rows without it fall back to context_sha256, and rows with neither count
+  // singly as before.
+  const refVersions = {};
+  let bareRow = 0;
   if (judgePath && existsSync(judgePath))
     for (const line of readFileSync(judgePath, "utf8").split("\n")) {
       if (!line.trim()) continue;
       let d; try { d = JSON.parse(line); } catch { continue; }
-      if (d.keep === false) ref[d.id] = (ref[d.id] ?? 0) + 1;
+      if (d.keep === false) {
+        const version = d.item_sha256 ?? d.context_sha256 ?? `row-${bareRow++}`;
+        (refVersions[d.id] ??= new Set()).add(version);
+      }
     }
   else console.log(`(no judge ledger at ${judgePath ?? "<none>"} — refutation counts unavailable)`);
+  const ref = Object.fromEntries(Object.entries(refVersions).map(([id, v]) => [id, v.size]));
   const ids = new Set([...Object.keys(rep), ...Object.keys(ref)]);
   const rows = [...ids]
     .map((id) => ({ id, ref: ref[id] ?? 0, rep: rep[id] ?? 0, tot: (ref[id] ?? 0) + (rep[id] ?? 0) }))

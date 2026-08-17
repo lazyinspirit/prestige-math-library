@@ -512,6 +512,18 @@ Nothing you write flips `status`; that is the owner's alone.
 **Fatal defects are fixed, not listed**, unless outside your write boundary or
 requiring an owner decision.
 
+**A 6b adjudication writes TWO artifacts**: the prose report and its machine
+half, `research/<run>-alpha-<g>-6b-findings.json` — a JSON array with one row
+per adjudicated reader or refuter finding:
+`{"id": "<item-id>", "verdict": "confirmed_fatal" | "confirmed_nonfatal" |
+"false_positive", "source": "<the finding's reference, e.g. R2-17>"}`.
+The defect ledger's completeness is CHECKED against these counts: on
+frontier-15 one group Alpha accepted 58 fatal reader findings and wrote 13
+ledger rows, no gate could see it, and the run's headline understated its
+fatal count threefold. A `confirmed_fatal` row here and its
+`research/defect-ledger.jsonl` row remain one act — this file does not
+replace the ledger, it is what makes the ledger auditable.
+
 **Repair rounds inherit their predecessors' work.** If your task answers a
 failing gate that earlier rounds already worked (labels ending in a round
 number, or starting `adjudicate-` / containing `risk-review`), list

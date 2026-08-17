@@ -1112,7 +1112,21 @@ snapshot a 6b Alpha correctly left open pending a pre-publish re-sweep — and
 burned a step-8 repair round), plus a liveness floor so zero rows never
 passes. The 10-report gate alone adds `--no-open`: step 9's sweep duty closes
 each open row whose recorded condition is met, and a row still open at the
-terminal stage is unfinished work the owner must read, whatever its severity. `research/DEFECT-LEDGER.md` is the GENERATED view; it
+terminal stage is unfinished work the owner must read, whatever its severity.
+**The step-6 COUNT is auditable** (owner directive, 2026-08-17): each 6b group
+writes `<run>-alpha-<g>-6b-findings.json` — one row per adjudicated finding
+(`briefs/alpha.md` has the schema) — and `check` compares the asserted
+confirmed-fatal count against the 6a/6b/6c-caught rows. Adoption-triggered:
+once any group's file exists every group needs one and the counts must
+reconcile; a pre-contract run gets a note. On frontier-15 one group accepted
+58 fatal reader findings, wrote 13 rows, satisfied the exists-only clause,
+and the run's headline understated its fatal count threefold. Relatedly, the
+twice-touched instrument now sees: `9-scope` and `10-report` snapshot
+`post-step8`/`post-step9` ahead of their Alphas (guarded so a resumed run
+never mislabels a later tree), and `touchlog audit` counts refutations as
+distinct rejected VERSIONS (id + item hash) — both lanes rejecting one text
+is agreement, and frontier-15's 30-item escalation noise collapsed to the 4
+real signals its step-10 report had assembled by hand. `research/DEFECT-LEDGER.md` is the GENERATED view; it
 leads with caught/prevented/escaped, never a bare total
 (`judge-rejection-rates-mislead`). Back-filled rows are `source:
 "reconstructed"` and the historical `check` against frontier-14 is
