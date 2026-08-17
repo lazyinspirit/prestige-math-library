@@ -259,11 +259,11 @@ At step 7, run `deepseek-v4-pro` with `claude-sonnet-5` through
 tool-less (an empty `--allowed-tools` list; headless `-p` denies the rest),
 explicit model id and `--effort xhigh`, so the frozen prompt is its only
 context — the same isolation the retired Terra lane had as an ephemeral
-Codex process. Its lane cap is **6**, deliberately an order below the
-recorded 2026-08-05 failure of the previous Claude lane (207 capacity
-refusals at cap 16); raise only on measured clean sweeps, in writing. Both
-lanes read one byte-identical frozen prompt, as adversarial refuters of
-proofs and dependency citations (`ARCHITECTURE.md` §5).
+Codex process. Its lane cap is **24** (owner, 2026-08-17; it debuted at 6,
+an order below the previous Claude lane's recorded 207 capacity refusals at
+cap 16, and ran 313/392 clean before the raise). Both lanes read one
+byte-identical frozen prompt, as adversarial refuters of proofs and
+dependency citations (`ARCHITECTURE.md` §5).
 
 **The judge's context unit is the A/B PAIR:** the item's page and its
 `-examples` companion in full, plus exactly the pages that page declares in
@@ -287,11 +287,13 @@ among them) stay append-only evidence and never satisfy current coverage.
   `logic`, `dependency_citation`, or `other`. At step 10 compare agreement,
   model-only rejections, nulls, and owner-confirmed fatal findings.
 - `tools/judge-sweep.mjs` keeps the lanes independent in file-backed pools
-  capped at **16 concurrent calls each, 32 combined** (owner, 2026-08-05); each
-  model advances when one of *its own* slots frees. Do not raise either cap:
-  every lane call is its own node+tsx process, and a capacity refusal is a null
-  verdict, not a verdict. `ARCHITECTURE.md` §5; the memory ceiling behind the
-  cap is in `UNATTENDED-AUDIT.md`.
+  capped at **24 concurrent calls each, 48 combined** (owner, 2026-08-17,
+  raising the 2026-08-05 cap of 16/32); each model advances when one of *its
+  own* slots frees. Every lane call is its own node+tsx process and a
+  capacity refusal is a null verdict, not a verdict — the old cap's memory
+  ceiling was measured on a 7.8 GB host (`UNATTENDED-AUDIT.md`); the raise
+  assumes 16 GB. On refusal or kernel-kill nulls, lower the cap back rather
+  than re-spending the loop. `ARCHITECTURE.md` §5.
 - Supply `--pages` with A-page ids; the sweep adds the B/examples items itself,
   because coverage is for the whole pair. **The initial Step-7 sweep takes every
   A page in the level** — both judges judge every item whether or not Alpha

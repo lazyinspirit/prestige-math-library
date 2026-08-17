@@ -182,17 +182,19 @@ const MODEL_CONCURRENCY = Object.freeze({
   // unit's MemoryHigh=4G and closing on MemoryMax=5G. A lane killed by the
   // kernel returns a capacity refusal, and a capacity refusal is not a verdict
   // — a capacity refusal is always a null verdict.
-  [DEEPSEEK]: 16,
+  // RAISED to 24 for DeepSeek and Sonnet (owner, 2026-08-17), superseding the
+  // 2026-08-05 16-cap. The context that cap carried, restated so this raise
+  // is a decision and not amnesia: the 16-cap's reason was MEMORY — the sweep
+  // measured 3.9 GB with a 4.6 GB peak at 16+16 on a 7.8 GB VPS host, and a
+  // kernel-killed lane is a null verdict. This host carries 16 GB. The
+  // retired 2026-08-04 Claude lane also recorded 207 capacity refusals at
+  // cap 16; today's sonnet lane ran 313/392 clean at cap 6 with its nulls
+  // coming from the account session limit, not concurrency. If 24 produces
+  // refusal or kernel-kill nulls, the currency rule re-spends them — but
+  // lower the cap back rather than paying that loop twice.
+  [DEEPSEEK]: 24,
   [TERRA]: 16,
-  // DELIBERATELY LOW. The measured history two paragraphs down is about a
-  // CLAUDE lane: the 2026-08-04-retired second lane returned 207 capacity
-  // refusals against 140 responses at cap 16 — fast claude_exit refusals
-  // under concurrency pressure. Sonnet 5 on today's CLI is a different lane,
-  // but the burn shape it must avoid is the same; 6 keeps boot pressure an
-  // order of magnitude below the recorded failure, and a refused call is a
-  // null the currency rule re-spends surgically anyway. Raise only on
-  // measured clean sweeps, and in writing.
-  [SONNET]: 6,
+  [SONNET]: 24,
 });
 
 // MEASURED, wave 5 A7 (2026-08-05): at cap 16 the retired second lane returned **207

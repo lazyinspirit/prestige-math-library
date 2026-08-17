@@ -1564,8 +1564,10 @@ exec — 392 null rows kept as evidence) and the owner replaced it with Claude
 Sonnet 5. The sonnet lane is `runFreshSonnet` in `judge.mts`: a fresh
 `claude` CLI process per call in an empty temporary working directory,
 tool-less via an empty `--allowed-tools` list, explicit model id, `--effort
-xhigh`; its pool is capped at 6, an order below the 2026-08-05-recorded
-capacity-refusal failure of the previous Claude lane at 16. The retired
+xhigh`; its pool is capped at 24 (owner, 2026-08-17 — it debuted at 6
+against the 2026-08-05-recorded capacity-refusal failure of the previous
+Claude lane at 16, and ran 313/392 clean before the raise; DeepSeek's pool
+rose to 24 in the same decision). The retired
 Terra lane (`runFreshTerra`, ephemeral Codex, read-only sandbox, 1M window)
 remains implemented for the `deepseek+terra` lineup. The frozen prompt, hash
 attestation, verdict contract, attempt telemetry, and retry semantics are
