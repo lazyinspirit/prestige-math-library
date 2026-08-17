@@ -64,6 +64,17 @@ notes saying what you actually checked — into the owning batch's
 `research/frontier-15-batch-<i>.proof-contracts.json` entry. Then re-merge
 (the command below) and re-run risk-report until it exits 0.
 
+**Write the disposition from your own verification, BEFORE dispatching or
+waiting on any refuter.** The high-risk refuter rule is satisfied by a
+refuter whose report corroborates a disposition already on disk; it is not
+a precondition for writing one. Your session ends at your final message —
+work you promise "once the refuter reports" never happens. The first lane
+on this gate verified everything, wrote nothing, and exited saying it would
+write later: exit 0, gate still red, a repair round spent for zero
+artifacts. If your refuter has not returned by the time your own read is
+complete, write the `risk_review` now, note the refuter as pending in your
+report, and record its result file path so the next reader can check it.
+
 Never batch-uphold; never weaken a rationale to pass a regex. Contract rows
 live in the batch's `research/frontier-15-batch-<i>.proof-contracts.json` —
 after edits, re-run the merge the join uses:
