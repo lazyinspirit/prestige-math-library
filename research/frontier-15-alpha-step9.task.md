@@ -40,9 +40,12 @@ citation.
    lists them (two as of step 8: B41, f15-a-rr-005). For each open row, test its
    own recorded closing condition against disk — B41, for example, demands
    a fresh `url-sweep --recover --fail-on-dead` over its batch and closes
-   only if the Lebl citation answers alive (append the closing row citing
-   the sweep artifact; disposition `fixed`, or `deferred` with the exact
-   remaining condition). A row whose condition cannot be met yet stays open
+   only if the Lebl citation answers alive. Closing is an IN-PLACE update of
+   that row — one defect, one row: set `disposition` to `fixed` (or
+   `deferred` with the exact remaining condition), add the closing evidence
+   to the row, and re-run `node tools/defect-ledger.mjs render` (a hand
+   edit stales the view fingerprint). Never append a second row for the
+   same defect. A row whose condition cannot be met yet stays open
    with a note — the 10-report gate refuses ANY open row (`--no-open`), so
    an open row you leave is one the owner must personally read.
 
