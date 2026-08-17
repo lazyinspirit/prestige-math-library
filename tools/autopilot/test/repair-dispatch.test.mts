@@ -107,6 +107,26 @@ test('the scaffold-fix hook dispatches one lane per owning batch, batch as cover
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('a step-8 contract-audit failure routes to a risk-review Alpha, not a no-op round', async () => {
+  // A fatal repair rewrites a proof; the rewritten proof recomputes its risk
+  // tier. The first live step 8 came back critical-risk with no risk_review
+  // and the hook, handling only open fatals, spent the round doing nothing.
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s8: any = stages.find((s: any) => s.id === '8-adjudicate');
+  await s8.onGateFailure({
+    ctx: { run: 'demo', repo: '/nonexistent' }, executor, stage: s8, round: 1,
+    failure: { id: 'risk-report', why: 'risk-review-missing [thm-x]' },
+  });
+  assert.equal(started.length, 1, 'the failure must dispatch, not fall through');
+  const p = started[0];
+  assert.equal(p.label, 'adjudicate-risk-review-1');
+  assert.ok(!/^step8-/.test(p.label), 'a repair must not match the stage result pattern');
+  assert.ok(!/^risk-review-/.test(p.label), "6b's result files own that name family");
+  assert.deepEqual(p.task, ['research/demo-alpha-contract-audit.task.md']);
+  assert.equal(p.role, 'alpha');
+});
+
 test('a prompt file carrying an identity placeholder blocks before any spawn', () => {
   const repo = fixtureRepo();
   writeFileSync(join(repo, 'research', 'demo-poisoned.task.md'), 'the grammar example says (order <n>)\n');

@@ -1221,7 +1221,29 @@ export const stages = [
     //
     // A fatal defect that needs authoring is still work. It gets dispatched.
     maxFixRounds: 3,
-    onGateFailure: async ({ ctx, executor, stage, round }) => {
+    onGateFailure: async ({ ctx, executor, stage, round, failure }) => {
+      // A fatal repair rewrites a proof, and a rewritten proof recomputes its
+      // risk tier and can trip the boundary and citation detectors — the
+      // contract-audit family, which routes to the same Alpha lane 6b uses.
+      // The first live step 8 hit exactly this: the both-lanes fatal's
+      // rewritten proof came back critical-risk with no risk_review, and the
+      // hook — which then handled only open fatals — spent the round doing
+      // nothing. The label is deliberately NOT `step8-*` (the stage pattern
+      // would mistake the repair for the adjudication) and NOT 6b's
+      // `risk-review-*` (those result files already exist in this dispatch
+      // dir and the names must not collide).
+      if (['risk-report', 'boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) {
+        executor.start(stage, {
+          role: 'alpha',
+          label: `adjudicate-risk-review-${round}`,
+          job: 'adjudication',
+          covers: [],
+          brief: 'briefs/alpha.md',
+          task: [`research/${ctx.run}-alpha-contract-audit.task.md`],
+          timeout: 3600,
+        });
+        return;
+      }
       const closure = readClosure(ctx);
       const ids = closure?.open_fatal ?? [];
       if (!ids.length) return;              // gate failed on something else
