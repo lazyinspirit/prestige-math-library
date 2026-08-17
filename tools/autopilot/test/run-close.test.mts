@@ -9,7 +9,7 @@
 // MAIN, no branches, no worktrees; push and publish stay owner acts.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync, execFileSync } from 'node:child_process';
@@ -44,7 +44,7 @@ test('a block-tier row holds the terminal gate; report-tier is surfaced, never b
     assert.match(r.stderr, /ext-debt/);
     assert.ok(!/ERROR fyi/.test(r.stderr), 'report-tier never blocks');
     assert.match(r.stdout, /REPORT fyi/);
-  } finally { if (existsSync(file)) writeFileSync(file, ''); }
+  } finally { rmSync(file, { force: true }); }
 });
 
 test('acceptance needs a named acceptor and a real reason; then the terminal check passes', () => {
@@ -57,7 +57,7 @@ test('acceptance needs a named acceptor and a real reason; then the terminal che
     assert.equal(r.status, 0, r.stderr);
     r = runTool(OBLIG, REPO, ['check', '--run', run, '--terminal']);
     assert.equal(r.status, 0, r.stderr);
-  } finally { if (existsSync(file)) writeFileSync(file, ''); }
+  } finally { rmSync(file, { force: true }); }
 });
 
 test('run-commit commits a dirty tree on main and refuses any other branch', () => {
@@ -166,4 +166,35 @@ test('10-commit is the terminal stage and cannot waive', () => {
   assert.equal(last.id, '10-commit');
   assert.ok(!last.gatesWaived, 'the terminal stage may not waive');
   assert.ok(last.gates({ run: 'demo', repo: REPO }).length >= 2, 'obligations + tree-clean');
+});
+
+test('10-commit carries the frontmatter closure: judge-stamps after the ledger gates, before the commit', () => {
+  // frontier-15 ended with every ledger-side gate green and 0 of 398 items
+  // stamped — the stamp had no owning stage. The gate order is load-bearing:
+  // stamps are only meaningful once judge closure holds, and the close-out
+  // commit must capture them.
+  const last: any = stages[stages.length - 1];
+  const ids = last.gates({ run: 'demo', repo: REPO }).map((g: any) => g.id);
+  const at = (id: string) => ids.indexOf(id);
+  assert.ok(at('judge-stamps') >= 0, 'the stamp gate exists at the terminal stage');
+  assert.ok(at('judge-closure') < at('judge-stamps'), 'ledger closure precedes the frontmatter check');
+  assert.ok(at('judge-stamps') < at('tree-clean'), 'the commit sweeps the stamps');
+});
+
+test('the 10-commit hook routes a judge-stamps failure to the mechanical stamping repair', async () => {
+  const repo = mkdtempSync(join(tmpdir(), 'stamp-route-'));
+  mkdirSync(join(repo, 'tools'), { recursive: true });
+  mkdirSync(join(repo, 'research'), { recursive: true });
+  // The stub proves the ROUTING; the real tool's behavior is judge-stamps.test.
+  writeFileSync(join(repo, 'tools', 'apply-judge-stamps.mjs'),
+    `import { writeFileSync } from 'node:fs';\nwriteFileSync('marker.txt', process.argv.slice(2).join(' '));\n`);
+  const s10c: any = stages.find((s: any) => s.id === '10-commit');
+  const report = await s10c.onGateFailure({
+    ctx: { run: 'demo', repo }, executor: { start: () => {} }, stage: s10c, round: 1,
+    failure: { id: 'judge-stamps', why: '' },
+  });
+  assert.equal(report, undefined, 'a clean repair spends the round without an outage');
+  const marker = readFileSync(join(repo, 'marker.txt'), 'utf8');
+  assert.match(marker, /--apply/);
+  assert.match(marker, /demo-judge\.jsonl/);
 });

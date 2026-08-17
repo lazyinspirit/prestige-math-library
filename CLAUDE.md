@@ -279,7 +279,9 @@ Alpha. Rows from retired lanes (Terra's included, its frontier-15 nulls
 among them) stay append-only evidence and never satisfy current coverage.
 
 - Record a paired pass in `verification.judge` only when **both** models actually
-  pass the text; commit the full verdict ledger at `research/<run>-judge.jsonl`
+  pass the text — written mechanically by `apply-judge-stamps.mjs`, which the
+  engine's `judge-stamps` gate at 10-commit enforces (an adjudicated rejection
+  never stamps); commit the full verdict ledger at `research/<run>-judge.jsonl`
   and compare the two models' findings at step 10 / A10. A proof refuted or
   repaired more than once escalates per `WORKFLOW.md` §"Twice-touched proofs".
 - Adjudicate a rejection from either model in

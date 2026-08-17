@@ -152,6 +152,7 @@ There are no halt codes. The engine either advances, holds, or is blocked, and
 | `stage table reloaded` / `reload refused` | `stages/*.mts` was edited under a running engine; a table that fails validation is never loaded | on refusal, fix the table and save again — the running table stayed |
 | `N dispatch record(s) stamped from result files` | adopted/orphaned records reconciled against disk | nothing; bookkeeping |
 | `obligations … open at the terminal stage` | a `block`-tier external debt is neither closed nor owner-accepted | close it with evidence, or `obligations.mjs accept --by owner --reason "…"` |
+| `judge-stamps … no current paired verdict` | an item passed the ledger gates but no current verdict covers it — a currency defect, since `--apply` (the mechanical repair) already ran | this one needs a person; `lane-rejected` items are NOT this, they honestly publish unstamped |
 | `run-commit: HEAD is on '<branch>', not main` | a person moved HEAD; the engine refuses to guess | move it back; the engine never checks out branches |
 | `barrier` | a previous stage still has work in flight | nothing; it lifts by itself |
 

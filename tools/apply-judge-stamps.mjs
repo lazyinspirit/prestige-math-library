@@ -5,6 +5,17 @@
 //   node tools/apply-judge-stamps.mjs --ledger research/audit/wave0-judge.jsonl \
 //     --manifests research/audit/wave0-a.pages.json,... [--apply] [--report out.json]
 //
+// `--verify` is the engine's GATE mode (the `judge-stamps` gate at 10-commit):
+// change nothing, exit 1 unless the frontmatter already carries every stamp the
+// ledger licenses — and no pass block the current verdicts contradict. At
+// closure `level-coverage --verify-current-context` has already passed, so an
+// item with NO current verdict here is a currency defect, never a normal case.
+// WHY A GATE: frontier-15 closed 398/398 pairs in the ledger while 0 of 398
+// items carried the stamp — no stage owned the stamping act, every closure gate
+// read the ledger, and the owner did the stamping by hand on the VPS
+// (2026-08-17). A `lane-rejected` item is the one honest skip: an adjudication
+// never manufactures a pass.
+//
 // Published-page audit A8 has one deliberately narrower route:
 //
 //   JUDGE_LINEUP=deepseek+terra node tools/apply-judge-stamps.mjs \
@@ -55,8 +66,10 @@ const manifestsArg = value('--manifests');
 const targetedReceiptPath = value('--audit-targeted-rejudges');
 const reportPath = value('--report');
 const apply = argv.includes('--apply');
-if (!ledgerPath || Boolean(manifestsArg) === Boolean(targetedReceiptPath)) {
-  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--apply] [--report <out.json>]');
+const verify = argv.includes('--verify');
+if (!ledgerPath || Boolean(manifestsArg) === Boolean(targetedReceiptPath)
+  || (verify && (apply || targetedReceiptPath))) {
+  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> [--verify] | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--apply] [--report <out.json>]');
   process.exit(2);
 }
 
@@ -163,15 +176,30 @@ const result = {
   at: today,
   ledger: ledgerPath,
   lanes: models,
-  mode: targetedReceiptPath ? 'published-audit-targeted-rejudge' : 'current-context',
+  mode: targetedReceiptPath ? 'published-audit-targeted-rejudge' : (verify ? 'verify' : 'current-context'),
   targeted_rejudge_receipt: targetedReceiptPath || null,
   stamped: [],
   skipped: [],
 };
 
+// The whole `  judge:` mapping under `verification:` — what writeBlock replaces
+// and what verify reads. Date-agnostic on purpose: a stamp's `date:` records
+// WHEN, not WHAT, so a verify run the day after the apply must not demand a
+// rewrite.
+const judgeBlockRe = /^ {2}judge:\n(?: {4}.*\n)*/m;
+const hasCurrentPassBlock = (text) => {
+  const m = text.match(judgeBlockRe);
+  return Boolean(m) && m[0].includes(`model: "${models.join(' + ')}"`) && m[0].includes('verdict: pass');
+};
+const problems = [];
+
 for (const id of ids) {
   const file = `items/${id}.md`;
-  if (!existsSync(file)) { result.skipped.push({ id, reason: 'no-item-file' }); continue; }
+  if (!existsSync(file)) {
+    result.skipped.push({ id, reason: 'no-item-file' });
+    problems.push(`${id}: no item file on disk`);
+    continue;
+  }
   const text = readFileSync(file, 'utf8');
   const target = targeted.get(id);
   if (target && attestedItemHash(text) !== target.item_sha256) {
@@ -187,9 +215,20 @@ for (const id of ids) {
   // readings of one rule was the defect judge-currency.mjs was written to end.
   // The audit-targeted route stays clause (a) only: its whole point is that the
   // Alpha-attested pair context and item hash are BOTH exact.
-  const now = target
-    ? { context: target.context_sha256, item: null }
-    : { context: contextHash(id), item: attestedItemHash(text) };
+  //
+  // The pair-context hash is LAZY: clause (b) needs no subprocess and, once a
+  // sweep records item_sha256, covers nearly every current verdict — so the
+  // per-item judge.mts spawn is paid only for the residue. Both passes go
+  // through the ONE shared predicate; the cheap pass hands it a context no row
+  // can match, so it is a sound subset of the full check, never a third
+  // reading of the rule.
+  const itemNow = target ? null : attestedItemHash(text);
+  let pairContext;
+  const isCurrent = (row) => verdictIsCurrent(row, { context: '', item: itemNow })
+    || verdictIsCurrent(row, {
+      context: pairContext ??= (target ? target.context_sha256 : contextHash(id)),
+      item: itemNow,
+    });
   // Grouped by context hash, as the gate does, so both lanes' verdicts come from
   // one judging of one pair rather than being assembled across two.
   const groups = new Map();
@@ -200,18 +239,35 @@ for (const id of ids) {
   }
   const eligible = [...groups.entries()].filter(([hash, byModel]) =>
     models.every((model) => byModel.has(model)
-      && verdictIsCurrent({ context_sha256: hash, item_sha256: byModel.get(model).item_sha256 }, now)));
+      && isCurrent({ context_sha256: hash, item_sha256: byModel.get(model).item_sha256 })));
   if (!eligible.length) {
     const seen = [...groups.values()].flatMap((byModel) => [...byModel.keys()]);
     result.skipped.push({ id, reason: 'no-current-verdict', models: models.filter((m) => !seen.includes(m)) });
+    problems.push(`${id}: no current paired verdict — at closure this is a currency defect, not a normal case`);
     continue;
   }
   const verdicts = models.map((model) => ({ model, row: eligible[eligible.length - 1][1].get(model) }));
   const rejecting = verdicts.filter((v) => v.row.keep === false).map((v) => v.model);
-  if (rejecting.length) { result.skipped.push({ id, reason: 'lane-rejected', models: rejecting }); continue; }
+  if (rejecting.length) {
+    // A rejection adjudicated nonfatal closes the LEDGER row, never the
+    // display: no pass block may sit on text a current lane rejected. Build
+    // route only — the audit-targeted route never strips what it did not
+    // target.
+    const stale = !target && judgeBlockRe.test(text);
+    if (stale && apply) writeFileSync(file, text.replace(judgeBlockRe, ''));
+    if (stale && verify) problems.push(`${id}: a judge block sits on an item whose current verdict is a rejection`);
+    result.skipped.push({ id, reason: 'lane-rejected', models: rejecting, ...(stale ? { stripped_stale_pass: apply } : {}) });
+    continue;
+  }
 
+  if (verify) {
+    const missing = !hasCurrentPassBlock(text);
+    if (missing) problems.push(`${id}: the ledger licenses a paired pass the frontmatter does not carry`);
+    result.stamped.push({ id, changed: missing });
+    continue;
+  }
   const auditEvidence = target
-    ? `    scope: published-audit-targeted\n    context_sha256: ${current}\n    item_sha256: ${target.item_sha256}\n`
+    ? `    scope: published-audit-targeted\n    context_sha256: ${target.context_sha256}\n    item_sha256: ${target.item_sha256}\n`
     : '';
   const block = `  judge:\n    model: "${models.join(' + ')}"\n    verdict: pass\n    date: ${today}\n${auditEvidence}`;
   const next = writeBlock(text, block);
@@ -222,6 +278,17 @@ for (const id of ids) {
 
 const byReason = {};
 for (const s of result.skipped) byReason[s.reason] = (byReason[s.reason] ?? 0) + 1;
+if (verify) {
+  const missing = result.stamped.filter((s) => s.changed).length;
+  console.log(`judge-stamps: ${ids.length} item(s) in scope — ${result.stamped.length - missing} stamped current, ${byReason['lane-rejected'] ?? 0} lane-rejected, ${problems.length} problem(s)`);
+  for (const p of problems) console.error(`ERROR ${p}`);
+  if (reportPath) {
+    result.problems = problems;
+    writeFileSync(reportPath, `${JSON.stringify(result, null, 1)}\n`);
+    console.log(`  report -> ${reportPath}`);
+  }
+  process.exit(problems.length ? 1 : 0);
+}
 console.log(`${apply ? 'APPLIED' : 'DRY RUN'} — lanes: ${models.join(' + ')}`);
 console.log(`  scope ${ids.length} | stamped ${result.stamped.length} | skipped ${result.skipped.length} ${JSON.stringify(byReason)}`);
 if (!apply) console.log('  (no file written; pass --apply to write)');

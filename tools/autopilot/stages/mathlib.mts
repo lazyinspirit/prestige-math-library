@@ -231,6 +231,16 @@ const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[]> = {
     '--touches', join(ctx.repo, touchesPath(ctx)),
     '--from', 'pre-author', '--to', latestSnapshotLabel(ctx),
     '--refresh-receipt', R(ctx, 'research', `${ctx.run}-impact.json`)],
+  // the paired ledger licenses stamps the frontmatter does not carry ->
+  // write them (and strip any pass block a current rejection contradicts).
+  // Stamping is a disk function of the ledger plus the current item text;
+  // the residue — an item no current verdict covers at closure — survives as
+  // the blocker. frontier-15 closed 398/398 in the ledger with 0 of 398
+  // items stamped, because no stage owned this act (owner, 2026-08-17).
+  'judge-stamps': (ctx) => ['tools/apply-judge-stamps.mjs',
+    '--ledger', R(ctx, 'research', `${ctx.run}-judge.jsonl`),
+    '--manifests', batches(ctx).map((b: any) => join(ctx.repo, 'research', `${ctx.run}-batch-${b}.pages.json`)).join(','),
+    '--apply', '--report', R(ctx, 'research', `${ctx.run}-judge-stamps.json`)],
   // a dirty tree at 10-commit means repairs landed after the close-out
   // commit: commit again. Idempotent; refuses any branch but main.
   'tree-clean': (ctx) => ['tools/run-commit.mjs', '--run', ctx.run],
@@ -1720,13 +1730,29 @@ export const stages = [
       // this is now the LAST stage: what "the level is closed" means is that
       // these pass on the exact tree the close-out commit captures.
       levelCoverageGate(ctx), closureGate(ctx),
+      // The ledger is closed by here; this gate is what carries the closure
+      // into the FRONTMATTER the reader and the publish path see. frontier-15
+      // ended with every closure gate green and 0 of 398 items stamped — the
+      // owner ran apply-judge-stamps by hand on the VPS (2026-08-17). Fails
+      // on a licensed stamp the item does not carry, a pass block a current
+      // rejection contradicts, and any item without a current paired verdict.
+      gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs',
+        '--ledger', `research/${ctx.run}-judge.jsonl`,
+        '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
+        '--verify'], {
+        liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' },
+      }),
       // Last, so the commit the gate verifies includes anything a repair
-      // round wrote (an obligation closure, a late disposition).
+      // round wrote (an obligation closure, a late disposition, the stamps).
       gate('tree-clean', ['node', 'tools/run-commit.mjs', '--run', ctx.run, '--check']),
     ],
-    maxFixRounds: 3,
+    // Two of these rounds are DESIGNED spends on a fresh run: the stamp
+    // round (judge-stamps writes frontmatter) and the commit round
+    // (tree-clean sweeps the stamps plus the close-commit's own result
+    // file). The remainder is headroom for real late dirt.
+    maxFixRounds: 4,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      if (failure.id === 'tree-clean') {
+      if (failure.id === 'tree-clean' || failure.id === 'judge-stamps') {
         const r = await mechanicalRepair({ ctx, failure });
         if (r.outcome === 'outage') return { outage: { reason: r.reason! } };
         return;

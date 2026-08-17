@@ -1152,9 +1152,20 @@ quota-locked lane is an outage on the obligation row's clock, and a row's
 acceptor, real reason); `report`-tier is surfaced, never blocking; due rows
 with a `dispatch` spec re-fire themselves. `10-commit`, the terminal stage,
 re-runs `level-coverage` and judge closure on the final tree, checks
-obligations, and commits on `main` via `tools/run-commit.mjs` (refuses any
-other branch, never touches a `status` field, no trailers). Push and publish
-remain owner acts.
+obligations, verifies the **frontmatter closure** (`judge-stamps`:
+`apply-judge-stamps --verify` fails on a ledger-licensed paired pass the item
+does not carry, a pass block a current rejection contradicts, or any item
+without a current paired verdict; its mechanical repair is `--apply`, and
+`lane-rejected` is the one honest skip — an adjudication never manufactures a
+pass), and commits on `main` via `tools/run-commit.mjs` (refuses any
+other branch, never touches a `status` field, no trailers). The stamp gate
+exists because frontier-15 closed 398/398 in the ledger with **0 of 398 items
+stamped** — no stage owned the act, and the owner ran the tool by hand at
+publish (2026-08-17), where it first refused the ledger (retired Terra rows
+under an exactly-two-lanes check) and then stamped nothing (clause-(a)-only
+currency; `judge-currency.mjs` now supplies the shared predicate, with the
+pair-context hash computed lazily only where the item-hash clause fails).
+Push and publish remain owner acts.
 
 ### 3.12 The published-page audit closures (owner, 2026-08-02)
 

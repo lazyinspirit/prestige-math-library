@@ -453,7 +453,13 @@ quota is an outage on the obligation row's clock, never a burnt round. After
 the report, **`10-commit`** — the terminal stage — re-runs the whole-level
 receipt and judge closure, checks `<run>-obligations.jsonl` (a `block`-tier
 row must be closed or owner-accepted on the record; `report`-tier rows are
-surfaced), and commits the working tree on `main` (`tools/run-commit.mjs`:
+surfaced), carries the judge closure into the frontmatter (the
+`judge-stamps` gate: `apply-judge-stamps --verify`, mechanically repaired by
+`--apply` — every ledger-licensed paired pass is written as
+`verification.judge`, a pass block a current rejection contradicts is
+stripped, and a `lane-rejected` item honestly publishes without a judge
+block; frontier-15 closed with 0 of 398 stamped because no stage owned this
+act), and commits the working tree on `main` (`tools/run-commit.mjs`:
 refuses any other branch, no worktrees, no trailers). **Push and
 `status: published` remain owner acts** — the pause is the publish decision,
 not an engine stop.

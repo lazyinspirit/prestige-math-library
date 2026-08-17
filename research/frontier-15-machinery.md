@@ -288,3 +288,42 @@ Entries appended as work lands. Format: what / commit / tests / docs.
   repair moves classification a round later and destabilizes tested behavior
   for a benefit observed exactly once (pause latency during a 1h sweep).
   Revisit if a future run shows group members starved behind a long repair.
+
+## 4. Post-publish finding — the run did not fully close (owner, 2026-08-17 evening)
+
+The owner had to stamp `verification.judge` by hand on the VPS: the engine
+finished 10-commit with every ledger-side gate green and **0 of 398 items
+carrying the stamp**. Three defects, one class — evidence in commit
+`7496b516` (the owner's publish) and its message:
+
+1. **No stage owned the stamping act.** Every closure gate
+   (`level-coverage --verify-current-context`, judge closure) reads the
+   LEDGER; nothing carried the paired passes into the frontmatter the
+   publish path and the reader-facing verification caption consume.
+   `grep -rn apply-judge-stamps tools/autopilot/ briefs/` returned nothing.
+2. **The tool refused the real ledger.** An exactly-two-lanes check made the
+   retired Terra rows a third lane; the lineup was also hardcoded
+   `deepseek+terra` while five sibling tools already resolved `JUDGE_LINEUP`
+   (owner fixed both in `7496b516`).
+3. **Clause-(a)-only currency stamped nothing.** Every step-9 repair moved a
+   pair context, so all 398 read as unjudged under the strict reading while
+   the receipt gate — on the shared `judge-currency.mjs` predicate — read
+   398/398 covered. The third divergent reading of one rule (owner fixed in
+   `7496b516`).
+
+**Built in response** (this commit): the `judge-stamps` gate at 10-commit
+(`apply-judge-stamps --verify`: exit 1 on a licensed stamp the item lacks, a
+pass block a current rejection contradicts, or an item with no current paired
+verdict — at closure that last is a currency defect, never a normal case) with
+its `MECHANICAL_REPAIRS` entry (`--apply --report <run>-judge-stamps.json`,
+stripping contradicted pass blocks; `lane-rejected` stays the one honest
+skip); `maxFixRounds` 3→4 (the stamp round joins the commit round as a
+designed spend); a lazy pair-context hash in the tool (clause (b) needs no
+subprocess — replaying the real ledger against the pre-flip tree `6ef8257a`
+reproduced the owner's receipt exactly, 286 pass / 112 lane-rejected / 0
+residue, with **zero** `judge.mts` spawns, where the eager form paid 398);
+and a fix for the `${current}` ReferenceError the `7496b516` rewrite left in
+the audit-targeted evidence block (the A8 route crashed on any eligible
+stamp; regression test added). Suite ends at **311/311**. Docs same-commit:
+ARCHITECTURE §3.11i, LEVELS §Full closure, UNATTENDED blocker table,
+AUDIT-WORKFLOW §tools, CLAUDE.md (39,728 chars, measured).
