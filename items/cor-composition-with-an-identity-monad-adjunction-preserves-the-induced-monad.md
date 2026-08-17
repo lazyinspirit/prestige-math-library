@@ -2,7 +2,7 @@
 id: cor-composition-with-an-identity-monad-adjunction-preserves-the-induced-monad
 kind: corollary
 title: "Composing with an adjunction that induces the identity monad on the nose does not change the induced monad"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

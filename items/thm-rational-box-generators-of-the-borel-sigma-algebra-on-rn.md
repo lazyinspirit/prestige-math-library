@@ -2,7 +2,7 @@
 id: thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn
 kind: theorem
 title: "For n at least one, open sets, closed sets, compact sets, open balls, boxes, rational open boxes, and rational half-open boxes generate the Borel sigma-algebra on R^n"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ short: "Borel generators on $\\mathbb R^n$"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

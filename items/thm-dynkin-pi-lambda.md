@@ -2,7 +2,7 @@
 id: thm-dynkin-pi-lambda
 kind: theorem
 title: "Dynkin's pi-lambda theorem"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ short: "Dynkin's $\\pi$-$\\lambda$ theorem"
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

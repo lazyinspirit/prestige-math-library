@@ -2,7 +2,7 @@
 id: fs-increasing-unions-of-monotone-classes-are-monotone-classes
 kind: false-statement
 title: "FALSE: the union of an increasing sequence of monotone classes is a monotone class"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

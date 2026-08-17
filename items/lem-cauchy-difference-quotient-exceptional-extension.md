@@ -2,7 +2,7 @@
 id: lem-cauchy-difference-quotient-exceptional-extension
 kind: lemma
 title: "The filled difference quotient is continuous at its exceptional point and holomorphic away from it"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

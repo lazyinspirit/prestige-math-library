@@ -2,7 +2,7 @@
 id: def-jacobi-symbol
 kind: definition
 title: "The Jacobi symbol, with its zero value and empty-product convention"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

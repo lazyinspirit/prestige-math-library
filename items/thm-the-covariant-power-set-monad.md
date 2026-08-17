@@ -2,7 +2,7 @@
 id: thm-the-covariant-power-set-monad
 kind: theorem
 title: "Singleton and union define the covariant power-set monad"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

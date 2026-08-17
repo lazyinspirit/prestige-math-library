@@ -2,7 +2,7 @@
 id: lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power
 kind: lemma
 title: "If $a$ is not a $p$th power in a characteristic-$p$ field, then $x^{p^n}-a$ is irreducible for every $n\\ge1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

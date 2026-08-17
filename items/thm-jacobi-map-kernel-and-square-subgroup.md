@@ -2,7 +2,7 @@
 id: thm-jacobi-map-kernel-and-square-subgroup
 kind: theorem
 title: "The kernel of the Jacobi map and the subgroup of unit squares"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -23,6 +23,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-degree-map-on-the-circle-is-a-homomorphism
 kind: theorem
 title: "$\\operatorname{Deg}:\\pi_1(S^1,[0])\\to(\\mathbb Z,+)$ is a group homomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

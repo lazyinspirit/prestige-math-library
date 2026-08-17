@@ -2,7 +2,7 @@
 id: thm-real-line-covers-real-line-mod-integers
 kind: theorem
 title: "$p:\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering map with translated interval sheets"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

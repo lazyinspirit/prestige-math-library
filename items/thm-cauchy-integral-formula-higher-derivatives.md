@@ -2,7 +2,7 @@
 id: thm-cauchy-integral-formula-higher-derivatives
 kind: theorem
 title: "All higher complex derivatives exist and satisfy Cauchy's integral formula on an interior circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

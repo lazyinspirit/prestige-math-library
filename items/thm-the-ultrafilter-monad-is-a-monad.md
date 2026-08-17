@@ -2,7 +2,7 @@
 id: thm-the-ultrafilter-monad-is-a-monad
 kind: theorem
 title: "The ultrafilter endofunctor with principal unit and flattening multiplication is a monad"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

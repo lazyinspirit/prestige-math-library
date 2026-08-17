@@ -2,7 +2,7 @@
 id: lem-the-principal-ultrafilter-and-ultrafilter-flattening-maps-are-natural
 kind: lemma
 title: "The principal-ultrafilter and ultrafilter-flattening formulas are well-defined and natural"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

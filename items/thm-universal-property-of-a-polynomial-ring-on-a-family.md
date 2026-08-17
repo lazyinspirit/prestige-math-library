@@ -2,7 +2,7 @@
 id: thm-universal-property-of-a-polynomial-ring-on-a-family
 kind: theorem
 title: "Universal property of a polynomial ring on an arbitrary family of indeterminates"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: def-purely-inseparable-extension
 kind: definition
 title: "Purely inseparable algebraic extensions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

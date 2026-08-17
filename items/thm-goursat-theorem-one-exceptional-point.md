@@ -2,7 +2,7 @@
 id: thm-goursat-theorem-one-exceptional-point
 kind: theorem
 title: "Goursat's triangle theorem remains valid for a continuous function holomorphic away from one point"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

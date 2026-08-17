@@ -2,7 +2,7 @@
 id: thm-one-step-algebraic-root-extension-is-algebraically-closed
 kind: theorem
 title: "An algebraic extension containing a root of every nonconstant base polynomial is algebraically closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

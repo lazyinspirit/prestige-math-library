@@ -2,7 +2,7 @@
 id: fs-right-noetherian-rings-are-left-noetherian
 kind: false-statement
 title: "False statement: every right Noetherian ring is left Noetherian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

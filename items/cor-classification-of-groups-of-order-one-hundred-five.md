@@ -2,7 +2,7 @@
 id: cor-classification-of-groups-of-order-one-hundred-five
 kind: corollary
 title: "There are exactly two isomorphism classes of groups of order $105$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

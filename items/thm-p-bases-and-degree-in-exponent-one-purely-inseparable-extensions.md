@@ -2,7 +2,7 @@
 id: thm-p-bases-and-degree-in-exponent-one-purely-inseparable-extensions
 kind: theorem
 title: "A minimal generating family in a finite exponent-one purely inseparable extension is a $p$-basis and gives degree $p^r$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

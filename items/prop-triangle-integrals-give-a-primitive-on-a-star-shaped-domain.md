@@ -2,7 +2,7 @@
 id: prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain
 kind: proposition
 title: "Vanishing integrals around triangles construct a primitive for a continuous function on a star-shaped domain"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

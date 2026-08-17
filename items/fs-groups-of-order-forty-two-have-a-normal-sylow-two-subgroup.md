@@ -2,7 +2,7 @@
 id: fs-groups-of-order-forty-two-have-a-normal-sylow-two-subgroup
 kind: false-statement
 title: "False statement: every group of order $42$ has a normal Sylow $2$-subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

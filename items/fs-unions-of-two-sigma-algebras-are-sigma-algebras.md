@@ -2,7 +2,7 @@
 id: fs-unions-of-two-sigma-algebras-are-sigma-algebras
 kind: false-statement
 title: "FALSE: the union of two sigma-algebras on one set is a sigma-algebra"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: counterexample
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

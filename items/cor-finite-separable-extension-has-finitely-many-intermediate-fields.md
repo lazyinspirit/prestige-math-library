@@ -2,7 +2,7 @@
 id: cor-finite-separable-extension-has-finitely-many-intermediate-fields
 kind: corollary
 title: "A finite separable extension has only finitely many intermediate fields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

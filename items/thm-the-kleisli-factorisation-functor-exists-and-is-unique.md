@@ -2,7 +2,7 @@
 id: thm-the-kleisli-factorisation-functor-exists-and-is-unique
 kind: theorem
 title: "The Kleisli factorisation functor for an adjunction inducing a monad exists and is unique"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

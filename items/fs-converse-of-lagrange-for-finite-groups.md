@@ -2,7 +2,7 @@
 id: fs-converse-of-lagrange-for-finite-groups
 kind: false-statement
 title: "False statement: every divisor of the order of a finite group occurs as a subgroup order"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

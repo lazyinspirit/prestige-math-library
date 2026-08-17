@@ -1,7 +1,7 @@
 ---
 page: quadratic-reciprocity-and-the-jacobi-symbol
 title: "Quadratic Reciprocity and the Jacobi Symbol"
-status: draft
+status: published
 items: [lem-gauss-lower-half-lattice-count,
         lem-reciprocity-rectangle-lattice-count,
         thm-quadratic-reciprocity,

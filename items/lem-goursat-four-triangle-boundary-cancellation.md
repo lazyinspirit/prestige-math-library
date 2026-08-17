@@ -2,7 +2,7 @@
 id: lem-goursat-four-triangle-boundary-cancellation
 kind: lemma
 title: "Midpoint subdivision of a triangle cancels every interior edge and preserves its outer boundary integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

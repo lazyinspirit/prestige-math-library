@@ -2,7 +2,7 @@
 id: ex-heisenberg-sylow-subgroup-of-the-upper-triangular-group
 kind: example
 title: "The finite Heisenberg group is the unique Sylow $p$-subgroup of its coordinate upper-triangular group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-product-of-two-fields-is-semisimple
 kind: example
 title: "A product of two fields is semisimple with two simple-module types"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

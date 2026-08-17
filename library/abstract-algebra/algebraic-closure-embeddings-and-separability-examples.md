@@ -1,7 +1,7 @@
 ---
 page: algebraic-closure-embeddings-and-separability-examples
 title: "Algebraic Closure, Embeddings, and Separability — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-algebraic-closure-of-the-rationals-and-real-algebraic-subfield,
            ex-algebraic-closure-of-a-finite-field,

@@ -2,7 +2,7 @@
 id: cor-frattini-subgroup-is-contained-in-the-fitting-subgroup
 kind: corollary
 title: "The Frattini subgroup is contained in the Fitting subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

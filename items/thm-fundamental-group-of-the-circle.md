@@ -2,7 +2,7 @@
 id: thm-fundamental-group-of-the-circle
 kind: theorem
 title: "$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

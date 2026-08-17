@@ -2,7 +2,7 @@
 id: thm-finite-normal-closures-exist-and-are-finite
 kind: theorem
 title: "The normal closure of a finite extension exists and is finite"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

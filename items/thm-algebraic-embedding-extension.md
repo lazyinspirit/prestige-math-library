@@ -2,7 +2,7 @@
 id: thm-algebraic-embedding-extension
 kind: theorem
 title: "Assuming Choice, a base-field embedding extends across every algebraic extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

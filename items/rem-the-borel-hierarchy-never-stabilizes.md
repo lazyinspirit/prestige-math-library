@@ -2,7 +2,7 @@
 id: rem-the-borel-hierarchy-never-stabilizes
 kind: remark
 title: "The Borel hierarchy on the real line never stabilizes at a countable stage"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -18,6 +18,11 @@ external_dependency:
   necessity: "The MT-1 companion refutes stabilization after a fixed finite number of alternations. Strictness of the Borel hierarchy is exactly the missing premise, and the companion page is a dependency leaf."
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

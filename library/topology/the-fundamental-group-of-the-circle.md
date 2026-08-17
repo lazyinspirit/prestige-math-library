@@ -1,7 +1,7 @@
 ---
 page: the-fundamental-group-of-the-circle
 title: "The Fundamental Group of the Circle"
-status: draft
+status: published
 items: [def-circle-as-real-line-mod-integers, rem-circle-quotient-model-agrees-with-published-examples,
         lem-open-quotient-arcs-in-real-line-mod-integers, thm-real-line-covers-real-line-mod-integers,
         prop-real-line-mod-integers-is-compact-and-path-connected, prop-real-line-mod-integers-is-hausdorff,

@@ -1,7 +1,7 @@
 ---
 page: sigma-algebras-and-borel-sets-examples
 title: "Sigma Algebras and Borel Sets — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-trivial-and-discrete-sigma-algebras,
            ex-countable-cocountable-sigma-algebra,

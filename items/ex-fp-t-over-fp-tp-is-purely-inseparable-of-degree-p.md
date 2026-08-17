@@ -2,7 +2,7 @@
 id: ex-fp-t-over-fp-tp-is-purely-inseparable-of-degree-p
 kind: example
 title: "$\\mathbb F_p(t)/\\mathbb F_p(t^p)$ is purely inseparable of degree $p$ and separable degree one"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

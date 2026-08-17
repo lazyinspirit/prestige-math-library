@@ -2,7 +2,7 @@
 id: thm-endomorphism-ring-of-a-finite-direct-sum-as-hom-matrices
 kind: theorem
 title: "Endomorphisms of a finite direct sum are matrices of Hom-groups"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

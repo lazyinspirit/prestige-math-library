@@ -2,7 +2,7 @@
 id: thm-groups-of-order-forty-five-are-abelian
 kind: theorem
 title: "Every group of order $45$ is abelian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

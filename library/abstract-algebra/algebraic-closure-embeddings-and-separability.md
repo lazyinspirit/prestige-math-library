@@ -1,7 +1,7 @@
 ---
 page: algebraic-closure-embeddings-and-separability
 title: "Algebraic Closure, Embeddings, and Separability"
-status: draft
+status: published
 items: [def-monomials-on-an-index-set,
         def-polynomial-ring-on-a-family-of-indeterminates,
         thm-polynomial-ring-on-a-family-is-a-commutative-ring,

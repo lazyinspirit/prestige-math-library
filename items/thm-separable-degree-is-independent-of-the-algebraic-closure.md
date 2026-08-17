@@ -2,7 +2,7 @@
 id: thm-separable-degree-is-independent-of-the-algebraic-closure
 kind: theorem
 title: "The separable degree is independent of the chosen algebraic closure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

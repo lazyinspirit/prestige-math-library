@@ -2,7 +2,7 @@
 id: cor-comonads-on-a-preorder-are-interior-operators
 kind: corollary
 title: "On a preorder the comonads are exactly the monotone contractive maps with Gp below G(Gp); on a poset they are exactly the interior operators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-a-paused-circle-loop-is-homotopic-to-the-standard-loop
 kind: example
 title: "A loop that traverses the circle once and then pauses is homotopic to the standard loop"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

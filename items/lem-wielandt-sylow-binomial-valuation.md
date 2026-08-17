@@ -2,7 +2,7 @@
 id: lem-wielandt-sylow-binomial-valuation
 kind: lemma
 title: "If $|G|=p^a m$ with $p\\nmid m$, then $v_p\\binom{p^a m}{p^a}=0$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

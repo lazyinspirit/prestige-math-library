@@ -2,7 +2,7 @@
 id: lem-gauss-lower-half-lattice-count
 kind: lemma
 title: "Gauss's lemma as a lower-half lattice-point count"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

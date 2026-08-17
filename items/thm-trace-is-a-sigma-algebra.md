@@ -2,7 +2,7 @@
 id: thm-trace-is-a-sigma-algebra
 kind: theorem
 title: "The trace of a sigma-algebra is a sigma-algebra on the traced subset"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

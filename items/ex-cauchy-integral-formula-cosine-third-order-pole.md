@@ -2,7 +2,7 @@
 id: ex-cauchy-integral-formula-cosine-third-order-pole
 kind: example
 title: 'The circle integral of $\cos z/(z-1)^3$ over $|z|=2$ is $-\pi i\cos 1$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -18,6 +18,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

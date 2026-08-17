@@ -2,7 +2,7 @@
 id: ex-the-ultrafilter-monad-on-a-finite-set
 kind: example
 title: "On finite sets the ultrafilter monad is naturally isomorphic to the identity; assuming the ultrafilter lemma, its unit is not invertible on the natural numbers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

@@ -2,7 +2,7 @@
 id: thm-composition-series-iff-noetherian-and-artinian
 kind: theorem
 title: "A module has a composition series if and only if it is Noetherian and Artinian, the converse using dependent choice"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

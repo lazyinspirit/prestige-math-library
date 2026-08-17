@@ -2,7 +2,7 @@
 id: def-coeilenberg-moore-category
 kind: definition
 title: "Co-Eilenberg–Moore category of a comonad"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -12,6 +12,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

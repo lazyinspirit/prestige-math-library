@@ -2,7 +2,7 @@
 id: thm-the-inclusion-of-a-reflective-subcategory-is-monadic
 kind: theorem
 title: "The inclusion of a reflective full subcategory is monadic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

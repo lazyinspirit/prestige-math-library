@@ -2,7 +2,7 @@
 id: ex-groups-of-order-thirty
 kind: example
 title: "The four isomorphism types of groups of order $30$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

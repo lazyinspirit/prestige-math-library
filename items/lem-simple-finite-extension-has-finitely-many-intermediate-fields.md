@@ -2,7 +2,7 @@
 id: lem-simple-finite-extension-has-finitely-many-intermediate-fields
 kind: lemma
 title: "A simple finite extension has only finitely many intermediate fields"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-socle-is-the-largest-semisimple-submodule
 kind: theorem
 title: "Under Choice, the socle is the largest semisimple submodule"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

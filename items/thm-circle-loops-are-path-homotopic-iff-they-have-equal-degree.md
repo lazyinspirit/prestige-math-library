@@ -2,7 +2,7 @@
 id: thm-circle-loops-are-path-homotopic-iff-they-have-equal-degree
 kind: theorem
 title: "Two based circle loops are path-homotopic if and only if they have equal degree"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

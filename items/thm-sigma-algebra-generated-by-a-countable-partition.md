@@ -2,7 +2,7 @@
 id: thm-sigma-algebra-generated-by-a-countable-partition
 kind: theorem
 title: "A countable partition generates exactly the unions of its blocks, and the resulting sigma-algebra is countable exactly for a finite partition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "Sigma-algebra of a partition"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

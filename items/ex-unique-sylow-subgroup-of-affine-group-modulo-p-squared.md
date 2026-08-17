@@ -2,7 +2,7 @@
 id: ex-unique-sylow-subgroup-of-affine-group-modulo-p-squared
 kind: example
 title: "The unique Sylow $p$-subgroup of $\\operatorname{Aff}(\\mathbb Z/p^2)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-space-over-an-infinite-field-is-not-a-finite-union-of-proper-subspaces
 kind: lemma
 title: "A finite-dimensional vector space over an infinite field is not a finite union of proper subspaces"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

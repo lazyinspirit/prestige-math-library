@@ -2,7 +2,7 @@
 id: cor-cauchy-theorem-star-shaped-domain
 kind: corollary
 title: "Cauchy's theorem on a star-shaped domain: every closed rectifiable contour integral of a holomorphic function is zero"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

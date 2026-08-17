@@ -2,7 +2,7 @@
 id: cex-holomorphic-function-on-an-annulus-with-nonzero-closed-contour-integral
 kind: counterexample
 title: "A holomorphic function on an annulus can have a nonzero closed-contour integral"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

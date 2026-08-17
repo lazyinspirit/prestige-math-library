@@ -2,7 +2,7 @@
 id: thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle
 kind: theorem
 title: "$[t]\\mapsto(\\cos 2\\pi t,\\sin 2\\pi t)$ is a homeomorphism from $\\mathbb R/\\mathbb Z$ to the unit circle"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

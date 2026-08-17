@@ -2,7 +2,7 @@
 id: thm-equivalent-characterisations-of-an-idempotent-monad
 kind: theorem
 title: "For a monad, invertibility of multiplication, monicity of every multiplication component, and equality of the two whiskered units are equivalent"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

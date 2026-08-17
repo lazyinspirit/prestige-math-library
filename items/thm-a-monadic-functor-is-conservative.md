@@ -2,7 +2,7 @@
 id: thm-a-monadic-functor-is-conservative
 kind: theorem
 title: "Every monadic functor is conservative"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

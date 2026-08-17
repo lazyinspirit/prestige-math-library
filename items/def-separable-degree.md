@@ -2,7 +2,7 @@
 id: def-separable-degree
 kind: definition
 title: "The separable degree $[K:F]_s$ as a count of embeddings into an algebraic closure"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: thm-infinite-sigma-algebra-has-continuum-many-members
 kind: theorem
 title: "Assuming countable choice, every infinite sigma-algebra contains a copy of the power set of the natural numbers"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ short: "$\\mathcal P(\\mathbb N)\\hookrightarrow\\mathcal A$"
 proof_strategy: constructive
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

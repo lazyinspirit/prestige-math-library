@@ -2,7 +2,7 @@
 id: thm-groups-of-order-thirty-have-a-normal-sylow-subgroup
 kind: theorem
 title: "Every group of order $30$ has normal Sylow $3$- and $5$-subgroups and is not simple"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

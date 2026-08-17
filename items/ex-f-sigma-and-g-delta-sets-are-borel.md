@@ -2,7 +2,7 @@
 id: ex-f-sigma-and-g-delta-sets-are-borel
 kind: example
 title: "F-sigma and G-delta subsets of the real line are Borel"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

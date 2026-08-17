@@ -2,7 +2,7 @@
 id: lem-distinct-normal-sylow-subgroups-commute
 kind: lemma
 title: "Distinct normal Sylow subgroups centralize one another"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

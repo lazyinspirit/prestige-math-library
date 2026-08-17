@@ -2,7 +2,7 @@
 id: thm-monads-on-a-preorder-are-exactly-closure-operators
 kind: theorem
 title: "On a preorder the monads are exactly the monotone extensive maps with T(Tp) below Tp; on a poset they are exactly the closure operators"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

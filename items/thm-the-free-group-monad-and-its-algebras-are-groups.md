@@ -2,7 +2,7 @@
 id: thm-the-free-group-monad-and-its-algebras-are-groups
 kind: theorem
 title: "The free-group monad has groups as its Eilenberg–Moore algebras"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

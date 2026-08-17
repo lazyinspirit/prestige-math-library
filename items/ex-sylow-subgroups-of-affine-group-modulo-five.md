@@ -2,7 +2,7 @@
 id: ex-sylow-subgroups-of-affine-group-modulo-five
 kind: example
 title: "Sylow subgroups of $\\operatorname{Aff}(\\mathbb Z/5)$: $n_2=5$ and $n_5=1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

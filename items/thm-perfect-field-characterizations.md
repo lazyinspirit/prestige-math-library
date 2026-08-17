@@ -2,7 +2,7 @@
 id: thm-perfect-field-characterizations
 kind: theorem
 title: "A field is perfect exactly when it has characteristic zero or its Frobenius map is surjective"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

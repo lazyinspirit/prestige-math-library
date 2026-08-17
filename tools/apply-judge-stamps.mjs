@@ -46,6 +46,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { tsxLoader } from './paths.mjs';
 import { itemHashJudge } from './item-hash.mjs';
+import { verdictIsCurrent } from './judge-currency.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -107,27 +108,37 @@ const ids = manifestsArg
   })();
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
-const models = [...new Set(rows.map((r) => r.model))].sort();
-if (models.length !== 2) {
-  console.error(`expected exactly two judge lanes in ${ledgerPath}, found: ${models.join(', ') || 'none'}`);
-  process.exit(2);
-}
-// The targeted-rejudge path must stamp only a lineup the wave actually ran, and
-// that lineup is configuration rather than a constant. Resolve it the way
-// judge.mts, judge-sweep.mjs and
-// level-coverage.mjs already do, so one env var stays the single source of truth
-// and a future lane change cannot desynchronise this file again.
+// The lineup this tool stamps for is configuration, not a constant. Resolve it
+// the way judge.mts, judge-sweep.mjs, judge-compare.mjs and level-coverage.mjs
+// already do, so one env var stays the single source of truth and a future lane
+// change cannot desynchronise this file again. It had drifted: only
+// deepseek+terra existed here after the owner moved the build to
+// deepseek+sonnet (2026-08-17), so the current lineup could not be stamped at
+// all.
 const LINEUPS = Object.freeze({
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
+  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+terra';
+const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+sonnet';
 const expected = LINEUPS[lineupName];
 if (!expected) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(', ')}; got ${lineupName}`);
   process.exit(2);
 }
-if (targetedReceiptPath && JSON.stringify(models) !== JSON.stringify([...expected].sort())) {
-  console.error(`audit targeted rejudge stamps require the ${lineupName} lanes (${expected.join(', ')}); found: ${models.join(', ')}`);
+// A ledger a retired lane also wrote into is the normal case, not an error: rows
+// from a retired lineup stay append-only evidence and never satisfy current
+// coverage (CLAUDE.md §"Paired skeptical judges"). Stamp from the lineup's own
+// two lanes and ignore every other lane's rows; a lane the ledger never wrote at
+// all is still a hard error, since then nothing here judged anything.
+const models = [...expected];
+const ledgerLanes = new Set(rows.map((r) => r.model));
+const absent = models.filter((m) => !ledgerLanes.has(m));
+if (absent.length) {
+  console.error(`${ledgerPath} carries no rows for the ${lineupName} lane(s): ${absent.join(', ')}`);
+  process.exit(2);
+}
+if (targetedReceiptPath && [...ledgerLanes].some((m) => !models.includes(m))) {
+  console.error(`audit targeted rejudge stamps require the ${lineupName} lanes (${expected.join(', ')}); found: ${[...ledgerLanes].sort().join(', ')}`);
   process.exit(2);
 }
 
@@ -167,13 +178,35 @@ for (const id of ids) {
     result.skipped.push({ id, reason: 'item-hash-changed-since-targeted-rejudge' });
     continue;
   }
-  const current = target ? target.context_sha256 : contextHash(id);
-  const verdicts = models.map((model) => ({
-    model,
-    row: [...rows].reverse().find((r) => r.id === id && r.model === model && r.context_sha256 === current && typeof r.keep === 'boolean'),
-  }));
-  const missing = verdicts.filter((v) => !v.row).map((v) => v.model);
-  if (missing.length) { result.skipped.push({ id, reason: 'no-current-verdict', models: missing }); continue; }
+  // Currency is tools/judge-currency.mjs, the predicate level-coverage.mjs and
+  // judge-sweep.mjs already share: a verdict is current against the CURRENT pair
+  // context, or against byte-identical text of that item (owner, 2026-08-06).
+  // This tool read clause (a) alone, so on a level where any step-9 repair moved
+  // a page's pair context every untouched page-mate stamped as unjudged — 0 of
+  // 398 on frontier-15, while the receipt gate read all 398 as covered. Three
+  // readings of one rule was the defect judge-currency.mjs was written to end.
+  // The audit-targeted route stays clause (a) only: its whole point is that the
+  // Alpha-attested pair context and item hash are BOTH exact.
+  const now = target
+    ? { context: target.context_sha256, item: null }
+    : { context: contextHash(id), item: attestedItemHash(text) };
+  // Grouped by context hash, as the gate does, so both lanes' verdicts come from
+  // one judging of one pair rather than being assembled across two.
+  const groups = new Map();
+  for (const r of rows) {
+    if (r.id !== id || !models.includes(r.model) || typeof r.keep !== 'boolean') continue;
+    if (!groups.has(r.context_sha256)) groups.set(r.context_sha256, new Map());
+    groups.get(r.context_sha256).set(r.model, r);   // later row wins, as before
+  }
+  const eligible = [...groups.entries()].filter(([hash, byModel]) =>
+    models.every((model) => byModel.has(model)
+      && verdictIsCurrent({ context_sha256: hash, item_sha256: byModel.get(model).item_sha256 }, now)));
+  if (!eligible.length) {
+    const seen = [...groups.values()].flatMap((byModel) => [...byModel.keys()]);
+    result.skipped.push({ id, reason: 'no-current-verdict', models: models.filter((m) => !seen.includes(m)) });
+    continue;
+  }
+  const verdicts = models.map((model) => ({ model, row: eligible[eligible.length - 1][1].get(model) }));
   const rejecting = verdicts.filter((v) => v.row.keep === false).map((v) => v.model);
   if (rejecting.length) { result.skipped.push({ id, reason: 'lane-rejected', models: rejecting }); continue; }
 

@@ -2,7 +2,7 @@
 id: thm-separable-degree-is-the-degree-of-the-separable-closure
 kind: theorem
 title: "For a finite extension, $[K:F]_s=[K_s:F]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

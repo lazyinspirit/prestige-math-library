@@ -1,7 +1,7 @@
 ---
 page: the-fundamental-group-of-the-circle-examples
 title: "The Fundamental Group of the Circle — Examples"
-status: draft
+status: published
 items: []
 examples: [cex-unit-length-interval-need-not-embed-in-real-line-mod-integers,
            ex-a-paused-circle-loop-is-homotopic-to-the-standard-loop,

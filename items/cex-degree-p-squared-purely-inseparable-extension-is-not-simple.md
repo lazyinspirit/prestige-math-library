@@ -2,7 +2,7 @@
 id: cex-degree-p-squared-purely-inseparable-extension-is-not-simple
 kind: counterexample
 title: "$\\mathbb F_p(s,t)/\\mathbb F_p(s^p,t^p)$ has degree $p^2$, infinitely many intermediate fields, and no primitive element"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

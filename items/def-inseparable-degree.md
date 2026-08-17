@@ -2,7 +2,7 @@
 id: def-inseparable-degree
 kind: definition
 title: "The inseparable degree $[K:F]_i=[K:F]/[K:F]_s$ of a finite extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

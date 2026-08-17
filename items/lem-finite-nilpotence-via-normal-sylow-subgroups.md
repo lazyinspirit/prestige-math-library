@@ -2,7 +2,7 @@
 id: lem-finite-nilpotence-via-normal-sylow-subgroups
 kind: lemma
 title: "A finite group is nilpotent if and only if all Sylow subgroups are normal, if and only if it is their internal direct product"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

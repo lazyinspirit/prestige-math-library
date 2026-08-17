@@ -2,7 +2,7 @@
 id: prop-endomorphisms-form-a-ring
 kind: proposition
 title: "Module endomorphisms form a ring under pointwise addition and composition"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -15,6 +15,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

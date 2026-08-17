@@ -2,7 +2,7 @@
 id: ex-finite-partition-sigma-algebra
 kind: example
 title: "A partition into k nonempty blocks generates a sigma-algebra with 2^k members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

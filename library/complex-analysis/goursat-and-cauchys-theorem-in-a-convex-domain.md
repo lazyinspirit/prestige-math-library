@@ -1,7 +1,7 @@
 ---
 page: goursat-and-cauchys-theorem-in-a-convex-domain
 title: "Goursat's Theorem and Cauchy's Theorem in a Convex Domain"
-status: draft
+status: published
 items: [def-oriented-complex-triangle-and-boundary, rem-plane-star-shaped-and-convex-dictionary, lem-goursat-four-triangle-boundary-cancellation, lem-goursat-nested-triangle-selection, thm-goursat-triangle-theorem, cor-goursat-rectangle-theorem, thm-goursat-theorem-one-exceptional-point, prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain, thm-holomorphic-primitive-on-star-shaped-domain, cor-cauchy-theorem-star-shaped-domain, cor-cauchy-theorem-convex-domain, thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain, lem-cauchy-difference-quotient-exceptional-extension, thm-cauchy-integral-formula-circle, lem-differentiating-cauchy-integrals, thm-cauchy-integral-formula-higher-derivatives, cor-cauchy-inequalities]
 examples: []
 ---

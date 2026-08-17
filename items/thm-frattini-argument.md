@@ -2,7 +2,7 @@
 id: thm-frattini-argument
 kind: theorem
 title: "Frattini argument: if $N\\trianglelefteq G$ and $P$ is Sylow in $N$, then $G=N N_G(P)$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

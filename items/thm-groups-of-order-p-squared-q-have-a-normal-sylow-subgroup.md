@@ -2,7 +2,7 @@
 id: thm-groups-of-order-p-squared-q-have-a-normal-sylow-subgroup
 kind: theorem
 title: "Every group of order $p^2q$ for distinct primes has a normal Sylow subgroup"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

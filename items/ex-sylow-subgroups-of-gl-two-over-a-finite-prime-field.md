@@ -2,7 +2,7 @@
 id: ex-sylow-subgroups-of-gl-two-over-a-finite-prime-field
 kind: example
 title: "Sylow $p$-subgroups of $\\operatorname{Aut}((\\mathbb Z/p)^2)$: $n_p=p+1$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

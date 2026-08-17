@@ -2,7 +2,7 @@
 id: cex-an-algebra-that-is-not-free
 kind: counterexample
 title: "A two-element idempotent monoid is an algebra for the free-monoid monad but is not free"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

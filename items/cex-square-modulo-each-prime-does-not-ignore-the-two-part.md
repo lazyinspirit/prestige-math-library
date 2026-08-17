@@ -2,7 +2,7 @@
 id: cex-square-modulo-each-prime-does-not-ignore-the-two-part
 kind: counterexample
 title: "Odd-prime tests alone miss the obstruction to $13$ being a square modulo $24$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

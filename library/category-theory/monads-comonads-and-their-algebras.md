@@ -1,7 +1,7 @@
 ---
 page: monads-comonads-and-their-algebras
 title: "Monads Comonads and Their Algebras"
-status: draft
+status: published
 items: [def-monad,
         rem-a-monad-is-a-monoid-in-the-endofunctor-category-only-when-that-category-exists,
         def-comonad,

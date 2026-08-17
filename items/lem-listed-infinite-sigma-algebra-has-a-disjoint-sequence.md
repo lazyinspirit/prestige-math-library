@@ -2,7 +2,7 @@
 id: lem-listed-infinite-sigma-algebra-has-a-disjoint-sequence
 kind: lemma
 title: "A sigma-algebra with a listed infinite subfamily contains a disjoint sequence of nonempty members"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

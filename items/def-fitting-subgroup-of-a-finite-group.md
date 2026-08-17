@@ -2,7 +2,7 @@
 id: def-fitting-subgroup-of-a-finite-group
 kind: definition
 title: "The Fitting subgroup $F(G)=\\prod_p O_p(G)$ of a finite group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

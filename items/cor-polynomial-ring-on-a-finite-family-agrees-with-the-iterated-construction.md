@@ -2,7 +2,7 @@
 id: cor-polynomial-ring-on-a-finite-family-agrees-with-the-iterated-construction
 kind: corollary
 title: "A polynomial ring on a finite ordered family agrees canonically with the iterated polynomial-ring construction"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: induction
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

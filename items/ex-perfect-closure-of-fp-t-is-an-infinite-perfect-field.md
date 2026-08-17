@@ -2,7 +2,7 @@
 id: ex-perfect-closure-of-fp-t-is-an-infinite-perfect-field
 kind: example
 title: "$\\bigcup_{n\\ge0}\\mathbb F_p(t^{1/p^n})$ is an infinite perfect field of characteristic $p$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

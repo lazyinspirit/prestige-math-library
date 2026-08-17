@@ -2,7 +2,7 @@
 id: ex-square-roots-modulo-an-odd-prime-power
 kind: example
 title: "Lifting both square roots of $2$ from modulo $7$ to modulo $7^4$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

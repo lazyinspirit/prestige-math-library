@@ -1,7 +1,7 @@
 ---
 page: quadratic-reciprocity-and-the-jacobi-symbol-examples
 title: "Quadratic Reciprocity and the Jacobi Symbol — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-complete-reciprocity-table-for-small-odd-primes,
            ex-jacobi-symbol-by-the-euclidean-algorithm,

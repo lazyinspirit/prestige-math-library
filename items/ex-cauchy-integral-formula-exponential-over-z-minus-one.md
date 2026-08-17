@@ -2,7 +2,7 @@
 id: ex-cauchy-integral-formula-exponential-over-z-minus-one
 kind: example
 title: 'The circle integral of $e^z/(z-1)$ over $|z|=2$ is $2\pi i e$'
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: fs-every-continuous-self-map-of-the-circle-is-nullhomotopic
 kind: false-statement
 title: "FALSE: every continuous self-map of the circle is nullhomotopic"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: cor-degree-descends-to-circle-loop-classes
 kind: corollary
 title: "Degree defines a function $\\operatorname{Deg}:\\pi_1(S^1,[0])\\to\\mathbb Z$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

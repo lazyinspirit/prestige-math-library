@@ -2,7 +2,7 @@
 id: thm-one-step-simultaneous-root-extension
 kind: theorem
 title: "Assuming Choice, every field has an algebraic extension containing roots of all nonconstant base polynomials"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,11 @@ landmark: true
 proof_strategy: constructive
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

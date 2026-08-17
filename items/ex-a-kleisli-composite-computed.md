@@ -2,7 +2,7 @@
 id: ex-a-kleisli-composite-computed
 kind: example
 title: "A Kleisli composite for the list monad computed by substitution and concatenation"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -17,6 +17,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

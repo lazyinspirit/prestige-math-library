@@ -2,7 +2,7 @@
 id: def-separable-closure-in-an-algebraic-extension
 kind: definition
 title: "The separable closure of the base inside an algebraic extension"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

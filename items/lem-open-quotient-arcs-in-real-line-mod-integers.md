@@ -2,7 +2,7 @@
 id: lem-open-quotient-arcs-in-real-line-mod-integers
 kind: lemma
 title: "The quotient map is open, and every interval shorter than one embeds in $\\mathbb R/\\mathbb Z$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

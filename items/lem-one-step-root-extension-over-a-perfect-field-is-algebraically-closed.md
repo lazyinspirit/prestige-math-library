@@ -2,7 +2,7 @@
 id: lem-one-step-root-extension-over-a-perfect-field-is-algebraically-closed
 kind: lemma
 title: "The one-step root condition makes an algebraic extension of a perfect field algebraically closed"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

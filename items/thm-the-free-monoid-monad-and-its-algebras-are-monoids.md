@@ -2,7 +2,7 @@
 id: thm-the-free-monoid-monad-and-its-algebras-are-monoids
 kind: theorem
 title: "The free-monoid monad has monoids as its Eilenberg–Moore algebras"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

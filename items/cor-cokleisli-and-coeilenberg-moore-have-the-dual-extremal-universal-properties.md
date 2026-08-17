@@ -2,7 +2,7 @@
 id: cor-cokleisli-and-coeilenberg-moore-have-the-dual-extremal-universal-properties
 kind: corollary
 title: "Co-Kleisli and co-Eilenberg–Moore adjunctions have the dual extremal universal properties"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: lem-nonsingular-square-root-lift-modulo-odd-prime-powers
 kind: lemma
 title: "A nonsingular square root lifts uniquely by one odd-prime-power step"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -15,6 +15,11 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

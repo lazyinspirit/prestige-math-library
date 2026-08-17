@@ -2,7 +2,7 @@
 id: fs-countably-infinite-sigma-algebras-exist
 kind: false-statement
 title: "FALSE: a countably infinite sigma-algebra exists"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

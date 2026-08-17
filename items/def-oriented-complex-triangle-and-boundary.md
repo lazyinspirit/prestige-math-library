@@ -2,7 +2,7 @@
 id: def-oriented-complex-triangle-and-boundary
 kind: definition
 title: "Filled complex triangles, their oriented three-edge boundary contours, diameter, and perimeter"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,7 @@ aliases: []
 landmark: true
 verification:
   precheck: n/a
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

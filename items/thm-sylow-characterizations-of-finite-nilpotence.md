@@ -2,7 +2,7 @@
 id: thm-sylow-characterizations-of-finite-nilpotence
 kind: theorem
 title: "Sylow and maximal-subgroup characterizations of finite nilpotence"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

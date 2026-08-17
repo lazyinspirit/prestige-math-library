@@ -2,7 +2,7 @@
 id: thm-seven-generators-of-the-borel-sigma-algebra-on-r
 kind: theorem
 title: "Seven generating families for the Borel sigma-algebra on the real line"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ short: "Borel generators on $\\mathbb R$"
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

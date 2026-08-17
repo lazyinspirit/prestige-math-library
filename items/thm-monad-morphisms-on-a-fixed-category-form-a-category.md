@@ -2,7 +2,7 @@
 id: thm-monad-morphisms-on-a-fixed-category-form-a-category
 kind: theorem
 title: "Whenever the endofunctor category exists, monads on a fixed category and their morphisms form a category"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

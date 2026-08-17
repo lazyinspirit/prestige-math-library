@@ -2,7 +2,7 @@
 id: def-frattini-subgroup-of-a-finite-group
 kind: definition
 title: "The Frattini subgroup $\\Phi(G)$ as the intersection of the maximal subgroups of a finite group"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

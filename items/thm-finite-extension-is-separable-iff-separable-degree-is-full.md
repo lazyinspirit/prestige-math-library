@@ -2,7 +2,7 @@
 id: thm-finite-extension-is-separable-iff-separable-degree-is-full
 kind: theorem
 title: "A finite extension is separable if and only if $[K:F]_s=[K:F]$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -14,6 +14,7 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

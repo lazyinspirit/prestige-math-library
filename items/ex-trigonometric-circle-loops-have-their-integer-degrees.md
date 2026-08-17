@@ -2,7 +2,7 @@
 id: ex-trigonometric-circle-loops-have-their-integer-degrees
 kind: example
 title: "The geometric loops $t\\mapsto(\\cos 2\\pi nt,\\sin 2\\pi nt)$ have degree $n$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

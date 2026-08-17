@@ -2,7 +2,7 @@
 id: ex-sylow-data-for-groups-of-order-at-most-fifteen
 kind: example
 title: "Sylow data for finite groups of order at most $15$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -14,6 +14,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references:

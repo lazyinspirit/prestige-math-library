@@ -2,7 +2,7 @@
 id: ex-infinite-binary-product-ring-is-not-noetherian
 kind: example
 title: "The ring $(\\mathbb Z/2)^{\\mathbb N}$ is not Noetherian"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,7 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

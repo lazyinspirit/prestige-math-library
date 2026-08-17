@@ -2,7 +2,7 @@
 id: ex-complete-reciprocity-table-for-small-odd-primes
 kind: example
 title: "A complete reciprocity table for $3,5,7,11$"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-generated
@@ -16,6 +16,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references: []

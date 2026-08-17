@@ -2,7 +2,7 @@
 id: cor-algebras-for-a-closure-operator-monad-are-its-fixed-points
 kind: corollary
 title: "Algebras for a preorder monad are exactly its fixed objects up to preorder equivalence; on a poset they are its fixed points"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered
@@ -13,6 +13,11 @@ landmark: false
 proof_strategy: direct
 verification:
   precheck: pass
+  judge:
+    model: "deepseek-v4-pro + claude-sonnet-5"
+    verdict: pass
+    date: 2026-08-17
+  audited: 2026-08-17
 sources:
   scraped: []
   references:
