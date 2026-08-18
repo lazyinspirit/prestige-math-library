@@ -23,6 +23,16 @@ part: 1                  # 1-based position in the series
 Body: markdown with `$...$` / `$$...$$` math and `[[item-id]]` / `[[item-id|label]]` wikilinks.
 Free-form `##` sections. A series part ends by posing the next part's question.
 
+Animated figures: a bare fence with an empty body embeds a named animation,
+
+    ```anim rectangle-squeeze
+    ```
+
+The names map to client components in the app repo
+(`web/components/library/articles/anims.tsx`, `ARTICLE_ANIMS`); currently
+`rectangle-squeeze`, `darboux-sums`, `disc-between-graphs`. An unknown name
+renders nothing, so naming an animation before it is built is safe.
+
 ## Editorial rules (these are the point)
 
 1. **One purpose per article, stated in `purpose`, and short.** An article that needs two

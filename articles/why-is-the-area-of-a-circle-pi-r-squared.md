@@ -25,15 +25,24 @@ Four requirements pin the concept down without any formulas at all:
 
 These four already force the familiar rules. A $3 \times 2$ rectangle is six unit squares, so its area is $6$. Chopping squares into strips forces base times height for every rectangle with rational sides, and requirements 1 and 4 together make area monotone: a region carries no more area than any region containing it. Now take a rectangle with irrational sides $b$ and $h$. Every rational rectangle placed inside it has area less than $bh$, every rational rectangle enclosing it has area greater than $bh$, and both can be chosen with area as close to $bh$ as you like. The rectangle's own area sits between every such pair, so it differs from $bh$ by less than any positive amount. Only $bh$ is left.
 
+```anim rectangle-squeeze
+```
+
 The same squeeze works on curved shapes. Fill a region from inside with rectangles and cover it from outside with slightly more; if the inner total and the outer total close in on one common value, then by the same argument as before, that value is the only area the four requirements permit.
 
 ## From rectangles to graphs
 
 The integral is this squeeze run systematically. Take the region under the graph of a continuous function $f \ge 0$ on $[a,b]$: chop $[a,b]$ into strips, and on each strip stand two rectangles, the tallest that fits under the graph and the shortest that covers it. On each strip the tallest inner rectangle has height $\min f$ and the shortest covering one $\max f$, so the two rectangle totals are precisely the lower and upper sums of the [[def-darboux-integral|Darboux integral]]. The rectangle squeeze is the definition of integration. For a continuous function the two totals do meet at a single value ([[thm-continuous-implies-integrable|continuous functions are integrable]]), written $\int_a^b f(x)\,dx$, and that value is the one area the four requirements allow the region under the graph to carry.
 
+```anim darboux-sums
+```
+
 ## The library's definition
 
 The library builds area on exactly this. [[def-riemann-area-between-continuous-graphs|Riemann area between two continuous graphs]] defines, for continuous functions $g \le f$ on $[a,b]$, the area between their graphs as $\int_a^b (f(x) - g(x))\,dx$: above each base point $x$ the region has height $f(x) - g(x)$, and the definition runs the squeeze on that height. The disc qualifies: the closed disc of radius $r$ is exactly the region trapped between $y = -\sqrt{r^2 - x^2}$ and $y = +\sqrt{r^2 - x^2}$.
+
+```anim disc-between-graphs
+```
 
 The definition is honest about its scope. It assigns an area to regions between continuous graphs and stays silent about arbitrary sets of points in the plane. Whether *every* set can be given an area is a genuinely deep question, and this hole reaches it in a later part.
 
