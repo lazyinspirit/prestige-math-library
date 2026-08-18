@@ -10,7 +10,7 @@ seriesTitle: "Why is the area of a circle πr²?"
 part: 1
 ---
 
-Everyone meets the formula at about age ten: the area of a circle is $\pi r^2$. Ask why it is true and the question turns out to be harder than it looks, because before anything can be proved, every word in it needs a meaning. What exactly is a circle? What is $\pi$? And the quiet one, the word doing the most work: what is *area*?
+Everyone meets the formula at about age ten: the area of a circle is $\pi r^2$. Ask why it is true and the question turns out to be harder than it looks, because before anything can be proved, every word in it needs a meaning. What exactly is a circle? What is $\pi$? What is area?
 
 ## What is area?
 
@@ -39,12 +39,12 @@ The integral is this squeeze run systematically. Take the region under the graph
 
 ## The library's definition
 
-The library builds area on exactly this. [[def-riemann-area-between-continuous-graphs|Riemann area between two continuous graphs]] defines, for continuous functions $g \le f$ on $[a,b]$, the area between their graphs as $\int_a^b (f(x) - g(x))\,dx$: above each base point $x$ the region has height $f(x) - g(x)$, and the definition runs the squeeze on that height. The disc qualifies: the closed disc of radius $r$ is exactly the region trapped between $y = -\sqrt{r^2 - x^2}$ and $y = +\sqrt{r^2 - x^2}$.
+The library builds area on this. [[def-riemann-area-between-continuous-graphs|Riemann area between two continuous graphs]] defines, for continuous functions $g \le f$ on $[a,b]$, the area between their graphs as $\int_a^b (f(x) - g(x))\,dx$: above each base point $x$ the region has height $f(x) - g(x)$, and the definition runs the squeeze on that height. The disc qualifies: the closed disc of radius $r$ is exactly the region trapped between $y = -\sqrt{r^2 - x^2}$ and $y = +\sqrt{r^2 - x^2}$.
 
 ```anim disc-between-graphs
 ```
 
-The definition is honest about its scope. It assigns an area to regions between continuous graphs and stays silent about arbitrary sets of points in the plane. Whether *every* set can be given an area is a genuinely deep question, and this hole reaches it in a later part.
+The definition is honest about its scope. It assigns an area to regions between continuous graphs and stays silent about arbitrary sets of points in the plane. Whether *every* set can be given an area is a deep question; this hole reaches it in a later part.
 
 With area defined, the claim in the title finally means something, and the library proves it: [[thm-disc-area-is-pi-r-squared]] states that the disc of radius $r$ has Riemann area $\pi r^2$. You could go and read the proof right now.
 

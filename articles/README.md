@@ -29,9 +29,11 @@ Animated figures: a bare fence with an empty body embeds a named animation,
     ```
 
 The names map to client components in the app repo
-(`web/components/library/articles/anims.tsx`, `ARTICLE_ANIMS`); currently
-`rectangle-squeeze`, `darboux-sums`, `disc-between-graphs`. An unknown name
-renders nothing, so naming an animation before it is built is safe.
+(components in `web/components/library/articles/anims.tsx`, name map in the
+rabbit-holes route); currently `rectangle-squeeze`, `darboux-sums`,
+`disc-between-graphs`, `cosine-first-zero`. An unknown name renders nothing,
+so naming an animation before it is built is safe. Figures carry no visible
+captions; the article text does the explaining.
 
 ## Editorial rules (these are the point)
 
