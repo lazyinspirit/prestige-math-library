@@ -32,7 +32,7 @@ The names map to client components in the app repo
 (components in `web/components/library/articles/anims.tsx`, name map in the
 rabbit-holes route); currently `rectangle-squeeze`, `darboux-sums`,
 `disc-between-graphs`, `cosine-first-zero`, `inscribed-polyline`, `koch-length`,
-`archimedes-polygons`. An unknown name renders nothing,
+`archimedes-polygons`, `rationals-no-content`. An unknown name renders nothing,
 so naming an animation before it is built is safe. Figures carry no visible
 captions; the article text does the explaining.
 
