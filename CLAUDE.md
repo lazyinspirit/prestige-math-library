@@ -21,6 +21,7 @@ This repo is the **public math library** served at
 | `WORKFLOW.md` | end-to-end runbook, prompt to publish; serving over SSH |
 | `README.md` | provenance, judge lineup, citation rules |
 | `briefs/` | the actual subagent prompt text |
+| `articles/README.md` | the "Rabbit holes" narrative articles: format, editorial rules, `tools/articlecheck.mts` gate. NOT governed by SCHEMA.md |
 
 The subject-specific doc wins over `WORKFLOW.md` where they differ. No driver
 ever publishes: step 10 / A10 is the sole owner pause.
