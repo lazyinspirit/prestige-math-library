@@ -1,8 +1,8 @@
 ---
 slug: what-is-pi-actually
 title: "What is π, actually?"
-status: draft
-date: null
+status: published
+date: "2026-08-19"
 description: "The school definition of π assumes two things nobody proved. The library defines π with no circle in it, then earns the circle back."
 purpose: "Define π without presupposing circles, and recover circumference over diameter as a theorem."
 series: circle-area

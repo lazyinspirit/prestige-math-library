@@ -1,8 +1,8 @@
 ---
 slug: why-is-the-area-of-a-circle-pi-r-squared
 title: "Why is the area of a circle πr²?"
-status: draft
-date: null
+status: published
+date: "2026-08-19"
 description: "The familiar formula only means something once area itself is defined. Three axioms pin it down, and the integral makes them precise."
 purpose: "Show that area needs a definition before the formula can be true, and hand the reader the library's definition."
 series: circle-area

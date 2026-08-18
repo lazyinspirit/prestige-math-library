@@ -1,8 +1,8 @@
 ---
 slug: how-deep-does-the-hole-go
 title: "How deep does the hole go?"
-status: draft
-date: null
+status: published
+date: "2026-08-19"
 description: "The squeeze that defines area has a proved boundary: a set of points with no area at all, and past it a road the library records but has not yet built."
 purpose: "Mark the exact boundary of the series' definition of area: a proved set the squeeze cannot trap, and the measure-theory road recorded past it."
 series: circle-area

@@ -1,8 +1,8 @@
 ---
 slug: where-does-pi-r-squared-come-from
 title: "Where does πr² come from?"
-status: draft
-date: null
+status: published
+date: "2026-08-19"
 description: "The proof itself: two substitutions reduce the disc to an integral, the r² falls out as pure scaling, and π enters through the limits."
 purpose: "Walk the actual proof of the disc-area theorem and show exactly where π and r² each enter."
 series: circle-area

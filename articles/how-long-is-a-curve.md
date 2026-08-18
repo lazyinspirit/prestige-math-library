@@ -1,8 +1,8 @@
 ---
 slug: how-long-is-a-curve
 title: "How long is a curve?"
-status: draft
-date: null
+status: published
+date: "2026-08-19"
 description: "Length is defined by inscribed straight segments, and the definition can refuse: some curves have no length. The circle has one, and it is 2πr."
 purpose: "Define arc length, show some curves have none, and prove the circle earns its circumference."
 series: circle-area
