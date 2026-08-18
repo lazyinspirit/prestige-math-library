@@ -490,7 +490,10 @@ A brief follows the same prose rules as a page summary (§6 above): it describes
 the mathematics, counts nothing, ranks nothing, and claims nothing about what
 other pages contain. `prosecheck.mjs` reads these bodies with the rest.
 
-A category with no pathway file renders one part per computed dependency level,
+Every category carries one except `not-proved-here`, the ‡ tier, which records
+results the library does not prove and therefore has no reading order to write
+(owner, 2026-08-18); `pathcheck` exempts it rather than warning every run. A
+category with no pathway file renders one part per computed dependency level,
 unnamed and unbriefed, so a new category is never broken by the absence of one.
 `tools/pathway-sync.mjs`, which runs at step 10 of the per-level build, places
 each new page in the part its prerequisites allow and reports the briefs that

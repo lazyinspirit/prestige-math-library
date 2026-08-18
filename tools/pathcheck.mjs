@@ -39,6 +39,12 @@
 
 import { categories, loadCorpus, readPathway } from './pathway-lib.mjs';
 
+// Categories that are DELIBERATELY without a pathway (owner, 2026-08-18). The ‡
+// tier is a register of results the library states and does not prove, so it
+// has no reading order to write: its pages are read when something else cites
+// them. Warning about it every run would be permanent noise.
+const NO_PATHWAY = new Set(['not-proved-here']);
+
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
 const quiet = argv.includes('--quiet');
@@ -63,7 +69,7 @@ for (const cat of categories().filter((c) => !only.size || only.has(c))) {
 
   const pw = readPathway(cat);
   if (!pw) {
-    if (aPages.length)
+    if (aPages.length && !NO_PATHWAY.has(cat))
       warn('pathway-missing', `${cat}: ${aPages.length} published pages and no _pathway.md (the group renders dependency levels instead)`);
     continue;
   }

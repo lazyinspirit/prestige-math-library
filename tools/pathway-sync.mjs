@@ -29,6 +29,10 @@ import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { REPO, categories, loadCorpus, readPathway, pathwayPath } from './pathway-lib.mjs';
 
+// Kept in step with pathcheck's list: the ‡ tier has no reading order to write,
+// so it is not owed a pathway file and must not be reported as one.
+const NO_PATHWAY = new Set(['not-proved-here']);
+
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
 const dryRun = argv.includes('--dry-run');
@@ -52,7 +56,7 @@ for (const cat of categories()) {
   if (!aPages.length) continue;
 
   const pw = readPathway(cat);
-  if (!pw) { owed.push({ category: cat, pages: aPages.length }); continue; }
+  if (!pw) { if (!NO_PATHWAY.has(cat)) owed.push({ category: cat, pages: aPages.length }); continue; }
   if (pw.error || !pw.parts.length) { stuck.push({ category: cat, reason: pw.error ?? 'no parts' }); continue; }
 
   const partOf = new Map();
