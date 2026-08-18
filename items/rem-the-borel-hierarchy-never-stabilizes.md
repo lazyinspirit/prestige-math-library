@@ -18,17 +18,16 @@ external_dependency:
   necessity: "The MT-1 companion refutes stabilization after a fixed finite number of alternations. Strictness of the Borel hierarchy is exactly the missing premise, and the companion page is a dependency leaf."
 verification:
   precheck: n/a
-  judge:
-    model: "deepseek-v4-pro + claude-sonnet-5"
-    verdict: pass
-    date: 2026-08-17
-  audited: 2026-08-17
+  sources_checked:
+    date: 2026-08-18
+    scope: citations
+    by: session-audit
 sources:
   scraped: []
   references:
     - title: "D. Marker, Descriptive Set Theory, Section 2, Corollary 2.38"
       url: "https://homepages.math.uic.edu/~marker/math512/dst.pdf"
-    - title: "M. Christ, Math 202B Lecture 1, Comment on the Borel hierarchy"
+    - title: "M. Christ, Math 202B (UCB, Spring 2014), Topic 1: Product Measures, comment on the Borel hierarchy"
       url: "https://math.berkeley.edu/~mchrist/Math202B/Lectures/L1.pdf"
 pipeline_run: null
 ---
