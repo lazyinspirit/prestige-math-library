@@ -319,6 +319,39 @@ can declare dozens of forward references while `depsource` reports
 `planned-later 0`. This caused a false "zero forward references" claim at
 level 9.
 
+### 3.9a `pathcheck.mjs` and `pathway-sync.mjs` — the category reading order
+
+**Which failure it prevents.** A category page renders an authored course
+pathway: named parts, each with a written brief, each listing its pages
+(`library/<cat>/_pathway.md`, SCHEMA §6.1). Nothing about authored prose keeps
+it covering a corpus that gains pages every level, so without a gate the
+pathway silently stops describing the library and a reader is handed a reading
+order with holes in it.
+
+`pathcheck.mjs` is the gate. Hard errors: `part-page-missing`,
+`part-page-foreign`, `part-page-companion`, `part-page-dup`, `page-unplaced`,
+`part-empty`, `part-brief-missing`, `brief-orphan`, `part-order`,
+`pathway-unparsable`. Warnings: `part-singleton`, `draft-unplaced`,
+`brief-long`, `pathway-missing`. `part-order` is the load-bearing one: a page
+must sit in the part of its last prerequisite or later, computed from the same
+page relation the site renders, so the written order and the dependency order
+cannot disagree.
+
+`pathway-sync.mjs` is what keeps the gate cheap to satisfy. It runs at step 10,
+in stage `10-report` ahead of the report Alpha, and places every unplaced page
+in its LEGAL WINDOW: no earlier than the part of its last prerequisite, no later
+than the part of the first page resting on it, choosing inside that window the
+part where most of its neighbours already live. Measured against a hand-written
+pathway, that heuristic reproduces the author's own placement. It never reorders
+parts, never creates one, and never edits a brief: the receipt
+`research/<run>-pathway.json` names the pages placed and the briefs that gained
+material, and the step-10 report is where the owner is asked for the sentences.
+Drafts are placed too, because a level publishes after the owner audit and a
+sync that waited for `published` would place nothing.
+
+Shared reading lives in `tools/pathway-lib.mjs`, so the tool that places a page
+and the tool that checks the placement cannot drift apart.
+
 ### 3.10 Proof contracts, finite smoke, and risk routing
 
 **Which failure it prevents.** A proof reads as licensed because every step

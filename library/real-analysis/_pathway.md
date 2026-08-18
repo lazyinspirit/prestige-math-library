@@ -1,0 +1,186 @@
+---
+category: real-analysis
+status: published
+parts:
+  - part: building-the-reals
+    title: "Building the real numbers"
+    pages:
+      - construction-of-r-via-cauchy-sequences
+      - construction-of-r-via-dedekind-cuts
+      - foundations-of-the-real-numbers
+  - part: order-and-countability
+    title: "Order, suprema and countability"
+    pages:
+      - suprema-and-infima
+      - roots-and-rational-powers
+      - countability-and-uncountability
+  - part: sequences-and-completeness
+    title: "Sequences and completeness"
+    pages:
+      - sequences-and-limits
+      - monotone-sequences-and-cauchy-completeness
+      - limsup-and-subsequential-limits
+      - formal-laurent-series-field
+      - equivalent-forms-of-completeness
+  - part: series
+    title: "Series"
+    pages:
+      - series-and-nonnegative-tests
+      - absolute-convergence-and-rearrangement
+  - part: topology-of-the-line
+    title: "Topology of the line"
+    pages:
+      - topology-of-r
+      - cantor-set-baire-and-measure-zero
+  - part: limits-and-continuity
+    title: "Limits and continuity"
+    pages:
+      - limits-of-real-functions
+      - continuity-ivt-evt-and-uniform-continuity
+      - monotone-functions-and-discontinuities
+  - part: differentiation
+    title: "Differentiation"
+    pages:
+      - the-derivative-and-mean-value-theorems
+      - darboux-lhopital-and-taylor
+      - convexity
+  - part: the-riemann-integral
+    title: "The Riemann integral"
+    pages:
+      - the-riemann-integral
+      - properties-of-the-integral-and-the-working-ftc
+      - improper-integrals
+      - bounded-variation-and-riemann-stieltjes
+  - part: sequences-of-functions
+    title: "Sequences of functions and power series"
+    pages:
+      - uniform-convergence-of-functions
+      - approximation-and-compactness-in-ck
+      - power-series-and-real-analytic-functions
+  - part: classical-functions
+    title: "The classical functions"
+    pages:
+      - the-exponential-function
+      - the-logarithm-and-general-powers
+      - sine-cosine-and-the-definition-of-pi
+      - fundamental-trigonometric-identities
+      - further-trigonometric-identities-and-inverses
+      - the-integral-logarithm-and-its-characterisations
+  - part: several-variables
+    title: "Several variables"
+    pages:
+      - rn-as-a-normed-space
+      - the-total-derivative
+      - mixed-partials-taylor-and-extrema
+      - inverse-and-implicit-function-theorems
+      - the-riemann-integral-in-rn-and-jordan-content
+      - fubini-and-change-of-variables
+  - part: curves-and-the-fundamental-theorems
+    title: "Curves and the fundamental theorems"
+    pages:
+      - arc-length-and-rectifiable-curves
+      - the-fundamental-theorems-of-calculus
+      - line-integrals-and-the-gradient-theorem
+      - pi-the-equivalent-characterizations
+      - the-complex-exponential-and-eulers-formula
+---
+
+## building-the-reals
+
+Analysis needs a field where every bounded set has a least upper bound, and the rationals are not
+one. Two constructions supply it, one by Cauchy sequences of rationals and one by Dedekind cuts,
+and both arrive at a totally ordered field with the least upper bound property. The axioms are then
+stated on their own, so the rest of the subject can quote them without carrying either
+construction.
+
+## order-and-countability
+
+The supremum is how completeness gets used, so it is worth the epsilon characterisations and the
+behaviour under inclusion, translation, scaling and sums. Roots and rational powers are the first
+things completeness produces that the rationals cannot. Countability separates the sets that can be
+listed from those that cannot, and it is what makes the line uncountable.
+
+## sequences-and-completeness
+
+A sequence converges when its terms eventually stay within any prescribed distance of a limit, and
+the theorems that follow are the working tools of the subject: the algebra of limits, monotone
+convergence, Bolzano-Weierstrass, and the equivalence of convergence with the Cauchy condition.
+Upper and lower limits give every bounded sequence a pair of limits, whether or not it converges.
+The formal Laurent series field is Cauchy complete without having the least upper bound property,
+which is why the two forms of completeness are proved equivalent rather than assumed to be the same.
+
+## series
+
+A series is the limit of its partial sums, so every test is a theorem about sequences. Comparison,
+condensation, ratio, root and integral tests settle the nonnegative case, where convergence is a
+question about growth. Absolute convergence is then separated from conditional convergence, and the
+separation is sharp: rearranging a conditionally convergent series changes what it sums to.
+
+## topology-of-the-line
+
+Open, closed, compact and connected sets let the theorems about functions be stated about the sets
+they act on rather than about intervals. Compactness is proved in the form used later, and
+connectedness is what makes the intermediate value theorem an argument about sets. The Cantor set,
+Baire category and measure zero give two ways for a set to be small, and they do not agree.
+
+## limits-and-continuity
+
+Continuity is defined for a function on a subset of the line, then made usable by the sequential
+criterion, the algebra of continuous functions, and the description by preimages of open sets. The
+theorems continuity exists for follow: the intermediate value theorem, the extreme value theorem,
+the image of a compact set, and uniform continuity where the domain forces it. Monotone functions
+close the part, with a full description of the sets on which a function can fail to be continuous.
+
+## differentiation
+
+The derivative is a limit of difference quotients, and the mean value theorems are what turn local
+information about it into global statements about the function. Rolle, the mean value theorem and
+its Cauchy form come first, then Darboux's theorem, L'Hopital's rule and Taylor's theorem with
+remainder. Convexity is characterised by the three slope inequality, and through it by monotonicity
+of the derivative and the sign of the second derivative.
+
+## the-riemann-integral
+
+The integral is built from upper and lower Darboux sums, and integrability is the statement that the
+two meet. The criterion is proved and the standard classes of integrable function established, then
+the linearity, additivity and order properties, and the form of the fundamental theorem that
+ordinary calculation uses. Improper integrals extend the definition past bounded functions and
+bounded intervals, and integration against a function of bounded variation extends it in the other
+direction.
+
+## sequences-of-functions
+
+Pointwise convergence of functions preserves neither continuity nor the integral, and uniform
+convergence is the hypothesis that repairs both. It is set up with the supremum metric, then applied
+in the space of continuous functions on a compact set, where Arzela-Ascoli describes the compact
+families and Stone-Weierstrass the dense subalgebras. Power series are the case where uniform
+convergence is available on every compact subset of the disc of convergence, which is what makes
+term by term differentiation legitimate.
+
+## classical-functions
+
+The exponential, the logarithm, the sine and the cosine are defined by their power series, so every
+identity about them is proved rather than read off a picture. The exponential yields its addition
+law, its derivative and its range, and pi is defined from the zeros of the cosine rather than from
+geometry. The trigonometric identities, the inverse functions and the integral form of the logarithm
+follow, and the characterisations that an informal treatment takes as definitions are shown to
+describe the same functions.
+
+## several-variables
+
+Calculus in several variables begins with the norm, because that is what turns the earlier limit
+arguments into arguments in Rⁿ. The total derivative is the linear map that approximates a function
+near a point, and from it come the chain rule, the equality of mixed partials, Taylor's formula and
+the classification of extrema. The inverse and implicit function theorems say when a system can be
+solved locally, and the Riemann integral over Jordan measurable sets, with Fubini and the change of
+variables formula, is how integration follows.
+
+## curves-and-the-fundamental-theorems
+
+A path has a length when its inscribed polygons have a bounded supremum, which is bounded variation
+read geometrically, and the classical functions are what make the standard curves available. The
+fundamental theorems are proved here in their sharp forms, with the exceptional sets, the
+one-sided derivatives and the hypotheses for differentiating under the integral sign stated
+explicitly. Line integrals and the gradient theorem carry the same idea into Rⁿ, the equivalent
+characterisations of pi are shown to agree, and the complex exponential ties the exponential and the
+trigonometric functions together.

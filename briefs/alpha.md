@@ -508,6 +508,13 @@ Nothing you write flips `status`; that is the owner's alone.
    id/file, defect type, location and exact disposition. Reconcile duplicates
    across reports without losing an affected id. Exclude mechanical and
    30-second edits.
+10. The **course-pathway receipt**, `research/<run>-pathway.json`, written by
+    `tools/pathway-sync.mjs` before you run: the pages it placed and the part
+    each landed in, the parts whose briefs now cover material they do not
+    mention, and any category with published pages and no `_pathway.md`. The
+    sync never writes prose, so a brief that gained a page needs a sentence from
+    the owner, and this pause is the only place to ask for it. Name the pages,
+    not a count.
 
 **Fatal defects are fixed, not listed**, unless outside your write boundary or
 requiring an owner decision.

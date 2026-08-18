@@ -110,6 +110,12 @@ const repoWide = (ctx) => [
   // always-green gate is noise, not checking — readers run it by hand.)
   gate('prosecheck', ['node', 'tools/prosecheck.mjs']),
   gate('depsource', ['node', 'tools/depsource.mjs']),
+  // The category pages render an AUTHORED reading order (library/<cat>/_pathway.md),
+  // so nothing mechanical keeps it covering the corpus as levels land. This is
+  // that guarantee: a published page in no part fails here. `pathway-sync` runs
+  // in stage 10-report, ahead of the report Alpha, so the usual case is already
+  // repaired by the time this reads it.
+  gate('pathcheck', ['node', 'tools/pathcheck.mjs']),
   // Scope loss is invisible to every gate that reads current state, and the
   // add/delete authority briefs/alpha.md grants runs through step 9 — so the
   // step-0 scope ledger is re-checked at every repo-wide gate point, not only
@@ -1617,6 +1623,18 @@ export const stages = [
       job: 'bookkeeping-mechanical',
       covers: [],
       argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step9'],
+    }, {
+      // Puts this level's pages into their category pathway, in the earliest
+      // part their prerequisites allow, and writes research/<run>-pathway.json.
+      // It never edits a brief: the report Alpha reads the receipt and asks the
+      // owner for the sentences the new pages need. Runs BEFORE the report so
+      // the report can quote it, and before this stage's `pathcheck` gate so a
+      // level does not close with a page missing from its reading order.
+      role: 'tool',
+      label: 'pathway-sync',
+      job: 'bookkeeping-mechanical',
+      covers: [],
+      argv: ['node', 'tools/pathway-sync.mjs', '--run', ctx.run],
     }, {
       role: 'alpha',
       label: 'step10-report',

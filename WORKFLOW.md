@@ -867,6 +867,11 @@ directory directly.
    not a silent skip.
 2. Set the owner-audit date (`verification.audited`) on every item. This is the
    gate.
+2a. Check the page sits in its category's course pathway:
+   `node tools/pathcheck.mjs <category>`. A published page in no part is a hard
+   error there. `tools/pathway-sync.mjs` places it, in the part its
+   prerequisites allow; the brief it lands under is prose, so if the part now
+   covers something its brief does not mention, write the sentence.
 3. Record the judge outcome honestly. Items the judge genuinely passed get
    `judge: { verdict: pass }`. Items published on owner audit over a verified
    judge false-positive are recorded as `audited` without a fabricated judge

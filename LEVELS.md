@@ -999,6 +999,16 @@ required re-grep or re-audit caused by a repair.
 
 ## Step 10 — Final rundown and sole owner pause
 
+`tools/pathway-sync.mjs` runs first, mechanically, in the `10-report` stage. It
+places every page of this level into its category's course pathway
+(`library/<cat>/_pathway.md`, SCHEMA §6.1) in the earliest part its
+prerequisites allow, and writes `research/<run>-pathway.json`. It never edits a
+brief. The rundown reports what it placed, the parts whose briefs now cover
+material they do not mention, and any category still owed a pathway file; the
+brief sentences are an owner decision, and this pause is where they are asked
+for. `pathcheck` then runs as a repo-wide gate, so a level cannot close with a
+published page missing from its reading order.
+
 Full report: added/deleted in-flight results; forward references present; paired
 judge coverage counted from the ledger and frontmatter on disk; DeepSeek/Sonnet
 agreement, model-only findings, and the owner-adjudicated fatal logic and

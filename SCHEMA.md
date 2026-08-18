@@ -10,6 +10,7 @@ changes require a version bump here and a migration note.
 items/<id>.md                       # one atomic item per file (the content)
 library/<cat>/[<subcat>/]<page>.md  # page composition files (the reading surface)
 library/.../_category.md            # category metadata
+library/<cat>/_pathway.md           # the category's course pathway (§6.1)
 ```
 
 Items live in ONE flat global pool, NOT under categories — an item (e.g.
@@ -445,6 +446,57 @@ README; a page renders publicly only if page `status: published` AND every
 listed item is `published` (a draft item on a published page is a broken page
 — the renderer refuses, listing offenders, rather than skipping silently).
 
+### 6.1 Category pathway files (`library/<cat>/_pathway.md`)
+
+A category page renders a COURSE PATHWAY: named parts in reading order, each
+with a written brief, each listing its A pages. It replaced a dependency
+flowchart of the whole group, which at 83 pages could not be read.
+
+```yaml
+---
+category: real-analysis
+status: published            # draft hides it from the public mirror, same gate as a page
+parts:
+  - part: building-the-reals            # stable slug; the body section joins on it
+    title: "Building the real numbers"
+    pages: [construction-of-r-via-cauchy-sequences, foundations-of-the-real-numbers]
+  - part: order-and-countability
+    title: "Order, suprema and countability"
+    pages: [suprema-and-infima, roots-and-rational-powers]
+---
+
+## building-the-reals
+
+The brief. Markdown, may carry `[[wikilinks]]` and KaTeX.
+
+## order-and-countability
+
+...
+```
+
+Rules, all enforced by `node tools/pathcheck.mjs`:
+
+* A part lists **A pages only**. A `-examples` companion rides with its A page
+  and is never placed on its own.
+* Every published page of the category sits in **exactly one** part.
+* Every part has a `## <part-slug>` brief, and every brief names a part.
+* **Order.** Everything a page rests on inside its own category sits in its part
+  or an earlier one. A part list, never a level number, is what a brief is
+  anchored to: a level is the longest prerequisite chain in the group, so
+  inserting one page renumbers everything above it, and a brief written against
+  a number would go quietly wrong on the next build.
+
+A brief follows the same prose rules as a page summary (§6 above): it describes
+the mathematics, counts nothing, ranks nothing, and claims nothing about what
+other pages contain. `prosecheck.mjs` reads these bodies with the rest.
+
+A category with no pathway file renders one part per computed dependency level,
+unnamed and unbriefed, so a new category is never broken by the absence of one.
+`tools/pathway-sync.mjs`, which runs at step 10 of the per-level build, places
+each new page in the part its prerequisites allow and reports the briefs that
+gained material, so the file keeps covering the corpus without a human
+remembering to open it.
+
 ## 7. Acyclicity (the no-circular-reasoning guarantee)
 
 Run `node tools/depcheck.mjs` from the repo root. It is the mechanical gate for
@@ -476,7 +528,7 @@ match; all `deps` + wikilinks resolve; precheck `pass` (or legitimately `n/a`);
 url+license; every `sources.references` entry has title + a working url;
 share-alike sources (CC BY-SA / GFDL) present ⇒ attribution renders.
 
-The gate is **eight tools**, run from the repo root; all must be clean before
+The gate is **nine tools**, run from the repo root; all must be clean before
 anything is published. `ARCHITECTURE.md` §3 documents every error code:
 
 ```
@@ -489,11 +541,12 @@ node tools/rendercheck.mjs   # delimiters, a REAL KaTeX parse, and a REAL YAML p
                              # frontmatter block; defects visible only when rendered
 node tools/validate-plan.mjs research/plan-spec.json   # the scaffold; TAKES THE SPEC PATH
 node tools/depsource.mjs     # where each dep lives; only `unresolved` fails
+node tools/pathcheck.mjs     # every published page sits in its category pathway, in a legal part
 ```
 
 `citecheck` is warning-only and its output is to be TRIAGED, never merely
 counted; the surviving false positives are documented in its own header.
-`depsource` fails only on `unresolved`. The other six exit non-zero on failure
+`depsource` fails only on `unresolved`. The other seven exit non-zero on failure
 and are hard gates.
 
 For a future authored level, run the additional scoped controls after authoring

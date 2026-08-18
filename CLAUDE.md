@@ -47,6 +47,10 @@ ever publishes: step 10 / A10 is the sole owner pause.
    judges").
 5. **Owner audit** gates `status: published` (set `verification.audited`).
    Flipping status is the publish action — the live site reads this directory.
+   A NEW CATEGORY also needs `library/<cat>/_pathway.md`, the parts and briefs
+   its category page reads (SCHEMA §6.1); until it exists the group renders bare
+   dependency levels. `node tools/pathcheck.mjs` is the gate, and
+   `tools/pathway-sync.mjs` (step 10) places each new page in it.
 6. **Commit + push** (`main`, conventional-commit style; the engine's
    `10-commit` stage commits the run's tree on `main` itself — push stays an
    owner act). NO Co-Authored-By
