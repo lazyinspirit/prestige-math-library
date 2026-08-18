@@ -21,11 +21,6 @@ and the adjoint. The collection closes on eigenvalues and the characteristic
 polynomial, the minimal polynomial and diagonalisability, generalised
 eigenspaces, triangularisation and Jordan canonical form.
 
-It is written for a reader who wants these facts proved rather than asserted.
-Every proof is given in full, stratified into numbered phases so that each step
-names what it stands on, and audited before publication. It assumes the field
-axioms and the elementary ring theory of Abstract Algebra.
-
 The multivariable calculus of Real Analysis is the nearest consumer, since the
 total derivative is a linear map and the change of variables factor is a
 determinant. Measure theory reserves the determinant and elimination pages for

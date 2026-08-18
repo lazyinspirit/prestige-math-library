@@ -21,11 +21,6 @@ theorems follow. Function space topologies, Ascoli-Arzela and Stone-Weierstrass
 carry it into spaces of maps, and homotopy, the fundamental group and covering
 spaces open the algebraic side.
 
-It is written for a reader who wants the argument rather than the statement.
-Each proof is given in full, stratified into numbered phases so that every step
-names what it rests on, and audited before publication. It assumes the set
-theory and choice principles of Foundations.
-
 Much of the mathematics still to be built rests on it. Measure theory takes
 compactness, the Euclidean topology, Urysohn and Tietze, partitions of unity and
 the countability axioms. Functional analysis takes compactness, nets and filters

@@ -23,11 +23,6 @@ the five colour theorem. Finite probability spaces close the collection, where
 expectation is a finite sum and the probabilistic method turns a positive
 probability into an existence proof.
 
-It is for a reader who wants each counting argument written out as a proof.
-Every proof is given in full, stratified into numbered phases so that each step
-names what it rests on, and audited before publication. It assumes the finite
-set theory and induction of Foundations.
-
 The probability track begins here: it proves that a measure of total mass one
 agrees with the finite probability spaces and random variables established here,
 rather than replacing them. The Euclidean topology page of the topology track

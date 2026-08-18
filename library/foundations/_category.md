@@ -18,11 +18,6 @@ transfinite recursion licenses definition by stages, and ordinal arithmetic,
 cardinals, cardinal arithmetic, cofinality and the alephs measure the sizes the
 library goes on to compare.
 
-It is written for a reader who wants to see the machinery rather than be told it
-exists. Each proof is given in full, stratified into numbered phases so that
-every step names what it rests on, and audited before it is published. No
-background is assumed beyond a willingness to read a formal argument.
-
 Every other collection here rests on this one, and several rest on named pages
 of it. The construction of the real numbers is a set-theoretic construction.
 Topology reaches for Zorn and the ultrafilter lemma at Tychonoff, at nets and

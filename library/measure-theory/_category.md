@@ -19,12 +19,6 @@ and stable under continuous preimages. The transfinite construction by countable
 ordinals is given with its choice hypothesis stated, and cardinal arithmetic
 settles the sizes a sigma-algebra can have.
 
-It is for a reader who wants to know why the objects of integration are well
-defined before integrating anything. Every proof is given in full, stratified
-into numbered phases so that each step names what it rests on, and audited
-before publication. It assumes the topology of Euclidean space, the transfinite
-recursion and cardinal arithmetic of Foundations, and the real line.
-
 This vocabulary is what the rest of the subject is stated in, and the tracks
 scaffolded above it reserve it directly. Functional analysis needs it for the
 Lebesgue spaces and their duality, probability for random elements and the limit

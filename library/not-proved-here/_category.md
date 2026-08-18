@@ -21,10 +21,6 @@ model and the consistency results that fix the choice strength of theorems
 proved elsewhere. Open problems are recorded separately, and no track will
 discharge them.
 
-It is for the reader who arrived from a citation and wants to know what was
-borrowed and on whose authority. Each entry carries its source, so a proof that
-leans on it can be checked against the literature rather than taken on trust.
-
 What rests on this category is every result across the library whose own proof
 reaches a statement recorded here, which is why an entry is aliased and retired
 rather than deleted. Each is replaced by a real proof as the track that owns its

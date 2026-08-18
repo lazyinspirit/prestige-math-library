@@ -20,11 +20,6 @@ case where an inclusion has a left adjoint, the adjoint functor theorems say
 when an adjoint exists at all, and every adjunction induces a monad and a
 comonad whose algebras measure how much of it the monad remembers.
 
-It is for a reader who wants the abstraction earned rather than asserted. Each
-proof is given in full, stratified into numbered phases so that every step names
-what it rests on, and audited before publication. It assumes the set theory of
-Foundations and enough algebra and topology to recognise the examples.
-
 Homological algebra is the declared consumer. Its chain complexes, long exact
 sequences, derived functors, Ext, Tor and spectral sequences are scaffolded to
 take their additive and abelian categories, their exactness criteria and their

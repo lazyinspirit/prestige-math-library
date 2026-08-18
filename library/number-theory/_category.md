@@ -19,12 +19,6 @@ criterion and Gauss's lemma compute it, quadratic reciprocity relates the symbol
 for one prime to the symbol for the other, and the Jacobi symbol extends the
 computation to odd composite moduli.
 
-It is for a reader who wants the arithmetic proved from the ring axioms rather
-than demonstrated by calculation. Every proof is given in full, stratified into
-numbered phases so that each step names what it rests on, and audited before it
-is published. It assumes the construction of the integers and the elementary
-group and ring theory of Abstract Algebra.
-
 The number theory track scaffolded to continue this collection rests on exactly
 these pages, and it splits at the point where they stop: an analytic block that
 needs the gamma and zeta functions of the complex analysis track, and a local

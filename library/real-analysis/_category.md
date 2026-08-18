@@ -22,10 +22,6 @@ variables closes the collection, with the total derivative, the inverse and
 implicit function theorems, Jordan content, Fubini, change of variables, arc
 length and line integrals.
 
-It is written for a reader who wants the argument and not the formula. Every
-proof is given in full, stratified into numbered phases so that each step names
-what it stands on, and audited before it is published.
-
 The rest of the library leans on it heavily. Measure theory takes over where the
 Riemann integral stops, functional analysis starts from the normed spaces and
 completeness proved here, complex analysis reuses the power series and the

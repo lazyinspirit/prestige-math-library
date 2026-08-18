@@ -18,13 +18,6 @@ theorem gives a vanishing integral over a triangle with no hypothesis on the
 derivative beyond its existence, and on a convex domain that produces a
 primitive and so Cauchy's theorem.
 
-It is for a reader who wants the plane's rigidity explained rather than
-asserted. Every proof is given in full, stratified into numbered phases so that
-each step names what it rests on, and audited before it is published. It assumes
-the complex numbers as Abstract Algebra constructs them, a quotient of a
-polynomial ring, together with the series, uniform convergence, Riemann-
-Stieltjes integration and rectifiability of Real Analysis.
-
 The tracks scaffolded above it reserve this material by name. The analytic block
 of number theory needs the gamma and zeta functions, their continuation and
 their functional equations, which continue directly from the power series and

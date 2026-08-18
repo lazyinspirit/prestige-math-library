@@ -23,11 +23,6 @@ tensor products, chain conditions and Wedderburn-Artin close the collection,
 alongside semidirect products, automorphism groups, Sylow theory and nilpotent
 groups.
 
-It is written for a reader who wants the structure theorems proved, not
-tabulated. Every proof is given in full, stratified into numbered phases so that
-each step names what it rests on, and audited before it is published. It assumes
-the set theory of Foundations, including Zorn's lemma.
-
 The number theory track reserves the cyclic, finite abelian, splitting-field and
 polynomial material. Commutative algebra continues directly from the rings,
 ideals, localisation, module and exact-sequence pages. Homological algebra
