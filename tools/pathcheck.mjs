@@ -34,10 +34,15 @@
 //   draft-unplaced   a draft page in no part; pathway-sync places it
 //   brief-long       a brief over 120 words
 //   pathway-missing  a category with published pages and no pathway file
+//   overview-missing a category whose `_category.md` body is empty or absent
+//   overview-short   a collection overview under 120 words
 //
 // Exit 0 iff there are no hard errors.
 
-import { categories, loadCorpus, readPathway } from './pathway-lib.mjs';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { REPO, categories, loadCorpus, readPathway, split } from './pathway-lib.mjs';
 
 // Categories that are DELIBERATELY without a pathway (owner, 2026-08-18). The ‡
 // tier is a register of results the library states and does not prove, so it
@@ -66,6 +71,26 @@ for (const cat of categories().filter((c) => !only.size || only.has(c))) {
   // A draft page is one the sync should already have placed, but it is not live
   // and a level in flight must not be blocked by it.
   const draftPages = inCat('draft').filter((s) => !aPages.includes(s));
+
+  // THE COLLECTION OVERVIEW (SCHEMA §6.2). `_category.md` holds the group's
+  // metadata, and its BODY is the prose a reader meets before the pathway: what
+  // the collection covers, who it is for, and what rests on it. It is authored,
+  // so nothing mechanical keeps it present as groups are added — same problem as
+  // the briefs, same answer.
+  //
+  // WARNINGS, never errors, and deliberately. A group whose pages are landing is
+  // allowed to reach them before its prose, and no build should stop for a
+  // paragraph. Note this runs BEFORE the pathway early-out: the ‡ tier is excused
+  // from having a READING ORDER, not from saying what it is.
+  const catFile = join(REPO, 'library', cat, '_category.md');
+  const overview = existsSync(catFile) ? split(readFileSync(catFile, 'utf8')).body.trim() : null;
+  const oWords = overview ? overview.split(/\s+/).filter(Boolean).length : 0;
+  if (overview === null)
+    warn('overview-missing', `library/${cat}/_category.md: the group has no _category.md, so no collection overview`);
+  else if (!oWords)
+    warn('overview-missing', `library/${cat}/_category.md: metadata only, no collection overview in the body`);
+  else if (oWords < 120)
+    warn('overview-short', `library/${cat}/_category.md: overview runs to ${oWords} words (SCHEMA §6.2 asks for 150 to 300)`);
 
   const pw = readPathway(cat);
   if (!pw) {

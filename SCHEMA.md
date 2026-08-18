@@ -500,6 +500,38 @@ each new page in the part its prerequisites allow and reports the briefs that
 gained material, so the file keeps covering the corpus without a human
 remembering to open it.
 
+### 6.2 Category overviews (the `_category.md` body)
+
+`library/<cat>/_category.md` carries the group's metadata (`name`, `title`,
+`status`) and, under it, a **collection overview**: the prose a reader meets
+before the pathway, written once per category and answering three questions.
+
+1. **What the collection covers**, with the mathematics named. Not a genre label
+   ("algebra"), the actual subject matter the group develops.
+2. **Who it is for.** This library proves things, in phase-stratified and audited
+   proofs, so the honest answer is a reader who wants the argument rather than
+   the formula. Say which background is assumed.
+3. **What rests on it**, inside this library and outside it. `DEFERRED.md` is
+   organised by prerequisite track and the unbuilt `research/plan-*-track.md`
+   scaffolds each declare what they need, so a dependent named here is sourced,
+   never guessed.
+
+**Length: 150 to 300 words.** Long enough for the three questions, short enough
+to be read before the pathway rather than instead of it.
+
+The overview follows the same prose rules as a page summary (§6) and a pathway
+brief (§6.1): it describes the mathematics, counts nothing, ranks nothing, and
+claims nothing about what other pages contain or lack. `prosecheck.mjs` reads
+these bodies with the rest. `pathcheck.mjs` warns `overview-missing` for a
+category whose `_category.md` has no body and `overview-short` for a body under
+120 words; both are warnings, because a category being built is allowed to reach
+its pages before its prose.
+
+**Every category carries one, `not-proved-here` included.** It has no reading
+order and so no pathway file, but it does have a subject and a set of dependents,
+and a reader arriving at a ‡ page from a citation is exactly the reader who needs
+to be told what the tier is.
+
 ## 7. Acyclicity (the no-circular-reasoning guarantee)
 
 Run `node tools/depcheck.mjs` from the repo root. It is the mechanical gate for
