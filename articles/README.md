@@ -41,7 +41,7 @@ captions; the article text does the explaining.
 1. **One purpose per article, stated in `purpose`, and short.** An article that needs two
    purposes is two articles.
 2. **Every mathematical claim links.** Narration and motivation may be prose; anything a
-   sceptical reader could ask "says who?" about must be a wikilink into a published library
+   skeptical reader could ask "says who?" about must be a wikilink into a published library
    item, or an honest link to a recorded-not-proved (‡) remark. An article never asserts
    mathematics the library has not checked.
 3. **Human voice.** No em dashes, no "not X, it's Y", no throat-clearing, no filler. British
