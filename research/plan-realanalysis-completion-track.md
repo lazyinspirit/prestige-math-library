@@ -59,7 +59,7 @@ above the topology stack, every new pair simply has the dependency it needs.
 | RC-11 | `the-gauge-integral-and-cousins-lemma` | 22 | Cousin's lemma, gauges and $\delta$-fine partitions, the Henstock–Kurzweil integral, every derivative is integrable, the unconditional FTC, Hake's theorem |
 | RC-12 | `trigonometric-and-oscillatory-examples-in-one-variable` | 23 | the classical forms the trig-free substitutes stood in for, the Weierstrass function, $\sin(nx)$, the $\sin(1/x)$ family, and what each one refutes |
 | RC-13 | `trigonometric-and-oscillatory-examples-in-several-variables` | 24 | polar and spherical oscillators, direction-dependent limits, the mean value witness, non-uniform convergence in several variables |
-| RC-14 | `fourier-series-and-fejer-summation` | 24 | periodic functions, Fourier coefficients, Dirichlet and Fejér kernels, localisation, pointwise convergence under regularity, uniform Cesàro convergence **(seam: §4.3)** |
+| RC-14 | `fourier-series-and-fejer-summation` | 24 | periodic functions, Fourier coefficients, Dirichlet and Fejér kernels, localisation, pointwise convergence under regularity, uniform Cesàro convergence — **seam settled §4.3, owner 2026-08-19** |
 
 A B companion rides with every A page at level $+1$.
 
@@ -653,11 +653,24 @@ trigonometric parametrisation fails injectivity, cross-linking the published
 
 `requires`: RC-12, `the-complex-exponential-and-eulers-formula`, `approximation-and-compactness-in-ck`, `bounded-variation-and-riemann-stieltjes`.
 
-**Do not author this pair without the §4.3 ruling.** SEAMS §4 assigns "Fourier
+**Seam settled (owner, 2026-08-19): option (c) of §4.3.** SEAMS §4 assigns "Fourier
 series, Fourier transform on $L^1$/$L^2$/Schwartz, Plancherel, convolution" to
-`functional-analysis`.
+`functional-analysis`. That assignment is now amended for the classical half only:
+**RC-14 owns the Riemann-integral pointwise and uniform theory and mints its
+definitions; `functional-analysis` FA-14 cites them and re-mints none.** The split
+is stated item by item in §5.4, which is an amendment owed and not a change I make.
 
-Scope if approved: periodic functions and trigonometric polynomials; Fourier
+**What RC-14 mints, and nothing else may.** `def-periodic-function-and-trigonometric-polynomial`,
+`def-fourier-coefficients-of-a-riemann-integrable-periodic-function`,
+`def-dirichlet-kernel`, `def-fejer-kernel`,
+`lem-trigonometric-characters-are-orthogonal-on-a-period`,
+`cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions`. The
+coefficients are defined by the **Riemann** integral over a period, not by a Haar
+integral on $\mathbb{T}$; FA-14 keeps its torus and Haar definitions and owes an
+agreement lemma, exactly as `rem-total-derivative-conventions-and-linear-map-seam`
+requires of the future general linear-map page.
+
+Scope: periodic functions and trigonometric polynomials; Fourier
 coefficients for Riemann integrable data and their uniqueness; orthogonality and
 the finite Bessel inequality; the Dirichlet kernel and the localisation principle;
 pointwise convergence under a Dini or Lipschitz condition, and the Dirichlet–Jordan
@@ -712,21 +725,29 @@ Both are recorded in §5. Neither blocks this block, because every pair sits abo
 the topology stack. Both remain true of the published pages, and repairing them
 would mean editing published pages. No action proposed.
 
-### 4.3 Fourier series: real analysis or functional analysis?
+### 4.3 Fourier series: real analysis or functional analysis? — **SETTLED (c), owner 2026-08-19**
 
 SEAMS §4 gives Fourier series to `functional-analysis`, whose track is planned and
 entirely unbuilt (50 empty pages). `ra-enrich-01-PLAN.md` proposed a classical
 Riemann-integral Fourier pair for real analysis, written before that table existed.
-Both readings are defensible: the classical Dirichlet/Fejér theory needs only the
-Riemann integral and uniform convergence, while the $L^2$ theory genuinely belongs
-with functional analysis.
+The classical Dirichlet/Fejér theory needs only the Riemann integral and uniform
+convergence; the $L^2$ theory genuinely belongs with functional analysis.
 
-Options: **(a)** approve RC-14 as scoped above, with the $L^2$ half explicitly
-reserved; **(b)** drop RC-14 and let `functional-analysis` carry all of it, at the
-cost of leaving the library with no Fourier series at all until that track is
-built; **(c)** approve RC-14 and record an amendment to
-`plan-functional-analysis-track.md` telling it to cite rather than re-mint the
-classical pointwise theory. Recommendation: **(c)**.
+**Ruling: RC-14 is approved as scoped, the $L^2$ half is reserved to
+`functional-analysis`, and §5.4 records the amendment that keeps FA-14 from
+re-minting.** The seam is a clean one, verified against
+`plan-functional-analysis-track.md` on 2026-08-19: FA-14 as scaffolded carries
+**no** Dirichlet kernel, **no** Fejér kernel, **no** localisation and **no**
+pointwise-convergence theorem, so no theorem is contested. Only three definitions
+are, and reading order settles them — RC-14 is below FA-14, so RC-14 mints.
+
+This amends SEAMS §4's analysis table for one row. The amended row should read:
+*classical Fourier series on a period: coefficients for Riemann integrable data,
+Dirichlet and Fejér kernels, localisation, pointwise and uniform convergence* →
+`real-analysis`; *Fourier series in $L^2$, Parseval, Riesz–Fischer, completeness of
+the trigonometric system, the Fourier transform on $L^1$/$L^2$/Schwartz,
+Plancherel, convolution* → `functional-analysis`. Applying that edit to
+`subjects-01-SEAMS.md` is the orchestrator's, not mine.
 
 ### 4.4 Brouwer's fixed point theorem
 
@@ -760,8 +781,34 @@ RC-13 discharge the debt. `rem-classical-oscillator-is-sine-of-one-over-x` and t
 other substitute items are left untouched; the new pairs point at them, not the
 other way round.
 
-**5.4 To `plan-functional-analysis-track.md`.** If §4.3 is decided as (a) or (c),
-that track cites RC-14's classical pointwise theory and re-mints none of it.
+**5.4 To `plan-functional-analysis-track.md`, FA-14 — the operative amendment.**
+§4.3 is settled as (c), so this is owed and specific. I do not open that file:
+SEAMS §0.1 gives it to the `functional-analysis` track, and the orchestrator
+applies amendments at reconciliation.
+
+FA-14 is `orthonormal-bases-parseval-and-fourier-series`, spec id
+`orthonormal-bases-parseval-and-fourier-series`, currently 19 scaffolded items and
+no authored ones. **No theorem is contested.** Items 1–10 (orthonormal families,
+Bessel, Parseval, the Hilbert expansion, maximal families by Zorn, the $\ell^2$
+classification) and items 15–19 (completeness of the trigonometric system in
+$L^2$, mean-square convergence, Parseval for Fourier series, Riesz–Fischer, the
+$n$-torus basis) are untouched and stay with FA-14. Three of its definitions
+collide with RC-14, and reading order decides them, RC-14 being the earlier page:
+
+| FA-14 item | disposition |
+|---|---|
+| 12 `def-fourier-coefficients-and-trigonometric-polynomials` | **do not mint.** Cite RC-14's `def-fourier-coefficients-of-a-riemann-integrable-periodic-function` and `def-periodic-function-and-trigonometric-polynomial`. |
+| 13 `lem-trigonometric-characters-are-orthonormal` | **do not mint.** Cite RC-14's `lem-trigonometric-characters-are-orthogonal-on-a-period` and, if the normalised form is wanted, state it as a corollary under a new id. |
+| 14 `cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions` | **do not mint.** RC-14 proves it constructively from the Fejér kernel, with no Stone–Weierstrass. FA-14 may keep the complex Stone–Weierstrass route as a **second proof under a distinct id**, which is the library's existing idiom (`thm-cesaro-matrix-satisfies-silverman-toeplitz`, "a second proof of the Cesaro mean theorem"), or drop it. |
+
+**One new obligation on FA-14.** Its item 11 defines the torus with a normalised
+Haar integral; RC-14 defines coefficients by the Riemann integral over a period.
+FA-14 owes an agreement lemma that the two give the same coefficients on
+continuous periodic functions, and must not silently redefine
+$\widehat f(k)$. This is the same discipline
+`rem-total-derivative-conventions-and-linear-map-seam` imposes on the future
+general linear-map page: *"A future general linear-map development must prove
+agreement with `def-euclidean-linear-map`, not silently replace the meaning."*
 
 **5.5 To `plan-measure-theory-track.md`.** RC-11's gauge integral overlaps the
 measure track's absolute-continuity and sharp-FTC material at exactly one point:
@@ -773,6 +820,11 @@ Euclidean surface integral, divergence theorem and Stokes theorem. The different
 geometry track should cite them as the classical special case and re-mint neither,
 while retaining sole ownership of forms, the exterior derivative, orientation of
 manifolds and the general Stokes theorem.
+
+
+**5.7 To `research/subjects-01-SEAMS.md` §4.** The analysis ownership table's
+Fourier row is split by the §4.3 ruling. The replacement wording is given at the
+end of §4.3.
 
 ---
 
@@ -884,6 +936,14 @@ already fixes.
 pages roughly 12, so about **420 items**. Every A page is well inside the 60-item
 `size` gate; RC-5 and RC-9 are the largest and are estimated at 22 and 20.
 
-Nothing here is authored. The next step is an owner ruling on §4.3, after which the
+Nothing here is authored. §4.3 is settled, so no ruling is outstanding and the
 block can be spliced into `research/plan-spec.json` at the anchor named in §0 and
-built pair by pair through the standard step 0–10 cycle.
+built pair by pair through the standard step 0–10 cycle. Two smaller questions
+remain open and neither blocks a splice: whether Brouwer's fixed point theorem
+rides on RC-9 (§4.4), and what to do about the dead Leibman citation under 29
+published items (§4.1).
+
+The splice owes three things beyond the page entries themselves: the amendments of
+§5, applied by the orchestrator to files this track does not own; a `requires` list
+per page as given in §3; and a B companion per A page, since `validate-plan`'s
+`companion` check is a hard error.
