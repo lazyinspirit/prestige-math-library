@@ -1123,6 +1123,21 @@ $\mathrm{AC}_\omega$-sufficient bound.
 `inverse-and-implicit-function-theorems`, `compactness`,
 `subspaces-products-and-quotients`
 
+**SEAM AMENDMENT (owner, 2026-08-19; from
+`research/plan-realanalysis-completion-track.md` §5.6).** Real analysis now
+carries **RC-1** `the-inverse-function-theorem-completed` ($C^k$ regularity,
+openness of the regular locus, the derivative of a local inverse, the
+parametrised implicit function theorem, global injectivity) and **RC-2**
+`constant-rank-submersions-and-regular-level-sets` (rank of a derivative, the
+**Euclidean** constant-rank normal form, submersions and immersions, regular
+values, regular level sets and their tangent kernels, general Lagrange
+multipliers), both spliced strictly below this page. Cite them for the Euclidean
+base case and re-mint none of it. **This page's scope is unchanged**: the
+manifold normal forms, embedded submanifolds and everything chart-dependent stay
+here, and the sentence below about what the published calculus page supplies is
+now understated rather than wrong — RC-1 and RC-2 supply considerably more than
+the $C^1$ theorems, which shortens this page's proofs without shrinking it.
+
 This pair converts the Euclidean inverse and implicit function theorems into
 the normal forms used throughout differential geometry. The published
 calculus page supplies only the $C^1$ inverse and implicit function theorems;
@@ -2076,6 +2091,21 @@ versions belong to a later differential-topology sequel if needed.
 `uniform-convergence-of-functions`, `properties-of-the-integral-and-the-working-ftc`,
 `the-total-derivative`,
 `mixed-partials-taylor-and-extrema`
+
+**SEAM AMENDMENT (owner, 2026-08-19; from
+`research/plan-realanalysis-completion-track.md` §5.6).** Real analysis now
+carries **RC-10** `picard-lindelof-and-first-order-odes`, spliced strictly below
+this page: the IVP and its integral equation, Picard–Lindelöf with uniqueness,
+Picard iterates with error bounds, Grönwall, **continuous** dependence on initial
+values and parameters, the maximal continuation criterion, and Peano existence
+without uniqueness. Cite it; do not re-mint the local existence theorem.
+
+**Nothing here is dropped, and the division is the page's own title.** RC-10 stops
+at *continuous* dependence; **smooth** dependence — $C^k$ dependence of the flow on
+initial conditions and parameters, which is what flows, parallel transport and the
+exponential map actually need — is this page's and is untouched. The sentence
+below ("no local ODE theorem") is what changes: there now is one, and this page
+starts from it.
 
 The published library has Banach's fixed-point theorem and complete spaces of
 continuous functions, but no local ODE theorem. Flow, parallel transport,
@@ -3458,6 +3488,28 @@ determinant-line signed sums and do not invoke that theory. Neither route
 waits for or duplicates Lebesgue integration. The optional extension from
 compactly supported smooth densities to measurable or $L^1$ densities is
 explicitly routed to measure theory.
+
+**SEAM AMENDMENT (owner, 2026-08-19; applied from
+`research/plan-realanalysis-completion-track.md` §5.6).** Real analysis now
+carries the **classical Euclidean** vector calculus, spliced strictly below this
+track: **RC-8** `regular-surfaces-and-surface-integrals` (regular parametrised
+patches, the Gram determinant, surface area, scalar surface integrals,
+orientation, flux) and **RC-9** `the-divergence-theorem-and-classical-stokes`
+(divergence and curl, the divergence theorem on a proved elementary class,
+oriented boundaries, classical Stokes in $\mathbb{R}^3$, Green as a planar
+corollary).
+
+**This track's scope is unchanged and loses nothing.** SEAMS §4 still gives
+differential forms, the exterior derivative, orientation of manifolds,
+integration on manifolds and the **general** Stokes theorem to differential
+geometry, and RC-8 and RC-9 mint no form, no manifold and no exterior derivative
+— by their own §R4 they are forbidden to. What changes is one sentence of
+practice: when DG-14 specialises the general theorem to $\mathbb{R}^3$ to recover
+Gauss, Green and classical Stokes, it **cites RC-8 and RC-9 for the classical
+statements and proves the agreement**, rather than re-minting them under new ids.
+The agreement item is worth having on its own merits: it is what tells a reader
+that $\int_{\partial M}\omega=\int_M d\omega$ really is the divergence theorem
+they already know.
 
 ### A-page items in dependency order
 

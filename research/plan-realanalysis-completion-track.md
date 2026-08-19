@@ -12,7 +12,7 @@ This file is NOT normative: `SCHEMA.md`, `CLAUDE.md`, `LEVELS.md` and
 `ARCHITECTURE.md` win wherever they differ.
 
 **AUTHORITY BOUNDARY.** This file is authoritative only for the 14 new A pages it
-defines, **RC-1 … RC-14**, and their 14 `-examples` companions. It defines no
+defines, **RC-1 … RC-13**, and their 13 `-examples` companions. It defines no
 change to any existing page. Where it finds a defect in published content it
 records it in §5 and takes no further action.
 
@@ -42,7 +42,7 @@ nothing. Two ordering defects in the published multivariable band (§5.1, §5.2)
 would otherwise have forced either a re-home receipt or a weakened statement; sat
 above the topology stack, every new pair simply has the dependency it needs.
 
-**What is scaffolded.** 14 A/B pairs, 28 pages.
+**What is scaffolded.** 13 A/B pairs, 26 pages. A fourteenth, a classical Fourier pair, was scaffolded and then **withdrawn**: see §6.9.
 
 | label | A page id | dependency level | one line |
 |---|---|---|---|
@@ -52,19 +52,19 @@ above the topology stack, every new pair simply has the dependency it needs.
 | RC-4 | `areas-of-elementary-plane-figures` | 23 | translation invariance of Jordan content, triangles, parallelograms, polygons, base times height, and the reconciliation of graph area with Jordan content |
 | RC-5 | `volumes-of-elementary-solids-and-solids-of-revolution` | 24 | solids between graphs over a Jordan base, volume as a double integral, solids of revolution, the cone, the cylinder, the ball, the $n$-ball |
 | RC-6 | `improper-and-parameter-dependent-multiple-integrals` | 22 | exhaustions, absolutely convergent improper multiple integrals, differentiation and continuity under the integral sign, the Gaussian integral |
-| RC-7 | `the-gamma-and-beta-functions` | 23 | $\Gamma$ by the Euler integral, the functional equation, log-convexity and Bohr–Mollerup, the Beta integral, $\Gamma(1/2)=\sqrt\pi$, the reflection formula, Stirling |
+| RC-7 | `the-real-gamma-and-beta-functions` | 23 | the **real** $\Gamma$ by the Euler integral, the functional equation, log-convexity and Bohr–Mollerup, the Beta integral, $\Gamma(1/2)=\sqrt\pi$, real Stirling, the $n$-ball closed form. Complex-analytic $\Gamma$ stays with CA-21: §5.8 |
 | RC-8 | `regular-surfaces-and-surface-integrals` | 23 | regular parametrised surfaces, reparametrisation, the Gram determinant, surface area, scalar surface integrals, orientation, flux |
 | RC-9 | `the-divergence-theorem-and-classical-stokes` | 24 | divergence and curl, the divergence theorem on a proved elementary class, oriented boundaries, classical Stokes, Green as a planar corollary |
 | RC-10 | `picard-lindelof-and-first-order-odes` | 22 | the IVP and its integral equation, Picard–Lindelöf, Picard iterates with error bounds, Grönwall, continuous dependence, maximal continuation |
 | RC-11 | `the-gauge-integral-and-cousins-lemma` | 22 | Cousin's lemma, gauges and $\delta$-fine partitions, the Henstock–Kurzweil integral, every derivative is integrable, the unconditional FTC, Hake's theorem |
 | RC-12 | `trigonometric-and-oscillatory-examples-in-one-variable` | 23 | the classical forms the trig-free substitutes stood in for, the Weierstrass function, $\sin(nx)$, the $\sin(1/x)$ family, and what each one refutes |
 | RC-13 | `trigonometric-and-oscillatory-examples-in-several-variables` | 24 | polar and spherical oscillators, direction-dependent limits, the mean value witness, non-uniform convergence in several variables |
-| RC-14 | `fourier-series-and-fejer-summation` | 24 | periodic functions, Fourier coefficients, Dirichlet and Fejér kernels, localisation, pointwise convergence under regularity, uniform Cesàro convergence — **seam settled §4.3, owner 2026-08-19** |
 
 A B companion rides with every A page at level $+1$.
 
-**What this discharges.** `research/ra-enrich-01-PLAN.md` Table B in full (its four
-proposals become RC-2, RC-9 + RC-8, RC-10, RC-14); the undelivered half of
+**What this discharges.** three of the four proposals in
+`research/ra-enrich-01-PLAN.md` Table B (they become RC-2, RC-9 + RC-8 and RC-10;
+its Fourier proposal is withdrawn, §6.9); the undelivered half of
 `plan-realanalysis-pages.md` RA-36 and RA-38; the D-TRIG debt recorded in
 `rem-classical-oscillator-is-sine-of-one-over-x`; and the geometric material
 (triangle, parallelogram, solid of revolution, ball) that the `circle-area`
@@ -403,17 +403,30 @@ domination; the Gaussian computed.
 
 ### Block III — classical special functions
 
-#### RC-7 The Gamma and Beta Functions — level 23
+#### RC-7 The Real Gamma and Beta Functions — level 23
 
-`requires`: `improper-integrals`, `the-logarithm-and-general-powers`, `power-series-and-real-analytic-functions`, `convexity`, RC-6.
+`requires`: RC-6, `the-logarithm-and-general-powers`, `convexity`.
 
 Zero items in the corpus mention $\Gamma$. The Wallis product is published, which
 is one of the two classical routes into $\Gamma(1/2)$.
 
+**Scope is the REAL theory only (seam, §5.8).** `the-gamma-function` (CA-21,
+complex analysis, unbuilt) already scaffolds holomorphy, meromorphic
+continuation, the Euler limit formula, the Weierstrass product, the reflection
+formula, Gauss multiplication, Legendre duplication, the Hankel contour and
+sectorial Stirling. **None of those appear here** and none of its ids is taken.
+This page mints real-variable ids — `def-real-gamma-function-by-the-euler-integral`,
+`def-real-beta-integral`, `thm-real-gamma-functional-equation`,
+`thm-real-gamma-is-log-convex`, `thm-bohr-mollerup-characterisation-of-the-real-gamma-function`,
+`thm-real-beta-gamma-identity`, `cor-real-gamma-one-half-is-root-pi`,
+`thm-real-stirling-formula`, `cor-volume-of-the-unit-n-ball` — and exists because
+the $n$-ball closed form is needed far below CA-21's order, and because
+Bohr–Mollerup, log-convexity and $\Gamma(1/2)=\sqrt\pi$ need no complex analysis.
+
 **DEFS.** $\Gamma(s)=\int_0^\infty t^{s-1}e^{-t}dt$ for $s>0$; the Beta integral
 $B(p,q)=\int_0^1 t^{p-1}(1-t)^{q-1}dt$; log-convexity.
 
-**THMS.** The Euler integral converges for $s>0$ and diverges for $s \le 0$.
+**THMS.** (Reflection is CA-21's, not stated here.) The Euler integral converges for $s>0$ and diverges for $s \le 0$.
 $\Gamma(s+1)=s\Gamma(s)$ and $\Gamma(n+1)=n!$. $\Gamma$ is $C^\infty$ on $(0,\infty)$
 by differentiation under the integral sign (RC-6), and log-convex.
 **Bohr–Mollerup:** $\Gamma$ is the unique positive log-convex solution of the
@@ -421,7 +434,6 @@ functional equation normalised by $\Gamma(1)=1$. $B(p,q)=\Gamma(p)\Gamma(q)/\Gam
 proved by Fubini on the first quadrant with the substitution the change-of-variables
 theorem licenses. $\Gamma(1/2)=\sqrt\pi$, from the Gaussian integral and independently
 from the Wallis product, with both routes given because the library has both.
-Euler's reflection formula $\Gamma(s)\Gamma(1-s)=\pi/\sin(\pi s)$ on $(0,1)$.
 **Stirling's formula** $n! \sim \sqrt{2\pi n}\,(n/e)^n$, and the volume of the
 $n$-ball in closed form, closing RC-5's recursion.
 
@@ -647,46 +659,11 @@ trigonometric parametrisation fails injectivity, cross-linking the published
 - `fs-existence-of-all-directional-derivatives-implies-continuity` — FALSE, now in classical form.
 - `fs-continuity-along-every-smooth-curve-implies-continuity` — FALSE; a spiral approach witnesses it where straight lines do not, strengthening the published straight-line counterexample.
 
-### Block VII — Fourier, subject to a seam ruling
+### Block VII — withdrawn
 
-#### RC-14 Fourier Series and Fejér Summation — level 24
-
-`requires`: RC-12, `the-complex-exponential-and-eulers-formula`, `approximation-and-compactness-in-ck`, `bounded-variation-and-riemann-stieltjes`.
-
-**Seam settled (owner, 2026-08-19): option (c) of §4.3.** SEAMS §4 assigns "Fourier
-series, Fourier transform on $L^1$/$L^2$/Schwartz, Plancherel, convolution" to
-`functional-analysis`. That assignment is now amended for the classical half only:
-**RC-14 owns the Riemann-integral pointwise and uniform theory and mints its
-definitions; `functional-analysis` FA-14 cites them and re-mints none.** The split
-is stated item by item in §5.4, which is an amendment owed and not a change I make.
-
-**What RC-14 mints, and nothing else may.** `def-periodic-function-and-trigonometric-polynomial`,
-`def-fourier-coefficients-of-a-riemann-integrable-periodic-function`,
-`def-dirichlet-kernel`, `def-fejer-kernel`,
-`lem-trigonometric-characters-are-orthogonal-on-a-period`,
-`cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions`. The
-coefficients are defined by the **Riemann** integral over a period, not by a Haar
-integral on $\mathbb{T}$; FA-14 keeps its torus and Haar definitions and owes an
-agreement lemma, exactly as `rem-total-derivative-conventions-and-linear-map-seam`
-requires of the future general linear-map page.
-
-Scope: periodic functions and trigonometric polynomials; Fourier
-coefficients for Riemann integrable data and their uniqueness; orthogonality and
-the finite Bessel inequality; the Dirichlet kernel and the localisation principle;
-pointwise convergence under a Dini or Lipschitz condition, and the Dirichlet–Jordan
-theorem for functions of bounded variation with the midpoint value at a jump; the
-Fejér kernel as an approximate identity and uniform Cesàro convergence for
-continuous periodic functions; density of trigonometric polynomials, recovering
-Weierstrass approximation a second way; the Riemann–Lebesgue lemma for Riemann
-integrable data. B page: square, sawtooth and absolute-value waves; Gibbs
-behaviour; coefficient decay against smoothness; the du Bois-Reymond continuous
-function with a divergent Fourier series, cross-linking the published
-`rem-du-bois-reymond-divergent-fourier`; a continuous function whose Fourier series
-converges pointwise but not uniformly. Everything $L^2$ — Parseval, Riesz–Fischer,
-completeness of the trigonometric system — stays with `measure-theory` and
-`functional-analysis`.
-
----
+**RC-14 `fourier-series-and-fejer-summation` was scaffolded here and is
+withdrawn.** The reason and the evidence are in §6.9. Nothing replaces it in this
+track; the material is already owned and already scaffolded elsewhere.
 
 ## 4. Decisions for the owner
 
@@ -725,29 +702,28 @@ Both are recorded in §5. Neither blocks this block, because every pair sits abo
 the topology stack. Both remain true of the published pages, and repairing them
 would mean editing published pages. No action proposed.
 
-### 4.3 Fourier series: real analysis or functional analysis? — **SETTLED (c), owner 2026-08-19**
+### 4.3 Fourier series — RULED, THEN WITHDRAWN ON A LATER FINDING
 
-SEAMS §4 gives Fourier series to `functional-analysis`, whose track is planned and
-entirely unbuilt (50 empty pages). `ra-enrich-01-PLAN.md` proposed a classical
-Riemann-integral Fourier pair for real analysis, written before that table existed.
-The classical Dirichlet/Fejér theory needs only the Riemann integral and uniform
-convergence; the $L^2$ theory genuinely belongs with functional analysis.
+The owner ruled option (c) on 2026-08-19: approve a classical Fourier pair for
+real analysis, reserve the $L^2$ half to `functional-analysis`, and amend FA-14 to
+cite rather than re-mint.
 
-**Ruling: RC-14 is approved as scoped, the $L^2$ half is reserved to
-`functional-analysis`, and §5.4 records the amendment that keeps FA-14 from
-re-minting.** The seam is a clean one, verified against
-`plan-functional-analysis-track.md` on 2026-08-19: FA-14 as scaffolded carries
-**no** Dirichlet kernel, **no** Fejér kernel, **no** localisation and **no**
-pointwise-convergence theorem, so no theorem is contested. Only three definitions
-are, and reading order settles them — RC-14 is below FA-14, so RC-14 mints.
+**That ruling was taken on an incomplete seam check of mine, and I withdrew the
+pair rather than act on it.** I had read `subjects-01-SEAMS.md` §4 (which assigns
+Fourier to `functional-analysis`) and `plan-functional-analysis-track.md`, and
+concluded the only contest was three definitions on FA-14. I had **not** read
+`research/subjects-02-SEAMS.md`, which commissions a **`fourier-analysis` track of
+36 planned pages** and states at its ownership table that the Fourier track "owns
+classical series convergence", nor `research/plan-fourier-analysis-track.md`,
+which already scaffolds `dirichlet-kernel-localisation-and-pointwise-fourier-convergence`
+and `fejer-and-poisson-summability-of-fourier-series` — RC-14's scope, page for
+page.
 
-This amends SEAMS §4's analysis table for one row. The amended row should read:
-*classical Fourier series on a period: coefficients for Riemann integrable data,
-Dirichlet and Fejér kernels, localisation, pointwise and uniform convergence* →
-`real-analysis`; *Fourier series in $L^2$, Parseval, Riesz–Fischer, completeness of
-the trigonometric system, the Fourier transform on $L^1$/$L^2$/Schwartz,
-Plancherel, convolution* → `functional-analysis`. Applying that edit to
-`subjects-01-SEAMS.md` is the orchestrator's, not mine.
+So the question §4.3 posed was a false dilemma: the third owner was never on the
+ballot. Building RC-14 would have double-minted against an owned, scaffolded pair,
+which SEAMS §4 calls "the single most expensive failure this commission can
+produce". The pair is withdrawn under §6.9 and **no amendment to FA-14 or to
+SEAMS §4 was made**; both files are exactly as they were.
 
 ### 4.4 Brouwer's fixed point theorem
 
@@ -781,50 +757,45 @@ RC-13 discharge the debt. `rem-classical-oscillator-is-sine-of-one-over-x` and t
 other substitute items are left untouched; the new pairs point at them, not the
 other way round.
 
-**5.4 To `plan-functional-analysis-track.md`, FA-14 — the operative amendment.**
-§4.3 is settled as (c), so this is owed and specific. I do not open that file:
-SEAMS §0.1 gives it to the `functional-analysis` track, and the orchestrator
-applies amendments at reconciliation.
-
-FA-14 is `orthonormal-bases-parseval-and-fourier-series`, spec id
-`orthonormal-bases-parseval-and-fourier-series`, currently 19 scaffolded items and
-no authored ones. **No theorem is contested.** Items 1–10 (orthonormal families,
-Bessel, Parseval, the Hilbert expansion, maximal families by Zorn, the $\ell^2$
-classification) and items 15–19 (completeness of the trigonometric system in
-$L^2$, mean-square convergence, Parseval for Fourier series, Riesz–Fischer, the
-$n$-torus basis) are untouched and stay with FA-14. Three of its definitions
-collide with RC-14, and reading order decides them, RC-14 being the earlier page:
-
-| FA-14 item | disposition |
-|---|---|
-| 12 `def-fourier-coefficients-and-trigonometric-polynomials` | **do not mint.** Cite RC-14's `def-fourier-coefficients-of-a-riemann-integrable-periodic-function` and `def-periodic-function-and-trigonometric-polynomial`. |
-| 13 `lem-trigonometric-characters-are-orthonormal` | **do not mint.** Cite RC-14's `lem-trigonometric-characters-are-orthogonal-on-a-period` and, if the normalised form is wanted, state it as a corollary under a new id. |
-| 14 `cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions` | **do not mint.** RC-14 proves it constructively from the Fejér kernel, with no Stone–Weierstrass. FA-14 may keep the complex Stone–Weierstrass route as a **second proof under a distinct id**, which is the library's existing idiom (`thm-cesaro-matrix-satisfies-silverman-toeplitz`, "a second proof of the Cesaro mean theorem"), or drop it. |
-
-**One new obligation on FA-14.** Its item 11 defines the torus with a normalised
-Haar integral; RC-14 defines coefficients by the Riemann integral over a period.
-FA-14 owes an agreement lemma that the two give the same coefficients on
-continuous periodic functions, and must not silently redefine
-$\widehat f(k)$. This is the same discipline
-`rem-total-derivative-conventions-and-linear-map-seam` imposes on the future
-general linear-map page: *"A future general linear-map development must prove
-agreement with `def-euclidean-linear-map`, not silently replace the meaning."*
+**5.4 To `plan-functional-analysis-track.md`, FA-14 — WITHDRAWN, nothing owed.**
+This entry previously instructed FA-14 not to mint its Fourier-coefficient
+definitions. With RC-14 withdrawn (§6.9), FA-14 is the earliest page in the
+reading order that needs them and mints them exactly as originally scaffolded.
+`plan-functional-analysis-track.md` is unmodified. So is `subjects-01-SEAMS.md`
+§4, whose Fourier row stands unchanged.
 
 **5.5 To `plan-measure-theory-track.md`.** RC-11's gauge integral overlaps the
 measure track's absolute-continuity and sharp-FTC material at exactly one point:
 the relation between the HK and Lebesgue integrals. RC-11 states the classical half
 and leaves the Lebesgue comparison to MT-19.
 
-**5.6 To `plan-differential-geometry-track.md`.** RC-8 and RC-9 mint the classical
-Euclidean surface integral, divergence theorem and Stokes theorem. The differential
-geometry track should cite them as the classical special case and re-mint neither,
-while retaining sole ownership of forms, the exterior derivative, orientation of
-manifolds and the general Stokes theorem.
+**5.6 To `plan-differential-geometry-track.md` — three sites, all APPLIED.**
+The differential-geometry track meets this block in three places, not one.
+*DG-4* `rank-theorems-and-embedded-submanifolds` cites RC-1 and RC-2 for the
+Euclidean inverse-function and constant-rank theory and keeps every manifold
+normal form. *DG-8* `euclidean-ordinary-differential-equations-with-smooth-dependence`
+cites RC-10 for local existence, uniqueness, Grönwall and **continuous**
+dependence, and keeps **smooth** dependence, which is what its title is about and
+what flows and the exponential map need. *DG-14*
+`integration-of-forms-and-the-general-stokes-theorem` cites RC-8 and RC-9 for the
+classical Euclidean surface integral, divergence theorem and Stokes theorem, and
+proves agreement when it specialises the general theorem to $\mathbb{R}^3$.
+Differential forms, the exterior derivative, orientation of manifolds and the
+general Stokes theorem remain that track's, untouched.
 
+**5.7 To `research/subjects-01-SEAMS.md` §4 — WITHDRAWN, nothing owed.** The
+Fourier row split this entry proposed depended on RC-14. That file is unmodified.
 
-**5.7 To `research/subjects-01-SEAMS.md` §4.** The analysis ownership table's
-Fourier row is split by the §4.3 ruling. The replacement wording is given at the
-end of §4.3.
+**5.8 To `plan-complex-analysis-track.md`, CA-21 — APPLIED.** CA-21
+`the-gamma-function` already scaffolds nine ids that RC-7 as first written would
+have duplicated. RC-7 is therefore narrowed to the **real** theory and renamed
+`the-real-gamma-and-beta-functions`, minting real-variable ids only, so no CA-21
+id is withdrawn and no complex result moves. CA-21 owes one new item,
+`thm-complex-gamma-restricts-to-the-real-gamma-function`, after which
+Bohr–Mollerup transfers instead of being proved twice. RC-7 survives the collision
+because the $n$-ball closed form is needed at a real-analysis order far below
+CA-21's, and because Bohr–Mollerup, log-convexity and $\Gamma(1/2)=\sqrt\pi$ need
+no complex analysis at all.
 
 ---
 
@@ -852,6 +823,26 @@ A dropped result is deferred, not deleted; each entry names what would license i
    downstream of a seam ruling.
 8. **Space-filling curves and Hahn–Mazurkiewicz.** Point-set topology, not this
    block. `DEFERRED.md` §0 already records them as in scope for the topology track.
+
+9. **Classical Fourier series and Fejér summation — WITHDRAWN, not deferred.**
+   Scaffolded here as RC-14 and removed on 2026-08-19 before any splice.
+   `research/subjects-02-SEAMS.md` commissions a **`fourier-analysis` track** of 36
+   planned pages and gives it "classical series convergence" by name, and
+   `research/plan-fourier-analysis-track.md` already scaffolds
+   `dirichlet-kernel-localisation-and-pointwise-fourier-convergence` and
+   `fejer-and-poisson-summability-of-fourier-series`. That is RC-14's scope page
+   for page, so building it would have double-minted against an owned, scaffolded
+   pair. This is a withdrawal, not a deferral: the material is not missing from
+   the library's plan and needs nothing from this track. Licensed by: nothing —
+   it is already licensed to `fourier-analysis`.
+
+   The lesson for the next scaffolder is worth recording. I checked
+   `subjects-01-SEAMS.md` and the one track its §4 named, and stopped. There are
+   **two** seam contracts, and the second commissions five further tracks
+   (`fourier-analysis` among them) that the first never mentions. Read both, and
+   grep `plan-spec.json` for near-duplicate page titles before proposing a pair —
+   which is how the Gamma collision in §5.8 surfaced too, and that one was caught
+   only by a `validate-plan` warning about an unrelated page.
 
 ---
 
@@ -932,8 +923,8 @@ already fixes.
 
 ## 8. Count
 
-14 A pages and 14 B companions, 28 pages. A pages average roughly 18 items and B
-pages roughly 12, so about **420 items**. Every A page is well inside the 60-item
+13 A pages and 13 B companions, 26 pages. A pages average roughly 18 items and B
+pages roughly 12, so about **390 items**. Every A page is well inside the 60-item
 `size` gate; RC-5 and RC-9 are the largest and are estimated at 22 and 20.
 
 Nothing here is authored. §4.3 is settled, so no ruling is outstanding and the

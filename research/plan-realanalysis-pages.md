@@ -1598,6 +1598,15 @@ derivative on a convex open set implies constancy. The stronger connected-open
 statement is deferred until connectedness and Euclidean polygonal
 connectedness are legal dependencies.
 
+**DEFERRAL DISCHARGED (owner, 2026-08-19).** `thm-open-connected-subsets-of-rn-are-polygonally-connected`
+and `cor-components-of-open-subsets-of-rn-are-polygonally-connected` are published
+on `the-topology-of-euclidean-space`, so the connected-open statement is now a
+legal dependency. It is stated by **RC-1**
+`the-inverse-function-theorem-completed`, which sits above the topology stack.
+`cor-zero-total-derivative-on-a-convex-open-set-is-constant` is NOT amended and
+NOT superseded: the convex form keeps its own shorter proof and its own consumers,
+and RC-1 cites it. Nothing is lost and no published item changes.
+
 B: the polynomial map (x,y) -> (1+x+2y+x^2, 2x+3y+xy) and its Jacobian;
 xy/(x^2+y^2) (partials exist, discontinuous); x^2y/(x^4+y^2) (every
 straight-line restriction tends to zero, but the function is discontinuous);
@@ -1658,6 +1667,25 @@ derivative everywhere and is globally 2-to-1 (the IFT is irreducibly local);
 IFT genuinely needs C^1 and not mere differentiability; f(x,y) = (x, xy);
 the **Jacobian conjecture** as a live open problem.
 
+**PARTIALLY DELIVERED — read the built page, not this prose (owner, 2026-08-19).**
+`inverse-and-implicit-function-theorems` was built with **5 A items and 3 B items**:
+`def-c-one-map-and-local-inverse`, `def-invertible-euclidean-linear-map`,
+`lem-newton-contraction-near-an-invertible-derivative`,
+`thm-euclidean-inverse-function-theorem`,
+`thm-euclidean-implicit-function-theorem`, plus
+`ex-unit-circle-implicit-function-theorem`,
+`cex-complex-squaring-is-not-globally-invertible` and
+`cex-invertible-derivative-without-c-one-local-inverse`. Everything else specified
+above was never authored: the **rank theorem**, `cor-invertible-derivative-locus-is-open`,
+`cor-derivative-of-a-local-inverse`, `thm-implicit-function-theorem-with-parameters`,
+`rem-local-versus-global-invertibility-and-regularity-hypotheses`, and the B-page
+polar-coordinate, $x + 2x^2 w(1/x)$, $f(x,y)=(x,xy)$ and Jacobian-conjecture
+entries. All of it is carried, in full and with nothing dropped, by **RC-1**
+`the-inverse-function-theorem-completed` and **RC-2**
+`constant-rank-submersions-and-regular-level-sets` in
+`research/plan-realanalysis-completion-track.md`. The published page is not
+amended.
+
 **RA-37 The Riemann Integral in R^m and Jordan Content** <- RA-18, RA-22
 for m>=1, axis-parallel rectangles, grid partitions, common refinements and
 mesh; multidimensional Darboux and tagged sums; Riemann's criterion and the
@@ -1701,6 +1729,20 @@ a nonnegative f with both iterated integrals 0 and no double integral;
 1_diagonal under Lebesgue times counting measure (Tonelli needs sigma-finiteness);
 **Sierpinski's CH example**; change of variables fails without injectivity;
 **Gabriel's horn** (finite volume, infinite lateral surface).
+
+**PARTIALLY DELIVERED (owner, 2026-08-19).** `fubini-and-change-of-variables` was
+built with 25 A items and 13 B items and does carry Fubini with upper and lower
+integrals, the Jordan-set and region-between-graphs forms, the linear/determinant
+case, the full change-of-variables chain, and polar, cylindrical, spherical and
+hyperspherical Jacobians. **Not built:** the volume of the $n$-ball, the Gaussian
+integral $\sqrt\pi$, improper multiple integrals by exhaustion, partitions of
+unity, Gabriel's horn, Sierpiński's CH example, and the
+$(x^2-y^2)/(x^2+y^2)^2$ pair of unequal iterated integrals. Every one of them is
+carried by **RC-5** `volumes-of-elementary-solids-and-solids-of-revolution`,
+**RC-6** `improper-and-parameter-dependent-multiple-integrals` and **RC-7**
+`the-gamma-and-beta-functions` (the $n$-ball closed form needs $\Gamma$), except
+Sierpiński's CH example, which needs the continuum hypothesis and stays with set
+theory. The published page is not amended.
 
 ### Block XI: the fundamental theorems
 
@@ -1888,6 +1930,13 @@ still intends to prove, at a page that does not exist yet.
    rule of 2026-07-27. Licensed by: order 179. $t \mapsto (t^2, t^3)$ is
    scaffolded in its place and the substitution is recorded in the item, so a
    reader who knows the classical example is told why it is absent.
+   **LICENCE TAKEN UP (owner, 2026-08-19):** every multivariable page sits at
+   order 229 or above, well past 179, so the denial no longer binds anywhere in
+   that band, and nobody had returned for it — there is currently no
+   trigonometric example anywhere in the multivariable corpus. **RC-13**
+   `trigonometric-and-oscillatory-examples-in-several-variables` states
+   $t \mapsto (\cos t, \sin t)$ on $[0,2\pi]$ as the mean-value witness. The
+   published $t \mapsto (t^2, t^3)$ item is kept and cited, not replaced.
 7. **Abstract inner-product-space theory** — orthonormal bases, Gram–Schmidt,
    orthogonal projection (RA-22). `inner-product-spaces-and-orthogonality` is
    order **94**, earlier in plan order and unbuilt. Licensed by: page 94. Only
@@ -1937,6 +1986,19 @@ cannot be stated in their usual form at that point. Three options:
   version and nothing else. The whitelist above is grandfathered, not extensible
   — this is exactly why RA-22 drops $t \mapsto (\cos t, \sin t)$ rather than
   forward-citing RA-28 as this decision once contemplated (scope denial 6).
+  **DEBT DISCHARGED (owner, 2026-08-19).** Option (c) promised that beside every
+  trig-free substitute would sit the classical form. The substitutes were built —
+  `ex-piecewise-polynomial-periodic-oscillator`, `ex-distance-to-the-integers`,
+  `ex-distance-to-the-integers-is-1-lipschitz`,
+  `cex-psi-of-one-over-x-has-no-limit-at-zero` — and
+  `rem-classical-oscillator-is-sine-of-one-over-x` records the promise in so many
+  words, but **no page ever owned discharging it**; the classical forms that did
+  land arrived by accident. **RC-12**
+  `trigonometric-and-oscillatory-examples-in-one-variable` and **RC-13**
+  `trigonometric-and-oscillatory-examples-in-several-variables` own it now, each
+  carrying an explicit ledger naming the substitute it restates. The substitutes
+  are kept, not replaced: the trig-free item stays the proved one for every page
+  below order 179, which is what keeps the stack self-contained.
 
 **D-MVT.** Adopt Rudin's ordering, proving Cauchy's MVT first and obtaining the
 ordinary MVT as the case g(x) = x. The sweep flags this as "a real alternative

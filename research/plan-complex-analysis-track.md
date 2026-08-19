@@ -2719,6 +2719,33 @@ Pair sources (exact harvested locators): Romik Ch. 14 “The gamma function,”
 Theorem 31; Stein--Shakarchi Ch. 6 (“The gamma function,” “Analytic
 continuation,” “Further properties”); Weber Ch. 3 §3.7 (“Gamma Function”).
 
+**SEAM AMENDMENT (owner, 2026-08-19; from
+`research/plan-realanalysis-completion-track.md` §5.8).** Real analysis now
+carries **RC-7** `the-real-gamma-and-beta-functions`, spliced strictly below this
+page and deliberately confined to the **real** theory: the Euler integral for real
+$s>0$, $\Gamma(s+1)=s\Gamma(s)$, $\Gamma(n+1)=n!$, smoothness by differentiation
+under the integral sign, log-convexity, **Bohr–Mollerup**, the Beta integral and
+$B(p,q)=\Gamma(p)\Gamma(q)/\Gamma(p+q)$, $\Gamma(1/2)=\sqrt\pi$ from the Gaussian
+integral, real Stirling, and the closed-form volume of the $n$-ball. It exists
+because the $n$-ball volume is needed at a real-analysis order far below 343, and
+because none of those results needs complex analysis.
+
+**This page keeps everything complex and loses nothing.** Holomorphy on the right
+half-plane, meromorphic continuation with its poles and residues, the Euler limit
+formula, the Weierstrass product, absence of zeros, the reflection formula, Gauss
+multiplication, Legendre duplication, sectorial Stirling and the Hankel contour
+are all untouched and remain this page's. Two adjustments only:
+
+- RC-7 mints **real-variable ids** (`def-real-gamma-function-by-the-euler-integral`,
+  `def-real-beta-integral`, and so on), so none of this page's ids collide and
+  none is withdrawn.
+- This page owes one new item, `thm-complex-gamma-restricts-to-the-real-gamma-function`,
+  proving that `def-euler-gamma-function` restricted to $(0,\infty)$ is RC-7's
+  function. Bohr–Mollerup then transfers rather than being re-proved, and the
+  reader is told the two objects are the same — the discipline
+  `rem-total-derivative-conventions-and-linear-map-seam` imposes on the future
+  general linear-map page.
+
 Proposed A-page inventory (dependency order; 21 items; the supplier contract
 below fixes the exported IDs):
 

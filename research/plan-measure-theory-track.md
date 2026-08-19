@@ -3482,6 +3482,25 @@ and `thm-c1-lipschitz-ac-bv-hierarchy` are **published at order 163** and are ci
 not re-minted (§9); what this page adds is Luzin's property (N), the sharp FTC in
 both directions, and Banach–Zarecki.
 
+**SEAM AMENDMENT (owner, 2026-08-19; applied from
+`research/plan-realanalysis-completion-track.md` §5.5).** Real analysis now
+carries **RC-11** `the-gauge-integral-and-cousins-lemma`, spliced strictly below
+this page: Cousin's lemma, gauges and $\delta$-fine partitions, the
+Henstock–Kurzweil integral, **every derivative is HK integrable with an
+unconditional FTC and no integrability hypothesis**, and Hake's theorem. RC-11
+mints all of that and this page re-mints none of it.
+
+**Nothing here is dropped.** The two pages meet at exactly one statement, the
+comparison of the HK and Lebesgue integrals, and it stays **MT-19's**: RC-11
+states the classical half only and explicitly leaves to this page that a
+nonnegative HK integrable function is Lebesgue integrable, that an $L^1$ function
+is HK integrable with the same value, and that the HK integral strictly extends
+the Lebesgue integral on the line while neither extends the other in general.
+Add one item here for that comparison, citing RC-11. This page's own sharp FTC for
+absolutely continuous functions is untouched and remains the measure-theoretic
+statement; RC-11's is the gauge-theoretic one, and the two are different theorems
+with different hypotheses.
+
 **DEFS.** **Luzin's property (N)** ($\lambda(E)=0\Rightarrow\lambda(F(E))=0$),
 well-definedness #30; the **indefinite integral** of an $L^1$ function; the
 **total variation function** $V_F(x) := V_F[a,x]$.
