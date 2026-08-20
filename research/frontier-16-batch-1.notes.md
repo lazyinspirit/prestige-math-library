@@ -1,5 +1,11 @@
 # Frontier 16, batch 1 — Beta-1 scaffold notes
 
+## Source-scouting repair (2026-08-20)
+
+`source-fetch-check` first reported the Jiří Lebl *Basic Analysis II* PDF as unstamped, then its `--stamp` run returned `fetch-check-dead` with `EAI_AGAIN` for `https://www.jirka.org/ra/realanal2.pdf`. The author's official book front matter and repository publish `https://jirilebl.github.io/ra/realanal2.pdf` as the alternate host for the same Volume II text. The coverage entry now uses that alternate URL and retains the failed address as `original_url`. This is a host recovery of the same source, edition, section numbering, and text, so the §8.5 locator and harvested `contents` rows do not change.
+
+The required stamped recheck was run after the replacement and again returned `fetch-check-dead: ... EAI_AGAIN`, now for `https://jirilebl.github.io/ra/realanal2.pdf`; the process exited 1 with 4/5 sources verified and 0 newly stamped. Web research reached the book PDF at the original host and the author's current front matter identifies both hosts as the Version 6.3 PDF locations, so no missing or partial document was found: the unresolved defect is DNS denial in this sandbox's local Node transport, not a source-content mismatch. No `fetch_verified` value was fabricated. Exact retry command: `node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-1.coverage.json --stamp`.
+
 ## Continuity checkpoint
 
 - Current substage: Step 2 proof-contract construction after source harvest, item decomposition, id reuse, and the first dependency pass.

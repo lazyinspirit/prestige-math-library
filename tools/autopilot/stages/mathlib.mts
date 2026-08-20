@@ -452,14 +452,24 @@ export const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: an
   const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
   const batchOf = new Map(ledger.pages.map((p: any) => [p.id, String(p.batch)]));
   const owed = [...new Set([...pages].map((p) => batchOf.get(p)).filter(Boolean))];
+  // WHICH TASK. A dead URL and a dead SOURCE are different jobs. Scouting looks
+  // for another way to reach the same document; re-harvesting accepts the
+  // document is gone and looks for a different treatment carrying the same
+  // results. `backing-lost` is the second, and it names authored results that
+  // would otherwise be deleted along with their source row — silently, since
+  // every other gate validates what is present.
+  const lostBacking = /backing-lost:/.test(text);
+  const task = lostBacking
+    ? [`research/${ctx.run}-beta-reharvest.task.md`, `research/${ctx.run}-beta-source-scout.task.md`]
+    : [`research/${ctx.run}-beta-source-scout.task.md`, `research/${ctx.run}-beta-fix.task.md`];
   for (const b of owed) {
     executor.start(stage, {
       role: 'beta',
-      label: `source-scout-${round}-b${b}`,
+      label: `${lostBacking ? 'reharvest' : 'source-scout'}-${round}-b${b}`,
       job: 'scouting',
       covers: [b],
       brief: 'briefs/beta-scaffold.md',
-      task: [`research/${ctx.run}-beta-source-scout.task.md`, `research/${ctx.run}-beta-fix.task.md`],
+      task,
       timeout: 3600,
     });
   }
@@ -485,6 +495,25 @@ const urlGate = (ctx) => gate('url-liveness', [
   // Zero collected URLs prints "0/0 live" and exits 0 — a coverage selection
   // gone wrong (wrong run name, empty files) must not pass as a sweep.
   liveness: { pattern: /\/(\d+) live/.source, min: 1, unit: 'URLs collected' },
+});
+
+// A dead citation is a broken link; a dead SOURCE is missing mathematics. This
+// gate is the second question, and it is the only one that can see it: it maps
+// every authored result back to the sources that back it, and fails when a
+// result has none a reader can open. Without it the cheapest way past a dead
+// citation is to delete the source row — which deletes its `included` results
+// too, silently, because every other gate validates what is present.
+//
+// It runs AFTER `url-liveness`, whose artifact it reads, and writes the
+// re-harvest work list the scout is dispatched against.
+const backingGate = (ctx) => gate('source-backing', [
+  'node', 'tools/source-backing.mjs',
+  '--coverage', batchCoverages(ctx).join(','),
+  '--liveness', `research/${ctx.run}-url-liveness.json`,
+  '--reharvest-plan', `research/${ctx.run}-reharvest-plan.json`,
+], {
+  // "0 results checked, all backed" is a coverage-selection defect, not a pass.
+  liveness: { pattern: /(\d+) authored result\(s\)/.source, min: 1, unit: 'authored results' },
 });
 
 // ---------------------------------------------------------------------------
@@ -769,7 +798,7 @@ export const stages = [
         task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
         timeout: 14400,
       })),
-    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate(), urlGate(ctx), fetchGate(ctx)],
+    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
 
     // Failures at this join with a MECHANICAL_REPAIRS entry — the archive
     // swap, the full-text stamp — are repaired by code, one round each; see
@@ -922,7 +951,7 @@ export const stages = [
     // the MECHANICAL_REPAIRS table swaps recorded snapshots and stamps
     // unstamped sources; only an unrecoverable or unfetchable source reaches
     // the fix loop below, as scouting work for the owning Beta.
-    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true }), urlGate(ctx), fetchGate(ctx)],
+    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx, { requireSufficient: true }), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
     // Still thin after the re-check is another fix round, not an advance. Bounded
     // for the same reason the judge loop is: a scaffold that will not converge is
     // a decision for a person, and the blocker names the pairs.
