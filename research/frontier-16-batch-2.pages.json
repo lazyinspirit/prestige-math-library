@@ -55,7 +55,7 @@
       },
       {
         "id": "fs-a-bounded-plane-set-has-an-area",
-        "kind": "false statement",
+        "kind": "false-statement",
         "title": "FALSE: every bounded plane set has Jordan area",
         "strategy": "Take $E=(\\mathbb{Q}\\cap[0,1])^2$. It is bounded because it lies in the unit square. Density of the rationals and irrationals gives $\\partial E=[0,1]^2$. The unit square has inner and outer content $1$ directly from the rectangular definitions, so this boundary is not content zero; the boundary criterion makes $E$ non-Jordan-measurable. Cross-link the published counterexample carrying the same witness in the Remark, not in `deps`, because its home is an examples page and examples pages are dependency leaves.",
         "deps": [
@@ -108,13 +108,14 @@
           "def-parallelogram-and-triangle-in-r2",
           "def-base-and-height-for-plane-figures",
           "lem-determinant-base-height-identity-in-r2",
-          "cor-parallelepiped-content-is-the-absolute-determinant"
+          "cor-parallelepiped-content-is-the-absolute-determinant",
+          "thm-jordan-content-is-translation-invariant"
         ]
       },
       {
         "id": "thm-triangle-content-and-base-height-formula",
         "kind": "theorem",
-        "title": "A triangle has content $\\tfrac12|\\det[B-A\\ C-A]|$, equal to half base times height",
+        "title": "A triangle has content $\\tfrac12|\\det[B-A\\ C-A]|$, equal to half base times height when the chosen side is nonzero",
         "strategy": "First use the graph-area agreement and an elementary antiderivative to compute the standard right triangle's Jordan content as $1/2$. Translate the given triangle so that $A$ is the origin and realize it as the linear image of that standard triangle. Translation invariance and linear content scaling give half the absolute determinant, including the singular case. When $A\\ne B$, the determinant--height identity gives the base--height form.",
         "deps": [
           "def-parallelogram-and-triangle-in-r2",
@@ -152,31 +153,10 @@
         ]
       },
       {
-        "id": "lem-simple-polygon-has-an-interior-diagonal",
-        "kind": "lemma",
-        "title": "Every simple polygon with more than three vertices has an interior diagonal",
-        "strategy": "Choose the lexicographically least vertex and its two neighbors. If their joining segment lies in the region, it is a diagonal. Otherwise select a polygon vertex in the intervening triangle farthest from that segment; the segment from the least vertex to this selected vertex stays in the polygon and splits it. The definition uses irredundant vertices, so consecutive collinear subdivision points are not vertices.",
-        "deps": [
-          "def-simple-polygonal-region-and-triangulation",
-          "def-parallelogram-and-triangle-in-r2",
-          "cor-triangle-content-zero-iff-collinear"
-        ]
-      },
-      {
         "id": "thm-simple-polygon-admits-a-triangulation",
         "kind": "theorem",
         "title": "Every simple polygon admits a triangulation",
-        "strategy": "Induct on the number of vertices. A three-vertex polygon is one triangle. Otherwise use the interior-diagonal lemma to split the polygon into two smaller simple polygons, triangulate both by induction, and unite the two triangle families; the shared diagonal is their only new overlap.",
-        "deps": [
-          "def-simple-polygonal-region-and-triangulation",
-          "lem-simple-polygon-has-an-interior-diagonal"
-        ]
-      },
-      {
-        "id": "cor-simple-polygon-triangulation-has-n-minus-two-triangles",
-        "kind": "corollary",
-        "title": "Every triangulation of a simple $n$-gon has $n-2$ triangles",
-        "strategy": "Induct along any interior diagonal of the triangulation. If it creates polygons with $n_1$ and $n_2$ vertices, then $n_1+n_2=n+2$; add the two inductive triangle counts. The base case $n=3$ has one triangle.",
+        "strategy": "Choose a generic projection direction with distinct vertex coordinates. Between consecutive vertex levels, the polygon is a finite union of bands between noncrossing affine boundary graphs. Close and commonly refine those trapezoidal cells, then split every quadrilateral into two triangles to obtain a finite face-to-face triangulation; subdivision vertices are allowed.",
         "deps": [
           "def-simple-polygonal-region-and-triangulation"
         ]
@@ -190,7 +170,8 @@
           "thm-simple-polygon-admits-a-triangulation",
           "thm-triangle-content-and-base-height-formula",
           "cor-jordan-content-finite-additivity",
-          "thm-graphs-of-continuous-functions-have-content-zero"
+          "thm-graphs-of-continuous-functions-have-content-zero",
+          "def-null-and-content-zero-in-rn"
         ]
       },
       {
@@ -273,7 +254,8 @@
         "strategy": "Map the unit square by $(x,y)\\mapsto(2x,y)$. This is a bijective linear map, but the image rectangle has content $2$ while the source has content $1$, exactly as the determinant-scaling theorem predicts.",
         "deps": [
           "thm-linear-images-scale-jordan-content-by-absolute-determinant",
-          "def-multidimensional-rectangle-and-volume"
+          "def-multidimensional-rectangle-and-volume",
+          "def-jordan-inner-and-outer-content"
         ]
       }
     ]
@@ -308,13 +290,17 @@
         "strategy": "Treat the empty set by the constant empty exhaustion and $\\mathbb{R}^n$ by expanding boxes. For a proper nonempty open set, use radius and reciprocal distance-to-the-closed-complement thresholds indexed by $j+1$ to form compact cores. Recursively put the preceding Jordan set together with the next core inside a rational-grid Jordan neighborhood contained in the open set, choosing the least finite code in a fixed enumeration so no countable choice is hidden. Compactness shows every compact subset is eventually contained.",
         "deps": [
           "def-jordan-exhaustion-of-an-open-set",
+          "def-jordan-inner-and-outer-content",
+          "def-multidimensional-rectangle-and-volume",
           "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
           "thm-heine-borel-rn",
           "lem-distance-to-set-is-lipschitz",
-          "def-countable",
           "lem-q-and-irrationals-dense-r",
           "thm-rationals-countable",
-          "lem-finite-powers-of-countable-sets-are-countable"
+          "thm-n-cross-n-countable",
+          "lem-finite-powers-of-countable-sets-are-countable",
+          "thm-recursion",
+          "thm-well-ordering-principle"
         ]
       },
       {
@@ -335,9 +321,7 @@
         "strategy": "The compact integrals along an exhaustion increase. Their limit is bounded by the supremum over all compact Jordan subsets. Conversely, compactness places each compact Jordan subset inside one exhaustion member, so its integral is bounded by the exhaustion limit. This proves equality and independence of exhaustion, including infinite value and the empty domain.",
         "deps": [
           "def-improper-multiple-integral-and-absolute-convergence",
-          "thm-open-subsets-of-rn-admit-jordan-exhaustions",
-          "thm-multidimensional-integral-properties",
-          "def-metric-compactness"
+          "thm-multidimensional-integral-properties"
         ]
       },
       {
@@ -377,8 +361,11 @@
         "strategy": "Choose a compact Jordan core on which the nonnegative improper integral of the dominator leaves tail mass below $\\varepsilon$. Every dominated slice then has tail integral bounded by the same number, uniformly in the parameter. Use the absolute-value estimate for differences of two slices as well.",
         "deps": [
           "def-parameter-dependent-improper-multiple-integral",
+          "thm-open-subsets-of-rn-admit-jordan-exhaustions",
           "thm-comparison-test-for-improper-multiple-integrals",
-          "thm-nonnegative-improper-multiple-integral-by-exhaustion"
+          "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "thm-absolute-improper-multiple-integral-by-exhaustion",
+          "thm-multidimensional-integral-properties"
         ]
       },
       {
@@ -389,9 +376,11 @@
         "deps": [
           "def-parameter-dependent-improper-multiple-integral",
           "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
+          "thm-comparison-test-for-improper-multiple-integrals",
           "thm-heine-cantor-metric",
           "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
-          "thm-multidimensional-integral-properties"
+          "thm-multidimensional-integral-properties",
+          "thm-jordan-content-and-indicator-integrability"
         ]
       },
       {
@@ -403,6 +392,8 @@
           "def-parameter-dependent-improper-multiple-integral",
           "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
           "thm-continuity-of-dominated-parameter-dependent-improper-integrals",
+          "thm-comparison-test-for-improper-multiple-integrals",
+          "thm-absolute-improper-multiple-integral-by-exhaustion",
           "cor-mean-value-theorem",
           "thm-heine-cantor-metric",
           "thm-multidimensional-integral-properties"
@@ -459,19 +450,22 @@
           "thm-change-of-variables-for-compact-jordan-sets",
           "def-jacobian-determinant-of-a-c-one-map",
           "thm-polar-form-with-unique-principal-argument",
-          "def-null-and-content-zero-in-rn",
           "thm-jordan-boundary-criterion",
           "thm-graphs-of-continuous-functions-have-content-zero",
           "thm-heine-borel-rn",
           "thm-jordan-content-and-indicator-integrability",
           "thm-multidimensional-integral-properties",
+          "cor-riemann-integral-of-a-product-function",
           "def-multidimensional-rectangle-and-volume",
           "thm-sine-and-cosine-derivatives",
           "cor-trigonometric-parity-and-pythagorean-identity",
           "thm-derivative-of-exponential",
+          "thm-exponential-is-strictly-increasing",
           "thm-exponential-limits-and-range",
-          "thm-ftc-second-part",
-          "lem-integral-elementary-bounds"
+          "thm-exponential-definition-equivalence",
+          "thm-chain-rule",
+          "lem-derivative-of-a-power",
+          "thm-ftc-second-part"
         ]
       },
       {
@@ -507,7 +501,6 @@
         "deps": [
           "def-improper-multiple-integral-and-absolute-convergence",
           "thm-absolute-improper-multiple-integral-by-exhaustion",
-          "def-mixed-improper-integral",
           "thm-ftc-second-part",
           "thm-principal-inverse-tangent-calculus"
         ]
@@ -521,9 +514,9 @@
           "def-sections-and-iterated-riemann-integrals",
           "thm-multidimensional-riemann-criterion",
           "thm-euclid-infinitude-of-primes",
-          "def-finite-cardinality",
           "thm-of-archimedean",
-          "lem-q-and-irrationals-dense-r"
+          "lem-q-and-irrationals-dense-r",
+          "lem-riemann-integral-unchanged-by-content-zero-modification"
         ]
       },
       {
@@ -534,7 +527,11 @@
         "deps": [
           "thm-differentiation-under-dominated-improper-multiple-integrals",
           "def-improper-integral-at-infinity",
+          "thm-exponential-definition-equivalence",
           "thm-derivative-of-exponential",
+          "thm-exponential-limits-and-range",
+          "thm-chain-rule",
+          "thm-ftc-second-part",
           "thm-substitution-for-improper-integrals"
         ]
       },
@@ -548,6 +545,8 @@
           "thm-differentiation-under-dominated-improper-multiple-integrals",
           "thm-substitution-for-improper-integrals",
           "thm-exponential-beats-every-polynomial",
+          "thm-improper-p-test-rational",
+          "thm-comparison-test-for-improper-integrals",
           "thm-real-power-continuity-and-derivatives"
         ]
       }

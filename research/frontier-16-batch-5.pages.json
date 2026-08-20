@@ -36,7 +36,8 @@
         "strategy": "Define the sum of a nonnegative extended-real series as the supremum of its partial sums. Compare both iterated sums with the supremum of all finite rectangular sums: every rectangle is bounded by either iterated sum, while every finite part of either iterated sum is bounded by a sufficiently large rectangle. Treat an infinite entry and an unbounded family of finite rectangular sums separately so no subtraction or undefined extended-real product is used.",
         "deps": [
           "def-nonnegative-extended-series",
-          "lem-extended-reals-complete"
+          "lem-extended-reals-complete",
+          "lem-finite-choice"
         ]
       },
       {
@@ -303,7 +304,7 @@
       {
         "id": "def-completion-of-a-measure-space",
         "kind": "definition",
-        "title": "The completion sigma-algebra and completed set function of a measure space",
+        "title": "The completion domain and proposed completed set function of a measure space",
         "deps": [
           "def-complete-measure-space",
           "def-measure-null-set-and-almost-everywhere"
@@ -312,7 +313,7 @@
       {
         "id": "lem-completion-domain-is-a-sigma-algebra",
         "kind": "lemma",
-        "title": "The completion domain is a sigma-algebra",
+        "title": "Assuming countable choice, the completion domain is a sigma-algebra",
         "strategy": "Represent a completed set as $A\\cup N$ with $A$ measurable and $N$ contained in a measurable null set, first replacing $N$ by $N\\setminus A$. Show complements by writing $(A\\cup N)^c$ as a measurable complement modified inside the same null set, and show countable unions by taking the union of the measurable parts and using the countable union of their null envelopes.",
         "deps": [
           "def-completion-of-a-measure-space",
@@ -326,13 +327,14 @@
         "strategy": "If one completed set has two representations, each measurable core differs from the other only inside the union of the two measurable null envelopes. Their symmetric difference is therefore null, and the null-symmetric-difference proposition gives equal measures. Check the empty null envelope and infinite common value explicitly.",
         "deps": [
           "def-completion-of-a-measure-space",
-          "prop-null-symmetric-difference-preserves-measure"
+          "prop-null-symmetric-difference-preserves-measure",
+          "prop-null-sets-form-a-sigma-ideal-in-a-complete-space"
         ]
       },
       {
         "id": "thm-completion-of-a-measure-space",
         "kind": "theorem",
-        "title": "Every measure space has a unique complete extension to its completion",
+        "title": "Assuming countable choice, every measure space has a unique complete extension to its completion",
         "strategy": "Use the two completion lemmas to obtain a well-defined set function on a sigma-algebra. For a disjoint sequence choose measurable cores, remove the null overlaps to obtain disjoint measurable representatives, and apply countable additivity; then prove extension and completeness directly. For uniqueness, every added subset lies inside a null measurable set, so any complete extension must give it value zero and hence must assign the prescribed value to every completed set.",
         "deps": [
           "lem-completion-domain-is-a-sigma-algebra",
@@ -453,12 +455,13 @@
         "id": "thm-semifinite-part-is-a-measure",
         "kind": "theorem",
         "title": "Assuming countable choice, the semifinite part is a semifinite measure and equals the original measure exactly when it is semifinite",
-        "strategy": "For disjoint $E_k$, finite-measure subsets of their union give the easy subadditive bound after intersecting each $E_k$. For the reverse bound, countable choice selects finite-measure subsets approaching each semifinite-part value; finite unions first avoid an unjustified countable union of finite numbers, and a supremum argument closes the inequality. Semifiniteness is immediate from the defining supremum; use the arbitrarily-large-subset lemma for the equality criterion.",
+        "strategy": "For disjoint $E_k$, finite-measure subsets of their union give the easy subadditive bound after intersecting each $E_k$. For the reverse bound, finite choice selects approximating subsets on each fixed finite initial range; finite unions first avoid an unjustified countable union of finite numbers, and a supremum argument closes the inequality. Semifiniteness is immediate from the defining supremum; use the countable-choice-dependent arbitrarily-large-subset lemma for the equality criterion.",
         "deps": [
           "def-semifinite-part-of-a-measure",
           "lem-semifinite-measures-have-arbitrarily-large-finite-subsets",
           "def-countable-choice",
-          "def-measure"
+          "def-measure",
+          "lem-finite-choice"
         ]
       },
       {
@@ -612,7 +615,7 @@
       {
         "id": "ex-completion-of-borel-dirac-measure",
         "kind": "example",
-        "title": "The completion of the Borel Dirac measure at zero is defined on every subset of the real line",
+        "title": "Assuming choice, the completion of the Borel Dirac measure at zero is defined on every subset of the real line",
         "strategy": "The Borel set $\\mathbb R\\setminus\\{0\\}$ is $\\delta_0$-null, so every subset not containing zero enters the completion, and adjoining $\\{0\\}$ handles every subset containing zero. Thus the completion domain is $\\mathcal P(\\mathbb R)$ and the completed value is one exactly on sets containing zero. Use the published Borel-cardinality theorem and Cantor's theorem to verify that the original Borel sigma-algebra is strictly smaller, so this also gives the promised non-complete Borel measure space without a forward reference to Lebesgue measure.",
         "deps": [
           "thm-completion-of-a-measure-space",

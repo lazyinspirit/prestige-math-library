@@ -322,3 +322,129 @@ What was not verified: the strict proof-contract and citation gates cannot pass 
 - **B5-1 — applied.** This is Alpha group b’s finding, not the earlier design amendment with the same local label. The manifest now gives `def-nonnegative-weighted-sum-of-measures` explicit branches for $c=0$, $0<c<+\infty$, and $c=+\infty$, the last taking value zero on $\mu$-null sets and $+\infty$ otherwise. The theorem strategy proves that infinite branch is a measure before applying nonnegative Tonelli. The finite-atomic and countable-discrete strategies use the same convention for infinite weights; the former now declares `lem-finite-choice` and the weighted-sum/Dirac dependencies it actually uses, while the latter separates empty, finite, and countably infinite indexings without repeated-point padding. Their proof contracts now assign separate numbered obligations to the infinite branch, downstream atomic evaluation, coefficient uniqueness, and the relevant empty/zero/infinite boundaries. Declining this repair would leave the finite-atom classification undefined whenever an atom has infinite mass and a measurable set misses that atom.
 
   The Step-3 commands were rerun from the repository root. `coverage-checklist` and `content-policy --manifest-only` pass cleanly. `validate-plan research/plan-spec.json` passes against the current unspliced plan; as required, this is not claimed as validation of the batch overlay before Step 4. `prosecheck --warnings` reports no errors and only the pre-existing count heuristics in this required audit report. Both batch JSON files parse, the contract/dependency consistency check reports no undeclared citation or unmapped planned step, all external dependency targets are published with eligible Statement provenance, and `git diff --check` is clean.
+
+## Continuity checkpoint
+
+- Current substage: Step-5 content is authored; final audit, report, and gate closure are in progress. No text is frozen, judged, published, or owner-audited.
+- Owned artifacts: all 59 manifest item files; `library/measure-theory/measures-and-their-basic-properties.md`; `library/measure-theory/measures-and-their-basic-properties-examples.md`; and the four namespaced batch ledgers.
+- Completed gates: scoped reflow and precheck pass for all 44 proof-bearing items; strict proof-contract pass; citation-fidelity pass; boundary-audit pass with no template cluster or contradicted disposition; content-policy, coverage-checklist, prosecheck, rendercheck, fwdcheck, extcheck, and citecheck are clean for this scope; `validate-plan research/plan-spec.json` passes.
+- Proof-contract state: synchronized to the final Facts and step numbering, with 190 exact citation entries, exact step maps, and item-specific boundary rows. No finite-smoke check type applies.
+- Open mathematical constraints: rerun the contract after the final dependency citation added to sigma-finite uniqueness; finish dependency/source/render sweeps; record all authored dependency differences and generated-example checks. The global `depcheck` is presently blocked only by an unrelated malformed YAML title in another active batch, which this batch does not own.
+- Exact next action: resynchronize and rerun the final scoped gates, append `## Step-5 authoring` with the per-item result and dependency ledger, then report the remaining unrelated global-gate blocker honestly if it persists.
+
+## Step-5 authoring
+
+### Authored files and precheck results
+
+All 59 scaffolded item ids were authored, together with the A page and its B companion. No item was dropped, renamed, merged, or moved, so every `included` coverage disposition remains true of disk. Definitions carry the schema-prescribed `precheck: n/a`; all 44 proof-bearing items passed the scoped precheck after canonical stratification was adopted. No judge was run and no judge verdict, owner audit, or delegated verification was written.
+
+| id | precheck | Statement / construction provenance | proof / verification provenance |
+|---|---|---|---|
+| `def-nonnegative-extended-series` | n/a | ai-altered | not-applicable |
+| `def-limsup-and-liminf-of-nonnegative-extended-sequences` | n/a | ai-altered | not-applicable |
+| `thm-tonelli-for-nonnegative-double-series` | pass | literature-derived | ai-altered |
+| `def-measure` | n/a | literature-derived | not-applicable |
+| `def-measure-space` | n/a | literature-derived | not-applicable |
+| `def-finitely-additive-set-function` | n/a | literature-derived | not-applicable |
+| `def-finite-sigma-finite-and-semifinite-measures` | n/a | literature-derived | not-applicable |
+| `def-probability-measure` | n/a | literature-derived | not-applicable |
+| `def-measure-null-set-and-almost-everywhere` | n/a | literature-derived | not-applicable |
+| `def-complete-measure-space` | n/a | literature-derived | not-applicable |
+| `fs-subsets-of-null-sets-are-always-measurable` | pass | ai-altered | ai-generated |
+| `prop-measure-monotonicity` | pass | literature-derived | ai-altered |
+| `prop-measure-of-a-set-difference` | pass | literature-derived | ai-altered |
+| `thm-finite-and-countable-subadditivity-of-measures` | pass | literature-derived | ai-altered |
+| `thm-continuity-from-below-for-measures` | pass | literature-derived | ai-altered |
+| `thm-continuity-from-above-for-measures` | pass | literature-derived | ai-altered |
+| `def-counting-measure` | n/a | literature-derived | not-applicable |
+| `prop-counting-measure-is-a-measure` | pass | literature-derived | ai-altered |
+| `fs-continuity-from-above-without-finiteness` | pass | literature-derived | ai-altered |
+| `prop-two-set-measure-identity` | pass | literature-derived | ai-altered |
+| `thm-finite-inclusion-exclusion-for-measures` | pass | literature-derived | ai-altered |
+| `prop-null-symmetric-difference-preserves-measure` | pass | literature-derived | ai-altered |
+| `thm-countable-additivity-and-set-function-continuity` | pass | ai-altered | ai-altered |
+| `thm-first-borel-cantelli` | pass | literature-derived | ai-altered |
+| `thm-measure-of-set-liminf` | pass | literature-derived | ai-altered |
+| `thm-measure-of-set-limsup` | pass | literature-derived | ai-altered |
+| `cor-dominated-convergence-for-sets` | pass | literature-derived | ai-altered |
+| `prop-null-sets-form-a-sigma-ideal-in-a-complete-space` | pass | literature-derived | ai-altered |
+| `def-completion-of-a-measure-space` | n/a | ai-altered | not-applicable |
+| `lem-completion-domain-is-a-sigma-algebra` | pass | literature-derived | ai-altered |
+| `lem-completed-measure-is-well-defined` | pass | literature-derived | ai-altered |
+| `thm-completion-of-a-measure-space` | pass | literature-derived | ai-altered |
+| `def-restriction-of-a-measure` | n/a | literature-derived | not-applicable |
+| `prop-restriction-is-a-measure` | pass | literature-derived | ai-altered |
+| `def-dirac-measure` | n/a | literature-derived | not-applicable |
+| `prop-dirac-measure-is-a-probability-measure` | pass | literature-derived | ai-altered |
+| `def-nonnegative-weighted-sum-of-measures` | n/a | ai-altered | not-applicable |
+| `thm-nonnegative-weighted-sums-of-measures` | pass | literature-derived | ai-altered |
+| `thm-measures-on-finite-sigma-algebras-are-atomic` | pass | literature-derived | ai-altered |
+| `thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums` | pass | literature-derived | ai-altered |
+| `lem-semifinite-measures-have-arbitrarily-large-finite-subsets` | pass | ai-altered | ai-altered |
+| `def-semifinite-part-of-a-measure` | n/a | literature-derived | not-applicable |
+| `thm-semifinite-part-is-a-measure` | pass | ai-altered | ai-altered |
+| `thm-semifinite-and-zero-infinity-decomposition` | pass | ai-altered | ai-altered |
+| `lem-finite-measure-uniqueness-on-a-pi-system` | pass | literature-derived | ai-altered |
+| `thm-measure-uniqueness-on-a-sigma-finite-pi-system` | pass | ai-altered | ai-altered |
+| `fs-generating-families-determine-measures` | pass | literature-derived | ai-altered |
+| `fs-every-finitely-additive-set-function-is-a-measure` | pass | literature-derived | ai-altered |
+| `fs-countable-additivity-without-disjointness` | pass | ai-altered | ai-generated |
+| `fs-zero-on-singletons-implies-zero-measure` | pass | ai-altered | ai-altered |
+| `ex-counting-measure-and-sigma-finiteness` | pass | ai-altered | ai-altered |
+| `ex-dirac-measure` | pass | literature-derived | ai-altered |
+| `ex-dyadic-probability-measure-on-naturals` | pass | ai-generated | ai-generated |
+| `ex-countable-cocountable-zero-infinity-measure` | pass | ai-altered | ai-altered |
+| `ex-completion-of-borel-dirac-measure` | pass | ai-generated | ai-generated |
+| `ex-borel-cantelli-for-shrinking-dyadic-intervals` | pass | ai-generated | ai-generated |
+| `cex-continuity-from-above-without-finite-first-measure` | pass | literature-derived | ai-altered |
+| `cex-free-ultrafilter-finitely-additive-probability` | pass | literature-derived | ai-altered |
+| `cex-generating-family-without-pi-system` | pass | literature-derived | ai-altered |
+
+The per-item source/edit history and the rationale for both component labels are the final rows of `## Component provenance and source/edit rationale` above. Step 5 confirmed those rows against the authored files. In summary, Axler and Folland support the basic measure calculus, nullity, monotone continuity, completion, restriction, set-limit inequalities, semifinite machinery, and the standard false claims; Tao supports nonnegative extended sums, Tonelli, weighted sums, atomic classifications, dominated convergence for sets, inclusion-exclusion, and Borel-Cantelli; Pollard supports pi-system uniqueness and the four-point witness; Galvin supports the free-ultrafilter witness. `ai-altered` records the material changes needed for zero-based indexing, explicit extended-real branches, the same-ambient restriction convention, exact choice hypotheses, and local dependency closure. `ai-generated` proof labels identify only the local derivations or refutations, not the source-backed claim.
+
+The only AI-generated Statements/Constructions are the three generated examples already named in the truth-risk section. Their bounded counterexample search was repeated at authoring: the shifted dyadic total was $1$, the unshifted total was $2$, the shrinking-interval tail formula was checked at indices $0$ through $7$, and every Pollard row and column again had mass $1/2$ under both tables. The Borel-Dirac completion was checked separately in the cases $0\in E$ and $0\notin E$, and the cardinal argument was tightened to produce a non-Borel subset of the Borel null set $\mathbb R\setminus\{0\}$. No counterexample was found. These examples remain non-load-bearing and no authored item depends on them.
+
+### Scaffold-change ledger
+
+No title or id changed. One scaffold claim was narrowed: `thm-completion-of-a-measure-space` and its domain lemma now state the Axiom of Countable Choice explicitly, because closing a countable union or a disjoint sequence of completed sets requires choosing a representing triple for each given completed set. The completion definition records this condition and its two forward justifications. This is a correctness repair, not a dropped result.
+
+Dependency-list differences from the spliced scaffold are:
+
+- `thm-finite-and-countable-subadditivity-of-measures`: added `thm-well-ordering-principle`, used to assign every point of the union its least membership index during disjointization.
+- `thm-continuity-from-below-for-measures`: added `lem-extended-reals-complete`, used for the displayed supremum, including the infinite case.
+- `thm-continuity-from-above-for-measures`: added `lem-extended-reals-complete`, used for the displayed infimum after passing to a finite tail.
+- `thm-finite-inclusion-exclusion-for-measures`: added `thm-finite-and-countable-subadditivity-of-measures` to license finite real subtraction and `def-integer-power` to license the alternating signs. The finite-subset sum is given a recursive order, so no permutation theorem is presumed.
+- `thm-first-borel-cantelli`: added `prop-measure-monotonicity`, used to compare the set limsup with every tail union.
+- `def-completion-of-a-measure-space`: added `def-countable-choice`, which states the hypothesis under which the forward sigma-algebra justification closes.
+- `lem-completion-domain-is-a-sigma-algebra`: added `def-countable-choice` for the countable representation selection and `prop-null-sets-form-a-sigma-ideal-in-a-complete-space` for the countable union of measurable null envelopes.
+- `thm-completion-of-a-measure-space`: added `def-countable-choice`, used to select a measurable core and null envelope for every member of a disjoint completed sequence.
+- `lem-semifinite-measures-have-arbitrarily-large-finite-subsets`: added finite subadditivity, the finite-subtrahend difference result, and `cor-archimedean-reciprocal`; they prove respectively that the finite unions stay finite, the remainder retains infinite measure, and the chosen $1/(n+1)$ approximants reach the supremum.
+- `thm-semifinite-part-is-a-measure`: added `prop-measure-monotonicity`, used for the pointwise bound and the finite-subset comparisons.
+- `thm-semifinite-and-zero-infinity-decomposition`: added `thm-countable-union-of-countable`, countable subadditivity, counting measure, and uncountability of $\mathbb R`; the first two close sigma-finite unions and restrictions, while the last two give the explicit nonuniqueness witness required by the source-backed Statement.
+- `thm-measure-uniqueness-on-a-sigma-finite-pi-system`: added `prop-restriction-is-a-measure`, used to establish that the localized set functions are finite measures before finite uniqueness is invoked.
+- `fs-generating-families-determine-measures`: added `def-pi-system`, used to identify the precise failed intersection-closure hypothesis in the four-point witness.
+
+No dependency was added merely for a checker, and no planned dependency was dropped. Every added edge is cited in the final Statement, Facts, or proof. The completed proof contract now records 191 exact source citations, maps every numbered step exactly once, and has a concrete disposition for all standard boundary axes. `boundary-audit` reports no repeated template cluster and no contradicted disposition.
+
+### Gates and escalations
+
+- Scoped reflow: all 59 items unchanged after the final pass.
+- Scoped precheck: 44 proof-bearing items checked, 0 failing.
+- `proof-contract --strict`: 44/44 items, 0 errors, 0 warnings.
+- `citation-fidelity --fail-on-missing-quote`: 191 citations, no missing quote and no widening candidate.
+- `boundary-audit --fail-on-contradicted`: 352 rows, no template cluster and no contradicted disposition.
+- `finite-smoke`: 0 errors and 0 applicable registered checks; no finite-smoke pass is being presented as a mathematical proof.
+- `risk-report` without the Step-6-only reviewed flag: 0 errors; the current risk tiers are left for Alpha's independent Step-6 dispositions.
+- `content-policy`: 59 scoped items, 0 errors, 0 warnings.
+- `coverage-checklist`: 1 page and 92 harvested source results, 0 errors, 0 warnings.
+- `prosecheck --warnings`: 61 item/page files, 0 errors, 0 warnings.
+- `rendercheck`: 61 item/page files; YAML, KaTeX, delimiters, display lines, and wikilink placement all pass.
+- `validate-plan research/plan-spec.json`: exit 0; the current 322 authored page objects have an acyclic, order-consistent item graph with no unresolved id or B-leaf violation.
+- `fwdcheck`, `extcheck`, `citecheck`, and `depsource`: exit 0. `citecheck` produced no warning on a batch-5 file, and `depsource` reports no unresolved dependency.
+- Batch-scoped `git diff --check`: clean.
+
+The global `depcheck` was rerun and cannot be claimed as passed: its sole hard error is the malformed double-quoted title in `items/ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge.md`, owned by another concurrently active batch. The global `git diff --check` likewise currently fails only on a trailing blank line in `research/frontier-16-batch-4.proof-contracts.json`. Neither file is in batch 5, and editing either would cross the ownership boundary. These are Step-5 integration blockers if they remain when the engine runs the whole-level gate, not mathematical defects in this pair.
+
+### Confidence
+
+Confidence is high in the authored statements, the zero-based formulas, the extended-real case splits, the completion witness handling, the semifinite supremum arguments, the finite and sigma-finite uniqueness routes, and all finite counterexamples. I verified every direct dependency statement from disk, reran the source-excerpt and boundary detectors, and checked the generated examples independently. I did not run a judge, did not perform the Step-6 independent-reader or Alpha risk review, did not publish, and did not verify the mathematical content of other simultaneously authored batches. The completion and semifinite results intentionally expose their countable-choice cost; an independent reader should give those high-risk proofs, Tonelli, atomic classification, and both uniqueness theorems particular attention.

@@ -485,3 +485,121 @@ Gate rerun after this disposition:
 - `coverage-checklist.mjs`: exit 0; 76 harvested rows, 0 errors, and the same two Alpha-adjudicated low-yield warnings for the two A pages.
 - `content-policy.mjs --manifest-only`: exit 0; 39 scoped items, 0 errors, 0 warnings.
 - `validate-plan.mjs research/plan-spec.json`: exit 0; declared page order and all currently asserted item dependencies are consistent, with no item-level cycles, forward references, B-page dependency violations, or unresolved ids.
+
+## Continuity checkpoint
+
+- Current substage: Step-5 authoring is mathematically complete; final whole-batch gates, durable report, and diff review remain.
+- Owned content: all 39 ids in `research/frontier-16-batch-6.pages.json`; the four page files under `library/topology/`; the batch pages manifest, proof contract, coverage ledger, and this notes file.
+- Completed gates: all 35 proof-bearing items pass final canonical precheck; `proof-contract --strict` is clean for 35/35 contracts; `boundary-audit` finds no template or contradicted row; `citation-fidelity` finds no missing quote or widening; coverage has 0 errors and the two Alpha-adjudicated low-yield warnings; content policy, plan validation, prosecheck, and scoped rendercheck are clean. No judge was run.
+- Frozen-text state: not frozen for Step 7; Step 6 may still repair. Every authored item and page remains `status: draft`, `origin: session`, with no judge or audited stamp.
+- Mathematical constraints closed: arbitrary-map pushout convention; explicit Archimedean mesh choices; coordinate-axis stereographic covers at every basepoint; joint continuity of finite-wedge contractions; no-global-choice definition of the van Kampen inverse; traversal-order right monodromy; equality, not inclusion, for deck automorphisms; circle and wedge base hypotheses before covering classification; zero, one, empty, endpoint, and both-direction cases in the contract.
+- Authored dependency deltas: thirteen items differ from scaffold dependencies, all recorded for the Step-5 ledger; none changes an id, kind, title, or planned mathematical claim. The batch manifest also follows the Step-4 plan addition of `partitions-of-unity-and-paracompactness` to the van Kampen page prerequisites.
+- Open verification limits: finite-smoke has no registered check applicable to this topology batch; risk-report routes all proof-bearing items for Step-6 review; published dependency Statements were reopened, but their proofs were not re-audited wholesale.
+- Exact next action: append the full `## Step-5 authoring` per-item/provenance/dependency report, rerun every required batch gate after that durable write, inspect the owned diff, and report exact outcomes without judging or advancing the stage.
+
+## Step-5 authoring
+
+### Scope result
+
+Authored every scaffolded item: 39 item files, four draft page compositions, and the two required A-page summaries. The B pages have no authored summary body. No item was dropped, merged, renamed, or moved. Every item and page remains `status: draft`; every item is `origin: session`; no `verification.judge` or `verification.audited` field was written. The batch manifest now mirrors Step 4's authoritative addition of `partitions-of-unity-and-paracompactness` to the van Kampen A-page prerequisites.
+
+Abbreviations below are `LD` for `literature-derived`, `AA` for `ai-altered`, `AG` for `ai-generated`, and `NA` for `not-applicable`. Hatcher means the official *Algebraic Topology* PDF already recorded above; May means the official *Concise Course* PDF. Each `AA` proof is a local adaptation to the library's exact quotient, basepoint, right-monodromy, zero-index, and phase-stratification conventions rather than a claim that the underlying result is new.
+
+### Per-item precheck and component-provenance ledger
+
+#### Seifert-van Kampen A/B pair
+
+- `lem-open-cover-loop-generation`: precheck `pass`; `LD / AA`. Hatcher Lemma 1.15 supplies the statement and subdivision route; the proof uses the published metric compactness and explicit Archimedean mesh machinery.
+- `lem-antipodal-sphere-cover`: precheck `pass`; `AA / AA`. Hatcher Proposition 1.14 supplies the stereographic construction; the reusable coordinate-axis form, denominator discharge, and induced-map transport are material adaptations.
+- `thm-higher-dimensional-spheres-are-simply-connected`: precheck `pass`; `LD / AA`. Hatcher Proposition 1.14 supplies the theorem; the proof factors through the local generation lemma and checks the library's every-basepoint convention.
+- `lem-van-kampen-homotopy-grid`: precheck `pass`; `AA / AA`. The Hatcher/May homotopy subdivision is extracted as a boundary-refining grid lemma with an explicit Archimedean mesh.
+- `lem-van-kampen-factorization-invariance`: precheck `pass`; `AA / AA`. Hatcher's grid sweep is isolated and translated from normal-closure language to the arbitrary-homomorphism pushout.
+- `thm-seifert-van-kampen`: precheck `pass`; `LD / AA`. Hatcher Theorem 1.20 and May Chapter 2 support the claim; the local proof defines its inverse by a unique common factorization value and makes no global choice.
+- `cor-seifert-van-kampen-simply-connected-overlap`: precheck `pass`; `LD / AA`. This standard Hatcher/May specialization is derived through the published trivial-amalgamation result.
+- `cor-van-kampen-one-simply-connected-set`: precheck `pass`; `LD / AA`. May's named consequence supplies the statement; the local quotient proof identifies the normal-closure kernel.
+- `def-wedge-of-pointed-spaces`: precheck `n/a`; `LD / NA`. Hatcher/May supply the wedge construction; the exact equivalence relation, empty-family point, and quotient well-definedness are written inline.
+- `lem-finite-circle-wedge-open-cover`: precheck `pass`; `AA / AA`. Hatcher Example 1.21 and May's wedge argument are restricted to finite quotient circles; the proof adds the tagged-quotient regrouping and a direct joint-continuity check at the wedge point.
+- `thm-fundamental-group-of-finite-wedge-of-circles`: precheck `pass`; `LD / AA`. Hatcher/May supply the free-group calculation; the local induction includes ranks zero and one and uses the exact free-product-of-free-groups theorem.
+- `cor-fundamental-group-of-two-circle-wedge`: precheck `pass`; `LD / AA`. Hatcher Example 1.21 supplies the specialization, with the standard loops named as $a,b$.
+- `thm-fundamental-group-of-a-product`: precheck `pass`; `LD / AA`. May supplies the product lemma; the proof constructs both coordinatewise homomorphisms and their inverse homotopies.
+- `def-two-dimensional-torus`: precheck `n/a`; `LD / NA`. May's product torus is stated in the library's quotient-circle model.
+- `cor-fundamental-group-of-two-dimensional-torus`: precheck `pass`; `LD / AA`. May's product calculation is composed with the two published degree isomorphisms.
+- `ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge`: precheck `pass`; `AG / AG`, role `example`. The construction is local rather than source-attributed; its two maps were checked by reducing $a$ and $b^{-1}ab$ as distinct free-group words.
+- `ex-fundamental-group-of-the-punctured-plane`: precheck `pass`; `LD / AA`. Hatcher's classical calculation is implemented through the published radial deformation retraction and quotient-circle homeomorphism.
+- `ex-fundamental-groups-of-once-and-twice-punctured-two-sphere`: precheck `pass`; `AA / AA`. Hatcher's stereographic consequences are combined and tied to explicit basepoints and the preceding punctured-plane calculation.
+- `fs-every-fundamental-group-is-abelian`: precheck `pass`; `LD / AA`. Hatcher's wedge witness supplies the false claim's counterexample; the refutation uses the published reduced-word model of a free group.
+- `fs-van-kampen-with-disconnected-intersection`: precheck `pass`; `LD / AA`. Hatcher's two-arc failure supplies the claim and witness; exact quotient intervals and induced homeomorphism maps discharge the local calculations.
+
+#### Covering-classification A/B pair
+
+- `def-local-homeomorphism`: precheck `n/a`; `LD / NA`. May Chapter 3 supplies the exact local definition, with neither surjectivity nor the covering condition added.
+- `lem-compact-local-homeomorphism-surjective-with-finite-fibres`: precheck `pass`; `AA / AA`. This is the clopen-image and compact-discrete-fibre part of May Problem 4, extracted for proof decomposition.
+- `prop-compact-local-homeomorphism-is-finite-covering`: precheck `pass`; `LD / AA`. May Problem 4 supplies the statement; finite Hausdorff separation and removal of the compact complement image are explicit.
+- `prop-covering-morphism-subgroup-criterion`: precheck `pass`; `LD / AA`. Hatcher Proposition 1.37 and May Section 7 supply the criterion; the proof also establishes that the morphism is a surjective covering by local sheets and path lifting.
+- `cor-based-connected-coverings-isomorphic-iff-equal-subgroups`: precheck `pass`; `LD / AA`. Hatcher Proposition 1.37 supplies the equivalence; the two unique morphisms are proved inverse.
+- `lem-subgroup-quotient-of-universal-cover`: precheck `pass`; `LD / AA`. Hatcher Proposition 1.36 and May Section 8 supply subgroup realization; the proof uses the already-published universal cover and no-reversal deck convention.
+- `lem-covering-basepoint-change-conjugates-subgroup`: precheck `pass`; `LD / AA`. Hatcher's proof of Theorem 1.38 supplies the formula; both inclusions fix the traversal-order conjugation direction.
+- `thm-classification-of-connected-covering-spaces`: precheck `pass`; `LD / AA`. Hatcher Theorem 1.38 and May Section 7 support both based and unbased bijections; all surjectivity and injectivity directions are written.
+- `def-regular-covering`: precheck `n/a`; `LD / NA`. Hatcher/May supply the deck-transitivity definition and the normal-cover synonym; subgroup normality remains a theorem.
+- `lem-deck-transformations-correspond-to-normalizer-cosets`: precheck `pass`; `AA / AA`. Hatcher Proposition 1.39's proof is isolated; equality of based subgroups, right cosets, multiplication order, surjectivity, and the closed-lift kernel are explicit.
+- `thm-deck-group-as-normalizer-quotient`: precheck `pass`; `LD / AA`. Hatcher Proposition 1.39(b) and May Section 7 support the formula; normality inside the normalizer and the first isomorphism theorem supply the proof.
+- `thm-regular-covering-characterizations`: precheck `pass`; `LD / AA`. Hatcher Proposition 1.39(a) and May support the equivalence; the proof transports transitivity from the selected fibre to every fibre by unique path lifting.
+- `cor-deck-group-of-a-regular-covering`: precheck `pass`; `LD / AA`. Hatcher's regular special case follows by substituting $N_G(H)=G$.
+- `cor-real-line-is-universal-cover-of-circle`: precheck `pass`; `LD / AA`. Hatcher/May support the universal cover; the proof combines the published quotient covering with convex simple connectedness of $\mathbb R$.
+- `cor-connected-coverings-of-circle-classified-by-nonnegative-integers`: precheck `pass`; `LD / AA`. Hatcher's circle discussion and the published subgroup theorem support the claim; quotient arcs verify every base hypothesis and standard residues verify the sheet counts at $n=0,1$ and $n\ge1$.
+- `cor-every-connected-covering-of-circle-is-regular`: precheck `pass`; `LD / AA`. Hatcher's circle covers supply the claim; quotient arcs and lifted local path-connectedness license the normal-subgroup criterion.
+- `ex-circle-covering-towers-follow-divisibility`: precheck `pass`; `AA / AA`. May's morphism criterion is specialized to $m\mathbb Z\subseteq n\mathbb Z$; injectivity and functoriality identify the relative subgroup index with the quotient $q$.
+- `ex-deck-groups-of-connected-circle-coverings`: precheck `pass`; `LD / AA`. Hatcher Proposition 1.39 and the circle classification support the positive and universal cases; the title was corrected to state both rather than calling the universal cover zero-sheeted.
+- `ex-regular-and-nonregular-three-sheeted-wedge-coverings`: precheck `pass`; `AG / AG`, role `example`. The finite witnesses were checked directly: both free-group maps are surjective, both subgroups have index three, $(123)(12)(132)=(23)$ fixes $1$, and its conjugate $(13)$ does not. The two-circle wedge's local and semilocal hypotheses are discharged before classification.
+
+### Scaffold-change and dependency ledger
+
+No id or kind changed. No planned claim was narrowed or dropped. Two Statement-level refinements and one title repair were made:
+
+- `lem-antipodal-sphere-cover` states the stereographic cover for every coordinate-axis antipodal pair, rather than only the north/south wording in the strategy. This directly proves triviality at an arbitrary basepoint without citing a later B-page change-of-basepoint example.
+- `lem-finite-circle-wedge-open-cover` records the canonical regrouping $W_{r+1}\cong W_r\vee Q$ and the induced fundamental-group isomorphisms of its deformation retracts, facts used by the successor induction and proved locally.
+- `ex-deck-groups-of-connected-circle-coverings` changed title from the scaffold's positive-sheet wording to name both $n\ge1$ and the universal case. Its mathematical Example and id are unchanged; the repair prevents $n=0$ from reading as a zero-sheeted cover.
+
+Final authored dependency lists differ from the scaffold as follows. Every addition is used in the final Statement, Fact, or numbered proof; every removal deletes a route the final proof does not use.
+
+- `lem-open-cover-loop-generation`: replaced `thm-heine-borel-r` by metric `thm-heine-borel-rn`, and added `cor-archimedean-reciprocal`, because the Lebesgue lemma needs metric compactness and the uniform mesh needs an explicit positive denominator.
+- `lem-van-kampen-homotopy-grid`: added `cor-archimedean-reciprocal` for the grid mesh.
+- `lem-finite-circle-wedge-open-cover`: added `def-simply-connected`, induced-map functoriality, and the fundamental-group laws; dropped the unused general pasting lemma after joint continuity was proved directly at the wedge point.
+- `thm-fundamental-group-of-finite-wedge-of-circles`: replaced the infinite-cyclic-family corollary by `thm-free-product-of-free-groups-on-disjoint-bases`, the exact theorem needed for the successor basis.
+- `ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge` and `fs-every-fundamental-group-is-abelian`: replaced free-product normal form by `thm-reduced-words-form-the-free-group`, matching the actual $F(a,b)$ statement.
+- `fs-van-kampen-with-disconnected-intersection`: added induced-map functoriality to transport interval fundamental groups through quotient-arc homeomorphisms.
+- `thm-regular-covering-characterizations`: added path lifting for transitivity on fibres away from the selected basepoint.
+- `cor-connected-coverings-of-circle-classified-by-nonnegative-integers`: added the quotient/residue results and the path-connected, local path-connected, semilocally simply connected circle suppliers needed before applying classification and counting sheets.
+- `cor-every-connected-covering-of-circle-is-regular`: added quotient-arc and lifted-local-path suppliers so the base and total-space hypotheses of the regularity theorem are explicit.
+- `ex-circle-covering-towers-follow-divisibility`: added covering-map injectivity and induced-map functoriality to identify $f_*\pi_1(E_m)$ with $m\mathbb Z$ inside $n\mathbb Z$ before taking its index.
+- `ex-deck-groups-of-connected-circle-coverings`: dropped the unused universal-deck theorem after both cases were computed by the regular-cover quotient; added the quotient-circle path/local suppliers needed for that theorem's hypotheses.
+- `ex-regular-and-nonregular-three-sheeted-wedge-coverings`: added orbit-stabilizer, standard residues, index and normality definitions, and the finite-wedge local topology needed for the two explicit subgroups and classification; dropped `lem-subgroup-criterion` because subgroup closure of the stabilizer preimage is proved directly.
+
+### Generated-claim truth checks
+
+- `ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge`: checked the full local scope consisting of endpoint compatibility, the inverse path maps, the identity $c_\sigma=c_\rho\circ(b^{-1}(-)b)$, and distinct reduced words $a$ and $b^{-1}ab$. No counterexample or endpoint failure was found. The item is a B-page leaf and is not a dependency target.
+- `ex-regular-and-nonregular-three-sheeted-wedge-coverings`: checked the full finite scope in $\mathbb Z/3$ and $S_3$, including surjectivity, coset indices, preimage subgroup closure, the conjugation witness to nonnormality, and every base-space hypothesis of classification. No counterexample or convention mismatch was found. The item is a B-page leaf and is not a dependency target.
+
+### Gate ledger
+
+- Reflow: all 39 item files unchanged on the final run.
+- Precheck: 35/35 proof-bearing items pass; the four structural definitions correctly record `n/a`.
+- `validate-plan.mjs research/plan-spec.json`: pass.
+- `content-policy.mjs research/frontier-16-batch-6.pages.json`: 39 scoped items, 0 errors, 0 warnings.
+- Coverage checklist: 76 harvested rows, 0 errors; the two low-yield warnings are the exact Hatcher/May decline sets already adjudicated by Alpha at Step 3.
+- Strict proof contract: 35/35 items, 191 direct citation entries, 0 errors, 0 warnings.
+- Boundary audit: 280 rows, no template cluster and no contradicted disposition.
+- Citation-fidelity audit: no missing source excerpt and no widening candidate.
+- Rendercheck: 43 owned item/page files, no YAML, delimiter, wikilink-in-math, multiline-display, or KaTeX error.
+- Prosecheck: 43 files, 0 errors, 0 warnings.
+- `depcheck`, `fwdcheck`, and `extcheck`: pass globally; `citecheck` reports no batch-6 warning; `depsource` reports 0 unresolved.
+- Finite smoke: 0 errors and 0 checks because no registered bounded topology check matches these claims; this is not evidence for the proofs.
+- Risk report: 0 errors and all 35 proof-bearing items routed for Step-6 risk review. No author-side `risk_review` was written.
+- `git diff --check`: pass.
+- No judge was run, no judge verdict was invented, and no stage transition was attempted.
+
+### Escalations and confidence
+
+No blocker, missing item, scaffold falsehood, or suspected false published dependency remains. No published dependency was edited. The Step-4 prerequisite addition was reconciled in the batch manifest, and every authored dependency remains backward or earlier on its own page.
+
+Confidence is high in the Statements, boundary handling, arbitrary-map pushout convention, grid sweep, finite-wedge topology, subgroup conjugation direction, right-coset normalizer calculation, and the finite permutation witnesses. I reopened every directly cited published Statement/Definition/Example and checked every exact contract excerpt, but I did not re-audit all published dependency proofs. I did not run a browser-level visual review, a judge, an owner audit, or a finite-model check; rendercheck did perform the real YAML and KaTeX parsers. Step 6 must still independently read the routed high/critical proofs, and Step 7 alone may judge the final frozen text.

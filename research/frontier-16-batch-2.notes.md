@@ -491,3 +491,112 @@ The two added ids were checked by fixed-string and semantic `rg` searches over `
 - `validate-plan research/plan-spec.json`: exit 0 and reports the declared page order acyclic and consistent. The batch pages still have empty item lists in `plan-spec.json`, so this is the required current-plan gate, not an authoritative validation of the unspliced Batch 2 edges.
 - `prosecheck --warnings`: 4 files checked, 0 errors, and 13 count heuristics confined to source/result names and this required recountable report; no positional claim contradicts the spec.
 - Batch JSON parsing, contract-scope parity, all eight boundary dispositions, citation-to-dependency declarations, published status/provenance, and exact published citation excerpts: clean.
+
+## Step-5 authoring
+
+### Authored pages
+
+- `library/real-analysis/areas-of-elementary-plane-figures.md` and `library/real-analysis/areas-of-elementary-plane-figures-examples.md` were authored as `status: draft`, with the A-page summary in exactly two prose paragraphs and no B-page summary body.
+- `library/real-analysis/improper-and-parameter-dependent-multiple-integrals.md` and `library/real-analysis/improper-and-parameter-dependent-multiple-integrals-examples.md` were authored under the same draft convention.
+- Every item listed by the four page objects exists on disk. No planned item was dropped, renamed, merged, or deferred, so `research/frontier-16-batch-2.coverage.json` remains true without a disposition change.
+
+### Per-item precheck and final component provenance
+
+The source/edit-history column records the final component rationale. URLs are in each item's `sources.references`; the full source ranges and convention decisions remain in the Step-2 ledger above.
+
+| Item | Precheck | Statement / proof | Final source and edit history |
+|---|---|---|---|
+| `def-translation-of-a-set-in-rn` | n/a | `literature-derived` / `not-applicable` | Taylor's set-translation convention, copied without a new existence claim. |
+| `thm-jordan-content-is-translation-invariant` | pass | `literature-derived` / `ai-altered` | Taylor and Trench support the invariant statement; the local proof transports both cover families and applies the inverse translation. |
+| `prop-riemann-graph-area-equals-jordan-content` | pass | `literature-derived` / `ai-altered` | Taylor Theorem 3.1.9 and Trench Theorem 7.2.6, specialized locally to the constant-one integrand and the library's graph-area definition. |
+| `cor-disc-jordan-content-is-pi-r-squared` | pass | `ai-altered` / `ai-altered` | The source-backed positive-radius disc formula was extended locally to the radius-zero singleton and reconciled with Jordan content. |
+| `fs-a-bounded-plane-set-has-an-area` | pass | `ai-altered` / `ai-altered` | The RC-4/Lebl/Treibergs false claim and rational-point witness were refuted locally without a B-page dependency. |
+| `def-parallelogram-and-triangle-in-r2` | n/a | `literature-derived` / `not-applicable` | Standard affine set definitions from the linear-change treatment, retaining singular vectors and repeated vertices. |
+| `def-base-and-height-for-plane-figures` | n/a | `literature-derived` / `not-applicable` | Standard line-distance definition, with a nonzero chosen base and an inline existence check for the distance. |
+| `lem-determinant-base-height-identity-in-r2` | pass | `ai-altered` / `ai-altered` | Trench/Taylor determinant geometry was combined with the published projection and nearest-point theorems; equality follows from an explicit square identity. |
+| `thm-parallelogram-content-and-base-height-formula` | pass | `literature-derived` / `ai-altered` | The published parallelepiped formula is specialized to two dimensions, translated by the base point, and joined to the local height lemma. |
+| `thm-triangle-content-and-base-height-formula` | pass | `literature-derived` / `ai-altered` | The standard triangle is computed by graph area and the FTC, then transported by a possibly singular affine map. |
+| `cor-triangle-content-zero-iff-collinear` | pass | `literature-derived` / `ai-altered` | The classical degeneracy criterion is proved in both directions, with repeated vertices handled before coordinate division. |
+| `def-simple-polygonal-region-and-triangulation` | n/a | `ai-altered` / `not-applicable` | ETH and Erickson were materially reconciled into the approved filled-set, irredundant-boundary, diagonal, and frugal-triangulation convention. |
+| `lem-simple-polygon-has-an-interior-diagonal` | pass | `literature-derived` / `ai-altered` | Erickson Lemma 1.4 and ETH's constructive diagonal argument were adapted to the filled-region convention. |
+| `thm-simple-polygon-admits-a-triangulation` | pass | `literature-derived` / `ai-altered` | ETH Theorem 4.9 and Erickson Theorem 1.5, proved by an interior-diagonal induction. |
+| `cor-simple-polygon-triangulation-has-n-minus-two-triangles` | pass | `literature-derived` / `ai-altered` | ETH Lemma 4.15 and Erickson Lemma 1.7, with the internal-edge split and $n_1+n_2=n+2$ written explicitly. |
+| `thm-simple-polygon-content-is-the-sum-of-triangle-contents` | pass | `ai-altered` / `ai-altered` | ETH's triangle-area sum was translated into Jordan measurability using content-zero face intersections and finite additivity. |
+| `thm-shoelace-formula-for-simple-polygons` | pass | `literature-derived` / `ai-altered` | ETH Exercise 4.14, proved by signed triangular face sums and cancellation of oppositely oriented internal edges. |
+| `ex-triangle-area-by-determinant-and-base-height` | pass | `ai-generated` / `ai-generated` | Locally chosen vertices; determinant $12$, base $4$, height $3$, and content $6$ were recomputed. |
+| `ex-parallelogram-content-from-a-two-by-two-matrix` | pass | `ai-generated` / `ai-generated` | Locally chosen vectors; determinant $8$ and projection height $8/\sqrt{10}$ were recomputed. |
+| `ex-collinear-triangle-has-zero-content` | pass | `ai-generated` / `ai-generated` | Locally chosen scalar-multiple witness; dependence, zero determinant, zero height, and zero content were checked. |
+| `ex-unit-disc-has-jordan-content-pi` | pass | `literature-derived` / `ai-altered` | Source-backed radius-one specialization with the two-semicircle graph/Jordan reconciliation made explicit. |
+| `ex-irregular-pentagon-area-by-triangulation-and-shoelace` | pass | `ai-generated` / `ai-generated` | Locally chosen convex pentagon; edge signs, fan diagonals, triangle determinants, and shoelace sum were checked. |
+| `cex-linear-bijection-need-not-preserve-jordan-content` | pass | `ai-generated` / `ai-generated` | Explicit diagonal scaling witness; bijectivity, determinant $2$, and rectangle contents $1$ and $2$ were verified. |
+| `def-jordan-exhaustion-of-an-open-set` | n/a | `literature-derived` / `not-applicable` | Guillemin Definitions 3.21/3.23, with compact cofinality derived inline from nested interiors. |
+| `thm-open-subsets-of-rn-admit-jordan-exhaustions` | pass | `literature-derived` / `ai-altered` | Guillemin Theorem 3.20, adapted to canonical least-coded rational grid neighborhoods and an explicit recursion, avoiding Countable Choice. |
+| `def-improper-multiple-integral-and-absolute-convergence` | n/a | `literature-derived` / `not-applicable` | Guillemin Definitions 3.22/3.25 and Taylor §3.1; extended suprema and signed positive/negative parts are justified inline. |
+| `thm-nonnegative-improper-multiple-integral-by-exhaustion` | pass | `literature-derived` / `ai-altered` | Guillemin Theorem 3.24, proved by monotonicity and the compact-cofinality clause of an already given exhaustion. |
+| `thm-absolute-improper-multiple-integral-by-exhaustion` | pass | `literature-derived` / `ai-altered` | Guillemin/Taylor absolute-convergence result, using finite limits of the positive and negative parts. |
+| `thm-comparison-test-for-improper-multiple-integrals` | pass | `ai-altered` / `ai-altered` | Guillemin's supremum convention and the published proper monotonicity theorem were adapted into nonnegative and absolute comparison forms. |
+| `def-parameter-dependent-improper-multiple-integral` | n/a | `literature-derived` / `not-applicable` | Trench's pointwise parameter convention, generalized to open multiple-integral domains without presuming a slice exists. |
+| `lem-uniform-tail-control-for-dominated-improper-multiple-integrals` | pass | `ai-altered` / `ai-altered` | Trench's uniform-tail mechanism was adapted to compact Jordan cores, with proper zero-extension linearity made explicit. |
+| `thm-continuity-of-dominated-parameter-dependent-improper-integrals` | pass | `ai-altered` / `ai-altered` | Trench Theorem 10 adapted to an integrable dominator and multiple domain; the proof separates tails from a uniformly continuous compact core. |
+| `thm-differentiation-under-dominated-improper-multiple-integrals` | pass | `ai-altered` / `ai-altered` | Trench Theorem 11 adapted to multiple domains, with slice integrability, dominated quotients, compact-core convergence, and derivative continuity separated. |
+| `lem-riemann-integral-unchanged-by-content-zero-modification` | pass | `ai-altered` / `ai-altered` | Taylor §3.1 and Trench §7.3, adapted to the library's zero-extension convention and proved by finite cover/grid control in both directions. |
+| `lem-gaussian-integral-is-finite-and-positive` | pass | `literature-derived` / `ai-altered` | Taylor's preliminary Gaussian claim, proved locally by exponential comparison, the rational $p$-test, separate tails, and a positive middle bound. |
+| `lem-gaussian-square-is-the-plane-gaussian-integral` | pass | `literature-derived` / `ai-altered` | Taylor formulas (3.1.71)–(3.1.75), first on compact squares and then along an explicit square exhaustion. |
+| `lem-plane-gaussian-integral-in-polar-coordinates` | pass | `literature-derived` / `ai-altered` | Taylor's polar computation, with injective half-annuli, content-zero seams, the origin-disc estimate, and expanding full discs all discharged locally. |
+| `thm-gaussian-integral` | pass | `literature-derived` / `ai-altered` | Taylor and Trench; the two local Gaussian lemmas give $I^2=\pi$, and positivity selects the unique nonnegative square root. |
+| `ex-unequal-iterated-improper-integrals-on-the-unit-square` | pass | `ai-generated` / `ai-generated` | The design formula was independently differentiated and integrated; the general rectangular truncation and both aspect-ratio limits were recomputed. |
+| `cex-zero-iterated-integrals-without-a-double-integral` | pass | `ai-generated` / `ai-generated` | The prime-grid witness was checked for finite sections, density, dense complement, constant Darboux gap, and zero iterated values. |
+| `cex-differentiation-under-an-improper-integral-without-domination` | pass | `literature-derived` / `ai-altered` | Trench Example 3, with the $t=0$ branch, substitution for $t\ne0$, and pointwise derivative integral checked separately. |
+| `ex-scaled-gaussian-parameter-integral` | pass | `literature-derived` / `ai-altered` | Trench Example 12 and Taylor; substitution gives the value, while exponential-versus-polynomial comparison supplies the derivative dominator. |
+
+### Scaffold-change ledger
+
+No item id or title changed, and no claim was dropped. `cor-triangle-content-zero-iff-collinear` adds the explicit displacement-list meaning of “collinear”; `thm-differentiation-under-dominated-improper-multiple-integrals` states the parameter interval as open so its two-sided derivative conclusion has no endpoint ambiguity. The following dependency lists changed from the scaffold, each because the final proof either exposed a real input or removed an edge it did not use:
+
+- `thm-parallelogram-content-and-base-height-formula`: added `thm-jordan-content-is-translation-invariant`, needed to move the origin-based published parallelepiped to base point $p$.
+- `lem-simple-polygon-has-an-interior-diagonal`: removed `def-parallelogram-and-triangle-in-r2` and `cor-triangle-content-zero-iff-collinear`; the source-backed planar diagonal argument uses only the final polygonal-region definition.
+- `cex-linear-bijection-need-not-preserve-jordan-content`: added `def-jordan-inner-and-outer-content` to compute the source and image rectangle contents rather than attributing that fact to the rectangle-volume definition.
+- `thm-open-subsets-of-rn-admit-jordan-exhaustions`: added `def-jordan-inner-and-outer-content`, `def-multidimensional-rectangle-and-volume`, `thm-n-cross-n-countable`, `thm-recursion`, and `thm-well-ordering-principle`; removed direct `def-countable`. These are the actual empty/box and canonical finite-code inputs, while countability terminology is inherited through the cited theorems.
+- `thm-nonnegative-improper-multiple-integral-by-exhaustion`: removed `thm-open-subsets-of-rn-admit-jordan-exhaustions` and `def-metric-compactness`; the Statement begins with an already given exhaustion, so existence of another exhaustion and a duplicate compactness definition are not proof inputs.
+- `lem-uniform-tail-control-for-dominated-improper-multiple-integrals`: added `thm-multidimensional-integral-properties` for the proper zero-extension difference estimate.
+- `thm-continuity-of-dominated-parameter-dependent-improper-integrals`: added `thm-comparison-test-for-improper-multiple-integrals` and `thm-jordan-content-and-indicator-integrability` for slice existence and the compact-core constant bound.
+- `thm-differentiation-under-dominated-improper-multiple-integrals`: added `thm-comparison-test-for-improper-multiple-integrals` for absolute integrability of nearby slices and derivative slices.
+- `lem-plane-gaussian-integral-in-polar-coordinates`: added `thm-exponential-is-strictly-increasing`; removed unused `def-null-and-content-zero-in-rn` and `lem-integral-elementary-bounds`. The final proof uses the local modification lemma for seams and monotonicity for the inner-disc bound.
+- `ex-unequal-iterated-improper-integrals-on-the-unit-square`: removed unused `def-mixed-improper-integral`; each fixed-coordinate inner integral is proper away from the omitted corner.
+- `cex-zero-iterated-integrals-without-a-double-integral`: added the same-pair A-item `lem-riemann-integral-unchanged-by-content-zero-modification` for finite sections and removed unused `def-finite-cardinality`.
+- `ex-scaled-gaussian-parameter-integral`: added `thm-improper-p-test-rational` and `thm-comparison-test-for-improper-integrals` so polynomial-times-Gaussian tail integrability is proved rather than asserted.
+
+### Generated witness audit
+
+- The generated triangle, parallelogram, collinear-triangle, pentagon, and linear-scaling constructions were searched for failure within their exact finite coordinate data. All determinant, projection, convexity/noncrossing, cyclic-index, and content calculations agreed with the Statements; no counterexample to any claimed value was found.
+- For `ex-unequal-iterated-improper-integrals-on-the-unit-square`, symbolic differentiation and the full four-endpoint rectangle formula were recomputed. Swapping the two lower-endpoint scales gives the claimed opposite limits, so the exhaustion failure is genuine.
+- For `cex-zero-iterated-integrals-without-a-double-integral`, reduced prime denominators make every coordinate section finite, arbitrarily large prime grids give density, an irrational first coordinate gives dense complement, and every nondegenerate Darboux cell has oscillation one. No exceptional boundary section invalidates the witness.
+- No generated construction is a dependency target. No external web counterexample search was needed after these exact finite/symbolic checks because none left a concrete truth doubt; the source-backed false statement and literature counterexample retain their source provenance instead of being mislabeled generated.
+
+### Final gate record
+
+- `reflow`: all owned item files unchanged; `precheck`: 35/35 proof-bearing items pass, while the seven definitions legitimately use `verification.precheck: n/a`.
+- `validate-plan research/plan-spec.json`: exit 0; the declared order is acyclic and consistent.
+- `content-policy research/frontier-16-batch-2.pages.json`: 42 scoped items, 0 errors, 0 warnings.
+- `proof-contract --strict`: 35/35 contracts, 0 errors and 0 warnings; citation fidelity checked 146 exact fact/source excerpts with no missing quote or widening candidate.
+- `boundary-audit`: all 280 axes are disposed with no template cluster. Its sole contradicted candidate is a false positive on the shoelace empty-sum axis: the Statement assumes $n\ge3$, so the indexed boundary sum cannot be empty.
+- `coverage-checklist`: 84 harvested headings, 0 errors, and the already-triaged area low-yield warning; Alpha's Step-3 re-check confirmed the source-specific declines.
+- `finite-smoke`: 0 registered checks apply, so the 0-check result is recorded only as non-applicability, not evidence. `risk-report` marks 25 items high or critical; Step 6 must supply the corresponding independent risk reviews.
+- `rendercheck`: 42 item files clean. `prosecheck --warnings`: all 42 items and four pages clean, including the two-paragraph A summaries and empty B bodies. The applied-natural-embedding scan found no `\iota(...)` occurrence.
+- `fwdcheck` and `extcheck`: exit 0. `citecheck`: exit 0; its two owned warnings are false positives that read set translation in the parallelogram and triangle items as addition of inequalities.
+- Repository-wide `depcheck` was run and returned one unrelated `yaml-escape` error in `items/ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge.md`; it reported zero errors in Batch 2. Repository-wide `git diff --check` was also run and stopped on an unrelated extra blank line in `research/frontier-16-batch-4.proof-contracts.json`; the Batch-2 whitespace scan is clean. These concurrent-file findings were not edited here.
+
+### Escalations and confidence
+
+There is no Batch-2 boundary escalation, external fallback, published-dependency repair, or missing prerequisite item. The repository-wide failures just named belong to concurrent batches and require the engine to rerun the global gates after those writers finish.
+
+Confidence is high in the explicit determinant, content, exhaustion, domination, Gaussian, and counterexample computations, and in citation fidelity because every Fact was reopened against its source item and contracted to exact primary-section text. The independent Step-6 reader and Alpha risk reviews have not run, no paired judge was invoked, and no owner audit or publication field was written. I did not browser-preview the draft pages. The nontrivial planar-geometry move in `lem-simple-polygon-has-an-interior-diagonal`, the least-code construction in `thm-open-subsets-of-rn-admit-jordan-exhaustions`, and the seam-to-disc passage in `lem-plane-gaussian-integral-in-polar-coordinates` deserve the reader's closest mathematical scrutiny even though their local contracts and mechanical gates are clean.
+
+## Continuity checkpoint
+
+- Current substage: Step-5 authoring and the batch-scoped final gate pass are complete; the text is still pre-audit and not Step-7 frozen.
+- Owned artifacts: all item ids in `research/frontier-16-batch-2.pages.json`, the four matching `library/real-analysis/` page files, `research/frontier-16-batch-2.proof-contracts.json`, `research/frontier-16-batch-2.coverage.json`, and this notes file.
+- Completed gates: final reflow/precheck, validate-plan, content-policy, coverage checklist, strict proof contract, citation fidelity, boundary audit, finite-smoke applicability, risk routing, rendercheck, prosecheck, fwdcheck, extcheck, citecheck, and depsource. Batch-2 ownership has zero depcheck errors and zero trailing-whitespace hits.
+- Open external state: repository-wide depcheck still has the unrelated YAML escape in `ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge.md`; repository-wide `git diff --check` still has the unrelated Batch-4 trailing blank line. The engine must rerun those global gates after concurrent authors finish.
+- Mathematical constraints for Step 6: 25 contracts are high or critical risk and need Alpha dispositions; the shoelace empty-axis boundary alert is a reviewed false positive because $n\ge3$; the interior-diagonal, least-code exhaustion, dominated differentiation, and polar seam/disc arguments merit closest independent review.
+- Exact next action: return the Step-5 report to the engine without judging, publishing, committing, or changing another batch.

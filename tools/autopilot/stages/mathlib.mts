@@ -204,7 +204,7 @@ const fetchGate = (ctx) => gate('source-fetch-check', ['node', 'tools/source-fet
 // the case that needs it: recover from the archive first — RECOVER BEFORE
 // REPLACE is the standing rule — and only then retire what is still dead and
 // carries nothing the level would lose.
-const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[][]> = {
+export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[][]> = {
   'url-liveness': (ctx) => [
     // 1. dead citation with a recorded archive snapshot -> swap it in place
     ['tools/url-recover-apply.mjs',
@@ -245,9 +245,19 @@ const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[][]> = 
   // the stalemate synthetic (covered, undispatched, artifact-incomplete) on
   // stage 4 IS the withheld-splice shape — same repair
   'stage-stalemate': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
-  // object drift between manifests and the plan is what the splice's REFRESH
-  // exists for — same remedy as a refusal re-splice
-  'splice-verify': (ctx) => ['tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'],
+  // Object drift between the manifests and the plan — "same ids, N item
+  // object(s) changed" — is what the splice's REFRESH exists for, and the
+  // refresh is `--update`, which the tool accepts ONLY per batch:
+  // `(update && !batch)` is a usage error. The entry here was
+  // `--all --fail-on-refusal`, which treats a differing page as a hard error
+  // and refuses to overwrite, so it could never clear the very drift the gate
+  // reports. frontier-16 spent three rounds on it at step 5 after the 6b
+  // Alphas repaired items in four pages of batch 1.
+  //
+  // One `--update` per batch instead. A batch whose items already match is
+  // left alone, so this is idempotent over the ones that did not drift.
+  'splice-verify': (ctx) => batches(ctx).map((b: any) =>
+    ['tools/splice-plan.mjs', '--run', ctx.run, '--batch', String(b), '--update']),
   // a stale impact receipt is a disk function: recompute the window from the
   // newest snapshot and add `pending` rows for new consumers. The pendings
   // keep the gate red, which correctly routes the RESIDUAL to the
@@ -1211,6 +1221,19 @@ export const stages = [
     // floor held correctly on 0/324.
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
+      // A FAILURE WITH A MECHANICAL REPAIR TAKES IT FIRST, whatever its id.
+      // `splice-verify` fails here as a matter of course: the 6b Alphas add
+      // and repair items under their step-6 licence, so the manifests move
+      // ahead of the plan and the currency check says so — correctly. It is
+      // not a candidate read and it has no Alpha; it has a transcription.
+      // This hook enumerated three ids, so it fell straight through, three
+      // rounds were spent dispatching nothing, and the run reported "did not
+      // clear" for a repair it never ran. Third instance of that shape today.
+      if (MECHANICAL_REPAIRS[failure.id]) {
+        const repair = await mechanicalRepair({ ctx, failure });
+        if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
+        return;   // the battery re-verifies; a residue fails the gate again, honestly
+      }
       if (!['boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) return;
       executor.start(stage, {
         role: 'alpha',

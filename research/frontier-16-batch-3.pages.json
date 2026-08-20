@@ -8,7 +8,10 @@
     "companion": "picard-lindelof-and-first-order-odes-examples",
     "requires": [
       "the-fundamental-theorems-of-calculus",
-      "approximation-and-compactness-in-ck"
+      "approximation-and-compactness-in-ck",
+      "improper-integrals",
+      "topological-spaces-and-continuity",
+      "connectedness"
     ],
     "items": [
       {
@@ -34,7 +37,7 @@
         "id": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
         "kind": "proposition",
         "title": "A first-order initial value problem is equivalent to its Volterra integral equation",
-        "strategy": "For a solution, continuity of the right-hand side along the curve makes the derivative componentwise Riemann integrable, and the vector-valued fundamental theorem gives the integral equation. Conversely, each component of a continuous integral equation is differentiable by the first fundamental theorem, has the prescribed derivative, and takes the initial value when the oriented integral has equal endpoints. Treat both orientations of time explicitly.",
+        "strategy": "On an order-convex interval with at least two elements, apply the vector-valued fundamental theorem componentwise to pass from the ODE to the oriented Volterra equation. Conversely, the primitive theorem for a continuous integrand differentiates the integral equation, including the domain-relative endpoints.",
         "deps": [
           "def-first-order-ode-initial-value-problem-and-solution",
           "def-vector-valued-derivative-and-integral",
@@ -51,13 +54,14 @@
         "deps": [
           "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
           "def-vector-valued-derivative-and-integral",
-          "def-metric-ball"
+          "def-metric-ball",
+          "thm-recursion"
         ]
       },
       {
         "id": "lem-vector-valued-continuous-curve-space-is-complete",
         "kind": "lemma",
-        "title": "Continuous $\\mathbb{R}^n$-valued curves on a compact interval form a complete supremum-metric space",
+        "title": "Continuous $\\mathbb{R}^n$-valued curves on a nonempty compact interval form a complete supremum-metric space",
         "strategy": "A supremum-metric Cauchy sequence is Cauchy in every coordinate. Completeness of the scalar $C(K,\\mathbb R)$ spaces supplies coordinate limits; the finite coordinate list reassembles to a continuous $\\mathbb R^n$-valued curve, and equivalence of the Euclidean and maximum norms turns coordinatewise uniform convergence into convergence in the stated supremum metric. Check $n\\ge1$ and the one-point interval separately.",
         "deps": [
           "thm-c-k-complete-in-the-sup-metric",
@@ -71,12 +75,13 @@
         "id": "lem-picard-operator-preserves-a-closed-curve-ball",
         "kind": "lemma",
         "title": "A bounded vector field makes the Picard operator preserve a sufficiently short closed curve ball",
-        "strategy": "Choose a compact time-state cylinder about the initial point and let $M$ bound the Euclidean norm of the vector field there. If the curve stays in the closed spatial ball and $hM\\le r$, the vector integral inequality gives $\\|\\mathcal T x(t)-x_0\\|\\le M|t-t_0|\\le r$ for every endpoint and interior time. The case $M=0$ is handled without dividing by $M$.",
+        "strategy": "A continuous curve gives a continuous composite integrand, so its componentwise integral is again a continuous curve. On a compact time-state cylinder with field bound $M$, the vector integral inequality gives $\\|\\mathcal T x(t)-x_0\\|\\le M|t-t_0|\\le r$ whenever $hM\\le r$. The case $M=0$ is handled without division.",
         "deps": [
           "def-picard-operator-and-picard-iterates",
           "thm-norm-inequality-for-the-vector-valued-integral",
-          "thm-extreme-value-metric",
-          "thm-heine-borel-rn"
+          "lem-continuity-is-local-and-pastes",
+          "cor-primitives-of-a-continuous-function",
+          "thm-componentwise-limits-and-continuity"
         ]
       },
       {
@@ -95,7 +100,7 @@
         "id": "thm-picard-lindelof-local-existence-and-uniqueness",
         "kind": "theorem",
         "title": "Picard-Lindelöf local existence and uniqueness for first-order systems",
-        "strategy": "Choose a nondegenerate compact cylinder inside the open ODE domain and then choose $h>0$ so that both $hM\\le r$ and $Lh<1$. The closed curve ball is nonempty and complete, the Picard operator maps it into itself and is a contraction, so Banach gives a unique fixed point. The integral-equation equivalence identifies that fixed point with the unique local solution; uniqueness on any smaller common interval follows by restricting the same estimate.",
+        "strategy": "Choose a nondegenerate compact cylinder inside the open ODE domain and then choose $h>0$ so that both $hM\\le r$ and $Lh<1$. The closed curve ball is nonempty and complete, the Picard operator maps it into itself and is a contraction, so Banach gives a unique fixed point. The integral-equation equivalence identifies that fixed point with the unique local solution; interval connectedness propagates local agreement across every common interval.",
         "deps": [
           "def-first-order-ode-initial-value-problem-and-solution",
           "def-locally-lipschitz-in-the-state-variable",
@@ -103,14 +108,15 @@
           "lem-vector-valued-continuous-curve-space-is-complete",
           "lem-picard-operator-preserves-a-closed-curve-ball",
           "lem-picard-operator-is-a-short-time-contraction",
-          "thm-banach-fixed-point"
+          "thm-banach-fixed-point",
+          "cor-connected-subsets-of-the-line"
         ]
       },
       {
         "id": "cor-uniform-picard-lindelof-for-nearby-initial-values",
         "kind": "corollary",
         "title": "Nearby initial values share one Picard–Lindelöf time interval and one state cylinder",
-        "strategy": "Shrink the original cylinder to a smaller compact cylinder around the base initial point. Continuity and local state-Lipschitz continuity give common bounds $M,L$ on the larger cylinder, while every nearby initial point retains a fixed positive distance from its boundary. One $h$ satisfying the invariant-ball and contraction inequalities therefore works for all initial values in the smaller ball.",
+        "strategy": "Choose nested compact cylinders around the base data. Compactness gives common field and state-Lipschitz bounds, while positive spatial and temporal margins allow one radius and one half-length satisfying the quantitative Picard-Lindelöf hypotheses for every nearby initial point.",
         "deps": [
           "thm-picard-lindelof-local-existence-and-uniqueness",
           "thm-extreme-value-metric",
@@ -133,21 +139,23 @@
         "id": "prop-picard-iteration-converges-with-explicit-error-bounds",
         "kind": "proposition",
         "title": "Picard iteration converges with geometric short-time and factorial cylinder error bounds",
-        "strategy": "On a short interval with $q=Lh<1$, apply the published Banach a priori and a posteriori estimates. On the full invariant cylinder, repeated integration gives $\\|\\mathcal T^m x-\\mathcal T^m y\\|_\\infty\\le (Lh)^m\\|x-y\\|_\\infty/m!$ by induction; Weissinger then yields convergence and the tail bound without requiring $Lh<1$. State the starting iterate at index zero and handle $L=0$ and $h=0$ before division.",
+        "strategy": "On a short interval with $q=Lh<1$, use the short-time contraction lemma before applying the published Banach a priori and a posteriori estimates. On the full invariant cylinder, repeated integration gives $\\|\\mathcal T^m x-\\mathcal T^m y\\|_\\infty\\le (Lh)^m\\|x-y\\|_\\infty/m!$ by induction; Weissinger then yields convergence and the tail bound without requiring $Lh<1$. State the starting iterate at index zero and handle $L=0$ and $h=0$ before division.",
         "deps": [
           "thm-picard-lindelof-local-existence-and-uniqueness",
           "def-picard-operator-and-picard-iterates",
+          "lem-picard-operator-is-a-short-time-contraction",
           "lem-weissinger-fixed-point-criterion",
           "cor-banach-error-estimates",
           "thm-norm-inequality-for-the-vector-valued-integral",
-          "def-factorial-and-falling-factorial"
+          "def-factorial-and-falling-factorial",
+          "thm-picard-iterates-for-exponential"
         ]
       },
       {
         "id": "thm-gronwall-integral-inequality",
         "kind": "theorem",
         "title": "Gronwall's integral inequality with variable and constant coefficients",
-        "strategy": "For $u(t)\\le a(t)+\\int_{t_0}^t b(s)u(s)\\,ds$, introduce the accumulated integral and multiply it by the integrating factor $\\exp(-\\int b)$. Differentiate, integrate the resulting inequality, and divide by the positive factor. This gives the generalized formula; when $a$ is nondecreasing it reduces to $u(t)\\le a(t)\\exp(\\int b)$. Reflect the proof for $t<t_0$ and treat $b=0$ explicitly.",
+        "strategy": "For forward time, introduce the accumulated integral and multiply it by the integrating factor $exp(-int b)$. Differentiate, integrate the resulting inequality, and divide by the positive factor. State the reflected hypothesis with $int_t^{t_0}$ explicitly and derive the constant-coefficient estimate in both orientations.",
         "deps": [
           "thm-derivative-of-exponential",
           "cor-exponential-reciprocal-and-positivity",
@@ -165,7 +173,6 @@
         "strategy": "Subtract the two Volterra equations, apply the vector integral inequality and the state-Lipschitz estimate, then apply Grönwall to obtain $\\|x(t)-y(t)\\|\\le e^{L|t-t_0|}\\|x(t_0)-y(t_0)\\|$. Coincident initial values give uniqueness. Check the estimate at $t=t_0$, for $L=0$, and in both time directions.",
         "deps": [
           "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
-          "def-locally-lipschitz-in-the-state-variable",
           "thm-gronwall-integral-inequality",
           "thm-norm-inequality-for-the-vector-valued-integral"
         ]
@@ -174,13 +181,14 @@
         "id": "thm-continuous-dependence-of-odes-on-initial-data-and-parameters",
         "kind": "theorem",
         "title": "Continuous dependence of ODE solutions on initial data and parameters",
-        "strategy": "Use the uniform nearby-initial-value cylinder and restrict all compared solutions to a common compact time interval. Subtract their integral equations, split the integrand into the state difference and the parameter/right-hand-side difference, and apply Grönwall. Uniform continuity of $F$ on the compact time-state-parameter cylinder makes the latter error tend to zero, proving joint continuous dependence with the quantitative estimate.",
+        "strategy": "Choose one compact time-state-parameter cylinder and common field and state-Lipschitz bounds. Apply the quantitative Picard–Lindelöf theorem to each parameter slice with the same radius and time length, then subtract the resulting Volterra equations. Split the integrand into state and parameter discrepancies; compact uniform continuity and Grönwall give the quantitative joint-dependence estimate.",
         "deps": [
-          "cor-uniform-picard-lindelof-for-nearby-initial-values",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
           "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
           "thm-gronwall-integral-inequality",
           "thm-norm-inequality-for-the-vector-valued-integral",
-          "thm-heine-cantor-metric"
+          "thm-heine-cantor-metric",
+          "thm-extreme-value-metric"
         ]
       },
       {
@@ -224,6 +232,7 @@
           "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps",
           "cor-bolzano-weierstrass-in-rn",
           "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
           "thm-norm-inequality-for-the-vector-valued-integral"
         ]
       },
@@ -231,10 +240,13 @@
         "id": "cor-finite-maximal-time-forces-escape-from-every-compact-set",
         "kind": "corollary",
         "title": "At a finite maximal time an ODE solution leaves every compact subset of the domain",
-        "strategy": "If the graph did not eventually leave some compact interior subset, choose times tending to the finite endpoint with graph points in that compact set. The extension lemma would continue the solution beyond the endpoint, contradicting maximality. State the backward-time version separately and distinguish escape from convergence to infinity when the whole domain is Euclidean space.",
+        "strategy": "If the graph did not eventually leave some compact interior subset, countable choice selects times tending to the finite endpoint with graph points in that compact set, and least later indices give an increasing subsequence. The extension lemma would continue the solution beyond the endpoint, contradicting maximality. State the backward-time version separately and distinguish compact escape from convergence to infinity.",
         "deps": [
           "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
-          "lem-ode-extension-from-a-compact-interior-region"
+          "lem-ode-extension-from-a-compact-interior-region",
+          "def-countable-choice",
+          "thm-well-ordering-principle",
+          "thm-recursion"
         ]
       },
       {
@@ -243,10 +255,12 @@
         "title": "A globally state-Lipschitz vector field on $\\mathbb R\\times\\mathbb R^n$ has global solutions",
         "strategy": "On each finite time slab, continuity bounds $\\|F(t,0)\\|$ and global state-Lipschitz continuity gives linear growth $\\|F(t,x)\\|\\le M+L\\|x\\|$. Apply Grönwall to the integral equation to bound the solution on that slab. A finite maximal endpoint would therefore fail the compact-escape criterion, so both maximal endpoints are infinite.",
         "deps": [
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
           "cor-finite-maximal-time-forces-escape-from-every-compact-set",
           "thm-gronwall-integral-inequality",
           "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
-          "thm-extreme-value-metric"
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn"
         ]
       },
       {
@@ -268,18 +282,16 @@
         "id": "lem-euler-polygonal-approximations-are-uniformly-bounded-and-equicontinuous",
         "kind": "lemma",
         "title": "Euler polygonal approximations for a continuous ODE are uniformly bounded and equicontinuous",
-        "strategy": "On a compact cylinder where $\\|F\\|\\le M$, choose a mesh with $hM\\le r$. Define the Euler polygon recursively at mesh points and interpolate linearly. Induction keeps every vertex and segment inside the spatial ball, and every polygon has slope norm at most $M$, hence is $M$-Lipschitz. Include the final shortened mesh interval and the case $M=0$.",
+        "strategy": "For $h>0$ on a cylinder with the given finite field bound $M$, define the Euler polygon recursively at positive-mesh vertices and interpolate linearly. Induction keeps every vertex and segment inside the spatial ball, and every polygon is $M$-Lipschitz, including a shortened final cell.",
         "deps": [
           "def-first-order-ode-initial-value-problem-and-solution",
-          "thm-extreme-value-metric",
-          "thm-heine-borel-rn",
           "def-equicontinuity-and-boundedness-in-ck"
         ]
       },
       {
         "id": "lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence",
         "kind": "lemma",
-        "title": "A uniformly bounded equicontinuous sequence of $\\mathbb R^n$-valued curves has a uniformly convergent subsequence",
+        "title": "A uniformly bounded equicontinuous sequence of $\\mathbb R^n$-valued curves on a nonempty compact interval has a uniformly convergent subsequence",
         "strategy": "Fix an enumeration of the rational points of the compact time interval. At each rational time use deterministic nested-box bisection and least admissible indices to extract a convergent subsequence in $\\mathbb R^n$; diagonalize over the fixed enumeration. Equicontinuity and a finite rational net make the diagonal subsequence uniformly Cauchy, and completeness of the vector-valued curve space gives a continuous uniform limit. The construction uses no choice principle.",
         "deps": [
           "cor-bolzano-weierstrass-in-rn",
@@ -294,7 +306,7 @@
         "id": "thm-peano-local-existence-for-continuous-odes",
         "kind": "theorem",
         "title": "Peano local existence for a continuous first-order system",
-        "strategy": "Build Euler polygonal approximations on a common compact cylinder. Their uniform boundedness and equicontinuity give a uniformly convergent subsequence. Uniform continuity of the vector field makes the defect between each polygon and its Volterra integral tend uniformly to zero; pass to the limit under the componentwise Riemann integral and use the integral-equation equivalence. No uniqueness is claimed, and the argument is Euler approximation rather than the invalid Picard-iterate compactness route.",
+        "strategy": "Build forward Euler polygons and repeat the construction after reflecting time. Uniform boundedness and equicontinuity yield a uniformly convergent subsequence on each side; uniform continuity controls the Volterra defects and permits passage under the componentwise integral. Glue the two limiting half-solutions at the initial point to obtain the required two-sided local solution.",
         "deps": [
           "lem-euler-polygonal-approximations-are-uniformly-bounded-and-equicontinuous",
           "lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence",
@@ -317,12 +329,13 @@
         "id": "thm-osgood-uniqueness-criterion-for-first-order-odes",
         "kind": "theorem",
         "title": "Osgood's criterion gives uniqueness without a Lipschitz bound",
-        "strategy": "For two solutions with the same initial value, set $R(t)=\\|x(t)-y(t)\\|^2$. The one-sided Osgood estimate bounds $R'$ by a constant times $\\sqrt R\\,\\rho(\\sqrt R)$. Regularize away from zero, separate variables, and integrate from the first alleged departure time. The divergence of $\\int_{0^+}dr/\\rho(r)$ contradicts any positive value of $R$; repeat in reverse time. Check that the criterion includes Lipschitz but also the almost-Lipschitz modulus $r(1+|\\log r|)$.",
+        "strategy": "For two solutions with the same initial value, set $R=|x-y|^2$ and bound $|R'|$ by $2sqrt R,\rho(sqrt R)$. Put $q_\u000barepsilon=sqrt{R+\u000barepsilon}$, integrate $q_\u000barepsilon'/\rho(q_\u000barepsilon)le1$, and let $\u000barepsilon$ tend to zero. Osgood divergence contradicts any positive separation; reflect time and continue through the agreement set.",
         "deps": [
           "def-modulus-of-continuity-and-osgood-condition",
           "def-first-order-ode-initial-value-problem-and-solution",
           "thm-chain-rule",
           "thm-ftc-second-part",
+          "cor-primitives-of-a-continuous-function",
           "def-euclidean-inner-product",
           "thm-cauchy-schwarz-and-the-euclidean-norm"
         ]
@@ -337,7 +350,9 @@
     "title": "Picard-Lindelof and First-Order Ordinary Differential Equations: Examples and Counterexamples",
     "companion": "picard-lindelof-and-first-order-odes",
     "requires": [
-      "picard-lindelof-and-first-order-odes"
+      "picard-lindelof-and-first-order-odes",
+      "darboux-lhopital-and-taylor",
+      "the-logarithm-and-general-powers"
     ],
     "items": [
       {
@@ -381,7 +396,8 @@
         "deps": [
           "def-first-order-ode-initial-value-problem-and-solution",
           "def-dirichlet-and-thomae-functions",
-          "thm-darboux-theorem-for-derivatives"
+          "thm-darboux-theorem-for-derivatives",
+          "lem-q-and-irrationals-dense-r"
         ]
       },
       {
@@ -392,12 +408,13 @@
         "deps": [
           "thm-osgood-uniqueness-criterion-for-first-order-odes",
           "def-locally-lipschitz-in-the-state-variable",
-          "thm-logarithm-derivative-and-integral"
+          "thm-logarithm-derivative-and-integral",
+          "def-modulus-of-continuity-and-osgood-condition"
         ]
       },
       {
         "id": "fs-continuity-of-the-right-hand-side-guarantees-unique-ode-solutions",
-        "kind": "false statement",
+        "kind": "false-statement",
         "title": "False: continuity of the right-hand side guarantees unique ODE solutions",
         "strategy": "Refute the claim with the earlier delayed-start family for $y'=2\\sqrt{|y|}$: the right-hand side is continuous, but every delay gives a distinct solution through zero.",
         "deps": [
@@ -406,7 +423,7 @@
       },
       {
         "id": "fs-a-local-ode-solution-exists-on-the-whole-domain-of-the-vector-field",
-        "kind": "false statement",
+        "kind": "false-statement",
         "title": "False: a local ODE solution extends across the whole time-domain of its vector field",
         "strategy": "The polynomial field $F(t,y)=y^2$ is defined on all of $\\mathbb R^2$, while the solution through $(0,1)$ is $(1-t)^{-1}$ and has finite maximal endpoint one. The blowup example and compact-escape criterion refute the asserted extension.",
         "deps": [
@@ -415,7 +432,7 @@
       },
       {
         "id": "fs-local-lipschitz-continuity-is-necessary-for-ode-uniqueness",
-        "kind": "false statement",
+        "kind": "false-statement",
         "title": "False: local Lipschitz continuity is necessary for uniqueness of an ODE solution",
         "strategy": "Use the almost-Lipschitz Osgood example: its vector field admits no finite local Lipschitz constant at zero, yet the Osgood divergence condition proves that the zero solution is the unique solution through zero.",
         "deps": [
@@ -500,34 +517,35 @@
         ]
       },
       {
-        "id": "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
+        "id": "thm-henstock-kurzweil-cauchy-criterion",
         "kind": "theorem",
-        "title": "Henstock–Kurzweil integrability on subintervals and additivity over adjacent intervals",
-        "strategy": "To restrict an integral, modify a gauge so every fine interval tagged on one side of the cut stays on that side, then complete a partial partition to a fine partition of the whole interval. Conversely combine gauges from the two sides, forcing the cut to be a partition point. The corresponding Riemann sums split exactly, giving integrability in both directions and the oriented additivity formula. Check tags equal to the cut and zero-length outer intervals.",
+        "title": "The Cauchy criterion for Henstock–Kurzweil integrability",
+        "strategy": "Necessity follows by comparing two fine sums with the same integral. For sufficiency, use countable choice to select, for each $n\\in\\mathbb N$, a gauge $\\gamma_n$ for which all fine sums differ by less than $2^{-n}$. Put $\\delta_n=\\min_{k\\le n}\\gamma_k$. The nonempty sets of $\\delta_n$-fine sums are nested and have diameter below $2^{-n}$; their closed interval hulls are therefore nested with lengths tending to zero, so the nested interval property gives one common value. Every sufficiently fine sum lies near that value. Cousin's lemma supplies nonemptiness, while no sequence of fine partitions is selected.",
         "deps": [
           "def-henstock-kurzweil-integral-on-a-compact-interval",
           "thm-cousins-lemma-for-gauges",
-          "def-oriented-integral"
+          "thm-nested-interval-property",
+          "def-countable-choice",
+          "lem-geometric-sequence-null"
         ]
       },
-    {
-      "id": "thm-henstock-kurzweil-cauchy-criterion",
-      "kind": "theorem",
-      "title": "The Cauchy criterion for Henstock–Kurzweil integrability",
-      "strategy": "Necessity follows by comparing two fine sums with the same integral. For sufficiency, use countable choice to select, for each $n\\in\\mathbb N$, a gauge $\\gamma_n$ for which all fine sums differ by less than $2^{-n}$. Put $\\delta_n=\\min_{k\\le n}\\gamma_k$. The nonempty sets of $\\delta_n$-fine sums are nested and have diameter below $2^{-n}$; their closed interval hulls are therefore nested with lengths tending to zero, so the nested interval property gives one common value. Every sufficiently fine sum lies near that value. Cousin's lemma supplies nonemptiness, while no sequence of fine partitions is selected.",
-      "deps": [
-        "def-henstock-kurzweil-integral-on-a-compact-interval",
-        "thm-cousins-lemma-for-gauges",
-        "thm-nested-interval-property",
-        "def-countable-choice",
-        "lem-geometric-sequence-null"
-      ]
+      {
+        "id": "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
+        "kind": "theorem",
+        "title": "Henstock–Kurzweil integrability on subintervals and additivity over adjacent intervals",
+        "strategy": "For restriction, complete two fine subinterval partitions by one common complementary partition; the whole-interval estimates give the HK Cauchy criterion on each side. Conversely, combine side gauges and shrink them by distance to the cut, so only a cut-tagged cell can cross and it splits validly. Add the side estimates and then orient arbitrary endpoints.",
+        "deps": [
+          "def-henstock-kurzweil-integral-on-a-compact-interval",
+          "thm-cousins-lemma-for-gauges",
+          "thm-henstock-kurzweil-cauchy-criterion",
+          "def-oriented-integral"
+        ]
       },
       {
         "id": "thm-saks-henstock-lemma",
         "kind": "theorem",
         "title": "The Saks–Henstock lemma for fine partial tagged partitions",
-        "strategy": "Fix a gauge controlling complete partition errors. For a fine partial partition, classify each local error by sign and use Cousin's lemma to fill every complementary interval with fine pieces. Comparing the completed sums with the integral bounds the positive and negative error totals separately; combine them to bound the sum of absolute local errors. Treat the empty partial partition and adjacent complementary intervals explicitly.",
+        "strategy": "Fix one whole-interval gauge controlling complete-partition errors before the partial partition is quantified. For a fine partial partition, classify local errors by sign and, on each complementary interval, use a partition fine for the minimum of the fixed gauge and a complement-specific accuracy gauge. Comparing the completed sums with the integral bounds the positive and negative totals separately; combine them to bound the sum of absolute local errors.",
         "deps": [
           "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
           "def-henstock-kurzweil-integral-on-a-compact-interval",
@@ -542,34 +560,37 @@
         "deps": [
           "def-henstock-kurzweil-integral-on-a-compact-interval",
           "thm-darboux-equals-riemann",
-          "def-tagged-partition-and-riemann-sum"
+          "def-tagged-partition-and-riemann-sum",
+          "def-gauge-and-fine-tagged-partition"
         ]
       },
-    {
-      "id": "thm-every-derivative-is-henstock-kurzweil-integrable",
-      "kind": "theorem",
+      {
+        "id": "thm-every-derivative-is-henstock-kurzweil-integrable",
+        "kind": "theorem",
         "title": "Every derivative is Henstock–Kurzweil integrable and satisfies Newton–Leibniz",
-        "strategy": "For each tag, differentiability supplies a gauge radius on which the linearization error of the primitive is bounded by $\\varepsilon$ times interval length. On a fine tagged partition, split each increment at its tag, sum the two error estimates, and telescope the primitive increments. The total error is at most $\\varepsilon(b-a)$, proving that $F'$ is integrable with integral $F(b)-F(a)$ without boundedness or prior integrability of $F'$.",
+        "strategy": "For each tag, use the least natural reciprocal radius satisfying the derivative estimate, making the gauge canonical without uncountable choice. Split each primitive increment at its tag, sum the two linearization errors, and telescope. This proves the endpoint formula on every nondegenerate compact interval without boundedness of the derivative.",
         "deps": [
           "def-henstock-kurzweil-integral-on-a-compact-interval",
           "def-derivative",
+          "cor-archimedean-reciprocal",
+          "thm-well-ordering-principle",
           "thm-cousins-lemma-for-gauges",
-        "lem-finite-sum-laws"
-      ]
-    },
-    {
-      "id": "cor-indefinite-henstock-kurzweil-integral-is-a-primitive",
-      "kind": "corollary",
-      "title": "The indefinite Henstock–Kurzweil integral of a derivative is a primitive",
-      "strategy": "Let $F$ be differentiable on $[a,b]$ with $a<b$, put $f=F'$, and define $G(x)=\\int_a^x f$. Apply the derivative form of Newton–Leibniz on each $[a,x]$ to obtain $G(x)=F(x)-F(a)$, with $G(a)=0$ from the degenerate-interval convention. The difference quotient of $G$ at any point of $[a,b]$ is therefore the difference quotient of $F$ there, so $G'=F'=f$, including the one-sided endpoint derivatives used by the library's domain-relative definition.",
-      "deps": [
-        "thm-every-derivative-is-henstock-kurzweil-integrable",
-        "def-henstock-kurzweil-integral-on-a-compact-interval",
-        "def-derivative"
-      ]
-    },
-    {
-      "id": "cor-henstock-kurzweil-integration-by-parts",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "cor-indefinite-henstock-kurzweil-integral-is-a-primitive",
+        "kind": "corollary",
+        "title": "The indefinite Henstock–Kurzweil integral of a derivative is a primitive",
+        "strategy": "Let $F$ be differentiable on $[a,b]$ with $a<b$, put $f=F'$, and define $G(x)=\\int_a^x f$. Apply the derivative form of Newton–Leibniz on each $[a,x]$ to obtain $G(x)=F(x)-F(a)$, with $G(a)=0$ from the degenerate-interval convention. The difference quotient of $G$ at any point of $[a,b]$ is therefore the difference quotient of $F$ there, so $G'=F'=f$, including the one-sided endpoint derivatives used by the library's domain-relative definition.",
+        "deps": [
+          "thm-every-derivative-is-henstock-kurzweil-integrable",
+          "def-henstock-kurzweil-integral-on-a-compact-interval",
+          "def-derivative"
+        ]
+      },
+      {
+        "id": "cor-henstock-kurzweil-integration-by-parts",
         "kind": "corollary",
         "title": "Henstock–Kurzweil integration by parts for differentiable factors",
         "strategy": "For differentiable $F,G$, the product rule makes $(FG)'=F'G+FG'$, and the derivative theorem makes this sum Henstock–Kurzweil integrable with endpoint integral. If either summand is integrable, linearity makes the other integrable and rearrangement gives the integration-by-parts formula. State the symmetric iff and avoid assuming both products integrable at the outset.",
@@ -586,8 +607,7 @@
         "strategy": "If $F'=f$ on an interval containing $\\phi([a,b])$, the chain rule gives $(F\\circ\\phi)'=(f\\circ\\phi)\\phi'$. Apply the derivative theorem to the composite to obtain integrability and the endpoint formula. No monotonicity of $\\phi$ and no separate integrability hypothesis on $f$ are needed; check constant $\\phi$ and reversed endpoint values.",
         "deps": [
           "thm-every-derivative-is-henstock-kurzweil-integrable",
-          "thm-chain-rule",
-          "thm-intermediate-value"
+          "thm-chain-rule"
         ]
       },
       {
@@ -631,12 +651,13 @@
         "id": "thm-hake-extension-theorem-for-henstock-kurzweil-integrals",
         "kind": "theorem",
         "title": "Hake's theorem: a finite-endpoint generalized integral is a proper Henstock–Kurzweil integral after assigning the endpoint value",
-        "strategy": "One direction is restriction plus the noncompact Cauchy criterion. Conversely, choose a tail point so all tail integrals are small, use compact Henstock–Kurzweil integrability on the remaining interval, and define a gauge that forces every interval tagged at the missing endpoint into the small tail. Split any fine partition at the tail point, apply the compact estimate and Saks–Henstock control, and note that the chosen endpoint value contributes only on an arbitrarily short interval. Prove independence of that value.",
+        "strategy": "The proper-to-noncompact direction uses Saks-Henstock on an endpoint-tagged tail cell. Conversely, decompose the interval into countably many bands approaching the missing endpoint, choose compatible local gauges with a summable error budget, and shrink them by distances to band boundaries. Every global fine partition then splits into complete bands, one final partial band, and an endpoint-tagged tail cell, whose errors are controlled separately.",
         "deps": [
           "def-henstock-kurzweil-integral-on-a-noncompact-interval",
           "thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals",
           "thm-saks-henstock-lemma",
-          "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity"
+          "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
+          "def-countable-choice"
         ]
       }
     ]
@@ -649,19 +670,25 @@
     "title": "The Gauge Integral and Cousin's Lemma: Examples and Counterexamples",
     "companion": "the-gauge-integral-and-cousins-lemma",
     "requires": [
-      "the-gauge-integral-and-cousins-lemma"
+      "the-gauge-integral-and-cousins-lemma",
+      "improper-integrals",
+      "darboux-lhopital-and-taylor"
     ],
     "items": [
       {
         "id": "ex-dirichlet-function-is-henstock-kurzweil-integrable",
         "kind": "example",
         "title": "The indicator of the irrationals is Henstock–Kurzweil integrable with integral $1$",
-        "strategy": "Enumerate the rationals in $[0,1]$ and choose the gauge at the $k$th rational so its interval length contributes less than $\\varepsilon 2^{-k}$. Give irrational tags an unrestricted small positive radius. In any fine partition the total length of intervals with rational tags is below $\\varepsilon$; the Riemann sum of the irrational indicator therefore differs from one by less than $\\varepsilon$. Cite the published failure of Riemann integrability.",
+        "strategy": "Enumerate the rationals in $[0,1]$ and choose the gauge at the $k$th rational so its interval length contributes less than $\\varepsilon 2^{-k}$. Give irrational tags an unrestricted small positive radius. In any fine partition the total length of intervals with rational tags is below $\\varepsilon$; the Riemann sum of the irrational indicator therefore differs from one by less than $\\varepsilon$. Then prove non-Riemann-integrability locally: density of the rationals and irrationals makes every lower Darboux sum zero and every upper Darboux sum one.",
         "deps": [
           "def-henstock-kurzweil-integral-on-a-compact-interval",
           "thm-cousins-lemma-for-gauges",
           "thm-rationals-countable",
-          "cex-dirichlet-is-not-riemann-integrable"
+          "def-dirichlet-and-thomae-functions",
+          "lem-q-and-irrationals-dense-r",
+          "def-partition-and-refinement",
+          "def-darboux-sums",
+          "def-darboux-integral"
         ]
       },
       {
@@ -687,7 +714,8 @@
           "thm-riemann-integrable-functions-are-henstock-kurzweil-integrable",
           "thm-continuous-implies-integrable",
           "thm-dirichlet-test-for-improper-integrals",
-          "thm-sine-and-cosine-derivatives"
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity"
         ]
       },
       {
@@ -697,22 +725,23 @@
         "strategy": "Given an open cover of $[a,b]$, choose for each point a gauge radius whose centered interval lies in one covering set. A fine tagged partition exists by Cousin's lemma, and the finitely many covering sets selected at its tags cover every partition subinterval and hence all of $[a,b]$. The empty and one-point intervals are handled before choosing tags.",
         "deps": [
           "thm-cousins-lemma-for-gauges",
-          "thm-heine-borel-r"
+          "def-complete-ordered-field"
         ]
       },
       {
         "id": "fs-every-derivative-is-riemann-integrable",
-        "kind": "false statement",
+        "kind": "false-statement",
         "title": "False: every derivative is Riemann integrable",
-        "strategy": "Use the published Volterra counterexample: it is an everywhere derivative and is bounded, yet it fails the Riemann criterion. The Henstock–Kurzweil derivative theorem supplies the correct replacement and evaluates its integral by endpoint difference.",
+        "strategy": "Use the earlier example $F(x)=x^2\\sin(1/x^2)$: its derivative is unbounded near zero, while the definition of the Riemann integral requires boundedness. This directly refutes the universal claim. The Henstock–Kurzweil derivative theorem supplies the correct replacement and evaluates the same derivative by endpoint difference. Mention the stronger published bounded Volterra witness only in a non-load-bearing Remark.",
         "deps": [
-          "cex-volterra-bounded-derivative-not-riemann-integrable",
+          "ex-unbounded-derivative-evaluated-by-henstock-kurzweil",
+          "def-darboux-integral",
           "thm-every-derivative-is-henstock-kurzweil-integrable"
         ]
       },
       {
         "id": "fs-henstock-kurzweil-integrable-functions-are-bounded",
-        "kind": "false statement",
+        "kind": "false-statement",
         "title": "False: every Henstock–Kurzweil integrable function is bounded",
         "strategy": "The derivative of $x^2\\sin(1/x^2)$ is Henstock–Kurzweil integrable on $[0,1]$ but unbounded near zero, as established in the earlier example.",
         "deps": [
@@ -723,28 +752,29 @@
         "id": "cex-henstock-kurzweil-integrability-is-not-absolute",
         "kind": "counterexample",
         "title": "Henstock–Kurzweil integrability does not imply integrability of the absolute value",
-        "strategy": "Use the derivative $f=F'$ from $F(x)=x^2\\sin(1/x^2)$. The derivative theorem makes $f$ HK integrable. On alternating intervals tending to zero, the term $2\\cos(1/x^2)/x$ forces a fixed positive amount of absolute integral; compare after the substitution $u=1/x^2$ with successive cosine half-periods to make the truncation integrals of $|f|$ unbounded. Hake's theorem then rules out a proper HK integral of $|f|$ on $[0,1]$.",
+        "strategy": "Use the derivative of $x^2sin(1/x^2)$. On compact intervals away from zero, $|f|$ is continuous and hence locally HK integrable. Endpoint increments on alternating sine extrema give a harmonic lower bound for the truncation integrals of $|f|$; Hake then rules out proper HK integrability on $[0,1]$.",
         "deps": [
           "ex-unbounded-derivative-evaluated-by-henstock-kurzweil",
           "thm-hake-extension-theorem-for-henstock-kurzweil-integrals",
           "cor-henstock-kurzweil-substitution-for-derivatives",
-          "thm-monotonicity-of-the-henstock-kurzweil-integral"
+          "thm-monotonicity-of-the-henstock-kurzweil-integral",
+          "thm-riemann-integrable-functions-are-henstock-kurzweil-integrable",
+          "thm-continuous-implies-integrable",
+          "thm-p-series-rational"
         ]
       },
       {
         "id": "fs-henstock-kurzweil-integrable-implies-riemann-integrable",
-        "kind": "false statement",
+        "kind": "false-statement",
         "title": "False: Henstock–Kurzweil integrability implies Riemann integrability",
-        "strategy": "The indicator of the irrationals is Henstock–Kurzweil integrable with integral one, while its complement differs from the published Dirichlet function by a constant and is not Riemann integrable. This refutes the converse of the Riemann-to-HK theorem.",
+        "strategy": "Use the preceding example, which establishes both that the irrational indicator has Henstock–Kurzweil integral one and that its lower and upper Darboux integrals are zero and one. The same function is therefore Henstock–Kurzweil integrable but not Riemann integrable, directly refuting the converse of the Riemann-to-HK theorem.",
         "deps": [
-          "ex-dirichlet-function-is-henstock-kurzweil-integrable",
-          "cex-dirichlet-is-not-riemann-integrable",
-          "thm-linearity-of-the-integral"
+          "ex-dirichlet-function-is-henstock-kurzweil-integrable"
         ]
       },
       {
         "id": "fs-every-henstock-kurzweil-integrable-function-is-a-derivative",
-        "kind": "false statement",
+        "kind": "false-statement",
         "title": "False: every Henstock–Kurzweil integrable function is a derivative",
         "strategy": "The indicator of the irrationals is Henstock–Kurzweil integrable but has only the values zero and one on every interval. It therefore fails the intermediate-value property, whereas Darboux's theorem says every derivative has that property.",
         "deps": [

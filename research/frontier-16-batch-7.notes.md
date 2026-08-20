@@ -499,3 +499,164 @@ Confidence is high that B7-1 is closed at scaffold level. I verified the new
 route against the exact published dependency statements and the four already
 harvested source treatments. I did not author or precheck the new item, splice
 the manifest, apply the queued published backlink, or run Step-6/Step-7 review.
+
+## Step-5 authoring
+
+### Authored artifacts
+
+The A page library/complex-analysis/analyticity-liouville-and-morera.md and the
+companion
+library/complex-analysis/analyticity-liouville-and-morera-examples.md are
+authored as drafts. Their item lists agree with the spliced specification. Every
+owned item is status: draft and origin: session; no item carries an owner audit,
+delegated verification, or judge verdict. The A-page summary is the approved
+two-paragraph scaffold summary, rechecked against the final items. The companion
+has no authored summary body.
+
+### Per-item precheck and component-provenance ledger
+
+| id | precheck | statement / proof | source and edit history |
+|---|---|---|---|
+| rem-locally-uniform-convergence-dictionary | n/a | ai-altered / not-applicable | Weber's locally uniform definition and the Ahlfors/Stein compact-uniform formulation were adapted into an agreement proof with the published compact-convergence topology. |
+| def-real-analytic-map-on-the-plane | n/a | ai-altered / not-applicable | Taylor's planar Taylor-series convention was adapted componentwise to maps into the coordinate plane, with convergence and finite-sum conventions made explicit. |
+| def-taylor-series-holomorphic-function | n/a | literature-derived / not-applicable | The Ahlfors, Stein--Shakarchi, Weber, and Shabat coefficient convention was followed; the definition records that higher derivatives make every coefficient well-defined. |
+| def-order-of-zero-holomorphic-function | n/a | literature-derived / not-applicable | Shabat's least-nonzero-coefficient definition was followed, with the published extended-real value for the zero germ and well-ordering discharge written inline. |
+| thm-taylor-expansion-holomorphic-function | pass | literature-derived / ai-altered | The sourced maximal-disc statement was retained; the local proof expands the Cauchy kernel and adds explicit compact-circle boundedness before passing the uniform limit through the integral. |
+| thm-holomorphic-if-and-only-if-analytic | pass | literature-derived / ai-altered | Shabat and Weber carry the equivalence; the proof combines the new Taylor theorem with the published analytic-implies-holomorphic direction and explicitly includes the empty domain. |
+| cor-holomorphic-functions-are-real-analytic-and-smooth | pass | ai-altered / ai-altered | Taylor's real-analytic convention was materially adapted to complex Taylor coefficients; the proof identifies every coordinate-derivative word and uses absolute convergence inside the Taylor disc. |
+| rem-taylor-coefficient-formula-agreement | n/a | ai-altered / not-applicable | The literature's derivative and contour coefficient formulas were joined to the already-published power-series coefficient formula without asserting a new theorem. |
+| thm-zero-order-factorization-holomorphic-function | pass | literature-derived / ai-altered | Shabat's factorization and multiplicity results supply the statement; the local proof treats both finite directions and the infinite-order zero-germ boundary. |
+| cor-cauchy-estimates-taylor-coefficients | pass | literature-derived / ai-altered | The Ahlfors, Stein--Shakarchi, Weber, and Krantz estimate was rewritten for the Taylor coefficient convention, including derivative order zero and zero bound. |
+| thm-liouville-bounded-entire-function | pass | literature-derived / ai-altered | The standard sourced Liouville statement was proved from the published Cauchy inequality and zero-derivative theorem, with an explicit contradiction radius. |
+| thm-entire-polynomial-growth-is-polynomial | pass | ai-altered / ai-altered | Krantz's integer-growth result was extended to real nonnegative exponent by the floor bound; the proof derives decay from the published exp-log definition and qualifies the degree only for a nonzero polynomial. |
+| thm-fundamental-theorem-of-algebra-liouville-proof | pass | literature-derived / ai-altered | Ahlfors, Stein--Shakarchi, Weber, and Krantz carry the FTA and Liouville route; the proof separately closes exterior boundedness, compact-disc boundedness, the shared boundary, and constancy. |
+| rem-fundamental-theorem-of-algebra-via-liouville | n/a | ai-altered / not-applicable | The owner-required agreement seam names the independent Liouville and minimum-modulus routes and makes no independent mathematical claim. |
+| def-edgewise-riemann-integral-around-complex-triangle | n/a | ai-altered / not-applicable | Shabat's discontinuous Morera witness motivated a narrow extension of the standard parametric edge formula to integrable pullbacks; agreement with the published continuous contour integral is stated. |
+| thm-morera-triangle-theorem | pass | literature-derived / ai-altered | The Ahlfors, Stein--Shakarchi, Weber, and Shabat equivalence was proved locally from the published triangle-primitive construction and Goursat, with each implication self-scoped after canonical stratification. |
+| lem-cauchy-estimates-on-concentric-subdiscs | pass | literature-derived / ai-altered | Weber and Stein--Shakarchi supply the subdisc estimate; the proof writes the reverse-triangle denominator and ML calculation, including inner radius zero. |
+| thm-weierstrass-convergence-holomorphic-functions | pass | literature-derived / ai-altered | The Ahlfors, Stein--Shakarchi, Weber, and Krantz theorem was proved by compact contour convergence plus Morera, followed by the subdisc estimate for every derivative order. |
+| cor-locally-uniformly-convergent-holomorphic-series | pass | literature-derived / ai-altered | The Ahlfors and Stein--Shakarchi series form was derived from Weierstrass applied to finite partial sums, including the empty partial sum and derivative order zero. |
+| thm-holomorphic-parameter-riemann-integral | pass | literature-derived / ai-altered | Stein--Shakarchi supplies holomorphy of the parameter integral; the proof verifies Riemann integrability before Fubini, continuity before Morera, and the derivative formula only under joint continuity of the slice derivative. |
+| cor-holomorphic-mean-value-property | pass | literature-derived / ai-altered | Weber's mean-value formula was obtained by the published positive circle parametrization and Cauchy formula. |
+| cor-nonconstant-entire-function-has-dense-image | pass | ai-generated / ai-generated | This direct non-load-bearing Liouville corollary was derived locally: an omitted ball bounds a zero-free reciprocal, whose constancy forces the original function to be constant. |
+| ex-sine-minus-z-zero-of-order-three | pass | literature-derived / ai-altered | Shabat's example was checked by the sine series, local factorization, and an independent derivative computation through the third derivative. |
+| ex-holomorphy-of-integral-of-t-to-z | pass | ai-generated / ai-generated | The scaffold example was endpoint-corrected locally: principal power is used for positive base, the zero-base slice is defined separately, and joint continuity follows from the bound $|t^z|\le t$ on the stated half-plane. |
+| cex-boundary-convergent-power-series-no-larger-holomorphic-disc | pass | literature-derived / ai-altered | Shabat's boundary-convergent series was supplemented by an M-test and an explicit harmonic-partial-sum proof that the derivative is unbounded toward the boundary. |
+| cex-powers-locally-uniform-not-uniform-on-closed-disc | pass | ai-generated / ai-generated | The explicit witness was checked on arbitrary compact subsets, including the empty set, and at the boundary point $1$, where pointwise convergence already fails. |
+| cex-morera-without-continuity | pass | literature-derived / ai-altered | Shabat's point-supported witness was adapted to the edgewise Riemann definition; nonconstant, constant, repeated, and collinear edge cases are all discharged. |
+| fs-every-smooth-map-of-the-plane-is-real-analytic | pass | ai-altered / ai-altered | The standard flat exponential witness was adapted to Taylor's planar definition; the polynomial-times-exponential derivative induction and every derivative at the origin are written locally. |
+| fs-entire-bounded-on-real-axis-is-constant | pass | ai-altered / ai-altered | The sourced Liouville contrast uses complex sine, its real restriction and bound, and its nonzero derivative at the origin. |
+| fs-every-entire-function-with-antiderivative-is-polynomial | pass | ai-altered / ai-altered | The sourced exponential witness uses $\exp'=\exp$, the addition law for nonvanishing, and the published minimum-modulus FTA to exclude a nonconstant polynomial. |
+
+The proof values label only the local derivations. An AI-altered or
+AI-generated proof does not change a source-backed statement label.
+
+### Scaffold-delta ledger
+
+No id, kind, title, reading-order position, landmark statement, or coverage
+disposition was dropped or renamed. Every harvested included row still names an
+authored item. The final statements keep the scaffold's intended scope: Taylor
+expansion stops at the largest disc contained in the given domain, parameter
+differentiation retains its stronger joint-continuity hypothesis, and the
+$t^z$ example remains on $\operatorname{Re}z>1$ with its endpoint value proved
+continuous.
+
+The following dependency declarations changed because the written proof uses
+the added facts:
+
+- thm-taylor-expansion-holomorphic-function adds
+  cor-complex-differentiability-implies-continuity, thm-heine-borel-rn, and
+  thm-extreme-value-metric to license boundedness of the integrand on the
+  compact circle before uniform integration.
+- cor-holomorphic-functions-are-real-analytic-and-smooth adds
+  thm-complex-power-series-converge-locally-uniformly for absolute convergence
+  of the binomially expanded total-degree series.
+- thm-weierstrass-convergence-holomorphic-functions adds
+  def-oriented-complex-triangle-and-boundary, thm-heine-borel-rn, and
+  thm-continuous-image-of-a-compact-space-is-compact to prove compactness of
+  the contour trace and the nested discs actually used.
+- thm-holomorphic-parameter-riemann-integral adds
+  thm-continuous-on-a-rectangle-is-riemann-integrable,
+  thm-norm-inequality-for-the-vector-valued-integral,
+  thm-complex-numbers-are-the-real-coordinate-plane, and
+  lem-integral-elementary-bounds to license the Fubini input and the
+  uniform-error integral estimates.
+- ex-holomorphy-of-integral-of-t-to-z adds thm-natural-logarithm-laws,
+  cor-complex-differentiability-implies-continuity, and
+  thm-chain-rule-for-complex-derivatives; it drops thm-real-power-laws because
+  the final endpoint estimate is proved directly from
+  $\exp((\operatorname{Re}z)\log t)\le\exp(\log t)=t$ and does not use
+  real-power algebra.
+- cex-boundary-convergent-power-series-no-larger-holomorphic-disc adds
+  thm-complex-polynomials-and-rational-functions-are-holomorphic,
+  thm-heine-borel-rn, lem-complex-conjugation-and-modulus-laws, and
+  thm-cauchy-integral-formula-higher-derivatives to license continuity of the
+  finite monomial family and boundedness of the hypothetical extension's
+  derivative on $[0,1]$.
+
+No dependency was added merely to silence a checker. The namespaced proof
+contract records each added direct fact, its exact on-disk source excerpt, and
+all step uses.
+
+### Generated-claim truth checks
+
+- For cor-nonconstant-entire-function-has-dense-image, the search scope was a
+  missing metric ball and the reciprocal $1/(f-w)$. The denominator is bounded
+  below by the positive ball radius, so the reciprocal is entire and bounded;
+  constant functions are the excluded counterexamples. No counterexample to
+  the stated nonconstant result was found.
+- For ex-holomorphy-of-integral-of-t-to-z, the search scope was joint
+  continuity at $t=0$ and branch use at positive real base. Principal power has
+  no branch ambiguity there, and $|t^z|\le t$ uniformly near each parameter
+  point of the half-plane closes the endpoint. No counterexample was found on
+  the stated domain.
+- For cex-powers-locally-uniform-not-uniform-on-closed-disc, the search scope
+  included empty and singleton compact sets, the initial index, and the boundary
+  point $1$. The compact maximum is strictly below $1$, while the boundary value
+  remains $1$ at every index, so the witness is valid.
+
+These generated statements are leaves and no item depends on them.
+
+### Escalations and boundaries
+
+The reciprocal backlink requested for the independent FTA proofs remains
+outside this batch's write authority. The published item
+thm-fundamental-theorem-of-algebra-minimum-modulus-proof is mathematically
+correct, so the obvious-published-dependency-repair exception cannot authorize
+an expository forward-reference edit. The exact queued edit remains in the
+Step-3 section above for an authorised later stage.
+
+No scaffold claim was dropped, narrowed, or found false during authoring. No
+published dependency required repair. No external fallback, forward reference,
+or cross-batch logical dependency was introduced.
+
+### Gate record and confidence
+
+- Reflow left every owned file unchanged. Scoped precheck passes every
+  proof-bearing item; definitions and remarks correctly record n/a.
+- proof-contract.mjs --strict reports no errors across the owned scope. Its
+  sole warning is the truthful five-fact citation cluster in the contour-trace
+  step of the Weierstrass proof.
+- boundary-audit.mjs --fail-on-contradicted reports no contradicted
+  dispositions and no repeated template cluster. citation-fidelity.mjs
+  --fail-on-missing-quote finds every recorded quote and no widening candidate.
+- finite-smoke.mjs runs no registered check for these analytic items. This is
+  recorded as no evidence, not as a mathematical pass.
+- Step-5 risk-report.mjs routes the proof-bearing scope for Step-6 review. No
+  risk_review was written, because that disposition belongs to Alpha.
+- Batch content policy, coverage checklist, plan validation, scoped prosecheck,
+  and scoped rendercheck pass. Fwdcheck, extcheck, and citecheck exit clean;
+  citecheck's warnings are outside this batch.
+- The global depcheck invocation is presently red on concurrently authored
+  files outside batch 7. The latest re-run has one hard YAML-escape error in
+  items/ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge.md, plus
+  advisory dependency rows in other batches. Its reported issue lines contain
+  no batch-7 item or page id. This session did not edit another Beta's files to
+  clear a parallel authoring failure and does not claim that global gate passed.
+
+Confidence is high in the statements, local proofs, dependency fidelity,
+boundary handling, page composition, and coverage truthfulness. I re-opened
+every direct cited source item through the contract audit and mechanically
+confirmed each exact quote. I did not run a judge, perform Step-6 independent
+review, apply the queued published backlink, refresh the external source bytes
+beyond the existing coverage stamps, or certify the parallel batches.

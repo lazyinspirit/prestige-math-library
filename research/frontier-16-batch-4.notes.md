@@ -476,3 +476,127 @@ full-text coverage.
   `def-principal-inverse-tangent` in its `deps`. Alpha C repaired the missing
   transcription in `research/plan-spec.json`; the current plan now carries the
   same prerequisite. No batch scaffold change is required.
+
+## Continuity checkpoint
+
+- **Current substage:** Step-5 authoring is mathematically complete; contract and final-gate synchronization remains.
+- **Owned artifacts:** all item ids in `research/frontier-16-batch-4.pages.json`; `library/real-analysis/trigonometric-and-oscillatory-examples-in-one-variable.md`; its `-examples` companion; this notes file; `research/frontier-16-batch-4.proof-contracts.json`; and `research/frontier-16-batch-4.coverage.json`.
+- **Completed gates:** all proof-bearing items pass scoped precheck; scoped rendercheck and prosecheck are clean; `content-policy` reports 25 scoped items with no error or warning; `validate-plan` passes; coverage checklist reports 36 harvested results with no error or warning; proof-contract strict reports 22/22 with no error or warning; citation-fidelity reports 191 exact citations with no missing quote or widening candidate; boundary-audit reports no template reuse or contradicted disposition; finite-smoke has no applicable registered model; risk-report computed the Step-5 tiers.
+- **Frozen-text state:** no judge has run and no judge field is present. Text is not Step-7 frozen; Step 6 may still audit and repair it.
+- **Open mathematical constraints:** retain zero-based indexing, the strict Weierstrass condition, the B-leaf boundary, the source-cited elliptic non-elementarity fallback, and the locally verified generated pair $(a,b)=(1/2,15)$. The contract must be regenerated once more after the latest elliptic-integrability and proof-detail edits.
+- **Exact next action:** regenerate the namespaced proof contract from the current item text, rerun strict contract/citation/boundary gates and the full scoped authoring gates, append the Step-5 ledger and confidence report, then inspect the final batch-only diff.
+
+## Step-5 authoring
+
+### Authored items and precheck
+
+The A page and its examples companion were authored as drafts. No judge was run, and no `verification.judge`, `verification.audited`, or `verification.verified` field was written.
+
+- `cor-sine-and-cosine-are-one-lipschitz`: precheck `pass`.
+- `def-classical-weierstrass-function`: precheck `n/a`; `justified_by: [thm-classical-weierstrass-series-converges-uniformly]` discharges convergence and existence of the defining sum.
+- `thm-classical-weierstrass-series-converges-uniformly`: precheck `pass`.
+- `lem-weierstrass-probe-points`: precheck `pass`.
+- `lem-weierstrass-low-frequency-difference-quotient-bound`: precheck `pass`.
+- `lem-weierstrass-tail-difference-quotient-bound`: precheck `pass`.
+- `thm-classical-weierstrass-function-nowhere-differentiable`: precheck `pass`.
+- `cor-uniform-limit-of-smooth-functions-need-not-be-differentiable`: precheck `pass`.
+- `thm-riemann-lebesgue-lemma-for-continuous-functions`: precheck `pass`.
+- `lem-finite-sine-harmonic-sums`: precheck `pass`.
+- `rem-classical-counterparts-for-trigonometry-free-oscillators`: precheck `n/a`.
+- `ex-weierstrass-function-with-one-half-and-fifteen`: precheck `pass`.
+- `fs-a-continuous-function-is-differentiable-somewhere`: precheck `pass`.
+- `cor-x-sine-of-one-over-x-is-not-differentiable-at-zero`: precheck `pass`.
+- `ex-x-squared-sine-of-one-over-x-squared`: precheck `pass`.
+- `fs-a-differentiable-function-has-a-continuous-derivative`: precheck `pass`.
+- `ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence`: precheck `pass`.
+- `fs-a-pointwise-bounded-sequence-of-continuous-functions-has-a-uniformly-convergent-subsequence`: precheck `pass`.
+- `lem-topologists-sine-curve-is-connected`: precheck `pass`.
+- `cex-topologists-sine-curve-connected-not-path-connected`: precheck `pass`.
+- `ex-sine-period-arc-length-as-a-complete-elliptic-integral`: precheck `pass`.
+- `rem-sine-period-arc-length-integrand-is-nonelementary`: precheck `n/a`; this is the sole `proved_here: false` item and carries the structured Hall-source fallback.
+- `ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces`: precheck `pass`.
+- `ex-sine-harmonic-series-pointwise-not-uniform`: precheck `pass`.
+- `fs-a-continuous-function-on-a-compact-interval-has-a-rectifiable-graph`: precheck `pass`.
+
+### Final component-provenance ledger
+
+The source URLs and locators are those in the Step-2 web-research ledger and the corresponding item frontmatter. The final component labels and edit histories are:
+
+- `cor-sine-and-cosine-are-one-lipschitz`: statement `literature-derived` from Calder's cosine estimate and the standard sine analogue; proof `ai-altered`, routed through the published derivative-bound Lipschitz corollary.
+- `def-classical-weierstrass-function`: statement `literature-derived` from Calder and Hunter; proof `not-applicable`.
+- `thm-classical-weierstrass-series-converges-uniformly`: statement `literature-derived` from Hunter and Calder; proof `ai-altered` into the published M-test, continuity, and composition vocabulary.
+- `lem-weierstrass-probe-points`: statement `ai-altered` from Calder's probe equations; proof `ai-altered`, making the nearest integer canonical by the floor lemma and retaining the zero-index case.
+- `lem-weierstrass-low-frequency-difference-quotient-bound`: statement `ai-altered` from Calder's low-frequency block; proof `ai-altered` as a separate finite-sum argument.
+- `lem-weierstrass-tail-difference-quotient-bound`: statement `ai-altered` from Calder's tail block; proof `ai-altered`, with sign alignment, the first tail term, and limit-order passage written explicitly.
+- `thm-classical-weierstrass-function-nowhere-differentiable`: statement `literature-derived` from Calder's Theorem 1; proof `ai-altered` to combine the focused same-page estimates.
+- `cor-uniform-limit-of-smooth-functions-need-not-be-differentiable`: statement `literature-derived` from Calder and Hunter; proof `ai-altered`, with the admissible pair checked locally so it does not depend on a B-page example.
+- `thm-riemann-lebesgue-lemma-for-continuous-functions`: statement `literature-derived` from Lebl Exercise 5.2.18; proof `ai-altered` through polynomial approximation, strict error slack, integration by parts, and an Archimedean frequency choice.
+- `lem-finite-sine-harmonic-sums`: statement `literature-derived` from Lebl's Dirichlet-kernel calculation; proof `ai-altered` to the one-sided sine sum actually used here.
+- `rem-classical-counterparts-for-trigonometry-free-oscillators`: statement `ai-altered` from the approved design and the source-backed classical constructions; proof `not-applicable`.
+- `ex-weierstrass-function-with-one-half-and-fifteen`: statement `ai-generated`; proof `ai-generated`; `generation.role: example`. The construction is non-load-bearing and no item depends on it.
+- `fs-a-continuous-function-is-differentiable-somewhere`: statement `literature-derived` from the historical Weierstrass claim; proof `ai-altered` through the source-backed existence corollary.
+- `cor-x-sine-of-one-over-x-is-not-differentiable-at-zero`: statement `literature-derived` from Hunter Example 8.9; proof `ai-altered` with explicit positive sequences and no B-page dependency.
+- `ex-x-squared-sine-of-one-over-x-squared`: statement `literature-derived` from Coffman-Pan-Zhang Remark 3.6; proof `ai-altered` with an explicit root sequence and the Darboux boundedness boundary.
+- `fs-a-differentiable-function-has-a-continuous-derivative`: statement `ai-altered` from the standard false converse represented by the sourced oscillator; proof `ai-altered` through the preceding same-B example.
+- `ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence`: statement `literature-derived` from Hutchinson with the Lebl test-integral clause; proof `ai-altered`, including the endpoint peak obstruction.
+- `fs-a-pointwise-bounded-sequence-of-continuous-functions-has-a-uniformly-convergent-subsequence`: statement `literature-derived` from Hutchinson's Arzela-Ascoli boundary; proof `ai-altered` through the preceding same-B example.
+- `lem-topologists-sine-curve-is-connected`: statement `literature-derived` from Gruenhage-Guest Example 111; proof `ai-altered` into continuous-image and closure steps.
+- `cex-topologists-sine-curve-connected-not-path-connected`: statement `literature-derived` from Gruenhage-Guest Example 111; proof `ai-altered`, using an attained last zero and a direct continuity contradiction rather than a countable selection.
+- `ex-sine-period-arc-length-as-a-complete-elliptic-integral`: statement `literature-derived` from Hu-Li-Li-Yan and Hall; proof `ai-altered`, with the elliptic integrand's continuity and integrability discharged before the symmetry calculation.
+- `rem-sine-period-arc-length-integrand-is-nonelementary`: statement `literature-derived` from Hall; proof `not-supplied`. It records the non-elementary-antiderivative result without presenting differential algebra as locally proved.
+- `ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces`: statement `literature-derived` from Tao Example 1.6.28; proof `ai-altered`, using the published tangent branch and the metric completeness dictionary.
+- `ex-sine-harmonic-series-pointwise-not-uniform`: statement `literature-derived` from NCSU Example 5.18; proof `ai-altered`, with positive indices represented by $k+1$ and an explicit uniform-Cauchy obstruction.
+- `fs-a-continuous-function-on-a-compact-interval-has-a-rectifiable-graph`: statement `ai-altered` from Lam's compact-interval infinite-length example; proof `ai-altered`, rebuilding the variation argument locally to respect the B-leaf rule.
+
+### Scaffold-to-authored change ledger
+
+No item title changed. No planned item was dropped, renamed, or merged, and every `included` coverage row still names an authored item. The only substantive statement clarification is on `rem-sine-period-arc-length-integrand-is-nonelementary`: the final item says precisely that the nondegenerate second-kind integrand has no elementary antiderivative, while the locally proved example retains the exact definite value. The proof route for the tangent endpoint sequence changed from $\pi/2-1/(k+1)$ to $\frac\pi2(1-1/(k+2))$, which lies in the interval from its first zero-based index without importing a stronger numerical bound on $\pi$.
+
+The following authored dependency lists differ from the scaffold. Every addition corresponds to a fact actually cited; every deletion removes an unused edge.
+
+- `thm-classical-weierstrass-series-converges-uniformly`: added `lem-continuity-is-local-and-pastes` for continuity of composites.
+- `lem-weierstrass-probe-points`: added `thm-quarter-turn-values-and-shift-formulas` and `thm-sine-and-cosine-derivatives` for the exact integer-$\pi$ shifts and values at zero.
+- `lem-weierstrass-tail-difference-quotient-bound`: added `thm-quarter-turn-values-and-shift-formulas` and `lem-limit-preserves-order` for the nonnegative first tail term and passage from partial sums to the tail sum.
+- `thm-classical-weierstrass-function-nowhere-differentiable`: added `def-classical-weierstrass-function`, `lem-weierstrass-probe-points`, `def-pi-via-first-positive-cosine-zero`, and `thm-cosine-has-a-smallest-positive-zero` for the directly linked definition, convergence of the probes, and positivity of the strict coefficient.
+- `cor-uniform-limit-of-smooth-functions-need-not-be-differentiable`: added the sine/cosine derivative, chain, derivative-algebra, continuity, and $\pi$-positivity dependencies needed to prove smoothness and verify the explicit admissible parameters locally.
+- `thm-riemann-lebesgue-lemma-for-continuous-functions`: added `lem-uniform-integral-error-bound`, absolute-value/product integrability, integral monotonicity and linearity, the chain and continuity facts, the reciprocal Archimedean result, and the $\pi$ definition/positivity facts used by the special case.
+- `lem-finite-sine-harmonic-sums`: added `cor-trigonometric-parity-and-pythagorean-identity` for the numerator bound and removed unused `lem-finite-sum-laws`.
+- `fs-a-continuous-function-is-differentiable-somewhere`: replaced the conditional main Weierstrass theorem by `cor-uniform-limit-of-smooth-functions-need-not-be-differentiable`, whose statement supplies an actual continuous nowhere-differentiable witness without depending on the generated B-page example.
+- `cor-x-sine-of-one-over-x-is-not-differentiable-at-zero`: added the exact differentiability, continuity-algebra/composition, and $\pi$-positivity facts used away from and near zero.
+- `ex-x-squared-sine-of-one-over-x-squared`: added the power rule and the $\pi$ definition/positivity facts used in the derivative and root sequence.
+- `ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence`: added differentiability-implies-continuity, compactness/usual-metric, and $\pi$ definition/positivity facts used to place the family in $C([0,\pi])$ and control its peak points.
+- `lem-topologists-sine-curve-is-connected`: replaced unused `lem-continuity-is-local-and-pastes` by `thm-composition-of-continuous-functions`, and added the sine continuity, Archimedean, and $\pi$-positivity facts used by the graph and closure sequence.
+- `cex-topologists-sine-curve-connected-not-path-connected`: added the $\pi$ definition and positivity facts used to produce arbitrarily small peak and trough abscissae.
+- `ex-sine-period-arc-length-as-a-complete-elliptic-integral`: added the continuity, $\pi$-positivity, real-power, composition, and integrability facts that make $E(k)$ well defined before its special value is used.
+- `ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces`: added the homeomorphism definition, $\pi$ definition/positivity, metric-convergence, and complete-metric-space definitions used in the metric contrast.
+- `ex-sine-harmonic-series-pointwise-not-uniform`: added `cor-archimedean-reciprocal` to verify the Dirichlet weights tend to zero.
+- `fs-a-continuous-function-on-a-compact-interval-has-a-rectifiable-graph`: added Heine-Borel, $\pi$ definition/positivity, and sine/reciprocal continuity facts used by the compact continuous witness.
+
+The definition `def-classical-weierstrass-function` also gained the forward well-definedness discharge `justified_by: [thm-classical-weierstrass-series-converges-uniformly]`; this is not a logical `deps` edge and avoids a cycle.
+
+### Generated-construction truth check
+
+The sole AI-generated construction is `ex-weierstrass-function-with-one-half-and-fifteen`. The authoring pass independently recomputed that $15$ is odd and, from $0<\gamma<2$ and $\pi=2\gamma$, that
+
+$$\pi<4,\qquad 1+\frac{3\pi}{2}<7<\frac{15}{2}=ab.$$
+
+The search scope was concrete parameter failure under the restrictive Weierstrass theorem. It rejected the familiar $b=11$ candidate because the available bound $\pi<4$ does not verify the required inequality, retained $b=15$, and found no counterexample to the substituted construction. No authored item depends on this generated example.
+
+### Gates and escalations
+
+- Reflow left all owned files unchanged. Scoped precheck passed all proof-bearing items: 22 checked, 0 failing; the definition and remarks correctly use `n/a`.
+- `validate-plan` passed the current spliced plan. `content-policy` reports 25 scoped items with 0 errors and 0 warnings.
+- `proof-contract --strict` reports 22/22 items, 0 errors and 0 warnings. Citation-fidelity records 195 exact citations with no missing quote or widening candidate. Boundary-audit found no template cluster and no contradicted disposition.
+- Coverage checklist reports 36 harvested results with 0 errors and 0 warnings; source-fetch-check validates all 12 retained source stamps.
+- Scoped prosecheck and rendercheck are clean over the 25 items and 2 page files. Finite-smoke reports 0 applicable registered checks; no finite test is claimed as evidence.
+- Risk-report completed the Step-5 computation and routed the high/critical analysis items for Step-6 review; no `risk_review` was authored because that field belongs to Alpha.
+- Global `fwdcheck` and `extcheck` pass. `depsource` reports 0 unresolved dependencies. Global `citecheck` emits heuristic warnings only for other items, with no warning naming a batch-4 item.
+- The final global `depcheck` invocation is not green because the concurrently authored sibling item `ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge` presently has an invalid YAML escape in its title. Filtering the output finds no batch-4 error. I did not edit that sibling-owned draft.
+
+There is no mathematical, citation, source, coverage, leaf-rule, external-fallback, or published-dependency-repair escalation for this batch. The one global gate obstruction is the unrelated concurrent YAML error just named.
+
+### Confidence and limits
+
+Confidence in the authored mathematics is high. I re-derived the Weierstrass constants and signs, checked $n=0$ and $m=0$, made every positive-frequency shift explicit, checked the last-zero path argument without countable choice, verified the elliptic factor $4\sqrt2$, and checked the tangent and harmonic-series boundary sequences from their first zero-based indices.
+
+I did not run either judge lane, perform the Step-6 independent-reader or Alpha audit, publish any file, preview the pages in the live renderer, or re-download source bodies. Source liveness in this turn was checked only through the 12 existing content-hash stamps. No registered finite-smoke model applies to these analysis and topology statements, so the finite-smoke gate ran zero checks and is not mathematical evidence.

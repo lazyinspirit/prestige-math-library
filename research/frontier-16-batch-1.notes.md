@@ -296,7 +296,7 @@ No planned Statement or construction is `ai-generated`. Accordingly no `generati
 | `ex-polar-coordinates-as-a-local-diffeomorphism` | literature-derived | ai-altered | Lebl Exercise 8.5.8 and the Toronto polar-coordinate section; local orientation and the principal-strip inverse are checked explicitly; cite both. |
 | `ex-x-xy-is-a-diffeomorphism-off-the-axis` | literature-derived | ai-altered | Lebl Example 8.5.3 with the off-axis restriction and explicit inverse made precise; cite Lebl. |
 | `ex-two-equation-implicit-system` | literature-derived | ai-altered | Exact system from Lebl Example 8.5.7; block matrix and solution derivative are recomputed; cite Lebl. |
-| `cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism` | literature-derived | ai-altered | Lebl Exercise 8.5.4; inverse failure at zero is proved by the chain rule and difference quotient; cite Lebl. |
+| `cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism` | ai-altered | ai-altered | Lebl Exercise 8.5.4 supplies the cube-map bijection with zero derivative; the Step-6 Statement adds its derived openness and inverse failure so the downstream open-map counterexample can cite the complete witness clause; cite Lebl. |
 | `cex-zero-derivative-on-a-disconnected-open-set-without-constancy` | literature-derived | ai-altered | Exact two-interval construction from Northwestern Math 320-2; cite Northwestern. |
 | `fs-invertible-derivative-at-a-point-gives-a-local-inverse` | literature-derived | ai-altered | The exact false implication and source-backed published witness come from Lebl Exercise 8.5.7; cite Lebl. |
 | `fs-invertible-derivative-everywhere-gives-a-global-inverse` | literature-derived | ai-altered | Lebl Example 8.5.4 and the immutable published complex-squaring witness; cite Lebl. |
@@ -655,3 +655,124 @@ Requested gate results after these dispositions:
 - The batch consistency audit found 70 unique items, 61 proof-bearing scope entries, 61 contracts, all eight boundary dispositions per contract, 122 declared citations, no undeclared citation source, no internal forward dependency, and no new dependency outside the convex page's declared prerequisite ancestry.
 
 Both required richness passes were rerun for the repaired pair. B1-1 supplies the focused intermediate lemma that decomposes boundary support; B1-2 retains the source's infinite-family closure result rather than treating finite maxima as if they covered it. No further useful immediate corollary was found, no pruning was performed, and the 31-item A page does not require a split.
+
+## Step-5 authoring
+
+### Authored scope and provenance ledger
+
+All items in both A/B pairs were authored as `status: draft` and `origin: session`, and the four page compositions were written with the A summaries and empty B bodies required by the schema. No item was dropped, renamed, merged, or moved. The coverage dispositions therefore remain true of disk.
+
+The item-specific source/edit histories and rationales in `## Planned component provenance and Step-5 source rationale` above are now the final provenance ledger: Step 5 verified every row against the authored component and changed none of its values. No Statement or construction is `ai-generated`, so no generated-claim counterexample search was required. The final component values and precheck results are:
+
+#### `the-inverse-function-theorem-completed`
+
+- `def-ck-euclidean-maps-and-diffeomorphisms`: precheck `n/a`; provenance.statement `ai-altered`; provenance.proof `not-applicable`.
+- `thm-ck-euclidean-maps-closed-under-algebra-and-composition`: precheck `pass`; provenance.statement `ai-altered`; provenance.proof `ai-generated`.
+- `lem-matrix-inversion-preserves-ck-regularity`: precheck `pass`; provenance.statement `ai-altered`; provenance.proof `ai-generated`.
+- `thm-higher-regularity-of-local-inverses`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `def-regular-locus-of-a-c-one-map`: precheck `n/a`; provenance.statement `literature-derived`; provenance.proof `not-applicable`.
+- `thm-regular-locus-is-open`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-c-one-local-diffeomorphisms-are-open-maps`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image`: precheck `pass`; provenance.statement `ai-altered`; provenance.proof `ai-generated`.
+- `thm-parametrized-implicit-function-theorem-with-higher-regularity`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `def-proper-map-between-euclidean-open-sets`: precheck `n/a`; provenance.statement `literature-derived`; provenance.proof `not-applicable`.
+- `thm-proper-local-diffeomorphisms-have-finite-diffeomorphic-sheets`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-proper-local-diffeomorphisms-have-constant-finite-fibres`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `def-local-orientation-of-a-regular-c-one-map`: precheck `n/a`; provenance.statement `literature-derived`; provenance.proof `not-applicable`.
+- `thm-jacobian-sign-is-constant-on-a-connected-regular-domain`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-zero-derivative-on-connected-open-euclidean-set-iff-constant`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+
+#### `the-inverse-function-theorem-completed-examples`
+
+- `ex-polar-coordinates-as-a-local-diffeomorphism`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `ex-x-xy-is-a-diffeomorphism-off-the-axis`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `ex-two-equation-implicit-system`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism`: precheck `pass`; provenance.statement `ai-altered`; provenance.proof `ai-altered` after the Step-6 witness-clause expansion.
+- `cex-zero-derivative-on-a-disconnected-open-set-without-constancy`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-invertible-derivative-at-a-point-gives-a-local-inverse`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-invertible-derivative-everywhere-gives-a-global-inverse`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-a-c-one-bijection-has-a-c-one-inverse`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-zero-derivative-on-an-open-set-forces-constancy`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-an-open-c-one-map-has-invertible-derivative`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+
+#### `convex-and-semicontinuous-functions-on-rn`
+
+- `def-convex-and-strictly-convex-functions-on-euclidean-sets`: precheck `n/a`; provenance.statement `literature-derived`; provenance.proof `not-applicable`.
+- `def-epigraph-and-hypograph`: precheck `n/a`; provenance.statement `literature-derived`; provenance.proof `not-applicable`.
+- `thm-convex-function-iff-convex-epigraph`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-finite-jensen-inequality-in-euclidean-space`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `prop-convex-functions-have-convex-sublevel-sets`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `prop-basic-operations-preserving-convexity`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `prop-pointwise-supremum-preserves-convexity`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `lem-convex-function-bound-on-an-interior-cube`: precheck `pass`; provenance.statement `ai-altered`; provenance.proof `ai-altered`.
+- `thm-convex-functions-on-open-convex-sets-are-locally-lipschitz`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-convex-functions-on-open-convex-sets-are-continuous`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `def-supporting-hyperplane-to-a-convex-set`: precheck `n/a`; provenance.statement `literature-derived`; provenance.proof `not-applicable`.
+- `thm-nearest-point-in-a-nonempty-closed-convex-set`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `lem-projection-onto-a-closed-convex-set-has-the-variational-inequality`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-strict-separation-of-a-point-from-a-closed-convex-set`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `lem-convex-set-and-closure-have-same-interior-and-boundary`: precheck `pass`; provenance.statement `ai-altered`; provenance.proof `ai-altered`.
+- `thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-separating-hyperplane-theorem-for-disjoint-convex-sets`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `def-subgradient-and-subdifferential`: precheck `n/a`; provenance.statement `literature-derived`; provenance.proof `not-applicable`.
+- `thm-convex-functions-have-subgradients-at-interior-points`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-differentiable-convex-functions-and-gradient-inequality`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-subgradient-zero-characterises-global-minima`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-hessian-characterises-convexity`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-positive-definite-hessian-implies-strict-convexity`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-local-minima-of-convex-functions-on-rn-are-global`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cor-strictly-convex-functions-on-rn-have-at-most-one-minimizer`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `def-semicontinuity-on-euclidean-subsets`: precheck `n/a`; provenance.statement `ai-altered`; provenance.proof `not-applicable`.
+- `prop-semicontinuity-agrees-on-the-real-line`: precheck `pass`; provenance.statement `ai-altered`; provenance.proof `ai-generated`.
+- `thm-euclidean-semicontinuity-level-set-characterisations`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-euclidean-semicontinuity-epigraph-characterisations`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `thm-euclidean-semicontinuous-extreme-value-theorem`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+
+#### `convex-and-semicontinuous-functions-on-rn-examples`
+
+- `ex-euclidean-norm-and-squared-norm-are-convex`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `ex-finite-maximum-of-affine-functions-and-its-subdifferential`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cex-convex-function-on-closed-convex-set-discontinuous-at-the-boundary`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cex-convex-function-with-empty-subdifferential-at-a-boundary-point`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cex-lower-semicontinuous-compact-function-without-a-maximum`: precheck `pass`; provenance.statement `ai-altered`; provenance.proof `ai-altered`.
+- `ex-characteristic-functions-of-open-and-closed-sets-are-semicontinuous`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cex-positive-semidefinite-hessian-without-strict-convexity`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `cex-strictly-convex-function-with-a-singular-hessian`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-a-convex-function-on-a-convex-set-is-continuous`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-a-convex-function-is-differentiable`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-semicontinuity-implies-continuity-on-a-compact-set`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-a-positive-semidefinite-hessian-gives-strict-convexity`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+- `fs-strict-convexity-gives-a-positive-definite-hessian`: precheck `pass`; provenance.statement `literature-derived`; provenance.proof `ai-altered`.
+
+### Scaffold-change ledger
+
+- `ex-polar-coordinates-as-a-local-diffeomorphism`: the title is unchanged. The authored Statement retains the local-diffeomorphism and orientation claims but does not identify the principal-strip image with a specific cut plane, because that identification would require a polar-form result outside the scaffolded proof route. Its dependencies add `thm-sine-cosine-zero-sets-and-fundamental-period` and `thm-sine-and-cosine-parametrize-the-unit-circle`, which the proof uses for periodic failure and principal-strip injectivity.
+- `cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism`: the title and counterexample are unchanged. Its dependencies add `thm-continuous-inverse`, which the verification uses to establish that the cube bijection is an open map before `fs-an-open-c-one-map-has-invertible-derivative` cites that construction.
+- No other title, mathematical Statement, construction, or dependency list differs from the post-Step-4 scaffold. Canonical precheck renumbering changed only proof step numbers, and the namespaced proof contract was mechanically synchronized to those final numbers and exact citation uses.
+
+### Gate record
+
+- Reflow: all owned item files unchanged.
+- Precheck: 61 proof-bearing items passed; the definition rows above correctly record `n/a`.
+- `validate-plan research/plan-spec.json`: pass.
+- `content-policy research/frontier-16-batch-1.pages.json`: 70 scoped items, 0 errors, 0 warnings.
+- `proof-contract --strict`: 61/61 checked, 0 errors, 0 warnings.
+- `coverage-checklist`: 2 pages and 97 harvested rows, 0 errors; the one inverse-function low-yield warning is the Step-3 Alpha-adjudicated reuse/defer pattern already explained above.
+- `boundary-audit --fail-on-contradicted`: 488 rows, no contradicted disposition and no template cluster.
+- `citation-fidelity --fail-on-missing-quote`: 128 citations, no missing quote and no widening candidate.
+- `finite-smoke`: 0 applicable registered checks; this is not evidence for the analytic claims.
+- `risk-report`: completed without error; high and critical items remain routed for Alpha's Step-6 `risk_review`, which the author did not fabricate.
+- `prosecheck --warnings`: 74 owned files, 0 errors, 0 warnings.
+- `rendercheck`: 74 owned files, clean YAML, KaTeX, delimiters, display layout, and wikilink placement.
+- `audit-manifest --json`: 280 relationships over 70 items, 0 defects.
+- `fwdcheck` and `extcheck`: pass. `citecheck` reports only its standing global heuristic warnings, none in an owned item.
+- Scoped `git diff --check`: clean.
+- The last global `depcheck` run reached one error outside this batch: the batch-6 file `items/ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge.md` has an invalid YAML `\\v` escape in its title. No batch-1 file appears in the error set. This report does not edit another author's id set; the global gate must be rerun after that owner repairs its file.
+
+### Escalations and confidence
+
+There is no mathematical, source, dependency-order, external-fallback, published-dependency-repair, coverage, or page-composition escalation for batch 1. The only open global gate finding at report time belongs to batch 6 and is stated above.
+
+Confidence is high in the exact statements, proof routes, and boundary handling. I rechecked the finite-sheet complement construction, the two directions of the zero-derivative equivalence, the affine-hull and relative-interior argument before boundary support, the nonvertical epigraph support argument, the active-slope converse for a finite affine maximum, both Hessian converse witnesses, all semicontinuity equivalences, and the finite-intersection extremum proof. I did not run either Step-7 judge, perform the Step-6 independent reading or Alpha risk review, publish any file, set `verification.audited`, or verify any claim beyond the cited source ranges and the local derivations recorded here.

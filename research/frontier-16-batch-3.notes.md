@@ -510,3 +510,135 @@ I did not verify the final Step-5 prose or precheck stratification because the i
 - `validate-plan`: exit 0 for the current unspliced `research/plan-spec.json`; authoritative validation of these revised ids remains the engine's post-splice gate.
 - `source-fetch-check --stamp`: all 4 sources fetch-verified, with no new stamp required.
 - `prosecheck --warnings`: exit 0; its count warnings are the required per-page report counts and Fonda's source heading `3 Examples`, not reader-facing authored prose.
+
+## Step-5 authoring
+
+### Authored pages
+
+- `library/real-analysis/picard-lindelof-and-first-order-odes.md`: draft A page with the required two-paragraph summary.
+- `library/real-analysis/picard-lindelof-and-first-order-odes-examples.md`: draft B page with no authored body.
+- `library/real-analysis/the-gauge-integral-and-cousins-lemma.md`: draft A page with the required two-paragraph summary.
+- `library/real-analysis/the-gauge-integral-and-cousins-lemma-examples.md`: draft B page with no authored body.
+
+### Per-item precheck ledger
+
+Every proof-bearing item below was run through `tools/precheck.mts` on its final text and passed. Definitions correctly carry `precheck: n/a`.
+
+#### `picard-lindelof-and-first-order-odes`
+
+- `def-first-order-ode-initial-value-problem-and-solution` — n/a.
+- `def-locally-lipschitz-in-the-state-variable` — n/a.
+- `prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation` — pass.
+- `def-picard-operator-and-picard-iterates` — n/a.
+- `lem-vector-valued-continuous-curve-space-is-complete` — pass.
+- `lem-picard-operator-preserves-a-closed-curve-ball` — pass.
+- `lem-picard-operator-is-a-short-time-contraction` — pass.
+- `thm-picard-lindelof-local-existence-and-uniqueness` — pass.
+- `cor-uniform-picard-lindelof-for-nearby-initial-values` — pass.
+- `lem-weissinger-fixed-point-criterion` — pass.
+- `prop-picard-iteration-converges-with-explicit-error-bounds` — pass.
+- `thm-gronwall-integral-inequality` — pass.
+- `cor-lipschitz-ode-uniqueness-and-stability-estimate` — pass.
+- `thm-continuous-dependence-of-odes-on-initial-data-and-parameters` — pass.
+- `def-maximal-ode-solution` — n/a.
+- `lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps` — pass.
+- `thm-existence-and-uniqueness-of-a-maximal-ode-solution` — pass.
+- `lem-ode-extension-from-a-compact-interior-region` — pass.
+- `cor-finite-maximal-time-forces-escape-from-every-compact-set` — pass.
+- `cor-globally-lipschitz-odes-have-global-solutions` — pass.
+- `thm-first-order-linear-ode-integrating-factor` — pass.
+- `lem-euler-polygonal-approximations-are-uniformly-bounded-and-equicontinuous` — pass.
+- `lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence` — pass.
+- `thm-peano-local-existence-for-continuous-odes` — pass.
+- `def-modulus-of-continuity-and-osgood-condition` — n/a.
+- `thm-osgood-uniqueness-criterion-for-first-order-odes` — pass.
+
+#### `picard-lindelof-and-first-order-odes-examples`
+
+- `ex-picard-iteration-for-y-prime-equals-y` — pass.
+- `ex-quadratic-ode-finite-time-blowup` — pass.
+- `cex-continuous-ode-with-nonunique-delayed-solutions` — pass.
+- `cex-discontinuous-right-hand-side-with-no-local-solution` — pass.
+- `cex-uniqueness-does-not-require-local-lipschitz-continuity` — pass.
+- `fs-continuity-of-the-right-hand-side-guarantees-unique-ode-solutions` — pass.
+- `fs-a-local-ode-solution-exists-on-the-whole-domain-of-the-vector-field` — pass.
+- `fs-local-lipschitz-continuity-is-necessary-for-ode-uniqueness` — pass.
+
+#### `the-gauge-integral-and-cousins-lemma`
+
+- `def-gauge-and-fine-tagged-partition` — n/a.
+- `thm-cousins-lemma-for-gauges` — pass.
+- `def-henstock-kurzweil-integral-on-a-compact-interval` — n/a.
+- `prop-henstock-kurzweil-integral-is-unique` — pass.
+- `thm-linearity-of-the-henstock-kurzweil-integral` — pass.
+- `thm-monotonicity-of-the-henstock-kurzweil-integral` — pass.
+- `thm-henstock-kurzweil-integrability-on-subintervals-and-additivity` — pass.
+- `thm-henstock-kurzweil-cauchy-criterion` — pass.
+- `thm-saks-henstock-lemma` — pass.
+- `thm-riemann-integrable-functions-are-henstock-kurzweil-integrable` — pass.
+- `thm-every-derivative-is-henstock-kurzweil-integrable` — pass.
+- `cor-indefinite-henstock-kurzweil-integral-is-a-primitive` — pass.
+- `cor-henstock-kurzweil-integration-by-parts` — pass.
+- `cor-henstock-kurzweil-substitution-for-derivatives` — pass.
+- `def-henstock-kurzweil-integral-on-a-noncompact-interval` — n/a.
+- `thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals` — pass.
+- `thm-comparison-tests-for-noncompact-henstock-kurzweil-integrals` — pass.
+- `thm-hake-extension-theorem-for-henstock-kurzweil-integrals` — pass.
+
+#### `the-gauge-integral-and-cousins-lemma-examples`
+
+- `ex-dirichlet-function-is-henstock-kurzweil-integrable` — pass.
+- `ex-unbounded-derivative-evaluated-by-henstock-kurzweil` — pass.
+- `ex-sine-over-x-has-a-noncompact-henstock-kurzweil-integral` — pass.
+- `ex-cousins-lemma-gives-heine-borel-on-an-interval` — pass.
+- `fs-every-derivative-is-riemann-integrable` — pass.
+- `fs-henstock-kurzweil-integrable-functions-are-bounded` — pass.
+- `cex-henstock-kurzweil-integrability-is-not-absolute` — pass.
+- `fs-henstock-kurzweil-integrable-implies-riemann-integrable` — pass.
+- `fs-every-henstock-kurzweil-integrable-function-is-a-derivative` — pass.
+
+### Final component provenance
+
+The earlier per-item component-provenance table remains the item-by-item rationale and was checked against every final frontmatter block. The final values group as follows.
+
+- `literature-derived / not-applicable`: `def-first-order-ode-initial-value-problem-and-solution`, `def-locally-lipschitz-in-the-state-variable`, `def-picard-operator-and-picard-iterates`, `def-maximal-ode-solution`, `def-modulus-of-continuity-and-osgood-condition`, `def-gauge-and-fine-tagged-partition`, `def-henstock-kurzweil-integral-on-a-compact-interval`, and `def-henstock-kurzweil-integral-on-a-noncompact-interval`. Teschl/Lebl or Fonda/BBT supply the conventions; these definitions contain no proof component.
+- `ai-altered / ai-altered`: `lem-vector-valued-continuous-curve-space-is-complete`, `lem-picard-operator-preserves-a-closed-curve-ball`, `cor-uniform-picard-lindelof-for-nearby-initial-values`, `prop-picard-iteration-converges-with-explicit-error-bounds`, `thm-continuous-dependence-of-odes-on-initial-data-and-parameters`, `lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence`, `cex-uniqueness-does-not-require-local-lipschitz-continuity`, `thm-comparison-tests-for-noncompact-henstock-kurzweil-integrals`, and `cex-henstock-kurzweil-integrability-is-not-absolute`. Each statement/construction materially adapts a harvested source result to the library's vector, endpoint, parameter, or combined-comparison conventions; each proof is reorganized around the exact local dependencies and final contract.
+- `literature-derived / ai-altered`: every other proof-bearing item in the per-item ledger. Its statement or witness is directly carried by the cited Teschl/Lebl or Fonda/BBT treatment, while the local derivation is reorganized around published library results and the final proof-obligation map.
+
+No Statement or Construction is `ai-generated`, so no generated-claim counterexample search was required and no `generation` block is present. No proof is labeled `literature-derived`: the source strategies were adapted materially to the library's phase format and dependency closure.
+
+### Scaffold-to-authored ledger
+
+No id, kind, title, reading order, or page membership changed. No planned item was dropped, merged, or deferred, and every `included` coverage row names an item now present on disk.
+
+The final prose made these dependency changes because each edge is actually used:
+
+- `def-picard-operator-and-picard-iterates`: added `thm-recursion` to license the recursively defined iterate sequence.
+- `prop-picard-iteration-converges-with-explicit-error-bounds`: added `thm-picard-iterates-for-exponential` to establish convergence of the factorial coefficient series before applying Weissinger.
+- `cor-globally-lipschitz-odes-have-global-solutions`: added `thm-heine-borel-rn` to make the bounded graph box compact in the escape contradiction.
+- `cex-discontinuous-right-hand-side-with-no-local-solution`: added `lem-q-and-irrationals-dense-r` for the dense two-value obstruction used with Darboux's theorem.
+- `cex-uniqueness-does-not-require-local-lipschitz-continuity`: added `def-modulus-of-continuity-and-osgood-condition` for the exact modulus and reciprocal-divergence conditions checked by the witness.
+- `thm-riemann-integrable-functions-are-henstock-kurzweil-integrable`: added `def-gauge-and-fine-tagged-partition` for the implication from a constant gauge to a mesh bound.
+- `cor-henstock-kurzweil-substitution-for-derivatives`: dropped `thm-intermediate-value`; the final theorem assumes a nondegenerate interval containing the image, so IVT is not used, while this formulation also handles constant inner maps under the library's domain-relative derivative convention.
+- `ex-sine-over-x-has-a-noncompact-henstock-kurzweil-integral`: added `cor-trigonometric-parity-and-pythagorean-identity` to establish boundedness of the cosine primitive in Dirichlet's test.
+- `ex-cousins-lemma-gives-heine-borel-on-an-interval`: added `def-complete-ordered-field` for the canonical supremum gauge, avoiding an uncountable choice of cover members.
+- `cex-henstock-kurzweil-integrability-is-not-absolute`: added `thm-p-series-rational` for the harmonic divergence that forces the absolute truncation integrals to be unbounded.
+
+Authoring also made the following proof obligations explicit without changing the scaffold titles: varying initial time contributes the term $M|s-t_0|$ in continuous dependence; the compact-endpoint extension uses a first-exit estimate before gluing; the one-point interval in vector Arzelà-Ascoli is handled separately; the almost-Lipschitz witness uses the valid modulus $2r(1+|\log r|)$; Hake's forward implication obtains small tails from Saks-Henstock; the compact HK definition is forward-justified by its uniqueness proposition; and all exact same-batch clauses listed above occur in the final source sections.
+
+### Step-5 gates and confidence
+
+- Reflow: all owned proof steps unchanged and one physical line each.
+- Precheck: all proof-bearing items pass.
+- `validate-plan`: exit 0, no cycle, forward edge, B-leaf dependency, or unresolved id.
+- `content-policy`: 61 scoped items, no errors or warnings.
+- `proof-contract --strict`: 53 contracts, no errors or warnings.
+- `citation-fidelity`: every recorded quote found and no widening candidate.
+- `coverage-checklist`: 2 pairs and 114 harvested rows, no errors or warnings; the coverage file remains true of disk.
+- `rendercheck`: 65 owned item/page files clean under YAML and KaTeX, with no wikilink inside math.
+- `prosecheck --warnings`: 65 owned item/page files, no errors or warnings.
+- `fwdcheck`, `extcheck`, `citecheck`, and `depsource`: no hard error; `citecheck` produced only pre-existing warnings outside this batch, and `depsource` reported zero unresolved dependencies.
+- `finite-smoke`: no registered analytic check applies, so it ran zero checks and is not evidence for correctness.
+- `risk-report`: high and critical analytic items are routed for the Step-6 Alpha risk review; no author-written `risk_review` was added.
+
+Confidence is high that the final statements are true under their written hypotheses, that every direct fact accurately states its cited source, and that the boundary cases named in the contracts match the final steps. I did not run either judge, did not write an Alpha risk review, did not set `verification.audited` or `verification.verified`, and did not publish. No published dependency was edited. At the last repo-wide `depcheck --quiet` invocation, this batch had no reported hard error; the command was still red because the concurrently authored item `ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge` had an unrelated YAML title escape. That file is outside this batch and was not touched here.

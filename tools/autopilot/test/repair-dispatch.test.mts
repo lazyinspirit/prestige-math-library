@@ -17,7 +17,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { stages, dispatchSourceScouts, mechanicalRepair } from '../stages/mathlib.mts';
+import { stages, dispatchSourceScouts, mechanicalRepair, MECHANICAL_REPAIRS } from '../stages/mathlib.mts';
 import { Executor } from '../src/executor.mts';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
@@ -384,5 +384,53 @@ test('a gate step 4 does not own still falls through without dispatching', async
     stage: s4, round: 1,
     failure: { id: 'manifest-integrity', why: '' },
   });
+  rmSync(repo, { recursive: true, force: true });
+});
+
+// `--update` is the splice's REFRESH and the tool accepts it only per batch:
+// `(update && !batch)` is a usage error. The splice-verify entry was
+// `--all --fail-on-refusal`, which treats a differing page as a hard error and
+// refuses to overwrite — so it could never clear the drift the gate reports.
+// frontier-16 spent three rounds on it after the 6b Alphas repaired items in
+// four pages of batch 1.
+test('the splice-verify repair updates per batch, because --update needs --batch', () => {
+  const repo = fixtureRepo();
+  for (const b of ['1', '4']) writeFileSync(join(repo, 'research', `demo-batch-${b}.pages.json`), '[]');
+  const cmds = MECHANICAL_REPAIRS['splice-verify']({ run: 'demo', repo }) as string[][];
+  assert.ok(Array.isArray(cmds[0]), 'several commands, one per batch');
+  assert.equal(cmds.length, 2);
+  for (const c of cmds) {
+    assert.ok(c.includes('--update'), 'the refresh is --update');
+    assert.ok(c.includes('--batch'), '--update without --batch is a usage error');
+    assert.ok(!c.includes('--all'), '--all cannot carry --update');
+  }
+  assert.deepEqual(cmds.map((c) => c[c.indexOf('--batch') + 1]), ['1', '4']);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+// Stage 5 enumerated three gate ids and fell through for everything else, so a
+// failure that HAS a mechanical repair burned rounds dispatching nothing.
+test('stage 5 runs a mechanical repair for any gate that has one', async () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-batch-1.pages.json'), '[]');
+  const s5: any = stages.find((s: any) => s.id === '5-author');
+  // splice-verify has a table entry: it must be repaired, never dispatched to
+  // the contract-audit Alpha, which is for candidate detector reads.
+  await s5.onGateFailure({
+    ctx: { run: 'demo', repo },
+    executor: { start: () => { throw new Error('a mechanical repair must not dispatch an Alpha'); } },
+    stage: s5, round: 1,
+    failure: { id: 'splice-verify', why: '' },
+  });
+  // and a detector failure still routes to the Alpha
+  const started: any[] = [];
+  await s5.onGateFailure({
+    ctx: { run: 'demo', repo },
+    executor: { start: (_s: any, p: any) => started.push(p) },
+    stage: s5, round: 1,
+    failure: { id: 'citation-fidelity', why: '' },
+  });
+  assert.equal(started.length, 1);
+  assert.match(started[0].task[0], /alpha-contract-audit\.task\.md$/);
   rmSync(repo, { recursive: true, force: true });
 });
