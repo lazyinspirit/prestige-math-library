@@ -45,10 +45,23 @@ that carefully: two different objects share the name.**
   `lem-dalembert-minimum-modulus-descent`.
 
 That page is already inside this page's transitive `requires` closure, so the
-published statement is citable as it stands — no new edge, no `external_refs`
-entry, and **no re-minting**. Your Liouville argument is a *second proof of an
-already-published landmark*; state the agreement and cite the existing item
-rather than introducing a new statement of the same theorem.
+published statement is citable as it stands — no new edge and no `external_refs`
+entry.
+
+**And a second proof is wanted, not avoided** (owner, 2026-08-20: *"I do not
+mind having duplicate theorems if they are proved in different ways, it's good
+for mathematical richness"*). The Liouville route to the fundamental theorem of
+algebra is genuinely different from the d'Alembert minimum-modulus route — it
+goes through boundedness of an entire function, not through a descent on |p|.
+So the fuller form is the preferred one here: **a theorem with its own Liouville
+proof**, with a distinct id naming the route (matching the published item's own
+convention of putting the route in the id), its own component provenance and
+contract, and a cross-reference each way so a reader meets both proofs. A
+`rem-` that only points at the published statement is thinner than this page can
+honestly carry.
+
+What is still forbidden: writing the *same* proof twice, and inventing a claim
+to fill the page. The statement must remain the source-backed one.
 
 Verified from disk on 2026-08-20 by the monitoring session, after the step-0
 drift review applied an edge to the order-139 page and blocked the whole

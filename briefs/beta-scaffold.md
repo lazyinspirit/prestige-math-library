@@ -353,8 +353,16 @@ its item list.
 2. **Run a corollary pass.** After placing each main theorem or substantial lemma,
    ask which useful immediate consequences now follow cheaply. Add mathematically
    meaningful corollaries with short honest proofs and explicit dependencies.
-   Corollaries enrich the development, but restatements, duplicates, and cosmetic
-   variants do not.
+   Corollaries enrich the development, but restatements and cosmetic variants do
+   not. **A second PROOF is not a restatement** (owner, 2026-08-20): a theorem
+   the library already establishes may be stated and proved again when your route
+   is genuinely different — a different method, not a rearrangement. Give it a
+   distinct id naming the route (the published
+   `thm-fundamental-theorem-of-algebra-minimum-modulus-proof` is the pattern),
+   its own provenance and contract, and a cross-reference each way so a reader
+   meets both. Where the page can carry the second proof honestly, prefer the
+   theorem over a remark that only points at the first. What stays forbidden is
+   the same proof written twice, and inventing a claim to fill a page.
 3. **The page ceiling is 60 items, and it is a hard `validate-plan` ERROR, not
    a warning** (owner, 2026-08-11; `size`). Sixty is a ceiling, **not a target
    or minimum**: never pad a page toward it. Conversely, never drop a valuable

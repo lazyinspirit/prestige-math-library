@@ -51,6 +51,13 @@ defect classes for those specific pages, and a scaffold that trips one is
   `node tools/validate-plan.mjs research/plan-spec.json` after, and record it.
   A forward edge is a reading-order change and is owner-only: record it as
   blocked.
+- **A second proof of a published theorem is welcome** (owner, 2026-08-20), and
+  a scaffold that reduced one to a bare pointer is thinner than it needed to be.
+  Where a page's development genuinely reaches a result the library already
+  proves by another route, the fuller form — a theorem with its own proof, a
+  distinct id naming the route, and a cross-reference each way — is the
+  preferred one. Adding it is inside your step-3 licence. The same proof written
+  twice is not, and neither is an invented claim.
 - **Size**: an A page whose scaffold exceeds 60 items is a SPLIT, decided now.
 - **Provenance order**: no `ai-generated` statement or construction may be a
   load-bearing scaffold dependency. `literature-derived` and `ai-altered` may

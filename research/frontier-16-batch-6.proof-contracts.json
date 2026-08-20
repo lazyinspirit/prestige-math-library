@@ -1,0 +1,856 @@
+{
+  "version": 1,
+  "level": "frontier-16",
+  "scope": [
+    "lem-open-cover-loop-generation",
+    "lem-antipodal-sphere-cover",
+    "thm-higher-dimensional-spheres-are-simply-connected",
+    "lem-van-kampen-homotopy-grid",
+    "lem-van-kampen-factorization-invariance",
+    "thm-seifert-van-kampen",
+    "cor-seifert-van-kampen-simply-connected-overlap",
+    "cor-van-kampen-one-simply-connected-set",
+    "lem-finite-circle-wedge-open-cover",
+    "thm-fundamental-group-of-finite-wedge-of-circles",
+    "cor-fundamental-group-of-two-circle-wedge",
+    "thm-fundamental-group-of-a-product",
+    "cor-fundamental-group-of-two-dimensional-torus",
+    "ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge",
+    "ex-fundamental-group-of-the-punctured-plane",
+    "ex-fundamental-groups-of-once-and-twice-punctured-two-sphere",
+    "fs-every-fundamental-group-is-abelian",
+    "fs-van-kampen-with-disconnected-intersection",
+    "prop-covering-morphism-subgroup-criterion",
+    "cor-based-connected-coverings-isomorphic-iff-equal-subgroups",
+    "lem-subgroup-quotient-of-universal-cover",
+    "lem-covering-basepoint-change-conjugates-subgroup",
+    "thm-classification-of-connected-covering-spaces",
+    "lem-deck-transformations-correspond-to-normalizer-cosets",
+    "thm-deck-group-as-normalizer-quotient",
+    "thm-regular-covering-characterizations",
+    "cor-deck-group-of-a-regular-covering",
+    "cor-real-line-is-universal-cover-of-circle",
+    "cor-connected-coverings-of-circle-classified-by-nonnegative-integers",
+    "cor-every-connected-covering-of-circle-is-regular",
+    "ex-circle-covering-towers-follow-divisibility",
+    "ex-deck-groups-of-connected-circle-coverings",
+    "ex-regular-and-nonregular-three-sheeted-wedge-coverings"
+  ],
+  "contracts": {
+    "lem-open-cover-loop-generation": {
+      "citations": [
+        {"fact":"F1","source":"thm-lebesgue-number-lemma","source_section":"Statement","quote":"a **Lebesgue number** for $\\mathcal{U}$, such that every nonempty","uses":["1.1"]},
+        {"fact":"F2","source":"def-path-connected","source_section":"Definition","quote":"$X$ is **path-connected** when for every pair","uses":["1.2"]},
+        {"fact":"F3","source":"thm-fundamental-group-laws","source_section":"Statement","quote":"is well defined and makes $\\pi_1(X,x_0)$ a group","uses":["2.1"]},
+        {"fact":"F4","source":"lem-finite-choice","source_section":"Statement","quote":"has a choice function","uses":["1.2"]},
+        {"fact":"F5","source":"thm-continuity-characterisations-top","source_section":"Statement","quote":"$f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"subdivision","claim":"Pull the two open sets back to an open cover and choose a finite subdivision whose loop segments each lie in U or V.","step":"1.1","inputs":["F1","F5","thm-heine-borel-r","given"]},
+        {"id":"connectors","claim":"Use finite choice to turn every segment into a based loop in its covering set.","step":"1.2","inputs":["F2","F4","step 1.1","choose"]},
+        {"id":"factorization","claim":"Connector cancellations express the original loop class as the product of factor images.","step":"2.1","inputs":["F3","step 1.2","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The common basepoint makes U, V, their overlap, and X nonempty in the Statement."},
+        {"case":"zero","status":"checked","evidence":"Step 1.1 permits the constant loop and chooses at least one subdivision interval."},
+        {"case":"one","status":"checked","evidence":"Step 2.1 explicitly covers a one-piece subordinate subdivision."},
+        {"case":"degenerate","status":"checked","evidence":"Repeated subdivision vertices give constant segments, whose classes are identities by F3."},
+        {"case":"endpoints","status":"checked","evidence":"Connectors at 0 and 1 are constant at the common basepoint in step 1.2."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Only finitely many connector paths are selected after path-connectedness supplies each one."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The Statement is a generation implication, not a biconditional."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse is asserted by the loop-factorization lemma."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-antipodal-sphere-cover": {
+      "citations": [
+        {"fact":"F1","source":"def-euclidean-spheres-and-closed-balls","source_section":"Definition","quote":"For the unit sphere centred at the origin write","uses":["1.1","1.2"]},
+        {"fact":"F2","source":"lem-algebra-of-continuous-real-maps-on-a-space","source_section":"Statement","quote":"the quotient $f/g$ is continuous","uses":["1.3"]},
+        {"fact":"F3","source":"thm-convex-subsets-have-trivial-fundamental-group","source_section":"Statement","quote":"Then $C$ is simply connected.","uses":["2.1"]},
+        {"fact":"F4","source":"lem-punctured-rn-is-polygonally-connected","source_section":"Statement","quote":"For $n\\ge2$, $\\mathbb R^n\\setminus\\{0\\}$ is polygonally connected.","uses":["2.2"]},
+        {"fact":"F5","source":"thm-componentwise-limits-and-continuity","source_section":"Statement","quote":"**Continuity is componentwise.**","uses":["1.2","1.3"]},
+        {"fact":"F6","source":"thm-continuity-characterisations-top","source_section":"Statement","quote":"$f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"formulas","claim":"Write mutually inverse stereographic formulas on each pole complement.","step":"1.1","inputs":["F1","algebra"]},
+        {"id":"open-cover","claim":"The last-coordinate inequalities make the two pole complements open and their union the whole sphere.","step":"1.2","inputs":["F1","F5","F6","algebra"]},
+        {"id":"continuity","claim":"Both formulas are continuous and hence are homeomorphisms.","step":"1.3","inputs":["F2","F5","step 1.1"]},
+        {"id":"complements","claim":"Each pole complement is simply connected.","step":"2.1","inputs":["F3","step 1.3"]},
+        {"id":"overlap","claim":"The double complement is path-connected for n at least 2.","step":"2.2","inputs":["F4","step 1.3"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"For n at least 2 the sphere and the double pole complement are explicitly nonempty."},
+        {"case":"zero","status":"not_applicable","evidence":"The theorem excludes dimension n=0, where the overlap statement would fail."},
+        {"case":"one","status":"checked","evidence":"Dimension n=1 is deliberately excluded because R minus {0} is disconnected."},
+        {"case":"degenerate","status":"checked","evidence":"The pole denominators vanish exactly at the deleted poles in step 1.1."},
+        {"case":"endpoints","status":"not_applicable","evidence":"No interval endpoint is quantified in the stereographic statement."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The poles and formulas are explicit and use no selection."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 1.1 verifies each formula lands in its claimed target."},
+        {"case":"iff-reverse","status":"checked","evidence":"Direct substitution in step 1.1 proves both composites are identities."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-higher-dimensional-spheres-are-simply-connected": {
+      "citations": [
+        {"fact":"L1","source":"lem-antipodal-sphere-cover","source_section":"Statement","quote":"Antipodal complements cover S^n by simply connected sets with path-connected overlap for n at least 2.","uses":["1.1"]},
+        {"fact":"L2","source":"lem-open-cover-loop-generation","source_section":"Statement","quote":"Every based loop class is a product of inclusion-images from the two covering sets.","uses":["1.2"]},
+        {"fact":"F1","source":"def-simply-connected","source_section":"Definition","quote":"A topological space $X$ is **simply connected** when it is nonempty and path-connected","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"cover","claim":"Fix the antipodal open cover with simply connected factors.","step":"1.1","inputs":["L1"]},
+        {"id":"trivial-loops","claim":"Every loop class is a product of trivial factor classes.","step":"1.2","inputs":["L2","step 1.1"]},
+        {"id":"simple-connectedness","claim":"The sphere satisfies every clause of simple connectedness.","step":"2.1","inputs":["F1","step 1.1","step 1.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"L1 gives a nonempty cover and overlap."},
+        {"case":"zero","status":"not_applicable","evidence":"The Statement begins at n=2 and asserts nothing for S^0."},
+        {"case":"one","status":"checked","evidence":"S^1 is excluded; its published nontrivial fundamental group explains the boundary."},
+        {"case":"degenerate","status":"checked","evidence":"The constant loop becomes the empty or identity product in step 1.2."},
+        {"case":"endpoints","status":"checked","evidence":"All loops and homotopies use the common basepoint fixed by L2."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"No family is selected beyond the explicit antipodal cover."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"Simple connectedness is asserted directly, not as an iff."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse dimension claim is made."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-van-kampen-homotopy-grid": {
+      "citations": [
+        {"fact":"F1","source":"thm-heine-borel-rn","source_section":"Statement","quote":"Closed boxes are compact.","uses":["1.1"]},
+        {"fact":"F2","source":"thm-lebesgue-number-lemma","source_section":"Statement","quote":"a **Lebesgue number** for $\\mathcal{U}$, such that every nonempty","uses":["1.1"]},
+        {"fact":"F3","source":"lem-product-topology-on-rn","source_section":"Statement","quote":"The product topology on $\\mathbb{R}^n$ is the metric topology of $d_\\infty$","uses":["1.1"]},
+        {"fact":"F4","source":"thm-continuity-characterisations-top","source_section":"Statement","quote":"$f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"compact-square","claim":"The pulled-back two-set open cover of I squared has a Lebesgue number.","step":"1.1","inputs":["F1","F2","F3","F4","given"]},
+        {"id":"mesh","claim":"Choose a finite mesh subordinate to the cover and refining prescribed boundary cuts.","step":"2.1","inputs":["step 1.1","algebra","construct"]},
+        {"id":"rectangles","claim":"Every closed grid rectangle maps into one covering set.","step":"2.2","inputs":["step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"I squared is nonempty and every point has a pulled-back cover member."},
+        {"case":"zero","status":"checked","evidence":"A zero-length boundary segment is retained as a degenerate grid edge."},
+        {"case":"one","status":"checked","evidence":"If one rectangle suffices, the one-by-one grid is admitted in step 2.1."},
+        {"case":"degenerate","status":"checked","evidence":"Repeated prescribed cuts are removed before choosing the common refinement."},
+        {"case":"endpoints","status":"checked","evidence":"The grid contains 0 and 1 in both coordinates and preserves prescribed bottom and top cuts."},
+        {"case":"nonempty-choice","status":"checked","evidence":"A positive integer mesh size is chosen explicitly from the positive Lebesgue number."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The grid lemma is an existence implication."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse from a grid to a cover hypothesis is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-van-kampen-factorization-invariance": {
+      "citations": [
+        {"fact":"L1","source":"lem-open-cover-loop-generation","source_section":"Statement","quote":"Every based loop class has a factorization by loops in U and V.","uses":["1.1"]},
+        {"fact":"L2","source":"lem-van-kampen-homotopy-grid","source_section":"Statement","quote":"A path homotopy admits a finite subordinate grid refining prescribed endpoint subdivisions.","uses":["2.1"]},
+        {"fact":"F1","source":"def-pushout-of-group-homomorphisms","source_section":"Definition","quote":"$i_G\\circ f=i_H\\circ h$","uses":["1.2","2.2"]},
+        {"fact":"F2","source":"lem-finite-choice","source_section":"Statement","quote":"has a choice function","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"word","claim":"Associate a pushout word to every subordinate loop factorization.","step":"1.1","inputs":["L1","construct"]},
+        {"id":"elementary-moves","claim":"Subdivision and connector changes preserve the pushout value.","step":"1.2","inputs":["F1","step 1.1","thm-fundamental-group-laws"]},
+        {"id":"grid-sweep","claim":"A subordinate grid and finitely selected vertex connectors relate the bottom and top factorizations through elementary moves.","step":"2.1","inputs":["L2","F2","step 1.2"]},
+        {"id":"invariance","claim":"Homotopic endpoint loops have equal factorization values in the pushout.","step":"2.2","inputs":["F1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The common basepoint ensures every connector family and pushout diagram has objects."},
+        {"case":"zero","status":"checked","evidence":"The constant loop has the identity word; zero-area grid cells make no move."},
+        {"case":"one","status":"checked","evidence":"A single factor is a valid word and a single grid cell is handled by step 1.2."},
+        {"case":"degenerate","status":"checked","evidence":"Constant connectors contribute identity classes and are deleted by group laws."},
+        {"case":"endpoints","status":"checked","evidence":"The homotopy is relative to endpoints, so bottom and top words share the fixed basepoint."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Only finitely many vertex connectors are chosen from path-connected U, V, or their overlap."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The lemma proves invariance under homotopy, not an equivalence criterion."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"Equality in the pushout is not claimed to imply loop homotopy."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-seifert-van-kampen": {
+      "citations": [
+        {"fact":"L1","source":"lem-open-cover-loop-generation","source_section":"Statement","quote":"The images of pi_1(U) and pi_1(V) generate pi_1(X).","uses":["1.2","3.1"]},
+        {"fact":"L2","source":"lem-van-kampen-factorization-invariance","source_section":"Statement","quote":"Homotopic-loop factorizations have the same value in the group pushout.","uses":["2.1"]},
+        {"fact":"F1","source":"def-pushout-of-group-homomorphisms","source_section":"Definition","quote":"every compatible pair $u:G\\to Q$, $v:H\\to Q$ factors through a unique $w:P\\to Q$","uses":["1.1","3.2"]}
+      ],
+      "derivations": [
+        {"id":"canonical-map","claim":"The inclusion-induced maps define a canonical homomorphism from the pushout to pi_1(X).","step":"1.1","inputs":["F1","def-induced-homomorphism-on-fundamental-groups"]},
+        {"id":"inverse-values","claim":"Every loop factorization defines a candidate pushout value.","step":"1.2","inputs":["L1","construct"]},
+        {"id":"well-defined","claim":"The candidate value is independent of loop representative and factorization.","step":"2.1","inputs":["L2","step 1.2"]},
+        {"id":"inverse-one","claim":"The composite on pi_1(X) is the identity.","step":"3.1","inputs":["L1","step 1.1","step 2.1"]},
+        {"id":"inverse-two","claim":"The composite on the pushout is the identity by uniqueness on both factors.","step":"3.2","inputs":["F1","step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"A named common basepoint makes every space in the pushout diagram nonempty."},
+        {"case":"zero","status":"checked","evidence":"Trivial factor groups and the identity loop are retained by the universal property."},
+        {"case":"one","status":"checked","evidence":"If U=X or V=X, the two inverse checks reduce to the corresponding factor map."},
+        {"case":"degenerate","status":"checked","evidence":"Neither inclusion-induced map is assumed injective; arbitrary kernels are allowed by F1."},
+        {"case":"endpoints","status":"checked","evidence":"All loops and homotopies are based at the common point throughout L1 and L2."},
+        {"case":"nonempty-choice","status":"checked","evidence":"The inverse uses one finite factorization per loop class only inside a representative-independent definition; Step 5 must present it by an explicit quotient rule, not global choice."},
+        {"case":"iff-forward","status":"checked","evidence":"Steps 1.1–3.2 construct the isomorphism from the cover hypotheses."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"The theorem does not claim the cover hypotheses are necessary for a pushout isomorphism."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-seifert-van-kampen-simply-connected-overlap": {
+      "citations": [
+        {"fact":"L1","source":"thm-seifert-van-kampen","source_section":"Statement","quote":"pi_1(X) is the pushout of the inclusion-induced maps from pi_1(U intersection V).","uses":["1.1"]},
+        {"fact":"F1","source":"cor-trivial-amalgamation-is-the-free-product","source_section":"Statement","quote":"The free product with amalgamation over the trivial group is canonically isomorphic to the ordinary free product.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"trivial-overlap","claim":"Simple connectedness makes the overlap fundamental group trivial.","step":"1.1","inputs":["L1","def-simply-connected"]},
+        {"id":"free-product","claim":"The resulting pushout is the ordinary free product.","step":"1.2","inputs":["F1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Simple connectedness includes nonemptiness of the overlap."},
+        {"case":"zero","status":"checked","evidence":"Either factor may have the trivial fundamental group; the free product convention still applies."},
+        {"case":"one","status":"checked","evidence":"A one-element overlap group has the unique maps used in step 1.2."},
+        {"case":"degenerate","status":"checked","evidence":"If U or V equals the overlap, the free product with a trivial factor reduces correctly."},
+        {"case":"endpoints","status":"checked","evidence":"The common basepoint belongs to the overlap by the inherited theorem hypotheses."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The corollary uses canonical universal properties only."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"Only a sufficient special case is stated."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"A free-product conclusion need not force the overlap to be simply connected."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-van-kampen-one-simply-connected-set": {
+      "citations": [
+        {"fact":"L1","source":"thm-seifert-van-kampen","source_section":"Statement","quote":"The fundamental group is the group pushout of the two inclusion-induced maps.","uses":["1.1"]},
+        {"fact":"F1","source":"thm-group-pushout-as-an-amalgamated-quotient","source_section":"Statement","quote":"Then $(G\\ast H)/N$, with the induced factor maps $j_G$ and $j_H$, is a pushout of $f$ and $h$.","uses":["1.2"]},
+        {"fact":"F2","source":"def-normal-closure","source_section":"Definition","quote":"Thus it is the smallest normal subgroup of $G$ containing $S$.","uses":["1.2"]},
+        {"fact":"F3","source":"def-free-product-of-a-family-of-groups","source_section":"Definition","quote":"there is a unique homomorphism $f:F\\to H$ satisfying $f\\circ\\iota_i=f_i$ for all $i$.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"replace-factor","claim":"Replace pi_1(V) by the trivial group in the van Kampen pushout.","step":"1.1","inputs":["L1","def-simply-connected"]},
+        {"id":"quotient","claim":"Identify the free product with the trivial factor as pi_1(U), then identify the pushout as its quotient by the normal closure of the overlap image.","step":"1.2","inputs":["F1","F2","F3","step 1.1"]},
+        {"id":"kernel","claim":"Read the canonical quotient map as the inclusion-induced surjection with exactly that kernel.","step":"2.1","inputs":["step 1.2","def-quotient-group"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"V is simply connected and therefore nonempty; the common basepoint lies in every set."},
+        {"case":"zero","status":"checked","evidence":"A trivial overlap image has trivial normal closure and yields an isomorphism from pi_1(U)."},
+        {"case":"one","status":"checked","evidence":"If pi_1(U) is trivial, the quotient and target are both trivial."},
+        {"case":"degenerate","status":"checked","evidence":"If U intersection V=U, the normal closure is all of pi_1(U), as step 1.2 records."},
+        {"case":"endpoints","status":"checked","evidence":"All induced maps use the inherited common basepoint."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Normal closure and quotient are canonical constructions."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The corollary is a direct implication."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No necessity of simple connectedness is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-circle-wedge-open-cover": {
+      "citations": [
+        {"fact":"F1","source":"lem-open-quotient-arcs-in-real-line-mod-integers","source_section":"Statement","quote":"The quotient map is open, and every interval shorter than one embeds in $\\mathbb R/\\mathbb Z$.","uses":["1.1"]},
+        {"fact":"F2","source":"thm-quotient-universal-property","source_section":"Statement","quote":"there is exactly one function $\\bar f : Y \\to W$ with $\\bar f \\circ q = f$, and it is continuous","uses":["2.1"]},
+        {"fact":"F3","source":"def-retraction-and-deformation-retract","source_section":"Definition","quote":"$H(a,t)=a$ for all $a\\in A$ and $t\\in I$","uses":["2.1","2.2"]},
+        {"fact":"F4","source":"def-path-connected","source_section":"Definition","quote":"$X$ is **path-connected** when for every pair","uses":["2.3"]}
+      ],
+      "derivations": [
+        {"id":"open-sets","claim":"Construct saturated open preimages whose quotient images form the two-set cover.","step":"1.1","inputs":["F1","def-wedge-of-pointed-spaces","construct"]},
+        {"id":"factor-retractions","claim":"Retract the two cover members to the old wedge and the new circle.","step":"2.1","inputs":["F2","F3","step 1.1"]},
+        {"id":"overlap-retraction","claim":"Retract the overlap to the wedge point.","step":"2.2","inputs":["F2","F3","step 1.1"]},
+        {"id":"path-connectedness","claim":"Construct paths through the wedge point to verify that both cover members and their overlap are path-connected.","step":"2.3","inputs":["F4","step 2.1","step 2.2","construct"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The zero-circle wedge is stipulated to be a point and handled before the successor construction."},
+        {"case":"zero","status":"checked","evidence":"The r=0 induction input is a point; no nonexistent circle arc is selected."},
+        {"case":"one","status":"checked","evidence":"For r=1 the old wedge is a point and the same explicit cover remains valid."},
+        {"case":"degenerate","status":"checked","evidence":"All quotient arcs have strictly positive length below one and contain the basepoint."},
+        {"case":"endpoints","status":"checked","evidence":"Arc homotopies fix the identified basepoints, so they descend through the quotient."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"A fixed rational-length arc is chosen in every circle by one uniform formula."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The lemma constructs a cover and deformation data."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"It does not characterize all van Kampen covers of a wedge."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-fundamental-group-of-finite-wedge-of-circles": {
+      "citations": [
+        {"fact":"L1","source":"lem-finite-circle-wedge-open-cover","source_section":"Statement","quote":"Finite wedges of quotient circles have van Kampen covers with contractible overlap.","uses":["2.1"]},
+        {"fact":"L2","source":"cor-seifert-van-kampen-simply-connected-overlap","source_section":"Statement","quote":"A simply connected overlap turns the van Kampen pushout into a free product.","uses":["2.1"]},
+        {"fact":"F1","source":"thm-fundamental-group-of-the-circle","source_section":"Statement","quote":"$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism.","uses":["1.2","2.2"]},
+        {"fact":"F2","source":"cor-free-product-of-infinite-cyclic-groups-is-free","source_section":"Statement","quote":"A free product of a family of infinite cyclic groups is a free group on one chosen generator from each factor.","uses":["2.2"]}
+      ],
+      "derivations": [
+        {"id":"zero-base","claim":"The empty wedge is a point and has the rank-zero free group.","step":"1.1","inputs":["def-wedge-of-pointed-spaces","algebra"]},
+        {"id":"one-base","claim":"The one-circle wedge has infinite cyclic fundamental group.","step":"1.2","inputs":["F1"]},
+        {"id":"successor-pushout","claim":"The successor wedge group is the free product of the old group and Z.","step":"2.1","inputs":["L1","L2","ih"]},
+        {"id":"successor-rank","claim":"That free product is free of successor rank with the stated basis.","step":"2.2","inputs":["F1","F2","step 2.1"]},
+        {"id":"induction","claim":"Conclude the theorem for every natural r.","step":"3.1","inputs":["thm-induction-principle","step 1.1","step 2.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Step 1.1 explicitly defines and proves the empty-wedge case."},
+        {"case":"zero","status":"checked","evidence":"Rank zero is the free group on the empty basis."},
+        {"case":"one","status":"checked","evidence":"Step 1.2 handles one circle independently of the successor proof."},
+        {"case":"degenerate","status":"checked","evidence":"Repeated or unbased summands are not allowed; each summand is the fixed pointed quotient circle."},
+        {"case":"endpoints","status":"checked","evidence":"Each standard loop begins and ends at the common wedge point."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The finite basis consists of the explicitly indexed standard circle loops."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The theorem computes one family of fundamental groups."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse characterization of spaces with free fundamental group is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-fundamental-group-of-two-circle-wedge": {
+      "citations": [
+        {"fact":"L1","source":"thm-fundamental-group-of-finite-wedge-of-circles","source_section":"Statement","quote":"The fundamental group of a finite wedge of r circles is free of rank r on the standard circle loops.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"specialize","claim":"Specialize the finite-wedge computation to r=2.","step":"1.1","inputs":["L1","algebra"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","evidence":"The displayed wedge has two nonempty circle summands."},
+        {"case":"zero","status":"not_applicable","evidence":"The specialization fixes rank two, not zero."},
+        {"case":"one","status":"not_applicable","evidence":"The specialization fixes two distinct summands."},
+        {"case":"degenerate","status":"checked","evidence":"The two standard generators remain distinct tagged summands in the wedge definition."},
+        {"case":"endpoints","status":"checked","evidence":"Both basis loops are based at the wedge point."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The two basis loops are explicitly named."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"This is a specialization corollary."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-fundamental-group-of-a-product": {
+      "citations": [
+        {"fact":"F1","source":"thm-product-universal-property","source_section":"Statement","quote":"h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .","uses":["1.1","2.1"]},
+        {"fact":"F2","source":"thm-fundamental-group-laws","source_section":"Statement","quote":"is well defined and makes $\\pi_1(X,x_0)$ a group","uses":["1.2","2.2"]},
+        {"fact":"F3","source":"thm-external-direct-product-is-a-group","source_section":"Statement","quote":"makes $G\\times H$ a group.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"coordinate-map","claim":"Coordinate projections send a product loop class to a pair of loop classes.","step":"1.1","inputs":["F1","def-induced-homomorphism-on-fundamental-groups"]},
+        {"id":"homomorphism","claim":"The coordinate map is a well-defined homomorphism to the direct product.","step":"1.2","inputs":["F2","F3","step 1.1"]},
+        {"id":"paired-loop","claim":"A pair of loop classes determines a continuous product loop class independently of representatives.","step":"2.1","inputs":["F1","construct"]},
+        {"id":"inverse","claim":"The coordinate and paired-loop maps are inverse homomorphisms.","step":"2.2","inputs":["F2","step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The displayed basepoints imply both factors and the product are nonempty."},
+        {"case":"zero","status":"not_applicable","evidence":"No numerical index occurs in the binary product theorem."},
+        {"case":"one","status":"checked","evidence":"If either factor is one-point, the construction reduces to the other fundamental group."},
+        {"case":"degenerate","status":"checked","evidence":"Constant coordinate loops are identities under F2 and are preserved by both maps."},
+        {"case":"endpoints","status":"checked","evidence":"A product loop has endpoints (x_0,y_0) exactly when both component loops have their named endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Pairing and projection are explicit functions."},
+        {"case":"iff-forward","status":"checked","evidence":"F1 supplies continuity from the two component loops."},
+        {"case":"iff-reverse","status":"checked","evidence":"F1 also ensures every continuous product loop has continuous components."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-fundamental-group-of-two-dimensional-torus": {
+      "citations": [
+        {"fact":"L1","source":"thm-fundamental-group-of-a-product","source_section":"Statement","quote":"pi_1(X times Y) is isomorphic to pi_1(X) times pi_1(Y).","uses":["1.1"]},
+        {"fact":"F1","source":"thm-fundamental-group-of-the-circle","source_section":"Statement","quote":"$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"product-circles","claim":"Apply the product theorem and the two degree isomorphisms to T squared.","step":"1.1","inputs":["L1","F1","def-two-dimensional-torus"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The quotient circle has the basepoint [0], so its square is nonempty."},
+        {"case":"zero","status":"not_applicable","evidence":"The torus is a fixed binary product, not a zero-fold product."},
+        {"case":"one","status":"not_applicable","evidence":"Both product factors are the quotient circle."},
+        {"case":"degenerate","status":"checked","evidence":"Identity classes map to (0,0) under the product degree isomorphism."},
+        {"case":"endpoints","status":"checked","evidence":"The basepoint is ([0],[0]) in the torus definition."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Both component isomorphisms are canonical degree maps."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The corollary computes a group."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse classification of spaces is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge": {
+      "citations": [
+        {"fact":"L1","source":"cor-fundamental-group-of-two-circle-wedge","source_section":"Statement","quote":"pi_1(S^1 wedge S^1) is the free group on two generators.","uses":["2.1"]},
+        {"fact":"F1","source":"thm-fundamental-group-laws","source_section":"Statement","quote":"Its identity is the class of the constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.","uses":["1.1"]},
+        {"fact":"F2","source":"thm-normal-form-for-free-products","source_section":"Statement","quote":"no nonempty reduced word represents the identity.","uses":["2.2"]}
+      ],
+      "derivations": [
+        {"id":"change-map","claim":"Conjugation by either connecting path defines an isomorphism with reverse-path inverse.","step":"1.1","inputs":["F1","def-homotopy-relative-and-path-homotopy","construct"]},
+        {"id":"compare","claim":"The second path changes the first isomorphism by conjugation by b.","step":"2.1","inputs":["L1","step 1.1"]},
+        {"id":"distinct","claim":"The images of a are distinct reduced words.","step":"2.2","inputs":["F2","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The two named points and paths are explicit points of the nonempty wedge."},
+        {"case":"zero","status":"not_applicable","evidence":"No indexed family begins at zero."},
+        {"case":"one","status":"checked","evidence":"The one extra traversal of the second circle is the source of the distinct conjugation."},
+        {"case":"degenerate","status":"checked","evidence":"If the two paths were homotopic rel endpoints the conjugating loop would be trivial; the explicit b loop is not."},
+        {"case":"endpoints","status":"checked","evidence":"Both connecting paths share exactly the same initial and terminal points."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Both paths and both free generators are explicit."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The example exhibits distinct maps rather than characterizing them."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse about all path pairs is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-fundamental-group-of-the-punctured-plane": {
+      "citations": [
+        {"fact":"F1","source":"thm-punctured-rn-deformation-retracts-onto-the-sphere","source_section":"Statement","quote":"is a deformation retraction of $P$ onto $S^{n-1}$.","uses":["1.1"]},
+        {"fact":"F2","source":"thm-induced-fundamental-group-map-functoriality","source_section":"Statement","quote":"(g\\circ f)_*=g_*\\circ f_*.","uses":["1.2","2.1"]},
+        {"fact":"F3","source":"thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle","source_section":"Statement","quote":"is a homeomorphism from $\\mathbb R/\\mathbb Z$ to the unit circle and sends $[0]$ to $(1,0)$.","uses":["2.1"]},
+        {"fact":"F4","source":"thm-fundamental-group-of-the-circle","source_section":"Statement","quote":"$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"retract","claim":"Specialize radial deformation retraction to the punctured plane.","step":"1.1","inputs":["F1"]},
+        {"id":"pi1-retract","claim":"The retraction and inclusion induce inverse fundamental-group isomorphisms.","step":"1.2","inputs":["F2","step 1.1"]},
+        {"id":"circle","claim":"Transport the circle group calculation to the Euclidean unit circle and then to the punctured plane.","step":"2.1","inputs":["F2","F3","F4","step 1.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"R squared minus the origin and its unit circle are explicitly nonempty."},
+        {"case":"zero","status":"checked","evidence":"The origin is deleted, so radial normalization never divides by zero."},
+        {"case":"one","status":"checked","evidence":"The unit radius is fixed pointwise by the deformation retraction."},
+        {"case":"degenerate","status":"checked","evidence":"Constant loops correspond to degree zero and the identity integer."},
+        {"case":"endpoints","status":"checked","evidence":"The basepoint (1,0) is fixed by the radial homotopy and the circle homeomorphism."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"All maps and basepoints are explicit."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The example computes one fundamental group."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse topological characterization is made."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-fundamental-groups-of-once-and-twice-punctured-two-sphere": {
+      "citations": [
+        {"fact":"L1","source":"lem-antipodal-sphere-cover","source_section":"Statement","quote":"A pole complement is homeomorphic to R^n and the double complement to R^n minus {0}.","uses":["1.1","2.1"]},
+        {"fact":"F1","source":"thm-convex-subsets-have-trivial-fundamental-group","source_section":"Statement","quote":"Then $C$ is simply connected.","uses":["1.2"]},
+        {"fact":"L2","source":"ex-fundamental-group-of-the-punctured-plane","source_section":"Example","quote":"pi_1(R^2 minus {0}) is isomorphic to Z.","uses":["2.2"]}
+      ],
+      "derivations": [
+        {"id":"one-homeomorphism","claim":"Identify the once-punctured two-sphere with R squared.","step":"1.1","inputs":["L1"]},
+        {"id":"one-group","claim":"Its fundamental group is trivial.","step":"1.2","inputs":["F1","step 1.1","thm-induced-fundamental-group-map-functoriality"]},
+        {"id":"two-homeomorphism","claim":"Identify the twice-punctured two-sphere with the punctured plane.","step":"2.1","inputs":["L1"]},
+        {"id":"two-group","claim":"Its fundamental group is infinite cyclic.","step":"2.2","inputs":["L2","step 2.1","thm-induced-fundamental-group-map-functoriality"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Deleting one or two poles from S squared leaves explicit nonempty spaces."},
+        {"case":"zero","status":"not_applicable","evidence":"The example begins with one puncture; the unpunctured sphere is treated by the sphere theorem."},
+        {"case":"one","status":"checked","evidence":"Steps 1.1–1.2 handle exactly one puncture."},
+        {"case":"degenerate","status":"checked","evidence":"The two punctures in step 2.1 are distinct antipodal points."},
+        {"case":"endpoints","status":"checked","evidence":"Basepoints are selected away from all deleted poles and transported by the displayed homeomorphisms."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Punctures, homeomorphisms, and basepoints are explicit."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The example contains two computations, not biconditionals."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse classification by fundamental group is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-fundamental-group-is-abelian": {
+      "citations": [
+        {"fact":"L1","source":"cor-fundamental-group-of-two-circle-wedge","source_section":"Statement","quote":"pi_1(S^1 wedge S^1) is the free group on two generators.","uses":["1.1"]},
+        {"fact":"F1","source":"thm-normal-form-for-free-products","source_section":"Statement","quote":"Every element of $\\ast_{i\\in I}G_i$ has a unique reduced syllable expression.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"witness","claim":"Choose the two standard generator loop classes a and b.","step":"1.1","inputs":["L1"]},
+        {"id":"noncommute","claim":"Normal form distinguishes ab from ba.","step":"1.2","inputs":["F1","step 1.1"]},
+        {"id":"refute","claim":"The wedge fundamental group is a counterexample to universal abelianness.","step":"2.1","inputs":["step 1.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"not_applicable","evidence":"The witness is the explicit nonempty two-circle wedge."},
+        {"case":"zero","status":"not_applicable","evidence":"No zero-index family occurs."},
+        {"case":"one","status":"checked","evidence":"A one-circle witness would be abelian; two generators are explicitly required."},
+        {"case":"degenerate","status":"checked","evidence":"Both generators are nonidentity one-syllable reduced words."},
+        {"case":"endpoints","status":"checked","evidence":"The two loops share the wedge basepoint, so both products are defined."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The witness and elements are explicit."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"A false universal statement is refuted by one witness."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No equivalence is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-van-kampen-with-disconnected-intersection": {
+      "citations": [
+        {"fact":"F1","source":"lem-open-quotient-arcs-in-real-line-mod-integers","source_section":"Statement","quote":"The quotient map is open, and every interval shorter than one embeds in $\\mathbb R/\\mathbb Z$.","uses":["1.1"]},
+        {"fact":"F2","source":"thm-convex-subsets-have-trivial-fundamental-group","source_section":"Statement","quote":"Then $C$ is simply connected.","uses":["1.2"]},
+        {"fact":"F3","source":"thm-fundamental-group-of-the-circle","source_section":"Statement","quote":"$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism.","uses":["2.2"]}
+      ],
+      "derivations": [
+        {"id":"arc-cover","claim":"Construct two open embedded arcs covering the quotient circle with two-component overlap.","step":"1.1","inputs":["F1","construct"]},
+        {"id":"factor-groups","claim":"Both arcs have trivial fundamental group.","step":"1.2","inputs":["F2","step 1.1"]},
+        {"id":"false-pushout","claim":"The claimed pushout using only the basepoint component is trivial.","step":"2.1","inputs":["def-pushout-of-group-homomorphisms","step 1.2"]},
+        {"id":"contradiction","claim":"The actual circle group is nontrivial, so the unrestricted claim is false.","step":"2.2","inputs":["F3","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Both arcs and both overlap components are nonempty in the explicit interval calculation."},
+        {"case":"zero","status":"checked","evidence":"The trivial factor groups are the one-element groups, not empty groups."},
+        {"case":"one","status":"checked","evidence":"The chosen basepoint lies in exactly one named overlap component used by the false formula."},
+        {"case":"degenerate","status":"checked","evidence":"Arc lengths are strictly below one, so each quotient restriction is injective."},
+        {"case":"endpoints","status":"checked","evidence":"Open intervals are chosen with overlap away from their excluded endpoints."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"All interval endpoints and the basepoint are explicit rational numbers."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The false implication is refuted by the circle witness."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No biconditional is involved."}
+      ],
+      "finite_smoke": []
+    },
+    "prop-covering-morphism-subgroup-criterion": {
+      "citations": [
+        {"fact":"F1","source":"thm-covering-space-lifting-criterion","source_section":"Statement","quote":"A based lift $\\widetilde f:(Y,y_0)\\to(E,e_0)$ exists if and only if $f_*\\pi_1(Y,y_0)\\subseteq p_*\\pi_1(E,e_0)$; when it exists it is unique.","uses":["1.1","1.2"]},
+        {"fact":"F2","source":"prop-local-path-connectedness-lifts-and-descends-along-coverings","source_section":"Statement","quote":"the total space $E$ is locally path-connected if and only if the base $B$ is locally path-connected.","uses":["1.1"]},
+        {"fact":"F3","source":"thm-uniqueness-of-lifts-from-a-connected-space","source_section":"Statement","quote":"If $f(y_0)=g(y_0)$ for some $y_0\\in Y$, then $f=g$.","uses":["1.2"]},
+        {"fact":"F4","source":"def-covering-map-and-evenly-covered-neighbourhoods","source_section":"Definition","quote":"each restriction $p|_{V_j}:V_j\\to U$ is a homeomorphism","uses":["2.1"]},
+        {"fact":"F5","source":"thm-connected-and-locally-path-connected-implies-path-connected","source_section":"Statement","quote":"then $X$ is path-connected.**","uses":["1.1","2.1"]},
+        {"fact":"F6","source":"thm-path-lifting-for-covering-maps","source_section":"Statement","quote":"There is a unique path $\\widetilde\\alpha:I\\to E$ with $\\widetilde\\alpha(0)=e_0$ and $p\\circ\\widetilde\\alpha=\\alpha$.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"existence","claim":"Subgroup inclusion is equivalent to existence of the based covering morphism.","step":"1.1","inputs":["F1","F2","F5","given"]},
+        {"id":"uniqueness","claim":"The based morphism is unique.","step":"1.2","inputs":["F1","F3","step 1.1"]},
+        {"id":"covering-map","claim":"The morphism itself is a surjective covering map.","step":"2.1","inputs":["F4","F5","F6","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Based connected coverings have nonempty total spaces and a named fibre point."},
+        {"case":"zero","status":"not_applicable","evidence":"No numerical index is part of the criterion."},
+        {"case":"one","status":"checked","evidence":"One-sheeted source or target coverings satisfy the same inclusion criterion."},
+        {"case":"degenerate","status":"checked","evidence":"Equality of subgroups is allowed and later yields an isomorphism; strict inclusion is not assumed."},
+        {"case":"endpoints","status":"checked","evidence":"All induced groups and the lift use the specified points e_1, e_2 over b_0."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The lifting criterion supplies one unique map rather than a family of choices."},
+        {"case":"iff-forward","status":"checked","evidence":"Functoriality of an existing morphism gives subgroup inclusion in step 1.1."},
+        {"case":"iff-reverse","status":"checked","evidence":"The lifting criterion constructs the morphism from subgroup inclusion in step 1.1."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-based-connected-coverings-isomorphic-iff-equal-subgroups": {
+      "citations": [
+        {"fact":"L1","source":"prop-covering-morphism-subgroup-criterion","source_section":"Statement","quote":"A unique based covering morphism exists exactly when the induced subgroups are included.","uses":["1.1","2.1"]},
+        {"fact":"F1","source":"thm-uniqueness-of-lifts-from-a-connected-space","source_section":"Statement","quote":"If $f(y_0)=g(y_0)$ for some $y_0\\in Y$, then $f=g$.","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"two-maps","claim":"Equal subgroups give based morphisms in both directions.","step":"1.1","inputs":["L1"]},
+        {"id":"inverse","claim":"The two composites are identities, so the maps are inverse isomorphisms.","step":"1.2","inputs":["F1","step 1.1"]},
+        {"id":"converse","claim":"A based isomorphism gives both subgroup inclusions and hence equality.","step":"2.1","inputs":["L1","thm-induced-fundamental-group-map-functoriality"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Based covers have named points and are nonempty."},
+        {"case":"zero","status":"not_applicable","evidence":"No numerical parameter occurs."},
+        {"case":"one","status":"checked","evidence":"The one-sheeted covering and trivial subgroup cases are included."},
+        {"case":"degenerate","status":"checked","evidence":"The two coverings may be the same; uniqueness then returns the identity map."},
+        {"case":"endpoints","status":"checked","evidence":"The isomorphism is required to take the first chosen fibre point to the second."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Both morphisms are unique outputs of L1."},
+        {"case":"iff-forward","status":"checked","evidence":"Steps 1.1–1.2 prove equality implies based isomorphism."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 2.1 proves based isomorphism implies equality."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-subgroup-quotient-of-universal-cover": {
+      "citations": [
+        {"fact":"F1","source":"thm-universal-cover-existence","source_section":"Statement","quote":"Every nonempty path-connected, locally path-connected, semilocally simply connected space has a universal covering space.","uses":["1.1"]},
+        {"fact":"F2","source":"thm-deck-group-of-a-universal-cover-is-the-fundamental-group","source_section":"Statement","quote":"no path reversal is inserted.","uses":["1.1","3.1"]},
+        {"fact":"F3","source":"thm-orbit-map-of-a-covering-space-action-is-a-covering","source_section":"Statement","quote":"For a covering-space action of $G$ on $E$, the orbit map $E\\to E/G$ is a covering.","uses":["2.1"]},
+        {"fact":"F4","source":"def-monodromy-action-on-a-covering-fibre","source_section":"Definition","quote":"With the library's traversal-order product this is a right action","uses":["3.1"]},
+        {"fact":"F5","source":"def-path-connected","source_section":"Definition","quote":"$X$ is **path-connected** when for every pair","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"subgroup-action","claim":"Transport H to a subgroup of the universal deck group and verify the covering-space action condition.","step":"1.1","inputs":["F1","F2","prop-deck-transformations-are-determined-by-one-point-and-act-freely"]},
+        {"id":"quotient-cover","claim":"Form the connected orbit quotient and its induced covering of B.","step":"2.1","inputs":["F3","F5","step 1.1","def-covering-map-and-evenly-covered-neighbourhoods"]},
+        {"id":"realized-subgroup","claim":"A loop closes in the quotient exactly when its class belongs to H.","step":"3.1","inputs":["F2","F4","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The base is explicitly nonempty and the universal cover has a chosen point over b_0."},
+        {"case":"zero","status":"checked","evidence":"H may be the trivial subgroup; the quotient then remains the universal cover."},
+        {"case":"one","status":"checked","evidence":"H may equal G; the quotient is the one-sheeted covering."},
+        {"case":"degenerate","status":"checked","evidence":"Arbitrary nonnormal H is allowed; normality is not used to form its orbit space."},
+        {"case":"endpoints","status":"checked","evidence":"Step 3.1 tracks the universal lift endpoint and its H-orbit at the chosen fibre."},
+        {"case":"nonempty-choice","status":"checked","evidence":"One universal cover and one fibre point are fixed from the existence theorem; the construction is then canonical relative to them."},
+        {"case":"iff-forward","status":"checked","evidence":"Step 3.1 proves closed quotient lift implies membership in H."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 3.1 proves membership in H identifies the endpoint with the starting orbit."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-covering-basepoint-change-conjugates-subgroup": {
+      "citations": [
+        {"fact":"F1","source":"thm-path-lifting-for-covering-maps","source_section":"Statement","quote":"There is a unique path $\\widetilde\\alpha:I\\to E$ with $\\widetilde\\alpha(0)=e_0$ and $p\\circ\\widetilde\\alpha=\\alpha$.","uses":["2.1"]},
+        {"fact":"F2","source":"thm-fundamental-group-laws","source_section":"Statement","quote":"Its identity is the class of the constant loop $c_{x_0}$, and $[\\alpha]^{-1}=[\\bar\\alpha]$.","uses":["1.1","1.2"]}
+      ],
+      "derivations": [
+        {"id":"one-inclusion","claim":"Project conjugated upstairs loops to obtain one conjugate-subgroup inclusion.","step":"1.1","inputs":["F2","def-induced-homomorphism-on-fundamental-groups","given"]},
+        {"id":"equality","claim":"Reverse the connecting path to obtain equality and fix the conjugation direction.","step":"1.2","inputs":["F2","step 1.1"]},
+        {"id":"all-fibre-points","claim":"Every other point in the fibre arises from a projected connecting path.","step":"2.1","inputs":["F1","def-path-connected","given"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The connected covering is based and therefore nonempty."},
+        {"case":"zero","status":"not_applicable","evidence":"No index or iteration parameter occurs."},
+        {"case":"one","status":"checked","evidence":"If e_0=e_1 the constant connecting path gives conjugation by the identity."},
+        {"case":"degenerate","status":"checked","evidence":"The connecting loop may lie in H; then the conjugate subgroup is unchanged as the calculation shows."},
+        {"case":"endpoints","status":"checked","evidence":"The lifted path begins at e_0, ends at e_1, and projects to a loop at b_0."},
+        {"case":"nonempty-choice","status":"checked","evidence":"For a specified e_1, path-connectedness supplies one connecting path; the resulting subgroup equality is independent of that path up to H-coset."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The lemma gives a conjugacy formula."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"It does not classify all conjugating elements by paths as a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-classification-of-connected-covering-spaces": {
+      "citations": [
+        {"fact":"L1","source":"lem-subgroup-quotient-of-universal-cover","source_section":"Statement","quote":"Every subgroup is realized by a connected quotient covering of the universal cover.","uses":["1.1"]},
+        {"fact":"L2","source":"cor-based-connected-coverings-isomorphic-iff-equal-subgroups","source_section":"Statement","quote":"Based connected coverings are isomorphic exactly when their induced subgroups are equal.","uses":["1.2"]},
+        {"fact":"L3","source":"lem-covering-basepoint-change-conjugates-subgroup","source_section":"Statement","quote":"Changing the point over a fixed basepoint conjugates the induced covering subgroup.","uses":["2.1","2.2"]}
+      ],
+      "derivations": [
+        {"id":"based-surjectivity","claim":"Every subgroup occurs as the invariant of a based connected covering.","step":"1.1","inputs":["L1"]},
+        {"id":"based-injectivity","claim":"Equal subgroup invariants give exactly one based isomorphism class.","step":"1.2","inputs":["L2"]},
+        {"id":"forget-basepoint","claim":"Forgetting the fibre point replaces a subgroup by its conjugacy class.","step":"2.1","inputs":["L3","def-path-connected"]},
+        {"id":"unbased-bijection","claim":"Unbased isomorphism classes correspond bijectively to conjugacy classes.","step":"2.2","inputs":["L2","L3","step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The theorem assumes a nonempty based base space; all classified total spaces are connected and nonempty."},
+        {"case":"zero","status":"checked","evidence":"The trivial subgroup is included and yields the universal covering class."},
+        {"case":"one","status":"checked","evidence":"The whole subgroup G is included and yields the one-sheeted covering class."},
+        {"case":"degenerate","status":"checked","evidence":"Normal, nonnormal, finite-index, and infinite-index subgroups are all admitted."},
+        {"case":"endpoints","status":"checked","evidence":"The based correspondence fixes b_0 and a point above it; the unbased passage explicitly forgets only that point."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Existence uses one fixed universal cover; classification is stated on isomorphism classes and does not select representatives globally."},
+        {"case":"iff-forward","status":"checked","evidence":"L2 and L3 prove isomorphic coverings have equal or conjugate subgroup invariants."},
+        {"case":"iff-reverse","status":"checked","evidence":"L1–L3 construct isomorphisms from equal or conjugate subgroup data."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-deck-transformations-correspond-to-normalizer-cosets": {
+      "citations": [
+        {"fact":"L1","source":"lem-covering-basepoint-change-conjugates-subgroup","source_section":"Statement","quote":"At the endpoint e_g of the lifted loop g, the induced subgroup is g inverse H g.","uses":["1.1"]},
+        {"fact":"L2","source":"prop-covering-morphism-subgroup-criterion","source_section":"Statement","quote":"A based morphism exists exactly when the source subgroup is contained in the target subgroup, and is unique.","uses":["1.2"]},
+        {"fact":"F1","source":"def-normalizer-of-a-subgroup","source_section":"Definition","quote":"N_G(H):=\\{g\\in G:gHg^{-1}=H\\}","uses":["1.2"]},
+        {"fact":"F2","source":"prop-deck-transformations-are-determined-by-one-point-and-act-freely","source_section":"Statement","quote":"two deck transformations agreeing at one point are equal.","uses":["2.1","2.2"]}
+      ],
+      "derivations": [
+        {"id":"endpoint-subgroup","claim":"Compute the subgroup at the lifted endpoint e_g.","step":"1.1","inputs":["L1","def-monodromy-action-on-a-covering-fibre"]},
+        {"id":"normalizer-existence","claim":"A deck transformation taking e_0 to e_g exists exactly when g normalizes H.","step":"1.2","inputs":["L2","F1","step 1.1"]},
+        {"id":"cosets","claim":"Two normalizer elements give the same deck transformation exactly when they lie in the same H-coset.","step":"2.1","inputs":["F2","def-monodromy-action-on-a-covering-fibre"]},
+        {"id":"multiplication","claim":"Traversal-order monodromy makes the correspondence compatible with multiplication.","step":"2.2","inputs":["F2","thm-fundamental-group-laws","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The connected based covering has a nonempty fibre containing e_0."},
+        {"case":"zero","status":"checked","evidence":"The identity class belongs to H and maps to the identity deck transformation."},
+        {"case":"one","status":"checked","evidence":"For a one-sheeted cover H=G and the normalizer quotient has one coset."},
+        {"case":"degenerate","status":"checked","evidence":"For self-normalizing H the construction correctly yields a trivial deck group."},
+        {"case":"endpoints","status":"checked","evidence":"Every g is represented by a loop at b_0 lifted from e_0 to e_g."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Unique path lifting and unique covering morphisms determine all objects from g."},
+        {"case":"iff-forward","status":"checked","evidence":"Steps 1.1–1.2 prove a deck transformation forces g in the normalizer."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 1.2 constructs the deck transformation from a normalizer element."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-deck-group-as-normalizer-quotient": {
+      "citations": [
+        {"fact":"L1","source":"lem-deck-transformations-correspond-to-normalizer-cosets","source_section":"Statement","quote":"Deck transformations of a connected covering correspond to cosets in the subgroup normalizer, compatibly with multiplication.","uses":["1.1"]},
+        {"fact":"F1","source":"thm-first-isomorphism-theorem-groups","source_section":"Statement","quote":"First isomorphism theorem for groups: $G/\\ker f\\cong\\operatorname{im}f$.","uses":["2.1"]},
+        {"fact":"F2","source":"def-normalizer-of-a-subgroup","source_section":"Definition","quote":"N_G(H):=\\{g\\in G:gHg^{-1}=H\\}","uses":["1.2"]}
+      ],
+      "derivations": [
+        {"id":"homomorphism","claim":"Construct the surjective homomorphism from N_G(H) to the deck group.","step":"1.1","inputs":["L1"]},
+        {"id":"kernel","claim":"Its kernel is H, which is normal in its normalizer.","step":"1.2","inputs":["F2","L1","def-normal-subgroup"]},
+        {"id":"quotient","claim":"Apply the first isomorphism theorem to obtain N_G(H)/H.","step":"2.1","inputs":["F1","step 1.1","step 1.2","def-quotient-group"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Every group contains an identity and H is a nonempty subgroup."},
+        {"case":"zero","status":"not_applicable","evidence":"No numerical parameter occurs."},
+        {"case":"one","status":"checked","evidence":"H=N_G(H) gives the one-element quotient and trivial deck group."},
+        {"case":"degenerate","status":"checked","evidence":"H trivial gives deck group isomorphic to its full normalizer."},
+        {"case":"endpoints","status":"checked","evidence":"The homomorphism is based at e_0 as fixed in L1."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The homomorphism is defined by unique deck transformations."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The theorem states an isomorphism formula."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse construction from an abstract quotient is claimed."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-regular-covering-characterizations": {
+      "citations": [
+        {"fact":"L1","source":"lem-covering-basepoint-change-conjugates-subgroup","source_section":"Statement","quote":"Changing the point in a fibre conjugates the induced subgroup.","uses":["1.1","2.1"]},
+        {"fact":"L2","source":"lem-deck-transformations-correspond-to-normalizer-cosets","source_section":"Statement","quote":"A deck transformation reaches the lifted endpoint for g exactly when g normalizes H.","uses":["1.2","2.2"]},
+        {"fact":"F1","source":"thm-normal-subgroup-characterisations","source_section":"Statement","quote":"The following conditions are equivalent:","uses":["2.1"]},
+        {"fact":"F2","source":"prop-monodromy-acts-by-bijections-and-detects-components","source_section":"Statement","quote":"Its orbit through $e$ is exactly the intersection of the path component of $e$ with that fibre.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"fibre-conjugates","claim":"Every fibre point corresponds to a conjugate subgroup.","step":"1.1","inputs":["L1","F2"]},
+        {"id":"deck-reachability","claim":"Deck transitivity is equivalent to every relevant conjugating element normalizing H.","step":"1.2","inputs":["L2","step 1.1","def-regular-covering"]},
+        {"id":"normal-implies","claim":"Normality of H implies regularity.","step":"2.1","inputs":["F1","step 1.1","step 1.2"]},
+        {"id":"regular-implies","claim":"Regularity implies H is normal.","step":"2.2","inputs":["L2","step 1.1","step 1.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Connected based covers have nonempty fibres."},
+        {"case":"zero","status":"checked","evidence":"The universal-cover subgroup H={e} is normal and the deck action is transitive."},
+        {"case":"one","status":"checked","evidence":"The one-sheeted cover has H=G and a trivially transitive one-point fibre."},
+        {"case":"degenerate","status":"checked","evidence":"Infinite fibres and infinite-index subgroups are included; no cardinality argument is used."},
+        {"case":"endpoints","status":"checked","evidence":"All conjugates are computed at points over the fixed b_0."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Monodromy and deck transformations are uniquely determined."},
+        {"case":"iff-forward","status":"checked","evidence":"Steps 2.1 and the definition prove normality implies regularity and transitivity."},
+        {"case":"iff-reverse","status":"checked","evidence":"Step 2.2 proves regularity or transitivity implies normality."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-deck-group-of-a-regular-covering": {
+      "citations": [
+        {"fact":"L1","source":"thm-deck-group-as-normalizer-quotient","source_section":"Statement","quote":"Deck(E/B) is isomorphic to N_G(H)/H.","uses":["1.1"]},
+        {"fact":"L2","source":"thm-regular-covering-characterizations","source_section":"Statement","quote":"A connected covering is regular exactly when H is normal in G.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"substitute-normalizer","claim":"Regularity gives N_G(H)=G and hence the deck quotient G/H.","step":"1.1","inputs":["L1","L2","def-normalizer-of-a-subgroup"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"H and G are groups and hence nonempty."},
+        {"case":"zero","status":"checked","evidence":"H trivial yields deck group G."},
+        {"case":"one","status":"checked","evidence":"H=G yields the trivial quotient and one-sheeted deck group."},
+        {"case":"degenerate","status":"checked","evidence":"No finiteness or properness of H is assumed."},
+        {"case":"endpoints","status":"checked","evidence":"G and H use the same fixed basepoint as L1."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The result is a direct substitution in a canonical quotient formula."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The corollary is an implication from regularity."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"The quotient formula alone is not asserted to imply regularity."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-real-line-is-universal-cover-of-circle": {
+      "citations": [
+        {"fact":"F1","source":"thm-real-line-covers-real-line-mod-integers","source_section":"Statement","quote":"$p:\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a covering map.","uses":["1.1"]},
+        {"fact":"F2","source":"thm-convex-subsets-have-trivial-fundamental-group","source_section":"Statement","quote":"Then $C$ is simply connected.","uses":["1.2"]},
+        {"fact":"F3","source":"def-universal-covering-space","source_section":"Definition","quote":"A **universal covering space** of $B$ is a covering map $p:\\widetilde B\\to B$ whose total space $\\widetilde B$ is simply connected","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"cover","claim":"Use the published quotient projection covering.","step":"1.1","inputs":["F1"]},
+        {"id":"simple","claim":"The real line is simply connected by convexity.","step":"1.2","inputs":["F2"]},
+        {"id":"universal","claim":"The covering satisfies the universal-cover definition.","step":"2.1","inputs":["F3","step 1.1","step 1.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"R is nonempty and the covering is surjective."},
+        {"case":"zero","status":"checked","evidence":"Zero is the chosen point over [0]."},
+        {"case":"one","status":"not_applicable","evidence":"No sheet-count claim is made."},
+        {"case":"degenerate","status":"checked","evidence":"The infinite fibre of integer translates is allowed by the covering definition."},
+        {"case":"endpoints","status":"not_applicable","evidence":"No interval homotopy is newly constructed in this corollary."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The covering and simply connected total space are explicit."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The corollary verifies a definition."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No characterization of all universal covers is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-connected-coverings-of-circle-classified-by-nonnegative-integers": {
+      "citations": [
+        {"fact":"L1","source":"thm-classification-of-connected-covering-spaces","source_section":"Statement","quote":"Based connected coverings correspond to subgroups, and unbased connected coverings correspond to conjugacy classes.","uses":["1.2"]},
+        {"fact":"F1","source":"thm-fundamental-group-of-the-circle","source_section":"Statement","quote":"$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism.","uses":["1.1"]},
+        {"fact":"F2","source":"lem-subgroups-of-z-are-cyclic","source_section":"Statement","quote":"In particular every subgroup of $(\\mathbb{Z},+)$ is cyclic.","uses":["1.1"]},
+        {"fact":"F3","source":"thm-sheets-equal-fundamental-group-index","source_section":"Statement","quote":"Thus its finite number of sheets equals the subgroup index, and one is infinite exactly when the other is recorded as $\\infty$.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"subgroups","claim":"Transport every circle-covering subgroup to a unique nZ.","step":"1.1","inputs":["F1","F2"]},
+        {"id":"classes","claim":"Classification gives one based and one unbased class for each n.","step":"1.2","inputs":["L1","step 1.1","thm-int-comm-ring"]},
+        {"id":"sheets","claim":"For positive n the cover has n sheets; n=0 gives the universal infinite-sheeted cover.","step":"2.1","inputs":["F3","cor-real-line-is-universal-cover-of-circle","step 1.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Connected covering spaces and the based circle are nonempty."},
+        {"case":"zero","status":"checked","evidence":"n=0 means the trivial subgroup 0Z and is identified with the universal cover."},
+        {"case":"one","status":"checked","evidence":"n=1 means Z itself and gives the one-sheeted covering."},
+        {"case":"degenerate","status":"checked","evidence":"No negative duplicate is allowed; n is uniquely nonnegative."},
+        {"case":"endpoints","status":"checked","evidence":"All subgroup identifications use the circle basepoint [0]."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The unique nonnegative generator is supplied by F2."},
+        {"case":"iff-forward","status":"checked","evidence":"Steps 1.1–1.2 assign a unique n to every connected cover."},
+        {"case":"iff-reverse","status":"checked","evidence":"L1 realizes every nZ by a connected cover."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-every-connected-covering-of-circle-is-regular": {
+      "citations": [
+        {"fact":"L1","source":"thm-regular-covering-characterizations","source_section":"Statement","quote":"A connected covering is regular exactly when its induced subgroup is normal.","uses":["1.2"]},
+        {"fact":"F1","source":"thm-fundamental-group-of-the-circle","source_section":"Statement","quote":"$\\operatorname{Deg}:\\pi_1(\\mathbb R/\\mathbb Z,[0])\\to(\\mathbb Z,+)$ is an isomorphism.","uses":["1.1"]},
+        {"fact":"F2","source":"cor-subgroups-of-abelian-groups-are-normal","source_section":"Statement","quote":"Every subgroup of an abelian group is normal.","uses":["1.1"]}
+      ],
+      "derivations": [
+        {"id":"normal","claim":"Every induced subgroup of the circle group is normal.","step":"1.1","inputs":["F1","F2"]},
+        {"id":"regular","claim":"Apply the regular-cover characterization.","step":"1.2","inputs":["L1","step 1.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"A connected covering has a nonempty total space and fibres."},
+        {"case":"zero","status":"checked","evidence":"The universal cover with trivial subgroup is regular."},
+        {"case":"one","status":"checked","evidence":"The one-sheeted cover with whole subgroup is regular."},
+        {"case":"degenerate","status":"checked","evidence":"Infinite-sheeted covers are included because normality is cardinality-free."},
+        {"case":"endpoints","status":"checked","evidence":"The subgroup is computed at a fixed point above [0]."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The conclusion follows from group structure alone."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The corollary proves a universal implication for circle covers."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"It does not characterize bases whose covers are all regular."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-circle-covering-towers-follow-divisibility": {
+      "citations": [
+        {"fact":"L1","source":"prop-covering-morphism-subgroup-criterion","source_section":"Statement","quote":"A based morphism exists exactly when the induced subgroups are included, and the morphism is a covering.","uses":["1.2","2.1"]},
+        {"fact":"F1","source":"def-divides-in-z","source_section":"Definition","quote":"write $d \\mid a$, when","uses":["1.1"]},
+        {"fact":"F2","source":"thm-sheets-equal-fundamental-group-index","source_section":"Statement","quote":"Thus its finite number of sheets equals the subgroup index","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"inclusion-divisibility","claim":"For positive m,n, mZ is contained in nZ exactly when n divides m.","step":"1.1","inputs":["F1","algebra"]},
+        {"id":"morphism","claim":"Obtain the unique based covering morphism exactly in that divisibility case.","step":"1.2","inputs":["L1","step 1.1"]},
+        {"id":"relative-sheets","claim":"If m=nq, the morphism has q sheets.","step":"2.1","inputs":["F2","L1","thm-division-algorithm-in-z","step 1.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The classified connected covers are nonempty."},
+        {"case":"zero","status":"checked","evidence":"The example assumes m,n positive, excluding division by zero and treating the universal cover separately."},
+        {"case":"one","status":"checked","evidence":"q=1 gives m=n and the identity based morphism."},
+        {"case":"degenerate","status":"checked","evidence":"If n does not divide m, subgroup inclusion fails and no based morphism is claimed."},
+        {"case":"endpoints","status":"checked","evidence":"All covering morphisms preserve the chosen points over [0]."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The morphism is unique and q is the unique quotient from integer division."},
+        {"case":"iff-forward","status":"checked","evidence":"Steps 1.1–1.2 prove a morphism implies divisibility."},
+        {"case":"iff-reverse","status":"checked","evidence":"Steps 1.1–1.2 construct the morphism from divisibility."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-deck-groups-of-connected-circle-coverings": {
+      "citations": [
+        {"fact":"L1","source":"cor-deck-group-of-a-regular-covering","source_section":"Statement","quote":"A regular connected covering has deck group G/H.","uses":["1.1"]},
+        {"fact":"F1","source":"prop-integers-modulo-n-as-a-quotient-group","source_section":"Statement","quote":"$(\\mathbb Z,+)/n\\mathbb Z=(\\mathbb Z/n,+)$","uses":["1.1"]},
+        {"fact":"F2","source":"thm-deck-group-of-a-universal-cover-is-the-fundamental-group","source_section":"Statement","quote":"the deck group of a universal cover is isomorphic to $\\pi_1(B,b_0)$.","uses":["2.1"]}
+      ],
+      "derivations": [
+        {"id":"positive-n","claim":"For positive n, substitute H=nZ into the regular deck-group quotient.","step":"1.1","inputs":["L1","F1","cor-every-connected-covering-of-circle-is-regular"]},
+        {"id":"zero-n","claim":"For n=0, the universal-cover deck group is Z.","step":"2.1","inputs":["F2","thm-fundamental-group-of-the-circle","cor-real-line-is-universal-cover-of-circle"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Every connected circle cover in the example is nonempty."},
+        {"case":"zero","status":"checked","evidence":"Step 2.1 separately handles n=0 and does not call it zero-sheeted."},
+        {"case":"one","status":"checked","evidence":"For n=1, Z/1Z is the trivial deck group of the one-sheeted cover."},
+        {"case":"degenerate","status":"checked","evidence":"The n=0 quotient notation is not used to claim a finite cyclic deck group."},
+        {"case":"endpoints","status":"checked","evidence":"Deck groups are computed relative to the covers over the fixed quotient circle."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"All isomorphisms come from the classification and quotient constructions."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The example computes deck groups."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse classification by deck group is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-regular-and-nonregular-three-sheeted-wedge-coverings": {
+      "citations": [
+        {"fact":"L1","source":"cor-fundamental-group-of-two-circle-wedge","source_section":"Statement","quote":"The two-circle wedge fundamental group is free on two generators.","uses":["1.1","2.1"]},
+        {"fact":"F1","source":"thm-reduced-words-form-the-free-group","source_section":"Statement","quote":"has the universal property of the free group on $X$.","uses":["1.1","2.1"]},
+        {"fact":"F2","source":"thm-image-subgroup-and-kernel-normal","source_section":"Statement","quote":"The image of a group homomorphism is a subgroup and its kernel is a normal subgroup.","uses":["1.2"]},
+        {"fact":"F3","source":"thm-first-isomorphism-theorem-groups","source_section":"Statement","quote":"First isomorphism theorem for groups: $G/\\ker f\\cong\\operatorname{im}f$.","uses":["1.2"]},
+        {"fact":"F4","source":"lem-stabilizer-is-a-subgroup","source_section":"Statement","quote":"the stabilizer $G_x$ is a subgroup of $G$.","uses":["2.2"]},
+        {"fact":"F5","source":"lem-subgroup-criterion","source_section":"Statement","quote":"$g h^{-1} \\in H \\qquad \\text{for all } g, h \\in H .","uses":["2.2"]},
+        {"fact":"L2","source":"thm-classification-of-connected-covering-spaces","source_section":"Statement","quote":"Every subgroup is realized by a connected covering, uniquely up to based isomorphism.","uses":["3.1"]},
+        {"fact":"L3","source":"thm-regular-covering-characterizations","source_section":"Statement","quote":"The covering is regular exactly when its induced subgroup is normal.","uses":["3.1"]}
+      ],
+      "derivations": [
+        {"id":"regular-map","claim":"Map the free generators onto Z/3 and obtain a surjective homomorphism.","step":"1.1","inputs":["L1","F1","prop-integers-modulo-n-as-a-quotient-group"]},
+        {"id":"regular-subgroup","claim":"Its kernel is normal of index three.","step":"1.2","inputs":["F2","F3","step 1.1","algebra"]},
+        {"id":"s3-map","claim":"Map the free generators to (12) and (123), obtaining a surjection to S_3.","step":"2.1","inputs":["L1","F1","def-symmetric-group","lem-symmetric-group-is-a-group"]},
+        {"id":"nonnormal-subgroup","claim":"The preimage of the stabilizer of 1 has index three and is not normal.","step":"2.2","inputs":["def-orbit-and-stabilizer","F4","F5","step 2.1","algebra"]},
+        {"id":"covers","claim":"Classification realizes regular and nonregular connected three-sheeted covers.","step":"3.1","inputs":["L2","L3","thm-sheets-equal-fundamental-group-index","step 1.2","step 2.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"Both kernels/preimages contain the identity and both covering spaces are connected and nonempty."},
+        {"case":"zero","status":"not_applicable","evidence":"The fixed sheet number is three."},
+        {"case":"one","status":"checked","evidence":"The stabilizer is taken at the explicit point 1 in a three-point set."},
+        {"case":"degenerate","status":"checked","evidence":"The two subgroups have the same index but different normality; they cannot collapse to the same based class."},
+        {"case":"endpoints","status":"checked","evidence":"Both subgroups classify covers based over the common wedge point."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"Both homomorphisms, permutations, subgroups, and witnesses to nonnormality are explicit."},
+        {"case":"iff-forward","status":"checked","evidence":"L3 identifies the normal kernel cover as regular."},
+        {"case":"iff-reverse","status":"checked","evidence":"L3 identifies the nonnormal stabilizer-preimage cover as nonregular."}
+      ],
+      "finite_smoke": []
+    }
+  }
+}

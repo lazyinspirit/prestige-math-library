@@ -360,6 +360,25 @@ verdicts — stay append-only evidence and never satisfy current coverage.
   focused lemmas and makes a pass for cheaply proved corollaries. Never pad; never
   drop valuable results for ergonomics.
 
+- **A second proof of a published theorem is welcome (owner, 2026-08-20).** The
+  owner's wording: *"I do not mind having duplicate theorems if they are proved
+  in different ways, it's good for mathematical richness."* A result the library
+  already establishes may be stated and proved again when the second proof is a
+  **genuinely different route** — a different method, not a rearrangement of the
+  same one. The corpus already names this way: the published FTA is
+  `thm-fundamental-theorem-of-algebra-minimum-modulus-proof`, the route in the
+  id. Each version keeps a distinct id naming its route, its own component
+  provenance and its own proof contract, and **each names the other** in a
+  `rem-` or in its Remark, so a reader meets both rather than suspecting an
+  accident. Prefer the fuller form: where a page can carry the second proof
+  honestly, a theorem with its own proof beats a remark pointing at the first.
+  **What this does not license:** a restatement carrying the same proof, a
+  cosmetic variant, or an invented claim — generated-claim minimization is
+  untouched and the statement must still be source-backed. The paired judges are
+  told in `briefs/judge-conventions.txt`, because a second route is otherwise
+  reported as a duplication defect; `content-policy`'s `batch-duplicate-item` is
+  about a repeated **id**, not a repeated statement, and is unaffected.
+
 - **Source-grounded, dependency-closed scaffolding (owner, 2026-07-30; dependency
   provenance order 2026-08-01).** Before scaffolding, Beta searches reputable
   sources for the relevant definitions, statements, counterexamples and proof

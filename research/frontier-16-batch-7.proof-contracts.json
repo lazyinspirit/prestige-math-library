@@ -34,7 +34,8 @@
           "source_section": "Definition",
           "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let\n$A, B \\subseteq X$.\n\n**Bounded subset.** $A$ is **bounded** if $A = \\emptyset$ or there are $x_0 \\in X$\nand a real $r > 0$ with $A \\subseteq B(x_0, r)$ ([[def-metric-ball]]). The space\n$(X,d)$ is a **bounded metric space** if $X$ is a bounded subset of itself.\n\n**Diameter, for nonempty bounded $A$ only.** Suppose $A$ is nonempty and\nbounded, and put\n\n$$D(A) := \\{\\, d(a,b) : a, b \\in A \\,\\} \\subseteq \\mathbb{R}.$$\n\nThen $D(A)$ is nonempty, since $A$ is, and it is bounded above: fixing $x_0$ and\n$r$ with $A \\subseteq B(x_0,r)$, every $a, b \\in A$ satisfy\n$d(a,b) \\le d(a,x_0) + d(x_0,b) < r + r$ by the triangle inequality, symmetry\n([[def-metric-space]]) and addition of inequalities ([[lem-of-add-order]],\n[[def-ordered-field]]), so $r + r$ is an upper bound of $D(A)$\n([[def-bounded-set]]). Hence $D(A)$ has a least upper bound in $\\mathbb{R}$ by\nthe least-upper-bound property ([[def-complete-ordered-field]]), and that bound\nis unique ([[lem-sup-unique]]). Define\n\n$$\\operatorname{diam}(A) := \\sup D(A).$$\n\n**Distance from a point to a set, for nonempty $A$ only.** Let $x \\in X$ and let\n$A$ be nonempty, and put $E(x,A) := \\{\\, d(x,a) : a \\in A \\,\\}$. Then $E(x,A)$ is\nnonempty and bounded below by $0$, since a metric is nonnegative\n([[lem-metric-nonnegativity]], [[def-bounded-set]]), so it has a greatest lower\nbound ([[thm-infimum-property]], [[def-infimum]]), unique by [[lem-sup-unique]].\nDefine\n\n$$d(x,A) := \\inf E(x,A).$$\n\n**Distance between two sets, for nonempty $A$ and $B$ only.** Put\n$E(A,B) := \\{\\, d(a,b) : a \\in A,\\ b \\in B \\,\\}$, again nonempty and bounded\nbelow by $0$, and define\n\n$$d(A,B) := \\inf E(A,B).$$\n\n**Every one of the three scope restrictions is load bearing.** In this library\n$\\sup$ and $\\inf$ denote real numbers and are written only after existence has\nbeen established; the extended real line is introduced on a later page and is\nnot used for the suprema and infima taken here, and no convention\n$\\sup \\emptyset = -\\infty$ is in force in this development\n([[rem-sup-conventions]]). Accordingly:\n\n- $\\operatorname{diam}(A)$ is defined exactly when $A$ is nonempty **and**\n  bounded. It is not defined for $A = \\emptyset$, and it is not defined, not even\n  as an infinite value, for an unbounded $A$.\n- $d(x,A)$ is defined exactly when $A \\ne \\emptyset$, and $d(A,B)$ exactly when\n  both $A$ and $B$ are nonempty. No boundedness is needed for these two, because\n  $0$ is always a lower bound.",
           "uses": [
-            "1.1"
+            "1.1",
+            "2.1"
           ]
         },
         {
@@ -848,6 +849,15 @@
           "uses": [
             "4.1"
           ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
@@ -870,6 +880,7 @@
             "L3",
             "L4",
             "L5",
+            "L8",
             "algebra"
           ]
         },
@@ -1499,6 +1510,17 @@
           "source_section": "Statement",
           "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
           "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
             "5.1"
           ]
         }
@@ -1510,6 +1532,8 @@
           "step": "1.1",
           "inputs": [
             "L1",
+            "L7",
+            "L8",
             "given"
           ]
         },
@@ -1549,6 +1573,7 @@
           "inputs": [
             "L6",
             "L7",
+            "L8",
             "given"
           ]
         },
@@ -1825,7 +1850,8 @@
           "source_section": "Statement",
           "quote": "For every $z\\in\\mathbb C$,\n$$\\sin z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n+1}}{(2n+1)!},\\quad \\cos z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n}}{(2n)!},$$\n$$\\sinh z=\\sum_{n\\ge0}\\frac{z^{2n+1}}{(2n+1)!},\\quad \\cosh z=\\sum_{n\\ge0}\\frac{z^{2n}}{(2n)!}.$$\nAll four series have infinite radius.",
           "uses": [
-            "1.1"
+            "1.1",
+            "2.1"
           ]
         },
         {
@@ -2324,24 +2350,16 @@
       "citations": [
         {
           "fact": "L1",
-          "source": "def-oriented-complex-triangle-and-boundary",
+          "source": "def-edgewise-riemann-integral-around-complex-triangle",
           "source_section": "Definition",
-          "quote": "For $u,v\\in\\mathbb C$, write\n\n$$\\ell_{uv}(t)=(1-t)u+tv\\qquad(0\\le t\\le1)$$\n\nfor the directed line segment from $u$ to $v$. It is a piecewise-$C^1$ complex contour, and its length is $|v-u|$ by [[cor-piecewise-c1-paths-have-additive-speed-integral-length]].\n\nFor an ordered triple $a,b,c\\in\\mathbb C$, the **filled complex triangle** is\n\n$$\\Delta[a,b,c]=\\{(1-s-t)a+sb+tc:s,t\\ge0,\\ s+t\\le1\\}.$$\n\nIts **positively oriented boundary contour** is\n\n$$\\partial\\Delta[a,b,c]=\\ell_{ab}*\\ell_{bc}*\\ell_{ca},$$\n\nwith concatenation understood up to increasing reparametrization as in [[def-complex-contours-reversal-concatenation-and-closedness]]. Reversing the order of two vertices reverses the orientation. Repeated or collinear vertices are allowed; thus this notation also covers degenerate triangles.\n\nThe **perimeter** and **diameter** are\n\n$$P(\\Delta[a,b,c])=|b-a|+|c-b|+|a-c|$$\n\nand\n\n$$\\operatorname{diam}(\\Delta[a,b,c])=\\sup\\{|z-w|:z,w\\in\\Delta[a,b,c]\\},$$\n\nwhere the latter is the metric diameter of [[def-metric-bounded-diameter]] under the standard identification of [[rem-complex-plane-euclidean-dictionary]]. These quantities are defined for every ordered triple: the filled triangle is nonempty because it contains $a$, and if $z=(1-s-t)a+sb+tc$ then the modulus laws of [[lem-complex-conjugation-and-modulus-laws]] give $|z-a|\\le |b-a|+|c-a|$. Hence it lies in a ball of finite positive radius and is bounded. Its perimeter is the length of its boundary contour, including in the degenerate cases.\n\nIf $f$ is continuous on the trace of the boundary, abbreviate\n\n$$I_f[a,b,c]=\\int_{\\partial\\Delta[a,b,c]}f(z)\\,dz.$$",
+          "quote": "For an ordered complex triangle and a function on its boundary trace, if the pullback along each affine edge multiplied by that edge's constant velocity is Riemann integrable, define the edgewise triangle integral to be the sum of those three complex Riemann integrals.",
           "uses": [
-            "1.1"
-          ]
-        },
-        {
-          "fact": "L2",
-          "source": "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
-          "source_section": "Statement",
-          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be piecewise-$C^1$ and let $f$ be continuous on its trace. Then\n$$\\int_\\gamma f(z)\\,dz=\\sum_j\\int_{t_j}^{t_{j+1}}f(\\gamma(t))\\gamma'_j(t)\\,dt,$$\nand\n$$\\int_\\gamma |f(z)|\\,|dz|=\\sum_j\\int_{t_j}^{t_{j+1}}|f(\\gamma(t))|\\,|\\gamma'_j(t)|\\,dt.$$\nThe real and imaginary parts of the first display are the published vector line integrals of $(u,-v)$ and $(v,u)$, while the second is the published scalar line integral.",
-          "uses": [
+            "1.1",
             "2.1"
           ]
         },
         {
-          "fact": "L3",
+          "fact": "L2",
           "source": "lem-changing-a-function-at-finitely-many-points",
           "source_section": "Statement",
           "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $E \\subseteq [a,b]$ be finite\n([[def-countable]], [[def-equinumerous]]), and let $g : [a,b] \\to \\mathbb{R}$\nsatisfy\n\n$$g(x) \\;=\\; f(x) \\qquad \\text{for every } x \\in [a,b] \\setminus E .$$\n\nThen $g$ is integrable on $[a,b]$ and\n\n$$\\int_a^b g \\;=\\; \\int_a^b f .$$\n\nIn particular the values of an integrand at the endpoints of the interval, and at\nany finite set of points, are irrelevant to both questions.",
@@ -2350,7 +2368,7 @@
           ]
         },
         {
-          "fact": "L4",
+          "fact": "L3",
           "source": "cor-complex-differentiability-implies-continuity",
           "source_section": "Statement",
           "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
@@ -2359,7 +2377,7 @@
           ]
         },
         {
-          "fact": "L5",
+          "fact": "L4",
           "source": "thm-morera-triangle-theorem",
           "source_section": "Statement",
           "quote": "A continuous function on an open subset of $\\mathbb C$ is holomorphic if and only if its integral around the boundary of every filled triangle contained in the open set is zero.",
@@ -2371,7 +2389,7 @@
       "derivations": [
         {
           "id": "derive-1-1",
-          "claim": "Define f(0)=1 and f(z)=0 otherwise and fix an arbitrary possibly degenerate oriented triangle.",
+          "claim": "Define the point-supported function and fix an arbitrary triangle in the edgewise Riemann sense.",
           "step": "1.1",
           "inputs": [
             "L1",
@@ -2380,11 +2398,11 @@
         },
         {
           "id": "derive-2-1",
-          "claim": "A nonconstant affine edge hits zero at most once, so finite-point invariance gives zero integral; a constant edge has zero velocity.",
+          "claim": "A nonconstant affine edge hits zero at most once, so finite-point invariance gives zero edge integral; a constant edge has zero velocity.",
           "step": "2.1",
           "inputs": [
+            "L1",
             "L2",
-            "L3",
             "step 1.1"
           ]
         },
@@ -2393,18 +2411,18 @@
           "claim": "The function is discontinuous at zero and therefore cannot be holomorphic there.",
           "step": "3.1",
           "inputs": [
-            "L4",
+            "L3",
             "given"
           ]
         },
         {
           "id": "derive-4-1",
-          "claim": "All triangle integrals vanish but continuity fails, so this refutes Morera with continuity removed.",
+          "claim": "All edgewise triangle integrals vanish but continuity fails, so this refutes Morera with continuity removed.",
           "step": "4.1",
           "inputs": [
             "step 2.1",
             "step 3.1",
-            "L5"
+            "L4"
           ]
         }
       ],
@@ -2508,6 +2526,15 @@
           "uses": [
             "4.1"
           ]
+        },
+        {
+          "fact": "L7",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and\n$$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "4.1"
+          ]
         }
       ],
       "derivations": [
@@ -2545,7 +2572,8 @@
           "step": "4.1",
           "inputs": [
             "step 3.1",
-            "L6"
+            "L6",
+            "L7"
           ]
         },
         {
@@ -2657,6 +2685,7 @@
           "claim": "Its derivative is cosine and has value one at zero, so complex sine is nonconstant.",
           "step": "2.1",
           "inputs": [
+            "L1",
             "L4",
             "algebra"
           ]
@@ -2744,6 +2773,15 @@
           "uses": [
             "3.1"
           ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-normalized-exponential-functional-equation",
+          "source_section": "Statement",
+          "quote": "The exponential function is the unique continuous $F:\\mathbb R\\to(0,\\infty)$ satisfying $F(x+y)=F(x)F(y)$ and $F(1)=e$. It is also the unique function differentiable at $0$ satisfying the functional equation, $F(0)=1$, and $F'(0)=1$.",
+          "uses": [
+            "2.1"
+          ]
         }
       ],
       "derivations": [
@@ -2762,6 +2800,7 @@
           "inputs": [
             "L1",
             "L2",
+            "L4",
             "algebra"
           ]
         },

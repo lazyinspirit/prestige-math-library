@@ -1,0 +1,4607 @@
+{
+  "version": 1,
+  "level": "frontier-16",
+  "scope": [
+    "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+    "lem-vector-valued-continuous-curve-space-is-complete",
+    "lem-picard-operator-preserves-a-closed-curve-ball",
+    "lem-picard-operator-is-a-short-time-contraction",
+    "thm-picard-lindelof-local-existence-and-uniqueness",
+    "cor-uniform-picard-lindelof-for-nearby-initial-values",
+    "lem-weissinger-fixed-point-criterion",
+    "prop-picard-iteration-converges-with-explicit-error-bounds",
+    "thm-gronwall-integral-inequality",
+    "cor-lipschitz-ode-uniqueness-and-stability-estimate",
+    "thm-continuous-dependence-of-odes-on-initial-data-and-parameters",
+    "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps",
+    "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+    "lem-ode-extension-from-a-compact-interior-region",
+    "cor-finite-maximal-time-forces-escape-from-every-compact-set",
+    "cor-globally-lipschitz-odes-have-global-solutions",
+    "thm-first-order-linear-ode-integrating-factor",
+    "lem-euler-polygonal-approximations-are-uniformly-bounded-and-equicontinuous",
+    "lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence",
+    "thm-peano-local-existence-for-continuous-odes",
+    "thm-osgood-uniqueness-criterion-for-first-order-odes",
+    "ex-picard-iteration-for-y-prime-equals-y",
+    "ex-quadratic-ode-finite-time-blowup",
+    "cex-continuous-ode-with-nonunique-delayed-solutions",
+    "cex-discontinuous-right-hand-side-with-no-local-solution",
+    "cex-uniqueness-does-not-require-local-lipschitz-continuity",
+    "fs-continuity-of-the-right-hand-side-guarantees-unique-ode-solutions",
+    "fs-a-local-ode-solution-exists-on-the-whole-domain-of-the-vector-field",
+    "fs-local-lipschitz-continuity-is-necessary-for-ode-uniqueness",
+    "thm-cousins-lemma-for-gauges",
+    "prop-henstock-kurzweil-integral-is-unique",
+    "thm-linearity-of-the-henstock-kurzweil-integral",
+    "thm-monotonicity-of-the-henstock-kurzweil-integral",
+    "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
+    "thm-henstock-kurzweil-cauchy-criterion",
+    "thm-saks-henstock-lemma",
+    "thm-riemann-integrable-functions-are-henstock-kurzweil-integrable",
+    "thm-every-derivative-is-henstock-kurzweil-integrable",
+    "cor-henstock-kurzweil-integration-by-parts",
+    "cor-henstock-kurzweil-substitution-for-derivatives",
+    "thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals",
+    "thm-comparison-tests-for-noncompact-henstock-kurzweil-integrals",
+    "thm-hake-extension-theorem-for-henstock-kurzweil-integrals",
+    "ex-dirichlet-function-is-henstock-kurzweil-integrable",
+    "ex-unbounded-derivative-evaluated-by-henstock-kurzweil",
+    "ex-sine-over-x-has-a-noncompact-henstock-kurzweil-integral",
+    "ex-cousins-lemma-gives-heine-borel-on-an-interval",
+    "fs-every-derivative-is-riemann-integrable",
+    "fs-henstock-kurzweil-integrable-functions-are-bounded",
+    "cex-henstock-kurzweil-integrability-is-not-absolute",
+    "fs-henstock-kurzweil-integrable-implies-riemann-integrable",
+    "fs-every-henstock-kurzweil-integrable-function-is-a-derivative"
+  ],
+  "contracts": {
+    "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-primitives-of-a-continuous-function",
+          "source_section": "Statement",
+          "quote": "is a primitive of $f$ on $I$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Integrate each component of the differential equation and apply L1 to obtain the Volterra equation.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Differentiate each component of the Volterra equation using L2 and recover the initial condition at the equal endpoint.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The IVP data include a specified initial point and never quantify over an empty interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The equal-endpoint integral is zero, so step 2.1 recovers $x(t_0)=x_0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar case $n=1$ is covered componentwise with no vector-specific shortcut."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant solutions and the zero vector field satisfy both formulations in steps 1.1–2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both $t<t_0$ and $t>t_0$ use the oriented integral; endpoint differentiation is one-sided."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No selection is made; the two implications apply the published componentwise theorems."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward implication is assigned explicitly in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse implication is assigned explicitly in step 2.1."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-vector-valued-continuous-curve-space-is-complete": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-c-k-complete-in-the-sup-metric",
+          "source_section": "Statement",
+          "quote": "With this metric,\n$C(K,\\mathbb{R})$ is complete.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-all-norms-on-rn-are-equivalent",
+          "source_section": "Statement",
+          "quote": "Then any two norms on $\\mathbb{R}^{n}$ are",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Apply L1 to every coordinate of a supremum-Cauchy sequence and assemble the coordinate limits.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Use finiteness of the coordinate set and L2 to prove uniform Euclidean convergence and continuity of the limit.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The time interval is nonempty and compact by hypothesis; an empty domain is outside the statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero curve and zero coordinate values are allowed throughout both steps."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $n=1$, L2 reduces to equivalence of absolute value and the Euclidean norm."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A one-point time interval gives a space isometric to $\\mathbb R^n$ and is covered by the same proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The supremum includes both endpoints of the compact interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Coordinate limits are uniquely determined; the finite coordinate assembly makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-picard-operator-preserves-a-closed-curve-ball": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "$$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "image $f[X]$ is bounded above and below",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Use L2 on the compact cylinder to obtain $M$, then L1 to bound the displacement by $M|t-t_0|$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Under $hM\\le r$, conclude that every Picard image remains in the closed spatial ball.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The closed curve ball contains the constant initial curve, so the operator domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When $M=0$, step 1.1 gives zero displacement without forming $r/M$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At the first nontrivial dimension $n=1$, L1 is the scalar absolute integral bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A radius-zero curve ball is excluded; constant curves are nevertheless included for every positive radius."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The estimate is checked at $t=t_0$ and at both time endpoints $t_0\\pm h$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The maximum $M$ is attained by L2; no nonempty selection beyond the initial point is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-picard-operator-is-a-short-time-contraction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "$$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Statement",
+          "quote": "On every compact time-state cylinder the state-variable inequality holds with one finite constant $L$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Subtract two Picard images, apply L1, and use L2 pointwise to obtain the $L|t-t_0|$ bound.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Take the curve supremum and use the strict hypothesis $Lh<1$ to obtain a contraction constant.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The contraction comparison concerns two arbitrary curves in a nonempty invariant ball, not an empty family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If $L=0$, the contraction constant is zero and the conclusion is strongest."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional scalar case uses exactly the same integral estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the two curves coincide, both sides of the contraction estimate are zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The supremum bound uses $|t-t_0|\\le h$ at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Lipschitz constant is part of the hypothesis; the proof chooses no state or time."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-picard-lindelof-local-existence-and-uniqueness": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-banach-fixed-point",
+          "source_section": "Statement",
+          "quote": "There is exactly one $x^{*} \\in X$ with $f(x^{*}) = x^{*}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "A curve solves the IVP if and only if it satisfies the associated Volterra integral equation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Choose a positive time radius satisfying both invariant-ball and strict contraction inequalities, then apply L1 on the complete closed curve ball.",
+          "step": "1.1",
+          "inputs": [
+            "lem-picard-operator-preserves-a-closed-curve-ball",
+            "lem-picard-operator-is-a-short-time-contraction",
+            "lem-vector-valued-continuous-curve-space-is-complete",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Use L2 to identify the unique fixed point with the unique local solution.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem begins at a specified point of an open domain, so the local cylinder and curve ball are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero vector fields give the constant solution; neither step divides by a vector-field value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem includes scalar equations at $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant solutions and equilibrium initial states remain legal and unique under the same contraction proof."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "A symmetric interval includes $t_0$ and both endpoints; one-sided cylinders are obtained by restriction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Positive cylinder radii exist from openness; explicit minima choose them without an arbitrary family selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-uniform-picard-lindelof-for-nearby-initial-values": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "a unique local solution of the IVP exists on some interval around the initial time",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "image $f[X]$ is bounded above and below",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Shrink a compact cylinder and use L2 to obtain common vector-field and Lipschitz bounds plus a positive boundary margin.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Choose one time radius from those common bounds and apply L1 to every initial value in the smaller ball.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The smaller initial-value ball contains the base point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero field or zero Lipschitz constant only enlarges the common interval."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $n=1$ the nested state balls are ordinary closed intervals."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The base point may be an equilibrium; uniformity does not require motion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The chosen common interval is closed and includes both time endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The common constants are extrema on one compact cylinder, not separately selected for each initial value."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-weissinger-fixed-point-criterion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-absolute-convergence-implies-convergence",
+          "source_section": "Statement",
+          "quote": "absolute convergence implies convergence",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "converges to a point of $X$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Telescope successive iterates and use summability of the iterate constants via L1 to prove the orbit is Cauchy.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply L2, pass the limit through the Lipschitz map, and use an iterate with constant below one to prove fixedness and uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The closed domain is explicitly nonempty and a starting point is given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero iterate constants and a fixed starting point make the tail estimate zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "If the first iterate is already contractive, the proof specializes to Banach's theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Identity behavior is excluded unless later iterate constants form a summable sequence; constant maps are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The infinite tail begins at the stated iterate index and includes its first term."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A starting point is selected from the nonempty domain as a stated input; the limit is unique by the metric."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-picard-iteration-converges-with-explicit-error-bounds": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-banach-error-estimates",
+          "source_section": "Statement",
+          "quote": "$$d(x^{*}, x_n) \\;\\le\\; \\frac{q^{\\,n}\\, d(x_1,x_0)}{1-q}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-weissinger-fixed-point-criterion",
+          "source_section": "Statement",
+          "quote": "Summably contracting iterates have a unique fixed point and the iteration tail bounds its error.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "On $Lh<1$, substitute $q=Lh$ into L1 for the geometric a priori and a posteriori estimates.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Inductively integrate the Lipschitz estimate to obtain $(Lh)^m/m!$ for the $m$th Picard iterate.",
+          "step": "2.1",
+          "inputs": [
+            "thm-norm-inequality-for-the-vector-valued-integral",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3",
+          "claim": "Apply L2 to the factorial sequence and record the resulting tail estimate on the full invariant cylinder.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "def-factorial-and-falling-factorial"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Picard sequence starts at the specified constant curve and has an index-zero term."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For $L=0$ all errors vanish after one step and no $1/L$ is formed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At $m=1$, the factorial estimate is the direct Lipschitz integral bound."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A zero-length interval is excluded from the main iteration; equilibrium curves give zero first difference."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The supremum estimates include the full closed time cylinder."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The initial curve is explicitly defined, and the fixed point is unique under both L1 and L2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-gronwall-integral-inequality": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Define the accumulated integral and differentiate its product with the exponential integrating factor using L1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-chain-rule",
+            "thm-algebra-of-derivatives",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Integrate the differential inequality, divide by the positive factor using L2, and simplify; reflect the variable for backward time.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "thm-ftc-second-part",
+            "thm-monotonicity-of-the-integral",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem concerns a nonempty compact time interval with a fixed initial endpoint."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When the coefficient is zero, step 2.1 reduces to the original additive bound."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The constant-coefficient case with coefficient one is obtained without a separate proof."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the initial majorant and forcing vanish, the conclusion correctly forces the nonnegative function to vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both the initial endpoint and terminal endpoint are included; backward time is handled by reflection."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No existential selection occurs; the integrating factor is given by a formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-lipschitz-ode-uniqueness-and-stability-estimate": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "source_section": "Statement",
+          "quote": "A curve solves the IVP if and only if it satisfies the associated Volterra integral equation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "If a nonnegative function is bounded by an initial error plus its coefficient-weighted integral, Grönwall gives the exponential estimate.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Subtract the two equations from L1 and bound the norm difference by its state-Lipschitz integral.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-norm-inequality-for-the-vector-valued-integral",
+            "def-locally-lipschitz-in-the-state-variable"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply L2 to get the stability estimate; set the initial difference to zero for uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Two actual solutions on a common interval are given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero initial difference yields uniqueness exactly, not merely an asymptotic estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $n=1$, the Euclidean norm is absolute value."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant solutions and $L=0$ are covered by the same inequality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The estimate equals the initial difference at $t=t_0$ and uses $|t-t_0|$ in both directions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No curve is selected; the two compared solutions are the given inputs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-continuous-dependence-of-odes-on-initial-data-and-parameters": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Then $f$ is uniformly continuous",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Gronwall's integral inequality converts an additive forcing error into an exponential stability bound.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Use the common existence cylinder and L1 to make the parameter/right-hand-side discrepancy uniformly small.",
+          "step": "1.1",
+          "inputs": [
+            "cor-uniform-picard-lindelof-for-nearby-initial-values",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Subtract the integral equations, split the state and parameter errors, and apply L2 to obtain joint continuity.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+            "thm-norm-inequality-for-the-vector-valued-integral",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The compact parameter neighborhood contains the base parameter and the common time interval is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero changes in data give zero discrepancy and recover the identical solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Scalar state or parameter dimensions are included when the relevant dimension equals one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant parameter families make the parameter error term vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Continuity is uniform on the entire common closed time interval, endpoints included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Neighborhoods and common constants are chosen around the specified base data, not from an arbitrary unindexed family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned statement is one-directional rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted by the planned statement."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-lipschitz-ode-uniqueness-and-stability-estimate",
+          "source_section": "Statement",
+          "quote": "Coincident initial values give uniqueness on every common interval.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-connected-subsets-of-r-are-intervals",
+          "source_section": "Statement",
+          "quote": "Then $E$ is connected ([[def-connected-r]]) if and\nonly if $E$ is **order-convex**",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Show the agreement set in the overlap is nonempty, closed by continuity, and open by L1; L2 makes it the whole overlap.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Define the union curve and verify its derivative at a common endpoint from the common vector-field value.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both solution domains contain the same initial time, so their overlap is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-length overlap beyond the shared point is handled by local uniqueness around that point."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-point agreement seed expands locally by L1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Identical domains and identical solutions make the gluing union unchanged."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 checks differentiability at the gluing endpoint, not only on open pieces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The union value is forced by agreement on overlaps; no representative is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-existence-and-uniqueness-of-a-maximal-ode-solution": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "a unique local solution exists on an interval around the initial time",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps",
+          "source_section": "Statement",
+          "quote": "Locally unique solutions through the same data agree on every overlap.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Take the union of all local solution domains; L1 makes the family nonempty and the union an open interval containing $t_0$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Use L2 to define the union solution pointwise and prove every other solution is its restriction and hence maximality and uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "L1 supplies at least one local solution, so the family of domains is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Equilibrium solutions with zero derivative have maximal domains determined solely by the ODE domain."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A minimal local interval still contains more than one time because openness gives positive radius."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the initial local solution is already global, the union construction returns it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The maximal domain is proved open at both finite endpoints by local existence."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No one solution is chosen from each interval; L2 makes the pointwise union independent of representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-ode-extension-from-a-compact-interior-region": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-bolzano-weierstrass-in-rn",
+          "source_section": "Statement",
+          "quote": "$x^{(i_j)} \\longrightarrow p",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "$$\\Bigl\\lVert \\int_a^b f \\Bigr\\rVert_2 \\;\\le\\; \\int_a^b \\lVert f\\rVert_2 .$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Choose graph times tending to the finite endpoint; compactness and L1 give a subsequence of states converging to an interior point.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Bound the vector field near that point and use L2 to prove the full solution tends to it, then start and glue a local solution past the endpoint.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "thm-picard-lindelof-local-existence-and-uniqueness",
+            "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sequence of endpoint-approaching times is infinite because the endpoint is not in the open solution domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A limiting state equal to the zero vector is fully allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $n=1$, L1 is ordinary Bolzano–Weierstrass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant tail makes convergence immediate and still extends."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The proof treats a finite right endpoint; the left endpoint follows after reversing time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "L1 provides one convergent subsequence from a stated sequence; the endpoint limit is then forced for the whole curve."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-finite-maximal-time-forces-escape-from-every-compact-set": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-ode-extension-from-a-compact-interior-region",
+          "source_section": "Statement",
+          "quote": "A solution whose graph has a sequence approaching a compact interior endpoint state extends past that endpoint.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Negate eventual compact escape to obtain times tending to the finite endpoint with graph points in one compact interior set.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply L1 and contradict maximality; reflect time for the negative endpoint.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "thm-existence-and-uniqueness-of-a-maximal-ode-solution"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A maximal solution contains its initial time and has a nonempty domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Compact sets containing the zero state are treated like any other compact set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "In scalar dimension the conclusion is ordinary unbounded escape when the domain is all of $\\mathbb R^2$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A global solution has no finite endpoint, so the conditional claim is vacuous only in the intended way."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both positive and negative finite maximal endpoints are stated and proved by reflection."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The times witnessing failure of eventual escape are chosen recursively toward a specified endpoint."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-globally-lipschitz-odes-have-global-solutions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-gronwall-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Gronwall bounds a nonnegative function by its forcing and a linear integral term.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-finite-maximal-time-forces-escape-from-every-compact-set",
+          "source_section": "Statement",
+          "quote": "At a finite maximal endpoint the solution leaves every compact subset of the ODE domain.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "On each finite time slab, bound $F(t,0)$ and use global Lipschitz continuity plus L1 to bound the solution norm.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-extreme-value-metric",
+            "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "The bounded graph lies in a compact box, contradicting L2 at any alleged finite maximal endpoint.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "thm-heine-borel-rn"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The IVP supplies an initial point and the global Euclidean ODE domain is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero field yields a constant global solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar case uses the same linear-growth estimate."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A globally Lipschitz constant of zero is allowed and makes the field state-independent."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Arbitrary finite positive and negative time slabs are handled before sending the maximal endpoints to infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The compact bounding box is explicitly determined by the Grönwall bound."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-first-order-linear-ode-integrating-factor": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "$(\\exp)'=\\exp$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-primitives-of-a-continuous-function",
+          "source_section": "Statement",
+          "quote": "$$\\int_a^b f \\;=\\; G(b) - G(a) .$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Let $P(x)=\\int_{x_0}^x p$ and use L1, the chain rule, and the product rule to obtain $(e^P y)'=e^Pq$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-chain-rule",
+            "thm-algebra-of-derivatives",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Integrate with L2, solve for $y$, verify the initial value, and apply the same identity to the difference for uniqueness.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "cor-exponential-reciprocal-and-positivity",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The coefficient interval contains the stated initial point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At $x=x_0$ both oriented integrals are zero and the formula gives $y_0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem is scalar by statement, so dimension one is its full scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero $p$, zero $q$, or zero initial value cause no division by those quantities."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The oriented formula applies on both sides of $x_0$ and includes interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The solution is given by a formula; uniqueness makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-euler-polygonal-approximations-are-uniformly-bounded-and-equicontinuous": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "image $f[X]$ is bounded above and below",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-equicontinuity-and-boundedness-in-ck",
+          "source_section": "Definition",
+          "quote": "It is **equicontinuous** when this holds at every $a\\in K$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Use L1 to bound the vector field on a compact cylinder; recursively form Euler vertices and prove $hM\\le r$ keeps all segments inside.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Each segment has slope norm at most $M$; sum across mesh cells to obtain a global $M$-Lipschitz bound and hence L2.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The polygon family is indexed by positive mesh sizes and each partition has at least one cell."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If $M=0$, every Euler polygon is the constant initial curve."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-cell mesh and the scalar state case satisfy the same recursion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A shortened final cell is explicitly allowed and does not exceed the mesh bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The estimates include the initial and final vertices and every interpolation join."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Euler vertices are recursively determined; no approximate solution is arbitrarily selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-bolzano-weierstrass-in-rn",
+          "source_section": "Statement",
+          "quote": "$x^{(i_j)} \\longrightarrow p",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-vector-valued-continuous-curve-space-is-complete",
+          "source_section": "Statement",
+          "quote": "Continuous $\\mathbb R^n$-valued curves on a compact interval are complete in the supremum metric.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Use L1 to enumerate rational times and apply deterministic nested-box versions of L2 successively, then take the diagonal subsequence.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Equicontinuity and a finite rational net make the diagonal subsequence uniformly Cauchy.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "thm-heine-borel-r",
+            "lem-q-and-irrationals-dense-r",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3",
+          "claim": "Apply L3 to obtain a continuous uniform limit.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The compact interval is nonempty and its rational trace contains a fixed dense enumeration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero curves and zero coordinate values satisfy boundedness and convergence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one state coordinate, L2 reduces to the real bounded-sequence theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "On a one-point interval, the result is exactly L2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite rational net controls both time endpoints by density and equicontinuity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "At each extraction the leftmost nested box and least next index are prescribed, avoiding countable choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-peano-local-existence-for-continuous-odes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-euler-polygonal-approximations-are-uniformly-bounded-and-equicontinuous",
+          "source_section": "Statement",
+          "quote": "Euler polygonal approximations on a compact cylinder are uniformly bounded and equicontinuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-equicontinuous-bounded-rn-valued-curves-have-a-uniformly-convergent-subsequence",
+          "source_section": "Statement",
+          "quote": "A uniformly bounded equicontinuous sequence of $\\mathbb R^n$-valued curves has a uniformly convergent subsequence.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-uniform-limit-interchanges-riemann-integration",
+          "source_section": "Statement",
+          "quote": "$$\\int_a^b f_k\\longrightarrow\\int_a^b f.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Construct the Euler polygons by L1 and extract a uniformly convergent subsequence by L2.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Use uniform continuity of $F$ to make the Euler integral defect vanish, pass to the limit componentwise by L3, and invoke the Volterra equivalence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "thm-heine-cantor-metric",
+            "L3",
+            "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The compact cylinder contains the initial point and every Euler family is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the vector field vanishes, the constant curve is the obtained solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The theorem includes scalar equations at $n=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No uniqueness is inferred; multiple subsequential limits may produce different Peano solutions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The solution is obtained on a closed local interval and satisfies the initial endpoint equation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The subsequence extraction is the deterministic one documented in L2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-osgood-uniqueness-criterion-for-first-order-odes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "$\\langle x,x\\rangle \\ge 0$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "**Cauchy-Schwarz.**",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "For two solutions define $R=\\|x-y\\|_2^2$ and use L1–L2 with the Osgood state estimate to bound $R'$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "thm-chain-rule"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Assume a first positive departure, regularize $\\sqrt R$, separate variables, and contradict divergence of $\\int_{0^+}dr/\\rho(r)$; reverse time similarly.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "def-modulus-of-continuity-and-osgood-condition",
+            "thm-ftc-second-part",
+            "assume-contra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Two solutions with the same stated initial point are given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The core case is $R=0$ at the initial time; the regularization prevents division by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar case is included, while the inner-product proof handles every $n\\ge1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Identically coincident solutions make $R=0$ and satisfy the conclusion immediately."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "First-departure times and both directions from $t_0$ are checked in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No departure time is assumed to exist without contradiction; its infimum is determined by the alleged positive set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-picard-iteration-for-y-prime-equals-y": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-picard-iterates-for-exponential",
+          "source_section": "Statement",
+          "quote": "and $u_r\\to\\exp$ uniformly on every bounded interval.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Apply L1 to identify every iterate and its compact-uniform limit.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Use Picard–Lindelöf uniqueness to identify that limit as the IVP solution.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "thm-picard-lindelof-local-existence-and-uniqueness"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Picard sequence has the explicit index-zero constant function."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At $t=0$, every partial sum and the exponential equal one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first iterate is $1+t$, matching the displayed formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Negative times and the zero time are covered on each bounded interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Uniform convergence includes both endpoints of each chosen compact interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No solution is selected: L1 supplies the explicit limit and uniqueness identifies it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-quadratic-ode-finite-time-blowup": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-finite-maximal-time-forces-escape-from-every-compact-set",
+          "source_section": "Statement",
+          "quote": "If the positive maximal endpoint is finite, the solution must eventually leave every compact set.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Differentiate $(1-t)^{-1}$, check the initial value, and use reciprocal differentiation to prove any solution agrees with it.",
+          "step": "1.1",
+          "inputs": [
+            "thm-algebra-of-derivatives",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Its norm tends to infinity at $1$; apply L1 and direct continuation to identify the maximal interval $(-\\infty,1)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "def-limits-at-infinity"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed maximal interval contains the initial time."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The initial value is one, so reciprocal differentiation never divides by zero on the solution."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "This is a scalar example and directly tests dimension one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The vector field is defined globally even though the solution interval is not."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The left endpoint is $-\\infty$ and the finite right endpoint is excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The formula uniquely determines the solution; no branch is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-continuous-ode-with-nonunique-delayed-solutions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-rational-power",
+          "source_section": "Definition",
+          "quote": "So we set $0^{r} = 0$ for rational $r > 0$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "For each delay $c\\ge0$, differentiate the two pieces and check both the ODE and differentiability at $t=c$ using L1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Distinct delays give distinct solutions through zero, and the quotient near zero proves the right-hand side is not locally Lipschitz.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "def-locally-lipschitz-in-the-state-variable",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The delay family includes $c=0$ and is indexed by a nonempty real half-line."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Every delayed solution has initial value and join value zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar case is the intended counterexample."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The constant zero solution is included separately from every finite-start branch."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Differentiability is checked at the delayed-start endpoint, where both one-sided derivatives are zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Each delay gives a formula; the proof makes no arbitrary choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-discontinuous-right-hand-side-with-no-local-solution": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-darboux-theorem-for-derivatives",
+          "source_section": "Statement",
+          "quote": "then $f'$ has the intermediate value property",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-dirichlet-and-thomae-functions",
+          "source_section": "Definition",
+          "quote": "This is the indicator of the rationals.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "The proposed right-hand side takes only zero and one densely on every interval by L2.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "lem-q-and-irrationals-dense-r"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "A differentiable solution would have this function as its derivative, contradicting L1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "assume-contra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every nondegenerate candidate solution interval contains rational and irrational points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The right-hand side takes the value zero but is not the zero function."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No initial value repairs the derivative's failure of the intermediate-value property."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The contradiction applies on every positive-radius neighborhood of the initial time."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No selection is used; density supplies both types of points in each interval."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-uniqueness-does-not-require-local-lipschitz-continuity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-osgood-uniqueness-criterion-for-first-order-odes",
+          "source_section": "Statement",
+          "quote": "The Osgood divergence condition gives uniqueness of solutions through the same initial value.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Define the almost-Lipschitz field and use L2 to show its quotient by $x$ is unbounded at zero, excluding every local Lipschitz constant.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Verify the modulus $\\rho(r)=r(1+|\\log r|)$ has divergent reciprocal integral and apply L1 to the zero IVP.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "def-modulus-of-continuity-and-osgood-condition"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The local interval around zero is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The field is explicitly assigned value zero at the origin."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample is scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The continuous extension outside the small interval does not affect local uniqueness at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All limiting and improper-integral claims are directed toward the endpoint zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The field and modulus are explicit formulas, not selected witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-continuity-of-the-right-hand-side-guarantees-unique-ode-solutions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-continuous-ode-with-nonunique-delayed-solutions",
+          "source_section": "Counterexample",
+          "quote": "$y'=2\\sqrt{|y|}$ has distinct delayed-start solutions through the origin.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Invoke the stated witness L1 and match its verified properties against the false universal claim.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Conclude that the false claim has a counterexample and is therefore refuted.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses a concrete nonempty IVP domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The witness's zero or nonzero initial value is stated explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each witness is scalar, so no higher-dimensional assumption is hidden."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exact exceptional behavior is the point of the witness, not a forbidden parameter value."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relevant maximal or local interval endpoints are recorded in L1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "L1 is an explicit earlier item and requires no new witness selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-a-local-ode-solution-exists-on-the-whole-domain-of-the-vector-field": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-quadratic-ode-finite-time-blowup",
+          "source_section": "Example",
+          "quote": "$y'=y^2$, $y(0)=1$, has maximal solution $y(t)=(1-t)^{-1}$ on $(-\\infty,1)$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Invoke the stated witness L1 and match its verified properties against the false universal claim.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Conclude that the false claim has a counterexample and is therefore refuted.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses a concrete nonempty IVP domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The witness's zero or nonzero initial value is stated explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each witness is scalar, so no higher-dimensional assumption is hidden."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exact exceptional behavior is the point of the witness, not a forbidden parameter value."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relevant maximal or local interval endpoints are recorded in L1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "L1 is an explicit earlier item and requires no new witness selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-local-lipschitz-continuity-is-necessary-for-ode-uniqueness": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-uniqueness-does-not-require-local-lipschitz-continuity",
+          "source_section": "Counterexample",
+          "quote": "An almost-Lipschitz vector field has a unique solution through zero but is not locally Lipschitz there.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Invoke the stated witness L1 and match its verified properties against the false universal claim.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Conclude that the false claim has a counterexample and is therefore refuted.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses a concrete nonempty IVP domain."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The witness's zero or nonzero initial value is stated explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Each witness is scalar, so no higher-dimensional assumption is hidden."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exact exceptional behavior is the point of the witness, not a forbidden parameter value."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relevant maximal or local interval endpoints are recorded in L1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "L1 is an explicit earlier item and requires no new witness selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned claim is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned claim asserts no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-cousins-lemma-for-gauges": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-nested-interval-property",
+          "source_section": "Statement",
+          "quote": "is a **single point** if and only",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "If $|r| < 1$ then $(r^k)$ is **null**",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Assuming no fine partition, recursively retain a half with no fine partition; L2 makes the lengths tend to zero and L1 gives one common point.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "assume-contra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "A sufficiently late retained interval lies inside that point's gauge neighborhood and is a one-piece fine partition, contradiction.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "def-gauge-and-fine-tagged-partition",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is stated for a nondegenerate compact interval; the singleton case is separately declared trivial in the item."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Gauge values are strictly positive, so a zero radius is never admitted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-piece tagged partition is the final contradiction and is explicitly legal."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A constant gauge and a gauge with forced endpoint tags are both covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The limiting point may be either endpoint; the centered gauge condition is intersected with the interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The halving rule takes the left bad half when possible and the right otherwise, so no countable choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-henstock-kurzweil-integral-is-unique": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cousins-lemma-for-gauges",
+          "source_section": "Statement",
+          "quote": "every gauge on a compact interval admits a fine tagged partition",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "For two alleged values, take the pointwise minimum of their error gauges and use L1 to obtain one partition fine for both.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "The triangle inequality makes the distance of the two values smaller than itself unless they are equal.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "L1 makes the common family of fine partitions nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If the alleged values are equal, the proof stops before dividing by their distance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-piece partition suffices when the common gauge permits it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero function and zero integral value satisfy uniqueness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Tags at either endpoint are included in both gauge conditions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The common partition is supplied by L1; no arbitrary fine partition is presumed to exist."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-linearity-of-the-henstock-kurzweil-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-henstock-kurzweil-integral-on-a-compact-interval",
+          "source_section": "Definition",
+          "quote": "For every $\\varepsilon>0$ one gauge controls every fine tagged Riemann sum.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "**Additivity.**",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "For sums, take the minimum of the two gauges and use L2 plus the triangle inequality to split the error.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "For scalar multiples, separate scalar zero and otherwise scale the requested tolerance by its absolute value.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Fine partitions exist by Cousin's lemma, already part of the definition's justification."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The scalar-zero case is separated and gives the zero integral directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-term Riemann sum obeys the same finite-sum laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero integrands and opposite integrands are allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All tags, including endpoint tags, are controlled by the pointwise minimum gauge."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choices are made beyond gauges furnished by the two integrability hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-monotonicity-of-the-henstock-kurzweil-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-linearity-of-the-henstock-kurzweil-integral",
+          "source_section": "Statement",
+          "quote": "The Henstock–Kurzweil integral is linear.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cousins-lemma-for-gauges",
+          "source_section": "Statement",
+          "quote": "every gauge admits a fine tagged partition",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "A nonnegative integrand has nonnegative fine sums; L2 and an error smaller than an alleged negative integral give a contradiction.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply step 1.1 to $g-f$ and use L1 to obtain monotonicity and two-sided constant bounds.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The integrability hypotheses and L2 ensure a nonempty family of sums."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero integrands give equality and are not forced to be strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-piece partition case preserves nonnegativity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case $f=g$ gives equality on both sides."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The theorem is stated for increasing orientation; reversed limits are not silently included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "L2 supplies a fine partition; no positive point of the integrand is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cousins-lemma-for-gauges",
+          "source_section": "Statement",
+          "quote": "every gauge on a compact interval admits a fine tagged partition",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-oriented-integral",
+          "source_section": "Definition",
+          "quote": "**Antisymmetry, for every pair.**",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Modify the whole-interval gauge near a cut and use L1 to complete a fine partial partition, proving restriction to each side.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Conversely combine side gauges while forcing the cut as a partition point; split sums to prove whole-interval integrability and additivity.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3",
+          "claim": "Use L2 and the increasing-order case to obtain the oriented three-point identity.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each nondegenerate subinterval has a fine partition; empty outer pieces are handled by the oriented zero convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If two cut points coincide, the intervening integral is zero by L2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A partition with one cell and a cut at an endpoint is explicitly covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant functions and equal side integrals cause no loss of the equivalence."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Tags equal to the cut and cuts at either endpoint are handled by the forced-gauge construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Complementary fine pieces are supplied interval by interval by L1 over a finite list."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The necessity/forward direction is proved in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The sufficiency/reverse direction is proved in the final derivation step."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-henstock-kurzweil-cauchy-criterion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cousins-lemma-for-gauges",
+          "source_section": "Statement",
+          "quote": "every gauge admits at least one fine tagged partition",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nested-interval-property",
+          "source_section": "Statement",
+          "quote": "is a **single point** if and only",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "If an integral exists, compare two sums with it to obtain the Cauchy diameter condition.",
+          "step": "1.1",
+          "inputs": [
+            "def-henstock-kurzweil-integral-on-a-compact-interval",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "For successively tighter gauges, use L1 to make each fine-sum set nonempty; its closed interval hulls are nested with lengths tending to zero, so L2 gives one common value.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3",
+          "claim": "Compare an arbitrary sufficiently fine sum with the chosen stage sum to verify the integral definition.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "L1 is exactly what prevents each family of fine sums from being empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero diameter condition gives a constant sequence of selected sums."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first chosen sum corresponds to the first positive tolerance and no index-one convention is imported."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero function and degenerate oscillation of all sums are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Endpoint tags are among the universally quantified fine partitions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses infima and suprema of the nonempty fine-sum sets and selects no partition from their countable family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The necessity/forward direction is proved in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The sufficiency/reverse direction is proved in the final derivation step."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-saks-henstock-lemma": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cousins-lemma-for-gauges",
+          "source_section": "Statement",
+          "quote": "every gauge on each complementary compact interval admits a fine tagged partition",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
+          "source_section": "Statement",
+          "quote": "Henstock–Kurzweil integrals restrict to subintervals and add over adjacent intervals.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Complete a given fine partial tagged partition over its finitely many complementary intervals using L1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Separate positive and negative local errors, compare each completed sum with the full integral, and use L2 to obtain the absolute-error bound.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For the empty partial partition the absolute-error sum is the empty sum zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero local errors contribute nothing and need no sign assignment."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-interval partial partition is allowed whether or not it covers the whole interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Adjacent partial intervals and empty complementary gaps are handled before applying L1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Partial intervals may meet at endpoints; interiors are required disjoint and endpoint duplication changes no length."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many complementary intervals occur, so the L1 completions require finite choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-riemann-integrable-functions-are-henstock-kurzweil-integrable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-darboux-equals-riemann",
+          "source_section": "Statement",
+          "quote": "for **every** tagged partition $(P,\\xi)$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Choose the constant gauge $\\delta/2$ from L1; every fine tagged interval has length below $\\delta$ and hence the whole mesh is below $\\delta$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "def-gauge-and-fine-tagged-partition",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply the universal Riemann-sum estimate from L1 to prove the same HK value.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The published Riemann statement is for nondegenerate intervals; the equal-endpoint HK convention is handled separately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero function and zero integral require no special argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-cell fine partition has mesh below the constant threshold."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Unbounded functions are outside the Riemann hypothesis and are not inferred integrable here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The mesh maximum includes all cells and every choice of endpoint tags."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The constant gauge is given by a formula; tags remain universally quantified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-every-derivative-is-henstock-kurzweil-integrable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "**derivative of $f$ at $c$** is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "**Telescoping.**",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "At each tag use L1 to choose a gauge making each one-sided linearization error at most $\\varepsilon$ times its sublength.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Split increments at tags, sum the local estimates, telescope by L2, and obtain the endpoint difference as the HK integral.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The theorem is stated on a nondegenerate compact interval; equal endpoints have zero increment separately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A derivative or endpoint increment may be zero without affecting the estimate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-cell tagged partition still splits at its tag and telescopes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant primitives yield zero derivatives and zero endpoint increment."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "One-sided derivatives at both endpoints are the derivatives on the closed interval in L1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The gauge radius at each tag is supplied pointwise by differentiability; the gauge is the resulting function, not a countable selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-henstock-kurzweil-integration-by-parts": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-every-derivative-is-henstock-kurzweil-integrable",
+          "source_section": "Statement",
+          "quote": "Every derivative is Henstock–Kurzweil integrable and its integral is the endpoint increment.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$(fg)'(c) = f'(c)g(c) + f(c)g'(c)$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Apply L2 and then L1 to the product $FG$, obtaining integrability and the endpoint integral of $F'G+FG'$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "If either summand is integrable, use HK linearity to prove the other is integrable and rearrange; reverse the argument for the iff.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "thm-linearity-of-the-henstock-kurzweil-integral",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The compact interval is nonempty and both differentiable factors are defined on it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If one factor or one derivative is zero, the formula reduces correctly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For one integration interval cell the theorem is unchanged."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant factors and identical endpoints are explicitly compatible with the formula."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoint products $F(a)G(a)$ and $F(b)G(b)$ are retained."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No primitive is selected: the given differentiable factors determine the product."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The necessity/forward direction is proved in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The sufficiency/reverse direction is proved in the final derivation step."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-henstock-kurzweil-substitution-for-derivatives": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "f'\\bigl(g(c)\\bigr)\\,g'(c)",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-every-derivative-is-henstock-kurzweil-integrable",
+          "source_section": "Statement",
+          "quote": "Every derivative is Henstock–Kurzweil integrable and evaluates by endpoint difference.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Apply L1 to $F\\circ\\phi$ and identify its derivative as $(F'\\circ\\phi)\\phi'$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply L2 to the composite and evaluate its endpoint increment.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain interval and the image interval containing $\\phi([a,b])$ are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If $\\phi'=0$ or $F'=0$, the integrand and endpoint difference both vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The result is scalar and includes the simplest one-dimensional substitution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant and nonmonotone $\\phi$ are deliberately allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Reversed image endpoints are handled by the endpoint difference, without assuming monotonicity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The primitive $F$ and map $\\phi$ are given, so no inverse branch is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity",
+          "source_section": "Statement",
+          "quote": "For points $u,v,w$, $\\int_u^w f=\\int_u^v f+\\int_v^w f$ whenever the compact pieces are integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-criterion-via-lub",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of reals converges to a real",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "If the truncation integral has a finite limit, use L1 to make every pair of tail integrals small.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "def-one-sided-limits",
+            "def-limits-at-infinity"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Conversely apply the tail condition to truncation sequences, use L2 and the sequential limit criterion to obtain one finite endpoint limit.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "def-one-sided-limits",
+            "def-limits-at-infinity"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every compact truncation interval is nonempty once its endpoint lies beyond the fixed base point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero tail integrals satisfy the criterion and yield a constant truncation limit."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first truncation may equal the base point and contributes the zero integral."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A finite missing endpoint and an infinite endpoint are stated as separate limit forms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Left and right missing endpoints are related by orientation and both are checked."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Truncation sequences are arbitrary; uniqueness of real limits makes their limits agree."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The necessity/forward direction is proved in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The sufficiency/reverse direction is proved in the final derivation step."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-comparison-tests-for-noncompact-henstock-kurzweil-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-monotonicity-of-the-henstock-kurzweil-integral",
+          "source_section": "Statement",
+          "quote": "If $f(x)\\le g(x)$ on a compact interval, then $\\int f\\le\\int g$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals",
+          "source_section": "Statement",
+          "quote": "Noncompact integrability is equivalent to uniformly small tail integrals.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "From $|f|\\le g$, apply L1 on every compact tail and use L2 to prove comparison and absolute convergence.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "For a ratio limit, bound $f/g$ between positive constants near the endpoint and apply step 1.1 in the required direction(s).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "def-one-sided-limits",
+            "def-limits-at-infinity",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All compared functions are defined on a common nonempty tail interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero comparison function forces $f=0$ on the tail and is handled directly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Ratio limits equal to one and constant comparison factors are included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The finite-positive, zero, and infinite ratio cases are separated before division."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All inequalities are directed toward the same missing endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The tail threshold comes from the stated limit and no comparison subsequence is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The planned result is not stated as a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The planned result contains no reverse implication."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-hake-extension-theorem-for-henstock-kurzweil-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-criterion-for-noncompact-henstock-kurzweil-integrals",
+          "source_section": "Statement",
+          "quote": "A missing finite-endpoint integral exists exactly when all sufficiently late tail integrals are small.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-saks-henstock-lemma",
+          "source_section": "Statement",
+          "quote": "Fine partial tagged partitions have uniformly small sums of local integration errors.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "A proper HK integrable extension restricts to compact truncations; use L1 and additivity to obtain the noncompact integral and equal value.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-henstock-kurzweil-integrability-on-subintervals-and-additivity"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Conversely choose a small tail by L1, control the compact prefix, force endpoint-tagged cells into the tail, and use L2 to bound every full fine sum.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3",
+          "claim": "Show changing the assigned finite endpoint value alters only an arbitrarily short endpoint-tagged cell and hence not the integral.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every compact prefix is nonempty; the missing endpoint itself is added only in the proper extension."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "An assigned endpoint value of zero and zero tail integrals are allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A partition consisting only of the endpoint tail cell is covered by step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Bounded or unbounded behavior near the endpoint is allowed provided the noncompact integral exists."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The missing finite endpoint is excluded before extension and included after it; both sides are explicit."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The tail cutoff is furnished by L1 and the gauge is then given by a formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The necessity/forward direction is proved in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The sufficiency/reverse direction is proved in the final derivation step."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-dirichlet-function-is-henstock-kurzweil-integrable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-rationals-countable",
+          "source_section": "Statement",
+          "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cex-dirichlet-is-not-riemann-integrable",
+          "source_section": "Statement refuted",
+          "quote": "and the function is not Riemann integrable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Enumerate the rationals by L1 and assign the $k$th rational a gauge radius with total allowed tagged length below $\\varepsilon 2^{-k}$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Every fine sum of the irrational indicator differs from one only on rational-tagged cells, whose total length is small; invoke L2 for the Riemann contrast.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "def-henstock-kurzweil-integral-on-a-compact-interval",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The compact interval $[0,1]$ and the rational enumeration are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The indicator is zero at rational tags, and those zero contributions are exactly controlled."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The rational zero and rational one endpoints are included in the enumeration."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Duplicate rational values in a surjective enumeration are removed by using the first occurrence, so the length budget is not double-counted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Intervals tagged at zero or one are assigned the same summable gauge budget as other rational tags."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The least occurrence of each rational is determined by well-ordering, not arbitrarily chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-unbounded-derivative-evaluated-by-henstock-kurzweil": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-every-derivative-is-henstock-kurzweil-integrable",
+          "source_section": "Statement",
+          "quote": "Every derivative is Henstock–Kurzweil integrable and its integral equals the endpoint increment.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "\\sin(\\pi/2)=1",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Differentiate on $(0,1]$, verify the derivative at zero, and use L2 along reciprocal-square sequences to prove unboundedness.",
+          "step": "1.1",
+          "inputs": [
+            "thm-chain-rule",
+            "thm-algebra-of-derivatives",
+            "thm-sine-and-cosine-derivatives",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply L1 and compute $F(1)-F(0)=\\sin 1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain $[0,1]$ is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "$F(0)=F'(0)=0$ are verified from the difference quotient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction is scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular formula is used only for $x>0$; zero has its own assigned value."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoints are evaluated in the Newton–Leibniz difference."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The unboundedness sequences are explicit reciprocal-square formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-sine-over-x-has-a-noncompact-henstock-kurzweil-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-dirichlet-test-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "$g$ is nonnegative, nonincreasing, and $g(x)\\to0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-integrable-functions-are-henstock-kurzweil-integrable",
+          "source_section": "Statement",
+          "quote": "Every Riemann integrable function is Henstock–Kurzweil integrable with the same integral.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "On $[1,\\infty)$ apply L1 to $f=\\sin$ and $g=1/x$; the cosine primitive is bounded.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-sine-and-cosine-derivatives",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "The removable extension is continuous on each compact truncation, hence Riemann integrable and HK integrable by L2; the noncompact definition uses the limit from step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "thm-continuous-implies-integrable",
+            "L2",
+            "def-henstock-kurzweil-integral-on-a-noncompact-interval"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every truncation interval begins at zero and is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The value at zero is assigned as one; division by zero is never used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The initial compact truncation $[0,1]$ is covered by continuity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Conditional rather than absolute convergence is intended and no absolute claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite endpoint zero and infinite endpoint are treated by separate clauses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No value $\\pi/2$ is selected or assumed; only convergence is proved."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-cousins-lemma-gives-heine-borel-on-an-interval": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cousins-lemma-for-gauges",
+          "source_section": "Statement",
+          "quote": "every gauge on a compact interval admits a fine tagged partition",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "has a finite subfamily",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "From an open cover, assign each point a radius whose gauge neighborhood lies in one covering member.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply L1; the finitely many cover members attached to the partition tags cover every cell and hence the interval.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3",
+          "claim": "Identify the conclusion with L2.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The empty interval is outside $a\\le b$ notation; a singleton interval is covered by one chosen cover member."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero-length singleton case is separated before invoking a nondegenerate tagged partition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-cell fine partition directly gives a one-member subcover when applicable."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated cover members at different tags are deduplicated harmlessly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Tags may be endpoints, whose relative neighborhoods remain contained in their chosen open sets."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Only finitely many tag-attached cover members are selected after L1 supplies the finite partition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-derivative-is-riemann-integrable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cex-volterra-bounded-derivative-not-riemann-integrable",
+          "source_section": "Counterexample",
+          "quote": "There is a differentiable function $W:[0,1]\\to\\mathbb R$ whose derivative is bounded but not Riemann integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-every-derivative-is-henstock-kurzweil-integrable",
+          "source_section": "Statement",
+          "quote": "Every derivative is Henstock–Kurzweil integrable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "L1 is an everywhere derivative that fails Riemann integrability, directly refuting the universal claim.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Apply L2 to record the correct integral notion and endpoint evaluation for the same derivative.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Volterra witness is defined on the nonempty interval $[0,1]$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The derivative vanishes on the fat Cantor set but is not identically zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The witness is scalar."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Boundedness of the derivative does not rescue Riemann integrability, which is the point of L1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Differentiability at both endpoints is included in L1's construction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The published witness is fixed; no new counterexample is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-henstock-kurzweil-integrable-functions-are-bounded": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-unbounded-derivative-evaluated-by-henstock-kurzweil",
+          "source_section": "Example",
+          "quote": "$F(x)=x^2\\sin(1/x^2)$ has an unbounded derivative whose Henstock–Kurzweil integral is $\\sin 1$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Invoke L1: its derivative is HK integrable and unbounded on the same compact interval.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Therefore the claimed boundedness consequence is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness interval $[0,1]$ is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The derivative is assigned value zero at the singular endpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar witness suffices to refute the universal claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Unboundedness occurs near zero despite a finite HK integral."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint zero is part of the domain and explicitly checked in L1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The counterexample is the fixed preceding item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-henstock-kurzweil-integrability-is-not-absolute": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-unbounded-derivative-evaluated-by-henstock-kurzweil",
+          "source_section": "Example",
+          "quote": "The derivative $f$ of $x^2\\sin(1/x^2)$ is Henstock–Kurzweil integrable on $[0,1]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-hake-extension-theorem-for-henstock-kurzweil-integrals",
+          "source_section": "Statement",
+          "quote": "A finite-endpoint noncompact integral extends to a proper HK integral if and only if the truncation limit exists.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "Take the HK-integrable derivative $f$ from L1.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "On explicit reciprocal-square half-period intervals, bound $|f|$ below by a harmonic-sized contribution and prove its truncation integrals are unbounded.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "cor-henstock-kurzweil-substitution-for-derivatives",
+            "thm-monotonicity-of-the-henstock-kurzweil-integral",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3",
+          "claim": "Apply L2 contrapositively: $|f|$ has no proper HK integral on $[0,1]$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every truncated interval $[c,1]$ with $c>0$ is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The endpoint value $|f(0)|=0$ does not affect the divergent tail."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar example is the full intended scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zeros of cosine are skipped by choosing subintervals where its absolute value has a fixed lower bound."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The divergence is directed toward the finite endpoint zero, precisely the Hake boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All half-period intervals and truncation points are explicit formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-henstock-kurzweil-integrable-implies-riemann-integrable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-dirichlet-function-is-henstock-kurzweil-integrable",
+          "source_section": "Example",
+          "quote": "The indicator of the irrationals is Henstock–Kurzweil integrable with integral $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cex-dirichlet-is-not-riemann-integrable",
+          "source_section": "Statement refuted",
+          "quote": "and the function is not Riemann integrable.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "By HK linearity the irrational indicator equals $1-\\mathbf1_{\\mathbb Q}$; L1 gives its HK integrability while L2 and Riemann linearity rule out its Riemann integrability.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "thm-linearity-of-the-integral",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "Thus the converse of the Riemann-to-HK theorem is false.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both indicators are defined on the nonempty interval $[0,1]$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At rational points the irrational indicator is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "This scalar example refutes the universal converse."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both dense value classes occur on every nondegenerate subinterval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The values at zero and one are rational-endpoint values and are included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The witness is fixed by L1–L2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-henstock-kurzweil-integrable-function-is-a-derivative": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-dirichlet-function-is-henstock-kurzweil-integrable",
+          "source_section": "Example",
+          "quote": "The indicator of the irrationals is Henstock–Kurzweil integrable with integral $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-darboux-theorem-for-derivatives",
+          "source_section": "Statement",
+          "quote": "then $f'$ has the intermediate value property",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1",
+          "claim": "The L1 function takes only zero and one, with both values dense on every interval.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "lem-q-and-irrationals-dense-r"
+          ]
+        },
+        {
+          "id": "step-2",
+          "claim": "It lacks every intermediate value strictly between zero and one, contradicting L2 if it were a derivative.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "assume-contra",
+            "discharge-contradiction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Every nondegenerate subinterval contains rational and irrational points."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The value zero is attained on all rationals."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar derivative theorem L2 is exactly the needed scope."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The function's two-point range is the non-Darboux behavior, not a missing definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Endpoint values do not repair the failure on interior subintervals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Density supplies points of both value classes without selecting a special interval."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This construction or refutation is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

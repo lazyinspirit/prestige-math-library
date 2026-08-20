@@ -11,13 +11,14 @@
     "cor-uniform-limit-of-smooth-functions-need-not-be-differentiable",
     "thm-riemann-lebesgue-lemma-for-continuous-functions",
     "lem-finite-sine-harmonic-sums",
-    "ex-weierstrass-function-with-one-half-and-thirteen",
+    "ex-weierstrass-function-with-one-half-and-fifteen",
     "fs-a-continuous-function-is-differentiable-somewhere",
     "cor-x-sine-of-one-over-x-is-not-differentiable-at-zero",
     "ex-x-squared-sine-of-one-over-x-squared",
     "fs-a-differentiable-function-has-a-continuous-derivative",
     "ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence",
     "fs-a-pointwise-bounded-sequence-of-continuous-functions-has-a-uniformly-convergent-subsequence",
+    "lem-topologists-sine-curve-is-connected",
     "cex-topologists-sine-curve-connected-not-path-connected",
     "ex-sine-period-arc-length-as-a-complete-elliptic-integral",
     "ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces",
@@ -581,7 +582,7 @@
           "fact": "L3",
           "source": "thm-integration-by-parts",
           "source_section": "Statement",
-          "quote": "$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'v .$$",
+          "quote": "$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'\\,v .$$",
           "uses": ["2.1"]
         },
         {
@@ -732,6 +733,1041 @@
         {"case": "iff-reverse", "status": "not_applicable", "reason": "The formula and bound are identities/inequalities, not a biconditional."}
       ],
       "finite_smoke": []
+    },
+    "ex-weierstrass-function-with-one-half-and-fifteen": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-pi-via-first-positive-cosine-zero",
+          "source_section": "Definition",
+          "quote": "$$\\pi:=2\\gamma.$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-cosine-has-a-smallest-positive-zero",
+          "source_section": "Statement",
+          "quote": "There is a unique $\\gamma\\in(0,2)$ with $\\cos\\gamma=0$. It is the smallest positive zero of cosine.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "def-classical-weierstrass-function",
+          "source_section": "Definition",
+          "quote": "$$W_{a,b}(x):=\\sum_{n=0}^{\\infty}a^n\\cos(b^n\\pi x).$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-classical-weierstrass-function-nowhere-differentiable",
+          "source_section": "Statement",
+          "quote": "If $ab>1+3\\pi/2$, then $W_{a,b}$ is continuous at every real point and differentiable at no real point.",
+          "uses": ["2.2"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "parameter-check",
+          "claim": "The integer $15$ is odd. By [L4], the first positive cosine zero satisfies $\\gamma<2$, while [L1] gives $\\pi=2\\gamma<4$; hence $1+3\\pi/2<7<15/2=(1/2)15$.",
+          "step": "1.1",
+          "inputs": ["L1", "L4", "algebra"]
+        },
+        {
+          "id": "instantiate-series",
+          "claim": "Substitute $a=1/2$ and $b=15$ in [L2] to obtain the displayed function, with its $n=0$ term included.",
+          "step": "2.1",
+          "inputs": ["L2", "construct"]
+        },
+        {
+          "id": "apply-weierstrass-theorem",
+          "claim": "The parameter check in step 1.1 verifies every hypothesis of [L3], so the explicit function is continuous everywhere and differentiable nowhere.",
+          "step": "2.2",
+          "inputs": ["step 1.1", "step 2.1", "L3"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "Step 2.1 writes the series from $n=0$ and includes its first term."},
+        {"case": "zero", "status": "checked", "evidence": "At index zero the term is $\\cos(\\pi x)$, not an omitted or undefined term."},
+        {"case": "one", "status": "checked", "evidence": "The damping $a=1/2$ lies strictly between zero and one and the frequency $b=15$ exceeds one."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 1.1 verifies the strict parameter inequality rather than relying on a boundary equality."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The function has domain all of $\\mathbb R$."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "Both parameters are explicitly fixed."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "This is an explicit instance of a sufficient theorem, not an iff claim."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "No necessity of the parameter values is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-a-continuous-function-is-differentiable-somewhere": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-classical-weierstrass-function-nowhere-differentiable",
+          "source_section": "Statement",
+          "quote": "Then $W_{a,b}$ is continuous at every real point and differentiable at no real point.",
+          "uses": ["1.2", "2.1", "3.1"]
+        }
+      ],
+      "derivations": [
+        {"id": "assume-false-claim", "claim": "Assume for contradiction that every continuous real function is differentiable at at least one point.", "step": "1.1", "inputs": ["assume-contra"]},
+        {"id": "choose-weierstrass-witness", "claim": "Take any Weierstrass function covered by [L1]; it is continuous on $\\mathbb R$.", "step": "1.2", "inputs": ["L1", "choose"]},
+        {"id": "apply-false-claim", "claim": "The assumed universal claim makes that function differentiable somewhere.", "step": "2.1", "inputs": ["step 1.1", "step 1.2"]},
+        {"id": "contradict-nowhere-differentiability", "claim": "This contradicts the nowhere-differentiability clause of [L1], so the universal claim is false.", "step": "3.1", "inputs": ["step 2.1", "L1", "discharge-contradiction"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The witness has nonempty domain $\\mathbb R$."},
+        {"case": "zero", "status": "checked", "evidence": "The conclusion 'somewhere' is refuted by a witness with zero differentiability points."},
+        {"case": "one", "status": "not_applicable", "reason": "No index or unit parameter occurs in the universal claim."},
+        {"case": "degenerate", "status": "checked", "evidence": "The witness satisfies the strict hypotheses of [L1], so it is not a boundary case of the theorem."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The witness domain is the endpoint-free real line."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The preceding explicit example supplies a concrete admissible witness; the refutation does not rely on an empty class."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The false statement is a universal implication, not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The false statement is a universal implication, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-x-sine-of-one-over-x-is-not-differentiable-at-zero": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-squeeze-for-function-limits",
+          "source_section": "Statement",
+          "quote": "Then\nthe limit of $g$ at $c$ **exists**, and\n\n$$\\lim_{x \\to c} g(x) \\;=\\; \\lim_{x \\to c} f(x) \\;=\\; \\lim_{x \\to c} h(x) \\;=\\; L .$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-sequential-criterion-for-nonexistence",
+          "source_section": "Statement",
+          "quote": "There are sequences $(x_k)$ and $(y_k)$ with all terms in $A \\setminus \\{c\\}$,\n   both converging to $c$, and reals $P \\ne Q$ with $f(x_k) \\to P$ and\n   $f(y_k) \\to Q$",
+          "uses": ["2.2"]
+        },
+        {
+          "fact": "L6",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": ["1.2", "3.1"]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "Both sine and cosine have period $2\\pi$",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "continuity-at-zero",
+          "claim": "Define $f(0)=0$ and $f(x)=x\\sin(1/x)$ off zero. From [L1], $-|x|\\le f(x)\\le|x|$; [L2] gives $f(x)\\to0$, hence continuity at zero. Ordinary composition gives continuity off zero.",
+          "step": "1.1",
+          "inputs": ["L1", "L2", "algebra"]
+        },
+        {
+          "id": "difference-quotient",
+          "claim": "For $x\\ne0$, the difference quotient in [L6] is $(f(x)-f(0))/x=\\sin(1/x)$.",
+          "step": "1.2",
+          "inputs": ["L6", "algebra"]
+        },
+        {
+          "id": "two-image-sequences",
+          "claim": "Put $x_k=1/(\\pi/2+2\\pi(k+1))$ and $y_k=1/(3\\pi/2+2\\pi(k+1))$. By [L4] both are positive and tend to zero, while [L3] and periodicity give $\\sin(1/x_k)=1$ and $\\sin(1/y_k)=-1$.",
+          "step": "2.1",
+          "inputs": ["L3", "L4", "L7", "algebra"]
+        },
+        {
+          "id": "no-quotient-limit",
+          "claim": "Apply [L5] to the two sequences in step 2.1 to conclude that $\\sin(1/x)$ has no limit at zero.",
+          "step": "2.2",
+          "inputs": ["step 2.1", "L5"]
+        },
+        {
+          "id": "no-derivative",
+          "claim": "The quotient identity in step 1.2 and failure in step 2.2 show through [L6] that $f'(0)$ does not exist.",
+          "step": "3.1",
+          "inputs": ["step 1.2", "step 2.2", "L6"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The function is defined on all of $\\mathbb R$."},
+        {"case": "zero", "status": "checked", "evidence": "Both the extension value and the derivative question are handled explicitly at zero in steps 1.1–3.1."},
+        {"case": "one", "status": "checked", "evidence": "The witnessing sequences use $k+1$, so their first denominators at $k=0$ are positive."},
+        {"case": "degenerate", "status": "checked", "evidence": "The zero extension is forced by [L1]; another value would not be continuous and is not claimed."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "Zero is an interior point of the real-line domain."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The construction and quotient are explicit."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The corollary is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The corollary is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-x-squared-sine-of-one-over-x-squared": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "$fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "For every $a \\in \\mathbb{R}$ with $a \\ge 0$ and every $n \\in \\mathbb{N}$ with\n$n \\ge 1$ there is a **unique** $s \\in \\mathbb{R}$ with $s \\ge 0$ and $s^n = a$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L7",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$",
+          "uses": ["2.2"]
+        },
+        {
+          "fact": "L8",
+          "source": "def-darboux-integral",
+          "source_section": "Definition",
+          "quote": "Let $a < b$ be reals and let $f : [a,b] \\to \\mathbb{R}$ be bounded",
+          "uses": ["4.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivative-at-zero",
+          "claim": "For $h\\ne0$, the difference quotient is $h\\sin(1/h^2)$; [L1] bounds its absolute value by $|h|$, so $F'(0)=0$.",
+          "step": "1.1",
+          "inputs": ["L1", "algebra"]
+        },
+        {
+          "id": "derivative-off-zero",
+          "claim": "Use [L2]–[L4] and the power rule to obtain $F'(x)=2x\\sin(1/x^2)-2\\cos(1/x^2)/x$ for $x\\ne0$.",
+          "step": "1.2",
+          "inputs": ["L2", "L3", "L4", "algebra"]
+        },
+        {
+          "id": "oscillatory-sequence",
+          "claim": "For $k\\in\\mathbb N$, [L6] defines $x_k=(2\\pi(k+1))^{-1/2}>0$. Then $1/x_k^2=2\\pi(k+1)$, so periodicity and [L5] give sine zero, cosine one, and $F'(x_k)=-2/x_k$.",
+          "step": "2.1",
+          "inputs": ["step 1.2", "L5", "L6", "algebra"]
+        },
+        {
+          "id": "unbounded-values",
+          "claim": "The reciprocal form [L7] gives $x_k\\to0$ and $1/x_k\\to+\\infty$, so the absolute values in step 2.1 exceed every real bound.",
+          "step": "2.2",
+          "inputs": ["step 2.1", "L7", "algebra"]
+        },
+        {
+          "id": "unbounded-derivative",
+          "claim": "Steps 1.1–2.2 show that $F$ is differentiable everywhere while $F'$ is unbounded on every interval $[0,\\eta]$ with $\\eta>0$.",
+          "step": "3.1",
+          "inputs": ["step 1.1", "step 1.2", "step 2.2"]
+        },
+        {
+          "id": "not-riemann-integrable",
+          "claim": "Any extension of $F'|_{(0,1]}$ to $[0,1]$ remains unbounded, while [L8] requires boundedness before Darboux integrability is defined; hence no such extension is Riemann integrable.",
+          "step": "4.1",
+          "inputs": ["step 3.1", "L8"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The construction is a function on the nonempty interval $[0,1]$ and a sequence indexed by all naturals."},
+        {"case": "zero", "status": "checked", "evidence": "Step 1.1 separately proves differentiability at zero and no formula divides by zero there."},
+        {"case": "one", "status": "checked", "evidence": "The sequence uses $k+1$, so its first denominator at $k=0$ is $2\\pi$, never zero."},
+        {"case": "degenerate", "status": "checked", "evidence": "Every proposed value at zero for the derivative extension leaves the off-zero sequence unbounded."},
+        {"case": "endpoints", "status": "checked", "evidence": "The integrability conclusion concerns $[0,1]$ and explicitly handles the endpoint zero; endpoint one creates no singularity."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The roots $x_k$ are unique nonnegative roots by [L6]."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example asserts properties of one construction, not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example asserts properties of one construction, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-a-differentiable-function-has-a-continuous-derivative": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-x-squared-sine-of-one-over-x-squared",
+          "source_section": "Example",
+          "quote": "The function $F$ is differentiable on $\\mathbb R$, with $F'(0)=0$, and $F'$ is unbounded on every neighbourhood of zero.",
+          "uses": ["1.2", "2.1"]
+        }
+      ],
+      "derivations": [
+        {"id": "assume-continuous-derivative", "claim": "Assume for contradiction that every differentiable real function has a continuous derivative.", "step": "1.1", "inputs": ["assume-contra"]},
+        {"id": "same-page-witness", "claim": "The function in [L1] is differentiable on all of $\\mathbb R$, has $F'(0)=0$, and has derivative unbounded on every neighbourhood of zero; hence its derivative is not continuous at zero.", "step": "1.2", "inputs": ["L1", "algebra"]},
+        {"id": "contradiction", "claim": "The assumed claim makes the derivative in step 1.2 continuous, contradicting its local unboundedness.", "step": "2.1", "inputs": ["step 1.1", "step 1.2", "L1", "discharge-contradiction"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The witness has nonempty domain $\\mathbb R$."},
+        {"case": "zero", "status": "checked", "evidence": "The discontinuity occurs exactly at zero and [L1] also records the derivative value there."},
+        {"case": "one", "status": "not_applicable", "reason": "No index-one convention enters this universal implication."},
+        {"case": "degenerate", "status": "checked", "evidence": "The witness is differentiable at the problematic point, so the contradiction is not caused by a missing derivative."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "Zero is an interior point of the witness domain."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The witness is explicitly published."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The false claim is an implication, not an iff."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The false claim is an implication, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$",
+          "uses": ["1.2", "2.1", "3.3"]
+        },
+        {
+          "fact": "L3",
+          "source": "def-equicontinuity-and-boundedness-in-ck",
+          "source_section": "Definition",
+          "quote": "The family $\\mathcal F$ is **equicontinuous at $a\\in K$** when, for every $\\varepsilon>0$, there is $\\delta>0$ such that for every $f\\in\\mathcal F$ and every $x\\in K$, $d(x,a)<\\delta$ implies $|f(x)-f(a)|<\\varepsilon$.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-uniform-limit-continuous-real-functions",
+          "source_section": "Statement",
+          "quote": "If $f_k\\to f$ uniformly on $X$, then\n$f:X\\to\\mathbb{R}$ is continuous.",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$",
+          "uses": ["2.1", "3.3"]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-riemann-lebesgue-lemma-for-continuous-functions",
+          "source_section": "Statement",
+          "quote": "For every continuous $g:[0,\\pi]\\to\\mathbb R$, $\\lim_{n\\to\\infty}\\int_0^\\pi g(x)\\sin(nx)\\,dx=0$.",
+          "uses": ["4.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "continuous-bounded-family",
+          "claim": "For positive integers $n$, $f_n(x)=\\sin(nx)$ is continuous on $[0,\\pi]$ and [L1] gives the uniform bound $|f_n(x)|\\le1$.",
+          "step": "1.1",
+          "inputs": ["L1", "algebra"]
+        },
+        {
+          "id": "pointwise-divergence",
+          "claim": "At $x=\\pi/2$, [L2] makes the values $1,0,-1,0,\\ldots$, so the sequence of functions does not converge pointwise on the whole interval.",
+          "step": "1.2",
+          "inputs": ["L2", "algebra"]
+        },
+        {
+          "id": "not-equicontinuous",
+          "claim": "At zero, $f_n(0)=0$ and $f_n(\\pi/(2n))=1$ by [L2], while [L5] gives $\\pi/(2n)\\to0$; this violates [L3] at tolerance $1/2$.",
+          "step": "2.1",
+          "inputs": ["L2", "L3", "L5", "algebra"]
+        },
+        {
+          "id": "assume-uniform-subsequence",
+          "claim": "Assume a subsequence $f_{n_k}$ converges uniformly to $g$. Then [L4] makes $g$ continuous.",
+          "step": "3.1",
+          "inputs": ["L4", "assume-hyp"]
+        },
+        {
+          "id": "limit-small-near-zero",
+          "claim": "Uniform convergence gives $g(0)=0$ because every $f_{n_k}(0)=0$; continuity gives a fixed $\\delta>0$ with $|g(x)|<1/4$ for $0\\le x<\\delta$.",
+          "step": "3.2",
+          "inputs": ["step 3.1", "algebra"]
+        },
+        {
+          "id": "peak-contradiction",
+          "claim": "For large $k$, [L5] gives $\\pi/(2n_k)<\\delta$ and uniform error below $1/4$, while [L2] gives $f_{n_k}(\\pi/(2n_k))=1$; step 3.2 then forces the same difference to exceed $3/4$, a contradiction.",
+          "step": "3.3",
+          "inputs": ["step 3.1", "step 3.2", "L2", "L5", "discharge-contradiction"]
+        },
+        {
+          "id": "oscillatory-integrals",
+          "claim": "Apply [L6] to every fixed continuous test function $g$.",
+          "step": "4.1",
+          "inputs": ["L6"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The family is indexed by positive integers and the domain $[0,\\pi]$ is nonempty."},
+        {"case": "zero", "status": "checked", "evidence": "Zero is the common base point in steps 2.1–3.3 and all functions are evaluated there."},
+        {"case": "one", "status": "checked", "evidence": "The first function is $f_1(x)=\\sin x$; no $f_0$ is silently introduced."},
+        {"case": "degenerate", "status": "checked", "evidence": "The endpoint values at zero and $\\pi$ do not remove the interior pointwise divergence at $\\pi/2$."},
+        {"case": "endpoints", "status": "checked", "evidence": "The uniform-subsequence contradiction is anchored at the endpoint zero, and the integral statement includes both endpoints."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "An assumed subsequence has strictly increasing positive indices, so its peak points are defined and tend to zero."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example lists properties and is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example lists properties and is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-a-pointwise-bounded-sequence-of-continuous-functions-has-a-uniformly-convergent-subsequence": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence",
+          "source_section": "Example",
+          "quote": "The sequence $(f_n)$ is uniformly bounded, is not equicontinuous, and has no uniformly convergent subsequence.",
+          "uses": ["1.2", "2.1"]
+        }
+      ],
+      "derivations": [
+        {"id": "assume-subsequence-claim", "claim": "Assume for contradiction that every pointwise bounded sequence of continuous functions has a uniformly convergent subsequence.", "step": "1.1", "inputs": ["assume-contra"]},
+        {"id": "sine-harmonic-hypotheses", "claim": "The functions in [L1] are continuous and uniformly bounded, hence pointwise bounded.", "step": "1.2", "inputs": ["L1"]},
+        {"id": "contradict-no-subsequence", "claim": "The assumed claim gives a uniformly convergent subsequence, contradicting the last clause of [L1].", "step": "2.1", "inputs": ["step 1.1", "step 1.2", "L1", "discharge-contradiction"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The counterexample sequence and its compact interval domain are nonempty."},
+        {"case": "zero", "status": "checked", "evidence": "The witness values at zero are used in its no-subsequence proof and cause no undefined term."},
+        {"case": "one", "status": "checked", "evidence": "The witness sequence begins at positive index one."},
+        {"case": "degenerate", "status": "checked", "evidence": "Uniform boundedness is stronger than the assumed pointwise boundedness, so the refutation does not exploit a missing bound."},
+        {"case": "endpoints", "status": "checked", "evidence": "The witness is defined continuously on the closed interval including both endpoints."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The witness is explicit and no subsequence is selected in the actual refutation."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The false statement is an implication, not an iff."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The false statement is an implication, not an iff."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-topologists-sine-curve-is-connected": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-connected-subsets-of-the-line",
+          "source_section": "Statement",
+          "quote": "In particular each of the nine interval forms of [[def-interval]] is connected",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-continuous-image-of-a-connected-space",
+          "source_section": "Statement",
+          "quote": "If $A \\subseteq X$ is a connected subset of $X$\n([[def-connected-space]]) then $f[A]$ is a connected subset of $Y$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "$$h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Both functions have range $[-1,1]$.",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "Both sine and cosine have period $2\\pi$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-closure-of-a-connected-set",
+          "source_section": "Statement",
+          "quote": "Taking $B = \\overline{A}$: **the closure of a connected set is connected.**",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "connected-graph",
+          "claim": "The interval $(0,1]$ is connected by [L1]. The map $x\\mapsto(x,\\sin(1/x))$ has continuous components and hence is continuous by [L3]; [L2] makes its image $C$ connected.",
+          "step": "1.1",
+          "inputs": ["L1", "L2", "L3", "algebra"]
+        },
+        {
+          "id": "vertical-segment-in-closure",
+          "claim": "For $y\\in[-1,1]$, choose $u$ with $\\sin u=y$ by [L4]. Periodicity [L5] gives graph points $(1/(u+2\\pi n),y)$; after a sufficiently large positive tail, [L6] makes their first coordinates tend to zero. Hence $\\{0\\}\\times[-1,1]\\subseteq\\overline C$.",
+          "step": "1.2",
+          "inputs": ["L4", "L5", "L6", "choose", "algebra"]
+        },
+        {
+          "id": "connected-sine-curve",
+          "claim": "For $S=C\\cup(\\{0\\}\\times[-1,1])$, step 1.2 gives $C\\subseteq S\\subseteq\\overline C$; apply [L7] to the connected set from step 1.1.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "step 1.2", "L7"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The graph $C$ is nonempty because $x=1$ is allowed, and the vertical segment is nonempty."},
+        {"case": "zero", "status": "checked", "evidence": "The graph excludes zero exactly where $1/x$ is undefined; the adjoined segment supplies the zero-abscissa points."},
+        {"case": "one", "status": "checked", "evidence": "The graph includes its right endpoint $x=1$."},
+        {"case": "degenerate", "status": "checked", "evidence": "The chosen sine value may be an endpoint $y=\\pm1$; periodic peak and trough points still approach the vertical segment."},
+        {"case": "endpoints", "status": "checked", "evidence": "The interval $(0,1]$ includes one and excludes zero, while the vertical segment includes both heights $-1$ and $1$."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.2 chooses a preimage only after [L4] establishes the full sine range; subsequent points are explicit periodic translates."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "Connectedness of this explicit set is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "Connectedness of this explicit set is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "cex-topologists-sine-curve-connected-not-path-connected": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-topologists-sine-curve-is-connected",
+          "source_section": "Statement",
+          "quote": "The topologist's sine curve $S=\\{(x,\\sin(1/x)):0<x\\le1\\}\\cup(\\{0\\}\\times[-1,1])$ is connected.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "$$h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .$$",
+          "uses": ["2.1", "2.3"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-continuity-preimage-characterisation",
+          "source_section": "Statement",
+          "quote": "$f^{-1}(F)$ is relatively closed in $A$ for every closed $F \\subseteq \\mathbb{R}$.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-heine-borel-r",
+          "source_section": "Statement",
+          "quote": "Then the closed bounded interval\n$[a,b]$ ([[def-interval]]) is compact",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-real-and-metric-notions-agree",
+          "source_section": "Statement",
+          "quote": "$K$ is compact in the open-cover sense of [[def-open-cover-r]]",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-closed-subset-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Then $F$ is a compact subset of $X$: the metric\nsubspace $(F, d_F)$ is a compact metric space",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L8",
+          "source": "cor-intermediate-value-theorem-topological",
+          "source_section": "Statement",
+          "quote": "If $p, q \\in X$ and $c \\in \\mathbb{R}$\n   satisfies $f(p) \\le c \\le f(q)$, then there is $x \\in X$ with $f(x) = c$.",
+          "uses": ["2.2"]
+        },
+        {
+          "fact": "L9",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "$$\\sin(\\pi/2)=1,\\quad\\cos(\\pi/2)=0,\\quad\\sin\\pi=0,\\quad\\cos\\pi=-1.$$",
+          "uses": ["2.2", "2.3"]
+        },
+        {
+          "fact": "L10",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "Both sine and cosine have period $2\\pi$",
+          "uses": ["2.2"]
+        },
+        {
+          "fact": "L11",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$",
+          "uses": ["2.2"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "connectedness",
+          "claim": "The set $S$ is connected by [L1].",
+          "step": "1.1",
+          "inputs": ["L1"]
+        },
+        {
+          "id": "last-axis-time",
+          "claim": "Assume a path $\\gamma$ in $S$ joins $(0,0)$ to a point of the graph, and put $x=\\pi_1\\gamma$. By [L2], $x$ is continuous. The nonempty zero set $E=x^{-1}(\\{0\\})$ is closed by [L3]; [L4] and [L5] make $[0,1]$ compact metrically, [L6] makes $E$ compact, and [L7] applied to the identity on $E$ supplies its maximum $s<1$. Thus $x(t)>0$ for $t>s$.",
+          "step": "2.1",
+          "inputs": ["L2", "L3", "L4", "L5", "L6", "L7", "assume-hyp"]
+        },
+        {
+          "id": "force-peaks-and-troughs",
+          "claim": "For every large $n$, $x(s+1/n)>0$. Use [L9]–[L11] to choose a peak or trough abscissa $u_n<x(s+1/n)$ with $\\sin(1/u_n)=(-1)^n$. The intermediate value theorem [L8] on $[s,s+1/n]$ gives $t_n$ with $x(t_n)=u_n$, hence $s<t_n<s+1/n$.",
+          "step": "2.2",
+          "inputs": ["step 2.1", "L8", "L9", "L10", "L11", "choose"]
+        },
+        {
+          "id": "path-continuity-contradiction",
+          "claim": "The second component of $\\gamma$ is continuous by [L2], but step 2.2 has $t_n\\to s$ and second coordinates alternating between $1$ and $-1$ by [L9]. This contradiction proves that no path joins the vertical segment to the graph, so $S$ is not path connected.",
+          "step": "2.3",
+          "inputs": ["step 2.2", "L2", "L9", "discharge-contradiction"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The zero-time set in step 2.1 contains the initial path parameter, and connectedness is supplied by a nonempty explicit set."},
+        {"case": "zero", "status": "checked", "evidence": "The graph excludes zero while the vertical segment includes $(0,0)$; the path argument separates these roles."},
+        {"case": "one", "status": "checked", "evidence": "The graph includes $x=1$, providing a concrete endpoint outside the vertical segment."},
+        {"case": "degenerate", "status": "checked", "evidence": "A path staying on the vertical segment is not the assumed path; step 2.1 requires its other endpoint on the graph and obtains $s<1$."},
+        {"case": "endpoints", "status": "checked", "evidence": "Step 2.1 includes path parameters zero and one, and step 2.2 stays inside the right-hand interval after the last zero."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The maximum $s$ is attained by compactness; the peak/trough abscissae are explicit periodic values chosen below a known positive coordinate."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The counterexample asserts connectedness and failure of path connectedness, not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The counterexample asserts connectedness and failure of path connectedness, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-sine-period-arc-length-as-a-complete-elliptic-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-length-of-the-graph-of-a-c1-function",
+          "source_section": "Statement",
+          "quote": "$$L(\\gamma)=\\int_a^b\\sqrt{1+q(t)^2}\\,dt.$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cofunction-supplementary-and-reflection-identities",
+          "source_section": "Statement",
+          "quote": "$$\\sin(\\pi/2-x)=\\cos x,\\quad \\cos(\\pi/2-x)=\\sin x,\\quad \\sin(\\pi-x)=\\sin x,\\quad \\cos(\\pi-x)=-\\cos x,$$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-additivity-over-subintervals",
+          "source_section": "Statement",
+          "quote": "$$\\int_a^b f \\;=\\; \\int_a^c f \\;+\\; \\int_c^b f .$$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-substitution",
+          "source_section": "Statement",
+          "quote": "$$\\int_{\\varphi(c)}^{\\varphi(d)} f \\;=\\; \\int_c^d (f\\circ\\varphi)\\,\\varphi' ,$$",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\sin ^2x+\\cos ^2x=1$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-nth-roots-exist",
+          "source_section": "Statement",
+          "quote": "Moreover $a^{1/n} > 0$ when $a > 0$, and $a^{1/1} = a$.",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "graph-length",
+          "claim": "For $f(x)=\\sin x$ on $[0,2\\pi]$, [L2] supplies the continuous derivative $q=\\cos$, and [L1] gives $L=\\int_0^{2\\pi}\\sqrt{1+\\cos^2x}\\,dx$.",
+          "step": "1.1",
+          "inputs": ["L1", "L2"]
+        },
+        {
+          "id": "quarter-period-symmetry",
+          "claim": "Split the integral at the quarter-period points with [L4] and use the affine substitutions in [L5] together with [L3] to show all four pieces equal $\\int_0^{\\pi/2}\\sqrt{1+\\cos^2x}\\,dx$.",
+          "step": "1.2",
+          "inputs": ["step 1.1", "L3", "L4", "L5"]
+        },
+        {
+          "id": "elliptic-form",
+          "claim": "Use [L6] to rewrite $1+\\cos^2x=2-\\sin^2x=2(1-\\tfrac12\\sin^2x)$ and [L7] for the positive square roots. Defining $E(k)=\\int_0^{\\pi/2}\\sqrt{1-k^2\\sin^2t}\\,dt$ gives one quarter as $\\sqrt2E(1/\\sqrt2)$.",
+          "step": "2.1",
+          "inputs": ["step 1.2", "L6", "L7", "algebra", "construct"]
+        },
+        {
+          "id": "length-value",
+          "claim": "Multiply the quarter-period value in step 2.1 by four to obtain $L=4\\sqrt2E(1/\\sqrt2)$.",
+          "step": "3.1",
+          "inputs": ["step 1.2", "step 2.1", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The interval $[0,2\\pi]$ is nondegenerate because $\\pi>0$."},
+        {"case": "zero", "status": "checked", "evidence": "The lower endpoint zero is included in the graph-length integral and all substitutions."},
+        {"case": "one", "status": "checked", "evidence": "The amplitude and horizontal scale are both one; the resulting nonzero modulus is computed explicitly."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 2.1 checks $0<1/\\sqrt2<1$, so the elliptic modulus is neither degenerate value zero nor one."},
+        {"case": "endpoints", "status": "checked", "evidence": "The four subintervals share endpoints only; additivity counts no length twice and covers all of $[0,2\\pi]$."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The square roots in step 2.1 are the unique nonnegative roots from [L7]."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example computes one length and states no biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example computes one length and states no biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-principal-inverse-tangent",
+          "source_section": "Definition",
+          "quote": "$$\\tan:(-\\pi/2,\\pi/2)\\longrightarrow\\mathbb R.$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-real-line-is-a-metric-space",
+          "source_section": "Statement",
+          "quote": "$(\\mathbb{R}, d_{\\mathbb{R}})$ is not a bounded metric space",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-reals-cauchy-complete",
+          "source_section": "Statement",
+          "quote": "Every Cauchy sequence of real numbers ([[def-real-limit]]) converges to a real\nnumber.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-real-and-metric-notions-agree",
+          "source_section": "Statement",
+          "quote": "A sequence $(x_k)$ with terms in $A$ is Cauchy\n   in $(A, d_A)$ ([[def-cauchy-in-metric]]) if and only if it is Cauchy as a\n   sequence of reals",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-metric-sequential-closure",
+          "source_section": "Statement",
+          "quote": "$F$ is closed ([[def-metric-topology]]) if and only if $F$ is sequentially\n   closed.",
+          "uses": ["2.2"]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-complete-subspace-iff-closed",
+          "source_section": "Statement",
+          "quote": "Consequently, for a complete $(X,d)$ a subset $A \\subseteq X$ is complete if and\nonly if it is closed.",
+          "uses": ["2.3"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "homeomorphism",
+          "claim": "[L1] and its inverse clause identify tangent as a homeomorphism with inverse arctangent.",
+          "step": "1.1",
+          "inputs": ["L1"]
+        },
+        {
+          "id": "boundedness-contrast",
+          "claim": "The interval lies in the ball centred at zero of radius $\\pi/2+1$, while [L2] makes the real line unbounded.",
+          "step": "1.2",
+          "inputs": ["L2", "algebra"]
+        },
+        {
+          "id": "real-line-complete",
+          "claim": "[L4] translates real Cauchyness into metric Cauchyness for the usual metric, and the same absolute-value formula translates convergence; [L3] therefore makes the usual real line a complete metric space.",
+          "step": "2.1",
+          "inputs": ["L3", "L4"]
+        },
+        {
+          "id": "interval-not-closed",
+          "claim": "The sequence $x_k=\\pi/2-1/(k+1)$ lies in $(-\\pi/2,\\pi/2)$ and converges in the ambient real line to $\\pi/2$, which is not in the interval. By [L5] the interval is not closed.",
+          "step": "2.2",
+          "inputs": ["L5", "algebra"]
+        },
+        {
+          "id": "interval-incomplete",
+          "claim": "Apply [L6] inside the complete ambient real line from step 2.1: the nonclosed interval of step 2.2 is not complete.",
+          "step": "2.3",
+          "inputs": ["step 2.1", "step 2.2", "L6"]
+        },
+        {
+          "id": "metric-properties-not-topological",
+          "claim": "The homeomorphic spaces from step 1.1 have opposite boundedness and completeness verdicts by steps 1.2 and 2.3, so neither property is topological.",
+          "step": "3.1",
+          "inputs": ["step 1.1", "step 1.2", "step 2.1", "step 2.3"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "Both homeomorphic spaces are nonempty."},
+        {"case": "zero", "status": "checked", "evidence": "Zero lies in the interval and is used as the centre of its bounding ball."},
+        {"case": "one", "status": "checked", "evidence": "The sequence is indexed as $1/(k+1)$, so its first denominator is one and never zero."},
+        {"case": "degenerate", "status": "checked", "evidence": "The open interval omits both endpoints; including them would change the completeness verdict and is not claimed."},
+        {"case": "endpoints", "status": "checked", "evidence": "Step 2.2 identifies the missing endpoint $\\pi/2$ explicitly."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The homeomorphism and the witness sequence are explicit."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example demonstrates failures of invariance and states no iff."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example demonstrates failures of invariance and states no iff."}
+      ],
+      "finite_smoke": []
+    },
+    "ex-sine-harmonic-series-pointwise-not-uniform": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-finite-sine-harmonic-sums",
+          "source_section": "Statement",
+          "quote": "If $x\\notin2\\pi\\mathbb Z$, then for every positive integer $N$, $|\\sum_{n=1}^N\\sin(nx)|\\le1/|\\sin(x/2)|$.",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-dirichlet-test",
+          "source_section": "Statement",
+          "quote": "Then $\\sum a_k b_k$ converges.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-uniform-cauchy-criterion-function-series",
+          "source_section": "Statement",
+          "quote": "The function series\n$\\sum f_k$ converges uniformly on $X$ if and only if, for every real\n$\\varepsilon>0$, there is $N\\in\\mathbb{N}$ such that\n\n$$\\left|\\sum_{k=m+1}^{n}f_k(x)\\right|<\\varepsilon$$",
+          "uses": ["3.1", "3.3"]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "source_section": "Statement",
+          "quote": "For $0<x\\le2$, $\\sin x\\ge x-x^3/6\\ge x/3>0$.",
+          "uses": ["3.2"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "period-multiple-branch",
+          "claim": "Index the positive series by $f_k(x)=\\sin((k+1)x)/(k+1)$. If $x\\in2\\pi\\mathbb Z$, [L3] and periodicity make every term zero.",
+          "step": "1.1",
+          "inputs": ["L3", "algebra"]
+        },
+        {
+          "id": "bounded-harmonic-partial-sums",
+          "claim": "If $x\\notin2\\pi\\mathbb Z$, [L1] gives a bound, depending on $x$ but independent of the partial-sum index, for the partial sums of $a_k=\\sin((k+1)x)$.",
+          "step": "1.2",
+          "inputs": ["L1"]
+        },
+        {
+          "id": "pointwise-dirichlet",
+          "claim": "The weights $b_k=1/(k+1)$ are positive, nonincreasing, and tend to zero; combine with step 1.2 in [L2], and with step 1.1 at the exceptional points, to get pointwise convergence on $\\mathbb R$.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "step 1.2", "L2", "algebra"]
+        },
+        {
+          "id": "assume-uniform",
+          "claim": "Assume the series converges uniformly on $[0,2]$; [L4] makes all sufficiently late tails uniformly small.",
+          "step": "3.1",
+          "inputs": ["L4", "assume-contra"]
+        },
+        {
+          "id": "large-positive-tail",
+          "claim": "For a positive integer $K$, set $x=1/K$ and sum the indexed terms $k=K-1$ through $2K-1$. Their angles $(k+1)/K$ lie in $[1,2]$, so [L5] gives sine at least $1/3$, while $1/(k+1)\\ge1/(2K)$. The $K+1$ nonnegative terms therefore sum to more than $1/6$.",
+          "step": "3.2",
+          "inputs": ["L5", "algebra"]
+        },
+        {
+          "id": "uniform-cauchy-contradiction",
+          "claim": "Choose $K$ beyond the threshold in [L4]. The tail in step 3.2 is still at least $1/6$, contradicting uniform Cauchyness at tolerance $1/7$; hence convergence is not uniform on $[0,2]$, and therefore not uniform on $\\mathbb R$.",
+          "step": "3.3",
+          "inputs": ["step 3.1", "step 3.2", "L4", "discharge-contradiction"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The series begins with positive harmonic index one, represented by $k=0$."},
+        {"case": "zero", "status": "checked", "evidence": "Step 1.1 handles $x=0$, and the reindexing by $k+1$ prevents a coefficient $1/0$."},
+        {"case": "one", "status": "checked", "evidence": "The first coefficient is $1/(0+1)=1$ and is a legitimate term."},
+        {"case": "degenerate", "status": "checked", "evidence": "The finite-sum denominator vanishes only at period multiples, which are handled separately in step 1.1."},
+        {"case": "endpoints", "status": "checked", "evidence": "The nonuniformity domain includes both zero and two; the witness points $1/K$ lie inside it for every $K\\ge1$."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "Every tail and witness point is explicitly defined from $K$."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The example states convergence modes, not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The example states convergence modes, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "fs-a-continuous-function-on-a-compact-interval-has-a-rectifiable-graph": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-bounded-variation-and-total-variation",
+          "source_section": "Definition",
+          "quote": "The function $f$ has **bounded variation**\non $[a,b]$ when this set of sums is bounded above",
+          "uses": ["2.1", "3.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-p-series-rational",
+          "source_section": "Statement",
+          "quote": "In particular the harmonic series $\\sum_{k \\ge 1} 1/k$ diverges, at $p = 1$",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-quarter-turn-values-and-shift-formulas",
+          "source_section": "Statement",
+          "quote": "$$\\sin(x+\\pi/2)=\\cos x,\\quad\\cos(x+\\pi/2)=-\\sin x,\\quad\\sin(x+\\pi)=-\\sin x,\\quad\\cos(x+\\pi)=-\\cos x.$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
+          "source_section": "Statement",
+          "quote": "Then $\\gamma$ is rectifiable if and only if every coordinate function $\\gamma_j$ has bounded variation.",
+          "uses": ["4.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "assume-rectifiable-graph-claim",
+          "claim": "Assume for contradiction that every continuous function on a compact interval has a rectifiable graph.",
+          "step": "1.1",
+          "inputs": ["assume-contra"]
+        },
+        {
+          "id": "continuous-witness",
+          "claim": "Define $f(0)=0$ and $f(x)=x\\sin(1/x)$ on $(0,1]$. The bound [L4] gives $|f(x)|\\le x$ and hence continuity at zero directly from the limit definition; ordinary composition gives continuity elsewhere.",
+          "step": "1.2",
+          "inputs": ["L4", "algebra"]
+        },
+        {
+          "id": "alternating-partitions",
+          "claim": "Put $x_k=2/((2k+1)\\pi)$. For a sufficiently large fixed $K$, the finite lists $0<x_N<\\cdots<x_K\\le1$ form partitions after adjoining one. By [L3], $f(x_k)=(-1)^kx_k$, so each successive variation increment is $x_k+x_{k+1}\\ge x_k$.",
+          "step": "2.1",
+          "inputs": ["L1", "L3", "construct", "algebra"]
+        },
+        {
+          "id": "variation-diverges",
+          "claim": "Since $x_k\\ge1/(\\pi(k+1))$, the partial variation sums from step 2.1 dominate a fixed positive multiple of the harmonic series, which diverges by [L2]. Thus [L1] says $f$ is not of bounded variation.",
+          "step": "3.1",
+          "inputs": ["step 2.1", "L1", "L2", "algebra"]
+        },
+        {
+          "id": "graph-not-rectifiable",
+          "claim": "For the graph path $\\gamma(x)=(x,f(x))$, the second coordinate is not of bounded variation by step 3.1, so [L5] says the graph is not rectifiable.",
+          "step": "4.1",
+          "inputs": ["step 3.1", "L5"]
+        },
+        {
+          "id": "contradict-universal-claim",
+          "claim": "The interval $[0,1]$ is compact and $f$ is continuous by step 1.2, so the assumed claim makes its graph rectifiable, contradicting step 4.1.",
+          "step": "5.1",
+          "inputs": ["step 1.1", "step 1.2", "step 4.1", "discharge-contradiction"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The witness interval $[0,1]$ and every sufficiently long partition are nonempty."},
+        {"case": "zero", "status": "checked", "evidence": "Step 1.2 defines and verifies the endpoint value at zero before partitions use it."},
+        {"case": "one", "status": "checked", "evidence": "The endpoint one is adjoined to every partition; if it duplicates $x_K$, the duplicate is omitted."},
+        {"case": "degenerate", "status": "checked", "evidence": "The witness interval is nondegenerate, and no claim is made for a singleton interval."},
+        {"case": "endpoints", "status": "checked", "evidence": "The partitions in step 2.1 include both zero and one and order all oscillatory nodes between them."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "A large $K$ with $x_K\\le1$ exists by the reciprocal Archimedean property and is fixed before the finite partitions are formed."},
+        {"case": "iff-forward", "status": "checked", "evidence": "Step 4.1 uses the reverse direction of [L5]: a coordinate not of bounded variation implies the path is not rectifiable."},
+        {"case": "iff-reverse", "status": "checked", "evidence": "The converse direction of [L5] is explicitly the direction applied in step 4.1 via contrapositive."}
+      ],
+      "finite_smoke": []
+    }
+  },
+  "external_fallbacks": {
+    "rem-sine-period-arc-length-integrand-is-nonelementary": {
+      "source_url": "https://web.mst.edu/_disabled/lmhall/SPFNS/spfns.pdf",
+      "exact_statement": "For nondegenerate modulus $0<k<1$, the complete elliptic integral of the second kind $E(k)=\\int_0^{\\pi/2}\\sqrt{1-k^2\\sin^2\\theta}\\,d\\theta$ cannot be evaluated in terms of elementary functions.",
+      "local_proof_attempt": "The preceding example reduces the sine-period arc length to the case $k=1/\\sqrt2$. A local proof of non-elementarity would require Liouville's theorem on elementary antiderivatives or equivalent differential-algebra machinery, none of which is available in the declared prerequisite closure and none of which can be built as a small analysis lemma.",
+      "necessity": "The page design explicitly requires the distinction between an exact elliptic-integral value and an elementary antiderivative; separating it into a recorded-not-proved remark keeps the computed length proved locally without pretending to develop differential algebra."
     }
   }
 }

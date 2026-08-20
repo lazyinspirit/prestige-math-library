@@ -1,0 +1,3293 @@
+{
+  "version": 1,
+  "level": "frontier-16",
+  "scope": [
+    "thm-jordan-content-is-translation-invariant",
+    "prop-riemann-graph-area-equals-jordan-content",
+    "cor-disc-jordan-content-is-pi-r-squared",
+    "lem-determinant-base-height-identity-in-r2",
+    "thm-parallelogram-content-and-base-height-formula",
+    "thm-triangle-content-and-base-height-formula",
+    "cor-triangle-content-zero-iff-collinear",
+    "lem-simple-polygon-has-an-interior-diagonal",
+    "thm-simple-polygon-admits-a-triangulation",
+    "cor-simple-polygon-triangulation-has-n-minus-two-triangles",
+    "thm-simple-polygon-content-is-the-sum-of-triangle-contents",
+    "thm-shoelace-formula-for-simple-polygons",
+    "ex-triangle-area-by-determinant-and-base-height",
+    "ex-parallelogram-content-from-a-two-by-two-matrix",
+    "ex-collinear-triangle-has-zero-content",
+    "ex-unit-disc-has-jordan-content-pi",
+    "ex-irregular-pentagon-area-by-triangulation-and-shoelace",
+    "cex-linear-bijection-need-not-preserve-jordan-content",
+    "thm-open-subsets-of-rn-admit-jordan-exhaustions",
+    "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+    "thm-absolute-improper-multiple-integral-by-exhaustion",
+    "thm-comparison-test-for-improper-multiple-integrals",
+    "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
+    "thm-continuity-of-dominated-parameter-dependent-improper-integrals",
+    "thm-differentiation-under-dominated-improper-multiple-integrals",
+    "lem-gaussian-integral-is-finite-and-positive",
+    "lem-gaussian-square-is-the-plane-gaussian-integral",
+    "lem-plane-gaussian-integral-in-polar-coordinates",
+    "thm-gaussian-integral",
+    "ex-unequal-iterated-improper-integrals-on-the-unit-square",
+    "cex-zero-iterated-integrals-without-a-double-integral",
+    "cex-differentiation-under-an-improper-integral-without-domination",
+    "ex-scaled-gaussian-parameter-integral"
+  ],
+  "contracts": {
+    "thm-jordan-content-is-translation-invariant": {
+      "citations": [
+        {
+          "fact": "L1",
+        "source": "def-jordan-inner-and-outer-content",
+        "source_section": "Definition",
+        "quote": "For bounded $E\\subseteq\\mathbb R^m$, in the metric sense of [[def-metric-bounded-diameter]], its **Jordan outer content** is the infimum of $\\sum_{r<q}\\operatorname{vol}(R_r)$ over finite axis-parallel rectangle covers of $E$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+        "source": "def-multidimensional-rectangle-and-volume",
+        "source_section": "Definition",
+          "quote": "For $a,b\\in\\mathbb R^m$ with $a_j\\le b_j$ for $j<m$, define",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "translate-covers",
+          "claim": "Translation bijects finite axis-parallel covers and interior-disjoint inner families while preserving every side length.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "definition of translation"
+          ]
+        },
+        {
+          "id": "two-inequalities",
+          "claim": "Applying the same construction with the inverse translation gives equality of both contents.",
+          "step": "1.2",
+          "inputs": [
+            "1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "measurability",
+          "claim": "Equality of inner and outer contents is therefore invariant, with the same common value.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 sends the unique empty inner family and every empty-set cover convention to the translated empty set"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "The theorem fixes n>=1, so no zero-dimensional rectangle convention is invoked"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 works unchanged for n=1 and preserves interval length"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 preserves zero side lengths as well as nondegenerate side lengths"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "No limiting interval endpoint occurs; all finite rectangles are translated as closed sets"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No element is selected from E; entire finite families are transported bijectively"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 proves Jordan measurability of E implies that of E+a"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Applying the inverse translation in step 1.2 proves the reverse measurability direction"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "prop-riemann-graph-area-equals-jordan-content": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-fubini-over-a-region-between-continuous-graphs",
+          "source_section": "Statement",
+          "quote": "Then $K$ is compact and Jordan measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-fubini-over-a-region-between-continuous-graphs",
+          "source_section": "Statement",
+          "quote": "$$\\int_KH=\\int_a^b\\left(\\int_{\\alpha(x)}^{\\beta(x)}H(x,y)\\,dy\\right)dx.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-jordan-content-and-indicator-integrability",
+          "source_section": "Statement",
+          "quote": "In that case\n$$\\int_Q1_E=\\operatorname{cont}(E).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "constant-one",
+          "claim": "Apply graph-region Fubini to H=1 and identify the integral with Jordan content.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "identify-area",
+          "claim": "The inner integral is beta(x)-alpha(x), exactly the graph-area definition.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "def-riemann-area-between-continuous-graphs"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The parameter interval satisfies a<b, so it is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "The ambient dimension is the plane and has no zero-dimensional case"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-point vertical section occurs when alpha(x)=beta(x) and contributes zero in step 2.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Coincident graphs give a content-zero graph and both sides of step 2.1 vanish"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The closed endpoint sections are included by the cited theorem and do not alter the formula"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The proof makes no selection; H is the fixed constant-one function"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The proposition is an equality, not a biconditional"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-disc-jordan-content-is-pi-r-squared": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-disc-area-is-pi-r-squared",
+          "source_section": "Statement",
+          "quote": "For every $r>0$, the Riemann area of the closed disc of radius $r$ is $\\pi r^2$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+        "source": "def-jordan-inner-and-outer-content",
+        "source_section": "Definition",
+          "quote": "The empty set and every degenerate rectangle have content $0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-riemann-graph-area-equals-jordan-content",
+          "source_section": "Statement",
+          "quote": "Then $K$ is compact and Jordan measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "zero-radius",
+          "claim": "Cover the singleton disc at r=0 by arbitrarily small squares, so both contents are zero.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "definition of outer content"
+          ]
+        },
+        {
+          "id": "positive-radius",
+          "claim": "For r>0, graph-area/Jordan-content agreement and the published disc area give pi r^2.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "A disc is never empty, including at radius zero"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 is devoted to r=0"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 includes r=1 without normalization assumptions"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate singleton disc is disposed in step 1.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The semicircle graphs include x=+-r and their zero-height endpoint sections"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No nonempty subset is chosen; the shrinking square cover is explicit"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The statement is a formula, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-determinant-base-height-identity-in-r2": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-orthogonal-projection-formula-and-linearity",
+          "source_section": "Statement",
+          "quote": "$$P_Wv=\\sum_{i<r}\\langle v,e_i\\rangle e_i.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "source_section": "Statement",
+          "quote": "For every $v\\in V$, the vector $P_Wv$ is the unique point of $W$ nearest to $v$:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+        "source": "def-determinant-of-a-square-matrix",
+        "source_section": "Definition",
+          "quote": "Its **determinant** is",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "projection-height",
+          "claim": "Normalize v, compute the projection of w onto Rv, and identify the residual norm with the attained distance.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "v!=0"
+          ]
+        },
+        {
+          "id": "square-identity",
+          "claim": "Expand the residual norm and the two-by-two determinant to obtain det^2=||v||^2 d(w,Rv)^2.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L3",
+            "inner-product algebra"
+          ]
+        },
+        {
+          "id": "nonnegative-roots",
+          "claim": "Both sides are nonnegative, so equality of squares gives the stated identity.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "ordered-field algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The line Rv contains zero and is never empty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis v!=0 prevents division by zero; w=0 gives both sides zero in steps 1.1-3.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A unit-length v is a regular special case of the normalization in step 1.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If w lies in Rv, the residual and determinant both vanish in step 2.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "No interval endpoint occurs in this vector identity"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The nearest point is supplied uniquely by L2, so no arbitrary nonempty choice remains"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The lemma asserts an equality, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-parallelogram-content-and-base-height-formula": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-parallelepiped-content-is-the-absolute-determinant",
+          "source_section": "Statement",
+          "quote": "This includes the singular case, when the content is zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-determinant-base-height-identity-in-r2",
+          "source_section": "Statement",
+          "quote": "For $v\\ne0$, $\\lVert v\\rVert_2\\,d(w,\\mathbb Rv)=|\\det[v\\ w]|$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "determinant-content",
+          "claim": "Specialize the n-dimensional parallelepiped formula to n=2.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "definition of parallelogram"
+          ]
+        },
+        {
+          "id": "base-height",
+          "claim": "When the chosen base v is nonzero, substitute the determinant-height identity.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "Every parallelogram set contains its base point and is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If v=0, step 1.1 gives content zero and step 2.1 is deliberately not invoked"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Unit base length reduces step 2.1 to content=height"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Dependent spanning vectors are covered by the singular clause of L1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Parameters t=0 and t=1 are included in the published closed parallelepiped"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No representative or point is chosen in the proof"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The result is a pair of formulas, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-triangle-content-and-base-height-formula": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "prop-riemann-graph-area-equals-jordan-content",
+          "source_section": "Statement",
+          "quote": "Then $K$ is compact and Jordan measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "source_section": "Statement",
+          "quote": "For every bounded Jordan set $E$, the image $T(E)$ is a bounded Jordan set and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-jordan-content-is-translation-invariant",
+          "source_section": "Statement",
+          "quote": "For every bounded $E\\subseteq\\mathbb R^n$ and every $a\\in\\mathbb R^n$, the translates $E+a$ and $E$ have equal Jordan inner and outer contents.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-determinant-base-height-identity-in-r2",
+          "source_section": "Statement",
+          "quote": "For $v\\ne0$, $\\lVert v\\rVert_2\\,d(w,\\mathbb Rv)=|\\det[v\\ w]|$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "standard-triangle",
+          "claim": "Graph-area agreement and the antiderivative of 1-x give content 1/2 for the standard right triangle.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-ftc-second-part",
+            "lem-derivative-of-a-power",
+            "thm-linearity-of-the-integral"
+          ]
+        },
+        {
+          "id": "affine-image",
+          "claim": "Translate by -A and apply the column map [B-A C-A] to the standard triangle.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "base-height",
+          "claim": "For A!=B, replace the determinant by base length times distance to the base line.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "A triangle contains its vertices and is nonempty even when they coincide"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Repeated vertices give a singular column map and zero content in step 2.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The standard triangle computation in step 1.1 includes unit base and height"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All collinear and repeated-vertex cases are handled by the singular linear-image clause"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The closed standard triangle includes all three edges and graph endpoints"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The affine map is explicit and makes no nonempty selection"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem asserts formulas rather than an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-triangle-content-zero-iff-collinear": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-triangle-content-and-base-height-formula",
+          "source_section": "Statement",
+          "quote": "Every triangle $T(A,B,C)$ is Jordan measurable and has content $\\tfrac12|\\det[B-A\\ C-A]|$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+        "source": "def-determinant-of-a-square-matrix",
+        "source_section": "Definition",
+          "quote": "When $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "forward",
+          "claim": "Collinearity makes one displacement a scalar multiple of the other, so the determinant and content vanish.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "definition of collinear"
+          ]
+        },
+        {
+          "id": "reverse",
+          "claim": "If content is zero, the two-by-two determinant is zero; split on a nonzero coordinate to prove the displacements dependent.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "coordinate algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The vertex set contains named points and is not empty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If B-A=0 or C-A=0, both directions are checked before any division in steps 1.1-2.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A nonzero unit displacement is included in the coordinate case split"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated vertices and all singular triangles are included in the equivalence"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "No interval endpoints occur"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The reverse proof chooses a coordinate only after the finite explicit case split shows one is nonzero"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 proves collinear implies zero content"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 proves zero content implies collinear"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-simple-polygon-has-an-interior-diagonal": {
+      "citations": [
+        {
+          "fact": "L1",
+        "source": "def-simple-polygonal-region-and-triangulation",
+        "source_section": "Definition",
+          "quote": "A simple polygonal region is a compact planar region whose boundary is an irredundant simple closed finite polygonal chain.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "extreme-vertex",
+          "claim": "Choose the lexicographically least vertex and inspect the chord between its neighbors.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "finite vertex set"
+          ]
+        },
+        {
+          "id": "visible-case",
+          "claim": "If the neighbor chord lies in the polygon, it is an interior diagonal.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "definition of diagonal"
+          ]
+        },
+        {
+          "id": "blocked-case",
+          "claim": "Otherwise a farthest obstructing vertex in the finite intervening triangle gives an interior diagonal from the extreme vertex.",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "L1",
+            "finite maximum",
+            "plane geometry"
+          ]
+        },
+        {
+          "id": "cases-close",
+          "claim": "The two cases exhaust the geometry and yield a diagonal.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "2.2",
+            "cases"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "A simple polygon has at least three vertices, and the lemma assumes more than three"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "The dimension is fixed at two and the polygon has nonempty interior"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "evidence": "A one-vertex polygon is excluded by the definition"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Irredundancy excludes three consecutive collinear vertices; the blocked case still permits other collinearities"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Chord endpoints are vertices and only the relative interior must lie inside the region"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The obstructing-vertex set is finite and nonempty in the blocked case, so a farthest member exists without Choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The lemma is an existence statement, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-simple-polygon-admits-a-triangulation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-simple-polygon-has-an-interior-diagonal",
+          "source_section": "Statement",
+          "quote": "Every simple polygon with more than three vertices has an interior diagonal.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "base",
+          "claim": "A three-vertex simple polygon is its single triangular triangulation.",
+          "step": "1.1",
+          "inputs": [
+            "definition of triangulation"
+          ]
+        },
+        {
+          "id": "split",
+          "claim": "For n>3, an interior diagonal splits the polygon into two smaller simple polygons.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "definition of diagonal"
+          ]
+        },
+        {
+          "id": "induction",
+          "claim": "Triangulate both pieces and unite the face families along the shared diagonal.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "inductive hypotheses",
+            "finite union"
+          ]
+        },
+        {
+          "id": "conclude",
+          "claim": "The union covers the original polygon and satisfies every face-intersection clause.",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "definition of triangulation"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "A simple polygon is nonempty by definition"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "Zero vertices are excluded"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "evidence": "One vertex is excluded"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The smallest admissible case n=3 is step 1.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The shared diagonal, its endpoints, and polygon boundary remain in the closed triangle union"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The diagonal exists by L1; the induction makes only two finite recursive choices"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem is an existence statement, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-simple-polygon-triangulation-has-n-minus-two-triangles": {
+      "citations": [
+        {
+          "fact": "L1",
+        "source": "def-simple-polygonal-region-and-triangulation",
+        "source_section": "Definition",
+          "quote": "A triangulation is a finite family of closed triangles with union the polygon and pairwise intersections empty or a common face.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "base-count",
+          "claim": "A triangulation of a 3-gon has one triangle.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "definition of simple polygon"
+          ]
+        },
+        {
+          "id": "internal-edge",
+          "claim": "For n>3, a triangulation has an internal diagonal separating two smaller triangulated polygons.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "finite face incidence"
+          ]
+        },
+        {
+          "id": "count",
+          "claim": "If their vertex counts are n1,n2, then n1+n2=n+2 and induction gives (n1-2)+(n2-2)=n-2 triangles.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "inductive hypotheses",
+            "arithmetic"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The polygon and every triangulation are nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "Zero vertices are excluded"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "evidence": "One vertex is excluded"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate lower boundary n=3 is step 1.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Boundary edges belong to one face while the chosen internal diagonal belongs to both subpolygons"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No arbitrary infinite choice occurs; one edge is chosen from a finite nonempty set"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The corollary is an exact count, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-simple-polygon-content-is-the-sum-of-triangle-contents": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-simple-polygon-admits-a-triangulation",
+          "source_section": "Statement",
+          "quote": "Every simple polygon admits a triangulation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-triangle-content-and-base-height-formula",
+          "source_section": "Statement",
+          "quote": "Every triangle $T(A,B,C)$ is Jordan measurable and has content $\\tfrac12|\\det[B-A\\ C-A]|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-jordan-content-finite-additivity",
+          "source_section": "Statement",
+          "quote": "If bounded Jordan measurable sets $E,F$ have $E\\cap F$ of content zero, then",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "triangles",
+          "claim": "Choose a triangulation; each closed triangular face is Jordan measurable.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "zero-overlaps",
+          "claim": "Distinct faces meet only in common edges or vertices, all of content zero.",
+          "step": "1.2",
+          "inputs": [
+            "definition of triangulation",
+            "thm-graphs-of-continuous-functions-have-content-zero"
+          ]
+        },
+        {
+          "id": "finite-additivity",
+          "claim": "Inductively apply finite additivity to prove measurability and sum all face contents.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "L3"
+          ]
+        },
+        {
+          "id": "independence",
+          "claim": "Every triangulation sum equals the intrinsic content, so the value is triangulation-independent.",
+          "step": "3.1",
+          "inputs": [
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "A simple polygon and its triangulation are nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "Zero faces cannot cover a nonempty polygon"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A triangular polygon gives a one-term sum via step 1.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero-area triangles are excluded by irredundant simple faces, while zero-content overlaps are handled in step 1.2"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All closed face edges and vertices are included, and their overlaps have zero content"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A triangulation exists by L1; only finite additivity is iterated afterward"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem gives equality and independence, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-shoelace-formula-for-simple-polygons": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-simple-polygon-content-is-the-sum-of-triangle-contents",
+          "source_section": "Statement",
+          "quote": "A simple polygon is Jordan measurable and its content is the sum of the contents of the triangles in any triangulation.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-triangle-content-and-base-height-formula",
+          "source_section": "Statement",
+          "quote": "Every triangle $T(A,B,C)$ is Jordan measurable and has content $\\tfrac12|\\det[B-A\\ C-A]|$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "signed-faces",
+          "claim": "Orient every triangular face counterclockwise and express its content by its signed determinant.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "counterclockwise orientation"
+          ]
+        },
+        {
+          "id": "cancel",
+          "claim": "Sum the edge expansions; every internal edge occurs twice with opposite orientations and cancels.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "finite-sum laws"
+          ]
+        },
+        {
+          "id": "boundary",
+          "claim": "Only cyclic boundary-edge terms remain, yielding one half of the shoelace sum.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "A simple polygon has a nonempty cyclic vertex list"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "Zero vertices and zero area are excluded by the simple-region convention"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "evidence": "A one-vertex cycle is excluded"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The triangular n=3 case is already the determinant formula in step 1.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cyclic convention sets the successor of the final vertex to the first vertex"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "Orientations are fixed by the given counterclockwise boundary and require no arbitrary choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem is a formula, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-triangle-area-by-determinant-and-base-height": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-triangle-content-and-base-height-formula",
+          "source_section": "Statement",
+          "quote": "Every triangle $T(A,B,C)$ is Jordan measurable and has content $\\tfrac12|\\det[B-A\\ C-A]|$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "determinant",
+          "claim": "For the stated vertices, compute det[(4,0),(2,3)]=12 and area 6.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "height",
+          "claim": "The horizontal base has length 4 and the third vertex has height 3, again giving area 6.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "arithmetic"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The example has three named vertices"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "Neither base length nor height is zero"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "evidence": "No unit-index boundary occurs"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "evidence": "The selected triangle is nondegenerate because its determinant is 12"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The perpendicular from C lands in the interior of the chosen horizontal base, though the theorem only needs the line"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No choice is made"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The example compares equal formulas rather than proving an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-parallelogram-content-from-a-two-by-two-matrix": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-parallelogram-content-and-base-height-formula",
+          "source_section": "Statement",
+          "quote": "A parallelogram has Jordan content $|\\det[v\\ w]|$, equal to base times height when $v\\ne0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "matrix",
+          "claim": "Compute det[(3,1),(1,3)]=8 and hence content 8.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "projection-check",
+          "claim": "Compute base sqrt(10) and height 8/sqrt(10), whose product is 8.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "inner-product algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The parallelogram contains the origin"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "Both spanning vectors are nonzero"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "evidence": "No one-index boundary occurs"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The determinant 8 confirms the example is nondegenerate"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Closed parameter endpoints are included by the parallelogram definition"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No choice is made"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The example verifies an equality, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-collinear-triangle-has-zero-content": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-triangle-content-zero-iff-collinear",
+          "source_section": "Statement",
+          "quote": "A triangle has zero Jordan content if and only if its vertices are collinear.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "dependence",
+          "claim": "Verify C-A=3(B-A).",
+          "step": "1.1",
+          "inputs": [
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "zero-content",
+          "claim": "Apply the collinearity equivalence and verify the determinant and height are zero.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "Three named vertices are supplied"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The perpendicular height is zero and is the point of the example"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "evidence": "No one-index case occurs"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The entire triangle is a degenerate segment, handled in step 2.1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The middle vertex lies on the closed segment from A to C"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No choice is made"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 supplies the collinearity direction used by L1"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The zero determinant directly reconfirms the reverse direction for this witness"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-unit-disc-has-jordan-content-pi": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-disc-jordan-content-is-pi-r-squared",
+          "source_section": "Statement",
+          "quote": "A closed disc of radius $r\\ge0$ has Jordan content $\\pi r^2$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-riemann-graph-area-equals-jordan-content",
+          "source_section": "Statement",
+          "quote": "Then $K$ is compact and Jordan measurable.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "radius-one",
+          "claim": "Substitute r=1 in the disc-content formula.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "reconciliation",
+          "claim": "Identify the same value through the two semicircle graphs and graph-area agreement.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The unit disc is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "Radius zero is not the chosen witness"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is exactly the radius-one boundary case"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "evidence": "The unit disc is nondegenerate"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The semicircle endpoints at x=+-1 are included"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No choice is made"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The example is an equality check, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-irregular-pentagon-area-by-triangulation-and-shoelace": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-simple-polygon-content-is-the-sum-of-triangle-contents",
+          "source_section": "Statement",
+          "quote": "A simple polygon is Jordan measurable and its content is the sum of the contents of the triangles in any triangulation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-shoelace-formula-for-simple-polygons",
+          "source_section": "Statement",
+          "quote": "The shoelace formula gives the Jordan content of a counterclockwise simple polygon.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "triangulate",
+          "claim": "Verify both diagonals from (0,0) stay inside and sum the three triangle areas to 15.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "determinant arithmetic"
+          ]
+        },
+        {
+          "id": "shoelace",
+          "claim": "Compute the cyclic shoelace sum 30 and divide by two.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "arithmetic"
+          ]
+        },
+        {
+          "id": "compare",
+          "claim": "The independent computations agree at content 15.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The pentagon has five named vertices"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "No coordinate degeneracy collapses an edge"
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "evidence": "No one-vertex boundary occurs"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "All three chosen triangular determinants are positive, so the fan is nondegenerate"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The final-to-first shoelace edge is explicitly included and contributes zero"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The fan triangulation is explicit and no existence choice is used"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The example checks two formulas, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-linear-bijection-need-not-preserve-jordan-content": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "source_section": "Statement",
+          "quote": "$$\\operatorname{cont}(T(E))=|\\det A|\\operatorname{cont}(E).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+        "source": "def-multidimensional-rectangle-and-volume",
+        "source_section": "Definition",
+          "quote": "Every factor is nonnegative, so volume is nonnegative.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "witness",
+          "claim": "The map diag(2,1) is bijective with determinant 2 and sends the unit square to [0,2]x[0,1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "linear algebra"
+          ]
+        },
+        {
+          "id": "refute",
+          "claim": "The source and image contents are 1 and 2, so bijectivity does not imply content preservation.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "Both rectangles are nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "evidence": "The map is nonsingular and no zero scaling occurs"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The unchanged coordinate has scale one"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "evidence": "The determinant is nonzero, so this is not a singular degeneration"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All closed rectangle endpoints are mapped exactly"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The witness is explicit"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The item refutes a one-way false claim, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-open-subsets-of-rn-admit-jordan-exhaustions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+          "source_section": "Statement",
+          "quote": "If $C\\subseteq U\\subseteq\\mathbb R^n$, where $C$ is compact and $U$ is open, then there is a compact Jordan set $K$ such that",
+          "uses": [
+            "2.1"
+          ]
+        },
+      {
+        "fact": "L2",
+        "source": "lem-distance-to-set-is-lipschitz",
+        "source_section": "Statement",
+        "quote": "$$|d(x,A) - d(y,A)| \\le d(x,y),$$",
+        "uses": [
+          "1.1"
+        ]
+      },
+      {
+        "fact": "L3",
+        "source": "thm-rationals-countable",
+        "source_section": "Statement",
+        "quote": "$\\mathbb{Q} \\approx \\mathbb{N}$ ([[def-equinumerous]]): the rationals are",
+        "uses": [
+          "2.1"
+        ]
+      },
+      {
+        "fact": "L4",
+        "source": "lem-finite-powers-of-countable-sets-are-countable",
+        "source_section": "Statement",
+        "quote": "If $C$ is at most countable and $m\\in\\mathbb N$, then the finite product $C^m=\\prod_{i<m}C$ is at most countable.",
+        "uses": [
+          "2.1"
+        ]
+      }
+      ],
+      "derivations": [
+        {
+          "id": "special-domains",
+          "claim": "Give explicit constant-empty and expanding-box exhaustions for the empty set and all of R^n.",
+          "step": "1.1",
+          "inputs": [
+            "definition of exhaustion"
+          ]
+        },
+        {
+          "id": "compact-cores",
+          "claim": "For a proper nonempty open set, define closed bounded cores using norm and positive distance to the complement.",
+          "step": "1.2",
+          "inputs": [
+            "L2",
+            "thm-heine-borel-rn",
+            "index j+1"
+          ]
+        },
+        {
+          "id": "canonical-neighborhoods",
+          "claim": "Recursively enclose the previous set and next core in the least coded rational-grid Jordan neighborhood inside the open set.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+          "L1",
+          "L3",
+          "L4",
+          "fixed enumeration"
+          ]
+        },
+        {
+          "id": "cofinality",
+          "claim": "Every compact subset has bounded norm and positive distance from the complement, hence lies in some core and later exhaustion member.",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "compactness"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty open set is handled by K_j=empty in step 1.1"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "All thresholds use j+1, so the j=0 stage never divides by zero"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For n=1 the same cores and rational intervals give an exhaustion"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cases D=empty, D=R^n, and proper nonempty D are separated before distance to a possibly empty complement"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "No integration endpoints occur"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The least finite rational-grid code makes the recursive sequence canonical and avoids Countable Choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem is an existence statement, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-nonnegative-improper-multiple-integral-by-exhaustion": {
+      "citations": [
+        {
+          "fact": "L1",
+        "source": "def-improper-multiple-integral-and-absolute-convergence",
+        "source_section": "Definition",
+          "quote": "For nonnegative f, its improper integral is the extended-real supremum of its compact Jordan integrals.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-open-subsets-of-rn-admit-jordan-exhaustions",
+          "source_section": "Statement",
+          "quote": "Every open subset of $\\mathbb R^n$ has a compact Jordan exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "monotone-limit",
+          "claim": "Along an exhaustion, compact integrals form an increasing extended-real sequence bounded by the defining supremum.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "monotonicity"
+          ]
+        },
+        {
+          "id": "cofinality",
+          "claim": "Every compact Jordan subset lies in one exhaustion member, so its integral is at most the exhaustion limit.",
+          "step": "2.1",
+          "inputs": [
+            "definition of exhaustion",
+            "compactness",
+            "monotonicity"
+          ]
+        },
+        {
+          "id": "equality",
+          "claim": "Take the supremum in step 2.1 and combine with step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "extended-real order"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For D=empty every compact integral and the supremum are zero"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The first stage is indexed by 0 but no reciprocal index occurs in this theorem"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-member exhaustion that already covers a compact D stabilizes and still satisfies step 3.1"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Infinite value is allowed for nonnegative f and is handled in extended-real order"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "There are no oriented endpoints; compact Jordan boundaries contribute through proper integrals"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No selection is made from the family of compact sets; its supremum is defined as a set"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem asserts equality, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-absolute-improper-multiple-integral-by-exhaustion": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "source_section": "Statement",
+          "quote": "Every compact Jordan exhaustion computes the nonnegative improper integral, independently of the exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+        "source": "def-improper-multiple-integral-and-absolute-convergence",
+        "source_section": "Definition",
+          "quote": "A locally Riemann-integrable signed function is improperly integrable precisely when the nonnegative improper integral of its absolute value is finite.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "parts",
+          "claim": "Apply nonnegative exhaustion convergence to f+ and f-, both bounded by |f|.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "difference",
+          "claim": "On each compact member, integral f equals integral f+ minus integral f-.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "thm-multidimensional-integral-properties"
+          ]
+        },
+        {
+          "id": "limit",
+          "claim": "Subtract the two finite limits to obtain the same signed value for every exhaustion.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "On the empty domain all three integrals are zero"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero function has f+=f-=0 and step 3.1 gives zero"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A stabilizing compact exhaustion is included"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The forbidden infinity-minus-infinity case is excluded by finiteness of integral |f|"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "No oriented endpoint convention enters the domain exhaustion"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "Positive and negative parts are canonical formulas, not choices"
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Absolute convergence implies an exhaustion-independent signed limit by steps 1.1-3.1"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Under the adopted definition, existence of the signed improper integral means integral |f| is finite"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-comparison-test-for-improper-multiple-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "source_section": "Statement",
+          "quote": "Every compact Jordan exhaustion computes the nonnegative improper integral, independently of the exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+        "source": "def-improper-multiple-integral-and-absolute-convergence",
+        "source_section": "Definition",
+          "quote": "A locally Riemann-integrable signed function is improperly integrable precisely when the nonnegative improper integral of its absolute value is finite.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nonnegative",
+          "claim": "Integrate 0<=f<=g on every compact Jordan subset and take suprema.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "monotonicity"
+          ]
+        },
+        {
+          "id": "absolute",
+          "claim": "If |f|<=g and integral g is finite, step 1.1 makes integral |f| finite and L2 gives convergence.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "On the empty domain all comparison integrals are zero"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero dominator forces f=0 and is included"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Equality f=g is allowed"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Infinite integral of g gives only the extended inequality, not the finite convergence conclusion"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "No endpoint convention occurs"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No choice is made"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem contains implications, not biconditionals"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No converse comparison is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-uniform-tail-control-for-dominated-improper-multiple-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "source_section": "Statement",
+          "quote": "Every compact Jordan exhaustion computes the nonnegative improper integral, independently of the exhaustion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-comparison-test-for-improper-multiple-integrals",
+          "source_section": "Statement",
+          "quote": "For locally integrable $0\\le f\\le g$, comparison on compact subsets gives the same inequality for improper integrals.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "core",
+          "claim": "Choose an exhaustion member after which the finite nonnegative integral of g has remaining mass below epsilon.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "integral g finite"
+          ]
+        },
+        {
+          "id": "uniform-slices",
+          "claim": "For every parameter, compare the absolute tail of its slice with the same tail of g.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L2",
+            "domination"
+          ]
+        },
+        {
+          "id": "differences",
+          "claim": "Use |f_t-f_s|<=2g to obtain the corresponding two-slice tail bound.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "triangle inequality"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If D is empty, choose the empty core and all tails vanish"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If g=0, every dominated slice vanishes and any core works"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A compact parameter set with one point is included"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The tail is defined as total nonnegative mass minus compact-core mass, never infinity-minus-infinity because g is integrable"
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "evidence": "No interval endpoints are involved in the tail estimate"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "One exhaustion member is selected from an explicitly given natural sequence after convergence, requiring no Choice"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The lemma is an estimate, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-continuity-of-dominated-parameter-dependent-improper-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
+          "source_section": "Statement",
+          "quote": "An integrable dominator gives one compact Jordan core outside which every dominated slice has uniformly small integral.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Then $f$ is uniformly continuous",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "tails",
+          "claim": "Fix t0 and choose a local integrable dominator and compact core making both tails small.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "local domination"
+          ]
+        },
+        {
+          "id": "core-continuity",
+          "claim": "Uniform continuity on the compact core times a closed parameter neighborhood makes the core-integral difference small.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "thm-multidimensional-integral-properties"
+          ]
+        },
+        {
+          "id": "combine",
+          "claim": "Split F(t)-F(t0) into the two tails and compact-core difference.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "triangle inequality"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For an empty domain F is identically zero"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A zero dominator makes all local slices zero off the fixed core and the proof still works"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A singleton parameter neighborhood makes continuity vacuous and satisfies the estimates"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Possible unbounded domains are isolated entirely in the tail estimate"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At a parameter-set endpoint use a relative one-sided neighborhood; the same estimate proves relative continuity"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The compact core and parameter neighborhood are supplied explicitly by local hypotheses and finite compactness"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "Continuity is not stated as an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-differentiation-under-dominated-improper-multiple-integrals": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-mean-value-theorem",
+          "source_section": "Statement",
+          "quote": "Then there is $c \\in (a,b)$ with",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
+          "source_section": "Statement",
+          "quote": "An integrable dominator gives one compact Jordan core outside which every dominated slice has uniformly small integral.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-continuity-of-dominated-parameter-dependent-improper-integrals",
+          "source_section": "Statement",
+          "quote": "A locally dominated parameter-dependent improper multiple integral is continuous in the parameter.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "slice-integrability",
+          "claim": "Pointwise MVT bounds |f(x,t)-f(x,t0)| by |t-t0|g(x), so one integrable slice gives all nearby slices.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "comparison theorem"
+          ]
+        },
+        {
+          "id": "quotients",
+          "claim": "The same MVT dominates difference quotients by g; on a compact core uniform continuity of the derivative gives uniform quotient convergence.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "thm-heine-cantor-metric"
+          ]
+        },
+        {
+          "id": "pass-limit",
+          "claim": "Split quotient-integral error into compact-core error and two uniformly small tails.",
+          "step": "2.2",
+          "inputs": [
+            "2.1",
+            "L2",
+            "integral absolute-value estimate"
+          ]
+        },
+        {
+          "id": "C1",
+          "claim": "Apply the continuity theorem to the derivative integrand to make the resulting derivative continuous.",
+          "step": "3.1",
+          "inputs": [
+            "2.2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "On an empty domain F and its derivative integral are both zero"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At increment h=0 no quotient is formed; the limit uses h!=0 and tends to zero"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-point parameter interval has no interior derivative claim"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Unbounded and punctured domains are handled by the integrable dominator tails"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Interior parameters get two-sided derivatives; interval endpoints receive only the stated relative one-sided conclusion if included"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "MVT points depend on x but are used existentially pointwise; no simultaneous choice function is formed"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem gives a sufficient condition, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No converse differentiation criterion is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-gaussian-integral-is-finite-and-positive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$1+x\\le\\exp(x).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-improper-p-test-rational",
+          "source_section": "Statement",
+          "quote": "$$\\int_1^\\infty x^{-p}\\,dx\\ \\text{converges exactly when }p>1,$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "tails",
+          "claim": "For |x|>=1, derive e^{-x^2}<=x^{-2} and apply comparison to both tails.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "thm-comparison-test-for-improper-integrals"
+          ]
+        },
+        {
+          "id": "middle-positive",
+          "claim": "On [-1,1], monotonicity gives e^{-x^2}>=e^{-1}>0, so the middle integral is positive.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "thm-exponential-is-strictly-increasing",
+            "lem-integral-elementary-bounds"
+          ]
+        },
+        {
+          "id": "combine",
+          "claim": "The two convergent tails and proper middle interval define a finite positive mixed improper integral.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "def-mixed-improper-integral"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The integration domain R is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "x=0 lies in the proper middle interval and e^0=1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The comparison begins at |x|=1, where both bounds are finite"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both infinite ends are required separately by the mixed-improper definition"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The split endpoints -1 and 1 are proper and changing them does not alter convergence"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No choices are made"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The lemma asserts existence and positivity, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-gaussian-square-is-the-plane-gaussian-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-riemann-integral-of-a-product-function",
+          "source_section": "Statement",
+          "quote": "$$\\int_{A\\times B}f=\\left(\\int_Aa\\right)\\left(\\int_Bb\\right).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "source_section": "Statement",
+          "quote": "Every compact Jordan exhaustion computes the nonnegative improper integral, independently of the exhaustion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-gaussian-integral-is-finite-and-positive",
+          "source_section": "Statement",
+          "quote": "The integral $I=\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx$ exists as a finite positive real number.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "truncated-product",
+          "claim": "On [-R,R]^2 factor the exponential and apply product Fubini.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-exponential-addition-formula"
+          ]
+        },
+        {
+          "id": "limits",
+          "claim": "Let R=n+1; squares exhaust the plane, their integrals converge to the plane integral, and the one-dimensional factors converge to I.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "square-limit",
+          "claim": "Continuity of multiplication gives the identity plane integral=I^2.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "algebra of limits"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "Every truncation square and the plane are nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The sequence uses R=n+1, so its first radius is 1 rather than 0"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first truncation R=1 is a proper nondegenerate square"
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "evidence": "The Gaussian is continuous and no singular parameter occurs"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both coordinate endpoints are included in every proper square integral"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The exhaustion is explicit"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The lemma is an equality, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-plane-gaussian-integral-in-polar-coordinates": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-change-of-variables-for-compact-jordan-sets",
+          "source_section": "Statement",
+          "quote": "When either condition holds,\n$$\\int_{g(K)}f(y)\\,dy=\\int_K f(g(x))|\\det Dg(x)|\\,dx.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-polar-form-with-unique-principal-argument",
+          "source_section": "Statement",
+          "quote": "Every $z\\ne0$ has a unique representation $z=r(\\cos\\theta+i\\sin\\theta)$ with $r=|z|>0$ and $-\\pi<\\theta\\le\\pi$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "In particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "source_section": "Statement",
+          "quote": "Every compact Jordan exhaustion computes the nonnegative improper integral, independently of the exhaustion.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "polar-truncation",
+          "claim": "On epsilon<=r<=R and -pi+delta<=theta<=pi, principal polar form gives injectivity and the Jacobian is r.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "trigonometric derivatives"
+          ]
+        },
+        {
+          "id": "evaluate",
+          "claim": "Change variables and integrate r e^{-r^2} to obtain the angular length times one half of e^{-epsilon^2}-e^{-R^2}.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L3",
+            "thm-ftc-second-part",
+            "lem-integral-elementary-bounds"
+          ]
+        },
+        {
+          "id": "exhaust-punctured-plane",
+          "claim": "Send delta and epsilon to zero and R to infinity along a nested compact Jordan exhaustion of R^2 minus the origin.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L4",
+            "thm-exponential-limits-and-range"
+          ]
+        },
+        {
+          "id": "restore-origin",
+          "claim": "A singleton has content zero, so inserting the origin changes no compact Riemann integral; the value is pi.",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "def-null-and-content-zero-in-rn",
+            "Darboux estimate"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The plane and punctured plane are nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The origin is excluded before polar change of variables and restored by the content-zero argument in step 4.1"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Unit radius is an ordinary member of the radial truncations"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The singular polar radius and full-period seam are removed before applying L1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Angular seam endpoints are separated by delta>0; their limit is handled only after proper integration"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The truncation parameters are explicit natural sequences"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The lemma is an equality, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-gaussian-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-gaussian-integral-is-finite-and-positive",
+          "source_section": "Statement",
+          "quote": "The integral $I=\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx$ exists as a finite positive real number.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-gaussian-square-is-the-plane-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$I^2=\\int_{\\mathbb R^2}e^{-(x^2+y^2)}\\,d(x,y).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-plane-gaussian-integral-in-polar-coordinates",
+          "source_section": "Statement",
+          "quote": "$$\\int_{\\mathbb R^2}e^{-(x^2+y^2)}\\,d(x,y)=\\pi.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+        "quote": "$s^2 = a$;",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "square-value",
+          "claim": "Let I be the finite positive integral; L2 and L3 give I^2=pi.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "positive-root",
+          "claim": "Uniqueness of the nonnegative square root gives I=sqrt(pi).",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The real-line domain is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The integrand value at zero is one and causes no singularity"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "No one-index boundary occurs"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both improper tails converge separately by L1"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Infinite endpoints are treated by the mixed improper definition before squaring"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No square-root sign choice remains because I>0 and L4 gives uniqueness"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The theorem is a value formula, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-unequal-iterated-improper-integrals-on-the-unit-square": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-principal-inverse-tangent-calculus",
+          "source_section": "Statement",
+          "quote": "$$\\frac{d}{dx}\\arctan x=\\frac1{1+x^2},\\qquad \\arctan x=\\int_0^x\\frac{dt}{1+t^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+        "source": "def-improper-multiple-integral-and-absolute-convergence",
+        "source_section": "Definition",
+          "quote": "A locally Riemann-integrable signed function is improperly integrable precisely when the nonnegative improper integral of its absolute value is finite.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "inner-antiderivatives",
+          "claim": "Identify f as d/dy[y/(x^2+y^2)] and as -d/dx[x/(x^2+y^2)].",
+          "step": "1.1",
+          "inputs": [
+            "calculus algebra"
+          ]
+        },
+        {
+          "id": "iterated-values",
+          "claim": "Evaluate the two inner integrals and use arctan(1)=pi/4 to get pi/4 and -pi/4.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "exhaustions",
+          "claim": "For lower rectangle endpoints a,b, compute the integral and choose a/b tending to zero or infinity, producing two different exhaustion limits.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "definition of Jordan exhaustion",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The open unit square is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The singular corner (0,0) is outside the domain but is approached by the exhaustions"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Upper endpoints tending to one are proper and do not affect the singular behavior"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The only degeneracy is the omitted corner; every compact truncation stays away from it"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both lower endpoints tend to zero and upper endpoints tend to one in step 3.1"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "Both exhaustions are explicit sequences"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The example refutes existence; it does not assert an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-zero-iterated-integrals-without-a-double-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+        "source": "def-sections-and-iterated-riemann-integrals",
+        "source_section": "Definition",
+          "quote": "For $x\\in A$ and $y\\in B$, the **sections** of $f$ are",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-multidimensional-riemann-criterion",
+          "source_section": "Statement",
+        "quote": "$U(f,P)-L(f,P)<\\varepsilon$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-q-and-irrationals-dense-r",
+          "source_section": "Statement",
+        "quote": "$X$ is dense in $\\mathbb{R}$;",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "sections",
+          "claim": "Each fixed coordinate belongs to at most one prime grid, so every horizontal and vertical section of E is finite and integrates to zero.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "prime denominator arithmetic"
+          ]
+        },
+        {
+          "id": "density",
+          "claim": "Arbitrarily large primes make E dense, while an irrational first coordinate gives a complement point in every open rectangle.",
+          "step": "2.1",
+          "inputs": [
+            "thm-euclid-infinitude-of-primes",
+            "thm-of-archimedean",
+            "L3"
+          ]
+        },
+        {
+          "id": "nonintegrability",
+          "claim": "Every grid cell has infimum zero and supremum one, so every Darboux gap is one and L2 rules out a double integral.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "refute",
+          "claim": "Both iterated integrals are zero by step 1.1 although the double integral fails by step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The unit square is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Boundary coordinates zero and one have empty sections because 1<=k,l<p"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first admissible prime p=2 gives a finite one-point grid and causes no exception"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No section becomes infinite; reduced prime denominators are unique"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All square boundary sections are explicitly zero and hence integrable"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No prime is chosen simultaneously for infinitely many cells; density fixes one rectangle and then uses an existential larger prime"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The item refutes a sufficient-condition claim, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-differentiation-under-an-improper-integral-without-domination": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "source_section": "Statement",
+          "quote": "The parameter derivative may be passed through the improper multiple integral under an integrable uniform derivative bound.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-substitution-for-improper-integrals",
+          "source_section": "Statement",
+          "quote": "If $f$ is locally Riemann integrable on $J$, then",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "integral",
+          "claim": "For t!=0 substitute u=t^2 x to get integral t; at t=0 the integrand is identically zero, so F(t)=t.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "exponential tail"
+          ]
+        },
+        {
+          "id": "pointwise-derivative",
+          "claim": "Differentiate f and evaluate at t=0 to obtain partial_t f(x,0)=0 for every x.",
+          "step": "2.1",
+          "inputs": [
+            "thm-derivative-of-exponential",
+            "algebra"
+          ]
+        },
+        {
+          "id": "failure",
+          "claim": "F'(0)=1 but the integral of the pointwise derivative is zero, so the conclusion of L1 fails and its domination hypothesis cannot hold.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The integration half-line is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The parameter t=0 is the exact failure point and is evaluated separately"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "No one-index boundary occurs"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The substitution is used only for t!=0, avoiding its degenerate scale at t=0"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The infinite endpoint converges for each t!=0 and the t=0 slice is proper zero on every truncation"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "No choice is made"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The item refutes sufficiency without a hypothesis, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-scaled-gaussian-parameter-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-gaussian-integral",
+          "source_section": "Statement",
+          "quote": "$$\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt\\pi.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "source_section": "Statement",
+          "quote": "The parameter derivative may be passed through the improper multiple integral under an integrable uniform derivative bound.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "scale",
+          "claim": "For a>0 substitute u=sqrt(a)x and apply the Gaussian value to get F(a)=sqrt(pi/a).",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "thm-substitution-for-improper-integrals"
+          ]
+        },
+        {
+          "id": "dominate",
+          "claim": "Near fixed a0>0, dominate x^2 e^{-a x^2} by an integrable Gaussian-polynomial tail and apply differentiation under the sign.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "thm-exponential-beats-every-polynomial"
+          ]
+        },
+        {
+          "id": "derivative",
+          "claim": "Differentiate sqrt(pi)a^{-1/2} to obtain -sqrt(pi)/(2a^{3/2}) and identify the second-moment integral.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "evidence": "The real-line integration domain is nonempty"
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The parameter hypothesis a>0 excludes the nonintegrable a=0 boundary"
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At a=1 the formula reduces exactly to the Gaussian theorem"
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "As a approaches zero no uniform neighborhood crossing zero is used"
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Differentiation is proved at interior points of (0,infinity), not at the excluded endpoint"
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "evidence": "The local interval around a0 is chosen explicitly inside the positive half-line"
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "evidence": "The example gives formulas, not an iff"
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "evidence": "No reverse implication is asserted"
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}
