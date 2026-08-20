@@ -2,7 +2,7 @@
 
 ## Scope and owned artifacts
 
-This batch owns `the-seifert-van-kampen-theorem` at order 297, its companion at order 298, `classification-of-covering-spaces` at order 299, and its companion at order 300. The manifest contains 15 A-page items and 5 companion items for the van Kampen pair, followed by 13 A-page items and 3 companion items for covering classification. Neither A page approaches the 60-item ceiling, so no split is proposed.
+This batch owns `the-seifert-van-kampen-theorem` at order 297, its companion at order 298, `classification-of-covering-spaces` at order 299, and its companion at order 300. The manifest contains 15 A-page items and 5 companion items for the van Kampen pair, followed by 16 A-page items and 3 companion items for covering classification. Neither A page approaches the 60-item ceiling, so no split is proposed.
 
 The four batch artifacts are:
 
@@ -251,6 +251,10 @@ item in new content.
 
 If declined, the classification would unnecessarily reprove an exact eligible result or reach for its B-page predecessor.
 
+### Amendment HT6-6 — retain the compact local-homeomorphism criterion harvested from May
+
+Recommendation: approve. May Chapter 3, Problem 4 supplies a useful positive companion to the already-published counterexample showing that a surjective local homeomorphism need not be a covering. Add `def-local-homeomorphism`, `lem-compact-local-homeomorphism-surjective-with-finite-fibres`, and `prop-compact-local-homeomorphism-is-finite-covering` before the subgroup classification. The lemma separates the open-and-closed image and compact-discrete fibre argument; the proposition uses finite Hausdorff separation and removes the compact image of the complement to build one evenly covered neighbourhood. If declined, a source result with a closed proof is omitted and the library retains only the negative half of the compactness boundary.
+
 ## Planned page summaries for Step 5
 
 ### `the-seifert-van-kampen-theorem`
@@ -263,7 +267,7 @@ Loop subdivision first proves that two path-connected open sets generate the fun
 
 Covering-space lifting supplies unique path and map lifts, injects fundamental groups, and equips each fibre with a right monodromy action. The prerequisite development also constructs universal covers for nonempty path-connected, locally path-connected, semilocally simply connected bases and identifies their deck groups with the base fundamental group under traversal-order multiplication. Subgroup index already measures the number of sheets.
 
-The lifting criterion first characterizes morphisms between connected coverings. Quotients of a universal cover then realize every subgroup, while changing the point over the basepoint produces conjugation, giving the based and unbased classification theorems. Regular coverings are defined through transitivity of deck transformations on fibres; basepoint conjugacy identifies regularity with normality, and the deck group becomes a normalizer quotient. The circle specialization classifies connected covers by the subgroups $n\mathbb Z$ and computes their regularity and deck groups.
+Local homeomorphisms are defined first, and compactness plus Hausdorff separation gives a finite-sheeted covering criterion. The lifting criterion then characterizes morphisms between connected coverings. Quotients of a universal cover realize every subgroup, while changing the point over the basepoint produces conjugation, giving the based and unbased classification theorems. Regular coverings are defined through transitivity of deck transformations on fibres; basepoint conjugacy identifies regularity with normality, and the deck group becomes a normalizer quotient. The circle specialization classifies connected covers by the subgroups $n\mathbb Z$ and computes their regularity and deck groups.
 
 ## Per-page item lists
 
@@ -293,21 +297,24 @@ The lifting criterion first characterizes morphisms between connected coverings.
 4. `fs-every-fundamental-group-is-abelian` — false statement — Every fundamental group is abelian
 5. `fs-van-kampen-with-disconnected-intersection` — false statement — The two-set conclusion needs no path-connectedness hypothesis on the overlap
 
-### `classification-of-covering-spaces` — 13 items
+### `classification-of-covering-spaces` — 16 items
 
-1. `prop-covering-morphism-subgroup-criterion` — proposition — A based morphism between connected coverings exists exactly when the induced subgroups are included
-2. `cor-based-connected-coverings-isomorphic-iff-equal-subgroups` — corollary — Based connected coverings are isomorphic exactly when their induced subgroups are equal
-3. `lem-subgroup-quotient-of-universal-cover` — lemma — Every subgroup acts on the universal cover with a connected quotient covering that realizes it
-4. `lem-covering-basepoint-change-conjugates-subgroup` — lemma — Changing the point over a fixed basepoint conjugates the induced covering subgroup
-5. `thm-classification-of-connected-covering-spaces` — theorem — Connected covering spaces are classified by conjugacy classes of fundamental-group subgroups
-6. `def-regular-covering` — definition — Regular coverings
-7. `lem-deck-transformations-correspond-to-normalizer-cosets` — lemma — Deck transformations correspond to cosets in the subgroup normalizer
-8. `thm-deck-group-as-normalizer-quotient` — theorem — $\operatorname{Deck}(E/B)\cong N_G(H)/H$
-9. `thm-regular-covering-characterizations` — theorem — Regularity, subgroup normality, and deck transitivity are equivalent
-10. `cor-deck-group-of-a-regular-covering` — corollary — A regular connected covering has deck group $G/H$
-11. `cor-real-line-is-universal-cover-of-circle` — corollary — $\mathbb R\to\mathbb R/\mathbb Z$ is a universal covering
-12. `cor-connected-coverings-of-circle-classified-by-nonnegative-integers` — corollary — Connected circle coverings are classified by $n\mathbb Z$, $n\ge0$
-13. `cor-every-connected-covering-of-circle-is-regular` — corollary — Every connected covering of the circle is regular
+1. `def-local-homeomorphism` — definition — Local homeomorphisms
+2. `lem-compact-local-homeomorphism-surjective-with-finite-fibres` — lemma — A compact local homeomorphism has surjective image and finite fibres under the stated connected Hausdorff hypotheses
+3. `prop-compact-local-homeomorphism-is-finite-covering` — proposition — A compact Hausdorff local homeomorphism over a connected Hausdorff target is a finite-sheeted covering
+4. `prop-covering-morphism-subgroup-criterion` — proposition — A based morphism between connected coverings exists exactly when the induced subgroups are included
+5. `cor-based-connected-coverings-isomorphic-iff-equal-subgroups` — corollary — Based connected coverings are isomorphic exactly when their induced subgroups are equal
+6. `lem-subgroup-quotient-of-universal-cover` — lemma — Every subgroup acts on the universal cover with a connected quotient covering that realizes it
+7. `lem-covering-basepoint-change-conjugates-subgroup` — lemma — Changing the point over a fixed basepoint conjugates the induced covering subgroup
+8. `thm-classification-of-connected-covering-spaces` — theorem — Connected covering spaces are classified by conjugacy classes of fundamental-group subgroups
+9. `def-regular-covering` — definition — Regular coverings
+10. `lem-deck-transformations-correspond-to-normalizer-cosets` — lemma — Deck transformations correspond to cosets in the subgroup normalizer
+11. `thm-deck-group-as-normalizer-quotient` — theorem — $\operatorname{Deck}(E/B)\cong N_G(H)/H$
+12. `thm-regular-covering-characterizations` — theorem — Regularity, subgroup normality, and deck transitivity are equivalent
+13. `cor-deck-group-of-a-regular-covering` — corollary — A regular connected covering has deck group $G/H$
+14. `cor-real-line-is-universal-cover-of-circle` — corollary — $\mathbb R\to\mathbb R/\mathbb Z$ is a universal covering
+15. `cor-connected-coverings-of-circle-classified-by-nonnegative-integers` — corollary — Connected circle coverings are classified by $n\mathbb Z$, $n\ge0$
+16. `cor-every-connected-covering-of-circle-is-regular` — corollary — Every connected covering of the circle is regular
 
 ### `classification-of-covering-spaces-examples` — 3 items
 
@@ -325,7 +332,7 @@ The corollary pass added `cor-seifert-van-kampen-simply-connected-overlap`, the 
 
 ### Covering-classification pair
 
-The classification proof is decomposed into the morphism criterion, based-isomorphism corollary, subgroup quotient of the universal cover, and basepoint-conjugacy lemma before the main theorem. The deck-group proof is decomposed through `lem-deck-transformations-correspond-to-normalizer-cosets` before the first-isomorphism-theorem quotient. The regularity theorem remains separate from that quotient because it proves a three-way equivalence rather than a formula.
+The compact local-homeomorphism criterion is decomposed into the open-and-closed image plus compact-discrete fibre lemma before the evenly-covered-neighbourhood proposition. The classification proof is decomposed into the morphism criterion, based-isomorphism corollary, subgroup quotient of the universal cover, and basepoint-conjugacy lemma before the main theorem. The deck-group proof is decomposed through `lem-deck-transformations-correspond-to-normalizer-cosets` before the first-isomorphism-theorem quotient. The regularity theorem remains separate from that quotient because it proves a three-way equivalence rather than a formula.
 
 The corollary pass added the regular-cover deck quotient, the universal real-line cover, the nonnegative-integer classification of connected circle covers, and regularity of every connected circle cover. The companion turns subgroup inclusion into divisibility, computes circle-cover deck groups, and supplies the promised regular/nonregular contrast at equal sheet number. I performed both passes. No split is needed.
 
@@ -362,6 +369,9 @@ Abbreviations below are `LD` = `literature-derived`, `AA` = `ai-altered`, `AG` =
 
 | item | statement / proof | rationale and Step-5 reference URL |
 |---|---|---|
+| `def-local-homeomorphism` | LD / NA | May Chapter 3 §8 problem preamble gives the exact local homeomorphism definition. May URL. |
+| `lem-compact-local-homeomorphism-surjective-with-finite-fibres` | AA / AA | Proof-decomposition lemma extracted from May Problem 4: clopen image plus compact discrete fibres. May URL. |
+| `prop-compact-local-homeomorphism-is-finite-covering` | LD / AA | May Chapter 3, Problem 4; proof expands the compact-complement construction explicitly. May URL. |
 | `prop-covering-morphism-subgroup-criterion` | LD / AA | May Chapter 3 §7 and Hatcher Proposition 1.37 route; includes May's lemma that the morphism is a covering. Hatcher and May URLs. |
 | `cor-based-connected-coverings-isomorphic-iff-equal-subgroups` | LD / AA | Hatcher Proposition 1.37; proof uses two lifts and their unique composites. Hatcher URL. |
 | `lem-subgroup-quotient-of-universal-cover` | LD / AA | Hatcher Proposition 1.36 and May Chapter 3 §8; quotient route reuses the published universal cover. Hatcher and May URLs. |
@@ -412,7 +422,7 @@ Every direct external dependency in the final manifest was opened from `items/` 
 
 The AI-altered load-bearing targets whose exact conventions mattered were source-checked rather than auto-trusted: `thm-lebesgue-number-lemma` against Hatcher's subdivision route; `def-path-connected`, `lem-punctured-rn-is-polygonally-connected`, and the Euclidean continuity items against the explicit stereographic formulas; `def-quotient-topology` and the wedge quotient against Hatcher/May; `lem-subgroups-of-z-are-cyclic` against its full on-disk proof and the classical least-positive-element argument; `thm-normal-subgroup-characterisations` and `cor-subgroups-of-abelian-groups-are-normal` against the normalizer sources; and `prop-integers-modulo-n-as-a-quotient-group` against its exact $n=0,1$ clauses. No published load-bearing falsehood was found.
 
-The proof-contract source clauses were checked mechanically against all 67 citations to already-published items: every recorded quote occurs in the exact cited section. Planned-to-planned citations carry the exact Statement sentence the Step-5 author must preserve.
+The proof-contract source clauses were checked mechanically against all 82 citations to already-published items: every recorded quote occurs in the exact cited section. Planned-to-planned citations carry the exact Statement sentence the Step-5 author must preserve.
 
 ## Forward references and cross-batch dependencies
 
@@ -422,7 +432,7 @@ This batch needs no item from another `frontier-16` batch, and the current manif
 
 ## New-id search
 
-I ran an exact fixed-string search for every proposed id across `items/` and `research/plan-spec.json` after finalizing the manifest. It checked 36 ids and found 0 pre-existing hits. The search deliberately excluded this batch manifest itself. No immutable id is re-used or re-homed.
+I ran an exact fixed-string search for every proposed id across `items/` and `research/plan-spec.json` after finalizing the manifest. It checked 39 ids and found 0 pre-existing hits. The search deliberately excluded this batch manifest itself. No immutable id is re-used or re-homed.
 
 ## Findings for Step-3 Alpha, ordered by severity
 
@@ -433,12 +443,13 @@ I ran an exact fixed-string search for every proposed id across `items/` and `re
 5. **Approve the published no-reversal monodromy convention.** Declining reverses multiplication in subgroup actions and the normalizer map relative to the actual dependency.
 6. **Approve the harvested one-simply-connected-set corollary.** It is a named source result with a short closed proof. Declining makes the source harvest unnecessarily thin.
 7. **Approve direct inline construction of the two-basepoint witness.** The general published item is a later B leaf and cannot be cited. Declining loses a promised example or forces an illegal dependency.
-8. **Approve deferral of full disconnected-cover/category equivalence.** Its formal category interfaces are planned after order 299; connected classification remains complete and source-backed. Declining would require a forward load-bearing dependency or duplicate category definitions.
-9. **Approve the official full-book URL substitutions used for durable fetch verification.** They are the same Hatcher and May editions and preserve every locator; completed-run stamps already bind their full bodies and hashes. Declining would restore unstamped URL variants without changing any mathematics.
+8. **Approve the compact local-homeomorphism definition, decomposition lemma, and finite-covering proposition.** May's problem closes from published compactness and Hausdorff results and supplies the positive boundary missing beside the published counterexample. Declining omits harvested content without a dependency obstacle.
+9. **Approve deferral of full disconnected-cover/category equivalence.** Its formal category interfaces are planned after order 299; connected classification remains complete and source-backed. Declining would require a forward load-bearing dependency or duplicate category definitions.
+10. **Approve the official full-book URL substitutions used for durable fetch verification.** They are the same Hatcher and May editions and preserve every locator; completed-run stamps already bind their full bodies and hashes. Declining would restore unstamped URL variants without changing any mathematics.
 
 ## Gate and confidence statement
 
-`content-policy.mjs --manifest-only` ran on the final manifest: 36 scoped items, 0 errors, 0 warnings. JSON parsing and proof-contract scope checks are clean: 33 proof-bearing items and 33 contracts, each with all eight boundary dispositions; all 67 published-source clauses in the contracts are exact section matches. `source-fetch-check` reports 4/4 verified sources. The coverage checklist reports 0 errors and two expected low-yield warnings, which correspond to explicitly resolved cell-complex, surface, category, and groupoid declines. `prosecheck --warnings` reports 0 errors and four count warnings, all from the four item-count headings required by this dispatch; it reports no positional contradiction. `git diff --check` is clean. `validate-plan.mjs` and `depsource.mjs` were not run against a spliced spec, because Step 4 has not occurred; I do not claim those gates passed.
+`content-policy.mjs --manifest-only` ran on the final manifest: 39 scoped items, 0 errors, 0 warnings. JSON parsing and proof-contract scope checks are clean: 35 proof-bearing items and 35 contracts, each with all eight boundary dispositions; all 93 published-source clauses in the contracts are exact section matches. `source-fetch-check` reports 4/4 verified sources. The coverage checklist reports 0 errors and two expected low-yield warnings, which correspond to explicitly resolved cell-complex, surface, category, and groupoid declines. `prosecheck --warnings` reports 0 errors; its count warnings come only from the item-count headings required by this dispatch, and it reports no positional contradiction. `git diff --check` is clean. `validate-plan.mjs` and `depsource.mjs` were not run against a spliced spec, because Step 4 has not occurred; I do not claim those gates passed.
 
 Confidence is high on the mathematical statements, pushout convention, subgroup conjugacy direction, right-monodromy multiplication, source coverage, and boundary cases. I verified every direct published dependency's statement and provenance, but did not re-audit every published dependency proof. I did not verify the planned later differential-geometry consumers mentioned by the stale stable-interface prose because no current plan item cites those ids. All required source bodies carry current durable fetch stamps.
 
@@ -448,4 +459,4 @@ Confidence is high on the mathematical statements, pushout convention, subgroup 
 - Owned paths: `research/frontier-16-batch-6.pages.json`, `.coverage.json`, `.proof-contracts.json`, and `.notes.md`.
 - Completed checks: all normative docs and exemplars read; both design sections checked against the spec; Hatcher and May harvested independently; every direct published dependency opened; new-id search clean; proof obligations and all boundary cases encoded; manifest-only content policy clean; source fetch check reports 4/4 verified; coverage, prose, JSON, exact-clause, and diff checks complete.
 - Open constraint: none mathematical; authoritative plan validation waits for the Step-4 splice.
-- Exact next action: Step-3 Alpha reads all four artifacts, adjudicates the nine findings, and verifies the two low-yield warning sets against the harvested source headings.
+- Exact next action: Step-3 Alpha reads all four artifacts, adjudicates the ten findings, and verifies the two low-yield warning sets against the harvested source headings.

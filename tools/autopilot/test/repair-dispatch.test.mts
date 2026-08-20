@@ -17,7 +17,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { stages } from '../stages/mathlib.mts';
+import { stages, dispatchSourceScouts } from '../stages/mathlib.mts';
 import { Executor } from '../src/executor.mts';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
@@ -245,5 +245,53 @@ test('the mechanical branch still short-circuits the Beta fan-out', async () => 
     failure: { id: 'url-liveness', why: '' },
   });
   assert.equal(started.length, 0, 'a mechanical repair must not fan out Betas');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+// A URL-LIVENESS FAILURE MUST BE ROUTABLE. On frontier-16 the stage-1 sweep
+// failed on a CiteSeerX citation whose host sends an incomplete certificate
+// chain; `url-recover-apply` found no snapshot and reported
+// `ERROR recover-apply-unrecoverable: <url>`. The router read only
+// `source-fetch-check`'s `fetch-check-*: <page>:` format, found no page,
+// returned false, and the stage threw — burning a repair round and heading for
+// a blocker that needs a person, for the exact case `beta-source-scout` exists
+// to answer. The URL is in the coverage files; mapping it to a batch is
+// mechanical.
+test('a url-recover-apply failure routes a scout to the batch that cites the URL', () => {
+  const repo = fixtureRepo();
+  const url = 'https://example.edu/document?doi=abc&repid=rep1&type=pdf';
+  writeFileSync(join(repo, 'research', 'demo-batch-4.pages.json'), '[]');
+  writeFileSync(join(repo, 'research', 'demo-batch-4.coverage.json'), JSON.stringify({
+    pages: [{ page: 'oscillatory-examples', sources: [{ url, kind: 'monograph', title: 'A Monograph', contents: [] }] }],
+  }));
+  writeFileSync(join(repo, 'research', 'demo-scope-ledger.json'), JSON.stringify({
+    run: 'demo', pages: [{ id: 'oscillatory-examples', kind: 'A', batch: '4' }],
+  }));
+  const started: any[] = [];
+  const executor = { start: (_s: any, p: any) => started.push(p) };
+  const s1: any = stages.find((s: any) => s.id === '1-scaffold');
+  // HTML-escaped, as the blocker message carries it — the raw report is not.
+  const stderr = `ERROR recover-apply-unrecoverable: ${url.replace(/&/g, '&amp;')}`;
+  const routed = dispatchSourceScouts({ ctx: { run: 'demo', repo }, executor, stage: s1, round: 1, stderr });
+  assert.equal(routed, true, 'the scout could not be routed — the stage would throw');
+  assert.equal(started.length, 1);
+  assert.deepEqual(started[0].covers, ['4']);
+  assert.equal(started[0].job, 'scouting');
+  assert.match(started[0].task[0], /beta-source-scout\.task\.md$/);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('a stderr naming no known URL and no page still refuses to guess', () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-batch-4.pages.json'), '[]');
+  writeFileSync(join(repo, 'research', 'demo-batch-4.coverage.json'), JSON.stringify({ pages: [] }));
+  writeFileSync(join(repo, 'research', 'demo-scope-ledger.json'), JSON.stringify({ run: 'demo', pages: [] }));
+  const executor = { start: () => { throw new Error('must not dispatch'); } };
+  const s1: any = stages.find((s: any) => s.id === '1-scaffold');
+  const routed = dispatchSourceScouts({
+    ctx: { run: 'demo', repo }, executor, stage: s1, round: 1,
+    stderr: 'ERROR something-else: https://unknown.example/never-cited.pdf',
+  });
+  assert.equal(routed, false, 'an unmappable failure must stay a blocker, not pick a batch');
   rmSync(repo, { recursive: true, force: true });
 });

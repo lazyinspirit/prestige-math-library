@@ -588,3 +588,21 @@ Mathematical confidence is high. I checked the $C^k$ bootstrap base and inductio
 Every published dependency was opened from disk and every direct published contract quote was checked as an exact source substring. Every load-bearing dependency is internal to the pair or available in published content on an actual earlier page. There is no exception, cross-batch input, external fallback, or AI-generated dependency target.
 
 What was not verified: `validate-plan` and `depsource` cannot authoritatively classify these new edges until Step 4 splices the manifests into `research/plan-spec.json`; the proof-contract strict gate cannot read numbered steps or same-batch quote text until Step 5 creates the items. The source-fetch stamp remains blocked by local DNS. No Step-6 independent reader, Alpha audit, Step-7 judge, publication, or status change has occurred.
+
+## Final Step-2 checks
+
+At the close of this scaffold pass:
+
+- `coverage-checklist --require-destination` reports 2 pages, 85 harvested headings, 0 errors, and 1 low-yield advisory. The advisory is explained under “Canonical coverage yield.”
+- `content-policy --manifest-only` reports 68 scoped items, 0 errors, and 0 warnings.
+- The manifest parses as 16/10 items for the inverse-function pair and 29/13 for the convex/semicontinuity pair. Every internal dependency is earlier on the same page or on a smaller-order page in this batch.
+- The actual library-page home audit resolves all 86 external dependency ids to published pages of smaller order. No dependency id is missing.
+- The proof-contract artifact parses as 59 scoped proof-bearing items and 59 contracts. Every contract has citations, an exact numbered-step input map, all eight boundary dispositions, and a `finite_smoke` array. No registered finite-smoke model applies to these real-analysis claims.
+- The citation overlay reports 50 exact quotes to published source sections and 58 same-batch quotes bound to Step-5 clauses, with 0 missing quotes and 0 undeclared citation sources.
+- The exact fixed-string collision scan over `items/` and `research/plan-spec.json` reports all 68 final ids new. The semantic scan found and reused the published items recorded in the new-id report.
+- `prosecheck --warnings` reports 0 errors and 13 count heuristics, all in this required audit report; it reports no positional contradiction. The A-page summary text itself contains no count, rank, survey, or reading-position claim.
+- The notation scan finds no applied canonical embedding in any owned artifact.
+- `git diff --check` reports no whitespace error.
+- `source-fetch-check --stamp` was run twice. Both runs report 0/5 stamped and the same `EAI_AGAIN` DNS failure for every source. This gate did not pass, and the batch must not advance on a claim that it did.
+
+No mathematical, dependency, id-collision, size, cross-batch, external-fallback, or published-falsehood blocker remains. The sole blocker is the source-fetch stamp, which requires the engine to retry the exact command in an environment with DNS access; no permission prompt or fabricated stamp is an acceptable substitute.

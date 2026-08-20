@@ -710,7 +710,7 @@
         {"fact": "F1", "source": "def-lipschitz-holder-contraction", "source_section": "Definition", "quote": "$f$ is Lipschitz with constant $L$", "uses": ["3.1"]}
       ],
       "derivations": [
-        {"id": "nested-cubes", "claim": "At a fixed domain point choose nested positive-radius sup-norm cubes with the larger closed cube in the open domain; [L1] gives a common absolute bound on it.", "step": "1.1", "inputs": ["L1", "given"]},
+        {"id": "nested-cubes", "claim": "At a fixed domain point choose a positive-radius full sup-norm cube with closure in the domain. Apply [L1] and use its half-sized cube as the outer Lipschitz cube, where both upper and lower bounds give a common absolute bound; choose a still smaller cube for test points.", "step": "1.1", "inputs": ["L1", "given"]},
         {"id": "secant-bound", "claim": "For distinct $x,y$ in the inner cube, extend the ray from $x$ through $y$ to the outer-cube boundary and solve the convexity inequality for $f(y)-f(x)$; step 1.1 bounds the endpoint values. Reverse $x,y$ for the opposite inequality.", "step": "2.1", "inputs": ["step 1.1", "L1", "algebra"]},
         {"id": "norm-translation", "claim": "The resulting sup-norm difference estimate and the inequality $\\|x-y\\|_\\infty\\le\\|x-y\\|_2$ give [F1] on the inner cube, proving local Lipschitz continuity.", "step": "3.1", "inputs": ["step 2.1", "F1", "algebra"]}
       ],
@@ -851,7 +851,7 @@
         {"case": "one", "status": "checked", "evidence": "Singleton disjoint sets give a one-vector difference set and are separated by step 2.1."},
         {"case": "degenerate", "status": "checked", "evidence": "Intersecting closures and zero distance are handled by the boundary branch in step 2.1."},
         {"case": "endpoints", "status": "checked", "evidence": "Weak equality is allowed on the separating hyperplane in the final inequality of step 2.1."},
-        {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.1 chooses one point from the given nonempty difference set; the separator is then supplied by [L1] or [L2]."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.1 uses [L3]'s declared countable-choice route to represent two fixed closure points by sequences, and otherwise chooses only one point from the nonempty difference set."},
         {"case": "iff-forward", "status": "not_applicable", "reason": "The theorem supplies separation from disjointness, not a biconditional."},
         {"case": "iff-reverse", "status": "not_applicable", "reason": "Weakly separated sets can meet on the hyperplane, so separation does not imply disjointness and no converse is claimed."}
       ],
@@ -1100,10 +1100,12 @@
         {"fact": "L3", "source": "thm-infimum-property", "source_section": "Statement", "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a greatest lower bound in $\\mathbb{R}$", "uses": ["2.1"]},
         {"fact": "L4", "source": "lem-inf-epsilon", "source_section": "Statement", "quote": "\\text{ with } s < \\ell + \\varepsilon.", "uses": ["2.1"]},
         {"fact": "L5", "source": "thm-of-archimedean", "source_section": "Statement", "quote": "for every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$", "uses": ["1.1"]},
-        {"fact": "L6", "source": "cor-archimedean-reciprocal", "source_section": "Statement", "quote": "there is a natural number $n \\ge 1$ such that $$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$", "uses": ["3.1"]}
+        {"fact": "L6", "source": "cor-archimedean-reciprocal", "source_section": "Statement", "quote": "there is a natural number $n \\ge 1$ such that $$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$", "uses": ["3.1"]},
+        {"fact": "L7", "source": "def-metric-compactness", "source_section": "Definition", "quote": "$(X,d)$ is **compact** when every open cover of it has a finite subcover", "uses": ["1.1"]},
+        {"fact": "L8", "source": "lem-finite-set-has-max", "source_section": "Statement", "quote": "the set $\\{a_0, a_1, \\dots, a_n\\}$ has a maximum and a minimum", "uses": ["1.1"]}
       ],
       "derivations": [
-        {"id": "lower-bound", "claim": "The relatively open sets $\\{f>-N\\}$ for positive natural $N$ cover the nonempty compact set because [L5] applies to $-f(x)$. A finite subcover and nesting give one uniform lower bound.", "step": "1.1", "inputs": ["L1", "L5", "given", "algebra"]},
+        {"id": "lower-bound", "claim": "The relatively open sets $\\{f>-N\\}$ for positive natural $N$ cover the nonempty compact set because [L5] applies to $-f(x)$. By [L7] finitely many cover, and [L8] supplies a largest index; nesting then gives one uniform lower bound.", "step": "1.1", "inputs": ["L1", "L5", "L7", "L8", "given", "algebra"]},
         {"id": "nested-sublevels", "claim": "By [L3], $m=\\inf f[K]$ exists after step 1.1. By [L4], each closed set $F_N=K\\cap\\{f\\le m+1/N\\}$ is nonempty, and nesting makes the family have the finite intersection property.", "step": "2.1", "inputs": ["step 1.1", "L1", "L3", "L4", "algebra"]},
         {"id": "attainment-and-dual", "claim": "[L2] gives $x_*$ in every $F_N$; if $f(x_*)>m$, [L6] chooses $N$ with $1/N<f(x_*)-m$, contradicting membership. Thus the minimum is attained. Apply the argument to $-f$ for an upper-semicontinuous maximum.", "step": "3.1", "inputs": ["step 2.1", "L2", "L6", "algebra"]}
       ],

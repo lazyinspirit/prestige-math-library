@@ -369,12 +369,55 @@ const mechanicalRepair = async ({ ctx, failure }: any): Promise<{ outcome: strin
  *  a person when the design routes it to an agent. Parse the failing pages
  *  out of the repair residue, map page -> owning batch via the scope
  *  ledger, one scouting lane per batch. */
-const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: any) => {
-  const pages = [...new Set([...(stderr ?? '').matchAll(/fetch-check-[a-z-]+: ([a-z0-9-]+):/g)].map((m) => m[1]))];
-  if (!pages.length) return false;
+/** Normalised for comparison: the same URL reaches us HTML-escaped in one
+ *  report and raw in another, and error text often carries trailing punctuation. */
+const sameUrl = (a: string, b: string) => {
+  const n = (u: string) => u.replace(/&amp;/g, '&').replace(/[.,;)\]]+$/, '').trim();
+  if (n(a) === n(b)) return true;
+  try {
+    const [x, y] = [new URL(n(a)), new URL(n(b))];
+    return x.host === y.host && x.pathname === y.pathname;
+  } catch { return false; }
+};
+
+export const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: any) => {
+  const text = String(stderr ?? '');
+  const pages = new Set<string>([...text.matchAll(/fetch-check-[a-z-]+: ([a-z0-9-]+):/g)].map((m: any) => m[1]));
+
+  // A URL-LIVENESS FAILURE NAMES A URL, NOT A PAGE, and the router used to read
+  // only `source-fetch-check`'s format. `url-recover-apply` reports
+  // `ERROR recover-apply-unrecoverable: <url>` — recovery works on URLs, so
+  // there is no page id in the line — and the match above produced nothing, so
+  // `dispatchSourceScouts` returned false and the stage THREW. Both repair
+  // rounds burned on that throw and the run raised a blocker needing a person,
+  // for the one case this stage already has an automated answer to: the
+  // `beta-source-scout` task exists precisely to find a live URL for a source
+  // whose citation cannot be fetched, and its own text opens "dead with no
+  // usable archive copy".
+  //
+  // Mapping a URL back to its batch is mechanical and exact — the coverage
+  // files record which page cites which source — so it is code, not judgment.
+  // Which REPLACEMENT to pick stays the scout's judgment, which is the part
+  // that needed an agent all along.
+  const urls = [...new Set([...text.matchAll(/https?:\/\/[^\s"'<>]+/g)].map((m: any) => m[0]))];
+  if (urls.length) {
+    for (const b of batches(ctx)) {
+      const f = join(R(ctx, 'research'), `${ctx.run}-batch-${b}.coverage.json`);
+      if (!existsSync(f)) continue;
+      let cov: any;
+      try { cov = JSON.parse(readFileSync(f, 'utf8')); } catch { continue; }
+      for (const p of cov.pages ?? []) {
+        for (const s of p.sources ?? []) {
+          if (s?.url && urls.some((u: any) => sameUrl(u, s.url))) pages.add(p.page ?? p.id);
+        }
+      }
+    }
+  }
+
+  if (!pages.size) return false;
   const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
   const batchOf = new Map(ledger.pages.map((p: any) => [p.id, String(p.batch)]));
-  const owed = [...new Set(pages.map((p) => batchOf.get(p)).filter(Boolean))];
+  const owed = [...new Set([...pages].map((p) => batchOf.get(p)).filter(Boolean))];
   for (const b of owed) {
     executor.start(stage, {
       role: 'beta',

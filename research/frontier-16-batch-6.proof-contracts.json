@@ -20,6 +20,8 @@
     "ex-fundamental-groups-of-once-and-twice-punctured-two-sphere",
     "fs-every-fundamental-group-is-abelian",
     "fs-van-kampen-with-disconnected-intersection",
+    "lem-compact-local-homeomorphism-surjective-with-finite-fibres",
+    "prop-compact-local-homeomorphism-is-finite-covering",
     "prop-covering-morphism-subgroup-criterion",
     "cor-based-connected-coverings-isomorphic-iff-equal-subgroups",
     "lem-subgroup-quotient-of-universal-cover",
@@ -317,12 +319,13 @@
       "citations": [
         {"fact":"F1","source":"thm-product-universal-property","source_section":"Statement","quote":"h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .","uses":["1.1","2.1"]},
         {"fact":"F2","source":"thm-fundamental-group-laws","source_section":"Statement","quote":"is well defined and makes $\\pi_1(X,x_0)$ a group","uses":["1.2","2.2"]},
-        {"fact":"F3","source":"thm-external-direct-product-is-a-group","source_section":"Statement","quote":"makes $G\\times H$ a group.","uses":["1.2"]}
+        {"fact":"F3","source":"thm-external-direct-product-is-a-group","source_section":"Statement","quote":"makes $G\\times H$ a group.","uses":["1.2"]},
+        {"fact":"F4","source":"def-homotopy-relative-and-path-homotopy","source_section":"Definition","quote":"a **path homotopy from $\\alpha$ to $\\beta$ relative to the endpoints**","uses":["1.1","2.1"]}
       ],
       "derivations": [
-        {"id":"coordinate-map","claim":"Coordinate projections send a product loop class to a pair of loop classes.","step":"1.1","inputs":["F1","def-induced-homomorphism-on-fundamental-groups"]},
+        {"id":"coordinate-map","claim":"Coordinate projections send a product loop class to a pair of loop classes independently of representatives.","step":"1.1","inputs":["F1","F4","def-induced-homomorphism-on-fundamental-groups"]},
         {"id":"homomorphism","claim":"The coordinate map is a well-defined homomorphism to the direct product.","step":"1.2","inputs":["F2","F3","step 1.1"]},
-        {"id":"paired-loop","claim":"A pair of loop classes determines a continuous product loop class independently of representatives.","step":"2.1","inputs":["F1","construct"]},
+        {"id":"paired-loop","claim":"A pair of loop classes determines a continuous product loop class independently of representatives.","step":"2.1","inputs":["F1","F4","construct"]},
         {"id":"inverse","claim":"The coordinate and paired-loop maps are inverse homomorphisms.","step":"2.2","inputs":["F2","step 1.1","step 2.1"]}
       ],
       "routine_steps": [],
@@ -478,6 +481,64 @@
         {"case":"nonempty-choice","status":"not_applicable","evidence":"All interval endpoints and the basepoint are explicit rational numbers."},
         {"case":"iff-forward","status":"not_applicable","evidence":"The false implication is refuted by the circle witness."},
         {"case":"iff-reverse","status":"not_applicable","evidence":"No biconditional is involved."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-compact-local-homeomorphism-surjective-with-finite-fibres": {
+      "citations": [
+        {"fact":"F1","source":"def-local-homeomorphism","source_section":"Definition","quote":"A continuous map is a local homeomorphism when every point has an open neighbourhood mapped homeomorphically onto an open subset of the target.","uses":["1.1","2.1"]},
+        {"fact":"F2","source":"thm-compactness-under-continuous-maps","source_section":"Statement","quote":"then $f[X]$ is a compact subset of $Y$.","uses":["1.2"]},
+        {"fact":"F3","source":"thm-compact-subset-of-a-hausdorff-space-is-closed","source_section":"Statement","quote":"Every compact subset of $X$ is closed in $X$.","uses":["1.2"]},
+        {"fact":"F4","source":"thm-closed-subspace-of-a-compact-space-is-compact","source_section":"Statement","quote":"If $(X, \\mathcal{T})$ is compact and $F \\subseteq X$ is closed in $X$, then $F$ is a compact subset of $X$.","uses":["2.2"]},
+        {"fact":"F5","source":"def-compact-space","source_section":"Definition","quote":"is **compact** when every open cover of it has a finite subcover","uses":["2.3"]},
+        {"fact":"F6","source":"def-connected-space","source_section":"Definition","quote":"**connected** when none does.","uses":["1.3"]}
+      ],
+      "derivations": [
+        {"id":"open-image","claim":"The local-homeomorphism image is open and nonempty.","step":"1.1","inputs":["F1","given"]},
+        {"id":"closed-image","claim":"The image is compact and therefore closed in the Hausdorff target.","step":"1.2","inputs":["F2","F3","given"]},
+        {"id":"surjective","claim":"Connectedness makes the nonempty clopen image the whole target.","step":"1.3","inputs":["F6","step 1.1","step 1.2"]},
+        {"id":"discrete-closed-fibre","claim":"Each fibre is closed and discrete.","step":"2.1","inputs":["F1","def-hausdorff-space","given"]},
+        {"id":"compact-fibre","claim":"Each closed fibre is compact.","step":"2.2","inputs":["F4","step 2.1"]},
+        {"id":"finite-fibre","claim":"The singleton open cover of a compact discrete fibre has a finite subcover.","step":"2.3","inputs":["F5","step 2.1","step 2.2"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"The domain is explicitly nonempty; otherwise its image would not force surjectivity onto the connected target."},
+        {"case":"zero","status":"checked","evidence":"Surjectivity makes every fibre nonempty, so zero-point fibres do not occur after step 1.3."},
+        {"case":"one","status":"checked","evidence":"A one-point fibre is discrete, compact, and finite by the same singleton-cover argument."},
+        {"case":"degenerate","status":"checked","evidence":"A one-point connected target is allowed and the proof reduces to finiteness of its sole fibre."},
+        {"case":"endpoints","status":"not_applicable","evidence":"No interval endpoint or limiting parameter occurs."},
+        {"case":"nonempty-choice","status":"not_applicable","evidence":"The singleton cover is the full explicitly defined family and compactness returns a finite subfamily."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The lemma is an implication from compactness and connectedness hypotheses."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"No converse from finite fibres or surjectivity is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "prop-compact-local-homeomorphism-is-finite-covering": {
+      "citations": [
+        {"fact":"L1","source":"lem-compact-local-homeomorphism-surjective-with-finite-fibres","source_section":"Statement","quote":"A local homeomorphism from a nonempty compact space to a connected Hausdorff space is surjective and has finite fibres.","uses":["1.1"]},
+        {"fact":"F1","source":"def-hausdorff-space","source_section":"Definition","quote":"any two distinct points are separated by disjoint open sets","uses":["1.1"]},
+        {"fact":"F2","source":"lem-finite-choice","source_section":"Statement","quote":"has a choice function","uses":["1.1"]},
+        {"fact":"F3","source":"thm-closed-subspace-of-a-compact-space-is-compact","source_section":"Statement","quote":"If $(X, \\mathcal{T})$ is compact and $F \\subseteq X$ is closed in $X$, then $F$ is a compact subset of $X$.","uses":["2.1"]},
+        {"fact":"F4","source":"thm-compactness-under-continuous-maps","source_section":"Statement","quote":"if $K \\subseteq X$ is a compact subset of $X$ then $f[K]$ is a compact subset of $Y$.","uses":["2.1"]},
+        {"fact":"F5","source":"thm-compact-subset-of-a-hausdorff-space-is-closed","source_section":"Statement","quote":"Every compact subset of $X$ is closed in $X$.","uses":["2.1"]},
+        {"fact":"F6","source":"def-covering-map-and-evenly-covered-neighbourhoods","source_section":"Definition","quote":"each restriction $p|_{V_j}:V_j\\to U$ is a homeomorphism","uses":["3.1"]}
+      ],
+      "derivations": [
+        {"id":"finite-charts","claim":"Around the finite fibre over y, choose pairwise disjoint local-homeomorphism charts and a common target neighbourhood.","step":"1.1","inputs":["L1","F1","F2","def-local-homeomorphism"]},
+        {"id":"remove-complement","claim":"The complement of those charts has compact closed image not containing y; remove it from the common target neighbourhood.","step":"2.1","inputs":["F3","F4","F5","step 1.1"]},
+        {"id":"even-cover","claim":"The remaining neighbourhood is evenly covered by finitely many restricted charts.","step":"3.1","inputs":["F6","step 1.1","step 2.1"]}
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case":"empty","status":"checked","evidence":"L1 gives surjectivity and a nonempty finite fibre over every chosen y."},
+        {"case":"zero","status":"checked","evidence":"No zero-fibre case remains after L1; the complement construction still permits an empty complement."},
+        {"case":"one","status":"checked","evidence":"For a one-point fibre the common-neighbourhood intersection and disjointness conditions reduce to one chart."},
+        {"case":"degenerate","status":"checked","evidence":"If the selected charts cover the whole compact domain, their complement and its image are empty and removal changes nothing."},
+        {"case":"endpoints","status":"not_applicable","evidence":"No interval endpoint or limiting operation occurs."},
+        {"case":"nonempty-choice","status":"checked","evidence":"Only finitely many local charts and separation neighbourhoods are selected, licensed by F2."},
+        {"case":"iff-forward","status":"not_applicable","evidence":"The proposition supplies a sufficient compactness theorem."},
+        {"case":"iff-reverse","status":"not_applicable","evidence":"Finite-sheeted coverings need not have compact total space without a compact base, so no converse is asserted."}
       ],
       "finite_smoke": []
     },
