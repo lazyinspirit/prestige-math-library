@@ -1101,8 +1101,22 @@ export const stages = [
       // handed a `size` violation under an edge-adjudication task would reach
       // for the tool it was given and add an edge. Leaving the rest on the
       // blocker path is the original design and it is right.
-      const isEdgeDecision = failure.id === 'validate-plan'
-        && /undeclared-prereq/.test(String(failure.why ?? '') + String(failure.output ?? ''));
+      //
+      // ASK THE TOOL, don't read the failure text. `failure.why` is the gate's
+      // last line — for this gate, the word "FAIL" — and `failure.output` is a
+      // truncated tail that may hold any part of a long report. Matching
+      // either one decided this by whichever lines happened to land in the
+      // slice, which on the first live firing was a run of `redundant-prereq`
+      // warnings and no dispatch. `validate-plan` is fast and deterministic,
+      // so re-running it and reading all of its output is both cheaper and
+      // correct.
+      let isEdgeDecision = false;
+      if (failure.id === 'validate-plan') {
+        const { spawnSync } = await import('node:child_process');
+        const v = spawnSync('node', ['tools/validate-plan.mjs', 'research/plan-spec.json'],
+          { cwd: ctx.repo, encoding: 'utf8' });
+        isEdgeDecision = /undeclared-prereq/.test(`${v.stdout ?? ''}${v.stderr ?? ''}`);
+      }
       if (!['splice-refusals', 'stage-stalemate'].includes(failure.id) && !isEdgeDecision) return;
       // A re-splice cannot clear `undeclared-prereq`: the edges it names are
       // induced by item `deps`, not declared by a manifest, so there is

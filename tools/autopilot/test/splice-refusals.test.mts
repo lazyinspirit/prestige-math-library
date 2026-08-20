@@ -125,19 +125,36 @@ test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; 
   // page over the 60-item ceiling are not step 4's business, and an Alpha
   // handed a `size` violation under an edge-adjudication task would reach for
   // the tool it was given and add an edge.
+  //
+  // The class is read from the TOOL, not from the failure text: `why` is the
+  // gate's last line ("FAIL") and `output` a truncated tail, so matching
+  // either decided this by whichever lines happened to land in the slice. On
+  // the first live firing that was a run of `redundant-prereq` warnings and
+  // the Alpha was never dispatched.
   await s4.onGateFailure({
     ctx, executor, stage: s4, round: 3,
-    failure: { id: 'validate-plan', why: '[size] page P has 74 items, ceiling is 60' },
+    failure: { id: 'validate-plan', why: 'FAIL' },  // spec is clean of undeclared-prereq
   });
-  assert.equal(started.length, 2, 'a size violation is not an edge decision');
+  assert.equal(started.length, 2, 'a validate-plan failure of another class is not an edge decision');
   // `undeclared-prereq` IS: an item whose deps reach a page outside its own
   // page's requires closure, decided exactly as a refusal is — apply a
   // backward edge, strike the dependency, block a forward one. frontier-16
   // returned 23 of them across all 11 pages, and three rounds were spent in
   // ninety seconds dispatching nothing because the hook returned on line one.
+  // Give the spec a real one: clean-page's item depends on an item owned by
+  // target-page, which clean-page does not declare.
+  const drifted = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
+  drifted.pages.find((p: any) => p.id === 'target-page').items = [{ id: 'def-t' }];
+  drifted.pages.find((p: any) => p.id === 'clean-page').items = [{ id: 'def-a', deps: ['def-t'] }];
+  drifted.pages.find((p: any) => p.id === 'clean-page').requires = [];
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify(drifted, null, 2));
+  const check = spawnSync(process.execPath, [join(REPO, 'tools', 'validate-plan.mjs'), 'research/plan-spec.json'],
+    { cwd: dir, encoding: 'utf8' });
+  assert.match(`${check.stdout}${check.stderr}`, /undeclared-prereq/, 'fixture must actually produce the class');
+
   await s4.onGateFailure({
     ctx, executor, stage: s4, round: 3,
-    failure: { id: 'validate-plan', why: '[undeclared-prereq] page P has an item depending on Q' },
+    failure: { id: 'validate-plan', why: 'FAIL' },
   });
   assert.equal(started.length, 3, 'undeclared-prereq must reach the adjudicating Alpha');
   assert.equal(started[2].job, 'adjudication');

@@ -349,13 +349,24 @@ test('no failing gate with a table entry is still unhandled', async () => {
 test('a validate-plan failure at step 4 dispatches the adjudicating Alpha', async () => {
   const repo = fixtureRepo();
   writeFileSync(join(repo, 'research', 'demo-alpha-step4.task.md'), 'adjudicate\n');
+  // The class is read by RE-RUNNING validate-plan, not from the failure text —
+  // `why` is the gate's last line ("FAIL") and `output` a truncated tail, so
+  // matching either decided this by whichever lines landed in the slice. The
+  // fixture therefore has to produce the class for real: `low-page`'s item
+  // depends on an item owned by `dep-page`, which it does not declare.
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({
+    pages: [
+      { order: 0.5, id: 'dep-page', kind: 'A', requires: [], items: [{ id: 'def-t' }] },
+      { order: 1, id: 'low-page', kind: 'A', requires: [], items: [{ id: 'def-a', deps: ['def-t'] }] },
+    ],
+  }, null, 2));
   const started: any[] = [];
   const s4: any = stages.find((s: any) => s.id === '4-splice');
   await s4.onGateFailure({
     ctx: { run: 'demo', repo },
     executor: { start: (_s: any, p: any) => started.push(p) },
     stage: s4, round: 1,
-    failure: { id: 'validate-plan', why: 'undeclared-prereq' },
+    failure: { id: 'validate-plan', why: 'FAIL' },
   });
   assert.equal(started.length, 1, 'validate-plan must route to the step-4 Alpha, not fall through');
   assert.equal(started[0].role, 'alpha');
