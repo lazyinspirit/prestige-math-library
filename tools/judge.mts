@@ -197,18 +197,24 @@ const DEEPSEEK_THINKING_LEVEL = "xhigh";
 const DEEPSEEK_API_REASONING_EFFORT = DEEPSEEK_THINKING_LEVEL === "xhigh" ? "max" : "high";
 const SUPPORTED_MODELS = [DEEPSEEK_MODEL, TERRA_MODEL, SONNET_MODEL];
 // JUDGE_LINEUP selects the session's paired lineup without forking the tool.
-// The active default is deepseek+sonnet (owner, 2026-08-17): the Codex
-// subscription behind Terra was account-throttled mid-run — 429 on the models
-// endpoint, NO_CONTENT on every exec — and the owner replaced the lane with
-// Claude Sonnet 5 on the claude CLI. Terra's rows remain historical evidence
-// only, exactly as the earlier switch's rows do. The frozen prompt, hash
-// attestation and verdict contract are identical across every lane.
+// The active default is BACK TO deepseek+terra (owner, 2026-08-20): "sonnet 5 to
+// terra for all agents and judges". It had been deepseek+sonnet since 2026-08-17,
+// when the Codex subscription behind Terra was account-throttled mid-run — 429 on
+// the models endpoint, NO_CONTENT on every exec — and that is the risk this
+// reversion re-accepts: the Terra lane is only as available as that account.
+// `judge.mts --preflight` spends one minimal call per lane and is the cheap way
+// to find out before a sweep does. Sonnet's rows, like Terra's before them,
+// remain historical evidence only; the frozen prompt, hash attestation and
+// verdict contract are identical across every lane, which is what makes a lane
+// swap a configuration change rather than a re-judgement.
 //
-// FAMILY WEIGHTING under deepseek+sonnet: DeepSeek remains the cross-family
-// screen against the Sol authors; SONNET shares the Anthropic family with the
-// build Alpha that adjudicates rejections, so weight same-family agreement
-// between the sonnet lane and Alpha accordingly — the same caveat the
-// deepseek+terra lineup carried for Terra and the GPT-family audit Alpha.
+// FAMILY WEIGHTING under deepseek+terra, and it is sharper than it used to be.
+// The same 2026-08-20 instruction moved the build `alpha` role from Opus 5 to
+// Sol, so Terra now shares the GPT family with BOTH the authors it screens and
+// the Alpha that adjudicates its rejections. DeepSeek is the only cross-family
+// reader left in either workflow. Weight Terra/author and Terra/Alpha agreement
+// accordingly: a Terra-only rejection that Alpha calls a false positive is two
+// GPT-family reads agreeing, not a corroboration.
 //
 // WHAT THE LEDGERS MEASURED BEFORE THE 2026-08-04 SWITCH (frontiers 6-9,
 // waves 0-1; the evidence is in research/audit/RESUME.md, not in memory):
@@ -218,7 +224,7 @@ const JUDGE_LINEUPS: Record<string, string[]> = {
   "deepseek+terra": [DEEPSEEK_MODEL, TERRA_MODEL],
   "deepseek+sonnet": [DEEPSEEK_MODEL, SONNET_MODEL],
 };
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
 const lineup = JUDGE_LINEUPS[lineupName];
 if (!lineup) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(JUDGE_LINEUPS).join(", ")}`);

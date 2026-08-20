@@ -49,12 +49,14 @@ const SONNET = "claude-sonnet-5";
 // JUDGE_LINEUP mirrors tools/judge.mts. Historical rows are append-only evidence
 // only; the child judge inherits the same env var as the sweep. Default flipped
 // to deepseek+sonnet (owner, 2026-08-17) after the Codex account behind Terra
-// was throttled mid-run; Terra's null rows stay as evidence.
+// was throttled mid-run, and BACK to deepseek+terra (owner, 2026-08-20). Both
+// lanes' old rows stay as evidence; neither satisfies current coverage, which is
+// per frozen context and per configured lane, not per model name.
 const LINEUPS = Object.freeze({
   "deepseek+terra": [DEEPSEEK, TERRA],
   "deepseek+sonnet": [DEEPSEEK, SONNET],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+sonnet";
+const lineupName = process.env.JUDGE_LINEUP ?? "deepseek+terra";
 const supportedModels = LINEUPS[lineupName];
 if (!supportedModels) {
   throw new Error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(", ")}`);
@@ -166,8 +168,9 @@ const currentContextHash = async (id) => {
 // API call can start.
 const currentHashes = new Map();
 for (const id of ids) currentHashes.set(id, await currentContextHash(id));
-// Owner policy, 2026-08-01: cap each judge lane independently — 16 per lane,
-// so at most 32 calls combined under a two-model lineup.
+// Owner policy, 2026-08-01: cap each judge lane independently. The current
+// values are 14 per active lane (owner, 2026-08-20), so at most 28 calls
+// combined under the `deepseek+terra` lineup; see MODEL_CONCURRENCY below.
 // `--limit` caps how many ITEMS each model covers; it is not concurrency.
 // Every lane has its own model-named slot directory, so independent pools cannot
 // double-book a cap.
@@ -192,8 +195,24 @@ const MODEL_CONCURRENCY = Object.freeze({
   // coming from the account session limit, not concurrency. If 24 produces
   // refusal or kernel-kill nulls, the currency rule re-spends them — but
   // lower the cap back rather than paying that loop twice.
-  [DEEPSEEK]: 24,
-  [TERRA]: 16,
+  //
+  // BOTH ACTIVE LANES ARE 14 (owner, 2026-08-20): "Set judge concurrency to 14
+  // for both deepseek and terra". The sweep therefore runs **28 calls combined**
+  // under `deepseek+terra`. This is a BACK-OFF, not a raise, and it sits below
+  // every previously measured cliff: below the 2026-08-05 memory value of 16
+  // that was derived on a 7.8 GB host, and well below the 24 the other lanes
+  // carried. Symmetric caps also mean neither lane can get far ahead of the
+  // other, so an interrupted sweep leaves fewer half-paired items.
+  //
+  // Do not read this as a memory or capacity finding — none was taken on
+  // 2026-08-20. It is an owner setting, and the note above records what the
+  // numbers around it were measured from.
+  //
+  // SONNET keeps 24 because its lineup is not selected; if `deepseek+sonnet` is
+  // ever chosen again, decide its cap then rather than inheriting a number set
+  // for a different lane.
+  [DEEPSEEK]: 14,
+  [TERRA]: 14,
   [SONNET]: 24,
 });
 
@@ -207,9 +226,10 @@ const MODEL_CONCURRENCY = Object.freeze({
 // This is the exact failure that retired an earlier lane (303 refusals of 382 on
 // wave 0), and the standing rule is that a capacity refusal is a NULL, never a
 // verdict. So the cap needs to be tunable without editing an owner-set constant:
-// the default stays 16 as the owner set it, and a targeted replay can lower just
-// the refusing lane. Raising it above the owner's value is deliberately not
-// possible here — this exists to back off, not to push harder.
+// the default is whatever MODEL_CONCURRENCY says the owner set (14 per active
+// lane since 2026-08-20), and a targeted replay can lower just the refusing
+// lane. Raising it above the owner's value is deliberately not possible here —
+// this exists to back off, not to push harder.
 const concurrencyOverride = (model) => {
   const raw = process.env[`JUDGE_CONCURRENCY_${model.replace(/[^A-Za-z0-9]/g, "_").toUpperCase()}`];
   if (raw === undefined) return null;

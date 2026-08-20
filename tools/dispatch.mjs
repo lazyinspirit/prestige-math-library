@@ -19,18 +19,29 @@
 // writer of the prose scaffolds and two concurrent Alphas would silently
 // overwrite each other.
 //
-// Model routing. BUILD roles follow the standing owner rule: GPT 5.6 Sol through
-// the Codex subscription at xhigh with a 1,000,000-token context window, passed
-// explicitly because the temporary CODEX_HOME deliberately does not inherit the
-// user's config.toml. The audit uses the same Codex subscription route: Sol for
-// writing/adjudication roles and Terra for independent certification.
+// Model routing. EVERY dispatched role follows the standing owner rule: GPT 5.6
+// Sol through the Codex subscription at xhigh with a 1,000,000-token context
+// window, passed explicitly because the temporary CODEX_HOME deliberately does
+// not inherit the user's config.toml. Terra takes the two lanes whose work is
+// bookkeeping (`mechanic`) or independent certification (`certifier`), and the
+// tool-less DeepSeek lane takes `audit-refuter`. There is no Anthropic lane.
 //
-// ONE EXCEPTION, owner 2026-08-10: the BUILD `alpha` role runs Claude Opus 5 on
-// the `claude` runner at xhigh with the same 1,000,000-token window, selected by
-// the `[1m]` model id. This is a deliberate cross-family split — Alpha
-// adjudicates the DeepSeek and Terra judges, and a Sol Alpha shared the GPT
-// family with the Terra lane it was weighing. The published-audit `audit-alpha`
-// role is NOT covered by this change and stays on Sol.
+// THE OPUS EXCEPTION IS WITHDRAWN (owner, 2026-08-20): "Change from opus 5 to
+// sol, and sonnet 5 to terra for all agents and judges". The BUILD `alpha` role
+// ran Claude Opus 5 on the `claude` runner from 2026-08-10 for cross-family
+// independence — it adjudicates the judges, and a Sol Alpha shares the GPT
+// family with a Terra judge lane. That cost is now accepted deliberately, and
+// what absorbs it is the DEEPSEEK lane: it is the only remaining cross-family
+// reader anywhere in either workflow, judging every item at step 7 and refuting
+// on the audit side. Same-family agreement between Alpha and the Terra judge is
+// therefore weak evidence and is weighted as such (CLAUDE.md §Paired skeptical
+// judges; tools/judge.mts).
+//
+// The `claude` runner below is KEPT and no role routes to it. It is the return
+// path if the owner reopens a cross-family lane, and its allow-list guarantee is
+// a measured result (2026-08-05, see CLAUDE_READ_TOOLS) that would be expensive
+// to relearn. `--check-read-only` still asserts it, so a re-added claude role
+// cannot arrive without one.
 //
 // READ-ONLY IS ENFORCED PER RUNNER, AND THE TWO RUNNERS DO IT DIFFERENTLY.
 // Codex has `--sandbox read-only`, a kernel-level guarantee. The `claude` CLI
@@ -53,17 +64,13 @@ import { createSlotPool } from './slots.mjs';
 const SOL_MODEL = process.env.SOL_MODEL ?? 'gpt-5.6-sol';
 const TERRA_MODEL = process.env.TERRA_MODEL ?? 'gpt-5.6-terra';
 const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL ?? 'deepseek-v4-pro';
-// The `[1m]` suffix IS the context window. Unlike Codex, the claude CLI has no
-// `model_context_window` knob — the 1,000,000-token variant is selected by the
-// model id itself, and bare `claude-opus-5` silently runs the standard window.
-// Alpha reads a whole level plus its published dependencies, so the owner's
-// standing 1M rule has to be expressed here or it is not expressed at all.
-const OPUS_MODEL = process.env.OPUS_MODEL ?? 'claude-opus-5[1m]';
-// The SUPERVISOR lane (owner, 2026-08-15). Sonnet 5 rather than Opus: this role
-// makes no mathematical judgment at all, so the expensive adjudicating model
-// would be pure cost. It reads run state, decides whether a stage is genuinely
-// finished, and fires the next dispatch. See `supervisor` in ROLES.
-const SONNET_MODEL = process.env.SONNET_MODEL ?? 'claude-sonnet-5';
+// No Anthropic model constant lives here any more (owner, 2026-08-20). Two did:
+// OPUS_MODEL (`claude-opus-5[1m]`) for the build `alpha` role, and SONNET_MODEL
+// for the `supervisor` role deleted on 2026-08-16. If a claude lane is ever
+// reopened, note what the id has to carry: unlike Codex the claude CLI has no
+// `model_context_window` knob, so the 1,000,000-token variant is selected by the
+// `[1m]` suffix on the model id itself and a bare id silently runs the standard
+// window. The owner's 1M rule is expressed there or it is not expressed at all.
 
 // READ-ONLY ON THE `claude` RUNNER, and why it is BOTH lists.
 //
@@ -112,10 +119,18 @@ const ROLES = Object.freeze({
   // because 6a dispatches one independent reader per batch.
   beta:         { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 9, web: true, why: 'one per batch, scaffolds and authors; 3 group Alphas x 3 batches' },
   reader:       { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', cap: 9, web: true, why: 'independent step-6 audit of a foreign batch, one per batch' },
-  // Alpha moved from Sol to Claude Opus 5 (owner, 2026-08-10), keeping xhigh and
-  // the 1M window (the `[1m]` id above).
-  // `effort` must be explicit: buildClaude defaults the claude runner to 'high',
-  // so omitting it here would silently downgrade the adjudicator.
+  // Alpha moved Sol -> Claude Opus 5 (owner, 2026-08-10) and BACK TO SOL (owner,
+  // 2026-08-20), keeping xhigh and the 1M window — now the Codex `-c` pair rather
+  // than a `[1m]` model id. `effort` stays explicit even though 'xhigh' is also
+  // the codex default: this is the adjudicating lane, and the one role where a
+  // silent downgrade would be invisible in its output.
+  //
+  // `web: true` IS REQUIRED, and is new with the move. On the claude runner Alpha
+  // had WebFetch/WebSearch by default; a Codex lane without `tools.web_search`
+  // does not fail, it asserts from memory (the failure this file records for the
+  // build lanes before 2026-08-11). Alpha's step-3 criterion 2 is source
+  // faithfulness, and step 6 has it probe an AI-generated claim for
+  // counterexamples — both are source work, not recall.
   //
   // CAP RAISED 1 -> 3 (owner, 2026-08-14): GROUP ALPHAS. One Alpha per at most
   // THREE Beta batches at step 3 and steps 6a/6b, so no single agent reads a
@@ -132,14 +147,19 @@ const ROLES = Object.freeze({
   // exact-hash adjudication ledger. Those three stages stay single-agent by
   // rule, and the rule is in LEVELS.md, not in this number.
   //
-  // QUOTA IS THE REAL BOUND, not memory (see ARCHITECTURE.md §6): four
-  // concurrent Opus lanes at xhigh exhausted the Claude session limit in 25-34
-  // minutes and took the orchestrator's own session down with them. 3 is chosen
-  // below that measured cliff. Concurrency here is a ceiling the orchestrator
-  // may use, never a quota it must spend: the accuracy win comes from SCOPING a
-  // group Alpha to 3 batches, which is free, and running the groups in series
-  // costs nothing but wall clock.
-  alpha:        { runner: 'claude', model: OPUS_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 3, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
+  // WHY 3 SURVIVED THE MOVE BACK TO SOL. Under Opus the number was read off a
+  // measured quota cliff (ARCHITECTURE.md §6): four concurrent Opus lanes at
+  // xhigh exhausted the Claude session limit in 25-34 minutes and took the
+  // orchestrator's own session down with them. That cliff is gone — but the
+  // number is not arbitrary without it, because 3 is also the group-Alpha
+  // arithmetic: one Alpha per <=3 batches against a beta/reader cap of 9. The
+  // constraint it now expresses is the CODEX subscription, which after this move
+  // carries every lane in the run rather than spreading Alpha across a second
+  // account. Concurrency here is a ceiling the orchestrator may use, never a
+  // quota it must spend: the accuracy win comes from SCOPING a group Alpha to 3
+  // batches, which is free, and running the groups in series costs only wall
+  // clock.
+  alpha:        { runner: 'codex',  model: SOL_MODEL, sandbox: 'workspace-write', effort: 'xhigh', cap: 3, web: true, why: 'group Alpha, <=3 batches each; lead Alpha alone writes prose scaffolds' },
   refuter:      { runner: 'codex',  model: SOL_MODEL, sandbox: 'read-only',       cap: 8, why: 'read-only by owner rule; returns evidence, never edits' },
   // AUDIT ONLY. The build has no orchestrator: every judgment it used to make
   // belongs to an Alpha, and every transition to the engine. The published-page
@@ -157,9 +177,10 @@ const ROLES = Object.freeze({
   // role's brief and `run-supervisor.mjs` are deleted.
 
   // `scaffolder` (owner, 2026-08-13): concurrent SUBJECT-track prose scaffolding,
-  // outside any level build. Same runner, model, effort and window as `alpha` —
-  // the owner asked for Opus 5 at xhigh per subject — but a different cap, and the
-  // difference is the whole reason it is a separate row rather than a raised
+  // outside any level build. Runner, model, effort and window are `alpha`'s again
+  // after 2026-08-20 — the owner asked for Opus 5 at xhigh per subject, both rows
+  // left the Anthropic lane, and they meet back on Sol — but the cap differs, and
+  // that difference is the whole reason it is a separate row rather than a raised
   // `alpha` cap.
   //
   // Alpha's cap of 1 is NOT a resource limit. It is a mutual-exclusion guarantee:

@@ -127,12 +127,14 @@ const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((l
 // change cannot desynchronise this file again. It had drifted: only
 // deepseek+terra existed here after the owner moved the build to
 // deepseek+sonnet (2026-08-17), so the current lineup could not be stamped at
-// all.
+// all. Both keys are kept for exactly that reason — the 2026-08-20 return to
+// deepseek+terra is the third lane change in a fortnight, and a table that
+// carries only today's answer is the defect, not the fix.
 const LINEUPS = Object.freeze({
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
   'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
 });
-const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+sonnet';
+const lineupName = process.env.JUDGE_LINEUP ?? 'deepseek+terra';
 const expected = LINEUPS[lineupName];
 if (!expected) {
   console.error(`JUDGE_LINEUP must be one of ${Object.keys(LINEUPS).join(', ')}; got ${lineupName}`);

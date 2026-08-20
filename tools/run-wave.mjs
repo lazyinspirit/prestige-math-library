@@ -643,7 +643,7 @@ for (const step of ORDER.slice(ORDER.indexOf(state.step))) {
       // The lineup is the owner's to set and the sweep's child judges inherit
       // whatever lands here, so an explicit env wins and the default follows
       // tools/judge.mts rather than pinning a lineup the tools have moved off.
-    ], { env: { ...process.env, JUDGE_LINEUP: process.env.JUDGE_LINEUP ?? 'deepseek+sonnet' } });
+    ], { env: { ...process.env, JUDGE_LINEUP: process.env.JUDGE_LINEUP ?? 'deepseek+terra' } });
     journal('spend', { detail: `targeted judge sweep (${targets.length} repaired item(s)) exit ${sweep.code}` });
     if (sweep.code !== 0) halt('sweep-failed', `the judge sweep failed: ${String(sweep.out).slice(-500)}`, resumeCmd(step));
   }

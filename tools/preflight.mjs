@@ -93,24 +93,35 @@ attempt('yaml', true, () => {
 // Two independent consumers decide it, and getting either wrong lets a run start
 // that cannot finish:
 //
-//   AGENTS  — a BUILD dispatches Sol through Codex (authoring, Beta, reader) AND
-//             Claude Opus 5 through the claude CLI for the `alpha` role (owner,
-//             2026-08-10). An AUDIT uses Codex for Sol Beta/Alpha and Terra
-//             readers, and no claude lane at all.
-//   JUDGES  — both workflows judge with the configured `deepseek+terra` lineup.
+//   AGENTS  — every dispatched role is Codex: Sol for authoring, Beta, reader
+//             and `alpha`, Terra for `mechanic` and the audit `certifier`. The
+//             build `alpha` role ran Claude Opus 5 through the claude CLI from
+//             2026-08-10 and returned to Sol on 2026-08-20, so NO workflow needs
+//             a claude lane for an agent any more.
+//   JUDGES  — both workflows judge with the configured lineup, `deepseek+terra`
+//             by default (owner, 2026-08-20) and `deepseek+sonnet` if selected.
 //
-// Codex is required for all GPT roles and the Terra judge lane. The claude CLI
-// is required by a BUILD because Alpha runs on it: checking only the judge
-// lineup for a claude-family model, as this did until 2026-08-11, reported a
-// green preflight for a build that then cannot dispatch its sole adjudicator.
+// Codex is therefore required by every workflow, and the claude CLI is required
+// only when the SELECTED JUDGE LINEUP names a claude-family lane. Note what this
+// re-exposes: checking only the lineup, as this did until 2026-08-11, reported a
+// green preflight for a build that could not dispatch its sole adjudicator. That
+// hole is closed by the agent side no longer having a claude lane at all, not by
+// the check — so if a claude role is ever re-added, `buildNeedsClaude` has to
+// come back with it. The lineup table is duplicated from judge.mts on purpose:
+// preflight must not import a tool it is checking is runnable.
 const lineupModels = {
   'deepseek+terra': ['deepseek-v4-pro', 'gpt-5.6-terra'],
+  'deepseek+sonnet': ['deepseek-v4-pro', 'claude-sonnet-5'],
 }[process.env.JUDGE_LINEUP ?? 'deepseek+terra'] ?? [];
 const judgeNeedsClaude = lineupModels.some((m) => m.startsWith('claude-'));
-const judgeNeedsCodex = lineupModels.some((m) => m.startsWith('gpt-'));
-const needCodex = !isAudit || judgeNeedsCodex;
-const buildNeedsClaude = !isAudit;              // the build `alpha` role
-const needClaude = judgeNeedsClaude || buildNeedsClaude;
+// Unconditional in both workflows: every agent lane is Codex, and so is the
+// Terra judge lane whenever it is selected. The `!isAudit || judgeNeedsCodex`
+// form this replaces existed only to let an audit skip Codex, which it never
+// could — audit-beta, audit-alpha and certifier are all Codex roles.
+const needCodex = true;
+// The build `alpha` role returned to Sol on 2026-08-20, so no agent needs the
+// claude CLI in either workflow; only a claude-family JUDGE lane does.
+const needClaude = judgeNeedsClaude;
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 attempt('codex-cli', needCodex, () => probe(process.env.CODEX_BIN ?? 'codex', ['--version']),
@@ -132,11 +143,9 @@ record('codex-auth', needCodex, existsSync(join(codexHome, 'auth.json')) ? 'pass
   'run the Codex login flow; an expired or already-rotated token takes out every Sol lane at once');
 
 attempt('claude-cli', needClaude, () => probe(process.env.CLAUDE_BIN ?? 'claude', ['--version']),
-  buildNeedsClaude
-    ? 'REQUIRED here: the build `alpha` role spawns claude -p (Claude Opus 5, 1M window)'
-    : judgeNeedsClaude
-      ? `REQUIRED here: the ${process.env.JUDGE_LINEUP ?? 'deepseek+terra'} judge lane spawns claude -p`
-      : 'not needed by this workflow or judge lineup');
+  judgeNeedsClaude
+    ? `REQUIRED here: the ${process.env.JUDGE_LINEUP ?? 'deepseek+terra'} judge lane spawns claude -p`
+    : 'not needed: no agent lane runs on claude, and this judge lineup has no claude-family lane');
 
 // The key itself is never printed, logged, or placed in any output.
 const envFile = deepseekEnvFile();

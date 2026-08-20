@@ -21,7 +21,12 @@ import { itemHashJudge } from '../../item-hash.mjs';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'apply-judge-stamps.mjs');
-const LANES = ['deepseek-v4-pro', 'claude-sonnet-5'];
+// The CONFIGURED lineup, which the tool resolves from JUDGE_LINEUP and these
+// tests run at its default (owner, 2026-08-20: deepseek+terra). The retired-lane
+// row below is whichever lane is not in it — the roles swapped on that date, and
+// the property under test did not.
+const LANES = ['deepseek-v4-pro', 'gpt-5.6-terra'];
+const RETIRED_LANE = 'claude-sonnet-5';
 const STUB_CONTEXT = 'c'.repeat(64);
 const OTHER_CONTEXT = 'f'.repeat(64);
 
@@ -62,7 +67,7 @@ test('apply stamps a current paired pass, ignores retired-lane rows, and verify 
     ledgerRow('itm-a', LANES[1], true, h),
     // the retired lane in the same ledger is append-only evidence, never an
     // error and never a third-lane refusal
-    ledgerRow('itm-a', 'gpt-5.6-terra', false, h),
+    ledgerRow('itm-a', RETIRED_LANE, false, h),
   ]);
 
   let r = run(dir, '--verify');
@@ -73,7 +78,7 @@ test('apply stamps a current paired pass, ignores retired-lane rows, and verify 
   r = run(dir, '--apply', '--report', 'research/stamps.json');
   assert.equal(r.status, 0, r.stderr);
   const text = readFileSync(join(dir, 'items', 'itm-a.md'), 'utf8');
-  assert.match(text, / {2}judge:\n {4}model: "deepseek-v4-pro \+ claude-sonnet-5"\n {4}verdict: pass\n/);
+  assert.match(text, / {2}judge:\n {4}model: "deepseek-v4-pro \+ gpt-5\.6-terra"\n {4}verdict: pass\n/);
   const receipt = JSON.parse(readFileSync(join(dir, 'research', 'stamps.json'), 'utf8'));
   assert.deepEqual(receipt.stamped.map((s: any) => s.id), ['itm-a']);
 
@@ -93,7 +98,7 @@ test('a lane rejection never stamps; a stale pass block fails verify and is stri
   // seed the stale pass a rejection now contradicts
   const seeded = itemText('itm-b').replace(
     '  precheck: pass\n',
-    '  precheck: pass\n  judge:\n    model: "deepseek-v4-pro + claude-sonnet-5"\n    verdict: pass\n    date: 2026-08-01\n');
+    '  precheck: pass\n  judge:\n    model: "deepseek-v4-pro + gpt-5.6-terra"\n    verdict: pass\n    date: 2026-08-01\n');
   writeFileSync(join(dir, 'items', 'itm-b.md'), seeded);
   const h = itemHashJudge(seeded);
   writeLedger(dir, [

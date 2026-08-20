@@ -23,7 +23,7 @@ Everything below is verified against the code as of 2026-07-31.
 |---|---|---|
 | **owner** | human | approves step-3 findings one at a time; audits; sets `verification.audited`; the only one who may remove published or out-of-level results |
 | **the engine** | `tools/autopilot/`, no model | batching, splicing, the **gate of record**, retries, blockers, ledgers, and every stage transition. It makes no mathematical judgment and never publishes |
-| **Alpha-n** | **Claude Opus 5 on the `claude` runner, `xhigh`, 1M-token context** (owner, 2026-08-10; was GPT 5.6 Sol) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk. **Since 2026-08-14 this is a GROUP role at steps 3 and 6a/6b** — see the row below |
+| **Alpha-n** | **GPT 5.6 Sol on the `codex` runner, `xhigh`, 1M-token context, `web: true`** (owner, 2026-08-20; was Claude Opus 5 from 2026-08-10, Sol before that) | spawned at **step 3** (owner, 2026-08-11 — was step 4), where its first job is to review every Beta scaffold for breadth and depth before anything is authored; resumed at **steps 4, 6 and 8**; dispatches read-only skeptical proof-refuters, adjudicates their and the paired judges' findings, applies/gates warranted repairs, propagates approved changes into higher-level prose, and audits every independent-reader fix and cross-batch/cross-level reference from disk. **Since 2026-08-14 this is a GROUP role at steps 3 and 6a/6b** — see the row below |
 | **group Alpha / lead Alpha** (owner, 2026-08-14; assignment judged 2026-08-16) | same model and settings | A run's batches are divided among **group Alphas, at most three batches each** (`dispatch.mjs` alpha cap 3). **Which batches each owns is decided at stage `2-assign`**, by an Alpha, to minimise what crosses a group boundary; `tools/alpha-groups.mjs` validates it and fails on a category split that was avoidable. Each group Alpha runs **step 3** for its own batches and **steps 6a/6b** for them, writing only namespaced artifacts nobody else opens. The **lead Alpha** is one of them and additionally owns the stages that are global by nature: **step 4** propagation, **step 6c** cross-batch/cross-level citation audit, **step 8** adjudication, step 9, the receipts and step 10. Rationale: `ARCHITECTURE.md` §6 |
 | **Beta-n-i** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | one per batch; steps 1–2 scaffolding and **step 5 authors all content in its batch** after Step 4. It never audits content it authored. |
 | **independent Step-6 reader** | **GPT 5.6 Sol via the Codex subscription plan, `xhigh`, 1M-token context** | Alpha-assigned read-only or repair-capable audit role for content it did not author; does not judge or adjudicate. |
@@ -489,10 +489,11 @@ writes its own
 scaffold-closure receipt. This exists because one Alpha reading a whole level's scaffolds is the
 same agent that later reads the whole level's proofs — `frontier-12` was 454
 items — and step 3 is where a thin page is still cheap to fix. Concurrency here
-is a ceiling, not a quota to spend: three concurrent Opus lanes burn a shared
-Claude session limit that also feeds the lead Alpha, so run the groups in
-series whenever the headroom is unknown. The scoping is what buys the accuracy;
-the parallelism is optional.
+is a ceiling, not a quota to spend: three concurrent Alpha lanes burn a shared
+subscription that also feeds the lead Alpha and, since 2026-08-20, every Beta
+and reader in the run as well — so run the groups in series whenever the
+headroom is unknown. The scoping is what buys the accuracy; the parallelism is
+optional.
 
 For every pair the owning group Alpha reads the
 `.pages.json`, `.notes.md` and `.coverage.json` together and asks whether the
@@ -654,13 +655,15 @@ correct. Splitting a single level is not.
 
 ## Step 6 — Audit (independent readers, then Alpha-n)
 
-**Model (owner, 2026-07-31, amended 2026-08-10): Beta-n-i is GPT 5.6 Sol run
-through the Codex subscription plan at `xhigh` reasoning with a 1,000,000-token
-context window. Alpha-n is Claude Opus 5 on the `claude` runner at `xhigh` with
-the same 1,000,000-token window (model id `claude-opus-5[1m]`).** Do
-not run GPT-family audit work through ofox. Alpha's read-only proof-refuters and
-the independent Step-6 readers stay on Sol, so the reading tier below Alpha
-remains GPT-family.
+**Model (owner, 2026-07-31, amended 2026-08-20): Beta-n-i AND Alpha-n are both
+GPT 5.6 Sol, run through the Codex subscription plan at `xhigh` reasoning with a
+1,000,000-token context window.** Do not run GPT-family audit work through ofox.
+Alpha's read-only proof-refuters and the independent Step-6 readers are Sol too,
+so **every reader in this step, and the Alpha adjudicating them, is one family**.
+Alpha ran on Claude Opus 5 from 2026-08-10 precisely to break that; the owner
+withdrew the exception on 2026-08-20. What is left outside the family is the
+DeepSeek judge lane at step 7 — treat a DeepSeek rejection as the only reading in
+the level that no other agent could have produced.
 
 This is the final mathematical reading tier before the judge and the owner. It
 has three ordered parts.
@@ -817,17 +820,19 @@ necessary fixes.
 
 ## Step 7 — Judge (after the audit, one sweep, on final text)
 
-**Model change (owner, 2026-07-31): the session-item judges are DeepSeek V4 Pro
-directly at maximum reasoning and freshly spawned Claude Sonnet 5 through the
-Codex subscription at `xhigh`.** `tools/judge.mts --parallel` supports a
-one-item paired call; `tools/judge-sweep.mjs` instead uses one file-backed,
-cross-process model pools with **24 concurrent DeepSeek calls and 16 concurrent
-Sonnet calls**. Either model moves to its next item as soon as one of its own
-slots is free (32 calls maximum combined). Both receive the same exact hash-attested frozen prompt
+**Model change (owner, 2026-07-31; second lane returned to Terra 2026-08-20):
+the session-item judges are DeepSeek V4 Pro directly at maximum reasoning and
+freshly spawned GPT 5.6 Terra processes through the Codex subscription at
+`xhigh`** (`JUDGE_LINEUP=deepseek+terra`). `tools/judge.mts --parallel` supports a
+one-item paired call; `tools/judge-sweep.mjs` instead uses file-backed,
+cross-process model pools with **14 concurrent calls per lane** (owner,
+2026-08-20). Either model moves to its next item as soon as one of its own
+slots is free (28 calls maximum combined). Both receive the same exact hash-attested frozen prompt
 for the item. DeepSeek remains the cross-family screen from the GPT 5.6 Sol
-author; Sonnet is retained as an independent same-context comparison lane, not
-as a cross-family claim. The harness retains the historical injection-test
-record.
+author; Terra is an independent same-context comparison lane, not a
+cross-family claim — and since 2026-08-20 it shares its family with the Alpha
+that adjudicates its rejections as well as with the author it reads. The harness
+retains the historical injection-test record.
 
 `tools/judge.mts` loads `briefs/judge-conventions.txt` into its frozen prompt by
 default; `briefs/codex-judge.md` is historical human documentation. Each judge's
@@ -867,7 +872,7 @@ after its ordinary 40k-token maximum-reasoning pass. A second length stop remain
 explicit reasoning-budget null.
 `verification.judge` records a pass only after both models passed the text.
 Never record a pass a judge did not give; a null/failed call is not a verdict.
-At step 10, compare both-pass, both-reject, Sonnet-only rejection, DeepSeek-only
+At step 10, compare both-pass, both-reject, Terra-only rejection, DeepSeek-only
 rejection, and incomplete/null outcomes with their adjudications. Record one
 owner adjudication for every model rejection in
 `research/<run>-judge-adjudications.jsonl`, keyed by `{id, model,
@@ -889,7 +894,7 @@ attestation fields. Before Step 8, rerun `level-coverage.mjs` with the merged
 proof contract, paired ledger, dependency-spine receipt, Alpha receipt, and
 `--verify-current-context`. The gate
 recomputes the item/relationship manifest from disk, requires a contract for
-every proof-bearing item, and requires one usable DeepSeek and Sonnet verdict on
+every proof-bearing item, and requires one usable DeepSeek and Terra verdict on
 the same *current* frozen prompt for every item. It is not satisfied by a broad
 agent report or by a stale pass after a repair. Give it
 `--judge-adjudications research/<run>-judge-adjudications.jsonl`: a current
@@ -1010,7 +1015,7 @@ for. `pathcheck` then runs as a repo-wide gate, so a level cannot close with a
 published page missing from its reading order.
 
 Full report: added/deleted in-flight results; forward references present; paired
-judge coverage counted from the ledger and frontmatter on disk; DeepSeek/Sonnet
+judge coverage counted from the ledger and frontmatter on disk; DeepSeek/Terra
 agreement, model-only findings, and the owner-adjudicated fatal logic and
 dependency-citation detection comparison; gate results;
 escalation set; Beta batch-audit coverage; Alpha cross-edge coverage; and

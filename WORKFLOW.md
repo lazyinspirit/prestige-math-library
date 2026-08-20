@@ -366,11 +366,12 @@ substituted the models above for these defaults:
 - Utility lineup (labels and small tasks): `google/gemini-3.1-flash-lite`,
   `anthropic/claude-haiku-4.5`, `openai/gpt-5-nano`.
 
-Current session cost rule: GPT 5.6 Sol authoring and Beta, plus GPT 5.6 Terra
-judging, run through the Codex subscription plan; build Alpha runs as Claude
-Opus 5 at `xhigh` with a 1M-token window on the `claude` runner (owner,
-2026-08-10); DeepSeek V4 Pro judging is direct DeepSeek API spend. GPT-family
-work must not be routed through ofox.
+Current session cost rule: GPT 5.6 Sol authoring, Beta **and build Alpha**, plus
+GPT 5.6 Terra judging, all run through the Codex subscription plan (owner,
+2026-08-20, returning Alpha from Claude Opus 5 and the second judge lane from
+Claude Sonnet 5); DeepSeek V4 Pro judging is direct DeepSeek API spend, and is
+now the only non-subscription lane and the only non-GPT one. GPT-family work
+must not be routed through ofox.
 
 Two hard rules govern the models:
 
@@ -881,10 +882,10 @@ directory directly.
    feature branch that repo is using.
 5. Report the total session cost on completion, broken down as firecrawl plus
    apify (step-0 scraping, zero when nothing was scraped) plus direct DeepSeek
-   judge spend. GPT 5.6 Sol authoring and Beta, plus GPT 5.6 Terra judge work,
-   run on the Codex subscription plan and are not counted as direct-API spend;
-   build Alpha runs as Claude Opus 5 on the `claude` runner and is likewise not
-   direct-API spend.
+   judge spend. GPT 5.6 Sol authoring, Beta and build Alpha, plus GPT 5.6 Terra
+   judge work, run on the Codex subscription plan and are not counted as
+   direct-API spend. Since 2026-08-20 no lane runs on a Claude subscription, so
+   direct DeepSeek spend is the whole of the model bill.
 
 ---
 

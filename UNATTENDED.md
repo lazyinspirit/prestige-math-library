@@ -179,9 +179,9 @@ the loops are shaped this way, and the run that proved it: `ARCHITECTURE.md`
 
 ## Budget, and why fatal repairs are not capped
 
-Judge calls are the spend: two lanes over every item in the run, capped at 16
-concurrent each and 32 combined. A capacity refusal is a null verdict, not a
-verdict, and the sweep retries it.
+Judge calls are the spend: two lanes over every item in the run, capped at **14
+concurrent per lane, 28 combined** (owner, 2026-08-20). A capacity refusal is a
+null verdict, not a verdict, and the sweep retries it.
 
 **Fatal repairs are deliberately uncapped** (owner, 2026-08-03). A proof that
 keeps yielding real fatal defects is either converging toward correctness or is
