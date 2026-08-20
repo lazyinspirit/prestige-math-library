@@ -434,3 +434,46 @@ test('stage 5 runs a mechanical repair for any gate that has one', async () => {
   assert.match(started[0].task[0], /alpha-contract-audit\.task\.md$/);
   rmSync(repo, { recursive: true, force: true });
 });
+
+// An edge decision reaches the same lane wherever it surfaces. A 6b Alpha
+// repairing an item under its step-6 licence can introduce a dependency its
+// page does not declare, long after the splice — frontier-16 did, once, at
+// step 5, and it fell through for want of a route.
+test('step 5 routes an undeclared-prereq to the edge-adjudication lane', async () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-alpha-step4.task.md'), 'adjudicate\n');
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({
+    pages: [
+      { order: 0.5, id: 'dep-page', kind: 'A', requires: [], items: [{ id: 'def-t' }] },
+      { order: 1, id: 'low-page', kind: 'A', requires: [], items: [{ id: 'def-a', deps: ['def-t'] }] },
+    ],
+  }, null, 2));
+  const started: any[] = [];
+  const s5: any = stages.find((s: any) => s.id === '5-author');
+  await s5.onGateFailure({
+    ctx: { run: 'demo', repo },
+    executor: { start: (_s: any, p: any) => started.push(p) },
+    stage: s5, round: 1,
+    failure: { id: 'validate-plan', why: 'FAIL' },
+  });
+  assert.equal(started.length, 1, 'the edge must reach a lane, not fall through');
+  assert.equal(started[0].job, 'adjudication');
+  assert.match(started[0].task[0], /alpha-step4\.task\.md$/);
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('step 5 leaves a validate-plan failure of another class on the blocker path', async () => {
+  const repo = fixtureRepo();
+  // a spec with no undeclared-prereq at all
+  writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({
+    pages: [{ order: 1, id: 'solo', kind: 'A', requires: [], items: [{ id: 'def-a' }] }],
+  }, null, 2));
+  const s5: any = stages.find((s: any) => s.id === '5-author');
+  await s5.onGateFailure({
+    ctx: { run: 'demo', repo },
+    executor: { start: () => { throw new Error('must not dispatch'); } },
+    stage: s5, round: 1,
+    failure: { id: 'validate-plan', why: 'FAIL' },
+  });
+  rmSync(repo, { recursive: true, force: true });
+});

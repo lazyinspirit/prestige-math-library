@@ -454,6 +454,46 @@ const sameUrl = (a: string, b: string) => {
   } catch { return false; }
 };
 
+/** Is this `validate-plan` failure the one class that is an EDGE DECISION?
+ *
+ *  That gate is repo-wide and fails for heterogeneous reasons — a cycle, a
+ *  forward reference, an unresolved id, a page over the 60-item ceiling — and
+ *  most are not anybody's edge to decide. Only `undeclared-prereq` is: an item
+ *  whose `deps` reach a page outside its own page's `requires` closure, settled
+ *  exactly as a splice refusal is (apply a backward edge the item genuinely
+ *  consumes, strike the dependency, block a forward one as owner-only).
+ *
+ *  ASK THE TOOL. `failure.why` is the gate's last line — for this gate, the
+ *  word "FAIL" — and `failure.output` is a truncated tail holding whichever
+ *  part of a long report happened to fit. Matching either decided this by which
+ *  lines landed in the slice, and on its first live firing that was a run of
+ *  `redundant-prereq` warnings and no dispatch at all.
+ *
+ *  Shared by every stage that gates on validate-plan: the class does not change
+ *  with the stage, and neither does who settles it. The 6b Alphas repair items
+ *  under their step-6 licence, so a repair can introduce one of these long
+ *  after step 4 — frontier-16 met exactly that, one edge, at step 5. */
+export const isEdgeDecision = async ({ ctx, failure }: any): Promise<boolean> => {
+  if (failure?.id !== 'validate-plan') return false;
+  const { spawnSync } = await import('node:child_process');
+  const v = spawnSync('node', ['tools/validate-plan.mjs', 'research/plan-spec.json'],
+    { cwd: ctx.repo, encoding: 'utf8' });
+  return /undeclared-prereq/.test(`${v.stdout ?? ''}${v.stderr ?? ''}`);
+};
+
+/** The lane that settles an edge, wherever the failure surfaced. */
+export const dispatchEdgeAdjudication = ({ ctx, executor, stage, round }: any) => {
+  executor.start(stage, {
+    role: 'alpha',
+    label: `step4-adjudicate-${round}`,
+    job: 'adjudication',
+    covers: [],
+    brief: 'briefs/alpha.md',
+    task: [`research/${ctx.run}-alpha-step4.task.md`],
+    timeout: 3600,
+  });
+};
+
 export const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: any) => {
   const text = String(stderr ?? '');
   const pages = new Set<string>([...text.matchAll(/fetch-check-[a-z-]+: ([a-z0-9-]+):/g)].map((m: any) => m[1]));
@@ -1120,18 +1160,12 @@ export const stages = [
       // warnings and no dispatch. `validate-plan` is fast and deterministic,
       // so re-running it and reading all of its output is both cheaper and
       // correct.
-      let isEdgeDecision = false;
-      if (failure.id === 'validate-plan') {
-        const { spawnSync } = await import('node:child_process');
-        const v = spawnSync('node', ['tools/validate-plan.mjs', 'research/plan-spec.json'],
-          { cwd: ctx.repo, encoding: 'utf8' });
-        isEdgeDecision = /undeclared-prereq/.test(`${v.stdout ?? ''}${v.stderr ?? ''}`);
-      }
-      if (!['splice-refusals', 'stage-stalemate'].includes(failure.id) && !isEdgeDecision) return;
+      const edge = await isEdgeDecision({ ctx, failure });
+      if (!['splice-refusals', 'stage-stalemate'].includes(failure.id) && !edge) return;
       // A re-splice cannot clear `undeclared-prereq`: the edges it names are
       // induced by item `deps`, not declared by a manifest, so there is
       // nothing for the transcriber to transcribe. Go straight to the Alpha.
-      if (!isEdgeDecision) {
+      if (!edge) {
         const repair = await mechanicalRepair({ ctx, failure: { id: 'splice-refusals' } });
         if (repair.outcome === 'clean') return;
         if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
@@ -1233,6 +1267,14 @@ export const stages = [
         const repair = await mechanicalRepair({ ctx, failure });
         if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
         return;   // the battery re-verifies; a residue fails the gate again, honestly
+      }
+      // An edge decision reaches the same lane it does at step 4. A 6b Alpha
+      // repairing an item under its step-6 licence can introduce a dependency
+      // its page does not declare, long after the splice; frontier-16 did,
+      // once, and it fell through here for want of a route.
+      if (await isEdgeDecision({ ctx, failure })) {
+        dispatchEdgeAdjudication({ ctx, executor, stage, round });
+        return;
       }
       if (!['boundary-audit', 'citation-fidelity', 'gate-liveness'].includes(failure.id)) return;
       executor.start(stage, {
