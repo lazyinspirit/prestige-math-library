@@ -87,6 +87,23 @@ VERDICT: drift-applied — added function-space-topologies (order 283)
 > mutate the plan. That gate now verifies every applied edge against the spec,
 > its direction, and whether its target is published or built by this run.
 >
-> Nothing in the review's *reading* is disturbed: the remark may still name FTA
-> as a non-load-bearing agreement mention, which is what CX-D7 asks for and what
-> `external_refs` is for.
+> **And the citation the review wanted is already available — no edge needed.**
+> Two different objects share the name. The order-139 page is the planned
+> *algebraic* proof (Artin–Galois, `requires` Kummer/Sylow/IVT), unbuilt. The
+> **theorem** is published: `thm-fundamental-theorem-of-algebra-minimum-modulus-proof`,
+> `landmark: true`, on the A page `the-complex-exponential-and-eulers-formula`
+> (order 189, real-analysis, `status: published`) — the d'Alembert minimum-modulus
+> route, with `lem-complex-polynomial-growth-and-minimum-modulus` and
+> `lem-dalembert-minimum-modulus-descent` beneath it.
+>
+> That page is **already inside this page's 85-page transitive `requires`
+> closure**, so CA-5's remark can cite the published statement today. It is an
+> A-page item, so no `b-leaf` problem. An explicit edge would be redundant, and
+> `external_refs` would be wrong — that is for non-load-bearing mentions of
+> things the library does not have, and the library has this.
+>
+> **Batch 7 must not re-mint it.** The design sentence "once that predecessor is
+> authored" predates the order-189 publication and, read literally today, invites
+> exactly the duplicate statement the generated-claim rule forbids. The Liouville
+> proof here is a *second proof of an already-published landmark*, and the remark
+> records the agreement.

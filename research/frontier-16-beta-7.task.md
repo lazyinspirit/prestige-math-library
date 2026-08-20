@@ -25,3 +25,31 @@ Check the design's stated `order` and prerequisites against `research/plan-spec.
 - **Never pad.** Decompose long proofs into focused lemmas and make a pass for cheaply proved corollaries; never mint a statement to enrich a page.
 
 **No permission prompts of any kind**, including inside an `&&` chain.
+
+## One verified fact about this page, added during the run
+
+`analyticity-liouville-and-morera`'s Liouville material reaches the fundamental
+theorem of algebra, and the design says CA-5 "cites the canonical statement on
+`the-fundamental-theorem-of-algebra` once that predecessor is authored". **Read
+that carefully: two different objects share the name.**
+
+- The **page** `the-fundamental-theorem-of-algebra` (order 139,
+  `abstract-algebra`) is the planned *algebraic* proof — `items: []`, unbuilt,
+  and its own `requires` names two unbuilt Galois pages. It is not available and
+  will not be during this run.
+- The **theorem is published**:
+  `thm-fundamental-theorem-of-algebra-minimum-modulus-proof`, `landmark: true`,
+  `status: published`, on the A page `the-complex-exponential-and-eulers-formula`
+  (order 189, real-analysis), by the d'Alembert minimum-modulus route over
+  `lem-complex-polynomial-growth-and-minimum-modulus` and
+  `lem-dalembert-minimum-modulus-descent`.
+
+That page is already inside this page's transitive `requires` closure, so the
+published statement is citable as it stands — no new edge, no `external_refs`
+entry, and **no re-minting**. Your Liouville argument is a *second proof of an
+already-published landmark*; state the agreement and cite the existing item
+rather than introducing a new statement of the same theorem.
+
+Verified from disk on 2026-08-20 by the monitoring session, after the step-0
+drift review applied an edge to the order-139 page and blocked the whole
+complex-analysis track. See `research/frontier-16-alpha-step0-drift.md`.
