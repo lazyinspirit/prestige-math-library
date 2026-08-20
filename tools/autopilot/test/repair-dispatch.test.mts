@@ -233,7 +233,15 @@ test('the mechanical branch still short-circuits the Beta fan-out', async () => 
   const repo = fixtureRepo();
   // a url-liveness failure with an artifact whose dead rows all carry
   // snapshots already applied -> repair tool exits 0 -> no Beta lanes
-  writeFileSync(join(repo, 'research', 'demo-url-liveness.json'), JSON.stringify({ rows: [] }));
+  //
+  // The row is present rather than `rows: []` because an EMPTY sweep is now a
+  // hard failure (`backing-empty-liveness`) — a sweep over nothing is not a
+  // sweep. That combination cannot arise for real either: `url-sweep` carries
+  // its own liveness assertion of at least one URL collected, so it fails
+  // before its artifact could reach a repair empty. The property under test —
+  // a mechanical repair that succeeds must not fan out Betas — is unchanged.
+  writeFileSync(join(repo, 'research', 'demo-url-liveness.json'),
+    JSON.stringify({ rows: [{ url: 'https://example.org/live.pdf', ok: true }] }));
   // the repair passes --coverage from the run's batch manifests
   writeFileSync(join(repo, 'research', 'demo-batch-4.pages.json'), '[]');
   writeFileSync(join(repo, 'research', 'demo-batch-4.coverage.json'), JSON.stringify({ pages: [] }));

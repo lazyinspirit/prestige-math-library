@@ -126,6 +126,62 @@ if (planPath) {
   }, null, 2) + '\n');
 }
 
+// --retire-redundant: remove a source that is dead AND carries nothing this
+// level would lose.
+//
+// This is the disposition the scouting order never had. Its three options are
+// "same document elsewhere", "same document from the archive", "different
+// source, re-harvest" — and none of them fits a dead source whose every result
+// is ALSO backed by a live one. A scout meeting that case has nothing to
+// replace and no licence to remove, so it re-points the URL, fails, and spends
+// a round. frontier-16 spent three that way on one walled textbook whose two
+// results were independently backed the whole time.
+//
+// Retiring it is safe exactly when this tool can prove it: dead by the sweep,
+// and every `included` row on it backed elsewhere by a source that is not.
+// That is a function of files on disk, so it is code. What is NOT code — and
+// is not done here — is retiring a source whose results would lose their last
+// backing; that stays `backing-lost`, and stays a scout's job.
+if (has('retire-redundant')) {
+  const retired = [];
+  for (const file of files) {
+    const cov = JSON.parse(readFileSync(file, 'utf8'));
+    let touched = false;
+    for (const page of cov.pages ?? []) {
+      const keep = [];
+      for (const s of page.sources ?? []) {
+        if (sourceUsable(s)) { keep.push(s); continue; }
+        // Every included row on this dead source must have a usable backing
+        // among the OTHER sources of the same page.
+        const orphans = (s.contents ?? []).filter((h) => h.disposition === 'included' && h.item)
+          .filter((h) => !(page.sources ?? []).some((o) => o !== s && sourceUsable(o)
+            && (o.contents ?? []).some((r) => r.disposition === 'included' && r.item === h.item)));
+        if (orphans.length) { keep.push(s); continue; }   // not redundant: leave it for the scout
+        retired.push({
+          file, page: page.page ?? page.id, url: s.url, title: s.title, kind: s.kind, locator: s.locator,
+          results: (s.contents ?? []).map((h) => ({ name: h.name, disposition: h.disposition, item: h.item ?? null })),
+          reason: 'unreachable and unarchived; every included result independently backed by a live source on the same page',
+        });
+        touched = true;
+      }
+      page.sources = keep;
+    }
+    if (touched) writeFileSync(file, JSON.stringify(cov, null, 2) + '\n');
+  }
+  if (retired.length) {
+    // The removal is recorded, never silent: the rows leave the harvest, so the
+    // only durable evidence that this source was ever read is this artifact.
+    const out = opt('retired-record') ?? 'research/retired-sources.json';
+    let prior = [];
+    if (existsSync(out)) { try { prior = JSON.parse(readFileSync(out, 'utf8')).retired ?? []; } catch { prior = []; } }
+    writeFileSync(out, JSON.stringify({ retired: [...prior, ...retired] }, null, 2) + '\n');
+    console.log(`source-backing: retired ${retired.length} redundant dead source(s) -> ${out}`);
+    for (const r of retired) console.log(`  ${r.page}: ${r.title ?? r.url} (${r.results.length} row(s), none orphaned)`);
+  } else {
+    console.log('source-backing: no dead source was redundant; nothing retired');
+  }
+}
+
 if (work.length) {
   console.error(`source-backing: ${work.length} authored result(s) have no openable source left`);
   for (const w of work) {

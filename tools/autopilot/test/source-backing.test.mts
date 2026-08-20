@@ -140,3 +140,46 @@ test('lost backing routes a RE-HARVEST task, not a URL scout', () => {
   assert.match(started[0].label, /^reharvest-/);
   rmSync(dir, { recursive: true, force: true });
 });
+
+// RETIRING A REDUNDANT DEAD SOURCE. The scouting order has three options —
+// same document elsewhere, same document from the archive, different source and
+// re-harvest — and none fits a dead source whose every result is ALSO backed by
+// a live one. There is nothing to replace and no licence to remove, so a scout
+// re-points the URL, fails, and spends a round. frontier-16 spent three that
+// way on one walled textbook whose two results were backed the whole time.
+test('a dead source whose results are all backed elsewhere is retired, and recorded', () => {
+  const dir = fixture({ backedBy: [DEAD, LIVE] });
+  const record = join(dir, 'research', 'retired.json');
+  const r = run(dir, ['--retire-redundant', '--retired-record', record]);
+  assert.equal(r.status, 0, r.stderr);
+  assert.match(r.stdout, /retired 1 redundant dead source/);
+
+  const cov = JSON.parse(readFileSync(join(dir, 'research', 'demo-batch-4.coverage.json'), 'utf8'));
+  const urls = cov.pages[0].sources.map((s: any) => s.url);
+  assert.deepEqual(urls, [LIVE], 'the dead source should be gone and the live one kept');
+
+  // The rows leave the harvest with it, so this artifact is the only durable
+  // evidence the source was ever read. Silent removal is the defect.
+  const rec = JSON.parse(readFileSync(record, 'utf8'));
+  assert.equal(rec.retired.length, 1);
+  assert.equal(rec.retired[0].url, DEAD);
+  assert.match(rec.retired[0].reason, /independently backed/);
+  assert.equal(rec.retired[0].results[0].item, 'ex-sine-period-arc-length-as-a-complete-elliptic-integral');
+
+  // And the level still passes on its own terms afterwards.
+  assert.equal(run(dir).status, 0);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('a dead source carrying the ONLY backing is never retired', () => {
+  const dir = fixture({ backedBy: [DEAD] });
+  const r = run(dir, ['--retire-redundant']);
+  // Retirement must not fire, and the level must still fail as backing-lost:
+  // this is the case that needs a different source, not a deletion.
+  assert.equal(r.status, 1);
+  assert.match(r.stdout, /no dead source was redundant/);
+  assert.match(r.stderr, /backing-lost/);
+  const cov = JSON.parse(readFileSync(join(dir, 'research', 'demo-batch-4.coverage.json'), 'utf8'));
+  assert.equal(cov.pages[0].sources.length, 1, 'the source must survive: removing it deletes the result');
+  rmSync(dir, { recursive: true, force: true });
+});

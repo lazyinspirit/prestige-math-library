@@ -1,5 +1,38 @@
 # Frontier-16 batch 4 — Step-2 scaffold notes
 
+## Source-scouting retry (2026-08-20)
+
+The unstamped gate now names the following sources, all on
+`trigonometric-and-oscillatory-examples-in-one-variable`: Lebl's *Basic
+Analysis I*, Lebl's *Basic Analysis II*, and Hu–Li–Li–Yan's *Calculus: Rigor,
+Concision, Clarity*. The Lebl entries now use the author's official
+GitHub Pages PDF mirrors,
+`https://jirilebl.github.io/ra/realanal.pdf` and
+`https://jirilebl.github.io/ra/realanal2.pdf`. Lebl's official book front
+matter publishes these as alternate hosts for the same two volumes, so the
+Exercise 5.2.18 and §11.8.4 harvests do not change. The Volume I entry retains
+the replaced `jirka.org` address as `original_url`; the Volume II entry retains
+the run's original obsolete draft URL, and this note records the immediately
+replaced `https://www.jirka.org/ra/realanal2.pdf` host without discarding that
+older provenance.
+
+The HKUST URL was not replaced. The web-research channel opened the complete
+PDF and located Example 7.1.7 at PDF pages 194–195 (printed
+pp. 189–190), including the ellipse perimeter, second-kind elliptic integral,
+rescaled-sine-period, and non-elementarity statements recorded in coverage. No
+independent live host for the same edition surfaced, and changing sources would
+therefore be an unnecessary re-harvest.
+
+After the URL edits, the required stamping command still returned `EAI_AGAIN`
+for the official Lebl mirrors and the complete HKUST PDF. A control Node fetch
+of the already-stamped arXiv source `https://arxiv.org/pdf/1410.1582` also
+returned `EAI_AGAIN`, proving that this runtime's shell DNS is unavailable
+rather than that the named bodies are dead or partial. Every other retained
+source already carries a valid stamp; the named sources remain unstamped. No
+stamp was fabricated. Exact next action in a runtime with Node DNS access:
+
+`node tools/source-fetch-check.mjs --coverage research/frontier-16-batch-4.coverage.json --stamp`
+
 ## Scope and design check
 
 The owned pair is `trigonometric-and-oscillatory-examples-in-one-variable` at order `288.00023` with companion order `288.00024`. Before dependency closure, the design and `research/plan-spec.json` agreed exactly on order, title, companion, category, and the four stated prerequisites. The item-level proof pass exposed two additional page prerequisites, `connectedness` and `further-trigonometric-identities-and-inverses`; they are proposed in the manifest rather than silently assumed. The in-memory overlay of the manifest on the current spec validates cleanly, but the actual spec remains untouched and Step 4 remains authoritative.
@@ -155,8 +188,8 @@ Every source below was opened as a substantive full-text page or PDF through the
 |---|---|---|
 | John K. Hunter, *An Introduction to Real Analysis* — `https://www.math.ucdavis.edu/~hunter/intro_analysis_pdf/intro_analysis.pdf` | Examples 6.10, 8.9–8.10; Theorem 9.22; Example 9.24 | reciprocal sine limits and derivatives; M-test; Weierstrass convergence and classical nowhere-differentiable example |
 | Jeff Calder, *Weierstrass’s Non-Differentiable Function* — `https://www-users.cse.umn.edu/~jwcalder/104F14/weierstrass-function.pdf` | Theorem 1 and proof, pp. 1–5 | exact condition $ab>1+3\pi/2$; cosine modulus estimate; probe construction; low/tail bounds; nowhere differentiability |
-| Jiří Lebl, *Basic Analysis I* — `https://jirka.org/ra/realanal.pdf` | Exercise 5.2.18 | continuous Riemann–Lebesgue lemma |
-| Jiří Lebl, *Basic Analysis II*, version 6.3 — `https://www.jirka.org/ra/realanal2.pdf` | §11.8.4, printed pp. 200–201 | symmetric finite exponential sum and Dirichlet-kernel formula, supporting the finite sine-harmonic sum |
+| Jiří Lebl, *Basic Analysis I* — `https://jirilebl.github.io/ra/realanal.pdf` | Exercise 5.2.18 | continuous Riemann–Lebesgue lemma |
+| Jiří Lebl, *Basic Analysis II*, version 6.3 — `https://jirilebl.github.io/ra/realanal2.pdf` | §11.8.4, printed pp. 200–201 | symmetric finite exponential sum and Dirichlet-kernel formula, supporting the finite sine-harmonic sum |
 | John Hutchinson, *Introduction to Analysis* — `https://maths-people.anu.edu.au/~john/Assets/Analysis%201.pdf` | §15.7, Remark 15.7.2 | `sin(nx)` boundedness, failure of equicontinuity, and absence of uniformly convergent subsequences |
 | Gary Gruenhage and Mark Guest, *Topology Course Notes* — `https://webhome.auburn.edu/~gruengf/papers/Topology_Course_Notes.pdf` | §2.3.1, Example 111 | topologist’s sine curve connectedness and failure of path connectedness |
 | L. M. Hall, *Special Functions* — `https://web.mst.edu/_disabled/lmhall/SPFNS/spfns.pdf` | §3.1, Example 3.1.2 | complete elliptic integral of the second kind and its non-elementarity outside degenerate moduli |
@@ -403,3 +436,34 @@ What was not verified:
 - No permission prompt or escalation was used.
 
 No mathematical, dependency, size, cross-batch, generated-load-bearing, or published-falsehood blocker remains. The sole blocker is mechanical source stamping under sandbox DNS.
+
+## Source-scouting round 2 — HKUST calculus host recovery
+
+The unstamped coverage entry was the current HKUST calculus text at
+`https://www.math.hkust.edu.hk/~majhu/Math024/Notes.pdf`. The stamping command
+returned `fetch-check-dead` with `EAI_AGAIN`. Web full-text inspection showed
+that this address is not dead or partial: it serves the complete 260-page PDF,
+with the title and four authors recorded in coverage. The fetched text contains
+§7.1.1, Example 7.1.7, across printed pp. 189–190, including the ellipse
+perimeter as a second-kind elliptic integral, its identification with the
+length of one period of the rescaled sine function, and the non-elementarity
+claim outside the circle case. Thus the existing locator and `contents` rows
+remain faithful.
+
+The same complete text is live at the university's legacy host alias,
+`https://www.math.ust.hk/~majhu/Math024/Notes.pdf`. Its browser fetch reports
+the same 260-page extent, title, authors, table of contents, pagination, and
+Example 7.1.7 text. Coverage now uses that same-source alternate and preserves
+the immediately replaced `www.math.hkust.edu.hk` address as `original_url`; the
+earlier source history was `https://www.math.hkust.edu.hk/~majhu/Math023/Notes_2007.pdf`,
+which had already been replaced and re-harvested during scaffolding. No source
+or content re-harvest is needed for this host-only recovery.
+
+The required stamped check still cannot write `fetch_verified`: the workspace's
+Node fetch fails at DNS resolution with `EAI_AGAIN` for the alternate host.
+Control probes to the already-stamped arXiv and UC Davis sources fail with the
+same error, so this is not evidence against the recovered URL. I found no
+escalation-free way to supply the checker with network DNS, and the no-permission
+rule precludes asking for one. The remaining named dead end is therefore the
+mechanical stamp under this sandbox's network isolation, not source liveness or
+full-text coverage.

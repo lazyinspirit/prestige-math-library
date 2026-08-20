@@ -200,11 +200,30 @@ const fetchGate = (ctx) => gate('source-fetch-check', ['node', 'tools/source-fet
 // REPO constant, not to cwd, so a repair running against any other ctx.repo
 // (a test fixture; a future second checkout) would silently read the wrong
 // tree. ctx.repo is the truth the engine already holds.
-const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[]> = {
-  // dead citation with a recorded archive snapshot -> swap it in place
-  'url-liveness': (ctx) => ['tools/url-recover-apply.mjs',
-    '--liveness', R(ctx, 'research', `${ctx.run}-url-liveness.json`),
-    '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(',')],
+// A gate may own SEVERAL mechanical repairs, run in order. `url-liveness` is
+// the case that needs it: recover from the archive first — RECOVER BEFORE
+// REPLACE is the standing rule — and only then retire what is still dead and
+// carries nothing the level would lose.
+const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[][]> = {
+  'url-liveness': (ctx) => [
+    // 1. dead citation with a recorded archive snapshot -> swap it in place
+    ['tools/url-recover-apply.mjs',
+      '--liveness', R(ctx, 'research', `${ctx.run}-url-liveness.json`),
+      '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(',')],
+    // 2. still dead, and every result on it independently backed by a live
+    //    source -> retire it, recorded. Without this the scouting order has no
+    //    disposition for a redundant dead source: there is nothing to replace
+    //    and no licence to remove, so a scout re-points the URL, fails, and
+    //    spends a round. frontier-16 spent three on one walled textbook whose
+    //    two results were backed by a second treatment the whole time.
+    //    A source carrying the LAST backing is never retired here — that stays
+    //    `backing-lost` and stays a scout's job.
+    ['tools/source-backing.mjs',
+      '--coverage', batchCoverages(ctx).join(','),
+      '--liveness', `research/${ctx.run}-url-liveness.json`,
+      '--retire-redundant',
+      '--retired-record', `research/${ctx.run}-retired-sources.json`],
+  ],
   // sources missing their full-text stamp -> fetch the bodies and stamp them
   'source-fetch-check': (ctx) => ['tools/source-fetch-check.mjs',
     '--coverage', batchCoverages(ctx).map((f: string) => join(ctx.repo, f)).join(','), '--stamp'],
@@ -376,9 +395,20 @@ export const mechanicalRepair = async ({ ctx, failure }: any): Promise<{ outcome
   const { spawnSync } = await import('node:child_process');
   const residues: string[] = [];
   for (const f of handled) {
-    const argvTail = MECHANICAL_REPAIRS[f.id](ctx);
+    const declared = MECHANICAL_REPAIRS[f.id](ctx);
+    // One gate may own several repairs, run in order, most-preferred first.
+    const commands: string[][] = Array.isArray(declared[0]) ? declared as string[][] : [declared as string[]];
     const startedAt = new Date().toISOString();
-    const r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
+    let r: any = { status: 0, stderr: '', stdout: '' };
+    // EVERY step runs, and the LAST one decides. An earlier step leaving
+    // residue is not a failure of the chain — it is why the later steps exist.
+    // `url-liveness` is the shape: the archive swap exits 1 on a citation it
+    // cannot recover, and the retire step then removes it if nothing would be
+    // lost. Breaking on the first non-zero would skip the step that resolves
+    // the case, which is the starvation this whole loop was rewritten to end.
+    for (const argvTail of commands) {
+      r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
+    }
     const classify = OUTAGE_CLASSIFIERS[f.id];
     const reason = classify ? classify(ctx, startedAt) : null;
     // An outage short-circuits: the round is refunded and the clock waited on,
