@@ -46,10 +46,30 @@ raised for your batches, and you own the repairs.
    `node tools/defect-ledger.mjs append`. Disposition and row are one act, and
    the `check` gate enforces it later.
 
-## Output
+## Output — TWO artifacts, and the machine half is what the ledger is audited against
 
-`research/{{run}}-alpha-<your-group>-6b.md`: per finding id, the adjudication
-and what you changed; the refuter findings and their dispositions; the risk
-reviews; and anything you could not check.
+1. **The prose report**, `research/{{run}}-alpha-<your-group>-6b.md`: per finding
+   id, the adjudication and what you changed; the refuter findings and their
+   dispositions; the risk reviews; and anything you could not check.
+
+2. **`research/{{run}}-alpha-<your-group>-6b-findings.json`** — a JSON array,
+   one row per adjudicated reader or refuter finding:
+
+```json
+{"id": "<item-id>", "verdict": "confirmed_fatal" | "confirmed_nonfatal" | "false_positive", "source": "<the finding's reference, e.g. R2-17>"}
+```
+
+   **Write it even if every verdict is `false_positive`.** `defect-ledger check`
+   compares the confirmed-fatal count asserted here against the ledger rows
+   caught at 6a/6b/6c, and the clause is adoption-triggered: if *no* group in
+   the run writes this file the gate degrades to a note and the run's fatal
+   count becomes unauditable — which is exactly how one group Alpha accepted 58
+   fatal reader findings, wrote 13 ledger rows, satisfied every gate, and left
+   the run's headline understating its own fatal count threefold. Once any group
+   writes one, every group must.
+
+   This file does not replace the ledger. A `confirmed_fatal` row here and its
+   `research/defect-ledger.jsonl` row are still one act; this is what makes that
+   act checkable.
 
 **No permission prompts of any kind**, including inside an `&&` chain.
