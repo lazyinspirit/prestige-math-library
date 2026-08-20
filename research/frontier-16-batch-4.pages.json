@@ -12,7 +12,159 @@
       "darboux-lhopital-and-taylor",
       "arc-length-and-rectifiable-curves"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "cor-sine-and-cosine-are-one-lipschitz",
+        "kind": "corollary",
+        "title": "Sine and cosine are $1$-Lipschitz on $\\mathbb{R}$",
+        "strategy": "The derivative formulas give $|\\sin'|=|\\cos|\\le1$ and $|\\cos'|=|\\sin|\\le1$. Apply the published bounded-derivative Lipschitz corollary on the whole real line, including equal endpoints, to obtain both modulus estimates without introducing a separate mean-value argument.",
+        "deps": [
+          "cor-bounded-derivative-implies-lipschitz",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ]
+      },
+      {
+        "id": "def-classical-weierstrass-function",
+        "kind": "definition",
+        "title": "The classical Weierstrass function",
+        "deps": [
+          "def-series-of-real-functions",
+          "def-sine-and-cosine-by-power-series",
+          "def-pi-via-first-positive-cosine-zero",
+          "def-integer-power",
+          "def-integers",
+          "lem-int-embeds-rat",
+          "lem-rat-embeds-dense"
+        ]
+      },
+      {
+        "id": "thm-classical-weierstrass-series-converges-uniformly",
+        "kind": "theorem",
+        "title": "The classical Weierstrass series converges uniformly to a continuous function",
+        "strategy": "For $0<a<1$, bound the $n$th summand $a^n\\cos(b^n\\pi x)$ by $a^n$ uniformly in $x$. The geometric majorant and the published M-test give absolute pointwise and uniform convergence from the first index $n=0$. Each partial sum is continuous, so the published uniform-limit theorem makes the sum continuous on $\\mathbb{R}$.",
+        "deps": [
+          "def-classical-weierstrass-function",
+          "thm-weierstrass-m-test-for-function-series",
+          "thm-uniform-limit-continuous-real-functions",
+          "thm-geometric-series",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "thm-algebra-of-continuous-functions"
+        ]
+      },
+      {
+        "id": "lem-weierstrass-probe-points",
+        "kind": "lemma",
+        "title": "Nearest-integer probe points for the Weierstrass function",
+        "strategy": "Fix $x_0$ and choose an integer $k_m$ nearest to $b^m x_0$, so $z_m=b^m x_0-k_m$ lies in $[-1/2,1/2]$. Put $x_m=(k_m+1)/b^m$. Then $x_0<x_m\\le x_0+3/(2b^m)$, hence $x_m\\to x_0$. For every $n\\ge m$, oddness of $b$ and the shift formulas give $\\cos(b^n\\pi x_m)=-(-1)^{k_m}$ and $\\cos(b^n\\pi x_0)=(-1)^{k_m}\\cos(b^{n-m}z_m\\pi)$.",
+        "deps": [
+          "def-classical-weierstrass-function",
+          "lem-integer-part",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "lem-geometric-sequence-null"
+        ]
+      },
+      {
+        "id": "lem-weierstrass-low-frequency-difference-quotient-bound",
+        "kind": "lemma",
+        "title": "Low-frequency bound for the Weierstrass difference quotient",
+        "strategy": "At the probe $x_m$, split the increment of the Weierstrass series before index $m$. Apply the $1$-Lipschitz estimate for cosine to each of the finitely many terms and sum the geometric progression to obtain $|A_m|\\le \\pi(x_m-x_0)((ab)^m-1)/(ab-1)<\\pi(ab)^m(x_m-x_0)/(ab-1)$. Treat $m=0$ as the empty low-frequency sum.",
+        "deps": [
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "lem-weierstrass-probe-points",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-of-triangle-inequality"
+        ]
+      },
+      {
+        "id": "lem-weierstrass-tail-difference-quotient-bound",
+        "kind": "lemma",
+        "title": "The Weierstrass tail has one sign and dominates at the probe points",
+        "strategy": "Use the exact tail values from the probe lemma. Every tail increment has the common sign $-(-1)^{k_m}$ because it is a positive multiple of $1+\\cos(b^{n-m}z_m\\pi)$. Thus no cancellation occurs. Retain the $n=m$ term, use $|z_m|\\le1/2$ to get $\\cos(z_m\\pi)\\ge0$, and use $x_m-x_0\\le3/(2b^m)$ to conclude $|B_m|\\ge(2/3)(ab)^m(x_m-x_0)$.",
+        "deps": [
+          "thm-classical-weierstrass-series-converges-uniformly",
+          "lem-weierstrass-probe-points",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ]
+      },
+      {
+        "id": "thm-classical-weierstrass-function-nowhere-differentiable",
+        "kind": "theorem",
+        "title": "The classical Weierstrass function is continuous everywhere and differentiable nowhere",
+        "strategy": "Assume $0<a<1$, $b>1$ is an odd integer, and $ab>1+3\\pi/2$. Continuity is already established. At an arbitrary $x_0$, combine the low-frequency upper bound and tail lower bound with the reverse triangle inequality. The selected right difference quotients have absolute value at least $(ab)^m(2/3-\\pi/(ab-1))$, whose coefficient is positive and whose geometric factor tends to infinity. Since the probes tend to $x_0$, no finite derivative exists there.",
+        "deps": [
+          "thm-classical-weierstrass-series-converges-uniformly",
+          "lem-weierstrass-low-frequency-difference-quotient-bound",
+          "lem-weierstrass-tail-difference-quotient-bound",
+          "lem-geometric-sequence-null",
+          "def-derivative"
+        ]
+      },
+      {
+        "id": "cor-uniform-limit-of-smooth-functions-need-not-be-differentiable",
+        "kind": "corollary",
+        "title": "A uniform limit of smooth functions need not be differentiable anywhere",
+        "strategy": "The partial sums of the classical Weierstrass series are finite sums of smooth cosine functions and are therefore smooth. They converge uniformly by the convergence theorem, while the limit is nowhere differentiable by the Weierstrass theorem. This supplies the claimed sequence and checks that the failure occurs at every real point, not merely at one exceptional point.",
+        "deps": [
+          "def-classical-weierstrass-function",
+          "thm-classical-weierstrass-series-converges-uniformly",
+          "thm-classical-weierstrass-function-nowhere-differentiable",
+          "def-higher-derivatives-and-smoothness"
+        ]
+      },
+      {
+        "id": "thm-riemann-lebesgue-lemma-for-continuous-functions",
+        "kind": "theorem",
+        "title": "Riemann–Lebesgue lemma for continuous functions on a compact interval",
+        "strategy": "For continuous $f:[a,b]\\to\\mathbb{R}$ with $a<b$, uniformly approximate $f$ by a polynomial $p$. The integral of $(f-p)\\sin(nt)$ is controlled by the approximation error. Integrate $p\\sin(nt)$ by parts to bound it by $(|p(a)|+|p(b)|+\\int_a^b|p'|)/n$. First choose the approximation and then a positive integer $n$ large enough; this proves $\\lim_{n\\to\\infty}\\int_a^b f(t)\\sin(nt)\\,dt=0$. The same proof with cosine is recorded in the Statement.",
+        "deps": [
+          "cor-weierstrass-approximation-on-a-closed-interval",
+          "thm-integration-by-parts",
+          "lem-integral-elementary-bounds",
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives",
+          "lem-derivative-of-a-power",
+          "thm-continuous-implies-integrable",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-real-limit"
+        ]
+      },
+      {
+        "id": "lem-finite-sine-harmonic-sums",
+        "kind": "lemma",
+        "title": "Finite sums of the sine harmonics",
+        "strategy": "For a positive integer $N$, sum $e^{inx}$ from $n=1$ to $N$ by the finite geometric identity. When $x\\notin2\\pi\\mathbb{Z}$, rewrite numerator and denominator with Euler's formula and take imaginary parts to obtain $\\sum_{n=1}^N\\sin(nx)=(\\cos(x/2)-\\cos((N+1/2)x))/(2\\sin(x/2))$. The cosine bound gives absolute value at most $1/|\\sin(x/2)|$. At multiples of $2\\pi$ the sum is zero and is handled separately so no division by zero occurs.",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "lem-complex-conjugation-and-modulus-laws"
+        ]
+      },
+      {
+        "id": "rem-classical-counterparts-for-trigonometry-free-oscillators",
+        "kind": "remark",
+        "title": "Classical counterparts for the trigonometry-free oscillators",
+        "deps": [
+          "cor-sine-and-cosine-are-one-lipschitz",
+          "thm-classical-weierstrass-function-nowhere-differentiable",
+          "cex-sine-of-one-over-x-has-no-limit-at-zero",
+          "ex-x-sine-of-one-over-x-tends-to-zero",
+          "ex-x-squared-sine-of-one-over-x-is-differentiable",
+          "cex-graph-of-x-sin-one-over-x-is-not-rectifiable",
+          "cex-a-function-with-a-primitive-that-is-not-integrable",
+          "thm-takagi-function-is-continuous-and-nowhere-differentiable"
+        ]
+      }
+    ]
   },
   {
     "order": 288.00024,
@@ -20,9 +172,189 @@
     "kind": "B",
     "category": "real-analysis",
     "title": "Trigonometric and Oscillatory Examples in One Variable: Examples and Counterexamples",
+    "companion": "trigonometric-and-oscillatory-examples-in-one-variable",
     "requires": [
       "trigonometric-and-oscillatory-examples-in-one-variable"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-weierstrass-function-with-one-half-and-thirteen",
+        "kind": "example",
+        "title": "The Weierstrass function with $a=1/2$ and $b=13$",
+        "strategy": "Check that $b=13$ is an odd integer and use the published bound $\\pi<3.185$ to verify $ab=13/2>1+3\\pi/2$. The general theorem then proves that $\\sum_{n=0}^{\\infty}2^{-n}\\cos(13^n\\pi x)$ converges uniformly, is continuous everywhere, and is differentiable nowhere. The construction is a non-load-bearing explicit instance and will be independently rechecked at authoring time.",
+        "deps": [
+          "def-classical-weierstrass-function",
+          "thm-classical-weierstrass-function-nowhere-differentiable",
+          "ex-bartle-sherbert-bounds-for-pi",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "fs-a-continuous-function-is-differentiable-somewhere",
+        "kind": "false-statement",
+        "title": "FALSE: every continuous real function is differentiable somewhere",
+        "strategy": "Assume the universal claim. The classical Weierstrass function is continuous on $\\mathbb{R}$ but the preceding theorem says it is differentiable at no real point. Applying the claim to that function gives an immediate contradiction.",
+        "deps": [
+          "thm-classical-weierstrass-function-nowhere-differentiable"
+        ]
+      },
+      {
+        "id": "cor-x-sine-of-one-over-x-is-not-differentiable-at-zero",
+        "kind": "corollary",
+        "title": "$x\\sin(1/x)$ extended by zero is continuous but not differentiable at zero",
+        "strategy": "Continuity is the published squeezed-limit example. Its difference quotient at zero is exactly $\\sin(1/x)$ on the punctured line, and the published counterexample shows that this function has no limit at zero. Hence the derivative at zero does not exist.",
+        "deps": [
+          "ex-x-sine-of-one-over-x-tends-to-zero",
+          "cex-sine-of-one-over-x-has-no-limit-at-zero",
+          "def-derivative"
+        ]
+      },
+      {
+        "id": "ex-x-squared-sine-of-one-over-x-squared",
+        "kind": "example",
+        "title": "$x^2\\sin(1/x^2)$ has an unbounded, non-Riemann-integrable derivative",
+        "strategy": "Define $F(0)=0$ and $F(x)=x^2\\sin(1/x^2)$ for $x\\ne0$. The quotient $F(h)/h=h\\sin(1/h^2)$ tends to zero, so $F'(0)=0$; the product and chain rules give $F'(x)=2x\\sin(1/x^2)-2\\cos(1/x^2)/x$ off zero. At $x_k=(2\\pi(k+1))^{-1/2}$ the sine term vanishes and the cosine term makes $|F'(x_k)|=2/x_k\\to\\infty$. Every extension of $F'|_{(0,1]}$ is therefore unbounded and cannot be Riemann integrable on $[0,1]$ under the published Darboux convention.",
+        "deps": [
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-derivative",
+          "def-darboux-integral",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "thm-nth-roots-exist",
+          "cor-archimedean-reciprocal"
+        ]
+      },
+      {
+        "id": "fs-a-differentiable-function-has-a-continuous-derivative",
+        "kind": "false-statement",
+        "title": "FALSE: every differentiable function has a continuous derivative",
+        "strategy": "Assume the universal claim and apply it to the published function $f(0)=0$, $f(x)=x^2\\sin(1/x)$ for $x\\ne0$. That item proves $f$ differentiable on $\\mathbb{R}$ and proves that $f'$ is discontinuous at zero, contradicting the claim.",
+        "deps": [
+          "ex-x-squared-sine-of-one-over-x-is-differentiable"
+        ]
+      },
+      {
+        "id": "ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence",
+        "kind": "example",
+        "title": "The sine harmonics are pointwise bounded but have no uniformly convergent subsequence",
+        "strategy": "On $[0,\\pi]$ let $f_n(x)=\\sin(nx)$ for positive integers $n$. The family is uniformly bounded, but the sequence does not converge pointwise on the whole interval, as the values at $\\pi/2$ cycle. It is not equicontinuous at zero because $f_n(\\pi/(2n))=1$. If a subsequence converged uniformly, its continuous limit would vanish at zero; continuity near zero and uniform closeness would contradict the same peak values for large subsequence indices. Finally apply the continuous Riemann–Lebesgue theorem to show $\\int_0^\\pi g(x)\\sin(nx)\\,dx\\to0$ for every fixed continuous $g$.",
+        "deps": [
+          "thm-riemann-lebesgue-lemma-for-continuous-functions",
+          "thm-uniform-limit-continuous-real-functions",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-archimedean-reciprocal",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-equicontinuity-and-boundedness-in-ck",
+          "def-pointwise-uniform-and-uniformly-cauchy-convergence"
+        ]
+      },
+      {
+        "id": "fs-a-pointwise-bounded-sequence-of-continuous-functions-has-a-uniformly-convergent-subsequence",
+        "kind": "false-statement",
+        "title": "FALSE: every pointwise bounded sequence of continuous functions has a uniformly convergent subsequence",
+        "strategy": "Assume the claim and apply it to the sine harmonics on $[0,\\pi]$. They are continuous and even uniformly bounded, hence pointwise bounded, but the preceding example proves that none of their subsequences converges uniformly. This contradiction also identifies the missing Arzelà–Ascoli hypothesis: equicontinuity.",
+        "deps": [
+          "ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence"
+        ]
+      },
+      {
+        "id": "cex-topologists-sine-curve-connected-not-path-connected",
+        "kind": "counterexample",
+        "title": "The topologist's sine curve is connected but not path connected",
+        "strategy": "Let $C=\\{(x,\\sin(1/x)):0<x\\le1\\}$ and $S=C\\cup(\\{0\\}\\times[-1,1])$. The graph $C$ is a continuous image of the connected interval $(0,1]$, and periodicity plus the full sine range shows every point of the vertical segment lies in $\\overline C$; closure preserves connectedness, so $S$ is connected. For path connectedness, assume a path leaves the vertical segment for $C$, take the last parameter at which its first coordinate is zero, and use the intermediate value theorem to force alternating peak and trough values of the second coordinate along parameters tending to that last time. This contradicts continuity of the path.",
+        "deps": [
+          "cor-connected-subsets-of-the-line",
+          "thm-continuous-image-of-a-connected-space",
+          "thm-closure-of-a-connected-set",
+          "thm-product-universal-property",
+          "thm-algebra-of-continuous-functions",
+          "lem-continuity-is-local-and-pastes",
+          "cor-intermediate-value-theorem-topological",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-archimedean-reciprocal",
+          "def-path-connected",
+          "thm-continuity-preimage-characterisation",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "thm-heine-borel-r",
+          "thm-extreme-value-metric",
+          "lem-real-and-metric-notions-agree"
+        ]
+      },
+      {
+        "id": "ex-sine-period-arc-length-as-a-complete-elliptic-integral",
+        "kind": "example",
+        "title": "The arc length of one sine period is $4\\sqrt{2}\\,E(1/\\sqrt{2})$",
+        "strategy": "Apply the published graph-length formula to $x\\mapsto\\sin x$ on $[0,2\\pi]$ to obtain $\\int_0^{2\\pi}\\sqrt{1+\\cos^2x}\\,dx$. Use reflection and period symmetries to reduce to four times the integral over $[0,\\pi/2]$, then rewrite $1+\\cos^2x=2(1-\\tfrac12\\sin^2x)$. With $E(k):=\\int_0^{\\pi/2}\\sqrt{1-k^2\\sin^2t}\\,dt$, this gives $4\\sqrt2E(1/\\sqrt2)$ and checks the nondegenerate modulus $0<1/\\sqrt2<1$.",
+        "deps": [
+          "cor-length-of-the-graph-of-a-c1-function",
+          "thm-sine-and-cosine-derivatives",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-cofunction-supplementary-and-reflection-identities",
+          "thm-additivity-over-subintervals",
+          "thm-substitution",
+          "thm-nth-roots-exist",
+          "def-oriented-integral"
+        ]
+      },
+      {
+        "id": "rem-sine-period-arc-length-integrand-is-nonelementary",
+        "kind": "remark",
+        "title": "The sine-period arc-length integrand has no elementary antiderivative",
+        "deps": [
+          "ex-sine-period-arc-length-as-a-complete-elliptic-integral"
+        ]
+      },
+      {
+        "id": "ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces",
+        "kind": "example",
+        "title": "Tangent identifies a bounded incomplete interval with the unbounded complete real line",
+        "strategy": "Use the published principal-branch definition to identify $\\tan:(-\\pi/2,\\pi/2)\\to\\mathbb{R}$ as a homeomorphism with inverse arctangent. The interval is bounded in the usual metric and $\\mathbb{R}$ is unbounded. The real line is complete, while the interval is not closed in it—its points $\\pi/2-1/(n+1)$ converge to the missing endpoint—so the complete-subspace criterion makes the interval incomplete. Thus neither boundedness nor completeness is preserved by homeomorphism.",
+        "deps": [
+          "def-principal-inverse-tangent",
+          "def-metric-bounded-diameter",
+          "lem-real-line-is-a-metric-space",
+          "thm-reals-cauchy-complete",
+          "lem-real-and-metric-notions-agree",
+          "thm-complete-subspace-iff-closed",
+          "thm-metric-sequential-closure",
+          "cor-archimedean-reciprocal"
+        ]
+      },
+      {
+        "id": "ex-sine-harmonic-series-pointwise-not-uniform",
+        "kind": "example",
+        "title": "$\\sum_{n=1}^{\\infty}\\sin(nx)/n$ converges pointwise but not uniformly",
+        "strategy": "At $x\\in2\\pi\\mathbb{Z}$ every term is zero. Elsewhere the finite-sum lemma bounds the partial sums of $\\sum\\sin(nx)$, and Dirichlet's test with the decreasing weights $1/n$ gives pointwise convergence, with the positive indices implemented as $k+1$ so no $1/0$ term occurs. For nonuniformity on $[0,2]$, given a positive integer $N$ take $x=1/N$ and the tail from $n=N$ through $2N$: each angle lies in $[1,2]$, where the published lower bound gives $\\sin(nx)\\ge1/3$, while $1/n\\ge1/(2N)$. The tail is at least $1/6$, violating the uniform Cauchy criterion for arbitrarily large $N$.",
+        "deps": [
+          "lem-finite-sine-harmonic-sums",
+          "thm-dirichlet-test",
+          "cor-uniform-cauchy-criterion-function-series",
+          "lem-sine-positive-and-cosine-decreasing-on-zero-two",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ]
+      },
+      {
+        "id": "fs-a-continuous-function-on-a-compact-interval-has-a-rectifiable-graph",
+        "kind": "false-statement",
+        "title": "FALSE: every continuous function on a compact interval has a rectifiable graph",
+        "strategy": "Assume the universal claim. The published function $f(0)=0$, $f(x)=x\\sin(1/x)$ on $(0,1]$ is continuous on the compact interval $[0,1]$, while its graph path is proved nonrectifiable through divergent variation. This is a direct contradiction.",
+        "deps": [
+          "cex-graph-of-x-sin-one-over-x-is-not-rectifiable",
+          "ex-x-sine-of-one-over-x-tends-to-zero",
+          "def-bounded-variation-and-total-variation",
+          "thm-rectifiable-iff-coordinate-functions-have-bounded-variation",
+          "thm-p-series-rational",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "cor-archimedean-reciprocal"
+        ]
+      }
+    ]
   }
 ]

@@ -147,7 +147,7 @@ for (const id of owed) {
   if (kind !== 'no-drift' && !detail.trim()) {
     errors.push(`drift-check-detail: ${id} is ${kind} but names no edge`);
   }
-  if (kind === 'drift-applied') {
+  if (kind === 'drift-applied' && detail.trim()) {
     applied += 1;
     // The verdict names its edges as `<page-id> (order <n>)`. Each must be true
     // of the spec and must point backward. A report claiming an edit it did not

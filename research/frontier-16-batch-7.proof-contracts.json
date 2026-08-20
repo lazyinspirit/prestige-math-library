@@ -1,0 +1,2833 @@
+{
+  "version": 1,
+  "level": "frontier-16",
+  "scope": [
+    "thm-taylor-expansion-holomorphic-function",
+    "thm-holomorphic-if-and-only-if-analytic",
+    "cor-holomorphic-functions-are-real-analytic-and-smooth",
+    "thm-zero-order-factorization-holomorphic-function",
+    "cor-cauchy-estimates-taylor-coefficients",
+    "thm-liouville-bounded-entire-function",
+    "thm-entire-polynomial-growth-is-polynomial",
+    "thm-morera-triangle-theorem",
+    "lem-cauchy-estimates-on-concentric-subdiscs",
+    "thm-weierstrass-convergence-holomorphic-functions",
+    "cor-locally-uniformly-convergent-holomorphic-series",
+    "thm-holomorphic-parameter-riemann-integral",
+    "cor-holomorphic-mean-value-property",
+    "cor-nonconstant-entire-function-has-dense-image",
+    "ex-sine-minus-z-zero-of-order-three",
+    "ex-holomorphy-of-integral-of-t-to-z",
+    "cex-boundary-convergent-power-series-no-larger-holomorphic-disc",
+    "cex-powers-locally-uniform-not-uniform-on-closed-disc",
+    "cex-morera-without-continuity",
+    "fs-every-smooth-map-of-the-plane-is-real-analytic",
+    "fs-entire-bounded-on-real-axis-is-constant",
+    "fs-every-entire-function-with-antiderivative-is-polynomial"
+  ],
+  "contracts": {
+    "thm-taylor-expansion-holomorphic-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-metric-bounded-diameter",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let\n$A, B \\subseteq X$.\n\n**Bounded subset.** $A$ is **bounded** if $A = \\emptyset$ or there are $x_0 \\in X$\nand a real $r > 0$ with $A \\subseteq B(x_0, r)$ ([[def-metric-ball]]). The space\n$(X,d)$ is a **bounded metric space** if $X$ is a bounded subset of itself.\n\n**Diameter, for nonempty bounded $A$ only.** Suppose $A$ is nonempty and\nbounded, and put\n\n$$D(A) := \\{\\, d(a,b) : a, b \\in A \\,\\} \\subseteq \\mathbb{R}.$$\n\nThen $D(A)$ is nonempty, since $A$ is, and it is bounded above: fixing $x_0$ and\n$r$ with $A \\subseteq B(x_0,r)$, every $a, b \\in A$ satisfy\n$d(a,b) \\le d(a,x_0) + d(x_0,b) < r + r$ by the triangle inequality, symmetry\n([[def-metric-space]]) and addition of inequalities ([[lem-of-add-order]],\n[[def-ordered-field]]), so $r + r$ is an upper bound of $D(A)$\n([[def-bounded-set]]). Hence $D(A)$ has a least upper bound in $\\mathbb{R}$ by\nthe least-upper-bound property ([[def-complete-ordered-field]]), and that bound\nis unique ([[lem-sup-unique]]). Define\n\n$$\\operatorname{diam}(A) := \\sup D(A).$$\n\n**Distance from a point to a set, for nonempty $A$ only.** Let $x \\in X$ and let\n$A$ be nonempty, and put $E(x,A) := \\{\\, d(x,a) : a \\in A \\,\\}$. Then $E(x,A)$ is\nnonempty and bounded below by $0$, since a metric is nonnegative\n([[lem-metric-nonnegativity]], [[def-bounded-set]]), so it has a greatest lower\nbound ([[thm-infimum-property]], [[def-infimum]]), unique by [[lem-sup-unique]].\nDefine\n\n$$d(x,A) := \\inf E(x,A).$$\n\n**Distance between two sets, for nonempty $A$ and $B$ only.** Put\n$E(A,B) := \\{\\, d(a,b) : a \\in A,\\ b \\in B \\,\\}$, again nonempty and bounded\nbelow by $0$, and define\n\n$$d(A,B) := \\inf E(A,B).$$\n\n**Every one of the three scope restrictions is load bearing.** In this library\n$\\sup$ and $\\inf$ denote real numbers and are written only after existence has\nbeen established; the extended real line is introduced on a later page and is\nnot used for the suprema and infima taken here, and no convention\n$\\sup \\emptyset = -\\infty$ is in force in this development\n([[rem-sup-conventions]]). Accordingly:\n\n- $\\operatorname{diam}(A)$ is defined exactly when $A$ is nonempty **and**\n  bounded. It is not defined for $A = \\emptyset$, and it is not defined, not even\n  as an infinite value, for an unbounded $A$.\n- $d(x,A)$ is defined exactly when $A \\ne \\emptyset$, and $d(A,B)$ exactly when\n  both $A$ and $B$ are nonempty. No boundedness is needed for these two, because\n  $0$ is always a lower bound.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-integral-formula-circle",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $R>0$, and let $f$ be holomorphic on the disc\n\n$$D(a,R)=\\{\\zeta\\in\\mathbb C:|\\zeta-a|<R\\}.$$\n\nIf $0<r<R$, $|z-a|<r$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$, then\n\n$$f(z)=\\frac{1}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{\\zeta-z}\\,d\\zeta.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-uniform-limit-interchanges-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma$ be a fixed rectifiable contour. If continuous functions $f_n$ on its trace converge uniformly to a continuous $f$, then\n$$\\int_\\gamma f_n(z)\\,dz\\longrightarrow\\int_\\gamma f(z)\\,dz.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-cauchy-integral-formula-higher-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$, let $0<r<R$, and let $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. Define $f^{(0)}=f$ and, whenever it exists, $f^{(n+1)}=(f^{(n)})'$. Then every $f^{(n)}$ exists on $D(a,r)$ and, for every $z\\in D(a,r)$ and $n\\in\\mathbb N$,\n\n$$f^{(n)}(z)=\\frac{n!}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{(\\zeta-z)^{n+1}}\\,d\\zeta.$$\n\nIn particular, every holomorphic function has complex derivatives of all orders locally.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Define the distance-to-complement radius, prove it is positive, and separate the whole-plane convention.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For a fixed interior z choose an intermediate positive radius and write Cauchy's circle formula.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Use the finite geometric identity and bound its uniform circle remainder by a geometric null sequence.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Pass the uniformly convergent kernel expansion through the contour integral and collect powers of z-a.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Identify every contour coefficient as f^(n)(a)/n! by the higher-derivative formula.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "L6"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "claim": "Conclude equality with the Taylor series at every point of the maximal contained disc.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A point a in the open domain is fixed, so the quantified local disc is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 handle z=a, where the geometric ratio is zero; every chosen circle radius is strictly positive."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The coefficient at n=0 is identified in step 5.1 using 0!=1, and the first geometric partial sum is retained."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero and constant functions satisfy the same Cauchy formula and coefficient identification in steps 4.1–6.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses |z-a|<r strictly below the distance to the complement, so no boundary point or kernel pole enters the contour."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The intermediate radius is given explicitly by a midpoint in the finite case and |z-a|+1 in the whole-plane case."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts an equality on a disc, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a formal series to holomorphy is asserted in this item."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-holomorphic-if-and-only-if-analytic": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-taylor-expansion-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "Every holomorphic function equals its Taylor series throughout the largest centred open disc contained in its domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-complex-analytic-function",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$. The function $f$ is **analytic at** $a\\in U$ if there are $r>0$ and complex coefficients $(c_n)_{n\\ge0}$ such that $B(a,r)\\subseteq U$ and\n$$f(z)=\\sum_{n=0}^{\\infty}c_n(z-a)^n\\qquad(z\\in B(a,r)),$$\nwith convergence in the sense of [[def-complex-series-power-series-and-absolute-convergence]]. It is **analytic on** $U$ if it is analytic at every point of $U$.\n\nThis terminology is distinct from **holomorphic** in [[def-complex-differentiability-holomorphic-and-entire]]: analytic is defined by local power-series representation, while holomorphic is defined by complex differentiability.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complex-analytic-functions-are-holomorphic",
+          "source_section": "Statement",
+          "quote": "Every function analytic on an open set $U\\subseteq\\mathbb C$ is holomorphic on $U$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Taylor expansion at every point proves the forward implication to local power-series representability.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The published analytic-implies-holomorphic theorem proves the reverse implication on the same open set.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Combine both implications, including the vacuous empty-open-set case.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly checks that both predicates hold vacuously on the empty open set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The power series may be the zero series and the function may be zero; both directions still apply."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Constant functions have a one-term local series and are holomorphic, covered by both cited results."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No connectedness or nonconstancy is assumed, so disconnected and constant cases are retained."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Analyticity is local on open discs; no convergence at a power-series boundary is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is selected; the local series is supplied by Taylor in the forward direction and by the analytic hypothesis in reverse."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 is the holomorphic-to-analytic direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 is the analytic-to-holomorphic direction."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-holomorphic-functions-are-real-analytic-and-smooth": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-taylor-expansion-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "Every holomorphic function equals its Taylor series throughout the largest centred open disc contained in its domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-binomial-theorem-over-complex-numbers",
+          "source_section": "Statement",
+          "quote": "For $z,w\\in\\mathbb C$ and $n\\in\\mathbb N$, write $\\iota_{\\mathbb C}:\\mathbb N\\to\\mathbb C$ for the canonical-natural map of [[def-canonical-natural]]. Then\n$$ (z+w)^n=\\sum_{k\\le n}\\iota_{\\mathbb C}\\!\\left(\\binom nk\\right) z^kw^{n-k}. $$ The conventions and prerequisite facts used below are recorded in [[thm-complex-numbers-form-a-field]], [[def-complex-integer-powers]], [[def-binomial-coefficient]], [[thm-pascals-rule]], [[def-monoid-finite-product]], [[thm-generalised-associativity]], [[thm-induction-principle]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-real-analytic-map-on-the-plane",
+          "source_section": "Definition",
+          "quote": "A smooth map $F=(u,v):U\\to\\mathbb R^2$ on an open set $U\\subseteq\\mathbb R^2$ is real analytic when, at every $a\\in U$, both components equal their total-degree Taylor series on some neighbourhood of $a$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-cauchy-integral-formula-higher-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$, let $0<r<R$, and let $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. Define $f^{(0)}=f$ and, whenever it exists, $f^{(n+1)}=(f^{(n)})'$. Then every $f^{(n)}$ exists on $D(a,r)$ and, for every $z\\in D(a,r)$ and $n\\in\\mathbb N$,\n\n$$f^{(n)}(z)=\\frac{n!}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{(\\zeta-z)^{n+1}}\\,d\\zeta.$$\n\nIn particular, every holomorphic function has complex derivatives of all orders locally.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-complex-differentiability-real-linearity-wirtinger-and-cauchy-riemann",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open, let $a\\in U$, and write $f=u+iv:U\\to\\mathbb C$. The following are equivalent:\n\n1. $f$ is complex differentiable at $a$.\n2. Under $\\mathbb C\\cong\\mathbb R^2$, the map $f$ is real totally differentiable at $a$ and $Df(a)$ is multiplication by a complex number.\n3. The map $f$ is real totally differentiable at $a$ and $\\partial_{\\bar z}f(a)=0$.\n4. The map $f$ is real totally differentiable at $a$ and satisfies the Cauchy–Riemann equations\n\n$$ u_x(a)=v_y(a),\\qquad u_y(a)=-v_x(a). $$\n\nWhen these conditions hold,\n\n$$ f'(a)=u_x(a)+iv_x(a)=v_y(a)-iu_y(a)=\\partial_zf(a). $$",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Choose the complex Taylor expansion at an arbitrary point.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Expand each complex power of the real coordinate increment by the finite binomial theorem and bound the total absolute series.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Identify the real Taylor coefficients with repeated coordinate derivatives using the complex derivative and Cauchy–Riemann dictionary.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Take real and imaginary parts of the absolutely convergent expansion to meet the planar real-analytic definition.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Repeated x- and y-partials are components of powers of i times higher complex derivatives, hence exist and are continuous for every derivative word.",
+          "step": "5.1",
+          "inputs": [
+            "L4",
+            "L5",
+            "L6",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the open domain is empty the conclusion is vacuous; otherwise step 1.1 starts at an arbitrary point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero function has all Taylor and coordinate derivatives zero and satisfies steps 1.1–5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The derivative word of length zero is the function itself and is included in step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant functions reduce the total-degree series to degree zero and remain smooth."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The real expansion is claimed only where |x|+|y| is strictly below the complex Taylor radius."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Taylor supplies coefficients canonically; no nonempty family choice is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is one-directional from holomorphy to real regularity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Real analyticity is not claimed to imply the Cauchy–Riemann equations or holomorphy."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-zero-order-factorization-holomorphic-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-order-of-zero-holomorphic-function",
+          "source_section": "Definition",
+          "quote": "The order $\\operatorname{ord}_a(f)$ is the least natural $n$ for which the $n$th Taylor coefficient is nonzero, and is $+\\infty$ when every Taylor coefficient is zero.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-taylor-expansion-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "Every holomorphic function equals its Taylor series throughout the largest centred open disc contained in its domain.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-complex-analytic-functions-are-holomorphic",
+          "source_section": "Statement",
+          "quote": "Every function analytic on an open set $U\\subseteq\\mathbb C$ is holomorphic on $U$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For finite order m, isolate the first nonzero Taylor coefficient and factor the formal power (z-a)^m.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Prove the shifted coefficient series converges locally and use analytic-implies-holomorphic for its sum g.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The value g(a) is the first nonzero coefficient, and continuity makes g nonzero on a smaller neighbourhood.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Conversely expand a holomorphic g with g(a) nonzero and identify the first nonzero coefficient of (z-a)^m g.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "All Taylor coefficients vanish exactly when Taylor expansion makes f vanish on a neighbourhood, establishing the infinite-order clause.",
+          "step": "5.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A point a and a neighbourhood in the holomorphic domain are fixed."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Order m=0 is covered: the factor is one and g(a)=f(a) is nonzero; the zero function is handled by step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Order one gives a simple zero, and the shifted series in step 2.1 starts with the nonzero linear coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The identically zero germ is separated as infinite order in step 5.1 rather than assigned a finite exponent."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All factorization statements are local on a smaller open disc; no value at the original disc boundary is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The least nonzero coefficient is part of the finite-order hypothesis and is unique by well-ordering."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove finite order implies factorization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 proves factorization with g(a) nonzero implies exact finite order."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-cauchy-estimates-taylor-coefficients": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-taylor-series-holomorphic-function",
+          "source_section": "Definition",
+          "quote": "The Taylor series of $f$ at $a$ is $\\sum_{n\\ge0}f^{(n)}(a)(z-a)^n/n!$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-cauchy-inequalities",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$ and let $0<r<R$. Suppose $M\\ge0$ and\n\n$$|f(\\zeta)|\\le M\\qquad\\text{whenever }|\\zeta-a|=r.$$\n\nThen, for every $n\\in\\mathbb N$,\n\n$$|f^{(n)}(a)|\\le\\frac{n!M}{r^n}.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Substitute c_n=f^(n)(a)/n! into Cauchy's derivative inequality.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Cancel the nonzero factorial to obtain |c_n|<=M/r^n.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The positive-radius circle in the hypotheses is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "M=0 is permitted, while r=0 is excluded before division in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At n=1 the bound is M/r; at n=0 it is the boundary bound |c_0|<=M."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero and constant functions satisfy the estimate, with positive-order coefficients zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The hypothesis is exactly a bound on the circle; no exterior or boundary-limit value is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "M is assumed as a bound rather than chosen as an unproved maximum."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The estimate is one-directional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Coefficient bounds are not asserted to imply holomorphy."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-liouville-bounded-entire-function": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-cauchy-inequalities",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$ and let $0<r<R$. Suppose $M\\ge0$ and\n\n$$|f(\\zeta)|\\le M\\qquad\\text{whenever }|\\zeta-a|=r.$$\n\nThen, for every $n\\in\\mathbb N$,\n\n$$|f^{(n)}(a)|\\le\\frac{n!M}{r^n}.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-zero-complex-derivative-on-a-domain-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be a domain. If $f:U\\to\\mathbb C$ is holomorphic and $f'(z)=0$ for every $z\\in U$, then $f$ is constant on $U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-rn-is-polygonally-connected-and-locally-path-connected",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $\\mathbb{R}^n$ is polygonally connected and connected, and it is locally path-connected and locally connected.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "At arbitrary a and every r>0, Cauchy's inequality gives |f'(a)|<=M/r.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "If f'(a) were nonzero, choose r>M/|f'(a)| to contradict step 1.1.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "choose",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The complex plane is an open connected domain under the Euclidean coordinate identification.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Since a was arbitrary, f'=0 throughout the domain; apply the zero-derivative theorem.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The complex plane is nonempty, as checked in step 3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "When M=0, step 1.1 immediately gives f'=0; the zero function is constant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Derivative order one is the only Cauchy estimate used, and radius one is an allowed intermediate choice."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Every constant entire function is bounded and satisfies the conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The domain is the entire plane, so there is no finite boundary endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The contradiction radius in step 2.1 is an explicit positive real determined by M and |f'(a)|."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Liouville is a one-directional boundedness theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Constancy does not imply a prescribed global bound without choosing the constant value."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-entire-polynomial-growth-is-polynomial": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-cauchy-estimates-taylor-coefficients",
+          "source_section": "Statement",
+          "quote": "If $|f(\\zeta)|\\le M$ on $|\\zeta-a|=r$, then the $n$th Taylor coefficient $c_n$ satisfies $|c_n|\\le M/r^n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define\n$$a^x:=\\exp(x\\log a).$$\nFor the supplementary zero-base convention, define $0^x:=0$ when $x>0$.\n\nThe expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-natural-logarithm",
+          "source_section": "Definition",
+          "quote": "For $x>0$, define $\\log x$ to be the unique real $y$ such that $\\exp(y)=x$. This is well-defined because [[cor-exponential-is-a-bijection-onto-positive-reals]] states that $\\exp:\\mathbb R\\to(0,\\infty)$ is a bijection.\n\nThus $\\log:(0,\\infty)\\to\\mathbb R$ is the inverse function of $\\exp$. In particular, $\\log(\\exp y)=y$ for every $y\\in\\mathbb R$ and $\\exp(\\log x)=x$ for every $x>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-exponential-limits-and-range",
+          "source_section": "Statement",
+          "quote": "$$\\exp(x)\\to+\\infty\\quad(x\\to+\\infty),\\qquad \\exp(x)\\to0\\quad(x\\to-\\infty),$$\nand the range of $\\exp$ is contained in $(0,\\infty)$ and is unbounded above with infimum $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-taylor-expansion-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "Every holomorphic function equals its Taylor series throughout the largest centred open disc contained in its domain.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Identify $\\mathbb{Z}$ with its canonical copy inside $\\mathbb{R}$, along the\nembeddings $\\mathbb{N} \\to \\mathbb{Z} \\to \\mathbb{Q} \\to \\mathbb{R}$\n([[lem-nat-embeds-int]], [[lem-int-embeds-rat]], [[lem-rat-embeds-dense]],\n[[def-integers]]). Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$\n\nIt is written $\\lfloor x \\rfloor$ and called the **integer part**, or **floor**,\nof $x$.\n\n**Two independent ingredients are needed and neither may be dropped.** Existence\nis the Archimedean property ([[thm-of-archimedean]]) together with the\nwell-ordering of $\\mathbb{N}$ ([[thm-well-ordering-principle]]): the first says\nthat $x$ is caught between two integers at all, the second picks the *least*\ninteger above $x$. Uniqueness is the discreteness of $\\mathbb{Z}$: no integer\nlies strictly between $m$ and $m+1$.\n\nThis lemma is stated once here and reused. It is what turns \"the nearest integer\nto $x$\" from a picture into an object, and the companion page's oscillator\n$\\psi(x) = \\inf_{n \\in \\mathbb{Z}} |x - n|$ is computed from it in one line.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For every natural n>N, apply the coefficient estimate on the radius-R circle to the polynomial growth bound.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For R>=1 bound (1+R)^N/R^n by 2^N R^(N-n) and show this tends to zero through the exp-log definition of real powers.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Every Taylor coefficient with index n>N is zero, so the entire Taylor expansion truncates.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L6"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "The integer-part inequalities identify the largest possible nonzero natural degree as floor N.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L7"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Handle C=0 and N=0 explicitly and conclude the stated degree bound.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The complex plane domain is nonempty and the entire Taylor expansion is global."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 handles C=0 and N=0; the zero polynomial is allowed."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first vanishing index is floor N+1, and step 4.1 checks the integer boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant entire functions and the zero function satisfy the growth hypothesis and degree conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Only radii R>=1 are sent to infinity; no division by R=0 or undefined zero-base real power occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary coefficient is selected; each fixed natural n>N is treated uniformly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is one-directional from growth to algebraic form."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A polynomial need not satisfy the displayed bound for arbitrary preassigned C and N, so no converse is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-morera-triangle-theorem": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-oriented-complex-triangle-and-boundary",
+          "source_section": "Definition",
+          "quote": "For $u,v\\in\\mathbb C$, write\n\n$$\\ell_{uv}(t)=(1-t)u+tv\\qquad(0\\le t\\le1)$$\n\nfor the directed line segment from $u$ to $v$. It is a piecewise-$C^1$ complex contour, and its length is $|v-u|$ by [[cor-piecewise-c1-paths-have-additive-speed-integral-length]].\n\nFor an ordered triple $a,b,c\\in\\mathbb C$, the **filled complex triangle** is\n\n$$\\Delta[a,b,c]=\\{(1-s-t)a+sb+tc:s,t\\ge0,\\ s+t\\le1\\}.$$\n\nIts **positively oriented boundary contour** is\n\n$$\\partial\\Delta[a,b,c]=\\ell_{ab}*\\ell_{bc}*\\ell_{ca},$$\n\nwith concatenation understood up to increasing reparametrization as in [[def-complex-contours-reversal-concatenation-and-closedness]]. Reversing the order of two vertices reverses the orientation. Repeated or collinear vertices are allowed; thus this notation also covers degenerate triangles.\n\nThe **perimeter** and **diameter** are\n\n$$P(\\Delta[a,b,c])=|b-a|+|c-b|+|a-c|$$\n\nand\n\n$$\\operatorname{diam}(\\Delta[a,b,c])=\\sup\\{|z-w|:z,w\\in\\Delta[a,b,c]\\},$$\n\nwhere the latter is the metric diameter of [[def-metric-bounded-diameter]] under the standard identification of [[rem-complex-plane-euclidean-dictionary]]. These quantities are defined for every ordered triple: the filled triangle is nonempty because it contains $a$, and if $z=(1-s-t)a+sb+tc$ then the modulus laws of [[lem-complex-conjugation-and-modulus-laws]] give $|z-a|\\le |b-a|+|c-a|$. Hence it lies in a ball of finite positive radius and is bounded. Its perimeter is the length of its boundary contour, including in the degenerate cases.\n\nIf $f$ is continuous on the trace of the boundary, abbreviate\n\n$$I_f[a,b,c]=\\int_{\\partial\\Delta[a,b,c]}f(z)\\,dz.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and star-shaped with respect to $a\\in U$ in the sense of [[rem-plane-star-shaped-and-convex-dictionary]], and let $f:U\\to\\mathbb C$ be continuous. Suppose\n\n$$\\int_{\\partial\\Delta[u,v,w]}f(\\zeta)\\,d\\zeta=0$$\n\nfor every filled triangle $\\Delta[u,v,w]\\subseteq U$ in the sense of [[def-oriented-complex-triangle-and-boundary]]. Then\n\n$$F(z)=\\int_{\\ell_{az}}f(\\zeta)\\,d\\zeta$$\n\nis holomorphic on $U$ and satisfies $F'(z)=f(z)$ for every $z\\in U$. Thus $F$ is a primitive of $f$ as defined in [[def-complex-primitive]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cauchy-integral-formula-higher-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$, let $0<r<R$, and let $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. Define $f^{(0)}=f$ and, whenever it exists, $f^{(n+1)}=(f^{(n)})'$. Then every $f^{(n)}$ exists on $D(a,r)$ and, for every $z\\in D(a,r)$ and $n\\in\\mathbb N$,\n\n$$f^{(n)}(z)=\\frac{n!}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{(\\zeta-z)^{n+1}}\\,d\\zeta.$$\n\nIn particular, every holomorphic function has complex derivatives of all orders locally.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nNo continuity of $f'$ is assumed, and repeated or collinear vertices are allowed.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Fix a point and choose a small disc whose closure lies in the open set; every filled triangle in it satisfies the integral hypothesis.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The triangle-integral construction supplies a holomorphic primitive F with F'=f on that disc.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Higher complex differentiability of F makes F'=f holomorphic.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Conversely Goursat makes every triangle-boundary integral of a holomorphic function zero.",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Since the point was arbitrary, combine the two local implications on the whole open set.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "On the empty open set both directions are vacuous; otherwise step 1.1 begins at an arbitrary point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero function has zero integrals and is holomorphic."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A triangle reduced to one point or one segment is allowed by the triangle definition and Goursat."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Disconnected open sets are handled component-free because the proof is local at every point."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The small disc closure is chosen inside the open set, so no boundary continuity is assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The disc radius is obtained directly from openness at the fixed point."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 prove the vanishing-integral condition implies holomorphy."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 proves holomorphy implies all the required triangle integrals vanish."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-cauchy-estimates-on-concentric-subdiscs": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-integral-formula-higher-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f$ be holomorphic on $D(a,R)$, let $0<r<R$, and let $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$. Define $f^{(0)}=f$ and, whenever it exists, $f^{(n+1)}=(f^{(n)})'$. Then every $f^{(n)}$ exists on $D(a,r)$ and, for every $z\\in D(a,r)$ and $n\\in\\mathbb N$,\n\n$$f^{(n)}(z)=\\frac{n!}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{(\\zeta-z)^{n+1}}\\,d\\zeta.$$\n\nIn particular, every holomorphic function has complex derivatives of all orders locally.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-ml-estimate-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "If $|f(z)|\\le M$ on the trace of a rectifiable contour $\\gamma$, with $M\\ge0$, then\n$$\\left|\\int_\\gamma f(z)\\,dz\\right|\\le M L(\\gamma).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-circle-circumference-diameter-ratio-is-pi",
+          "source_section": "Statement",
+          "quote": "For every centre $c\\in\\mathbb R^2$ and radius $r>0$, the once-traversed circle has circumference\n\n$$C(r)=2\\pi r.$$\n\nSince its diameter is $d(r)=2r$, one has $C(r)/d(r)=\\pi$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Apply the higher-derivative circle formula and use |zeta-z|>=R-r on the smaller closed disc.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply ML with circle length 2pi R to obtain n!RM/(R-r)^(n+1).",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Record uniformity in z and the n=0, r=0, and M=0 boundary cases.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The positive-radius outer circle is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The inner radius r may be zero and M may be zero; R-r remains positive by hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Derivative orders zero and one are both included in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Zero and constant functions satisfy the estimate, with positive-order derivatives zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The strict inequality r<R keeps the denominator R-r positive; the estimate includes |z-a|=r."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The boundary bound M is assumed and no point of maximum is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-directional estimate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The estimate is not asserted to characterize holomorphy."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-weierstrass-convergence-holomorphic-functions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-uniform-limit-continuous-complex-functions",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space. If continuous functions $f_n:X\\to\\mathbb C$ converge uniformly to $f:X\\to\\mathbb C$ in the sense of [[def-uniform-convergence-of-complex-valued-functions]], then $f$ is continuous.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-uniform-limit-interchanges-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma$ be a fixed rectifiable contour. If continuous functions $f_n$ on its trace converge uniformly to a continuous $f$, then\n$$\\int_\\gamma f_n(z)\\,dz\\longrightarrow\\int_\\gamma f(z)\\,dz.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nNo continuity of $f'$ is assumed, and repeated or collinear vertices are allowed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-morera-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "A continuous function on an open subset of $\\mathbb C$ is holomorphic if and only if its integral around the boundary of every filled triangle contained in the open set is zero.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cauchy-estimates-on-concentric-subdiscs",
+          "source_section": "Statement",
+          "quote": "If $0\\le r<R$, $M$ bounds $|f|$ on $|\\zeta-a|=R$, and $|z-a|\\le r$, then $|f^{(n)}(z)|\\le n!RM/(R-r)^{n+1}$.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Compact convergence on a small closed disc makes the limit continuous there.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "On every compact triangle, pass the limit through the contour integral; Goursat makes all approximating integrals zero.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Morera applied locally makes the limit holomorphic throughout the open set.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Fix a derivative order and nested concentric discs around an arbitrary point.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Apply the subdisc estimate to f_n-f; the outer-disc uniform error tends to zero.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "claim": "The derivative error tends uniformly to zero on the inner disc, including derivative order zero.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "On an empty open set all conclusions are vacuous; otherwise the proof works pointwise."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero sequence and the zero limit satisfy both holomorphy and every derivative convergence clause."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Derivative order one is covered by steps 4.1–6.1, and order zero recovers the original convergence."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant sequences and eventually constant sequences are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Only compactly contained triangles and nested discs are used; no convergence on the domain boundary is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Nested radii are chosen explicitly from one positive ball supplied by openness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a convergence implication, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A holomorphic limit alone does not imply local uniform convergence of a given sequence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-locally-uniformly-convergent-holomorphic-series": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-algebra-of-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f,g:U\\to\\mathbb C$ be complex differentiable at $a\\in U$, and let $\\alpha,\\beta\\in\\mathbb C$. Then\n\n$$ (\\alpha f+\\beta g)'(a)=\\alpha f'(a)+\\beta g'(a), $$\n\n$$ (fg)'(a)=f'(a)g(a)+f(a)g'(a). $$\n\nIf $g(a)\\ne0$, then $g$ is nonzero on some neighbourhood of $a$, the reciprocal $1/g$ is complex differentiable at $a$, and\n\n$$ (1/g)'(a)=-\\frac{g'(a)}{g(a)^2},\\qquad (f/g)'(a)=\\frac{f'(a)g(a)-f(a)g'(a)}{g(a)^2}. $$\n\nEvery constant function has derivative $0$, and the identity function has derivative $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-weierstrass-convergence-holomorphic-functions",
+          "source_section": "Statement",
+          "quote": "A locally uniform limit of holomorphic functions is holomorphic, and for every natural $k$ the $k$th derivatives converge locally uniformly to the $k$th derivative of the limit.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Finite linearity identifies every derivative of each finite partial sum with the corresponding finite derivative sum.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Apply Weierstrass convergence to the partial-sum sequence and each derivative order.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Read the locally uniform derivative limits as termwise differentiated series, including k=0.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty partial sum is the zero holomorphic function."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A series of zero functions and the zero sum are covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Derivative orders zero and one are explicit in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Finite series are eventually constant partial-sum sequences and satisfy the conclusion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Local uniform convergence is asserted only inside the common open domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No term or index is selected from a nonempty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is one-directional from local uniform convergence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Termwise differentiability alone does not imply local uniform convergence of the original series."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "thm-holomorphic-parameter-riemann-integral": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be piecewise-$C^1$ and let $f$ be continuous on its trace. Then\n$$\\int_\\gamma f(z)\\,dz=\\sum_j\\int_{t_j}^{t_{j+1}}f(\\gamma(t))\\gamma'_j(t)\\,dt,$$\nand\n$$\\int_\\gamma |f(z)|\\,|dz|=\\sum_j\\int_{t_j}^{t_{j+1}}|f(\\gamma(t))|\\,|\\gamma'_j(t)|\\,dt.$$\nThe real and imaginary parts of the first display are the published vector line integrals of $(u,-v)$ and $(v,u)$, while the second is the published scalar line integral.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-riemann-fubini-on-product-rectangles",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\mathbb R^p$ and $B\\subseteq\\mathbb R^q$ be nondegenerate closed rectangles, and let $f:A\\times B\\to\\mathbb R$ be Riemann integrable. Then the four lower and upper section-integral functions of [[def-sections-and-iterated-riemann-integrals]] are Riemann integrable and\n$$\\int_A\\ell_B=\\int_Au_B=\\int_{A\\times B}f=\\int_B\\ell_A=\\int_Bu_A.$$\n\nIf the $B$-sections are integrable outside a content-zero set $N\\subseteq A$, every bounded exceptionally completed function $h$ with $h(x)=\\int_Bf_x$ for $x\\notin N$ is integrable and\n$$\\int_{A\\times B}f=\\int_Ah.$$\nThe same assertion holds with the coordinate blocks exchanged. In particular, when every section in an order is integrable, the ordinary iterated integral in that order exists and equals the multiple integral. The theorem does not assert that every section of an integrable function is integrable.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-goursat-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C$ be open and let $f:U\\to\\mathbb C$ be holomorphic. If the filled triangle $T=\\Delta[a,b,c]$ of [[def-oriented-complex-triangle-and-boundary]] is contained in $U$, then\n\n$$\\int_{\\partial T}f(z)\\,dz=0.$$\n\nNo continuity of $f'$ is assumed, and repeated or collinear vertices are allowed.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-morera-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "A continuous function on an open subset of $\\mathbb C$ is holomorphic if and only if its integral around the boundary of every filled triangle contained in the open set is zero.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-fundamental-theorem-for-complex-line-integrals",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a primitive of a continuous function $f$ on an open set containing the trace of a rectifiable contour $\\gamma:[a,b]\\to\\mathbb C$. If $F'=f$ is continuous, then\n$$\\int_\\gamma f(z)\\,dz=F(\\gamma(b))-F(\\gamma(a)).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Joint continuity makes the componentwise complex Riemann integral F(z) defined and continuous.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Parametrize the three triangle edges and rewrite each contour integral as a parameter integral.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Apply real Riemann–Fubini to both components on each edge rectangle, then use Goursat on every fixed parameter slice.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "All triangle integrals of F vanish, so Morera makes F holomorphic.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Under the stronger jointly continuous z-derivative hypothesis, use the complex FTC along a short segment and uniform continuity on a compact box.",
+          "step": "5.1",
+          "inputs": [
+            "L6",
+            "L7",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-6-1",
+          "claim": "Pass the uniform difference-quotient error through the parameter integral to obtain F'=integral of the slice derivative.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The complex domain may be empty, in which case the assertion is vacuous; the parameter interval itself is given."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If a=b the parameter integral is zero and both holomorphy and the derivative formula are immediate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-point parameter interval is exactly the a=b case; nondegenerate rectangles are used only when a<b."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant parameter slices and a constant zero integrand are covered by every step."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The z-segment in step 5.1 is chosen inside a compactly contained disc; parameter endpoints are included by joint continuity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The interval and integrand are given; no measurable or nonempty selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem gives sufficient continuity and slice-holomorphy hypotheses, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from holomorphy of the integral to holomorphy of each slice is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-holomorphic-mean-value-property": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cauchy-integral-formula-circle",
+          "source_section": "Statement",
+          "quote": "Let $a\\in\\mathbb C$, let $R>0$, and let $f$ be holomorphic on the disc\n\n$$D(a,R)=\\{\\zeta\\in\\mathbb C:|\\zeta-a|<R\\}.$$\n\nIf $0<r<R$, $|z-a|<r$, and $\\gamma(t)=a+r\\exp(it)$ for $0\\le t\\le2\\pi$, then\n\n$$f(z)=\\frac{1}{2\\pi i}\\int_\\gamma\\frac{f(\\zeta)}{\\zeta-z}\\,d\\zeta.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be piecewise-$C^1$ and let $f$ be continuous on its trace. Then\n$$\\int_\\gamma f(z)\\,dz=\\sum_j\\int_{t_j}^{t_{j+1}}f(\\gamma(t))\\gamma'_j(t)\\,dt,$$\nand\n$$\\int_\\gamma |f(z)|\\,|dz|=\\sum_j\\int_{t_j}^{t_{j+1}}|f(\\gamma(t))|\\,|\\gamma'_j(t)|\\,dt.$$\nThe real and imaginary parts of the first display are the published vector line integrals of $(u,-v)$ and $(v,u)$, while the second is the published scalar line integral.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Apply Cauchy's formula at the centre of the positive-radius circle.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Parametrize the circle and substitute d zeta=i r exp(i theta)d theta.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Cancel the nonzero circle factors to obtain the normalized circular average.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A positive-radius circle is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The hypothesis r>0 excludes zero-radius cancellation; the zero function remains covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The normalization by 2pi is checked once, and radius one is an ordinary instance."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant functions give the same constant after averaging."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The closed circle is compactly contained in the holomorphy disc; no boundary extension is assumed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No point is selected; the centre and radius are given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-directional consequence of holomorphy."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The mean-value property is not claimed here to characterize holomorphy."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cor-nonconstant-entire-function-has-dense-image": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dense-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space, let $\\mathcal{B}$ be a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]) and let $A \\subseteq X$. Interior\nand closure are as in [[def-interior-closure-boundary-top]].\n\n- $A$ is **dense** in $X$ if $\\overline{A} = X$.\n- $A$ is **codense** in $X$ if $X \\setminus A$ is dense.\n- $A$ is **nowhere dense** in $X$ if $\\operatorname{int}(\\overline{A}) = \\varnothing$.\n\n**Three equivalent forms of density, and the one used in practice.** The\nfollowing are equivalent:\n\n1. $\\overline{A} = X$;\n2. $U \\cap A \\ne \\varnothing$ for every nonempty open $U \\subseteq X$;\n3. $B \\cap A \\ne \\varnothing$ for every nonempty $B \\in \\mathcal{B}$.\n\n*Proof.* (1) $\\Rightarrow$ (2): if $U$ is open and nonempty, pick $x \\in U$; then\n$x \\in \\overline{A}$, so $U \\cap A \\ne \\varnothing$ by clause (c) of\n[[thm-closure-characterisation-top]]. (2) $\\Rightarrow$ (3): a nonempty member of\n$\\mathcal{B}$ is a nonempty open set. (3) $\\Rightarrow$ (1): let $x \\in X$; every\n$B \\in \\mathcal{B}$ with $x \\in B$ is nonempty and so meets $A$, hence\n$x \\in \\overline{A}$ by clause (d) of [[thm-closure-characterisation-top]]. Form\n3 is what makes density checkable: for the Sorgenfrey line it is a statement\nabout half-open intervals, and for a metric space a statement about balls.\n\n**Codensity is emptiness of the interior.** $A$ is codense if and only if\n$\\operatorname{int}(A) = \\varnothing$, because\n$X \\setminus \\operatorname{int}(A) = \\overline{X \\setminus A}$\n([[def-interior-closure-boundary-top]]), so $\\overline{X \\setminus A} = X$ holds\nexactly when $\\operatorname{int}(A) = \\varnothing$.\n\n**Nowhere dense implies codense, and the converse fails.** If\n$\\operatorname{int}(\\overline{A}) = \\varnothing$ then\n$\\operatorname{int}(A) \\subseteq \\operatorname{int}(\\overline{A}) = \\varnothing$\nby monotonicity of the interior, so $A$ is codense. The two notions can differ\nonly on sets whose closure is larger than themselves, and there they sometimes\ndo: a dense set with empty interior, such as the rationals inside the real line,\nis codense and is not nowhere dense, its closure being everything. They may also\nagree on such a set: $(0,1)$ inside $\\mathbb{R}$ has closure $[0,1]$ and is\nneither codense nor nowhere dense. A *closed* set is nowhere dense\nprecisely when it is codense, since then $\\overline{A} = A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-complex-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f,g:U\\to\\mathbb C$ be complex differentiable at $a\\in U$, and let $\\alpha,\\beta\\in\\mathbb C$. Then\n\n$$ (\\alpha f+\\beta g)'(a)=\\alpha f'(a)+\\beta g'(a), $$\n\n$$ (fg)'(a)=f'(a)g(a)+f(a)g'(a). $$\n\nIf $g(a)\\ne0$, then $g$ is nonzero on some neighbourhood of $a$, the reciprocal $1/g$ is complex differentiable at $a$, and\n\n$$ (1/g)'(a)=-\\frac{g'(a)}{g(a)^2},\\qquad (f/g)'(a)=\\frac{f'(a)g(a)-f(a)g'(a)}{g(a)^2}. $$\n\nEvery constant function has derivative $0$, and the identity function has derivative $1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-liouville-bounded-entire-function",
+          "source_section": "Statement",
+          "quote": "Every bounded entire function is constant.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Failure of density supplies a nonempty open ball D(w,epsilon) disjoint from the image.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The reciprocal g=1/(f-w) is entire because its denominator never vanishes and is bounded by 1/epsilon.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Liouville makes g constant.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "A constant nonzero reciprocal forces f constant, contradicting the hypothesis.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The image of a function on the nonempty complex plane is nonempty; the missing ball in step 1.1 is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The radius epsilon is strictly positive and the denominator is never zero by construction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A missing unit-radius ball is an ordinary instance; no special index-one issue occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant entire functions are explicitly excluded because their images are not dense."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The entire domain has no boundary endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The missing-ball centre and radius are supplied by the basis characterization of nondensity."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary is one-directional for nonconstant entire functions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A dense image does not by itself imply holomorphy or nonconstancy for an arbitrary map."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-sine-minus-z-zero-of-order-three": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-complex-trigonometric-and-hyperbolic-power-series",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$,\n$$\\sin z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n+1}}{(2n+1)!},\\quad \\cos z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n}}{(2n)!},$$\n$$\\sinh z=\\sum_{n\\ge0}\\frac{z^{2n+1}}{(2n+1)!},\\quad \\cosh z=\\sum_{n\\ge0}\\frac{z^{2n}}{(2n)!}.$$\nAll four series have infinite radius.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-order-of-zero-holomorphic-function",
+          "source_section": "Definition",
+          "quote": "The order $\\operatorname{ord}_a(f)$ is the least natural $n$ for which the $n$th Taylor coefficient is nonzero, and is $+\\infty$ when every Taylor coefficient is zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-zero-order-factorization-holomorphic-function",
+          "source_section": "Statement",
+          "quote": "A holomorphic function has finite order $m$ at $a$ if and only if, on some neighbourhood of $a$, it has the form $f(z)=(z-a)^m g(z)$ with $g$ holomorphic and $g(a)\\ne0$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-complex-trigonometric-and-hyperbolic-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin,\\cos,\\sinh,\\cosh$ are entire and satisfy\n$$\\sin'=\\cos,\\qquad \\cos'=-\\sin,\\qquad \\sinh'=\\cosh,\\qquad \\cosh'=\\sinh.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Subtract z from the sine series and identify the first term as -z^3/3!.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The coefficients in degrees zero through two vanish and the degree-three coefficient is nonzero, hence the order is three.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Use factorization and derivative formulas as independent checks of the order-three conclusion.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example has the specified origin and entire function."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The value and first two coefficients at zero are checked in steps 1.1–2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree one cancels exactly, while degree three is the first surviving term."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The function is not the zero germ because -1/3! is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The series is entire, so no finite endpoint is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No witness is selected; the origin and function are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a computation of one order, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about all order-three zeros is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "ex-holomorphy-of-integral-of-t-to-z": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-complex-logarithms-principal-logarithm-and-complex-powers",
+          "source_section": "Definition",
+          "quote": "For $z\\ne0$ with principal polar form $z=r(\\cos\\theta+i\\sin\\theta)$, $-\\pi<\\theta\\le\\pi$, define the **principal logarithm**\n$$\\operatorname{Log}z:=\\log r+i\\theta.$$\nThe set of all complex logarithms of $z$ is\n$$\\log_{\\mathrm{multi}}z:=\\{v\\in\\mathbb C:\\exp v=z\\}.$$\nFor $w\\in\\mathbb C$, define the **principal power** and the **multivalued power** respectively by\n$$z^w_{\\mathrm{pr}}:=\\exp(w\\operatorname{Log}z),\\qquad z^w_{\\mathrm{multi}}:=\\{\\exp(wv):v\\in\\log_{\\mathrm{multi}}z\\}.$$\nThus the first is one specified complex number and the second is a set of complex numbers; neither notation silently identifies them. The conventions and prerequisite facts used below are recorded in [[thm-polar-form-with-unique-principal-argument]], [[def-natural-logarithm]], [[def-complex-exponential]], [[thm-complex-numbers-form-a-field]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-exponential-addition-and-real-extension]], [[thm-eulers-formula]], [[lem-complex-conjugation-and-modulus-laws]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[cor-exponential-reciprocal-and-positivity]], [[thm-quarter-turn-values-and-shift-formulas]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-real-power-laws",
+          "source_section": "Statement",
+          "quote": "For $a,b>0$ and $r,s\\in\\mathbb R$,\n$$a^{r+s}=a^ra^s,\\qquad (ab)^r=a^rb^r,\\qquad (a/b)^r=a^r/b^r,\\qquad (a^r)^s=a^{rs}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-exponential-is-strictly-increasing",
+          "source_section": "Statement",
+          "quote": "The exponential function is continuous and strictly increasing on $\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-holomorphic-parameter-riemann-integral",
+          "source_section": "Statement",
+          "quote": "If $\\varphi:[a,b]\\times\\Omega\\to\\mathbb C$ is jointly continuous and $\\varphi(t,\\cdot)$ is holomorphic for every $t$, then $F(z)=\\int_a^b\\varphi(t,z)\\,dt$ is holomorphic on $\\Omega$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For t>0 define t^z by the principal power and assign the endpoint value zero at t=0.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "For fixed positive t the z-slice is an exponential of a linear function, hence entire; the zero endpoint slice is entire.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "On Re z>1 prove |t^z|=t^(Re z)<=t and use it for joint continuity at t=0.",
+          "step": "3.1",
+          "inputs": [
+            "L3",
+            "L4",
+            "L5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "Apply the parameter-integral theorem on the finite interval [0,1].",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The parameter interval [0,1] is nonempty and the half-plane is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The special endpoint t=0 is assigned value zero and checked in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "At t=1 the principal logarithm is zero, so the integrand is one; this endpoint is continuous."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The zero slice at t=0 is a constant holomorphic function."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Both endpoints t=0 and t=1 are included in the joint-continuity check."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The endpoint convention and half-plane are explicit; no branch is selected dynamically."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves holomorphy under stated hypotheses, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No conclusion about extending the integral across Re z=1 is asserted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-boundary-convergent-power-series-no-larger-holomorphic-disc": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-weierstrass-m-test-for-complex-function-series",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set and $f_n:X\\to\\mathbb C$. Suppose $M_n\\ge0$, $|f_n(x)|\\le M_n$ for all $n,x$, and the real series $\\sum M_n$ converges. Then $\\sum f_n(x)$ converges absolutely for every $x$ and its partial sums converge uniformly on $X$ in the sense of [[def-uniform-convergence-of-complex-valued-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-p-series-rational",
+          "source_section": "Statement",
+          "quote": "Let $p \\in \\mathbb{Q}$ with $p > 0$. For a natural number $k \\ge 1$ write\n$\\iota(k) = k \\cdot 1_{\\mathbb{R}}$ for the canonical natural, which is positive\n([[lem-of-naturals-positive]]), and write $k^{p} := \\iota(k)^{p}$ for its rational\npower ([[def-rational-power]]). Then\n\n$$\\sum_{k \\ge 1} \\frac{1}{k^{p}} \\ \\text{converges} \\qquad \\Longleftrightarrow \\qquad p > 1 .$$\n\nIn particular the harmonic series $\\sum_{k \\ge 1} 1/k$ diverges, at $p = 1$, and\n$\\sum_{k \\ge 1} 1/k^{2}$ converges, at $p = 2$.\n\n**The index range is not cosmetic.** The series starts at $k = 1$ because\n$1/0^{p}$ is undefined: [[def-rational-power]] gives $0^{p} = 0$ for rational\n$p > 0$, and $0$ has no inverse. Sequences here are functions on $\\mathbb{N}$ and\n$\\mathbb{N}$ contains $0$ ([[def-series]]), so the object named above is a series\nfrom the starting index $1$ in the sense of [[def-series]], not a series of a\nsequence on $\\mathbb{N}$.\n\n**The exponent is rational, and that is a limitation of this page.** Rational\npowers of a positive base are what [[def-rational-power]] supplies; real exponents\nrequire the exponential and the logarithm, which this library develops later. The\nstatement above is therefore the full $p$-series theorem for every exponent this\npage can name.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-termwise-differentiation-of-complex-power-series",
+          "source_section": "Statement",
+          "quote": "Let $f(z)=\\sum_{n\\ge0}c_n(z-a)^n$ have radius $R$. If $|z-a|<R$, then $f$ is complex differentiable at $z$ and\n$$f'(z)=\\sum_{n\\ge1}n c_n(z-a)^{n-1}.$$\nConsequently $f$ is holomorphic on its open disc of convergence ([[def-complex-differentiability-holomorphic-and-entire]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Use |z^n/n^2|<=1/n^2 and the p-series at p=2 to obtain uniform convergence on the closed disc.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Inside the open disc differentiate termwise to get the harmonic-weight derivative series.",
+          "step": "2.1",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Use divergence of the harmonic series and finitely many powers close to one to make the derivative unbounded along r approaching one.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "choose"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "A holomorphic extension past one would have continuous derivative bounded on the compact real interval [0,1].",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "The contradiction proves no holomorphic extension exists to any larger centred disc.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The closed unit disc and the displayed series are nonempty explicit objects."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The series begins at n=1, avoiding division by zero; z=0 contributes zero to every term."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first term n=1 is included and the p-series facts at p=1 and p=2 are both used exactly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The sum is not assumed holomorphic on the boundary; only its hypothetical extension is contradicted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The point z=1 is the endpoint obstruction and the compact interval [0,1] is used only under the extension assumption."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For each requested bound, a finite harmonic partial sum is chosen by divergence and then one real r is chosen close to one."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This counterexample refutes an implication rather than proving a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Failure of extension does not imply boundary uniform convergence for an arbitrary power series."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-powers-locally-uniform-not-uniform-on-closed-disc": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "Let $r \\in \\mathbb{R}$ and let $r^k$ be the integer power ([[def-integer-power]]).\n\n1. If $|r| < 1$ then $(r^k)$ is **null**, that is $r^k \\to 0$\n   ([[def-real-limit]]).\n2. If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**\n   ([[def-divergence-to-infinity]]).\n\nClaim 2 is stated for $|r|^k$ and not for $r^k$ on purpose: for $r < -1$ the\nterms $r^k$ alternate in sign and are unbounded, so they neither converge nor\ndiverge to $+\\infty$; what is true of them is the statement about their absolute\nvalues.\n\nBoth claims come from Bernoulli's inequality ([[lem-bernoulli-inequality]]) and\nthe Archimedean property. Nothing here needs the least-upper-bound property\nexcept through [[thm-of-archimedean]] and [[cor-archimedean-reciprocal]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-uniform-convergence-of-complex-valued-functions",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $f_n,f:X\\to\\mathbb C$. The sequence $(f_n)$ **converges uniformly** to $f$ when\n$$\\forall\\varepsilon>0\\ \\exists N\\ \\forall n\\ge N\\ \\forall x\\in X:\\quad |f_n(x)-f(x)|<\\varepsilon.$$\nIt is **uniformly Cauchy** when\n$$\\forall\\varepsilon>0\\ \\exists N\\ \\forall m,n\\ge N\\ \\forall x\\in X:\\quad |f_m(x)-f_n(x)|<\\varepsilon.$$\n\nWriting $f_n=u_n+iv_n$ and $f=u+iv$, uniform convergence in complex modulus is equivalent to uniform convergence of both real component sequences. This follows from $|u_n-u|,|v_n-v|\\le |f_n-f|$ and $|f_n-f|\\le |u_n-u|+|v_n-v|$. These are the complex analogues of [[def-pointwise-uniform-and-uniformly-cauchy-convergence]], using the metric of [[def-complex-metric-convergence-and-continuity]] and the componentwise convergence clause in [[thm-complex-plane-is-complete]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "For nonempty compact K in the open disc take q=max_K|z|<1 and dominate |z^n| by q^n; handle K empty vacuously.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "At z=1 every term equals one, so convergence to zero fails pointwise and hence uniformly on the closed disc.",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Together the two computations distinguish local uniform convergence on the open domain from uniform convergence on its closure.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The compact set K may be empty, in which case uniform convergence is vacuous; the closed disc is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At z=0, powers with n>=1 are zero; the n=0 term is irrelevant to eventual convergence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The boundary witness is z=1 and equals one for every natural n."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Singleton compact subsets and the constant boundary sequence are included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The failure occurs exactly on the closed-disc endpoint z=1; no claim is made beyond the unit circle."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "For nonempty K, the maximum point is supplied by the extreme-value theorem."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The counterexample distinguishes two convergence notions and states no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Local uniform convergence does not imply any particular boundary behaviour, as this witness shows."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "cex-morera-without-continuity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-oriented-complex-triangle-and-boundary",
+          "source_section": "Definition",
+          "quote": "For $u,v\\in\\mathbb C$, write\n\n$$\\ell_{uv}(t)=(1-t)u+tv\\qquad(0\\le t\\le1)$$\n\nfor the directed line segment from $u$ to $v$. It is a piecewise-$C^1$ complex contour, and its length is $|v-u|$ by [[cor-piecewise-c1-paths-have-additive-speed-integral-length]].\n\nFor an ordered triple $a,b,c\\in\\mathbb C$, the **filled complex triangle** is\n\n$$\\Delta[a,b,c]=\\{(1-s-t)a+sb+tc:s,t\\ge0,\\ s+t\\le1\\}.$$\n\nIts **positively oriented boundary contour** is\n\n$$\\partial\\Delta[a,b,c]=\\ell_{ab}*\\ell_{bc}*\\ell_{ca},$$\n\nwith concatenation understood up to increasing reparametrization as in [[def-complex-contours-reversal-concatenation-and-closedness]]. Reversing the order of two vertices reverses the orientation. Repeated or collinear vertices are allowed; thus this notation also covers degenerate triangles.\n\nThe **perimeter** and **diameter** are\n\n$$P(\\Delta[a,b,c])=|b-a|+|c-b|+|a-c|$$\n\nand\n\n$$\\operatorname{diam}(\\Delta[a,b,c])=\\sup\\{|z-w|:z,w\\in\\Delta[a,b,c]\\},$$\n\nwhere the latter is the metric diameter of [[def-metric-bounded-diameter]] under the standard identification of [[rem-complex-plane-euclidean-dictionary]]. These quantities are defined for every ordered triple: the filled triangle is nonempty because it contains $a$, and if $z=(1-s-t)a+sb+tc$ then the modulus laws of [[lem-complex-conjugation-and-modulus-laws]] give $|z-a|\\le |b-a|+|c-a|$. Hence it lies in a ball of finite positive radius and is bounded. Its perimeter is the length of its boundary contour, including in the degenerate cases.\n\nIf $f$ is continuous on the trace of the boundary, abbreviate\n\n$$I_f[a,b,c]=\\int_{\\partial\\Delta[a,b,c]}f(z)\\,dz.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "source_section": "Statement",
+          "quote": "Let $\\gamma:[a,b]\\to\\mathbb C$ be piecewise-$C^1$ and let $f$ be continuous on its trace. Then\n$$\\int_\\gamma f(z)\\,dz=\\sum_j\\int_{t_j}^{t_{j+1}}f(\\gamma(t))\\gamma'_j(t)\\,dt,$$\nand\n$$\\int_\\gamma |f(z)|\\,|dz|=\\sum_j\\int_{t_j}^{t_{j+1}}|f(\\gamma(t))|\\,|\\gamma'_j(t)|\\,dt.$$\nThe real and imaginary parts of the first display are the published vector line integrals of $(u,-v)$ and $(v,u)$, while the second is the published scalar line integral.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-changing-a-function-at-finitely-many-points",
+          "source_section": "Statement",
+          "quote": "Let $a < b$ be reals, let $f : [a,b] \\to \\mathbb{R}$ be integrable\n([[def-darboux-integral]]), let $E \\subseteq [a,b]$ be finite\n([[def-countable]], [[def-equinumerous]]), and let $g : [a,b] \\to \\mathbb{R}$\nsatisfy\n\n$$g(x) \\;=\\; f(x) \\qquad \\text{for every } x \\in [a,b] \\setminus E .$$\n\nThen $g$ is integrable on $[a,b]$ and\n\n$$\\int_a^b g \\;=\\; \\int_a^b f .$$\n\nIn particular the values of an integrand at the endpoints of the interval, and at\nany finite set of points, are irrelevant to both questions.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-complex-differentiability-implies-continuity",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb C$ is complex differentiable at $a\\in U$, then $f$ is continuous at $a$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-morera-triangle-theorem",
+          "source_section": "Statement",
+          "quote": "A continuous function on an open subset of $\\mathbb C$ is holomorphic if and only if its integral around the boundary of every filled triangle contained in the open set is zero.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Define f(0)=1 and f(z)=0 otherwise and fix an arbitrary possibly degenerate oriented triangle.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "A nonconstant affine edge hits zero at most once, so finite-point invariance gives zero integral; a constant edge has zero velocity.",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "The function is discontinuous at zero and therefore cannot be holomorphic there.",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "All triangle integrals vanish but continuity fails, so this refutes Morera with continuity removed.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the nonempty complex plane and the witness function is explicit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The exceptional point is zero; constant edges at zero are handled by zero velocity in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A nonconstant edge has at most one preimage of the origin, exactly the finite-change case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated and collinear triangle vertices are included through constant and nonconstant edge cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "A vertex or an entire constant edge at the origin is covered explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No arbitrary exceptional point is selected; the origin is fixed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a counterexample to one weakened implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Zero triangle integrals without continuity are not claimed to have any converse consequence."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-smooth-map-of-the-plane-is-real-analytic": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$,\n$$\\exp^{(m)}=\\exp.$$\nIn particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with\n$g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite\n$f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of\n$A$ ([[def-limit-point-r]]) at which $g$ is differentiable\n([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$\nat which $f$ is differentiable. Then $f \\circ g$ is differentiable at $c$ and\n\n$$(f \\circ g)'(c) \\;=\\; f'\\bigl(g(c)\\bigr)\\,g'(c) .$$\n\n**Both limit-point hypotheses are needed, and neither is automatic.** That $c$\nis a limit point of $A$ is what makes $g'(c)$ and $(f \\circ g)'(c)$ defined\nsymbols; that $b = g(c)$ is a limit point of $B$ is what makes $f'(b)$ one.\nNothing forces the second: $g$ may be differentiable at $c$ and send $c$ to an\nisolated point of $B$, and there $f'(b)$ is not defined and the formula asserts\nnothing.\n\n**No case analysis appears anywhere.** The naive difference-quotient proof\nwrites $\\frac{f(g(x)) - f(g(c))}{g(x) - g(c)} \\cdot \\frac{g(x) - g(c)}{x - c}$\nand then has to say what happens where $g(x) = g(c)$, which may occur at points\narbitrarily close to $c$. Carathéodory's factorisation never divides by the\ninner increment, so the difficulty does not arise.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-exponential-beats-every-polynomial",
+          "source_section": "Statement",
+          "quote": "For every $m\\in\\mathbb N$ and every real $a>0$,\n$$\\frac{x^m}{\\exp(ax)}\\longrightarrow0\\qquad(x\\to+\\infty).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put\n\n$$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$\n\nHere $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the factorial of [[def-factorial-and-falling-factorial]]. By contrast, $h^\\alpha$ is the finite product in $\\mathbb R$ of [[def-finite-sum]], with the natural exponents interpreted by [[def-integer-power]]. For the zero multi-index $0$, set $D^0f:=f$. For nonzero $\\alpha$, write\n\n$$D^\\alpha f:=\\partial_0^{\\alpha_0}\\cdots\\partial_{m-1}^{\\alpha_{m-1}}f$$\n\nfor this displayed, canonical order whenever it exists. Coordinate partial derivatives have the meaning fixed in [[def-directional-and-partial-derivatives]].\n\nFor $k\\in\\mathbb N$, $f$ is of class $C^k$ on $U$ when, for every word $(i_1,\\ldots,i_r)$ of coordinate indices with $0\\le r\\le k$, the iterated derivative $\\partial_{i_r}\\cdots\\partial_{i_1}f$ exists and is continuous on $U$; the word of length $0$ denotes $f$. Thus this definition does **not** presuppose that differently ordered derivatives are equal. Equality of their values is a later theorem under these regularity hypotheses.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-real-analytic-map-on-the-plane",
+          "source_section": "Definition",
+          "quote": "A smooth map $F=(u,v):U\\to\\mathbb R^2$ on an open set $U\\subseteq\\mathbb R^2$ is real analytic when, at every $a\\in U$, both components equal their total-degree Taylor series on some neighbourhood of $a$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Off zero, repeated product and chain rules express every derivative as a polynomial in 1/x times exp(-1/x^2).",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Exponential domination makes every derivative and the next difference quotient tend to zero at the origin.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Induction extends all derivatives continuously through zero; F(x,y)=(phi(x),0) is smooth and every mixed derivative at the origin vanishes.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "The planar Taylor series at the origin is zero, while F(x,0) is nonzero for x nonzero, contradicting the real-analytic definition.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L6"
+          ]
+        },
+        {
+          "id": "derive-5-1",
+          "claim": "Therefore the displayed smooth map refutes the false statement.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain and codomain are the nonempty plane."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The piecewise definition and every derivative at x=0 are checked in steps 2.1–3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first derivative and derivative word of length one are included in the induction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Dependence on y is constant, so every mixed derivative involving y is zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Analyticity fails in every neighbourhood of the origin because nonzero x-values occur arbitrarily close."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The witness F is explicit and no selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a refutation of smooth-implies-analytic."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Real analytic maps are smooth by definition here, but that true reverse direction is not refuted."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-entire-bounded-on-real-axis-is-constant": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-complex-trigonometric-and-hyperbolic-power-series",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$,\n$$\\sin z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n+1}}{(2n+1)!},\\quad \\cos z=\\sum_{n\\ge0}\\frac{(-1)^nz^{2n}}{(2n)!},$$\n$$\\sinh z=\\sum_{n\\ge0}\\frac{z^{2n+1}}{(2n+1)!},\\quad \\cosh z=\\sum_{n\\ge0}\\frac{z^{2n}}{(2n)!}.$$\nAll four series have infinite radius.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-trigonometric-hyperbolic-dictionary",
+          "source_section": "Statement",
+          "quote": "For every $z\\in\\mathbb C$,\n$$\\cos z=\\cosh(iz),\\qquad \\sin z=-i\\sinh(iz),\\qquad \\cosh z=\\cos(iz),\\qquad \\sinh z=-i\\sin(iz).$$\nThe complex functions restrict to their real sine, cosine, hyperbolic sine and hyperbolic cosine series on the real axis. The conventions and prerequisite facts used below are recorded in [[def-complex-trigonometric-and-hyperbolic-functions]], [[thm-eulers-formula]], [[thm-complex-exponential-addition-and-real-extension]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-complex-trigonometric-and-hyperbolic-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin,\\cos,\\sinh,\\cosh$ are entire and satisfy\n$$\\sin'=\\cos,\\qquad \\cos'=-\\sin,\\qquad \\sinh'=\\cosh,\\qquad \\cosh'=\\sinh.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "Complex sine is entire, restricts to real sine, and satisfies |sin x|<=1 on the real axis.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "Its derivative is cosine and has value one at zero, so complex sine is nonconstant.",
+          "step": "2.1",
+          "inputs": [
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "Thus sine satisfies the weakened boundedness hypothesis and refutes the constant conclusion.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The real axis and entire complex sine are nonempty explicit objects."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x=0 the bound is attained with sine zero, and nonconstancy is checked by the derivative."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The value cos 0=1 supplies the nonzero first derivative."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The witness is a nonconstant entire function, so it is not a degenerate constant example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The real axis has no finite endpoint in this statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The sine function is explicitly chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This false statement is a one-way claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Liouville's true whole-plane boundedness hypothesis is not weakened in reverse."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "fs-every-entire-function-with-antiderivative-is-polynomial": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and\n\n$$ \\exp'(z)=\\exp z $$\n\nfor every $z\\in\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-exponential-addition-and-real-extension",
+          "source_section": "Statement",
+          "quote": "For all $z,w\\in\\mathbb C$, $\\exp(z+w)=\\exp z\\exp w$. For real $x$, the complex value $\\exp(x+0i)$ equals the published real exponential $e^x$. The conventions and prerequisite facts used below are recorded in [[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]], [[lem-cauchy-product-of-absolutely-convergent-complex-series]], [[def-real-exponential-function-and-e]], [[lem-binomial-theorem-over-complex-numbers]], [[thm-binomial-closed-formula]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+          "source_section": "Statement",
+          "quote": "Every nonconstant complex polynomial has a complex root. The conventions and prerequisite facts used below are recorded in [[lem-complex-polynomial-growth-and-minimum-modulus]], [[lem-dalembert-minimum-modulus-descent]].",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "claim": "The complex exponential is entire and is its own antiderivative.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "derive-2-1",
+          "claim": "The addition law gives exp z exp(-z)=1, so exponential never vanishes; its derivative is nonzero and it is nonconstant.",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3-1",
+          "claim": "If exponential were a nonconstant polynomial, the fundamental theorem of algebra would give a zero.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "derive-4-1",
+          "claim": "It cannot be a constant polynomial because its derivative is nonzero, so it is the required counterexample.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The complex plane domain and exponential witness are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The value exp 0=1 and the nonvanishing product identity are checked in step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The first derivative equals the function and is nonzero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Both constant-polynomial and nonconstant-polynomial cases are excluded separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The entire domain has no finite endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The exponential witness is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a refutation of a one-directional false statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Polynomials do have antiderivatives, but that true reverse implication is not at issue."
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

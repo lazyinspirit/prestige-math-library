@@ -28,8 +28,26 @@ const TOOL = join(REPO, 'tools', 'drift-review-check.mjs');
 
 // ---------------------------------------------------------------- the gate
 
-/** A fixture repo: research/<run>-scope-ledger.json plus an optional report. */
-function fixture(ledgerPages: any[] | null, report: string | null) {
+/** The world the gate reads, not just the report.
+ *
+ *  The gate began as a pure prose check and could say nothing about what the
+ *  review DID — which is how a `requires` edge to an unbuilt page reached
+ *  frontier-16 and blocked a whole track. It now reads `plan-spec.json` and
+ *  `library/`, so a fixture with only a ledger and a report is no longer a
+ *  model of anything it runs against. Every fixture carries all three, and the
+ *  defaults are a consistent world: `beta-page` legitimately requires the
+ *  published `gamma-page`, which sits below it.
+ */
+const SPEC_PAGES = [
+  { id: 'gamma-page', kind: 'A', order: 3, requires: [] },
+  { id: 'alpha-page', kind: 'A', order: 10, requires: [] },
+  { id: 'alpha-page-examples', kind: 'B', order: 11, requires: [] },
+  { id: 'beta-page', kind: 'A', order: 20, requires: ['gamma-page'] },
+  { id: 'beta-page-examples', kind: 'B', order: 21, requires: [] },
+];
+
+function fixture(ledgerPages: any[] | null, report: string | null,
+  { specPages = SPEC_PAGES, published = ['gamma-page'] }: { specPages?: any[]; published?: string[] } = {}) {
   const dir = mkdtempSync(join(tmpdir(), 'drift-'));
   mkdirSync(join(dir, 'research'));
   if (ledgerPages !== null) {
@@ -38,6 +56,11 @@ function fixture(ledgerPages: any[] | null, report: string | null) {
   }
   if (report !== null) {
     writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), report);
+  }
+  writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({ pages: specPages }, null, 2));
+  mkdirSync(join(dir, 'library', 'demo'), { recursive: true });
+  for (const id of published) {
+    writeFileSync(join(dir, 'library', 'demo', `${id}.md`), `id: ${id}\nstatus: published\n`);
   }
   return dir;
 }
@@ -119,6 +142,78 @@ test('an empty ledger fails rather than making every report complete', () => {
   const r = check(dir);
   assert.equal(r.status, 1);
   assert.match(r.stderr, /drift-check-empty-ledger/);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+// ------------------------------------------- the edges, not just the prose
+//
+// frontier-16: the review read a design sentence saying CA-5 cites the FTA
+// statement "once that predecessor is authored", and applied that conditional
+// future citation as a present `requires` edge to a planned, unauthored page.
+// validate-plan passed (backward edge, target has no item list); this gate
+// passed (well-formed prose); and the citing page — plus the 23 pairs chaining
+// through it — became unbuildable, discovered only by re-running `frontier`,
+// which nothing does after step 0.
+
+test('an edge to a page that is neither published nor built by this run fails', () => {
+  const dir = fixture(PAGES, [
+    '### alpha-page', 'VERDICT: no-drift',
+    '### beta-page', 'VERDICT: drift-applied — added delta-page (order 5)',
+  ].join('\n'), {
+    specPages: [...SPEC_PAGES.filter((p) => p.id !== 'beta-page'),
+      { id: 'beta-page', kind: 'A', order: 20, requires: ['gamma-page', 'delta-page'] },
+      { id: 'delta-page', kind: 'A', order: 5, requires: [] }],
+    published: ['gamma-page'],   // delta-page is planned but unbuilt
+  });
+  const r = check(dir);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /drift-check-unbuildable-edge: beta-page requires `delta-page`/);
+  assert.match(r.stderr, /neither published nor built by this run/);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('a page built by this run satisfies an edge, even though nothing is published yet', () => {
+  // The run's own A pages are legitimate targets: they will exist when it ends.
+  const dir = fixture(PAGES, [
+    '### alpha-page', 'VERDICT: no-drift',
+    '### beta-page', 'VERDICT: drift-applied — added alpha-page (order 10)',
+  ].join('\n'), {
+    specPages: [...SPEC_PAGES.filter((p) => p.id !== 'beta-page'),
+      { id: 'beta-page', kind: 'A', order: 20, requires: ['gamma-page', 'alpha-page'] }],
+  });
+  const r = check(dir);
+  assert.equal(r.status, 0, r.stderr);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('a verdict claiming an edge the spec does not carry fails', () => {
+  // A report claiming an edit it did not make produces the same file as one
+  // that made it — the step-3 recheck's failure mode, one stage earlier.
+  const dir = fixture(PAGES, [
+    '### alpha-page', 'VERDICT: no-drift',
+    '### beta-page', 'VERDICT: drift-applied — added gamma-page (order 3), epsilon-page (order 4)',
+  ].join('\n'), {
+    specPages: [...SPEC_PAGES, { id: 'epsilon-page', kind: 'A', order: 4, requires: [] }],
+    published: ['gamma-page', 'epsilon-page'],
+  });
+  const r = check(dir);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /drift-check-not-applied: beta-page reports adding `epsilon-page`/);
+  rmSync(dir, { recursive: true, force: true });
+});
+
+test('an applied edge pointing forward fails — reading order is the owner\'s', () => {
+  const dir = fixture(PAGES, [
+    '### alpha-page', 'VERDICT: drift-applied — added beta-page (order 20)',
+    '### beta-page', 'VERDICT: no-drift',
+  ].join('\n'), {
+    specPages: [...SPEC_PAGES.filter((p) => p.id !== 'alpha-page'),
+      { id: 'alpha-page', kind: 'A', order: 10, requires: ['beta-page'] }],
+    published: ['gamma-page'],
+  });
+  const r = check(dir);
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /drift-check-forward-edge: alpha-page \(order 10\) requires `beta-page` \(order 20\)/);
   rmSync(dir, { recursive: true, force: true });
 });
 

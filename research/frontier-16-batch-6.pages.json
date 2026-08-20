@@ -10,7 +10,197 @@
       "the-fundamental-group-of-the-circle",
       "free-products-and-amalgamation"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "lem-open-cover-loop-generation",
+        "kind": "lemma",
+        "title": "Loops over a two-set path-connected open cover factor through the covering sets",
+        "strategy": "Let $X=U\\cup V$, with $U$, $V$, and $U\\cap V$ path-connected and containing the basepoint. Pull the cover back along a loop, use a Lebesgue subdivision of $[0,1]$, and insert paths in $U$ or $V$ from subdivision vertices to the basepoint. The connecting paths cancel in adjacent factors, so every loop class is a product of inclusion-images from $\\pi_1(U)$ and $\\pi_1(V)$. Treat constant loops and a one-piece subdivision explicitly.",
+        "deps": [
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-path-connected",
+          "thm-lebesgue-number-lemma",
+          "thm-heine-borel-r",
+          "lem-continuity-is-local-and-pastes"
+        ]
+      },
+      {
+        "id": "lem-antipodal-sphere-cover",
+        "kind": "lemma",
+        "title": "Antipodal complements cover $S^n$ by simply connected sets with path-connected overlap for $n\\ge2$",
+        "strategy": "For the north and south poles of $S^n\\subset\\mathbb R^{n+1}$, write stereographic projection and its inverse explicitly. Componentwise continuity, continuity of real quotients on nonzero denominators, and direct substitution prove each pole complement homeomorphic to $\\mathbb R^n$; deleting both poles corresponds to $\\mathbb R^n\\setminus\\{0\\}$. Convexity makes the complements simply connected, and polygonal connectedness gives the overlap condition when $n\\ge2$.",
+        "deps": [
+          "def-euclidean-spheres-and-closed-balls",
+          "def-homeomorphism-and-open-maps",
+          "thm-componentwise-limits-and-continuity",
+          "lem-algebra-of-continuous-real-maps-on-a-space",
+          "thm-product-universal-property",
+          "thm-convex-subsets-have-trivial-fundamental-group",
+          "lem-punctured-rn-is-polygonally-connected"
+        ]
+      },
+      {
+        "id": "thm-higher-dimensional-spheres-are-simply-connected",
+        "kind": "theorem",
+        "title": "$S^n$ is simply connected for every $n\\ge2$",
+        "strategy": "Use the antipodal-complement cover. The generation lemma expresses every loop class as a product of classes coming from the two simply connected complements, so every factor and therefore every loop class is trivial. Nonemptiness and path-connectedness follow from the same cover and its nonempty path-connected overlap.",
+        "deps": [
+          "lem-open-cover-loop-generation",
+          "lem-antipodal-sphere-cover",
+          "def-simply-connected",
+          "thm-fundamental-group-laws"
+        ]
+      },
+      {
+        "id": "lem-van-kampen-homotopy-grid",
+        "kind": "lemma",
+        "title": "A path homotopy over a two-set open cover admits a finite subordinate grid",
+        "strategy": "Pull $\\{U,V\\}$ back along $H:I^2\\to X$. Regard $I^2$ as a compact metric subspace of $\\mathbb R^2$, take a Lebesgue number, and choose a positive grid mesh smaller than it. Every closed grid rectangle then maps into $U$ or $V$. Refine the bottom and top edges to any prescribed finite subdivisions so the lemma can compare predetermined loop factorizations.",
+        "deps": [
+          "def-homotopy-relative-and-path-homotopy",
+          "def-product-topology",
+          "lem-product-topology-on-rn",
+          "thm-heine-borel-rn",
+          "thm-lebesgue-number-lemma"
+        ]
+      },
+      {
+        "id": "lem-van-kampen-factorization-invariance",
+        "kind": "lemma",
+        "title": "Homotopic-loop factorizations have the same value in the group pushout",
+        "strategy": "Associate to a subordinate subdivision a word of based loops in $U$ and $V$, using chosen connector paths from grid vertices to the basepoint. Show that subdivision, changing a connector, and moving a grid edge across one rectangle alter the word only by multiplication inside one factor or by identifying the two images of a loop in $U\\cap V$. Sweep across the subordinate homotopy grid to prove that any two factorizations of endpoint-homotopic loops define the same pushout element.",
+        "deps": [
+          "lem-open-cover-loop-generation",
+          "lem-van-kampen-homotopy-grid",
+          "def-pushout-of-group-homomorphisms",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "thm-fundamental-group-laws"
+        ]
+      },
+      {
+        "id": "thm-seifert-van-kampen",
+        "kind": "theorem",
+        "title": "Seifert–van Kampen identifies the fundamental group with a group pushout",
+        "strategy": "For $X=U\\cup V$ with $U$, $V$, and $U\\cap V$ open and path-connected and with a common basepoint, let $P$ be the pushout of the two inclusion-induced maps from $\\pi_1(U\\cap V)$. The pushout property gives $P\\to\\pi_1(X)$. Define the inverse by choosing an open-cover factorization of each loop; generation gives existence and factorization invariance gives independence of every choice and of the loop representative. Verify both composites on factor images and on arbitrary loop classes. Do not assume either intersection map is injective.",
+        "deps": [
+          "lem-open-cover-loop-generation",
+          "lem-van-kampen-factorization-invariance",
+          "def-pushout-of-group-homomorphisms",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "thm-fundamental-group-laws",
+          "def-group-isomorphism-and-automorphism"
+        ]
+      },
+      {
+        "id": "cor-seifert-van-kampen-simply-connected-overlap",
+        "kind": "corollary",
+        "title": "A simply connected overlap turns the van Kampen pushout into a free product",
+        "strategy": "When $U\\cap V$ is simply connected, both maps from its one-element fundamental group are the unique trivial maps. The van Kampen pushout is therefore the free product $\\pi_1(U)*\\pi_1(V)$ by the published trivial-amalgamation result.",
+        "deps": [
+          "thm-seifert-van-kampen",
+          "def-simply-connected",
+          "cor-trivial-amalgamation-is-the-free-product"
+        ]
+      },
+      {
+        "id": "cor-van-kampen-one-simply-connected-set",
+        "kind": "corollary",
+        "title": "If one set in a van Kampen cover is simply connected, the other fundamental group surjects with overlap-generated kernel",
+        "strategy": "If $V$ is simply connected, replace its fundamental group in the van Kampen pushout by the trivial group. The amalgamated-quotient construction identifies the pushout with $\\pi_1(U)$ modulo the normal closure of the image of $\\pi_1(U\\cap V)$. Read the canonical map as the inclusion-induced surjection and identify its kernel exactly, including a trivial overlap and a trivial $U$.",
+        "deps": [
+          "thm-seifert-van-kampen",
+          "def-simply-connected",
+          "thm-group-pushout-as-an-amalgamated-quotient",
+          "def-normal-closure",
+          "def-quotient-group"
+        ]
+      },
+      {
+        "id": "def-wedge-of-pointed-spaces",
+        "kind": "definition",
+        "title": "The wedge of a family of pointed spaces",
+        "deps": [
+          "def-disjoint-union-topology",
+          "def-quotient-topology",
+          "def-based-loops-and-fundamental-group"
+        ]
+      },
+      {
+        "id": "lem-finite-circle-wedge-open-cover",
+        "kind": "lemma",
+        "title": "Finite wedges of quotient circles have van Kampen covers at the wedge point",
+        "strategy": "For a finite wedge, use quotient arcs of length less than one around each basepoint. To add one circle, take one open set containing the old wedge and a short arc of the new circle, and another containing the new circle and short arcs in the old wedge. Check openness by saturated preimages under the wedge quotient. Give explicit deformation retractions of the two sets onto the two wedge factors and of their overlap onto the wedge point, with the zero- and one-circle cases separated.",
+        "deps": [
+          "def-wedge-of-pointed-spaces",
+          "def-circle-as-real-line-mod-integers",
+          "lem-open-quotient-arcs-in-real-line-mod-integers",
+          "def-retraction-and-deformation-retract",
+          "thm-quotient-universal-property",
+          "lem-continuity-is-local-and-pastes"
+        ]
+      },
+      {
+        "id": "thm-fundamental-group-of-finite-wedge-of-circles",
+        "kind": "theorem",
+        "title": "The fundamental group of a finite wedge of circles is free of that rank",
+        "strategy": "Induct on the natural number $r$ of quotient-circle summands. The empty wedge is a point and the one-circle case is the published circle calculation. At the successor step use the explicit wedge cover and van Kampen with contractible overlap, then identify the free product of the rank-$r$ free group and one infinite cyclic group as the free group of rank $r+1$. Keep the chosen loop in each summand as the displayed free basis.",
+        "deps": [
+          "lem-finite-circle-wedge-open-cover",
+          "cor-seifert-van-kampen-simply-connected-overlap",
+          "thm-fundamental-group-of-the-circle",
+          "cor-free-product-of-infinite-cyclic-groups-is-free",
+          "def-rank-of-a-finite-rank-free-group",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "cor-fundamental-group-of-two-circle-wedge",
+        "kind": "corollary",
+        "title": "$\\pi_1(S^1\\vee S^1)$ is the free group on two generators",
+        "strategy": "Specialise the finite-wedge theorem to two summands and name the two standard circle-loop classes as the free basis.",
+        "deps": [
+          "thm-fundamental-group-of-finite-wedge-of-circles"
+        ]
+      },
+      {
+        "id": "thm-fundamental-group-of-a-product",
+        "kind": "theorem",
+        "title": "$\\pi_1(X\\times Y,(x_0,y_0))\\cong\\pi_1(X,x_0)\\times\\pi_1(Y,y_0)$",
+        "strategy": "Send a loop in $X\\times Y$ to the pair of its coordinate loop classes. Product continuity and homotopy make this a well-defined homomorphism. Its inverse sends a pair of loop classes to the class of the coordinatewise paired loop. The product universal property verifies continuity and homotopies componentwise, and both composites are identities, including empty or one-point factor spaces whenever the displayed basepoints exist.",
+        "deps": [
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-product-topology",
+          "thm-product-universal-property",
+          "def-external-direct-product-of-groups",
+          "thm-external-direct-product-is-a-group",
+          "def-group-isomorphism-and-automorphism"
+        ]
+      },
+      {
+        "id": "def-two-dimensional-torus",
+        "kind": "definition",
+        "title": "The two-dimensional torus $T^2=(\\mathbb R/\\mathbb Z)^2$",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "def-product-topology"
+        ]
+      },
+      {
+        "id": "cor-fundamental-group-of-two-dimensional-torus",
+        "kind": "corollary",
+        "title": "$\\pi_1(T^2)\\cong\\mathbb Z\\times\\mathbb Z$",
+        "strategy": "Apply the product theorem to the two quotient-circle factors, then take the product of the two degree isomorphisms. This route uses no surface presentation and no van Kampen computation.",
+        "deps": [
+          "def-two-dimensional-torus",
+          "thm-fundamental-group-of-a-product",
+          "thm-fundamental-group-of-the-circle"
+        ]
+      }
+    ]
   },
   {
     "order": 298,
@@ -22,7 +212,72 @@
     "requires": [
       "the-seifert-van-kampen-theorem"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-distinct-basepoint-change-isomorphisms-on-two-circle-wedge",
+        "kind": "example",
+        "title": "Two paths can induce distinct change-of-basepoint isomorphisms on $S^1\\vee S^1$",
+        "strategy": "Choose the wedge point and a second point on the first circle. Let one connecting path run along a short arc and let the other first traverse the second circle. Verify inline that conjugating loops by a connecting path gives a basepoint-change isomorphism. After identifying the wedge group with $F(a,b)$, the two maps differ by conjugation by $b$; normal form distinguishes their values on $a$.",
+        "deps": [
+          "def-wedge-of-pointed-spaces",
+          "cor-fundamental-group-of-two-circle-wedge",
+          "thm-fundamental-group-laws",
+          "def-path-connected",
+          "def-homotopy-relative-and-path-homotopy",
+          "thm-normal-form-for-free-products",
+          "def-group-isomorphism-and-automorphism"
+        ]
+      },
+      {
+        "id": "ex-fundamental-group-of-the-punctured-plane",
+        "kind": "example",
+        "title": "$\\pi_1(\\mathbb R^2\\setminus\\{0\\})\\cong\\mathbb Z$",
+        "strategy": "Use the published radial deformation retraction onto the Euclidean unit circle. Functoriality and homotopy invariance make the inclusion and retraction induce inverse isomorphisms. Transport the quotient-circle calculation across the published homeomorphism between $\\mathbb R/\\mathbb Z$ and the Euclidean unit circle.",
+        "deps": [
+          "thm-punctured-rn-deformation-retracts-onto-the-sphere",
+          "def-retraction-and-deformation-retract",
+          "thm-induced-fundamental-group-map-functoriality",
+          "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "thm-fundamental-group-of-the-circle",
+          "def-euclidean-spheres-and-closed-balls"
+        ]
+      },
+      {
+        "id": "ex-fundamental-groups-of-once-and-twice-punctured-two-sphere",
+        "kind": "example",
+        "title": "The once-punctured two-sphere has trivial fundamental group and the twice-punctured two-sphere has fundamental group $\\mathbb Z$",
+        "strategy": "Use the explicit stereographic homeomorphisms from the antipodal-cover lemma. Removing one pole gives $\\mathbb R^2$, whose fundamental group is trivial by convexity. Removing both poles gives $\\mathbb R^2\\setminus\\{0\\}$, whose fundamental group is the preceding example's infinite cyclic group. Verify that the chosen basepoints are carried correctly before applying induced-map functoriality.",
+        "deps": [
+          "lem-antipodal-sphere-cover",
+          "ex-fundamental-group-of-the-punctured-plane",
+          "thm-convex-subsets-have-trivial-fundamental-group",
+          "thm-induced-fundamental-group-map-functoriality"
+        ]
+      },
+      {
+        "id": "fs-every-fundamental-group-is-abelian",
+        "kind": "false-statement",
+        "title": "FALSE: every fundamental group is abelian",
+        "strategy": "Use $S^1\\vee S^1$. Its fundamental group is free on generators $a,b$, and the free-product normal form makes $ab$ and $ba$ distinct. Thus the two loop classes do not commute.",
+        "deps": [
+          "cor-fundamental-group-of-two-circle-wedge",
+          "thm-normal-form-for-free-products"
+        ]
+      },
+      {
+        "id": "fs-van-kampen-with-disconnected-intersection",
+        "kind": "false-statement",
+        "title": "FALSE: the two-set van Kampen conclusion needs no path-connectedness hypothesis on the overlap",
+        "strategy": "Cover $\\mathbb R/\\mathbb Z$ by two open arcs, each obtained as the image of an interval shorter than one and hence simply connected. Arrange the arcs so their intersection has two components. The pushout of the two trivial fundamental groups over the basepoint component is trivial, while the circle has fundamental group $\\mathbb Z$. This witnesses failure of surjectivity when the overlap is disconnected.",
+        "deps": [
+          "def-circle-as-real-line-mod-integers",
+          "lem-open-quotient-arcs-in-real-line-mod-integers",
+          "thm-convex-subsets-have-trivial-fundamental-group",
+          "thm-fundamental-group-of-the-circle",
+          "def-pushout-of-group-homomorphisms"
+        ]
+      }
+    ]
   },
   {
     "order": 299,
@@ -35,7 +290,177 @@
       "covering-spaces-and-lifting",
       "the-fundamental-group-of-the-circle"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "prop-covering-morphism-subgroup-criterion",
+        "kind": "proposition",
+        "title": "A based morphism between connected coverings exists exactly when the induced subgroups are included",
+        "strategy": "For connected coverings $p_i:(E_i,e_i)\\to(B,b_0)$ over a path-connected locally path-connected base, apply the lifting criterion to $p_1:E_1\\to B$ through $p_2$. This gives existence exactly when $(p_1)_*\\pi_1(E_1,e_1)\\subseteq(p_2)_*\\pi_1(E_2,e_2)$, and uniqueness follows from lift uniqueness. Over a common evenly covered neighbourhood, compare sheets to show that the resulting morphism is itself a covering map; do not import the stronger claim from the earlier universal-cover item, which deliberately did not prove it.",
+        "deps": [
+          "def-map-and-isomorphism-of-covering-spaces",
+          "thm-covering-space-lifting-criterion",
+          "thm-uniqueness-of-lifts-from-a-connected-space",
+          "prop-local-path-connectedness-lifts-and-descends-along-coverings",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "thm-induced-fundamental-group-map-functoriality",
+          "def-covering-map-and-evenly-covered-neighbourhoods"
+        ]
+      },
+      {
+        "id": "cor-based-connected-coverings-isomorphic-iff-equal-subgroups",
+        "kind": "corollary",
+        "title": "Based connected coverings are isomorphic exactly when their induced subgroups are equal",
+        "strategy": "Equality gives unique based covering morphisms in both directions. Each composite is a lift of the corresponding projection that fixes the basepoint, so lift uniqueness makes both composites identities. Conversely an isomorphism over the base and its inverse give both subgroup inclusions by functoriality.",
+        "deps": [
+          "prop-covering-morphism-subgroup-criterion",
+          "thm-uniqueness-of-lifts-from-a-connected-space",
+          "def-map-and-isomorphism-of-covering-spaces",
+          "thm-induced-fundamental-group-map-functoriality"
+        ]
+      },
+      {
+        "id": "lem-subgroup-quotient-of-universal-cover",
+        "kind": "lemma",
+        "title": "Every subgroup acts on the universal cover with a connected quotient covering that realizes it",
+        "strategy": "Let $G=\\pi_1(B,b_0)$ and identify it with the universal deck group using the published traversal-order convention, with no inserted path reversal. A subgroup $H\\le G$ acts by deck transformations and inherits the disjoint-translate property. Form $E_H=\\widetilde B/H$. On a universal-cover sheet, $H$-orbits of sheets map homeomorphically to the same evenly covered neighbourhood of $B$, giving a connected covering $p_H:E_H\\to B$. A loop lifts closed in $E_H$ exactly when its universal lift ends in the $H$-orbit of the chosen point, so $(p_H)_*\\pi_1(E_H)=H$.",
+        "deps": [
+          "thm-universal-cover-existence",
+          "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
+          "def-covering-space-action",
+          "thm-orbit-map-of-a-covering-space-action-is-a-covering",
+          "prop-deck-transformations-are-determined-by-one-point-and-act-freely",
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-monodromy-action-on-a-covering-fibre",
+          "thm-covering-maps-inject-fundamental-groups"
+        ]
+      },
+      {
+        "id": "lem-covering-basepoint-change-conjugates-subgroup",
+        "kind": "lemma",
+        "title": "Changing the point over a fixed basepoint conjugates the induced covering subgroup",
+        "strategy": "For a path $\\widetilde\\gamma$ in a connected covering from $e_0$ to $e_1$ over $b_0$, its projection is a loop $\\gamma$ at $b_0$. Conjugating an upstairs loop by $\\widetilde\\gamma$ and projecting gives conjugation of $(p_*)\\pi_1(E,e_0)$ by $[\\gamma]$, with the direction fixed by traversal-order multiplication. Reverse the path for the opposite inclusion. Conversely path-connectedness supplies such a path between any two fibre points.",
+        "deps": [
+          "def-based-loops-and-fundamental-group",
+          "thm-fundamental-group-laws",
+          "def-induced-homomorphism-on-fundamental-groups",
+          "def-path-connected",
+          "thm-path-lifting-for-covering-maps"
+        ]
+      },
+      {
+        "id": "thm-classification-of-connected-covering-spaces",
+        "kind": "theorem",
+        "title": "Connected covering spaces are classified by conjugacy classes of fundamental-group subgroups",
+        "strategy": "For a nonempty path-connected locally path-connected semilocally simply connected base, subgroup quotients of the universal cover give a based connected covering for every subgroup, and the based-isomorphism corollary gives uniqueness for a fixed subgroup. Thus based isomorphism classes correspond to subgroups. Forgetting the point over $b_0$ replaces a subgroup by exactly its conjugacy class by the basepoint-change lemma, giving the unbased classification. Prove both surjectivity and injectivity of both correspondences explicitly.",
+        "deps": [
+          "lem-subgroup-quotient-of-universal-cover",
+          "cor-based-connected-coverings-isomorphic-iff-equal-subgroups",
+          "lem-covering-basepoint-change-conjugates-subgroup",
+          "def-semilocally-simply-connected-space",
+          "def-map-and-isomorphism-of-covering-spaces"
+        ]
+      },
+      {
+        "id": "def-regular-covering",
+        "kind": "definition",
+        "title": "Regular coverings",
+        "deps": [
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "def-deck-transformation-and-deck-group"
+        ]
+      },
+      {
+        "id": "lem-deck-transformations-correspond-to-normalizer-cosets",
+        "kind": "lemma",
+        "title": "Deck transformations of a connected covering correspond to cosets in the subgroup normalizer",
+        "strategy": "For $H=p_*\\pi_1(E,e_0)\\le G=\\pi_1(B,b_0)$, a loop class $g$ lifts from $e_0$ to a fibre point $e_g$. The basepoint-change lemma says the subgroup at $e_g$ is $g^{-1}Hg$ in the fixed traversal convention. The covering-morphism criterion gives a unique deck transformation taking $e_0$ to $e_g$ exactly when $g$ normalizes $H$. One-point determination and monodromy show two normalizer elements give the same deck transformation exactly when they lie in the same right coset of $H$, and composition matches coset multiplication.",
+        "deps": [
+          "lem-covering-basepoint-change-conjugates-subgroup",
+          "prop-covering-morphism-subgroup-criterion",
+          "def-normalizer-of-a-subgroup",
+          "lem-centralizers-and-normalizers-are-subgroups",
+          "def-monodromy-action-on-a-covering-fibre",
+          "prop-deck-transformations-are-determined-by-one-point-and-act-freely",
+          "thm-fundamental-group-laws"
+        ]
+      },
+      {
+        "id": "thm-deck-group-as-normalizer-quotient",
+        "kind": "theorem",
+        "title": "$\\operatorname{Deck}(E/B)\\cong N_G(H)/H$ for a connected covering",
+        "strategy": "Use the normalizer-coset lemma to define the surjective homomorphism $N_G(H)\\to\\operatorname{Deck}(E/B)$. Its kernel is exactly $H$. The first isomorphism theorem gives the displayed quotient isomorphism, with $G=\\pi_1(B,b_0)$ and $H=p_*\\pi_1(E,e_0)$. Check $H\\trianglelefteq N_G(H)$ from the definition of normalizer before forming the quotient.",
+        "deps": [
+          "lem-deck-transformations-correspond-to-normalizer-cosets",
+          "def-normalizer-of-a-subgroup",
+          "lem-centralizers-and-normalizers-are-subgroups",
+          "def-normal-subgroup",
+          "def-quotient-group",
+          "thm-first-isomorphism-theorem-groups"
+        ]
+      },
+      {
+        "id": "thm-regular-covering-characterizations",
+        "kind": "theorem",
+        "title": "A connected covering is regular exactly when its induced subgroup is normal, exactly when deck transformations act transitively on a fibre",
+        "strategy": "The first and third clauses are the definition of regularity and its deck-action formulation. By the basepoint-change formula, fibre points correspond to conjugates of $H$; a deck transformation reaches every fibre point exactly when all those conjugates equal $H$. This is equivalent to $H\\trianglelefteq G$. Use monodromy transitivity for the connected total space and prove both directions without assuming a finite fibre.",
+        "deps": [
+          "def-regular-covering",
+          "lem-covering-basepoint-change-conjugates-subgroup",
+          "lem-deck-transformations-correspond-to-normalizer-cosets",
+          "def-normal-subgroup",
+          "thm-normal-subgroup-characterisations",
+          "prop-monodromy-acts-by-bijections-and-detects-components"
+        ]
+      },
+      {
+        "id": "cor-deck-group-of-a-regular-covering",
+        "kind": "corollary",
+        "title": "A regular connected covering has deck group $\\pi_1(B,b_0)/p_*\\pi_1(E,e_0)$",
+        "strategy": "For a regular covering, the characterization theorem makes $H$ normal in $G$, hence $N_G(H)=G$. Substitute this equality into the normalizer-quotient theorem.",
+        "deps": [
+          "thm-deck-group-as-normalizer-quotient",
+          "thm-regular-covering-characterizations",
+          "def-normalizer-of-a-subgroup"
+        ]
+      },
+      {
+        "id": "cor-real-line-is-universal-cover-of-circle",
+        "kind": "corollary",
+        "title": "$\\mathbb R\\to\\mathbb R/\\mathbb Z$ is a universal covering",
+        "strategy": "The quotient projection is already a covering. The real line is a nonempty convex subset of $\\mathbb R$, hence simply connected. Apply the published definition of universal covering space.",
+        "deps": [
+          "thm-real-line-covers-real-line-mod-integers",
+          "thm-convex-subsets-have-trivial-fundamental-group",
+          "def-universal-covering-space"
+        ]
+      },
+      {
+        "id": "cor-connected-coverings-of-circle-classified-by-nonnegative-integers",
+        "kind": "corollary",
+        "title": "Connected coverings of the circle are classified by the subgroups $n\\mathbb Z$ for $n\\ge0$",
+        "strategy": "Transport induced subgroups through the degree isomorphism $\\pi_1(\\mathbb R/\\mathbb Z,[0])\\cong\\mathbb Z$. Every subgroup is uniquely $n\\mathbb Z$ for a natural $n$. Classification gives one based isomorphism class for each $n$; abelianness makes based and unbased classes agree. For $n\\ge1$ the sheet number is $n$, while $n=0$ is the infinite-sheeted universal cover, identified with the real-line cover.",
+        "deps": [
+          "thm-classification-of-connected-covering-spaces",
+          "thm-fundamental-group-of-the-circle",
+          "lem-subgroups-of-z-are-cyclic",
+          "thm-sheets-equal-fundamental-group-index",
+          "cor-real-line-is-universal-cover-of-circle",
+          "def-index"
+        ]
+      },
+      {
+        "id": "cor-every-connected-covering-of-circle-is-regular",
+        "kind": "corollary",
+        "title": "Every connected covering of the circle is regular",
+        "strategy": "Under the degree isomorphism the induced subgroup lies in the abelian group $(\\mathbb Z,+)$, so it is normal. Apply the regular-covering characterization. This includes the universal and one-sheeted cases.",
+        "deps": [
+          "thm-regular-covering-characterizations",
+          "thm-fundamental-group-of-the-circle",
+          "cor-subgroups-of-abelian-groups-are-normal",
+          "thm-int-comm-ring"
+        ]
+      }
+    ]
   },
   {
     "order": 300,
@@ -47,6 +472,54 @@
     "requires": [
       "classification-of-covering-spaces"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-circle-covering-towers-follow-divisibility",
+        "kind": "example",
+        "title": "Maps between connected circle coverings are governed by divisibility",
+        "strategy": "Let $E_m$ and $E_n$ be the based connected covers classified by $m\\mathbb Z$ and $n\\mathbb Z$, with $m,n\\ge1$. The covering-morphism criterion gives a unique based map $E_m\\to E_n$ exactly when $m\\mathbb Z\\subseteq n\\mathbb Z$, which is equivalent by a direct multiples argument to $n\\mid m$. When $m=nq$, explicit coset representatives show the morphism has $q$ sheets. Include $q=1$ and rule out zero denominators by the stated positive hypotheses.",
+        "deps": [
+          "prop-covering-morphism-subgroup-criterion",
+          "cor-connected-coverings-of-circle-classified-by-nonnegative-integers",
+          "lem-subgroups-of-z-are-cyclic",
+          "def-divides-in-z",
+          "thm-division-algorithm-in-z",
+          "thm-sheets-equal-fundamental-group-index"
+        ]
+      },
+      {
+        "id": "ex-deck-groups-of-connected-circle-coverings",
+        "kind": "example",
+        "title": "The deck group of the $n$-sheeted connected circle cover is $\\mathbb Z/n\\mathbb Z$",
+        "strategy": "For $n\\ge1$, the classified subgroup is $n\\mathbb Z$ and the cover is regular, so the deck group is $(\\mathbb Z,+)/n\\mathbb Z=(\\mathbb Z/n,+)$. For the $n=0$ universal cover, use the universal-cover deck theorem to obtain $(\\mathbb Z,+)$. Keep the one-sheeted case, whose quotient group is trivial.",
+        "deps": [
+          "cor-connected-coverings-of-circle-classified-by-nonnegative-integers",
+          "cor-every-connected-covering-of-circle-is-regular",
+          "cor-deck-group-of-a-regular-covering",
+          "prop-integers-modulo-n-as-a-quotient-group",
+          "thm-deck-group-of-a-universal-cover-is-the-fundamental-group",
+          "thm-fundamental-group-of-the-circle"
+        ]
+      },
+      {
+        "id": "ex-regular-and-nonregular-three-sheeted-wedge-coverings",
+        "kind": "example",
+        "title": "The two-circle wedge has both regular and nonregular connected three-sheeted coverings",
+        "strategy": "Identify the wedge group with $F(a,b)$. A surjection $F(a,b)\\to\\mathbb Z/3$ gives a normal kernel of index three and hence a regular three-sheeted cover. A surjection $F(a,b)\\to S_3$ taking $a$ to $(12)$ and $b$ to $(123)$ has as the preimage of a point stabilizer a subgroup of index three; conjugating the stabilizer by $(123)$ changes it, so the preimage is not normal and its cover is nonregular. Classification realizes both subgroups, and the index theorem verifies the common sheet number.",
+        "deps": [
+          "cor-fundamental-group-of-two-circle-wedge",
+          "thm-classification-of-connected-covering-spaces",
+          "thm-regular-covering-characterizations",
+          "thm-sheets-equal-fundamental-group-index",
+          "def-free-group",
+          "thm-reduced-words-form-the-free-group",
+          "def-symmetric-group",
+          "lem-symmetric-group-is-a-group",
+          "def-orbit-and-stabilizer",
+          "prop-integers-modulo-n-as-a-quotient-group",
+          "thm-image-subgroup-and-kernel-normal"
+        ]
+      }
+    ]
   }
 ]

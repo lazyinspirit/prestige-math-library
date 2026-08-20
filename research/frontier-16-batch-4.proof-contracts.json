@@ -1,0 +1,737 @@
+{
+  "version": 1,
+  "level": "frontier-16",
+  "scope": [
+    "cor-sine-and-cosine-are-one-lipschitz",
+    "thm-classical-weierstrass-series-converges-uniformly",
+    "lem-weierstrass-probe-points",
+    "lem-weierstrass-low-frequency-difference-quotient-bound",
+    "lem-weierstrass-tail-difference-quotient-bound",
+    "thm-classical-weierstrass-function-nowhere-differentiable",
+    "cor-uniform-limit-of-smooth-functions-need-not-be-differentiable",
+    "thm-riemann-lebesgue-lemma-for-continuous-functions",
+    "lem-finite-sine-harmonic-sums",
+    "ex-weierstrass-function-with-one-half-and-thirteen",
+    "fs-a-continuous-function-is-differentiable-somewhere",
+    "cor-x-sine-of-one-over-x-is-not-differentiable-at-zero",
+    "ex-x-squared-sine-of-one-over-x-squared",
+    "fs-a-differentiable-function-has-a-continuous-derivative",
+    "ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence",
+    "fs-a-pointwise-bounded-sequence-of-continuous-functions-has-a-uniformly-convergent-subsequence",
+    "cex-topologists-sine-curve-connected-not-path-connected",
+    "ex-sine-period-arc-length-as-a-complete-elliptic-integral",
+    "ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces",
+    "ex-sine-harmonic-series-pointwise-not-uniform",
+    "fs-a-continuous-function-on-a-compact-interval-has-a-rectifiable-graph"
+  ],
+  "contracts": {
+    "cor-sine-and-cosine-are-one-lipschitz": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Consequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-bounded-derivative-implies-lipschitz",
+          "source_section": "Statement",
+          "quote": "$$|f(x) - f(y)| \\;\\le\\; M\\,|x - y| \\qquad \\text{for all } x, y \\in I ,$$",
+          "uses": ["2.1", "2.2"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derivative-bounds",
+          "claim": "Use [L1] and [L2] to obtain $|\\sin' x|\\le1$ and $|\\cos' x|\\le1$ on all of $\\mathbb R$; [L3] supplies the continuity hypothesis of [L4].",
+          "step": "1.1",
+          "inputs": ["L1", "L2", "L3"]
+        },
+        {
+          "id": "sine-lipschitz",
+          "claim": "Apply [L4] to sine on the order-convex domain $\\mathbb R$ with $M=1$.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "L4"]
+        },
+        {
+          "id": "cosine-lipschitz",
+          "claim": "Apply [L4] to cosine on the same domain with $M=1$.",
+          "step": "2.2",
+          "inputs": ["step 1.1", "L4"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "not_applicable", "reason": "The statement concerns two total functions on the nonempty real line and forms no indexed collection."},
+        {"case": "zero", "status": "checked", "evidence": "Steps 2.1–2.2 include $x=y$, where both sides of each Lipschitz inequality are zero."},
+        {"case": "one", "status": "checked", "evidence": "Step 1.1 uses the exact derivative bound one, and steps 2.1–2.2 preserve that constant."},
+        {"case": "degenerate", "status": "not_applicable", "reason": "There is no variable parameter or restricted subinterval whose degeneration could alter the claim."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "The domain is all of $\\mathbb R$ and has no endpoints."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The proof applies a universal corollary and makes no existential selection."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "Neither Lipschitz assertion is a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "Neither Lipschitz assertion is a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-classical-weierstrass-series-converges-uniformly": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-geometric-series",
+          "source_section": "Statement",
+          "quote": "If $|r| < 1$ then the series $\\sum r^k$ converges",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-weierstrass-m-test-for-function-series",
+          "source_section": "Statement",
+          "quote": "Then $\\sum f_k(x)$ converges\nabsolutely for every $x\\in X$, and the function series $\\sum f_k$ converges\nuniformly on $X$.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$",
+          "uses": ["2.2"]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-differentiable-implies-continuous",
+          "source_section": "Statement",
+          "quote": "Consequently, if $f$ is differentiable on a set $S \\subseteq A$ then $f$ is\ncontinuous at every point of $S$.",
+          "uses": ["2.2"]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-uniform-limit-continuous-real-functions",
+          "source_section": "Statement",
+          "quote": "If $f_k\\to f$ uniformly on $X$, then\n$f:X\\to\\mathbb{R}$ is continuous.",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "majorise-terms",
+          "claim": "For every $n\\in\\mathbb N$ and real $x$, [L1] gives $|a^n\\cos(b^n\\pi x)|\\le a^n$.",
+          "step": "1.1",
+          "inputs": ["L1", "given", "algebra"]
+        },
+        {
+          "id": "geometric-majorant",
+          "claim": "Since $0<a<1$, [L2] makes the majorant series $\\sum_{n=0}^\\infty a^n$ convergent, including its $n=0$ term.",
+          "step": "1.2",
+          "inputs": ["L2", "given"]
+        },
+        {
+          "id": "m-test",
+          "claim": "Apply [L3] to steps 1.1–1.2 to obtain absolute pointwise and uniform convergence of the Weierstrass series.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "step 1.2", "L3"]
+        },
+        {
+          "id": "continuous-partial-sums",
+          "claim": "Cosine is continuous by [L4] and [L5]; composition with the affine map $x\\mapsto b^n\\pi x$ and finite algebra make every partial sum continuous.",
+          "step": "2.2",
+          "inputs": ["L4", "L5", "algebra"]
+        },
+        {
+          "id": "continuous-limit",
+          "claim": "Use the uniform convergence from step 2.1 and continuous partial sums from step 2.2 in [L6].",
+          "step": "3.1",
+          "inputs": ["step 2.1", "step 2.2", "L6"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The series begins at $n=0$; steps 1.1–1.2 include the first term rather than treating it as an empty sum."},
+        {"case": "zero", "status": "checked", "evidence": "At $n=0$ the summand is $\\cos(\\pi x)$ and the majorant is $a^0=1$, so the index-zero convention is explicit."},
+        {"case": "one", "status": "checked", "evidence": "The boundary $a=1$ is excluded by $0<a<1$; the proof uses strict convergence of the geometric majorant."},
+        {"case": "degenerate", "status": "checked", "evidence": "The condition $b>1$ excludes zero and unit frequency, although convergence itself only uses the damping parameter $a$."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "Uniform convergence and continuity are asserted on the whole real line, which has no endpoints."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The M-test and uniform-limit theorem are universal implications and make no selection."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The convergence-and-continuity statement is one directional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The convergence-and-continuity statement is one directional."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-weierstrass-probe-points": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-classical-weierstrass-function",
+          "source_section": "Definition",
+          "quote": "Let $0<a<1$ and let $b>1$ be an odd integer.",
+          "uses": ["1.1", "3.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-integer-part",
+          "source_section": "Statement",
+          "quote": "Then for every real $x$ there is **exactly one** integer $m$\nwith\n\n$$m \\;\\le\\; x \\;<\\; m + 1 .$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "Both sine and cosine have period $2\\pi$",
+          "uses": ["3.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "nearest-integer",
+          "claim": "Apply [L2] to $b^m x_0+1/2$: with $k_m=\\lfloor b^m x_0+1/2\\rfloor$ and $z_m=b^m x_0-k_m$, one has $-1/2\\le z_m<1/2$.",
+          "step": "1.1",
+          "inputs": ["L1", "L2", "construct", "algebra"]
+        },
+        {
+          "id": "probe-bounds",
+          "claim": "For $x_m=(k_m+1)/b^m$, step 1.1 gives $x_m-x_0=(1-z_m)/b^m$, hence $0<x_m-x_0\\le3/(2b^m)$.",
+          "step": "1.2",
+          "inputs": ["step 1.1", "algebra"]
+        },
+        {
+          "id": "probe-convergence",
+          "claim": "Since $b>1$, [L3] gives $b^m\\to+\\infty$ and therefore the upper bound in step 1.2 tends to zero; squeeze yields $x_m\\to x_0$.",
+          "step": "2.1",
+          "inputs": ["step 1.2", "L3", "algebra"]
+        },
+        {
+          "id": "tail-values",
+          "claim": "For $n\\ge m$, oddness of $b^{n-m}$ and [L4]–[L5] give $\\cos(b^n\\pi x_m)=-(-1)^{k_m}$ and $\\cos(b^n\\pi x_0)=(-1)^{k_m}\\cos(b^{n-m}z_m\\pi)$.",
+          "step": "3.1",
+          "inputs": ["step 1.1", "L1", "L4", "L5", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The construction is valid at $m=0$ and uses $b^0=1$; no initial index is omitted."},
+        {"case": "zero", "status": "checked", "evidence": "Step 1.2 proves $x_m-x_0>0$, so every later difference quotient has a nonzero denominator."},
+        {"case": "one", "status": "checked", "evidence": "At $m=1$ the same floor construction and parity calculation apply without an induction start shift."},
+        {"case": "degenerate", "status": "checked", "evidence": "The nearest-integer tie $z_m=-1/2$ is allowed and still gives $1-z_m=3/2$; $z_m=1/2$ is excluded by the half-open floor convention."},
+        {"case": "endpoints", "status": "checked", "evidence": "Step 1.1 uses the exact interval $[-1/2,1/2)$ and step 1.2 checks both resulting bounds."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The integer $k_m$ is the unique floor supplied by [L2], not an arbitrary nearest-integer choice."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The probe construction is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The probe construction is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-weierstrass-low-frequency-difference-quotient-bound": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-sine-and-cosine-are-one-lipschitz",
+          "source_section": "Statement",
+          "quote": "$|\\cos u-\\cos v|\\le|u-v|$ for all real $u,v$.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-weierstrass-probe-points",
+          "source_section": "Statement",
+          "quote": "$0<x_m-x_0\\le 3/(2b^m)$ and $x_m\\to x_0$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "$$|x + y| \\le |x| + |y|.$$",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "define-low-block",
+          "claim": "Define $A_m=\\sum_{n<m}a^n(\\cos(b^n\\pi x_m)-\\cos(b^n\\pi x_0))$; [L3] makes $A_0=0$.",
+          "step": "1.1",
+          "inputs": ["L2", "L3", "construct"]
+        },
+        {
+          "id": "termwise-bound",
+          "claim": "Repeated [L5], [L1], and [L4] give $|A_m|\\le\\pi(x_m-x_0)\\sum_{n<m}(ab)^n$.",
+          "step": "2.1",
+          "inputs": ["step 1.1", "L1", "L4", "L5", "algebra"]
+        },
+        {
+          "id": "finite-geometric-identity",
+          "claim": "Multiply the finite sum by $ab-1>0$ and telescope to obtain $\\sum_{n<m}(ab)^n=((ab)^m-1)/(ab-1)$, valid also at $m=0$.",
+          "step": "2.2",
+          "inputs": ["L3", "algebra"]
+        },
+        {
+          "id": "low-bound",
+          "claim": "Substitute step 2.2 into step 2.1 and use $(ab)^m-1<(ab)^m$ to get the asserted strict upper bound.",
+          "step": "3.1",
+          "inputs": ["step 2.1", "step 2.2", "given", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "Steps 1.1 and 2.2 explicitly treat $m=0$ as the empty low-frequency sum."},
+        {"case": "zero", "status": "checked", "evidence": "The denominator $ab-1$ is positive because the lemma is used under $ab>1$."},
+        {"case": "one", "status": "checked", "evidence": "For $m=1$, step 2.2 reads $1=((ab)-1)/(ab-1)$."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 3.1 remains valid when $A_m=0$; it does not divide by the low block."},
+        {"case": "endpoints", "status": "checked", "evidence": "The cut is exactly $n<m$; the frequency $n=m$ is deliberately excluded for the tail lemma."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The only selected point is the uniquely constructed probe from [L2]."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The estimate is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The estimate is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-weierstrass-tail-difference-quotient-bound": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-classical-weierstrass-series-converges-uniformly",
+          "source_section": "Statement",
+          "quote": "The series defining $W_{a,b}$ converges absolutely at every real point and uniformly on $\\mathbb R$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-weierstrass-probe-points",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge m$, $\\cos(b^n\\pi x_m)=-(-1)^{k_m}$ and $\\cos(b^n\\pi x_0)=(-1)^{k_m}\\cos(b^{n-m}z_m\\pi)$.",
+          "uses": ["1.2", "3.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Both functions have range $[-1,1]$.",
+          "uses": ["2.1", "2.2"]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$",
+          "uses": ["2.2"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "define-tail-block",
+          "claim": "Absolute convergence from [L1] licenses subtracting the two series and defining the tail increment $B_m=\\sum_{n\\ge m}a^n(\\cos(b^n\\pi x_m)-\\cos(b^n\\pi x_0))$.",
+          "step": "1.1",
+          "inputs": ["L1", "construct"]
+        },
+        {
+          "id": "tail-sign",
+          "claim": "Insert [L2] to write every summand as $-(-1)^{k_m}a^n(1+\\cos(b^{n-m}z_m\\pi))$.",
+          "step": "1.2",
+          "inputs": ["step 1.1", "L2", "algebra"]
+        },
+        {
+          "id": "no-cancellation",
+          "claim": "By [L3], every factor $1+\\cos(\\cdot)$ is nonnegative, so all terms in step 1.2 share one sign and the absolute value of the sum is the sum of their absolute values.",
+          "step": "2.1",
+          "inputs": ["step 1.2", "L3"]
+        },
+        {
+          "id": "first-tail-term",
+          "claim": "Because $|z_m|\\le1/2$, parity [L4] and cosine's monotonicity between its adjacent zeros give $\\cos(z_m\\pi)\\ge0$; retaining $n=m$ in step 2.1 yields $|B_m|\\ge a^m$.",
+          "step": "2.2",
+          "inputs": ["step 2.1", "L2", "L3", "L4", "algebra"]
+        },
+        {
+          "id": "tail-quotient-bound",
+          "claim": "From [L2], $x_m-x_0\\le3/(2b^m)$, hence $1\\ge(2b^m/3)(x_m-x_0)$; multiply step 2.2 by this bound to obtain $|B_m|\\ge(2/3)(ab)^m(x_m-x_0)$.",
+          "step": "3.1",
+          "inputs": ["step 2.2", "L2", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The tail starts at $n=m$ and is nonempty for every natural $m$."},
+        {"case": "zero", "status": "checked", "evidence": "At $m=0$ the retained term is $a^0(1+\\cos(z_0\\pi))$ and the probe denominator is positive."},
+        {"case": "one", "status": "checked", "evidence": "Step 2.2 retains exactly one term before making any claim about the rest; it is valid even if only that term is inspected."},
+        {"case": "degenerate", "status": "checked", "evidence": "The extreme $z_m=-1/2$ gives cosine zero, so the retained factor is one and the lower bound remains strict enough."},
+        {"case": "endpoints", "status": "checked", "evidence": "The frequency $n=m$ belongs to the tail and is the term used in step 2.2."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "After the deterministic probe construction, the proof only estimates a fixed convergent series."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The tail lower bound is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The tail lower bound is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-classical-weierstrass-function-nowhere-differentiable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-classical-weierstrass-series-converges-uniformly",
+          "source_section": "Statement",
+          "quote": "Its sum $W_{a,b}:\\mathbb R\\to\\mathbb R$ is continuous.",
+          "uses": ["1.1", "4.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-weierstrass-low-frequency-difference-quotient-bound",
+          "source_section": "Statement",
+          "quote": "$|A_m|<\\pi(ab)^m(x_m-x_0)/(ab-1)$.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-weierstrass-tail-difference-quotient-bound",
+          "source_section": "Statement",
+          "quote": "$|B_m|\\ge(2/3)(ab)^m(x_m-x_0)$.",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-geometric-sequence-null",
+          "source_section": "Statement",
+          "quote": "If $|r| > 1$ then $(|r|^k)$ **diverges to $+\\infty$**",
+          "uses": ["3.1"]
+        },
+        {
+          "fact": "L5",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$$f'(c) \\;:=\\; \\lim_{x \\to c} q_{f,c}(x) \\;=\\; \\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": ["4.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "fix-point-and-probes",
+          "claim": "Fix arbitrary $x_0\\in\\mathbb R$ and take the probes $x_m>x_0$ converging to it from the probe lemma; [L1] already supplies continuity.",
+          "step": "1.1",
+          "inputs": ["L1", "given"]
+        },
+        {
+          "id": "split-increment",
+          "claim": "Split $W(x_m)-W(x_0)=A_m+B_m$ at frequency $m$.",
+          "step": "1.2",
+          "inputs": ["step 1.1", "algebra"]
+        },
+        {
+          "id": "reverse-triangle",
+          "claim": "The reverse triangle inequality with [L2] and [L3] gives $|W(x_m)-W(x_0)|\\ge(ab)^m(2/3-\\pi/(ab-1))(x_m-x_0)$.",
+          "step": "2.1",
+          "inputs": ["step 1.2", "L2", "L3", "algebra"]
+        },
+        {
+          "id": "positive-coefficient",
+          "claim": "The hypothesis $ab>1+3\\pi/2$ is equivalent to $2/3-\\pi/(ab-1)>0$ and also implies $ab>1$.",
+          "step": "2.2",
+          "inputs": ["given", "algebra"]
+        },
+        {
+          "id": "quotients-diverge",
+          "claim": "Divide step 2.1 by $x_m-x_0>0$ and use step 2.2 with [L4] to make the absolute values of the selected difference quotients tend to infinity.",
+          "step": "3.1",
+          "inputs": ["step 2.1", "step 2.2", "L4", "algebra"]
+        },
+        {
+          "id": "no-derivative",
+          "claim": "Because $x_m\\to x_0$ but the selected difference quotients have no finite limit, [L5] rules out differentiability at $x_0$; arbitrariness of $x_0$ proves nowhere differentiability, together with continuity from [L1].",
+          "step": "4.1",
+          "inputs": ["step 1.1", "step 3.1", "L1", "L5"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The low block may be empty at $m=0$, but the tail block is nonempty and both cited estimates cover that index."},
+        {"case": "zero", "status": "checked", "evidence": "Every probe difference $x_m-x_0$ is positive before step 3.1 divides by it."},
+        {"case": "one", "status": "checked", "evidence": "The strict hypothesis excludes the boundary $ab=1$ and makes the geometric growth in [L4] applicable."},
+        {"case": "degenerate", "status": "checked", "evidence": "The coefficient in step 2.2 is strictly positive; equality $ab=1+3\\pi/2$ is deliberately not claimed."},
+        {"case": "endpoints", "status": "checked", "evidence": "The proof uses right-hand probes at every real point; existence of a two-sided derivative would force convergence along this side, so one side suffices."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "The probes are deterministic floor constructions and $x_0$ is arbitrary rather than selected."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The theorem gives a sufficient parameter condition, not an iff characterisation."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "No necessity of the restrictive Weierstrass condition is asserted."}
+      ],
+      "finite_smoke": []
+    },
+    "cor-uniform-limit-of-smooth-functions-need-not-be-differentiable": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-higher-derivatives-and-smoothness",
+          "source_section": "Definition",
+          "quote": "It is **smooth**, or $C^\\infty$, if it is $C^k$ for every $k\\in\\mathbb N$.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-classical-weierstrass-series-converges-uniformly",
+          "source_section": "Statement",
+          "quote": "The partial sums converge uniformly to $W_{a,b}$ on $\\mathbb R$.",
+          "uses": ["1.2"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-classical-weierstrass-function-nowhere-differentiable",
+          "source_section": "Statement",
+          "quote": "Then $W_{a,b}$ is continuous at every real point and differentiable at no real point.",
+          "uses": ["2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "smooth-partial-sums",
+          "claim": "Repeated differentiation cycles each cosine summand through sine and cosine; finite sums preserve all derivatives and continuity, so every partial sum is smooth in the sense of [L1].",
+          "step": "1.1",
+          "inputs": ["L1", "algebra"]
+        },
+        {
+          "id": "uniform-convergence",
+          "claim": "Use [L2] for uniform convergence of those smooth partial sums.",
+          "step": "1.2",
+          "inputs": ["L2"]
+        },
+        {
+          "id": "rough-limit",
+          "claim": "Choose any parameters satisfying the strict Weierstrass condition; [L3] makes the uniform limit nowhere differentiable.",
+          "step": "2.1",
+          "inputs": ["L3", "given"]
+        },
+        {
+          "id": "counterexample-to-preservation",
+          "claim": "Steps 1.1–2.1 exhibit a uniformly convergent sequence of smooth functions whose limit is differentiable nowhere.",
+          "step": "3.1",
+          "inputs": ["step 1.1", "step 1.2", "step 2.1"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The zeroth partial sum used here contains the $n=0$ cosine term; it is not an empty approximation."},
+        {"case": "zero", "status": "checked", "evidence": "Smoothness includes $C^0$ because zero belongs to the natural numbers, as the cited definition records."},
+        {"case": "one", "status": "checked", "evidence": "The first partial sum is already smooth and the argument applies uniformly to every later finite sum."},
+        {"case": "degenerate", "status": "checked", "evidence": "Step 2.1 requires parameters satisfying the strict theorem and does not use the differentiable regime $ab<1$."},
+        {"case": "endpoints", "status": "not_applicable", "reason": "All functions have domain $\\mathbb R$, so no endpoint derivative convention enters."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "A concrete admissible pair is supplied on the companion page; existence is not left to an unverified selection."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The corollary is an existence counterexample, not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The corollary is an existence counterexample, not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "thm-riemann-lebesgue-lemma-for-continuous-functions": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-weierstrass-approximation-on-a-closed-interval",
+          "source_section": "Statement",
+          "quote": "For $a\\le b$, every continuous real function on $[a,b]$ is a uniform limit of polynomials.",
+          "uses": ["1.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-integral-elementary-bounds",
+          "source_section": "Statement",
+          "quote": "$$m(b-a) \\;\\le\\; L(f,P) \\;\\le\\; \\underline{\\int_a^b} f \\;\\le\\; \\overline{\\int_a^b} f \\;\\le\\; U(f,P) \\;\\le\\; M(b-a) .$$",
+          "uses": ["1.2", "2.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-integration-by-parts",
+          "source_section": "Statement",
+          "quote": "$$\\int_a^b u\\,v' \\;=\\; u(b)v(b) - u(a)v(a) \\;-\\; \\int_a^b u'v .$$",
+          "uses": ["2.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$",
+          "uses": ["2.1", "3.2"]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-continuous-implies-integrable",
+          "source_section": "Statement",
+          "quote": "Then $f$ is bounded ([[def-bounded-set]]) and Riemann\nintegrable on $[a,b]$",
+          "uses": ["1.2", "2.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "polynomial-approximation",
+          "claim": "Given $\\varepsilon>0$, use [L1] to choose a polynomial $p$ with $\\|f-p\\|_\\infty<\\varepsilon/(2(b-a))$.",
+          "step": "1.1",
+          "inputs": ["L1", "given", "choose"]
+        },
+        {
+          "id": "approximation-integral",
+          "claim": "The product $(f-p)\\sin(nt)$ is continuous and integrable by [L5]; [L2] with its pointwise bounds gives absolute integral less than $\\varepsilon/2$.",
+          "step": "1.2",
+          "inputs": ["step 1.1", "L2", "L5", "algebra"]
+        },
+        {
+          "id": "polynomial-oscillatory-bound",
+          "claim": "For positive $n$, apply [L3] with $u=p$ and $v=-\\cos(nt)/n$, using [L4]. Bound the boundary terms and $\\int p'\\cos(nt)$ by [L2] to get $|\\int_a^b p(t)\\sin(nt)dt|\\le C_p/n$.",
+          "step": "2.1",
+          "inputs": ["L2", "L3", "L4", "L5", "algebra"]
+        },
+        {
+          "id": "choose-frequency",
+          "claim": "Choose a positive integer $N$ with $C_p/N<\\varepsilon/2$; then step 2.1 is below $\\varepsilon/2$ for every $n\\ge N$.",
+          "step": "2.2",
+          "inputs": ["step 2.1", "choose", "algebra"]
+        },
+        {
+          "id": "sine-limit",
+          "claim": "Split the integral into the $(f-p)$ and $p$ parts and combine steps 1.2 and 2.2 to obtain the sine limit.",
+          "step": "3.1",
+          "inputs": ["step 1.2", "step 2.2", "algebra"]
+        },
+        {
+          "id": "cosine-limit",
+          "claim": "Repeat steps 1.2–3.1 with $v=\\sin(nt)/n$ and [L4] to obtain the cosine version.",
+          "step": "3.2",
+          "inputs": ["step 1.1", "L2", "L3", "L4", "L5", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The theorem assumes $a<b$, so the integration interval is nonempty and nondegenerate."},
+        {"case": "zero", "status": "checked", "evidence": "Frequencies are positive integers; step 2.1 never forms $1/0$."},
+        {"case": "one", "status": "checked", "evidence": "The estimate in step 2.1 is valid at the first frequency $n=1$, even though only a tail is used for the limit."},
+        {"case": "degenerate", "status": "checked", "evidence": "If $f$ or the selected polynomial is zero, the same estimates hold with $C_p=0$ and the limit is immediate."},
+        {"case": "endpoints", "status": "checked", "evidence": "Step 2.1 retains both integration-by-parts boundary terms $p(a)$ and $p(b)$."},
+        {"case": "nonempty-choice", "status": "checked", "evidence": "Step 1.1 invokes polynomial density for an explicit positive tolerance, and step 2.2 chooses a positive integer after $p$ is fixed."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The decay statement is not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The decay statement is not a biconditional."}
+      ],
+      "finite_smoke": []
+    },
+    "lem-finite-sine-harmonic-sums": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$.",
+          "uses": ["1.2", "2.1"]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": ["1.2", "2.1"]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "source_section": "Statement",
+          "quote": "$$\\sin x=0\\Longleftrightarrow x=m\\pi\\text{ for some }m\\in\\mathbb Z",
+          "uses": ["1.1", "3.1"]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": ["2.2"]
+        },
+        {
+          "fact": "L5",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "$$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$",
+          "uses": ["1.1"]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "finite-exponential-sum",
+          "claim": "For $x\\notin2\\pi\\mathbb Z$, multiply $S_N=\\sum_{n=1}^Ne^{inx}$ by $1-e^{ix}$ and use [L5] to telescope, obtaining $(1-e^{ix})S_N=e^{ix}-e^{i(N+1)x}$; [L3] makes the denominator nonzero.",
+          "step": "1.1",
+          "inputs": ["L3", "L5", "algebra"]
+        },
+        {
+          "id": "half-angle-rewrite",
+          "claim": "Use [L1] and [L2] to rewrite step 1.1 after multiplying numerator and denominator by suitable half-angle exponentials.",
+          "step": "1.2",
+          "inputs": ["step 1.1", "L1", "L2", "algebra"]
+        },
+        {
+          "id": "take-imaginary-part",
+          "claim": "Taking imaginary parts in step 1.2 yields $\\sum_{n=1}^N\\sin(nx)=(\\cos(x/2)-\\cos((N+1/2)x))/(2\\sin(x/2))$.",
+          "step": "2.1",
+          "inputs": ["step 1.2", "L1", "L2", "algebra"]
+        },
+        {
+          "id": "uniform-in-N-bound",
+          "claim": "The numerator in step 2.1 has absolute value at most two, so [L4] gives the bound $1/|\\sin(x/2)|$.",
+          "step": "2.2",
+          "inputs": ["step 2.1", "L4", "algebra"]
+        },
+        {
+          "id": "multiple-of-period",
+          "claim": "If $x\\in2\\pi\\mathbb Z$, every summand is zero by [L3] and periodicity, so the separate zero branch avoids division by $\\sin(x/2)=0$.",
+          "step": "3.1",
+          "inputs": ["L3", "algebra"]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {"case": "empty", "status": "checked", "evidence": "The statement assumes $N\\ge1$; the empty sum at $N=0$ is not claimed by the displayed quotient formula."},
+        {"case": "zero", "status": "checked", "evidence": "Step 3.1 handles $x=0$ and all period multiples without division."},
+        {"case": "one", "status": "checked", "evidence": "At $N=1$, step 2.1 reduces by the addition formulas to $\\sin x$."},
+        {"case": "degenerate", "status": "checked", "evidence": "The only degenerate denominator occurs at $2\\pi\\mathbb Z$, and step 3.1 gives its exact value."},
+        {"case": "endpoints", "status": "checked", "evidence": "The finite range includes both $n=1$ and $n=N$ in the telescoping identity of step 1.1."},
+        {"case": "nonempty-choice", "status": "not_applicable", "reason": "The proof manipulates a fixed finite sum and makes no existential choice."},
+        {"case": "iff-forward", "status": "not_applicable", "reason": "The formula and bound are identities/inequalities, not a biconditional."},
+        {"case": "iff-reverse", "status": "not_applicable", "reason": "The formula and bound are identities/inequalities, not a biconditional."}
+      ],
+      "finite_smoke": []
+    }
+  }
+}

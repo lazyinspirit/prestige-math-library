@@ -1095,7 +1095,7 @@ export class Executor {
       }
       for (const g of gates) {
         n += 1;
-        const key = Array.isArray(g.argv) ? `${g.id} ${JSON.stringify(g.argv)}` : `${g.id} fn-${n}`;
+        const key = Array.isArray(g.argv) ? `${g.id}\u0000${JSON.stringify(g.argv)}` : `${g.id}\u0000fn-${n}`;
         if (seen.has(key)) continue;
         seen.add(key);
         list.push(g);

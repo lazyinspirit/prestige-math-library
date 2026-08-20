@@ -11,7 +11,184 @@
       "pi-the-equivalent-characterizations",
       "inner-product-spaces-and-orthogonality"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-translation-of-a-set-in-rn",
+        "kind": "definition",
+        "title": "Translation of a subset of $\\mathbb{R}^n$",
+        "deps": [
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "thm-jordan-content-is-translation-invariant",
+        "kind": "theorem",
+        "title": "Jordan inner content, outer content, measurability, and content are translation invariant",
+        "strategy": "Translate every finite rectangular inner packing and outer cover by the same vector. Coordinate side lengths are unchanged, and translation is bijective, so taking the two suprema and infima in both directions gives equality. The empty set and degenerate rectangles remain harmless.",
+        "deps": [
+          "def-translation-of-a-set-in-rn",
+          "def-jordan-inner-and-outer-content",
+          "def-multidimensional-rectangle-and-volume"
+        ]
+      },
+      {
+        "id": "prop-riemann-graph-area-equals-jordan-content",
+        "kind": "proposition",
+        "title": "Riemann area between continuous graphs equals Jordan content",
+        "strategy": "Apply the published Jordan--Fubini theorem for a region between continuous graphs to the constant-one integrand. The inner integral is the graph difference, so its one-variable integral is exactly the published graph-area convention. Include coincident graphs and endpoint sections.",
+        "deps": [
+          "def-riemann-area-between-continuous-graphs",
+          "thm-fubini-over-a-region-between-continuous-graphs",
+          "thm-jordan-content-and-indicator-integrability"
+        ]
+      },
+      {
+        "id": "cor-disc-jordan-content-is-pi-r-squared",
+        "kind": "corollary",
+        "title": "A closed disc of radius $r\\ge0$ has Jordan content $\\pi r^2$",
+        "strategy": "For $r>0$, the disc is the region between the two continuous semicircle graphs. Use the agreement proposition to identify its Jordan content with its published Riemann graph area, then substitute $\\pi r^2$. At $r=0$, cover the singleton by arbitrarily small squares and obtain content zero directly.",
+        "deps": [
+          "prop-riemann-graph-area-equals-jordan-content",
+          "thm-disc-area-is-pi-r-squared",
+          "def-jordan-inner-and-outer-content"
+        ]
+      },
+      {
+        "id": "def-parallelogram-and-triangle-in-r2",
+        "kind": "definition",
+        "title": "Parallelograms and triangles in $\\mathbb{R}^2$",
+        "deps": [
+          "def-translation-of-a-set-in-rn",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "def-base-and-height-for-plane-figures",
+        "kind": "definition",
+        "title": "Base and perpendicular height for a chosen side of a plane figure",
+        "deps": [
+          "def-parallelogram-and-triangle-in-r2",
+          "def-metric-bounded-diameter",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "lem-determinant-base-height-identity-in-r2",
+        "kind": "lemma",
+        "title": "$\\lVert v\\rVert_2\\,d(w,\\mathbb{R}v)=|\\det[v\\ w]|$ for $v\\ne0$ in $\\mathbb{R}^2$",
+        "strategy": "Project $w$ orthogonally onto the line $\\mathbb{R}v$, so the distance is the norm of the residual. The projection formula gives its squared norm. Expanding the two-by-two Leibniz determinant shows that $\\det[v\\ w]^2=\\lVert v\\rVert_2^2\\lVert w\\rVert_2^2-\\langle v,w\\rangle^2$; compare the two identities and take nonnegative square roots. This also proves attainment.",
+        "deps": [
+          "def-base-and-height-for-plane-figures",
+          "prop-orthogonal-projection-formula-and-linearity",
+          "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "def-determinant-of-a-square-matrix",
+          "thm-of-square-roots"
+        ]
+      },
+      {
+        "id": "thm-parallelogram-content-and-base-height-formula",
+        "kind": "theorem",
+        "title": "A parallelogram has Jordan content $|\\det[v\\ w]|$, equal to base times height when $v\\ne0$",
+        "strategy": "Specialize the published parallelepiped-content theorem to two columns. For a nonzero chosen base vector, apply the determinant--height identity. Retain the singular case, where the determinant and content are zero, without calling the height formula at a zero base.",
+        "deps": [
+          "def-parallelogram-and-triangle-in-r2",
+          "def-base-and-height-for-plane-figures",
+          "lem-determinant-base-height-identity-in-r2",
+          "cor-parallelepiped-content-is-the-absolute-determinant"
+        ]
+      },
+      {
+        "id": "thm-triangle-content-and-base-height-formula",
+        "kind": "theorem",
+        "title": "A triangle has content $\\tfrac12|\\det[B-A\\ C-A]|$, equal to half base times height",
+        "strategy": "First use the graph-area agreement and an elementary antiderivative to compute the standard right triangle's Jordan content as $1/2$. Translate the given triangle so that $A$ is the origin and realize it as the linear image of that standard triangle. Translation invariance and linear content scaling give half the absolute determinant, including the singular case. When $A\\ne B$, the determinant--height identity gives the base--height form.",
+        "deps": [
+          "def-parallelogram-and-triangle-in-r2",
+          "def-base-and-height-for-plane-figures",
+          "thm-jordan-content-is-translation-invariant",
+          "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "prop-riemann-graph-area-equals-jordan-content",
+          "thm-ftc-second-part",
+          "lem-derivative-of-a-power",
+          "thm-linearity-of-the-integral",
+          "lem-determinant-base-height-identity-in-r2"
+        ]
+      },
+      {
+        "id": "cor-triangle-content-zero-iff-collinear",
+        "kind": "corollary",
+        "title": "A triangle has zero Jordan content if and only if its vertices are collinear",
+        "strategy": "Use the triangle formula. Expand the two-by-two determinant directly: if the first displacement is zero the vertices are already collinear; otherwise divide by one of its nonzero coordinates to show determinant zero exactly when the second displacement is a scalar multiple of the first. This is precisely collinearity, including repeated vertices.",
+        "deps": [
+          "thm-triangle-content-and-base-height-formula",
+          "def-determinant-of-a-square-matrix",
+          "def-linear-independence"
+        ]
+      },
+      {
+        "id": "def-simple-polygonal-region-and-triangulation",
+        "kind": "definition",
+        "title": "Simple polygonal regions and their triangulations",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-finite-cardinality"
+        ]
+      },
+      {
+        "id": "lem-simple-polygon-has-an-interior-diagonal",
+        "kind": "lemma",
+        "title": "Every simple polygon with more than three vertices has an interior diagonal",
+        "strategy": "Choose the lexicographically least vertex and its two neighbors. If their joining segment lies in the region, it is a diagonal. Otherwise select a polygon vertex in the intervening triangle farthest from that segment; the segment from the least vertex to this selected vertex stays in the polygon and splits it. The definition uses irredundant vertices, so consecutive collinear subdivision points are not vertices.",
+        "deps": [
+          "def-simple-polygonal-region-and-triangulation",
+          "def-parallelogram-and-triangle-in-r2",
+          "cor-triangle-content-zero-iff-collinear"
+        ]
+      },
+      {
+        "id": "thm-simple-polygon-admits-a-triangulation",
+        "kind": "theorem",
+        "title": "Every simple polygon admits a triangulation",
+        "strategy": "Induct on the number of vertices. A three-vertex polygon is one triangle. Otherwise use the interior-diagonal lemma to split the polygon into two smaller simple polygons, triangulate both by induction, and unite the two triangle families; the shared diagonal is their only new overlap.",
+        "deps": [
+          "def-simple-polygonal-region-and-triangulation",
+          "lem-simple-polygon-has-an-interior-diagonal"
+        ]
+      },
+      {
+        "id": "cor-simple-polygon-triangulation-has-n-minus-two-triangles",
+        "kind": "corollary",
+        "title": "Every triangulation of a simple $n$-gon has $n-2$ triangles",
+        "strategy": "Induct along any interior diagonal of the triangulation. If it creates polygons with $n_1$ and $n_2$ vertices, then $n_1+n_2=n+2$; add the two inductive triangle counts. The base case $n=3$ has one triangle.",
+        "deps": [
+          "def-simple-polygonal-region-and-triangulation"
+        ]
+      },
+      {
+        "id": "thm-simple-polygon-content-is-the-sum-of-triangle-contents",
+        "kind": "theorem",
+        "title": "A simple polygon is Jordan measurable and its content is the sum of the contents of its triangles",
+        "strategy": "Choose a triangulation. Every triangle is Jordan measurable by the triangle formula; distinct triangles meet only along edges and vertices, which have content zero. Repeated finite additivity therefore makes the polygon Jordan measurable and sums the triangle contents. Independence of the triangulation follows because both sums equal the polygon's content.",
+        "deps": [
+          "thm-simple-polygon-admits-a-triangulation",
+          "thm-triangle-content-and-base-height-formula",
+          "cor-jordan-content-finite-additivity",
+          "thm-graphs-of-continuous-functions-have-content-zero"
+        ]
+      },
+      {
+        "id": "thm-shoelace-formula-for-simple-polygons",
+        "kind": "theorem",
+        "title": "The shoelace formula for the area of a counterclockwise simple polygon",
+        "strategy": "For an oriented triangulation, write each triangle's signed determinant area relative to the origin. Contributions from every internal diagonal cancel in opposite orientations, while the boundary edges remain in cyclic order. The resulting signed sum is nonnegative for counterclockwise orientation and equals the polygon's Jordan content.",
+        "deps": [
+          "def-simple-polygonal-region-and-triangulation",
+          "thm-simple-polygon-content-is-the-sum-of-triangle-contents",
+          "thm-triangle-content-and-base-height-formula",
+          "lem-finite-sum-laws"
+        ]
+      }
+    ]
   },
   {
     "order": 288.00008,
@@ -19,10 +196,70 @@
     "kind": "B",
     "category": "real-analysis",
     "title": "Areas of Elementary Plane Figures: Examples and Counterexamples",
+    "companion": "areas-of-elementary-plane-figures",
     "requires": [
       "areas-of-elementary-plane-figures"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-triangle-area-by-determinant-and-base-height",
+        "kind": "example",
+        "title": "One triangle computed by both the determinant and base--height formulas",
+        "strategy": "Use $A=(1,1)$, $B=(5,1)$, and $C=(3,4)$. The determinant has absolute value $12$, while the horizontal base has length $4$ and perpendicular height $3$; both formulas give content $6$.",
+        "deps": [
+          "thm-triangle-content-and-base-height-formula"
+        ]
+      },
+      {
+        "id": "ex-parallelogram-content-from-a-two-by-two-matrix",
+        "kind": "example",
+        "title": "The content of a parallelogram from a two-by-two matrix",
+        "strategy": "Take spanning vectors $(3,1)$ and $(1,3)$. Their determinant is $8$, so the parallelogram has content $8$; independently compute the projection height and check that base times height gives the same value.",
+        "deps": [
+          "thm-parallelogram-content-and-base-height-formula"
+        ]
+      },
+      {
+        "id": "ex-collinear-triangle-has-zero-content",
+        "kind": "example",
+        "title": "Three collinear vertices give a triangle of zero content",
+        "strategy": "Use $A=(0,0)$, $B=(2,1)$, and $C=(6,3)$. The second displacement is three times the first, so the determinant, perpendicular height, and Jordan content are all zero.",
+        "deps": [
+          "cor-triangle-content-zero-iff-collinear",
+          "thm-triangle-content-and-base-height-formula"
+        ]
+      },
+      {
+        "id": "ex-unit-disc-has-jordan-content-pi",
+        "kind": "example",
+        "title": "The unit disc has Jordan content $\\pi$",
+        "strategy": "Apply the disc reconciliation corollary at radius one and identify the same value through the vertically simple graph description. This records explicitly that the graph-area and Jordan-content conventions agree on the unit disc.",
+        "deps": [
+          "cor-disc-jordan-content-is-pi-r-squared",
+          "prop-riemann-graph-area-equals-jordan-content"
+        ]
+      },
+      {
+        "id": "ex-irregular-pentagon-area-by-triangulation-and-shoelace",
+        "kind": "example",
+        "title": "An irregular pentagon computed by triangulation and the shoelace formula",
+        "strategy": "Use the counterclockwise vertices $(0,0),(4,0),(5,2),(2,4),(0,3)$. Triangulate from the first vertex, sum the three determinant areas, and independently evaluate the cyclic shoelace sum; both give $15$. Check that the chosen diagonals remain inside the polygon.",
+        "deps": [
+          "thm-simple-polygon-content-is-the-sum-of-triangle-contents",
+          "thm-shoelace-formula-for-simple-polygons"
+        ]
+      },
+      {
+        "id": "cex-linear-bijection-need-not-preserve-jordan-content",
+        "kind": "counterexample",
+        "title": "A linear bijection need not preserve Jordan content",
+        "strategy": "Map the unit square by $(x,y)\\mapsto(2x,y)$. This is a bijective linear map, but the image rectangle has content $2$ while the source has content $1$, exactly as the determinant-scaling theorem predicts.",
+        "deps": [
+          "thm-linear-images-scale-jordan-content-by-absolute-determinant",
+          "def-multidimensional-rectangle-and-volume"
+        ]
+      }
+    ]
   },
   {
     "order": 288.00011,
@@ -36,7 +273,181 @@
       "improper-integrals",
       "the-fundamental-theorems-of-calculus"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-jordan-exhaustion-of-an-open-set",
+        "kind": "definition",
+        "title": "Compact Jordan exhaustions of open subsets of $\\mathbb{R}^n$",
+        "deps": [
+          "def-jordan-inner-and-outer-content",
+          "def-metric-interior-closure-boundary",
+          "def-metric-compactness"
+        ]
+      },
+      {
+        "id": "thm-open-subsets-of-rn-admit-jordan-exhaustions",
+        "kind": "theorem",
+        "title": "Every open subset of $\\mathbb{R}^n$ admits a compact Jordan exhaustion",
+        "strategy": "Treat the empty set by the constant empty exhaustion and $\\mathbb{R}^n$ by expanding boxes. For a proper nonempty open set, use radius and reciprocal distance-to-the-closed-complement thresholds indexed by $j+1$ to form compact cores. Recursively put the preceding Jordan set together with the next core inside a rational-grid Jordan neighborhood contained in the open set, choosing the least finite code in a fixed enumeration so no countable choice is hidden. Compactness shows every compact subset is eventually contained.",
+        "deps": [
+          "def-jordan-exhaustion-of-an-open-set",
+          "lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set",
+          "thm-heine-borel-rn",
+          "lem-distance-to-set-is-lipschitz",
+          "def-countable",
+          "lem-q-and-irrationals-dense-r"
+        ]
+      },
+      {
+        "id": "def-improper-multiple-integral-and-absolute-convergence",
+        "kind": "definition",
+        "title": "Improper multiple integrals and absolute convergence on open sets",
+        "deps": [
+          "def-jordan-exhaustion-of-an-open-set",
+          "thm-multidimensional-integral-properties",
+          "def-extended-reals",
+          "lem-extended-reals-complete"
+        ]
+      },
+      {
+        "id": "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+        "kind": "theorem",
+        "title": "Every Jordan exhaustion computes a nonnegative improper multiple integral",
+        "strategy": "The compact integrals along an exhaustion increase. Their limit is bounded by the supremum over all compact Jordan subsets. Conversely, compactness places each compact Jordan subset inside one exhaustion member, so its integral is bounded by the exhaustion limit. This proves equality and independence of exhaustion, including infinite value and the empty domain.",
+        "deps": [
+          "def-improper-multiple-integral-and-absolute-convergence",
+          "thm-open-subsets-of-rn-admit-jordan-exhaustions",
+          "thm-multidimensional-integral-properties",
+          "def-metric-compactness"
+        ]
+      },
+      {
+        "id": "thm-absolute-improper-multiple-integral-by-exhaustion",
+        "kind": "theorem",
+        "title": "Absolute convergence makes signed improper multiple integrals independent of exhaustion",
+        "strategy": "Apply the nonnegative exhaustion theorem to the positive and negative parts, each bounded by the integral of the absolute value. Their exhaustion limits are finite and their difference is the integral of the signed function on each compact member. Conversely, the adopted signed definition has no conditionally convergent branch: it exists precisely when the absolute integral is finite.",
+        "deps": [
+          "def-improper-multiple-integral-and-absolute-convergence",
+          "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "thm-multidimensional-integral-properties"
+        ]
+      },
+      {
+        "id": "thm-comparison-test-for-improper-multiple-integrals",
+        "kind": "theorem",
+        "title": "Comparison and absolute comparison tests for improper multiple integrals",
+        "strategy": "For locally integrable $0\\le f\\le g$, compare the proper integrals on every compact Jordan subset and take suprema. For signed $f$ with $|f|\\le g$, apply the nonnegative comparison to $|f|$ and then the absolute-convergence definition. State the zero dominator and empty domain cases explicitly.",
+        "deps": [
+          "def-improper-multiple-integral-and-absolute-convergence",
+          "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "thm-multidimensional-integral-properties"
+        ]
+      },
+      {
+        "id": "def-parameter-dependent-improper-multiple-integral",
+        "kind": "definition",
+        "title": "Parameter-dependent improper multiple integrals",
+        "deps": [
+          "def-improper-multiple-integral-and-absolute-convergence"
+        ]
+      },
+      {
+        "id": "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
+        "kind": "lemma",
+        "title": "An integrable dominator gives uniform tail control on every compact parameter set",
+        "strategy": "Choose a compact Jordan core on which the nonnegative improper integral of the dominator leaves tail mass below $\\varepsilon$. Every dominated slice then has tail integral bounded by the same number, uniformly in the parameter. Use the absolute-value estimate for differences of two slices as well.",
+        "deps": [
+          "def-parameter-dependent-improper-multiple-integral",
+          "thm-comparison-test-for-improper-multiple-integrals",
+          "thm-nonnegative-improper-multiple-integral-by-exhaustion"
+        ]
+      },
+      {
+        "id": "thm-continuity-of-dominated-parameter-dependent-improper-integrals",
+        "kind": "theorem",
+        "title": "Locally dominated parameter-dependent improper multiple integrals are continuous",
+        "strategy": "Near a fixed parameter, choose one integrable dominator and a compact Jordan core with uniformly small tails. Uniform continuity of the integrand on the product of that core with a compact parameter neighborhood makes the core integrals continuous. Split the total difference into two tails and the compact-core difference.",
+        "deps": [
+          "def-parameter-dependent-improper-multiple-integral",
+          "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
+          "thm-heine-cantor-metric",
+          "thm-continuous-functions-on-compact-jordan-sets-are-integrable",
+          "thm-multidimensional-integral-properties"
+        ]
+      },
+      {
+        "id": "thm-differentiation-under-dominated-improper-multiple-integrals",
+        "kind": "theorem",
+        "title": "Differentiation under an improper multiple integral under an integrable derivative bound",
+        "strategy": "Assume one slice is absolutely integrable and the parameter derivative is continuous and bounded in absolute value by one integrable function on the whole open domain. The mean value theorem first makes every nearby slice absolutely integrable. On a compact core, difference quotients converge uniformly to the parameter derivative; the dominator gives uniform tail control for both the quotients and the derivative. Pass to the limit and use the continuity theorem for the derivative integral.",
+        "deps": [
+          "def-parameter-dependent-improper-multiple-integral",
+          "lem-uniform-tail-control-for-dominated-improper-multiple-integrals",
+          "thm-continuity-of-dominated-parameter-dependent-improper-integrals",
+          "cor-mean-value-theorem",
+          "thm-heine-cantor-metric",
+          "thm-multidimensional-integral-properties"
+        ]
+      },
+      {
+        "id": "lem-gaussian-integral-is-finite-and-positive",
+        "kind": "lemma",
+        "title": "The improper integral of $e^{-x^2}$ over $\\mathbb{R}$ is finite and positive",
+        "strategy": "On $|x|\\ge1$, the inequality $1+x^2\\le e^{x^2}$ gives $e^{-x^2}\\le x^{-2}$; the rational improper $p$-test gives convergence of both tails. Continuity handles the middle interval, and a positive lower bound on a small interval proves strict positivity.",
+        "deps": [
+          "def-mixed-improper-integral",
+          "thm-comparison-test-for-improper-integrals",
+          "thm-improper-p-test-rational",
+          "lem-exponential-dominates-one-plus-x",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "lem-integral-elementary-bounds"
+        ]
+      },
+      {
+        "id": "lem-gaussian-square-is-the-plane-gaussian-integral",
+        "kind": "lemma",
+        "title": "The square of the one-dimensional Gaussian integral is the plane Gaussian integral",
+        "strategy": "On every square $[-R,R]^2$, the exponential addition law factors $e^{-(x^2+y^2)}$ into a product, and rectangular Fubini gives the square of the truncated one-dimensional integral. Let the squares exhaust the plane; nonnegative exhaustion convergence and the one-dimensional improper limit give the identity.",
+        "deps": [
+          "lem-gaussian-integral-is-finite-and-positive",
+          "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "cor-riemann-integral-of-a-product-function",
+          "thm-exponential-addition-formula"
+        ]
+      },
+      {
+        "id": "lem-plane-gaussian-integral-in-polar-coordinates",
+        "kind": "lemma",
+        "title": "The plane Gaussian integral equals $\\pi$ by polar coordinates",
+        "strategy": "Integrate over compact annuli with a vanishing angular seam, where the polar map is injective and has Jacobian $r$. Change variables and use the exponential derivative to obtain $\\pi(e^{-\\varepsilon^2}-e^{-R^2})$ after the angular seam closes. Then send $\\varepsilon$ to zero and $R$ to infinity; nonnegative exhaustion independence identifies the limit with the plane integral.",
+        "deps": [
+          "thm-nonnegative-improper-multiple-integral-by-exhaustion",
+          "thm-change-of-variables-for-compact-jordan-sets",
+          "def-jacobian-determinant-of-a-c-one-map",
+          "thm-polar-form-with-unique-principal-argument",
+          "def-null-and-content-zero-in-rn",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-derivative-of-exponential",
+          "thm-exponential-limits-and-range",
+          "thm-ftc-second-part",
+          "lem-integral-elementary-bounds"
+        ]
+      },
+      {
+        "id": "thm-gaussian-integral",
+        "kind": "theorem",
+        "title": "The Gaussian integral $\\int_{-\\infty}^{\\infty}e^{-x^2}\\,dx=\\sqrt{\\pi}$",
+        "strategy": "Let $I$ denote the finite positive one-dimensional integral. The product lemma gives $I^2$ as the plane integral, and the polar lemma evaluates that integral as $\\pi$. The uniqueness of the positive square root then gives $I=\\sqrt{\\pi}$.",
+        "deps": [
+          "lem-gaussian-integral-is-finite-and-positive",
+          "lem-gaussian-square-is-the-plane-gaussian-integral",
+          "lem-plane-gaussian-integral-in-polar-coordinates",
+          "thm-of-square-roots"
+        ]
+      }
+    ]
   },
   {
     "order": 288.00012,
@@ -44,9 +455,63 @@
     "kind": "B",
     "category": "real-analysis",
     "title": "Improper and Parameter-Dependent Multiple Integrals: Examples and Counterexamples",
+    "companion": "improper-and-parameter-dependent-multiple-integrals",
     "requires": [
       "improper-and-parameter-dependent-multiple-integrals"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-unequal-iterated-improper-integrals-on-the-unit-square",
+        "kind": "example",
+        "title": "Two iterated improper integrals over the unit square are $\\pi/4$ and $-\\pi/4$",
+        "strategy": "On $(0,1)^2$ use $f(x,y)=(x^2-y^2)/(x^2+y^2)^2$. Recognize it as the $y$-derivative of $y/(x^2+y^2)$ and the negative $x$-derivative of $x/(x^2+y^2)$. The two iterated values are $\\pi/4$ and $-\\pi/4$. More strongly, evaluate rectangles with lower endpoints $a,b$: choosing $a/b\\to0$ or $a/b\\to\\infty$ gives two compact Jordan exhaustions with those opposite limits, so no exhaustion-independent integral exists.",
+        "deps": [
+          "def-improper-multiple-integral-and-absolute-convergence",
+          "thm-absolute-improper-multiple-integral-by-exhaustion",
+          "def-mixed-improper-integral",
+          "thm-ftc-second-part",
+          "thm-principal-inverse-tangent-calculus"
+        ]
+      },
+      {
+        "id": "cex-zero-iterated-integrals-without-a-double-integral",
+        "kind": "counterexample",
+        "title": "A nonnegative function can have both iterated integrals zero and no double Riemann integral",
+        "strategy": "In the unit square let $E$ contain $(k/p,\\ell/p)$ for primes $p$ and $1\\le k,\\ell<p$, and take $1_E$. Each horizontal and vertical section is finite, so both iterated integrals are zero. Arbitrarily fine prime grids make $E$ dense, while its countable complement is also dense; every cell therefore has oscillation one, so the double Riemann integral does not exist.",
+        "deps": [
+          "def-sections-and-iterated-riemann-integrals",
+          "thm-multidimensional-riemann-criterion",
+          "thm-euclid-infinitude-of-primes",
+          "def-finite-cardinality",
+          "thm-of-archimedean",
+          "lem-q-and-irrationals-dense-r"
+        ]
+      },
+      {
+        "id": "cex-differentiation-under-an-improper-integral-without-domination",
+        "kind": "counterexample",
+        "title": "Differentiation under an improper integral can fail without uniform domination",
+        "strategy": "Use $f(x,t)=t^3e^{-t^2x}$ on $x\\ge0$. Its improper integral is $F(t)=t$, including $t=0$, so $F'(0)=1$. But $\\partial_tf(x,0)=0$ for every $x$, whose improper integral is zero. Verify the two calculations directly and show that no integrable parameter-uniform bound for the derivative can hold near zero.",
+        "deps": [
+          "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "def-improper-integral-at-infinity",
+          "thm-derivative-of-exponential",
+          "thm-substitution-for-improper-integrals"
+        ]
+      },
+      {
+        "id": "ex-scaled-gaussian-parameter-integral",
+        "kind": "example",
+        "title": "The scaled Gaussian integral and its parameter derivative",
+        "strategy": "For $a>0$, substitution $u=\\sqrt a,x$ and the Gaussian theorem give $F(a)=\\sqrt{\\pi/a}$. On a compact neighborhood of a fixed positive parameter, dominate the parameter derivative $-x^2e^{-ax^2}$ by an integrable Gaussian-polynomial tail, apply differentiation under the integral sign, and recover $F'(a)=-\\sqrt\\pi/(2a^{3/2})$.",
+        "deps": [
+          "thm-gaussian-integral",
+          "thm-differentiation-under-dominated-improper-multiple-integrals",
+          "thm-substitution-for-improper-integrals",
+          "thm-exponential-beats-every-polynomial",
+          "thm-real-power-continuity-and-derivatives"
+        ]
+      }
+    ]
   }
 ]

@@ -9,7 +9,527 @@
     "requires": [
       "sigma-algebras-and-borel-sets-examples"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-nonnegative-extended-series",
+        "kind": "definition",
+        "title": "Series in the nonnegative extended real line",
+        "deps": [
+          "def-extended-reals",
+          "lem-extended-reals-complete",
+          "thm-recursion"
+        ]
+      },
+      {
+        "id": "thm-tonelli-for-nonnegative-double-series",
+        "kind": "theorem",
+        "title": "Tonelli's theorem for double series of nonnegative extended real numbers",
+        "strategy": "Define the sum of a nonnegative extended-real series as the supremum of its partial sums. Compare both iterated sums with the supremum of all finite rectangular sums: every rectangle is bounded by either iterated sum, while every finite part of either iterated sum is bounded by a sufficiently large rectangle. Treat an infinite entry and an unbounded family of finite rectangular sums separately so no subtraction or undefined extended-real product is used.",
+        "deps": [
+          "def-nonnegative-extended-series",
+          "lem-extended-reals-complete"
+        ]
+      },
+      {
+        "id": "def-measure",
+        "kind": "definition",
+        "title": "Measures on sigma-algebras",
+        "deps": [
+          "def-sigma-algebra",
+          "def-nonnegative-extended-series",
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "def-measure-space",
+        "kind": "definition",
+        "title": "Measure spaces",
+        "deps": [
+          "def-measure"
+        ]
+      },
+      {
+        "id": "def-finitely-additive-set-function",
+        "kind": "definition",
+        "title": "Finitely additive nonnegative set functions",
+        "deps": [
+          "def-sigma-algebra",
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "def-finite-sigma-finite-and-semifinite-measures",
+        "kind": "definition",
+        "title": "Finite, sigma-finite, and semifinite measures",
+        "deps": [
+          "def-measure",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "def-probability-measure",
+        "kind": "definition",
+        "title": "Probability measures and probability spaces",
+        "deps": [
+          "def-measure",
+          "def-measure-space"
+        ]
+      },
+      {
+        "id": "def-measure-null-set-and-almost-everywhere",
+        "kind": "definition",
+        "title": "Measure-null sets and almost-everywhere statements relative to a measure",
+        "deps": [
+          "def-measure-space"
+        ]
+      },
+      {
+        "id": "def-complete-measure-space",
+        "kind": "definition",
+        "title": "Complete measure spaces",
+        "deps": [
+          "def-measure-null-set-and-almost-everywhere"
+        ]
+      },
+      {
+        "id": "fs-subsets-of-null-sets-are-always-measurable",
+        "kind": "false-statement",
+        "title": "FALSE: every subset of a measure-null set is measurable",
+        "strategy": "On the two-point space use the trivial sigma-algebra and its zero measure. The whole space is measurable and null, but a singleton is a subset of it and is not in the sigma-algebra. This isolates exactly the missing completeness hypothesis without invoking Lebesgue measure or a nonconstructive subset.",
+        "deps": [
+          "def-complete-measure-space",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "prop-measure-monotonicity",
+        "kind": "proposition",
+        "title": "Measures are monotone",
+        "strategy": "For measurable $A\\subseteq B$, decompose $B$ as the disjoint union of $A$ and $B\\setminus A$ and use nonnegativity; do not subtract when either value may be infinite.",
+        "deps": [
+          "def-measure"
+        ]
+      },
+      {
+        "id": "prop-measure-of-a-set-difference",
+        "kind": "proposition",
+        "title": "Measure of a set difference when the smaller set has finite measure",
+        "strategy": "From $B=A\\sqcup(B\\setminus A)$ and finite $\\mu(A)$, cancel the finite term to obtain $\\mu(B\\setminus A)=\\mu(B)-\\mu(A)$. State the finiteness hypothesis on the subtracted quantity and separately cover $A=\\emptyset$ and $A=B$.",
+        "deps": [
+          "def-measure",
+          "prop-measure-monotonicity"
+        ]
+      },
+      {
+        "id": "thm-finite-and-countable-subadditivity-of-measures",
+        "kind": "theorem",
+        "title": "Finite and countable subadditivity of measures",
+        "strategy": "Disjointize a sequence by $F_k=E_k\\setminus\\bigcup_{j<k}E_j$. The $F_k$ are pairwise disjoint, have the same union as the $E_k$, and satisfy $F_k\\subseteq E_k$; countable additivity and monotonicity give the inequality. Obtain the finite form by padding the list with empty sets, including the empty-list boundary.",
+        "deps": [
+          "def-measure",
+          "prop-measure-monotonicity",
+          "def-nonnegative-extended-series"
+        ]
+      },
+      {
+        "id": "thm-continuity-from-below-for-measures",
+        "kind": "theorem",
+        "title": "Continuity from below for measures",
+        "strategy": "For $E_0\\subseteq E_1\\subseteq\\cdots$, decompose the union into $E_0$ and the disjoint increments $E_{k+1}\\setminus E_k$. Countable additivity identifies the union's measure with the supremum of the measures of finite initial unions, which are exactly the $E_n$. Separate the case in which some $\\mu(E_n)$ is infinite before using finite differences.",
+        "deps": [
+          "def-measure",
+          "prop-measure-of-a-set-difference",
+          "def-nonnegative-extended-series"
+        ]
+      },
+      {
+        "id": "thm-continuity-from-above-for-measures",
+        "kind": "theorem",
+        "title": "Continuity from above when one set has finite measure",
+        "strategy": "Discard finitely many initial terms so the first retained set has finite measure. Apply continuity from below to the increasing complements inside that finite set and use the set-difference formula. This yields the decreasing-intersection limit without ever forming infinity minus infinity.",
+        "deps": [
+          "thm-continuity-from-below-for-measures",
+          "prop-measure-of-a-set-difference"
+        ]
+      },
+      {
+        "id": "def-counting-measure",
+        "kind": "definition",
+        "title": "Counting measure on an arbitrary set",
+        "deps": [
+          "def-countable",
+          "def-extended-reals"
+        ]
+      },
+      {
+        "id": "prop-counting-measure-is-a-measure",
+        "kind": "proposition",
+        "title": "Counting measure is a measure",
+        "strategy": "For a disjoint sequence, if one member is infinite then both sides are infinite. Otherwise the finite cardinalities add over every finite initial union; if the full union is infinite, the natural-number partial sums cannot remain bounded, while if it is finite only finitely many members are nonempty. This proves countable additivity without a choice principle.",
+        "deps": [
+          "def-counting-measure",
+          "def-measure",
+          "def-nonnegative-extended-series",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "fs-continuity-from-above-without-finiteness",
+        "kind": "false-statement",
+        "title": "FALSE: continuity from above needs no finiteness hypothesis",
+        "strategy": "Use counting measure on $\\mathbb N$ and the tails $E_k=\\{n:k\\le n\\}$. They decrease to the empty set while every term has infinite measure, so their measures do not converge to zero. Check the $k=0$ tail and the empty intersection explicitly.",
+        "deps": [
+          "prop-counting-measure-is-a-measure",
+          "thm-continuity-from-above-for-measures",
+          "def-nat-order",
+          "lem-nat-discrete"
+        ]
+      },
+      {
+        "id": "prop-two-set-measure-identity",
+        "kind": "proposition",
+        "title": "The two-set measure identity $\\mu(A\\cup B)+\\mu(A\\cap B)=\\mu(A)+\\mu(B)$",
+        "strategy": "Partition both sides into the three disjoint pieces $A\\setminus B$, $A\\cap B$, and $B\\setminus A$. The proof uses only addition of nonnegative extended reals and remains valid when one or more terms are infinite.",
+        "deps": [
+          "def-measure"
+        ]
+      },
+      {
+        "id": "thm-finite-inclusion-exclusion-for-measures",
+        "kind": "theorem",
+        "title": "Inclusion-exclusion for a nonempty finite family of finite-measure sets",
+        "strategy": "Induct on the number of sets. Apply the two-set identity to the union of the first $n$ sets and the last set, then apply the induction hypothesis both to the first union and to its intersections with the last set. Reindex the resulting nonempty subsets and signs. Check the one-set base case and use the finite-measure hypothesis exactly where signed cancellation occurs.",
+        "deps": [
+          "prop-two-set-measure-identity",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "prop-null-symmetric-difference-preserves-measure",
+        "kind": "proposition",
+        "title": "Sets whose symmetric difference is null have the same measure",
+        "strategy": "Monotonicity makes both $A\\setminus B$ and $B\\setminus A$ null. Decompose $A$ and $B$ over their common intersection; adding a null piece changes neither value, including when the common value is infinite.",
+        "deps": [
+          "prop-measure-monotonicity",
+          "prop-two-set-measure-identity"
+        ]
+      },
+      {
+        "id": "thm-countable-additivity-and-set-function-continuity",
+        "kind": "theorem",
+        "title": "Countable additivity and continuity of finitely additive set functions",
+        "strategy": "First prove that a finitely additive nonnegative set function is countably additive exactly when it is continuous from below: one direction is the increment argument, and the reverse applies continuity to partial unions of a disjoint sequence. Then assume the set function is finite and prove equivalence with continuity from above at the empty set by taking complements or disjoint tails. Explicitly explain why the finite hypothesis cannot be deleted from this third clause.",
+        "deps": [
+          "def-finitely-additive-set-function",
+          "def-measure",
+          "def-nonnegative-extended-series"
+        ]
+      },
+      {
+        "id": "thm-first-borel-cantelli",
+        "kind": "theorem",
+        "title": "The first Borel-Cantelli lemma for measures",
+        "strategy": "Write the set limsup as the intersection of the tail unions. For every $N$, monotonicity and countable subadditivity bound its measure by $\\sum_{k\\ge N}\\mu(E_k)$. A convergent nonnegative real series has tails tending to zero, so the limsup has measure zero. The proof does not assume independence or finite total measure.",
+        "deps": [
+          "def-measure",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "def-set-limsup-and-liminf",
+          "def-series",
+          "lem-series-tail-invariance",
+          "thm-algebra-of-limits"
+        ]
+      },
+      {
+        "id": "thm-measure-of-set-liminf",
+        "kind": "theorem",
+        "title": "The measure of a set liminf is at most the liminf of the measures",
+        "strategy": "Let $F_N=\\bigcap_{k\\ge N}E_k$. The $F_N$ increase to the set liminf, and $F_N\\subseteq E_k$ for every $k\\ge N$. Apply continuity from below and monotonicity, then take the supremum over $N$ of the tail infima in the extended real line.",
+        "deps": [
+          "thm-continuity-from-below-for-measures",
+          "prop-measure-monotonicity",
+          "def-set-limsup-and-liminf",
+          "def-limsup-liminf",
+          "lem-extended-reals-complete"
+        ]
+      },
+      {
+        "id": "thm-measure-of-set-limsup",
+        "kind": "theorem",
+        "title": "The limsup of the measures is at most the measure of the set limsup under a finite-union bound",
+        "strategy": "Let $G_N=\\bigcup_{k\\ge N}E_k$. The $G_N$ decrease to the set limsup, and $E_k\\subseteq G_N$ for every $k\\ge N$. The hypothesis $\\mu(\\bigcup_kE_k)<\\infty$ licenses continuity from above. Compare each tail supremum with $\\mu(G_N)$ and then take the infimum over $N$.",
+        "deps": [
+          "thm-continuity-from-above-for-measures",
+          "prop-measure-monotonicity",
+          "def-set-limsup-and-liminf",
+          "def-limsup-liminf",
+          "lem-extended-reals-complete"
+        ]
+      },
+      {
+        "id": "cor-dominated-convergence-for-sets",
+        "kind": "corollary",
+        "title": "Measures converge for a convergent sequence of sets contained in one finite-measure set",
+        "strategy": "Pointwise convergence of indicators is exactly equality of the set liminf and set limsup with the limiting set. Apply the two set-Fatou inequalities; the common finite envelope supplies the limsup theorem's finiteness hypothesis, and the two inequalities squeeze the numerical liminf and limsup to $\\mu(E)$.",
+        "deps": [
+          "thm-measure-of-set-liminf",
+          "thm-measure-of-set-limsup",
+          "prop-set-limsup-and-liminf-membership",
+          "def-limsup-liminf"
+        ]
+      },
+      {
+        "id": "prop-null-sets-form-a-sigma-ideal-in-a-complete-space",
+        "kind": "proposition",
+        "title": "Null sets are closed under countable unions and, in a complete space, under arbitrary subsets",
+        "strategy": "Countable subadditivity sends a countable union of null measurable sets to zero. Monotonicity makes every measurable subset of a null set null; completeness supplies measurability for arbitrary subsets. Keep these two roles separate so completeness is not incorrectly used for the union clause.",
+        "deps": [
+          "def-complete-measure-space",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "prop-measure-monotonicity"
+        ]
+      },
+      {
+        "id": "def-completion-of-a-measure-space",
+        "kind": "definition",
+        "title": "The completion sigma-algebra and completed set function of a measure space",
+        "deps": [
+          "def-complete-measure-space",
+          "def-measure-null-set-and-almost-everywhere"
+        ]
+      },
+      {
+        "id": "lem-completion-domain-is-a-sigma-algebra",
+        "kind": "lemma",
+        "title": "The completion domain is a sigma-algebra",
+        "strategy": "Represent a completed set as $A\\cup N$ with $A$ measurable and $N$ contained in a measurable null set, first replacing $N$ by $N\\setminus A$. Show complements by writing $(A\\cup N)^c$ as a measurable complement modified inside the same null set, and show countable unions by taking the union of the measurable parts and using the countable union of their null envelopes.",
+        "deps": [
+          "def-completion-of-a-measure-space",
+          "def-sigma-algebra"
+        ]
+      },
+      {
+        "id": "lem-completed-measure-is-well-defined",
+        "kind": "lemma",
+        "title": "The completed measure is independent of the representing measurable set",
+        "strategy": "If one completed set has two representations, each measurable core differs from the other only inside the union of the two measurable null envelopes. Their symmetric difference is therefore null, and the null-symmetric-difference proposition gives equal measures. Check the empty null envelope and infinite common value explicitly.",
+        "deps": [
+          "def-completion-of-a-measure-space",
+          "prop-null-symmetric-difference-preserves-measure"
+        ]
+      },
+      {
+        "id": "thm-completion-of-a-measure-space",
+        "kind": "theorem",
+        "title": "Every measure space has a unique complete extension to its completion",
+        "strategy": "Use the two completion lemmas to obtain a well-defined set function on a sigma-algebra. For a disjoint sequence choose measurable cores, remove the null overlaps to obtain disjoint measurable representatives, and apply countable additivity; then prove extension and completeness directly. For uniqueness, every added subset lies inside a null measurable set, so any complete extension must give it value zero and hence must assign the prescribed value to every completed set.",
+        "deps": [
+          "lem-completion-domain-is-a-sigma-algebra",
+          "lem-completed-measure-is-well-defined",
+          "prop-null-sets-form-a-sigma-ideal-in-a-complete-space",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "def-restriction-of-a-measure",
+        "kind": "definition",
+        "title": "Restriction of a measure to a measurable set",
+        "deps": [
+          "def-measure"
+        ]
+      },
+      {
+        "id": "prop-restriction-is-a-measure",
+        "kind": "proposition",
+        "title": "The restriction of a measure to a measurable set is a measure",
+        "strategy": "For fixed measurable $E$, define $\\mu_E(A)=\\mu(A\\cap E)$ on the original sigma-algebra. Intersections with $E$ preserve the empty set, disjointness, and countable unions, so the measure axioms follow directly from those of $\\mu$.",
+        "deps": [
+          "def-restriction-of-a-measure",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "def-dirac-measure",
+        "kind": "definition",
+        "title": "The Dirac set function at a point",
+        "deps": [
+          "def-sigma-algebra"
+        ]
+      },
+      {
+        "id": "prop-dirac-measure-is-a-probability-measure",
+        "kind": "proposition",
+        "title": "A Dirac set function is a probability measure",
+        "strategy": "A point belongs to at most one member of a pairwise disjoint sequence. Split on whether it belongs to none or to the unique successful member; this proves countable additivity, and the whole space has value one. The empty sequence boundary is handled by the empty-set clause.",
+        "deps": [
+          "def-dirac-measure",
+          "def-probability-measure",
+          "def-nonnegative-extended-series"
+        ]
+      },
+      {
+        "id": "def-nonnegative-weighted-sum-of-measures",
+        "kind": "definition",
+        "title": "Nonnegative scalar multiples and countable weighted sums of measures",
+        "deps": [
+          "def-nonnegative-extended-series",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "thm-nonnegative-weighted-sums-of-measures",
+        "kind": "theorem",
+        "title": "Nonnegative scalar multiples and countable weighted sums of measures are measures",
+        "strategy": "Define zero times a measure as the zero measure, so no undefined product $0\\cdot\\infty$ occurs; for a positive coefficient use ordinary extended scaling. Scalar multiples preserve countable additivity. For a countable sum, apply Tonelli's theorem for nonnegative double series to interchange the measure index with the disjoint-union index.",
+        "deps": [
+          "def-nonnegative-weighted-sum-of-measures",
+          "thm-tonelli-for-nonnegative-double-series",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "thm-measures-on-finite-sigma-algebras-are-atomic",
+        "kind": "theorem",
+        "title": "A measure on a finite sigma-algebra is a finite weighted sum over its atoms",
+        "strategy": "For each point intersect the finitely many measurable sets containing it; the distinct intersections form a finite measurable partition into atoms. Every measurable set is the union of the atoms it contains. Finite additivity therefore writes its measure as the sum of the atom weights, and choosing one representative from each nonempty atom rewrites the same formula as a finite Dirac combination. Treat the empty underlying space and infinite atom weights.",
+        "deps": [
+          "def-measure",
+          "def-dirac-measure",
+          "def-finite-sum",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "thm-measures-on-countable-discrete-spaces-are-weighted-dirac-sums",
+        "kind": "theorem",
+        "title": "Every measure on a countable discrete space is its weighted sum of Dirac measures",
+        "strategy": "For a fixed listing of the countable set, decompose each subset into its disjoint singleton fibres and apply countable additivity. The coefficient of the Dirac mass at $x$ is forced to be $\\mu(\\{x\\})$, proving uniqueness. Handle the empty set, a finite listing padded by repetitions only after isolating duplicate-free terms, and infinite singleton weights.",
+        "deps": [
+          "thm-nonnegative-weighted-sums-of-measures",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-countable",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "lem-semifinite-measures-have-arbitrarily-large-finite-subsets",
+        "kind": "lemma",
+        "title": "Assuming countable choice, an infinite-measure set in a semifinite measure space has arbitrarily large finite-measure subsets",
+        "strategy": "Take the supremum of the finite measures attained by measurable subsets of the given set. If it were finite, countable choice selects subsets approaching it; their union has the supremal finite measure by continuity from below. Semifiniteness then supplies a disjoint positive finite-measure subset of the remaining infinite-measure part, contradicting maximality. Include the case when the supremum is already infinite.",
+        "deps": [
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-countable-choice",
+          "thm-continuity-from-below-for-measures",
+          "lem-extended-reals-complete"
+        ]
+      },
+      {
+        "id": "def-semifinite-part-of-a-measure",
+        "kind": "definition",
+        "title": "The semifinite part of a measure",
+        "deps": [
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "lem-extended-reals-complete"
+        ]
+      },
+      {
+        "id": "thm-semifinite-part-is-a-measure",
+        "kind": "theorem",
+        "title": "Assuming countable choice, the semifinite part is a semifinite measure and equals the original measure exactly when it is semifinite",
+        "strategy": "For disjoint $E_k$, finite-measure subsets of their union give the easy subadditive bound after intersecting each $E_k$. For the reverse bound, countable choice selects finite-measure subsets approaching each semifinite-part value; finite unions first avoid an unjustified countable union of finite numbers, and a supremum argument closes the inequality. Semifiniteness is immediate from the defining supremum; use the arbitrarily-large-subset lemma for the equality criterion.",
+        "deps": [
+          "def-semifinite-part-of-a-measure",
+          "lem-semifinite-measures-have-arbitrarily-large-finite-subsets",
+          "def-countable-choice",
+          "def-measure"
+        ]
+      },
+      {
+        "id": "thm-semifinite-and-zero-infinity-decomposition",
+        "kind": "theorem",
+        "title": "Assuming countable choice, every measure is the sum of its semifinite part and a zero-infinity-valued measure",
+        "strategy": "Define $\\nu(E)=0$ when $E$ is sigma-finite for $\\mu$ and $\\nu(E)=\\infty$ otherwise. Countable choice and countability of $\\mathbb N\\times\\mathbb N$ show that a countable union of sigma-finite measurable sets is sigma-finite, while any measurable superset of a non-sigma-finite set remains non-sigma-finite; hence $\\nu$ is a measure. On sigma-finite $E$, the restriction of $\\mu$ is semifinite and the semifinite part agrees with $\\mu$; otherwise the $\\nu$ term is infinite.",
+        "deps": [
+          "thm-semifinite-part-is-a-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-countable-choice",
+          "thm-product-of-countable"
+        ]
+      },
+      {
+        "id": "lem-finite-measure-uniqueness-on-a-pi-system",
+        "kind": "lemma",
+        "title": "Finite measures agreeing on a generating pi-system and on the whole space are equal",
+        "strategy": "Let $\\mathcal D$ be the measurable sets on which the two finite measures agree. Equality of the total masses puts $X$ in $\\mathcal D$; finite subtraction gives closure under relative differences, and continuity from below gives closure under increasing unions. Thus $\\mathcal D$ is a lambda-system containing the pi-system, so Dynkin's theorem yields the generated sigma-algebra. The convention that a pi-system need not contain $X$ is why total-mass equality is stated separately.",
+        "deps": [
+          "def-pi-system",
+          "thm-dynkin-pi-lambda",
+          "def-measure",
+          "def-generated-sigma-algebra",
+          "thm-continuity-from-below-for-measures",
+          "prop-measure-of-a-set-difference"
+        ]
+      },
+      {
+        "id": "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+        "kind": "theorem",
+        "title": "Measures agreeing on a generating pi-system are equal under an increasing finite-measure exhaustion from that pi-system",
+        "strategy": "Let $P_n$ be the increasing pi-system exhaustion. For fixed $n$, the restricted set functions $A\\mapsto\\mu(A\\cap P_n)$ and $A\\mapsto\\nu(A\\cap P_n)$ are finite measures with equal total mass and agree on the pi-system, so the finite uniqueness lemma makes them equal everywhere. Let $n$ tend upward and use continuity from below on $A\\cap P_n$ to recover $\\mu(A)=\\nu(A)$.",
+        "deps": [
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "thm-continuity-from-below-for-measures",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-pi-system"
+        ]
+      },
+      {
+        "id": "fs-generating-families-determine-measures",
+        "kind": "false-statement",
+        "title": "FALSE: agreement on an arbitrary generating family determines a measure",
+        "strategy": "Use Pollard's four-point probability measures. The north, south, east, and west two-point sets generate the whole power set and receive the same mass under both measures, but the two diagonal pairs of point masses are different. Verify generation by taking intersections and complements, and identify the failed hypothesis: the family is not closed under intersections.",
+        "deps": [
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-generated-sigma-algebra",
+          "def-probability-measure"
+        ]
+      },
+      {
+        "id": "fs-every-finitely-additive-set-function-is-a-measure",
+        "kind": "false-statement",
+        "title": "FALSE: every finitely additive nonnegative set function on a sigma-algebra is a measure",
+        "strategy": "On $\\mathcal P(\\mathbb N)$ assign zero to finite sets and infinity to infinite sets. A finite disjoint union has the required value, but the natural numbers are the countable disjoint union of their singletons, whose assigned values sum to zero. Check the empty set and a union containing an infinite member.",
+        "deps": [
+          "def-finitely-additive-set-function",
+          "def-measure",
+          "def-countable"
+        ]
+      },
+      {
+        "id": "fs-countable-additivity-without-disjointness",
+        "kind": "false-statement",
+        "title": "FALSE: measures are additive on arbitrary countable unions",
+        "strategy": "For a Dirac probability measure repeat the same measurable singleton twice and use empty sets thereafter. The union has measure one while the series of the term measures begins with two ones. This isolates disjointness and also covers the index-zero convention.",
+        "deps": [
+          "def-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-nonnegative-extended-series"
+        ]
+      },
+      {
+        "id": "fs-zero-on-singletons-implies-zero-measure",
+        "kind": "false-statement",
+        "title": "FALSE: a measure on an infinite set that vanishes on every singleton is the zero measure",
+        "strategy": "Assume countable choice, take an uncountable $X$ with the countable-cocountable sigma-algebra, and assign zero to countable sets and one to cocountable sets. Countable choice makes the domain a sigma-algebra and proves countable additivity. Every singleton has value zero while $X$ has value one.",
+        "deps": [
+          "def-measure",
+          "def-sigma-algebra",
+          "def-countable",
+          "def-countable-choice",
+          "thm-countable-union-of-countable"
+        ]
+      }
+    ]
   },
   {
     "order": 288.004,
@@ -21,6 +541,130 @@
     "requires": [
       "measures-and-their-basic-properties"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-counting-measure-and-sigma-finiteness",
+        "kind": "example",
+        "title": "Assuming countable choice, counting measure is sigma-finite exactly on countable sets",
+        "strategy": "A countable set is covered by its finite initial segments under a listing, with the finite-set case handled by one set. Conversely, a sigma-finite counting-measure cover is a countable union of finite sets, hence countable under countable choice. Explain why this implication has a genuine choice cost in the library's conventions.",
+        "deps": [
+          "prop-counting-measure-is-a-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-countable-choice",
+          "thm-countable-union-of-countable"
+        ]
+      },
+      {
+        "id": "ex-dirac-measure",
+        "kind": "example",
+        "title": "A Dirac probability measure concentrates all mass at one point",
+        "strategy": "Compute the measure of a set according as it contains the distinguished point, verify the empty and whole-space values, and illustrate restriction to a measurable set both containing and omitting the point.",
+        "deps": [
+          "prop-dirac-measure-is-a-probability-measure",
+          "prop-restriction-is-a-measure"
+        ]
+      },
+      {
+        "id": "ex-dyadic-probability-measure-on-naturals",
+        "kind": "example",
+        "title": "The weights $2^{-(k+1)}$ define a probability measure on $\\mathcal P(\\mathbb N)$",
+        "strategy": "Set $\\mu(E)=\\sum_{k\\in E}2^{-(k+1)}$ by the weighted sum of the Dirac measures at $k$. The weighted-sum theorem proves it is a measure and the geometric series gives total mass one. Explicitly contrast the incorrect weights $2^{-k}$, whose total is two because $k=0$ is present.",
+        "deps": [
+          "thm-nonnegative-weighted-sums-of-measures",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-probability-measure",
+          "thm-geometric-series",
+          "def-integer-power"
+        ]
+      },
+      {
+        "id": "ex-countable-cocountable-zero-infinity-measure",
+        "kind": "example",
+        "title": "Assuming countable choice, zero on countable sets and infinity on cocountable sets is a non-semifinite measure",
+        "strategy": "On an uncountable set with the countable-cocountable sigma-algebra, a disjoint sequence has cocountable union only if one member is uncountable; otherwise countable choice makes the union countable. This proves countable additivity of the zero-infinity set function. The whole space has infinite measure and no measurable subset has positive finite measure, so the measure is not semifinite.",
+        "deps": [
+          "def-measure",
+          "def-finite-sigma-finite-and-semifinite-measures",
+          "def-sigma-algebra",
+          "def-countable",
+          "def-countable-choice",
+          "thm-countable-union-of-countable"
+        ]
+      },
+      {
+        "id": "ex-completion-of-borel-dirac-measure",
+        "kind": "example",
+        "title": "The completion of the Borel Dirac measure at zero is defined on every subset of the real line",
+        "strategy": "The Borel set $\\mathbb R\\setminus\\{0\\}$ is $\\delta_0$-null, so every subset not containing zero enters the completion, and adjoining $\\{0\\}$ handles every subset containing zero. Thus the completion domain is $\\mathcal P(\\mathbb R)$ and the completed value is one exactly on sets containing zero. Use the published Borel-cardinality theorem and Cantor's theorem to verify that the original Borel sigma-algebra is strictly smaller, so this also gives the promised non-complete Borel measure space without a forward reference to Lebesgue measure.",
+        "deps": [
+          "thm-completion-of-a-measure-space",
+          "prop-dirac-measure-is-a-probability-measure",
+          "def-borel-sigma-algebra",
+          "def-open-and-closed-in-r",
+          "thm-cardinality-of-the-borel-sigma-algebra-on-rn",
+          "thm-cardinal-power-set-and-cantor",
+          "thm-cantor-set-ternary-description",
+          "def-axiom-of-choice"
+        ]
+      },
+      {
+        "id": "ex-borel-cantelli-for-shrinking-dyadic-intervals",
+        "kind": "example",
+        "title": "Borel-Cantelli for the shrinking intervals $(0,2^{-k})$ under a dyadic atomic measure",
+        "strategy": "Let $\\mu=\\sum_{j\\ge0}2^{-(j+1)}\\delta_{2^{-j}}$. For $E_k=(0,2^{-k})$, compute $\\mu(E_k)=\\sum_{j>k}2^{-(j+1)}=2^{-(k+1)}$, so the series of measures equals one. Borel-Cantelli gives null limsup; independently, the geometric sequence tends to zero and the intervals decrease to the empty set, so the limsup is visibly empty.",
+        "deps": [
+          "thm-first-borel-cantelli",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-geometric-series",
+          "lem-geometric-sequence-null",
+          "def-set-limsup-and-liminf",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "cex-continuity-from-above-without-finite-first-measure",
+        "kind": "counterexample",
+        "title": "Counting-measure tails decrease to the empty set while every term has infinite measure",
+        "strategy": "For $E_k=\\{n\\in\\mathbb N:k\\le n\\}$, verify $E_{k+1}\\subseteq E_k$, every $E_k$ is infinite, and the intersection is empty because $n$ fails membership in $E_{n+1}$. Hence counting measure stays infinite although the intersection has measure zero.",
+        "deps": [
+          "prop-counting-measure-is-a-measure",
+          "thm-continuity-from-above-for-measures",
+          "def-nat-order",
+          "lem-nat-discrete"
+        ]
+      },
+      {
+        "id": "cex-free-ultrafilter-finitely-additive-probability",
+        "kind": "counterexample",
+        "title": "A free ultrafilter induces a finitely additive zero-one probability that is not countably additive",
+        "strategy": "Assuming the Axiom of Choice, extend the filter generated by the tails of $\\mathbb N$ to an ultrafilter and prove it contains no singleton. Define $m(A)=1$ exactly when $A$ belongs to the ultrafilter. The ultrafilter dichotomy proves finite additivity on disjoint pairs, while $m(\\mathbb N)=1$ and the countable singleton partition has total assigned mass zero, so countable additivity fails.",
+        "deps": [
+          "def-finitely-additive-set-function",
+          "thm-ultrafilter-lemma",
+          "def-ultrafilter",
+          "thm-ultrafilter-characterisation",
+          "def-filter-base",
+          "lem-filter-base-generates",
+          "def-natural-numbers",
+          "def-nat-order",
+          "thm-nat-linear-order",
+          "lem-nat-discrete",
+          "def-axiom-of-choice"
+        ]
+      },
+      {
+        "id": "cex-generating-family-without-pi-system",
+        "kind": "counterexample",
+        "title": "Two four-point probability measures agree on a generating family that is not a pi-system",
+        "strategy": "On the points northwest, northeast, southwest, southeast, put mass one-half on the northwest/southeast diagonal for $\\mu$ and on the northeast/southwest diagonal for $\\nu$. Both give mass one-half to each row and column, and those rows and columns generate the power set, but the singleton masses differ. Their intersections are singletons absent from the family, pinpointing failure of the pi-system hypothesis.",
+        "deps": [
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-probability-measure",
+          "def-generated-sigma-algebra",
+          "def-pi-system"
+        ]
+      }
+    ]
   }
 ]

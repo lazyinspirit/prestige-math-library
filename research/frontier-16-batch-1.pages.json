@@ -10,7 +10,200 @@
       "inverse-and-implicit-function-theorems",
       "the-topology-of-euclidean-space"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+        "kind": "definition",
+        "title": "$C^k$ Euclidean maps and diffeomorphisms",
+        "deps": [
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-c-one-map-and-local-inverse",
+          "def-injection-surjection-bijection"
+        ]
+      },
+      {
+        "id": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+        "kind": "theorem",
+        "title": "$C^k$ Euclidean maps are closed under componentwise algebra and composition",
+        "strategy": "Use induction on the derivative order. At order zero the assertions are the algebra and composition laws for continuous component functions. For the induction step, differentiate sums and scalar products componentwise and apply the total chain rule to a composition; the resulting first derivatives are finite sums of products of derivatives of lower order, so the induction hypothesis supplies continuity. Treat empty domains and $k=0$ explicitly.",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-total-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-induction-principle"
+        ]
+      },
+      {
+        "id": "lem-matrix-inversion-preserves-ck-regularity",
+        "kind": "lemma",
+        "title": "Matrix inversion preserves $C^k$ regularity where the determinant is nonzero",
+        "strategy": "Write each inverse entry as the corresponding cofactor divided by the determinant. Cofactors and the determinant are polynomials in the matrix entries, hence are $C^k$ by the algebra theorem. Prove by induction from the reciprocal rule that $t\\mapsto1/t$ is smooth on each component of $\\mathbb R\\setminus\\{0\\}$, then compose it with the nonvanishing determinant. This handles $k=0$, $k=1$, and every finite $k$ without assuming a matrix-valued derivative calculus.",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "cor-inverse-matrix-by-adjugate",
+          "def-matrix-minors-cofactors-and-adjugate",
+          "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "thm-algebra-of-derivatives"
+        ]
+      },
+      {
+        "id": "thm-higher-regularity-of-local-inverses",
+        "kind": "theorem",
+        "title": "A local inverse of a $C^k$ regular map is $C^k$",
+        "strategy": "The published inverse function theorem gives a $C^1$ inverse $g$ and $Dg=(Df\\circ g)^{-1}$. Induct on $r<k$: if $g$ is $C^r$, then the entries of $Df\\circ g$ are $C^r$ by closure under composition, and the matrix-inversion lemma makes the entries of $Dg$ $C^r$; hence $g$ is $C^{r+1}$. The case $k=1$ is the published theorem, and the same finite induction at every order gives the smooth case.",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "lem-matrix-inversion-preserves-ck-regularity",
+          "thm-euclidean-inverse-function-theorem"
+        ]
+      },
+      {
+        "id": "def-regular-locus-of-a-c-one-map",
+        "kind": "definition",
+        "title": "The regular locus of a square-dimensional $C^1$ map",
+        "deps": [
+          "def-c-one-map-and-local-inverse",
+          "def-invertible-euclidean-linear-map"
+        ]
+      },
+      {
+        "id": "thm-regular-locus-is-open",
+        "kind": "theorem",
+        "title": "The regular locus of a $C^1$ Euclidean map is open",
+        "strategy": "At a regular point apply the published Newton-contraction lemma. Its conclusion makes every derivative in a closed ball about that point invertible, so a smaller open ball lies in the regular locus. This proves openness point by point and also covers the empty regular locus.",
+        "deps": [
+          "def-regular-locus-of-a-c-one-map",
+          "lem-newton-contraction-near-an-invertible-derivative",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "cor-c-one-local-diffeomorphisms-are-open-maps",
+        "kind": "corollary",
+        "title": "A $C^1$ map with everywhere-invertible derivative is open",
+        "strategy": "For an open subset $O$ of the domain and a point $y=f(x)$ in its image, apply the inverse function theorem at $x$ after intersecting its inverse neighbourhood with $O$. The resulting neighbourhood of $y$ lies in $f[O]$. Since every image point is interior, $f[O]$ is open.",
+        "deps": [
+          "thm-euclidean-inverse-function-theorem",
+          "def-homeomorphism-and-open-maps"
+        ]
+      },
+      {
+        "id": "thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image",
+        "kind": "theorem",
+        "title": "An injective regular $C^1$ map is a diffeomorphism onto its image",
+        "strategy": "Openness makes the image open and makes the inverse of the continuous bijection continuous. At every image point, global injectivity identifies this inverse with the local inverse supplied by the inverse function theorem, so it is $C^1$ locally and therefore on the whole image. Preserve the derivative formula $D(f^{-1})(f(x))=Df(x)^{-1}$.",
+        "deps": [
+          "def-regular-locus-of-a-c-one-map",
+          "cor-c-one-local-diffeomorphisms-are-open-maps",
+          "def-c-one-map-and-local-inverse",
+          "thm-euclidean-inverse-function-theorem",
+          "def-homeomorphism-and-open-maps"
+        ]
+      },
+      {
+        "id": "cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image",
+        "kind": "corollary",
+        "title": "An injective regular $C^k$ map is a $C^k$ diffeomorphism onto its image",
+        "strategy": "The $C^1$ theorem supplies the global inverse on the open image. Around each image point it agrees with a local inverse, and the higher-regularity theorem makes that local inverse $C^k$. Regularity is local, so these restrictions give a $C^k$ global inverse. Include $k=1$ as the base case.",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image",
+          "thm-higher-regularity-of-local-inverses"
+        ]
+      },
+      {
+        "id": "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+        "kind": "theorem",
+        "title": "The parametrized implicit function theorem with $C^k$ regularity",
+        "strategy": "Treat the ordinary variables and parameters together as the first coordinate block in the published implicit function theorem. It gives the unique $C^1$ solution and the derivative with respect to the combined block. Apply the higher-regularity inverse argument to the block map $(x,\\lambda,y)\\mapsto(x,\\lambda,F(x,y,\\lambda))$ to upgrade the solution to $C^k$, and read the displayed derivative formula by differentiating $F(x,\\varphi(x,\\lambda),\\lambda)=0$.",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "lem-matrix-inversion-preserves-ck-regularity",
+          "thm-higher-regularity-of-local-inverses",
+          "thm-euclidean-implicit-function-theorem"
+        ]
+      },
+      {
+        "id": "def-proper-map-between-euclidean-open-sets",
+        "kind": "definition",
+        "title": "Proper maps between Euclidean open sets",
+        "deps": [
+          "def-metric-compactness",
+          "def-metric-continuity",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "thm-proper-local-diffeomorphisms-have-finite-diffeomorphic-sheets",
+        "kind": "theorem",
+        "title": "A proper Euclidean local diffeomorphism has finite diffeomorphic sheets over every target neighbourhood",
+        "strategy": "First prove that a proper continuous map between Euclidean open sets is closed by restricting near a target point to a compact closed ball and using compact images. A local diffeomorphism is open, so its nonempty image is clopen and equals the connected target. Each fibre is compact by properness and discrete by local injectivity, hence finite by its singleton cover. Choose disjoint local inverse neighbourhoods around the finitely many fibre points; remove from the common target neighbourhood the closed image of their complement. The remaining neighbourhood has exactly those finitely many disjoint sheets, each mapped diffeomorphically onto it. State the property directly and mention the order-293 covering-map definition only as orientation, never as a proof input.",
+        "deps": [
+          "def-proper-map-between-euclidean-open-sets",
+          "def-regular-locus-of-a-c-one-map",
+          "cor-c-one-local-diffeomorphisms-are-open-maps",
+          "thm-euclidean-inverse-function-theorem",
+          "def-metric-compactness",
+          "thm-compactness-under-continuous-maps",
+          "lem-closed-subset-of-a-compact-space-is-compact",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "def-homeomorphism-and-open-maps",
+          "def-connected-space"
+        ]
+      },
+      {
+        "id": "cor-proper-local-diffeomorphisms-have-constant-finite-fibres",
+        "kind": "corollary",
+        "title": "A proper Euclidean local diffeomorphism over a connected target has constant finite fibre cardinality",
+        "strategy": "Over each neighbourhood supplied by the finite-sheet theorem, every fibre meets each sheet exactly once, so all fibres there are canonically bijective with the finite sheet index set. The subsets of the connected target on which a fixed finite cardinal occurs are open; two nonempty such subsets would separate the target. Hence every fibre has the same finite cardinality.",
+        "deps": [
+          "thm-proper-local-diffeomorphisms-have-finite-diffeomorphic-sheets",
+          "def-connected-space",
+          "def-equinumerous"
+        ]
+      },
+      {
+        "id": "def-local-orientation-of-a-regular-c-one-map",
+        "kind": "definition",
+        "title": "Local orientation of a regular $C^1$ Euclidean map",
+        "deps": [
+          "def-jacobian-determinant-of-a-c-one-map",
+          "def-regular-locus-of-a-c-one-map",
+          "def-ordered-field"
+        ]
+      },
+      {
+        "id": "thm-jacobian-sign-is-constant-on-a-connected-regular-domain",
+        "kind": "theorem",
+        "title": "The Jacobian sign of a regular $C^1$ map is constant on a connected domain",
+        "strategy": "The Jacobian determinant is continuous because it is a polynomial in the continuous derivative-matrix entries. Its image of a connected domain is a connected subset of the real line. Regularity excludes zero, so order-convexity of connected real subsets prevents the image from containing both positive and negative values. Nonemptiness then gives exactly one sign.",
+        "deps": [
+          "def-local-orientation-of-a-regular-c-one-map",
+          "def-c-one-map-and-local-inverse",
+          "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "thm-continuous-image-of-a-connected-space",
+          "cor-connected-subsets-of-the-line"
+        ]
+      },
+      {
+        "id": "thm-zero-derivative-on-connected-open-euclidean-set-iff-constant",
+        "kind": "theorem",
+        "title": "A differentiable map on a connected open Euclidean set has zero derivative exactly when it is constant",
+        "strategy": "The reverse implication follows directly from the total-derivative definition. For the forward implication, polygonal connectedness joins any two domain points by finitely many line segments. Compose each component of the map with each affine segment; the total chain rule gives derivative zero on the parameter interval, so the one-variable zero-derivative theorem makes the composition constant. Concatenate the finitely many equalities.",
+        "deps": [
+          "thm-open-connected-subsets-of-rn-are-polygonally-connected",
+          "def-polygonal-path-and-polygonal-connectedness",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-zero-derivative-implies-constant",
+          "def-total-derivative-in-euclidean-space",
+          "def-vector-valued-functions-limits-and-continuity"
+        ]
+      }
+    ]
   },
   {
     "order": 288.00002,
@@ -18,10 +211,113 @@
     "kind": "B",
     "category": "real-analysis",
     "title": "The Inverse Function Theorem Completed: Examples and Counterexamples",
+    "companion": "the-inverse-function-theorem-completed",
     "requires": [
       "the-inverse-function-theorem-completed"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-polar-coordinates-as-a-local-diffeomorphism",
+        "kind": "example",
+        "title": "Polar coordinates are a local diffeomorphism away from zero radius",
+        "strategy": "For $P(r,\\theta)=(r\\cos\\theta,r\\sin\\theta)$ compute the derivative determinant as $r$. Thus $P$ is locally orientation-preserving for $r>0$ and locally orientation-reversing for $r<0$. On $(0,\\infty)\\times(-\\pi,\\pi)$ give the explicit inverse onto the plane cut along the nonpositive horizontal ray; on $(0,\\infty)\\times\\mathbb R$ note the periodic failure of global injectivity.",
+        "deps": [
+          "thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image",
+          "def-local-orientation-of-a-regular-c-one-map",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ]
+      },
+      {
+        "id": "ex-x-xy-is-a-diffeomorphism-off-the-axis",
+        "kind": "example",
+        "title": "The map $(x,y)\\mapsto(x,xy)$ is a diffeomorphism off the vertical axis",
+        "strategy": "Its derivative matrix has determinant $x$. Restricting to the open set $x\\ne0$ gives the explicit inverse $(u,v)\\mapsto(u,v/u)$, which is $C^\\infty$ on the same set. Verify both composite identities and note that the full-plane image omits every $(0,v)$ with $v\\ne0$.",
+        "deps": [
+          "cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image",
+          "thm-algebra-of-total-derivatives"
+        ]
+      },
+      {
+        "id": "ex-two-equation-implicit-system",
+        "kind": "example",
+        "title": "Two equations implicitly determine two variables near the origin",
+        "strategy": "For the source system $x^2+y^2-(z+1)^3=-1$ and $e^x+e^y+e^z=3$, regard $(y,z)$ as the unknown block and $x$ as the parameter. At the origin the derivative with respect to $(y,z)$ is the invertible matrix with rows $(0,-3)$ and $(1,1)$. Apply the parametrized implicit theorem and record the derivative of the solution pair at zero.",
+        "deps": [
+          "thm-parametrized-implicit-function-theorem-with-higher-regularity",
+          "thm-algebra-of-total-derivatives",
+          "thm-derivative-of-exponential"
+        ]
+      },
+      {
+        "id": "cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism",
+        "kind": "counterexample",
+        "title": "$x\\mapsto x^3$ is a $C^1$ bijection whose inverse is not differentiable at zero",
+        "strategy": "The cube map is a strictly increasing smooth bijection of the line. If its inverse were differentiable at zero, differentiating the identity $g(x^3)=x$ at zero would give $Dg(0)\\,0=1$, impossible. Equivalently, the cube-root difference quotient at zero is unbounded.",
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-c-one-map-and-local-inverse",
+          "thm-chain-rule",
+          "lem-derivative-of-a-power"
+        ]
+      },
+      {
+        "id": "cex-zero-derivative-on-a-disconnected-open-set-without-constancy",
+        "kind": "counterexample",
+        "title": "Zero derivative need not give constancy on a disconnected open set",
+        "strategy": "On $U=(-2,-1)\\cup(1,2)$ let $f$ be $1$ on the first component and $-1$ on the second. Every point has a neighbourhood on which $f$ is constant, so its total derivative is zero everywhere, while the two displayed values show that $f$ is not constant. This is the exact source-backed witness from the Northwestern real-analysis notes.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space"
+        ]
+      },
+      {
+        "id": "fs-invertible-derivative-at-a-point-gives-a-local-inverse",
+        "kind": "false statement",
+        "title": "FALSE: an invertible derivative at one point gives a local inverse",
+        "strategy": "Cite the published differentiable function with derivative one at zero that is injective on no neighbourhood of zero. State precisely that continuity of the derivative near the point, not merely differentiability at the point, is the missing hypothesis.",
+        "deps": [
+          "cex-invertible-derivative-without-c-one-local-inverse"
+        ]
+      },
+      {
+        "id": "fs-invertible-derivative-everywhere-gives-a-global-inverse",
+        "kind": "false statement",
+        "title": "FALSE: an everywhere-invertible derivative gives a global inverse",
+        "strategy": "Use the published real complex-squaring map on the punctured plane: its derivative is invertible everywhere on the domain, but antipodal points have the same image. This separates local invertibility from global injectivity without duplicating the immutable counterexample.",
+        "deps": [
+          "cex-complex-squaring-is-not-globally-invertible"
+        ]
+      },
+      {
+        "id": "fs-a-c-one-bijection-has-a-c-one-inverse",
+        "kind": "false statement",
+        "title": "FALSE: every $C^1$ bijection has a $C^1$ inverse",
+        "strategy": "Use the preceding cube-map counterexample. It is a $C^1$ bijection and an open map, but the vanishing derivative at zero forces the inverse cube root to fail differentiability there.",
+        "deps": [
+          "cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism"
+        ]
+      },
+      {
+        "id": "fs-zero-derivative-on-an-open-set-forces-constancy",
+        "kind": "false statement",
+        "title": "FALSE: zero derivative on an open set forces constancy",
+        "strategy": "The two-component locally constant counterexample has derivative zero everywhere and takes two values. Contrast it with the exact connected-open equivalence, isolating connectedness as the omitted hypothesis.",
+        "deps": [
+          "cex-zero-derivative-on-a-disconnected-open-set-without-constancy",
+          "thm-zero-derivative-on-connected-open-euclidean-set-iff-constant"
+        ]
+      },
+      {
+        "id": "fs-an-open-c-one-map-has-invertible-derivative",
+        "kind": "false statement",
+        "title": "FALSE: every open $C^1$ map has invertible derivative",
+        "strategy": "The cube map is a $C^1$ open bijection of the line, yet its derivative at zero is the zero linear map. This refutes the converse of the open-map corollary while preserving its forward implication.",
+        "deps": [
+          "cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism",
+          "cor-c-one-local-diffeomorphisms-are-open-maps"
+        ]
+      }
+    ]
   },
   {
     "order": 288.00005,
@@ -35,7 +331,345 @@
       "mixed-partials-taylor-and-extrema",
       "the-topology-of-euclidean-space"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+        "kind": "definition",
+        "title": "Convex and strictly convex functions on Euclidean convex sets",
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "def-interval"
+        ]
+      },
+      {
+        "id": "def-epigraph-and-hypograph",
+        "kind": "definition",
+        "title": "The epigraph and hypograph of a real-valued function",
+        "deps": [
+          "def-cartesian-product"
+        ]
+      },
+      {
+        "id": "thm-convex-function-iff-convex-epigraph",
+        "kind": "theorem",
+        "title": "A function is convex exactly when its epigraph is convex",
+        "strategy": "If the function is convex, take two epigraph points and compare the function at their convex combination with the same combination of their heights. Conversely apply convexity of the epigraph to the graph points $(x,f(x))$ and $(y,f(y))$ and read the last-coordinate inequality. Check both directions and the empty-domain convention separately.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-epigraph-and-hypograph",
+          "def-convex-subset-of-euclidean-space"
+        ]
+      },
+      {
+        "id": "thm-finite-jensen-inequality-in-euclidean-space",
+        "kind": "theorem",
+        "title": "Finite Jensen inequality for convex functions on $\\mathbb R^n$",
+        "strategy": "Induct on the positive number of weighted points. If the last weight is one, every earlier nonnegative weight is zero. Otherwise normalize the earlier weights by their positive sum, apply the induction hypothesis to their Euclidean convex combination, and then apply two-point convexity with the last point. Verify that every intermediate point remains in the convex domain and that zero weights cause no division.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "thm-induction-principle",
+          "def-finite-sum",
+          "lem-finite-sum-laws"
+        ]
+      },
+      {
+        "id": "prop-convex-functions-have-convex-sublevel-sets",
+        "kind": "proposition",
+        "title": "Every sublevel set of a convex function is convex",
+        "strategy": "Take two points whose function values are at most the level. Convexity keeps their segment in the domain and bounds the function at every convex combination by the same level. Include empty and singleton sublevel sets under the same definition.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-convex-subset-of-euclidean-space"
+        ]
+      },
+      {
+        "id": "prop-basic-operations-preserving-convexity",
+        "kind": "proposition",
+        "title": "Nonnegative combinations, affine precomposition, and finite pointwise maxima preserve convexity",
+        "strategy": "For a nonnegative finite combination, multiply each convexity inequality by its coefficient and add. For affine precomposition, an affine map carries a convex combination to the matching combination of its images. For a finite maximum, each constituent at the combined point is bounded by the corresponding weighted values and hence by the same weighted combination of the two maxima; the maximum exists because the family is nonempty and finite.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-euclidean-linear-map",
+          "def-finite-sum",
+          "lem-finite-sum-laws",
+          "lem-finite-set-has-max"
+        ]
+      },
+      {
+        "id": "lem-convex-function-bound-on-an-interior-cube",
+        "kind": "lemma",
+        "title": "A convex function is bounded above and below on a smaller interior cube",
+        "strategy": "Choose a closed cube centred at the interior point and contained in the domain. Express every point of the cube as a convex combination of its vertices and apply finite Jensen to bound the function above by the largest vertex value. For a point in the half-sized cube, reflect it through the centre to a point of the full cube; convexity at the midpoint converts the upper bounds at the reflected point and centre into a lower bound. State all constants explicitly and handle dimension one without a separate argument.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "thm-finite-jensen-inequality-in-euclidean-space",
+          "def-multidimensional-rectangle-and-volume",
+          "def-p-norms-on-rn",
+          "lem-finite-set-has-max",
+          "def-max-min"
+        ]
+      },
+      {
+        "id": "thm-convex-functions-on-open-convex-sets-are-locally-lipschitz",
+        "kind": "theorem",
+        "title": "A convex function on an open convex set is locally Lipschitz",
+        "strategy": "Fix a point and nested sup-norm cubes with the larger closure in the domain. The cube-bound lemma gives a uniform absolute bound $M$ on the larger cube. For distinct points $x,y$ in the smaller cube, extend the ray from $x$ through $y$ to the boundary of the larger cube. The convexity inequality on that segment bounds the secant slope by a constant depending only on $M$ and the cube radii. Apply the same argument with $x,y$ reversed and translate the sup-norm estimate to the Euclidean norm.",
+        "deps": [
+          "lem-convex-function-bound-on-an-interior-cube",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-p-norms-on-rn",
+          "lem-p-norms-are-norms-and-induce-the-published-metrics",
+          "def-lipschitz-holder-contraction"
+        ]
+      },
+      {
+        "id": "cor-convex-functions-on-open-convex-sets-are-continuous",
+        "kind": "corollary",
+        "title": "A convex function on an open convex set is continuous",
+        "strategy": "At each point the local Lipschitz theorem supplies a neighbourhood and a Lipschitz constant. Lipschitz maps are continuous on that neighbourhood, so the function is continuous at the point. Since the point is arbitrary, it is continuous on the open domain; the empty domain is vacuous.",
+        "deps": [
+          "thm-convex-functions-on-open-convex-sets-are-locally-lipschitz",
+          "thm-metric-regularity-hierarchy"
+        ]
+      },
+      {
+        "id": "def-supporting-hyperplane-to-a-convex-set",
+        "kind": "definition",
+        "title": "Supporting and strictly separating hyperplanes in Euclidean space",
+        "deps": [
+          "def-euclidean-inner-product",
+          "def-convex-subset-of-euclidean-space"
+        ]
+      },
+      {
+        "id": "thm-nearest-point-in-a-nonempty-closed-convex-set",
+        "kind": "theorem",
+        "title": "Every point has a unique nearest point in a nonempty closed Euclidean convex set",
+        "strategy": "Choose one point of the set to obtain a finite comparison radius. Any minimizer must lie in the intersection with the corresponding closed ball, which is nonempty and compact by Heine--Borel; the continuous distance function attains its minimum there. If two distinct minimizers existed, their midpoint would lie in the convex set and the parallelogram identity would make it strictly closer. Treat a point already in the set and singleton sets explicitly.",
+        "deps": [
+          "def-convex-subset-of-euclidean-space",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-metric-interior-closure-boundary"
+        ]
+      },
+      {
+        "id": "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+        "kind": "lemma",
+        "title": "Metric projection onto a closed convex set satisfies the variational inequality",
+        "strategy": "Let $p$ be the nearest point to $x$ and compare it with $p+t(z-p)$ for $0<t\\le1$. Expanding the squared distance and using minimality gives $2\\langle x-p,z-p\\rangle\\le t\\|z-p\\|^2$. Let $t$ tend to zero to obtain $\\langle x-p,z-p\\rangle\\le0$. Conversely this inequality makes the squared distance to every $z$ at least the squared distance to $p$, so it also characterizes the projection.",
+        "deps": [
+          "thm-nearest-point-in-a-nonempty-closed-convex-set",
+          "def-convex-subset-of-euclidean-space",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+        "kind": "theorem",
+        "title": "A point outside a nonempty closed convex set is strictly separated from it",
+        "strategy": "Let $p$ be the projection of the exterior point $x$ and use normal $x-p$. The variational inequality gives $\\langle x-p,z\\rangle\\le\\langle x-p,p\\rangle$ for every $z$ in the set, while evaluating at $x$ raises the value by $\\|x-p\\|^2>0$. The normal is nonzero because the set is closed and $x$ lies outside it.",
+        "deps": [
+          "lem-projection-onto-a-closed-convex-set-has-the-variational-inequality",
+          "def-supporting-hyperplane-to-a-convex-set",
+          "def-metric-interior-closure-boundary"
+        ]
+      },
+      {
+        "id": "thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set",
+        "kind": "theorem",
+        "title": "Every boundary point of a nonempty Euclidean convex set has a supporting hyperplane",
+        "strategy": "Replace the set by its closed convex closure. Choose exterior points tending to the boundary point and strictly separate each by the normalized projection normal. Compactness of the unit sphere gives a convergent subsequence of normals. Pass the separation inequalities to the limit to obtain a nonzero unit normal supporting the closure at the boundary point, hence supporting the original set. The same argument includes convex sets with empty interior; no unproved affine-hull assertion is used.",
+        "deps": [
+          "def-supporting-hyperplane-to-a-convex-set",
+          "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "cor-bolzano-weierstrass-in-rn",
+          "thm-metric-sequential-closure",
+          "def-metric-interior-closure-boundary"
+        ]
+      },
+      {
+        "id": "thm-separating-hyperplane-theorem-for-disjoint-convex-sets",
+        "kind": "theorem",
+        "title": "Disjoint nonempty Euclidean convex sets have a separating hyperplane",
+        "strategy": "For disjoint convex sets $C,D$, the difference set $E=C-D$ is convex and omits zero. If zero lies outside the closure of $E$, strictly separate zero from that closed convex set. If zero lies on its boundary, take a supporting hyperplane to the closure at zero. In either case obtain a nonzero vector $a$ with $\\langle a,c-d\\rangle\\le0$ for all $c\\in C,d\\in D$, equivalently $\\langle a,c\\rangle\\le\\langle a,d\\rangle$. Prove that zero cannot be an interior point of the closure of a convex set that omits zero by shrinking a small symmetric ball toward one point of $E$.",
+        "deps": [
+          "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set",
+          "def-supporting-hyperplane-to-a-convex-set",
+          "def-convex-subset-of-euclidean-space",
+          "def-metric-interior-closure-boundary"
+        ]
+      },
+      {
+        "id": "def-subgradient-and-subdifferential",
+        "kind": "definition",
+        "title": "Subgradients and the subdifferential of a convex function",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-euclidean-inner-product"
+        ]
+      },
+      {
+        "id": "thm-convex-functions-have-subgradients-at-interior-points",
+        "kind": "theorem",
+        "title": "A convex function has a subgradient at every interior point of its domain",
+        "strategy": "Continuity on the open convex interior makes the epigraph over a small closed ball a closed convex set. Apply the supporting-hyperplane theorem at $(a,f(a))$. Because $a$ is interior, the supporting normal cannot be vertical; normalize its last coordinate to $-1$ to obtain a local subgradient inequality. For an arbitrary domain point $y$, place a small point $a+t(y-a)$ inside the ball, apply the local inequality there, and divide by $t>0$ to extend the same subgradient inequality to $y$.",
+        "deps": [
+          "thm-convex-function-iff-convex-epigraph",
+          "cor-convex-functions-on-open-convex-sets-are-continuous",
+          "thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set",
+          "def-subgradient-and-subdifferential",
+          "def-epigraph-and-hypograph",
+          "def-metric-interior-closure-boundary"
+        ]
+      },
+      {
+        "id": "thm-differentiable-convex-functions-and-gradient-inequality",
+        "kind": "theorem",
+        "title": "Differentiable convex functions are characterized by the gradient inequality",
+        "strategy": "For the forward direction restrict the function to each line segment from $x$ to $y$. The one-variable supporting-line theorem at the initial point, together with the total chain rule, gives $f(y)\\ge f(x)+\\langle\\nabla f(x),y-x\\rangle$. Conversely apply the assumed inequality at the intermediate point $z=(1-t)x+ty$ once toward $x$ and once toward $y$; multiply by $1-t$ and $t$, add, and cancel the gradient terms to obtain convexity. Keep both directions and $t=0,1$ explicit.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-subgradient-and-subdifferential",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-supporting-lines-for-convex-functions",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      },
+      {
+        "id": "cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient",
+        "kind": "corollary",
+        "title": "The subdifferential of a differentiable convex function is its gradient singleton",
+        "strategy": "The gradient inequality places $\\nabla f(a)$ in the subdifferential. If $v$ is any subgradient, apply its inequality and the differentiability expansion to $a+te_i$ for positive and negative $t$ small enough to remain in the open domain. Dividing by $t$ and taking both one-sided limits gives $v_i=\\partial_i f(a)$ for every coordinate.",
+        "deps": [
+          "thm-differentiable-convex-functions-and-gradient-inequality",
+          "def-subgradient-and-subdifferential",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient"
+        ]
+      },
+      {
+        "id": "cor-subgradient-zero-characterises-global-minima",
+        "kind": "corollary",
+        "title": "Zero is a subgradient exactly at a global minimum",
+        "strategy": "Substituting the zero vector into the subgradient inequality gives $f(y)\\ge f(a)$ for every domain point, so $a$ is a global minimizer. Conversely the global-minimum inequality is exactly the subgradient inequality with zero. This is an equivalence and both directions are written separately.",
+        "deps": [
+          "def-subgradient-and-subdifferential"
+        ]
+      },
+      {
+        "id": "thm-hessian-characterises-convexity",
+        "kind": "theorem",
+        "title": "A $C^2$ function is convex exactly when its Hessian is positive semidefinite",
+        "strategy": "Restrict $f$ to every affine line segment in the open convex domain and differentiate twice by the total chain rule, obtaining $\\phi''(t)=\\langle H_f(x+tv)v,v\\rangle$. If $f$ is convex, every restriction is convex and the one-variable second-derivative criterion makes this quantity nonnegative. Conversely positive semidefiniteness makes every line restriction convex, which is exactly the two-point convexity inequality. Check both directions and nonzero as well as zero directions.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-definite-and-indefinite-hessian-quadratic-forms",
+          "def-hessian-and-euclidean-critical-point",
+          "cor-second-derivative-characterises-convexity",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-hessian-is-symmetric"
+        ]
+      },
+      {
+        "id": "cor-positive-definite-hessian-implies-strict-convexity",
+        "kind": "corollary",
+        "title": "An everywhere-positive-definite Hessian implies strict convexity",
+        "strategy": "For distinct $x,y$, the direction $v=y-x$ is nonzero. Along the segment the second derivative is $\\langle H_f(x+tv)v,v\\rangle>0$, so the first derivative is strictly increasing. The one-variable secant-slope argument then makes the chord inequality strict for every $0<t<1$. Endpoints are excluded exactly as strict convexity requires.",
+        "deps": [
+          "thm-hessian-characterises-convexity",
+          "def-definite-and-indefinite-hessian-quadratic-forms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-monotonicity-from-the-derivative",
+          "thm-differentiable-convex-functions-and-monotone-derivatives"
+        ]
+      },
+      {
+        "id": "cor-local-minima-of-convex-functions-on-rn-are-global",
+        "kind": "corollary",
+        "title": "Every local minimum of a convex function on a Euclidean convex set is global",
+        "strategy": "If $a$ is a local minimum but some $y$ has smaller value, choose a sufficiently small positive $t$ so that $(1-t)a+ty$ lies in the local-minimum neighbourhood. Convexity makes its value strictly below $f(a)$, a contradiction. If $y=a$ or the domain is a singleton the conclusion is immediate.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-euclidean-local-extrema-and-critical-points"
+        ]
+      },
+      {
+        "id": "cor-strictly-convex-functions-on-rn-have-at-most-one-minimizer",
+        "kind": "corollary",
+        "title": "A strictly convex function on a Euclidean convex set has at most one global minimizer",
+        "strategy": "If distinct points were both minimizers, their midpoint would be in the domain and strict convexity would give it a value below the minimum. The argument asserts uniqueness only and does not assert existence; empty and singleton domains satisfy it vacuously.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ]
+      },
+      {
+        "id": "def-semicontinuity-on-euclidean-subsets",
+        "kind": "definition",
+        "title": "Upper and lower semicontinuity on subsets of $\\mathbb R^n$",
+        "deps": [
+          "def-metric-ball",
+          "lem-metrics-on-rn",
+          "def-metric-continuity"
+        ]
+      },
+      {
+        "id": "prop-semicontinuity-agrees-on-the-real-line",
+        "kind": "proposition",
+        "title": "Euclidean semicontinuity agrees with the published real-line definition",
+        "strategy": "Under the standard identification $\\mathbb R^1\\cong\\mathbb R$, a Euclidean ball about $c$ of radius $\\delta$ is exactly the real neighbourhood $N_\\delta(c)$. Substitute this identity into the upper and lower epsilon--delta clauses. The definitions then agree at every point and hence on every subset, in both directions.",
+        "deps": [
+          "def-semicontinuity-on-euclidean-subsets",
+          "def-semicontinuity",
+          "lem-real-and-metric-notions-agree"
+        ]
+      },
+      {
+        "id": "thm-euclidean-semicontinuity-level-set-characterisations",
+        "kind": "theorem",
+        "title": "Semicontinuity on $\\mathbb R^n$ is characterized by strict open level sets and weak closed level sets",
+        "strategy": "For upper semicontinuity, prove that every strict sublevel set is relatively open by applying the definition with gap $\\alpha-f(c)$; conversely use relative openness of the sublevel at $\\alpha=f(c)+\\varepsilon$. Take complements to obtain closed superlevel sets. Apply the result to $-f$ to get the lower-semicontinuous strict superlevel and closed sublevel forms. Include both directions of all four equivalences and the empty-domain case.",
+        "deps": [
+          "def-semicontinuity-on-euclidean-subsets",
+          "def-metric-topology",
+          "def-subspace-topology-top",
+          "def-metric-ball"
+        ]
+      },
+      {
+        "id": "thm-euclidean-semicontinuity-epigraph-characterisations",
+        "kind": "theorem",
+        "title": "Lower semicontinuity is equivalent to a closed epigraph and upper semicontinuity to a closed hypograph",
+        "strategy": "If $f$ is lower semicontinuous and $(x,t)$ lies below its epigraph, choose a level strictly between $t$ and $f(x)$; the open strict superlevel neighbourhood in the first coordinates and a short vertical interval form an open product neighbourhood disjoint from the epigraph. Conversely, if lower semicontinuity fails at $x$, choose a sequence approaching $x$ with values uniformly below $f(x)$ and use graph points to violate closedness. Apply the argument to $-f$ for the hypograph. State relative closedness in $A\\times\\mathbb R$ when $A$ is not closed.",
+        "deps": [
+          "def-semicontinuity-on-euclidean-subsets",
+          "def-epigraph-and-hypograph",
+          "thm-euclidean-semicontinuity-level-set-characterisations",
+          "lem-product-topology-on-rn",
+          "thm-metric-sequential-closure",
+          "def-subspace-topology-top"
+        ]
+      },
+      {
+        "id": "thm-euclidean-semicontinuous-extreme-value-theorem",
+        "kind": "theorem",
+        "title": "Semicontinuous extreme value theorem on compact Euclidean sets",
+        "strategy": "For lower semicontinuous $f$ on nonempty compact $K$, the open sets $\\{f>-N\\}$ for positive natural $N$ cover $K$; a finite subcover gives a lower bound. Let $m=\\inf f[K]$. The nonempty closed sets $K\\cap\\{f\\le m+1/N\\}$ have the finite intersection property, so compactness gives a common point where $f=m$. Apply the result to $-f$ for the upper-semicontinuous maximum. This avoids selecting a minimizing sequence and uses no choice principle.",
+        "deps": [
+          "def-semicontinuity-on-euclidean-subsets",
+          "thm-euclidean-semicontinuity-level-set-characterisations",
+          "def-metric-compactness",
+          "thm-compact-iff-finite-intersection-property",
+          "def-infimum",
+          "lem-inf-epsilon",
+          "thm-of-archimedean"
+        ]
+      }
+    ]
   },
   {
     "order": 288.00006,
@@ -43,9 +677,150 @@
     "kind": "B",
     "category": "real-analysis",
     "title": "Convex and Semicontinuous Functions on R^n: Examples and Counterexamples",
+    "companion": "convex-and-semicontinuous-functions-on-rn",
     "requires": [
       "convex-and-semicontinuous-functions-on-rn"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-euclidean-norm-and-squared-norm-are-convex",
+        "kind": "example",
+        "title": "The Euclidean norm and its square are convex, with a ball of subgradients at zero for the norm",
+        "strategy": "The triangle inequality and homogeneity prove convexity of $x\\mapsto\\|x\\|_2$. Cauchy--Schwarz shows that its subdifferential at zero is exactly the closed unit ball. For $x\\mapsto\\|x\\|_2^2$, compute gradient $2x$ and Hessian $2I$, so the Hessian criterion gives strict convexity and the differentiable-subdifferential theorem gives the singleton $\\{2x\\}$.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "thm-hessian-characterises-convexity",
+          "cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient",
+          "def-p-norms-on-rn",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ]
+      },
+      {
+        "id": "ex-finite-maximum-of-affine-functions-and-its-subdifferential",
+        "kind": "example",
+        "title": "A finite maximum of affine functions and its active subgradients",
+        "strategy": "For $f(x)=\\max_{1\\le j\\le m}(\\langle a_j,x\\rangle+b_j)$, the operations proposition proves convexity. Show that every convex combination of the active slopes at $x$ is a subgradient by weighting their affine inequalities. Conversely separate a vector outside those finite convex combinations and move a short distance in the separating direction to contradict the subgradient inequality. Work out $\\max\\{x_1,-x_1,x_2,-x_2\\}$ at the origin explicitly.",
+        "deps": [
+          "prop-basic-operations-preserving-convexity",
+          "def-subgradient-and-subdifferential",
+          "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "thm-finite-jensen-inequality-in-euclidean-space"
+        ]
+      },
+      {
+        "id": "cex-convex-function-on-closed-convex-set-discontinuous-at-the-boundary",
+        "kind": "counterexample",
+        "title": "A convex function on $[0,1]$ that is discontinuous at the boundary",
+        "strategy": "Set $f(0)=1$ and $f(x)=0$ for $0<x\\le1$. Check the convexity inequality by separating the cases in which a convex combination equals zero; otherwise the left side is zero and the right side is nonnegative. The right-hand limit at zero is zero, not $f(0)=1$. This is the textbook boundary-jump construction and does not contradict interior continuity.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "cor-convex-functions-on-open-convex-sets-are-continuous"
+        ]
+      },
+      {
+        "id": "cex-convex-function-with-empty-subdifferential-at-a-boundary-point",
+        "kind": "counterexample",
+        "title": "$x\\mapsto-\\sqrt{1-\\|x\\|_2^2}$ has empty subdifferential on the unit-sphere boundary",
+        "strategy": "On the closed unit ball the function is convex and continuous. Fix a boundary point and suppose a finite vector were a subgradient. Test the subgradient inequality on the radial points $\\alpha x$ as $\\alpha$ tends to one from below; after division it forces the radial component of the putative subgradient to dominate $\\sqrt{(1+\\alpha)/(1-\\alpha)}$ for every $\\alpha<1$, impossible. This shows why the interior hypothesis in subgradient existence is sharp.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-subgradient-and-subdifferential",
+          "thm-convex-functions-have-subgradients-at-interior-points",
+          "def-p-norms-on-rn"
+        ]
+      },
+      {
+        "id": "cex-lower-semicontinuous-compact-function-without-a-maximum",
+        "kind": "counterexample",
+        "title": "A lower semicontinuous function on $[0,1]$ with no maximum",
+        "strategy": "Negate the published upper-semicontinuous function with no minimum: put $g(0)=-1$ and $g(x)=-x$ for $0<x\\le1$. Negation exchanges upper and lower semicontinuity, and the values have supremum zero but are all negative, so no maximum is attained. The lower-semicontinuous minimum theorem remains satisfied.",
+        "deps": [
+          "def-semicontinuity-on-euclidean-subsets",
+          "prop-semicontinuity-agrees-on-the-real-line",
+          "cex-upper-semicontinuous-need-not-attain-its-infimum",
+          "thm-euclidean-semicontinuous-extreme-value-theorem"
+        ]
+      },
+      {
+        "id": "ex-characteristic-functions-of-open-and-closed-sets-are-semicontinuous",
+        "kind": "example",
+        "title": "Characteristic functions of open and closed sets are one-sided semicontinuous",
+        "strategy": "For a subset $E$ of a Euclidean space, use the level-set characterisation on $1_E$. If $E$ is open, every strict superlevel is empty, $E$, or the whole space, so $1_E$ is lower semicontinuous. If $E$ is closed, every strict sublevel is empty, the complement of $E$, or the whole space, so $1_E$ is upper semicontinuous. Taking a nontrivial clopen failure such as $E=\\{0\\}$ in $[0,1]$ shows that neither conclusion implies continuity.",
+        "deps": [
+          "def-semicontinuity-on-euclidean-subsets",
+          "thm-euclidean-semicontinuity-level-set-characterisations",
+          "def-metric-topology"
+        ]
+      },
+      {
+        "id": "cex-positive-semidefinite-hessian-without-strict-convexity",
+        "kind": "counterexample",
+        "title": "A positive-semidefinite Hessian need not give strict convexity",
+        "strategy": "On $\\mathbb R^2$ take $f(x,y)=x^2$. Its Hessian is $\\operatorname{diag}(2,0)$, hence positive semidefinite everywhere, and the Hessian criterion makes $f$ convex. Along every vertical line the function is constant, so the strict convexity inequality is an equality for distinct points on that line.",
+        "deps": [
+          "thm-hessian-characterises-convexity",
+          "def-definite-and-indefinite-hessian-quadratic-forms",
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets"
+        ]
+      },
+      {
+        "id": "cex-strictly-convex-function-with-a-singular-hessian",
+        "kind": "counterexample",
+        "title": "A strictly convex function can have a singular Hessian",
+        "strategy": "For $f(x)=\\sum_{j<n}x_j^4$ on $\\mathbb R^n$ with $n\\ge1$, the one-variable fourth power is strictly convex, and for distinct vectors at least one coordinate gives a strict inequality while the others give weak inequalities. The Hessian is diagonal with entries $12x_j^2$ and is the zero matrix at the origin, so it is not positive definite there.",
+        "deps": [
+          "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "def-hessian-and-euclidean-critical-point",
+          "lem-derivative-of-a-power",
+          "thm-differentiable-convex-functions-and-monotone-derivatives"
+        ]
+      },
+      {
+        "id": "fs-a-convex-function-on-a-convex-set-is-continuous",
+        "kind": "false statement",
+        "title": "FALSE: a convex function on a convex set is continuous",
+        "strategy": "Use the boundary-jump counterexample on $[0,1]$. It is convex but discontinuous at zero, showing that openness of the domain, or restriction to its interior, is essential in the continuity theorem.",
+        "deps": [
+          "cex-convex-function-on-closed-convex-set-discontinuous-at-the-boundary"
+        ]
+      },
+      {
+        "id": "fs-a-convex-function-is-differentiable",
+        "kind": "false statement",
+        "title": "FALSE: every convex function is differentiable",
+        "strategy": "Use the Euclidean norm at the origin. Its subdifferential is the whole closed unit ball rather than a singleton; direct opposite directional quotients also show that no total derivative exists there.",
+        "deps": [
+          "ex-euclidean-norm-and-squared-norm-are-convex",
+          "cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient"
+        ]
+      },
+      {
+        "id": "fs-semicontinuity-implies-continuity-on-a-compact-set",
+        "kind": "false statement",
+        "title": "FALSE: semicontinuity implies continuity on a compact set",
+        "strategy": "On the compact interval $[0,1]$, the characteristic function of the closed set $\\{0\\}$ is upper semicontinuous and discontinuous at zero; its negative is lower semicontinuous and also discontinuous there. Thus either one-sided notion fails to imply continuity even under compactness.",
+        "deps": [
+          "ex-characteristic-functions-of-open-and-closed-sets-are-semicontinuous"
+        ]
+      },
+      {
+        "id": "fs-a-positive-semidefinite-hessian-gives-strict-convexity",
+        "kind": "false statement",
+        "title": "FALSE: a positive-semidefinite Hessian gives strict convexity",
+        "strategy": "Use $f(x,y)=x^2$. Its Hessian is positive semidefinite, but distinct points on one vertical line have equal function values and give equality in the convexity inequality.",
+        "deps": [
+          "cex-positive-semidefinite-hessian-without-strict-convexity"
+        ]
+      },
+      {
+        "id": "fs-strict-convexity-gives-a-positive-definite-hessian",
+        "kind": "false statement",
+        "title": "FALSE: strict convexity gives a positive-definite Hessian",
+        "strategy": "Use the strictly convex sum of fourth powers. Its Hessian vanishes at the origin, so strict convexity does not force pointwise positive definiteness. This is the converse actually addressed by the design's proposed fourth-power witness.",
+        "deps": [
+          "cex-strictly-convex-function-with-a-singular-hessian"
+        ]
+      }
+    ]
   }
 ]
