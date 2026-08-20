@@ -336,28 +336,62 @@ const OUTAGE_CLASSIFIERS: Record<string, (ctx: any, startedAt: string) => string
   'judge-closure': judgeOutageSince,
 };
 
-/** Run the table's repair for this failure, if it has one.
- *  'clean'      — a repair ran and exited 0; the battery re-verifies.
- *  'outage'     — the repair's failures were all an external platform outage
+/** Run the table's repair for EVERY failing gate that has one — the primary
+ *  failure and every advisory one the same battery named.
+ *
+ *  WHY ALL OF THEM. The battery stops at its first failure and then runs the
+ *  rest read-only, so that one battery names every failure rather than one per
+ *  round. That is the whole point of `failure.advisory`. But the repair hook
+ *  read only `failure.id`, so a mechanical repair keyed to an ADVISORY gate was
+ *  never attempted: it sat starved behind whichever gate happened to fail
+ *  first, for as many rounds as the stage had.
+ *
+ *  On frontier-16 that cost the run. `url-liveness` failed on one unreachable
+ *  citation and `source-fetch-check` failed advisory on 28 sources across six
+ *  of seven pages. The 28 were the STAMPABLE case — `--stamp` fetches the
+ *  bodies and verifies them, deterministically, and the entry for it sits in
+ *  the table right here. It never ran once in five batteries and two repair
+ *  rounds, because a different gate was first. The run exhausted its rounds
+ *  and blocked with a repair it owned, untried.
+ *
+ *  A mechanical repair is deterministic, idempotent and cheap, and it runs in
+ *  THIS process rather than in a dispatched agent's sandbox — which is also
+ *  where the network is. There is no reason to ration them one per round.
+ *
+ *  'clean'      — every repair that ran exited 0; the battery re-verifies.
+ *  'outage'     — some repair's failures were all an external platform outage
  *                 (`reason` carries the evidence); the hook returns it and the
  *                 executor waits on a clock instead of spending a round.
  *                 Classified BEFORE exit status is read: during an outage the
  *                 tool itself runs fine while every call it made was refused.
  *  'residual'   — a repair ran and left named failures (stderr carries
- *                 `fetch-check-...: <page>: <url>` lines); the caller may
- *                 route the residue to a scouting dispatch.
- *  'unhandled'  — no table entry for this gate. */
-const mechanicalRepair = async ({ ctx, failure }: any): Promise<{ outcome: string; stderr?: string; reason?: string }> => {
-  const repair = MECHANICAL_REPAIRS[failure.id];
-  if (!repair) return { outcome: 'unhandled' };
-  const argvTail = repair(ctx);
-  const startedAt = new Date().toISOString();
+ *                 `fetch-check-...: <page>: <url>` lines, or a bare URL); the
+ *                 caller may route the residue to a scouting dispatch.
+ *  'unhandled'  — no table entry for any of the failing gates. */
+export const mechanicalRepair = async ({ ctx, failure }: any): Promise<{ outcome: string; stderr?: string; reason?: string }> => {
+  const failing = [failure, ...(failure?.advisory ?? [])].filter((f: any) => f?.id);
+  const handled = failing.filter((f: any) => MECHANICAL_REPAIRS[f.id]);
+  if (!handled.length) return { outcome: 'unhandled' };
+
   const { spawnSync } = await import('node:child_process');
-  const r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
-  const classify = OUTAGE_CLASSIFIERS[failure.id];
-  const reason = classify ? classify(ctx, startedAt) : null;
-  if (reason) return { outcome: 'outage', reason };
-  if (r.status !== 0) return { outcome: 'residual', stderr: (r.stderr || r.stdout || '').trim() };
+  const residues: string[] = [];
+  for (const f of handled) {
+    const argvTail = MECHANICAL_REPAIRS[f.id](ctx);
+    const startedAt = new Date().toISOString();
+    const r = spawnSync('node', argvTail, { cwd: ctx.repo, encoding: 'utf8' });
+    const classify = OUTAGE_CLASSIFIERS[f.id];
+    const reason = classify ? classify(ctx, startedAt) : null;
+    // An outage short-circuits: the round is refunded and the clock waited on,
+    // so running the remaining repairs against a platform that is refusing
+    // calls would spend work to learn what this already knows.
+    if (reason) return { outcome: 'outage', reason };
+    // Every repair is attempted even after one leaves residue. They are
+    // independent — a dead citation and an unstamped source are different
+    // defects on different rows — and stopping at the first would reinstate
+    // exactly the starvation this loop exists to end.
+    if (r.status !== 0) residues.push((r.stderr || r.stdout || '').trim());
+  }
+  if (residues.length) return { outcome: 'residual', stderr: residues.join('\n') };
   return { outcome: 'clean' };
 };
 

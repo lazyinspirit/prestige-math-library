@@ -17,7 +17,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { stages, dispatchSourceScouts } from '../stages/mathlib.mts';
+import { stages, dispatchSourceScouts, mechanicalRepair } from '../stages/mathlib.mts';
 import { Executor } from '../src/executor.mts';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
@@ -293,5 +293,39 @@ test('a stderr naming no known URL and no page still refuses to guess', () => {
     stderr: 'ERROR something-else: https://unknown.example/never-cited.pdf',
   });
   assert.equal(routed, false, 'an unmappable failure must stay a blocker, not pick a batch');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+// A MECHANICAL REPAIR KEYED TO AN ADVISORY GATE MUST STILL RUN. The battery
+// stops at its first failure and runs the rest read-only so that ONE battery
+// names every failure — that is what `failure.advisory` is for. But the repair
+// hook read only `failure.id`, so a repair belonging to an advisory gate was
+// starved behind whichever gate happened to fail first, for every round the
+// stage had. On frontier-16 `url-liveness` failed on one unreachable citation
+// while `source-fetch-check` failed advisory on 28 sources whose repair —
+// fetch the bodies and stamp them — is deterministic and sits in the table.
+// It was never attempted across five batteries and two rounds; the run
+// exhausted its budget and blocked with a repair it owned, untried.
+test('a mechanical repair keyed to an advisory gate is attempted, not starved', async () => {
+  const repo = fixtureRepo();
+  writeFileSync(join(repo, 'research', 'demo-batch-4.pages.json'), '[]');
+  writeFileSync(join(repo, 'research', 'demo-batch-4.coverage.json'), JSON.stringify({ pages: [] }));
+  const out = await mechanicalRepair({
+    ctx: { run: 'demo', repo },
+    // The PRIMARY gate has no table entry; the ADVISORY one does.
+    failure: { id: 'validate-plan', why: '', advisory: [{ id: 'source-fetch-check', why: '' }] },
+  });
+  assert.notEqual(out.outcome, 'unhandled',
+    'the advisory gate has a mechanical repair and it must be attempted');
+  rmSync(repo, { recursive: true, force: true });
+});
+
+test('no failing gate with a table entry is still unhandled', async () => {
+  const repo = fixtureRepo();
+  const out = await mechanicalRepair({
+    ctx: { run: 'demo', repo },
+    failure: { id: 'validate-plan', why: '', advisory: [{ id: 'prosecheck', why: '' }] },
+  });
+  assert.equal(out.outcome, 'unhandled');
   rmSync(repo, { recursive: true, force: true });
 });
